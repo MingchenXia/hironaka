@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build (with the Mathlib cache)
+        uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          build-args: "--wfail"
+          test: false
+      - name: Axioms of every declaration
+        run: lake env lean scripts/CheckAxioms.lean
+      - name: Kernel replay (leanchecker)
+        run: lake env leanchecker Hironaka
