@@ -1,0 +1,125 @@
+\section{Actual analytic superlevels of coherent ideal-order tuples}
+
+The analytic semicontinuity used in Bierstone--Milman\cite{bierstone-milman97-invent-math},
+Section 13, is stronger than topological upper semicontinuity. Here the
+superlevels are constructed from genuine coherent ideal orders, including
+infinite order, before any dimensional component is selected. This proves
+the finite global ideal-order tuple layer. It does not identify an arbitrary
+enhanced resolution invariant with such a tuple.
+
+\begin{definition}[Constructed lexicographic order locus]
+\label{hir:actual-lex-order-locus}
+\lean{Hironaka.HironakaOrderTupleAnalyticSuperlevels.orderTupleSuperlevel}
+\leanok
+Fix a closed smooth submanifold $N$ and a finite list of coherent ideals
+with natural thresholds $L=((I_1,\mu_1),\ldots,(I_s,\mu_s))$.
+Define $A_\varnothing=N$ and recursively
+\[
+ A_{(I,\mu)::L}=\operatorname{cosupp}_N(I,\mu+1)
+ \cup\bigl(\operatorname{cosupp}_N(I,\mu)\cap A_L\bigr).
+\]
+\end{definition}
+\begin{proof}
+This finite recursion uses actual order cosupports, with the zero threshold
+giving all of $N$. No superlevel analyticity or extension certificate is
+supplied as data.
+\end{proof}
+
+\begin{lemma}[The actual lexicographic dictionary]
+\label{hir:actual-lex-order-dictionary}
+\uses{hir:actual-lex-order-locus}
+\lean{Hironaka.HironakaOrderTupleAnalyticSuperlevels.mem_orderTupleSuperlevel_iff}
+\leanok
+The constructed locus equals
+\[
+ \{x\in N:(\mu_1,\ldots,\mu_s)\le_{\rm lex}
+ (\operatorname{ord}_x(I_1|_N),\ldots,\operatorname{ord}_x(I_s|_N))\},
+\]
+where orders lie in $\mathbb N\cup\{\infty\}$ and the thresholds are finite.
+\end{lemma}
+\begin{proof}
+For an empty list both sides are $N$. For a nonempty list, the actual
+order theorem identifies cosupport membership with the inequality on
+the first extended-natural order. Strictly exceeding a finite threshold
+$\mu$ is equivalent to order at least $\mu+1$, also for infinite order.
+Lexicographic comparison of two nonempty lists says either the first
+entry strictly exceeds its threshold, or it equals its threshold and
+the tail comparison holds. Equivalently it says that the first entry
+strictly exceeds its threshold, or is at least its threshold and the
+tail comparison holds. The recursive formula and induction give this
+exact equivalence, with membership in $N$ in either branch.
+\end{proof}
+
+\begin{theorem}[Produced global analytic tuple superlevels]
+\label{hir:actual-lex-order-analytic-superlevels}
+\uses{hir:actual-lex-order-dictionary}
+\lean{Hironaka.HironakaOrderTupleAnalyticSuperlevels.isComplexAnalyticSubset_orderTupleSuperlevel}
+\leanok
+Every constructed order-tuple superlevel is a global analytic subset,
+without compactness or nonvanishing assumptions on the ideals.
+\end{theorem}
+\begin{proof}
+The closed smooth $N$ is analytic. At a positive threshold $r$ the actual
+cosupport is $N\cap V(\mathcal D_N^{r-1} I)$, with a coherent derivative
+ideal, so it is analytic. At threshold zero, actual holomorphicity makes
+cosupport exactly $N$, so it is analytic as well. Global analytic sets
+are closed under finite intersection and union. Induction through the
+displayed recursion proves the assertion. A zero ideal, hence infinite
+order, causes no failure of derivative coherence or of this argument.
+\end{proof}
+
+\begin{theorem}[Actual global pure extension of a regular tuple trace]
+\label{hir:actual-lex-order-global-pure-extension}
+\uses{hir:actual-lex-order-analytic-superlevels,hir:dimension-part-regular-trace,hir:dimension-part-global-component-union}
+\lean{Hironaka.HironakaOrderTupleAnalyticSuperlevels.exists_pure_global_extension_of_regular_tuple_superlevel}
+\leanok
+If the actual order-tuple superlevel $A$ is regular of dimension $q$ at
+every point of its trace on an open $U$, there is an internally produced
+global analytic pure-$q$ set $T\subset A$, with $T\cap U=A\cap U$,
+regular of dimension $q$ on that trace. It equals the union of $A$'s
+actual global components of geometric pure dimension $q$.
+\end{theorem}
+\begin{proof}
+Construct $T=A^{(q)}=\overline{\operatorname{Reg}_q A}$ using the preceding
+actual global analytic set. Dimension-part analyticity, geometric purity,
+closedness and the actual global-component identification give all global
+assertions. The regular-trace lemma gives exact trace equality, and a
+regular coordinate neighbourhood in $A$ is also a regular neighbourhood
+in its dimension part. Singularities of $T$ outside $U$ are not excluded:
+they remain the separate auxiliary-chain smoothification problem of
+Bierstone--Milman, Lemma 13.7.
+\end{proof}
+
+\begin{theorem}[The actual canonical invariant's first-entry superlevels]
+\label{hir:canonical-first-entry-analytic-superlevel}
+\uses{hir:actual-lex-order-analytic-superlevels,hir:actual-lex-order-dictionary,hir:canonical-centres}
+\lean{Hironaka.HironakaOrderTupleAnalyticSuperlevels.canonical_first_superlevel_eq_orderTupleSuperlevel,Hironaka.HironakaOrderTupleAnalyticSuperlevels.isComplexAnalyticSubset_canonical_first_superlevel}
+\leanok
+For positive ambient dimension, let $\mathfrak m$ be an actual marked
+ideal in the invariant domain and let $T$ be any genuine admissible test
+tower. The locus in $N_T$ on which the first entry of the constructed
+canonical invariant in positive induction dimension is at least $\mu$
+is a global analytic subset. It equals the internally constructed
+one-entry order-tuple locus for the actual nonmonomial ideal
+$\mathcal N_{N_T}(I_T)$ and threshold $\mu$.
+\end{theorem}
+\begin{proof}
+The actual transform remains in the invariant domain: its ideal is
+coherent, its carrier is closed smooth, the genuine transformed boundary
+is SNC and transverse, and the ideal is nonzero along its carrier.
+The nonmonomial coherence theorem, proved by actual local monomial
+division, therefore gives coherence of $\mathcal N_{N_T}(I_T)$. At every
+point of $N_T$, its finite natural order used by the constructed invariant
+equals its extended-natural ideal order. Indeed membership in every
+actual order cosupport characterizes both orders; equality follows from
+all finite threshold comparisons.
+
+By the definitions of the genuine dimension-inductive invariant, its
+first entry is exactly this nonmonomial order. Apply the actual one-entry
+lexicographic dictionary to identify the stated locus with the produced
+tuple locus, then apply its global analyticity theorem. This selects no
+tuple as additional caller data and uses no analyticity assumption on the
+canonical invariant. The higher companion/history entries, the monomial
+second-entry superlevels, and the Hilbert--Samuel auxiliary-chain invariant
+of Lemma 13.7 remain separate obligations.
+\end{proof}

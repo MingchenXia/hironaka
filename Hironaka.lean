@@ -414,6 +414,19 @@ import Hironaka.Resolution.HironakaSNCSupportedMonomialIdeal
 import Hironaka.Resolution.HironakaSmoothStageCenters
 import Hironaka.Resolution.HironakaStageCenters
 
+import Hironaka.Resolution.HironakaOrderTupleAnalyticSuperlevels
+import Hironaka.Resolution.HironakaBoundaryCountAnalyticSuperlevels
+import Hironaka.Resolution.HironakaMonomialAnalyticSuperlevels
+import Hironaka.Resolution.HironakaStepOneSpecialAnalyticLoci
+import Hironaka.Resolution.HironakaStepOneDimZeroAnalyticSuperlevels
+import Hironaka.Resolution.HironakaOneDimensionalCanonicalSuperlevels
+import Hironaka.Resolution.HironakaCurveStrictFibres
+import Hironaka.Resolution.HironakaNormalCrossingsLocalBranches
+import Hironaka.Resolution.HironakaNormalCrossingsCompatibility
+import Hironaka.Resolution.HironakaHypersurfaceStrictIdeal
+import Hironaka.Resolution.HironakaPureCodimensionOneInvertibleIdeal
+import Hironaka.Resolution.HironakaHypersurfaceMultiplicityDescent
+
 /-!
 # Hironaka
 

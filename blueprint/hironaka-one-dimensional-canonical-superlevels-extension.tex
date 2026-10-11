@@ -1,0 +1,167 @@
+\section{All actual canonical superlevels in carrier dimension at most one}
+
+The genuine low-dimensional geometry supplies a complete analytic base for
+the canonical invariant, without an enhanced-invariant presentation
+certificate. It also proves the local constancy at the zero-dimensional
+last-member base of Bierstone--Milman\cite{bierstone-milman97-invent-math},
+Lemma 13.7. The higher-dimensional simultaneous chain engine remains open.
+
+\begin{lemma}[Actual zero-dimensional analytic geometry]
+\label{hir:analytic-dimzero-all-points-regular}
+\uses{rem:global-components}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.regularAtDim_zero_of_analytic_dimLE_zero,Hironaka.HironakaOneDimensionalCanonicalSuperlevels.isDiscrete_of_analytic_dimLE_zero}
+\leanok
+An actual analytic set of geometric dimension at most zero consists
+entirely of genuine regular zero-dimensional points and is discrete.
+The statement includes ambient dimension zero and the empty set.
+\end{lemma}
+\begin{proof}
+Express the actual analytic set as the union of its actual global
+regular-locus components. The dimension bound forces the generating
+regular point of each component to have dimension zero, and every
+point in that regular-locus component has the same genuine dimension.
+Its preconnectedness and the actual zero-dimensional regular patch
+force it to lie in the singleton of its generating point. The closed
+singleton also contains its closure. Thus any point of the analytic
+set is that actual generating regular point. Its genuine flattening
+gives an open neighbourhood meeting the whole set precisely in that
+singleton, which proves discreteness.
+\end{proof}
+
+\begin{theorem}[An actual infinite whole-cosupport iteration]
+\label{hir:one-dimensional-global-cosupport-growing-sequence}
+\uses{hir:one-dimensional-global-cosupport-step}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.exists_global_cosupport_growing_sequence_of_isInvDomain_one}
+\leanok
+A genuine dimension-at-most-one invariant domain internally produces a
+growing sequence of actual global test towers starting at the empty tower.
+Every next tower is an actual blowup of the entire preceding transformed
+cosupport, with the actual map, blowup proof and exact tower equality retained.
+This theorem makes no termination or local-finiteness assertion.
+\end{theorem}
+\begin{proof}
+Use as the state the actual pair of a last-stage manifold and a finite tower,
+together with its true geometric test-tower proof. In each state, internally
+produce the genuine transformed invariant-domain data. Its whole cosupport
+is an actual globally admissible centre with empty interior, so the actual
+blowup existence theorem produces a next state and the exact one-step
+extension equality. Choose a next state from these actual witnesses and
+iterate this function from the reflexive tower. The actual iterate equations
+give the growing-sequence successor data and retain the exact whole-cosupport
+choice at every step. Every iterate has a genuine test-tower proof from its
+state. In particular, no preconstructed global tower or compatibility
+certificate is an input. The further order-countdown and compact-set local
+finiteness proofs remain separate obligations.
+\end{proof}
+
+\begin{theorem}[All subsets and all functions on the actual zero-dimensional set]
+\label{hir:analytic-dimzero-subsets-and-constancy}
+\uses{hir:analytic-dimzero-all-points-regular}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.isClosedSubmanifold_subset_of_analytic_dimLE_zero,Hironaka.HironakaOneDimensionalCanonicalSuperlevels.eventually_eq_on_analytic_dimLE_zero}
+\leanok
+Every subset of an actual zero-dimensional analytic set is a genuine
+closed complex submanifold. Every function is locally constant on that
+actual analytic carrier, without a constancy certificate.
+\end{theorem}
+\begin{proof}
+An arbitrary subset of the genuine closed discrete carrier is closed.
+At each subset point, its actual singleton neighbourhood makes its
+germ agree with the original carrier, so transfer the genuine
+zero-dimensional regular patch. The same singleton neighbourhood
+proves that any function has its value at that point on every nearby
+carrier point. No finite global carrier assumption is used.
+\end{proof}
+
+\begin{lemma}[Actual nonzero coherent cosupport drops dimension]
+\label{hir:one-dimensional-actual-cosupport-dimension}
+\uses{rem:thin-dimension-drop}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.dimLE_cosupport_of_isInvDomain}
+\leanok
+The actual cosupport of a marked ideal in the genuine dimension-at-most-$k$
+invariant domain has geometric dimension at most $k-1$ (natural truncated
+subtraction). In particular, in carrier dimension at most one it has
+geometric dimension at most zero.
+\end{lemma}
+\begin{proof}
+The nonzero-along condition makes the actual positive-order cosupport
+thin in the genuine smooth carrier. Indeed, if an open carrier piece
+were contained in cosupport, choose a genuine nonvanishing germ from
+the nonzero-along condition. A real local coherent generator
+presentation expresses it as a finite holomorphic combination. Every
+actual local generator vanishes on that open carrier piece because
+its actual order is at least the positive mark. The expression then
+vanishes there too, contradicting the actual frequent nonvanishing
+witness. Apply the genuine thin analytic dimension-drop theorem to
+the analytic smooth carrier and its dimension bound at most one.
+The same dimension-drop proof works for every $k$, using its true smooth
+carrier dimension bound. The actual cosupport itself is analytic by
+coherent derivative ideals.
+\end{proof}
+
+\begin{theorem}[Whole actual one-dimensional canonical thresholds]
+\label{hir:canonical-one-dimensional-all-analytic-superlevels}
+\uses{hir:analytic-dimzero-subsets-and-constancy,hir:one-dimensional-actual-cosupport-dimension,hir:canonical-centres}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.isComplexAnalyticSubset_subset_cosupport_of_isInvDomain_one,Hironaka.HironakaOneDimensionalCanonicalSuperlevels.isComplexAnalyticSubset_canonical_one_superlevel}
+\leanok
+Along every actual test tower of a marked ideal in the genuine
+dimension-at-most-one invariant domain, every entire superlevel of
+the actual constructed canonical invariant $\operatorname{invFamily}(1)$
+on its actual transformed cosupport is globally analytic. All genuine
+value thresholds, including every companion/history entry, are covered.
+\end{theorem}
+\begin{proof}
+Internally produce the genuine transformed invariant-domain data
+along the actual test tower. Its true cosupport is analytic and of
+geometric dimension at most zero by the preceding producer. The
+entire actual invariant superlevel is an actual subset of that
+carrier, so the genuine closed-submanifold subset producer gives
+analyticity. No upper-semicontinuity or historical-start compatibility
+certificate is needed because every subset of this actual closed
+discrete geometric carrier is analytic. No value is replaced or
+discarded. Higher-dimensional canonical superlevels, the global
+auxiliary chain, and the noncompact G3 resolving sequence remain open.
+\end{proof}
+
+\begin{theorem}[Actual zero-dimensional centres with a genuine SNC boundary]
+\label{hir:analytic-dimzero-snc-centres}
+\uses{hir:analytic-dimzero-all-points-regular,hir:analytic-dimzero-subsets-and-constancy,hir:one-dimensional-actual-cosupport-dimension}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.hasNormalCrossings_singleton,Hironaka.HironakaOneDimensionalCanonicalSuperlevels.hasNormalCrossings_subset_of_analytic_dimLE_zero,Hironaka.HironakaOneDimensionalCanonicalSuperlevels.isAdmissibleCentre_subset_cosupport_of_isInvDomain_one}
+\leanok
+Every actual subset of a genuine zero-dimensional analytic set has normal
+crossings with any genuine SNC boundary. Consequently, every actual subset
+of the cosupport of a genuine dimension-at-most-one invariant domain is a
+global admissible centre. No finite carrier or global maximal value is used.
+\end{theorem}
+\begin{proof}
+At a singleton centre use the actual centred SNC coordinate system for the
+boundary. Take every ambient coordinate as the singleton's vanishing index
+set. A point maps to zero precisely when it is the centre point, by the
+actual inverse coordinate maps and the injectivity of the preferred chart.
+The boundary coordinate equations and one-coordinate cardinalities are
+unchanged. At a point of an arbitrary subset of the zero-dimensional analytic
+carrier, the genuine singleton neighbourhood makes its germ agree with that
+singleton. Normal crossings transfers under that actual germ equality.
+For a genuine one-dimensional invariant domain, internally produce the
+analytic zero-dimensional cosupport. The preceding closed-submanifold
+subset producer, its actual SNC boundary, and the given subset relation
+then give all three actual admissibility clauses.
+\end{proof}
+
+\begin{theorem}[A genuine global cosupport blowup step in carrier dimension one]
+\label{hir:one-dimensional-global-cosupport-step}
+\uses{hir:analytic-dimzero-snc-centres,hir:resolution-driver}
+\lean{Hironaka.HironakaOneDimensionalCanonicalSuperlevels.exists_global_cosupport_blowup_step_of_isInvDomain_one}
+\leanok
+A genuine marked ideal in the dimension-at-most-one invariant domain admits
+an actual global blowup along its entire cosupport, and the resulting
+one-step tower is an actual geometric test tower. This includes the empty
+cosupport and does not assert termination or local finiteness of its iteration.
+\end{theorem}
+\begin{proof}
+The preceding producer gives actual global admissibility of the entire
+cosupport. Its interior is empty by the genuine invariant-domain nonzero
+condition. Apply the actual analytic blowup existence construction to this
+closed smooth centre, and use the geometric test-tower step equivalence
+with the reflexive prefix and this actual admissibility proof. No global
+maximum, tower compatibility certificate, or termination bound is assumed.
+\end{proof}

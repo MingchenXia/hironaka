@@ -99,7 +99,7 @@ The four extension modules exported by `import Hironaka` add 40 named mathematic
 
 The continuation modules prove the complete SNC divisor-sum dictionary. Genuine connected components are constructed from disconnected boundary members; their multiplicities are the original divisor's exponents. Compact support gives an actual finite component sum, while arbitrary noncompact support gives one global coefficient function and locally finite positive component sums whose complete ideal stalks agree with the divisor on every selected open neighbourhood. The residual unit and coefficient identities are produced internally. Canonical compact-support principalization retains the original conclusions and this actual sum.
 
-New centre modules record literal stage geometry for smooth current strict transforms and produce fresh maximum-multiplicity singular centres and their actual blowups. The noncompact sequence module proves local stabilization of an actual given canonical growing sequence; global sequence existence is a separate goal. Actual blowups of the same centre produce comparison cocycles, and coherent-order strata produce genuine pure global analytic extensions.
+The current centre modules internally produce the original reduced invertible ideal of a pure hypersurface, identify every controlled strict ideal, terminate arbitrary multiplicity restarts and retain literal centre conditions at every stage, then append smooth boundary resolution. Actual curve-cosupport data produce an unconditional global canonical growing sequence, locally finite centre images and compact-uniform eventual geometric resolution. Actual order tuples, boundary counts, monomial and special StepOne strata have analytic superlevels. General NC charts produce original local branches and fixed-sequence permutation compatibility. Actual blowups of the same centre produce comparison cocycles. Full higher-dimensional global resolution and unordered canonical boundary descent remain open.
 
 The complete statements and mathematical proofs are in [the extension blueprint](blueprint/extensions.tex). Reusable support modules supply original geometric and ideal-theoretic declarations omitted by the first release's extraction.
 
@@ -116,9 +116,10 @@ This checklist compares the proved statements with classical forms. Items 5–7 
    biholomorphism uniqueness and all principalization conclusions. General smooth-morphism functoriality and
    fully canonical elementary embedded resolution remain open.
 3. **Compactness.** A finite blowup sequence is produced when `X` is compact, or when `Z(𝔞)` (resp. `V`, `W`) is
-   compact; otherwise only over an open set contained in a compact set, or over a relatively compact neighbourhood of a
-   compact set. There is no locally finite global sequence on a non-compact manifold (the form of Bierstone--Milman 1997
-   for non-compact spaces).
+   compact; otherwise the original API provides relatively compact restrictions. The continuation now produces
+   a genuine global canonical sequence with locally finite centre images and compact-uniform stabilization
+   when the actual initial cosupport has geometric dimension at most one. General higher-dimensional
+   global sequence existence and its terminal analytic space remain open.
 4. **Embedded resolution relative to a boundary: the sharp form is not proved** (`*_boundary*`). The centres lie over
    `F = W_sing ∪ (W ∩ |E₀|)`, so `f` may blow up points where `W` is smooth and has normal crossings with `E₀`. The sharp
    form -- no blowup over the locus where `W` is smooth and has normal crossings with `E₀` -- is a known gap, deferred to
@@ -141,12 +142,14 @@ This checklist compares the proved statements with classical forms. Items 5–7 
    admissibility and the original exceptional-support conclusions. Nine directly named existence forms retain all
    original conclusions and append transversality; four generic lemmas also upgrade the other original forms.
    The original 42 API declarations themselves retain their previous statements.
-8. **General singular-stage centre control remains open.** The continuation modules prove the literal
-   smooth-stage alternative, and fresh maximum-order centres lie in the actual current singular locus with
-   constant maximum multiplicity. The entire general singular restart invariant is not yet identified with the
-   reduced current strict transform; no complete general per-stage singular-centre theorem is claimed.
-9. **Normal crossings.** The output divisors have *simple* normal crossings (stronger than normal crossings), and an
-   initial boundary `E₀` must have simple normal crossings.
+8. **Full compact hypersurface stage control is proved.** The original reduced ideal is internally invertible;
+   every controlled strict ideal is identified with the actual reduced current strict ideal. Unbounded multiplicity
+   restarts terminate, and every centre obeys literal current-transform singular or smooth-boundary conditions.
+   Higher codimension, full Hilbert–Samuel descent and normal-flat centres remain open.
+9. **General normal crossings remains open.** Genuine initial NC charts now produce the complete original
+   local divisor stalk and SNC local branches, with fixed-sequence permutation compatibility. Global unordered
+   canonical descent with the required cosupport and isomorphism conditions remains open; the existing
+   resolution API still assumes an initial SNC list.
 
 ## Building
 
@@ -176,7 +179,7 @@ Every declaration of the library, and in particular every public theorem, depend
 
 ## Verification
 
-The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuation in [its report](audit/continuation-20261011-r1/verification.md):
+The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md) and [the second report](audit/continuation-20261011-r1-batch2/verification.md):
 
 * **Build**: `lake build` from scratch: exit code 0, 352 modules compiled, 0 errors, 0 warnings, 0 declarations with an incomplete proof, 2470 s with one Lean process at a time.
 * **Axioms**: `#print axioms` on each of the 42 public theorems and `collectAxioms` on all 4439 declarations: every public theorem depends exactly on `Classical.choice`, `Quot.sound`, `propext`; all 4439 declarations depend on these three at most.
