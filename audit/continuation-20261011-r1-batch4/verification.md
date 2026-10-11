@@ -1,0 +1,11 @@
+# Fourth standalone continuation checkpoint
+
+Six complete native modules and three exact pure support fragments passed the standalone build (4258 jobs, no warnings). All 467 previous mathematical modules are byte identical to the preceding standalone commit. Existing public API statements and proof modules are preserved.
+
+All 86 new non-internal declaration types and definition values are syntactically identical under the canonical rename, with zero definitional fallback or comparison problems. Every one of the 76 theorem proof terms is also syntactically identical. The monomial-representative theorem locally restores the original SubsemiringClass.toAddSubmonoidClass instance priority: the theorem body is unchanged, and the original proof term is recovered exactly. All added support declarations retain their precise original line intervals and universe context.
+
+CheckContinuationBatch4 enumerates all 140 new actual compiled moduleData constants, including private and compiler helpers. Every axiom belongs to propext, Classical.choice or Quot.sound. The full library scan checks 5134 declarations against that allowlist. Independent leanchecker replay explicitly targets all nine new modules with two threads and completes with exit 0. Source preservation retains the earlier modules' replay coverage.
+
+Six complete mathematical chapters add 41 Blueprint nodes. Only canonical declaration renaming and article section formatting are applied. Two-pass LaTeX compilation produces 76 pages with no final warnings or unresolved references. Source, exact provenance and readable audit evidence are published; generated PDFs remain local.
+
+The checkpoint includes actual coherent colon/controlled-transform extension, genuine finite coordinate monomial representatives and whole-ideal Macaulay spans, all iterated derivative pullback inclusions for arbitrary holomorphic maps, genuine GeneralTwo companion curve loci and real highest-stratum blowups preserving the original NC carrier jointly with the accumulated SNC boundary. Later native results on intrinsic Hilbert–Samuel analytic loci and finite differential NC separation require the next standalone extraction. General smooth canonical functoriality, higher-dimensional global recursion, normal flatness, Hilbert–Samuel transformation descent and ordered marked choice independence remain open.

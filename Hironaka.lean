@@ -434,6 +434,13 @@ import Hironaka.Resolution.HironakaNormalCrossingsMultiplicityStrata
 import Hironaka.Resolution.HironakaHolomorphicPointJets
 import Hironaka.Resolution.HironakaCurveAnalyticPredicates
 import Hironaka.Resolution.HironakaSmoothSubmersionOrder
+import Hironaka.Resolution.HironakaCoherentTransformExtension
+import Hironaka.Resolution.HironakaHolomorphicJetMonomialSpan
+import Hironaka.Resolution.HironakaNormalCrossingsHighestStratumBlowup
+import Hironaka.Resolution.HironakaSmoothPullbackDerivatives
+import Hironaka.Resolution.HironakaGeneralTwoCompanionCurveLoci
+import Hironaka.Resolution.HironakaNormalCrossingsBoundaryTransform
+
 /-!
 # Hironaka
 
