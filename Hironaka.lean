@@ -355,6 +355,17 @@ import Hironaka.Resolution.StrictTransformComposition
 import Hironaka.Resolution.StrictTransformSubvariety
 import Hironaka.Resolution.StrictTransformSubvarietySequence
 
+import Hironaka.Analytic.GlobalComponents
+import Hironaka.Analytic.GeometricPureDimension
+import Hironaka.Analytic.GlobalComponentRegularity
+import Hironaka.Invariant.AmbientDivisorExponent
+import Hironaka.Blowup.SmoothHypersurfaceIdeal
+import Hironaka.Analytic.ActualInvertibleIdealDifference
+import Hironaka.Resolution.HironakaDimensionGlobalComponents
+import Hironaka.Resolution.HironakaNormalCrossingsTransversality
+import Hironaka.Resolution.HironakaDivisorPowers
+import Hironaka.Resolution.HironakaDivisorResidual
+
 /-!
 # Hironaka
 

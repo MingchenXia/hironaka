@@ -18,7 +18,7 @@ Vocabulary (all in this library): `GermIdeal n X` is an ideal sheaf of holomorph
 
 ## What is proved
 
-The public surface is the 42 theorems of the modules `Hironaka.API`, `Hironaka.API2`, `Hironaka.API3`, `Hironaka.API4`. They are restatements, with the internal machinery hidden, of the theorems of the `Hironaka.Resolution.*` modules. All of them are stated in the namespace `Hironaka`.
+The original API surface consists of the 42 theorems of the modules `Hironaka.API`, `Hironaka.API2`, `Hironaka.API3`, `Hironaka.API4`. They are restatements, with the internal machinery hidden, of the theorems of the `Hironaka.Resolution.*` modules. All of them are stated in the namespace `Hironaka`.
 
 The principalization hypothesis "`𝔞` is nonzero at every point" is written out as `∀ x, ∃ g, 𝔞.mem x g ∧ ∃ᶠ y in 𝓝 x, g y ≠ 0` (at every point some germ of `𝔞` does not vanish identically near the point).
 
@@ -86,10 +86,24 @@ The principalization hypothesis "`𝔞` is nonzero at every point" is written ou
 
 The underlying statements in terms of towers of blowups are part of the library as well: `Hironaka.HironakaAdmissibleSequence.exists_tower_embedded_of_isCanonical`, `Hironaka.HironakaEmbeddedBoundary.exists_tower_embedded_of_isCanonical`.
 
+## Extensions added on 11 October 2026
+
+The four extension modules exported by `import Hironaka` add 40 named mathematical declarations (38 theorems and two definitions). The original 42 API statements and proofs are unchanged.
+
+| namespace | additions |
+|---|---|
+| `Hironaka.HironakaDimensionGlobalComponents` | Nine declarations identify `dimensionPart A k` exactly with the union of genuine global irreducible components of pure geometric dimension `k`, prove the purity dictionary, and construct finite filtered local decompositions. No compactness, empty-interior or positive-dimension assumption is needed for the identification. |
+| `Hironaka.HironakaNormalCrossingsTransversality` | Four geometric upgrade lemmas and nine resolution-existence theorems prove `IsTransverse` for the smooth strict transform and the accumulated SNC boundary, retaining the original resolution conclusions. Direct existence forms include compact pure/mixed-dimensional sets, compact ambient pure forms, pure relatively compact restrictions, and the boundary neighbourhood form. Other original forms can use the generic upgrades. |
+| `Hironaka.HironakaDivisorPowers` | Ten theorems prove multiplicity scaling for actual ideal powers, including restricted submanifolds and the zeroth power, and produce nonzero stalks from actual invertibility. |
+| `Hironaka.HironakaDivisorResidual` | Seven theorems and a recursive finite-product definition produce constant multiplicities on connected smooth carriers and actual residual factorizations for a finite ordered list of nonempty connected smooth closed hypersurfaces. The residual support shrinks and contains none of the chosen hypersurfaces entirely. |
+
+In the finite-list theorem, coefficients are extracted successively from intermediate residual divisors. Repeated list members are allowed; a later repeated member may have coefficient zero. The theorem does not identify these ordered coefficients with all the original divisor's component multiplicities. The full arbitrary SNC divisor sum remains open, as recorded in item 6 below.
+
+The complete statements and mathematical proofs are in [the extension blueprint](blueprint/extensions.tex). Reusable support modules supply original geometric and ideal-theoretic declarations omitted by the first release's extraction.
+
 ## Known gaps with respect to the standard theorems
 
-The theorems are honest statements of what is proved, but they are weaker than the strongest classical forms in the
-following respects.
+This checklist compares the proved statements with classical forms. Items 5 and 7 record the specific gaps closed by the extensions; the other limitations remain.
 
 1. **Scope.** The ambient space is always a complex manifold (smooth); singular analytic spaces appear only as analytic
    subsets of a manifold (embedded resolution) or through ideal sheaves (principalization). There is no statement about
@@ -108,18 +122,23 @@ following respects.
    a later release; it would need the modified invariant of Bierstone--Milman 1997, Section 12. Bierstone--Milman 1997,
    Theorem 1.6 itself has the same behaviour (their Remark 1.7 (3)). Only `Exc f ⊆ ⋃ (new members) ⊆ f⁻¹ F` is stated, not equality. Hypothesis:
    no member of `E₀` contains a nonempty relatively open subset of `W`.
-5. **Analytic sets that are not equidimensional.** One admissible sequence resolves an analytic set `W` with empty
-   interior whose components may have different dimensions (`Hironaka.exists_embeddedResolution_analytic*`), with
-   smooth, pairwise disjoint strict transforms of the dimension parts `W⁽ᵏ⁾ = closure (Reg_k W)`: for compact `W` (or
-   compact `X`), and for any `W` over an open set contained in a compact set or over a relatively compact neighbourhood of
-   a compact set (as in item 3, there is no locally finite global sequence). `interior W = ∅` is assumed (no
-   `n`-dimensional part). The identification of `W⁽ᵏ⁾` with the union of the `k`-dimensional irreducible components is
-   not stated.
-6. **The divisor of principalization** is not stated to be a combination `Σ aᵢ Eᵢ` of the members of `E`; only
-   `Supp D = ⋃ E` (resp. `⋃ E.drop |E₀|`) is stated.
-7. **Simultaneous normal crossings.** `HasNormalCrossings S E` allows `S` to lie inside a member of `E`. For an
-   irreducible `V` this is excluded by connectedness and `⋃ E ⊆ f⁻¹(V_sing)`, but this is not stated as a theorem; for the
-   pure-dimensional and boundary forms it is not stated.
+5. **Dimension components: identification proved.** The extension theorem
+   `Hironaka.HironakaDimensionGlobalComponents.dimensionPart_eq_sUnion_globalComponents` identifies
+   `W⁽ᵏ⁾ = closure (Reg_k W)` with the union of the genuine global irreducible components of pure geometric
+   dimension `k`, for every analytic `W` and every `k`. Its finite local decomposition retains exactly the branches
+   of dimension `k`. Existing mixed-dimensional resolution results still have the compactness or local restrictions
+   in item 3 and assume `interior W = ∅`.
+6. **The full divisor sum remains open.** Principalization still does not produce a global sum `Σ aᵢ Eᵢ` for an
+   arbitrary prescribed SNC list. The new residual theorem gives actual ideal factorizations along a finite ordered
+   list of nonempty connected smooth closed hypersurfaces, with effective residual support contained in the original
+   support and no chosen hypersurface entirely contained in it. Proving that an SNC-supported residual is the unit
+   ideal, and refining disconnected list members into connected components, remain necessary for the full statement.
+7. **Simultaneous normal crossings: noncontainment proved in the extension.** The original predicate
+   `HasNormalCrossings S E` permits a boundary member to contain `S` locally. The extension derives `IsTransverse S E`
+   from actual normal-crossings coordinates and density off the boundary, and proves it for strict transforms using
+   admissibility and the original exceptional-support conclusions. Nine directly named existence forms retain all
+   original conclusions and append transversality; four generic lemmas also upgrade the other original forms.
+   The original 42 API declarations themselves retain their previous statements.
 8. **Position of the centres.** Every embedded form states that the centres lie over the singular set (`W_sing`, resp.
    `F`) and that `f` is an isomorphism over the complement. The literal condition "`Cⱼ ⊂ Sing Xⱼ`, or `Xⱼ` smooth and
    `Cⱼ ⊂ Xⱼ ∩ Eⱼ`" of Bierstone--Milman 1997, Theorem 1.6 (1) (Bierstone--Milman 2008, (2′)), on the current strict
@@ -135,6 +154,7 @@ You need [elan](https://github.com/leanprover/elan); the toolchain is pinned in 
 lake exe cache get      # download the compiled Mathlib
 lake build              # build the library
 lake test               # print and check the axioms (scripts/CheckAxioms.lean)
+lake env lean scripts/CheckExtensions.lean # enumerate and audit every new/support constant
 lake env leanchecker Hironaka   # optional: replay every module in the kernel
 ```
 
@@ -153,7 +173,7 @@ Every declaration of the library, and in particular every public theorem, depend
 
 ## Verification
 
-Performed on this release (352 modules, 3557 declarations, 94679 lines of Lean):
+The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the new extensions is recorded separately in [the audit report](audit/extensions-20261011/verification.md):
 
 * **Build**: `lake build` from scratch: exit code 0, 352 modules compiled, 0 errors, 0 warnings, 0 declarations with an incomplete proof, 2470 s with one Lean process at a time.
 * **Axioms**: `#print axioms` on each of the 42 public theorems and `collectAxioms` on all 4439 declarations: every public theorem depends exactly on `Classical.choice`, `Quot.sound`, `propext`; all 4439 declarations depend on these three at most.
@@ -176,7 +196,7 @@ Performed on this release (352 modules, 3557 declarations, 94679 lines of Lean):
 
 Namespaces follow the module structure of the development the library was extracted from: the declarations of the module `Hironaka/<Area>/<Name>.lean` are in the namespace `Hironaka.<Name>` (except the public statements, which are in `Hironaka`). The module `Hironaka/Invariant/StepOneSeq.lean` generates part of its declarations with the command `transport_ext_to_seq` of `Hironaka/Invariant/ExtSeqTransport.lean`, which re-states results proved for one form of the resolution invariant for another and adds each one through the kernel.
 
-Some docstrings refer to statements of the LaTeX write-up from which the formalization was developed by labels such as `hir:general-step`; that write-up is not part of this repository. Labels such as `pr:resol` or `le:S` are those of the arXiv source of Włodarczyk 2005, and keys such as `wlodarczyk05-hironaka` refer to the references below.
+Some docstrings refer to statements of the LaTeX write-up from which the formalization was developed by labels such as `hir:general-step`; the full original write-up is not part of this repository. The new extension chapters are included under `blueprint/`. Labels such as `pr:resol` or `le:S` are those of the arXiv source of Włodarczyk 2005, and keys such as `wlodarczyk05-hironaka` refer to the references below.
 
 ## References
 

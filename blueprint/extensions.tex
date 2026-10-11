@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{alphalph}
+\usepackage[margin=2.4cm]{geometry}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{convention}[theorem]{Convention}
+\newtheorem{remark}[theorem]{Remark}
+\providecommand{\fint}{\ensuremath{\mathchoice{\kern.18em\overline{\kern-.18em\int}}{\overline{\int}}{\overline{\int}}{\overline{\int}}}}
+\providecommand{\ddc}{dd^c}
+\providecommand{\href}[2]{#2}
+\newcommand{\lean}[1]{}
+\newcommand{\uses}[1]{}
+\newcommand{\source}[1]{}
+\newcommand{\dcref}[1]{\textup{(#1)}}
+\newcommand{\leanok}{}
+\newcommand{\mathlibok}{}
+\newcommand{\notready}{}
+\title{Hironaka: dimension components, transversality and divisor multiplicities}
+\author{}
+\date{11 October 2026}
+\begin{document}
+\maketitle
+\section{Prerequisites from the original API}
+These results use the embedded resolution theorems already proved in the library.
+The following pointers identify the earlier results referred to in the proofs below.
+\subsection{Pure-dimensional embedded resolution}\label{hir:embedded-resolution-pure-dimensional}
+See \texttt{Hironaka.exists\_embeddedResolution\_pure\_of\_isCompact} and its compact-ambient and relatively compact variants in \texttt{API} and \texttt{API2}.
+\subsection{Embedded resolution with an SNC boundary}\label{hir:embedded-resolution-boundary}
+See \texttt{Hironaka.exists\_embeddedResolution\_boundary\_of\_isCompact} and the corresponding variants in \texttt{API2}.
+\subsection{Embedded resolution in mixed dimensions}\label{hir:embedded-resolution-analytic}
+See \texttt{Hironaka.exists\_embeddedResolution\_analytic\_of\_isCompact} and its boundary form in \texttt{API3}.
+\input{hironaka-dimension-extension}
+\input{hironaka-boundary-extension}
+\input{hironaka-divisor-extension}
+\begin{thebibliography}{9}
+\bibitem{demailly-cadg} J.-P. Demailly, \emph{Complex analytic and differential geometry}, Chapter II, sections 4--5.
+\bibitem{wlodarczyk05-hironaka} J. W{\l}odarczyk, \emph{Simple Hironaka resolution in characteristic zero}, J. Amer. Math. Soc. 18 (2005), 779--822.
+\bibitem{bierstone-milman97-invent-math} E. Bierstone and P. D. Milman, \emph{Canonical desingularization in characteristic zero by blowing up the maximum strata of a local invariant}, Invent. Math. 128 (1997), 207--302.
+\end{thebibliography}
+\end{document}
