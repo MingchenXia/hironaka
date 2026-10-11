@@ -1,0 +1,84 @@
+\section{Actual order under holomorphic submersions}
+
+This chapter produces the first order layer of smooth functoriality from an
+actual holomorphic submersion between manifolds of possibly different
+dimensions. It does not assume a section or an equality of invariants.
+Compatibility of the full higher invariant and of its selected blowup
+sequence remains a separate obligation.
+
+\begin{theorem}\label{hir:submersion-local-section}
+Let $f:Y\to X$ be a holomorphic submersion at $y$. There is a map
+$s:X\to Y$ that is holomorphic on a neighbourhood of $f(y)$, with
+$s(f(y))=y$ and $f\circ s=\operatorname{id}$ on a neighbourhood of $f(y)$.
+\lean{Hironaka.HironakaSmoothSubmersionOrder.exists_holomorphic_localSection}
+\leanok
+\end{theorem}
+\begin{proof}
+Choose the genuine submersion charts $\phi$ at $y$ and $\psi$ at $f(y)$,
+and the complex linear equivalence $L$ for which
+$\psi\circ f\circ\phi^{-1}=\operatorname{pr}_1\circ L$.
+Put $v=\operatorname{pr}_2 L(\phi(y))$ and define
+$s(z)=\phi^{-1}(L^{-1}(\psi(z),v))$.
+The original identity at $y$ gives
+$L(\phi(y))=(\psi(f(y)),v)$, so $s(f(y))=y$.
+The open chart targets and continuity give a neighbourhood of $f(y)$
+on which every expression stays in its actual chart domain. Chart
+holomorphicity and the affine complex linear slice prove that $s$ is
+holomorphic there. On that neighbourhood the submersion chart equation
+gives $\psi(f(s(z)))=\psi(z)$; injectivity on the actual chart source
+then gives $f(s(z))=z$. This produces all section properties internally.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-order-ge}
+For an actual ideal of holomorphic germs $I$ on $X$, at a point where $f$
+is a holomorphic submersion, and every natural $q$,
+$I_{f(y)}\subseteq\mathfrak m_{f(y)}^q$ if and only if
+$(f^*I)_y\subseteq\mathfrak m_y^q$.
+\lean{Hironaka.HironakaSmoothSubmersionOrder.orderGE_pullback_iff}
+\leanok
+\uses{hir:submersion-local-section}
+\end{theorem}
+\begin{proof}
+For the forward direction, each actual pullback generator is $a\circ f$
+with $a\in I_{f(y)}$. The existing genuine pullback theorem for powers
+of point ideals places it in $\mathfrak m_y^q$. Closure under finite
+holomorphic combinations gives the entire pullback ideal inclusion.
+Conversely, for each original $a\in I_{f(y)}$, its actual pullback
+$a\circ f$ belongs to $(f^*I)_y$, hence to $\mathfrak m_y^q$.
+Compose with the internally produced holomorphic section through $y$.
+Pullback of point-ideal powers gives $(a\circ f)\circ s$ in
+$\mathfrak m_{f(y)}^q$; the genuine local identity $f\circ s=\operatorname{id}$
+and locality of germ membership identify this germ with $a$.
+Both directions apply to the original full ideal, not just one generator.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-order}
+For the same original data,
+$\operatorname{ord}_y(f^*I)=\operatorname{ord}_{f(y)} I$ in
+$\mathbb N\cup\{\infty\}$.
+\lean{Hironaka.HironakaSmoothSubmersionOrder.order_pullback_eq}
+\leanok
+\uses{hir:submersion-order-ge}
+\end{theorem}
+\begin{proof}
+The actual order is the supremum of the natural $q$ for which the full
+stalk lies in the $q$-th point-ideal power. The preceding equivalence
+identifies these indexing predicates exactly. Their suprema are equal,
+including infinite order and the zero ideal.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-cosupport}
+For a holomorphic submersion $f$ and a coherent original ideal $I$, every
+marked cosupport satisfies
+$\operatorname{cosupp}(f^*I,q)=f^{-1}\operatorname{cosupp}(I,q)$.
+\lean{Hironaka.HironakaSmoothSubmersionOrder.cosupport_pullback_eq}
+\leanok
+\uses{hir:submersion-order-ge}
+\end{theorem}
+\begin{proof}
+Coherence supplies holomorphicity of every original ideal germ.
+At each actual source point, apply the preceding pointwise order
+equivalence to the genuine submersion at that point. Unfolding the
+actual marked cosupport gives equality of the two sets by extensionality.
+No compactness, equal-dimensional inverse, or section certificate is an input.
+\end{proof}

@@ -101,6 +101,8 @@ The continuation modules prove the complete SNC divisor-sum dictionary. Genuine 
 
 The current centre modules internally produce the original reduced invertible ideal of a pure hypersurface, identify every controlled strict ideal, terminate arbitrary multiplicity restarts and retain literal centre conditions at every stage, then append smooth boundary resolution. Actual curve-cosupport data produce an unconditional global canonical growing sequence, locally finite centre images and compact-uniform eventual geometric resolution. Actual order tuples, boundary counts, monomial and special StepOne strata have analytic superlevels. General NC charts produce original local branches and fixed-sequence permutation compatibility. Actual blowups of the same centre produce comparison cocycles. Full higher-dimensional global resolution and unordered canonical boundary descent remain open.
 
+The third continuation identifies intrinsic whole-ideal embedding dimension, complete dimension-two StepOne analytic superlevels, unique NC branch overlaps and smooth highest strata with internally attained maxima. Genuine holomorphic jets identify the actual maximal-ideal powers with derivative kernels and prove finite dimension of R/(I+m^q) for any original ideal. Actual finite curve-history predicates internally produce a global zero-dimensional exception. Original holomorphic submersion charts internally produce a section through the point and preserve entire ideal order and cosupport across different dimensions. Higher-invariant smooth functoriality, normal-flat centres and general Hilbert–Samuel transformation descent remain open.
+
 The complete statements and mathematical proofs are in [the extension blueprint](blueprint/extensions.tex). Reusable support modules supply original geometric and ideal-theoretic declarations omitted by the first release's extraction.
 
 ## Known gaps with respect to the standard theorems
@@ -179,7 +181,7 @@ Every declaration of the library, and in particular every public theorem, depend
 
 ## Verification
 
-The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md) and [the second report](audit/continuation-20261011-r1-batch2/verification.md):
+The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md), [the second report](audit/continuation-20261011-r1-batch2/verification.md) and [the third report](audit/continuation-20261011-r1-batch3/verification.md):
 
 * **Build**: `lake build` from scratch: exit code 0, 352 modules compiled, 0 errors, 0 warnings, 0 declarations with an incomplete proof, 2470 s with one Lean process at a time.
 * **Axioms**: `#print axioms` on each of the 42 public theorems and `collectAxioms` on all 4439 declarations: every public theorem depends exactly on `Classical.choice`, `Quot.sound`, `propext`; all 4439 declarations depend on these three at most.

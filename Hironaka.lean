@@ -427,6 +427,13 @@ import Hironaka.Resolution.HironakaHypersurfaceStrictIdeal
 import Hironaka.Resolution.HironakaPureCodimensionOneInvertibleIdeal
 import Hironaka.Resolution.HironakaHypersurfaceMultiplicityDescent
 
+import Hironaka.Resolution.HironakaCurrentEmbeddingDimension
+import Hironaka.Resolution.HironakaDimensionTwoStepOneAnalyticSuperlevels
+import Hironaka.Resolution.HironakaNormalCrossingsBranchOverlap
+import Hironaka.Resolution.HironakaNormalCrossingsMultiplicityStrata
+import Hironaka.Resolution.HironakaHolomorphicPointJets
+import Hironaka.Resolution.HironakaCurveAnalyticPredicates
+import Hironaka.Resolution.HironakaSmoothSubmersionOrder
 /-!
 # Hironaka
 
