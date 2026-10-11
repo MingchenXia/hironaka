@@ -451,6 +451,12 @@ import Hironaka.Resolution.HironakaNormalCrossingsBiholomorphicMultiplicity
 import Hironaka.Resolution.HironakaHilbertSamuelTangentValue
 import Hironaka.Resolution.HironakaGeneralThreeNonspecialAnalyticLoci
 
+import Hironaka.Resolution.HironakaSmoothSubmersionJacobian
+import Hironaka.Resolution.HironakaNormalCrossingsSeparationChoiceComparison
+import Hironaka.Resolution.HironakaDimensionThreeStepOneCurveEnvelope
+import Hironaka.Resolution.HironakaHolomorphicJetQuotientFrames
+import Hironaka.Resolution.HironakaStepOneCurveHistoryPredicates
+
 /-!
 # Hironaka
 
