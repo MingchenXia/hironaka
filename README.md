@@ -97,21 +97,24 @@ The four extension modules exported by `import Hironaka` add 40 named mathematic
 | `Hironaka.HironakaDivisorPowers` | Ten theorems prove multiplicity scaling for actual ideal powers, including restricted submanifolds and the zeroth power, and produce nonzero stalks from actual invertibility. |
 | `Hironaka.HironakaDivisorResidual` | Seven theorems and a recursive finite-product definition produce constant multiplicities on connected smooth carriers and actual residual factorizations for a finite ordered list of nonempty connected smooth closed hypersurfaces. The residual support shrinks and contains none of the chosen hypersurfaces entirely. |
 
-In the finite-list theorem, coefficients are extracted successively from intermediate residual divisors. Repeated list members are allowed; a later repeated member may have coefficient zero. The theorem does not identify these ordered coefficients with all the original divisor's component multiplicities. The full arbitrary SNC divisor sum remains open, as recorded in item 6 below.
+The continuation modules prove the complete SNC divisor-sum dictionary. Genuine connected components are constructed from disconnected boundary members; their multiplicities are the original divisor's exponents. Compact support gives an actual finite component sum, while arbitrary noncompact support gives one global coefficient function and locally finite positive component sums whose complete ideal stalks agree with the divisor on every selected open neighbourhood. The residual unit and coefficient identities are produced internally. Canonical compact-support principalization retains the original conclusions and this actual sum.
+
+New centre modules record literal stage geometry for smooth current strict transforms and produce fresh maximum-multiplicity singular centres and their actual blowups. The noncompact sequence module proves local stabilization of an actual given canonical growing sequence; global sequence existence is a separate goal. Actual blowups of the same centre produce comparison cocycles, and coherent-order strata produce genuine pure global analytic extensions.
 
 The complete statements and mathematical proofs are in [the extension blueprint](blueprint/extensions.tex). Reusable support modules supply original geometric and ideal-theoretic declarations omitted by the first release's extraction.
 
 ## Known gaps with respect to the standard theorems
 
-This checklist compares the proved statements with classical forms. Items 5 and 7 record the specific gaps closed by the extensions; the other limitations remain.
+This checklist compares the proved statements with classical forms. Items 5–7 record the specific gaps closed by the extensions; the general limitations in the other items remain.
 
 1. **Scope.** The ambient space is always a complex manifold (smooth); singular analytic spaces appear only as analytic
    subsets of a manifold (embedded resolution) or through ideal sheaves (principalization). There is no statement about
    abstract analytic spaces, algebraic varieties, schemes, or fields other than `ℂ`.
-2. **No functoriality in the elementary statements.** They are existence statements. At the marked-ideal level,
-   `Hironaka.canonicalResolution` gives compatibility with restriction to open sets and uniqueness up to isomorphism under
-   biholomorphisms of the base, but nothing about general smooth morphisms, and the elementary theorems do not say that
-   their `f` is the canonical one.
+2. **Canonical elementary principalization is proved for compact zero locus.** The continuation theorem
+   `Hironaka.HironakaCompleteDivisorSum.exists_canonical_principalization_componentSum` constructs the actual
+   canonical tower on an arbitrary ambient manifold with compact ideal zero locus, retaining open restriction,
+   biholomorphism uniqueness and all principalization conclusions. General smooth-morphism functoriality and
+   fully canonical elementary embedded resolution remain open.
 3. **Compactness.** A finite blowup sequence is produced when `X` is compact, or when `Z(𝔞)` (resp. `V`, `W`) is
    compact; otherwise only over an open set contained in a compact set, or over a relatively compact neighbourhood of a
    compact set. There is no locally finite global sequence on a non-compact manifold (the form of Bierstone--Milman 1997
@@ -128,21 +131,20 @@ This checklist compares the proved statements with classical forms. Items 5 and 
    dimension `k`, for every analytic `W` and every `k`. Its finite local decomposition retains exactly the branches
    of dimension `k`. Existing mixed-dimensional resolution results still have the compactness or local restrictions
    in item 3 and assume `interior W = ∅`.
-6. **The full divisor sum remains open.** Principalization still does not produce a global sum `Σ aᵢ Eᵢ` for an
-   arbitrary prescribed SNC list. The new residual theorem gives actual ideal factorizations along a finite ordered
-   list of nonempty connected smooth closed hypersurfaces, with effective residual support contained in the original
-   support and no chosen hypersurface entirely contained in it. Proving that an SNC-supported residual is the unit
-   ideal, and refining disconnected list members into connected components, remain necessary for the full statement.
+6. **Complete SNC divisor sums are proved.** `Hironaka.HironakaCompleteDivisorSum` gives actual finite sums
+   for compact support and the same actual canonical principalization tower. `Hironaka.HironakaLocallyFiniteDivisorSum`
+   gives arbitrary noncompact locally finite sums with one global original-coefficient function and full local ideal
+   equality. Disconnected SNC members, zero coefficients, empty boundaries and ambient dimension zero are covered.
 7. **Simultaneous normal crossings: noncontainment proved in the extension.** The original predicate
    `HasNormalCrossings S E` permits a boundary member to contain `S` locally. The extension derives `IsTransverse S E`
    from actual normal-crossings coordinates and density off the boundary, and proves it for strict transforms using
    admissibility and the original exceptional-support conclusions. Nine directly named existence forms retain all
    original conclusions and append transversality; four generic lemmas also upgrade the other original forms.
    The original 42 API declarations themselves retain their previous statements.
-8. **Position of the centres.** Every embedded form states that the centres lie over the singular set (`W_sing`, resp.
-   `F`) and that `f` is an isomorphism over the complement. The literal condition "`Cⱼ ⊂ Sing Xⱼ`, or `Xⱼ` smooth and
-   `Cⱼ ⊂ Xⱼ ∩ Eⱼ`" of Bierstone--Milman 1997, Theorem 1.6 (1) (Bierstone--Milman 2008, (2′)), on the current strict
-   transform, is not stated.
+8. **General singular-stage centre control remains open.** The continuation modules prove the literal
+   smooth-stage alternative, and fresh maximum-order centres lie in the actual current singular locus with
+   constant maximum multiplicity. The entire general singular restart invariant is not yet identified with the
+   reduced current strict transform; no complete general per-stage singular-centre theorem is claimed.
 9. **Normal crossings.** The output divisors have *simple* normal crossings (stronger than normal crossings), and an
    initial boundary `E₀` must have simple normal crossings.
 
@@ -154,7 +156,8 @@ You need [elan](https://github.com/leanprover/elan); the toolchain is pinned in 
 lake exe cache get      # download the compiled Mathlib
 lake build              # build the library
 lake test               # print and check the axioms (scripts/CheckAxioms.lean)
-lake env lean scripts/CheckExtensions.lean # enumerate and audit every new/support constant
+lake env lean scripts/CheckExtensions.lean # original extension audit
+lake env lean scripts/CheckContinuations.lean # audit continuation and support constants
 lake env leanchecker Hironaka   # optional: replay every module in the kernel
 ```
 
@@ -173,7 +176,7 @@ Every declaration of the library, and in particular every public theorem, depend
 
 ## Verification
 
-The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the new extensions is recorded separately in [the audit report](audit/extensions-20261011/verification.md):
+The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuation in [its report](audit/continuation-20261011-r1/verification.md):
 
 * **Build**: `lake build` from scratch: exit code 0, 352 modules compiled, 0 errors, 0 warnings, 0 declarations with an incomplete proof, 2470 s with one Lean process at a time.
 * **Axioms**: `#print axioms` on each of the 42 public theorems and `collectAxioms` on all 4439 declarations: every public theorem depends exactly on `Classical.choice`, `Quot.sound`, `propext`; all 4439 declarations depend on these three at most.

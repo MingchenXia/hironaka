@@ -1,0 +1,122 @@
+\section{Fresh maximal multiplicity centres}
+
+\begin{lemma}[The reduced ideal has order one at a regular point]
+\label{hir:reduced-ideal-order-one-regular}
+\uses{hir:order-taylor,hir:monomial-invariant-geometry}
+\lean{Hironaka.HironakaHypersurfaceStageCenters.order_vanishingIdeal_eq_one_of_regularAtDim}
+\leanok
+If $W$ is regular at $x$ of dimension $d<n$, then its actual vanishing
+ideal has order one at $x$.
+\end{lemma}
+\begin{proof}
+Every member of its vanishing ideal vanishes at $x$, so the order is at
+least one. Choose a local holomorphic flattening of $W$ to
+$\mathbb C^d\times\{0\}$. Its $d$th coordinate is an actual holomorphic
+germ in $\mathcal I_{W,x}$. A coordinate of a local biholomorphism has
+a nonzero first directional derivative: composing the derivatives of
+the chart and its inverse gives the identity. It consequently does not
+belong to the square of the point ideal, by the forward Taylor-order
+theorem. The vanishing ideal therefore does not have order at least two.
+Every integer in its defining order supremum is at most one, proving
+the asserted equality.
+\end{proof}
+
+\begin{lemma}[High multiplicity lies in the current singular locus]
+\label{hir:high-multiplicity-in-singular-locus}
+\uses{hir:reduced-ideal-order-one-regular}
+\lean{Hironaka.HironakaHypersurfaceStageCenters.cosupport_high_mark_subset_diff_regularLocus}
+\leanok
+Let $W$ be closed, $d<n$, and $\mu\geq2$. The actual cosupport of
+$(\mathcal I_W,\mu)$ is contained in $W\setminus\operatorname{Reg}_d W$.
+\end{lemma}
+\begin{proof}
+The cosupport for mark $\mu$ is contained in the cosupport for mark one,
+which equals $W$. If a point there were regular of dimension $d$, the
+preceding lemma would give order one, whereas cosupport membership gives
+order at least $\mu\geq2$. This is impossible.
+\end{proof}
+
+\begin{theorem}[Actual fresh maximal-multiplicity centre]
+\label{hir:actual-fresh-maximal-multiplicity-centre}
+\uses{hir:high-multiplicity-in-singular-locus,hir:fresh-order-bounded-current-residual-order,hir:centre-function}
+\lean{Hironaka.HironakaHypersurfaceStageCenters.exists_fresh_maximal_order_centre}
+\leanok
+Let $W$ be compact analytic, with regular points of dimension $d<n$ dense
+in $W$, and let $E$ be SNC. Suppose some point of $W$ has reduced ideal
+order at least two. Then the actual maximum multiplicity $\mu\geq2$
+and a nonempty smooth centre $C$ are produced internally, with
+\[
+ C\subset W\setminus\operatorname{Reg}_d W,
+ \qquad\operatorname{ord}_c\mathcal I_W=\mu\quad(c\in C).
+\]
+This $C$ is admissible for the actual marked ideal
+$(X,X,E,\mathcal I_W,\mu)$; in particular it has normal crossings with
+the given boundary. The reduced order is at most $\mu$ on all of $W$.
+\end{theorem}
+\begin{proof}
+Cartan coherence and empty interior put $(X,X,E,\mathcal I_W,1)$ in the
+actual domain. The reduced order is upper semicontinuous by its closed
+derivative-ideal superlevel sets, so it attains a maximum on compact $W$.
+At the point attaining this maximum, initialize instead with empty
+boundary and mark one. The previous current-reduced-order comparison for
+the empty tower bounds its order by the finite nonmonomial order of this
+actual fresh initialization. The maximum is therefore a finite integer
+$\mu$. The given high-order point forces $\mu\geq2$.
+
+Changing the mark to $\mu$ preserves well-formedness, dimension and
+nonzero germs. Its cosupport is a nonempty closed subset of compact $W$:
+it contains the point of maximum reduced order. The actual canonical
+invariant attains a maximum on this compact cosupport. Its own
+admissibility theorem produces the nonempty smooth maximum centre $C$
+with normal crossings with $E$. The preceding high-multiplicity lemma
+puts $C$ inside $W\setminus\operatorname{Reg}_d W$. Its points have order
+at least $\mu$ by admissibility and at most $\mu$ by maximality, hence
+exactly $\mu$. No centre-position or constant-multiplicity data is assumed.
+\end{proof}
+
+\begin{theorem}[Actual blowup with exact exceptional multiplicity]
+\label{hir:actual-high-multiplicity-blowup}
+\uses{hir:actual-fresh-maximal-multiplicity-centre,hir:hadamard-bridge,bcalc:controlled-not-exceptional,bcalc:controlled-transform}
+\lean{Hironaka.HironakaHypersurfaceStageCenters.exists_fresh_maximal_order_blowup}
+\leanok
+Under the preceding hypotheses there are an actual produced centre $C$,
+its blowup $\pi$, and the actual maximum multiplicity $\mu\geq2$, such that
+$C$ is nonempty, admissible, and contained in the present singular locus.
+The actual controlled ideal $\mathfrak a'$ is coherent and satisfies
+\[
+ \pi^*\mathcal I_W=\mathcal I_D^\mu\mathfrak a',
+ \qquad D=\pi^{-1}C,
+\]
+where $\mathcal I_D$ denotes the actual exceptional invertible ideal.
+At every point of $D$, some germ of $\mathfrak a'$ does not belong to
+the vanishing ideal of $D$. The next strict transform is actually analytic
+and compact, and the actual accumulated boundary is SNC.
+\end{theorem}
+\begin{proof}
+Produce $\mu$ and $C$ by the preceding theorem. Since $C\subset W$ and
+$W$ has empty interior, the actual blowup-existence theorem applies.
+Hadamard divisibility produces $\mathcal I_W\subset\mathcal I_C^\mu$;
+pulling back and taking the colon by the invertible exceptional power
+gives the stated actual factorization and coherence.
+
+At a point $z$ of the exceptional divisor the order at $\pi z$ is exactly
+$\mu$. The exceptional-ideal pushforward theorem says that if every
+controlled germ at $z$ belonged to the exceptional ideal, the original
+order at $\pi z$ would be at least $\mu+1$. This contradicts the proved
+constant multiplicity. Its contrapositive produces the required germ.
+Every germ vanishing on $D$ belongs to the exceptional ideal, by the
+actual SNC blowup coordinate theorem, so the produced germ also fails
+membership in the vanishing ideal of $D$.
+
+The actual test blowup preserves well-formedness, proving that the
+accumulated boundary is SNC. The actual analytic strict-transform theorem
+and properness of the blowup give analyticity and compactness of the next
+strict transform.
+\end{proof}
+
+The missing hypersurface step is the actual identity between the reduced
+strict-transform ideal and the $\mu$-controlled ideal after blowing up this
+produced centre. Exact exceptional multiplicity is supplied by the actual
+nondivisibility producer above; reducedness of the whole residual ideal
+remains to be proved. The maximal-multiplicity centre and blowup are genuine producers,
+but no finite restarted tower or general G8 completion is asserted here.
