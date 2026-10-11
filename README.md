@@ -183,6 +183,8 @@ rev = "main"
 
 Every declaration of the library, and in particular every public theorem, depends only on the three standard axioms of Lean and Mathlib: `propext`, `Classical.choice` and `Quot.sound`. The library declares no axioms of its own, and `scripts/CheckAxioms.lean` checks this for every declaration.
 
+The sixth continuation checkpoint adds actual dimension-three companion lower patches and nonspecial current-level GeneralThree analytic thresholds, intrinsic first Hilbert–Samuel tangent values and their exact pure-dimensional singular-locus dictionary, and actual biholomorphic preservation of unordered NC multiplicities. All 484 earlier mathematical modules remain byte identical; 60 types/definitions and 42 theorem proof terms compare exactly, all 89 actual new constants pass the axiom allowlist, and all four new modules pass independent kernel replay. The general gaps listed above remain open.
+
 ## Verification
 
 The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md), [the second report](audit/continuation-20261011-r1-batch2/verification.md) and [the third report](audit/continuation-20261011-r1-batch3/verification.md):

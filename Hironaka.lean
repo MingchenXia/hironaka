@@ -446,6 +446,11 @@ import Hironaka.Resolution.HironakaGeneralTwoAnalyticSuperlevels
 import Hironaka.Resolution.HironakaNormalCrossingsBoundarySeparation
 import Hironaka.Resolution.HironakaHolomorphicJetChartInvariance
 
+import Hironaka.Resolution.HironakaDimensionThreeStepOneLowerAnalyticLoci
+import Hironaka.Resolution.HironakaNormalCrossingsBiholomorphicMultiplicity
+import Hironaka.Resolution.HironakaHilbertSamuelTangentValue
+import Hironaka.Resolution.HironakaGeneralThreeNonspecialAnalyticLoci
+
 /-!
 # Hironaka
 
