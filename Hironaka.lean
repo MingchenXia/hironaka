@@ -441,6 +441,11 @@ import Hironaka.Resolution.HironakaSmoothPullbackDerivatives
 import Hironaka.Resolution.HironakaGeneralTwoCompanionCurveLoci
 import Hironaka.Resolution.HironakaNormalCrossingsBoundaryTransform
 
+import Hironaka.Resolution.HironakaHolomorphicJetRankLoci
+import Hironaka.Resolution.HironakaGeneralTwoAnalyticSuperlevels
+import Hironaka.Resolution.HironakaNormalCrossingsBoundarySeparation
+import Hironaka.Resolution.HironakaHolomorphicJetChartInvariance
+
 /-!
 # Hironaka
 
