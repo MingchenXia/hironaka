@@ -457,6 +457,15 @@ import Hironaka.Resolution.HironakaDimensionThreeStepOneCurveEnvelope
 import Hironaka.Resolution.HironakaHolomorphicJetQuotientFrames
 import Hironaka.Resolution.HironakaStepOneCurveHistoryPredicates
 
+import Hironaka.Resolution.HironakaSmoothSubmersionDerivativeEquality
+import Hironaka.Resolution.HironakaRelativeNormalIdeal
+import Hironaka.Resolution.HironakaStepOneMemberLowerExtension
+import Hironaka.Resolution.HironakaNormalCrossingsOpenRestrictionSeparation
+
+import Hironaka.Blowup.BlowupEmptyCentreExact
+import Hironaka.Blowup.BlowupTowerRestrictLengthExact
+import Hironaka.Invariant.MemberRestrictCosupportExact
+
 /-!
 # Hironaka
 

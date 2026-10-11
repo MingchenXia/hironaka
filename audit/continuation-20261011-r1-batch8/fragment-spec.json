@@ -1,0 +1,48 @@
+[
+  {
+    "source_module": "TranscendentalNakamaye.Pending.BlowupExistenceCodimOne",
+    "destination_module": "Hironaka.Blowup.BlowupEmptyCentreExact",
+    "intervals": [
+      [
+        143,
+        160
+      ]
+    ],
+    "imports": [
+      "Hironaka.Blowup.BlowupExistenceCodimOne",
+      "Hironaka.Blowup.SmoothHypersurfaceIdeal"
+    ],
+    "setup": "open Set Filter\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace Hironaka.BlowupExistenceCodimOne\nopen Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates\nnoncomputable section\nvariable {n : \u2115} {X : Type u} [TopologicalSpace X]\n  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]\n",
+    "ending": "end\nend Hironaka.BlowupExistenceCodimOne\n"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.BlowupTowerTransforms",
+    "destination_module": "Hironaka.Blowup.BlowupTowerRestrictLengthExact",
+    "intervals": [
+      [
+        140,
+        143
+      ]
+    ],
+    "imports": [
+      "Hironaka.Blowup.BlowupTowerTransforms"
+    ],
+    "setup": "open Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace Hironaka.BlowupTowerTransforms\nopen Hironaka BlowupTowers\nvariable {n : \u2115} {X : CMfd.{u} n}\n",
+    "ending": "end Hironaka.BlowupTowerTransforms\n"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.InvDomainMemberRestriction",
+    "destination_module": "Hironaka.Invariant.MemberRestrictCosupportExact",
+    "intervals": [
+      [
+        227,
+        235
+      ]
+    ],
+    "imports": [
+      "Hironaka.Invariant.InvDomainMemberRestriction"
+    ],
+    "setup": "open Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace Hironaka.InvDomainMemberRestriction\nopen Hironaka MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction BoundaryCount\nvariable {n : \u2115} {X : Type u} [TopologicalSpace X]\n [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]\n",
+    "ending": "end Hironaka.InvDomainMemberRestriction\n"
+  }
+]
