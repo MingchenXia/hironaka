@@ -1,0 +1,59 @@
+[
+  {
+    "source_module": "TranscendentalNakamaye.Pending.DerivativeIdealTower",
+    "destination_module": "Hironaka.MarkedIdeal.DerivativeAmbientMarkedDataExact",
+    "intervals": [
+      [
+        45,
+        58
+      ]
+    ],
+    "imports": [
+      "Hironaka.MarkedIdeal.DerivativeIdealTower",
+      "Hironaka.MarkedIdeal.DerivativeIdeal"
+    ],
+    "setup": "open Set Filter\nopen scoped Topology Manifold\nuniverse u\nnamespace Hironaka.DerivativeIdealTower\nopen Hironaka MarkedIdeals DerivativeIdeal\nnoncomputable section\nvariable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n",
+    "ending": "end\nend Hironaka.DerivativeIdealTower\n"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.CoefficientIdeal",
+    "destination_module": "Hironaka.MarkedIdeal.CoefficientAmbientMarkedDataExact",
+    "intervals": [
+      [
+        171,
+        180
+      ],
+      [
+        308,
+        320
+      ]
+    ],
+    "imports": [
+      "Hironaka.MarkedIdeal.CoefficientIdeal",
+      "Hironaka.MarkedIdeal.DerivativeAmbientMarkedDataExact",
+      "Hironaka.MarkedIdeal.DerivativeIdealCoherence"
+    ],
+    "setup": "open Set Filter\nopen scoped Topology Manifold\nuniverse u\nnamespace Hironaka.CoefficientIdeal\nopen Hironaka Hironaka.HolomorphicIdealSheaves MarkedIdeals DerivativeIdeal DerivativeIdealTower HomogenizedGlueing\nnoncomputable section\nvariable {n : ℕ}\n",
+    "ending": "end\nend Hironaka.CoefficientIdeal\n",
+    "fragment_context": "First interval in section Ambient with actual M complex-manifold context; coefficient declarations in original n-only context."
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.MemberInterTowerAlong",
+    "destination_module": "Hironaka.Invariant.MemberStrictPartitionExact",
+    "intervals": [
+      [
+        177,
+        180
+      ],
+      [
+        290,
+        296
+      ]
+    ],
+    "imports": [
+      "Hironaka.Invariant.MemberInterTowerAlong"
+    ],
+    "setup": "open Set Filter TopologicalSpace\nopen scoped Topology Manifold\nuniverse u\nnamespace Hironaka.MemberInterTowerAlong\nopen Hironaka Hironaka.BlowupSequences BlowupTowers BlowupTowerTransforms MarkedIdeals.MarkedIdeal HomogenizedGlueingTower BlowupStrictSubmanifold\nvariable {n : ℕ} {X : CMfd.{u} n}\n",
+    "ending": "end Hironaka.MemberInterTowerAlong\n"
+  }
+]

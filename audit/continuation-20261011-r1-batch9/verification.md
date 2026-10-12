@@ -1,0 +1,11 @@
+# Ninth standalone continuation checkpoint
+
+Four complete native modules and three missing pure exact fragments pass the final full standalone build: 4289 jobs, exit 0, no warnings. All 500 preceding mathematical modules remain byte identical; all 507 mathematical modules pass the source scan.
+
+All 87 declaration types/definition bodies and all 68 theorem proof terms are syntactically identical under canonical renaming, with zero definitional fallback and zero problems. A local instance-priority declaration in the new SmoothCentreRelativeIdeal copy selects the original SubsemiringClass.toAddSubmonoidClass elaboration route. The frozen native mathematical statements, definitions and proof text remain unchanged. Exact committed revisions, final hashes and original fragment intervals are archived. Existing derivative coherence and strict-transform support are reused rather than duplicated.
+
+The actual new moduleData audit covers all 141 compiled constants including private/compiler helpers. The full library audit covers 5572 non-internal mathematical declarations. All use only propext, Classical.choice and Quot.sound. Final explicit two-thread kernel replay of all seven new modules finishes with exit 0.
+
+The four mathematical chapters add 23 Blueprint nodes, 23 complete proofs and one definition, which also has a construction proof. Two-pass LaTeX produces 115 pages with no warnings, unresolved references or overfull boxes; five underfull typography diagnostics remain honestly recorded. Original plain-text subscript expressions are placed in math mode in the new derived chapters only. Frozen native Blueprints and mathematical content are preserved. Generated PDF and first-pass artifacts remain local.
+
+Whole original coefficient marked data commute with genuine smooth pullback. Original smooth-centre geometry internally supplies actual flattening and whole ideal/power quotient dictionaries. Actual dimension-three member lower domains and complete masked tail identities are produced. Entire original NC total ideals have their original intrinsic component coefficients and residual unit on the actual augmented terminal boundary. Final controlled cosupport vanishing and the six general goals G1, G2, G3, G4, G8 and G9 remain open.

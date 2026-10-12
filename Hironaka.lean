@@ -466,6 +466,15 @@ import Hironaka.Blowup.BlowupEmptyCentreExact
 import Hironaka.Blowup.BlowupTowerRestrictLengthExact
 import Hironaka.Invariant.MemberRestrictCosupportExact
 
+import Hironaka.Resolution.HironakaSmoothSubmersionCoefficientIdeals
+import Hironaka.Resolution.HironakaSmoothCentreRelativeIdeal
+import Hironaka.Resolution.HironakaStepOneMemberTailExtension
+import Hironaka.Resolution.HironakaNormalCrossingsTotalIdeal
+
+import Hironaka.MarkedIdeal.DerivativeAmbientMarkedDataExact
+import Hironaka.MarkedIdeal.CoefficientAmbientMarkedDataExact
+import Hironaka.Invariant.MemberStrictPartitionExact
+
 /-!
 # Hironaka
 
