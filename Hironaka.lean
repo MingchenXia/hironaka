@@ -3,6 +3,8 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
+import Hironaka.Invariant.DivisorExponentAlongUnivExact
+import Hironaka.Invariant.MonomialGammaAlongUnivExact
 import Hironaka.API
 import Hironaka.API2
 import Hironaka.API3
@@ -515,6 +517,14 @@ import Hironaka.MarkedIdeal.GeoResolutionAppendExact
 import Hironaka.Invariant.UnitCosupportExact
 import Hironaka.Invariant.NonzeroAlongUnivExact
 
+import Hironaka.Resolution.HironakaSmoothSubmersionMonomialOrdering
+import Hironaka.Resolution.HironakaStepOneMemberHeadIncidence
+import Hironaka.Resolution.HironakaNormalCrossingsOrderedMonomialTail
+import Hironaka.Resolution.HironakaStepOneMemberAcrossMaskValues
+
+import Hironaka.Invariant.StepOneLowerValueExact
+import Hironaka.Invariant.StepOneSeqLowerValueExact
+
 /-!
 # Hironaka
 
@@ -523,3 +533,7 @@ resolution of analytic subsets, by finite sequences of blowups with smooth centr
 of marked ideals from which they are derived.  The public statements are in the modules `Hironaka.API*`; see
 `README.md`.
 -/
+
+
+
+

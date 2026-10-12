@@ -201,6 +201,8 @@ The thirteenth continuation checkpoint adds the complete original relative assoc
 
 The fourteenth continuation checkpoint adds genuine whole original standard normal monomial bases and one actual uniform denominator, actual masked monomial values and complete finite marked SNC procedures. All 529 earlier mathematical modules remain byte identical. All 123 declaration types/definitions and 93 theorem proof terms compare exactly, with zero fallback; four missing pure support fragments preserve their original complete declaration contexts. All six general gaps remain open.
 
+The fifteenth continuation checkpoint adds actual monomial ordering under genuine smooth pullback, source member-head incidence, complete ordered monomial tails and original values across every member mask. All 537 preceding mathematical modules remain byte identical. All 125 actual new compiled constants and 111 theorem proof bodies compare fully and exactly, including every private/compiler helper, with zero fallback, alpha/defeq comparison or numerical erasure. The complete 9696-constant library audit and explicit kernel replay of all eight new modules pass. G1, G2, G3, G4, G8 and G9 remain open.
+
 ## Verification
 
 The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md), [the second report](audit/continuation-20261011-r1-batch2/verification.md) and [the third report](audit/continuation-20261011-r1-batch3/verification.md):
