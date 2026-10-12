@@ -505,6 +505,16 @@ import Hironaka.Resolution.HironakaRelativeNormalAssociatedGraded
 import Hironaka.Resolution.HironakaStepOneMemberCompanionMaskedPositiveValues
 import Hironaka.Resolution.HironakaSmoothSubmersionInvertibleQuotients
 
+import Hironaka.Resolution.HironakaRelativeNormalStandardMonomials
+import Hironaka.Resolution.HironakaRelativeNormalUniformLocalization
+import Hironaka.Resolution.HironakaStepOneMemberMaskedMonomialValues
+import Hironaka.Resolution.HironakaNormalCrossingsFiniteMarkedCompletion
+
+import Hironaka.MarkedIdeal.GeoStrictEmptyExact
+import Hironaka.MarkedIdeal.GeoResolutionAppendExact
+import Hironaka.Invariant.UnitCosupportExact
+import Hironaka.Invariant.NonzeroAlongUnivExact
+
 /-!
 # Hironaka
 

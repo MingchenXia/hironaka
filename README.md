@@ -199,6 +199,8 @@ The twelfth continuation checkpoint adds actual whole relative normal ideal matr
 
 The thirteenth continuation checkpoint adds the complete original relative associated graded quotient and monomial-symbol dictionary, actual positive first-entry values across every original member-companion mask, and entire genuine smooth pullback of invertible quotients and original residual marked records. All 526 earlier mathematical modules remain byte identical. All 62 declaration types/definitions and 47 theorem proof terms compare exactly, with zero fallback; existing pure support is reused without new fragments. All six general gaps remain open.
 
+The fourteenth continuation checkpoint adds genuine whole original standard normal monomial bases and one actual uniform denominator, actual masked monomial values and complete finite marked SNC procedures. All 529 earlier mathematical modules remain byte identical. All 123 declaration types/definitions and 93 theorem proof terms compare exactly, with zero fallback; four missing pure support fragments preserve their original complete declaration contexts. All six general gaps remain open.
+
 ## Verification
 
 The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md), [the second report](audit/continuation-20261011-r1-batch2/verification.md) and [the third report](audit/continuation-20261011-r1-batch3/verification.md):
