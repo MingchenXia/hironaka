@@ -485,6 +485,10 @@ import Hironaka.Resolution.HironakaControlledTransform
 import Hironaka.MarkedIdeal.HomogenizedAmbientMarkedDataExact
 import Hironaka.MarkedIdeal.HomogenizedAmbientCoherenceExact
 
+import Hironaka.Resolution.HironakaStepOneMemberCompanionHistoryExtension
+import Hironaka.Resolution.HironakaRelativeNormalMonomialBasis
+import Hironaka.Resolution.HironakaStepOneMemberCompanionPositiveSpecialLoci
+
 /-!
 # Hironaka
 

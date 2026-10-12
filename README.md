@@ -193,6 +193,8 @@ The ninth continuation checkpoint adds whole original coefficient marked data un
 
 The tenth continuation checkpoint adds complete whole relative Taylor coefficient kernels and entire original ideal quotients, actual marking-one admissibility and residual unit on the augmented NC terminal boundary, real member lower order histories, and entire original homogenized marked records under genuine smooth pullback. All 507 earlier mathematical modules remain byte identical. All 93 declaration types/definitions and 78 theorem proof terms compare exactly. Four missing pure support fragments are copied exactly, with existing support reused. The six general gaps remain open.
 
+The eleventh continuation checkpoint adds actual whole ambient normal monomial bases in every degree, entire original member companion controlled histories, and genuine component-own positive special/count history exceptions. All 515 preceding mathematical modules remain byte identical. All 75 declaration types/definitions and 53 theorem proof terms compare exactly. The six general goals remain open.
+
 ## Verification
 
 The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md), [the second report](audit/continuation-20261011-r1-batch2/verification.md) and [the third report](audit/continuation-20261011-r1-batch3/verification.md):
