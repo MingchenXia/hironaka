@@ -489,6 +489,18 @@ import Hironaka.Resolution.HironakaStepOneMemberCompanionHistoryExtension
 import Hironaka.Resolution.HironakaRelativeNormalMonomialBasis
 import Hironaka.Resolution.HironakaStepOneMemberCompanionPositiveSpecialLoci
 
+import Hironaka.Resolution.HironakaRelativeNormalIdealMatrices
+import Hironaka.Resolution.HironakaSmoothSubmersionDivisorExponents
+import Hironaka.Resolution.HironakaNormalCrossingsOriginalExponents
+
+import Hironaka.Invariant.MonomialAmbientDataExact
+import Hironaka.Invariant.MemberNonContainedPullbackExact
+import Hironaka.MarkedIdeal.ControlledProductTransformExact
+
+import Hironaka.Invariant.MemberPrincipalPullbackExact
+
+import Hironaka.Blowup.ControlledTransformZeroExact
+
 /-!
 # Hironaka
 
