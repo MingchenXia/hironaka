@@ -1,0 +1,73 @@
+[
+  {
+    "source_module": "TranscendentalNakamaye.Pending.FactorizationFromResolution",
+    "destination_module": "Hironaka.Resolution.FactorizationAmbientExact",
+    "intervals": [
+      [
+        97,
+        103
+      ],
+      [
+        547,
+        550
+      ]
+    ],
+    "imports": [
+      "Hironaka.MarkedIdeal.MarkedIdeals",
+      "Hironaka.Blowup.BlowupTowers",
+      "Hironaka.MarkedIdeal.GermIdealTotalTransform",
+      "Hironaka.Blowup.BlowupControlledTransform"
+    ],
+    "setup": "open Set Filter\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace Hironaka.FactorizationFromResolution\nopen Hironaka Hironaka.HolomorphicIdealSheaves MarkedIdeals BlowupTowers GermIdealTotalTransform BlowupControlledTransform\nnoncomputable section\nvariable {n : \u2115} {X : CMfd.{u} n}",
+    "ending": "end\nend Hironaka.FactorizationFromResolution\n"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HironakaControlledTransform",
+    "destination_module": "Hironaka.Resolution.HironakaControlledTransform",
+    "intervals": [
+      [
+        67,
+        95
+      ]
+    ],
+    "imports": [
+      "Hironaka.Resolution.FactorizationAmbientExact",
+      "Hironaka.MarkedIdeal.MarkedIdealGeoTransform",
+      "Hironaka.MarkedIdeal.HadamardBridge",
+      "Hironaka.Blowup.BlowupTowerTransforms"
+    ],
+    "setup": "open Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace Hironaka.HironakaControlledTransform\nopen Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences MarkedIdeals MarkedIdeals.MarkedIdeal BlowupTowers BlowupTowerTransforms BlowupControlledTransform BlowupExceptionalDivisor InvertibleIdealQuotient IdealWeightPowers FactorizationFromResolution\nnoncomputable section\nvariable {n : \u2115} {X : CMfd.{u} n}",
+    "ending": "end\nend Hironaka.HironakaControlledTransform\n"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HomogenizedEquivalence",
+    "destination_module": "Hironaka.MarkedIdeal.HomogenizedAmbientMarkedDataExact",
+    "intervals": [
+      [
+        188,
+        194
+      ]
+    ],
+    "imports": [
+      "Hironaka.MarkedIdeal.HomogenizedEquivalence"
+    ],
+    "setup": "open Set Filter\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace Hironaka.HomogenizedEquivalence\nopen Hironaka Hironaka.HolomorphicIdealSheaves MarkedIdeals HomogenizedIdeal\nnoncomputable section\nvariable {n : \u2115}",
+    "ending": "end\nend Hironaka.HomogenizedEquivalence\n"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HomogenizedGlueing",
+    "destination_module": "Hironaka.MarkedIdeal.HomogenizedAmbientCoherenceExact",
+    "intervals": [
+      [
+        134,
+        141
+      ]
+    ],
+    "imports": [
+      "Hironaka.MarkedIdeal.HomogenizedGlueing",
+      "Hironaka.MarkedIdeal.DerivativeIdealCoherence"
+    ],
+    "setup": "open Set Filter\nopen scoped Topology Manifold\nnamespace Hironaka.HomogenizedGlueing\nopen Hironaka Hironaka.HolomorphicIdealSheaves GermIdealOrder DerivativeIdeal IdealWeightPowers HomogenizedIdeal\nnoncomputable section\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M] {\ud835\udd1e : GermIdeal n M}",
+    "ending": "end\nend Hironaka.HomogenizedGlueing\n"
+  }
+]

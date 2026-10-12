@@ -475,6 +475,16 @@ import Hironaka.MarkedIdeal.DerivativeAmbientMarkedDataExact
 import Hironaka.MarkedIdeal.CoefficientAmbientMarkedDataExact
 import Hironaka.Invariant.MemberStrictPartitionExact
 
+import Hironaka.Resolution.HironakaStepOneMemberLowerOrderPredicates
+import Hironaka.Resolution.HironakaNormalCrossingsMarkedAdmissibility
+import Hironaka.Resolution.HironakaRelativeNormalTaylorCoefficients
+import Hironaka.Resolution.HironakaSmoothSubmersionHomogenization
+
+import Hironaka.Resolution.FactorizationAmbientExact
+import Hironaka.Resolution.HironakaControlledTransform
+import Hironaka.MarkedIdeal.HomogenizedAmbientMarkedDataExact
+import Hironaka.MarkedIdeal.HomogenizedAmbientCoherenceExact
+
 /-!
 # Hironaka
 
