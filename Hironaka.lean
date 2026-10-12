@@ -501,6 +501,10 @@ import Hironaka.Invariant.MemberPrincipalPullbackExact
 
 import Hironaka.Blowup.ControlledTransformZeroExact
 
+import Hironaka.Resolution.HironakaRelativeNormalAssociatedGraded
+import Hironaka.Resolution.HironakaStepOneMemberCompanionMaskedPositiveValues
+import Hironaka.Resolution.HironakaSmoothSubmersionInvertibleQuotients
+
 /-!
 # Hironaka
 
