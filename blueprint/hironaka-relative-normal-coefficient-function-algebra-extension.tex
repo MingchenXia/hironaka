@@ -1,0 +1,222 @@
+\section{A common coefficient algebra for the nearby original normal cones}
+
+The coefficient algebra here consists of actual functions holomorphic near every
+point of a fixed open base set. It is distinct from the ring of germs at the
+origin: passage to each nearby germ is defined on the actual functions. This
+supplies a common algebraic presentation of the previously identified nearby
+normal cones. All-degree generic freeness for this presentation is established in the
+subsequent base-change and nearby-freeness sections.
+This coordinate normal-module calculation is an additional commutative-algebra
+step in the resolution route of W\l odarczyk's marked-ideal construction.
+The common function algebra, whole-kernel shrinking, and uniform polynomial
+denominator below are the explicit analytic adaptation used here; they do not
+assert the geometric singular-locus-centre or higher Hilbert--Samuel driver.
+
+
+\begin{definition}[The algebra of holomorphic coefficient functions]
+\label{hir:relative-normal-coefficient-function-algebra}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientFunctionAlgebra}
+\leanok
+For a base set $B\subset\mathbb C^d$, let $A_B$ be the complex subalgebra of
+functions $\mathbb C^d\to\mathbb C$ that are holomorphic in a neighbourhood of
+each point of $B$. Its addition and multiplication are pointwise operations.
+\end{definition}
+\begin{proof}
+Constant functions are holomorphic. The sum, product and negative of functions
+holomorphic near a point are holomorphic near that point, by their complex
+derivative formulas on the intersection of the two neighbourhoods. These
+closures give the asserted complex subalgebra.
+\end{proof}
+
+\begin{lemma}[Nearby germ maps on the common coefficient algebra]
+\label{hir:relative-normal-coefficient-function-germ-hom}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientGermHom}
+\leanok
+\uses{hir:relative-normal-coefficient-function-algebra,hir:relative-normal-nearby-actual-function-coefficient-germs}
+For every $a\in B$ there is a complex algebra homomorphism
+$\rho_a:A_B\to\mathcal O_{\mathbb C^d,0}$ sending an actual function $f$ to
+the whole germ of $z\mapsto f(a+z)$.
+\end{lemma}
+\begin{proof}
+Holomorphicity of $f$ near $a$ and the complex chain rule make its translated
+function holomorphic near zero. Translation commutes pointwise with constants,
+sums and products, and taking a whole germ preserves these operations.
+Consequently this formula defines the asserted algebra homomorphism.
+\end{proof}
+
+\begin{lemma}[Whole polynomial lifts over the actual coefficient algebra]
+\label{hir:relative-normal-coefficient-function-polynomial-lift}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientPolynomialLift,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientPolynomialLift_coeff,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientPolynomialLift_homogeneous,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientPolynomialLift_nearby,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientPolynomialLift_origin}
+\leanok
+\uses{hir:relative-normal-coefficient-function-germ-hom,hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary,hir:relative-normal-nearby-entire-polynomial-coefficient-germs}
+Suppose the chosen representative of every coefficient of $P$ is holomorphic
+near every point of $B$. The finite sum with those same coefficient functions
+defines $\widetilde P\in A_B[Y_1,\ldots,Y_t]$. At every exponent its
+coefficient is the actual chosen coefficient function of $P$. Thus its support
+is contained in that of $P$, and its homogeneous degree is retained. For every
+$a\in B$, mapping $\widetilde P$ by $\rho_a$ gives the entire nearby
+coefficient polynomial $P_a$. If $0\in B$, mapping by $\rho_0$ gives $P$.
+\end{lemma}
+\begin{proof}
+Use the sum over the finite support of $P$. Coefficient extraction gives the
+asserted coefficient at a supported exponent. Outside that support the original
+coefficient is zero and its chosen function is identically zero, so the same
+formula holds there. Every nonzero coefficient of the lift therefore has an
+original supported exponent, which proves preservation of homogeneous degree.
+Extract coefficients after applying each algebra homomorphism: they are exactly
+the translated whole germs used to define $P_a$. At zero the translation is the
+identity and the chosen function has its prescribed original whole germ.
+Polynomial equality follows at every exponent.
+\end{proof}
+
+\begin{theorem}[One actual algebra presents every entire nearby original initial ideal]
+\label{hir:relative-normal-coefficient-function-original-initial-family}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.exists_original_coefficient_algebra_initial_family}
+\leanok
+\uses{hir:relative-normal-coefficient-function-polynomial-lift,hir:relative-normal-affine-dnc-original-nearby-cone,hir:relative-normal-graded-internal-finite-relations}
+An original coherent ideal $I$ internally supplies one open base neighbourhood
+$B$ of zero and lifts over $A_B$ of its selected finite original homogeneous
+relation family. If $K_B$ is the ideal generated by those lifts, its image under
+the polynomial map induced by $\rho_0$ is the whole original normal initial
+ideal. At every $a\in B$, its image under the polynomial map induced by
+$\rho_a$ is the whole normal initial ideal of the actual translated original
+ideal. The generators over $A_B$ are homogeneous.
+\end{theorem}
+\begin{proof}
+The entire nearby original normal-cone theorem supplies a single open $B$ on
+which every selected coefficient function is holomorphic near every base point
+and on which the nearby finite relation polynomials generate precisely the
+whole original initial ideals. Form their lifts by the preceding lemma. The
+image of an ideal generated by a family is the ideal generated by the images
+of that family. At each $a$ those images are exactly the nearby polynomials,
+so the existing entire nearby initial-ideal equality gives the desired
+equality. At zero each image is its original relation polynomial, and the
+selected original finite relations generate the whole original initial ideal.
+Each selected relation has its original homogeneous degree; the preceding
+lemma retains that degree over $A_B$.
+\end{proof}
+
+\begin{lemma}[Finite type coefficient algebra for finitely many polynomials]
+\label{hir:relative-normal-finite-type-coefficient-algebra}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.finitePolynomialCoefficientAlgebra,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.finitePolynomialCoefficientAlgebra_finiteType,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.finitePolynomialCoefficientAlgebra_isNoetherianRing,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.finiteCoefficientPolynomialLift_map,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.finiteCoefficientPolynomialLift_homogeneous}
+\leanok
+\uses{hir:relative-normal-coefficient-function-original-initial-family}
+For finitely many polynomials over $A_B$, the complex subalgebra $C$ generated
+by their finitely many supported coefficients is of finite type and
+Noetherian. Each polynomial lifts to $C[Y_1,\ldots,Y_t]$ with exactly its
+original image under coefficient inclusion, retaining homogeneous degree.
+\end{lemma}
+\begin{proof}
+The union, over the finite family, of the coefficient sets indexed by each
+finite support is finite. Its complex algebraic span is therefore a finite
+type algebra and a quotient of a polynomial algebra in finitely many variables
+over the Noetherian field $\mathbb C$, hence Noetherian. Every supported
+coefficient lies in this subalgebra by construction; unsupported coefficients
+are zero and also lie there. Form the same finite sum over each support with
+these coefficients in $C$. Inclusion recovers every original coefficient,
+and injectivity of inclusion shows that the lifted support is exactly the
+original support. Homogeneous degree is consequently unchanged.
+\end{proof}
+
+\begin{theorem}[Original nearby initial ideals over one finite type coefficient algebra]
+\label{hir:relative-normal-original-finite-type-coefficient-initial-family}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.exists_original_finiteType_coefficient_algebra_initial_family}
+\leanok
+\uses{hir:relative-normal-coefficient-function-original-initial-family,hir:relative-normal-finite-type-coefficient-algebra}
+Only the original coherent ideal $I$ supplies an open $B$ containing zero,
+a finite type complex subalgebra $C\subset A_B$, and a finite homogeneous
+relation family over $C$. Its entire ideal image under the actual origin germ
+map is the original normal initial ideal. Its image under the actual nearby
+germ map at every $a\in B$ is the entire normal initial ideal of the
+actual translated original ideal.
+\end{theorem}
+\begin{proof}
+The original-input common function-algebra theorem gives $B$ and its finite
+homogeneous relations over $A_B$. Take $C$ to be the complex subalgebra
+generated by their finite supported coefficient set. The finite type lemma
+lifts every relation to $C$, with its original image under inclusion and its
+original homogeneous degree. Composing the origin and nearby maps with this
+inclusion gives exactly the previous images of every generator. The ideal
+map formula for generated ideals therefore retains each entire initial-ideal
+equality, both at origin and at every point of $B$.
+\end{proof}
+
+\begin{lemma}[One neighbourhood kills the entire origin coefficient kernel]
+\label{hir:relative-normal-coefficient-algebra-kernel-spread}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.exists_common_coefficient_kernel_open}
+\leanok
+\uses{hir:relative-normal-finite-type-coefficient-algebra,hir:relative-normal-coefficient-function-germ-hom}
+Let $B$ be open and contain zero, and let $C\subset A_B$ be a Noetherian
+complex subalgebra. There is one open neighbourhood $W\subset B$ of zero
+such that $\ker(\rho_0|_C)\subset\ker(\rho_a|_C)$ for every $a\in W$.
+\end{lemma}
+\begin{proof}
+Noetherianity makes the origin kernel finitely generated. Each of its selected
+generators is an actual function with zero whole germ at the origin, so it
+vanishes on a neighbourhood of zero. Intersect these finitely many
+neighbourhoods and $B$, and take an open neighbourhood $W$ of zero inside
+that intersection. At every $a\in W$, each selected actual function is
+identically zero near $a$. Its translated whole germ at zero is therefore
+zero. The nearby homomorphism kills the selected generators; since its kernel
+is an ideal, it kills their whole span, which is exactly the origin kernel.
+\end{proof}
+
+\begin{theorem}[A common domain coefficient algebra with genuine nearby homomorphisms]
+\label{hir:relative-normal-coefficient-algebra-domain-nearby-homs}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientOriginKernel,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientOriginAlgebra_isDomain,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.coefficientOriginAlgebra_finiteType,Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.exists_common_coefficient_origin_quotient_homs}
+\leanok
+\uses{hir:relative-normal-coefficient-algebra-kernel-spread}
+The quotient $C_0=C/\ker(\rho_0|_C)$ is a domain and, when $C$ is of
+finite type over $\mathbb C$, remains of finite type. On one open neighbourhood
+$W$ of zero every actual nearby homomorphism $\rho_a|_C$ factors as a complex
+algebra homomorphism through $C_0$, with its original actual-function formula
+preserved after composition with the quotient map.
+\end{theorem}
+\begin{proof}
+The origin homomorphism takes values in the domain of holomorphic germs, so its
+kernel is prime and the quotient is a domain. A quotient of a finite type
+algebra is of finite type. The preceding lemma gives one $W$ on which this
+entire origin kernel lies in every nearby kernel. The universal property of
+the quotient therefore defines each asserted homomorphism, and its defining
+composition identity recovers the actual translated whole germ map. No map
+on arbitrary origin germs is required: only the finitely generated actual
+coefficient algebra is factored through its internally determined kernel.
+\end{proof}
+
+\begin{theorem}[A single finite type domain presents all nearby original initial ideals]
+\label{hir:relative-normal-original-common-domain-coefficient-initial-family}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaRelativeNormalCoefficientFunctionAlgebra.exists_original_common_domain_coefficient_initial_family}
+\leanok
+\uses{hir:relative-normal-original-finite-type-coefficient-initial-family,hir:relative-normal-coefficient-algebra-domain-nearby-homs}
+Only the original coherent ideal $I$ supplies a finite type domain
+$C_0=C/\ker(\rho_0|_C)$, an open base neighbourhood $W$ of zero,
+and one finite homogeneous relation family over $C_0$. There are genuine
+complex algebra homomorphisms from $C_0$ to the translated base germ rings
+at every $a\in W$. Their composition with the quotient map equals the
+actual translated whole germ map on coefficient functions. At every
+$a\in W$, the image of the ideal generated by this same relation family is
+the entire normal initial ideal of the actual translated original ideal.
+\end{theorem}
+\begin{proof}
+Apply the preceding original-input theorem to obtain $B,C$ and its finite
+homogeneous relations. Finite type over $\mathbb C$ makes $C$ Noetherian.
+The common-domain theorem produces one $W\subset B$ on which every
+nearby actual coefficient map factors through $C_0$. Map each relation's
+coefficients through $C\to C_0$. Coefficient maps preserve homogeneous
+degree. At every $a\in W$, composition of polynomial coefficient maps
+and the defining factorisation identity give exactly the original nearby
+relation polynomial. Since ideal maps preserve generated ideals, the entire
+nearby initial-ideal equality follows for the same finite family. The
+origin kernel is prime and quotient finite type is preserved, giving the
+claimed domain and finite type properties. This presentation alone does not
+assert freeness of its degree pieces or analytic normal flatness.
+\end{proof}

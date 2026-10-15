@@ -1,0 +1,51 @@
+\section{Actual finite reconstruction of integer-weight graph coefficients}
+This OWN OFFLIB producer reconstructs actual finite selected graph coefficients as genuine original normal polynomials, with whole base-germ coefficients. It uses the actual finite indices, integer-weight selection and literal graph substitution. It introduces no original-ideal result, weight, reconstruction or free-basis certificate. The reverse saturated-central initial ideal, entire-ideal closure, nearby original cone/Rees dictionary and ALL-order analytic free open remain OPEN.
+
+\begin{lemma}[Actual parameter forgetting is a genuine whole-base polynomial algebra map]
+\label{hir:relative-normal-graph-weight-actual-forgetting}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphForgetVariable,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphForgetVariable_parameter,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphForgetVariable_fiber,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphForgetParameter,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphForgetParameter_substitution,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphPolynomialSubstitution_injective}
+\uses{hir:relative-normal-graph-jets-polynomial-substitution,hir:relative-normal-graph-weight-substitution-zero}
+\leanok
+Internally construct the actual whole-base algebra map sending the true parameter variable to one and each true fibre variable to its corresponding original normal variable. Its composition with the genuine diagonal graph substitution is the literal identity on EVERY original polynomial. Hence that genuine diagonal substitution is injective.
+\end{lemma}
+\begin{proof}
+At the literal parameter finite index set the value one. At every other finite index use its actual positive index minus one, whose original finite bound follows from the genuine ambient bound. The real parameter value and every fibre-index value give one and the corresponding original variable, respectively. Genuine polynomial algebra extensionality compares the composition with the identity: every original variable maps first to parameter times fibre, hence after forgetting to one times itself; every entire coefficient is fixed by both actual base algebra maps. This proves the entire identity and therefore injectivity, without a supplied retraction or coefficient-separation certificate.
+\end{proof}
+
+\begin{lemma}[Actual integer weight and monomial forgetting have their literal finite-coordinate formulas]
+\label{hir:relative-normal-graph-weight-literal-monomial-reconstruction}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphIntegerWeight_exponent,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphForgetParameter_monomial,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphSubstitution_forgotten_monomial,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraph_monomial_parameter_fiber_product}
+\uses{hir:relative-normal-graph-weight-actual-forgetting,hir:relative-normal-graph-weight-substitution-zero}
+\leanok
+For an actual parameter/fibre exponent $\alpha$, its integer weight is its genuine parameter exponent minus the sum of its genuine fibre exponents. Forgetting its literal monomial retains the entire coefficient times the original fibre-variable monomial. Substituting this forgotten monomial back gives the SAME fibre monomial and parameter exponent equal to that genuine fibre sum.
+\end{lemma}
+\begin{proof}
+The actual finite coordinate block is parameter first and the entire genuine fibre block after it. Split the full finite sum defining the actual exponent weight into that genuine parameter coordinate and the genuine fibre coordinates. Their already proved weights one and minus one give the stated actual integer difference. Split the full finite monomial evaluation product in the same literal way. Forgetting replaces the actual parameter factor by one and each fibre factor by its corresponding original variable. The actual diagonal substitution then replaces those genuine variables by parameter times fibre. Genuine finite product and power laws give the stated parameter power and SAME whole fibre monomial, with the actual entire coefficient unchanged.
+\end{proof}
+
+\begin{lemma}[Two actual natural parameter powers reconstruct every selected whole polynomial]
+\label{hir:relative-normal-graph-weight-natural-parameter-reconstruction}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraph_weighted_natural_parameter_reconstruction,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraph_component_natural_parameter_reconstruction}
+\uses{hir:relative-normal-graph-weight-literal-monomial-reconstruction,hir:relative-normal-graph-weight-product-extraction}
+\leanok
+For ANY natural $N,k$ and genuine finite graph polynomial $A$, internally let $A_w$ be its actual component of integer weight $N-k$ and let $B$ be its actual forgotten original polynomial. Then the genuine whole polynomial identity is
+\[U^k A_w=U^N\sigma(B).\]
+It has only genuine natural powers, with no division or inversion of the parameter.
+\end{lemma}
+\begin{proof}
+The actual component is genuinely weighted homogeneous of degree $N-k$. Expand it into its actual finite monomial sum. For each actual nonzero coefficient, true weighted homogeneity and the preceding literal weight formula give parameter-exponent plus $k$ equal to fibre-exponent-sum plus $N$, as actual natural numbers. The preceding whole monomial dictionary therefore identifies the two entire monomial products after multiplying by the stated actual parameter powers. For a zero coefficient both sides vanish. Genuine finite sums and distributivity give the whole polynomial identity. This argument treats every $N,k$, including $k>N$, without negative parameter powers or a caller weight certificate.
+\end{proof}
+
+\begin{theorem}[Actual finite graph relations produce genuine original coefficient polynomials]
+\label{hir:relative-normal-graph-weight-finite-relation-reconstruction}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraphReconstructedCoefficient,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraph_finite_relation_reconstruction,Hironaka.HironakaRelativeNormalGraphWeightReconstruction.actualGraph_reconstructed_relation_mem_original_ideal}
+\uses{hir:relative-normal-graph-weight-natural-parameter-reconstruction,hir:relative-normal-graph-weight-product-extraction,hir:relative-normal-graph-weight-actual-forgetting}
+\leanok
+For ANY actual finite family of graph coefficient polynomials $A_i$ and genuine original polynomials $P_i$, internally produce the original coefficient polynomial $B_i$ by actual weight selection followed by actual parameter forgetting. Their genuine finite relation satisfies
+\[U^k\pi_{N-k}\!\left(\sum_i A_i\sigma(P_i)\right)
+ = U^N\sigma\!\left(\sum_i B_i P_i\right).\]
+If the actual original $P_i$ belong to an actual original polynomial ideal, the internally produced sum belongs to THAT ideal.
+\end{theorem}
+\begin{proof}
+Use the preceding actual construction independently for each finite coefficient polynomial. The actual product extraction identity moves integer-weight selection to its coefficient polynomial, and actual linearity moves it through the finite sum. Multiply by the genuine parameter power and apply the preceding natural-power reconstruction to each term. Genuine multiplication, distributivity and the actual diagonal algebra-homomorphism product/sum laws give the displayed whole identity. Every reconstructed coefficient is an actual original polynomial with entire base-germ coefficients. If every genuine $P_i$ belongs to the stated actual ideal, true ideal absorption puts each actual $B_iP_i$ in it and genuine finite ideal additivity puts their actual sum in it. This is an ordinary reusable ideal-membership lemma; final analytic reverse-ideal consumers must internally obtain their original finite generators and relation, which remain separate unfinished steps.
+\end{proof}

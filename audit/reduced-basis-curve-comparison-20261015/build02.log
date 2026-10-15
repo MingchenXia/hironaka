@@ -1,0 +1,19 @@
+✔ [4238/4597] Built Hironaka.Resolution.HironakaRelativeNormalCoherentSaturation (3.9s)
+✔ [4251/4597] Built Hironaka.Resolution.HironakaRelativeNormalDeformationSaturation (4.4s)
+✖ [4257/4597] Building Hironaka.Resolution.HironakaRelativeNormalDeformationInitialRelations (10s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.setup.json --json
+error: Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.lean:326:2: Unknown identifier `HolomorphicGermReducednessBridge.coordinate_germ_ne_zero`
+error: Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.lean:527:5: Unknown identifier `RestrictedIdealExtension.le_sumIdeal_left`
+error: Hironaka/Resolution/HironakaRelativeNormalDeformationInitialRelations.lean:523:103: unsolved goals
+d t : ℕ
+I : GermIdeal (d + t) (ComplexModel (d + t))
+hI : I.IsCoherent
+g : HolGerm (ComplexModel (d + t))
+hg : g ∈ originalCoherentOriginIdeal I
+hK : (originalDeformationIdeal d t I).IsCoherent
+hpull : (GermIdeal.pullback (⇑(deformationProjection d t)) I).IsCoherent
+⊢ (deformationScalingPullback d t) g ∈ originalCoherentOriginIdeal (originalDeformationIdeal d t I)
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaRelativeNormalDeformationInitialRelations
+error: build failed

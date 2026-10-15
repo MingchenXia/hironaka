@@ -1,0 +1,42 @@
+✔ [4244/4598] Built Hironaka.Support.RestrictedIdealLeSumLeftExact (3.7s)
+✔ [4269/4601] Built Hironaka.Resolution.HironakaRelativeNormalDeformationInitialRelations (13s)
+✔ [4270/4601] Built Hironaka.Resolution.HironakaRelativeNormalAnalyticGraphQuotient (9.3s)
+✔ [4274/4602] Built Hironaka.Resolution.HironakaRelativeNormalPolynomialJetAlgebra (10s)
+✔ [4279/4602] Built Hironaka.Resolution.HironakaRelativeNormalGraphWeightJets (7.4s)
+✔ [4286/4602] Built Hironaka.Resolution.HironakaRelativeNormalDeformationFiniteRelationsSpread (4.6s)
+✔ [4292/4605] Built Hironaka.Resolution.HironakaRelativeNormalGraphWeightComponents (6.1s)
+✔ [4294/4605] Built Hironaka.Resolution.HironakaRelativeNormalFiniteJetSplitting (52s)
+✔ [4298/4606] Built Hironaka.Resolution.HironakaRelativeNormalGraphWeightReconstruction (5.3s)
+✔ [4301/4606] Built Hironaka.Resolution.HironakaRelativeNormalOriginalFiniteJetGenerators (6.9s)
+✔ [4302/4606] Built Hironaka.Resolution.HironakaRelativeNormalGraphWeightCancellation (4.3s)
+✔ [4304/4607] Built Hironaka.Resolution.HironakaRelativeNormalGraphAnalyticFiniteRelations (7.2s)
+✔ [4307/4607] Built Hironaka.Resolution.HironakaRelativeNormalCoherentTranslatedJets (6.4s)
+✔ [4308/4607] Built Hironaka.Resolution.HironakaRelativeNormalGraphWeightAnalyticReconstruction (7.6s)
+✔ [4313/4610] Built Hironaka.Resolution.HironakaRelativeNormalGraphDiagonalCoefficients (6.2s)
+✔ [4315/4612] Built Hironaka.Resolution.HironakaRelativeNormalGraphCentralInitialSymbols (7.6s)
+✔ [4318/4615] Built Hironaka.Resolution.HironakaRelativeNormalGraphCentralAnalyticClosure (7.7s)
+✔ [4322/4616] Built Hironaka.Resolution.HironakaRelativeNormalGraphCentralIdealEquality (4.4s)
+✔ [4325/4616] Built Hironaka.Resolution.HironakaRelativeNormalHomogeneousAnalyticContraction (5.4s)
+✔ [4327/4617] Built Hironaka.Resolution.HironakaRelativeNormalGraphCentralFiniteModel (4.2s)
+✖ [4424/4664] Building Hironaka.Resolution.HironakaRelativeNormalGraphCentralPolynomialModel (5.3s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.setup.json --json
+error: Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.lean:136:10: Unknown constant `Hironaka.HolGerm.mk_mul'`
+error: Hironaka/Resolution/HironakaRelativeNormalGraphCentralPolynomialModel.lean:131:91: unsolved goals
+d t : ℕ
+P : MvPolynomial (Fin t) (HolGerm (ComplexModel d))
+f : (Fin t →₀ ℕ) → ComplexModel (d + t) → ℂ :=
+  fun α z =>
+    actualCoefficientRepresentative (MvPolynomial.coeff α P) ((tangentProjection d t) z) *
+      actualNormalMonomialFunction d t α z
+hf : ∀ (α : Fin t →₀ ℕ), HolAt (f α) 0
+α : Fin t →₀ ℕ
+a✝ : α ∈ P.support
+⊢ HolGerm.mk
+      (actualCoefficientRepresentative (MvPolynomial.coeff α P) ∘ ⇑(tangentProjection d t) *
+        actualNormalMonomialFunction d t α)
+      ⋯ =
+    (normalPolynomialEval d t) ((MvPolynomial.monomial α) (MvPolynomial.coeff α P))
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaRelativeNormalGraphCentralPolynomialModel
+error: build failed

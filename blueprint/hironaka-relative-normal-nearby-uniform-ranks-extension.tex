@@ -1,0 +1,145 @@
+\section{Uniform original normal ranks on the genuine common open}
+
+Let $\mathfrak I$ be an original coherent whole ideal sheaf in the split
+ambient coordinates, and let $I_a$ be its actual translated original whole
+germ ideal at the point $(a,0)$. The common coefficient construction gives
+a finite type domain $D$, a finite family of true homogeneous relations,
+and their whole generated ideal $H\subset D[Y_1,\ldots,Y_t]$, together
+with genuine coefficient homomorphisms $\rho_a$ whose whole ideal images
+are exactly the original initial ideals of $I_a$. Let $b\in D\setminus\{0\}$
+be the actual uniform leading denominator of this one whole ideal, and
+write $L=D[b^{-1}]$. These choices are independent of all degrees and
+truncation orders. The source-facing objective is the whole local-ring
+Hilbert--Samuel quotient in Bierstone--Milman's ``Use of the Hilbert--Samuel
+function''. The following argument supplies its relative-filtration rank and
+literal residue-tensor dimensions first; the geometric maximal-ideal quotient
+comparison and descent remain separate producers.
+
+\begin{lemma}[Actual coefficient-image standard monomial bases]
+\label{hir:relative-normal-nearby-coefficient-standard-basis}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalNearbyUniformRanks.coefficientImageStandardMonomialBasis,Hironaka.HironakaRelativeNormalNearbyUniformRanks.coefficientImageStandardMonomialBasis_apply}
+\leanok
+\uses{hir:relative-normal-uniform-localized-whole-basis,hir:relative-normal-coefficient-polynomial-quotient-base-change}
+Fix the actual field-standard exponent family $E$ of $H$, computed over
+the fraction field of $D$. For every coefficient homomorphism $f:D\to T$
+with $f(b)$ a unit, the whole polynomial quotient by the image of $H$ has
+a $T$-basis indexed by this same $E$. Its vector indexed by $\alpha$ is
+the actual quotient class of $Y^\alpha$ with coefficient $1$.
+\end{lemma}
+\begin{proof}
+The unit condition gives a genuine homomorphism $L\to T$. The existing
+uniform standard monomial basis of $L[Y]/HL[Y]$ has its literal monomial
+numerator formula. Tensor that basis with $T$ over $L$. The whole polynomial
+coefficient base-change algebra isomorphism sends $1\otimes[Y^\alpha]$
+to the actual class of $Y^\alpha$ in $T[Y]$ modulo the extended whole
+ideal. The composition of $D\to L\to T$ is $f$, so this extended ideal
+is exactly the whole image of $H$ under $f$. Tensoring a basis and applying
+these genuine isomorphisms proves both the asserted basis and its actual
+numerator formula, without requiring $f$ to be injective.
+\end{proof}
+
+\begin{lemma}[Actual homogeneous degree fibres of a whole monomial basis]
+\label{hir:relative-normal-nearby-standard-degree-basis}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalNearbyUniformRanks.originalDegreeCoefficientImageMonomialBasis,Hironaka.HironakaRelativeNormalNearbyUniformRanks.originalDegreeCoefficientImageMonomialBasis_finrank}
+\leanok
+\uses{hir:relative-normal-nearby-coefficient-standard-basis,hir:relative-normal-intrinsic-associated-quotient-algebra-dictionary}
+For any actual nearby original quotient dictionary, the preceding whole
+basis identifies each literal original degree-$q$ layer with the finite
+free coefficient module indexed by
+$E_q=\{\alpha\in E:|\alpha|=q\}$. Thus its rank is $\#E_q$.
+\end{lemma}
+\begin{proof}
+The intrinsic original quotient algebra dictionary sends each whole basis
+vector to the actual degree-$|\alpha|$ original monomial symbol. For a
+coefficient function supported in $E_q$, include it in the whole exponent
+family, apply the whole basis isomorphism, and project to degree $q$.
+Its original degree inclusion recovers the whole vector, because each
+basis vector used in the sum already lies in degree $q$. This gives
+injectivity. Conversely, include any literal degree-$q$ vector in the
+whole direct sum and take its unique whole basis coefficients. Projection
+to degree $q$ kills every basis vector of other degree and retains every
+basis vector of degree $q$. Uniqueness of coefficients therefore forces
+the original coefficient function to be supported in $E_q$. This gives
+surjectivity and the claimed genuine degree isomorphism. Every exponent
+of degree $q$ has all its entries at most $q$, so $E_q$ injects into a
+finite set of bounded normal exponents. Its cardinal is therefore finite,
+and the degree isomorphism gives the asserted rank.
+\end{proof}
+
+\begin{theorem}[One original-input open and one complete original rank sequence]
+\label{hir:relative-normal-nearby-all-degree-uniform-rank}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalNearbyUniformRanks.exists_original_nearby_all_degree_uniform_rank_open}
+\leanok
+\uses{hir:relative-normal-original-common-domain-coefficient-initial-family,hir:relative-normal-nearby-standard-degree-basis}
+Original coherence alone supplies one open set $U$ in the actual base,
+meeting every origin neighbourhood, and one sequence $r(q)\in\mathbb N$,
+such that for every $a\in U$ and every $q$, the actual original layer
+$L_q(I_a)$ is finite free over the actual base germ ring and has rank
+$r(q)$. The same $U$ works for all $q$; it need not contain the origin.
+\end{theorem}
+\begin{proof}
+Apply the original-input common-domain relation producer to obtain the
+actual $D,H,\rho_a$ above on its common neighbourhood $W$. Represent the
+one nonzero denominator $b$ by its true coefficient function $g$.
+Its original germ is nonzero, because $D$ was the quotient by the complete
+origin kernel. Set $U=W\cap\{g\ne0\}$. Holomorphicity makes $U$ open.
+If some origin neighbourhood failed to meet $U$, $g$ would vanish on
+its intersection with $W$, contradicting that nonzero original germ.
+For $a\in U$, the actual translated germ $\rho_a(b)$ evaluates to
+$g(a)\ne0$, hence is a unit. Apply the actual coefficient-image monomial
+basis and the whole ideal equality supplied internally by the common-domain
+producer. Apply the preceding actual homogeneous degree dictionary to the
+original translated ideal $I_a$. Its degree-$q$ index family is always
+the same finite set $E_q$, independently of $a$. Taking $r(q)=\#E_q$
+proves all assertions with this single $U$.
+\end{proof}
+
+\begin{theorem}[Every actual whole original truncation has the common rank sum]
+\label{hir:relative-normal-nearby-all-truncation-uniform-rank}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalNearbyUniformRanks.exists_original_nearby_all_truncation_uniform_rank_open}
+\leanok
+\uses{hir:relative-normal-nearby-all-degree-uniform-rank,hir:relative-normal-uniformtrunc-original-short-exact}
+For the same original-input open and the same sequence $r$, every actual
+whole original power truncation $R/(I_a+J^s)$ is finite free over the
+base germ ring and has rank $\sum_{q<s}r(q)$, for all $a\in U$ and all
+$s\in\mathbb N$.
+\end{theorem}
+\begin{proof}
+At $s=0$ the ideal contains $J^0=R$, so the quotient is zero and its
+rank is the empty sum. At the successor step, the literal original
+power filtration gives the actual short exact sequence with left term
+$L_s(I_a)$, middle term $R/(I_a+J^{s+1})$, and right term
+$R/(I_a+J^s)$. The right term is finite free by induction and therefore
+projective, so this genuine sequence splits. The middle module is
+therefore the direct sum of the two finite free endpoint modules.
+Their ranks add, giving $r(s)+\sum_{q<s}r(q)=\sum_{q<s+1}r(q)$.
+No new neighbourhood or denominator is chosen in this induction.
+\end{proof}
+
+\begin{theorem}[Complete dimensions of the actual original algebraic fibre powers]
+\label{hir:relative-normal-nearby-complete-fibre-power-dimensions}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalNearbyUniformRanks.exists_original_nearby_all_fibre_truncation_dimension_open}
+\leanok
+\uses{hir:relative-normal-nearby-all-truncation-uniform-rank}
+Specialize the actual base germ ring at its origin residue homomorphism to
+$\mathbb C$. On the same $U$, the complex dimension of every literal
+fibre module $\mathbb C\otimes_B R/(I_a+J^s)$ is
+$\sum_{q<s}r(q)$. These are dimensions of the genuine algebraic fibres
+of the whole original normal-power quotients.
+\end{theorem}
+\begin{proof}
+Each actual truncation has a finite basis with the preceding common
+cardinal. Tensor this true basis with $\mathbb C$ using the actual base
+evaluation homomorphism. The resulting basis of the genuine tensor fibre
+has the same index family, so its complex dimension equals that same
+cardinal. The already proved common truncation rank therefore gives the
+asserted full sequence. Identification with the geometric fibre whole
+maximal-ideal Hilbert--Samuel quotient requires the separate literal
+base-maximal-ideal extension and ideal-power comparison; no geometric
+Hilbert--Samuel descent is asserted by this tensor dimension statement.
+\end{proof}

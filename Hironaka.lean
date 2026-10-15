@@ -529,6 +529,14 @@ import Hironaka.Resolution.HironakaSharpActualCurveLocalSharpEndpoints
 
 import Hironaka.Resolution.HironakaOriginalUntestedControlledSmoothPullback
 
+import Hironaka.Resolution.HironakaSharpActualCurveDefectRestriction
+
+import Hironaka.Resolution.HironakaOriginalControlledReferenceRestriction
+
+import Hironaka.Resolution.HironakaSharpActualCurveStageComparison
+
+import Hironaka.Resolution.HironakaActualReducedFormalStandardBasis
+
 /-!
 # Hironaka
 
