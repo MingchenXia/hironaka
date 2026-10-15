@@ -1,0 +1,99 @@
+/- Exact complete original codimension-one and empty-centre identity blowup proofs. -/
+import Hironaka.Blowup.BlowupExistenceCodimOne
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+open Set Filter
+open scoped Topology Manifold ContDiff
+namespace Hironaka.BlowupExistenceCodimOne
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates
+noncomputable section
+universe u
+variable {n : ℕ} {X : Type u} [TopologicalSpace X]
+  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
+
+/-- **The ideal of a smooth hypersurface is invertible.**  At a point off the (closed) centre
+the generator is `1`; at a point of the centre it is the last flattening coordinate. -/
+theorem isInvertible_vanishingIdeal_of_codimOne {C : Set X} (hCclosed : IsClosed C)
+    (hCint : interior C = ∅)
+    (hcodim : ∀ x ∈ C, ∃ k, RegularAtDim (n := n) C x k ∧ k + 1 = n) :
+    (vanishingIdeal (n := n) C).IsInvertible := by
+  intro x
+  by_cases hx : x ∈ C
+  · obtain ⟨k, hreg, hk⟩ := hcodim x hx
+    obtain ⟨hkn, -, Φ, hΦsrc, -, hflat⟩ := hreg
+    have hkn' : k < n := by omega
+    set i₀ : Fin n := ⟨k, hkn'⟩ with hi₀
+    have hi₀val : (i₀ : ℕ) = k := rfl
+    -- on the flattening domain, `C` is exactly the zero set of the last flattening coordinate
+    have hzero : ∀ y ∈ flatDomain Φ, (y ∈ C ↔ flatCoord Φ i₀ y = 0) := by
+      intro y hy
+      rw [hflat hy.1 hy.2]
+      constructor
+      · intro h; exact h i₀ le_rfl
+      · intro h i hi
+        have hlt := i.isLt
+        have : i = i₀ := Fin.ext (by omega)
+        rw [this]; exact h
+    refine ⟨flatDomain Φ, isOpen_flatDomain Φ, mem_flatDomain_self Φ, flatCoord Φ i₀,
+      fun y hy => (holomorphicAt_flatCoord Φ i₀ hy).mdifferentiableAt.mdifferentiableWithinAt,
+      ?_, fun y hy g => ?_⟩
+    · -- no nonempty open subset of the flattening domain lies inside `C`
+      rintro W hW hWsub ⟨y, hy⟩
+      by_contra hcon
+      have hcon' : ∀ z ∈ W, flatCoord Φ i₀ z = 0 := fun z hz => by
+        by_contra hz0; exact hcon ⟨z, hz, hz0⟩
+      have hWC : W ⊆ C := fun z hz => (hzero z (hWsub hz)).mpr (hcon' z hz)
+      have : y ∈ interior C := mem_interior.mpr ⟨W, hWC, hW, hy⟩
+      rw [hCint] at this
+      exact this
+    · constructor
+      · intro hg
+        obtain ⟨b, hb0, hbhol, hbeq⟩ := exists_eq_sum_flatCoord Φ hΦsrc hflat hy hg
+        refine isInSpanAt_eq_iff.mpr ⟨hg.1, b i₀, hbhol i₀, ?_⟩
+        filter_upwards [hbeq] with z hz
+        rw [hz, Finset.sum_eq_single i₀ (fun i _ hi => ?_) (by simp)]
+        have hlt := i.isLt
+        have : i.1 < k := by
+          rcases lt_or_ge i.1 k with h | h
+          · exact h
+          · exact absurd (Fin.ext (show i.1 = (i₀ : ℕ) by omega) : i = i₀) hi
+        rw [hb0 i this]; simp
+      · rintro hg
+        obtain ⟨-, a, -, heq⟩ := isInSpanAt_eq_iff.mp hg
+        refine ⟨hg.1, ?_⟩
+        filter_upwards [heq, (isOpen_flatDomain Φ).mem_nhds hy] with z hz hz' hzC
+        rw [hz, (hzero z hz').mp hzC, mul_zero]
+  · refine ⟨Cᶜ, hCclosed.isOpen_compl, hx, fun _ => 1,
+      fun y _ => mdifferentiableAt_const.mdifferentiableWithinAt,
+      fun W _ _ ⟨y, hy⟩ => ⟨y, hy, one_ne_zero⟩, fun y hy g => ?_⟩
+    constructor
+    · intro hg
+      exact isInSpanAt_of_eq_mul rfl hg.1 hg.1 (Eventually.of_forall fun _ => by simp)
+    · intro hg
+      refine ⟨hg.1, ?_⟩
+      filter_upwards [hCclosed.isOpen_compl.mem_nhds hy] with z hz hzC
+      exact absurd hzC hz
+
+/-- **Existence of the blowup along a smooth hypersurface.**  The blowup of `X` along a centre
+that is regular of codimension one at each of its points is `X` itself. -/
+theorem isBlowupAlong_id_of_codimOne {C : Set X} (hC : IsClosedSubmanifold n C)
+    (hCint : interior C = ∅)
+    (hcodim : ∀ x ∈ C, ∃ k, RegularAtDim (n := n) C x k ∧ k + 1 = n) :
+    IsBlowupAlong n C (id : X → X) := by
+  refine ⟨hC, hCint, contMDiff_id, ?_, ?_⟩
+  · intro y
+    obtain ⟨U, hU, hyU, h, hhd, hhne, hmem⟩ :=
+      isInvertible_vanishingIdeal_of_codimOne hC.1 hCint hcodim y
+    exact ⟨U, hU, hyU, h, hhd, hhne, fun z hz g =>
+      (pullback_id_vanishingIdeal_mem_iff (C := C)).trans (hmem z hz g)⟩
+  · intro m Z _ _ _ g hg _
+    refine ⟨g, ⟨hg, rfl⟩, ?_⟩
+    rintro h ⟨-, hgh⟩
+    exact (Function.id_comp h).symm.trans hgh
+
+/-- The blowup along the empty centre. -/
+theorem isBlowupAlong_id_empty : IsBlowupAlong n (∅ : Set X) (id : X → X) :=
+  isBlowupAlong_id_of_codimOne ⟨isClosed_empty, by simp⟩ (by simp) (by simp)
+
+end
+end Hironaka.BlowupExistenceCodimOne

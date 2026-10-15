@@ -537,6 +537,32 @@ import Hironaka.Resolution.HironakaSharpActualCurveStageComparison
 
 import Hironaka.Resolution.HironakaActualReducedFormalStandardBasis
 
+import Hironaka.Resolution.HironakaActualCoefficientPresentationCentrePower
+
+import Hironaka.Resolution.HironakaActualReducedBasisDivision
+
+import Hironaka.Resolution.HironakaOriginalAllStepOneEtaleValues
+
+import Hironaka.Resolution.HironakaOriginalPositiveMemberCurrentCosupport
+
+import Hironaka.Resolution.HironakaOriginalPositiveStepOneSmoothValues
+
+import Hironaka.Resolution.HironakaOriginalUntestedCompanionSmoothPullback
+
+import Hironaka.Resolution.HironakaOriginalUntestedCurveSmoothValues
+
+import Hironaka.Resolution.HironakaOriginalUntestedSpecialSmoothPullback
+
+import Hironaka.Resolution.HironakaSharpActualCurveEmptyPadding
+
+import Hironaka.Resolution.HironakaSharpActualCurveFiniteRecipeComparison
+
+import Hironaka.Resolution.HironakaSharpActualCurveRecipeOpenRestriction
+
+import Hironaka.Resolution.HironakaSharpActualCurveRetainedLocalRecipes
+
+import Hironaka.Resolution.HironakaSharpActualCurveTerminalPaddingComparison
+
 /-!
 # Hironaka
 

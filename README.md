@@ -6,7 +6,7 @@ The original library was produced by AI agents (Claude). Subsequent continuation
 
 ## Current status — 15 October 2026
 
-The checked library contains **795 mathematical modules**, plus the `Hironaka` import root. All **14,022 actual compiled declarations**, including private and generated declarations, depend only on the three standard axioms. Kernel coverage of all **796 local modules** combines the preceding full replay with byte-identical source and kernel data for its 743 non-root modules, and fresh replay of all 52 added modules and the updated import root. The [current verification receipt](audit/reduced-basis-curve-comparison-20261015/final-validation.json) records the exact scope and fingerprints.
+The checked library contains **817 mathematical modules**, plus the `Hironaka` import root. All **14,474 actual compiled declarations**, including private and generated declarations, depend only on the three standard axioms. All **818 local modules** have kernel coverage: the 795 preceding non-root sources and kernel-data parts are byte-identical to the verified checkpoint, and all 22 added modules and the updated import root pass fresh replay. The [current verification receipt](audit/retained-recipes-and-reduced-division-20261015/final-validation.json) records the exact scope and the chain back to the earlier full replay.
 
 The latest completed subgoals construct canonical reduced formal standard bases, restrict actual controlled records to smaller strict carriers, and prove genuine open restriction of curve defects and naturality of their actual first centres and next blowup maps. The earlier local sharp curve endpoints and whole controlled smooth-pullback comparisons remain included. Their precise hypotheses and remaining boundaries are described below.
 
@@ -152,6 +152,16 @@ Both completed subgoals and their full dependency closures are synchronized from
 
 The four subgoals and their 49-module dependency closure retain 49 complete blueprint chapters with 209 original proofs. Three additional support modules recover five complete original declarations. Every one of the **1,656 actual new compiled declarations**, including all **1,386 theorem proofs**, passes complete structural type and value comparison. The [verification report](audit/reduced-basis-curve-comparison-20261015/verification.md) records source provenance, declaration-scoped original instance contexts and the five precisely witnessed imported-binder owner relocations.
 
+## Reduced division, smooth value cases and retained curve recipes (15 October 2026)
+
+[`HironakaActualReducedBasisDivision`](Hironaka/Resolution/HironakaActualReducedBasisDivision.lean) proves whole formal division by the actual canonical reduced vertex members, including the quotient centre-power bounds. [`HironakaActualCoefficientPresentationCentrePower`](Hironaka/Resolution/HironakaActualCoefficientPresentationCentrePower.lean) derives whole formal centre powers from genuine coherent coefficient cosupport and literal Taylor coefficient identities. Construction of arbitrary local coefficient presentations, their transformed stability and Bennett inequalities remain open.
+
+The smooth-pullback results now include original controlled lower current-cosupport membership, actual special and companion values, whole general values for target curve data in any source relative dimension, positive StepOne values in any relative dimension, and all StepOne branches in equal dimension. General higher-dimensional whole-value and history compatibility remains open.
+
+The curve results now retain actual local first blowups and terminating recipes, restrict the literal recipes to smaller opens, construct genuine empty-blowup padding and uniquely compare unequal terminal histories. These are completed subgoals. Compatibility of histories from different neighbourhoods and global descent remain open.
+
+The 13 synchronized subgoals add 21 complete modules and one pure support module. All **452 actual added declarations**, including **342 complete theorem proofs**, match their original complete types and values. Their 21 complete blueprint chapters retain all 83 original proofs; see [the verification report](audit/retained-recipes-and-reduced-division-20261015/verification.md).
+
 ## Status of the nine original gaps
 
 G5–G7 are **closed**, as recorded in the table above. They are no longer missing features. The six remaining gaps and their completed cases are:
@@ -159,10 +169,10 @@ G5–G7 are **closed**, as recorded in the table above. They are no longer missi
 | Gap | Completed part | Remaining part |
 |---|---|---|
 | G1 | Embedded resolution and principalization in complex manifolds. | Abstract analytic spaces and characteristic-zero algebraic categories. |
-| G2 | Canonical principalization for compact zero locus, including the actual divisor sum; genuine smooth pullback dictionaries and Cartesian comparison results. | The complete general canonical elementary endpoint, with original higher-invariant history compatibility and actual global scheduling. |
+| G2 | Canonical principalization for compact zero locus and actual divisor sums; original curve general-value, positive StepOne and all equal-dimensional StepOne smooth-pullback cases; genuine Cartesian histories. | The complete general canonical elementary endpoint, with original higher-invariant history compatibility and actual global scheduling. |
 | G3 | A global canonical growing sequence with locally finite centre images and compact-uniform stabilization for initial cosupport of dimension at most one; terminal-map and comparison constructions. | The actual globally scheduled locally finite blowup history and terminal-space identification in general dimension. |
-| G4 | Genuine local sharp endpoints for original smooth curves, preserving the whole original NC good locus and transversality of the entire ordered boundary. | Compatibility of those local histories on overlaps, and the complete defect invariant, decrease and termination in general dimension. |
-| G8 | Compact hypersurface stage control, including all multiplicity restarts and literal centre conditions; actual formal division, canonical reduced standard bases, jet/HS dictionaries and substitution comparisons. | General higher-codimension permissible centres, transformed presentations, stability and Bennett inequalities. |
+| G4 | Genuine local sharp curve endpoints preserving the whole original NC good locus and entire ordered-boundary transversality; actual retained local recipes, open restriction, empty padding and unique finite-history comparisons. | Compatibility of those local histories on overlaps, and the complete defect invariant, decrease and termination in general dimension. |
+| G8 | Compact hypersurface stage control, including all multiplicity restarts and literal centre conditions; whole reduced-basis filtered division, actual coefficient-cosupport centre powers, canonical reduced standard bases, jet/HS dictionaries and substitution comparisons. | General higher-codimension permissible centres, transformed presentations, stability and Bennett inequalities. |
 | G9 | Genuine local NC branches and whole divisor stalks; permutation and indexed-SNC procedure comparisons. | Global canonical descent for local branches and self-intersections, alignment with the main driver and additional ideals. |
 
 The following descriptions record the precise scope of each original item; **items 5–7 describe completed results**, while the other items distinguish proved cases from outstanding generalizations.
@@ -260,22 +270,22 @@ The fifteenth continuation checkpoint adds actual monomial ordering under genuin
 
 ## Verification
 
-The current [verification report](audit/reduced-basis-curve-comparison-20261015/verification.md) and [machine-readable receipt](audit/reduced-basis-curve-comparison-20261015/final-validation.json) cover this increment:
+The current [verification report](audit/retained-recipes-and-reduced-division-20261015/verification.md) and [machine-readable receipt](audit/retained-recipes-and-reduced-division-20261015/final-validation.json) cover this increment:
 
-* **Build and axioms:** `lake build --wfail` passed all 4,766 jobs with zero warnings. All 14,022 actual library roots use only `propext`, `Classical.choice` and `Quot.sound`.
-* **Complete expression comparison:** all 1,656 added actual roots match their original complete types and values, including all 1,386 theorem proofs. Private/generated declarations, binder names, numerical name components and complete metadata are retained. The strictly scoped owner relocation is witnessed in actual compiled callee data. There is no alpha-equivalence, definitional-equivalence or numerical-erasure fallback.
-* **Kernel coverage:** all 52 new modules and the changed import root passed fresh frozen replay. The preceding full 744-module replay is retained; all 743 preceding non-root sources and kernel-data parts remain byte-identical. This covers all 796 current local modules without claiming a fresh full-library replay.
-* **Source provenance:** all 743 preceding mathematical modules remain byte-identical. The 49 added whole modules, three pure support modules and 49 complete blueprint chapters are reproducible from the public [upstream merge](https://github.com/MingchenXia/archon-nakamaye/commit/d7bd3eabbaa5853f5062bd38e5f358c2d462c1a4). Independent reviews cover the complete mathematics, support extraction and verification tools.
-* **Blueprint scope:** the 231 complete synchronized chapters contain 979 complete proofs, with 2,801 distinct local bindings, 241 verified upstream-only bindings and two explicitly unresolved historical attachment names. The full 558-page blueprint compiles without LaTeX errors; 660 retained prerequisite-reference warnings and six bookmark warnings are recorded separately from proof verification.
+* **Build and axioms:** `lake build --wfail` passed all 4,788 jobs with zero warnings. All 14,474 actual library roots use only `propext`, `Classical.choice` and `Quot.sound`.
+* **Complete expression comparison:** all 452 added actual roots match their original complete types and values, including all 342 theorem proofs. Every private/generated declaration, numerical name component, binder name and complete metadata is retained. No alpha-equivalence, definitional-equivalence or erasure fallback is used.
+* **Kernel coverage:** all 22 new modules and the changed import root passed fresh frozen replay. All 795 preceding non-root sources and kernel-data parts remain byte-identical to the preceding verified checkpoint. The receipts retain the earlier replay chain; this covers all 818 current modules without claiming a fresh full-library replay.
+* **Source provenance:** all 795 preceding mathematical modules remain byte-identical. The 21 added whole modules, one pure support module and 21 complete blueprint chapters reproduce from the public [upstream merge](https://github.com/MingchenXia/archon-nakamaye/commit/fb619fede1f7a4e8d4224a1d10756f059ae77513). The support contains two complete original proofs and reuses the existing invertibility theorem.
+* **Blueprint scope:** the 252 complete synchronized chapters contain 1,062 complete proofs, with 3,048 distinct local bindings, 241 verified upstream-only bindings and two explicitly unresolved historical attachment names. The full 592-page blueprint compiles without LaTeX errors; retained reference and bookmark warnings are recorded in the receipt.
 
-Reproduce this increment from a normal upstream Git checkout and compare the complete recorded expressions with:
+Reproduce the source increment and compare its complete recorded expressions with:
 
 ```sh
-python3 audit/reduced-basis-curve-comparison-20261015/verify_incremental_source.py --source-root /path/to/archon-nakamaye
-python3 audit/reduced-basis-curve-comparison-20261015/verify_recorded_full_expressions.py
+python3 audit/retained-recipes-and-reduced-division-20261015/verify_incremental_source.py --source-root /path/to/archon-nakamaye
+python3 audit/retained-recipes-and-reduced-division-20261015/verify_recorded_full_expressions.py
 ```
 
-No private Horizon checkpoint objects are required. The expression snapshots are published as lossless gzip files because each full snapshot exceeds GitHub’s per-file limit. The expression replay checks complete recorded proof data; current source compilation, axiom auditing and frozen kernel replay are separate checks. The [preceding full verification](audit/local-sharp-curves-20261015/verification.md) retains the evidence for PR #1.
+The snapshots are losslessly compressed. The captured-data comparison, current source build, axiom audit and frozen kernel replay are separate checks. The [preceding verification](audit/reduced-basis-curve-comparison-20261015/verification.md) retains the previous increment and its precisely scoped imported-owner profile. G5, G6 and G7 remain closed; G1, G2, G3, G4, G8 and G9 retain the outstanding general goals listed above.
 
 <details>
 <summary>Historical verification of the original v0.1 release</summary>
