@@ -1,0 +1,3 @@
+/-- The blowup along the empty centre. -/
+theorem isBlowupAlong_id_empty : IsBlowupAlong n (∅ : Set X) (id : X → X) :=
+  isBlowupAlong_id_of_codimOne ⟨isClosed_empty, by simp⟩ (by simp) (by simp)
