@@ -1,0 +1,25 @@
+✔ [4745/4834] Built Hironaka.Support.CodimOneRestrictedTowerExact (2.0s)
+✔ [4755/4837] Built Hironaka.Resolution.HironakaOriginalInteriorEmptyHistory (3.5s)
+✔ [4760/4838] Built Hironaka.Resolution.HironakaOriginalInteriorPositiveLower (3.1s)
+✔ [4765/4840] Built Hironaka.Resolution.HironakaOriginalSelectedPositiveLowerTail (3.4s)
+✔ [4775/4869] Built Hironaka.Resolution.HironakaOriginalCrossingLowerHistory (3.8s)
+✔ [4781/4869] Built Hironaka.Resolution.HironakaOriginalInteriorZeroLowerHistory (3.6s)
+✔ [4791/4869] Built Hironaka.Resolution.HironakaOriginalShortLowerValues (3.3s)
+✔ [4797/4869] Built Hironaka.Resolution.HironakaOriginalCrossingValueTransport (3.3s)
+✖ [4826/4869] Building Hironaka.Resolution.HironakaOriginalCrossingLowerLeaf (4.4s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.lean:114:37: Unknown identifier `length_restrict`
+error: Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.lean:140:17: Unknown identifier `length_restrict`
+error: Hironaka/Resolution/HironakaOriginalCrossingLowerLeaf.lean:140:2: Type mismatch: After simplification, term
+  hvnew
+ has type
+  (invFamily hn k).inv J (BlowupTowerTransforms.restrict W (interiorEmptyHistory B S)) p' =
+    shiftFamily k (J.E.length + (BlowupTowerTransforms.restrict W B).length)
+      ((invFamily hn k).inv J (BlowupTowerTransforms.restrict W (B.append S)) p)
+but is expected to have type
+  (invFamily hn k).inv J (BlowupTowerTransforms.restrict W (interiorEmptyHistory B S)) ⟨↑p, hp'⟩ =
+    shiftFamily k (J.E.length + B.length) ((invFamily hn k).inv J (BlowupTowerTransforms.restrict W (B.append S)) p)
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaOriginalCrossingLowerLeaf
+error: build failed

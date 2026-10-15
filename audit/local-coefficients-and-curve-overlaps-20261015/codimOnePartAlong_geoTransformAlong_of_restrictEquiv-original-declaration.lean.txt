@@ -1,0 +1,11 @@
+/-- **Restricted-equivalent marked ideals have the same codimension-one part at every stage**
+(property (7); closed `N`, coherent ideals). -/
+theorem codimOnePartAlong_geoTransformAlong_of_restrictEquiv {𝔫 : MarkedIdeal n X}
+    (h : MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv 𝔪 𝔫) (hN : IsClosed 𝔪.N)
+    (h𝔪 : 𝔪.ideal.IsCoherent) (h𝔫 : 𝔫.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      codimOnePartAlong (geoTransformAlong 𝔪 T).N (geoTransformAlong 𝔪 T).ideal (geoTransformAlong 𝔪 T).d =
+        codimOnePartAlong (geoTransformAlong 𝔫 T).N (geoTransformAlong 𝔫 T).ideal (geoTransformAlong 𝔫 T).d
+  | _, .refl => codimOnePartAlong_congr h.N_eq h.cosupp_eq
+  | _, .step T C π hπ => by
+      rw [MarkedIdealEquivalence.MarkedIdeal.RestrictEquiv.geoTransformAlong_step_eq h hN h𝔪 h𝔫 T C π hπ]

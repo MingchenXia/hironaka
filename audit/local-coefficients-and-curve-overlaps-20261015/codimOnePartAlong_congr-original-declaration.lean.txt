@@ -1,0 +1,8 @@
+omit [IsComplexManifold n M] in
+/-- **Equal supports have equal codimension-one parts** (the same `N`). -/
+theorem codimOnePartAlong_congr {N N' : Set M} {𝔞 𝔟 : GermIdeal n M} {μ ν : ℕ} (hN : N = N')
+    (hS : cosupport n N 𝔞 μ = cosupport n N' 𝔟 ν) :
+    codimOnePartAlong N 𝔞 μ = codimOnePartAlong N' 𝔟 ν := by
+  ext x
+  exact mem_codimOnePartAlong_congr (Eventually.of_forall fun _ => by rw [hN])
+    (Eventually.of_forall fun _ => by rw [hS])

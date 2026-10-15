@@ -1,0 +1,118 @@
+\section{Actual overlap maps for retained local sharp curve recipes}
+
+Let $W\subset X$ be a closed smooth pure curve in positive ambient dimension,
+let $E$ be its original ordered SNC family and assume density of the complement
+of all original members in $W$. For actual opens $U,V\subset X$, let $O\subset U\cap V$ be ANY genuine common open.
+View $O$ as the true nested open $A_U\subset U$ and $A_V\subset V$.
+Their canonical maps to $O$ give a genuine biholomorphism
+$\Phi_{UV}:A_U\longrightarrow A_V$, equal to the identity on underlying points.
+
+\begin{theorem}[Genuine intersection base maps retain the original product and ordered family]
+\label{hir:sharp-actual-curve-overlap-original-data}
+\uses{hir:sharp-actual-original-curve-biholomorphic-base-inputs,hir:sharp-original-member-product-actual-open-pullback}
+\lean{Hironaka.HironakaSharpActualCurveOverlapMaps.commonOpenBase,Hironaka.HironakaSharpActualCurveOverlapMaps.common_open_original_product_dictionary}
+\leanok
+Construct $\Phi_{UV}$ from the two actual nested-open biholomorphisms.
+The twice-restricted original carrier and ordered family on $A_U$ are exactly
+the inverse images of those on $A_V$. For every mark, the genuine pullback of
+the whole original product record on $A_V$ is the actual original product
+record on $A_U$, including all four fields. Original empty or repeated member
+positions are retained, and the initial marked exceptional list is empty.
+\end{theorem}
+\begin{proof}
+Each nested-open map sends a point to the same underlying point of $X$ and
+has its actual nested inclusion as holomorphic inverse. Their composite is
+therefore a true biholomorphism. Membership in the two twice-restricted
+carriers is membership of that same underlying point in $W$, proving the
+carrier identity in both directions. For each original position, membership
+in the two restricted members is membership of that same point in that
+original member. Applying the two literal ordered-list maps proves the whole
+family identity, with no reindexing or deletion. Restriction of the original
+SNC family to $V$ and then to $A_V$ supplies its genuine SNC geometry. The
+whole original product pullback theorem for this actual biholomorphism and
+that genuine family then gives all four fields of the original marked record.
+Substitute the proved carrier and list identities. No ideal identity is
+inferred solely from supports.
+\end{proof}
+
+\begin{theorem}[Actual local FIRST blowups have genuine intersection comparisons]
+\label{hir:sharp-actual-curve-overlap-first-blowups}
+\uses{hir:sharp-actual-curve-overlap-original-data,hir:sharp-original-curve-first-defect-open-restriction,hir:sharp-original-curve-biholomorphic-base-stage-centres,hir:sharp-actual-stage-matched-blowup-unique-lift}
+\lean{Hironaka.HironakaSharpActualCurveOverlapMaps.exists_actual_common_open_first_comparison}
+\leanok
+Take any actual blowup of the computed FIRST centre for the original data on
+$U$, and any such actual blowup on $V$. Restrict these actual first histories
+to $A_U$ and $A_V$. Construct a genuine stagewise comparison over $\Phi_{UV}$,
+with its actual next biholomorphism. No matching-centre, original TEST or
+geometric certificate on the intersection is supplied.
+\end{theorem}
+\begin{proof}
+Open restriction of the original smooth carrier, SNC coordinates and regular
+curve dimension gives the true data on $U,V$ and on the nested opens.
+The open inclusion is an open continuous map, so the preimage of the original
+closure is the closure of the preimage. Together with the literal ordered
+union dictionary this constructs the whole-family density on each open.
+FIRST-centre open naturality applied to each reflexive history identifies its
+computed nested FIRST centre with the trace of its actual local FIRST centre.
+The preceding carrier and ordered-family identities and the genuine base
+biholomorphism give exact FIRST-centre naturality between the nested opens.
+Thus the actual trace centres are genuine inverse images under $\Phi_{UV}$.
+The restrictions of both given arrows are actual blowups of those trace
+centres. Their actual same-centre universal property constructs both inverse
+holomorphic maps and the real commuting square. The reflexive base comparison
+extends by this actual step to the required restricted first-history
+isomorphism, retaining even an empty trace centre as a real successor.
+\end{proof}
+
+\begin{theorem}[Terminated retained local recipes have actual intersection maps]
+\label{hir:sharp-actual-curve-overlap-terminal-recipes}
+\uses{hir:sharp-actual-curve-overlap-first-blowups,hir:sharp-original-curve-terminal-difference-recipe-open-restriction,hir:sharp-actual-curve-biholo-terminal-padded-recipes}
+\lean{Hironaka.HironakaSharpActualCurveOverlapMaps.exists_unique_actual_common_open_recipe_comparison}
+\leanok
+On each of the two actual local FIRST blowups, take a literal difference
+recipe whose independently computed terminal whole difference is empty.
+Restrict its tail to the actual inverse image of $A_U$ or $A_V$ under that
+first blowup. At every common length at least the two original tail lengths,
+append the genuine identity empty-centre blowups. Construct a unique actual
+full stagewise comparison of the restricted padded histories over
+$\Phi_{UV}$. The unpadded prefixes and tails are the actual open restrictions of the
+retained recipes; the added padding consists of actual identity blowups of
+the empty centre, with every original position and empty trace step present.
+\end{theorem}
+\begin{proof}
+All original open data needed for the two local curve products are constructed
+by the preceding argument. Actual original FIRST admissibility gives an
+original local TEST on each given first blowup. The genuine terminating
+recipe restriction theorem then constructs each actual restricted literal
+tail, exact retained length, full original restricted TEST and actual terminal
+difference emptiness. Construct the actual first-prefix comparison by the
+preceding theorem. The target first-prefix TEST is supplied independently by
+true original TEST restriction and the whole initial product pullback identity.
+The proved carrier and ordered-family identities identify the actual source
+restricted recipe with the source input of the genuine-base terminal recipe
+comparison theorem. Apply that theorem to these exact histories, lengths and
+computed empty differences. It constructs the actual empty padding and unique
+full stagewise biholomorphism. No compactness of $O$, prescribed endpoint map,
+comparison centre or source-history certificate is used. This is an actual
+pairwise overlap map; compatibility on triple overlaps and geometric descent
+remain further assertions.
+\end{proof}
+
+\begin{corollary}[Actual pairwise intersections supply the common open internally]
+\label{hir:sharp-actual-curve-literal-intersection-terminal-recipes}
+\uses{hir:sharp-actual-curve-overlap-terminal-recipes}
+\lean{Hironaka.HironakaSharpActualCurveOverlapMaps.exists_unique_actual_overlap_recipe_comparison}
+\leanok
+For two retained actual local recipes on $U,V$ as above, construct the unique
+actual padded full comparison on their literal intersection $U\cap V$,
+without any supplied common open or inclusion witness. Every common cut of
+the actual retained tail lengths is allowed.
+\end{corollary}
+\begin{proof}
+Take the actual open $O=U\cap V$. Its two inclusions into $U$ and $V$ are the
+true defining intersection inclusions. Apply the preceding common-open
+theorem to these exact opens and the given actual first blowups and literal
+terminating tails. All source geometry, restricted original TESTs, computed
+centres, actual retained lengths and genuine padding are constructed by that
+theorem; no new mathematical premise is introduced.
+\end{proof}

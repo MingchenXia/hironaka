@@ -563,6 +563,28 @@ import Hironaka.Resolution.HironakaSharpActualCurveRetainedLocalRecipes
 
 import Hironaka.Resolution.HironakaSharpActualCurveTerminalPaddingComparison
 
+import Hironaka.Resolution.HironakaActualCoefficientReducedStrictGenerators
+
+import Hironaka.Resolution.HironakaActualLocalCoefficientStrictGenerators
+
+import Hironaka.Resolution.HironakaOriginalRunCompanionSpecialSmooth
+
+import Hironaka.Resolution.HironakaOriginalSameCarrierCandidateDomains
+
+import Hironaka.Resolution.HironakaOriginalSourceChoiceCartesian
+
+import Hironaka.Resolution.HironakaOriginalZeroOwnLargeSmoothValues
+
+import Hironaka.Resolution.HironakaOriginalZeroOwnSmallSmoothValues
+
+import Hironaka.Resolution.HironakaSharpActualCurveBaseBiholomorphism
+
+import Hironaka.Resolution.HironakaSharpActualCurveBiholomorphicRecipes
+
+import Hironaka.Resolution.HironakaSharpActualCurveCommonOpenCocycle
+
+import Hironaka.Resolution.HironakaSharpActualCurveOverlapMaps
+
 /-!
 # Hironaka
 

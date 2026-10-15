@@ -41,22 +41,18 @@
 \maketitle
 \section*{Verification scope of the complete chapters}
 The continuation retains complete upstream statements and mathematical proofs.
-Of the 3,044 distinct declaration references in the 231 complete synchronized chapters,
-2,801 are compiled in this standalone library, 241 identify verified upstream
-facts which are not exported here, and two preserved historical attachment names
-do not resolve to upstream declarations. Those two names are explicitly marked
-as unresolved and are not counted as verified. The 241 verified upstream references retain their original qualified names in
-explicit \texttt{upstreamlean} metadata. The two unresolved names use
-\texttt{upstreamunbound} metadata. The 241 upstream facts' actual compiled owners,
-complete proofs and standard axioms are checked in the upstream development;
-see the source provenance and verification reports accompanying these chapters.
-Nodes with these dependencies are marked below; an upstream verification marker
-is not a claim of a local standalone declaration. The fixed upstream published
-revision is \texttt{7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4} in
-\href{https://github.com/MingchenXia/archon-nakamaye/tree/7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4/TranscendentalNakamaye}{\texttt{MingchenXia/archon-nakamaye}, fixed source on GitHub}.
-The further 49 complete chapters are reproduced from published revision
-\texttt{d7bd3eabbaa5853f5062bd38e5f358c2d462c1a4}; their 810 additional
-declaration bindings all resolve in this standalone library.
+The 319 complete synchronized chapters retain all 1,302 original proofs.
+Their 3,776 distinct declaration references comprise 3,533 locally compiled
+bindings, 241 verified upstream-only bindings and 2 explicitly unresolved historical
+attachment names. The unresolved names are not counted as verified.
+Local bindings use \texttt{lean} metadata; verified upstream-only facts use
+\texttt{upstreamlean}, and unresolved historical names use
+\texttt{upstreamunbound}. The current published source revision is
+\texttt{7cfb7a24ea1c4d42a2d37faee1af3757637fc19b} in
+\href{https://github.com/MingchenXia/archon-nakamaye}{MingchenXia/archon-nakamaye}.
+The per-checkpoint audit reports identify all earlier fixed source revisions
+and the complete proof, binding and namespace provenance. The full document
+also retains the earlier original extension chapters.
 \section{Prerequisites from the original API}
 These results use the embedded resolution theorems already proved in the library.
 The following pointers identify the earlier results referred to in the proofs below.
@@ -403,6 +399,73 @@ See \texttt{Hironaka.exists\_embeddedResolution\_analytic\_of\_isCompact} and it
 \input{hironaka-smooth-submersion-marked-cartesian-tower-extension}
 \input{hironaka-smooth-submersion-ordered-compressed-image-pullback-extension}
 \input{hironaka-smooth-submersion-ordered-global-trace-extension}
+\input{hironaka-actual-coefficient-reduced-strict-generators-extension}
+\input{hironaka-actual-formal-blowup-all-directions-extension}
+\input{hironaka-actual-formal-blowup-member-generation-extension}
+\input{hironaka-actual-formal-monomial-blowup-reflection-extension}
+\input{hironaka-actual-formal-strict-generators-extension}
+\input{hironaka-actual-local-coefficient-strict-generators-extension}
+\input{hironaka-original-actual-empty-normalization-extension}
+\input{hironaka-original-ambient-terminal-choice-extension}
+\input{hironaka-original-boundary-history-map-extension}
+\input{hironaka-original-canonical-normalized-lower-tail-extension}
+\input{hironaka-original-crossing-exact-index-extension}
+\input{hironaka-original-crossing-lower-history-extension}
+\input{hironaka-original-crossing-lower-leaf-extension}
+\input{hironaka-original-crossing-value-transport-extension}
+\input{hironaka-original-curve-history-extension}
+\input{hironaka-original-finite-empty-compression-extension}
+\input{hironaka-original-general-crossing-history-extension}
+\input{hironaka-original-general-special-companion-extension}
+\input{hironaka-original-interior-empty-history-extension}
+\input{hironaka-original-interior-positive-lower-extension}
+\input{hironaka-original-interior-zero-lower-history-extension}
+\input{hironaka-original-invariant-empty-insertion-extension}
+\input{hironaka-original-member-future-shift-extension}
+\input{hironaka-original-outer-short-family-extension}
+\input{hironaka-original-positive-companion-empty-insertion-extension}
+\input{hironaka-original-positive-member-empty-insertion-extension}
+\input{hironaka-original-recursive-boundary-history-map-extension}
+\input{hironaka-original-recursive-empty-deletion-extension}
+\input{hironaka-original-recursive-interior-history-extension}
+\input{hironaka-original-run-companion-special-smooth-extension}
+\input{hironaka-original-same-carrier-candidate-domains-extension}
+\input{hironaka-original-selected-positive-lower-tail-extension}
+\input{hironaka-original-short-lower-values-extension}
+\input{hironaka-original-short-uniform-index-extension}
+\input{hironaka-original-source-choice-cartesian-extension}
+\input{hironaka-original-step-one-curve-history-extension}
+\input{hironaka-original-step-one-empty-insertion-extension}
+\input{hironaka-original-terminal-atlas-extension}
+\input{hironaka-original-terminal-choice-comparison-extension}
+\input{hironaka-original-terminal-finite-identification-extension}
+\input{hironaka-original-terminal-local-biholomorphism-extension}
+\input{hironaka-original-terminal-manifold-extension}
+\input{hironaka-original-terminal-open-comparison-extension}
+\input{hironaka-original-terminal-overlap-comparison-extension}
+\input{hironaka-original-terminal-overlap-restriction-extension}
+\input{hironaka-original-terminal-projection-uniqueness-extension}
+\input{hironaka-original-zero-own-large-smooth-values-extension}
+\input{hironaka-original-zero-own-small-smooth-values-extension}
+\input{hironaka-relative-normal-canonical-centre-freeness-extension}
+\input{hironaka-relative-normal-centre-scalars-extension}
+\input{hironaka-sharp-actual-curve-base-biholomorphism-extension}
+\input{hironaka-sharp-actual-curve-biholomorphic-recipes-extension}
+\input{hironaka-sharp-actual-curve-common-open-cocycle-extension}
+\input{hironaka-sharp-actual-curve-overlap-maps-extension}
+\input{hironaka-smooth-centre-canonical-layers-extension}
+\input{hironaka-smooth-centre-coherent-domain-extension}
+\input{hironaka-smooth-submersion-original-ambient-canonical-extension}
+\input{hironaka-smooth-submersion-original-compact-terminal-extension}
+\input{hironaka-smooth-submersion-original-global-finite-extension}
+\input{hironaka-smooth-submersion-original-recursive-family-extension}
+\input{hironaka-smooth-submersion-original-terminal-cartesian-extension}
+\input{hironaka-smooth-submersion-original-terminal-choice-naturality-extension}
+\input{hironaka-smooth-submersion-original-terminal-functor-extension}
+\input{hironaka-smooth-submersion-original-terminal-submersion-extension}
+\input{hironaka-smooth-submersion-original-zero-family-history-extension}
+\input{hironaka-terminal-atlas-holomorphic-extension}
+\input{hironaka-terminal-atlas-topology-extension}
 \begin{thebibliography}{99}
 \bibitem{bierstone-milman03-desingularization-algorithms} E. Bierstone and P. D. Milman, \emph{Desingularization algorithms I. Role of exceptional divisors}, arXiv:math/0207098v1 (2002), Section 6.3.
 \bibitem{demailly-cadg} J.-P. Demailly, \emph{Complex analytic and differential geometry}, Chapter II, sections 4--5.
