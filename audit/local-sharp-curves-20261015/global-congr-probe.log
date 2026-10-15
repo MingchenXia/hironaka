@@ -1,0 +1,6 @@
+LinearEquiv.toContinuousLinearEquiv.congr_simp.{u, v, w} {𝕜 : Type u} [hnorm : NontriviallyNormedField 𝕜] {E : Type v}
+  [AddCommGroup E] [_root_.Module 𝕜 E] [TopologicalSpace E] [IsTopologicalAddGroup E] [ContinuousSMul 𝕜 E] {F : Type w}
+  [AddCommGroup F] [_root_.Module 𝕜 F] [TopologicalSpace F] [IsTopologicalAddGroup F] [ContinuousSMul 𝕜 F]
+  [CompleteSpace 𝕜] [T2Space E] [T2Space F] [FiniteDimensional 𝕜 E] (e e✝ : E ≃ₗ[𝕜] F) (e_e : e = e✝) :
+  e.toContinuousLinearEquiv = e✝.toContinuousLinearEquiv
+ACTUAL_GLOBAL_HELPER_OWNER Hironaka.Analytic.GermCoordinateTower

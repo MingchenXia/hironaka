@@ -1,0 +1,205 @@
+{
+  "status": "PASS_STANDARD_PUBLISHED_GIT_SOURCE_REPLAY",
+  "source_checkout": "/workspace/archon-nakamaye-main",
+  "published_source_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4",
+  "original_provenance_revision": "d5d387143239a2776b1e55ef529e65229b120448",
+  "original_provenance_metadata_unchanged": true,
+  "horizon_private_ledger_or_original_revision_objects_required": false,
+  "complete_lean_modules": 182,
+  "complete_blueprint_chapters": 182,
+  "original_complete_proofs": 770,
+  "support_modules": 16,
+  "support_source_parents": 22,
+  "protected_byte_identical_modules": 543,
+  "exact_original_declaration_context_restores": 2,
+  "original_declaration_context_checks": [
+    {
+      "path": "Hironaka/MarkedIdeal/GermIdealOrderValue.lean",
+      "replacements": [
+        {
+          "before": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n",
+          "after": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\nvariable {N : Set M} {x : M} {g : M → ℂ}\nvariable {𝔞 : GermIdeal n M}\n"
+        }
+      ],
+      "before_sha256": "2b774dd10eb5a308cc809690f8810e5bf388c4d8f73268f91bf31cc7d2a88c12",
+      "after_sha256": "84606deb62ee552984e8ebed28cbb35d61d21aa665bb9f01b76bcd87737c4f0b",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/GermIdealOrder.lean",
+      "source_whole_sha256": "55556898c589b735e46d6ab66664b31e049e4c8a86c5cd9c5fdad391b7e960c0",
+      "complete_unchanged_declaration_interval_inclusive": [
+        236,
+        240
+      ],
+      "complete_unchanged_declaration_sha256": "7d520997d8657276ad0e8839200b3c0313a8a59a19de990eb4067bfbcba693a9"
+    },
+    {
+      "path": "Hironaka/Analytic/HolomorphicGermReducednessBridge.lean",
+      "replacements": [
+        {
+          "before": "import Hironaka.Analytic.AnalyticJacobianSingularCore\n",
+          "after": "import Mathlib.Analysis.CStarAlgebra.Classes\nimport Hironaka.Analytic.AnalyticJacobianSingularCore\n",
+          "role": "Restore availability of the original complex CStar instance definition."
+        },
+        {
+          "before": "/-- A coordinate projection is holomorphic as a germ at the origin. -/\ntheorem eventually_differentiableAt_coordinate (j : Fin n) :",
+          "after": "attribute [local instance 2000] CommCStarAlgebra.toNormedCommRing in\n/-- A coordinate projection is holomorphic as a germ at the origin. -/\ntheorem eventually_differentiableAt_coordinate (j : Fin n) :",
+          "role": "Restore the original declaration-local outer projection priority; original doccomment, statement and proof retained."
+        }
+      ],
+      "before_sha256": "4c53b758c12651e3262d4bd6c647efc250452e18b45e143d0e023c8a218410dc",
+      "after_sha256": "1fbeccb16d71a717ce25b01400473a3c0e9ee5d1c9f6ca2e58565b52011d2a7d",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermReducednessBridge.lean",
+      "source_whole_sha256": "9d579e7531d3bde12508a2d7a9d3935711cf49fbde42fa4ddcf747ae1f388e02",
+      "complete_unchanged_declaration_interval_inclusive": [
+        35,
+        38
+      ],
+      "complete_unchanged_declaration_sha256": "3d0c3a247d443c4a429815b317c3ee0e9f2e77f3277bfe05af13b469ac5a0b9a"
+    }
+  ],
+  "exact_original_source_and_export_replay": "passed",
+  "local_declaration_references": 1991,
+  "verified_upstream_only_references": 241,
+  "unresolved_historical_references": 2,
+  "published_additional_native_modules_outside_original_inventory": [
+    "TranscendentalNakamaye.Pending.AffineBarrierPreceq",
+    "TranscendentalNakamaye.Pending.FiniteGeodesicPreceqEndpoint",
+    "TranscendentalNakamaye.Pending.LocalCurrentL1Ddc",
+    "TranscendentalNakamaye.Pending.RelativePreceqEnergy"
+  ],
+  "build_lean_kernel_axiom_or_ast_audit_started": false,
+  "support_parent_checks": [
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CoherentIdealColon.lean",
+      "expected_original_sha256": "a2e7ca4820709da95c04ae42841693df66650cb7a29b1fffd0769143a7040ff7",
+      "published_source_sha256": "a2e7ca4820709da95c04ae42841693df66650cb7a29b1fffd0769143a7040ff7",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/StepOneValue.lean",
+      "expected_original_sha256": "4cb764a64ce676b9d317baca14be01f6a21b9ddbdd1e56b2fee2955a417c601f",
+      "published_source_sha256": "4cb764a64ce676b9d317baca14be01f6a21b9ddbdd1e56b2fee2955a417c601f",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/GeneralValue.lean",
+      "expected_original_sha256": "2b3d3079922dd8aa1553b4249112ff8a7fe835edf93981f63dbef20437728116",
+      "published_source_sha256": "2b3d3079922dd8aa1553b4249112ff8a7fe835edf93981f63dbef20437728116",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/RestrictedIdealExtension.lean",
+      "expected_original_sha256": "3073775dc211a49c339b8edf744866618dfbabc5aaa69f093281e4002087db38",
+      "published_source_sha256": "3073775dc211a49c339b8edf744866618dfbabc5aaa69f093281e4002087db38",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/NonmonomialOrderTail.lean",
+      "expected_original_sha256": "a1fddca9b2cb429e2dc4bc2e5eeef45cea6caf7f8e39887b0c52b77cd7167f5b",
+      "published_source_sha256": "a1fddca9b2cb429e2dc4bc2e5eeef45cea6caf7f8e39887b0c52b77cd7167f5b",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ContactIndependenceAlong.lean",
+      "expected_original_sha256": "f6b205fdfe22c454cabd2c968af2da17d3e644cc7c1e2e2f9776f9ac8c79c8fd",
+      "published_source_sha256": "f6b205fdfe22c454cabd2c968af2da17d3e644cc7c1e2e2f9776f9ac8c79c8fd",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ContactStageInvDomain.lean",
+      "expected_original_sha256": "b95faabc0776d7e39e3e8a1a86d93b3b87e8a06b92a151e9a8512b4e9ebae26b",
+      "published_source_sha256": "b95faabc0776d7e39e3e8a1a86d93b3b87e8a06b92a151e9a8512b4e9ebae26b",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/StepOneWellFounded.lean",
+      "expected_original_sha256": "46cc726e65446955c2af68f6a9e79fa1b064e0d7bfbb6e6a38f3b5fc664db91e",
+      "published_source_sha256": "46cc726e65446955c2af68f6a9e79fa1b064e0d7bfbb6e6a38f3b5fc664db91e",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/StepOneSeq.lean",
+      "expected_original_sha256": "68ee8e8a50ec8f084b4d73b45d70f7a09f375a0fc8e084963afb84e56a541ebb",
+      "published_source_sha256": "68ee8e8a50ec8f084b4d73b45d70f7a09f375a0fc8e084963afb84e56a541ebb",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupStrictIdeal.lean",
+      "expected_original_sha256": "55cac8fd6d2e2a9256e33ce64693990495c2aa9b29678d96028fbc604ca1c590",
+      "published_source_sha256": "55cac8fd6d2e2a9256e33ce64693990495c2aa9b29678d96028fbc604ca1c590",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/MarkedIdealGeoTransform.lean",
+      "expected_original_sha256": "679bcb114ea731ceb1cb5daa4cc411df6032c67efedf84a00d257608013e0661",
+      "published_source_sha256": "679bcb114ea731ceb1cb5daa4cc411df6032c67efedf84a00d257608013e0661",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/DropMembers.lean",
+      "expected_original_sha256": "495077710e3d96ac76248483ad94d075fdbdfac46ffd7d80d8322bb26be3af78",
+      "published_source_sha256": "495077710e3d96ac76248483ad94d075fdbdfac46ffd7d80d8322bb26be3af78",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/GermIdealOrder.lean",
+      "expected_original_sha256": "55556898c589b735e46d6ab66664b31e049e4c8a86c5cd9c5fdad391b7e960c0",
+      "published_source_sha256": "55556898c589b735e46d6ab66664b31e049e4c8a86c5cd9c5fdad391b7e960c0",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupStrictSubmanifold.lean",
+      "expected_original_sha256": "9a9066b3587e86504e713605615b177402b1eb170d71f6a0c1031e184aafd320",
+      "published_source_sha256": "9a9066b3587e86504e713605615b177402b1eb170d71f6a0c1031e184aafd320",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ResolutionInvariantOrder.lean",
+      "expected_original_sha256": "4bf10a153d43acb9f3fdb9e100cd93cd21057570f3d2fb5fb8ec26281df82339",
+      "published_source_sha256": "4bf10a153d43acb9f3fdb9e100cd93cd21057570f3d2fb5fb8ec26281df82339",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ResolutionInvariantSeq.lean",
+      "expected_original_sha256": "3e7b15a7bf0e9209bc0e659f167c1d54c7e6c7434dfba58c6bf918fae2d171dd",
+      "published_source_sha256": "3e7b15a7bf0e9209bc0e659f167c1d54c7e6c7434dfba58c6bf918fae2d171dd",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupControlledTransform.lean",
+      "expected_original_sha256": "efff4c2d7e5a8822503029cbcac2a794fead3e93f7dc050185bfda987aa4ef7a",
+      "published_source_sha256": "efff4c2d7e5a8822503029cbcac2a794fead3e93f7dc050185bfda987aa4ef7a",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupDerivativeIdeal.lean",
+      "expected_original_sha256": "b5a490e4d9387e8bdb22126f0f1dcd975a7e7f9aeff2542979490e9c98c86aa0",
+      "published_source_sha256": "b5a490e4d9387e8bdb22126f0f1dcd975a7e7f9aeff2542979490e9c98c86aa0",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupTowerSplit.lean",
+      "expected_original_sha256": "d62ce96c588343d37eaaa1621f893212245ed24f911c5a079093cfe3dfedeffe",
+      "published_source_sha256": "d62ce96c588343d37eaaa1621f893212245ed24f911c5a079093cfe3dfedeffe",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermRing.lean",
+      "expected_original_sha256": "96153b860adc2738d9b5211b4bac80fc500f53c4527b3b4ac3d77d40c29cb447",
+      "published_source_sha256": "96153b860adc2738d9b5211b4bac80fc500f53c4527b3b4ac3d77d40c29cb447",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/DerivativeIdealAlong.lean",
+      "expected_original_sha256": "d6690ca3bc2e433962b07f9e5d2a9268031f7c8cdd4b3b2963910a3fc3a4196b",
+      "published_source_sha256": "d6690ca3bc2e433962b07f9e5d2a9268031f7c8cdd4b3b2963910a3fc3a4196b",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    },
+    {
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/FirstPass/ComplexAnalyticSubvarieties.lean",
+      "expected_original_sha256": "5680924a9975a83a5d522c272c245b1e5922991a441052652322d40dca7ee074",
+      "published_source_sha256": "5680924a9975a83a5d522c272c245b1e5922991a441052652322d40dca7ee074",
+      "actual_source_read_revision": "7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4"
+    }
+  ],
+  "replay_report_sha256": "e039e5405fd1b22fa1100ae6195e41991c630d170de932121ac84dd67c304ef8"
+}

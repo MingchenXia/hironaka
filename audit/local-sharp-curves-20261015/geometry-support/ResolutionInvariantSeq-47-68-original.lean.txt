@@ -1,0 +1,22 @@
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+
+universe u v
+
+namespace TranscendentalNakamaye.Pending.ResolutionInvariantSeq
+
+open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences
+open TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal
+  TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms
+  TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.MarkedIdeal
+  TranscendentalNakamaye.Pending.MarkedIdealOperationsAlong.MarkedIdeal
+  TranscendentalNakamaye.Pending.MarkedIdealRestrictOpen TranscendentalNakamaye.Pending.BlowupTowerIsomorphism
+  TranscendentalNakamaye.Pending.ResolutionInvariantOrder TranscendentalNakamaye.Pending.ResolutionDriver
+open TranscendentalNakamaye.Pending.ResolutionInvariantSpec (IsInvDomain IsCanonical countCentresMeeting)
+open TranscendentalNakamaye.Pending.ResolutionInvariantExt (IsEmptyTower)
+open TranscendentalNakamaye.Pending.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top
+  maxLocus_eq_level interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment)
+
+noncomputable section
+
+variable {n : ℕ}

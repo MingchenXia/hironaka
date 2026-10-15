@@ -1,0 +1,114 @@
+\section{The actual universal blowup lift is a submersion everywhere}
+
+\begin{lemma}[The genuine complement biholomorphism]
+\label{hir:submersion-blowup-actual-complement-biholomorphism}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementOpen,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.sourceComplementOpen,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementBiholomorphism,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementBiholomorphism_apply,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementPartial,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementPartial_source,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementPartial_target,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementPartial_apply,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.complementPartial_holomorphic}
+\uses{bcalc:isomorphism-off-centre}
+Let $\pi:Z\to X$ be an actual analytic blowup along a closed smooth centre $C$.
+The restriction $\pi:O=\pi^{-1}(X\setminus C)\to N=X\setminus C$ is a
+biholomorphism of the actual open submanifolds. For any actual off-centre
+point $p$, it internally determines a holomorphic open partial homeomorphism
+$b:Z\dashrightarrow X$ with source $O$,
+target $N$, and $b(z)=\pi(z)$ on its entire source. Both directions are
+holomorphic on their entire actual domains.
+\end{lemma}
+\begin{proof}
+Apply the actual blowup universal property to the inclusion $N\hookrightarrow X$.
+The whole centre ideal pulls back to the unit ideal on $N$, so this produces a
+holomorphic section $s:N\to Z$ with $\pi s=\operatorname{incl}$. Apply uniqueness
+again on the actual open $O$: its two holomorphic lifts $s\pi$ and the inclusion
+have the same projection and the same whole unit pullback ideal. Thus $s\pi$
+is the identity on $O$. The actual maps $z\mapsto\pi z$ and $x\mapsto s x$,
+corestricted to these two opens, are inverse holomorphic maps. Corestriction
+preserves holomorphy because the target is an open submanifold. Compose the
+inverse of the open inclusion $O\hookrightarrow Z$, this biholomorphism, and
+the inclusion $N\hookrightarrow X$. This is the required actual partial
+homeomorphism. The open inclusion is holomorphic; its inverse is holomorphic
+because its composition with the subtype value map is the identity on $O$.
+This argument also applies to empty complements: for chart constructions at a
+specified off-centre point the needed nonempty witnesses are that actual point
+and its projection. No compactness or chosen complement section is supplied.
+\end{proof}
+
+\begin{lemma}[True chart transport through local biholomorphisms]
+\label{hir:submersion-blowup-local-biholomorphic-chart-transport}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.isSubmersionAtOfComplement_local_square}
+\uses{}
+Let $b:Y'\dashrightarrow Y$ and $a:X'\dashrightarrow X$ be holomorphic open
+partial homeomorphisms, holomorphic in both directions on their actual open
+domains. Let $f:Y\to X$ be continuous and a submersion at $b(p)$ with complement $F$, and
+let $G:Y'\to X'$ be continuous at $p$. Suppose $p\in b.\mathrm{source}$,
+$G(b.\mathrm{source})\subseteq a.\mathrm{source}$, and
+$a(Gq)=f(bq)$ on this whole source. Then $G$ is a submersion at $p$ with the
+same $F$, proved from actual maximal-atlas charts.
+\end{lemma}
+\begin{proof}
+Take the actual submersion charts $d,c$ of $f$ and its actual linear product
+equivalence $L$. Replace $d$ by its restriction to $f^{-1}(a.\mathrm{target})$,
+an actual open containing $b(p)$, because the original $f$ is continuous. Compose this restricted chart with $b$, and compose $c$ with $a$.
+Both charts lie in the actual maximal atlases: their forward and inverse maps
+are compositions of the given holomorphic maps and actual maximal-atlas charts.
+They contain $p$ and $G(p)$ respectively. For every parameter in the transported
+domain chart target, the two inverse identities for $b$ and $a$, and the given
+whole local square, reduce the transported expression to $c f d^{-1}$.
+That expression is exactly $\operatorname{pr}_1 L$, by the actual original
+submersion chart dictionary. The continuous-at version of the submersion chart
+criterion now yields the asserted same-complement submersion. All source/target
+restrictions are the literal actual opens; no differentiable-surjectivity
+criterion or caller submersion conclusion is used.
+\end{proof}
+
+\begin{lemma}[Off-centre submersion of the actual universal lift]
+\label{hir:submersion-blowup-actual-lift-off-centre-submersion}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.actualLift_off_isSubmersionAtOfComplement}
+\uses{hir:submersion-blowup-actual-complement-biholomorphism,hir:submersion-blowup-local-biholomorphic-chart-transport,hir:submersion-blowup-lift-actual-lift,hir:submersion-nc-full-lifted-coordinates}
+Let $f:Y\to X$ be a genuine global holomorphic submersion, with dimensions
+$n+r$ and $n$. Let $\pi:Z\to X$ and $\pi':Z'\to Y$ be genuine analytic
+blowups of $C$ and its actual preimage. Let $G:Z'\to Z$ be the internally
+constructed holomorphic universal lift. At every $p$ with $\pi'p\notin f^{-1}C$,
+$G$ is a submersion with complement $\mathbb C^r$.
+\end{lemma}
+\begin{proof}
+Produce both actual complement partial biholomorphisms from the first lemma.
+The actual universal projection identity $\pi G=f\pi'$ implies that $G$ maps
+the entire source complement into the target complement and gives the entire
+local square of the second lemma. The actual universal lift is holomorphic,
+hence continuous at $p$. The second lemma gives a submersion with an actual
+complement of the original submersion at $\pi'p$. The already proved actual
+\texttt{complementCoordinates} constructs an isomorphism from this complement
+to $\mathbb C^{(n+r)-n}=\mathbb C^r$: projection onto the complement is a
+surjective linear image of $\mathbb C^{n+r}$, so the complement is finite
+dimensional, and the actual product equivalence gives its rank $r$. Transport
+the complement along this genuine internally produced isomorphism.
+\end{proof}
+
+\begin{theorem}[Global same-r submersion of the canonical actual lift]
+\label{hir:submersion-blowup-actual-universal-lift-global-submersion}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.canonical_actualLift_isSubmersionOfComplement,Hironaka.HironakaSmoothSubmersionGlobalBlowupSubmersion.canonical_actualLift_isSubmersion}
+\uses{hir:submersion-blowup-actual-lift-off-centre-submersion,hir:submersion-global-lift-original-exceptional-smooth,hir:submersion-blowup-lift-centre,hir:submersion-relative-regular-geometry,bex:blowup-exists}
+For a genuine global submersion $f:Y^{n+r}\to X^n$ and a closed smooth centre
+$C$ with empty interior, the internally generated canonical blowup lift
+$\operatorname{Bl}_{f^{-1}C}Y\to\operatorname{Bl}_C X$ is a genuine global
+submersion, with the fixed complement $\mathbb C^r$ at every point.
+\end{theorem}
+\begin{proof}
+The original genuine submersion internally produces that its actual centre
+preimage is a closed smooth submanifold with empty interior. Hence both actual
+canonical blowups and their actual universal lift are defined without a caller
+source-centre or lift certificate. At a point whose base belongs to the centre,
+use the previously proved original exceptional-point matching-chart coverage
+and entire universal chart equality: these internally produce the same-r
+projection charts at that point. At every other point use the third lemma.
+The two exhaustive cases both have the identical fixed complement
+$\mathbb C^r$, so they give the actual global submersion-of-complement property;
+the actual global submersion follows. There is no compactness hypothesis and
+no assumption of a local or global submersion output certificate. Empty centre,
+empty source, $n=0$, and $r=0$ are covered by the same case split and actual
+finite-dimensional identities. This theorem does not assert the Cartesian
+universal property for arbitrary cones, comparison with arbitrary blowup
+choices, or functoriality of the whole higher invariant/general driver.
+\end{proof}

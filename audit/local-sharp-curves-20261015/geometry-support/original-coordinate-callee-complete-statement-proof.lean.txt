@@ -1,0 +1,4 @@
+theorem eventually_differentiableAt_coordinate (j : Fin n) :
+    ∀ᶠ z in 𝓝 (0 : ComplexModel n), DifferentiableAt ℂ (fun z : ComplexModel n => z j) z :=
+  Eventually.of_forall fun z => by
+    simpa using (EuclideanSpace.proj (𝕜 := ℂ) j).differentiableAt

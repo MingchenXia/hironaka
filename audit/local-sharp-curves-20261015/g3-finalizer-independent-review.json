@@ -1,0 +1,30 @@
+{
+  "status": "PASS_INDEPENDENT_ENTIRE_FINALIZER_STATIC_CODE_REVIEW",
+  "utc": "2026-10-15T13:36:18.285439+00:00",
+  "reviewed_script": "/workspace/hironaka/audit/local-sharp-curves-20261015/finalize_validation.py",
+  "script_sha256": "b2a8e50db20073007447c98b74df10a3fca680606d55b02cab552e0bb33c7f42",
+  "review_scope": "Entire finalizer source, static review only; no execution of the finalizer or Lean tools.",
+  "validated_gates": [
+    "Exact statuses and zero exceptions for 2627+13+30 compiled roots and 2142+12+27 complete theorem proofs; both original context repair comparisons remain required.",
+    "Kernel final receipt requires exit zero, exact 744-module multiset reconstructed from the actual final log, no found-a-problem message, identical before/after snapshots, matching compiled-part count and current source hashes.",
+    "Exact G2 and G3 independent review statuses are tied to the current frozen export configuration; preservation explicitly distinguishes 543 unchanged original modules and two context restorations.",
+    "Combined source and blueprint provenance arrays must equal both final component arrays.",
+    "Published source revision, actual-root standard-axiom log, final frozen 4563-job build, PDF log and all final report input paths are explicit; raw final kernel log is included in the input digests.",
+    "Final-validation JSON is written only after every assertion; no candidate or failed kernel log is an accepted input."
+  ],
+  "accepted_counts": {
+    "new_actual_compiled_roots": 2670,
+    "exact_new_theorem_proofs": 2181,
+    "additional_original_context_restored_declarations": 2,
+    "kernel_modules": 744,
+    "all_library_actual_roots": 12366,
+    "full_build_jobs": 4563,
+    "complete_blueprint_chapters": 182,
+    "complete_explicit_blueprint_proofs": 770,
+    "local_bindings": 1991,
+    "verified_upstream_bindings": 241,
+    "historical_unbound_names": 2
+  },
+  "findings": "No remaining actionable finding within the frozen serial validation pipeline; the two prior gate weaknesses have been corrected.",
+  "execution_boundary": "Finalizer not run. No final kernel or publication PASS is asserted by this static code review. Root retains exclusive kernel replay and finalization ownership."
+}

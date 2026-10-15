@@ -1,0 +1,33 @@
+✖ [3993/3994] Building Hironaka.Invariant.ContactStageDimensionExact (3.2s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Invariant/ContactStageDimensionExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Invariant/ContactStageDimensionExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Invariant/ContactStageDimensionExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Invariant/ContactStageDimensionExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Invariant/ContactStageDimensionExact.setup.json --json
+error: Hironaka/Invariant/ContactStageDimensionExact.lean:22:30: ambiguous identifier `strictAlong`, possible interpretations: [HomogenizedGlueingTower.strictAlong,
+ HomogenizedGlueingTower.strictAlong]
+error: Hironaka/Invariant/ContactStageDimensionExact.lean:23:30: ambiguous identifier `DimLE`, possible interpretations: [ResolutionInvariantSpec.DimLE, ResolutionInvariantSpec.DimLE]
+error: Hironaka/Invariant/ContactStageDimensionExact.lean:33:46: Unknown identifier `DimLE`
+
+Note: It is not possible to treat `DimLE` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Invariant/ContactStageDimensionExact.lean:34:4: Unknown identifier `DimLE`
+
+Note: It is not possible to treat `DimLE` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Invariant/ContactStageDimensionExact.lean:35:8: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+n : ℕ
+X : CMfd n
+𝔪 : MarkedIdeal n X.carrier
+hN : IsClosedSubmanifold n 𝔪.N
+h𝔞 : 𝔪.ideal.IsCoherent
+hd : 1 ≤ 𝔪.d
+U : Opens X.carrier
+u : X.carrier → ℂ
+hu : IsTangentDirectionAlong 𝔪.N 𝔪.ideal 𝔪.d (↑U) u
+Y : CMfd n
+T₀ : BlowupTower X Y
+hT₀ : 𝔪.IsGeoTestTower T₀
+k : ℕ
+hk : sorry
+⊢ sorry
+error: Lean exited with code 1
+✔ [3994/3994] Built Hironaka.Blowup.SharpStrictTransformExact (3.4s)
+Some required targets logged failures:
+- Hironaka.Invariant.ContactStageDimensionExact
+error: build failed

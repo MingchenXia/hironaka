@@ -1,0 +1,75 @@
+[
+  {
+    "source_revision": "d5d387143239a2776b1e55ef529e65229b120448",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupTowerSplit.lean",
+    "source_module": "TranscendentalNakamaye.Pending.BlowupTowerSplit",
+    "source_sha256": "d62ce96c588343d37eaaa1621f893212245ed24f911c5a079093cfe3dfedeffe",
+    "context": "open Set\n\nuniverse u v\n\nnamespace TranscendentalNakamaye.Pending.BlowupTowerSplit\n\nopen FirstPass FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.MarkedIdeals\n  TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal TranscendentalNakamaye.Pending.ResolutionDriver\nopen TranscendentalNakamaye.Pending.ResolutionInvariantSpec (IsCanonical)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantExt (IsEmptyTower)\n\nnoncomputable section\n\nvariable {n : \u2115} {X : CMfd.{u} n}\n\n",
+    "fragment": "/-- The projection of the tower is that of the head after that of the tail. -/\ntheorem proj_eq_comp {Y : CMfd.{u} n} (T : BlowupTower X Y) (j : \u2115) : T.proj = (head T j).proj \u2218 (tail T j).proj := by\n  conv_lhs => rw [\u2190 head_append_tail T j]\n  exact BlowupTower.proj_append _ _\n",
+    "context_sha256": "6983bbbe5d503448a1566d7eb3998cb10c003c31f672ee1636e802d9eb5d0bb2",
+    "fragment_sha256": "a5d44171c7802df71fd13a4349ce9d1b82ed03e06d2b988a5a944e9201e722cd",
+    "source_interval": [
+      95,
+      98
+    ],
+    "destination_module": "Hironaka.Support.BlowupSplitProjectionExact",
+    "destination_sha256": "8678946c6a7c1d6a0e15c8865d9f344379fd12b9029025f6aba12f70bb5d1850",
+    "actual_original_names": [
+      "TranscendentalNakamaye.Pending.BlowupTowerSplit.proj_eq_comp"
+    ],
+    "caller_module": "Hironaka.Resolution.HironakaSmoothSubmersionOrderedChoiceBaseChange",
+    "caller_before_sha256": "d222880dc1043db5e8e7b1c31c82bd9e1fc08f39fceb724942735bf7f6f3c459",
+    "caller_after_sha256": "2fc7cead0624605aeb115f120208485bea462369cd8e1fc33cacf061d5bffbd1",
+    "whole_original_statement_and_proof_preserved": true,
+    "interval_convention": "One-based inclusive lines, excluding the following blank separator line."
+  },
+  {
+    "source_revision": "d5d387143239a2776b1e55ef529e65229b120448",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermRing.lean",
+    "source_module": "TranscendentalNakamaye.Pending.HolomorphicGermRing",
+    "source_sha256": "96153b860adc2738d9b5211b4bac80fc500f53c4527b3b4ac3d77d40c29cb447",
+    "context": "namespace Hironaka\n\nopen Filter Topology\n\nnoncomputable section\n\nvariable (E : Type*) [NormedAddCommGroup E] [NormedSpace \u2102 E]\n\nnamespace HolGerm\n\nvariable {E}\n",
+    "fragment": "theorem mk_mul' (f g : E \u2192 \u2102) (hf : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 f z)\n    (hg : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 g z) :\n    mk (f * g) (eventually_differentiableAt_mul hf hg) = mk f hf * mk g hg :=\n  rfl\n",
+    "fragment_sha256": "7440d30323c66331ad83f54a3a8301aaf537856e993acdaadd4c872d71f3f635",
+    "source_interval": [
+      193,
+      196
+    ],
+    "destination_module": "Hironaka.Support.HolGermMulExact",
+    "destination_sha256": "5c1ab3f97f4fa0fb0e00e7442c7d648e7d9db9a70de225b78b7cfd8077a42a3c",
+    "actual_original_names": [
+      "TranscendentalNakamaye.Pending.HolGerm.mk_mul'"
+    ],
+    "caller_module": "Hironaka.Resolution.HironakaSharpActualRelativeMemberPrime",
+    "caller_before_sha256": "0d3512ba47ab6a592109f9843df339968ff2f54fa4afc85575535c38fe074f0a",
+    "caller_after_sha256": "1caf6efaeffb0eae90fae255d0230d818182903217354c75321e6beeb61e887a",
+    "whole_original_statement_and_proof_preserved": true,
+    "interval_convention": "One-based inclusive lines, excluding the following blank separator line."
+  },
+  {
+    "source_revision": "d5d387143239a2776b1e55ef529e65229b120448",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/DerivativeIdealAlong.lean",
+    "source_module": "TranscendentalNakamaye.Pending.DerivativeIdealAlong",
+    "source_sha256": "d6690ca3bc2e433962b07f9e5d2a9268031f7c8cdd4b3b2963910a3fc3a4196b",
+    "context": "open Set Filter\nopen scoped Topology Manifold\n\nnamespace TranscendentalNakamaye.Pending.DerivativeIdealAlong\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves DerivativeIdeal\n\nnoncomputable section\n\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n\n",
+    "fragment": "/-- Every vector field is tangent to `N = M` (`\ud835\udcd8_M` consists of the germs vanishing near `x`). -/\ntheorem isTangentField_univ {e : ComplexChart n M} {\u03be : Fin n \u2192 M \u2192 \u2102} {x : M}\n    (hx : x \u2208 e.val.source) (h\u03be : \u2200 m, HolomorphicAt n (\u03be m) x) : IsTangentField univ e \u03be x := by\n  refine \u27e8hx, h\u03be, fun g hg => \u27e8?_, ?_\u27e9\u27e9\n  \u00b7 have hg0 : g =\u1da0[\ud835\udcdd x] fun _ => 0 := hg.2.mono fun p hp => hp (mem_univ p)\n    exact holomorphicAt_fieldDeriv hx h\u03be ((holomorphicAt_const 0).congr hg0.symm)\n  \u00b7 have hg0 : g =\u1da0[\ud835\udcdd x] fun _ => 0 := hg.2.mono fun p hp => hp (mem_univ p)\n    have hd : \u2200 m, chartDeriv e (EuclideanSpace.single m 1) g =\u1da0[\ud835\udcdd x]\n        chartDeriv e (EuclideanSpace.single m 1) (fun _ => (0 : \u2102)) := fun m => chartDeriv_congr hx hg0\n    filter_upwards [eventually_all.2 hd] with p hp _\n    have h0 : \u2200 m : Fin n, chartDeriv e (EuclideanSpace.single m 1) (fun _ => (0 : \u2102)) p = 0 :=\n      fun m => by simp [chartDeriv, Function.comp_def]\n    simp only [fieldDeriv, hp, h0, mul_zero, Finset.sum_const_zero]\n",
+    "context_sha256": "93c97c9f0ed27f3a25734fac3b87d3eae9b8339cfbba0ce3233df196b04d6fcd",
+    "fragment_sha256": "d7730c7cd45815e5263dad8f0a58e2885b86d31d8bb8e72cecbf02e66517f20c",
+    "source_interval": [
+      104,
+      116
+    ],
+    "destination_module": "Hironaka.Support.TangentFieldUnivExact",
+    "destination_sha256": "7391a0e854d3ce6cb4d997959ca2f64b83cbe4cf9060a792fffaf975c8311cd5",
+    "actual_original_names": [
+      "TranscendentalNakamaye.Pending.DerivativeIdealAlong.isTangentField_univ"
+    ],
+    "caller_module": "Hironaka.Resolution.HironakaSmoothSubmersionTangentContact",
+    "caller_before_sha256": "7712e6623dcf9a68260cb89cce09e363326764eea582b9301cea7f999c7dcccb",
+    "caller_after_sha256": "1b3d8ae1d8cef60f4caee8e44186e2529f633d1f5a37665d36d75b8bce7ac0fe",
+    "whole_original_statement_and_proof_preserved": true,
+    "interval_convention": "One-based inclusive lines, excluding the following blank separator line.",
+    "additional_original_unused_variable_context": "variable {N : Set M} {\ud835\udd1e \ud835\udd1f : GermIdeal n M}",
+    "additional_original_context_source_line": 77
+  }
+]

@@ -1,0 +1,141 @@
+\section{Entire coherent ideal quotients under genuine arbitrary-dimensional submersions}
+
+\begin{lemma}[Actual adapted germ representatives and the entire original stalk]
+\label{hir:submersion-germ-colon-adapted-stalk}
+\lean{Hironaka.HironakaSmoothSubmersionGermIdealColon.holomorphic_adapted_iff,Hironaka.HironakaSmoothSubmersionGermIdealColon.adaptedGerm,Hironaka.HironakaSmoothSubmersionGermIdealColon.adaptedGerm_mul,Hironaka.HironakaSmoothSubmersionGermIdealColon.exists_original_adapted_representative,Hironaka.HironakaSmoothSubmersionGermIdealColon.adaptedIdeal,Hironaka.HironakaSmoothSubmersionGermIdealColon.holomorphicAt_of_mem_coherent,Hironaka.HironakaSmoothSubmersionGermIdealColon.mem_adaptedIdeal_iff}
+\uses{trace:actual-manifold-finite-span-adapted-covariance,trace:actual-euclidean-holomorphic-germ-span,oka:coherent-colon}
+\leanok
+For an actual complex manifold $X$, actual point $x$ and genuine centred local
+holomorphic coordinate equivalence $\Phi$, define $\gamma_\Phi(F)$ by the
+literal original function $F\circ e^{-1}\circ\Phi^{-1}$, where $e$ is the
+actual preferred chart. For an original coherent germ ideal $I$ define
+$I_\Phi$ as the ideal span of ALL actual membership germs $\gamma_\Phi(F)$.
+Internally prove that every genuine complex germ has an actual original
+function representative, that $\gamma_\Phi$ preserves multiplication, and
+that $I.mem(x,F)$ is exactly $\gamma_\Phi(F)\in I_\Phi$. No finite generator,
+stalk equivalence or whole ideal membership dictionary is supplied.
+\end{lemma}
+\begin{proof}
+Holomorphy of the actual inverse-chart composite is equivalent to holomorphy
+of $F$ at $x$: use the true preferred chart inverse identities, and then the
+two holomorphic directions and true inverse identities of $\Phi$. For an
+arbitrary germ choose only its actual holomorphic representative $H$ and set
+$F=H\circ\Phi\circ e$. Near zero the actual inverse composite returns $H$,
+since $\Phi^{-1}(0)=e(x)$, its inverse stays in the actual preferred target
+near zero, and both genuine chart inverse identities hold there. This gives
+actual holomorphy and exact germ equality. Multiplication follows from the
+literal product of these original inverse composites.
+Coherence internally selects a genuine finite family $G_i$ generating $I$
+at $x$. The full preferred/adapted finite-span transport and genuine complex
+germ span theorem identify $I.mem(x,F)$ with membership in the actual span
+of $\gamma_\Phi(G_i)$. This span equals the definition using ALL original
+members: each original member belongs to the finite span by that exact
+finite-span theorem, and each chosen original generator really belongs to
+$I$ by the original coherent presentation. These two actual span inclusions
+prove the full dictionary. No coherence model or frame is a caller input.
+\end{proof}
+
+\begin{theorem}[The actual entire stalk of the original coherent quotient]
+\label{hir:submersion-germ-colon-original-stalk-quotient}
+\lean{Hironaka.HironakaSmoothSubmersionGermIdealColon.adaptedIdeal_colon_eq}
+\uses{hir:submersion-germ-colon-adapted-stalk,oka:coherent-colon,ana:invertible-colon}
+\leanok
+For ANY TWO original coherent ideals $I,L$ on $X$, the actual adapted ideal
+of their genuine sheaf quotient equals the ENTIRE ring ideal quotient:
+$(I:L)_\Phi=I_\Phi:L_\Phi$. No inclusion $I\le L$ or invertibility is assumed.
+\end{theorem}
+\begin{proof}
+Oka internally gives coherence of the actual original quotient. For an
+arbitrary actual ring germ use the first node's internally constructed
+original representative $F$. Its membership in the quotient stalk is the
+original definition: $F$ is holomorphic and $GF\in I$ for EVERY original
+$G\in L$. The multiplication and exact original membership dictionaries
+translate these conditions into the ring quotient. Conversely every actual
+ring germ in $L_\Phi$ has an internally produced original representative;
+the exact dictionary puts that representative in the SAME entire original
+$L$. Thus the original universal multiplication condition quantifies over
+ALL actual denominator germs, rather than only prescribed generators.
+Both implications and actual representability prove the whole ideal
+identity. No caller quotient or comparison certificate occurs.
+\end{proof}
+
+\begin{lemma}[Actual submersion chart produces the whole original projection square]
+\label{hir:submersion-germ-colon-actual-projection-square}
+\lean{Hironaka.HironakaSmoothSubmersionGermIdealColon.actualSourceCoordinates,Hironaka.HironakaSmoothSubmersionGermIdealColon.actualSourceCoordinates_zero,Hironaka.HironakaSmoothSubmersionGermIdealColon.actualSourceInverse_projection,Hironaka.HironakaSmoothSubmersionGermIdealColon.adaptedGerm_original_comp_projection}
+\uses{hir:submersion-composition-normalized-target,hir:submersion-nc-full-lifted-coordinates,hir:submersion-germ-colon-adapted-stalk}
+\leanok
+ONLY an original genuine complex submersion $f:Y\to X$ and a point $y$
+internally choose $m=n+t$, actual normalized target coordinates $\Phi$ and
+actual lifted source coordinates $\Psi$. EVERY original holomorphic $F$
+satisfies the exact whole germ identity
+$\gamma_\Psi(F\circ f)=\eta(\gamma_\Phi(F))$, for the actual tangential
+projection pullback $\eta$. No chart, square or stalk-map equality is input.
+\end{lemma}
+\begin{proof}
+The actual submersion's genuine linear complement internally proves $n\le m$
+at the actual point, so choose $t$ with $m=n+t$. Normalize the preferred
+actual target chart by its own centre. The true lifted coordinate producer
+constructs $\Psi$ and its entire first-block dictionary. On the genuine
+source inverse chart near zero, write $z=e_Y^{-1}(\Psi^{-1}(w))$; actual
+inverse identities put $z$ in the true lifted domain and give its source
+coordinates exactly $w$. The dictionary says that the target coordinates
+of $f(z)$ are precisely the first $n$ coordinates of $w$. The target actual
+inverse identity therefore gives
+$f(z)=e_X^{-1}(\Phi^{-1}(\operatorname{pr}(w)))$ on this actual neighbourhood.
+Compose with EVERY original $F$ and use exact germ equality. Holomorphy is
+produced from the genuine original smooth map and both actual charts. This
+includes fibre dimension zero and either ambient dimension zero.
+\end{proof}
+
+\begin{theorem}[The whole actual pulled ideal in the true lifted stalk]
+\label{hir:submersion-germ-colon-whole-pulled-stalk}
+\lean{Hironaka.HironakaSmoothSubmersionGermIdealColon.adaptedIdeal_actual_pullback}
+\uses{hir:submersion-germ-colon-actual-projection-square,hir:submersion-germ-colon-adapted-stalk,trace:actual-finite-germ-ideal-pullback-generation}
+\leanok
+For EVERY original coherent ideal $I$, ONLY the same original $f$ and its
+internally chosen charts give
+$(f^*I)_\Psi=\eta(I_\Phi)R$. This is the ENTIRE actual pulled ideal, with no
+caller pullback equality or finite-generator presentation.
+\end{theorem}
+\begin{proof}
+Original coherence internally chooses actual finite generators $G_i$ at
+$f(y)$. The true finite-generator pullback theorem proves membership in the
+actual pulled ideal exactly by the literal family $G_i\circ f$ at $y$.
+The first node's true finite-span dictionary therefore represents its whole
+source ideal by the actual germs of that family. Each germ is exactly the
+projection pullback of the original target generator by the third node.
+Actual ideal-map span equality identifies this whole span with the extended
+original target ideal. The finite families were internally selected from
+original coherence and their literal composites; no caller family, source
+ideal or ideal-map identity entered the construction.
+\end{proof}
+
+\begin{theorem}[Every actual coherent ideal quotient commutes with genuine smooth pullback]
+\label{hir:submersion-germ-colon-entire-sheaf-equality}
+\lean{Hironaka.HironakaSmoothSubmersionGermIdealColon.pullback_colon_eq_add,Hironaka.HironakaSmoothSubmersionGermIdealColon.pullback_colon_eq}
+\uses{hir:submersion-germ-colon-original-stalk-quotient,hir:submersion-germ-colon-whole-pulled-stalk,hir:submersion-projection-colon-entire-equality,oka:coherent-colon,hir:submersion-germ-colon-adapted-stalk}
+\leanok
+For ANY original genuine arbitrary-dimensional possibly NON-surjective
+submersion $f$ and ANY TWO original coherent ideals $I,L$, internally prove
+$f^*(I:L)=(f^*I:f^*L)$ as the WHOLE actual GermIdeal. There is no original
+ideal inclusion, denominator invertibility, flatness or equality certificate.
+\end{theorem}
+\begin{proof}
+At EACH actual source point internally construct the true charts of node
+three. Oka and genuine coherent pullback internally supply coherence of
+both original and pulled quotients. Nodes two and four identify the source
+stalk of $f^*(I:L)$ with $\eta(I_\Phi:L_\Phi)R$, and that of the source
+quotient with $(\eta(I_\Phi)R:\eta(L_\Phi)R)$. The previously actually proved
+projection quotient theorem equates these ENTIRE actual ideals without
+assuming $I_\Phi\subseteq L_\Phi$. The first node's exact dictionary returns
+this equality to EVERY literal original source function membership. A
+nonholomorphic function belongs to neither coherent ideal; this follows
+from the internally selected actual finite coherent presentations. Pointwise
+extensionality proves the whole GermIdeal equality. Empty source needs no
+false dimension inequality, since the proof is genuinely pointwise.
+This removes the actual algebraic obstruction to arbitrary-carrier restricted
+quotient naturality. The restricted carrier dictionary and complete marked
+transform consumer are separate subsequent producers; general higher
+invariant/canonical driver, noncompact termination and whole G3/G8 remain
+OPEN, as do formal native registration and publication.
+\end{proof}

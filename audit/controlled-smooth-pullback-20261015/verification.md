@@ -1,0 +1,9 @@
+# Whole controlled smooth pullback
+
+`Hironaka.HironakaOriginalUntestedControlledSmoothPullback` proves equality of the whole controlled marked records under genuine smooth pullback. Its hypotheses retain the actual coherent numerator and smooth next strict carrier. Original two-dimensional DOMAIN data, a nonempty actual member and an arbitrary upper TEST produce the required reference geometry internally. The resulting dictionaries cover the entire original reference history and every literal prefix, with both actual cosupport dictionaries.
+
+The separate source through-member initial-record statement retains all four fields. The generic controlled-record statements permit arbitrary ambient dimensions and mark zero; the reference-history corollaries retain their original DOMAIN hypotheses. No statement infers current lower-cosupport membership or identifies an upper TEST with a lower TEST.
+
+The accepted source checkpoint is `d5d387143239a2776b1e55ef529e65229b120448`, published in [upstream PR 54](https://github.com/MingchenXia/archon-nakamaye/pull/54), merge `7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4`. This dependency closure copies 95 whole mathematical modules and their 95 complete blueprint chapters. Every source byte is reproducible from the public merge; original checkpoint identifiers remain in the provenance records.
+
+The [shared verification report](../local-sharp-curves-20261015/verification.md) describes the combined build, complete expression/proof comparison, complete-root axiom audit, 744-module kernel replay, source preservation, blueprint attachment scope and remaining frontiers. Its `final-validation.json` is the publication gate receipt. Independent controlled-export review and source replay are archived in this directory and in the shared audit; support declarations retain complete original statements and proofs.

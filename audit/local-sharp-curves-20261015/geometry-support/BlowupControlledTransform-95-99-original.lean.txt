@@ -1,0 +1,5 @@
+/-- The colon ideal by the unit ideal is the ideal itself, for a coherent ideal. -/
+theorem colon_unitIdeal {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) :
+    colon 𝔞 (unitIdeal n M) = 𝔞 := by
+  have h := colon_mul_eq (isInvertible_unitIdeal (n := n) (M := M)) h𝔞
+  rwa [RestrictLeCalculus.mul_comm', RestrictLeCalculus.mul_unitIdeal h𝔞] at h

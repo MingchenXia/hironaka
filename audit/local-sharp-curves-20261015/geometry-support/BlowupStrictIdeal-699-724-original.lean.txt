@@ -1,0 +1,26 @@
+/-- The geometric strict transform lies in the library's one. -/
+theorem geoStrictTransform_subset_strictTransform (hπ : IsBlowupAlong n C π) (N : Set X) :
+    geoStrictTransform π C N ⊆ strictTransform n π N := by
+  unfold geoStrictTransform strictTransform
+  exact closure_mono fun u hu => ⟨hu.1, fun hE =>
+    hu.2 (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ hE)⟩
+
+/-- **If the centre is nowhere dense in `N`, the geometric strict transform
+`closure (π⁻¹(N \ C))` is the library's `strictTransform n π N = closure (π⁻¹N \ Exc π)`.**
+Off `Exc π` the blowup is open (inverse function theorem), so points of `N \ C` near `π u`
+lift to points near `u`. -/
+theorem geoStrictTransform_eq_strictTransform (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hN : N ⊆ closure (N \ C)) :
+    geoStrictTransform π C N = strictTransform n π N := by
+  refine (geoStrictTransform_subset_strictTransform hπ N).antisymm ?_
+  show closure (π ⁻¹' N \ exceptionalLocus n π) ⊆ _
+  refine closure_minimal (fun u hu => ?_) isClosed_closure
+  obtain ⟨huN, huE⟩ := hu
+  rw [geoStrictTransform, mem_closure_iff_nhds]
+  intro V hV
+  have hmap := StrictTransformComposition.map_nhds_eq_of_not_mem_exceptionalLocus
+    hπ.contMDiff huE
+  have himg : π '' V ∈ 𝓝 (π u) := by
+    rw [← hmap]; exact image_mem_map hV
+  obtain ⟨x, ⟨v, hvV, rfl⟩, hx⟩ := mem_closure_iff_nhds.mp (hN huN) _ himg
+  exact ⟨v, hvV, hx⟩

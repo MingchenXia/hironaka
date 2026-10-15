@@ -1,0 +1,19 @@
+open Set Filter
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.BlowupControlledTransform
+
+open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences
+  GermIdealTotalTransform GermIdealPullbackCalculus IdealWeightPowers InvertibleIdealQuotient
+  RelativePrincipalizationSpan BlowupExceptionalDivisor
+
+noncomputable section
+
+/-! ### Cancellation of an invertible ideal -/
+
+section Cancel
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]

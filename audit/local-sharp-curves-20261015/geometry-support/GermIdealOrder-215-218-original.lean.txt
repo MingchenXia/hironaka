@@ -1,0 +1,4 @@
+/-- A holomorphic multiple keeps the order. -/
+theorem VanishesToOrderOn.mul_left {c : M → ℂ} (hc : HolomorphicAt n c x) {q : ℕ}
+    (hg : VanishesToOrderOn n N x q g) : VanishesToOrderOn n N x q (fun y => c y * g y) := by
+  simpa using (vanishesToOrderOn_zero (N := N) hc).mul hg

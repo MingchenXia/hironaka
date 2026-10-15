@@ -1,0 +1,139 @@
+\section{Genuine composite submersion charts from the two original maps}
+
+\begin{theorem}[Existing pure holomorphic analytic ingredient, recorded explicitly]
+\label{hir:submersion-composition-holomorphic-analytic-ingredient}
+\leanok
+\lean{Hironaka.HolomorphicAnalytic.analyticOnNhd_of_differentiableOn}
+\uses{fpgeom:complex-manifold}
+A complex differentiable map on an actual open subset of a finite-dimensional
+complex normed space, with values in a complex Banach space, is analytic
+at EVERY point of that open set. This is an existing proved pure ingredient;
+its Lean source is unchanged, and this new node records its actual use.
+\end{theorem}
+\begin{proof}
+Fix an actual point $c$ in the actual open domain. Complex differentiability
+gives continuity. Choose $R>0$ so that the whole radius-$R$ ball about $c$
+lies in that domain and the actual map's norm is bounded there by
+$\|f(c)\|+1$. The proved complex Cauchy estimates, applied to the actual
+one-variable restrictions $t\mapsto f(c+ty)$, give continuous symmetric
+multilinear Taylor coefficients and their genuine geometric majorant
+on the radius-$R/e$ ball. For any vector in this smaller ball, choose
+$T=2R/(R+\|y\|)>1$; its radius-$T$ line restriction lies in the original
+ball. The actual one-variable Taylor sum at $t=1$, with the genuine
+iterated-line derivative dictionary, is exactly the multilinear Taylor
+series at $c+y$. The Cauchy bound gives convergence of that SAME power
+series on the entire smaller ball. Thus the original function, not an
+assumed series representative, is analytic at $c$. Since $c$ was any actual
+point, it is analytic on a neighbourhood of every point of the actual
+open domain. This is precisely the existing pure analytic proof consumed
+below; no general smoothness certificate or new Lean interface is inserted.
+\end{proof}
+
+\begin{definition}[Normalized actual target coordinates]
+\label{hir:submersion-composition-normalized-target}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionComposition.centeredCoordinates,Hironaka.HironakaSmoothSubmersionComposition.centeredCoordinates_source,Hironaka.HironakaSmoothSubmersionComposition.centeredCoordinates_zero}
+\uses{fpgeom:complex-manifold}
+At any actual point in a genuine complex manifold, internally construct
+a whole local holomorphic coordinate equivalence in its preferred model
+chart whose source is EXACTLY the preferred chart target and whose actual
+point is sent to zero. No caller coordinate-normalization certificate is supplied.
+\end{definition}
+\begin{proof}
+Let $p$ be the point's actual preferred chart coordinate and $V$ the actual
+preferred chart target, an open set containing $p$. Use $w\mapsto w-p$
+on $V$, with inverse $w\mapsto w+p$ on $(\cdot+p)^{-1}V$. Both maps are
+genuinely holomorphic, each maps its entire domain into the other domain,
+and the two inverse equations follow from actual addition and subtraction.
+The source is literally $V$, and the actual coordinate $p$ maps to zero.
+Every zero-dimensional case uses the same true definitions.
+\end{proof}
+
+\begin{theorem}[The actual holomorphic coordinate equivalence gives genuine maximal-atlas charts]
+\label{hir:submersion-composition-whole-holomorphic-chart}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionComposition.holomorphicChart,Hironaka.HironakaSmoothSubmersionComposition.holomorphicChart_mem_maximalAtlas}
+\uses{hir:submersion-composition-normalized-target,hir:submersion-composition-holomorphic-analytic-ingredient,fpgeom:complex-manifold}
+For a true local holomorphic coordinate equivalence whose source lies in
+the actual preferred chart target, compose its whole partial homeomorphism
+with that preferred chart. This is a genuine chart with source equal to
+the actual coordinate domain, containing the original point; BOTH genuine
+holomorphic directions internally make it a maximal-atlas chart.
+\end{theorem}
+\begin{proof}
+The actual coordinate equivalence is a true open partial homeomorphism.
+Its actual preferred-chart composite has the stated source by the literal
+partial-map composition law. On this entire open source the forward map
+is the coordinate equivalence composed with the genuine preferred chart.
+On the entire target the inverse is the preferred chart inverse composed
+with the coordinate equivalence inverse; the true source inclusion gives
+every required intermediate actual target-domain membership. Both local
+holomorphic maps are complex analytic on their actual open domains by the
+proved holomorphic analytic theorem, hence complex smooth to every order.
+The two actual smooth partial-map conditions give true maximal-atlas
+membership. No caller smooth-chart or atlas certificate is required.
+\end{proof}
+
+\begin{theorem}[Two genuine original submersions produce the actual composite projection chart]
+\label{hir:submersion-composition-actual-point-chart}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionComposition.submersionAt_composition_add,Hironaka.HironakaSmoothSubmersionComposition.isSubmersionAt_composition}
+\uses{hir:submersion-composition-normalized-target,hir:submersion-composition-whole-holomorphic-chart,hir:submersion-nc-full-lifted-coordinates,hir:submersion-monomial-dimension}
+Let $f:Y^{n+r}\to X^n$ and $h:Z^{(n+r)+s}\to Y^{n+r}$ be genuine
+submersions at the actual compatible points. Their composite is a genuine
+submersion there, with actual complement $\mathbf C^r\times\mathbf C^s$.
+For arbitrary three dimensions the same genuine pointwise conclusion is
+internally produced from the two original pointwise inputs; no composite
+submersion or derivative certificate is assumed.
+\end{theorem}
+\begin{proof}
+Internally construct the preceding normalized actual coordinates $\Phi$
+on $X$ at $f(hz)$. Apply the already proved actual lifted-coordinate
+producer to the ORIGINAL $f$ and this SAME $\Phi$. It gives a true local
+holomorphic equivalence $\Psi$ on $Y$, normalized at $hz$, with its actual
+whole source inside the preferred chart target and the ENTIRE dictionary
+that its first $n$ coordinate entries equal $\Phi(fy)$. Apply the SAME
+producer to the ORIGINAL $h$ and this SAME $\Psi$. It gives a true local
+holomorphic equivalence $\Omega$ on $Z$, normalized at $z$, whose first
+$n+r$ entries equal $\Psi(hw)$ on its ENTIRE actual domain, and whose
+domain maps into the actual $\Psi$ domain. The latter maps into the actual
+$\Phi$ domain. Thus on the ENTIRE $\Omega$ chart domain, the first $n$
+entries in the two nested coordinate blocks equal $\Phi(f(hw))$.
+The actual continuous complex linear equivalence first splitting
+$\mathbf C^{(n+r)+s}$ into $\mathbf C^{n+r}\times\mathbf C^s$, then splitting
+the first block and reassociating, identifies the model with
+$\mathbf C^n\times(\mathbf C^r\times\mathbf C^s)$. Its projection is EXACTLY
+those genuine first $n$ entries. Use the preceding genuine maximal-atlas
+charts for $\Omega$ and $\Phi$; their actual domain and inverse dictionaries
+give the entire extended-chart projection equation. This is precisely the
+true submersion-at-point definition. For arbitrary dimensions, the actual
+two original points internally give $n\le m\le\ell$. Write $m=n+r$ and
+$\ell=m+s$ and apply the already produced point chart. No ambient global
+inequality or finite-dimensional derivative-output certificate is supplied.
+\end{proof}
+
+\begin{theorem}[Only the two original submersions produce genuine global composite smoothness]
+\label{hir:submersion-composition-original-global}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionComposition.isSubmersion_composition}
+\uses{hir:submersion-composition-actual-point-chart,hir:submersion-monomial-dimension}
+For arbitrary three complex dimensions and possibly empty or non-surjective
+original maps, TWO genuine global submersions internally imply that their
+composite is a genuine global submersion. The original maps and their genuine
+submersion hypotheses are the ONLY inputs.
+\end{theorem}
+\begin{proof}
+If the original source is nonempty, choose one actual point. The genuine
+original submersions internally force the actual dimension inequalities,
+so fix $m=n+r$ and $\ell=m+s$. At EVERY actual source point apply the preceding
+true two-map coordinate construction with the SAME fixed complement
+$\mathbf C^r\times\mathbf C^s$. This gives genuine global submersion with
+that fixed complement, hence genuine global submersion in the ordinary
+definition. If the actual source is empty, the pointwise requirement with
+fixed zero-dimensional complement is vacuous; no false global dimension
+inequality is asserted. Nothing requires original-map surjectivity.
+This provides the actual missing composite smoothness ingredient for
+ordinary finite Cartesian tower composition; it does not assert a higher
+canonical driver, arbitrary restricted controlled quotient naturality,
+general noncompact termination, whole G3/G8 or native publication.
+\end{proof}

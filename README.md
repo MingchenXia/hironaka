@@ -2,7 +2,7 @@
 
 A Lean 4 / Mathlib formalization of **resolution of singularities in complex-analytic geometry**: principalization of coherent ideal sheaves and embedded resolution of analytic subsets of complex manifolds, by finite sequences of blowups with smooth centres, together with the canonical resolution of marked ideals from which both are derived (in the style of Włodarczyk and Bierstone--Milman).
 
-The library was produced by AI agents (Claude) formalizing mathematics in Lean 4; every file has `Authors: Claude`. It is checked by Lean's kernel; see [Verification](#verification).
+The original library was produced by AI agents (Claude). Subsequent continuation modules are credited in their file headers. The formalization is checked by Lean's kernel; see [Verification](#verification).
 
 ## Setting
 
@@ -109,6 +109,14 @@ The fifth continuation checkpoint proves genuine finite holomorphic Macaulay min
 
 The complete statements and mathematical proofs are in [the extension blueprint](blueprint/extensions.tex). Reusable support modules supply original geometric and ideal-theoretic declarations omitted by the first release's extraction.
 
+## Local sharp curve endpoints and controlled smooth pullback (15 October 2026)
+
+`Hironaka.HironakaSharpActualCurveLocalSharpEndpoints.exists_original_curve_actual_local_sharp_endpoint` starts from an original smooth curve, its indexed SNC boundary and density off that boundary, and any base point. It constructs an actual open neighbourhood and a finite genuine TEST history whose endpoint is transverse to the entire accumulated ordered boundary. The same composite projection is an isomorphism over the whole original local normal-crossings good locus. Compactness of the local cosupport is proved internally using an actual isolating neighbourhood; no compact-window or completed-history certificate is required. Comparing these histories on overlaps and constructing a general noncompact global sharp history remain open.
+
+`Hironaka.HironakaOriginalUntestedControlledSmoothPullback` proves equality of the entire controlled marked records under genuine smooth pullback, including the original reference history and every literal prefix. It preserves actual coherent numerators and smooth strict carriers, and derives the needed reference geometry from original two-dimensional DOMAIN data, a nonempty actual member and an arbitrary upper TEST. It does not assert the still-open lower current-cosupport membership or turn an upper TEST into a lower TEST.
+
+Both completed subgoals and their full dependency closures are synchronized from accepted source checkpoints. The complete blueprint chapters and reproducible source provenance are in [the curve endpoint audit](audit/local-sharp-curves-20261015/verification.md) and [the controlled pullback audit](audit/controlled-smooth-pullback-20261015/verification.md).
+
 ## Known gaps with respect to the standard theorems
 
 This checklist compares the proved statements with classical forms. Items 5–7 record the specific gaps closed by the extensions; the general limitations in the other items remain.
@@ -126,12 +134,11 @@ This checklist compares the proved statements with classical forms. Items 5–7 
    a genuine global canonical sequence with locally finite centre images and compact-uniform stabilization
    when the actual initial cosupport has geometric dimension at most one. General higher-dimensional
    global sequence existence and its terminal analytic space remain open.
-4. **Embedded resolution relative to a boundary: the sharp form is not proved** (`*_boundary*`). The centres lie over
-   `F = W_sing ∪ (W ∩ |E₀|)`, so `f` may blow up points where `W` is smooth and has normal crossings with `E₀`. The sharp
-   form -- no blowup over the locus where `W` is smooth and has normal crossings with `E₀` -- is a known gap, deferred to
-   a later release; it would need the modified invariant of Bierstone--Milman 1997, Section 12. Bierstone--Milman 1997,
-   Theorem 1.6 itself has the same behaviour (their Remark 1.7 (3)). Only `Exc f ⊆ ⋃ (new members) ⊆ f⁻¹ F` is stated, not equality. Hypothesis:
-   no member of `E₀` contains a nonempty relatively open subset of `W`.
+4. **Sharp embedded resolution is proved locally for original smooth curves; the general form remains open.**
+   The new local curve theorem above preserves the whole original NC good locus and makes the entire ordered boundary
+   transverse. The original `*_boundary*` API theorems still permit centres over
+   `F = W_sing ∪ (W ∩ |E₀|)`. General higher-dimensional sharp centres, the complete defect invariant and termination,
+   and compatibility of local histories for a noncompact global sharp resolution remain open.
 5. **Dimension components: identification proved.** The extension theorem
    `Hironaka.HironakaDimensionGlobalComponents.dimensionPart_eq_sUnion_globalComponents` identifies
    `W⁽ᵏ⁾ = closure (Reg_k W)` with the union of the genuine global irreducible components of pure geometric
@@ -247,4 +254,4 @@ Some docstrings refer to statements of the LaTeX write-up from which the formali
 
 ## Authors and license
 
-Authors: Claude. The library was written by AI agents (Claude, by Anthropic) formalizing in Lean 4 with Mathlib. It is released under the Apache License 2.0 (see `LICENSE`).
+The original release was written by AI agents (Claude, by Anthropic). Later continuation and synchronization files credit Hironaka contributors in their headers. The library is released under the Apache License 2.0 (see `LICENSE`).
