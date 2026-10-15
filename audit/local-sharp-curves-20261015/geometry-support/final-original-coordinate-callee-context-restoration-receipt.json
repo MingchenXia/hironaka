@@ -1,0 +1,76 @@
+{
+  "status": "FINAL_EXACT_ORIGINAL_CONTEXT_RESTORATION_PASS",
+  "scope": "One existing public callee original instance context and its entire new consumer module; no mathematical statement/body text changes; all proof Expr and hygiene numbers exact.",
+  "source_frozen": true,
+  "protected_old_scope": "543 byte-identical files plus TWO explicitly authorized original-context restorations (GermIdealOrderValue and this callee module)",
+  "original_source": {
+    "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermReducednessBridge.lean",
+    "source_whole_sha256": "9d579e7531d3bde12508a2d7a9d3935711cf49fbde42fa4ddcf747ae1f388e02",
+    "source_original_complete_interval_inclusive": [
+      35,
+      38
+    ],
+    "source_original_complete_statement_and_proof_sha256": "3d0c3a247d443c4a429815b317c3ee0e9f2e77f3277bfe05af13b469ac5a0b9a"
+  },
+  "actual_old_file": "Hironaka/Analytic/HolomorphicGermReducednessBridge.lean",
+  "actual_old_file_sha256": "1fbeccb16d71a717ce25b01400473a3c0e9ee5d1c9f6ca2e58565b52011d2a7d",
+  "actual_consumer_source_sha256": "1caf6efaeffb0eae90fae255d0230d818182903217354c75321e6beeb61e887a",
+  "exact_administrative_changes": [
+    {
+      "before": "import Hironaka.Analytic.AnalyticJacobianSingularCore\n",
+      "after": "import Mathlib.Analysis.CStarAlgebra.Classes\nimport Hironaka.Analytic.AnalyticJacobianSingularCore\n",
+      "kind": "restore actual original CStar class defining import"
+    },
+    {
+      "before": "/-- A coordinate projection is holomorphic as a germ at the origin. -/\ntheorem eventually_differentiableAt_coordinate (j : Fin n) :",
+      "after": "attribute [local instance 2000] CommCStarAlgebra.toNormedCommRing in\n/-- A coordinate projection is holomorphic as a germ at the origin. -/\ntheorem eventually_differentiableAt_coordinate (j : Fin n) :",
+      "kind": "only actual native outer projection instance priority for this one declaration"
+    }
+  ],
+  "validation": {
+    "direct_log": "39-coordinate-callee-actual-cstar-context-direct.log",
+    "direct_result": "PASS; empty log; no warnings",
+    "native_log": "40-coordinate-callee-actual-cstar-context-native.log",
+    "native_result": "PASS4185jobs; actual callee+coordinate-prime+consumer rebuilt; no warnings",
+    "exact_actual_proof_comparisons": {
+      "coordinate-callee-cstar-comparison.json": {
+        "report_sha256": "551189fbcac9359b6b772de62bac6a647ca3e59bcddba035f5aba762cab68c56",
+        "actual_compared_roots": 1,
+        "module_counts": {
+          "Hironaka.Analytic.HolomorphicGermReducednessBridge": {
+            "constants": 1,
+            "types_exact": 1,
+            "values_exact": 1,
+            "theorems": 1,
+            "theorem_proofs_exact": 1
+          }
+        },
+        "comparator_sha256": "28bc2ba40004520f5c9f483adf5e2cd2e2491c0de7bb0355ff642b176ca4c063"
+      },
+      "prime-cstar-comparison.json": {
+        "report_sha256": "1fc8aea91a3419d535595df0072ca581790483ce3b8ae817534260498582b957",
+        "actual_compared_roots": 16,
+        "module_counts": {
+          "Hironaka.Resolution.HironakaSharpActualRelativeMemberPrime": {
+            "constants": 16,
+            "types_exact": 16,
+            "values_exact": 16,
+            "theorems": 15,
+            "theorem_proofs_exact": 15
+          }
+        },
+        "comparator_sha256": "28bc2ba40004520f5c9f483adf5e2cd2e2491c0de7bb0355ff642b176ca4c063"
+      }
+    }
+  },
+  "failed_candidates_retained": [
+    "logs24-27 and prime-annotation-comparison.json: type annotation solved instance but changed hyg181->213; rejected and annotation removed",
+    "logs30-31: attribute between original doccomment and theorem rejected by parser; moved before complete original doccomment",
+    "logs32-37: merely disabling NormedField selected DenselyNormedField and failed exact TYPE/VALUE; rejected",
+    "log38: outer CStar projection priority without actual defining import unknown; rejected"
+  ],
+  "no_numeric_alpha_defeq_waiver": true,
+  "no_final_whole_library_kernel_pass_claimed": true,
+  "all_Lean_native_serializer_processes_finished": true
+}

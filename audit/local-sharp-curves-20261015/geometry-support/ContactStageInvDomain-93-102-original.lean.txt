@@ -1,0 +1,10 @@
+include hN h𝔞 hd hu hT₀ in
+/-- **`dim N ≤ k` gives `dim (N ∩ V(u))_{T₀} ≤ k - 1` over `U`.** -/
+theorem dimLE_strictAlong_stage {k : ℕ} (hk : DimLE n 𝔪.N k) :
+    DimLE n ((Subtype.val : openPreimage T₀ U → Y) ⁻¹' strictAlong T₀ (𝔪.N ∩ {x | u x = 0})) (k - 1) := by
+  intro y hy
+  obtain ⟨j, hj1, hj⟩ := exists_regularAtDim_strictAlong_stage 𝔪 hN h𝔞 hd U hu T₀ hT₀ y.2 hy
+  obtain ⟨j', hj'k, hj'⟩ := InvDomainTowerAlong.dimLE_geoTransformAlong hN h𝔞 hk T₀ hT₀ y hj1.2.1
+  have hjj := RegularPointDimension.eq_of_regularAtDim hj1 hj'
+  exact ⟨j, by omega, AnalyticSubsetOpens.regularAtDim_preimage_val_iff.mpr hj⟩
+

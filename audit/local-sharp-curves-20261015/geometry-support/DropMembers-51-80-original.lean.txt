@@ -1,0 +1,30 @@
+/-- **Members missing the centre do not matter for normal crossings**: if `C` has only normal crossings with `E'`, every
+member of `E'` is a member of `E` and every member of `E` missing from `E'` is disjoint from `C`, then `C` has only
+normal crossings with `E`. -/
+theorem hasNormalCrossings_of_forall_disjoint {C : Set X} {E E' : List (Set X)}
+    (h : HasNormalCrossings n C E') (hdis : ∀ H ∈ E, H ∉ E' → Disjoint C H) :
+    HasNormalCrossings n C E := by
+  classical
+  intro x hx
+  obtain ⟨S₀, S, ⟨Φ, hΦt, hΦ0, hΦA⟩, hS⟩ := h x hx
+  -- a member of `E` through `x` is a member of `E'`
+  have hmem : ∀ i : Fin E.length, x ∈ E.get i → E.get i ∈ E' := fun i hxi => by
+    by_contra hnot
+    exact Set.disjoint_left.mp (hdis _ (List.get_mem _ _) hnot) hx hxi
+  set idx : Fin E.length → Option (Fin E'.length) := fun i =>
+    if h : E.get i ∈ E' then some (List.mem_iff_get.mp h).choose else none
+  have hidx : ∀ i (hxi : x ∈ E.get i), ∃ j, idx i = some j ∧ E'.get j = E.get i := fun i hxi => by
+    have h := hmem i hxi
+    exact ⟨_, dif_pos h, (List.mem_iff_get.mp h).choose_spec⟩
+  refine ⟨S₀, fun i => (idx i).elim ∅ S, ⟨Φ, hΦt, hΦ0, ?_⟩, fun i hi => ?_⟩
+  · rintro (_ | i) hi y hy hyΦ
+    · exact hΦA none hi hy hyΦ
+    · obtain ⟨j, hj, hjE⟩ := hidx i hi
+      have h1 := hΦA (some j) (by simp only [Option.elim]; rw [hjE]; exact hi) hy hyΦ
+      simp only [Option.elim] at h1 ⊢
+      rw [hjE] at h1
+      rw [hj]
+      exact h1
+  · obtain ⟨j, hj, hjE⟩ := hidx i hi
+    simp only [hj, Option.elim]
+    exact hS j (by rw [hjE]; exact hi)

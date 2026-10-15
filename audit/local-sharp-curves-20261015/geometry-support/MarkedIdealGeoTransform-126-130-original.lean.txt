@@ -1,0 +1,5 @@
+/-- **A set inside the centre has empty strict transform**: this is what removes, e.g., an
+exceptional member `H` blown up again as a codimension-one centre `C = H`. -/
+theorem geoStrictTransform_eq_empty_of_subset {A : Set M} (hA : A ⊆ C) :
+    geoStrictTransform π C A = ∅ := by
+  rw [geoStrictTransform, sdiff_eq_empty.mpr hA, preimage_empty, closure_empty]

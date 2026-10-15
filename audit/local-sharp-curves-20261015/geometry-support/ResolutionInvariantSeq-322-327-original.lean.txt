@@ -1,0 +1,6 @@
+/-- The same, with the resolution a canonical segment in the sense of `hir:centre-function`. -/
+theorem exists_isGeoResolution_isCanonical [CompactSpace X] (R : ResolutionInvariant.{u, v} n k Λ)
+    {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
+  obtain ⟨Y, T, hcan, hres⟩ := exists_isGeoResolution_isCanonicalSegment R h
+  exact ⟨Y, T, isCanonical_of_isCanonicalSegment _ T hcan, hres⟩

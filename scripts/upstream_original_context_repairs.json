@@ -1,0 +1,65 @@
+[
+  {
+    "status": "APPLIED_PARENT_AUTHORIZED_ORIGINAL_UNUSED_CONTEXT_RESTORE",
+    "protected_module": "Hironaka.MarkedIdeal.GermIdealOrderValue",
+    "prior_sha256": "2b774dd10eb5a308cc809690f8810e5bf388c4d8f73268f91bf31cc7d2a88c12",
+    "before": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n",
+    "after": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\nvariable {N : Set M} {x : M} {g : M → ℂ}\nvariable {𝔞 : GermIdeal n M}\n",
+    "source_original_contexts": [
+      "GermIdealOrder.lean:51",
+      "GermIdealOrder.lean:172",
+      "GermIdealOrder.lean:227"
+    ],
+    "statement_and_body_unchanged": true,
+    "declarations_in_affected_old_module": [
+      "Hironaka.GermIdealOrder.order"
+    ],
+    "numeric_hygienic_seed_current": 48,
+    "numeric_hygienic_seed_from_true_original_unused_context_probe": 55,
+    "namespace_module_owner_still_requires_actual_provenance_map": true,
+    "after_sha256": "84606deb62ee552984e8ebed28cbb35d61d21aa665bb9f01b76bcd87737c4f0b",
+    "native_whole_def_and_statement_unchanged": true,
+    "source_owner": "TranscendentalNakamaye.Pending.GermIdealOrder",
+    "actual_standalone_owner": "Hironaka.MarkedIdeal.GermIdealOrderValue",
+    "canonical_owner_mapping_preserves_all_hygiene_numbers": true,
+    "source_revision": "d5d387143239a2776b1e55ef529e65229b120448",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/GermIdealOrder.lean",
+    "source_whole_sha256": "55556898c589b735e46d6ab66664b31e049e4c8a86c5cd9c5fdad391b7e960c0",
+    "complete_unchanged_definition_interval_inclusive": [
+      236,
+      240
+    ],
+    "complete_unchanged_definition_sha256": "7d520997d8657276ad0e8839200b3c0313a8a59a19de990eb4067bfbcba693a9"
+  },
+  {
+    "status": "APPLIED_PARENT_AUTHORIZED_SECOND_ORIGINAL_CONTEXT_RESTORE",
+    "protected_module": "Hironaka.Analytic.HolomorphicGermReducednessBridge",
+    "prior_sha256": "4c53b758c12651e3262d4bd6c647efc250452e18b45e143d0e023c8a218410dc",
+    "after_sha256": "1fbeccb16d71a717ce25b01400473a3c0e9ee5d1c9f6ca2e58565b52011d2a7d",
+    "replacements": [
+      {
+        "before": "import Hironaka.Analytic.AnalyticJacobianSingularCore\n",
+        "after": "import Mathlib.Analysis.CStarAlgebra.Classes\nimport Hironaka.Analytic.AnalyticJacobianSingularCore\n",
+        "role": "Restore availability of the original complex CStar instance definition."
+      },
+      {
+        "before": "/-- A coordinate projection is holomorphic as a germ at the origin. -/\ntheorem eventually_differentiableAt_coordinate (j : Fin n) :",
+        "after": "attribute [local instance 2000] CommCStarAlgebra.toNormedCommRing in\n/-- A coordinate projection is holomorphic as a germ at the origin. -/\ntheorem eventually_differentiableAt_coordinate (j : Fin n) :",
+        "role": "Restore the original declaration-local outer projection priority; original doccomment, statement and proof retained."
+      }
+    ],
+    "statement_and_body_unchanged": true,
+    "declarations_in_affected_old_module": [
+      "Hironaka.HolomorphicGermReducednessBridge.eventually_differentiableAt_coordinate"
+    ],
+    "source_revision": "d5d387143239a2776b1e55ef529e65229b120448",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermReducednessBridge.lean",
+    "source_whole_sha256": "9d579e7531d3bde12508a2d7a9d3935711cf49fbde42fa4ddcf747ae1f388e02",
+    "complete_unchanged_declaration_interval_inclusive": [
+      35,
+      38
+    ],
+    "complete_unchanged_declaration_sha256": "3d0c3a247d443c4a429815b317c3ee0e9f2e77f3277bfe05af13b469ac5a0b9a",
+    "permission": "Parent explicitly authorized actual missing Mathlib CStar class import plus only this declaration-local outer projection priority; original statement/proof/comments untouched."
+  }
+]

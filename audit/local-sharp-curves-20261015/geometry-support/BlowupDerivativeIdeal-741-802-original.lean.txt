@@ -1,0 +1,62 @@
+/-- **Away from the centre**: `y = 1`, and `W = e_x ∘ π` is a local coordinate system. -/
+theorem isDerivationGenerator_of_notMem (hπ : IsBlowupAlong n C π) {z : Y} (hz : π z ∉ C) :
+    IsDerivationGenerator n π C z (π ⁻¹' Cᶜ) (fun _ => 1) := by
+  classical
+  have hπs := hπ.contMDiff
+  have hUo : IsOpen (π ⁻¹' Cᶜ) := hπ.1.1.isOpen_compl.preimage hπs.continuous
+  refine ⟨hUo, hz, fun p _ => holomorphicAt_const 1, fun p hp g => ?_, fun V _ _ hV => ?_,
+    fun f hf e' hx' v => ?_⟩
+  · constructor
+    · intro hg
+      exact isInSpanAt_of_eq_mul rfl hg.1 hg.1 (Eventually.of_forall fun q => by simp)
+    · intro hg
+      obtain ⟨hgh, c, hc, hgc⟩ := isInSpanAt_eq_iff.mp hg
+      have h1 : (vanishingIdeal (n := n) C).mem (π p) (fun _ => 1) :=
+        ⟨holomorphicAt_const 1, by
+          filter_upwards [hπ.1.1.isOpen_compl.mem_nhds hp] with q hq hqC
+          exact absurd hqC hq⟩
+      show IsInSpanAt (n := n) (fun s => ∃ a, (vanishingIdeal (n := n) C).mem (π p) a ∧ s = a ∘ π)
+        p g
+      exact isInSpanAt_of_eq_mul ⟨fun _ => 1, h1, rfl⟩ hgh hc hgc
+  · obtain ⟨p, hp⟩ := hV
+    exact ⟨p, hp, one_ne_zero⟩
+  · -- local coordinates `W = e_x ∘ π` at `z`
+    set ex := complexChartAt (n := n) (π z) with hex
+    set ez := complexChartAt (n := n) z with hez
+    have hzs : z ∈ ez.val.source := mem_complexChartAt_source z
+    have hxs : π z ∈ ex.val.source := mem_complexChartAt_source (π z)
+    set N := coordinateDomain π ez ex with hN
+    have hNo : IsOpen N := coordinateDomain_isOpen hπs ez ex
+    have hzN : ez.val z ∈ N := mem_coordinateDomain hzs hxs
+    have hFd : DifferentiableOn ℂ ((fun p => ex.val (π p)) ∘ ez.val.symm) N := fun ζ hζ =>
+      ((coordinateMap_contDiffAt hπs ez ex hζ).differentiableAt (by simp)).differentiableWithinAt
+    have hinj : Function.Injective
+        (fderiv ℂ ((fun p => ex.val (π p)) ∘ ez.val.symm) (ez.val z)) := by
+      have hbij : Function.Bijective
+          (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π z) := by
+        by_contra h
+        exact hz (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ h)
+      have hd : DifferentiableAt ℂ (coordinateMap π ez ex) (ez.val z) :=
+        (coordinateMap_contDiffAt hπs ez ex hzN).differentiableAt (by simp)
+      refine (injective_iff_map_eq_zero _).mpr fun w hw => ?_
+      have h0 : mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π z w = 0 := by
+        rw [← BlowupFibreDirection.fderiv_coordinateMap_eq_mfderiv hπs z w]
+        change fderiv ℝ (coordinateMap π ez ex) (ez.val z) w = 0
+        rw [hd.fderiv_restrictScalars ℝ]
+        exact hw
+      exact (injective_iff_map_eq_zero
+        (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π z)).mp hbij.1 w h0
+    have hT : ex.val (π z) ∈ ex.val.target := ex.val.map_source hxs
+    obtain ⟨b, hb, hbeq, ρ, hρ, hρeq⟩ := derivationData_of_coordinates hπs ex hxs
+      (idOn ex.val.target ex.val.open_target hT) hNo hzN hFd hinj (Ψ := id) differentiable_id
+      (by
+        filter_upwards [(hπs z).continuousAt.preimage_mem_nhds
+          (ex.val.open_source.mem_nhds hxs)] with p hp
+        exact ⟨hp, ex.val.map_source hp, rfl⟩)
+      (Q := fun _ => 1) (differentiable_const 1)
+      (P := fun i l _ => if i = l then 1 else 0) (fun i l => differentiable_const _)
+      (fun F w _ i => by simp [Finset.sum_ite_eq])
+      (R := fun _ _ => 0) (fun _ => differentiable_const 0)
+      (fun i w => by simp)
+      hf e' hx' v
+    exact ⟨b, hb, hbeq, ρ, hρ, hρeq⟩

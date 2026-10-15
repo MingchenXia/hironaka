@@ -1,0 +1,14 @@
+/-- **The strict transform of a submanifold containing the centre is a submanifold of the same
+dimension**: if `N ⊇ C` is closed and regular of dimension `k_N` at each of its points, every
+point of `N' = closure (π⁻¹ (N \ C))` is a regular point of `N'` of dimension `k_N`. -/
+theorem regularAtDim_geoStrictTransform (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hNc : IsClosed N) {kN : ℕ} (hN : ∀ x ∈ N, RegularAtDim (n := n) N x kN) (hCN : C ⊆ N)
+    {z : Y} (hz : z ∈ geoStrictTransform π C N) :
+    RegularAtDim (n := n) (geoStrictTransform π C N) z kN := by
+  by_cases hzC : π z ∈ C
+  · obtain ⟨kC, hkC⟩ := hπ.1.2 (π z) hzC
+    have hNz := hN (π z) (hCN hzC)
+    exact regularAtDim_geoStrictTransform_of_mem hπ (le_of_regularAtDim_subset hkC hNz hCN) hkC
+      hNz hCN hz
+  · exact regularAtDim_geoStrictTransform_of_notMem hπ hNc hzC
+      (hN (π z) (geoStrictTransform_subset_preimage hπ.contMDiff.continuous hNc hz))

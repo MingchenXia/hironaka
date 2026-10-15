@@ -1,0 +1,467 @@
+{
+  "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+  "fragments": [
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.BlowupStrictIdeal",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupStrictIdeal.lean",
+      "source_module_sha256": "55cac8fd6d2e2a9256e33ce64693990495c2aa9b29678d96028fbc604ca1c590",
+      "first_line": 699,
+      "last_line": 724,
+      "source_fragment_sha256": "fdb47abe0efb05b5402956df7fc45236913af6bc4982228de7cd499ae16fa6e9",
+      "original_constants": [
+        "geoStrictTransform_subset_strictTransform",
+        "geoStrictTransform_eq_strictTransform"
+      ],
+      "entire_fragment_literal_bytes_present_in_support": true
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.MarkedIdealGeoTransform",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/MarkedIdealGeoTransform.lean",
+      "source_module_sha256": "679bcb114ea731ceb1cb5daa4cc411df6032c67efedf84a00d257608013e0661",
+      "first_line": 126,
+      "last_line": 130,
+      "source_fragment_sha256": "8c5cebd164aa4cc184747110491a8f604e06a8bcec4a36c0eebb7d8ab38ec1b1",
+      "original_constants": [
+        "geoStrictTransform_eq_empty_of_subset"
+      ],
+      "entire_fragment_literal_bytes_present_in_support": true
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.ContactStageInvDomain",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ContactStageInvDomain.lean",
+      "source_module_sha256": "b95faabc0776d7e39e3e8a1a86d93b3b87e8a06b92a151e9a8512b4e9ebae26b",
+      "first_line": 93,
+      "last_line": 102,
+      "source_fragment_sha256": "6b3a3fdb48c04f274c72fbbfe9051bcafe0498f2e89889d8039ba66a89e8949a",
+      "original_constants": [
+        "dimLE_strictAlong_stage"
+      ],
+      "entire_fragment_literal_bytes_present_in_support": true
+    }
+  ],
+  "support_modules": [
+    {
+      "module": "Hironaka.Blowup.SharpStrictTransformExact",
+      "path": "Hironaka/Blowup/SharpStrictTransformExact.lean",
+      "sha256": "263c6934c90fc4273273f1d610337205dccfdf4547d9ba23d5c301d49477af4d"
+    },
+    {
+      "module": "Hironaka.Invariant.ContactStageDimensionExact",
+      "path": "Hironaka/Invariant/ContactStageDimensionExact.lean",
+      "sha256": "eaedd881757cb4f53e339b83e2475490ea673d9280d47a275fdccd4dfbd39d4b"
+    },
+    {
+      "module": "Hironaka.Support.SharpGeometryExact",
+      "path": "Hironaka/Support/SharpGeometryExact.lean",
+      "sha256": "1078bfba330ab3e2ed0e0a1f705b37d4313f97e836434b8e9131e330482306eb",
+      "administrative_instance_context": "Only the original mul_left declaration is wrapped by attribute [-instance] instCommCStarAlgebraComplex in. The broad imported CStar instance was absent from the original native germ-order environment; original statements/proof/context fragments remain literal. No global instance deletion or proof/structure rewrite."
+    },
+    {
+      "module": "Hironaka.Support.ColonUnitIdealExact",
+      "path": "Hironaka/Support/ColonUnitIdealExact.lean",
+      "sha256": "95ef6c1ab360a93c2a889b4fafa2f313d15c5eeedfe6c3e44f071b26f45b86b0"
+    }
+  ],
+  "caller_imports_only": [
+    {
+      "path": "Hironaka/Resolution/HironakaSharpSingleBoundaryTraceCentre.lean",
+      "added_import": "Hironaka.Blowup.SharpStrictTransformExact",
+      "before_sha256": "a8b62389079bca1d23dab5deef21fbae2f0e85457d67130b31105cdf50cb651a",
+      "after_sha256": "3730e7fb165836caeb37548617dafb6ee650a820a5de63ee1e1ada3a96440674",
+      "mathematical_body_unchanged": true
+    },
+    {
+      "path": "Hironaka/Invariant/MonomialInvariantEmptyMember.lean",
+      "added_import": "Hironaka.Blowup.SharpStrictTransformExact",
+      "before_sha256": "e8eac9f3b05f2710623a11972afaa89307cb3b05c44fff888ae036971a745451",
+      "after_sha256": "4347c962519f7e405baba40495b66ef33c6e0b18c67312b889f1f38c0a871219",
+      "mathematical_body_unchanged": true
+    },
+    {
+      "path": "Hironaka/Resolution/HironakaStepOneZeroContactPatchValues.lean",
+      "added_import": "Hironaka.Invariant.ContactStageDimensionExact",
+      "before_sha256": "813c3051a937a5de427e9c877249375657d4d8bf9e794024fb4965873c631308",
+      "after_sha256": "79172636c9c27b9ac494fbc82f539f59c3e114d7c4ff22bd6bba8a32144fc1e7",
+      "mathematical_body_unchanged": true
+    },
+    {
+      "path": "Hironaka/Resolution/HironakaSharpOriginalProductTraceOrder.lean",
+      "added_import": "Hironaka.Support.SharpGeometryExact",
+      "before_sha256": "dc42c8593e16b4e1e5c93a1305415335542049b0c7c8a719814f55cf130aeada",
+      "after_sha256": "906500ced20959c92f21efbb91e60136be0b1a04feb9578f1c6bd8e99ed5b3d0"
+    },
+    {
+      "path": "Hironaka/Resolution/HironakaStepOneZeroContactClippedCentres.lean",
+      "added_import": "Hironaka.Support.SharpGeometryExact",
+      "before_sha256": "8d2d60c4bee2ad13a7d819da6d27e40c271f7645cac6d93e13c92c968cbab5ce",
+      "after_sha256": "bd719676a693a163cb5104eb44cfa48d402bc2f17d50602a22bf2364b392114e"
+    },
+    {
+      "path": "Hironaka/Resolution/HironakaSharpActualChronologicalResidualDictionary.lean",
+      "added_import": "Hironaka.Support.ColonUnitIdealExact",
+      "before_sha256": "9eae138228e433975ac813566d90ad8f809c19a1ae32a0c941822225dabcd121",
+      "after_sha256": "fc384fff481fc5617bb72b521e86345d5e4fd219403dce645c01c43cf90cb11b",
+      "mathematical_body_unchanged": true
+    },
+    {
+      "path": "Hironaka/Resolution/HironakaSharpActualControlledRelativeSaturation.lean",
+      "added_import": "Hironaka.Blowup.BlowupDerivativeMaximalOrder",
+      "before_sha256": "3957ca202d054355f174adc3041923ec98ee12143853b2b3063f136e49985cf0",
+      "after_sha256": "f6545e2a347cc271ca015c827ec6e0f50d3b6e57caeb89923631bfcc130b318c",
+      "mathematical_body_unchanged": true,
+      "reuses_preexisting_public_owner": true
+    }
+  ],
+  "old_math_files_modified": [],
+  "constant_owner_mapping": [
+    {
+      "original_module": "TranscendentalNakamaye.Pending.BlowupStrictIdeal",
+      "original_constant": "TranscendentalNakamaye.Pending.BlowupStrictIdeal.geoStrictTransform_subset_strictTransform",
+      "destination_actual_module_owner": "Hironaka.Blowup.SharpStrictTransformExact",
+      "destination_constant": "Hironaka.BlowupStrictIdeal.geoStrictTransform_subset_strictTransform"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.BlowupStrictIdeal",
+      "original_constant": "TranscendentalNakamaye.Pending.BlowupStrictIdeal.geoStrictTransform_eq_strictTransform",
+      "destination_actual_module_owner": "Hironaka.Blowup.SharpStrictTransformExact",
+      "destination_constant": "Hironaka.BlowupStrictIdeal.geoStrictTransform_eq_strictTransform"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.MarkedIdealGeoTransform",
+      "original_constant": "TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoStrictTransform_eq_empty_of_subset",
+      "destination_actual_module_owner": "Hironaka.Blowup.SharpStrictTransformExact",
+      "destination_constant": "Hironaka.MarkedIdeals.MarkedIdeal.geoStrictTransform_eq_empty_of_subset"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.ContactStageInvDomain",
+      "original_constant": "TranscendentalNakamaye.Pending.ContactStageInvDomain.dimLE_strictAlong_stage",
+      "destination_actual_module_owner": "Hironaka.Invariant.ContactStageDimensionExact",
+      "destination_constant": "Hironaka.ContactStageInvDomain.dimLE_strictAlong_stage"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.DropMembers",
+      "original_constant": "TranscendentalNakamaye.Pending.DropMembers.hasNormalCrossings_of_forall_disjoint",
+      "destination_actual_module_owner": "Hironaka.Support.SharpGeometryExact",
+      "destination_constant": "Hironaka.DropMembers.hasNormalCrossings_of_forall_disjoint"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.GermIdealOrder",
+      "original_constant": "TranscendentalNakamaye.Pending.GermIdealOrder.VanishesToOrderOn.mul_left",
+      "destination_actual_module_owner": "Hironaka.Support.SharpGeometryExact",
+      "destination_constant": "Hironaka.GermIdealOrder.VanishesToOrderOn.mul_left"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.BlowupStrictSubmanifold",
+      "original_constant": "TranscendentalNakamaye.Pending.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform",
+      "destination_actual_module_owner": "Hironaka.Support.SharpGeometryExact",
+      "destination_constant": "Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.ResolutionInvariantOrder",
+      "original_constant": "TranscendentalNakamaye.Pending.ResolutionInvariantOrder.IsInvUSCOn.isClosed_superlevel",
+      "destination_actual_module_owner": "Hironaka.Support.SharpGeometryExact",
+      "destination_constant": "Hironaka.ResolutionInvariantOrder.IsInvUSCOn.isClosed_superlevel"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.ResolutionInvariantOrder",
+      "original_constant": "TranscendentalNakamaye.Pending.ResolutionInvariantOrder.IsInvUSCOn.isClosed_maxLocus",
+      "destination_actual_module_owner": "Hironaka.Support.SharpGeometryExact",
+      "destination_constant": "Hironaka.ResolutionInvariantOrder.IsInvUSCOn.isClosed_maxLocus"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.ResolutionInvariantSeq",
+      "original_constant": "TranscendentalNakamaye.Pending.ResolutionInvariantSeq.exists_isGeoResolution_isCanonical",
+      "destination_actual_module_owner": "Hironaka.Support.SharpGeometryExact",
+      "destination_constant": "Hironaka.ResolutionInvariantSeq.exists_isGeoResolution_isCanonical"
+    },
+    {
+      "original_module": "TranscendentalNakamaye.Pending.BlowupControlledTransform",
+      "original_constant": "TranscendentalNakamaye.Pending.BlowupControlledTransform.colon_unitIdeal",
+      "destination_actual_module_owner": "Hironaka.Support.ColonUnitIdealExact",
+      "destination_constant": "Hironaka.BlowupControlledTransform.colon_unitIdeal"
+    }
+  ],
+  "second_layer_complete_source_fragments": [
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.DropMembers",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/DropMembers.lean",
+      "source_module_sha256": "495077710e3d96ac76248483ad94d075fdbdfac46ffd7d80d8322bb26be3af78",
+      "fragments": [
+        {
+          "first_line": 33,
+          "last_line": 49,
+          "source_fragment_sha256": "213aea57329653b66eab98a040ee697edf4cb58eb89af5f2510ca7bb20db06ff",
+          "canonical_fragment_sha256": "c13e9d1d0e2f37be10829adcab59e9115770df8bc868ab8e38f6c30b4c2e4bae"
+        },
+        {
+          "first_line": 51,
+          "last_line": 80,
+          "source_fragment_sha256": "d7724f5f955091a4f918b2b911496133e011e2c2e28611faa762c42d65ab89e8",
+          "canonical_fragment_sha256": "d7724f5f955091a4f918b2b911496133e011e2c2e28611faa762c42d65ab89e8"
+        }
+      ]
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.GermIdealOrder",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/GermIdealOrder.lean",
+      "source_module_sha256": "55556898c589b735e46d6ab66664b31e049e4c8a86c5cd9c5fdad391b7e960c0",
+      "fragments": [
+        {
+          "first_line": 41,
+          "last_line": 51,
+          "source_fragment_sha256": "c4b01cdf7d7f3119b25c827c63ff33cc268127ec2df73fd043a48098bf5d8968",
+          "canonical_fragment_sha256": "e5019055044acda3d0b81b2849dafa5f0d50c345299638328fe89bc42cd91506"
+        },
+        {
+          "first_line": 172,
+          "last_line": 172,
+          "source_fragment_sha256": "cbf8dfe273de25a3d5f8bdc6b28c45ed14b99cdb4312d0758c4f31ad46430154",
+          "canonical_fragment_sha256": "cbf8dfe273de25a3d5f8bdc6b28c45ed14b99cdb4312d0758c4f31ad46430154"
+        },
+        {
+          "first_line": 215,
+          "last_line": 218,
+          "source_fragment_sha256": "bfb06c3e9bc1b8a5e8ea1f15bcdff5d8b9666cab1ea7ed8558439d7531a1a45b",
+          "canonical_fragment_sha256": "bfb06c3e9bc1b8a5e8ea1f15bcdff5d8b9666cab1ea7ed8558439d7531a1a45b"
+        }
+      ]
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.BlowupStrictSubmanifold",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupStrictSubmanifold.lean",
+      "source_module_sha256": "9a9066b3587e86504e713605615b177402b1eb170d71f6a0c1031e184aafd320",
+      "fragments": [
+        {
+          "first_line": 41,
+          "last_line": 54,
+          "source_fragment_sha256": "e19b627575c03d5be93792903b651e1cfcc6fdd3a6f1c3696b838121c77c1083",
+          "canonical_fragment_sha256": "fd83e47cb3a1f03f4a5a1f34df9b09fc94f351a783854703056f9a1def38221e"
+        },
+        {
+          "first_line": 227,
+          "last_line": 231,
+          "source_fragment_sha256": "606e3bec7c07df0ed5f4de6334aba9232b19c8ba11b660180f3be60ffb3a2379",
+          "canonical_fragment_sha256": "606e3bec7c07df0ed5f4de6334aba9232b19c8ba11b660180f3be60ffb3a2379"
+        },
+        {
+          "first_line": 446,
+          "last_line": 459,
+          "source_fragment_sha256": "98024ea1c444e08d71faa709c2f1cb420ca9d510cf5e955968361b3cd666a717",
+          "canonical_fragment_sha256": "98024ea1c444e08d71faa709c2f1cb420ca9d510cf5e955968361b3cd666a717"
+        }
+      ]
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.ResolutionInvariantOrder",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ResolutionInvariantOrder.lean",
+      "source_module_sha256": "4bf10a153d43acb9f3fdb9e100cd93cd21057570f3d2fb5fb8ec26281df82339",
+      "fragments": [
+        {
+          "first_line": 41,
+          "last_line": 48,
+          "source_fragment_sha256": "d32fd809cc05baafdd61c2187e105d47be18957507ce9d03a03511cc46f50c92",
+          "canonical_fragment_sha256": "b3c81af9a8c8ee462819eec821101dcf2640b8079f42883847312ed12686705e"
+        },
+        {
+          "first_line": 55,
+          "last_line": 55,
+          "source_fragment_sha256": "f777904d2eb7f59cd25a7134d342438cf3893f489350686031eb44467d62c69a",
+          "canonical_fragment_sha256": "f777904d2eb7f59cd25a7134d342438cf3893f489350686031eb44467d62c69a"
+        },
+        {
+          "first_line": 81,
+          "last_line": 99,
+          "source_fragment_sha256": "ef13eae47ea7925b43c9bee214f8f17fa5d4c8a25f1e568d20aa652a104a912d",
+          "canonical_fragment_sha256": "ef13eae47ea7925b43c9bee214f8f17fa5d4c8a25f1e568d20aa652a104a912d"
+        }
+      ]
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.ResolutionInvariantSeq",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/ResolutionInvariantSeq.lean",
+      "source_module_sha256": "3e7b15a7bf0e9209bc0e659f167c1d54c7e6c7434dfba58c6bf918fae2d171dd",
+      "fragments": [
+        {
+          "first_line": 47,
+          "last_line": 68,
+          "source_fragment_sha256": "5e9d113a8e40af4e328124f689d1d5f98e29f088c55a67ba0b7ba2b404be75b3",
+          "canonical_fragment_sha256": "fdaafdd4fac2fc95c4fd8f9743f200ca61af7efb726c5f28b260df045573c679"
+        },
+        {
+          "first_line": 225,
+          "last_line": 227,
+          "source_fragment_sha256": "449dfd5024878a0747e5d52f4f71e3366e7f0bb5feadc4c636c23f120886c425",
+          "canonical_fragment_sha256": "449dfd5024878a0747e5d52f4f71e3366e7f0bb5feadc4c636c23f120886c425"
+        },
+        {
+          "first_line": 298,
+          "last_line": 298,
+          "source_fragment_sha256": "5eb598fb6818c7037b2e60058a63b15ab96d1c5562b7f5c291885ecfc886441e",
+          "canonical_fragment_sha256": "5eb598fb6818c7037b2e60058a63b15ab96d1c5562b7f5c291885ecfc886441e"
+        },
+        {
+          "first_line": 322,
+          "last_line": 327,
+          "source_fragment_sha256": "0b33a78176b82f1a95b71cc0d28cd0a49e34efcbe3f3f0f63a2c8074c5b176d5",
+          "canonical_fragment_sha256": "0b33a78176b82f1a95b71cc0d28cd0a49e34efcbe3f3f0f63a2c8074c5b176d5"
+        }
+      ]
+    },
+    {
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_module": "TranscendentalNakamaye.Pending.BlowupControlledTransform",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupControlledTransform.lean",
+      "source_module_sha256": "efff4c2d7e5a8822503029cbcac2a794fead3e93f7dc050185bfda987aa4ef7a",
+      "fragments": [
+        {
+          "first_line": 44,
+          "last_line": 62,
+          "source_fragment_sha256": "703ed693551591410f858f3d6a44c9119a617c68812b62f59f45626e5576b660",
+          "canonical_fragment_sha256": "661b3f8aafb234078fadc0a6125487c0da0c88effc9de69fef9f1e9b4ab52c44"
+        },
+        {
+          "first_line": 95,
+          "last_line": 99,
+          "source_fragment_sha256": "7d9c8c5597a72bb576566ba621f8a20e69dbcc1617880639170f1523fd33d615",
+          "canonical_fragment_sha256": "7d9c8c5597a72bb576566ba621f8a20e69dbcc1617880639170f1523fd33d615"
+        }
+      ]
+    }
+  ],
+  "validation": [
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/01-strict-direct.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/02-contact-direct.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/03-support-native.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/04-contact-direct.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/05-support-native.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/06-trace-caller.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/07-empty-caller.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/08-contact-caller.json",
+      "exit_code": null,
+      "seconds": null
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/09-frontier-direct.json",
+      "exit_code": 0,
+      "seconds": 3.7321329830010654
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/10-frontier-native.json",
+      "exit_code": 0,
+      "seconds": 5.354506260991911
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/11-product-order-caller.json",
+      "exit_code": 0,
+      "seconds": 3.82164562199614
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/12-clipped-centres-caller.json",
+      "exit_code": 0,
+      "seconds": 4.974160982994363
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/14-colon-unit-direct.json",
+      "exit_code": 0,
+      "seconds": 3.5017376199975843
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/15-colon-unit-native.json",
+      "exit_code": 0,
+      "seconds": 4.304934227999183
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/16-colon-caller.json",
+      "exit_code": 0,
+      "seconds": 4.037100675996044
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/17-exact-instance-direct.json",
+      "exit_code": 0,
+      "seconds": 3.5489831949962536
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/18-exact-instance-native.json",
+      "exit_code": 0,
+      "seconds": 5.122684850997757
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/19-original-instance-scope-direct.json",
+      "exit_code": 0,
+      "seconds": 5.225894038987462
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/20-original-instance-scope-native.json",
+      "exit_code": 0,
+      "seconds": 5.581432941995445
+    },
+    {
+      "evidence": "audit/local-sharp-curves-20261015/geometry-support/21-derivation-owner-caller.json",
+      "exit_code": 0,
+      "seconds": 3.722249832993839
+    }
+  ],
+  "strict_expression_status": "Root fragment2-module-origin-comparison.json EXACT_ALL_FULL_EXPR_DAG_MATCH for29actualroots; final scoped CStar exclusion only on original mul_left. Later whole-standalone/all-root acceptance remains root-owned.",
+  "reused_preexisting_constants": [
+    {
+      "original_module": "TranscendentalNakamaye.Pending.BlowupDerivativeIdeal",
+      "original_constant": "TranscendentalNakamaye.Pending.BlowupDerivativeIdeal.isDerivationGenerator_of_notMem",
+      "destination_actual_module_owner": "Hironaka.Blowup.BlowupDerivativeMaximalOrder",
+      "destination_constant": "Hironaka.BlowupDerivativeIdeal.isDerivationGenerator_of_notMem",
+      "path": "Hironaka/Blowup/BlowupDerivativeMaximalOrder.lean",
+      "existing_source_sha256": "0185fb50cfa83911c32a5dff5445aedd294d1eff9f1eecd21c598e146d91f302",
+      "original_complete_lemma_lines": [
+        741,
+        802
+      ],
+      "source_revision": "6968ee2596d43d4a5c965a9b0cadad66ec0fc703",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupDerivativeIdeal.lean",
+      "source_module_sha256": "b5a490e4d9387e8bdb22126f0f1dcd975a7e7f9aeff2542979490e9c98c86aa0",
+      "source_complete_lemma_sha256": "3fcf601157bdb50df1d44d10d61182c45c8c77f8daaa292c527ec9709ab164b6",
+      "destination_complete_lemma_lines": [
+        250,
+        311
+      ],
+      "destination_complete_lemma_sha256": "3fcf601157bdb50df1d44d10d61182c45c8c77f8daaa292c527ec9709ab164b6",
+      "complete_original_lemma_literal_in_existing_owner": true
+    }
+  ],
+  "independent_peer_status": "G2 final actual Sharp1078 scoped single-declaration exclusion, Colon95ef complete context/proof and existing derivation owner/caller exact-body review PASS; common support-independent-review-g2.md and associated JSON guards."
+}

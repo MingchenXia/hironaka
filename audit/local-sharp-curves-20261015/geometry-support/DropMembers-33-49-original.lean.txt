@@ -1,0 +1,17 @@
+open Set Filter
+open scoped Topology Manifold
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.DropMembers
+
+open FirstPass FirstPass.BlowupSequences NormalCrossings BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  BlowupStrictSubmanifold NormalCrossingsComparison CoefficientIdealRestriction HomogenizedGlueingTower
+
+noncomputable section
+
+/-! ### Normal crossings and members missing the centre -/
+
+section NC
+
+variable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]

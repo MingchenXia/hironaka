@@ -19,6 +19,13 @@ sys.path.insert(0,str(Path(__file__).parent))
 import upstream_namespace_map as names
 typography_file=Path(__file__).parent/'upstream_blueprint_typography.json'
 typography=json.loads(typography_file.read_text()) if typography_file.exists() else {}
+imports_file=Path(__file__).parent/'upstream_additional_imports.json'
+additional_imports=json.loads(imports_file.read_text()) if imports_file.exists() else {}
+from upstream_blueprint_scope import annotate as annotate_blueprint_scope
+external_bindings=json.loads((Path(__file__).parent/'upstream_blueprint_external_bindings.json').read_text())
+external_unbound=json.loads((Path(__file__).parent/'upstream_blueprint_unbound_bindings.json').read_text())
+contexts_file=Path(__file__).parent/'upstream_elaboration_contexts.json'
+elaboration_contexts=json.loads(contexts_file.read_text()) if contexts_file.exists() else {}
 names.set_api_modules([f'TranscendentalNakamaye.Pending.HironakaAPI{s}' for s in ['', '2','3','4']])
 git=['git',f'--git-dir={a.source_root}/.archon-horizon/vcs/workspace.git',f'--work-tree={a.source_root}']
 def show(path):return subprocess.check_output(git+['show',f'{a.checkpoint}:{path}'],cwd=a.source_root).decode()
@@ -48,22 +55,32 @@ header='/-\nCopyright (c) 2026 Hironaka contributors. All rights reserved.\nRele
 a.audit.mkdir(parents=True,exist_ok=True)
 records=[]
 for m,source in ordered:
- lines=[]
+ lines=[]; in_open=False
  for line in source.splitlines(keepends=True):
   match=re.fullmatch(r'import (TranscendentalNakamaye\.[\w.]+)\s*',line)
   if match:lines.append('import '+names.new_mod(match.group(1))+'\n');continue
   line=flat_qual.sub('Hironaka.',names.rename_text_names(line))
   if re.match(r'^\s*(namespace|end|section)\b',line):line=re.sub(r'(?<![\w.])(FirstPass|Pending)\.', '',line)
   else:line=re.sub(r'(?<![\w.])(FirstPass|Pending)\.', 'Hironaka.',line)
-  if re.match(r'^\s*open\b',line):
+  if re.match(r'^\S',line) or re.match(r'^\s*open\b',line):
+   in_open=bool(re.match(r'^\s*open\b',line))
+  if in_open:
    line=' '.join(t for t in line.split(' ') if t.strip() not in ('FirstPass','Pending',*flat))
    if re.fullmatch(r'\s*open\s*',line):line='\n'
   lines.append(line)
  newm=names.new_mod(m);p=dest/(newm.replace('.','/')+'.lean')
  output=header+''.join(lines)
+ initial_sha=hashlib.sha256(output.encode()).hexdigest()
+ for adjustment in elaboration_contexts.get(newm,[]):
+  assert output.count(adjustment["before"])==1,(m,adjustment)
+  output=output.replace(adjustment["before"],adjustment["after"])
+ for extra in additional_imports.get(newm,[]):
+  assert (dest/(extra.replace('.','/')+'.lean')).is_file(),extra
+  first=re.search(r'^import ',output,re.M);assert first is not None
+  output=output[:first.start()]+'import '+extra+'\n'+output[first.start():]
  if p.exists():assert m in previously_owned and p.read_text()==output,('Refusing to replace existing source',p)
  else:p.parent.mkdir(parents=True,exist_ok=True);p.write_text(output)
- records.append(dict(source_revision=a.checkpoint,source_module=m,source_path='TranscendentalNakamaye/'+m.replace('.','/')+'.lean',source_sha256=hashlib.sha256(source.encode()).hexdigest(),destination_module=newm,destination_sha256=hashlib.sha256(output.encode()).hexdigest()))
+ records.append(dict(source_revision=a.checkpoint,source_module=m,source_path='TranscendentalNakamaye/'+m.replace('.','/')+'.lean',source_sha256=hashlib.sha256(source.encode()).hexdigest(),destination_module=newm,initial_synchronized_destination_sha256=initial_sha,additional_pure_support_imports=additional_imports.get(newm,[]),administrative_elaboration_contexts=elaboration_contexts.get(newm,[]),destination_sha256=hashlib.sha256(output.encode()).hexdigest()))
 rootfile=dest/'Hironaka.lean';content=rootfile.read_text()
 for m in a.roots:
  line='import '+names.new_mod(m)
@@ -95,10 +112,11 @@ for f in bpfiles:
  for adjustment in typography.get(p.name,[]):
   assert out.count(adjustment['before'])==1,(f,adjustment)
   out=out.replace(adjustment['before'],adjustment['after'])
+ out=annotate_blueprint_scope(out,external_bindings,external_unbound)
  if p.exists():
   assert f in prior_bps and p.read_text()==out and prior_bps[f]['source_sha256']==hashlib.sha256(src.encode()).hexdigest(),('Refusing to replace existing blueprint',p)
  else:p.write_text(out)
- bps.append(dict(source_path=f,source_sha256=hashlib.sha256(src.encode()).hexdigest(),destination_path=str(p.relative_to(dest)),destination_sha256=hashlib.sha256(out.encode()).hexdigest(),nodes=len(re.findall(r'\\label\{',src)),proofs=src.count('\\begin{proof}'),bindings=bindings))
+ bps.append(dict(source_path=f,source_sha256=hashlib.sha256(src.encode()).hexdigest(),destination_path=str(p.relative_to(dest)),destination_sha256=hashlib.sha256(out.encode()).hexdigest(),nodes=len(re.findall(r'\\label\{',src)),proofs=src.count('\\begin{proof}'),bindings=bindings,local_bindings=[b.strip() for group in re.findall(r'\\lean\{([^}]+)\}',out) for b in group.split(',')],unbound_upstream_bindings=[b.strip() for group in re.findall(r'\\upstreamunbound\{([^}]+)\}',out) for b in group.split(',')],upstream_bindings=[b.strip() for group in re.findall(r'\\upstreamlean\{([^}]+)\}',out) for b in group.split(',')]))
 content=(dest/'blueprint/extensions.tex').read_text();needle='\\begin{thebibliography}{99}';assert content.count(needle)==1
 lines=['\\input{'+Path(b['destination_path']).stem+'}' for b in bps]
 content=content.replace(needle,''.join(line+'\n' for line in lines if line not in content.splitlines())+needle)

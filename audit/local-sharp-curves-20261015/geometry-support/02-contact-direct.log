@@ -1,0 +1,26 @@
+Hironaka/Invariant/ContactStageDimensionExact.lean:22:30: error: ambiguous identifier `strictAlong`, possible interpretations: [HomogenizedGlueingTower.strictAlong,
+ HomogenizedGlueingTower.strictAlong]
+Hironaka/Invariant/ContactStageDimensionExact.lean:23:30: error: ambiguous identifier `DimLE`, possible interpretations: [ResolutionInvariantSpec.DimLE, ResolutionInvariantSpec.DimLE]
+Hironaka/Invariant/ContactStageDimensionExact.lean:33:46: error(lean.unknownIdentifier): Unknown identifier `DimLE`
+
+Note: It is not possible to treat `DimLE` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Hironaka/Invariant/ContactStageDimensionExact.lean:34:4: error(lean.unknownIdentifier): Unknown identifier `DimLE`
+
+Note: It is not possible to treat `DimLE` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+Hironaka/Invariant/ContactStageDimensionExact.lean:35:8: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+n : ℕ
+X : CMfd n
+𝔪 : MarkedIdeal n X.carrier
+hN : IsClosedSubmanifold n 𝔪.N
+h𝔞 : 𝔪.ideal.IsCoherent
+hd : 1 ≤ 𝔪.d
+U : Opens X.carrier
+u : X.carrier → ℂ
+hu : IsTangentDirectionAlong 𝔪.N 𝔪.ideal 𝔪.d (↑U) u
+Y : CMfd n
+T₀ : BlowupTower X Y
+hT₀ : 𝔪.IsGeoTestTower T₀
+k : ℕ
+hk : sorry
+⊢ sorry
