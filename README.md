@@ -4,6 +4,25 @@ A Lean 4 / Mathlib formalization of **resolution of singularities in complex-ana
 
 The original library was produced by AI agents (Claude). Subsequent continuation modules are credited in their file headers. The formalization is checked by Lean's kernel; see [Verification](#verification).
 
+## Current status — 15 October 2026
+
+The latest verified mathematical checkpoint is [PR #1](https://github.com/MingchenXia/hironaka/pull/1), merge `4c1a7330`. It contains **743 mathematical modules**, plus the `Hironaka` import root. All **744 local modules** passed kernel replay; all **12,366 actual compiled library declarations**, including private and generated declarations, depend only on the three standard axioms. The [verification receipt](audit/local-sharp-curves-20261015/final-validation.json) records the exact source and compiled-artifact fingerprints.
+
+The latest completed subgoals construct local sharp endpoints for original smooth curves and identify whole controlled marked records under genuine smooth pullback, retaining the complete reference history and every literal prefix. Their precise hypotheses and remaining boundaries are described [below](#local-sharp-curve-endpoints-and-controlled-smooth-pullback-15-october-2026).
+
+**The full strengthening programme remains in progress.** The following six directions are open; module and declaration counts are not a completion percentage.
+
+| Direction | Remaining source-facing goal |
+|---|---|
+| G1 — categories | Resolution for abstract analytic spaces and the characteristic-zero algebraic setting, beyond the present complex-manifold setting. |
+| G2 — higher invariants | General higher-dimensional original invariants, full-history compatibility and descent, including actual current lower-cosupport membership for retained positive member branches. |
+| G3 — noncompact global construction | Produce actual global centres, exhaustion scheduling and compact-uniform stabilization, then identify and glue the terminal analytic space in general dimension. |
+| G4 — sharp resolution | Construct the complete defect invariant and prove its decrease and termination in general dimension; compare the actual local curve histories on overlaps. |
+| G8 — Hilbert–Samuel transformation | General permissible-centre vertex compatibility, transformed presentations and stability, Bennett inequalities, and the full analytic/formal strict-transform bridge. |
+| G9 — general NC input | Connect local branches and self-intersections of general normal-crossings input to the canonical driver and additional-ideal compatibility. |
+
+The current proof fronts are actual controlled restriction to smaller strict carriers, actual curve-defect restriction and overlap comparisons, and general Hilbert–Samuel transformation. Research plans are not counted as completed Lean proofs. The detailed [known gaps](#known-gaps-with-respect-to-the-standard-theorems) distinguish the original API, completed special cases and the remaining general statements.
+
 ## Setting
 
 All statements are about complex manifolds of dimension `n`, given unbundled:
@@ -12,7 +31,7 @@ All statements are about complex manifolds of dimension `n`, given unbundled:
 {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
 ```
 
-where `ComplexModel n = EuclideanSpace ℂ (Fin n)` and `IsComplexManifold n X` asks for a Hausdorff, second countable topological space with a holomorphic atlas (Mathlib's `IsManifold 𝓘(ℂ, ℂⁿ) ∞`). Everything is complex-analytic. Global finite results need **compactness**: either `X` is compact, or the relevant set (`Z(𝔞)`, `V`, `W`) is compact; otherwise the results hold over open sets contained in a compact set, or over a **relatively compact** neighbourhood of any compact set.
+where `ComplexModel n = EuclideanSpace ℂ (Fin n)` and `IsComplexManifold n X` asks for a Hausdorff, second countable topological space with a holomorphic atlas (Mathlib's `IsManifold 𝓘(ℂ, ℂⁿ) ∞`). Everything is complex-analytic. The original global finite-sequence existence theorems assume **compactness**: either `X` is compact, or the relevant set (`Z(𝔞)`, `V`, `W`) is compact; otherwise the results hold over open sets contained in a compact set, or over a **relatively compact** neighbourhood of any compact set.
 
 Vocabulary (all in this library): `GermIdeal n X` is an ideal sheaf of holomorphic germs, with `IsCoherent`, `zeroLocus` (`Z(𝔞)`), `pullback`; `EffectiveDivisor` is an invertible ideal sheaf `𝒪(-D)` with its support; `ClosedIrreducibleAnalyticSubvariety` and `IsComplexAnalyticSubset` are analytic subsets; `Hironaka.singularLocus V = V \ V_reg` (`V_sing`), and `W_sing = W \ regularLocus W d`; `IsSNCDivisor n E` says that the closed members of the list `E` have simple normal crossings (at every point the members through it are distinct coordinate hyperplanes of one chart); an *admissible blowup sequence* of `(X, E₀)` over `F` (`HironakaAdmissibleSequence.IsAdmissibleBlowupSequence n X E₀ F X' f E`) is a finite composition `f : X' → X` of blowups with smooth centres, each centre having only normal crossings with the divisor accumulated so far and lying over `F`; `E` starts with the strict transforms of the members of `E₀`, then has one member per blowup. `exceptionalLocus` (`Exc f`), `strictTransform` and `IsIsomorphismOver` have their usual meaning.
 
@@ -169,11 +188,13 @@ This checklist compares the proved statements with classical forms. Items 5–7 
 You need [elan](https://github.com/leanprover/elan); the toolchain is pinned in `lean-toolchain` (`leanprover/lean4:v4.33.1`) and Mathlib is pinned to commit `0df444a360eaa60ab8c11dca51a86af692955474` (tag `v4.33.1`) in `lakefile.toml` and `lake-manifest.json`.
 
 ```sh
+export LEAN_NUM_THREADS=2 # match the validated build and CI thread budget
 lake exe cache get      # download the compiled Mathlib
-lake build              # build the library
+lake build --wfail      # build the library; fail on warnings
 lake test               # print and check the axioms (scripts/CheckAxioms.lean)
 lake env lean scripts/CheckExtensions.lean # original extension audit
 lake env lean scripts/CheckContinuations.lean # audit continuation and support constants
+lake env lean audit/local-sharp-curves-20261015/CheckAllCompiledRoots.lean # all actual local roots
 lake env leanchecker Hironaka   # optional: replay every module in the kernel
 ```
 
@@ -188,7 +209,7 @@ rev = "main"
 
 ## Axioms
 
-Every declaration of the library, and in particular every public theorem, depends only on the three standard axioms of Lean and Mathlib: `propext`, `Classical.choice` and `Quot.sound`. The library declares no axioms of its own, and `scripts/CheckAxioms.lean` checks this for every declaration.
+Every declaration of the library, and in particular every public theorem, depends only on the three standard axioms of Lean and Mathlib: `propext`, `Classical.choice` and `Quot.sound`. The library declares no axioms of its own. `scripts/CheckAxioms.lean` checks the public namespace; the complete compiled-module audit in `audit/local-sharp-curves-20261015/CheckAllCompiledRoots.lean` also covers private, generated and globally named helper declarations.
 
 The sixth continuation checkpoint adds actual dimension-three companion lower patches and nonspecial current-level GeneralThree analytic thresholds, intrinsic first Hilbert–Samuel tangent values and their exact pure-dimensional singular-locus dictionary, and actual biholomorphic preservation of unordered NC multiplicities. All 484 earlier mathematical modules remain byte identical; 60 types/definitions and 42 theorem proof terms compare exactly, all 89 actual new constants pass the axiom allowlist, and all four new modules pass independent kernel replay. The general gaps listed above remain open.
 
@@ -212,6 +233,26 @@ The fifteenth continuation checkpoint adds actual monomial ordering under genuin
 
 ## Verification
 
+The current [full verification report](audit/local-sharp-curves-20261015/verification.md) and [machine-readable receipt](audit/local-sharp-curves-20261015/final-validation.json) cover the mathematical checkpoint merged in PR #1:
+
+* **Build:** `lake build --wfail Hironaka` passed all 4,563 build jobs with zero warnings.
+* **Complete expression comparison:** all 2,670 newly synchronized actual compiled roots match their original complete types and values, including all 2,181 theorem proofs. The comparison retains private/generated declarations, binder names and numerical name components; it uses no alpha-equivalence, definitional-equivalence or numerical-erasure fallback.
+* **Axioms:** all 12,366 actual library roots use only `propext`, `Classical.choice` and `Quot.sound`. The ordinary namespace-filtered audit checks 7,585 declarations; the complete-root audit supplies the larger count.
+* **Kernel replay:** all 744 local modules, including the import root and preceding library, passed `leanchecker`. Every mathematical source and available compiled kernel-data part had identical fingerprints before and after the isolated replay.
+* **Source provenance:** 182 whole modules, 16 exact support modules and 182 complete blueprint chapters are reproducible from the public [upstream merge](https://github.com/MingchenXia/archon-nakamaye/commit/7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4). Of the preceding 545 mathematical files, 543 remain byte identical and two restore original declaration contexts while preserving their statement and proof source. Independent reviews cover both the source export and its verification tools.
+* **Blueprint scope:** 1,991 distinct bindings resolve locally; 241 explicitly marked bindings resolve to verified upstream-only declarations; two historical unresolved attachment names remain explicitly marked. The full 485-page extension blueprint compiles without LaTeX errors; its retained prerequisite-reference and bookmark warnings are documented in the report.
+
+To replay source provenance, use a normal Git checkout of the upstream repository containing the linked merge:
+
+```sh
+python3 scripts/verify_from_published_source.py --source-root /path/to/archon-nakamaye
+```
+
+This replay requires no private Horizon checkpoint objects. It checks source/export integrity; the build, axiom audit, expression comparisons and kernel replay are separate checks recorded above.
+
+<details>
+<summary>Historical verification of the original v0.1 release</summary>
+
 The following evidence describes the original v0.1 release (352 modules, 3557 declarations, 94679 lines of Lean). Verification of the original extensions is recorded separately in [their audit report](audit/extensions-20261011/verification.md), and the current continuations in [the first report](audit/continuation-20261011-r1/verification.md), [the second report](audit/continuation-20261011-r1-batch2/verification.md) and [the third report](audit/continuation-20261011-r1-batch3/verification.md):
 
 * **Build**: `lake build` from scratch: exit code 0, 352 modules compiled, 0 errors, 0 warnings, 0 declarations with an incomplete proof, 2470 s with one Lean process at a time.
@@ -219,6 +260,8 @@ The following evidence describes the original v0.1 release (352 modules, 3557 de
 * **Faithfulness**: every declaration of the library was compared with the declaration it was extracted from, in one Lean environment containing both (types, definition bodies and inductive types, up to the renaming of names): 42/42 public theorem statements equal; of the 4438 compared declarations, 4435 are syntactically equal and 3 equal up to definitional unfolding (all of them differ only in the numbering of `_proof_N` auxiliary lemmas), 0 differ; the 24 further declarations of the library (generated or auxiliary) all have an equal original (0 exceptions); 3522/3531 proof terms identical.
 * **Kernel replay**: `leanchecker` on all 352 modules: exit code 0, 352 modules replayed, 0 problems.
 * **Source scan**: 359 files scanned for e-mail addresses, incomplete-proof markers, declarations of axioms, kernel-bypassing tactics, internal identifiers and internal paths: 0 hits.
+
+</details>
 
 ## Layout
 
