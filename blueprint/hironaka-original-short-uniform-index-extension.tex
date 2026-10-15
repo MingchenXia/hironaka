@@ -1,0 +1,124 @@
+\section{The exact original short-history index and whole Step One spectrum}
+
+A removed original member is an actual boundary index, not merely a set.
+The existing actual SNC germ-index uniqueness prevents two boundary entries
+through the same point from being the same set. This supplies the missing
+count needed to compare original positive-level short histories by a single
+map, rather than assuming equality of their point-dependent filtered indices.
+This indexed deletion argument is a local adaptation of W\l odarczyk's Step One
+and Bierstone--Milman's ordered-boundary trivial-blowup convention
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}.
+
+\begin{lemma}[The actual filtered original boundary prefix has its exact count]
+\label{hir:original-member-filtered-prefix-exact-count}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalShortUniformIndex.original_filtered_prefix_exact_count}
+\leanok
+\uses{bcalc:snc-simultaneous,bcalc:boundary-count}
+Let $E$ be an actual SNC boundary and let $m\leq j\leq|E|$. Select the
+members of its original prefix $E[0,m)$ through $x$, as indices in all of $E$.
+The prefix $E[0,j)$ with these selected indices removed has length
+$j-\operatorname{boundaryCount}(E[0,m),x)$.
+\end{lemma}
+\begin{proof}
+Every selected index is below $m$. If an index at or above $m$ were selected,
+its through-point member would equal some actual member in the prefix below
+$m$; the genuine SNC germ-index uniqueness would identify these two indices,
+a contradiction. For indices below $m$, selection is exactly membership of
+$x$ in that indexed boundary entry, since the entry belongs to the original
+prefix. Therefore the selected indices inside the larger prefix are in
+bijection with the through-point indices of the original prefix. Their number
+is its actual boundary count. The $j$ prefix indices partition into the
+selected and retained ones, yielding the stated natural-number subtraction.
+The proof counts every original index and uses no supplied count certificate.
+\end{proof}
+
+\begin{theorem}[The true original positive lower insertion index]
+\label{hir:original-positive-short-lower-index-exact}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalShortUniformIndex.original_positive_lower_index_exact}
+\leanok
+\uses{hir:original-member-filtered-prefix-exact-count,hir:original-interior-actual-positive-lower-index,hir:step-one-bridge}
+Let $M$ be originally well formed and let $HP$ be an actual test history of
+$\overline M$. At any actual stage point $x$, the true positive lower index
+for an empty insertion after $H$ is
+\[
+ c=|M.E|+|H|-\operatorname{level}(M,HP,x).
+\]
+There is no supplied filtered-index or count equality premise.
+\end{theorem}
+\begin{proof}
+Actual bar-testness makes the whole original transformed bar datum well formed,
+so its entire boundary is genuinely SNC. The true transform dictionary gives
+its length $|M.E|+|H|+|P|$. Its actual original member list is literally the
+prefix of length $|M.E|$. Its level at $x$ is the boundary count of precisely
+that original prefix. The actual lower insertion index is the retained length
+of the whole prefix of length $|M.E|+|H|$. Both required prefix bounds hold
+internally from these actual lengths. Apply the preceding exact filtered-prefix
+count to get the asserted original formula.
+\end{proof}
+
+\begin{definition}[The actual level-indexed history map]
+\label{hir:original-short-history-step-map}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalShortUniformIndex.historyStepShift,Hironaka.HironakaOriginalShortUniformIndex.strictMono_historyStepShift,Hironaka.HironakaOriginalShortUniformIndex.historyStepShiftEmbedding}
+\leanok
+\uses{hir:original-invariant-empty-map-strict}
+For original lower dimension $k$ and original insertion position $j$, define
+on the entire Step One value order
+\[
+ F_{k,j}(\ell,v)=(\ell,\operatorname{WithTop.map}
+          (\operatorname{shiftFamily}(k,j-\ell))(v)).
+\]
+This is a strict order embedding, including infinite lower values.
+\end{definition}
+\begin{proof}
+For distinct first coordinates the strict comparison is preserved because
+that coordinate is unchanged. At a common first coordinate $\ell$, both lower
+entries use the SAME genuine strict family map with index $j-\ell$.
+Its extension to WithTop is strictly increasing, including infinity. The
+lexicographic comparison is therefore preserved and reflected, giving the
+strict order embedding. No inequality between different family insertion
+indices is assumed.
+\end{proof}
+
+\begin{theorem}[The entire original short-history Step One spectrum]
+\label{hir:original-entire-short-step-one-spectrum-order}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalShortUniformIndex.actual_entire_short_stepOne_value,Hironaka.HironakaOriginalShortUniformIndex.actual_entire_short_spectrum_comparisons}
+\leanok
+\uses{hir:original-positive-short-lower-index-exact,hir:original-short-history-step-map,hir:original-interior-full-family-short-zero-step-one-value,hir:original-interior-full-family-short-positive-step-one-value,hir:original-interior-empty-history}
+Let $M$ be originally well formed and let $HS$ be an actual test history of
+$\overline M$. Put $j=|M.E|+|H|$. At every actual point $y$ whose true own-level
+Step One run on $HS$ is shorter than $|S|$, the ENTIRE actual specific-family
+Step One value on $H\epsilon S$ is $F_{k,j}$ of its entire value on $HS$,
+for every lower dimension $k$. Consequently strict order, weak order and
+equality of actual values at any two such original points are reflected and
+preserved, without a common-level or nonzero-lower-order restriction.
+\end{theorem}
+\begin{proof}
+Original whole bar-testness internally supplies the head bar-test dictionary.
+If $y$ is special, the true special/level dictionaries preserve its whole pair
+$(\ell,\top)$, and $F_{k,j}$ fixes that pair. If it is nonspecial at level zero,
+the genuine original short-zero formula supplies the entire pair map with
+family index $j$, which is $j-0$ as required. Otherwise write its true level
+as $s+1$. The genuine positive-short formula computes the lower insertion
+index at the whole selected assignment head $H\operatorname{head}(S,r)$
+and the actual image point, where $r<|S|$ is its true own-level run. This head
+is an actual prefix of the original bar-test history. True run-reaching
+membership on the selected suffix identifies its assignment level with the
+original current level $s+1$. The preceding exact original index formula
+therefore gives $c=j-(s+1)$. Substitute this internally computed equality in
+the complete positive-short value formula to obtain $F_{k,j}$ of the whole
+original value. The single strict order embedding just proved now compares
+any two true short-run points; unequal levels are handled by its unchanged
+first coordinate, and equal levels by its common internally computed index.
+No lower-value equality, variable-index comparison or canonical new-history
+certificate is assumed. Dominance predicates on this actual short-run subset
+are consequently preserved, but no maximum existence or global scheduling is
+asserted.
+\end{proof}
+
+Crossing runs and their positive recursive companions, full outer transport,
+maximum existence and noncompact scheduling remain open. These local actual
+SNC/count producers do not assert global distinctness of all boundary entries.

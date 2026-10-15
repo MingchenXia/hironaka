@@ -1,0 +1,106 @@
+\section{Genuine local coefficient cosupport and whole reduced strict generation}
+
+The coefficient ideals are required coherent only on an actual open
+neighbourhood $U$ of the origin. Cosupport containment is required only on
+$U\cap\{y=0\}$. No global extension of local holomorphic functions or coherent
+ideals is assumed. The real flattening pullback already produces exactly
+this local coherence notion. This is the local coefficient-centre component
+of \cite[Theorem 9.4, pp.~277--278]{bierstone-milman97-invent-math}; full
+presentation construction, transformed derivative/Jacobian properties and
+Bennett remain separate goals.
+
+\begin{lemma}[Local coherent germs propagate on their real domain]
+\label{hir:actual-local-coefficient-germ-propagation}
+\uses{hir:real-centre-domain-actual-flattened-coherent-family}
+\lean{Hironaka.HironakaActualLocalCoefficientStrictGenerators.eventually_mem_of_coherentOn}
+\leanok
+Let $\mathfrak a$ be an original ideal coherent on an actual open domain
+$U$, and let $x\in U$. Every original membership $f\in\mathfrak a_x$
+remains a membership at all sufficiently nearby points.
+\end{lemma}
+\begin{proof}
+Take the actual finite original generating family and its membership
+characterization near $x$, supplied by local coherence. Express $f$ as a
+finite holomorphic linear combination of these actual generators. Shrink
+to a common open where the coefficients, $f$ and this literal equality
+remain holomorphic and valid. At each point of that open the same finite
+relation, read in the original membership characterization, proves the
+claimed membership. No extension outside the real domain is needed.
+\end{proof}
+
+\begin{theorem}[Local plane cosupport produces actual whole germ powers]
+\label{hir:actual-local-coefficient-cosupport-normal-power}
+\uses{hir:actual-local-coefficient-germ-propagation,hir:relative-normal-actual-recursive-power-dictionary}
+\lean{Hironaka.HironakaActualLocalCoefficientStrictGenerators.mk_mem_normalIdeal_pow_of_local_cosupport,Hironaka.HironakaActualLocalCoefficientStrictGenerators.originalTaylor_mem_coordinate_power_of_local_cosupport}
+\leanok
+Let $U\subset\mathbb C^{k+s}$ be open with $0\in U$, and let
+$\mathfrak a$ be coherent only on $U$. Suppose
+$U\cap\{y=0\}\subset\operatorname{cosupp}(\mathfrak a,q)$.
+For every actual original member $f\in\mathfrak a_0$ holomorphic at zero,
+its entire germ lies in the actual normal-coordinate ideal power
+$(y_1,\ldots,y_s)^q$. Its genuine Taylor series consequently lies in the
+same whole formal coordinate ideal power.
+\end{theorem}
+\begin{proof}
+Propagate the original membership on a neighbourhood contained in $U$.
+At every nearby point of the coordinate plane the genuine cosupport
+condition puts $f$ in the actual maximal-ideal power of degree $q$.
+The original chart-derivative dictionary therefore makes all iterated
+ordinary derivatives of length less than $q$ vanish along that plane near
+zero. The proved multivariable Hadamard--Taylor decomposition gives the
+actual recursive normal-power expression of degree $q$. Its genuine
+whole-germ normal-power dictionary yields membership in $(y)^q$.
+Apply the actual Taylor ring homomorphism and its whole coordinate-ideal
+identity to obtain the formal power. The argument includes $q=0$ and an
+empty normal block, and uses neither coherence away from $U$ nor a globally
+smooth coordinate-centre certificate.
+\end{proof}
+
+\begin{theorem}[True local coefficient data produce the whole formal centre power]
+\label{hir:actual-local-coefficient-presentation-centre-power}
+\uses{hir:actual-local-coefficient-cosupport-normal-power,hir:actual-formal-centre-power-relative-coefficients}
+\lean{Hironaka.HironakaActualLocalCoefficientStrictGenerators.mem_actualPresentationCentre_power_of_local_coefficient_cosupport}
+\leanok
+Let $F(w,z)$ be an actual formal series. On a genuine open neighbourhood
+$U\ni0$ in $w=(u,y)$ suppose its low literal normal coefficients are
+Taylor expansions of original holomorphic coefficient functions
+$c_\gamma\in\mathfrak a_{\gamma,0}$, where $\mathfrak a_\gamma$ is coherent
+only on $U$ and $U\cap\{y=0\}$ lies in its genuine cosupport of weight
+$q-|\gamma|$. Then $F\in(y,z)^q$.
+\end{theorem}
+\begin{proof}
+For every low normal exponent, the preceding theorem gives its whole
+formal tangential-centre power of degree $q-|\gamma|$. The literal
+coefficient identity and the proved entire formal coefficient-power
+criterion imply $F\in(y,z)^q$. That criterion treats every original
+coefficient, including the high normal exponents whose weight alone
+already exceeds the required bound. No factorial convention or unproved
+identification with raw derivatives is used.
+\end{proof}
+
+\begin{theorem}[Local original coefficients internally produce entire reduced strict generators]
+\label{hir:actual-local-coefficient-reduced-strict-generators}
+\uses{hir:actual-local-coefficient-presentation-centre-power,hir:actual-reduced-basis-entire-formal-strict-generation}
+\lean{Hironaka.HironakaActualLocalCoefficientStrictGenerators.ActualLocalReducedCoefficientPresentation,Hironaka.HironakaActualLocalCoefficientStrictGenerators.actualLocalReducedCoefficientPresentation_centre_powers,Hironaka.HironakaActualLocalCoefficientStrictGenerators.exists_actual_reduced_strict_generators_of_local_coefficients}
+\leanok
+Suppose the actual canonical reduced members $G_a$ have the preceding
+literal local coefficient data, with weight equal to their actual selected
+vertex weight. In every genuine blowup chart of $(y,z)$ there is an
+internally constructed finite family generating the ENTIRE existing formal
+strict transform and satisfying the literal exceptional-product identities
+for these same reduced members. Centre-power membership and strict
+generation are not inputs to the coefficient data.
+\end{theorem}
+\begin{proof}
+The preceding producer supplies every reduced member's required actual
+centre power from the original local coherence, local cosupport and
+literal coefficient identities. Genuine reduced filtered division now
+expands every original ideal member with the actual quotient powers.
+Normalize the same reduced members and those actual quotients in the true
+chart; formal-domain cancellation proves the whole strict-ideal equality
+and the actual exceptional-product identities. Thus the previously proved
+whole reduced strict-generation theorem applies without any global
+extension premise. Existence of all source coefficient presentations and
+the later analytic/formal and Hilbert--Samuel transformation arguments
+are not asserted.
+\end{proof}

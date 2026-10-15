@@ -1,0 +1,117 @@
+\section{Actual center shears and whole-power reflection in every formal blowup direction}
+
+Keep the genuine coordinate center $P=(X_i:i\in A)$, the actual
+$e\in A$, the literal blowup chart $\sigma_b$, and $B=A\setminus\{e\}$.
+The true centered linear shear is
+\[
+ L_b(X_i)=X_i+\mathbf1_B(i)b_iX_e.
+\]
+The genuine formal substitutions, rather than a supplied change-of-model
+certificate, implement the changes of direction in
+\cite[\S7, pp.~267--272]{bierstone-milman97-invent-math}.
+All complex scalar actions and whole ideals remain the existing ones.
+
+\begin{lemma}[The actual centered shear constructs a genuine formal complex algebra map]
+\label{hir:actual-formal-center-shear-coordinate-map}
+\uses{hir:actual-formal-blowup-coordinate-power-image}
+The literal finite coordinate family $L_b(X_i)$ has actual zero constant
+coefficients and internally defines a genuine formal complex algebra map
+$L_b:S\to S$ with precisely those variable images. It fixes $X_e$.
+\lean{Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShearCoordinates,Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShearCoordinates_constant_zero,Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShear,Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShear_X,Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShear_exceptional}
+\leanok
+\end{lemma}
+\begin{proof}
+Each actual variable and each actual scalar multiple of $X_e$ has zero
+constant coefficient. The genuine coefficient homomorphism is additive,
+so every displayed coordinate has zero constant coefficient. The finite
+family therefore supplies a genuine formal substitution internally.
+Its literal variable formula is the displayed family, and it retains
+the original complex algebra action. Since $e\notin B$, its actual
+$e$-coordinate is exactly $X_e$.
+\end{proof}
+
+\begin{theorem}[Actual inverse shears and both whole center-power image directions]
+\label{hir:actual-formal-center-shear-inverse-and-powers}
+\uses{hir:actual-formal-center-shear-coordinate-map}
+The actual maps $L_b$ and $L_{-b}$ are inverse on EVERY formal series.
+They are genuine formal algebra automorphisms, and for every $d\in\mathbb N$,
+\[
+ (L_b)_*P=P,\qquad (L_b)_*(P^d)=P^d,
+ \qquad F\in P^d\Longleftrightarrow L_b(F)\in P^d.
+\]
+\lean{Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShear_left_inverse,Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShear_right_inverse,Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalCenterShearAlgEquiv,Hironaka.HironakaActualFormalBlowupAllDirections.map_coordinateIdeal_centerShear_le,Hironaka.HironakaActualFormalBlowupAllDirections.map_coordinateIdeal_centerShear,Hironaka.HironakaActualFormalBlowupAllDirections.map_coordinate_power_centerShear,Hironaka.HironakaActualFormalBlowupAllDirections.mem_coordinate_power_iff_centerShear}
+\leanok
+\end{theorem}
+\begin{proof}
+Genuine formal substitution composition identifies the composite with
+the substitution by the actual composite coordinate family. At $e$
+both maps fix $X_e$; at every $i\notin B$ both fix $X_i$; at $i\in B$
+the true image is $(X_i-b_iX_e)+b_iX_e=X_i$.
+Thus the actual composite coordinate family is the genuine variable
+family, whose formal substitution is the identity on EVERY series.
+Replacing $b$ by $-b$ proves the other composite identity and hence
+constructs the true algebra inverse.
+Every selected coordinate image belongs to the same actual $P$,
+so image of the actual selected-variable span is contained in $P$.
+For the converse, each $X_i$ with $i\in A$ equals its actual image
+minus, when $i\in B$, the scalar multiple $b_i$ of the SAME actual
+image of $X_e$. Both terms belong to the actual image ideal since
+$e\in A$, proving the reverse whole inclusion. True image-of-power
+gives the assertion for every $d$. Forward membership follows from
+that whole image formula; reverse membership applies the actual
+inverse shear and the SAME whole image formula for $-b$.
+\end{proof}
+
+\begin{theorem}[The SAME actual arbitrary-direction blowup factors through the genuine zero chart]
+\label{hir:actual-formal-blowup-direction-shear-factorization}
+\uses{hir:actual-formal-center-shear-inverse-and-powers,hir:actual-formal-blowup-coordinate-power-image}
+For EVERY actual formal series $F$,
+\[
+ \sigma_b(F)=\sigma_0(L_b(F)).
+\]
+\lean{Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalBlowup_eq_zero_comp_centerShear}
+\leanok
+\end{theorem}
+\begin{proof}
+Use the genuine formal substitution composition theorem for the two
+actual finite zero-constant coordinate families. For $i\notin A$
+the actual composite image is $X_i$. For $i=e$ it is $X_e$.
+For $i\in B$ it is $X_eX_i+b_iX_e=X_e(b_i+X_i)$.
+These are precisely the literal coordinate images of the SAME actual
+$\sigma_b$. Equality of the actual composite coordinate families,
+and thus equality of their genuine formal substitutions, proves the
+identity on EVERY series, with no arbitrary algebra-map extensionality
+principle for discontinuous homomorphisms being assumed.
+\end{proof}
+
+\begin{theorem}[Genuine injectivity and both whole center-power reflection directions in every chart]
+\label{hir:actual-formal-blowup-all-directions-whole-power-reflection}
+\uses{hir:actual-formal-blowup-direction-shear-factorization,hir:actual-formal-monomial-blowup-coefficient-reflection,hir:actual-formal-monomial-blowup-whole-power-reflection,hir:actual-formal-blowup-normalized-member}
+The SAME actual map $\sigma_b$ is injective. For EVERY $F\in S$ and
+every $d\in\mathbb N$,
+\[
+ F\in P^d\Longleftrightarrow X_e^d\mid\sigma_b(F),
+ \qquad \sigma_b^{-1}((X_e^d))=P^d.
+\]
+Every internally normalized quotient of a nonzero actual $F\in P^d$
+is nonzero, in every actual direction $b$.
+\lean{Hironaka.HironakaActualFormalBlowupAllDirections.actualFormalBlowup_injective,Hironaka.HironakaActualFormalBlowupAllDirections.mem_coordinate_power_iff_blowup_exceptional_dvd,Hironaka.HironakaActualFormalBlowupAllDirections.comap_exceptional_power_blowup,Hironaka.HironakaActualFormalBlowupAllDirections.actualNormalizedFormalMember_ne_zero}
+\leanok
+\end{theorem}
+\begin{proof}
+The preceding factorization expresses $\sigma_b$ as the composite of
+the actual invertible shear and the already proved injective genuine
+zero-direction substitution, so it is injective. The true zero-chart
+whole-power reflection applied to $L_b(F)$ says that exceptional
+power divisibility of $\sigma_b(F)$ is equivalent to $L_b(F)\in P^d$.
+The true shear inverse and whole-power preservation make the latter
+equivalent to $F\in P^d$. This proves both membership directions
+and hence equality of the actual whole ideal inverse images.
+Finally, a zero actual normalized quotient would make its true
+exceptional-product numerator $\sigma_b(F)$ zero. Genuine actual
+injectivity forces $F=0$, contradicting the given nonvanishing.
+This constructs the valuation-reflection facts internally. Identification
+of normalized-member ideals with the independent all-power strict
+saturation, transformed standard-basis stability and general Bennett
+remain subsequent separate proofs.
+\end{proof}

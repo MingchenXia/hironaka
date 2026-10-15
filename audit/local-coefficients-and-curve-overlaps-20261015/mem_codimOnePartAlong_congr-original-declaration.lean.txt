@@ -1,0 +1,7 @@
+omit [IsComplexManifold n M] in
+/-- **Membership in the codimension-one part depends only on germs**: of `N` and of the cosupport. -/
+theorem mem_codimOnePartAlong_congr {N N' : Set M} {𝔞 𝔟 : GermIdeal n M} {μ ν : ℕ} {x : M}
+    (hN : ∀ᶠ y in 𝓝 x, y ∈ N ↔ y ∈ N')
+    (hS : ∀ᶠ y in 𝓝 x, y ∈ cosupport n N 𝔞 μ ↔ y ∈ cosupport n N' 𝔟 ν) :
+    x ∈ codimOnePartAlong N 𝔞 μ ↔ x ∈ codimOnePartAlong N' 𝔟 ν :=
+  mem_codimOnePartAlong_iff_of_eventually hN hS

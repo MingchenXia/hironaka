@@ -1,0 +1,9 @@
+/-- **Resolutions restrict**: the restriction to `U` of a resolution of `𝔪` is a resolution of `𝔪|_U`. -/
+theorem isGeoResolution_restrict (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    {Y : CMfd.{u} n} {T : BlowupTower X Y} (hT : IsGeoResolution 𝔪 T) :
+    IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T) := by
+  obtain ⟨-, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hN h𝔞 T hT.1
+  refine ⟨isGeoTestTower_restrict U hN h𝔞 T hT.1, ?_⟩
+  rw [geoTransformAlong_restrict U hN h𝔞 T hT.1, cosupp_pullback_val _
+    (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg), hT.2,
+    preimage_empty]
