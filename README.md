@@ -10,18 +10,26 @@ The latest verified mathematical checkpoint is [PR #1](https://github.com/Mingch
 
 The latest completed subgoals construct local sharp endpoints for original smooth curves and identify whole controlled marked records under genuine smooth pullback, retaining the complete reference history and every literal prefix. Their precise hypotheses and remaining boundaries are described [below](#local-sharp-curve-endpoints-and-controlled-smooth-pullback-15-october-2026).
 
-**The full strengthening programme remains in progress.** The following six directions are open; module and declaration counts are not a completion percentage.
+**Three of the nine original gaps are closed: G5, G6 and G7.** The other six have the remaining general statements listed below; several already have substantial completed cases. These are scope labels, not a numerical measure of proof difficulty or completion.
+
+| Closed gap | What is proved | Lean evidence |
+|---|---|---|
+| G5 — dimension components | Every dimension part is exactly the union of the genuine global irreducible components of that dimension, with finite local branch filtering. | [`dimensionPart_eq_sUnion_globalComponents`](Hironaka/Resolution/HironakaDimensionGlobalComponents.lean) |
+| G6 — complete SNC divisor sums | Finite sums for compact support and locally finite sums for arbitrary support, using one global coefficient function and full local ideal equality; disconnected members and zero coefficients are covered. | [`HironakaCompleteDivisorSum`](Hironaka/Resolution/HironakaCompleteDivisorSum.lean), [`HironakaLocallyFiniteDivisorSum`](Hironaka/Resolution/HironakaLocallyFiniteDivisorSum.lean) |
+| G7 — simultaneous normal crossings | The resolved strict transform is transverse to the entire accumulated SNC boundary; generic upgrade lemmas and strengthened existence theorems retain the original conclusions. | [`HironakaNormalCrossingsTransversality`](Hironaka/Resolution/HironakaNormalCrossingsTransversality.lean) |
+
+**Six broader gaps remain open:**
 
 | Direction | Remaining source-facing goal |
 |---|---|
 | G1 — categories | Resolution for abstract analytic spaces and the characteristic-zero algebraic setting, beyond the present complex-manifold setting. |
-| G2 — higher invariants | General higher-dimensional original invariants, full-history compatibility and descent, including actual current lower-cosupport membership for retained positive member branches. |
+| G2 — canonical elementary resolution | General higher-dimensional original invariants, full-history compatibility and descent, including actual current lower-cosupport membership for retained positive member branches. |
 | G3 — noncompact global construction | Produce actual global centres, exhaustion scheduling and compact-uniform stabilization, then identify and glue the terminal analytic space in general dimension. |
 | G4 — sharp resolution | Construct the complete defect invariant and prove its decrease and termination in general dimension; compare the actual local curve histories on overlaps. |
 | G8 — Hilbert–Samuel transformation | General permissible-centre vertex compatibility, transformed presentations and stability, Bennett inequalities, and the full analytic/formal strict-transform bridge. |
 | G9 — general NC input | Connect local branches and self-intersections of general normal-crossings input to the canonical driver and additional-ideal compatibility. |
 
-The current proof fronts are actual controlled restriction to smaller strict carriers, actual curve-defect restriction and overlap comparisons, and general Hilbert–Samuel transformation. Research plans are not counted as completed Lean proofs. The detailed [known gaps](#known-gaps-with-respect-to-the-standard-theorems) distinguish the original API, completed special cases and the remaining general statements.
+The current proof fronts are actual controlled restriction to smaller strict carriers, actual curve-defect restriction and overlap comparisons, and general Hilbert–Samuel transformation. Research plans are not counted as completed Lean proofs. The detailed [gap status](#status-of-the-nine-original-gaps) separates completed gaps, completed cases and the remaining general statements.
 
 ## Setting
 
@@ -136,9 +144,20 @@ The complete statements and mathematical proofs are in [the extension blueprint]
 
 Both completed subgoals and their full dependency closures are synchronized from accepted source checkpoints. The complete blueprint chapters and reproducible source provenance are in [the curve endpoint audit](audit/local-sharp-curves-20261015/verification.md) and [the controlled pullback audit](audit/controlled-smooth-pullback-20261015/verification.md).
 
-## Known gaps with respect to the standard theorems
+## Status of the nine original gaps
 
-This checklist compares the proved statements with classical forms. Items 5–7 record the specific gaps closed by the extensions; the general limitations in the other items remain.
+G5–G7 are **closed**, as recorded in the table above. They are no longer missing features. The six remaining gaps and their completed cases are:
+
+| Gap | Completed part | Remaining part |
+|---|---|---|
+| G1 | Embedded resolution and principalization in complex manifolds. | Abstract analytic spaces and characteristic-zero algebraic categories. |
+| G2 | Canonical principalization for compact zero locus, including the actual divisor sum; genuine smooth pullback dictionaries and Cartesian comparison results. | The complete general canonical elementary endpoint, with original higher-invariant history compatibility and actual global scheduling. |
+| G3 | A global canonical growing sequence with locally finite centre images and compact-uniform stabilization for initial cosupport of dimension at most one; terminal-map and comparison constructions. | The actual globally scheduled locally finite blowup history and terminal-space identification in general dimension. |
+| G4 | Genuine local sharp endpoints for original smooth curves, preserving the whole original NC good locus and transversality of the entire ordered boundary. | Compatibility of those local histories on overlaps, and the complete defect invariant, decrease and termination in general dimension. |
+| G8 | Compact hypersurface stage control, including all multiplicity restarts and literal centre conditions; actual formal division, jet/HS dictionaries and substitution comparisons. | General higher-codimension permissible centres, transformed presentations, stability and Bennett inequalities. |
+| G9 | Genuine local NC branches and whole divisor stalks; permutation and indexed-SNC procedure comparisons. | Global canonical descent for local branches and self-intersections, alignment with the main driver and additional ideals. |
+
+The following descriptions record the precise scope of each original item; **items 5–7 describe completed results**, while the other items distinguish proved cases from outstanding generalizations.
 
 1. **Scope.** The ambient space is always a complex manifold (smooth); singular analytic spaces appear only as analytic
    subsets of a manifold (embedded resolution) or through ideal sheaves (principalization). There is no statement about
