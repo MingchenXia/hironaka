@@ -1,0 +1,6 @@
+theorem le_sumIdeal_right {𝔞 𝔟 : GermIdeal n M} (h𝔟 : 𝔟.IsCoherent) :
+    𝔟.Le (sumIdeal 𝔞 𝔟) := by
+  intro x g hg
+  exact isInSpanAt_of_eq_mul (S := fun s => 𝔞.mem x s ∨ 𝔟.mem x s) (Or.inr hg)
+    (GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg) (holomorphicAt_const 1)
+    (Eventually.of_forall fun y => (one_mul _).symm)

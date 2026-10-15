@@ -1,0 +1,611 @@
+{
+  "status": "BLOCKED_EXACT_DIFFERENCE",
+  "old": {
+    "path": "audit/reduced-basis-curve-comparison-20261015/fragment-native-full-expressions.jsonl",
+    "sha256": "62bf87b8fd0250751179424c51379a6014859cbc3ac634f6536a60adf1c48cb7",
+    "all_actual_constants": 3
+  },
+  "native": {
+    "path": "audit/reduced-basis-curve-comparison-20261015/fragment-public-full-expressions.jsonl",
+    "sha256": "79c318d82873bd665097f60b3c7200d6b87c0653d2887fc802a743b16f251ab4",
+    "all_actual_constants": 3
+  },
+  "comparator": {
+    "path": "/workspace/hironaka/audit/local-sharp-curves-20261015/compare_full_expr_dag.py",
+    "sha256": "28bc2ba40004520f5c9f483adf5e2cd2e2491c0de7bb0355ff642b176ca4c063"
+  },
+  "module_counts": {
+    "Hironaka.Support.CoordinateGermNonzeroExact": {
+      "constants": 1,
+      "types_exact": 1,
+      "values_exact": 0,
+      "theorems": 1,
+      "theorem_proofs_exact": 0
+    },
+    "Hironaka.Support.RestrictedIdealLeSumLeftExact": {
+      "constants": 2,
+      "types_exact": 0,
+      "values_exact": 0,
+      "theorems": 2,
+      "theorem_proofs_exact": 0
+    }
+  },
+  "missing": [],
+  "native_extras": [],
+  "approved_native_extras": [],
+  "unapproved_native_extras": [],
+  "differences": [
+    {
+      "constant": [
+        "Hironaka.Support.CoordinateGermNonzeroExact",
+        "Hironaka.HolomorphicGermReducednessBridge.coordinate_germ_ne_zero"
+      ],
+      "field": "whole_value",
+      "difference": {
+        "old_node": 1139,
+        "native_node": 1139,
+        "old": {
+          "children": [
+            813,
+            1138
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "x"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "Analytic"
+                      ],
+                      "HolomorphicGermReducednessBridge"
+                    ],
+                    841674587
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              148
+            ],
+            [
+              "default"
+            ]
+          ],
+          "tag": "lambda"
+        },
+        "native": {
+          "children": [
+            813,
+            1138
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "x"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "Support"
+                      ],
+                      "CoordinateGermNonzeroExact"
+                    ],
+                    841674587
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              148
+            ],
+            [
+              "default"
+            ]
+          ],
+          "tag": "lambda"
+        }
+      }
+    },
+    {
+      "constant": [
+        "Hironaka.Support.RestrictedIdealLeSumLeftExact",
+        "Hironaka.RestrictedIdealExtension.le_sumIdeal_left"
+      ],
+      "field": "type",
+      "difference": {
+        "old_node": 99,
+        "native_node": 99,
+        "old": {
+          "children": [
+            4,
+            98
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "MarkedIdeal"
+                      ],
+                      "RestrictedIdealExtension"
+                    ],
+                    4042443656
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "forall"
+        },
+        "native": {
+          "children": [
+            4,
+            98
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "Support"
+                      ],
+                      "RestrictedIdealLeSumLeftExact"
+                    ],
+                    4042443656
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "forall"
+        }
+      }
+    },
+    {
+      "constant": [
+        "Hironaka.Support.RestrictedIdealLeSumLeftExact",
+        "Hironaka.RestrictedIdealExtension.le_sumIdeal_left"
+      ],
+      "field": "whole_value",
+      "difference": {
+        "old_node": 252,
+        "native_node": 252,
+        "old": {
+          "children": [
+            4,
+            251
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "MarkedIdeal"
+                      ],
+                      "RestrictedIdealExtension"
+                    ],
+                    4042443656
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "lambda"
+        },
+        "native": {
+          "children": [
+            4,
+            251
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "Support"
+                      ],
+                      "RestrictedIdealLeSumLeftExact"
+                    ],
+                    4042443656
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "lambda"
+        }
+      }
+    },
+    {
+      "constant": [
+        "Hironaka.Support.RestrictedIdealLeSumLeftExact",
+        "Hironaka.RestrictedIdealExtension.le_sumIdeal_right"
+      ],
+      "field": "type",
+      "difference": {
+        "old_node": 99,
+        "native_node": 99,
+        "old": {
+          "children": [
+            4,
+            98
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "MarkedIdeal"
+                      ],
+                      "RestrictedIdealExtension"
+                    ],
+                    2739476274
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "forall"
+        },
+        "native": {
+          "children": [
+            4,
+            98
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "Support"
+                      ],
+                      "RestrictedIdealLeSumLeftExact"
+                    ],
+                    2739476274
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "forall"
+        }
+      }
+    },
+    {
+      "constant": [
+        "Hironaka.Support.RestrictedIdealLeSumLeftExact",
+        "Hironaka.RestrictedIdealExtension.le_sumIdeal_right"
+      ],
+      "field": "whole_value",
+      "difference": {
+        "old_node": 252,
+        "native_node": 252,
+        "old": {
+          "children": [
+            4,
+            251
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "MarkedIdeal"
+                      ],
+                      "RestrictedIdealExtension"
+                    ],
+                    2739476274
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "lambda"
+        },
+        "native": {
+          "children": [
+            4,
+            251
+          ],
+          "data": [
+            [
+              "num",
+              [
+                "str",
+                [
+                  "str",
+                  [
+                    "num",
+                    [
+                      "str",
+                      [
+                        "str",
+                        [
+                          "str",
+                          [
+                            "str",
+                            [
+                              "str",
+                              [
+                                "anonymous"
+                              ],
+                              "inst"
+                            ],
+                            "_@"
+                          ],
+                          "Hironaka"
+                        ],
+                        "Support"
+                      ],
+                      "RestrictedIdealLeSumLeftExact"
+                    ],
+                    2739476274
+                  ],
+                  "_hygCtx"
+                ],
+                "_hyg"
+              ],
+              6
+            ],
+            [
+              "instanceImplicit"
+            ]
+          ],
+          "tag": "lambda"
+        }
+      }
+    }
+  ],
+  "fallbacks": 0,
+  "auxiliaries_skipped": 0,
+  "proof_numbers_erased": 0,
+  "binder_names_erased": 0,
+  "defeq_or_alpha_comparison": false,
+  "metadata_preserved_in_full": true,
+  "method": "Full structural Expr DAG constructor/field/child comparison; all Name/Level/DataValue/Syntax fields retained; no hash used to decide equality"
+}

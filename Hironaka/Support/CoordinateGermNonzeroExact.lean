@@ -1,0 +1,34 @@
+/- Exact complete original declaration and declaration context; namespace relocation only. -/
+import Hironaka.Analytic.HolomorphicGermReducednessBridge
+set_option autoImplicit false
+open Set Filter
+open scoped Topology
+namespace Hironaka.HolomorphicGermReducednessBridge
+open Hironaka
+noncomputable section
+variable {n : ℕ}
+
+theorem coordinate_germ_ne_zero (j : Fin n) :
+    HolGerm.mk (fun z : ComplexModel n => z j) (eventually_differentiableAt_coordinate j) ≠ 0 := by
+  intro hzero
+  have hmk : HolGerm.mk (fun z : ComplexModel n => z j)
+      (eventually_differentiableAt_coordinate j) =
+      HolGerm.mk (fun _ : ComplexModel n => 0) eventually_differentiableAt_zero := by
+    rw [hzero]
+    exact HolGerm.mk_zero.symm
+  have heq : (fun z : ComplexModel n => z j) =ᶠ[𝓝 (0 : ComplexModel n)] fun _ => 0 :=
+    HolGerm.mk_eq_mk_iff.mp hmk
+  have hderiv : fderiv ℂ (fun z : ComplexModel n => z j) 0
+      (AnalyticJacobianSingularCore.coordinateDirection j) ≠ 0 := by
+    apply fderiv_apply_coordinateDirection_ne_zero_of_eventuallyEq_unit_mul_coordinate
+      (f := fun z : ComplexModel n => z j) (u := fun _ : ComplexModel n => (1 : ℂ))
+    · exact differentiableAt_const _
+    · norm_num
+    · filter_upwards with z
+      simp
+  apply hderiv
+  rw [heq.fderiv_eq]
+  simp
+
+end
+end Hironaka.HolomorphicGermReducednessBridge

@@ -1,0 +1,30 @@
+✔ [4218/4596] Built Hironaka.Resolution.HironakaOriginalControlledReferenceRestriction (3.5s)
+✔ [4219/4596] Built Hironaka.Resolution.HironakaActualWholeIdealJetDetection (6.1s)
+✖ [4264/4600] Building Hironaka.Resolution.HironakaRelativeNormalCoherentSaturation (3.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.setup.json --json
+error: Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.lean:352:17: Unknown identifier `CoherentIdealColon.isInSpanAt_range_iff`
+error: Hironaka/Resolution/HironakaRelativeNormalCoherentSaturation.lean:348:53: unsolved goals
+n : ℕ
+I : HolomorphicIdealSheaves.GermIdeal n (ComplexModel n)
+hI : I.IsCoherent
+U : Set (ComplexModel n)
+hU : IsOpen U
+h0 : 0 ∈ U
+N : ℕ
+s : Fin N → ComplexModel n → ℂ
+hs : ∀ (i : Fin N), MDiff[U] (s i)
+hsI : ∀ y ∈ U, ∀ (g : ComplexModel n → ℂ), I.mem y g ↔ HolomorphicIdealSheaves.IsInSpanAt (fun x => x ∈ range s) y g
+y : ComplexModel n
+hy : y ∈ U
+g : ComplexModel n → ℂ
+⊢ HolomorphicIdealSheaves.IsInSpanAt (fun x => x ∈ range s) y g ↔ InSpanAt s y g
+error: Lean exited with code 1
+✔ [4278/4600] Built Hironaka.Resolution.HironakaRelativeNormalAnalyticCoefficients (6.7s)
+✔ [4282/4600] Built Hironaka.Resolution.HironakaRelativeNormalLocalizedAssociatedGraded (47s)
+✔ [4288/4600] Built Hironaka.Resolution.HironakaRelativeNormalUniformTruncations (19s)
+✔ [4406/4661] Built Hironaka.Resolution.HironakaRelativeNormalGradedAlgebra (23s)
+✔ [4760/4763] Built Hironaka.Resolution.HironakaSharpActualCurveDefectRestriction (3.8s)
+✔ [4761/4763] Built Hironaka.Resolution.HironakaSharpActualCurveStageComparison (4.6s)
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaRelativeNormalCoherentSaturation
+error: build failed
