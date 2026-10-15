@@ -3,6 +3,7 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
+import Mathlib.Analysis.CStarAlgebra.Classes
 import Hironaka.Analytic.AnalyticJacobianSingularCore
 import Hironaka.Analytic.HolomorphicGermRing
 
@@ -19,6 +20,7 @@ noncomputable section
 
 variable {n : ℕ}
 
+attribute [local instance 2000] CommCStarAlgebra.toNormedCommRing in
 /-- A coordinate projection is holomorphic as a germ at the origin. -/
 theorem eventually_differentiableAt_coordinate (j : Fin n) :
     ∀ᶠ z in 𝓝 (0 : ComplexModel n), DifferentiableAt ℂ (fun z : ComplexModel n => z j) z :=

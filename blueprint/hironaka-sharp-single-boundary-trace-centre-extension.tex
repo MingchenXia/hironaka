@@ -1,0 +1,152 @@
+\section{A genuine modified trace-order centre preserves the original smooth normal-crossings region}
+
+The original embedded marked ideal uses the ambient carrier and can blow up
+already resolved boundary intersections. Bierstone--Milman 1997,
+Section~12, pp.~292--294, instead uses the ideals of the original boundary
+restricted to the smooth current variety. For one original smooth boundary
+member $H$, its first actual defect is order at least two of
+$\mathcal I_H\mathcal O_W$. We implement this genuine first centre-selection
+phase. The whole multi-member product/distinct-branch defect, recursive
+intersection phases, exceptional monomial cleanup and termination remain
+separate mathematical producers.
+
+\begin{lemma}[A true transverse boundary coordinate has restricted order one]
+\label{hir:sharp-single-boundary-transverse-trace-order-one}
+\lean{Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundaryTraceMarked_cosupp_eq_empty_of_normalCrossings}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:snc,hir:monomial-case,hir:monomial-part-along,hir:nc-density-transverse}
+\leanok
+Let $W$ be a closed smooth submanifold of a positive-dimensional complex
+manifold, let $[H]$ be SNC, and suppose $W$ has normal crossings with $[H]$
+and is dense off $H$. Then the actual restricted marked ideal
+$(N=W,E=[],\mathcal I_H,2)$ has empty cosupport.
+\end{lemma}
+\begin{proof}
+Density excludes a boundary coordinate containing $W$, so the actual
+normal-crossings family is transverse to $W$. At a point of $W\cap H$, use
+the genuine simultaneous adapted coordinates: $W$ is a coordinate plane,
+and $H$ is one of its free coordinate hyperplanes. The original ambient
+coordinate function belongs to the actual original vanishing ideal of
+$H$. Its restriction to $W$ has order one: the true local retraction onto
+the coordinate plane preserves this free coordinate, while the original
+ambient flat-coordinate order theorem says it is not in the square of
+the actual point ideal. Thus it cannot have restricted order two, which
+contradicts cosupport membership. At a point of $W\setminus H$, mark-one
+cosupport is the actual zero locus and is already empty. Mark-two
+cosupport is contained in mark-one cosupport. This proves emptiness at
+every point without assuming a desired order or cosupport certificate.
+\end{proof}
+
+\begin{lemma}[The actual original trace marked ideal lies in the original driver domain]
+\label{hir:sharp-single-boundary-trace-original-domain}
+\lean{Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundaryTraceMarked,Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundaryIdeal_isNonzeroAlongAt_of_dense,Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundary_isClosedSubmanifold,Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundaryTraceMarked_isInvDomain,Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundaryTraceMarked_cosupp_subset_inter}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:snc,hir:centre-function}
+\leanok
+Let $W$ be closed and smooth of fixed dimension $d\le n$, and let $H$ be
+a smooth original boundary with $[H]$ SNC. Suppose
+$W\subset\overline{W\setminus H}$. The actual marked ideal
+$(N=W,E=[],\mathcal I_H,2)$ is in the original canonical invariant domain.
+Its actual cosupport is closed and contained in $W\cap H$.
+\end{lemma}
+\begin{proof}
+The original boundary vanishing ideal is coherent because $H$ is a
+closed smooth submanifold. Its actual restriction to $W$ is nonzero at
+every point. Outside $H$ use the original unit germ. At a point of $H$,
+the genuine SNC chart gives a local boundary coordinate generating a
+germ of $\mathcal I_H$. Density of $W\setminus H$ gives arbitrarily nearby
+points of $W$ where this original coordinate is nonzero. Hence it does
+not vanish identically on $W$ near the point. The true smooth carrier,
+empty divisor, positive mark two and fixed dimension give every original
+domain field. Actual coherent restricted cosupport is closed. Its
+containment in $W\cap H$ follows from monotonicity in the mark and the
+original mark-one zero-locus identity.
+\end{proof}
+
+\begin{theorem}[Actual trace defect avoids every genuine original good normal-crossings neighborhood]
+\label{hir:sharp-single-boundary-trace-avoids-good-nc-region}
+\lean{Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalSmoothNCRegion,Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalSmoothNCRegion_isOpen,Hironaka.HironakaSharpSingleBoundaryTraceCentre.originalBoundaryTraceMarked_cosupp_disjoint_goodRegion}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:sharp-single-boundary-transverse-trace-order-one,hir:sharp-single-boundary-trace-original-domain}
+\leanok
+Define the original good region as the union of the genuine original open
+neighborhoods on which the actual restriction of $W$ has normal crossings
+with the actual restriction of $[H]$. The original trace marked ideal's
+mark-two cosupport is disjoint from this whole good region.
+\end{theorem}
+\begin{proof}
+Fix a witnessing actual original open. Actual open restriction preserves
+the smooth carrier, SNC divisor and the density away from $H$, by the
+open-map closure identity. The first lemma gives empty cosupport of the
+literal restricted marked ideal. The genuine marked open-restriction
+cosupport dictionary is the inverse image of the original cosupport.
+Thus no point of that open is in the original cosupport. This holds for
+every genuine witnessing open, giving disjointness from their whole union.
+The good region is open by its actual open-cover definition; no desired
+preservation or comparison certificate is part of this definition.
+\end{proof}
+
+\begin{theorem}[Only original data produce a true modified smooth centre]
+\label{hir:sharp-single-boundary-actual-modified-trace-centre}
+\lean{Hironaka.HironakaSharpSingleBoundaryTraceCentre.exists_originalBoundaryTraceCentre}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:sharp-single-boundary-trace-original-domain,hir:sharp-single-boundary-trace-avoids-good-nc-region,hir:centre-function,hir:monomial-case,hir:drop-containing-members}
+\leanok
+Under the preceding original hypotheses, suppose $W$ is compact and the
+actual mark-two trace cosupport is nonempty. The genuine original
+canonical invariant of the actual trace marked ideal produces a nonempty
+closed smooth centre $C$ in that actual cosupport. In particular
+$C\subset W\cap H$, $C$ avoids the entire original good normal-crossings
+region, and $C$ has normal crossings with the true original boundary
+$[H]$. It is genuinely admissible for both the actual trace marked ideal
+and the original embedded marked ideal $(X,X,[H],\mathcal I_W,1)$.
+\end{theorem}
+\begin{proof}
+The true trace cosupport is closed inside compact $W$. The original
+canonical invariant is upper semicontinuous there and attains a maximum.
+Its actual maximum locus is nonempty and is a closed smooth admissible
+centre by the original centre-production theorem, applied to the true
+trace domain and literal zero-length tower. This is an internally
+produced centre, not a supplied maximum or desired smooth-centre field.
+Its actual cosupport containment supplies $C\subset W\cap H$ and
+disjointness from the original good region. Normal crossings with the
+empty trace divisor follow from admissibility. Since the true original
+member $H$ contains the whole centre, the proved containing-member
+normal-crossings theorem adds that member and proves normal crossings
+with $[H]$. Mark-one cosupport of the original embedded vanishing ideal
+is exactly $W$. Consequently the same genuine smooth centre is also
+admissible for the original embedded marked ideal, with its actual
+original boundary.
+\end{proof}
+
+\begin{theorem}[The produced actual blowup preserves every original good normal-crossings point]
+\label{hir:sharp-single-boundary-actual-modified-blowup}
+\lean{Hironaka.HironakaSharpSingleBoundaryTraceCentre.exists_originalBoundaryTraceBlowup}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:sharp-single-boundary-actual-modified-trace-centre,hir:smooth-current-ideal-along-tower,bex:blowup-exists,hir:admissible-sequence}
+\leanok
+The preceding original data produce an actual blowup along the internally
+selected centre, with proper holomorphic original projection and genuine
+isomorphism over the entire original good normal-crossings region. Its
+actual strict transform of $W$ is smooth, and the actual transformed
+original boundary consists of the genuine geometric strict transform
+$\overline{\pi^{-1}(H\setminus C)}$ of $H$ followed
+by the true exceptional divisor and is SNC.
+\end{theorem}
+\begin{proof}
+The centre is contained in the true restricted cosupport, which has
+empty interior by original domain membership. The existing genuine
+blowup construction therefore constructs the actual map and manifold.
+The projection is proper and holomorphic. Centre disjointness from the
+original good region and the true off-centre blowup isomorphism prove
+the asserted preservation over that whole region. Since $C\subset H$
+and $W$ is dense away from $H$, it is dense away from $C$. The genuine
+coordinate blowup theorem for a smooth submanifold containing a smooth
+centre makes its geometric strict transform smooth, and the actual
+density dictionary identifies that transform with the true strict
+transform. Original embedded admissibility and genuine transformed
+well-formedness give SNC of the literal original transformed boundary,
+retaining its original member and the actual exceptional member.
+No termination of a freshly initialized or whole modified driver is
+claimed.
+\end{proof}

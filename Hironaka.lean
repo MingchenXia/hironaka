@@ -525,6 +525,10 @@ import Hironaka.Resolution.HironakaStepOneMemberAcrossMaskValues
 import Hironaka.Invariant.StepOneLowerValueExact
 import Hironaka.Invariant.StepOneSeqLowerValueExact
 
+import Hironaka.Resolution.HironakaSharpActualCurveLocalSharpEndpoints
+
+import Hironaka.Resolution.HironakaOriginalUntestedControlledSmoothPullback
+
 /-!
 # Hironaka
 

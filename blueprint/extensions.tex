@@ -1,7 +1,8 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{alphalph}
-\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[expansion=false]{microtype}
 \usepackage[margin=2.4cm]{geometry}
 \emergencystretch=4em
 \newtheorem{theorem}{Theorem}[section]
@@ -14,8 +15,19 @@
 \newtheorem{remark}[theorem]{Remark}
 \providecommand{\fint}{\ensuremath{\mathchoice{\kern.18em\overline{\kern-.18em\int}}{\overline{\int}}{\overline{\int}}{\overline{\int}}}}
 \providecommand{\ddc}{dd^c}
+\providecommand{\cosupp}{\operatorname{cosupp}}
+\DeclareUnicodeCharacter{03BB}{\ensuremath{\lambda}}
+\DeclareUnicodeCharacter{2113}{\ensuremath{\ell}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
+\DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+\DeclareUnicodeCharacter{2218}{\ensuremath{\circ}}
 \providecommand{\href}[2]{#2}
 \newcommand{\lean}[1]{}
+\newcommand{\upstreamlean}[1]{}
+\newcommand{\upstreamunbound}[1]{\par\noindent\textit{Unresolved historical declaration reference; not counted as verified.}\par}
+\newcommand{\upstreamleanok}{\par\smallskip\noindent\textit{Verified upstream; not exported by this standalone library.}\par}
+\newcommand{\historicalleanok}{\par\smallskip\noindent\textit{Includes a preserved unresolved historical reference; compiled declarations are identified separately.}\par}
+\newcommand{\mixedleanok}{\par\smallskip\noindent\textit{Local and upstream declarations; individual reference status is recorded in the source.}\par}
 \newcommand{\uses}[1]{}
 \newcommand{\source}[1]{}
 \newcommand{\dcref}[1]{\textup{(#1)}}
@@ -24,9 +36,24 @@
 \newcommand{\notready}{}
 \title{Hironaka: canonical principalization, divisor sums and centre geometry}
 \author{}
-\date{11 October 2026}
+\date{15 October 2026}
 \begin{document}
 \maketitle
+\section*{Verification scope of the complete chapters}
+The continuation retains complete upstream statements and mathematical proofs.
+Of the 2,234 distinct declaration references in the newly synchronized chapters,
+1,991 are compiled in this standalone library, 241 identify verified upstream
+facts which are not exported here, and two preserved historical attachment names
+do not resolve to upstream declarations. Those two names are explicitly marked
+as unresolved and are not counted as verified. The 241 verified upstream references retain their original qualified names in
+explicit \texttt{upstreamlean} metadata. The two unresolved names use
+\texttt{upstreamunbound} metadata. The 241 upstream facts' actual compiled owners,
+complete proofs and standard axioms are checked in the upstream development;
+see the source provenance and verification reports accompanying these chapters.
+Nodes with these dependencies are marked below; an upstream verification marker
+is not a claim of a local standalone declaration. The fixed upstream published
+revision is \texttt{7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4} in
+\href{https://github.com/MingchenXia/archon-nakamaye/tree/7d0a4d88308ef45c16f25c2e9991e76c1f6ae4b4/TranscendentalNakamaye}{\texttt{MingchenXia/archon-nakamaye}, fixed source on GitHub}.
 \section{Prerequisites from the original API}
 These results use the embedded resolution theorems already proved in the library.
 The following pointers identify the earlier results referred to in the proofs below.
@@ -121,6 +148,188 @@ See \texttt{Hironaka.exists\_embeddedResolution\_analytic\_of\_isCompact} and it
 \input{hironaka-step-one-member-head-incidence-extension}
 \input{hironaka-normal-crossings-ordered-monomial-tail-extension}
 \input{hironaka-step-one-member-across-mask-values-extension}
+\input{hironaka-sharp-actual-accumulated-trace-residual-extension}
+\input{hironaka-sharp-actual-chronological-ambient-trace-extension}
+\input{hironaka-sharp-actual-chronological-distinct-defect-extension}
+\input{hironaka-sharp-actual-chronological-no-old-factor-extension}
+\input{hironaka-sharp-actual-chronological-residual-dictionary-extension}
+\input{hironaka-sharp-actual-chronological-strict-step-extension}
+\input{hironaka-sharp-actual-composite-product-residual-extension}
+\input{hironaka-sharp-actual-composite-total-residual-extension}
+\input{hironaka-sharp-actual-controlled-accumulated-residual-extension}
+\input{hironaka-sharp-actual-controlled-relative-principal-extension}
+\input{hironaka-sharp-actual-controlled-relative-saturation-extension}
+\input{hironaka-sharp-actual-curve-ambient-contact-budget-extension}
+\input{hironaka-sharp-actual-curve-contact-budget-domination-extension}
+\input{hironaka-sharp-actual-curve-controlled-order-shift-extension}
+\input{hironaka-sharp-actual-curve-exceptional-difference-extension}
+\input{hironaka-sharp-actual-curve-exceptional-point-exponent-extension}
+\input{hironaka-sharp-actual-curve-exceptional-residual-unit-extension}
+\input{hironaka-sharp-actual-curve-finite-ambient-difference-phase-extension}
+\input{hironaka-sharp-actual-curve-first-defect-erasure-extension}
+\input{hironaka-sharp-actual-curve-full-ambient-boundary-extension}
+\input{hironaka-sharp-actual-curve-initial-good-preservation-extension}
+\input{hironaka-sharp-actual-curve-local-sharp-endpoints-extension}
+\input{hironaka-sharp-actual-curve-off-centre-orders-extension}
+\input{hironaka-sharp-actual-curve-strict-projection-local-inverse-extension}
+\input{hironaka-sharp-actual-curve-strict-trace-contact-drop-extension}
+\input{hironaka-sharp-actual-curve-two-phase-defect-erasure-extension}
+\input{hironaka-sharp-actual-curve-two-phase-isomorphism-extension}
+\input{hironaka-sharp-actual-curve-whole-ambient-difference-centre-extension}
+\input{hironaka-sharp-actual-curve-whole-boundary-transversality-extension}
+\input{hironaka-sharp-actual-curve-whole-defect-centre-extension}
+\input{hironaka-sharp-actual-discrete-centre-member-local-branch-extension}
+\input{hironaka-sharp-actual-dynamic-distinct-centre-extension}
+\input{hironaka-sharp-actual-exceptional-power-cancellation-extension}
+\input{hironaka-sharp-actual-finite-chronological-history-extension}
+\input{hironaka-sharp-actual-finite-member-product-extension}
+\input{hironaka-sharp-actual-finite-product-residual-extension}
+\input{hironaka-sharp-actual-first-ambient-strict-exponent-extension}
+\input{hironaka-sharp-actual-first-ambient-strict-trace-factor-extension}
+\input{hironaka-sharp-actual-first-good-curve-base-extension}
+\input{hironaka-sharp-actual-first-good-exceptional-trace-density-extension}
+\input{hironaka-sharp-actual-first-good-lower-dimension-extension}
+\input{hironaka-sharp-actual-first-good-lower-product-extension}
+\input{hironaka-sharp-actual-first-good-reduced-traces-extension}
+\input{hironaka-sharp-actual-first-good-trace-restriction-nonzero-extension}
+\input{hironaka-sharp-actual-mixed-centre-whole-strict-trace-geometry-extension}
+\input{hironaka-sharp-actual-mixed-curve-contact-evolution-extension}
+\input{hironaka-sharp-actual-mixed-discrete-trace-residual-extension}
+\input{hironaka-sharp-actual-monomial-division-residual-extension}
+\input{hironaka-sharp-actual-normalized-controlled-principal-history-extension}
+\input{hironaka-sharp-actual-order-one-curve-transverse-coordinates-extension}
+\input{hironaka-sharp-actual-original-controlled-history-extension}
+\input{hironaka-sharp-actual-original-dynamic-step-extension}
+\input{hironaka-sharp-actual-original-total-history-residual-extension}
+\input{hironaka-sharp-actual-principal-order-one-trace-extension}
+\input{hironaka-sharp-actual-principal-shared-branch-dimension-extension}
+\input{hironaka-sharp-actual-product-new-exceptional-factor-extension}
+\input{hironaka-sharp-actual-product-relative-strict-extension}
+\input{hironaka-sharp-actual-raw-member-open-strict-extension}
+\input{hironaka-sharp-actual-relative-member-prime-extension}
+\input{hironaka-sharp-actual-relative-monomial-product-extension}
+\input{hironaka-sharp-actual-relative-product-order-extension}
+\input{hironaka-sharp-actual-relative-product-total-extension}
+\input{hironaka-sharp-actual-strict-trace-open-nonmonomial-extension}
+\input{hironaka-sharp-actual-total-accumulated-residual-extension}
+\input{hironaka-sharp-actual-total-monomial-factor-transport-extension}
+\input{hironaka-sharp-actual-total-nonmonomial-transport-extension}
+\input{hironaka-sharp-nested-normal-crossings-inheritance-extension}
+\input{hironaka-sharp-normal-crossings-open-locus-extension}
+\input{hironaka-sharp-original-all-boundary-centre-extension}
+\input{hironaka-sharp-original-deep-product-blowup-extension}
+\input{hironaka-sharp-original-distinct-defect-analytic-extension}
+\input{hironaka-sharp-original-distinct-defect-phase-extension}
+\input{hironaka-sharp-original-distinct-trace-usc-extension}
+\input{hironaka-sharp-original-first-member-exceptional-factor-extension}
+\input{hironaka-sharp-original-first-member-relative-strict-extension}
+\input{hironaka-sharp-original-first-member-residual-principal-extension}
+\input{hironaka-sharp-original-first-member-whole-factor-extension}
+\input{hironaka-sharp-original-member-product-domain-extension}
+\input{hironaka-sharp-original-member-product-extension}
+\input{hironaka-sharp-original-multiboundary-bad-locus-extension}
+\input{hironaka-sharp-original-order-one-trace-geometry-extension}
+\input{hironaka-sharp-original-order-one-trace-ideal-extension}
+\input{hironaka-sharp-original-product-trace-order-extension}
+\input{hironaka-sharp-original-restricted-distinct-defect-blowup-extension}
+\input{hironaka-sharp-original-restricted-distinct-defect-centre-extension}
+\input{hironaka-sharp-original-shared-trace-branch-dimension-extension}
+\input{hironaka-sharp-single-boundary-trace-centre-extension}
+\input{blowup-calculus}
+\input{finite-germ-ideal-pullback-generators}
+\input{hironaka-normal-crossings-ordered-choice-comparison-extension}
+\input{hironaka-normal-crossings-ordered-open-trace-extension}
+\input{hironaka-original-actual-smooth-lower-diagram-extension}
+\input{hironaka-original-actual-smooth-lower-history-extension}
+\input{hironaka-original-actual-smooth-zero-mask-histories-extension}
+\input{hironaka-original-any-test-curve-etale-values-extension}
+\input{hironaka-original-any-test-curve-full-value-extension}
+\input{hironaka-original-any-test-curve-stepone-value-extension}
+\input{hironaka-original-any-test-curve-value-naturality-extension}
+\input{hironaka-original-companion-chronological-boundary-analytic-extension}
+\input{hironaka-original-companion-history-year-analytic-extension}
+\input{hironaka-original-computed-zero-mask-curve-values-extension}
+\input{hironaka-original-contact-choice-lower-histories-extension}
+\input{hironaka-original-contact-remainder-smooth-naturality-extension}
+\input{hironaka-original-curve-positive-empty-window-extension}
+\input{hironaka-original-frozen-companion-presentation-extension}
+\input{hironaka-original-frozen-recursive-lower-extension}
+\input{hironaka-original-independent-smooth-contact-choices-extension}
+\input{hironaka-original-independent-smooth-lower-histories-extension}
+\input{hironaka-original-noncanonical-remainder-presentation-extension}
+\input{hironaka-original-noncanonical-uniform-contact-presentation-extension}
+\input{hironaka-original-same-carrier-curve-stepone-extension}
+\input{hironaka-original-selected-contact-cosupport-extension}
+\input{hironaka-original-step-one-history-year-analytic-extension}
+\input{hironaka-original-untested-controlled-smooth-pullback-extension}
+\input{hironaka-original-untested-member-curve-full-values-extension}
+\input{hironaka-original-untested-member-curve-special-extension}
+\input{hironaka-original-untested-member-open-full-values-extension}
+\input{hironaka-original-whole-contact-remainder-domain-extension}
+\input{hironaka-original-whole-member-lower-analytic-extension}
+\input{hironaka-original-zero-common-curve-values-extension}
+\input{hironaka-original-zero-contact-curve-full-values-extension}
+\input{hironaka-original-zero-mask-choice-towers-extension}
+\input{hironaka-original-zero-own-curve-values-extension}
+\input{hironaka-original-zero-stepone-etale-values-extension}
+\input{hironaka-smooth-submersion-actual-family-monomial-leaf-extension}
+\input{hironaka-smooth-submersion-adapted-blowup-charts-extension}
+\input{hironaka-smooth-submersion-adapted-blowup-coverage-extension}
+\input{hironaka-smooth-submersion-adapted-product-coordinates-extension}
+\input{hironaka-smooth-submersion-all-branch-history-extension}
+\input{hironaka-smooth-submersion-blowup-cartesian-extension}
+\input{hironaka-smooth-submersion-blowup-choice-geometry-extension}
+\input{hironaka-smooth-submersion-blowup-compatible-points-extension}
+\input{hironaka-smooth-submersion-blowup-lift-extension}
+\input{hironaka-smooth-submersion-blowup-local-cones-extension}
+\input{hironaka-smooth-submersion-blowup-pivot-compatibility-extension}
+\input{hironaka-smooth-submersion-canonical-value-dimension-shift-extension}
+\input{hironaka-smooth-submersion-cartesian-tower-extension}
+\input{hironaka-smooth-submersion-composition-extension}
+\input{hironaka-smooth-submersion-contact-coefficient-restriction-extension}
+\input{hironaka-smooth-submersion-contact-coordinates-extension}
+\input{hironaka-smooth-submersion-contact-parameter-charts-extension}
+\input{hironaka-smooth-submersion-contact-parameter-coefficient-ideals-extension}
+\input{hironaka-smooth-submersion-controlled-transform-extension}
+\input{hironaka-smooth-submersion-finite-ideal-intersections-extension}
+\input{hironaka-smooth-submersion-germ-ideal-colon-extension}
+\input{hironaka-smooth-submersion-global-blowup-submersion-extension}
+\input{hironaka-smooth-submersion-historical-companion-masks-extension}
+\input{hironaka-smooth-submersion-historical-controlled-tail-extension}
+\input{hironaka-smooth-submersion-monomial-chart-pullback-extension}
+\input{hironaka-smooth-submersion-nonmonomial-history-extension}
+\input{hironaka-smooth-submersion-normal-crossings-extension}
+\input{hironaka-smooth-submersion-ordered-choice-base-change-extension}
+\input{hironaka-smooth-submersion-ordered-choice-image-trace-extension}
+\input{hironaka-smooth-submersion-ordered-image-trace-extension}
+\input{hironaka-smooth-submersion-ordered-monomial-procedure-extension}
+\input{hironaka-smooth-submersion-original-contact-history-extension}
+\input{hironaka-smooth-submersion-original-curve-family-extension}
+\input{hironaka-smooth-submersion-original-general-family-leaves-extension}
+\input{hironaka-smooth-submersion-original-positive-curve-lower-extension}
+\input{hironaka-smooth-submersion-original-positive-family-leaf-extension}
+\input{hironaka-smooth-submersion-original-zero-contact-lower-extension}
+\input{hironaka-smooth-submersion-positive-lower-history-extension}
+\input{hironaka-smooth-submersion-positive-member-history-extension}
+\input{hironaka-smooth-submersion-projection-ideal-colon-extension}
+\input{hironaka-smooth-submersion-regularity-reflection-extension}
+\input{hironaka-smooth-submersion-relative-controlled-tower-extension}
+\input{hironaka-smooth-submersion-relative-differential-ideals-extension}
+\input{hironaka-smooth-submersion-relative-geometry-extension}
+\input{hironaka-smooth-submersion-relative-monomial-extension}
+\input{hironaka-smooth-submersion-relative-order-extension}
+\input{hironaka-smooth-submersion-relative-parts-companion-extension}
+\input{hironaka-smooth-submersion-relative-restriction-extension}
+\input{hironaka-smooth-submersion-tangent-contact-extension}
+\input{hironaka-smooth-submersion-universal-blowup-chart-equality-extension}
+\input{hironaka-step-one-positive-analytic-superlevels-extension}
+\input{hironaka-step-one-zero-contact-clipped-centres-extension}
+\input{hironaka-step-one-zero-contact-patch-values-extension}
+\input{hironaka-step-one-zero-contact-remainder-extension}
+\input{hironaka-step-one-zero-contact-remainder-glueing-extension}
+\input{hironaka-step-one-zero-contact-remainder-tail-glueing-extension}
+\input{hironaka-step-one-zero-contact-remainder-test-tower-extension}
+\input{holomorphic-germ-point-truncation-closure}
 \begin{thebibliography}{99}
 \bibitem{demailly-cadg} J.-P. Demailly, \emph{Complex analytic and differential geometry}, Chapter II, sections 4--5.
 \bibitem{wlodarczyk05-hironaka} J. W{\l}odarczyk, \emph{Simple Hironaka resolution in characteristic zero}, J. Amer. Math. Soc. 18 (2005), 779--822.
