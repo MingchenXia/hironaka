@@ -1,0 +1,5 @@
+/-- An isomorphism of towers may be stated over any pointwise equal base biholomorphism. -/
+theorem IsTowerIso.congr_base (h : IsTowerIso Φ T' T χ)
+    {Φ' : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X} (hΦ : ∀ p, Φ' p = Φ p) : IsTowerIso Φ' T' T χ := by
+  obtain rfl : Φ' = Φ := Diffeomorph.ext hΦ
+  exact h

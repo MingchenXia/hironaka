@@ -1,0 +1,16 @@
+/-- The genuine restricted local coherence condition supplies the actual Oka finite presentation. -/
+theorem idealFGAt_of_coherentOn {n : ℕ} (I : GermIdeal n (ComplexModel n))
+    (W : Set (ComplexModel n)) (hI : CoherentOn I W) {y : ComplexModel n} (hy : y ∈ W) :
+    IdealFGAt I.mem y := by
+  obtain ⟨U, hU, hyU, _hUW, N, H, hH, hgen⟩ := hI y hy
+  refine ⟨U, hU, hyU, Fin N, inferInstance, H,
+    fun i => mdifferentiableOn_iff_differentiableOn.mp (hH i), ?_⟩
+  intro z hz g
+  rw [hgen z hz g, CoherentIdealColon.isInSpanAt_range_iff]
+  constructor
+  · rintro ⟨hg, a, ha, he⟩
+    exact ⟨hg.mono (fun _ h => h.differentiableAt), a,
+      fun i => (ha i).mono (fun _ h => h.differentiableAt), he⟩
+  · rintro ⟨hg, a, ha, he⟩
+    exact ⟨hg.mono (fun _ h => h.mdifferentiableAt), a,
+      fun i => (ha i).mono (fun _ h => h.mdifferentiableAt), he⟩
