@@ -1,0 +1,6 @@
+/-- The cosupport of a marked ideal with mark one and coherent ideal is `N ∩ Z(𝔞)`. -/
+theorem cosupp_eq_inter_zeroLocus {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+    [IsComplexManifold n M] {𝔫 : MarkedIdeal n M} (hd : 𝔫.d = 1) (h : 𝔫.ideal.IsCoherent) :
+    𝔫.cosupp = 𝔫.N ∩ 𝔫.ideal.zeroLocus := by
+  rw [MarkedIdeal.cosupp, hd]
+  exact cosupport_one fun _ _ hg => SubmanifoldRestrictLe.holomorphicAt_of_mem_of_isCoherent h hg

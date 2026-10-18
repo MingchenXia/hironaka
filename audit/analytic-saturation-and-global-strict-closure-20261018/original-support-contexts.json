@@ -1,0 +1,270 @@
+[
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualFormalStandardMonomialHS.lean",
+    "source_parent_sha256": "aad17e550911eaaaa7216f2697a964c69a83350a7f10b225be9da34adc1ebdfb",
+    "destination_module": "Hironaka.Support.ActualDegreeLexBoundExact",
+    "destination_path": "Hironaka/Support/ActualDegreeLexBoundExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          1035
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.HironakaActualFormalVertexDivision\n\n/-! Actual diagram-complement monomials give the genuine whole formal jet quotient and HS count. -/\nset_option autoImplicit false\nopen Set Classical\nnamespace TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS\nnoncomputable section\nopen FirstPass HolGerm HironakaHolomorphicPointJets HironakaRelativeNormalMonomialBasis\n  HironakaActualOriginalFormalTaylor HironakaActualOriginalFormalHSTransfer\n  HironakaActualFormalInitialDiagram HironakaActualFormalVertexDivision\n\nvariable {n : \u2115}\n\n/-- The genuine degree-first order is compatible with the actual total exponent degree. -/\ntheorem actual_degree_le_of_deglex_lt (a b : Fin n \u2192\u2080 \u2115)\n    (h : MonomialOrder.degLex.toSyn a < MonomialOrder.degLex.toSyn b) :\n    normalExponentDegree a \u2264 normalExponentDegree b := by\n  have hd := Finsupp.DegLex.monotone_degree (MonomialOrder.degLex_lt_iff.mp h).le\n  simpa only [ofDegLex_toDegLex,Finsupp.degree_eq_sum,normalExponentDegree] using hd\n",
+        "sha256": "c03f18c6e1525ba20eab4d68c7537b93281c1d7b7eb232ac16d198a439f47eb3"
+      },
+      {
+        "source_byte_range": [
+          10841,
+          10919
+        ],
+        "original_text": "end\nend TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS\n",
+        "sha256": "1d3fe072985f9cd132f78bf65c3861ea84770c0dc561aa14b4eb777802874d6a"
+      }
+    ],
+    "recorded_context_omissions": [],
+    "pure_existing_imports": [],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "6e2afe05bbf7d5117467c7e23aec86290c993d196495ad6c28809667405b05b6"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.FactorizationFromResolution",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/FactorizationFromResolution.lean",
+    "source_parent_sha256": "8cdba3436704a330cc4c8c98a15b6fbea3e25962bd741624f8bd7540b18b1b1b",
+    "destination_module": "Hironaka.Support.MarkOneCarrierDensityExact",
+    "destination_path": "Hironaka/Support/MarkOneCarrierDensityExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          6079
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.FactorizationDomain\nimport TranscendentalNakamaye.Pending.MarkedIdealGeoTransform\nimport TranscendentalNakamaye.Pending.MarkedIdealOperationsAlong\nimport TranscendentalNakamaye.Pending.MarkedIdealEquivalence\nimport TranscendentalNakamaye.Pending.MarkedIdealRestrictOpen\nimport TranscendentalNakamaye.Pending.HomogenizedIdealAlongTower\nimport TranscendentalNakamaye.Pending.HadamardBridge\nimport TranscendentalNakamaye.Pending.BlowupStrictIdeal\nimport TranscendentalNakamaye.Pending.BlowupCodimOne\nimport TranscendentalNakamaye.Pending.BlowupIsomorphismOff\nimport TranscendentalNakamaye.Pending.ComponentComplementConnected\nimport TranscendentalNakamaye.Pending.RegularAtDimTransport\nimport TranscendentalNakamaye.Pending.AnalyticSubsetPreimage\nimport TranscendentalNakamaye.Pending.InvDomainTowerAlong\nimport TranscendentalNakamaye.Pending.GermIdealTotalTransform\nimport TranscendentalNakamaye.Pending.StrictTransformComposition\nimport TranscendentalNakamaye.Pending.RestrictLeCalculus\nimport TranscendentalNakamaye.Pending.EmbeddedFromResolution\nimport TranscendentalNakamaye.Pending.ResolutionDriver\nimport TranscendentalNakamaye.Pending.BlowupConnected\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n/-!\n# Relative principalization from given resolutions of marked ideals\n\nHironaka phase H5a (design I-0981 C-0161): the geometry of `hir:factorization-from-resolution`\n(`blueprint/src/hironaka.tex`), with the two resolutions of the proof taken as hypotheses.  Blueprint\n`mc:factorization-ambient`, `mc:factorization-thin-centre`, `mc:factorization-tower`, `mc:factorization-second`,\n`mc:factorization-assembly` (`blueprint/src/maximal-contact.tex`).  Source: Copy-4\n(`transcendental-nakamaye-copy4-20260911`), the proof of `lem:relative-principalization`, identities `eq:rp-induction`.\n\nLet `\ud835\udd2a = (X, N, E, \ud835\udd1e, 1)` be a marked ideal with mark one, `N` a closed submanifold and `\ud835\udd1e` coherent, and\n`\ud835\udd2a' = (X, X, E, \ud835\udd1e, 1)` the same data with `N` replaced by the whole manifold.  Along a multiple test blow-up `T` of `\ud835\udd2a`\nthe ideal of the transform `\ud835\udd2a_T` is an ideal of `\ud835\udcaa_{N_T}`, represented by a colon ideal along `N_T`; the transform\n`\ud835\udd2a'_T` carries the ambient controlled transform `\ud835\udd1e'_T = \ud835\udcaa(E_T)\u00b7T^*\ud835\udd1e`.  Copy-4's third identity\n`Res_{W_i} \ud835\udd1e_i = \ud835\udd1f_i` says that the two agree along `N_T`.\n\n## Main results\n\n* `ambient \ud835\udd2a`: the marked ideal `(X, X, E, \ud835\udd1e, d)`; `cosupp_eq_inter_zeroLocus` (mark one: `cosupp = N \u2229 Z(\ud835\udd1e)`);\n* **`isGeoTestTower_and_restrictEquiv`**: every multiple test blow-up `T` of `\ud835\udd2a` is one of `\ud835\udd2a'`, and `\ud835\udd2a_T` is\n  restricted-equivalent to `\ud835\udd2a_T` with its ideal replaced by `\ud835\udd1e'_T`; `cosupp_geoTransformAlong_eq`: hence\n  `cosupp \ud835\udd2a_T = N_T \u2229 Z(\ud835\udd1e'_T)`;\n* one blowup along a thin centre `C` inside a closed connected submanifold `N` of dimension `k`:\n  `lt_of_regularAtDim_of_frequently` (`dim C < k`), `mem_exceptionalLocus_of_regularAtDim` (codimension `\u2265 2`: every point\n  over `C` is exceptional), `isPreconnected_preimage_of_disjoint`, `mem_geoStrictTransform_iff_of_notMem`,\n  **`geoStrictTransform_data`** (`N' = closure (\u03c0\u207b\u00b9(N \\ C))` is the strict transform `closure (\u03c0\u207b\u00b9N \\ Exc \u03c0)` and a closed\n  connected submanifold of dimension `k`), `pullback_vanishingIdeal_eq_of_disjoint` (`\u03c0^*\ud835\udcd8_A = \ud835\udcd8_{\u03c0\u207b\u00b9A}` for `A \u2229 C = \u2205`);\n* along a multiple test blow-up `T` of `\ud835\udd2a` in the domain, with mark one and `N` a closed connected submanifold of\n  dimension `k < n`: `support_add_subset`, `frequently_mem_N_notMem_of_isInvDomain`, **`tower_data`** -- `N_T` is a closed\n  connected submanifold of dimension `k` and the strict transform of `N`; `T` is adapted to `N`;\n  `T^*\ud835\udcd8_N = \ud835\udcaa(-E_T)\u00b7\ud835\udcd8_{N_T}` (Copy-4's first identity); the support of `E_T` lies in `Exc T`;\n* the second stage, for `(X, X, E, \ud835\udd1f, 1)` with `\ud835\udd1f` coherent and a closed connected submanifold `A` of dimension `k` missing\n  `Z(\ud835\udd1f)`: `disjoint_preimage_of_isAdmissibleCentre` (admissible centres along a test tower `S` miss `S\u207b\u00b9A`), **`second_data`**\n  (`S\u207b\u00b9A` is a closed connected submanifold of dimension `k` and the strict transform of `A`, `E_S` misses it,\n  `S^*\ud835\udcd8_A = \ud835\udcd8_{S\u207b\u00b9A}`);\n* the assembly: `pullDivisor` (`S^*D`, with `pullDivisor_ideal`, `support_pullDivisor`), `idealPow_one_of_isCoherent`,\n  `isAdaptedBlowupSequence_comp`, `lt_of_ne_univ`, **`factorizationData_of_isGeoResolution`** (from a resolution `T\u2081` of\n  `(Y, W, \u2205, \ud835\udd1e, 1)` and a resolution `T\u2082` of `(Y_t, Y_t, \u2205, \ud835\udd1e_t, 1)`, `\ud835\udd1e_t` the ambient controlled transform along `T\u2081`: the body of\n  `RelativePrincipalization.FactorizationData W k \ud835\udd1e`, written out, with `f = T\u2081 \u2218 T\u2082`, `H = T\u2082^*E_{T\u2081}`, `H' = E_{T\u2082}`) and\n  **`factorizationData_of_exists_resolution`** (the same from the existence of resolutions of every marked ideal of the domain\n  in dimension `\u2264 j`, `n \u2264 j`, on compact manifolds -- the output of a resolution invariant's driver).\n\n`RelativePrincipalization` is not imported: its `FactorizationData` is written out in the conclusions above (checked\ndefinitionally equal by a throwaway probe outside the repository).\n\nImport discipline (Hironaka phase): this module does not import, even transitively,\n`Pending.RelativePrincipalization` or `Pending.EmbeddedResolution`.  Sorry-free.\n-/\n\nopen Set Filter\nopen scoped Topology Manifold\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.FactorizationFromResolution\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.MarkedIdeals\n  TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal TranscendentalNakamaye.Pending.GermIdealOrder\n  TranscendentalNakamaye.Pending.MarkedIdealOperationsAlong.MarkedIdeal\n  TranscendentalNakamaye.Pending.BlowupControlledTransform TranscendentalNakamaye.Pending.BlowupExceptionalDivisor\nopen TranscendentalNakamaye.Pending.ResolutionInvariantSpec (IsInvDomain)\n\nnoncomputable section\n\nvariable {n : \u2115}\n",
+        "sha256": "8aef048ded541e7570e1679da78d38a5ae1b3271b5295e9ed9be9d769bb0ea9b"
+      },
+      {
+        "source_byte_range": [
+          6142,
+          6185
+        ],
+        "original_text": "section Ambient\n\nvariable {X : CMfd.{u} n}\n",
+        "sha256": "fd82618d7adbfe827b5c228f34498d00392bf9ce2386b5fcc88ab9f40bf9134d"
+      },
+      {
+        "source_byte_range": [
+          6754,
+          7232
+        ],
+        "original_text": "/-- The cosupport of a marked ideal with mark one and coherent ideal is `N \u2229 Z(\ud835\udd1e)`. -/\ntheorem cosupp_eq_inter_zeroLocus {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n    [IsComplexManifold n M] {\ud835\udd2b : MarkedIdeal n M} (hd : \ud835\udd2b.d = 1) (h : \ud835\udd2b.ideal.IsCoherent) :\n    \ud835\udd2b.cosupp = \ud835\udd2b.N \u2229 \ud835\udd2b.ideal.zeroLocus := by\n  rw [MarkedIdeal.cosupp, hd]\n  exact cosupport_one fun _ _ hg => SubmanifoldRestrictLe.holomorphicAt_of_mem_of_isCoherent h hg",
+        "sha256": "920cdd07cd8312ba15ecf71ae32406a864b9aad94fb3eec12b7254d8c4f5cd34"
+      },
+      {
+        "source_byte_range": [
+          12204,
+          12216
+        ],
+        "original_text": "end Ambient\n",
+        "sha256": "8cd262994567cec70ac154e2ab737f93414ee2c36c32f898fd610798258970e7"
+      },
+      {
+        "source_byte_range": [
+          21150,
+          21191
+        ],
+        "original_text": "section Tower\n\nvariable {X : CMfd.{u} n}\n",
+        "sha256": "1a62e16543684ede8fd87ba522e6ffe363929e406224f3b9309d896280d98ecf"
+      },
+      {
+        "source_byte_range": [
+          21697,
+          22727
+        ],
+        "original_text": "/-- **Points of the submanifold off a centre accumulate at the centre**: for `\ud835\udd2b` in the domain with mark one and an\nadmissible centre `C`, every point of `C` is a limit of points of `N \\ C` (a germ of `\ud835\udd1e` nonzero along `N` does not vanish\nat nearby points of `N`, which therefore lie off the cosupport). -/\ntheorem frequently_mem_N_notMem_of_isInvDomain {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n    [IsComplexManifold n M] {\ud835\udd2b : MarkedIdeal n M} {k : \u2115} (h : IsInvDomain k \ud835\udd2b) (hd : \ud835\udd2b.d = 1) {C : Set M}\n    (hC : C \u2286 \ud835\udd2b.cosupp) : \u2200 c \u2208 C, \u2203\u1da0 y in \ud835\udcdd c, y \u2208 \ud835\udd2b.N \u2227 y \u2209 C := by\n  intro c hc\n  have hcoh := h.isWellFormed.isCoherent\n  obtain \u27e8g, hg, hfr\u27e9 := h.isNonzeroAlongAt c (\ud835\udd2b.cosupp_subset_N (hC hc))\n  refine (hfr.and_eventually (HadamardBridge.eventually_mem_of_isCoherent hcoh hg)).mono ?_\n  rintro y \u27e8\u27e8hyN, hgy\u27e9, hmem\u27e9\n  refine \u27e8hyN, fun hyC => hgy ?_\u27e9\n  have hy := hC hyC\n  rw [cosupp_eq_inter_zeroLocus hd hcoh] at hy\n  exact hy.2 g hmem",
+        "sha256": "b69f9a557513f2d0b85cfeeb76c786262f2ff3f6661ea1bc14660ee15632b25b"
+      },
+      {
+        "source_byte_range": [
+          27880,
+          27890
+        ],
+        "original_text": "end Tower\n",
+        "sha256": "e9bd319e962c98c11790a17ebfd632f97c77bbe5d2140316c068a05401e3d192"
+      },
+      {
+        "source_byte_range": [
+          46638,
+          46706
+        ],
+        "original_text": "end\n\nend TranscendentalNakamaye.Pending.FactorizationFromResolution\n",
+        "sha256": "c424770fbe07cab325b44cf6851429ba15b48a9b253c8b6b339157cf0a94f14b"
+      }
+    ],
+    "recorded_context_omissions": [
+      {
+        "before": "import TranscendentalNakamaye.Pending.BlowupCodimOne\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.Pending.BlowupConnected\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      }
+    ],
+    "pure_existing_imports": [],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "cf4bde83913adf569e7772d8992bb1c1dfcacec770f59331c2cd82dca6cc685e"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.OpensRestriction",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/OpensRestriction.lean",
+    "source_parent_sha256": "7e59881ef1e8261c861660080e71779489e8a9a2169ed8c582cc9c85045636fe",
+    "destination_module": "Hironaka.Support.OpensPreferredChartExact",
+    "destination_path": "Hironaka/Support/OpensPreferredChartExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          2422
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.AnalyticSubsetOpens\nimport TranscendentalNakamaye.Pending.GlobalPotentialPullback\nimport TranscendentalNakamaye.Pending.KahlerPerturbation\nimport TranscendentalNakamaye.FirstPass.FormPullbackFunctorial\nimport TranscendentalNakamaye.FirstPass.AnalyticGluingData\nimport Mathlib.Geometry.Manifold.ContMDiff.Basic\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n/-!\n# Restriction of forms and theta-PSH potentials to an open submanifold\n\nLet `M` be a complex manifold and `U` an open subset, a complex manifold with the restricted\ncharts `(chartAt x).subtypeRestr` (`TopologicalSpace.Opens.instChartedSpace`,\n`AnalyticSubsetOpens.instIsComplexManifoldOpens`).  The inclusion `Subtype.val : U \u2192 M` is\nholomorphic, and forms, K\u00e4hler backgrounds and theta-PSH functions restrict along it:\n\n* `restrictForm U \u03b8` \u2014 the closed real `(1,1)`-form `\u03b8|_U` (the pullback along the inclusion);\n  in the preferred chart of `U` at `y` its coefficient is that of `\u03b8` in the preferred chart of\n  `M` at `y` (`restrictForm_coeff_chartAt`);\n* `restrictKahler U \u03c9` \u2014 a K\u00e4hler background restricts to a K\u00e4hler background;\n* `thetaPlurisubharmonic_restrict`, `locallyNondegenerate_restrict`,\n  `isThetaPshPotential_restrict` \u2014 theta-PSH potentials restrict.\n\nThe converse is the point of this module.  A theta-PSH witness (a smooth local potential `\u03c1` of\n`\u03b8` with `u + \u03c1` PSH) in one chart transports to any other chart at the same point\n(`exists_witness_of_chart`, holomorphic pullback along the chart transition), so:\n\n* `thetaPlurisubharmonicOn_of_restrict` \u2014 if `G|_U` is `\u03b8|_U`-PSH, then `G` is `\u03b8`-PSH over `U`;\n* `thetaPlurisubharmonic_piecewise` \u2014 on a clopen `U`, a function equal to a `\u03b8|_U`-PSH\n  function on `U` and to a `\u03b8`-PSH function off `U` is `\u03b8`-PSH on `M`.\n\nThis is the reusable half of the reduction of statements about compact K\u00e4hler manifolds to\ntheir connected components (`Pending.OpensRestrictionMeasure` carries the measures and the\nenvelopes).  Sorry-free.\n-/\n\nopen Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nnamespace TranscendentalNakamaye.Pending.OpensRestriction\n\nopen FirstPass FirstPass.HolomorphicMaps FirstPass.PositiveClasses\n  FirstPass.AnalyticGluingData\n\nnoncomputable section\n\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n",
+        "sha256": "14dd07bce9c23654e459341b9307b5b3b906b24d7074bb30fd2193879784e497"
+      },
+      {
+        "source_byte_range": [
+          5404,
+          7493
+        ],
+        "original_text": "/-! ### The inclusion of an open submanifold -/\n\nvariable (U : Opens M)\n\nomit [IsComplexManifold n M] in\n/-- The inclusion of an open submanifold is holomorphic. -/\ntheorem contMDiff_val :\n    ContMDiff \ud835\udcd8(\u2102, ComplexModel n) \ud835\udcd8(\u2102, ComplexModel n) \u221e (Subtype.val : U \u2192 M) :=\n  contMDiff_subtype_val\n\nvariable {U}\n\nomit [IsComplexManifold n M] in\n/-- The preferred chart of `U` at `y` is the preferred chart of `M` at `y`, restricted. -/\ntheorem complexChartAt_opens_val (y : U) :\n    (complexChartAt (n := n) y).val =\n      (chartAt (ComplexModel n) (y : M)).subtypeRestr \u27e8y\u27e9 := rfl\n\n/-- The target of the preferred chart of `U` at `y` lies in that of `M`. -/\ntheorem complexChartAt_opens_target_subset (y : U) :\n    (complexChartAt (n := n) y).val.target \u2286 (complexChartAt (n := n) (y : M)).val.target := by\n  rw [complexChartAt_opens_val]\n  exact (chartAt (ComplexModel n) (y : M)).subtypeRestr_target_subset \u27e8y\u27e9\n\n/-- The inverse of the preferred chart of `U`, read in `M`. -/\ntheorem val_complexChartAt_opens_symm (y : U) {z : ComplexModel n}\n    (hz : z \u2208 (complexChartAt (n := n) y).val.target) :\n    ((complexChartAt (n := n) y).val.symm z : M) =\n      (complexChartAt (n := n) (y : M)).val.symm z := by\n  rw [complexChartAt_opens_val] at hz \u22a2\n  exact (chartAt (ComplexModel n) (y : M)).subtypeRestr_symm_apply \u27e8y\u27e9 hz\n\nomit [IsComplexManifold n M] in\ntheorem complexChartAt_opens_apply (y : U) :\n    (complexChartAt (n := n) y).val y = (complexChartAt (n := n) (y : M)).val (y : M) := rfl\n\n/-- The coordinate expression of the inclusion in the preferred charts at `y` is the identity on\nthe chart target of `U`. -/\ntheorem coordinateMap_val_complexChartAt (y : U) {z : ComplexModel n}\n    (hz : z \u2208 (complexChartAt (n := n) y).val.target) :\n    coordinateMap (Subtype.val : U \u2192 M) (complexChartAt (n := n) y)\n      (complexChartAt (n := n) (y : M)) z = z := by\n  simp only [coordinateMap, Function.comp_apply]\n  rw [val_complexChartAt_opens_symm y hz]\n  exact (complexChartAt (n := n) (y : M)).val.right_inv (complexChartAt_opens_target_subset y hz)\n",
+        "sha256": "d0fede03de568426c71674d5935f358014e7882210981ea257fe99a4a8bebb08"
+      },
+      {
+        "source_byte_range": [
+          18083,
+          18140
+        ],
+        "original_text": "end\n\nend TranscendentalNakamaye.Pending.OpensRestriction\n",
+        "sha256": "839513b040f95024cefeeca1760d303e3f74eea3f05d929bdaf31e9c36e8ec57"
+      }
+    ],
+    "recorded_context_omissions": [
+      {
+        "before": "import TranscendentalNakamaye.Pending.GlobalPotentialPullback\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.Pending.KahlerPerturbation\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.FirstPass.FormPullbackFunctorial\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.FirstPass.AnalyticGluingData\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": " FirstPass.PositiveClasses",
+        "after": "",
+        "reason": "Unrelated original pluripotential namespace is unavailable; no selected type or proof uses it."
+      },
+      {
+        "before": "\n  FirstPass.AnalyticGluingData",
+        "after": "",
+        "reason": "Unrelated original pluripotential namespace is unavailable; no selected type or proof uses it."
+      }
+    ],
+    "pure_existing_imports": [
+      "Hironaka.Manifold.HolomorphicMaps"
+    ],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "b90d87a4a67200cd2ae219ff5aaab35f6e3d2ed061e581c4ecacacc23fdb585b"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.OpensRestrictionMeasure",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/OpensRestrictionMeasure.lean",
+    "source_parent_sha256": "4f249905b2b30ae42025b6f6e2e6aff3292d29e28499cbf117efdc282c1a7a8a",
+    "destination_module": "Hironaka.Support.OpensExceptionalLocusExact",
+    "destination_path": "Hironaka/Support/OpensExceptionalLocusExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          2502
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.OpensRestriction\nimport TranscendentalNakamaye.Pending.ModificationMassInvariance\nimport TranscendentalNakamaye.Pending.DiagonalMass\nimport TranscendentalNakamaye.Pending.ManifoldPluripolar\nimport TranscendentalNakamaye.FirstPass.RooftopEnvelope\nimport TranscendentalNakamaye.FirstPass.UscRegularizationContinuous\nimport TranscendentalNakamaye.FirstPass.RegularPatchNeighborhood\nimport TranscendentalNakamaye.PshRegularDistribution\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n/-!\n# Measures, pluripolar sets and envelopes on a clopen open submanifold\n\nLet `M` be a compact complex manifold and `U` a nonempty clopen subset, for instance a connected\ncomponent.  `U` is a compact complex manifold (`Pending.OpensRestriction`), and the objects of\nglobal pluripotential theory on `M` restrict to `U` without change:\n\n* `exceptionalLocus_val`, `isIsomorphismOver_val` \u2014 the inclusion is an isomorphism over `U`;\n* `globalMixedMeasure_restrict_apply` \u2014 **the global mixed non-pluripolar measure is local**:\n  `\u27e8\u22c0 (\u03b8\u1d62|_U)_{u\u1d62|_U}\u27e9(val\u207b\u00b9 S) = \u27e8\u22c0 (\u03b8\u1d62)_{u\u1d62}\u27e9(S \u2229 U)` for measurable `S`\n  (from `ModificationMassInvariance.globalMixedMeasure_restrict_preimage_eq_map` with\n  `\u03c0 = Subtype.val`), and `diagonalPotentialMeasure_restrict_apply`;\n* `manifoldLocallyPluripolar_preimage_val`, `manifoldLocallyPluripolar_image_val` \u2014 pluripolar\n  sets restrict to `U` and extend from `U` (chart change by `locallyPluripolarAt_chartTransition`);\n* `uscRegularization_comp_val` and `rooftopEnvelope_restrict` \u2014 usc regularization and the\n  rooftop envelope commute with the restriction (competitors restrict, and a competitor on `U`\n  glues with a competitor on `M` across the clopen `U`);\n* `measure_eq_zero_of_forall_connectedComponent` \u2014 a set is null as soon as its trace on every\n  connected component is null.\n\nThis is the general mechanism by which a statement about compact K\u00e4hler manifolds proved under\n`[ConnectedSpace M]` extends to every compact K\u00e4hler manifold.  Sorry-free.\n-/\n\nopen Set Filter TopologicalSpace MeasureTheory\nopen scoped Topology Manifold ContDiff ENNReal\n\nnamespace TranscendentalNakamaye.Pending.OpensRestrictionMeasure\n\nopen FirstPass FirstPass.HolomorphicMaps FirstPass.PositiveClasses FirstPass.BlowupSequences\n  OpensRestriction\n\nnoncomputable section\n\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M] {U : Opens M}\n",
+        "sha256": "51626151ae9fd89b34883a8143f92f289b1f8dbae91b08f852351f97dfca1620"
+      },
+      {
+        "source_byte_range": [
+          2555,
+          3791
+        ],
+        "original_text": "\n/-- The derivative of the inclusion is the identity in the preferred charts. -/\ntheorem mfderiv_val_bijective (y : U) :\n    Function.Bijective\n      (mfderiv \ud835\udcd8(\u2102, ComplexModel n) \ud835\udcd8(\u2102, ComplexModel n) (Subtype.val : U \u2192 M) y) := by\n  have hd : MDifferentiableAt \ud835\udcd8(\u2102, ComplexModel n) \ud835\udcd8(\u2102, ComplexModel n)\n      (Subtype.val : U \u2192 M) y := ((contMDiff_val U) y).mdifferentiableAt (by simp)\n  rw [hd.mfderiv]\n  have heq : writtenInExtChartAt \ud835\udcd8(\u2102, ComplexModel n) \ud835\udcd8(\u2102, ComplexModel n) y\n      (Subtype.val : U \u2192 M) =\u1da0[\ud835\udcdd ((extChartAt \ud835\udcd8(\u2102, ComplexModel n) y) y)] id := by\n    have ht : (complexChartAt (n := n) y).val.target \u2208\n        \ud835\udcdd ((extChartAt \ud835\udcd8(\u2102, ComplexModel n) y) y) :=\n      (complexChartAt (n := n) y).val.open_target.mem_nhds\n        ((complexChartAt (n := n) y).val.map_source (mem_complexChartAt_source y))\n    filter_upwards [ht] with z hz\n    exact coordinateMap_val_complexChartAt y hz\n  simp only [modelWithCornersSelf_coe, range_id, fderivWithin_univ]\n  rw [heq.fderiv_eq, fderiv_id]\n  exact Function.bijective_id\n\ntheorem exceptionalLocus_val : exceptionalLocus n (Subtype.val : U \u2192 M) = \u2205 :=\n  eq_empty_of_forall_notMem fun y hy => hy (mfderiv_val_bijective y)\n",
+        "sha256": "65bf84742df7b5e107c875132b270f234c0cad736d4ea4376c0b555b19a94967"
+      },
+      {
+        "source_byte_range": [
+          21714,
+          21778
+        ],
+        "original_text": "end\n\nend TranscendentalNakamaye.Pending.OpensRestrictionMeasure\n",
+        "sha256": "ceaa5d78d616626eb28787d66a27748d2a492d259a27e1d73db9f0ff7a04f120"
+      }
+    ],
+    "recorded_context_omissions": [
+      {
+        "before": "import TranscendentalNakamaye.Pending.OpensRestriction\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.Pending.ModificationMassInvariance\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.Pending.DiagonalMass\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.Pending.ManifoldPluripolar\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.FirstPass.RooftopEnvelope\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.FirstPass.UscRegularizationContinuous\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "import TranscendentalNakamaye.PshRegularDistribution\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": " FirstPass.PositiveClasses",
+        "after": "",
+        "reason": "Unrelated original pluripotential namespace is unavailable; no selected type or proof uses it."
+      }
+    ],
+    "pure_existing_imports": [
+      "Hironaka.Support.OpensPreferredChartExact",
+      "Hironaka.Blowup.BlowupSequences"
+    ],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "0875f9455dea65c66c895a952beca595e69b063534444523e2dbaef200b5509c"
+  }
+]

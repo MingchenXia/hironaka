@@ -1,0 +1,28 @@
+{
+  "Hironaka.Resolution.HironakaActualAnalyticVertexBasis": [
+    {
+      "before": "import Hironaka.Resolution.HironakaActualFormalStandardMonomialHS\n",
+      "after": "import Hironaka.Support.ActualDegreeLexBoundExact\n",
+      "reason": "Load the complete original required degree lemma and its original context from a pure support."
+    }
+  ],
+  "Hironaka.Resolution.HironakaSharpActualCurveGlobalStrictClosure": [
+    {
+      "before": "import Hironaka.Resolution.FactorizationFromResolution\n",
+      "after": "import Hironaka.Support.MarkOneCarrierDensityExact\n",
+      "reason": "Load complete original mark-one cosupport and density proofs with original section variables."
+    },
+    {
+      "before": "import Hironaka.Analytic.OpensRestrictionMeasure\n",
+      "after": "import Hironaka.Support.OpensExceptionalLocusExact\n",
+      "reason": "Load complete original preferred-chart and differential exceptional-locus proofs without unrelated measure theory."
+    }
+  ],
+  "Hironaka.Resolution.HironakaActualFormalColonSaturation": [
+    {
+      "before": "/-- Whole principal colons commute with actual original Taylor extension, even for the zero germ. -/\ntheorem map_colon_originalTaylorAlgHom",
+      "after": "attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in\n/-- Whole principal colons commute with actual original Taylor extension, even for the zero germ. -/\ntheorem map_colon_originalTaylorAlgHom",
+      "reason": "Restore the actual original proof instance spine: native ZeroMemClass through SubsemiringClass.toAddSubmonoidClass, rather than AddSubgroupClass; full strict comparison must verify complete value."
+    }
+  ]
+}

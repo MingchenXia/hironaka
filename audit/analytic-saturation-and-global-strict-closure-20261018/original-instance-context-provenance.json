@@ -1,0 +1,26 @@
+{
+  "normal_published_revision": "d39b015d6674af8ceb12e0fa6a5198e93b2afba5",
+  "source_module": "TranscendentalNakamaye.Pending.HironakaActualFormalColonSaturation",
+  "source_parent_sha256": "1d9b31f8f869093a836c33c12f766c50f995617ae1c4df86bfae1b2e53ca72a4",
+  "actual_original_declaration": "TranscendentalNakamaye.Pending.HironakaActualFormalColonSaturation.map_colon_originalTaylorAlgHom",
+  "compiler_source_range": [
+    32,
+    0,
+    72,
+    92
+  ],
+  "original_complete_declaration_file": "map_colon_originalTaylorAlgHom-original-complete-declaration.lean.txt",
+  "original_complete_declaration_sha256": "5d0960d5a79739ec081160aa4467c343062f68ee6a0acb216f34496690da32f1",
+  "original_entire_owning_prelude": "import TranscendentalNakamaye.Pending.HironakaActualFormalIdealIntersections\nimport TranscendentalNakamaye.Pending.HironakaRelativeNormalCoherentSaturation\n\n/-! Genuine whole Taylor colons and a common internally chosen saturation index. -/\nset_option autoImplicit false\nopen Set Classical\nnamespace TranscendentalNakamaye.Pending.HironakaActualFormalColonSaturation\nnoncomputable section\nopen FirstPass HolGerm HironakaActualOriginalFormalTaylor HironakaActualTaylorFaithfullyFlat\n  HironakaRelativeNormalCoherentSaturation\n\nprivate theorem actual_extension_finite_expression (n : \u2115)\n    (I : Ideal (HolGerm (ComplexModel (0+n)))) (F : MvPowerSeries (Fin n) \u2102)\n    (hF : F \u2208 Ideal.map (originalTaylorAlgHom n).toRingHom I) :\n    \u2203 (r : \u2115) (G : Fin r \u2192 HolGerm (ComplexModel (0+n)))\n      (A : Fin r \u2192 MvPowerSeries (Fin n) \u2102),\n      (\u2200 i,G i \u2208 I) \u2227 F=\u2211 i,originalTaylorAlgHom n (G i)*A i := by\n  let := isNoetherianRing_holGerm_euclidean (0+n)\n  obtain \u27e8r,G,hG\u27e9 := Submodule.fg_iff_exists_fin_generating_family.mp (IsNoetherian.noetherian I)\n  have hspan : Ideal.span (range G)=I := hG\n  have hmap : Ideal.map (originalTaylorAlgHom n).toRingHom I=\n      Ideal.span (range fun i => originalTaylorAlgHom n (G i)) := by\n    rw [\u2190 hspan,Ideal.map_span,\u2190 Set.range_comp]\n    rfl\n  rw [hmap] at hF\n  obtain \u27e8A,hA\u27e9 := Ideal.mem_span_range_iff_exists_fun.mp hF\n  refine \u27e8r,G,A,?_,?_\u27e9\n  \u00b7 intro i\n    rw [\u2190 hspan]\n    exact Ideal.mem_span_range_self (x := i)\n  \u00b7 simpa only [mul_comm] using hA.symm\n\n",
+  "before_source_sha256": "b044321d9dadb0faa70314a13ac6bc198f3dd4b640f32b4a155dc243783a4713",
+  "administrative_prefix": "attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in\n",
+  "original_type_and_proof_tokens_changed": 0,
+  "initial_complete_difference_report": "whole-module-full-expression-comparison-initial-before-instance-context.json",
+  "original_actual_instance_path": [
+    "SubringClass.toSubsemiringClass",
+    "SubsemiringClass.toAddSubmonoidClass",
+    "AddSubmonoidClass.toZeroMemClass"
+  ],
+  "rejected_public_instance_branch": "AddSubgroupClass.toAddSubmonoidClass",
+  "status": "ORIGINAL_CONTEXT_RESTORED_PENDING_FULL_COMPILED_VALUE_CHECK"
+}

@@ -1,0 +1,7 @@
+/-- The inverse of the preferred chart of `U`, read in `M`. -/
+theorem val_complexChartAt_opens_symm (y : U) {z : ComplexModel n}
+    (hz : z ∈ (complexChartAt (n := n) y).val.target) :
+    ((complexChartAt (n := n) y).val.symm z : M) =
+      (complexChartAt (n := n) (y : M)).val.symm z := by
+  rw [complexChartAt_opens_val] at hz ⊢
+  exact (chartAt (ComplexModel n) (y : M)).subtypeRestr_symm_apply ⟨y⟩ hz

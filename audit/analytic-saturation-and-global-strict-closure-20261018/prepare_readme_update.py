@@ -1,0 +1,73 @@
+"""Reproduce the fixed322 README from public PR8 after all independent gates pass."""
+from pathlib import Path
+import json,subprocess
+A=Path(__file__).resolve().parent;ROOT=A.parents[1]
+for name in ['whole-module-full-expression-comparison.json','fragment-full-expression-comparison.json']:
+ assert json.loads((A/name).read_text())['status']=='EXACT_ALL_FULL_EXPR_DAG_MATCH'
+assert json.loads((A/'incremental-kernel-replay.json').read_text())['status']=='PASS_ALL_NEW_MODULES_AND_CHANGED_KERNEL_ARTIFACTS_AND_IMPORT_ROOT_FROZEN_KERNEL_REPLAY'
+assert json.loads((A/'blueprint-validation.json').read_text())['status']=='PASS_COMPLETE_BLUEPRINT_LATEX_NO_ERRORS'
+assert 'PASS_ALL_63_RECORDED_ACTUAL_ROOTS_AND_59_COMPLETE_THEOREM_PROOFS_FULL_STRUCTURAL_COMPARISON' in (A/'recorded-full-expression-replay.log').read_text()
+s=subprocess.check_output(['git','-C',str(ROOT),'show','9af2f7c9484b15a45282d098396261a682fb3f93:README.md'],text=True)
+a=s.index('The checked library contains **1,002 mathematical modules**');b=s.index('**Three of the nine original gaps are closed:',a)
+s=s[:a]+'''The checked library contains **1,015 mathematical modules**, plus the `Hironaka` import root. All **16,926 actual compiled declarations**, including private and generated declarations, depend only on the three standard axioms. The [verification receipt](audit/analytic-saturation-and-global-strict-closure-20261018/final-validation.json) records fresh frozen kernel replay of all 13 added modules and the import root. All 1,002 preceding mathematical sources and their complete kernel-data artifacts remain byte-identical to the verified preceding checkpoint.
+
+The latest completed subgoals construct genuine original analytic monic vertex generators, prove whole Taylor colon and blowup-saturation identities, preserve given smooth source histories during Step One preparation, and identify the constructed global smooth curve with the conventional strict transform. These results advance G2, G4 and G8; the remaining general goals are stated below.
+
+'''+s[b:]
+s=s.replace('Construct the complete defect invariant and prove its decrease and termination in general dimension; identify the conventional global strict transform and geometric blowup history beyond the proved proper global smooth-curve endpoint.','Construct the complete defect invariant and prove its decrease and termination in general dimension; construct an actual global blowup history for the proved proper smooth-curve endpoint and its conventional strict transform.')
+s=s.replace('The current proof fronts are general canonical history comparisons, the remaining global strict-transform and history identifications for smooth curves, and general Hilbert–Samuel transformation.','The current proof fronts are general canonical history comparisons, actual global blowup histories and scheduling for smooth curves, and general Hilbert–Samuel transformation.')
+a=s.index('## Latest completed subgoals');b=s.index('## Status of the nine original gaps',a)
+s=s[:a]+'''## Latest completed subgoals
+
+* **Actual analytic vertex generators and whole saturation:** the [analytic vertex-basis theorem](Hironaka/Resolution/HironakaActualAnalyticVertexBasis.lean) internally constructs genuine original analytic germs at every actual degree-lex monic vertex and proves that they generate the entire original ideal. Earlier modules identify the genuine analytic adic completion, prove faithful flatness of its original Taylor map, and produce finite analytic syzygies and whole ideal-intersection identities. [Entire principal colons and saturation](Hironaka/Resolution/HironakaActualFormalColonSaturation.lean) now commute with that Taylor map, with one internally chosen common stabilization index, including zero and unit cases. On the same genuine holomorphic polynomial blowup chart, [whole analytic total ideals and saturation](Hironaka/Resolution/HironakaActualAnalyticFormalBlowupSaturation.lean) have exactly their independently defined formal Taylor images. The convergence of the canonical reduced formal basis, general permissible-centre compatibility, transformed presentations and Bennett inequalities remain open.
+* **Preparation on the same given source history:** the [original source-history comparison](Hironaka/Resolution/HironakaOriginalSourceStepOneCanonicalSmoothHistory.lean) and [whole-cut source preparation](Hironaka/Resolution/HironakaOriginalStepOneCutSourcePreparation.lean) retain any given genuine smooth Cartesian prefix, prove its old Step One canonicity and entire pulled-back cut, and construct a genuine next source blowup over a given target blowup. No canonicity of the appended history is assumed or inferred. In the prepared source-bound-three case with equal positive ambient dimension, [all unchanged original Step One branches](Hironaka/Resolution/HironakaOriginalPreparedAllStepOneEtaleValues.lean), including independent OWN-large zero records, have equal full values at every stated depth on that same given history. The earlier prepared full GENERAL and positive-relative-dimension cases retain their original hypotheses. General positive-relative-dimension preparation, the complete higher-dimensional canonical endpoint and terminating global scheduler remain open.
+* **The global curve is the conventional strict transform:** from only the original closed smooth pure curve, ordered SNC boundary and density off it, the already constructed global endpoint is a Hausdorff, second-countable complex manifold with a proper holomorphic projection, a smooth glued curve, a locally finite indexed SNC boundary transverse to it, and an isomorphism over the whole original good locus. The [global strict-closure identity](Hironaka/Resolution/HironakaSharpActualCurveGlobalStrictClosure.lean) now identifies that same curve with `closure (π ⁻¹' W \\ exceptionalLocus n π)`. The [actual indexed birth support](Hironaka/Resolution/HironakaSharpActualCurveGlobalExceptionalBirthSupport.lean) contains the entire differential exceptional locus and lies over the original bad set; empty birth positions are retained. Equality of those supports and one actual global blowup schedule are not claimed. The higher-dimensional sharp driver remains open.
+
+This public snapshot reproduces the accepted native **322-module** continuation checkpoint, published in [upstream PR118](https://github.com/MingchenXia/archon-nakamaye/pull/118) at the [fixed source revision](https://github.com/MingchenXia/archon-nakamaye/commit/d39b015d6674af8ceb12e0fa6a5198e93b2afba5). The increment beyond the preceding 313-module checkpoint contains nine whole original modules, four pure support modules with eleven complete original proofs, and nine complete blueprint chapters with nineteen proofs. Every one of its **63 actual added declarations**, including **59 complete theorem proofs**, matches the original complete type and value. Later native checkpoints are separate progress and are not counted in this snapshot's verified totals.
+
+'''+s[b:]
+rows={
+'G2':'| G2 | Canonical principalization for compact zero locus and actual divisor sums; original given-history and prepared GENERAL cases; genuine Step One source-cut preparation preserving the same given smooth Cartesian prefix; all prepared source-bound-three Step One branches in equal ambient dimension. | The complete general canonical elementary endpoint, general positive-relative-dimension preparation and higher-carrier-bound history compatibility, and terminating global scheduling. |',
+'G4':'| G4 | An actual proper global complex endpoint from original smooth-curve data, with its smooth curve identified as the conventional strict transform, locally finite indexed SNC boundary transverse to it, full birth-support inclusions, and isomorphism over the entire original good locus. | An actual global blowup history and schedule; the complete higher-dimensional defect invariant, decrease and termination. |',
+'G8':'| G8 | Compact hypersurface stage control; canonical reduced formal bases and division; genuine analytic completion and faithfully flat Taylor map; original analytic syzygies and whole intersections, colons and saturation; internally constructed analytic monic vertex generators of the whole original ideal; whole analytic/formal blowup saturation on the same actual chart. | Convergence and permissible-centre compatibility for the required presentations, the complete geometric analytic/formal strict-transform bridge, transformed stability and Bennett inequalities. |'}
+start=s.index('## Status of the nine original gaps')
+for gap,row in rows.items():
+ a=s.index('| '+gap+' |',start);b=s.index('\n',a);s=s[:a]+row+s[b:]
+s=s.replace('and the remaining conventional strict-transform and global-history identifications for the constructed smooth-curve endpoint remain open.','and actual global blowup histories and scheduling for the constructed smooth-curve endpoint remain open.')
+s=s.replace('The subsequent overlap-map results below compare these local histories; constructing their global geometric descent and a general noncompact global sharp history remains open.',
+ 'Later continuation checkpoints construct their proper global complex endpoint and identify its curve with the conventional strict transform, as described below. An actual global blowup history and general higher-dimensional sharp resolution remain open.')
+a=s.index('4. **Sharp embedded resolution is proved locally for original smooth curves; the general form remains open.**')
+b=s.index('5. **Dimension components:',a)
+s=s[:a]+'''4. **The global smooth-curve endpoint and its conventional strict transform are proved.**
+   Under the original smooth pure curve, ordered SNC and density hypotheses, the actual global proper holomorphic
+   projection has a smooth conventional strict transform, a locally finite indexed SNC boundary transverse to it,
+   and an isomorphism over the whole original good locus. Its differential exceptional locus lies in the indexed
+   birth support, which lies over the original bad set. These endpoint results do not construct a single actual
+   global blowup history. General higher-dimensional sharp centres, the complete defect invariant, decrease,
+   termination and global scheduling remain open.
+'''+s[b:]
+s=s.replace('audit/analytic-completion-and-global-curve-atlas-20261018/CheckAllActualCompiledRoots.lean','audit/analytic-saturation-and-global-strict-closure-20261018/CheckAllActualCompiledRoots.lean')
+a=s.index('The current [verification report]',s.index('## Verification'));b=s.index('<details>',a)
+s=s[:a]+'''The current [verification report](audit/analytic-saturation-and-global-strict-closure-20261018/verification.md) and [machine-readable receipt](audit/analytic-saturation-and-global-strict-closure-20261018/final-validation.json) cover this increment:
+
+* **Build and axioms:** `lake --wfail build` passed all 5,007 jobs with zero warnings. All 16,926 actual library roots use only `propext`, `Classical.choice` and `Quot.sound`. All 5,434 distinct local declaration bindings in the full blueprint resolve in the compiled library.
+* **Complete expression comparison:** all **63 added actual roots** match their original complete types and values, including all **59 complete theorem proofs** and every private/generated helper. Numerical name components, binder names and metadata are retained. The frozen AllV2 and ScopedOwnersV3 profiles and comparator use no alpha-equivalence, definitional-equivalence or erasure fallback. Lossless compressed captures reproduce the full comparison.
+* **Kernel coverage:** all 13 new modules and the changed import root passed fresh frozen replay. All 1,002 preceding mathematical sources and complete kernel-data artifacts match the pinned preceding verified checkpoint byte for byte. This chain covers all 1,016 modules; it does not claim a fresh full-library replay.
+* **Source provenance:** nine whole modules and nine complete blueprint chapters reproduce from the [fixed normal published source](https://github.com/MingchenXia/archon-nakamaye/commit/d39b015d6674af8ceb12e0fa6a5198e93b2afba5). Four additive pure support modules recover eleven complete original degree, density, chart and differential proofs, with their original scope variables, universes and `omit` context. Three recorded import substitutions load these originals without unrelated prerequisites; one declaration-local instance restoration selects the exact original compiled colon-proof instance path. Original statement and proof text is unchanged. Independent entire-source/context review and complete expression comparison verify the result. None of the preceding 1,002 mathematical sources changes.
+* **Blueprint scope:** 399 complete synchronized chapters contain 1,560 complete proofs, with 4,275 distinct local bindings, 241 verified upstream-only bindings and two explicitly unresolved historical attachment names. The full document includes 484 chapters, 2,031 proof environments and 5,434 distinct local bindings. Its [795-page PDF](audit/analytic-saturation-and-global-strict-closure-20261018/blueprint-pdf-build/extensions.pdf) compiles without LaTeX errors. Preserved external-reference and bookmark warnings are recorded in the receipt.
+* **Previously disclosed parser outputs:** the earlier native280 publication separately audited three generated front-end definitions of a local notation. Their relocated generated names and quoted hygiene identifiers differ, so its raw all-1,009-root comparison remains explicitly `BLOCKED_EXACT_DIFFERENCE`; equality of those three bodies remains unclaimed. Their source-generation evidence and full axiom/kernel coverage remain included through the verified preceding checkpoint chain. This increment has no such unmatched new roots.
+
+Reproduce source recovery and compare the complete recorded expressions with:
+
+```sh
+python3 audit/analytic-saturation-and-global-strict-closure-20261018/verify_incremental_source.py --source-root /path/to/archon-nakamaye
+python3 audit/analytic-saturation-and-global-strict-closure-20261018/verify_recorded_full_expressions.py
+```
+
+Source build, actual-root axiom audit, captured-data comparison and frozen kernel replay are separate checks. The [preceding verification](audit/analytic-completion-and-global-curve-atlas-20261018/verification.md) retains its complete evidence and the earlier parser disclosures. G5, G6 and G7 remain closed; G1, G2, G3, G4, G8 and G9 retain the outstanding general goals listed above.
+
+'''+s[b:]
+assert '**Three of the nine original gaps are closed: G5, G6 and G7.**' in s
+(A/'README-next-checkpoint.md.txt').write_text(s)
+(ROOT/'README.md').write_text(s)
+print('README_UPDATED_FIXED322_VERIFIED_SCOPE')

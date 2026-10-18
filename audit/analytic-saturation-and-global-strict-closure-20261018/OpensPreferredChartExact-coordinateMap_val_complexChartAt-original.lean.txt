@@ -1,0 +1,9 @@
+/-- The coordinate expression of the inclusion in the preferred charts at `y` is the identity on
+the chart target of `U`. -/
+theorem coordinateMap_val_complexChartAt (y : U) {z : ComplexModel n}
+    (hz : z ∈ (complexChartAt (n := n) y).val.target) :
+    coordinateMap (Subtype.val : U → M) (complexChartAt (n := n) y)
+      (complexChartAt (n := n) (y : M)) z = z := by
+  simp only [coordinateMap, Function.comp_apply]
+  rw [val_complexChartAt_opens_symm y hz]
+  exact (complexChartAt (n := n) (y : M)).val.right_inv (complexChartAt_opens_target_subset y hz)
