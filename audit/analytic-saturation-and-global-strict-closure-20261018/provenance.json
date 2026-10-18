@@ -38,8 +38,14 @@
     "destination_module": "Hironaka.Resolution.HironakaActualFormalColonSaturation",
     "initial_synchronized_destination_sha256": "b044321d9dadb0faa70314a13ac6bc198f3dd4b640f32b4a155dc243783a4713",
     "additional_pure_support_imports": [],
-    "administrative_elaboration_contexts": [],
-    "destination_sha256": "b044321d9dadb0faa70314a13ac6bc198f3dd4b640f32b4a155dc243783a4713"
+    "administrative_elaboration_contexts": [
+      {
+        "before": "/-- Whole principal colons commute with actual original Taylor extension, even for the zero germ. -/\ntheorem map_colon_originalTaylorAlgHom",
+        "after": "attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in\n/-- Whole principal colons commute with actual original Taylor extension, even for the zero germ. -/\ntheorem map_colon_originalTaylorAlgHom",
+        "reason": "Restore the actual original proof instance spine: native ZeroMemClass through SubsemiringClass.toAddSubmonoidClass, rather than AddSubgroupClass; full strict comparison must verify complete value."
+      }
+    ],
+    "destination_sha256": "104ed0be93703be5f978ea59276baba0b2078a014d058e2496dfbaf99f4368a2"
   },
   {
     "source_revision": "fb8088374e308e1ae1c103a276b6fe996c3a936d",

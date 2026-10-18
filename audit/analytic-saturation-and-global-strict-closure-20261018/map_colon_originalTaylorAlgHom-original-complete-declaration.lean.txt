@@ -1,0 +1,41 @@
+/-- Whole principal colons commute with actual original Taylor extension, even for the zero germ. -/
+theorem map_colon_originalTaylorAlgHom (n : ℕ)
+    (I : Ideal (HolGerm (ComplexModel (0+n)))) (a : HolGerm (ComplexModel (0+n))) :
+    Ideal.map (originalTaylorAlgHom n).toRingHom (I.colon {a})=
+      (Ideal.map (originalTaylorAlgHom n).toRingHom I).colon {originalTaylorAlgHom n a} := by
+  apply le_antisymm
+  · apply Ideal.map_le_iff_le_comap.mpr
+    intro g hg
+    change originalTaylorAlgHom n g ∈
+      (Ideal.map (originalTaylorAlgHom n).toRingHom I).colon {originalTaylorAlgHom n a}
+    rw [Submodule.mem_colon_singleton,smul_eq_mul] at hg ⊢
+    rw [← map_mul]
+    exact Ideal.mem_map_of_mem _ hg
+  · intro F hF
+    rw [Submodule.mem_colon_singleton,smul_eq_mul] at hF
+    obtain ⟨r,G,A,hGI,hA⟩ := actual_extension_finite_expression n I _ hF
+    let L := Fin.append G (fun _ : Fin 1 => -a)
+    let V := Fin.append A (fun _ : Fin 1 => F)
+    have hrel : (∑ i,originalTaylorAlgHom n (L i)*V i)=0 := by
+      simp only [L,V,Fin.sum_univ_add,Fin.append_left,Fin.append_right,
+        Fin.sum_univ_one,map_neg,neg_mul]
+      rw [← hA]
+      ring
+    obtain ⟨k,c,B,hc,hL⟩ :=
+      (actual_formal_relation_iff_original_syzygies n (r+1) L V).mp hrel
+    let K := fun j : Fin k => c ((0 : Fin 1).natAdd r) j
+    have hK : ∀ j,K j ∈ I.colon {a} := by
+      intro j
+      rw [Submodule.mem_colon_singleton,smul_eq_mul]
+      have he : (∑ i : Fin r,G i*c (i.castAdd 1) j)-a*K j=0 := by
+        simpa only [L,K,Fin.sum_univ_add,Fin.append_left,Fin.append_right,
+          Fin.sum_univ_one,neg_mul,sub_eq_add_neg] using hL j
+      have hk : K j*a=∑ i : Fin r,G i*c (i.castAdd 1) j := by
+        have h := sub_eq_zero.mp he
+        simpa only [mul_comm] using h.symm
+      rw [hk]
+      exact Ideal.sum_mem _ fun i _ => Ideal.mul_mem_right _ _ (hGI i)
+    have he : F=∑ j,originalTaylorAlgHom n (K j)*B j := by
+      simpa only [V,K,Fin.append_right] using hc ((0 : Fin 1).natAdd r)
+    rw [he]
+    exact Ideal.sum_mem _ fun j _ => Ideal.mul_mem_right _ _ (Ideal.mem_map_of_mem _ (hK j))

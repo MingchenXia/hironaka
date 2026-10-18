@@ -99,5 +99,9 @@ adjustments={
    'after':'import Hironaka.Support.MarkOneCarrierDensityExact\n','reason':'Load complete original mark-one cosupport and density proofs with original section variables.'},
   {'before':'import Hironaka.Analytic.OpensRestrictionMeasure\n',
    'after':'import Hironaka.Support.OpensExceptionalLocusExact\n','reason':'Load complete original preferred-chart and differential exceptional-locus proofs without unrelated measure theory.'}]}
+instance_contexts=HERE/'original-instance-restorations.json'
+if instance_contexts.exists():
+ for module,changes in json.loads(instance_contexts.read_text()).items():
+  adjustments.setdefault(module,[]).extend(changes)
 (HERE/'owned-administrative-contexts.json').write_text(json.dumps(adjustments,indent=2)+'\n')
 print(json.dumps({'status':'RESTORED_COMPLETE_ORIGINAL_PROOFS_AND_CONTEXTS','support_modules':len(contexts),'complete_original_declarations':len(records)}))
