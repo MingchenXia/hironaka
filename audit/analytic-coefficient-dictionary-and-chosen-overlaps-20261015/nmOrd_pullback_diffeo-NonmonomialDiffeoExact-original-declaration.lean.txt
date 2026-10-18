@@ -1,0 +1,4 @@
+theorem nmOrd_pullback_diffeo (hn : 0 < n) (Φ : M' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ M)
+    {𝔪 : MarkedIdeal n M} (h𝔪 : 𝔪.IsWellFormed) (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) (z : M') :
+    nmOrd (MarkedIdeal.pullback Φ 𝔪) z = nmOrd 𝔪 (Φ z) :=
+  nmOrd_congr fun q => mem_ordGe_pullback_diffeo_iff hn Φ h𝔪 hne q z

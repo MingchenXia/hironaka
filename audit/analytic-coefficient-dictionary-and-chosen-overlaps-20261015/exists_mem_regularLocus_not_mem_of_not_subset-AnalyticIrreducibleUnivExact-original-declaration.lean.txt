@@ -1,0 +1,16 @@
+/-- **Top-dimensional regular points off a proper analytic subset.**
+An irreducible analytic subvariety `V` not contained in an analytic subset `A` has a point
+outside `A` at which `V` is regular of dimension `dim V`.
+
+`A` is closed, so `V \ A` is a nonempty relatively open subset of `V`; the regular locus is
+dense (`RegularLocusDense.exists_regularAtDim_mem_nhds`, sorry-free), so `V` is regular of
+some dimension at a point of `Aᶜ`, and that dimension is `dim V` by pure dimensionality
+(`eq_dim_of_regularAtDim`). -/
+theorem exists_mem_regularLocus_not_mem_of_not_subset
+    (V : ClosedIrreducibleAnalyticSubvariety n M) {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) (hV : ¬ V.carrier ⊆ A) :
+    ∃ x ∈ regularLocus (n := n) V.carrier V.dim, x ∉ A := by
+  obtain ⟨y, hyV, hyA⟩ := not_subset.mp hV
+  obtain ⟨x, hxA, k, hx⟩ := RegularLocusDense.exists_regularAtDim_mem_of_isOpen V.analytic
+    hA.isClosed.isOpen_compl hyV hyA
+  exact ⟨x, (eq_dim_of_regularAtDim V hx) ▸ hx, hxA⟩

@@ -1,0 +1,30 @@
+/-- **A subspace of dimension `r` is the standard `r`-plane in suitable linear coordinates.** -/
+theorem exists_linearEquiv_mem_plane_iff {V : Type*} [NormedAddCommGroup V] [NormedSpace ℂ V]
+    [FiniteDimensional ℂ V] {N r : ℕ} (hV : Module.finrank ℂ V = N) (W : Submodule ℂ V)
+    (hW : Module.finrank ℂ W = r) :
+    ∃ A : V ≃L[ℂ] ComplexModel N, ∀ v, A v ∈ complexCoordinatePlane N r ↔ v ∈ W := by
+  have hrN : r ≤ N := hW ▸ hV ▸ Submodule.finrank_le W
+  obtain ⟨C, hC⟩ := W.exists_isCompl
+  obtain ⟨C', hC'⟩ := (planeSubmodule N r).exists_isCompl
+  have hdimC : Module.finrank ℂ C = N - r := by
+    have := Submodule.finrank_add_eq_of_isCompl hC
+    omega
+  have hdimC' : Module.finrank ℂ C' = N - r := by
+    have := Submodule.finrank_add_eq_of_isCompl hC'
+    rw [finrank_planeSubmodule hrN, finrank_euclideanSpace_fin] at this
+    omega
+  let e₁ : W ≃ₗ[ℂ] planeSubmodule N r :=
+    LinearEquiv.ofFinrankEq _ _ (by rw [hW, finrank_planeSubmodule hrN])
+  let e₂ : C ≃ₗ[ℂ] C' := LinearEquiv.ofFinrankEq _ _ (by rw [hdimC, hdimC'])
+  let σ := Submodule.prodEquivOfIsCompl W C hC
+  let σ' := Submodule.prodEquivOfIsCompl (planeSubmodule N r) C' hC'
+  let A : V ≃ₗ[ℂ] ComplexModel N := σ.symm.trans ((e₁.prodCongr e₂).trans σ')
+  refine ⟨A.toContinuousLinearEquiv, fun v => ?_⟩
+  change A v ∈ planeSubmodule N r ↔ v ∈ W
+  have hsymm : σ'.symm (A v) = (e₁ (σ.symm v).1, e₂ (σ.symm v).2) := by
+    simp [A]
+  rw [← Submodule.prodEquivOfIsCompl_symm_apply_snd_eq_zero (planeSubmodule N r) C' hC',
+    ← Submodule.prodEquivOfIsCompl_symm_apply_snd_eq_zero W C hC]
+  change (σ'.symm (A v)).2 = 0 ↔ (σ.symm v).2 = 0
+  rw [hsymm]
+  simp

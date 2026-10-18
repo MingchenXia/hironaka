@@ -1,0 +1,281 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Support.AnalyticSubsetPresentationsExact
+import Hironaka.Analytic.RemmertSteinFlatSetup
+import Hironaka.Analytic.ProperImageIrreducible
+import Hironaka.Analytic.AnalyticComplementConnected
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# The flat case of Remmert--Stein: the bad set and the connected base
+
+Blueprint `rem:remmert-stein-flat`, paragraph "The bad set" (Demailly, *Complex analytic and
+differential geometry*, II.8.7).  On the open set `X₀ = Q ∩ π⁻¹(B' \ N)` (`N = ℂᵖ × {0} ⊆ ℂˢ`,
+`B'` the ball of radius `δ` about `π a`), the projection `F₀ = π : X₀ → Y₀ = B' \ N` has finite
+fibres on `E₀ = E ∩ X₀`, which is analytic of pure dimension `s`.  The rank-degeneracy set
+`S₀ = S_s(F₀, E₀)` (singular points and points where `π|_E` has rank `< s`, `RankDegeneracy`) is a
+thin analytic subset of `E₀` (`FiniteMapDimension`: every open piece of `E₀` contains points of rank
+`s`), hence of dimension `≤ s - 1`; `F₀` is proper on it, so by `(R_{s-1})` its image `Sig₀` is
+analytic in `Y₀`, of dimension `≤ s - 1` (`exists_badSet`).  Off `Sig₀` every point of `E₀` is a regular
+point of dimension `s` of rank `s`.
+
+The base `B'₀ = (B' \ N) \ Sig₀` is connected (`isPreconnected_base`): complements of proper analytic
+subsets of connected manifolds are connected (`AnalyticComplementConnected`), applied to `N ∩ B'`
+in the ball and to `Sig₀` in `Y₀`.
+
+Sorry-free.
+-/
+
+open Set Filter Topology Metric TopologicalSpace
+open scoped Manifold ContDiff
+
+noncomputable section
+
+namespace Hironaka.RemmertSteinFlat
+
+open Hironaka.RegularLocusDense AnalyticDimensionBasics AnalyticSubsetOpens
+  RemmertStatements RankDegeneracy ThinDimensionDrop AnalyticImageDimension
+  RemmertSteinCoordinates
+
+variable {n p t : ℕ} {Λ : ComplexModel n ≃L[ℂ] ComplexModel (p + t) × ComplexModel (n - (p + t))}
+  {a : ComplexModel n} {δ ρ : ℝ}
+
+/-- `ℂᵖ × {0}` is analytic in `ℂ^{p+t}`. -/
+theorem isComplexAnalyticSubset_plane (p t : ℕ) :
+    IsComplexAnalyticSubset (n := p + t) (M := ComplexModel (p + t))
+      (complexCoordinatePlane (p + t) p) := by
+  have h := isComplexAnalyticSubset_levels (n := p + t)
+    (fun j : Fin t => (EuclideanSpace.proj (Fin.natAdd p j) : ComplexModel (p + t) →L[ℂ] ℂ)) 0
+  convert h using 1
+  ext w
+  simp only [complexCoordinatePlane, mem_ofPred_eq, map_zero]
+  constructor
+  · intro hw j
+    exact hw _ (by simp)
+  · intro hw i hi
+    have := hw ⟨i.1 - p, by omega⟩
+    have hi' : Fin.natAdd p ⟨i.1 - p, by omega⟩ = i := by ext; simp; omega
+    simpa [hi'] using this
+
+/-- The open set `X₀ = Q ∩ π⁻¹(B' \ N)`. -/
+def coverSource (Λ : ComplexModel n ≃L[ℂ] ComplexModel (p + t) × ComplexModel (n - (p + t)))
+    (a : ComplexModel n) (δ ρ : ℝ) : Opens (ComplexModel n) :=
+  ⟨polydisc Λ a δ ρ ∩ {z | (Λ z).1 ∉ complexCoordinatePlane (p + t) p},
+    isOpen_polydisc.inter ((isComplexAnalyticSubset_plane p t).isClosed.isOpen_compl.preimage
+      (continuous_fst.comp Λ.continuous))⟩
+
+/-- The open set `Y₀ = B' \ N`. -/
+def coverTarget (Λ : ComplexModel n ≃L[ℂ] ComplexModel (p + t) × ComplexModel (n - (p + t)))
+    (a : ComplexModel n) (δ : ℝ) : Opens (ComplexModel (p + t)) :=
+  ⟨ball (Λ a).1 δ \ complexCoordinatePlane (p + t) p,
+    isOpen_ball.sdiff (isComplexAnalyticSubset_plane p t).isClosed⟩
+
+/-- The projection `F₀ : X₀ → Y₀`. -/
+def coverMap (Λ : ComplexModel n ≃L[ℂ] ComplexModel (p + t) × ComplexModel (n - (p + t)))
+    (a : ComplexModel n) (δ ρ : ℝ) : coverSource Λ a δ ρ → coverTarget Λ a δ :=
+  fun z => ⟨(Λ z).1, by
+    obtain ⟨⟨h1, -⟩, h2⟩ := z.2
+    exact ⟨by rw [mem_ball, dist_eq_norm]; exact h1, h2⟩⟩
+
+@[simp] theorem coverMap_coe (z : coverSource Λ a δ ρ) :
+    (coverMap Λ a δ ρ z : ComplexModel (p + t)) = (Λ z).1 := rfl
+
+theorem contMDiff_coverMap :
+    ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel (p + t)) ∞ (coverMap Λ a δ ρ) := by
+  intro z
+  rw [← ContMDiffAt.subtypeVal_comp_iff]
+  have h : ContDiff ℂ ∞ fun z : ComplexModel n => (Λ z).1 :=
+    (ContinuousLinearMap.fst ℂ _ _).contDiff.comp Λ.contDiff
+  exact (h.contMDiff.comp contMDiff_subtype_val).contMDiffAt
+
+section BadSet
+
+variable {Ω E : Set (ComplexModel n)}
+
+attribute [local instance 2000] CommCStarAlgebra.toNormedCommRing in
+/-- **The bad set** (`rem:remmert-stein-flat`).  Under `(R_{m-1})`, `s = p + t ≤ m`, there is an
+analytic `Sig₀ ⊆ Y₀` of dimension `≤ s - 1` off whose preimage every point of `E ∩ X₀` is a regular
+point of dimension `s` at which `π|_E` has rank `s` (computed in `X₀`). -/
+theorem exists_badSet {m : ℕ} (hR : ProperImageStatement.{0, 0} (m - 1)) (hsm : p + t ≤ m)
+    (hEL : Disjoint E (complexCoordinatePlane n p))
+    (hEpres : ∀ z ∈ Ω, z ∉ complexCoordinatePlane n p →
+      Nonempty (ComplexAnalyticPresentationAt (n := n) E z))
+    (hpure : IsPureDim (n := n) E (p + t))
+    (hπL : ∀ l ∈ complexCoordinatePlane n p, (Λ l).1 ∈ complexCoordinatePlane (p + t) p)
+    (hcl : closure E ∩ Ω ⊆ E ∪ complexCoordinatePlane n p)
+    (hQΩ : ∀ z, ‖(Λ z).1 - (Λ a).1‖ ≤ δ → ‖(Λ z).2 - (Λ a).2‖ ≤ ρ → z ∈ Ω)
+    (hsph : ∀ z, ‖(Λ z).1 - (Λ a).1‖ ≤ δ → ‖(Λ z).2 - (Λ a).2‖ = ρ →
+      z ∉ E ∧ z ∉ complexCoordinatePlane n p) :
+    ∃ Sig₀ : Set (coverTarget Λ a δ), IsComplexAnalyticSubset (n := p + t) Sig₀ ∧
+      DimLE (n := p + t) Sig₀ (p + t - 1) ∧
+      ∀ z : coverSource Λ a δ ρ, (z : ComplexModel n) ∈ E → coverMap Λ a δ ρ z ∉ Sig₀ →
+        RegularAtDim (n := n) ((↑) ⁻¹' E : Set (coverSource Λ a δ ρ)) z (p + t) ∧
+        rankAt (n := n) (n' := p + t) (coverMap Λ a δ ρ)
+          ((↑) ⁻¹' E : Set (coverSource Λ a δ ρ)) z = p + t := by
+  classical
+  set X₀ := coverSource Λ a δ ρ with hX₀
+  set Y₀ := coverTarget Λ a δ with hY₀
+  set F₀ := coverMap Λ a δ ρ with hF₀def
+  set E₀ : Set X₀ := (↑) ⁻¹' E with hE₀
+  have hX₀Ω : ∀ z : X₀, (z : ComplexModel n) ∈ Ω ∧ (z : ComplexModel n) ∉ complexCoordinatePlane n p :=
+    fun z => ⟨hQΩ z z.2.1.1.le z.2.1.2.le, fun h => z.2.2 (hπL z h)⟩
+  have hE₀a : IsComplexAnalyticSubset (n := n) E₀ :=
+    isComplexAnalyticSubset_preimage_val_of_forall fun z hz =>
+      hEpres z (hX₀Ω ⟨z, hz⟩).1 (hX₀Ω ⟨z, hz⟩).2
+  have hpure₀ : IsPureDim (n := n) E₀ (p + t) := fun y j hy =>
+    hpure y j (regularAtDim_preimage_val_iff.mp hy)
+  have hF₀ : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel (p + t)) ∞ F₀ :=
+    contMDiff_coverMap
+  -- finite fibres
+  have hfin : ∀ y : X₀, (E₀ ∩ F₀ ⁻¹' {F₀ y}).Finite := by
+    intro y
+    have h := finite_fibre (Ω := Ω) (L := complexCoordinatePlane n p) hcl hEL hEpres hQΩ hsph
+      (w := (Λ y).1) (by rw [mem_ball, dist_eq_norm]; exact y.2.1.1)
+      (fun l hl h => y.2.2 (h ▸ hπL l hl))
+    refine (h.preimage Subtype.val_injective.injOn).subset fun z hz => ?_
+    refine ⟨⟨hz.1, z.2.1⟩, ?_⟩
+    have : F₀ z = F₀ y := hz.2
+    exact congrArg Subtype.val this
+  have hdisc : ∀ y ∈ E₀, ¬ AccPt y (𝓟 (E₀ ∩ F₀ ⁻¹' {F₀ y})) := fun y _ =>
+    not_accPt_of_finite (hfin y) y
+  -- the rank-degeneracy set
+  set S₀ := rankDegeneracyLocus n (p + t) F₀ E₀ (p + t) (p + t) with hS₀
+  have hS₀a : IsComplexAnalyticSubset (n := n) S₀ :=
+    isComplexAnalyticSubset_rankDegeneracyLocus hE₀a hpure₀ (hF₀.mdifferentiable (by simp)) _
+  have hS₀E : S₀ ⊆ E₀ := rankDegeneracyLocus_subset _ _ _ _
+  have hthin : ∀ O : Set X₀, IsOpen O → O ∩ E₀ ⊆ S₀ → O ∩ E₀ = ∅ := by
+    intro O hO hOS
+    by_contra hne
+    obtain ⟨y, hyO, hyE⟩ := nonempty_iff_ne_empty.mpr hne
+    obtain ⟨y₁, hy₁O, j, hy₁⟩ := exists_regularAtDim_mem_nhds hE₀a hyE (hO.mem_nhds hyO)
+    have hj : j = p + t := hpure₀ y₁ j hy₁
+    subst hj
+    obtain ⟨y₂, hy₂O, hy₂, hy₂r⟩ := FiniteMapDimension.exists_regularAtDim_rankAt_eq
+      (hF₀.mdifferentiable (by simp)) hdisc hy₁ (hO.mem_nhds hy₁O)
+    rcases hOS ⟨hy₂O, hy₂.2.1⟩ with ⟨-, h⟩ | ⟨-, h⟩
+    · exact h hy₂
+    · omega
+  have hS₀dim : DimLE (n := n) S₀ (p + t - 1) := fun y j hy => by
+    have := lt_of_regularAtDim_of_thin hE₀a hS₀E hthin hpure₀.dimLE hy
+    omega
+  have hprop : ProperOn F₀ S₀ := by
+    intro K hK
+    have hKc : IsCompact (((↑) : Y₀ → ComplexModel (p + t)) '' K) := hK.image continuous_subtype_val
+    have hcomp := isCompact_inter_preimage (Ω := Ω) (L := complexCoordinatePlane n p) hcl hQΩ hsph
+      hKc (fun w ⟨y, _, hy⟩ => hy ▸ (by
+        have := y.2.1
+        rw [mem_ball, dist_eq_norm] at this ⊢
+        exact this))
+      (fun l hl ⟨y, _, hy⟩ => y.2.2 (hy ▸ hπL l hl))
+    have hEK : IsCompact (E₀ ∩ F₀ ⁻¹' K) := by
+      rw [Subtype.isCompact_iff]
+      convert hcomp using 1
+      ext z
+      constructor
+      · rintro ⟨y, ⟨hyE, hyK⟩, rfl⟩
+        exact ⟨⟨hyE, y.2.1⟩, F₀ y, hyK, rfl⟩
+      · rintro ⟨⟨hzE, hzQ⟩, w, hwK, hw⟩
+        have hzX : z ∈ X₀ := ⟨hzQ, by
+          show (Λ z).1 ∉ complexCoordinatePlane (p + t) p
+          rw [← hw]
+          exact w.2.2⟩
+        refine ⟨⟨z, hzX⟩, ⟨hzE, ?_⟩, rfl⟩
+        have : F₀ ⟨z, hzX⟩ = w := Subtype.ext (by
+          show (Λ z).1 = (w : ComplexModel (p + t))
+          exact hw.symm)
+        rw [mem_preimage, this]
+        exact hwK
+    exact hEK.of_isClosed_subset (hS₀a.isClosed.inter (hK.isClosed.preimage hF₀.continuous))
+      (inter_subset_inter_left _ hS₀E)
+  have hSiga : IsComplexAnalyticSubset (n := p + t) (F₀ '' S₀) :=
+    hR hF₀ hS₀a (fun y j hy => (hS₀dim y j hy).trans (by omega)) hprop
+  have hSigdim : DimLE (n := p + t) (F₀ '' S₀) (p + t - 1) := by
+    have h := dimLE_image hF₀ hS₀a hS₀dim (b := 0) fun x hx =>
+      locDimGE_zero (hS₀a.inter (AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage hF₀
+        (FibreDimensionLowerBound.isComplexAnalyticSubset_singleton (F₀ x)))) ⟨hx, rfl⟩
+    simpa using h
+  refine ⟨F₀ '' S₀, hSiga, hSigdim, fun z hzE hzSig => ?_⟩
+  have hzS : z ∉ S₀ := fun h => hzSig ⟨z, h, rfl⟩
+  have hreg : RegularAtDim (n := n) E₀ z (p + t) := by
+    by_contra h
+    exact hzS (Or.inl ⟨hzE, h⟩)
+  refine ⟨hreg, le_antisymm (rankAt_le_of_regularAtDim F₀ hreg) ?_⟩
+  by_contra h
+  exact hzS (Or.inr ⟨hreg, by omega⟩)
+
+end BadSet
+
+section Connected
+
+/-- **The base `B'₀ = (B' \ N) \ Sig₀` is connected.** -/
+theorem isPreconnected_base (ht : 1 ≤ t) (hδ : 0 < δ) {Sig₀ : Set (coverTarget Λ a δ)}
+    (hSiga : IsComplexAnalyticSubset (n := p + t) Sig₀) (hSigdim : DimLE (n := p + t) Sig₀ (p + t - 1)) :
+    IsPreconnected ((ball (Λ a).1 δ \ complexCoordinatePlane (p + t) p) \
+      ((↑) '' Sig₀ : Set (ComplexModel (p + t)))) := by
+  classical
+  -- a point of the ball off the plane
+  set e : ComplexModel (p + t) := EuclideanSpace.single (Fin.natAdd p ⟨0, by omega⟩) 1 with he
+  have hY₀ne : Nonempty (coverTarget Λ a δ) := by
+    by_cases hc : (Λ a).1 ∈ complexCoordinatePlane (p + t) p
+    · refine ⟨⟨(Λ a).1 + (δ / 2) • e, ?_, ?_⟩⟩
+      · rw [mem_ball, dist_eq_norm, add_sub_cancel_left, norm_smul, he,
+          PiLp.norm_single, norm_one, mul_one, Real.norm_eq_abs, abs_of_pos (half_pos hδ)]
+        linarith
+      · intro h
+        have := h (Fin.natAdd p ⟨0, by omega⟩) (by simp)
+        have h0 := hc (Fin.natAdd p ⟨0, by omega⟩) (by simp)
+        simp only [PiLp.add_apply, PiLp.smul_apply, he, PiLp.single_apply, if_true,
+          h0, zero_add] at this
+        exact absurd this (by simpa using (half_pos hδ).ne')
+    · exact ⟨⟨(Λ a).1, mem_ball_self hδ, hc⟩⟩
+  -- the ball minus the plane is connected
+  have hball : IsPreconnected (ball (Λ a).1 δ \ complexCoordinatePlane (p + t) p) := by
+    set B : Opens (ComplexModel (p + t)) := ⟨ball (Λ a).1 δ, isOpen_ball⟩ with hB
+    have : ConnectedSpace B := isConnected_iff_connectedSpace.mp (isConnected_ball hδ)
+    have hT := isComplexAnalyticSubset_preimage_val (isComplexAnalyticSubset_plane p t) B
+    have hTne : ((↑) ⁻¹' complexCoordinatePlane (p + t) p : Set B) ≠ univ := by
+      intro h
+      obtain ⟨y⟩ := hY₀ne
+      have : (⟨y, y.2.1⟩ : B) ∈ ((↑) ⁻¹' complexCoordinatePlane (p + t) p : Set B) :=
+        h ▸ mem_univ _
+      exact y.2.2 this
+    have h := (AnalyticComplementConnected.isPreconnected_compl hT hTne).image _
+      continuous_subtype_val.continuousOn
+    convert h using 1
+    ext w
+    constructor
+    · rintro ⟨hwB, hwN⟩
+      exact ⟨⟨w, hwB⟩, hwN, rfl⟩
+    · rintro ⟨y, hy, rfl⟩
+      exact ⟨y.2, hy⟩
+  have : ConnectedSpace (coverTarget Λ a δ) :=
+    Subtype.connectedSpace (s := (coverTarget Λ a δ : Set (ComplexModel (p + t))))
+      ⟨by obtain ⟨y⟩ := hY₀ne; exact ⟨y, y.2⟩, hball⟩
+  have hSigne : Sig₀ ≠ univ := by
+    intro h
+    obtain ⟨y⟩ := hY₀ne
+    have hreg : RegularAtDim (n := p + t) Sig₀ y (p + t) := by
+      rw [h]
+      exact AnalyticIrreducibleComponents.regularAtDim_univ y
+    have := hSigdim y _ hreg
+    omega
+  have h := (AnalyticComplementConnected.isPreconnected_compl hSiga hSigne).image _
+    continuous_subtype_val.continuousOn
+  convert h using 1
+  ext w
+  constructor
+  · rintro ⟨hw, hwSig⟩
+    exact ⟨⟨w, hw⟩, fun h => hwSig ⟨_, h, rfl⟩, rfl⟩
+  · rintro ⟨y, hy, rfl⟩
+    refine ⟨y.2, ?_⟩
+    rintro ⟨y', hy', hyy'⟩
+    exact hy (Subtype.ext hyy' ▸ hy')
+
+end Connected
+
+end Hironaka.RemmertSteinFlat

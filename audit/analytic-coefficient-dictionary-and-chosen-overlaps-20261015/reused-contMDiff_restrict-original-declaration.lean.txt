@@ -1,0 +1,6 @@
+/-- A map holomorphic on the open set `U` is holomorphic on the manifold `U`. -/
+theorem contMDiff_restrict {m : ℕ} {Y : Type*} [TopologicalSpace Y]
+    [ChartedSpace (ComplexModel m) Y] {f : M → Y}
+    (hf : ContMDiffOn 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel m) ∞ f U) :
+    ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel m) ∞ (fun x : U => f x) := fun x =>
+  contMDiffAt_subtype_iff.mpr ((hf x x.2).contMDiffAt (U.isOpen.mem_nhds x.2))

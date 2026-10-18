@@ -1,0 +1,5 @@
+/-- `𝒪_Y(-D)^1 = 𝒪_Y(-D)`. -/
+theorem idealPow_one_exceptionalDivisor (hπ : IsBlowupAlong n C π) :
+    idealPow (exceptionalDivisor hπ).ideal 1 = (exceptionalDivisor hπ).ideal := by
+  show (idealPow (exceptionalDivisor hπ).ideal 0).mul (exceptionalDivisor hπ).ideal = _
+  rw [idealPow_zero, unitIdeal_mul (isCoherent_ideal _)]

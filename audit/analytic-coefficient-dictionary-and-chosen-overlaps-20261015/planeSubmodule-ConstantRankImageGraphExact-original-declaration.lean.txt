@@ -1,0 +1,12 @@
+/-- The standard `r`-plane `{z | z_i = 0 for i ≥ r}` of `ℂᴺ` as a submodule. -/
+def planeSubmodule (N r : ℕ) : Submodule ℂ (ComplexModel N) where
+  carrier := complexCoordinatePlane N r
+  add_mem' := by
+    intro a b ha hb i hi
+    simp [ha i hi, hb i hi]
+  zero_mem' := by
+    intro i _
+    simp
+  smul_mem' := by
+    intro c a ha i hi
+    simp [ha i hi]

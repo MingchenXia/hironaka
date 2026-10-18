@@ -1,0 +1,8 @@
+/-- An analytic subset of a connected manifold with nonempty interior is the
+whole manifold. -/
+theorem IsComplexAnalyticSubset.eq_univ_of_interior_nonempty [ConnectedSpace M]
+    {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A)
+    (hint : (interior A).Nonempty) : A = univ :=
+  eq_univ_of_univ_subset
+    ((IsClopen.eq_univ ⟨hA.isClosed_interior, isOpen_interior⟩ hint).symm.subset.trans
+      interior_subset)

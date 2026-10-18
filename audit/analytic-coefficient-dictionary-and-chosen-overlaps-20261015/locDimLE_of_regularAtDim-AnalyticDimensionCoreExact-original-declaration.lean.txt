@@ -1,0 +1,5 @@
+/-- A regular point of dimension `k` has local dimension `≤ k`. -/
+theorem locDimLE_of_regularAtDim {A : Set M} {x : M} {k : ℕ} (hx : RegularAtDim (n := n) A x k) :
+    LocDimLE (n := n) A x k := by
+  refine ⟨_, RegularPatchNeighborhood.eventually_regularAtDim hx, fun y hy j hyj => ?_⟩
+  exact (RegularPointDimension.eq_of_regularAtDim hyj (hy hyj.2.1)).le

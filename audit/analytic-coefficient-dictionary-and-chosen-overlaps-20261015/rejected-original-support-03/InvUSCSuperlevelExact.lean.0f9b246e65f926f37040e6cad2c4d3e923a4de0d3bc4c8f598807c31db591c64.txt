@@ -1,0 +1,66 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Invariant.ResolutionInvariantOrder
+import Mathlib.Data.DFinsupp.WellFounded
+import Mathlib.Order.OrderIsoNat
+import Mathlib.Topology.Compactness.Compact
+import Mathlib.Data.ENat.Lattice
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# Upper semicontinuous resolution invariants: maxima, maximum loci, termination
+
+Blueprint `hir:invariant-order` (`blueprint/src/hironaka.tex`, Hironaka phase H4, design D9 of
+`.archon-horizon/scratch/tn-classical-hironaka-design-0180.md`).  Sources: Bierstone--Milman 2008 §7 (the
+invariant whose maximum locus is the next centre), Encinas--Hauser 2002 ("Resolution of mobiles": an invariant with
+values in a well-ordered set that drops under the blowup of its top locus gives termination).
+
+A resolution invariant is upper semicontinuous in the sense used by the algorithm: every point has a
+neighbourhood on which the invariant is at most its value at the point (`IsInvUSCOn`).  No topology on the set of
+values is needed.
+
+## Main results
+
+* `IsInvUSCOn.exists_isMaxOn`: on a nonempty compact set such an invariant attains its maximum (finitely many
+  neighbourhoods cover);
+* `IsInvUSCOn.isClosed_superlevel`, `IsInvUSCOn.isClosed_maxLocus`: superlevel sets and the maximum locus are closed when
+  the domain is closed;
+* `IsInvUSCOn.mono`, `IsInvUSCOn.comp`: restriction to a subset and pullback along a continuous map (restriction to
+  open sets and transport along biholomorphisms in the algorithm);
+* `maxLocus_inter_eq`: on a set `W` on which the invariant is `≤ λ`, the points of value `λ` are the trace on `W` of the
+  superlevel set;
+* termination: `exists_not_of_lt_succ` -- if, as long as a property `P i` holds (e.g. "the cosupport at stage `i` is
+  nonempty"), the maxima `m i` strictly decrease in a well-founded order, then `P` fails at some stage;
+  `wellFoundedLT_lex` -- lexicographically ordered tuples `Fin k → Λ` of a well-ordered `Λ` (e.g. `ℕ∞`) are well-founded.
+
+Import discipline (Hironaka phase): mathlib only; in particular this module does not import
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
+-/
+
+open Set Filter
+open scoped Topology
+
+namespace Hironaka.ResolutionInvariantOrder
+
+section USC
+
+variable {X Y Λ : Type*} [TopologicalSpace X] [TopologicalSpace Y]
+
+variable {f : X → Λ} {s t : Set X}
+
+/-- **Superlevel sets are closed** (for a closed domain). -/
+theorem IsInvUSCOn.isClosed_superlevel [LinearOrder Λ] (hf : IsInvUSCOn f s) (hs : IsClosed s) (l : Λ) :
+    IsClosed {x | x ∈ s ∧ l ≤ f x} := by
+  refine isOpen_compl_iff.mp (isOpen_iff_mem_nhds.mpr fun y hy => ?_)
+  by_cases hys : y ∈ s
+  · have hlt : f y < l := lt_of_not_ge fun h => hy ⟨hys, h⟩
+    filter_upwards [hf y hys] with z hz hzmem
+    exact absurd ((hz hzmem.1).trans_lt hlt) (not_lt.mpr hzmem.2)
+  · filter_upwards [hs.isOpen_compl.mem_nhds hys] with z hz hzmem
+    exact hz hzmem.1
+
+end USC
+end Hironaka.ResolutionInvariantOrder

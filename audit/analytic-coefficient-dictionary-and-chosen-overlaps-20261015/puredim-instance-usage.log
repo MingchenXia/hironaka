@@ -1,0 +1,80 @@
+TranscendentalNakamaye.Pending.AnalyticDimensionBasics.IsPureDim type: CSTAR=true; FIELD=false
+Hironaka.AnalyticDimensionBasics.IsPureDim type: CSTAR=false; FIELD=true
+TranscendentalNakamaye.Pending.AnalyticSubsetOpens.instIsComplexManifoldOpens type: CSTAR=true; FIELD=true
+Hironaka.AnalyticSubsetOpens.instIsComplexManifoldOpens type: CSTAR=true; FIELD=true
+def Hironaka.AnalyticDimensionBasics.IsPureDim.{u_1} : {n : Nat} →
+  {M : Type u_1} →
+    [inst : TopologicalSpace.{u_1} M] →
+      [@ChartedSpace.{0, u_1} (Hironaka.ComplexModel n)
+            (@PiLp.topologicalSpace.{0, 0}
+              (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+                (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+                  (@AddMonoidWithOne.toNatCast.{0} ENNReal
+                    (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+                  PiLp.innerProductSpace._proof_1))
+              (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+              @UniformSpace.toTopologicalSpace.{0} Complex
+                (@PseudoMetricSpace.toUniformSpace.{0} Complex
+                  (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                    (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                      (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                        (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField))))))
+            M inst] →
+        (A : Set.{u_1} M) → (k : Nat) → Prop :=
+fun {n : Nat} {M : Type u_1} [inst : TopologicalSpace.{u_1} M]
+    [inst_1 :
+      @ChartedSpace.{0, u_1} (Hironaka.ComplexModel n)
+        (@PiLp.topologicalSpace.{0, 0}
+          (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+            (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+              (@AddMonoidWithOne.toNatCast.{0} ENNReal
+                (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+              PiLp.innerProductSpace._proof_1))
+          (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+          @UniformSpace.toTopologicalSpace.{0} Complex
+            (@PseudoMetricSpace.toUniformSpace.{0} Complex
+              (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                  (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                    (@NormedField.toNormedCommRing.{0} Complex Complex.instNormedField))))))
+        M inst]
+    (A : Set.{u_1} M) (k : Nat) =>
+  ∀ (y : M) (j : Nat), @Hironaka.RegularAtDim.{u_1} n M inst inst_1 A y j → @Eq.{1} Nat j k
+def TranscendentalNakamaye.Pending.AnalyticDimensionBasics.IsPureDim.{u_1} : {n : Nat} →
+  {M : Type u_1} →
+    [inst : TopologicalSpace.{u_1} M] →
+      [@ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+            (@PiLp.topologicalSpace.{0, 0}
+              (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+                (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+                  (@AddMonoidWithOne.toNatCast.{0} ENNReal
+                    (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+                  PiLp.innerProductSpace._proof_1))
+              (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+              @UniformSpace.toTopologicalSpace.{0} Complex
+                (@PseudoMetricSpace.toUniformSpace.{0} Complex
+                  (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                    (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                      (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                        (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+            M inst] →
+        (A : Set.{u_1} M) → (k : Nat) → Prop :=
+fun {n : Nat} {M : Type u_1} [inst : TopologicalSpace.{u_1} M]
+    [inst_1 :
+      @ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+        (@PiLp.topologicalSpace.{0, 0}
+          (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+            (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+              (@AddMonoidWithOne.toNatCast.{0} ENNReal
+                (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+              PiLp.innerProductSpace._proof_1))
+          (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+          @UniformSpace.toTopologicalSpace.{0} Complex
+            (@PseudoMetricSpace.toUniformSpace.{0} Complex
+              (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+                (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                  (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                    (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+        M inst]
+    (A : Set.{u_1} M) (k : Nat) =>
+  ∀ (y : M) (j : Nat), @TranscendentalNakamaye.FirstPass.RegularAtDim.{u_1} n M inst inst_1 A y j → @Eq.{1} Nat j k

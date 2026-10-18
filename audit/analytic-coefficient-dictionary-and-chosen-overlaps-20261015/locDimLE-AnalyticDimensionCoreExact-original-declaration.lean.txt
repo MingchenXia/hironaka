@@ -1,0 +1,3 @@
+theorem DimLE.locDimLE {A : Set M} {p : ℕ} (h : DimLE (n := n) A p) (x : M) :
+    LocDimLE (n := n) A x p :=
+  ⟨univ, univ_mem, fun y _ k hy => h y k hy⟩

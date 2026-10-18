@@ -1,0 +1,12 @@
+theorem locDimLE_preimage_val_iff {A : Set M} {x : U} {p : ℕ} :
+    LocDimLE (n := n) ((↑) ⁻¹' A : Set U) x p ↔ LocDimLE (n := n) A (x : M) p := by
+  constructor
+  · rintro ⟨V, hV, hVp⟩
+    rw [nhds_opens_eq_comap, mem_comap] at hV
+    obtain ⟨W, hW, hWV⟩ := hV
+    refine ⟨W ∩ U, inter_mem hW (U.isOpen.mem_nhds x.2), fun y hy k hyk => ?_⟩
+    exact hVp ⟨y, hy.2⟩ (hWV hy.1) k (regularAtDim_preimage_val_iff.mpr hyk)
+  · rintro ⟨W, hW, hWp⟩
+    refine ⟨((↑) : U → M) ⁻¹' W, ?_, fun y hy k hyk =>
+      hWp y hy k (regularAtDim_preimage_val_iff.mp hyk)⟩
+    rw [nhds_opens_eq_comap]; exact preimage_mem_comap hW

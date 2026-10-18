@@ -1,0 +1,18 @@
+/-- **Maximality from an open piece.** -/
+theorem eq_of_subset_of_inter_open_subset {V Z : Set M}
+    (hV : IsComplexAnalyticSubset (n := n) V)
+    (hZ : IsComplexAnalyticallyIrreducible (n := n) Z) (hVZ : V ⊆ Z) {O : Set M}
+    (hO : IsOpen O) (hne : (Z ∩ O).Nonempty) (hsub : Z ∩ O ⊆ V) : V = Z := by
+  have hC := isComplexAnalyticSubset_closure_diff hZ.analytic hV
+  have hCZ : closure (Z \ V) ⊆ Z := closure_minimal sdiff_subset hZ.analytic.isClosed
+  have hZVC : Z = V ∪ closure (Z \ V) := by
+    refine Subset.antisymm (fun z hz => ?_) (union_subset hVZ hCZ)
+    by_cases hzV : z ∈ V
+    · exact Or.inl hzV
+    · exact Or.inr (subset_closure ⟨hz, hzV⟩)
+  rcases hZ.eq_left_or_eq_right hV hC hVZ hCZ hZVC with h | h
+  · exact h.symm
+  · exfalso
+    obtain ⟨y, hyZ, hyO⟩ := hne
+    obtain ⟨z, hzO, hzZ, hzV⟩ := mem_closure_iff.mp (h.subset hyZ) O hO hyO
+    exact hzV (hsub ⟨hzZ, hzO⟩)

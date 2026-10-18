@@ -1,0 +1,29 @@
+/-- **Constant-rank images are submanifolds** (blueprint `rem:constant-rank-submanifold`).  If
+`G` is holomorphic of constant rank `r` on the open set `U ∋ p`, then some open neighbourhood `O`
+of `p` in `U` is mapped onto the zero set, in an open set `W`, of a holomorphic map `h`, and every
+point of `G(O)` is a regular point of `G(O)` of dimension `r`. -/
+theorem exists_image_eq_graph {G : E → ComplexModel N} {U : Set E} (hU : IsOpen U)
+    (hG : DifferentiableOn ℂ G U) {r : ℕ}
+    (hr : ∀ z ∈ U, Module.finrank ℂ (LinearMap.range ((fderiv ℂ G z : E →L[ℂ] ComplexModel N) :
+      E →ₗ[ℂ] ComplexModel N)) = r)
+    {p : E} (hp : p ∈ U) :
+    ∃ (O : Set E) (W : Set (ComplexModel N)) (h : ComplexModel N → ComplexModel N),
+      IsOpen O ∧ p ∈ O ∧ O ⊆ U ∧ IsOpen W ∧ DifferentiableOn ℂ h W ∧
+      G '' O = {y | y ∈ W ∧ h y = 0} ∧
+      ∀ y ∈ G '' O, RegularAtDim (n := N) (M := ComplexModel N) (G '' O) y r := by
+  obtain ⟨Q, S, ψ, k, ρ, hρ, hopen, hψp, hψ, -, hkd, hQk, hnf⟩ := exists_normalForm hU hG hr hp
+  have himg := image_eq_graph (G := G) (ψ := ψ) (k := k) (Q := Q) (c := (Q (G p), S p))
+    (ρ := ρ) hQk hnf
+  refine ⟨ψ '' ball (Q (G p), S p) ρ, Q ⁻¹' ball (Q (G p)) ρ, fun y => y - k (Q y), hopen,
+    ⟨_, mem_ball_self hρ, hψp⟩, ?_, isOpen_ball.preimage Q.continuous, ?_, ?_, ?_⟩
+  · rintro _ ⟨w, hw, rfl⟩
+    exact (hψ w hw).1
+  · exact differentiableOn_id.sub (hkd.comp Q.differentiableOn fun y hy => hy)
+  · rw [himg]
+    ext y
+    simp only [mem_ofPred_eq, mem_preimage, sub_eq_zero]
+    exact and_congr_right fun _ => eq_comm
+  · intro y hy
+    rw [himg] at hy ⊢
+    have := regularAtDim_graph Q isOpen_ball hkd hQk hy.1 hy.2
+    rwa [hr p hp] at this

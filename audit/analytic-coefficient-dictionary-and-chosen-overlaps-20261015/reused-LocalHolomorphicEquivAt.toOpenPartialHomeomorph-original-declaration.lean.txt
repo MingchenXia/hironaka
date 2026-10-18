@@ -1,0 +1,19 @@
+/-- The underlying local biholomorphism is an actual open partial
+homeomorphism.  Keeping this conversion explicit lets local analytic
+flattenings use the topological covariance theorems for upper-semicontinuous
+regularization. -/
+def toOpenPartialHomeomorph {p : ComplexModel n}
+    (Φ : LocalHolomorphicEquivAt (n := n) p) :
+    OpenPartialHomeomorph (ComplexModel n) (ComplexModel n) where
+  toFun := Φ.toFun
+  invFun := Φ.invFun
+  source := Φ.source
+  target := Φ.target
+  map_source' := Φ.mapsTo_toFun
+  map_target' := Φ.mapsTo_invFun
+  left_inv' := Φ.left_inv
+  right_inv' := Φ.right_inv
+  continuousOn_toFun := Φ.toFun_holomorphic.continuousOn
+  continuousOn_invFun := Φ.invFun_holomorphic.continuousOn
+  open_source := Φ.isOpen_source
+  open_target := Φ.isOpen_target

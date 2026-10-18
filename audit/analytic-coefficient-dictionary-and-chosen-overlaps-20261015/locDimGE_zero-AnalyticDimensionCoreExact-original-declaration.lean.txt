@@ -1,0 +1,6 @@
+/-- Every point of an analytic set has local dimension `≥ 0`. -/
+theorem locDimGE_zero {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A) {x : M} (hx : x ∈ A) :
+    LocDimGE (n := n) A x 0 := by
+  intro U hU
+  obtain ⟨y, hyU, k, hy⟩ := RegularLocusDense.exists_regularAtDim_mem_nhds hA hx hU
+  exact ⟨y, hyU, k, Nat.zero_le k, hy⟩

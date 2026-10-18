@@ -1,0 +1,5 @@
+/-- **Restriction**: `A ∩ U` is analytic in `U` when `A` is analytic in `M`. -/
+theorem isComplexAnalyticSubset_preimage_val {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) (U : Opens M) :
+    IsComplexAnalyticSubset (n := n) ((↑) ⁻¹' A : Set U) :=
+  fun x => ⟨presentationPreimageVal x (hA x).some⟩

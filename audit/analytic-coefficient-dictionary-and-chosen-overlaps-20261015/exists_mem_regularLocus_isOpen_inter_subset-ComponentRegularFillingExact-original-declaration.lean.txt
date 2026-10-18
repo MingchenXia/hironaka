@@ -1,0 +1,17 @@
+/-- **The filling open set can be centred at a top-dimensional regular point of the
+component.**  Every open `O` meeting the irreducible component `V` of `A` contains an open `U`
+with `A ∩ U ⊆ V` around a point at which `V` is regular of dimension `dim V`. -/
+theorem exists_mem_regularLocus_isOpen_inter_subset {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) {V : ClosedIrreducibleAnalyticSubvariety n M}
+    (hV : IsIrreducibleComponent V A) {O : Set M} (hO : IsOpen O)
+    (hVO : (V.carrier ∩ O).Nonempty) :
+    ∃ x ∈ regularLocus (n := n) V.carrier V.dim, ∃ U : Set M, IsOpen U ∧ x ∈ U ∧ U ⊆ O ∧
+      A ∩ U ⊆ V.carrier := by
+  obtain ⟨p, hpV, hpO⟩ := hVO
+  obtain ⟨U, hU, hUO, ⟨y, hyV, hyU⟩, hsub⟩ :=
+    exists_isOpen_subset_inter_subset_of_mem hA hV hpV hO hpO
+  obtain ⟨x, hxU, k, hx⟩ :=
+    RegularLocusDense.exists_regularAtDim_mem_of_isOpen V.analytic hU hyV hyU
+  have hk : k = V.dim := AnalyticIrreducibleComponents.eq_dim_of_regularAtDim V hx
+  subst hk
+  exact ⟨x, hx, U, hU, hxU, hUO, hsub⟩

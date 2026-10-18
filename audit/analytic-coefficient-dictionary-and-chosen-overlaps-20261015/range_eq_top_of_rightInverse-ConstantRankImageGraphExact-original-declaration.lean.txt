@@ -1,0 +1,8 @@
+/-- A linear map which has a holomorphic right inverse on a nonempty open set is onto. -/
+theorem range_eq_top_of_rightInverse (Q : ComplexModel N →L[ℂ] R) {B' : Set R} (hB' : IsOpen B')
+    (hne : B'.Nonempty) {k : R → ComplexModel N} (hQk : ∀ w ∈ B', Q (k w) = w) :
+    LinearMap.range (Q : ComplexModel N →ₗ[ℂ] R) = ⊤ := by
+  apply Submodule.eq_top_of_nonempty_interior'
+  have hsub : B' ⊆ (LinearMap.range (Q : ComplexModel N →ₗ[ℂ] R) : Set R) :=
+    fun w hw => ⟨k w, hQk w hw⟩
+  exact hne.mono (interior_maximal hsub hB')

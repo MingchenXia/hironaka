@@ -1,0 +1,8 @@
+/-- `dim_x B ≥ q` and `B ⊆ T` give `dim_x T ≥ q`. -/
+theorem LocDimGE.mono {T B : Set M} (hT : IsComplexAnalyticSubset (n := n) T) (hBT : B ⊆ T)
+    {x : M} {q : ℕ} (h : LocDimGE (n := n) B x q) : LocDimGE (n := n) T x q := by
+  intro N hN
+  obtain ⟨y, hyN, j, hqj, hy⟩ := h (interior N) (interior_mem_nhds.2 hN)
+  obtain ⟨y', hy'N, j', hjj', hy'⟩ :=
+    locDimGE_of_regularAtDim_subset hT hBT hy (interior N) (isOpen_interior.mem_nhds hyN)
+  exact ⟨y', interior_subset hy'N, j', hqj.trans hjj', hy'⟩

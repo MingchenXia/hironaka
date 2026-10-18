@@ -1,0 +1,17 @@
+/-- A subset of `U` which is analytic in `U` and closed in `M` is analytic in `M`. -/
+theorem isComplexAnalyticSubset_image_val {B : Set U}
+    (hB : IsComplexAnalyticSubset (n := n) B) (hc : IsClosed ((↑) '' B : Set M)) :
+    IsComplexAnalyticSubset (n := n) ((↑) '' B : Set M) := by
+  refine isComplexAnalyticSubset_of_forall_opens fun x => ?_
+  by_cases hxU : x ∈ U
+  · refine ⟨U, hxU, ?_⟩
+    rwa [Subtype.val_injective.preimage_image]
+  · refine ⟨⟨_, hc.isOpen_compl⟩, fun hx => hxU ?_, ?_⟩
+    · obtain ⟨y, -, rfl⟩ := hx
+      exact y.2
+    · have : ((↑) ⁻¹' ((↑) '' B : Set M) : Set (⟨_, hc.isOpen_compl⟩ : Opens M)) = ∅ := by
+        ext y
+        simp only [mem_preimage, mem_empty_iff_false, iff_false]
+        exact y.2
+      rw [this]
+      exact fun y => ⟨ComplexAnalyticPresentationAt.empty y⟩

@@ -1,0 +1,29 @@
+/-- **Baire.**  An irreducible subvariety meeting an open set inside a countable union of
+analytic sets lies in one of them. -/
+theorem exists_subset_of_inter_isOpen_subset_iUnion (V : ClosedIrreducibleAnalyticSubvariety n M)
+    {A : ℕ → Set M} (hA : ∀ m, IsComplexAnalyticSubset (n := n) (A m)) {U : Set M}
+    (hU : IsOpen U) (hVU : (V.carrier ∩ U).Nonempty) (hsub : V.carrier ∩ U ⊆ ⋃ m, A m) :
+    ∃ m, V.carrier ⊆ A m := by
+  have : LocallyCompactSpace M := ChartedSpace.locallyCompactSpace (ComplexModel n) M
+  set O : Set M := V.carrier ∩ U with hO
+  have hOlc : IsLocallyClosed O := V.isClosed_carrier.isLocallyClosed.inter hU.isLocallyClosed
+  have : LocallyCompactSpace O := hOlc.locallyCompactSpace
+  have : BaireSpace O := BaireSpace.of_t2Space_locallyCompactSpace
+  let B : ℕ → Set O := fun m => (Subtype.val : O → M) ⁻¹' A m
+  have hBc : ∀ m, IsClosed (B m) := fun m =>
+    (hA m).isClosed.preimage continuous_subtype_val
+  have hBu : ⋃ m, B m = univ := by
+    refine eq_univ_of_forall fun p => ?_
+    simpa [B] using hsub p.2
+  have : Nonempty O := hVU.to_subtype
+  obtain ⟨m, p, hp⟩ := nonempty_interior_of_iUnion_of_closed hBc hBu
+  obtain ⟨W, hW, hWeq⟩ := isOpen_induced_iff.mp (isOpen_interior (s := B m))
+  refine ⟨m, subset_of_inter_isOpen_subset V (hA m) (hW.inter hU) ?_ ?_⟩
+  · refine ⟨p.1, p.2.1, ?_, p.2.2⟩
+    have : p ∈ (Subtype.val : O → M) ⁻¹' W := hWeq ▸ hp
+    exact this
+  · rintro y ⟨hyV, hyW, hyU⟩
+    have hy : (⟨y, hyV, hyU⟩ : O) ∈ interior (B m) := by
+      rw [← hWeq]
+      exact hyW
+    exact (interior_subset hy : (⟨y, hyV, hyU⟩ : O) ∈ B m)

@@ -1,0 +1,45 @@
+ℹ [4799/4950] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4931/4950] Built Hironaka.Support.IrreducibleNonemptyExact (1.9s)
+✔ [4932/4950] Built Hironaka.Analytic.ProperImageIrreducible (4.3s)
+✔ [4933/4950] Built Hironaka.Analytic.ProperMappingInduction (3.2s)
+✔ [4934/4950] Built Hironaka.Analytic.RemmertSteinFlatBadSet (4.6s)
+✖ [4935/4950] Building Hironaka.Analytic.RemmertSteinFlatGraph (6.7s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/RemmertSteinFlatGraph.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RemmertSteinFlatGraph.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RemmertSteinFlatGraph.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RemmertSteinFlatGraph.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RemmertSteinFlatGraph.setup.json --json
+error: Hironaka/Analytic/RemmertSteinFlatGraph.lean:66:6: Unknown identifier `chartAt_opens_apply`
+error: Hironaka/Analytic/RemmertSteinFlatGraph.lean:65:61: unsolved goals
+n p t : ℕ
+Λ : ComplexModel n ≃L[ℂ] ComplexModel (p + t) × ComplexModel (n - (p + t))
+a : ComplexModel n
+δ ρ : ℝ
+x y : ↥(coverSource Λ a δ ρ)
+⊢ ↑(chartAt (ComplexModel n) x) y = ↑y
+error: Hironaka/Analytic/RemmertSteinFlatGraph.lean:71:6: Unknown identifier `chartAt_opens_apply`
+error: Hironaka/Analytic/RemmertSteinFlatGraph.lean:70:73: unsolved goals
+n p t : ℕ
+Λ : ComplexModel n ≃L[ℂ] ComplexModel (p + t) × ComplexModel (n - (p + t))
+a : ComplexModel n
+δ : ℝ
+x y : ↥(coverTarget Λ a δ)
+⊢ ↑(chartAt (ComplexModel (p + t)) x) y = ↑y
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Analytic.RemmertSteinFlatGraph
+error: build failed

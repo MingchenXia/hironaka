@@ -1,0 +1,52 @@
+import TranscendentalNakamaye.Pending.PositiveDimensionalComponent
+import TranscendentalNakamaye.Pending.IrreducibleComponentFilling
+import TranscendentalNakamaye.Pending.RegularPointDimension
+import TranscendentalNakamaye.FirstPass.RegularPatchNeighborhood
+
+set_option autoImplicit false
+
+/-!
+# Dimension bounds for analytic subsets
+
+Blueprint `rem:dimension`, `rem:isolated-dim-zero` (Demailly, *Complex analytic and differential
+geometry*, II.5; used throughout II.8).  For a subset `A` of a complex manifold:
+
+* `DimLE A p`: every regular point of `A` has dimension `≤ p` (`dim A ≤ p`);
+* `LocDimGE A x q`: every neighbourhood of `x` contains a regular point of `A` of dimension `≥ q`
+  (`dim_x A ≥ q`);
+* `LocDimLE A x p`: on some neighbourhood of `x`, every regular point of `A` has dimension `≤ p`
+  (`dim_x A ≤ p`);
+* `IsPureDim A k`: every regular point has dimension `k`; `ProperOn F A`: `A ∩ F⁻¹(K)` is compact
+  for every compact `K`.
+
+Basic facts: the two local bounds are compatible (`LocDimGE.le_of_locDimLE`); a regular point of
+dimension `k` has local dimension exactly `k` (`locDimGE_of_regularAtDim`,
+`locDimLE_of_regularAtDim`); every point of an analytic set has local dimension `≥ 0`
+(`locDimGE_zero`, density of the regular locus); and a point of local dimension `≤ 0` is isolated
+(`not_accPt_of_locDimLE_zero`): otherwise it lies on a positive-dimensional irreducible component,
+which fills `A` near one of its top-dimensional regular points.
+-/
+
+open Set Filter Topology
+
+namespace TranscendentalNakamaye.Pending.AnalyticDimensionBasics
+
+open FirstPass
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+/-- `dim A ≤ p`: every regular point of `A` has dimension at most `p`. -/
+def DimLE (A : Set M) (p : ℕ) : Prop :=
+  ∀ y k, RegularAtDim (n := n) A y k → k ≤ p
+
+/-- `dim_x A ≥ q`: every neighbourhood of `x` contains a regular point of `A` of dimension at
+least `q`. -/
+def LocDimGE (A : Set M) (x : M) (q : ℕ) : Prop :=
+  ∀ U ∈ 𝓝 x, ∃ y ∈ U, ∃ k, q ≤ k ∧ RegularAtDim (n := n) A y k
+
+/-- `dim_x A ≤ p`: on some neighbourhood of `x`, every regular point of `A` has dimension at most
+`p`. -/
+def LocDimLE (A : Set M) (x : M) (p : ℕ) : Prop :=
+  ∃ U ∈ 𝓝 x, ∀ y ∈ U, ∀ k, RegularAtDim (n := n) A y k → k ≤ p
+

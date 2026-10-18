@@ -1,0 +1,146 @@
+ℹ [4799/4949] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4921/4949] Built Hironaka.Support.AnalyticDimensionCoreExact (2.8s)
+✔ [4922/4949] Built Hironaka.Analytic.RemmertStatements (3.9s)
+✔ [4923/4949] Built Hironaka.Analytic.GenericSections (4.3s)
+✖ [4924/4949] Building Hironaka.Analytic.ImageDimensionBound (6.2s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/ImageDimensionBound.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/ImageDimensionBound.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/ImageDimensionBound.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/ImageDimensionBound.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/ImageDimensionBound.setup.json --json
+error: Hironaka/Analytic/ImageDimensionBound.lean:195:46: Unknown identifier `dimLE_pred_of_thin`
+error: Lean exited with code 1
+✖ [4926/4949] Building Hironaka.Analytic.RemmertSteinCoordinates (6.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/RemmertSteinCoordinates.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RemmertSteinCoordinates.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RemmertSteinCoordinates.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RemmertSteinCoordinates.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RemmertSteinCoordinates.setup.json --json
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean:251:36: Unknown identifier `ConstantRankSubmanifold.planeSubmodule`
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean:252:27: Unknown identifier `ConstantRankSubmanifold.planeSubmodule`
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean:256:9: Unknown identifier `ConstantRankSubmanifold.planeSubmodule`
+warning: Hironaka/Analytic/RemmertSteinCoordinates.lean:264:46: Variable name `hpn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hpn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Hironaka/Analytic/RemmertSteinCoordinates.lean:266:2: Unused tactic linter: `classical
+let f : Fin p → Fin n := fun j => ⟨j.1, by omega⟩
+let v : Fin p → (ConstantRankSubmanifold.planeSubmodule n p →ₗ[ℂ] ℂ) := fun j =>
+  restrictPlane n p (EuclideanSpace.proj (f j))
+have hli : LinearIndependent ℂ v := by
+  rw [Fintype.linearIndependent_iff]
+  intro g hg j
+  have :=
+    congrArg
+      (fun φ : ConstantRankSubmanifold.planeSubmodule n p →ₗ[ℂ] ℂ =>
+        φ ⟨EuclideanSpace.single (f j) 1, single_mem_plane (by simp [f])⟩)
+      hg
+  have hfi : ∀ i, f i = f j ↔ i = j := fun i => by
+    constructor
+    · intro h
+      ext
+      simpa [f] using congrArg Fin.val h
+    · rintro rfl
+      rfl
+  simp [v, PiLp.single_apply, hfi] at this
+  exact this
+have hspan : Submodule.span ℂ (range v) ≤ (⊤ : Submodule ℂ (ComplexModel n →L[ℂ] ℂ)).map (restrictPlane n p) :=
+  by
+  rw [Submodule.span_le]
+  rintro _ ⟨j, rfl⟩
+  exact Submodule.mem_map_of_mem Submodule.mem_top
+have := Submodule.finrank_mono hspan
+rw [finrank_span_eq_card hli, Fintype.card_fin] at this
+exact this` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Hironaka/Analytic/RemmertSteinCoordinates.lean:266:2: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean:319:43: Unknown identifier `dimLE_preimage_val`
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean:343:10: failed to synthesize
+  Module ℂ ?M
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+error: Lean exited with code 1
+✔ [4927/4949] Built Hironaka.Analytic.CompactAnalyticFinite (8.6s)
+✖ [4929/4949] Building Hironaka.Analytic.FibreDimensionLowerBound (4.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/FibreDimensionLowerBound.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/FibreDimensionLowerBound.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/FibreDimensionLowerBound.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/FibreDimensionLowerBound.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/FibreDimensionLowerBound.setup.json --json
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean:245:33: Unknown identifier `locDimGE_zero`
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean:245:11: Tactic `rcases` failed: `x✝ : ?m.210` is not an inductive datatype
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean:260:53: Unknown identifier `isComplexAnalyticSubset_preimage_val`
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean:267:4: Unknown identifier `contMDiff_restrict`
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean:282:6: Unknown identifier `nhds_opens_eq_comap`
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean:230:76: unsolved goals
+n n' : ℕ
+X : Type u_1
+inst✝⁵ : TopologicalSpace X
+inst✝⁴ : ChartedSpace (ComplexModel n) X
+inst✝³ : IsComplexManifold n X
+Y : Type u_2
+inst✝² : TopologicalSpace Y
+inst✝¹ : ChartedSpace (ComplexModel n') Y
+inst✝ : IsComplexManifold n' Y
+A : Set X
+hA : IsComplexAnalyticSubset A
+m : ℕ
+hpure : IsPureDim A m
+F : X → Y
+hF : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n') ∞ F
+r : ℕ
+hr : ∀ (y : X), RegularAtDim A y m → rankAt F A y ≤ r
+x : X
+hx : x ∈ A
+hΦa : IsComplexAnalyticSubset (A ∩ F ⁻¹' {F x})
+hcon : ¬LocDimGE (A ∩ F ⁻¹' {F x}) x (m - r)
+V : Set X
+hV : V ∈ 𝓝 x
+hVj : ∀ y ∈ V, ∀ (j : ℕ), RegularAtDim (A ∩ F ⁻¹' {F x}) y j → j + r < m
+hrm : r < m
+k : ℕ := m - r - 1
+hk : k = m - r - 1
+e : OpenPartialHomeomorph X (ComplexModel n) := chartAt (ComplexModel n) x
+he : e = chartAt (ComplexModel n) x
+e' : OpenPartialHomeomorph Y (ComplexModel n') := chartAt (ComplexModel n') (F x)
+he' : e' = chartAt (ComplexModel n') (F x)
+hxe : x ∈ e.source
+hU₁o : IsOpen[inst✝⁵] (interior V ∩ e.source ∩ F ⁻¹' e'.source)
+U₁ : Opens X := { carrier := interior V ∩ e.source ∩ F ⁻¹' e'.source, is_open' := hU₁o }
+hU₁ : U₁ = { carrier := interior V ∩ e.source ∩ F ⁻¹' e'.source, is_open' := hU₁o }
+hxU₁ : x ∈ U₁
+x₀ : ↥U₁ := ⟨x, hxU₁⟩
+hx₀ : x₀ = ⟨x, hxU₁⟩
+Φ' : Set ↥U₁ := Subtype.val ⁻¹' (A ∩ F ⁻¹' {F x})
+hΦ' : Φ' = Subtype.val ⁻¹' (A ∩ F ⁻¹' {F x})
+hΦ'a : IsComplexAnalyticSubset Φ'
+hΦ'd : DimLE Φ' k
+g : ↥U₁ → ComplexModel n := fun y => ↑e ↑y
+hg : g = fun y => ↑e ↑y
+hgs : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ g
+hsep : ∀ y ∈ Φ', y ≠ x₀ → ∃ ξ ∈ ⊤, ξ (g y) ≠ ξ (g x₀)
+ξ : Fin k → ComplexModel n →L[ℂ] ℂ
+hξ :
+  ∀ y ∈ Φ' ∩ {y | ∀ (i : Fin k), (ξ i) (g y) = (ξ i) (g x₀)},
+    ¬AccPt y (𝓟 (Φ' ∩ {y | ∀ (i : Fin k), (ξ i) (g y) = (ξ i) (g x₀)}))
+Ui : Set ↥U₁
+hUi : Ui ∈ 𝓝 x₀
+hUiS : ∀ y ∈ Ui ∩ (Φ' ∩ {y | ∀ (i : Fin k), (ξ i) (g y) = (ξ i) (g x₀)}), y = x₀
+⊢ False
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Analytic.ImageDimensionBound
+- Hironaka.Analytic.RemmertSteinCoordinates
+- Hironaka.Analytic.FibreDimensionLowerBound
+error: build failed

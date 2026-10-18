@@ -1,0 +1,13 @@
+/-- **A connected complex manifold is analytically irreducible.** -/
+theorem isComplexAnalyticallyIrreducible_univ_of_connectedSpace [ConnectedSpace M] :
+    IsComplexAnalyticallyIrreducible (n := n) (univ : Set M) := by
+  refine ⟨isComplexAnalyticSubset_univ, univ_nonempty, fun B C hB hC _ _ hBC => ?_⟩
+  by_cases hBi : (interior B).Nonempty
+  · exact Or.inl (hB.eq_univ_of_interior_nonempty hBi).symm
+  by_cases hCi : (interior C).Nonempty
+  · exact Or.inr (hC.eq_univ_of_interior_nonempty hCi).symm
+  exfalso
+  rw [not_nonempty_iff_eq_empty] at hBi hCi
+  have hBC' := interior_union_isClosed_of_interior_empty hB.isClosed hCi
+  rw [← hBC, interior_univ, hBi] at hBC'
+  exact univ_nonempty.ne_empty hBC'

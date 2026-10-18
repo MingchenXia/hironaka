@@ -1,0 +1,139 @@
+ℹ [4738/4930] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4760/4930] Built Hironaka.Resolution.HironakaActualRelativeCoefficientGerms (4.6s)
+✔ [4761/4930] Built Hironaka.Resolution.HironakaOriginalCompactCosupportGlobalScheduler (3.2s)
+✖ [4762/4930] Building Hironaka.Analytic.RemmertStatements (3.1s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/RemmertStatements.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RemmertStatements.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RemmertStatements.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RemmertStatements.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RemmertStatements.setup.json --json
+error: Hironaka/Analytic/RemmertStatements.lean:58:77: Unknown identifier `ProperOn`
+error: Hironaka/Analytic/RemmertStatements.lean:156:12: Unknown identifier `presentationPreimageVal`
+error: Hironaka/Analytic/RemmertStatements.lean:162:3: Unknown identifier `presentationOfPreimageVal`
+error: Lean exited with code 1
+✖ [4763/4930] Building Hironaka.Analytic.FiniteMapDimension (3.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/FiniteMapDimension.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/FiniteMapDimension.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/FiniteMapDimension.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/FiniteMapDimension.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/FiniteMapDimension.setup.json --json
+error: Hironaka/Analytic/FiniteMapDimension.lean:244:4: Unknown identifier `ConstantRankSubmanifold.exists_image_eq_graph`
+error: Hironaka/Analytic/FiniteMapDimension.lean:243:9: Tactic `rcases` failed: `x✝ : ?m.278` is not an inductive datatype
+error: Lean exited with code 1
+✖ [4764/4930] Building Hironaka.Analytic.GenericSections (3.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/GenericSections.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/GenericSections.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/GenericSections.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/GenericSections.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/GenericSections.setup.json --json
+error: Hironaka/Analytic/GenericSections.lean:280:10: Unknown identifier `not_accPt_of_locDimLE_zero`
+error: Lean exited with code 1
+✖ [4765/4930] Building Hironaka.Analytic.AnalyticCodimTwoStratification (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/AnalyticCodimTwoStratification.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/AnalyticCodimTwoStratification.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/AnalyticCodimTwoStratification.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/AnalyticCodimTwoStratification.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/AnalyticCodimTwoStratification.setup.json --json
+error: Hironaka/Analytic/AnalyticCodimTwoStratification.lean:190:20: Invalid field `eq_univ_of_interior_nonempty`: The environment does not contain `Function.eq_univ_of_interior_nonempty`, so it is not possible to project the field `eq_univ_of_interior_nonempty` from an expression
+  hA
+of type
+  ∀ (x : M), Nonempty (ComplexAnalyticPresentationAt A x)
+error: Lean exited with code 1
+✖ [4766/4930] Building Hironaka.Analytic.AnalyticComplementConnected (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/AnalyticComplementConnected.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/AnalyticComplementConnected.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/AnalyticComplementConnected.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/AnalyticComplementConnected.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/AnalyticComplementConnected.setup.json --json
+error: Hironaka/Analytic/AnalyticComplementConnected.lean:55:5: Unknown identifier `AnalyticIrreducibleComponents.isComplexAnalyticallyIrreducible_univ`
+error: Lean exited with code 1
+✖ [4767/4930] Building Hironaka.Analytic.RiemannExtensionThin (2.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/RiemannExtensionThin.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RiemannExtensionThin.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/RiemannExtensionThin.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RiemannExtensionThin.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/RiemannExtensionThin.setup.json --json
+error: Hironaka/Analytic/RiemannExtensionThin.lean:70:35: Unknown identifier `RiemannExtension.exists_extension_of_bounded`
+error: Hironaka/Analytic/RiemannExtensionThin.lean:70:9: Tactic `rcases` failed: `x✝ : ?m.475` is not an inductive datatype
+error: Lean exited with code 1
+✔ [4768/4930] Built Hironaka.Analytic.CoveringSymmetricFunctions (3.7s)
+✖ [4769/4930] Building Hironaka.Resolution.HironakaActualWholeAmbientHSSuperlevel (2.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.setup.json --json
+error: Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.lean:71:32: Unknown identifier `exists_local_stable`
+error: Hironaka/Resolution/HironakaActualWholeAmbientHSSuperlevel.lean:71:9: Tactic `rcases` failed: `x✝ : ?m.34` is not an inductive datatype
+error: Lean exited with code 1
+✔ [4781/4930] Built Hironaka.Resolution.HironakaOriginalWholeContactMaskDictionary (4.7s)
+✖ [4782/4930] Building Hironaka.Resolution.HironakaOriginalCompactUpperCutGlobalPhase (2.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.lean:55:46: Invalid field `isClosed_superlevel`: The environment does not contain `Function.isClosed_superlevel`, so it is not possible to project the field `isClosed_superlevel` from an expression
+  R.isInvValue.usc m h T hc
+of type
+  ∀ x ∈ (m.geoTransformAlong T).cosupp,
+    ∀ᶠ (y : Y.carrier) in 𝓝 x, y ∈ (m.geoTransformAlong T).cosupp → R.inv m T y ≤ R.inv m T x
+error: Hironaka/Resolution/HironakaOriginalCompactUpperCutGlobalPhase.lean:52:92: unsolved goals
+n k : ℕ
+X Y : CMfd n
+Λ : Type v
+inst✝ : LinearOrder Λ
+R : ResolutionInvariant n k Λ
+m : MarkedIdeal n X.carrier
+h : IsInvDomain k m
+b : Λ
+hK : IsCompact (actualUpperCut R m BlowupTower.refl b)
+T : BlowupTower X Y
+hc : IsCanonical m (fun {Y} => R.inv m) T
+ht : m.IsGeoTestTower T
+hw : (m.geoTransformAlong T).IsWellFormed
+⊢ IsCompact (actualUpperCut R m T b) ∧ actualUpperCut R m T b ⊆ T.proj ⁻¹' actualUpperCut R m BlowupTower.refl b
+error: Lean exited with code 1
+✖ [4799/4930] Building Hironaka.Resolution.HironakaOriginalWholeContactLowerFirstAnalytic (4.2s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalWholeContactLowerFirstAnalytic.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalWholeContactLowerFirstAnalytic.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalWholeContactLowerFirstAnalytic.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalWholeContactLowerFirstAnalytic.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalWholeContactLowerFirstAnalytic.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalWholeContactLowerFirstAnalytic.lean:126:15: Unknown identifier `nmOrd_pullback_diffeo`
+error: Lean exited with code 1
+✔ [4809/4930] Built Hironaka.Resolution.HironakaActualTaylorCoordinateNaturality (4.8s)
+✔ [4886/4930] Built Hironaka.Resolution.HironakaActualRelativeTaylorCoefficients (4.7s)
+✔ [4912/4930] Built Hironaka.Resolution.HironakaOriginalAllStepOneSmoothValues (3.5s)
+✔ [4919/4930] Built Hironaka.Resolution.HironakaOriginalFullCutCompanionTestStep (3.3s)
+✔ [4923/4930] Built Hironaka.Resolution.HironakaSharpActualCurveComparisonRestriction (3.7s)
+✖ [4924/4930] Building Hironaka.Resolution.HironakaSharpActualCurvePaddedComparisonRestriction (3.5s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.setup.json --json
+error: Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.lean:44:17: Unknown identifier `BlowupTowerSplitIso.IsTowerIso.congr_base`
+error: Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.lean:34:29: unsolved goals
+n : ℕ
+X Y Z : CMfd n
+P : BlowupTower X Y
+S : BlowupTower Y Z
+L : ℕ
+U : Opens X.carrier
+A : Opens Y.carrier := openPreimage P U
+V : Opens Z.carrier := openPreimage S A
+r : ℕ := L - S.length
+a : (CMfd.of ↥(openPreimage (P.append (S.append (identityEmptyTail Z r))) U)).carrier ≃ₘ⟮𝓘(ℂ, ComplexModel n),
+  𝓘(ℂ, ComplexModel n)⟯ (CMfd.of ↥(openPreimage (S.append (identityEmptyTail Z r)) (openPreimage P U))).carrier :=
+  opensCongr ⋯
+b : (CMfd.of ↥(openPreimage (S.append (identityEmptyTail Z r)) A)).carrier ≃ₘ⟮𝓘(ℂ, ComplexModel n),
+  𝓘(ℂ, ComplexModel n)⟯ (CMfd.of ↥V).carrier :=
+  (opensCongr ⋯).trans (identityEmptyRestriction Z V r)
+e : (CMfd.of ↥(openPreimage (P.append (S.append (identityEmptyTail Z r))) U)).carrier ≃ₘ⟮𝓘(ℂ, ComplexModel n),
+  𝓘(ℂ, ComplexModel n)⟯ (CMfd.of ↥V).carrier :=
+  a.trans b
+hTail :
+  IsTowerIso
+    ((Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of ↥A).carrier ∞).trans
+      (Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of ↥A).carrier ∞))
+    (BlowupTowerTransforms.restrict A (S.append (identityEmptyTail Z r)))
+    ((BlowupTowerTransforms.restrict A S).append (identityEmptyTail (CMfd.of ↥V) r))
+    ((opensCongr ⋯).trans (identityEmptyRestriction Z V r))
+⊢ ∃ e,
+    IsTowerIso (Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of ↥U).carrier ∞)
+        (BlowupTowerTransforms.restrict U (paddedHistory P S L))
+        (paddedHistory (BlowupTowerTransforms.restrict U P) (BlowupTowerTransforms.restrict (openPreimage P U) S) L) e ∧
+      ∀ (z : (CMfd.of ↥(openPreimage (paddedHistory P S L) U)).carrier), ↑(e z) = ↑z
+error: Hironaka/Resolution/HironakaSharpActualCurvePaddedComparisonRestriction.lean:82:10: Unknown identifier `BlowupTowerSplitIso.IsTowerIso.congr_base`
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Analytic.RemmertStatements
+- Hironaka.Analytic.FiniteMapDimension
+- Hironaka.Analytic.GenericSections
+- Hironaka.Analytic.AnalyticCodimTwoStratification
+- Hironaka.Analytic.AnalyticComplementConnected
+- Hironaka.Analytic.RiemannExtensionThin
+- Hironaka.Resolution.HironakaActualWholeAmbientHSSuperlevel
+- Hironaka.Resolution.HironakaOriginalCompactUpperCutGlobalPhase
+- Hironaka.Resolution.HironakaOriginalWholeContactLowerFirstAnalytic
+- Hironaka.Resolution.HironakaSharpActualCurvePaddedComparisonRestriction
+error: build failed

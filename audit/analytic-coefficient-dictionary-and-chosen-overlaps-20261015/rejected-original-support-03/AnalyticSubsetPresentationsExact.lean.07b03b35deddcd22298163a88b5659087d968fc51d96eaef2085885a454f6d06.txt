@@ -1,0 +1,98 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Analytic.AnalyticSubsetOpenMaps
+import Hironaka.Analytic.AnalyticSubsetOpens
+import Hironaka.Analytic.AnalyticDimensionBasics
+import Mathlib.Geometry.Manifold.ContMDiff.Basic
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# Analytic subsets of an open subset of a complex manifold
+
+Blueprint `rem:open-subset-analytic` (step toward `rem:analytic-image-dimension`,
+`rem:fibre-dimension-lower-bound` and Remmert--Stein in `blueprint/src/remmert.tex`).
+
+An open subset `U` of a complex manifold `M` is a complex manifold (`TopologicalSpace.Opens`
+with the restricted charts `(chartAt x).subtypeRestr`); the preferred chart of `U` at `x` is the
+preferred chart of `M` at `x`, restricted.  This file transfers the analytic notions between `M`
+and `U`:
+
+* `isComplexAnalyticSubset_preimage_val`: `A ∩ U` is analytic in `U` when `A` is analytic in `M`;
+* `isComplexAnalyticSubset_of_forall_opens`: analyticity is local -- `A` is analytic in `M` as soon
+  as every point has an open neighbourhood `U` with `A ∩ U` analytic in `U`;
+  `isComplexAnalyticSubset_image_val`: a subset of `U` analytic in `U` and closed in `M` is analytic
+  in `M`;
+* `regularAtDim_preimage_val_iff`: the regular points of `A ∩ U` (in `U`) and their dimensions are
+  those of `A` (in `M`) lying in `U`; hence the dimension predicates of `AnalyticDimensionBasics`
+  transfer (`dimLE_preimage_val`, `dimLE_image_val_iff`, `locDimGE_preimage_val_iff`,
+  `locDimLE_preimage_val_iff`, `isPureDim_image_val_iff`);
+* `contMDiff_restrict`: a map holomorphic on `U` restricts to a holomorphic map on the manifold `U`.
+
+Sorry-free.
+-/
+
+open Set Filter Topology TopologicalSpace
+open scoped Manifold ContDiff
+
+noncomputable section
+
+namespace Hironaka.AnalyticSubsetOpens
+
+open AnalyticDimensionBasics
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+variable {U : Opens M}
+
+/-- The trace on `U` of a presentation of `A` at a point of `U`. -/
+def presentationPreimageVal {A : Set M} (x : U)
+    (P : ComplexAnalyticPresentationAt (n := n) A (x : M)) :
+    ComplexAnalyticPresentationAt (n := n) ((↑) ⁻¹' A : Set U) x where
+  generatorCount := P.generatorCount
+  generator := P.generator
+  coordinateNeighborhood := P.coordinateNeighborhood ∩ (chartAt (ComplexModel n) x).target
+  isOpen_coordinateNeighborhood :=
+    P.isOpen_coordinateNeighborhood.inter (isOpen_chartAt_opens_target x)
+  center_mem_coordinateNeighborhood :=
+    ⟨P.center_mem_coordinateNeighborhood, (chartAt (ComplexModel n) x).map_source
+      (mem_chart_source (ComplexModel n) x)⟩
+  coordinateNeighborhood_subset_target := inter_subset_right
+  generator_holomorphic i := (P.generator_holomorphic i).mono inter_subset_left
+  zeroLocus := by
+    intro y hy hyN
+    exact P.zeroLocus (y := (y : M)) (mem_chartAt_opens_source.mp hy) hyN.1
+
+/-- **Restriction**: `A ∩ U` is analytic in `U` when `A` is analytic in `M`. -/
+theorem isComplexAnalyticSubset_preimage_val {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) (U : Opens M) :
+    IsComplexAnalyticSubset (n := n) ((↑) ⁻¹' A : Set U) :=
+  fun x => ⟨presentationPreimageVal x (hA x).some⟩
+
+/-- A presentation of `A ∩ U` in `U` at `x` is a presentation of `A` in `M` at `x`. -/
+def presentationOfPreimageVal {A : Set M} (x : U)
+    (P : ComplexAnalyticPresentationAt (n := n) ((↑) ⁻¹' A : Set U) x) :
+    ComplexAnalyticPresentationAt (n := n) A (x : M) where
+  generatorCount := P.generatorCount
+  generator := P.generator
+  coordinateNeighborhood := P.coordinateNeighborhood
+  isOpen_coordinateNeighborhood := P.isOpen_coordinateNeighborhood
+  center_mem_coordinateNeighborhood := P.center_mem_coordinateNeighborhood
+  coordinateNeighborhood_subset_target :=
+    P.coordinateNeighborhood_subset_target.trans (chartAt_opens_target_subset x)
+  generator_holomorphic := P.generator_holomorphic
+  zeroLocus := by
+    intro y hy hyN
+    have hyU : y ∈ U := mem_opens_of_chart_mem_target hy (P.coordinateNeighborhood_subset_target hyN)
+    exact P.zeroLocus (y := ⟨y, hyU⟩) (mem_chartAt_opens_source.mpr hy) hyN
+
+theorem dimLE_preimage_val {A : Set M} {p : ℕ} (h : DimLE (n := n) A p) (U : Opens M) :
+    DimLE (n := n) ((↑) ⁻¹' A : Set U) p :=
+  fun y k hy => h y k (regularAtDim_preimage_val_iff.mp hy)
+
+theorem nhds_opens_eq_comap (x : U) : 𝓝 x = comap ((↑) : U → M) (𝓝 (x : M)) :=
+  nhds_induced _ _
+
+end Hironaka.AnalyticSubsetOpens
+end

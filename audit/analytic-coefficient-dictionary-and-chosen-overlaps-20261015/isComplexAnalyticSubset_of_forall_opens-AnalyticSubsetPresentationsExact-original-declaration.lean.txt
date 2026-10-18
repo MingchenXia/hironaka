@@ -1,0 +1,9 @@
+/-- **Analyticity is local**: if every point has an open neighbourhood `U` with `A ∩ U` analytic
+in `U`, then `A` is analytic. -/
+theorem isComplexAnalyticSubset_of_forall_opens {A : Set M}
+    (h : ∀ x : M, ∃ U : Opens M, x ∈ U ∧
+      IsComplexAnalyticSubset (n := n) ((↑) ⁻¹' A : Set U)) :
+    IsComplexAnalyticSubset (n := n) A := by
+  intro x
+  obtain ⟨U, hxU, hU⟩ := h x
+  exact ⟨presentationOfPreimageVal (⟨x, hxU⟩ : U) (hU ⟨x, hxU⟩).some⟩

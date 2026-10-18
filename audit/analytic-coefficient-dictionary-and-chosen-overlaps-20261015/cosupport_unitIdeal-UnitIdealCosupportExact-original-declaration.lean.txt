@@ -1,0 +1,6 @@
+/-- The unit ideal has empty cosupport for every positive mark. -/
+theorem cosupport_unitIdeal {d : ℕ} (hd : 1 ≤ d) : cosupport n N (unitIdeal n M) d = ∅ := by
+  refine eq_empty_of_forall_notMem fun x hx => ?_
+  have h1 := (hx.2 (fun _ => (1 : ℂ)) (holomorphicAt_const 1)).mono hd
+  have := (vanishesToOrderOn_one_iff hx.1 (holomorphicAt_const (n := n) (M := M) (x := x) 1)).mp h1
+  exact one_ne_zero this

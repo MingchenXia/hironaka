@@ -1,0 +1,58 @@
+ℹ [4735/4944] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4765/4946] Built Hironaka.Support.RegularComponentClosureExact (3.1s)
+✖ [4801/4946] Building Hironaka.Support.IrreducibleOpenEqualityExact (2.7s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/IrreducibleOpenEqualityExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/IrreducibleOpenEqualityExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/IrreducibleOpenEqualityExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/IrreducibleOpenEqualityExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/IrreducibleOpenEqualityExact.setup.json --json
+error: Hironaka/Support/IrreducibleOpenEqualityExact.lean:34:53: Unknown identifier `M`
+
+Note: It is not possible to treat `M` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/IrreducibleOpenEqualityExact.lean:34:53: Unknown identifier `M`
+
+Note: It is not possible to treat `M` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/IrreducibleOpenEqualityExact.lean:36:78: Unknown identifier `M`
+
+Note: It is not possible to treat `M` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/IrreducibleOpenEqualityExact.lean:37:75: unsolved goals
+V : Set sorry
+Z : Set sorry
+hV : sorry
+hZ : sorry
+hVZ : V ⊆ Z
+O : Set sorry
+hO : sorry
+hne : (Z ∩ O).Nonempty
+hsub : Z ∩ O ⊆ V
+⊢ V = Z
+error: Lean exited with code 1
+✔ [4848/4946] Built Hironaka.Resolution.HironakaOriginalCoherentCompanionCountOpenNaturality (3.6s)
+✔ [4855/4946] Built Hironaka.Resolution.HironakaOriginalCoherentSpecialResetIdeal (3.8s)
+✔ [4859/4946] Built Hironaka.Resolution.HironakaOriginalCoherentStepOneHistoryYearIdeal (3.7s)
+✔ [4863/4946] Built Hironaka.Resolution.HironakaOriginalAllDepthReferenceValueAnalytic (3.5s)
+✔ [4868/4946] Built Hironaka.Resolution.HironakaOriginalReferenceValueOpenNaturality (3.8s)
+✔ [4872/4946] Built Hironaka.Resolution.HironakaOriginalReferenceValueAuxiliaryMarked (3.7s)
+✖ [4932/4946] Building Hironaka.Resolution.HironakaOriginalReferenceValueLocalBlowup (3.1s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.lean:77:8: Unknown identifier `BlowupStrictIdeal.controlledTransform_vanishingIdeal`
+error: Hironaka/Resolution/HironakaOriginalReferenceValueLocalBlowup.lean:87:8: Unknown identifier `cosupport_unitIdeal`
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Support.IrreducibleOpenEqualityExact
+- Hironaka.Resolution.HironakaOriginalReferenceValueLocalBlowup
+error: build failed

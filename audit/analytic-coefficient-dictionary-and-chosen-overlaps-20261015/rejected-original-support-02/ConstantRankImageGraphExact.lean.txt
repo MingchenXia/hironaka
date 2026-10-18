@@ -1,0 +1,243 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Analytic.ConstantRankSubmanifold
+import Hironaka.Analytic.HolomorphicConstantRank
+import Hironaka.Analytic.RegularLocusDense
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+set_option autoImplicit false
+
+/-!
+# Constant-rank images are submanifolds
+
+Blueprint `rem:constant-rank-submanifold` (used in Demailly, *Complex analytic and differential
+geometry*, II.8.1 and II.8.8).
+
+* `exists_linearEquiv_mem_plane_iff`: a linear subspace `W` of dimension `r` of an
+  `N`-dimensional space `V` is carried onto the standard `r`-plane of `ℂᴺ` by a linear
+  isomorphism `V ≃ ℂᴺ`.
+* `regularAtDim_graph`: let `Q : ℂᴺ → R` be linear, `k` holomorphic on an open `B' ⊆ R` with
+  `Q ∘ k = id` there, and `Γ = {y | Q y ∈ B' ∧ k (Q y) = y}`.  Every point of `Γ` is a regular
+  point of `Γ` of dimension `dim R`.  The flattening is `y ↦ (Q y - Q y₀, y - k (Q y))`, read in
+  linear coordinates in which `R × {0}` is the standard plane.
+* `exists_image_eq_graph`: for `G` holomorphic of constant rank `r` near `p` (with values in
+  `ℂᴺ`), there is an open neighbourhood `O` of `p` whose image is the zero set, in an open set
+  `W`, of the holomorphic map `y ↦ y - k (Q y)`, and every point of `G(O)` is a regular point
+  of `G(O)` of dimension `r`.
+* `image_mem_nhds_of_range_eq_top`: if `dG_p` is onto, `G` maps every neighbourhood of `p` onto
+  a neighbourhood of `G p` (the case `r = dim F` of the blueprint statement).
+-/
+
+open Set Filter Topology Metric
+open scoped ContDiff
+
+noncomputable section
+
+namespace Hironaka.ConstantRankSubmanifold
+
+open Hironaka.RegularLocusDense HolomorphicConstantRank
+
+/-! ### Linear coordinates for a subspace -/
+
+
+/-- The standard `r`-plane `{z | z_i = 0 for i ≥ r}` of `ℂᴺ` as a submodule. -/
+def planeSubmodule (N r : ℕ) : Submodule ℂ (ComplexModel N) where
+  carrier := complexCoordinatePlane N r
+  add_mem' := by
+    intro a b ha hb i hi
+    simp [ha i hi, hb i hi]
+  zero_mem' := by
+    intro i _
+    simp
+  smul_mem' := by
+    intro c a ha i hi
+    simp [ha i hi]
+
+theorem mem_planeSubmodule {N r : ℕ} {z : ComplexModel N} :
+    z ∈ planeSubmodule N r ↔ z ∈ complexCoordinatePlane N r := Iff.rfl
+
+theorem finrank_planeSubmodule {N r : ℕ} (hr : r ≤ N) :
+    Module.finrank ℂ (planeSubmodule N r) = r := by
+  have hrange : LinearMap.range ((coordinateInclusion N r : ComplexModel r →L[ℂ] ComplexModel N) :
+      ComplexModel r →ₗ[ℂ] ComplexModel N) = planeSubmodule N r := by
+    ext z
+    constructor
+    · rintro ⟨w, rfl⟩
+      exact coordinateInclusion_mem_complexCoordinatePlane w
+    · intro hz
+      exact ⟨coordinateProjection N r z, coordinateInclusion_coordinateProjection hz⟩
+  have hinj : Function.Injective ((coordinateInclusion N r : ComplexModel r →L[ℂ] ComplexModel N) :
+      ComplexModel r →ₗ[ℂ] ComplexModel N) := by
+    intro a b hab
+    have := congrArg (coordinateProjection N r) hab
+    simpa [coordinateProjection_coordinateInclusion hr] using this
+  rw [← hrange, LinearMap.finrank_range_of_inj hinj, finrank_euclideanSpace_fin]
+
+/-- **A subspace of dimension `r` is the standard `r`-plane in suitable linear coordinates.** -/
+theorem exists_linearEquiv_mem_plane_iff {V : Type*} [NormedAddCommGroup V] [NormedSpace ℂ V]
+    [FiniteDimensional ℂ V] {N r : ℕ} (hV : Module.finrank ℂ V = N) (W : Submodule ℂ V)
+    (hW : Module.finrank ℂ W = r) :
+    ∃ A : V ≃L[ℂ] ComplexModel N, ∀ v, A v ∈ complexCoordinatePlane N r ↔ v ∈ W := by
+  have hrN : r ≤ N := hW ▸ hV ▸ Submodule.finrank_le W
+  obtain ⟨C, hC⟩ := W.exists_isCompl
+  obtain ⟨C', hC'⟩ := (planeSubmodule N r).exists_isCompl
+  have hdimC : Module.finrank ℂ C = N - r := by
+    have := Submodule.finrank_add_eq_of_isCompl hC
+    omega
+  have hdimC' : Module.finrank ℂ C' = N - r := by
+    have := Submodule.finrank_add_eq_of_isCompl hC'
+    rw [finrank_planeSubmodule hrN, finrank_euclideanSpace_fin] at this
+    omega
+  let e₁ : W ≃ₗ[ℂ] planeSubmodule N r :=
+    LinearEquiv.ofFinrankEq _ _ (by rw [hW, finrank_planeSubmodule hrN])
+  let e₂ : C ≃ₗ[ℂ] C' := LinearEquiv.ofFinrankEq _ _ (by rw [hdimC, hdimC'])
+  let σ := Submodule.prodEquivOfIsCompl W C hC
+  let σ' := Submodule.prodEquivOfIsCompl (planeSubmodule N r) C' hC'
+  let A : V ≃ₗ[ℂ] ComplexModel N := σ.symm.trans ((e₁.prodCongr e₂).trans σ')
+  refine ⟨A.toContinuousLinearEquiv, fun v => ?_⟩
+  change A v ∈ planeSubmodule N r ↔ v ∈ W
+  have hsymm : σ'.symm (A v) = (e₁ (σ.symm v).1, e₂ (σ.symm v).2) := by
+    simp [A]
+  rw [← Submodule.prodEquivOfIsCompl_symm_apply_snd_eq_zero (planeSubmodule N r) C' hC',
+    ← Submodule.prodEquivOfIsCompl_symm_apply_snd_eq_zero W C hC]
+  change (σ'.symm (A v)).2 = 0 ↔ (σ.symm v).2 = 0
+  rw [hsymm]
+  simp
+
+/-! ### Graphs over a linear projection are submanifolds -/
+
+variable {N : ℕ} {R : Type*} [NormedAddCommGroup R] [NormedSpace ℂ R] [FiniteDimensional ℂ R]
+
+omit [FiniteDimensional ℂ R] in
+/-- A linear map which has a holomorphic right inverse on a nonempty open set is onto. -/
+theorem range_eq_top_of_rightInverse (Q : ComplexModel N →L[ℂ] R) {B' : Set R} (hB' : IsOpen B')
+    (hne : B'.Nonempty) {k : R → ComplexModel N} (hQk : ∀ w ∈ B', Q (k w) = w) :
+    LinearMap.range (Q : ComplexModel N →ₗ[ℂ] R) = ⊤ := by
+  apply Submodule.eq_top_of_nonempty_interior'
+  have hsub : B' ⊆ (LinearMap.range (Q : ComplexModel N →ₗ[ℂ] R) : Set R) :=
+    fun w hw => ⟨k w, hQk w hw⟩
+  exact hne.mono (interior_maximal hsub hB')
+
+/-- **A graph over a linear projection is a submanifold.**  If `Q ∘ k = id` on the open set
+`B'`, every point `y` of the graph `{z | Q z ∈ B' ∧ k (Q z) = z}` is a regular point of the graph
+of dimension `dim R`. -/
+theorem regularAtDim_graph (Q : ComplexModel N →L[ℂ] R) {B' : Set R} (hB' : IsOpen B')
+    {k : R → ComplexModel N} (hk : DifferentiableOn ℂ k B') (hQk : ∀ w ∈ B', Q (k w) = w)
+    {y : ComplexModel N} (hy : Q y ∈ B') (hky : k (Q y) = y) :
+    RegularAtDim (n := N) (M := ComplexModel N) {z | Q z ∈ B' ∧ k (Q z) = z} y
+      (Module.finrank ℂ R) := by
+  classical
+  set K := LinearMap.ker (Q : ComplexModel N →ₗ[ℂ] R) with hK
+  have htop := range_eq_top_of_rightInverse Q hB' ⟨_, hy⟩ hQk
+  have hdim : Module.finrank ℂ R + Module.finrank ℂ K = N := by
+    have := LinearMap.finrank_range_add_finrank_ker (Q : ComplexModel N →ₗ[ℂ] R)
+    rw [htop, finrank_top, finrank_euclideanSpace_fin] at this
+    exact this
+  obtain ⟨K', hK'⟩ := K.exists_isCompl
+  let P : ComplexModel N →L[ℂ] K :=
+    (Submodule.projectionOnto K K' hK').toContinuousLinearMap
+  have hP : ∀ u : K, P u = u := fun u => Submodule.projectionOnto_apply_left hK' u
+  let Wsub : Submodule ℂ (R × K) := LinearMap.ker (LinearMap.snd ℂ R K)
+  have hWdim : Module.finrank ℂ Wsub = Module.finrank ℂ R := by
+    have h := LinearMap.finrank_range_of_inj (LinearMap.inl_injective (R := ℂ) (M := R) (M₂ := K))
+    rw [LinearMap.range_inl] at h
+    exact h
+  have hVdim : Module.finrank ℂ (R × K) = N := by
+    rw [Module.finrank_prod, hdim]
+  obtain ⟨A, hA⟩ := exists_linearEquiv_mem_plane_iff hVdim Wsub hWdim
+  let Θ : ComplexModel N → ComplexModel N := fun z => A (Q z - Q y, P (z - k (Q z)))
+  have hN : IsOpen (Q ⁻¹' B') := hB'.preimage Q.continuous
+  have hyN : y ∈ Q ⁻¹' B' := hy
+  have hkQ : DifferentiableOn ℂ (fun z => k (Q z)) (Q ⁻¹' B') :=
+    hk.comp Q.differentiableOn fun z hz => hz
+  have hΘd : DifferentiableOn ℂ Θ (Q ⁻¹' B') := by
+    refine A.differentiable.comp_differentiableOn ?_
+    refine DifferentiableOn.prodMk ?_ ?_
+    · exact (Q.differentiable.sub_const _).differentiableOn
+    · exact P.differentiable.comp_differentiableOn (differentiableOn_id.sub hkQ)
+  -- the derivative at `y`
+  set k' := fderiv ℂ k (Q y) with hk'
+  have hkd : HasFDerivAt k k' (Q y) := (hk.differentiableAt (hB'.mem_nhds hy)).hasFDerivAt
+  have hkQd : HasFDerivAt (fun z => k (Q z)) (k'.comp Q) y := hkd.comp y Q.hasFDerivAt
+  have h1 : HasFDerivAt (fun z => Q z - Q y) Q y := Q.hasFDerivAt.sub_const _
+  have h2 : HasFDerivAt (fun z => P (z - k (Q z)))
+      (P.comp (ContinuousLinearMap.id ℂ (ComplexModel N) - k'.comp Q)) y :=
+    P.hasFDerivAt.comp y ((hasFDerivAt_id y).sub hkQd)
+  have hΘD : HasFDerivAt Θ ((A : R × K →L[ℂ] ComplexModel N).comp
+      (Q.prod (P.comp (ContinuousLinearMap.id ℂ (ComplexModel N) - k'.comp Q)))) y :=
+    A.hasFDerivAt.comp y (h1.prodMk h2)
+  have hinj : Function.Injective (fderiv ℂ Θ y) := by
+    rw [hΘD.fderiv]
+    rw [injective_iff_map_eq_zero]
+    intro v hv
+    have hv' : (Q v, P (v - k' (Q v))) = 0 := by
+      have : A (Q v, P (v - k' (Q v))) = 0 := by simpa using hv
+      exact (map_eq_zero_iff A A.injective).1 this
+    have hQv : Q v = 0 := congrArg Prod.fst hv'
+    have hPv : P v = 0 := by
+      have := congrArg Prod.snd hv'
+      simpa [hQv] using this
+    have hvK : v ∈ K := hQv
+    have := hP ⟨v, hvK⟩
+    rw [hPv] at this
+    exact (congrArg Subtype.val this).symm
+  obtain ⟨Φ, hΦN, hΦΘ, -⟩ := exists_localHolomorphicEquivAt hN hyN hΘd hinj
+  have hmemK : ∀ z, Q z ∈ B' → z - k (Q z) ∈ K := fun z hz => by
+    change Q (z - k (Q z)) = 0
+    rw [map_sub, hQk _ hz, sub_self]
+  refine ⟨by omega, ⟨hy, hky⟩, Φ, fun _ _ => mem_univ _, ?_, ?_⟩
+  · change Φ.toFun y = 0
+    rw [hΦΘ]
+    simp only [Θ, sub_self, hky]
+    simp
+  · intro z _ hz
+    change z ∈ {z | Q z ∈ B' ∧ k (Q z) = z} ↔ Φ.toFun z ∈ complexCoordinatePlane N _
+    have hzN : Q z ∈ B' := hΦN hz
+    rw [hΦΘ, hA]
+    change Q z ∈ B' ∧ k (Q z) = z ↔ P (z - k (Q z)) = 0
+    rw [hP ⟨_, hmemK z hzN⟩]
+    constructor
+    · rintro ⟨-, h⟩
+      ext1
+      simp [h]
+    · intro h
+      refine ⟨hzN, ?_⟩
+      have := congrArg Subtype.val h
+      simp only [ZeroMemClass.coe_zero] at this
+      exact (sub_eq_zero.1 this).symm
+
+/-! ### Images of constant-rank maps -/
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E] [FiniteDimensional ℂ E]
+
+/-- **Constant-rank images are submanifolds** (blueprint `rem:constant-rank-submanifold`).  If
+`G` is holomorphic of constant rank `r` on the open set `U ∋ p`, then some open neighbourhood `O`
+of `p` in `U` is mapped onto the zero set, in an open set `W`, of a holomorphic map `h`, and every
+point of `G(O)` is a regular point of `G(O)` of dimension `r`. -/
+theorem exists_image_eq_graph {G : E → ComplexModel N} {U : Set E} (hU : IsOpen U)
+    (hG : DifferentiableOn ℂ G U) {r : ℕ}
+    (hr : ∀ z ∈ U, Module.finrank ℂ (LinearMap.range ((fderiv ℂ G z : E →L[ℂ] ComplexModel N) :
+      E →ₗ[ℂ] ComplexModel N)) = r)
+    {p : E} (hp : p ∈ U) :
+    ∃ (O : Set E) (W : Set (ComplexModel N)) (h : ComplexModel N → ComplexModel N),
+      IsOpen O ∧ p ∈ O ∧ O ⊆ U ∧ IsOpen W ∧ DifferentiableOn ℂ h W ∧
+      G '' O = {y | y ∈ W ∧ h y = 0} ∧
+      ∀ y ∈ G '' O, RegularAtDim (n := N) (M := ComplexModel N) (G '' O) y r := by
+  obtain ⟨Q, S, ψ, k, ρ, hρ, hopen, hψp, hψ, -, hkd, hQk, hnf⟩ := exists_normalForm hU hG hr hp
+  have himg := image_eq_graph (G := G) (ψ := ψ) (k := k) (Q := Q) (c := (Q (G p), S p))
+    (ρ := ρ) hQk hnf
+  refine ⟨ψ '' ball (Q (G p), S p) ρ, Q ⁻¹' ball (Q (G p)) ρ, fun y => y - k (Q y), hopen,
+    ⟨_, mem_ball_self hρ, hψp⟩, ?_, isOpen_ball.preimage Q.continuous, ?_, ?_, ?_⟩
+  · rintro _ ⟨w, hw, rfl⟩
+    exact (hψ w hw).1
+  · exact differentiableOn_id.sub (hkd.comp Q.differentiableOn fun y hy => hy)
+  · rw [himg]
+    ext y
+    simp only [mem_ofPred_eq, mem_preimage, sub_eq_zero]
+    exact and_congr_right fun _ => eq_comm
+  · intro y hy
+    rw [himg] at hy ⊢
+    have := regularAtDim_graph Q isOpen_ball hkd hQk hy.1 hy.2
+    rwa [hr p hp] at this
+
+end
+end

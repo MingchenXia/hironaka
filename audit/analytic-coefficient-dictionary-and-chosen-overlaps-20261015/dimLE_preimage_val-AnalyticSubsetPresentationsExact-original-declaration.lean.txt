@@ -1,0 +1,3 @@
+theorem dimLE_preimage_val {A : Set M} {p : ℕ} (h : DimLE (n := n) A p) (U : Opens M) :
+    DimLE (n := n) ((↑) ⁻¹' A : Set U) p :=
+  fun y k hy => h y k (regularAtDim_preimage_val_iff.mp hy)

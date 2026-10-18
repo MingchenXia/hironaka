@@ -1,0 +1,14 @@
+theorem locDimGE_preimage_val_iff {A : Set M} {x : U} {q : ℕ} :
+    LocDimGE (n := n) ((↑) ⁻¹' A : Set U) x q ↔ LocDimGE (n := n) A (x : M) q := by
+  constructor
+  · intro h W hW
+    have hV : ((↑) ⁻¹' W : Set U) ∈ 𝓝 x := by
+      rw [nhds_opens_eq_comap]; exact preimage_mem_comap hW
+    obtain ⟨y, hyV, k, hqk, hy⟩ := h _ hV
+    exact ⟨y, hyV, k, hqk, regularAtDim_preimage_val_iff.mp hy⟩
+  · intro h V hV
+    rw [nhds_opens_eq_comap, mem_comap] at hV
+    obtain ⟨W, hW, hWV⟩ := hV
+    obtain ⟨y, ⟨hyW, hyU⟩, k, hqk, hy⟩ :=
+      h (W ∩ U) (inter_mem hW (U.isOpen.mem_nhds x.2))
+    exact ⟨⟨y, hyU⟩, hWV hyW, k, hqk, regularAtDim_preimage_val_iff.mpr hy⟩

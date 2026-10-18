@@ -1,0 +1,59 @@
+ℹ [4737/4942] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4760/4942] Built Hironaka.Support.InvUSCSuperlevelExact (1.5s)
+✖ [4762/4942] Building Hironaka.Support.PositiveDimensionalAccPtExact (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/PositiveDimensionalAccPtExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/PositiveDimensionalAccPtExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/PositiveDimensionalAccPtExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/PositiveDimensionalAccPtExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/PositiveDimensionalAccPtExact.setup.json --json
+error: Hironaka/Support/PositiveDimensionalAccPtExact.lean:48:6: Unknown identifier `IsIrreducibleComponent`
+
+Note: It is not possible to treat `IsIrreducibleComponent` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/PositiveDimensionalAccPtExact.lean:41:0: cannot omit referenced section variable `inst✝`
+error: Lean exited with code 1
+✔ [4763/4942] Built Hironaka.Support.AnalyticSubsetPresentationsExact (2.9s)
+✔ [4764/4942] Built Hironaka.Support.HolomorphicNormalFormGraphExact (2.9s)
+✔ [4765/4942] Built Hironaka.Support.AnalyticIdentityInteriorExact (2.6s)
+✔ [4766/4942] Built Hironaka.Support.RiemannBoundedExact (2.7s)
+✔ [4768/4942] Built Hironaka.Support.AnalyticDescendingLocalStableExact (3.1s)
+✔ [4769/4942] Built Hironaka.Support.NonmonomialDiffeoExact (2.9s)
+✔ [4781/4942] Built Hironaka.Support.TowerIsoBaseCongrExact (3.2s)
+✔ [4782/4942] Built Hironaka.Resolution.HironakaOriginalCompactUpperCutGlobalPhase (3.2s)
+✔ [4785/4942] Built Hironaka.Support.ConstantRankImageGraphExact (5.0s)
+✔ [4786/4942] Built Hironaka.Support.AnalyticIrreducibleUnivExact (3.1s)
+✔ [4787/4942] Built Hironaka.Analytic.AnalyticCodimTwoStratification (2.9s)
+✔ [4788/4942] Built Hironaka.Analytic.RiemannExtensionThin (3.4s)
+✔ [4789/4942] Built Hironaka.Resolution.HironakaActualWholeAmbientHSSuperlevel (3.4s)
+✔ [4798/4942] Built Hironaka.Resolution.HironakaOriginalWholeContactLowerFirstAnalytic (4.6s)
+✔ [4802/4942] Built Hironaka.Analytic.FiniteMapDimension (4.3s)
+✔ [4804/4942] Built Hironaka.Analytic.AnalyticComplementConnected (2.0s)
+✔ [4805/4942] Built Hironaka.Resolution.HironakaActualReferenceHSSingularCentre (5.4s)
+✖ [4815/4942] Building Hironaka.Resolution.HironakaOriginalCoherentHistoryYearIdeal (3.3s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.lean:34:29: Unknown identifier `le_sumIdeal_left`
+error: Hironaka/Resolution/HironakaOriginalCoherentHistoryYearIdeal.lean:35:24: Unknown identifier `le_sumIdeal_right`
+error: Lean exited with code 1
+✔ [4904/4942] Built Hironaka.Resolution.HironakaActualCompactIntrinsicHSMaximum (3.1s)
+✔ [4936/4942] Built Hironaka.Resolution.HironakaSharpActualCurvePaddedComparisonRestriction (3.7s)
+✔ [4937/4942] Built Hironaka.Resolution.HironakaSharpActualCurveNestedComparison (4.8s)
+✔ [4938/4942] Built Hironaka.Resolution.HironakaSharpActualCurveChosenOverlapCocycle (5.4s)
+✔ [4939/4942] Built Hironaka.Resolution.HironakaSharpActualCurveEndpointGeometry (4.3s)
+✔ [4940/4942] Built Hironaka.Resolution.HironakaSharpActualCurveTopologicalGluing (4.4s)
+Some required targets logged failures:
+- Hironaka.Support.PositiveDimensionalAccPtExact
+- Hironaka.Resolution.HironakaOriginalCoherentHistoryYearIdeal
+error: build failed

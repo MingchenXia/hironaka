@@ -1,0 +1,74 @@
+ℹ [4769/4944] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4798/4944] Built Hironaka.Support.OriginalIrreducibleComponentExact (1.0s)
+✔ [4814/4944] Built Hironaka.Support.SumIdealCoherentInclusionsExact (2.6s)
+✖ [4824/4944] Building Hironaka.Support.PositiveDimensionalAccPtExact (2.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/PositiveDimensionalAccPtExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/PositiveDimensionalAccPtExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/PositiveDimensionalAccPtExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/PositiveDimensionalAccPtExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/PositiveDimensionalAccPtExact.setup.json --json
+error: Hironaka/Support/PositiveDimensionalAccPtExact.lean:63:35: Unknown identifier `subset_singleton_of_isPreconnected`
+error: Hironaka/Support/PositiveDimensionalAccPtExact.lean:95:35: Unknown identifier `regularAtDim_closure_component`
+error: Hironaka/Support/PositiveDimensionalAccPtExact.lean:98:10: Unknown identifier `ClosureDifferenceAnalytic.eq_of_subset_of_inter_open_subset`
+error: Hironaka/Support/PositiveDimensionalAccPtExact.lean:101:8: No goals to be solved
+error: Lean exited with code 1
+✔ [4849/4944] Built Hironaka.Resolution.HironakaOriginalCoherentHistoryYearIdeal (3.4s)
+✔ [4857/4944] Built Hironaka.Resolution.HironakaOriginalCoherentCompanionCountIdeal (3.3s)
+✔ [4863/4944] Built Hironaka.Resolution.HironakaOriginalCoherentHistoryYearOpenNaturality (3.7s)
+✖ [4924/4944] Building Hironaka.Resolution.HironakaOriginalCoherentCompanionCountOpenNaturality (3.1s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.lean:154:50: Unknown identifier `length_restrict`
+error: Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.lean:151:87: unsolved goals
+n k : ℕ
+X Y : CMfd n
+m : MarkedIdeal n X.carrier
+h : IsInvDomain k m
+T : BlowupTower X Y
+ht : m.IsGeoTestTower T
+U : Opens X.carrier
+r : ℕ
+⊢ List.take (m.E.length + ((BlowupTowerTransforms.restrict U T).length - r))
+      (List.map (fun x => Subtype.val ⁻¹' x) (m.geoTransformAlong T).E) =
+    List.take (m.E.length + (T.length - r)) (List.map (fun x => Subtype.val ⁻¹' x) (m.geoTransformAlong T).E)
+error: Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.lean:195:6: Unknown identifier `length_restrict`
+error: Hironaka/Resolution/HironakaOriginalCoherentCompanionCountOpenNaturality.lean:183:108: unsolved goals
+n k : ℕ
+X Y : CMfd n
+hn : 0 < n
+m : MarkedIdeal n X.carrier
+h : IsInvDomain k m
+T : BlowupTower X Y
+ht : m.IsGeoTestTower T
+U : Opens X.carrier
+q s : ℕ
+F : ℕ → GermIdeal n Y.carrier :=
+  fun r => sumIdeal (companionHistoryYearIdeal m T q r) (indexedBoundaryCountIdeal (chronologicalMembers m T r) s)
+hF : ∀ I ∈ List.map F (Finset.range (T.length + 1)).toList, I.IsCoherent
+⊢ GermIdeal.pullback Subtype.val (idealListProduct (List.map F (Finset.range (T.length + 1)).toList)) =
+    idealListProduct
+      (List.map
+        (fun r =>
+          sumIdeal
+            (companionHistoryYearIdeal (MarkedIdeal.pullback Subtype.val m) (BlowupTowerTransforms.restrict U T) q r)
+            (indexedBoundaryCountIdeal
+              (chronologicalMembers (MarkedIdeal.pullback Subtype.val m) (BlowupTowerTransforms.restrict U T) r) s))
+        (Finset.range ((BlowupTowerTransforms.restrict U T).length + 1)).toList)
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Support.PositiveDimensionalAccPtExact
+- Hironaka.Resolution.HironakaOriginalCoherentCompanionCountOpenNaturality
+error: build failed

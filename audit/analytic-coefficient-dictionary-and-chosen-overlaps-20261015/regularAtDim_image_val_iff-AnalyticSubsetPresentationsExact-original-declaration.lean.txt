@@ -1,0 +1,3 @@
+theorem regularAtDim_image_val_iff {B : Set U} {x : U} {k : ℕ} :
+    RegularAtDim (n := n) ((↑) '' B : Set M) (x : M) k ↔ RegularAtDim (n := n) B x k := by
+  rw [← regularAtDim_preimage_val_iff, Subtype.val_injective.preimage_image]

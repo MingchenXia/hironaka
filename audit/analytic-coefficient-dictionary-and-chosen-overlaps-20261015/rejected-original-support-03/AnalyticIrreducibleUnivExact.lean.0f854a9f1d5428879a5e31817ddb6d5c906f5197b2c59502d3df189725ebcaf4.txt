@@ -1,0 +1,87 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Support.AnalyticIdentityInteriorExact
+import Hironaka.Analytic.AnalyticIrreducibleComponents
+import Hironaka.Blowup.BlowupSequences
+import Hironaka.Analytic.AnalyticSubsetTopology
+import Hironaka.Analytic.RegularLocusDense
+import Hironaka.Analytic.PureDimension
+import Hironaka.Analytic.PositiveDimensionalComponent
+
+set_option autoImplicit false
+
+/-!
+# Irreducible components of analytic subsets
+
+Source: the analytic-geometry facts used in Copy-4, `sec:gluing`
+(`transcendental-nakamaye-copy4-20260911`): "a connected complex manifold is
+irreducible", and "if `E_nK(α)` has no isolated points, each of its irreducible
+components is positive-dimensional"; blueprint `ana:irreducible-components`.
+These are standard (Grauert--Remmert, *Coherent analytic sheaves*, Ch. 9;
+Demailly, *Complex analytic and differential geometry*, II.5).
+
+* `isComplexAnalyticallyIrreducible_univ`: a nonempty connected complex manifold
+  is analytically irreducible (identity theorem: a proper analytic subset of a
+  connected manifold is nowhere dense).  Proved in
+  `Hironaka.AnalyticSubsetTopology`.
+* `regularAtDim_univ`, `exists_subvariety_univ`: the manifold itself is a closed
+  irreducible analytic subvariety of dimension `n`.
+* `eq_univ_of_isClosedConnectedSubmanifold_self`: a closed connected submanifold of
+  full dimension of a connected manifold is the whole manifold.
+* `exists_isIrreducibleComponent_pos_dim_of_accPt`: every non-isolated point of an
+  analytic subset lies on a positive-dimensional irreducible component.  (The
+  global irreducible components form a locally finite family of maximal
+  irreducible analytic subsets; the germ at a non-isolated point has positive
+  dimension, so some component through it does, and irreducible analytic sets are
+  pure-dimensional.)  Derived in `Hironaka.PositiveDimensionalComponent` (blueprint
+  `ana:irreducible-components`) from (LS) with connected regular parts and the closures of
+  the connected components of the regular locus.
+* `eq_dim_of_regularAtDim`: an irreducible analytic subvariety is pure-dimensional,
+  i.e. every regular point has the certified dimension (Chirka, §5.3--5.4).  Derived in
+  `Hironaka.PureDimension` from the local statement (LS)
+  `AnalyticLocalStatement.exists_localDecomposition`, itself proved from the local
+  parametrization theorem (`GermParametrization.exists_localParametrization`).
+* `exists_mem_regularLocus_not_mem_of_not_subset`: an irreducible analytic
+  subvariety not contained in an analytic subset `A` has a point, regular of the
+  certified dimension, outside `A`.  PROVED from pure dimensionality and density of
+  the regular locus (`Hironaka.RegularLocusDense.exists_regularAtDim_mem_nhds`,
+  sorry-free): `V \ A` is a nonempty relatively open subset of `V`.  Used for
+  positivity of restricted volumes.
+-/
+
+open Set Filter
+open scoped Topology
+
+namespace Hironaka.AnalyticIrreducibleComponents
+
+open Hironaka Hironaka.BlowupSequences
+
+noncomputable section
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+
+/-- **A connected complex manifold is analytically irreducible.** -/
+theorem isComplexAnalyticallyIrreducible_univ [ConnectedSpace M] :
+    IsComplexAnalyticallyIrreducible (n := n) (univ : Set M) :=
+  isComplexAnalyticallyIrreducible_univ_of_connectedSpace
+
+/-- **Top-dimensional regular points off a proper analytic subset.**
+An irreducible analytic subvariety `V` not contained in an analytic subset `A` has a point
+outside `A` at which `V` is regular of dimension `dim V`.
+
+`A` is closed, so `V \ A` is a nonempty relatively open subset of `V`; the regular locus is
+dense (`RegularLocusDense.exists_regularAtDim_mem_nhds`, sorry-free), so `V` is regular of
+some dimension at a point of `Aᶜ`, and that dimension is `dim V` by pure dimensionality
+(`eq_dim_of_regularAtDim`). -/
+theorem exists_mem_regularLocus_not_mem_of_not_subset
+    (V : ClosedIrreducibleAnalyticSubvariety n M) {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) (hV : ¬ V.carrier ⊆ A) :
+    ∃ x ∈ regularLocus (n := n) V.carrier V.dim, x ∉ A := by
+  obtain ⟨y, hyV, hyA⟩ := not_subset.mp hV
+  obtain ⟨x, hxA, k, hx⟩ := RegularLocusDense.exists_regularAtDim_mem_of_isOpen V.analytic
+    hA.isClosed.isOpen_compl hyV hyA
+  exact ⟨x, (eq_dim_of_regularAtDim V hx) ▸ hx, hxA⟩
+
+end
+end Hironaka.AnalyticIrreducibleComponents

@@ -1,0 +1,49 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Analytic.AnalyticSubsetTopology
+import Hironaka.Analytic.ComplexAnalyticSubvarieties
+import Mathlib.Analysis.Complex.CauchyIntegral
+
+set_option autoImplicit false
+
+/-!
+# Topology of complex analytic subsets
+
+Source: the standard facts about analytic sets used in Copy-4, `sec:gluing`
+(`transcendental-nakamaye-copy4-20260911`): "a connected complex manifold is
+irreducible"; Grauert--Remmert, *Coherent analytic sheaves*, Ch. 5 and 9;
+blueprint `ana:irreducible-components`.
+
+* `eqOn_zero_of_isOpen_convex`: the identity theorem for a holomorphic function
+  on an open convex subset of a complex normed space, proved by restricting to
+  complex lines and applying the one-variable identity theorem.
+* `IsComplexAnalyticSubset.isClosed`: an analytic subset is closed.
+* `IsComplexAnalyticSubset.isClosed_interior`: the interior of an analytic subset
+  is closed.  At a point of the closure of the interior, the local generators
+  vanish on a nonempty open subset of a coordinate ball, hence on the whole ball.
+* `isComplexAnalyticallyIrreducible_univ_of_connectedSpace`: a connected complex
+  manifold is analytically irreducible.  An analytic subset with nonempty
+  interior is clopen-interior, hence everything; two closed sets with empty
+  interior cannot cover the manifold.
+-/
+
+open Set Filter Metric
+open scoped Topology
+
+namespace Hironaka
+
+noncomputable section
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- An analytic subset of a connected manifold with nonempty interior is the
+whole manifold. -/
+theorem IsComplexAnalyticSubset.eq_univ_of_interior_nonempty [ConnectedSpace M]
+    {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A)
+    (hint : (interior A).Nonempty) : A = univ :=
+  eq_univ_of_univ_subset
+    ((IsClopen.eq_univ ⟨hA.isClosed_interior, isOpen_interior⟩ hint).symm.subset.trans
+      interior_subset)
+
+end
+end

@@ -1,0 +1,34 @@
+ℹ [4799/4949] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4917/4949] Built Hironaka.Support.AnalyticIrreducibleUnivExact (2.8s)
+✔ [4918/4949] Built Hironaka.Analytic.AnalyticComplementConnected (3.4s)
+✔ [4919/4949] Built Hironaka.Support.StrictTransformDensityExact (3.6s)
+✖ [4920/4949] Building Hironaka.Support.ComponentRegularFillingExact (3.2s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/ComponentRegularFillingExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ComponentRegularFillingExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ComponentRegularFillingExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/ComponentRegularFillingExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/ComponentRegularFillingExact.setup.json --json
+error: Hironaka/Support/ComponentRegularFillingExact.lean:55:10: Unknown identifier `IsIrreducibleComponent`
+
+Note: It is not possible to treat `IsIrreducibleComponent` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/ComponentRegularFillingExact.lean:120:10: Unknown identifier `IsIrreducibleComponent`
+
+Note: It is not possible to treat `IsIrreducibleComponent` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Support.ComponentRegularFillingExact
+error: build failed
