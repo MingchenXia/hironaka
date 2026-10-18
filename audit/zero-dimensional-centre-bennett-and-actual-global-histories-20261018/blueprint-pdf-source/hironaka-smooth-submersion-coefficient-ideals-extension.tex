@@ -1,0 +1,124 @@
+\section{Entire coefficient ideals under actual smooth pullback}
+
+The map, original coherent ideal, carrier and boundary are the actual inputs.
+All products, powers and finite weighted sums below are the original entire
+germ ideals. No pullback algebra or coefficient comparison certificate is an
+input. The coefficient equality does not assert blowup base change or complete
+canonical smooth functoriality.
+
+\begin{lemma}\label{hir:crossdim-entire-product-pullback}
+For an actual holomorphic map $f:Y^m\to X^n$ and original coherent ideals
+$I,J$, the entire ideals satisfy $f^*(IJ)=(f^*I)(f^*J)$.
+\lean{Hironaka.HironakaSmoothSubmersionCoefficientIdeals.pullback_mul}
+\leanok
+\end{lemma}
+\begin{proof}
+A generator of the product is a product of original ideal members. Pull a
+finite holomorphic expression for a product-ideal member back along the actual
+map: its coefficients remain holomorphic, and each original product pulls
+back to the product of its two actual pulled members. The resulting entire
+finite span gives the first inclusion. For the reverse inclusion, write each
+actual pulled member as its genuine finite holomorphic combination of original
+pulled ideal members. Multiply both sums and distribute. Each term is a
+holomorphic coefficient times the pullback of a product of actual members of
+$I$ and $J$. Coherence makes those original members holomorphic and their
+product a genuine product-ideal member. Transitivity of the original entire
+finite spans gives the reverse inclusion. Apply membership extensionality.
+The construction uses neither dimension equality nor a local inverse.
+\end{proof}
+
+\begin{lemma}\label{hir:crossdim-entire-unit-power-pullback}
+The actual unit ideal pulls back to the actual unit ideal. For every original
+coherent ideal $I$ and every $q\ge0$, $f^*(I^q)=(f^*I)^q$.
+\lean{Hironaka.HironakaSmoothSubmersionCoefficientIdeals.pullback_unitIdeal,Hironaka.HironakaSmoothSubmersionCoefficientIdeals.pullback_idealPow}
+\leanok
+\uses{hir:crossdim-entire-product-pullback}
+\end{lemma}
+\begin{proof}
+Every pulled unit-ideal member is holomorphic, so lies in the genuine target
+unit ideal. Conversely every target holomorphic germ is itself its coefficient
+times the pullback of the original constant one; hence it belongs to the
+entire pulled unit ideal. For powers induct on $q$. The genuine zero power
+is precisely this unit ideal. The genuine successor power is the product of
+the previous power with the original ideal, and both are coherent. Apply the
+actual product equality and replace the previous power using induction.
+This covers the actual zero and unit ideals and literal zeroth powers.
+\end{proof}
+
+\begin{lemma}\label{hir:crossdim-entire-finite-sum-pullback}
+For any actual finite family $I_i$ of coherent original ideals,
+$f^*(\sum_{i<r}I_i)=\sum_{i<r}f^*I_i$, as entire germ ideals.
+\lean{Hironaka.HironakaSmoothSubmersionCoefficientIdeals.pullback_finSumIdeal}
+\leanok
+\end{lemma}
+\begin{proof}
+A member of the original finite sum is a genuine finite holomorphic
+combination of members of the actual summands. Pull this whole expression
+back; every pulled summand member is an original generator of its entire
+pulled summand and hence of the target finite sum. Span transitivity gives
+the first inclusion. Conversely a member of a pulled summand is a genuine
+finite holomorphic combination of pullbacks of its original members. Each
+original member is a member of the original full finite sum by its defining
+span and holomorphicity from coherence. Thus this whole pulled summand is
+contained in the pullback of that finite sum. Span transitivity gives the
+opposite inclusion. With no summands the same empty-span argument applies.
+\end{proof}
+
+\begin{definition}\label{hir:crossdim-literal-marked-pullback}
+The actual marked pullback of $(N,E,I,d)$ along $f:Y^m\to X^n$ is the
+literal marked ideal $(f^{-1}N,(f^{-1}E_i)_i,f^*I,d)$ on $Y$.
+\lean{Hironaka.HironakaSmoothSubmersionCoefficientIdeals.markedPullback}
+\leanok
+\end{definition}
+\begin{proof}
+Use the original inverse image of the carrier, the original ordered boundary
+list mapped by inverse image, the entire original germ-ideal pullback and the
+same original mark. These are actual data of the target marked-ideal type,
+and their four projections are exactly the displayed data. This definition
+does not supply or presume centre admissibility or canonical tower equality.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-entire-coefficient-ideal-equality}
+For an original marked ideal with coherent $I$ and a genuine holomorphic
+submersion $f:Y^m\to X^n$, the actual coefficient marked ideal commutes with
+this literal marked pullback, including all original carriers, ordered
+boundary data, marks and entire ideal members.
+\lean{Hironaka.HironakaSmoothSubmersionCoefficientIdeals.coeffMarked_pullback_eq}
+\leanok
+\uses{hir:crossdim-literal-marked-pullback,hir:crossdim-entire-unit-power-pullback,hir:crossdim-entire-finite-sum-pullback,hir:submersion-entire-iterated-derivative-equality,mc:coefficient-ideal}
+\end{theorem}
+\begin{proof}
+The original coefficient ideal is the finite marked sum of actual iterated
+derivative ideals $\mathcal D^i I$, with original marks $d-i$ and the original
+weighted exponents obtained by multiplying the other marks. The genuine
+submersion already gives equality of ENTIRE pulled iterated derivative ideals.
+Each original iterated derivative ideal is coherent. Apply the proved entire
+power equality to its actual weighted power and the entire finite-sum equality
+to the original finite weighted family. Replace each actual iterated pullback
+using the derivative equality. The result is precisely the original coefficient
+ideal of the literal target marked data. Both actual constructions retain the
+inverse-image carrier and ordered boundary and have the same numerical mark,
+because the original source marks are unchanged. Extensionality of the actual
+marked records gives the stated entire marked-ideal equality. No threshold,
+coefficient-space or selected generator equality is used as a hypothesis.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-actual-coefficient-cosupport-preimage}
+For an original ambient marked ideal $N=X$ with coherent $I$, the cosupport
+of its actual pulled coefficient marked ideal is exactly the inverse image of
+its original coefficient cosupport under the genuine holomorphic submersion.
+\lean{Hironaka.HironakaSmoothSubmersionCoefficientIdeals.coefficient_cosupport_pullback_eq}
+\leanok
+\uses{hir:submersion-entire-coefficient-ideal-equality,hir:submersion-cosupport,mc:coefficient-ideal}
+\end{theorem}
+\begin{proof}
+The original finite weighted sum of derivative powers is coherent, by the
+actual coherent finite-sum and power constructors. The previous result identifies
+the entire target coefficient ideal with the genuine pullback of this same
+original coherent ideal and identifies its mark and full ambient carrier.
+The actual original-point section of the genuine submersion gives equality of
+all entire germ order thresholds for this original coefficient ideal, so its
+marked cosupport is exactly the real inverse image. Substitute the true
+coefficient-ideal equality. The empty weighted family and literal zero mark
+retain the original definitions throughout; no positivity assumption is added.
+\end{proof}

@@ -1,0 +1,16 @@
+/-- Genuine Taylor coordinates and true polynomial extensionality supply BOTH whole translated ideal directions. -/
+theorem actualTranslatedInitialIdeal_formal_extension (I : Ideal (MvPowerSeries (Fin n) ℂ)) (p : Fin n → ℂ) :
+    Ideal.map (originalTaylorAlgHom n).toRingHom (actualTranslatedInitialIdeal I p)=
+      actualTranslatedInitialFormalIdeal I p := by
+  have hm : (originalTaylorAlgHom n).comp (actualTranslatedPolynomialEval n p)=
+      MvPolynomial.aeval (fun i => MvPowerSeries.X i+algebraMap ℂ _ (p i)) := by
+    apply MvPolynomial.algHom_ext
+    intro i
+    change originalTaylorAlgHom n (actualTranslatedPolynomialEval n p (MvPolynomial.X i))=_
+    simp only [actualTranslatedPolynomialEval,MvPolynomial.aeval_X,map_add,
+      originalTaylorAlgHom_coordinate,AlgHom.commutes]
+  rw [actualTranslatedInitialIdeal,Ideal.map_span,← Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext a
+  exact DFunLike.congr_fun hm (actualInitialVertexPolynomial I a)

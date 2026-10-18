@@ -1,0 +1,14 @@
+/-- Actual whole jet separation internally proves genuine monomial map injectivity. -/
+theorem actualStandardQuotientMap_injective (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :
+    Function.Injective (actualStandardQuotientMap n I q) := by
+  intro c d hcd
+  have hz : actualStandardQuotientMap n I q (c-d)=0 := by rw [map_sub,hcd,sub_self]
+  rw [actualStandardQuotientMap_apply,Ideal.Quotient.eq_zero_iff_mem] at hz
+  have he := bounded_diagram_avoiding_series_eq_zero I q (actualStandardLift n I q (c-d))
+    (actualStandardLift_support I q (c-d)) hz
+  have hvec : c-d=0 := by
+    funext a
+    have hc := congrArg (MvPowerSeries.coeff a.val.val) he
+    rw [actualStandardLift_coefficient,map_zero] at hc
+    exact hc
+  exact sub_eq_zero.mp hvec

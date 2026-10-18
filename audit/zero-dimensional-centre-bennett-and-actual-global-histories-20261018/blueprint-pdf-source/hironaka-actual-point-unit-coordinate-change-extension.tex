@@ -1,0 +1,128 @@
+\section{Actual point-chart coordinates and homogeneous unit factors}
+
+Fix a coordinate $e$ of $\mathbb C^n$ and complex numbers $b_i$.
+Put $p_e=1$ and $p_i=b_i$ for $i\ne e$. All local algebras in this
+chapter are the original holomorphic germ algebras at the origin.
+Only finite polynomials are translated; no translation of arbitrary
+formal series is used.
+
+\begin{definition}[The actual origin-fixing point-chart maps]
+\label{hir:actual-point-unit-coordinate-maps}
+\lean{Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitForward,Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitInverse,Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitDomain,Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitBasePoint}
+\leanok
+Set $U=\{z:1+z_e\ne0\}$ and define the actual maps
+\[
+ F_e(z)=z_e,\quad F_i(z)=\frac{b_i+z_i}{1+z_e}-b_i\quad(i\ne e),
+ \qquad
+ G_e(w)=w_e,\quad G_i(w)=(1+w_e)(b_i+w_i)-b_i\quad(i\ne e).
+\]
+The actual point $p$ has the coordinates specified above.
+\end{definition}
+
+\begin{theorem}[A genuine local biholomorphism on the true open domain]
+\label{hir:actual-point-unit-local-biholomorphism}
+\uses{hir:actual-point-unit-coordinate-maps}
+\lean{Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitLocalEquiv}
+\leanok
+The set $U$ is an open neighbourhood of zero. Both maps fix zero,
+preserve the exceptional coordinate, map $U$ into itself, and satisfy
+$G\circ F=\mathrm{id}$ and $F\circ G=\mathrm{id}$ on $U$.
+The map $F$ is holomorphic on $U$ and $G$ is holomorphic everywhere.
+They therefore construct a genuine original local holomorphic equivalence
+with source and target $U$ and centre zero.
+\end{theorem}
+\begin{proof}
+The coordinate function $1+z_e$ is continuous, so its nonzero locus
+is open; its value at zero is one. The displayed formulas give the
+exceptional coordinates and the origin identities directly. For $i\ne e$,
+\[
+ G_i(F(z))=(1+z_e)\frac{b_i+z_i}{1+z_e}-b_i=z_i,
+ \qquad
+ F_i(G(w))=\frac{(1+w_e)(b_i+w_i)}{1+w_e}-b_i=w_i.
+\]
+The denominators are nonzero on $U$. The exceptional coordinate is
+unchanged, so both maps preserve $U$. Each coordinate of $G$ is a
+polynomial. Each coordinate of $F$ is a quotient of holomorphic
+functions with nonvanishing denominator on $U$. The finite coordinate
+criterion for holomorphic maps gives the asserted holomorphicity.
+These actual functions, open sets, inverse identities and holomorphicity
+proofs supply every field of the original local equivalence.
+\end{proof}
+
+\begin{theorem}[Whole original germ equivalence and all HS orders]
+\label{hir:actual-point-unit-whole-germ-equivalence}
+\uses{hir:actual-point-unit-local-biholomorphism,hir:actual-nonlinear-local-germ-algebra-isomorphism,hir:actual-nonlinear-full-quotient-hilbert-samuel-invariance}
+\lean{Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitGermEquiv,Hironaka.HironakaActualPointUnitCoordinateChange.hilbertSamuelValue_actualPointUnitGermEquiv}
+\leanok
+The actual pullback $E(g)=g\circ F$ is an algebra automorphism of the
+entire original holomorphic germ algebra. Its inverse is pullback by $G$.
+For every whole ideal $I$ and every $\ell\in\mathbb N$,
+\[
+ H_{E(I)}(\ell)=H_I(\ell).
+\]
+\end{theorem}
+\begin{proof}
+Apply the original local-germ algebra construction to the preceding
+actual equivalence and its proved origin identity. Composition on
+representatives is holomorphic on a neighbourhood of zero; the two
+actual local inverse identities prove both inverse algebra identities.
+This automorphism preserves the actual maximal ideal and all its powers.
+It consequently induces an isomorphism of the entire quotients by
+$I+\mathfrak m^{\ell+1}$ and $E(I)+\mathfrak m^{\ell+1}$.
+Their complex dimensions, hence the original HS values, are equal.
+\end{proof}
+
+\begin{theorem}[Finite homogeneous polynomial dictionary with the actual unit]
+\label{hir:actual-point-unit-homogeneous-polynomial-dictionary}
+\uses{hir:actual-point-unit-coordinate-maps,hir:actual-point-polynomial-dehomogenization}
+\lean{Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitForward_dehomogenization,Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitReciprocal,Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnit_mul_reciprocal,Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnit_reciprocal_mul,Hironaka.HironakaActualPointUnitCoordinateChange.isUnit_actualPointUnit,Hironaka.HironakaActualPointUnitCoordinateChange.isUnit_actualPointUnitReciprocal}
+\leanok
+Let $P$ be any genuine homogeneous complex polynomial of degree $d$.
+For every $z\in U$, the actual finite point-chart dehomogenization obeys
+\[
+ \delta_{e,b}P(F(z))=(1+z_e)^{-d}P(p+z).
+\]
+The factor is a genuine nonvanishing holomorphic unit near zero.
+\end{theorem}
+\begin{proof}
+Put $\lambda=(1+z_e)^{-1}$. The arguments of $P$ on the left are
+$1$ in coordinate $e$ and $b_i+F_i(z)$ otherwise. The exceptional
+argument is $\lambda(1+z_e)=\lambda(p_e+z_e)$, and every other argument
+is $(b_i+z_i)/(1+z_e)=\lambda(p_i+z_i)$.
+Expand the genuine finite polynomial as its finite sum of supported
+monomials. Each supported exponent has total degree $d$, so each
+monomial contributes the same scalar $\lambda^d$. Factoring it out
+of the finite sum proves the identity. The function $1+z_e$ and its
+reciprocal are holomorphic and mutually inverse on the actual
+neighbourhood $U$; their germs are therefore actual inverse units.
+\end{proof}
+
+\begin{theorem}[The same identity on entire original germs]
+\label{hir:actual-point-unit-entire-germ-polynomial-dictionary}
+\uses{hir:actual-point-unit-whole-germ-equivalence,hir:actual-point-unit-homogeneous-polynomial-dictionary}
+\lean{Hironaka.HironakaActualPointUnitCoordinateChange.actualPointUnitGermEquiv_dehomogenization}
+\leanok
+For the same finite homogeneous $P$ of degree $d$, let $v$ be the
+original germ of $(1+z_e)^{-1}$ and let $p$ be the actual point above.
+Then $v$ is a unit in the original germ algebra and
+\[
+ E\bigl((\delta_{e,b}P)(z)\bigr)=v^d P(p+z)
+\]
+as equality of entire original holomorphic germs, not just finite jets
+or restrictions to the exceptional hyperplane.
+\end{theorem}
+\begin{proof}
+The original germ pullback acts on every holomorphic representative
+by composition with $F$. Apply the pointwise polynomial identity
+on the actual neighbourhood $U$ of zero. Equality on this neighbourhood
+is equality in the original germ algebra. Polynomial evaluation commutes
+with the actual representative-to-germ algebra map, and the germ of
+the scalar factor is the stated power of $v$. Its genuine inverse germ
+is represented by $1+z_e$.
+\end{proof}
+
+The coordinate equivalence and unit identity concern actual finite
+homogeneous polynomials and entire original analytic germs. The later
+point-centre HS comparison combines them with genuine initial-ideal
+inclusions and specialization; no general permissible-centre Bennett
+inequality is asserted here.

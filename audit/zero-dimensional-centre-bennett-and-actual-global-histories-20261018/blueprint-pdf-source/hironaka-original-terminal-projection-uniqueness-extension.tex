@@ -1,0 +1,132 @@
+\section{True uniqueness and cocycles of original terminal comparison maps}
+
+Keep the actual recorded finite blowup tower and every original marked input.
+The finite canonical-choice route of
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality} is extended
+from existence of true original-final comparisons to their intrinsic
+uniqueness over the WHOLE original projection. The true first-centre ideal
+pullback is supplied internally from the actual blowup and its entire tail;
+no stage lift, invertibility or dense-isomorphism certificate is a caller input.
+
+\begin{lemma}[An actual positive-length tower has a genuine first-step factorization]
+\label{hir:original-actual-first-step-whole-tail-factorization}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:blowup-tower}
+\lean{Hironaka.HironakaOriginalTerminalProjectionUniqueness.exists_actual_first_step_split}
+\leanok
+Every actual positive-length recorded tower has a literal first genuine
+blowup followed by its ENTIRE actual remaining tail. The tail has strictly
+smaller actual length. This includes true empty first centres and actual
+nonidentity empty projections.
+\end{lemma}
+\begin{proof}
+Use actual tower recursion. An empty tower contradicts positive length.
+For a next step, if its preceding tower is empty, this step is the first
+and its tail is empty. Otherwise the actual preceding tower has positive
+length and its genuine first step and entire tail are internally supplied
+by recursion. Append the given actual last step to THIS tail; the actual
+append recursion identifies the whole result with the original tower.
+True length append gives one plus tail length, hence strict decrease.
+\end{proof}
+
+\begin{theorem}[Actual final biholomorphisms over a whole blowup projection are intrinsically unique]
+\label{hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-actual-first-step-whole-tail-factorization,hir:general-nc-natural-whole-total-divisor,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalTerminalProjectionUniqueness.biholomorphisms_eq_of_actual_proj_eq}
+\leanok
+For ANY actual finite tower $T:X\leftarrow Y$ and two genuine
+biholomorphisms $a,b:Z\to Y$, equality $p_Ta=p_Tb$ INTERNALLY implies
+$a=b$. No source canonical history, chosen stage lift, first-centre
+pullback invertibility or generic-density certificate is required.
+\end{theorem}
+\begin{proof}
+Use strong induction on ACTUAL target-tower length, uniformly over all
+original source manifolds and actual final biholomorphisms. For the empty
+tower its projection is identity, so the given equality is exactly $a=b$.
+Otherwise the first lemma internally supplies a genuine first blowup
+$\pi:A\to X$ and its entire remaining tower $S:A\leftarrow Y$ with
+$p_T=\pi p_S$. The actual first blowup's universal property includes
+invertibility of the ENTIRE actual pullback of its actual centre ideal
+$J$ on $A$. Genuine pullback along an ACTUAL recorded tower preserves an
+invertible ideal: each true blowup has exceptional locus of empty interior,
+which preserves nonzero local holomorphic generators, and actual coherent
+ideal pullback composition gives the whole tower assertion. Apply this
+established intrinsic producer to THIS entire $S$ and THIS internally
+supplied $\pi^*J$. Pull back further along the genuine biholomorphism $a$;
+its inverse differential makes its exceptional locus empty. Thus the
+ENTIRE original pullback of $J$ along $\pi p_Sa$ is internally invertible.
+Actual coherent ideal pullback composition supplies exactly this original
+map's ideal, not a substitute denominator or generation certificate.
+
+The genuine universal property of $\pi$, applied to THIS actual holomorphic
+map $\pi p_Sa$, gives uniqueness of its actual holomorphic lift into $A$.
+Both $p_Sa$ and $p_Sb$ are real lifts: the former by definition and the
+latter by the GIVEN entire projection equality. Hence $p_Sa=p_Sb$.
+The target-tail length is strictly smaller, so the induction on THIS
+actual tail and SAME genuine final biholomorphisms gives $a=b$. All
+invertibility and lift conditions were supplied from the actual original
+blowups; no arbitrary holomorphic pullback preservation or maximum
+existence was assumed. Empty manifolds, empty steps and dimension zero
+are included.
+\end{proof}
+
+\begin{theorem}[Original ambient canonical terminal comparisons are internally unique]
+\label{hir:original-ambient-terminal-choice-intrinsic-unique-comparison}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-actual-whole-projection-biholomorphic-map-uniqueness,hir:original-ambient-terminal-choices-all-dimensions}
+\lean{Hironaka.HironakaOriginalTerminalProjectionUniqueness.original_ambient_terminal_choice_existsUnique,Hironaka.HironakaOriginalTerminalProjectionUniqueness.ambientTerminalComparison,Hironaka.HironakaOriginalTerminalProjectionUniqueness.ambientTerminalComparison_proj}
+\leanok
+At EVERY ambient dimension, ONLY the original marked-domain input and TWO
+GIVEN whole actual canonical terminal histories internally supply EXACTLY
+ONE original-final biholomorphism commuting with their WHOLE original
+projections. Let their canonical comparison be this INTERNALLY constructed
+unique actual map. All original empty steps/counts remain allowed; no
+compressed, nonempty, invertibility, comparison or cocycle certificate
+is supplied by a caller.
+\end{theorem}
+\begin{proof}
+The completed genuine all-ambient original terminal-choice producer
+internally gives an actual original-final biholomorphism with the whole
+projection formula; at dimension zero this comes from true original whole
+projection biholomorphisms. For any other actual original-final map with
+the same whole formula, their target-tower projections are equal at every
+original source point. Apply the preceding actual projection uniqueness
+theorem to THIS genuine target tower and THESE genuine final maps. Thus
+the original-final comparison is unique. Select the actual map supplied
+by this proved existence and uniqueness. Its original projection formula
+is retained directly from that producer; no desired map is an input.
+\end{proof}
+
+\begin{theorem}[Actual original canonical terminal comparisons satisfy identity, inverse and triple cocycle]
+\label{hir:original-ambient-terminal-comparison-identity-inverse-cocycle}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-ambient-terminal-choice-intrinsic-unique-comparison}
+\lean{Hironaka.HironakaOriginalTerminalProjectionUniqueness.ambientTerminalComparison_self,Hironaka.HironakaOriginalTerminalProjectionUniqueness.ambientTerminalComparison_symm,Hironaka.HironakaOriginalTerminalProjectionUniqueness.ambientTerminalComparison_trans}
+\leanok
+For original marked-domain input and GIVEN actual canonical terminal
+histories, the internally constructed comparison of a history with itself
+is the actual identity. Reversing two histories gives the actual inverse
+comparison. For THREE independently given actual canonical terminal
+histories, the actual comparison from the first to the second followed
+by the actual comparison from the second to the third equals the actual
+comparison from the first to the third. These are equalities of genuine
+original-final biholomorphisms, including differing actual empty-step
+counts, dimension zero and empty final spaces.
+\end{theorem}
+\begin{proof}
+The actual identity map satisfies the same whole original projection
+formula as the constructed self-comparison, so intrinsic uniqueness
+identifies them. The true inverse of the first-to-second comparison
+satisfies the reversed formula: substitute its actual inverse point into
+the original whole projection equality and use the genuine right inverse.
+Intrinsic uniqueness identifies it with the internally constructed
+reverse comparison. For three histories compose their actual first-to-second
+and second-to-third biholomorphisms. Their TWO retained whole projection
+formulas compose to the original first-to-third formula at EVERY original
+source point. Intrinsic uniqueness identifies this actual composite with
+the actual directly constructed first-to-third map. No uncompressed tower
+length equality or equality of indexed exceptional lists is asserted.
+This supplies finite original comparison cocycles; noncompact global
+scheduling and global resolution gluing remain distinct source obligations.
+\end{proof}

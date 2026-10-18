@@ -1,0 +1,9 @@
+/-- **The stages correspond by biholomorphisms commuting with the projections**:
+`Φ ∘ T'.proj = T.proj ∘ back`. -/
+theorem proj_transport : {Y : CMfd.{u} n} → (T : BlowupTower X Y) → ∀ p : (transport Φ T).target,
+    Φ ((transport Φ T).tower.proj p) = T.proj ((transport Φ T).back p)
+  | _, .refl, _ => rfl
+  | _, .step T _ π _, p => by
+      have := proj_transport T ((transport Φ T).back.symm (π p))
+      rw [Diffeomorph.apply_symm_apply] at this
+      exact this

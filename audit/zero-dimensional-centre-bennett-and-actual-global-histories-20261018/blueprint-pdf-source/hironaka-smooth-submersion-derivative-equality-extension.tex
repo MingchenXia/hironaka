@@ -1,0 +1,118 @@
+\section{Entire derivative ideals under a genuine holomorphic submersion}
+
+The input is the original holomorphic map $f:Y^m\to X^n$, a genuine
+submersion at every point, and an original ideal of holomorphic germs.
+Jacobian pivots, inverse coefficients and the entire ideal comparison are
+constructed internally. This is a prerequisite for full canonical smooth
+functoriality; higher invariant equality and blowup base change remain separate.
+
+\begin{lemma}\label{hir:submersion-holomorphic-cramer-coefficients}
+For an actual square matrix $A$ of scalar holomorphic germs with
+$\det A(y)\ne0$, the actual coefficients
+$B_{ij}=\det(A)^{-1}\operatorname{adj}(A)_{ij}$ are holomorphic at $y$.
+Where $\det A\ne0$, the actual matrices satisfy $AB=1$.
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.holomorphicAt_cramer_entry}
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.cramer_matrix_rightInverse}
+\leanok
+\uses{hir:submersion-holomorphic-jacobian-pivot}
+\end{lemma}
+\begin{proof}
+The determinant is a finite signed sum of products of the original entries,
+hence holomorphic. Its nonzero value makes its reciprocal holomorphic near
+the original point. Each adjugate entry is the determinant of the original
+matrix with one row replaced by a coordinate vector; each replacement entry
+is either an original holomorphic entry or a constant. Thus every adjugate
+entry, and its product with the reciprocal determinant, is holomorphic.
+The algebraic identity $A\operatorname{adj}(A)=\det(A)1$, followed by
+scalar multiplication by $\det(A)^{-1}$, gives $AB=1$ at each point where
+the same actual determinant is nonzero. The empty matrix is included.
+\end{proof}
+
+\begin{lemma}\label{hir:submersion-actual-coordinate-derivative-recovery}
+Let $e,e'$ be original charts through $f(y),y$ and let $a$ be holomorphic
+at $f(y)$. Internally choose actual source columns $c_i$ of a nonzero
+Jacobian pivot. Every target coordinate derivative has the genuine germ identity
+\[
+ (\partial_j^e a)\circ f
+ =\sum_i B_{ij}\,\partial_{c_i}^{e'}(a\circ f).
+\]
+All the actual coefficients $B_{ij}$ are holomorphic at $y$.
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.exists_coordinate_derivative_recovery}
+\leanok
+\uses{hir:submersion-holomorphic-cramer-coefficients,hir:submersion-holomorphic-jacobian-pivot,hir:crossdim-chain-rule}
+\end{lemma}
+\begin{proof}
+The actual submersion derivative has a right inverse, so the internally
+constructed original-coordinate Jacobian minor is nonzero at $y$ and remains
+nonzero near $y$. Keep these actual columns on this neighbourhood and construct
+$B$ as above. The genuine chart chain rule, on a further neighbourhood where
+the original charts and $a$ are valid, says
+$\partial_{c_i}^{e'}(a\circ f)=\sum_k A_{ki}(\partial_k^e a)\circ f$.
+Multiply by $B_{ij}$ and sum over $i$. Exchange the two finite sums and use
+$\sum_i A_{ki}B_{ij}=\delta_{kj}$ from the actual matrix identity.
+Only the $j$th target derivative remains. Every neighbourhood used is produced
+from the original point and actual holomorphic germs; no inverse or chain
+identity is supplied as an extra hypothesis.
+\end{proof}
+
+\begin{lemma}\label{hir:submersion-actual-directional-derivative-membership}
+For every original ideal member $a$ at $f(y)$, every original chart $e$
+through $f(y)$ and every target direction $v$, the actual germ
+$(\partial_v^e a)\circ f$ belongs to $\mathcal D(f^*I)$ at $y$.
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.pulled_chartDeriv_mem_derivIdeal}
+\leanok
+\uses{hir:submersion-actual-coordinate-derivative-recovery,hir:derivative-ideal}
+\end{lemma}
+\begin{proof}
+Choose an actual source chart through $y$. The holomorphic germ $a\circ f$
+is an original generator of $f^*I$, and every actual source coordinate
+derivative of this generator belongs to $\mathcal D(f^*I)$ by its definition.
+The preceding internal recovery identity puts each pulled target coordinate
+derivative in that same entire ideal, since its coefficients are holomorphic.
+Write the actual target vector as the finite sum of its coordinate vectors
+with coefficients $v_j$. Complex linearity of the actual derivative gives
+$\partial_v^e a=\sum_j v_j\partial_j^e a$ on the original chart.
+Closure of the entire span under finite sums, constants and germ equality
+puts its pullback in $\mathcal D(f^*I)$ as required.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-entire-derivative-ideal-equality}
+For every ideal $I$ of holomorphic germs on $X$ and every genuine holomorphic
+submersion $f:Y\to X$, the entire original germ ideals satisfy
+$f^*\mathcal D(I)=\mathcal D(f^*I)$.
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.pullback_derivIdeal_le}
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.derivIdeal_pullback_eq}
+\leanok
+\uses{hir:submersion-actual-directional-derivative-membership,hir:crossdim-derivative-inclusion}
+\end{theorem}
+\begin{proof}
+At any original point $y$, a member of $f^*\mathcal D(I)$ is a finite
+holomorphic combination of pullbacks of actual members of $\mathcal D(I)$.
+Each such actual member is itself a finite holomorphic combination of members
+of $I$ and original-chart directional derivatives of members of $I$.
+Pull this combination back along the original holomorphic map. Its coefficients
+remain holomorphic; pulled ideal members belong to $f^*I$ and hence its
+derivative ideal, and pulled directional derivatives belong to that derivative
+ideal by the previous lemma. Transitivity of the actual entire finite spans
+proves $f^*\mathcal D(I)\subseteq\mathcal D(f^*I)$.
+The genuine cross-dimensional chain and product rules already prove the
+opposite inclusion for every holomorphic map. Apply both inclusions at every
+point and every scalar germ and use extensionality of the original germ ideal.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-entire-iterated-derivative-equality}
+For every integer $r\ge0$, the actual entire iterated ideals satisfy
+$f^*\mathcal D^r(I)=\mathcal D^r(f^*I)$.
+\lean{Hironaka.HironakaSmoothSubmersionDerivativeEquality.iterDerivIdeal_pullback_eq}
+\leanok
+\uses{hir:submersion-entire-derivative-ideal-equality,hir:derivative-ideal}
+\end{theorem}
+\begin{proof}
+Induct on $r$. The zero case is the original ideal itself, so reflexivity
+suffices. Every member of the actual iterated derivative ideal is holomorphic,
+by the defining finite holomorphic span (and the original hypothesis for $r=0$).
+Apply the entire first derivative equality to this actual iterated ideal.
+Replace its pullback using the induction hypothesis and unfold the successor
+definition of the original iteration. This is equality of all members of the
+entire original ideals at all points; no selected generator space is substituted.
+\end{proof}

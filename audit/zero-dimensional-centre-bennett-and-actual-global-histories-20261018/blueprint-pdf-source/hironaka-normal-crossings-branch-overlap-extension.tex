@@ -1,0 +1,157 @@
+\section{Intrinsic branches on genuine normal-crossing chart overlaps}
+
+Normal-crossing coordinate descriptions need not share a global branch
+labelling. Their local branches nevertheless match uniquely. The argument
+uses actual holomorphic germ factoriality and the radical Nullstellensatz,
+as in \cite{demailly-cadg}, Chapter~II. It compares the original coordinate
+functions themselves, without assuming a correspondence of their branches.
+
+\begin{lemma}[A first-order holomorphic equation is prime]
+\label{hir:first-order-equation-prime}
+\uses{lag:germ-domain,ana:actual-holomorphic-germ-factoriality}
+\lean{Hironaka.HironakaNormalCrossingsBranchOverlap.prime_germ_of_fderiv_ne_zero}
+\leanok
+If a holomorphic germ $f$ at $0$ vanishes at $0$ and has nonzero complex
+differential there, then its genuine holomorphic germ is prime.
+\end{lemma}
+\begin{proof}
+The germ is not a unit because its value is zero. If $f=ab$ and both
+factors are nonunits, their values at zero are both zero. Choose actual
+holomorphic representatives of the factors. Their product equals $f$ on
+a neighbourhood, and the product rule gives $df_0=a(0)db_0+b(0)da_0=0$,
+a contradiction. Thus the germ is irreducible. Actual factoriality of
+the holomorphic germ ring makes every irreducible germ prime.
+\end{proof}
+
+\begin{lemma}[Actual coordinates have distinct prime branches]
+\label{hir:actual-coordinate-distinct-prime-branches}
+\uses{hir:first-order-equation-prime}
+\lean{Hironaka.HironakaNormalCrossingsBranchOverlap.surjective_fderiv_shifted,Hironaka.HironakaNormalCrossingsBranchOverlap.prime_coordinate_of_surjective_fderiv,Hironaka.HironakaNormalCrossingsBranchOverlap.eq_of_associated_coordinates_of_surjective_fderiv}
+\leanok
+Let $F$ be an actual local holomorphic equivalence centred at zero, with
+$F(0)=0$. Every coordinate function $F_i$ is a prime holomorphic germ,
+and germs for distinct coordinates are not associated.
+\end{lemma}
+\begin{proof}
+Differentiate the actual identity $F\circ F^{-1}=\mathrm{id}$ near zero.
+It makes $dF_0$ surjective. Each coordinate row is nonzero, since a
+preimage of the $i$th coordinate direction has $i$th image coordinate
+one. The preceding lemma proves primeness. If $F_i=uF_j$ for a unit
+germ $u$, choose its actual holomorphic representative. Differentiating
+at zero gives $d(F_i)_0=u(0)d(F_j)_0$, since $F_j(0)=0$. Applying this
+identity to a preimage under $dF_0$ of the $i$th coordinate direction
+gives $1=0$ when $i\ne j$. This excludes association.
+\end{proof}
+
+\begin{lemma}[Equal zero unions produce a unique branch correspondence]
+\label{hir:equal-zero-unions-prime-branch-correspondence}
+\uses{hir:actual-coordinate-distinct-prime-branches,lag:prime-nullstellensatz}
+\lean{Hironaka.HironakaNormalCrossingsBranchOverlap.exists_unique_branch_equiv}
+\leanok
+Let $(f_i)_{i\in I}$ and $(g_j)_{j\in J}$ be finite actual holomorphic
+equations whose germs are prime and pairwise nonassociated within each
+family. If their zero unions agree as germs at zero, there is a unique
+bijection $\sigma:I\to J$ for which $f_i$ and $g_{\sigma(i)}$ are
+associated.
+\end{lemma}
+\begin{proof}
+Fix $i$. The product $G=\prod_{j\in J}g_j$ vanishes on the zero germ of
+$f_i$, because this germ lies in the first union and hence in the second.
+The radical Nullstellensatz places the germ of $G$ in the radical of
+$(f_i)$. Since $f_i$ is prime, its principal ideal is prime and hence
+radical, so $f_i$ divides $G$. Primeness selects a factor $g_j$
+divisible by $f_i$.
+Irreducibility of both germs makes them associated. Two possible $j$'s
+would be associated to one another, contradicting the second family's
+distinctness. Thus every $i$ has a unique match. Reversing the two families
+gives a unique match for every $j$. The two match maps are inverse by the
+uniqueness just proved, so the first is a bijection, uniquely determined
+by association. If one index set is
+empty, its zero union is empty; the same primeness argument prohibits
+any branch in the other family, and the resulting bijection is empty.
+\end{proof}
+
+\begin{lemma}[Associated original equations have actual holomorphic units]
+\label{hir:associated-original-equations-actual-unit}
+\uses{lag:germ-domain}
+\lean{Hironaka.HironakaNormalCrossingsBranchOverlap.exists_unit_equation_of_associated}
+\leanok
+If two actual holomorphic equations $f,g$ have associated germs at zero,
+there is an actual holomorphic function $u$, nonzero at zero, such that
+$f=ug$ on a neighbourhood of zero.
+\end{lemma}
+\begin{proof}
+Association supplies a unit of the actual holomorphic germ ring with
+$f=ug$ as germs. Choose an actual holomorphic representative of that
+unit. Evaluation at zero is nonzero because the germ is a unit. Equality
+of the actual germs is equality of their representatives on a
+neighbourhood, and gives the asserted original equation there.
+\end{proof}
+
+\begin{theorem}[Actual normal-crossing flattenings agree branch by branch]
+\label{hir:actual-normal-crossing-chart-branch-correspondence}
+\uses{hir:equal-zero-unions-prime-branch-correspondence,hir:associated-original-equations-actual-unit}
+\lean{Hironaka.HironakaNormalCrossingsBranchOverlap.exists_unique_coordinate_branch_equiv,Hironaka.HironakaNormalCrossingsBranchOverlap.exists_coordinate_unit_branch_equiv}
+\leanok
+Let $F$ and $G$ be two actual centred local holomorphic equivalences in
+$\mathbb C^n$, both mapping zero to zero. Let $S,T\subseteq\{1,\ldots,n\}$
+be finite sets of distinct coordinates. If
+\[
+ \bigcup_{i\in S}\{F_i=0\}=\bigcup_{j\in T}\{G_j=0\}
+\]
+as actual germs at zero, their original branch germs have a uniquely
+produced bijection. Corresponding coordinate functions differ by actual
+holomorphic units on one common neighbourhood of zero, and $|S|=|T|$.
+The same assertion holds for maps centred at any common point $q$, with
+equations $F_i(z+q)$ and $G_j(z+q)$ at zero.
+\end{theorem}
+\begin{proof}
+The actual local inverse identities produce prime, pairwise distinct
+coordinate germs in both families by the preceding coordinate lemma.
+Apply the zero-union correspondence theorem to the selected coordinates.
+Its internally produced bijection matches the entire original selected
+branch germs. Apply the preceding original-unit lemma to each pair;
+intersect the finitely many neighbourhoods on which those equations
+hold to get all equations on one neighbourhood. These holomorphic units
+make their zero germs equal.
+Equality of finite cardinalities follows from that actual bijection.
+For a common point $q$, translate the source by $q$ before this argument;
+its derivative is the identity and the original inverse derivative
+remains surjective. Dimension zero yields two empty selected coordinate
+sets and is included.
+\end{proof}
+
+\begin{corollary}[Original manifold branches and intersections agree on overlaps]
+\label{hir:original-normal-crossing-branch-overlap}
+\uses{hir:actual-normal-crossing-chart-branch-correspondence,hir:general-nc-actual-local-snc-branches}
+\lean{Hironaka.HironakaNormalCrossingsBranchOverlap.exists_unique_original_branch_equiv,Hironaka.HironakaNormalCrossingsBranchOverlap.exists_original_branch_equiv_intersections}
+\leanok
+At a point of an actual general normal-crossing carrier, any two actual
+adapted flattenings have uniquely matching original coordinate branch
+germs. Their local branch counts agree. Under the produced matching,
+every finite intersection of original branches agrees as a germ.
+\end{corollary}
+\begin{proof}
+Write both flattenings after the actual chart at the point, and translate
+that chart centre to zero. Translation and each actual local inverse
+give centred local holomorphic equivalences. The actual chart and its
+inverse identify both selected zero unions with the original carrier
+germ. Apply the preceding theorem. Transport each matched zero-set germ
+through the actual chart back to the original manifold; continuity and
+the local inverse identities preserve neighbourhood-germ equality.
+For a finite intersection, intersect the finitely many neighbourhoods
+on which the matched branch membership tests agree. On this common
+neighbourhood all tests, and hence their conjunctions, agree. Equality
+of the actual finite branch counts is already supplied by the produced
+bijection, independently of the chosen flattening.
+\end{proof}
+
+\begin{remark}
+This intrinsic correspondence does not imply that an ordered resolution
+algorithm ignores initial labels. An invariant using a colexicographic
+tie-break on ordered boundary indices can choose different centres under
+a branch permutation. Canonical descent requires an invariant or a
+first-blowup construction whose dependence on original unordered branches
+has itself been proved, followed by genuine compatibility of subsequent
+blowups. The correspondence above supplies the original overlap geometry.
+\end{remark}

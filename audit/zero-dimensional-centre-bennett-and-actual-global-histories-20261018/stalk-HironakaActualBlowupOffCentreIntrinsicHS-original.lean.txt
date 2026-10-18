@@ -1,0 +1,94 @@
+import TranscendentalNakamaye.Pending.HironakaActualOpenIntrinsicHS
+import TranscendentalNakamaye.Pending.HironakaSmoothSubmersionGlobalBlowupSubmersion
+import TranscendentalNakamaye.Pending.HironakaAdmissibleCalculus
+import TranscendentalNakamaye.Pending.HironakaEmbeddedResolutionLocal
+
+/-! The existing intrinsic reduced HS on the genuine centre complement of the actual strict blowup. -/
+set_option autoImplicit false
+open Set Filter Classical TopologicalSpace
+open scoped Topology Manifold ContDiff
+universe u
+namespace TranscendentalNakamaye.Pending.HironakaActualBlowupOffCentreIntrinsicHS
+noncomputable section
+open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences BlowupTowers
+  HironakaSmoothCentreRealDomainActualAmbientHS
+  HironakaHolomorphicJetChartInvariance HironakaHolomorphicJetRankLoci HironakaActualBiholomorphicWholeStalkHS
+  HironakaActualOpenIntrinsicHS HironakaActualWholeAmbientHSSuperlevel
+  HironakaSmoothSubmersionGlobalBlowupSubmersion
+section Biholomorphic
+variable {n : ℕ} {X Y : Type u} [TopologicalSpace X] [TopologicalSpace Y]
+  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
+  [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]
+
+/-- BOTH entire reduced vanishing-ideal directions follow from the actual original inverse maps. -/
+theorem actual_biholomorphic_pullback_vanishingIdeal
+    (e : Y ≃ₘ⟮𝓘(ℂ,ComplexModel n),𝓘(ℂ,ComplexModel n)⟯ X) (W : Set X) :
+    GermIdeal.pullback (m := n) e (vanishingIdeal (n := n) W) =
+      vanishingIdeal (n := n) (e ⁻¹' W) := by
+  have h := MarkedIdealBiholomorphism.pullback_vanishingIdeal_preimage
+    (φ := e) (ψ := e.symm) e.contMDiff e.symm.contMDiff e.apply_symm_apply e.symm_apply_apply
+    (g := (id : Y → Y)) contMDiff_id W
+  have hid : GermIdeal.pullback (m := n) (id : Y → Y) (vanishingIdeal (n := n) (e ⁻¹' W)) =
+      vanishingIdeal (n := n) (e ⁻¹' W) :=
+    GermIdeal.ext (funext fun _ => funext fun _ =>
+      propext BlowupExistenceCodimOne.pullback_id_vanishingIdeal_mem_iff)
+  simpa only [Function.comp_id,hid] using h.symm
+
+/-- ONLY original analyticity gives EVERY existing intrinsic reduced HS order under the actual biholomorphism. -/
+theorem hilbertSamuelAt_vanishing_actual_biholomorphic
+    (e : Y ≃ₘ⟮𝓘(ℂ,ComplexModel n),𝓘(ℂ,ComplexModel n)⟯ X)
+    {W : Set X} (hW : IsComplexAnalyticSubset (n := n) W) (y : Y) (ℓ : ℕ) :
+    hilbertSamuelAt (vanishingIdeal (n := n) (e ⁻¹' W)) y ℓ =
+      hilbertSamuelAt (vanishingIdeal (n := n) W) (e y) ℓ := by
+  rw [← actual_biholomorphic_pullback_vanishingIdeal e W]
+  exact hilbertSamuelAt_actual_biholomorphic_pullback e _ (CartanIrreducible.cartanCoherence W hW) y ℓ
+end Biholomorphic
+section Blowup
+variable {n : ℕ} {X Y : CMfd.{u} n} {W C : Set X} {π : Y → X}
+
+/-- The literal whole strict carrier is the true complement biholomorphism preimage, in BOTH directions. -/
+theorem actual_strict_carrier_centre_complement (hπ : IsBlowupAlong n C π) (hW : IsClosed W) :
+    (Subtype.val : sourceComplementOpen hπ → Y) ⁻¹' strictTransform n π W =
+      (complementBiholomorphism hπ) ⁻¹' ((Subtype.val : complementOpen hπ → X) ⁻¹' W) := by
+  ext y
+  change (y : Y) ∈ strictTransform n π W ↔ π y ∈ W
+  exact HironakaAdmissibleCalculus.mem_strictTransform_iff_of_notMem hπ.contMDiff.continuous hW
+    (fun he => y.2 (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ he))
+
+/-- Actual source-open, genuine complement biholomorphism and target-open comparisons preserve every original order. -/
+theorem hilbertSamuelAt_actual_strict_blowup_off_centre
+    (hπ : IsBlowupAlong n C π) (hW : IsComplexAnalyticSubset (n := n) W)
+    (y : Y) (hy : π y ∉ C) (ℓ : ℕ) :
+    hilbertSamuelAt (vanishingIdeal (n := n) (strictTransform n π W)) y ℓ =
+      hilbertSamuelAt (vanishingIdeal (n := n) W) (π y) ℓ := by
+  let S := sourceComplementOpen hπ
+  let O := complementOpen hπ
+  let e := complementBiholomorphism hπ
+  let ys : S := ⟨y,hy⟩
+  have hS := HironakaEmbeddedResolutionLocal.isComplexAnalyticSubset_strictTransform_of_isBlowupAlong hπ hW
+  have hO := AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage
+    (m := n) (g := (Subtype.val : O → X)) contMDiff_subtype_val hW
+  calc
+    hilbertSamuelAt (vanishingIdeal (n := n) (strictTransform n π W)) y ℓ =
+        hilbertSamuelAt (vanishingIdeal (n := n) ((Subtype.val : S → Y) ⁻¹' strictTransform n π W)) ys ℓ :=
+      (hilbertSamuelAt_vanishing_actual_open hS S ys ℓ).symm
+    _ = hilbertSamuelAt (vanishingIdeal (n := n)
+        (e ⁻¹' ((Subtype.val : O → X) ⁻¹' W))) ys ℓ := by
+      rw [actual_strict_carrier_centre_complement hπ hW.isClosed]
+    _ = hilbertSamuelAt (vanishingIdeal (n := n) ((Subtype.val : O → X) ⁻¹' W)) (e ys) ℓ :=
+      hilbertSamuelAt_vanishing_actual_biholomorphic e hO ys ℓ
+    _ = hilbertSamuelAt (vanishingIdeal (n := n) W) (π y) ℓ :=
+      hilbertSamuelAt_vanishing_actual_open hW O (e ys) ℓ
+
+/-- BOTH literal all-order condition directions retain the SAME original threshold profile off the actual centre. -/
+theorem actualWholeAmbientHSSuperlevel_strict_blowup_off_centre
+    (hπ : IsBlowupAlong n C π) (hW : IsComplexAnalyticSubset (n := n) W)
+    (h : ℕ → ℕ) (y : Y) (hy : π y ∉ C) :
+    y ∈ actualWholeAmbientHSSuperlevel (vanishingIdeal (n := n) (strictTransform n π W)) h ↔
+      π y ∈ actualWholeAmbientHSSuperlevel (vanishingIdeal (n := n) W) h := by
+  change (∀ ℓ, h ℓ ≤ hilbertSamuelAt (vanishingIdeal (n := n) (strictTransform n π W)) y ℓ) ↔
+    ∀ ℓ, h ℓ ≤ hilbertSamuelAt (vanishingIdeal (n := n) W) (π y) ℓ
+  simp only [hilbertSamuelAt_actual_strict_blowup_off_centre hπ hW y hy]
+end Blowup
+end
+end TranscendentalNakamaye.Pending.HironakaActualBlowupOffCentreIntrinsicHS

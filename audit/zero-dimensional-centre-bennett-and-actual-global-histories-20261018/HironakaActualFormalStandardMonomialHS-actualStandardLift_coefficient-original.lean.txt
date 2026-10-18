@@ -1,0 +1,11 @@
+/-- Every actual displayed monomial retains precisely its original complex coefficient. -/
+theorem actualStandardLift_coefficient (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ)
+    (c : actualStandardIndex n I q → ℂ) (a : actualStandardIndex n I q) :
+    MvPowerSeries.coeff a.val.val (actualStandardLift n I q c)=c a := by
+  change MvPowerSeries.coeff a.val.val
+    (∑ b : actualStandardIndex n I q, MvPowerSeries.monomial b.val.val (c b))=c a
+  rw [map_sum,Finset.sum_eq_single_of_mem a (Finset.mem_univ a)]
+  · exact MvPowerSeries.coeff_monomial_same _ _
+  · intro b _ hne
+    have he : a.val.val ≠ b.val.val := fun h => hne (Subtype.ext (Subtype.ext h.symm))
+    simp only [MvPowerSeries.coeff_monomial,if_neg he]

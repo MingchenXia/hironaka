@@ -1,0 +1,4 @@
+/-- Literal translation is polynomial evaluation at the SAME actual original coordinate germs. -/
+def actualTranslatedPolynomialEval (n : ℕ) (p : Fin n → ℂ) :
+    MvPolynomial (Fin n) ℂ →ₐ[ℂ] HolGerm (ComplexModel (0+n)) :=
+  MvPolynomial.aeval (fun i => normalCoordinate 0 n i+algebraMap ℂ _ (p i))

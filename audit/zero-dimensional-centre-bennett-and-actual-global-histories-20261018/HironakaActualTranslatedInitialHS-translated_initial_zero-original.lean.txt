@@ -1,0 +1,8 @@
+private theorem translated_initial_zero (I : Ideal (MvPowerSeries (Fin n) ℂ)) :
+    actualTranslatedInitialIdeal I 0=actualOriginalInitialVertexIdeal I := by
+  have he : actualTranslatedPolynomialEval n (0 : Fin n → ℂ)=originalPolynomialEval n := by
+    apply MvPolynomial.algHom_ext
+    intro i
+    simp [actualTranslatedPolynomialEval,originalPolynomialEval]
+  unfold actualTranslatedInitialIdeal actualOriginalInitialVertexIdeal
+  rw [he]

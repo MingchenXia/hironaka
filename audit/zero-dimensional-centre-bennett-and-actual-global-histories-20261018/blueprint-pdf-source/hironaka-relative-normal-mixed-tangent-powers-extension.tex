@@ -1,0 +1,96 @@
+\section{Actual ambient powers retain every mixed tangent degree}
+
+Let $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+let $M=\mathfrak m_B R$ through the original tangent pullback, and let
+$J$ be the actual normal-coordinate ideal. The genuine relative Hadamard
+decomposition gives $\mathfrak m_R=M+J$. The ambient Hilbert--Samuel
+quotient of $R/I$ therefore retains mixed tangent and normal orders.
+This chapter makes that weighted quotient explicit, including every
+original numerator. It is an algebraic prerequisite for the ambient
+dimension calculation; no blowup descent or Hilbert--Samuel constancy
+is a conclusion here.
+
+\begin{lemma}[Every power of a whole ideal sum retains its mixed weights]
+\label{hir:relative-normal-whole-mixed-ideal-power-expansion}
+\lean{Hironaka.HironakaRelativeNormalMixedTangentPowers.ideal_sup_pow_eq_mixed}
+\leanok
+For ideals $M,J$ in a commutative ring and every $s\geq0$,
+\[
+ (M+J)^s=\sum_{q=0}^s M^{s-q}J^q.
+\]
+\end{lemma}
+\begin{proof}
+The binomial theorem in the semiring of ideals writes this power as
+the sum of the mixed products multiplied by the binomial coefficients.
+Ideal addition is ideal sum and is idempotent. Hence multiplication
+of an ideal by a positive natural-number coefficient leaves that
+ideal unchanged. For each $0\leq q\leq s$, the binomial coefficient
+is positive, so the corresponding term is exactly $M^{s-q}J^q$.
+There are no other terms in the binomial sum. This proves the equality,
+including $s=0$, when both sides are the unit ideal.
+\end{proof}
+
+\begin{theorem}[The genuine original ambient maximal power is the mixed ideal]
+\label{hir:relative-normal-original-ambient-mixed-maximal-power}
+\uses{hir:relative-normal-whole-mixed-ideal-power-expansion,hir:relative-normal-original-fibre-maximal-ideal}
+\lean{Hironaka.HironakaRelativeNormalMixedTangentPowers.originalMixedTangentPower,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalMaximalIdeal_power_eq_mixed,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalAmbientIdeal_sup_maximal_power_eq_mixed,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalNormalPower_le_mixed}
+\leanok
+For every actual original whole ideal $I\subset R$ and every $s$,
+\[
+ I+\mathfrak m_R^s=I+\sum_{q=0}^s M^{s-q}J^q.
+\]
+In particular the degree-$q$ term retains its original tangent weight
+$M^{s-q}$, rather than replacing the ambient quotient by a fibre quotient.
+\end{theorem}
+\begin{proof}
+Substitute the previously proved whole original identity
+$\mathfrak m_R=M+J$ into the first lemma and add the same original
+whole ideal $I$ to both sides. This retains the actual original ring,
+all its original powers, and all mixed products.
+\end{proof}
+
+\begin{theorem}[Every actual ambient jet is a weighted quotient of the normal truncation]
+\label{hir:relative-normal-original-ambient-mixed-truncation-quotient}
+\uses{hir:relative-normal-original-ambient-mixed-maximal-power}
+\lean{Hironaka.HironakaRelativeNormalMixedTangentPowers.originalNormalTruncation,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalMixedTruncationIdeal,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalAmbientMixedTruncation,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalMixedTruncation_kernel_eq,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalAmbientMixedTruncationAlgEquiv,Hironaka.HironakaRelativeNormalMixedTangentPowers.originalAmbientMixedTruncationAlgEquiv_mk}
+\leanok
+Put $T_s=R/(I+J^s)$, let $\pi_s:R\to T_s$ be the actual quotient map,
+and let $K_s$ be the image in $T_s$ of
+$\sum_{q=0}^s M^{s-q}J^q$. There is a genuine complex algebra isomorphism
+\[
+ T_s/K_s\simeq R/(I+\mathfrak m_R^s)
+\]
+that sends the double class of every actual original numerator $g$
+to its original ambient class $[g]$.
+\end{theorem}
+\begin{proof}
+The mixed sum contains $J^s$ as its $q=s$ term. Thus the actual normal
+truncation quotient map is followed by a well-defined map to the
+ambient quotient, and the image ideal $K_s$ lies in its kernel.
+The third isomorphism theorem for the actual quotient identifies
+$T_s/K_s$ with $R/(I+J^s+\sum_q M^{s-q}J^q)$. Containment of $J^s$
+in the mixed sum removes precisely that redundant term, and the
+preceding identity identifies the remaining ideal with
+$I+\mathfrak m_R^s$. The quotient maps and the third-isomorphism map
+all send an original numerator to its same class and preserve
+complex constants. Their composite therefore has the stated
+complex algebra structure and the original numerator formula.
+\end{proof}
+
+\begin{corollary}[The existing whole ambient Hilbert--Samuel value uses the same weighted quotient]
+\label{hir:relative-normal-original-ambient-mixed-hilbert-samuel}
+\uses{hir:relative-normal-original-ambient-mixed-truncation-quotient,hir:actual-hilbert-samuel-point-value}
+\lean{Hironaka.HironakaRelativeNormalMixedTangentPowers.finiteDimensional_originalAmbientMixedTruncation,Hironaka.HironakaRelativeNormalMixedTangentPowers.hilbertSamuelValue_eq_originalAmbientMixedTruncation}
+\leanok
+For every $\ell$, the existing whole ambient Hilbert--Samuel value
+of the original ideal $I$ is the complex dimension of
+$T_{\ell+1}/K_{\ell+1}$. This quotient is finite dimensional for every
+original $I$, without a normal-flatness hypothesis.
+\end{corollary}
+\begin{proof}
+The preceding complex algebra isomorphism gives a complex linear
+isomorphism with the actual original quotient defining the existing
+Hilbert--Samuel value. That original quotient is finite dimensional
+by the genuine original finite-jet theorem. Transport finite dimension
+and equality of complex dimensions through this linear isomorphism.
+\end{proof}

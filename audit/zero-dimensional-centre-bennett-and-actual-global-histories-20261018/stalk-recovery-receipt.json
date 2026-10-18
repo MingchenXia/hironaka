@@ -1,0 +1,55 @@
+{
+  "status": "PASS_EXACT_ORIGINAL_SOURCE_RECOVERY_AND_BOUNDED_BUILD",
+  "normal_published_source_revision": "bae7068afc70d624cd8563fd4291436195a7f25f",
+  "normal_published_source_repository": "/workspace/archon-nakamaye-main",
+  "source_access": "read-only normal Git show at pinned published merge; checkout bytes independently matched",
+  "whole_original_parent_modules": 4,
+  "whole_original_parent_explicit_declarations": 29,
+  "complete_original_ambient_support_declarations": 3,
+  "proof_edits": false,
+  "axioms_or_waivers_added": false,
+  "pure_import_substitutions": 1,
+  "elaboration_context_fixes_after_failure": 0,
+  "failed_checks": 0,
+  "source_replay": {
+    "frozen_relocate_verifier": "audit/local-coefficients-and-curve-overlaps-20261015/verify_incremental_source.py",
+    "frozen_relocate_verifier_sha256": "e50b6ae9de725a3e598571f4441000505dafa552e77f6e1a9a2c7911039d5f84",
+    "function_source_sha256": "2fca3700363f620e0e7b08487bea16f59a763a499ce2e9ae633d1f6c3651b3f3",
+    "whole_modules": "byte-exact header + frozen relocate + recorded pure import substitution",
+    "support": "byte-exact contiguous original lines 21\u201348 under frozen relocate and recorded administrative wrapper",
+    "checked_paths": [
+      "Hironaka/Resolution/HironakaActualWholeStalkHolomorphicPullback.lean",
+      "Hironaka/Resolution/HironakaActualBiholomorphicWholeStalkHS.lean",
+      "Hironaka/Resolution/HironakaActualOpenIntrinsicHS.lean",
+      "Hironaka/Resolution/HironakaActualBlowupOffCentreIntrinsicHS.lean",
+      "Hironaka/Support/GenuineAmbientJetAlgEquivExact.lean"
+    ]
+  },
+  "lsp": "unavailable; no Lean LSP tools exposed",
+  "support_narrow_check": {
+    "command": "PATH=/workspace/lean-toolchains/lean-4.33.1-linux/bin:$PATH LEAN_NUM_THREADS=1 lake env lean Hironaka/Support/GenuineAmbientJetAlgEquivExact.lean",
+    "working_directory": "/workspace/hironaka",
+    "exit_code": 0,
+    "log_path": "audit/zero-dimensional-centre-bennett-and-actual-global-histories-20261018/stalk-support-narrow.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "bounded_final_build": {
+    "command": "PATH=/workspace/lean-toolchains/lean-4.33.1-linux/bin:$PATH LEAN_NUM_THREADS=1 timeout 180s lake build --wfail Hironaka.Resolution.HironakaActualBlowupOffCentreIntrinsicHS",
+    "working_directory": "/workspace/hironaka",
+    "exit_code": 0,
+    "log_path": "audit/zero-dimensional-centre-bennett-and-actual-global-histories-20261018/stalk-whole-build.log",
+    "log_sha256": "56c4b061c4ba275b60a8f4b46fa932cdb7800e7131417c515699f246b56f107c",
+    "warnings": 0,
+    "built_owned_modules": 5,
+    "lake_reported_jobs": 4277
+  },
+  "strict_all_serializers": "pending parent lane; not run by this worker",
+  "old_public_source_guard": "parent lane; this worker wrote only five new module paths and stalk-* audit artifacts",
+  "destination_sha256": {
+    "Hironaka/Resolution/HironakaActualWholeStalkHolomorphicPullback.lean": "7b525009fd372e33bbba1f2e216441df123d15669d43347f8c90b5efc566312b",
+    "Hironaka/Resolution/HironakaActualBiholomorphicWholeStalkHS.lean": "33d289299b64eb4c8a2f721772830be54dfc84b20423fc10bcfba3a87d912c96",
+    "Hironaka/Resolution/HironakaActualOpenIntrinsicHS.lean": "f13ca773b9a50efb9bd8b80abf6c28a0b74521d92f797ba7b92cdefc8b59f41f",
+    "Hironaka/Resolution/HironakaActualBlowupOffCentreIntrinsicHS.lean": "fe7effb3b9cf01e5217e51b577dd05a3fa2ba4b40218677f6beb3e1255ece735",
+    "Hironaka/Support/GenuineAmbientJetAlgEquivExact.lean": "dcfa3ef0e33c6ae205150cf05ae4b450f1e3983c74b3cf3a04390bab72f89d96"
+  }
+}

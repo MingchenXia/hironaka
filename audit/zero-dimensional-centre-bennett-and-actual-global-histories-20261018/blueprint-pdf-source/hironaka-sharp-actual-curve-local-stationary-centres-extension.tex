@@ -1,0 +1,58 @@
+\section{Actual local stationarity of the global blowup centres}
+
+\begin{lemma}[The literal successor centre after a genuine local history is empty]
+\label{hir:sharp-actual-curve-local-successor-centre-empty}
+\uses{hir:sharp-actual-curve-uniform-prefix-eventual-empty,hir:sharp-actual-curve-uniform-successor-data}
+\lean{Hironaka.HironakaSharpActualCurveLocalStationaryCentres.actualUniformSuccessor_centre_empty}
+\leanok
+Let $T$ be a genuine finite blowup history. At EVERY natural stage $k$
+at or beyond its literal length, the actual chosen successor centre of
+its uniform prefix is empty. This concerns the actual centre supplied
+by the original last-step constructor, not a replacement empty history.
+\end{lemma}
+\begin{proof}
+Write $k=\operatorname{length}(T)+r$. The actual whole endpoint-and-history identity at $k+1$ identifies
+its entire history with $T$ followed by $r$ genuine empty identity steps
+and one further identity blowup at the empty centre. The actual chosen
+successor is an original last-step constructor of precisely this SAME
+whole history. Consider the property of a whole endpoint-history packet
+that its last constructor has empty centre (true on a reflexive history).
+It holds for the literal displayed empty successor. Transport this
+property through the genuine whole packet identity, then read the actual
+chosen last constructor. Its centre must therefore be empty. This includes $r=0$ and keeps every prior empty position.
+\end{proof}
+
+\begin{theorem}[Actual global successor centres eventually avoid every original chart]
+\label{hir:sharp-actual-curve-global-centres-locally-stationary}
+\uses{hir:sharp-actual-curve-local-successor-centre-empty,hir:sharp-actual-curve-successor-centre-transition,hir:sharp-actual-endpoint-saturated-local-range,hir:sharp-actual-curve-original-uniform-stage-atlas}
+\lean{Hironaka.HironakaSharpActualCurveLocalStationaryCentres.globalUniformCentre_disjoint_preimage_open,Hironaka.HironakaSharpActualCurveLocalStationaryCentres.originalUniformCentres_locally_stationary}
+\leanok
+For actual retained histories covering the original space, fix one actual
+original chart and let $L$ be the literal length of its SAME retained full
+local history. At EVERY $k\ge L$, the entire global successor centre is
+disjoint from the entire stage-projection preimage of that original
+chart. In particular only original positive-dimensional smooth pure
+curve, ordered SNC and density data construct, around EVERY original
+point, an actual open neighbourhood and an actual finite bound with this
+property. No cover, local stopping bound, empty-centre or stationarity
+certificate is supplied to this original-only conclusion.
+\end{theorem}
+\begin{proof}
+At each such stage the first lemma makes the actual local successor
+centre on this chart empty. The entire preimage of the global centre
+under the actual chart inclusion is exactly that local centre. If a
+global centre point projected into the chart, the genuine saturated-range
+identity would place it in that inclusion range. Choosing its actual
+local representative would put that representative in the empty local
+centre, a contradiction. Thus the two entire sets are disjoint.
+
+For each original point take its actual original chart from the internally
+constructed original retained-history atlas. It is genuinely open and
+contains that point. Its actual full history has an ordinary finite
+literal length; choose exactly this length as the bound and apply the
+preceding argument to every later stage. No maximum over an infinite
+family is formed. This proves actual local stationarity of centres;
+a uniform global stopping time, identification with the retained sharp
+terminal endpoint, and compact finite termination are distinct subsequent
+conclusions.
+\end{proof}

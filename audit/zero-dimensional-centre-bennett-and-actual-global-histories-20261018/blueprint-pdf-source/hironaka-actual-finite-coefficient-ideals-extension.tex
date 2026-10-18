@@ -1,0 +1,59 @@
+\section{Internally constructed local coherent coefficient ideals of actual analytic families}
+
+We retain literal Taylor coefficients of actual holomorphic germs. The coefficient
+ideals in this chapter are genuine principal germ ideals on their real common
+holomorphic domain. No analytic preimage of an arbitrary formal reduced basis or
+semicoherent presentation is assumed. The construction supplies the actual local
+coefficient objects used in the coefficient-centre step of
+\cite[Theorem 9.4]{bierstone-milman97-invent-math}.
+
+\begin{lemma}[A real holomorphic function generates an actual locally coherent principal family]
+\label{hir:actual-local-principal-coefficient-ideal}
+\uses{hir:actual-local-coefficient-germ-propagation}
+\lean{Hironaka.HironakaActualFiniteCoefficientIdeals.actualPrincipalCoefficientIdeal,Hironaka.HironakaActualFiniteCoefficientIdeals.coherentOn_actualPrincipalCoefficientIdeal,Hironaka.HironakaActualFiniteCoefficientIdeals.mem_actualPrincipalCoefficientIdeal}
+\leanok
+For any actual function $c$ holomorphic on a real open set $U$, define its
+principal family at a point $x$ by the genuine holomorphic germ span of $c$.
+This family is coherent on $U$, with the single actual generator $c$.
+At every $x\in U$ the original function $c$ belongs to its genuine stalk.
+\end{lemma}
+\begin{proof}
+At each $x\in U$ use the same real open set $U$ and the one-element family
+whose value is $c$. Its range is exactly the singleton consisting of $c$,
+so the defining original germ membership is precisely the original
+finite holomorphic span membership for that one-element family. Holomorphicity
+on $U$ supplies the required generator holomorphicity. The function $c$
+belongs to its own germ span by its one-term expression $1\cdot c$ and its
+actual holomorphicity near $x$. No statement is made about coherence outside $U$.
+\end{proof}
+
+\begin{theorem}[Every finite actual analytic family internally supplies its low coherent coefficient ideals]
+\label{hir:actual-finite-local-coherent-coefficient-ideals}
+\uses{hir:actual-local-principal-coefficient-ideal,hir:actual-relative-coefficient-literal-formal-taylor-dictionary}
+\lean{Hironaka.HironakaActualFiniteCoefficientIdeals.exists_actual_finite_local_coefficient_ideals}
+\leanok
+Fix a finite family of actual analytic germs $g_i(u,z)$ and a degree bound
+$q$. There exist a real open neighbourhood $U$ of the origin and actual
+representatives $c_{i,\gamma}(u)$ of all of their original analytic relative
+coefficient germs. For every $|\gamma|<q$ these representatives are
+holomorphic on $U$, their actual principal germ ideals are coherent on $U$,
+and $c_{i,\gamma}$ belongs to the original ideal stalk at the origin.
+For every exponent $\gamma$, the entire normal coefficient series of the
+literal Taylor series of $g_i$ is the literal Taylor series of the chosen
+original germ of $c_{i,\gamma}$. Every later finite relative Taylor polynomial
+uses these same original coefficient germs. A common domain for infinitely
+many high coefficients is not asserted.
+\end{theorem}
+\begin{proof}
+The proved finite relative coefficient construction chooses actual representatives
+of the intrinsic original coefficient germs and a single real open neighbourhood
+on which all low coefficients of this finite family are holomorphic. Its
+whole Taylor coefficient dictionary gives the stated entire-series identity
+for every exponent, and its whole-germ stability gives the same coefficients
+in every later finite relative Taylor polynomial. For each low coefficient
+apply the preceding lemma to its actual representative on this same $U$.
+It constructs the genuine principal ideal family and proves its local coherence
+and original stalk membership internally. Thus the output consists of actual
+functions and actual ideals, without supplied coefficient identities, coherent
+ideal certificates or global extensions of local holomorphic functions.
+\end{proof}

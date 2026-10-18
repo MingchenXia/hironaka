@@ -1,0 +1,435 @@
+\section{Actual hypersurface maximum-multiplicity phases}
+
+This section proves the literal current-centre alternative of
+Bierstone--Milman\cite{bierstone-milman97-invent-math}, Theorem 1.6(1),
+for compact hypersurfaces. It uses fresh maximum reduced-multiplicity
+phases and the actual controlled transform of marked ideals as in
+Bierstone--Milman\cite{bierstone-milman08-functoriality}, Section 2.
+The full higher-codimension Hilbert--Samuel invariant assertion and
+noncompact locally finite resolution are separate conclusions.
+This section follows the fresh multiplicity phases used in the proof of
+embedded resolution for a hypersurface. It concerns the actual current
+reduced vanishing ideal, not the original marked ideal's nonmonomial
+part alone. The geometric and analytic lemmas below identify those
+ideals on every actual recorded prefix of one fixed maximum-order phase.
+
+\begin{lemma}[Regular density survives a singular-centre blowup]
+\label{hir:singular-centre-regular-density}
+\uses{bcalc:strict-geo}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.strictTransform_subset_closure_regularLocus}
+\leanok
+Let W be closed analytic in a complex manifold, with
+W contained in the closure of its dimension-d regular locus. Let C be a
+closed smooth centre contained in W minus that regular locus, and let
+pi be its actual blowup. Then its actual strict transform S is contained
+in the closure of its own dimension-d regular locus.
+\end{lemma}
+\begin{proof}
+The centre misses the entire regular locus, so W is contained in the
+closure of W minus C. Therefore S is the actual geometric strict transform,
+the closure of pi inverse-image of W minus C. Fix a point z of that
+defining inverse-image set and an arbitrary open neighbourhood U of z.
+Since pi(z) is outside C, z is outside the actual exceptional locus and
+the image of U intersected with its open complement is a neighbourhood
+of pi(z). Original regular density supplies a point of $\operatorname{Reg}_d$ W in that
+image, lifted to a point y of U outside the exceptional locus. Its image
+is outside C since it is regular. The original regular flattening transports
+through the actual local biholomorphic inverse of pi at y; the local
+strict-transform membership germ is the inverse-image germ, so y is in
+$\operatorname{Reg}_d$ S. Thus every defining point is in the closure of $\operatorname{Reg}_d$ S. Taking
+closures proves the claimed density on all S, including points of the
+new divisor. No current purity or transformed regular-density certificate
+is supplied.
+\end{proof}
+
+\begin{lemma}[The actual derivative maximal-order bound]
+\label{hir:actual-reduced-derivative-bound}
+\uses{hir:order-taylor,bcalc:giraud-strict}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.isMaximalOrder_vanishingIdeal_of_order_le,Hironaka.HironakaHypersurfaceMultiplicityDescent.order_le_of_isMaximalOrder}
+\leanok
+For the actual complete vanishing ideal of an analytic set W, a bound
+mu on its actual order on W implies that its mu-th iterated derivative
+ideal contains 1 at every ambient point. Conversely this derivative-unit
+condition for any actual ideal implies the ambient order bound. Under
+an actual admissible blowup with I contained in the mu-th centre ideal
+power, the genuine derivative-transform inclusion preserves this unit
+condition for the actual controlled transform.
+\end{lemma}
+\begin{proof}
+Containing 1 after mu derivatives prevents order at least mu+1: the
+iterated Giraud inclusion would force that 1 to vanish to order one.
+Conversely absence of the order-(mu+1) locus gives actual derivatives
+of order at most mu whose values do not vanish at each point. Their
+generated coherent derivative ideal therefore contains 1 locally.
+Under the actual blowup, the derivative transform inclusion places the
+pullback of this iterated derivative ideal inside the mu-th derivative
+ideal of the actual controlled transform. Pulling back the actual unit
+and taking mark zero gives the new unit. These are the actual previously
+proved derivative inclusions and local Taylor witnesses, not a newly
+introduced bound-preservation certificate.
+\end{proof}
+
+\begin{theorem}[Whole current ideals on actual maximum-order test towers]
+\label{hir:maximum-phase-entire-current-ideal}
+\uses{hir:singular-centre-regular-density,hir:actual-reduced-derivative-bound,hir:actual-max-order-hypersurface-strict-ideal}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.strictIdeal_and_geometry_geoTransformAlong,Hironaka.HironakaHypersurfaceMultiplicityDescent.stageCentres_singular_and_exact_order}
+\leanok
+Let W be an analytic hypersurface in dimension m+1, with actual
+invertible vanishing ideal and dense m-dimensional regular locus, and
+let E be an SNC boundary. Let mu be at least two and bound the actual
+order of $I_W$ at every point of W. On every actual admissible test tower
+of the original marked ideal (X,X,E,$I_W$,mu), every current strict
+transform is analytic, has dense m-dimensional regular locus and an
+actual invertible vanishing ideal. Its actual marked transform ideal
+is exactly its complete reduced vanishing ideal. Its order is at most
+mu everywhere. Every recorded centre is contained in the singular
+locus of the actual current strict transform and has order exactly mu.
+\end{theorem}
+\begin{proof}
+Outside the closed W its actual ideal contains 1, so the given bound
+extends to the whole ambient space. The derivative maximal-order
+criterion supplies its actual derivative-unit condition. Induct on the
+actual recorded blowup tower. The empty tower gives the original data.
+At a successor prefix, genuine admissibility and the preceding entire
+ideal equality put its next centre in the order-mu locus of the actual
+current reduced ideal. As its current order is bounded by mu everywhere,
+it has exact order mu on that centre. Order one at regular points and
+mu at least two put the entire centre in the current singular locus,
+including points on the accumulated boundary.
+
+Apply the previously proved actual one-step whole strict-ideal theorem
+to that current hypersurface, its actual SNC boundary, its true order
+bound and the literal next blowup. It proves the next controlled ideal
+is the complete reduced strict ideal and is invertible. The actual
+derivative-unit transform maintains the global mu bound; regular density
+is preserved by the preceding singular-centre lemma. Analyticity comes
+from the actual blowup theorem. The actual strict-transform composition
+identity identifies this successor with the strict transform by the
+original prefix projection. All induction assertions refer to the true
+recorded prefix and its actual objects. No equality or centre-position
+data for later stages is supplied by the caller.
+\end{proof}
+
+\begin{theorem}[A genuinely constructed finite multiplicity-drop phase]
+\label{hir:constructed-multiplicity-drop-phase}
+\uses{hir:maximum-phase-entire-current-ideal,hir:actual-fresh-maximal-multiplicity-centre,hir:resolution-driver}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_maximal_multiplicity_drop_phase}
+\leanok
+Suppose additionally W is compact and has an actual point of order at
+least two. There exist an internally chosen finite maximum mu, at least
+two, and a genuinely constructed finite canonical resolution tower of
+(X,X,E,$I_W$,mu) such that its entire recorded centres lie in the current
+strict-transform singular loci with exact current order mu, and its
+final current reduced ideal has order strictly less than mu everywhere.
+Its final strict transform is analytic and compact, with dense
+m-dimensional regular locus, invertible vanishing ideal and actual SNC
+boundary.
+\end{theorem}
+\begin{proof}
+Choose the actual finite maximum of the original reduced order internally
+by upper semicontinuity and compactness. The original pure hypersurface
+geometry supplies the invariant-domain data for the genuine marked
+ideal at this mu. Its cosupport is closed and contained in compact W,
+so the actual compact-support canonical resolution constructor gives
+an actual finite tower with final cosupport empty. The whole-current-ideal
+and recorded-centre induction theorem applies to this tower, hence
+identifies the final cosupport as the order-mu locus of the actual
+final reduced vanishing ideal. Its emptiness says every actual order
+is strictly below mu. The actual proper projection gives compactness;
+the preceding theorem supplies all the remaining geometric conclusions.
+This is a produced multiplicity drop for a true canonical tower, not an
+assumed terminating tower or a post-reinitialization comparison.
+\end{proof}
+
+\begin{lemma}[Order one of the actual invertible reduced ideal gives regularity]
+\label{hir:actual-order-one-regular-hypersurface}
+\uses{hir:order-taylor}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.regularAtDim_of_order_lt_two_of_isInvertible}
+\leanok
+Let W be closed in dimension m+1 and have an actual invertible vanishing
+ideal. At a point x of W where that ideal has order less than two,
+W is regular of dimension m.
+\end{lemma}
+\begin{proof}
+Choose the actual invertible local generator f on one neighbourhood U of x,
+generating every original nearby ideal stalk. It vanishes at x. Its
+actual preferred-chart differential is nonzero: otherwise every test
+germ in $I_W$ has the form a f, whose value and first differential vanish
+at x. The actual Taylor criterion puts every such germ in the square
+of the point ideal, forcing order at least two, a contradiction.
+The actual local zero set of f is W: membership in W makes the generator
+vanish; outside closed W the original ideal contains 1, so local generation
+prevents f from vanishing. Transfer this equation to the actual chart.
+It is an actual one-equation holomorphic presentation and its single
+nonzero differential is linearly independent. The actual holomorphic
+inverse function theorem gives a flattening to the codimension-one plane,
+which transports back to a genuine RegularAtDim witness for W at x.
+No regularity, local equation or post-transform ideal certificate is input.
+\end{proof}
+
+\begin{lemma}[Actual singular-centre phases preserve every original regular open]
+\label{hir:singular-phases-preserve-regular-open}
+\uses{hir:maximum-phase-entire-current-ideal}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.centresAvoid_regularOpen_of_maximalOrder_testTower,Hironaka.HironakaHypersurfaceMultiplicityDescent.centresAvoid_regularOpen_of_stageCentres_singular}
+\leanok
+Let O be an open subset on which the original W is dimension-m regular
+at each of its points. Every actual maximum-order hypersurface test tower
+as above has all its centres avoiding the original inverse-images of O.
+\end{lemma}
+\begin{proof}
+Induct on the literal recorded tower. The empty tower has no centres.
+At a successor, the preceding centres avoid O, so the actual prefix
+projection is locally biholomorphic at each point over O. Its strict
+transform has the actual inverse-image membership germ there. Hence
+its regularity is equivalent to the original regularity through that
+actual inverse, with the same dimension. A point in its next singular
+centre over O would therefore be both regular and nonregular, a
+contradiction. This proves avoidance for the actual next centre and
+completes induction. The hypothesis refers only to the original open
+set and the original W, not to current-stage position data.
+\end{proof}
+
+General higher-codimension centre positions require a further invariant
+argument. The original pure hypersurface ideal is produced by the
+preceding codimension-one local-equation construction.
+
+\begin{lemma}[Actual boundary and centre positions through concatenation]
+\label{hir:actual-stage-centres-concatenation}
+\uses{bcalc:strict-geo}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.boundary_geoTransformAlong_eq_of_boundary_eq,Hironaka.HironakaHypersurfaceMultiplicityDescent.stageCentres_normalCrossings_of_isGeoTestTower,Hironaka.HironakaHypersurfaceMultiplicityDescent.stageCentres_singular_normalCrossings_append}
+\leanok
+The actual accumulated boundary of a recorded blowup tower depends only
+on its original boundary list, not on the original ideal or its mark.
+Let T be a tower over W and S a tower over its actual final strict
+transform. If the recorded centres of each are singular in the respective
+current strict transform and have normal crossings with their actual
+current boundary, then the concatenated tower has these same literal
+properties relative to W and the original boundary.
+\end{lemma}
+\begin{proof}
+For the boundary identity, induct on the recorded tower. At a successor,
+the actual boundary consists precisely of the geometric strict transforms
+of its preceding members and the actual exceptional preimage of its centre.
+Equality of the preceding lists therefore gives equality of the entire
+successor lists, including ordering and multiplicity. For concatenation,
+induct on S. The empty tail is T. At each actual next step of S, strict
+transform composition identifies its current strict transform of the
+final transform of W with the strict transform of W by the concatenated
+prefix. The genuine boundary composition identity and the preceding
+ideal-independent boundary identity identify the two current boundary
+lists. Thus its actual singular containment and normal-crossing witness
+are exactly the required witnesses for that concatenated prefix. The
+preceding induction assertion preserves all earlier recorded centres.
+\end{proof}
+
+\begin{theorem}[Genuine finite multiplicity restarts to a smooth hypersurface]
+\label{hir:finite-reduced-multiplicity-restarts}
+\uses{hir:constructed-multiplicity-drop-phase,hir:actual-order-one-regular-hypersurface,hir:actual-stage-centres-concatenation,hir:singular-phases-preserve-regular-open}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_tower_smooth_of_order_le,Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_tower_smooth_singular_stage_centres}
+\leanok
+For a compact analytic hypersurface W in dimension m+1 with invertible
+actual reduced ideal, dense m-dimensional regular locus, and SNC boundary,
+a finite tower exists whose final actual strict transform is smooth of
+dimension m and whose every actual centre lies in the current strict
+transform's singular locus with normal crossings with the accumulated
+boundary. It avoids every original open set on which W is dimension-m
+regular.
+\end{theorem}
+\begin{proof}
+First assume an integer b bounds the actual original order on W. Induct
+strongly on b, universally over the actual ambient manifold and the
+original geometric data. If no point of W has order at least two, the
+actual order-one lemma proves regularity at every point, and the empty
+tower suffices. Otherwise choose the actual attained maximum mu internally
+and apply the genuinely constructed finite multiplicity-drop phase. The
+attained original maximum satisfies mu at most b. Its final complete
+reduced ideal has order strictly below mu everywhere, hence is bounded
+by the integer mu-1, strictly less than b. Its actual final hypersurface
+is analytic and compact, with invertible actual reduced ideal and dense
+m-dimensional regular locus, and its actual final boundary is SNC.
+Apply the induction hypothesis to precisely these actual produced objects.
+Concatenate the two actual finite towers. The preceding composition lemma
+preserves the literal singular containment and normal-crossing condition
+at every recorded centre, and identifies the final actual strict transform.
+The actual marked-domain and compactness maximum argument supplies an
+original finite bound internally when needed; the resulting tower's
+existence does not assume a terminating sequence. Finally, any such
+singular-centre tower avoids every original regular open by induction:
+above that open the prior prefix is genuinely biholomorphic, so current
+regularity transports from the original W and excludes the next singular
+centre. This proves actual avoidance for the entire constructed tower.
+\end{proof}
+
+\begin{corollary}[Natural irreducible hypersurface input]
+\label{hir:natural-irreducible-hypersurface-smoothing}
+\uses{hir:finite-reduced-multiplicity-restarts,hir:pure-hypersurface-original-invertible-ideal}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_tower_smooth_irreducible_hypersurface}
+\leanok
+For an actual compact closed irreducible analytic subvariety V of
+dimension m in a smooth ambient manifold of dimension m+1, the preceding
+finite smoothing tower exists without a supplied invertibility hypothesis.
+\end{corollary}
+\begin{proof}
+Original irreducible regular-density gives dimension-m regular points
+dense in V. The pure hypersurface local-equation theorem internally
+constructs an actual nonzero equation at every original point, including
+singular points. Its reduced all-nearby-stalk and empty-interior argument
+proves that the original complete ideal $I_V$ is invertible. Apply the finite-restart theorem to these
+produced original geometric facts. No current transform equation,
+post-transform invertibility or terminating sequence is supplied.
+\end{proof}
+
+\begin{lemma}[Density outside the original singular part and boundary]
+\label{hir:regular-density-outside-boundary-union-singular}
+\uses{hir:singular-centre-regular-density}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.subset_closure_diff_boundary_union_singular}
+\leanok
+If dimension-m regular points are dense in closed W and W is dense
+off a closed initial boundary B, then W is dense off B union its
+original nonregular part.
+\end{lemma}
+\begin{proof}
+At any y in W outside B, intersect an arbitrary neighbourhood with
+the open complement of B. Regular density supplies a dimension-m
+regular point in that intersection. Thus every such y lies in the
+closure of regular W outside B. The latter set is contained in W
+outside B union its nonregular part. Taking closures and using the
+assumed density off B gives the conclusion.
+\end{proof}
+
+\begin{lemma}[The intrinsic singular part of every produced prefix]
+\label{hir:intrinsic-singular-stage-centres}
+\uses{hir:singular-centre-regular-density}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.strictTransform_subset_closure_regularLocus_of_stageCentres_singular,Hironaka.HironakaHypersurfaceMultiplicityDescent.stageCentres_all_nonregular_of_stageCentres_singular}
+\leanok
+For closed W with dense dimension-d regular locus, an actual recorded
+tower whose centres lie in each current dimension-d nonregular part
+has dense dimension-d regular locus at every actual prefix. Consequently
+each such centre consists of actual current points nonregular in every
+dimension, not just dimension d.
+\end{lemma}
+\begin{proof}
+Induct on the actual recorded tower. The empty tower has the original
+regular density. At the next literal centre apply the genuine
+singular-centre regular-density lemma to the actual current closed
+strict transform, its induction-produced density and its actual centre.
+Strict-transform composition identifies its conclusion with the next
+actual prefix. This proves actual density at every prefix.
+To identify its dimension-d nonregular part intrinsically, suppose a
+point there were regular of dimension k. Its actual regular flattening
+gives a neighbourhood whose current-set points are regular of dimension k.
+Density supplies a dimension-d regular point in this same neighbourhood.
+Uniqueness of regular dimension gives k=d, contradicting nonregularity
+in dimension d at the original point. Conversely a point nonregular
+in every dimension is nonregular in dimension d. This proves the exact
+set equality and applies it to every actual centre; no later-stage
+purity certificate is assumed.
+\end{proof}
+
+\begin{theorem}[Literal hypersurface embedded centre conditions]
+\label{hir:actual-hypersurface-embedded-stage-centres}
+\uses{hir:finite-reduced-multiplicity-restarts,hir:regular-density-outside-boundary-union-singular,hir:intrinsic-singular-stage-centres,hir:smooth-boundary-resolution-stage-centres,hir:actual-stage-centres-concatenation}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.stageCentres_embedded_position_append,Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_tower_embedded_hypersurface_stage_centres}
+\leanok
+\source{bierstone-milman97-invent-math:page-0009}
+Suppose also the original hypersurface is dense off the original SNC
+boundary. There is an actual finite admissible embedded resolution whose
+final strict transform is smooth and transverse to the final SNC boundary.
+Each actual recorded centre is contained in the singular part of its
+current strict transform, or that current strict transform is already
+smooth and the centre is contained in its intersection with the actual
+current boundary.
+\end{theorem}
+\begin{proof}
+Construct the actual finite smoothing tower above, whose centres lie
+over the original singular part. Its final accumulated boundary is
+contained in the inverse image of the original boundary union original
+singular part by the true admissible boundary-support theorem. The
+preceding original density and actual strict-transform density theorem
+therefore make its actual final smooth strict transform dense off its
+entire actual accumulated boundary. Apply the already proved genuine
+smooth-input boundary-resolution tower producer to these actual objects.
+It constructs an actual finite tail with final normal crossings and
+transversality, and supplies the literal smooth-current and current
+boundary containment at every recorded tail centre.
+Concatenate the actual towers. For a smoothing prefix use its literal
+current singular containment and the preceding intrinsic dictionary,
+whose regular density is produced along that actual prefix. For every tail prefix, actual strict
+transform composition and the ideal-independent actual boundary identity
+transport precisely its smooth-current and boundary-intersection
+witnesses to the concatenated original prefix. The actual blowup
+constructors and normal-crossing witnesses give admissibility throughout.
+The final strict transform and boundary identities transport the tail's
+smoothness, dimension, normal-crossings and transversality conclusions.
+No current-stage centre condition is an input of this existence theorem.
+\end{proof}
+
+\begin{corollary}[Natural compact irreducible hypersurface embedded resolution]
+\label{hir:natural-hypersurface-embedded-stage-centres}
+\uses{hir:actual-hypersurface-embedded-stage-centres,hir:pure-hypersurface-original-invertible-ideal}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_tower_embedded_irreducible_hypersurface_stage_centres}
+\leanok
+\source{bierstone-milman97-invent-math:page-0009}
+For an actual compact irreducible analytic hypersurface V, with an
+original SNC boundary off which V is dense, the full embedded resolution
+and the literal per-stage centre condition above are produced without
+any supplied original invertibility, initial multiplicity bound, current
+ideal equality or terminating-sequence certificate. In particular the
+empty-boundary case needs no boundary-density certificate.
+\end{corollary}
+\begin{proof}
+Use actual irreducible regular density for the original dimension-m
+regular locus. The pure hypersurface local-equation, all-nearby-stalk
+reduced-generator and empty-interior producer constructs the original
+complete invertible vanishing ideal from that geometric density. Apply the genuine finite-restart
+and boundary-append theorem to these original facts. For the empty
+boundary the density assertion is the original closed set contained in
+its own closure. All later ideal equalities, geometric regularity,
+finite descent, actual boundary compatibility and recorded centre positions
+come from that theorem's internal constructors.
+\end{proof}
+
+
+\begin{theorem}[Natural compact pure hypersurface embedded resolution]
+\label{hir:natural-pure-hypersurface-embedded-stage-centres}
+\uses{hir:actual-hypersurface-embedded-stage-centres,hir:pure-hypersurface-original-invertible-ideal}
+\lean{Hironaka.HironakaHypersurfaceMultiplicityDescent.exists_tower_embedded_pure_hypersurface_stage_centres}
+\leanok
+\source{bierstone-milman97-invent-math:page-0009}
+Let W be any compact analytic set of pure dimension m in a complex
+manifold of dimension m+1, including a reducible or disconnected set.
+Let the original boundary E be SNC and suppose W is dense off its
+union. There is a finite actual admissible embedded resolution tower
+with final smooth dimension-m strict transform, normal crossings and
+transversality with the final boundary, and an isomorphism outside
+\[
+ (W\setminus\operatorname{Reg}_m W)\cup(W\cap\bigcup E).
+\]
+At every literal recorded prefix, either its next actual centre lies
+in the intrinsic singular locus of the current strict transform, or
+that entire current strict transform is smooth and the centre lies
+in its intersection with the actual accumulated boundary. Every
+centre has normal crossings with that current boundary. Original
+invertibility, original equations, a multiplicity bound, finite descent
+and current-stage centre conditions are all internally produced.
+\end{theorem}
+\begin{proof}
+Original pure codimension-one regular density and analyticity produce
+the complete original invertible vanishing ideal by the actual finite
+component equations, reduced all-stalk generators and empty-interior
+argument. Apply the finite-multiplicity-restart and smooth boundary-tail
+construction to that original ideal and the given original geometric
+boundary data. The constructed phases successively lower the actual
+maximum order of the entire reduced current strict ideal; strong integer
+induction gives a finite smooth-current tower. Its produced regular
+density identifies every phase centre with the intrinsic current
+singular locus. The actual smooth-current boundary-tail producer gives
+the second centre alternative on each of its recorded prefixes.
+Composition of the actual strict transforms and actual boundary lists
+transports both alternatives to all prefixes of the concatenated tower,
+and transports the final smoothness, normal crossings and transversality.
+The produced admissible sequence is an isomorphism off the displayed
+original bad set. Reducibility needs no additional ideal input because
+the original pure hypersurface ideal producer already applies to all
+locally finite actual global components.
+\end{proof}

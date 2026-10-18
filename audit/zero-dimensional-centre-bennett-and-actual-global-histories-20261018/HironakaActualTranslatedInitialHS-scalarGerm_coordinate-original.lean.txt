@@ -1,0 +1,13 @@
+private theorem scalarGerm_coordinate (c : ℂ) (hc : c ≠ 0) (i : Fin n) :
+    actualScalarGermAlgEquiv n c hc (normalCoordinate 0 n i)=
+      algebraMap ℂ _ c*normalCoordinate 0 n i := by
+  let hx : ∀ᶠ z in 𝓝 (0 : ComplexModel (0+n)),
+      DifferentiableAt ℂ (fun w : ComplexModel (0+n) => w (i.natAdd 0)) z :=
+    Eventually.of_forall fun _ => (EuclideanSpace.proj (i.natAdd 0) : ComplexModel (0+n) →L[ℂ] ℂ).differentiableAt
+  change HolGerm.comapEquiv (scalarLinearEquiv (0+n) c hc)
+    (HolGerm.mk (fun z : ComplexModel (0+n) => z (i.natAdd 0)) hx)=
+      HolGerm.mk (fun _ : ComplexModel (0+n) => c) (eventually_differentiableAt_const c)*
+        HolGerm.mk (fun z : ComplexModel (0+n) => z (i.natAdd 0)) hx
+  rw [HolGerm.comapEquiv_mk,← HolGerm.mk_mul]
+  apply HolGerm.mk_eq_mk_iff.mpr
+  exact Eventually.of_forall fun z => by simp [scalarLinearEquiv]

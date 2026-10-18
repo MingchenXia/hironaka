@@ -1,0 +1,12 @@
+/-- Literal polynomial coordinates prove genuine joint holomorphicity on the entire actual product domain. -/
+theorem actualRayInitialFamily_holomorphic (I : Ideal (MvPowerSeries (Fin n) ℂ)) (p : Fin n → ℂ)
+    (i : Fin (Fintype.card (actualInitialVertices MonomialOrder.degLex I))) :
+    DifferentiableOn ℂ (actualRayInitialFamily I p i) Set.univ := by
+  have ht : ContDiff ℂ ∞ (fun u : ComplexModel 1 × ComplexModel (0+n) => u.1 0) :=
+    (EuclideanSpace.proj (0 : Fin 1) : ComplexModel 1 →L[ℂ] ℂ).contDiff.comp contDiff_fst
+  have hx (j : Fin n) : ContDiff ℂ ∞ (fun u : ComplexModel 1 × ComplexModel (0+n) =>
+      u.2 (j.natAdd 0)+u.1 0*p j) :=
+    ((EuclideanSpace.proj (j.natAdd 0) : ComplexModel (0+n) →L[ℂ] ℂ).contDiff.comp contDiff_snd).add
+      (ht.mul contDiff_const)
+  exact ((polynomial_contDiff (actualInitialVertexPolynomial I (vertexEnumeration I i)) _ hx).differentiable
+    (by simp)).differentiableOn

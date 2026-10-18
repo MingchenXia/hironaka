@@ -1,0 +1,101 @@
+\section{Literal centre positions for initially smooth sets}
+
+\begin{lemma}[The current ideal for an initially smooth set]
+\label{hir:smooth-current-ideal-along-tower}
+\uses{hir:geo-transform,hir:stage-cosupport-off-boundary}
+\lean{Hironaka.HironakaSmoothStageCenters.smooth_strictTransform_and_ideal_geoTransformAlong_of_centresAvoid}
+\leanok
+Let $W$ be a closed smooth submanifold, and let $O\subset X$ be open with
+$W\subset\overline{W\cap O}$. Every actual multiple test tower of
+$(X,X,E_0,\mathcal I_W,1)$ whose centres avoid the preimages of $O$ has
+smooth current strict transform at every prefix. Moreover its current
+controlled ideal is exactly $\mathcal I_{W_j}$.
+\end{lemma}
+\begin{proof}
+Induct on the recorded tower. The initial equality and smoothness are
+immediate. At a step after prefix $T$, induction gives a smooth current
+$S=W_T$ and ideal $\mathcal I_S$. The ambient carrier stays the whole
+manifold and the mark stays one, so the current cosupport is exactly $S$.
+Thus admissibility puts the actual centre $C$ inside $S$.
+
+Density transports to the strict transform:
+$S\subset\overline{S\cap T^{-1}O}$. The actual centre avoids $T^{-1}O$,
+so $S\subset\overline{S\setminus C}$. The geometric strict transform
+$\overline{\pi^{-1}(S\setminus C)}$ therefore equals the library strict
+transform, including possible codimension-one components of the centre.
+The coordinate blowup theorem for a smooth submanifold containing the
+centre makes that transform smooth and proves the actual ideal identity
+\[
+ \pi^*\mathcal I_S=\mathcal O(-\pi^{-1}C)\mathcal I_{S'}.
+\]
+Its controlled transform with mark one is exactly $\mathcal I_{S'}$,
+by cancellation of the invertible exceptional factor. Strict-transform
+composition identifies $S'$ with the strict transform for the extended
+prefix. This proves both induction claims without assuming the current
+centre containment or current ideal equality.
+\end{proof}
+
+\begin{theorem}[Literal centre position for an initially smooth set]
+\label{hir:smooth-current-centres-in-boundary}
+\uses{hir:smooth-current-ideal-along-tower}
+\lean{Hironaka.HironakaSmoothStageCenters.stageCentresSmoothInBoundary_of_isGeoTestTower}
+\leanok
+Under the preceding assumptions, if all centres lie over $W\cap|E_0|$,
+then every current strict transform $W_j$ is smooth and every recorded
+centre satisfies $C_j\subset W_j\cap|E_j|$.
+\end{theorem}
+\begin{proof}
+Apply Lemma~\ref{hir:smooth-current-ideal-along-tower} at each prefix to
+obtain smoothness and equality of the actual current cosupport with $W_j$.
+Admissibility puts $C_j$ in $W_j$. Its image belongs to $|E_0|$ by the
+assumed original bad locus. A point outside the current boundary has image
+outside the initial boundary, by the actual boundary-transform induction.
+Consequently every point of $C_j$ belongs to $|E_j|$. These are exactly the
+smooth-current alternative in the literal classical centre condition.
+\end{proof}
+
+\begin{theorem}[Actual boundary resolution with literal smooth-current centres]
+\label{hir:smooth-boundary-resolution-stage-centres}
+\uses{hir:smooth-current-centres-in-boundary,hir:embedded-resolution-boundary,hir:strict-transform-density-transverse}
+\source{bierstone-milman97-invent-math:page-0009}
+\lean{Hironaka.HironakaSmoothStageCenters.exists_tower_embeddedResolution_smooth_boundary_stage_centres}
+\leanok
+Let $W$ be a compact smooth analytic set, regular of fixed dimension $d<n$
+at every point. Let $E_0$ be SNC and assume $W\subset\overline{W\setminus|E_0|}$.
+There is an actual finite admissible resolution tower over $W\cap|E_0|$
+whose final strict transform is smooth of dimension $d$, has normal crossings
+with its SNC accumulated divisor, and is transverse to that divisor.
+At every recorded step the current strict transform is smooth and the
+actual centre is contained in its intersection with the actual current
+divisor. Thus this existence theorem satisfies the literal smooth-current
+alternative at every step, with no centre-containment assumption.
+\end{theorem}
+\begin{proof}
+The dense pure-dimensional regular locus and $d<n$ give empty interior.
+Cartan coherence, nonzero germs, and the SNC initial boundary construct
+the domain of the actual canonical invariant for
+$(X,X,E_0,\mathcal I_W,1)$. Its cosupport is the given compact $W$.
+The actual compact-cosupport driver supplies a finite canonical resolution.
+Take $O=X\setminus|E_0|$. It misses all initial boundary members, the set
+$W$ is regular of dimension $d$ there, and $W\cap O$ is dense in $W$.
+The first-centre construction for the original boundary existence theorem
+therefore produces an actual prefix tower whose centres avoid the preimages
+of $O$ and whose final strict transform has normal crossings with the
+accumulated divisor.
+
+Every centre lies over $W$, by the actual cosupport-transport producer,
+and over $|E_0|$, because it avoids $O$. Intersect these two proved containments
+to obtain admissibility over $W\cap|E_0|$. Well-formedness of the actual
+marked transform gives the SNC output boundary. The earlier density
+transversality theorem applies, since adjoining $W\cap|E_0|$ to the bad
+set $|E_0|$ changes nothing. Finally apply
+Theorem~\ref{hir:smooth-current-centres-in-boundary} to this produced tower:
+it proves the exact current-stage centre condition for every recorded step.
+The existence consumer carries actual geometric data, rather than accepting
+a caller-supplied centre-position certificate.
+\end{proof}
+
+The initially singular case of the literal centre-position obligation remains
+open. Its controlled ideal can retain exceptional branches away from the
+strict transform, so the preceding smooth-input ideal identity does not
+extend to that case by dropping smoothness.

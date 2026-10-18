@@ -1,0 +1,193 @@
+\section{Actual local branches of a general normal crossings carrier}
+\label{sec:hironaka-general-nc-local-branches}
+
+A globally self-intersecting hypersurface can have normal crossings
+without admitting a global list of smooth members.  The local notion
+below describes its carrier by actual coordinates.  Local smooth
+branches and their complete divisor-ideal dictionary are then produced
+from those coordinates.  No global labelling or descent of blowup
+sequences is asserted.
+
+\begin{definition}[A general normal crossings carrier]
+\label{hir:general-normal-crossings-carrier}
+\uses{hir:snc}
+\lean{Hironaka.HironakaNormalCrossingsLocalBranches.IsNormalCrossingsCarrier}
+\leanok
+A closed set $H$ has normal crossings if, at every ambient point $x$,
+there are centred holomorphic coordinates $\psi$ on a neighbourhood
+and a set $S$ of distinct coordinate indices such that
+\[
+ y\in H\quad\Longleftrightarrow\quad
+ \text{there exists }j\in S\text{ with }\psi_j(y)=0
+\]
+throughout their actual domain.  The set $S$ is allowed to be empty.
+The definition imposes no global smoothness, connectedness, or
+irreducibility on $H$.
+\end{definition}
+
+\begin{lemma}[The actual coordinate hyperplanes are SNC]
+\label{hir:actual-coordinate-hyperplane-snc-list}
+\uses{hir:snc,hir:snc-invariance}
+\lean{Hironaka.HironakaNormalCrossingsLocalBranches.coordinateHyperplanes,Hironaka.HironakaNormalCrossingsLocalBranches.isSNCDivisor_coordinateHyperplanes}
+\leanok
+For a finite set $S$ of coordinate indices in $\mathbb C^n$, the list
+of distinct actual hyperplanes $\{z_j=0\}$, $j\in S$, is SNC.  Their
+traces in every open subset are SNC as well.
+\end{lemma}
+\begin{proof}
+Each hyperplane is closed because a coordinate projection is continuous.
+At any point $w$, translate the coordinates by $w$.  For a hyperplane
+through $w$ its coordinate $w_j$ is zero, so the translated $j$th
+coordinate vanishes exactly on that hyperplane.  The assigned singleton
+coordinate sets are distinct because the indices in $S$ are distinct.
+Translation is a genuine holomorphic equivalence with inverse translation
+by $w$, and is centred at zero.  These are precisely the actual SNC
+coordinate conditions.  Passing to an open subset preserves closedness
+relative to that subset and restricts the same adapted coordinates.
+The construction also applies to $n=0$, when $S$ and the list are empty.
+\end{proof}
+
+\begin{lemma}[The actual flattening map is a biholomorphism]
+\label{hir:actual-flat-domain-biholomorphism}
+\uses{hir:snc-invariance,hir:open-biholomorphism}
+\lean{Hironaka.HironakaNormalCrossingsLocalBranches.flatDomainDiffeomorph}
+\leanok
+Let $\psi=\Phi\circ e$ be actual holomorphic flattening coordinates,
+where $e$ is the preferred chart and $\Phi$ is a local holomorphic
+equivalence whose source lies in the actual chart target.  The map
+$\psi$ is a biholomorphism from its open actual domain onto
+$\Phi$'s open target.
+\end{lemma}
+\begin{proof}
+On the actual source define the map by $\Phi(e(y))$.  On the actual
+target define its inverse by $e^{-1}(\Phi^{-1}(w))$.
+The source containment ensures that this inverse is in the chart source
+and in the flattening domain.  The two inverse equations are exactly
+the actual chart and local holomorphic equivalence inverse equations.
+Both maps are holomorphic on their specified open domains, being
+compositions of holomorphic chart maps and holomorphic equivalence
+maps.  Complex holomorphic maps there are smooth of every order.
+Thus these actual mutually inverse maps give the stated biholomorphism.
+\end{proof}
+
+\begin{theorem}[Actual smooth coordinate branches]
+\label{hir:general-nc-actual-local-snc-branches}
+\uses{hir:general-normal-crossings-carrier,hir:actual-coordinate-hyperplane-snc-list,hir:actual-flat-domain-biholomorphism}
+\lean{Hironaka.HironakaNormalCrossingsLocalBranches.exists_actual_snc_branches}
+\leanok
+For every point $x$ of a manifold with a normal crossings carrier $H$,
+there is an actual open neighbourhood $U$ and a finite SNC list $B$
+of closed smooth hypersurfaces in $U$, such that
+\[
+ H\cap U=\bigcup_{C\in B}C.
+\]
+The list is the inverse image of distinct coordinate hyperplanes under
+the actual coordinate biholomorphism.  In particular it is produced
+from the geometric coordinate condition rather than supplied as input.
+\end{theorem}
+\begin{proof}
+Choose the actual coordinates and $S$ from the definition at $x$,
+and let $U$ be their actual flattening domain.  It is open and contains
+$x$.  For each $j\in S$ take the actual set
+$C_j=\{y\in U:\psi_j(y)=0\}$.
+Under the preceding actual biholomorphism it is the inverse image of
+the corresponding coordinate hyperplane in the open target.
+The coordinate-hyperplane lemma and biholomorphic invariance produce
+the SNC condition on the whole of $U$.  Each branch is relatively
+closed and smooth.  The defining coordinate equation gives the stated
+carrier equality at every point of $U$.  Empty $S$ gives the empty
+branch list and an empty carrier on $U$.
+\end{proof}
+
+\begin{lemma}[The actual original divisor and exponents on an open subset]
+\label{hir:actual-divisor-open-germ-exponent-dictionary}
+\uses{hir:divisor-exponent,hir:open-restriction-ideal,hir:open-restriction-marked,hir:open-biholomorphism}
+\lean{Hironaka.HironakaNormalCrossingsLocalBranches.restrictDivisor,Hironaka.HironakaNormalCrossingsLocalBranches.ideal_restrictDivisor,Hironaka.HironakaNormalCrossingsLocalBranches.support_restrictDivisor,Hironaka.HironakaNormalCrossingsLocalBranches.mem_restrictDivisor_iff,Hironaka.HironakaNormalCrossingsLocalBranches.divExp_restrictDivisor_eq}
+\leanok
+For an actual effective divisor $D$ and an open subset $U$, its actual
+restriction $D_U$ has ideal $I_{D_U}=\iota^*I_D$ and support
+$\iota^{-1}\operatorname{Supp}D$, where $\iota:U\to M$ is inclusion.
+For every point $y\in U$ and every germ represented by a function $g$
+on $U$, membership in $I_{D_U,y}$ is precisely membership of the
+extension of $g$ in $I_{D,y}$.  For every carrier $C\subset U$ and
+$y\in C$, its genuine divisorial exponent satisfies
+\[
+ e_C(I_{D_U},y)=e_{\iota(C)}(I_D,\iota(y)).
+\]
+\end{lemma}
+\begin{proof}
+An open inclusion is holomorphic and has bijective differential at
+every point.  Pullback therefore preserves actual invertibility,
+giving the genuine effective divisor $D_U$.  The coherent pullback
+zero-locus identity gives the asserted actual support.
+
+For complete stalk membership, a function on $U$ may be extended by
+zero outside $U$: near an original point of $U$ this is exactly its
+holomorphic germ.  Finite holomorphic linear combinations of pulled-back
+original ideal germs extend to the corresponding original combinations,
+and every original germ restricts back.  Coherence identifies these
+spans with the complete original ideal stalk, proving the equivalence
+for every $g$.
+
+Actual marked cosupports restrict under open inclusion, for every mark.
+The inclusion identifies neighbourhood filters at $y$ with their
+restriction from $M$.  Since the original image of $C$ and $C$ have
+exactly matching membership at points of $U$, divisibility near $y$
+along $C$ is equivalent to divisibility near $\iota(y)$ along
+$\iota(C)$ at every mark.  Both actual invertible divisor ideals have
+nonzero germs in each stalk, so their genuine finite exponents are
+determined by these identical divisibility thresholds.  This proves
+the claimed original exponent equality.  The image carrier need not
+be globally closed in $M$; the argument uses its actual germ at a point
+of the open subset.
+\end{proof}
+
+\begin{theorem}[The full local divisor dictionary for general normal crossings]
+\label{hir:general-nc-original-divisor-local-product-dictionary}
+\uses{hir:general-nc-actual-local-snc-branches,hir:actual-divisor-open-germ-exponent-dictionary,hir:locally-finite-original-component-product}
+\lean{Hironaka.HironakaNormalCrossingsLocalBranches.exists_original_local_component_dictionary}
+\leanok
+Suppose the actual effective divisor $D$ is supported on a general
+normal crossings carrier $H$.  At every original point $x$, produce
+the open subset $U$ and actual SNC branch list $B$ above.  The genuine
+component family $\mathcal C(B)$ is locally finite, and there is one
+function $a$ on this whole family such that
+\[
+ a(C)=e_{\iota(C)}(I_D,\iota(y))\qquad(y\in C).
+\]
+Every point of $U$ has an open neighbourhood $V$ in $U$ and a finite
+list of distinct actual carriers $A=((C_i,a(C_i)))$ with positive
+coefficients, satisfying at every $y\in V$ the complete original
+stalk dictionary
+\[
+ g\in(I_{D_U})_y
+ \quad\Longleftrightarrow\quad
+ g\in\left(\prod_i I_{C_i}^{a(C_i)}\right)_y
+ \qquad(g:U\to\mathbb C).
+\]
+The left-hand side also equals membership of the extension of $g$
+in the actual original ideal of $D$.  No compactness or global smooth
+boundary list is assumed.
+\end{theorem}
+\begin{proof}
+Produce the actual SNC list $B$ from the original coordinate condition,
+and construct the actual restricted divisor $D_U$.
+Its support is contained in $\iota^{-1}H=\bigcup B$ by original support
+containment and the actual carrier equality.  Apply the genuine locally
+finite SNC divisor-product theorem to this actual divisor and actual
+branch list.  It produces $a$, local finiteness, and the positive finite
+lists with the complete stalk equivalence.  The preceding exponent
+transport identifies every produced coefficient with the exponent of
+the original divisor on the image of the genuine carrier, at every
+original carrier point.  The complete open-stalk equivalence supplies
+the final original ideal interpretation.  All choices are produced
+from the original geometric normal crossings condition and the actual
+divisor; no factor or coefficient dictionary is an incoming premise.
+\end{proof}
+
+These are genuine local branches and actual divisor-ideal identities.
+For a global normal crossings boundary whose branches have monodromy
+or self-intersections, compatibility and descent of canonical blowup
+sequences still require a separate proof.  The local dictionary does
+not assert that global resolution theorem or close that remaining G9
+obligation.

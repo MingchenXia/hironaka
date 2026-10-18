@@ -1,0 +1,46 @@
+\section{The actual positive original lower record and its computed insertion index}
+The empty original member is never selected by the actual members-through-reference-point restriction. After that genuine restriction, its position is the number of retained entries before its original index. This rank is computed from the actual original list and actual reference point. It can vary between masks, but it remains within the retained original empty prefix already proved for the literal positive lower record. Thus the entire actual positive lower records, rather than caller-supplied models, have a precise insertion dictionary needed for the recursive order comparison.
+
+\begin{lemma}[An ordered filter computes the exact new position of a retained inserted entry]
+\label{hir:positive-member-empty-filter}
+\lean{Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.filter_insertIdx_of_kept}
+\uses{hir:step-one-value}
+\leanok
+For an actual finite ordered list, a genuine insertion position within it, and an ordinary predicate keeping the inserted entry, filtering after insertion equals insertion into the filtered list at the number of kept entries of the actual prefix before that position. The entire filtered list retains its order, including repeated entries.
+\end{lemma}
+\begin{proof}
+Induct on the original finite ordered list and its insertion position. At position zero, the retained inserted entry is the new first entry, and the prefix has zero kept entries. At a positive position the original list has a first entry. If the predicate keeps that entry, it appears first on both sides and contributes one to the kept-prefix length; apply the induction to the remaining list and the preceding insertion position. If the predicate omits that entry, it appears on neither side and contributes zero to the kept-prefix length; the SAME induction applies to the remaining list. The genuine insertion bound excludes any missing-list case at a positive position. These cases prove the literal ordered list identity, without a supplied rank, relabelling or permutation certificate.
+\end{proof}
+
+\begin{lemma}[The whole true member restriction commutes with the actual computed empty insertion]
+\label{hir:positive-member-empty-record}
+\lean{Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.memberInsertionIndex,Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.memberRestrict_insertEmpty}
+\uses{hir:positive-member-empty-filter,bcalc:member-restriction-rebase,hir:step-one-value}
+\leanok
+Let $J$ be the actual head marked record and $E_0$ its actual original member list, with a valid insertion position in both. Insert an empty member at that SAME position into the whole boundary and original list. Apply the true original members-through-$p$ restriction. The resulting entire marked record equals empty insertion into the SAME old actual restricted record at the number of genuinely retained entries of the original boundary prefix before that position. Its carrier, ideal, mark and whole ordered boundary are retained literally.
+\end{lemma}
+\begin{proof}
+The actual member selection keeps an entry precisely when it is false that it belongs to the actual original list and contains $p$. Adding an empty entry to the original list leaves this predicate unchanged on EVERY boundary entry, since an empty entry never contains $p$. The new empty entry is genuinely kept. Apply the preceding ordered-filter identity to this SAME actual predicate: it computes the retained-boundary insertion position internally. The original member-restricted carrier is the intersection of the actual carrier with every selected member through $p$. The new empty member contributes no selected condition, so the entire selected intersection is unchanged. The actual coefficient ideal and marking depend on carrier, ideal and old mark and retain the boundary; inserting the empty member therefore does not change those fields. These four literal field identities prove equality of the entire actual member-restricted marked record, without an input selected set or lower-record certificate.
+\end{proof}
+
+\begin{theorem}[The entire actual original positive lower record has an internal insertion dictionary]
+\label{hir:positive-member-empty-actual}
+\lean{Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.actualLowerInsertionIndex,Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.lowerMarked_succ_insertEmpty_heq}
+\uses{hir:positive-member-empty-record,hir:step-one-empty-insertion-transform,hir:step-one-empty-insertion-masks,hir:open-restriction-marked}
+\leanok
+For ONLY an actual original marked record, its valid original empty insertion, a genuine head and reference point, the literal positive lowerMarked record for the inserted original input is heterogeneously equal, after identifying its internally computed original mask, to insertion at the internally computed retained-prefix rank into the literal positive lowerMarked record of the original input.
+\end{theorem}
+\begin{proof}
+The original Step-One whole coefficient-homogenized transform dictionary identifies the inserted actual head marked record with the SAME insertion into the actual old head record. Its true original member list has the SAME insertion, and its actual positive mask equals the actual old positive mask. Apply the preceding whole member restriction dictionary to those SAME actual head records and true original lists. A mask pullback acts entrywise on the whole ordered boundary, takes the inserted empty entry to empty, and commutes with insertion at the internally computed index. Substitute the internally proved equal masks. The original ideal, mark and entire carrier are preserved as actual fields; all original and future entries retain their actual order. No lower model, mask or desired equality is a hypothesis.
+\end{proof}
+
+\begin{theorem}[The computed index is within the actual retained original empty prefix]
+\label{hir:positive-member-empty-bound}
+\lean{Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.actualLowerInsertionIndex_le_retainedOriginalCount,Hironaka.HironakaOriginalPositiveMemberEmptyInsertion.actualLowerInsertionIndex_le_lowerBoundary}
+\uses{hir:positive-member-empty-actual,hir:member-future-boundary}
+\leanok
+The actual retained-prefix insertion rank is at most the true number of original members missing the reference point and at most the actual old positive lower boundary length.
+\end{theorem}
+\begin{proof}
+The actual insertion position lies within the original prefix. Therefore its original boundary prefix is exactly the corresponding prefix of the true original member list. On that prefix the genuine retention predicate is precisely failure to contain the reference point. Its filtered list is a sublist of the actual ordered list of ALL original members missing the reference point; its length is at most that whole retained-original length. The true positive lower boundary contains exactly that whole retained-original list, restricted to its actual mask, followed by its actual future entries, so its length is at least the same retained-original length. The preceding original lower empty-prefix producer proves every entry of this whole original prefix is empty on the SAME mask. Thus the internally computed insertion lies within the actual empty prefix, the input needed for the already proved uniform future-only monomial order map. No upper bound, selected count or history certificate is supplied.
+\end{proof}

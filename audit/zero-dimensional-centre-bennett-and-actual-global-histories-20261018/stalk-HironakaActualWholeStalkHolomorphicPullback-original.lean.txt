@@ -1,0 +1,132 @@
+import TranscendentalNakamaye.Pending.HironakaHolomorphicJetChartInvariance
+import TranscendentalNakamaye.Pending.FiniteGermIdealPullbackGenerators
+
+/-! Actual original holomorphic maps retain the ENTIRE original ideal in the genuine chart-stalk algebra. -/
+set_option autoImplicit false
+open Set Filter Classical
+open scoped Topology Manifold ContDiff
+namespace TranscendentalNakamaye.Pending.HironakaActualWholeStalkHolomorphicPullback
+noncomputable section
+open FirstPass FirstPass.HolomorphicIdealSheaves HolGerm
+  HironakaHolomorphicJetChartInvariance HironakaHolomorphicJetRankLoci
+  RelativePrincipalizationSpan
+variable {n m : ℕ} {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
+  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
+  [ChartedSpace (ComplexModel m) Y] [IsComplexManifold m Y]
+
+/-- The literal original preferred-chart expression, genuinely centred at the two original points. -/
+def actualTranslatedMap (f : Y → X) (y : Y) (z : ComplexModel m) : ComplexModel n :=
+  (chartAt (ComplexModel n) (f y)) (f ((chartAt (ComplexModel m) y).symm
+    (z + (chartAt (ComplexModel m) y) y))) - (chartAt (ComplexModel n) (f y)) (f y)
+
+/-- The genuine chart composition domain retains both actual original chart conditions. -/
+def actualTranslatedMapDomain (f : Y → X) (y : Y) : Set (ComplexModel m) :=
+  {z | z + (chartAt (ComplexModel m) y) y ∈ (chartAt (ComplexModel m) y).target ∧
+    f ((chartAt (ComplexModel m) y).symm (z + (chartAt (ComplexModel m) y) y)) ∈
+      (chartAt (ComplexModel n) (f y)).source}
+
+omit [IsComplexManifold n X] [IsComplexManifold m Y] in
+theorem actualTranslatedMapDomain_isOpen {f : Y → X}
+    (hf : ContMDiff 𝓘(ℂ,ComplexModel m) 𝓘(ℂ,ComplexModel n) ∞ f) (y : Y) :
+    IsOpen (actualTranslatedMapDomain (n := n) (m := m) f y) :=
+  ((chartAt (ComplexModel m) y).isOpen_inter_preimage_symm
+    ((chartAt (ComplexModel n) (f y)).open_source.preimage hf.continuous)).preimage
+      (continuous_id.add continuous_const)
+
+omit [IsComplexManifold n X] [IsComplexManifold m Y] in
+theorem zero_mem_actualTranslatedMapDomain (f : Y → X) (y : Y) :
+    (0 : ComplexModel m) ∈ actualTranslatedMapDomain (n := n) (m := m) f y := by
+  change 0 + (chartAt (ComplexModel m) y) y ∈ (chartAt (ComplexModel m) y).target ∧ _
+  simpa only [zero_add,(chartAt (ComplexModel m) y).left_inv (mem_chart_source _ y)] using
+    And.intro ((chartAt (ComplexModel m) y).map_source (mem_chart_source _ y))
+      (mem_chart_source (ComplexModel n) (f y))
+
+omit [IsComplexManifold n X] [IsComplexManifold m Y] in
+theorem actualTranslatedMap_zero (f : Y → X) (y : Y) : actualTranslatedMap (n := n) (m := m) f y 0 = 0 := by
+  simp only [actualTranslatedMap,zero_add,(chartAt (ComplexModel m) y).left_inv
+    (mem_chart_source _ y),sub_self]
+
+/-- The ACTUAL map and chart chain rule supply genuine holomorphicity near zero. -/
+theorem actualTranslatedMap_holomorphic {f : Y → X}
+    (hf : ContMDiff 𝓘(ℂ,ComplexModel m) 𝓘(ℂ,ComplexModel n) ∞ f) (y : Y) :
+    ∀ᶠ z in 𝓝 (0 : ComplexModel m), DifferentiableAt ℂ (actualTranslatedMap (n := n) (m := m) f y) z := by
+  filter_upwards [(actualTranslatedMapDomain_isOpen hf y).mem_nhds (zero_mem_actualTranslatedMapDomain (n := n) (m := m) f y)] with z hz
+  have hχ : DifferentiableAt ℂ (fun w => (chartAt (ComplexModel n) (f y))
+      (f ((chartAt (ComplexModel m) y).symm w))) (z + (chartAt (ComplexModel m) y) y) :=
+    mdifferentiableAt_iff_differentiableAt.mp
+      ((HolomorphicBoundedQuotient.mdifferentiableAt_chartAt hz.2).comp
+        (z + (chartAt (ComplexModel m) y) y)
+        ((hf.mdifferentiable (by simp)).mdifferentiableAt.comp (z + (chartAt (ComplexModel m) y) y)
+          (HolomorphicBoundedQuotient.mdifferentiableAt_chartAt_symm hz.1)))
+  exact (hχ.comp z (differentiableAt_id.add_const ((chartAt (ComplexModel m) y) y))).sub_const _
+
+/-- Independently constructed genuine entire original complex germ-algebra pullback. -/
+def actualHolomorphicGermPullback {f : Y → X}
+    (hf : ContMDiff 𝓘(ℂ,ComplexModel m) 𝓘(ℂ,ComplexModel n) ∞ f) (y : Y) :
+    HolGerm (ComplexModel n) →ₐ[ℂ] HolGerm (ComplexModel m) :=
+  compAlgHom (actualTranslatedMap (n := n) (m := m) f y) (actualTranslatedMap_holomorphic hf y) (actualTranslatedMap_zero f y)
+
+/-- EVERY actual original representative is sent to the SAME original composed function, with original scalar actions. -/
+theorem actualHolomorphicGermPullback_original_function {f : Y → X}
+    (hf : ContMDiff 𝓘(ℂ,ComplexModel m) 𝓘(ℂ,ComplexModel n) ∞ f) (y : Y)
+    (g : X → ℂ) (hg : HolomorphicAt n g (f y)) :
+    actualHolomorphicGermPullback hf y
+      (chartTranslatedGerm (f y) (f y) (mem_chart_source _ (f y)) g hg) =
+    chartTranslatedGerm y y (mem_chart_source _ y) (g ∘ f)
+      (hg.comp_contMDiff (Eventually.of_forall fun _ => hf.contMDiffAt)) := by
+  unfold actualHolomorphicGermPullback chartTranslatedGerm translatedGerm
+  rw [compAlgHom_mk]
+  apply HolGerm.mk_eq_mk_iff.mpr
+  filter_upwards [(actualTranslatedMapDomain_isOpen hf y).mem_nhds (zero_mem_actualTranslatedMapDomain (n := n) (m := m) f y)] with z hz
+  change g ((chartAt (ComplexModel n) (f y)).symm
+    (actualTranslatedMap (n := n) (m := m) f y z + (chartAt (ComplexModel n) (f y)) (f y))) = _
+  rw [actualTranslatedMap,sub_add_cancel,(chartAt (ComplexModel n) (f y)).left_inv hz.2]
+  rfl
+
+/-- BOTH entire original chart-stalk ideal directions retain the SAME literal finite original generators. -/
+theorem wholeChartStalkIdeal_eq_actual_generator_span (A : GermIdeal n X) (x : X) {s : ℕ}
+    (G : Fin s → X → ℂ) (hG : ∀ i, HolomorphicAt n (G i) x)
+    (hgen : ∀ g : X → ℂ, A.mem x g ↔ IsInSpanAt (n := n) (· ∈ Set.range G) x g) :
+    wholeChartStalkIdeal A x x (mem_chart_source _ x) =
+      Ideal.span (Set.range fun i => chartTranslatedGerm x x (mem_chart_source _ x) (G i) (hG i)) := by
+  let H : Fin s → ComplexModel n → ℂ := fun i z => G i ((chartAt (ComplexModel n) x).symm z)
+  have hH (i : Fin s) := CartanLocalReduction.holAt_comp_chart_symm (mem_chart_source _ x) (hG i)
+  have hbridge (g : X → ℂ) (hg : HolomorphicAt n g x) :
+      A.mem x g ↔ chartTranslatedGerm x x (mem_chart_source _ x) g hg ∈
+        translatedIdeal H ((chartAt (ComplexModel n) x) x) hH :=
+    (hgen g).trans ((ManifoldFiniteSpanChartTransport.isInSpanAt_comp_chartSymm_iff
+      (mem_chart_source _ x) G g).trans (isInSpanAt_iff_translatedGerm_mem H _ hH
+        (CartanLocalReduction.holAt_comp_chart_symm (mem_chart_source _ x) hg)))
+  change wholeChartStalkIdeal A x x (mem_chart_source _ x) = translatedIdeal H _ hH
+  apply le_antisymm
+  · apply Ideal.span_le.mpr
+    rintro _ ⟨g,hg,hmem,rfl⟩
+    exact (hbridge g hg).mp hmem
+  · apply Ideal.span_le.mpr
+    rintro _ ⟨i,rfl⟩
+    exact Ideal.subset_span ⟨G i,hG i,(hgen (G i)).mpr (CoherentIdealColon.isInSpanAt_range_self hG i),rfl⟩
+
+/-- ONLY original coherence constructs the ENTIRE ideal image dictionary for the actual original sheaf pullback. -/
+theorem map_wholeChartStalkIdeal_actual_pullback {f : Y → X}
+    (hf : ContMDiff 𝓘(ℂ,ComplexModel m) 𝓘(ℂ,ComplexModel n) ∞ f)
+    (A : GermIdeal n X) (hA : A.IsCoherent) (y : Y) :
+    Ideal.map (actualHolomorphicGermPullback hf y).toRingHom
+      (wholeChartStalkIdeal A (f y) (f y) (mem_chart_source _ (f y))) =
+      wholeChartStalkIdeal (GermIdeal.pullback (m := m) f A) y y (mem_chart_source _ y) := by
+  have hfat : ∀ᶠ z in 𝓝 y, ContMDiffAt 𝓘(ℂ,ComplexModel m) 𝓘(ℂ,ComplexModel n) ∞ f z :=
+    Eventually.of_forall fun _ => hf.contMDiffAt
+  obtain ⟨U,hU,hyU,s,G,hG,hgen,hpb⟩ :=
+    FiniteGermIdealPullbackGenerators.exists_finite_generators_pullback_of_isCoherent hfat A hA
+  have hGhol (i : Fin s) : HolomorphicAt n (G i) (f y) :=
+    InvertibleIdealQuotient.holomorphicAt_of_mdifferentiableOn hU (hG i) hyU
+  have hGcomp (i : Fin s) : HolomorphicAt m (G i ∘ f) y := (hGhol i).comp_contMDiff hfat
+  rw [wholeChartStalkIdeal_eq_actual_generator_span A (f y) G hGhol (hgen (f y) hyU),
+    wholeChartStalkIdeal_eq_actual_generator_span (GermIdeal.pullback (m := m) f A) y
+      (fun i => G i ∘ f) hGcomp hpb,Ideal.map_span,← Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  exact actualHolomorphicGermPullback_original_function hf y (G i) (hGhol i)
+
+end
+end TranscendentalNakamaye.Pending.HironakaActualWholeStalkHolomorphicPullback

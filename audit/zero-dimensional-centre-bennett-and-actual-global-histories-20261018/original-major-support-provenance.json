@@ -1,0 +1,800 @@
+[
+  {
+    "published_source_revision": "bae7068afc70d624cd8563fd4291436195a7f25f",
+    "source_parent_module": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualFormalStandardMonomialHS.lean",
+    "source_parent_sha256": "aad17e550911eaaaa7216f2697a964c69a83350a7f10b225be9da34adc1ebdfb",
+    "compiler_ilean_sha256": "589cafc68fd885730aa802fa6ce5e6f856a8fca2cd4b8a544cdcbf451c823163",
+    "destination_module": "Hironaka.Support.FormalStandardMonomialHSComplementExact",
+    "destination_path": "Hironaka/Support/FormalStandardMonomialHSComplementExact.lean",
+    "destination_sha256": "ee39e84320d23332ad4c81bcbe9bbc756c70b5c25cbc84c8fdc3edb59a86b9b5",
+    "classification": "COMPLETE_ORIGINAL_PARENT_REMAINDER_WITH_ALREADY_PUBLISHED_DECLARATION_REUSED",
+    "original_context_source": "import TranscendentalNakamaye.Pending.HironakaActualFormalVertexDivision\n\n/-! Actual diagram-complement monomials give the genuine whole formal jet quotient and HS count. -/\nset_option autoImplicit false\nopen Set Classical\nnamespace TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS\nnoncomputable section\nopen FirstPass HolGerm HironakaHolomorphicPointJets HironakaRelativeNormalMonomialBasis\n  HironakaActualOriginalFormalTaylor HironakaActualOriginalFormalHSTransfer\n  HironakaActualFormalInitialDiagram HironakaActualFormalVertexDivision\n\nvariable {n : \u2115}\n\n\n\n/-- Genuine bounded diagram-avoiding series are separated by the WHOLE actual formal jet quotient. -/\ntheorem bounded_diagram_avoiding_series_eq_zero (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (q : \u2115) (P : MvPowerSeries (Fin n) \u2102)\n    (hP : \u2200 a, MvPowerSeries.coeff a P \u2260 0 \u2192\n      normalExponentDegree a < q \u2227 a \u2209 actualInitialDiagram MonomialOrder.degLex I)\n    (hmem : P \u2208 I \u2294 genuineFormalVariables n ^ q) : P=0 := by\n  obtain \u27e8G,hG,Z,hZ,he\u27e9 := Submodule.mem_sup.mp hmem\n  have hz := (mem_genuineFormalVariables_pow_iff_coefficients_zero n q Z).mp hZ\n  by_contra hne\n  let a := actualInitialExponent MonomialOrder.degLex P hne\n  have ha : MvPowerSeries.coeff a P \u2260 0 := (actualInitialExponent_spec _ P hne).1\n  have hs := hP a ha\n  have hGa : MvPowerSeries.coeff a G=MvPowerSeries.coeff a P := by\n    have hc := congrArg (MvPowerSeries.coeff a) he\n    rw [map_add,hz a hs.1,add_zero] at hc\n    exact hc\n  have hGne : G \u2260 0 := by\n    intro hzero\n    have hc : MvPowerSeries.coeff a G=0 := by rw [hzero,map_zero]\n    exact ha (hGa.symm.trans hc)\n  have hgexp : actualInitialExponent MonomialOrder.degLex G hGne=a := by\n    apply actualInitialExponent_eq_of_coefficients\n    \u00b7 rwa [hGa]\n    \u00b7 intro b hb\n      have hdb : normalExponentDegree b < q :=\n        lt_of_le_of_lt (actual_degree_le_of_deglex_lt b a hb) hs.1\n      have hp := coeff_eq_zero_of_lt_actualInitialExponent MonomialOrder.degLex P hne b hb\n      have hc := congrArg (MvPowerSeries.coeff b) he\n      rw [map_add,hz b hdb,add_zero,hp] at hc\n      exact hc\n  exact hs.2 \u27e8G,hG,hGne,hgexp\u27e9\n\n/-- The finite genuine diagram complement within the ORIGINAL actual bounded exponent index. -/\nabbrev actualStandardIndex (n : \u2115) (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :=\n  {a : normalExponentIndex n q // (a : Fin n \u2192\u2080 \u2115) \u2209 actualInitialDiagram MonomialOrder.degLex I}\n\n/-- The actual bounded exponent construction internally makes its genuine diagram complement finite. -/\ninstance actualStandardIndexFintype (n : \u2115) (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :\n    Fintype (actualStandardIndex n I q) := by\n  classical\n  letI := normalExponentFintype n q\n  exact inferInstance\n\n/-- The literal finite sum of ACTUAL formal monomials, using the genuine complex action. -/\ndef actualStandardLift (n : \u2115) (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :\n    (actualStandardIndex n I q \u2192 \u2102) \u2192\u2097[\u2102] MvPowerSeries (Fin n) \u2102 where\n  toFun c := \u2211 a : actualStandardIndex n I q, MvPowerSeries.monomial a.val.val (c a)\n  map_add' c d := by simp only [Pi.add_apply,map_add,Finset.sum_add_distrib]\n  map_smul' c d := by simp only [Pi.smul_apply,map_smul,Finset.smul_sum,RingHom.id_apply]\n\n/-- Every actual displayed monomial retains precisely its original complex coefficient. -/\ntheorem actualStandardLift_coefficient (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115)\n    (c : actualStandardIndex n I q \u2192 \u2102) (a : actualStandardIndex n I q) :\n    MvPowerSeries.coeff a.val.val (actualStandardLift n I q c)=c a := by\n  change MvPowerSeries.coeff a.val.val\n    (\u2211 b : actualStandardIndex n I q, MvPowerSeries.monomial b.val.val (c b))=c a\n  rw [map_sum,Finset.sum_eq_single_of_mem a (Finset.mem_univ a)]\n  \u00b7 exact MvPowerSeries.coeff_monomial_same _ _\n  \u00b7 intro b _ hne\n    have he : a.val.val \u2260 b.val.val := fun h => hne (Subtype.ext (Subtype.ext h.symm))\n    simp only [MvPowerSeries.coeff_monomial,if_neg he]\n\n/-- Every actual coefficient outside the true bounded diagram complement is zero. -/\ntheorem actualStandardLift_coefficient_outside (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115)\n    (c : actualStandardIndex n I q \u2192 \u2102) (b : Fin n \u2192\u2080 \u2115)\n    (hb : \u00acnormalExponentDegree b < q \u2228 b \u2208 actualInitialDiagram MonomialOrder.degLex I) :\n    MvPowerSeries.coeff b (actualStandardLift n I q c)=0 := by\n  change MvPowerSeries.coeff b\n    (\u2211 a : actualStandardIndex n I q, MvPowerSeries.monomial a.val.val (c a))=0\n  rw [map_sum]\n  apply Finset.sum_eq_zero\n  intro a _\n  have he : b \u2260 a.val.val := by\n    intro he\n    rcases hb with hd | hi\n    \u00b7 exact hd (he \u25b8 a.val.property)\n    \u00b7 exact a.property (he \u25b8 hi)\n  simp only [MvPowerSeries.coeff_monomial,if_neg he]\n\n/-- The true finite standard lift has exactly the actual bounded diagram-complement support. -/\ntheorem actualStandardLift_support (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115)\n    (c : actualStandardIndex n I q \u2192 \u2102) (b : Fin n \u2192\u2080 \u2115)\n    (hb : MvPowerSeries.coeff b (actualStandardLift n I q c) \u2260 0) :\n    normalExponentDegree b < q \u2227 b \u2209 actualInitialDiagram MonomialOrder.degLex I := by\n  constructor\n  \u00b7 by_contra h\n    exact hb (actualStandardLift_coefficient_outside I q c b (Or.inl h))\n  \u00b7 intro h\n    exact hb (actualStandardLift_coefficient_outside I q c b (Or.inr h))\n\n/-- The literal actual standard monomial map into the WHOLE genuine formal jet quotient. -/\ndef actualStandardQuotientMap (n : \u2115) (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :\n    (actualStandardIndex n I q \u2192 \u2102) \u2192\u2097[\u2102]\n      (MvPowerSeries (Fin n) \u2102 \u29f8 (I \u2294 genuineFormalVariables n ^ q)) :=\n  (Ideal.Quotient.mk\u2090 \u2102 (I \u2294 genuineFormalVariables n ^ q)).toLinearMap.comp (actualStandardLift n I q)\n\n/-- EVERY actual coefficient vector retains its genuine literal finite monomial numerator. -/\ntheorem actualStandardQuotientMap_apply (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115)\n    (c : actualStandardIndex n I q \u2192 \u2102) :\n    actualStandardQuotientMap n I q c=\n      Ideal.Quotient.mk (I \u2294 genuineFormalVariables n ^ q) (actualStandardLift n I q c) := rfl\n\n/-- Actual whole jet separation internally proves genuine monomial map injectivity. -/\ntheorem actualStandardQuotientMap_injective (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :\n    Function.Injective (actualStandardQuotientMap n I q) := by\n  intro c d hcd\n  have hz : actualStandardQuotientMap n I q (c-d)=0 := by rw [map_sub,hcd,sub_self]\n  rw [actualStandardQuotientMap_apply,Ideal.Quotient.eq_zero_iff_mem] at hz\n  have he := bounded_diagram_avoiding_series_eq_zero I q (actualStandardLift n I q (c-d))\n    (actualStandardLift_support I q (c-d)) hz\n  have hvec : c-d=0 := by\n    funext a\n    have hc := congrArg (MvPowerSeries.coeff a.val.val) he\n    rw [actualStandardLift_coefficient,map_zero] at hc\n    exact hc\n  exact sub_eq_zero.mp hvec\n\n/-- Genuine formal division and the actual formal power kernel reach EVERY whole quotient class. -/\ntheorem actualStandardQuotientMap_surjective (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :\n    Function.Surjective (actualStandardQuotientMap n I q) := by\n  intro z\n  obtain \u27e8F,rfl\u27e9 := Ideal.Quotient.mk_surjective z\n  let R := actualFormalRemainder MonomialOrder.degLex I F\n  let c : actualStandardIndex n I q \u2192 \u2102 := fun a => MvPowerSeries.coeff a.val.val R\n  have hrem : R-actualStandardLift n I q c \u2208 genuineFormalVariables n ^ q := by\n    apply (mem_genuineFormalVariables_pow_iff_coefficients_zero n q _).mpr\n    intro b hb\n    rw [map_sub]\n    apply sub_eq_zero.mpr\n    by_cases hi : b \u2208 actualInitialDiagram MonomialOrder.degLex I\n    \u00b7 change MvPowerSeries.coeff b (actualFormalRemainder MonomialOrder.degLex I F)=_\n      rw [actualFormalRemainder_coefficient_diagram MonomialOrder.degLex I F b hi,\n        actualStandardLift_coefficient_outside I q c b (Or.inr hi)]\n    \u00b7 exact (actualStandardLift_coefficient I q c \u27e8\u27e8b,hb\u27e9,hi\u27e9).symm\n  have hdiff : F-R \u2208 I := by\n    have he : F-R=\u2211 a : actualInitialVertices MonomialOrder.degLex I,\n        actualFormalQuotient MonomialOrder.degLex I F a*actualVertexSeries MonomialOrder.degLex I a :=\n      sub_eq_iff_eq_add.mpr (actual_formal_vertex_division MonomialOrder.degLex I F)\n    rw [he]\n    exact I.sum_mem (fun a _ => I.mul_mem_left _ (actualVertexSeries_spec MonomialOrder.degLex I a).1)\n  have htotal : F-actualStandardLift n I q c \u2208 I \u2294 genuineFormalVariables n ^ q := by\n    have he : F-actualStandardLift n I q c=(F-R)+(R-actualStandardLift n I q c) := by abel\n    rw [he]\n    exact Ideal.add_mem _ (Ideal.mem_sup_left hdiff) (Ideal.mem_sup_right hrem)\n  refine \u27e8c,?_\u27e9\n  rw [actualStandardQuotientMap_apply]\n  apply Ideal.Quotient.eq.mpr\n  have he : actualStandardLift n I q c-F=-(F-actualStandardLift n I q c) := by abel\n  rw [he]\n  exact (I \u2294 genuineFormalVariables n ^ q).neg_mem htotal\n\n/-- The internally proved genuine monomial bijection retains the EXISTING complex action. -/\ndef actualStandardQuotientLinearEquiv (n : \u2115) (I : Ideal (MvPowerSeries (Fin n) \u2102)) (q : \u2115) :\n    (actualStandardIndex n I q \u2192 \u2102) \u2243\u2097[\u2102]\n      (MvPowerSeries (Fin n) \u2102 \u29f8 (I \u2294 genuineFormalVariables n ^ q)) :=\n  LinearEquiv.ofBijective (actualStandardQuotientMap n I q)\n    \u27e8actualStandardQuotientMap_injective I q,actualStandardQuotientMap_surjective I q\u27e9\n\n/-- EVERY actual formal HS value is the true cardinality of its bounded initial diagram complement. -/\ntheorem genuineFormalHilbertSamuelValue_eq_card_standardIndex (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (\u2113 : \u2115) :\n    genuineFormalHilbertSamuelValue n I \u2113=Fintype.card (actualStandardIndex n I (\u2113+1)) := by\n  rw [genuineFormalHilbertSamuelValue,\u2190 (actualStandardQuotientLinearEquiv n I (\u2113+1)).finrank_eq,\n    Module.finrank_fintype_fun_eq_card]\n\n/-- EVERY EXISTING original HS value is computed by the actual diagram of its GENUINE whole Taylor extension. -/\ntheorem hilbertSamuelValue_eq_card_actual_formal_standardIndex\n    (J : Ideal (HolGerm (ComplexModel (0+n)))) (\u2113 : \u2115) :\n    hilbertSamuelValue J \u2113=Fintype.card (actualStandardIndex n\n      (Ideal.map (originalTaylorAlgHom n).toRingHom J) (\u2113+1)) :=\n  (hilbertSamuelValue_eq_genuine_formal_extension n J \u2113).trans\n    (genuineFormalHilbertSamuelValue_eq_card_standardIndex _ \u2113)\n\nend\nend TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS\n",
+    "original_context_sha256": "b1bae4f9e0269d86033ad54dd09f4d8d779b41683f30a0223d7186c5ea9013d4",
+    "pure_existing_or_new_original_support_imports": [
+      "Hironaka.Support.ActualDegreeLexBoundExact"
+    ],
+    "complete_original_declarations": [
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardIndex",
+        "compiler_source_range": [
+          52,
+          0,
+          54,
+          97
+        ],
+        "source_byte_range": [
+          2625,
+          2916
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardIndex-original.lean.txt",
+        "complete_original_declaration_sha256": "c99e04e086859a00d321f95693038ef4c44f1e7761f663ac77c134d5cc7d0bab"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardIndexFintype",
+        "compiler_source_range": [
+          56,
+          0,
+          61,
+          21
+        ],
+        "source_byte_range": [
+          2918,
+          3235
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardIndexFintype-original.lean.txt",
+        "complete_original_declaration_sha256": "6b01d7fee0c39294cabc69f5e6507019e924ab9ab1a93eaec1369c39fdb24a12"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardLift",
+        "compiler_source_range": [
+          63,
+          0,
+          68,
+          89
+        ],
+        "source_byte_range": [
+          3237,
+          3751
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardLift-original.lean.txt",
+        "complete_original_declaration_sha256": "33538b4831175dafec4e465195c9bac152d8457ee94dbd00f9d146c9d9630794"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardLift_coefficient",
+        "compiler_source_range": [
+          70,
+          0,
+          80,
+          54
+        ],
+        "source_byte_range": [
+          3753,
+          4483
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardLift_coefficient-original.lean.txt",
+        "complete_original_declaration_sha256": "ada8db931a1561dd61dfc3d62b2395bab53d430449531cccf0af8be64e93e07c"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardLift_coefficient_outside",
+        "compiler_source_range": [
+          82,
+          0,
+          97,
+          52
+        ],
+        "source_byte_range": [
+          4485,
+          5262
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardLift_coefficient_outside-original.lean.txt",
+        "complete_original_declaration_sha256": "a05821e2aecca55757ec6022d92f94fa2a85d47461fa9ef78c5f7566e35f1c43"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardLift_support",
+        "compiler_source_range": [
+          99,
+          0,
+          108,
+          72
+        ],
+        "source_byte_range": [
+          5264,
+          5862
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardLift_support-original.lean.txt",
+        "complete_original_declaration_sha256": "5da3e6206c340ae022f3cca75e39e025bc10cc9e9e1cf7c5c8003d523141c9f8"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardQuotientLinearEquiv",
+        "compiler_source_range": [
+          171,
+          0,
+          176,
+          86
+        ],
+        "source_byte_range": [
+          9402,
+          9875
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardQuotientLinearEquiv-original.lean.txt",
+        "complete_original_declaration_sha256": "7e47f0ffd6766ded164d9e7d29aa9fc4c8c495b88d2c8890ac7b9b011a2cc9fd"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap",
+        "compiler_source_range": [
+          110,
+          0,
+          114,
+          103
+        ],
+        "source_byte_range": [
+          5864,
+          6287
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardQuotientMap-original.lean.txt",
+        "complete_original_declaration_sha256": "b8ed874c5f0638b3f92e2c8a3c06317d89e575be707aca1d76e4f1e49b904b38"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap_apply",
+        "compiler_source_range": [
+          116,
+          0,
+          120,
+          94
+        ],
+        "source_byte_range": [
+          6289,
+          6654
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardQuotientMap_apply-original.lean.txt",
+        "complete_original_declaration_sha256": "499054b23ad84d602243435e1cf8268e0bd40a860942ac8c08fea24ab7d80976"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap_injective",
+        "compiler_source_range": [
+          122,
+          0,
+          135,
+          27
+        ],
+        "source_byte_range": [
+          6656,
+          7407
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardQuotientMap_injective-original.lean.txt",
+        "complete_original_declaration_sha256": "d2ede6594494ea3c0194d90affd18e2ea36fa76ab9853b32acfff48247822796"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap_surjective",
+        "compiler_source_range": [
+          137,
+          0,
+          169,
+          57
+        ],
+        "source_byte_range": [
+          7409,
+          9400
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actualStandardQuotientMap_surjective-original.lean.txt",
+        "complete_original_declaration_sha256": "4447fcd103f993f908e11c1e35240a342d6ac3b98658218300a554686626bcfc"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.bounded_diagram_avoiding_series_eq_zero",
+        "compiler_source_range": [
+          20,
+          0,
+          50,
+          30
+        ],
+        "source_byte_range": [
+          1036,
+          2623
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-bounded_diagram_avoiding_series_eq_zero-original.lean.txt",
+        "complete_original_declaration_sha256": "444c2e90444f0239d944f7eb80714d05bde81f0665a6f50761cf768714992674"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.genuineFormalHilbertSamuelValue_eq_card_standardIndex",
+        "compiler_source_range": [
+          178,
+          0,
+          183,
+          39
+        ],
+        "source_byte_range": [
+          9877,
+          10338
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-genuineFormalHilbertSamuelValue_eq_card_standardIndex-original.lean.txt",
+        "complete_original_declaration_sha256": "7eaa16b8b2cb9fe99738c8405ee3f80a48b777e5b733d33483ffc6c74d3a2799"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.hilbertSamuelValue_eq_card_actual_formal_standardIndex",
+        "compiler_source_range": [
+          185,
+          0,
+          191,
+          63
+        ],
+        "source_byte_range": [
+          10340,
+          10839
+        ],
+        "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-hilbertSamuelValue_eq_card_actual_formal_standardIndex-original.lean.txt",
+        "complete_original_declaration_sha256": "2e9f5e65854231f7ecb93cd2b00afa3d988c12bf709f3cb87a3a212cc3972615"
+      }
+    ],
+    "recorded_context_omissions": [
+      {
+        "reason": "The complete original degree-bound lemma is already published verbatim.",
+        "omitted_original_declaration": {
+          "name": "TranscendentalNakamaye.Pending.HironakaActualFormalStandardMonomialHS.actual_degree_le_of_deglex_lt",
+          "compiler_source_range": [
+            13,
+            0,
+            18,
+            84
+          ],
+          "source_byte_range": [
+            582,
+            1034
+          ],
+          "complete_original_declaration": "HironakaActualFormalStandardMonomialHS-actual_degree_le_of_deglex_lt-original.lean.txt",
+          "complete_original_declaration_sha256": "abb33973a5685de3db457505e08780e2116d369174efa3fd823be14a772fb8fb"
+        },
+        "published_source": "Hironaka/Support/ActualDegreeLexBoundExact.lean",
+        "published_source_sha256": "6e2afe05bbf7d5117467c7e23aec86290c993d196495ad6c28809667405b05b6"
+      }
+    ],
+    "declaration_local_original_instance_contexts": [],
+    "proof_tokens_edited": 0
+  },
+  {
+    "published_source_revision": "bae7068afc70d624cd8563fd4291436195a7f25f",
+    "source_parent_module": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualTranslatedInitialHS.lean",
+    "source_parent_sha256": "abf1338e4b0377fac923a68aa6ee657941517694fb6d6d9332fecedc3802af42",
+    "compiler_ilean_sha256": "2cff0071598e75e767a5aa73f5d12bfdcb91850cba3aa3b9cb97c0dd25638ca6",
+    "destination_module": "Hironaka.Support.TranslatedInitialHSOriginalExact",
+    "destination_path": "Hironaka/Support/TranslatedInitialHSOriginalExact.lean",
+    "destination_sha256": "fbedd196784cc6e4afb64146f485ccaeea602df48969184e681bb4c80e2c5dbf",
+    "classification": "COMPLETE_ORIGINAL_SOURCE_ALL_PUBLIC_ROOTS_COMPARED_TO_ENTIRE_ORIGINAL_PARENT",
+    "original_context_source": "import TranscendentalNakamaye.Pending.HironakaActualFiniteInitialGeneration\nimport TranscendentalNakamaye.Pending.HironakaActualCoordinateSpecializationHS\nimport Mathlib.RingTheory.MvPolynomial.Homogeneous\n\n/-! Actual translated homogeneous initial polynomial ideals and their genuine holomorphic ray family. -/\nset_option autoImplicit false\nopen Set Filter Classical\nopen scoped Topology Manifold ContDiff\nnamespace TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS\nnoncomputable section\nopen FirstPass HolGerm HironakaHolomorphicPointJets HironakaHolomorphicJetChartInvariance\n  HironakaHolomorphicJetMonomialSpan HironakaRelativeNormalIdeal HironakaRelativeNormalMonomialBasis\n  HironakaActualOriginalTaylorPolynomial HironakaActualOriginalFormalTaylor\n  HironakaActualFormalIdealContraction HironakaActualOriginalFormalHSTransfer\n  HironakaActualFormalInitialDiagram HironakaActualFormalVertexDivision\n  HironakaActualHomogeneousInitialHS HironakaActualFiniteInitialGeneration\n  HironakaActualHolomorphicFibreHS HironakaSmoothCentreRealDomainActualAmbientHS\nvariable {n : \u2115}\n\n/-- True entire polynomial inclusion internally supplies genuine polynomial homogeneity. -/\ntheorem actualInitialVertexPolynomial_isHomogeneous (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (a : actualInitialVertices MonomialOrder.degLex I) :\n    (actualInitialVertexPolynomial I a).IsHomogeneous (normalExponentDegree a.val) := by\n  intro b hb\n  have hc : MvPowerSeries.coeff b\n      (actualHomogeneousInitialForm (actualVertexSeries MonomialOrder.degLex I a)\n        (actualVertexSeries_spec MonomialOrder.degLex I a).2.choose) \u2260 0 := by\n    rw [\u2190 actualInitialVertexPolynomial_coe,MvPolynomial.coeff_coe]\n    exact hb\n  have hh : (actualHomogeneousInitialForm (actualVertexSeries MonomialOrder.degLex I a)\n      (actualVertexSeries_spec MonomialOrder.degLex I a).2.choose).IsHomogeneous (normalExponentDegree a.val) := by\n    rw [actualHomogeneousInitialForm,actualHomogeneousInitialDegree,\n      (actualVertexSeries_spec MonomialOrder.degLex I a).2.choose_spec.1]\n    intro c hcc\n    exact MvPowerSeries.isHomogeneous_homogeneousComponent _ _ hcc\n  exact hh hc\n\n-- Same finite-monomial argument as BingWangEntropy.homogeneousPolynomial_eval\u2082_scaled;\n-- projects have separate Lean libraries, so retain the needed complex-algebra form here.\nprivate theorem homogeneous_aeval_scaled {S : Type*} [CommSemiring S] [Algebra \u2102 S]\n    (P : MvPolynomial (Fin n) \u2102) (d : \u2115) (hP : P.IsHomogeneous d) (x : Fin n \u2192 S) (c : S) :\n    MvPolynomial.aeval (fun i => c*x i) P=c^d*MvPolynomial.aeval x P := by\n  rw [\u2190 P.support_sum_monomial_coeff,map_sum,map_sum,Finset.mul_sum]\n  apply Finset.sum_congr rfl\n  intro e he\n  simp only [MvPolynomial.aeval_monomial,Finsupp.prod,mul_pow,\n    Finset.prod_mul_distrib,Finset.prod_pow_eq_pow_sum]\n  rw [\u2190 hP.degree_eq_sum_deg_support he]\n  ac_rfl\n\nprivate theorem polynomial_contDiff {E : Type*} [NormedAddCommGroup E] [NormedSpace \u2102 E]\n    (P : MvPolynomial (Fin n) \u2102) (x : Fin n \u2192 E \u2192 \u2102) (hx : \u2200 i, ContDiff \u2102 \u221e (x i)) :\n    ContDiff \u2102 \u221e (fun z => MvPolynomial.eval (fun i => x i z) P) := by\n  induction P using MvPolynomial.induction_on with\n  | C c => simpa only [MvPolynomial.eval_C] using (contDiff_const : ContDiff \u2102 \u221e (fun _ : E => c))\n  | add P Q hP hQ => simpa only [MvPolynomial.eval_add] using hP.add hQ\n  | mul_X P i hP => simpa only [MvPolynomial.eval_mul,MvPolynomial.eval_X] using hP.mul (hx i)\n\n/-- Literal translation is polynomial evaluation at the SAME actual original coordinate germs. -/\ndef actualTranslatedPolynomialEval (n : \u2115) (p : Fin n \u2192 \u2102) :\n    MvPolynomial (Fin n) \u2102 \u2192\u2090[\u2102] HolGerm (ComplexModel (0+n)) :=\n  MvPolynomial.aeval (fun i => normalCoordinate 0 n i+algebraMap \u2102 _ (p i))\n\nprivate theorem translated_polynomial_holomorphic (p : Fin n \u2192 \u2102) (P : MvPolynomial (Fin n) \u2102) :\n    \u2200\u1da0 z in \ud835\udcdd (0 : ComplexModel (0+n)),\n      DifferentiableAt \u2102 (fun w : ComplexModel (0+n) => MvPolynomial.eval (fun i => w (i.natAdd 0)+p i) P) z := by\n  have h := polynomial_contDiff P (fun i (z : ComplexModel (0+n)) => z (i.natAdd 0)+p i)\n    (fun i => (EuclideanSpace.proj (i.natAdd 0) : ComplexModel (0+n) \u2192L[\u2102] \u2102).contDiff.add contDiff_const)\n  exact Eventually.of_forall fun _ => (h.differentiable (by simp)).differentiableAt\n\nprivate theorem translated_polynomial_mk (p : Fin n \u2192 \u2102) (P : MvPolynomial (Fin n) \u2102) :\n    actualTranslatedPolynomialEval n p P=\n      HolGerm.mk (fun z : ComplexModel (0+n) => MvPolynomial.eval (fun i => z (i.natAdd 0)+p i) P)\n        (translated_polynomial_holomorphic p P) := by\n  induction P using MvPolynomial.induction_on with\n  | C c =>\n      simp only [actualTranslatedPolynomialEval,MvPolynomial.aeval_C,MvPolynomial.eval_C]\n      rfl\n  | add P Q hP hQ =>\n      rw [map_add,hP,hQ]\n      rw [\u2190 HolGerm.mk_add]\n      apply HolGerm.mk_eq_mk_iff.mpr\n      exact Eventually.of_forall fun z => MvPolynomial.eval_add.symm\n  | mul_X P i hP =>\n      rw [map_mul,hP,actualTranslatedPolynomialEval,MvPolynomial.aeval_X]\n      let hx : \u2200\u1da0 z in \ud835\udcdd (0 : ComplexModel (0+n)),\n          DifferentiableAt \u2102 (fun w : ComplexModel (0+n) => w (i.natAdd 0)) z :=\n        Eventually.of_forall fun _ => (EuclideanSpace.proj (i.natAdd 0) : ComplexModel (0+n) \u2192L[\u2102] \u2102).differentiableAt\n      change HolGerm.mk (fun z : ComplexModel (0+n) => MvPolynomial.eval (fun j => z (j.natAdd 0)+p j) P)\n        (translated_polynomial_holomorphic p P)*\n          (HolGerm.mk (fun z : ComplexModel (0+n) => z (i.natAdd 0)) hx+\n            HolGerm.mk (fun _ : ComplexModel (0+n) => p i) (eventually_differentiableAt_const (p i)))=_\n      rw [\u2190 HolGerm.mk_add,\u2190 HolGerm.mk_mul]\n      apply HolGerm.mk_eq_mk_iff.mpr\n      exact Eventually.of_forall fun z => by simp [MvPolynomial.eval_mul,MvPolynomial.eval_X]\n\n/-- The actual ORIGINAL translated homogeneous initial ideal, without an analytic-model premise. -/\ndef actualTranslatedInitialIdeal (I : Ideal (MvPowerSeries (Fin n) \u2102)) (p : Fin n \u2192 \u2102) :\n    Ideal (HolGerm (ComplexModel (0+n))) :=\n  Ideal.span (range fun a : actualInitialVertices MonomialOrder.degLex I =>\n    actualTranslatedPolynomialEval n p (actualInitialVertexPolynomial I a))\n\n/-- Only genuine finite polynomials are translated in the actual formal ring. -/\ndef actualTranslatedInitialFormalIdeal (I : Ideal (MvPowerSeries (Fin n) \u2102)) (p : Fin n \u2192 \u2102) :\n    Ideal (MvPowerSeries (Fin n) \u2102) :=\n  Ideal.span (range fun a : actualInitialVertices MonomialOrder.degLex I =>\n    MvPolynomial.aeval (fun i => MvPowerSeries.X i+algebraMap \u2102 _ (p i)) (actualInitialVertexPolynomial I a))\n\n/-- Genuine Taylor coordinates and true polynomial extensionality supply BOTH whole translated ideal directions. -/\ntheorem actualTranslatedInitialIdeal_formal_extension (I : Ideal (MvPowerSeries (Fin n) \u2102)) (p : Fin n \u2192 \u2102) :\n    Ideal.map (originalTaylorAlgHom n).toRingHom (actualTranslatedInitialIdeal I p)=\n      actualTranslatedInitialFormalIdeal I p := by\n  have hm : (originalTaylorAlgHom n).comp (actualTranslatedPolynomialEval n p)=\n      MvPolynomial.aeval (fun i => MvPowerSeries.X i+algebraMap \u2102 _ (p i)) := by\n    apply MvPolynomial.algHom_ext\n    intro i\n    change originalTaylorAlgHom n (actualTranslatedPolynomialEval n p (MvPolynomial.X i))=_\n    simp only [actualTranslatedPolynomialEval,MvPolynomial.aeval_X,map_add,\n      originalTaylorAlgHom_coordinate,AlgHom.commutes]\n  rw [actualTranslatedInitialIdeal,Ideal.map_span,\u2190 Set.range_comp]\n  apply congrArg Ideal.span\n  apply congrArg Set.range\n  funext a\n  exact DFunLike.congr_fun hm (actualInitialVertexPolynomial I a)\n\nprivate theorem translated_initial_zero (I : Ideal (MvPowerSeries (Fin n) \u2102)) :\n    actualTranslatedInitialIdeal I 0=actualOriginalInitialVertexIdeal I := by\n  have he : actualTranslatedPolynomialEval n (0 : Fin n \u2192 \u2102)=originalPolynomialEval n := by\n    apply MvPolynomial.algHom_ext\n    intro i\n    simp [actualTranslatedPolynomialEval,originalPolynomialEval]\n  unfold actualTranslatedInitialIdeal actualOriginalInitialVertexIdeal\n  rw [he]\n\nprivate def scalarLinearEquiv (k : \u2115) (c : \u2102) (hc : c \u2260 0) : ComplexModel k \u2243L[\u2102] ComplexModel k where\n  toFun z := c \u2022 z\n  invFun z := c\u207b\u00b9 \u2022 z\n  map_add' z w := smul_add _ _ _\n  map_smul' r z := by simp only [RingHom.id_apply,smul_smul]; rw [mul_comm]\n  left_inv z := by simp [smul_smul,hc]\n  right_inv z := by simp [smul_smul,hc]\n  continuous_toFun := (continuous_const : Continuous (fun _ : ComplexModel k => c)).smul\n    (continuous_id : Continuous (fun z : ComplexModel k => z))\n  continuous_invFun := (continuous_const : Continuous (fun _ : ComplexModel k => (c\u207b\u00b9 : \u2102))).smul\n    (continuous_id : Continuous (fun z : ComplexModel k => z))\n\n/-- The ACTUAL continuous scalar isomorphism induces a genuine original COMPLEX germ algebra equivalence. -/\ndef actualScalarGermAlgEquiv (n : \u2115) (c : \u2102) (hc : c \u2260 0) :\n    HolGerm (ComplexModel (0+n)) \u2243\u2090[\u2102] HolGerm (ComplexModel (0+n)) where\n  toRingEquiv := HolGerm.comapEquiv (scalarLinearEquiv (0+n) c hc)\n  commutes' _ := rfl\n\nprivate theorem scalarGerm_coordinate (c : \u2102) (hc : c \u2260 0) (i : Fin n) :\n    actualScalarGermAlgEquiv n c hc (normalCoordinate 0 n i)=\n      algebraMap \u2102 _ c*normalCoordinate 0 n i := by\n  let hx : \u2200\u1da0 z in \ud835\udcdd (0 : ComplexModel (0+n)),\n      DifferentiableAt \u2102 (fun w : ComplexModel (0+n) => w (i.natAdd 0)) z :=\n    Eventually.of_forall fun _ => (EuclideanSpace.proj (i.natAdd 0) : ComplexModel (0+n) \u2192L[\u2102] \u2102).differentiableAt\n  change HolGerm.comapEquiv (scalarLinearEquiv (0+n) c hc)\n    (HolGerm.mk (fun z : ComplexModel (0+n) => z (i.natAdd 0)) hx)=\n      HolGerm.mk (fun _ : ComplexModel (0+n) => c) (eventually_differentiableAt_const c)*\n        HolGerm.mk (fun z : ComplexModel (0+n) => z (i.natAdd 0)) hx\n  rw [HolGerm.comapEquiv_mk,\u2190 HolGerm.mk_mul]\n  apply HolGerm.mk_eq_mk_iff.mpr\n  exact Eventually.of_forall fun z => by simp [scalarLinearEquiv]\n\nprivate theorem scalarGerm_translated_initial (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (p : Fin n \u2192 \u2102) (c : \u2102) (hc : c \u2260 0) (a : actualInitialVertices MonomialOrder.degLex I) :\n    actualScalarGermAlgEquiv n c hc (actualTranslatedPolynomialEval n (c \u2022 p) (actualInitialVertexPolynomial I a))=\n      algebraMap \u2102 _ (c^normalExponentDegree a.val)*actualTranslatedPolynomialEval n p (actualInitialVertexPolynomial I a) := by\n  have he : (actualScalarGermAlgEquiv n c hc).toAlgHom.comp (actualTranslatedPolynomialEval n (c \u2022 p))=\n      MvPolynomial.aeval (fun i => algebraMap \u2102 (HolGerm (ComplexModel (0+n))) c*\n        (normalCoordinate 0 n i+algebraMap \u2102 _ (p i))) := by\n    apply MvPolynomial.algHom_ext\n    intro i\n    change actualScalarGermAlgEquiv n c hc (actualTranslatedPolynomialEval n (c \u2022 p) (MvPolynomial.X i))=_\n    simp only [actualTranslatedPolynomialEval,MvPolynomial.aeval_X,map_add,\n      scalarGerm_coordinate,AlgEquiv.commutes,Pi.smul_apply,smul_eq_mul,map_mul]\n    ring\n  have h := DFunLike.congr_fun he (actualInitialVertexPolynomial I a)\n  change actualScalarGermAlgEquiv n c hc\n    (actualTranslatedPolynomialEval n (c \u2022 p) (actualInitialVertexPolynomial I a))=_ at h\n  rw [h,homogeneous_aeval_scaled _ _ (actualInitialVertexPolynomial_isHomogeneous I a)]\n  rw [\u2190 map_pow]\n  rfl\n\n\nprivate theorem map_scalar_translated_initial (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (p : Fin n \u2192 \u2102) (c : \u2102) (hc : c \u2260 0) :\n    Ideal.map (actualScalarGermAlgEquiv n c hc).toRingEquiv.toRingHom\n      (actualTranslatedInitialIdeal I (c \u2022 p))=actualTranslatedInitialIdeal I p := by\n  rw [actualTranslatedInitialIdeal,Ideal.map_span,\u2190 Set.range_comp]\n  apply le_antisymm\n  \u00b7 apply Ideal.span_le.mpr\n    rintro g \u27e8a,rfl\u27e9\n    change actualScalarGermAlgEquiv n c hc\n      (actualTranslatedPolynomialEval n (c \u2022 p) (actualInitialVertexPolynomial I a)) \u2208 actualTranslatedInitialIdeal I p\n    rw [scalarGerm_translated_initial]\n    exact Ideal.mul_mem_left _ _ (Ideal.subset_span \u27e8a,rfl\u27e9)\n  \u00b7 apply Ideal.span_le.mpr\n    rintro g \u27e8a,rfl\u27e9\n    have hg : actualScalarGermAlgEquiv n c hc\n        (actualTranslatedPolynomialEval n (c \u2022 p) (actualInitialVertexPolynomial I a)) \u2208\n          Ideal.span (range fun b : actualInitialVertices MonomialOrder.degLex I =>\n            actualScalarGermAlgEquiv n c hc\n              (actualTranslatedPolynomialEval n (c \u2022 p) (actualInitialVertexPolynomial I b))) :=\n      Ideal.subset_span \u27e8a,rfl\u27e9\n    rw [scalarGerm_translated_initial] at hg\n    have hh := Ideal.mul_mem_left _ (algebraMap \u2102 (HolGerm (ComplexModel (0+n))) ((c^normalExponentDegree a.val)\u207b\u00b9)) hg\n    rw [\u2190 mul_assoc,\u2190 map_mul,inv_mul_cancel\u2080 (pow_ne_zero _ hc),map_one,one_mul] at hh\n    exact hh\n\n/-- Every true nonzero ray parameter preserves the SAME actual original translated ideal HS values. -/\ntheorem actualTranslatedInitialIdeal_nonzero_ray_hs (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (p : Fin n \u2192 \u2102) (c : \u2102) (hc : c \u2260 0) (\u2113 : \u2115) :\n    hilbertSamuelValue (actualTranslatedInitialIdeal I (c \u2022 p)) \u2113=\n      hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113 := by\n  have h := actualAmbientHS_eq_of_genuineAlgEquiv (actualScalarGermAlgEquiv n c hc)\n    (actualTranslatedInitialIdeal I (c \u2022 p)) \u2113\n  rw [map_scalar_translated_initial I p c hc] at h\n  exact h.symm\n\nprivate def vertexEnumeration (I : Ideal (MvPowerSeries (Fin n) \u2102)) :\n    Fin (Fintype.card (actualInitialVertices MonomialOrder.degLex I)) \u2243\n      actualInitialVertices MonomialOrder.degLex I :=\n  (Fintype.equivFin _).symm\n\n/-- The genuine jointly polynomial family is internally constructed from the actual finite original vertex family. -/\ndef actualRayInitialFamily (I : Ideal (MvPowerSeries (Fin n) \u2102)) (p : Fin n \u2192 \u2102)\n    (i : Fin (Fintype.card (actualInitialVertices MonomialOrder.degLex I)))\n    (u : ComplexModel 1 \u00d7 ComplexModel (0+n)) : \u2102 :=\n  MvPolynomial.eval (fun j => u.2 (j.natAdd 0)+u.1 0*p j)\n    (actualInitialVertexPolynomial I (vertexEnumeration I i))\n\n/-- Literal polynomial coordinates prove genuine joint holomorphicity on the entire actual product domain. -/\ntheorem actualRayInitialFamily_holomorphic (I : Ideal (MvPowerSeries (Fin n) \u2102)) (p : Fin n \u2192 \u2102)\n    (i : Fin (Fintype.card (actualInitialVertices MonomialOrder.degLex I))) :\n    DifferentiableOn \u2102 (actualRayInitialFamily I p i) Set.univ := by\n  have ht : ContDiff \u2102 \u221e (fun u : ComplexModel 1 \u00d7 ComplexModel (0+n) => u.1 0) :=\n    (EuclideanSpace.proj (0 : Fin 1) : ComplexModel 1 \u2192L[\u2102] \u2102).contDiff.comp contDiff_fst\n  have hx (j : Fin n) : ContDiff \u2102 \u221e (fun u : ComplexModel 1 \u00d7 ComplexModel (0+n) =>\n      u.2 (j.natAdd 0)+u.1 0*p j) :=\n    ((EuclideanSpace.proj (j.natAdd 0) : ComplexModel (0+n) \u2192L[\u2102] \u2102).contDiff.comp contDiff_snd).add\n      (ht.mul contDiff_const)\n  exact ((polynomial_contDiff (actualInitialVertexPolynomial I (vertexEnumeration I i)) _ hx).differentiable\n    (by simp)).differentiableOn\n\n/-- BOTH whole actual original fibre-ideal directions retain the SAME literal translated generators. -/\ntheorem actualRayInitialFibreIdeal_eq (I : Ideal (MvPowerSeries (Fin n) \u2102)) (p : Fin n \u2192 \u2102)\n    (t : ComplexModel 1) :\n    actualFibreIdeal isOpen_univ (actualRayInitialFamily I p) (actualRayInitialFamily_holomorphic I p)\n      t (mem_univ _)=actualTranslatedInitialIdeal I ((t 0) \u2022 p) := by\n  rw [actualFibreIdeal_eq_original_span,actualTranslatedInitialIdeal]\n  apply congrArg Ideal.span\n  apply Set.Subset.antisymm\n  \u00b7 rintro g \u27e8i,rfl\u27e9\n    refine \u27e8vertexEnumeration I i,?_\u27e9\n    dsimp only\n    rw [translated_polynomial_mk]\n    apply HolGerm.mk_eq_mk_iff.mpr\n    exact Eventually.of_forall fun z => by\n      simp only [actualRayInitialFamily,Pi.smul_apply,smul_eq_mul]\n  \u00b7 rintro g \u27e8a,rfl\u27e9\n    refine \u27e8(vertexEnumeration I).symm a,?_\u27e9\n    dsimp only\n    rw [translated_polynomial_mk]\n    apply HolGerm.mk_eq_mk_iff.mpr\n    exact Eventually.of_forall fun z => by\n      simp only [actualRayInitialFamily,Equiv.apply_symm_apply,Pi.smul_apply,smul_eq_mul]\n\nprivate def complexParameterPoint (c : \u2102) : ComplexModel 1 :=\n  c \u2022 (EuclideanSpace.basisFun (Fin 1) \u2102) 0\n\nprivate theorem complexParameterPoint_coordinate (c : \u2102) : complexParameterPoint c 0=c := by\n  simp [complexParameterPoint]\n\nprivate theorem continuous_complexParameterPoint : Continuous complexParameterPoint :=\n  continuous_id.smul continuous_const\n\n/-- EVERY actual translated original homogeneous initial ideal has true HS values bounded by the original formal ideal. -/\ntheorem hilbertSamuelValue_actual_translated_initial_le (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (p : Fin n \u2192 \u2102) (\u2113 : \u2115) :\n    hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113 \u2264 genuineFormalHilbertSamuelValue n I \u2113 := by\n  let G := actualRayInitialFamily I p\n  have hG : \u2200 i, DifferentiableOn \u2102 (G i) Set.univ := actualRayInitialFamily_holomorphic I p\n  let J (c : \u2102) := actualFibreIdeal isOpen_univ G hG (complexParameterPoint c) (mem_univ _)\n  have hdict (c : \u2102) : J c=actualTranslatedInitialIdeal I (c \u2022 p) := by\n    have h := actualRayInitialFibreIdeal_eq I p (complexParameterPoint c)\n    rw [complexParameterPoint_coordinate] at h\n    exact h\n  let P : \u2102 \u2192 (\u22a4 : TopologicalSpace.Opens (ComplexModel 1)) :=\n    fun c => \u27e8complexParameterPoint c,mem_univ _\u27e9\n  have hP : Continuous P := Continuous.subtype_mk continuous_complexParameterPoint _\n  have hclosed : IsClosed {c : \u2102 |\n      hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113 \u2264 hilbertSamuelValue (J c) \u2113} :=\n    (isClosed_actualFibreHS_superlevel isOpen_univ G hG \u22a4 (fun _ _ => mem_univ _) \u2113\n      (hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113)).preimage hP\n  have hsub : ({(0 : \u2102)}\u1d9c : Set \u2102) \u2286 {c : \u2102 |\n      hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113 \u2264 hilbertSamuelValue (J c) \u2113} := by\n    intro c hc\n    have hc0 : c \u2260 0 := by simpa using hc\n    change hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113 \u2264 hilbertSamuelValue (J c) \u2113\n    rw [hdict c,actualTranslatedInitialIdeal_nonzero_ray_hs I p c hc0]\n  have hz := closure_minimal hsub hclosed ((dense_compl_singleton (0 : \u2102)) 0)\n  change hilbertSamuelValue (actualTranslatedInitialIdeal I p) \u2113 \u2264 hilbertSamuelValue (J 0) \u2113 at hz\n  rw [hdict 0,zero_smul,translated_initial_zero,actualOriginalInitialVertexIdeal_hs] at hz\n  exact hz\n\n/-- Genuine whole Taylor extension transfers the actual translated-polynomial comparison to EVERY formal HS quotient. -/\ntheorem genuineFormalHilbertSamuelValue_translated_initial_le (I : Ideal (MvPowerSeries (Fin n) \u2102))\n    (p : Fin n \u2192 \u2102) (\u2113 : \u2115) :\n    genuineFormalHilbertSamuelValue n (actualTranslatedInitialFormalIdeal I p) \u2113 \u2264\n      genuineFormalHilbertSamuelValue n I \u2113 := by\n  rw [\u2190 actualTranslatedInitialIdeal_formal_extension,\n    \u2190 hilbertSamuelValue_eq_genuine_formal_extension]\n  exact hilbertSamuelValue_actual_translated_initial_le I p \u2113\n\nend\nend TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS\n",
+    "original_context_sha256": "abf1338e4b0377fac923a68aa6ee657941517694fb6d6d9332fecedc3802af42",
+    "pure_existing_or_new_original_support_imports": [],
+    "complete_original_declarations": [
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualInitialVertexPolynomial_isHomogeneous",
+        "compiler_source_range": [
+          19,
+          0,
+          35,
+          13
+        ],
+        "source_byte_range": [
+          1097,
+          2163
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualInitialVertexPolynomial_isHomogeneous-original.lean.txt",
+        "complete_original_declaration_sha256": "324dafde1f6b225e41fd5014cb913c49684d46c8fd224ccc6a61af77bc60e14d"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualRayInitialFamily",
+        "compiler_source_range": [
+          227,
+          0,
+          232,
+          61
+        ],
+        "source_byte_range": [
+          13606,
+          14062
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualRayInitialFamily-original.lean.txt",
+        "complete_original_declaration_sha256": "3d9b16e5a88439e16442d01e290544ed2ab93ef072aa059b5a932e1b1f909005"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualRayInitialFamily_holomorphic",
+        "compiler_source_range": [
+          234,
+          0,
+          245,
+          31
+        ],
+        "source_byte_range": [
+          14064,
+          15014
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualRayInitialFamily_holomorphic-original.lean.txt",
+        "complete_original_declaration_sha256": "48b098035621e9ba03342ec73c11dc5c2de2480d1430e4a7faa203593b215566"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualRayInitialFibreIdeal_eq",
+        "compiler_source_range": [
+          247,
+          0,
+          268,
+          89
+        ],
+        "source_byte_range": [
+          15016,
+          16099
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualRayInitialFibreIdeal_eq-original.lean.txt",
+        "complete_original_declaration_sha256": "e7b13250ee9176dc4d46014b34fa726a7676d2ccf1827ca7bfe97c0c304a01b6"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualScalarGermAlgEquiv",
+        "compiler_source_range": [
+          146,
+          0,
+          150,
+          20
+        ],
+        "source_byte_range": [
+          8778,
+          9120
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualScalarGermAlgEquiv-original.lean.txt",
+        "complete_original_declaration_sha256": "5c288c363ec7607113f0636c1d2b03faef8177e1e3cb52cf4f3f6785beca4df8"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualTranslatedInitialFormalIdeal",
+        "compiler_source_range": [
+          102,
+          0,
+          106,
+          109
+        ],
+        "source_byte_range": [
+          6246,
+          6656
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualTranslatedInitialFormalIdeal-original.lean.txt",
+        "complete_original_declaration_sha256": "0eb8e0bd4410e085d28f126e4496ede6850227eecb66e9445f44f28aa38e8817"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualTranslatedInitialIdeal",
+        "compiler_source_range": [
+          96,
+          0,
+          100,
+          75
+        ],
+        "source_byte_range": [
+          5854,
+          6244
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualTranslatedInitialIdeal-original.lean.txt",
+        "complete_original_declaration_sha256": "93fa0f6174797b1891f2f0f673e1f380ec74624e09a676b57a206b76df631e65"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualTranslatedInitialIdeal_formal_extension",
+        "compiler_source_range": [
+          108,
+          0,
+          123,
+          65
+        ],
+        "source_byte_range": [
+          6658,
+          7659
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualTranslatedInitialIdeal_formal_extension-original.lean.txt",
+        "complete_original_declaration_sha256": "078f3cd7293e3803bf4f7c149aa8038b9f34ab58980f977751551c7ec3c0aa82"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualTranslatedInitialIdeal_nonzero_ray_hs",
+        "compiler_source_range": [
+          212,
+          0,
+          220,
+          14
+        ],
+        "source_byte_range": [
+          12776,
+          13375
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualTranslatedInitialIdeal_nonzero_ray_hs-original.lean.txt",
+        "complete_original_declaration_sha256": "700fb406e35b34c6bb392c6a1b959e9666a674d8c4629261494d8cc54cd2b243"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualTranslatedPolynomialEval",
+        "compiler_source_range": [
+          58,
+          0,
+          61,
+          75
+        ],
+        "source_byte_range": [
+          3477,
+          3792
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-actualTranslatedPolynomialEval-original.lean.txt",
+        "complete_original_declaration_sha256": "ef26628069d65273d201dafca18fb0783200778bc797efdb84eed9538e5aeb8e"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.genuineFormalHilbertSamuelValue_translated_initial_le",
+        "compiler_source_range": [
+          308,
+          0,
+          315,
+          61
+        ],
+        "source_byte_range": [
+          18468,
+          19044
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-genuineFormalHilbertSamuelValue_translated_initial_le-original.lean.txt",
+        "complete_original_declaration_sha256": "0fb82d8a48d3b1fad1a3db0bcaa81c0f11f50eec5cefca349cbb5f43521d7be8"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.hilbertSamuelValue_actual_translated_initial_le",
+        "compiler_source_range": [
+          279,
+          0,
+          306,
+          10
+        ],
+        "source_byte_range": [
+          16467,
+          18466
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-hilbertSamuelValue_actual_translated_initial_le-original.lean.txt",
+        "complete_original_declaration_sha256": "065c0fca0a07753eb37ff66325bd305a86e09c80232a9c1168902d8aa3fee052"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.complexParameterPoint",
+        "compiler_source_range": [
+          270,
+          0,
+          271,
+          43
+        ],
+        "source_byte_range": [
+          16101,
+          16212
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-complexParameterPoint-original.lean.txt",
+        "complete_original_declaration_sha256": "42073fba6d16a5e5b09347250ab46db1d444a29edbf3102866bcd78d193d6aeb"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.complexParameterPoint_coordinate",
+        "compiler_source_range": [
+          273,
+          0,
+          274,
+          30
+        ],
+        "source_byte_range": [
+          16214,
+          16339
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-complexParameterPoint_coordinate-original.lean.txt",
+        "complete_original_declaration_sha256": "9ec8724189bafd9b98d28b52d889b09522a319f3174bd2819af24b345f3205e9"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.continuous_complexParameterPoint",
+        "compiler_source_range": [
+          276,
+          0,
+          277,
+          37
+        ],
+        "source_byte_range": [
+          16341,
+          16465
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-continuous_complexParameterPoint-original.lean.txt",
+        "complete_original_declaration_sha256": "4da27523d64c46243a1206c691d526ec23949f2108b82f59b2bfb7d6fe2e6f65"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.homogeneous_aeval_scaled",
+        "compiler_source_range": [
+          39,
+          0,
+          48,
+          8
+        ],
+        "source_byte_range": [
+          2345,
+          2887
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-homogeneous_aeval_scaled-original.lean.txt",
+        "complete_original_declaration_sha256": "9d80106bb4e8f9b62e80cde0a90b5444d3f6276c2afa644b0c5b27a00c15c781"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.map_scalar_translated_initial",
+        "compiler_source_range": [
+          187,
+          0,
+          210,
+          12
+        ],
+        "source_byte_range": [
+          11332,
+          12774
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-map_scalar_translated_initial-original.lean.txt",
+        "complete_original_declaration_sha256": "0a94f56cbf22415b49dcca833d5038d363f9bd00b13c9e8a18de8cc95a438edf"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.polynomial_contDiff",
+        "compiler_source_range": [
+          50,
+          0,
+          56,
+          94
+        ],
+        "source_byte_range": [
+          2889,
+          3475
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-polynomial_contDiff-original.lean.txt",
+        "complete_original_declaration_sha256": "4165011fccbfe5042d9fac5703e0cfe1bfecca1b68b3ddd44bbb08bc46c62c2b"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.scalarGerm_coordinate",
+        "compiler_source_range": [
+          152,
+          0,
+          164,
+          65
+        ],
+        "source_byte_range": [
+          9122,
+          10001
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-scalarGerm_coordinate-original.lean.txt",
+        "complete_original_declaration_sha256": "874a1cab3768dfd0162e02f4e4789f866f1b72d261a3463c9c72a8f9b4907a7d"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.scalarGerm_translated_initial",
+        "compiler_source_range": [
+          166,
+          0,
+          184,
+          5
+        ],
+        "source_byte_range": [
+          10003,
+          11329
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-scalarGerm_translated_initial-original.lean.txt",
+        "complete_original_declaration_sha256": "5342694a90fa3a8c468a31fa1a47ab619b8144333694674c2efaf68ee1eebf50"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.scalarLinearEquiv",
+        "compiler_source_range": [
+          134,
+          0,
+          144,
+          62
+        ],
+        "source_byte_range": [
+          8110,
+          8776
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-scalarLinearEquiv-original.lean.txt",
+        "complete_original_declaration_sha256": "34e16a2df546a5a17b10282ea2b8ac75d94270253461c7e5e0bd1c1ca9bd2f6e"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.translated_initial_zero",
+        "compiler_source_range": [
+          125,
+          0,
+          132,
+          9
+        ],
+        "source_byte_range": [
+          7661,
+          8108
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-translated_initial_zero-original.lean.txt",
+        "complete_original_declaration_sha256": "e6e3f27c3a18d636af6b163f9944679bd061ccc0880cb224d9ebaffb1cca7833"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.translated_polynomial_holomorphic",
+        "compiler_source_range": [
+          63,
+          0,
+          68,
+          83
+        ],
+        "source_byte_range": [
+          3794,
+          4346
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-translated_polynomial_holomorphic-original.lean.txt",
+        "complete_original_declaration_sha256": "22a50afe44c5f5e551ea46f577fee7e5346ad923d629898b8ad3cd5420d2be9b"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.translated_polynomial_mk",
+        "compiler_source_range": [
+          70,
+          0,
+          94,
+          93
+        ],
+        "source_byte_range": [
+          4348,
+          5852
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-translated_polynomial_mk-original.lean.txt",
+        "complete_original_declaration_sha256": "bfa48916e9ced7f55f2db32f77b659a1460c9bf3afc8043f6b68f6fa7d8a9f6b"
+      },
+      {
+        "name": "_private.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.0.TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.vertexEnumeration",
+        "compiler_source_range": [
+          222,
+          0,
+          225,
+          27
+        ],
+        "source_byte_range": [
+          13377,
+          13604
+        ],
+        "complete_original_declaration": "HironakaActualTranslatedInitialHS-vertexEnumeration-original.lean.txt",
+        "complete_original_declaration_sha256": "ed2a9ef50f2682e535f10c6df3f47d933ef7413b58e84c5aa9d9810ded4fcb6a"
+      }
+    ],
+    "recorded_context_omissions": [],
+    "declaration_local_original_instance_contexts": [
+      {
+        "before": "private theorem translated_initial_zero",
+        "after": "attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in\nprivate theorem translated_initial_zero",
+        "kind": "declaration_local_recovery_of_original_compiled_instance_route",
+        "actual_original_selector": "SubsemiringClass.toAddSubmonoidClass",
+        "original_declaration": "translated_initial_zero",
+        "reason": "Exact original instance projection occurs in retained frozen native entire proof Expr; public imported context currently selects a different route. Recover the original declaration-local route, retaining the entire original declaration and proof byte-for-byte. No new instances or source theorem tokens."
+      }
+    ],
+    "proof_tokens_edited": 0
+  },
+  {
+    "published_source_revision": "bae7068afc70d624cd8563fd4291436195a7f25f",
+    "source_parent_module": "TranscendentalNakamaye.Pending.HolomorphicGermRing",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermRing.lean",
+    "source_parent_sha256": "96153b860adc2738d9b5211b4bac80fc500f53c4527b3b4ac3d77d40c29cb447",
+    "compiler_ilean_sha256": "11cdd181097f97ed6386458dcdc4011918c02d379dcb2a4d0bdb6d819f54d211",
+    "destination_module": "Hironaka.Support.HolGermSubExact",
+    "destination_path": "Hironaka/Support/HolGermSubExact.lean",
+    "destination_sha256": "5cc7f1be467cee2f92e89d54ad2d67ffd8b017baf827bfe861c5a1e6ff777500",
+    "classification": "COMPLETE_ORIGINAL_DECLARATIONS_AND_SECTION_CONTEXT",
+    "original_context_source": "set_option autoImplicit false\n\n\nnamespace TranscendentalNakamaye.Pending\n\n\nopen Filter Topology\n\n\nsection Differentiability\n\n\nvariable {E : Type*} [NormedAddCommGroup E] [NormedSpace \u2102 E]\n\n\ntheorem eventually_differentiableAt_sub {f g : E \u2192 \u2102}\n    (hf : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 f z) (hg : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 g z) :\n    \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 (fun z => f z - g z) z :=\n  hf.and hg |>.mono fun _ h => h.1.sub h.2\n\nend Differentiability\n\n\nvariable (E : Type*) [NormedAddCommGroup E] [NormedSpace \u2102 E]\n\n\nnamespace HolGerm\n\n\nvariable {E}\n\n\ntheorem mk_sub (f g : E \u2192 \u2102) (hf : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 f z)\n    (hg : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 g z) :\n    mk (fun z => f z - g z) (eventually_differentiableAt_sub hf hg) = mk f hf - mk g hg :=\n  rfl\n\nend HolGerm\n\n\nend TranscendentalNakamaye.Pending\n",
+    "original_context_sha256": "5355ee35114892d16b3c077ce9fb75ba68fb5e5482aa9950c8c57e0fcb058c03",
+    "pure_existing_or_new_original_support_imports": [
+      "Hironaka.Analytic.HolomorphicGermRing"
+    ],
+    "complete_original_declarations": [
+      {
+        "name": "TranscendentalNakamaye.Pending.eventually_differentiableAt_sub",
+        "compiler_source_range": [
+          54,
+          0,
+          57,
+          42
+        ],
+        "source_byte_range": [
+          2167,
+          2448
+        ],
+        "complete_original_declaration": "HolomorphicGermRing-eventually_differentiableAt_sub-original.lean.txt",
+        "complete_original_declaration_sha256": "3fa2a57d768aedb6a97cb3e296832c90b8add5cdff7fcaba5f8ebda4b385ec16"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.HolGerm.mk_sub",
+        "compiler_source_range": [
+          169,
+          0,
+          172,
+          5
+        ],
+        "source_byte_range": [
+          7471,
+          7710
+        ],
+        "complete_original_declaration": "HolomorphicGermRing-mk_sub-original.lean.txt",
+        "complete_original_declaration_sha256": "a37acc9599cac1ec15ade7a48a42e3af72a86bed32332b894e67a9fdc1ffbb63"
+      }
+    ],
+    "recorded_context_omissions": [],
+    "declaration_local_original_instance_contexts": [],
+    "proof_tokens_edited": 0
+  },
+  {
+    "published_source_revision": "bae7068afc70d624cd8563fd4291436195a7f25f",
+    "source_parent_module": "TranscendentalNakamaye.Pending.MarkedIdealTowerTransport",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/MarkedIdealTowerTransport.lean",
+    "source_parent_sha256": "22d4855929089c490291eb3984e3f8ea9f0eb432e88493eeff334bcbacc89251",
+    "compiler_ilean_sha256": "2a86ca62b02961b9f6c8e6d3373437f4d30c3a2bc806c92f744cf0aee354184f",
+    "destination_module": "Hironaka.Support.MarkedTowerTransportEquationsExact",
+    "destination_path": "Hironaka/Support/MarkedTowerTransportEquationsExact.lean",
+    "destination_sha256": "e4fa08de58d98fe0c3af9e8284fb2bf6aff004fc5b2fa6306ff1afc7b35a212c",
+    "classification": "COMPLETE_ORIGINAL_DECLARATIONS_AND_SECTION_CONTEXT",
+    "original_context_source": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n\n\nopen Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.MarkedIdealTowerTransport\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.NormalCrossings TranscendentalNakamaye.Pending.NormalCrossingsInvariance\n  TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.MarkedIdeals\n  TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism\n  TranscendentalNakamaye.Pending.GermIdealPullbackCalculus\n\nnoncomputable section\n\n\n\nsection Transport\n\n\nvariable {n : \u2115}\n\n\nvariable {X X' : CMfd.{u} n} (\u03a6 : X' \u2243\u2098\u27ee\ud835\udcd8(\u2102, ComplexModel n), \ud835\udcd8(\u2102, ComplexModel n)\u27ef X)\n\n\nvariable {Y Z : CMfd.{u} n}\n\n\n/-- **The transported tower has the same length.** -/\ntheorem length_transport : {Y : CMfd.{u} n} \u2192 (T : BlowupTower X Y) \u2192 (transport \u03a6 T).tower.length = T.length\n  | _, .refl => rfl\n  | _, .step T _ _ _ => congrArg (\u00b7 + 1) (length_transport T)\n\n/-- **The stages correspond by biholomorphisms commuting with the projections**:\n`\u03a6 \u2218 T'.proj = T.proj \u2218 back`. -/\ntheorem proj_transport : {Y : CMfd.{u} n} \u2192 (T : BlowupTower X Y) \u2192 \u2200 p : (transport \u03a6 T).target,\n    \u03a6 ((transport \u03a6 T).tower.proj p) = T.proj ((transport \u03a6 T).back p)\n  | _, .refl, _ => rfl\n  | _, .step T _ \u03c0 _, p => by\n      have := proj_transport T ((transport \u03a6 T).back.symm (\u03c0 p))\n      rw [Diffeomorph.apply_symm_apply] at this\n      exact this\n\nend Transport\n\n\nend\n\n\nend TranscendentalNakamaye.Pending.MarkedIdealTowerTransport\n",
+    "original_context_sha256": "40fcfb6c56a07ea52e0e91d150ae205610b636bb9dbabd9d20df37aee84bbda5",
+    "pure_existing_or_new_original_support_imports": [
+      "Hironaka.MarkedIdeal.MarkedIdealTowerTransport"
+    ],
+    "complete_original_declarations": [
+      {
+        "name": "TranscendentalNakamaye.Pending.MarkedIdealTowerTransport.length_transport",
+        "compiler_source_range": [
+          201,
+          0,
+          204,
+          61
+        ],
+        "source_byte_range": [
+          10690,
+          10941
+        ],
+        "complete_original_declaration": "MarkedIdealTowerTransport-length_transport-original.lean.txt",
+        "complete_original_declaration_sha256": "8fa8a647db6fe8a114530bcb545cb5a68cf8298a16feecc19a98431f8858554c"
+      },
+      {
+        "name": "TranscendentalNakamaye.Pending.MarkedIdealTowerTransport.proj_transport",
+        "compiler_source_range": [
+          206,
+          0,
+          214,
+          16
+        ],
+        "source_byte_range": [
+          10943,
+          11427
+        ],
+        "complete_original_declaration": "MarkedIdealTowerTransport-proj_transport-original.lean.txt",
+        "complete_original_declaration_sha256": "400d60c06ac2fa3f90d10b11b4c8980cdb3429d926a7db7b453ce3f05e9fed25"
+      }
+    ],
+    "recorded_context_omissions": [],
+    "declaration_local_original_instance_contexts": [],
+    "proof_tokens_edited": 0
+  },
+  {
+    "published_source_revision": "bae7068afc70d624cd8563fd4291436195a7f25f",
+    "source_parent_module": "TranscendentalNakamaye.Pending.HironakaOriginalGlobalPrincipalization",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaOriginalGlobalPrincipalization.lean",
+    "source_parent_sha256": "8bea4d383358ad938ac5610c02abae2e5cee89b0521c8c4035f24eb95434ece6",
+    "compiler_ilean_sha256": "7cbf5aba420038f7dafb8991add53a1ed60460080c9eba00d9022ca90f4f8ff7",
+    "destination_module": "Hironaka.Support.OriginalInvertibleOpenCoverExact",
+    "destination_path": "Hironaka/Support/OriginalInvertibleOpenCoverExact.lean",
+    "destination_sha256": "75ba2fa083a1be9a1ee8c4c8426c113698765367a5226cbdd729b1172d9d2ba3",
+    "classification": "COMPLETE_ORIGINAL_DECLARATION_AND_RELEVANT_SECTION_CONTEXT",
+    "original_context_source": "set_option autoImplicit false\n\nopen Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u v\n\nnamespace TranscendentalNakamaye.Pending.HironakaOriginalGlobalPrincipalization\n\nnoncomputable section\n\n\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\n\n\nopen RelativePrincipalizationSpan InvertibleIdealQuotient GermIdealPullbackCalculus\n\n\nsection OpenDescent\n\nvariable {n : \u2115} {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]\n  [IsComplexManifold n Y] {\u03b9 : Type v}\n\n\n\n/-- A coherent ideal is invertible if its actual restrictions to a covering family\nof open subsets are invertible. -/\ntheorem isInvertible_of_open_cover {\ud835\udd1e : GermIdeal n Y} (h\ud835\udd1e : \ud835\udd1e.IsCoherent)\n    (O : \u03b9 \u2192 Opens Y) (hcover : \u2200 y : Y, \u2203 i, y \u2208 O i)\n    (hinv : \u2200 i, (GermIdeal.pullback (m := n) (Subtype.val : O i \u2192 Y) \ud835\udd1e).IsInvertible) :\n    \ud835\udd1e.IsInvertible := by\n  intro y\n  obtain \u27e8i, hy\u27e9 := hcover y\n  obtain \u27e8U, hU, hyU, h, hh, hnon, hgen\u27e9 := hinv i \u27e8y, hy\u27e9\n  let H := extendOpens (O i) h\n  have hH : H \u2218 (Subtype.val : O i \u2192 Y) = h :=\n    funext fun q => extendOpens_val (O i) h q\n  refine \u27e8Subtype.val '' U, (O i).isOpen.isOpenMap_subtype_val U hU,\n    \u27e8\u27e8y, hy\u27e9, hyU, rfl\u27e9, H, ?_, ?_, ?_\u27e9\n  \u00b7 rintro z \u27e8q, hq, rfl\u27e9\n    have hq' : MDifferentiableAt \ud835\udcd8(\u2102, ComplexModel n) \ud835\udcd8(\u2102, \u2102)\n        (H \u2218 (Subtype.val : O i \u2192 Y)) q := by\n      rw [hH]\n      exact (hh q hq).mdifferentiableAt (hU.mem_nhds hq)\n    exact ((mdifferentiableAt_comp_val_iff (O i)).mp hq').mdifferentiableWithinAt\n  \u00b7 rintro W hW hWU \u27e8z, hz\u27e9\n    have hsub : (Subtype.val : O i \u2192 Y) \u207b\u00b9' W \u2286 U := by\n      intro q hq\n      obtain \u27e8q', hq', he\u27e9 := hWU hq\n      exact (Subtype.ext he : q' = q) \u25b8 hq'\n    have hne : ((Subtype.val : O i \u2192 Y) \u207b\u00b9' W).Nonempty := by\n      obtain \u27e8q, _, he\u27e9 := hWU hz\n      refine \u27e8q, ?_\u27e9\n      change q.val \u2208 W\n      rw [he]\n      exact hz\n    obtain \u27e8q, hq, hq0\u27e9 := hnon _ (hW.preimage continuous_subtype_val) hsub hne\n    exact \u27e8q.val, hq, by simpa only [H, extendOpens_val] using hq0\u27e9\n  \u00b7 rintro z \u27e8q, hq, rfl\u27e9 g\n    have hge : extendOpens (O i) (g \u2218 Subtype.val) =\u1da0[\ud835\udcdd q.val] g := by\n      filter_upwards [(O i).isOpen.mem_nhds q.property] with z hz\n      exact extendOpens_val (O i) (g \u2218 Subtype.val) \u27e8z, hz\u27e9\n    constructor\n    \u00b7 intro hg\n      have hlocal := (hgen q hq (g \u2218 Subtype.val)).mp\n        (MarkedIdealRestrictOpen.comp_val_mem_pullback_val (O i) h\ud835\udd1e hg)\n      have hspan : IsInSpanAt (n := n) (\u00b7 = H) q.val\n          (extendOpens (O i) (g \u2218 Subtype.val)) :=\n        (isInSpanAt_comp_val_iff (O i)).mp (hlocal.mono fun s hs => by\n          exact \u27e8H, rfl, hs.trans hH.symm\u27e9)\n      exact IsInSpanAt.congr' hspan hge\n    \u00b7 intro hg\n      have hlocal : IsInSpanAt (n := n) (\u00b7 = h) q (g \u2218 Subtype.val) :=\n        (isInSpanAt_comp contMDiff_subtype_val hg).mono fun s hs => by\n          obtain \u27e8s', rfl, rfl\u27e9 := hs\n          exact hH\n      have hmem := (MarkedIdealRestrictOpen.mem_pullback_val_iff (O i) h\ud835\udd1e).mp\n        ((hgen q hq (g \u2218 Subtype.val)).mpr hlocal)\n      exact HomogenizedIdeal.mem_congr h\ud835\udd1e hmem hge\n\n\nend OpenDescent\n\n\nend\n\n\nend TranscendentalNakamaye.Pending.HironakaOriginalGlobalPrincipalization\n",
+    "original_context_sha256": "9d3737bcae343361c61b2223ffb8254f83d52f4a5a10ad5c705889fe8cd11ef1",
+    "pure_existing_or_new_original_support_imports": [
+      "Hironaka.MarkedIdeal.MarkedIdealRestrictOpen",
+      "Hironaka.MarkedIdeal.HomogenizedIdeal"
+    ],
+    "complete_original_declarations": [
+      {
+        "name": "TranscendentalNakamaye.Pending.HironakaOriginalGlobalPrincipalization.isInvertible_of_open_cover",
+        "compiler_source_range": [
+          39,
+          0,
+          92,
+          51
+        ],
+        "source_byte_range": [
+          1398,
+          4077
+        ],
+        "complete_original_declaration": "HironakaOriginalGlobalPrincipalization-isInvertible_of_open_cover-original.lean.txt",
+        "complete_original_declaration_sha256": "846ad0eb92973ccb32b5ced8087ea0fbaa762c97feb8fb8ac3943db8d3a8850b"
+      }
+    ],
+    "recorded_context_omissions": [
+      {
+        "reason": "Original terminal-manifold opens and terminal-only local instances are unused by this general open-cover proof; retained original geometric variables are arbitrary Y."
+      }
+    ],
+    "declaration_local_original_instance_contexts": [],
+    "proof_tokens_edited": 0
+  }
+]

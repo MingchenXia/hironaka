@@ -1,0 +1,5 @@
+/-- Only genuine finite polynomials are translated in the actual formal ring. -/
+def actualTranslatedInitialFormalIdeal (I : Ideal (MvPowerSeries (Fin n) ℂ)) (p : Fin n → ℂ) :
+    Ideal (MvPowerSeries (Fin n) ℂ) :=
+  Ideal.span (range fun a : actualInitialVertices MonomialOrder.degLex I =>
+    MvPolynomial.aeval (fun i => MvPowerSeries.X i+algebraMap ℂ _ (p i)) (actualInitialVertexPolynomial I a))

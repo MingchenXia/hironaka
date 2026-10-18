@@ -1,0 +1,129 @@
+\section{Actual formal initial diagrams and their finite monic vertex series}
+
+Let $S=\mathbb C[[X_1,\ldots,X_n]]$ be the GENUINE formal series ring.
+Fix an additive, pointwise-monotone well monomial order $\preceq$ on the
+actual exponent set $\mathbb N^n$. These are actual coefficient supports
+and the actual finite-antidiagonal product. This is the initial-diagram
+construction used in \cite[\S3, \S7, pp.~261--264]{bierstone-milman97-invent-math},
+before proving formal division. The degree-lexicographic specialization
+uses a fixed ordering of the original coordinates; reversing the coordinate
+priority only permutes the convention permitted in the source.
+
+\begin{lemma}[Actual lowest nonzero coefficients and genuine convolution]
+\label{hir:actual-formal-initial-exponent-coefficient-product}
+For every nonzero actual $F\in S$, there is a unique lowest exponent
+$\exp_\preceq(F)$ in its actual nonzero coefficient support. Its actual
+coefficient is nonzero and every smaller coefficient vanishes. For actual
+nonzero $F,G$,
+\[
+ \exp_\preceq(FG)=\exp_\preceq(F)+\exp_\preceq(G),\qquad
+ [X^{\exp(F)+\exp(G)}](FG)
+ =[X^{\exp(F)}]F\,[X^{\exp(G)}]G.
+\]
+In particular the lowest exponent of the genuine monomial $X^\beta$ is
+$\beta$, and multiplying $F$ by it shifts its actual lowest exponent by
+$\beta$.
+\lean{Hironaka.HironakaActualFormalInitialDiagram.exists_actualInitialExponent,Hironaka.HironakaActualFormalInitialDiagram.actualInitialExponent,Hironaka.HironakaActualFormalInitialDiagram.actualInitialExponent_spec,Hironaka.HironakaActualFormalInitialDiagram.coeff_eq_zero_of_lt_actualInitialExponent,Hironaka.HironakaActualFormalInitialDiagram.actualInitialExponent_eq_of_coefficients,Hironaka.HironakaActualFormalInitialDiagram.coeff_mul_actualInitialExponent,Hironaka.HironakaActualFormalInitialDiagram.actualInitialExponent_mul,Hironaka.HironakaActualFormalInitialDiagram.actualMonomial_ne_zero,Hironaka.HironakaActualFormalInitialDiagram.actualInitialExponent_monomial}
+\leanok
+\end{lemma}
+\begin{proof}
+The actual nonzero coefficient support is nonempty, so its image in the
+genuine well ordered exponent type has a minimum. Pull it back to the
+same exponent set. Membership gives its nonzero coefficient; minimality
+gives vanishing below it. Conversely these two properties characterize
+that exponent by antisymmetry.
+Put $a=\exp(F)$ and $b=\exp(G)$. In the ACTUAL finite convolution
+for degree $a+b$, the pair $(a,b)$ contributes the displayed product.
+For every other pair $(u,v)$ with $u+v=a+b$, either $u\prec a$ or
+$v\prec b$: if both were at least their respective minima, ordered
+addition and cancellation force equality of both. Thus every other
+actual summand vanishes. The displayed product is nonzero over
+$\mathbb C$. If $c\prec a+b$, then for every pair $u+v=c$ one of
+$u\prec a$, $v\prec b$ again holds by ordered addition; hence that
+whole convolution vanishes. The characterization proves the product
+formula. The monomial has precisely its one actual nonzero coefficient,
+so the same characterization and product formula prove the final claim.
+\end{proof}
+
+\begin{theorem}[The whole genuine ideal determines its actual upper diagram]
+\label{hir:actual-formal-ideal-initial-diagram-upper}
+\uses{hir:actual-formal-initial-exponent-coefficient-product}
+For every actual ideal $I\subset S$, define its actual initial diagram
+\[
+ \mathcal N_\preceq(I)=
+ \{\exp_\preceq(F):F\in I,\ F\ne0\}.
+\]
+Then $a\in\mathcal N_\preceq(I)$ implies
+$a+\beta\in\mathcal N_\preceq(I)$ for every actual exponent $\beta$.
+Equivalently, this actual diagram is upward closed for the original
+pointwise exponent order. The zero ideal has empty diagram.
+\lean{Hironaka.HironakaActualFormalInitialDiagram.actualInitialDiagram,Hironaka.HironakaActualFormalInitialDiagram.actualInitialDiagram_add,Hironaka.HironakaActualFormalInitialDiagram.actualInitialDiagram_upper,Hironaka.HironakaActualFormalInitialDiagram.actualInitialDiagram_bot}
+\leanok
+\end{theorem}
+\begin{proof}
+Take the actual ideal member $F$ witnessing $a$. The actual monomial
+$X^\beta$ times $F$ is a member of the SAME whole ideal, is nonzero,
+and has lowest exponent $\beta+a$ by the preceding result. If $a\le c$
+pointwise, write $c=(c-a)+a$ in the actual finitely supported exponent
+monoid and apply this assertion. The zero ideal has no actual nonzero
+member, proving its empty-diagram statement directly.
+\end{proof}
+
+\begin{theorem}[Dickson vertices have internally constructed monic genuine series]
+\label{hir:actual-formal-initial-diagram-finite-monic-vertices}
+\uses{hir:actual-formal-ideal-initial-diagram-upper,hir:actual-formal-initial-exponent-coefficient-product}
+For every actual $I\subset S$, its pointwise-minimal diagram elements
+form a finite set $V$. For EVERY actual exponent $c$,
+\[
+ c\in\mathcal N_\preceq(I)\quad\Longleftrightarrow\quad
+ \exists a\in V:\ a\le c.
+\]
+For each $a\in V$, one can internally choose a GENUINE $f_a\in I$
+whose actual lowest exponent is $a$ and whose actual coefficient there
+is $1$. In particular all these $f_a$ are nonzero. No vertex set or
+series with the required exponents is a premise.
+\lean{Hironaka.HironakaActualFormalInitialDiagram.actualInitialDiagram_vertices_finite,Hironaka.HironakaActualFormalInitialDiagram.actualInitialVertices,Hironaka.HironakaActualFormalInitialDiagram.mem_actualInitialDiagram_iff_vertex_le,Hironaka.HironakaActualFormalInitialDiagram.exists_actual_monic_vertex_series}
+\leanok
+\end{theorem}
+\begin{proof}
+Dickson's lemma applies to the SAME finite-coordinate pointwise
+exponent order. Minimal elements form an antichain, hence are finite.
+For each actual diagram member $c$, pointwise well foundedness gives
+a minimal diagram member $a\le c$; conversely upper closure of the
+actual diagram proves membership from any such $a$.
+For each $a$ in this finite set, actual diagram membership supplies an
+actual nonzero $F_a\in I$ with lowest exponent $a$. Its coefficient
+$c_a=[X^a]F_a$ is a genuine nonzero complex number. Set
+$f_a=C(c_a^{-1})F_a$ in the ACTUAL formal series ring. The whole
+ideal is closed under this actual product. The true coefficient formula
+for a constant series product makes its coefficient at $a$ equal to
+$1$ and preserves vanishing of every lower coefficient. The preceding
+characterization therefore gives the SAME lowest exponent $a$.
+This constructs every claimed series internally. It does not yet claim
+that this family generates the whole ideal: that is a consequence of
+the subsequent genuine formal division theorem.
+\end{proof}
+
+\begin{lemma}[Degree-compatible lowest exponents detect actual formal powers]
+\label{hir:actual-formal-degreelex-initial-exponent-power-kernel}
+\uses{hir:actual-formal-initial-exponent-coefficient-product,hir:actual-formal-variable-power-coefficient-kernel}
+Specialize to the genuine degree-lexicographic monomial order. For each
+actual nonzero $F\in S$ and each $q\ge0$,
+\[
+ F\in(X_1,\ldots,X_n)^q\quad\Longleftrightarrow\quad
+ |\exp_{\mathrm{deglex}}(F)|\ge q.
+\]
+\lean{Hironaka.HironakaActualFormalInitialDiagram.mem_formal_variables_pow_iff_degree_initialExponent}
+\leanok
+\end{lemma}
+\begin{proof}
+If $F$ lies in the true variable power, the already proved actual power
+kernel kills every coefficient below total degree $q$. Its genuine
+lowest coefficient is nonzero, so its degree is at least $q$.
+Conversely suppose that degree is at least $q$. Every exponent of
+degree below $q$ is strictly smaller in the genuine degree-first order,
+so its actual coefficient vanishes by the lowest-coefficient lemma.
+The BOTH-direction genuine power kernel places $F$ in that same actual
+formal variable power. This includes $q=0$ and the empty coordinate
+family; it assumes no Hilbert--Samuel or standard-basis certificate.
+\end{proof}

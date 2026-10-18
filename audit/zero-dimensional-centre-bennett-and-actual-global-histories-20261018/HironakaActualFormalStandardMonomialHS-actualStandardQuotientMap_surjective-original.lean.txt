@@ -1,0 +1,33 @@
+/-- Genuine formal division and the actual formal power kernel reach EVERY whole quotient class. -/
+theorem actualStandardQuotientMap_surjective (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :
+    Function.Surjective (actualStandardQuotientMap n I q) := by
+  intro z
+  obtain ⟨F,rfl⟩ := Ideal.Quotient.mk_surjective z
+  let R := actualFormalRemainder MonomialOrder.degLex I F
+  let c : actualStandardIndex n I q → ℂ := fun a => MvPowerSeries.coeff a.val.val R
+  have hrem : R-actualStandardLift n I q c ∈ genuineFormalVariables n ^ q := by
+    apply (mem_genuineFormalVariables_pow_iff_coefficients_zero n q _).mpr
+    intro b hb
+    rw [map_sub]
+    apply sub_eq_zero.mpr
+    by_cases hi : b ∈ actualInitialDiagram MonomialOrder.degLex I
+    · change MvPowerSeries.coeff b (actualFormalRemainder MonomialOrder.degLex I F)=_
+      rw [actualFormalRemainder_coefficient_diagram MonomialOrder.degLex I F b hi,
+        actualStandardLift_coefficient_outside I q c b (Or.inr hi)]
+    · exact (actualStandardLift_coefficient I q c ⟨⟨b,hb⟩,hi⟩).symm
+  have hdiff : F-R ∈ I := by
+    have he : F-R=∑ a : actualInitialVertices MonomialOrder.degLex I,
+        actualFormalQuotient MonomialOrder.degLex I F a*actualVertexSeries MonomialOrder.degLex I a :=
+      sub_eq_iff_eq_add.mpr (actual_formal_vertex_division MonomialOrder.degLex I F)
+    rw [he]
+    exact I.sum_mem (fun a _ => I.mul_mem_left _ (actualVertexSeries_spec MonomialOrder.degLex I a).1)
+  have htotal : F-actualStandardLift n I q c ∈ I ⊔ genuineFormalVariables n ^ q := by
+    have he : F-actualStandardLift n I q c=(F-R)+(R-actualStandardLift n I q c) := by abel
+    rw [he]
+    exact Ideal.add_mem _ (Ideal.mem_sup_left hdiff) (Ideal.mem_sup_right hrem)
+  refine ⟨c,?_⟩
+  rw [actualStandardQuotientMap_apply]
+  apply Ideal.Quotient.eq.mpr
+  have he : actualStandardLift n I q c-F=-(F-actualStandardLift n I q c) := by abel
+  rw [he]
+  exact (I ⊔ genuineFormalVariables n ^ q).neg_mem htotal

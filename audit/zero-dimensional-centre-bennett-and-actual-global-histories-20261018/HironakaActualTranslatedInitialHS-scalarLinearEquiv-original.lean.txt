@@ -1,0 +1,11 @@
+private def scalarLinearEquiv (k : ℕ) (c : ℂ) (hc : c ≠ 0) : ComplexModel k ≃L[ℂ] ComplexModel k where
+  toFun z := c • z
+  invFun z := c⁻¹ • z
+  map_add' z w := smul_add _ _ _
+  map_smul' r z := by simp only [RingHom.id_apply,smul_smul]; rw [mul_comm]
+  left_inv z := by simp [smul_smul,hc]
+  right_inv z := by simp [smul_smul,hc]
+  continuous_toFun := (continuous_const : Continuous (fun _ : ComplexModel k => c)).smul
+    (continuous_id : Continuous (fun z : ComplexModel k => z))
+  continuous_invFun := (continuous_const : Continuous (fun _ : ComplexModel k => (c⁻¹ : ℂ))).smul
+    (continuous_id : Continuous (fun z : ComplexModel k => z))

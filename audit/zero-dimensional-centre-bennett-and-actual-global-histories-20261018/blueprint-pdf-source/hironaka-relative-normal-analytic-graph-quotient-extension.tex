@@ -1,0 +1,168 @@
+\section{The actual analytic graph quotient and its saturated central model}
+Let $\mathfrak a$ be the original coherent ideal on $\mathbf C^{d+t}$.
+The only original inputs are $d,t,\mathfrak a$ and its genuine coherence.
+Put $D=d+t+1+t$, $G=d+1+t$, with coordinates $(x,y,u,v)$ and $(x,u,v)$.
+All rings below are the actual WHOLE convergent holomorphic germ rings at zero.
+This chapter proves a true graph quotient and the actual saturated central
+fiber dictionary. It does not identify it with the nearby ORIGINAL normal cone.
+
+\begin{theorem}[Actual graph maps and a whole split surjection]
+\label{hir:relative-normal-analytic-graph-split-surjection}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDimension,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphParameter,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphFiberCoordinate,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphBaseProjection,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphBaseProjection_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphBaseProjection_tail,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding_normal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding_tail,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding_holomorphic,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding_zero,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphBaseProjection_graphEmbedding,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphBasePullback,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_graphBasePullback,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_surjective}
+Let $\rho(x,y,u,v)=(x,u,v)$ and $\iota(x,u,v)=(x,uv,u,v)$.
+Both maps are genuinely holomorphic, preserve zero and satisfy
+$\rho\iota=1$. The actual whole pullback $T=\iota^*:A\to C$
+is surjective, with genuine right inverse $\rho^*:C\to A$.
+Their coordinate dictionaries include zero tangent/normal dimensions.
+\end{theorem}
+\begin{proof}
+Construct $\rho$ as the actual continuous linear coordinate projection.
+Construct $\iota$ coordinate by coordinate: the original tangent coordinates
+are $x$, original normal coordinates are the actual products $uv_i$, and
+parameter and fiber coordinates are the literal $u,v$. Finite coordinate
+complex differentiability proves whole holomorphy, and each coordinate
+vanishes at zero. Direct substitution in every block proves $\rho\iota=1$.
+On every actual germ represented by a holomorphic function, composition
+of these genuine maps gives the same WHOLE representative. Thus
+$T\rho^*=1$ as actual algebra maps; every entire germ in $C$ has the
+actual preimage $\rho^*c$, proving surjectivity internally.
+\end{proof}
+
+\begin{theorem}[Whole analytic Hadamard gives the exact actual graph kernel]
+\label{hir:relative-normal-analytic-graph-whole-kernel}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphRetraction,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphRetraction_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphRetraction_normal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphRetraction_tail,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledRetraction,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledRetraction_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledRetraction_normal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledRetraction_holomorphic,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledRetraction_zero,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledPullback,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledPullback_sum,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledPullback_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledPullback_normal_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledPullback_normal_normal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphDoubledPullback_normal_tail,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphBasePullback_trace_sub_mem_equations,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalEquationIdeal_eq_span,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_equationGerm,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_kernel}
+\uses{hir:relative-normal-analytic-graph-split-surjection,hir:relative-normal-whole-hadamard,hir:relative-normal-deformation-actual-scaling-graph,hir:relative-normal-analytic-graph-origin-ideal-operations}
+Let $E$ be the actual entire origin ideal of the genuine equation sheaf
+generated by $uv_i-y_i$. For EVERY whole ambient germ $F\in A$,
+$(\iota\rho)^*F-F\in E$. Consequently $\ker T=E$.
+\end{theorem}
+\begin{proof}
+Use actual doubled coordinates $(z,\delta)$ in $\mathbf C^{D+D}$.
+The whole germ $F(z+\delta)-F(z)$ has actual zero plane trace.
+The genuine whole Hadamard decomposition writes it as the finite sum
+$\sum_j\delta_j H_j(z,\delta)$ with entire holomorphic coefficients $H_j$.
+Pull this WHOLE identity back by the actual holomorphic map
+$z\mapsto(z,\iota\rho(z)-z)$. Its tangent, parameter and fiber differences
+are literally zero; its original normal differences are exactly $uv_i-y_i$.
+Hence EVERY ambient entire difference is in the genuine equation ideal.
+Each actual equation vanishes under $\iota$, so $E\subseteq\ker T$.
+If $TF=0$, actual retraction gives $(\iota\rho)^*F=\rho^*(TF)=0$;
+the whole difference identity then puts $-F$, and hence $F$, in $E$.
+The finite functional span/origin-germ dictionary identifies the entire
+true equation ideal with the ring span of these actual equation germs.
+No polynomial-only argument or caller kernel certificate is used.
+\end{proof}
+
+\begin{theorem}[Actual coherent origin ideals commute with genuine pullback and sum]
+\label{hir:relative-normal-analytic-graph-origin-ideal-operations}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.whole_origin_span_mem,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalOriginIdeal_pullback_eq,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalOriginIdeal_sum_eq}
+\uses{hir:relative-normal-deformation-whole-origin-ideal}
+For a genuine zero-preserving continuous linear map $\eta$ and an actual
+coherent ideal $\mathfrak b$, the WHOLE origin ideal of its actual sheaf
+pullback equals the genuine ring-ideal image under $\eta^*$.
+The WHOLE origin ideal of the actual sum of two coherent ideals is the
+sum of their whole origin ideals.
+\end{theorem}
+\begin{proof}
+One pullback inclusion follows by taking every genuine original stalk
+member to its actual composite. For the reverse, unfold actual sheaf
+pullback membership: it is a finite WHOLE holomorphic coefficient
+combination of actual functions $f_i\circ\eta$ with each $f_i$ in the
+original stalk. Coherence supplies genuine holomorphy of every $f_i$.
+The full eventual functional identity passes to the entire germ identity,
+so every actual pullback member belongs to the ring-ideal image.
+For sums, actual sheaf membership is a finite functional span of the
+union of the two actual stalks. Coherence supplies every generator's
+whole holomorphy, and its entire germ lies in the corresponding original
+ideal. The same whole finite coefficient identity proves inclusion in the
+ring sum. Conversely the actual coherent sheaf sum contains both original
+stalks and is coherent; its whole origin ideal contains both entire ring
+ideals and therefore their sum. No flatness certificate is needed.
+\end{proof}
+
+\begin{theorem}[The original enlarged equation quotient is the actual scaled graph quotient]
+\label{hir:relative-normal-analytic-graph-original-quotient}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.actualGraphScaledIdeal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalDeformationOriginIdeal_eq,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_kernel_le_original,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_map_originalOriginIdeal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalOriginIdeal_eq_graphTrace_comap,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalGraphQuotientMap,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalGraphQuotientMap_surjective,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalGraphQuotientMap_kernel,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalGraphQuotientEquiv,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalGraphQuotientEquiv_apply_mk}
+\uses{hir:relative-normal-analytic-graph-whole-kernel,hir:relative-normal-analytic-graph-origin-ideal-operations,hir:relative-normal-deformation-uniform-saturation}
+Write $I$ for the actual original whole origin ideal, $K$ for the actual
+origin ideal of $p^*\mathfrak a+\mathfrak e$, and
+$L=(T\circ p^*)I$ for the genuine scaled ideal in $C$.
+Then $TK=L$, $K=T^{-1}L$, and the actual quotient rings satisfy
+$A/K\simeq C/L$. The actual scaled functions are $f(x,uv)$ for every
+original WHOLE $f$, including arbitrary convergent germs.
+\end{theorem}
+\begin{proof}
+The preceding actual pullback/sum identities give $K=p^*I+E$.
+Taking the genuine ideal image under $T$ kills $E=\ker T$ and gives
+precisely the ideal image under the actual composite $T\circ p^*$.
+The actual split surjectivity and $\ker T\subseteq K$ imply
+$T^{-1}(TK)=K$. Compose $T$ with the actual quotient map $C\to C/L$;
+it is surjective with kernel $K$. The genuine first isomorphism theorem
+therefore gives the claimed WHOLE quotient ring equivalence. Its value
+on every quotient representative is the actual trace followed by the
+actual quotient map. No caller presentation or quotient certificate occurs.
+\end{proof}
+
+\begin{theorem}[Literal parameter colons and the actual central fiber dictionary]
+\label{hir:relative-normal-analytic-graph-colons-central}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphParameterGerm,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_parameter,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.actualGraphColonIdeal,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalOriginColon_eq_graphTrace_comap,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphTrace_map_originalOriginColon,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralInclusion,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphEmbedding_graphCentralInclusion,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralPullback,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralPullback_graphTrace,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralPullback_comp_trace,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.originalCentralOriginIdeal_eq_graphColon_image,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralInclusion_tangent,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralInclusion_parameter,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.graphCentralInclusion_fiber}
+\uses{hir:relative-normal-analytic-graph-original-quotient,hir:relative-normal-deformation-central-restriction}
+Let $a$ be the actual parameter germ in $A$, $\bar a=Ta$ its actual graph
+parameter, and $K_q=K:a^q$, $L_q=L:\bar a^q$ the literal entire ideal colons.
+For ALL $q$, $K_q=T^{-1}L_q$ and $TK_q=L_q$.
+Let $\gamma(x,v)=(x,0,v)$ in the graph model. The whole origin ideal of
+the actual central sheaf pullback of the $q$th original colon is exactly
+$\gamma^*L_q$ as a genuine ideal image, with the full coordinate dictionary.
+\end{theorem}
+\begin{proof}
+For every whole ambient $g$, true colon membership is $ga^q\in K$.
+Using $K=T^{-1}L$ and multiplicativity of the ACTUAL trace, this is exactly
+$(Tg)\bar a^q\in L$, or $Tg\in L_q$. Thus $K_q=T^{-1}L_q$.
+Surjectivity of $T$ proves that the entire image of this preimage is $L_q$.
+The actual linear central graph map $\gamma$ satisfies $\iota\gamma=j$,
+where $j$ is the genuine previously constructed central inclusion. Whole
+representative composition therefore gives $j^*=\gamma^*T$.
+Actual coherence of the original $q$th colon and the genuine linear
+pullback/origin-ideal equality identify its central origin ideal with
+$j^*K_q$. Genuine ideal-image composition and the preceding full image
+identity now give exactly $\gamma^*L_q$. No nearby-original-cone identity
+is inferred from this actual central model dictionary.
+\end{proof}
+
+\begin{theorem}[Only the original coherent input supplies the true saturated graph model]
+\label{hir:relative-normal-analytic-graph-original-saturated-consumer}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.exists_original_graph_saturated_model,Hironaka.HironakaRelativeNormalAnalyticGraphQuotient.exists_original_graph_quotient_and_saturation}
+\uses{hir:relative-normal-analytic-graph-colons-central,hir:relative-normal-deformation-uniform-saturation}
+Only $d,t,\mathfrak a$ and actual coherence internally supply SAME $N,U$,
+the actual whole graph quotient and central $N$th graph-colon image
+identities above, and every original enlarged-equation all-power saturation
+and whole-union dictionary at EVERY point of the SAME true open $U$.
+At zero the whole graph saturation union equals the SAME $L_N$.
+\end{theorem}
+\begin{proof}
+Internally select the genuine coherent original-equation saturation index
+and ONE open from its proven actual Noetherian/coherent spreading producer.
+Retain every all-point, all-power and entire functional saturation-union
+identity on that SAME open. At zero, representing each WHOLE ambient germ
+by its genuine holomorphic function identifies these actual functional
+colon dictionaries with the literal ring colons. Their full entire images
+under the internally surjective trace are the corresponding graph colons,
+so all graph colons beyond $N$ and their entire increasing union equal $L_N$.
+The preceding actual quotient and central-image identities apply to this
+internally selected $N$ without external index, generator, kernel, Rees,
+central-fiber or flatness certificates. Return these actual joint results.
+\end{proof}
+
+\paragraph{Open frontier.}
+The actual graph-saturated central model is not yet identified with the
+WHOLE nearby ORIGINAL Rees algebra/associated graded cone. The reverse
+whole analytic initial-ideal dictionary, analytic polynomial-extension
+flatness and convergence/spreading identification require genuine proofs.
+Nearby ALL-degree freeness, analytic normal-flatness, higher HS and G8 remain
+OPEN. Origin whole ring equalities do not invent maps into arbitrary nearby stalks.

@@ -1,0 +1,4 @@
+private def vertexEnumeration (I : Ideal (MvPowerSeries (Fin n) ℂ)) :
+    Fin (Fintype.card (actualInitialVertices MonomialOrder.degLex I)) ≃
+      actualInitialVertices MonomialOrder.degLex I :=
+  (Fintype.equivFin _).symm

@@ -1,0 +1,4 @@
+/-- **The transported tower has the same length.** -/
+theorem length_transport : {Y : CMfd.{u} n} → (T : BlowupTower X Y) → (transport Φ T).tower.length = T.length
+  | _, .refl => rfl
+  | _, .step T _ _ _ => congrArg (· + 1) (length_transport T)

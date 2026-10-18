@@ -1,0 +1,98 @@
+\section{Actual whole-ideal detection by all original finite jets}
+
+This chapter supplies the convergent original-ring separation needed before
+formal initial-diagram or division arguments can identify an ENTIRE original
+ideal. It is an auxiliary bridge for the standard-basis route in
+\cite[\S7, pp.~260--263]{bierstone-milman97-invent-math}; it does not prove
+formal division or a transformed-standard-basis theorem.
+Write $R=\mathcal O_{\mathbb C^n,0}$, with its ACTUAL original complex
+algebra structure, $\mathfrak m$ its true maximal ideal, and $j_q$ the
+already constructed genuine finite derivative jet of every original germ.
+All ideals below are arbitrary original ideals, including zero and the unit
+ideal, and zero ambient dimension is allowed.
+
+\begin{theorem}[Every original whole ideal is separated in the actual maximal filtration]
+\label{hir:actual-whole-ideal-maximal-filtration-separated}
+\uses{hir:actual-finite-linear-jet-kernel,hir:actual-every-original-ideal-finite-jet-columns}
+\lean{Hironaka.HironakaActualWholeIdealJetDetection.mem_original_ideal_iff_all_maximal_thickenings,Hironaka.HironakaActualWholeIdealJetDetection.iInf_original_maximal_thickenings,Hironaka.HironakaActualWholeIdealJetDetection.mem_original_ideal_iff_all_positive_thickenings}
+\leanok
+For EVERY original ideal $I\subset R$,
+\[
+ \bigcap_{q\ge0}(I+\mathfrak m^q)=I.
+\]
+Consequently an original numerator belongs to $I$ exactly when it belongs
+to all these genuine enlarged ideals, equivalently when it belongs to
+$I+\mathfrak m^{\ell+1}$ for every $\ell\ge0$.
+\end{theorem}
+\begin{proof}
+The original holomorphic germ ring is internally Noetherian and local.
+Its quotient $M=R/I$, regarded as an ORIGINAL $R$-module, is finite even
+when $I=R$. Module Krull intersection for the actual proper maximal ideal
+therefore gives $\bigcap_q\mathfrak m^q M=0$. If $g$ lies in every
+displayed enlarged ideal, write $g=a_q+z_q$ with $a_q\in I$ and
+$z_q\in\mathfrak m^q$. The actual quotient class of $g$ is the class of
+$z_q=z_q\cdot1$, hence belongs to every $\mathfrak m^q M$. It is zero,
+so $g\in I$. The other inclusion is literal original ideal inclusion.
+The order-zero enlarged ideal is the whole ring; removing that one
+condition gives precisely the positive-order version. No quotient
+nontriviality or proposed ideal equality is assumed.
+\end{proof}
+
+\begin{theorem}[True finite derivative images determine entire original ideals]
+\label{hir:actual-whole-ideal-all-finite-jet-detection}
+\uses{hir:actual-whole-ideal-maximal-filtration-separated,hir:actual-finite-linear-jet-kernel,hir:actual-every-original-ideal-finite-jet-columns}
+\lean{Hironaka.HironakaActualWholeIdealJetDetection.finiteJet_mem_original_image_iff,Hironaka.HironakaActualWholeIdealJetDetection.mem_original_ideal_iff_all_finiteJet_images,Hironaka.HironakaActualWholeIdealJetDetection.mem_original_ideal_iff_all_positive_finiteJet_images,Hironaka.HironakaActualWholeIdealJetDetection.original_ideal_le_iff_all_finiteJet_images,Hironaka.HironakaActualWholeIdealJetDetection.original_ideal_eq_iff_all_finiteJet_images}
+\leanok
+For every original $g\in R$, ideal $I$, and $q\ge0$,
+\[
+ j_q(g)\in j_q(I)\quad\Longleftrightarrow\quad
+ g\in I+\mathfrak m^q.
+\]
+Thus $g\in I$ iff $j_q(g)\in j_q(I)$ for EVERY $q$, and equivalently
+for every positive $q$. For any two original ideals $I,J$, actual
+inclusion $I\subseteq J$ is equivalent to $j_q(I)\subseteq j_q(J)$ for
+every $q$, and equality is equivalent to equality of ALL these actual
+complex subspaces.
+\end{theorem}
+\begin{proof}
+A genuine image witness $a\in I$ with $j_q(a)=j_q(g)$ has
+$g-a\in\ker j_q=\mathfrak m^q$, giving the enlarged-ideal membership.
+Conversely the actual decomposition $g=a+z$, with $a\in I$ and
+$z\in\mathfrak m^q$, gives $j_q(g)=j_q(a)$ by the already proved
+WHOLE jet kernel. Intersect the resulting equivalences using the first
+theorem. Actual ideal inclusion implies every image inclusion directly.
+If all image inclusions hold, apply the membership equivalence to EACH
+original $g\in I$ to obtain $g\in J$. Both inclusion directions give the
+equality assertion. In particular this does not select or transport a
+finite surrogate ideal in place of the original one.
+\end{proof}
+
+\begin{theorem}[A proper original ideal inclusion is detected by an existing HS value]
+\label{hir:actual-proper-ideal-inclusion-finite-hs-separation}
+\uses{hir:actual-whole-ideal-all-finite-jet-detection,hir:actual-whole-point-quotient-jet-rank}
+\lean{Hironaka.HironakaActualWholeIdealJetDetection.exists_hilbertSamuelValue_lt_of_original_ideal_lt,Hironaka.HironakaActualWholeIdealJetDetection.original_ideal_eq_iff_entire_hs_eq_of_le}
+\leanok
+If $I\subsetneq J$ are original ideals, there is an actual $\ell\ge0$
+with
+\[
+ H_J(\ell)<H_I(\ell).
+\]
+Consequently, for actual original $I\subseteq J$, equality of EVERY
+existing original HS value is equivalent to WHOLE ideal equality.
+\end{theorem}
+\begin{proof}
+Choose a genuine original $g\in J\setminus I$. The preceding
+positive-order jet detection supplies some $q=\ell+1$ with
+$j_q(g)\notin j_q(I)$. Since $j_q(g)\in j_q(J)$ and actual image
+inclusion holds, $j_q(I)$ is a PROPER complex subspace of $j_q(J)$.
+All are finite dimensional actual derivative subspaces. Their original
+complex dimensions therefore satisfy
+$\dim j_q(I)<\dim j_q(J)\le\dim\operatorname{im}j_q$.
+The already proved ENTIRE original quotient dictionary gives
+$H_K(\ell)=\dim\operatorname{im}j_q-\dim j_q(K)$ for $K=I,J$;
+these genuine finite dimension inequalities give the displayed strict
+inequality. If $I\subseteq J$ and all original HS values agree, a proper
+inclusion would contradict it, so $I=J$. The converse follows from literal
+ideal equality. Without the inclusion premise, equal HS profiles are not
+claimed to identify ideals.
+\end{proof}

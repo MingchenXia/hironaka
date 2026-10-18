@@ -1,0 +1,107 @@
+\section{Actual positive Step One lower histories under arbitrary smooth maps}
+
+Fix an original well-formed marked ideal $M$ on $X^n$, its actual
+coefficient-homogenized test history $T$, and an actual smooth Cartesian
+history $Q$ over $f:Y^m\to X^n$, with actual final map $g$.
+No surjectivity, positive source compactness, injectivity on global boundary
+sets, desired lower-record comparison or restricted-tail certificate is
+assumed. Every empty indexed boundary entry and original ordering is retained.
+
+\begin{lemma}[Reflection of original-member membership through a point]
+\label{hir:smooth-positive-lower-through-member-reflection}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveLowerHistory.mem_of_preimage_mem_map_through}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:submersion-nc-entire-snc-preimage,bcalc:snc-simultaneous}
+Let $E$ be an actual SNC divisor and $E_0$ a list of its actual members.
+For a smooth map $g$, a member $H\in E$ through $g(z)$ whose whole preimage
+belongs to $E_0$'s preimage list already belongs to $E_0$.
+\end{lemma}
+\begin{proof}
+Choose $H_0\in E_0$ with $g^{-1}H_0=g^{-1}H$ and retain their actual
+indices $i,j$ in $E$. Smooth pullback supplies the SNC structure of the
+entire indexed list $g^{-1}E$. Its indexed members $i,j$ pass through $z$
+and agree as whole sets, hence as germs. The actual SNC germ separation
+theorem gives $i=j$. Thus $H=H_0\in E_0$. No reflection is claimed for
+members missing $z$; coincident empty preimages remain literal entries.
+\end{proof}
+
+\begin{theorem}[The whole member-restricted record]
+\label{hir:smooth-positive-lower-whole-member-record}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveLowerHistory.markedPullback_memberRestrict_membersThrough}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-positive-lower-through-member-reflection,hir:submersion-relative-differential-whole-homogenized-coefficient,bcalc:member-restriction-rebase}
+For an original well-formed $J$, a list $E_0$ of its actual members and
+any smooth $g$, the smooth pullback of the whole member-restricted record
+selected by $E_0$ through $gz$ equals the corresponding whole record
+for $g^*J$ at $z$.
+\end{theorem}
+\begin{proof}
+The true smooth coefficient-ideal theorem identifies the entire
+coefficient record, thus its literal ideal and marking. For the carrier,
+write the intersection as the condition on members through the point.
+Pullback preserves membership at the point; the preceding lemma reflects
+membership in $E_0$ when it is needed. The same reflection in the existing
+filter-map theorem identifies the entire surviving indexed divisor in
+its original order, with multiplicities and empty entries. These four
+field equalities identify the entire original marked record.
+\end{proof}
+
+\begin{theorem}[The actual positive masked lower record]
+\label{hir:smooth-positive-lower-actual-mask-record}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveLowerHistory.IsActualTowerPullback.exists_actual_positive_lower_record}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-positive-lower-whole-member-record,hir:smooth-bar-record,hir:smooth-all-branches-original-member-mask,hir:step-one-value-masked}
+For every positive lower index $s+1$ and every actual stage point $z$,
+the actual restricted smooth map between the original masks pulls back
+the whole original lowerMarkedM record to the pulled history's whole
+lowerMarkedM record.
+\end{theorem}
+\begin{proof}
+The actual original bar-stage gives its well-formedness internally.
+The original-member list is literally a prefix of its whole divisor,
+so membership inclusion is internal. The bar-stage and original-member
+dictionaries and the preceding producer identify the whole unmasked
+member-restricted record. The all-branch maskA theorem identifies the
+actual open mask with the smooth preimage. Restrict the actual smooth map
+to these actual opens. Coherence of the coefficient ideal, supplied
+internally by the original stage, makes whole marked pullback commute
+with both compositions of these actual maps. Substitution identifies all
+four fields of the actual positive masked lower record. The formula
+holds for every stage point; no positive-level or nonspecial-point
+certificate is needed to construct the record itself.
+\end{proof}
+
+\begin{theorem}[The actual selected positive lower Cartesian tail]
+\label{hir:smooth-positive-lower-actual-selected-tail}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveLowerHistory.IsActualTowerPullback.exists_split_actual_positive_lower_diagram,Hironaka.HironakaSmoothSubmersionPositiveLowerHistory.IsActualTowerPullback.exists_selected_actual_positive_lower_diagram}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-positive-lower-actual-mask-record,hir:smooth-all-branches-original-regime-run,hir:historical-control-open-history,hir:tower-split}
+At every literal split index $j$, and in particular at the literal current
+fixed regime run $r$ at a point of positive level $s+1$, the actual
+simultaneous split supplies both head and tail maps.
+There exist actual maps between the actual lower masks and their actual
+tail preimages, which compare the whole lower records and give an actual
+Cartesian relation of the restricted tail histories.
+\end{theorem}
+\begin{proof}
+First apply the actual simultaneous split at the arbitrary index $j$.
+For the actual selected diagram, the full original level/run dictionaries
+identify the current selected run in both original histories, so apply
+the arbitrary-split construction at precisely that literal index. The original full test history supplies head test
+data internally. The tail square identifies the selected projected
+points, and the preceding theorem gives the exact lower record at those
+points. The actual mask dictionary and actual open-restriction producer
+construct the maps and the true Cartesian restricted histories.
+Their stage coordinates remain the original stage coordinates.
+Neither the lower record nor the restricted-tail conclusion is a premise.
+\end{proof}
+
+The chosen level-zero contact comparison, the ambient dimension shift
+of higher values and the full recursive canonical invariant comparison
+remain further producers. This result constructs actual positive lower
+records and tails and does not assert equality of ambient-dependent
+resolution invariant values.

@@ -1,0 +1,132 @@
+\section{Actual interior test histories and the recursive monomial leaf}
+
+An original crossing lower diagram has the same actual initial lower
+record but a different entire tail, containing an internal identity empty
+blowup.  Its admissibility must therefore be supplied from the original
+data, not assumed as a lower-history comparison.  We first establish that
+real test-history preservation.  The actual monomial branch of the full
+recursive invariant is then transported along these original histories.
+This is additional explicit indexed-history bookkeeping for Wlodarczyk's
+Step One and Bierstone--Milman's trivial blowup convention.
+
+\begin{lemma}[Normal crossings ignore an inserted empty boundary entry]
+\label{hir:original-empty-boundary-centre-normal-crossings}
+\lean{Hironaka.HironakaOriginalCrossingValueTransport.hasNormalCrossings_insertIdx_empty_iff}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:snc-basic}
+For every actual ordered boundary list $E$, actual subset $C$ and index
+$j\leq |E|$, $C$ has normal crossings with
+$E.\operatorname{insertIdx}(j,\varnothing)$ if and only if it has normal
+crossings with $E$.  No boundary entry is deleted from either history.
+\end{lemma}
+\begin{proof}
+At a point $x\in C$, retain the actual adapted chart and coordinate
+support of $C$.  A member of the inserted list through $x$ cannot be its
+empty entry, so it is an actual old member.  Choose its original list
+index and use that member's actual coordinate support; for a member
+missing $x$ choose empty support.  Each required coordinate formula and
+one-coordinate cardinality is precisely the retained old member's
+formula.  The inserted entry has no required formula or cardinality,
+because no point belongs to it.  This constructs adapted coordinates for
+the entire inserted indexed list.  Conversely every old member occurs
+in the actual inserted list.  At $x$, choose its actual index there and
+retain that coordinate support, with the same chart and $C$ support.
+Its formula and cardinality are the supplied inserted-list ones.  These
+constructions give both directions pointwise, and hence for all $x\in C$.
+They use genuine membership equality of the nonempty members; no global
+index-preimage injectivity or new normal-crossings certificate is needed.
+\end{proof}
+
+\begin{lemma}[Actual test towers under an initial empty boundary insertion]
+\label{hir:original-empty-boundary-test-history}
+\lean{Hironaka.HironakaOriginalCrossingValueTransport.isAdmissibleCentre_insertEmpty_iff,Hironaka.HironakaOriginalCrossingValueTransport.isGeoTestTower_insertEmpty_iff}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-empty-boundary-centre-normal-crossings,hir:original-invariant-empty-actual}
+For any marked ideal $J$ and $j\leq |J.E|$, any actual tower $R$ is a
+test tower of $\operatorname{insertEmpty}_j(J)$ if and only if it is a
+test tower of $J$.  The actual admissibility of every centre also agrees.
+\end{lemma}
+\begin{proof}
+Inserting the empty member changes neither the carrier, coefficient
+ideal, mark nor cosupport.  A centre has the same closed submanifold and
+cosupport conditions, and its normal-crossings condition agrees by the
+previous lemma.  Thus its entire admissibility condition agrees.
+Induct on the actual last steps of $R$.  The empty tower is a test tower
+on both sides.  At a last step, actual transformation commutes with the
+same indexed insertion; the index remains valid because the whole
+boundary has gained exactly one entry at each previous step.  The
+induction hypothesis gives testness of the predecessor and the proved
+admissibility equivalence gives its actual last centre.  This proves
+both directions for the entire tower, with all original blowup data kept.
+\end{proof}
+
+\begin{theorem}[Genuine original testness across the internal identity empty step]
+\label{hir:original-interior-empty-test-history}
+\lean{Hironaka.HironakaOriginalCrossingValueTransport.isGeoTestTower_interior_empty_iff}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-empty-boundary-test-history,hir:original-interior-empty-geometric-dictionary,hir:restricted-equivalence,hir:wellformed-tower}
+Let $M$ be originally well formed and $H$ an actual test tower of $M$.
+For every actual tail $S$, $H\epsilon S$ is an actual test tower of $M$
+if and only if $HS$ is, where $\epsilon$ is the genuine identity empty
+blowup.  This includes an empty tail.
+\end{theorem}
+\begin{proof}
+The actual transformed original record $K=M_H$ is well formed.  Its
+genuine identity empty step is admissible, so $H\epsilon$ is an actual
+test head.  The actual transformed record after that step is
+$\operatorname{insertEmpty}_{|M.E|+|H|}(K_\epsilon^-)$, where
+$K_\epsilon^-$ is the actual empty-step base with only its newly created
+empty member removed.  The actual identity empty-blowup calculus gives
+restricted equivalence of $K_\epsilon^-$ and $K$, genuine coherence of
+both ideals, closedness of their common carrier, and equality of their
+original whole boundary.  Restricted-equivalent coherent records have
+the same actual admissible test towers.  Removing the new empty boundary
+entry for testing is also legitimate by the previous lemma, with its
+index bounded by the real whole empty-step base boundary.  Thus $S$ is
+a test tail of the actual new head record exactly when it is a test tail
+of $K$.  Testness of a concatenation is testness of its actual head and
+tail; the already proved test heads $H$ and $H\epsilon$ now give precisely
+the asserted equivalence.  No testness of the inserted lower tail is a
+caller conclusion certificate.
+\end{proof}
+
+\begin{theorem}[The actual full-family monomial leaf in the same original history]
+\label{hir:original-interior-empty-full-family-monomial-leaf}
+\lean{Hironaka.HironakaOriginalCrossingValueTransport.nmOrd_interior_empty_nonempty,Hironaka.HironakaOriginalCrossingValueTransport.invFamily_interior_monomial_leaf,Hironaka.HironakaOriginalCrossingValueTransport.invFamily_interior_monomial_comparisons}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-empty-test-history,hir:original-interior-empty-geometric-dictionary,hir:original-invariant-empty-map-strict,hir:general-value-basic}
+Let $n>0$, $k\geq0$, $M$ originally well formed, $H$ an actual test
+history of $M$, $S$ a nonempty actual tail and $y$ an actual final point.
+Assume that the actual nonmonomial order of $M_{HS}$ at $y$ is zero.
+Then the actual nonmonomial order at $H\epsilon S,y$ is also zero and
+\[
+ \operatorname{invFamily}(n,k)(M,H\epsilon S,y)
+ =\operatorname{shiftFamily}(k,|M.E|+|H|)
+    \bigl(\operatorname{invFamily}(n,k)(M,HS,y)\bigr).
+\]
+For any two such actual zero-order points, strict order, weak order and
+equality of these actual full invariant values are preserved and reflected.
+The original initial ideal and entire history remain unre-based.
+\end{theorem}
+\begin{proof}
+The nonempty-tail whole-record producer gives the actual transformed
+record at $H\epsilon S$ as the old transformed record with the empty
+entry inserted at the true position $j=|M.E|+|H|$, bounded by the old
+whole boundary.  Actual nonmonomial order is unchanged by this insertion,
+so both points lie in the same actual zero-order branch.  For $k=0$ the
+actual family is constant and its shift is the identity.  For $k>0$ its
+definition in this branch is its unchanged first coordinate zero and the
+actual monomial invariant of its transformed original record.  That
+monomial invariant is changed precisely by the proved indexed shift at
+$j$.  The definition of shiftFamily on this branch is exactly that map,
+giving the entire full-family equality.  The map is strictly increasing
+on the full value type at every $k$, so applying it to two genuine
+zero-order points preserves and reflects all three comparisons.  This
+leaf computation uses no proposed arbitrary-invariant insertion axiom.
+It does not replace the still-needed positive-order recursive crossing
+transport or claim maximum existence or scheduling.
+\end{proof}

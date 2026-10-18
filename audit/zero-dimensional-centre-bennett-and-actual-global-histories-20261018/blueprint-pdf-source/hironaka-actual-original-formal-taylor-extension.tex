@@ -1,0 +1,117 @@
+\section{The genuine original multivariate formal Taylor algebra embedding}
+
+Let $R=\mathcal O_{\mathbb C^n,0}$ with its ORIGINAL complex scalar
+structure, and let $c_\alpha(g)$ be the actual stabilized coefficients
+already constructed from genuine finite quotient polynomials. Define
+$\mathcal T(g)=\sum_\alpha c_\alpha(g)X^\alpha$ in the ACTUAL
+multivariate formal power-series ring $\mathbb C[[X_1,\ldots,X_n]]$,
+whose multiplication is its genuine coefficient convolution. The
+zero-tangential-block coordinate identification retains the same original
+ambient coordinates. This supplies a faithful convergent-to-formal
+producer for \cite[\S7]{bierstone-milman97-invent-math}; completion
+surjectivity, faithful flatness, formal division and transformed standard
+bases remain separate obligations.
+
+\begin{lemma}[Actual constants and original coordinates have their genuine formal values]
+\label{hir:actual-original-formal-taylor-constants-coordinates}
+\uses{hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-taylor-coefficient-stabilization}
+\lean{Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorPolynomial_constant,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorPolynomial_coordinate,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorSeries,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorSeries_coefficient,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorSeries_constant,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorSeries_coordinate}
+\leanok
+The actual formal series $\mathcal T(a)$ of an original complex constant
+is the genuine constant formal series $a$, and the actual formal series
+of EACH original coordinate germ is the corresponding formal variable
+$X_i$. All coefficients are the SAME original complex numbers.
+\end{lemma}
+\begin{proof}
+A genuine constant polynomial has the exact original constant germ as its
+evaluation and has no coefficient outside degree zero. The already proved
+finite Taylor uniqueness therefore gives $T_k(a)=a$ for every $k$.
+For an original coordinate, its genuine polynomial $X_i$ has the exact
+same evaluation and degree one; uniqueness gives $T_k(x_i)=X_i$ whenever
+$k\ge1$. To compute ANY original coefficient in either statement, use
+coefficient stabilization at an actual truncation containing that exponent
+and, for a coordinate, also degree one. These are precisely the genuine
+constant and variable coefficients in the actual formal-series ring.
+\end{proof}
+
+\begin{theorem}[Actual whole original products give the genuine formal coefficient convolution]
+\label{hir:actual-original-formal-taylor-genuine-convolution}
+\uses{hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-polynomial-low-coefficient-separation,hir:actual-original-taylor-coefficient-stabilization}
+\lean{Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorCoefficientMap_mul,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorSeries_mul}
+\leanok
+For ANY original numerators $g,h\in R$ and EVERY actual exponent $\alpha$,
+\[
+ c_\alpha(gh)=\sum_{\beta+\gamma=\alpha}c_\beta(g)c_\gamma(h).
+\]
+Thus $\mathcal T(gh)=\mathcal T(g)\mathcal T(h)$ for the ACTUAL formal
+power-series multiplication, rather than pointwise coefficient products.
+\end{theorem}
+\begin{proof}
+Set $k=|\alpha|$ and $A=T_k(g)$, $B=T_k(h)$, $C=T_k(gh)$.
+All three true original remainders lie in $\mathfrak m^{k+1}$. The literal
+original ring identity
+\[
+ \operatorname{ev}(C)-\operatorname{ev}(A)\operatorname{ev}(B)
+ =-(gh-\operatorname{ev}(C))
+   +g(h-\operatorname{ev}(B))
+   +(g-\operatorname{ev}(A))\operatorname{ev}(B)
+\]
+puts the actual evaluation of $C-AB$ in that SAME true maximal power.
+Genuine lower coefficient separation gives $[X^\alpha]C=[X^\alpha](AB)$.
+The genuine polynomial product formula expresses the right side as its
+finite exponent antidiagonal sum. At each actual pair $\beta+\gamma=\alpha$,
+nonnegative degree additivity gives $|\beta|,|\gamma|\le k$; true
+coefficient stabilization therefore replaces both polynomial coefficients
+by $c_\beta(g)$ and $c_\gamma(h)$. This proves the displayed convolution.
+Actual formal coefficient extensionality and the genuine formal product
+formula give the stated multiplication identity.
+\end{proof}
+
+\begin{theorem}[An actual injective algebra homomorphism retains every original constant and coordinate]
+\label{hir:actual-original-formal-taylor-algebra-embedding}
+\uses{hir:actual-original-formal-taylor-constants-coordinates,hir:actual-original-formal-taylor-genuine-convolution,hir:actual-original-all-taylor-coefficients-faithful}
+\lean{Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorSeries_add,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorAlgHom,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorAlgHom_coefficient,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorAlgHom_injective,Hironaka.HironakaActualOriginalFormalTaylor.originalTaylorAlgHom_coordinate}
+\leanok
+The SAME $\mathcal T$ is an injective ORIGINAL complex algebra homomorphism
+from the ENTIRE original holomorphic germ ring to the ACTUAL multivariate
+formal power-series ring, retaining the displayed original constants and
+coordinates.
+\end{theorem}
+\begin{proof}
+Original coefficient linearity gives zero and addition for the genuine
+formal additive structure. The preceding actual constant computation
+gives the genuine unit and the original constant action; the preceding
+convolution gives the actual formal multiplication. These fields construct
+the complex algebra homomorphism on the SAME entire original numerator
+map. If two actual formal images agree, each actual original coefficient
+agrees; the already proved injectivity of the original complex coefficient
+function map forces the two ORIGINAL germs equal. No algebra structure is
+transported or substituted on either ring.
+\end{proof}
+
+\begin{theorem}[Actual original maximal powers have precisely the genuine low-coefficient kernel]
+\label{hir:actual-original-formal-taylor-maximal-power-kernel}
+\uses{hir:actual-original-formal-taylor-algebra-embedding,hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-polynomial-low-coefficient-separation}
+\lean{Hironaka.HironakaActualOriginalFormalTaylor.mem_original_maximal_pow_iff_formal_coefficients_zero}
+\leanok
+For every original $g\in R$ and $q\ge0$,
+\[
+ g\in\mathfrak m^q\quad\Longleftrightarrow\quad
+ [X^\alpha]\mathcal T(g)=0\quad\hbox{for all }|\alpha|<q.
+\]
+This is the actual original filtration dictionary with the genuine formal
+coefficients, without a supplied coefficient or kernel certificate.
+\end{theorem}
+\begin{proof}
+Suppose $g\in\mathfrak m^q$ and $|\alpha|<q$. Put $k=|\alpha|$.
+The actual power inclusion gives $g\in\mathfrak m^{k+1}$, and its true
+Taylor remainder lies there too. Subtracting yields
+$\operatorname{ev}(T_k(g))\in\mathfrak m^{k+1}$. Actual lower
+coefficient separation kills its $\alpha$ coefficient, which is the
+actual formal coefficient by stabilization. Conversely $q=0$ is the
+whole original ring. For $q=k+1$, all lower coefficients of $T_k(g)$
+vanish by the assumed actual formal coefficients and stabilization; all
+higher ones vanish by its true support bound. Thus $T_k(g)=0$, and the
+actual whole remainder gives $g\in\mathfrak m^q$ as required. No
+identification with a completed-ideal quotient or flatness is inferred.
+\end{proof}

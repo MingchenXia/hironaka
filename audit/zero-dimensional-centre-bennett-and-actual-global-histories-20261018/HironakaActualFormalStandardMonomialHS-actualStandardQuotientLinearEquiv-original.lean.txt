@@ -1,0 +1,6 @@
+/-- The internally proved genuine monomial bijection retains the EXISTING complex action. -/
+def actualStandardQuotientLinearEquiv (n : ℕ) (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :
+    (actualStandardIndex n I q → ℂ) ≃ₗ[ℂ]
+      (MvPowerSeries (Fin n) ℂ ⧸ (I ⊔ genuineFormalVariables n ^ q)) :=
+  LinearEquiv.ofBijective (actualStandardQuotientMap n I q)
+    ⟨actualStandardQuotientMap_injective I q,actualStandardQuotientMap_surjective I q⟩

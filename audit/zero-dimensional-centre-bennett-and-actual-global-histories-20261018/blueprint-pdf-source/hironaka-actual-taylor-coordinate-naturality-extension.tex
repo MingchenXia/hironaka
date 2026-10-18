@@ -1,0 +1,60 @@
+\section{Whole original germ algebra maps and genuine Taylor coordinate naturality}
+
+The coefficient-presentation dictionary needs Taylor expansion to commute
+with the actual tangential coordinate inclusion. The proof uses genuine
+finite original coordinate representatives, not an assumed continuity or
+coefficient identity. This supplies the coordinate part of the relative
+coefficient route; the entire literal normal-coefficient dictionary remains
+separate until proved.
+
+\begin{theorem}[Actual coordinate images determine the whole original germ map]
+\label{hir:actual-formal-germ-hom-coordinate-uniqueness}
+\uses{hir:actual-whole-germ-finite-monomial-representative,hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualTaylorCoordinateNaturality.map_actualGerm_maximalIdeal_le_formal_coordinates,Hironaka.HironakaActualTaylorCoordinateNaturality.actualGermAlgHom_coefficient_zero_of_mem_maximal_pow,Hironaka.HironakaActualTaylorCoordinateNaturality.actualGermAlgHom_eq_of_coordinate_images}
+\leanok
+Let $f,h:\mathcal O_{\mathbb C^d,0}\to\mathbb C[[X_1,\ldots,X_m]]$
+be actual complex algebra homomorphisms. Suppose their images of every
+original coordinate germ agree and lie in the genuine formal maximal ideal
+$(X_1,\ldots,X_m)$. Then $f=h$ on the ENTIRE original germ ring.
+No topological-continuity certificate or desired Taylor identity is assumed.
+\end{theorem}
+\begin{proof}
+The original holomorphic Hadamard decomposition writes every germ with
+zero value as a sum of actual coordinate germs times actual holomorphic
+germs. Thus each homomorphism maps the entire original maximal ideal into
+the formal maximal ideal, and genuine multiplication gives the same
+inclusion at every power. Actual formal coordinate-power membership
+annihilates every coefficient below that power.
+
+For any original $g$ and any formal exponent $a$, choose the actual finite
+original coordinate-word representative $p$ modulo the original maximal
+power of degree $|a|+1$. Both image remainders have zero $a$ coefficient.
+The two algebra maps agree on $p$ because it lies in the genuine finite
+complex span of products of the original coordinate germs: use their exact
+coordinate identities, multiplication, addition and complex linearity.
+Hence the $a$ coefficients of $f(g)$ and $h(g)$ agree. This holds for every
+actual exponent, proving equality of the entire formal series and then
+of the whole algebra maps, also when either coordinate block is empty.
+\end{proof}
+
+\begin{theorem}[Genuine Taylor expansion commutes with the actual tangential embedding]
+\label{hir:actual-original-taylor-tangent-coordinate-naturality}
+\uses{hir:actual-formal-germ-hom-coordinate-uniqueness,hir:actual-original-formal-taylor-algebra-embedding,hir:relative-normal-basis-actual-entire-quotient-basis}
+\lean{Hironaka.HironakaActualTaylorCoordinateNaturality.tangentPullback_coordinateGerm,Hironaka.HironakaActualTaylorCoordinateNaturality.actualUnshiftedTaylor_tangentPullback}
+\leanok
+For every actual tangential holomorphic germ $g$, its genuine pullback by
+the actual first-coordinate projection has original Taylor series equal
+to the actual variable-renaming of the original Taylor series of $g$,
+using precisely the first $d$ variables inside $d+t$ variables.
+\end{theorem}
+\begin{proof}
+The two sides are independently defined actual complex algebra maps on the
+entire original tangential germ ring. The real coordinate projection pulls
+each original tangential coordinate germ to the corresponding ambient
+coordinate germ. The genuine Taylor homomorphism maps that same coordinate
+to the corresponding formal variable. The actual formal variable-renaming
+homomorphism has exactly the same images. These true coordinate images
+belong to the formal maximal ideal, so the preceding whole-map uniqueness
+applies. This proves the exact original Taylor identity without replacing
+either independently defined map by a proxy.
+\end{proof}

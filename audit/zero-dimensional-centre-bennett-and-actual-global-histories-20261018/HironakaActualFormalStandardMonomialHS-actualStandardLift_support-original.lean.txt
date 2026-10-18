@@ -1,0 +1,10 @@
+/-- The true finite standard lift has exactly the actual bounded diagram-complement support. -/
+theorem actualStandardLift_support (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ)
+    (c : actualStandardIndex n I q → ℂ) (b : Fin n →₀ ℕ)
+    (hb : MvPowerSeries.coeff b (actualStandardLift n I q c) ≠ 0) :
+    normalExponentDegree b < q ∧ b ∉ actualInitialDiagram MonomialOrder.degLex I := by
+  constructor
+  · by_contra h
+    exact hb (actualStandardLift_coefficient_outside I q c b (Or.inl h))
+  · intro h
+    exact hb (actualStandardLift_coefficient_outside I q c b (Or.inr h))

@@ -1,0 +1,67 @@
+\section{Actual original analytic monic vertex generators}
+
+Fix the genuine original Taylor map $T:R\to S$ at the origin of $\mathbb C^n$.
+All original analytic germs below are constructed internally. The monomial
+order in the basis statement is the actual degree-lexicographic order.
+Canonical reduced formal basis convergence is not asserted.
+
+\begin{theorem}[Every formal extended member has actual original ideal jet representatives]
+\label{hir:actual-analytic-ideal-member-finite-jet-lift}
+\uses{hir:actual-formal-extension-whole-original-ideal-contraction}
+\lean{Hironaka.HironakaActualAnalyticVertexBasis.exists_original_ideal_member_jet_lift}
+\leanok
+For every original ideal $I$, every $F\in T(I)S$ and every $q\geq0$, there
+exists $g\in I$ such that $T(g)$ and $F$ have identical coefficients at
+all exponents of total degree less than $q$.
+\end{theorem}
+\begin{proof}
+The original ring is Noetherian, so internally choose finite generators
+$g_i$ of $I$. Membership in their actual formal extension gives an actual
+finite expression $F=\sum_i A_iT(g_i)$. For each formal $A_i$, use its
+actual polynomial truncation through degree $q$, evaluated as an original
+analytic polynomial germ $a_i$. The already proved genuine approximation
+identity says $T(a_i)T(g_i)$ and $A_iT(g_i)$ have the same coefficients
+in degrees less than $q$. The original germ $g=\sum_i a_ig_i$ belongs
+to $I$ and finite additivity gives the stated whole finite jet equality.
+No formal coefficient is assumed convergent and empty families are allowed.
+\end{proof}
+
+\begin{theorem}[A finite actual analytic family realizes all true monic vertices and generates the entire original ideal]
+\label{hir:actual-original-analytic-monic-vertex-basis}
+\uses{hir:actual-analytic-ideal-member-finite-jet-lift,hir:actual-formal-vertex-division-identity,hir:actual-formal-vertex-series-whole-ideal-generation}
+\lean{Hironaka.HironakaActualAnalyticVertexBasis.exists_actual_original_analytic_vertex_basis}
+\leanok
+For every original ideal $I$, let $V$ be the actual finite set of minimal
+vertices of the genuine degree-lex initial diagram of $T(I)S$.
+There exists an actual original analytic family $(g_\alpha)_{\alpha\in V}$
+with $g_\alpha\in I$, $T(g_\alpha)\ne0$, initial exponent exactly $\alpha$
+and coefficient exactly $1$ at $\alpha$. Moreover the entire original ideal
+is $I=(g_\alpha)_{\alpha\in V}$. No proposed standard basis, generator
+family or analytic convergence certificate is supplied.
+\end{theorem}
+\begin{proof}
+For each actual vertex $\alpha$, use the already constructed genuine monic
+formal vertex series of $T(I)S$. Apply the preceding original-ideal jet lift
+with $q=|\alpha|+1$. Its original representative $g_\alpha$ has coefficient
+$1$ at $\alpha$. Every exponent strictly lower in degree-lex has total
+degree at most $|\alpha|$, so its coefficient also agrees with the formal
+vertex series and is zero. Thus $T(g_\alpha)$ is nonzero and has exactly
+the required original initial exponent and monic coefficient.
+
+Set $J=(T(g_\alpha))S$. Then $J\subseteq T(I)S$. Its initial diagram
+contains every vertex of the latter and hence, by upward closure, contains
+the whole latter diagram. The reverse inclusion follows from ideal inclusion.
+To infer whole ideal equality from these equal diagrams, divide any
+$F\in T(I)S$ by the genuine internally constructed vertex family of $J$.
+Its complete remainder has zero coefficients at all diagram exponents of
+$J$. The remainder still belongs to $T(I)S$ because the subtracted finite
+sum belongs to $J$. If nonzero its actual initial exponent belongs to the
+diagram of $T(I)S$, hence of $J$, contradicting that coefficient vanishing.
+So the remainder is zero and $F\in J$. This proves $J=T(I)S$ using whole
+formal division, rather than assuming that a matching finite jet generates.
+Finally extension of the original span of the $g_\alpha$ is exactly $J$.
+The previously proved contraction identity for every entire original ideal
+therefore gives $(g_\alpha)=I$. Empty vertex sets, the zero and unit ideals,
+and dimension zero remain covered. This analytic family need not equal the
+canonical reduced formal basis in its higher coefficients.
+\end{proof}

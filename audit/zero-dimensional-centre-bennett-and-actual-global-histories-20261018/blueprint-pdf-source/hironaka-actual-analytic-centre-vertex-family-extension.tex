@@ -1,0 +1,50 @@
+\section{Genuine analytic monic vertices retaining literal centre powers}
+
+Let $R$ be the original analytic germ ring on $\mathbb C^n$, $T:R\to S$
+its actual unshifted Taylor map and $I\subseteq R$ any original ideal.
+For a coordinate centre set $A$, let $C_A$ be its genuine original coordinate
+ideal. Let $V$ be the actual degree-lex vertices of $T(I)S$, and let
+$F_\alpha$ be its existing canonical reduced formal vertex series.
+
+\begin{theorem}[Actual analytic vertex generators preserve every required whole centre power]
+\label{hir:actual-analytic-centre-compatible-monic-vertex-family}
+\uses{hir:actual-original-analytic-monic-vertex-basis,hir:actual-formal-extension-whole-ideal-intersections,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualAnalyticCentreVertexFamily.exists_actual_analytic_centre_vertex_family}
+\leanok
+Suppose the literal existing reduced formal members satisfy
+$F_\alpha\in\widehat C_A^{w_A(\alpha)}$ for every $\alpha\in V$,
+where $w_A(\alpha)=\sum_{i\in A}\alpha_i$.
+Then there exists an internally constructed finite actual analytic family
+$(g_\alpha)_{\alpha\in V}$ such that
+\[
+ g_\alpha\in I\cap C_A^{w_A(\alpha)},\qquad
+ \operatorname{in}_{\deglex} T(g_\alpha)=\alpha,\qquad
+ [x^\alpha]T(g_\alpha)=1,\qquad I=(g_\alpha)_{\alpha\in V}.
+\]
+No analytic standard family or convergence certificate is supplied. The
+formal centre-power hypothesis is explicit; its derivation for general
+permissible centres remains a separate source-facing goal.
+\end{theorem}
+\begin{proof}
+The genuine coordinate Taylor dictionary identifies the extension of every
+whole analytic centre power with the corresponding whole formal centre power.
+Whole ideal intersection compatibility therefore puts the actual formal
+$F_\alpha$ in the extension of $I\cap C_A^{w_A(\alpha)}$.
+Apply the original-ideal jet representative construction to this actual
+intersection, through degree $|\alpha|$. This internally gives an analytic
+$g_\alpha$ in the genuine intersection, preserving the coefficient $1$ at
+$\alpha$ and every lower degree-lex coefficient. The latter exponents all
+have total degree at most $|\alpha|$, so their coefficients are zero.
+Thus its true Taylor initial exponent is exactly $\alpha$ and it is monic.
+
+These actual Taylor series lie in $T(I)S$ and internally supply every field
+of the existing monic vertex family: genuine ideal membership, coefficient
+$1$ and vanishing below the actual vertex. The existing whole family division
+then proves that their entire formal span is $T(I)S$. Extending the original
+span of the $g_\alpha$ gives exactly that same formal span; injectivity of
+whole original ideal extension yields $I=(g_\alpha)$. The dimension equality
+$0+n=n$ merely transports the already proved original Taylor statements to
+the existing unshifted map. Zero/unit ideals, empty families, an empty centre
+set and dimension zero are included. The higher formal coefficients of this
+analytic family are not asserted to equal the canonical reduced family.
+\end{proof}

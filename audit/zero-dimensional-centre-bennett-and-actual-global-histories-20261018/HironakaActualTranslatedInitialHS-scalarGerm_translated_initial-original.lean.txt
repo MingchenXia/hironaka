@@ -1,0 +1,19 @@
+private theorem scalarGerm_translated_initial (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (p : Fin n → ℂ) (c : ℂ) (hc : c ≠ 0) (a : actualInitialVertices MonomialOrder.degLex I) :
+    actualScalarGermAlgEquiv n c hc (actualTranslatedPolynomialEval n (c • p) (actualInitialVertexPolynomial I a))=
+      algebraMap ℂ _ (c^normalExponentDegree a.val)*actualTranslatedPolynomialEval n p (actualInitialVertexPolynomial I a) := by
+  have he : (actualScalarGermAlgEquiv n c hc).toAlgHom.comp (actualTranslatedPolynomialEval n (c • p))=
+      MvPolynomial.aeval (fun i => algebraMap ℂ (HolGerm (ComplexModel (0+n))) c*
+        (normalCoordinate 0 n i+algebraMap ℂ _ (p i))) := by
+    apply MvPolynomial.algHom_ext
+    intro i
+    change actualScalarGermAlgEquiv n c hc (actualTranslatedPolynomialEval n (c • p) (MvPolynomial.X i))=_
+    simp only [actualTranslatedPolynomialEval,MvPolynomial.aeval_X,map_add,
+      scalarGerm_coordinate,AlgEquiv.commutes,Pi.smul_apply,smul_eq_mul,map_mul]
+    ring
+  have h := DFunLike.congr_fun he (actualInitialVertexPolynomial I a)
+  change actualScalarGermAlgEquiv n c hc
+    (actualTranslatedPolynomialEval n (c • p) (actualInitialVertexPolynomial I a))=_ at h
+  rw [h,homogeneous_aeval_scaled _ _ (actualInitialVertexPolynomial_isHomogeneous I a)]
+  rw [← map_pow]
+  rfl
