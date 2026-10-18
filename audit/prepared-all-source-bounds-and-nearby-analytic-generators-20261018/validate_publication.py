@@ -63,6 +63,8 @@ for r in peer['whole_modules']:
 for r in peer['original_supports']:
  own=next(v for v in supports if v['destination_module']==r['module']);assert own['source_parent_sha256']==r['parent_sha256'] and own['source_complete_declaration_sha256']==r['declaration_sha256'] and own['destination_sha256']==r['destination_sha256']
 for name,h in peer['file_sha256'].items():assert digest(A/name)==h,name
+for name,r in peer['observed_final_strict_gates'].items():assert digest(A/name)==r['sha256']
+assert digest(ROOT/'README.md')==peer['readme_sha256'] and digest(A/'prepare_readme_update.py')==peer['readme_generator_sha256']
 before=load('kernel-artifacts-before.json');after=load('kernel-artifacts-after.json');assert before==after
 assert after['mathematical_modules_including_root']==after['kernel_data_parts']==1035
 assert set(after['sources'])=={'Hironaka.lean'}|{str(p.relative_to(ROOT)) for p in (ROOT/'Hironaka').rglob('*.lean')}
