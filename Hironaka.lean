@@ -645,6 +645,12 @@ import Hironaka.Resolution.HironakaOriginalPreparedZeroOwnLargeRelativeOneValues
 
 import Hironaka.Resolution.HironakaSharpActualCurveGlobalSharpEndpointData
 
+import Hironaka.Resolution.HironakaActualAnalyticNearbyVertexGenerators
+
+import Hironaka.Resolution.HironakaOriginalPreparedJointSourceBoundValues
+
+import Hironaka.Resolution.HironakaSharpActualCurveUniformPrefixRestriction
+
 /-!
 # Hironaka
 

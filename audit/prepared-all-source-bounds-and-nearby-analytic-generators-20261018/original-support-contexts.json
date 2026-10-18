@@ -1,0 +1,135 @@
+[
+  {
+    "source_module": "TranscendentalNakamaye.Pending.BlowupTowerSplitIso",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/BlowupTowerSplitIso.lean",
+    "source_parent_sha256": "1d31622c885b9f4343d1699caa51997e19fc26d566c51884910722a9491480d1",
+    "destination_module": "Hironaka.Support.TowerIsoBaseCongruenceExact",
+    "destination_path": "Hironaka/Support/TowerIsoBaseCongruenceExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          3642
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.BlowupTowerSplit\nimport TranscendentalNakamaye.Pending.BlowupTowerIsoTail\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n/-!\n# Splitting a tower, along restriction to open sets and along isomorphisms of towers\n\nBlueprint `hir:tower-split-iso` (`blueprint/src/hironaka.tex`, Hironaka phase H4).  In the maximal-order case and the\ngeneral step (`hir:maximal-order-step`, `hir:general-step`) the lower-dimensional invariant at a point is computed along the\ntail of the split of the segment at a stage depending on the point (`BlowupTowerSplit.split`).  Properties (5) and (6) of\n`hir:centre-function` for the new invariant compare the split of a restricted tower `T|_U`, resp. of an isomorphic tower\n`T'`, with the split of `T`; this module gives the comparison as isomorphisms of towers (TN23's `IsTowerIso`), so that\nproperties (5) and (6) of the inductive invariant apply to the pieces.  Source: W\u0142odarczyk 2005 (arXiv `hiron.tex`), the\ncommutativity of the resolution procedure of Step 1 with \u00e9tale morphisms (the induced sequence `\u03c6^*(X_i)_{i_l \u2264 i \u2264 i_{l+1}}`\nof each part of the resolution).\n\nThe restriction `restrict U T` of a tower is not definitionally the concatenation of the restricted pieces (the stages agree\nonly propositionally), so the comparisons are isomorphisms of towers whose last-stage maps are the identity on points.\n\n## Main results\n\n* `IsTowerIso.congr_last`, `IsTowerIso.congr_base`: an isomorphism of towers may be stated with any pointwise equal\n  last-stage map, resp. base biholomorphism;\n* `isTowerIso_restrict_of_append_eq`: the form `T\u2080.append T\u2081 = T` of TN23's `isTowerIso_restrict_append`;\n  `openPreimage_head_tail`, `isTowerIso_restrict_head_tail`: the restriction of `T` is isomorphic to the concatenation of\n  the restrictions of the head and of the tail of its split;\n* `exists_isTowerIso_split_restrict`: **the split of a restricted tower is the restriction of the split** -- the head of\n  `split (restrict U T) j` is isomorphic over `id_U` to `restrict U (head T j)`, and its tail, over that isomorphism, to\n  `restrict (openPreimage (head T j) U) (tail T j)` with last-stage map the identity on points; `proj_tail_split_restrict`:\n  the head isomorphism sends the image of a point in the head stage of the restricted split to its image in the head stage\n  of the split;\n* `IsTowerIso.exists_split`: **splits correspond along isomorphisms of towers** -- for `IsTowerIso \u03a6 T' T \u03c7` the heads of the\n  splits at `j` are isomorphic over `\u03a6` and the tails over that isomorphism, with last-stage map `\u03c7`.\n\nImport discipline (Hironaka phase): this module does not import, even transitively,\n`Pending.RelativePrincipalization` or `Pending.EmbeddedResolution`.  Sorry-free.\n-/\n\nopen Set TopologicalSpace\nopen scoped Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.BlowupTowerSplitIso\n\nopen FirstPass FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.BlowupTowerIsomorphism TranscendentalNakamaye.Pending.BlowupTowerSplit\n  TranscendentalNakamaye.Pending.BlowupRestrictOpen TranscendentalNakamaye.Pending.BlowupTowerIsoTail\n\nnoncomputable section\n\nvariable {n : \u2115}\n\n/-! ### Changing the maps of an isomorphism of towers -/\n\nsection Congr\n\nvariable {X X' : CMfd.{u} n} {\u03a6 : X' \u2243\u2098\u27ee\ud835\udcd8(\u2102, ComplexModel n), \ud835\udcd8(\u2102, ComplexModel n)\u27ef X} {Y' Y : CMfd.{u} n}\n  {T' : BlowupTower X' Y'} {T : BlowupTower X Y} {\u03c7 : Y' \u2243\u2098\u27ee\ud835\udcd8(\u2102, ComplexModel n), \ud835\udcd8(\u2102, ComplexModel n)\u27ef Y}\n\n",
+        "sha256": "d07a6f07c8fa3224b981c3c9c165c2619f3143025332d42a6718dbacf4d160c7"
+      },
+      {
+        "source_byte_range": [
+          3986,
+          4333
+        ],
+        "original_text": "/-- An isomorphism of towers may be stated over any pointwise equal base biholomorphism. -/\ntheorem IsTowerIso.congr_base (h : IsTowerIso \u03a6 T' T \u03c7)\n    {\u03a6' : X' \u2243\u2098\u27ee\ud835\udcd8(\u2102, ComplexModel n), \ud835\udcd8(\u2102, ComplexModel n)\u27ef X} (h\u03a6 : \u2200 p, \u03a6' p = \u03a6 p) : IsTowerIso \u03a6' T' T \u03c7 := by\n  obtain rfl : \u03a6' = \u03a6 := Diffeomorph.ext h\u03a6\n  exact h",
+        "sha256": "d6aea4a69c3501ed259b6dea5c9cb175199b3add202aa51f92eb86e3e8af6458"
+      },
+      {
+        "source_byte_range": [
+          4335,
+          4345
+        ],
+        "original_text": "end Congr\n",
+        "sha256": "cacbfabb9f0149cdb9988f4fe734e5e5f2ca442711c7189982962006ad722b2b"
+      },
+      {
+        "source_byte_range": [
+          10140,
+          10200
+        ],
+        "original_text": "end\n\nend TranscendentalNakamaye.Pending.BlowupTowerSplitIso\n",
+        "sha256": "8d22fb4ae3a941dee4bcb952208b0e2d89a7b4fc8d62b0633d8de60ae76e78c8"
+      }
+    ],
+    "recorded_context_omissions": [],
+    "pure_existing_imports": [],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "c1c1ccf30553b3d76b80f49cc017fa83ab72d680043fc4f611d6f1117083247b"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainSaturation",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaSmoothCentreRealDomainSaturation.lean",
+    "source_parent_sha256": "44c1dc29a8c34f3f1027056f408c15bc63f14a6e7cae581d458b1b7d523b0625",
+    "destination_module": "Hironaka.Support.RealDomainLocalCoherenceExact",
+    "destination_path": "Hironaka/Support/RealDomainLocalCoherenceExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          864
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.HironakaSmoothCentreCoherentDomain\n\n/-! # Exact original saturation on a real nonlinear domain\nOnly genuine finite generation near zero is used. Original regularity\nand coherence internally provide the flattening and real target family;\ntrue Oka coherence and germ Noetherianity supply the selected index,\nactual fixed-colon generators and one real open for ALL powers/unions.\nComplete mathematics precedes this source; no global extension is used.\n-/\nset_option autoImplicit false\nopen Set Filter\nopen scoped Topology Manifold ContDiff\nnamespace TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainSaturation\nnoncomputable section\nopen FirstPass FirstPass.HolomorphicIdealSheaves HolGerm OkaRelationSheaf OkaIdealOperations\n  OkaCoherence HironakaSmoothCentreCoherentDomain HironakaRelativeNormalCoherentSaturation\n\n",
+        "sha256": "21d75eea61e251657c82fa8ba568eabf776267da735bb63bd0d29f552b082cf7"
+      },
+      {
+        "source_byte_range": [
+          864,
+          1738
+        ],
+        "original_text": "/-- The genuine restricted local coherence condition supplies the actual Oka finite presentation. -/\ntheorem idealFGAt_of_coherentOn {n : \u2115} (I : GermIdeal n (ComplexModel n))\n    (W : Set (ComplexModel n)) (hI : CoherentOn I W) {y : ComplexModel n} (hy : y \u2208 W) :\n    IdealFGAt I.mem y := by\n  obtain \u27e8U, hU, hyU, _hUW, N, H, hH, hgen\u27e9 := hI y hy\n  refine \u27e8U, hU, hyU, Fin N, inferInstance, H,\n    fun i => mdifferentiableOn_iff_differentiableOn.mp (hH i), ?_\u27e9\n  intro z hz g\n  rw [hgen z hz g, CoherentIdealColon.isInSpanAt_range_iff]\n  constructor\n  \u00b7 rintro \u27e8hg, a, ha, he\u27e9\n    exact \u27e8hg.mono (fun _ h => h.differentiableAt), a,\n      fun i => (ha i).mono (fun _ h => h.differentiableAt), he\u27e9\n  \u00b7 rintro \u27e8hg, a, ha, he\u27e9\n    exact \u27e8hg.mono (fun _ h => h.mdifferentiableAt), a,\n      fun i => (ha i).mono (fun _ h => h.mdifferentiableAt), he\u27e9",
+        "sha256": "998944dc0742a44b9c5a7514fabaa97f2c5bb289cdc00a809a92534bff26d082"
+      },
+      {
+        "source_byte_range": [
+          4433,
+          4513
+        ],
+        "original_text": "end\nend TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainSaturation\n",
+        "sha256": "91c629ab9374eabb0cbc11f73c0db5e3cb0983349a5a7b0e977b48061729330e"
+      }
+    ],
+    "recorded_context_omissions": [],
+    "pure_existing_imports": [],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "1fb7307090aa8c08f43e03be90348c3f3c23c020f29d7745c16721b678b895c5"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainInitialRelations",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaSmoothCentreRealDomainInitialRelations.lean",
+    "source_parent_sha256": "beaf98d4342868e1bf619396d3fc29f96c2c33d285ebab999971d21b5a829092",
+    "destination_module": "Hironaka.Support.RealDomainOriginDictionaryExact",
+    "destination_path": "Hironaka/Support/RealDomainOriginDictionaryExact.lean",
+    "original_context_pieces": [
+      {
+        "source_byte_range": [
+          0,
+          1327
+        ],
+        "original_text": "import TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainDeformation\n\n/-! # Whole original initial relations in the actual real central family\nActual finite generation near zero supplies every origin dictionary.\nThe existing graph ideal/scaling/parameter-colon/central definitions\nare retained. Original geometric/coherent input internally supplies\nthe real domains, selected index and entire initial-ideal inclusion.\nComplete mathematics precedes this source; global model coherence is\nneither a premise nor a conclusion of the original-input endpoint.\n-/\nset_option autoImplicit false\nopen Set Filter\nopen scoped Topology Manifold ContDiff\nnamespace TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainInitialRelations\nnoncomputable section\nopen FirstPass FirstPass.HolomorphicIdealSheaves HolGerm OkaRelationSheaf OkaIdealOperations\n  OkaCoherence HironakaSmoothCentreCoherentDomain HironakaSmoothCentreRealDomainSaturation\n  HironakaSmoothCentreRealDomainDeformation HironakaRelativeNormalCoherentSaturation\n  HironakaRelativeNormalDeformationSaturation HironakaRelativeNormalDeformationInitialRelations\n  HironakaRelativeNormalIdeal HironakaRelativeNormalAssociatedGraded HironakaRelativeNormalMonomialBasis\n  HironakaHolomorphicJetChartInvariance RelativePrincipalizationSpan InvertibleIdealQuotient\n\n",
+        "sha256": "13a105897323bd4795e54a18ae49f4940f3e21f8b0dc6a0888fd888c4607e1df"
+      },
+      {
+        "source_byte_range": [
+          1327,
+          2452
+        ],
+        "original_text": "/-- The literal WHOLE origin ideal has the actual representative dictionary from local generation alone. -/\ntheorem mk_mem_originalOriginIdeal_iff_of_local {n : \u2115} (I : GermIdeal n (ComplexModel n))\n    (hI : IdealFGAt I.mem 0) {f : ComplexModel n \u2192 \u2102} (hf : HolAt f 0) :\n    HolGerm.mk f hf \u2208 originalCoherentOriginIdeal I \u2194 I.mem 0 f := by\n  classical\n  obtain \u27e8U, hU, h0U, \u03bc, h\u03bc, S, hS, hgen\u27e9 := hI\n  let := h\u03bc\n  have hS0 : \u2200 i, HolAt (S i) 0 := fun i => holAt_of_differentiableOn hU (hS i) h0U\n  let K := Ideal.span (range fun i => HolGerm.mk (S i) (hS0 i))\n  have hdict (g : ComplexModel n \u2192 \u2102) (hg : HolAt g 0) : I.mem 0 g \u2194 HolGerm.mk g hg \u2208 K :=\n    (hgen 0 h0U g).trans (inSpanAt_zero_iff_mem_origin_span S hS0 hg)\n  have hK : originalCoherentOriginIdeal I = K := by\n    apply le_antisymm\n    \u00b7 apply Ideal.span_le.mpr\n      rintro g \u27e8a, ha, hIa, rfl\u27e9\n      exact (hdict a ha).mp hIa\n    \u00b7 apply Ideal.span_le.mpr\n      rintro g \u27e8i, rfl\u27e9\n      apply Ideal.subset_span\n      exact \u27e8S i, hS0 i, (hgen 0 h0U _).mpr (inSpanAt_self hS0 i), rfl\u27e9\n  rw [hK]\n  exact (hdict f hf).symm",
+        "sha256": "4c457e8ff220469f2c0307495c055deb53d08224d2b638563737530ca92f7319"
+      },
+      {
+        "source_byte_range": [
+          14459,
+          14545
+        ],
+        "original_text": "end\nend TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainInitialRelations\n",
+        "sha256": "3c3fe0c42e2de6fa09f93a842980d256dc5b74b7e960dfa9f356ba669b3d01b5"
+      }
+    ],
+    "recorded_context_omissions": [
+      {
+        "before": "import TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainDeformation\n",
+        "after": "",
+        "reason": "Original import is unavailable in the pure public library and contributes no selected proof declaration; required geometric originals are recovered separately."
+      },
+      {
+        "before": "  HironakaSmoothCentreRealDomainDeformation",
+        "after": "",
+        "reason": "Unrelated original real-domain deformation namespace is unavailable; no selected type or proof uses it."
+      }
+    ],
+    "pure_existing_imports": [
+      "Hironaka.Support.RealDomainLocalCoherenceExact",
+      "Hironaka.Resolution.HironakaRelativeNormalDeformationInitialRelations"
+    ],
+    "omitted_original_proof_tokens": 0,
+    "destination_sha256": "da903d72f961be5dbc78d8f360bc1dec9ecc27fbdfa40dd4c8896899c88e4522"
+  }
+]
