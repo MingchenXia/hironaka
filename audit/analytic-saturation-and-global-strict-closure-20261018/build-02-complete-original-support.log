@@ -1,0 +1,28 @@
+ℹ [4799/5007] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4999/5007] Built Hironaka.Support.MarkOneCarrierDensityExact (2.7s)
+✔ [5000/5007] Built Hironaka.Support.OpensPreferredChartExact (2.8s)
+✔ [5001/5007] Built Hironaka.Support.ActualDegreeLexBoundExact (2.9s)
+✔ [5002/5007] Built Hironaka.Support.OpensExceptionalLocusExact (2.0s)
+✔ [5003/5007] Built Hironaka.Resolution.HironakaActualAnalyticVertexBasis (3.7s)
+✔ [5004/5007] Built Hironaka.Resolution.HironakaSharpActualCurveGlobalStrictClosure (3.1s)
+✔ [5005/5007] Built Hironaka.Resolution.HironakaSharpActualCurveGlobalExceptionalBirthSupport (3.5s)
+✔ [5006/5007] Built Hironaka (2.6s)
+Build completed successfully (5007 jobs).

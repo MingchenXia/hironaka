@@ -1,0 +1,15 @@
+/-- **Points of the submanifold off a centre accumulate at the centre**: for `𝔫` in the domain with mark one and an
+admissible centre `C`, every point of `C` is a limit of points of `N \ C` (a germ of `𝔞` nonzero along `N` does not vanish
+at nearby points of `N`, which therefore lie off the cosupport). -/
+theorem frequently_mem_N_notMem_of_isInvDomain {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+    [IsComplexManifold n M] {𝔫 : MarkedIdeal n M} {k : ℕ} (h : IsInvDomain k 𝔫) (hd : 𝔫.d = 1) {C : Set M}
+    (hC : C ⊆ 𝔫.cosupp) : ∀ c ∈ C, ∃ᶠ y in 𝓝 c, y ∈ 𝔫.N ∧ y ∉ C := by
+  intro c hc
+  have hcoh := h.isWellFormed.isCoherent
+  obtain ⟨g, hg, hfr⟩ := h.isNonzeroAlongAt c (𝔫.cosupp_subset_N (hC hc))
+  refine (hfr.and_eventually (HadamardBridge.eventually_mem_of_isCoherent hcoh hg)).mono ?_
+  rintro y ⟨⟨hyN, hgy⟩, hmem⟩
+  refine ⟨hyN, fun hyC => hgy ?_⟩
+  have hy := hC hyC
+  rw [cosupp_eq_inter_zeroLocus hd hcoh] at hy
+  exact hy.2 g hmem

@@ -629,6 +629,14 @@ import Hironaka.Resolution.HironakaOriginalPreparedZeroOwnSmallValues
 
 import Hironaka.Resolution.HironakaSharpActualCurveGlobalGoodIsomorphism
 
+import Hironaka.Resolution.HironakaActualAnalyticFormalBlowupSaturation
+
+import Hironaka.Resolution.HironakaActualAnalyticVertexBasis
+
+import Hironaka.Resolution.HironakaOriginalPreparedAllStepOneEtaleValues
+
+import Hironaka.Resolution.HironakaSharpActualCurveGlobalExceptionalBirthSupport
+
 /-!
 # Hironaka
 

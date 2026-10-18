@@ -1,0 +1,18 @@
+/-- The derivative of the inclusion is the identity in the preferred charts. -/
+theorem mfderiv_val_bijective (y : U) :
+    Function.Bijective
+      (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) (Subtype.val : U → M) y) := by
+  have hd : MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n)
+      (Subtype.val : U → M) y := ((contMDiff_val U) y).mdifferentiableAt (by simp)
+  rw [hd.mfderiv]
+  have heq : writtenInExtChartAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) y
+      (Subtype.val : U → M) =ᶠ[𝓝 ((extChartAt 𝓘(ℂ, ComplexModel n) y) y)] id := by
+    have ht : (complexChartAt (n := n) y).val.target ∈
+        𝓝 ((extChartAt 𝓘(ℂ, ComplexModel n) y) y) :=
+      (complexChartAt (n := n) y).val.open_target.mem_nhds
+        ((complexChartAt (n := n) y).val.map_source (mem_complexChartAt_source y))
+    filter_upwards [ht] with z hz
+    exact coordinateMap_val_complexChartAt y hz
+  simp only [modelWithCornersSelf_coe, range_id, fderivWithin_univ]
+  rw [heq.fderiv_eq, fderiv_id]
+  exact Function.bijective_id

@@ -1,0 +1,5 @@
+/-- The target of the preferred chart of `U` at `y` lies in that of `M`. -/
+theorem complexChartAt_opens_target_subset (y : U) :
+    (complexChartAt (n := n) y).val.target ⊆ (complexChartAt (n := n) (y : M)).val.target := by
+  rw [complexChartAt_opens_val]
+  exact (chartAt (ComplexModel n) (y : M)).subtypeRestr_target_subset ⟨y⟩

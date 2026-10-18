@@ -1,0 +1,4 @@
+/-- The preferred chart of `U` at `y` is the preferred chart of `M` at `y`, restricted. -/
+theorem complexChartAt_opens_val (y : U) :
+    (complexChartAt (n := n) y).val =
+      (chartAt (ComplexModel n) (y : M)).subtypeRestr ⟨y⟩ := rfl
