@@ -613,6 +613,22 @@ import Hironaka.Resolution.HironakaSharpActualCurvePaddedComparisonRestriction
 
 import Hironaka.Resolution.HironakaSharpActualCurveTopologicalGluing
 
+import Hironaka.Resolution.HironakaActualCoefficientAnalyticBlowup
+
+import Hironaka.Resolution.HironakaActualFormalIdealIntersections
+
+import Hironaka.Resolution.HironakaOriginalFullCutInheritedCompanion
+
+import Hironaka.Resolution.HironakaOriginalFullCutSourcePreparation
+
+import Hironaka.Resolution.HironakaOriginalPreparedBoundTwoOpenLocality
+
+import Hironaka.Resolution.HironakaOriginalPreparedPositiveStepOneValues
+
+import Hironaka.Resolution.HironakaOriginalPreparedZeroOwnSmallValues
+
+import Hironaka.Resolution.HironakaSharpActualCurveGlobalGoodIsomorphism
+
 /-!
 # Hironaka
 

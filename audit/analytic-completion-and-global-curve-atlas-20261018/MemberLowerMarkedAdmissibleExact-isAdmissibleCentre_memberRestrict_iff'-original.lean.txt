@@ -1,0 +1,40 @@
+/-- **Admissible centres of the restricted marked ideal, cosupport form**: under the hypotheses of
+`isAdmissibleCentre_memberRestrict_iff`, `C` is admissible for the transform of `memberRestrict 𝔪 S` iff it is admissible for
+`𝔪_T` and lies in the cosupport of the transform of `memberRestrict 𝔪 S`. -/
+theorem isAdmissibleCentre_memberRestrict_iff' (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed)
+    (hd : 1 ≤ 𝔪.d) (S : Finset (Fin 𝔪.E.length)) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower (memberRestrict 𝔪 S) T) (C : Set Y) :
+    (geoTransformAlong (memberRestrict 𝔪 S) T).IsAdmissibleCentre C ↔
+      (geoTransformAlong 𝔪 T).IsAdmissibleCentre C ∧ C ⊆ (geoTransformAlong (memberRestrict 𝔪 S) T).cosupp := by
+  classical
+  rw [isAdmissibleCentre_memberRestrict_iff hn h𝔪 hd S T hT C]
+  have hwfS := isWellFormed_memberRestrict hn h𝔪 S
+  have hS : IsClosedSubmanifold n (𝔪.N ∩ memberInter 𝔪.E S) := hwfS.isClosedSubmanifold_N
+  have hsub : ∀ H ∈ (memberRestrict 𝔪 S).E, H ∈ 𝔪.E := by
+    intro H hH
+    rw [memberRestrict_E] at hH
+    obtain ⟨i, -, rfl⟩ := List.mem_map.mp hH
+    exact List.get_mem _ _
+  have hA : ∀ H ∈ 𝔪.E, H ∉ (memberRestrict 𝔪 S).E → 𝔪.N ∩ memberInter 𝔪.E S ⊆ H := by
+    intro H hH hHS x hx
+    obtain ⟨i, rfl⟩ := List.mem_iff_get.mp hH
+    by_cases hi : i ∈ S
+    · exact hx.2 i hi
+    · exfalso
+      apply hHS
+      rw [memberRestrict_E]
+      exact List.mem_map_of_mem (List.mem_filter.mpr ⟨List.mem_finRange i, decide_eq_true hi⟩)
+  have hcosR := (CoefficientIdealAlongRestrictionDrop.coeffAlong_restrict_withE_iff 𝔪 h𝔪 hd
+    hS inter_subset_left hsub hA T).2 hT
+  constructor
+  · rintro ⟨h, hCS⟩
+    refine ⟨h, fun x hx => ?_⟩
+    have h' : x ∈ (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T (𝔪.N ∩ memberInter 𝔪.E S) := ⟨h.2.1 hx, hCS hx⟩
+    rw [← hcosR] at h'
+    exact h'
+  · rintro ⟨h, hCS⟩
+    refine ⟨h, fun x hx => ?_⟩
+    have h' : x ∈ (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T (𝔪.N ∩ memberInter 𝔪.E S) := by
+      rw [← hcosR]
+      exact hCS hx
+    exact h'.2

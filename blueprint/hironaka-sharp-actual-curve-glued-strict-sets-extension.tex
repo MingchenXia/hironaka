@@ -1,0 +1,86 @@
+\section{Actual strict sets descend to genuine global closed subsets}
+
+The local strict-set overlap dictionary is now proved from actual finite
+histories. We use the TRUE gluing relation to construct global subsets with
+exact local pullbacks and closedness. They are called glued strict sets:
+identification with a conventional global strict-support closure, smoothness,
+and global exceptional divisor structure remain separate producers.
+
+\begin{theorem}[The actual union of local strict sets has exactly the prescribed local pullbacks]
+\label{hir:sharp-actual-glued-strict-set-local-dictionary}
+\uses{hir:sharp-actual-endpoint-transition-strict-set-membership,hir:sharp-actual-endpoint-topcat-glue-core}
+\lean{Hironaka.HironakaSharpActualCurveGluedStrictSets.gluedStrictSet,Hironaka.HironakaSharpActualCurveGluedStrictSets.mem_gluedStrictSet_iff,Hironaka.HironakaSharpActualCurveGluedStrictSets.preimage_gluedStrictSet}
+\leanok
+For ANY original closed set B, form the actual union of the inclusion images
+of its SAME local finite-history strict transforms. The inverse image of
+this actual global subset under EVERY real local inclusion is exactly the
+corresponding entire local strict set. No set-descent or compatibility
+certificate is an input.
+\end{theorem}
+\begin{proof}
+A local strict point belongs to its own actual inclusion image, giving one
+direction. Conversely, an included point in the union has a genuine local
+strict representative from some actual chart. Equality of the two actual
+included points is, by the genuine TopCat gluing relation, witnessed by a
+point in their actual overlap with the true OLD transition taking one
+representative to the other. The already proved BOTH strict-set membership
+dictionary transports strict membership through this actual OLD map.
+The real subtype point equalities then give membership in the requested
+whole local strict set. Taking pointwise membership gives the exact inverse
+image equality, not merely a containment or a chosen representative equation.
+\end{proof}
+
+\begin{theorem}[The genuine glued strict set is globally closed and lies over B]
+\label{hir:sharp-actual-glued-strict-set-closed-over-original}
+\uses{hir:sharp-actual-glued-strict-set-local-dictionary,hir:sharp-actual-endpoint-glued-projection}
+\lean{Hironaka.HironakaSharpActualCurveGluedStrictSets.isClosed_gluedStrictSet,Hironaka.HironakaSharpActualCurveGluedStrictSets.gluedStrictSet_subset_preimage}
+\leanok
+The actual glued strict set is closed in the true glued space and is
+contained in the inverse image of the original closed B under the ACTUAL
+global projection. No global closedness or projection-support certificate
+is assumed.
+\end{theorem}
+\begin{proof}
+Every actual local strict transform is closed, because the original trace
+of B is closed and genuine tower strict transforms preserve closedness.
+The genuine quotient topology says that a global subset is open exactly
+when all actual local inclusion inverse images are open. Apply this to the
+complement of the constructed global set. The first theorem identifies
+every such inverse image with the open complement of the whole local strict
+set. Thus the actual global complement is open and the global set is closed.
+Equivalently, a real local representative of a point outside the global set
+has an actual open-complement neighborhood whose open inclusion image is
+disjoint from the entire global set. No global closedness is supplied.
+
+For a point in the glued set, choose its real local strict representative.
+Genuine finite-history strict-transform containment puts its actual local
+projection in the original B trace. The true component and append-projection
+equations identify this with the actual global projection, proving the stated
+whole global containment without asserting surjectivity onto B.
+\end{proof}
+
+\begin{theorem}[The actual local biholomorphisms identify these global sets with the SAME local strict sets]
+\label{hir:sharp-actual-glued-strict-set-local-biholomorphism-dictionary}
+\uses{hir:sharp-actual-glued-strict-set-local-dictionary,hir:sharp-actual-glued-strict-set-closed-over-original,hir:sharp-actual-endpoint-local-range-biholomorphism,hir:sharp-actual-original-endpoint-comparison-atlas}
+\lean{Hironaka.HironakaSharpActualCurveGluedStrictSets.localBiholomorphism_preimage_gluedStrictSet,Hironaka.HironakaSharpActualCurveGluedStrictSets.originalGluedStrictSet,Hironaka.HironakaSharpActualCurveGluedStrictSets.isClosed_originalGluedStrictSet,Hironaka.HironakaSharpActualCurveGluedStrictSets.originalLocalBiholomorphism_preimage_gluedStrictSet}
+\leanok
+Under each genuine local range biholomorphism, the inverse image of the
+trace of the actual global glued strict set is exactly the original local
+finite-history strict set. For only original curve data this constructs a
+true global closed carrier and true global closed sets for all original
+closed divisors, retaining the precise local strict-transform dictionary.
+No local history, overlap identity or global carrier certificate is input.
+\end{theorem}
+\begin{proof}
+The actual local biholomorphism has exactly the OLD inclusion as underlying
+point map, so the first theorem gives the entire inverse-image equality by
+pointwise extensionality. Instantiate the construction with the actual
+original-only recipe atlas and its internally proved base cover, complex
+manifold and range maps. All local histories and comparison geometry are
+therefore original producer outputs. Original closedness supplies the prior
+two theorems for the curve and each original closed divisor. This constructs
+actual global closed sets and their exact local analytic-geometric data.
+It does not yet prove global smoothness, the conventional strict-support
+closure identity, or the birth-indexed locally finite exceptional divisor
+family, and it does not conclude the sharp global driver.
+\end{proof}

@@ -1,0 +1,44 @@
+/-- **Admissible centres of Step 1ab's lower marked ideal** (TN-CLASSICAL's form; the Step 1ab twin of TN23's `(a1)` for
+Step 1bb): along a multiple test blow-up `T₀ T₁` of `J̄` (`𝔍` well formed, `0 < n`), for `y₀` in its own mask
+`W = lowerMask 𝔍 (s + 1) T₀ y₀` and `T₁|_W` a multiple test blow-up of `lowerMarked 𝔍 (s + 1) T₀ y₀`, a set `C` of the open
+preimage of `W` is an admissible centre of the transform of the lower marked ideal along `T₁|_W` iff it is an admissible
+centre of `J̄_{T₀T₁}` restricted to `T₁⁻¹W` lying on the strict transforms of the original members through `y₀`. -/
+theorem isAdmissibleCentre_lowerMarked_succ_iff (h𝔍 : 𝔍.IsWellFormed) (hn : 0 < n) {s : ℕ}
+    {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y)
+    (hT : IsGeoTestTower (barMarked 𝔍) (T₀.append T₁)) {y₀ : Y₀} (hy₀ : y₀ ∈ lowerMask 𝔍 (s + 1) T₀ y₀)
+    (hTW : IsGeoTestTower (lowerMarked 𝔍 (s + 1) T₀ y₀) (restrict (lowerMask 𝔍 (s + 1) T₀ y₀) T₁))
+    (C : Set (openPreimage T₁ (lowerMask 𝔍 (s + 1) T₀ y₀))) :
+    (geoTransformAlong (lowerMarked 𝔍 (s + 1) T₀ y₀) (restrict (lowerMask 𝔍 (s + 1) T₀ y₀) T₁)).IsAdmissibleCentre C ↔
+      (MarkedIdeal.pullback (Subtype.val : openPreimage T₁ (lowerMask 𝔍 (s + 1) T₀ y₀) → Y)
+        (geoTransformAlong (barMarked 𝔍) (T₀.append T₁))).IsAdmissibleCentre C ∧
+        ∀ q ∈ C, ∀ H ∈ origMembers 𝔍 T₀, y₀ ∈ H → (q : Y) ∈ strictAlong T₁ H := by
+  classical
+  obtain ⟨hT₀, hT₁⟩ := (isGeoTestTower_append_iff _ T₀ T₁).mp hT
+  have hJ := isWellFormed_barMarked 𝔍 h𝔍
+  have hwf : (geoTransformAlong (barMarked 𝔍) T₀).IsWellFormed :=
+    MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong hJ T₀ hT₀
+  have hd𝔫 : 1 ≤ (geoTransformAlong (barMarked 𝔍) T₀).d := by
+    rw [d_geoTransformAlong]; exact ContactIndependenceAlong.one_le_coeffMarkedAlong_d _
+  have hE₀𝔫 : ∀ H ∈ origMembers 𝔍 T₀, H ∈ (geoTransformAlong (barMarked 𝔍) T₀).E :=
+    fun H hH => List.mem_of_mem_take hH
+  have h1 := InvDomainRebase.pullback_val_memberRestrict_membersThrough hwf hd𝔫 hE₀𝔫
+    (lowerMask 𝔍 (s + 1) T₀ y₀) ⟨y₀, hy₀⟩
+  have h1' : lowerMarked 𝔍 (s + 1) T₀ y₀ = memberRestrict
+      (MarkedIdeal.pullback (Subtype.val : lowerMask 𝔍 (s + 1) T₀ y₀ → Y₀) (geoTransformAlong (barMarked 𝔍) T₀))
+      (membersThrough (MarkedIdeal.pullback (Subtype.val : lowerMask 𝔍 (s + 1) T₀ y₀ → Y₀)
+          (geoTransformAlong (barMarked 𝔍) T₀)).E
+        ((origMembers 𝔍 T₀).map ((Subtype.val : lowerMask 𝔍 (s + 1) T₀ y₀ → Y₀) ⁻¹' ·)) ⟨y₀, hy₀⟩) := h1
+  have hwfW := IsWellFormed.pullback_val hwf (lowerMask 𝔍 (s + 1) T₀ y₀)
+  have hTW' := h1' ▸ hTW
+  have hiff := isAdmissibleCentre_memberRestrict_iff' (X := CMfd.of (n := n) (lowerMask 𝔍 (s + 1) T₀ y₀)) hn hwfW
+    hd𝔫 _ _ hTW' C
+  rw [← h1', geoTransformAlong_restrict _ hwf.isClosedSubmanifold_N hwf.isCoherent T₁ hT₁,
+    ← geoTransformAlong_append] at hiff
+  rw [hiff]
+  refine and_congr_right fun hadm => ⟨fun hC q hq => ?_, fun hC q hq => ?_⟩
+  · exact ((StepOneCompare.mem_cosupp_lowerMarked_succ_iff 𝔍 h𝔍 hn T₀ T₁ hT hy₀ hTW q).mp (hC hq)).2
+  · have hJT := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong hJ (T₀.append T₁) hT
+    have hq' := hadm.2.1 hq
+    rw [cosupp_pullback_val _ (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem
+      hJT.isCoherent hg)] at hq'
+    exact (StepOneCompare.mem_cosupp_lowerMarked_succ_iff 𝔍 h𝔍 hn T₀ T₁ hT hy₀ hTW q).mpr ⟨hq', hC q hq⟩
