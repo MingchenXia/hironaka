@@ -1,0 +1,100 @@
+\section{Genuine partial-normal scaling and the nonzero translated ray}
+
+\begin{definition}[The actual normal scaling with the original tangent projection fixed]
+\label{hir:actual-normal-scaling-linear-map}
+\uses{hir:relative-normal-entire-germ-retraction}
+\lean{Hironaka.HironakaActualNormalScalingRays.actualNormalScale,Hironaka.HironakaActualNormalScalingRays.actualNormalScale_tangent,Hironaka.HironakaActualNormalScalingRays.actualNormalScale_normal,Hironaka.HironakaActualNormalScalingRays.tangentProjection_actualNormalScale}
+\leanok
+Let $T$ be the genuine tangent projection followed by the original
+tangent inclusion in $\mathbb C^{d+t}$. Define the actual continuous
+complex linear map $L_c=T+c(1-T)$. It fixes each tangent coordinate and
+multiplies each normal coordinate by the true complex scalar $c$.
+The actual entire tangent projection is unchanged by $L_c$.
+\end{definition}
+\begin{proof}
+Both the original projection and inclusion are actual continuous complex
+linear maps, so their composite and the displayed linear combination
+are such maps. In a tangent coordinate $Tz$ equals $z$, hence the
+formula gives $z$. In a normal coordinate $Tz$ is zero, hence it gives
+$cz$. Coordinate extensionality in the true tangent model proves the
+whole projection identity. Empty coordinate blocks obey the same rules.
+\end{proof}
+
+\begin{definition}[The genuine nonzero normal-scaling coordinate and germ equivalences]
+\label{hir:actual-normal-scaling-whole-germ-equivalence}
+\uses{hir:actual-normal-scaling-linear-map}
+\lean{Hironaka.HironakaActualNormalScalingRays.actualNormalScaleLinearEquiv,Hironaka.HironakaActualNormalScalingRays.actualNormalScaleGermEquiv,Hironaka.HironakaActualNormalScalingRays.hilbertSamuelValue_actualNormalScale}
+\leanok
+For $c\ne0$, the actual inverse of $L_c$ is $L_{c^{-1}}$. These actual
+maps construct a genuine continuous complex linear equivalence and its
+actual pullback equivalence of the entire original complex holomorphic
+germ algebras. Mapping any entire original ideal under this genuine
+algebra equivalence preserves every original HS value.
+\end{definition}
+\begin{proof}
+In each actual tangent coordinate both composites are the identity.
+In each actual normal coordinate both composites multiply by
+$c^{-1}c=cc^{-1}=1$. The preceding continuous linear maps supply both
+continuity fields, so they give the actual claimed coordinate
+equivalence. Genuine original holomorphic germ pullback along these
+actual inverse linear maps gives inverse ring homomorphisms and fixes
+the original complex constants, hence a true complex algebra
+equivalence. The original whole quotient dimension theorem for genuine
+complex germ algebra equivalences preserves the maximal ideal and all
+its powers, proving every unchanged original HS equality.
+\end{proof}
+
+\begin{theorem}[The finite normal-homogeneous translated polynomial has its actual scalar factor]
+\label{hir:actual-normal-scaling-translated-polynomial}
+\uses{hir:actual-normal-scaling-whole-germ-equivalence}
+\lean{Hironaka.HironakaActualNormalScalingRays.actualNormalScaleGermEquiv_tangentPullback,Hironaka.HironakaActualNormalScalingRays.actualNormalScaleGermEquiv_normalCoordinate,Hironaka.HironakaActualNormalScalingRays.actualTranslatedNormalPolynomialEval,Hironaka.HironakaActualNormalScalingRays.actualNormalScaleGermEquiv_translatedPolynomial}
+\leanok
+Let $P$ be a genuine finite normal polynomial of degree $q$, homogeneous
+with coefficients in the entire original tangent holomorphic germ ring.
+Evaluate it at the actual normal coordinates translated by $cp$. Its
+actual pullback by $L_c$ is $c^q$ times the actual evaluation translated
+by $p$. Every whole actual tangent germ is fixed by this pullback.
+\end{theorem}
+\begin{proof}
+Represent a genuine tangent germ by a true holomorphic function. The
+whole tangent projection identity in the first node makes its actual
+composite representative identical after pullback, so the entire
+original germ is fixed. The true normal-coordinate expression gives
+pullback of a normal germ equal to $c$ times that germ; original complex
+constants remain constants. Thus each translated coordinate with
+parameter $cp$ pulls back to $c$ times its translate with parameter $p$.
+Expand the genuine finite polynomial as its actual sum of monomials.
+A monomial of degree $q$ acquires exactly $q$ factors of $c$, while its
+whole tangent coefficient remains fixed. Every supported monomial has
+that same degree by genuine homogeneity. Summing gives the asserted
+actual original germ identity, with the numerical factor $c^q$ retained.
+\end{proof}
+
+\begin{theorem}[The actual whole translated normal-family ideal is constant in HS along the nonzero ray]
+\label{hir:actual-translated-normal-family-nonzero-ray-hs}
+\uses{hir:actual-normal-scaling-translated-polynomial}
+\lean{Hironaka.HironakaActualNormalScalingRays.actualTranslatedNormalFamilyIdeal,Hironaka.HironakaActualNormalScalingRays.map_actualNormalScale_translatedFamily,Hironaka.HironakaActualNormalScalingRays.actualTranslatedNormalFamily_nonzero_ray_hs}
+\leanok
+For any actual indexed family $P_i$ of genuine finite normal-homogeneous
+polynomials with entire original analytic tangent coefficients, let
+$J_p$ be the entire ideal spanned by their actual evaluations translated
+by $p$. For every $c\ne0$, the true scaling germ equivalence maps the
+entire $J_{cp}$ onto the entire $J_p$. Hence their unchanged original
+Hilbert--Samuel values agree at every order.
+\end{theorem}
+\begin{proof}
+The image-of-span identity and the preceding actual generator formula
+show that every image generator is $c^{q_i}$ times the corresponding
+original target generator, proving one entire inclusion. Conversely,
+the true complex factor $c^{q_i}$ is nonzero and has its actual inverse
+as an original constant germ. Multiply the same image generator by that
+inverse to obtain the exact target generator in the entire image ideal.
+Span proves the reverse inclusion, allowing different genuine degrees
+for different generators. Apply the genuine whole germ algebra HS
+invariance from the second node to this exact entire ideal equality.
+\end{proof}
+
+This is genuine nonzero-ray invariance. Comparison with the ray origin
+still needs an actual jointly holomorphic coefficient family and its
+original closed HS superlevel theorem. No such comparison is assumed or
+claimed here; general positive-dimensional Bennett remains open.

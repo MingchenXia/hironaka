@@ -1,0 +1,102 @@
+\section{Actual locally finite birth support as a reduced Cartier boundary}
+
+The indexed family remains genuinely locally finite and may have
+unbounded lengths on different charts. No global infinite product and
+no globally finite divisor list are introduced. We construct the whole
+original vanishing ideal of its actual union; its invertibility is the
+existing effective-divisor API, not a stalkwise substitute certificate.
+
+\begin{theorem}[A locally finite simultaneous hyperplane family has a true NC union]
+\label{hir:sharp-actual-locally-finite-coordinate-union-nc}
+\uses{hir:sharp-actual-global-indexed-boundary-snc-coordinates,hir:general-nc-actual-local-snc-branches}
+\lean{Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.normalCrossingsCarrier_iUnion_of_locallyFinite,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.normalCrossingsCarrier_iUnion_offset}
+\leanok
+For ANY locally finite family of closed subsets of a complex manifold,
+assume actual simultaneous holomorphic coordinates at each point make
+every incident member a coordinate hyperplane. Its ENTIRE union is an
+original \texttt{IsNormalCrossingsCarrier}. Repeated coordinate labels
+need not be identified globally. There is no supplied finite local
+union, nonincident-avoidance window or equation certificate.
+\end{theorem}
+\begin{proof}
+Local finiteness and closedness give closedness of the whole union.
+At a real point $x$, local finiteness gives finitely many incident
+indices. The complements of ALL nonincident closed members have a
+common neighborhood of $x$: this follows from the actual locally finite
+closed-family neighborhood theorem, even if infinitely many labels are
+present globally. Choose a genuine open subset of that neighborhood.
+
+Take the supplied actual simultaneous chart. Restrict its source by
+the true preferred-chart image of that open subset; its actual inverse
+makes this image open and ensures the restricted source still contains
+the actual center. The original forward/inverse maps are retained and
+all holomorphic identities continue to hold on the smaller domains.
+Let $S$ be the finite union of the singleton coordinate sets of the
+actual incident indices. At EVERY point of the smaller flat domain,
+membership in any family member implies that this member was incident
+at $x$. Its actual flattening identity and singleton cardinality give
+one coordinate in $S$ which vanishes. Conversely a zero coordinate in
+$S$ belongs to a real incident singleton; its full flattening identity
+puts the point in that same actual member. Thus the ENTIRE union on
+the genuine flat domain is exactly the union of these coordinate
+hyperplanes. This is the original NC-carrier definition, not an
+assumed finite chart model. Empty incidence gives the empty union and
+constant nonzero local equation.
+\end{proof}
+
+\begin{theorem}[ONLY original data make the SAME born union a genuine NC carrier]
+\label{hir:sharp-actual-original-born-union-nc}
+\uses{hir:sharp-actual-locally-finite-coordinate-union-nc,hir:sharp-actual-global-birth-boundary-locally-finite,hir:sharp-actual-global-indexed-boundary-snc-coordinates}
+\lean{Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornSupport,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornSupport_normalCrossingsCarrier}
+\leanok
+For ONLY the original positive-dimensional ambient manifold, smooth
+pure curve, actual ordered SNC family and true boundary-complement
+density, the SAME born union $B=\bigcup_j D_{|E|+j}$ on the SAME
+constructed global endpoint is a genuine original NC carrier.
+\end{theorem}
+\begin{proof}
+Use the already constructed actual global endpoint and indexed family.
+Each born member is one of its actual closed members. The map
+$j\mapsto |E|+j$ is genuinely injective, so the actual locally finite
+whole family restricts to a locally finite born family, retaining ALL
+empty positions. The original-only global-coordinate theorem gives
+one true simultaneous holomorphic chart for ALL natural positions and
+singleton cardinality at every incident position. Restrict that real
+coordinate family along the literal offset map. The preceding theorem
+now constructs the entire born union's NC structure internally. No
+caller atlas, local cutoff or NC witness is supplied.
+\end{proof}
+
+\begin{theorem}[The SAME whole reduced vanishing ideal is an actual effective Cartier divisor]
+\label{hir:sharp-actual-original-born-reduced-cartier-divisor}
+\uses{hir:sharp-actual-original-born-union-nc,hir:general-nc-whole-original-ideal-invertible,hir:sharp-actual-original-global-exceptional-birth-support}
+\lean{Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.vanishingIdeal_mem_positive_power_iff,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornDivisor,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornDivisor_ideal,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornDivisor_support,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornDivisor_coherent,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornSupport_isComplexAnalyticSubset,Hironaka.HironakaSharpActualCurveGlobalBirthCartierBoundary.originalBornDivisor_support_inclusions}
+\leanok
+On this SAME original-only endpoint construct an actual effective
+divisor whose ideal is literally the ENTIRE original vanishing ideal
+$\mathcal I_B$. Its support is exactly $B$, that whole ideal is
+coherent and invertible, and its holomorphic germs are radical under
+EVERY positive power. Its actual support is closed analytic, contains
+the whole differential exceptional locus, and lies in the preimage of
+the original sharp bad locus.
+\end{theorem}
+\begin{proof}
+The preceding genuine NC structure is supplied to the existing G6
+whole-original-ideal invertibility theorem. That theorem constructs
+nonzero actual finite coordinate product germs and uses the original
+whole vanishing dictionary; it does not assume a generator or an
+invertible substitute. Use this complete ideal and its actual
+invertibility in the existing effective-divisor constructor.
+Invertibility supplies actual coherence. Closedness of the SAME NC
+carrier gives the existing exact zero-locus-of-vanishing-ideal identity,
+so the constructed divisor's actual support is exactly $B$, and the
+coherent zero-locus theorem gives its analyticity. If a positive power
+of a genuine holomorphic function vanishes on $B$ near a point,
+pointwise complex reducedness implies that the function itself
+vanishes there; conversely its positive power does. This proves
+reducedness of the literal whole ideal, without treating multiplicities
+of indexed labels as coefficients or forming an infinite product.
+Finally substitute the exact support identity into the two already
+proved whole exceptional/birth support inclusions. General global
+scheduling and the higher-dimensional sharp driver remain separate.
+\end{proof}

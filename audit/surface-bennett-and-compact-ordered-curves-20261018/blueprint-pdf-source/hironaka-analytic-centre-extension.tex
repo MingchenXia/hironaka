@@ -1,0 +1,54 @@
+\section{A genuine global analytic extension of a regular order stratum}
+
+Bierstone--Milman\cite{bierstone-milman97-invent-math}, Section 13,
+proof of Theorem 13.4 (printed page 300), extends a local centre by taking
+appropriate dimensional components of genuine global analytic superlevel
+sets. The following producer proves that extension step for an actual ideal
+order superlevel already regular of one dimension on the selected open set.
+It does not assume a global extension, or assert that this global extension
+is already smooth away from that open set.
+
+\begin{lemma}[Dimension selection preserves a regular trace]
+\label{hir:dimension-part-regular-trace}
+\uses{hir:embedded-resolution-dimension-parts}
+\lean{Hironaka.HironakaAnalyticCentreExtension.dimensionPart_inter_eq_of_regularOn}
+\leanok
+Let $A$ be closed, and suppose every point of $A\cap U$ is regular of
+complex dimension $q$ in $A$. Then $A^{(q)}\cap U=A\cap U$, where
+$A^{(q)}=\overline{\operatorname{Reg}_q A}$.
+\end{lemma}
+\begin{proof}
+Closedness gives $A^{(q)}\subset A$. Conversely, each point of $A\cap U$
+belongs to $\operatorname{Reg}_q A$ by the assumed actual regularity,
+and therefore to its closure. Intersect these two containments with $U$.
+No compactness or global pure-dimensionality of $A$ is needed.
+\end{proof}
+
+\begin{theorem}[Produced global analytic extension of an actual order stratum]
+\label{hir:actual-order-stratum-global-analytic-extension}
+\uses{hir:dimension-part-regular-trace,hir:embedded-resolution-dimension-parts,hir:dimension-part-global-component-union}
+\lean{Hironaka.HironakaAnalyticCentreExtension.exists_pure_global_extension_of_regular_order_superlevel}
+\leanok
+Let $I$ be a coherent holomorphic germ ideal on a complex manifold, $N$ a
+closed smooth submanifold, and $\mu\ge1$. Put $A=\operatorname{cosupp}_N(I,\mu)$.
+Suppose $A\cap U$ is regular of complex dimension $q$ at every point, where
+$U$ is open. There is a genuine global analytic pure-$q$ subset $T\subset A$
+with $T\cap U=A\cap U$. It is exactly the union of the actual $q$-dimensional global components
+selected from $A$, and every point
+of its trace on $U$ is regular of dimension $q$ in $T$.
+\end{theorem}
+\begin{proof}
+The derivative-ideal order theorem identifies the actual superlevel with
+$N\cap V(\mathcal D_N^{\mu-1} I)$. Coherence of the derivative ideal and
+analyticity of the closed smooth $N$ make $A$ a global analytic set. Take
+$T=A^{(q)}$. Actual dimension-part analyticity and purity give the first
+assertions, and closedness of $A$ gives $T\subset A$. The preceding lemma
+gives the exact trace equality. A regular point of $A$ is regular of the
+same dimension in its actual dimension part: the regular coordinate
+neighbourhood agrees with that part. Finally the global dimension-part
+identification proved from genuine global components gives
+$T=\bigcup\{B:B\text{ is a global component of }A\text{ of pure dimension }q\}$.
+Thus this is an internally constructed analytic extension; no extension or
+component labels are supplied by the caller. Its singularities away from
+$U$ remain for the separate recursive smoothification step of Lemma 13.7.
+\end{proof}

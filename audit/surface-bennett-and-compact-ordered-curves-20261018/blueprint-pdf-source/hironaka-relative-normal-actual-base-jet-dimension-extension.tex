@@ -1,0 +1,92 @@
+\section{Count the genuine original complex base jets}
+
+For $B_d=\mathcal O_{\mathbb C^d,0}$ and its ACTUAL original maximal
+ideal $\mathfrak m_d$, the required tangent weight at order $k+1$ has
+complex dimension $\binom{d+k}{d}$. We count genuine distinct monomials,
+not the full multilinear derivative codomain, whose redundant nonsymmetric
+tensors would give an incorrect dimension.
+
+\begin{lemma}[The actual zero-dimensional germ algebra is the original complex field]
+\label{hir:relative-normal-actual-zero-base-complex-algebra}
+\lean{Hironaka.HironakaRelativeNormalActualBaseJetDimension.zeroBaseEval_injective,Hironaka.HironakaRelativeNormalActualBaseJetDimension.zeroBaseComplexEval,Hironaka.HironakaRelativeNormalActualBaseJetDimension.zeroBaseComplexAlgEquiv,Hironaka.HironakaRelativeNormalActualBaseJetDimension.zeroBaseMaximalIdeal_eq_bot,Hironaka.HironakaRelativeNormalActualBaseJetDimension.zeroTangentNormalIdeal_eq_maximalIdeal}
+\leanok
+Evaluation is a genuine complex-algebra isomorphism $B_0\simeq_{\mathbb C}\mathbb C$.
+In particular its actual maximal ideal is zero and the actual normal ideal
+$J_{0,d}$ in $B_d$ is precisely $\mathfrak m_d$.
+\end{lemma}
+\begin{proof}
+The actual model $\mathbb C^0$ has one point. Every genuine holomorphic
+germ representative therefore agrees everywhere with its original constant
+value. The original germ equality relation gives injectivity of evaluation.
+Every complex constant has its actual constant germ, which gives surjectivity
+and the original complex scalar compatibility. This constructs the stated
+algebra isomorphism. Membership in the actual zero-dimensional maximal ideal
+is exactly zero evaluation, hence that ideal is zero. Its whole image in
+$B_d$ is zero. The original relative Hadamard identity
+$\mathfrak m_d=\mathfrak m_0B_d+J_{0,d}$ proves the last assertion.
+\end{proof}
+
+\begin{theorem}[The true original base-jet quotient has its actual distinct complex monomial coordinates]
+\label{hir:relative-normal-actual-base-jet-complex-monomial-dictionary}
+\uses{hir:relative-normal-actual-zero-base-complex-algebra,hir:relative-normal-basis-actual-entire-quotient-basis}
+\lean{Hironaka.HironakaRelativeNormalActualBaseJetDimension.zeroBaseCoefficientEquiv,Hironaka.HironakaRelativeNormalActualBaseJetDimension.actualZeroTangentJetComplexEquiv,Hironaka.HironakaRelativeNormalActualBaseJetDimension.actualZeroTangentJetComplexEquiv_single}
+\leanok
+The actual quotient $B_d/\mathfrak m_d^{k+1}$ is genuinely complex-linearly
+isomorphic to complex coefficient families indexed by original normal
+exponents $\alpha:\operatorname{Fin}d\to_0\mathbb N$ with $|\alpha|\leq k$.
+Each coordinate basis vector is the class of its same original monomial.
+\end{theorem}
+\begin{proof}
+Apply the previous genuine whole normal-monomial basis construction with
+tangent dimension zero and normal dimension $d$. Actual derivative
+coefficient separation proves independence and actual Hadamard remainder
+representatives prove surjectivity; neither is a premise here. Its actual
+base action is the original $B_0$ action. Use the preceding true evaluation
+isomorphism for each original coefficient. The actual tangent pullback
+of a zero-dimensional constant is the same original ambient constant,
+so these maps preserve the genuine complex action. Identify the same
+normal ideal with the genuine maximal ideal. The original basis-vector
+formula retains each whole monomial numerator and therefore gives the
+asserted genuine original complex coefficient dictionary.
+\end{proof}
+
+\begin{lemma}[Actual bounded original exponent families have the binomial cardinality]
+\label{hir:relative-normal-actual-base-jet-exponent-binomial-count}
+\lean{Hironaka.HironakaRelativeNormalActualBaseJetDimension.optionMultisetCard,Hironaka.HironakaRelativeNormalActualBaseJetDimension.optionMultisetReconstruction,Hironaka.HironakaRelativeNormalActualBaseJetDimension.normalExponentDegree_eq_multisetCard,Hironaka.HironakaRelativeNormalActualBaseJetDimension.filterMap_none_replicate,Hironaka.HironakaRelativeNormalActualBaseJetDimension.normalExponentToSym,Hironaka.HironakaRelativeNormalActualBaseJetDimension.normalExponentFromSym,Hironaka.HironakaRelativeNormalActualBaseJetDimension.normalExponentFromSym_toSym,Hironaka.HironakaRelativeNormalActualBaseJetDimension.normalExponentToSym_fromSym,Hironaka.HironakaRelativeNormalActualBaseJetDimension.normalExponentSymEquiv,Hironaka.HironakaRelativeNormalActualBaseJetDimension.actualNormalExponentIndex_card}
+\leanok
+The genuine distinct exponent family $\{\alpha:|\alpha|\leq k\}$ has
+cardinality $\binom{d+k}{d}$, including $d=0$ and $k=0$.
+\end{lemma}
+\begin{proof}
+An exponent is its actual multiplicity multiset on $\operatorname{Fin}d$.
+Map that multiset into $\operatorname{Option}(\operatorname{Fin}d)$ using
+$\mathrm{some}$ and fill its missing $k-|\alpha|$ entries with $\mathrm{none}$.
+This gives a multiset of exactly $k$ entries on an alphabet of $d+1$ symbols.
+Conversely discard the $\mathrm{none}$ entries and retain the actual
+multiplicities of every $\mathrm{some}(i)$. The total retained cardinality
+is at most $k$, giving a valid original exponent. Counting each original
+symbol proves both inverse identities, including the slack symbol count
+$k-|\alpha|$. This is a true finite equivalence with
+$\operatorname{Sym}(\operatorname{Option}(\operatorname{Fin}d),k)$.
+The genuine symmetric-power cardinality is $\binom{d+k}{k}$, equal to
+$\binom{d+k}{d}$ by binomial symmetry. This proves the formula without
+counting repeated normal words as distinct monomials.
+\end{proof}
+
+\begin{theorem}[The actual original base-jet dimension is the tangent binomial weight]
+\label{hir:relative-normal-actual-base-jet-binomial-dimension}
+\uses{hir:relative-normal-actual-base-jet-complex-monomial-dictionary,hir:relative-normal-actual-base-jet-exponent-binomial-count}
+\lean{Hironaka.HironakaRelativeNormalActualBaseJetDimension.actualBaseJetDimension}
+\leanok
+For every $d,k$, the actual original complex dimension is
+$\dim_{\mathbb C}(B_d/\mathfrak m_d^{k+1})=\binom{d+k}{d}$.
+\end{theorem}
+\begin{proof}
+The original complex coefficient isomorphism identifies the genuine jet
+quotient with a finite family of complex coefficients, one for each
+actual distinct exponent. That complex vector space has dimension the
+cardinality of its genuine coordinate index. Apply the preceding exact
+binomial cardinality and invariance of dimension under the constructed
+true complex-linear isomorphism. All finiteness and index witnesses were
+produced internally from the actual original monomials.
+\end{proof}

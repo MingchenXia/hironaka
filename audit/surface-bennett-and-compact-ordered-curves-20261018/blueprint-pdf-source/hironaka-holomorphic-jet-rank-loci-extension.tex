@@ -1,0 +1,183 @@
+\section{Actual holomorphic Macaulay columns and point-value rank loci}
+\label{sec:hironaka-holomorphic-jet-rank-loci}
+
+The preceding whole-ring producers compute literal Hilbert--Samuel values
+using the rank of actual finite columns. The next obligation is that these
+same columns vary holomorphically for an original holomorphic family, and
+that their rank loci describe the entire original point quotient. In the
+convention of \cite{bierstone-milman97-invent-math}, Remark~1.3, the value
+at $\ell$ is the dimension of the actual quotient by $I+\mathfrak m^{\ell+1}$.
+No matrix, quotient dimension, point-value equality, or normally flat centre
+is supplied as a certificate below.
+
+\begin{lemma}[Faithful finite coordinate evaluation]
+\label{hir:actual-finite-jet-coordinate-evaluation}
+\lean{Hironaka.HironakaHolomorphicJetRankLoci.finiteCoordinateArray,Hironaka.HironakaHolomorphicJetRankLoci.finiteCoordinateArray_injective}
+\leanok
+\uses{hir:actual-finite-holomorphic-linear-jet,hir:actual-finite-coordinate-words}
+Evaluate each degree-$j$ jet on every $j$-tuple of original coordinate basis
+vectors. This defines an actual injective complex linear map from the whole
+finite multilinear jet target into the finite scalar coordinate array.
+\end{lemma}
+\begin{proof}
+Evaluation on a fixed coordinate tuple is complex linear, so the finite
+array is complex linear. Two actual multilinear maps that agree on all
+basis tuples agree on arbitrary tuples: expand each argument in its genuine
+finite coordinate basis and apply multilinearity, obtaining the same finite
+sum of values on basis tuples. This proves injectivity on every degree and
+hence on the whole finite tuple. Degree zero uses the unique empty tuple;
+zero ambient dimension has no positive-degree coordinate tuples and those
+actual positive-degree multilinear maps are zero. No symmetry basis or
+independence of commutative coordinate words is asserted.
+\end{proof}
+
+\begin{lemma}[Actual translated whole germs and derivatives]
+\label{hir:actual-original-translated-holomorphic-jets}
+\lean{Hironaka.HironakaHolomorphicJetRankLoci.translated_holomorphic,Hironaka.HironakaHolomorphicJetRankLoci.translatedGerm,Hironaka.HironakaHolomorphicJetRankLoci.finiteCoordinateArray_translatedGerm,Hironaka.HironakaHolomorphicJetRankLoci.wordFunction,Hironaka.HironakaHolomorphicJetRankLoci.differentiable_wordFunction,Hironaka.HironakaHolomorphicJetRankLoci.wordMonomial_eq_mk,Hironaka.HironakaHolomorphicJetRankLoci.finiteCoordinateArray_original_macaulay_column}
+\leanok
+\uses{hir:actual-finite-jet-coordinate-evaluation,hir:actual-finite-holomorphic-linear-jet}
+Let $G_i$ be an original finite holomorphic family on an open $U\subseteq
+\mathbb C^n$. At each $p\in U$, its original functions $z\mapsto G_i(p+z)$
+are holomorphic near zero and define genuine whole germs. Their actual finite
+jets are the unmodified derivatives $D^jG_i(p)$ at the original point.
+The finite coordinate-word germs times these original translated germs are
+represented by $z\mapsto z_wG_i(p+z)$.
+\end{lemma}
+\begin{proof}
+Addition by $p$ is an actual holomorphic translation with inverse subtraction
+by $p$. The open set $U$ gives a genuine neighbourhood of zero whose image
+lies in $U$, proving holomorphicity of the same original translated functions.
+The original derivative translation identity gives
+$D^j(G_i(p+\cdot))(0)=D^jG_i(p)$. The actual finite-jet representative
+identity identifies these with the actual germ jets. Germ formation preserves
+all original finite coordinate products and multiplication by the original
+translated function, proving the whole word-times-generator representative
+identity, including the empty word.
+\end{proof}
+
+\begin{lemma}[Original partial-derivative columns are holomorphic]
+\label{hir:actual-macaulay-jet-columns-holomorphic}
+\lean{Hironaka.HironakaHolomorphicJetRankLoci.iteratedFDeriv_affine_slice,Hironaka.HironakaHolomorphicJetRankLoci.analyticOnNhd_partial_derivative,Hironaka.HironakaHolomorphicJetRankLoci.jointColumn,Hironaka.HironakaHolomorphicJetRankLoci.differentiableOn_jointColumn,Hironaka.HironakaHolomorphicJetRankLoci.analyticOnNhd_original_macaulay_column,Hironaka.HironakaHolomorphicJetRankLoci.originalMacaulayMatrix,Hironaka.HironakaHolomorphicJetRankLoci.differentiableOn_originalMacaulayMatrix_entry}
+\leanok
+\uses{hir:actual-original-translated-holomorphic-jets}
+For each fixed word $w$, degree $j$ and actual coordinate tuple $v$, the
+scalar entry
+\[
+p\longmapsto D_z^j\bigl(z_wG_i(p+z)\bigr)\big|_{z=0}(v)
+\]
+is holomorphic on $U$. Thus the genuine finite coordinate array of the
+actual Macaulay map varies holomorphically on the same original open set.
+\end{lemma}
+\begin{proof}
+On the genuine open set $D=\{(p,z):p+z\in U\}$ consider the original joint
+function $F(p,z)=z_wG_i(p+z)$. The coordinate product is holomorphic, addition
+is complex linear, and $G_i$ is holomorphic on $U$, so this joint function
+is holomorphic on $D$. Holomorphic functions are analytic; their actual
+iterated Fr\'echet derivatives are analytic on the same open set. Restrict
+the derivative at $(p,0)$ to the actual directions $(0,v_k)$ and evaluate.
+Fixed multilinear evaluation is a continuous complex linear map, and the
+map $p\mapsto(p,0)$ is complex linear, so the resulting scalar function is
+holomorphic on $U$. The genuine affine slice $z\mapsto(p,z)$ and the
+iterated chain rule identify this derivative with the actual partial
+derivative displayed above. Locally restrict to the open domain before
+using the chain rule, so no global differentiability outside $D$ is assumed.
+The finite entry set is the actual finite word and coordinate-tuple set.
+\end{proof}
+
+\begin{theorem}[Literal point values from the same original matrix]
+\label{hir:actual-translated-point-quotient-macaulay-rank}
+\lean{Hironaka.HironakaHolomorphicJetRankLoci.originalMacaulayLinearMap,Hironaka.HironakaHolomorphicJetRankLoci.originalMacaulayLinearMap_eq,Hironaka.HironakaHolomorphicJetRankLoci.translatedIdeal,Hironaka.HironakaHolomorphicJetRankLoci.hilbertSamuelValue_translatedIdeal_eq_original_matrix_rank}
+\leanok
+\uses{hir:actual-macaulay-jet-columns-holomorphic,hir:actual-hilbert-samuel-macaulay-rank}
+At every $p\in U$, let $I_p$ be the entire ring ideal generated by the
+actual translated original germs. The literal point value of $I_p$ at
+$\ell$ equals the fixed entire jet-image dimension minus the rank of the
+same original holomorphic finite column matrix at $p$.
+\end{theorem}
+\begin{proof}
+The genuine arbitrary-family Macaulay theorem applies to the actual
+translated germs, and gives the literal whole quotient value using its
+actual map range. Compose with the proved injective finite coordinate
+array map. Restricting this injection to the actual range is an actual
+linear equivalence onto the composed range, so it preserves dimension.
+The translated representative identity identifies every resulting column
+with the original holomorphic column just proved. Thus the actual matrix
+is produced internally from those same original functions, and its rank
+is the dimension of the whole ideal jet image. The ambient whole-jet
+range dimension is fixed and independent of $p$.
+\end{proof}
+
+\begin{theorem}[Actual finite point-value superlevel equations]
+\label{hir:actual-hilbert-samuel-point-value-minor-loci}
+\lean{Hironaka.HironakaHolomorphicJetRankLoci.scalarArrayToDual,Hironaka.HironakaHolomorphicJetRankLoci.scalarArrayToDual_coordinateDirection,Hironaka.HironakaHolomorphicJetRankLoci.scalarArrayToDual_injective,Hironaka.HironakaHolomorphicJetRankLoci.finite_column_rank_lt_iff_minors_eq_zero,Hironaka.HironakaHolomorphicJetRankLoci.originalMacaulayMinor,Hironaka.HironakaHolomorphicJetRankLoci.differentiableOn_originalMacaulayMinor,Hironaka.HironakaHolomorphicJetRankLoci.finrank_originalMacaulayLinearMap_le,Hironaka.HironakaHolomorphicJetRankLoci.hilbertSamuelValue_translatedIdeal_ge_iff_minors,Hironaka.HironakaHolomorphicJetRankLoci.exists_hilbertSamuelValue_superlevel_equations}
+\leanok
+\uses{hir:actual-translated-point-quotient-macaulay-rank,hir:actual-macaulay-jet-columns-holomorphic}
+For every finite degree $\ell$ and natural threshold $r$, the actual
+point-value superlevel for this original family is the common zero locus
+of finitely many original holomorphic minors on $U$.
+\end{theorem}
+\begin{proof}
+Write $d$ for the fixed whole-jet image dimension at degree $\ell+1$.
+If $r>d$, the literal finite quotient value cannot reach $r$, so the
+superlevel is empty and has the constant-one equation. Otherwise the
+proved literal value formula identifies the threshold with matrix rank
+at most $d-r$, equivalently less than $d-r+1$. A matrix has rank less
+than this integer exactly when all its square minors of that size vanish.
+For the reverse implication, send each genuine scalar column $v$ to the
+actual complex-bilinear coordinate functional $x\mapsto\sum_a v_a x_a$.
+Evaluation on the genuine original coordinate directions recovers every
+$v_a$, proving that this real linear map is injective even for the empty
+coordinate set. It preserves the dimension of the actual column span.
+Independent functionals and actual coordinate row selection produce a
+nonzero minor if the rank is at least the prescribed size. Transposing
+these genuine evaluation minors gives exactly the original column-matrix
+minors, with identical determinant.
+There are finitely many row and column selections, with repetitions
+permitted and their determinants automatically zero. Each determinant
+is a genuine finite sum of products of the original holomorphic entries,
+hence holomorphic. This gives both directions for the entire superlevel,
+including $r=0$, empty generator families, zero ideals and unit ideals.
+\end{proof}
+
+\begin{theorem}[Full nearby coherent ideal dictionary]
+\label{hir:actual-coherent-whole-point-quotient-column-dictionary}
+\lean{Hironaka.HironakaHolomorphicJetRankLoci.translationEquiv,Hironaka.HironakaHolomorphicJetRankLoci.isInSpanAt_iff_translatedGerm_mem,Hironaka.HironakaHolomorphicJetRankLoci.chartTranslatedGerm,Hironaka.HironakaHolomorphicJetRankLoci.wholeChartStalkIdeal,Hironaka.HironakaHolomorphicJetRankLoci.exists_coherent_whole_stalk_original_columns,Hironaka.HironakaHolomorphicJetRankLoci.exists_coherent_whole_stalk_superlevel_equations}
+\leanok
+\uses{hir:actual-hilbert-samuel-point-value-minor-loci,hir:actual-whole-generated-ideal-finite-jet-columns,hir:actual-finite-linear-jet-kernel}
+An actual coherent ideal has genuine finite Cartan generators on one
+neighbourhood of any point. Read them in a genuine chart and translate
+at each nearby point. Their whole ring ideal equals the translated entire
+original coherent stalk ideal at every nearby point; consequently the
+preceding actual finite column equations compute its entire quotient values.
+\end{theorem}
+\begin{proof}
+Choose the actual coherent generator neighbourhood and the actual chart;
+intersect their open domains. At every nearby point, coherence identifies
+membership in the entire original ideal with finite holomorphic span of
+the same original generators. The genuine translated chart and its inverse
+carry original holomorphic functions, coefficients, sums and products to
+their identical germ-ring operations. Form the actual whole chart-stalk ideal from all original membership germs,
+using the actual chart and translation. The genuine finite-span dictionary
+sends every such original member into the generated whole ring ideal;
+conversely every original generator is an actual member by the original
+coherent span identity. Taking whole ring spans proves equality of these
+entire actual ideals, rather than an equality of selected jets. This
+actual finite-span germ dictionary therefore identifies the entire translated coherent ideal with the generated
+ring ideal, in both directions. No stalk equality or Cartan dictionary is
+an extra input beyond the original coherence. Apply the preceding true
+whole-ring quotient/rank formula and the internally constructed minors to
+these same generators throughout this genuine neighbourhood.
+\end{proof}
+
+\begin{remark}
+The faithful finite scalar array, actual holomorphic column producer and
+full coherent dictionary must be proved before claiming these local
+rank loci. Intrinsic comparison between different nonlinear original charts
+requires an actual local holomorphic germ-ring isomorphism preserving the
+maximal ideal and its powers; local biholomorphic point-power transport
+provides the route, but chart-independent global Hilbert--Samuel loci will
+not be claimed without that proof. A normally flat smooth centre, genuine
+Hilbert--Samuel transformation presentation, higher-entry descent and finite
+higher-codimension embedded resolution remain subsequent obligations.
+General G8 is still open.
+\end{remark}

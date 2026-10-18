@@ -1,0 +1,127 @@
+\section{Actual analytic special loci and maximal second-entry thresholds}
+
+W{\l}odarczyk\cite{wlodarczyk05-hironaka}, Proposition
+\texttt{pr:resol}, Step 1aa and Step 1ba, assigns the maximal second
+entry precisely to the genuine member-intersection locus and the
+codimension-one part. The following construction proves analytic
+superlevels at these thresholds without assuming analyticity of a
+lower invariant. It is one part of the enhanced-invariant analyticity
+required by Bierstone--Milman\cite{bierstone-milman97-invent-math},
+Theorem 13.4 and Lemma 13.7; the remaining companion/history thresholds
+and the global auxiliary-chain scheduler remain open.
+
+\begin{lemma}[Smooth selected actual components]
+\label{hir:smooth-selected-components}
+\uses{rem:global-components}
+\lean{Hironaka.HironakaStepOneSpecialAnalyticLoci.selectedComponents,Hironaka.HironakaStepOneSpecialAnalyticLoci.isClosedSubmanifold_selectedComponents}
+\leanok
+Let $H$ be an actual closed complex submanifold, possibly disconnected
+and with different dimensions on different components. For any set $A$,
+the union of the actual global irreducible components of $H$ contained
+in $A$ is a closed complex submanifold, hence analytic.
+\end{lemma}
+\begin{proof}
+Every point of $H$ is regular, so its actual regular-locus components
+are its connected components. Each is closed, since $H$ is closed.
+The actual analytic-component family is locally finite; its selected
+subfamily therefore has closed union. At a point in that union, choose
+the actual component containing it. The regular-patch theorem supplies
+an open neighbourhood on which $H$ is contained in this component.
+The selected union lies in $H$ and contains this component, so their
+germs agree. Transfer the actual regular patch of $H$ to this union.
+No finiteness of the global component family is used.
+\end{proof}
+
+\begin{theorem}[Actual member locus as an analytic component union]
+\label{hir:member-inter-locus-analytic-components}
+\uses{hir:smooth-selected-components}
+\lean{Hironaka.HironakaStepOneSpecialAnalyticLoci.memberInterLocus_eq_componentUnion,Hironaka.HironakaStepOneSpecialAnalyticLoci.isComplexAnalyticSubset_memberInterLocus}
+\leanok
+Let $N$ be genuinely closed and smooth, let the finite SNC list $E$ be
+transverse to $N$ in positive ambient dimension, and let $A\subset N$
+be analytic. The actual member locus is
+\[
+ \bigcup_{S\subset\{0,\ldots,|E|-1\}}
+ \bigcup\{B:B\text{ is an actual global component of }
+ N\cap\bigcap_{i\in S}E_i,\ B\subset A\}.
+\]
+In particular it is globally analytic, without a maximal-level or
+compactness hypothesis.
+\end{theorem}
+\begin{proof}
+For a point of the actual member locus choose exactly its actual member
+indices $S$. The defining neighbourhood implication says that an open
+piece of the actual component of $N\cap\bigcap_{i\in S}E_i$ lies in
+$A$. Analytic continuation along the connected regular-locus component
+puts the whole component in $A$; its closedness identifies it with the
+actual global component.
+
+Conversely, suppose a point lies in a selected component of one such
+intersection. Every index in $S$ is an actual member through the point.
+A genuine regular neighbourhood of that component identifies its germ
+with the whole intersection. Hence any sufficiently nearby point of
+$N$ lying on all members through the original point lies in this
+selected component, and therefore in $A$. This is exactly the defining
+member-locus condition. Each intersection is genuinely closed smooth
+by SNC transversality. The preceding producer makes each selected
+component union analytic, and the actual index set is finite, so its
+finite union is analytic. Empty intersections and repeated original
+members cause no change to these actual indexed conditions.
+\end{proof}
+
+\begin{lemma}[Actual maximal second-entry dictionary]
+\label{hir:step-one-top-threshold-dictionary}
+\uses{hir:step-one-value-masked-basic}
+\lean{Hironaka.HironakaStepOneSpecialAnalyticLoci.stepOneInvM_top_threshold_iff}
+\leanok
+For a well-formed positive-mark maximal-order ideal and an actual test
+tower of its homogenized coefficient ideal, at every point $y$ of the
+actual transformed cosupport,
+\[
+ (s,\infty)\le\operatorname{stepOneInvM}(y)
+ \quad\Longleftrightarrow\quad
+ s<\operatorname{level}(y)\ \text{or}\
+ (s=\operatorname{level}(y)\ \text{and }y\text{ is special}).
+\]
+The lower invariant is the actual per-sequence structure; neither a
+canonical-segment nor a lower-analyticity certificate is assumed.
+\end{lemma}
+\begin{proof}
+The genuine Step 1 value has first entry equal to the actual level.
+At special points its second entry is the top element. At every
+non-special point of the actual cosupport, the actual lower-mask
+membership theorem proves that its lower value is not top. Thus the
+lexicographic comparison is exactly the stated disjunction. This
+explicitly excludes the undefined-mask junk top value.
+\end{proof}
+
+\begin{theorem}[Actual Step 1 maximal second-entry superlevels]
+\label{hir:step-one-top-threshold-analytic}
+\uses{hir:member-inter-locus-analytic-components,hir:step-one-top-threshold-dictionary,hir:actual-step-one-level-analytic-superlevels}
+\lean{Hironaka.HironakaStepOneSpecialAnalyticLoci.isComplexAnalyticSubset_stepOneInvM_top_superlevel}
+\leanok
+Every actual superlevel of the genuine masked Step 1 invariant at
+$(s,\infty)$ on the actual transformed cosupport is globally analytic,
+in positive ambient dimension, along any actual test tower of a
+well-formed positive-mark maximal-order ideal.
+\end{theorem}
+\begin{proof}
+Internally transform the genuine well-formed ideal. Its actual
+cosupport is analytic by the derivative-ideal construction; the actual
+original members retain SNC transversality by sublist restriction.
+For $s\ge1$ the dictionary identifies the superlevel with
+\[
+ (\operatorname{cosupp}\cap\{\operatorname{level}\ge s+1\})
+ \ \cup\
+ (\operatorname{memberInterLocus}\cap\{\operatorname{level}\ge s\}).
+\]
+The second union member already lies in the cosupport. For $s=0$ it
+identifies the superlevel with the actual positive-level cosupport
+union the actual codimension-one part along the transformed carrier.
+The latter is genuinely closed smooth by the maximal-order theorem,
+hence analytic. The former level superlevels and the produced member
+locus are analytic. Finite intersections and finite unions prove both
+cases. Empty cosupports, excessive levels, disconnected members, and
+zero-dimensional carrier components are included; the ambient
+dimension assumption is explicit and never inferred by vacuity.
+\end{proof}

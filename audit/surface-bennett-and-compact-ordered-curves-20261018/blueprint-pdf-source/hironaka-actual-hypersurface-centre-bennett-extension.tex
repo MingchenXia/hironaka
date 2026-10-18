@@ -1,0 +1,91 @@
+\section{Original intrinsic HS for hypersurface centres and ambient surfaces}
+
+\begin{theorem}[Every original hypersurface-centre blowup preserves all intrinsic HS values at the centre]
+\label{hir:actual-hypersurface-centre-blowup-intrinsic-hs-equality}
+\uses{hir:actual-smooth-centre-blowup-coordinate-normal-form,hir:actual-normal-blowup-codimension-one-identity,hir:actual-open-coordinate-geometric-strict-square,hir:actual-flat-coordinate-inverse-any-subset-intrinsic-hs,hir:actual-any-subset-open-intrinsic-hs}
+\lean{Hironaka.HironakaActualHypersurfaceCentreBennett.hilbertSamuelAt_actual_hypersurface_centre_blowup_eq}
+\leanok
+Let $\pi:Y\to X$ satisfy the original full blowup predicate in complex
+ambient dimension $d+1$. Suppose its same original centre is regular
+of dimension $d$ at $\pi(z)$. For every original subset $W\subset X$
+and every order $\ell$, its original geometric strict transform has
+unchanged intrinsic Hilbert--Samuel value:
+\[
+ H_{\mathcal I_{\operatorname{strict}_{\pi}(W)},z}(\ell)
+ =H_{\mathcal I_W,\pi(z)}(\ell).
+\]
+Only the original blowup and actual centre regularity are hypotheses;
+no coordinate normal form or numerical certificate is supplied.
+\end{theorem}
+\begin{proof}
+The genuine smooth-centre coordinate theorem constructs centred local
+holomorphic equivalences $\Phi$ at $\pi(z)$ and $\Theta$ at $z$, an
+actual pivot $j\ge d$, and the entire commuting polynomial square for
+the same original blowup and same centre. Since $j<d+1$, necessarily
+$j=d$. The normal set $\{i\mid d\le i<d+1\}$ is exactly the one-element
+last normal block. The actual polynomial normal map is therefore the
+codimension-one model, which is the literal identity, in every tangent
+dimension and for every parameter. Its exceptional locus is empty;
+its original strict transform of an arbitrary subset $A$ is its closure.
+The original vanishing germ ideal of a set equals that of its closure,
+so all its unchanged intrinsic HS values at zero agree.
+
+Let $U=\Theta.target$ and $V=\Phi.target$ be the actual open coordinate
+targets. The entire original coordinate square places the model map of
+$U$ inside $V$ and gives its genuine holomorphic map $Q:U\to V$.
+The inverse coordinates identify $U$ and $V$ biholomorphically with
+the actual original source and target coordinate domains. For the
+subset $A$ of the model obtained by imaging the original inverse-target
+pullback of $W$, injectivity of the open inclusion identifies its whole
+pullback to $V$ with that same original inverse-coordinate pullback.
+Apply the original geometric strict-transform square first to the actual
+blowup and these inverse coordinates, then to the actual polynomial map
+and its true open restrictions. Equality of the original differential
+exceptional sets and open-map closure pullback in these squares gives
+exact equality of the two whole strict-transform pullbacks on $U$.
+
+The genuine original intrinsic HS transports under both inverse
+coordinate equivalences and both actual open inclusions apply to any
+subset. They identify the original strict-transform value at $z$ with
+the model strict-transform value at zero, and the value of $W$ at
+$\pi(z)$ with the model value of $A$ at zero. The model equality already
+proved between these middle values yields the asserted equality at
+every order. The original centre, map, subsets and whole vanishing
+ideals are retained throughout.
+\end{proof}
+
+\begin{theorem}[The original all-point Bennett inequality on every ambient complex surface]
+\label{hir:actual-ambient-surface-blowup-bennett}
+\uses{hir:actual-hypersurface-centre-blowup-intrinsic-hs-equality,hir:actual-manifold-point-centre-bennett-all-orders,hir:actual-smooth-centre-blowup-coordinate-normal-form,hir:actual-blowup-off-centre-intrinsic-reduced-hs}
+\lean{Hironaka.HironakaActualHypersurfaceCentreBennett.hilbertSamuelAt_actual_surface_blowup_le}
+\leanok
+Let $X$ and $Y$ have complex dimension two and let $\pi:Y\to X$
+satisfy the original full blowup predicate. For every original analytic
+subset $W\subset X$, every $z\in Y$ and every order $\ell$,
+\[
+ H_{\mathcal I_{\operatorname{strict}_{\pi}(W)},z}(\ell)
+ \le H_{\mathcal I_W,\pi(z)}(\ell).
+\]
+No compatibility, selected standard basis, HS comparison, or supplied
+restriction dictionary is assumed.
+\end{theorem}
+\begin{proof}
+Off the original centre, the genuine original complement
+biholomorphism gives equality of every unchanged intrinsic HS value.
+At a point of the centre, the original full blowup predicate itself
+supplies original centre regularity of some dimension $k$. The genuine
+smooth-centre coordinate producer supplies an actual pivot $j$ with
+$k\le j<2$. Hence $k=0$ or $k=1$; a full-dimensional centre at this
+point cannot occur. In dimension zero, apply the original point-centre
+Bennett theorem, which has no compatibility or numerical hypotheses.
+In dimension one, the preceding original hypersurface-centre equality
+applies with $d=1$ and implies the required inequality. These cases
+exhaust every original point and establish every order.
+\end{proof}
+
+This closes the original Bennett inequality in ambient dimension two
+and the original equality above hypersurface centres in every ambient
+dimension. For higher-dimensional ambient manifolds with positive
+centre dimension and normal codimension at least two, genuine
+compatible-family selection and the general Bennett comparison remain
+separate mathematical requirements.

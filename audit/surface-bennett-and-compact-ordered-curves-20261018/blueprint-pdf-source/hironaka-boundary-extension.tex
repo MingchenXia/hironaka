@@ -1,0 +1,104 @@
+\section{Transversality of the resolved set and the accumulated divisor}
+
+\begin{lemma}[Density excludes a containing coordinate hyperplane]
+\label{hir:nc-density-transverse}
+\uses{hir:snc}
+\lean{Hironaka.HironakaNormalCrossingsTransversality.isTransverse_of_hasNormalCrossings_of_subset_closure_diff}
+\leanok
+Let \(C\) be a subset of a complex manifold and \(E=[H_1,\ldots,H_s]\) a finite family of subsets. Assume that \(C\) has only normal crossings with \(E\) and
+\[
+ C\subset\overline{C\setminus|E|},\qquad |E|=\bigcup_i H_i.
+\]
+Then \(E\) is transverse to \(C\): in the normal crossings coordinates at every point of \(C\), the coordinate defining any member of \(E\) through that point is not among the coordinates defining \(C\).
+\end{lemma}
+\begin{proof}
+Fix \(x\in C\) and normal crossings coordinates on an open neighbourhood \(U\) of \(x\). Write \(C\cap U=\{z_j=0:j\in S_0\}\) and, for every member \(H_i\) through \(x\), write \(H_i\cap U=\{z_{a_i}=0\}\). If \(a_i\in S_0\), then \(C\cap U\subset H_i\). Density gives a point of \((C\setminus|E|)\cap U\), which would belong to \(H_i\subset|E|\), a contradiction. Thus \(a_i\notin S_0\) for every such member, which is precisely transversality. No connectedness or irreducibility is required.
+\end{proof}
+
+\begin{lemma}[The initial boundary is the only additional obstruction]
+\label{hir:strict-transform-initial-boundary-transverse}
+\uses{hir:nc-density-transverse,ana:strict-transform-composition,hir:admissible-calculus}
+\lean{Hironaka.HironakaNormalCrossingsTransversality.isTransverse_strictTransform_of_support_subset,Hironaka.HironakaNormalCrossingsTransversality.isTransverse_strictTransform_of_admissible_of_preimage_subset_exceptional}
+\leanok
+Let \(f:Y\to X\) be holomorphic, \(A\) closed, \(B\subset X\), and \(E\) a finite family on \(Y\) such that
+\[
+ A\subset\overline{A\setminus B},\qquad
+ |E|\subset\operatorname{Exc}(f)\cup f^{-1}(B).
+\]
+If the strict transform \(A'\) has only normal crossings with \(E\), then \(E\) is transverse to \(A'\). In particular, this applies to an admissible sequence of \((X,E_0)\) with centres over \(G\cup(A\cap|E_0|)\), whenever \(f^{-1}(G)\subset\operatorname{Exc}(f)\) and \(A\subset\overline{A\setminus|E_0|}\).
+\end{lemma}
+\begin{proof}
+Put \(D=f^{-1}(A)\setminus\operatorname{Exc}(f)\), so \(A'=\overline D\). Fix \(y\in D\) and a neighbourhood \(V\) of \(y\). The exceptional locus has open complement, and \(f\) is a local biholomorphism at \(y\). Consequently \(f(V\setminus\operatorname{Exc}(f))\) is a neighbourhood of \(f(y)\). Density off \(B\) provides a point \(f(w)\in A\setminus B\) with \(w\in V\setminus\operatorname{Exc}(f)\). Then \(w\in D\subset A'\), and the support inclusion gives \(w\notin|E|\). Every neighbourhood of \(y\) therefore meets \(A'\setminus|E|\). Taking closures gives \(A'\subset\overline{A'\setminus|E|}\), and Lemma~\ref{hir:nc-density-transverse} applies.
+
+For the final assertion, the accumulated support lies in \(f^{-1}(|E_0|\cup G)\), since \(A\cap|E_0|\subset|E_0|\). The assumed inclusion over \(G\) puts that support inside \(f^{-1}(|E_0|)\cup\operatorname{Exc}(f)\), giving the required hypotheses.
+\end{proof}
+
+\begin{lemma}[Transversality after an admissible sequence]
+\label{hir:strict-transform-density-transverse}
+\uses{hir:nc-density-transverse,hir:admissible-calculus}
+\lean{Hironaka.HironakaNormalCrossingsTransversality.isTransverse_strictTransform_of_admissible}
+\leanok
+Let \(f:Y\to X\) be an admissible blowup sequence of \((X,E_0)\), with centres over \(F\) and accumulated divisor \(E\). Suppose the members of \(E_0\) are closed, \(A\subset X\) is closed,
+\[
+ A\subset\overline{A\setminus(|E_0|\cup F)},
+\]
+and the strict transform \(A'\) has only normal crossings with \(E\). Then \(E\) is transverse to \(A'\).
+\end{lemma}
+\begin{proof}
+The support of the accumulated divisor lies in \(f^{-1}(|E_0|\cup F)\). Density survives passage to the strict transform, so
+\[
+ A'\subset\overline{A'\setminus f^{-1}(|E_0|\cup F)}
+ \subset\overline{A'\setminus|E|}.
+\]
+Apply Lemma~\ref{hir:nc-density-transverse}.
+\end{proof}
+
+\begin{theorem}[Embedded resolution with a transverse boundary]
+\label{hir:embedded-resolution-transverse-boundary}
+\uses{hir:strict-transform-density-transverse,hir:embedded-resolution-pure-dimensional,hir:embedded-resolution-boundary}
+\source{bierstone-milman97-invent-math:page-0009}
+\lean{Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_pure_transverse_of_isCompact,Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_boundary_transverse_of_isCompact,Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_pure_transverse,Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_boundary_transverse}
+\leanok
+Let \(W\) be a compact analytic subset of a complex manifold of pure dimension \(d<n\). Its embedded resolution can be chosen with all the conclusions of Theorem~\ref{hir:embedded-resolution-pure-dimensional}, and with the accumulated divisor transverse to the smooth strict transform. If \(E_0\) is a simple normal crossings divisor and \(W\subset\overline{W\setminus|E_0|}\), the same strengthening holds for Theorem~\ref{hir:embedded-resolution-boundary}, retaining its centres over \(W_{\mathrm{sing}}\cup(W\cap|E_0|)\). These statements apply in particular to every such \(W\) in a compact ambient manifold.
+\end{theorem}
+\begin{proof}
+For the empty initial divisor the regular points of dimension \(d\) are dense in \(W\) and avoid \(W_{\mathrm{sing}}=W\setminus\operatorname{Reg}_d(W)\). Therefore \(W\subset\overline{W\setminus W_{\mathrm{sing}}}\), and Lemma~\ref{hir:strict-transform-density-transverse} applies to the sequence of Theorem~\ref{hir:embedded-resolution-pure-dimensional}.
+
+For the boundary form, put \(B=|E_0|\), which is closed. We claim that \(W\subset\overline{W\setminus(W_{\mathrm{sing}}\cup B)}\). Given \(x\in W\) and an open neighbourhood \(U\) of \(x\), density off \(B\) gives \(y\in(W\setminus B)\cap U\). The open set \(U\setminus B\) contains \(y\), so density of \(\operatorname{Reg}_d(W)\) gives \(z\in\operatorname{Reg}_d(W)\cap(U\setminus B)\). This proves the claim. Since
+\[
+ B\cup\bigl(W_{\mathrm{sing}}\cup(W\cap B)\bigr)
+ =W_{\mathrm{sing}}\cup B,
+\]
+Lemma~\ref{hir:strict-transform-density-transverse} applies to the existing boundary resolution. Its conclusion strengthens the normal crossings conclusion without changing the support conditions, dimensions, or position of the centres.
+\end{proof}
+
+\begin{theorem}[Transverse resolution without equidimensionality]
+\label{hir:embedded-resolution-analytic-transverse}
+\uses{hir:strict-transform-initial-boundary-transverse,hir:embedded-resolution-analytic}
+\source{bierstone-milman97-invent-math:page-0009}
+\lean{Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_analytic_transverse_of_isCompact,Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_analytic_boundary_transverse_of_isCompact}
+\leanok
+Let \(W\) be compact analytic with empty interior, allowing components of different dimensions. The embedded resolutions of Theorem~\ref{hir:embedded-resolution-analytic}, with or without an initial simple normal crossings divisor \(E_0\) satisfying \(W\subset\overline{W\setminus|E_0|}\), can be chosen with the accumulated divisor transverse to \(W'\). All dimension-part, disjointness, exceptional-support and isomorphism conclusions are retained.
+\end{theorem}
+\begin{proof}
+The boundary theorem supplies an admissible sequence with centres over \(W_{\mathrm{sing}}\cup(W\cap|E_0|)\), with \(f^{-1}(W_{\mathrm{sing}})\subset\operatorname{Exc}(f)\), and with \(W'\) having normal crossings with \(E\). Apply Lemma~\ref{hir:strict-transform-initial-boundary-transverse} with \(G=W_{\mathrm{sing}}\). This argument does not use equidimensionality. For the empty initial divisor, the old theorem gives \(|E|=\operatorname{Exc}(f)\). Apply the same lemma with \(B=\varnothing\). These operations retain the original witnesses and every stated conclusion about their dimension parts.
+\end{proof}
+
+\begin{theorem}[Transverse embedded resolution on relatively compact open sets]
+\label{hir:embedded-resolution-transverse-local}
+\uses{hir:strict-transform-initial-boundary-transverse,hir:embedded-resolution-boundary,hir:embedded-resolution-pure-dimensional,hir:boundary-relatively-compact}
+\lean{Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_pure_transverse_of_subset_isCompact,Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_boundary_transverse_of_subset_isCompact,Hironaka.HironakaNormalCrossingsTransversality.exists_embeddedResolution_boundary_transverse_local}
+\leanok
+The transverse conclusions of Theorem~\ref{hir:embedded-resolution-transverse-boundary} also hold on any open set \(U\subset X\) contained in a compact set, without requiring \(W\) compact. In particular, every compact subset \(K\subset X\) has an open neighbourhood \(U\) with compact closure on which the boundary resolution has this transverse conclusion.
+\end{theorem}
+\begin{proof}
+Use the existing embedded resolutions on \(U\). In the empty-boundary case the accumulated support is exactly the exceptional locus, so Lemma~\ref{hir:strict-transform-initial-boundary-transverse} applies with \(B=\varnothing\).
+
+For the boundary case put \(W_U=W\cap U\) and \(E_{0,U}=E_0|_U\). The inclusion \(U\hookrightarrow X\) is an open embedding, so pulling back the closure of any set equals the closure of its pullback. Hence density of \(W\setminus|E_0|\) in \(W\) gives density of \(W_U\setminus|E_{0,U}|\) in \(W_U\). The old theorem supplies a sequence with centres over \((W_{\mathrm{sing}}\cap U)\cup(W_U\cap|E_{0,U}|)\), and the entire preimage of \(W_{\mathrm{sing}}\cap U\) is exceptional. Lemma~\ref{hir:strict-transform-initial-boundary-transverse} therefore gives transversality to the accumulated divisor, retaining every existing conclusion of the local resolution.
+
+A complex manifold is locally compact. Cover a compact \(K\) by finitely many open neighbourhoods with compact closures and take their union \(U\). Its closure is contained in the finite union of those compact closures, so it is compact. Applying the preceding result on \(U\subset\overline U\) completes the neighbourhood form.
+\end{proof}
+
+\begin{remark}
+The density argument supplies the noncontainment needed for simultaneous normal crossings in Bierstone--Milman's Theorem 1.6(2). It does not change the locus over which the boundary resolution may blow up, and does not treat an initial divisor with general, nonsimple normal crossings.
+\end{remark}

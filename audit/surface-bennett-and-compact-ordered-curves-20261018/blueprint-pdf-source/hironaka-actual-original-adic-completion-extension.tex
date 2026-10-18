@@ -1,0 +1,83 @@
+\section{The actual original germ ring and its full formal completion}
+
+Let $R$ be the ring of original holomorphic germs at the origin of
+$\mathbb C^n$, let $\mathfrak m$ be its actual maximal ideal, and let
+$A=\mathbb C[x_1,\ldots,x_n]$ with variable ideal $\mathfrak v$.
+Polynomial evaluation is at the original coordinate germs. The constructions
+below use the already established genuine finite Taylor representatives;
+no convergent realization of an arbitrary formal series is asserted.
+
+\begin{theorem}[Actual polynomial jets are the whole original local jet rings]
+\label{hir:actual-original-polynomial-jet-ring-equivalences}
+\uses{hir:actual-original-polynomial-low-coefficient-separation,hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-formal-variable-power-extension}
+\lean{Hironaka.HironakaActualOriginalAdicCompletion.originalPolynomial_mem_maximal_pow_iff,Hironaka.HironakaActualOriginalAdicCompletion.originalPolynomialJetEquiv,Hironaka.HironakaActualOriginalAdicCompletion.originalPolynomialJetEquiv_transition}
+\leanok
+For every $q\geq0$, genuine polynomial evaluation induces a ring
+isomorphism
+\[
+ e_q:A/\mathfrak v^q\;\xrightarrow{\;\sim\;}R/\mathfrak m^q,
+ \qquad [P]\longmapsto[P(x)].
+\]
+These isomorphisms commute with every quotient reduction $q\to p$ for
+$p\leq q$. The whole preimage of $\mathfrak m^q$ is exactly
+$\mathfrak v^q$.
+\end{theorem}
+\begin{proof}
+The actual Taylor homomorphism takes $P(x)$ to the same polynomial as a
+formal series. Membership of an original germ in $\mathfrak m^q$ is
+equivalent to the vanishing of every Taylor coefficient of total degree
+less than $q$. Applied to $P(x)$, these are precisely the coefficients of
+$P$; their vanishing is exactly membership in $\mathfrak v^q$. This proves
+both whole ideal directions and makes the indicated quotient homomorphism
+well defined and injective.
+
+For $q>0$, the genuine finite Taylor polynomial of order $q-1$ of any
+original germ $g$ has remainder in $\mathfrak m^q$. Its polynomial class
+therefore maps to the entire class of $g$, so the map is surjective.
+For $q=0$ both quotients are the zero ring and the same conclusion holds.
+Every quotient element has a polynomial representative, and both
+composites around a reduction square send that representative to the
+class of the same actual evaluated polynomial modulo $\mathfrak m^p$.
+Thus the reduction squares commute, without choosing compatible
+representatives as additional data.
+\end{proof}
+
+\begin{theorem}[The genuine maximal-adic completion is the actual formal Taylor ring]
+\label{hir:actual-original-maximal-adic-formal-ring-equivalence}
+\uses{hir:actual-original-polynomial-jet-ring-equivalences,hir:actual-original-all-taylor-coefficients-faithful}
+\lean{Hironaka.HironakaActualOriginalAdicCompletion.actualOriginalCompletionEquiv,Hironaka.HironakaActualOriginalAdicCompletion.actualOriginalCompletionEquiv_of}
+\leanok
+There is an internally constructed ring isomorphism
+\[
+ \widehat R_{\mathfrak m}\;\xrightarrow{\;\sim\;}
+ \mathbb C[[x_1,\ldots,x_n]]
+\]
+whose composite with the original completion map $R\to\widehat R$ is
+the genuine original Taylor homomorphism on every original germ.
+\end{theorem}
+\begin{proof}
+An element of either adic completion is a family of classes, one in each
+power quotient, coherent under every quotient reduction. Apply $e_q$ to
+each component of a coherent polynomial-jet family. The reduction squares
+of the first theorem show that the resulting original-jet family is
+coherent. Applying $e_q^{-1}$ componentwise gives the reverse construction;
+the same reduction squares, after composing with the two inverse maps,
+prove its coherence. Both maps preserve zero, one, addition and
+multiplication componentwise. Their two composites are identities in
+every quotient, hence identities of the coherent families. This identifies
+the original maximal-adic completion with the variable-adic completion of
+the actual polynomial ring.
+
+Use the canonical formal-series isomorphism with the latter polynomial
+completion, given in degree $q$ by truncation to monomials of total degree
+less than $q$. To check the required original embedding identity, fix an
+original germ $g$ and $q>0$. Its finite Taylor polynomial of order $q-1$
+represents its entire original class. Its coefficients of degree less than
+$q$ are exactly those of the genuine original Taylor series, so its
+polynomial quotient class is the truncation class of that series. For
+$q=0$ both classes are zero. Thus the two coherent polynomial families
+agree at every degree, and the formal-series isomorphism gives exactly the
+original Taylor series of $g$. This argument establishes an isomorphism of
+completions, not convergence of arbitrary formal series in the original
+analytic germ ring.
+\end{proof}

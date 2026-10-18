@@ -757,6 +757,74 @@ import Hironaka.Resolution.HironakaSharpActualCurveUniformInitialStage
 
 import Hironaka.Resolution.HironakaSharpActualCurveUniformSuccessorRestriction
 
+import Hironaka.Resolution.HironakaActualCoefficientCentreBennett
+
+import Hironaka.Resolution.HironakaActualHypersurfaceCentreBennett
+
+import Hironaka.Resolution.HironakaActualNormalAxisDehomogenization
+
+import Hironaka.Resolution.HironakaActualNormalBlowupExceptionalLocus
+
+import Hironaka.Resolution.HironakaActualNormalHomogeneousComponents
+
+import Hironaka.Resolution.HironakaActualNormalQuotientExceptionalRestriction
+
+import Hironaka.Resolution.HironakaActualNormalScalingRays
+
+import Hironaka.Resolution.HironakaActualNormalUnitAnalyticCoefficients
+
+import Hironaka.Resolution.HironakaActualNormalUnitCoordinateChange
+
+import Hironaka.Resolution.HironakaActualSmoothCentreBlowupCoordinates
+
+import Hironaka.Resolution.HironakaActualTranslatedNormalFamilyHS
+
+import Hironaka.Resolution.HironakaActualTranslatedNormalVertexHS
+
+import Hironaka.Resolution.HironakaActualVertexCoefficientNormalPowers
+
+import Hironaka.Resolution.HironakaActualWeightedVertexHS
+
+import Hironaka.Resolution.HironakaOriginalBoundTwoContactDirections
+
+import Hironaka.Resolution.HironakaOriginalBoundTwoFullCutLocality
+
+import Hironaka.Resolution.HironakaOriginalBoundTwoStepOneEmptyPrefix
+
+import Hironaka.Resolution.HironakaOriginalEmptyPrefixLevelCutTransport
+
+import Hironaka.Resolution.HironakaOriginalFiniteCutInheritedLowerValues
+
+import Hironaka.Resolution.HironakaOriginalFiniteCutLowerFullHistory
+
+import Hironaka.Resolution.HironakaOriginalFiniteCutPreparedLower
+
+import Hironaka.Resolution.HironakaOriginalFullCutEmptyPrefixContact
+
+import Hironaka.Resolution.HironakaOriginalPositiveEmptyPrefixBaseValues
+
+import Hironaka.Resolution.HironakaOriginalPositiveEmptyPrefixHeadValues
+
+import Hironaka.Resolution.HironakaOriginalZeroEmptyPrefixBaseValues
+
+import Hironaka.Resolution.HironakaOriginalZeroEmptyPrefixHeadValues
+
+import Hironaka.Resolution.HironakaSharpActualCurveCompactAdmissibleHistory
+
+import Hironaka.Resolution.HironakaSharpActualCurveCompactBoundaryReadouts
+
+import Hironaka.Resolution.HironakaSharpActualCurveCompactGlobalFiniteEndpoint
+
+import Hironaka.Resolution.HironakaSharpActualCurveCompactSubsetStopping
+
+import Hironaka.Resolution.HironakaSharpActualCurveGlobalPrefixLocalHistories
+
+import Hironaka.Resolution.HironakaSharpActualCurveGlobalPrefixTests
+
+import Hironaka.Resolution.HironakaSharpActualCurveStoppedOpenGluing
+
+import Hironaka.Resolution.HironakaSharpActualCurveStoppedSuccessorNaturality
+
 /-!
 # Hironaka
 

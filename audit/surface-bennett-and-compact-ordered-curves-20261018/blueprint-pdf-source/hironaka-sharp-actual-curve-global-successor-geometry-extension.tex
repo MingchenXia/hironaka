@@ -1,0 +1,58 @@
+\section{Actual global successor complex and proper geometry}
+
+\begin{theorem}[Genuine global successor holomorphicity and entire surjectivity]
+\label{hir:sharp-actual-curve-global-successor-holo-surj}
+\uses{hir:sharp-actual-curve-global-successor-quotient-map,hir:sharp-actual-original-global-complex-endpoint,hir:sharp-actual-global-projection-surjective}
+\lean{Hironaka.HironakaSharpActualCurveGlobalSuccessorGeometry.globalUniformSuccessor_contMDiff,Hironaka.HironakaSharpActualCurveGlobalSuccessorGeometry.globalUniformSuccessor_surjective}
+\leanok
+For an actual finite terminal-history atlas with genuine base cover, the
+actual descended successor is holomorphic between its genuine complex
+uniform-stage manifolds. It is surjective on the ENTIRE preceding stage.
+No holomorphicity, properness or fibre-lift certificate is input.
+\end{theorem}
+\begin{proof}
+Represent any source global point in an actual local chart. Lift a genuine
+holomorphic chart of that actual source-stage manifold through its true
+open inclusion. It is an actual maximal-atlas chart of the constructed
+global complex manifold. The local successor blowup is holomorphic and
+the previous global inclusion is holomorphic, so their actual composite
+is holomorphic. Compose with the true inverse source chart. On the genuine
+open source neighbourhood, the exact descended-map component formula
+identifies this composite with the actual global successor. Local equality
+therefore proves its holomorphicity at the original point.
+
+For surjectivity represent an arbitrary preceding global point by a real
+preceding local point. The actual next arrow is a genuine original blowup;
+its actual one-step blowup sequence is surjective. Choose the supplied
+actual next local point and include it into the genuine next quotient.
+The real local component formula sends that global point to the given
+preceding point. This covers the entire preceding quotient, including
+all exceptional fibres and real empty-identity stages.
+\end{proof}
+
+\begin{theorem}[Original-only actual proper holomorphic surjective successors]
+\label{hir:sharp-actual-curve-original-global-successor-geometry}
+\uses{hir:sharp-actual-curve-global-successor-holo-surj,hir:sharp-actual-curve-original-global-successor-map,hir:sharp-actual-curve-original-global-uniform-stages}
+\lean{Hironaka.HironakaSharpActualCurveGlobalSuccessorGeometry.originalUniformSuccessor_contMDiff,Hironaka.HironakaSharpActualCurveGlobalSuccessorGeometry.originalUniformSuccessor_isProperMap,Hironaka.HironakaSharpActualCurveGlobalSuccessorGeometry.originalUniformSuccessor_surjective}
+\leanok
+ONLY the original positive-dimensional smooth pure curve, entire ordered
+SNC boundary and actual density inputs construct actual proper holomorphic
+surjective successor arrows between every pair of the original uniform
+global stages. The same original whole projection square is retained.
+No compactness, atlas, stage arrow or desired geometric certificate is input.
+\end{theorem}
+\begin{proof}
+The original-only actual terminal-history atlas internally supplies its
+genuine point cover, so the preceding theorem gives holomorphicity and
+surjectivity for the SAME original descended arrows. For properness use
+the already proved ENTIRE original projection square: the actual next
+arrow followed by the continuous preceding original projection equals
+the actual next original projection, which is genuinely proper. The
+preceding complex stage is Hausdorff. Properness of this composite between
+these actual spaces therefore implies properness of the first arrow by
+the general Hausdorff composition theorem. This uses neither a global
+compactness premise nor a requested properness certificate.
+Global smooth centres, the actual global blowup universal property and
+local stationarity descent remain subsequent work; no global finite
+history bound is concluded.
+\end{proof}

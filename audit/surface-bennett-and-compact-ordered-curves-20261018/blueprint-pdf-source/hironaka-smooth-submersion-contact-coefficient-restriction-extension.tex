@@ -1,0 +1,164 @@
+\section{Actual open submersions and whole original contact coefficient restriction}
+
+\begin{lemma}[Actual open inverse and restricted maximal charts]
+\label{hir:submersion-contact-restriction-open-charts}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.opens_inverse_holomorphic,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.restrictedChart_mem_maximal}
+\uses{rem:open-subset-analytic}
+\leanok
+For an actual open manifold $U$ and a point witnessing its nonemptiness, the
+actual open partial inclusion inverse is holomorphic on its true target.
+Every genuine maximal ambient chart restricts by that actual open inclusion
+to a genuine maximal chart of $U$; both actual coordinate maps are retained.
+\end{lemma}
+\begin{proof}
+The composite of the actual inclusion with its inverse equals the identity
+on the true open target, by the two inverse identities. It is holomorphic
+there. The exact open-subtype holomorphicity dictionary therefore gives
+holomorphicity of the inverse itself. A restricted chart is the actual open
+partial inclusion followed by the original chart. Its forward map is the
+original holomorphic chart composed with the holomorphic inclusion; its
+inverse is the original chart inverse followed by the actual open inverse.
+On the true source and target of the composed partial homeomorphism the
+respective maps land in the next true domain. Ordinary composition thus
+gives both genuine holomorphic maps, which are exactly the maximal-atlas
+criterion. No chart or desired-atlas certificate is supplied. There is no
+nonemptiness requirement for an empty-open theorem below: at each actual
+point the point itself supplies the temporary nonemptiness witness.
+\end{proof}
+
+\begin{theorem}[True original submersion restricts with the SAME actual complement]
+\label{hir:submersion-contact-restriction-whole-open-map}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.preimageOpen,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.openMap,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.openMap_isSubmersionOfComplement,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.openMap_isSubmersion}
+\uses{hir:submersion-contact-restriction-open-charts}
+\leanok
+For an original genuine submersion $f:Y^m\to X^n$ and ANY actual target open
+$U$, internally form the ENTIRE actual preimage open $V=f^{-1}U$ and the
+actual map $f_U:V\to U$. It is a genuine submersion with the SAME globally
+chosen original complement, also for unequal dimensions, nonsurjective maps
+and empty opens. No open-map submersion or Cartesian/chart certificate is an
+input.
+\end{theorem}
+\begin{proof}
+Continuity of $f$ internally makes $V$ open; actual point membership makes
+$f_U$ well defined. At an actual point of $V$, take the genuine original
+submersion charts and actual linear product decomposition. Restrict the
+source chart to $V$ and the target chart to $U$ by node one. Their actual
+partial inverse identities retain the same linear decomposition and the
+same coordinate projection. The original source chart maps into the original
+target chart, and every point of $V$ maps into $U$, so the new source maps
+into the new target. At every point of the actual restricted source chart
+target, its true inverse is the original source inverse, with its guaranteed
+membership in $V$; the original projection equation therefore gives the
+ENTIRE new written-in-charts equation. The genuine submersion chart
+constructor gives the same-complement witness at every actual source point.
+The original globally chosen complement is constant across these witnesses,
+so this is a true global submersion, without choosing incompatible pointwise
+complements. Empty $V$ has no point at which fictitious charts are demanded.
+\end{proof}
+
+\begin{theorem}[Whole literal marked records on actual preimage opens]
+\label{hir:submersion-contact-restriction-marked-open-square}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.whole_marked_open_square}
+\uses{hir:submersion-contact-restriction-whole-open-map,hir:submersion-choice-image-trace-whole-pullback}
+\leanok
+For ANY original coherent marked datum $M$, the actual pullback of its
+literal open restriction to $U$ along $f_U$ equals the literal open
+restriction to $V$ of its actual pullback along $f$, in ALL fields $N,E,I,d$.
+Empty and repeated boundary entries are retained; every mark is allowed.
+\end{theorem}
+\begin{proof}
+The actual map square commutes pointwise by subtype membership. Entire
+coherent ideal pullback is functorial in arbitrary dimensions: literal
+finite original function spans compose by true holomorphic composition,
+then the reverse span inclusion expands every actual intermediate generator.
+Apply this whole composition theorem on both sides of the actual open map
+square to obtain the ENTIRE ideal equality. The carrier preimages are
+literally equal by membership. Mapping the actual boundary list twice gives
+exactly mapping the composite once, including every empty or repeated entry;
+the marks stay unchanged. These are exactly the four marked-record fields,
+not an assumed record comparison certificate.
+\end{proof}
+
+\begin{theorem}[Whole coefficient ideals reduce on the actual original contact]
+\label{hir:submersion-contact-restriction-whole-reduced-record}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.contactCoefficient,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.contactCoefficient_pullback,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.openContact,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.openMap_preimage_contact,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.whole_reduced_open_record}
+\uses{hir:submersion-contact-restriction-marked-open-square,hir:submersion-relative-differential-whole-homogenized-coefficient,hir:submersion-relative-control-whole-restriction,hir:submersion-tangent-contact-actual-carriers,bcalc:restrict-open,mc:homogenized-along-basic}
+\leanok
+Given a true original closed smooth contact carrier INSIDE $U$, form the
+actual contact-reduced coefficient record by taking the entire relative
+coefficient ideal of the literal original marked datum on $U$, restricting
+its whole ideal to that contact by the original $\operatorname{restrictOn}$,
+changing its carrier to that contact, and retaining its literal boundary and
+coefficient mark. Its actual pullback along $f_U$ equals the corresponding
+source construction on $V$ and the literal preimage contact, in ALL four
+fields. No source reduced-ideal or coefficient comparison is input.
+\end{theorem}
+\begin{proof}
+The actual open submersion and genuine original smooth carrier first give
+the whole relative iterated derivative identity and the whole coefficient
+marked identity, for ANY original mark including zero. The actual entire
+coefficient ideal is coherent, by coherence of every actual derivative,
+power and finite sum. True closed smooth contact internally has a coherent
+vanishing ideal. The original restriction operation is precisely the entire
+coefficient ideal plus this genuine vanishing ideal. Whole coherent sums
+commute with actual pullback, and the true submersion producer identifies
+the ENTIRE original vanishing ideal pullback with the vanishing ideal of
+the whole preimage contact. This gives the entire restricted coefficient
+ideal equality. Literal preimage carriers, unchanged marks and mapped
+boundary lists give the other three fields. No ambient closedness is
+claimed for the contact outside its genuine open manifold.
+\end{proof}
+
+\begin{theorem}[Actual coherent reduced records and whole relative cosupport preimages]
+\label{hir:submersion-contact-restriction-reduced-cosupport}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.contactCoefficient_isCoherent,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.contactCoefficient_cosupp_preimage,Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.whole_reduced_open_cosupp}
+\uses{hir:submersion-contact-restriction-whole-reduced-record,hir:smooth-relative-whole-cosupport,ana:restricted-calculus,mc:homogenized-along-basic,bcalc:restrict-open}
+\leanok
+The true contact-reduced coefficient ideal is coherent and its whole source
+cosupport is exactly the true preimage of its whole original cosupport.
+This is the literal reduced marked datum, not an asserted equality with the
+original unreduced cosupport or an unproved SNC/admissibility condition.
+\end{theorem}
+\begin{proof}
+The entire relative coefficient ideal is coherent by its true finite
+power/sum presentation. The genuine closed smooth contact has coherent
+vanishing ideal, hence their actual sum, equal to the literal restriction,
+is coherent. Node four gives the ENTIRE source reduced ideal and its true
+preimage carrier and identical mark. The genuine whole relative order
+threshold equivalence for coherent ideals applies to this actual reduced
+ideal and carrier, at every source point. Unfolding cosupport gives the
+whole set equality, including infinite order and mark zero. No caller order,
+support or desired-zero-set certificate appears.
+\end{proof}
+
+\begin{theorem}[ONLY original maximal-order data internally choose simultaneous actual reductions]
+\label{hir:submersion-contact-restriction-original-only-consumer}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoefficientRestriction.exists_joint_original_contact_reductions}
+\uses{hir:submersion-tangent-contact-closed-open-carriers,hir:submersion-contact-restriction-whole-open-map,hir:submersion-contact-restriction-marked-open-square,hir:submersion-contact-restriction-whole-reduced-record,hir:submersion-contact-restriction-reduced-cosupport}
+\leanok
+ONLY genuine original submersion, coherent original marked ideal, actual
+closed smooth original carrier, positive original mark, and an actual source
+cosupport point with genuinely maximal original image order internally
+produce the SAME original open and contact function, BOTH genuine entire
+contact directions and closed smooth contacts in the two actual opens, the
+actual open submersion, ENTIRE reduced coefficient marked equality and the
+whole reduced cosupport preimage. No selected direction/open/contact,
+source comparison, SNC, admissibility, canonical or termination certificate
+is primitive.
+\end{theorem}
+\begin{proof}
+The real source cosupport point maps into original cosupport by the true
+relative order dictionary. Original positive maximal-order contact existence
+internally chooses actual $U,u$; the genuine tangent-field lift gives the
+whole direction on $V=f^{-1}U$, including every zero outside the original
+carrier. True contact regularity and holomorphicity give closed smooth
+carriers inside the two actual opens, and their ENTIRE carriers satisfy the
+literal preimage dictionary. Node two supplies the true same-complement open
+submersion. Node three gives the literal original marked open square. Apply
+node four to this actual original chosen contact and whole coherent
+coefficient record, then node five gives the full reduced cosupport equality.
+All intermediate geometry and whole ideal comparisons are internal outputs.
+No boundary transversality, independent contact-choice comparison, general
+higher invariant or noncompact termination follows from these producers;
+those remain OPEN.
+\end{proof}

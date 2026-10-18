@@ -1,0 +1,106 @@
+\section{Actual submersions on independently chosen terminal spaces}
+
+The final comparison keeps the GIVEN original source and target canonical
+terminal histories, with all actual empty steps and their unchanged marked
+records. The smooth route of \cite{bierstone-milman08-functoriality} uses
+true biholomorphic changes of the source charts. This gives an actual
+submersion on the original terminal spaces, with the same full holomorphic
+pullback universal property, without a caller submersion or chart certificate.
+
+\begin{lemma}[A genuine biholomorphism pulls every genuine maximal chart back to a maximal chart]
+\label{hir:smooth-terminal-biholomorphic-maximal-chart-pullback}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalTerminalSubmersion.biholomorphic_chart_pullback_mem_maximalAtlas}
+\leanok
+\source{bierstone-milman08-functoriality}
+\uses{hir:submersion-composition-whole-holomorphic-chart}
+Let $\eta:E\to Z$ be a genuine biholomorphism of actual complex manifolds
+with the SAME model dimension. For ANY actual maximal holomorphic chart
+$a$ on $Z$, the actual chart $a\eta$ on $\eta^{-1}(\operatorname{source}a)$
+is maximal holomorphic. Its inverse is $\eta^{-1}a^{-1}$ and it has the
+SAME chart target as $a$. No chart-compatibility certificate is an input.
+\end{lemma}
+\begin{proof}
+Compose the global genuine homeomorphism underlying $\eta$ with the actual
+partial homeomorphism $a$. Its true source is the displayed preimage and
+its target is the original target: the inverse image lies in the global
+homeomorphism target. The actual partial inverse is exactly
+$\eta^{-1}a^{-1}$. Maximality of $a$ gives holomorphicity of $a$ on its
+actual source and of $a^{-1}$ on its actual target. Compose these with
+the genuine holomorphic $\eta$ and $\eta^{-1}$, on the respective true
+domains. Both actual partial maps are therefore holomorphic. A partial
+homeomorphism whose forward and inverse maps are holomorphic on their
+actual domains belongs to the maximal holomorphic atlas: its two changes
+to every original chart are compositions of those genuine holomorphic
+partial maps with the original chart and its inverse. This proves actual
+chart maximality, including empty charts and zero-dimensional manifolds.
+\end{proof}
+
+\begin{theorem}[True source biholomorphic changes preserve the actual submersion condition]
+\label{hir:smooth-terminal-submersion-biholomorphic-precomposition}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalTerminalSubmersion.isSubmersion_precompose_biholomorphism}
+\leanok
+\source{bierstone-milman08-functoriality}
+\uses{hir:smooth-terminal-biholomorphic-maximal-chart-pullback,hir:submersion-composition-whole-holomorphic-chart}
+For ANY genuine submersion $g_Q:Z\to D$ and genuine biholomorphism
+$\eta:E\to Z$ between SAME-dimensional source models, $g_Q\eta$ is a
+genuine submersion. Its genuine fixed complementary normed space can be
+retained throughout. No caller local-coordinate, complement-transport or
+composite submersion conclusion is assumed.
+\end{theorem}
+\begin{proof}
+Use the actual fixed-complement presentation supplied by the given
+submersion, at the actual point $\eta e$. It gives maximal source and
+target charts $a,b$, actual point/domain membership and a continuous
+linear model equivalence under which $b g_Q a^{-1}$ is the coordinate
+projection on the ENTIRE true source chart target. Pull $a$ back through
+$\eta$ by the first lemma and retain the SAME $b$, linear model equivalence
+and fixed complementary space. Its source is the exact $\eta$-preimage of
+the original source; the original domain condition therefore proves that
+it maps under $g_Q\eta$ into $b$'s actual source. Its actual inverse is
+$\eta^{-1}a^{-1}$. On its true chart target, which is the original target,
+the identity $\eta\eta^{-1}=\mathrm{id}$ makes the new chart formula
+$b g_Q\eta(\eta^{-1}a^{-1})=b g_Q a^{-1}$. Thus the original coordinate
+projection formula holds on the ENTIRE actual target, giving the true
+fixed-complement submersion at $e$. This works at every point with ONE
+fixed complement, so it gives the genuine global submersion condition.
+Empty manifolds and dimension zero are included without a fabricated
+global dimension inequality or a nonvacuous value seed.
+\end{proof}
+
+\begin{theorem}[Original independent terminal choices internally supply an actual Cartesian submersion]
+\label{hir:smooth-original-terminal-final-submersion-pullback}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalTerminalSubmersion.original_terminal_final_submersion_cartesian}
+\leanok
+\source{bierstone-milman08-functoriality}
+\uses{hir:smooth-terminal-submersion-biholomorphic-precomposition,hir:smooth-original-terminal-source-actual-cartesian-comparison,hir:smooth-original-terminal-final-holomorphic-pullback,hir:submersion-cartesian-tower-whole-universal}
+From ONLY an original genuine submersion $f$, original ambient-domain
+target marked record, primitive individual blowup choices and GIVEN
+independently chosen source and target whole ambient canonical terminal
+histories $S,T$, internally construct a genuine submersion
+$g:S_{\rm final}\to T_{\rm final}$ with $p_Tg=fp_S$ and the FULL actual
+holomorphic pullback universal property. Every actual test manifold of
+every dimension and every compatible holomorphic cone has exactly one
+holomorphic lift. No caller actual-model canonicality, final comparison,
+composite submersion or desired universal certificate is supplied. All
+ambient dimensions and different real empty-step counts are included.
+\end{theorem}
+\begin{proof}
+The completed original terminal Cartesian source producer internally
+constructs one actual Cartesian model $Q$ over the GIVEN $T$, its true
+source domain, whole canonicality and terminality, and a genuine
+biholomorphism $\eta:S_{\rm final}\to Q_{\rm final}$ with $p_Q\eta=p_S$.
+The actual stage witness gives a genuine submersion $g_Q$ and its actual
+whole Cartesian universal property. Choose $g=g_Q\eta$. The preceding
+theorem proves THIS $g$ is a genuine submersion. Its real whole projection
+identity follows from the model projection square and $p_Q\eta=p_S$.
+For every actual compatible holomorphic cone, the model internally gives
+its genuine unique holomorphic lift $w_Q$. The actual $\eta^{-1}w_Q$ is
+holomorphic and satisfies both original cone equations by the true inverse
+and projection identities. Any other lift produces $\eta w'$ with the
+same two model cone equations; actual model uniqueness and injectivity
+of $\eta$ give $w'=\eta^{-1}w_Q$. This proves the full genuine universal
+property on the ORIGINAL independently given final spaces. No equality
+of different recorded exceptional lists or uncompressed towers is used.
+Intrinsic choice/cocycle uniqueness and noncompact scheduling/gluing remain
+subsequent original source obligations.
+\end{proof}

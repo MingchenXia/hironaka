@@ -1,0 +1,131 @@
+\section{Empty original entries in the entire recursive canonical value}
+The ordered boundary is part of the actual marked ideal. Inserting an empty
+original entry changes its indices, even though it changes neither its ideal
+nor its cosupport. The comparison below retains this change throughout the
+entire recursive value. It uses the actual masks and histories of the masked
+Step-One construction in W\l odarczyk's marked-ideal algorithm. The explicit
+recursive index map describes how the retained indexed boundary adapts the
+insertion of isomorphisms in the original resolution history.
+
+\begin{definition}[The recursive empty-entry value map]
+\label{hir:original-invariant-empty-map}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInvariantEmptyInsertion.shiftFamily}
+\leanok
+\uses{hir:canonical-centres,bcalc:monomial-invariant-empty-member}
+Let $F_{0,j}$ be the identity on the zero-dimensional value type. For the
+successor value type, $F_{k+1,j}$ retains its first, nonmonomial-order entry.
+On its monomial branch it retains bottom and applies the increasing index
+insertion map at $j$ to the finite index component of the monomial value. On its positive-order
+branch it retains infinity; on a finite Step-One value it retains the original
+level and applies $F_{k,0}$ to the recursive lower value, retaining infinity
+there as well. Thus all recursive monomial index components after the first
+one use the insertion map at zero.
+\end{definition}
+
+\begin{lemma}[The recursive map is a strict order embedding]
+\label{hir:original-invariant-empty-map-strict}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInvariantEmptyInsertion.strictMono_shiftFamily,Hironaka.HironakaOriginalInvariantEmptyInsertion.shiftFamilyEmbedding}
+\leanok
+\uses{hir:original-invariant-empty-map,bcalc:monomial-invariant-empty-member}
+Each $F_{k,j}$ is strictly increasing and consequently reflects strict order,
+weak order, and equality on the entire recursive value type.
+\end{lemma}
+\begin{proof}
+Induct on $k$. The identity has the assertion at zero. At a successor, the
+monomial index insertion preserves and reflects the colexicographic order
+of finite sets, and leaves the other monomial entries unchanged. Extending a
+strictly increasing map by a fixed bottom or top preserves strict order.
+The induction therefore applies to the lower-value map, its top extension,
+and the Step-One lexicographic pair with unchanged level. Extend that map
+again by a fixed top. The sum order puts every monomial branch value below
+every positive branch value, so applying these two increasing branch maps
+preserves strict order on the sum. Finally the outer lexicographic pair has
+an unchanged first entry. If two first entries differ their comparison is
+unchanged; if they agree their second-entry comparison is preserved. This
+proves the successor assertion. A strictly increasing map between linear
+orders reflects both orders and is injective, giving all three reflections.
+\end{proof}
+
+\begin{theorem}[The entire actual invariant commutes with empty insertion]
+\label{hir:original-invariant-empty-actual}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInvariantEmptyInsertion.invFamily_insertEmpty}
+\leanok
+\uses{hir:original-invariant-empty-map,hir:positive-member-empty-actual,hir:positive-member-empty-bound,hir:member-future-boundary,hir:step-one-empty-insertion-masked-zero,hir:step-one-empty-insertion-run,hir:original-positive-companion-empty-run}
+For every $k$, actual marked ideal $m$, valid original insertion position $j$,
+genuine blowup tower $T$, and endpoint $y$, the actual canonical value satisfies
+\[
+ \operatorname{inv}_{k}(\operatorname{insertEmpty}_{j}m,T,y)
+ =F_{k,j}(\operatorname{inv}_{k}(m,T,y)).
+\]
+\end{theorem}
+\begin{proof}
+Induct on $k$. At zero the invariant is constant. At a successor the actual
+nonmonomial orders agree at every stage. If the endpoint has order zero, the
+whole transformed boundary has the same insertion at $j$, so its monomial
+value is precisely the monomial branch of $F_{k+1,j}$.
+For positive order, the actual order regimes agree along every stage, hence
+their computed runs and genuine head-tail splits agree. The actual order
+masks agree and their actual companion marked ideals have the same insertion
+at $j$. The true Step-One original levels, specialness, regimes, and runs
+also agree. Special endpoints give identical infinite Step-One values.
+Otherwise the actual lower masks agree. At level zero, the masked contact
+record has the same insertion at $j$; its entire original prefix has empty
+traces on this actual mask because the zero mask requires avoidance of every
+actual original member. Pulling each of these members back to the mask
+therefore gives the empty set. At positive level the genuine member restriction
+computes the new insertion index $c$ as the number of retained entries before
+$j$. Its whole retained original prefix is empty on the actual mask, and
+$c$ lies inside that prefix. Apply the induction to the real lower record
+and genuine restricted tail. At either level the positions selected in the current monomial branch
+lie beyond the empty prefix; insertion at $j$, respectively $c$, therefore
+acts on those positions exactly as insertion at zero. The
+positive branch of $F_{k,c}$ is already independent of $c$. Thus the actual
+recursive lower value is $F_{k,0}$ of its old value. Extending through both
+actual infinity cases gives the stated positive branch of $F_{k+1,j}$.
+All masks and runs here are those computed by the original value; no
+comparison, selected-index, or history alignment is assumed.
+\end{proof}
+
+\begin{corollary}[All actual value comparisons and maximum loci are retained]
+\label{hir:original-invariant-empty-comparisons}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInvariantEmptyInsertion.invFamily_insertEmpty_comparisons,Hironaka.HironakaOriginalInvariantEmptyInsertion.maxLocus_invFamily_insertEmpty}
+\leanok
+\uses{hir:original-invariant-empty-actual,hir:original-invariant-empty-map-strict}
+At fixed $k$ and insertion position $j$, all comparisons of actual values
+before and after insertion agree, including comparisons between different
+genuine histories. In particular every maximum locus on any set of endpoints
+of a fixed history agrees.
+\end{corollary}
+\begin{proof}
+Rewrite each actual inserted value by the preceding theorem and apply the
+three order reflections of the same strictly increasing map $F_{k,j}$.
+A point belongs to a maximum locus exactly when it belongs to its comparison
+set and dominates every value on that set. Weak-order reflection identifies
+every one of these comparisons, proving equality of the whole maximum loci.
+\end{proof}
+
+\begin{corollary}[Entire actual canonical histories are retained]
+\label{hir:original-invariant-empty-canonical-histories}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInvariantEmptyInsertion.isCanonical_invFamily_insertEmpty_iff,Hironaka.HironakaOriginalInvariantEmptyInsertion.isCanonicalSegment_invFamily_insertEmpty_iff}
+\leanok
+\uses{hir:original-invariant-empty-comparisons,bcalc:monomial-invariant-empty-member}
+For each actual marked ideal and valid empty original insertion, a genuine
+history is canonical for the inserted datum if and only if it is canonical
+for the old datum. This holds both when empty centres are permitted and when
+every centre must be nonempty.
+\end{corollary}
+\begin{proof}
+Induct on the genuine history. At length zero both canonical predicates hold.
+At a successor, their preceding histories agree by induction. The whole
+transformed cosupports agree because insertion retains the carrier, ideal,
+and marking at every stage. The preceding maximum-locus corollary therefore
+identifies the actual maximum centres at the preceding stage. The successor
+centre is the same set for both inputs, so its emptiness or nonemptiness is
+also the same. Thus every clause of either recursive canonical-history
+definition agrees, giving both equivalences.
+\end{proof}

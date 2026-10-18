@@ -1,0 +1,73 @@
+\section{Actual middle histories between run starts without canonicality}
+
+\begin{lemma}[Genuine original cut recipes persist on actual heads]
+\label{hir:original-finite-stepone-cut-head-recipe}
+\uses{hir:original-finite-stepone-cut-history,hir:tower-split}
+\lean{Hironaka.HironakaOriginalFiniteStepOneCutMiddleHistory.stepOneCutTower_head}
+\leanok
+Every actual head of a genuine finite original whole Step One cut history
+is again that literal cut history. Removing positions retains the real
+original centres, maps, cuts and every remaining empty slot.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower with the number of removed last positions
+arbitrary. At zero remove nothing. At a positive number and an actual
+successor, its actual head is the corresponding head of the real preceding
+history, whose cut recipe is the literal first field of the successor
+recipe. Reflexive heads remain reflexive. This is genuine structural
+recursion, with no rebasing or replacement history.
+\end{proof}
+
+\begin{theorem}[Actual middle tower and entire earlier-mask avoidance from original finite cuts]
+\label{hir:original-finite-stepone-cut-actual-middle-history}
+\uses{hir:original-finite-stepone-cut-head-recipe,hir:original-finite-stepone-cut-centres-avoid-earlier-mask,hir:step-one-canonical-tail,hir:step-one-nearby,hir:tower-split}
+\lean{Hironaka.HironakaOriginalFiniteStepOneCutMiddleHistory.exists_actual_middle_of_stepone_cut}
+\leanok
+For positive ambient dimension and original DOMAIN$(k+1)$ of actual
+maximal order, let $T$ be a literal finite original whole Step One cut
+history. Let $z$ be an actual current cosupport point of level $s$, with
+actual run $r_z$. Let $r_q\geq r_z$ be the actual computed run of $q$ for that same
+level-$s$ regime, and suppose its image at its genuine run-start head has
+level $s$. Internally construct the actual middle tower $B$ with
+\[
+ \operatorname{head}_{r_q}T\cdot B=\operatorname{head}_{r_z}T,
+ \qquad B\cdot\operatorname{tail}_{r_z}T=\operatorname{tail}_{r_q}T.
+\]
+EVERY real centre of $B$ avoids the ENTIRE earlier lower mask defined by
+the image of $q$ at its actual start. No middle tower, avoidance, lower TEST,
+canonicity or desired numerical comparison is supplied.
+\end{theorem}
+\begin{proof}
+Original finite cut geometry gives the genuine entire upper TEST and its
+real coefficient/homogenized bar TEST. If the runs are equal, the true split
+factorization gives a middle history whose actual length is zero. Thus its
+genuine CentresAvoid predicate holds with no deletion of actual steps.
+
+For $r_z<r_q$, both runs are bounded by the actual tower length. Split the
+actual history between heads $r_z+1$ and $r_z$. The true length identity
+makes this segment exactly one genuine original blowup, exposing its centre,
+map and blowup proof. Independently split between heads $r_q$ and $r_z+1$.
+Concatenate that actual middle segment with the exposed one-step tower.
+The two true split concatenation identities give precisely both required
+whole head/tail equations.
+
+One stage before the start of $z$, the literal maximal-run definition says
+its image is out of the level-$s$ regime. Genuine cosupport projection
+puts that actual image in the old cosupport; the true original ordered
+level monotonicity along heads bounds its level below by $s$. Transport
+these complete ordinary statements along the actual split equality.
+The actual head is itself a genuine cut history by the first lemma.
+Its real original/bar cosupport equality supplies the same point in the
+original cosupport. Apply the proved finite-cut ALL-centres avoidance
+theorem to this true intermediate history and actual out-of-regime point.
+It gives the ENTIRE earlier-mask avoidance for the newly constructed
+middle tower. Neither a canonical maximum-locus equality nor a lower
+numerical certificate was used.
+
+This supplies genuine between-run geometry on finite noncanonical cut
+histories. Fixed-reference lower numerical equality still requires a true
+source-bound comparison producer: existing canonical-only invariant
+rebase/tower-isomorphism interfaces are not silently applied to these
+noncanonical lower histories. No all-history FULL, semicoherent stability
+or global termination theorem is asserted here.
+\end{proof}

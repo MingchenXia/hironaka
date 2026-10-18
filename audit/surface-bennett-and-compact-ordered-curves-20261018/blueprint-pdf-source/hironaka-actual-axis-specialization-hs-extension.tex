@@ -1,0 +1,85 @@
+\section{All-order Hilbert--Samuel comparison for the genuine analytic axis contraction}
+
+\begin{theorem}[Nonzero axis parameters preserve every original Hilbert--Samuel value]
+\label{hir:actual-axis-nonzero-hs}
+\uses{hir:actual-axis-contraction,hir:smooth-centre-actual-whole-ambient-jet-transport}
+\lean{Hironaka.HironakaActualAxisSpecializationHS.hilbertSamuelValue_actual_axis_nonzero}
+\leanok
+For every ideal $I$ of the original analytic germ ring at the origin, every
+nonzero $c\in\mathbb C$, and every $\ell\ge0$, the actual whole image
+$L_c^*I$ has Hilbert--Samuel value $H_I(\ell)$.
+\end{theorem}
+\begin{proof}
+The actual inverse coordinate map $L_{c^{-1}}$ gives the genuine complex
+germ algebra equivalence already constructed for $L_c$. The intrinsic
+finite-jet quotient of the whole ideal is preserved by this genuine
+equivalence, so its complex dimension is unchanged at every order.
+\end{proof}
+
+\begin{definition}[The genuine axis-contraction family on its actual domain]
+\label{hir:actual-axis-family-domain}
+\uses{hir:actual-axis-contraction-joint-holomorphic}
+\lean{Hironaka.HironakaActualAxisSpecializationHS.actualAxisContractionDomain,Hironaka.HironakaActualAxisSpecializationHS.actualAxisContractionFamily}
+\leanok
+Given original holomorphic functions $G_1,\ldots,G_s$ on one original open
+neighbourhood $U$ of zero, put
+$D=\{(t,z):L_{t_0}(z)\in U\}$ and
+$F_i(t,z)=G_i(L_{t_0}(z))$. These are the actual original functions and
+the true preimage domain, with one complex parameter independent of the
+original ambient dimension.
+\end{definition}
+
+\begin{theorem}[Real joint holomorphicity and the entire original fibre-ideal dictionary]
+\label{hir:actual-axis-family-whole-ideal-dictionary}
+\uses{hir:actual-axis-family-domain}
+\lean{Hironaka.HironakaActualAxisSpecializationHS.isOpen_actualAxisContractionDomain,Hironaka.HironakaActualAxisSpecializationHS.axis_mem_actualAxisContractionDomain,Hironaka.HironakaActualAxisSpecializationHS.differentiableOn_actualAxisContractionFamily,Hironaka.HironakaActualAxisSpecializationHS.actualAxisContractionFibreIdeal_eq_map_original_span}
+\leanok
+The domain $D$ is open and contains every parameter-axis point $(t,0)$.
+Every $F_i$ is jointly holomorphic on $D$. At each actual parameter $t$,
+the entire actual fibre ideal is the whole ideal image under $L_{t_0}^*$
+of the ideal spanned by the original germs of the $G_i$.
+\end{theorem}
+\begin{proof}
+The genuine joint contraction is complex smooth and hence continuous,
+so the true inverse image of $U$ is open. Its value at every $(t,0)$ is
+zero, proving the axis inclusion. The chain rule on the open domain gives
+joint holomorphicity of each original composition. The actual fibre germs
+are precisely $z\mapsto G_i(L_{t_0}(z))$, which are the whole pullbacks of
+the original generator germs. Ideal image commutes with span, proving
+both inclusions for the entire ideals, rather than just finite jets.
+\end{proof}
+
+\begin{theorem}[Every original ideal has all Hilbert--Samuel values bounded by its true axis-zero specialization]
+\label{hir:actual-axis-zero-all-hs}
+\uses{hir:actual-axis-nonzero-hs,hir:actual-axis-family-whole-ideal-dictionary,hir:actual-holomorphic-family-fibre-hs-closed-superlevels}
+\lean{Hironaka.HironakaActualAxisSpecializationHS.hilbertSamuelValue_actual_axis_specialization}
+\leanok
+For every ideal $I$ of the original analytic germ ring, every original
+coordinate $e$, and every $\ell\ge0$,
+\[
+ H_I(\ell)\le H_{L_0^*I}(\ell).
+\]
+There is no supplied finite generating system, family, or numerical
+comparison hypothesis.
+\end{theorem}
+\begin{proof}
+The actual original analytic ring is Noetherian. Choose a finite generating
+family of the given whole ideal, original holomorphic representatives,
+and the finite intersection of their true holomorphic neighbourhoods.
+This internally supplies one open neighbourhood $U$, with the original
+generator germs still spanning exactly $I$. Construct the preceding real
+joint family on its actual domain. Its entire fibre ideal at the genuine
+parameter point with coordinate $c$ is exactly $L_c^*I$.
+
+Fix $\ell$. Actual holomorphic-fibre Hilbert--Samuel semicontinuity makes
+the superlevel set $\{c:H_I(\ell)\le H_{L_c^*I}(\ell)\}$ closed in
+the true complex parameter line. Every nonzero parameter belongs to it
+by the genuine inverse-coordinate equivalence. The complement of the
+origin is dense, so the same closed superlevel set contains zero. This
+gives the claimed inequality for the unchanged original whole ideal at
+the arbitrary chosen order, and hence at every order.
+\end{proof}
+
+The specialized ideal is the whole image under the actual map setting
+coordinate $e$ to zero. A comparison with a finite dehomogenized initial
+ideal, and the resulting point-blowup inequality, are subsequent steps.

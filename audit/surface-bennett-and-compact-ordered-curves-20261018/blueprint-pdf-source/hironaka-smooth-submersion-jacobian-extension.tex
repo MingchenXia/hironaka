@@ -1,0 +1,83 @@
+\section{Actual Jacobian pivots of a holomorphic submersion}
+
+The input is a genuine holomorphic submersion of possibly different dimensions,
+with original atlas charts through the two original points. The local section,
+the derivative right inverse and the nonzero holomorphic Jacobian pivot are
+constructed internally. Derivative-ideal equality and the complete selected
+canonical tower under smooth base change are subsequent obligations.
+
+\begin{lemma}\label{hir:submersion-chart-derivative-right-inverse}
+Let $f:Y^m\to X^n$ be holomorphic and a submersion at $y$, and let $e'$ and $e$
+be original atlas charts through $y$ and $f(y)$. For the actual chart map
+$F=e\circ f\circ(e')^{-1}$, the complex derivative $DF(e'(y))$ has a complex
+continuous linear right inverse.
+\lean{Hironaka.HironakaSmoothSubmersionJacobian.exists_chartDerivative_rightInverse}
+\leanok
+\uses{hir:crossdim-chart-map}
+\end{lemma}
+\begin{proof}
+Use the genuine submersion charts to obtain an actual holomorphic local section
+$s$ through the original point, with $s(f(y))=y$ and $f\circ s=\mathrm{id}$
+near $f(y)$. Put $S=e'\circ s\circ e^{-1}$. The actual inverse-chart continuity,
+the original point identities and holomorphicity of $s$ give a neighbourhood
+of $e(f(y))$ on which all arguments stay in their true chart domains. There
+$F\circ S=\mathrm{id}$ and $S(e(f(y)))=e'(y)$. Both chart maps are complex
+differentiable at those points. Differentiate the actual neighbourhood identity
+and apply the complex chain rule. The derivative $DS(e(f(y)))$ is the required
+right inverse. No equality of Jacobians or chosen inverse is a hypothesis.
+\end{proof}
+
+\begin{lemma}\label{hir:submersion-chart-derivative-surjective}
+The derivative of the actual chart map $F$ at $e'(y)$ is surjective.
+\lean{Hironaka.HironakaSmoothSubmersionJacobian.chartDerivative_surjective}
+\leanok
+\uses{hir:submersion-chart-derivative-right-inverse}
+\end{lemma}
+\begin{proof}
+For any vector $v$ in the original target model, apply the internally produced
+right inverse to $v$. The differentiated actual section identity shows that
+its image under $DF(e'(y))$ is exactly $v$.
+\end{proof}
+
+\begin{lemma}\label{hir:submersion-jacobian-nonzero-minor}
+There are actual original source-coordinate columns
+$c:\{1,\ldots,n\}\to\{1,\ldots,m\}$ for which the square matrix
+$A_{ij}=(DF(e'(y))\epsilon_{c(j)})_i$ has nonzero complex determinant.
+\lean{Hironaka.HironakaSmoothSubmersionJacobian.exists_nonzero_chartJacobian_minor}
+\leanok
+\uses{hir:submersion-chart-derivative-surjective}
+\end{lemma}
+\begin{proof}
+Let $L_i$ be the $i$th target coordinate functional composed with the actual
+derivative. A linear relation between the $L_i$ vanishes after evaluation at
+each preimage of a target coordinate vector. Surjectivity supplies those
+preimages, and evaluation gives every coefficient zero. Thus the actual rows
+are linearly independent. The finite original-coordinate evaluation map is
+injective. The resulting rectangular matrix has row rank $n$, and its columns
+span the whole $n$-dimensional coordinate space. Select a genuine finite basis
+from those original columns and reindex it by $\{1,\ldots,n\}$. The square
+matrix of that basis has nonzero determinant. If $n=0$, the chosen empty matrix
+has determinant one; no positivity or nonempty column assumption is needed.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-holomorphic-jacobian-pivot}
+Some actual original-coordinate Jacobian minor is a holomorphic scalar germ
+at $y$, is nonzero there and stays nonzero on a genuine neighbourhood of $y$.
+For any actual finite matrix of scalar holomorphic germs its determinant is
+holomorphic, including the empty matrix.
+\lean{Hironaka.HironakaSmoothSubmersionJacobian.holomorphicAt_matrix_det}
+\lean{Hironaka.HironakaSmoothSubmersionJacobian.exists_holomorphic_nonzero_chartJacobian_minor}
+\leanok
+\uses{hir:submersion-jacobian-nonzero-minor,hir:crossdim-chain-holomorphic}
+\end{theorem}
+\begin{proof}
+Keep the actual columns supplied by the previous lemma. Every matrix entry is
+one of the genuine chart chain coefficients for an original source coordinate
+vector, so is holomorphic at $y$. Expand the square determinant as its finite
+signed sum of products. Closure of holomorphic germs under products, sums and
+complex constants makes this actual determinant holomorphic. Holomorphicity
+gives continuity; because its value at the original point is nonzero, an open
+neighbourhood of zero's complement pulls back to a genuine neighbourhood of
+$y$ where this same internally selected minor stays nonzero. The empty
+determinant is the constant one, so the zero-dimensional target is included.
+\end{proof}

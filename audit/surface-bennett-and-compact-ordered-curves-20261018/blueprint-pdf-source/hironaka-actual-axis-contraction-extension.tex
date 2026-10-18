@@ -1,0 +1,76 @@
+\section{The genuine original one-coordinate contraction}
+
+\begin{definition}[Actual analytic contraction and its genuine nonzero-parameter inverse]
+\label{hir:actual-axis-contraction}
+\lean{Hironaka.HironakaActualAxisContraction.actualAxisContraction,Hironaka.HironakaActualAxisContraction.actualAxisContractionGerm,Hironaka.HironakaActualAxisContraction.actualAxisContractionGermEquiv}
+\leanok
+For the actual coordinate $e$ and $c\in\mathbb C$, let
+$L_c(z)=z+(c-1)z_e\mathbf e_e$. This is a genuine continuous complex-linear
+map, fixing the original origin. Let $L_c^*$ be its actual pullback on the
+whole original analytic germ ring. For $c\ne0$, use the actual inverse
+$L_{c^{-1}}$ to construct the original complex germ algebra equivalence.
+At zero the true map sets exactly the selected coordinate to zero.
+\end{definition}
+
+\begin{theorem}[Literal coordinate values, original composition and identity]
+\label{hir:actual-axis-contraction-whole-coordinate-dictionary}
+\uses{hir:actual-axis-contraction}
+\lean{Hironaka.HironakaActualAxisContraction.actualAxisContraction_apply,Hironaka.HironakaActualAxisContraction.actualAxisContraction_comp,Hironaka.HironakaActualAxisContraction.actualAxisContractionGerm_comp,Hironaka.HironakaActualAxisContraction.actualAxisContractionGerm_one}
+\leanok
+The true coordinate values are $L_c(z)_e=cz_e$ and $L_c(z)_i=z_i$ for
+$i\ne e$. The actual maps satisfy $L_cL_t=L_{ct}$, and their whole
+pullbacks satisfy $L_c^*L_t^*=L_{tc}^*$ and $L_1^*=\mathrm{id}$.
+\end{theorem}
+\begin{proof}
+Evaluate the genuine continuous-linear sum defining $L_c$ in each original
+coordinate. The standard vector is one at $e$ and zero elsewhere, giving
+the displayed values. Evaluate the composition in those same coordinates:
+the selected coordinate is multiplied by $ct$ and all others retained.
+Equality in every coordinate proves equality of the actual maps. Apply
+these true function identities to each original holomorphic representative;
+the actual whole germ pullback is precisely composition with those maps.
+Every genuine whole germ has such a representative, proving the entire
+pullback composition and identity claims. In particular $c^{-1}$ gives
+both actual inverse identities when $c\ne0$.
+\end{proof}
+
+\begin{theorem}[Actual polynomial dehomogenization is fixed by every original axis contraction]
+\label{hir:actual-axis-contraction-fixes-dehomogenized-polynomial}
+\uses{hir:actual-axis-contraction-whole-coordinate-dictionary,hir:actual-point-polynomial-dehomogenization}
+\lean{Hironaka.HironakaActualAxisContraction.actualAxisContractionGerm_coordinate,Hironaka.HironakaActualAxisContraction.actualAxisContractionGerm_dehomogenization}
+\leanok
+The whole analytic coordinate germ at $e$ maps to $c$ times itself and all
+other coordinate germs are retained. For every actual complex polynomial
+$P$, the original analytic evaluation of $\delta_{e,b}P$ is fixed by
+every $L_c^*$, including the true coordinate-zero contraction $c=0$.
+\end{theorem}
+\begin{proof}
+The literal whole pullback of each coordinate function has the preceding
+actual coordinate value, which gives the stated entire germ identities.
+Both polynomial algebra maps in the second assertion preserve constants,
+addition and multiplication. On variable $e$, actual dehomogenization is
+one and is fixed; on every other variable it is the constant $b_i$ plus
+that coordinate germ, both fixed. Polynomial algebra extensionality gives
+the equality for every genuine finite polynomial.
+\end{proof}
+
+\begin{lemma}[The same original contraction is genuinely jointly holomorphic]
+\label{hir:actual-axis-contraction-joint-holomorphic}
+\uses{hir:actual-axis-contraction}
+\lean{Hironaka.HironakaActualAxisContraction.actualAxisContractionJoint_contDiff}
+\leanok
+The actual map $(t,z)\mapsto L_{t_0}(z)$ on the true parameter/model product
+is complex smooth, hence jointly holomorphic, and fixes every parameter-axis
+point $(t,0)$ at the origin in the target.
+\end{lemma}
+\begin{proof}
+Its literal formula is the model projection $z$ plus
+$(t_0-1)z_e\mathbf e_e$. The parameter coordinate and original model
+coordinate are genuine continuous complex-linear projections. Their
+product and scalar multiplication by the fixed original standard vector
+are complex smooth. Thus their sum is complex smooth on the actual whole
+product. At $z=0$ both terms vanish, proving the stated axis identity.
+\end{proof}
+
+These are actual analytic maps, rather than an assumed specialization
+certificate. Their all-order Hilbert--Samuel comparison is the next step.
