@@ -1,0 +1,12 @@
+/-- **Germ stabilization.**  A descending chain of analytic subsets has stationary germs at
+every point. -/
+theorem exists_germ_stable {A : ℕ → Set M} (hA : ∀ i, IsComplexAnalyticSubset (n := n) (A i))
+    (hanti : Antitone A) (p : M) :
+    ∃ N, ∀ i, N ≤ i → ∃ U : Set M, IsOpen U ∧ p ∈ U ∧ A N ∩ U ⊆ A i := by
+  have := isNoetherianRing_holGerm_euclidean n
+  let I : ℕ →o Ideal (HolGerm (ComplexModel n)) :=
+    ⟨fun i => vanishingIdeal (chartGerm (n := n) (A i) p), fun i j hij =>
+      vanishingIdeal_anti (Eventually.of_forall (chartGerm_mono (hanti hij) p))⟩
+  obtain ⟨N, hN⟩ := (monotone_stabilizes_iff_noetherian.mpr inferInstance) I
+  refine ⟨N, fun i hi => exists_isOpen_inter_subset_of_chartGerm_le (n := n) ?_⟩
+  exact le_of_vanishingIdeal_le (isAnalyticGerm_chartGerm (hA i) p) (hN i hi).ge

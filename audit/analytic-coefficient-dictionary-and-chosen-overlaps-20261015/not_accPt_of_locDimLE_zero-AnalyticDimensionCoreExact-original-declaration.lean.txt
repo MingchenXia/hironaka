@@ -1,0 +1,16 @@
+/-- **Points of local dimension zero are isolated** (`rem:isolated-dim-zero`). -/
+theorem not_accPt_of_locDimLE_zero {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A) {x : M}
+    (hx : x ∈ A) (h0 : LocDimLE (n := n) A x 0) : ¬ AccPt x (𝓟 A) := by
+  intro hacc
+  obtain ⟨U, hU, hU0⟩ := h0
+  obtain ⟨V, hV, hpos, hxV⟩ :=
+    PositiveDimensionalComponent.exists_isIrreducibleComponent_pos_dim_of_accPt hA hx hacc
+  obtain ⟨y, hyreg, W, hW, hyW, hWU, hAW⟩ :=
+    IrreducibleComponentFilling.exists_mem_regularLocus_isOpen_inter_subset hA hV isOpen_interior
+      ⟨x, hxV, mem_interior_iff_mem_nhds.2 hU⟩
+  have hAW' : V.carrier ∩ W = A ∩ W :=
+    Subset.antisymm (fun z hz => ⟨hV.1 hz.1, hz.2⟩) (fun z hz => ⟨hAW hz, hz.2⟩)
+  have hyA : RegularAtDim (n := n) A y V.dim :=
+    RegularPointDimension.regularAtDim_of_inter_eq hW hyW hAW' hyreg
+  have := hU0 y (interior_subset (hWU hyW)) V.dim hyA
+  omega

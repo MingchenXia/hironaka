@@ -1,0 +1,24 @@
+/-- An irreducible analytic set is the closure of the component of its regular locus through
+any regular point. -/
+theorem eq_closure_component {A : Set M} (hA : IsComplexAnalyticallyIrreducible (n := n) A)
+    {c : M} {k : ℕ} (hc : RegularAtDim (n := n) A c k) :
+    A = closure (component (n := n) A c) := by
+  have hK := isComplexAnalyticSubset_closure_component hA.analytic hc
+  have hS := ClosureDifferenceAnalytic.isComplexAnalyticSubset_closure_diff hA.analytic hK
+  have hKA : closure (component (n := n) A c) ⊆ A :=
+    closure_minimal (component_subset (n := n) A c) hA.analytic.isClosed
+  have hSA : closure (A \ closure (component (n := n) A c)) ⊆ A :=
+    closure_minimal sdiff_subset hA.analytic.isClosed
+  have hunion : A = closure (component (n := n) A c) ∪
+      closure (A \ closure (component (n := n) A c)) := by
+    refine Subset.antisymm (fun x hx => ?_) (union_subset hKA hSA)
+    by_cases hxK : x ∈ closure (component (n := n) A c)
+    · exact Or.inl hxK
+    · exact Or.inr (subset_closure ⟨hx, hxK⟩)
+  rcases hA.eq_left_or_eq_right hK hS hKA hSA hunion with h | h
+  · exact h
+  · exfalso
+    obtain ⟨W, hW, hcW, hWK⟩ := exists_open_inter_subset_component hc (mem_component_self hc)
+    have hc' : c ∈ closure (A \ closure (component (n := n) A c)) := h ▸ hc.2.1
+    obtain ⟨x, hxW, hxA, hxK⟩ := mem_closure_iff.mp hc' W hW hcW
+    exact hxK (subset_closure (hWK ⟨hxA, hxW⟩))

@@ -1,0 +1,18 @@
+/-- An irreducible subvariety meeting an open set inside an analytic set lies in that set. -/
+theorem subset_of_inter_isOpen_subset (V : ClosedIrreducibleAnalyticSubvariety n M)
+    {A U : Set M} (hA : IsComplexAnalyticSubset (n := n) A) (hU : IsOpen U)
+    (hVU : (V.carrier ∩ U).Nonempty) (hsub : V.carrier ∩ U ⊆ A) : V.carrier ⊆ A := by
+  by_contra hVA
+  obtain ⟨c, hc, hcA⟩ :=
+    AnalyticIrreducibleComponents.exists_mem_regularLocus_not_mem_of_not_subset V hA hVA
+  have hc' : RegularAtDim (n := n) V.carrier c V.dim := hc
+  have hVeq := StrictTransformSubvariety.eq_closure_component V.irreducible_carrier hc'
+  have hK : ¬ RegularLocusComponent.component (n := n) V.carrier c ⊆ A := fun h =>
+    hcA (h (RegularLocusComponent.mem_component_self hc'))
+  have hcl := (ComponentComplementConnected.isPreconnected_component_diff_and_subset_closure
+    V.irreducible_carrier.analytic hA hc' hK).2
+  obtain ⟨x, hxV, hxU⟩ := hVU
+  have hx : x ∈ closure (RegularLocusComponent.component (n := n) V.carrier c \ A) :=
+    closure_minimal hcl isClosed_closure (hVeq ▸ hxV)
+  obtain ⟨y, hyU, hyK, hyA⟩ := mem_closure_iff.mp hx U hU hxU
+  exact hyA (hsub ⟨RegularLocusComponent.component_subset (n := n) V.carrier c hyK, hyU⟩)

@@ -1,0 +1,84 @@
+\section{Actual all-order intrinsic HS maxima on a genuine compact original carrier}
+
+The point function below is the EXISTING intrinsic whole-stalk Hilbert--Samuel
+function. The maximizing point and the entire constant-profile locus are
+constructed internally from original coherence and actual compactness.
+
+\begin{lemma}[A countable family of actual upper semicontinuous natural values has a lexicographic maximum on a nonempty compact carrier]
+\label{hir:actual-countable-usc-compact-lexicographic-maximum}
+\uses{hir:actual-ambient-hs-whole-superlevel-analytic}
+\lean{Hironaka.HironakaActualCompactIntrinsicHSMaximum.exists_actual_compact_countable_usc_lexmax}
+\leanok
+For a nonempty compact $K$ and actual natural functions $f_i$ whose true
+superlevels are closed, there is an actual $y\in K$ such that no actual
+$x\in K$ has a lexicographically larger profile $(f_i(x))_{i\ge0}$.
+Moreover $f_i(y)\le f_i(x)$ for EVERY $i$ holds on $K$ exactly when the
+ENTIRE two actual profiles agree.
+\end{lemma}
+\begin{proof}
+Work on the actual compact subtype $K$, avoiding any extra ambient
+Hausdorff or closed-carrier premise. Start with the full compact subtype.
+At stage $i$, actual upper semicontinuity gives a genuine attained
+maximum of $f_i$ on the preceding nonempty compact closed set. Intersect
+that set with the actual closed superlevel at this attained value. The
+result is again closed, compact and nonempty. These actual sets decrease.
+Compactness supplies a point in their full countable intersection.
+For any competing point whose first $i$ coordinates agree with this point,
+induction puts it in the $i$th actual maximizing set. Its $i$th coordinate
+is therefore bounded by the chosen point's coordinate. The first
+differing coordinate rules out a lexicographically larger profile.
+If all competing coordinates dominate, induction gives the reverse
+inequality at each successive coordinate, hence equality at EVERY order.
+The converse is immediate. No maximizing profile, bound or nested-set
+certificate is a caller premise.
+\end{proof}
+
+\begin{theorem}[Original coherence internally supplies the true compact lexicographic HS maximum]
+\label{hir:actual-original-compact-intrinsic-hs-lexicographic-maximum}
+\uses{hir:actual-countable-usc-compact-lexicographic-maximum,hir:actual-intrinsic-whole-stalk-hilbert-samuel-value}
+\lean{Hironaka.HironakaActualCompactIntrinsicHSMaximum.actual_intrinsic_hs_upperSemicontinuous,Hironaka.HironakaActualCompactIntrinsicHSMaximum.exists_actual_original_compact_hs_maximum}
+\leanok
+For ONLY an original coherent ideal $A$ and actual nonempty compact $K$,
+there is $y\in K$ which maximizes the EXISTING intrinsic profile
+$(H_A(y,\ell))_{\ell\ge0}$ lexicographically. On that SAME actual $K$,
+the literal coordinatewise ALL-order threshold at this produced profile
+is exactly the ENTIRE constant intrinsic HS-profile locus of $y$.
+\end{theorem}
+\begin{proof}
+For every original order and actual natural threshold, the existing
+whole-stalk theorem constructs the true analytic HS superlevel from
+original finite generators. It is therefore closed and gives actual
+upper semicontinuity of the EXISTING intrinsic function at that order.
+Apply the preceding compact theorem to these actual functions restricted
+to the literal original $K$. Its produced point and BOTH all-order
+directions give the stated genuine maximum and exact constant-profile
+dictionary. The original quotient ideals, maximal powers, complex
+actions and point function remain unchanged.
+\end{proof}
+
+\begin{theorem}[Only a nonempty compact analytic original carrier produces its genuine analytic constant maximal HS locus]
+\label{hir:actual-original-compact-reduced-constant-maximal-hs-locus}
+\uses{hir:actual-original-compact-intrinsic-hs-lexicographic-maximum,hir:actual-ambient-hs-whole-superlevel-analytic,hir:actual-order-zero-hs-whole-support-dictionary,ana:cartan-coherence}
+\lean{Hironaka.HironakaActualCompactIntrinsicHSMaximum.exists_actual_original_compact_reduced_constant_maximal_hs_locus}
+\leanok
+For ONLY nonempty compact analytic original $W$, there is an actual
+$y\in W$ such that the literal WHOLE ambient ALL-order reduced HS threshold
+at its produced original profile is nonempty, compact and analytic,
+lies in $W$, and consists EXACTLY of the actual points of $W$ having
+the SAME ENTIRE intrinsic reduced HS profile as $y$.
+\end{theorem}
+\begin{proof}
+Original Cartan coherence makes the genuine reduced vanishing ideal
+coherent. Apply the preceding internal compact maximum to $K=W$.
+At the produced point the genuine order-zero HS value is one, since
+the actual reduced ideal support is exactly $W$. The whole threshold
+therefore forces actual reduced support membership by its order-zero
+condition, so it lies in the ORIGINAL $W$. On $W$, the preceding theorem
+gives BOTH threshold/ENTIRE-profile-equality directions. The produced
+point itself proves nonemptiness. The existing whole ambient all-order
+analytic-cut theorem supplies analyticity; its closedness and actual
+containment in compact original $W$ give compactness. No caller maximal
+point, HS-constant carrier, analytic-cut or geometry certificate is used.
+This is a genuine maximal constant HS locus; exceptional blowup
+nonincrease and the terminating HS-centre driver remain OPEN.
+\end{proof}

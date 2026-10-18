@@ -1,0 +1,16 @@
+theorem finrank_planeSubmodule {N r : ℕ} (hr : r ≤ N) :
+    Module.finrank ℂ (planeSubmodule N r) = r := by
+  have hrange : LinearMap.range ((coordinateInclusion N r : ComplexModel r →L[ℂ] ComplexModel N) :
+      ComplexModel r →ₗ[ℂ] ComplexModel N) = planeSubmodule N r := by
+    ext z
+    constructor
+    · rintro ⟨w, rfl⟩
+      exact coordinateInclusion_mem_complexCoordinatePlane w
+    · intro hz
+      exact ⟨coordinateProjection N r z, coordinateInclusion_coordinateProjection hz⟩
+  have hinj : Function.Injective ((coordinateInclusion N r : ComplexModel r →L[ℂ] ComplexModel N) :
+      ComplexModel r →ₗ[ℂ] ComplexModel N) := by
+    intro a b hab
+    have := congrArg (coordinateProjection N r) hab
+    simpa [coordinateProjection_coordinateInclusion hr] using this
+  rw [← hrange, LinearMap.finrank_range_of_inj hinj, finrank_euclideanSpace_fin]

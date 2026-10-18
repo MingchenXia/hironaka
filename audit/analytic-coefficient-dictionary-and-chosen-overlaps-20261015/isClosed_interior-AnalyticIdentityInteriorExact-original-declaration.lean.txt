@@ -1,0 +1,26 @@
+/-- The interior of an analytic subset is closed. -/
+theorem IsComplexAnalyticSubset.isClosed_interior {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) : IsClosed (interior A) := by
+  refine isClosed_of_closure_subset fun x hx => ?_
+  obtain ⟨p⟩ := hA x
+  set e := (complexChartAt (n := n) x).val with he
+  obtain ⟨r, hr, hball⟩ :=
+    Metric.isOpen_iff.mp p.isOpen_coordinateNeighborhood (e x)
+      p.center_mem_coordinateNeighborhood
+  set S := e.source ∩ e ⁻¹' ball (e x) r with hSdef
+  have hSo : IsOpen S := e.continuousOn.isOpen_inter_preimage e.open_source isOpen_ball
+  have hxS : x ∈ S := ⟨mem_complexChartAt_source (n := n) x, mem_ball_self hr⟩
+  obtain ⟨y, hyS, hyint⟩ := mem_closure_iff.mp hx S hSo hxS
+  have hUo : IsOpen (e '' (interior A ∩ S)) :=
+    e.isOpen_image_of_subset_source (isOpen_interior.inter hSo) fun z hz => hz.2.1
+  have hvanish : ∀ i, EqOn (p.generator i) 0 (ball (e x) r) := by
+    intro i
+    refine eqOn_zero_of_isOpen_convex isOpen_ball (convex_ball _ _)
+      ((p.generator_holomorphic i).mono hball) hUo ?_ ⟨e y, y, ⟨hyint, hyS⟩, rfl⟩ ?_
+    · rintro _ ⟨z, hz, rfl⟩
+      exact hz.2.2
+    · rintro _ ⟨z, hz, rfl⟩
+      exact (p.zeroLocus hz.2.1 (hball hz.2.2)).mp (interior_subset hz.1) i
+  have hSA : S ⊆ A := fun z hz =>
+    (p.zeroLocus hz.1 (hball hz.2)).mpr fun i => hvanish i hz.2
+  exact mem_interior_iff_mem_nhds.mpr (mem_of_superset (hSo.mem_nhds hxS) hSA)

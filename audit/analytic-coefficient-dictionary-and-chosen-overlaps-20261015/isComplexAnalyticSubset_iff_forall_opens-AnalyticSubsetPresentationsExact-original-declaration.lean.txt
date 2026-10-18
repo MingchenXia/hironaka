@@ -1,0 +1,5 @@
+theorem isComplexAnalyticSubset_iff_forall_opens {A : Set M} :
+    IsComplexAnalyticSubset (n := n) A ↔ ∀ x : M, ∃ U : Opens M, x ∈ U ∧
+      IsComplexAnalyticSubset (n := n) ((↑) ⁻¹' A : Set U) :=
+  ⟨fun hA _ => ⟨⊤, trivial, isComplexAnalyticSubset_preimage_val hA ⊤⟩,
+    isComplexAnalyticSubset_of_forall_opens⟩

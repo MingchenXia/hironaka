@@ -1,0 +1,4 @@
+theorem chart_mem_opens_target {x y : U}
+    (hy : (y : M) ∈ (chartAt (ComplexModel n) (x : M)).source) :
+    chartAt (ComplexModel n) (x : M) y ∈ (chartAt (ComplexModel n) x).target :=
+  (chartAt (ComplexModel n) (x : M)).map_subtype_source ⟨x⟩ hy

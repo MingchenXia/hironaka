@@ -1,0 +1,495 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Manifold.LocalHolomorphicOpenPartialExact
+import Hironaka.Analytic.RemmertSteinFlat
+import Hironaka.Analytic.RegularAtDimChart
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# The Remmert--Stein theorem
+
+Blueprint `rem:remmert-stein` (Demailly, *Complex analytic and differential geometry*, II.8.7):
+`(R_{m-1})` (for manifolds in `Type`) implies `(RS_m)` (`remmertSteinStatement_of_properImage`).
+
+* `regularAtDim_of_localEquiv`: regular points pull back along a local biholomorphism of `ℂᵏ`
+  (precomposition of a flattening, `RegularAtDimChart.precomp`).
+* `nonempty_presentation_closure_of_regularAtDim`: the local step -- at a regular point `y` of `B`
+  of dimension `q < s`, the closure of a pure `s`-dimensional `E ⊆ Y \ B`, analytic off `B`, has a
+  presentation: the chart at `y` followed by a flattening `Θ` of `B` carries `B` to `ℂ^q × {0}`, the
+  flat case (`RemmertSteinFlat.remmertStein_flat_pure`) applies to the image of `E`, and the
+  presentation of the closure is pulled back along `Θ ∘ e`.
+* `remmertStein_pure`: induction on `q` for pure-dimensional `E`: `B' = sing(B_q) ∪ B_{<q}` has
+  regular dimensions `< q - 1`, the closure of `E` is analytic off `B'` by the local step, and the
+  induction hypothesis applies to `closure E \ B'`.
+* `remmertSteinStatement_of_properImage`: the general case by the dimension strata of `E`.
+
+Sorry-free.
+-/
+
+open Set Filter Topology Metric TopologicalSpace
+open scoped Manifold ContDiff
+
+noncomputable section
+
+namespace Hironaka.RemmertSteinGeneral
+
+open Hironaka.RegularLocusDense AnalyticDimensionBasics AnalyticSubsetOpens
+  RemmertStatements RemmertSteinFlat
+
+universe u
+
+section Model
+
+variable {k : ℕ}
+
+/-- Regular points in the model space, with the identity chart unfolded. -/
+theorem regularAtDim_model_iff {S : Set (ComplexModel k)} {x : ComplexModel k} {j : ℕ} :
+    RegularAtDim (n := k) (M := ComplexModel k) S x j ↔ j ≤ k ∧ x ∈ S ∧
+      ∃ Ψ : LocalHolomorphicEquivAt (n := k) x, Ψ.toFun x = 0 ∧
+        ∀ v ∈ Ψ.source, (v ∈ S ↔ Ψ.toFun v ∈ complexCoordinatePlane k j) := by
+  have hchart : (complexChartAt (n := k) x).val = OpenPartialHomeomorph.refl (ComplexModel k) := by
+    simp [complexChartAt, chartAt_self_eq]
+  unfold RegularAtDim
+  rw [hchart]
+  simp only [OpenPartialHomeomorph.refl_apply, id_eq, OpenPartialHomeomorph.refl_target,
+    OpenPartialHomeomorph.refl_source, subset_univ, true_and, mem_univ, forall_const]
+  exact Iff.rfl
+
+/-- **Regular points pull back along a local biholomorphism of `ℂᵏ`.** -/
+theorem regularAtDim_of_localEquiv {c : ComplexModel k} (Θ : LocalHolomorphicEquivAt (n := k) c)
+    {S S' : Set (ComplexModel k)} (hSS' : ∀ v ∈ Θ.source, v ∈ S ↔ Θ.toFun v ∈ S')
+    {u : ComplexModel k} (hu : u ∈ Θ.source) {j : ℕ}
+    (h : RegularAtDim (n := k) (M := ComplexModel k) S' (Θ.toFun u) j) :
+    RegularAtDim (n := k) (M := ComplexModel k) S u j := by
+  rw [regularAtDim_model_iff] at h ⊢
+  obtain ⟨hj, hmem, Ψ, hΨ0, hΨ⟩ := h
+  set T := LocalHolomorphicEquivAt.toOpenPartialHomeomorph Θ with hT
+  let Ψ' := RegularAtDimChart.precomp T Θ.toFun_holomorphic Θ.invFun_holomorphic hu rfl Ψ
+  refine ⟨hj, (hSS' u hu).mpr hmem, Ψ', hΨ0, fun v hv => ?_⟩
+  rw [hSS' v hv.1]
+  exact hΨ (Θ.toFun v) hv.2
+
+end Model
+
+section LocalStep
+
+variable {k : ℕ} {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel k) Y]
+  [IsComplexManifold k Y]
+
+attribute [local instance 2000] PiLp.topologicalSpace in
+/-- **The local step of Remmert--Stein.** -/
+theorem nonempty_presentation_closure_of_regularAtDim {m : ℕ}
+    (hR : ProperImageStatement.{0, 0} (m - 1)) {B E : Set Y} (hBc : IsClosed B) {q s : ℕ}
+    (hqs : q < s)
+    (hsm : s ≤ m) (hEB : Disjoint E B)
+    (hEpres : ∀ y, y ∉ B → Nonempty (ComplexAnalyticPresentationAt (n := k) E y))
+    (hpure : IsPureDim (n := k) E s) {y : Y} (hy : RegularAtDim (n := k) B y q) :
+    Nonempty (ComplexAnalyticPresentationAt (n := k) (closure E) y) := by
+  classical
+  set e := (complexChartAt (n := k) y).val with he
+  obtain ⟨-, -, Θ, hΘt, hΘ0, hΘB⟩ := hy
+  have hys : y ∈ e.source := mem_complexChartAt_source y
+  -- the two maps
+  set ψ : ComplexModel k → Y := fun w => e.symm (Θ.invFun w) with hψ
+  set φ : Y → ComplexModel k := fun y' => Θ.toFun (e y') with hφ
+  set Uy : Set Y := e.source ∩ e ⁻¹' Θ.source with hUy
+  have hUyo : IsOpen Uy := e.isOpen_inter_preimage Θ.isOpen_source
+  have hyU : y ∈ Uy := ⟨hys, Θ.center_mem_source⟩
+  have hψU : ∀ w ∈ Θ.target, ψ w ∈ Uy ∧ φ (ψ w) = w := by
+    intro w hw
+    have h1 := Θ.mapsTo_invFun hw
+    have h2 := hΘt h1
+    refine ⟨⟨e.map_target h2, by simp only [mem_preimage, hψ, e.right_inv h2]; exact h1⟩, ?_⟩
+    simp only [hφ, hψ, e.right_inv h2, Θ.right_inv _ hw]
+  have hφU : ∀ y' ∈ Uy, φ y' ∈ Θ.target ∧ ψ (φ y') = y' := by
+    intro y' hy'
+    refine ⟨Θ.mapsTo_toFun hy'.2, ?_⟩
+    simp only [hφ, hψ, Θ.left_inv _ hy'.2, e.left_inv hy'.1]
+  have hB : ∀ w ∈ Θ.target, (ψ w ∈ B ↔ w ∈ complexCoordinatePlane k q) := by
+    intro w hw
+    obtain ⟨hwU, hφw⟩ := hψU w hw
+    have := hΘB hwU.1 hwU.2
+    rwa [show Θ.toFun (e (ψ w)) = w from hφw] at this
+  have hψc : ContMDiffOn 𝓘(ℂ, ComplexModel k) 𝓘(ℂ, ComplexModel k) ∞ ψ Θ.target := by
+    have h1 : ContMDiffOn 𝓘(ℂ, ComplexModel k) 𝓘(ℂ, ComplexModel k) ∞ Θ.invFun Θ.target :=
+      (contDiffOn_of_differentiableOn_complex Θ.invFun_holomorphic Θ.isOpen_target).contMDiffOn
+    exact (contMDiffOn_chart_symm (I := 𝓘(ℂ, ComplexModel k)) (x := y)).comp h1
+      fun w hw => hΘt (Θ.mapsTo_invFun hw)
+  have hφc : ContMDiffOn 𝓘(ℂ, ComplexModel k) 𝓘(ℂ, ComplexModel k) ∞ φ Uy := by
+    have h1 : ContMDiffOn 𝓘(ℂ, ComplexModel k) 𝓘(ℂ, ComplexModel k) ∞ Θ.toFun Θ.source :=
+      (contDiffOn_of_differentiableOn_complex Θ.toFun_holomorphic Θ.isOpen_source).contMDiffOn
+    exact h1.comp ((contMDiffOn_chart (I := 𝓘(ℂ, ComplexModel k)) (x := y)).mono
+      inter_subset_left) fun y' hy' => hy'.2
+  -- the image of `E`
+  set E' : Set (ComplexModel k) := Θ.target ∩ ψ ⁻¹' E with hE'
+  by_cases hEne : E = ∅
+  · subst hEne
+    rw [closure_empty]
+    exact ⟨ComplexAnalyticPresentationAt.empty y⟩
+  have hsk : s ≤ k := by
+    obtain ⟨z, hz⟩ := nonempty_iff_ne_empty.mpr hEne
+    have hzB : z ∉ B := fun h => disjoint_left.mp hEB hz h
+    obtain ⟨P⟩ := hEpres z hzB
+    have hEa : IsComplexAnalyticSubset (n := k)
+        ((↑) ⁻¹' E : Set (⟨Bᶜ, hBc.isOpen_compl⟩ : Opens Y)) :=
+      isComplexAnalyticSubset_preimage_val_of_forall fun x hx => hEpres x hx
+    obtain ⟨z', -, j, hz'⟩ := exists_regularAtDim_mem_nhds hEa (x := ⟨z, hzB⟩) hz univ_mem
+    have := regularAtDim_preimage_val_iff.mp hz'
+    rw [← hpure _ _ this]
+    exact this.1
+  -- the hypotheses of the flat case for `E'`
+  have hE'L : Disjoint E' (complexCoordinatePlane k q) := by
+    rw [disjoint_left]
+    rintro w ⟨hw, hwE⟩ hwL
+    exact disjoint_left.mp hEB hwE ((hB w hw).mpr hwL)
+  have hE'pres : ∀ w ∈ Θ.target, w ∉ complexCoordinatePlane k q →
+      Nonempty (ComplexAnalyticPresentationAt (n := k) (M := ComplexModel k) E' w) := by
+    intro w hw hwL
+    have hψB : ψ w ∉ B := fun h => hwL ((hB w hw).mp h)
+    obtain ⟨P⟩ := hEpres (ψ w) hψB
+    exact nonempty_presentation_comp Θ.isOpen_target hw hψc P
+      fun w' hw' => ⟨fun h => h.2, fun h => ⟨hw', h⟩⟩
+  have hE'pure : IsPureDim (n := k) (M := ComplexModel k) E' s := by
+    intro w j hw
+    have hwT : w ∈ Θ.target := hw.2.1.1
+    have hu : Θ.invFun w ∈ Θ.source := Θ.mapsTo_invFun hwT
+    set S : Set (ComplexModel k) := e.target ∩ e.symm ⁻¹' E with hS
+    have hSS' : ∀ v ∈ Θ.source, v ∈ S ↔ Θ.toFun v ∈ E' := by
+      intro v hv
+      have hvt := hΘt hv
+      constructor
+      · rintro ⟨-, hvE⟩
+        refine ⟨Θ.mapsTo_toFun hv, ?_⟩
+        show e.symm (Θ.invFun (Θ.toFun v)) ∈ E
+        rw [Θ.left_inv _ hv]
+        exact hvE
+      · rintro ⟨-, hvE⟩
+        refine ⟨hvt, ?_⟩
+        have : e.symm (Θ.invFun (Θ.toFun v)) ∈ E := hvE
+        rwa [Θ.left_inv _ hv] at this
+    have h1 : RegularAtDim (n := k) (M := ComplexModel k) S (Θ.invFun w) j :=
+      regularAtDim_of_localEquiv Θ hSS' hu (by rw [Θ.right_inv _ hwT]; exact hw)
+    have hψs : ψ w ∈ e.source := e.map_target (hΘt hu)
+    have heψ : e (ψ w) = Θ.invFun w := e.right_inv (hΘt hu)
+    have h2 := (RegularAtDimChart.regularAtDim_chart_iff (complexChartAt (n := k) y) S hψs).mpr
+      (by
+        rw [← he, heψ, inter_eq_left.mpr (fun v hv => hv.1)]
+        exact h1)
+    have h3 : RegularAtDim (n := k) E (ψ w) j := by
+      refine RegularPointDimension.regularAtDim_of_inter_eq e.open_source hψs ?_ h2
+      ext y'
+      constructor
+      · rintro ⟨⟨hy's, hy'S⟩, -⟩
+        refine ⟨?_, hy's⟩
+        have := hy'S.2
+        rwa [mem_preimage, e.left_inv hy's] at this
+      · rintro ⟨hy'E, hy's⟩
+        refine ⟨⟨hy's, e.map_source hy's, ?_⟩, hy's⟩
+        rw [mem_preimage, e.left_inv hy's]
+        exact hy'E
+    exact hpure _ _ h3
+  -- the flat case
+  have h0T : (0 : ComplexModel k) ∈ Θ.target := by
+    rw [← hΘ0]
+    exact Θ.mapsTo_toFun Θ.center_mem_source
+  have h0L : (0 : ComplexModel k) ∈ complexCoordinatePlane k q := fun i _ => by simp
+  have hqs' : q + (s - q) = s := by omega
+  obtain ⟨P⟩ := remmertStein_flat_pure (m := m) hR (p := q) (t := s - q) (by omega)
+    (by omega) (by omega) Θ.isOpen_target inter_subset_left hE'L hE'pres
+    (by rw [hqs']; exact hE'pure) h0T h0L
+  have hφy : φ y = 0 := hΘ0
+  rw [← hφy] at P
+  refine nonempty_presentation_comp hUyo hyU hφc P fun y' hy' => ?_
+  obtain ⟨hφT, hψφ⟩ := hφU y' hy'
+  constructor
+  · intro hy'c
+    have h1 : y' ∈ closure (Uy ∩ E) := hUyo.inter_closure ⟨hy', hy'c⟩
+    have h2 : ContinuousWithinAt φ (Uy ∩ E) y' :=
+      (hφc.continuousOn.continuousAt (hUyo.mem_nhds hy')).continuousWithinAt
+    refine closure_mono ?_ (h2.mem_closure_image h1)
+    rintro _ ⟨z, ⟨hzU, hzE⟩, rfl⟩
+    obtain ⟨hzT, hψz⟩ := hφU z hzU
+    exact ⟨hzT, by simp only [mem_preimage]; rw [hψz]; exact hzE⟩
+  · intro hφc'
+    have h2 : ContinuousWithinAt ψ E' (φ y') :=
+      (hψc.continuousOn.continuousAt (Θ.isOpen_target.mem_nhds hφT)).continuousWithinAt
+    have := h2.mem_closure_image hφc'
+    rw [hψφ] at this
+    refine closure_mono ?_ this
+    rintro _ ⟨w, hw, rfl⟩
+    exact hw.2
+
+end LocalStep
+
+section Strata
+
+variable {k : ℕ} {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel k) Y]
+  [IsComplexManifold k Y]
+
+/-- **Regular dimensions of a union.**  If all regular points of `S₁` (closed) and `S₂` have
+dimension `< q`, so do those of `S₁ ∪ S₂`. -/
+theorem regularAtDim_union_lt {S₁ S₂ : Set Y} (h₁ : IsClosed S₁) {q : ℕ}
+    (hd₁ : ∀ y j, RegularAtDim (n := k) S₁ y j → j < q)
+    (hd₂ : ∀ y j, RegularAtDim (n := k) S₂ y j → j < q) :
+    ∀ y j, RegularAtDim (n := k) (S₁ ∪ S₂) y j → j < q := by
+  intro y j hy
+  obtain ⟨O, hOsub, hOo, hyO⟩ :=
+    _root_.mem_nhds_iff.mp (RegularPatchNeighborhood.eventually_regularAtDim hy)
+  by_cases hcase : ∃ z ∈ O, z ∈ S₁ ∪ S₂ ∧ z ∉ S₁
+  · obtain ⟨z, hzO, hzT, hzS⟩ := hcase
+    have hzreg := hOsub hzO hzT
+    have heq : (S₁ ∪ S₂) ∩ S₁ᶜ = S₂ ∩ S₁ᶜ := by
+      ext w
+      constructor
+      · rintro ⟨hw | hw, hw'⟩
+        · exact absurd hw hw'
+        · exact ⟨hw, hw'⟩
+      · rintro ⟨hw, hw'⟩
+        exact ⟨Or.inr hw, hw'⟩
+    exact hd₂ z j (RegularPointDimension.regularAtDim_of_inter_eq h₁.isOpen_compl hzS heq hzreg)
+  · push Not at hcase
+    have heq : (S₁ ∪ S₂) ∩ O = S₁ ∩ O := by
+      ext w
+      constructor
+      · rintro ⟨hw, hwO⟩
+        exact ⟨hcase w hwO hw, hwO⟩
+      · rintro ⟨hw, hwO⟩
+        exact ⟨Or.inl hw, hwO⟩
+    exact hd₁ y j (RegularPointDimension.regularAtDim_of_inter_eq hOo hyO heq hy)
+
+/-- An analytic set without regular points is empty. -/
+theorem eq_empty_of_forall_not_regularAtDim {B : Set Y} (hB : IsComplexAnalyticSubset (n := k) B)
+    (h : ∀ y j, ¬ RegularAtDim (n := k) B y j) : B = ∅ := by
+  by_contra hne
+  obtain ⟨y, hy⟩ := nonempty_iff_ne_empty.mpr hne
+  obtain ⟨z, -, j, hz⟩ := exists_regularAtDim_mem_nhds hB hy univ_mem
+  exact h z j hz
+
+/-- A set with presentations off a closed `B` agrees with its closure off `B`. -/
+theorem closure_inter_compl_eq {B E : Set Y} (hBc : IsClosed B)
+    (hEpres : ∀ y, y ∉ B → Nonempty (ComplexAnalyticPresentationAt (n := k) E y)) :
+    closure E ∩ Bᶜ = E ∩ Bᶜ := by
+  apply Subset.antisymm
+  · intro z hz
+    exact ⟨closure_inter_subset_of_forall hBc.isOpen_compl (fun y hy => hEpres y hy) hz, hz.2⟩
+  · exact inter_subset_inter_left _ subset_closure
+
+/-- **Remmert--Stein for pure-dimensional `E`**, by induction on the bound `q` of the regular
+dimensions of `B`. -/
+theorem remmertStein_pure {m : ℕ} (hR : ProperImageStatement.{0, 0} (m - 1)) {s : ℕ}
+    (hsm : s ≤ m) :
+    ∀ q : ℕ, q ≤ s → ∀ {B E : Set Y}, IsComplexAnalyticSubset (n := k) B →
+      (∀ y j, RegularAtDim (n := k) B y j → j < q) → Disjoint E B →
+      (∀ y, y ∉ B → Nonempty (ComplexAnalyticPresentationAt (n := k) E y)) →
+      IsPureDim (n := k) E s → IsComplexAnalyticSubset (n := k) (closure E) := by
+  intro q
+  induction q with
+  | zero =>
+    intro _ B E hB hBdim _ hEpres _
+    have hB0 : B = ∅ := eq_empty_of_forall_not_regularAtDim hB fun y j hy => by
+      have := hBdim y j hy
+      omega
+    subst hB0
+    have hE : IsComplexAnalyticSubset (n := k) E := fun y => hEpres y (notMem_empty y)
+    rw [hE.isClosed.closure_eq]
+    exact hE
+  | succ q ih =>
+    intro hqs B E hB hBdim hEB hEpres hpure
+    have hBc : IsClosed B := hB.isClosed
+    -- the strata of `B`
+    set Bq := closure (PureDimension.regularStratum (n := k) B (· = q)) with hBq
+    set Bl := closure (PureDimension.regularStratum (n := k) B (· < q)) with hBl
+    have hBqa : IsComplexAnalyticSubset (n := k) Bq :=
+      PureDimension.isComplexAnalyticSubset_closure_regularStratum hB _
+    have hBla : IsComplexAnalyticSubset (n := k) Bl :=
+      PureDimension.isComplexAnalyticSubset_closure_regularStratum hB _
+    have hBqpure : IsPureDim (n := k) Bq q := fun y j hy =>
+      AnalyticCodimTwoStratification.regularAtDim_regularStratumHull hB (· = q) hy
+    have hBldim : ∀ y j, RegularAtDim (n := k) Bl y j → j < q := fun y j hy =>
+      AnalyticCodimTwoStratification.regularAtDim_regularStratumHull hB (· < q) hy
+    set Sing := Bq \ regularLocus (n := k) Bq q with hSing
+    have hSinga : IsComplexAnalyticSubset (n := k) Sing :=
+      PureSingularLocus.isComplexAnalyticSubset_diff_regularLocus hBqa hBqpure
+    have hSingdim : ∀ y j, RegularAtDim (n := k) Sing y j → j < q := fun y j hy =>
+      ThinDimensionDrop.lt_of_regularAtDim_of_thin hBqa sdiff_subset
+        (PureSingularLocus.thin_diff_regularLocus hBqa hBqpure) hBqpure.dimLE hy
+    set B' := Sing ∪ Bl with hB'
+    have hB'a : IsComplexAnalyticSubset (n := k) B' :=
+      ConstantRankImage.IsComplexAnalyticSubset.union hSinga hBla
+    have hB'dim : ∀ y j, RegularAtDim (n := k) B' y j → j < q :=
+      regularAtDim_union_lt hSinga.isClosed hSingdim hBldim
+    have hBsub : B ⊆ Bq ∪ Bl := by
+      intro y hy
+      have hy' : y ∈ closure (PureDimension.regularStratum (n := k) B (· = q) ∪
+          PureDimension.regularStratum (n := k) B (· < q)) := by
+        rw [_root_.mem_closure_iff]
+        intro O hO hyO
+        obtain ⟨z, hzO, j, hz⟩ := exists_regularAtDim_mem_nhds hB hy (hO.mem_nhds hyO)
+        have hj := hBdim z j hz
+        refine ⟨z, hzO, ?_⟩
+        rcases (Nat.lt_succ_iff.mp hj).lt_or_eq with h | h
+        · exact Or.inr (PureDimension.mem_regularStratum.mpr ⟨j, h, hz⟩)
+        · exact Or.inl (PureDimension.mem_regularStratum.mpr ⟨j, h, hz⟩)
+      rwa [closure_union] at hy'
+    have hBqB : Bq ⊆ B := hBc.closure_subset_iff.mpr (PureDimension.regularStratum_subset B _)
+    have hB'B : B' ⊆ B := by
+      rintro y (hy | hy)
+      · exact hBqB hy.1
+      · exact hBc.closure_subset_iff.mpr (PureDimension.regularStratum_subset B _) hy
+    -- points of `B \ B'` are regular of dimension `q`
+    have hregB : ∀ y ∈ B, y ∉ B' → RegularAtDim (n := k) B y q := by
+      intro y hyB hyB'
+      have hyl : y ∉ Bl := fun h => hyB' (Or.inr h)
+      have hyq : y ∈ Bq := (hBsub hyB).resolve_right hyl
+      have hyreg : RegularAtDim (n := k) Bq y q := by
+        by_contra h
+        exact hyB' (Or.inl ⟨hyq, h⟩)
+      refine RegularPointDimension.regularAtDim_of_inter_eq hBla.isClosed.isOpen_compl hyl ?_ hyreg
+      ext z
+      constructor
+      · rintro ⟨hz, hzl⟩
+        exact ⟨hBqB hz, hzl⟩
+      · rintro ⟨hz, hzl⟩
+        exact ⟨(hBsub hz).resolve_right hzl, hzl⟩
+    -- the set `E₁`
+    have hcl := closure_inter_compl_eq hBc hEpres
+    set E₁ := closure E ∩ B'ᶜ with hE₁
+    have hE₁B : E₁ ∩ Bᶜ = E ∩ Bᶜ := by
+      rw [hE₁, inter_assoc, inter_comm B'ᶜ, ← inter_assoc, hcl]
+      ext z
+      constructor
+      · rintro ⟨⟨hz, hzB⟩, -⟩
+        exact ⟨hz, hzB⟩
+      · rintro ⟨hz, hzB⟩
+        exact ⟨⟨hz, hzB⟩, fun h => hzB (hB'B h)⟩
+    have hEE₁ : E ⊆ E₁ := fun z hz =>
+      ⟨subset_closure hz, fun h => disjoint_left.mp hEB hz (hB'B h)⟩
+    have hE₁pres : ∀ y, y ∉ B' → Nonempty (ComplexAnalyticPresentationAt (n := k) E₁ y) := by
+      intro y hyB'
+      by_cases hyB : y ∈ B
+      · obtain ⟨P⟩ := nonempty_presentation_closure_of_regularAtDim hR hBc (by omega) hsm hEB
+          hEpres hpure (hregB y hyB hyB')
+        refine nonempty_presentation_of_inter_eq hB'a.isClosed.isOpen_compl hyB' ?_ P
+        rw [hE₁, inter_assoc, inter_self]
+      · obtain ⟨P⟩ := hEpres y hyB
+        exact nonempty_presentation_of_inter_eq hBc.isOpen_compl hyB hE₁B P
+    have hE₁pure : IsPureDim (n := k) E₁ s := by
+      intro z j hz
+      by_cases hzB : z ∈ B
+      · obtain ⟨O, hOsub, hOo, hzO⟩ :=
+          _root_.mem_nhds_iff.mp (RegularPatchNeighborhood.eventually_regularAtDim hz)
+        have hzc : z ∈ closure E := hz.2.1.1
+        obtain ⟨z', hz'O, hz'E⟩ := _root_.mem_closure_iff.mp hzc O hOo hzO
+        have hz'B : z' ∉ B := fun h => disjoint_left.mp hEB hz'E h
+        have hreg := hOsub hz'O (hEE₁ hz'E)
+        exact hpure z' j (RegularPointDimension.regularAtDim_of_inter_eq hBc.isOpen_compl hz'B
+          hE₁B hreg)
+      · exact hpure z j (RegularPointDimension.regularAtDim_of_inter_eq hBc.isOpen_compl hzB
+          hE₁B hz)
+    have h := ih (by omega) hB'a hB'dim (disjoint_left.mpr fun z hz hzB' => hz.2 hzB')
+      hE₁pres hE₁pure
+    have hcE : closure E₁ = closure E := by
+      apply Subset.antisymm
+      · rw [← closure_closure (s := E)]
+        exact closure_mono inter_subset_left
+      · exact closure_mono hEE₁
+    rwa [hcE] at h
+
+end Strata
+
+section General
+
+/-- **The Remmert--Stein theorem** (`rem:remmert-stein`): `(R_{m-1})` for manifolds in `Type`
+implies `(RS_m)` for manifolds in any universe. -/
+theorem remmertSteinStatement_of_properImage {m : ℕ}
+    (hR : ProperImageStatement.{0, 0} (m - 1)) : RemmertSteinStatement.{u} m := by
+  intro k Y _ _ _ B E q hB hBdim hEB hEpres hdim hloc
+  classical
+  have hBc := hB.isClosed
+  set V : Opens Y := ⟨Bᶜ, hBc.isOpen_compl⟩ with hV
+  have hEVa : IsComplexAnalyticSubset (n := k) ((↑) ⁻¹' E : Set V) :=
+    isComplexAnalyticSubset_preimage_val_of_forall fun x hx => hEpres x hx
+  have hEV : E ⊆ V := fun z hz h => disjoint_left.mp hEB hz h
+  set R : ℕ → Set Y := fun s => PureDimension.regularStratum (n := k) E (· = s) with hR'
+  have hRE : ∀ s, R s ⊆ E := fun s => PureDimension.regularStratum_subset E _
+  -- the strata `E_s = closure (R s) \ B`
+  have hhull : ∀ s, ((↑) ⁻¹' (closure (R s) ∩ Bᶜ) : Set V) =
+      AnalyticCodimTwoStratification.regularStratumHull (n := k) ((↑) ⁻¹' E : Set V) (· = s) := by
+    intro s
+    rw [AnalyticCodimTwoStratification.regularStratumHull, closure_opens_eq]
+    have himg : ((↑) '' PureDimension.regularStratum (n := k) ((↑) ⁻¹' E : Set V) (· = s) :
+        Set Y) = R s := by
+      ext z
+      constructor
+      · rintro ⟨y, hy, rfl⟩
+        rw [PureDimension.mem_regularStratum] at hy ⊢
+        obtain ⟨j, hj, hyj⟩ := hy
+        exact ⟨j, hj, regularAtDim_preimage_val_iff.mp hyj⟩
+      · intro hz
+        refine ⟨⟨z, hEV (hRE s hz)⟩, ?_, rfl⟩
+        rw [PureDimension.mem_regularStratum] at hz ⊢
+        obtain ⟨j, hj, hzj⟩ := hz
+        exact ⟨j, hj, regularAtDim_preimage_val_iff.mpr hzj⟩
+    rw [himg]
+    ext y
+    simp only [mem_preimage, mem_inter_iff, and_iff_left_iff_imp]
+    exact fun _ => y.2
+  have hEspres : ∀ s, ∀ y, y ∉ B →
+      Nonempty (ComplexAnalyticPresentationAt (n := k) (closure (R s) ∩ Bᶜ) y) := by
+    intro s y hy
+    refine nonempty_presentation_of_preimage_val (U := V) ?_ hy
+    rw [hhull s]
+    exact AnalyticCodimTwoStratification.isComplexAnalyticSubset_regularStratumHull hEVa _
+  have hEspure : ∀ s, IsPureDim (n := k) (closure (R s) ∩ Bᶜ) s := by
+    intro s z j hz
+    have hzV : z ∈ V := hz.2.1.2
+    have h := regularAtDim_preimage_val_iff (U := V) (x := ⟨z, hzV⟩) |>.mpr hz
+    rw [hhull s] at h
+    exact AnalyticCodimTwoStratification.regularAtDim_regularStratumHull hEVa (· = s) h
+  have hclEs : ∀ s, closure (closure (R s) ∩ Bᶜ) = closure (R s) := by
+    intro s
+    apply Subset.antisymm
+    · exact closure_minimal inter_subset_left isClosed_closure
+    · exact closure_mono fun z hz => ⟨subset_closure hz, hEV (hRE s hz)⟩
+  -- `closure E` is the union of the closures of the strata
+  have hEsub : closure E = ⋃ s ∈ Finset.range (m + 1), closure (R s) := by
+    apply Subset.antisymm
+    · refine (isClosed_biUnion_finset fun s _ => isClosed_closure).closure_subset_iff.mpr ?_
+      intro y hy
+      by_contra hcon
+      have hO : (⋃ s ∈ Finset.range (m + 1), closure (R s))ᶜ ∈ 𝓝 y :=
+        (isClosed_biUnion_finset fun s _ => isClosed_closure).isOpen_compl.mem_nhds hcon
+      have hO' : ((↑) ⁻¹' (⋃ s ∈ Finset.range (m + 1), closure (R s))ᶜ : Set V) ∈
+          𝓝 (⟨y, hEV hy⟩ : V) :=
+        continuous_subtype_val.continuousAt.preimage_mem_nhds hO
+      obtain ⟨z, hzO, j, hz⟩ := exists_regularAtDim_mem_nhds hEVa (x := ⟨y, hEV hy⟩) hy hO'
+      have hz' := regularAtDim_preimage_val_iff.mp hz
+      apply hzO
+      exact mem_biUnion (Finset.mem_range.mpr (Nat.lt_succ_of_le (hdim _ j hz')))
+        (subset_closure (PureDimension.mem_regularStratum.mpr ⟨j, rfl, hz'⟩))
+    · refine iUnion₂_subset fun s _ => closure_mono (hRE s)
+  rw [hEsub]
+  refine ConstantRankImage.isComplexAnalyticSubset_biUnion _ fun s hs => ?_
+  have hsm : s ≤ m := Nat.lt_succ_iff.mp (Finset.mem_range.mp hs)
+  by_cases hqs : q ≤ s
+  · rw [← hclEs s]
+    exact remmertStein_pure hR hsm q hqs hB hBdim
+      (disjoint_left.mpr fun z hz hzB => hz.2 hzB) (hEspres s) (hEspure s)
+  · have hRs : R s = ∅ := by
+      ext z
+      simp only [mem_empty_iff_false, iff_false]
+      intro hz
+      rw [hR', PureDimension.mem_regularStratum] at hz
+      obtain ⟨j, rfl, hzj⟩ := hz
+      exact hqs ((hloc z hzj.2.1).le_of_locDimLE (locDimLE_of_regularAtDim hzj))
+    rw [hRs, closure_empty]
+    exact isComplexAnalyticSubset_empty
+
+end General
+
+end Hironaka.RemmertSteinGeneral

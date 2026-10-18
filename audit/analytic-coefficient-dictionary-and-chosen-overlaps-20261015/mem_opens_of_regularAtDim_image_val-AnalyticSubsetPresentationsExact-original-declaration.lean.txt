@@ -1,0 +1,4 @@
+theorem mem_opens_of_regularAtDim_image_val {B : Set U} {y : M} {k : ℕ}
+    (hy : RegularAtDim (n := n) ((↑) '' B : Set M) y k) : y ∈ U := by
+  obtain ⟨z, -, rfl⟩ := hy.2.1
+  exact z.2

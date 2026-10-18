@@ -585,6 +585,34 @@ import Hironaka.Resolution.HironakaSharpActualCurveCommonOpenCocycle
 
 import Hironaka.Resolution.HironakaSharpActualCurveOverlapMaps
 
+import Hironaka.Resolution.HironakaActualRelativeCoefficientGerms
+
+import Hironaka.Resolution.HironakaActualRelativeTaylorCoefficients
+
+import Hironaka.Resolution.HironakaActualTaylorCoordinateNaturality
+
+import Hironaka.Resolution.HironakaOriginalAllStepOneSmoothValues
+
+import Hironaka.Resolution.HironakaOriginalFullCutCompanionTestStep
+
+import Hironaka.Resolution.HironakaOriginalPreparedCompanionSmoothDiagram
+
+import Hironaka.Resolution.HironakaOriginalPreparedCurrentCompanion
+
+import Hironaka.Resolution.HironakaOriginalSimultaneousCompanionTestStep
+
+import Hironaka.Resolution.HironakaSharpActualCurveChosenOverlapCocycle
+
+import Hironaka.Resolution.HironakaSharpActualCurveComparisonRestriction
+
+import Hironaka.Resolution.HironakaSharpActualCurveEndpointGeometry
+
+import Hironaka.Resolution.HironakaSharpActualCurveNestedComparison
+
+import Hironaka.Resolution.HironakaSharpActualCurvePaddedComparisonRestriction
+
+import Hironaka.Resolution.HironakaSharpActualCurveTopologicalGluing
+
 /-!
 # Hironaka
 

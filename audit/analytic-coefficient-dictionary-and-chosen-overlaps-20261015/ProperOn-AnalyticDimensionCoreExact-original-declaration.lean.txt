@@ -1,0 +1,4 @@
+/-- The restriction of `F` to `A` is proper: `A ∩ F⁻¹(K)` is compact for every compact `K`. -/
+def ProperOn {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] (F : X → Y) (A : Set X) :
+    Prop :=
+  ∀ K : Set Y, IsCompact K → IsCompact (A ∩ F ⁻¹' K)

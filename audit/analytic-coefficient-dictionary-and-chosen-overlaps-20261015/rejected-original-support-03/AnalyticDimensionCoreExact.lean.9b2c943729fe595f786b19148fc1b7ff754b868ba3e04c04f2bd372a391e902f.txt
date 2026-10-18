@@ -1,0 +1,91 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Support.PositiveDimensionalAccPtExact
+import Hironaka.Support.ComponentRegularFillingExact
+import Hironaka.Analytic.AnalyticDimensionBasics
+import Hironaka.Analytic.PositiveDimensionalComponent
+import Hironaka.Analytic.IrreducibleComponentFilling
+import Hironaka.Analytic.RegularPointDimension
+import Hironaka.Analytic.RegularPatchNeighborhood
+
+set_option autoImplicit false
+
+/-!
+# Dimension bounds for analytic subsets
+
+Blueprint `rem:dimension`, `rem:isolated-dim-zero` (Demailly, *Complex analytic and differential
+geometry*, II.5; used throughout II.8).  For a subset `A` of a complex manifold:
+
+* `DimLE A p`: every regular point of `A` has dimension `≤ p` (`dim A ≤ p`);
+* `LocDimGE A x q`: every neighbourhood of `x` contains a regular point of `A` of dimension `≥ q`
+  (`dim_x A ≥ q`);
+* `LocDimLE A x p`: on some neighbourhood of `x`, every regular point of `A` has dimension `≤ p`
+  (`dim_x A ≤ p`);
+* `IsPureDim A k`: every regular point has dimension `k`; `ProperOn F A`: `A ∩ F⁻¹(K)` is compact
+  for every compact `K`.
+
+Basic facts: the two local bounds are compatible (`LocDimGE.le_of_locDimLE`); a regular point of
+dimension `k` has local dimension exactly `k` (`locDimGE_of_regularAtDim`,
+`locDimLE_of_regularAtDim`); every point of an analytic set has local dimension `≥ 0`
+(`locDimGE_zero`, density of the regular locus); and a point of local dimension `≤ 0` is isolated
+(`not_accPt_of_locDimLE_zero`): otherwise it lies on a positive-dimensional irreducible component,
+which fills `A` near one of its top-dimensional regular points.
+-/
+
+open Set Filter Topology
+
+namespace Hironaka.AnalyticDimensionBasics
+
+
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+
+/-- The restriction of `F` to `A` is proper: `A ∩ F⁻¹(K)` is compact for every compact `K`. -/
+def ProperOn {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] (F : X → Y) (A : Set X) :
+    Prop :=
+  ∀ K : Set Y, IsCompact K → IsCompact (A ∩ F ⁻¹' K)
+
+/-- `dim_x A ≤ p`: on some neighbourhood of `x`, every regular point of `A` has dimension at most
+`p`. -/
+def LocDimLE (A : Set M) (x : M) (p : ℕ) : Prop :=
+  ∃ U ∈ 𝓝 x, ∀ y ∈ U, ∀ k, RegularAtDim (n := n) A y k → k ≤ p
+
+
+omit [IsComplexManifold n M] in
+theorem LocDimGE.le_of_locDimLE {A : Set M} {x : M} {q p : ℕ} (hq : LocDimGE (n := n) A x q)
+    (hp : LocDimLE (n := n) A x p) : q ≤ p := by
+  obtain ⟨U, hU, hUp⟩ := hp
+  obtain ⟨y, hyU, k, hqk, hy⟩ := hq U hU
+  exact hqk.trans (hUp y hyU k hy)
+
+omit [IsComplexManifold n M] in
+theorem DimLE.locDimLE {A : Set M} {p : ℕ} (h : DimLE (n := n) A p) (x : M) :
+    LocDimLE (n := n) A x p :=
+  ⟨univ, univ_mem, fun y _ k hy => h y k hy⟩
+
+/-- Every point of an analytic set has local dimension `≥ 0`. -/
+theorem locDimGE_zero {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A) {x : M} (hx : x ∈ A) :
+    LocDimGE (n := n) A x 0 := by
+  intro U hU
+  obtain ⟨y, hyU, k, hy⟩ := RegularLocusDense.exists_regularAtDim_mem_nhds hA hx hU
+  exact ⟨y, hyU, k, Nat.zero_le k, hy⟩
+
+/-- **Points of local dimension zero are isolated** (`rem:isolated-dim-zero`). -/
+theorem not_accPt_of_locDimLE_zero {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A) {x : M}
+    (hx : x ∈ A) (h0 : LocDimLE (n := n) A x 0) : ¬ AccPt x (𝓟 A) := by
+  intro hacc
+  obtain ⟨U, hU, hU0⟩ := h0
+  obtain ⟨V, hV, hpos, hxV⟩ :=
+    PositiveDimensionalComponent.exists_isIrreducibleComponent_pos_dim_of_accPt hA hx hacc
+  obtain ⟨y, hyreg, W, hW, hyW, hWU, hAW⟩ :=
+    IrreducibleComponentFilling.exists_mem_regularLocus_isOpen_inter_subset hA hV isOpen_interior
+      ⟨x, hxV, mem_interior_iff_mem_nhds.2 hU⟩
+  have hAW' : V.carrier ∩ W = A ∩ W :=
+    Subset.antisymm (fun z hz => ⟨hV.1 hz.1, hz.2⟩) (fun z hz => ⟨hAW hz, hz.2⟩)
+  have hyA : RegularAtDim (n := n) A y V.dim :=
+    RegularPointDimension.regularAtDim_of_inter_eq hW hyW hAW' hyreg
+  have := hU0 y (interior_subset (hWU hyW)) V.dim hyA
+  omega
+
+end Hironaka.AnalyticDimensionBasics

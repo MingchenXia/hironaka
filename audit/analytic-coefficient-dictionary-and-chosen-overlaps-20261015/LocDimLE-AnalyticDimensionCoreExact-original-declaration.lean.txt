@@ -1,0 +1,4 @@
+/-- `dim_x A ≤ p`: on some neighbourhood of `x`, every regular point of `A` has dimension at most
+`p`. -/
+def LocDimLE (A : Set M) (x : M) (p : ℕ) : Prop :=
+  ∃ U ∈ 𝓝 x, ∀ y ∈ U, ∀ k, RegularAtDim (n := n) A y k → k ≤ p

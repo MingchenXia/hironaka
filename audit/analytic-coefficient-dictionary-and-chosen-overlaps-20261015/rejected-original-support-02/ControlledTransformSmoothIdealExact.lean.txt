@@ -1,0 +1,96 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Blowup.BlowupStrictIdeal
+import Hironaka.Blowup.BlowupStrictSubmanifold
+import Hironaka.Blowup.BlowupControlledTransform
+import Hironaka.Coherence.VanishingIdealCoherent
+import Hironaka.Resolution.StrictTransformComposition
+import Hironaka.Coherence.FiniteGeneratorIdealDescent
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# The ideal of the strict transform of a submanifold through the centre
+
+Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2 (the transform of a marked
+ideal `(M, N, E, 𝓘, d)` under a blowup of `M` with centre `C ⊆ N`); Wlodarczyk 2005
+(`wlodarczyk05-hironaka`), §2.2 (controlled transforms; the lemma `𝓘 ⊆ 𝓘_C^μ`) and Lemma `le:Gi`
+(the controlled transform of a hypersurface of maximal contact is its strict transform);
+blueprint `bcalc:strict-ideal`, `bcalc:strict-geo` (chapter `blowup-calculus.tex`).
+
+Let `π : Y → X` be the blowup along `C` with exceptional divisor `D`, and `N ⊇ C` a closed
+submanifold.  With `N' = closure (π⁻¹ (N \ C))` (`BlowupStrictSubmanifold.geoStrictTransform`):
+
+* `pullback_vanishingIdeal_eq_mul` -- **`π^*𝓘_N = 𝒪_Y(-D) · 𝓘_{N'}`**;
+* `controlledTransform_vanishingIdeal` -- **`σ^c(𝓘_N, 1) = 𝓘_{N'}`**: the controlled transform of
+  the ideal of `N` with the mark one is the ideal of its strict transform;
+* `isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold` -- `N'` is a closed
+  submanifold (no constant dimension needed);
+* `geoStrictTransform_eq_strictTransform` -- if `C` is nowhere dense in `N`, `N'` is the library's
+  strict transform `closure (π⁻¹ N \ Exc π)`; `geoStrictTransform_self` -- the strict transform of
+  the centre itself is empty (the two notions differ for a centre of codimension one, where
+  `Exc π = ∅`).
+
+Proof of the ideal identity, stalk by stalk at `z ∈ Y`.
+* `π z ∉ C`: `π` has a holomorphic section over `X \ C` (`BlowupIsomorphismOff`), so
+  `π^*𝓘_N = 𝓘_{π⁻¹N}` at `z`, `N' = π⁻¹N` near `z`, and `𝒪_Y(-D)` contains `1` at `z`.
+* `π z ∈ C`: nested flattening coordinates `Φ` for `C ⊆ N` at `π z` (`C = ℂ^{k_C} × 0`,
+  `N = ℂ^{k_N} × 0`) and a monomial chart `j ≥ k_C` with local inverse `W` near `z`
+  (`σ_j ∘ W = Φ ∘ e ∘ π`).  By Hadamard in the coordinates `Φ`, `π^*𝓘_A` is generated near `z` by
+  the `σ_j(W)_i`, `i ≥ k_A` (`A = C, N`); so `𝒪_Y(-D) = (W_j)`, and `π^*𝓘_N = (W_j W_i, i ≥ k_N)`
+  if `j < k_N`, `= (W_j)` if `j ≥ k_N`.  On the other side `N' = W⁻¹(ℂ^{k_N} × 0)` near `z` if
+  `j < k_N` (then Hadamard in the coordinates `W`, a local biholomorphism, gives
+  `𝓘_{N'} = (W_i, i ≥ k_N)`), and `N'` misses a neighbourhood of `z` if `j ≥ k_N`
+  (`𝓘_{N'} = 𝒪`).  The product of the presentations is the presentation of `π^*𝓘_N`.
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
+-/
+
+open Set Filter
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace Hironaka.BlowupStrictIdeal
+
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection
+  NestedFlattening BlowupStrictSubmanifold BlowupExceptionalDivisor BlowupControlledTransform
+  IdealWeightPowers IdealWeightProducts IdealWeightComparison InvertibleIdealQuotient
+  RelativePrincipalizationSpan GermIdealPullbackCalculus VanishingIdealCoherent
+  Hironaka.RegularPatchPullback
+
+noncomputable section
+
+variable {n : ℕ}
+
+/-! ### Spans, vanishing ideals and pullbacks -/
+
+section General
+
+variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+  [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+  [IsComplexManifold n Y] {C : Set X} {π : Y → X}
+
+/-- `𝒪_Y(-D)^1 = 𝒪_Y(-D)`. -/
+theorem idealPow_one_exceptionalDivisor (hπ : IsBlowupAlong n C π) :
+    idealPow (exceptionalDivisor hπ).ideal 1 = (exceptionalDivisor hπ).ideal := by
+  show (idealPow (exceptionalDivisor hπ).ideal 0).mul (exceptionalDivisor hπ).ideal = _
+  rw [idealPow_zero, unitIdeal_mul (isCoherent_ideal _)]
+
+/-- **The controlled transform of the ideal of `N ⊇ C` with the mark one is the ideal of the
+strict transform**: `σ^c(𝓘_N, 1) = 𝓘_{N'}`. -/
+theorem controlledTransform_vanishingIdeal (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hN : IsClosedSubmanifold n N) (hCN : C ⊆ N) :
+    controlledTransform hπ (vanishingIdeal (n := n) N) 1 =
+      vanishingIdeal (n := n) (geoStrictTransform π C N) := by
+  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_vanishingIdeal
+    (isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold hπ hN hCN)) ?_).symm
+  rw [idealPow_one_exceptionalDivisor, pullback_vanishingIdeal_eq_mul hπ hN hCN]
+
+end General
+end
+end Hironaka.BlowupStrictIdeal

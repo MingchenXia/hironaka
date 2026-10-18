@@ -1,0 +1,7 @@
+/-- `V` is an irreducible component of `S`: a closed irreducible analytic
+subvariety contained in `S` and maximal among such subvarieties. -/
+def IsIrreducibleComponent (V : ClosedIrreducibleAnalyticSubvariety n M)
+    (S : Set M) : Prop :=
+  V.carrier ⊆ S ∧
+    ∀ Z : ClosedIrreducibleAnalyticSubvariety n M,
+      V.carrier ⊆ Z.carrier → Z.carrier ⊆ S → Z.carrier = V.carrier

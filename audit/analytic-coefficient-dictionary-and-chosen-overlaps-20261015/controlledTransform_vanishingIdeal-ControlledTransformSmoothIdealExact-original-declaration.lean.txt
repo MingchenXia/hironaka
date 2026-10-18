@@ -1,0 +1,9 @@
+/-- **The controlled transform of the ideal of `N ⊇ C` with the mark one is the ideal of the
+strict transform**: `σ^c(𝓘_N, 1) = 𝓘_{N'}`. -/
+theorem controlledTransform_vanishingIdeal (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hN : IsClosedSubmanifold n N) (hCN : C ⊆ N) :
+    controlledTransform hπ (vanishingIdeal (n := n) N) 1 =
+      vanishingIdeal (n := n) (geoStrictTransform π C N) := by
+  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_vanishingIdeal
+    (isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold hπ hN hCN)) ?_).symm
+  rw [idealPow_one_exceptionalDivisor, pullback_vanishingIdeal_eq_mul hπ hN hCN]

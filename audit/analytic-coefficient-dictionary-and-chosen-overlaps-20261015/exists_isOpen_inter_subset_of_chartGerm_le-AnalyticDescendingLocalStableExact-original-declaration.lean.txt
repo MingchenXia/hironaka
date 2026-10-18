@@ -1,0 +1,25 @@
+/-- A germ inclusion in the chart at `p` is an inclusion on a neighbourhood of `p`. -/
+theorem exists_isOpen_inter_subset_of_chartGerm_le {A B : Set M} {p : M}
+    (h : chartGerm (n := n) A p ≤ᶠ[𝓝 0] chartGerm (n := n) B p) :
+    ∃ U : Set M, IsOpen U ∧ p ∈ U ∧ A ∩ U ⊆ B := by
+  let e := (complexChartAt (n := n) p).val
+  have hsrc : e.source ∈ 𝓝 p := e.open_source.mem_nhds (mem_complexChartAt_source p)
+  have ht : Tendsto (fun y => e y - e p) (𝓝 p) (𝓝 0) := by
+    have hc : ContinuousAt (fun y => e y - e p) p :=
+      (e.continuousAt (mem_complexChartAt_source p)).sub continuousAt_const
+    simpa using hc.tendsto
+  have hev : ∀ᶠ y in 𝓝 p, y ∈ e.source ∧
+      (e y - e p ∈ chartGerm (n := n) A p → e y - e p ∈ chartGerm (n := n) B p) :=
+    (Filter.eventually_of_mem hsrc fun _ hy => hy).and (ht.eventually h)
+  obtain ⟨U, hUsub, hU, hpU⟩ := mem_nhds_iff.mp hev
+  refine ⟨U, hU, hpU, fun y hy => ?_⟩
+  obtain ⟨hys, himp⟩ := hUsub hy.2
+  have hy' : e y - e p + e p = e y := sub_add_cancel _ _
+  have hmem : e y - e p ∈ chartGerm (n := n) A p := by
+    change e y - e p + e p ∈ e.target ∩ e.symm ⁻¹' A
+    rw [hy']
+    exact ⟨e.map_source hys, by simpa [mem_preimage, e.left_inv hys] using hy.1⟩
+  have hB := himp hmem
+  change e y - e p + e p ∈ e.target ∩ e.symm ⁻¹' B at hB
+  rw [hy'] at hB
+  simpa [mem_preimage, e.left_inv hys] using hB.2

@@ -1,0 +1,79 @@
+ℹ [4799/4949] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4924/4949] Built Hironaka.Support.AnalyticSubsetPresentationsExact (3.4s)
+✔ [4925/4949] Built Hironaka.Analytic.RemmertStatements (4.5s)
+✔ [4926/4949] Built Hironaka.Analytic.AnalyticImageDimension (4.9s)
+✔ [4927/4949] Built Hironaka.Analytic.FibreDimensionLowerBound (11s)
+✔ [4928/4949] Built Hironaka.Analytic.RemmertSteinCoordinates (8.6s)
+✖ [4929/4949] Building Hironaka.Analytic.ConstantRankImage (3.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Analytic/ConstantRankImage.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/ConstantRankImage.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Analytic/ConstantRankImage.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/ConstantRankImage.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Analytic/ConstantRankImage.setup.json --json
+error: Hironaka/Analytic/ConstantRankImage.lean:335:30: Invalid field `le_of_locDimLE`: The environment does not contain `Function.le_of_locDimLE`, so it is not possible to project the field `le_of_locDimLE` from an expression
+  hloc y hy.right.left
+of type
+  ∀ U ∈ 𝓝 y, ∃ y ∈ U, ∃ k, r ≤ k ∧ RegularAtDim (G '' P) y k
+error: Hironaka/Analytic/ConstantRankImage.lean:235:60: unsolved goals
+n n' : ℕ
+X : Type u_1
+inst✝⁵ : TopologicalSpace X
+inst✝⁴ : ChartedSpace (ComplexModel n) X
+inst✝³ : IsComplexManifold n X
+Y : Type u_2
+inst✝² : TopologicalSpace Y
+inst✝¹ : ChartedSpace (ComplexModel n') Y
+inst✝ : IsComplexManifold n' Y
+P : Set X
+m r : ℕ
+hPc : IsClosed[inst✝⁵] P
+hPreg : ∀ x ∈ P, RegularAtDim P x m
+G : X → Y
+hG : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n') ∞ G
+hrank : ∀ x ∈ P, rankAt G P x = r
+hprop : ProperOn G P
+V : X → Set X
+hVo : ∀ x ∈ P, IsOpen[inst✝⁵] (V x)
+hxV : ∀ x ∈ P, x ∈ V x
+hVs : ∀ x ∈ P, G '' (P ∩ V x) ⊆ (chartAt (ComplexModel n') (G x)).source
+W : X → Set (ComplexModel n')
+h : X → ComplexModel n' → ComplexModel n'
+hWo : ∀ x ∈ P, IsOpen (W x)
+hhd : ∀ x ∈ P, DifferentiableOn ℂ (h x) (W x)
+hmem :
+  ∀ x ∈ P,
+    ∀ y ∈ (chartAt (ComplexModel n') (G x)).source,
+      y ∈ G '' (P ∩ V x) ↔ ↑(chartAt (ComplexModel n') (G x)) y ∈ W x ∧ h x (↑(chartAt (ComplexModel n') (G x)) y) = 0
+hreg : ∀ x ∈ P, ∀ y ∈ G '' (P ∩ V x), RegularAtDim (G '' (P ∩ V x)) y r
+hana : IsComplexAnalyticSubset (G '' P)
+hloc : ∀ y ∈ G '' P, LocDimGE (G '' P) y r
+y : Y
+k : ℕ
+hy : RegularAtDim (G '' P) y k
+hPa : IsComplexAnalyticSubset P
+hpure : IsPureDim P m
+x₀ : X
+hx₀ : x₀ ∈ P
+hrm : r ≤ m
+hfib : ∀ x ∈ P, LocDimGE (P ∩ G ⁻¹' {G x}) x (m - r)
+hle : k + (m - r) ≤ m
+⊢ k = r
+error: Lean exited with code 1
+✔ [4932/4949] Built Hironaka.Analytic.RemmertSteinFlatSetup (4.1s)
+Some required targets logged failures:
+- Hironaka.Analytic.ConstantRankImage
+error: build failed

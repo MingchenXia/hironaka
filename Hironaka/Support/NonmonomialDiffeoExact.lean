@@ -1,0 +1,78 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Invariant.NonmonomialOrderLocal
+import Hironaka.Invariant.CompanionOpen
+import Hironaka.Invariant.NonmonomialTransformAlong
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# The order of the nonmonomial part: a local, finite, upper semicontinuous invariant
+
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0165.  Blueprint
+`bcalc:nonmonomial-order-local` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`),
+Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
+
+At a point `x` of the cosupport of a marked ideal `𝔪 = (X, N, E, 𝔞, d)` the general step reads off the order
+`o = ord_x(𝓝_N(𝔞)|_N)` of the nonmonomial part (`MonomialPartAlong.nonmonomialPartAlong`), and along a tower it uses the
+order of the nonmonomial part `𝓝_{N_T}(𝔞_T)` *of the transform* (taken with the whole divisor `E_T`).  This module makes
+that order a function and proves the facts about it which do not depend on the invariant of the general step:
+
+* `ordGe 𝔪 q = cosupp(𝓝_N(𝔞)|_N, q)` (the points of order `≥ q`), `nmOrd 𝔪 y` the order (`sInf`), with
+  `mem_ordGe_iff` (**the order is finite at the points of `N`**, Krull along `N`, `exists_notMem_ordGe`), `isClosed_ordGe`
+  and **`eventually_nmOrd_le`** (upper semicontinuity), `nmOrd_congr` (the order is determined by the sets `ordGe`);
+* **locality**: the sets `ordGe` pull back along local biholomorphisms (`mem_ordGe_pullback_iff_of_local`), in particular
+  under restriction to open sets and under biholomorphisms; across a blowup along the empty set
+  (`mem_ordGe_geoTransform_empty_iff`) and along towers with only empty centres;
+  **`mem_ordGe_geoTransformAlong_of_centresAvoid`**: along a multiple test blow-up whose centres miss an open `W`, at the
+  points over `W` the order is that of the image; **`mem_ordGe_geoTransform_of_notMem`**: off the centre of a test
+  blowup; **`mem_ordGe_geoTransformAlong_isTowerIso`**: along isomorphisms of towers (`hir:tower-isomorphism`);
+* **`notMem_ordGe_geoTransform_of_mem`** (the order does not go up over a centre of constant order `q ≥ 1`): if the
+  centre `C` of a test blowup lies in `{ord = q}`, every cosupport point over `C` has order `≤ q` (the companion ideal on
+  `{ord ≤ q}`, `CompanionOpen`, and `NonmonomialTransformAlong`);
+* **`companionOf_tower_facts`**: along a multiple test blow-up of the companion ideal `𝓞(𝔪, o)` (`o ≥ 1`, order `≤ o` on
+  the cosupport), the tower is one of `𝔪`, the order stays `≤ o` on the cosupport, and the cosupport of `𝓞_T` lies in
+  `{ord ≥ o} ∩ cosupp 𝔪_T`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
+-/
+
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace Hironaka.NonmonomialOrderLocal
+
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale
+  Hironaka.CompanionRebase Hironaka.GermIdealOrder
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.DerivativeIdealAlongEtale
+  Hironaka.MarkedIdealRestrictOpen Hironaka.RestrictEmptyTower
+  Hironaka.BlowupTowerIsomorphism Hironaka.InvDomainRebase
+  Hironaka.ContactCanonicalAlong
+open Hironaka.ResolutionInvariantSpec (IsInvDomain)
+open Hironaka.ResolutionInvariantExt (IsEmptyTower)
+
+noncomputable section
+
+variable {n : ℕ}
+
+/-! ### The order of the nonmonomial part -/
+
+section Local
+variable {M M' : CMfd.{u} n}
+
+theorem nmOrd_pullback_diffeo (hn : 0 < n) (Φ : M' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ M)
+    {𝔪 : MarkedIdeal n M} (h𝔪 : 𝔪.IsWellFormed) (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) (z : M') :
+    nmOrd (MarkedIdeal.pullback Φ 𝔪) z = nmOrd 𝔪 (Φ z) :=
+  nmOrd_congr fun q => mem_ordGe_pullback_diffeo_iff hn Φ h𝔪 hne q z
+
+
+end Local
+end
+end Hironaka.NonmonomialOrderLocal

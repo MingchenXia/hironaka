@@ -1,0 +1,16 @@
+/-- A presentation of `A ∩ U` in `U` at `x` is a presentation of `A` in `M` at `x`. -/
+def presentationOfPreimageVal {A : Set M} (x : U)
+    (P : ComplexAnalyticPresentationAt (n := n) ((↑) ⁻¹' A : Set U) x) :
+    ComplexAnalyticPresentationAt (n := n) A (x : M) where
+  generatorCount := P.generatorCount
+  generator := P.generator
+  coordinateNeighborhood := P.coordinateNeighborhood
+  isOpen_coordinateNeighborhood := P.isOpen_coordinateNeighborhood
+  center_mem_coordinateNeighborhood := P.center_mem_coordinateNeighborhood
+  coordinateNeighborhood_subset_target :=
+    P.coordinateNeighborhood_subset_target.trans (chartAt_opens_target_subset x)
+  generator_holomorphic := P.generator_holomorphic
+  zeroLocus := by
+    intro y hy hyN
+    have hyU : y ∈ U := mem_opens_of_chart_mem_target hy (P.coordinateNeighborhood_subset_target hyN)
+    exact P.zeroLocus (y := ⟨y, hyU⟩) (mem_chartAt_opens_source.mpr hy) hyN

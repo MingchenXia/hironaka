@@ -1,0 +1,17 @@
+/-- The trace on `U` of a presentation of `A` at a point of `U`. -/
+def presentationPreimageVal {A : Set M} (x : U)
+    (P : ComplexAnalyticPresentationAt (n := n) A (x : M)) :
+    ComplexAnalyticPresentationAt (n := n) ((↑) ⁻¹' A : Set U) x where
+  generatorCount := P.generatorCount
+  generator := P.generator
+  coordinateNeighborhood := P.coordinateNeighborhood ∩ (chartAt (ComplexModel n) x).target
+  isOpen_coordinateNeighborhood :=
+    P.isOpen_coordinateNeighborhood.inter (isOpen_chartAt_opens_target x)
+  center_mem_coordinateNeighborhood :=
+    ⟨P.center_mem_coordinateNeighborhood, (chartAt (ComplexModel n) x).map_source
+      (mem_chart_source (ComplexModel n) x)⟩
+  coordinateNeighborhood_subset_target := inter_subset_right
+  generator_holomorphic i := (P.generator_holomorphic i).mono inter_subset_left
+  zeroLocus := by
+    intro y hy hyN
+    exact P.zeroLocus (y := (y : M)) (mem_chartAt_opens_source.mp hy) hyN.1

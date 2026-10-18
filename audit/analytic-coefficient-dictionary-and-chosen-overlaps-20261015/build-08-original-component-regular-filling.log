@@ -1,0 +1,125 @@
+✖ [4519/4949] Running job computation
+error: Hironaka: some modules have bad imports
+ℹ [4799/4949] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✖ [4878/4949] Running Hironaka.Analytic.StrictTransformLocus
+error: no such file or directory (error code: 4294967294)
+  file: /workspace/hironaka/Hironaka/Analytic/StrictTransformLocus.lean
+✖ [4879/4949] Running Hironaka.Support.ComponentRegularFillingExact
+error: Hironaka/Support/ComponentRegularFillingExact.lean: bad import 'Hironaka.Analytic.StrictTransformLocus'
+✖ [4880/4949] Running Hironaka.Support.AnalyticDimensionCoreExact
+error: Hironaka/Support/AnalyticDimensionCoreExact.lean: bad import 'Hironaka.Support.ComponentRegularFillingExact'
+✖ [4882/4949] Running Hironaka.Analytic.RemmertStatements
+error: Hironaka/Analytic/RemmertStatements.lean: bad import 'Hironaka.Support.AnalyticDimensionCoreExact'
+✖ [4886/4949] Running Hironaka.Analytic.GenericSections
+error: Hironaka/Analytic/GenericSections.lean: bad import 'Hironaka.Support.AnalyticDimensionCoreExact'
+✖ [4889/4949] Running Hironaka.Analytic.CompactAnalyticFinite
+error: Hironaka/Analytic/CompactAnalyticFinite.lean: bad import 'Hironaka.Analytic.GenericSections'
+✖ [4890/4949] Running Hironaka.Analytic.FibreDimensionLowerBound
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean: bad import 'Hironaka.Analytic.GenericSections'
+error: Hironaka/Analytic/FibreDimensionLowerBound.lean: bad import 'Hironaka.Analytic.CompactAnalyticFinite'
+✖ [4891/4949] Running Hironaka.Analytic.ImageDimensionBound
+error: Hironaka/Analytic/ImageDimensionBound.lean: bad import 'Hironaka.Analytic.GenericSections'
+✖ [4892/4949] Running Hironaka.Analytic.AnalyticImageDimension
+error: Hironaka/Analytic/AnalyticImageDimension.lean: bad import 'Hironaka.Analytic.ImageDimensionBound'
+✖ [4893/4949] Running Hironaka.Analytic.ConstantRankImage
+error: Hironaka/Analytic/ConstantRankImage.lean: bad import 'Hironaka.Analytic.FibreDimensionLowerBound'
+error: Hironaka/Analytic/ConstantRankImage.lean: bad import 'Hironaka.Analytic.AnalyticImageDimension'
+✖ [4894/4949] Running Hironaka.Analytic.ProperImageIrreducible
+error: Hironaka/Analytic/ProperImageIrreducible.lean: bad import 'Hironaka.Analytic.RemmertStatements'
+error: Hironaka/Analytic/ProperImageIrreducible.lean: bad import 'Hironaka.Analytic.ConstantRankImage'
+✖ [4895/4949] Running Hironaka.Analytic.ProperMappingInduction
+error: Hironaka/Analytic/ProperMappingInduction.lean: bad import 'Hironaka.Analytic.ProperImageIrreducible'
+✖ [4896/4949] Running Hironaka.Analytic.RemmertSteinCoordinates
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean: bad import 'Hironaka.Analytic.GenericSections'
+error: Hironaka/Analytic/RemmertSteinCoordinates.lean: bad import 'Hironaka.Analytic.RemmertStatements'
+✖ [4897/4949] Running Hironaka.Analytic.RemmertSteinFlatSetup
+error: Hironaka/Analytic/RemmertSteinFlatSetup.lean: bad import 'Hironaka.Analytic.RemmertSteinCoordinates'
+error: Hironaka/Analytic/RemmertSteinFlatSetup.lean: bad import 'Hironaka.Analytic.CompactAnalyticFinite'
+✖ [4900/4949] Running Hironaka.Analytic.RemmertSteinFlatBadSet
+error: Hironaka/Analytic/RemmertSteinFlatBadSet.lean: bad import 'Hironaka.Analytic.RemmertSteinFlatSetup'
+error: Hironaka/Analytic/RemmertSteinFlatBadSet.lean: bad import 'Hironaka.Analytic.ProperImageIrreducible'
+✖ [4901/4949] Running Hironaka.Analytic.RemmertSteinFlatGraph
+error: Hironaka/Analytic/RemmertSteinFlatGraph.lean: bad import 'Hironaka.Analytic.RemmertSteinFlatBadSet'
+✖ [4904/4949] Running Hironaka.Analytic.RemmertSteinFlatExtension
+error: Hironaka/Analytic/RemmertSteinFlatExtension.lean: bad import 'Hironaka.Analytic.RemmertSteinFlatGraph'
+✖ [4906/4949] Running Hironaka.Analytic.RemmertSteinFlat
+error: Hironaka/Analytic/RemmertSteinFlat.lean: bad import 'Hironaka.Analytic.RemmertSteinFlatExtension'
+✖ [4907/4949] Running Hironaka.Analytic.RemmertSteinGeneral
+error: Hironaka/Analytic/RemmertSteinGeneral.lean: bad import 'Hironaka.Analytic.RemmertSteinFlat'
+✖ [4908/4949] Running Hironaka.Analytic.ProperMappingTheorem
+error: Hironaka/Analytic/ProperMappingTheorem.lean: bad import 'Hironaka.Analytic.ProperMappingInduction'
+error: Hironaka/Analytic/ProperMappingTheorem.lean: bad import 'Hironaka.Analytic.RemmertSteinGeneral'
+✖ [4909/4949] Running Hironaka.Resolution.HironakaOriginalFiniteCentreImageSuperlevels
+error: Hironaka/Resolution/HironakaOriginalFiniteCentreImageSuperlevels.lean: bad import 'Hironaka.Analytic.ProperMappingTheorem'
+✖ [4910/4949] Running Hironaka.Resolution.HironakaOriginalFullHistorySuperlevelsAnalytic
+error: Hironaka/Resolution/HironakaOriginalFullHistorySuperlevelsAnalytic.lean: bad import 'Hironaka.Resolution.HironakaOriginalFiniteCentreImageSuperlevels'
+✖ [4915/4949] Running Hironaka.Resolution.HironakaOriginalSimultaneousHSAdmissibleCentre
+error: Hironaka/Resolution/HironakaOriginalSimultaneousHSAdmissibleCentre.lean: bad import 'Hironaka.Resolution.HironakaOriginalFullHistorySuperlevelsAnalytic'
+✖ [4931/4949] Running Hironaka.Resolution.HironakaOriginalFullReferenceGlobalExtension
+error: Hironaka/Resolution/HironakaOriginalFullReferenceGlobalExtension.lean: bad import 'Hironaka.Resolution.HironakaOriginalFullHistorySuperlevelsAnalytic'
+✖ [4932/4949] Running Hironaka.Resolution.HironakaOriginalFullValueVariationLocus
+error: Hironaka/Resolution/HironakaOriginalFullValueVariationLocus.lean: bad import 'Hironaka.Resolution.HironakaOriginalFullReferenceGlobalExtension'
+✖ [4933/4949] Running Hironaka.Resolution.HironakaOriginalVariationPreservingSimultaneousCentre
+error: Hironaka/Resolution/HironakaOriginalVariationPreservingSimultaneousCentre.lean: bad import 'Hironaka.Resolution.HironakaOriginalSimultaneousHSAdmissibleCentre'
+error: Hironaka/Resolution/HironakaOriginalVariationPreservingSimultaneousCentre.lean: bad import 'Hironaka.Resolution.HironakaOriginalFullValueVariationLocus'
+✖ [4934/4949] Running Hironaka.Resolution.HironakaOriginalSimultaneousCompanionTestStep
+error: Hironaka/Resolution/HironakaOriginalSimultaneousCompanionTestStep.lean: bad import 'Hironaka.Resolution.HironakaOriginalVariationPreservingSimultaneousCentre'
+✖ [4935/4949] Running Hironaka.Resolution.HironakaOriginalPreparedCurrentCompanion
+error: Hironaka/Resolution/HironakaOriginalPreparedCurrentCompanion.lean: bad import 'Hironaka.Resolution.HironakaOriginalSimultaneousCompanionTestStep'
+✖ [4936/4949] Running Hironaka.Resolution.HironakaOriginalPreparedCompanionSmoothDiagram
+error: Hironaka/Resolution/HironakaOriginalPreparedCompanionSmoothDiagram.lean: bad import 'Hironaka.Resolution.HironakaOriginalPreparedCurrentCompanion'
+✖ [4938/4949] Running Hironaka
+error: Hironaka.lean: bad import 'Hironaka.Resolution.HironakaOriginalPreparedCompanionSmoothDiagram'
+error: Hironaka.lean: bad import 'Hironaka.Resolution.HironakaOriginalPreparedCurrentCompanion'
+error: Hironaka.lean: bad import 'Hironaka.Resolution.HironakaOriginalSimultaneousCompanionTestStep'
+Some required targets logged failures:
+- job computation
+- Hironaka.Analytic.StrictTransformLocus
+- Hironaka.Support.ComponentRegularFillingExact
+- Hironaka.Support.AnalyticDimensionCoreExact
+- Hironaka.Analytic.RemmertStatements
+- Hironaka.Analytic.GenericSections
+- Hironaka.Analytic.CompactAnalyticFinite
+- Hironaka.Analytic.FibreDimensionLowerBound
+- Hironaka.Analytic.ImageDimensionBound
+- Hironaka.Analytic.AnalyticImageDimension
+- Hironaka.Analytic.ConstantRankImage
+- Hironaka.Analytic.ProperImageIrreducible
+- Hironaka.Analytic.ProperMappingInduction
+- Hironaka.Analytic.RemmertSteinCoordinates
+- Hironaka.Analytic.RemmertSteinFlatSetup
+- Hironaka.Analytic.RemmertSteinFlatBadSet
+- Hironaka.Analytic.RemmertSteinFlatGraph
+- Hironaka.Analytic.RemmertSteinFlatExtension
+- Hironaka.Analytic.RemmertSteinFlat
+- Hironaka.Analytic.RemmertSteinGeneral
+- Hironaka.Analytic.ProperMappingTheorem
+- Hironaka.Resolution.HironakaOriginalFiniteCentreImageSuperlevels
+- Hironaka.Resolution.HironakaOriginalFullHistorySuperlevelsAnalytic
+- Hironaka.Resolution.HironakaOriginalSimultaneousHSAdmissibleCentre
+- Hironaka.Resolution.HironakaOriginalFullReferenceGlobalExtension
+- Hironaka.Resolution.HironakaOriginalFullValueVariationLocus
+- Hironaka.Resolution.HironakaOriginalVariationPreservingSimultaneousCentre
+- Hironaka.Resolution.HironakaOriginalSimultaneousCompanionTestStep
+- Hironaka.Resolution.HironakaOriginalPreparedCurrentCompanion
+- Hironaka.Resolution.HironakaOriginalPreparedCompanionSmoothDiagram
+- Hironaka
+error: build failed

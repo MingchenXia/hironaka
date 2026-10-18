@@ -1,0 +1,33 @@
+/-- **Local stationarity.**  A descending chain of analytic subsets is stationary on a
+neighbourhood of every point. -/
+theorem exists_local_stable {A : ℕ → Set M} (hA : ∀ i, IsComplexAnalyticSubset (n := n) (A i))
+    (hanti : Antitone A) (p : M) :
+    ∃ N, ∃ U : Set M, IsOpen U ∧ p ∈ U ∧ ∀ i, N ≤ i → A i ∩ U = A N ∩ U := by
+  obtain ⟨N, hN⟩ := exists_germ_stable hA hanti p
+  by_cases hp : p ∈ A N
+  swap
+  · refine ⟨N, (A N)ᶜ, (hA N).isClosed.isOpen_compl, hp, fun i hi => ?_⟩
+    have h1 : A i ∩ (A N)ᶜ = ∅ :=
+      eq_empty_iff_forall_notMem.mpr fun x hx => hx.2 (hanti hi hx.1)
+    rw [h1, inter_compl_self]
+  obtain ⟨D, ⟨G⟩⟩ := exists_connectedParts (hA N) hp
+  refine ⟨N, D.nbhd ∩ ⋂ j, G.core j, D.isOpen_nbhd.inter (isOpen_iInter_of_finite G.isOpen_core),
+    ⟨D.mem_nbhd, mem_iInter.mpr G.mem_core⟩, fun i hi => ?_⟩
+  refine Subset.antisymm (fun x hx => ⟨hanti hi hx.1, hx.2⟩) ?_
+  rintro x ⟨hxN, hxD, hxcore⟩
+  obtain ⟨U, hU, hpU, hUsub⟩ := hN i hi
+  have hxpiece : x ∈ ⋃ j, D.piece j := D.inter_nbhd_eq ▸ ⟨hxN, hxD⟩
+  obtain ⟨j, hxj⟩ := mem_iUnion.mp hxpiece
+  obtain ⟨g, hgU, hgj⟩ :=
+    mem_closure_iff.mp (G.subset_closure_good j ⟨G.mem_piece j, G.mem_core j⟩) U hU hpU
+  have hg := G.regularAtDim_of_mem_good j g hgj
+  have hgood : G.good j ⊆ component (n := n) (A N) g :=
+    subset_component_of_isPreconnected (G.isPreconnected_good j)
+      (fun z hz => ⟨D.dim j, G.regularAtDim_of_mem_good j z hz⟩)
+      ⟨g, hgj, mem_component_self hg⟩
+  have hcomp : component (n := n) (A N) g ⊆ A i :=
+    component_subset_of_isOpen (hA i) hU ⟨g, hgU, mem_component_self hg⟩
+      fun z hz => hUsub ⟨component_subset (n := n) (A N) g hz.2, hz.1⟩
+  have hcl : closure (G.good j) ⊆ A i :=
+    closure_minimal (hgood.trans hcomp) (hA i).isClosed
+  exact ⟨hcl (G.subset_closure_good j ⟨hxj, mem_iInter.mp hxcore j⟩), hxD, hxcore⟩

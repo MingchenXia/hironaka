@@ -1,0 +1,8 @@
+theorem dimLE_image_val_iff {B : Set U} {p : ℕ} :
+    DimLE (n := n) ((↑) '' B : Set M) p ↔ DimLE (n := n) B p := by
+  constructor
+  · intro h y k hy
+    exact h y k (regularAtDim_image_val_iff.mpr hy)
+  · intro h y k hy
+    have hyU := mem_opens_of_regularAtDim_image_val hy
+    exact h ⟨y, hyU⟩ k (regularAtDim_image_val_iff.mp hy)

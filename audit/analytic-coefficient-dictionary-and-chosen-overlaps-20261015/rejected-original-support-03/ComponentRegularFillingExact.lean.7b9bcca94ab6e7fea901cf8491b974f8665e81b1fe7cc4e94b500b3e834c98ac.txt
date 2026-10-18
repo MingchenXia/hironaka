@@ -1,0 +1,67 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Analytic.IrreducibleComponentFilling
+import Hironaka.Analytic.PositiveDimensionalComponent
+import Hironaka.Analytic.StrictTransformLocus
+import Hironaka.Analytic.AnalyticIrreducibleComponents
+
+set_option autoImplicit false
+
+/-!
+# An irreducible component fills the analytic set near some of its points
+
+Blueprint `ana:component-local-filling` and `ana:component-preimage-maximal` (Demailly,
+*Complex analytic and differential geometry*, II.5.3–5.4).
+
+Let `A` be an analytic subset of a complex manifold and `V` an irreducible component of `A`
+(`IsIrreducibleComponent V A`: maximal among closed irreducible analytic subvarieties contained
+in `A`).
+
+* `exists_isOpen_subset_inter_subset_of_mem`: every neighbourhood `O` of every point `p ∈ V`
+  contains an open `U` meeting `V` with `A ∩ U ⊆ V`.  Take the local statement (LS) with
+  connected regular parts at `p` (`LocalStatementConnected.exists_connectedParts`), a point
+  `cᵢ ∈ O` of each connected regular part `Gᵢ` (possible since `p ∈ closure Gᵢ`) and the
+  closure `Cᵢ` of the connected component of the regular locus of `A` through `cᵢ`, a closed
+  irreducible analytic subvariety of `A` (`componentSubvariety`).  Near `p`, `A` lies in
+  `⋃ᵢ Cᵢ`, so the identity principle puts `V` inside one `Cᵢ`, maximality gives `Cᵢ = V`, and
+  `A` agrees with `Cᵢ` near `cᵢ` (`RegularLocusComponent.exists_open_inter_subset_component`).
+* `exists_isOpen_inter_subset` is the form without a prescribed point, and
+  `exists_mem_regularLocus_isOpen_inter_subset` adds a regular point of `V` of dimension
+  `dim V` in `U`.
+* `isIrreducibleComponent_of_preimage`: maximality transported along a continuous map
+  `μ : Y → M` without images.  If `S ⊆ μ⁻¹ A ∪ E` with `E` closed, `Ṽ ⊆ S` contains
+  `μ⁻¹ V \ E` and lifts every top-dimensional regular point of `V` to a point off `E`, then
+  `Ṽ` is an irreducible component of `S`.  This is the maximality half of Copy-4
+  `lem:resolution` with no appeal to the analyticity of `μ(Z)`.
+-/
+
+open Set Filter
+open scoped Topology
+
+namespace Hironaka.IrreducibleComponentFilling
+
+open Hironaka AnalyticLocalStatement LocalStatementConnected
+  RegularLocusComponent
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+
+/-- **The filling open set can be centred at a top-dimensional regular point of the
+component.**  Every open `O` meeting the irreducible component `V` of `A` contains an open `U`
+with `A ∩ U ⊆ V` around a point at which `V` is regular of dimension `dim V`. -/
+theorem exists_mem_regularLocus_isOpen_inter_subset {A : Set M}
+    (hA : IsComplexAnalyticSubset (n := n) A) {V : ClosedIrreducibleAnalyticSubvariety n M}
+    (hV : IsIrreducibleComponent V A) {O : Set M} (hO : IsOpen O)
+    (hVO : (V.carrier ∩ O).Nonempty) :
+    ∃ x ∈ regularLocus (n := n) V.carrier V.dim, ∃ U : Set M, IsOpen U ∧ x ∈ U ∧ U ⊆ O ∧
+      A ∩ U ⊆ V.carrier := by
+  obtain ⟨p, hpV, hpO⟩ := hVO
+  obtain ⟨U, hU, hUO, ⟨y, hyV, hyU⟩, hsub⟩ :=
+    exists_isOpen_subset_inter_subset_of_mem hA hV hpV hO hpO
+  obtain ⟨x, hxU, k, hx⟩ :=
+    RegularLocusDense.exists_regularAtDim_mem_of_isOpen V.analytic hU hyV hyU
+  have hk : k = V.dim := AnalyticIrreducibleComponents.eq_dim_of_regularAtDim V hx
+  subst hk
+  exact ⟨x, hx, U, hU, hxU, hUO, hsub⟩
+
+end Hironaka.IrreducibleComponentFilling

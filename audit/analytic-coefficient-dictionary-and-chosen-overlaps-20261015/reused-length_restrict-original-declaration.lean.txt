@@ -1,0 +1,5 @@
+/-- The restricted tower has the same length. -/
+theorem length_restrict (U : Opens X) : {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+    (restrict U T).length = T.length
+  | _, .refl => rfl
+  | _, .step T _ _ _ => congrArg (· + 1) (length_restrict U T)

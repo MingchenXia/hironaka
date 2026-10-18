@@ -1,0 +1,87 @@
+/-- **A graph over a linear projection is a submanifold.**  If `Q ∘ k = id` on the open set
+`B'`, every point `y` of the graph `{z | Q z ∈ B' ∧ k (Q z) = z}` is a regular point of the graph
+of dimension `dim R`. -/
+theorem regularAtDim_graph (Q : ComplexModel N →L[ℂ] R) {B' : Set R} (hB' : IsOpen B')
+    {k : R → ComplexModel N} (hk : DifferentiableOn ℂ k B') (hQk : ∀ w ∈ B', Q (k w) = w)
+    {y : ComplexModel N} (hy : Q y ∈ B') (hky : k (Q y) = y) :
+    RegularAtDim (n := N) (M := ComplexModel N) {z | Q z ∈ B' ∧ k (Q z) = z} y
+      (Module.finrank ℂ R) := by
+  classical
+  set K := LinearMap.ker (Q : ComplexModel N →ₗ[ℂ] R) with hK
+  have htop := range_eq_top_of_rightInverse Q hB' ⟨_, hy⟩ hQk
+  have hdim : Module.finrank ℂ R + Module.finrank ℂ K = N := by
+    have := LinearMap.finrank_range_add_finrank_ker (Q : ComplexModel N →ₗ[ℂ] R)
+    rw [htop, finrank_top, finrank_euclideanSpace_fin] at this
+    exact this
+  obtain ⟨K', hK'⟩ := K.exists_isCompl
+  let P : ComplexModel N →L[ℂ] K :=
+    (Submodule.projectionOnto K K' hK').toContinuousLinearMap
+  have hP : ∀ u : K, P u = u := fun u => Submodule.projectionOnto_apply_left hK' u
+  let Wsub : Submodule ℂ (R × K) := LinearMap.ker (LinearMap.snd ℂ R K)
+  have hWdim : Module.finrank ℂ Wsub = Module.finrank ℂ R := by
+    have h := LinearMap.finrank_range_of_inj (LinearMap.inl_injective (R := ℂ) (M := R) (M₂ := K))
+    rw [LinearMap.range_inl] at h
+    exact h
+  have hVdim : Module.finrank ℂ (R × K) = N := by
+    rw [Module.finrank_prod, hdim]
+  obtain ⟨A, hA⟩ := exists_linearEquiv_mem_plane_iff hVdim Wsub hWdim
+  let Θ : ComplexModel N → ComplexModel N := fun z => A (Q z - Q y, P (z - k (Q z)))
+  have hN : IsOpen (Q ⁻¹' B') := hB'.preimage Q.continuous
+  have hyN : y ∈ Q ⁻¹' B' := hy
+  have hkQ : DifferentiableOn ℂ (fun z => k (Q z)) (Q ⁻¹' B') :=
+    hk.comp Q.differentiableOn fun z hz => hz
+  have hΘd : DifferentiableOn ℂ Θ (Q ⁻¹' B') := by
+    refine A.differentiable.comp_differentiableOn ?_
+    refine DifferentiableOn.prodMk ?_ ?_
+    · exact (Q.differentiable.sub_const _).differentiableOn
+    · exact P.differentiable.comp_differentiableOn (differentiableOn_id.sub hkQ)
+  -- the derivative at `y`
+  set k' := fderiv ℂ k (Q y) with hk'
+  have hkd : HasFDerivAt k k' (Q y) := (hk.differentiableAt (hB'.mem_nhds hy)).hasFDerivAt
+  have hkQd : HasFDerivAt (fun z => k (Q z)) (k'.comp Q) y := hkd.comp y Q.hasFDerivAt
+  have h1 : HasFDerivAt (fun z => Q z - Q y) Q y := Q.hasFDerivAt.sub_const _
+  have h2 : HasFDerivAt (fun z => P (z - k (Q z)))
+      (P.comp (ContinuousLinearMap.id ℂ (ComplexModel N) - k'.comp Q)) y :=
+    P.hasFDerivAt.comp y ((hasFDerivAt_id y).sub hkQd)
+  have hΘD : HasFDerivAt Θ ((A : R × K →L[ℂ] ComplexModel N).comp
+      (Q.prod (P.comp (ContinuousLinearMap.id ℂ (ComplexModel N) - k'.comp Q)))) y :=
+    A.hasFDerivAt.comp y (h1.prodMk h2)
+  have hinj : Function.Injective (fderiv ℂ Θ y) := by
+    rw [hΘD.fderiv]
+    rw [injective_iff_map_eq_zero]
+    intro v hv
+    have hv' : (Q v, P (v - k' (Q v))) = 0 := by
+      have : A (Q v, P (v - k' (Q v))) = 0 := by simpa using hv
+      exact (map_eq_zero_iff A A.injective).1 this
+    have hQv : Q v = 0 := congrArg Prod.fst hv'
+    have hPv : P v = 0 := by
+      have := congrArg Prod.snd hv'
+      simpa [hQv] using this
+    have hvK : v ∈ K := hQv
+    have := hP ⟨v, hvK⟩
+    rw [hPv] at this
+    exact (congrArg Subtype.val this).symm
+  obtain ⟨Φ, hΦN, hΦΘ, -⟩ := exists_localHolomorphicEquivAt hN hyN hΘd hinj
+  have hmemK : ∀ z, Q z ∈ B' → z - k (Q z) ∈ K := fun z hz => by
+    change Q (z - k (Q z)) = 0
+    rw [map_sub, hQk _ hz, sub_self]
+  refine ⟨by omega, ⟨hy, hky⟩, Φ, fun _ _ => mem_univ _, ?_, ?_⟩
+  · change Φ.toFun y = 0
+    rw [hΦΘ]
+    simp only [Θ, sub_self, hky]
+    simp
+  · intro z _ hz
+    change z ∈ {z | Q z ∈ B' ∧ k (Q z) = z} ↔ Φ.toFun z ∈ complexCoordinatePlane N _
+    have hzN : Q z ∈ B' := hΦN hz
+    rw [hΦΘ, hA]
+    change Q z ∈ B' ∧ k (Q z) = z ↔ P (z - k (Q z)) = 0
+    rw [hP ⟨_, hmemK z hzN⟩]
+    constructor
+    · rintro ⟨-, h⟩
+      ext1
+      simp [h]
+    · intro h
+      refine ⟨hzN, ?_⟩
+      have := congrArg Subtype.val h
+      simp only [ZeroMemClass.coe_zero] at this
+      exact (sub_eq_zero.1 this).symm

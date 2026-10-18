@@ -1,0 +1,177 @@
+ℹ [4741/4940] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✖ [4764/4940] Building Hironaka.Support.InvUSCSuperlevelExact (1.3s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/InvUSCSuperlevelExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/InvUSCSuperlevelExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/InvUSCSuperlevelExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/InvUSCSuperlevelExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/InvUSCSuperlevelExact.setup.json --json
+error: Hironaka/Support/InvUSCSuperlevelExact.lean:65:0: Missing name after `end`: Expected the current scope name `USC`
+
+Hint: To end the current scope `USC`, specify its name:
+  end ̲U̲S̲C̲
+error: Hironaka/Support/InvUSCSuperlevelExact.lean:66:0: Missing name after `end`: Expected the current scope name `USC`
+
+Hint: To end the current scope `USC`, specify its name:
+  end ̲U̲S̲C̲
+error: Lean exited with code 1
+✖ [4766/4940] Building Hironaka.Support.AnalyticDimensionCoreExact (2.5s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/AnalyticDimensionCoreExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticDimensionCoreExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticDimensionCoreExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticDimensionCoreExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticDimensionCoreExact.setup.json --json
+error: Hironaka/Support/AnalyticDimensionCoreExact.lean:59:4: Unknown identifier `PositiveDimensionalComponent.exists_isIrreducibleComponent_pos_dim_of_accPt`
+error: Hironaka/Support/AnalyticDimensionCoreExact.lean:58:9: Tactic `rcases` failed: `x✝ : ?m.38` is not an inductive datatype
+error: Hironaka/Support/AnalyticDimensionCoreExact.lean:70:0: Missing name after `end`: Expected the current scope name `AnalyticDimensionBasics`
+
+Hint: To end the current scope `AnalyticDimensionBasics`, specify its name:
+  end ̲A̲n̲a̲l̲y̲t̲i̲c̲D̲i̲m̲e̲n̲s̲i̲o̲n̲B̲a̲s̲i̲c̲s̲
+error: Lean exited with code 1
+✖ [4767/4940] Building Hironaka.Support.AnalyticSubsetPresentationsExact (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/AnalyticSubsetPresentationsExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticSubsetPresentationsExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticSubsetPresentationsExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticSubsetPresentationsExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticSubsetPresentationsExact.setup.json --json
+error: Hironaka/Support/AnalyticSubsetPresentationsExact.lean:83:0: Missing name after `end`: Expected the current scope name `AnalyticSubsetOpens`
+
+Hint: To end the current scope `AnalyticSubsetOpens`, specify its name:
+  end ̲A̲n̲a̲l̲y̲t̲i̲c̲S̲u̲b̲s̲e̲t̲O̲p̲e̲n̲s̲
+error: Hironaka/Support/AnalyticSubsetPresentationsExact.lean:84:0: Missing name after `end`: Expected the current scope name `AnalyticSubsetOpens`
+
+Hint: To end the current scope `AnalyticSubsetOpens`, specify its name:
+  end ̲A̲n̲a̲l̲y̲t̲i̲c̲S̲u̲b̲s̲e̲t̲O̲p̲e̲n̲s̲
+error: Lean exited with code 1
+✖ [4768/4940] Building Hironaka.Support.ConstantRankImageGraphExact (5.5s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/ConstantRankImageGraphExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ConstantRankImageGraphExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ConstantRankImageGraphExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/ConstantRankImageGraphExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/ConstantRankImageGraphExact.setup.json --json
+error: Hironaka/Support/ConstantRankImageGraphExact.lean:226:15: Unknown identifier `image_eq_graph`
+error: Hironaka/Support/ConstantRankImageGraphExact.lean:224:80: unsolved goals
+N : ℕ
+E : Type u_2
+inst✝² : NormedAddCommGroup E
+inst✝¹ : NormedSpace ℂ E
+inst✝ : FiniteDimensional ℂ E
+G : E → ComplexModel N
+U : Set E
+hU : IsOpen[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] U
+hG : DifferentiableOn ℂ G U
+r : ℕ
+hr : ∀ z ∈ U, Module.finrank ℂ ↥(↑(fderiv ℂ G z)).range = r
+p : E
+hp : p ∈ U
+Q : ComplexModel N →L[ℂ] ↥(↑(fderiv ℂ G p)).range
+S : E →L[ℂ] ↥(↑(fderiv ℂ G p)).ker
+ψ : ↥(↑(fderiv ℂ G p)).range × ↥(↑(fderiv ℂ G p)).ker → E
+k : ↥(↑(fderiv ℂ G p)).range → ComplexModel N
+ρ : ℝ
+hρ : 0 < ρ
+hopen : IsOpen[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] (ψ '' ball (Q (G p), S p) ρ)
+hψp : ψ (Q (G p), S p) = p
+hψ : ∀ w ∈ ball (Q (G p), S p) ρ, ψ w ∈ U ∧ (Q (G (ψ w)), S (ψ w)) = w
+hkd : DifferentiableOn ℂ k (ball (Q (G p)) ρ)
+hQk : ∀ w ∈ ball (Q (G p)) ρ, Q (k w) = w
+hnf : ∀ w ∈ ball (Q (G p), S p) ρ, G (ψ w) = k w.1
+⊢ ∃ O W h,
+    IsOpen[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] O ∧
+      p ∈ O ∧
+        O ⊆ U ∧
+          IsOpen W ∧ DifferentiableOn ℂ h W ∧ G '' O = {y | y ∈ W ∧ h y = 0} ∧ ∀ y ∈ G '' O, RegularAtDim (G '' O) y r
+error: Hironaka/Support/ConstantRankImageGraphExact.lean:242:0: Missing name after `end`: Expected the current scope name `ConstantRankSubmanifold`
+
+Hint: To end the current scope `ConstantRankSubmanifold`, specify its name:
+  end ̲C̲o̲n̲s̲t̲a̲n̲t̲R̲a̲n̲k̲S̲u̲b̲m̲a̲n̲i̲f̲o̲l̲d̲
+error: Hironaka/Support/ConstantRankImageGraphExact.lean:243:0: Missing name after `end`: Expected the current scope name `ConstantRankSubmanifold`
+
+Hint: To end the current scope `ConstantRankSubmanifold`, specify its name:
+  end ̲C̲o̲n̲s̲t̲a̲n̲t̲R̲a̲n̲k̲S̲u̲b̲m̲a̲n̲i̲f̲o̲l̲d̲
+error: Lean exited with code 1
+✖ [4769/4940] Building Hironaka.Support.AnalyticIdentityInteriorExact (2.3s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/AnalyticIdentityInteriorExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticIdentityInteriorExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticIdentityInteriorExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticIdentityInteriorExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticIdentityInteriorExact.setup.json --json
+error: Hironaka/Support/AnalyticIdentityInteriorExact.lean:45:27: Invalid field `isClosed_interior`: The environment does not contain `Function.isClosed_interior`, so it is not possible to project the field `isClosed_interior` from an expression
+  hA
+of type
+  ∀ (x : M), Nonempty (ComplexAnalyticPresentationAt A x)
+error: Hironaka/Support/AnalyticIdentityInteriorExact.lean:49:0: Missing name after `end`: Expected the current scope name `Hironaka`
+
+Hint: To end the current scope `Hironaka`, specify its name:
+  end ̲H̲i̲r̲o̲n̲a̲k̲a̲
+error: Lean exited with code 1
+✖ [4770/4940] Building Hironaka.Support.AnalyticIrreducibleUnivExact (2.0s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/AnalyticIrreducibleUnivExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticIrreducibleUnivExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticIrreducibleUnivExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticIrreducibleUnivExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticIrreducibleUnivExact.setup.json --json
+error: Hironaka/Support/AnalyticIrreducibleUnivExact.lean:55:5: unknown namespace `Hironaka.NonKahlerLocus`
+error: Hironaka/Support/AnalyticIrreducibleUnivExact.lean:66:2: Unknown identifier `isComplexAnalyticallyIrreducible_univ_of_connectedSpace`
+error: Hironaka/Support/AnalyticIrreducibleUnivExact.lean:69:0: Missing name after `end`: Expected the current scope name `AnalyticIrreducibleComponents`
+
+Hint: To end the current scope `AnalyticIrreducibleComponents`, specify its name:
+  end ̲A̲n̲a̲l̲y̲t̲i̲c̲I̲r̲r̲e̲d̲u̲c̲i̲b̲l̲e̲C̲o̲m̲p̲o̲n̲e̲n̲t̲s̲
+error: Lean exited with code 1
+✖ [4771/4940] Building Hironaka.Support.RiemannBoundedExact (2.3s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/RiemannBoundedExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/RiemannBoundedExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/RiemannBoundedExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/RiemannBoundedExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/RiemannBoundedExact.setup.json --json
+error: Hironaka/Support/RiemannBoundedExact.lean:63:0: Missing name after `end`: Expected the current scope name `Euclidean`
+
+Hint: To end the current scope `Euclidean`, specify its name:
+  end ̲E̲u̲c̲l̲i̲d̲e̲a̲n̲
+error: Hironaka/Support/RiemannBoundedExact.lean:64:0: Missing name after `end`: Expected the current scope name `Euclidean`
+
+Hint: To end the current scope `Euclidean`, specify its name:
+  end ̲E̲u̲c̲l̲i̲d̲e̲a̲n̲
+error: Hironaka/Support/RiemannBoundedExact.lean:65:0: Missing name after `end`: Expected the current scope name `Euclidean`
+
+Hint: To end the current scope `Euclidean`, specify its name:
+  end ̲E̲u̲c̲l̲i̲d̲e̲a̲n̲
+error: Lean exited with code 1
+✖ [4773/4940] Building Hironaka.Support.AnalyticDescendingLocalStableExact (2.0s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/AnalyticDescendingLocalStableExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticDescendingLocalStableExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/AnalyticDescendingLocalStableExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticDescendingLocalStableExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/AnalyticDescendingLocalStableExact.setup.json --json
+error: Hironaka/Support/AnalyticDescendingLocalStableExact.lean:124:0: Missing name after `end`: Expected the current scope name `AnalyticDescendingChain`
+
+Hint: To end the current scope `AnalyticDescendingChain`, specify its name:
+  end ̲A̲n̲a̲l̲y̲t̲i̲c̲D̲e̲s̲c̲e̲n̲d̲i̲n̲g̲C̲h̲a̲i̲n̲
+error: Lean exited with code 1
+✖ [4774/4940] Building Hironaka.Support.NonmonomialDiffeoExact (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/NonmonomialDiffeoExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/NonmonomialDiffeoExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/NonmonomialDiffeoExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/NonmonomialDiffeoExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/NonmonomialDiffeoExact.setup.json --json
+error: Hironaka/Support/NonmonomialDiffeoExact.lean:76:0: Missing name after `end`: Expected the current scope name `Local`
+
+Hint: To end the current scope `Local`, specify its name:
+  end ̲L̲o̲c̲a̲l̲
+error: Hironaka/Support/NonmonomialDiffeoExact.lean:77:0: Missing name after `end`: Expected the current scope name `Local`
+
+Hint: To end the current scope `Local`, specify its name:
+  end ̲L̲o̲c̲a̲l̲
+error: Hironaka/Support/NonmonomialDiffeoExact.lean:78:0: Missing name after `end`: Expected the current scope name `Local`
+
+Hint: To end the current scope `Local`, specify its name:
+  end ̲L̲o̲c̲a̲l̲
+error: Lean exited with code 1
+✖ [4900/4940] Building Hironaka.Support.TowerIsoBaseCongrExact (2.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/lean-toolchains/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/TowerIsoBaseCongrExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/TowerIsoBaseCongrExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/TowerIsoBaseCongrExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/TowerIsoBaseCongrExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/TowerIsoBaseCongrExact.setup.json --json
+error: Hironaka/Support/TowerIsoBaseCongrExact.lean:73:0: Missing name after `end`: Expected the current scope name `Congr`
+
+Hint: To end the current scope `Congr`, specify its name:
+  end ̲C̲o̲n̲g̲r̲
+error: Hironaka/Support/TowerIsoBaseCongrExact.lean:74:0: Missing name after `end`: Expected the current scope name `Congr`
+
+Hint: To end the current scope `Congr`, specify its name:
+  end ̲C̲o̲n̲g̲r̲
+error: Hironaka/Support/TowerIsoBaseCongrExact.lean:75:0: Missing name after `end`: Expected the current scope name `Congr`
+
+Hint: To end the current scope `Congr`, specify its name:
+  end ̲C̲o̲n̲g̲r̲
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Support.InvUSCSuperlevelExact
+- Hironaka.Support.AnalyticDimensionCoreExact
+- Hironaka.Support.AnalyticSubsetPresentationsExact
+- Hironaka.Support.ConstantRankImageGraphExact
+- Hironaka.Support.AnalyticIdentityInteriorExact
+- Hironaka.Support.AnalyticIrreducibleUnivExact
+- Hironaka.Support.RiemannBoundedExact
+- Hironaka.Support.AnalyticDescendingLocalStableExact
+- Hironaka.Support.NonmonomialDiffeoExact
+- Hironaka.Support.TowerIsoBaseCongrExact
+error: build failed

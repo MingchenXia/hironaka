@@ -1,0 +1,5 @@
+theorem LocDimGE.le_of_locDimLE {A : Set M} {x : M} {q p : ℕ} (hq : LocDimGE (n := n) A x q)
+    (hp : LocDimLE (n := n) A x p) : q ≤ p := by
+  obtain ⟨U, hU, hUp⟩ := hp
+  obtain ⟨y, hyU, k, hqk, hy⟩ := hq U hU
+  exact hqk.trans (hUp y hyU k hy)

@@ -1,0 +1,8 @@
+theorem isPureDim_image_val_iff {B : Set U} {k : ℕ} :
+    IsPureDim (n := n) ((↑) '' B : Set M) k ↔ IsPureDim (n := n) B k := by
+  constructor
+  · intro h y j hy
+    exact h y j (regularAtDim_image_val_iff.mpr hy)
+  · intro h y j hy
+    have hyU := mem_opens_of_regularAtDim_image_val hy
+    exact h ⟨y, hyU⟩ j (regularAtDim_image_val_iff.mp hy)
