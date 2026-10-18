@@ -3,3 +3,5 @@ Fixed native346 publication lane. Horizon and lean-check instructions were loade
 Unchanged shared control-plane/collection warnings remain intentionally recorded by root; no repeated foreign roadmap/inbox scans or mutations. Prior scratch dry run found shared adhoc scratch whose ownership was not established, so it was retained. This public extraction lane owns no native roadmap/inbox item requiring closure.
 
 Lean LSP is unavailable; original proof text is copied without edits and checked through the configured public build, complete actual-expression comparison and installed kernel replay. Cloud environment runtime skill was loaded and environment status observed running/current; this lane needs no network or credentials.
+
+Boundary maintenance: all authored source/script/document non-log diffs pass git diff --check. Original raw captures and all historical evidence remain available; only deterministic lossless capture gzip files are staged. The fixed346 source/axiom/Expr/kernel/BP gates pass independently. No native roadmap, human conversation, standing protection or foreign scratch is changed.
