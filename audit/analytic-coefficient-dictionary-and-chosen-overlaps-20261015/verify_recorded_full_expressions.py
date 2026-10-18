@@ -51,7 +51,21 @@ with tempfile.TemporaryDirectory(prefix='hironaka-recorded-expressions-') as scr
     for name in ['all-actual-root-verification-classification-final.json',
                  'all-actual-raw-structural-comparison-final.json',
                  'all-mathematical-strict-comparison-final.json']:
-        assert json.loads((target / name).read_text()) == json.loads((HERE / name).read_text()), name
+        actual = json.loads((target / name).read_text())
+        expected = json.loads((HERE / name).read_text())
+        if name != 'all-actual-root-verification-classification-final.json':
+            kind = 'mathematical' if name == 'all-mathematical-strict-comparison-final.json' else 'actual'
+            relatives = {'old': HERE.relative_to(ROOT) / f'native-all-{kind}-full-expressions-final.jsonl',
+                         'native': HERE.relative_to(ROOT) / f'public-all-{kind}-full-expressions-final.jsonl',
+                         'comparator': COMPARATOR_REL}
+            for key, relative in relatives.items():
+                assert Path(actual[key]['path']) == tmp_root / relative
+                assert Path(expected[key]['path']).parts[-len(relative.parts):] == relative.parts
+                # Only report file locations differ between checkouts. Every
+                # captured byte/hash, AST comparison and result field is exact.
+                del actual[key]['path']
+                del expected[key]['path']
+        assert actual == expected, name
 print('PASS recorded complete mathematical types/values: 1006 roots, 839 theorem proofs.')
 print('Raw all-1009-root structural comparison remains BLOCKED on exactly three disclosed parser outputs.')
 print('Their typed source-generation audit, actual-root axiom audit and frozen kernel replay are separate gates.')
