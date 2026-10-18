@@ -79,6 +79,9 @@ bindings=sorted({x for r in bps for x in r['local_bindings']});assert len(bindin
 master=ROOT/'blueprint/extensions.tex';oldmaster=subprocess.check_output(['git','-C',str(ROOT),'show',BASE+':blueprint/extensions.tex'],text=True)
 needle='\\begin{thebibliography}{99}';assert oldmaster.count(needle)==1
 newmaster=oldmaster.replace(needle,''.join('\\input{'+Path(r['destination_path']).stem+'}\n' for r in bps)+needle)
+for change in load('master-documentation-contexts.json') if (HERE/'master-documentation-contexts.json').exists() else []:
+ assert newmaster.count(change['before'])==1
+ newmaster=newmaster.replace(change['before'],change['after'])
 assert master.read_text() in (oldmaster,newmaster),'Master document differs beyond owned33 inputs'
 if master.read_text()!=newmaster:master.write_text(newmaster)
 mods=subprocess.check_output(['git','-C',str(SOURCE),'ls-tree','-r','--name-only',REV,'--','TranscendentalNakamaye/TranscendentalNakamaye'],text=True).splitlines()
