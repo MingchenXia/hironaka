@@ -1,0 +1,42 @@
+[
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HironakaActualTaylorFaithfullyFlat",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualTaylorFaithfullyFlat.lean",
+    "source_sha256": "498997ddd6662eddd428d17295c42c0bb6d40a7d5e19b54130116935c7e4e2b1",
+    "compiler_ilean_sha256": "de3c5429fe04139be839a3d2a13e33492855db5262cbdc2559d22bb4c8727bb8",
+    "compiler_source_range": [
+      46,
+      0,
+      76,
+      53
+    ],
+    "actual_original_declaration": "TranscendentalNakamaye.Pending.HironakaActualTaylorFaithfullyFlat.actual_formal_relation_iff_original_syzygies",
+    "complete_original_declaration_sidecar": "actual_formal_relation_iff_original_syzygies-original-complete-declaration.lean.txt",
+    "complete_original_declaration_sha256": "d28eefe0974a3eee6dce87bd5fb748969ea65b940f8667fca30176fe3f256374",
+    "original_complete_owning_prelude": "import TranscendentalNakamaye.Pending.HironakaActualOriginalAdicCompletion\nimport Mathlib.RingTheory.AdicCompletion.AsTensorProduct\nimport Mathlib.RingTheory.RingHom.FaithfullyFlat\nimport Mathlib.RingTheory.Flat.EquationalCriterion\n\n/-! The actual original Taylor embedding is faithfully flat, before its genuine analytic syzygy consumer. -/\nset_option autoImplicit false\nopen Set Classical\nnamespace TranscendentalNakamaye.Pending.HironakaActualTaylorFaithfullyFlat\nnoncomputable section\nopen FirstPass HolGerm HironakaActualOriginalFormalTaylor\n  HironakaActualFormalIdealContraction HironakaActualOriginalAdicCompletion\n\n/-- Flatness is internally obtained from the ACTUAL original completion and its Taylor identity. -/\ntheorem originalTaylorAlgHom_flat (n : \u2115) : (originalTaylorAlgHom n).toRingHom.Flat := by\n  let R := HolGerm (ComplexModel (0+n))\n  let m := IsLocalRing.maximalIdeal R\n  let := isNoetherianRing_holGerm_euclidean (0+n)\n  have hflat : (algebraMap R (AdicCompletion m R)).Flat :=\n    RingHom.flat_algebraMap_iff.mpr inferInstance\n  have he : (actualOriginalCompletionEquiv n).toRingHom.comp\n      (algebraMap R (AdicCompletion m R))=(originalTaylorAlgHom n).toRingHom := by\n    apply RingHom.ext\n    intro g\n    exact actualOriginalCompletionEquiv_of n g\n  rw [\u2190 he]\n  exact hflat.comp (RingHom.Flat.of_bijective (actualOriginalCompletionEquiv n).bijective)\n\n/-- True whole original ideal contraction upgrades the actual flat Taylor map to faithful flatness. -/\ntheorem originalTaylorAlgHom_faithfullyFlat (n : \u2115) :\n    (originalTaylorAlgHom n).toRingHom.FaithfullyFlat := by\n  let R := HolGerm (ComplexModel (0+n))\n  let S := MvPowerSeries (Fin n) \u2102\n  let : Algebra R S := (originalTaylorAlgHom n).toRingHom.toAlgebra\n  have : Module.Flat R S := originalTaylorAlgHom_flat n\n  change Module.FaithfullyFlat R S\n  apply (Module.FaithfullyFlat.iff_flat_and_proper_ideal R S).mpr\n  refine \u27e8inferInstance,?_\u27e9\n  intro I hI htop\n  have hmap : Ideal.map (originalTaylorAlgHom n).toRingHom I=\u22a4 := by\n    apply (Submodule.restrictScalars_eq_top_iff R S S).mp\n    simpa only [Ideal.smul_top_eq_map,RingHom.algebraMap_toAlgebra] using htop\n  have hc := comap_map_originalTaylorAlgHom n I\n  rw [hmap,Ideal.comap_top] at hc\n  exact hI hc.symm\n\n",
+    "destination_module": "Hironaka.Resolution.HironakaActualTaylorFaithfullyFlat",
+    "before_source_sha256": "5a7a4b5139b0f57675cd152902c6135961f88b8aab3bf3d4192a960d01cc010d",
+    "declaration_type_proof_tokens_changed": false,
+    "restored_actual_original_selector": "SubsemiringClass.toAddSubmonoidClass"
+  },
+  {
+    "source_module": "TranscendentalNakamaye.Pending.HironakaActualFormalIdealIntersections",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualFormalIdealIntersections.lean",
+    "source_sha256": "9e4672155caa1eb1aa7607c8becf60e2566c88bbf9a8294eaa3cec76da3cefeb",
+    "compiler_ilean_sha256": "b82755eae6a09ffe31be3bc3d2595f867e323f2cd9cf44c3b1c105dfff49546a",
+    "compiler_source_range": [
+      30,
+      0,
+      70,
+      68
+    ],
+    "actual_original_declaration": "TranscendentalNakamaye.Pending.HironakaActualFormalIdealIntersections.map_inf_originalTaylorAlgHom",
+    "complete_original_declaration_sidecar": "map_inf_originalTaylorAlgHom-original-complete-declaration.lean.txt",
+    "complete_original_declaration_sha256": "c06b1f8662d94b7ac7217a313a843957cf441a50221340976ffd40cd18fd2dba",
+    "original_complete_owning_prelude": "import TranscendentalNakamaye.Pending.HironakaActualTaylorFaithfullyFlat\n\n/-! Whole original ideal intersections under the genuine Taylor embedding. -/\nset_option autoImplicit false\nopen Set Classical\nnamespace TranscendentalNakamaye.Pending.HironakaActualFormalIdealIntersections\nnoncomputable section\nopen FirstPass HolGerm HironakaActualOriginalFormalTaylor HironakaActualTaylorFaithfullyFlat\n\nprivate theorem actual_extension_finite_expression (n : \u2115)\n    (I : Ideal (HolGerm (ComplexModel (0+n)))) (F : MvPowerSeries (Fin n) \u2102)\n    (hF : F \u2208 Ideal.map (originalTaylorAlgHom n).toRingHom I) :\n    \u2203 (r : \u2115) (G : Fin r \u2192 HolGerm (ComplexModel (0+n)))\n      (A : Fin r \u2192 MvPowerSeries (Fin n) \u2102),\n      (\u2200 i,G i \u2208 I) \u2227 F=\u2211 i,originalTaylorAlgHom n (G i)*A i := by\n  let := isNoetherianRing_holGerm_euclidean (0+n)\n  obtain \u27e8r,G,hG\u27e9 := Submodule.fg_iff_exists_fin_generating_family.mp (IsNoetherian.noetherian I)\n  have hspan : Ideal.span (range G)=I := hG\n  have hmap : Ideal.map (originalTaylorAlgHom n).toRingHom I=\n      Ideal.span (range fun i => originalTaylorAlgHom n (G i)) := by\n    rw [\u2190 hspan,Ideal.map_span,\u2190 Set.range_comp]\n    rfl\n  rw [hmap] at hF\n  obtain \u27e8A,hA\u27e9 := Ideal.mem_span_range_iff_exists_fun.mp hF\n  refine \u27e8r,G,A,?_,?_\u27e9\n  \u00b7 intro i\n    rw [\u2190 hspan]\n    exact Ideal.mem_span_range_self (x := i)\n  \u00b7 simpa only [mul_comm] using hA.symm\n\n",
+    "destination_module": "Hironaka.Resolution.HironakaActualFormalIdealIntersections",
+    "before_source_sha256": "d1aaffb924b070cd36b49ce63e739c1293b42016c670ea5ccb6045e2638394a2",
+    "declaration_type_proof_tokens_changed": false,
+    "restored_actual_original_selector": "SubsemiringClass.toAddSubmonoidClass"
+  }
+]
