@@ -1,0 +1,71 @@
+\section{The true point-chart initial restriction in the original analytic germ ring}
+
+Use the actual original analytic germ ring $R$, its entire genuine Taylor
+map $T$, and the true point-blowup chart. Write $z_e$ for its original
+analytic exceptional coordinate germ, and $E(P)$ for actual evaluation of
+the finite complex polynomial $P$ at the original coordinate germs.
+
+\begin{lemma}[Actual analytic polynomial evaluation has its entire formal inclusion]
+\label{hir:actual-unshifted-analytic-polynomial-taylor-inclusion}
+\uses{hir:actual-formal-coefficients-original-polynomial-approximation}
+\lean{Hironaka.HironakaActualAnalyticPointInitialRestriction.actualTaylor_polynomial_coordinate_evaluation}
+\leanok
+For every actual complex polynomial $P$, $T(E(P))$ is its entire formal
+polynomial inclusion, with the original coordinate dimension retained.
+\end{lemma}
+\begin{proof}
+The actual Taylor coordinate dictionary sends every original coordinate
+germ to the same formal variable. Constants are preserved by the original
+complex algebra homomorphism. Polynomial induction through addition and
+multiplication then proves the entire identity. No convergence or chosen
+polynomial representative certificate is an input.
+\end{proof}
+
+\begin{theorem}[Every genuine analytic normalized quotient retains the entire analytic initial restriction]
+\label{hir:actual-analytic-point-normalized-initial-restriction}
+\uses{hir:actual-unshifted-analytic-polynomial-taylor-inclusion,hir:actual-point-exceptional-restriction-dehomogenized-polynomial,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality,hir:actual-formal-extension-whole-original-ideal-contraction}
+\lean{Hironaka.HironakaActualAnalyticPointInitialRestriction.actual_analytic_point_quotient_initial_restriction}
+\leanok
+Suppose the actual original germ $g$ lies in the whole point ideal power
+$\mathfrak m^d$ and the original analytic quotient $H$ satisfies the true
+product identity $z_e^dH=\pi^*g$. Then
+\[
+ H-E\bigl(\delta_{e,b}P_d(Tg)\bigr)\in(z_e)
+\]
+in the entire original analytic germ ring.
+\end{theorem}
+\begin{proof}
+Actual whole Taylor naturality carries the true product identity to
+$x_e^dT(H)=\pi^*T(g)$. The proved whole point-power image puts $T(g)$
+in the actual required formal point power. Genuine exceptional quotient
+uniqueness identifies $T(H)$ with that same actual normalized formal
+member. The proved whole dehomogenized restriction therefore puts
+$T(H)-\delta_{e,b}P_d(Tg)$ in the entire formal ideal $(x_e)$.
+The preceding polynomial identity makes this the Taylor image of the
+displayed original analytic difference. The genuine coordinate dictionary
+makes $(x_e)$ exactly the extension of the whole analytic principal ideal
+$(z_e)$. Entire original ideal contraction consequently puts the original
+difference in $(z_e)$. The contraction uses the whole original ideal, not
+only its finite jets, and never assumes all formal coefficients converge.
+\end{proof}
+
+\begin{theorem}[Only the original member and true point-power membership produce the analytic quotient and initial restriction]
+\label{hir:actual-analytic-point-initial-restriction-producer}
+\uses{hir:actual-analytic-point-normalized-initial-restriction,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{Hironaka.HironakaActualAnalyticPointInitialRestriction.exists_actual_analytic_point_initial_quotient}
+\leanok
+Given only the actual original $g\in\mathfrak m^d$ and true point chart,
+internally construct an original analytic quotient $H$ satisfying both
+$z_e^dH=\pi^*g$ and the entire analytic initial-restriction conclusion above.
+\end{theorem}
+\begin{proof}
+The genuine original analytic exceptional-division theorem internally
+produces $H$ and its literal product identity from the stated whole
+point-power membership. Apply the preceding original analytic restriction
+theorem to this internally constructed same quotient. No quotient,
+restriction, ideal equality or output dictionary is supplied by the caller.
+\end{proof}
+
+This supplies actual analytic input for the point-centre Hilbert--Samuel
+comparison. The all-order inequality and its general permissible-centre
+extension remain open.

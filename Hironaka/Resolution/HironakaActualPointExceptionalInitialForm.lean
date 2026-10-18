@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Hironaka contributors
 -/
 import Hironaka.Resolution.HironakaActualFormalBlowupMemberGeneration
+import Hironaka.Resolution.HironakaActualHomogeneousInitialHS
 
 /-! True centre-power precision becomes whole exceptional precision; point normalization retains the actual homogeneous polynomial. -/
 set_option autoImplicit false
