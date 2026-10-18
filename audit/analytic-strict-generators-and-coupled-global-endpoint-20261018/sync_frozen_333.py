@@ -80,10 +80,12 @@ master=ROOT/'blueprint/extensions.tex';oldmaster=subprocess.check_output(['git',
 needle='\\begin{thebibliography}{99}';assert oldmaster.count(needle)==1
 newmaster=oldmaster.replace(needle,''.join('\\input{'+Path(r['destination_path']).stem+'}\n' for r in bps)+needle)
 master_with_added_inputs=newmaster
+master_states=[oldmaster,master_with_added_inputs]
 for change in load('master-documentation-contexts.json') if (HERE/'master-documentation-contexts.json').exists() else []:
  assert newmaster.count(change['before'])==1
  newmaster=newmaster.replace(change['before'],change['after'])
-assert master.read_text() in (oldmaster,master_with_added_inputs,newmaster),'Master document differs beyond owned11 inputs and recorded documentation scope'
+ master_states.append(newmaster)
+assert master.read_text() in master_states,'Master document differs beyond owned11 inputs and recorded documentation contexts'
 if master.read_text()!=newmaster:master.write_text(newmaster)
 mods=subprocess.check_output(['git','-C',str(SOURCE),'ls-tree','-r','--name-only',REV,'--','TranscendentalNakamaye/TranscendentalNakamaye'],text=True).splitlines()
 mods=[p.removeprefix('TranscendentalNakamaye/').removesuffix('.lean').replace('/','.') for p in mods if p.endswith('.lean')]
