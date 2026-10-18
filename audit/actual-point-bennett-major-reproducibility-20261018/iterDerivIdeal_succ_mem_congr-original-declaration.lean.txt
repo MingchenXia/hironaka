@@ -1,0 +1,5 @@
+/-- Membership in `𝓓^j(𝔞)`, `j ≥ 1`, only depends on the germ. -/
+theorem iterDerivIdeal_succ_mem_congr {𝔞 : GermIdeal n M} {j : ℕ} {g g' : M → ℂ}
+    (hg : (iterDerivIdeal 𝔞 (j + 1)).mem x g) (h : g =ᶠ[𝓝 x] g') :
+    (iterDerivIdeal 𝔞 (j + 1)).mem x g' :=
+  DerivativeIdeal.isInSpanAt_congr hg h

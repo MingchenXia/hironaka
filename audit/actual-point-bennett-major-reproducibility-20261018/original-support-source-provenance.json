@@ -1,0 +1,92 @@
+{
+  "status": "COMPLETE_ORIGINAL_SOURCE_RECOVERY_AWAITING_COMPILATION_AND_STRICT_ALL_CAPTURE",
+  "published_native_revision": "7587223a67df90b21e50d7afb6b0649428409508",
+  "source_parent_module": "TranscendentalNakamaye.Pending.HomogenizedIdeal",
+  "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HomogenizedIdeal.lean",
+  "source_parent_sha256": "f5e0892e47d2a3ff2207a146488eceda3fbe582c546cfc1edb38a584b9483995",
+  "compiler_ilean_sha256": "8171ce6693ab48fe6dc0395d47a099039b7c8ea7da1a62300cd68d1499798d6d",
+  "destination_path": "Hironaka/Support/IterDerivCoordinateMembershipExact.lean",
+  "destination_module": "Hironaka.Support.IterDerivCoordinateMembershipExact",
+  "destination_sha256": "9bea8bb4b3fad63ba9f3f803464f091c5795cb8c8a61a495ec92786dc9d4a02e",
+  "source_complete_declarations": [
+    {
+      "source_name": "TranscendentalNakamaye.Pending.HomogenizedIdeal.iterDerivIdeal_succ_mem_congr",
+      "compiler_source_range": [
+        94,
+        0,
+        98,
+        39
+      ],
+      "source_byte_range": [
+        5162,
+        5486
+      ],
+      "original_declaration_sha256": "c70d7ac1d1aedb8143c13ffb087de9f8513a4756e7156944ad219f9344375767"
+    },
+    {
+      "source_name": "TranscendentalNakamaye.Pending.HomogenizedIdeal.iterDeriv_comp_mem_iterDerivIdeal",
+      "compiler_source_range": [
+        149,
+        0,
+        189,
+        17
+      ],
+      "source_byte_range": [
+        7934,
+        10735
+      ],
+      "original_declaration_sha256": "3fb161ff8f580348e8ee012f754432436c7727cbb5c60ea305c55b80127bb2bf"
+    }
+  ],
+  "original_context_pieces": [
+    {
+      "original_text": "import TranscendentalNakamaye.Pending.BlowupDerivativeIdeal\nimport TranscendentalNakamaye.Pending.HolomorphicTaylorTail\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n",
+      "sha256": "53639b6a500e3bb24cf974ee341e3fd1ed6a6265c5a605cb6ad9f4b1ce917433",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "open Set Filter\nopen scoped Topology Manifold Nat\n\nnamespace TranscendentalNakamaye.Pending.HomogenizedIdeal\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves GermIdealOrder DerivativeIdeal IdealWeightPowers\n  BlowupDerivativeIdeal HolomorphicTaylorTail\n\nnoncomputable section\n\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n",
+      "sha256": "43ee616d175c2a9123b45450095373b47dd9716e0932aaeb004afa55e809f74c",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "section Helpers\n\nvariable {x : M}\n",
+      "sha256": "d9bb652ab49a709e4bfb1539cd5a0405b5a63a54523dd0e104e304bba31d948f",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "/-- Membership in `\ud835\udcd3^j(\ud835\udd1e)`, `j \u2265 1`, only depends on the germ. -/\ntheorem iterDerivIdeal_succ_mem_congr {\ud835\udd1e : GermIdeal n M} {j : \u2115} {g g' : M \u2192 \u2102}\n    (hg : (iterDerivIdeal \ud835\udd1e (j + 1)).mem x g) (h : g =\u1da0[\ud835\udcdd x] g') :\n    (iterDerivIdeal \ud835\udd1e (j + 1)).mem x g' :=\n  DerivativeIdeal.isInSpanAt_congr hg h",
+      "sha256": "c70d7ac1d1aedb8143c13ffb087de9f8513a4756e7156944ad219f9344375767",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "end Helpers\n",
+      "sha256": "a4d394ddc5aae5a2bc5496976f5e77ef569a6db4522f7740b7897c149381a620",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "variable {\ud835\udd1e : GermIdeal n M}\n",
+      "sha256": "9d5e37221ccaa562ca8c60ffa51fe57bac8c976264e0669096bbdfd14b27c3cc",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "/-- **Iterated coordinate derivatives.**  Let `W` be local holomorphic coordinates at `x` and `F`\nholomorphic near `W x` with `F \u2218 W \u2208 \ud835\udd1e_x`.  Then `(\u2202_v^j F) \u2218 W \u2208 \ud835\udcd3^j(\ud835\udd1e)_x` for every `j` (for the\nbasis direction `v = e\u2097`). -/\ntheorem iterDeriv_comp_mem_iterDerivIdeal (h\ud835\udd1e : \ud835\udd1e.IsCoherent) {x : M} {W : M \u2192 ComplexModel n}\n    {N : Set (ComplexModel n)} (hN : IsOpen N) (hxN : (complexChartAt (n := n) x).val x \u2208 N)\n    (hFd : DifferentiableOn \u2102 (W \u2218 (complexChartAt (n := n) x).val.symm) N)\n    (hinj : Function.Injective\n      (fderiv \u2102 (W \u2218 (complexChartAt (n := n) x).val.symm) ((complexChartAt (n := n) x).val x)))\n    {F : ComplexModel n \u2192 \u2102} (hF : \u2200\u1da0 w in \ud835\udcdd (W x), DifferentiableAt \u2102 F w)\n    (hFW : \ud835\udd1e.mem x (F \u2218 W)) (l : Fin n) :\n    \u2200 j : \u2115, (iterDerivIdeal \ud835\udd1e j).mem x\n      (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : \u2102))) F \u2218 W)\n  | 0 => hFW\n  | j + 1 => by\n    obtain \u27e8c, hc, hceq\u27e9 := exists_coordDeriv_coeff hN hxN hFd hinj\n    have hhol : \u2200 y g, \ud835\udd1e.mem y g \u2192 HolomorphicAt n g y := fun _ _ hg =>\n      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h\ud835\udd1e hg\n    -- `\u2202^j F` is differentiable near `W x`\n    obtain \u27e8r, hr, hball\u27e9 := Metric.eventually_nhds_iff_ball.mp hF\n    have hFU : DifferentiableOn \u2102 F (Metric.ball (W x) r) := fun z hz =>\n      (hball z hz).differentiableWithinAt\n    have hdj := differentiableOn_iterDeriv hFU Metric.isOpen_ball\n      (List.replicate j (EuclideanSpace.single l (1 : \u2102)))\n    have hGev : \u2200\u1da0 w in \ud835\udcdd (W x), DifferentiableAt \u2102\n        (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : \u2102))) F) w := by\n      filter_upwards [Metric.isOpen_ball.mem_nhds (Metric.mem_ball_self hr)] with w hw\n      exact (hdj w hw).differentiableAt (Metric.isOpen_ball.mem_nhds hw)\n    have hprev := iterDeriv_comp_mem_iterDerivIdeal h\ud835\udd1e hN hxN hFd hinj hF hFW l j\n    have hxs : x \u2208 (complexChartAt (n := n) x).val.source := mem_complexChartAt_source x\n    -- `(\u2202^{j+1} F) \u2218 W = \u2211\u2098 c l m \u00b7 \u2202^e_m ((\u2202^j F) \u2218 W)` near `x`\n    have heq := hceq _ hGev l\n    have hmem : (iterDerivIdeal \ud835\udd1e (j + 1)).mem x (fun p => \u2211 m, c l m p *\n        chartDeriv (complexChartAt (n := n) x) (EuclideanSpace.single m 1)\n          (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : \u2102))) F \u2218 W) p) := by\n      refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun m _ => ?_\n      exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (hc l m)\n        (chartDeriv_mem_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal hhol j) hxs hprev)\n    refine iterDerivIdeal_succ_mem_congr hmem ?_\n    filter_upwards [heq] with p hp\n    simp only [Function.comp_apply, List.replicate_succ, iterDeriv, dirDeriv]\n    exact hp.symm",
+      "sha256": "3fb161ff8f580348e8ee012f754432436c7727cbb5c60ea305c55b80127bb2bf",
+      "is_original_substring": true
+    },
+    {
+      "original_text": "end\n\nend TranscendentalNakamaye.Pending.HomogenizedIdeal\n",
+      "sha256": "f1e95276a370cbf2cb484e4c7c74a58d86acbc6ce62a1a7da71adc45a8d0962f",
+      "is_original_substring": true
+    }
+  ],
+  "proof_tokens_edited": 0,
+  "source_context_omitted_declarations_are_not_claimed_restored": true,
+  "additional_existing_support_import": "Hironaka.MarkedIdeal.HomogenizedIdeal",
+  "old_public_mathematical_sources_edited": 0,
+  "additional_existing_support_imports": [
+    "Hironaka.MarkedIdeal.HomogenizedIdeal",
+    "Hironaka.MarkedIdeal.DerivativeIdealCoherence"
+  ],
+  "initial_narrow_failure": "Missing legacy split-module import DerivativeIdealCoherence; both complete original proof bodies unchanged."
+}

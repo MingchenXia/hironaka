@@ -6,6 +6,7 @@ Authors: Hironaka contributors
 import Hironaka.Resolution.HironakaActualOriginalDifferentialIdeals
 import Hironaka.Resolution.HironakaRelativeNormalDeformationInitialRelations
 import Hironaka.MarkedIdeal.DerivativeIdeal
+import Hironaka.Support.IterDerivCoordinateMembershipExact
 
 /-! The existing original chart-free derivative sheaf has the actual whole differential stalk and Taylor extension. -/
 set_option autoImplicit false

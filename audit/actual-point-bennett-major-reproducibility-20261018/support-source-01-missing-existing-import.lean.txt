@@ -1,0 +1,87 @@
+/- Two complete original coordinate-derivative prerequisites, with unchanged mathematical statements and proofs. -/
+import Hironaka.MarkedIdeal.HomogenizedIdeal
+
+import Hironaka.Blowup.BlowupDerivativeIdeal
+import Hironaka.Analytic.HolomorphicTaylorTail
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+
+
+open Set Filter
+open scoped Topology Manifold Nat
+
+namespace Hironaka.HomogenizedIdeal
+
+open Hironaka.HolomorphicIdealSheaves GermIdealOrder DerivativeIdeal IdealWeightPowers
+  BlowupDerivativeIdeal HolomorphicTaylorTail
+
+noncomputable section
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+
+section Helpers
+
+variable {x : M}
+
+
+/-- Membership in `𝓓^j(𝔞)`, `j ≥ 1`, only depends on the germ. -/
+theorem iterDerivIdeal_succ_mem_congr {𝔞 : GermIdeal n M} {j : ℕ} {g g' : M → ℂ}
+    (hg : (iterDerivIdeal 𝔞 (j + 1)).mem x g) (h : g =ᶠ[𝓝 x] g') :
+    (iterDerivIdeal 𝔞 (j + 1)).mem x g' :=
+  DerivativeIdeal.isInSpanAt_congr hg h
+
+end Helpers
+
+
+variable {𝔞 : GermIdeal n M}
+
+
+/-- **Iterated coordinate derivatives.**  Let `W` be local holomorphic coordinates at `x` and `F`
+holomorphic near `W x` with `F ∘ W ∈ 𝔞_x`.  Then `(∂_v^j F) ∘ W ∈ 𝓓^j(𝔞)_x` for every `j` (for the
+basis direction `v = eₗ`). -/
+theorem iterDeriv_comp_mem_iterDerivIdeal (h𝔞 : 𝔞.IsCoherent) {x : M} {W : M → ComplexModel n}
+    {N : Set (ComplexModel n)} (hN : IsOpen N) (hxN : (complexChartAt (n := n) x).val x ∈ N)
+    (hFd : DifferentiableOn ℂ (W ∘ (complexChartAt (n := n) x).val.symm) N)
+    (hinj : Function.Injective
+      (fderiv ℂ (W ∘ (complexChartAt (n := n) x).val.symm) ((complexChartAt (n := n) x).val x)))
+    {F : ComplexModel n → ℂ} (hF : ∀ᶠ w in 𝓝 (W x), DifferentiableAt ℂ F w)
+    (hFW : 𝔞.mem x (F ∘ W)) (l : Fin n) :
+    ∀ j : ℕ, (iterDerivIdeal 𝔞 j).mem x
+      (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : ℂ))) F ∘ W)
+  | 0 => hFW
+  | j + 1 => by
+    obtain ⟨c, hc, hceq⟩ := exists_coordDeriv_coeff hN hxN hFd hinj
+    have hhol : ∀ y g, 𝔞.mem y g → HolomorphicAt n g y := fun _ _ hg =>
+      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+    -- `∂^j F` is differentiable near `W x`
+    obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.mp hF
+    have hFU : DifferentiableOn ℂ F (Metric.ball (W x) r) := fun z hz =>
+      (hball z hz).differentiableWithinAt
+    have hdj := differentiableOn_iterDeriv hFU Metric.isOpen_ball
+      (List.replicate j (EuclideanSpace.single l (1 : ℂ)))
+    have hGev : ∀ᶠ w in 𝓝 (W x), DifferentiableAt ℂ
+        (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : ℂ))) F) w := by
+      filter_upwards [Metric.isOpen_ball.mem_nhds (Metric.mem_ball_self hr)] with w hw
+      exact (hdj w hw).differentiableAt (Metric.isOpen_ball.mem_nhds hw)
+    have hprev := iterDeriv_comp_mem_iterDerivIdeal h𝔞 hN hxN hFd hinj hF hFW l j
+    have hxs : x ∈ (complexChartAt (n := n) x).val.source := mem_complexChartAt_source x
+    -- `(∂^{j+1} F) ∘ W = ∑ₘ c l m · ∂^e_m ((∂^j F) ∘ W)` near `x`
+    have heq := hceq _ hGev l
+    have hmem : (iterDerivIdeal 𝔞 (j + 1)).mem x (fun p => ∑ m, c l m p *
+        chartDeriv (complexChartAt (n := n) x) (EuclideanSpace.single m 1)
+          (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : ℂ))) F ∘ W) p) := by
+      refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun m _ => ?_
+      exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (hc l m)
+        (chartDeriv_mem_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal hhol j) hxs hprev)
+    refine iterDerivIdeal_succ_mem_congr hmem ?_
+    filter_upwards [heq] with p hp
+    simp only [Function.comp_apply, List.replicate_succ, iterDeriv, dirDeriv]
+    exact hp.symm
+
+end
+
+end Hironaka.HomogenizedIdeal
