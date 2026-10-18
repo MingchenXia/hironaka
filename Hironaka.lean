@@ -651,6 +651,14 @@ import Hironaka.Resolution.HironakaOriginalPreparedJointSourceBoundValues
 
 import Hironaka.Resolution.HironakaSharpActualCurveUniformPrefixRestriction
 
+import Hironaka.Resolution.HironakaActualOriginalDifferentialIdeals
+
+import Hironaka.Resolution.HironakaOriginalCompactPreparedSmoothHistory
+
+import Hironaka.Resolution.HironakaOriginalFiniteStepOneCutMaskAvoidance
+
+import Hironaka.Resolution.HironakaSharpActualCurveUniformSuccessorComparison
+
 /-!
 # Hironaka
 
