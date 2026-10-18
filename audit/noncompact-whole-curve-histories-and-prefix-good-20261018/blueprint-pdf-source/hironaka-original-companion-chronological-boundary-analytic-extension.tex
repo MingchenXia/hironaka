@@ -1,0 +1,192 @@
+\section{Original positive companion boundary thresholds are globally analytic}
+
+The actual companion starts at a point's literal nonmonomial-order history
+year. Its ``original'' boundary therefore includes precisely those genuine
+original and exceptional members already present at that year. The historical
+boundary list is not fixed over the whole final manifold. Its actual
+point-dependent indexed count nevertheless has global analytic thresholds,
+because it is an internally selected prefix of the same actual chronological
+final boundary and the real history-year bounds are analytic.
+
+This identifies a family of genuine positive thresholds of the SAME constructed
+canonical invariant, rather than assigning a different invariant to the original
+input. These are the full companion-boundary-count thresholds with the true
+minimum lower value. Arbitrary later lower thresholds, special/contact
+presentations and the auxiliary Hilbert--Samuel chain remain separate producers.
+The historical convention agrees with Bierstone--Milman\cite{bierstone-milman08-functoriality},
+Section 7, Step II.B, and the recursive historical boundary counts in
+Bierstone--Milman\cite{bierstone-milman97-invent-math}, Section 6.
+
+\begin{lemma}[The true minimum lower value makes the whole Step One threshold exactly its actual level]
+\label{hir:original-companion-minimum-lower-threshold-level-dictionary}
+\lean{Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.minimumValTy,Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.minimumValTy_le,Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.stepOneMinimumThreshold_iff_level}
+\leanok
+Let $b_k$ be the actual minimum of the literal lower value type: $0$ at
+induction dimension zero and $(0,\operatorname{inl}\bot)$ at a successor.
+Every actual masked Step One value satisfies
+\[
+ (s,b_k)\le \overline{\operatorname{inv}}(y)
+ \quad\Longleftrightarrow\quad s\le\operatorname{level}(y).
+\]
+The statement includes special points and every later lower/contact branch.
+\end{lemma}
+\begin{proof}
+At dimension zero, $0$ is the minimum natural number. At a successor, either
+the first natural entry is positive, giving strict lexicographic inequality,
+or it is zero, where the left tagged bottom is at most every actual second
+entry. Thus $b_k$ is the actual minimum, and its finite lift is at most every
+finite or top lower value. The literal Step One first entry is exactly its
+actual original-boundary level. Lexicographic comparison with $(s,b_k)$
+is therefore true precisely when that level is at least $s$, since the
+second comparison is automatic at equality. The special top value and
+all nonspecial finite values obey the same minimum comparison.
+\end{proof}
+
+\begin{lemma}[The actual frozen companion boundary is the genuine chronological final prefix]
+\label{hir:original-companion-frozen-chronological-boundary-dictionary}
+\lean{Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.chronologicalMembers,Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.actualCompanionLevel_eq_chronologicalBoundaryCount}
+\leanok
+\uses{hir:tower-split,bcalc:nonmonomial-order-tail,hir:step-one-value,bcalc:member-intersection-tower,hir:open-restriction-marked}
+For an original admissible tower $T$ of length $t$ with original boundary
+length $e$, and any actual split with $r$ final stages, put
+\[
+ E^{[r]}_T=\operatorname{take}_{e+(t-r)}E_T.
+\]
+The original-boundary list of the actual companion formed on its true order
+mask at this split, along its actual restricted tail, is precisely the
+pullback of $E^{[r]}_T$. Consequently its actual Step One level at a point of
+the real tail mask equals the indexed boundary count of $E^{[r]}_T$ at that
+point's same underlying original final point.
+\end{lemma}
+\begin{proof}
+Every genuine blowup appends its actual exceptional member after the strict
+transforms of the preceding members; empty members are retained at their true
+chronological positions. Therefore the prefix boundary length is exactly
+$e+(t-r)$, including literal empty steps. The original members at the final
+stage of the tail are the first this many members of its actual final
+boundary. The entire original transform dictionary identifies that boundary
+with $E_T$.
+
+The actual companion construction preserves the entire prefix boundary, as
+does its actual homogenized/coefficient marked ideal used by Step One.
+Transforming the boundary only depends on that same original boundary list.
+The original whole open-restriction transform dictionary therefore identifies
+its actual final boundary with the pullback of $E_T$ on the true tail mask.
+Taking the actual original-length prefix commutes with that list pullback.
+This proves the entire list identity. The indexed boundary count is unchanged
+by pullback: an index passes through the restricted point precisely when its
+same original member passes through the underlying point. This gives the
+stated actual level identity without a caller boundary or value dictionary.
+\end{proof}
+
+\begin{lemma}[The whole actual companion history count has a finite threshold dictionary]
+\label{hir:original-companion-chronological-count-finite-union-dictionary}
+\lean{Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.companionChronologicalCount,Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.companionChronologicalCount_superlevel_eq_biUnion}
+\leanok
+\uses{hir:original-companion-history-year-threshold,hir:original-companion-frozen-chronological-boundary-dictionary}
+For the SAME original actual history, put
+$c_q(y)=\operatorname{count}(E^{[R_q(y)]}_T,y)$ and
+\[
+ C_{q,s}=\{y\in\operatorname{cosupp}M_T:q\le\nu_T(y),\ s\le c_q(y)\}.
+\]
+Then the exact entire identity is
+\[
+ C_{q,s}=\bigcup_{0\le r\le t}
+ \bigl(L_{q,r}(T)\cap\{y:s\le\operatorname{count}(E^{[r]}_T,y)\}\bigr).
+\]
+No history year or selected prefix is supplied as additional data.
+\end{lemma}
+\begin{proof}
+The literal run is at most the genuine finite tower length. A point of the
+left set therefore supplies its actual $r=R_q(y)$ in the true finite union;
+the selected prefix and count are exactly its own. Conversely membership
+in the $r$ summand says $R_q(y)\le r$. Hence $t-r\le t-R_q(y)$ and
+$E^{[r]}_T$ is an actual indexed prefix of $E^{[R_q(y)]}_T$.
+The injection of the smaller prefix's indices into the larger one preserves
+each member and membership through the same point. The smaller indexed
+count is at most the larger indexed count, so its lower threshold gives
+the actual point-dependent count threshold. Both directions retain the
+same genuine current cosupport and current-order lower bound. This proves
+exactly the entire displayed identity, including zero or excessive count
+thresholds and all real empty chronological members.
+\end{proof}
+
+\begin{theorem}[Actual chronological companion-count thresholds are genuinely global analytic sets]
+\label{hir:original-companion-chronological-count-global-analytic-producer}
+\lean{Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.isComplexAnalyticSubset_companionChronologicalCount_superlevel}
+\leanok
+\uses{hir:original-companion-chronological-count-finite-union-dictionary,hir:original-companion-history-year-global-analytic-producer,hir:boundary-count-global-analytic-superlevels}
+In positive ambient dimension, for only an original marked-domain input and its literal constructed
+canonical finite history, each $C_{q,s}$ is globally complex analytic,
+in arbitrary induction dimension without compactness or a curve envelope.
+\end{theorem}
+\begin{proof}
+Original canonical-domain transport internally supplies the actual final
+SNC boundary $E_T$. Every true indexed prefix $E^{[r]}_T$ inherits that
+same SNC structure, so its finite intersection dictionary supplies actual
+holomorphic equations for each indexed-count threshold. The actual
+history-year producer supplies genuine global equations for $L_{q,r}(T)$.
+Intersect those actual finite presentations in every true summand of the
+preceding dictionary and take their real finite union. The resulting
+holomorphic equations present exactly $C_{q,s}$ on the entire original
+final manifold. No global finite component family or analytic target
+certificate is assumed.
+\end{proof}
+
+\begin{theorem}[Literal positive canonical companion minimum-tail thresholds have the exact whole original dictionary]
+\label{hir:original-positive-canonical-companion-count-threshold-whole-dictionary}
+\lean{Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.positiveCanonicalCompanionCountThreshold,Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.canonical_positive_companion_count_superlevel_eq_union}
+\leanok
+\uses{hir:original-companion-minimum-lower-threshold-level-dictionary,hir:original-companion-frozen-chronological-boundary-dictionary,hir:original-companion-chronological-count-finite-union-dictionary,hir:general-value,hir:general-canonical-tail}
+For original marked-domain input and its SAME literal canonical finite
+history, and every positive $q$ and indexed count threshold $s$, let
+\[
+ \alpha_{q,s}=(q,\operatorname{inr}(s,b_k))
+\]
+be the genuine tagged threshold in the literal canonical value type at
+induction dimension $k+1$. Then
+\[
+ \{y\in\operatorname{cosupp}M_T:
+       \alpha_{q,s}\le\operatorname{inv}_{k+1}(M,T,y)\}
+ =\bigl(\operatorname{cosupp}M_T\cap\{\nu_T\ge q+1\}\bigr)\cup C_{q,s}.
+\]
+The left side is the original full value, with its actual original companion
+and point-dependent historical split; it is not a redefined count invariant.
+\end{theorem}
+\begin{proof}
+At a current cosupport point of order below $q$, the original first entry
+makes the comparison false, and both right terms fail by their genuine
+order bounds. At order above $q$, the first entry gives strict inequality;
+the actual order-$q+1$ baseline includes the point regardless of its history
+count. At order exactly $q$, positivity and the genuine original canonical
+history internally supply the actual companion order mask, whole companion
+marked domain, true maximal order and canonical restricted tail. Its lower
+value is finite and equals the literal masked Step One value at the true
+restricted point. Therefore tagged lexicographic comparison is exactly
+comparison of that actual Step One value with $(s,b_k)$. The first lemma
+turns this into the actual companion level threshold; the whole frozen
+boundary dictionary identifies that level with $c_q(y)$. This is precisely
+the right count term. All cases use actual original data; no companion
+value, mask-membership or chronological dictionary is an input.
+\end{proof}
+
+\begin{theorem}[Only original inputs construct global analytic positive companion-count superlevels]
+\label{hir:original-positive-canonical-companion-count-global-analytic-producer}
+\lean{Hironaka.HironakaOriginalCompanionChronologicalBoundaryAnalytic.isComplexAnalyticSubset_canonical_positive_companion_count_superlevel}
+\leanok
+\uses{hir:original-positive-canonical-companion-count-threshold-whole-dictionary,hir:original-companion-chronological-count-global-analytic-producer,hir:canonical-first-entry-analytic-superlevel}
+Every literal original positive threshold $\alpha_{q,s}$ above has a genuine
+global analytic superlevel in arbitrary induction dimension. No compactness,
+curve, presentation, threshold-analyticity or selected-history certificate
+is supplied by the caller.
+\end{theorem}
+\begin{proof}
+The actual coherent nonmonomial ideal supplies the whole order-$q+1$ baseline
+and original coherence supplies the whole current cosupport. The chronological
+companion-count producer supplies genuine analytic equations for $C_{q,s}$.
+Take their finite union through the preceding exact whole original value
+dictionary. Its actual holomorphic presentations define precisely the
+literal canonical superlevel. This proves the positive companion boundary
+layer, while every later arbitrary recursive lower threshold still requires
+its own genuine semicoherent marked/contact presentation construction.
+\end{proof}

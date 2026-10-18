@@ -1,0 +1,73 @@
+[
+  {
+    "published_source_revision": "6a888f9dc4155b9ec1407b27223eb37218957159",
+    "source_parent_module": "TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainOriginalStalkFreeness",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaSmoothCentreRealDomainOriginalStalkFreeness.lean",
+    "source_parent_sha256": "4e10677c90aabe19e0750869bde91ae5ac57258488d4c089f0a0a288a0eab4b5",
+    "complete_original_declarations": [
+      "whole_original_stalk_dictionary_at_actual_target"
+    ],
+    "complete_declaration_sha256": {
+      "whole_original_stalk_dictionary_at_actual_target": "36fb8599641ae10c5e9c2c0c749b7d3a3a5a2073c4e4742e7487231e01fe3a60"
+    },
+    "original_variable_context": "variable {n : \u2115} {M : Type*} [TopologicalSpace M]\n  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]",
+    "original_namespace_context_tokens_selected": "open FirstPass FirstPass.HolomorphicIdealSheaves HolGerm OkaRelationSheaf\n  HironakaSmoothCentreCoherentDomain HironakaSmoothCentreNearbyStalks\n  HironakaSmoothCentreNearbyIdeal HironakaHolomorphicJetRankLoci\n  HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations\n  InvertibleIdealQuotient",
+    "new_imports": [
+      "Hironaka.Resolution.HironakaSmoothCentreNearbyIdeal"
+    ],
+    "source_generator_template": "set_option autoImplicit false\nopen Set Filter\nopen scoped DirectSum Topology Manifold ContDiff\nnamespace TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainOriginalStalkFreeness\nnoncomputable section\nopen FirstPass FirstPass.HolomorphicIdealSheaves HolGerm OkaRelationSheaf\n  HironakaSmoothCentreCoherentDomain HironakaSmoothCentreNearbyStalks\n  HironakaSmoothCentreNearbyIdeal HironakaHolomorphicJetRankLoci\n  HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations\n  InvertibleIdealQuotient\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M]\n  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n\n/-- ANY fixed original flattening has the ENTIRE actual original stalk map/comap at EVERY real target point. -/\ntheorem whole_original_stalk_dictionary_at_actual_target\n    (A : GermIdeal n M) (hA : A.IsCoherent) (x : M)\n    (\u03a6 : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x))\n    (hsrc : \u03a6.source \u2286 (chartAt (ComplexModel n) x).target)\n    (a : ComplexModel n) (ha : a \u2208 \u03a6.target) :\n    let y := actualFlatteningInverseMap x \u03a6 a\n    let hy := actualNearbyPoint_mem_chart_source x \u03a6 hsrc a ha\n    let E := actualNearbyGermEquiv \u03a6 a ha\n    let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x \u03a6) a)\n    Ideal.map E.toRingEquiv.toRingHom Ia = wholeChartStalkIdeal A x y hy \u2227\n      Ia = Ideal.comap E.toRingEquiv.toRingHom (wholeChartStalkIdeal A x y hy) := by\n  classical\n  obtain \u27e8O,hO,_hyO,N,G,hG,hgen,U,hU,haU,_hUT,hMap,hH,hF\u27e9 :=\n    exists_local_original_pullback_generators A hA \u03a6.target \u03a6.isOpen_target\n      (actualFlatteningInverseMap_mdifferentiable x \u03a6 hsrc) a ha\n  let y := actualFlatteningInverseMap x \u03a6 a\n  let hy := actualNearbyPoint_mem_chart_source x \u03a6 hsrc a ha\n  let E := actualNearbyGermEquiv \u03a6 a ha\n  let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x \u03a6) a)\n  have hhol : \u2200 i, HolAt ((G i \u2218 actualFlatteningInverseMap x \u03a6) \u2218 actualAffineTranslation n a) 0 :=\n    fun i => translated_function_holAt hU (hH i) haU\n  have hI := translated_origin_ideal_eq_span_of_real_generators\n    (actualFlattenedOriginalSheaf A x \u03a6) (fun i => G i \u2218 actualFlatteningInverseMap x \u03a6)\n      hU hH hF haU hhol\n  have hGy (i : Fin N) : HolomorphicAt n (G i) y :=\n    holomorphicAt_of_mdifferentiableOn hO (hG i) (hMap haU)\n  have hwhole := wholeChartStalkIdeal_eq_span_of_original_generators A x y hy G hGy (hgen y (hMap haU))\n  have hmap : Ideal.map E.toRingEquiv.toRingHom Ia = wholeChartStalkIdeal A x y hy := by\n    dsimp only [Ia]\n    rw [hI,Ideal.map_span,hwhole]\n    congr 1\n    ext g\n    constructor\n    \u00b7 rintro \u27e8_,\u27e8i,rfl\u27e9,rfl\u27e9\n      exact \u27e8i,(actualNearbyGermEquiv_original_function x \u03a6 hsrc a ha\n        (G i) (hGy i) (hhol i)).symm\u27e9\n    \u00b7 rintro \u27e8i,rfl\u27e9\n      exact \u27e8_,\u27e8i,rfl\u27e9,actualNearbyGermEquiv_original_function x \u03a6 hsrc a ha\n        (G i) (hGy i) (hhol i)\u27e9\n  refine \u27e8hmap,?_\u27e9\n  rw [\u2190 hmap,Ideal.comap_map_of_bijective E.toRingEquiv.toRingHom E.bijective]\n\nend\nend TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainOriginalStalkFreeness\n",
+    "destination_module": "Hironaka.Support.OriginalFixedFlatteningStalkDictionaryExact",
+    "destination_path": "Hironaka/Support/OriginalFixedFlatteningStalkDictionaryExact.lean",
+    "destination_sha256": "366c4240498b6fefdda8d3d3787778f08fa0b5016a5df4838f8f9c0fa985a688",
+    "original_type_and_proof_token_changes": 0
+  },
+  {
+    "published_source_revision": "6a888f9dc4155b9ec1407b27223eb37218957159",
+    "source_parent_module": "TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainActualAmbientHS",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaSmoothCentreRealDomainActualAmbientHS.lean",
+    "source_parent_sha256": "4377d6e3acd234da3c8863ff877fe9e635c60bb254265563df956d740d4f00ee",
+    "complete_original_declarations": [
+      "fixed_real_original_whole_stalk_ambient_hs_dictionary"
+    ],
+    "complete_declaration_sha256": {
+      "fixed_real_original_whole_stalk_ambient_hs_dictionary": "cd4d8aa52fa979f817af6cc388920a76628f7e7a462f378338a28cb77a51652e"
+    },
+    "original_variable_context": "variable {n : \u2115} {M : Type*} [TopologicalSpace M]\n  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]",
+    "original_namespace_context_tokens_selected": "open FirstPass FirstPass.HolomorphicIdealSheaves HolGerm\n  HironakaHolomorphicPointJets HironakaSmoothCentreRealDomainOriginalStalkFreeness\n  HironakaSmoothCentreNearbyStalks HironakaSmoothCentreCoherentDomain\n  HironakaSmoothCentreNearbyIdeal HironakaHolomorphicJetRankLoci\n  HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations",
+    "new_imports": [
+      "Hironaka.Support.OriginalFixedFlatteningStalkDictionaryExact",
+      "Hironaka.Support.GenuineAmbientJetAlgEquivExact"
+    ],
+    "source_generator_template": "set_option autoImplicit false\nopen Set Filter\nopen scoped Topology Manifold ContDiff DirectSum\nnamespace TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainActualAmbientHS\nnoncomputable section\nopen FirstPass FirstPass.HolomorphicIdealSheaves HolGerm\n  HironakaHolomorphicPointJets HironakaSmoothCentreRealDomainOriginalStalkFreeness\n  HironakaSmoothCentreNearbyStalks HironakaSmoothCentreCoherentDomain\n  HironakaSmoothCentreNearbyIdeal HironakaHolomorphicJetRankLoci\n  HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M]\n  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n\n/-- ANY fixed actual nonlinear flattening retains the SAME WHOLE original chart-stalk ambient HS at EVERY true target point. -/\ntheorem fixed_real_original_whole_stalk_ambient_hs_dictionary\n    (A : GermIdeal n M) (hA : A.IsCoherent) (x : M)\n    (\u03a6 : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x))\n    (hsrc : \u03a6.source \u2286 (chartAt (ComplexModel n) x).target)\n    (a : ComplexModel n) (ha : a \u2208 \u03a6.target) (\u2113 : \u2115) :\n    let y := actualFlatteningInverseMap x \u03a6 a\n    let hy := actualNearbyPoint_mem_chart_source x \u03a6 hsrc a ha\n    hilbertSamuelValue (wholeChartStalkIdeal A x y hy) \u2113 =\n      hilbertSamuelValue\n        (originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x \u03a6) a)) \u2113 := by\n  dsimp only\n  have hmap := (whole_original_stalk_dictionary_at_actual_target A hA x \u03a6 hsrc a ha).1\n  rw [\u2190 hmap]\n  exact actualAmbientHS_eq_of_genuineAlgEquiv (actualNearbyGermEquiv \u03a6 a ha) _ \u2113\n\nend\nend TranscendentalNakamaye.Pending.HironakaSmoothCentreRealDomainActualAmbientHS\n",
+    "destination_module": "Hironaka.Support.OriginalFixedRealAmbientHSDictionaryExact",
+    "destination_path": "Hironaka/Support/OriginalFixedRealAmbientHSDictionaryExact.lean",
+    "destination_sha256": "44fc46e03c755278a058a9c4067850a68d781dd84a5f05e3104603a74d6892b6",
+    "original_type_and_proof_token_changes": 0
+  },
+  {
+    "published_source_revision": "6a888f9dc4155b9ec1407b27223eb37218957159",
+    "source_parent_module": "TranscendentalNakamaye.Pending.RestrictEmptyTower",
+    "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/RestrictEmptyTower.lean",
+    "source_parent_sha256": "6d2cc1a8ce711a3963635828705d6b5af62d0760a193b5b3e6e95387c2f5bdb1",
+    "complete_original_declarations": [
+      "centresOver_step_iff",
+      "centresOver_append_iff",
+      "centresOver_head"
+    ],
+    "complete_declaration_sha256": {
+      "centresOver_step_iff": "594820ab61769a5eca55082d2519706db675c2b7f9474c46f9cb26fc41ee3bdf",
+      "centresOver_append_iff": "1cd5829d9d96342a0fe08b5f4b4102cf76717316726becee2b8e891fd9da3c4c",
+      "centresOver_head": "ba352878148fcc64c51dc07d327e7ad992b0b8615402d728c0def33f6eea74bd"
+    },
+    "original_variable_context": "variable {n : \u2115} {X : CMfd.{u} n}",
+    "original_namespace_context_tokens_selected": "open FirstPass FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.BlowupTowerSplit",
+    "new_imports": [
+      "Hironaka.Invariant.RestrictEmptyTower"
+    ],
+    "source_generator_template": "set_option autoImplicit false\nopen Set Filter\nopen scoped Topology Manifold ContDiff\nuniverse u\nnamespace TranscendentalNakamaye.Pending.RestrictEmptyTower\nnoncomputable section\nopen FirstPass FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.BlowupTowerSplit\nvariable {n : \u2115} {X : CMfd.{u} n}\n\ntheorem centresOver_step_iff (F : Set X) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (\u03c0 : Z \u2192 Y)\n    (h\u03c0 : IsBlowupAlong n C \u03c0) : CentresOver F (.step T C \u03c0 h\u03c0) \u2194 CentresOver F T \u2227 C \u2286 T.proj \u207b\u00b9' F :=\n  Iff.rfl\n\n/-- **Along a concatenation**: the centres of `T\u2080.append T\u2081` lie over `F` iff those of `T\u2080` do and those of `T\u2081` lie\nover the preimage of `F` in the last stage of `T\u2080`. -/\ntheorem centresOver_append_iff (F : Set X) {Y\u2080 : CMfd.{u} n} (T\u2080 : BlowupTower X Y\u2080) :\n    \u2200 {Y : CMfd.{u} n} (T\u2081 : BlowupTower Y\u2080 Y),\n      CentresOver F (T\u2080.append T\u2081) \u2194 CentresOver F T\u2080 \u2227 CentresOver (T\u2080.proj \u207b\u00b9' F) T\u2081\n  | _, .refl => by simp\n  | _, .step T\u2081 C \u03c0 h\u03c0 => by\n    rw [BlowupTower.append_step, centresOver_step_iff, centresOver_step_iff, centresOver_append_iff F T\u2080 T\u2081,\n      BlowupTower.proj_append, and_assoc]\n    rfl\n\n/-- **The head of a split lies over `F` if the tower does.** -/\ntheorem centresOver_head (F : Set X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (j : \u2115) (h : CentresOver F T) :\n    CentresOver F (head T j) := by\n  have h' : CentresOver F ((head T j).append (tail T j)) := (head_append_tail T j).symm \u25b8 h\n  exact ((centresOver_append_iff F (head T j) (tail T j)).mp h').1\n\nend\nend TranscendentalNakamaye.Pending.RestrictEmptyTower\n",
+    "destination_module": "Hironaka.Support.OriginalCentresOverAppendHeadExact",
+    "destination_path": "Hironaka/Support/OriginalCentresOverAppendHeadExact.lean",
+    "destination_sha256": "97d36412ce06f52c81937df28ac0ff26d9d014e36b5a86b7303a725794e5a426",
+    "original_type_and_proof_token_changes": 0
+  }
+]

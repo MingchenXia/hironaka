@@ -1,0 +1,105 @@
+\section{Internally chosen compatible analytic vertices and coordinate Bennett}
+
+Let $R=\mathcal O_{\mathbb C^{d+t},0}$, let $I\subset R$ be an
+original analytic ideal, and write $T$ for the actual unshifted Taylor
+map. The tangent centre is $\mathbb C^d\times\{0\}$, with actual
+normal ideal $N$. Let $V$ be the true degree-lex vertices of $T(I)$,
+let $F_a$ be the canonical reduced formal member at $a$, and put
+$w_a=\sum_{i=d}^{d+t-1}a_i$. The hypothesis in this chapter is the
+literal whole formal centre-power property
+\[
+ F_a\in\widehat N^{w_a}\qquad(a\in V).
+\]
+It is imposed on the canonical reduced members of the original ideal.
+Deriving it from constancy of the original Hilbert--Samuel function
+along a general smooth centre is a separate assertion.
+
+\begin{theorem}[Compatible analytic vertex coefficient data are internally chosen]
+\label{hir:actual-reduced-centre-compatible-analytic-vertex-data}
+\uses{hir:actual-analytic-centre-compatible-monic-vertex-family,hir:actual-analytic-vertex-coefficient-data,hir:actual-finite-local-coherent-coefficient-ideals,hir:actual-formal-normal-power-contracts-exact-original-analytic-power}
+\lean{Hironaka.HironakaActualReducedCentreBennett.exists_actual_reduced_centre_vertex_data}
+\leanok
+Under the displayed formal centre-power hypothesis there exist genuine
+analytic vertex coefficient data $P$ for the same original $I$ such
+that every actual generator satisfies $P_a\in N^{w_a}$. In particular
+these are internally chosen monic generators of the entire original
+ideal, with the actual initial exponent $a$, one genuine common tangent
+domain for their finitely many required low coefficients, and their
+entire original coefficient Taylor identities. No analytic family or
+coefficient presentation is supplied as a hypothesis.
+\end{theorem}
+\begin{proof}
+Apply the analytic centre-vertex construction to the original ideal
+and the actual normal coordinate set. It constructs actual germs
+$g_a\in I\cap C^{w_a}$ with initial exponent $a$, coefficient one at
+$a$, and whole span $I$, where $C$ is the analytic coordinate ideal.
+Their entire Taylor series belong to the corresponding whole formal
+normal powers, by the genuine coordinate Taylor map. Whole formal
+normal-power contraction therefore gives $g_a\in N^{w_a}$.
+
+The actual vertex set is finite. Put $q=\sum_{a\in V}w_a$, so that
+$w_a\le q$ for each vertex. Apply the finite actual coefficient-ideal
+construction to this same family $(g_a)$ at cutoff $q$. It chooses a
+single real open tangent neighbourhood containing zero and actual
+coefficient representatives whose entire Taylor series are the literal
+normal coefficients of $T(g_a)$. All coefficients of degree less than
+$q$ are holomorphic on this neighbourhood, generate genuine coherent
+principal germ ideals there, and belong to their original stalks.
+These conclusions hold in particular in degree less than $w_a$.
+Retain the original monicity, initial exponents, membership and whole
+generation of the same $g_a$. They give the stated genuine vertex data
+$P$, while their already proved normal-power membership is retained.
+The construction also covers an empty vertex set and weights zero.
+\end{proof}
+
+\begin{theorem}[All normalized HS orders decrease from canonical reduced centre powers]
+\label{hir:actual-reduced-centre-normalized-bennett}
+\uses{hir:actual-reduced-centre-compatible-analytic-vertex-data,hir:actual-normal-normalized-hs-le-translated-components,hir:actual-every-translated-normal-vertex-hs-bound}
+\lean{Hironaka.HironakaActualReducedCentreBennett.hilbertSamuelValue_actual_reduced_centre_normalized_le}
+\leanok
+Under the same literal formal centre-power hypothesis, for every normal
+pivot $j$, every actual chart parameter $b$, and every order $\ell$,
+the original HS value of the actual normalized-member ideal is at most
+the original HS value of $I$. No compatible analytic presentation is
+an input.
+\end{theorem}
+\begin{proof}
+Choose the genuine data $P$ by the preceding theorem, retaining
+$P_a\in I\cap N^{w_a}$. The actual exceptional quotient and zero-axis
+restriction theorem therefore bounds the HS of the actual normalized
+ideal by the HS of the entire translated normal-symbol ideal of this
+same $P$. Here the translation has pivot entry one and its other
+entries are the actual normal entries of $b$; tangent variables remain
+unchanged. This comparison uses the actual normal-unit coordinate
+equivalence and both directions of its whole ideal dictionary. The
+translated-vertex theorem for every genuine analytic vertex family
+bounds that last HS value by the original HS of the same $I$. Compose
+the two inequalities at the arbitrary order $\ell$.
+\end{proof}
+
+\begin{theorem}[Original geometric coordinate Bennett from canonical reduced centre powers]
+\label{hir:actual-reduced-centre-geometric-bennett}
+\uses{hir:actual-reduced-centre-normalized-bennett,hir:actual-normal-geometric-strict-normalized-inclusion,hir:actual-normal-blowup-codimension-one-identity}
+\lean{Hironaka.HironakaActualReducedCentreBennett.hilbertSamuelAt_actual_reduced_centre_strict_le}
+\leanok
+Let $W\subset\mathbb C^{d+t}$ be any subset, and let $I$ be its
+entire original vanishing germ ideal at zero. Suppose the canonical
+reduced formal members of this $I$ satisfy the displayed whole normal
+power condition. Then, for every normal pivot, chart parameter and
+order, the original intrinsic HS of the original geometric strict
+transform at zero is at most the original intrinsic HS of $W$ there.
+\end{theorem}
+\begin{proof}
+If $t=1$, the actual normal blowup model is the identity on the whole
+ambient space and has empty geometric exceptional locus. Its actual
+strict transform is the closure of $W$, whose entire original
+vanishing ideal is the same as that of $W$. Thus all intrinsic HS
+values are equal. Otherwise an actual normal pivot gives $t>0$, hence
+$t\ge2$. The genuine exceptional-locus theorem and the original
+exceptional product identity give whole normalized-ideal inclusion in
+the vanishing ideal of the geometric strict transform. Original HS
+antitonicity bounds its intrinsic HS by the normalized HS. Apply the
+preceding theorem to $I$ and use the original model-zero whole-stalk
+dictionary to identify the remaining HS value with the intrinsic one
+of $W$. Normal codimension zero has no pivot.
+\end{proof}

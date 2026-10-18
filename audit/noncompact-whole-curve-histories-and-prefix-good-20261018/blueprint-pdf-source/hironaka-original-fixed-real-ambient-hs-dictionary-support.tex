@@ -1,0 +1,47 @@
+\section{Original complete ambient quotient transport and fixed-real dictionary}
+
+\begin{theorem}[Every true local complex algebra equivalence preserves all original ambient jet quotients]
+\label{hir:smooth-centre-actual-whole-ambient-jet-transport}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualAmbientHS.actualLocalAmbientJetAlgEquiv,Hironaka.HironakaSmoothCentreRealDomainActualAmbientHS.actualLocalAmbientJetAlgEquiv_mk,Hironaka.HironakaSmoothCentreRealDomainActualAmbientHS.actualAmbientHS_eq_of_genuineAlgEquiv}
+\leanok
+For every genuine complex algebra equivalence $E:R\simeq_{\mathbb C}S$
+between actual local complex germ algebras, every original ideal $I$ and
+every $s\geq0$, it gives a genuine complex algebra isomorphism
+$R/(I+\mathfrak m_R^s)\simeq_{\mathbb C}
+S/(E(I)+\mathfrak m_S^s)$. Every original numerator maps to its SAME
+actual $E$ image. Thus the actual ambient Hilbert--Samuel values agree at
+every order.
+\end{theorem}
+\begin{proof}
+An actual ring equivalence preserves units and nonunits in both directions.
+The unique original maximal ideals therefore satisfy
+$E(\mathfrak m_R)=\mathfrak m_S$. The true whole ideal map preserves powers
+and sums, giving the full denominator image equality. The genuine quotient
+algebra universal property constructs the whole complex algebra isomorphism,
+with its inverse induced by the SAME original inverse map. Its actual
+quotient formula retains every original representative. Restricting its
+original algebra action to complex scalars proves equality of actual complex
+dimensions. Apply this at exponent $s=\ell+1$ to the existing ambient
+Hilbert--Samuel definition.
+\end{proof}
+
+\begin{theorem}[A fixed real nonlinear flattening retains the actual original chart-stalk ambient function]
+\label{hir:smooth-centre-fixed-real-original-ambient-hs-dictionary}
+\uses{hir:smooth-centre-actual-whole-ambient-jet-transport,hir:real-domain-fixed-flattening-all-original-whole-stalks}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualAmbientHS.fixed_real_original_whole_stalk_ambient_hs_dictionary}
+\leanok
+For the actual original coherent ideal $A$, a fixed genuine flattening
+$\Phi$, every actual target point $a\in\Phi.\mathrm{target}$ and original
+point $y=\Phi^{-1}(a)$ in its true chart source, the actual translated
+flattened origin ideal $I_a$ and the WHOLE original chart-stalk ideal
+$A_y$ have identical ambient Hilbert--Samuel functions at all orders.
+\end{theorem}
+\begin{proof}
+Use the actual original whole stalk map and comap dictionary, constructed
+from genuine finite original coherent generators and their true nonlinear
+holomorphic images on the real target. The genuine recentered nonlinear
+germ equivalence maps the entire original $I_a$ onto the original $A_y$.
+Apply the preceding whole maximal-power quotient transport. Its whole
+complex scalar map is the actual original germ pullback. No finite jet,
+ideal equality or Hilbert--Samuel comparison is supplied by a caller.
+\end{proof}

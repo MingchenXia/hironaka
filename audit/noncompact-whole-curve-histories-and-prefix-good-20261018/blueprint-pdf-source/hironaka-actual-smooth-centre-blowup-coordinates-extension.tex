@@ -1,0 +1,70 @@
+\section{Actual recentred polynomial coordinates for a smooth-centre blowup}
+
+\begin{lemma}[True monomial recentering retains the tangent block]
+\label{hir:actual-smooth-centre-monomial-recentring}
+\uses{bcalc:monomial-lift}
+\lean{Hironaka.HironakaActualSmoothCentreBlowupCoordinates.actual_smooth_centre_monomial_recentre}
+\leanok
+Let the genuine monomial blowup chart of the coordinate centre
+$\mathbb C^k\times0\subset\mathbb C^n$ have pivot $j$. Suppose the
+actual vector $v$ has $v_j=0$ and every tangent coordinate $v_i=0$
+for $i<k$. The original monomial map at $w$ is exactly the actual
+analytic polynomial blowup map with normal variables $i\ge k$ and
+parameters $b_i=v_i$, evaluated at $w-v$.
+\end{lemma}
+\begin{proof}
+In a tangent coordinate, the original map is $w_i$ and the recentred
+expression is $w_i-v_i=w_i$. At the pivot, both expressions are $w_j$
+because $v_j=0$. At any other normal coordinate, the recentred
+expression is $(w_j-v_j)(v_i+w_i-v_i)=w_jw_i$, exactly the original
+monomial coordinate. Equality in every coordinate proves the vector
+identity, including empty tangent blocks.
+\end{proof}
+
+\begin{theorem}[The original full blowup and centre regularity construct actual smooth-centre coordinates]
+\label{hir:actual-smooth-centre-blowup-coordinate-normal-form}
+\uses{hir:actual-smooth-centre-monomial-recentring,hir:actual-monomial-local-inverse-complex-injective,bcalc:snc-chart,ana:local-holomorphic-inverse}
+\lean{Hironaka.HironakaActualSmoothCentreBlowupCoordinates.exists_actual_smooth_centre_blowup_coordinates}
+\leanok
+Let $\pi:Y\to X$ satisfy the original full blowup predicate, and let
+its same centre $C$ be regular of dimension $k$ at $\pi(z)$. Then there
+are genuine target and source local holomorphic coordinate equivalences
+$\Phi$ and $\Theta$, both centred at zero, an actual pivot $j\ge k$,
+and actual parameters $b$ with $b_j=0$ and all tangent $b_i=0$, such
+that $\Phi$ flattens precisely the original centre to
+$\mathbb C^k\times0$ and
+\[
+ \Phi(e_{\pi(z)}(\pi(u)))
+ =\pi^{\mathrm{normal}}_{k,j,b}(\Theta(e_z(u)))
+\]
+throughout the entire source coordinate neighborhood. That neighborhood
+maps into the genuine target flattening domain. All coordinate source
+inclusions and the whole centre-flattening equivalence are retained.
+No normal-form, centre-compatibility or HS certificate is a premise.
+\end{theorem}
+\begin{proof}
+Unpack the original regularity to obtain a true centred flattening
+$\Phi$ of that very centre. The original full blowup universal property
+gives a genuine normal monomial chart with pivot $j\ge k$, its
+holomorphic lift, and an actual local inverse $W$ near $z$. Its complete
+square is the original map expressed in the same flattening, and the
+lift composed with $W$ is the identity on a genuine open neighborhood.
+The existing injective complex differential theorem for this actual
+monomial local inverse applies in every centre dimension. The actual
+holomorphic inverse function theorem, followed by translation by
+$-W(z)$, therefore gives a genuine centred local equivalence $\Theta$
+whose expression is $W(u)-W(z)$ on a smaller actual open neighborhood.
+At $z$, the monomial square equals the zero vector. Every tangent row
+of that square is $W(z)_i$, and its pivot row is $W(z)_j$, so these
+coordinates are all zero. Set $b=W(z)$. The preceding recentering
+identity turns the actual monomial square on the entire smaller
+neighborhood into the displayed actual polynomial square. The local
+inverse construction already places every original image in the same
+target flattening domain. Retain, without altering it, the original
+equivalence describing membership in $C$ in those coordinates.
+\end{proof}
+
+This is a coordinate producer for the original blowup along its genuine
+smooth centre. Compatibility of an original analytic ideal with that
+centre and the general positive-dimensional Bennett inequality remain
+separate mathematical assertions.

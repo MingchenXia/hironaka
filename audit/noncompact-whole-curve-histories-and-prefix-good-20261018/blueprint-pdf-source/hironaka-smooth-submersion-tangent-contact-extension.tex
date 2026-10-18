@@ -1,0 +1,161 @@
+\section{Genuine relative tangent directions and original maximal contact under submersions}
+
+\begin{lemma}[Every actual holomorphic field is tangent off a closed carrier]
+\label{hir:submersion-tangent-contact-off-carrier-field}
+\lean{Hironaka.HironakaSmoothSubmersionTangentContact.isTangentField_of_notMem}
+\uses{mc:derivative-along,mc:field-chain-rule}
+\leanok
+For an original closed carrier $N$, a true point outside $N$, an actual chart
+containing that point and actual holomorphic field coefficients, the field is
+genuinely tangent to $N$ there. No tangency or vanishing-output certificate is
+supplied.
+\end{lemma}
+\begin{proof}
+The complement of the actual closed carrier is a genuine neighbourhood of the
+point. Every holomorphic function germ, including every true field derivative,
+therefore belongs to the actual vanishing ideal of $N$: its required equality
+on nearby carrier points is vacuous on this neighbourhood. The ordinary field
+product/derivative calculus gives holomorphicity of the derivative of every
+member of the vanishing ideal, whose function is itself holomorphic. The
+original chart membership and coefficient holomorphicity are exactly the
+remaining two fields of the actual tangency definition.
+\end{proof}
+
+\begin{lemma}[A true nonzero original tangent derivative has a genuine source tangent derivative]
+\label{hir:submersion-tangent-contact-nonzero-field-lift}
+\lean{Hironaka.HironakaSmoothSubmersionTangentContact.exists_nonzero_tangentField_preimage_add,Hironaka.HironakaSmoothSubmersionTangentContact.exists_nonzero_tangentField_preimage}
+\uses{hir:submersion-tangent-contact-off-carrier-field,hir:submersion-relative-differential-actual-inverse-chain-rule,hir:submersion-adapted-whole-original-centre,hir:order-along-flat,mc:contact-hypersurface-along,hir:submersion-monomial-dimension,hir:submersion-composition-normalized-target}
+\leanok
+Only genuine submersion $f$, original closed smooth $N$, an original function
+holomorphic at $fy$, and a genuine original tangent field with nonzero
+function derivative at $fy$ internally produce a genuine holomorphic field
+at $y$ tangent to $f^{-1}N$ whose derivative of the entire pulled function is
+nonzero. Dimensions may differ and $f$ need not be surjective. No lifted field,
+chart, tangent-space or derivative comparison certificate is supplied.
+\end{lemma}
+\begin{proof}
+At a point over $N$, internally choose actual flattening coordinates of $N$.
+The original whole field/flat-partial decomposition, together with tangency,
+makes all normal-coordinate coefficient values zero at that point. A nonzero
+whole derivative therefore has a genuinely nonzero tangential partial with
+index $j<k$. Construct the true fibre-first source chart from the actual
+submersion. Its whole preimage carrier is the contiguous plane of dimension
+$t+k$, and its actual coordinate field at index $t+j$ is tangent to this
+carrier. The proved genuine function chain rule identifies its derivative of
+$u\circ f$ with the nonzero original partial.
+
+At a point outside $N$, use genuine centred ambient coordinates and regard
+the original field as tangent to the whole ambient manifold. The same whole
+flat decomposition yields a nonzero ambient partial. Its lifted coordinate
+field has the same nonzero derivative by the actual chain rule. Source field
+coefficients are holomorphic; node one makes it tangent to the true closed
+preimage carrier outside that carrier. Thus no off-carrier zeros are discarded.
+If the source is nonempty actual submersion geometry internally gives
+$m=n+t$; otherwise there is no point at which a fictitious field is demanded.
+The argument itself excludes a nonexistent nonzero derivative in dimension
+zero without introducing a false positive-dimension hypothesis.
+\end{proof}
+
+\begin{theorem}[Entire original tangent directions pull back on the whole true preimage open]
+\label{hir:submersion-tangent-contact-whole-direction-preimage}
+\lean{Hironaka.HironakaSmoothSubmersionTangentContact.isTangentDirectionAlong_preimage}
+\uses{hir:submersion-tangent-contact-nonzero-field-lift,hir:submersion-relative-differential-whole-iterations,mc:tangent-direction-along,mc:derivative-along-coherent}
+\leanok
+For original coherent $I$, original closed smooth $N$, actual submersion and
+ANY genuine original tangent direction $u$ on its true open $U$, the actual
+function $u\circ f$ is a tangent direction of the true pulled ideal along
+$f^{-1}N$ on the ENTIRE actual preimage $f^{-1}U$. This is a primitive true
+direction as intermediate input; the original-only consumer below internally
+chooses it. No source-direction or desired-preimage conclusion is assumed.
+\end{theorem}
+\begin{proof}
+Continuity gives the true preimage open. At every actual source point there,
+original tangent-direction membership puts $u$ in the actual original iterate
+$\mathcal D_N^{\mu-1}I$. Its coherence gives actual holomorphicity. Genuine
+function membership in actual ideal pullback, followed by the WHOLE iterated
+derivative identity, gives the literal source iterate membership. At EVERY
+zero of $u\circ f$ the original direction supplies a nonzero true tangent
+field derivative at the image. Apply node two, including its off-carrier
+case. These are exactly all fields of the original source tangent-direction
+structure, on the whole preimage open, not merely a chosen smaller chart.
+\end{proof}
+
+\begin{theorem}[Original maximal order internally produces a simultaneous genuine contact direction]
+\label{hir:submersion-tangent-contact-original-joint-existence}
+\lean{Hironaka.HironakaSmoothSubmersionTangentContact.isMaximalOrderAlong_preimage,Hironaka.HironakaSmoothSubmersionTangentContact.exists_joint_original_contact_direction}
+\uses{hir:submersion-tangent-contact-whole-direction-preimage,hir:smooth-relative-whole-cosupport,hir:smooth-relative-whole-ideal-thresholds,mc:tangent-direction-along-exists,mc:homogenized-along}
+\leanok
+ONLY original coherent $I$, original closed smooth $N$, positive original mark
+and a genuine maximal-order original current point over a source cosupport
+point internally produce a true original open $U$ and function $u$, with BOTH
+original and source whole tangent-direction witnesses on $U$ and $f^{-1}U$.
+Global maximal order likewise pulls back from its true relative order
+thresholds. No caller selected direction/contact/canonical/result certificate
+is supplied.
+\end{theorem}
+\begin{proof}
+The true relative cosupport preimage identity gives the actual image point in
+the original cosupport. Its real original nonmembership in order threshold
+$\mu+1$ is the original maximal-order point input. The existing original
+coherent tangent-direction existence theorem internally chooses actual $U,u$
+containing that point and gives the whole original direction. Apply node
+three to produce the source direction on its ENTIRE preimage, containing the
+original source point. If global maximal order is given, the same actual
+order-threshold equivalence at every source point proves the source global
+maximal-order property, without any finite-order or boundedness certificate.
+\end{proof}
+
+\begin{theorem}[Whole actual contact carrier and its real dimension dictionary]
+\label{hir:submersion-tangent-contact-actual-carriers}
+\lean{Hironaka.HironakaSmoothSubmersionTangentContact.contactCarrier,Hironaka.HironakaSmoothSubmersionTangentContact.contactCarrier_preimage,Hironaka.HironakaSmoothSubmersionTangentContact.positive_regular_contact_carrier_dimension,Hironaka.HironakaSmoothSubmersionTangentContact.exists_joint_contact_regular_dimensions}
+\uses{hir:submersion-tangent-contact-whole-direction-preimage,mc:contact-hypersurface-along,hir:submersion-relative-regular-geometry}
+\leanok
+For a genuine original direction $u$ on $U$, the ENTIRE source contact carrier
+is exactly the preimage of $N\cap V(u)\cap U$. At each true contact source point,
+the actual original carrier has some internally produced positive dimension
+$k$, its actual contact has dimension $k-1$, and the genuine source carrier
+and contact have dimensions $k+(m-n)$ and $(k-1)+(m-n)$ respectively. No
+caller positive dimension, contact-regularity or desired-carrier certificate
+is supplied.
+\end{theorem}
+\begin{proof}
+Literal membership in the actual preimage, intersection and composed zero
+set gives the whole set equality. Original contact regularity internally
+chooses true original carrier coordinates and produces contact dimension
+$k-1$. At a real contact point the original tangent-direction field has a
+nonzero derivative; its actual tangential flat-partial producer gives an
+index below $k$, hence $k>0$. The two genuine original regular carriers then
+have actual smooth preimages by the already proved dimension-shift producer.
+Use the whole set equality for the source contact. Its positive tangent
+codimension one is now an actual consequence, including arbitrary fibre
+dimension, rather than a guessed arithmetic formula at $k=0$.
+\end{proof}
+
+\begin{theorem}[Actual selected contacts are closed smooth carriers in their whole original opens]
+\label{hir:submersion-tangent-contact-closed-open-carriers}
+\lean{Hironaka.HironakaSmoothSubmersionTangentContact.isClosedSubmanifold_contact_in_open,Hironaka.HironakaSmoothSubmersionTangentContact.exists_joint_original_closed_contacts}
+\uses{hir:submersion-tangent-contact-actual-carriers,hir:submersion-tangent-contact-original-joint-existence,mc:contact-hypersurface-along,mc:tangent-direction-along-basic,rem:open-subset-analytic}
+\leanok
+The original-only chosen contact internally gives genuine closed smooth
+carriers in the actual original open $U$ and the ENTIRE source preimage open.
+Their whole ambient contact sets are not falsely called closed in the full
+ambient manifolds. Their true local cosupports lie on these real carriers.
+Contact coefficient restriction and independent contact-choice/higher
+canonical comparison are subsequent work.
+\end{theorem}
+\begin{proof}
+Every actual direction function is holomorphic throughout its real open from
+membership in the true coherent tangent iterate. Its zero set in that open
+is therefore closed by continuity. Intersect with the actual closed original
+carrier to get a true closed contact in the open manifold. At every actual
+contact point node five gives real regularity; the exact open-subtype
+regularity dictionary transports it into that open manifold. The SAME
+argument applies to the whole source direction produced by node three, with
+true pulled coherence and closed preimage carrier, on the whole source open.
+The actual Giraud tangent-direction support inclusion gives the entire
+relative cosupport intersection contained in each selected contact. Apply
+these producers to the genuine original-only choices of node four; no open,
+closed-carrier or support certificate is primitive. No whole coefficient
+contact restriction, canonical contact choice, higher invariant or global
+noncompact termination is inferred from these genuine contact carriers.
+\end{proof}

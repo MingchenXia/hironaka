@@ -1,0 +1,100 @@
+\section{Arbitrary genuine blowup choices have the actual smooth universal lift}
+
+\begin{lemma}[The original whole lift is the internally produced comparison conjugate]
+\label{hir:submersion-blowup-choice-actual-conjugate}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupChoiceGeometry.exists_actual_comparison_conjugate}
+\uses{hir:submersion-blowup-lift-centre,hir:general-nc-actual-highest-step-unique-lift,hir:submersion-blowup-lift-actual-lift}
+Let $f:Y^{n+r}\to X^n$ be a genuine submersion and let $\pi:D\to X$,
+$\pi':D'\to Y$ be genuine blowup choices of $C$ and $f^{-1}C$. Internally
+produce actual biholomorphisms $a:D\to\operatorname{Bl}_C X$ and
+$b:D'\to\operatorname{Bl}_{f^{-1}C}Y$ over the identity original bases.
+The actual uniquely generated universal lift for the two original choices
+is exactly $a^{-1}G_0 b$, where $G_0$ is the actual internally generated
+canonical universal lift.
+\end{lemma}
+\begin{proof}
+The original target blowup supplies the closed smooth centre and its empty
+interior. The original genuine submersion produces the same properties for
+its literal preimage. Therefore both true canonical blowups exist internally.
+Apply genuine aligned blowup uniqueness over the identity base twice. It
+constructs the actual biholomorphisms $a,b$ and their whole projection
+identities, without a supplied comparison. The map $a^{-1}G_0b$ is holomorphic
+because all three actual factors are holomorphic. Its projection is exactly
+$f\pi'$: use the inverse projection identity of $a$, the true canonical
+universal square, and the original source comparison identity of $b$.
+Actual target blowup universal uniqueness then identifies this entire map
+with the already generated actual original-choice lift. No restriction to
+the complement or density passage loses exceptional points.
+\end{proof}
+
+\begin{theorem}[Actual arbitrary-choice whole lift is a same-r global submersion]
+\label{hir:submersion-blowup-choice-global-smooth}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupChoiceGeometry.actualLift_isSubmersionOfComplement}
+\uses{hir:submersion-blowup-choice-actual-conjugate,hir:submersion-blowup-actual-universal-lift-global-submersion,hir:submersion-choice-actual-conjugate-charts}
+For these same original genuine data, the actual universal lift of ANY two
+primitive genuine target/source blowup choices is a global submersion, with
+the actual fixed $r$-dimensional complement at every point.
+\end{theorem}
+\begin{proof}
+The preceding lemma internally produces the true comparisons and proves the
+entire original-choice lift formula. The previously proved canonical global
+lift is a submersion with the fixed complement $\mathbb C^r$. Transport its
+actual maximal-atlas submersion charts through the two produced GLOBAL
+biholomorphisms, using the existing genuine conjugation theorem. This proves
+submersion of the entire original chosen lift. If the general conjugation
+theorem chooses an equivalent complement, its actual finite-dimensional
+product equivalence internally gives rank $r$; the true complement-coordinate
+isomorphism fixes the complement to $\mathbb C^r$. No comparison, local chart,
+pointwise smoothness or global smoothness conclusion is an input.
+\end{proof}
+
+\begin{theorem}[Arbitrary original dimensions, including empty sources]
+\label{hir:submersion-blowup-choice-arbitrary-dimensions}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupChoiceGeometry.actualLift_isSubmersion}
+\uses{hir:submersion-blowup-choice-global-smooth,hir:submersion-monomial-dimension}
+For a genuine submersion $f:Y^m\to X^n$ of ANY original finite dimensions and
+ANY genuine blowup choices of $C$ and its literal preimage, the internally
+generated entire universal lift is a genuine global submersion.
+\end{theorem}
+\begin{proof}
+If its actual source blowup is empty, the submersion-of-complement property
+with the zero complement has no points to check, and gives the claimed
+global submersion. Otherwise select one actual source blowup point and its
+original projected point in $Y$. The actual original submersion chart there
+contains a linear product equivalence with target $\mathbb C^n$. Its true
+finite-dimensional projection is surjective, so internally $n\le m$.
+Choose the actual natural difference $r$ with $m=n+r$, and apply the preceding
+theorem to these SAME original manifolds/maps/centres/blowup choices.
+Thus no dimension bound or nonempty-source assumption is supplied. In
+particular no $m\ge n$ assertion is made for a globally empty source.
+\end{proof}
+
+\begin{theorem}[Original geometry produces the actual complete smooth lift output]
+\label{hir:submersion-blowup-choice-original-output}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupChoiceGeometry.exists_original_smooth_blowup_lift}
+\uses{hir:submersion-blowup-choice-arbitrary-dimensions,hir:submersion-blowup-lift-existence,hir:submersion-blowup-lift-actual-lift}
+ONLY a genuine global submersion $f:Y^m\to X^n$ and a primitive genuine target
+blowup $\pi:D\to X$ internally produce a genuine source blowup of the literal
+preimage centre and its true holomorphic GLOBAL SUBMERSION lift. It satisfies
+the entire original projection square, the exact pullback identity for the
+WHOLE original centre ideal, and the literal centre-preimage divisor identity.
+\end{theorem}
+\begin{proof}
+Use the previously proved actual source-centre producer and genuine analytic
+blowup existence to choose the source blowup internally. Actual target
+universal uniqueness gives its whole holomorphic lift. The preceding theorem
+proves this SAME produced map is a global submersion of the actual original
+dimensions. The existing genuine coherent whole-ideal pullback composition
+and original vanishing-ideal preimage dictionary identify its ENTIRE
+pulled-back target blowup ideal with the actual source blowup ideal.
+The whole projection identity gives the literal centre-preimage set identity.
+All these conclusions concern the SAME internally selected source blowup
+and SAME true unique lift. No source, ideal, comparison, smoothness, Cartesian
+or result certificate is supplied. The Cartesian universal property for
+arbitrary compatible cones, higher invariant/canonical-driver functoriality
+and general G2/G3/G8 remain separate OPEN targets.
+\end{proof}

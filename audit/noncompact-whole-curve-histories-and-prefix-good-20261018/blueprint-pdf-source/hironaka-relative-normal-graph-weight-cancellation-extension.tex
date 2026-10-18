@@ -1,0 +1,37 @@
+\section{Actual parameter-power cancellation in true finite graph-jet relations}
+This OWN OFFLIB continuation applies actual integer-weight selection and natural-power reconstruction to genuine finite graph relations modulo actual normal powers. Parameter cancellation uses literal polynomial coefficient shifting, not a parameter inverse or a saturation certificate. Reverse whole analytic initial-ideal inclusion, Krull closure, nearby original cone/Rees and one ALL-order analytic free open remain OPEN.
+
+\begin{lemma}[Actual homogeneous multiplication shifts genuine weight extraction]
+\label{hir:relative-normal-graph-weight-actual-parameter-shift}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightCancellation.actualGraphWeightComponent_mul_homogeneous,Hironaka.HironakaRelativeNormalGraphWeightCancellation.actualGraphWeightComponent_parameter_power}
+\uses{hir:relative-normal-graph-weight-product-extraction,hir:relative-normal-graph-weight-substitution-zero}
+\leanok
+For a genuine weighted homogeneous polynomial $Q$ of weight $m$, actual finite extraction satisfies $\pi_w(AQ)=\pi_{w-m}(A)Q$. In particular the genuine parameter power has actual weight $N$, and $\pi_{N-k}(U^NH)=U^N\pi_{-k}(H)$ for every actual polynomial $H$ and natural $N,k$.
+\end{lemma}
+\begin{proof}
+Compare all true coefficients using finite antidiagonal multiplication. When the actual coefficient of $Q$ vanishes both corresponding terms vanish. Otherwise its exponent has genuine weight $m$. For every actual pair summing to the target exponent, actual weight additivity gives weight$(\alpha)=w-m$ exactly when the target has weight $w$. Thus the two genuine coefficient-selection predicates agree, giving the whole product identity. The actual parameter variable has weight one, and genuine graded powers give weight $N$ for its $N$th power. Apply the product identity, commutativity and the literal integer subtraction identity; all coefficients remain actual entire base germs.
+\end{proof}
+
+\begin{lemma}[Actual polynomial parameter powers cancel with a true jet-order loss]
+\label{hir:relative-normal-graph-weight-literal-parameter-cancellation}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightCancellation.actualGraphParameterExponent_degree,Hironaka.HironakaRelativeNormalGraphWeightCancellation.actualGraphPolynomial_parameter_power_cancel,Hironaka.HironakaRelativeNormalGraphWeightCancellation.actualGraphPolynomial_parameter_power_raise}
+\uses{hir:relative-normal-polynomial-jets-literal-variable-powers,hir:relative-normal-graph-weight-actual-parameter-shift}
+\leanok
+If $U^NQ$ belongs to the actual graph variable ideal to power $M$ and $N\leq M$, then $Q$ belongs to that SAME ideal to power $M-N$. Also multiplying any element of its $L$th power by $U^k$ gives an element of its genuine $(L+k)$th power. No domain or nonzero parameter hypothesis is needed.
+\end{lemma}
+\begin{proof}
+The true parameter power is the literal monomial with parameter exponent $N$ and unit coefficient. Its genuine product coefficient at that exponent plus $\alpha$ is precisely the actual coefficient of $Q$ at $\alpha$. The actual total degree of that shifted exponent is $N+\lvert\alpha\rvert$. If $\lvert\alpha\rvert<M-N$, the genuine whole power coefficient dictionary makes this coefficient vanish. The same dictionary gives $Q$ in the $(M-N)$th power. The parameter generator lies in the actual variable ideal, so its $k$th power lies in the genuine $k$th ideal power; actual product ideal membership and the true power-addition identity prove the second assertion. This includes zero coefficient rings, $N=0$, $M=N$ and no fibre variables.
+\end{proof}
+
+\begin{theorem}[The genuine finite relation internally produces its actual reconstructed diagonal congruence]
+\label{hir:relative-normal-graph-weight-reconstructed-finite-congruence}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightCancellation.actualGraph_reconstructed_finite_jet_congruence}
+\uses{hir:relative-normal-graph-weight-actual-parameter-shift,hir:relative-normal-graph-weight-literal-parameter-cancellation,hir:relative-normal-graph-weight-finite-relation-reconstruction,hir:relative-normal-graph-weight-preserves-jet-power}
+\leanok
+For any genuine finite relation $U^NH-\sum A_i\sigma(P_i)$ in the actual graph variable ideal to power $L$, internally construct $B_i=\operatorname{forget}(\pi_{N-k}A_i)$ and $Q=\sum B_iP_i$. Whenever $N\leq L+k$, the true polynomial
+\[U^k\pi_{-k}H-\sigma(Q)\]
+lies in the actual graph variable ideal to power $L+k-N$.
+\end{theorem}
+\begin{proof}
+The actual weighted component of the original relation belongs to its SAME $L$th power, by genuine power preservation. Multiply by the genuine parameter power $U^k$, obtaining actual power $L+k$. Use the first lemma on its $U^NH$ term and the existing internally reconstructed finite-relation identity on its finite product sum. Actual linearity and ring distributivity identify this whole polynomial with $U^N(U^k\pi_{-k}H-\sigma(Q))$. Apply the preceding literal parameter cancellation to this actual polynomial membership. Every coefficient polynomial $B_i$ is actually constructed from the given true finite coefficient polynomial; no reconstructed congruence or parameter-divisibility certificate is supplied. This polynomial statement will next be consumed with the internally selected original analytic finite relations; it alone does not yet identify the original analytic central ideal or nearby normal cone.
+\end{proof}

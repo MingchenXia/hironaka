@@ -1,0 +1,228 @@
+\section{Actual zero-contact remainders under contact glueing}
+
+Let $L=(N,E,I,d)$ be a marked ideal. Write $S(L)$ for the union of the
+actual global components of $N$ contained in its actual cosupport, and
+$R(L)=N\setminus S(L)$. A positive marking is essential in the following
+zero-germ characterization. No bound on dimension, component count, or ideal
+orders is imposed. Put
+\[
+ L^{\mathrm{rem},k}=(R(L),[\varnothing]^k\mathbin{+\!+}E_{\geq k},I,d).
+\]
+
+\begin{theorem}[The actual selected union is precisely the zero-germ locus]
+\label{hir:zero-contact-selected-zero-germ}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.selectedComponents_iff_not_isNonzeroAlongAt,Hironaka.HironakaStepOneZeroContactRemainderGlueing.not_isNonzeroAlongAt_iff_vanishing_stalk}
+\uses{hir:smooth-selected-components,hir:dimtwo-unselected-smooth-components}
+Suppose $N$ is closed smooth, $I$ is coherent, and $d\geq1$. At each
+$x\in N$, membership in $S(L)$ is equivalent to the failure of nonzero
+along $N$ at $x$. Equivalently every germ of $I_x$ vanishes identically
+on the germ $N_x$.
+\end{theorem}
+\begin{proof}
+The selected and remaining component unions are disjoint closed smooth
+sets with union $N$. If $x$ is selected, the complement of the remaining
+union is a neighborhood of $x$ on which every point of $N$ lies in the
+actual cosupport. A coherent ideal germ extends to a member at every
+nearby point. At a nearby point of $N$, order at least $d\geq1$ makes
+the value of this member zero. Thus no ideal member is frequently nonzero
+along $N$ near $x$.
+
+Conversely let $x$ be remaining. The actual cosupport is analytic, and
+analytic continuation on each genuine connected smooth component proves
+that its intersection with the remaining union contains no nonempty
+relatively open subset. Near every remaining point, closedness of the
+selected union makes the remaining and original carrier germs equal;
+their along-carrier order predicates therefore agree. If all ideal germs
+were zero along the remaining carrier at $x$, a finite coherent generating
+family would give a single neighborhood where all ideal members vanish
+along that carrier. This neighborhood would be contained in its cosupport,
+contradicting the preceding thinness. A germ frequently nonzero along the
+remaining carrier is also frequently nonzero along $N$.
+
+Finally, the negation of frequent nonvanishing for every ideal member says
+that each member is eventually zero along $N$. Coherence makes each member
+holomorphic. These are exactly the two requirements for membership in the
+vanishing-ideal stalk of $N$. Conversely such stalk membership contradicts
+frequent nonvanishing. This proves the zero-germ equivalence.
+\end{proof}
+
+\begin{theorem}[Actual nonzero and selected germs commute with open restriction]
+\label{hir:zero-contact-selected-open-dictionary}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.isNonzeroAlongAt_pullback_val_iff,Hironaka.HironakaStepOneZeroContactRemainderGlueing.remainingComponents_pullback_val}
+\uses{hir:zero-contact-selected-zero-germ}
+For a coherent ideal $I$, an arbitrary carrier $N$, an actual open $U$,
+and $p\in U$, nonzero along the restricted carrier for $I|_U$ at $p$
+is equivalent to nonzero along $N$ at the same ambient point. If $N$ is
+closed smooth and $d\geq1$, the remaining carrier of $L|_U$ is precisely
+the restriction of $R(L)$ to $U$.
+\end{theorem}
+\begin{proof}
+Restrict an actual nonzero germ to $U$. Coherent ideal restriction preserves
+its membership, and the open embedding identifies the neighborhood filter
+at $p$ with that at its ambient point. It therefore preserves frequent
+nonvanishing along the restricted carrier. In the reverse direction,
+extend a restricted function back to the ambient manifold. Coherent
+restriction identifies its ideal membership, while its values on $U$
+are unchanged. The same equality of neighborhood filters transfers
+frequent nonvanishing back. Apply the preceding zero-germ characterization
+to the genuinely closed smooth restricted carrier and to $N$. Since
+remaining membership means carrier membership and nonzero along, this
+gives equality of the entire remaining carriers. No assertion about
+equality of the two global component index sets is needed.
+\end{proof}
+
+\begin{theorem}[Actual nonzero and remaining germs commute with biholomorphisms]
+\label{hir:zero-contact-selected-biholomorphic-dictionary}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.isNonzeroAlongAt_pullback_diffeo_iff,Hironaka.HironakaStepOneZeroContactRemainderGlueing.remainingComponents_pullback_diffeo}
+\uses{hir:zero-contact-selected-zero-germ}
+For a biholomorphism $\Phi$, coherent $I$, arbitrary $N$, and $p$ in its
+source, nonzero along $\Phi^{-1}N$ for the actual entire pullback ideal
+at $p$ is equivalent to nonzero along $N$ at $\Phi p$. For closed smooth
+$N$ and positive marking, the remaining carrier of $\Phi^*L$ is
+$\Phi^{-1}R(L)$.
+\end{theorem}
+\begin{proof}
+Compose an actual ideal member with $\Phi$; it belongs to the entire
+coherent pullback ideal. The homeomorphism's equality of neighborhood
+filters transfers frequent nonvanishing. For the reverse implication
+apply the same argument to $\Phi^{-1}$. Genuine coherent pullback
+functoriality and the inverse identities identify the twice-pulled ideal
+with the original ideal and the twice-pulled carrier with $N$. Closed
+smoothness and coherence are preserved by this actual biholomorphism.
+The zero-germ characterization on both sides now identifies remaining
+membership at every point and hence the entire remaining carriers.
+\end{proof}
+
+\begin{theorem}[The entire remainder record commutes with actual transport]
+\label{hir:zero-contact-remainder-transport-record}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.contactRemainderMarked_pullback_val,Hironaka.HironakaStepOneZeroContactRemainderGlueing.contactRemainderMarked_pullback_diffeo}
+\uses{hir:zero-contact-selected-open-dictionary,hir:zero-contact-selected-biholomorphic-dictionary,hir:zero-contact-actual-remainder-definition}
+For closed smooth $N$, coherent $I$, positive marking and every natural
+$k$, the entire record $L^{\mathrm{rem},k}$ commutes with genuine open
+restriction and with genuine biholomorphic pullback.
+\end{theorem}
+\begin{proof}
+The preceding theorems give the exact carrier identities. The ideal and
+mark are unchanged by the remainder construction, so their identities
+follow from the definitions of actual pullback. On the boundary, taking
+preimages commutes with dropping the first $k$ entries and with list
+concatenation. The preimage of an empty set is empty, so the first $k$
+historical entries remain exactly $k$ empty entries. These four field
+identities give equality of the entire records. In particular a genuine
+whole contact-record transport induces whole remainder-record transport.
+\end{proof}
+
+\begin{theorem}[True contact lifts transport the actual remainders at every prefix]
+\label{hir:zero-contact-remainder-actual-contact-lifts}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.exists_contact_remainder_glueing}
+\uses{hir:zero-contact-remainder-transport-record,mc:glueing-data-shrink,mc:contact-independence-along}
+Suppose $K.N$ is closed smooth, $K.I$ is coherent, $K.d\geq1$, and
+$x$ is in its actual cosupport. Let $u,v$ be genuine tangent directions
+on actual opens containing $x$. There is actual glueing data $G$, with
+both neighborhoods inside both tangent opens and containing $x$, such
+that every actual test prefix $T$ of the coefficient-homogenized datum
+has an actual lifted biholomorphism transporting the entire coefficient
+contact remainder for $u$ to that for $v$, retaining every actual
+exceptional entry and adding any prescribed number of empty historical
+entries. This lift fixes the actual transformed cosupport. The padding
+does not delete exceptional entries.
+\end{theorem}
+\begin{proof}
+The actual homogenized contact construction gives glueing maps trivial
+modulo the genuine glue ideal. Intersect its open neighborhood with the
+two genuine tangent opens. The inverse identities, ideal invariance,
+contact-coordinate identity, carrier invariance and trivial action
+restrict to this intersection. Both actual glueing neighborhoods are
+therefore contained in the two tangent opens and contain $x$, since the
+maps fix the original cosupport.
+
+For every actual coefficient-homogenized test prefix, the genuine
+universal-property lifting construction produces a biholomorphism of
+the two inverse-image neighborhoods, whole transformed coefficient-ideal
+transport, whole contact-record transport, and pointwise fixation of
+the actual transformed cosupport. The true contact-stage coordinate
+theorem, applied inside the actual tangent opens, produces closed smooth
+strict contact carriers on both neighborhoods. The transformed coefficient
+ideal is coherent by the actual coherent coefficient construction and
+the actual test tower; its marking is positive by the genuine factorial
+coefficient marking. Thus all premises of whole remainder-record
+transport have been produced internally. Apply it to the actual whole
+contact-record equality for each $k$. This preserves the actual
+exceptional boundary and exactly the padded historical positions.
+It imposes no equality on undeleted original boundary members.
+\end{proof}
+
+\begin{theorem}[The padded datum is exactly the original boundary-kept contact remainder]
+\label{hir:zero-contact-remainder-literal-history-dictionary}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.contactRemainderMarked_contactMarkedKept_emptyE}
+\uses{hir:zero-contact-actual-remainder-definition,hir:drop-original-members}
+At every tower prefix, restricting the contact datum of the coefficient
+homogenization with empty initial boundary, removing its actual selected
+components, and padding $\#K.E$ empty entries gives exactly the actual
+remainder of the original boundary-kept contact datum with its first
+$\#K.E$ entries replaced by empty entries.
+\end{theorem}
+\begin{proof}
+Initially the coefficient homogenization with empty initial boundary
+is the original bar datum with all original boundary entries dropped.
+The actual map-and-append transformation recursion commutes with dropping
+these entries: new exceptional entries are appended after the original
+block, whose length persists at every prefix. The coefficient operation
+and actual open restriction preserve the carrier, ideal and mark
+identities; taking preimages of boundary members commutes with dropping.
+The two actual contact records consequently have the same carrier,
+ideal, mark and cosupport, and their boundaries differ precisely by
+dropping the original block. They select precisely the same actual
+contact components. Padding the dropped contact datum by the original
+number of empty entries gives the defined original contact remainder
+in all four fields. No exceptional entry is dropped by this padding.
+\end{proof}
+
+\begin{theorem}[Original chosen contact inputs produce the actual remainder glueing]
+\label{hir:zero-contact-remainder-original-chosen-glueing}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactRemainderGlueing.exists_actual_chosen_contact_remainder_glueing}
+\uses{hir:zero-contact-remainder-actual-contact-lifts,hir:zero-contact-remainder-literal-history-dictionary,hir:step-one-bridge,hir:step-one-lower-domain}
+Let $K$ have its actual domain-three and maximal-order properties, and
+let $R$ be a canonical sequence for its literal constructed Step One
+invariant. The genuine chosen contact directions at original cosupport
+points $x,y$, with $x$ inside the actual chosen tangent open at $y$,
+internally produce whole remainder dictionaries for the SAME original
+boundary-kept contact records, with their historical block replaced by
+empty entries, along every literal prefix of $R$. The same actual contact maps and
+actual lifts fix the original transformed cosupport.
+\end{theorem}
+\begin{proof}
+The actual domain gives coherent ideal, closed smooth carrier, positive
+marking and well-formedness. Maximal order at the actual original
+cosupport points produces tangent directions, so the literal chosen
+directions are genuine and their opens contain their own points. The
+stated actual incidence puts $x$ in the second chosen open as well.
+Hence the preceding construction applies to these two actual directions,
+without any caller-supplied contact-domain or glueing witness.
+
+The genuine Step One canonical bridge internally makes the literal
+sequence a test sequence for its actual bar datum. Deleting only its
+initial historical boundary gives a true test sequence for the
+coefficient-homogenized datum, whose carrier, ideal and marking have
+the same literal transformation recursion. Every literal prefix inherits
+this genuine test property. Apply the preceding actual lifts at each
+prefix, and identify the bar and coefficient-homogenized transformed
+cosupports by the genuine weak-equivalence and Step One bridge. This
+gives precisely the stated joint whole record dictionaries and pointwise
+fixation on the actual original cosupport. No enlarged remainder
+canonicality has been used or asserted.
+\end{proof}
+
+\paragraph{Scope.}
+The conclusions are actual local contact transport and entire remainder
+record dictionaries. Canonicality on enlarged contact neighborhoods,
+deeper zero-contact histories, descent of all zero-level thresholds
+across contact patches, whole General Three analytic superlevels and
+general noncompact global termination remain open.

@@ -1,0 +1,63 @@
+\section{Stopped terminal identifications and actual open restriction}
+
+\begin{theorem}[Every genuine open prefix flattening preserves the same stopped terminal point]
+\label{hir:sharp-actual-curve-stopped-prefix-open-terminal-square}
+\uses{hir:sharp-actual-curve-stopped-prefix-terminal-biholomorphism,hir:sharp-actual-stagewise-tower-comparison-unique,hir:sharp-actual-identity-empty-padding-comparison,mc:tower-isomorphism-restrict-append}
+\lean{Hironaka.HironakaSharpActualCurveStoppedPrefixOpenNaturality.stoppedPrefix_open_terminal_square}
+\leanok
+Let $T$ be a genuine finite blowup history, $U$ a genuine original base
+open, and $k$ at least the literal length of $T$. Any actual full
+stagewise open-prefix flattening from the $k$th uniform prefix of
+$T|_U$ to the restriction of the $k$th uniform prefix of $T$ has this
+ENTIRE terminal square: identifying its image with the SAME original
+terminal point gives exactly the underlying terminal point of the
+stopped restricted prefix. No desired point formula or terminal
+compatibility certificate is assumed.
+\end{theorem}
+\begin{proof}
+Restrict the actual stopped-prefix whole-history isomorphism of $T$ to
+$U$. This is a genuine stagewise isomorphism between the restricted
+uniform prefix and the restriction of $T$ followed by its literal empty
+identity tail. Its terminal map on underlying points is precisely the
+actual stopped terminal identification. Actual concatenation restriction
+and actual identity-tail restriction identify the latter history with
+$T|_U$ followed by exactly the SAME number of empty identity steps. The
+two terminal flattenings in this construction are identities on the
+underlying terminal points, and all original positions remain present.
+
+Compose the given actual prefix flattening with those genuine
+isomorphisms. Its whole source history is the uniform prefix of $T|_U$,
+and its target history is $T|_U$ followed by $k-\operatorname{length}(T)$
+identity steps. Genuine open restriction preserves literal length, so
+this is exactly the target of the independently constructed stopped
+restricted-prefix isomorphism. Real fixed-history universal uniqueness
+identifies these TWO entire terminal maps. Evaluate at an arbitrary
+actual point and pass to the underlying original terminal manifold.
+The true underlying-point identities of open restriction, concatenation
+flattening and identity-tail flattening give the claimed exact square.
+No projection injectivity or removal of exceptional points is used.
+\end{proof}
+
+\begin{theorem}[The actual unique open-prefix flattening has its terminal square internally]
+\label{hir:sharp-actual-curve-stopped-prefix-open-terminal-natural}
+\uses{hir:sharp-actual-curve-stopped-prefix-open-terminal-square,hir:sharp-actual-curve-uniform-prefix-open-restriction}
+\lean{Hironaka.HironakaSharpActualCurveStoppedPrefixOpenNaturality.exists_unique_stoppedPrefix_open_restriction}
+\leanok
+For ONLY a genuine finite history, original base open and actual stopped
+stage, the genuine open-prefix construction internally supplies the
+unique full stagewise flattening, together with the exact ENTIRE stopped
+terminal square of the preceding theorem. No flattening, open endpoint
+identity, terminal map compatibility or numerical certificate is input.
+\end{theorem}
+\begin{proof}
+The genuine uniform-prefix restriction producer constructs its unique
+stagewise flattening from actual append restrictions and actual split
+restrictions, retaining every original and auxiliary empty position.
+Apply the preceding theorem to this internally supplied genuine
+flattening and its actual whole-history isomorphism. This proves its
+entire terminal square. A competing flattening with both conclusions
+is in particular an actual full-history flattening on the SAME two
+histories, so the original producer's full uniqueness identifies it
+with the constructed one. Thus the complete strengthened existence
+and uniqueness follow, without a supplied point-square witness.
+\end{proof}

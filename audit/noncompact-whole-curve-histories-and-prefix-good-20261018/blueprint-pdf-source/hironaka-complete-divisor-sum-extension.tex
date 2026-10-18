@@ -1,0 +1,90 @@
+\section{Actual component sums in canonical principalization}
+
+\begin{definition}[Finite sum of genuine connected boundary components]
+\label{hir:finite-connected-component-sum-contract}
+\uses{hir:connected-boundary-components,hir:component-product-effective-sum}
+\lean{Hironaka.HironakaCompleteDivisorSum.HasFiniteComponentSum}
+\leanok
+For an effective divisor $D$ and a finite SNC boundary $E$, a finite component
+sum consists of a distinct finite list $F$ of actual connected components of
+members of $E$, still SNC, and a weighted list $A$ with underlying list $F$.
+Each member is a closed smooth hypersurface and
+\[
+ D=\sum_{(C,a)\in A}a[C],\qquad
+ \operatorname{divExp}(\mathcal I_D,C,x)=a\quad(x\in C).
+\]
+The sum is the actual sum of effective Cartier divisors constructed by
+ideal products, and the equality is equality of those divisors. A coefficient
+may be zero when a boundary component merely meets the support of $D$.
+\end{definition}
+
+\begin{theorem}[Complete sum on a finite connected SNC list]
+\label{hir:complete-finite-connected-divisor-sum}
+\uses{hir:component-factorization-original-coefficients,hir:component-product-effective-sum}
+\lean{Hironaka.HironakaCompleteDivisorSum.exists_componentSum}
+\leanok
+Let $F$ be a distinct finite SNC list of closed connected smooth
+hypersurfaces. Every effective divisor supported in $|F|$ is its actual
+weighted component sum, with weights equal to the original divisor exponents
+at every point of each component.
+\end{theorem}
+\begin{proof}
+The complete factorization producer constructs the weighted list $A$, proves
+$\mathcal I_D=\prod_{(C,a)\in A}\mathcal I_C^a$, and computes its coefficients
+as the original exponents. The supplied actual closed codimension-one
+geometry constructs each Cartier divisor $[C]$. The genuine finite sum has
+exactly this ideal product. Equality of the invertible ideal determines the
+effective divisor, giving the required sum equality and retaining the
+computed exponents. Nothing about factorization or coefficient identification
+is required from the caller.
+\end{proof}
+
+\begin{theorem}[Complete component sum for compact support]
+\label{hir:compact-supported-complete-divisor-sum}
+\uses{hir:complete-finite-connected-divisor-sum,hir:compact-connected-boundary-refinement}
+\lean{Hironaka.HironakaCompleteDivisorSum.hasFiniteComponentSum_of_isCompact_support}
+\leanok
+Let $D$ have compact support contained in an arbitrary finite SNC boundary
+$E$. Then $D$ has a finite component sum in the preceding sense, even if
+the ambient manifold and the original boundary members are noncompact or
+disconnected. This holds also in dimension zero.
+\end{theorem}
+\begin{proof}
+In positive ambient dimension, the actual connected-component family of $E$
+is locally finite. Compactness selects a finite distinct list of its members
+meeting $\operatorname{Supp}D$. The coordinate refinement theorem makes that
+list SNC and each member a closed connected smooth hypersurface. The union
+of the selected list agrees with the original boundary on the compact
+support, so it contains the support of $D$. Apply the preceding complete
+sum producer. In dimension zero, no SNC member can contain a point: its
+adapted singleton coordinate would lie in the empty coordinate index set.
+Thus $\operatorname{Supp}D$ is empty, its actual ideal is the unit ideal,
+and $D$ is the empty sum. Empty ambient spaces and empty lists are covered
+by the same argument.
+\end{proof}
+
+\begin{theorem}[Canonical principalization with the actual divisor sum]
+\label{hir:canonical-principalization-complete-divisor-sum}
+\uses{hir:canonical-elementary-principalization-boundary,hir:compact-supported-complete-divisor-sum}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaCompleteDivisorSum.exists_canonical_principalization_componentSum}
+\leanok
+Canonical principalization of a coherent ideal with nonzero stalks and
+compact zero locus, relative to any initial SNC boundary, has its actual
+effective divisor equal to a finite sum of genuine connected components
+of the newly created boundary. Its coefficients are the original divisor
+exponents. The same tower retains admissibility, the complete pullback ideal
+identity, both support identities, the isomorphism off the zero locus,
+canonicality, open restriction, and biholomorphism compatibility.
+\end{theorem}
+\begin{proof}
+Construct the actual canonical principalization tower with all these
+conclusions. Its projection is proper, so the preimage of the compact zero
+locus is compact. This is exactly the support of its effective divisor.
+The newly created boundary is the sublist obtained by dropping the
+transforms of the initial members; a sublist of an SNC list is SNC, and
+its union is the actual divisor support. Apply the compact-support sum
+producer to that divisor and that sublist. Append its genuine component
+sum to the conclusions of the very same tower. This uses no compactness
+of the initial boundary and no assumption identifying product coefficients.
+\end{proof}

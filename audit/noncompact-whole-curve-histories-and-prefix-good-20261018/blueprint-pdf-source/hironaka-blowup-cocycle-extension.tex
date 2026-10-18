@@ -1,0 +1,56 @@
+\section{Actual comparison cocycles for a common blowup centre}
+
+The universal property of the analytic blowup supplies unique comparison maps.
+For gluing, these maps must be produced simultaneously with their cocycle
+identities. This section proves that step for a family of genuine blowups of
+the same centre; alignment of centres of independently chosen local canonical
+towers and analytic manifold descent remain separate obligations.
+
+\begin{theorem}[The actual holomorphic comparison cocycle]
+\label{hir:actual-blowup-comparison-cocycle}
+\uses{hir:blowup-tower}
+\lean{Hironaka.HironakaBlowupComparisonCocycle.exists_comparison_cocycle}
+\leanok
+Let $(\pi_i:Y_i\to X)_{i\in I}$ be any family of actual blowups along the
+same closed smooth centre $C$. There are bijective holomorphic maps
+$f_{ij}:Y_i\to Y_j$ satisfying
+\[
+ \pi_j f_{ij}=\pi_i,\qquad f_{ii}=\mathrm{id},\qquad
+ f_{jk}f_{ij}=f_{ik}\quad(i,j,k\in I).
+\]
+No comparison maps or cocycle identities are required as inputs.
+\end{theorem}
+\begin{proof}
+For each pair $(i,j)$, the universal property of the actual blowup $Y_j$
+applied to $\pi_i$ produces a unique holomorphic map $f_{ij}$ over $X$.
+The comparison in the opposite direction is an inverse: both composites
+are holomorphic maps of the respective blowup over $X$, and uniqueness
+identifies each with the identity. Consequently every $f_{ij}$ is bijective.
+Choose these actual maps simultaneously over all pairs. The identity is
+itself a holomorphic comparison from $Y_i$ to itself, so uniqueness gives
+$f_{ii}=\mathrm{id}$. The composite $f_{jk}f_{ij}$ is holomorphic, and
+$\pi_k f_{jk}f_{ij}=\pi_j f_{ij}=\pi_i$. It is therefore the unique
+comparison from $Y_i$ to $Y_k$, which gives the displayed cocycle. This
+argument applies to arbitrary index sets and needs neither finiteness nor
+compactness.
+\end{proof}
+
+\begin{theorem}[Biholomorphic comparison data with the actual cocycle]
+\label{hir:actual-blowup-biholomorphism-cocycle}
+\uses{hir:actual-blowup-comparison-cocycle}
+\lean{Hironaka.HironakaBlowupComparisonCocycle.exists_biholomorphism_cocycle}
+\leanok
+Under the same geometric hypotheses, there are actual biholomorphisms
+$\Phi_{ij}:Y_i\simeq Y_j$ with inverse $\Phi_{ji}$, commuting with the
+actual blowup projections, whose underlying maps satisfy the identity
+and triple-overlap cocycle.
+\end{theorem}
+\begin{proof}
+Use the produced maps $f_{ij}$ and $f_{ji}$ as the forward and inverse
+maps. The cocycle with indices $(i,j,i)$, followed by the identity result,
+gives $f_{ji}f_{ij}=\mathrm{id}_{Y_i}$; the indices $(j,i,j)$ give the
+other inverse equality. Both maps are holomorphic by the preceding theorem,
+so these data define an actual biholomorphism $\Phi_{ij}$. Its projection,
+identity, inverse and cocycle assertions are precisely the already proved
+equalities of those actual maps.
+\end{proof}

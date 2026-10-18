@@ -1,0 +1,102 @@
+\section{Actual whole division by the canonical reduced standard basis}
+
+The earlier division constructs arbitrary monic vertex members of the actual
+whole ideal. Those members need not have the same selected-centre orders as
+the canonical reduced members. We therefore perform the actual recursion for
+a specified monic family, then instantiate it with the internally constructed
+canonical reduced basis. The construction follows the standard-basis division
+in \cite{bierstone-milman03-desingularization-algorithms}, Section 6.3. This chapter does not infer centre compatibility
+from an arbitrary monic choice or construct a semicoherent presentation.
+
+\begin{theorem}[Whole division by an actual monic vertex family]
+\label{hir:actual-monic-vertex-family-whole-division}
+\source{bierstone-milman03-desingularization-algorithms}
+\uses{hir:actual-formal-vertex-division-identity,hir:actual-formal-ideal-initial-diagram-upper}
+\lean{Hironaka.HironakaActualReducedBasisDivision.ActualMonicVertexFamily,Hironaka.HironakaActualReducedBasisDivision.familyDivisionCoefficient,Hironaka.HironakaActualReducedBasisDivision.familyDivisionCoefficient_eq,Hironaka.HironakaActualReducedBasisDivision.familyFormalQuotient,Hironaka.HironakaActualReducedBasisDivision.familyFormalRemainder,Hironaka.HironakaActualReducedBasisDivision.familyFormalQuotient_support,Hironaka.HironakaActualReducedBasisDivision.familyFormalRemainder_coefficient_diagram,Hironaka.HironakaActualReducedBasisDivision.family_formal_vertex_division,Hironaka.HironakaActualReducedBasisDivision.familyFormalRemainder_eq_zero_of_mem,Hironaka.HironakaActualReducedBasisDivision.family_formal_ideal_member_division,Hironaka.HironakaActualReducedBasisDivision.family_formal_ideal_eq_span_vertex_series}
+\leanok
+Let $I\subset\mathbb C[[x]]$ have its genuine initial diagram and actual
+vertices. For each actual vertex $a$, let $B_a\in I$ have coefficient one
+at $a$ and zero coefficients strictly below $a$. Every formal $F$ has
+internally constructed series $Q_a,R$ satisfying
+\[
+ F=\sum_a Q_aB_a+R,
+\]
+with the actual disjoint owner-part support for each $Q_a$ and zero
+coefficients of $R$ on the entire actual diagram. If $F\in I$, then
+$R=0$, and the $B_a$ generate the whole ideal.
+\end{theorem}
+\begin{proof}
+Use the already constructed actual owner partition of the whole diagram.
+At exponent $c$, define the correction coefficient by well-founded
+recursion: subtract all finite antidiagonal products whose quotient
+exponent plus its owner vertex is strictly below $c$. Put the correction
+in that owner's quotient, or in the remainder if no owner exists.
+For each antidiagonal product, the monic coefficient supplies the owner
+term at $c$; the remaining terms are exactly the recursive tail. Terms
+whose source vertex would lie above their second exponent vanish by the
+assumed genuine lower coefficients. Summing all actual owners proves the
+identity coefficient by coefficient. If $F\in I$, the finite product sum
+lies in $I$, hence so does $R$. A nonzero such $R$ would have its genuine
+initial exponent in the diagram, contradicting its vanishing there.
+Whole ideal generation follows in both directions.
+\end{proof}
+
+\begin{theorem}[The same actual canonical normal representative]
+\label{hir:actual-monic-family-canonical-remainder}
+\uses{hir:actual-monic-vertex-family-whole-division,hir:actual-formal-normal-representative-unique}
+\lean{Hironaka.HironakaActualReducedBasisDivision.familyFormalRemainder_eq_canonical}
+\leanok
+The actual remainder produced by any such family is exactly the previously
+constructed canonical normal representative of the same class modulo $I$.
+\end{theorem}
+\begin{proof}
+The whole division identity puts $F-R$ in $I$. Its actual remainder
+coefficients vanish on the diagram. Apply uniqueness of the canonical
+normal representative to these two already proved properties. No equality
+of arbitrary chosen monic representatives is required.
+\end{proof}
+
+\begin{theorem}[Actual selected-centre filtration of the same quotients]
+\label{hir:actual-monic-family-centre-power-division}
+\uses{hir:actual-monic-vertex-family-whole-division,hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualReducedBasisDivision.familyDivisionCoefficient_eq_zero_of_weight_lt,Hironaka.HironakaActualReducedBasisDivision.familyFormalQuotient_coefficient_weight_bound,Hironaka.HironakaActualReducedBasisDivision.familyFormalRemainder_coefficient_weight_bound,Hironaka.HironakaActualReducedBasisDivision.family_formal_ideal_member_weighted_division,Hironaka.HironakaActualReducedBasisDivision.familyFormalQuotient_mem_coordinate_power}
+\leanok
+Let $P_A$ be the actual coordinate ideal of a selected subset and write
+$w_A(a)$ for its literal exponent weight. If $B_a\in P_A^{w_A(a)}$
+for every actual vertex and $F\in I\cap P_A^q$, then the very same whole
+division quotients satisfy $Q_a\in P_A^{q-w_A(a)}$.
+\end{theorem}
+\begin{proof}
+The actual coordinate-power kernel translates the hypotheses into lower
+coefficient vanishing. Induct along the very same well-founded recursion.
+In a nonzero tail product, the second factor has weight at least the
+owner vertex weight. Its first exponent plus the owner vertex therefore
+has weight at most the total exponent. At a total weight below $q$ the
+induction hypothesis kills its correction coefficient. Thus every
+correction coefficient below $q$ vanishes. The quotient's actual owner
+formula shifts this bound by the vertex weight. Translate it back through
+the entire coordinate-power kernel. Power zero and empty coordinate blocks
+are covered by the same argument.
+\end{proof}
+
+\begin{corollary}[Internally supplied canonical reduced family]
+\label{hir:actual-reduced-basis-entire-filtered-division}
+\uses{hir:actual-reduced-formal-vertex-members,hir:actual-monic-family-canonical-remainder,hir:actual-monic-family-centre-power-division}
+\lean{Hironaka.HironakaActualReducedBasisDivision.actualReducedVertexFamily,Hironaka.HironakaActualReducedBasisDivision.actual_reduced_basis_entire_division,Hironaka.HironakaActualReducedBasisDivision.actual_reduced_basis_entire_filtered_division}
+\leanok
+Use the actual reduced members $G_a=X^a-R_I(X^a)$ of the same whole ideal.
+They internally supply every monic-family hypothesis above. Hence there
+is genuine whole division by these very reduced members, with the same
+canonical remainder and the asserted centre-power quotient bounds whenever
+their actual selected-centre powers hold.
+\end{corollary}
+\begin{proof}
+The previous construction proves actual ideal membership, coefficient one
+at the genuine vertex, and vanishing below it for every $G_a$. These are
+exactly the three inputs to the actual recursion, with no supplied quotient,
+normal form, generation certificate or filtered division. Substitute this
+internally constructed family in the preceding theorems. Actual original
+coefficient cosupports can supply the remaining centre-power hypotheses by
+the separate coefficient-presentation producer; general presentation
+construction and Bennett inequalities are still separate obligations.
+\end{proof}

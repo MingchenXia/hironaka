@@ -1,0 +1,74 @@
+\section{The genuine glued endpoint projection and its saturated ranges}
+
+All maps below are constructed from the actual sharp finite-history gluing
+core. No quotient projection, local range, embedding-overlap dictionary or
+holomorphic transition certificate is an input. The initial covering recipe
+family from only original curve data remains a separate construction.
+
+\begin{theorem}[The actual local projections descend uniquely]
+\label{hir:sharp-actual-endpoint-glued-projection}
+\uses{hir:sharp-actual-endpoint-topcat-glue-core,hir:sharp-actual-endpoint-transition-projection}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveGluedProjection.localProjection,Hironaka.HironakaSharpActualCurveGluedProjection.localProjection_compatible,Hironaka.HironakaSharpActualCurveGluedProjection.gluedProjection,Hironaka.HironakaSharpActualCurveGluedProjection.gluedProjection_local,Hironaka.HironakaSharpActualCurveGluedProjection.gluedProjection_unique}
+The actual endpoint projections construct a genuine continuous map from the
+actual glued topological space to the original ambient manifold. Its value
+on every actual local inclusion is exactly the original prefix/tail
+projection, and it is the unique continuous map with these exact values.
+\end{theorem}
+\begin{proof}
+Bundle each real holomorphic composite local projection as a continuous map.
+The proved actual transition projection square supplies compatibility for
+every literal overlap object in the genuine gluing diagram. Its true
+multicoequalizer universal property constructs a continuous descended map.
+The actual component equation gives its exact value at every included local
+point. For uniqueness, write every actual glued point using the proved
+joint surjectivity of the true local inclusions and use the exact component
+value there. No assumed projection square is used to create the gluing maps.
+\end{proof}
+
+\begin{theorem}[The actual local inclusion range is the whole saturated projection open]
+\label{hir:sharp-actual-endpoint-saturated-local-range}
+\uses{hir:sharp-actual-endpoint-glued-projection,hir:sharp-actual-endpoint-projection-overlap}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveGluedProjection.localInclusion_range}
+For every actual chart, the ENTIRE range of its local open embedding equals
+the inverse image of its original base open under the genuine glued
+projection. No projection-surjectivity or range certificate is required.
+\end{theorem}
+\begin{proof}
+An included local point projects to its actual original open by the genuine
+first prefix projection, proving one inclusion. Conversely, represent an
+actual glued point by a true endpoint point from any actual chart, using
+the real joint-surjectivity theorem. If its genuine glued projection lies
+in the requested original open, the local projection equation says exactly
+that this representative is in the actual transition domain to the
+requested chart. The actual transition gives a point in that chart, and
+the genuine gluing relation identifies its inclusion with the original
+point. This supplies an actual preimage in the requested local inclusion,
+proving the full reverse inclusion, not merely a local containment.
+\end{proof}
+
+\begin{theorem}[True embedding overlaps carry the actual biholomorphic transitions]
+\label{hir:sharp-actual-endpoint-embedding-overlap}
+\uses{hir:sharp-actual-endpoint-saturated-local-range,hir:sharp-actual-endpoint-transition-cocycle}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveGluedProjection.embeddingOverlap_eq,Hironaka.HironakaSharpActualCurveGluedProjection.transition_inclusion,Hironaka.HironakaSharpActualCurveGluedProjection.embeddingTransition,Hironaka.HironakaSharpActualCurveGluedProjection.embeddingTransition_inclusion}
+The actual overlap of two local open embeddings is exactly the genuine
+projection-defined overlap open. On these true embedding overlaps,
+construct the real biholomorphism whose two included points are literally
+equal in the actual glued space.
+\end{theorem}
+\begin{proof}
+Membership in an actual embedding overlap means that the included point
+lies in the entire range of the second embedding. The proved saturated
+range dictionary and exact local projection equation identify this in BOTH
+directions with the projection-defined overlap predicate. Equal-open
+biholomorphisms therefore identify the two true embedding overlaps with
+the original transition domains. Conjugate the actual OLD transition by
+these genuine equal-open biholomorphisms. Both inverse maps and both
+holomorphic directions are real. The original gluing condition, evaluated
+at the corresponding actual endpoint point, gives exact equality of their
+included points. These are the real transition data needed for subsequent
+lifted complex charts; no separation, countability or complex manifold
+structure is concluded here.
+\end{proof}

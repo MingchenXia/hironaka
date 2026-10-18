@@ -1,0 +1,236 @@
+\section{Actual NC separation on an open set after deleting genuine empty steps}
+\label{sec:hironaka-normal-crossings-open-restriction-separation}
+
+A global highest stratum can miss an entire open region. Its actual restricted
+blowup is then an isomorphism with an empty centre, while the independent local
+procedure may already have stopped. Therefore full restricted tower lengths
+and unfiltered boundary lists need not agree. The comparison below internally
+records every actual empty step and deletes exactly these steps and their actual
+empty exceptional entries. It assumes no compressed tower, maximum history,
+termination or naturality certificate.
+
+\begin{lemma}[Actual intrinsic original count on an open manifold]
+\label{hir:general-nc-open-original-intrinsic-count}
+\uses{hir:general-nc-biholomorphic-intrinsic-multiplicity,hir:general-nc-whole-biholomorphic-carrier-pair}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.boundaryAdapted_open,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.branchMultiplicity_open,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.superlevel_branchMultiplicity_open,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.boundaryAdapted_open_embedding,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.branchMultiplicity_open_embedding}
+\leanok
+The literal open preimage of a whole boundary-adapted NC pair is a genuine
+boundary-adapted pair. Every actual original branch count and entire count-r
+superlevel on the open manifold is the corresponding literal original trace.
+The same dictionary holds under a genuine biholomorphism onto that open set.
+\end{lemma}
+\begin{proof}
+In the actual inherited open chart, the derivative of the open inclusion is
+the identity. Hence it has no exceptional differential point. The genuine
+local coordinate reader constructs actual pulled-back flat coordinates for
+the entire original carrier and every literal indexed boundary member. The
+same finite set of actual normal branch coordinates computes both intrinsic
+counts, giving equality at every point. Whole superlevel equality follows
+pointwise for every natural r. Compose this dictionary with the actual
+biholomorphic local-base dictionary; no branch labels or count identity are
+supplied.
+\end{proof}
+
+\begin{lemma}[Actual highest-centre trace and drop dichotomy]
+\label{hir:general-nc-open-highest-trace-dichotomy}
+\uses{hir:general-nc-open-original-intrinsic-count,hir:general-nc-biholomorphic-whole-highest-centre}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.count_le_pred_of_empty_highest_trace,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.attained_local_maximum_eq_of_nonempty_highest_trace}
+\leanok
+At an actual global higher step with internally attained maximum r, the whole
+current centre trace on the actual open preimage is empty or nonempty. If it
+is empty, all actual local original counts are at most r-1. If nonempty, the
+internally attained local maximum equals r and the entire local highest centre
+is the literal global centre trace.
+\end{lemma}
+\begin{proof}
+Every local count is at most r by the genuine original count dictionary. If
+the whole trace is empty, no actual point has count at least r, so its integer
+count is at most r-1. If nonempty, a true trace point has count at least r and
+therefore exactly r. The actual local count image thus has attained maximum r.
+The genuine maximum uniqueness theorem identifies the internally selected
+local maximum with r. Exact pointwise count transport identifies their entire
+highest centres. This includes disconnected opens omitting every global
+highest component and uses no compactness or preassigned drop history.
+\end{proof}
+
+\begin{lemma}[True empty-centre blowup and whole closed carrier]
+\label{hir:general-nc-open-actual-empty-blowup-isomorphism}
+\uses{hir:general-nc-actual-highest-step-unique-lift,hir:general-nc-actual-highest-step-pair-transport}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.exists_empty_blowup_biholomorphism,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.empty_blowup_whole_closed_dictionary}
+\leanok
+A genuine blowup of an actual empty centre internally gives a biholomorphism
+with its original base. Every whole closed original and old boundary is its
+entire preimage under this map, and the new actual exceptional boundary is empty.
+\end{lemma}
+\begin{proof}
+The identity map is a genuine blowup of the empty centre, by its true analytic
+universal property. Actual blowup uniqueness compares the given blowup and
+this identity in both directions. Their composites are identities by the same
+universal uniqueness, so the given projection is genuinely biholomorphic.
+Its actual derivative is bijective everywhere. The differential strict
+transform of a closed carrier is therefore its entire preimage. Its geometric
+strict transform off the empty centre is the same closed preimage. The whole
+exceptional centre preimage is literally empty. Thus the local original and
+its intrinsic count are unchanged under the real isomorphism.
+\end{proof}
+
+\begin{definition}[Actual stage compression with only empty source steps]
+\label{hir:general-nc-open-actual-stage-compression}
+\uses{hir:general-nc-open-actual-empty-blowup-isomorphism,hir:blowup-tower}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression}
+\leanok
+A stage compression relates two actual recorded towers over a genuine base
+biholomorphism. Its reflexive stage is that base map. A matched stage appends
+actual source and target blowups with exact whole centre preimage and a true
+commuting projection square. A silent source stage appends a genuine source
+blowup whose actual centre is empty, keeps the real target prefix, and records
+its actual biholomorphic projection square. No other steps are omitted.
+\end{definition}
+
+\begin{lemma}[Actual projection, concatenation and retained lengths]
+\label{hir:general-nc-open-actual-compression-algebra}
+\uses{hir:general-nc-open-actual-stage-compression}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.proj_comm,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.length_le,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.append,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.source_iso}
+\leanok
+Actual stage compressions commute with full projections and concatenate along
+actual recorded heads and tails. Genuine source tower isomorphisms transport
+them by their actual stage maps. The retained source-stage count equals the
+actual target length and is at most the uncompressed source length.
+\end{lemma}
+\begin{proof}
+Induct on the last recorded constructor. At the reflexive stage all equalities
+are identities. A matched stage adds the true projection square after the
+previous projection equality and adds one retained stage on both sides. A
+silent stage adds only its actual source projection and no retained stage.
+For concatenation induct on the tail compression: its matched constructor
+appends paired real blowups to the already concatenated shorter comparisons;
+its silent constructor appends only its real empty source step. For source
+tower isomorphisms, invert the actual last-stage isomorphism and transport the
+whole centre and commuting square. An empty source centre remains empty under
+an actual biholomorphism. This gives the transported compression in both
+constructors. In particular the actual restriction-append tower isomorphism
+transports a comparison of restricted head and restricted tail to the literal
+restriction of their entire concatenation.
+\end{proof}
+
+\begin{lemma}[Literal boundary dictionary after deleting actual empty entries]
+\label{hir:general-nc-open-cleaned-whole-boundary-dictionary}
+\uses{hir:general-nc-open-actual-compression-algebra,hir:general-nc-actual-highest-step-pair-transport}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary_nil,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary_cons,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary_append,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary_map_preimage,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary_map_remove_empty,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.cleanBoundary_map_congr,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.isClosed_boundary_geoTransformAlong,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.strict_original_eq,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.cleaned_boundary_eq,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.strictTransform_restricted_tower,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.strictTransform_open_square,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.boundary_geoTransformAlong_restrict}
+\leanok
+Let clean(E) delete exactly the empty sets from a literal finite boundary list.
+Actual stage compression carries the whole differential strict original and
+cleaned literal accumulated boundaries to their true counterparts, when the
+original whole carriers and cleaned boundary lists agree under its real base
+map and the original literal source boundary members are closed. Actual
+intermediate boundary closedness is derived internally from the recorded tower.
+\end{lemma}
+\begin{proof}
+An actual biholomorphism preserves nonemptiness, so clean commutes with its
+literal preimage list map. For every geometric strict-transform operation F,
+F(empty) is empty. Finite-list induction therefore gives
+clean(map F E)=clean(map F(clean E)), even if some nonempty entry transforms
+to empty. At a matched actual step, the true square and actual homeomorphism
+closure transport identify every whole old geometric strict boundary and the
+entire new exceptional preimage. The cleaned lists agree by these actual
+finite-map identities. At a silent actual empty step, closed old boundaries
+transform to their entire biholomorphic preimages; the appended actual empty
+exceptional entry is deleted by clean. Induction proves the entire boundary
+dictionary. The real differential strict original follows the actual squares
+by true holomorphic strict composition and the absence of exceptional points
+of the actual stage biholomorphisms. No ideal coherence or marked admissibility
+is used for these literal geometric equalities.
+\end{proof}
+
+\begin{theorem}[Internally compared actual global and independent local procedures]
+\label{hir:general-nc-open-actual-procedure-comparison}
+\uses{hir:general-nc-open-highest-trace-dichotomy,hir:general-nc-open-actual-compression-algebra,hir:general-nc-open-cleaned-whole-boundary-dictionary,hir:general-nc-actual-choice-separation-procedure}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.procedureTower,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.procedureTower_open_comparison,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.separateWith_open_whole_dictionary}
+\leanok
+For a true original boundary-adapted NC pair, any actual open set and arbitrary
+independent individual genuine blowup choices, the literal restriction of the
+actual global finite procedure and the actual local finite procedure internally
+have a real stage compression. Their initial true count bounds may differ.
+The produced final map is a genuine biholomorphism commuting with the entire
+original projections, with whole differential strict-original and cleaned
+literal accumulated-boundary dictionaries.
+\end{theorem}
+\begin{proof}
+Induct on the actual global count bound b, uniformly in the actual global
+ambient, current open, genuine biholomorphism from the local base to that open
+and arbitrary independent local bound b'. This permits the same local
+procedure to wait through a genuinely empty global step. If b is zero or the
+whole global count is at most one, the true local count dictionary makes both
+procedures reflexive; the actual local-base map is the comparison.
+Otherwise read the actual first global blowup from the transparent procedure
+equation and test its entire actual centre trace. If empty, its genuine
+restricted projection gives the real empty-step biholomorphism. It identifies
+the unchanged actual local base with the new true global open preimage. Apply
+the induction hypothesis to the real smaller global tail and the same local
+procedure at bound b'. Append the actual silent head comparison and transport
+through the genuine restriction-append isomorphism.
+If the trace is nonempty, its actual point forces the internally computed local
+maximum to equal r. Then the local count is at least two, b' is positive, and
+its true procedure equation performs its actual chosen first blowup. Genuine
+universal uniqueness produces the lift of the two actual aligned blowups.
+Their whole strict-original dictionary supplies the real smaller-pair relation.
+The compression induction itself uses no initial boundary alignment; the
+final cleaned-boundary consumer uses only the literal initial list dictionary. Apply the induction hypothesis to the actual global
+and local tails, at bounds b-1 and b'-1, then append the genuinely matched head
+and actual tail comparisons. Exact projection and whole boundary consumers
+prove the claimed literal outputs. No candidate compressed tower or naturality
+property is assumed.
+\end{proof}
+
+\begin{lemma}[Unique actual final comparison after genuine empty-step omission]
+\label{hir:general-nc-open-unique-actual-comparison}
+\uses{hir:general-nc-open-actual-procedure-comparison,hir:general-nc-actual-highest-step-unique-lift}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.IsStageCompression.unique_last,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.separateWith_nonempty_centres,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.separateWith_open_unique_comparison}
+\leanok
+The final map of the internally produced stage compression is unique over its
+actual base map. It is independent of the internal construction of its actual
+drop/match history.
+\end{lemma}
+\begin{proof}
+Every target step of the real local procedure has a genuinely nonempty centre,
+since its selected higher maximum is actually attained. Induct on the actual
+source last step for two comparisons over the same base. If its centre is
+empty, neither comparison can be matched: the biholomorphic preimage of the
+nonempty target centre would be nonempty. Both are silent. Induction identifies
+the preceding real maps and their actual projection squares identify the last
+maps. If the source centre is nonempty, neither comparison is silent. Invert
+the two genuinely matched last steps. Induction identifies their preceding
+maps; true analytic single-blowup universal uniqueness identifies their last
+lifts. At the reflexive stage the map is the actual base map. Thus the genuine
+comparison is unique without a caller uniqueness or compression certificate.
+\end{proof}
+
+\begin{theorem}[Actual natural geometric separation on every open set]
+\label{hir:general-nc-open-internally-natural-separation}
+\uses{hir:general-nc-open-actual-procedure-comparison,hir:general-nc-open-unique-actual-comparison,hir:general-nc-internally-natural-geometric-separation}
+\lean{Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.restrictedNaturalSeparation,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.naturalSeparation_open_unique_comparison,Hironaka.HironakaNormalCrossingsOpenRestrictionSeparation.naturalSeparation_open_whole_dictionary}
+\leanok
+Internally existing actual choices and the intrinsic dimension bound give a
+real geometric NC separation on every open set, uniquely compared with the
+literal restriction of the global natural separation after deleting exactly
+its actual empty-centre steps. Its entire final original and cleaned accumulated
+boundary correspond under the produced biholomorphism.
+\end{theorem}
+\begin{proof}
+The actual open coordinate reader internally supplies the true pulled-back
+pair and dimension bound. Use the genuinely existing default individual choices
+and the internally proved bound n on both actual manifolds. The preceding
+producer constructs the genuine compression and whole terminal dictionary;
+its actual uniqueness consumer applies because the local procedure's genuine
+higher centres are nonempty. Empty original, dimension zero and empty open
+are included. A count-one open region may inherit genuine empty global steps,
+which are deleted as recorded isomorphisms rather than claimed nonexistent.
+Disconnected and noncompact opens need no globally finite component family.
+\end{proof}
+
+\begin{remark}
+This is restriction naturality of the intrinsic unordered geometric NC
+procedure. It does not eliminate the old marked colexicographic label tie-break
+or prove arbitrary additional marked-ideal cosupport admissibility. The full
+canonical marked-ideal G9 obligation remains separate.
+\end{remark}

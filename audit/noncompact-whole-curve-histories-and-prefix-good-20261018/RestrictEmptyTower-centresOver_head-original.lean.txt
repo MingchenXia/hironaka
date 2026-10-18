@@ -1,0 +1,5 @@
+/-- **The head of a split lies over `F` if the tower does.** -/
+theorem centresOver_head (F : Set X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (j : ℕ) (h : CentresOver F T) :
+    CentresOver F (head T j) := by
+  have h' : CentresOver F ((head T j).append (tail T j)) := (head_append_tail T j).symm ▸ h
+  exact ((centresOver_append_iff F (head T j) (tail T j)).mp h').1

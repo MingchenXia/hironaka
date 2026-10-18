@@ -1,0 +1,96 @@
+\section{A genuine original growing curve history and locally finite centre images}
+
+The ambient dimension is positive. No compactness of the original ambient
+space is assumed. Every empty centre remains an actual blowup position.
+The following growing history is built from the actual sharp local recipes;
+it is not assumed canonical for a numerical invariant.
+
+\begin{theorem}[The actual transported prefixes form an original growing admissible history]
+\label{hir:sharp-actual-curve-original-growing-history}
+\uses{hir:sharp-actual-curve-genuine-global-prefix-tower,hir:sharp-actual-curve-original-global-prefix-tower,hir:sharp-actual-curve-original-global-prefix-test,hir:sharp-original-curve-test-history-full-original-ambient-boundary}
+\lean{Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.uniformGrowingSeq,Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.uniformGrowingSeq_length,Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.originalGrowingSeq,Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.originalGrowingSeq_test,Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.originalGrowingSeq_ambient_test}
+\leanok
+The actual global prefixes, transported by their internally proved initial
+projection biholomorphism, form a genuine growing sequence over the ORIGINAL
+ambient manifold. Stage zero is literally its reflexive tower. Every next
+stage appends the actual transported centre and blowup, and stage k has
+exactly k constructors. For ordinary original smooth pure curve, ordered
+SNC boundary and density inputs, every stage is a TEST of the original
+member product and, independently, a TEST of the original ambient template
+with its ENTIRE original ordered boundary.
+\end{theorem}
+\begin{proof}
+At stage k take the actual last manifold and tower of the genuine base
+transport of the k-step global tower. At zero the transport definition is
+the reflexive tower on the original manifold. At the next constructor the
+same definition appends the inverse image of the true global centre under
+the preceding last-stage biholomorphism, with the composite of its inverse
+and the true global blowup map. The original blowup transport theorem proves
+this is a genuine blowup. This is an equality of whole towers with the SAME
+preceding stage, not an equality of projections. Length is preserved by
+transport, so every actual constructor, including every empty one, remains.
+
+At a positive stage the actual transported tower is exactly the proved
+original positive prefix. Its original member-product TEST follows from
+the original-input global TEST producer. At zero it is reflexive. For each
+stage separately, the genuine curve DOMAIN1 and current zero-dimensional
+cosupport argument supplies actual normal crossings of every centre with
+the full original ambient family, and therefore its ambient-template TEST
+and entire transformed SNC list. The member product's initial auxiliary
+empty boundary is never substituted for the original ordered family.
+\end{proof}
+
+\begin{theorem}[Actual transported centre images form a locally finite closed family]
+\label{hir:sharp-actual-curve-growing-centre-images-locally-finite}
+\uses{hir:sharp-actual-curve-original-growing-history,hir:sharp-actual-curve-global-centres-locally-stationary,hir:sharp-actual-original-global-projection-proper}
+\lean{Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.centreImage_uniformGrowingSeq,Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.locallyFinite_originalGrowingSeq_centreImage,Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.isClosed_originalGrowingSeq_centreImage_union}
+\leanok
+The image in the original ambient manifold of each ACTUAL transported next
+centre equals the image of its true global centre under the same stage
+projection. For the original-input atlas, these centre images are closed
+and locally finite; consequently their entire union is closed. No local
+finiteness or support equality is supplied as a premise.
+\end{theorem}
+\begin{proof}
+The genuine whole transport projection square holds on every point of the
+transported stage. Apply the initial projection biholomorphism to it and
+then use the actual global prefix projection identity. The resulting
+pointwise equality identifies the transported projection with the true
+stage projection after the actual last-stage biholomorphism. Surjectivity
+of that biholomorphism identifies the ENTIRE images of its pulled-back
+centre with the true global centre image, including the first stage.
+
+At an original point choose its actual recipe neighbourhood and its actual
+finite recipe length L. At EVERY k at least L the entire stage projection
+preimage of that neighbourhood is disjoint from the true centre. A point
+in the intersection of the centre image and the neighbourhood would lift
+to an actual centre point in that preimage, contradicting this disjointness.
+Thus the neighbourhood meets only centre images indexed below L, a genuine
+finite set. This proves local finiteness without a maximum over the atlas.
+Each true global centre is closed; the actual stage projection is closed
+by its already proved properness. Its image is therefore closed. The union
+of a locally finite family of closed sets is closed.
+\end{proof}
+
+\begin{theorem}[Every ordinary compact subset encounters only finitely many actual centres]
+\label{hir:sharp-actual-curve-growing-history-compact-encounters}
+\uses{hir:sharp-actual-curve-growing-centre-images-locally-finite,hir:sharp-actual-curve-compact-stopped-open-bound}
+\lean{Hironaka.HironakaSharpActualCurveOriginalGrowingHistory.originalGrowingSeq_compact_encounters}
+\leanok
+For every ordinary compact subset K of the original ambient manifold,
+there is an internally constructed natural N such that EVERY actual centre
+image at index at least N is disjoint from K. The actual set of encountered
+indices is finite. The assertion allows an empty K and does not assert a
+uniform finite length on a noncompact ambient manifold.
+\end{theorem}
+\begin{proof}
+The actual stopped base opens increase and cover the original manifold.
+Ordinary compactness gives a genuine finite subcover of K; the maximum
+of the finitely many chosen lengths, increased by one, gives N with K
+contained in the N-th stopped open. Every later centre avoids the ENTIRE
+projection preimage of K by the proved stopped-open centre theorem. Lift
+a hypothetical point of its image intersecting K to an actual centre point
+to obtain a contradiction. All encountered indices therefore belong to
+the finite initial interval below N. This also handles an empty compact
+set and keeps every actual empty step of the growing sequence.
+\end{proof}

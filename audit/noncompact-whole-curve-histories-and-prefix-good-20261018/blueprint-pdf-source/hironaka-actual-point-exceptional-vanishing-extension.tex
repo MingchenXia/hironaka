@@ -1,0 +1,90 @@
+\section{Actual analytic normalized members vanish on the exceptional-complement closure}
+
+\begin{lemma}[Local continuity extends actual vanishing to the whole closure germ]
+\label{hir:actual-local-continuous-vanishing-closure}
+\lean{Hironaka.HironakaActualPointExceptionalVanishing.eventually_zero_on_closure_of_eventually_continuous}
+\leanok
+Let $S\subseteq\mathbb C^n$. If an actual function is continuous at every
+point of some neighbourhood of zero and vanishes on $S$ near zero,
+then it vanishes on the whole closure of $S$ near zero.
+\end{lemma}
+\begin{proof}
+Choose one true open neighbourhood $U$ on which both hypotheses hold.
+Fix $z\in U\cap\overline S$. If the function were nonzero at $z$,
+continuity would give a neighbourhood of $z$ on which it stays nonzero.
+Intersect this neighbourhood with $U$. The actual closure property gives
+a point of $S$ in this intersection, contradicting its prescribed
+vanishing on $S\cap U$. Thus the function vanishes on $U\cap\overline S$.
+\end{proof}
+
+\begin{theorem}[Every true analytic exceptional quotient vanishes on the original exceptional-complement closure]
+\label{hir:actual-point-quotient-vanishing-exceptional-complement-closure}
+\uses{hir:actual-local-continuous-vanishing-closure,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualPointExceptionalVanishing.actual_point_quotient_zero_on_exceptional_complement_closure}
+\leanok
+Let $\pi$ be the actual analytic point-chart blowup map. Let $g,H$ be
+genuine original holomorphic representatives near zero, suppose $g$
+vanishes on the original set $A$ near zero, and suppose their whole germs
+satisfy the true identity $x_e^dH=\pi^*g$. Then $H$ vanishes near zero on
+\[
+ \overline{\pi^{-1}A\setminus\{z:z_e=0\}}.
+\]
+\end{theorem}
+\begin{proof}
+Equality of the original whole germs gives the literal function identity
+$z_e^dH(z)=g(\pi(z))$ on an actual neighbourhood of zero. The actual
+polynomial map $\pi$ is continuous and fixes zero, so the original
+vanishing neighbourhood of $g$ pulls back to a genuine neighbourhood
+where $\pi(z)\in A$ implies $g(\pi(z))=0$. On its intersection with the
+first neighbourhood, $z_e\ne0$ therefore forces $H(z)=0$, including
+$d=0$. Original holomorphicity of $H$ gives continuity at every point
+of a neighbourhood of zero. Apply the preceding actual closure lemma.
+\end{proof}
+
+\begin{theorem}[The entire original normalized ideal is contained in the actual closure vanishing ideal]
+\label{hir:actual-point-whole-normalized-ideal-closure-vanishing}
+\uses{hir:actual-point-quotient-vanishing-exceptional-complement-closure,hir:relative-normal-deformation-whole-origin-ideal,ana:cartan-coherence}
+\lean{Hironaka.HironakaActualPointExceptionalVanishing.actual_point_normalized_ideal_le_exceptional_complement_closure_vanishing}
+\leanok
+Let $A$ be an original complex analytic subset of the actual model. Take
+the unchanged entire origin ideal of its original vanishing ideal sheaf.
+The whole original analytic point-normalized member ideal is contained
+in the unchanged entire origin ideal of the vanishing ideal sheaf of
+$\overline{\pi^{-1}A\setminus\{z:z_e=0\}}$.
+\end{theorem}
+\begin{proof}
+Original analyticity internally gives coherence of the original vanishing
+ideal sheaf. Hence every actual original germ in its whole origin ideal
+has an original representative genuinely vanishing on $A$ near zero.
+Take any defining normalized generator. Its unchanged definition supplies
+an original member $g$, an exponent $d$, and the literal whole product
+identity with its actual quotient $H$. Choose genuine holomorphic
+representatives of these same germs. The preceding theorem proves that
+the actual representative of $H$ vanishes on the displayed closure near
+zero. Its holomorphicity and this actual vanishing place its germ directly
+among the generators of the original target vanishing origin ideal.
+Thus every defining normalized generator belongs to that whole ideal;
+ideal span gives the entire inclusion. No coherence or chosen ideal
+dictionary of the target closure is assumed.
+\end{proof}
+
+\begin{corollary}[Every actual exceptional-complement closure value is bounded by the original analytic value]
+\label{hir:actual-point-exceptional-complement-closure-all-hs}
+\uses{hir:actual-point-whole-normalized-ideal-closure-vanishing,hir:actual-whole-analytic-ideal-hs-antitone,hir:actual-analytic-point-normalized-bennett-all-orders}
+\lean{Hironaka.HironakaActualPointExceptionalVanishing.hilbertSamuelValue_actual_point_exceptional_complement_closure_le}
+\leanok
+For every original analytic $A$, point chart, and order $\ell$, the
+intrinsic whole origin-ideal value of the actual displayed closure is
+at most that of the original vanishing ideal of $A$.
+\end{corollary}
+\begin{proof}
+The preceding whole ideal inclusion and genuine ideal antitonicity bound
+the target value by that of the same actual normalized member ideal.
+The all-order original analytic point-normalized comparison bounds this
+by the unchanged original vanishing origin-ideal value.
+\end{proof}
+
+This is the actual exceptional-coordinate-complement closure. Comparing
+it with the library's original differential-exceptional strict transform
+requires the genuine differential calculation in dimension at least two;
+the one-dimensional actual point map is treated separately as the identity.

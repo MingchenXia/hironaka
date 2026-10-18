@@ -1,0 +1,83 @@
+\section{Original finite coefficient data for genuine analytic monic vertices}
+
+Write $R$ for the original analytic germ ring in coordinates $(u,y,z)$
+of dimensions $k,s,t$, and $T:R\to S$ for its actual unshifted Taylor map.
+Let $I\subseteq R$ be any original ideal, $J=T(I)S$, and let $V$ be the
+actual degree-lex vertices of $J$. The coordinate centre is $y=z=0$.
+Write $w_\alpha$ for its true weight at $\alpha\in V$.
+
+\begin{definition}[Actual analytic vertex coefficient data]
+\label{hir:actual-analytic-vertex-coefficient-data}
+\lean{Hironaka.HironakaActualAnalyticVertexCoefficientData.ActualAnalyticVertexCoefficientData}
+\leanok
+Such data consist of actual analytic generators $g_\alpha\in I$, monic
+with true Taylor initial exponent $\alpha$ and generating the whole $I$;
+one genuine open neighbourhood $U$ of the origin in the $(u,y)$ variables;
+and actual holomorphic normal coefficient germs represented by functions
+$c_{\alpha,\gamma}$ there. Their entire Taylor series equal the literal
+$z^\gamma$ coefficients of $T(g_\alpha)$ for every $\gamma$.
+For $|\gamma|<w_\alpha$ all these functions are holomorphic on the same
+$U$, their actual principal germ ideals are coherent there, and their
+original germs belong to those same ideals.
+\end{definition}
+
+\begin{theorem}[Every original analytic ideal internally supplies these finite coefficient data]
+\label{hir:actual-original-analytic-vertex-coefficient-data-existence}
+\uses{hir:actual-analytic-vertex-coefficient-data,hir:actual-analytic-centre-compatible-monic-vertex-family,hir:actual-finite-local-coherent-coefficient-ideals}
+\lean{Hironaka.HironakaActualAnalyticVertexCoefficientData.nonempty_actualAnalyticVertexCoefficientData}
+\leanok
+For every original analytic ideal $I$, actual analytic vertex coefficient
+data exist. No analytic generators, coefficient germs or domains are supplied.
+\end{theorem}
+\begin{proof}
+Use the analytic monic vertex construction with the empty coordinate centre.
+Its formal centre condition is automatic: the true empty-centre weights are
+zero and the zeroth ideal power is the whole ring. It internally supplies
+actual monic $g_\alpha\in I$ at every true vertex, generating the entire $I$.
+The true vertex set is finite. Let $q=\sum_{\alpha\in V}w_\alpha$, so each
+$w_\alpha\leq q$, including when the set is empty or the sum is zero.
+Apply the actual finite analytic coefficient construction at cutoff $q$
+to this internally chosen family. It supplies one genuine $U$, actual
+$c_{\alpha,\gamma}$, their entire Taylor identities, and real-open
+holomorphicity, coherence of their actual principal ideals and original
+membership for $|\gamma|<q$. These properties hold in particular when
+$|\gamma|<w_\alpha$. Keeping the genuine initial coefficients and
+whole ideal generation from the first construction gives all the stated
+data. No canonical reduced formal member is asserted to converge.
+\end{proof}
+
+\begin{theorem}[Original coefficient cosupport produces canonical compatibility and genuine analytic strict generators]
+\label{hir:actual-original-vertex-coefficient-cosupport-strict-generators}
+\uses{hir:actual-original-analytic-vertex-coefficient-data-existence,hir:actual-canonical-centre-compatibility-iff-monic-family,hir:actual-local-coefficient-presentation-centre-power,hir:actual-analytic-normalized-member-finite-generation}
+\lean{Hironaka.HironakaActualAnalyticVertexCoefficientData.exists_actual_original_coefficient_strict_generators}
+\leanok
+The data above can be internally chosen so that the following holds.
+Suppose, for every $|\gamma|<w_\alpha$, the actual plane
+$U\cap\{y=0\}$ lies in the original cosupport of the actual principal
+coefficient ideal $(c_{\alpha,\gamma})$ at order
+$w_\alpha-|\gamma|$. Then every actual canonical reduced formal vertex
+member belongs to the true centre power $C^{w_\alpha}$.
+In every actual exceptional chart there is an internally constructed finite
+analytic family generating the entire analytic normalized-member ideal,
+whose whole Taylor extension is exactly the source formal strict ideal.
+\end{theorem}
+\begin{proof}
+Choose the original coefficient data by the preceding existence theorem.
+Coherence and original membership on the same genuine $U$, together with
+the assumed ordinary coefficient cosupport, imply whole centre-power
+membership for the actual formal series $T(g_\alpha)$: apply the local
+coefficient-power theorem to the actual coefficient functions and their
+entire Taylor identities. The $T(g_\alpha)$ form a genuine monic vertex
+family for $J$, since their original ideal membership, actual coefficient
+$1$ and true initial exponent supply ideal membership and every preceding
+coefficient vanishing. The canonical compatibility theorem for any such
+family therefore puts the actual reduced formal members in the required
+whole centre powers. The genuine analytic normalized-member generation
+theorem applies to this derived compatibility in each real exceptional
+chart, internally constructing the finite analytic family and both entire
+ideal equalities. No formal compatibility or convergence certificate is
+an input. The hypothesis is the stated original geometric coefficient
+cosupport; identifying it with all permissible centres, the full source
+semicoherent derivative and Jacobian conditions, transformed stability and
+Bennett inequalities remain separate goals.
+\end{proof}
