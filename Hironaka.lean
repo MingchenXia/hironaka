@@ -637,6 +637,14 @@ import Hironaka.Resolution.HironakaOriginalPreparedAllStepOneEtaleValues
 
 import Hironaka.Resolution.HironakaSharpActualCurveGlobalExceptionalBirthSupport
 
+import Hironaka.Resolution.HironakaActualAnalyticStrictGenerators
+
+import Hironaka.Resolution.HironakaActualCanonicalCentreCompatibility
+
+import Hironaka.Resolution.HironakaOriginalPreparedZeroOwnLargeRelativeOneValues
+
+import Hironaka.Resolution.HironakaSharpActualCurveGlobalSharpEndpointData
+
 /-!
 # Hironaka
 
