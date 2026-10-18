@@ -80,6 +80,7 @@ theorem exists_actual_original_point_initial_polynomial_lift (n : ℕ)
     omega
   · rfl
 
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Every actual extended point-power component gives a member of the true whole specialized analytic ideal. -/
 theorem actual_dehomogenized_component_mem_axis_normalized_image (n : ℕ)
     (I : Ideal (HolGerm (ComplexModel n))) (e : Fin n) (b : Fin n → ℂ)

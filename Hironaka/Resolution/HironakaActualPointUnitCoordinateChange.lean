@@ -267,6 +267,7 @@ theorem actualPointUnitGermEquiv_coordinate (e : Fin n) (b : Fin n → ℂ) (i :
     filter_upwards [] with z
     simp [actualPointUnitForward_apply,hi,div_eq_mul_inv]
 
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Every finite homogeneous polynomial is transported in the ENTIRE original germ algebra.
 The forward orientation is F pullback, exactly as required for the dehomogenized initial ideal. -/
 theorem actualPointUnitGermEquiv_dehomogenization (e : Fin n) (b : Fin n → ℂ)

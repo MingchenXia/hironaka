@@ -32,6 +32,9 @@ variable {n : ℕ}
 variable {X X' : CMfd.{u} n} (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X)
 
 
+variable {Y Z : CMfd.{u} n}
+
+
 /-- **The transported tower has the same length.** -/
 theorem length_transport : {Y : CMfd.{u} n} → (T : BlowupTower X Y) → (transport Φ T).tower.length = T.length
   | _, .refl => rfl

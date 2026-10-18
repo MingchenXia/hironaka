@@ -125,6 +125,7 @@ theorem actualTranslatedInitialIdeal_formal_extension (I : Ideal (MvPowerSeries 
   funext a
   exact DFunLike.congr_fun hm (actualInitialVertexPolynomial I a)
 
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem translated_initial_zero (I : Ideal (MvPowerSeries (Fin n) ℂ)) :
     actualTranslatedInitialIdeal I 0=actualOriginalInitialVertexIdeal I := by
   have he : actualTranslatedPolynomialEval n (0 : Fin n → ℂ)=originalPolynomialEval n := by

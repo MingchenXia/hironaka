@@ -122,6 +122,7 @@ def actualHomogeneousInitialIdeal (I : Ideal (MvPowerSeries (Fin n) ℂ)) :
     Ideal (MvPowerSeries (Fin n) ℂ) :=
   Ideal.span (range (fun F : actualHomogeneousInitialIdealIndex I => actualHomogeneousInitialForm F.val F.property.2))
 
+attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- Genuine convolution constructs the original ideal degree lift of EACH actual coefficient-times-initial-form product. -/
 theorem actual_initial_product_degree_lift (I : Ideal (MvPowerSeries (Fin n) ℂ))
     (F : MvPowerSeries (Fin n) ℂ) (hI : F ∈ I) (hne : F ≠ 0)
