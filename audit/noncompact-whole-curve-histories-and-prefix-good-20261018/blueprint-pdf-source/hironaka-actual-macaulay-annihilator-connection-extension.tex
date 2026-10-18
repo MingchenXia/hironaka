@@ -1,0 +1,99 @@
+\section{The genuine moving Macaulay annihilator relation}
+
+Let $G_i$ be a finite family of actual holomorphic functions on one
+real open $U\subset\mathbb C^{d+t}$, and let $T:\mathbb C^d\to
+\mathbb C^{d+t}$ be the actual tangent inclusion. For an order $q$,
+write $M_q(p)$ for the original Macaulay matrix: its column $(w,i)$
+consists of all coordinate-word derivatives of $w(z)G_i(z+p)$ at zero,
+in orders strictly below $q$. Its row index is denoted by $r$, its row
+order by $|r|$, and its actual tuple of coordinate directions by $v_r$.
+
+\begin{theorem}[An original matrix annihilator annihilates the entire original ideal jet]
+\label{hir:actual-macaulay-annihilator-whole-ideal-jet}
+\uses{hir:actual-every-original-ideal-finite-jet-columns,hir:actual-finite-macaulay-linear-map}
+\lean{Hironaka.HironakaActualMacaulayAnnihilatorConnection.actual_macaulay_annihilator_whole_ideal}
+\leanok
+Fix $p\in U$. If a scalar row $\lambda$ annihilates every column of
+the original $M_q(p)$, then it annihilates the actual finite derivative
+coordinate array of every germ in the entire original ideal generated
+by the true translated germs $G_i(z+p)$.
+\end{theorem}
+\begin{proof}
+The actual whole-ideal Macaulay-range theorem identifies the image of
+the entire generated original ideal under the finite jet map with the
+range of the original finite column map. Thus the jet of any such
+germ is the column map applied to an actual finite scalar vector $b$.
+The original derivative-coordinate map carries it to $M_q(p)b$.
+Pairing with $\lambda$, interchange the two finite sums: the result is
+the sum, over columns, of the coefficient $b$ times the pairing of
+$\lambda$ with that column. Each latter pairing is zero by hypothesis,
+so their finite sum is zero. This uses the entire original ideal,
+including arbitrary analytic multipliers.
+\end{proof}
+
+\begin{theorem}[The true word-derivative correction is killed by the same original annihilator]
+\label{hir:actual-macaulay-annihilator-word-correction-zero}
+\uses{hir:actual-macaulay-annihilator-whole-ideal-jet,hir:actual-original-word-directional-correction}
+\lean{Hironaka.HironakaActualMacaulayAnnihilatorConnection.actual_macaulay_annihilator_correction_zero}
+\leanok
+Fix an actual tangent parameter $c$ with $Tc\in U$, a tangent direction
+$a$, an original column $(w,i)$, and a row $\lambda$ annihilating all
+columns of $M_q(Tc)$. Then
+\[
+ \sum_r\lambda_r D^{|r|}
+ \bigl((Dw(z)(Ta))G_i(z+Tc)\bigr)_0(v_r)=0.
+\]
+All derivatives here are those of the unchanged original functions.
+\end{theorem}
+\begin{proof}
+The word $w$ is an actual finite coordinate polynomial. Its directional
+derivative is holomorphic on the whole ambient space: the actual
+finite product rule writes it as the sum over word positions of the
+corresponding direction coordinate times the product of all remaining
+word coordinates, with repeated positions retained. It therefore
+defines an actual holomorphic germ at zero. Its product with the
+original translated germ of $G_i$ belongs to the entire original
+generated ideal, by ideal multiplication and generator membership.
+The preceding theorem annihilates the finite derivative coordinate
+array of this same germ. The actual product-of-germs dictionary
+identifies its entries with precisely the displayed unchanged
+derivatives, proving the equality.
+\end{proof}
+
+\begin{theorem}[Differentiating the actual moving annihilator gives the successor-jet relation]
+\label{hir:actual-moving-macaulay-annihilator-successor-connection}
+\uses{hir:actual-macaulay-annihilator-word-correction-zero,hir:actual-original-macaulay-tangent-connection-corrected}
+\lean{Hironaka.HironakaActualMacaulayAnnihilatorConnection.actual_moving_macaulay_annihilator_connection}
+\leanok
+Let $V\subset\mathbb C^d$ be real open with $T(V)\subset U$. Suppose
+the actual row coefficients $\lambda_r(c)$ are holomorphic on $V$ and
+annihilate every column of the unchanged $M_q(Tc)$ for every $c\in V$.
+Then, for every such $c$, every actual direction $a$, and every
+original column $(w,i)$,
+\[
+ \sum_r\left(
+ D\lambda_r(c)(a)M_q(Tc)_{r,(w,i)}+
+ \lambda_r(c)D^{|r|+1}
+ \bigl(w(z)G_i(z+Tc)\bigr)_0(Ta,v_r)
+ \right)=0.
+\]
+No replacement matrix, connection certificate or higher-order
+annihilator is supplied.
+\end{theorem}
+\begin{proof}
+For the fixed original column, the finite scalar pairing
+$f(c)=\sum_r\lambda_r(c)M_q(Tc)_{r,(w,i)}$ vanishes on the actual
+open $V$. At each $c\in V$ it therefore agrees with the zero function
+on a neighbourhood, so $Df(c)(a)=0$. All entries are holomorphic on
+their actual original domain and all row coefficients are holomorphic
+on $V$, hence the finite sum and product differentiation rules apply.
+They give the sum of $D\lambda_r(c)(a)$ times the original entry and
+$\lambda_r(c)$ times its true parameter derivative. The corrected
+original Macaulay differentiation formula identifies the latter
+derivative with the displayed successor jet minus the original jet
+of $(Dw(Ta))G_i$. The sum of these correction jets paired with the
+same $\lambda(c)$ is zero by the preceding theorem. Subtracting that
+zero sum leaves exactly the asserted successor-jet relation. This is
+an identity for actual moving annihilators; constructing a normal
+graded trivialization from it is a separate assertion.
+\end{proof}

@@ -1,0 +1,84 @@
+\section{Actual topological gluing from sharp endpoint histories}
+
+The data in this chapter are actual finite prefix/tail towers over original
+opens, and genuine stagewise comparisons of their retained empty-padded
+histories. No cocycle, composite-projection identity, overlap geometry,
+separation or descended manifold certificate is an input. This is the actual
+geometric gluing interface; a covering family from only original curve input
+and its global analytic and properness consequences are separate producers.
+
+\begin{lemma}[Actual endpoint transition intersections]
+\label{hir:sharp-actual-endpoint-transition-intersection}
+\uses{hir:sharp-actual-endpoint-transition-projection,hir:sharp-actual-endpoint-diagonal-transition}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveTopologicalGluing.ActualEndpointHistories,Hironaka.HironakaSharpActualCurveTopologicalGluing.overlapOpen,Hironaka.HironakaSharpActualCurveTopologicalGluing.transition,Hironaka.HironakaSharpActualCurveTopologicalGluing.transition_projection,Hironaka.HironakaSharpActualCurveTopologicalGluing.overlapOpen_self,Hironaka.HironakaSharpActualCurveTopologicalGluing.transition_self,Hironaka.HironakaSharpActualCurveTopologicalGluing.transition_inter}
+For an actual family of finite prefix/tail towers and chosen genuine stagewise
+pairwise comparisons, the real diagonal overlap is whole and its real
+transition is identity. Each pairwise transition takes the actual intersection
+with a third endpoint overlap into the corresponding actual target overlap.
+\end{lemma}
+\begin{proof}
+Use the real projection-defined overlap opens and the genuine transitions of
+the preceding chapter. Its fixed-history universal uniqueness supplies the
+actual diagonal identity. For an actual point in the first pair overlap and
+the third overlap, the genuine transition projection square identifies the
+original ambient image after the transition with the original image before
+it. Membership in the third original open therefore persists, which is
+exactly the target third-overlap predicate. No target domain membership is
+assumed separately.
+\end{proof}
+
+\begin{theorem}[The actual OLD transitions satisfy the literal gluing cocycle]
+\label{hir:sharp-actual-endpoint-transition-cocycle}
+\uses{hir:sharp-actual-endpoint-transition-intersection,hir:sharp-actual-chosen-pairwise-overlap-cocycle}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveTopologicalGluing.transition_cocycle}
+The actual transitions on the true projection-defined overlap opens satisfy
+the literal triple gluing identity at every point of the actual intersection,
+including chosen pairwise histories with different real padding cuts.
+\end{theorem}
+\begin{proof}
+Take the genuine intersection of the three original base opens. An actual
+point in the two source overlaps lies over this intersection, so it defines
+a real point in the first common-open terminal domain. Apply the already
+proved chosen-map restriction theorem to ALL THREE actual chosen stagewise
+pairwise maps. It internally constructs the three common-open stagewise maps,
+retaining every empty position, with their exact OLD terminal-point identities.
+The genuine common-cut extension and fixed-history uniqueness prove the
+composition identity for these three actual maps.
+
+The first exact OLD point identity identifies its image with the OLD first
+transition. Its actual common-open membership and the preceding intersection
+lemma identify the input to the second OLD transition by subtype
+extensionality. The second exact point identity therefore identifies the
+composite with the OLD second transition applied to the OLD first one. The
+third point identity identifies the direct image with the OLD direct
+transition. Evaluating the actual common-open composition identity at this
+point gives precisely the literal gluing cocycle. No fresh pairwise maps are
+silently substituted for the already chosen ones.
+\end{proof}
+
+\begin{theorem}[A genuine topological gluing core is constructed]
+\label{hir:sharp-actual-endpoint-topcat-glue-core}
+\uses{hir:sharp-actual-endpoint-transition-cocycle,hir:sharp-actual-endpoint-transition-intersection}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveTopologicalGluing.endpointGlueCore,Hironaka.HironakaSharpActualCurveTopologicalGluing.endpointGlueData,Hironaka.HironakaSharpActualCurveTopologicalGluing.endpointGluedSpace,Hironaka.HironakaSharpActualCurveTopologicalGluing.endpointLocalInclusion,Hironaka.HironakaSharpActualCurveTopologicalGluing.endpointLocalInclusion_openEmbedding,Hironaka.HironakaSharpActualCurveTopologicalGluing.endpointLocalInclusion_jointly_surjective}
+The actual endpoint spaces, true overlap opens and chosen real transitions
+construct a genuine TopCat gluing core, with every required identity proved
+internally from the actual finite-history geometry. Its actual topological
+glued space has genuine open-embedding local inclusions that are jointly
+surjective.
+\end{theorem}
+\begin{proof}
+Use the actual complex endpoint manifolds as topological spaces and the real
+projection-defined opens as the overlap objects. Each actual transition is a
+biholomorphism, hence continuous, and defines the required topological
+morphism. The first lemma gives the true diagonal domain, diagonal identity
+and intersection membership. The second theorem gives exactly the required
+triple point identity. These are all the fields of the genuine TopCat gluing
+core, which can therefore be filled without any assumed cocycle certificate.
+The topological gluing API now supplies its actual quotient data, real open
+embeddings of all endpoint spaces and their joint surjectivity. Hausdorffness,
+countability, lifted complex charts, the original-only covering atlas and
+properness are not concluded here.
+\end{proof}

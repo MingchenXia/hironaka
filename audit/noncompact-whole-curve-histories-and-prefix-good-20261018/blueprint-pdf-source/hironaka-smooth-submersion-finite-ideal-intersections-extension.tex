@@ -1,0 +1,104 @@
+\section{Actual whole finite ideal intersections in genuine smooth stalks}
+
+\begin{theorem}[The entire actual projected ideal is characterized by every genuine finite normal coefficient]
+\label{hir:submersion-finite-intersection-whole-coefficients}
+\lean{Hironaka.HironakaSmoothSubmersionFiniteIdealIntersections.projection_mem_extended_ideal_iff_all_coefficients}
+\uses{hir:submersion-projection-colon-actual-coefficients,hir:submersion-projection-colon-whole-ideal-jet-dictionary,hir:submersion-projection-colon-normal-power-separation}
+\leanok
+For the actual tangential projection $\eta:B=\mathcal O_{\mathbb C^d,0}\to
+R=\mathcal O_{\mathbb C^{d+t},0}$ and ANY whole ideal $I\subset B$, an
+arbitrary actual $g\in R$ belongs to $\eta(I)R$ if and only if EVERY actual
+normal Taylor coefficient of EVERY finite truncation of $g$ belongs to $I$.
+No generator, fixed-degree stability, flatness or membership certificate is input.
+\end{theorem}
+\begin{proof}
+For a member of the ENTIRE extended ideal, the earlier true strong span
+induction includes all arbitrary $R$ multipliers; therefore each coefficient
+in each actual finite truncation belongs to $I$. Conversely, if all those
+actual coefficients belong to $I$, the genuine finite reconstruction gives
+$g\in\eta(I)R+J^q$ for EVERY $q$, where $J$ is the true normal-coordinate
+ideal. This actual ideal lies in the actual local maximal ideal. The proved
+local-ring Krull intersection theorem, applied to the ENTIRE ideal
+$\eta(I)R$, therefore gives $g\in\eta(I)R$. No uniform truncation bound is
+assumed. Zero normal dimension and degree zero use the literal earlier
+normal-index and unit-ideal conventions.
+\end{proof}
+
+\begin{theorem}[Any two whole original ideals have their actual intersection extended exactly]
+\label{hir:submersion-finite-intersection-binary}
+\lean{Hironaka.HironakaSmoothSubmersionFiniteIdealIntersections.projection_map_inf_eq}
+\uses{hir:submersion-finite-intersection-whole-coefficients}
+\leanok
+For ANY TWO actual whole ideals $I,L\subset B$, internally prove
+$\eta(I\cap L)R=\eta(I)R\cap\eta(L)R$. Neither inclusion of the ideals,
+finiteness of prescribed generators nor a flatness certificate is supplied.
+\end{theorem}
+\begin{proof}
+Membership of an actual ring germ on the right is membership in both
+whole extended ideals. By node one it is equivalent to EVERY true finite
+coefficient belonging to both $I$ and $L$. This is literally membership in
+$I\cap L$ for every such coefficient, so node one returns membership in
+the left ENTIRE extended ideal. The equivalence for EVERY actual germ is
+whole ideal extensionality. In particular no coefficient conclusion was
+assumed, and arbitrary source multipliers were handled by the original
+whole extended-ideal producer.
+\end{proof}
+
+\begin{theorem}[Whole finite intersections retain all literal original indices]
+\label{hir:submersion-finite-intersection-entire-family}
+\lean{Hironaka.HironakaSmoothSubmersionFiniteIdealIntersections.projection_map_iInf_eq}
+\uses{hir:submersion-finite-intersection-whole-coefficients}
+\leanok
+For ANY literal indexed family of actual whole ideals $I_i\subset B$,
+$\eta(\bigcap_i I_i)R=\bigcap_i\eta(I_i)R$. In particular every genuine
+finite family retains empty and repeated entries literally. This concerns
+fixed-origin projection ideals; it supplies no ONE common nearby open or
+analytic-extension assertion for an arbitrary family.
+\end{theorem}
+\begin{proof}
+For an arbitrary genuine source germ, node one identifies membership in
+EACH extended ideal with membership of EVERY true finite coefficient in
+that corresponding original ideal. Quantifying over all actual indices
+and interchanging these literal universal quantifiers yields that EVERY
+coefficient belongs to the ENTIRE intersection of the original ideals.
+Node one, applied to that actual intersection ideal, returns membership
+in its whole extension. This is genuine whole ideal extensionality, valid
+also for the empty index family, since its intersection is the unit ideal.
+Repeated ideals are retained by literal quantification. The previous
+strong span induction and actual Krull theorem account for arbitrary
+source coefficients; no infinite sum, convergence interchange or claimed
+nearby uniformity is used. Finite original families are a direct special
+case and will be the actual relative monomial consumers.
+\end{proof}
+
+\begin{theorem}[Original coherent functions internally give the entire finite smooth stalk intersection dictionary]
+\label{hir:submersion-finite-intersection-original-smooth-stalks}
+\lean{Hironaka.HironakaSmoothSubmersionFiniteIdealIntersections.original_coherent_family_stalk_intersection}
+\uses{hir:submersion-finite-intersection-entire-family,hir:submersion-germ-colon-whole-pulled-stalk,hir:submersion-germ-colon-actual-projection-square,hir:submersion-composition-normalized-target}
+\leanok
+ONLY an original actual complex submersion $f:Y^{d+t}\to X^d$, original
+finite family of coherent GermIdeals $I_i$ and a true point $y$ internally
+construct the real target/source coordinates and prove that the intersection
+of EVERY actual source pulled stalk equals the extension of the intersection
+of the SAME whole target stalks. No chart, finite frame, target stalk,
+pulled-ideal equality or intersection-result certificate is a caller input.
+\end{theorem}
+\begin{proof}
+Normalize the true preferred target coordinates at $f(y)$. The actual
+submersion lift-coordinate producer constructs the source chart and its
+whole inverse projection square. For EACH original $I_i$, original coherence
+internally selects a true finite presentation by original holomorphic
+functions. The genuine whole pulled-stalk theorem identifies the ENTIRE
+actual pulled ideal in that source chart with the actual projection extension
+of the whole target ideal in the normalized chart. Apply node three to
+these actual target stalk ideals. Thus their finite whole source
+intersection has the asserted exact dictionary, including the empty family.
+No chosen source stalk or frame is input. This is the actual algebraic
+finite-intersection foundation for the subsequent genuine relative monomial
+part: that part still requires its actual finite restricted-power stalk
+membership dictionary, internally computed original exponents and full
+coherent carrier producer. It does NOT yet assert that the whole original
+GermIdeal intersection is coherent or that a prescribed whole monomial part
+pullback equality has been proved. Higher invariant/canonical driver,
+noncompact termination, whole G3/G8 and formal/native publication remain OPEN.
+\end{proof}

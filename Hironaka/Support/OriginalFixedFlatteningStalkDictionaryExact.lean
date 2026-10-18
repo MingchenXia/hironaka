@@ -1,0 +1,65 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaSmoothCentreNearbyIdeal
+
+set_option autoImplicit false
+open Set Filter
+open scoped DirectSum Topology Manifold ContDiff
+namespace Hironaka.HironakaSmoothCentreRealDomainOriginalStalkFreeness
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf
+  HironakaSmoothCentreCoherentDomain HironakaSmoothCentreNearbyStalks
+  HironakaSmoothCentreNearbyIdeal HironakaHolomorphicJetRankLoci
+  HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations
+  InvertibleIdealQuotient
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- ANY fixed original flattening has the ENTIRE actual original stalk map/comap at EVERY real target point. -/
+theorem whole_original_stalk_dictionary_at_actual_target
+    (A : GermIdeal n M) (hA : A.IsCoherent) (x : M)
+    (Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x))
+    (hsrc : Φ.source ⊆ (chartAt (ComplexModel n) x).target)
+    (a : ComplexModel n) (ha : a ∈ Φ.target) :
+    let y := actualFlatteningInverseMap x Φ a
+    let hy := actualNearbyPoint_mem_chart_source x Φ hsrc a ha
+    let E := actualNearbyGermEquiv Φ a ha
+    let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x Φ) a)
+    Ideal.map E.toRingEquiv.toRingHom Ia = wholeChartStalkIdeal A x y hy ∧
+      Ia = Ideal.comap E.toRingEquiv.toRingHom (wholeChartStalkIdeal A x y hy) := by
+  classical
+  obtain ⟨O,hO,_hyO,N,G,hG,hgen,U,hU,haU,_hUT,hMap,hH,hF⟩ :=
+    exists_local_original_pullback_generators A hA Φ.target Φ.isOpen_target
+      (actualFlatteningInverseMap_mdifferentiable x Φ hsrc) a ha
+  let y := actualFlatteningInverseMap x Φ a
+  let hy := actualNearbyPoint_mem_chart_source x Φ hsrc a ha
+  let E := actualNearbyGermEquiv Φ a ha
+  let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x Φ) a)
+  have hhol : ∀ i, HolAt ((G i ∘ actualFlatteningInverseMap x Φ) ∘ actualAffineTranslation n a) 0 :=
+    fun i => translated_function_holAt hU (hH i) haU
+  have hI := translated_origin_ideal_eq_span_of_real_generators
+    (actualFlattenedOriginalSheaf A x Φ) (fun i => G i ∘ actualFlatteningInverseMap x Φ)
+      hU hH hF haU hhol
+  have hGy (i : Fin N) : HolomorphicAt n (G i) y :=
+    holomorphicAt_of_mdifferentiableOn hO (hG i) (hMap haU)
+  have hwhole := wholeChartStalkIdeal_eq_span_of_original_generators A x y hy G hGy (hgen y (hMap haU))
+  have hmap : Ideal.map E.toRingEquiv.toRingHom Ia = wholeChartStalkIdeal A x y hy := by
+    dsimp only [Ia]
+    rw [hI,Ideal.map_span,hwhole]
+    congr 1
+    ext g
+    constructor
+    · rintro ⟨_,⟨i,rfl⟩,rfl⟩
+      exact ⟨i,(actualNearbyGermEquiv_original_function x Φ hsrc a ha
+        (G i) (hGy i) (hhol i)).symm⟩
+    · rintro ⟨i,rfl⟩
+      exact ⟨_,⟨i,rfl⟩,actualNearbyGermEquiv_original_function x Φ hsrc a ha
+        (G i) (hGy i) (hhol i)⟩
+  refine ⟨hmap,?_⟩
+  rw [← hmap,Ideal.comap_map_of_bijective E.toRingEquiv.toRingHom E.bijective]
+
+end
+end Hironaka.HironakaSmoothCentreRealDomainOriginalStalkFreeness

@@ -1,0 +1,99 @@
+\section{Whole original homogenization under actual smooth pullback}
+
+The actual map is a genuine holomorphic submersion of arbitrary dimensions.
+The input ideal is the original coherent ideal; the mark, carrier and ordered
+boundary are its literal original data. No tangent, homogenization, coefficient,
+cosupport or invariant equality certificate is supplied. Full canonical smooth
+functoriality and genuine blowup base change remain subsequent obligations.
+
+\begin{lemma}\label{hir:submersion-whole-tangent-ideal-equality}
+For every original coherent ideal $I$ and mark $\mu\ge0$, the original entire
+tangent ideal $T(I,\mu)=\mathcal D^{\mu-1}I$ commutes with actual smooth pullback.
+\lean{Hironaka.HironakaSmoothSubmersionHomogenization.pullback_tangentIdeal}
+\leanok
+\uses{hir:submersion-entire-iterated-derivative-equality}
+\end{lemma}
+\begin{proof}
+The actual tangent ideal is precisely the original iterated derivative ideal
+at the natural-number index $\mu-1$. Apply the already internally proved ENTIRE
+iterated derivative pullback equality to that actual index. Equality includes
+all whole germ members. Natural subtraction retains the genuine index zero
+when $\mu=0$; no positive-mark or selected-generator premise is introduced.
+\end{proof}
+
+\begin{lemma}\label{hir:submersion-whole-homogenized-summands}
+Every literal original summand $\mathcal D^iI\,T(I,\mu)^i$ of the true
+homogenization pulls back to $\mathcal D^i(f^*I)\,T(f^*I,\mu)^i$ as an ENTIRE ideal.
+\lean{Hironaka.HironakaSmoothSubmersionHomogenization.pullback_homogenized_summand}
+\leanok
+\uses{hir:submersion-whole-tangent-ideal-equality,hir:crossdim-entire-product-pullback,hir:crossdim-entire-unit-power-pullback,hir:submersion-entire-iterated-derivative-equality}
+\end{lemma}
+\begin{proof}
+Every original iterated derivative ideal is coherent, and so is the actual
+tangent ideal. Its genuine $i$th power is coherent. The actual holomorphic
+pullback preserves the ENTIRE product and that ENTIRE power. Substitute the
+true entire iterated derivative equality for the first factor and the preceding
+true tangent equality for the second. The actual target product is exactly the
+displayed original homogenization summand. The unit zeroth power is preserved
+by the genuine constant-one span argument already proved.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-entire-homogenized-ideal-equality}
+The COMPLETE original homogenized ideal satisfies
+$f^*\mathcal H(I,\mu)=\mathcal H(f^*I,\mu)$ under the genuine submersion.
+\lean{Hironaka.HironakaSmoothSubmersionHomogenization.pullback_homogenizedIdeal}
+\leanok
+\uses{hir:submersion-whole-homogenized-summands,hir:crossdim-entire-finite-sum-pullback}
+\end{theorem}
+\begin{proof}
+The original definition is the entire finite span of the actual product
+summands indexed by $i<\mu$. These are coherent by genuine iterated derivative,
+power and product coherence. Read that defining whole span as the actual finite
+sum ideal and apply the already proved entire finite-sum pullback equality.
+Replace every whole pulled summand by the preceding true equality. Finite-span
+extensionality yields exactly the original target homogenized ideal, with no
+chosen coefficient system or order assumption. At zero mark both finite families
+are genuinely empty, so the same entire-span proof applies.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-literal-whole-homogenized-marked-equality}
+The actual original homogenized marked datum commutes with the literal
+cross-dimensional marked pullback, including carrier, ordered boundary, mark
+and EVERY ideal member.
+\lean{Hironaka.HironakaSmoothSubmersionHomogenization.homMarked_pullback_eq}
+\leanok
+\uses{hir:submersion-entire-homogenized-ideal-equality,hir:crossdim-literal-marked-pullback}
+\end{theorem}
+\begin{proof}
+Original homogenization retains the original carrier, ordered boundary and mark
+and replaces only its entire ideal by the genuine homogenized ideal. Literal
+pullback takes the actual preimage carrier and ordered preimage list and retains
+the same numerical mark. These three actual fields therefore agree on both sides.
+The preceding theorem identifies the fourth field, the COMPLETE original ideal.
+Extensionality of the actual marked record proves equality of the WHOLE data.
+No well-formedness or canonical-domain conclusion is inferred from these fields.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-actual-homogenized-coefficient-cosupport}
+The original coefficient marked datum of the original homogenized marked datum
+also commutes with genuine smooth pullback as WHOLE marked data. For actual
+ambient original carrier, the homogenized and homogenized-coefficient cosupports
+are exactly their original preimages.
+\lean{Hironaka.HironakaSmoothSubmersionHomogenization.coeffHomMarked_pullback_eq,Hironaka.HironakaSmoothSubmersionHomogenization.homMarked_cosupport_pullback_eq,Hironaka.HironakaSmoothSubmersionHomogenization.coeffHomMarked_cosupport_pullback_eq}
+\leanok
+\uses{hir:submersion-literal-whole-homogenized-marked-equality,hir:submersion-entire-coefficient-ideal-equality,hir:submersion-actual-coefficient-cosupport-preimage,hir:submersion-cosupport}
+\end{theorem}
+\begin{proof}
+The original homogenized ideal is genuinely coherent, by its actual finite
+coherent summand construction. First use the WHOLE homogenized marked-data
+equality, and then the already proved actual coefficient marked-data equality
+for that SAME original coherent homogenized ideal. This proves the stated entire
+composite marked equality. For ambient carrier, its actual homogenized carrier
+remains the whole original manifold. The genuine original-point section of the
+submersion preserves every whole germ order threshold for that SAME original
+coherent homogenized ideal, so its marked cosupport is exactly the original
+preimage. The corresponding actual coefficient-cosupport producer applies to
+that SAME original homogenized marked datum, proving the other whole preimage
+identity. Zero marks and empty weighted families retain the literal definitions;
+no caller coherence of a transformed ideal or threshold equality is assumed.
+\end{proof}

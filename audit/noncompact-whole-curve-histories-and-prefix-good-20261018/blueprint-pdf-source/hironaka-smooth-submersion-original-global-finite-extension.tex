@@ -1,0 +1,122 @@
+\section{Actual finite smooth arrows on the original global terminal manifolds}
+
+The smooth functoriality comparison of
+\cite{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+is now transported to the genuine original global terminal manifolds,
+using actual finite canonical terminal histories. A compact original target
+produces the target history internally, and actual smooth pullback produces
+the entire source history even for a noncompact source. This statement includes the actual
+original projection and holomorphic Cartesian law; it imposes compactness
+only on the internal finite-history producer. Arbitrary noncompact smooth
+map gluing remains a separate conclusion.
+
+\begin{lemma}[Biholomorphic changes of final spaces preserve genuine submersions]
+\label{hir:original-global-finite-submersion-biholomorphic-transport}
+\uses{hir:smooth-terminal-submersion-biholomorphic-precomposition,hir:submersion-composition-original-global}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.isSubmersion_biholomorphism,Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.isSubmersion_biholomorphic_conjugate}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+A genuine holomorphic submersion remains a genuine submersion after
+precomposition and postcomposition with biholomorphisms of the source
+and target final manifolds.
+\end{lemma}
+\begin{proof}
+The genuine precomposition theorem pulls back the submersion's actual
+domain chart by the source biholomorphism, retaining the same fixed
+complement and linear projection presentation. Applied to the identity
+submersion, it says that every actual biholomorphism is a submersion.
+The genuine composition theorem therefore permits postcomposition by
+the target biholomorphism. The complement is fixed over the entire map,
+so this proves the stated global submersion and not merely pointwise
+surjectivity of a differential.
+\end{proof}
+
+\begin{theorem}[Actual finite original smooth arrows descend to the original global terminal manifolds]
+\label{hir:original-global-finite-terminal-smooth-map-cartesian}
+\uses{hir:original-global-terminal-finite-whole-biholomorphism,hir:original-global-finite-submersion-biholomorphic-transport,hir:smooth-original-finite-terminal-intrinsic-smooth-map}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.originalGlobalFiniteSmoothMap,Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.originalGlobalFiniteSmoothMap_properties}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Let $f:Y\to X$ be a genuine holomorphic submersion and let $M$ be an original
+marked ideal in the invariant domain on $X$. Given actual finite canonical
+terminal histories for $M$ and $f^*M$, construct a smooth arrow
+$G:\widetilde Y_{f^*M}\to\widetilde X_M$ between their genuine original global
+terminal manifolds. It is a holomorphic submersion, it satisfies
+$P_MG=fP_{f^*M}$ at every point, and its square with these same entire
+original projections is Cartesian among holomorphic maps of complex manifolds.
+\end{theorem}
+\begin{proof}
+The original finite terminal producer supplies the actual finite smooth
+Cartesian arrow $g:E\to D$. The preceding finite-identification theorem
+constructs genuine biholomorphisms $C_Y:\widetilde Y_{f^*M}\to E$ and
+$C_X:\widetilde X_M\to D$ from the actual original gluing, with whole
+projection equalities. Define $G=C_X^{-1}gC_Y$. The preceding submersion
+transport lemma proves it is a submersion, hence holomorphic. Apply the
+whole target projection formula at $C_X^{-1}gC_Y(z)$, cancel the inverse,
+then apply the finite arrow's projection equality and the whole source
+projection formula. The result is exactly $P_MG(z)=fP_{f^*M}(z)$.
+
+For the Cartesian property take an arbitrary complex manifold $W$ and
+holomorphic maps $a:W\to Y$, $b:W\to\widetilde X_M$ with $fa=P_Mb$.
+The whole target formula shows that $(a,C_Xb)$ is a cone for the actual
+finite Cartesian square. Its unique holomorphic lift $w:W\to E$ gives
+a lift $C_Y^{-1}w$ into the genuine original global source. The source
+projection equality and both inverse equations give the required source
+leg; the finite target leg and the target inverse equation give the $G$
+leg. Any other holomorphic lift, composed with $C_Y$, is a finite lift
+for the same cone, because the two actual whole projection formulas and
+$G=C_X^{-1}gC_Y$ identify its legs. Finite uniqueness identifies these
+maps; injectivity of $C_Y$ gives uniqueness of the global lift.
+\end{proof}
+
+
+\begin{theorem}[An actual finite target history internally produces its smooth source history]
+\label{hir:original-global-finite-smooth-source-history}
+\uses{hir:smooth-original-terminal-final-submersion-pullback}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.originalFiniteSmoothSourceHistory_properties}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+An original finite canonical terminal history for $M$ and a genuine smooth
+map $f:Y\to X$ internally produce a finite canonical terminal history for
+$f^*M$ on the entire original source $Y$, without compactness of $Y$.
+\end{theorem}
+\begin{proof}
+Apply the actual Cartesian blowup-tower producer to every step of the
+entire finite target history. It constructs an actual finite source tower
+and a genuine Cartesian smooth arrow. Original ambient canonicality
+transport identifies the canonical invariant values and centres on this
+actual tower. The entire marked pullback dictionary identifies its
+transformed marked ideal with the pullback of the target transform,
+including every indexed boundary member, and supplies actual testness.
+The true cosupport dictionary identifies source terminal cosupport with
+the inverse image of the empty target terminal cosupport, hence empty.
+These are genuine original canonicality and terminality, with the source
+history constructed internally rather than given by the caller.
+\end{proof}
+
+\begin{theorem}[A compact original target internally produces the actual global smooth Cartesian arrow]
+\label{hir:original-compact-global-terminal-smooth-map-cartesian}
+\uses{hir:original-global-finite-terminal-smooth-map-cartesian,hir:smooth-original-compact-canonical-terminal-object,hir:original-global-finite-smooth-source-history}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.originalCompactGlobalSmoothMap,Hironaka.HironakaSmoothSubmersionOriginalGlobalFinite.originalCompactGlobalSmoothMap_properties}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+If the target $X$ is compact, only the original marked-domain input $M$ and
+the genuine submersion $f$ are needed to construct the preceding global
+arrow, its submersion property, its entire original projection equality,
+and its holomorphic Cartesian law. No histories, local arrows, local
+comparison compatibility or global identifications are caller assumptions.
+\end{theorem}
+\begin{proof}
+Original smooth pullback supplies the invariant-domain predicate for the
+whole pulled-back marked record. The compact canonical driver constructs
+the actual finite history on the compact target, with canonicality
+and terminality as its outputs. The actual smooth pullback tower producer
+constructs a finite source history from this entire target history. Original
+smooth canonicality transport supplies its canonicality, and the entire
+marked and cosupport dictionaries supply its terminality. Thus the source
+need not be compact. Apply the preceding theorem to these actual histories
+and their genuine output properties. All remaining
+objects are the original terminal manifolds already constructed from
+$M$ and $f^*M$; the finite identifications retain their entire original
+projections. Thus every required datum is an internal producer output.
+\end{proof}

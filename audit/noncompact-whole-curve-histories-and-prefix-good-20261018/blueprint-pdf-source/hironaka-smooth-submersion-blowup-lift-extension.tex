@@ -1,0 +1,82 @@
+\section{Genuine holomorphic blowup lifts from original submersions}
+Let $f:B^m\to A^n$ be an actual complex submersion, without surjectivity, and let $\pi:Z^n\to A$ be any genuine blowup along its actual original centre $C$. The centre's actual closed-submanifold and nowhere-dense properties are intrinsic parts of the genuine input blowup. Neither a pulled-centre geometry, ideal equality, source blowup, lift, invertibility conclusion, Cartesian conclusion, smoothness of the lift nor naturality certificate is original input. This foundation constructs genuine source blowups and unique actual holomorphic lifts; it deliberately does not claim smoothness of the lifted map or the full unrestricted holomorphic Cartesian universal property.
+
+\begin{definition}[Actual original-input holomorphic blowup lift output]
+\label{hir:submersion-blowup-lift-output}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.ActualBlowupLift}
+\uses{}
+The produced output consists of an actual complex $m$-manifold $Z'$, a genuine blowup $\pi':Z'\to B$ along the literal centre $f^{-1}C$, and a genuine holomorphic map $g:Z'\to Z$ with actual square $\pi g=f\pi'$. It includes the entire coherent-ideal identity
+$g^*(\pi^*\mathcal I_C)=\pi'^*\mathcal I_{f^{-1}C}$ and the literal centre-preimage equality
+$g^{-1}(\pi^{-1}C)=\pi'^{-1}(f^{-1}C)$. These are produced conclusions. Centre-preimage divisors are not identified with the differential exceptional locus: a Cartier centre has a biholomorphic blowup and need not have a differential exceptional locus.
+\end{definition}
+
+\begin{theorem}[Actual original submersion produces its true nowhere-dense source centre]
+\label{hir:submersion-blowup-lift-centre}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.actual_source_centre}
+\uses{hir:submersion-relative-regular-geometry,hir:submersion-image-trace-open}
+The literal inverse image $C'=f^{-1}C$ is a genuine closed complex submanifold with empty interior, internally produced from original $f$ and the genuine target blowup.
+\end{theorem}
+\begin{proof}
+The actual target closed submanifold and the actual source submersion charts give the true pulled closed submanifold with the internally produced dimension shift $m-n$. For nowhere density, a nonempty source open contained in $f^{-1}C$ would have a nonempty actual open image under $f$. Genuine local holomorphic sections of the original submersion internally prove that $f$ is open, so this true image is a nonempty ambient open contained in $C$, contradicting the genuine target blowup's $\operatorname{int}C=\varnothing$. Thus source interior is empty without surjectivity, connectedness, compactness or a supplied source dimension/nowhere-dense conclusion. Empty source, empty centre and zero dimension use the same actual geometric statement.
+\end{proof}
+
+\begin{theorem}[A genuine source blowup is internally constructed]
+\label{hir:submersion-blowup-lift-existence}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.exists_actual_source_blowup}
+\uses{hir:submersion-blowup-lift-centre,bex:blowup-exists}
+Only original $f$ and the actual target blowup produce an actual source manifold and a genuine blowup along the literal $C'$.
+\end{theorem}
+\begin{proof}
+Use the preceding true closed/nowhere-dense source centre in the already proved genuine analytic blowup existence construction. Package its actual type, topology, complex charts and genuine complex manifold structure as the actual complex $m$-manifold $Z'$. The resulting actual projection has the genuine blowup property along EXACTLY $f^{-1}C$. Its pulled whole source vanishing ideal is invertible by that true blowup property itself. No source manifold, source blowup, nonzero generator or existence result is caller data. In particular empty source or centre does not require an artificial nonempty coordinate family.
+\end{proof}
+
+\begin{theorem}[The entire original ideal supplies true target-universal invertibility]
+\label{hir:submersion-blowup-lift-whole-ideal}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.actual_base_ideal_eq,Hironaka.HironakaSmoothSubmersionBlowupLift.actual_base_ideal_invertible}
+\uses{hir:submersion-relative-vanishing-ideal,hir:submersion-choice-image-trace-whole-pullback}
+For every genuine actual source blowup $\pi'$ along this literal source centre,
+$(f\pi')^*\mathcal I_C=\pi'^*\mathcal I_{C'}$ as ENTIRE ideal sheaves, and the former actual ideal is genuinely invertible.
+\end{theorem}
+\begin{proof}
+The genuine original closed submanifold and original submersion internally produce the entire stalkwise identity $f^*\mathcal I_C=\mathcal I_{f^{-1}C}$ from actual lifted coordinate generators, with the unit presentation off the original centre. The original centre ideal is genuinely coherent. Compose true whole holomorphic finite-span pullbacks along the actual $f$ and actual $\pi'$ to obtain the written whole ideal identity. The right side is invertible by the genuine source blowup property; transport that actual property across the ENTIRE ideal equality. This argument does not pull an arbitrary invertible ideal through an arbitrary map: only the source blowup's genuine original-centre invertibility is used.
+\end{proof}
+
+\begin{theorem}[Original geometry produces its unique genuine holomorphic lift and whole ideal square]
+\label{hir:submersion-blowup-lift-actual-lift}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.existsUnique_actual_lift,Hironaka.HironakaSmoothSubmersionBlowupLift.actualLift,Hironaka.HironakaSmoothSubmersionBlowupLift.actualLift_contMDiff,Hironaka.HironakaSmoothSubmersionBlowupLift.actualLift_proj_comm,Hironaka.HironakaSmoothSubmersionBlowupLift.actualLift_unique,Hironaka.HironakaSmoothSubmersionBlowupLift.actualLift_whole_ideal,Hironaka.HironakaSmoothSubmersionBlowupLift.actualLift_centre_preimage,Hironaka.HironakaSmoothSubmersionBlowupLift.exists_actualBlowupLift}
+\uses{hir:submersion-blowup-lift-whole-ideal,hir:submersion-blowup-lift-existence,hir:submersion-blowup-lift-output,hir:submersion-choice-image-trace-whole-pullback}
+Every genuine source blowup along $C'$ has a unique holomorphic lift $g$ with the actual original projection square. In particular the internally constructed actual source blowup gives the full output above, with whole ideal and literal centre-preimage dictionaries.
+\end{theorem}
+\begin{proof}
+The true original composite $f\pi'$ is holomorphic. The preceding internally proved ENTIRE pulled-ideal invertibility supplies the genuine target blowup universal property; it produces an actual holomorphic $g$ and proves uniqueness among ALL actual holomorphic maps with this SAME projection square. To obtain the whole ideal square, the actual holomorphic maps $g,\pi,f,\pi'$ and original coherent $\mathcal I_C$ give true whole finite-span pullback composition. Rewrite the real commutative square and the preceding actual whole ideal transport to identify $g^*(\pi^*\mathcal I_C)$ with the literal actual source blowup ideal. Its invertibility is therefore also internally proved. Taking literal inverse images in the true square gives the exact written centre-preimage identity. This last equality concerns the centre preimage; no false identification with differential exceptional locus is made.
+\end{proof}
+
+\begin{theorem}[Actual primitive blowup choices give genuine comparison and lift coherence]
+\label{hir:submersion-blowup-lift-choices}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.exists_choice_lift_cocycles}
+\uses{hir:submersion-blowup-lift-actual-lift,hir:actual-blowup-biholomorphism-cocycle}
+For two genuine source blowup choices along the SAME actual $C'$ and two genuine target choices along the SAME actual $C$, internally produced genuine biholomorphisms over their original bases compare them. The corresponding actual holomorphic lifts obey the true comparison square and its identity/inverse/composite cocycles.
+\end{theorem}
+\begin{proof}
+Apply genuine blowup uniqueness over the identical actual centre to obtain the actual holomorphic inverse comparison maps, their real projection equalities and the genuine biholomorphism. For either composite of an actual source comparison, actual produced lift and actual target comparison, the true projection squares give the SAME original base map $f\pi'$. The source blowup's actual original-centre pullback is invertible; the preceding full original ideal dictionary therefore supplies the SAME target universal uniqueness hypothesis internally. Both actual composites are genuinely holomorphic, so target uniqueness proves their true equality. Identity, inverse and composite comparison maps preserve the SAME original projections; genuine uniqueness gives their exact cocycles. No chosen lift, comparison, Cartesian or naturality conclusion is caller data.
+\end{proof}
+
+\begin{theorem}[Two original submersions internally supply genuine composite lift coherence]
+\label{hir:submersion-blowup-lift-composite}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLift.actual_composite_base_ideal_eq,Hironaka.HironakaSmoothSubmersionBlowupLift.existsUnique_actual_composite_lift,Hironaka.HironakaSmoothSubmersionBlowupLift.actualCompositeLift,Hironaka.HironakaSmoothSubmersionBlowupLift.actualCompositeLift_contMDiff,Hironaka.HironakaSmoothSubmersionBlowupLift.actualCompositeLift_proj_comm,Hironaka.HironakaSmoothSubmersionBlowupLift.actualCompositeLift_eq_comp,Hironaka.HironakaSmoothSubmersionBlowupLift.actualCompositeLift_whole_ideal,Hironaka.HironakaSmoothSubmersionBlowupLift.actualCompositeLift_centre_preimage,Hironaka.HironakaSmoothSubmersionBlowupLift.exists_actual_successive_blowups,Hironaka.HironakaSmoothSubmersionBlowupLift.exists_actual_successive_lifts}
+\uses{hir:submersion-blowup-lift-centre,hir:submersion-blowup-lift-existence,hir:submersion-blowup-lift-actual-lift,hir:submersion-relative-vanishing-ideal,hir:submersion-choice-image-trace-whole-pullback}
+For original actual submersions $f:B\to A$ and $h:P\to B$, generate genuine source blowups successively along $f^{-1}C$ and $h^{-1}(f^{-1}C)$. The true composite of the two actually produced holomorphic lifts agrees with the direct target-universal lift from that SAME actual final source blowup along the literal composite base map $fh$; different genuine source choices are related by the preceding actual comparison.
+\end{theorem}
+\begin{proof}
+Apply actual pulled closed-centre geometry and nowhere-density twice, with actual source opens and original submersions. This internally constructs the true successive source blowups. Whole vanishing-ideal transport for BOTH original submersions and true coherent finite-span composition prove $(fh)^*\mathcal I_C=\mathcal I_{h^{-1}(f^{-1}C)}$ without requiring a caller composite-submersion certificate. The actual final source blowup therefore gives genuine invertibility of the direct target pullback, and the target universal property produces a direct holomorphic lift. The actual successive lift squares compose to the SAME original map $fh\pi''$, and the composite lift is holomorphic. True target universal uniqueness identifies it with the direct lift. Literal inverse-image composition identifies the final source centre with $(fh)^{-1}C$. Genuine final-source choice comparison gives the alternative-model statement. No higher algorithm or lifted-submersion conclusion is assumed.
+\end{proof}
+
+\paragraph{Actual next geometric frontier.}
+A holomorphic compatible cone entirely inside an actual centre-preimage divisor can pull its nonzero invertible ideal back to the zero ideal. Thus the weak ideal-invertibility blowup universal property alone does NOT prove the unrestricted holomorphic Cartesian square for arbitrary cones. Genuine local product blowup charts, their actual atlas transitions and genuine choice comparison are still needed to produce smoothness of the actual lifted map and the unrestricted Cartesian universal property. General higher-invariant functoriality, noncompact general termination, old-driver identification, unrelated ideal admissibility, whole G3/G8 and formal/native/publication remain OPEN. 

@@ -1,0 +1,111 @@
+\section{Actual empty-blowup padding of terminal sharp-curve histories}
+
+An empty centre is a genuine position in an actual blowup history. We use
+actual identity blowups of the empty centre, retaining their exceptional
+slots and proving their precise geometric effect. No deletion of steps
+or canonical-history compression is used.
+
+\begin{definition}[Actual identity empty tails]
+\label{hir:sharp-actual-identity-empty-padding}
+\uses{hir:geo-transform-basic}
+\lean{Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail,Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail_length,Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail_proj,Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail_isEmptyTower}
+\leanok
+For a genuine complex manifold $Y$ and $r\in\mathbb N$, construct an
+actual tower $B_r(Y):Y\to Y$ by starting with the reflexive tower and
+appending $r$ genuine identity blowups of the empty centre. Its length
+is exactly $r$, its actual projection is the identity and every actual
+centre is empty. Both inverse laws of its projection are literal
+identity laws; the tower itself has $r$ positions.
+\end{definition}
+\begin{proof}
+The existing identity blowup theorem supplies an ACTUAL blowup predicate
+for $\operatorname{id}_Y$ at the empty centre. Use it at each successor
+of the recursion. The tower constructor increases the length by one,
+composes the previous projection with the identity and appends the
+actual empty centre. Induction from length zero proves each assertion.
+\end{proof}
+
+\begin{theorem}[Actual empty padding preserves carrier and cosupport and records every empty boundary slot]
+\label{hir:sharp-actual-identity-empty-padding-geometric-ledger}
+\uses{hir:sharp-actual-identity-empty-padding,hir:wellformed-tower,hir:geo-transform-basic}
+\lean{Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail_geometric_dictionary}
+\leanok
+Let $M$ be an actual well-formed marked record and $P$ a genuine original
+$M$ TEST. Appending $B_r(Y_P)$ gives another genuine original TEST. Its
+actual current carrier, marking and cosupport equal those at $P$, and
+its ENTIRE ordered current exceptional list is
+\[
+                         E_P\mathbin{+\!+}\operatorname{replicate}(r,\varnothing).
+\]
+No equality of the old and new ambient ideal representatives is asserted.
+\end{theorem}
+\begin{proof}
+An empty centre is admissible for EVERY actual marked record, so induction
+constructs the actual appended TEST before current geometry is used.
+For one step, the strict carrier is the closure of its preimage under
+the identity after deleting the empty set. The old carrier is closed,
+so it is unchanged. Every old exceptional member is closed by actual
+well-formedness, hence the same computation fixes each of them. The new
+exceptional member is exactly the empty preimage. The marking is retained
+by the actual controlled transform definition.
+
+At every point the actual projection is off its empty centre. The
+independently proved off-centre controlled cosupport equivalence gives
+both cosupport directions; its smooth-carrier and coherent-ideal
+requirements are supplied by actual current well-formedness. Iterating
+these one-step identities proves the stated carrier, marking, whole
+cosupport and ordered-list formulas. The controlled colon can normalize
+an ambient ideal along its carrier even in this empty step, which is why
+no literal whole-ideal equality follows from these geometric identities.
+\end{proof}
+
+\begin{theorem}[A terminal literal difference remains empty along actual recipe padding]
+\label{hir:sharp-original-curve-terminal-difference-actual-padding}
+\uses{hir:sharp-actual-identity-empty-padding-geometric-ledger,hir:sharp-original-curve-literal-ambient-difference-history-order-bound}
+\lean{Hironaka.HironakaSharpActualCurveEmptyPadding.original_curve_terminal_difference_padding}
+\leanok
+For positive ambient dimension $n$ and the original curve/SNC/density data, ANY genuine original product
+TEST $P$ with its ACTUAL literal difference $\Delta_P=\varnothing$ and
+ANY $r$, the genuine tail $B_r(Y_P)$ is a literal-$\Delta$ recipe tail
+on that SAME original prefix, and the actual difference at its endpoint
+is still empty. Every original position and every padded empty centre is
+retained.
+\end{theorem}
+\begin{proof}
+At $r=0$ the recipe is reflexive and the difference is the stated actual
+terminal difference. At a successor, the genuine original TEST theorem for
+actual literal-difference recipes applies to the shorter recipe already
+constructed by induction, supplying the original shorter TEST internally.
+The induction hypothesis says its ACTUAL computed difference is empty;
+therefore the true next identity empty blowup is precisely a blowup of
+that computed difference. Actual whole-difference support localization
+gives $\Delta_{\rm next}\subseteq\pi^{-1}(\Delta_{\rm old})$.
+The right side is empty, proving the actual new difference empty. The
+shorter recipe plus equality of the REAL next empty centre with its
+computed old difference is exactly the next recipe condition. No new
+termination, order bound or canonicality assertion is used.
+\end{proof}
+
+\begin{theorem}[Actual empty padding concatenates and transports through genuine biholomorphisms]
+\label{hir:sharp-actual-identity-empty-padding-comparison}
+\uses{hir:sharp-actual-identity-empty-padding,mc:tower-isomorphism-basic,mc:tower-isomorphism-append}
+\lean{Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail_append,Hironaka.HironakaSharpActualCurveEmptyPadding.identityEmptyTail_isTowerIso}
+\leanok
+The actual towers satisfy $B_{r+s}(Y)=B_r(Y)B_s(Y)$.
+For EVERY genuine biholomorphism $e:Y'\to Y$ and EVERY $r$, construct an
+actual stagewise isomorphism between $B_r(Y')$ and $B_r(Y)$ over $e$,
+whose terminal map is the SAME actual $e$.
+\end{theorem}
+\begin{proof}
+Induction on $s$ gives the first equality: both successor histories are
+the same actual identity empty blowup appended to their shorter equal
+histories. For the second assertion, start from the reflexive tower
+isomorphism over $e$. At each successor both actual centres are empty,
+whose true preimages under $e$ are empty; both next projections are the
+identity, so $\operatorname{id}\circ e=e\circ\operatorname{id}$ is the
+actual next square. The genuine tower-isomorphism constructor extends
+the shorter comparison with terminal map still $e$. This construction
+keeps all empty entries. Unequal stopping-length comparison, padding
+independence and actual overlap cocycles require the separate finite
+recipe comparison and remain subsequent consumers.
+\end{proof}

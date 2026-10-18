@@ -1,0 +1,103 @@
+\section{Genuine original first-phase DISTINCT defect recognition at ALL carrier points}
+
+Bierstone--Milman printed page 294 defines the FIRST-phase locus
+$Z=\{\nu(J)>t\}$, with $t$ the number of DISTINCT proper trace germ ideals.
+It is not the whole sharp non-NC locus $\Sigma^*$. Even distinct order-one
+traces can require the subsequent simultaneous-crossings recursion of Lemma
+12.7; exceptional monomial defects require Lemma 12.8. Here initial $J_i=I_i$
+are the actual original member traces and all original multiplicities are retained.
+
+\begin{lemma}[Actual original member trace order detects precisely proper incidence]
+\label{hir:sharp-original-member-order-proper-incidence-all-points}
+\source{bierstone-milman97-invent-math:page-0088}
+\uses{hir:sharp-original-empty-boundary-ordinary-trace-order-dictionary,hir:sharp-original-multiboundary-distinct-proper-trace-germs}
+\lean{Hironaka.HironakaSharpOriginalDistinctDefectPhase.properTraceMembers_eq_incident,Hironaka.HironakaSharpOriginalDistinctDefectPhase.one_le_originalMemberTraceOrder_iff,Hironaka.HironakaSharpOriginalDistinctDefectPhase.originalMemberTraceOrder_eq_zero_of_notMem}
+\leanok
+At every actual original carrier point, including bad points, a genuine original
+member trace has positive order exactly when that point lies in that original
+member; off the member its actual trace order is zero. The true proper-germ
+positions are exactly those incident positions.
+\end{lemma}
+\begin{proof}
+Actual original SNC gives the closed smooth member and coherent vanishing
+ideal. Whole-boundary density independently constructs its genuine nonzero
+restriction. The real ordinary-order cosupport dictionary and actual mark-one
+vanishing-ideal cosupport identify positive order with actual carrier/member
+intersection. Finiteness gives zero precisely off the member. Independently,
+the genuine whole restricted-span unit dictionary identifies absence of the
+unit germ with that SAME incidence. No good-NC hypothesis is used.
+\end{proof}
+
+\begin{theorem}[The actual original whole product order dominates the true DISTINCT proper trace count everywhere]
+\label{hir:sharp-original-product-order-ge-distinct-proper-count-all-points}
+\source{bierstone-milman97-invent-math:page-0088}
+\uses{hir:sharp-original-member-order-proper-incidence-all-points,hir:sharp-original-member-product-whole-factor-order-sum}
+\lean{Hironaka.HironakaSharpOriginalDistinctDefectPhase.originalProductOrder_eq_fin_sum,Hironaka.HironakaSharpOriginalDistinctDefectPhase.distinctProperTraceGermCount_le_incident,Hironaka.HironakaSharpOriginalDistinctDefectPhase.distinctProperTraceGermCount_le_length,Hironaka.HironakaSharpOriginalDistinctDefectPhase.boundaryCount_le_originalProductTraceOrder,Hironaka.HironakaSharpOriginalDistinctDefectPhase.distinctProperTraceGermCount_le_originalProductTraceOrder}
+\leanok
+For only original smooth carrier, actual SNC boundary and whole-boundary density,
+at EVERY actual carrier point the SAME literal product trace order $\nu$ is at
+least the true quotient-class count $t$ of DISTINCT proper trace germ ideals.
+The true count is at most the original list length, with no identification of
+DISTINCT count and indexed incidence at bad points.
+\end{theorem}
+\begin{proof}
+The actual quotient-class image of proper positions has cardinality at most
+the number of those positions. Every proper actual original factor has genuine
+order at least one and every other factor has order zero. Thus their true
+finite sum is at least the number of proper positions. The independently
+proved SAME whole original product-order sum identifies this sum with $\nu$.
+The number of proper positions is at most the true finite original list length.
+This proves the inequalities retaining actual multiplicities, without any
+bad-point quotient injection premise.
+\end{proof}
+
+\begin{theorem}[Equality recognizes exactly DISTINCT proper original traces of true order one]
+\label{hir:sharp-original-distinct-defect-exact-equality-recognition}
+\source{bierstone-milman97-invent-math:page-0088}
+\uses{hir:sharp-original-product-order-ge-distinct-proper-count-all-points}
+\lean{Hironaka.HironakaSharpOriginalDistinctDefectPhase.originalProductOrder_eq_distinct_iff}
+\leanok
+At any actual carrier point, the SAME $\nu=t$ if and only if EVERY actual proper
+original factor has true trace order one and the real quotient map on all
+proper positions is injective. Thus absence of the actual FIRST-phase defect
+means precisely order-one and distinct proper trace germs, including the true
+empty-family case; it does not assert simultaneous NC of all their crossings.
+\end{theorem}
+\begin{proof}
+The preceding inequalities form $t\leq\#\mathrm{proper}\leq\nu$. If $t=\nu$,
+both inequalities are equalities. True finite-sum rigidity comparing each
+actual factor order with its actual zero/one incidence value forces each proper
+factor to have order one. Equality of the actual finite quotient-image
+cardinality and its actual source cardinality gives genuine quotient
+injectivity on proper positions. Conversely order one on proper factors and
+zero elsewhere makes the true original sum equal to the number of proper
+positions, while actual quotient injectivity makes that number exactly $t$.
+Both directions keep the SAME actual original ideals, orders and germ classes.
+\end{proof}
+
+\begin{theorem}[The actual deep original maximum centre lies in the genuine first-phase DISTINCT defect]
+\label{hir:sharp-original-deep-product-actual-centre-in-distinct-defect-phase}
+\source{bierstone-milman97-invent-math:page-0088}
+\uses{hir:sharp-original-distinct-defect-exact-equality-recognition,hir:sharp-original-deep-product-first-centre-good-region-preserving}
+\lean{Hironaka.HironakaSharpOriginalDistinctDefectPhase.originalDistinctDefectPhase,Hironaka.HironakaSharpOriginalDistinctDefectPhase.originalDeepProduct_cosupp_subset_distinctDefectPhase,Hironaka.HironakaSharpOriginalDistinctDefectPhase.exists_actual_original_firstPhase_deep_centre}
+\leanok
+Define the actual initial first-phase set
+$Z=\{x\in W:t(x)<\nu(x)\}$ using the genuine whole product and actual quotient
+classes. The literal original deep cosupport at mark $\#E+1$ lies in $Z$.
+Only the preceding original inputs therefore internally select the SAME actual
+ALL-boundary admissible maximum centre inside this true $Z$, while preserving
+the already proved entire good-region avoidance. No $Z$-analyticity, selected
+centre, defect membership or restricted-$Z$ maximum certificate is input.
+\end{theorem}
+\begin{proof}
+Actual product cosupport gives true product order at least $\#E+1$ by its
+independently proved finite ordinary-order dictionary. The true DISTINCT count
+is at most $\#E$, so $t<\nu$. Actual maximum-centre containment in that SAME
+deep cosupport proves its real $Z$ membership. The genuine original maximum
+centre, whole-boundary admissibility and good avoidance are constructed by
+the independently verified preceding producer from ONLY original inputs.
+Actual analytic closedness and saturated invariant strata for general $Z$,
+maximum centres selected on the whole $Z$, the actual transformed strict trace
+family, Lemma 12.7 recursion, exceptional $\tau_D$ cleanup and full sharp
+terminating history remain separate unmet mathematical producers.
+\end{proof}

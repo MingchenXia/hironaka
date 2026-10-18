@@ -825,6 +825,34 @@ import Hironaka.Resolution.HironakaSharpActualCurveStoppedOpenGluing
 
 import Hironaka.Resolution.HironakaSharpActualCurveStoppedSuccessorNaturality
 
+import Hironaka.Resolution.HironakaActualCentreJetFrameCocycle
+
+import Hironaka.Resolution.HironakaActualCentreJetFrameTruncation
+
+import Hironaka.Resolution.HironakaActualHSConstantCentreJetFrames
+
+import Hironaka.Resolution.HironakaActualMacaulayAnnihilatorConnection
+
+import Hironaka.Resolution.HironakaActualReducedCentreBennett
+
+import Hironaka.Resolution.HironakaActualTangentJetConnection
+
+import Hironaka.Resolution.HironakaOriginalBoundTwoCompanionStepOneRebase
+
+import Hironaka.Resolution.HironakaOriginalBoundTwoStepOneRepresentative
+
+import Hironaka.Resolution.HironakaOriginalRelativeIdealLevelCut
+
+import Hironaka.Resolution.HironakaOriginalZeroContactRepresentative
+
+import Hironaka.Resolution.HironakaSharpActualCurveGrowingGoodPreservation
+
+import Hironaka.Resolution.HironakaSharpActualCurveGrowingOpenTerminal
+
+import Hironaka.Resolution.HironakaSharpActualCurveLocallyFiniteSharpHistory
+
+import Hironaka.Resolution.HironakaSharpActualCurveOriginalGrowingHistory
+
 /-!
 # Hironaka
 

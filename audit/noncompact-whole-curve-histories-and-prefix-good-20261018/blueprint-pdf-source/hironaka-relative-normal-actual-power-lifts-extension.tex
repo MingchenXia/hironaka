@@ -1,0 +1,72 @@
+\section{Original normal layers lift to genuine whole power representatives}
+
+The weighted ambient quotient requires compatible finite normal-filtration
+coordinates. The first construction lifts each free original graded layer
+back into its actual whole normal power. No splitting or basis is supplied
+to the original coherent-ideal consumer.
+
+\begin{lemma}[A free original layer has a true linear power lift]
+\label{hir:relative-normal-actual-free-layer-power-lift}
+\uses{hir:relative-normal-intrinsic-layer-multiplication}
+\lean{Hironaka.HironakaRelativeNormalActualPowerLifts.actualFreeLayerPowerLift,Hironaka.HironakaRelativeNormalActualPowerLifts.actualFreeLayerPowerLift_rightInverse}
+\leanok
+Let $B\to R$ be a commutative algebra, $I,J$ actual whole ideals of $R$,
+and $L_q=\operatorname{im}(J^q\to R/(I+J^{q+1}))$ with its actual
+$B$ action. If $L_q$ is free over $B$, there is a genuine $B$-linear
+map $\lambda_q:L_q\to J^q$ for which the actual original power-layer
+map $p_q$ satisfies $p_q\lambda_q=\operatorname{id}_{L_q}$.
+\end{lemma}
+\begin{proof}
+Choose a basis of the free module $L_q$ internally. The actual map
+$p_q:J^q\to L_q$ is surjective by the definition of its image. For each
+chosen basis vector, choose a genuine element of $J^q$ mapping to that
+same vector. Extend these actual representatives $B$-linearly using
+the basis universal property. The composite with $p_q$ is the identity
+on every chosen basis vector. Two linear maps agreeing on a basis
+agree on every vector, so the composite is the full identity.
+This proves the assertion for the actual power module and actual
+quotient map, including degree zero and the zero module.
+\end{proof}
+
+\begin{lemma}[Every lifted whole numerator has the same actual original class]
+\label{hir:relative-normal-actual-free-layer-power-lift-numerators}
+\uses{hir:relative-normal-actual-free-layer-power-lift}
+\lean{Hironaka.HironakaRelativeNormalActualPowerLifts.actualFreeLayerPowerLift_class}
+\leanok
+For every $x\in L_q$, the actual whole numerator
+$g=(\lambda_q x)\in J^q$ has exactly the original class $x$ in
+$R/(I+J^{q+1})$.
+\end{lemma}
+\begin{proof}
+Evaluate $p_q\lambda_q=\operatorname{id}$ at $x$. By the definition
+of the actual original power-layer map, $p_q(g)$ is precisely the
+class of the whole numerator $g$ in the same original quotient.
+Forgetting the image-submodule membership from this equality gives
+the asserted original quotient-class identity.
+\end{proof}
+
+\begin{theorem}[Only original coherence produces all actual nearby power lifts on one open]
+\label{hir:relative-normal-original-nearby-all-power-lifts}
+\uses{hir:relative-normal-actual-free-layer-power-lift,hir:relative-normal-nearby-all-degree-uniform-rank}
+\lean{Hironaka.HironakaRelativeNormalActualPowerLifts.exists_original_nearby_all_normal_layer_power_lifts}
+\leanok
+For an original coherent ideal sheaf on $\mathbb C^{d+t}$, original
+coherence supplies one genuine base open $U$ meeting every neighborhood
+of the origin and one rank sequence $r(q)$ such that, at every original
+plane point $a\in U$ and every $q$, its true translated original layer
+is finite free of rank $r(q)$ and has a genuine linear lift to the
+whole original normal power. The same $U$ works for all degrees.
+\end{theorem}
+\begin{proof}
+Apply the original-only all-degree uniform-rank producer to this
+same coherent ideal. It internally supplies $U$, its origin-neighborhood
+intersection property, and every actual original layer's finite
+freeness and rank, all on that same open. At each actual plane point
+and each degree, apply the first lemma to its same whole translated
+original ideal, same original normal-coordinate ideal, and actual
+tangent-base action. This produces the true power lift and its full
+right-inverse identity. Retain all previously supplied ranks, finite
+freeness and open properties. No further neighborhood, degree-dependent
+denominator, free-module witness, basis or desired power lift is an
+input to this original coherent-ideal theorem.
+\end{proof}

@@ -1,0 +1,213 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaHolomorphicJetQuotientFrames
+import Hironaka.Support.GenuineAmbientJetAlgEquivExact
+
+set_option autoImplicit false
+open Set Filter Classical
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaActualHSConstantCentreJetFrames
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf
+  HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan HironakaHolomorphicJetRankLoci
+  HironakaHolomorphicJetQuotientFrames HironakaHolomorphicJetChartInvariance
+  HironakaSmoothCentreCoherentDomain HironakaSmoothCentreNearbyStalks
+  HironakaSmoothCentreNearbyIdeal HironakaSmoothCentreRealDomainActualAmbientHS
+  HironakaSmoothCentreRealDomainOriginalStalkFreeness HironakaRelativeNormalIdeal
+  HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations
+variable {n : ℕ}
+
+/-- Every actual original Macaulay image lies in the TRUE whole jet image; its rank bound is proved. -/
+theorem finrank_originalMacaulay_le_actualJet (q : ℕ) {ι : Type*} [Fintype ι]
+    (H : ι → ComplexModel n → ℂ) (p : ComplexModel n) (hH : ∀ i,HolAt (H i) p) :
+    Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap q H p)) ≤
+      Module.finrank ℂ (LinearMap.range (finiteJet (n := n) q)) := by
+  have hd : Module.finrank ℂ (LinearMap.range (finiteJet (n := n) q))=
+      Module.finrank ℂ (scalarJetRange n q) := by
+    rw [scalarJetRange,scalarJet,LinearMap.range_comp]
+    exact ((LinearMap.range (finiteJet (n := n) q)).equivMapOfInjective
+      (finiteCoordinateArray q) (finiteCoordinateArray_injective q)).finrank_eq
+  rw [hd]
+  exact Submodule.finrank_mono (range_originalMacaulay_le_scalarJetRange q H p hH)
+
+/-- Actual whole translated-ideal HS equality faithfully determines actual ranks at every order. -/
+theorem originalMacaulay_rank_eq_of_translated_hs_eq (ℓ : ℕ) {ι : Type*} [Fintype ι]
+    (H : ι → ComplexModel n → ℂ) (p p' : ComplexModel n)
+    (hH : ∀ i,HolAt (H i) p) (hH' : ∀ i,HolAt (H i) p')
+    (hhs : hilbertSamuelValue (translatedIdeal H p hH) ℓ=
+      hilbertSamuelValue (translatedIdeal H p' hH') ℓ) :
+    Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p))=
+      Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p')) := by
+  rw [hilbertSamuelValue_translatedIdeal_eq_original_matrix_rank,
+    hilbertSamuelValue_translatedIdeal_eq_original_matrix_rank] at hhs
+  have hle := finrank_originalMacaulay_le_actualJet (ℓ+1) H p hH
+  have hle' := finrank_originalMacaulay_le_actualJet (ℓ+1) H p' hH'
+  omega
+
+section OriginalCentre
+variable {d t : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel (d+t)) M] [IsComplexManifold (d+t) M]
+
+/-- ONE actual original family/domain precedes EVERY order; ALL intrinsic HS constancy produces actual centre ranks. -/
+theorem exists_original_hs_constant_centre_common_jet_ranks
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)
+    (A : GermIdeal (d+t) M) (hA : A.IsCoherent)
+    (hhs : ∀ y ∈ C,∀ ℓ : ℕ,hilbertSamuelAt A y ℓ=hilbertSamuelAt A x ℓ) :
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x),
+      Φ.source ⊆ (chartAt (ComplexModel (d+t)) x).target ∧
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel (d+t)) x x)=0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel (d+t)) x).source →
+        chartAt (ComplexModel (d+t)) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel (d+t)) x y) ∈ complexCoordinatePlane (d+t) d)) ∧
+      ∃ (O : Set M), IsOpen O ∧ x ∈ O ∧ ∃ (N : ℕ) (G : Fin N → M → ℂ),
+        (∀ i,MDifferentiableOn 𝓘(ℂ,ComplexModel (d+t)) 𝓘(ℂ,ℂ) (G i) O) ∧
+        (∀ y ∈ O,∀ g,A.mem y g ↔ IsInSpanAt (n := d+t) (· ∈ range G) y g) ∧
+      ∃ (U : Set (ComplexModel (d+t))), IsOpen U ∧ 0 ∈ U ∧ U ⊆ Φ.target ∧
+        MapsTo (actualFlatteningInverseMap x Φ) U O ∧
+        let H : Fin N → ComplexModel (d+t) → ℂ := fun i => G i ∘ actualFlatteningInverseMap x Φ
+        (∀ i,DifferentiableOn ℂ (H i) U) ∧
+        ∃ hhol : ∀ p ∈ U,∀ i,HolAt (H i) p,
+          (∀ p (hp : p ∈ U),originalCoherentOriginIdeal
+            (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x Φ) p)=translatedIdeal H p (hhol p hp)) ∧
+          (∀ p (_hp : p ∈ U) (ℓ : ℕ),
+            hilbertSamuelAt A (actualFlatteningInverseMap x Φ p) ℓ=
+              Module.finrank ℂ (LinearMap.range (finiteJet (n := d+t) (ℓ+1)))-
+                Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p))) ∧
+          (∀ p ∈ U,p ∈ complexCoordinatePlane (d+t) d → ∀ ℓ : ℕ,
+            Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p))=
+              Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H 0))) := by
+  obtain ⟨Φ,hsrc,h0,hflat,O,hO,hxO,N,G,hG,hgen,U,hU,h0U,hUT,hMap,hH,hF,hlocal,hI,_⟩ :=
+    exists_original_regular_real_translated_ideal_dictionary C x hreg A hA
+  let H : Fin N → ComplexModel (d+t) → ℂ := fun i => G i ∘ actualFlatteningInverseMap x Φ
+  have hhol : ∀ p ∈ U,∀ i,HolAt (H i) p := by
+    intro p hp i
+    exact (InvertibleIdealQuotient.holomorphicAt_of_mdifferentiableOn hU (hH i) hp).mono
+      (fun _ hz => hz.differentiableAt)
+  have hdiff (i : Fin N) : DifferentiableOn ℂ (H i) U :=
+    fun p hp => (hhol p hp i).self_of_nhds.differentiableWithinAt
+  have hIt (p : ComplexModel (d+t)) (hp : p ∈ U) :
+      originalCoherentOriginIdeal
+        (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x Φ) p)=translatedIdeal H p (hhol p hp) := by
+    rw [hI p hp,translatedIdeal]
+    apply congrArg Ideal.span
+    apply congrArg Set.range
+    funext i
+    apply HolGerm.mk_eq_mk_iff.mpr
+    apply Eventually.of_forall
+    intro z
+    change H i (p+z)=H i (z+p)
+    rw [add_comm]
+  have hV (p : ComplexModel (d+t)) (hp : p ∈ U) (ℓ : ℕ) :
+      hilbertSamuelAt A (actualFlatteningInverseMap x Φ p) ℓ=
+        hilbertSamuelValue (translatedIdeal H p (hhol p hp)) ℓ := by
+    rw [hilbertSamuelAt_eq_fixedChart A x _
+      (actualNearbyPoint_mem_chart_source x Φ hsrc p (hUT hp)),
+      fixed_real_original_whole_stalk_ambient_hs_dictionary A hA x Φ hsrc p (hUT hp) ℓ,hIt p hp]
+  refine ⟨Φ,hsrc,h0,hflat,O,hO,hxO,N,G,hG,hgen,U,hU,h0U,hUT,hMap,hdiff,hhol,hIt,?_,?_⟩
+  · intro p hp ℓ
+    exact (hV p hp ℓ).trans
+      (hilbertSamuelValue_translatedIdeal_eq_original_matrix_rank ℓ H p (hhol p hp))
+  · intro p hp hplane ℓ
+    apply originalMacaulay_rank_eq_of_translated_hs_eq ℓ H p 0 (hhol p hp) (hhol 0 h0U)
+    rw [← hV p hp ℓ,← hV 0 h0U ℓ,actualFlatteningInverseMap_zero x Φ h0]
+    have hdom := actualNearbyPoint_mem_flatDomain x Φ hsrc p (hUT hp)
+    apply hhs _ ((hflat hdom.1 hdom.2).mpr ?_) ℓ
+    rw [actualNearbyPoint_chart_value x Φ hsrc p (hUT hp),Φ.right_inv p (hUT hp)]
+    exact hplane
+
+/-- EVERY finite order has a genuine maximal pivot AT0 and ENTIRE original centre quotient frames on true opens containing0. -/
+theorem exists_original_hs_constant_centre_origin_pivot_frames
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)
+    (A : GermIdeal (d+t) M) (hA : A.IsCoherent)
+    (hhs : ∀ y ∈ C,∀ ℓ : ℕ,hilbertSamuelAt A y ℓ=hilbertSamuelAt A x ℓ) :
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x),
+      ∃ hsrc : Φ.source ⊆ (chartAt (ComplexModel (d+t)) x).target,
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel (d+t)) x x)=0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel (d+t)) x).source →
+        chartAt (ComplexModel (d+t)) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel (d+t)) x y) ∈ complexCoordinatePlane (d+t) d)) ∧
+      ∃ (O : Set M), IsOpen O ∧ x ∈ O ∧ ∃ (N : ℕ) (G : Fin N → M → ℂ),
+        (∀ i,MDifferentiableOn 𝓘(ℂ,ComplexModel (d+t)) 𝓘(ℂ,ℂ) (G i) O) ∧
+        (∀ y ∈ O,∀ g,A.mem y g ↔ IsInSpanAt (n := d+t) (· ∈ range G) y g) ∧
+      ∃ (U : Set (ComplexModel (d+t))), IsOpen U ∧ 0 ∈ U ∧ ∃ hUT : U ⊆ Φ.target,
+        MapsTo (actualFlatteningInverseMap x Φ) U O ∧
+        let H : Fin N → ComplexModel (d+t) → ℂ := fun i => G i ∘ actualFlatteningInverseMap x Φ
+        (∀ i,DifferentiableOn ℂ (H i) U) ∧
+        ∃ hhol : ∀ p ∈ U,∀ i,HolAt (H i) p,
+          (∀ p (hp : p ∈ U),originalCoherentOriginIdeal
+            (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x Φ) p)=translatedIdeal H p (hhol p hp)) ∧
+          (∀ p (_hp : p ∈ U) (ℓ : ℕ),
+            hilbertSamuelAt A (actualFlatteningInverseMap x Φ p) ℓ=
+              Module.finrank ℂ (LinearMap.range (finiteJet (n := d+t) (ℓ+1)))-
+                Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p))) ∧
+          (∀ p ∈ U,p ∈ complexCoordinatePlane (d+t) d → ∀ ℓ : ℕ,
+            Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p))=
+              Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H 0))) ∧
+          ∀ ℓ : ℕ,∃ (k : ℕ) (rows : Fin k → monomialIndex (d+t) (ℓ+1))
+            (cols : Fin k → monomialIndex (d+t) (ℓ+1) × Fin N),
+            k=Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H 0)) ∧
+            ∃ D : Set (ComplexModel (d+t)),IsOpen D ∧ (0 : ComplexModel (d+t)) ∈ D ∧
+            ∃ hDU : D ⊆ U,
+              IsOpen ((tangentInclusion d t) ⁻¹' D) ∧ (0 : ComplexModel d) ∈ (tangentInclusion d t) ⁻¹' D ∧
+            ∃ hdet : ∀ p ∈ D,(pivotMatrix (ℓ+1) H rows cols p).det ≠ 0,
+              (∀ (v : monomialIndex (d+t) (ℓ+1) → ℂ) (a : monomialIndex (d+t) (ℓ+1)),
+                DifferentiableOn ℂ (fun p => pivotProjection (ℓ+1) H rows cols p v a) D) ∧
+              ∀ p (hp : p ∈ D),p ∈ complexCoordinatePlane (d+t) d →
+                LinearMap.ker (pivotProjection (ℓ+1) H rows cols p)=
+                  LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p) ∧
+                LinearMap.ker (wholeQuotientCoordinates (ℓ+1) H rows cols p (hdet p hp) (hhol p (hDU hp)))=
+                  (translatedIdeal H p (hhol p (hDU hp)) ⊔
+                    IsLocalRing.maximalIdeal (HolGerm (ComplexModel (d+t))) ^ (ℓ+1)).restrictScalars ℂ ∧
+                Nonempty ((HolGerm (ComplexModel (d+t)) ⧸
+                    (wholeChartStalkIdeal A x (actualFlatteningInverseMap x Φ p)
+                      (actualNearbyPoint_mem_chart_source x Φ hsrc p (hUT (hDU hp))) ⊔
+                      IsLocalRing.maximalIdeal (HolGerm (ComplexModel (d+t))) ^ (ℓ+1)))
+                  ≃ₗ[ℂ] fixedQuotientModel (ℓ+1) rows) := by
+  obtain ⟨Φ,hsrc,h0,hflat,O,hO,hxO,N,G,hG,hgen,U,hU,h0U,hUT,hMap,hH,hhol,hI,hD,hR⟩ :=
+    exists_original_hs_constant_centre_common_jet_ranks C x hreg A hA hhs
+  let H : Fin N → ComplexModel (d+t) → ℂ := fun i => G i ∘ actualFlatteningInverseMap x Φ
+  refine ⟨Φ,hsrc,h0,hflat,O,hO,hxO,N,G,hG,hgen,U,hU,h0U,hUT,hMap,hH,hhol,hI,hD,hR,?_⟩
+  intro ℓ
+  let k := Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H 0))
+  have hminor : ¬ ∀ (rows : Fin k → monomialIndex (d+t) (ℓ+1))
+      (cols : Fin k → monomialIndex (d+t) (ℓ+1) × Fin N),
+      (Matrix.of fun i j => originalMacaulayMatrix (ℓ+1) H 0 (rows i) (cols j)).det=0 := by
+    intro hz
+    have hlt := (finite_column_rank_lt_iff_minors_eq_zero (originalMacaulayMatrix (ℓ+1) H 0) k).mpr hz
+    change k<k at hlt
+    exact (lt_irrefl k) hlt
+  push Not at hminor
+  obtain ⟨rows,cols,hdet0⟩ := hminor
+  let f : ComplexModel (d+t) → ℂ := originalMacaulayMinor (ℓ+1) H rows cols
+  let D : Set (ComplexModel (d+t)) := U ∩ f ⁻¹' ({0} : Set ℂ)ᶜ
+  have hDo : IsOpen D :=
+    (differentiableOn_originalMacaulayMinor (ℓ+1) H hU hH rows cols).continuousOn.isOpen_inter_preimage
+      hU isClosed_singleton.isOpen_compl
+  have h0D : (0 : ComplexModel (d+t)) ∈ D := ⟨h0U,hdet0⟩
+  have hDU : D ⊆ U := inter_subset_left
+  have hdet : ∀ p ∈ D,(pivotMatrix (ℓ+1) H rows cols p).det ≠ 0 := fun _ hp => hp.2
+  refine ⟨k,rows,cols,rfl,D,hDo,h0D,hDU,hDo.preimage (tangentInclusion d t).continuous,?_,hdet,?_,?_⟩
+  · change tangentInclusion d t 0 ∈ D
+    simpa only [map_zero] using h0D
+  · intro v a
+    exact pivotProjection_holomorphic_entries (ℓ+1) H rows cols hU hH hDU hdet v a
+  · intro p hp hplane
+    have hr : Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) H p))=k :=
+      hR p (hDU hp) hplane ℓ
+    refine ⟨ker_pivotProjection_eq_entire_image (ℓ+1) H rows cols p (hdet p hp) hr,
+      ker_wholeQuotientCoordinates (ℓ+1) H rows cols p (hdet p hp) hr (hhol p (hDU hp)),?_⟩
+    let E := actualNearbyGermEquiv Φ p (hUT (hDU hp))
+    let e := actualLocalAmbientJetAlgEquiv E (translatedIdeal H p (hhol p (hDU hp))) (ℓ+1)
+    have hmap := (whole_original_stalk_dictionary_at_actual_target A hA x Φ hsrc p (hUT (hDU hp))).1
+    rw [hI p (hDU hp)] at hmap
+    have e' := e
+    rw [hmap] at e'
+    exact ⟨e'.toLinearEquiv.symm.trans
+      (wholeQuotientFrame (ℓ+1) H rows cols p (hdet p hp) hr (hhol p (hDU hp)))⟩
+
+end OriginalCentre
+end
+end Hironaka.HironakaActualHSConstantCentreJetFrames

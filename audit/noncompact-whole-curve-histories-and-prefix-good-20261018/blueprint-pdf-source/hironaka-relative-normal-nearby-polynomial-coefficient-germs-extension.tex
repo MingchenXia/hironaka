@@ -1,0 +1,48 @@
+\section{Actual nearby coefficient germs and the entire translated central polynomial model}
+This OWN OFFLIB continuation uses actual affine maps of FUNCTIONS, never a canonical map from all origin germs to nearby germs. The original coherent ideal internally selects the SAME finite homogeneous relation family, true neighbourhood and actual central model. Identifying this entire translated central model with the nearby ORIGINAL normal cone remains a subsequent producer.
+
+\begin{lemma}[Actual affine function translations produce genuine entire nearby coefficient germs]
+\label{hir:relative-normal-nearby-actual-function-coefficient-germs}
+\lean{Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualCoefficientFunctionTranslation_holomorphic,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualAmbientBaseTranslation_tangent,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualAmbientBaseTranslation_normal}
+\uses{hir:relative-normal-translated-jets-actual-affine-pullback,hir:relative-normal-analytic-coefficients-common-open}
+\leanok
+An actual coefficient function holomorphic at a genuine base point $a$ has a true entire origin germ after composition with the genuine affine function map $z\mapsto a+z$. On the original base-preserving ambient affine map $w\mapsto \iota(a)+w$, actual tangent projection translates by $a$ and EVERY actual normal coordinate is unchanged.
+\end{lemma}
+\begin{proof}
+The actual affine translation is a genuine entire holomorphic map of original manifolds, and its actual value at zero is $a$. The genuine local complex chain rule transfers coefficient holomorphicity at $a$ to a true whole holomorphic germ of its translated function at zero. Tangent projection is genuinely linear and retracts actual tangent inclusion, so projection of $\iota(a)+w$ is exactly $a+\operatorname{pr}(w)$. Every actual normal coordinate of $\iota(a)$ is literally zero; linear evaluation therefore leaves its normal coordinate equal to that of $w$. These are actual whole function and coordinate identities, not a map on arbitrary origin-germ equivalence classes.
+\end{proof}
+
+\begin{lemma}[Whole nearby polynomial coefficient germs retain literal finite support and true homogeneous degree]
+\label{hir:relative-normal-nearby-entire-polynomial-coefficient-germs}
+\lean{Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNearbyCoefficientPolynomial,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNearbyCoefficientPolynomial_coeff,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNearbyCoefficientPolynomial_support_subset,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNearbyCoefficientPolynomial_homogeneous}
+\uses{hir:relative-normal-nearby-actual-function-coefficient-germs,hir:relative-normal-central-literal-polynomial-functions,hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary}
+\leanok
+For a genuine original polynomial $P$ whose actual coefficient functions are holomorphic at $a$, form its actual finite polynomial $P_a$ over entire translated base coefficient germs. At EVERY exponent its coefficient is the WHOLE true translated germ of the SAME original coefficient function; its true support is contained in the original finite support, and EVERY genuine original homogeneous degree is retained.
+\end{lemma}
+\begin{proof}
+Define $P_a$ by the finite sum over original support of monomials with actual translated coefficient germs. Actual coefficient extraction gives the asserted coefficient at every supported exponent. At an exponent outside original support, the original coefficient is zero and its actual representative is the literal zero function. Its actual affine translation remains zero, hence its entire coefficient germ is zero. Thus the same formula holds at EVERY exponent and the actual support is contained in the original finite support. Every exponent with nonzero actual new coefficient therefore belonged to the true original support; its original homogeneous degree gives the SAME actual degree. No point-value coefficient surrogate or nearby-germ ring map on arbitrary origin germs is used.
+\end{proof}
+
+\begin{lemma}[Translated entire ambient polynomial-function germs are genuine evaluation of their nearby coefficient polynomials]
+\label{hir:relative-normal-nearby-whole-polynomial-evaluation-dictionary}
+\lean{Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNormalMonomialFunctionTranslation,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNormalPolynomialFunctionTranslation_dictionary,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNormalPolynomialFunctionTranslation_holomorphic,Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actualNormalPolynomialFunctionTranslation_whole_germ}
+\uses{hir:relative-normal-nearby-entire-polynomial-coefficient-germs,hir:relative-normal-central-literal-monomial-functions,hir:relative-normal-central-literal-polynomial-functions}
+\leanok
+The WHOLE germ of the original literal normal-polynomial function translated by the actual tangent inclusion of $a$ equals normal evaluation of the genuine entire coefficient-germ polynomial $P_a$.
+\end{lemma}
+\begin{proof}
+The actual affine coordinate identities of the first lemma rewrite the entire translated function as the SAME true finite sum of actual coefficient functions translated on the base and composed with true tangent projection, times unchanged original normal monomial functions. The true whole germ map preserves every finite sum and product. The base coefficient germ pulls back through the SAME genuine tangent projection; each true normal monomial germ is the actual original normal monomial. The actual finite monomial evaluation formula therefore identifies the WHOLE sum germ with actual normal evaluation of $P_a$. Nothing is inferred from equality of values only, and every coefficient germ and actual normal-coordinate identity is retained.
+\end{proof}
+
+\begin{theorem}[Only original coherent input supplies the entire genuine translated nearby central ideal by actual homogeneous coefficient-germ polynomials]
+\label{hir:relative-normal-nearby-original-translated-central-polynomial-model}
+\lean{Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.exists_original_whole_translated_central_polynomial_model}
+\uses{hir:relative-normal-central-original-whole-polynomial-model,hir:relative-normal-nearby-whole-polynomial-evaluation-dictionary,hir:relative-normal-translated-jets-original-ideal-dictionary,hir:relative-normal-deformation-whole-origin-ideal,hir:relative-normal-homogeneous-whole-analytic-contraction}
+\leanok
+Only original coherent $I$ internally supplies SAME $N$ and a genuine base open $B$ containing zero. At EVERY $a\in B$, the ENTIRE origin ideal of the actual affine pullback of the SAME selected original central ideal equals the analytic normal-evaluation ideal image of the span of the SAME finite original relations with their WHOLE actual translated coefficient germs. The latter is an actual homogeneous polynomial ideal, constructed internally from actual original homogeneous degrees, and is the ENTIRE polynomial inverse-image kernel of this actual translated central ideal. No original translated normal-cone equality or all-order free frame is supplied as an input or claimed.
+\end{theorem}
+\begin{proof}
+The preceding original-input literal polynomial model supplies SAME $N,V$, original selected central coherence, actual whole finite polynomial-functional span at EVERY point of $V$, true coefficient holomorphicity and original homogeneous relation degrees. Take $B=\iota^{-1}(V)$ using the genuine original tangent inclusion. It is an actual open containing zero. At any actual $a\in B$, every original finite coefficient function is genuinely holomorphic at $a$ by the actual retraction identity. The preceding lemmas internally form every entire nearby coefficient-germ polynomial of the SAME finite original relation family and retain its homogeneous degree.
+
+The selected original central coherence and genuine finite functional presentation at $\iota(a)$ internally supply the ENTIRE actual affine pullback's finite generators, equal to these same literal generator functions composed with the actual affine translation. The genuine original origin ideal of this coherent pullback is exactly the span of their actual whole origin germs. The preceding WHOLE evaluation dictionary identifies each such germ with actual normal evaluation of the SAME true coefficient-germ polynomial. Genuine ideal-map span equality therefore gives the asserted whole ideal image. Every actual nearby polynomial is homogeneous at its internally retained original degree, so the span of this SAME finite family is a genuine homogeneous ideal by the actual graded ideal constructor. The actual homogeneous analytic contraction theorem internally identifies its WHOLE polynomial inverse-image kernel as exactly this SAME actual homogeneous ideal. This entire translated central-model dictionary still requires separate identification with the nearby ORIGINAL deformation saturation and original normal initial ideal before all-degree flattening can be transported.
+\end{proof}

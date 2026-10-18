@@ -1,0 +1,127 @@
+\section{Genuine adjacent-order truncation of original centre jet frames}
+
+\begin{definition}[A fixed linear representative in the entire original germ ring]
+\label{hir:actual-fixed-entire-scalar-jet-representatives}
+\uses{hir:actual-fixed-whole-scalar-jet-range,hir:actual-entire-point-quotient-pivot-frame}
+For every genuine jet order $q$, choose once a complex-linear right
+inverse of the original scalar jet map restricted to its actual image.
+It maps the existing $\mathrm{scalarJetRange}(n,q)$ into the ENTIRE
+original holomorphic germ ring. Its original scalar jet is exactly
+the input array. Restricting it to any existing constant row-kernel
+quotient model gives a representative whose whole quotient coordinates
+are that model element at every actual point where the original pivot
+is nonzero and the original functions are holomorphic.
+\lean{Hironaka.HironakaActualCentreJetFrameTruncation.actualScalarJetRepresentative,Hironaka.HironakaActualCentreJetFrameTruncation.scalarJet_actualScalarJetRepresentative,Hironaka.HironakaActualCentreJetFrameTruncation.wholeCoordinates_fixed_representative}
+\leanok
+\end{definition}
+\begin{proof}
+The existing original scalar jet map onto its actual image is
+surjective. Complex vector spaces are projective, so the genuine
+surjective linear map has a linear right inverse; choose it once.
+The defining right-inverse equality proves equality of the actual
+whole jet arrays. An existing fixed quotient model is literally a
+subspace of this same scalar jet image with the selected rows zero.
+The original inverse-pivot projection fixes every such array.
+Consequently the entire original germ representative has exactly
+the specified original whole quotient coordinates. There is no
+point-dependent inverse choice and no map from arbitrary origin
+germs to nearby germs.
+\end{proof}
+
+\begin{theorem}[The genuine frame transition is the whole original quotient truncation]
+\label{hir:actual-whole-quotient-frame-truncation}
+\uses{hir:actual-fixed-entire-scalar-jet-representatives,hir:actual-holomorphic-pivot-whole-kernel,hir:actual-entire-point-quotient-pivot-frame}
+At genuine nonzero pivots for one SAME original holomorphic family
+$H$ at orders $q\le r$, define the linear transition from the actual
+upper fixed quotient model to the lower one by taking its fixed
+entire original representative and its actual lower whole quotient
+coordinates. If both actual original ranks equal the selected pivot
+sizes, this transition carries every original upper numerator
+coordinate to the SAME original lower numerator coordinate and is
+surjective. Under the existing original whole quotient frames, it
+is exactly the ordinary quotient factor
+$R/(I_p+\mathfrak m^r)\longrightarrow R/(I_p+\mathfrak m^q)$.
+\lean{Hironaka.HironakaActualCentreJetFrameTruncation.actualJetFrameTruncation,Hironaka.HironakaActualCentreJetFrameTruncation.actualJetFrameTruncation_wholeCoordinates,Hironaka.HironakaActualCentreJetFrameTruncation.actualJetFrameTruncation_surjective,Hironaka.HironakaActualCentreJetFrameTruncation.actualJetFrameTruncation_quotient_factor}
+\leanok
+\end{theorem}
+\begin{proof}
+The upper whole coordinates of the fixed representative agree with
+the upper whole coordinates of the original numerator. Their
+difference is therefore in the ENTIRE proved upper coordinate
+kernel, which is exactly the same actual ideal $I_p$ plus the genuine
+power $\mathfrak m^r$. Since $q\le r$, this whole ideal is contained
+in $I_p+\mathfrak m^q$, the entire lower coordinate kernel. Thus the
+lower whole coordinates of the representative and original numerator
+agree. Lower whole coordinates are surjective, so lifting an arbitrary
+lower model vector to one original numerator and then taking its
+upper coordinates proves surjectivity of the transition. The actual
+ideal inclusion defines the original complex-algebra quotient factor,
+which is itself surjective. On every original numerator class both
+frame routes equal the proved same lower whole coordinates. Original
+quotient surjectivity therefore proves equality of the entire maps,
+not only equality on a selected finite column space.
+\end{proof}
+
+\begin{theorem}[The actual transition entries are holomorphic without differentiating an inverse frame]
+\label{hir:actual-jet-frame-truncation-holomorphic-entries}
+\uses{hir:actual-whole-quotient-frame-truncation,hir:actual-holomorphic-pivot-whole-kernel}
+For actual holomorphic original functions on a real ambient open and
+a fixed nonzero lower pivot there, every actual scalar entry of the
+transition applied to any fixed upper model vector is holomorphic
+on that same open. This holds in particular for every member of any
+fixed finite complex basis of the upper model.
+\lean{Hironaka.HironakaActualCentreJetFrameTruncation.actualJetFrameTruncation_holomorphic_entries}
+\leanok
+\end{theorem}
+\begin{proof}
+The upper model and its linear whole-germ representative are constant
+with respect to the actual point. The representative's original
+lower scalar jet is therefore a fixed complex array. The transition
+entries are literally the existing original lower inverse-pivot
+projection applied to that fixed array. Its entries are holomorphic
+by the genuine determinant/adjugate proof on the actual nonzero
+pivot domain. No derivative of an arbitrarily chosen point-dependent
+frame inverse is used.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centres supply genuine adjacent-order transition families through zero]
+\label{hir:actual-hs-constant-centre-adjacent-order-truncation}
+\uses{hir:actual-hs-constant-centre-origin-pivot-whole-frames,hir:actual-whole-quotient-frame-truncation,hir:actual-jet-frame-truncation-holomorphic-entries}
+From ONLY the original coherent ideal, actual regular centre at $x$
+and original ALL intrinsic HS constancy on that centre, choose the
+SAME genuine original $G$, flattening, and real ambient $U\ni0$
+BEFORE every order as in the proved origin-frame producer. For every
+$\ell$, internally choose its actual pivots at truncations $\ell+1$
+and $\ell+2$. The intersection of their real ambient domains is open,
+is contained in that SAME $U$ and contains $0$; its true tangent
+preimage is also open and contains $0$. On its centre plane the
+actual transition is the genuine surjective whole quotient truncation,
+commutes with EVERY original numerator, and has actual holomorphic
+entries on the real ambient intersection.
+\lean{Hironaka.HironakaActualCentreJetFrameTruncation.exists_original_hs_constant_centre_adjacent_jet_truncations}
+\leanok
+\end{theorem}
+\begin{proof}
+Apply the source-derived original origin-pivot theorem once, keeping
+its original finite generators, flattening and ambient $U$ fixed for
+all orders. At the chosen adjacent orders take its two genuine
+pivots and intersect their original real domains. Both domains
+contain zero, so their intersection does too; continuous actual
+tangent inclusion gives the asserted tangent neighbourhood. The
+original rank constancy on the actual centre gives the two genuine
+pivot-rank equalities there. The preceding whole-kernel argument
+therefore identifies the actual transition with the entire quotient
+factor and proves its surjectivity and same-numerator identity.
+The functions are holomorphic on the SAME original $U$, and the
+actual lower pivot is nonzero throughout the intersection, so the
+preceding fixed-representative proof gives its holomorphic entries.
+All source generators are literal original composites chosen once;
+no matrix, rank, frame or desired quotient diagram is an input.
+\end{proof}
+
+Neighbourhoods may depend on the adjacent order. These true structural
+truncations do not establish tangent differential/Spencer compatibility,
+normal-flatness, canonical reduced centre compatibility, existential
+compatible analytic vertices or general positive-dimensional Bennett.
+The complementary original tangent-translation/word-corrected connection
+is a separate mathematical producer.

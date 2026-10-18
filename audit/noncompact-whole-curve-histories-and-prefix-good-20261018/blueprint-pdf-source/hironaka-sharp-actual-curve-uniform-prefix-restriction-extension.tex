@@ -1,0 +1,88 @@
+\section{Actual open restriction of uniform-stage histories}
+
+\begin{theorem}[Actual restriction-prefix comparison, constructed from whole histories]
+\label{hir:sharp-actual-curve-uniform-prefix-open-restriction}
+\uses{hir:sharp-actual-curve-uniform-prefix-padding,hir:tower-split-iso,hir:sharp-actual-identity-empty-padding-open-restriction,hir:sharp-actual-stagewise-tower-comparison-unique}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixRestriction.exists_unique_uniformPrefix_open_restriction}
+\leanok
+For every actual finite blowup tower $T$ over $X$, actual base open $U$
+and natural $k$, construct a unique actual stagewise isomorphism over
+$\mathrm{id}_U$ from the uniform $k$ prefix of $T|_U$ to the actual
+restriction to $U$ of the uniform $k$ prefix of $T$. The target endpoint
+is the ENTIRE genuine inverse-image open in that original prefix stage.
+No restriction, flattening or endpoint comparison certificate is input.
+\end{theorem}
+\begin{proof}
+Write $R=T|_U$ and append $k$ actual identity-empty successors. The
+already proved restriction-of-concatenation isomorphism identifies
+$(T\cdot\mathrm{Empty}_k)|_U$ with $R$ followed by the restriction of
+the SAME empty tail. Its separate actual empty-tail restriction
+isomorphism identifies this latter tail with the $k$ identity-empty
+blowups on the genuine endpoint inverse-image open of $R$. Their true
+stagewise composition gives a full tower isomorphism; both underlying
+base maps are literally the identity on $U$.
+
+Split this full isomorphism before its last $|T|$ positions. Independently
+apply the existing split-restriction theorem to $T\cdot\mathrm{Empty}_k$
+at that SAME cut. The inverse of the first actual head isomorphism,
+followed by the second, compares the requested prefix and restricted
+prefix. The true equality $|R|=|T|$ transports the ENTIRE dependent
+endpoint/tower predicate, preserving all hidden manifold structure;
+no partial numerical rewriting of a stage is used. Genuine fixed-tower
+uniqueness proves uniqueness of this actual map. This construction
+retains every restricted empty centre as a genuine step.
+\end{proof}
+
+\begin{theorem}[The actual prefix restriction preserves the full projection square]
+\label{hir:sharp-actual-curve-uniform-prefix-restriction-projection}
+\uses{hir:sharp-actual-curve-uniform-prefix-open-restriction,mc:tower-isomorphism-basic}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixRestriction.uniformPrefix_open_restriction_projection}
+\leanok
+Every genuine restriction-prefix comparison from the preceding theorem
+commutes pointwise with the original prefix projection to $X$, after
+the actual subtype inclusions. This is the full projection square on
+the whole genuine prefix endpoint, not only on its strict carrier or
+off the centres.
+\end{theorem}
+\begin{proof}
+The whole actual tower isomorphism over $\mathrm{id}_U$ gives its
+existing full projection-commutation identity at every point. Apply
+the genuine subtype inclusion $U\hookrightarrow X$ to that identity.
+The actual projection of a restricted tower is the restriction of
+the original projection, so the resulting equality is exactly the
+stated whole prefix projection square. No density or exceptional-locus
+argument, or additional inverse, is needed.
+\end{proof}
+
+\begin{theorem}[Actual uniform-stage maps restrict by genuine conjugation]
+\label{hir:sharp-actual-curve-uniform-prefix-map-restriction}
+\uses{hir:sharp-actual-curve-uniform-prefix-open-restriction,hir:sharp-actual-stagewise-tower-comparison-unique,hir:sharp-actual-stagewise-comparison-open-restriction}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixRestriction.exists_unique_uniformPrefix_comparison_open_restriction}
+\leanok
+Given a genuine stagewise comparison of two actual uniform $k$ prefixes
+over a genuine base biholomorphism and an actual target base open,
+construct the actual stagewise comparison between the uniform prefixes
+of the two full restricted histories. It is the genuine restriction
+of the old prefix map conjugated by the two independently constructed
+restriction-prefix isomorphisms. ANY direct stagewise comparison on
+these exact restricted prefix towers is equal to that actual map.
+\end{theorem}
+\begin{proof}
+The old genuine prefix comparison gives an actual projection square;
+that square identifies the source prefix endpoint open with the
+inverse image of the target prefix endpoint open. The existing full
+comparison restriction theorem therefore restricts the old map to
+those real opens, with both actual inverse laws. Independently
+construct both restriction-prefix isomorphisms by the first theorem.
+Compose the source flattening, actual restricted old map, and inverse
+target flattening. True stagewise composition supplies the complete
+new isomorphism over the actual restricted base map, retaining all
+centres, arrows and slots. A direct comparison has the same full
+source tower, target tower and base map; genuine universal uniqueness
+makes it equal to this conjugation. No caller compatibility or desired
+map equality is assumed.
+
+These are actual finite-stage restriction producers. Original-only
+common-open stage atlases, global next blowup universal properties and
+local stationarity of a global sequence remain separate constructions.
+\end{proof}

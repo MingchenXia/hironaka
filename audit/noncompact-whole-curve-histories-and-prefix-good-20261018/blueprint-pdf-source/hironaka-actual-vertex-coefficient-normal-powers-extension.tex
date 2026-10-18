@@ -1,0 +1,89 @@
+\section{Original coefficient cosupport gives the same analytic vertices their normal powers}
+
+\begin{theorem}[The actual zero-middle presentation centre is exactly the normal block]
+\label{hir:actual-vertex-coefficient-zero-middle-centre}
+\uses{hir:actual-local-coefficient-cosupport-analytic-centre-power}
+For the unchanged three-block coefficient presentation with dimensions
+$(d,0,t)$, its selected-coordinate set is exactly the original last
+normal block $A=\mathrm{actualTangentCentreVariables}(d,t)$.
+Consequently every actual exponent has the same original presentation
+centre weight and normal-block weight.
+\lean{Hironaka.HironakaActualVertexCoefficientNormalPowers.actualCoefficientCentreVariables_zero_middle,Hironaka.HironakaActualVertexCoefficientNormalPowers.actualCoefficientCentreVertexWeight_zero_middle}
+\leanok
+\end{theorem}
+\begin{proof}
+The existing literal three-block centre dictionary identifies its set
+with the actual coordinates whose indices are at least $d$.
+The existing two-block dictionary identifies the original last normal
+block with the very same set, including an empty normal block.
+The two unchanged coordinate sets therefore agree. Applying the
+original coordinate-weight function and the original finite-exponent
+weighted sum gives the stated weight equality.
+\end{proof}
+
+\begin{theorem}[Genuine original coefficient cosupport gives every same analytic vertex its entire normal power]
+\label{hir:actual-vertex-coefficient-cosupport-same-generator-normal-power}
+\uses{hir:actual-vertex-coefficient-zero-middle-centre,hir:actual-original-vertex-coefficient-cosupport-strict-generators,hir:actual-local-coefficient-cosupport-normal-power,hir:actual-formal-normal-power-contracts-exact-original-analytic-power}
+Let $I$ be an original analytic germ ideal, and let $P$ be any of the
+existing genuine $\mathrm{ActualAnalyticVertexCoefficientData}(d,0,t,I)$.
+For each actual vertex $a$ put $q_a$ equal to its actual normal-block
+weight. Suppose that for every $a$ and every actual normal exponent
+$\gamma$ of degree below $q_a$, the true set
+$P.\mathrm{domain}\cap\mathrm{complexCoordinatePlane}(d,d)$ lies in
+the original cosupport of the actual principal coefficient ideal
+of $P.\mathrm{coefficient}(a,\gamma)$ with mark $q_a-|\gamma|$.
+Then every SAME original generator $P.\mathrm{generator}(a)$ belongs
+to the entire original ideal power $N^{q_a}$.
+\lean{Hironaka.HironakaActualVertexCoefficientNormalPowers.actualVertexCoefficientData_generator_mem_normal_pow}
+\leanok
+\end{theorem}
+\begin{proof}
+Fix the actual vertex $a$. Keep its actual generator and every actual
+coefficient function from $P$, on the actual open neighbourhood
+$P.\mathrm{domain}$ containing zero. Their original local principal
+ideals are coherent there and contain these very functions, by the
+original fields of $P$; the assumed ordinary cosupport is on this
+same real domain. The local Hadamard coefficient-power theorem thus
+puts the entire Taylor series of this same generator in the original
+presentation-centre power of exponent $q_a$. Its coefficient hypothesis
+is exactly $P.\mathrm{coefficient\_eq}$; no replacement coefficient,
+reduced formal generator or new analytic realization is chosen.
+Use the preceding literal centre/weight equality, and then the proved
+whole original Taylor contraction for the normal ideal. The entire
+original generator itself belongs to $N^{q_a}$, as asserted.
+This uses actual geometric cosupport, rather than a supplied normal
+power, restriction, quotient or HS certificate.
+\end{proof}
+
+\begin{theorem}[The same actual coefficient data supply the whole axis-image and every translated-family HS bound]
+\label{hir:actual-vertex-coefficient-cosupport-axis-translated-hs}
+\uses{hir:actual-vertex-coefficient-cosupport-same-generator-normal-power,hir:actual-normal-components-in-axis-normalized-image,hir:actual-normal-normalized-hs-le-translated-components}
+Under precisely the preceding original cosupport assumption, let
+$P_a$ be the existing canonical actual normal homogeneous polynomial
+of degree $q_a$ of the SAME generator $P.\mathrm{generator}(a)$.
+For every genuine normal chart $(j,b)$ the entire dehomogenized family
+ideal is contained in the actual zero-axis image of the unchanged
+normalized-member ideal. At every original HS order, the normalized
+ideal value is at most that of the genuine translated family $(P_a)$
+at the actual point $p_j=1$, $p_i=b_i$ for $i\ne j$.
+\lean{Hironaka.HironakaActualVertexCoefficientNormalPowers.actualVertexCoefficientData_dehomogenizedFamily_le_axis_normalized_image,Hironaka.HironakaActualVertexCoefficientNormalPowers.hilbertSamuelValue_actualVertexCoefficientData_normalized_le_translated}
+\leanok
+\end{theorem}
+\begin{proof}
+Every same generator is in $I$ by the original member field of $P$,
+and the preceding actual local Hadamard argument internally gives all
+its required normal powers. Insert these two genuine memberships in
+the proved whole-family axis-image inclusion. It gives the entire
+ideal inclusion for these very canonical polynomials, not a finite
+jet or a newly chosen analytic family. Insert the same two memberships
+in the proved all-order axis-specialization/unit-coordinate HS bridge.
+This gives the stated original inequality at each order, with no
+numeric HS assumption and no supplied normal-power premise.
+\end{proof}
+
+The original geometric coefficient-cosupport premise remains explicit.
+The original marked-ideal admissibility condition alone only gives its
+single marked order, not every variable vertex weight. Deriving this
+actual coefficient cosupport from an all-order HS-constant permissible
+centre is a further producer. The translated-family/source-ideal HS
+comparison and general positive-dimensional Bennett remain separate.

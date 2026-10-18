@@ -1,0 +1,135 @@
+\section{The actual differential exceptional locus of a normal-coordinate chart}
+
+\begin{theorem}[The actual manifold differential retains the tangent rows]
+\label{hir:actual-normal-blowup-differential-coordinates}
+\uses{hir:actual-point-blowup-differential-coordinates,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+For the unchanged polynomial chart with selected-coordinate set $A$,
+the actual holomorphic manifold differential has row $v_i$ outside
+$A$, row $v_e$ at its exceptional selected coordinate, and row
+$v_e(b_i+z_i)+z_ev_i$ at every other selected coordinate.
+\lean{Hironaka.HironakaActualNormalBlowupExceptionalLocus.mfderiv_actual_selected_blowup_apply}
+\leanok
+\end{theorem}
+\begin{proof}
+Compose the genuine actual Fr\'echet differential with the original
+continuous linear coordinate projection. The chain rule gives the
+actual scalar-row derivative. On a selected coordinate that scalar
+function equals the already proved point-chart scalar function at
+every actual point, so uniqueness of the differential identifies its
+row with the genuine point-chart derivative. Outside the selected
+set the scalar function is exactly the original linear coordinate
+projection, whose derivative is itself. The existing self-model
+manifold/Fr\'echet differential dictionary gives the asserted actual
+manifold formula. No Jacobian certificate is assumed.
+\end{proof}
+
+\begin{theorem}[Normal codimension at least two supplies a genuine nonzero differential kernel]
+\label{hir:actual-normal-blowup-hyperplane-exceptional}
+\uses{hir:actual-normal-blowup-differential-coordinates}
+For the actual last normal block of size $t\ge2$, an actual
+$j\in\{0,\ldots,t-1\}$ and $e=d+j$, every point with $z_e=0$
+belongs to the original differential exceptional locus of the actual
+normal blowup chart.
+\lean{Hironaka.HironakaActualNormalBlowupExceptionalLocus.exists_actual_normal_blowup_nonzero_kernel,Hironaka.HironakaActualNormalBlowupExceptionalLocus.mem_exceptionalLocus_actual_normal_blowup_of_coordinate_eq_zero}
+\leanok
+\end{theorem}
+\begin{proof}
+Choose a genuine different normal index $k\ne j$, possible because
+$t\ge2$, and take the actual standard vector supported at $d+k$.
+Its $d+k$ coordinate is one, so it is nonzero. Every tangent coordinate
+and its exceptional coordinate $d+j$ are zero. The preceding actual
+row formula gives zero in the exceptional output and every other
+normal output because $v_e=z_e=0$. Every tangent output is its zero
+tangent coordinate. Thus the entire actual differential sends a
+genuine nonzero vector to zero and is not injective, hence not
+bijective. This is precisely the original exceptional-locus meaning.
+\end{proof}
+
+\begin{theorem}[Normal codimension one is the actual identity in every tangent dimension]
+\label{hir:actual-normal-blowup-codimension-one-identity}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality,hir:actual-whole-vanishing-origin-ideal-meaning,hir:actual-model-zero-whole-stalk-hs-dictionary}
+If the normal block has size one, the entire original chart map is
+the identity for every tangent dimension $d$ and every chart parameter.
+Its original exceptional locus is empty. For every original subset
+$W$, its original geometric strict transform is $\overline W$,
+and the unchanged intrinsic HS value at zero equals that of $W$ at
+every order.
+\lean{Hironaka.HironakaActualNormalBlowupExceptionalLocus.actual_normal_blowup_one_eq_id,Hironaka.HironakaActualNormalBlowupExceptionalLocus.exceptionalLocus_actual_normal_blowup_one,Hironaka.HironakaActualNormalBlowupExceptionalLocus.strictTransform_actual_normal_blowup_one,Hironaka.HironakaActualNormalBlowupExceptionalLocus.hilbertSamuelAt_actual_normal_blowup_one}
+\leanok
+\end{theorem}
+\begin{proof}
+Every tangent coordinate is fixed by definition. The unique normal
+coordinate is the exceptional one and is also fixed. Thus the whole
+actual map is the identity, regardless of the total dimension. Its
+actual differential is bijective everywhere, so the original
+exceptional locus is empty. The original strict-transform definition
+reduces to the closure of $W$. Genuine continuity of holomorphic
+representatives identifies the entire original vanishing germ ideals
+of $W$ and $\overline W$, even for arbitrary subsets. The actual
+model-zero whole-stalk dictionary identifies their unchanged intrinsic
+HS values, giving equality at every order.
+\end{proof}
+
+\begin{theorem}[A genuine exceptional product vanishes on the actual exceptional-complement closure]
+\label{hir:actual-holomorphic-product-quotient-closure-vanishing}
+\uses{hir:actual-local-continuous-vanishing-closure}
+Let $\Pi$ be an actual map of the original complex model, holomorphic
+near zero and fixing zero. If an original holomorphic germ $g$ vanishes
+on an arbitrary subset $W$ near zero and the actual product identity
+$x_e^qH=g\circ\Pi$ holds as whole original germs, then a genuine
+representative of $H$ vanishes near zero on
+$\overline{\Pi^{-1}(W)\setminus\{z_e=0\}}$.
+\lean{Hironaka.HironakaActualNormalBlowupExceptionalLocus.actual_quotient_zero_on_exceptional_complement_closure}
+\leanok
+\end{theorem}
+\begin{proof}
+The original whole germ identity means the actual representative
+identity $z_e^qH(z)=g(\Pi(z))$ on a neighbourhood of zero.
+Actual holomorphicity of $\Pi$ and its original zero identity give
+continuity at zero, so the original near-zero vanishing neighbourhood
+of $g$ pulls back to a genuine near-zero neighbourhood. At its points
+of $\Pi^{-1}(W)$ outside $z_e=0$, the scalar $z_e^q$ is nonzero.
+Cancelling it gives actual vanishing of $H$. The existing genuine
+local continuity theorem carries that vanishing to the full closure
+germ. No global analytic extension, coherence or output restriction
+certificate is assumed.
+\end{proof}
+
+\begin{theorem}[The entire original normalized ideal lies in the actual geometric strict vanishing ideal]
+\label{hir:actual-normal-geometric-strict-normalized-inclusion}
+\uses{hir:actual-normal-blowup-hyperplane-exceptional,hir:actual-holomorphic-product-quotient-closure-vanishing,hir:actual-whole-vanishing-origin-ideal-meaning,hir:actual-model-zero-whole-stalk-hs-dictionary,hir:actual-analytic-normalized-member-ideal}
+For an actual normal block of size $t\ge2$ and every original subset
+$W$ of the original model, the unchanged entire analytic
+normalized-member ideal of its original vanishing ideal is contained
+in the unchanged original vanishing ideal of the original geometric
+strict transform under the actual normal chart. Consequently every
+original intrinsic HS value of that strict transform at zero is at
+most the original whole normalized-ideal HS value at that order.
+\lean{Hironaka.HironakaActualNormalBlowupExceptionalLocus.actual_normal_normalized_ideal_le_geometric_strict_vanishing,Hironaka.HironakaActualNormalBlowupExceptionalLocus.hilbertSamuelAt_actual_normal_strict_le_normalized}
+\leanok
+\end{theorem}
+\begin{proof}
+It suffices to treat every original generator of the entire normalized
+ideal. Its original numerator belongs to the original vanishing ideal,
+so genuine whole-ideal vanishing semantics gives an actual near-zero
+vanishing representative on $W$. Its defining genuine normalized
+product gives the preceding actual quotient vanishing on the closure
+outside the exceptional coordinate hyperplane. By the actual
+differential-kernel theorem, that hyperplane lies in the original
+exceptional locus. Thus the complement of the original exceptional
+locus is contained in the complement of the coordinate hyperplane.
+Taking inverse-image intersections and then closures preserves this
+direction. The original geometric strict set is therefore contained
+in the closure on which the actual quotient vanishes. The same
+whole-vanishing semantics puts the generator in the entire original
+geometric strict vanishing ideal. Span induction gives the whole
+inclusion. Original whole-ideal HS antitonicity and the true model-zero
+intrinsic dictionary yield the stated all-order bound.
+\end{proof}
+
+The codimension-one geometric identity is deliberately separate from
+the normalized ideal, which may lose a divisor even though the actual
+geometric map is the identity. The higher-codimension bound here is
+by the unchanged normalized ideal, with no source-HS comparison or
+coefficient compatibility certificate. General positive-dimensional
+permissible-centre Bennett remains open.

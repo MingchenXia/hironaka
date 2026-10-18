@@ -1,0 +1,3 @@
+theorem centresOver_step_iff (F : Set X) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (π : Z → Y)
+    (hπ : IsBlowupAlong n C π) : CentresOver F (.step T C π hπ) ↔ CentresOver F T ∧ C ⊆ T.proj ⁻¹' F :=
+  Iff.rfl

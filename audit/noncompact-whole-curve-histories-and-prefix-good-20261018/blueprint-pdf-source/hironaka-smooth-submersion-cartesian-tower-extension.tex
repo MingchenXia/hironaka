@@ -1,0 +1,147 @@
+\section{Internally produced smooth Cartesian pullback of every genuine finite blowup tower}
+
+\begin{definition}[The actual non-surjective stage history]
+\label{hir:submersion-cartesian-tower-actual-history}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback,Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.isSubmersion,Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.length_eq,Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.proj_comm}
+\uses{hir:tower-sequence,hir:submersion-blowup-lift-actual-lift,hir:submersion-blowup-choice-arbitrary-dimensions}
+Let $f:Y\to X$ be a genuine submersion of arbitrary complex dimensions.
+Define an OUTPUT history relation on actual source and target finite blowup
+towers and their actual last-stage map. Its empty case is the original
+submersion and the two literal empty towers. Its step case extends a
+previous actual history with a genuine target blowup along $C$, a genuine
+source blowup along EXACTLY the previous actual map's preimage of $C$,
+and the internally defined actual blowup lift of these primitive choices.
+There is no surjectivity field, no prescribed final map, no Cartier-only
+condition and no caller square or Cartesian certificate in the step.
+Every such actual history has a genuine smooth last-stage map, exactly
+equal source/target tower lengths, and its original whole projection square.
+\end{definition}
+\begin{proof}
+The empty map is precisely $f$. At a step the original arbitrary-dimensional
+smooth blowup theorem proves that the SAME internally defined actual lift
+is a submersion. Thus its predecessor smoothness is actual geometry and
+not a supplied final result. Both lengths increase by one, including every
+literal empty or repeated centre. For the whole square, the actual step
+identity $\pi G_1=G\rho$ followed by the predecessor identity gives
+$T_{\rm new}G_1=fQ_{\rm new}$. This proves all three dictionaries by literal
+induction. The relation is used as a produced output below, not as an
+assumption replacing the original-only existence theorem.
+\end{proof}
+
+\begin{theorem}[Actual step squares paste into the whole tower Cartesian square]
+\label{hir:submersion-cartesian-tower-whole-universal}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.universal}
+\uses{hir:submersion-cartesian-tower-actual-history,hir:submersion-blowup-cartesian-whole-universal,hir:submersion-choice-actual-stage-pullback}
+Every actual history has the WHOLE holomorphic square universal property
+for its entire composite projections. For every actual finite-dimensional
+test manifold in the same universe and every two genuine whole holomorphic
+maps satisfying the original projection square, there is exactly one whole
+holomorphic map to the produced source last stage with both projection
+identities. The existing whole-square notation is reused; its old
+surjectivity-dependent stage-history predicate is not assumed.
+\end{theorem}
+\begin{proof}
+In the empty case the unique map is the original source-side test map,
+and its target-side equality is the given whole square. At a genuine step,
+first apply the internally obtained predecessor universal property to the
+source test map and the target test map followed by the genuine target
+blowup projection. This gives a unique WHOLE holomorphic predecessor map.
+Its actual lift-image identity supplies the true cone equation for the
+new step. The genuine single-blowup Cartesian theorem internally gives a
+unique WHOLE holomorphic map to the new source blowup, even for a test cone
+wholly in the exceptional divisor. Its source projection identity composed
+with the predecessor projection gives the desired whole source identity.
+For any competitor, its genuine source blowup projection is a competing
+predecessor lift by the actual step square. Predecessor uniqueness identifies
+this map, then actual single-step uniqueness identifies the competitor.
+No invertibility of the test ideal, source/target surjectivity, overlap
+certificate or final universal-property certificate is supplied.
+\end{proof}
+
+\begin{theorem}[Every literal geometric head retains its actual smooth Cartesian history]
+\label{hir:submersion-cartesian-tower-literal-heads}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.head}
+\uses{hir:submersion-cartesian-tower-actual-history,hir:submersion-cartesian-tower-whole-universal,hir:tower-split}
+For EVERY natural $j$, the literal heads obtained by cutting the same last
+$j$ steps from the source and target towers have an internally obtained
+actual stage map and actual history. Consequently their complete lengths,
+whole original projection squares and entire holomorphic universal
+properties hold. Cutting beyond the true length gives the two original
+empty towers; all empty and repeated steps remain literal before cutting.
+\end{theorem}
+\begin{proof}
+Induct on the actual history while allowing arbitrary $j$. At $j=0$ use
+the SAME actual whole last-stage history. For a nonempty step and $j+1$,
+the literal split definitions remove its final source and target step;
+the induction hypothesis at $j$ is therefore exactly the required head
+history. An empty history remains empty for every $j$, with actual map
+$f$. Equal lengths were proved from the real step induction, not from a
+compression certificate. Apply the preceding dictionary and universal
+theorems to each internally produced head history. This does not identify
+any general canonical algorithm or delete a geometrically empty step.
+\end{proof}
+
+\begin{theorem}[Original submersion and original finite target tower internally produce every source stage]
+\label{hir:submersion-cartesian-tower-original-production}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionCartesianTower.exists_actual_tower,Hironaka.HironakaSmoothSubmersionCartesianTower.exists_original_smooth_cartesian_tower}
+\uses{hir:submersion-cartesian-tower-actual-history,hir:submersion-cartesian-tower-whole-universal,hir:submersion-cartesian-tower-literal-heads,hir:submersion-blowup-lift-existence}
+The ONLY inputs are an original genuine arbitrary-dimensional submersion
+$f$ and a genuine ordinary finite target blowup tower $T$. Internally
+produce an actual source last space, an actual source blowup tower $Q$, a
+whole actual map $G$ and its actual history. In particular $G$ is smooth,
+$\operatorname{length}Q=\operatorname{length}T$, the original whole square
+commutes, the entire square is holomorphically Cartesian, and EVERY literal
+head has its corresponding actual smooth Cartesian square and equal length.
+No source tower, boundedness, termination, chosen-stage or naturality
+certificate is an input. The target tower is genuine primitive finite
+geometry, not asserted to be a canonical resolution tower.
+\end{theorem}
+\begin{proof}
+Induct on the supplied ordinary finite target tower. For its empty case
+take $Y$, its literal empty source tower, and $f$. At a target step, the
+induction hypothesis has ALREADY internally constructed the whole previous
+source tower and actual smooth stage map $G$. The original source-centre
+producer applied to this actual $G$ and the genuine target step internally
+proves the preimage centre is closed, smooth and nowhere dense and provides
+its actual primitive source blowup. Extend the previous tower by that SAME
+blowup and take the actual lift. This is exactly the step constructor of
+the output relation, whose smoothness and square are genuine proved geometry.
+The preceding three theorems give all stated whole and literal-head outputs.
+Finite recursion is on the supplied real finite tower, not a hidden
+termination hypothesis for a general resolution algorithm. Empty initial
+spaces, dimension zero, non-surjective maps, empty or repeated centres are
+covered by the same primitive geometry and literal induction.
+\end{proof}
+
+\begin{theorem}[Actual surjectivity internally recovers the old surjective stage history]
+\label{hir:submersion-cartesian-tower-surjective-bridge}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.surjective,Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.to_surjective_history}
+\uses{hir:submersion-cartesian-tower-actual-history,hir:submersion-cartesian-tower-whole-universal,hir:submersion-blowup-pivot-chosen-joint-unique,hir:submersion-choice-actual-stage-pullback}
+If the original $f$ is genuinely surjective, EVERY actual history internally
+has a surjective actual last-stage map and gives the old
+\texttt{IsSmoothTowerPullback} on the SAME literal source and target towers
+and SAME actual map. This consumes no caller stage-surjectivity or Cartesian
+certificate. It adds no assertion about whole marked transforms, higher
+invariant equality or a general canonical driver's chosen centres.
+\end{theorem}
+\begin{proof}
+Induct on the actual history. Surjectivity of $f$ is the empty case. Given
+any point in the target step, predecessor surjectivity supplies a genuine
+source point over its target base. The actual compatible-pair theorem
+internally gives the unique source-blowup point over this source point and
+target point, and its actual lift-image identity proves stage surjectivity.
+This argument works in arbitrary dimensions without imposing a dimension
+difference as input. For the old history, use its empty constructor and,
+at each literal step, the internally recovered previous old history,
+the primitive blowup choices, the real actual smooth lift, the just-proved
+actual stage surjectivity, the actual projection-square identity, the
+literal preimage-centre reflexivity, and the genuine single-step Cartesian
+universal theorem. Thus every old field is internally proved from original
+geometry. The prior general separation/colex driver identification,
+general higher-invariant functoriality and G3/G8 remain OPEN.
+\end{proof}
