@@ -1,0 +1,141 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Support.IterDerivCoordinateMembershipExact
+import Hironaka.Resolution.HironakaActualOriginalDifferentialIdeals
+import Hironaka.Resolution.HironakaRelativeNormalDeformationInitialRelations
+import Hironaka.MarkedIdeal.DerivativeIdeal
+
+/-! The existing original chart-free derivative sheaf has the actual whole differential stalk and Taylor extension. -/
+set_option autoImplicit false
+open Set Filter Classical
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaActualOriginalDerivativeSheaf
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf
+  HironakaRelativeNormalTaylorCoefficients HironakaRelativeNormalDeformationInitialRelations
+  HironakaActualOriginalDifferentialIdeals HironakaActualOriginalFormalTaylor
+  HironakaRelativeNormalIdeal HolomorphicTaylorTail DerivativeIdeal
+
+private theorem original_member_holomorphic {m : ℕ}
+    (A : GermIdeal m (ComplexModel m)) (hA : A.IsCoherent)
+    (x : ComplexModel m) (f : ComplexModel m → ℂ) (hf : A.mem x f) :
+    HolomorphicAt m f x := by
+  obtain ⟨U,_hU,hx,N,s,_hs,hgen⟩ := hA x
+  exact ((hgen x hx f).mp hf).1
+
+private theorem model_chartDeriv_eq_iterDeriv {m : ℕ}
+    (e : ComplexChart m (ComplexModel m)) (v : ComplexModel m) (f : ComplexModel m → ℂ) :
+    chartDeriv e v f=iterDeriv [v] f := by
+  have he := chartedSpaceSelf_atlas.mp e.property
+  funext z
+  simp [chartDeriv,he,iterDeriv,dirDeriv]
+
+private theorem mk_mem_of_original_span {m : ℕ} (K : Ideal (HolGerm (ComplexModel m)))
+    (S : (ComplexModel m → ℂ) → Prop) (g : ComplexModel m → ℂ) (hg : HolAt g 0)
+    (hspan : IsInSpanAt (n := m) S 0 g)
+    (hS : ∀ f,S f → ∃ hf : HolAt f 0,HolGerm.mk f hf ∈ K) :
+    HolGerm.mk g hg ∈ K := by
+  obtain ⟨_,N,s,a,hs,ha,he⟩ := hspan
+  choose hsh hsm using fun i => hS (s i) (hs i)
+  have hah (i : Fin N) : HolAt (a i) 0 := (ha i).mono fun _ h => h.differentiableAt
+  have heq : HolGerm.mk g hg=∑ i,HolGerm.mk (a i) (hah i)*HolGerm.mk (s i) (hsh i) := by
+    calc
+      HolGerm.mk g hg=HolGerm.mk (fun x => ∑ i,a i x*s i x)
+          (HolAt.fintype_sum fun i => (hah i).mul (hsh i)) := HolGerm.mk_eq_mk_iff.mpr he
+      _=_ := by
+        rw [HolGerm.mk_sum Finset.univ (fun i x => a i x*s i x)
+          (fun i => (hah i).mul (hsh i))]
+        exact Finset.sum_congr rfl fun i _ => HolGerm.mk_mul _ _ _ _
+  rw [heq]
+  exact K.sum_mem fun i _ => K.mul_mem_left _ (hsm i)
+
+/-- The original chart-free derivative sheaf retains exactly the whole actual analytic differential stalk. -/
+theorem originalOriginIdeal_derivIdeal (n : ℕ)
+    (A : GermIdeal (0+n) (ComplexModel (0+n))) (hA : A.IsCoherent) :
+    originalCoherentOriginIdeal (derivIdeal A)=
+      originalDifferentialIdeal n (originalCoherentOriginIdeal A) := by
+  let I := originalCoherentOriginIdeal A
+  let J := originalDifferentialIdeal n I
+  let K := originalCoherentOriginIdeal (derivIdeal A)
+  have hhol := original_member_holomorphic A hA
+  have hAtoD : I ≤ K := by
+    apply Ideal.span_le.mpr
+    rintro g ⟨f,hf,hAf,rfl⟩
+    exact Ideal.subset_span ⟨f,hf,le_derivIdeal hhol 0 f hAf,rfl⟩
+  have hcoords (f : ComplexModel (0+n) → ℂ) (hf : HolAt f 0) (hAf : A.mem 0 f)
+      (i : Fin n) : iteratedDerivativeGerm [normalVector 0 n i] (HolGerm.mk f hf) ∈ J := by
+    apply (show Ideal.span _ ≤ J from le_sup_right)
+    exact Ideal.subset_span ⟨i,HolGerm.mk f hf,Ideal.subset_span ⟨f,hf,hAf,rfl⟩,rfl⟩
+  have hgens (s : ComplexModel (0+n) → ℂ) (hs : DerivGen A 0 s) :
+      ∃ hsh : HolAt s 0,HolGerm.mk s hsh ∈ J := by
+    rcases hs with hs | ⟨e,v,f,_he,hAf,rfl⟩
+    · have hf : HolAt s 0 := (hhol 0 s hs).mono fun _ h => h.differentiableAt
+      exact ⟨hf,(show I ≤ J from le_sup_left) (Ideal.subset_span ⟨s,hf,hs,rfl⟩)⟩
+    · have hf : HolAt f 0 := (hhol 0 f hAf).mono fun _ h => h.differentiableAt
+      have hd := eventually_holomorphic_iterDeriv hf [v]
+      rw [model_chartDeriv_eq_iterDeriv]
+      refine ⟨hd,?_⟩
+      have heq : iterDeriv [v] f=fun z => ∑ j : Fin (0+n),v j*iterDeriv [EuclideanSpace.single j 1] f z := by
+        funext z
+        change fderiv ℂ f z v=_
+        conv_lhs => rw [← sum_smul_single v]
+        simp [map_sum,map_smul,smul_eq_mul,iterDeriv,dirDeriv]
+      have hdh (j : Fin (0+n)) := eventually_holomorphic_iterDeriv hf [EuclideanSpace.single j 1]
+      have hj (j : Fin (0+n)) : HolGerm.mk (iterDeriv [EuclideanSpace.single j 1] f) (hdh j) ∈ J := by
+        let i : Fin n := ⟨j.val,by omega⟩
+        have hi : i.natAdd 0=j := by apply Fin.ext; simp [i]
+        have hv : normalVector 0 n i=EuclideanSpace.single j 1 := by rw [normalVector,hi]
+        simpa only [iteratedDerivativeGerm_mk,hv] using hcoords f hf hAf i
+      have hsum := HolAt.fintype_sum fun j =>
+        eventually_differentiableAt_mul (eventually_differentiableAt_const (v j)) (hdh j)
+      have hmk : HolGerm.mk (iterDeriv [v] f) hd=
+          ∑ j,HolGerm.mk (fun _ => v j) (eventually_differentiableAt_const (v j))*
+            HolGerm.mk (iterDeriv [EuclideanSpace.single j 1] f) (hdh j) := by
+        calc
+          HolGerm.mk (iterDeriv [v] f) hd=HolGerm.mk _ hsum :=
+            HolGerm.mk_eq_mk_iff.mpr (Eventually.of_forall (congrFun heq))
+          _=_ := by
+            rw [HolGerm.mk_sum Finset.univ _
+              (fun j => eventually_differentiableAt_mul (eventually_differentiableAt_const (v j)) (hdh j))]
+            exact Finset.sum_congr rfl fun j _ => HolGerm.mk_mul _ _ _ _
+      rw [hmk]
+      exact J.sum_mem fun j _ => J.mul_mem_left _ (hj j)
+  apply le_antisymm
+  · apply Ideal.span_le.mpr
+    rintro g ⟨f,hf,hDf,rfl⟩
+    exact mk_mem_of_original_span J (DerivGen A 0) f hf hDf hgens
+  · change I ⊔ Ideal.span _ ≤ K
+    refine sup_le hAtoD (Ideal.span_le.mpr ?_)
+    rintro H ⟨i,g,hg,rfl⟩
+    obtain ⟨f,hf,rfl⟩ := HolGerm.exists_eq_mk g
+    have hAf := (mk_mem_originalCoherentOriginIdeal_iff A hA hf).mp hg
+    let e := complexChartAt (n := 0+n) (0 : ComplexModel (0+n))
+    have hD := chartDeriv_mem_derivIdeal (e := e) (v := normalVector 0 n i) hhol
+      (mem_complexChartAt_source (0 : ComplexModel (0+n))) hAf
+    have hd := eventually_holomorphic_iterDeriv hf [normalVector 0 n i]
+    rw [model_chartDeriv_eq_iterDeriv] at hD
+    exact Ideal.subset_span ⟨iterDeriv [normalVector 0 n i] f,hd,hD,rfl⟩
+
+/-- Every existing original iterated derivative sheaf has exactly the entire recursive analytic differential ideal. -/
+theorem originalOriginIdeal_iterDerivIdeal (n : ℕ)
+    (A : GermIdeal (0+n) (ComplexModel (0+n))) (hA : A.IsCoherent) (q : ℕ) :
+    originalCoherentOriginIdeal (iterDerivIdeal A q)=
+      originalDifferentialClosure n (originalCoherentOriginIdeal A) q := by
+  induction q with
+  | zero => rfl
+  | succ q ih =>
+      rw [iterDerivIdeal_succ,originalOriginIdeal_derivIdeal n _ (isCoherent_iterDerivIdeal hA q),ih]
+      rfl
+
+/-- Taylor extension of every whole original chart-free derivative-sheaf stalk is the actual formal closure. -/
+theorem map_originalOriginIdeal_iterDerivIdeal (n : ℕ)
+    (A : GermIdeal (0+n) (ComplexModel (0+n))) (hA : A.IsCoherent) (q : ℕ) :
+    (originalCoherentOriginIdeal (iterDerivIdeal A q)).map (originalTaylorAlgHom n).toRingHom=
+      formalDifferentialClosure n ((originalCoherentOriginIdeal A).map (originalTaylorAlgHom n).toRingHom) q := by
+  rw [originalOriginIdeal_iterDerivIdeal n A hA q,map_originalDifferentialClosure]
+
+end
+end Hironaka.HironakaActualOriginalDerivativeSheaf

@@ -1,0 +1,82 @@
+\section{Actual endpoint overlap domains before geometric descent}
+
+The chosen pairwise cocycle is now established, but topological gluing also
+needs the literal domains, diagonal maps and compatibility with the genuine
+projection to the original ambient manifold. These facts below are produced
+from actual prefix-and-tail histories and their genuine stagewise comparisons.
+No descended manifold or separation certificate is assumed.
+
+\begin{lemma}[The actual terminal projection determines its true overlap open]
+\label{hir:sharp-actual-endpoint-projection-overlap}
+\uses{bcalc:tower-restrict,hir:sharp-actual-identity-empty-padding,hir:sharp-actual-chosen-overlap-map-restriction}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointProjection,Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointProjection_contMDiff,Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointOverlapOpen,Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointOverlapOpen_eq_pair,Hironaka.HironakaSharpActualCurveEndpointGeometry.localPaddedHistory_projection}
+For an actual local open $U\subset X$ and actual prefix $P$ and tail $S$,
+the true endpoint map to $X$ is the genuine holomorphic composite of the two
+actual projections and $U\hookrightarrow X$. Its inverse image of another
+actual open $V$ equals the literal endpoint open used by the retained pairwise
+comparison on $U\cap V$. The whole padded restricted history on any common
+open has this same underlying projection, at every padding cut.
+\end{lemma}
+\begin{proof}
+Compose the actual holomorphic projections and the real open inclusion.
+Membership of an endpoint in the genuine inverse image of $V$ means that
+its actual base image belongs to $V$. It already belongs to $U$ because the
+first projection is a point of $U$. This is equivalent in both directions
+to membership in $U\cap V$, exactly the literal iterated inverse-image open
+of the pairwise history. For its padded projection, use the genuine append
+projection equations, the actual identity projection of every real empty
+tail, and both original restricted-projection point identities. Every
+underlying point is unchanged; no step or ordered position is removed.
+\end{proof}
+
+\begin{theorem}[The chosen pairwise map gives an actual transition on the true endpoint opens]
+\label{hir:sharp-actual-endpoint-transition-projection}
+\uses{hir:sharp-actual-endpoint-projection-overlap,mc:tower-isomorphism-basic,mc:tower-isomorphism-restrict-append}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointOverlapOpen_eq_reversed_pair,Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointTransition,Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointTransition_projection}
+A genuine chosen stagewise comparison of the actual padded pairwise histories
+constructs a real biholomorphism from the first endpoint's true overlap open
+to the second endpoint's true reversed overlap open. This actual transition
+preserves the genuine projection to $X$ at EVERY point.
+\end{theorem}
+\begin{proof}
+The preceding exact source-domain equality identifies the first true overlap
+with the literal source domain of the chosen comparison. On the target,
+commutativity of the actual two ambient opens identifies its literal domain
+with the true reversed overlap. Compose these two genuine equal-open
+biholomorphisms with the OLD chosen comparison. This supplies both actual
+inverse maps and holomorphic directions.
+
+Its true stagewise projection square commutes before taking underlying
+ambient points. The common-open base map preserves that original point.
+The proved padded restricted-projection identities identify the two sides
+with the genuine two endpoint projections. Hence this actual transition
+preserves the projection to $X$. A commuting composite square is used only
+AFTER the genuine stagewise comparison has supplied the real map, not as a
+replacement for its blowup or centre dictionary.
+\end{proof}
+
+\begin{theorem}[The actual diagonal overlap is the whole endpoint and its transition is identity]
+\label{hir:sharp-actual-endpoint-diagonal-transition}
+\uses{hir:sharp-actual-endpoint-transition-projection,hir:sharp-actual-stagewise-tower-comparison-unique}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointOverlapOpen_self,Hironaka.HironakaSharpActualCurveEndpointGeometry.commonOpenBase_self,Hironaka.HironakaSharpActualCurveEndpointGeometry.endpointTransition_self}
+The true diagonal overlap is the whole actual local endpoint. A genuine
+chosen self-comparison of the same actual prefix-and-tail history induces
+exactly the actual identity transition there, independently of its genuine
+padding cut.
+\end{theorem}
+\begin{proof}
+Every actual local endpoint projects to a point of its own original open,
+so its true diagonal overlap is the whole endpoint. The actual common-open
+base self-map is identity on both real subtype levels, hence is the genuine
+identity biholomorphism. Re-express the supplied true self stagewise
+comparison over that identity. The real reflexive comparison of the same
+padded finite history is another such stagewise comparison. Actual blowup
+universal uniqueness identifies their terminal biholomorphisms, giving the
+literal identity. The two genuine equal-open identifications in the
+transition are identity on underlying points, so the actual transition is
+also identity by subtype extensionality. No arbitrary map over the composite
+projection is asserted unique, and no deletion of empty positions is used.
+\end{proof}

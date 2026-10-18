@@ -1,0 +1,4 @@
+theorem mk_sub (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z)
+    (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
+    mk (fun z => f z - g z) (eventually_differentiableAt_sub hf hg) = mk f hf - mk g hg :=
+  rfl

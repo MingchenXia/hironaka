@@ -1,0 +1,7 @@
+/-- EVERY EXISTING original HS value is computed by the actual diagram of its GENUINE whole Taylor extension. -/
+theorem hilbertSamuelValue_eq_card_actual_formal_standardIndex
+    (J : Ideal (HolGerm (ComplexModel (0+n)))) (ℓ : ℕ) :
+    hilbertSamuelValue J ℓ=Fintype.card (actualStandardIndex n
+      (Ideal.map (originalTaylorAlgHom n).toRingHom J) (ℓ+1)) :=
+  (hilbertSamuelValue_eq_genuine_formal_extension n J ℓ).trans
+    (genuineFormalHilbertSamuelValue_eq_card_standardIndex _ ℓ)

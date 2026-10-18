@@ -1,0 +1,95 @@
+\section{Actual nested restrictions of chosen comparison maps}
+
+A direct comparison on a smaller common open must be compared with the
+actual restriction of the previously chosen map, rather than replaced by
+an unrelated existential witness. All constructions below retain every
+empty trace centre and every real padding position.
+
+\begin{lemma}[Actual matching smaller windows give a genuine smaller base map]
+\label{hir:sharp-actual-nested-comparison-base}
+\uses{hir:sharp-actual-comparison-open-biholomorphism,bcalc:restrict-nested}
+\lean{Hironaka.HironakaSharpActualCurveNestedComparison.nested_window_preimage,Hironaka.HironakaSharpActualCurveNestedComparison.nestedBaseComparison,Hironaka.HironakaSharpActualCurveNestedComparison.nestedBaseComparison_val}
+\leanok
+Let $W'\subset X'$ and $W\subset X$ be actual opens and let
+$\Phi:W'\to W$ be a genuine biholomorphism. Let $V'\subset W'$ and
+$V\subset W$ be genuine smaller ambient opens, whose memberships correspond
+under the actual underlying map $\Phi$. Construct a genuine biholomorphism
+$V'\to V$. Its underlying point map is exactly the old $\Phi$ applied to
+the actual inclusion of the smaller source point into $W'$.
+\end{lemma}
+\begin{proof}
+The actual window membership equivalence identifies the nested source open
+inside $W'$ with the inverse image of the nested target open inside $W$.
+Restrict the genuine $\Phi$ to those exact opens, with its actual inverse.
+Precompose with the inverse of the true source nested-open flattening and
+postcompose with the true target nested-open flattening. Both flattenings
+are identity on the original ambient points. Their real inverse equations
+therefore prove the stated exact underlying point map. This is a genuine
+map of actual opens, with no assumed smaller-window comparison.
+\end{proof}
+
+\begin{theorem}[Actual comparisons of restricted towers restrict and flatten again]
+\label{hir:sharp-actual-nested-stagewise-comparison}
+\uses{hir:sharp-actual-nested-comparison-base,hir:sharp-actual-stagewise-comparison-open-restriction,bcalc:restrict-nested}
+\lean{Hironaka.HironakaSharpActualCurveNestedComparison.exists_nested_tower_comparison}
+\leanok
+For two actual original towers and an actual stagewise comparison of their
+restrictions to $W'$ and $W$, construct a genuine stagewise comparison of
+their literal restrictions to $V'$ and $V$ over the smaller base map just
+constructed. The terminal point map is the original comparison applied to
+the actual inclusion of the smaller source endpoint into the old restricted
+endpoint. No history position is removed.
+\end{theorem}
+\begin{proof}
+First restrict the genuine stagewise comparison to the nested target open
+presenting $V$ inside $W$. The preceding actual window identity identifies
+its genuine inverse-image source open with the nested open presenting $V'$
+inside $W'$. The stagewise restriction theorem supplies all true trace
+centres and blowup squares before flattening. The existing genuine
+nested-restriction tower isomorphisms identify the two double restrictions
+with the literal restrictions of the original towers to $V'$ and $V$.
+Invert the source identification, compose the actual restricted comparison,
+then compose the target identification. Its base map is exactly the
+constructed smaller map. The two real flattenings and their inverses are
+identity on ambient endpoint points. The resulting underlying point map
+is therefore exactly the claimed old terminal map on the actual included
+point. This does not infer stagewise isomorphism from a commuting composite
+projection square.
+\end{proof}
+
+\begin{theorem}[Chosen padded comparisons have genuine smaller-window compatibility]
+\label{hir:sharp-actual-nested-padded-comparison}
+\uses{hir:sharp-actual-nested-stagewise-comparison,hir:sharp-actual-padded-history-open-flattening,hir:sharp-actual-terminal-recipe-padding-independence}
+\lean{Hironaka.HironakaSharpActualCurveNestedComparison.exists_nested_padded_comparison,Hironaka.HironakaSharpActualCurveNestedComparison.nested_padded_comparison_direct}
+\leanok
+For two actual original prefix-and-tail histories, suppose a genuine
+stagewise comparison has been chosen between their padded restrictions to
+$W'$ and $W$. On the matching actual smaller windows, construct a stagewise
+comparison between the literal padded smaller restrictions with the exact
+old terminal point map. Every direct comparison of those smaller histories
+has that same map, including any different genuine padding cut which,
+together with the old cut, bounds both actual original tail lengths.
+\end{theorem}
+\begin{proof}
+Construct the actual padded-history flattenings on both large windows.
+Invert their direction as needed to conjugate the chosen comparison into
+a genuine comparison of the literal restrictions of the two full original
+padded histories. Each conjugating map is identity on ambient endpoint
+points, so the raw terminal point map is still the chosen one.
+Apply the preceding nested stagewise theorem to those exact original full
+padded histories. Independently construct the genuine padded-history
+flattenings on the two smaller windows, and conjugate the real smaller
+comparison into the literal restricted prefix-and-tail histories. All
+flattenings and inverse flattenings preserve the actual ambient point, so
+the constructed terminal map has the old underlying map on the actual
+included source point.
+
+Restriction preserves both actual tail lengths. Thus any other stated cut
+still bounds the same smaller tails. Extend the two genuine padded
+comparisons to the common sum of the cuts by actual empty-centre identity
+blowups, retaining all positions. The real fixed-history blowup uniqueness
+theorem identifies their terminal maps. This proves compatibility for
+chosen comparisons and their actual smaller-window restrictions; it does
+not assert that an arbitrary endpoint witness carries a retained recipe,
+or that geometric manifold descent or global scheduling is complete.
+\end{proof}

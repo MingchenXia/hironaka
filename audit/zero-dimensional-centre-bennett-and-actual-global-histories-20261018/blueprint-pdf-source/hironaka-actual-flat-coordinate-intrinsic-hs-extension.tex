@@ -1,0 +1,84 @@
+\section{Actual flattening-coordinate biholomorphisms and intrinsic vanishing HS}
+
+Let $x_0$ be a point of an original complex manifold $M$, write $e$ for
+its original preferred chart, and let $\Phi$ be an existing genuine
+local holomorphic equivalence centred at $e(x_0)$. Assume its actual
+source lies in the actual target of $e$. The original flattening domain
+is $D=e.\mathrm{source}\cap e^{-1}(\Phi.\mathrm{source})$.
+The actual model target $T=\Phi.\mathrm{target}$ remains an ordinary
+open subset of the original complex model; no universe restriction on
+$M$ and no replacement local algebra are imposed.
+
+\begin{definition}[The actual flattening-coordinate biholomorphism]
+\label{hir:actual-flat-coordinate-open-biholomorphism}
+\lean{Hironaka.HironakaActualFlatCoordinateIntrinsicHS.actualFlatCoordinateDiffeomorph,Hironaka.HironakaActualFlatCoordinateIntrinsicHS.actualFlatCoordinateDiffeomorph_apply,Hironaka.HironakaActualFlatCoordinateIntrinsicHS.actualFlatCoordinateDiffeomorph_symm_apply}
+\leanok
+The actual maps
+\[
+ F:D\longrightarrow T,\quad F(x)=\Phi(e(x)),\qquad
+ G:T\longrightarrow D,\quad G(u)=e^{-1}(\Phi^{-1}(u))
+\]
+construct a genuine biholomorphism of the original open subtypes.
+\end{definition}
+\begin{proof}
+Both actual domains are open. The original local equivalence maps its
+source into its target and its target back into its source. The source
+containment in the chart target ensures that the displayed inverse
+lands in the original flattening domain. The true inverse identities of
+$\Phi$ and the actual chart prove $G(F(x))=x$ and $F(G(u))=u$.
+On the actual flattening domain, the chart is holomorphic and $\Phi$
+is holomorphic at each actual chart image. On the actual target, the
+inverse $\Phi^{-1}$ is holomorphic and its values lie in the true chart
+target, where the chart inverse is holomorphic. These actual composite
+maps are holomorphic near every point, hence complex smooth of all
+orders. True open-subtype restriction and lifting preserve that
+holomorphicity, supplying both smoothness fields of the actual
+biholomorphism with precisely the displayed forward and inverse functions.
+\end{proof}
+
+\begin{theorem}[The inverse flat-coordinate map is a genuine holomorphic open embedding]
+\label{hir:actual-flat-coordinate-inverse-open-embedding}
+\uses{hir:actual-flat-coordinate-open-biholomorphism}
+\lean{Hironaka.HironakaActualFlatCoordinateIntrinsicHS.contMDiff_actual_flat_inverse,Hironaka.HironakaActualFlatCoordinateIntrinsicHS.isOpenEmbedding_actual_flat_inverse}
+\leanok
+The actual function $u\mapsto e^{-1}(\Phi^{-1}(u))$ from $T$ to the
+original manifold $M$ is holomorphic and is an open embedding onto the
+actual original flattening domain.
+\end{theorem}
+\begin{proof}
+It is exactly the genuine inverse biholomorphism from the preceding
+node followed by the actual inclusion of the original open subtype $D$.
+Both maps are holomorphic, and both underlying maps are open embeddings.
+Composition gives the asserted actual properties. Surjectivity of the
+inverse biholomorphism onto $D$ identifies its image with that unchanged
+domain. No same-universe open-embedding packaging or supplied Jacobian
+is used.
+\end{proof}
+
+\begin{theorem}[Every original intrinsic vanishing HS value is transported by the actual inverse coordinates]
+\label{hir:actual-flat-coordinate-inverse-any-subset-intrinsic-hs}
+\uses{hir:actual-flat-coordinate-open-biholomorphism,hir:actual-any-subset-biholomorphic-intrinsic-hs,hir:actual-any-subset-open-intrinsic-hs}
+\lean{Hironaka.HironakaActualFlatCoordinateIntrinsicHS.hilbertSamuelAt_vanishing_actual_flat_inverse}
+\leanok
+For every original subset $W\subseteq M$, every actual point $u\in T$
+and every order $\ell$, the existing intrinsic vanishing-ideal
+Hilbert--Samuel value of $G^{-1}W$ at $u$ equals the unchanged original
+value of $W$ at $G(u)$. No analyticity, closedness, coherence or global
+analytic extension is a premise.
+\end{theorem}
+\begin{proof}
+Restrict the original subset to the actual open domain $D$. The proved
+arbitrary-subset intrinsic transport for the genuine inverse
+biholomorphism identifies its unchanged original HS value at $G(u)$
+with that of the actual inverse image in $T$ at $u$. The proved arbitrary-
+subset open restriction theorem identifies the former with the original
+value on $M$. Their composition gives the equality at every arbitrary
+order. All functions, ideal sheaves, whole chart stalks, complex quotient
+actions and intrinsic functions are the original ones.
+\end{proof}
+
+The local equivalence is actual coordinate geometry, not a desired
+ideal or HS certificate. Construction of the original point-blowup
+normal-form coordinates is a separate geometric producer; the present
+actual inverse-coordinate embedding is the transport interface for that
+producer. Positive-dimensional permissible-centre Bennett remains open.

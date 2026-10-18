@@ -1,0 +1,28 @@
+/-- EVERY actual translated original homogeneous initial ideal has true HS values bounded by the original formal ideal. -/
+theorem hilbertSamuelValue_actual_translated_initial_le (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (p : Fin n → ℂ) (ℓ : ℕ) :
+    hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ ≤ genuineFormalHilbertSamuelValue n I ℓ := by
+  let G := actualRayInitialFamily I p
+  have hG : ∀ i, DifferentiableOn ℂ (G i) Set.univ := actualRayInitialFamily_holomorphic I p
+  let J (c : ℂ) := actualFibreIdeal isOpen_univ G hG (complexParameterPoint c) (mem_univ _)
+  have hdict (c : ℂ) : J c=actualTranslatedInitialIdeal I (c • p) := by
+    have h := actualRayInitialFibreIdeal_eq I p (complexParameterPoint c)
+    rw [complexParameterPoint_coordinate] at h
+    exact h
+  let P : ℂ → (⊤ : TopologicalSpace.Opens (ComplexModel 1)) :=
+    fun c => ⟨complexParameterPoint c,mem_univ _⟩
+  have hP : Continuous P := Continuous.subtype_mk continuous_complexParameterPoint _
+  have hclosed : IsClosed {c : ℂ |
+      hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ ≤ hilbertSamuelValue (J c) ℓ} :=
+    (isClosed_actualFibreHS_superlevel isOpen_univ G hG ⊤ (fun _ _ => mem_univ _) ℓ
+      (hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ)).preimage hP
+  have hsub : ({(0 : ℂ)}ᶜ : Set ℂ) ⊆ {c : ℂ |
+      hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ ≤ hilbertSamuelValue (J c) ℓ} := by
+    intro c hc
+    have hc0 : c ≠ 0 := by simpa using hc
+    change hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ ≤ hilbertSamuelValue (J c) ℓ
+    rw [hdict c,actualTranslatedInitialIdeal_nonzero_ray_hs I p c hc0]
+  have hz := closure_minimal hsub hclosed ((dense_compl_singleton (0 : ℂ)) 0)
+  change hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ ≤ hilbertSamuelValue (J 0) ℓ at hz
+  rw [hdict 0,zero_smul,translated_initial_zero,actualOriginalInitialVertexIdeal_hs] at hz
+  exact hz

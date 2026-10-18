@@ -1,0 +1,124 @@
+\section{Original canonical crossing tails at their actual monomial leaves}
+
+This is a source-facing consumer of the genuine interior identity empty
+step.  The initial marked ideal, the actual current level and run, and the
+whole selected original tails are retained.  Lower domain, testness and
+cosupport are conclusions from the original canonical history.  The value
+comparison is restricted explicitly to the actual order-zero branch of
+that lower history; it does not assert positive-order recursive transport.
+This adds the indexed-history bookkeeping needed in W\l odarczyk's Step
+One and the trivial-blowup convention of Bierstone--Milman
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}.
+
+\begin{theorem}[Actual canonical lower data on the original crossing split]
+\label{hir:original-canonical-crossing-lower-data}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerLeaf.original_canonical_crossing_lower_data}
+\leanok
+\uses{hir:step-one-canonical-tail,hir:original-interior-crossing-selected-splits}
+Let $n>0$, let $M$ belong to the original invariant domain in dimension
+$k+1$, and assume that $M$ has maximal order.  Let $HS$ be a canonical
+history for its actual Step One value built from the specific invariant
+$R_k$, and let $y$ be a nonspecial point in the actual transformed
+cosupport.  Put $\ell=\operatorname{level}(M,HS,y)$,
+$r=\operatorname{run}_{M,\ell}(HS,y)$ and assume $|S|\leq r$.
+Put $a=r-|S|$, $K=\operatorname{head}(H,a)$,
+$B=\operatorname{tail}(H,a)$, $p=(BS).\operatorname{proj}(y)$,
+$W=\operatorname{lowerMask}(M,\ell,K,p)$ and
+$J=\operatorname{lowerMarkedM}(M,\ell,K,p)$.
+Then $p\in W$, $J$ belongs to the genuine invariant domain in dimension
+$k$, the entire restricted tail $(BS)|_W$ is canonical for $R_k(J)$,
+and the actual point $y$ over $W$ belongs to its transformed cosupport.
+\end{theorem}
+\begin{proof}
+The original canonical Step One history is a genuine multiple test
+history both of $M$ and of $\overline M$, with identical transformed
+cosupports.  Its canonicity is also the canonicity used for
+$\overline M$.  The canonical-tail theorem therefore gives actual lower
+data at the run split of this nonspecial cosupport point.  The true
+crossing split calculation identifies its entire split record with
+$(\operatorname{stage}(H,a),K,BS)$.  Substitute this whole record in
+the canonical-tail conclusion.  The lower mask, marked ideal, restricted
+tail and cosupport point are exactly the ones stated, rather than
+separately selected representatives.  The dimension bound is
+$(k+1)-1=k$.
+\end{proof}
+
+\begin{lemma}[Actual restricted interior tails at a monomial leaf]
+\label{hir:original-restricted-interior-monomial-leaf}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerLeaf.restricted_interior_monomial_leaf}
+\leanok
+\uses{hir:original-interior-empty-test-history,hir:original-interior-empty-full-family-monomial-leaf,hir:original-crossing-restricted-empty-history,bcalc:general-value-order-zero}
+Let $W$ be an actual open subset of a stage $D$, $J$ an actual marked
+ideal on $W$ in the dimension-$k$ domain, and $B,S$ actual consecutive
+histories from $D$.  Suppose $|S|>0$ and $(BS)|_W$ is a test history of
+$J$.  At any actual point $y$ over $W$ whose nonmonomial order on this
+restricted old history is zero, the specific full invariant $R_k$ on
+$(B\epsilon S)|_W$ equals its value on $(BS)|_W$ under the actual
+index map $\operatorname{shift}_{k,j}$, where
+$j=|J.E|+|B|$.  Both points are the same underlying point $y$; membership
+in the new open preimage is supplied by the identity-step projection.
+\end{lemma}
+\begin{proof}
+The true restriction-of-concatenation isomorphism identifies the old
+restricted history with $B|_W$ followed by
+$S|_{B^{-1}W}$.  Its base and final identifications are the identity on
+points.  Testness transfers across this isomorphism, and the genuine
+order-isomorphism dictionary transfers the assumed actual order zero.
+The restriction of $S$ has length $|S|>0$.  The proved same-base interior
+test equivalence supplies testness after inserting the identity empty
+step into this normalized history.  The actual full-family monomial
+leaf theorem on this history gives the index
+$|J.E|+|B|_W=|J.E|+|B|$ and the stated shift, including $k=0$.
+The genuine nonmonomial-order equality supplies order zero after insertion.
+Finally the whole restricted empty-history isomorphism transfers the
+new value back to $(B\epsilon S)|_W$.  At order zero this uses only the
+actual testness and domain: the general value is the true monomial
+invariant, so no desired new canonical segment or lower-value equality
+is required.  For $k>0$ this is exactly the order-zero branch of $R_k$;
+for $k=0$ its value is constant.  All final identifications fix $y$.
+\end{proof}
+
+\begin{theorem}[The actual original crossing Step One value at its lower leaf]
+\label{hir:original-canonical-crossing-step-one-monomial-leaf}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerLeaf.original_canonical_crossing_stepOne_leaf}
+\leanok
+\uses{hir:original-canonical-crossing-lower-data,hir:original-restricted-interior-monomial-leaf,hir:original-interior-crossing-lower-history,hir:original-interior-empty-step-one-dictionary}
+Retain the original canonical hypotheses and literal $\ell,r,K,B,W,J,p$
+above and assume $|S|>0$.  The actual lower data at $p$ exist internally.
+If the nonmonomial order at their actual cosupport point on $(BS)|_W$
+is zero, then the whole actual Step One value at $y$ on $H\epsilon S$
+is
+\[
+ \operatorname{pairShift}(\operatorname{shift}_{k,|J.E|+|B|})
+ \bigl(\operatorname{StepOne}(R_k,M,HS,y)\bigr).
+\]
+The original initial $M$ is unchanged and both Step One values use their
+own actual current-level runs.  This holds at all actual levels,
+including the original chosen-contact level zero.
+\end{theorem}
+\begin{proof}
+The first theorem supplies genuine mask membership, the actual lower
+domain and canonical old tail.  The resolution invariant makes that
+canonical tail a test history.  The original whole history also supplies
+testness of its original head $H$.  The actual crossing-run theorem
+therefore gives run $r+1$ and the two entire selected split records
+$(D,K,BS)$ and $(D,K,B\epsilon S)$.  Their projected point is literally
+the same $p$, hence their lower mask and whole lower marked ideal are
+the same $W,J$, also in the zero-contact branch.  The level dictionary
+identifies both current levels with $\ell$; the special-point dictionary
+makes the new point nonspecial.  Unfolding the actual Step One values
+now selects these two genuine lower tails.  The mask membership supplied
+by the first theorem selects the finite lower-value branch on both
+histories.  The preceding restricted-leaf theorem gives the full $R_k$
+shift of this true lower value.  Keeping the common first coordinate
+$\ell$ gives exactly the displayed pair map.  No independently chosen
+lower ideal, contact direction, tail, new canonicity or value comparison
+is an input.
+\end{proof}
+
+Positive-order recursion inside this actual crossing lower tail, the full
+outer general-value transport, mixed spectra and noncompact scheduling
+remain further obligations.

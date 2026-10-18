@@ -1,0 +1,210 @@
+\section{Actual original finite normal relations and leading lifts have ONE genuine analytic coefficient neighborhood}
+Let $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+$J$ the actual normal ideal, and $I\subset R$ an arbitrary ORIGINAL whole
+ideal. All finite relations, leading lifts, multipliers and the denominator
+below are internally produced from this actual $I$. An entire function
+representative ring is used only to express finite genuine identities;
+its functions are proved holomorphic on one actual open neighborhood.
+There is no canonical homomorphism from all germs at zero to all germs at
+an arbitrary nearby point. The finite model produced here is not yet
+identified with the WHOLE original normal cone at nearby stalks.
+
+\begin{lemma}[Internally chosen whole germ representatives share one actual holomorphic open]
+\label{hir:relative-normal-analytic-coefficients-common-open}
+\lean{Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualCoefficientRepresentative,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualCoefficientRepresentative_zero,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualCoefficientRepresentative_holomorphic,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualCoefficientRepresentative_germ,Hironaka.HironakaRelativeNormalAnalyticCoefficients.exists_common_coefficient_open}
+\leanok
+Every actual entire $h\in B$ internally has a function representative
+$r_h:\mathbb C^d\to\mathbb C$ holomorphic near zero whose WHOLE germ is $h$.
+Choose $r_0=0$ literally. Every finite actual family of these coefficients
+has ONE genuine open neighborhood $U$ of zero on which ALL its chosen
+representatives are holomorphic at EVERY point.
+\end{lemma}
+\begin{proof}
+Membership in the actual holomorphic-germ subring is precisely existence
+of an actual function differentiable throughout some neighborhood of zero,
+with that ENTIRE germ equal to the given element. Internally choose such
+an actual representative for each nonzero germ, and choose the literal
+zero function for zero. The subtype equality proves its whole germ
+identity, not merely an equality of values at the centre. For a finite
+family, take the finite intersection of their genuine neighborhood
+conditions. The resulting condition belongs to the neighborhood filter;
+choose an actual open neighborhood of zero contained in it. Every chosen
+coefficient is then genuinely differentiable, hence holomorphic, at EVERY
+point of this same open. The empty family permits the whole space and the
+zero-dimensional base uses the same neighborhood argument. No caller
+representative, open set or point-value replacement is supplied.
+\end{proof}
+
+\begin{lemma}[Finite-support polynomial representatives retain their entire original polynomial germs and degrees]
+\label{hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary}
+\lean{Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialRepresentative,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialRepresentative_coeff,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialRepresentative_whole_germ,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialSpecialization,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialSpecialization_coeff,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialSpecialization_support_subset,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialSpecialization_homogeneous,Hironaka.HironakaRelativeNormalAnalyticCoefficients.exists_common_polynomial_coefficient_open}
+\leanok
+\uses{hir:relative-normal-analytic-coefficients-common-open}
+For each actual $P\in B[z_1,\ldots,z_t]$ form the genuine polynomial
+$\widetilde P$ with coefficient functions $r_{P_\alpha}$ on its ACTUAL
+finite support. Its coefficient at EVERY exponent is exactly
+$r_{P_\alpha}$, including the literal zero coefficients outside that support.
+The genuine function-to-germ ring homomorphism maps this WHOLE polynomial
+to the original $P$ under the injective holomorphic-germ subtype map.
+The actual specialization at any point has support contained in the SAME
+finite support; every actual homogeneous degree of $P$ is retained.
+\end{lemma}
+\begin{proof}
+Define $\widetilde P=\sum_{\alpha\in\operatorname{supp}P}
+ z^\alpha r_{P_\alpha}$ in the TRUE polynomial ring over the ring of actual
+functions. Coefficient extraction gives the stated function at an exponent
+in the actual finite support. Outside it the sum coefficient is zero,
+and the original coefficient and its chosen representative are literally
+zero, giving the SAME dictionary at every exponent. Apply the genuine
+function-to-germ ring map coefficientwise. Each coefficient then equals
+the corresponding entire original holomorphic germ by the first lemma;
+polynomial extensionality gives the complete polynomial identity.
+Specialization is the genuine evaluation ring map on this actual function
+ring, not an invented map on all zero-centred germs. Outside the SAME
+support it remains zero, so actual homogeneous original support stays in
+its true original total degree at every point, even when some coefficients
+vanish. A common coefficient open follows by applying the first lemma to
+the finite union of the actual polynomial supports. Empty supports and
+zero polynomials retain all these exact dictionaries.
+\end{proof}
+
+\begin{lemma}[Whole finite polynomial germ identities spread to ONE common genuine open]
+\label{hir:relative-normal-analytic-coefficients-finite-identity-spread}
+\lean{Hironaka.HironakaRelativeNormalAnalyticCoefficients.exists_open_polynomial_sum_mul}
+\leanok
+\uses{hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary}
+For any ACTUAL finite polynomial family $A_i,P_i$, the chosen representative
+of the complete original polynomial $\sum_i A_iP_i$ agrees throughout ONE
+actual open neighborhood of zero with the sum of products of the chosen
+representatives. This is a WHOLE polynomial functional identity.
+\end{lemma}
+\begin{proof}
+Subtract these two actual sides in the genuine polynomial
+ring of coefficient functions. The actual function-to-germ ring map takes
+this difference to zero, since the complete original polynomial sum-product identity
+holds and the preceding full coefficient dictionary is exact.
+Each coefficient in its actual finite support therefore has zero ENTIRE
+germ. Equality to the zero germ means genuine equality of the function to
+zero on some neighborhood of zero. Intersect these actual neighborhoods
+for every coefficient of this actual difference polynomial. Choose an open
+neighborhood of zero contained in that finite intersection. Each entire
+difference polynomial specializes to zero at EVERY point there, by its
+actual finite coefficient support and polynomial extensionality. Thus this
+original whole finite sum-product identity holds on ONE common actual open.
+For the internally produced FINITE family of original lift identities below,
+intersect these genuine opens and the actual coefficient holomorphic open;
+this retains every whole identity and holomorphicity on the SAME open. No
+compactness, finite-order truncation or caller functional identity is used.
+\end{proof}
+
+\begin{theorem}[The original whole ideal internally supplies its actual finite homogeneous relations and leading-lift multipliers]
+\label{hir:relative-normal-analytic-coefficients-original-finite-inputs}
+\lean{Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalHomogeneousRelations,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalHomogeneousRelations_spec,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalHomogeneousRelations_homogeneous,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalLeadingLifts,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalLeadingLifts_mem,Hironaka.HironakaRelativeNormalAnalyticCoefficients.exists_actualOriginalLeadingMultiplier,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalLeadingMultiplier,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalLeadingMultiplier_identity,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalModelPolynomials,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalRelations_mem_model,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalLeadingLift_mem_model,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalMultiplier_mem_model,Hironaka.HironakaRelativeNormalAnalyticCoefficients.exists_actualOriginalFiniteModel_open,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalAnalyticOpen,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalAnalyticOpen_isOpen,Hironaka.HironakaRelativeNormalAnalyticCoefficients.zero_mem_actualOriginalAnalyticOpen,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalModel_coefficients_holomorphic,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalModel_leading_identity}
+\leanok
+\uses{hir:relative-normal-graded-internal-finite-relations,hir:relative-normal-uniform-original-leading-lifts,hir:relative-normal-analytic-coefficients-finite-identity-spread,hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary}
+The actual whole original initial ideal $H(I)$ internally has a finite
+subset $S$ of its ACTUAL homogeneous normal relations with $H(I)=(S)$.
+The actual internally selected finite leading-lift family $F$ consists of
+nonzero whole members of $H(I)$. For EVERY $g\in F$, internally produce
+actual polynomial multipliers $A_{g,s}\in B[z]$ satisfying the COMPLETE
+original polynomial identity $g=\sum_{s\in S}A_{g,s}s$. Internally obtain
+ONE genuine common open containing zero on which ALL chosen coefficients
+of $S,F,A$ are holomorphic and ALL these WHOLE functional identities hold.
+\end{theorem}
+\begin{proof}
+The actual original normal associated-graded producer identifies the
+ENTIRE initial ideal with the span of the actual original homogeneous
+relations. True Noetherianity internally extracts a finite subset $S$
+of this SAME relation family generating the whole ideal, retaining each
+actual original homogeneous degree and its underlying original relation.
+The actual field leading-generator construction and genuine denominator
+clearing internally give the finite family $F$ of nonzero original
+polynomials belonging to this SAME $H(I)$. Substitute $H(I)=(S)$ in each
+actual membership. The genuine finite-span membership characterization
+then yields finitely many actual polynomial multipliers, one per true
+finite generator, whose sum is the ENTIRE original member. Choose these
+actual witnesses internally. There are only finitely many $g$ and $s$;
+all multipliers therefore have a finite total coefficient family. Apply
+the actual whole coefficient-representative producer to the finite union
+of their supports and all $S,F$ supports. The third lemma spreads each
+TRUE internally supplied sum-product identity to an actual open. Finiteness
+of the original lift family permits their finite intersection with the
+coefficient holomorphic open, producing ONE common actual open containing
+zero that retains ALL coefficient and whole functional dictionaries. The
+empty leading family and empty relation family use genuine empty sums.
+No caller finite relation, leading-lift, Groebner or multiplier certificate
+is passed to this ORIGINAL ideal consumer.
+\end{proof}
+
+\begin{theorem}[The SAME genuine leading-coefficient product has an actual nonvanishing open with exact leading exponents]
+\label{hir:relative-normal-analytic-coefficients-same-denominator-open}
+\lean{Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualPolynomialSpecialization_degree,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalDenominatorRepresentative,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalDenominatorRepresentative_whole_germ,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalDenominatorRepresentative_holomorphic,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalNonvanishingOpen,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalNonvanishingOpen_isOpen,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalNonvanishingOpen_meets_nhds,Hironaka.HironakaRelativeNormalAnalyticCoefficients.actualOriginalLeadingLifts_specialized_degree}
+\leanok
+\uses{hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary,hir:relative-normal-analytic-coefficients-original-finite-inputs,hir:relative-normal-uniform-common-denominator}
+The actual product $\beta=\prod_{g\in F}r_{\operatorname{LC}(g)}$
+is holomorphic on ONE actual coefficient open $U\ni0$, and its ENTIRE germ
+is the SAME actual nonzero uniform denominator $b(I)$, independent of
+normal order. The true set $U_\beta=\{y\in U:\beta(y)\ne0\}$ is open and
+meets EVERY neighborhood of zero. At EVERY $y\in U_\beta$ ALL actual
+specialized $\widetilde g(y)$ have their SAME original leading exponents.
+\end{theorem}
+\begin{proof}
+Every original lift is nonzero, so its actual leading coefficient is a
+nonzero entire base germ. The actual uniform denominator is literally
+the product of these SAME coefficients, and true domain arithmetic makes
+it nonzero. The genuine whole representative product has that exact
+ENTIRE germ because function-to-germ is a ring homomorphism. The first
+lemma supplies one actual open on which all factors are holomorphic;
+the finite product is holomorphic there. Continuity at every actual
+point makes its nonvanishing set open relative to this actual open,
+hence actually open. If any neighborhood of zero missed $U_\beta$,
+the function $\beta$ would vanish throughout its intersection with $U$,
+a genuine neighborhood of zero. Its ENTIRE germ would then be zero,
+contradicting the actual nonzero $b(I)$. Hence this real open meets EVERY
+origin neighborhood, including zero-dimensional and empty-product cases.
+At a point of this SAME open each genuine product factor is nonzero.
+The preceding polynomial dictionary gives that the original leading
+coefficient remains nonzero and every coefficient beyond the original
+leading exponent remains literally zero. The actual monomial-order
+maximum of the finite support is consequently unchanged. This is an
+exact finite-polynomial leading dictionary, not a nearby whole normal-cone
+or normal-flatness conclusion.
+\end{proof}
+
+\begin{theorem}[ONLY the original whole ideal produces the complete common analytic finite model]
+\label{hir:relative-normal-analytic-coefficients-original-consumer}
+\lean{Hironaka.HironakaRelativeNormalAnalyticCoefficients.exists_original_whole_analytic_model}
+\leanok
+\uses{hir:relative-normal-analytic-coefficients-finite-identity-spread,hir:relative-normal-analytic-coefficients-original-finite-inputs,hir:relative-normal-analytic-coefficients-same-denominator-open}
+For the ORIGINAL arbitrary $I$, internally produce the actual $S,F,A$,
+ONE actual open $U\ni0$, their whole holomorphic coefficient and polynomial
+germ dictionaries, true homogeneous relation degrees, and the SAME real
+nonzero denominator representative $\beta$. Throughout this SAME $U$,
+ALL complete identities $\widetilde g(y)=\sum_{s\in S}
+\widetilde A_{g,s}(y)\widetilde s(y)$ hold. Its SAME nonvanishing open
+meets EVERY origin neighborhood and preserves ALL true leading exponents.
+\end{theorem}
+\begin{proof}
+Apply the fourth theorem to the actual original $I$ to obtain the TRUE
+internally generated homogeneous relations, leading lifts and multipliers.
+Take the finite union of ALL their genuine coefficient supports, including
+all actual leading coefficients. Apply the first two lemmas to construct
+actual whole representatives and a common actual holomorphic open.
+Apply the third lemma to the FINITE internally supplied complete membership
+identities. Shrink the SAME actual open to retain EVERY functional identity
+and EVERY coefficient holomorphic condition. Form the actual product
+$\beta$ of the SAME real leading-coefficient representatives. The fifth
+theorem applies on this very open: its ENTIRE germ remains the SAME actual
+nonzero denominator, so its nonvanishing open still meets EVERY origin
+neighborhood and ALL actual leading exponents remain exact. Retain all
+original ideal, whole germ, degree, product and finite identity dictionaries.
+Every construction consumes only the actual original whole ideal.
+No nearby original normal-cone equality is asserted from this finite model.
+\end{proof}
+
+\begin{remark}
+Actual coherent relative Rees/initial-ideal identification of this SAME
+finite analytic model with the WHOLE original normal cone at nearby stalks
+remains OPEN. Until that genuine producer exists, analytic normal-flat loci,
+nearby ALL-order finite freeness, higher HS and general G8 remain OPEN.
+\end{remark}

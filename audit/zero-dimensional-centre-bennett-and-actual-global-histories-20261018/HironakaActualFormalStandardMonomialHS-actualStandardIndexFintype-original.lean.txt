@@ -1,0 +1,6 @@
+/-- The actual bounded exponent construction internally makes its genuine diagram complement finite. -/
+instance actualStandardIndexFintype (n : ℕ) (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :
+    Fintype (actualStandardIndex n I q) := by
+  classical
+  letI := normalExponentFintype n q
+  exact inferInstance

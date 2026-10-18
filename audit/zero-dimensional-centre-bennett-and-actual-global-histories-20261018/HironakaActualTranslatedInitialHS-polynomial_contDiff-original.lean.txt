@@ -1,0 +1,7 @@
+private theorem polynomial_contDiff {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+    (P : MvPolynomial (Fin n) ℂ) (x : Fin n → E → ℂ) (hx : ∀ i, ContDiff ℂ ∞ (x i)) :
+    ContDiff ℂ ∞ (fun z => MvPolynomial.eval (fun i => x i z) P) := by
+  induction P using MvPolynomial.induction_on with
+  | C c => simpa only [MvPolynomial.eval_C] using (contDiff_const : ContDiff ℂ ∞ (fun _ : E => c))
+  | add P Q hP hQ => simpa only [MvPolynomial.eval_add] using hP.add hQ
+  | mul_X P i hP => simpa only [MvPolynomial.eval_mul,MvPolynomial.eval_X] using hP.mul (hx i)

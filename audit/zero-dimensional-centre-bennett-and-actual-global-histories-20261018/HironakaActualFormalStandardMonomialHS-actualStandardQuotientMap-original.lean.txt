@@ -1,0 +1,5 @@
+/-- The literal actual standard monomial map into the WHOLE genuine formal jet quotient. -/
+def actualStandardQuotientMap (n : ℕ) (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :
+    (actualStandardIndex n I q → ℂ) →ₗ[ℂ]
+      (MvPowerSeries (Fin n) ℂ ⧸ (I ⊔ genuineFormalVariables n ^ q)) :=
+  (Ideal.Quotient.mkₐ ℂ (I ⊔ genuineFormalVariables n ^ q)).toLinearMap.comp (actualStandardLift n I q)

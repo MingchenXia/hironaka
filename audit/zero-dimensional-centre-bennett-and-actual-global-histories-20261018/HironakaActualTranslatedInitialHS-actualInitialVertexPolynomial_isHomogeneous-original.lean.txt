@@ -1,0 +1,17 @@
+/-- True entire polynomial inclusion internally supplies genuine polynomial homogeneity. -/
+theorem actualInitialVertexPolynomial_isHomogeneous (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (a : actualInitialVertices MonomialOrder.degLex I) :
+    (actualInitialVertexPolynomial I a).IsHomogeneous (normalExponentDegree a.val) := by
+  intro b hb
+  have hc : MvPowerSeries.coeff b
+      (actualHomogeneousInitialForm (actualVertexSeries MonomialOrder.degLex I a)
+        (actualVertexSeries_spec MonomialOrder.degLex I a).2.choose) ≠ 0 := by
+    rw [← actualInitialVertexPolynomial_coe,MvPolynomial.coeff_coe]
+    exact hb
+  have hh : (actualHomogeneousInitialForm (actualVertexSeries MonomialOrder.degLex I a)
+      (actualVertexSeries_spec MonomialOrder.degLex I a).2.choose).IsHomogeneous (normalExponentDegree a.val) := by
+    rw [actualHomogeneousInitialForm,actualHomogeneousInitialDegree,
+      (actualVertexSeries_spec MonomialOrder.degLex I a).2.choose_spec.1]
+    intro c hcc
+    exact MvPowerSeries.isHomogeneous_homogeneousComponent _ _ hcc
+  exact hh hc

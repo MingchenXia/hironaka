@@ -1,0 +1,90 @@
+\section{Original positive companions and actual histories under inserted empty boundary members}
+This independent OWN OFFLIB fragment supplies the original companion and regime dictionaries needed before a middle-empty-step comparison. It keeps all original boundary indices. It proves whole companion equality up to the explicit inserted empty member, not equality of the entire recursively constructed general invariant. Whole strict-order alignment of lower StepOne values and noncompact gluing remain OPEN.
+
+\begin{lemma}[The whole actual companion commutes with the explicit empty insertion]
+\label{hir:original-positive-companion-empty-insertion}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.companionOf_insertEmpty}
+\uses{bcalc:monomial-invariant-empty-member,bcalc:companion-rebase,hir:companion-reduction-along}
+\leanok
+For any actual marked ideal $m$, index $j\le |E_m|$ and natural order $o$, the companion of $m$ with an empty member inserted at $j$ equals the companion of $m$ with the SAME empty member inserted at $j$. Equality is of the ENTIRE marked ideal, including its actual ideal and mark; the indexed boundary list is retained literally.
+\end{lemma}
+\begin{proof}
+The actual monomial part is unchanged by the inserted empty member, since the new member contains no point. The actual nonmonomial part is also unchanged by the whole original monomial-part identity. The true companion is the marked sum of these original parts with orders $o,d-o$ if $o<d$, and the nonmonomial part with order $o$ otherwise. In each of these two actual cases its ideal, carrier and mark are independent of the empty member, while its boundary is exactly the original boundary with that SAME insertion. Thus every field of the entire original companion agrees.
+\end{proof}
+
+\begin{lemma}[The whole original companion dictionary holds at every tower stage]
+\label{hir:original-positive-companion-empty-stage}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.companionOf_geoTransformAlong_insertEmpty}
+\uses{hir:original-positive-companion-empty-insertion,bcalc:monomial-invariant-empty-member}
+\leanok
+Along ANY actual blowup tower $T$, companion formation after transforming the inserted marked ideal equals explicit insertion at the SAME original $j$ into the companion of the actual original transform $m_T$.
+\end{lemma}
+\begin{proof}
+The original geometric transform commutes with explicit empty insertion along the entire tower, including every exceptional member appended after the original list. Its boundary length is $|E_m|+|T|$, so the original insertion position is still valid. Apply the preceding whole companion equality to this SAME actual transform. No independently supplied transformed or companion model is used.
+\end{proof}
+
+\begin{theorem}[Original coherent input gives the entire companion ideal dictionary at every order and point]
+\label{hir:original-positive-companion-empty-whole-coherent}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.whole_coherent_companion_empty_dictionary}
+\uses{hir:original-positive-companion-empty-stage,bcalc:companion-domain,bcalc:inv-domain-stable}
+\leanok
+Only actual original invariant-domain data and a genuine geometric test tower internally give, for EVERY positive natural order $o$, coherence of the entire companion ideal of the transformed inserted datum and equality of its membership with the companion of the SAME original transform at EVERY ambient point and EVERY function germ. Points of higher original nonmonomial order are included; no order-bound or maximal-order assumption is supplied.
+\end{theorem}
+\begin{proof}
+Original domain stability along the genuine geometric test tower gives the actual transformed original datum in the SAME invariant domain. For each true $o\ge1$, the original companion-domain producer proves that its whole companion is coherent; it needs no bound on the original nonmonomial order. The preceding ENTIRE marked-ideal equality identifies the inserted companion ideal with this SAME coherent original ideal, since inserting an empty member changes only the boundary field. Substitute this whole ideal equality for every ambient point and every germ. This proves real coherent extension of the original companion as an ideal across higher-order points; it does not extend its maximal-order hypothesis or its full StepOne canonical-value dictionary across those points.
+\end{proof}
+
+\begin{lemma}[Every actual order mask agrees on the entire stage]
+\label{hir:original-positive-companion-empty-whole-mask}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.ordMask_geoTransformAlong_insertEmpty}
+\uses{bcalc:monomial-invariant-empty-member,bcalc:nonmonomial-order-tail}
+\leanok
+At every tower stage and every natural $o$, the genuine original open order mask of the inserted transformed datum equals the SAME open mask of the original transformed datum.
+\end{lemma}
+\begin{proof}
+Whole transformation commutes with insertion as above. The entire original nonmonomial part, hence every actual order-at-least locus, is unchanged by insertion. The actual open mask is defined as the complement of the closure of the order-at-least-$o+1$ locus. Substituting the entire locus equality proves equality of the WHOLE open mask, without a pointwise chosen neighbourhood or an order-bound assumption.
+\end{proof}
+
+\begin{lemma}[Actual regimes at every original stage agree]
+\label{hir:original-positive-companion-empty-regime}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.ordRegime_insertEmpty_iff}
+\uses{bcalc:monomial-invariant-empty-member,bcalc:nonmonomial-order-regime}
+\leanok
+At EVERY actual tower stage and EVERY point, the original regime of order $o$ for the inserted datum is equivalent to that for the original datum.
+\end{lemma}
+\begin{proof}
+The actual regime is the conjunction of original current cosupport membership and equality of the current nonmonomial order with $o$. Whole cosupport and actual nonmonomial order are unchanged by empty insertion along the tower, so both actual conjuncts agree.
+\end{proof}
+
+\begin{lemma}[The original entire run length agrees]
+\label{hir:original-positive-companion-empty-run}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.regimeRun_insertEmpty}
+\uses{hir:original-positive-companion-empty-regime,hir:regime-run}
+\leanok
+For EVERY order, actual tower and endpoint, the original run length of the inserted datum equals that of the original datum. Thus the actual tower is split at the SAME integer.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower. Both runs are zero at the base. At each actual final blowup the run tests the actual preceding endpoint's regime, either continuing by one or resetting to zero. The preceding regime equivalence identifies these two actual branch predicates; the induction identifies the preceding runs in the continuing case. Both resetting cases are literally zero. This proves equality of the entire point-dependent run, without a caller run or split certificate.
+\end{proof}
+
+\begin{lemma}[The actual regime across a middle empty step]
+\label{hir:original-positive-companion-middle-empty-regime}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.ordRegime_step_empty_append_iff}
+\uses{bcalc:monomial-invariant-empty-member,bcalc:nonmonomial-order-regime}
+\leanok
+For actual $T_0$, a genuine blowup $\sigma$ along the empty centre, and ANY actual tail $S$, the regime along $T_0\sigma S$ equals the regime along $S$ of the actual transported base with its new empty member removed. This uses the original explicit empty-step base, retaining its genuine transformed ideal and every original boundary member.
+\end{lemma}
+\begin{proof}
+The original middle-empty-step transform formula identifies the ENTIRE actual transform with explicit insertion at $|E_m|+|T_0|$ into the tail transform of that SAME original empty-step base. The original middle-empty identities give identical whole cosupports and nonmonomial orders. Substitute them into the two actual regime conjuncts.
+\end{proof}
+
+\begin{theorem}[The whole actual run across a middle empty step has an internally determined cap]
+\label{hir:original-positive-companion-middle-empty-run-cap}
+\lean{Hironaka.HironakaOriginalPositiveCompanionEmptyInsertion.regimeRun_step_empty_append_cases}
+\uses{hir:original-positive-companion-middle-empty-regime,hir:step-one-empty-prefix,hir:regime-run}
+\leanok
+For EVERY actual order and endpoint let $r$ be the actual run in $S$ for the original transported empty-step base. The run in $T_0\sigma S$ is $r$ if $r<|S|$, and otherwise $|S|$ plus the actual run in $T_0\sigma$ at the image of the endpoint. The split is determined by these SAME original computed integers. No history, run cap or chosen alignment is supplied.
+\end{theorem}
+\begin{proof}
+Actual runs are bounded by the true tail length. The preceding actual regime equivalence holds on EVERY prefix of $S$. Apply the original concatenation-run identities: in the strict case the run stays wholly inside $S$ and equals $r$; in the remaining case the bound forces $r=|S|$, so the true original run continues from its actual preceding image into $T_0\sigma$. These two internally exhausted cases give the stated conditional formula. This is an actual original-history producer; comparison of lower StepOne invariant orders after deleting the empty step remains a subsequent producer.
+\end{proof}

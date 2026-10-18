@@ -1,0 +1,24 @@
+private theorem map_scalar_translated_initial (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (p : Fin n → ℂ) (c : ℂ) (hc : c ≠ 0) :
+    Ideal.map (actualScalarGermAlgEquiv n c hc).toRingEquiv.toRingHom
+      (actualTranslatedInitialIdeal I (c • p))=actualTranslatedInitialIdeal I p := by
+  rw [actualTranslatedInitialIdeal,Ideal.map_span,← Set.range_comp]
+  apply le_antisymm
+  · apply Ideal.span_le.mpr
+    rintro g ⟨a,rfl⟩
+    change actualScalarGermAlgEquiv n c hc
+      (actualTranslatedPolynomialEval n (c • p) (actualInitialVertexPolynomial I a)) ∈ actualTranslatedInitialIdeal I p
+    rw [scalarGerm_translated_initial]
+    exact Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨a,rfl⟩)
+  · apply Ideal.span_le.mpr
+    rintro g ⟨a,rfl⟩
+    have hg : actualScalarGermAlgEquiv n c hc
+        (actualTranslatedPolynomialEval n (c • p) (actualInitialVertexPolynomial I a)) ∈
+          Ideal.span (range fun b : actualInitialVertices MonomialOrder.degLex I =>
+            actualScalarGermAlgEquiv n c hc
+              (actualTranslatedPolynomialEval n (c • p) (actualInitialVertexPolynomial I b))) :=
+      Ideal.subset_span ⟨a,rfl⟩
+    rw [scalarGerm_translated_initial] at hg
+    have hh := Ideal.mul_mem_left _ (algebraMap ℂ (HolGerm (ComplexModel (0+n))) ((c^normalExponentDegree a.val)⁻¹)) hg
+    rw [← mul_assoc,← map_mul,inv_mul_cancel₀ (pow_ne_zero _ hc),map_one,one_mul] at hh
+    exact hh

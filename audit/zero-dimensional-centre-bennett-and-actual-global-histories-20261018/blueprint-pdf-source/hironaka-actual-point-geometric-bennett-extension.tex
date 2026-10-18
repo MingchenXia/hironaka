@@ -1,0 +1,99 @@
+\section{The intrinsic geometric point-chart Hilbert--Samuel comparison}
+
+\begin{theorem}[The unchanged whole vanishing origin ideal has its actual vanishing germ meaning]
+\label{hir:actual-whole-vanishing-origin-ideal-meaning}
+\lean{Hironaka.HironakaActualPointGeometricBennett.mk_mem_original_vanishing_origin_ideal_iff,Hironaka.HironakaActualPointGeometricBennett.originalVanishingOriginIdeal_closure}
+\leanok
+For every actual subset $A$ of the original model and every holomorphic
+representative $f$ near zero, its original germ belongs to the unchanged
+whole vanishing origin ideal exactly when $f$ vanishes on $A$ near zero.
+The whole original vanishing origin ideal is unchanged on replacing $A$
+by its actual closure. No coherence or global analytic extension is a premise.
+\end{theorem}
+\begin{proof}
+Every defining generator has a genuine holomorphic representative
+vanishing on $A$ near zero. The zero germ has such a representative;
+addition and multiplication by arbitrary original holomorphic germs
+preserve that property. Induction on the unchanged whole ideal span
+therefore gives such a representative for every member. Equality with
+the given original representative is equality near zero, proving the
+forward implication. For the reverse implication the same representative
+is literally one of the defining original vanishing generators.
+Local holomorphicity supplies continuity near zero, so actual vanishing
+on $A$ extends to its closure near zero. The reverse inclusion follows
+from $A\subseteq\overline A$, proving the entire closure ideal equality.
+\end{proof}
+
+\begin{theorem}[The original intrinsic model-point function is the unchanged whole origin-ideal function]
+\label{hir:actual-model-zero-whole-stalk-hs-dictionary}
+\lean{Hironaka.HironakaActualPointGeometricBennett.wholeChartStalkIdeal_model_zero,Hironaka.HironakaActualPointGeometricBennett.hilbertSamuelAt_model_zero}
+\leanok
+For every original germ ideal sheaf on the actual model, its entire chart
+stalk ideal at zero is the same unchanged whole origin ideal. Thus the
+existing intrinsic point Hilbert--Samuel function at zero equals the
+whole origin-ideal quotient function at every order.
+\end{theorem}
+\begin{proof}
+The actual model chart is the identity and the original point is zero.
+Consequently the actual translated chart germ of each original member
+is precisely its original whole germ. Original model differentiability
+and manifold differentiability agree. Each defining generator therefore
+belongs to the other defining generator set, with its genuine membership
+preserved. Their entire spans coincide. Apply the existing definition
+of the intrinsic point function to these identical actual ideals.
+\end{proof}
+
+\begin{theorem}[Actual geometric strict vanishing contains the whole normalized ideal in dimension at least two]
+\label{hir:actual-point-geometric-strict-normalized-inclusion}
+\uses{hir:actual-whole-vanishing-origin-ideal-meaning,hir:actual-point-quotient-vanishing-exceptional-complement-closure,hir:actual-point-blowup-hyperplane-exceptional}
+\lean{Hironaka.HironakaActualPointGeometricBennett.actual_point_normalized_ideal_le_geometric_strict_vanishing}
+\leanok
+For $n\ge2$ and the actual point-chart map $\pi$, the whole analytic
+normalized member ideal of the original vanishing origin ideal of $A$
+is contained in the unchanged vanishing origin ideal of the library's
+actual geometric strict transform of $A$.
+\end{theorem}
+\begin{proof}
+Take an actual defining normalized quotient $H$ with original member $g$
+and true whole exceptional product. The first theorem gives genuine
+vanishing of a representative of $g$ on $A$ near zero. The actual
+quotient-closure theorem makes $H$ vanish on
+$\overline{\pi^{-1}A\setminus\{z_e=0\}}$ near zero.
+The true differential calculation in dimension at least two puts every
+point with $z_e=0$ in the actual differential exceptional locus: a
+different standard coordinate vector is a nonzero kernel vector.
+Therefore the original geometric strict transform
+$\overline{\pi^{-1}A\setminus\operatorname{Exc}(\pi)}$ is contained
+in that actual closure. The same representative of $H$ vanishes on
+this strict transform near zero. It is thus an original target vanishing
+generator, and span gives the whole inclusion.
+\end{proof}
+
+\begin{theorem}[Actual geometric point-chart blowup does not increase the existing intrinsic Hilbert--Samuel function]
+\label{hir:actual-geometric-point-bennett-all-orders}
+\uses{hir:actual-point-geometric-strict-normalized-inclusion,hir:actual-model-zero-whole-stalk-hs-dictionary,hir:actual-whole-analytic-ideal-hs-antitone,hir:actual-analytic-point-normalized-bennett-all-orders,hir:actual-point-blowup-one-dimensional-identity}
+\lean{Hironaka.HironakaActualPointGeometricBennett.hilbertSamuelValue_actual_geometric_point_strict_le,Hironaka.HironakaActualPointGeometricBennett.hilbertSamuelAt_actual_geometric_point_strict_le}
+\leanok
+For every original subset $A$, actual point-chart map $\pi$, and order
+$\ell$, the actual geometric strict transform has the existing intrinsic
+Hilbert--Samuel value at zero at most the original value at zero.
+The assertion also holds for the unchanged whole origin-ideal values.
+\end{theorem}
+\begin{proof}
+The existence of the actual coordinate implies $n\ge1$. If $n=1$, the
+actual point-chart map is literally the identity and its differential
+exceptional locus is empty. Its geometric strict transform is therefore
+$\overline A$, whose entire original vanishing origin ideal equals
+that of $A$ by the first theorem. Hence the values are equal.
+If $n\ge2$, the preceding entire ideal inclusion and genuine ideal
+antitonicity bound the geometric strict value by the actual analytic
+normalized member value. The proved all-order original point-normalized
+comparison bounds that by the unchanged original value. Finally the
+actual model-zero whole-stalk dictionary identifies these same quotient
+values with the unchanged intrinsic point function on both sides.
+\end{proof}
+
+This concerns the genuine original point-chart maps and the original
+differential-exceptional definition of geometric strict transform.
+Transport to arbitrary actual manifold blowup charts and the
+positive-dimensional permissible-centre theorem remain separate steps.

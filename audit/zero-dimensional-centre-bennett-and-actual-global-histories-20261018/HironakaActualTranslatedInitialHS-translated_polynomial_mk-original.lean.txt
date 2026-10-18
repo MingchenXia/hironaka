@@ -1,0 +1,25 @@
+private theorem translated_polynomial_mk (p : Fin n → ℂ) (P : MvPolynomial (Fin n) ℂ) :
+    actualTranslatedPolynomialEval n p P=
+      HolGerm.mk (fun z : ComplexModel (0+n) => MvPolynomial.eval (fun i => z (i.natAdd 0)+p i) P)
+        (translated_polynomial_holomorphic p P) := by
+  induction P using MvPolynomial.induction_on with
+  | C c =>
+      simp only [actualTranslatedPolynomialEval,MvPolynomial.aeval_C,MvPolynomial.eval_C]
+      rfl
+  | add P Q hP hQ =>
+      rw [map_add,hP,hQ]
+      rw [← HolGerm.mk_add]
+      apply HolGerm.mk_eq_mk_iff.mpr
+      exact Eventually.of_forall fun z => MvPolynomial.eval_add.symm
+  | mul_X P i hP =>
+      rw [map_mul,hP,actualTranslatedPolynomialEval,MvPolynomial.aeval_X]
+      let hx : ∀ᶠ z in 𝓝 (0 : ComplexModel (0+n)),
+          DifferentiableAt ℂ (fun w : ComplexModel (0+n) => w (i.natAdd 0)) z :=
+        Eventually.of_forall fun _ => (EuclideanSpace.proj (i.natAdd 0) : ComplexModel (0+n) →L[ℂ] ℂ).differentiableAt
+      change HolGerm.mk (fun z : ComplexModel (0+n) => MvPolynomial.eval (fun j => z (j.natAdd 0)+p j) P)
+        (translated_polynomial_holomorphic p P)*
+          (HolGerm.mk (fun z : ComplexModel (0+n) => z (i.natAdd 0)) hx+
+            HolGerm.mk (fun _ : ComplexModel (0+n) => p i) (eventually_differentiableAt_const (p i)))=_
+      rw [← HolGerm.mk_add,← HolGerm.mk_mul]
+      apply HolGerm.mk_eq_mk_iff.mpr
+      exact Eventually.of_forall fun z => by simp [MvPolynomial.eval_mul,MvPolynomial.eval_X]

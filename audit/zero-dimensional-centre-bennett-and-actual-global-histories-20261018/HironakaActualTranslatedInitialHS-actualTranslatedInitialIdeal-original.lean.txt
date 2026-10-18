@@ -1,0 +1,5 @@
+/-- The actual ORIGINAL translated homogeneous initial ideal, without an analytic-model premise. -/
+def actualTranslatedInitialIdeal (I : Ideal (MvPowerSeries (Fin n) ℂ)) (p : Fin n → ℂ) :
+    Ideal (HolGerm (ComplexModel (0+n))) :=
+  Ideal.span (range fun a : actualInitialVertices MonomialOrder.degLex I =>
+    actualTranslatedPolynomialEval n p (actualInitialVertexPolynomial I a))

@@ -1,0 +1,3 @@
+/-- The finite genuine diagram complement within the ORIGINAL actual bounded exponent index. -/
+abbrev actualStandardIndex (n : ℕ) (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :=
+  {a : normalExponentIndex n q // (a : Fin n →₀ ℕ) ∉ actualInitialDiagram MonomialOrder.degLex I}

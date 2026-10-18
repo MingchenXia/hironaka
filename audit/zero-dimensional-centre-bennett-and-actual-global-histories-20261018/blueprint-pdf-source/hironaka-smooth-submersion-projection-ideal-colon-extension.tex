@@ -1,0 +1,114 @@
+\section{Actual projection of holomorphic germs preserves whole ideal quotients}
+
+\begin{lemma}[Internally produced entire normal-jet coefficients]
+\label{hir:submersion-projection-colon-actual-coefficients}
+\lean{Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projectionJetCoefficients,Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projectionJetCoefficients_tangent_mul,Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projectionJetCoefficients_eq_zero_iff,Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projectionJetCoefficients_reconstruction}
+\leanok
+\uses{hir:relative-normal-basis-actual-entire-quotient-basis}
+Let $B=\mathcal O_{\mathbf C^d,0}$, $R=\mathcal O_{\mathbf C^{d+t},0}$,
+and let $\eta:B\to R$ be the actual tangential projection pullback. Let
+$J$ be the actual ideal of the last $t$ coordinate germs. For EVERY $q$,
+internally define the whole coefficient map $c_q$ of $R/J^q$ by the inverse
+of its actually constructed finite normal-monomial $B$-linear equivalence.
+It is $B$-linear, has literal kernel $J^q$, and its actual reconstruction is
+$g\equiv\sum_{|\alpha|<q}\eta(c_q(g)_\alpha)y^\alpha\pmod{J^q}$.
+No finite frame, tuple inverse, kernel or representation certificate is input.
+\end{lemma}
+\begin{proof}
+Compose the true quotient map $R\to R/J^q$ with the inverse of the internally
+constructed normal-monomial linear equivalence. The latter is genuinely
+bijective by actual normal Taylor coefficient separation and the proved
+entire monomial representative theorem. Its linearity gives additivity and
+$c_q(\eta(a)g)=a c_q(g)$ for the ENTIRE original base germ $a$. Its inverse
+identity gives the exact whole finite reconstruction using the actual
+monomial evaluation dictionary. Its injectivity and the genuine quotient
+kernel give $c_q(g)=0$ exactly when $g\in J^q$. This includes $q=0$ (zero
+quotient and empty tuple), $t=0$ and $d=0$, without a prescribed basis input.
+\end{proof}
+
+\begin{theorem}[Every original ideal has an exact actual coefficient membership dictionary]
+\label{hir:submersion-projection-colon-whole-ideal-jet-dictionary}
+\lean{Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projection_extended_ideal_coefficients,Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projection_extended_ideal_mod_normal_pow_iff}
+\leanok
+\uses{hir:submersion-projection-colon-actual-coefficients}
+For ANY actual original ideal $I\subseteq B$, EVERY $q$, and EVERY actual
+germ $g\in R$, one has
+$g\in\eta(I)R+J^q$ if and only if EVERY actual coefficient $c_q(g)_\alpha$
+is in the SAME entire original $I$. No finite generation or coefficient
+membership/output certificate is supplied.
+\end{theorem}
+\begin{proof}
+First prove the stronger generator-span assertion that for every actual
+$g\in\eta(I)R$ and every whole multiplier $r\in R$, all coefficients of
+$r g$ belong to $I$. Induct on actual ideal-span membership. A true image
+generator is $\eta(a)$ with actual $a\in I$; $B$-linearity rewrites its
+coefficient tuple after ANY multiplier as $a c_q(r)$, whose entries belong
+to $I$. The zero and additive cases use genuine linearity. In the arbitrary
+$R$-multiple case, absorb the new multiplier into the universal whole $r$;
+no coefficient convolution or fake base-linearity over $R$ is asserted.
+Thus the assertion holds for the ENTIRE extended original ideal.
+A member of $\eta(I)R+J^q$ is an actual sum of a member of this ideal and
+an element of $J^q$; the second coefficient tuple is zero, proving one
+implication. Conversely, use the actual finite reconstruction of the first
+node. Each finite term $\eta(c_q(g)_\alpha)y^\alpha$ belongs to $\eta(I)R$
+by its actual coefficient membership. Their whole finite sum therefore lies
+there. The genuine inverse identity says the difference from $g$ lies in
+$J^q$, proving the reverse implication with no chosen polynomial model.
+\end{proof}
+
+\begin{lemma}[Genuine normal powers detect the whole extended ideal]
+\label{hir:submersion-projection-colon-normal-power-separation}
+\lean{Hironaka.HironakaSmoothSubmersionProjectionIdealColon.normalIdeal_le_actual_maximalIdeal,Hironaka.HironakaSmoothSubmersionProjectionIdealColon.mem_iff_mem_all_normal_truncations}
+\leanok
+\uses{hir:submersion-projection-colon-whole-ideal-jet-dictionary,trace:actual-holomorphic-germ-point-truncation-closure}
+Every actual ideal $K\subseteq R$ satisfies $g\in K$ if and only if
+$g\in K+J^q$ for ALL $q$. This is internally proved for the SAME genuine
+normal coordinate ideal, without caller separatedness or Krull certificate.
+\end{lemma}
+\begin{proof}
+Every genuine normal coordinate germ vanishes at the actual origin. The
+actual local-germ maximal-ideal evaluation dictionary therefore puts every
+original generator in the genuine maximal ideal $\mathfrak m_R$. Actual
+ideal-span monotonicity gives $J\subseteq\mathfrak m_R$, and hence
+$J^q\subseteq\mathfrak m_R^q$. Membership in $K+J^q$ at ALL $q$ thus implies
+membership in $K+\mathfrak m_R^q$ at ALL $q$. The already proved faithful
+point-truncation theorem internally installs genuine holomorphic-germ
+Noetherianity and local-ring Krull separation, giving $g\in K$. The forward
+implication is the genuine inclusion into each sum. Empty coordinate sets
+and $q=0$ are literal and do not require a positive codimension.
+\end{proof}
+
+\begin{theorem}[Actual projection preserves the ENTIRE colon of ANY two original ideals]
+\label{hir:submersion-projection-colon-entire-equality}
+\lean{Hironaka.HironakaSmoothSubmersionProjectionIdealColon.projection_map_colon_eq}
+\leanok
+\uses{hir:submersion-projection-colon-actual-coefficients,hir:submersion-projection-colon-whole-ideal-jet-dictionary,hir:submersion-projection-colon-normal-power-separation}
+For ANY actual original ideals $I,L\subseteq B$ the entire projection
+pullback satisfies $\eta(I:L)R=(\eta(I)R:\eta(L)R)$.
+There is no hypothesis $I\subseteq L$, denominator invertibility, caller
+flatness, finite presentation, finite generator, truncation bound or quotient
+identity. Both ideals and the projection are the actual original objects.
+\end{theorem}
+\begin{proof}
+For the easy inclusion fix an actual $a\in I:L$. For every original
+$b\in L$, one has $ab\in I$, so
+$\eta(a)\eta(b)=\eta(ab)\in\eta(I)R$. Genuine span induction over the
+ENTIRE extended denominator ideal extends this multiplication inclusion to
+all its members. Thus $\eta(a)$ lies in its true quotient; actual ideal-span
+closure extends to the ENTIRE $\eta(I:L)R$.
+Conversely take a true $g$ in the right-hand colon. For EVERY actual $b\in L$,
+$\eta(b)g$ belongs to the ENTIRE extended $I$. For EVERY $q$ its actual tuple
+entries therefore belong to $I$ by the exact whole-ideal coefficient
+criterion. Genuine $B$-linearity identifies those entries with
+$b c_q(g)_\alpha$. Since this holds for EVERY original $b\in L$, every
+actual $c_q(g)_\alpha$ lies in the SAME original $I:L$. The real finite
+coefficient criterion then gives $g\in\eta(I:L)R+J^q$ for EVERY $q$.
+Actual normal-power separation gives $g\in\eta(I:L)R$, completing equality.
+No finiteness over all degrees, inverse denominator or ideal-inclusion
+certificate entered the argument. This proves a real algebraic prerequisite
+for non-full-carrier controlled transform naturality. The still necessary
+actual arbitrary submersion chart/stalk transport, whole sheaf-colon bridge,
+relative marked-transform consumer and general higher invariant/canonical
+driver/termination remain OPEN; this projection-germ theorem alone does not
+claim those conclusions or formal native publication.
+\end{proof}

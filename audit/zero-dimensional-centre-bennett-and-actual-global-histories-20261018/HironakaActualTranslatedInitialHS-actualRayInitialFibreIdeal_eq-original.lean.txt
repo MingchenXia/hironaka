@@ -1,0 +1,22 @@
+/-- BOTH whole actual original fibre-ideal directions retain the SAME literal translated generators. -/
+theorem actualRayInitialFibreIdeal_eq (I : Ideal (MvPowerSeries (Fin n) ℂ)) (p : Fin n → ℂ)
+    (t : ComplexModel 1) :
+    actualFibreIdeal isOpen_univ (actualRayInitialFamily I p) (actualRayInitialFamily_holomorphic I p)
+      t (mem_univ _)=actualTranslatedInitialIdeal I ((t 0) • p) := by
+  rw [actualFibreIdeal_eq_original_span,actualTranslatedInitialIdeal]
+  apply congrArg Ideal.span
+  apply Set.Subset.antisymm
+  · rintro g ⟨i,rfl⟩
+    refine ⟨vertexEnumeration I i,?_⟩
+    dsimp only
+    rw [translated_polynomial_mk]
+    apply HolGerm.mk_eq_mk_iff.mpr
+    exact Eventually.of_forall fun z => by
+      simp only [actualRayInitialFamily,Pi.smul_apply,smul_eq_mul]
+  · rintro g ⟨a,rfl⟩
+    refine ⟨(vertexEnumeration I).symm a,?_⟩
+    dsimp only
+    rw [translated_polynomial_mk]
+    apply HolGerm.mk_eq_mk_iff.mpr
+    exact Eventually.of_forall fun z => by
+      simp only [actualRayInitialFamily,Equiv.apply_symm_apply,Pi.smul_apply,smul_eq_mul]

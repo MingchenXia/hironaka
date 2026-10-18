@@ -1,0 +1,68 @@
+\section{The actual positive member lower boundary has an empty original prefix}
+At a positive Step-One head, the original member restriction selects the actual original members through its reference point and keeps all other indexed members in order. Its actual mask excludes every original member missing that reference point. The retained original boundary prefix is therefore literally a list of empty sets on this SAME mask. Future members are retained with their original order. The numerical position of the end of this empty prefix may depend on the reference point, but any monomial top set has every position after it. Inserting an empty member at its end consequently shifts every position used by the literal monomial value by one, independently of the reference point. This is an order embedding, and does not assert equality of the old literal values. It supplies the zero-order branch of the recursive member comparison; positive recursive lower orders and the complete middle-empty-step comparison remain subsequent producers.
+
+\begin{lemma}[The literal positive lower boundary splits after its retained original prefix]
+\label{hir:member-future-boundary}
+\lean{Hironaka.HironakaOriginalMemberFutureShift.retainedOriginalCount,Hironaka.HironakaOriginalMemberFutureShift.lowerMarked_succ_boundary_empty_prefix}
+\uses{hir:step-one-value,bcalc:member-restriction-rebase,hir:open-restriction-marked}
+\leanok
+Let $J$ be the actual coefficient-homogenized transform at any original head $H$, let $E_0$ be its original prefix, and let $p$ be the actual reference point. Set $A$ to the ordered sublist of $E_0$ missing $p$, and set $F$ to the ordered sublist of the actual future boundary not selected by the original members-through-$p$ restriction. On the actual original positive lower mask, the entire boundary of the old lower marked record is exactly $[\varnothing]^{|A|}$ followed by the full masked preimage of $F$. All actual entries, including repeated and empty entries, retain their order.
+\end{lemma}
+\begin{proof}
+The original members-through restriction keeps exactly those indexed entries $W$ for which it is false that $W\in E_0$ and $p\in W$. Split the actual original boundary into its initial original prefix and the remaining future list, and apply this SAME filter to both ordered lists. On the original prefix this filter is exactly the predicate $p\notin W$, because each entry belongs to that original prefix. For every retained original entry $W$, the defining predicate of the actual lower mask says that any masked point of $W$ would force $p\in W$. The retained entry has $p\notin W$, so its entire masked preimage is empty. Thus the entire masked original sublist is precisely $|A|$ empty entries. Map distributes over the ordered concatenation, giving the stated literal whole boundary identity. No incidence, chosen member subset, mask, lower model or boundary decomposition is supplied by the caller.
+\end{proof}
+
+\begin{lemma}[Every actual lower tail preserves the same empty original prefix]
+\label{hir:member-future-tail}
+\lean{Hironaka.HironakaOriginalMemberFutureShift.empty_prefix_geoTransformAlong,Hironaka.HironakaOriginalMemberFutureShift.original_lower_tail_empty_prefix}
+\uses{hir:member-future-boundary,bcalc:monomial-invariant-empty-member}
+\leanok
+Along every genuine blowup tail on this SAME original positive lower mask, the first $|A|$ members of the whole actual transformed lower record are empty. This prefix length is at most the actual transformed boundary length.
+\end{lemma}
+\begin{proof}
+The preceding literal identity establishes the statement at the base. At every genuine blowup, the actual transformed boundary is the ordered strict-transform map of the preceding entire boundary followed by its true exceptional member. A strict transform of an empty set is empty. The new member is appended after the preceding list, whose length is at least $|A|$, so the first $|A|$ members remain exactly the same empty list. Induction on the actual tail gives the literal prefix identity at every stage. The true transformed boundary length is the original lower boundary length plus the tail length, which gives the stated bound. This applies to every actual tail, without canonicality or ideal hypotheses because it is a structural boundary statement.
+\end{proof}
+
+\begin{lemma}[The actual monomial value uses only positions after an empty prefix]
+\label{hir:member-future-top}
+\lean{Hironaka.HironakaOriginalMemberFutureShift.memberIdx_ge_of_empty_prefix,Hironaka.HironakaOriginalMemberFutureShift.gammaAlong_key_positions_ge_of_empty_prefix}
+\uses{hir:monomial-invariant,hir:monomial-invariant-along}
+\leanok
+For an actual entire indexed boundary whose first $j$ entries are empty, every member position through any point is at least $j$. Whenever its literal monomial value is a finite key, every position of that key is at least $j$.
+\end{lemma}
+\begin{proof}
+A member position smaller than $j$ indexes the empty prefix and hence cannot contain the point. Every feasible subset is a subset of the true set of member positions through that point. If the monomial value is finite, its actual maximum is achieved by one of those feasible subsets, so every position of its selected key is in that true set and is at least $j$. If there is no feasible subset, the literal value is bottom, which is retained by every insertion relabelling. No top-set, feasible-set or value-profile certificate is input.
+\end{proof}
+
+\begin{lemma}[The future-only insertion relabelling is uniform]
+\label{hir:member-future-shift}
+\lean{Hironaka.HironakaOriginalMemberFutureShift.shiftSet_eq_shiftSet_zero_of_ge,Hironaka.HironakaOriginalMemberFutureShift.shiftVal_inv_eq_shiftVal_zero_of_ge,Hironaka.HironakaOriginalMemberFutureShift.gammaAlong_uniform_shift_of_empty_prefix,Hironaka.HironakaOriginalMemberFutureShift.original_lower_towerInv_insertEmpty_uniform}
+\uses{hir:member-future-tail,hir:member-future-top,bcalc:monomial-invariant-empty-member}
+\leanok
+For every literal monomial value computed from a boundary with $j$ empty initial members, the insertion relabelling at $j$ equals the SAME relabelling at $0$. In particular the actual transformed original positive lower marked record with an empty member inserted at its internally computed retained-original-prefix length has its entire monomial value equal to the uniform relabelling at $0$ of the SAME actual original lower monomial value, at every point of every actual lower tail.
+\end{lemma}
+\begin{proof}
+On a position at least $j$, insertion at $j$ and insertion at $0$ both send that position to its successor. Therefore they give identical images of every selected feasible subset, preserving its cardinality, exponent sum and other key entries. The preceding actual maximum description gives equality on every finite literal value; bottom is unchanged by definition. Whole transformation commutes with explicit empty insertion, retaining the same original insertion position. The preceding actual empty-prefix producer and length bound apply at every stage, so the original whole insertion dictionary gives this SAME uniform relabelling for every actual transformed lower monomial value. The value definition and its absolute member indices remain literal.
+\end{proof}
+
+\begin{theorem}[Original zero-order lower values have the same strict order after the actual insertion]
+\label{hir:member-future-order}
+\lean{Hironaka.HironakaOriginalMemberFutureShift.original_lower_zero_order_comparisons}
+\uses{hir:member-future-shift,bcalc:general-value-order-zero,bcalc:monomial-invariant-empty-member}
+\leanok
+At points of actual nonmonomial order zero in any two such original positive lower marked records and actual lower tails, insertion at EACH internally computed retained-original-prefix length preserves equality, non-strict order and strict order of the entire old general invariant values, even when these computed lengths or reference masks differ.
+\end{theorem}
+\begin{proof}
+Whole empty insertion preserves the actual nonmonomial order, so both old and inserted general values lie in the literal zero-order monomial branch. Their first component is zero and their second is the monomial value in the left branch of the original lexicographic sum. The preceding original-input producer gives the SAME uniform insertion relabelling at $0$ for both monomial values. That relabelling is strictly increasing, hence injective and order-reflecting on the actual linear order, and consequently preserves and reflects equality, non-strict order and strict order. The common lexicographic outer components and left injections preserve those three comparisons. This uses no recursively supplied invariant relation or canonicality certificate.
+\end{proof}
+
+\begin{corollary}[Original zero-order exact maximum loci and centres agree]
+\label{hir:member-future-centre}
+\lean{Hironaka.HironakaOriginalMemberFutureShift.original_lower_zero_order_maxLocus}
+\uses{hir:member-future-order,hir:centre-function}
+\leanok
+On any actual subset consisting of nonmonomial-order-zero points of one such genuine original lower tail, the exact maximum locus of its whole old general value equals that after empty insertion at the internally computed retained-original-prefix length.
+\end{corollary}
+\begin{proof}
+A point belongs to the exact maximum locus precisely when it belongs to the stated actual subset and every value at another point of that subset is at most its value. Apply the preceding original comparison equivalence to each such pair of actual points. This proves equality of the entire exact loci with all actual points retained. Since these are equal subsets of the SAME actual ambient mask, any admissibility property or geometric centre already proved for that exact original locus concerns precisely the SAME inserted locus. No existence of a global maximum on a noncompact space, recursive positive comparison or scheduling statement follows from this locus identity.
+\end{proof}

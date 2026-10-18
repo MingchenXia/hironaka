@@ -1,0 +1,6 @@
+/-- EVERY actual formal HS value is the true cardinality of its bounded initial diagram complement. -/
+theorem genuineFormalHilbertSamuelValue_eq_card_standardIndex (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (ℓ : ℕ) :
+    genuineFormalHilbertSamuelValue n I ℓ=Fintype.card (actualStandardIndex n I (ℓ+1)) := by
+  rw [genuineFormalHilbertSamuelValue,← (actualStandardQuotientLinearEquiv n I (ℓ+1)).finrank_eq,
+    Module.finrank_fintype_fun_eq_card]

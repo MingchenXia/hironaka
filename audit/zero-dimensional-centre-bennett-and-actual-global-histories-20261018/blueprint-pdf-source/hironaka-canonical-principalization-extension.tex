@@ -1,0 +1,79 @@
+\section{Canonical elementary principalization with compact support}
+
+Canonical principalization can retain its marked-ideal centre rule while
+exporting all the elementary geometric conclusions. Compactness of the
+ambient manifold is unnecessary when the ideal's zero locus is compact.
+The compatibility established here is with open restrictions and
+biholomorphisms. General smooth morphisms require additional invariant
+and blowup base-change theorems.
+
+\begin{theorem}[Canonical marked resolution with compact cosupport]
+\label{hir:canonical-resolution-compact-cosupport}
+\uses{hir:canonical-resolution,hir:principalization-compact-support}
+Let $\mathfrak m$ lie in the domain of a resolution invariant with
+well-ordered values and have compact cosupport on a complex manifold.
+There exists a resolution which is a canonical segment with nonempty
+centres. The invariant is upper semicontinuous along canonical segments,
+every open restriction is canonical, and canonical resolutions after a
+biholomorphism are isomorphic, stage by stage, over that biholomorphism.
+\lean{Hironaka.HironakaCanonicalPrincipalization.canonicalResolution_of_isCompact}
+\leanok
+\end{theorem}
+\begin{proof}
+Along a canonical segment the transformed cosupport is compact: it is
+closed and contained in the inverse image of the initial compact cosupport
+under a proper composition of blowups. Upper semicontinuity gives a
+maximum on every nonempty transformed cosupport. Its maximum locus is
+a nonempty smooth admissible centre with empty interior. The invariant
+strictly decreases above that centre and stays unchanged elsewhere.
+The compact-cosupport, well-founded driver therefore produces a
+resolving segment using only nonempty maximum loci.
+
+Upper semicontinuity is the invariant's second property. Its open
+restriction property identifies every nonempty restricted centre with
+the restricted maximum locus; centres missing an open set restrict to
+empty centres. For two canonical resolving segments related by a
+biholomorphism, induction gives corresponding maximum loci and the
+uniqueness of each blowup gives isomorphisms of their stages. Their
+lengths are equal: if one were longer, its prefix corresponding to the
+completed shorter resolution would have empty cosupport, and a nonempty
+next maximum locus could not exist. The resulting stage isomorphisms
+therefore extend through both complete towers.
+\end{proof}
+
+\begin{theorem}[Canonical principalization relative to an SNC boundary]
+\label{hir:canonical-elementary-principalization-boundary}
+\uses{hir:canonical-resolution-compact-cosupport,hir:principalization-boundary}
+Let $\mathfrak a$ be a coherent ideal on a complex manifold, nonzero
+at every point, with compact zero locus, and let $E_0$ be an SNC boundary.
+There is an admissible principalization $f$ obtained from the canonical
+resolution of $(X,X,E_0,\mathfrak a,1)$. Its effective divisor $D$
+satisfies $f^*\mathfrak a=\mathcal O(-D)$, and its accumulated boundary
+$E$ is SNC. The support of $D$ is both $f^{-1}Z(\mathfrak a)$ and the
+union of the new members of $E$; $f$ is an isomorphism off
+$Z(\mathfrak a)$. The same tower has the open-restriction and
+biholomorphism compatibility of the preceding theorem.
+\lean{Hironaka.HironakaCanonicalPrincipalization.exists_canonical_principalization_boundary}
+\leanok
+\end{theorem}
+\begin{proof}
+The boundary is transverse to the whole manifold, so the marked ideal
+$(X,X,E_0,\mathfrak a,1)$ lies in the invariant's domain. Its cosupport
+is exactly $Z(\mathfrak a)$: order at least one is precisely vanishing
+of every member of the stalk. Apply the preceding theorem to the
+canonical invariant. Every centre of the resulting test tower has
+normal crossings with the accumulated boundary and lies over the
+initial cosupport, proving admissibility over $Z(\mathfrak a)$.
+
+The controlled-transform identity at mark one identifies the total
+pullback ideal, at the terminal empty cosupport, with the tower's
+effective exceptional divisor ideal. The tower transform preserves
+SNC. Induction on its blowups shows that the support of its exceptional
+divisor is the union of the new boundary members. Pullback of coherent
+ideals identifies that support with $f^{-1}Z(\mathfrak a)$.
+The exceptional locus is contained in this support, and a proper
+composition of blowups is an isomorphism over the complement of its
+exceptional image. This yields the asserted isomorphism off
+$Z(\mathfrak a)$. All compatibility clauses belong to this very tower,
+since it was selected by the canonical marked-ideal producer.
+\end{proof}

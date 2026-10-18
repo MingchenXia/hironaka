@@ -1,0 +1,111 @@
+\section{Actual birth-index boundary positions on chosen overlaps}
+
+A finite local blowup history gives a finite ordered boundary, but its
+length varies with the actual chart. We retain a natural-number position
+and read an absent position as the EMPTY set. Empty blowup positions remain
+real births with empty boundary; they are never compressed away. This
+chapter supplies true overlap and local-cutoff dictionaries before any
+global birth-indexed divisor or local-finiteness claim.
+
+\begin{theorem}[Real identity-empty padding preserves the entire zero-extended boundary ledger]
+\label{hir:sharp-actual-empty-padding-zero-extended-boundary}
+\uses{hir:sharp-actual-identity-empty-padding,hir:sharp-actual-padded-local-strict-set-dictionary}
+\lean{Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout_map_preimage,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout_append_empty,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundary_identityEmptyTail,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout_append_identityEmptyTail,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout_restrict,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.localPaddedHistory_boundaryReadout}
+\leanok
+For a genuine finite history whose actual transformed boundary members are
+closed, append any actual identity empty tail. Its entire ordered boundary
+is the original entire boundary followed by exactly one EMPTY member per
+real appended step. Consequently reading ANY natural-number position with
+default EMPTY gives exactly the old readout. The actual open restriction
+of each such zero-extended position is the zero-extended position of the
+true restricted ordered boundary.
+\end{theorem}
+\begin{proof}
+Induct on the ACTUAL length of the identity empty tail. A step takes the
+strict transform of each old member by the identity blowup at EMPTY and
+appends its actual exceptional inverse image of EMPTY. The closed-set strict
+transform is the SAME old member, and that exceptional inverse image is
+EMPTY. Closedness holds for all retained old members and every actual new
+EMPTY member, so the induction proves the entire ordered list equation.
+For each position below the old length, the real append readout is the old
+member; for every later position, either an actual padding slot is read or
+the default is read, and both are EMPTY. This proves equality at ALL
+positions, including genuine empty slots and positions beyond BOTH lengths.
+For genuine well-formed TEST histories, actual preimages commute with finite list maps and preserve EMPTY; splitting
+on the literal list-length bound proves the restriction readout equation.
+No count of nonempty members replaces the actual ordered positions.
+\end{proof}
+
+\begin{theorem}[The OLD actual overlap transition preserves every original and birth boundary position]
+\label{hir:sharp-actual-original-birth-boundary-overlap-dictionary}
+\uses{hir:sharp-actual-empty-padding-zero-extended-boundary,hir:sharp-actual-original-endpoint-comparison-atlas,hir:sharp-original-curve-test-history-full-original-ambient-boundary,mc:tower-isomorphism-basic}
+\lean{Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.localBoundaryReadout,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundary_field_isTowerIso,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout_isTowerIso,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.comparison_localBoundaryReadout,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.original_localBoundary_ambient_geometry,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.original_comparison_localBoundaryReadout,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.original_transition_localBoundaryReadout}
+\leanok
+Let the ambient complex dimension satisfy $n>0$. Use ONLY the original
+smooth pure curve, ordered SNC boundary and true
+whole-family density to construct the retained recipe atlas. At each local
+endpoint take the actual entire transformed ordered boundary of the
+ambient mark-zero template with carrier the WHOLE local ambient manifold
+and initial boundary the actual ordered original boundary trace. For ANY
+natural-number position k, define its local member by readout with default
+EMPTY. Membership in this SAME k-th member is equivalent in BOTH directions
+under the OLD actual overlap transition. No ordered-boundary comparison,
+ambient-template TEST or centre compatibility certificate is input.
+\end{theorem}
+\begin{proof}
+Original DOMAIN one and each genuine original TEST first construct the
+SAME-map ambient-template TEST with the ENTIRE original ambient boundary,
+using true zero-dimensional cosupport and actual normal crossings with the
+whole ordered ambient list. This is essential: initial curve transversality
+to the original boundary is not assumed. On the actual chosen opens,
+original closedness/SNC/purity/density are obtained by genuine open
+restriction; the retained dictionary supplies their true finite original
+histories. Thus the ambient-template geometry at each actual endpoint is
+internally supplied, not a caller comparison input.
+
+Restrict those SAME original ambient marked records and histories to the
+true common open. Both entire record restriction dictionaries apply to
+these genuine TESTs. Actual append restriction and the first theorem then
+identify the entire common padded boundary with the true restriction of
+the local ordered boundary followed by the real EMPTY padding. The actual
+common base biholomorphism preserves each original point and hence EACH
+initial original boundary position. The genuine whole marked-record
+transport along the OLD stagewise tower isomorphism therefore identifies
+its ENTIRE ordered transformed boundary with the true pullback of the other
+one. Apply the same k-th zero-extended readout. Preimage preserves EMPTY,
+and the preceding padding/restriction dictionaries remove neither actual
+empty steps nor positions. This gives the displayed BOTH membership
+directions at the SAME local endpoints. The actual equal-open
+biholomorphisms identify them with the OLD transition point maps.
+\end{proof}
+
+\begin{theorem}[Every actual chart has a genuine finite cutoff and original-position dictionary]
+\label{hir:sharp-actual-original-birth-boundary-local-cutoff}
+\uses{hir:sharp-actual-original-birth-boundary-overlap-dictionary,hir:sharp-actual-endpoint-transition-strict-set-membership}
+\lean{Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.boundaryReadout_geoTransformAlong_eq_empty,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.localBoundaryReadout_eq_empty,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.localBoundaryReadout_original,Hironaka.HironakaSharpActualCurveBirthBoundaryOverlaps.original_localBoundaryReadout_isClosed}
+\leanok
+For every actual chosen chart, all local boundary positions k at least the
+literal original-list length PLUS its literal FULL finite-history length
+are EMPTY. Every such local member is genuinely closed. Thus all nonempty local
+positions belong to the actual finite
+initial segment determined by that chart. Before the original-list length,
+the position is exactly the SAME actual local strict transform of that
+original ordered member. This produces a real finite bound on EACH chart,
+not a uniform bound on the whole atlas or a globally finite ordered list.
+\end{theorem}
+\begin{proof}
+The actual ambient-template SNC output supplies closedness of every real
+finite-list member; beyond its length the default EMPTY set is closed.
+The actual ordered-boundary length theorem gives initial-list length plus
+actual history length, including EVERY real empty step. The zero-extended
+readout is EMPTY at and beyond that exact bound. For an original position,
+the genuine ordered original-members transform theorem identifies the true
+finite-list entry with the strict transform of the corresponding actual
+initial trace. The original restriction list preserves the exact original
+index and value, so this is the SAME local strict set used earlier. Its
+OLD transition dictionary is consistent with the all-position theorem.
+These actual chartwise bounds will supply local finiteness only AFTER a
+true global family with exact local pullbacks is constructed. No global
+family, SNC/transversality, conventional strict closure or sharp driver is
+asserted here.
+\end{proof}

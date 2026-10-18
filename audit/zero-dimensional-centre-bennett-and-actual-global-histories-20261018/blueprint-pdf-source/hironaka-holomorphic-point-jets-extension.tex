@@ -1,0 +1,135 @@
+\section{Faithful finite jets of the entire holomorphic germ ring}
+\label{sec:hironaka-holomorphic-point-jets}
+
+Hilbert--Samuel values concern the entire reduced current local ring, rather
+than a selected equation or an order-one substitute. In the convention of
+\cite{bierstone-milman97-invent-math}, Remark~1.3, the value at $\ell$ is
+$\dim_{\mathbb C}\mathcal O/(I+\mathfrak m^{\ell+1})$. The following genuine
+finite-jet construction establishes that this dimension is finite for every
+original ideal. It does not assert that these values have a semicoherent
+transformation presentation or supply a normally flat centre.
+
+\begin{lemma}[Literal point powers and actual local-ring powers]
+\label{hir:whole-point-power-ring-dictionary}
+\lean{Hironaka.HironakaHolomorphicPointJets.mem_maximalIdeal_pow_of_point_power,Hironaka.HironakaHolomorphicPointJets.mem_maximalIdeal_pow_iff_point_power}
+\leanok
+\uses{hir:order-taylor,lag:germ-domain}
+Let $R=\mathcal O_{\mathbb C^n,0}$ be the entire genuine holomorphic germ
+ring and $\mathfrak m$ its actual maximal ideal. For every function $f$
+holomorphic near zero and every $q\ge0$, its actual germ lies in
+$\mathfrak m^q$ if and only if $f$ belongs to the $q$th power of the original
+point ideal at zero.
+\end{lemma}
+\begin{proof}
+The actual maximal ideal consists exactly of germs with value zero. For
+one direction, an original point-power expression is a finite holomorphic
+sum of products of original point-ideal functions. Passing every actual
+representative to its holomorphic germ carries sums, coefficients and
+products to the same sums, coefficients and products in $R$. Induction on
+$q$ therefore places the resulting germ in $\mathfrak m^q$. At $q=0$
+both powers are the whole holomorphic ring.
+
+For the other direction, let $J_q$ consist of germs having an original
+representative in that point power. This is an actual ideal: the power is
+closed under finite sums and holomorphic coefficients, and membership is
+invariant under equality on a neighbourhood. The ideal $J_0$ is $R$.
+Every element of $\mathfrak m$ has a holomorphic representative vanishing
+at zero and hence belongs to the original point ideal. If
+$\mathfrak m^q\subseteq J_q$, products of these representatives lie in the
+$(q+1)$st original point power. Since $J_{q+1}$ is an ideal, the full product
+ideal $\mathfrak m^q\mathfrak m$ is contained in it. This proves
+$\mathfrak m^q\subseteq J_q$ by induction. Equality of two actual germs is
+neighbourhood equality of their original representatives, so membership
+transfers to the stated original $f$.
+\end{proof}
+
+\begin{lemma}[The exact whole-jet kernel]
+\label{hir:whole-point-power-derivative-kernel}
+\lean{Hironaka.HironakaHolomorphicPointJets.mem_maximalIdeal_pow_iff_iteratedFDeriv}
+\leanok
+\uses{hir:whole-point-power-ring-dictionary,hir:order-taylor}
+An actual holomorphic germ lies in $\mathfrak m^q$ exactly when all its
+actual iterated complex derivatives of degrees less than $q$ vanish at zero.
+\end{lemma}
+\begin{proof}
+The preceding dictionary identifies membership with the genuine original
+point power. The convergent holomorphic Taylor theorem identifies this
+power with vanishing of every derivative below degree $q$: the forward
+implication differentiates products, and the reverse implication expresses
+the convergent Taylor remainder as a sum of degree-$q$ coordinate products
+with holomorphic coefficients. The original point-power derivative theorem
+therefore gives both implications. In the original Euclidean chart the
+preferred chart is the identity, so these derivatives are precisely the
+unmodified derivatives of the same original representative at zero.
+\end{proof}
+
+\begin{definition}[The actual finite linear jet]
+\label{hir:actual-finite-holomorphic-linear-jet}
+\lean{Hironaka.HironakaHolomorphicPointJets.holGermComplexAlgebra,Hironaka.HironakaHolomorphicPointJets.finiteJet,Hironaka.HironakaHolomorphicPointJets.finiteJet_mk}
+\leanok
+\uses{hir:whole-point-power-derivative-kernel}
+Give $R$ its actual complex algebra structure through constant germs. The
+$q$th jet of a germ is the finite tuple $(D^j f(0))_{0\le j<q}$, with each
+entry an algebraic complex multilinear map on $(\mathbb C^n)^j$. These
+are the derivatives of any genuine original holomorphic representative.
+\end{definition}
+
+\begin{lemma}[Well-defined linearity and the exact kernel]
+\label{hir:actual-finite-linear-jet-kernel}
+\lean{Hironaka.HironakaHolomorphicPointJets.ker_finiteJet}
+\leanok
+\uses{hir:actual-finite-holomorphic-linear-jet,hir:whole-point-power-derivative-kernel}
+The actual finite jet is a complex linear map. Its kernel is exactly
+$\mathfrak m^q$, considered as a complex subspace of $R$.
+\end{lemma}
+\begin{proof}
+Representatives of the same germ agree on an open neighbourhood, so every
+iterated derivative agrees at zero. Thus the finite tuple is well defined
+on the entire original germ ring. Every holomorphic representative is
+analytic near zero and hence has all complex derivatives there. The
+iterated derivative of $f+g$ is $D^j f+D^j g$, and the derivative of a
+constant scalar multiple $cf$ is $cD^j f$. Constant-germ multiplication is
+exactly this same scalar multiplication, proving complex linearity.
+The jet vanishes precisely when each actual derivative below degree $q$
+vanishes. The preceding whole-jet kernel theorem identifies this condition
+with the actual maximal-ideal power, including $q=0$.
+\end{proof}
+
+\begin{theorem}[Finite dimension of every actual point quotient]
+\label{hir:actual-point-quotient-finite-dimensional}
+\lean{Hironaka.HironakaHolomorphicPointJets.finiteDimensional_quotient_maximalIdeal_pow,Hironaka.HironakaHolomorphicPointJets.finiteDimensional_quotient_sup_maximalIdeal_pow}
+\leanok
+\uses{hir:actual-finite-linear-jet-kernel}
+For every $q\ge0$, the entire actual quotient $R/\mathfrak m^q$ is a
+finite-dimensional complex vector space. For every original ideal $I$ of
+$R$, the actual quotient $R/(I+\mathfrak m^q)$ is also finite dimensional.
+\end{theorem}
+\begin{proof}
+Each degree-$j$ multilinear-map space on finite-dimensional $\mathbb C^n$
+with values in $\mathbb C$ is finite dimensional: repeated currying
+identifies it with iterated finite-dimensional spaces of linear maps.
+There are only $q$ entries, so the whole finite jet target is finite
+dimensional. The actual linear map's first isomorphism theorem and its
+proved exact kernel identify $R/\mathfrak m^q$ with its genuine image,
+a subspace of that finite-dimensional target. This proves finite dimension
+without a supplied Taylor-polynomial basis or a finiteness certificate.
+Since $\mathfrak m^q\subseteq I+\mathfrak m^q$, the actual quotient map
+$R/\mathfrak m^q\to R/(I+\mathfrak m^q)$ is surjective. Its image is thus
+finite dimensional, proving the second conclusion. At $q=0$ the quotient
+is zero; at $n=0$ the same real jet construction includes the degree-zero
+value and the higher zero multilinear entries.
+\end{proof}
+
+\begin{definition}[Actual Hilbert--Samuel point values]
+\label{hir:actual-hilbert-samuel-point-value}
+\lean{Hironaka.HironakaHolomorphicPointJets.hilbertSamuelValue}
+\leanok
+\uses{hir:actual-point-quotient-finite-dimensional}
+For an original ideal $I\subseteq R$, define its actual point value at
+$\ell$ by
+\[
+ H_I(\ell)=\dim_{\mathbb C}R/(I+\mathfrak m^{\ell+1}).
+\]
+The preceding theorem proves this dimension is finite for every original
+ideal; no finite-dimensional quotient hypothesis is part of the definition.
+\end{definition}

@@ -1,0 +1,48 @@
+\section{Actual integer-weight components of whole graph jets}
+This OWN OFFLIB continuation uses the actual whole graph scaling $(x,u,v)\mapsto(x,uv)$ and actual polynomial/germ jet algebra. Integer weights assign $1$ to the genuine parameter and $-1$ to every genuine fibre variable. They select actual finite polynomial coefficients, never a formal-series surrogate or a supplied diagonal-weight certificate. Reverse saturated-central initial-ideal inclusion, its entire-ideal passage, nearby original cone/Rees identification and one common ALL-order analytic free open remain OPEN.
+
+\begin{lemma}[Every actual graph-substituted polynomial has true integer weight zero]
+\label{hir:relative-normal-graph-weight-substitution-zero}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphIntegerWeight,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphIntegerWeight_parameter,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphIntegerWeight_fiber,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphPolynomialSubstitution_weight_zero,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphPolynomialSubstitution_coeff_nonzero_weight}
+\uses{hir:relative-normal-graph-jets-polynomial-substitution}
+\leanok
+The actual integer-weight function has parameter weight $1$ and every fibre weight $-1$. Every entire-base-coefficient polynomial under the literal actual substitution $Y_i\mapsto UV_i$ is genuinely weighted homogeneous of weight zero. In particular every coefficient at an exponent of nonzero integer weight vanishes.
+\end{lemma}
+\begin{proof}
+The actual parameter and fibre indices are distinct, by their literal finite values zero and $1+i$. Thus their actual weights are $1$ and $-1$. Their product has genuine weight zero, using the actual graded polynomial multiplication. Entire base constants have weight zero. Polynomial induction on constants, sums and multiplication by original variables, followed by the actual algebra-homomorphism identities, proves weight zero for every actual substituted polynomial. The definition of weighted homogeneity then forces each coefficient of nonzero integer weight to vanish. No support, exponent or homogeneous-output certificate is input.
+\end{proof}
+
+\begin{lemma}[Actual integer-weight extraction commutes with multiplication by the genuine graph-scaled polynomial]
+\label{hir:relative-normal-graph-weight-product-extraction}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphWeightComponent,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphWeightComponent_coeff,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphWeightComponent_mul_substitution,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphWeightComponent_sum_products}
+\uses{hir:relative-normal-graph-weight-substitution-zero}
+\leanok
+For every actual graph polynomial $A$, actual original polynomial $P$ and integer $w$, the true finite weighted component satisfies
+\[\pi_w(A\,\sigma(P))=\pi_w(A)\,\sigma(P).\]
+All coefficients are genuine whole base germs. Finite sums of such actual products satisfy the corresponding literal extraction identity.
+\end{lemma}
+\begin{proof}
+Compare every actual coefficient of the two polynomials. Genuine polynomial multiplication is the finite antidiagonal convolution over pairs $\alpha+\eta=\delta$. If the actual coefficient of $\sigma(P)$ at $\eta$ vanishes, both terms vanish. Otherwise the preceding internal producer gives weight$(\eta)=0$, so additivity of the actual integer-weight homomorphism gives weight$(\alpha)=\text{weight}(\delta)$. Hence the two genuine coefficient-selection predicates agree term by term. The finite antidiagonal sums agree, proving the whole polynomial identity. The actual weighted component is a base linear map, so finite sum extraction follows from its genuine additivity. This proof uses full coefficients and actual convolution, not a value at a point.
+\end{proof}
+
+\begin{lemma}[Actual weight extraction preserves every literal normal-power jet congruence]
+\label{hir:relative-normal-graph-weight-preserves-jet-power}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphWeightComponent_mem_power,Hironaka.HironakaRelativeNormalGraphWeightComponents.actualGraphWeightComponent_preserves_power_congruence}
+\uses{hir:relative-normal-polynomial-jets-literal-variable-powers,hir:relative-normal-graph-weight-product-extraction}
+\leanok
+Every actual finite integer-weight component of a polynomial in the literal parameter/fibre variable ideal to power $L$ lies in that SAME power. Therefore whole-polynomial congruence modulo that true power is preserved by every integer-weight component.
+\end{lemma}
+\begin{proof}
+The proven entire coefficient-separation dictionary characterizes the actual variable ideal to power $L$ by vanishing of every coefficient of total normal degree below $L$. Weighted component extraction either retains that same coefficient or replaces it by zero. Every required low coefficient therefore still vanishes, and the SAME genuine power dictionary gives membership. Apply this to the actual polynomial difference; the genuine linear component map preserves subtraction, proving congruence. This holds for every integer weight and $L=0$, including no fibre coordinates.
+\end{proof}
+
+\begin{theorem}[The actual whole scaled germ has an internally produced finite weight-zero representative]
+\label{hir:relative-normal-graph-weight-whole-scaled-jet}
+\lean{Hironaka.HironakaRelativeNormalGraphWeightComponents.exists_actual_whole_graph_jet_weight_zero,Hironaka.HironakaRelativeNormalGraphWeightComponents.actual_whole_graph_jet_other_nonzero_component_mem}
+\uses{hir:relative-normal-graph-jets-entire-finite-jet-dictionary,hir:relative-normal-graph-weight-substitution-zero,hir:relative-normal-graph-weight-preserves-jet-power}
+\leanok
+For every actual original entire germ and finite graph-jet order, internally produce a genuine finite parameter/fibre polynomial of weight zero representing its actual whole graph-scaled jet. Every other genuine representative of that SAME whole jet has each nonzero-weight component in the actual jet ideal power.
+\end{theorem}
+\begin{proof}
+The actual whole graph-jet producer selects a genuine finite original polynomial and its actual diagonal substitution, with an entire analytic remainder in the literal graph normal power. The first lemma internally proves that substituted polynomial has integer weight zero. This gives the genuine finite whole-jet representative. For another true polynomial representative, subtract the two whole evaluated polynomials. Both actual whole remainders lie in the same normal power, so their difference does. The genuine entire polynomial-evaluation power equivalence gives membership of the polynomial difference in the literal variable ideal power. The preceding preservation lemma applies. The selected representative has zero component at every nonzero weight, so the other representative's whole component lies in that same power. This proves a genuine finite-jet diagonal-weight dictionary; no reverse initial-ideal or nearby ALL-order conclusion is inferred.
+\end{proof}

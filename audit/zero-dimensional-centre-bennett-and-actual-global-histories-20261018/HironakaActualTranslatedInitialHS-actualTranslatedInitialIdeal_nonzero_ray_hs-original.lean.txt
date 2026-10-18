@@ -1,0 +1,9 @@
+/-- Every true nonzero ray parameter preserves the SAME actual original translated ideal HS values. -/
+theorem actualTranslatedInitialIdeal_nonzero_ray_hs (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (p : Fin n → ℂ) (c : ℂ) (hc : c ≠ 0) (ℓ : ℕ) :
+    hilbertSamuelValue (actualTranslatedInitialIdeal I (c • p)) ℓ=
+      hilbertSamuelValue (actualTranslatedInitialIdeal I p) ℓ := by
+  have h := actualAmbientHS_eq_of_genuineAlgEquiv (actualScalarGermAlgEquiv n c hc)
+    (actualTranslatedInitialIdeal I (c • p)) ℓ
+  rw [map_scalar_translated_initial I p c hc] at h
+  exact h.symm

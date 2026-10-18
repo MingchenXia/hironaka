@@ -1,0 +1,128 @@
+\section{Deletion of a genuine empty blowup in an original recursive history}
+
+Keep the original marked record, its entire indexed boundary and original head
+$H:X\leftarrow A$. An actual empty blowup $\pi:B\to A$ may have a different
+source manifold and need not be an identity. Keep its entire original suffix
+$S:B\leftarrow Y$. The ordered-boundary route of
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality} is adapted by
+internally normalizing the actual suffix through the empty blowup's genuine
+biholomorphism, before deleting only that empty step. The original marked
+record is never rebased and all actual later blowups remain recorded.
+
+\begin{theorem}[The actual empty blowup supplies a whole suffix normalization]
+\label{hir:original-actual-empty-whole-suffix-normalization}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:general-nc-open-actual-empty-blowup-isomorphism,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalActualEmptyNormalization.exists_actual_empty_step_normalization}
+\leanok
+For an original head $H$, actual empty-centre blowup $\pi:B\to A$ and entire
+original suffix $S$, there are a genuine normalized suffix $S'$ over $A$ and
+an actual final biholomorphism $\chi:Y'\to Y$ such that $|S'|=|S|$ and the
+ENTIRE normalized identity-inserted history $H\epsilon S'$ is isomorphic to
+$H\pi S$ over the identity of the ORIGINAL base $X$, with final map $\chi$.
+No biholomorphism, normalized history or tower comparison is a caller input.
+\end{theorem}
+\begin{proof}
+The actual empty blowup's universal uniqueness against the genuine identity
+empty blowup constructs a biholomorphism $\varphi:B\to A$ whose underlying
+map is exactly $\pi$. Transport the SAME entire $S$ through $\varphi^{-1}$.
+At the empty suffix the normalized suffix is empty over $A$ and the final
+map is $\varphi^{-1}$. At a next original centre and projection, pull back
+the centre through the preceding final biholomorphism and compose the
+projection with its inverse. The genuine blowup universal property gives
+the normalized blowup and a commuting next-stage square. Its new source is
+exactly the original source and its final biholomorphism is the identity.
+Consequently every source stage after the first, and every later original
+centre and projection, remain literal; the first centre and projection are
+conjugated by the actual empty blowup's biholomorphism. This constructs a
+whole suffix tower isomorphism and preserves its number of actual steps.
+The original head is isomorphic to itself over identities. Extend this by
+the identity empty step on the normalized side and the actual $\pi$ on the
+original side, with intermediate map $\varphi^{-1}$. The square commutes
+because $\pi\varphi^{-1}=\mathrm{id}$ and both centres are empty. Concatenate
+with the constructed WHOLE suffix isomorphism. This proves the stated
+whole-history comparison over the unchanged original base, including empty
+suffixes and empty source manifolds.
+\end{proof}
+
+\begin{theorem}[Original actual family canonicality computes genuine empty deletion]
+\label{hir:original-actual-empty-family-canonical-deletion}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-actual-empty-whole-suffix-normalization,hir:original-recursive-interior-empty-deletion-entire-values,hir:original-recursive-interior-empty-terminal-deletion-iff,hir:tower-isomorphism,hir:invariant-driver-seq}
+\lean{Hironaka.HironakaOriginalActualEmptyNormalization.original_recursive_family_actual_empty_deletion}
+\leanok
+For EVERY actual family depth $k$, ONLY original bound-$k$ marked input and
+canonicality of the actual entire $H\pi S$ internally give such a normalized
+$S'$ and $\chi$, with deleted $HS'$ canonical for the SAME actual $R_k$.
+The entire original transformed cosupport is the $\chi^{-1}$-preimage of the
+deleted transformed cosupport. At EVERY original cosupport point $y$,
+\[
+ R_k(M,H\pi S,y)=H_{k,j}\bigl(R_k(M,HS',\chi^{-1}y)\bigr),
+ \qquad j=|M.E|+|H|.
+\]
+The actual original history is a terminal geometric resolution if and only
+if the normalized deleted history is. No deleted or normalized canonicality,
+cosupport, branch, value or termination certificate is a caller premise.
+\end{theorem}
+\begin{proof}
+Construct the entire actual normalization by the first theorem. Actual
+canonical tower-isomorphism transport supplies canonicality of $H\epsilon
+S'$ from the GIVEN original actual canonical history. Pullback by the base
+identity is literally the original marked record, using its internally
+supplied coherence. The completed actual identity empty deletion theorem
+then constructs deleted whole canonicality and its whole-value formula.
+The GIVEN original canonical history internally supplies real testness;
+tower-isomorphism transport gives normalized inserted testness and the whole
+transformed-cosupport preimage dictionary. The deleted canonical history
+internally supplies its real testness and original head testness. The actual
+identity insertion dictionary identifies normalized inserted cosupport with
+deleted cosupport. Applying the inverse final biholomorphism gives the
+stated entire original cosupport equality. For each original cosupport point
+$y$, the equality proves that $\chi^{-1}y$ is a genuine normalized inserted
+cosupport point. The actual specific family's canonical tower-isomorphism
+value theorem equates its normalized inserted value with the GIVEN original
+value at $y$. Compose this equality with the internally supplied entire
+identity deletion formula. No independent choice of a contact or assignment
+history is introduced. Actual whole tower-isomorphism resolution transport
+and actual identity deletion terminal equivalence give the stated terminal
+iff. All orders, true levels, contact-zero branches, empty suffixes and
+actual empty manifolds are included.
+\end{proof}
+
+\begin{theorem}[The actual maximal-order Step One history has the same genuine deletion]
+\label{hir:original-actual-empty-step-canonical-deletion}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-actual-empty-whole-suffix-normalization,hir:original-recursive-interior-empty-deletion-entire-values,hir:original-recursive-interior-empty-terminal-deletion-iff,hir:tower-isomorphism,hir:step-one-seq}
+\lean{Hironaka.HironakaOriginalActualEmptyNormalization.original_recursive_step_actual_empty_deletion}
+\leanok
+For EVERY lower depth $k$, original bound-$(k+1)$ maximal-order input and
+canonicality of the actual entire Step One $R_k$ history $H\pi S$ internally
+construct normalized $S'$ and $\chi$, with deleted $HS'$ canonical for the
+SAME actual masked Step One value. Its entire original cosupport is the
+$\chi^{-1}$-preimage of the deleted cosupport. At EVERY original cosupport
+point, its entire original Step One value is $S_{k,j}$ of the entire deleted
+Step One value at $\chi^{-1}y$, with the same $j=|M.E|+|H|$. Actual original
+and normalized deleted terminal resolutions are equivalent. All normalizing
+geometry, lower-order choices and deleted canonicality are supplied internally.
+\end{theorem}
+\begin{proof}
+Construct the real entire normalization from the first theorem. The actual
+masked Step One of the specific lower family is a genuine maximal-order
+value function. Apply its true canonical tower-isomorphism transport to the
+GIVEN original whole Step One canonical history and the constructed whole
+isomorphism. Actual coherent identity pullback keeps the original marked
+record. The completed Step One identity empty deletion constructs deleted
+whole canonicality, genuine testness and its whole-value formula. True Step
+One canonical testness on the original side supplies the actual entire
+cosupport preimage dictionary; deleted canonical testness and the head
+dictionary equate normalized inserted and deleted cosupport. Inverting the
+final biholomorphism gives the stated entire cosupport equality. At each
+actual original point the genuine maximal-order tower-isomorphism value
+theorem compares the normalized inserted value with the original value;
+compose with the actual deletion formula. Whole geometric resolution
+isomorphism transport and the internally supplied Step One deletion terminal
+iff prove the terminal equivalence. The proof uses the actual masked value
+including independently chosen contact-zero branches and every positive
+inner depth, not a monomial-only surrogate. Noncompact canonical scheduling
+and global resolution gluing remain separate source obligations.
+\end{proof}

@@ -1,0 +1,6 @@
+/-- The literal finite sum of ACTUAL formal monomials, using the genuine complex action. -/
+def actualStandardLift (n : ℕ) (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ) :
+    (actualStandardIndex n I q → ℂ) →ₗ[ℂ] MvPowerSeries (Fin n) ℂ where
+  toFun c := ∑ a : actualStandardIndex n I q, MvPowerSeries.monomial a.val.val (c a)
+  map_add' c d := by simp only [Pi.add_apply,map_add,Finset.sum_add_distrib]
+  map_smul' c d := by simp only [Pi.smul_apply,map_smul,Finset.smul_sum,RingHom.id_apply]

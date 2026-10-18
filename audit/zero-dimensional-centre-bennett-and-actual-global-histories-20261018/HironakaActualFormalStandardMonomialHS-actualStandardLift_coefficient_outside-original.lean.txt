@@ -1,0 +1,16 @@
+/-- Every actual coefficient outside the true bounded diagram complement is zero. -/
+theorem actualStandardLift_coefficient_outside (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ)
+    (c : actualStandardIndex n I q → ℂ) (b : Fin n →₀ ℕ)
+    (hb : ¬normalExponentDegree b < q ∨ b ∈ actualInitialDiagram MonomialOrder.degLex I) :
+    MvPowerSeries.coeff b (actualStandardLift n I q c)=0 := by
+  change MvPowerSeries.coeff b
+    (∑ a : actualStandardIndex n I q, MvPowerSeries.monomial a.val.val (c a))=0
+  rw [map_sum]
+  apply Finset.sum_eq_zero
+  intro a _
+  have he : b ≠ a.val.val := by
+    intro he
+    rcases hb with hd | hi
+    · exact hd (he ▸ a.val.property)
+    · exact a.property (he ▸ hi)
+  simp only [MvPowerSeries.coeff_monomial,if_neg he]

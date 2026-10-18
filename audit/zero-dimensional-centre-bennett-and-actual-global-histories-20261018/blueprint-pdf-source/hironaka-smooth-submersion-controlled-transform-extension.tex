@@ -1,0 +1,125 @@
+\section{Actual smooth blowup pullback of whole controlled ideals and marked successors}
+
+\begin{theorem}[Actual centre-relative strict carriers and whole literal boundary]
+\label{hir:submersion-controlled-actual-strict-carriers}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionControlledTransform.geoStrictTransform_actual_preimage,Hironaka.HironakaSmoothSubmersionControlledTransform.boundary_actual_preimage}
+\uses{hir:submersion-blowup-choice-arbitrary-dimensions,hir:submersion-blowup-lift-actual-lift,hir:submersion-image-trace-open,hir:geo-transform}
+For an original arbitrary-dimensional genuine submersion $f$, primitive
+genuine target and source blowups along $C$ and its literal preimage, let
+$G$ be the internally defined actual lift. For EVERY original set $A$,
+$G^{-1}\operatorname{geoStrict}_{\pi,C}(A)
+=\operatorname{geoStrict}_{\rho,f^{-1}C}(f^{-1}A)$.
+For EVERY literal finite ordered original boundary list, its whole
+strict-transformed list followed by the new centre-preimage divisor pulls
+back to EXACTLY the same literal source list. Empty, repeated and removed
+members are retained literally; this uses centre-relative strict transform,
+not the derivative exceptional locus for a Cartier blowup.
+\end{theorem}
+\begin{proof}
+The genuine actual lift $G$ is a submersion, hence genuinely continuous and
+open. Openness and continuity give $G^{-1}\overline{S}
+=\overline{G^{-1}S}$ for every actual set $S$. Apply this to
+$S=\pi^{-1}(A\setminus C)$. The proved whole square $\pi G=f\rho$
+then identifies its whole preimage with
+$\rho^{-1}(f^{-1}A\setminus f^{-1}C)$. Taking closure gives exactly the
+actual source strict carrier. Apply this genuine equality to every literal
+boundary member, with list map composition and append unchanged. The whole
+new divisor dictionary $G^{-1}\pi^{-1}C=\rho^{-1}f^{-1}C$ is the actual
+projection square. No closedness or regularity of $A$, boundary coordinate
+certificate, strict dictionary certificate or surjectivity is supplied.
+\end{proof}
+
+\begin{theorem}[Every genuine original admissible centre transports internally]
+\label{hir:submersion-controlled-actual-admissibility}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionControlledTransform.isAdmissibleCentre_markedPullback}
+\uses{hir:submersion-relative-regular-geometry,hir:submersion-relative-nc-transversality,hir:smooth-relative-whole-cosupport}
+For ANY original marked record with coherent whole ideal, an original
+genuine admissible centre has its actual preimage admissible for the WHOLE
+marked pullback under a genuine arbitrary-dimensional submersion. The
+original carrier need not be the whole ambient manifold in this theorem.
+\end{theorem}
+\begin{proof}
+Original admissibility gives precisely a genuine closed smooth centre,
+its actual inclusion in the original relative cosupport, and genuine
+normal crossings with the whole ordered original boundary. The existing
+original-coordinate smooth preimage theorem internally produces the
+closed smooth preimage centre. The actual whole relative cosupport theorem
+identifies the pulled record's cosupport with the genuine preimage of the
+original cosupport, including all marks and infinite order, so the original
+inclusion pulls back directly. The genuine whole-coordinate normal-crossings
+preimage producer transports the last admissibility field, retaining all
+literal boundary indices. No caller pulled-centre or admissibility
+certificate, full-ambient assumption or maximum/termination input is used.
+\end{proof}
+
+\begin{theorem}[Whole controlled ideal, genuine coherence and every actual cosupport threshold]
+\label{hir:submersion-controlled-whole-ideal}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionControlledTransform.controlledTransform_actual_pullback,Hironaka.HironakaSmoothSubmersionControlledTransform.isCoherent_source_controlled,Hironaka.HironakaSmoothSubmersionControlledTransform.controlledTransform_actual_cosupport}
+\uses{hir:submersion-blowup-lift-actual-lift,hir:submersion-blowup-choice-arbitrary-dimensions,hir:submersion-choice-image-trace-whole-pullback,hir:submersion-actual-powered-colon,hir:hadamard-bridge,bcalc:controlled-transform,hir:submersion-cosupport}
+Only the original genuine submersion, primitive actual blowup choices,
+the original whole coherent ideal $I$, its actual marking $d$, and the
+genuine original inclusion $C\subset\operatorname{cosupp}(I,d)$ in the
+WHOLE ambient manifold are inputs. The actual source controlled transform
+of $f^*I$ equals the pullback under the SAME actual $G$ of the actual target
+controlled transform of $I$, as ENTIRE germ ideals. It is genuinely coherent,
+and EVERY natural order threshold of this whole controlled ideal has its
+actual whole cosupport exactly pulled back. No ideal-inclusion, colon,
+factorization, coherence or threshold output certificate is supplied.
+\end{theorem}
+\begin{proof}
+Apply the genuine original coherent Hadamard bridge to the actual closed
+smooth centre and original cosupport inclusion. It internally gives
+$I\subset I_C^d$, then the actual target blowup internally gives
+$\pi^*I\subset L^d$ for its genuine invertible exceptional ideal $L$.
+The already proved arbitrary-dimensional smooth powered-colon theorem,
+applied to the SAME actual smooth $G$, identifies the entire pullback of
+$(\pi^*I:L^d)$ with $(G^*\pi^*I:(G^*L)^d)$. The genuine coherent whole
+pullback-composition law and actual whole square identify the first
+numerator with $\rho^*f^*I$. The actual whole blowup-ideal dictionary
+identifies $G^*L$ with the source exceptional ideal, using the original
+vanishing ideal of the genuine source preimage centre. Thus this colon
+is EXACTLY the actual source controlled ideal, on every stalk.
+The original target controlled transform is coherent by its genuine
+Hadamard-derived inclusion. Pullback of this same ideal under the actual
+holomorphic $G$ is coherent; the whole equality yields actual source
+coherence. Apply the genuine smooth whole-ideal cosupport theorem to the
+SAME coherent target transform for ANY threshold $q$, and use the same
+whole ideal equality. Mark $d=0$, threshold $q=0$, empty centres and
+non-surjective maps use these same entire identities.
+\end{proof}
+
+\begin{theorem}[The entire actual controlled marked successor dictionary]
+\label{hir:submersion-controlled-whole-marked-successor}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionControlledTransform.markedPullback_geoTransform_actual}
+\uses{hir:submersion-controlled-actual-strict-carriers,hir:submersion-controlled-whole-ideal,hir:geo-transform-ambient}
+For an original coherent marked record with literal carrier $N=\mathrm{univ}$
+and a genuine original admissible centre, the geo-transform of its whole
+marked pullback by the SAME actual source blowup equals the whole marked
+pullback under the SAME actual $G$ of its original target geo-transform.
+This is equality of the ENTIRE marked record: carrier, ordered boundary,
+whole ideal and unchanged mark. Surjectivity and marking one are not required.
+\end{theorem}
+\begin{proof}
+The actual strict-carrier theorem gives the whole carrier equality, and
+its actual ordered-list theorem gives the WHOLE boundary equality, keeping
+every empty and repeated historical entry and the exact appended new
+centre-preimage divisor. Since the original carrier is literally the
+whole ambient manifold, both original marked records have whole ambient
+carrier, and their actual blowup strict transforms are whole ambient
+carriers by genuine nowhere-density. The existing full-ambient
+geo-transform theorem therefore identifies both ENTIRE successor ideals
+with their genuine controlled ideals. Original admissibility supplies the
+actual original cosupport inclusion, so the preceding internally proved
+whole controlled equality gives the full successor ideal equality.
+Both marks are the unchanged original $d$. Marked-record extensionality
+then gives the entire equality, with no caller record, coefficient,
+chosen-centre or transform equality certificate. General non-full-carrier
+\texttt{colonAlong} naturality still needs a genuine restricted quotient
+producer; this theorem does not replace its restricted inclusion by a false
+ambient inclusion. General higher invariant and canonical driver equality,
+whole G3/G8 and formal/native/publication remain OPEN.
+\end{proof}

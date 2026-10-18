@@ -1,0 +1,126 @@
+\section{Literal relative normal associated graded of an original ideal}
+Let $B$ be the entire tangential holomorphic germ ring, $R$ the original
+ambient holomorphic germ ring and $J$ the actual ideal of the normal
+coordinates. Fix an arbitrary original whole ideal $I\subseteq R$.
+No caller kernel, finite relation, flattening, basis or generic-freeness
+certificate is an input to the following constructions.
+
+\begin{theorem}[Actual original normal monomials and literal graded layers]
+\label{hir:relative-normal-graded-literal-layers}
+\lean{Hironaka.HironakaRelativeNormalAssociatedGraded.normalExponentDegree_eq_degree,Hironaka.HironakaRelativeNormalAssociatedGraded.normalExponentMonomial_mem_pow,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalGradedPiece,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalGradedPieceAddCommGroup,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalAssociatedGraded,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalPowerImage,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalPowerImage_succ_le,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalGradedStepMap,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalGradedStepMap_surjective,Hironaka.HironakaRelativeNormalAssociatedGraded.ker_originalNormalGradedStepMap,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalGradedPieceQuotientEquiv}
+\leanok
+\uses{hir:relative-normal-basis-actual-entire-quotient-basis,hir:relative-normal-ideal-actual-coordinates}
+The actual normal monomial $z^\alpha$ belongs to $J^{|\alpha|}$.
+The literal degree-$q$ layer is the entire $B$-submodule
+$L_q=\operatorname{image}(J^q\longrightarrow R/(I+J^{q+1}))$.
+It is precisely the quotient of the image of $J^q$ in $R/I$ by the image
+of $J^{q+1}$, with the true original representative dictionary. The
+associated graded module is the actual direct sum $\bigoplus_q L_q$.
+\end{theorem}
+\begin{proof}
+Each normal coordinate belongs to its genuine generated ideal; its $k$th
+power belongs to the $k$th ideal power. Multiply these actual memberships
+and use the finite product identity $\prod_iJ^{\alpha_i}=J^{\sum_i\alpha_i}$.
+Use the literal quotient map and submodule image to define $L_q$. Its
+representatives are precisely original germs in $J^q$. Two such germs
+have the same layer class exactly when their difference lies in
+$I+J^{q+1}$. Passing first to $R/I$ gives the same dictionary, since a
+representative in $J^q$ maps to the next power image exactly when its
+difference from some actual $J^{q+1}$ germ lies in $I$. The first
+isomorphism theorem gives the actual layer identification and hence the
+literal direct sum. This includes $q=0$ and zero/unit original ideals.
+\end{proof}
+
+\begin{theorem}[Genuine homogeneous normal polynomial surjection]
+\label{hir:relative-normal-graded-homogeneous-surjection}
+\lean{Hironaka.HironakaRelativeNormalAssociatedGraded.normalPolynomialEval_mem_pow_of_homogeneous,Hironaka.HironakaRelativeNormalAssociatedGraded.exists_homogeneous_normal_polynomial_representative,Hironaka.HironakaRelativeNormalAssociatedGraded.homogeneousNormalSymbolMap,Hironaka.HironakaRelativeNormalAssociatedGraded.homogeneousNormalSymbolMap_surjective,Hironaka.HironakaRelativeNormalAssociatedGraded.normalAssociatedSymbolMap,Hironaka.HironakaRelativeNormalAssociatedGraded.normalAssociatedSymbolMap_surjective,Hironaka.HironakaRelativeNormalAssociatedGraded.normalAssociatedSymbolMap_component,Hironaka.HironakaRelativeNormalAssociatedGraded.normalAssociatedSymbolMap_eq_zero_iff}
+\leanok
+\uses{hir:relative-normal-graded-literal-layers,hir:relative-normal-ideal-actual-coordinates,hir:relative-normal-basis-actual-coefficient-separation}
+Evaluate an actual degree-$q$ homogeneous normal polynomial in the
+original normal coordinates and then take its actual class in $L_q$.
+This is a true $B$-linear surjection onto $L_q$. Summing these maps after
+the genuine polynomial homogeneous decomposition gives a true surjection
+$B[Z_1,\ldots,Z_t]\twoheadrightarrow\bigoplus_qL_q$.
+Its whole kernel is exactly the condition that the evaluated $q$th
+homogeneous part belongs to $I+J^{q+1}$ for every $q$.
+\end{theorem}
+\begin{proof}
+Homogeneous polynomial support has degree $q$, so actual monomial
+membership proves that its entire evaluation belongs to $J^q$.
+Given an original representative $g\in J^q$, use the genuine distinct
+normal-monomial representative modulo $J^{q+1}$. Its evaluated polynomial
+also lies in $J^q$, because the actual remainder is in $J^{q+1}\subseteq
+J^q$. Whole polynomial coefficient separation forces every coefficient
+of degree less than $q$ to vanish as an entire base germ. All its
+remaining degrees are exactly $q$, giving the required homogeneous
+representative. The true finite homogeneous decomposition of a polynomial
+and the actual universal property of the direct sum construct the full
+map. Surjectivity on each literal layer implies surjectivity on the true
+direct sum. Equality to zero in a layer is precisely whole membership in
+$I+J^{q+1}$, proving the asserted complete kernel condition.
+\end{proof}
+
+\begin{theorem}[True original initial symbols and the complete homogeneous kernel ideal]
+\label{hir:relative-normal-graded-whole-initial-ideal}
+\lean{Hironaka.HironakaRelativeNormalAssociatedGraded.normalAssociatedSymbolMap_eq_zero_of_homogeneous,Hironaka.HironakaRelativeNormalAssociatedGraded.homogeneous_normalPolynomialEval_mul_mem_remainder,Hironaka.HironakaRelativeNormalAssociatedGraded.normalAssociatedSymbolMap_mul_eq_zero,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialIdeal,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialIdeal_eq_ker,Hironaka.HironakaRelativeNormalAssociatedGraded.homogeneous_normal_polynomial_unique,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialSymbol,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialSymbol_homogeneous,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialSymbol_remainder,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalRelationIndex,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalRelation,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalRelation_mem_initialIdeal,Hironaka.HironakaRelativeNormalAssociatedGraded.exists_original_germ_homogeneous_kernel_relation,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialIdeal_eq_span_original_relations,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalInitialIdeal_homogeneous}
+\leanok
+\uses{hir:relative-normal-graded-homogeneous-surjection}
+For every actual $g\in I\cap J^q$, its true degree-$q$ normal initial
+symbol is the $q$th homogeneous part of its actual polynomial
+representative modulo $J^{q+1}$. Let $H$ be the ideal generated by all
+these actual homogeneous symbols. Then $H$ is homogeneous and is the
+COMPLETE whole kernel of the preceding polynomial surjection.
+\end{theorem}
+\begin{proof}
+The initial symbol is homogeneous by the actual polynomial projection,
+and its evaluation differs from $g$ by a true element of $J^{q+1}$.
+It therefore maps to zero. Multiplication of homogeneous polynomials
+corresponds to multiplication of their original evaluated germs: an
+actual error in $I+J^{q+1}$ times a degree-$r$ representative in $J^r$
+lies in $I+J^{q+r+1}$. Decompose every multiplier into its actual finite
+homogeneous parts to obtain closure of the complete kernel under arbitrary
+polynomial multiplication. Addition and entire base scalar multiplication
+are actual linear operations. This proves an actual ideal, and stability
+under all homogeneous projections proves homogeneity. Conversely, a
+homogeneous $P$ of degree $q$ in the kernel has actual evaluation
+$g+h$ with $g\in I$ and $h\in J^{q+1}$. Since its evaluation and $h$
+belong to $J^q$, the entire original $g$ lies in $I\cap J^q$. Whole
+coefficient separation modulo $J^{q+1}$ identifies $P$ with the actual
+initial symbol of $g$. The finite homogeneous decomposition then expresses
+every complete kernel element in the ideal generated by these actual
+symbols. Both inclusions are proved with whole germs and actual original
+ideal memberships.
+\end{proof}
+
+\begin{theorem}[Internally finite actual homogeneous original relations]
+\label{hir:relative-normal-graded-internal-finite-relations}
+\lean{Hironaka.HironakaRelativeNormalAssociatedGraded.exists_finite_originalNormalRelations,Hironaka.HironakaRelativeNormalAssociatedGraded.originalNormalAssociatedGradedQuotientEquiv,Hironaka.HironakaRelativeNormalAssociatedGraded.exists_finite_originalNormalAssociatedGraded_presentation}
+\leanok
+\uses{hir:relative-normal-graded-whole-initial-ideal,hir:relative-normal-ideal-actual-original-matrices}
+An actual finite family of original germs $g_i\in I\cap J^{q_i}$
+internally supplies homogeneous relations generating the complete kernel
+$H$. Thus the literal original associated graded module has a true finite
+homogeneous polynomial presentation, valid in all degrees simultaneously.
+\end{theorem}
+\begin{proof}
+The genuine entire base holomorphic germ ring is Noetherian. The true
+polynomial ring in the finite actual normal coordinate family is therefore
+Noetherian by Hilbert's basis theorem. Its actual ideal $H$ is finitely
+generated. Apply finite extraction to its proved span by all actual
+original initial symbols. This chooses a finite SUBSET of that actual
+symbol family, rather than replacing it by caller relations or arbitrary
+nonhomogeneous polynomial generators. Choose the original germ and degree
+witness for each of these finitely many actual symbols. The complete
+kernel equality then identifies the polynomial quotient by these genuine
+finite homogeneous relations with the literal original direct sum of
+layers. No generic-freeness or flatness result is inferred from finite
+presentation alone.
+\end{proof}
+
+\begin{remark}
+A genuine nonzero common denominator making this entire graded module free,
+and a true uniform analytic neighbourhood realizing the required original
+stalks, remain subsequent producer obligations. Separate degree-wise
+localizations and finite presentation do not settle all-degree normal
+flatness. Higher HS descent and general G8 remain OPEN.
+\end{remark}

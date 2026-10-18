@@ -1,0 +1,102 @@
+\section{Actual uniform prefixes of retained curve histories}
+
+The terminal geometric endpoint does not itself specify global intermediate
+blowup stages. Here the first $k$ actual positions of each retained finite
+history are constructed, with genuine identity blowups of the empty centre
+when that history has already terminated. No empty position is compressed.
+
+\begin{theorem}[Actual uniform prefix and exact independence of extra empty tails]
+\label{hir:sharp-actual-curve-uniform-prefix-padding}
+\uses{hir:tower-split,hir:sharp-actual-identity-empty-padding-comparison}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixes.headPacket,Hironaka.HironakaSharpActualCurveUniformPrefixes.uniformPrefix,Hironaka.HironakaSharpActualCurveUniformPrefixes.uniformPrefix_length,Hironaka.HironakaSharpActualCurveUniformPrefixes.uniformPrefix_append_empty}
+\leanok
+For every actual finite blowup tower $T:X\leftarrow Y$ and natural $k$,
+construct an actual endpoint and a tower of exactly $k$ blowups over $X$.
+It retains the first $k$ positions of $T$, continuing with real empty-centre
+identity blowups if necessary. Appending ANY number of such actual empty
+blowups before this construction gives exactly the same pair of endpoint
+and tower, not merely the same numerical length or a compressed history.
+\end{theorem}
+\begin{proof}
+Package the actual endpoint and head of an existing split as a dependent
+pair. Append $k$ real identity-empty blowups to $T$, then remove the last
+$|T|$ positions by the actual split operation. The head length is
+$(|T|+k)-|T|=k$, including $k=0$ and an originally empty tower.
+
+First induct on $r$: the endpoint/head pair of $T$ followed by $r$ real
+empty steps, split before its last $j+r$ positions, equals the endpoint/head
+pair of $T$ split before its last $j$ positions. At a successor, the split
+definition removes precisely the last actual empty blowup, so the induction
+keeps every preceding arrow and centre. For extra padding $r$ in the
+uniform-prefix construction, associativity and the actual empty-tail
+concatenation identity rewrite the two consecutive tails of sizes $r,k$
+as tails of sizes $k,r$. Apply the preceding equality with $j=|T|$.
+This is equality of the whole dependent pair; no terminal-isomorphism
+certificate or erased step is used.
+\end{proof}
+
+\begin{theorem}[Unique uniform-stage comparison from genuine padded histories]
+\label{hir:sharp-actual-curve-uniform-prefix-comparison}
+\uses{hir:sharp-actual-curve-uniform-prefix-padding,hir:tower-split-iso,hir:sharp-actual-stagewise-tower-comparison-unique,mc:tower-isomorphism-append}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixes.uniformPrefix_comparison,Hironaka.HironakaSharpActualCurveUniformPrefixes.exists_unique_uniformPrefix_of_padded_comparison,Hironaka.HironakaSharpActualCurveUniformPrefixes.uniformPrefix_comparison_cocycle}
+\leanok
+Any genuine stagewise isomorphism between two actually empty-padded full
+histories over a fixed actual base biholomorphism supplies a unique
+stagewise isomorphism between their uniform $k$ prefixes. The prefix
+endpoints and towers depend only on the original histories and $k$,
+so every real larger-cut comparison induces the same map there.
+Three such prefix maps satisfy the actual cocycle over the composed base
+map. All projection squares and every retained centre are those of
+the genuine tower isomorphisms.
+\end{theorem}
+\begin{proof}
+For unpadded isomorphic histories, their lengths are equal. Append $k$
+actual identity-empty blowups on both sides; the existing genuine
+empty-tail comparison extends the given stagewise isomorphism. Split
+both full towers before their last common original length. The existing
+split-isomorphism theorem supplies the actual head biholomorphism and
+the entire head-stage isomorphism, hence the desired uniform-prefix map.
+
+If the given histories were first padded by unequal actual empty-tail
+lengths, perform the construction on those real towers. Rewrite both
+whole dependent endpoint/tower pairs by the exact padding-independence
+identity. This gives the requested map on the original prefix types.
+For any two candidates, the genuine fixed-tower universal uniqueness
+theorem makes their terminal maps equal. Thus different larger terminal
+cuts and different genuine full comparisons cannot change the prefix map.
+For three maps, their true stagewise composition and the direct map have
+the same source tower, target tower and composed base map; the same
+uniqueness proves the cocycle. No scalar, numerical or endpoint-only
+comparison is substituted for a tower isomorphism.
+\end{proof}
+
+\begin{theorem}[Actual original two-phase curve recipes compare at every uniform stage]
+\label{hir:sharp-actual-curve-original-uniform-prefix-comparison}
+\uses{hir:sharp-actual-curve-uniform-prefix-comparison,hir:sharp-actual-curve-biholo-two-phase-padded-recipes}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixes.exists_unique_original_uniformPrefix_comparison}
+\leanok
+Under the original positive ambient dimension, closed smooth pure-curve,
+ordered SNC and boundary-complement density inputs, let two genuine FIRST
+blowups and literal terminal Delta tails lie over any actual base
+biholomorphism, with the original carrier and EVERY ordered member pulled
+back on its source. Their full histories have a unique actual comparison
+at every uniform stage $k$. No prefix map, source geometric input, common
+padding bound or desired centre-matching certificate is supplied.
+\end{theorem}
+\begin{proof}
+Choose internally the common terminal tail cut to be the sum of the two
+actual tail lengths. Both bounds follow from natural arithmetic. The
+existing original two-phase comparison producer first supplies the real
+original/source product TEST geometry and actual FIRST/Delta centre
+naturality, then constructs a genuine stagewise isomorphism between the
+two histories padded to that common tail length. Reassociate each actual
+full concatenation as its unpadded full history followed by the real
+remaining empty steps. Apply the preceding uniform-prefix theorem and
+its uniqueness. The final prefix types therefore use precisely the
+original full histories and $k$, independently of that internal cut.
+
+This is a genuine finite-stage producer for later overlap descent. A
+global stage atlas, compatibility with restriction to smaller opens,
+global next blowup universal property and locally stationary global
+sequence are separate remaining constructions; none is asserted here.
+\end{proof}

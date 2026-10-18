@@ -1,0 +1,8 @@
+/-- Genuine whole Taylor extension transfers the actual translated-polynomial comparison to EVERY formal HS quotient. -/
+theorem genuineFormalHilbertSamuelValue_translated_initial_le (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (p : Fin n → ℂ) (ℓ : ℕ) :
+    genuineFormalHilbertSamuelValue n (actualTranslatedInitialFormalIdeal I p) ℓ ≤
+      genuineFormalHilbertSamuelValue n I ℓ := by
+  rw [← actualTranslatedInitialIdeal_formal_extension,
+    ← hilbertSamuelValue_eq_genuine_formal_extension]
+  exact hilbertSamuelValue_actual_translated_initial_le I p ℓ

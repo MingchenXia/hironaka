@@ -1,0 +1,6 @@
+/-- The genuine jointly polynomial family is internally constructed from the actual finite original vertex family. -/
+def actualRayInitialFamily (I : Ideal (MvPowerSeries (Fin n) ℂ)) (p : Fin n → ℂ)
+    (i : Fin (Fintype.card (actualInitialVertices MonomialOrder.degLex I)))
+    (u : ComplexModel 1 × ComplexModel (0+n)) : ℂ :=
+  MvPolynomial.eval (fun j => u.2 (j.natAdd 0)+u.1 0*p j)
+    (actualInitialVertexPolynomial I (vertexEnumeration I i))

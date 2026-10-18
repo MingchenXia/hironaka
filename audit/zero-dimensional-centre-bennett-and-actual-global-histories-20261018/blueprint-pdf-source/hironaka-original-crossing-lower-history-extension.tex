@@ -1,0 +1,109 @@
+\section{The actual selected lower history crossing an interior empty step}
+
+These producers retain the actual initial marked ideal, the whole original
+history and the run computed at the actual current Step One level.  Here
+that run reaches the insertion.  No desired assignment-stage, tail, lower
+record or invariant comparison is an input.
+
+\begin{lemma}[A run reaching the base of a concatenated tail]
+\label{hir:original-crossing-run-base-regime}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerHistory.regime_at_base_of_reaching_run,Hironaka.HironakaOriginalCrossingLowerHistory.split_append_above_tail}
+\leanok
+\uses{hir:tower-split}
+For an actual regime $P$, actual histories $H,S$ and final point $y$, if
+$P(HS,y)$ holds and $|S|\leq\operatorname{run}_P(HS,y)$, then
+$P(H,S.\operatorname{proj}(y))$ holds.  Moreover, for every $r\geq|S|$, the
+entire actual split of $HS$ at $r$ has stage and head those of the split of
+$H$ at $r-|S|$, and tail $\operatorname{tail}(H,r-|S|)S$.
+\end{lemma}
+\begin{proof}
+For regime membership induct on $S$.  The empty tail uses current membership.
+At a nonempty last step, a run reaching the positive length of $S$ cannot
+have stopped at that step.  The actual predecessor therefore satisfies $P$,
+and the run recursion gives a predecessor run reaching the predecessor
+tail length.  Induction gives the original base membership.  For the full
+split formula, remove the last actual steps of $S$ recursively.  Once the
+tail is exhausted, the remaining $r-|S|$ steps are removed from $H$.
+The actual split constructors retain precisely the stated original head
+and append $S$ to its actual tail.  This applies also to saturated split
+indices beyond the whole length.
+\end{proof}
+
+\begin{theorem}[The original crossing run and its whole selected splits]
+\label{hir:original-interior-crossing-selected-splits}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerHistory.actual_crossing_selected_splits}
+\leanok
+\uses{hir:original-crossing-run-base-regime,hir:original-interior-empty-regime-run,hir:original-interior-empty-step-one-dictionary}
+Let $M$ be originally well formed, $H$ an actual test tower of $\overline M$,
+$S$ any actual tail, and $y$ an actual nonspecial final point of $HS$.
+Put $\ell=\operatorname{level}(M,HS,y)$ and
+$r=\operatorname{run}_{M,\ell}(HS,y)$, and assume $|S|\leq r$.
+The actual current-level run in $H\epsilon S$ is $r+1$.  Write
+$a=r-|S|$, $D=\operatorname{stage}(H,a)$, $K=\operatorname{head}(H,a)$ and
+$B=\operatorname{tail}(H,a)$.  The two actual selected full split records
+are precisely $(D,K,BS)$ and $(D,K,B\epsilon S)$.
+\end{theorem}
+\begin{proof}
+The actual nonspecial point satisfies the regime of its own actual level.
+The first lemma therefore supplies membership at the original $H$ point.
+The exact original run formula, with $r\geq|S|$, gives $r+1$ after insertion;
+the original level dictionary also identifies the new actual current level.
+The preceding whole split formula gives the old split.  Apply it to the new
+prefix $H\epsilon$ at $r+1$.  Because $r\geq|S|$, its remaining split count
+is $a+1$.  The last step of this prefix is the identity empty blowup, so
+its split at $a+1$ has stage/head $(D,K)$ and tail $B\epsilon$ by the actual
+split recursion.  Appending $S$ gives precisely the new whole split record.
+This includes level zero and an empty $S$.
+\end{proof}
+
+\begin{lemma}[Actual restriction of an interior identity empty step]
+\label{hir:original-crossing-restricted-empty-history}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerHistory.restrict_identity_empty_step,Hironaka.HironakaOriginalCrossingLowerHistory.actual_restricted_empty_history}
+\leanok
+\uses{hir:original-interior-empty-history,bcalc:tower-restrict}
+For any actual open $W$ and histories $B,S$, the restriction of $B\epsilon S$
+to $W$ is genuinely isomorphic over the identity of $W$ to the restriction
+of $B$ followed by the genuine identity empty blowup and the restriction of
+$S$ to the actual open preimage of $W$ under $B$.  The final identification
+is the natural equality of the actual open preimages, with the same points.
+\end{lemma}
+\begin{proof}
+The empty centre restricts to the empty centre, the identity projection
+restricts to the identity on the same actual open preimage, and the actual
+restricted blowup has the true empty blowup universal property.  Thus the
+whole restricted prefix is exactly the restricted $B$ followed by that
+identity empty step.  The genuine restriction-of-concatenation dictionary
+then gives the asserted whole tower isomorphism and its natural final
+open identification.  No restricted-tail isomorphism is assumed.
+\end{proof}
+
+\begin{theorem}[The actual crossing lower assignment and restricted history]
+\label{hir:original-interior-crossing-lower-history}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalCrossingLowerHistory.actual_crossing_lower_history}
+\leanok
+\uses{hir:original-interior-crossing-selected-splits,hir:original-crossing-restricted-empty-history}
+For the actual selected splits above, the images of $y$ in $D$ agree, both
+selected heads are literally $K$, and the actual lower masks and masked
+lower marked ideals at their actual level $\ell$ agree.  The new whole
+restricted lower tail is the genuine interior identity empty insertion
+in the actual restricted old tail, as in the preceding restriction diagram.
+No positive-level restriction is required for this crossing branch.
+\end{theorem}
+\begin{proof}
+The two actual tails are $BS$ and $B\epsilon S$, whose composite projections
+are equal by the actual identity-step projection dictionary.  Their images
+$p\in D$ therefore agree.  The full split calculation has already supplied
+the same original head $K$.  The actual lower mask and lowerMarkedM depend
+on the same $M,\ell,K,p$, so their equality follows by substitution, also
+for the original chosen contact direction at level zero.  Apply the actual
+restriction producer to this literal common lower open.  It supplies the
+new whole restricted tail diagram internally.
+\end{proof}
+
+Complete lower invariant value/order transport along these actual histories,
+the zero-contact carrier in the short-run branch, and full higher recursive
+invariant and noncompact maximum scheduling remain subsequent producers.

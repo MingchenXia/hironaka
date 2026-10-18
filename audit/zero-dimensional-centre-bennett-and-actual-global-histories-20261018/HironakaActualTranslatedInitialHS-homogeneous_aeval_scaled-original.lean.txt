@@ -1,0 +1,10 @@
+private theorem homogeneous_aeval_scaled {S : Type*} [CommSemiring S] [Algebra ℂ S]
+    (P : MvPolynomial (Fin n) ℂ) (d : ℕ) (hP : P.IsHomogeneous d) (x : Fin n → S) (c : S) :
+    MvPolynomial.aeval (fun i => c*x i) P=c^d*MvPolynomial.aeval x P := by
+  rw [← P.support_sum_monomial_coeff,map_sum,map_sum,Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro e he
+  simp only [MvPolynomial.aeval_monomial,Finsupp.prod,mul_pow,
+    Finset.prod_mul_distrib,Finset.prod_pow_eq_pow_sum]
+  rw [← hP.degree_eq_sum_deg_support he]
+  ac_rfl

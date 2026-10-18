@@ -1,0 +1,31 @@
+ℹ [4750/5045] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4857/5045] Built Hironaka.Resolution.HironakaActualPointExceptionalInitialForm (2.7s)
+✔ [4881/5045] Built Hironaka.Resolution.HironakaActualPointDehomogenizedInitial (2.8s)
+✔ [4903/5045] Built Hironaka.Resolution.HironakaActualOriginalDerivativeSheaf (3.0s)
+✔ [4931/5045] Built Hironaka.Resolution.HironakaOriginalFiniteStepOneCutMiddleHistory (2.6s)
+✔ [4990/5045] Built Hironaka.Resolution.HironakaActualPointCentreStrictGenerators (2.7s)
+✔ [4993/5045] Built Hironaka.Resolution.HironakaOriginalFiniteOrderCutCompanionTests (4.1s)
+✔ [5040/5045] Built Hironaka.Resolution.HironakaOriginalFiniteOrderCutSmoothCompanions (4.0s)
+✔ [5041/5045] Built Hironaka.Resolution.HironakaSharpActualCurveUniformSuccessorRestriction (16s)
+✔ [5042/5045] Built Hironaka.Resolution.HironakaSharpActualCurveGlobalSuccessorMap (4.1s)
+✔ [5043/5045] Built Hironaka.Resolution.HironakaSharpActualCurveGlobalSuccessorGeometry (2.9s)
+✔ [5044/5045] Built Hironaka (2.3s)
+Build completed successfully (5045 jobs).

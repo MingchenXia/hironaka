@@ -1,0 +1,31 @@
+/-- Genuine bounded diagram-avoiding series are separated by the WHOLE actual formal jet quotient. -/
+theorem bounded_diagram_avoiding_series_eq_zero (I : Ideal (MvPowerSeries (Fin n) ℂ))
+    (q : ℕ) (P : MvPowerSeries (Fin n) ℂ)
+    (hP : ∀ a, MvPowerSeries.coeff a P ≠ 0 →
+      normalExponentDegree a < q ∧ a ∉ actualInitialDiagram MonomialOrder.degLex I)
+    (hmem : P ∈ I ⊔ genuineFormalVariables n ^ q) : P=0 := by
+  obtain ⟨G,hG,Z,hZ,he⟩ := Submodule.mem_sup.mp hmem
+  have hz := (mem_genuineFormalVariables_pow_iff_coefficients_zero n q Z).mp hZ
+  by_contra hne
+  let a := actualInitialExponent MonomialOrder.degLex P hne
+  have ha : MvPowerSeries.coeff a P ≠ 0 := (actualInitialExponent_spec _ P hne).1
+  have hs := hP a ha
+  have hGa : MvPowerSeries.coeff a G=MvPowerSeries.coeff a P := by
+    have hc := congrArg (MvPowerSeries.coeff a) he
+    rw [map_add,hz a hs.1,add_zero] at hc
+    exact hc
+  have hGne : G ≠ 0 := by
+    intro hzero
+    have hc : MvPowerSeries.coeff a G=0 := by rw [hzero,map_zero]
+    exact ha (hGa.symm.trans hc)
+  have hgexp : actualInitialExponent MonomialOrder.degLex G hGne=a := by
+    apply actualInitialExponent_eq_of_coefficients
+    · rwa [hGa]
+    · intro b hb
+      have hdb : normalExponentDegree b < q :=
+        lt_of_le_of_lt (actual_degree_le_of_deglex_lt b a hb) hs.1
+      have hp := coeff_eq_zero_of_lt_actualInitialExponent MonomialOrder.degLex P hne b hb
+      have hc := congrArg (MvPowerSeries.coeff b) he
+      rw [map_add,hz b hdb,add_zero,hp] at hc
+      exact hc
+  exact hs.2 ⟨G,hG,hGne,hgexp⟩

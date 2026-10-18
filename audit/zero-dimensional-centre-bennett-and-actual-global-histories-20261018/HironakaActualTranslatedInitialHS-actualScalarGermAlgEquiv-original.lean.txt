@@ -1,0 +1,5 @@
+/-- The ACTUAL continuous scalar isomorphism induces a genuine original COMPLEX germ algebra equivalence. -/
+def actualScalarGermAlgEquiv (n : ℕ) (c : ℂ) (hc : c ≠ 0) :
+    HolGerm (ComplexModel (0+n)) ≃ₐ[ℂ] HolGerm (ComplexModel (0+n)) where
+  toRingEquiv := HolGerm.comapEquiv (scalarLinearEquiv (0+n) c hc)
+  commutes' _ := rfl

@@ -1,0 +1,85 @@
+\section{The actual global smooth successor centre}
+
+\begin{theorem}[The genuine chosen transition preserves the entire local successor centre]
+\label{hir:sharp-actual-curve-successor-centre-transition}
+\uses{hir:sharp-actual-curve-uniform-stage-successor-compatible,hir:sharp-actual-curve-uniform-successor-open-restriction}
+\lean{Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.localUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.transition_localUniformCentre}
+\leanok
+For actual finite terminal-history data, every natural stage and pair of
+actual chart indices, the OLD chosen stage transition preserves membership
+in their actual next blowup centres in BOTH directions. The centres are
+constructed from the genuine uniform successors, not supplied sets.
+\end{theorem}
+\begin{proof}
+Restrict each actual successor blowup to the genuine overlap open. The
+previously constructed restricted centres are exactly the traces of the
+actual unrestricted centres. The actual uniform-stage comparison at the
+preceding and next stages is a genuine isomorphism of the SAME restricted
+histories. Inverting its actual last step and applying whole-history
+uniqueness gives centre correspondence under the ALREADY chosen preceding
+stage map. Normalize the actual equal-open identification used to define
+the OLD transition. The two exact trace identities then turn that centre
+correspondence into both membership directions for the original centres.
+No new map or desired centre identity is assumed.
+\end{proof}
+
+\begin{theorem}[Actual centre union, exact local preimages and genuine closed smooth thin geometry]
+\label{hir:sharp-actual-curve-global-successor-centre-geometry}
+\uses{hir:sharp-actual-curve-successor-centre-transition,hir:sharp-actual-endpoint-topcat-glue-core,hir:sharp-actual-endpoint-local-range-biholomorphism}
+\lean{Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.globalUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.mem_globalUniformCentre_iff,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.preimage_globalUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.isClosed_globalUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.localUniformCentre_regularAtDim_iff,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.isClosedSubmanifold_globalUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.interior_globalUniformCentre}
+\leanok
+Form the union of the actual local successor centres' inclusion images in
+the actual global preceding stage. Its inverse image under EVERY local
+inclusion is exactly that chart's entire actual centre. The union is
+closed and has empty interior. Under the genuine base cover its actual
+complex-stage subset is a closed submanifold; local regularity transports
+in the SAME dimension. No global set, compatibility, closedness,
+smoothness or thinness certificate is input.
+\end{theorem}
+\begin{proof}
+Local membership implies union membership by its own inclusion image.
+Conversely, equality of included representatives is witnessed by the real
+TopCat gluing relation: an actual overlap point whose OLD transition takes
+one representative to the other. The preceding theorem transports its
+centre membership, giving the exact whole preimage equality.
+
+Each actual local blowup supplies closedness of its own centre. The actual
+quotient topology applied to the union's complement and the whole preimage
+equalities proves global closedness. Each local blowup also supplies empty
+interior of its entire centre. If a global interior point existed, choose
+an actual chart representative. Continuity of that true inclusion puts
+this representative in the interior of its whole inverse image, hence in
+the empty interior of the actual local centre, a contradiction.
+
+For smoothness use the actual range biholomorphism. Its entire pullback of
+the global centre trace is the same actual local centre by the proved
+preimage equality. Genuine biholomorphic regularity transport followed by
+the open-subtype regularity dictionary preserves the exact dimension.
+Each actual local blowup supplies local regularity at every centre point;
+true joint surjectivity and the exact membership dictionary therefore
+supply global regularity. Together with the already proved closedness,
+this gives the genuine global closed submanifold.
+\end{proof}
+
+\begin{theorem}[Only original inputs construct the actual global successor centres]
+\label{hir:sharp-actual-curve-original-global-successor-centre}
+\uses{hir:sharp-actual-curve-global-successor-centre-geometry,hir:sharp-actual-curve-original-global-uniform-stages,hir:sharp-actual-curve-original-global-successor-geometry}
+\lean{Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.originalUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.isClosedSubmanifold_originalUniformCentre,Hironaka.HironakaSharpActualCurveGlobalSuccessorCentre.interior_originalUniformCentre}
+\leanok
+Only the original positive-dimensional smooth pure curve, entire ordered
+SNC boundary and genuine density data construct a closed smooth centre
+with empty interior in EVERY actual original global stage, using the SAME
+actual local successor blowups as the constructed global next arrow.
+No local histories, atlas, map or desired centre geometry is supplied.
+\end{theorem}
+\begin{proof}
+The original-only retained-history producer internally supplies the actual
+atlas, genuine base cover and all uniform stages. Apply the preceding
+construction to these exact histories. All centres and centre comparisons
+come from their actual successor steps, so the resulting global set is
+coupled to the same actual global arrow. Its closed-submanifold property
+and empty interior are the preceding genuine outputs, not new hypotheses.
+This does not yet prove invertibility of the pulled-back whole centre
+ideal or the actual global blowup universal property. Local stationarity
+and any global finite scheduling statement also remain subsequent work.
+\end{proof}

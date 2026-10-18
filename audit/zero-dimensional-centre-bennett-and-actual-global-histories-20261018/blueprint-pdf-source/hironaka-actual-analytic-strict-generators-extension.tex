@@ -1,0 +1,112 @@
+\section{Genuine analytic generators of the whole source formal strict ideal}
+
+Let $R$ be the original analytic germ ring on $\mathbb C^n$ and
+$T:R\to S=\mathbb C[[x_1,\ldots,x_n]]$ its actual unshifted Taylor map.
+For an original ideal $I$, put $J=T(I)S$ and let $V$ be the actual degree-lex
+vertices of $J$. Let $F_\alpha$ be its actual canonical reduced formal
+vertex members. Fix a coordinate centre $A$, an exceptional coordinate
+$e\in A$ and an actual chart point $b$. Write $C_A$ for the analytic
+coordinate ideal, $\widehat C_A$ for its formal counterpart, $\rho^*$
+for the genuine polynomial analytic blowup pullback, and $\sigma$ for
+the corresponding entire formal substitution.
+
+\begin{theorem}[Internally constructed analytic exceptional quotients generate the entire formal strict ideal]
+\label{hir:actual-analytic-quotient-formal-strict-generators}
+\uses{hir:actual-analytic-centre-compatible-monic-vertex-family,hir:actual-formal-strict-ideal-monic-family-generators,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualAnalyticStrictGenerators.exists_actual_analytic_strict_vertex_generators}
+\leanok
+Suppose $F_\alpha\in\widehat C_A^{w_A(\alpha)}$ for every $\alpha\in V$.
+There are internally constructed finite analytic families
+$(g_\alpha)_{\alpha\in V}$ and $(h_\alpha)_{\alpha\in V}$ such that
+\[
+ I=(g_\alpha),\quad
+ g_\alpha\in I\cap C_A^{w_A(\alpha)},\quad
+ \operatorname{in}_{\deglex}T(g_\alpha)=\alpha,\quad
+ [x^\alpha]T(g_\alpha)=1,
+\]
+\[
+ x_e^{w_A(\alpha)}h_\alpha=\rho^*g_\alpha,
+ \qquad J^{\mathrm{str}}=(T(h_\alpha))_{\alpha\in V}.
+\]
+Here the analytic $x_e$ denotes the genuine coordinate germ. No analytic
+family, exceptional quotient, or convergence certificate is supplied.
+\end{theorem}
+\begin{proof}
+The analytic centre-compatible vertex construction supplies actual
+$g_\alpha$ inside the entire original intersections
+$I\cap C_A^{w_A(\alpha)}$, monic at the true vertices and generating $I$.
+Their actual Taylor series form a monic vertex family for the whole $J$:
+ideal membership follows from original membership, and coefficients below
+the true initial exponent vanish by the definition of that exponent.
+The genuine coordinate Taylor dictionary preserves their whole centre powers.
+
+Actual analytic blowup pullback sends $C_A^w$ to the principal ideal
+$(x_e^w)$. Thus each actual $g_\alpha$ internally has an analytic quotient
+$h_\alpha$ with the displayed equation. The whole Taylor naturality square
+turns that equation into
+$x_e^{w_A(\alpha)}T(h_\alpha)=\sigma(T(g_\alpha))$.
+Uniqueness by nonzero exceptional-power cancellation identifies
+$T(h_\alpha)$ with the actual normalized member
+$N_{w_A(\alpha)}(T(g_\alpha))$. The whole strict-ideal theorem for this
+same monic family now gives exactly the asserted entire ideal equality.
+\end{proof}
+
+\begin{definition}[Entire analytic ideal of actual normalized original members]
+\label{hir:actual-analytic-normalized-member-ideal}
+\lean{Hironaka.HironakaActualAnalyticStrictGenerators.actualAnalyticNormalizedMemberIdeal}
+\leanok
+Define the original analytic ideal
+\[
+ \mathcal N_A(I)=
+ \bigl(h\in R:\ \exists d\geq0,\ \exists g\in I\cap C_A^d,
+                       \ x_e^dh=\rho^*g\bigr).
+\]
+The parentheses denote the ideal span of all such actual analytic germs.
+\end{definition}
+
+\begin{lemma}[Every actual analytic normalized member maps into the source formal strict ideal]
+\label{hir:actual-analytic-normalized-member-formal-inclusion}
+\uses{hir:actual-analytic-normalized-member-ideal,hir:actual-formal-strict-ideal-normalized-member-identification,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualAnalyticStrictGenerators.map_actualAnalyticNormalizedMemberIdeal_le_formalStrictTransform}
+\leanok
+For every original ideal $I$, without a vertex compatibility hypothesis,
+$T(\mathcal N_A(I))S\subseteq J^{\mathrm{str}}$.
+\end{lemma}
+\begin{proof}
+Take an actual analytic generator $h$ and its genuine witnesses $d$ and
+$g\in I\cap C_A^d$. Apply the entire Taylor map to
+$x_e^dh=\rho^*g$. Its coordinate dictionary and whole naturality square give
+$x_e^dT(h)=\sigma(T(g))$, with $T(g)\in J\cap\widehat C_A^d$.
+Actual exceptional-power cancellation identifies $T(h)$ with the unique
+$N_d(T(g))$. This is one of the generators of the entire normalized-member
+ideal, which equals the actual source formal strict ideal. Extending the
+analytic span gives the claimed inclusion.
+\end{proof}
+
+\begin{theorem}[Whole original analytic normalized-member generation and exact Taylor extension]
+\label{hir:actual-analytic-normalized-member-finite-generation}
+\uses{hir:actual-analytic-quotient-formal-strict-generators,hir:actual-analytic-normalized-member-formal-inclusion,hir:actual-original-analytic-monic-vertex-basis}
+\lean{Hironaka.HironakaActualAnalyticStrictGenerators.exists_actual_analytic_normalized_member_generators}
+\leanok
+Under the explicit reduced-formal-vertex centre compatibility above, there
+is an internally constructed finite family $(h_\alpha)_{\alpha\in V}$ with
+\[
+ \mathcal N_A(I)=(h_\alpha)_{\alpha\in V},\qquad
+ T(\mathcal N_A(I))S=J^{\mathrm{str}}.
+\]
+\end{theorem}
+\begin{proof}
+Choose the genuine analytic families from the first theorem. Each
+$h_\alpha$ is an actual generator of $\mathcal N_A(I)$, using its
+constructed $g_\alpha$ and its literal whole centre-power membership.
+Consequently $(T(h_\alpha))\subseteq T(\mathcal N_A(I))S$.
+The first theorem identifies the left side with the entire formal strict
+ideal; the preceding lemma gives the reverse inclusion. Hence the Taylor
+extension of $\mathcal N_A(I)$ equals that of $(h_\alpha)$. Injectivity of
+whole original ideal extension reflects this equality back to $R$.
+The theorem identifies an independently defined whole analytic
+normalized-member ideal; identifying it with a geometric strict closure
+requires its own argument. Deriving the stated formal centre compatibility
+for all permissible centres, or convergence of the canonical reduced formal
+members, is not asserted here.
+\end{proof}
