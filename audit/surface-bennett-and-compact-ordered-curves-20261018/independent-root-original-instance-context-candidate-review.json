@@ -1,0 +1,40 @@
+{
+  "status": "PASS_BOUNDED_ORIGINAL_INSTANCE_CONTEXT_CANDIDATE_REVIEW",
+  "reviewer": "root independent of publisher",
+  "entire_affected_mathematical_sources_read": true,
+  "candidate_context_file_sha256": "ec34404f5f99aef31aa664c3d6b6ccd220232871579ae91e334db870a26bfdae",
+  "first_strict_entire_dag_evidence_sha256": "308e5b0faaf044f54ecbafb57aca1a8775e7d5dc5e8f83c5bec80ab8489a0937",
+  "first_strict_comparison_sha256": "f432f8e0969c30430c038585766529f5bf94dfc5534dfa91962a645017a20d10",
+  "first_strict_counts": {
+    "actual_roots_per_side": 315,
+    "types_exact": 315,
+    "entire_values_exact": 313,
+    "whole_proof_mismatches": 2,
+    "missing_or_extra_roots": 0
+  },
+  "mathematical_judgment": "Both unchanged dehomogenization proofs use the genuine normal-unit germ equivalence, finite actual homogeneous polynomial evaluation and true exceptional reciprocal. The only proposed context changes select the existing original SubsemiringClass projection at two declaration-local elaboration sites. They do not supply or weaken a mathematical premise and do not change proof/type text, imports or create an instance. This is restoration of observed native elaboration, subject to full exact recapture.",
+  "records": [
+    {
+      "module": "Hironaka.Resolution.HironakaActualNormalUnitCoordinateChange",
+      "declaration": "actualNormalUnitGermEquiv_dehomogenization",
+      "source_before_sha256": "45c37711ddcde95e038359868f023b02f2a217312c4a0152f3c55b76faedc47b",
+      "proposed_source_sha256": "b75b904741899ecd75afbdb0db64154847b42fedfe392dd93a12c95b46b4c758",
+      "prefix_reversal_restores_entire_precontext_source": true,
+      "declaration_local_existing_projection_only": true,
+      "new_instances_or_type_or_proof_body_edits": false
+    },
+    {
+      "module": "Hironaka.Resolution.HironakaActualNormalUnitAnalyticCoefficients",
+      "declaration": "actualNormalUnitGermEquiv_analytic_dehomogenization",
+      "source_before_sha256": "0f8e7a94b291921dbf2cdae6ce3f7aacce2de7156ec0e7975211ecae07b25c8a",
+      "proposed_source_sha256": "0ae8312813990435be177deb5f0206319c396423733f499d2b609fc0b193eb05",
+      "prefix_reversal_restores_entire_precontext_source": true,
+      "declaration_local_existing_projection_only": true,
+      "new_instances_or_type_or_proof_body_edits": false
+    }
+  ],
+  "permitted_next_step": "Apply only reviewed two declaration-local prefixes via recorded source replay; reverse prefixes to recover entire precontext bytes; rebuild affected consumers; unfiltered ALL315 fulltype+ENTIREvalue recapture with unchanged frozen tools.",
+  "final_strict_expression_gate": "PENDING_FULL_RECAPTURE_NO_WAIVER_ALLOWED",
+  "fresh_kernel": "PENDING_AFTER_FINAL_STRICT_PASS",
+  "publication": "PENDING_ALL_REQUIRED_GATES"
+}

@@ -1,0 +1,118 @@
+\section{Actual derivative ideals under maps of different dimensions}
+
+We prove the genuine chain-rule inclusion on entire holomorphic germ ideals for
+arbitrary source and target dimensions. This is a necessary first derivative
+layer of smooth functoriality. The converse under a submersion, its coefficient
+and homogenization consumers, and the selected canonical tower remain open.
+
+\begin{lemma}\label{hir:crossdim-chart-map}
+Let $f:Y^m\to X^n$ be holomorphic and let $e'$ and $e$ be actual atlas charts
+at $y$ and $f(y)$. The real chart map $T=e\circ f\circ(e')^{-1}$ is holomorphic
+on a neighbourhood of $e'(y)$.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.eventually_differentiableAt_chartMap}
+\leanok
+\end{lemma}
+\begin{proof}
+The actual chart inverse is continuous and holomorphic near $e'(y)$ and sends
+that point to $y$. The original holomorphic map sends $y$ to $f(y)$.
+Continuity gives a neighbourhood contained in the true source-chart target
+and whose image under $f\circ(e')^{-1}$ stays in the true target-chart source.
+On that neighbourhood, compose the two holomorphic atlas maps with the original
+map. The ordinary differentiability characterization in the model vector
+spaces proves the claimed holomorphicity, with no same-dimension hypothesis.
+\end{proof}
+
+\begin{definition}\label{hir:crossdim-chain-coeff}
+For $v\in\mathbb C^m$ and $j\in\{1,\ldots,n\}$, set
+$c_j(p)=(DT(e'(p))v)_j$ using the actual original chart map.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.chainCoeff}
+\leanok
+\uses{hir:crossdim-chart-map}
+\end{definition}
+\begin{proof}
+This formula uses the actual Frechet derivative of the genuine map between
+the original model spaces and coordinate evaluation in its target. Its source
+and target dimensions are independent; no matrix or transport certificate is input.
+\end{proof}
+
+\begin{lemma}\label{hir:crossdim-chain-holomorphic}
+Every actual coefficient $c_j$ is a holomorphic germ at $y$.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.holomorphicAt_chainCoeff}
+\leanok
+\uses{hir:crossdim-chart-map,hir:crossdim-chain-coeff}
+\end{lemma}
+\begin{proof}
+Choose a genuine open neighbourhood on which $T$ is holomorphic, using the
+preceding lemma. The holomorphic derivative theorem makes $z\mapsto DT(z)v$
+holomorphic there. Compose with complex linear coordinate evaluation in
+$\mathbb C^n$ and the original source atlas chart. This proves actual scalar
+germ holomorphicity, including an empty target coordinate family when $n=0$.
+\end{proof}
+
+\begin{lemma}\label{hir:crossdim-chain-rule}
+For every original holomorphic germ $a$ at $f(y)$ and $v\in\mathbb C^m$,
+near $y$ one has
+$\partial^{e'}_v(a\circ f)=\sum_{j=1}^n c_j\, (\partial^e_j a)\circ f$.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.chartDeriv_comp_eventuallyEq_sum}
+\leanok
+\uses{hir:crossdim-chart-map,hir:crossdim-chain-coeff}
+\end{lemma}
+\begin{proof}
+On one true neighbourhood all original charts and the original germ are
+holomorphic and their arguments stay in the actual chart domains.
+The germ $(a\circ f)\circ(e')^{-1}$ equals
+$(a\circ e^{-1})\circ T$ there, by the actual inverse identity of $e$.
+Apply the genuine Frechet chain rule. Expand the true vector $DT(e'(p))v$
+in the standard finite coordinate basis of $\mathbb C^n$ and use complex
+linearity of the derivative of $a\circ e^{-1}$. The resulting finite sum
+is exactly the stated formula for the original chart derivatives.
+\end{proof}
+
+\begin{lemma}\label{hir:crossdim-pulled-derivative-generator}
+Every actual member $a$ of the derivative ideal $\mathcal D(I)_{f(y)}$
+pulls back to a genuine germ of $f^*\mathcal D(I)$ at $y$.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.isInSpanAt_comp_of_mem_derivIdeal}
+\leanok
+\end{lemma}
+\begin{proof}
+Derivative-ideal membership itself gives holomorphicity of $a$ at the original
+point. Compose with the actual holomorphic map. The defining genuine pullback
+family contains $a\circ f$ with coefficient one, which supplies the required
+span relation. No generator equality is an input.
+\end{proof}
+
+\begin{theorem}\label{hir:crossdim-derivative-inclusion}
+For any actual ideal $I$ of holomorphic germs,
+$\mathcal D(f^*I)\subseteq f^*\mathcal D(I)$.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.derivIdeal_pullback_le}
+\leanok
+\uses{hir:crossdim-chain-holomorphic,hir:crossdim-chain-rule,hir:crossdim-pulled-derivative-generator}
+\end{theorem}
+\begin{proof}
+The original pullback ideal is the span of the actual functions $a\circ f$
+with $a\in I$. Those original germs already belong to $\mathcal D(I)$, so
+all germs of $f^*I$ satisfy the inclusion. For a chart derivative of an
+arbitrary actual pullback member, write that member as a real finite
+holomorphic combination of those generators. The actual product rule
+separates derivatives of coefficients and derivatives of pulled-back
+original generators. The first terms use $I\subseteq\mathcal D(I)$.
+For the second terms apply the preceding actual chain rule, whose genuine
+coefficients are holomorphic. Each original chart derivative of $a$ is
+an actual member of $\mathcal D(I)$. Actual finite-sum, product and germ
+locality properties conclude the inclusion on the whole ideal.
+\end{proof}
+
+\begin{theorem}\label{hir:crossdim-iterated-inclusion}
+For every natural $r$, $\mathcal D^r(f^*I)\subseteq f^*\mathcal D^r(I)$.
+\lean{Hironaka.HironakaSmoothPullbackDerivatives.iterDerivIdeal_pullback_le}
+\leanok
+\uses{hir:crossdim-derivative-inclusion}
+\end{theorem}
+\begin{proof}
+Induct on $r$. At zero both sides are the literal original pullback ideal.
+For the successor, derivative monotonicity applies to the actual induction
+inclusion. Apply the preceding one-step theorem to the real original
+iterated derivative ideal, whose members are holomorphic by the actual
+derivative-ideal construction. Compose these inclusions. No higher
+invariant or canonical functoriality identity is assumed.
+\end{proof}

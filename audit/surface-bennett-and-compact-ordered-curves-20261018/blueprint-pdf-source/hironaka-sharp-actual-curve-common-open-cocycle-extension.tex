@@ -1,0 +1,86 @@
+\section{Padding-independent cocycles on a genuine common open}
+
+Three retained local recipes can be compared on ANY actual open contained
+in their three original base opens. Every map below is constructed from
+the actual recipes; no arbitrary sharp endpoint is assigned centres.
+A cocycle on that fixed common open is distinct from compatibility with
+restricting a previously chosen pairwise-intersection map. The latter and
+geometric manifold descent remain separate obligations.
+
+\begin{lemma}[The actual common-open base maps compose]
+\label{hir:sharp-actual-curve-common-open-base-cocycle}
+\uses{hir:sharp-actual-curve-overlap-original-data}
+\lean{Hironaka.HironakaSharpActualCurveCommonOpenCocycle.commonOpenBase_trans}
+\leanok
+For three actual opens $U_1,U_2,U_3$ and a common open $O\subset U_i$,
+let $\Phi_{ij}:A_i\to A_j$ be the genuine common-open base maps between
+the nested presentations of $O$. Then
+$\Phi_{23}\circ\Phi_{12}=\Phi_{13}$ as genuine biholomorphisms.
+\end{lemma}
+\begin{proof}
+Each map is the actual nested-open biholomorphism to $O$ followed by the
+inverse nested-open biholomorphism for the other chart. The real inverse
+laws cancel the two maps for $U_2$. Equivalently, at every actual nested
+point both composite and direct map have the same underlying point of $X$;
+their subtype membership proofs express the same genuine point. Thus their
+forward functions agree, and genuine biholomorphism extensionality gives
+the claimed equality. No base cocycle is supplied as a hypothesis.
+\end{proof}
+
+\begin{theorem}[True finite comparisons compose independently of their padding cuts]
+\label{hir:sharp-actual-curve-common-cut-padding-cocycle}
+\uses{hir:sharp-actual-terminal-recipe-padding-independence,hir:sharp-actual-stagewise-tower-comparison-unique,mc:tower-isomorphism-basic}
+\lean{Hironaka.HironakaSharpActualCurveCommonOpenCocycle.paddedHistory,Hironaka.HironakaSharpActualCurveCommonOpenCocycle.terminal_padding_comparison_cocycle}
+\leanok
+Fix three actual prefixes and tails, with genuine base biholomorphisms
+$\Phi_{12},\Phi_{23}$. Suppose real stagewise comparisons of their actual
+identity-empty-padded full histories are given for pairs $12,23,13$,
+where the third base map is the literal composite. The three common tail
+cuts may differ and each bounds both of its actual tail lengths. Then the
+actual terminal maps satisfy $e_{23}\circ e_{12}=e_{13}$.
+\end{theorem}
+\begin{proof}
+If the three cuts are $L_{12},L_{23},L_{13}$, take their genuine common size
+$N=L_{12}+L_{23}+L_{13}$. Extend the first comparison by the actual empty
+identity towers of length $L_{23}+L_{13}$, the second by length
+$L_{12}+L_{13}$, and the third by length $L_{12}+L_{23}$. True empty-tail
+concatenation and natural-number subtraction identify all three extended
+comparisons with the same fixed histories padded to $N$. Their terminal
+maps have not changed. Actual stagewise composition gives a genuine
+comparison of the first and third fixed histories over the literal composite
+base map. Actual fixed-history comparison uniqueness identifies its terminal
+biholomorphism with the independently given third map. No empty position
+has been deleted and no canonicality or compressed history is assumed.
+\end{proof}
+
+\begin{theorem}[Retained original local recipes construct the common-open cocycle]
+\label{hir:sharp-actual-curve-retained-common-open-cocycle}
+\uses{hir:sharp-actual-curve-common-open-base-cocycle,hir:sharp-actual-curve-common-cut-padding-cocycle,hir:sharp-actual-curve-overlap-terminal-recipes}
+\lean{Hironaka.HironakaSharpActualCurveCommonOpenCocycle.exists_actual_common_open_recipe_cocycle}
+\leanok
+Let the original positive-dimensional ambient manifold have a closed smooth
+pure curve $W$, original ordered SNC family $E$, and density of the complement
+of that whole family in $W$. On each of three actual base opens choose an
+actual computed-FIRST blowup followed by a literal terminating difference
+recipe. For ANY genuine common open $O$ and ANY three pairwise common cuts,
+construct the real restricted padded pair comparisons independently. Their
+actual terminal maps satisfy the cocycle, with all original and empty positions
+retained. No matching centres, source TESTs, endpoint maps or cocycle certificate
+are additional inputs.
+\end{theorem}
+\begin{proof}
+Apply the genuine arbitrary-common-open overlap producer separately to the
+three pairs, using the same actual $O$ and their respective cuts. It internally
+constructs all restricted original data and TESTs, independently computed
+centre matches, literal restricted recipes, exact retained lengths, terminal
+difference emptiness and genuine padding. Thus each pair has its unique
+actual full stagewise comparison on the stated real histories. Rewrite only
+the actual base composition by the first lemma. The preceding theorem applies
+to these exact three comparisons, even though their padding cuts differ,
+and proves the terminal-map cocycle. All three comparison maps were produced
+from the original recipes. This assertion holds in particular after choosing
+$O=U_1\cap U_2\cap U_3$. It does not yet identify these independently constructed
+common-open maps with restrictions of pairwise-intersection maps; that genuine
+restriction-and-flattening comparison remains necessary before geometric
+descent.
+\end{proof}

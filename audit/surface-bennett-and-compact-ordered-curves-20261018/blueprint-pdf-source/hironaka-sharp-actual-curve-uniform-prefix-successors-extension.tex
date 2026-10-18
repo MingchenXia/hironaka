@@ -1,0 +1,83 @@
+\section{Actual successor blowups of uniform local histories}
+
+Here the uniform prefix retains every actual blowup position, including the
+identity blowups of the empty centre used after a finite local history ends.
+All equalities below are equalities of the WHOLE dependent endpoint--tower
+pair. They do not replace a history by a compressed or merely isomorphic one.
+
+\begin{lemma}[True iterated head packets and the original zeroth stage]
+\label{hir:sharp-actual-curve-uniform-prefix-head-successor}
+\uses{hir:tower-split,hir:sharp-actual-curve-uniform-prefix-padding}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.headPacket_head,Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.uniformPrefix_zero,Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.uniformPrefix_head_one}
+\leanok
+For ANY actual finite blowup history $T$, taking its head after removing $j$
+last positions, and then removing $r$, gives literally its head packet after
+removing $j+r$. The actual zeroth uniform prefix is the original ambient
+with its reflexive history. Removing the last position of the actual
+$(k+1)$st uniform prefix gives literally the $k$th uniform prefix.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower, with the numbers of removed positions arbitrary.
+For a reflexive tower every head packet is reflexive. For an actual last
+blowup, removing zero changes nothing; removing a successor reduces to the
+previous tower and one fewer removed position, including its actual stage.
+The same recursion at the actual entire length proves the zeroth assertion.
+Apply the iterated-head identity to the defining head of the tower obtained
+by appending $k+1$ actual empty identity blowups. Removing its final position
+literally leaves the tower with $k$ such actual empty successors. The complete
+endpoint and tower pair is retained throughout.
+\end{proof}
+
+\begin{theorem}[Actual next centre and blowup arrow are internally constructed]
+\label{hir:sharp-actual-curve-uniform-prefix-actual-next-blowup}
+\uses{hir:sharp-actual-curve-uniform-prefix-head-successor,hir:sharp-actual-curve-uniform-prefix-padding}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.uniformPrefix_successor}
+\leanok
+For ANY actual finite history $T$ and every $k$, there exist a centre in the
+actual $k$th uniform stage and an actual map from stage $k+1$ to that stage,
+with genuine \texttt{IsBlowupAlong}, such that the entire stage-$k+1$ history
+is literally the actual successor of the stage-$k$ history by this centre
+and map. The whole projection is the preceding projection composed with
+this actual blowup arrow. No centre, next arrow or blowup certificate is
+an input.
+\end{theorem}
+\begin{proof}
+The length of the actual next prefix is $k+1$, hence is positive. Case
+analysis on this actual tower therefore rules out the reflexive constructor
+and exposes its actual last centre, map and blowup proof. Its entire head
+packet is the actual previous uniform prefix by the preceding lemma.
+Transport the WHOLE existential proposition on dependent endpoint--tower
+pairs along that exact equality. This retains the original step, centre,
+map and blowup proof, and proves literal tower equality. The real projection
+recursion for this actual last step gives the asserted projection square.
+No choice of an unrelated endpoint or external factorization is involved.
+\end{proof}
+
+\begin{theorem}[Literal terminal histories and genuine eventual empty successors]
+\label{hir:sharp-actual-curve-uniform-prefix-eventual-empty}
+\uses{hir:sharp-actual-curve-uniform-prefix-padding,hir:sharp-actual-identity-empty-padding,hir:sharp-actual-curve-uniform-prefix-head-successor}
+\lean{Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.uniformPrefix_of_length_le,Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.uniformPrefix_after_length,Hironaka.HironakaSharpActualCurveUniformPrefixSuccessors.uniformPrefix_after_length_successor}
+\leanok
+If $k$ is at least the actual length of $T:X\leftarrow Y$, its actual uniform
+prefix packet is literally $(Y,T\mathbin{+}\mathrm{Empty}^{k-|T|})$. In
+particular its stage at $|T|+r$ is the SAME original terminal ambient and
+the original full history followed by exactly $r$ actual empty identity
+blowups. Its next step in these identifications has centre empty and map
+identity, with the original genuine empty-centre blowup proof.
+\end{theorem}
+\begin{proof}
+First induct on the number of positions removed from an actual empty
+suffix, keeping its length arbitrary. Removing zero leaves that entire
+suffix; removing a successor requires a nonzero suffix and its actual last
+empty identity blowup is removed by the defining split recursion. The
+induction leaves exactly the original suffix length minus the number
+removed, with the SAME terminal ambient. Apply this to the defining
+uniform prefix, whose suffix has length $k$ and from which exactly $|T|$
+positions are removed. The assumed inequality justifies the recursion.
+Substitute $k=|T|+r$ and use actual natural subtraction. At $r+1$ unfold the
+last actual empty-tail constructor: it is literally the identity map,
+empty centre and genuine original empty-centre blowup. Every empty position
+is present. This is local eventual stationarity with the actual local
+length; no uniform global bound, overlap-arrow descent or global blowup
+sequence is concluded here.
+\end{proof}

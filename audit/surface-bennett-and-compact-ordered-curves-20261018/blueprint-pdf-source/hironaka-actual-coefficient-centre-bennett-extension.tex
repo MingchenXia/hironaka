@@ -1,0 +1,90 @@
+\section{Bennett comparison for genuine coefficient-compatible coordinate centres}
+
+Let $I\subset\mathcal O_{\mathbb C^{d+t},0}$ be an original analytic
+ideal and $P$ genuine analytic monic vertex data for its entire original
+Taylor ideal. Write $w_a$ for the normal weight of the same vertex $a$,
+and $c_{a\gamma}$ for its actual analytic normal coefficient on the
+actual common tangent domain $U$. The coefficient compatibility
+condition used here is the original geometric inclusion
+\[
+ U\cap\mathbb C^d\subset
+ \operatorname{cosupp}(c_{a\gamma},w_a-|\gamma|)
+ \qquad (|\gamma|<w_a).
+\]
+It is a condition on these actual coefficient functions and their
+original orders, not on a transformed ideal or an HS value.
+
+\begin{theorem}[All original normalized HS orders decrease under actual coefficient compatibility]
+\label{hir:actual-coefficient-centre-normalized-bennett}
+\uses{hir:actual-vertex-coefficient-cosupport-axis-translated-hs,hir:actual-every-translated-normal-vertex-hs-bound}
+\lean{Hironaka.HironakaActualCoefficientCentreBennett.hilbertSamuelValue_actual_coefficient_centre_normalized_le}
+\leanok
+Assume the displayed original coefficient compatibility for $P$. For
+every actual normal pivot $j$, every actual blowup-chart parameter $b$
+and every order $\ell$, the unchanged original HS value of the actual
+normalized ideal in that chart is at most the original HS value of $I$.
+\end{theorem}
+\begin{proof}
+The actual original coefficient-cosupport theorem first puts every
+same vertex generator in its normal ideal power. Its canonical genuine
+exceptional quotient and entire zero-axis image then put the entire
+dehomogenized normal symbol ideal inside the zero-axis image of the
+same actual normalized ideal. Original axis specialization and ideal
+antitonicity bound the normalized HS value by the dehomogenized one.
+The true normal-unit coordinate equivalence identifies the whole latter
+ideal with the whole translated normal vertex ideal at the vector whose
+pivot is one and whose other entries are the actual normal entries of
+$b$. The preceding translated-vertex HS theorem bounds this last
+original HS value by that of $I$. Compose these inequalities at the
+arbitrary original order $\ell$.
+\end{proof}
+
+\begin{theorem}[Intrinsic geometric Bennett in normal codimension at least two]
+\label{hir:actual-coefficient-centre-geometric-bennett-at-least-two}
+\uses{hir:actual-coefficient-centre-normalized-bennett,hir:actual-normal-geometric-strict-normalized-inclusion}
+\lean{Hironaka.HironakaActualCoefficientCentreBennett.hilbertSamuelAt_actual_coefficient_centre_strict_le_of_two_le}
+\leanok
+Let $t\ge2$, let $W\subset\mathbb C^{d+t}$ be any subset, and let
+$I$ be its entire original vanishing germ ideal at zero. Suppose the
+same genuine vertex data $P$ for $I$ satisfy the displayed original
+coefficient compatibility. For every actual pivot and parameter, the
+original intrinsic HS of the original geometric strict transform at
+zero is at most the original intrinsic HS of $W$ at zero, at every order.
+\end{theorem}
+\begin{proof}
+The actual normal chart has its exceptional hyperplane inside its true
+geometric exceptional locus, because a different genuine normal
+direction gives a nonzero kernel vector for the actual differential.
+Every actual normalized generator therefore vanishes on the genuine
+geometric strict transform by its true exceptional product identity
+and continuity on the closure. Entire ideal inclusion and original HS
+antitonicity bound the intrinsic strict-transform HS by the normalized
+HS. Apply the preceding normalized comparison to the same original
+vanishing ideal. The original model-zero whole-stalk dictionary
+identifies its HS value with the original intrinsic HS of $W$.
+\end{proof}
+
+\begin{theorem}[Intrinsic coefficient-compatible coordinate Bennett includes the divisor case]
+\label{hir:actual-coefficient-centre-geometric-bennett-all-normal-codimensions}
+\uses{hir:actual-coefficient-centre-geometric-bennett-at-least-two,hir:actual-normal-blowup-codimension-one-identity}
+\lean{Hironaka.HironakaActualCoefficientCentreBennett.hilbertSamuelAt_actual_coefficient_centre_strict_le}
+\leanok
+The preceding intrinsic geometric inequality holds for every actual
+normal pivot, including normal codimension one, with precisely the
+same original coefficient compatibility assumptions.
+\end{theorem}
+\begin{proof}
+If $t=1$, the actual normal chart is the identity on the whole ambient
+model and its actual geometric exceptional locus is empty. Its
+geometric strict transform is therefore exactly the closure of $W$.
+The original entire vanishing ideal is unchanged by closure, so the
+two intrinsic HS values are equal at every order. Otherwise an actual
+normal pivot implies $t>0$, and hence $t\ge2$. Apply the preceding
+intrinsic comparison. The case $t=0$ admits no normal pivot.
+\end{proof}
+
+These statements retain genuine original coefficient compatibility.
+Constancy of the original HS values along a smooth centre does not
+force that condition for an arbitrary chosen monic vertex family.
+Producing an actual compatible analytic presentation from the original
+centre geometry is a separate assertion in general Bennett.

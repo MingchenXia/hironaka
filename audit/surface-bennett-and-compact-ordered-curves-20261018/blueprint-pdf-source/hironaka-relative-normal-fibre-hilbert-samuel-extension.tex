@@ -1,0 +1,137 @@
+\section{The whole original fibre Hilbert--Samuel dictionary}
+
+Write $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+$J$ for the actual normal-coordinate ideal, and $M$ for the whole image of
+$\mathfrak m_B$ under the actual tangent pullback. The genuine original
+fibre ideal of an original ambient germ ideal $I$ is $I+M$. The objective
+is the existing whole local-ring Hilbert--Samuel quotient in
+Bierstone--Milman's ``Use of the Hilbert--Samuel function''. The argument
+below identifies its entire sequence on the one original-input open from
+the uniform relative ranks; it does not assert descent after blowing up.
+
+\begin{definition}[The genuine whole original base-fibre ideal]
+\label{hir:relative-normal-original-base-fibre-ideal}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalFibreHilbertSamuel.originalBaseMaximalIdeal}
+\leanok
+\uses{hir:relative-normal-original-split}
+Let $M$ be the whole ideal image of $\mathfrak m_B$ under the original
+tangent pullback. The fibre ideal of an arbitrary original $I$ is $I+M$.
+All quotients use the original whole germ ring, its actual multiplication,
+and its original complex scalar structure.
+\end{definition}
+
+\begin{lemma}[The actual split-coordinate maximal ideal]
+\label{hir:relative-normal-original-fibre-maximal-ideal}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalFibreHilbertSamuel.baseMaximalIdeal_sup_normalIdeal}
+\leanok
+\uses{hir:relative-normal-original-base-fibre-ideal,hir:relative-normal-whole-hadamard}
+The literal maximal ideal of $R$ is exactly $M+J$.
+\end{lemma}
+\begin{proof}
+Every base germ in $\mathfrak m_B$ evaluates to zero at the original base
+origin, and its true tangent pullback has the same value at the ambient
+origin. Therefore $M\subseteq\mathfrak m_R$. Every normal coordinate
+also evaluates to zero, so $J\subseteq\mathfrak m_R$.
+Conversely, for $g\in\mathfrak m_R$, the actual relative holomorphic
+Hadamard decomposition writes
+$g=\operatorname{tangentPullback}(\operatorname{planeTrace}(g))+
+\sum_i z_i h_i$, with the sum over the original normal coordinates.
+The actual plane trace has the same origin value as $g$, hence belongs
+to $\mathfrak m_B$. Its true tangent pullback therefore belongs to $M$.
+Every normal-coordinate summand belongs to $J$. Thus $g\in M+J$.
+\end{proof}
+
+\begin{lemma}[All actual fibre maximal-ideal powers are the same normal-power quotients]
+\label{hir:relative-normal-original-fibre-maximal-power}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalFibreHilbertSamuel.fibreMaximalIdeal_power_eq}
+\leanok
+\uses{hir:relative-normal-original-fibre-maximal-ideal}
+For every original whole $I$ and every $s\in\mathbb N$,
+\[
+ I+M+\mathfrak m_R^s=I+M+J^s.
+\]
+Thus the existing whole Hilbert--Samuel quotient of the genuine fibre
+ideal $I+M$ at order $\ell$ is literally the original quotient
+$R/(I+M+J^{\ell+1})$.
+\end{lemma}
+\begin{proof}
+Let $\pi:R\to R/M$ be the genuine whole quotient map. The images
+of $M+J$ and $J$ under $\pi$ agree, because the image of $M$ is zero.
+Ideal image commutes with taking powers, so the images of $(M+J)^s$
+and $J^s$ agree for every $s$, including zero. The inverse image of
+the image of any whole ideal $K$ under this surjective quotient map is
+exactly $K+M$. Taking inverse images therefore gives
+$M+(M+J)^s=M+J^s$. Substitute the preceding actual identity
+$\mathfrak m_R=M+J$ and add the same whole original ideal $I$.
+This proves precisely the asserted equality, with $M$ retained on both
+sides. For positive base dimension it does not identify the ambient
+quotient by $I+\mathfrak m_R^s$ with a normal-power or fibre quotient;
+that quotient retains mixed tangent degrees.
+\end{proof}
+
+\begin{theorem}[Actual residue tensor is the whole original fibre-power algebra]
+\label{hir:relative-normal-original-fibre-tensor-algebra}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalFibreHilbertSamuel.originalNormalFibreTruncationAlgEquiv,Hironaka.HironakaRelativeNormalFibreHilbertSamuel.originalNormalFibreTruncationAlgEquiv_tmul_mk,Hironaka.HironakaRelativeNormalFibreHilbertSamuel.originalNormalFibreTruncationAlgEquiv_symm_mk}
+\leanok
+\uses{hir:relative-normal-original-base-fibre-ideal,hir:relative-normal-nearby-complete-fibre-power-dimensions}
+Using the genuine base residue evaluation $B\to\mathbb C$, there is a
+$\mathbb C$-algebra isomorphism
+\[
+ \mathbb C\otimes_B R/(I+J^s)\ \simeq_{\mathbb C}\ R/(I+M+J^s).
+\]
+It maps every pure original numerator $c\otimes[g]$ to the actual class
+$[cg]$, where $c$ is the original constant germ. Its inverse maps every
+original class $[g]$ to $1\otimes[g]$.
+\end{theorem}
+\begin{proof}
+The proposed forward map is induced by multiplication of the two actual
+maps into the whole original quotient: complex constant germs and the
+original quotient of $R$. It is balanced over $B$. Indeed, for $b\in B$,
+$b-b(0)$ belongs to $\mathfrak m_B$; its true tangent pullback therefore
+belongs to $M$ and is zero in the target. Thus the base action in that
+quotient agrees with actual origin evaluation. The tensor universal
+property gives the forward unital algebra map.
+For the inverse, first map $g\in R$ to $1\otimes[g]$. The map kills
+$I+J^s$ by the actual original quotient, and it kills every $bg$ with
+$b\in\mathfrak m_B$ by tensor balancing and $b(0)=0$. It therefore
+kills the whole generated image ideal $M$ and descends to the asserted
+whole fibre-power quotient. Both maps preserve the actual complex constants.
+Their composition on every original quotient numerator is the identity.
+On a pure tensor $c\otimes[g]$, the other composition is
+$1\otimes[cg]=c\otimes[g]$, because evaluation of the constant germ is
+$c$. Pure tensors generate the tensor algebra additively, so this second
+composition is also the identity. These two identities prove the stated
+algebra isomorphism and both numerator formulas.
+\end{proof}
+
+\begin{theorem}[One original-input open gives the entire whole fibre Hilbert--Samuel sequence]
+\label{hir:relative-normal-original-nearby-whole-fibre-hilbert-samuel}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalFibreHilbertSamuel.exists_original_nearby_whole_fibre_hilbertSamuel_open}
+\leanok
+\uses{hir:relative-normal-original-fibre-maximal-power,hir:relative-normal-original-fibre-tensor-algebra,hir:relative-normal-nearby-complete-fibre-power-dimensions}
+Original coherence alone supplies one actual open $U$ meeting every origin
+neighbourhood and one sequence $r(q)$, such that for every $a\in U$ and
+every $\ell$, the EXISTING whole Hilbert--Samuel value of the genuine
+original fibre ideal $I_a+M$ equals
+\[
+ H_{R/(I_a+M)}(\ell)=\sum_{q<\ell+1}r(q).
+\]
+The same $U$ works for the entire sequence. No geometric descent or
+singular-resolution driver is a conclusion of this theorem.
+\end{theorem}
+\begin{proof}
+The original-input uniform-rank producer gives the true finite complex
+dimension of every residue tensor fibre at every normal order, all on
+its same actual open. Apply the preceding genuine fibre tensor algebra
+isomorphism at $s=\ell+1$. Its underlying complex linear isomorphism
+retains that dimension. The preceding whole ideal-power equality then
+identifies its target with the existing whole maximal-ideal quotient
+that defines the original fibre ideal's Hilbert--Samuel value. Taking
+complex dimensions proves the equality for every $\ell$, with no new
+open, denominator, branch, or rank certificate.
+\end{proof}

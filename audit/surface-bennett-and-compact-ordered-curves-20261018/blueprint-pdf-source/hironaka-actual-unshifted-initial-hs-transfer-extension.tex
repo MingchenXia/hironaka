@@ -1,0 +1,72 @@
+\section{The actual translated-initial comparison in the original unshifted coordinate ring}
+
+\begin{theorem}[The whole unshifted original Taylor extension preserves every intrinsic Hilbert--Samuel value]
+\label{hir:actual-unshifted-original-formal-hs-transfer}
+\uses{hir:actual-original-formal-entire-hs-transfer}
+\lean{Hironaka.HironakaActualUnshiftedInitialHSTransfer.hilbertSamuelValue_eq_actual_unshifted_formal_extension}
+\leanok
+For every ideal $I$ of the original analytic germ ring on the actual
+$n$-dimensional model and every order $\ell$, its intrinsic Hilbert--Samuel
+value equals that of the entire formal extension under the same actual
+unshifted Taylor homomorphism $T$.
+\end{theorem}
+\begin{proof}
+The proved original whole-quotient Taylor algebra equivalence gives this
+identity on the unchanged original model of dimension $0+n$. Transport
+that theorem and the actual original Taylor homomorphism along the true
+dimension equality $0+n=n$. This is exactly the actual unshifted Taylor
+homomorphism already defined on the original model. Both whole ideals
+and their actual complex quotient actions are transported together, so
+the quotient dimensions and the entire extension in the statement are
+the same original quantities.
+\end{proof}
+
+\begin{definition}[Actual translated finite initial ideals in the original coordinate ring]
+\label{hir:actual-unshifted-translated-initial-ideal}
+\lean{Hironaka.HironakaActualUnshiftedInitialHSTransfer.actualUnshiftedTranslatedPolynomialEval,Hironaka.HironakaActualUnshiftedInitialHSTransfer.actualUnshiftedTranslatedInitialIdeal}
+\leanok
+For the true vector $p$, evaluate a finite complex polynomial at the
+original coordinate germs $x_i+p_i$. For an actual formal ideal $K$,
+let its translated initial ideal be the span of these evaluations of the
+unchanged finite actual initial vertex polynomials of $K$. The whole
+original analytic ideal is independent of the Hilbert--Samuel order.
+\end{definition}
+
+\begin{theorem}[The entire actual translated analytic ideal has its unchanged formal extension]
+\label{hir:actual-unshifted-translated-initial-formal-extension}
+\uses{hir:actual-unshifted-translated-initial-ideal}
+\lean{Hironaka.HironakaActualUnshiftedInitialHSTransfer.actualUnshiftedTranslatedInitialIdeal_formal_extension}
+\leanok
+The whole Taylor extension of this actual analytic ideal is precisely
+the existing actual translated initial formal ideal of $K$ at $p$.
+\end{theorem}
+\begin{proof}
+The genuine Taylor coordinate dictionary sends the original coordinate
+germs to the same actual formal variables, and its complex algebra map
+preserves the constants $p_i$. Polynomial algebra extensionality therefore
+identifies both entire finite polynomial evaluation maps. Ideal image
+commutes with the span of their same finite vertex family. This proves
+both directions of the entire ideal equality.
+\end{proof}
+
+\begin{theorem}[All translated-initial values are bounded by the unchanged actual original values]
+\label{hir:actual-unshifted-translated-initial-all-hs}
+\uses{hir:actual-unshifted-original-formal-hs-transfer,hir:actual-unshifted-translated-initial-formal-extension,hir:actual-translated-initial-all-order-hs-dominance}
+\lean{Hironaka.HironakaActualUnshiftedInitialHSTransfer.hilbertSamuelValue_actual_unshifted_translated_initial_le,Hironaka.HironakaActualUnshiftedInitialHSTransfer.hilbertSamuelValue_actual_original_translated_initial_le}
+\leanok
+For every actual formal ideal $K$, every $p$ and every $\ell$, the actual
+translated analytic initial ideal has value at most the genuine formal
+value of $K$. In particular, for $K=T(I)$, it has value at most the
+unchanged intrinsic original value $H_I(\ell)$, for every original
+analytic ideal $I$.
+\end{theorem}
+\begin{proof}
+Use the first theorem to identify the analytic value with that of its
+whole actual formal extension. The preceding entire ideal dictionary
+identifies this extension with the existing translated formal initial
+ideal. The already proved genuine translated-initial comparison bounds
+its value by that of $K$. In the case $K=T(I)$, apply the first theorem
+again to identify the latter value with the original analytic value.
+No comparison, coefficient convergence, or ideal-identification premise
+is supplied by the caller.
+\end{proof}

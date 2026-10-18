@@ -1,0 +1,806 @@
+\section{Remmert's proper mapping theorem}
+\label{sec:remmert}
+
+This section proves the Remmert proper mapping theorem and the Remmert--Stein extension theorem by the
+simultaneous induction on the dimension of Demailly, \emph{Complex analytic and differential geometry}, II.8.7--8.8.
+Everything happens inside complex manifolds (Hausdorff, second countable): an analytic subset of a manifold
+\(X\) is a closed set with local holomorphic equations (Definition~\ref{fpgeom:complex-analytic-subvariety}),
+and ``analytic in an open set \(U\subset X\)'' means analytic in the manifold \(U\). No abstract complex spaces occur.
+The route differs from the source in one respect: Demailly's rank theory (II.8.3--8.6) uses the normalization of
+complex spaces (proof of II.8.4). It is replaced here by two dimension estimates proved directly from the local
+parametrization theorem --- a lower bound for the dimension of the fibres of a map on a pure-dimensional set
+(Lemma~\ref{rem:fibre-dimension-lower-bound}) and the bound ``dimension of the image \(\le\) dimension of the source
+minus the fibre dimension'' (Lemma~\ref{rem:image-dimension-bound}) --- and in Step~1 of the induction the
+exceptional set is saturated by the fibres before the estimate is applied.
+
+\begin{definition}[Dimension bounds for analytic sets]
+\label{rem:dimension}
+\uses{fpgeom:complex-analytic-subvariety,lag:regular-point-basics,lag:regular-locus-dense}
+\lean{Hironaka.AnalyticDimensionBasics.DimLE,Hironaka.AnalyticDimensionBasics.LocDimGE,Hironaka.AnalyticDimensionBasics.LocDimLE,Hironaka.AnalyticDimensionBasics.IsPureDim,Hironaka.AnalyticDimensionBasics.ProperOn,Hironaka.AnalyticDimensionBasics.IsPureDim.dimLE,Hironaka.AnalyticDimensionBasics.LocDimGE.le_of_locDimLE,Hironaka.AnalyticDimensionBasics.DimLE.locDimLE,Hironaka.AnalyticDimensionBasics.locDimGE_of_regularAtDim,Hironaka.AnalyticDimensionBasics.locDimLE_of_regularAtDim,Hironaka.AnalyticDimensionBasics.locDimGE_zero}
+\leanok
+Let \(A\) be an analytic subset of a complex manifold \(X\). A point \(x\in A\) is \emph{regular of dimension \(k\)} if \(A\) is, near \(x\), a
+complex submanifold of dimension \(k\); \(A_{\mathrm{reg}}\) is the set of regular points (of any dimension) and \(A_{\mathrm{sing}}=A\setminus A_{\mathrm{reg}}\).
+We write \(\dim A\le p\) if every regular point of \(A\) has dimension \(\le p\); for \(x\in A\) we write \(\dim_xA\ge q\) if every neighbourhood of
+\(x\) contains a regular point of \(A\) of dimension \(\ge q\), and \(\dim_xA\le p\) if every regular point of \(A\) in some neighbourhood of \(x\) has dimension \(\le p\).
+\(A\) is \emph{of pure dimension \(k\)} if every regular point of \(A\) has dimension \(k\).
+For a holomorphic map \(F\colon X\to Y\), \(F|_A\) is \emph{proper} if \(A\cap F^{-1}(K)\) is compact for every compact \(K\subset Y\).
+\end{definition}
+
+Directly from the definitions, \(\dim_xA\le p\) and \(\dim_xA\ge q\) force \(q\le p\), and \(\dim A\le p\) gives \(\dim_xA\le p\) everywhere; at a regular point of
+dimension \(k\) both \(\dim_xA\le k\) and \(\dim_xA\ge k\) hold (regularity is relatively open and the dimension of a regular point is unique,
+Lemma~\ref{lag:regular-point-basics}); and every point of an analytic set has \(\dim_xA\ge0\) (Theorem~\ref{lag:regular-locus-dense}).
+
+\begin{lemma}[Analytic subsets of an open subset]
+\label{rem:open-subset-analytic}
+\uses{rem:dimension,fpgeom:complex-analytic-subvariety}
+\lean{Hironaka.AnalyticSubsetOpens.instIsComplexManifoldOpens,Hironaka.AnalyticSubsetOpens.chartAt_opens_apply,Hironaka.AnalyticSubsetOpens.mem_chartAt_opens_source,Hironaka.AnalyticSubsetOpens.chartAt_opens_target_subset,Hironaka.AnalyticSubsetOpens.mem_opens_of_chart_mem_target,Hironaka.AnalyticSubsetOpens.chart_mem_opens_target,Hironaka.AnalyticSubsetOpens.isOpen_chartAt_opens_target,Hironaka.AnalyticSubsetOpens.presentationPreimageVal,Hironaka.AnalyticSubsetOpens.isComplexAnalyticSubset_preimage_val,Hironaka.AnalyticSubsetOpens.presentationOfPreimageVal,Hironaka.AnalyticSubsetOpens.isComplexAnalyticSubset_of_forall_opens,Hironaka.AnalyticSubsetOpens.isComplexAnalyticSubset_iff_forall_opens,Hironaka.AnalyticSubsetOpens.isComplexAnalyticSubset_image_val,Hironaka.AnalyticSubsetOpens.regularAtDim_preimage_val_iff,Hironaka.AnalyticSubsetOpens.regularAtDim_image_val_iff,Hironaka.AnalyticSubsetOpens.mem_opens_of_regularAtDim_image_val,Hironaka.AnalyticSubsetOpens.dimLE_preimage_val,Hironaka.AnalyticSubsetOpens.dimLE_image_val_iff,Hironaka.AnalyticSubsetOpens.isPureDim_image_val_iff,Hironaka.AnalyticSubsetOpens.nhds_opens_eq_comap,Hironaka.AnalyticSubsetOpens.locDimGE_preimage_val_iff,Hironaka.AnalyticSubsetOpens.locDimLE_preimage_val_iff,Hironaka.AnalyticSubsetOpens.contMDiff_restrict}
+\leanok
+Let \(U\) be an open subset of a complex manifold \(X\), a complex manifold with the restricted charts.
+\begin{enumerate}
+\item If \(A\) is analytic in \(X\), then \(A\cap U\) is analytic in \(U\).
+\item If every point of \(X\) has an open neighbourhood \(U\) with \(A\cap U\) analytic in \(U\), then \(A\) is analytic in \(X\). In particular a subset of \(U\)
+which is analytic in \(U\) and closed in \(X\) is analytic in \(X\).
+\item A point \(x\in U\) is a regular point of dimension \(k\) of \(A\cap U\) (in \(U\)) if and only if it is one of \(A\) (in \(X\)). Consequently
+\(\dim A\le p\) implies \(\dim(A\cap U)\le p\); for \(x\in U\), \(\dim_x(A\cap U)\ge q\) iff \(\dim_xA\ge q\), and \(\dim_x(A\cap U)\le p\) iff \(\dim_xA\le p\); and for
+\(B\subset U\) the bounds \(\dim B\le p\) and ``pure dimension \(k\)'' mean the same in \(U\) and in \(X\).
+\item A map holomorphic on \(U\) is holomorphic on the manifold \(U\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+The chart of \(U\) at \(x\) is the chart \(e\) of \(X\) at \(x\) restricted to \(U\cap\operatorname{dom}e\); its image is \(e(U\cap\operatorname{dom}e)\), an open subset of the
+image of \(e\). (1) Restrict the local equations of \(A\) at \(x\in U\) to this smaller open set. (2) The local equations of \(A\cap U\) at \(x\) in \(U\) are local
+equations of \(A\) at \(x\) in \(X\), since a point of \(\operatorname{dom}e\) whose image lies in \(e(U\cap\operatorname{dom}e)\) lies in \(U\). For the second
+statement use \(U\) near points of \(U\) and the open complement of the closed set elsewhere. (3) The same two remarks apply to a flattening at \(x\); in
+the direction \(X\to U\) restrict the flattening to the preimage of \(e(U\cap\operatorname{dom}e)\). The dimension statements follow, since the neighbourhoods
+of \(x\) in \(U\) are the traces of those in \(X\). (4) Holomorphy is local.
+\end{proof}
+These facts are used whenever a lemma proved for analytic subsets of a manifold is applied to a set that is analytic only in an open subset.
+
+\subsection{The constant rank theorem}
+
+\begin{lemma}[Constant rank theorem]
+\label{rem:constant-rank}
+\uses{lag:regular-point-basics}
+\lean{Hironaka.HolomorphicConstantRank.apply_inr_eq_zero,Hironaka.HolomorphicConstantRank.bijective_prod_comp,Hironaka.HolomorphicConstantRank.exists_normalForm,Hironaka.HolomorphicConstantRank.exists_ne_mem_fibre,Hironaka.HolomorphicConstantRank.image_eq_graph}
+\leanok
+Let \(E\), \(F\) be finite-dimensional complex normed spaces, \(U\subset E\) open, \(G\colon U\to F\) holomorphic with \(\operatorname{rank}dG_z=r\) for all
+\(z\in U\), and \(p\in U\); put \(R=\operatorname{range}dG_p\) (dimension \(r\)) and \(K=\ker dG_p\). There are continuous linear projections \(Q\colon F\to R\),
+\(S\colon E\to K\), a radius \(\rho>0\), a holomorphic map \(\psi\) on the ball \(B\) of radius \(\rho\) around \(c=(Q(G(p)),S(p))\) in \(R\times K\) (sup norm, so
+\(B=B'\times B''\)) and a holomorphic \(k\) on \(B'\) such that: \(\psi(c)=p\); \(\psi(w)\in U\) and \(\Psi(\psi(w))=w\) for \(w\in B\), where \(\Psi(z)=(Q(G(z)),S(z))\);
+\(\psi(B)\) is open; \(Q\circ k=\mathrm{id}\) on \(B'\); and
+\[
+ G(\psi(w))=k(w_1)\qquad(w=(w_1,w_2)\in B).
+\]
+Consequently: (a) if \(r<\dim E\), every neighbourhood of \(p\) contains a point \(z\ne p\) with \(G(z)=G(p)\) (the fibre through \(p\) contains
+\(\psi(\{c_1\}\times B'')\), with \(\dim K=\dim E-r\ge1\)); (b) \(G(\psi(B))=\{y\in F:Q(y)\in B',\ k(Q(y))=y\}\), the zero set of \(y\mapsto y-k(Q(y))\) in the
+open set \(Q^{-1}(B')\).
+\end{lemma}
+\begin{proof}
+\leanok
+Choose complements of \(R\) in \(F\) and of \(K\) in \(E\) and let \(Q\), \(S\) be the projections. The derivative \((Q\circ dG_p,S)\) of \(\Psi\) at \(p\) is
+injective: if \(Q(dG_p(x))=0\) then \(dG_p(x)=0\) (as \(dG_p(x)\in R\) is fixed by \(Q\)), so \(x\in K\) and \(x=S(x)=0\); by rank--nullity
+\(\dim R+\dim K=\dim E\), so it is bijective, and the holomorphic inverse function theorem gives a local inverse \(\psi\) of \(\Psi\) near \(c\), holomorphic
+on a ball \(B\) on which moreover \(d\Psi\) is invertible at \(\psi(w)\). For \(w\in B\), \(H=G\circ\psi\) has \(dH_w=dG_{\psi(w)}\circ(d\Psi_{\psi(w)})^{-1}\), so
+\(Q\circ dH_w=\mathrm{pr}_1\) and \(\operatorname{rank}dH_w=r=\dim R\). Then \(Q\) restricted to \(\operatorname{range}dH_w\) is onto \(R\), hence injective by
+dimension, and \(Q(dH_w(0,v))=0\) gives \(dH_w(0,v)=0\) for \(v\in K\). Thus \(t\mapsto H(w_1,t)\) has zero derivative on the convex ball \(B''\) and is constant;
+\(k(w_1)=H(w_1,c_2)\) gives the normal form, and \(Q(k(w_1))=Q(G(\psi(w_1,c_2)))=w_1\). (a) Take \(v\in K\setminus0\) and \(z=\psi(c_1,c_2+sv)\) with \(s\ne0\) small:
+\(z\to p\), \(\Psi(z)\ne c\) so \(z\ne p\), and \(G(z)=k(c_1)=G(p)\). (b) If \(w\in B\), \(y=G(\psi(w))=k(w_1)\) has \(Q(y)=w_1\in B'\) and \(k(Q(y))=y\); conversely such a
+\(y\) equals \(G(\psi(Q(y),c_2))\).
+\end{proof}
+
+\begin{lemma}[Constant-rank images are submanifolds]
+\label{rem:constant-rank-submanifold}
+\uses{rem:constant-rank,lag:regular-point-basics}
+\lean{Hironaka.ConstantRankSubmanifold.planeSubmodule,Hironaka.ConstantRankSubmanifold.mem_planeSubmodule,Hironaka.ConstantRankSubmanifold.finrank_planeSubmodule,Hironaka.ConstantRankSubmanifold.exists_linearEquiv_mem_plane_iff,Hironaka.ConstantRankSubmanifold.range_eq_top_of_rightInverse,Hironaka.ConstantRankSubmanifold.regularAtDim_graph,Hironaka.ConstantRankSubmanifold.exists_image_eq_graph,Hironaka.ConstantRankSubmanifold.image_mem_nhds_of_range_eq_top,Hironaka.ConstantRankSubmanifold.image_mem_nhds_of_finrank_eq}
+\leanok
+(1) Let \(R\) be a finite-dimensional complex normed space, \(Q\colon\mathbf C^N\to R\) linear, \(B'\subset R\) open and \(k\) holomorphic on \(B'\) with
+\(Q\circ k=\mathrm{id}\) on \(B'\). Every point of the graph \(\Gamma=\{y\in\mathbf C^N:Q(y)\in B',\ k(Q(y))=y\}\) is a regular point of \(\Gamma\) of dimension
+\(\dim R\); \(\Gamma\) is the zero set of the holomorphic map \(y\mapsto y-k(Q(y))\) on the open set \(Q^{-1}(B')\).
+(2) Let \(E\) be a finite-dimensional complex normed space, \(U\subset E\) open, \(G\colon U\to\mathbf C^N\) holomorphic with \(\operatorname{rank}dG_z=r\) for all
+\(z\in U\), and \(p\in U\). There are an open \(O\) with \(p\in O\subset U\), an open \(W\subset\mathbf C^N\) and a holomorphic \(h\) on \(W\) with
+\(G(O)=\{y\in W:h(y)=0\}\), and every point of \(G(O)\) is a regular point of \(G(O)\) of dimension \(r\).
+(3) If \(G\) is holomorphic on an open set \(U\ni p\) of \(E\) with values in a finite-dimensional space \(F\) and \(dG_p\) is onto (i.e.\ \(\operatorname{rank}dG_p=\dim F\)), then
+\(G\) maps every neighbourhood of \(p\) onto a neighbourhood of \(G(p)\).
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Linear algebra first: a subspace \(W_0\) of dimension \(r\) of an \(N\)-dimensional space \(V\) is carried onto the standard plane \(\mathbf C^r\times\{0\}\) by a linear
+isomorphism \(V\to\mathbf C^N\) (choose complements of \(W_0\) and of the plane, both of dimension \(N-r\), and isomorphisms between the summands). \(Q\) is onto, since
+its range contains the nonempty open set \(B'=Q(k(B'))\); so \(\ker Q\) has dimension \(N-\dim R\). Let \(P\colon\mathbf C^N\to\ker Q\) be a linear projection and
+\(A\colon R\times\ker Q\to\mathbf C^N\) a linear isomorphism carrying \(R\times\{0\}\) onto the standard \((\dim R)\)-plane. For \(y_0\in\Gamma\) put
+\[
+ \Theta(y)=A\bigl(Q(y)-Q(y_0),\,P(y-k(Q(y)))\bigr)\qquad(y\in Q^{-1}(B')).
+\]
+\(\Theta\) is holomorphic, \(\Theta(y_0)=0\), and \(d\Theta_{y_0}(v)=A(Q(v),P(v-dk(Qv)))\) is injective: \(Q(v)=0\) forces \(v\in\ker Q\) and \(P(v)=v=0\). By the
+holomorphic inverse function theorem \(\Theta\) is a biholomorphism near \(y_0\). For \(y\in Q^{-1}(B')\) we have \(y-k(Q(y))\in\ker Q\) (as \(Q\circ k=\mathrm{id}\)), so
+\(P(y-k(Q(y)))=y-k(Q(y))\), and \(\Theta(y)\) lies in the standard plane iff \(y-k(Q(y))=0\), i.e.\ iff \(y\in\Gamma\). So \(\Theta\) flattens \(\Gamma\) near \(y_0\).
+(2) In the normal form of Lemma~\ref{rem:constant-rank} take \(O=\psi(B)\), \(W=Q^{-1}(B')\), \(h(y)=y-k(Q(y))\): \(G(O)=\Gamma\) by part (b) of that lemma, and
+\(\dim R=r\); apply (1). (3) \(G\) is \(C^1\), so it has a strict derivative at \(p\), and a map with surjective strict derivative maps neighbourhoods of \(p\) onto
+neighbourhoods of \(G(p)\) (the surjective form of the inverse function theorem).
+\end{proof}
+For holomorphic maps between complex manifolds the lemma is applied in charts.
+
+\begin{lemma}[Generic rank]
+\label{rem:generic-rank}
+\uses{rem:constant-rank,lag:germ-domain}
+\lean{Hironaka.HolomorphicGenericRank.eventually_finrank_range_le,Hironaka.HolomorphicGenericRank.isOpen_maxRank,Hironaka.HolomorphicGenericRank.subset_closure_maxRank}
+\leanok
+(1) The rank of a family of linear maps \(A_x\colon E\to F\) between finite-dimensional spaces, continuous at \(x_0\), is lower semicontinuous at \(x_0\).
+(2) Let \(U\) be a connected open subset of a finite-dimensional complex normed space, \(G\colon U\to F\) holomorphic, and let \(\operatorname{rank}dG\) attain its
+maximum \(r\) on \(U\) at \(z_1\). Then \(U^{\max}=\{z\in U:\operatorname{rank}dG_z=r\}\) is open and dense in \(U\); at its points the hypothesis of
+Lemma~\ref{rem:constant-rank} holds on a neighbourhood. (For a connected complex manifold \(P\) and a holomorphic map, this is applied in charts.)
+\end{lemma}
+\begin{proof}
+\leanok
+(1) If \(A_{x_0}v_1,\dots,A_{x_0}v_s\) is a basis of \(\operatorname{range}A_{x_0}\), linear independence of \((A_xv_i)_i\) persists near \(x_0\), so
+\(\operatorname{rank}A_x\ge s\). (2) Openness: by (1) applied to \(z\mapsto dG_z\) (continuous, \(G\) being \(C^\infty\)) and maximality. Density: let \(dG_{z_1}v_i\),
+\(i\le r\), be a basis of \(\operatorname{range}dG_{z_1}\) and \(\ell_j\) linear forms dual to it; \(h(z)=\det\bigl(\ell_j(dG_zv_i)\bigr)\) is holomorphic on \(U\)
+(an alternating sum of products of directional derivatives), \(h(z_1)=1\), and \(h(z)=0\) where \(\operatorname{rank}dG_z<r\) (the \(dG_zv_i\) are then dependent, so
+the rows are). If an open set met \(U\) but not \(U^{\max}\), \(h\) would vanish near a point of \(U\), hence on the connected \(U\) by the identity theorem
+(Lemma~\ref{lag:germ-domain}; holomorphic functions of several variables are analytic), contradicting \(h(z_1)=1\).
+\end{proof}
+
+\subsection{Dimension estimates from the local parametrization}
+
+\begin{lemma}[Manifold pieces of a parametrized irreducible germ]
+\label{rem:finite-fibre-piece}
+\uses{lag:parametrization-sets,lag:parametrization-regular,lag:germ-domain,rem:constant-rank,rem:constant-rank-submanifold,rem:generic-rank}
+\source{demailly-cadg:II.4.19}
+\lean{Hironaka.FiniteFibrePiece.finite_setOf_monicEval_eq_zero,Hironaka.FiniteFibrePiece.norm_coordinateProjection_le,Hironaka.FiniteFibrePiece.finite_fibre_ball,Hironaka.FiniteFibrePiece.exists_isOpen_constRank,Hironaka.FiniteFibrePiece.exists_isOpen_rank_eq_finrank_of_finite_fibre,Hironaka.FiniteFibrePiece.finite_fibre_comp,Hironaka.FiniteFibrePiece.le_dim_of_injOn,Hironaka.FiniteFibrePiece.exists_isOpen_subset_image,Hironaka.FiniteFibrePiece.exists_param_of_regularAtDim}
+\leanok
+Let \(A\subset\mathbf C^N\) carry parametrization data of dimension \(d\) as in Proposition~\ref{lag:parametrization-sets} (an irreducible germ in Noether position
+does): projection \(\pi\colon\mathbf C^N\to\mathbf C^d\) onto the first \(d\) coordinates, the ball \(B\) on which the defining identities hold, and the polydisc
+\(\Delta\subset B\) of the parametrizing sets.
+(1) Every fibre of \(\pi\) on \(A\cap B\) is finite.
+(2) (Generic rank of maps with finite fibres.) If \(G\) is holomorphic on a nonempty open subset \(U\) of a finite-dimensional space \(E\) and all its fibres in \(U\) are
+finite, then \(\operatorname{rank}dG=\dim E\) on a nonempty open subset of \(U\).
+(3) If \(\varphi\) is holomorphic and injective on a nonempty open \(U\subset\mathbf C^k\) with \(\varphi(U)\subset A\cap B\), then \(k\le d\).
+(4) If moreover \(k=d\) and \(\varphi(U)\subset A\cap\Delta\), then \(\varphi(U)\) contains a nonempty relatively open subset of \(A\cap\Delta\).
+(5) If \(y\) is a regular point of dimension \(k\) of a set \(S\subset\mathbf C^N\) and \(W\) a neighbourhood of \(y\), there are an open \(U\ni0\) in \(\mathbf C^k\) and an injective
+holomorphic \(\varphi\) on \(U\) with \(\varphi(0)=y\) and \(\varphi(U)\subset S\cap W\).
+\end{lemma}
+\begin{proof}
+\leanok
+(1) A point \(z\in A\cap B\) over \(x\) has its first \(d\) coordinates equal to those of \(x\) and each coordinate \(z_j\), \(j>d\), among the finitely many roots of the monic
+polynomial \(Q_j(x,\cdot)\) of Proposition~\ref{lag:parametrization-sets}.
+(2) The rank of \(dG\) is bounded by \(\dim F\); let \(\rho\) be its maximum on \(U\). The set \(U^{\max}\) where it is attained is open and nonempty
+(Lemma~\ref{rem:generic-rank}(2), openness part), and the rank is constant there. If \(\rho<\dim E\), a point \(z_1\in U^{\max}\) is an accumulation point of its fibre
+(Lemma~\ref{rem:constant-rank}(a)); but that fibre is finite. So \(\rho=\dim E\).
+(3) \(G=\pi\circ\varphi\) has finite fibres on \(U\): \(\varphi\) maps a fibre of \(G\) injectively into a fibre of \(\pi\) on \(A\cap B\), finite by (1). By (2),
+\(\operatorname{rank}dG=k\) somewhere, and \(\operatorname{rank}dG\le d\).
+(4) By (2) \(G=\pi\circ\varphi\) has rank \(d=\dim\mathbf C^d\) on a nonempty open \(U'\subset U\), so it maps every neighbourhood of a point of \(U'\) onto a neighbourhood of
+its image (Lemma~\ref{rem:constant-rank-submanifold}(3)). For \(z\in U'\), \(|G(z)|\le|\varphi(z)|\) lies in the ball where the discriminant \(\delta\) is holomorphic; \(\delta\) is not
+identically zero near \(0\), so its zero set has empty interior in that ball (identity theorem, Lemma~\ref{lag:germ-domain}), and the open neighbourhood \(G(U')\) of \(G(z)\)
+contains a point \(G(z_1)\), \(z_1\in U'\), with \(\delta(G(z_1))\ne0\). By Proposition~\ref{lag:parametrization-regular} (local graphs) at \(y_1=\varphi(z_1)\) there are open
+\(V_g\ni y_1\), \(U_g\ni\pi(y_1)\) and a holomorphic section \(g\) of \(\pi\) with \(y=g(\pi(y))\) for every \(y\in A\cap V_g\). Let \(O_1=U'\cap\varphi^{-1}(V_g)\), a neighbourhood of
+\(z_1\), and \(V=V_g\cap\pi^{-1}(\operatorname{int}G(O_1))\), an open set containing \(y_1\). If \(y\in V\cap A\cap\Delta\), then \(\pi(y)=\pi(\varphi(u))\) for some \(u\in O_1\), and both
+\(y\) and \(\varphi(u)\) lie in \(A\cap V_g\), so \(y=g(\pi(y))=g(\pi(\varphi(u)))=\varphi(u)\). Hence \(V\cap A\cap\Delta\subset\varphi(U)\).
+(5) Let \(\Phi\) flatten \(S\) at \(y\) (\(\Phi(y)=0\)) and \(\iota\colon\mathbf C^k\to\mathbf C^N\), \(w\mapsto(w,0)\). Take \(\varphi=\Phi^{-1}\circ\iota\) on
+\(U=\iota^{-1}\bigl(\operatorname{target}\Phi\cap(\Phi^{-1})^{-1}(\operatorname{int}W)\bigr)\): it is injective as \(\Phi^{-1}\) and \(\iota\) are, and
+\(\Phi(\varphi(w))=\iota(w)\) lies in the standard plane, so \(\varphi(w)\in S\).
+\end{proof}
+
+\begin{lemma}[Monotonicity of dimension]
+\label{rem:dimension-monotone}
+\uses{rem:finite-fibre-piece,lag:germ-decomposition,lag:noether-normalization,lag:parametrization-sets,lag:parametrization-dense,lag:thin-subgerm,lag:irreducible-germ-pure,rem:dimension}
+\lean{Hironaka.DimensionMonotone.exists_parametrization,Hironaka.DimensionMonotone.exists_isOpen_subset_inter_of_cover,Hironaka.DimensionMonotone.exists_regularAtDim_ge_germ,Hironaka.DimensionMonotone.regularAtDim_chartGerm_zero,Hironaka.DimensionMonotone.regularAtDim_of_chartGerm,Hironaka.DimensionMonotone.locDimGE_of_regularAtDim_subset,Hironaka.DimensionMonotone.LocDimGE.mono,Hironaka.DimensionMonotone.DimLE.anti}
+\leanok
+(1) (Germ form.) Let \(T\) be an analytic germ at \(0\in\mathbf C^N\) and \(\varphi\) holomorphic and injective on an open \(U\subset\mathbf C^k\) with \(\varphi(U)\subset T\) and
+\(\varphi(u_0)=0\) for some \(u_0\in U\). Every neighbourhood of \(0\) contains a regular point of \(T\) of dimension \(\ge k\).
+(2) Let \(T\) be an analytic subset of a complex manifold \(X\), \(B\subset T\) any subset and \(z\) a regular point of \(B\) of dimension \(k\). Then \(\dim_zT\ge k\): every
+neighbourhood of \(z\) contains a regular point of \(T\) of dimension \(\ge k\). Consequently, for \(B\subset T\), \(\dim_xB\ge q\) implies \(\dim_xT\ge q\), and \(\dim T\le a\)
+implies \(\dim B\le a\).
+\end{lemma}
+\begin{proof}
+\leanok
+(1) The germ of \(T\) is an irredundant union of irreducible germs \(T_1,\dots,T_s\) (Theorem~\ref{lag:germ-decomposition}); after a linear change of coordinates
+\(L_j\) each \(T_j\) is in Noether position with parametrization data of dimension \(d_j\) (Theorem~\ref{lag:noether-normalization},
+Proposition~\ref{lag:parametrization-sets}). Choose a ball \(B_\rho\) on which \(T=\bigcup_jT_j\), each \(T_j\) is relatively closed and \(L_j^{-1}(B_\rho)\) lies in the
+ball of the \(j\)-th data. The open set \(U_1=U\cap\varphi^{-1}(B_\rho)\ni u_0\) is covered by the finitely many relatively closed sets \(U_1\cap\varphi^{-1}(T_j)\), so one of
+them contains a nonempty open \(W\) (if \(U_1\not\subset\varphi^{-1}(T_1)\), pass to the nonempty open \(U_1\setminus\varphi^{-1}(T_1)\), covered by the others, and induct).
+Then \(L_j^{-1}\circ\varphi\) is an injective holomorphic \(k\)-parameter piece of \(L_j^{-1}(T_j)\), and Lemma~\ref{rem:finite-fibre-piece}(3) gives \(k\le d_j\). The regular
+points of \(T_j\) of dimension \(d_j\) accumulate at \(0\) and are dense in \(T_j\) near \(0\) (Proposition~\ref{lag:parametrization-dense},
+Lemma~\ref{lag:irreducible-germ-pure}), and by Lemma~\ref{lag:thin-subgerm} there is an open set \(O'\) inside the given neighbourhood and \(B_\rho\) meeting \(T_j\) and none of the
+other \(T_i\); a regular point \(y\in O'\) of \(T_j\) of dimension \(d_j\) is a regular point of \(T\), since \(T=T_j\) on \(O'\).
+(2) Read \(B\subset T\) in the chart at \(z\), translated so that \(z\) becomes \(0\): \(0\) is a regular point of dimension \(k\) of the chart germ of \(B\), which is therefore
+the image of \(0\) under an injective holomorphic \(k\)-parameter piece (Lemma~\ref{rem:finite-fibre-piece}(5)) inside the chart germ of \(T\), an analytic germ. Apply (1) and
+read the regular point back on \(X\). For the consequences: a regular point of \(B\) of dimension \(j\ge q\) near \(x\) has regular points of \(T\) of dimension \(\ge j\) near it;
+and a regular point of \(B\) of dimension \(j\) has regular points of \(T\) of dimension \(\ge j\), which are \(\le a\).
+\end{proof}
+
+\begin{lemma}[Thin analytic subsets have smaller dimension]
+\label{rem:thin-dimension-drop}
+\uses{rem:dimension-monotone,rem:finite-fibre-piece,lag:germ-decomposition,lag:thin-subgerm,lag:parametrization-dense,lag:irreducible-germ-pure}
+\lean{Hironaka.ThinDimensionDrop.exists_isOpen_avoid,Hironaka.ThinDimensionDrop.exists_isOpen_subset_image_of_eq,Hironaka.ThinDimensionDrop.exists_isOpen_subset_image_germ,Hironaka.ThinDimensionDrop.lt_of_regularAtDim_of_thin,Hironaka.ThinDimensionDrop.dimLE_pred_of_thin}
+\leanok
+(1) (Germ form.) Let \(T\) be an analytic germ at \(0\in\mathbf C^N\) all of whose regular points have dimension \(\le a\), and \(\varphi\) holomorphic and injective on an
+open \(U\subset\mathbf C^a\) with \(\varphi(U)\subset T\) and \(\varphi(u_0)=0\). Every neighbourhood of \(0\) contains an open \(W\) meeting \(T\) with \(W\cap T\subset\varphi(U)\).
+(2) Let \(T\) be analytic in a complex manifold with \(\dim T\le a\), and \(T'\subset T\) any subset with empty interior relative to \(T\) (an open set \(O\) with
+\(O\cap T\subset T'\) has \(O\cap T=\emptyset\)). Then every regular point of \(T'\) has dimension \(<a\); that is, \(\dim T'\le a-1\), and \(T'\) has no regular point if \(a=0\).
+\end{lemma}
+\begin{proof}
+\leanok
+(1) As in the proof of Lemma~\ref{rem:dimension-monotone}(1): the germ is an irredundant union of irreducible germs \(T_j\) with parametrization data of dimension \(d_j\) after
+linear changes \(L_j\), and an open piece \(W'\) of the parameter domain is mapped into one \(T_j\), so \(a\le d_j\). Conversely \(T_j\) has regular points of dimension \(d_j\) in an
+open set where \(T=T_j\) (Lemma~\ref{lag:thin-subgerm}, Proposition~\ref{lag:parametrization-dense}, Lemma~\ref{lag:irreducible-germ-pure}), regular points of \(T\), so \(d_j\le a\).
+Thus \(d_j=a\), and by Lemma~\ref{rem:finite-fibre-piece}(4) applied to \(L_j^{-1}\circ\varphi\) on \(W'\) there is an open \(V\) meeting \(T_j\) (in the polydisc) with
+\(V\cap T_j\subset\varphi(W')\). By Lemma~\ref{lag:thin-subgerm}, applied once for each \(i\ne j\) (each \(T_i\cap T_j\) is avoided by \(T_j\) in every small open set meeting
+\(T_j\), and the complements of the \(T_i\) are relatively open), there is an open \(W\subset V\) meeting \(T_j\) and none of the other \(T_i\); on \(W\), \(T=T_j\subset\varphi(U)\).
+(2) Let \(y\) be a regular point of \(T'\) of dimension \(k\). By Lemma~\ref{rem:dimension-monotone}, \(k\le a\). If \(k=a\), read \(T'\subset T\) in the chart at \(y\): \(0\) is the
+centre of an injective holomorphic \(a\)-parameter piece of the chart germ of \(T'\) (Lemma~\ref{rem:finite-fibre-piece}(5)), all regular points of the chart germ of \(T\)
+have dimension \(\le a\), and (1) gives an open \(W\) meeting the chart germ of \(T\) inside that of \(T'\). Its preimage \(O\) under the translated chart is an open set with
+\(\emptyset\ne O\cap T\subset T'\), contradicting the hypothesis. Hence \(k<a\).
+\end{proof}
+
+\begin{lemma}[Points of local dimension zero are isolated]
+\label{rem:isolated-dim-zero}
+\uses{ana:irreducible-components,ana:component-local-filling,ana:pure-dimension,lag:regular-point-basics}
+\lean{Hironaka.AnalyticDimensionBasics.not_accPt_of_locDimLE_zero}
+\leanok
+Let \(T\) be analytic in a complex manifold and \(x\in T\) such that every regular point of \(T\) in some neighbourhood \(U\) of \(x\) has dimension \(0\).
+Then \(x\) is an isolated point of \(T\).
+\end{lemma}
+\begin{proof}
+\leanok
+Otherwise \(x\) lies on an irreducible component \(V\) of \(T\) of positive dimension (Proposition~\ref{ana:irreducible-components}). By
+Lemma~\ref{ana:component-local-filling} there is an open \(U'\subset U\) meeting \(V\) with \(T\cap U'\subset V\) containing a regular point of \(V\) of
+dimension \(\dim V\); there \(T=V\), so it is a regular point of \(T\) of dimension \(\dim V>0\) in \(U\), a contradiction.
+\end{proof}
+
+\begin{lemma}[Generic hyperplane sections]
+\label{rem:generic-sections}
+\uses{rem:thin-dimension-drop,rem:isolated-dim-zero,rem:dimension-monotone,rem:finite-fibre-piece}
+\lean{Hironaka.GenericSections.lt_of_regularAtDim_of_thin_nhds,Hironaka.GenericSections.exists_ne_mem_of_regularAtDim_pos,Hironaka.GenericSections.isComplexAnalyticSubset_level,Hironaka.GenericSections.isComplexAnalyticSubset_section,Hironaka.GenericSections.exists_mem_forall_not_mem,Hironaka.GenericSections.levelSubmodule,Hironaka.GenericSections.exists_generic_sections,Hironaka.GenericSections.exists_forms_not_accPt}
+\leanok
+Let \(T\) be analytic in a complex manifold \(M\) with \(\dim T\le k\), \(g\colon M\to\mathbf C^N\) a map, \(x_0\in M\), and \(\Xi\) a linear subspace of the dual space
+\((\mathbf C^N)^*\) such that no \(y\in T\setminus\{x_0\}\) satisfies \(\xi(g(y))=\xi(g(x_0))\) for all \(\xi\in\Xi\).
+(1) If \(k\ge1\), there is a countable set of linear subspaces of \((\mathbf C^N)^*\), none containing \(\Xi\), such that for every \(\xi\in\Xi\) outside all of them,
+\(\dim\bigl(T\cap\{\xi\circ g=\xi(g(x_0))\}\bigr)\le k-1\).
+(2) Some \(\xi\in\Xi\) lies outside any given countable set of subspaces none of which contains \(\Xi\) (so such choices exist and can be combined with countably many
+further conditions of the same kind).
+(3) If \(g\) is holomorphic, there are \(\xi_1,\dots,\xi_k\in\Xi\) such that \(T\cap\{\xi_1\circ g=\xi_1(g(x_0)),\dots,\xi_k\circ g=\xi_k(g(x_0))\}\) is a discrete set (no point
+of it is an accumulation point of it).
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Let \((O_i)\) be a countable base of \(M\) and \(I\) the set of \(i\) with \(T\cap O_i\not\subset\{x_0\}\); for \(i\in I\) the forms \(\xi\) with \(\xi\circ g=\xi(g(x_0))\) on
+\(T\cap O_i\) form a subspace \(H_i\), not containing \(\Xi\) by the hypothesis applied to some \(y\in T\cap O_i\), \(y\ne x_0\). Let \(\xi\in\Xi\setminus\bigcup H_i\) and
+\(T_\xi=T\cap\{\xi\circ g=\xi(g(x_0))\}\). An open \(O\subset M\setminus\{x_0\}\) with \(O\cap T\subset T_\xi\) has \(O\cap T=\emptyset\): otherwise it contains a basic \(O_i\), \(i\in I\), and
+\(T\cap O_i\subset T_\xi\) would put \(\xi\) in \(H_i\). So near every \(y\ne x_0\), \(T_\xi\) has empty interior relative to \(T\), and the argument of
+Lemma~\ref{rem:thin-dimension-drop}, which only uses open sets inside a neighbourhood of the regular point, bounds the dimension of every regular point \(y\ne x_0\) of \(T_\xi\) by
+\(k-1\). If \(x_0\) is a regular point of \(T_\xi\) of dimension \(j\ge1\), it is not isolated (a \(j\)-dimensional manifold piece through it, Lemma~\ref{rem:finite-fibre-piece}(5)),
+and nearby points of \(T_\xi\) are regular of the same dimension \(j\), so \(j\le k-1\); \(j=0\le k-1\) is trivial.
+(2) The subspaces meet \(\Xi\) in closed subspaces with empty interior unless they contain \(\Xi\); by Baire's theorem in the finite-dimensional space \(\Xi\), countably many of them do
+not cover \(\Xi\).
+(3) Induction on \(k\). For \(k=0\) every point of \(T\) is isolated (Lemma~\ref{rem:isolated-dim-zero}). For \(k\ge1\) choose \(\xi_1\) by (1) and (2); \(T_{\xi_1}\) is analytic (a level
+set of the holomorphic \(\xi_1\circ g\) intersected with \(T\)), of dimension \(\le k-1\), and the separation hypothesis passes to it; apply the induction hypothesis.
+\end{proof}
+For an open set \(\Omega\subset\mathbf C^N\) one takes \(M=\Omega\) and \(g\) the inclusion; for \(\Xi=(\mathbf C^N)^*\) the separation hypothesis always holds.
+
+\begin{lemma}[Compact analytic subsets of open subsets of \(\mathbf C^N\) are finite]
+\label{rem:compact-analytic-finite}
+\uses{rem:isolated-dim-zero,rem:stratum-hull,rem:dimension-monotone,rem:generic-sections,lag:regular-point-basics,lag:germ-decomposition,lag:noether-normalization,lag:parametrization-sets,lag:parametrization-regular,lag:canonical-defining-functions,lag:germ-domain}
+\source{demailly-cadg:II.5.9}
+\lean{Hironaka.CompactAnalyticFinite.coeff_fibrePoly_pred,Hironaka.CompactAnalyticFinite.exists_norm_lt_of_small,Hironaka.CompactAnalyticFinite.eventually_eq_of_re_eq_zero,Hironaka.CompactAnalyticFinite.exists_level_piece_of_param,Hironaka.CompactAnalyticFinite.exists_level_regularAtDim_germ,Hironaka.CompactAnalyticFinite.exists_level_regularAtDim_of_isMaxOn,Hironaka.CompactAnalyticFinite.regularAtDim_eq_zero_aux,Hironaka.CompactAnalyticFinite.regularAtDim_eq_zero_of_isCompact,Hironaka.CompactAnalyticFinite.finite_of_isCompact,Hironaka.CompactAnalyticFinite.isComplexAnalyticSubset_of_isCompact,Hironaka.CompactAnalyticFinite.finite_of_isCompact_of_presentation}
+\leanok
+Let \(\Omega\subset\mathbf C^N\) be open and \(K\subset\Omega\) a compact analytic subset of \(\Omega\). Then \(K\) is finite. (Being compact, \(K\) is closed in
+\(\mathbf C^N\) and has local equations at its own points, so it is an analytic subset of \(\mathbf C^N\); this is the form proved.)
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{rem:isolated-dim-zero} and compactness it suffices to show that \(K\) has no regular point of positive dimension. We show by descending induction on
+\(j=N,\dots,0\): \emph{no compact analytic subset \(K\) of \(\mathbf C^N\) contained in \(\{z_1=c_1,\dots,z_j=c_j\}\) has a regular point of positive
+dimension}. For \(j=N\) such a \(K\) has at most one point, while a regular point of positive dimension is not isolated (Lemma~\ref{rem:generic-sections}). Let
+\(j<N\), and suppose \(K\subset\{z_1=c_1,\dots,z_j=c_j\}\) has a regular point of positive dimension. Let \(K_+\) be the closure of the set of regular points of \(K\)
+of positive dimension: a nonempty compact analytic subset of \(\mathbf C^N\) (Lemma~\ref{rem:stratum-hull}). Let \(\xi=z_{j+1}\) and let \(p\in K_+\) maximize
+\(\operatorname{Re}\xi\) on \(K_+\). The point \(p\) is not isolated in \(K_+\): it is a limit of regular points of \(K\) of positive dimension, and if it is one itself,
+the points of \(K\) near it are regular of the same dimension (Lemma~\ref{lag:regular-point-basics}) and some of them differ from \(p\).
+
+Translate \(p\) to \(0\) and write the germ of \(K_+\) as a finite union of irreducible germs (Theorem~\ref{lag:germ-decomposition}). One of them, \(C\), has positive
+dimension \(d\): put each in Noether position after a linear change of coordinates (Propositions~\ref{lag:noether-normalization} and~\ref{lag:parametrization-sets}); a
+component of dimension \(0\) is \(\{0\}\) near \(0\) by the \emph{small} clause, and \(p\) is not isolated. Let \(\pi\), \(\Delta\), \(\delta\) and \(q\) be the projection,
+polydisc, discriminant and number of sheets of \(C\); on \(C\) near \(0\), \(\operatorname{Re}\xi\le0\). By Proposition~\ref{lag:canonical-defining-functions} the
+coefficient of \(T^{q-1}\) of the canonical polynomial of \(\xi\) extends to a holomorphic function near \(0\), so there is a holomorphic \(\sigma\) near \(0\) with
+\(\sigma(x)=\sum_{y\in C\cap\Delta,\ \pi(y)=x}\xi(y)\) whenever \(\delta(x)\ne0\). Then \(\operatorname{Re}\sigma\le0\) off \(\delta^{-1}(0)\), hence near \(0\) (the complement of
+\(\delta^{-1}(0)\) is dense, Lemma~\ref{lag:germ-domain}); and \(\sigma(0)=0\), because the fibre points over \(x\) tend to \(0\) as \(x\to0\) (the small clause). By the maximum
+principle applied to \(e^{\sigma}\), \(\operatorname{Re}\sigma\equiv0\) near \(0\); each summand has real part \(\le0\), so \(\operatorname{Re}\xi(y)=0\) for every \(y\in C\cap\Delta\)
+over a point \(x\) near \(0\) with \(\delta(x)\ne0\). Pick such an \(x_0\) and \(y_0\) over it, as close to \(0\) as we like, and the local holomorphic section \(g\) through
+\(y_0\) (Proposition~\ref{lag:parametrization-regular}). Then \(\operatorname{Re}(\xi\circ g)\equiv0\) near \(x_0\), so \(|e^{\xi\circ g}|\equiv1\) and \(\xi\circ g\) is constant
+near \(x_0\) (maximum principle, and continuity to exclude jumps by \(2\pi i\mathbf Z\)). Hence near \(y_0\) the set \(C\cap\Delta\) lies in \(\{\xi=\xi(y_0)\}\), and \(y_0\) is a
+regular point of \(C\cap\Delta\) of dimension \(d\).
+
+Back in \(\mathbf C^N\), \(K'=K_+\cap\{\xi=c'\}\), \(c'=\xi(p+y_0)\) after undoing the coordinate changes, contains a set of which \(p+y_0\) is a regular point of
+dimension \(d\ge1\); by Lemma~\ref{rem:dimension-monotone}, \(K'\) has a regular point of dimension \(\ge d\). But \(K'\) is a compact analytic subset of \(\mathbf C^N\)
+inside \(\{z_1=c_1,\dots,z_j=c_j,\ z_{j+1}=c'\}\), contradicting the induction hypothesis for \(j+1\).
+\end{proof}
+
+\begin{lemma}[Regular-stratum hulls]
+\label{rem:stratum-hull}
+\uses{ana:dimension-strata,lag:regular-point-basics}
+\lean{Hironaka.AnalyticCodimTwoStratification.isComplexAnalyticSubset_regularStratumHull,Hironaka.AnalyticCodimTwoStratification.regularStratumHull_subset,Hironaka.AnalyticCodimTwoStratification.regularAtDim_regularStratumHull}
+\leanok
+Let \(A\) be an analytic subset of a complex manifold and \(P\) a set of natural numbers. The closure \(A_P\) of the set of regular points of \(A\) whose
+dimension lies in \(P\) is an analytic subset contained in \(A\), and every regular point of \(A_P\) has its dimension in \(P\).
+\end{lemma}
+\begin{proof}
+\leanok
+\(A_P\) is analytic by Proposition~\ref{ana:dimension-strata}, and \(A_P\subset A\) as \(A\) is closed. Let \(x\) be a regular point of \(A_P\) of dimension \(k\).
+Regular points of \(A\) with dimension in \(P\) are dense in \(A_P\), so there is one, \(z\), of dimension \(j\in P\), inside a neighbourhood of \(x\) on which
+\(A_P\) is a \(k\)-manifold. Near \(z\) every point of \(A\) is a regular point of \(A\) of dimension \(j\), hence lies in \(A_P\); so \(A=A_P\) near \(z\), and
+\(z\) is a regular point of \(A_P\) of dimensions \(j\) and \(k\). By Lemma~\ref{lag:regular-point-basics}, \(k=j\in P\).
+\end{proof}
+
+\begin{lemma}[Singular locus of a pure-dimensional analytic set]
+\label{rem:pure-singular-locus}
+\uses{ana:stokes-cartan-generators,ana:stokes-singular-locus-analytic,lag:regular-locus-dense,rem:thin-dimension-drop}
+\source{demailly-cadg:II.4.31}
+\lean{Hironaka.PureSingularLocus.regularAtDim_of_minor_ne_zero_of_isPureDim,Hironaka.PureSingularLocus.isComplexAnalyticSubset_diff_regularLocus_of_le,Hironaka.PureSingularLocus.isComplexAnalyticSubset_diff_regularLocus,Hironaka.PureSingularLocus.thin_diff_regularLocus,Hironaka.PureSingularLocus.dimLE_diff_regularLocus}
+\leanok
+Let \(A\) be an analytic subset of pure dimension \(k\) of a complex manifold \(M\) of dimension \(n\). Then \(A_{\mathrm{sing}}\) is analytic, cut out near every
+point by Cartan generators \(g_1,\dots,g_N\) of \(\mathcal I_A\) and all \((n-k)\)-minors of their Jacobian matrix, and \(\dim A_{\mathrm{sing}}\le k-1\).
+\end{lemma}
+\begin{proof}
+\leanok
+As in the proof of Lemma~\ref{ana:stokes-singular-locus-analytic}: at a regular point the normal coordinates of a flattening are combinations of the
+\(g_j\), so some \((n-k)\)-minor is \(\ne0\); conversely a nonzero \((n-k)\)-minor at \(y\in A\) makes the selected equations cut out a \(k\)-manifold \(Z\supset A\)
+near \(y\), and \(A\cap Z\), read on a ball of \(Z\), has a regular point of some dimension \(j\) giving a regular point of \(A\) of dimension \(j\); pure dimensionality
+(which is all that irreducibility was used for there) gives \(j=k\), so \(A\cap Z\) has interior in \(Z\) and equals \(Z\) near \(y\) by the identity theorem. \(A_{\mathrm{sing}}\) has empty interior in \(A\) because
+\(A_{\mathrm{reg}}\) is dense (Theorem~\ref{lag:regular-locus-dense}), so Lemma~\ref{rem:thin-dimension-drop} gives \(\dim A_{\mathrm{sing}}\le k-1\).
+\end{proof}
+
+\begin{lemma}[Tangent spaces of an analytic set; the rank of a map on it]
+\label{rem:tangent-space}
+\uses{ana:stokes-cartan-generators,ana:stokes-singular-locus-analytic,lag:regular-point-basics}
+\lean{Hironaka.RankDegeneracy.tangentSpaceIn,Hironaka.RankDegeneracy.mem_tangentSpaceIn,Hironaka.RankDegeneracy.chartDeriv,Hironaka.RankDegeneracy.rankIn,Hironaka.RankDegeneracy.rankAt,Hironaka.RankDegeneracy.differentiableAt_chartReading,Hironaka.RankDegeneracy.fderiv_comp_of_eq,Hironaka.RankDegeneracy.fderiv_transition_comp,Hironaka.RankDegeneracy.injective_fderiv_transition,Hironaka.RankDegeneracy.surjective_fderiv_transition,Hironaka.RankDegeneracy.tangentSpaceIn_eq_comap,Hironaka.RankDegeneracy.finrank_map_chartDeriv_target,Hironaka.RankDegeneracy.rankIn_eq_rankIn,Hironaka.RankDegeneracy.rankAt_eq_rankIn,Hironaka.RankDegeneracy.fderiv_invFun_comp_fderiv_toFun,Hironaka.RankDegeneracy.tangentSpaceIn_eq_range_of_flattening,Hironaka.RankDegeneracy.finrank_tangentSpaceIn_of_flattening,Hironaka.RankDegeneracy.rankIn_eq_finrank_range_param,Hironaka.RankDegeneracy.rankAt_param_eq,Hironaka.RankDegeneracy.finrank_tangentSpaceIn_of_regularAtDim,Hironaka.RankDegeneracy.rankAt_le_of_regularAtDim,Hironaka.RankDegeneracy.tangentSpaceIn_eq_iInf_ker}
+\leanok
+Let \(A\) be an analytic subset of a complex manifold \(X\) of dimension \(n\), \(y\in X\), and \(e\) a chart of \(X\) at \(y\). The \emph{tangent space of \(A\) at
+\(y\), read in \(e\)}, is \(T^e_yA=\bigcap_g\ker d(g\circ e^{-1})_{e(y)}\subset\mathbf C^n\), the intersection over all holomorphic germs \(g\) at \(y\) vanishing on
+\(A\) near \(y\). For \(F\colon X\to Y\) holomorphic (\(\dim Y=n'\)) and a chart \(e'\) of \(Y\) at \(F(y)\), the \emph{rank of \(F\) on \(A\) at \(y\)} is
+\(\operatorname{rank}_y(F|_A)=\dim D_y(T^e_yA)\), with \(D_y\) the differential of \(e'\circ F\circ e^{-1}\) at \(e(y)\).
+\begin{enumerate}
+\item If \(e_1,e_2\) are charts at \(y\), then \(T^{e_1}_yA\) is the preimage of \(T^{e_2}_yA\) under the differential of \(e_2\circ e_1^{-1}\) at \(e_1(y)\), and
+      \(\operatorname{rank}_y(F|_A)\) does not depend on the charts \(e\), \(e'\).
+\item Let \(\Psi\) be a local biholomorphism of \(\mathbf C^n\) with \(e^{-1}(z)\in A\iff\Psi(z)\in\mathbf C^m\times0\) for all \(z\) in its source, and let
+      \(y\in A\) with \(e(y)\) in the source, \(\Psi(e(y))=(w_0,0)\). Then \(T^e_yA\) is the image of \(\mathbf C^m\) under the differential at \(w_0\) of
+      \(P(w)=\Psi^{-1}(w,0)\); it has dimension \(m\); and \(\operatorname{rank}_y(F|_A)\) is the rank at \(w_0\) of the differential of
+      \(w\mapsto e'(F(e^{-1}(P(w))))\). In particular, at a regular point of dimension \(m\) the space \(T_yA\) is the tangent space of the manifold
+      \(A_{\mathrm{reg}}\), \(\operatorname{rank}_y(F|_A)=\operatorname{rank}d(F|_{A_{\mathrm{reg}}})_y\le m\).
+\item If holomorphic \(g_1,\dots,g_N\) generate \(\mathcal I_A\) at every point of an open \(U\) and cut out \(A\) on \(U\), then
+      \(T^e_yA=\bigcap_i\ker d(g_i\circ e^{-1})_{e(y)}\) for \(y\in A\cap U\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Near \(e_1(y)\), \(g\circ e_1^{-1}=(g\circ e_2^{-1})\circ(e_2\circ e_1^{-1})\), so by the chain rule every differential in \(e_1\) is the differential in \(e_2\)
+composed with the differential \(T\) of the transition; hence \(T^{e_1}_yA=T^{-1}(T^{e_2}_yA)\). As \(T\) is invertible (the two transitions are mutually
+inverse), \(D^{e_1}_y=D^{e_2}_y\circ T\) maps \(T^{-1}(T^{e_2}_yA)\) onto \(D^{e_2}_y(T^{e_2}_yA)\); a change of \(e'\) composes \(D_y\) with an invertible
+map. (2) The point \(e(y)\) equals \(P(w_0)\), as \(\Psi(e(y))\) lies in the plane. If \(g\) vanishes on \(A\) near \(y\), then \(g\circ e^{-1}\circ P\) vanishes near \(w_0\)
+(its points lie in \(A\)), so \(d(g\circ e^{-1})\circ dP_{w_0}=0\): the image of \(dP_{w_0}\) lies in \(T^e_yA\). Conversely the normal coordinates
+\(\Psi_j\circ e\) (\(j>m\)) vanish on \(A\) near \(y\), so a vector \(v\in T^e_yA\) has \(d\Psi(v)\) in \(\mathbf C^m\times0\), and
+\(v=d\Psi^{-1}(d\Psi(v))=dP_{w_0}(\mathrm{pr}\,d\Psi(v))\). The differential \(dP_{w_0}=d\Psi^{-1}\circ\iota\) is injective, so \(\dim T^e_yA=m\), and the rank
+formula is the chain rule. At a regular point a flattening exists in every chart (Lemma~\ref{ana:stokes-singular-locus-analytic}), and \(P\) parametrizes
+\(A_{\mathrm{reg}}\) near \(y\). (3) Each \(g_i\) vanishes on \(A\) near \(y\), so \(T^e_yA\subset\bigcap\ker dg_i\); a germ \(g\) of \(\mathcal I_{A,y}\) is
+\(\sum a_ig_i\) near \(y\), and as \(g_i(y)=0\), \(dg=\sum a_i(y)\,dg_i\) (Lemma~\ref{ana:stokes-cartan-generators}).
+\end{proof}
+
+\begin{lemma}[The rank-degeneracy set is analytic]
+\label{rem:rank-degeneracy}
+\uses{rem:tangent-space,rem:pure-singular-locus,ana:stokes-cartan-generators}
+\lean{Hironaka.RankDegeneracy.rankDegeneracyLocus,Hironaka.RankDegeneracy.rankDegeneracyLocus_subset,Hironaka.RankDegeneracy.finrank_span_add_finrank_iInf_ker,Hironaka.RankDegeneracy.finrank_span_lt_iff_minors_eq_zero,Hironaka.RankDegeneracy.stackedEquations,Hironaka.RankDegeneracy.finrank_span_fderiv_stackedEquations,Hironaka.RankDegeneracy.productMinor,Hironaka.RankDegeneracy.productMinor_eq_zero_iff,Hironaka.RankDegeneracy.isComplexAnalyticSubset_rankDegeneracyLocus}
+\leanok
+Let \(A\) be an analytic subset of pure dimension \(m\) of a complex manifold \(X\) of dimension \(n\), \(F\colon X\to Y\) holomorphic and \(r\in\mathbf N\). Then
+\[
+ S_r(F,A)=A_{\mathrm{sing}}\cup\{x\in A_{\mathrm{reg}}:\operatorname{rank}d(F|_{A_{\mathrm{reg}}})_x<r\}
+\]
+is an analytic subset of \(X\).
+\end{lemma}
+\begin{proof}
+\leanok
+If \(m>n\), \(A\) has no regular point, so \(A=\emptyset\) (regular points are dense). Let \(m\le n\). Near \(x_0\in X\) take Cartan generators \(g=(g_1,\dots,g_N)\)
+of \(\mathcal I_A\) on an open \(U\) (Lemma~\ref{ana:stokes-cartan-generators}), read in the chart \(e\) at \(x_0\), and read \(F\) in the chart \(e'\) at \(F(x_0)\)
+(\(n'\) components), on \(U\cap F^{-1}(\operatorname{dom}e')\). Let \(y\in A\cap U\) be a regular point (of dimension \(m\)). By
+Lemma~\ref{rem:tangent-space}(3), \(T_yA=\ker dg(y)\) has dimension \(m\) (part (2)); for the stacked matrix \(J=\binom{dg}{dF}(y)\),
+\(\ker J=T_yA\cap\ker dF_y\), and by rank--nullity for \(dF_y\) on \(T_yA\), \(\operatorname{rank}J=n-\dim\ker J=n-m+\operatorname{rank}_y(F|_A)\). The rank of a
+family of linear forms is \(<s\) iff all \(s\times s\) minors of its matrix vanish. Therefore \(S_r(F,A)\cap U\) is the set of \(y\in U\) with \(g(y)=0\) at which
+either all \((n-m)\)-minors of \(dg\) vanish (at points of \(A\) this is \(A_{\mathrm{sing}}\), Lemma~\ref{rem:pure-singular-locus}: at regular points \(dg\) has
+rank \(\ge n-m\)) or all \((n-m+r)\)-minors of \(J\) vanish (at regular points this is the rank condition, by Lemma~\ref{rem:tangent-space}(1) in the chart
+\(e\)). A union of two zero sets is the zero set of the products, so \(S_r(F,A)\cap U\) is the common zero set of the \(g_i\) and of the products of the
+\((n-m)\)-minors of \(dg\) with the \((n-m+r)\)-minors of \(J\), finitely many holomorphic functions on \(U\).
+\end{proof}
+
+\begin{lemma}[Global irreducible components are locally finite]
+\label{rem:global-components}
+\uses{ana:regular-component,lag:local-statement-connected,lag:regular-locus-dense}
+\source{demailly-cadg:II.5.3}
+\lean{Hironaka.GlobalComponents.globalComponents,Hironaka.GlobalComponents.closure_component_mem_globalComponents,Hironaka.GlobalComponents.isComplexAnalyticallyIrreducible_of_mem_globalComponents,Hironaka.GlobalComponents.subset_of_mem_globalComponents,Hironaka.GlobalComponents.component_eq_of_isPreconnected,Hironaka.GlobalComponents.exists_isOpen_finite_globalComponents,Hironaka.GlobalComponents.locallyFinite_globalComponents,Hironaka.GlobalComponents.sUnion_globalComponents}
+\leanok
+Let \(A\) be an analytic subset of a complex manifold. The closures \(A_\alpha\) of the connected components of \(A_{\mathrm{reg}}\) are irreducible analytic
+subsets, \(A=\bigcup_\alpha A_\alpha\), and every point has a neighbourhood meeting only finitely many \(A_\alpha\).
+\end{lemma}
+\begin{proof}
+\leanok
+The first assertion is Lemma~\ref{ana:regular-component}. Let \(p\in A\) and take the local statement
+with connected regular parts at \(p\) (Lemma~\ref{lag:local-statement-connected}): pieces \(A_1,\dots,A_s\) with \(A\cap W=\bigcup A_i\), open \(\Delta_i\ni p\) and
+connected sets \(G_i\subset A_{\mathrm{reg}}\cap A_i\cap\Delta_i\) dense in \(A_i\cap\Delta_i\). Let \(\Omega=W\cap\bigcap_i\Delta_i\). A regular point \(z\in\Omega\)
+of \(A\) lies in some \(A_i\cap\Delta_i\), hence in \(\overline{G_i}\); a connected manifold neighbourhood of \(z\) in \(A_{\mathrm{reg}}\) meets \(G_i\), so \(z\) and
+\(G_i\) lie in the same connected component of \(A_{\mathrm{reg}}\). Hence a component meeting \(\Omega\) contains one of the \(G_i\), and at most \(s\) components
+\(A_\alpha\) meet \(\Omega\) (a component \(A_\alpha\) meeting the open set \(\Omega\) meets it in a point of the dense set \(A_{\mathrm{reg}}\cap A_\alpha\)).
+Finally \(\bigcup_\alpha A_\alpha\subset A\), and a point \(x\in A\) has an open neighbourhood \(U\) meeting only finitely many \(A_\alpha\); the regular points in \(U\)
+lie in their union, which is closed, and they accumulate at \(x\) (Theorem~\ref{lag:regular-locus-dense}); so \(x\) lies in one of them.
+\end{proof}
+
+\subsection{Fibre and image dimensions}
+
+\begin{lemma}[Fibres of a map on a pure-dimensional set are not too small]
+\label{rem:fibre-dimension-lower-bound}
+\uses{rem:dimension,rem:open-subset-analytic,rem:generic-sections,rem:compact-analytic-finite,rem:tangent-space,rem:finite-map-dimension,ana:analytic-preimage,lag:regular-locus-dense}
+\source{demailly-cadg:II.8.2}
+\lean{Hironaka.FibreDimensionLowerBound.isComplexAnalyticSubset_singleton,Hironaka.FibreDimensionLowerBound.not_accPt_of_finite,Hironaka.FibreDimensionLowerBound.inlCLM,Hironaka.FibreDimensionLowerBound.inrCLM,Hironaka.FibreDimensionLowerBound.fstCLM,Hironaka.FibreDimensionLowerBound.sndCLM,Hironaka.FibreDimensionLowerBound.fstCLM_inlCLM,Hironaka.FibreDimensionLowerBound.fstCLM_inrCLM,Hironaka.FibreDimensionLowerBound.sndCLM_inlCLM,Hironaka.FibreDimensionLowerBound.sndCLM_inrCLM,Hironaka.FibreDimensionLowerBound.inlCLM_fstCLM_add_inrCLM_sndCLM,Hironaka.FibreDimensionLowerBound.finrank_ker_fstCLM_le,Hironaka.FibreDimensionLowerBound.formsCLM,Hironaka.FibreDimensionLowerBound.formsCLM_apply,Hironaka.FibreDimensionLowerBound.finrank_range_le_finrank_range_comp_add,Hironaka.FibreDimensionLowerBound.locDimGE_fibre}
+\leanok
+Let \(A\) be an analytic subset of pure dimension \(m\) of a complex manifold \(X\), \(F\colon X\to Y\) holomorphic, and \(r\) such that
+\(\operatorname{rank}d(F|_A)\le r\) at every regular point of \(A\). For every \(x\in A\), the fibre \(\Phi_x=A\cap F^{-1}(F(x))\) satisfies
+\(\dim_x\Phi_x\ge m-r\).
+\end{lemma}
+\begin{proof}
+\leanok
+\(\Phi=\Phi_x\) is analytic (a point is analytic, Lemma~\ref{ana:analytic-preimage}). Suppose that every regular point of \(\Phi\) in a neighbourhood \(V\)
+of \(x\) has dimension \(\le k\) with \(k+r<m\) (if \(m\le r\) there is nothing to prove, Theorem~\ref{lag:regular-locus-dense}). Let \(e\) be the chart at
+\(x\), \(e'\) the chart at \(F(x)\), and \(U_1\subset V\) an open neighbourhood of \(x\) in the chart domain of \(e\) with \(F(U_1)\) in that of \(e'\). In the
+manifold \(U_1\) the set \(\Phi\cap U_1\) has dimension \(\le k\) (Lemma~\ref{rem:open-subset-analytic}), so Lemma~\ref{rem:generic-sections}, iterated, gives
+linear forms \(\xi_1,\dots,\xi_k\) on \(\mathbf C^n\) such that \(x\) is isolated in \(\Phi\cap\{\xi_i\circ e=\xi_i(e(x))\ \forall i\}\). Put
+\(G=(e'\circ F,\ \xi\circ e)\colon U_1\to\mathbf C^{n'+k}\), holomorphic; then \(x\) is isolated in \(A\cap G^{-1}(G(x))\): there is an open \(B\ni x\) with
+\(B\cap A\cap G^{-1}(G(x))=\{x\}\).
+
+Choose \(\varepsilon>0\) with \(\overline B_\varepsilon=\overline B(e(x),\varepsilon)\) inside the chart image of \(B\). The points \(z\) of the sphere
+\(\partial B_\varepsilon\) with \(e^{-1}(z)\in A\) form a compact set on which \(|G\circ e^{-1}-G(x)|\) is positive, so it is \(\ge\eta\) there for some \(\eta>0\).
+Let \(W=\{y:e(y)\in B_\varepsilon,\ |G(y)-G(x)|<\eta\}\), open with \(x\in W\). For \(|w-G(x)|<\eta\) the set
+\(K_w=\{z\in\overline B_\varepsilon:e^{-1}(z)\in A,\ G(e^{-1}(z))=w\}\) is compact and misses the sphere, so it is a compact analytic subset of the open ball, read in
+\(\mathbf C^n\) (Lemmas~\ref{ana:analytic-preimage} and~\ref{rem:open-subset-analytic}); by Lemma~\ref{rem:compact-analytic-finite} it is finite. Hence
+\(A\cap W\cap G^{-1}(w)\subset e^{-1}(K_w)\) is finite: \(G\) has finite fibres on \(A\cap W\).
+
+By Theorem~\ref{lag:regular-locus-dense} there is a regular point \(y_0\in W\) of \(A\); its dimension is \(m\). In the manifold \(W\), with a flattening \(\Psi\)
+of \(A\cap W\) at \(y_0\) and the parametrization \(p(v)=e_{y_0}^{-1}\Psi^{-1}(v,0)\), Lemma~\ref{rem:finite-map-dimension} (its core: the parametrized map of a
+map with discrete fibres has full rank on an open set) gives a parameter \(v_1\) at which \(G\circ p\) has rank \(m\). But the first \(n'\) components of
+\(G\circ p\) are \(e'\circ F\circ p\), whose rank at \(v_1\) is \(\operatorname{rank}d(F|_A)\) at the regular point \(p(v_1)\) (Lemma~\ref{rem:tangent-space}),
+hence \(\le r\); the remaining \(k\) components add at most \(k\) to the rank. So \(m\le r+k<m\), a contradiction. Hence every neighbourhood of \(x\) contains
+regular points of \(\Phi\) of dimension \(\ge m-r\).
+\end{proof}
+
+\begin{lemma}[Image dimension]
+\label{rem:image-dimension-bound}
+\uses{rem:thin-dimension-drop,rem:dimension}
+\source{demailly-cadg:II.8.6}
+\lean{Hironaka.ImageDimensionBound.tailCLM,Hironaka.ImageDimensionBound.tailCLM_apply,Hironaka.ImageDimensionBound.consPt,Hironaka.ImageDimensionBound.consPt_zero,Hironaka.ImageDimensionBound.tailCLM_consPt,Hironaka.ImageDimensionBound.consPt_eq,Hironaka.ImageDimensionBound.continuous_consPt,Hironaka.ImageDimensionBound.eq_of_zero_eq_of_tail_eq,Hironaka.ImageDimensionBound.countable_exceptionalLevels,Hironaka.ImageDimensionBound.add_le_of_isOpen_subset_image}
+\leanok
+Let \(T\) be analytic in a complex manifold \(X\) with \(\dim T\le a\), and \(g\colon X\to\mathbf C^d\) holomorphic such that \(g(T)\) contains a nonempty open
+subset of \(\mathbf C^d\) and \(\dim_x\bigl(T\cap g^{-1}(g(x))\bigr)\ge b\) for every \(x\in T\). Then \(d+b\le a\).
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on \(d\). For \(d=0\), \(T\ne\emptyset\); for \(x\in T\) the fibre is \(T\), and \(\dim_xT\ge b\), \(\dim T\le a\) give \(b\le a\). Let \(d\ge1\) and
+\(h=g_1\). The levels \(c\) for which \(T\cap h^{-1}(c)\) contains a nonempty relatively open subset of \(T\) are countably many: such subsets of distinct
+levels are disjoint, and each contains \(B\cap T\ne\emptyset\) for a set \(B\) of a countable basis of \(X\), which determines the level. The first coordinates
+of the open set \(O\subset g(T)\) form a nonempty open subset of \(\mathbf C\) (a surjective linear map is open), which is uncountable, so we can choose \(c\)
+in it, not exceptional. \(T'=T\cap h^{-1}(c)\) is analytic, has empty interior in \(T\), so its regular points have dimension \(<a\)
+(Lemma~\ref{rem:thin-dimension-drop}); it is nonempty, so \(a\ge1\) and \(\dim T'\le a-1\). The map \(g'=(g_2,\dots,g_d)\) maps \(T'\) onto a set containing the
+nonempty open set \(\{w:(c,w)\in O\}\subset\mathbf C^{d-1}\). For \(x\in T'\), \(T'\cap g'^{-1}(g'(x))=T\cap g^{-1}(g(x))\), so the fibre bound persists, and the
+induction hypothesis gives \(d-1+b\le a-1\).
+\end{proof}
+
+\begin{lemma}[Dimension of an analytic image]
+\label{rem:analytic-image-dimension}
+\uses{rem:image-dimension-bound,rem:dimension,rem:open-subset-analytic,lag:regular-locus-dense}
+\source{demailly-cadg:II.8.6}
+\lean{Hironaka.AnalyticImageDimension.headCLM,Hironaka.AnalyticImageDimension.headCLM_apply,Hironaka.AnalyticImageDimension.inclCLM,Hironaka.AnalyticImageDimension.inclCLM_apply,Hironaka.AnalyticImageDimension.inclCLM_mem_plane,Hironaka.AnalyticImageDimension.headCLM_inclCLM,Hironaka.AnalyticImageDimension.inclCLM_headCLM,Hironaka.AnalyticImageDimension.add_le_of_regularAtDim_image,Hironaka.AnalyticImageDimension.dimLE_image,Hironaka.AnalyticImageDimension.eq_empty_of_lt}
+\leanok
+If \(G\colon X\to Y\) is holomorphic, \(T\subset X\) analytic with \(\dim T\le a\), and \(\dim_x(T\cap G^{-1}(G(x)))\ge b\) for every \(x\in T\), then every
+regular point of \(G(T)\) has a dimension \(d\) with \(d+b\le a\); so \(\dim G(T)\le a-b\). If moreover \(G(T)\) is analytic in \(Y\) and \(b>a\), then \(T=\emptyset\).
+\end{lemma}
+\begin{proof}
+\leanok
+Let \(y\) be a regular point of \(G(T)\) of dimension \(d\), flattened by \(\Phi\circ e\) onto \(\mathbf C^d\times0\) on the open set \(N_0=\{z\in\operatorname{dom}e:
+e(z)\in\operatorname{dom}\Phi\}\), and let \(\varphi\colon N_0\to\mathbf C^d\) be \(\Phi\circ e\) followed by the first \(d\) coordinates. Then \(\varphi\) is holomorphic,
+injective on \(G(T)\cap N_0\), and \(\varphi(G(T)\cap N_0)\) is open (it is the set of \(w\) with \((w,0)\) in the image of \(\Phi\)) and contains \(0\). On the
+open set \(U=G^{-1}(N_0)\), a manifold, \(T\cap U\) is analytic with \(\dim(T\cap U)\le a\) and \(g=\varphi\circ G\) is holomorphic
+(Lemma~\ref{rem:open-subset-analytic}); the fibres of \(g\) on \(T\cap U\) are those of \(G\) (injectivity of \(\varphi\)), with the same local dimensions; and
+\(g(T\cap U)=\varphi(G(T)\cap N_0)\) is a nonempty open set. Lemma~\ref{rem:image-dimension-bound} gives \(d+b\le a\). If \(G(T)\) is analytic and \(T\ne\emptyset\),
+then \(G(T)\) has a regular point (Theorem~\ref{lag:regular-locus-dense}), so \(b\le a\).
+\end{proof}
+
+\begin{lemma}[Maps with discrete fibres]
+\label{rem:finite-map-dimension}
+\uses{rem:tangent-space,rem:generic-rank,rem:constant-rank,rem:constant-rank-submanifold,rem:dimension-monotone}
+\source{demailly-cadg:II.8.1}
+\lean{Hironaka.FiniteMapDimension.param,Hironaka.FiniteMapDimension.continuousOn_param,Hironaka.FiniteMapDimension.param_mem,Hironaka.FiniteMapDimension.param_injOn,Hironaka.FiniteMapDimension.differentiableAt_param,Hironaka.FiniteMapDimension.exists_param_rank_eq,Hironaka.FiniteMapDimension.exists_regularAtDim_rankAt_eq,Hironaka.FiniteMapDimension.dimLE_of_discrete_fibres}
+\leanok
+Let \(T\) be a subset of a complex manifold \(X\) and \(G\colon X\to Y\) holomorphic with discrete fibres on \(T\) (no \(y\in T\) is an accumulation point of
+\(T\cap G^{-1}(G(y))\)). (1) Every neighbourhood of a regular point of \(T\) of dimension \(k\) contains a regular point \(y_1\) of \(T\) of dimension \(k\) with
+\(\operatorname{rank}_{y_1}(G|_T)=k\). (2) If \(G(T)\subset D\) with \(D\) analytic and \(\dim D\le a\), then \(\dim T\le a\).
+\end{lemma}
+\begin{proof}
+\leanok
+Let \(y\) be a regular point of \(T\) of dimension \(k\), \(\Psi\) a flattening of \(T\) at \(y\) in a chart \(e\), \(P(w)=e^{-1}\Psi^{-1}(w,0)\) the parametrization near
+\(w=0\) (\(P(0)=y\), \(P\) injective, with values in \(T\)), and \(H=e'\circ G\circ P\) for a chart \(e'\) of \(Y\) at \(G(y)\), holomorphic on an open set \(\Omega\ni0\) of
+parameters mapped into a given neighbourhood of \(y\). The rank of \(dH\) is \(\le k\); let \(\rho\) be its maximum on \(\Omega\), attained at \(w_1\); it is \(\rho\)
+on an open set \(V\ni w_1\) (Lemma~\ref{rem:generic-rank}). If \(\rho<k\), every neighbourhood of \(w_1\) contains \(z\ne w_1\) with \(H(z)=H(w_1)\)
+(Lemma~\ref{rem:constant-rank}(a)), so \(P(w_1)\) is an accumulation point of \(T\cap G^{-1}(G(P(w_1)))\) (\(P\) is continuous and injective, \(e'\) injective);
+hence \(\rho=k\). (1) \(y_1=P(w_1)\) is a regular point of \(T\) of dimension \(k\) (it lies on the flattening), and
+\(\operatorname{rank}_{y_1}(G|_T)=\operatorname{rank}dH(w_1)=k\) (Lemma~\ref{rem:tangent-space}(2)). (2) \(H\) maps a neighbourhood of \(w_1\) in \(V\) onto a set all of
+whose points are regular of dimension \(k\) (Lemmas~\ref{rem:constant-rank}(b) and~\ref{rem:constant-rank-submanifold}); read back in \(Y\) through \(e'\) it
+lies in \(G(T)\subset D\), so by Lemma~\ref{rem:dimension-monotone} \(D\) has regular points of dimension \(\ge k\), and \(k\le a\).
+\end{proof}
+
+\begin{lemma}[Images of proper constant-rank maps]
+\label{rem:constant-rank-image}
+\uses{rem:constant-rank,rem:constant-rank-submanifold,rem:dimension-monotone,rem:open-subset-analytic,rem:tangent-space,rem:fibre-dimension-lower-bound,rem:analytic-image-dimension,ana:analytic-preimage}
+\source{demailly-cadg:II.8.8}
+\lean{Hironaka.ConstantRankImage.presentationUnion,Hironaka.ConstantRankImage.IsComplexAnalyticSubset.union,Hironaka.ConstantRankImage.isComplexAnalyticSubset_biUnion,Hironaka.ConstantRankImage.exists_local_piece,Hironaka.ConstantRankImage.constantRankImage}
+\leanok
+Let \(X'\subset X\) and \(Y'\subset Y\) be open subsets of complex manifolds, \(P\subset X'\) a closed complex submanifold of \(X'\) of dimension \(m\),
+\(G\colon X'\to Y'\) holomorphic with \(\operatorname{rank}d(G|_P)=r\) everywhere on \(P\), and \(G|_P\colon P\to Y'\) proper. Then \(G(P)\) is analytic in \(Y'\), every
+regular point of \(G(P)\) has dimension \(r\), and \(\dim_yG(P)\ge r\) for every \(y\in G(P)\).
+\end{lemma}
+\begin{proof}
+\leanok
+\(X'\) and \(Y'\) are complex manifolds (Lemma~\ref{rem:open-subset-analytic}); work in them. \emph{Local pieces.} Let \(x\in P\), \(e\) a chart at \(x\), \(\Psi\) a
+flattening of \(P\) at \(x\) in \(e\), \(p(w)=e^{-1}\Psi^{-1}(w,0)\) the parametrization and \(e'\) the chart at \(G(x)\). On the open set \(\Omega\) of parameters with
+\(G(p(w))\) in the domain of \(e'\), \(H=e'\circ G\circ p\) is holomorphic of rank \(\operatorname{rank}d(G|_P)=r\) at every point (Lemma~\ref{rem:tangent-space}). By
+Lemma~\ref{rem:constant-rank-submanifold}~(2) there are an open \(O\ni0\) in \(\Omega\), an open \(W\) and a holomorphic \(h\) on \(W\) with \(H(O)=\{z\in W:h(z)=0\}\), every point
+of \(H(O)\) regular of dimension \(r\). With \(V=\{y\in\operatorname{dom}e:e(y)\in\operatorname{dom}\Psi,\ \text{first \(m\) coordinates of }\Psi(e(y))\in O\}\) one has
+\(P\cap V=p(O)\); hence \(G(P\cap V)\) lies in the domain of \(e'\), equals \(\{y:e'(y)\in W,\ h(e'(y))=0\}\) there, and each of its points is a regular point of dimension \(r\)
+(the flattenings of \(H(O)\) read through \(e'\)).
+
+\emph{Analyticity.} Let \(y\in Y'\). The fibre \(P\cap G^{-1}(y)\) is compact; finitely many \(V_{x_1},\dots,V_{x_l}\) as above (all with \(G(x_i)=y\), so with the same chart
+\(e'\) at \(y\)) cover it. Let \(C=P\setminus\bigcup_iV_{x_i}\), closed, and \(K\) a compact neighbourhood of \(y\); \(G(C\cap G^{-1}(K))\) is compact (properness) and misses \(y\).
+On the open neighbourhood \(W_y=\operatorname{int}K\setminus G(C\cap G^{-1}(K))\cap\{e'\in\bigcap_iW_i\}\) of \(y\), every point of \(G(P)\) is the image of a point of some
+\(V_{x_i}\), so \(G(P)\cap W_y=\bigcup_i\{y'\in W_y:h_i(e'(y'))=0\}\), a finite union of zero sets of holomorphic maps (a point is analytic,
+Lemma~\ref{ana:analytic-preimage}), hence analytic in \(W_y\) (products of the local equations); if \(l=0\) it is empty. By Lemma~\ref{rem:open-subset-analytic}~(2),
+\(G(P)\) is analytic.
+
+\emph{Dimensions.} Every \(y=G(x)\in G(P)\) is a regular point of dimension \(r\) of \(G(P\cap V_x)\subset G(P)\), so \(\dim_yG(P)\ge r\) (Lemma~\ref{rem:dimension-monotone}).
+\(P\) has pure dimension \(m\) and \(r\le m\); by Lemma~\ref{rem:fibre-dimension-lower-bound} the fibres of \(G\) on \(P\) have local dimension \(\ge m-r\), so by
+Lemma~\ref{rem:analytic-image-dimension} every regular point of \(G(P)\) has a dimension \(d\le r\), and \(d\ge r\) by the previous sentence.
+\end{proof}
+
+\subsection{Riemann extension and canonical defining functions over a covering}
+
+\begin{lemma}[Riemann extension across a thin analytic set]
+\label{rem:riemann-extension-thin}
+\uses{lag:riemann-extension,lag:germ-domain}
+\source{demailly-cadg:II.4.2}
+\lean{Hironaka.RiemannExtensionThin.exists_local_extension,Hironaka.RiemannExtensionThin.exists_extension_of_thin}
+\leanok
+Let \(U\subset\mathbf C^s\) be open and \(T\subset U\) with \(U\setminus T\) open, such that every \(t\in T\) has a ball \(B\ni t\) in \(U\) and a holomorphic \(h\) on
+\(B\), not identically zero near \(t\), with \(T\cap B\subset h^{-1}(0)\). If \(f\) is holomorphic on \(U\setminus T\) and locally bounded near \(T\), then \(f\) extends to a
+holomorphic function on \(U\).
+\end{lemma}
+\begin{proof}
+\leanok
+Near \(t\in T\), Lemma~\ref{lag:riemann-extension} (translated to \(t\)) gives a holomorphic \(G_t\) on a ball \(B_t\ni t\) equal to \(f\) off \(h^{-1}(0)\). As
+\(B_t\setminus h^{-1}(0)\) is dense in \(B_t\) (Lemma~\ref{lag:germ-domain}) and contained in \(B_t\setminus T\), continuity gives \(G_t=f\) on all of \(B_t\setminus T\), and
+\(B_t\setminus T\) is dense in \(B_t\). Define \(F=f\) on \(U\setminus T\) and, at \(z\in T\), \(F(z)=\lim f(w)\) as \(w\to z\) in \(U\setminus T\); near \(t\in T\) this limit
+exists and equals \(G_t(z)\), so \(F=G_t\) on \(B_t\) and \(F\) is holomorphic.
+\end{proof}
+This applies in particular to an analytic subset \(T\) of \(U\) with empty interior: near \(t\in T\) some local equation \(g_i\) of \(T\) is not identically zero near
+\(t\) (else \(T\) would contain a neighbourhood of \(t\)), and \(T\subset g_i^{-1}(0)\) there.
+
+\begin{lemma}[Canonical defining functions of a finite unramified covering]
+\label{rem:covering-symmetric-functions}
+\uses{lag:canonical-defining-functions}
+\source{demailly-cadg:II.8.8}
+\lean{Hironaka.CoveringSymmetricFunctions.fibreSet,Hironaka.CoveringSymmetricFunctions.fibrePoly,Hironaka.CoveringSymmetricFunctions.fibrePoly_eq,Hironaka.CoveringSymmetricFunctions.exists_local_sheets,Hironaka.CoveringSymmetricFunctions.exists_card_eq,Hironaka.CoveringSymmetricFunctions.differentiableOn_coeff_fibrePoly,Hironaka.CoveringSymmetricFunctions.norm_coeff_fibrePoly_le,Hironaka.CoveringSymmetricFunctions.exists_forms_mem_iff}
+\leanok
+Let \(B_0\subset\mathbf C^s\) be a connected open set, \(B''\subset\mathbf C^{d}\) the open ball of radius \(R\) about \(0\), and \(E\subset B_0\times B''\) such that the
+projection \(\pi\colon E\to B_0\) is proper (\(E\cap\pi^{-1}(K)\) is compact for every compact \(K\subset B_0\)) and every point of \(E\) has a neighbourhood \(V\) with
+\(E\cap V\) the graph of a holomorphic map over an open subset of \(\mathbf C^s\). Then the fibres \(E_w=\{z'':(w,z'')\in E\}\) are finite of a constant cardinality \(q\) on
+\(B_0\); for every linear form \(\lambda\) on \(\mathbf C^{d}\) the coefficients of \(P_\lambda(w;T)=\prod_{z''\in E_w}(T-\lambda(z''))\) (up to sign the elementary symmetric
+functions of the values \(\lambda(z'')\)) are holomorphic on \(B_0\) and bounded by \((1+\|\lambda\|R)^q\); and for the \(qd+1\) linear forms
+\(\lambda_i(z'')=\sum_ki^kz''_k\) (\(0\le i\le qd\)), a point \((w,z'')\in B_0\times\mathbf C^{d}\) lies in \(E\) iff \(P_{\lambda_i}(w;\lambda_i(z''))=0\) for every \(i\).
+\end{lemma}
+\begin{proof}
+\leanok
+\emph{Local sheets.} Let \(w_0\in B_0\). The fibre \(E_{w_0}\) is compact (properness), and each of its points \(z\) is isolated in it (in the graph neighbourhood of
+\((w_0,z)\) the fibre is one point), so it is finite. Choose for each \(z\in E_{w_0}\) the graph neighbourhood \(V_z\) with sheet \(g_z\) over \(U_z\ni w_0\), and
+pairwise disjoint open \(S_z\ni z\); put \(Q_z=\operatorname{int}V_z\cap(\mathbf C^s\times S_z)\). For a compact neighbourhood \(K\subset B_0\) of \(w_0\), the
+projection of the compact set \((E\cap\pi^{-1}(K))\setminus\bigcup_zQ_z\) misses \(w_0\). On the neighbourhood \(N\) of \(w_0\) where moreover \(w\in U_z\) and
+\((w,g_z(w))\in Q_z\) for all \(z\), every fibre is \(E_w=\{g_z(w):z\in E_{w_0}\}\) with the \(g_z(w)\) pairwise distinct.
+
+Hence \(w\mapsto\#E_w\) is locally constant, so constant on the connected \(B_0\); near \(w_0\), \(P_\lambda(w;T)=\prod_z(T-\lambda(g_z(w)))\) has holomorphic coefficients;
+and \(|\lambda(z'')|\le\|\lambda\|R\) on \(B''\) gives the bound. If \(P_{\lambda_i}(w;\lambda_i(z''))=0\) for all \(i\), each \(\lambda_i(z'')\) equals \(\lambda_i(y)\) for some
+\(y\in E_w\); since \(qd<qd+1\), by the pigeonhole principle more than \(d\) indices give the same \(y\), and \(d\) of the forms \(\lambda_i\) are linearly
+independent (Vandermonde, as in Lemma~\ref{lag:canonical-defining-functions}), so \(z''=y\in E_w\). The converse is clear.
+\end{proof}
+
+\subsection{The Remmert--Stein theorem and Remmert's theorem}
+
+For \(m\in\mathbf N\) consider the two statements:
+
+\((\mathrm R_m)\) \emph{For complex manifolds \(X,Y\), a holomorphic \(F\colon X\to Y\) and an analytic \(A\subset X\) with \(\dim A\le m\) and \(F|_A\) proper,
+\(F(A)\) is analytic in \(Y\).}
+
+\((\mathrm{RS}_m)\) \emph{For a complex manifold \(Y\), an integer \(p\ge-1\), an analytic \(B\subset Y\) with \(\dim B\le p\) (\(B=\emptyset\) if \(p=-1\)), and an analytic subset \(E\) of \(Y\setminus B\) with
+\(\dim E\le m\) and \(\dim_yE\ge p+1\) for every \(y\in E\), the closure \(\overline E\) is analytic in \(Y\).}
+
+\begin{definition}[The induction statements]
+\label{rem:induction-statements}
+\uses{rem:dimension,rem:open-subset-analytic}
+\lean{Hironaka.RemmertStatements.ProperImageStatement,Hironaka.RemmertStatements.RemmertSteinStatement,Hironaka.RemmertStatements.nonempty_presentation_comp,Hironaka.RemmertStatements.nonempty_presentation_of_inter_eq,Hironaka.RemmertStatements.isComplexAnalyticSubset_preimage_val_of_forall,Hironaka.RemmertStatements.nonempty_presentation_of_preimage_val,Hironaka.RemmertStatements.closure_inter_subset_of_forall}
+\leanok
+\((\mathrm R_m)\) and \((\mathrm{RS}_m)\) are the two statements above, for all complex manifolds. ``\(E\) is analytic in \(Y\setminus B\)'' means that every
+point of \(Y\setminus B\) has a neighbourhood in which \(E\) is the common zero set of finitely many holomorphic functions; this is the same as
+analyticity of \(E\) in the manifold \(Y\setminus B\) (Lemma~\ref{rem:open-subset-analytic}). With \(q=p+1\), the hypotheses on \(B\) say that every
+regular point of \(B\) has dimension \(<q\) (an analytic set without regular points is empty, Theorem~\ref{lag:regular-locus-dense}).
+\end{definition}
+
+\begin{lemma}[Generic linear coordinates]
+\label{rem:flat-coordinates}
+\uses{rem:generic-sections,rem:open-subset-analytic,rem:dimension}
+\source{demailly-cadg:II.8.7}
+\lean{Hironaka.RemmertSteinCoordinates.levelSubmoduleVec,Hironaka.RemmertSteinCoordinates.exists_generic_sections_vec,Hironaka.RemmertSteinCoordinates.exists_generic_forms,Hironaka.RemmertSteinCoordinates.isComplexAnalyticSubset_levels,Hironaka.RemmertSteinCoordinates.linearIndependent_proj,Hironaka.RemmertSteinCoordinates.annPlane,Hironaka.RemmertSteinCoordinates.proj_mem_annPlane,Hironaka.RemmertSteinCoordinates.le_finrank_annPlane,Hironaka.RemmertSteinCoordinates.restrictPlane,Hironaka.RemmertSteinCoordinates.restrictPlane_apply,Hironaka.RemmertSteinCoordinates.single_mem_plane,Hironaka.RemmertSteinCoordinates.le_finrank_map_restrictPlane,Hironaka.RemmertSteinCoordinates.exists_flat_coordinates}
+\leanok
+Let \(L=\mathbf C^p\times\{0\}\subset\mathbf C^n\), \(a\in L\), \(t\ge1\) with \(p+t\le n\), and let \(E\) be analytic in an open set \(U\subset\mathbf C^n\setminus L\)
+with \(\dim E\le p+t\). There is a linear isomorphism \(\Lambda=(\pi,\kappa)\colon\mathbf C^n\to\mathbf C^{p+t}\times\mathbf C^{n-p-t}\) such that, with
+\(N=\mathbf C^p\times\{0\}\subset\mathbf C^{p+t}\), \(\pi(L)\subset N\), \(\pi\) is injective on \(L\), \(\dim\bigl(E\cap\pi^{-1}(N)\bigr)\le p\) and
+\(\dim\bigl(E\cap\pi^{-1}(\pi(a))\bigr)\le0\).
+\end{lemma}
+\begin{proof}
+\leanok
+Lemma~\ref{rem:generic-sections} is used with the levels measured against the vector \(a\) (which is not a point of \(U\)): if the forms of a space
+\(\Xi\) separate every point of \(E\) from \(a\), then outside countably many proper subspaces of \(\Xi\), \(\dim(E\cap\{\xi=\xi(a)\})\le\dim E-1\); the
+proof is the same. A generic \(\xi\) also avoids one more proper subspace, which keeps the chosen forms independent in a prescribed sense.
+First choose \(\xi_{p+1},\dots,\xi_{p+t}\) among the forms vanishing on \(L\) (they separate every point of \(E\) from \(a\), as \(E\cap L=\emptyset\) and
+\(a\in L\)), linearly independent, with \(\dim\bigl(E\cap\{\xi_j=\xi_j(a),\ j>p\}\bigr)\le p\); then \(\xi_1,\dots,\xi_p\) with linearly independent
+restrictions to \(L\), cutting this set down to dimension \(\le0\). The forms \(\xi_1,\dots,\xi_{p+t}\) are linearly independent (apply a relation to
+\(L\), then use the independence of the last \(t\)), so \(\pi=(\xi_1,\dots,\xi_{p+t})\) is onto; let \(\kappa\) be the projection onto \(\ker\pi\) along a
+complementary subspace followed by an isomorphism \(\ker\pi\cong\mathbf C^{n-p-t}\). The last \(t\) coordinates of \(\pi\) vanish on \(L\), so
+\(\pi(L)\subset N\) and \(E\cap\pi^{-1}(N)\) lies in the first section; \(\pi\) is injective on \(L\) because the restrictions of \(\xi_1,\dots,\xi_p\)
+form a basis of the dual of \(L\); and \(E\cap\pi^{-1}(\pi(a))\) lies in the second section.
+\end{proof}
+
+\begin{lemma}[Remmert--Stein, flat case]
+\label{rem:remmert-stein-flat}
+\uses{rem:flat-coordinates,rem:compact-analytic-finite,rem:rank-degeneracy,rem:finite-map-dimension,rem:thin-dimension-drop,rem:analytic-image-dimension,rem:riemann-extension-thin,rem:covering-symmetric-functions,rem:open-subset-analytic,rem:isolated-dim-zero,rem:tangent-space,ana:component-complement-connected,ana:closure-difference-analytic,ana:dimension-strata}
+\source{demailly-cadg:II.8.7}
+\lean{Hironaka.RemmertSteinFlat.nonempty_presentation_of_eqOn,Hironaka.RemmertSteinFlat.not_accPt_of_finite,Hironaka.RemmertSteinFlat.regularAtDim_of_mem_nhds,Hironaka.RemmertSteinFlat.exists_radii,Hironaka.RemmertSteinFlat.polydisc,Hironaka.RemmertSteinFlat.isOpen_polydisc,Hironaka.RemmertSteinFlat.mem_polydisc_self,Hironaka.RemmertSteinFlat.polydisc_subset,Hironaka.RemmertSteinFlat.isCompact_inter_preimage,Hironaka.RemmertSteinFlat.finite_fibre,Hironaka.RemmertSteinFlat.isComplexAnalyticSubset_plane,Hironaka.RemmertSteinFlat.coverSource,Hironaka.RemmertSteinFlat.coverTarget,Hironaka.RemmertSteinFlat.coverMap,Hironaka.RemmertSteinFlat.coverMap_coe,Hironaka.RemmertSteinFlat.contMDiff_coverMap,Hironaka.RemmertSteinFlat.exists_badSet,Hironaka.RemmertSteinFlat.isPreconnected_base,Hironaka.RemmertSteinFlat.goodBase,Hironaka.RemmertSteinFlat.isOpen_goodBase,Hironaka.RemmertSteinFlat.coverSet,Hironaka.RemmertSteinFlat.chart_coverSource_apply,Hironaka.RemmertSteinFlat.chart_coverTarget_apply,Hironaka.RemmertSteinFlat.exists_local_graph,Hironaka.RemmertSteinFlat.not_mem_nhds_of_dimLE,Hironaka.RemmertSteinFlat.not_subset_of_isOpen,Hironaka.RemmertSteinFlat.subset_closure_goodBase,Hironaka.RemmertSteinFlat.exists_extension,Hironaka.RemmertSteinFlat.eqn,Hironaka.RemmertSteinFlat.Wset,Hironaka.RemmertSteinFlat.differentiableOn_eqn,Hironaka.RemmertSteinFlat.nonempty_presentation_Wset,Hironaka.RemmertSteinFlat.fibrePoly_monic,Hironaka.RemmertSteinFlat.eval_monic_eq,Hironaka.RemmertSteinFlat.mem_Wset_iff,Hironaka.RemmertSteinFlat.finite_Wset_fibre,Hironaka.RemmertSteinFlat.isClosed_complexCoordinatePlane,Hironaka.RemmertSteinFlat.closure_opens_eq,Hironaka.RemmertSteinFlat.dimLE_over_badSet,Hironaka.RemmertSteinFlat.remmertStein_flat_pure}
+\leanok
+Assume \((\mathrm R_{m-1})\). Let \(\Omega\subset\mathbf C^n\) be open, \(L=\mathbf C^p\times\{0\}\), \(s=p+t\) with \(t\ge1\) and \(s\le\min(m,n)\), and let
+\(E\subset\Omega\setminus L\) be analytic in \(\Omega\setminus L\) and of pure dimension \(s\). Then \(\overline E\) is analytic near every point of \(L\cap\Omega\).
+\end{lemma}
+\begin{proof}
+\leanok
+Fix \(a\in L\cap\Omega\). \(E\) is closed in \(\Omega\setminus L\), so \(\overline E\cap\Omega\subset E\cup L\).
+
+\emph{Coordinates and radii.} Take \(\Lambda=(\pi,\kappa)\) from Lemma~\ref{rem:flat-coordinates} (with \(U=\Omega\setminus L\)). The central fibre
+\(E\cap\pi^{-1}(\pi(a))\) has dimension \(\le0\), so it is discrete (Lemma~\ref{rem:isolated-dim-zero}) and countable. Choose \(\rho>0\) outside the
+countably many values \(|\kappa(z)-\kappa(a)|\), \(z\) in the central fibre, and so small that \(\{\pi=\pi(a),\ |\kappa-\kappa(a)|\le\rho\}\subset\Omega\).
+The compact set \(\{\pi=\pi(a),\ |\kappa-\kappa(a)|=\rho\}\) misses \(E\) (choice of \(\rho\)) and \(L\) (\(\pi\) is injective on \(L\)), hence lies in the
+open set \(\Omega\setminus(E\cup L)\); by the tube lemma there is \(\delta>0\) such that the closed polydisc \(\{|\pi-\pi(a)|\le\delta,\
+|\kappa-\kappa(a)|\le\rho\}\) lies in \(\Omega\) and its vertical boundary \(\{|\pi-\pi(a)|\le\delta,\ |\kappa-\kappa(a)|=\rho\}\) misses \(E\cup L\). Let
+\(Q\) be the open polydisc, \(B'\) the ball of radius \(\delta\) about \(\pi(a)\) and \(N=\mathbf C^p\times\{0\}\subset\mathbf C^s\), so \(\pi(L)\subset N\).
+
+\emph{Properness.} For a compact \(K\subset B'\setminus N\), \(E\cap Q\cap\pi^{-1}(K)\) equals \(\overline E\cap\Lambda^{-1}(K\times\overline{B}(\kappa(a),\rho))\):
+a point of the right side lies in \(\Omega\), not in \(L\) (\(\pi(L)\subset N\)), hence in \(E\), and not on the vertical boundary. So it is compact; in
+particular the fibres of \(\pi\) on \(E\cap Q\) over \(B'\setminus N\) are compact analytic subsets of a ball of \(\mathbf C^{n-s}\), hence finite
+(Lemma~\ref{rem:compact-analytic-finite}).
+
+\emph{The bad set.} On the open set \(X_0=Q\cap\pi^{-1}(B'\setminus N)\) (a manifold, Lemma~\ref{rem:open-subset-analytic}), \(E_0=E\cap X_0\) is analytic
+of pure dimension \(s\), and \(\pi\colon X_0\to Y_0=B'\setminus N\) has finite fibres on \(E_0\). Let \(S_0=S_s(\pi,E_0)\) be the set of singular points
+of \(E_0\) and of regular points where \(\operatorname{rank}d(\pi|_{E_0})<s\), analytic by Lemma~\ref{rem:rank-degeneracy}. By
+Lemma~\ref{rem:finite-map-dimension}(1) every nonempty open piece of \(E_0\) contains points of rank \(s\), so \(S_0\) has empty interior in \(E_0\) and
+\(\dim S_0\le s-1\) (Lemma~\ref{rem:thin-dimension-drop}). \(\pi\) is proper on \(S_0\), so \(\Sigma_0=\pi(S_0)\) is analytic in \(Y_0\) by
+\((\mathrm R_{s-1})\), with \(\dim\Sigma_0\le s-1\) (Lemma~\ref{rem:analytic-image-dimension}). The good base \(B'_0=Y_0\setminus\Sigma_0\) is open and
+connected: \(N\cap B'\) and \(\Sigma_0\) are proper analytic subsets of the connected manifolds \(B'\) and \(Y_0\)
+(Lemma~\ref{ana:component-complement-connected}).
+
+\emph{Local graphs.} Let \(z\in E\cap Q\) with \(\pi(z)\in B'_0\). Then \(z\notin S_0\): \(z\) is a regular point of \(E\) of dimension \(s\) and
+\(d(\pi|_E)\) has rank \(s\) there. Reading the rank through a flattening \(\varphi\) of \(E\) at \(z\) (Lemma~\ref{rem:tangent-space}), \(\pi\circ\varphi\) has
+invertible differential at the centre, hence is a local biholomorphism \(\Theta\); near \(z\), \(E\) is the graph of \(w\mapsto\kappa(\varphi(\Theta^{-1}(w)))\) over
+the open set \(\Theta(\text{source})\subset B'_0\).
+
+\emph{Canonical defining functions.} Lemma~\ref{rem:covering-symmetric-functions} applies to \(\hat E=\{(\pi z,\kappa z-\kappa a):z\in E\cap Q,\ \pi z\in
+B'_0\}\subset B'_0\times B(0,\rho)\): the fibres have a constant cardinality \(q\), and the coefficients \(\sigma_{ij}\) (\(0\le i\le q(n-s)\), \(j<q\)) of the
+canonical polynomials \(P_{\lambda_i}\) are holomorphic and bounded on \(B'_0\). They extend holomorphically to \(B'\) by
+Lemma~\ref{rem:riemann-extension-thin}, applied across \(\Sigma_0\) in \(B'\setminus N\) (\(\Sigma_0\) has empty interior, so near each of its points one
+of its local equations is not identically zero) and then across \(N\cap B'\) (with the equation \(z_{p+1}\)); the bound on \(B'\setminus N\) holds by
+continuity, since \(B'_0\) is dense there. With the extensions \(F_{ij}\), let
+\(W=\{z\in Q:\ \lambda_i(\kappa z-\kappa a)^q+\sum_{j<q}F_{ij}(\pi z)\lambda_i(\kappa z-\kappa a)^j=0,\ 0\le i\le q(n-s)\}\), analytic in \(Q\). Over
+\(B'_0\), \(W=E\) (Lemma~\ref{rem:covering-symmetric-functions}, the polynomials being monic of degree \(q\)). The fibres of \(\pi\) on \(W\) are finite: each
+\(\lambda_i(\kappa z-\kappa a)\) is a root of a monic polynomial of degree \(q\), and when \(q\ge1\) any \(n-s\) of the \(q(n-s)+1\) forms \(\lambda_i\) are
+independent (Vandermonde), while for \(q=0\) the fibres are empty. Hence the sets \(E\cap X_0\cap\pi^{-1}(\Sigma_0)\) and \(W\cap X_0\cap\pi^{-1}(\Sigma_0)\),
+with finite fibres over \(\Sigma_0\), have dimension \(\le s-1\) (Lemma~\ref{rem:finite-map-dimension}(2)).
+
+\emph{Density.} Let \(E'_0=E\cap Q\cap\pi^{-1}(B'_0)\). Then \(E\cap Q\subset\overline{E'_0}\): near a point of \(E\cap Q\) there are regular points of
+\(E\) of dimension \(s\). If all points of \(E\) in a neighbourhood \(O\subset Q\) lay over \(N\), one of them would be a regular point of dimension \(s\) of
+\(E\cap\pi^{-1}(N)\), of dimension \(\le p<s\); so there is a point of \(E\) in \(O\cap X_0\), and if all points of \(E\) near it lay over \(\Sigma_0\), a regular
+point of dimension \(s\) of \(E\) near it would be one of \(E\cap X_0\cap\pi^{-1}(\Sigma_0)\), which has dimension \(\le s-1\).
+
+\emph{Analyticity.} Let \(W_1=\overline{W\cap X_0}=\overline{(W\setminus\pi^{-1}(N))\cap Q}\), analytic in \(Q\) (Lemma~\ref{ana:closure-difference-analytic}),
+and \(W_1^s\) the closure of the set of its regular points of dimension \(s\) in \(Q\), analytic in \(Q\) (Proposition~\ref{ana:dimension-strata}). We claim
+\(\overline E\cap Q=W_1^s\cap Q\). On the open set \(Q\cap\pi^{-1}(B'_0)\), \(E=W=W_1\), so the points of \(E'_0\), regular of dimension \(s\) in \(E\), are regular
+points of dimension \(s\) of \(W_1\); with the density, \(\overline E\cap Q\subset\overline{E'_0}\subset W_1^s\). Conversely let \(z\in Q\) be a regular point of
+\(W_1\) of dimension \(s\). If \(\pi(z)\notin N\), then \(W_1=W\) near \(z\) (\(W\) is closed in \(Q\)); if a neighbourhood of \(z\) missed \(E'_0\), \(W\) would
+agree near \(z\) with \(W\cap X_0\cap\pi^{-1}(\Sigma_0)\), and \(z\) would be a regular point of dimension \(s\) of that set, of dimension \(\le s-1\); so
+\(z\in\overline{E'_0}\). If \(\pi(z)\in N\), the points of \(W\cap X_0\) near \(z\), which are regular points of \(W_1\) of dimension \(s\), are of the first kind
+and accumulate at \(z\). Hence \(W_1^s\cap Q\subset\overline{E'_0}\subset\overline E\), and \(\overline E\cap Q=W_1^s\cap Q\) is analytic in \(Q\).
+\end{proof}
+
+\begin{theorem}[Remmert--Stein]
+\label{rem:remmert-stein}
+\uses{rem:remmert-stein-flat,rem:induction-statements,rem:pure-singular-locus,rem:stratum-hull,rem:thin-dimension-drop,rem:dimension-monotone,ana:dimension-strata,rem:open-subset-analytic}
+\source{demailly-cadg:II.8.7}
+\lean{Hironaka.RemmertSteinGeneral.regularAtDim_model_iff,Hironaka.RemmertSteinGeneral.regularAtDim_of_localEquiv,Hironaka.RemmertSteinGeneral.nonempty_presentation_closure_of_regularAtDim,Hironaka.RemmertSteinGeneral.regularAtDim_union_lt,Hironaka.RemmertSteinGeneral.eq_empty_of_forall_not_regularAtDim,Hironaka.RemmertSteinGeneral.closure_inter_compl_eq,Hironaka.RemmertSteinGeneral.remmertStein_pure,Hironaka.RemmertSteinGeneral.remmertSteinStatement_of_properImage}
+\leanok
+\((\mathrm R_{m-1})\) implies \((\mathrm{RS}_m)\).
+\end{theorem}
+\begin{proof}
+\leanok
+Write \(q=p+1\). \emph{Pure dimension.} Let first \(E\) be of pure dimension \(s\) with \(q\le s\le m\); we argue by induction on \(q\) (for all \(B\) and \(E\)).
+If \(q=0\), \(B\) has no regular point, so \(B=\emptyset\) (Theorem~\ref{lag:regular-locus-dense}), and \(\overline E=E\) is analytic. Let \(q\ge1\) and
+every regular point of \(B\) have dimension \(\le q-1\). Put \(B_{q-1}\) = closure of the regular points of \(B\) of dimension \(q-1\) (pure of dimension
+\(q-1\), Lemma~\ref{rem:stratum-hull}) and \(B_{<}\) = closure of the regular points of dimension \(<q-1\), both analytic
+(Proposition~\ref{ana:dimension-strata}), and \(B'=(B_{q-1})_{\mathrm{sing}}\cup B_{<}\). The regular points of \((B_{q-1})_{\mathrm{sing}}\) have dimension
+\(<q-1\) (Lemmas~\ref{rem:pure-singular-locus} and~\ref{rem:thin-dimension-drop}), and so do those of the union: near a regular point of the union, either
+it agrees with \(B_{<}\) on a neighbourhood, or some nearby point has a neighbourhood on which it agrees with \((B_{q-1})_{\mathrm{sing}}\). As the regular
+points of \(B\) are dense, \(B=B_{q-1}\cup B_{<}\), and every point \(y\in B\setminus B'\) is a regular point of \(B\) of dimension \(q-1<s\).
+
+Near such \(y\), a chart followed by a flattening \(\Theta\) of \(B\) carries \(B\) to \(\mathbf C^{q-1}\times\{0\}\subset\mathbf C^k\); the image of \(E\) is
+analytic off this plane and of pure dimension \(s\) (regular points correspond under the local biholomorphism), so by
+Lemma~\ref{rem:remmert-stein-flat} its closure is analytic near the image of \(y\), and since closures correspond under the local biholomorphism,
+\(\overline E\) is analytic near \(y\). Off \(B\), \(\overline E=E\). Hence \(E_1=\overline E\setminus B'\) is analytic in \(Y\setminus B'\). It is of pure dimension
+\(s\): off \(B\) it agrees with \(E\), and near a regular point of \(E_1\) on \(B\) there are points of \(E\), which are regular points of \(E_1\) of the same
+dimension. The induction hypothesis for \(B'\) gives that \(\overline{E_1}=\overline E\) is analytic.
+
+\emph{General \(E\).} For \(s\le m\) let \(E_s\) be the closure in \(Y\setminus B\) of the regular points of \(E\) of dimension \(s\): analytic in \(Y\setminus B\) and of
+pure dimension \(s\) (Lemma~\ref{rem:stratum-hull} in the manifold \(Y\setminus B\), Lemma~\ref{rem:open-subset-analytic}). It is empty for \(s<q\), since
+\(\dim_yE\ge q\) at every point of \(E\). The regular points of \(E\) being dense, \(\overline E=\bigcup_{s\le m}\overline{E_s}\), a finite union of sets which are
+analytic by the pure case.
+\end{proof}
+
+\begin{lemma}[Remmert, irreducible source]
+\label{rem:proper-image-irreducible}
+\uses{rem:rank-degeneracy,rem:thin-dimension-drop,rem:fibre-dimension-lower-bound,rem:analytic-image-dimension,rem:constant-rank-image,rem:induction-statements,ana:irreducible-open-density,ana:closure-difference-analytic,ana:analytic-preimage,ana:pure-dimension}
+\source{demailly-cadg:II.8.8}
+\lean{Hironaka.ProperImageIrreducible.isClosed_image_of_properOn,Hironaka.ProperImageIrreducible.rankAt_congr,Hironaka.ProperImageIrreducible.exists_maxRank,Hironaka.ProperImageIrreducible.nonempty_presentation_image,Hironaka.ProperImageIrreducible.isComplexAnalyticSubset_image_of_irreducible}
+\leanok
+Assume \((\mathrm R_{m-1})\) and \((\mathrm{RS}_m)\). Let \(A\subset X\) be an irreducible analytic subset with \(\dim A\le m\) and \(F\colon X\to Y\) holomorphic with
+\(F|_A\) proper. Then \(F(A)\) is analytic in \(Y\).
+\end{lemma}
+\begin{proof}
+\leanok
+\(A\) has pure dimension \(d\le m\) (Proposition~\ref{ana:pure-dimension}). Let \(r\) be the maximal rank of \(d(F|_{A_{\mathrm{reg}}})\) and \(S=S_r(F,A)\)
+(Lemma~\ref{rem:rank-degeneracy}), a proper analytic subset of \(A\), so \(\dim S\le d-1\le m-1\) (Lemma~\ref{rem:thin-dimension-drop}; \(S\) has empty interior in
+\(A\) by Lemma~\ref{ana:irreducible-open-density}). \(F|_S\) is proper, so \(F(S)\) is analytic by \((\mathrm R_{m-1})\). Let \(A'=A\cap F^{-1}(F(S))\), analytic
+(Lemma~\ref{ana:analytic-preimage}), and note \(F(A')=F(S)\). If \(A'=A\), \(F(A)=F(S)\) is analytic.
+
+Otherwise \(A'\) is a proper analytic subset of the irreducible \(A\): it has empty interior in \(A\) and \(A\setminus A'\) is dense in \(A\); since \(F(A)\) is
+closed (properness), \(F(A)=\overline{F(A\setminus A')}\). On \(Y'=Y\setminus F(S)\) and \(X'=F^{-1}(Y')\), \(P=A\setminus A'=A\cap X'\) is a \(d\)-dimensional manifold
+contained in \(A_{\mathrm{reg}}\setminus S\), on which \(F\) has constant rank \(r\), and every point of \(A\) over \(Y'\) lies in \(P\). Near each point of \(P\) the image
+of a piece of \(P\) is a submanifold of dimension \(r\) cut out by holomorphic equations (Lemma~\ref{rem:constant-rank-image}); near a point \(y\in Y'\), the
+compact fibre \(A\cap F^{-1}(y)\) is covered by finitely many such pieces and, by properness, \(F(P)\) is near \(y\) their union. So \(E=F(P)\) is analytic in
+\(Y'\) with \(\dim_yE\ge r\) for all \(y\in E\); and \(\dim E\le r\le m\), since off \(F(S)\) the set \(E\) agrees with \(F(A)\), whose regular points have dimension
+\(\le d-(d-r)\) (Lemmas~\ref{rem:fibre-dimension-lower-bound} and~\ref{rem:analytic-image-dimension}).
+
+\(A'\) is saturated: \(A'\cap F^{-1}(F(x))=A\cap F^{-1}(F(x))\) for \(x\in A'\). By Lemma~\ref{rem:fibre-dimension-lower-bound} these fibres satisfy
+\(\dim_x\ge d-r\); with \(\dim A'\le d-1\), Lemma~\ref{rem:analytic-image-dimension} gives that every regular point of \(F(S)=F(A')\) has dimension
+\(\le(d-1)-(d-r)<r\) (so \(F(S)=\emptyset\) if \(r=0\)). Now \((\mathrm{RS}_m)\) with \(B=F(S)\), \(q=r\), shows that \(\overline E=F(A)\) is analytic.
+\end{proof}
+
+\begin{theorem}[Remmert's proper mapping theorem]
+\label{rem:proper-mapping}
+\uses{rem:proper-image-irreducible,rem:remmert-stein,rem:global-components,rem:isolated-dim-zero,rem:dimension,rem:induction-statements}
+\source{demailly-cadg:II.8.8,demailly-cadg:II.8.7}
+\lean{Hironaka.ProperMappingInduction.isComplexAnalyticSubset_of_finite,Hironaka.ProperMappingInduction.properImageStatement_zero,Hironaka.ProperMappingInduction.properImageStatement_succ,Hironaka.ProperMappingInduction.properImageStatement_of_remmertStein,Hironaka.ProperMappingTheorem.properImageStatement,Hironaka.ProperMappingTheorem.remmertSteinStatement,Hironaka.ProperMappingTheorem.isComplexAnalyticSubset_image}
+\leanok
+\((\mathrm R_m)\) and \((\mathrm{RS}_m)\) hold for every \(m\). In particular, if \(F\colon X\to Y\) is a holomorphic map of complex manifolds and \(A\subset X\) is
+analytic with \(F|_A\) proper, then \(F(A)\) is analytic in \(Y\).
+\end{theorem}
+\begin{proof}
+\leanok
+Induction on \(m\). \((\mathrm R_0)\): by Lemma~\ref{rem:isolated-dim-zero} \(A\) is discrete; near a point of \(Y\) with a compact neighbourhood \(K\),
+\(F(A)\) agrees with the image of the compact discrete, hence finite, set \(A\cap F^{-1}(K)\), and a finite set is analytic. For \(m\ge1\), \((\mathrm{RS}_m)\)
+follows from \((\mathrm R_{m-1})\) by Theorem~\ref{rem:remmert-stein}. For \((\mathrm R_m)\), let \(y\in Y\) and \(K\) a compact neighbourhood of \(y\). By
+Lemma~\ref{rem:global-components} the compact set \(A\cap F^{-1}(K)\) meets only finitely many global irreducible components \(A_1,\dots,A_l\) of \(A\), each
+irreducible of dimension \(\le m\) with \(F|_{A_i}\) proper; so \(F(A)\cap\operatorname{int}K=\bigcup_iF(A_i)\cap\operatorname{int}K\), and each \(F(A_i)\) is analytic
+by Lemma~\ref{rem:proper-image-irreducible}. A finite union of analytic sets is analytic. The last assertion is \((\mathrm R_m)\) with \(m=\dim X\).
+\end{proof}

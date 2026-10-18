@@ -1,0 +1,167 @@
+\section{The first actual Hilbert--Samuel value and current singular position}
+\label{sec:hironaka-hilbert-samuel-tangent-value}
+
+The literal convention is
+$H_I(\ell)=\dim_{\mathbb C}R/(I+\mathfrak m^{\ell+1})$
+(\cite{bierstone-milman97-invent-math}, Remark~1.3).
+At a point of a reduced analytic set, $H_I(1)$ therefore equals one plus
+the actual embedding dimension. The whole original ideal, properness,
+complete cotangent image and genuine pure singular threshold are produced
+from original analytic geometry; no caller tangent-value identity is assumed.
+
+\begin{lemma}[All original first coordinate words]
+\label{hir:actual-first-coordinate-word-dictionary}
+\lean{Hironaka.HironakaHilbertSamuelTangentValue.zeroWord,Hironaka.HironakaHilbertSamuelTangentValue.coordinateWord,Hironaka.HironakaHilbertSamuelTangentValue.firstWordEquiv}
+\leanok
+\uses{hir:actual-finite-coordinate-words}
+The actual words of length less than two are exactly the empty word and the
+single original coordinate words. Their genuine finite index set has
+cardinality $1+n$.
+\end{lemma}
+\begin{proof}
+The actual degree is a natural number strictly below two, hence zero or
+one. A tuple on the empty index has a unique value; a tuple on the singleton
+index is determined by its sole genuine original coordinate. Send the
+empty word to the one-point summand and a singleton word to that original
+coordinate. The inverse uses the actual empty tuple and actual constant
+singleton tuple. Their genuine inverse identities follow from those two
+finite tuple facts, including zero ambient dimension. Thus the actual word
+index is equivalent to a one-point set disjoint union the $n$ coordinates,
+which has cardinality $1+n$.
+\end{proof}
+
+\begin{lemma}[Entire first-jet range from genuine original affine functions]
+\label{hir:actual-entire-first-jet-affine-range}
+\lean{Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet,Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet_zeroWord,Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet_coordinateWord,Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet_surjective,Hironaka.HironakaHilbertSamuelTangentValue.finrank_range_finiteJet_two}
+\leanok
+\uses{hir:actual-first-coordinate-word-dictionary,hir:actual-finite-jet-coordinate-evaluation}
+The actual first scalar coordinate jet on the entire holomorphic germ ring
+is surjective onto the whole genuine $(1+n)$-coordinate array. Consequently
+the entire actual first-jet range has dimension $1+n$.
+\end{lemma}
+\begin{proof}
+Given an arbitrary whole array, take its genuine empty-word value $a$ and
+singleton values $b_i$. The same original affine holomorphic function
+$z\mapsto a+\sum_i b_i z_i$ has value $a$ and actual derivative $b_i$ on
+coordinate direction $i$ at zero. Its true degree-zero and degree-one
+iterated derivatives are exactly those same genuine value and derivative.
+Thus its entire actual germ realizes the arbitrary array. This is an
+internal representative producer; no first-jet-surjectivity certificate is
+assumed. The earlier faithful coordinate array is injective on the entire
+multilinear jet target and hence on the true range, and the new affine
+producer makes its image the entire scalar array. The induced genuine
+linear equivalence proves the actual range dimension, including $n=0$.
+\end{proof}
+
+\begin{lemma}[The entire first ideal image is the original cotangent span]
+\label{hir:actual-whole-first-ideal-cotangent-image}
+\lean{Hironaka.HironakaHilbertSamuelTangentValue.firstDerivativeEmbedding,Hironaka.HironakaHilbertSamuelTangentValue.firstDerivativeEmbedding_injective,Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet_translated_eq_derivative,Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet_coordinate_mul_translated_eq_zero,Hironaka.HironakaHilbertSamuelTangentValue.firstScalarJet_word_mul_translated,Hironaka.HironakaHilbertSamuelTangentValue.range_first_originalMacaulay_eq_differentials,Hironaka.HironakaHilbertSamuelTangentValue.finrank_first_originalMacaulay_eq_differentials}
+\leanok
+\uses{hir:actual-entire-first-jet-affine-range,hir:actual-whole-generated-ideal-finite-jet-columns}
+For actual original finite holomorphic generators vanishing at the original
+point, the entire ideal first-jet image equals the faithful coordinate
+embedding of the span of their unmodified original differentials.
+\end{lemma}
+\begin{proof}
+Embed each actual complex linear functional into the genuine first scalar
+array by empty-word value zero and its original values on each coordinate
+direction. Genuine basis evaluation makes this linear map injective.
+The internally proved whole ideal-image Macaulay formula spans all actual
+empty/singleton word-times-generator first jets. An empty word gives zero
+constant part and the actual generator differential. A singleton word
+$z_iG_j(p+z)$ has value zero at zero, and its genuine first derivative is
+$G_j(p)$ times the original coordinate differential plus $z_i(0)$ times
+the original generator differential. Both terms vanish by the real original
+zero value and true coordinate value. In the entire original germ ring,
+both the singleton coordinate and translated vanishing generator belong
+to the actual maximal ideal. Their real product belongs to its genuine
+square, which is exactly the kernel of the entire first-jet map. This
+gives the same genuine vanishing without a selected derivative formula.
+Therefore all nonempty word columns
+vanish and every original generator differential occurs as an empty-word
+column. This proves equality with the entire ideal image, in both directions.
+Injectivity of the actual differential-coordinate map preserves its
+whole span dimension. No selected-derivative or whole-image equality is
+supplied as a premise.
+\end{proof}
+
+\begin{lemma}[First literal whole-ideal point value from genuine differentials]
+\label{hir:actual-first-hilbert-samuel-differential-rank}
+\lean{Hironaka.HironakaHilbertSamuelTangentValue.hilbertSamuelValue_translatedIdeal_one_eq}
+\leanok
+\uses{hir:actual-entire-first-jet-affine-range,hir:actual-whole-first-ideal-cotangent-image,hir:actual-hilbert-samuel-point-value}
+For the actual whole ideal of the original vanishing family,
+$H_I(1)=1+n-\dim\operatorname{span}\{dG_i(p)\}$.
+\end{lemma}
+\begin{proof}
+The actual entire first-jet range dimension is $1+n$. The actual entire
+ideal first-jet image has exactly the dimension of the full original
+differential span. Substitute both genuine image dimensions into the
+proved actual entire quotient/rank formula at $\ell=1$, whose truncation
+exponent is exactly two. This gives the literal whole quotient value,
+including the empty family and zero ideal. Vanishing at the original point
+makes the whole family ideal proper; the unit-ideal case is deliberately
+not asserted under this genuine vanishing hypothesis.
+\end{proof}
+
+\begin{theorem}[Actual complete reduced stalk value equals embedding dimension plus one]
+\label{hir:actual-reduced-hilbert-samuel-tangent-value}
+\lean{Hironaka.HironakaHilbertSamuelTangentValue.whole_vanishing_stalk_le_maximalIdeal,Hironaka.HironakaHilbertSamuelTangentValue.whole_vanishing_stalk_ne_top,Hironaka.HironakaHilbertSamuelTangentValue.hilbertSamuelAt_vanishing_one_eq_embeddingDimension_add_one}
+\leanok
+\uses{hir:actual-intrinsic-whole-stalk-hilbert-samuel-value,hir:actual-first-hilbert-samuel-differential-rank,hir:current-embedding-dimension}
+At every genuine point of an original reduced analytic set, the entire
+actual reduced ideal is internally proper and its first actual intrinsic
+Hilbert--Samuel value is exactly embedding dimension plus one.
+\end{theorem}
+\begin{proof}
+Every original member of the whole vanishing ideal vanishes at the genuine
+point, since its original eventual vanishing condition holds at that point
+itself. In the actual translated preferred chart its genuine germ value at
+zero is the same original value by the true chart inverse identity. All
+original membership germs therefore lie in the actual maximal ideal;
+taking their whole ring span proves actual properness internally.
+Original analyticity supplies one genuine Cartan family for the complete
+vanishing ideal near the point. Its exact original membership and zero-locus
+dictionaries show internally that every generator vanishes at this actual
+point and that their entire translated ring ideal is the whole reduced
+stalk ideal. The previous actual cotangent-image computation thus applies
+without a caller selected-Jacobian equality. The genuine whole tangent-space
+Cartan dictionary identifies the common kernel of these same original
+differentials with the actual reduced tangent space. Its actual rank-nullity
+formula says that differential-span dimension plus actual embedding
+dimension equals $n$. Combining it with the literal whole quotient value
+$1+n$ minus that actual span dimension gives precisely embedding dimension
+plus one. The ideal and all generator/differential dictionaries are
+internally produced from the original reduced analytic set.
+\end{proof}
+
+\begin{theorem}[Exact current pure singular threshold of the same intrinsic value]
+\label{hir:actual-pure-current-singular-first-hilbert-samuel-threshold}
+\lean{Hironaka.HironakaHilbertSamuelTangentValue.singularLocus_eq_first_hilbertSamuel_superlevel}
+\leanok
+\uses{hir:actual-reduced-hilbert-samuel-tangent-value,hir:pure-singular-embedding-dimension-threshold,hir:actual-intrinsic-hilbert-samuel-analytic-superlevels}
+For an original pure-$d$ reduced analytic set, its genuine singular locus
+is exactly the points of the set where the same actual intrinsic
+$H(1)$ is at least $d+2$.
+\end{theorem}
+\begin{proof}
+The previously proved actual complete reduced-ideal embedding-dimension
+criterion identifies pure singular points exactly with embedding dimension
+at least $d+1$. At every point of the actual set the new entire stalk-value
+identity is $H(1)=1+\operatorname{embdim}$. Adding one converts that genuine
+threshold exactly to $d+2$, in both directions. Outside the actual set the
+intersection condition excludes points, so no unit-stalk exception is
+silently treated as a proper stalk. Empty pure sets satisfy the identity
+vacuously; zero-dimensional regular points give $H(1)=1$ and are excluded
+from threshold two. The same intrinsic function and its genuine analytic
+superlevel, not a separately chosen chart function, occur in this actual
+current-singularity dictionary.
+\end{proof}
+
+\begin{remark}
+This is a genuine first-value bridge for the modified current embedded
+invariant. It supplies exact original singular position data; it does not
+produce a normally flat smooth centre or a Hilbert--Samuel decrease after
+an actual blowup. General higher-codimension G8 remains open until those
+actual geometry and higher-entry descent producers are constructed.
+\end{remark}

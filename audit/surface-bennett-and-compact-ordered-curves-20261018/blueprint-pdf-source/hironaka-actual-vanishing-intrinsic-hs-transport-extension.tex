@@ -1,0 +1,103 @@
+\section{Intrinsic vanishing-ideal Hilbert--Samuel transport for arbitrary subsets}
+
+All ideals, chart germs and Hilbert--Samuel functions below are the
+unchanged original ones. A subset need not be analytic, closed or have
+a supplied coherent vanishing sheaf. Actual inverse maps, rather than
+coherence of a general ideal pullback, give both entire ideal directions.
+
+\begin{theorem}[Actual biholomorphic transport of the entire original vanishing stalk ideal]
+\label{hir:actual-any-subset-biholomorphic-whole-vanishing-ideal}
+\uses{hir:actual-original-whole-germ-pullback-functorial,hir:actual-biholomorphic-whole-original-germ-algebra-equivalence}
+\lean{Hironaka.HironakaActualVanishingIntrinsicHSTransport.map_wholeChartStalkIdeal_vanishing_actual_biholomorphic}
+\leanok
+Let $e:Y\to X$ be a genuine global biholomorphism between original
+complex manifolds of the same dimension, let $W\subseteq X$ be arbitrary,
+and let $y\in Y$. The image of the entire original preferred-chart
+vanishing stalk ideal of $W$ at $e(y)$ under the actual original germ
+pullback equals the entire original preferred-chart vanishing stalk
+ideal of $e^{-1}W$ at $y$.
+\end{theorem}
+\begin{proof}
+The original whole stalk ideal is the span of chart germs of actual
+holomorphic functions vanishing on the given subset near the given point.
+The actual whole germ pullback sends every such chart germ of $f$ to the
+same original chart germ of $f\circ e$. Continuity of $e$ carries the
+vanishing neighbourhood to a neighbourhood of $y$. These images are
+therefore genuine defining generators of the target ideal, proving the
+forward entire inclusion by the ideal image-of-span identity.
+Conversely let $h$ be a defining target representative. The actual
+function $f=h\circ e^{-1}$ is holomorphic near $e(y)$, and continuity of
+the true inverse carries its target vanishing neighbourhood back to a
+source vanishing neighbourhood on $W$. Its source chart germ is a
+genuine defining source generator. Its actual pullback has representative
+$h\circ e^{-1}\circ e=h$, by the true global inverse identity. Thus every
+target generator is in the image ideal. Span proves the reverse entire
+inclusion, without a finite generating-family or coherence hypothesis.
+\end{proof}
+
+\begin{theorem}[Every original intrinsic vanishing Hilbert--Samuel value is biholomorphically invariant]
+\label{hir:actual-any-subset-biholomorphic-intrinsic-hs}
+\uses{hir:actual-any-subset-biholomorphic-whole-vanishing-ideal,hir:actual-biholomorphic-whole-original-germ-algebra-equivalence}
+\lean{Hironaka.HironakaActualVanishingIntrinsicHSTransport.hilbertSamuelAt_vanishing_actual_biholomorphic_any}
+\leanok
+For the same actual geometry, arbitrary subset $W$, point $y$ and every
+$\ell\in\mathbb N$, the existing intrinsic Hilbert--Samuel value of
+$e^{-1}W$ at $y$ equals that of $W$ at $e(y)$.
+\end{theorem}
+\begin{proof}
+The actual biholomorphism induces the existing genuine equivalence of
+the entire original complex germ algebras. It preserves the actual
+maximal ideal and all its powers, and hence the complex dimensions of
+the whole original quotient by the ideal plus its $(\ell+1)$-st maximal
+power. Apply the preceding entire ideal image identity. The existing
+intrinsic point function is exactly that original quotient value in the
+preferred chart, proving equality at the arbitrary chosen order.
+\end{proof}
+
+\begin{theorem}[The genuine open inclusion preserves the entire original vanishing stalk ideal]
+\label{hir:actual-any-subset-open-whole-vanishing-ideal}
+\uses{hir:actual-open-inclusion-whole-germ-pullback-identity}
+\lean{Hironaka.HironakaActualVanishingIntrinsicHSTransport.map_wholeChartStalkIdeal_vanishing_actual_open,Hironaka.HironakaActualVanishingIntrinsicHSTransport.wholeChartStalkIdeal_vanishing_actual_open}
+\leanok
+Let $U$ be a true open subset of an original complex manifold $X$, let
+$W\subseteq X$ be arbitrary and let $y\in U$. The image of the original
+whole vanishing stalk ideal of $W$ under the actual open-inclusion germ
+pullback is the whole vanishing stalk ideal of $W\cap U$ in the open
+subtype. These two actual preferred-chart ideals are equal under the
+existing identity expression for the actual open germ pullback.
+\end{theorem}
+\begin{proof}
+A source representative restricts to the same actual function on $U$.
+Original holomorphicity and near-point vanishing restrict together, so
+its actual pulled-back chart germ is a target generator. Conversely a
+target representative $h:U\to\mathbb C$ extends by the existing actual
+zero extension outside $U$. This extension is required to be holomorphic
+only near the original point, where openness gives a neighbourhood
+entirely inside $U$. There it is exactly $h$, and it vanishes on $W$.
+It therefore gives an original source generator whose actual pullback
+is the original chart germ of $h$. Ideal image and span give both whole
+inclusions. Finally the existing original open-inclusion germ pullback
+is the identity on the actual preferred-chart germ algebra, so its image
+ideal is the unchanged source ideal itself.
+\end{proof}
+
+\begin{theorem}[Every original intrinsic vanishing Hilbert--Samuel value survives true open restriction]
+\label{hir:actual-any-subset-open-intrinsic-hs}
+\uses{hir:actual-any-subset-open-whole-vanishing-ideal}
+\lean{Hironaka.HironakaActualVanishingIntrinsicHSTransport.hilbertSamuelAt_vanishing_actual_open_any}
+\leanok
+For every actual open $U$, arbitrary subset $W$, point $y\in U$ and
+order $\ell$, the existing intrinsic vanishing-ideal Hilbert--Samuel
+value of $W\cap U$ at $y$ equals that of $W$ at the same original point.
+\end{theorem}
+\begin{proof}
+Unfold the unchanged intrinsic point function into its original whole
+preferred-chart ideal quotient value. The preceding actual entire ideal
+equality identifies those same ideals, maximal ideals and every power,
+so their whole quotient dimensions are equal at every order.
+\end{proof}
+
+These are actual vanishing-ideal transport theorems. They do not remove
+coherence from a general original sheaf-pullback theorem. Construction
+of actual manifold blowup coordinate charts and the positive-dimensional
+permissible-centre Bennett comparison remain separate tasks.

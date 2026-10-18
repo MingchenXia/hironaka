@@ -1,0 +1,159 @@
+\section{Actual smooth coordinate-plane relative ideal powers}
+\label{sec:hironaka-relative-normal-ideal}
+
+This supplies the entire normal ideal and finite relative truncations of an
+actual smooth coordinate plane, from genuine holomorphic functions. All scalar
+coefficients are whole holomorphic germs on the actual tangential plane. No
+kernel, power equality, finite-generation or frame certificate is an input.
+Finite generation is not flatness or freeness. Full smooth-centre normal
+flatness, all-degree relative ranks and actual higher Hilbert--Samuel blowup
+descent remain open.
+
+\begin{definition}[Original tangential projection and inclusion]
+\label{hir:relative-normal-original-split}
+\lean{Hironaka.HironakaRelativeNormalIdeal.tangentProjection,Hironaka.HironakaRelativeNormalIdeal.tangentInclusion,Hironaka.HironakaRelativeNormalIdeal.tangentProjection_apply,Hironaka.HironakaRelativeNormalIdeal.tangentInclusion_tangent,Hironaka.HironakaRelativeNormalIdeal.tangentInclusion_normal,Hironaka.HironakaRelativeNormalIdeal.tangentProjection_tangentInclusion,Hironaka.HironakaRelativeNormalIdeal.tangentInclusion_mem_plane,Hironaka.HironakaRelativeNormalIdeal.tangentInclusion_projection_eq_of_mem_plane}
+\leanok
+For $n=d+t$, let $\pi:\mathbf C^{d+t}\to\mathbf C^d$ be the actual first-$d$
+coordinate projection and $i:\mathbf C^d\to\mathbf C^{d+t}$ the actual first-$d$
+coordinate inclusion with the last $t$ coordinates zero. Both are original
+continuous complex linear maps. Their actual composite $\pi i$ is identity;
+$i\pi$ is identity precisely on the original coordinate plane $\mathbf C^d\times0$.
+\end{definition}
+\begin{proof}
+Construct $\pi$ from the finite actual coordinate continuous linear functionals
+and the genuine finite-product/PiLp linear equivalence. Construct $i$ as the
+finite sum of the actual source coordinate functionals times the corresponding
+actual ambient coordinate vectors. Evaluate each coordinate to obtain the
+projection/inclusion formulas and the two true identities. In the normal
+coordinates, $i\pi$ is zero, so its fixed-point condition is exactly the actual
+plane equations; in the tangential coordinates it preserves the original value.
+Continuous complex linear maps are everywhere holomorphic, including $d=0$,
+$t=0$ and empty ambient dimension.
+\end{proof}
+
+\begin{lemma}[Entire original germ algebra retraction]
+\label{hir:relative-normal-entire-germ-retraction}
+\uses{hir:relative-normal-original-split,hir:actual-nonlinear-holomorphic-germ-algebra}
+\lean{Hironaka.HironakaRelativeNormalIdeal.tangentPullback,Hironaka.HironakaRelativeNormalIdeal.planeTrace,Hironaka.HironakaRelativeNormalIdeal.planeTrace_tangentPullback,Hironaka.HironakaRelativeNormalIdeal.planeTrace_surjective,Hironaka.HironakaRelativeNormalIdeal.tangentPullback_injective,Hironaka.HironakaRelativeNormalIdeal.tangentAlgebra,Hironaka.HironakaRelativeNormalIdeal.normalCoordinate,Hironaka.HironakaRelativeNormalIdeal.planeTrace_normalCoordinate}
+\leanok
+Let $R_d=\mathcal O_{\mathbf C^d,0}$ and $R=\mathcal O_{\mathbf C^{d+t},0}$.
+Actual composition gives $\pi^*:R_d\to R$ and $i^*:R\to R_d$, genuine entire
+complex germ algebra homomorphisms, with $i^*\pi^*=\mathrm{id}$. The trace is
+surjective and the pullback injective. Use $\pi^*$ as the real $R_d$-algebra
+structure on $R$. Every original normal-coordinate germ $z_{d+j}$ has trace zero.
+\end{lemma}
+\begin{proof}
+Both actual linear maps fix zero and are holomorphic, so their real nonlinear
+composition maps on ALL holomorphic representatives induce entire germ algebra
+homomorphisms. On any original holomorphic representative the composite acts
+by $F\circ\pi\circ i=F$ at every point, proving the retraction. Any entire
+$R_d$ germ is the trace of its genuine pullback; applying trace to an equality
+of pullbacks proves injectivity. Each actual normal coordinate vanishes
+identically after $i$, giving trace zero as an equality of entire germs.
+The algebra action is literally multiplication by this actual pullback.
+\end{proof}
+
+\begin{lemma}[Actual relative Hadamard decomposition of every whole germ]
+\label{hir:relative-normal-whole-hadamard}
+\uses{hir:relative-normal-entire-germ-retraction}
+\lean{Hironaka.HironakaRelativeNormalIdeal.exists_relative_decomposition}
+\leanok
+Every $g\in R$ has internally constructed entire holomorphic germs $h_j\in R$
+with
+\[
+ g=\pi^*i^*g+\sum_{j=0}^{t-1}z_{d+j}h_j.
+\]
+\end{lemma}
+\begin{proof}
+Choose an actual holomorphic representative $F$ of the ENTIRE germ $g$. The
+real function $H=F-F\circ i\circ\pi$ is holomorphic near zero, since the true
+projection/inclusion preserve zero. At every point of the actual coordinate
+plane, the genuine identity $i\pi z=z$ makes $H(z)=0$. Actual coordinate-plane
+Hadamard division internally constructs holomorphic coefficient functions for
+ALL normal coordinates, with the tangential coefficients identically zero.
+Pass their original holomorphic representatives to entire germs. The actual
+finite sum split between first $d$ and last $t$ coordinates discards the zero
+tangential coefficients and leaves exactly the displayed genuine normal sum.
+The original composition dictionary identifies the remaining base term with
+$\pi^*i^*g$. No decomposition or finite-generation data is supplied.
+\end{proof}
+
+\begin{theorem}[The entire reduced plane ideal is exactly the whole trace kernel]
+\label{hir:relative-normal-entire-plane-kernel}
+\uses{hir:relative-normal-whole-hadamard}
+\lean{Hironaka.HironakaRelativeNormalIdeal.normalIdeal,Hironaka.HironakaRelativeNormalIdeal.normalIdeal_eq_ker_planeTrace,Hironaka.HironakaRelativeNormalIdeal.mk_mem_normalIdeal_iff,Hironaka.HironakaRelativeNormalIdeal.planeQuotientAlgEquiv}
+\leanok
+Let $J$ be the entire ring ideal generated by the actual $t$ normal coordinate
+germs. Then $J=\ker i^*$ and membership is exactly vanishing near zero on the
+actual coordinate plane, for an original holomorphic representative. The true
+quotient $R/J$ is isomorphic as an entire complex germ algebra to $R_d$.
+\end{theorem}
+\begin{proof}
+Every normal coordinate has trace zero; since trace is an actual ring
+homomorphism, its kernel contains their whole generated ideal. Conversely if
+an ENTIRE germ has trace zero, its actual relative Hadamard decomposition has
+zero base term and expresses it as a true finite sum of those coordinate
+multiples. This lies in the full ideal $J$ and proves both ideal inclusions.
+If an actual representative vanishes on the plane near zero, composing with
+$i$ gives zero near zero because $i$ is continuous and fixes zero; hence its
+whole trace is zero. Conversely trace zero gives a representative $F$ whose
+$F\circ i$ is zero near zero. For ambient points near zero on the plane,
+$\pi$ continuity sends them into that true neighbourhood and $i\pi z=z$, so
+$F(z)=0$. This proves the genuine all-representative geometric dictionary.
+Finally the actual trace is surjective, and its real ring/complex-algebra
+first-isomorphism theorem gives the entire plane quotient, using the proved
+kernel equality. Thus the ideal is reduced, without assuming reducedness or
+supplying an abstract ideal-kernel certificate.
+\end{proof}
+
+\begin{theorem}[Internally constructed all-degree relative normal-word representatives]
+\label{hir:relative-normal-all-power-representatives}
+\uses{hir:relative-normal-whole-hadamard,hir:relative-normal-entire-plane-kernel}
+\lean{Hironaka.HironakaRelativeNormalIdeal.normalWord,Hironaka.HironakaRelativeNormalIdeal.normalWordSpan,Hironaka.HironakaRelativeNormalIdeal.one_mem_normalWordSpan,Hironaka.HironakaRelativeNormalIdeal.normalCoordinate_mul_mem_normalWordSpan,Hironaka.HironakaRelativeNormalIdeal.exists_normalWord_representative}
+\leanok
+For every actual natural $q$ and every ENTIRE $g\in R$, there is a finite
+$R_d$-linear combination $p$ of actual normal-coordinate words of length
+strictly below $q$, with $g-p\in J^q$. Here the scalar action is actual $\pi^*$;
+coefficients are entire tangential holomorphic germs, not point scalars.
+\end{theorem}
+\begin{proof}
+Induct on the actual $q$. At $q=0$ choose zero; the real zeroth power is the
+entire ring. For $q+1$, apply the actual relative Hadamard decomposition to $g$
+and the induction hypothesis to each internally produced ENTIRE coefficient
+$h_j$. Write $h_j=p_j+r_j$, with actual $r_j\in J^q$. Set
+$p=\pi^*i^*g+\sum_j z_{d+j}p_j$. The base term is its actual $R_d$ coefficient
+times the genuine degree-zero word. Prefixing each actual normal word by
+$z_{d+j}$ raises its degree by one, so the actual finite scalar span is the
+required below-$q+1$ span. Multiplication by a normal coordinate commutes with
+the true $R_d$ action, so this extends from generating words to their entire
+scalar span. The true remainder is $\sum_j z_{d+j}r_j$; actual ideal power
+multiplication puts each summand in $J\,J^q=J^{q+1}$ and finite ideal addition
+puts the whole remainder there. This is a genuine manufactured all-power
+representative, not a caller Taylor or normal-ideal-power equality certificate.
+\end{proof}
+
+\begin{theorem}[True entire relative power quotients are finite tangential modules]
+\label{hir:relative-normal-entire-power-quotients-finite}
+\uses{hir:relative-normal-all-power-representatives}
+\lean{Hironaka.HironakaRelativeNormalIdeal.normalWordSpan_fg,Hironaka.HironakaRelativeNormalIdeal.finite_quotient_sup_normalIdeal_pow,Hironaka.HironakaRelativeNormalIdeal.finite_quotient_normalIdeal_pow}
+\leanok
+For every $q$, the literal entire ring quotient $R/J^q$ is a finite $R_d$ module.
+More generally, for EVERY whole original ring ideal $I$, the literal quotient
+$R/(I+J^q)$ is a finite $R_d$ module. No freeness or flatness is inferred.
+\end{theorem}
+\begin{proof}
+The actual normal-word index is finite: a degree in $\{0,\ldots,q-1\}$ and a
+word of that degree in the actual $t$ normal coordinates. Its real finite
+$R_d$ span is therefore finitely generated. Every ENTIRE quotient member has
+an actual whole-germ representative, and the preceding internally constructed
+representative differs from that whole germ by an actual $J^q$ member. The
+real quotient map sends both to the same class. Thus the actual image of the
+finite normal-word span is the ENTIRE quotient module. Taking its finite image
+of generators proves genuine module finiteness. The identical representative
+works for $I+J^q$, since the actual power is contained in this actual sum ideal.
+At $q=0$ both literal quotients are zero; at $t=0$ all positive truncations
+have the actual degree-zero word alone and recover the tangential whole germ
+ring or its true quotient. At $d=0$ these are genuine finite point truncations.
+No relative monomial independence, free graded pieces, normal-flat centre or
+all-degree constant rank is presumed or claimed.
+\end{proof}

@@ -1,0 +1,93 @@
+\section{Actual translated normal families with analytic tangent coefficients}
+
+\begin{theorem}[A genuine common coefficient domain for a finite normal polynomial family]
+\label{hir:actual-finite-normal-polynomial-coefficient-domain}
+\uses{hir:relative-normal-entire-germ-retraction}
+\lean{Hironaka.HironakaActualTranslatedNormalFamilyHS.exists_actual_polynomial_coefficient_domain}
+\leanok
+Let $P_i$, for $i$ in a finite set, be genuine finite normal polynomials
+with coefficients in the original holomorphic germ ring on $\mathbb C^d$.
+There are actual representative functions $a_{i\gamma}$ of all their
+coefficient germs and a single genuine open neighborhood $U$ of zero
+on which every coefficient occurring in any $P_i$ is holomorphic.
+\end{theorem}
+\begin{proof}
+Choose an actual holomorphic representative of each original coefficient
+germ. Each representative is complex differentiable at all points in
+some neighborhood of zero. For fixed $i$, the support of the actual
+polynomial $P_i$ is finite. The pairs $(i,\gamma)$ with $\gamma$ in that
+support therefore form a finite set. Intersect their neighborhoods and
+choose an open neighborhood $U$ inside the intersection. Each supported
+representative is differentiable throughout $U$, and its germ is still
+the original entire coefficient germ. Unsupported coefficient
+representatives impose no domain requirement. This also covers an empty
+family and zero polynomials.
+\end{proof}
+
+\begin{theorem}[The genuine jointly holomorphic normal translation family and its entire original fibres]
+\label{hir:actual-translated-normal-joint-family}
+\uses{hir:actual-finite-normal-polynomial-coefficient-domain,hir:actual-normal-scaling-translated-polynomial}
+\lean{Hironaka.HironakaActualTranslatedNormalFamilyHS.exists_actual_joint_normal_ray_family}
+\leanok
+For any such finite family and any true normal vector $p$, there are an
+actual open set $D\subset\mathbb C\times\mathbb C^{d+t}$ containing the
+whole parameter axis and actual functions $G_i$ jointly holomorphic on
+$D$, whose entire original fibre ideal at $c$ is precisely $J_{cp}$,
+the ideal spanned by the original evaluations $P_i(u,x+cp)$.
+\end{theorem}
+\begin{proof}
+Take the common representative domain $U$ from the preceding theorem.
+Let $D$ be the inverse image of $U$ under the actual continuous linear
+map sending $(c,z)$ to the tangent projection of $z$. This is open,
+and contains every $(c,0)$ because $0\in U$. Define the actual function
+\[
+ G_i(c,z)=\sum_{\gamma\in\operatorname{supp}(P_i)}
+ a_{i\gamma}(u(z))\prod_{j=1}^{t}(x_j(z)+cp_j)^{\gamma_j}.
+\]
+Each supported coefficient is holomorphic after composition with the
+true tangent projection on $D$. Every translated normal coordinate is
+an actual polynomial function of $(c,z)$, hence holomorphic. Finite
+sums and products prove joint holomorphicity on this very domain.
+For fixed $c$, expand the genuine finite polynomial evaluation as its
+sum of monomials. The original germ sum, product, and pullback identities
+identify the germ of each displayed summand with the actual tangent
+pullback of its entire original coefficient germ times the same
+translated normal monomial. Thus the germ of $G_i(c,\cdot)$ equals
+exactly the original evaluation of $P_i$ translated by $cp$.
+The actual fibre ideal is the span of these very germs. Replacing each
+generator by that exact equality proves both entire ideal directions.
+\end{proof}
+
+\begin{theorem}[Every translated homogeneous normal ideal has HS bounded by its ray origin]
+\label{hir:actual-translated-normal-family-origin-hs-bound}
+\uses{hir:actual-translated-normal-joint-family,hir:actual-translated-normal-family-nonzero-ray-hs,hir:actual-holomorphic-family-fibre-hs-closed-superlevels}
+\lean{Hironaka.HironakaActualTranslatedNormalFamilyHS.hilbertSamuelValue_actual_translated_normal_le}
+\leanok
+Suppose additionally that every $P_i$ is homogeneous in the normal
+variables, with an arbitrary genuine degree depending on $i$.
+For every actual normal vector $p$ and every order $\ell$, the unchanged
+original Hilbert--Samuel value of $J_p$ is at most that of $J_0$.
+\end{theorem}
+\begin{proof}
+Use the preceding actual jointly holomorphic family and its exact
+entire fibre dictionary. For fixed $\ell$, the original fibre HS
+superlevel theorem makes the set of parameters $c$ with
+$H_{J_p}(\ell)\le H_{J_{cp}}(\ell)$ closed. Indeed the genuine whole
+parameter axis lies in the actual domain, so the closed superlevel
+theorem on the actual parameter open applies, and pullback along the
+continuous inclusion of the complex parameter gives this closed set.
+For every $c\ne0$, genuine partial-normal scaling maps the whole
+$J_{cp}$ onto the whole $J_p$, so the preceding nonzero-ray equality
+puts $c$ in this set. The complement of zero is dense in $\mathbb C$.
+Its closure contains zero, and closedness gives the asserted inequality
+at $c=0$. This works for every original HS order separately and hence
+for all of them, without a supplied semicontinuity or numerical
+certificate.
+\end{proof}
+
+The translated expressions are evaluations only of genuine finite normal
+polynomials. Their coefficients remain entire original analytic tangent
+germs. No formal power series is evaluated at a nonzero point. This
+comparison concerns these original ideals; compatibility of a smooth
+centre with the original vertex data remains a separate requirement in
+the general positive-dimensional Bennett argument.

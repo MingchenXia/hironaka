@@ -1,0 +1,91 @@
+\section{True vertex-weight components and the whole formal Hilbert--Samuel bound}
+
+\begin{definition}[The actual coefficientwise weighted component]
+\label{hir:actual-weighted-component-definition}
+\lean{Hironaka.HironakaActualWeightedVertexHS.actualWeightedComponent,Hironaka.HironakaActualWeightedVertexHS.actualWeightedComponent_coefficient}
+\leanok
+For any nonnegative coordinate weights $w$, degree $d$ and original
+formal series $F$, retain exactly the coefficients with $w$-weight $d$
+and set all other coefficients to zero. This defines a genuine formal
+series, without positivity of the weights or finite-support assumptions.
+\end{definition}
+\begin{proof}
+An original multivariate formal series is precisely a function from
+actual finite exponents to complex coefficients. The displayed
+coefficient rule is therefore an actual original series, and evaluation
+at each exponent gives exactly the asserted coefficient formula. Zero
+weights may retain infinitely many tangential coefficients; no analytic
+convergence or finite-polynomial claim is made.
+\end{proof}
+
+\begin{theorem}[The component at a genuine initial exponent's weight retains that exact exponent]
+\label{hir:actual-weighted-component-retains-initial-exponent}
+\uses{hir:actual-weighted-component-definition}
+\lean{Hironaka.HironakaActualWeightedVertexHS.actualWeightedComponent_ne_zero,Hironaka.HironakaActualWeightedVertexHS.actualWeightedComponent_initialExponent}
+\leanok
+Let $F$ be an actual nonzero formal series and $a$ its original least
+nonzero exponent for the given genuine monomial order. The actual
+component of $F$ at degree $w(a)$ is nonzero and has precisely that same
+original initial exponent $a$.
+\end{theorem}
+\begin{proof}
+Its coefficient at $a$ is the unchanged nonzero coefficient of $F$,
+since $w(a)=w(a)$. Thus the component is nonzero. At every smaller
+exponent the coefficient of $F$ was zero. The component either retains
+that zero coefficient or replaces it by zero. The unchanged nonzero
+coefficient at $a$ and vanishing below $a$ characterize exactly the same
+original least exponent.
+\end{proof}
+
+\begin{theorem}[The entire vertex-weight component ideal has a diagram containing the original diagram]
+\label{hir:actual-weighted-vertex-ideal-diagram-inclusion}
+\uses{hir:actual-weighted-component-retains-initial-exponent}
+\lean{Hironaka.HironakaActualWeightedVertexHS.actualWeightedVertexIdeal,Hironaka.HironakaActualWeightedVertexHS.actualInitialDiagram_subset_weightedVertexIdeal}
+\leanok
+Take any genuine monic vertex family of the unchanged whole original
+formal ideal $I$. Span the actual components of its genuine members at
+the weights of their actual vertex exponents. The entire resulting
+formal ideal has initial diagram containing the entire initial diagram
+of $I$, for the same original monomial order.
+\end{theorem}
+\begin{proof}
+Every genuine monic family member has coefficient one at its actual
+vertex and vanishes at every smaller exponent. Its component at that
+vertex's weight therefore has exactly the same actual initial exponent,
+by the preceding coefficient argument. It is a defining generator of
+the displayed entire ideal, so the latter's actual initial diagram
+contains each original vertex. Every original diagram exponent lies
+above an actual original vertex. The genuine diagram of the component
+ideal is closed under increasing the exponent, by actual multiplication
+with original monomials. Hence it contains every original diagram exponent.
+\end{proof}
+
+\begin{theorem}[Every unchanged formal Hilbert--Samuel value of the vertex-weight ideal is at most the original value]
+\label{hir:actual-weighted-vertex-ideal-hs-bound}
+\uses{hir:actual-weighted-vertex-ideal-diagram-inclusion}
+\lean{Hironaka.HironakaActualWeightedVertexHS.genuineFormalHilbertSamuelValue_weightedVertex_le}
+\leanok
+For the genuine degree-lexicographic vertex family, arbitrary
+nonnegative weights and every order $\ell$, the existing whole formal
+Hilbert--Samuel value of the actual vertex-weight component ideal is
+at most the existing whole formal value of $I$.
+\end{theorem}
+\begin{proof}
+The existing actual standard-monomial theorem identifies each unchanged
+whole quotient dimension with the cardinality of the original bounded
+exponents outside that ideal's actual initial diagram. The preceding
+whole diagram inclusion gives an injection from the bounded complement
+for the component ideal into the original bounded complement: retain
+the same exponent, and use inclusion contrapositively for its genuine
+nonmembership. These are finite actual exponent sets, so their
+cardinalities satisfy the asserted inequality. The original standard-
+monomial dimension identities give the statement at every arbitrary
+order, without an ideal-presentation or Hilbert--Samuel certificate.
+\end{proof}
+
+The retained degree is the weight of the genuine initial exponent; it
+need not be the least weight present in the series. To identify these
+components with actual exceptional restrictions for a positive-dimensional
+centre still requires the genuine centre-power compatibility and
+analytic coefficient realization. Those producers, and the general
+positive-dimensional Bennett theorem, remain separate and open.

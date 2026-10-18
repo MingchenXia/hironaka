@@ -1,0 +1,110 @@
+\section{True coordinate-ideal powers and genuine centre-order division memberships}
+
+In the ACTUAL formal ring $S=\mathbb C[[X_1,\ldots,X_n]]$, fix ANY
+actual subset $A$ of the original finite coordinate family. Put
+$P_A=(X_i:i\in A)$, $w_i=1$ for $i\in A$ and $w_i=0$ otherwise,
+and $w(\alpha)=\sum_iw_i\alpha_i$. This chapter gives the actual
+coordinate-power meaning of the coefficient bounds in
+\cite[Lemma~7.22 and Corollary~7.24, pp.~269--270]{bierstone-milman97-invent-math}.
+The ideal, powers, formal products and scalar actions are the genuine
+existing ones. No centre compatibility or strict-transform certificate
+is manufactured by these formal algebra statements.
+
+\begin{lemma}[Genuine weight-vanishing ideals contain the true coordinate powers]
+\label{hir:actual-formal-coordinate-weight-vanishing-ideal}
+For $q\ge0$, the actual set
+$V_q=\{F\in S:[X^\alpha]F=0\text{ whenever }w(\alpha)<q\}$
+is a genuine ideal of $S$. One has $P_A^q\subset V_q$, and for EVERY
+actual exponent $\alpha$, the actual monomial $X^\alpha$ belongs to
+$P_A^{w(\alpha)}$. In particular $w(\alpha)\ge q$ implies
+$X^\alpha\in P_A^q$.
+\lean{Hironaka.HironakaActualFormalCoordinatePowerDivision.actualFormalWeightVanishing,Hironaka.HironakaActualFormalCoordinatePowerDivision.actualFormalWeightVanishing_mul_mem,Hironaka.HironakaActualFormalCoordinatePowerDivision.actualCoordinateWeight,Hironaka.HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal,Hironaka.HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal_le_weightVanishing,Hironaka.HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal_pow_le_weightVanishing,Hironaka.HironakaActualFormalCoordinatePowerDivision.actual_monomial_mem_coordinate_weight_power}
+\leanok
+\end{lemma}
+\begin{proof}
+Zero and sums have the stated coefficient vanishing. For an ACTUAL
+product $GF$ with $F\in V_q$, every genuine antidiagonal pair
+$\beta+\gamma=\alpha$ satisfies $w(\gamma)\le w(\alpha)$.
+Thus when $w(\alpha)<q$, the $F$ coefficient at $\gamma$ is zero,
+and the entire genuine finite convolution vanishes. This proves ideal
+closure for the actual ring multiplication.
+Similarly, if $F\in V_p$ and $G\in V_q$, every pair with
+$w(\alpha)<p+q$ has $w(\beta)<p$ or $w(\gamma)<q$, so actual
+convolution gives $V_pV_q\subset V_{p+q}$. Each selected actual
+variable belongs to $V_1$, so actual span and power induction give
+$P_A^q\subset V_q$, including $q=0$.
+Finally the genuine monomial is the actual finite product
+$X^\alpha=\prod_iX_i^{\alpha_i}$. For selected $i$ the corresponding
+factor lies in $P_A^{\alpha_i}$; for unselected $i$ it lies in the
+actual whole ideal $P_A^0=S$. Multiplying these genuine ideal
+memberships gives membership in $P_A^{\sum_{i\in A}\alpha_i}$,
+exactly the claimed power. Monotonicity of genuine ideal powers gives
+the final assertion. No infinite series division is used in this part.
+\end{proof}
+
+\begin{theorem}[The actual coordinate power has precisely the true coefficient kernel]
+\label{hir:actual-formal-coordinate-power-coefficient-kernel}
+\uses{hir:actual-formal-coordinate-weight-vanishing-ideal,hir:actual-formal-initial-exponent-coefficient-product,hir:actual-formal-vertex-division-identity,hir:actual-formal-vertex-division-supports}
+For every genuine monomial order, the actual initial diagram of $P_A^q$
+is exactly $\{\alpha:w(\alpha)\ge q\}$. For EVERY actual $F\in S$,
+\[
+ F\in P_A^q\quad\Longleftrightarrow\quad
+ [X^\alpha]F=0\ \text{for every }w(\alpha)<q.
+\]
+These statements include empty and full coordinate subsets, $n=0$ and
+$q=0$; the actual unselected coordinates are unrestricted.
+\lean{Hironaka.HironakaActualFormalCoordinatePowerDivision.mem_actualInitialDiagram_coordinate_power_iff,Hironaka.HironakaActualFormalCoordinatePowerDivision.mem_actualFormalCoordinateIdeal_pow_iff,Hironaka.HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal_pow_eq_weightVanishing}
+\leanok
+\end{theorem}
+\begin{proof}
+An actual nonzero member of $P_A^q$ belongs to the preceding true
+$V_q$. Its actual lowest nonzero coefficient therefore has weight at
+least $q$. Conversely each exponent of weight at least $q$ has its
+actual monomial in $P_A^q$ by the preceding lemma, and that monomial's
+genuine lowest exponent is exactly the same exponent. This proves BOTH
+actual diagram inclusions.
+Power membership implies the displayed coefficient condition by
+$P_A^q\subset V_q$. Conversely suppose $F\in V_q$ and apply
+the already internally proved ACTUAL formal division for the WHOLE ideal
+$P_A^q$. The finite sum of its genuine vertex products belongs to
+$P_A^q\subset V_q$, so its actual remainder belongs to $V_q$ as
+well. At every exponent of weight below $q$ that remainder's actual
+coefficient therefore vanishes. At every exponent of weight at least
+$q$, the just proved true diagram identity puts the exponent in the
+actual diagram, so the genuine remainder support theorem again makes
+its coefficient zero. Thus EVERY actual remainder coefficient is zero.
+The WHOLE genuine division identity now places $F$ in $P_A^q$.
+No coefficient kernel, quotient model or desired membership is a caller
+premise, and no formal completion identification is needed.
+\end{proof}
+
+\begin{theorem}[Actual whole division quotients belong to the true centre-order ideal powers]
+\label{hir:actual-formal-centre-power-whole-division-membership}
+\uses{hir:actual-formal-coordinate-power-coefficient-kernel,hir:actual-formal-division-quotient-remainder-weight-bounds}
+Let $I\subset S$ be ANY actual ideal and let its actual internally
+constructed monic vertex series be $f_a$, for the fixed genuine monomial
+order. Suppose each SAME actual $f_a$ belongs to $P_A^{w(a)}$.
+For EVERY actual $F\in I\cap P_A^d$, its SAME genuinely constructed
+division quotients satisfy
+\[
+ F=\sum_aQ_a(F)f_a,\qquad Q_a(F)\in P_A^{d-w(a)}.
+\]
+The natural-number subtraction convention handles $d<w(a)$. The stated
+actual vertex power hypothesis is explicit; deriving it from genuine
+admissible-centre geometry remains the separate transformation step.
+\lean{Hironaka.HironakaActualFormalCoordinatePowerDivision.actual_formal_centre_power_whole_division}
+\leanok
+\end{theorem}
+\begin{proof}
+The BOTH-direction actual coordinate-power coefficient kernel turns
+each genuine vertex power membership into exactly the actual coefficient
+weight compatibility of the preceding division theorem. It similarly
+turns the genuine numerator power membership into vanishing below
+weight $d$. That theorem gives the actual WHOLE ideal member division
+identity with its SAME quotients, and shows that a nonzero actual
+coefficient of $Q_a(F)$ has weight at least $d-w(a)$. Equivalently
+every actual coefficient below that weight is zero. The SAME true
+coordinate-power kernel, now in the reverse direction, therefore
+places the entire actual quotient series in $P_A^{d-w(a)}$, as claimed.
+No quotient bound, division decomposition or ideal model is assumed.
+\end{proof}

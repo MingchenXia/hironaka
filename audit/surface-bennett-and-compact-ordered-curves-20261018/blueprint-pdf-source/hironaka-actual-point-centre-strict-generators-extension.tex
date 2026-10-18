@@ -1,0 +1,59 @@
+\section{Unconditional whole analytic strict generators for a point centre}
+
+The coordinate centre with every variable selected is the original point
+at the origin. Its ideal is the whole coordinate maximal ideal. Unlike a
+positive-dimensional centre, its coordinate weight is exactly total degree,
+so degree-first vertex order itself supplies the required centre filtration.
+
+\begin{lemma}[Canonical reduced vertices automatically respect the point-centre powers]
+\label{hir:actual-point-centre-canonical-vertex-powers}
+\uses{hir:actual-reduced-formal-vertex-members,hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualPointCentreStrictGenerators.actualReducedVertexSeries_mem_point_power}
+\leanok
+For every entire formal ideal $J$ and every genuine degree-lexicographic
+vertex $\alpha$, its actual canonical reduced member $F_\alpha$ belongs to
+the entire point ideal power $\mathfrak m^{|\alpha|}$.
+\end{lemma}
+\begin{proof}
+The selected-coordinate weight for all variables is their total degree.
+Take any exponent $\beta$ of degree less than $|\alpha|$. Degree-first
+ordering gives $\beta<_{\deglex}\alpha$. The actual reduced vertex
+coefficient theorem then makes its coefficient in $F_\alpha$ zero.
+The proved whole coordinate-power coefficient criterion, applied to every
+such $\beta$, is exactly membership in $\mathfrak m^{|\alpha|}$. This uses
+the actual canonical reduced series and the entire ideal power, with no
+compatibility or convergence certificate as an input.
+\end{proof}
+
+\begin{theorem}[Whole point-centre normalized analytic ideals have actual finite generators]
+\label{hir:actual-point-centre-whole-analytic-strict-generators}
+\uses{hir:actual-point-centre-canonical-vertex-powers,hir:actual-analytic-normalized-member-finite-generation}
+\lean{Hironaka.HironakaActualPointCentreStrictGenerators.exists_actual_point_normalized_member_generators}
+\leanok
+For every original analytic ideal $I$, every actual point-blowup coordinate
+chart and every actual chart-direction parameter, internally construct a
+finite family of original analytic normalized members $H_\alpha$ such that
+the whole normalized-member ideal is $\langle H_\alpha\rangle$, and its
+entire genuine Taylor extension is the actual formal strict-transform ideal.
+No reduced-formal-vertex centre-power hypothesis is supplied.
+\end{theorem}
+\begin{proof}
+Form the entire actual Taylor extension $J=T(I)S$. The preceding lemma
+supplies the point-centre power condition for every actual canonical
+reduced vertex of this same ideal. Apply the proved actual analytic
+normalized-member generator theorem with all coordinate variables selected.
+It internally chooses original analytic generators in the required whole
+ideal intersections and their true analytic exceptional quotients. The
+whole Taylor square and formal quotient uniqueness identify their entire
+formal normalized members. Both ideal inclusions give the full Taylor
+extension equality, and faithful contraction gives generation of the entire
+original analytic normalized-member ideal by the same finite family.
+The compatibility premise has thus been proved internally from the point
+geometry, rather than added to the original input.
+\end{proof}
+
+This closes the point-centre case of this local analytic/formal generator
+interface for arbitrary original ideals. Identifying the whole geometric
+strict closure, proving the general Bennett inequality, and deriving
+vertex compatibility from general positive-dimensional permissible centres
+remain separate open obligations.

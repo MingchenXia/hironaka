@@ -1,0 +1,107 @@
+\section{Genuine analytic monomial-invariant superlevels}
+
+The monomial step in W{\l}odarczyk\cite{wlodarczyk05-hironaka},
+Proposition \texttt{pr:resol}, Step 2b, uses the maximum of finitely many
+feasible boundary-subset keys. Actual divisor exponents are locally
+constant on the corresponding smooth boundary traces. These facts give
+analytic, rather than merely topological, superlevels for that invariant.
+
+\begin{lemma}[Actual finite-maximum threshold dictionary]
+\label{hir:monomial-max-threshold-dictionary}
+\lean{Hironaka.HironakaMonomialAnalyticSuperlevels.le_inv_iff_exists_feasible}
+\leanok
+For fixed actual weights $a_i$, a finite set $S$ of member indices and
+mark $d$, the genuine monomial invariant $\gamma$ satisfies
+\[
+ v\le\gamma(S,a,d)\quad\Longleftrightarrow\quad
+ \exists K\subset S:\ d\le\sum_{i\in K}a_i\ \text{and}\ v\le\operatorname{key}(K,a).
+\]
+Here $v$ is a genuine nonbottom key value; the key is the actual
+lexicographic/colexicographic key used by the monomial algorithm.
+\end{lemma}
+\begin{proof}
+The invariant is the maximum of the actual finite image of the feasible
+subsets. A nonbottom lower bound implies that this finite family is
+nonempty. Its actual maximum is attained by one of its feasible subsets,
+which witnesses the right side. Conversely the key of any feasible subset
+is at most the actual maximum; transitivity proves the lower bound.
+No optimal or feasible subset is supplied by the caller.
+\end{proof}
+
+\begin{lemma}[Produced local analytic monomial superlevel]
+\label{hir:monomial-superlevel-local-analytic-dictionary}
+\uses{hir:monomial-max-threshold-dictionary}
+\lean{Hironaka.HironakaMonomialAnalyticSuperlevels.exists_analytic_near_gammaAlong_superlevel}
+\leanok
+Let $I$ be coherent and nonzero along a genuine closed smooth $N$, and
+let the genuine SNC boundary $E$ be transverse to $N$, in positive
+ambient dimension. Near each $x\in N$, the actual locus
+$\{y\in N:v\le\gamma_N(I,E,d,y)\}$ agrees with an internally produced
+global analytic finite union of actual member intersections.
+\end{lemma}
+\begin{proof}
+The genuine exponent local-constancy theorem and closedness of missing
+members give one neighbourhood on which only the members through $x$
+can occur and each occurring member carries its actual original exponent
+at $x$. Freeze those genuine exponents as $a$. Select, from the actual
+finite feasible subsets of members through $x$, those whose actual key
+is at least $v$. For each selected $K$, take the genuine closed smooth
+trace $N\cap\bigcap_{i\in K}E_i$. These are analytic by SNC transversality;
+their finite union is the produced analytic set.
+
+At any nearby $y\in N$, its actual invariant equals the fixed-weight
+invariant on the actual members through $y$. The preceding finite-maximum
+dictionary says the threshold holds exactly when one selected feasible
+$K$ is contained in that member set, which says precisely that $y$
+belongs to the corresponding actual intersection. Both containments
+use the same actual neighbourhood and all actual stalk exponents.
+The chosen finite analytic set can depend on $x$; no globally constant
+coefficient on a disconnected original boundary member is assumed.
+\end{proof}
+
+\begin{theorem}[Global analytic monomial superlevels]
+\label{hir:monomial-superlevels-global-analytic}
+\uses{hir:monomial-superlevel-local-analytic-dictionary}
+\lean{Hironaka.HironakaMonomialAnalyticSuperlevels.isComplexAnalyticSubset_gammaAlong_superlevel}
+\leanok
+Every actual monomial-invariant superlevel on $N$ is globally analytic,
+including the bottom threshold, without compactness.
+\end{theorem}
+\begin{proof}
+At the bottom threshold the locus is exactly $N$, hence analytic.
+For a nonbottom threshold, genuine upper semicontinuity of the monomial
+invariant and closedness of $N$ prove that the actual superlevel is closed.
+At each point in that locus, the preceding producer supplies an actual
+analytic set agreeing with it on a neighbourhood. Restrict that set's
+actual holomorphic presentation to the common neighbourhood to present
+the actual superlevel. At a point outside the closed locus, a neighbourhood
+misses it and the constant function $1$ presents the empty germ. These
+actual presentations prove global analyticity; topological upper
+semicontinuity is used only for closedness, never for analyticity itself.
+\end{proof}
+
+\begin{theorem}[Actual canonical superlevels at monomial thresholds]
+\label{hir:canonical-monomial-threshold-global-analytic}
+\uses{hir:monomial-superlevels-global-analytic,hir:canonical-first-entry-analytic-superlevel,hir:canonical-centres}
+\lean{Hironaka.HironakaMonomialAnalyticSuperlevels.canonical_monomial_superlevel_eq_union,Hironaka.HironakaMonomialAnalyticSuperlevels.isComplexAnalyticSubset_canonical_monomial_superlevel}
+\leanok
+For the genuine constructed canonical invariant along any actual test
+tower of a marked ideal in its invariant domain, every superlevel on
+the actual transformed carrier at a monomial threshold $(0,\operatorname{inl}v)$
+is globally analytic. It equals the union of the actual first-entry
+superlevel at $1$ and the genuine monomial-invariant superlevel at $v$.
+\end{theorem}
+\begin{proof}
+The actual transform remains in the invariant domain, so the genuine
+closed smooth, coherent, SNC, transverse and nonzero-along hypotheses
+needed above are internally available. At a point of positive nonmonomial
+order, the first entry strictly exceeds $0$, so the lexicographic canonical
+value exceeds the monomial threshold regardless of its companion entry.
+At order zero, the canonical value is exactly $(0,\operatorname{inl}\gamma)$,
+so the comparison is precisely $v\le\gamma$. This proves the exact union
+dictionary. Both actual members of that union are globally analytic by
+the two genuine producers, and finite union proves the result. No tuple,
+coefficient or enhanced-invariant analyticity certificate is an input.
+Companion/history thresholds and the auxiliary Hilbert--Samuel chain
+engine of Bierstone--Milman, Lemma 13.7, remain separate open obligations.
+\end{proof}

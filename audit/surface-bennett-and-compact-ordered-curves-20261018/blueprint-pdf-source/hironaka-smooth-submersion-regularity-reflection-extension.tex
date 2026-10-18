@@ -1,0 +1,145 @@
+\section{Regularity of actual saturated cylinders}
+
+This chapter proves the geometric reflection step for a genuine smooth
+submersion.  Product coordinates are supplied by the original submersion;
+no reflected-regularity or chosen-normal-equation certificate is an input.
+The local product calculation is stated first and then consumed by those
+actual charts.
+
+\begin{lemma}[Actual vertical-preserving normal coordinates]
+\label{hir:saturated-cylinder-vertical-preserving-coordinates}
+\lean{Hironaka.HironakaSmoothSubmersionRegularityReflection.exists_vertical_preserving_normal_coordinates}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{bcalc:snc-simultaneous}
+Let $\Xi$ be a local holomorphic equivalence at the origin of
+$\mathbb C^{n+t}$.  Suppose its inverse image of a specified coordinate
+plane contains the vertical plane $\{0\}\times\mathbb C^t$ on its actual
+source.  There are new local holomorphic coordinates at the origin, a
+normal cutting index set $X$ contained in the first $n$ coordinates, and
+an actual source contained in that of $\Xi$, in which the same normal
+zero set is the coordinate subspace cut by $X$.  Every vertical coordinate
+is retained literally.  The number of cutting indices is the original
+normal codimension.
+\end{lemma}
+\begin{proof}
+Apply the existing simultaneous model-coordinate construction with the
+centre cutting indices equal to the first $n$ coordinates and with the
+divisor family empty.  Containment of the vertical plane is exactly its
+centre-containment premise.  That construction internally chooses
+independent normal differential columns from those first $n$ coordinates,
+then applies the holomorphic inverse function theorem.  It gives a normal
+index set $X$ contained in this first block and a permutation $\sigma$.
+Undo that permutation in the resulting coordinate values.  Its literal
+unchanged-coordinate formula then says that every coordinate outside $X$
+is retained, hence all vertical coordinates are retained.  The normal
+plane dictionary becomes precisely vanishing on $X$.  The permutation
+identifies $X$ with the old last normal block, giving the asserted cardinal.
+\end{proof}
+
+\begin{lemma}[An actual horizontal slice of vertical-preserving coordinates]
+\label{hir:saturated-cylinder-horizontal-slice-coordinates}
+\lean{Hironaka.HironakaSmoothSubmersionRegularityReflection.horizontalSliceCoordinates,Hironaka.HironakaSmoothSubmersionRegularityReflection.horizontalSliceCoordinates_zero}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:saturated-cylinder-vertical-preserving-coordinates}
+A local holomorphic equivalence at the origin of $\mathbb C^{n+t}$
+which retains every vertical coordinate restricts to a genuine local
+holomorphic equivalence at the origin of $\mathbb C^n$.  Its source and
+target are the literal preimages of the original source and target under
+$u\mapsto(u,0)$; its maps are the first-block projections of the original
+maps on that slice.
+\end{lemma}
+\begin{proof}
+The source and target are open by continuity of the linear slice inclusion.
+The forward map sends a horizontal input to a horizontal output because
+all vertical coordinates are retained.  Conversely, the inverse of a
+horizontal output is horizontal: applying the forward map to that inverse
+shows that its retained vertical coordinates vanish.  The original inverse
+identities therefore imply both slice inverse identities and both genuine
+source-to-target maps.  Holomorphicity follows by composition with the
+linear inclusion and projection.  The origin is retained, so the actual
+slice source contains it.
+\end{proof}
+
+\begin{theorem}[Reflection of regularity of an actual cylinder]
+\label{hir:saturated-cylinder-regularity-reflection}
+\lean{Hironaka.HironakaSmoothSubmersionRegularityReflection.regularAtDim_of_cylinder_flattening,Hironaka.HironakaSmoothSubmersionRegularityReflection.regularAtDim_cylinder_reflection}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:saturated-cylinder-horizontal-slice-coordinates}
+Let $A\subseteq\mathbb C^n$ contain the origin.  If its actual cylinder
+$A\times\mathbb C^t$, read in the fixed finite product coordinates, is
+regular of dimension $j$ at the origin, then $t\leq j$ and $A$ is regular
+of dimension $j-t$ at the origin.
+\end{theorem}
+\begin{proof}
+Take the actual flattening supplied by cylinder regularity.  The vertical
+plane lies in its normal zero set, since $0\in A$.  The first lemma
+supplies genuine vertical-preserving coordinates with normal cutting
+indices $X$ in the first block, of cardinal $n+t-j$.  Restrict those
+actual coordinates to the horizontal slice using the second lemma.
+The cylinder dictionary on that slice says exactly that membership in
+$A$ is vanishing on those same first-block indices.  Permute only this
+first block to put its $|X|$ cutting indices last.  This is a genuine
+flattening of $A$ of dimension $n-|X|$.  Because $|X|\leq n$, we have
+$t\leq j$, and the displayed cardinal gives $n-|X|=j-t$.
+\end{proof}
+
+The subsequent original-manifold consumer composes these actual slice
+coordinates with the actual lifted submersion and original preferred charts.
+The cylinder calculation alone does not yet identify the zero-branch contact
+choices or complete higher invariant values under a smooth map.
+
+
+\begin{theorem}[Original regularity reflection under an arbitrary smooth map]
+\label{hir:smooth-submersion-original-regularity-reflection}
+\lean{Hironaka.HironakaSmoothSubmersionRegularityReflection.regularAtDim_of_preimage_submersion}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:saturated-cylinder-regularity-reflection,hir:submersion-nc-full-lifted-coordinates}
+Let $f:Y^m\to X^n$ be an actual holomorphic submersion at $y$, and let
+$A\subseteq X$ be any original subset.  If the actual preimage $f^{-1}A$
+is regular of dimension $j$ at $y$, then $m-n\leq j$ and the original
+$A$ is regular of dimension $j-(m-n)$ at $f(y)$.
+\end{theorem}
+\begin{proof}
+The true submersion supplies $n\leq m$ and its actual lifted holomorphic
+coordinates, centred at $y$, with first block equal to the actual centred
+preferred coordinates of $f$.  Compose their genuine inverse with the
+actual flattening of the whole source preimage.  Its source is the actual
+intersection where both coordinate maps and both original preferred charts
+apply.  On that source the normal plane dictionary identifies membership
+with the literal cylinder over the original $A$ in the centred target
+coordinates: the first-block equality and both chart inverse identities
+prove this directly.  The source point belongs to the preimage, hence the
+original target point belongs to $A$.  Apply the cylinder reflection
+producer on this actual local source.  It supplies the fibre-dimension bound
+and an actual target flattening of dimension $j-(m-n)$ in the centred target
+coordinates.  Compose this flattening with the actual centred preferred
+target coordinates.  The literal inverse identities give the original
+membership dictionary, and its source lies in the preferred target chart.
+This is precisely the original definition of target regularity.
+\end{proof}
+
+
+\begin{corollary}[Actual regular codimension-one pairs]
+\label{hir:smooth-submersion-original-codimension-one-pairs}
+\lean{Hironaka.HironakaSmoothSubmersionRegularityReflection.regular_codim_one_preimage_iff}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-submersion-original-regularity-reflection,hir:submersion-relative-regular-geometry}
+For any original subsets $S,N$ and an actual holomorphic submersion at $y$,
+the existence of regular dimensions $k+1,k$ for $f^{-1}N,f^{-1}S$ at $y$
+is equivalent to the existence of such consecutive regular dimensions for
+$N,S$ at $f(y)$.
+\end{corollary}
+\begin{proof}
+For reflection, apply the original reflection theorem to both subsets.
+The regular dimension $k$ of the smaller source subset is at least the
+fibre dimension $t$, so $(k+1)-t=(k-t)+1$.  This supplies the target pair.
+Conversely, the original forward regularity producer adds the same actual
+fibre dimension to both original dimensions, retaining their difference
+of one.  No supplied choice of target regular dimension or coordinates
+is needed in either direction.
+\end{proof}

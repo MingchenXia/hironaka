@@ -1,0 +1,93 @@
+\section{Actual analytic superlevels of the canonical boundary count}
+
+The maximal-order step of W{\l}odarczyk\cite{wlodarczyk05-hironaka},
+proof of Proposition \texttt{pr:resol}, Step 1a, uses the number of
+original boundary members through a point. Its superlevel is globally
+analytic for a genuine analytic boundary. This supplies another actual
+canonical invariant layer needed before the analytic extension construction
+of Bierstone--Milman\cite{bierstone-milman97-invent-math}, Section 13.
+
+\begin{lemma}[Actual finite intersection dictionary]
+\label{hir:boundary-count-superlevel-intersection-dictionary}
+\lean{Hironaka.HironakaBoundaryCountAnalyticSuperlevels.boundaryCount_superlevel_eq_biUnion}
+\leanok
+For a finite list $E$ and $s\in\mathbb N$,
+\[
+ \{x:s\le \#\{i:x\in E_i\}\}
+ =\bigcup_{S\subset\{1,\ldots,|E|\},\ |S|=s}\ \bigcap_{i\in S} E_i.
+\]
+Indices retain the actual original list occurrences. No choice of
+intersections or superlevel certificate is part of the input.
+\end{lemma}
+\begin{proof}
+At a point of count at least $s$, the finite set of indices through that
+point has a subset $S$ of cardinality exactly $s$. The point lies in every
+member indexed by $S$, so it lies in the displayed union. Conversely,
+membership in a displayed intersection puts all $s$ indices of $S$ into
+the actual index set through the point; cardinality monotonicity proves
+the count bound. For $s=0$, the empty intersection is the whole ambient
+space. For $s>|E|$, both sides are empty. Repeated list members do not
+invalidate this indexed combinatorial identity.
+\end{proof}
+
+\begin{theorem}[Produced analytic boundary-count superlevels]
+\label{hir:boundary-count-global-analytic-superlevels}
+\uses{hir:boundary-count-superlevel-intersection-dictionary}
+\lean{Hironaka.HironakaBoundaryCountAnalyticSuperlevels.isComplexAnalyticSubset_boundaryCount_superlevel}
+\leanok
+If every actual boundary member is analytic, each boundary-count
+superlevel is globally analytic in every ambient dimension, without
+compactness.
+\end{theorem}
+\begin{proof}
+Finite intersections of the genuine analytic members are analytic,
+including the empty intersection, the whole ambient space. The exact
+dictionary expresses the superlevel as a finite union of those actual
+intersections. Finite unions are analytic by products of their actual
+local defining equations. Thus the analytic structure is produced from
+the original members, rather than inferred from closedness or topological
+upper semicontinuity.
+\end{proof}
+
+\begin{theorem}[Actual transformed original-member level superlevels]
+\label{hir:actual-step-one-level-analytic-superlevels}
+\uses{hir:boundary-count-global-analytic-superlevels,hir:step-one-seq}
+\lean{Hironaka.HironakaBoundaryCountAnalyticSuperlevels.isComplexAnalyticSubset_stepOne_level_superlevel}
+\leanok
+Let $\mathfrak J$ be a genuinely well formed marked ideal in positive
+ambient dimension, and $T$ a genuine admissible test tower of its actual
+homogenized coefficient marked ideal $\overline{\mathfrak J}$. The locus
+where the genuine original-member level $s_T$ is at least $s$ is globally
+analytic.
+\end{theorem}
+\begin{proof}
+The actual homogenized coefficient marked ideal is well formed. Its
+genuine transform along $T$ therefore has an actual SNC boundary. Taking
+the original number of its members gives the genuine list of original
+strict transforms; this sublist remains SNC. In positive dimension,
+every actual SNC member is a closed smooth hypersurface, as follows by
+the genuine singleton member-intersection regularity theorem. Hence each
+is analytic. The definition of $s_T$ is exactly the actual boundary count
+of this list, so apply the produced analytic-superlevel theorem. No
+analytic presentation of the level or transformed members is requested
+from the caller.
+\end{proof}
+
+\begin{corollary}[Actual masked StepOne first-entry analytic superlevels]
+\label{hir:actual-masked-step-one-first-entry-analytic-superlevels}
+\uses{hir:actual-step-one-level-analytic-superlevels,hir:step-one-seq}
+\lean{Hironaka.HironakaBoundaryCountAnalyticSuperlevels.isComplexAnalyticSubset_stepOneInvM_first_superlevel}
+\leanok
+Under the same genuine geometric inputs, the first-entry superlevels of
+the actual masked StepOne invariant are globally analytic.
+\end{corollary}
+\begin{proof}
+At special points the actual invariant is $(s_T,\infty)$; at every other
+point it is $(s_T,\text{actual lower value})$. Consequently its first
+entry equals $s_T$ at every point. Substitute this identity into the
+preceding theorem. This connection uses the actual invariant constructor,
+not a supplied tuple or an analyticity certificate. The lower/history
+entries and the full auxiliary-chain invariant still require separate
+analyticity and smoothification producers before general noncompact
+global resolution can be claimed.
+\end{proof}

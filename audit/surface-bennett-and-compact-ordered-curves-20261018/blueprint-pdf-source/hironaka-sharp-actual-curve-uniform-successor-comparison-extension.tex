@@ -1,0 +1,66 @@
+\section{Actual next blowup arrows and centres under uniform-stage comparisons}
+
+\begin{definition}[Actual uniform successor output]
+\label{hir:sharp-actual-curve-uniform-successor-data}
+\uses{hir:sharp-actual-curve-uniform-prefix-actual-next-blowup}
+\lean{Hironaka.HironakaSharpActualCurveUniformSuccessorComparison.UniformSuccessorData,Hironaka.HironakaSharpActualCurveUniformSuccessorComparison.actualUniformSuccessor}
+\leanok
+For an actual finite history $T$ and $k$, the ordinary successor output
+consists of a centre in its actual $k$th uniform stage, an actual map from
+stage $k+1$, its genuine blowup proof and literal equality of the ENTIRE
+next history with that successor. These data are constructed internally
+from the already proved actual successor theorem. No comparison,
+compatibility, atlas or gluing conclusion is a field or input.
+\end{definition}
+
+\begin{theorem}[Actual next arrows and centres respect the already chosen stage maps]
+\label{hir:sharp-actual-curve-uniform-successor-chosen-map-compatible}
+\uses{hir:sharp-actual-curve-uniform-successor-data,hir:tower-isomorphism,hir:sharp-actual-stagewise-tower-comparison-unique}
+\lean{Hironaka.HironakaSharpActualCurveUniformSuccessorComparison.actualUniformSuccessor_projection,Hironaka.HironakaSharpActualCurveUniformSuccessorComparison.actualUniformSuccessor_compatible}
+\leanok
+Given two actual finite histories over a genuine base biholomorphism,
+and genuine stagewise isomorphisms of their actual uniform histories at
+$k$ and $k+1$, the independently constructed next blowup arrows commute
+with THESE actual stage maps. The inverse image of the target centre
+under THIS already chosen stage-$k$ map is the source centre. Each actual
+next arrow also factors its full projection through the actual previous
+projection. The centre
+and next arrow themselves are outputs of the actual successor construction.
+\end{theorem}
+\begin{proof}
+Rewrite both next histories by their literal actual last-step equalities.
+Invert the genuine next-stage tower-isomorphism constructor. This yields
+an actual isomorphism of the preceding histories, its true centre-preimage
+identity and the actual commuting next-blowup square. The preceding-history
+universal uniqueness theorem identifies this actual predecessor map with
+the already chosen stage-$k$ map. Substitute that equality in the entire
+centre identity and square. No commuting square or centre correspondence
+is assumed, and no map is identified merely because its projection to the
+original base agrees. The absolute projection identity follows from the
+literal last-step equality and the actual tower projection recursion.
+\end{proof}
+
+\begin{theorem}[A genuine padded full-history comparison supplies the whole successor square]
+\label{hir:sharp-actual-curve-uniform-successor-padded-comparison}
+\uses{hir:sharp-actual-curve-uniform-successor-chosen-map-compatible,hir:sharp-actual-curve-uniform-prefix-comparison}
+\lean{Hironaka.HironakaSharpActualCurveUniformSuccessorComparison.exists_uniformSuccessor_comparison_of_padded}
+\leanok
+For ANY genuine stagewise comparison of two actual full histories after
+any actual empty padding, and every $k$, internally construct actual
+stage-$k$ and stage-$(k+1)$ maps and their genuine stagewise properties.
+The independently constructed next blowup arrows commute with these maps,
+and their actual centres correspond. Empty steps and every actual
+position are retained, irrespective of the padding cuts or terminal lengths.
+\end{theorem}
+\begin{proof}
+Apply the true uniform-prefix comparison producer separately at $k$ and
+$k+1$ to the supplied actual padded full-history isomorphism. Its exact
+whole-packet padding identities retain all actual stages and yield both
+genuine shorter-history isomorphisms. The preceding theorem then supplies
+the actual arrow square and centre identity for the independently
+constructed actual successors. This concludes actual finite-history
+comparison only. Descent through the global quotient, a global smooth
+centre and the genuine local-on-target blowup universal property remain
+separate mathematical work; no global schedule or global finite bound is
+asserted here.
+\end{proof}

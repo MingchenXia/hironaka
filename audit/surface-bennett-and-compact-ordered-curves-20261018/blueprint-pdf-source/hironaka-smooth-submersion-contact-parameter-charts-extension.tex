@@ -1,0 +1,125 @@
+% OWN complete mathematical route BEFORE Lean; formal registration pending root.
+\section{Genuine lower-dimensional contact parameter charts and their smooth square}
+
+\begin{lemma}[Entire actual fibre-first projection commutes with genuine plane inclusion]
+\label{hir:submersion-contact-parameters-linear-plane-square}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCharts.actual_projection_plane_inclusion,Hironaka.HironakaSmoothSubmersionContactParameterCharts.actual_target_projection_isSubmersionOfComplement}
+\uses{hir:submersion-relative-differential-actual-linear-projection,hir:submersion-adapted-fibre-first-rotation}
+\leanok
+For ANY $a,n$, use the genuine continuous linear inclusion $\iota_{n,a}$
+of the first $a$ coordinates. For the actual fibre-first projections $P_{n,t}$
+and $P_{a,t}$ one has the ENTIRE map identity
+\[P_{n,t}\iota_{n+t,a+t}=\iota_{n,a}P_{a,t}.\]
+The actual smaller projection is a genuine submersion with fibre $\mathbf C^t$,
+including $a=0$ or $t=0$.
+\end{lemma}
+\begin{proof}
+For each original coordinate $j<n$, both sides read the source coordinate
+$t+j$ if $j<a$ and zero otherwise. This follows directly from the actual
+shifted-index formula and the genuine inclusion's finite coordinate formula.
+Coordinate extensionality proves the entire linear equality. The actual
+fibre-first linear equivalence splits $\mathbf C^{a+t}$ into its first $t$
+fibre coordinates and its last $a$ original coordinates. Compose this true
+linear equivalence with interchange of the two factors. Identity charts on
+the model spaces then give the genuine submersion chart equation to first
+projection, with complement $\mathbf C^t$. No rank, coordinate, complement
+or submersion conclusion is supplied as a hypothesis.
+\end{proof}
+
+\begin{theorem}[Actual arbitrary open-domain restrictions preserve the same smooth complement]
+\label{hir:submersion-contact-parameters-actual-open-restriction}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCharts.restrictedOpenMap,Hironaka.HironakaSmoothSubmersionContactParameterCharts.restrictedOpenMap_isSubmersionOfComplement}
+\uses{hir:submersion-contact-restriction-open-charts,hir:submersion-composition-normalized-target,ana:restricted-calculus}
+\leanok
+Given a genuine original submersion $f$, genuine source and target opens
+$V,U$ and the primitive actual image containment $f(V)\subset U$, the
+actual restricted map $V\to U$ is a genuine submersion with the SAME original
+complement. The source open may be any actual open, rather than the whole
+preimage of the target open. Empty opens require no artificial chart data.
+\end{theorem}
+\begin{proof}
+At each actual source point of $V$, take the genuine original submersion
+charts and its actual original complement. Compose each chart with the true
+open inclusion partial homeomorphism for $V$ and for $U$ respectively.
+Both composed charts genuinely belong to the maximal holomorphic atlases:
+their inverses are the original inverse charts restricted to actual opens,
+and their forward maps are holomorphic there. The primitive actual image
+containment makes the restricted map total into $U$. On the ENTIRE new source
+chart target, the true open inclusion right inverse identifies its ambient
+point with the original chart inverse. The original whole projection equation
+therefore proves the same new chart equation. The real submersion constructor
+produces the desired map with that SAME complement. Actual source points
+supply chart nonemptiness; for an empty source the universally quantified
+statement is vacuous, without invented dimensions or coordinates.
+\end{proof}
+
+\begin{theorem}[ONLY original direction geometry internally creates lower-dimensional actual contact charts]
+\label{hir:submersion-contact-parameters-internal-joint-charts}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCharts.parameterOpen,Hironaka.HironakaSmoothSubmersionContactParameterCharts.parameterMap,Hironaka.HironakaSmoothSubmersionContactParameterCharts.parameterMap_flat_dictionary,Hironaka.HironakaSmoothSubmersionContactParameterCharts.parameterMap_zero,Hironaka.HironakaSmoothSubmersionContactParameterCharts.parameterMap_roundtrip,Hironaka.HironakaSmoothSubmersionContactParameterCharts.parameterMap_contMDiffOn,Hironaka.HironakaSmoothSubmersionContactParameterCharts.adapted_parameter_square,Hironaka.HironakaSmoothSubmersionContactParameterCharts.exists_actual_joint_contact_parameters}
+\uses{hir:submersion-contact-coordinates-internal-original-chart,hir:submersion-adapted-whole-original-centre,hir:submersion-relative-differential-actual-inverse-chain-rule,hir:submersion-contact-parameters-linear-plane-square,hir:submersion-contact-parameters-actual-open-restriction,hir:submersion-monomial-dimension,hir:order-along-flat,hir:giraud-along,ana:restricted-calculus}
+\leanok
+ONLY original coherent $I$, actual closed smooth $N$, genuine whole original
+direction $u$ on $U$, genuine submersion $f$ and an actual source point over
+$N\cap V(u)\cap U$ internally produce $k>0$, $t=m-n$, one original coordinate
+chart $\Theta$ and its actual adapted source chart $\Gamma$. There are actual
+opens $W\subset\mathbf C^{k-1}$ and $V\subset\mathbf C^{(k-1)+t}$ containing
+zero, and actual holomorphic parameter maps into the original and preimage
+contacts. They parametrize the ENTIRE respective contact portions in the
+chosen ambient chart domains, with true coordinate projection as inverse.
+The ENTIRE original $f$ square in these parameters is precisely the actual
+projection $P_{k-1,t}:V\to W$, and that actual map is a genuine submersion
+with complement $\mathbf C^t$. No caller lower-dimensional contact chart,
+normal form, square, dimension or submersion conclusion is input.
+\end{theorem}
+\begin{proof}
+The true contact-coordinate producer internally creates $k>0$ and one
+centred $\Theta$ whose entire domain lies in $U$ and whose exact whole contact
+is the plane of dimension $a=k-1$. Genuine submersion geometry internally
+gives $m=n+t$; construct its actual fibre-first adapted chart $\Gamma$ from
+this SAME $\Theta$. Its true entire dictionary flattens the preimage contact
+onto the plane of dimension $a+t$ and sends every source chart point into
+the original chart domain. Define $W=\iota_{n,a}^{-1}(\Theta.target)$ and
+$V=\iota_{n+t,a+t}^{-1}(\Gamma.target)$. Genuine continuous linear inclusions
+make both actual sets open; true centring places zero in both.
+
+Define the actual parameter maps by $\Theta^{-1}\iota_{n,a}$ and
+$\Gamma^{-1}\iota_{n+t,a+t}$ using the real ambient inverse charts. Their whole
+inverse-point dictionaries put every parameter point into the actual contact
+and ambient chart domain. Conversely, each true contact point in that domain
+has its flattened coordinate in the actual coordinate plane; genuine plane
+inclusion composed with projection is identity there. The actual local chart
+round trips therefore give both entire inverse parameterizations, not just
+pointwise regularity.
+
+The real adapted inverse-point square identifies $f\Gamma^{-1}(w)$ with
+$\Theta^{-1}(P_{n,t}w)$ on the ENTIRE source chart target. Node one's entire
+linear plane square identifies $P_{n,t}\iota_{n+t,a+t}$ with
+$\iota_{n,a}P_{a,t}$. The adapted chart's true image-domain containment proves
+that every $V$ parameter is sent into $W$. Thus the whole parameter square is
+the genuine smaller projection. Node one's actual linear submersion and node
+two's true arbitrary-open restriction produce the genuine $V\to W$
+submersion with complement $\mathbf C^t$. The genuine coordinate inverses are holomorphic on their actual targets; complex differentiability there gives smoothness of every order. Composing with the smooth original chart inverse and genuine continuous linear inclusion gives actual holomorphic parameter maps on the entire parameter opens. All dimensions, sets, maps and
+round trips arise internally from the original geometry. This also treats a
+zero-dimensional contact or zero fibre without creating nonexistent indices.
+\end{proof}
+
+\begin{theorem}[Original marked maximal-order data internally select the actual contact parameter square]
+\label{hir:submersion-contact-parameters-original-only-consumer}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCharts.exists_original_only_joint_contact_parameters}
+\uses{hir:submersion-tangent-contact-closed-open-carriers,hir:smooth-relative-whole-cosupport,hir:submersion-contact-parameters-internal-joint-charts}
+\leanok
+ONLY a genuine submersion, original coherent marked datum with actual closed
+smooth carrier, positive mark and an actual source cosupport point of maximal
+original image order internally select the SAME true original $U,u$ and the
+preceding actual lower-dimensional contact parameterizations and submersion.
+\end{theorem}
+\begin{proof}
+The genuine original maximal-order contact producer internally chooses $U,u$
+and both true whole tangent directions. Whole relative cosupport pullback
+places the image point in original cosupport. Its true original local contact
+inclusion and actual membership in $U$ put the image point on the genuine
+contact. Apply the preceding internal joint construction. No selected contact
+or lower-dimensional chart is supplied to this original-only consumer.
+Boundary transversality of independent contacts, higher canonical driver and
+noncompact termination remain open.
+\end{proof}

@@ -1,0 +1,93 @@
+\section{Actual analytic tangent coefficients under the normal-unit coordinates}
+
+\begin{theorem}[Every original tangent germ is fixed by the actual normal-unit pullback]
+\label{hir:actual-normal-unit-entire-tangent-coefficients}
+\uses{hir:actual-normal-unit-local-biholomorphism,hir:actual-normal-unit-coordinate-germ,hir:relative-normal-entire-germ-retraction}
+Use the original splitting into $d$ tangent and $t$ normal coordinates,
+the actual normal block $A$, an actual $j\in\{0,\ldots,t-1\}$ and
+$e=d+j$. Let $F$ and $E$ be the proved actual normal-unit coordinate
+map and its original whole germ pullback. Then the genuine tangent
+projection satisfies $\mathrm{pr}_{\mathrm{tan}}\circ F=
+\mathrm{pr}_{\mathrm{tan}}$. For every entire original tangent germ
+$a\in\mathcal O_{\mathbb C^d,0}$,
+$E(\mathrm{tangentPullback}(a))=\mathrm{tangentPullback}(a)$.
+\lean{Hironaka.HironakaActualNormalUnitAnalyticCoefficients.tangentProjection_actualNormalUnitForward,Hironaka.HironakaActualNormalUnitAnalyticCoefficients.actualNormalUnitGermEquiv_tangentPullback}
+\leanok
+\end{theorem}
+\begin{proof}
+Every tangent index is outside the actual last normal block and differs
+from $e$. The literal formula for $F$ therefore fixes it at every
+actual point. Equality of every projected coordinate proves the actual
+projection identity. Represent an arbitrary original tangent germ by
+its genuine holomorphic representative $f$. The original
+$\mathrm{tangentPullback}$ is composition by that genuine projection;
+the original $E$ is composition by the proved actual $F$. Their
+representatives are $f\circ\mathrm{pr}_{\mathrm{tan}}\circ F$
+and $f\circ\mathrm{pr}_{\mathrm{tan}}$, respectively. The actual
+projection identity makes them equal, hence equal as whole original
+germs. No polynomial approximation of $f$ or formal evaluation at a
+nonzero point is used.
+\end{proof}
+
+\begin{theorem}[The actual normal-unit pullback commutes with every finite tangent-coefficient evaluation]
+\label{hir:actual-normal-unit-tangent-coefficient-evaluation}
+\uses{hir:actual-normal-unit-entire-tangent-coefficients}
+Let $P$ be any actual finite normal polynomial with coefficients in the
+entire original tangent holomorphic germ ring. For every assignment
+$q_i$ of its variables to original ambient germs,
+\[
+ E\bigl(\operatorname{eval}_2(\mathrm{tangentPullback},q)(P)\bigr)
+ =\operatorname{eval}_2(\mathrm{tangentPullback},E(q))(P).
+\]
+\lean{Hironaka.HironakaActualNormalUnitAnalyticCoefficients.actualNormalUnitGermEquiv_eval₂}
+\leanok
+\end{theorem}
+\begin{proof}
+An actual ring homomorphism composed with finite polynomial evaluation
+is evaluation with both its coefficient map and variable assignment
+composed with that homomorphism. Apply this original polynomial
+universal-property identity to $E$. The preceding entire tangent-germ
+identity identifies the composite coefficient map with the original
+$\mathrm{tangentPullback}$. All coefficients are genuine tangent
+holomorphic germs, so the equality concerns the entire original
+ambient germ ring.
+\end{proof}
+
+\begin{theorem}[Exact normal-unit dehomogenization with arbitrary actual tangent germ coefficients]
+\label{hir:actual-normal-unit-analytic-coefficient-dictionary}
+\uses{hir:actual-normal-unit-tangent-coefficient-evaluation,hir:actual-normal-unit-coordinate-germ,hir:relative-normal-basis-actual-derivation-evaluation}
+Let $P$ be an actual finite homogeneous normal polynomial of degree
+$q$ with coefficients in $\mathcal O_{\mathbb C^d,0}$. Its coefficients
+are evaluated by the original $\mathrm{tangentPullback}$. Let $x_i$
+denote the original normal coordinate germs, $p_j=1$ and $p_i=b_i$
+for $i\ne j$, and let $v$ be the genuine reciprocal germ of
+$1+x_j$. With the actual dehomogenizing normal entries $r_j=1$,
+$r_i=b_i+x_i$ for $i\ne j$, the exact whole germ equality is
+\[
+ E\bigl(\operatorname{eval}_2(\mathrm{tangentPullback},r)(P)\bigr)
+ =v^q\operatorname{eval}_2(\mathrm{tangentPullback},x+p)(P).
+\]
+\lean{Hironaka.HironakaActualNormalUnitAnalyticCoefficients.actualNormalUnitGermEquiv_analytic_dehomogenization}
+\leanok
+\end{theorem}
+\begin{proof}
+The preceding finite-evaluation identity moves the actual pullback
+through evaluation while preserving every whole tangent coefficient.
+In coordinate $j$, the evaluated left entry is $1=v(1+x_j)$ by
+the genuine reciprocal identity. In every other normal coordinate,
+the literal actual coordinate germ formula gives
+$b_i+E(x_i)=v(b_i+x_i)$. Thus all normal polynomial variables are
+scaled by the same actual unit $v$. Expand $P$ in its finite supported
+coefficient monomials. Every such exponent has total normal degree
+$q$, so its evaluated product acquires precisely the factor $v^q$.
+Factor that common power from the finite sum. This proves the exact
+equality inside the original entire germ ring for arbitrary original
+tangent coefficients, including the zero polynomial and degree zero.
+\end{proof}
+
+These theorems transport actual analytic tangent coefficients already
+present as whole original germs. They do not assert that an arbitrary
+formal coefficient series has an analytic representative, or supply a
+coefficient-cosupport, normal-flatness or Bennett certificate. General
+analytic coefficient realization and positive-dimensional permissible
+centre Bennett remain open.

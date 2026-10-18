@@ -1,0 +1,96 @@
+\section{Genuine stopped-open identification of the global history and terminal endpoint}
+
+\begin{lemma}[The stopped local maps agree at every actual quotient representative]
+\label{hir:sharp-actual-curve-stopped-local-quotient-independence}
+\uses{hir:sharp-actual-curve-stopped-atlas-transition-square,hir:sharp-actual-endpoint-saturated-local-range,hir:sharp-actual-endpoint-local-range-biholomorphism}
+\lean{Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stopped_local_inclusion_eq}
+\leanok
+For the SAME retained actual atlas, fix a natural stage $k$. Whenever
+two actual chart histories have their literal full lengths at most $k$,
+points representing the SAME actual stage point have stopped terminal
+points representing the SAME original terminal point. No representation
+independence or quotient map is supplied.
+\end{lemma}
+\begin{proof}
+The actual original projections agree for the two representations. The
+second representation therefore puts the first point in the ENTIRE real
+stage overlap. The genuine quotient transition relation sends this point
+to a point in the second chart with exactly the same inclusion. Actual
+open-embedding injectivity identifies it with the given second point.
+Apply the already proved square for the SAME chosen stage and terminal
+transitions. The true terminal quotient transition relation identifies
+its terminal inclusions. This proves the required equality without any
+injectivity of the original blowdown projection.
+\end{proof}
+
+\begin{theorem}[Actual stopped maps glue to a genuine biholomorphism on their entire stopped-open union]
+\label{hir:sharp-actual-curve-stopped-open-global-biholomorphism}
+\uses{hir:sharp-actual-curve-stopped-local-quotient-independence,hir:sharp-actual-curve-stopped-stage-terminal-range}
+\lean{Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedBaseOpen,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.mem_stoppedBaseOpen,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedStageOpen,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedTerminalOpen,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenMap,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenMap_bijective,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenMap_contMDiff,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenEquiv_symm_contMDiff,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenBiholomorphism,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenBiholomorphism_projection,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedOpenBiholomorphism_local}
+\leanok
+Let $U_k$ be the union of the original opens whose actual full histories
+have length at most $k$. On the ENTIRE inverse image of $U_k$ in the
+actual global stage $Y_k$, the stopped local identifications glue to a
+genuine biholomorphism onto the ENTIRE inverse image of $U_k$ in the
+original terminal endpoint. It has exactly the previously constructed
+local stopped maps, and its whole original projection square commutes.
+No global map, inverse, overlap certificate or stopping bound is an input.
+\end{theorem}
+\begin{proof}
+A point of the first inverse image has an actual stopped chart over its
+original projection. The ENTIRE saturated range dictionary supplies an
+actual chart representative. Send it by its genuine stopped terminal
+biholomorphism and then by the original terminal inclusion. The first
+lemma proves independence of every representative and hence gives the
+exact local formula on each stopped range. The stopped projection square
+puts the image in the second entire inverse image and proves the whole
+projection identity.
+
+To prove injectivity, choose a stopped chart above the projection of one
+source point. Equality of terminal images and the projection square put
+both source points in this SAME saturated stage range. Their local
+formulas, the genuine terminal inclusion embedding and stopped local
+biholomorphism give equality of the source representatives. For
+surjectivity, choose a stopped chart over any target projection. Its
+whole saturated terminal range gives a representative; the actual inverse
+of its stopped biholomorphism gives a source representative. Both true
+inverse laws and the local formula give the prescribed target.
+
+The resulting actual bijection is holomorphic on each stopped range by
+its genuine local formula. These ranges are open and cover its entire
+source open, so it is holomorphic everywhere. Its actual inverse has,
+on each stopped terminal range, precisely the inverse genuine local
+biholomorphism, by the proved bijection and the exact forward local
+formula. These actual target ranges are also open and cover its entire
+target open. Thus its inverse is holomorphic as well. All open-subtype
+maps are genuine restrictions and inclusions. These two actual maps and
+inverse laws give the asserted biholomorphism.
+\end{proof}
+
+\begin{theorem}[Original curve data give increasing stopped opens covering every original point]
+\label{hir:sharp-actual-curve-original-stopped-open-cover}
+\uses{hir:sharp-actual-curve-stopped-open-global-biholomorphism,hir:sharp-actual-original-retained-local-recipe-family}
+\lean{Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedBaseOpen_mono,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.stoppedBaseOpen_cover,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.originalStoppedOpenBiholomorphism,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.originalStoppedOpenBiholomorphism_projection,Hironaka.HironakaSharpActualCurveStoppedOpenGluing.originalStoppedOpen_point_mem}
+\leanok
+Positive ambient dimension and ONLY the original smooth pure curve,
+ordered SNC and density data internally give the preceding stopped-open
+biholomorphisms. The opens $U_k$ increase with $k$ and cover the ENTIRE
+original ambient space. Each original point belongs to $U_L$, where $L$
+is its own actual retained history length. No uniform bound or caller
+atlas is supplied. Compact uniform finite stopping remains separate.
+\end{theorem}
+\begin{proof}
+Construct the SAME original retained atlas and its genuine pointwise
+open cover from the original geometric data. All hypotheses of the
+preceding construction are thereby internally supplied. The defining
+union uses the literal full length of each retained history, so any
+history counted at $k$ is also counted at a later stage. This proves
+monotonicity directly. For an arbitrary original point choose its own
+actual atlas chart, which contains that point by the original producer.
+At its actual finite full length that chart occurs in the defining
+union. Thus every point belongs to one of these increasing opens. No
+maximum over the infinite point-indexed family is used. Together with
+the preceding genuine maps this identifies the actual history with the
+terminal endpoint locally over every original point; finite uniform
+stopping under compactness is not asserted by this covering statement.
+\end{proof}

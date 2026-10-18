@@ -1,0 +1,156 @@
+\section{Actual finite historical predicates on genuine curve components}
+
+The following producers address the dynamic positive-order history seam
+of the constructed general invariant. Every exception set is constructed
+from actual analytic sets and the genuinely locally finite global
+component family. No finite global component list, constant-history
+certificate, or given zero-dimensional exception is assumed. The final
+consumer uses the actual coherent nonmonomial ideals at all heads of a
+finite geometric tower. Full General2 companion descent and G3 remain open.
+
+\begin{lemma}[Locally finite analytic unions and their actual dimensions]
+\label{hir:curve-predicates-locally-finite-union}
+\uses{rem:global-components,hir:dimtwo-finite-dimzero-union,ana:analytic-preimage}
+\lean{Hironaka.HironakaCurveAnalyticPredicates.isComplexAnalyticSubset_iUnion_of_locallyFinite,Hironaka.HironakaCurveAnalyticPredicates.analytic_dimzero_iUnion_of_locallyFinite}
+\leanok
+A genuinely locally finite family of closed analytic subsets has an
+analytic union. If each member has dimension at most zero, so does its union.
+\end{lemma}
+\begin{proof}
+The locally finite union is closed. At any point choose a genuine open
+neighbourhood meeting only finitely many indexed members. On this same
+neighbourhood the full union agrees exactly with that finite union, whose
+analytic equations come from actual finite analytic union. Transfer its
+analytic presentation using this local equality; outside the closed union
+use the unit equation. In the zero-dimensional case the finite union has
+actual dimension zero by the proved finite-union producer. Every regular
+point of the full union transfers to that finite union by the same open
+local equality, so its regular dimension is zero. This permits infinite,
+empty and repeated families whenever their actual indexed family is locally finite.
+\end{proof}
+
+\begin{lemma}[A proper analytic intersection on a genuine curve component]
+\label{hir:curve-predicates-proper-intersection}
+\uses{rem:global-components,rem:thin-dimension-drop,hir:global-component-pure-geometric-dimension}
+\lean{Hironaka.HironakaCurveAnalyticPredicates.analytic_dimzero_inter_globalComponent_of_not_subset}
+\leanok
+Let $A$ be analytic of dimension at most one, $B$ one of its genuine global
+components, and $P$ analytic. If $B\not\subseteq P$, then $B\cap P$ is
+closed analytic and has dimension at most zero.
+\end{lemma}
+\begin{proof}
+The actual $B$ is an analytic closure of a connected component $C$ of the
+regular locus of $A$, is contained in $A$, and inherits its dimension bound
+by analytic dimension monotonicity. If a nonempty relatively open trace
+of $B$ were contained in $P$, choose a genuine point of $C$ in that open
+set using its density in $B$. The corresponding nonempty relatively open
+trace of $C$ is contained in $P$. Analytic continuation on $C$ makes all
+of $C$, and then its closure $B$, contained in the closed $P$, a contradiction.
+Thus the actual intersection is thin in $B$. Genuine thin analytic
+dimension drop gives dimension at most zero; intersection of the actual
+analytic sets provides analyticity.
+\end{proof}
+
+\begin{theorem}[Internally produced exception for finite analytic predicates]
+\label{hir:curve-predicates-finite-exception}
+\uses{hir:curve-predicates-locally-finite-union,hir:curve-predicates-proper-intersection}
+\lean{Hironaka.HironakaCurveAnalyticPredicates.predicateException,Hironaka.HironakaCurveAnalyticPredicates.exists_analytic_dimzero_predicate_exception}
+\leanok
+For an actual analytic $A$ of dimension at most one and a finite indexed
+family of actual analytic predicates $P_i$, there is a constructed closed
+analytic zero-dimensional $Z\subseteq A$ such that, for every actual global
+component $B$ and every $x\in B\setminus Z$,
+\[
+x\in P_i\quad\Longleftrightarrow\quad B\subseteq P_i
+\]
+for all indices $i$.
+\end{theorem}
+\begin{proof}
+For each $i$, take the union of $B\cap P_i$ over precisely the genuine
+components $B$ not contained in $P_i$. This actual subfamily is locally
+finite: inject its component subtype into the genuinely locally finite
+full global-component family, then take actual subsets. Every intersection
+is analytic and zero-dimensional by the preceding lemma. The actual union
+producer therefore makes it analytic and zero-dimensional. Take the finite
+union over $i$, retaining its actual inclusion in $A$. At $x\in B\setminus Z$,
+if $B\subseteq P_i$, membership is immediate. If $B\not\subseteq P_i$, membership
+in $P_i$ would place $x$ in the corresponding actual intersection, hence in
+$Z$, contradicting the hypothesis. This proves the literal predicate dictionary.
+\end{proof}
+
+\begin{lemma}[Actual zero-dimensional singular envelope of an analytic curve]
+\label{hir:curve-predicates-singular-envelope}
+\uses{hir:dimension-part-global-component-union,rem:pure-singular-locus,hir:dimtwo-finite-dimzero-union}
+\lean{Hironaka.HironakaCurveAnalyticPredicates.eq_dimensionPart_zero_union_one,Hironaka.HironakaCurveAnalyticPredicates.exists_analytic_dimzero_regular_curve_envelope}
+\leanok
+For an actual analytic $A$ of dimension at most one, an internally
+constructed analytic zero-dimensional $S\subseteq A$ contains all its
+zero-dimensional components and all its nonregular points. Every point
+of $A\setminus S$ is genuinely regular of dimension one.
+\end{lemma}
+\begin{proof}
+The actual global components have internally witnessed regular dimensions
+zero or one. Their exact geometric dictionary with the dimension parts
+therefore gives $A=A_0\cup A_1$. Both parts are analytic and genuinely pure
+of their selected dimensions. Take $S=A_0\cup(A_1\setminus\operatorname{Reg}_1 A_1)$.
+The first part has dimension zero by purity; the second is analytic and
+zero-dimensional by the actual pure singular-locus producer. The finite
+union remains analytic and zero-dimensional. Away from its closed $A_0$
+part, $A$ has the same germ as $A_1$. Outside the second part the point is
+actually regular of dimension one in $A_1$, hence also in $A$. Both parts
+are subsets of $A$, so this is an actual exception producer.
+\end{proof}
+
+\begin{theorem}[Actual finite head-tail nonmonomial history predicates]
+\label{hir:curve-predicates-actual-history}
+\uses{hir:curve-predicates-finite-exception,hir:canonical-first-entry-analytic-superlevel,hir:tower-split,bcalc:inv-domain-stable}
+\lean{Hironaka.HironakaCurveAnalyticPredicates.historyOrderSuperlevel,Hironaka.HironakaCurveAnalyticPredicates.isComplexAnalyticSubset_historyOrderSuperlevel,Hironaka.HironakaCurveAnalyticPredicates.exists_analytic_dimzero_history_exception}
+\leanok
+Let $\mathfrak m$ be an actual dimension-two invariant-domain datum, $T$ an
+actual finite geometric test tower, and $o$ any natural order. On the current
+actual cosupport there is a constructed analytic zero-dimensional exception
+such that, on each genuine global component outside it, every actual
+historical nonmonomial comparison $\nu_r\ge o$ and $\nu_r\ge o+1$ is constant,
+where $\nu_r$ is the order at the actual image under the tail to head $r$.
+The actual head-stage cosupport conditions in these predicates are retained.
+\end{theorem}
+\begin{proof}
+For every $0\le r\le\operatorname{length}T$, split the actual tower into its
+literal head and tail. The head is an actual geometric test tower and its
+transformed datum is in the genuine invariant domain. Its nonmonomial ideal
+is coherent by the actual domain producer, so the already proved actual
+canonical first-entry superlevel is analytic. Intersect this actual locus with the genuine analytic head-stage cosupport,
+then pull it back by the genuine holomorphic tail projection. Use the two thresholds $o$ and
+$o+1$ at each head; the index set is genuinely finite. The current actual
+cosupport is analytic and has dimension at most one by the actual positive-mark,
+nonzero ideal and carrier-dimension-two dimension-drop producer. Apply the
+preceding internally constructed finite-predicate exception to this actual
+family and this actual cosupport. Its literal membership dictionary gives
+the claimed comparisons and retains every actual history stage and map.
+\end{proof}
+
+\begin{corollary}[Literal actual order-regime run on curve components]
+\label{hir:curve-predicates-actual-run}
+\uses{hir:curve-predicates-actual-history,hir:regime-run}
+\lean{Hironaka.HironakaCurveAnalyticPredicates.regimeRun_eq_of_head_predicates,Hironaka.HironakaCurveAnalyticPredicates.exists_analytic_dimzero_history_regime_exception}
+\leanok
+In the preceding actual situation the produced exception can be chosen so
+that every point outside it is genuinely regular of dimension one and any two points of the same genuine current global component outside
+it have exactly the same literal trailing order-$o$ regime run along $T$.
+\end{corollary}
+\begin{proof}
+Each actual regime predicate is membership in the actual carrier together
+with equality of its nonmonomial order to $o$. Equality is the conjunction
+of the comparisons at $o$ and the negation of the comparison at $o+1$,
+so the actual finite predicate dictionary makes all head regime predicates
+identical at the two actual points. Induct on the genuine tower: a reflexive
+tower has run zero; at a literal blowup step the actual previous-stage
+predicate decides whether the run is zero or the previous actual run plus
+one. The next head-tail predicates reduce definitionally to the previous
+tower's head-tail predicates, so induction gives equality. Apply this proved
+structural identity to the produced actual predicate dictionary. This is
+an equality of the genuine history function, not an assumed constant-run
+certificate. Take the union with the internally produced singular envelope to ensure
+actual dimension-one regularity outside the exception. Complete lower companion values and their analytic descent
+across higher-order boundary points are still to be proved.
+\end{proof}
