@@ -659,6 +659,18 @@ import Hironaka.Resolution.HironakaOriginalFiniteStepOneCutMaskAvoidance
 
 import Hironaka.Resolution.HironakaSharpActualCurveUniformSuccessorComparison
 
+import Hironaka.Resolution.HironakaActualOriginalDerivativeSheaf
+
+import Hironaka.Resolution.HironakaActualPointCentreStrictGenerators
+
+import Hironaka.Resolution.HironakaActualPointDehomogenizedInitial
+
+import Hironaka.Resolution.HironakaOriginalFiniteOrderCutSmoothCompanions
+
+import Hironaka.Resolution.HironakaOriginalFiniteStepOneCutMiddleHistory
+
+import Hironaka.Resolution.HironakaSharpActualCurveGlobalSuccessorGeometry
+
 /-!
 # Hironaka
 
