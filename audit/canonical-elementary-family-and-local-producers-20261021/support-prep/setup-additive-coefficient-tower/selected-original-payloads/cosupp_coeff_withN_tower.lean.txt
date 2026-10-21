@@ -1,0 +1,9 @@
+/-- `supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T` along a multiple test blow-up of `𝔪` with centres in the strict transforms. -/
+theorem cosupp_coeff_withN_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :
+    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S := by
+  refine Subset.antisymm (fun x hx => ⟨cosupp_coeff_withN_tower_subset 𝔪 hN h𝔞 hd hS T hT hTS hx, ?_⟩)
+    (coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS).2.2
+  have h := (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp_subset_N hx
+  rwa [N_geoTransformAlong_withN] at h

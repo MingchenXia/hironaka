@@ -1,0 +1,146 @@
+\section{Whole relative canonical normalization has no exceptional torsion}
+
+Put $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$
+and $N=(z_1,\ldots,z_t)\subset R$. For an original whole ideal $I\subset R$,
+index a prescribed analytic family $G_a$ by the canonical reduced vertices of
+its actual whole Taylor ideal, and assume its actual Taylor images are exactly
+those canonical reduced series. Set $w_a=\sum_{i=1}^t a_{d+i}$, the literal
+normal weight of each vertex; assume the genuine whole powers $G_a\in N^{w_a}$.
+Fix an actual normal pivot $j$, complex chart direction $b$, exceptional germ
+$e=z_j$, and actual blowup pullback $\pi^*$. A prescribed normalized family
+$H_a$ below satisfies the actual defining equations $e^{w_a}H_a=\pi^*G_a$.
+These equations specify actual quotients and are not exceptional-regularity inputs.
+
+\begin{theorem}[Every whole relative homogeneous initial relation lifts for the same prescribed normalized family]
+\label{hir:actual-relative-normalized-polynomial-relation-lifts}
+\uses{hir:actual-prescribed-canonical-relative-initial-syzygy,hir:actual-normal-polynomial-blowup-factorization,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary,hir:actual-relative-homogeneous-dehomogenization-injective}
+\lean{Hironaka.HironakaActualRelativeNormalizedSaturation.relative_normalized_polynomial_relation_lift}
+\leanok
+Under the prescribed canonical-family and genuine generator-power hypotheses,
+let $f_a$ be the actual normal homogeneous polynomial of $G_a$ of degree $w_a$.
+For $D\ge w_a$ and actual $p_a\in B[z]$ homogeneous of degree $D-w_a$,
+any whole polynomial relation $\sum_ap_af_a=0$ produces actual analytic $L_a$
+with $\sum_aH_aL_a=0$ and $L_a-\operatorname{ev}(\delta p_a)\in(e)$.
+The normalized family $H$ is unchanged before every such relation.
+\end{theorem}
+\begin{proof}
+Genuine normal-filtered canonical owner division lifts the given whole polynomial
+relation to an actual source syzygy $\sum_aG_aC_a=0$ with
+$\operatorname{ev}(p_a)-C_a\in N^{D+1-w_a}$. Homogeneity gives
+$\operatorname{ev}(p_a)\in N^{D-w_a}$; descending one power then gives
+$C_a\in N^{D-w_a}$. Actual analytic exceptional division produces $L_a$ with
+$e^{D-w_a}L_a=\pi^*C_a$. Multiply $\sum_aH_aL_a$ by $e^D$, use the
+prescribed quotient equations and $w_a+(D-w_a)=D$, and substitute the true
+source syzygy. The genuine nonzero coordinate germ and analytic domain cancel
+$e^D$, giving the whole target relation.
+
+Apply actual exceptional division to $C_a-\operatorname{ev}(p_a)$ at order
+$D+1-w_a$, obtaining $R_a$. Genuine homogeneous normal-polynomial
+factorization gives $\pi^*\operatorname{ev}(p_a)=e^{D-w_a}
+\operatorname{ev}(\delta p_a)$, retaining every tangent coefficient.
+Subtracting the two displayed quotient equations and cancelling the genuine
+nonzero $e^{D-w_a}$ gives $L_a=\operatorname{ev}(\delta p_a)+eR_a$.
+This proves the actual principal-ideal congruence without a desired target
+relation or remainder-order hypothesis.
+\end{proof}
+
+\begin{theorem}[The whole prescribed relative normalized quotient is exceptional-regular]
+\label{hir:actual-relative-normalized-family-exceptional-regular}
+\uses{hir:actual-relative-normalized-polynomial-relation-lifts,hir:actual-relative-exceptional-fibre-complete-polynomial-syzygies,hir:actual-relative-finite-polynomial-relation-rehomogenization,hir:actual-normal-quotient-canonical-exceptional-restriction}
+\lean{Hironaka.HironakaActualRelativeNormalizedSaturation.relative_normalized_family_exceptional_regular}
+\leanok
+For the same prescribed family and genuine powers, let $J=(H_a)$ be its whole
+actual analytic ideal. Then $eg\in J$ if and only if $g\in J$, for every
+whole original analytic germ $g$. In particular every power of $e$ cancels
+in this actual quotient, including the zero quotient and empty family cases.
+\end{theorem}
+\begin{proof}
+The genuine initial quotient restriction gives
+$H_a-\operatorname{ev}(\delta f_a)\in(e)$ for each member of this exact $H$.
+The polynomials $\delta f_a$ have no pivot variable. If
+$eg=\sum_aH_aA_a$, subtract the actual initial congruences to obtain the
+whole analytic fibre relation $\sum_a\operatorname{ev}(\delta f_a)A_a\in(e)$.
+Complete actual relative fibre flatness produces finitely many entire
+pivot-free polynomial syzygies $c_{al}$ with
+$A_a-\sum_l\operatorname{ev}(c_{al})B_l\in(e)$ and
+$\sum_a(\delta f_a)c_{al}=0$.
+
+For each finite column, genuine rehomogenization over the original analytic
+coefficient ring constructs one degree and actual homogeneous polynomials
+$P_{al}$ with $\delta P_{al}=c_{al}$ and $\sum_aP_{al}f_a=0$.
+Apply the preceding genuine analytic relation lift to this column. It produces
+$L_{al}$ with $\sum_aH_aL_{al}=0$ and
+$L_{al}-\operatorname{ev}(c_{al})\in(e)$, for this same $H$.
+Thus $A_a-\sum_lL_{al}B_l=eD_a$ for actual $D_a$.
+Substituting in the original expression for $eg$, the finite column syzygies
+cancel and give $eg=e\sum_aH_aD_a$. Actual domain cancellation yields
+$g\in J$. The reverse direction is genuine ideal multiplication. Induction
+then cancels every power of the exceptional germ; no completed-relation or
+exceptional-regularity certificate has entered the proof.
+\end{proof}
+
+\begin{theorem}[Whole relative normalized-member ideal equals total exceptional saturation with one finite colon]
+\label{hir:actual-relative-normalized-member-total-saturation}
+\uses{hir:actual-relative-normalized-family-exceptional-regular,hir:actual-original-canonical-reduced-vertex-basis,hir:actual-analytic-normalized-member-ideal}
+\lean{Hironaka.HironakaActualRelativeNormalizedSaturation.relative_normalized_member_iff_total_saturation}
+\leanok
+Under the same prescribed canonical-family and genuine generator-power
+hypotheses, the independently defined whole normalized-member ideal is
+exactly $\{g:\exists q,\ e^qg\in\pi^*I\}$. It is exceptional-regular,
+and one actual finite integer $D$ satisfies $(\pi^*I:e^D)$ equal to that
+entire ideal. No target saturation or normalized-ideal equality is assumed.
+\end{theorem}
+\begin{proof}
+Actual Taylor injectivity and the canonical analytic basis theorem show that
+the entire prescribed family spans $I$. Choose actual exceptional quotients
+$H_a$ once using the genuine powers, and apply the preceding theorem.
+Every total pullback generator $\pi^*G_a=e^{w_a}H_a$ lies in $(H)$, hence
+$\pi^*I\subseteq(H)$. Every defining normalized generator has $e^qg=\pi^*F$ with $F\in I$;
+exceptional regularity cancels that power and puts each such generator in
+$(H)$. Closure under actual finite target-analytic spans then gives the
+whole normalized-ideal inclusion. Conversely each $H_a$ is itself a defining
+normalized generator, using $G_a\in I\cap N^{w_a}$. Thus the two independently
+constructed whole ideals agree.
+
+Choose the literal finite $D=\sum_aw_a$. For every $a$, $w_a\le D$ and
+$e^DH_a=e^{D-w_a}\pi^*G_a\in\pi^*I$. The true finite-span expression for
+each germ of $(H)$ then gives $e^D(H)\subseteq\pi^*I$. This proves the
+saturation statement in one direction with the same $D$ before all germs;
+in the other direction, use $\pi^*I\subseteq(H)$ and cancellation of every
+exceptional power. The singleton-colon membership dictionary gives the
+whole finite-colon equality. This is a source-normal filtration statement;
+transformed maximal-ideal standardness, reverse Hilbert--Samuel persistence
+and a uniform history driver remain separate.
+\end{proof}
+
+
+\begin{theorem}[Original regular-centre Hilbert--Samuel geometry internally supplies the whole relative normalization law]
+\label{hir:actual-original-hs-centre-normalized-total-saturation}
+\uses{hir:actual-relative-normalized-member-total-saturation,hir:actual-original-hs-centre-canonical-coefficient-data}
+\lean{Hironaka.HironakaActualRelativeNormalizedSaturation.exists_original_hs_centre_normalized_saturation}
+\leanok
+An original coherent ideal with all-order Hilbert--Samuel constancy along a
+regular centre internally fixes ONE actual flattening and ONE prescribed
+canonical analytic coefficient family before every normal-pivot chart.
+For the same transported original origin ideal, every such chart satisfies
+the whole normalized-member/total-saturation law, exceptional regularity,
+and one finite-power colon equality before all germs in that chart.
+No canonical-family, generator-power, relation-generation, exceptional
+regularity or saturation certificate is an input.
+\end{theorem}
+\begin{proof}
+Apply the original regular-centre all-order Hilbert--Samuel producer once.
+It returns one actual flattening, its genuine source/zero/centre-plane data,
+the same transported whole origin ideal and one actual canonical coefficient
+family. Its literal Taylor identities and actual normal-power memberships
+are produced internally from actual normal-layer freeness and the same
+initial stability. Retain these exact witnesses before the chart quantifiers.
+For each pivot and direction apply the preceding whole relative normalization
+law to that same ideal and that same family. It internally constructs the
+actual normalized quotients and every relation lift, so no output datum is
+fed in as a hypothesis. The preceding theorem's finite degree is chosen once
+before all germs. The result claims the source-normal normalization law;
+identification of a geometric strict ideal, transformed maximal standardness,
+a reverse persistent-HS criterion and the uniform history driver require their
+own genuine later arguments.
+\end{proof}

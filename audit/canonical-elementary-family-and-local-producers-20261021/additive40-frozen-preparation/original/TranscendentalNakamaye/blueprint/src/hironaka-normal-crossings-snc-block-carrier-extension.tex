@@ -1,0 +1,86 @@
+\section{An actual SNC block produces its intrinsic old carrier and count}
+\label{sec:nc-snc-block-carrier}
+
+\begin{theorem}[The actual union of one SNC block is adapted to the entire other block]
+\label{hir:nc-snc-old-block-boundary-adapted-union}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsSNCBlockCarrier.boundaryAdapted_union_of_snc_append}
+\leanok
+Let the actual finite concatenation $B+\!+E$ be SNC. Then the literal union
+$H=\bigcup_{A\in B}A$ is an NC carrier adapted to the entire retained list
+$E$. Empty members and all original index positions are retained. This is
+proved from the genuine SNC coordinates, without a joint-union witness.
+\uses{hir:nc-original-highest-joint-branch-chart,hir:general-nc-simultaneous-original-boundary}
+\end{theorem}
+\begin{proof}
+The finite union of the closed old members is closed and every retained
+member is closed. At an arbitrary point $x$, take the actual SNC flattening
+of the whole concatenation. Shrink its actual source so the corresponding
+manifold domain avoids every old member not through $x$; the finite
+intersection of their open complements is a genuine neighbourhood of $x$.
+Restriction of the original local holomorphic equivalence supplies a true
+restricted flattening with the same coordinate functions and the same zero
+centre.
+
+Let $S$ be the union of the singleton coordinate sets of precisely those old
+indices through $x$, and retain the original singleton coordinate set at
+every born index. On the restricted domain, the literal union of old members
+is exactly the union of the coordinate hyperplanes indexed by $S$: absent
+old members have been excluded and every through-old member has its true
+coordinate equation. Injectivity on all through-indices makes the singleton
+coordinate sets of distinct old and born indices disjoint. In particular
+$S$ is disjoint from every through-born singleton, and the born coordinate
+sets remain injective. These are all fields of the actual boundary-adapted
+carrier, with no reordering or deletion of retained indices.
+\end{proof}
+
+\begin{theorem}[Its genuine branch multiplicity is the number of through-old indices]
+\label{hir:nc-snc-old-block-intrinsic-count}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsSNCBlockCarrier.branchMultiplicity_union_eq_count}
+\leanok
+For the actual carrier just constructed and every actual point $x$,
+its intrinsic branch multiplicity is the number of indices $i$ of $B$ with
+$x\in B_i$, and consequently is at most the length of $B$.
+\uses{hir:nc-snc-old-block-boundary-adapted-union,hir:general-nc-intrinsic-branch-multiplicity}
+\end{theorem}
+\begin{proof}
+Use the same genuine restricted coordinates at $x$. Distinct through-old
+indices have distinct singleton coordinate sets, by actual SNC injectivity.
+Their finite union $S$ therefore has cardinality equal to the number of
+through-old indices; empty and absent members contribute nothing. The true
+intrinsic branch-count theorem applied to these centred coordinates gives
+multiplicity $|S|$, independent of any chosen flattening. The through-index
+set is contained in the whole finite index type of $B$, giving the stated
+bound. This counts actual old branches without identifying them with born
+members or inferring any later-stage old multiplicity decrease.
+\end{proof}
+
+\begin{theorem}[The actual original coefficient phase has genuine current local old carriers]
+\label{hir:nc-original-boundary-phase-current-local-adapted-carriers}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsSNCBlockCarrier.exists_original_phase_current_local_carriers}
+\leanok
+From only the original natural compact-cosupport positive-mark joint NC data,
+one actual finite stratum phase is produced as before. At every original
+highest point it internally chooses $U,B$, and at EVERY actual restricted
+prefix the strict transform of $H|_U$ is a genuine NC carrier adapted to the
+SAME entire current retained/born boundary. Its intrinsic count equals the
+number of original old branch indices whose strict transforms pass through
+the point and is bounded by the original finite list length.
+\uses{hir:nc-original-boundary-stratum-joint-histories,hir:nc-snc-old-block-boundary-adapted-union,hir:nc-snc-old-block-intrinsic-count}
+\end{theorem}
+\begin{proof}
+Internally produce the actual whole-boundary phase and its genuine joint
+branch histories. At a chosen original highest point, take their actual
+$U,B$. Every restricted prefix is truly well formed. Its literal entire
+boundary identity is the strict old list followed by exactly the current
+original-and-born list, so its proved SNC property gives SNC of precisely
+these two actual blocks. Apply the preceding actual carrier and count
+construction to them. The strict transform of a finite union is the union
+of the strict transforms: prove this by finite-list induction using the
+true binary-union strict-transform identity and the empty case. Together
+with $H|_U=\bigcup B$, this identifies the constructed carrier with the
+literal current old carrier, without a geometric presentation certificate.
+Mapping a finite list preserves its length and indices, giving the count
+and bound for exactly the same original old branch slots. This produces
+current local geometry but does not assert a global smaller multiplicity
+outside the permitted cosupport or complete the open-extension iteration.
+\end{proof}

@@ -1,0 +1,24 @@
+\begin{definition}[Sum of finitely many marked ideals]
+\label{mc:marked-finite-sum}
+\uses{hir:marked-sum-product,mc:finite-sum,hir:marked-ideal-operations,hir:geo-transform-ambient,hir:bridge-consumers}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.mul_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.one_le_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.isCoherent_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.cosupp_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.isAdmissibleCentre_msum_iff,TranscendentalNakamaye.Pending.CoefficientIdeal.geoTransform_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.geoTransform}
+\leanok
+For marked ideals \(\underline{\mathcal I}_i=(M,N_i,E_i,\mathfrak a_i,\mu_i)\), \(i<m\),
+\[
+ \underline{\mathcal I}_0+\dots+\underline{\mathcal I}_{m-1}=\Bigl(M,N_0,E_0,\sum_{i<m}\mathfrak a_i^{\prod_{j\ne i}\mu_j},\prod_{j<m}\mu_j\Bigr).
+\]
+If \(m\ge1\), \(N_i=M\), \(E_i=E_0\), \(\mathfrak a_i\) is coherent and \(\mu_i\ge1\) for all \(i\), then the sum has coherent ideal and cosupport
+\(\bigcap_i\operatorname{cosupp}\underline{\mathcal I}_i\); a centre is admissible for it if and only if it is admissible for every \(\underline{\mathcal I}_i\), and then the
+transform of the sum is the sum of the transforms (Definition~\ref{hir:geo-transform}), whose summands again satisfy these hypotheses.
+\end{definition}
+\begin{proof}
+\leanok
+Write \(\mu=\prod_j\mu_j\) and \(e_i=\prod_{j\ne i}\mu_j\ge1\), so \(\mu_ie_i=\mu\). By Lemma~\ref{mc:finite-sum} and
+\(\operatorname{cosupp}(\mathfrak a^{e},\nu e)=\operatorname{cosupp}(\mathfrak a,\nu)\) for \(e\ge1\) (Lemma~\ref{hir:marked-ideal-operations}),
+\(\operatorname{cosupp}(\sum_i\mathfrak a_i^{e_i},\mu)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i^{e_i},\mu_ie_i)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i,\mu_i)\). The
+admissibility statement follows, as all \(E_i\) agree. For an admissible centre \(C\), \(\mathfrak a_i\subset\mathcal I_C^{\mu_i}\) (Lemma~\ref{hir:bridge-consumers}), so
+\(\mathfrak a_i^{e_i}\subset\mathcal I_C^{\mu}\), and by Lemmas~\ref{hir:geo-transform-ambient}, \ref{mc:finite-sum} and~\ref{hir:controlled-operations}
+\(\sigma^{\mathrm c}(\sum_i\mathfrak a_i^{e_i},\mu)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i^{e_i},\mu_ie_i)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i,\mu_i)^{e_i}\); the strict transform of \(M\)
+is the whole blowup, the \(E\) are transformed alike, the marks do not change, and the controlled transforms are coherent.
+\end{proof}

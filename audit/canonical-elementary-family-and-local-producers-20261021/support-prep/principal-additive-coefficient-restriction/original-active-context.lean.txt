@@ -1,0 +1,21 @@
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+open Set Filter
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.CoefficientIdealRestriction
+
+open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences GermIdealOrder DerivativeIdeal
+  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal
+  HomogenizedGlueing HomogenizedGlueingTower MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal
+  MarkedIdealEquivalence MarkedIdealEquivalence.MarkedIdeal RestrictedIdealWeight BlowupStrictSubmanifold
+
+noncomputable section
+
+section Tower
+
+variable {n : ℕ} {X : CMfd.{u} n}
+

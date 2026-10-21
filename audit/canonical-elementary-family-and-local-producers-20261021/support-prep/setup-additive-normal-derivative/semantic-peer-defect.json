@@ -1,0 +1,176 @@
+{
+  "status": "PASS_STATIC_COMPLETE_ORIGINAL_SOURCE_CONTEXT_RECONSTRUCTION_AND_BP",
+  "reviewer": "/root/defect_descent",
+  "scope": "Independent entire draft and all captured written BP proofs; source-only static peer, not a build or expression acceptance.",
+  "destination_module": "Hironaka.Support.NormalDerivativeChartIdealOriginalExact",
+  "draft_path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/setup-additive-normal-derivative/NormalDerivativeChartIdealOriginalExact.lean",
+  "draft_sha256": "7c911110dbdd9a52a2584cc0eac31fce2b61de7a392eff0d82707558aadd3fa4",
+  "draft_lines": 81,
+  "fixed_original_base_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "also_byte_identical_final_revision": "47cef49895832e3bfe492f66e1f2ac68785187dd",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/NormalDerivativeChart.lean",
+  "source_git_blob": "24a7bc43f2ca5f087603529bce288e9e5f41392b",
+  "source_sha256": "d506705829fc5ae95c604d89e39639ef95a803efd7f6e33e0f1dd89396d26783",
+  "normalized_integration_plan": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/additive40-prerequisite-integration-preparation/plan-before-import-closure.json",
+    "sha256": "2a3ccd5a7586541092616553f94b92846fbc5b3dce736d5f742da1dbbf8736d0"
+  },
+  "author_contract": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/setup-additive-normal-derivative/extraction-audit.json",
+    "sha256": "db34f3951d759b0dee8eee784a3cb7d720c7bbee00f8f84acf5e1cc5210c1731"
+  },
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_mem_iterDerivIdeal",
+    "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_nil"
+  ],
+  "declarations": 2,
+  "all_complete_payloads_and_contexts": [
+    {
+      "index": 0,
+      "original_lines": [
+        135,
+        138
+      ],
+      "original_sha256": "4a7e5cdf7922e264c89763d80a0023088b5c520cf1d25bff1590fcee4463b12e",
+      "normalized_payload_sha256": "4a7e5cdf7922e264c89763d80a0023088b5c520cf1d25bff1590fcee4463b12e",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.NormalDerivativeChart",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves HolomorphicTaylorTail GermIdealOrder IdealWeightPowers\n  NormalTaylorOrder DerivativeIdeal BlowupFlatCoordinates"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "FlatChart",
+          "commands": [
+            "variable {S : Set M} {p : M} {k : ℕ} (c : FlatChart n S p k)"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "original_lines": [
+        167,
+        213
+      ],
+      "original_sha256": "6c5637f401e1848795f07f9ca619dfeec8dcb7a30906419787fc0f22a02f9922",
+      "normalized_payload_sha256": "6c5637f401e1848795f07f9ca619dfeec8dcb7a30906419787fc0f22a02f9922",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.NormalDerivativeChart",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves HolomorphicTaylorTail GermIdealOrder IdealWeightPowers\n  NormalTaylorOrder DerivativeIdeal BlowupFlatCoordinates"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "FlatChart",
+          "commands": [
+            "variable {S : Set M} {p : M} {k : ℕ} (c : FlatChart n S p k)"
+          ]
+        }
+      ]
+    }
+  ],
+  "entire_draft_reconstructed_from_normalized_original_chunks_and_recorded_context_layout": true,
+  "all_named_anonymous_sections_namespaces_balanced": true,
+  "original_local_context_commands_not_omitted": true,
+  "all_original_BP_nodes": [
+    {
+      "label": "mc:flat-chart",
+      "capture": "mc--flat-chart.complete-original-node.tex.txt",
+      "sha256": "fe7139e6da8d2889ba09cdc9f6fc00dbaa049496c4b140a358f5ab3d45a0e5b3",
+      "fixed_source_lines": [
+        1329,
+        1338
+      ],
+      "complete_written_proofs": 0,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.mem_congr_of_isCoherent",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ψ",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.inv",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ofRegularAtDim",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mem_flatDomain",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ψ_self",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.zero_mem_target",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.inv_zero",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mem_flatDomain",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mdifferentiableAt_ψ",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mdifferentiableAt_ψ",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mdifferentiableAt_inv",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mdifferentiableAt_inv",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_inv_ψ",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_ψ_inv",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_flat",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.tendsto_inv",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.tendsto_ψ",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_differentiableAt_comp_inv",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_nil",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mem_idealPow_of_vanishesToOrderOn",
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.injective_fderiv_Φ"
+      ],
+      "complete_node_bytes_exact": true
+    },
+    {
+      "label": "mc:normal-derivative-ideal",
+      "capture": "mc--normal-derivative-ideal.complete-original-node.tex.txt",
+      "sha256": "b75a13ec7b7960f1fd8d46163be94c139344b805e51e27c3a71e21b62b6e9240",
+      "fixed_source_lines": [
+        1340,
+        1351
+      ],
+      "complete_written_proofs": 1,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_mem_iterDerivIdeal"
+      ],
+      "complete_node_bytes_exact": true
+    }
+  ],
+  "all_original_attachments_retained": true,
+  "mathematical_statement_or_proof_payload_edits": 0,
+  "findings": [],
+  "no_runtime_production_Git_or_original_evidence_edits": true,
+  "remaining_boundary": "Only frontier may install and adjust approved pure imports. Actual metadata closure, source replay, build, full strict expressions, kernel, axioms and bindings remain separate required gates."
+}

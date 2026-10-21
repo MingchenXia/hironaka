@@ -1,0 +1,23 @@
+\begin{lemma}[Localising the centres of a tower over an open set]
+\label{bcalc:centres-localise}
+\uses{bcalc:member-intersection-tower,mc:strict-along,hir:open-restriction-tower,hir:test-tower,mc:coefficient-restriction-drop-along}
+\source{wlodarczyk09-analytic-resolution:page-0025,bierstone-milman08-functoriality}
+\lean{Hironaka.MemberInterTowerAlong.strictAlong_union}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterTowerAlong.centresIn_restrict_of_centresIn_union}\lean{Hironaka.MemberInterTowerAlong.centresIn_restrict_of_forall}
+\mixedleanok
+Let \(T\) be a tower over \(X\) and \(U\subset X\) open, and write \(T|_U\) for its restriction (Lemma~\ref{hir:open-restriction-tower}). Then \((A\cup B)_T=A_T\cup B_T\).
+(1) If the centres of \(T\) lie in the strict transforms of \(A\cup B\), with \(B\) closed and disjoint from \(U\), then the centres of \(T|_U\) lie in the strict
+transforms of \(A\cap U\). (2) If every admissible centre \(C\) of every multiple test blow-up \(T\) of a marked ideal satisfies \(C\cap T^{-1}(U)\subset A_T\), then
+the centres of the restriction to \(U\) of every multiple test blow-up lie in the strict transforms of \(A\cap U\).
+In Step~1a inside \(N\) the centres lie in the strict transforms of the union of the intersections \(S_\alpha=N\cap H^s_\alpha\), whose traces on the cosupport
+are disjoint; (1) with \(A=S_\alpha\), \(B=\bigcup_{\alpha'\ne\alpha}(S_{\alpha'}\cap\operatorname{cosupp})\) and \(U=X\setminus B\supset S_\alpha\cap\operatorname{cosupp}\) puts the
+restricted tower in the setting of the restricted coefficient ideal with \(E_{S_\alpha}\) (Corollary~\ref{mc:coefficient-restriction-drop-along}) on \(U\). In Step~1b, (2) applies to the
+strict transforms of a hypersurface of maximal contact \(N\cap V(u)\cap U\).
+\end{lemma}
+\begin{proof}
+\mixedleanok
+The union: by induction on the length, as \(\overline{\pi^{-1}((A\cup B)\setminus C)}=\overline{\pi^{-1}(A\setminus C)}\cup\overline{\pi^{-1}(B\setminus C)}\).
+The centres of \(T|_U\) are the traces of those of \(T\) on the open preimages of \(U\), and the strict transform of \(A\cap U\) along \(T|_U\) is the trace of
+\(A_T\) (Definition~\ref{mc:strict-along}). (1) A point \(p\) of a centre over \(U\) lies in \(A_T\cup B_T\); it does not lie in \(B_T\), which lies over \(B\)
+(Lemma~\ref{bcalc:member-intersection-tower}), while \(p\) lies over \(U\). (2) Each centre of \(T\) is an admissible centre of a multiple test blow-up
+(Definition~\ref{hir:test-tower}).
+\end{proof}

@@ -1,0 +1,357 @@
+{
+  "status": "DRAFT_ONLY_COMPLETE_ORIGINAL_SELECTED_SUPPORT_ACTUAL_ORDINARY_CLOSURE_MATCH",
+  "fixed_ordinary_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/OrderMultiplicativity.lean",
+  "source_git_blob": "0b7e8929c187e7634319a9b9fb03e0f8ceb853ff",
+  "whole_original_source_sha256": "e4ff0844c3977901f355971ee79f3408f528407ffe33de9534d6b7761e3c339a",
+  "destination_module": "Hironaka.Support.OrderMultiplicativityCosupportOriginalExact",
+  "draft_path": "OrderMultiplicativityCosupportOriginalExact.lean",
+  "draft_sha256": "91375cfdae85ce3686ffa09923472bf9814128717dba4eb9be4a1c6b5bbe4824",
+  "draft_lines": 43,
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq"
+  ],
+  "selected_payloads": [
+    {
+      "native_name": "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq",
+      "short_name": "cosupport_idealPow_mul_eq",
+      "start_byte": 13676,
+      "end_byte": 14376,
+      "start_line": 271,
+      "end_line": 279,
+      "complete_original_payload": "/-- **`cosupp(𝔞^ν, μν) = cosupp(𝔞, μ)`** for `ν ≥ 1` (`N = M`, `𝔞` an ideal of holomorphic germs). -/\ntheorem cosupport_idealPow_mul_eq (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {ν : ℕ} (hν : 1 ≤ ν)\n    (μ : ℕ) : cosupport n univ (idealPow 𝔞 ν) (μ * ν) = cosupport n univ 𝔞 μ := by\n  refine Subset.antisymm ?_ (cosupport_subset_cosupport_idealPow μ ν)\n  rintro x ⟨-, hx⟩\n  refine ⟨mem_univ x, fun g hg => ⟨g, ?_, Eventually.of_forall fun _ _ => rfl⟩⟩\n  have hpow := mem_idealPow_of_vanishesToOrderOn_univ (hx _ (pow_mem_idealPow hg (h𝔞 x g hg) ν))\n  rw [Nat.mul_comm] at hpow\n  exact mem_idealPow_of_pow_mem (h𝔞 x g hg) hν hpow\n",
+      "sha256": "371911d9bf82adf313f86f3f94726127543201ceae9fea3e6d0efbfad04fa3c9"
+    }
+  ],
+  "original_payload_chunks": [
+    "/-- **`cosupp(𝔞^ν, μν) = cosupp(𝔞, μ)`** for `ν ≥ 1` (`N = M`, `𝔞` an ideal of holomorphic germs). -/\ntheorem cosupport_idealPow_mul_eq (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {ν : ℕ} (hν : 1 ≤ ν)\n    (μ : ℕ) : cosupport n univ (idealPow 𝔞 ν) (μ * ν) = cosupport n univ 𝔞 μ := by\n  refine Subset.antisymm ?_ (cosupport_subset_cosupport_idealPow μ ν)\n  rintro x ⟨-, hx⟩\n  refine ⟨mem_univ x, fun g hg => ⟨g, ?_, Eventually.of_forall fun _ _ => rfl⟩⟩\n  have hpow := mem_idealPow_of_vanishesToOrderOn_univ (hx _ (pow_mem_idealPow hg (h𝔞 x g hg) ν))\n  rw [Nat.mul_comm] at hpow\n  exact mem_idealPow_of_pow_mem (h𝔞 x g hg) hν hpow\n"
+  ],
+  "original_selected_source": "/-- **`cosupp(𝔞^ν, μν) = cosupp(𝔞, μ)`** for `ν ≥ 1` (`N = M`, `𝔞` an ideal of holomorphic germs). -/\ntheorem cosupport_idealPow_mul_eq (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {ν : ℕ} (hν : 1 ≤ ν)\n    (μ : ℕ) : cosupport n univ (idealPow 𝔞 ν) (μ * ν) = cosupport n univ 𝔞 μ := by\n  refine Subset.antisymm ?_ (cosupport_subset_cosupport_idealPow μ ν)\n  rintro x ⟨-, hx⟩\n  refine ⟨mem_univ x, fun g hg => ⟨g, ?_, Eventually.of_forall fun _ _ => rfl⟩⟩\n  have hpow := mem_idealPow_of_vanishesToOrderOn_univ (hx _ (pow_mem_idealPow hg (h𝔞 x g hg) ν))\n  rw [Nat.mul_comm] at hpow\n  exact mem_idealPow_of_pow_mem (h𝔞 x g hg) hν hpow\n",
+  "original_selected_sha256": "371911d9bf82adf313f86f3f94726127543201ceae9fea3e6d0efbfad04fa3c9",
+  "canonical_source_layout": [
+    {
+      "canonical_administrative_context": "/- Complete original prerequisite; statement and mathematical proof unchanged. -/\nimport Hironaka.Invariant.OrderMultiplicativity\n\n",
+      "sha256": "a9eb42a906ac14b96d173f61443fb0467453d5785b9b9b8335884e2e145db72f"
+    },
+    {
+      "canonical_administrative_context": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n",
+      "original_context": {
+        "start_line": 4,
+        "end_line": 5,
+        "original_source": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n",
+        "sha256": "daf02537fa574f7c9bad34ae0b69a6b6858be62234a4f94ae548fb61d4d4b159"
+      },
+      "sha256": "a503ba17d6a900b2708e949f5077a2d25a126ba460d6edfbdb98e3e365e4ebe5"
+    },
+    {
+      "canonical_administrative_context": "open Set Filter\nopen scoped Topology Manifold ContDiff\n\n",
+      "original_context": {
+        "start_line": 35,
+        "end_line": 36,
+        "original_source": "open Set Filter\nopen scoped Topology Manifold ContDiff\n",
+        "sha256": "5712741fadead81c96d1f010eb45826b13d51e25771c58f3de6254540f153f7f"
+      },
+      "sha256": "d4754fb633f25e80b30b5e63a1a9ca884835dc89f9728757e5ab68cba9273447"
+    },
+    {
+      "canonical_administrative_context": "namespace Hironaka.OrderMultiplicativity\n\n",
+      "original_context": {
+        "start_line": 38,
+        "end_line": 38,
+        "original_source": "namespace TranscendentalNakamaye.Pending.OrderMultiplicativity\n",
+        "sha256": "3e5662f47498b489e904c034f2d95a3de2a1d96f8784b4b8e0fb47f3b1059809"
+      },
+      "sha256": "61239b223ef9c4835e8ededb09c1a2e2a1131324260c51a1bf612ffe504c67cb"
+    },
+    {
+      "canonical_administrative_context": "open Hironaka.HolomorphicIdealSheaves\nopen Hironaka.IdealWeightPowers Hironaka.GermIdealOrder\n  Hironaka.DerivativeIdeal Hironaka.OrderTaylor\n  Hironaka.HolomorphicTaylorTail Hironaka.IdealOrderArithmetic\n  Hironaka.RestrictedIdealExtension Hironaka.HolomorphicAnalytic\n\n",
+      "original_context": {
+        "start_line": 40,
+        "end_line": 44,
+        "original_source": "open FirstPass FirstPass.HolomorphicIdealSheaves\nopen TranscendentalNakamaye.Pending.IdealWeightPowers TranscendentalNakamaye.Pending.GermIdealOrder\n  TranscendentalNakamaye.Pending.DerivativeIdeal TranscendentalNakamaye.Pending.OrderTaylor\n  TranscendentalNakamaye.Pending.HolomorphicTaylorTail TranscendentalNakamaye.Pending.IdealOrderArithmetic\n  TranscendentalNakamaye.Pending.RestrictedIdealExtension TranscendentalNakamaye.Pending.HolomorphicAnalytic\n",
+        "sha256": "7ba7f25c0a00da9bea449abd789b17e6e8deb9a93afd328c68fe783ecd424cce"
+      },
+      "sha256": "5daa6be0152e4ebd6482b95769252d88f33ac9f688072d989061ec975bb3489b"
+    },
+    {
+      "canonical_administrative_context": "noncomputable section\n\n",
+      "original_context": {
+        "start_line": 46,
+        "end_line": 46,
+        "original_source": "noncomputable section\n",
+        "sha256": "e31ffdecccec9ca586049080a5f3eacc885d03b4f3128e7815e3ce8fd53fa738"
+      },
+      "sha256": "de2bdf29f369260cf4a3a3e2ce381fffbb8aeaa782f28a42ee531a2e6f1372fc"
+    },
+    {
+      "canonical_administrative_context": "section Iterated\n\n",
+      "original_context": {
+        "start_line": 122,
+        "end_line": 122,
+        "original_source": "section Iterated\n",
+        "sha256": "481e959272b32dfdf18c3a97fefe4beb811b169f0cde8549226cd1d38b3b2bd8"
+      },
+      "sha256": "7dadec50341a362c52d710316bd5d992264bf3648b330e3930c103ae46bc1f60"
+    },
+    {
+      "canonical_administrative_context": "variable {n : ℕ}\n\n",
+      "original_context": {
+        "start_line": 124,
+        "end_line": 124,
+        "original_source": "variable {n : ℕ}\n",
+        "sha256": "0a565b51dee513c518db4b5150b80ae228a2e41b6e4d36f4550732487431e21e"
+      },
+      "sha256": "53dc2cd7644d521d16e8abe178374f54497ee51fe2ca4fadcf6feb2acaefe257"
+    },
+    {
+      "canonical_administrative_context": "variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n\n",
+      "original_context": {
+        "start_line": 150,
+        "end_line": 150,
+        "original_source": "variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n",
+        "sha256": "f2c2e7562ba6de882fa1fbe137f5a4767d39104c13e11c00f57a3ebf425d49a6"
+      },
+      "sha256": "7ef9ea99954e091b8873af94200be1446df7c9330be85f018e11fe1708f892d6"
+    },
+    {
+      "canonical_administrative_context": "variable {𝔞 𝔟 : GermIdeal n M}\n\n",
+      "original_context": {
+        "start_line": 269,
+        "end_line": 269,
+        "original_source": "variable {𝔞 𝔟 : GermIdeal n M}\n",
+        "sha256": "3de1672b3786f92bbc81fe73382f514a8c6a4a82f7c74ba4e1e4875a032cf753"
+      },
+      "sha256": "16f60ff17d64d295a98e96c2786d0d38bc9ad82d10299a07c98c142aeb29ec01"
+    },
+    {
+      "original_payload_index": 0
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "canonical_administrative_context": "end Iterated\n\n",
+      "original_context": {
+        "start_line": 291,
+        "end_line": 291,
+        "original_source": "end Iterated\n",
+        "sha256": "2aa352d8d5e2719e6a7fc0fd9f3728e2ae8f629381210d0edb7e95f2af5fe0c9"
+      },
+      "sha256": "2b3ac2c2d15bed1b0e334354d80b83bca550659ea848b131e44c784ff8fb79a6"
+    },
+    {
+      "canonical_administrative_context": "end\n\n",
+      "original_context": {
+        "start_line": 293,
+        "end_line": 293,
+        "original_source": "end\n",
+        "sha256": "48332fe667bc51ac4a51ba0efe734441c90def55c60a26d7db275ecbbcf42f15"
+      },
+      "sha256": "fda1a92ed27158b890b39db1ac4cf11759c505231c0740ffce85306841c23c84"
+    },
+    {
+      "canonical_administrative_context": "end Hironaka.OrderMultiplicativity\n\n",
+      "original_context": {
+        "start_line": 295,
+        "end_line": 295,
+        "original_source": "end TranscendentalNakamaye.Pending.OrderMultiplicativity\n",
+        "sha256": "9262b69ff41eff7bde27b4a64f953b47228cfad6d2263177a64aeed13b4e2ead"
+      },
+      "sha256": "75da98a7fc169ce3e0e9fca314fc9e2e3f5512de39de2ad91c8818f89ca998aa"
+    }
+  ],
+  "complete_original_active_contexts_before_payloads": [
+    {
+      "start_line": 4,
+      "end_line": 5,
+      "original_source": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n",
+      "sha256": "daf02537fa574f7c9bad34ae0b69a6b6858be62234a4f94ae548fb61d4d4b159"
+    },
+    {
+      "start_line": 35,
+      "end_line": 36,
+      "original_source": "open Set Filter\nopen scoped Topology Manifold ContDiff\n",
+      "sha256": "5712741fadead81c96d1f010eb45826b13d51e25771c58f3de6254540f153f7f"
+    },
+    {
+      "start_line": 38,
+      "end_line": 38,
+      "original_source": "namespace TranscendentalNakamaye.Pending.OrderMultiplicativity\n",
+      "sha256": "3e5662f47498b489e904c034f2d95a3de2a1d96f8784b4b8e0fb47f3b1059809"
+    },
+    {
+      "start_line": 40,
+      "end_line": 44,
+      "original_source": "open FirstPass FirstPass.HolomorphicIdealSheaves\nopen TranscendentalNakamaye.Pending.IdealWeightPowers TranscendentalNakamaye.Pending.GermIdealOrder\n  TranscendentalNakamaye.Pending.DerivativeIdeal TranscendentalNakamaye.Pending.OrderTaylor\n  TranscendentalNakamaye.Pending.HolomorphicTaylorTail TranscendentalNakamaye.Pending.IdealOrderArithmetic\n  TranscendentalNakamaye.Pending.RestrictedIdealExtension TranscendentalNakamaye.Pending.HolomorphicAnalytic\n",
+      "sha256": "7ba7f25c0a00da9bea449abd789b17e6e8deb9a93afd328c68fe783ecd424cce"
+    },
+    {
+      "start_line": 46,
+      "end_line": 46,
+      "original_source": "noncomputable section\n",
+      "sha256": "e31ffdecccec9ca586049080a5f3eacc885d03b4f3128e7815e3ce8fd53fa738"
+    },
+    {
+      "start_line": 122,
+      "end_line": 122,
+      "original_source": "section Iterated\n",
+      "sha256": "481e959272b32dfdf18c3a97fefe4beb811b169f0cde8549226cd1d38b3b2bd8"
+    },
+    {
+      "start_line": 124,
+      "end_line": 124,
+      "original_source": "variable {n : ℕ}\n",
+      "sha256": "0a565b51dee513c518db4b5150b80ae228a2e41b6e4d36f4550732487431e21e"
+    },
+    {
+      "start_line": 150,
+      "end_line": 150,
+      "original_source": "variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n",
+      "sha256": "f2c2e7562ba6de882fa1fbe137f5a4767d39104c13e11c00f57a3ebf425d49a6"
+    },
+    {
+      "start_line": 269,
+      "end_line": 269,
+      "original_source": "variable {𝔞 𝔟 : GermIdeal n M}\n",
+      "sha256": "3de1672b3786f92bbc81fe73382f514a8c6a4a82f7c74ba4e1e4875a032cf753"
+    }
+  ],
+  "complete_original_active_closings": [
+    {
+      "start_line": 291,
+      "end_line": 291,
+      "original_source": "end Iterated\n",
+      "sha256": "2aa352d8d5e2719e6a7fc0fd9f3728e2ae8f629381210d0edb7e95f2af5fe0c9"
+    },
+    {
+      "start_line": 293,
+      "end_line": 293,
+      "original_source": "end\n",
+      "sha256": "48332fe667bc51ac4a51ba0efe734441c90def55c60a26d7db275ecbbcf42f15"
+    },
+    {
+      "start_line": 295,
+      "end_line": 295,
+      "original_source": "end TranscendentalNakamaye.Pending.OrderMultiplicativity\n",
+      "sha256": "9262b69ff41eff7bde27b4a64f953b47228cfad6d2263177a64aeed13b4e2ead"
+    }
+  ],
+  "original_universe_context": "Original Type* binders retained literally; no explicit universe declarations inserted or rewritten.",
+  "no_active_include_omit_or_local_instance_commands_in_selected_context": true,
+  "scope_trace": [
+    [
+      10,
+      "namespace",
+      "Hironaka.OrderMultiplicativity"
+    ],
+    [
+      18,
+      "section",
+      ""
+    ],
+    [
+      20,
+      "section",
+      "Iterated"
+    ],
+    [
+      38,
+      "end",
+      "Iterated"
+    ],
+    [
+      40,
+      "end",
+      ""
+    ],
+    [
+      42,
+      "end",
+      "Hironaka.OrderMultiplicativity"
+    ]
+  ],
+  "all_named_and_anonymous_closings_balanced": true,
+  "frozen_original_owner_import": {
+    "module": "Hironaka.Invariant.OrderMultiplicativity",
+    "path": "Hironaka/Invariant/OrderMultiplicativity.lean",
+    "sha256": "4af8fd46cf49f9f9cf9ef1ad2e591033995203c6d3ab279d506bea2d27181699",
+    "unchanged": true
+  },
+  "actual_ordinary_closure": {
+    "path": "/workspace/archon-nakamaye/work/g1-g9-20261021-phase3/publication/native8-recursive-callee-closure/ordinary-source-declarations-by-parent.json",
+    "sha256": "fd27ba0d6be37a00f8189acabcff1acd7395bad50ae3e9447b225d898625f4b3",
+    "exact_same_parent_set_confirmed": true,
+    "runtime_not_repeated": true
+  },
+  "blueprint": {
+    "source_path": "TranscendentalNakamaye/blueprint/src/hironaka.tex",
+    "whole_original_source_sha256": "135584f112c8123b0524077f93347417bb98b3cdb1f9fc46a4c1ad2370c8873e",
+    "git_blob": "d1a66c91bd9818471d469eed1de4b1e7c920bd31",
+    "complete_original_nodes": [
+      {
+        "label": "hir:marked-ideal-operations",
+        "environment": "lemma",
+        "capture": "hir--marked-ideal-operations.complete-original-node.tex.txt",
+        "start_line": 599,
+        "end_line": 620,
+        "start_byte": 52355,
+        "end_byte_exclusive_before_added_terminal_newline": 54661,
+        "sha256": "8af9b0abfdd1fdd437d419eac82f8cb528041d9c4aac22e915bd80721aafbc43",
+        "complete_written_proofs": 1,
+        "complete_definition_nodes": 0,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.IdealOrderArithmetic.vanishesToOrderOn_sum_mul",
+          "TranscendentalNakamaye.Pending.IdealOrderArithmetic.IsInSpanAt.vanishesToOrderOn",
+          "TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_sumIdeal",
+          "TranscendentalNakamaye.Pending.IdealOrderArithmetic.inter_cosupport_subset_cosupport_mul",
+          "TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_subset_cosupport_idealPow",
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq",
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_sumIdeal_idealPow"
+        ],
+        "all_original_uses": [
+          "hir:cosupport-basic",
+          "hir:order-basic",
+          "hir:order-power",
+          "hir:derivative-leibniz"
+        ],
+        "statement_and_proof_changes": 0,
+        "capture_only_not_installed": true
+      },
+      {
+        "label": "hir:order-power",
+        "environment": "lemma",
+        "capture": "hir--order-power.complete-original-node.tex.txt",
+        "start_line": 580,
+        "end_line": 597,
+        "start_byte": 50686,
+        "end_byte_exclusive_before_added_terminal_newline": 52353,
+        "sha256": "20b7cbfce0c30662b3ddef397a38e9887ad5c16b076f5b0e9b2ca0fadbd4400f",
+        "complete_written_proofs": 1,
+        "complete_definition_nodes": 0,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.iterDeriv_ofFn_eq_iteratedFDeriv",
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.iterDeriv_eq_iteratedFDeriv",
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.mem_idealPow_pointIdeal_iff_iteratedFDeriv",
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.pow_mem_idealPow",
+          "TranscendentalNakamaye.Pending.OrderMultiplicativity.mem_idealPow_of_pow_mem"
+        ],
+        "all_original_uses": [
+          "hir:order-taylor",
+          "hir:polarization",
+          "mc:taylor-tail"
+        ],
+        "statement_and_proof_changes": 0,
+        "capture_only_not_installed": true
+      }
+    ],
+    "original_bindings_retained_for_later_actual_local_upstream_classification": true
+  },
+  "mathematical_statement_or_proof_payload_edits": 0,
+  "production_source_BP_Git_edits": false,
+  "Lean_build_kernel_Expr_invocations": 0,
+  "publication_compile_or_expression_PASS_claimed": false,
+  "notes": [
+    "hir:marked-ideal-operations directly binds the selected cosupport identity and supplies its full proof. hir:order-power is also captured as the complete original supporting prerequisite proof; its installation is not silently required or claimed."
+  ]
+}

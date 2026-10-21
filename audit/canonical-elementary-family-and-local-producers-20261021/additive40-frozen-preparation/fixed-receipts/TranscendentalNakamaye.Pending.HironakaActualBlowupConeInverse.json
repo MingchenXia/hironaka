@@ -1,0 +1,370 @@
+{
+  "created_utc": "2026-10-21T03:24:51.634417+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G8": "Whole actual signed-cone range and genuine analytic inverse convergence now closed for zero charts; geometric compatible image-family and relative maximal/HS comparison remain open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualBlowupConeInverse.lean",
+    "sha256": "2b8d119aaefd80f397e175ad8e8712debf77379035ea62934d2e1e5bd0a62d85",
+    "bytes": 10707
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-blowup-cone-inverse-extension.tex",
+    "sha256": "2a6b99dfb4ea2e6d5b1e0b68268a9b48ee76dd6f391aed408ae3286c58a20b91",
+    "bytes": 5985
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualBlowupConeInverse.ilean",
+      "sha256": "47c51951b58e67a72be0b1a7e834f60c559230c520364ee3cb4356e447563977",
+      "bytes": 59691
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualBlowupConeInverse.ilean.hash",
+      "sha256": "2779c714f45d19cd202e9e9ac516cdbda32cee764de386544f92d8a634ec809a",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualBlowupConeInverse.olean",
+      "sha256": "7f8248d7f0a34583b702dc6f5af737ad31b373b940c7add8439b19329c5a4de6",
+      "bytes": 322504
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualBlowupConeInverse.olean.hash",
+      "sha256": "b41f43b7a40c763f1435908c71bc351ad0c66c337a151674b7360e464af3b3d9",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualBlowupConeInverse.trace",
+      "sha256": "63e3b8f45389f4d39356de79c98eb5780e57145d9409245fca1926b403b8da45",
+      "bytes": 3719
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "actualBlowupCoefficientInverse",
+      "source_line": 30
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualBlowupCoefficientInverse_blowup",
+      "source_line": 34
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_preimage_exponent",
+      "source_line": 40
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualFormalBlowup_coefficientInverse",
+      "source_line": 61
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "mem_range_actualFormalBlowup_zero_iff",
+      "source_line": 71
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "selected_weight_le_degree",
+      "source_line": 81
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualMonomialBlowupExponent_degree_le",
+      "source_line": 89
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "radiusMonomial_uniform",
+      "source_line": 96
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "inverse_mass_term_le",
+      "source_line": 100
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualBlowupCoefficientInverse_summable",
+      "source_line": 110
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualBlowupCoefficientInverse_mass_le",
+      "source_line": 119
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "unshiftedTaylor_property",
+      "source_line": 135
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_unshifted_realization",
+      "source_line": 145
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_analytic_preimage_of_convergent_cone",
+      "source_line": 152
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "mem_range_actualAnalyticBlowupPullback_zero_iff",
+      "source_line": 173
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-zero-chart-whole-cone-range",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse",
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_blowup",
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualFormalBlowup_coefficientInverse",
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.mem_range_actualFormalBlowup_zero_iff"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "4a0c3a80daa5b40b17769157f09bf40ffb4bc0e0aaa06c32b28683d6c4790ac6"
+    },
+    {
+      "label": "hir:actual-zero-chart-coefficient-inverse-convergence",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_summable",
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_mass_le"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "0d9a7ebc81876b12b5e721500afd1faa9ee6ba718b9907a1adbcc8774e64a211"
+    },
+    {
+      "label": "hir:actual-zero-chart-convergent-cone-original-preimage",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.exists_analytic_preimage_of_convergent_cone",
+        "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.mem_range_actualAnalyticBlowupPullback_zero_iff"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "8650e5d4416d55701c92af1153a85b53485e0ef330eea3eb8e404ef0670b53c1"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualMonomialBlowupExponent_degree_le._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.exists_preimage_exponent._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.mem_range_actualFormalBlowup_zero_iff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.inverse_mass_term_le",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_mass_le",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_blowup",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualMonomialBlowupExponent_degree_le",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_summable",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.inverse_mass_term_le._simp_1_2",
+      "transitive_axioms": []
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.exists_analytic_preimage_of_convergent_cone",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.mem_range_actualAnalyticBlowupPullback_zero_iff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.exists_unshifted_realization",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.exists_preimage_exponent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.radiusMonomial_uniform",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.unshiftedTaylor_property",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualFormalBlowup_coefficientInverse",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.0.TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.selected_weight_le_degree",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 19,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 18,
+    "(none)": 1
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-blowup-cone-inverse/kernel.log",
+    "sha256": "b88a270915693911060da4613824ad03d53d90b3730d8b8118af6b8523371469",
+    "bytes": 73
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-blowup-cone-inverse/actual-roots.log",
+    "sha256": "86295bc635b1961f1800954aecf58e7b0f18b9f2208086ee46d68fcb8a7f6aca",
+    "bytes": 5038
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-blowup-cone-inverse/ActualRoots.lean",
+    "sha256": "ff5b9667976f9b65333e44889fde2d9c7a73ad524f67bdc96362d4176dc46d6b",
+    "bytes": 852
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/principal-parts/cone-inverse/final-build.log",
+    "sha256": "15240ef410915375d5db505fefdc51cf5ba93249c315da673261c331f9e065b5",
+    "bytes": 134
+  },
+  "native_build_jobs": 4939,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 196-line source, all exponent, coefficient mass and actual Taylor reassociation helpers, and all THREE complete written BP proofs reviewed. The literal coefficient inverse reads the entire target coefficient array at the TRUE injective actual chart exponent map T(a). Genuine monomial coefficient reflection proves this coefficient inverse is a left inverse on EVERY entire formal source series. For a target exponent in the nonnegative signed cone, its selected nonpivot sum s is at most its exceptional component. Componentwise subtraction of s at the pivot yields a genuine natural source exponent a. The selected nonpivot sum is unchanged, since the pivot has weight zero there, and the actual insertion formula gives EXACTLY T(a)=beta. Thus coefficients of the actual chart of the inverse recover all nonnegative-cone coefficients. On the negative cone both actual chart output and the disclosed input coefficient vanish, proving the WHOLE formal right inverse and entire image iff. This is an explicit actual preimage construction, not an assumed range certificate. Independently of cone support, the literal exponent degree satisfies degree(T(a)) at most twice degree(a). For 0<r at most1, this gives the correct Archimedean inequality r^(2degree(a)) at most r^degree(T(a)). Nonnegative coefficient norms and the genuinely injective exponent subfamily then give actual absolute inverse-coefficient summability at the uniform SQUARED radius and its sharp mass bound. The output convergence is derived and does not enter the estimate. A convergent cone series at arbitrary positive input radius is first restricted to the minimum of that radius and1; genuine radius domination retains its mass. The proved squared-radius estimate gives positive inverse mass, so genuine original analytic Taylor realization constructs an actual holomorphic source germ with the ENTIRE literal inverse series. Real dimension reassociation preserves the unchanged actual germ ring and Taylor map. True whole Taylor naturality for the actual zero-direction polynomial chart and the formal right inverse give the entire requested target Taylor series. For an actual original target germ, its own positive Taylor mass radius is internally supplied by actual analyticity; actual Taylor injectivity then identifies the analytic pullback itself with the given whole target germ. Conversely genuine analytic pullback naturality and unconditional zero-chart support give the whole cone condition. No original analytic preimage, range compatibility or inverse convergence certificate is a premise.",
+  "proven_scope": "Entire actual zero-direction formal chart image iff nonnegative signed cone, explicit literal coefficient inverse, actual inverse mass/convergence at the squared positive radius, and whole ORIGINAL analytic pullback image iff the target germ own Taylor series has that cone.",
+  "scope_limits": [
+    "The substitution and analytic image theorem concern the prescribed actual ZERO-direction coordinate chart. Arbitrary-direction or global blowup inverse assertions are not made.",
+    "The convergence bound is derived from natural input coefficient mass; for an actual original target germ this positive input radius is internally produced from its own analyticity.",
+    "No suitable geometric monic image family, relative maximal standardness, relative current HS criterion or Hilbert-Samuel history law is produced here."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-blowup-cone-inverse/review-config.json",
+    "sha256": "cc16382a117ca46f03b41a0b01a90018d270218c492b6fa07a1837e236e0ad80",
+    "bytes": 4297
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/principal-parts/cone-inverse/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/principal-parts/cone-inverse/peer-review-root.json"
+}

@@ -1,0 +1,563 @@
+{
+  "created_utc": "2026-10-21T02:16:15.115442+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G8": "point-centre all-vertex order bounds now produce whole formal strict maximal filtration and exceptional initial-symbol regularity; full HS equivalence and relative extension remain open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualExceptionalFilteredDivision.lean",
+    "sha256": "6d8072b8d4301fea32316b891031c8bcfdf7e54f57f811fd2a61bc2f8cff7434",
+    "bytes": 32140
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-exceptional-filtered-division-extension.tex",
+    "sha256": "17a16a74548bb4da03f6d5a9b76694bada9e77399a373410018637139f1f6548",
+    "bytes": 12117
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualExceptionalFilteredDivision.ilean",
+      "sha256": "938934104b688c44fee4465ab67fa206a1efe2e11802714a16d286c71595611b",
+      "bytes": 197968
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualExceptionalFilteredDivision.ilean.hash",
+      "sha256": "6e61b21d681902a02f4ad27730a4a5e9f66f9a60a06d6d2ad72a182fdfb6cc98",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualExceptionalFilteredDivision.olean",
+      "sha256": "ed29d35ff3105aa99de4cac9004e0bce9fba60928d6e85b9b857e74157042a50",
+      "bytes": 1304288
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualExceptionalFilteredDivision.olean.hash",
+      "sha256": "143b16c068dc9bebc1e271bb48ed06a296cedfa2ccd64091e918b52d4d006e11",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualExceptionalFilteredDivision.trace",
+      "sha256": "fd9f2aab22712499f7caac1db25f6bc515fc475f535a7922b50a0e1bc572ff66",
+      "bytes": 4013
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "highPart",
+      "source_line": 26
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "point_power_iff",
+      "source_line": 29
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "highPart_mem",
+      "source_line": 37
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coeff_mul_highPart",
+      "source_line": 44
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_homogeneous_filtered_representation",
+      "source_line": 78
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "pivotZeroProjection",
+      "source_line": 100
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pivot_exponent_range_iff",
+      "source_line": 105
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pivotZeroProjection_coefficient",
+      "source_line": 120
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pivotZeroProjection_idempotent",
+      "source_line": 141
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pivotZeroProjection_eq_zero_iff",
+      "source_line": 149
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pivotZeroProjection_mem_point_power",
+      "source_line": 165
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "point_power_of_X_mul_mem",
+      "source_line": 176
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "product_mem_point_power",
+      "source_line": 188
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_exceptional_filtered_representation",
+      "source_line": 198
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "formal_syzygies_finite",
+      "source_line": 286
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "taylor_span_exceptional_regular",
+      "source_line": 307
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "dehom_pivot_independent",
+      "source_line": 348
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "dehom_totalDegree_le",
+      "source_line": 361
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_point_power",
+      "source_line": 383
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_quotient_shadow_homogeneous",
+      "source_line": 397
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_original_point_canonical_filtered_family",
+      "source_line": 441
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exceptional_point_power_colon_eq",
+      "source_line": 504
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_original_point_canonical_strict_symbol_family",
+      "source_line": 581
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-exceptional-pivot-zero-projection",
+      "kind": "definition",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection"
+      ],
+      "complete_proof_present": false,
+      "leanok": true,
+      "proof_sha256": null
+    },
+    {
+      "label": "hir:actual-homogeneous-family-shifted-filtered-division",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_homogeneous_filtered_representation"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "7714389b4f9c0dcc9e08a4189520055aa96e92f21e51d5580303883b33878392"
+    },
+    {
+      "label": "hir:actual-exceptional-pivot-projection-kernel-powers",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_coefficient",
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_idempotent",
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_eq_zero_iff",
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_mem_point_power",
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.point_power_of_X_mul_mem"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "2c907cffc478010695127ab2c3fcd06885b318939d2796d284ca6d8fbd23cec3"
+    },
+    {
+      "label": "hir:actual-exceptional-saturated-homogeneous-fibre-filtered-division",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_exceptional_filtered_representation"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "91b48400160839487889a04f7c9615fac9c733e64950e062190f4d3fa46a2cec"
+    },
+    {
+      "label": "hir:actual-exceptional-homogeneous-fibre-regular-initial-symbol",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exceptional_point_power_colon_eq"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "6863740b2f98c7c5e83efad4c20f91368a4c114f366d85d1252c8a3b1dda3815"
+    },
+    {
+      "label": "hir:actual-canonical-point-normalized-strict-filtered-division",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_original_point_canonical_filtered_family",
+        "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_original_point_canonical_strict_symbol_family"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "f6f6735f5f6b67fcc5aa022567b1d0b565d7a4fc556550c78333f51885148a44"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.point_power_iff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.coeff_mul_highPart._proof_1_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exceptional_point_power_colon_eq._proof_1_2",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_original_point_canonical_strict_symbol_family",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_homogeneous_filtered_representation",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_exceptional_filtered_representation._proof_1_2",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.formal_syzygies_finite",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivot_exponent_range_iff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_mem_point_power",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.highPart_mem._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.highPart_mem",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_idempotent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.canonical_quotient_shadow_homogeneous",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.product_mem_point_power",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.dehom_pivot_independent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_exceptional_filtered_representation",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.taylor_span_exceptional_regular",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_original_point_canonical_filtered_family",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.canonical_point_power",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_exceptional_filtered_representation._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.coeff_mul_highPart._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_coefficient",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.point_power_of_X_mul_mem._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exceptional_point_power_colon_eq._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exists_homogeneous_filtered_representation._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_eq_zero_iff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.dehom_totalDegree_le",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.exceptional_point_power_colon_eq",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.canonical_quotient_shadow_homogeneous._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.point_power_of_X_mul_mem",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.coeff_mul_highPart",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.0.TranscendentalNakamaye.Pending.HironakaActualExceptionalFilteredDivision.highPart",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 34,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 30,
+    "Quot.sound, propext": 4
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-exceptional-filtered-division/kernel.log",
+    "sha256": "000484bf7d5c7dfd6de2cc207a57b7e82c503b5bd24ed3a026dac5685b10039a",
+    "bytes": 83
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-exceptional-filtered-division/actual-roots.log",
+    "sha256": "cf4bc0b1e56c046377f854ef975ff9de09f8094e095681c1847d20debe64ca2d",
+    "bytes": 9553
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-exceptional-filtered-division/ActualRoots.lean",
+    "sha256": "42d15555d0caeda895a5c5da92347dce2d094ba1a99dac621444e4c5507cf490",
+    "bytes": 872
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/defect-descent/native.log",
+    "sha256": "e7c5ae0101fa1351f1764421e0b674f295592112e509eb69ccc23efd6f7a7622",
+    "bytes": 144
+  },
+  "native_build_jobs": 5119,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE 624-line frozen source, all private helpers and public results, projection definition and all FIVE complete written BP proofs reviewed. Literal coefficient truncation of arbitrary finite span representations proves exact shifted maximal-power coefficients for genuinely homogeneous generators, with natural subtraction handling zero/small orders and empty families. The actual pivot-zero algebra retraction has its literal whole coefficient formula, idempotence, exact variable-divisibility kernel, preservation of EVERY actual maximal power and true one-variable coefficient-shift reflection. For an actual whole finite ideal with exceptional cancellation, true generator powers and homogeneous pivot shadows, finite induction on q projects to homogeneous fibres, lifts the high-order fibre expression, divides the actual zero-projection difference by the pivot, uses whole exceptional saturation, and applies induction to the SAME generators. It gives exact whole shifted filtered division without a completed standardness input. A separate explicit decomposition of pivot times F into ideal plus maximal power and the same actual projected homogeneous lifting proves EVERY whole colon identity (I+m^(q+1)):x_e=I+m^q. The original-only point endpoint fixes ONE analytic normalized canonical reduced-vertex family from J/j/b BEFORE all current-order hypotheses and jets. Literal original generator division, actual total saturation and analytic exceptional cancellation identify its whole span with the independently defined normalized ideal. Genuine Taylor-flat finite analytic syzygy generation transports this actual analytic exceptional cancellation to the WHOLE formal extension. Exact actual quotient pure coefficients equal those of the original degree-d homogeneous polynomial after literal point dehomogenization; that polynomial is pivot-independent and degree at most d. The natural retained current order of the SAME H eliminates all lower degrees, proving the genuinely homogeneous pivot shadow internally. Thus the same H gives both exact whole filtered division and every exceptional initial-symbol colon identity after ALL its original vertex-order bounds. No target filtered division, homogeneous-shadow, exceptional regularity, fixed-coordinate diagram inclusion or HS certificate is supplied at the original endpoint.",
+  "proven_scope": "An original analytic germ ideal and point blowup chart choose ONE canonical normalized analytic family; under the natural all-vertex current order bounds, its independently defined whole formal normalized ideal admits exact shifted maximal-power division and EVERY actual exceptional initial-symbol colon identity. Generic actual saturated homogeneous-fibre results and whole pivot projection identities are also proved.",
+  "scope_limits": [
+    "The original endpoint is for a POINT centre; positive-dimensional-centre propagation is not proved here.",
+    "All chosen normalized generators retaining their respective original vertex orders is an explicit natural hypothesis. It is not yet deduced from entire current Hilbert-Samuel persistence.",
+    "The final filtered coefficients are whole FORMAL series; no convergence of these newly filtered coefficients or analytic filtered-division theorem is inferred.",
+    "No complete original/current Hilbert-Samuel equality or converse, general G8 criterion, global history, strict progress or termination is claimed."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-exceptional-filtered-division/review-config.json",
+    "sha256": "6ea2cd8464d10555b5fbfdcf4d31a5d30827a71b5aab38794900bb5f16504307",
+    "bytes": 4359
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/defect-descent/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/defect-descent/peer-review-canonical.json",
+  "written_proof_nodes": 5,
+  "transparent_definition_nodes": 1
+}

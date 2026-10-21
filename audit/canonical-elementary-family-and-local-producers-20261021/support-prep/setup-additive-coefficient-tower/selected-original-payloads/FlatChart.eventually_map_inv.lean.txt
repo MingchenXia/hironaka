@@ -1,0 +1,5 @@
+/-- For a flat chart `c` with `c.ψ = W` near `z`, `W (c.inv u) = u` near `0`. -/
+theorem FlatChart.eventually_map_inv {S' : Set Z} {z : Z} {k : ℕ} (c : FlatChart n S' z k) {W : Z → ComplexModel n}
+    (hcW : c.ψ =ᶠ[𝓝 z] W) : ∀ᶠ u in 𝓝 (0 : ComplexModel n), W (c.inv u) = u := by
+  filter_upwards [c.eventually_ψ_inv, c.tendsto_inv.eventually hcW] with u hu hu'
+  rw [← hu', hu]

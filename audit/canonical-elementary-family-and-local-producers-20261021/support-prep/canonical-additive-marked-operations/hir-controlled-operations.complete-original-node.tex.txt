@@ -1,0 +1,20 @@
+\begin{lemma}[Controlled transforms of products, powers and sums]
+\label{hir:controlled-operations}
+\uses{bcalc:controlled-transform,bcalc:exceptional-divisor}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_le_mul',TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_mono,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_idealPow,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_sumIdeal,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.pullback_sumIdeal,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.isCoherent_D,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_mul,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_idealPow,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal_idealPow}
+\leanok
+Let \(\sigma\) be a blowup along \(C\) and \(\mathfrak a\subset\mathcal I_C^\mu\), \(\mathfrak b\subset\mathcal I_C^\nu\) coherent. Then
+\(\sigma^{\mathrm c}(\mathfrak a\mathfrak b,\mu+\nu)=\sigma^{\mathrm c}(\mathfrak a,\mu)\,\sigma^{\mathrm c}(\mathfrak b,\nu)\), \(\sigma^{\mathrm c}(\mathfrak a^k,\mu k)=\sigma^{\mathrm c}(\mathfrak a,\mu)^k\),
+\(\sigma^{\mathrm c}(\mathfrak a+\mathfrak b,\mu)=\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu)\) if also \(\mathfrak b\subset\mathcal I_C^\mu\), and
+\(\sigma^{\mathrm c}(\mathfrak a^\nu+\mathfrak b^\mu,\mu\nu)=\sigma^{\mathrm c}(\mathfrak a,\mu)^\nu+\sigma^{\mathrm c}(\mathfrak b,\nu)^\mu\).
+\end{lemma}
+\begin{proof}
+\leanok
+Pullback commutes with products and sums of ideals and \(\mathfrak l(\mathfrak a+\mathfrak b)=\mathfrak l\mathfrak a+\mathfrak l\mathfrak b\); so, with \(\mathcal O(-\mu D)\) the
+\(\mu\)-th power of the exceptional ideal, \(\sigma^*(\mathfrak a\mathfrak b)=\mathcal O(-(\mu+\nu)D)\,\sigma^{\mathrm c}(\mathfrak a,\mu)\sigma^{\mathrm c}(\mathfrak b,\nu)\),
+\(\sigma^*(\mathfrak a^k)=\mathcal O(-\mu kD)\,\sigma^{\mathrm c}(\mathfrak a,\mu)^k\) and
+\(\sigma^*(\mathfrak a+\mathfrak b)=\mathcal O(-\mu D)(\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu))\), and the controlled transform is the unique coherent
+ideal with this property (Lemma~\ref{bcalc:controlled-transform}). For the last statement, \(\mathfrak a^\nu\subset\mathcal I_C^{\mu\nu}\) and
+\(\mathfrak b^\mu\subset\mathcal I_C^{\mu\nu}\); apply the sum rule and then the power rule.
+\end{proof}

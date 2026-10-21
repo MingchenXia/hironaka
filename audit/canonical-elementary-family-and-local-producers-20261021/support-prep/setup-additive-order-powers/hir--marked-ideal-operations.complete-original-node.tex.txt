@@ -1,0 +1,22 @@
+\begin{lemma}[Cosupports of sums, products and powers]
+\label{hir:marked-ideal-operations}
+\uses{hir:cosupport-basic,hir:order-basic,hir:order-power,hir:derivative-leibniz}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.IdealOrderArithmetic.vanishesToOrderOn_sum_mul,TranscendentalNakamaye.Pending.IdealOrderArithmetic.IsInSpanAt.vanishesToOrderOn,TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_sumIdeal,TranscendentalNakamaye.Pending.IdealOrderArithmetic.inter_cosupport_subset_cosupport_mul,TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_subset_cosupport_idealPow,TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq,TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_sumIdeal_idealPow}
+\leanok
+Let \(\mathfrak a,\mathfrak b\) be ideals of holomorphic germs and \(N\subset M\). Then
+\(\operatorname{cosupp}(\mathfrak a+\mathfrak b|_N,\mu)=\operatorname{cosupp}(\mathfrak a|_N,\mu)\cap\operatorname{cosupp}(\mathfrak b|_N,\mu)\),
+\(\operatorname{cosupp}(\mathfrak a|_N,\mu)\cap\operatorname{cosupp}(\mathfrak b|_N,\nu)\subset\operatorname{cosupp}(\mathfrak a\mathfrak b|_N,\mu+\nu)\) and
+\(\operatorname{cosupp}(\mathfrak a|_N,\mu)\subset\operatorname{cosupp}(\mathfrak a^\nu|_N,\mu\nu)\). For \(N=M\) and \(\nu\ge1\),
+\(\operatorname{cosupp}(\mathfrak a^\nu,\mu\nu)=\operatorname{cosupp}(\mathfrak a,\mu)\); hence for \(\mu,\nu\ge1\) the sum of marked ideals
+\((\mathfrak a,\mu)+(\mathfrak b,\nu)=(\mathfrak a^\nu+\mathfrak b^\mu,\mu\nu)\) has cosupport
+\(\operatorname{cosupp}(\mathfrak a,\mu)\cap\operatorname{cosupp}(\mathfrak b,\nu)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Germs vanishing to order \(\mu\) along \(N\) at \(x\) are closed under holomorphic combinations, and products add orders
+(Lemma~\ref{hir:order-basic}); this gives the first three statements (the first in both directions because
+\(\mathfrak a,\mathfrak b\subset\mathfrak a+\mathfrak b\)), the third by induction on \(\nu\). For the reverse inclusion of the fourth, if
+\(x\in\operatorname{cosupp}(\mathfrak a^\nu,\mu\nu)\) and \(g\in\mathfrak a_x\), then \(g^\nu\in(\mathfrak a^\nu)_x\subset\mathfrak m_x^{\nu\mu}\), so \(g\in\mathfrak m_x^\mu\) by
+Lemma~\ref{hir:order-power}. The last statement combines the first and the fourth.
+\end{proof}

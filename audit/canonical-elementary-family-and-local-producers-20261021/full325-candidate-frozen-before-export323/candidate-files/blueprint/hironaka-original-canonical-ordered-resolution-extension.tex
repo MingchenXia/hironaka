@@ -1,0 +1,118 @@
+\section{The actual canonical head-and-tail resolution tree}
+
+\begin{definition}[Canonical ordered resolution provenance]
+\label{hir:original-canonical-ordered-resolution-tree}
+\uses{hir:original-canonical-ordered-separator-chain,hir:original-pure-boundary-canonical-first-prefix}
+\lean{Hironaka.HironakaOriginalCanonicalOrderedResolution.CanonicalOrderedResolution}
+\leanok
+A pure head stage for $(E,A,d)$ is a genuine canonical prefix of the
+literal marked datum $(X,X,E,I_A,1)$ avoiding the intrinsic good open
+$O=(A\setminus\operatorname{Reg}_d A\cup|E|)^c$, with its next whole
+maximum meeting $O$ if $A$ is nonempty. Its original analytic,
+pure-dimensional, boundary-density and invariant-domain properties are
+retained. Its dimension is $<n$ whenever $A$ is nonempty.
+
+Define an actual ordered resolution tree of $(E,G,L)$ recursively.
+The empty list uses the identity. For $(A,d)::L_0$, take an actual
+ordered canonical separator chain, then an actual pure head stage
+for its transformed head and whole accumulated boundary. Let $L_2$
+be the ordered strict transforms of $L_0$ under these two stages and
+let $K_2$ be the union of their carriers. Recurse on $L_2$ with the
+whole new boundary and bad set
+$G_2=p_{\rm head}^{-1}p_{\rm sep}^{-1}G\cap K_2$. The actual tower
+is the literal append of the separator, head stage and recursive tail.
+Every boundary and empty stage position is retained.
+\end{definition}
+
+\begin{theorem}[Original good parts construct the actual ordered resolution and its same smooth source]
+\label{hir:original-canonical-ordered-resolution-producer}
+\uses{hir:original-canonical-ordered-resolution-tree,hir:original-canonical-ordered-separator-producer,hir:original-pure-boundary-canonical-first-prefix,hir:original-stopped-strict-transform-smooth-square,hir:actual-smooth-cartesian-tower-append,hir:actual-singular-vanishing-ideal-pullback-submersion,hir:original-smooth-intrinsic-singular-boundary-good}
+\lean{Hironaka.HironakaOriginalCanonicalOrderedResolution.exists_canonical_ordered_resolution}
+\leanok
+An original finite ordered list of compact good parts relative to a
+whole SNC boundary $E$ and a closed bad set $G$, with pairwise
+intersections contained in $G$, internally constructs an actual
+canonical ordered resolution tree $T$ and its whole ordered boundary.
+Its projection is admissible over $G$, the final boundary is SNC,
+each original part has a strict transform regular of its labelled
+dimension and in normal crossings with this boundary, and the
+different listed strict transforms are pairwise disjoint.
+
+After this same target tree is fixed, every original holomorphic
+submersion $b:Y^m\to X^n$ internally supplies an actual source tree
+for the pulled list with dimension labels shifted by $m-n$. It is a
+literal stagewise pullback of the same target append, with upper
+submersion and holomorphic Cartesian square. Its whole ordered
+boundary is the literal inverse image of the target boundary. Every
+whole source strict part is the inverse image of the corresponding
+target strict part. The source is admissible over $b^{-1}G$ and has
+the corresponding own-boundary regularity, normal crossings and
+pairwise disjointness. No source compactness or incoming algorithm
+history is assumed.
+\end{theorem}
+\begin{proof}
+Induct on the original ordered list length. The empty case is the
+actual identity on each side. For $(A,d)::L_0$, construct the actual
+ordered separator chain for $A$ and $L_0$ using the preceding
+producer. All transformed original good parts remain compact good
+parts relative to its whole accumulated SNC boundary and the inverse
+image of $G$.
+
+Apply the original pure-boundary driver to the transformed head,
+retaining the actual canonical first-meeting prefix and its complete
+elementary geometry. Its intrinsic bad set is contained in the
+current inverse image of $G$, by the good-part hypotheses. The strict
+tail parts remain good parts. Cut their new bad set down to its
+intersection with their whole finite union $K_2$ and apply induction.
+The resolved head misses $K_2$: it was separated from every tail part,
+and strict transforms preserve these disjointness inclusions. Thus
+it misses every later centre image. Its later strict transform is its
+literal inverse image through a map isomorphic along it, preserving
+its resolved dimension and normal crossings with the actual final
+boundary. The tail properties follow by induction. Literal strict
+transform composition identifies these actual sets with strict
+transforms under the same full appended projection. Admissibility
+composes over $G$, and disjointness persists under the later strict
+transforms. The retained stages give exactly the stated provenance.
+
+For a given $b$, construct the actual smooth source separator chain
+for that fixed target separator, then construct the actual smooth
+pullback of the fixed target head prefix. The whole singular
+vanishing-ideal theorem identifies its source marked datum with its
+intrinsic source datum. Intrinsic pure regular loci, boundary density
+and good opens pull back exactly. If the pulled head is nonempty,
+openness and the original dense good part give a genuine source
+whole maximum over its own good open, by the actual ambient-dimension
+order embedding of the complete invariant. If it is empty that
+encounter condition is vacuous. Hence the source head is an actual
+pure canonical head stage; the dimension bound is needed only when
+it has a point, where the actual submersion supplies it.
+
+Apply the induction hypothesis to the actual head upper submersion.
+The literal projection equalities identify the two recursive bad
+sets, and the preserved-open strict-square theorem identifies their
+whole labelled tail inputs. Entire ordered boundary equalities
+identify the true initial boundary of every next source stage.
+Therefore append the actual source separator, head and tail towers;
+actual pullback append gives the same full target and its true
+Cartesian square. Every original part is dense away from $G$ and
+every actual target centre lies over $G$. The genuine preserved-open
+strict-square theorem therefore identifies all final source strict
+parts, including exceptional points. Smooth pullback of the target
+regular and normal-crossings coordinates gives the asserted source
+geometry with its own entire boundary. Disjointness follows by
+inverse image. All choices and all source stages were constructed
+internally from the stated original inputs.
+\end{proof}
+
+\begin{remark}
+The source tree here retains all raw pulled labels, actual empty
+blowups and whole boundary positions. The intrinsic nonempty
+dimension-list dictionary identifies its nonempty input labels, but
+does not by itself identify an independently filtered source
+algorithm: deletion of empty blocks and recursive uniqueness require
+their own genuine proofs. The appended resolution is not asserted to
+be one canonical history for a different whole mixed-dimensional
+ideal. This chapter does not assert the unrestricted noncompact
+global scheduler.
+\end{remark}

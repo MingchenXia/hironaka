@@ -1,0 +1,21 @@
+/-- **The zero set of a function of multiplicity one is a hypersurface**: regular of dimension
+`n - 1` at each of its points in `U`. -/
+theorem regularAtDim_zeroSet {U : Set X} (hU : IsOpen U) {u : X → ℂ}
+    (hu : ∀ x ∈ U, HolomorphicAt n u x)
+    (hu1 : ∀ x ∈ U, u x = 0 → ∃ (e : ComplexChart n X) (v : ComplexModel n),
+      x ∈ e.val.source ∧ chartDeriv e v u x ≠ 0)
+    {x : X} (hx : x ∈ U) (hux : u x = 0) :
+    RegularAtDim (n := n) ({y | u y = 0} ∩ U) x (n - 1) := by
+  obtain ⟨e, v, hxe, hd⟩ := hu1 x hx hux
+  obtain ⟨hn, W, hWs, hWinj, hWu⟩ := exists_hypersurface_coords (hu x hx) hxe hd
+  have hO : IsOpen (U ∩ (chartAt (ComplexModel n) x).source) :=
+    hU.inter (chartAt (ComplexModel n) x).open_source
+  have hxO : x ∈ U ∩ (chartAt (ComplexModel n) x).source := ⟨hx, mem_chart_source _ x⟩
+  have hplane : ∀ y, W y ∈ complexCoordinatePlane n (n - 1) ↔ u y = 0 := fun y => by
+    rw [mem_plane_pred_iff hn, hWu]
+  obtain ⟨Θ, hΘt, hΘ0, hΘ⟩ :=
+    exists_recentred_coords hO (fun z' hz' => hWs z' hz'.2 (hu z' hz'.1)) hxO hWinj
+  refine ⟨Nat.sub_le n 1, ⟨hux, hx⟩, Θ, hΘt, hΘ0, fun {y} hy hyΘ => ?_⟩
+  obtain ⟨hyO, hΘy⟩ := hΘ hy hyΘ
+  rw [hΘy, sub_mem_plane_iff ((hplane x).mpr hux), hplane]
+  exact ⟨fun h => h.1, fun h => ⟨h, hyO.1⟩⟩

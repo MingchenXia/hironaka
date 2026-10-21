@@ -1,0 +1,32 @@
+\section{Unique holomorphic lifts along an actual finite blowup extension}
+
+\begin{theorem}[The actual tail projection is the unique whole holomorphic lift]
+\label{hir:actual-tower-tail-holomorphic-lift-uniqueness}
+\uses{hir:blowup-tower,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\lean{Hironaka.HironakaActualTowerLiftUniqueness.actual_lift_unique}
+\leanok
+Let $T:Y\to X$ and $R:Z\to Y$ be actual finite towers of genuine blowups.
+Every holomorphic $f:Z\to Y$ satisfying $T\circ f=(T\circ R)$ is exactly
+the whole actual tail projection $R$. No invertibility, canonicality,
+terminal datum or inverse for $f$ is an input.
+\end{theorem}
+\begin{proof}
+Induct on the actual last step of $T$. For the empty tower its projection
+is the identity, and the given equation is the desired equality.
+For $T=T_0\circ\pi$, retain the SAME genuine extension from the endpoint
+of $T_0$ obtained by appending the actual first step $\pi$ and then $R$.
+The induction hypothesis applies to the holomorphic map $\pi\circ f$ and
+this actual extension. Associativity of the true tower composition gives
+its required projection equation. Consequently
+$\pi\circ f=\pi\circ R$ on the entire endpoint.
+
+The actual blowup property makes $\pi^*I_C$ invertible. Pulling this very
+invertible ideal through the actual finite tower $R$ remains invertible;
+the genuine whole pullback composition formula identifies it with
+$(\pi\circ R)^*I_C$. Thus the actual universal property of $\pi$ applies
+to the SAME base map $\pi\circ R$, with its required invertibility proved
+internally. Both $f$ and the actual projection $R$ are holomorphic lifts
+of this base map, by the induction equality and by definition. Genuine
+universal uniqueness identifies them on the whole endpoint, including
+exceptional points. Every finite empty position remains in the induction.
+\end{proof}

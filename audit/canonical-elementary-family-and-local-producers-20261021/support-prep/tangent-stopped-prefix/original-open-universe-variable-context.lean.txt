@@ -1,0 +1,26 @@
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+
+universe u v
+
+namespace TranscendentalNakamaye.Pending.EmbeddedFromResolution
+
+open FirstPass FirstPass.NonKahlerLocus FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences
+  BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism BlowupTowerTransforms RestrictEmptyTower
+  RegularLocusComponent
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantExt (IsEmptyTower)
+
+noncomputable section
+
+variable {n : ℕ}
+
+
+section Invariant
+
+variable {k : ℕ} {Λ : Type v} [LinearOrder Λ] {X : CMfd.{u} n}
+  {inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
+
+section Stopping
+
+variable {Λ : Type v} [LinearOrder Λ] {X : CMfd.{u} n}

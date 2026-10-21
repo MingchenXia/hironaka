@@ -1,0 +1,81 @@
+\section{The whole original associated ring stalk}
+
+Retain the literal section rings $G(U)=\bigoplus_{q\geq0}L_q(U)$,
+their representative multiplication, and their genuine ring-colimit
+stalks. Let $G_y^{\mathrm{whole}}=\bigoplus_q L_q(R_y,I_y,J_y)$.
+The original germ ideal $A$ is coherent; the subset $C$ is arbitrary.
+
+\begin{lemma}[Every actual homogeneous component retains its germ]
+\label{hir:real-domain-actual-normal-associated-ring-components}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-stalk-whole-map,hir:real-domain-actual-normal-associated-section-ring-presheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingRestrict_apply,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingSectionGermHom_apply}
+\leanok
+For every genuine section $s\in G(U)$, every degree $q$, and every
+original point $y\in U$, the $q$-component of its whole ring germ is
+the whole layer germ of $s_q$. The $q$-component of any actual restriction
+of $s$ is the actual restriction of $s_q$.
+\end{lemma}
+\begin{proof}
+Both assertions hold on a homogeneous inclusion by the previously proved
+inclusion formulas: the selected component equals its actual layer class,
+and every other component is zero. Each map is additive. Every section
+is a finite sum of homogeneous inclusions, so applying additivity to
+that finite sum proves both component formulas.
+\end{proof}
+
+\begin{lemma}[A zero whole ring germ vanishes on one true neighbourhood]
+\label{hir:real-domain-actual-normal-associated-ring-zero-neighbourhood}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-components,hir:real-domain-actual-normal-layer-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingSectionGermHom_zero_neighbourhood}
+\leanok
+If the whole ring germ of $s\in G(U)$ at $y$ is zero, then there is a
+true open neighbourhood $V\subseteq U$ of $y$ on which the actual ring
+restriction of $s$ is zero.
+\end{lemma}
+\begin{proof}
+The component formula gives a zero whole layer germ for each $s_q$.
+Original coherence makes the actual layer-stalk comparison injective,
+so the actual layer germ of $s_q$ equals the actual layer germ of zero.
+Equality in the filtered neighbourhood colimit supplies a true smaller
+open neighbourhood on which these two layer sections have equal
+restrictions. The set of nonzero components of $s$ is finite. Intersect
+the finitely many smaller neighbourhoods for those components with
+$U$. This intersection is an open neighbourhood of $y$ contained in
+$U$. Restriction composition shows that all selected components vanish
+there. Every component outside the finite support was already zero,
+and its restriction is zero. The component formula for restriction
+therefore gives zero in every degree, which is equality to zero in
+the whole direct sum.
+\end{proof}
+
+\begin{theorem}[The genuine whole ring-stalk map is bijective]
+\label{hir:real-domain-actual-normal-associated-ring-whole-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-zero-neighbourhood,hir:real-domain-actual-normal-associated-ring-stalk-whole-map,hir:real-domain-actual-normal-layer-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingStalkToWholeHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk.actualNormalAssociatedRingStalkWholeEquiv_germ}
+\leanok
+The previously constructed original ring homomorphism
+$G_y\longrightarrow G_y^{\mathrm{whole}}$ is a ring isomorphism.
+Its map on every original section germ, and hence every homogeneous
+power-section germ, is the same original whole germ-class map.
+\end{theorem}
+\begin{proof}
+For injectivity subtract two stalk elements with the same image. Every
+element of the genuine ring stalk is the germ of a section on a true
+neighbourhood. Its whole image is zero; the preceding lemma makes this
+section zero on a smaller neighbourhood. The restriction identity
+then makes its actual ring germ zero, proving injectivity.
+For surjectivity, an arbitrary whole ring element is a finite sum of
+homogeneous elements. Each whole homogeneous layer element has an
+actual layer-stalk preimage by the existing layer surjectivity result.
+Represent that layer-stalk element by a true layer section, then take
+the actual ring germ of its homogeneous inclusion. The ring germ
+inclusion formula gives exactly the prescribed whole homogeneous
+element. Summing these finitely many actual ring stalk elements gives
+a preimage of the original whole element. The bijective existing ring
+homomorphism thus has a ring inverse. The section and power-class
+formulas are the original homomorphism formulas, since its forward
+map has not changed.
+\end{proof}

@@ -1,0 +1,86 @@
+\section{Local ambient representatives and intrinsic morphism faithfulness}
+
+Let $C\subset M$ be an actual subset of a complex manifold, with the genuine
+reduced quotient sheaf $\mathcal O_C$ constructed from the entire original
+vanishing ideal. No smoothness or coherence of $C$ is required below.
+
+\begin{theorem}[Whole local ambient representatives of actual quotient sections]
+\label{hir:actual-analytic-subspace-local-ambient-section}
+\uses{hir:actual-analytic-subspace-inclusion-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspaceLocalFunctions.actualSubspaceSection_local_ambient}
+\leanok
+For an actual open $W\subset C$, a section $s\in\mathcal O_C(W)$ and $x\in W$,
+there is an actual ambient open neighbourhood $O\subset M$ of $x$ and an
+original holomorphic section $t$ on $O$, such that $C\cap O\subset W$ and
+at every $y\in C\cap O$ the entire germ $s_y$ equals the image of the
+original germ $t_y$ under the genuine quotient inclusion stalk map.
+\end{theorem}
+\begin{proof}
+Surjectivity of the genuine inclusion stalk map lifts $s_x$ to an original
+ambient stalk element. Represent that element by an original holomorphic
+section $t_0$ on an ambient neighbourhood $O_0$. The actual stalk-map germ
+formula says that the pullback section of $t_0$ and $s$ have equal germs at
+$x$. The genuine colimit equality criterion therefore gives an actual open
+neighbourhood $Q\subset C$ on which their restrictions agree. By the
+subspace topology write $Q=C\cap T$ for an ambient open $T$. Take
+$O=T\cap O_0$ and restrict $t_0$ to $O$. For each $y\in C\cap O$, equality
+of these actual restricted sections, the actual restriction-germ formulas
+and the inclusion stalk-map germ formula give the asserted equality of
+entire germs. The same restriction inclusion gives $y\in W$.
+\end{proof}
+
+\begin{theorem}[Point values determine entire actual quotient sections]
+\label{hir:actual-analytic-subspace-section-value-ext}
+\uses{hir:actual-analytic-subspace-local-ambient-section,hir:actual-analytic-subspace-stalk-residue-evaluation,hir:actual-analytic-subspace-reduced-stalks}
+\lean{Hironaka.HironakaActualAnalyticSubspaceLocalFunctions.actualSubspaceSection_eq_zero_of_eval,Hironaka.HironakaActualAnalyticSubspaceLocalFunctions.actualSubspaceSection_ext_eval}
+\leanok
+An actual section whose genuine residue evaluation is zero at every point
+of its domain is zero. Consequently two actual sections with identical
+actual point values on their whole domain are equal as sections.
+\end{theorem}
+\begin{proof}
+Fix a point and take the whole local ambient representative just constructed.
+At every point of the actual intersection with $C$, its original value
+is the residue evaluation of the given section, by the whole original
+inclusion numerator formula and original chart-germ evaluation. Thus the
+ambient section vanishes pointwise on that whole intersection. The proved
+actual section-ideal criterion puts it in the entire original vanishing
+ideal on that ambient open. Its germ at the chosen point therefore lies
+in the entire kernel of the actual inclusion stalk map, so the original
+section germ is zero. Actual sheaf stalk extensionality now proves the
+whole section zero. Apply this result to the difference of two sections
+to obtain equality from equal point values. In particular this argument
+uses the genuine local vanishing ideal, rather than an inference from
+reducedness of an individual local ring.
+\end{proof}
+
+\begin{theorem}[Actual intrinsic complex morphisms are determined by their base map]
+\label{hir:actual-analytic-subspace-intrinsic-map-faithful}
+\uses{hir:actual-analytic-subspace-section-value-ext,hir:actual-analytic-subspace-scalar-map-point-values}
+\lean{Hironaka.HironakaActualAnalyticSubspaceLocalFunctions.actualSubspaceMap_eq_of_base_eq}
+\leanok
+Two genuine locally ringed morphisms between actual quotient-subspace
+models, each commuting with the original structural map to the complex
+point, are equal if their continuous base maps are equal. No ambient
+extension or supplied equality of sheaf maps is assumed.
+\end{theorem}
+\begin{proof}
+Fix a target open and an actual section. Equality of base maps identifies
+the two actual source preimage opens. At every point of that whole open,
+the stalk-map germ formula identifies the germ of each pullback section
+with the pullback of the original target germ. Compatibility with the
+actual complex point gives residue-evaluation naturality for each genuine
+morphism. Hence these two pullback sections have identical point values
+at every point, because the target point and target germ are the same.
+The preceding whole-section extensionality proves that the two pullback
+sections are equal. Extensionality of ring homomorphisms and natural
+transformations proves equality of the entire sheaf maps; together with
+the given base equality this proves equality of the actual locally ringed
+morphisms. The argument compares values throughout the genuine open,
+not just the residue value of one stalk element.
+\end{proof}
+
+These local-function facts provide genuine input for lifting an arbitrary
+intrinsic complex morphism to an ambient holomorphic map by finitely many
+coordinate sections. They do not assert analytic atlas resolution descent
+or a terminal resolution driver.

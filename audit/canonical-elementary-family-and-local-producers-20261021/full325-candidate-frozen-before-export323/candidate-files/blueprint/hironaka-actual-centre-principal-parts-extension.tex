@@ -1,0 +1,88 @@
+\section{Whole original principal parts over genuine tangent germs}
+
+\begin{theorem}[The origin-unit pivot gives the whole tangent-germ projection kernel]
+\label{hir:actual-centre-whole-germ-pivot-kernel}
+\uses{hir:actual-centre-joint-whole-macaulay-image,hir:actual-hs-constant-centre-origin-pivot-whole-frames}
+A genuine original pivot nonzero at the original point is a UNIT
+pivot over $B$. If the actual original matrix has that SAME rank on
+the actual centre near zero, the genuine original pivot projection,
+lifted entrywise to tangent germs, has kernel exactly the ENTIRE
+$B$-image of the SAME original Macaulay columns. It preserves the
+true joint-jet image $S_B$ and fixes its actual selected-row kernel.
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreMacaulayGerm_eval}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreMacaulayGerm_pivot_unit}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreProjectionEntry_holAt}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection_representatives}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection_fixes_row_kernel}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection_kills_columns}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection_row_zero}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection_mem_model}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermProjection_kernel}
+\leanok
+\end{theorem}
+\begin{proof}
+Evaluation of the actual determinant germ is the nonzero original
+pivot determinant at zero, so the original local-ring unit criterion
+gives a true unit. The actual inverse-pivot projection has holomorphic
+entries on its real pivot open. Its identities killing the selected
+columns and fixing the row kernel lift to equalities of ENTIRE tangent
+germs. The unit pivot splits an arbitrary germ vector into a genuine
+selected-column vector and a selected-row-kernel vector. Those
+identities identify the entire projection kernel with the selected
+column image. On the actual centre, source-derived rank constancy
+makes the original projection kill every original column; equality on
+a real tangent neighbourhood makes the SAME lifted whole germ product
+zero. Thus the selected image equals the full actual Macaulay image.
+That image lies in $S_B$ by the preceding true joint dictionary, so
+subtracting it preserves $S_B$ and the original projection fixes its
+row kernel. No generic denominator away from the original point occurs.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centres supply whole principal-parts quotient frames]
+\label{hir:actual-hs-constant-centre-whole-principal-parts}
+\uses{hir:actual-centre-whole-germ-pivot-kernel,hir:actual-centre-joint-original-word-jet,hir:actual-hs-constant-centre-orderwise-jet-system}
+ONLY the original coherent ideal, actual regular centre and constancy
+of ALL intrinsic HS values on that centre internally supply the SAME
+original finite generators and ambient neighbourhood before every
+order. For each order, on a genuine tangent neighbourhood containing
+zero, the ENTIRE original quotient $R/(J+N_z^q)$ is $B$-linearly
+isomorphic to the true joint-jet image intersected with its selected-row
+kernel, by the genuine original pivot projection.
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreJointIdeal}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreJointIdeal_image}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentreGermRowMap}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentrePrincipalPartsModel}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentrePrincipalPartsCoordinates}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.ker_actualCentrePrincipalPartsCoordinates}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentrePrincipalPartsCoordinates_surjective}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.actualCentrePrincipalPartsFrame}
+\lean{Hironaka.HironakaActualCentrePrincipalParts.exists_original_hs_constant_centre_whole_principal_parts}
+\leanok
+\end{theorem}
+\begin{proof}
+Use the accepted original HS-constant common-generator and origin-pivot
+producer once, keeping the SAME real generators and ambient domain
+before all orders. For a chosen order its actual pivot is nonzero at
+zero and its real domain contains zero; its true tangent preimage does
+too. The original intrinsic HS/rank dictionary and source HS constancy
+prove exactly the required centre rank equality internally. The three
+preceding results identify the whole original ideal image and the
+whole projection kernel. Restrict the original projection to the true
+joint-jet image and its selected-row kernel. It is surjective because
+it fixes every vector of that kernel, and its entire original germ
+kernel is precisely $J+N_z^q$: one direction follows from the genuine
+ideal image and normal-power kernel, while the other subtracts an
+actual ideal preimage and uses that same exact whole kernel. The
+ordinary original module quotient theorem gives the asserted entire
+$B$-linear equivalence. No caller rank, quotient frame, output diagram
+or normal-flatness certificate is supplied.
+\end{proof}
+
+The original word arrays may have repetitions. Every assertion above
+keeps their TRUE joint-jet image, and never identifies its quotient with
+the full word-array cokernel. Neighbourhoods depend on the finite order.
+This moving principal-parts construction does not yet identify the
+NORMAL-adic graded algebra of the original ideal or prove tangent
+Spencer compatibility, normal-flatness, compatible analytic vertices,
+or general positive-centre Bennett.

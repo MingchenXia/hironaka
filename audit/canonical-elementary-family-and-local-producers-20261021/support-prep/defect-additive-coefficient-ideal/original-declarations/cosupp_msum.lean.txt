@@ -1,0 +1,18 @@
+/-- **The cosupport of a sum** is the intersection of the cosupports (`N = M`, marks `≥ 1`). -/
+theorem cosupp_msum (h : IsAmbientFamily 𝔪 m) (hm : 1 ≤ m) :
+    (msum 𝔪 m).cosupp = {x | ∀ i < m, x ∈ (𝔪 i).cosupp} := by
+  ext x
+  have hhol : ∀ i < m, ∀ y g,
+      (idealPow (𝔪 i).ideal (sumExp (fun j => (𝔪 j).d) m i)).mem y g → HolomorphicAt n g y :=
+    fun i _ y g hg => holomorphicAt_of_mem_idealPow hg
+  show x ∈ cosupport n (𝔪 0).N
+    (finSumIdeal (fun i => idealPow (𝔪 i).ideal (sumExp (fun j => (𝔪 j).d) m i)) m)
+    ((Finset.range m).prod fun j => (𝔪 j).d) ↔ _
+  rw [h.N 0 hm, mem_cosupport_finSumIdeal hhol]
+  simp only [mem_univ, true_and, Set.mem_ofPred_eq]
+  refine forall₂_congr fun i hi => ?_
+  have hpow := OrderMultiplicativity.cosupport_idealPow_mul_eq
+    (fun y g hg => holomorphicAt_of_mem (h.coh i hi) hg)
+    (one_le_sumExp h.d i) (𝔪 i).d
+  rw [mul_sumExp (fun j => (𝔪 j).d) hi] at hpow
+  rw [hpow, MarkedIdeal.cosupp, h.N i hi]

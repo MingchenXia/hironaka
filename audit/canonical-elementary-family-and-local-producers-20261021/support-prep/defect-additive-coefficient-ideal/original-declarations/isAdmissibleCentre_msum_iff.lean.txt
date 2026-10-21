@@ -1,0 +1,9 @@
+/-- **A centre is admissible for a sum iff it is admissible for every summand.** -/
+theorem isAdmissibleCentre_msum_iff (h : IsAmbientFamily 𝔪 m) (hm : 1 ≤ m) {C : Set M} :
+    (msum 𝔪 m).IsAdmissibleCentre C ↔ ∀ i < m, (𝔪 i).IsAdmissibleCentre C := by
+  rw [IsAdmissibleCentre, cosupp_msum h hm]
+  constructor
+  · rintro ⟨hC, hsub, hnc⟩ i hi
+    exact ⟨hC, fun x hx => hsub hx i hi, by rw [h.E i hi]; exact hnc⟩
+  · intro hall
+    exact ⟨(hall 0 hm).1, fun x hx i hi => (hall i hi).2.1 hx, (hall 0 hm).2.2⟩

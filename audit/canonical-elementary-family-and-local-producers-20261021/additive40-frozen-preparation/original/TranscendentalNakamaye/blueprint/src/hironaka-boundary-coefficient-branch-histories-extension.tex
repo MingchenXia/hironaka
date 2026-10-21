@@ -1,0 +1,87 @@
+\section{The actual coefficient phase retains joint old and born histories}
+\label{sec:boundary-coefficient-branch-histories}
+
+The retained SNC boundary is the entire current born block. It is present in
+both the canonical remainder input and the branch histories below. No old
+boundary index is removed, and no global old multiplicity decrease is claimed.
+
+\begin{lemma}[Literal old and retained-boundary concatenation at every position]
+\label{hir:nc-entire-old-retained-born-boundary}
+\lean{TranscendentalNakamaye.Pending.HironakaBoundaryCoefficientBranchHistories.entire_old_retained_boundary}
+\leanok
+For any original marked record $M$, any finite old branch list $B$, and any
+actual finite tower $T$, the entire boundary of $(M[E:=B+\!+M.E])_T$ is
+$\operatorname{strict}_T(B)+\!+(M_T).E$. This includes every empty position
+and requires no testness assumption.
+\uses{hir:nc-history-entire-old-born-boundary}
+\end{lemma}
+\begin{proof}
+At the empty tower this is the literal original concatenation. At an actual
+next blowup, each entire previous block is mapped by the same geometric
+strict transform, and the same exceptional member is appended. Mapping a
+concatenation and associating the final append proves the identity. Induction
+on the actual tower retains all ordered positions.
+\end{proof}
+
+\begin{theorem}[Original joint geometry yields actual branch histories with the whole retained boundary]
+\label{hir:nc-highest-joint-retained-boundary-histories}
+\lean{TranscendentalNakamaye.Pending.HironakaBoundaryCoefficientBranchHistories.exists_highest_joint_branch_histories}
+\leanok
+Let $H$ be an original NC carrier adapted to an entire SNC boundary $E$,
+with old branch count bounded by $r$. Let $M=(X,E,I,d)$ have coherent $I$.
+For every actual original marked test tower $T$ whose centres lie in the
+successive strict transforms of its highest stratum $Z$, and every $x\in Z$,
+there are an internally chosen genuine neighbourhood $U$ and old branch list
+$B$ with $H|_U=\bigcup B$ and $B+\!+E|_U$ SNC. The SAME restricted tower is
+an actual test history for $(U,B+\!+E|_U,I|_U,d)$. Every actual finite prefix
+is well formed and its ENTIRE boundary is the strict old block followed by
+the SAME retained original-and-born boundary of $M|_U$ at that prefix.
+\uses{hir:nc-original-highest-joint-branch-chart,hir:nc-entire-old-retained-born-boundary,hir:drop-containing-members}
+\end{theorem}
+\begin{proof}
+Use the internally constructed original joint chart at $x$. Its entire
+concatenation $B+\!+E|_U$ is genuinely SNC, its union of old branches is the
+literal $H|_U$, and every old branch contains the whole $Z|_U$. The augmented
+marked record is well formed: its carrier is the entire ambient open,
+its ideal is the actual coherent pullback, and its whole boundary is the
+proved joint SNC list. Restrict the given genuine $M$ history to $U$; its
+centres remain in the successive strict transforms of $Z|_U$.
+
+Apply the genuine whole-history drop-member equivalence with retained list
+$E|_U$, rather than the empty list. Every retained member belongs to the
+whole concatenation. A member of that concatenation absent from the retained
+list must come from $B$ and therefore contains $Z|_U$. Thus all equivalence
+hypotheses are derived from the actual original chart. Its ADD direction
+proves the augmented history's testness from the already true restricted
+original history. Actual testness passes to every prefix, whose well
+formedness follows from the original augmented well-formed record. The
+preceding literal concatenation identity gives every asserted whole boundary.
+No joint-history certificate or special empty-boundary assumption is supplied.
+\end{proof}
+
+\begin{theorem}[Only original data produce the whole boundary phase with all joint histories]
+\label{hir:nc-original-boundary-stratum-joint-histories}
+\lean{TranscendentalNakamaye.Pending.HironakaBoundaryCoefficientBranchHistories.exists_original_boundary_stratum_joint_histories}
+\leanok
+Let the original ideal be coherent with positive marking and compact original
+cosupport. Let the actual old NC carrier be adapted to the whole retained
+boundary, with positive highest old count $r$. Original data alone supply one
+finite coefficient-stratum resolution, a genuine SAME original marked test
+tower, all centres in strict $Z$, and original final cosupport disjoint from
+strict $Z$. This SAME tower has all the preceding genuine joint branch
+histories and whole-prefix identities at every original highest point.
+\uses{hir:original-boundary-nc-whole-coefficient-stratum-resolution,hir:nc-highest-joint-retained-boundary-histories}
+\end{theorem}
+\begin{proof}
+Apply the actual original whole-boundary coefficient-stratum producer. It
+internally supplies the finite tower, whole coefficient terminality, original
+testness, true strict-$Z$ centre containment, and final original cosupport
+clearance. Its canonical remainder input already contains the entire retained
+boundary. Apply the preceding genuine joint-history construction to this SAME
+tower at each original highest point. Every local branch list and every
+whole-prefix property is then an output. The caller supplies no phase,
+chosen centre, maximum, local history or terminality certificate. This does
+not identify an older ordered invariant or lower the old count outside the
+current permitted cosupport; open-support extension and iteration remain
+separate obligations for general initial-NC resolution.
+\end{proof}

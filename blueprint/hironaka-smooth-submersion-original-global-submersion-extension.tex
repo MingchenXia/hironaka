@@ -1,0 +1,91 @@
+\section{The same arbitrary-target original global arrow is genuinely a submersion}
+
+The entire original global holomorphic Cartesian arrow has true local
+submersion normal forms. These come from the already produced original
+local smooth chart arrows, transported through genuine open inclusions and
+proved original saturated-range biholomorphisms. No differential rank or
+local normal-form certificate is a caller input.
+
+\begin{lemma}[A genuine open-range biholomorphism gives two holomorphic partial directions]
+\label{hir:actual-open-range-biholomorphism-partial-inverse}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalSubmersion.openRangePartial,Hironaka.HironakaSmoothSubmersionOriginalGlobalSubmersion.openRangePartial_source,Hironaka.HironakaSmoothSubmersionOriginalGlobalSubmersion.openRangePartial_holomorphic,Hironaka.HironakaSmoothSubmersionOriginalGlobalSubmersion.openRangePartial_inverse_point}
+\leanok
+Let $e:E\simeq U$ be a genuine biholomorphism onto an actual open subset
+$U\subset A$, with a point of $U$. Compose the inverse open inclusion with
+$e^{-1}$. The resulting partial homeomorphism $A\dashrightarrow E$ has
+source exactly $U$, both directions are holomorphic on their true domains,
+and its value at every point of $U$ has original inclusion equal to that
+point.
+\end{lemma}
+\begin{proof}
+The canonical open inclusion partial homeomorphism has source the whole
+subtype and target $U$. Its forward direction is holomorphic by subtype
+inclusion. For its inverse, the composite with subtype inclusion equals
+the identity on $U$ by the actual inverse equation; holomorphicity into
+the open subtype is equivalent to holomorphicity of this composite. Both
+biholomorphism directions are holomorphic. Composition of the partial
+maps gives both claimed regularities on the actual intersection domains.
+The true final biholomorphism has whole source, so the composed source
+is exactly $U$. Applying the genuine biholomorphism inverse equation,
+followed by the true open-inclusion inverse equation, proves the point
+identity.
+\end{proof}
+
+\begin{theorem}[Every entire original source-chart map is a genuine submersion]
+\label{hir:original-entire-source-terminal-chart-smooth-map-submersion}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalSubmersion.originalSourceChartSmoothMap_isSubmersion}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:actual-open-range-biholomorphism-partial-inverse,hir:original-entire-source-terminal-chart-holomorphic-comparison,hir:original-local-terminal-actual-smooth-chart-arrow,hir:original-terminal-local-actual-saturated-range-biholomorphism}
+For only the original marked-domain input and genuine submersion $f$, each
+entire internally constructed source-chart map into the same original
+global target terminal manifold is a submersion, without compactness.
+\end{theorem}
+\begin{proof}
+At a source final-chart point, choose an actual target original base open
+containing its underlying original $f$-image. Its inverse image in the
+source final chart is an actual open neighborhood. On this neighborhood,
+the entire source-chart map equals the already produced actual local
+smooth arrow followed by the original target inclusion. The local smooth
+arrow is a genuine submersion by its finite original-history construction.
+The neighborhood open inclusion and the target saturated-range
+biholomorphism supply the two partial source and target coordinate changes
+from the preceding lemma. The exact whole map formula puts the image in
+the true target domain and gives the commuting local square.
+
+Transport the local submersion normal form through those two genuinely
+holomorphic partial directions. This proves a true submersion normal form
+at the chosen point. Its actual complement is finite dimensional: its
+actual linear chart isomorphism gives dimension $m=n+\dim F$. Hence the
+complement is continuously linearly isomorphic to $\mathbb C^{m-n}$.
+Use that actual isomorphism to normalize every point's complement to the
+same space. These normal forms therefore assemble into the global
+submersion predicate, including when the source chart is empty.
+\end{proof}
+
+\begin{theorem}[The same entire original global Cartesian arrow is a submersion]
+\label{hir:original-arbitrary-target-global-genuine-smooth-submersion}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalSubmersion.originalGlobalSmoothMap_isSubmersion}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:original-entire-source-terminal-chart-smooth-map-submersion,hir:original-arbitrary-target-global-holomorphic-smooth-comparison,hir:actual-open-range-biholomorphism-partial-inverse}
+The same produced entire arrow on the original global source and target
+terminal manifolds is a genuine smooth submersion, for arbitrary original
+source and target bases.
+\end{theorem}
+\begin{proof}
+At any global source point, joint surjectivity chooses an actual original
+source final chart representing it. The genuine source local
+biholomorphism identifies that chart with its actual open range. Its
+partial inverse has both holomorphic directions by the first lemma.
+On this true neighborhood the whole global arrow equals the entire
+source-chart arrow after this actual partial inverse, by the exact local
+formula and actual inverse equation. Use the identity partial change on
+the target. The preceding source-chart submersion normal form therefore
+transports to a true whole global normal form. Normalize its actual
+complement to $\mathbb C^{m-n}$ as above and assemble the pointwise forms.
+All manifolds, projections, neighborhoods, inverses, and normal forms are
+produced internally from the original data. This completes the genuine
+arbitrary-target original global smooth Cartesian arrow; it does not
+construct a single global canonical finite scheduling history.
+\end{proof}

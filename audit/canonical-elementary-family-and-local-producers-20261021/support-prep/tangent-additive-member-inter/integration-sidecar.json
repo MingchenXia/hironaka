@@ -1,0 +1,68 @@
+{
+  "status": "DRAFT_ONLY_EXACT_INTEGRATION_SIDECAR_NO_PRODUCTION_INSTALL",
+  "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "published_git_source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/MemberInterTowerAlong.lean",
+  "source_module": "TranscendentalNakamaye.Pending.MemberInterTowerAlong",
+  "native_project_source_path": "TranscendentalNakamaye/Pending/MemberInterTowerAlong.lean",
+  "whole_original_source_capture": "audit/canonical-elementary-family-and-local-producers-20261021/support-prep/tangent-additive-member-inter/original-MemberInterTowerAlong.lean",
+  "whole_original_source_sha256": "0c2d64a401c019d3b9b0f3bb71a96ce59cc4008a73049384659ec572671b1eb0",
+  "destination_module": "Hironaka.Support.MemberInterTowerAlongOriginalExact",
+  "destination_path": "Hironaka/Support/MemberInterTowerAlongOriginalExact.lean",
+  "destination_logical_namespace": "Hironaka.MemberInterTowerAlong",
+  "entire_draft_path": "audit/canonical-elementary-family-and-local-producers-20261021/support-prep/tangent-additive-member-inter/MemberInterTowerAlongOriginalExact.lean",
+  "entire_draft_sha256": "8bda4982671f17b49ac57264110b53f481b3c9f44e451df32d03fd9fbe61b90a",
+  "selected_complete_chunks": [
+    {
+      "declaration": "mem_strictAlong_inter_memberInter_self",
+      "original_inclusive_line_range": [
+        267,
+        276
+      ],
+      "complete_original_chunk": "open Classical in\n/-- **A point of `N_T` lies on the strict transform of the intersection of `N` with the original\nmembers whose strict transforms pass through it** (Step 1a: the intersection `N \u2229 H_S` a point with\n`s(x) = s` lies on). -/\ntheorem mem_strictAlong_inter_memberInter_self (h\ud835\udd2a : \ud835\udd2a.IsWellFormed) {Y : CMfd.{u} n}\n    (T : BlowupTower X Y) (hT : IsGeoTestTower \ud835\udd2a T) {z : Y} (hz : z \u2208 (geoTransformAlong \ud835\udd2a T).N) :\n    z \u2208 strictAlong T\n      (\ud835\udd2a.N \u2229 memberInter \ud835\udd2a.E (Finset.univ.filter fun i => z \u2208 strictAlong T (\ud835\udd2a.E.get i))) := by\n  rw [strictAlong_inter_memberInter \ud835\udd2a h\ud835\udd2a _ T hT]\n  exact \u27e8hz, fun i hi => (Finset.mem_filter.mp hi).2\u27e9\n",
+      "complete_relocated_chunk": "open Classical in\n/-- **A point of `N_T` lies on the strict transform of the intersection of `N` with the original\nmembers whose strict transforms pass through it** (Step 1a: the intersection `N \u2229 H_S` a point with\n`s(x) = s` lies on). -/\ntheorem mem_strictAlong_inter_memberInter_self (h\ud835\udd2a : \ud835\udd2a.IsWellFormed) {Y : CMfd.{u} n}\n    (T : BlowupTower X Y) (hT : IsGeoTestTower \ud835\udd2a T) {z : Y} (hz : z \u2208 (geoTransformAlong \ud835\udd2a T).N) :\n    z \u2208 strictAlong T\n      (\ud835\udd2a.N \u2229 memberInter \ud835\udd2a.E (Finset.univ.filter fun i => z \u2208 strictAlong T (\ud835\udd2a.E.get i))) := by\n  rw [strictAlong_inter_memberInter \ud835\udd2a h\ud835\udd2a _ T hT]\n  exact \u27e8hz, fun i hi => (Finset.mem_filter.mp hi).2\u27e9\n",
+      "original_chunk_sha256": "8b3773d89ae9c3792400ace1b3b372adf91b3cf6cae6cfdba989ae532fc95a33",
+      "relocated_chunk_sha256": "8b3773d89ae9c3792400ace1b3b372adf91b3cf6cae6cfdba989ae532fc95a33",
+      "draft_start_character": 893,
+      "draft_end_character_exclusive": 1538
+    },
+    {
+      "declaration": "centresIn_restrict_of_centresIn_union",
+      "original_inclusive_line_range": [
+        298,
+        312
+      ],
+      "complete_original_chunk": "/-- **Localising the centres, several intersections at once** (Step 1a, \"moving apart\"): if the\ncentres of `T` lie in the strict transforms of `A \u222a B`, with `B` closed and disjoint from the open\nset `U`, then the centres of the restriction of `T` to `U` lie in the strict transforms of `A \u2229 U`. -/\ntheorem centresIn_restrict_of_centresIn_union (U : Opens X) {A B : Set X} (hB : IsClosed B)\n    (hUB : Disjoint (U : Set X) B) : {Y : CMfd.{u} n} \u2192 (T : BlowupTower X Y) \u2192\n      CentresIn (A \u222a B) T \u2192 CentresIn ((\u2191) \u207b\u00b9' A : Set U) (restrict U T)\n  | _, .refl, _ => trivial\n  | _, .step T C _ _, hT => by\n    refine \u27e8centresIn_restrict_of_centresIn_union U hB hUB T hT.1, fun p hp => ?_\u27e9\n    rw [strictAlong_restrict U T A]\n    have hpC : p.1 \u2208 strictAlong T A \u222a strictAlong T B := by\n      rw [\u2190 strictAlong_union]; exact hT.2 hp\n    rcases hpC with h | h\n    \u00b7 exact h\n    \u00b7 exact absurd (strictAlong_subset_preimage T hB h) (Set.disjoint_left.mp hUB p.2)\n",
+      "complete_relocated_chunk": "/-- **Localising the centres, several intersections at once** (Step 1a, \"moving apart\"): if the\ncentres of `T` lie in the strict transforms of `A \u222a B`, with `B` closed and disjoint from the open\nset `U`, then the centres of the restriction of `T` to `U` lie in the strict transforms of `A \u2229 U`. -/\ntheorem centresIn_restrict_of_centresIn_union (U : Opens X) {A B : Set X} (hB : IsClosed B)\n    (hUB : Disjoint (U : Set X) B) : {Y : CMfd.{u} n} \u2192 (T : BlowupTower X Y) \u2192\n      CentresIn (A \u222a B) T \u2192 CentresIn ((\u2191) \u207b\u00b9' A : Set U) (restrict U T)\n  | _, .refl, _ => trivial\n  | _, .step T C _ _, hT => by\n    refine \u27e8centresIn_restrict_of_centresIn_union U hB hUB T hT.1, fun p hp => ?_\u27e9\n    rw [strictAlong_restrict U T A]\n    have hpC : p.1 \u2208 strictAlong T A \u222a strictAlong T B := by\n      rw [\u2190 strictAlong_union]; exact hT.2 hp\n    rcases hpC with h | h\n    \u00b7 exact h\n    \u00b7 exact absurd (strictAlong_subset_preimage T hB h) (Set.disjoint_left.mp hUB p.2)\n",
+      "original_chunk_sha256": "f3eb7d35dba5edf6a179db27ba2dadbb1791c43e1686c0ac12ad38b7a5eecc36",
+      "relocated_chunk_sha256": "f3eb7d35dba5edf6a179db27ba2dadbb1791c43e1686c0ac12ad38b7a5eecc36",
+      "draft_start_character": 1688,
+      "draft_end_character_exclusive": 2642
+    }
+  ],
+  "context_segments": [
+    {
+      "context_segment_index": 0,
+      "start_character": 0,
+      "end_character_exclusive": 893,
+      "sha256": "2cc0536565452cf9ec13f0e3e7b0c45fc1c4c83e65ddfe21ff8163d81524d6fb",
+      "text": "import Hironaka.Invariant.MemberInterTowerAlong\nimport Hironaka.Invariant.MemberStrictPartitionExact\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace Hironaka.MemberInterTowerAlong\n\nopen Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences\nopen Hironaka.BlowupFlatCoordinates\n  Hironaka.BlowupMonomialCharts\n  Hironaka.BlowupLocalSurjectivity\n  Hironaka.BlowupStrictSubmanifold\n  Hironaka.BlowupSNCTransform Hironaka.NormalCrossings\n  Hironaka.SimultaneousNormalCrossings\n  Hironaka.BoundaryCount Hironaka.BlowupTowers\n  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal\n  Hironaka.HomogenizedGlueingTower\n\nnoncomputable section\n\nvariable {n : \u2115}\n\n/-! ### One blowup: `(N \u2229 H_S)' = N' \u2229 \u22c2_{i \u2208 S} H_i'` -/\nsection Tower\n\nvariable {X : CMfd.{u} n} (\ud835\udd2a : MarkedIdeal n X)\n\n"
+    },
+    {
+      "context_segment_index": 1,
+      "start_character": 1538,
+      "end_character_exclusive": 1688,
+      "sha256": "b9f6baf6d3c76211f99496699b357d79f11666442a787b90d51a196994846223",
+      "text": "\nend Tower\n\nsection Localise\n\nvariable {X : CMfd.{u} n}\n\nopen TopologicalSpace Hironaka.BlowupTowerTransforms\n  Hironaka.CoefficientIdealRestriction\n\n"
+    },
+    {
+      "context_segment_index": 2,
+      "start_character": 2642,
+      "end_character_exclusive": 2697,
+      "sha256": "6bf978e858144974834c12644315dd17045e30734cede6ac6790da76b2705252",
+      "text": "\nend Localise\n\nend\n\nend Hironaka.MemberInterTowerAlong\n"
+    }
+  ],
+  "all_selected_chunks_and_intervening_context_partition_entire_draft": true,
+  "source_and_draft_bytes_unchanged": true,
+  "runtime_invoked": false
+}

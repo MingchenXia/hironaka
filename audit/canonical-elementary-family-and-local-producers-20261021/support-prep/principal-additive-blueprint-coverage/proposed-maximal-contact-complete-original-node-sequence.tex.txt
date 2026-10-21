@@ -1,0 +1,296 @@
+\begin{definition}[Derivatives of a marked ideal]
+\label{mc:derivative-marked}
+\uses{hir:marked-ideal,hir:derivative-ideal,hir:cosupport}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.DerivativeIdealTower.derivMarked,TranscendentalNakamaye.Pending.DerivativeIdealTower.derivMarked_N,TranscendentalNakamaye.Pending.DerivativeIdealTower.derivMarked_E,TranscendentalNakamaye.Pending.DerivativeIdealTower.derivMarked_ideal,TranscendentalNakamaye.Pending.DerivativeIdealTower.derivMarked_d,TranscendentalNakamaye.Pending.DerivativeIdealTower.cosupport_subset_of_le,TranscendentalNakamaye.Pending.DerivativeIdealTower.controlledTransform_le_of_le,TranscendentalNakamaye.Pending.DerivativeIdealTower.cosupp_subset_cosupp_derivMarked}
+\leanok
+For a marked ideal \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) and \(j\in\mathbb N\), \(\mathcal D^j(\underline{\mathcal I})=(M,N,E,\mathcal D^j(\mathfrak a),d-j)\).
+If \(\mathfrak b\subset\mathfrak c\), then \(\operatorname{cosupp}(\mathfrak c,d)\subset\operatorname{cosupp}(\mathfrak b,d)\) and
+\(\sigma^{\mathrm c}(\mathfrak b,\mu)\subset\sigma^{\mathrm c}(\mathfrak c,\mu)\). For \(N=M\) and \(j\le d\),
+\(\operatorname{cosupp}\underline{\mathcal I}\subset\operatorname{cosupp}\mathcal D^j(\underline{\mathcal I})\).
+\end{definition}
+The two monotonicity statements are immediate from the definitions (a germ of \(\mathfrak b\) is a germ of \(\mathfrak c\); \(\sigma^*\mathfrak b\subset\sigma^*\mathfrak c\)), and the
+last one is Lemma~\ref{hir:giraud-support} applied \(j\) times, \(\operatorname{cosupp}(\mathfrak a,(d-j)+j)\subset\operatorname{cosupp}(\mathcal D^j\mathfrak a,d-j)\).
+
+\begin{lemma}[Derivative ideals along multiple test blow-ups]
+\label{mc:inclusions-tower}
+\uses{mc:derivative-marked,mc:inclusions,hir:geo-transform,hir:geo-transform-ambient,hir:bridge-consumers,hir:giraud-support,hir:derivative-ideal-generators}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.DerivativeIdealTower.inclusions_tower}
+\leanok
+Let \(\underline{\mathcal I}=(M,M,E,\mathfrak a,d)\) with \(\mathfrak a\) coherent, \(j\le d\), and let \(T\) be a multiple test blow-up of \(\underline{\mathcal I}\)
+(Definition~\ref{hir:geo-transform}). Then \(T\) is a multiple test blow-up of \(\mathcal D^j(\underline{\mathcal I})\), and
+\[
+ [\mathcal D^j(\underline{\mathcal I})]_T\subset\mathcal D^j(\underline{\mathcal I}_T),
+\]
+i.e.\ the transformed ideal of \(\mathcal D^j(\underline{\mathcal I})\) is contained in \(\mathcal D^j\) of the transformed ideal of \(\underline{\mathcal I}\); both transforms
+have \(N\) the whole space, the same \(E\), and coherent ideals.
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on \(T\); for the empty tower both sides are \(\mathcal D^j(\mathfrak a)\), coherent by Lemma~\ref{hir:derivative-ideal-generators}. Let \(T\) be followed by
+the blowup \(\sigma\) along an admissible centre \(C\) of \(\underline{\mathcal I}_T=(M_T,M_T,E_T,\mathfrak a_T,d)\), and write
+\(\mathfrak b_T\subset\mathcal D^j(\mathfrak a_T)\) for the transformed ideal of \(\mathcal D^j(\underline{\mathcal I})\), with mark \(d-j\) and the same \(E_T\).
+\(C\) is admissible for \((M_T,M_T,E_T,\mathfrak b_T,d-j)\): it is a closed submanifold with normal crossings with \(E_T\), and
+\(C\subset\operatorname{cosupp}(\mathfrak a_T,d)\subset\operatorname{cosupp}(\mathcal D^j\mathfrak a_T,d-j)\subset\operatorname{cosupp}(\mathfrak b_T,d-j)\)
+(Definition~\ref{mc:derivative-marked}). By Lemma~\ref{hir:bridge-consumers}, \(\mathfrak a_T\subset\mathcal I_C^{d}\) and \(\mathfrak b_T\subset\mathcal I_C^{d-j}\), so both
+transformed ideals are the coherent controlled transforms (Lemma~\ref{hir:geo-transform-ambient}), and by monotonicity and
+Lemma~\ref{mc:inclusions} (with mark \(d-j\) and \(r=j\))
+\[
+ \sigma^{\mathrm c}(\mathfrak b_T,d-j)\subset\sigma^{\mathrm c}(\mathcal D^j\mathfrak a_T,d-j)\subset\mathcal D^j(\sigma^{\mathrm c}(\mathfrak a_T,d)).
+\]
+\(N\) stays the whole space and both \(E\) are transformed alike.
+\end{proof}
+This is Włodarczyk's Lemma ``le:inclusions2''. His Lemma ``le:Giraud'' (the cosupports of the transforms lie on the strict transforms of a
+hypersurface of maximal contact) is Theorem~\ref{mc:giraud-tower} below: it follows from Lemma~\ref{mc:giraud-transform} and parts (2)--(3) of
+``le:Gi'' on open sets (Lemma~\ref{bcalc:giraud-local}) by induction on the tower.
+
+\begin{lemma}[Finite sums of ideals]
+\label{mc:finite-sum}
+\uses{mc:homogenized-coherent,mc:coherent-germs,hir:controlled-operations,hir:cosupport-basic,bcalc:controlled-transform-def}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_one,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_congr,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_le,TranscendentalNakamaye.Pending.CoefficientIdeal.isCoherent_finSumIdeal_of_lt,TranscendentalNakamaye.Pending.CoefficientIdeal.mem_cosupport_finSumIdeal,TranscendentalNakamaye.Pending.CoefficientIdeal.controlledTransform_finSumIdeal}
+\leanok
+Let \(\mathfrak J_0,\dots,\mathfrak J_{m-1}\) be coherent. Then \(\sum_{i<m}\mathfrak J_i\) is coherent; it is contained in every coherent ideal containing all
+\(\mathfrak J_i\); \(\operatorname{cosupp}(\sum_{i<m}\mathfrak J_i,\mu)=\bigcap_{i<m}\operatorname{cosupp}(\mathfrak J_i,\mu)\); and if \(m\ge1\) and
+\(\mathfrak J_i\subset\mathcal I_C^\mu\) for all \(i\), then \(\sigma^{\mathrm c}(\sum_{i<m}\mathfrak J_i,\mu)=\sum_{i<m}\sigma^{\mathrm c}(\mathfrak J_i,\mu)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Coherence: Lemma~\ref{mc:homogenized-coherent}. A germ of the sum is a holomorphic combination of germs of the \(\mathfrak J_i\); this gives the
+inclusion and, since a combination of germs vanishing to order \(\mu\) vanishes to order \(\mu\), the cosupport (the reverse inclusion because each
+\(\mathfrak J_i\) is contained in the sum). The controlled transform: induction on \(m\), starting from \(\sum_{i<1}\mathfrak J_i=\mathfrak J_0\), with
+\(\sum_{i<m+1}\mathfrak J_i=\sum_{i<m}\mathfrak J_i+\mathfrak J_m\) and \(\sigma^{\mathrm c}(\mathfrak a+\mathfrak b,\mu)=\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu)\)
+for coherent \(\mathfrak a,\mathfrak b\subset\mathcal I_C^\mu\) (Lemma~\ref{hir:controlled-operations}); the partial sums are contained in the coherent ideal \(\mathcal I_C^\mu\).
+\end{proof}
+
+\begin{definition}[Sum of finitely many marked ideals]
+\label{mc:marked-finite-sum}
+\uses{hir:marked-sum-product,mc:finite-sum,hir:marked-ideal-operations,hir:geo-transform-ambient,hir:bridge-consumers}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.mul_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.one_le_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.isCoherent_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.cosupp_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.isAdmissibleCentre_msum_iff,TranscendentalNakamaye.Pending.CoefficientIdeal.geoTransform_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.geoTransform}
+\leanok
+For marked ideals \(\underline{\mathcal I}_i=(M,N_i,E_i,\mathfrak a_i,\mu_i)\), \(i<m\),
+\[
+ \underline{\mathcal I}_0+\dots+\underline{\mathcal I}_{m-1}=\Bigl(M,N_0,E_0,\sum_{i<m}\mathfrak a_i^{\prod_{j\ne i}\mu_j},\prod_{j<m}\mu_j\Bigr).
+\]
+If \(m\ge1\), \(N_i=M\), \(E_i=E_0\), \(\mathfrak a_i\) is coherent and \(\mu_i\ge1\) for all \(i\), then the sum has coherent ideal and cosupport
+\(\bigcap_i\operatorname{cosupp}\underline{\mathcal I}_i\); a centre is admissible for it if and only if it is admissible for every \(\underline{\mathcal I}_i\), and then the
+transform of the sum is the sum of the transforms (Definition~\ref{hir:geo-transform}), whose summands again satisfy these hypotheses.
+\end{definition}
+\begin{proof}
+\leanok
+Write \(\mu=\prod_j\mu_j\) and \(e_i=\prod_{j\ne i}\mu_j\ge1\), so \(\mu_ie_i=\mu\). By Lemma~\ref{mc:finite-sum} and
+\(\operatorname{cosupp}(\mathfrak a^{e},\nu e)=\operatorname{cosupp}(\mathfrak a,\nu)\) for \(e\ge1\) (Lemma~\ref{hir:marked-ideal-operations}),
+\(\operatorname{cosupp}(\sum_i\mathfrak a_i^{e_i},\mu)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i^{e_i},\mu_ie_i)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i,\mu_i)\). The
+admissibility statement follows, as all \(E_i\) agree. For an admissible centre \(C\), \(\mathfrak a_i\subset\mathcal I_C^{\mu_i}\) (Lemma~\ref{hir:bridge-consumers}), so
+\(\mathfrak a_i^{e_i}\subset\mathcal I_C^{\mu}\), and by Lemmas~\ref{hir:geo-transform-ambient}, \ref{mc:finite-sum} and~\ref{hir:controlled-operations}
+\(\sigma^{\mathrm c}(\sum_i\mathfrak a_i^{e_i},\mu)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i^{e_i},\mu_ie_i)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i,\mu_i)^{e_i}\); the strict transform of \(M\)
+is the whole blowup, the \(E\) are transformed alike, the marks do not change, and the controlled transforms are coherent.
+\end{proof}
+
+\begin{lemma}[Multiple test blow-ups of a sum]
+\label{mc:marked-finite-sum-tower}
+\uses{mc:marked-finite-sum,hir:geo-transform}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.geoTransformAlong_msum}
+\leanok
+Under the hypotheses of Definition~\ref{mc:marked-finite-sum}, the multiple test blow-ups of \(\underline{\mathcal I}_0+\dots+\underline{\mathcal I}_{m-1}\) are exactly
+the simultaneous multiple test blow-ups of the \(\underline{\mathcal I}_i\), and along them the transform of the sum is the sum of the transforms.
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on the tower, using at each step that the transforms satisfy the hypotheses again and Definition~\ref{mc:marked-finite-sum}.
+\end{proof}
+This is part (1) of Włodarczyk's Lemma ``le:operations'' for \(m\) summands; for \(m=2\) it is Lemma~\ref{hir:marked-operations-transform}(1).
+
+\begin{definition}[Coefficient ideal]
+\label{mc:coefficient-ideal}
+\uses{mc:marked-finite-sum,mc:derivative-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0022}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.derivMarked_zero,TranscendentalNakamaye.Pending.CoefficientIdeal.coeffMarked,TranscendentalNakamaye.Pending.CoefficientIdeal.isAmbientFamily_derivMarked}
+\leanok
+The \emph{coefficient ideal} of \(\underline{\mathcal I}=(M,N,E,\mathfrak a,\mu)\) is
+\[
+ \mathcal C(\underline{\mathcal I})=\underline{\mathcal I}+\mathcal D(\underline{\mathcal I})+\dots+\mathcal D^{\mu-1}(\underline{\mathcal I}),
+\]
+i.e.\ \((\mathfrak a,\mu)+(\mathcal D\mathfrak a,\mu-1)+\dots+(\mathcal D^{\mu-1}\mathfrak a,1)\) (Definitions~\ref{mc:derivative-marked} and~\ref{mc:marked-finite-sum}).
+For \(N=M\) and \(\mathfrak a\) coherent, the summands satisfy the hypotheses of Definition~\ref{mc:marked-finite-sum}.
+\end{definition}
+
+\begin{lemma}[The coefficient ideal is equivalent to the marked ideal]
+\label{mc:coefficient-equivalent}
+\uses{mc:coefficient-ideal,mc:marked-finite-sum-tower,mc:inclusions-tower,mc:derivative-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0022}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.coeff_tower}
+\leanok
+Let \(\underline{\mathcal I}=(M,M,E,\mathfrak a,\mu)\) with \(\mathfrak a\) coherent and \(\mu\ge1\). A tower is a multiple test blow-up of
+\(\mathcal C(\underline{\mathcal I})\) if and only if it is one of \(\underline{\mathcal I}\), and along it
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\operatorname{cosupp}\underline{\mathcal I}_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:marked-finite-sum-tower} the multiple test blow-ups of \(\mathcal C(\underline{\mathcal I})\) are the simultaneous ones of the
+\(\mathcal D^i(\underline{\mathcal I})\), \(i<\mu\); the summand \(i=0\) is \(\underline{\mathcal I}\), and by Lemma~\ref{mc:inclusions-tower} every multiple test blow-up
+of \(\underline{\mathcal I}\) is one of every \(\mathcal D^i(\underline{\mathcal I})\). Along such a tower,
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\bigcap_{i<\mu}\operatorname{cosupp}[\mathcal D^i(\underline{\mathcal I})]_T\); the term \(i=0\) is
+\(\operatorname{cosupp}\underline{\mathcal I}_T\), and for every \(i\), \(\operatorname{cosupp}\underline{\mathcal I}_T\subset\operatorname{cosupp}\mathcal D^i(\underline{\mathcal I}_T)\subset
+\operatorname{cosupp}[\mathcal D^i(\underline{\mathcal I})]_T\) by Definition~\ref{mc:derivative-marked} and \([\mathcal D^i(\underline{\mathcal I})]_T\subset\mathcal D^i(\underline{\mathcal I}_T)\)
+(Lemma~\ref{mc:inclusions-tower}).
+\end{proof}
+This is Włodarczyk's Lemma ``le:coeff'', \(\mathcal C(\underline{\mathcal I})\simeq\underline{\mathcal I}\); the source assumes maximal order, which the proof does not use.
+
+\begin{definition}[Restriction of a marked ideal to a set]
+\label{mc:restrict-marked}
+\uses{hir:marked-ideal,hir:order,mc:strict-along,mc:coefficient-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_N,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_E,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_ideal,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_d,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupp_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.CentresIn,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_refl,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_step_iff,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.N_geoTransformAlong_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.N_coeffMarked,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.isCoherent_coeffMarked}
+\leanok
+For a set \(S\subset M\), the \emph{restriction} \(\underline{\mathcal B}|_S=(M,S,E,\mathfrak b,d)\) has the same \(E\), ideal and mark and \(N=S\); its cosupport is
+\(\{x\in S\mid \operatorname{ord}_x(\mathfrak b|_S)\ge d\}\) (Definition~\ref{hir:order}). A tower \(T\) has its \emph{centres in the strict transforms of \(S\)} if
+each centre \(C_i\) lies in the strict transform \(S_i\) of \(S\) (Definition~\ref{mc:strict-along}). The coefficient ideal \(\mathcal C(\underline{\mathcal I})\)
+has \(N=M\) and a coherent ideal.
+\end{definition}
+
+\begin{lemma}[Restriction along multiple test blow-ups]
+\label{mc:restrict-tower}
+\uses{mc:restrict-step,mc:restrict-order,mc:strict-along,hir:test-tower,hir:restricted-equivalence-basic,bcalc:strict-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_of_isGeoTestTower_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.restrict_tower}
+\leanok
+Let \(S\subset M\) be a closed submanifold. A multiple test blow-up of \(\underline{\mathcal B}|_S\) has its centres in the strict transforms of \(S\).
+Every multiple test blow-up \(T\) of \(\underline{\mathcal B}\) with centres in the strict transforms of \(S\) is a multiple test blow-up of
+\(\underline{\mathcal B}|_S\), and along it \([\underline{\mathcal B}|_S]_T\) is restricted-equivalent to \((\underline{\mathcal B}_T)|_{S_T}\); moreover
+\(\underline{\mathcal B}_T\) has \(N\) the whole space, both transformed ideals are coherent and \(S_T\) is a closed submanifold.
+\end{lemma}
+\begin{proof}
+\leanok
+An admissible centre lies in the cosupport, hence in \(N\), which is the strict transform of \(S\). For the second statement induct on \(T\). At a step
+with centre \(C\subset S_T\) admissible for \(\underline{\mathcal B}_T\), \(C\) is admissible for \((\underline{\mathcal B}_T)|_{S_T}\) by
+Lemma~\ref{mc:restrict-order}, hence for the restricted-equivalent \([\underline{\mathcal B}|_S]_T\); restricted-equivalent marked ideals have the same
+transform (Lemma~\ref{hir:restricted-equivalence-basic}), and Lemma~\ref{mc:restrict-step} applies. The strict transform of a closed submanifold
+containing the centre is a closed submanifold (Lemma~\ref{bcalc:strict-ideal}).
+\end{proof}
+This is the last statement of Włodarczyk's Lemma ``le:cf'': \([(\mathcal I,\mu)|_S]_i=(\mathcal I_i,\mu)|_{S_i}\).
+
+\begin{lemma}[The support of the restricted coefficient ideal]
+\label{mc:coefficient-restriction-support}
+\uses{mc:restrict-marked,mc:restrict-order,mc:coefficient-equivalent,mc:finite-sum,hir:order-power,hir:giraud-support}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupport_coeff_subset,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupp_coeff_withN}
+\leanok
+For every set \(S\subset M\), \(\operatorname{cosupp}\underline{\mathcal I}\cap S=\operatorname{cosupp}(\mathcal C(\underline{\mathcal I})|_S)\).
+\end{lemma}
+\begin{proof}
+\leanok
+The inclusion \(\subset\) is Lemma~\ref{mc:coefficient-equivalent} (for the empty tower) followed by Lemma~\ref{mc:restrict-order}. Conversely, let
+\(x\in S\) with \(\operatorname{ord}_x(\mathcal C(\mathfrak a)|_S)\ge\mu_{\mathcal C}\). The ideal of \(\mathcal C(\underline{\mathcal I})\) contains
+\(g^e\) for every \(g\in\mathcal D^{\mu-1}\mathfrak a\), where \(e\) is the exponent of the last summand \((\mathcal D^{\mu-1}\mathfrak a,1)\), and
+\(\mu_{\mathcal C}=1\cdot e\ge1\). So \(g^e\), hence \(g\), vanishes at \(x\): \(x\in V(\mathcal D^{\mu-1}\mathfrak a)=\operatorname{cosupp}(\mathfrak a,\mu)\)
+(Lemma~\ref{hir:giraud-support}).
+\end{proof}
+This is the first statement of Włodarczyk's Lemma ``le:S'' (Proposition~5.6.4 of the analytic paper), with \(\mu_{\mathcal C}=\mu!\) in place of
+\(\operatorname{lcm}(1,\dots,\mu)\), which changes nothing. The source proves \(\supset\) by expanding the germs of \(\mathfrak a\) in coordinates normal to \(S\);
+the last summand of \(\mathcal C\) makes this unnecessary, and \(S\) need not be a submanifold.
+
+\begin{lemma}[The restricted coefficient ideal along multiple test blow-ups]
+\label{mc:coefficient-restriction-tower}
+\uses{mc:restrict-tower,mc:coefficient-equivalent,mc:restrict-order,mc:restrict-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.coeff_restrict_tower}
+\leanok
+Let \(S\subset M\) be a closed submanifold and \(T\) a multiple test blow-up of \(\underline{\mathcal I}\) with centres in the strict transforms of \(S\).
+Then \(T\) is a multiple test blow-up of \(\mathcal C(\underline{\mathcal I})|_S\), along it \([\mathcal C(\underline{\mathcal I})|_S]_T\) is
+restricted-equivalent to \(\mathcal C(\underline{\mathcal I})_T|_{S_T}\), and
+\(\operatorname{cosupp}\underline{\mathcal I}_T\cap S_T\subset\operatorname{cosupp}[\mathcal C(\underline{\mathcal I})|_S]_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:coefficient-equivalent}, \(T\) is a multiple test blow-up of \(\mathcal C(\underline{\mathcal I})\) and
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\operatorname{cosupp}\underline{\mathcal I}_T\). Lemma~\ref{mc:restrict-tower} for
+\(\underline{\mathcal B}=\mathcal C(\underline{\mathcal I})\) gives the first two statements, and the inclusion follows from Lemma~\ref{mc:restrict-order}.
+\end{proof}
+This is part (1) and the inclusion \(\subset\) of part (2) of Włodarczyk's Lemma ``le:S'' (Proposition~5.6.4 of the analytic paper). The reverse
+inclusion \(\operatorname{cosupp}[\mathcal C(\underline{\mathcal I})|_S]_T\subset\operatorname{cosupp}\underline{\mathcal I}_T\) for a nonempty tower, and
+with it part (3), is Lemma~\ref{mc:coefficient-restriction-full} below (the source's tracking of the Taylor coefficients in coordinates normal to the
+\(S_i\) through the monomial charts).
+
+\begin{definition}[Flat charts and normal derivatives]
+\label{mc:flat-chart}
+\uses{mc:normal-taylor-order,fpgeom:complex-analytic-subvariety}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart,TranscendentalNakamaye.Pending.NormalDerivativeChart.mem_congr_of_isCoherent,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ψ,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.inv,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ofRegularAtDim,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mem_flatDomain,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ψ_self,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.zero_mem_target,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.inv_zero,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mem_flatDomain,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mdifferentiableAt_ψ,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mdifferentiableAt_ψ,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mdifferentiableAt_inv,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mdifferentiableAt_inv,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_inv_ψ,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_ψ_inv,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_flat,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.tendsto_inv,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.tendsto_ψ,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_differentiableAt_comp_inv,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_nil,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mem_idealPow_of_vanishesToOrderOn,TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.injective_fderiv_Φ}
+\leanok
+A \emph{flat chart} for \(S\) at \(p\) is the preferred chart followed by a local biholomorphism \(\Phi\) with \(\Phi(e\,p)=0\) in which \(S\) is the plane
+\(\mathbb C^k\times0\) near \(p\) (the data of a regular point). The \emph{normal derivatives} of \(f\) are \(\partial^L(f\circ\psi^{-1})\circ\psi\),
+\(\psi=\Phi\circ e\). Lemma~\ref{mc:normal-taylor-order} applies to flat charts.
+\end{definition}
+
+\begin{lemma}[Normal derivatives of an ideal]
+\label{mc:normal-derivative-ideal}
+\uses{mc:flat-chart,hir:derivative-ideal,mc:coordinate-derivatives}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_mem_iterDerivIdeal}
+\leanok
+For a coherent \(\mathfrak b\) and \(g\in\mathfrak b_p\), every derivative of \(g\) in a flat chart along a list \(L\) lies in \(\mathcal D^{|L|}(\mathfrak b)_p\).
+\end{lemma}
+\begin{proof}
+\leanok
+A coordinate derivative is a holomorphic combination of chart derivatives (Lemma~\ref{mc:coordinate-derivatives}); induct on \(L\).
+\end{proof}
+
+\begin{lemma}[The coefficient invariant]
+\label{mc:normal-coefficient-invariant}
+\uses{mc:flat-chart,mc:normal-derivative-ideal,mc:normal-taylor-order,mc:restrict-marked,mc:derivative-marked,ana:local-holomorphic-inverse}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientRestrictionTower.vanishesToOrderOn_of_isInSpanOnAt,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.isInSpanAt_comp_map,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.holomorphicAt_nd}
+\leanok
+Let \(\underline{\mathcal I}=(X,X,E,\mathfrak a,\mu)\), \(\mathfrak a\) coherent, \(S\) a closed submanifold and \(T\) a tower. A point \(p\in S_T\) is \emph{good} if there are a flat chart
+for \(S_T\) at \(p\) and generators of \((\mathfrak a_T)_p\) whose normal derivatives \(\partial^L\), \(|L|<\mu\), restrict on \(S_T\) near \(p\) into
+\([\mathcal D^{|L|}\mathfrak a]_T\). At a good point where every \([\mathcal D^i\mathfrak a]_T\) has order \(\ge\mu-i\) along \(S_T\), every germ of \(\mathfrak a_T\) lies in
+\(\mathfrak m_p^\mu\). Every point of \(S\) is good for the empty tower.
+\end{lemma}
+\begin{proof}
+\leanok
+The first statement is Lemma~\ref{mc:normal-taylor-order} for the generators. For the empty tower take all germs of \(\mathfrak a\) as generators and
+Lemma~\ref{mc:normal-derivative-ideal}.
+\end{proof}
+
+\begin{lemma}[The coefficient invariant along multiple test blow-ups]
+\label{mc:normal-coefficient-step}
+\uses{mc:normal-coefficient-invariant,mc:nested-product-chart,mc:normal-derivative-monomial,mc:monomial-local-equation,mc:restrict-tower,mc:inclusions-tower,bcalc:strict-submanifold,bcalc:monomial-lift,bcalc:isomorphism-off-centre,bcalc:function-transform,hir:geo-transform-ambient,hir:bridge-consumers,hir:geo-transform-wellformed,ana:restricted-colon}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower}
+\leanok
+Along a multiple test blow-up of \(\underline{\mathcal I}\) with centres in the strict transforms of \(S\), every point of \(S_T\) is good.
+\end{lemma}
+\begin{proof}
+\leanok
+Induct on the tower; let \(\pi\) blow up \(C\subset S_T\) and \(z\in S_{T'}\). If \(\pi z\notin C\), \(\pi\) is a local biholomorphism near \(z\): pull back the chart and the
+generators. If \(\pi z\in C\), refine the chart at \(\pi z\) to a nested product-form chart (Lemma~\ref{mc:nested-product-chart}) and take the monomial chart \(W\) at
+\(z\) (Lemma~\ref{bcalc:strict-submanifold}): \(\sigma_j\circ W\) are the old coordinates, \(S_{T'}=W^{-1}(\mathbb C^k\times0)\), and \(W_j\) is a local equation of the
+exceptional divisor (Lemma~\ref{mc:monomial-local-equation}). The new chart is \(W-W(z)\); the new generators are \(h'\) with \(g\circ\pi=W_j^\mu h'\) (they generate the
+controlled transform after cancelling \(W_j^\mu\)). Lemma~\ref{mc:normal-derivative-monomial} gives
+\(W_j^\mu\,\partial^Lh'=W_j^{|L|}(\partial^Lg)\circ\pi\); on \(S_T\) the right side is \(W_j^{|L|}\sum a_i(s_i\circ\pi)\) with \(s_i\in[\mathcal D^{|L|}\mathfrak a]_T\subset\mathcal I_C^{\mu-|L|}\),
+so \(s_i\circ\pi=W_j^{\mu-|L|}s_i'\) with \(s_i'\in[\mathcal D^{|L|}\mathfrak a]_{T'}\); cancel \(W_j^\mu\) along \(S_{T'}\), where it vanishes on no relatively open set
+(\(S_{T'}\) is the closure of \(\pi^{-1}(S_T\setminus C)\)).
+\end{proof}
+
+\begin{lemma}[The restricted coefficient ideal along multiple test blow-ups: full statement]
+\label{mc:coefficient-restriction-full}
+\uses{mc:normal-coefficient-step,mc:coefficient-restriction-tower,mc:coefficient-restriction-support,mc:marked-finite-sum-tower,mc:finite-sum,hir:order-power-along,hir:restricted-equivalence-basic}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff}
+\leanok
+Let \(\underline{\mathcal I}=(X,X,E,\mathfrak a,\mu)\) with \(\mathfrak a\) coherent and \(\mu\ge1\), and \(S\) a closed submanifold. A tower is a multiple test blow-up of
+\(\mathcal C(\underline{\mathcal I})|_S\) if and only if it is a multiple test blow-up of \(\underline{\mathcal I}\) with centres in the strict transforms of \(S\), and along it
+\(\operatorname{cosupp}[\mathcal C(\underline{\mathcal I})|_S]_T=\operatorname{cosupp}\underline{\mathcal I}_T\cap S_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+The inclusion \(\supset\) is Lemma~\ref{mc:coefficient-restriction-tower}. Conversely, at \(x\) in the left side, \([\mathcal C(\underline{\mathcal I})|_S]_T\) is restricted-equivalent
+to \(\mathcal C(\underline{\mathcal I})_T|_{S_T}=\sum_i[\mathcal D^i\mathfrak a]_T^{e_i}\) (Lemma~\ref{mc:marked-finite-sum-tower}); along \(S_T\) the order of the sum is the minimum of the
+scaled orders (Lemma~\ref{hir:order-power-along}), so \([\mathcal D^i\mathfrak a]_T\) has order \(\ge\mu-i\) along \(S_T\) at \(x\), and the good point \(x\)
+(Lemma~\ref{mc:normal-coefficient-step}) lies in \(\operatorname{cosupp}\underline{\mathcal I}_T\). The test blow-ups correspond by induction on the tower: a centre inside \(S_T\) is admissible
+for one side iff for the other, since the cosupports correspond and \(E\) is the same.
+\end{proof}
+This is Włodarczyk's Lemma ``le:S'' (2)--(3) for the restriction keeping \(E\) (no member of \(E\) is dropped).

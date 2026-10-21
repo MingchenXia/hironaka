@@ -1,0 +1,112 @@
+\section{Actual selected vertex blocks give every genuine homogeneous division basis}
+
+Keep the actual degree-first vertices $A$ of a genuine ideal
+$I\subset S=\mathbb C[[X_1,\ldots,X_n]]$ and its internally fixed
+monic series $f_a$. The finite-jet construction is now made for ANY
+selected subset $V\subset A$, using the SAME actual original series.
+In particular $V_k=\{a\in A:|a|\le k\}$ supplies all the homogeneous
+conditions $(2_{k,d})$ in
+\cite[\S7, (7.2)(2) and Lemma~7.7, pp.~262--264]{bierstone-milman97-invent-math}.
+The owner is now the genuinely least eligible vertex in the actual
+degree-first order. Degree-block owners agree with the full-family owner
+wherever a selected vertex is eligible, giving the source's coherent
+first-vertex partition. We do not assert that every partial ideal has
+the partial diagram as its own whole initial diagram.
+
+\begin{lemma}[Every actual selected vertex family supplies true triangular and homogeneous columns]
+\label{hir:actual-selected-vertex-owned-columns}
+\uses{hir:actual-finite-jet-owned-vertex-series-triangular,hir:actual-formal-initial-exponent-coefficient-product}
+Put $\mathcal N_V=\{\alpha:\exists a\in V,\ a\le\alpha\}$.
+For $\alpha\in\mathcal N_V$ internally construct the least such SAME
+actual vertex $o(\alpha)$ in degree-first order, and set
+\[
+ B^V_\alpha=X^{\alpha-o(\alpha)}f_{o(\alpha)},\qquad
+ C^V_\alpha=X^{\alpha-o(\alpha)}\operatorname{in}f_{o(\alpha)}.
+\]
+For $\alpha\notin\mathcal N_V$ set both columns to $X^\alpha$.
+Both actual columns are nonzero with genuine least exponent $\alpha$
+and coefficient one there; every coefficient preceding $\alpha$ is zero.
+The actual $C^V_\alpha$ is homogeneous of degree $|\alpha|$.
+\lean{Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexDiagram,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexOwner,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexOwner_spec,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexSeries,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexSeries_spec,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexSeries_triangular,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexSeries_homogeneous}
+\leanok
+\end{lemma}
+\begin{proof}
+Actual selected-diagram membership gives a nonempty set of eligible
+vertices. The true degree-first well-order supplies its least element,
+with both eligibility and the genuine minimum inequality internally.
+Thus $a\in V$, $a\le\alpha$ and $(\alpha-a)+a=\alpha$. The already proved
+monic minimum of $f_a$ and of its literal initial form, together with
+true formal monomial convolution, gives nonvanishing, minimum $\alpha$
+and coefficient one for BOTH products. Actual minimum minimality kills
+every preceding coefficient. Outside the selected diagram these are
+the genuine monomial identities. The true initial form of $f_a$ is
+homogeneous of degree $|a|$; multiplying by the genuine monomial of
+degree $|\alpha-a|$ gives degree $|\alpha-a|+|a|=|\alpha|$.
+No linear independence, rank or desired division family is supplied.
+\end{proof}
+
+\begin{theorem}[Every genuine selected family gives the actual whole jet basis]
+\label{hir:actual-selected-vertex-whole-jet-bases}
+\uses{hir:actual-selected-vertex-owned-columns,hir:actual-finite-jet-triangular-series-basis}
+For EVERY $q\in\mathbb N$, the actual classes of $B^V_\alpha$,
+$|\alpha|<q$, form a complex basis of the SAME actual $S/\mathfrak n^q$.
+The classes of $C^V_\alpha$ form a second actual basis. The literal
+finite-sum maps and their inverses are constructed internally, and
+each coordinate vector maps to the class of the SAME displayed column.
+\lean{Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexJetEquiv,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexJetBasis,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexJetEquiv_single}
+\leanok
+\end{theorem}
+\begin{proof}
+Apply the actual finite triangular whole-jet theorem to EACH of the
+preceding internally constructed families. Its proof uses the genuine
+least nonzero scalar-support coefficient and the actual power kernel
+for injectivity, and the independently proved whole-jet dimension for
+surjectivity. The preceding lemma internally supplies every triangular
+hypothesis. Mapping the true coordinate basis by the constructed
+linear equivalence gives the actual displayed basis. The finite
+unit-coordinate sum has just the chosen column, proving its formula.
+This includes arbitrary selected subsets, empty selections, zero jets,
+zero variables and the zero/unit original ideals.
+\end{proof}
+
+\begin{theorem}[Actual homogeneous division at every selected degree block]
+\label{hir:actual-selected-vertex-homogeneous-division-basis}
+\uses{hir:actual-selected-vertex-whole-jet-bases,hir:actual-selected-vertex-owned-columns,hir:actual-formal-variable-power-coefficient-kernel}
+For every actual homogeneous $F\in S$ of degree $d$, there is a UNIQUE
+actual coefficient vector $(c_\alpha)_{|\alpha|<d+1}$ satisfying
+\[
+ c_\alpha=0\quad(|\alpha|\ne d),\qquad
+ F=\sum_{|\alpha|<d+1}c_\alpha C^V_\alpha.
+\]
+In particular selecting the actual $V_k=\{a\in A:|a|\le k\}$
+gives the genuine homogeneous division basis $(2_{k,d})$ for EVERY
+$k,d\in\mathbb N$, with internally fixed actual owner supports and
+the true complementary monomials of $\mathcal N_{V_k}$.
+\lean{Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualSelectedVertexHomogeneousExpansion,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualDegreeBlockVertices,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualDegreeBlockOwner_compatible,Hironaka.HironakaActualSelectedVertexHomogeneousBasis.actualDegreeBlockHomogeneousExpansion}
+\leanok
+\end{theorem}
+\begin{proof}
+Use the preceding genuine whole-jet inverse at $q=d+1$ to expand the
+actual class of $F$, obtaining coefficients $b_\alpha$. The actual
+difference $\sum b_\alpha C^V_\alpha-F$ belongs to the WHOLE
+$\mathfrak n^{d+1}$. Its degree-$d$ component is zero by the true
+coefficient kernel. Actual homogeneous projection is complex linear;
+it fixes $F$ and each column with $|\alpha|=d$, and kills every column
+of another degree. Thus the internally constructed mask
+$c_\alpha=b_\alpha$ for $|\alpha|=d$ and $0$ otherwise gives the
+displayed equality of ENTIRE actual formal series. Uniqueness follows
+by taking true quotient classes and applying the preceding actual
+whole-jet injectivity to the two finite vectors. The surviving columns
+are genuine homogeneous polynomials of degree $d$; grouping them by
+their internally chosen owners gives exactly the polynomial columns
+and complementary monomials in $(2_{k,d})$. Finally substitute the
+internally defined actual degree-block selection $V_k$. Its minimum
+eligible vertex agrees with the full-family minimum: the latter
+precedes the former, so its total degree is no greater, hence it too
+belongs to $V_k$; the two genuine minimum inequalities then force
+equality. Thus these degree blocks use the SAME coherent first-owner
+partition, as required in $(2_{k,d})$. No target
+homogeneous basis, division solution or transformed-presentation
+certificate is assumed. Conditions (4),(5), their genuine geometric
+transforms and the general strict Bennett comparison remain open.
+\end{proof}

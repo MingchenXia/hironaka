@@ -1,0 +1,54 @@
+ℹ [4776/5181] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [5536/5630] Built Hironaka.Resolution.HironakaOriginalStoppedBoundaryTransport (5.6s)
+✔ [5554/5630] Built Hironaka.Resolution.HironakaOriginalPureBoundaryCanonicalPrefix (3.0s)
+✔ [5560/5630] Built Hironaka.Resolution.HironakaOriginalPureBoundaryTerminalPrefix (3.2s)
+✔ [5574/5630] Built Hironaka.Resolution.HironakaOriginalSmoothIntrinsicRegularLoci (3.1s)
+✔ [5586/5630] Built Hironaka.Resolution.HironakaOriginalPureBoundaryIndependentSource (4.0s)
+✔ [5592/5630] Built Hironaka.Resolution.HironakaOriginalLocalPureBoundaryCanonicalPrefix (4.9s)
+✔ [5593/5630] Built Hironaka.Resolution.HironakaOriginalEmptySumStage (3.2s)
+✔ [5594/5630] Built Hironaka.Resolution.HironakaOriginalBoundaryEmptyFilterComparison (4.3s)
+✔ [5598/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalDimensionList (3.1s)
+✔ [5601/5630] Built Hironaka.Resolution.HironakaOriginalLocalPureBoundaryIndependentSource (4.6s)
+✔ [5602/5630] Built Hironaka.Resolution.HironakaOriginalBoundaryEmptyBaseComparison (3.8s)
+✔ [5604/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalPartListResolution (7.9s)
+✔ [5607/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalDimensionPartResolution (4.4s)
+✔ [5608/5630] Built Hironaka.Resolution.HironakaOriginalLocalCanonicalPartListResolution (9.0s)
+✔ [5609/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalOrderedResolution (7.3s)
+✔ [5611/5630] Built Hironaka.Resolution.HironakaOriginalPureCanonicalSpecializations (2.9s)
+✔ [5612/5630] Built Hironaka.Resolution.HironakaOriginalLocalPureHeadHosts (4.3s)
+✔ [5613/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalSeparationChainChoice (5.1s)
+✔ [5614/5630] Built Hironaka.Resolution.HironakaOriginalPureHeadChoice (3.1s)
+✔ [5615/5630] Built Hironaka.Resolution.HironakaOriginalNonpureCanonicalResolution (5.0s)
+✔ [5616/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalEmptyParts (3.2s)
+✔ [5617/5630] Built Hironaka.Resolution.HironakaOriginalOrderedTreeSmoothPullback (3.7s)
+✔ [5618/5630] Built Hironaka.Resolution.HironakaOriginalLocalCanonicalOrderedResolution (6.9s)
+✔ [5619/5630] Built Hironaka.Resolution.HironakaOriginalStageReconstruction (3.2s)
+✔ [5620/5630] Built Hironaka.Resolution.HironakaOriginalFullDimensionIdentity (3.3s)
+✔ [5621/5630] Built Hironaka.Resolution.HironakaOriginalEmptyHeadPrefix (3.1s)
+✔ [5622/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalIrreducibleFamily (3.7s)
+✔ [5623/5630] Built Hironaka.Resolution.HironakaOriginalLocalCanonicalIrreducibleFamily (5.2s)
+✔ [5624/5630] Built Hironaka.Resolution.HironakaOriginalCanonicalOrderedChoice (4.9s)
+✔ [5625/5630] Built Hironaka.Resolution.HironakaOriginalPrescribedLocalIrreducibleFamily (2.6s)
+✔ [5626/5630] Built Hironaka.Resolution.HironakaOriginalIntrinsicNonpureRecipe (3.9s)
+✔ [5627/5630] Built Hironaka.Resolution.HironakaOriginalLocalNonpureCanonicalResolution (14s)
+✔ [5628/5630] Built Hironaka.Resolution.HironakaOriginalNonpureCanonicalSpecializations (3.5s)
+✔ [5629/5630] Built Hironaka (3.2s)
+Build completed successfully (5630 jobs).

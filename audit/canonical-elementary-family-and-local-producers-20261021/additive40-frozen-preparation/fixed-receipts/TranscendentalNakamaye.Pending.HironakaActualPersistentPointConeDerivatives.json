@@ -1,0 +1,569 @@
+{
+  "created_utc": "2026-10-21T03:39:10.389107+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G8": "Genuine source homogeneous-initial pivot derivative stability now produced from actual zero-point HS persistence; combining it with a qualified algebraic order converse and relative extension remains separate"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualPersistentPointConeDerivatives.lean",
+    "sha256": "dcca6cd322680f5fadc38218e6d8dfa248bd77f1ad3f0995f4733cad09d8c089",
+    "bytes": 24581
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-persistent-point-cone-derivatives-extension.tex",
+    "sha256": "e03b85db1ce2fbbb3c4d1612111d45b0465d3f484232834c5ade6f94542ca7de",
+    "bytes": 5637
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPersistentPointConeDerivatives.ilean",
+      "sha256": "2b1cfd6e7d720e8f815e469881a12ac121cb866850b13994129b54aeab321431",
+      "bytes": 203177
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPersistentPointConeDerivatives.ilean.hash",
+      "sha256": "d0f1838626c8ade24a66905ba4a54dce3f9330600df921d3a793d2307abdcb16",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPersistentPointConeDerivatives.olean",
+      "sha256": "399518908663e3173dce36cbc04c8d489ceae6ab4cc25a153913ce0d69ab0eed",
+      "bytes": 945744
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPersistentPointConeDerivatives.olean.hash",
+      "sha256": "427567b46ade8558c780b69745178d24d062d567a5f0a80784a1bbe4c187c909",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPersistentPointConeDerivatives.trace",
+      "sha256": "56db6ed2cb75279099296c5b04e1ba8e8adac18c037f3c036a607c04d3609ece",
+      "bytes": 3772
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "polynomial_contDiff",
+      "source_line": 25
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "polyFunction",
+      "source_line": 33
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "polyFunction_contDiff",
+      "source_line": 36
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "polyFunction_hol",
+      "source_line": 41
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "translated_poly_mk",
+      "source_line": 45
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "coneFunctions",
+      "source_line": 69
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "coneSheaf",
+      "source_line": 72
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coneSheaf_isCoherent",
+      "source_line": 75
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coneTranslatedIdeal_eq",
+      "source_line": 89
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "cone_origin_formal",
+      "source_line": 98
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "translated_cone_hs_eq_of_zero_point_persistence",
+      "source_line": 117
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "polynomial_coe_homogeneous",
+      "source_line": 158
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "homogeneous_span_initial_eq",
+      "source_line": 164
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "permLinear",
+      "source_line": 201
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "permGerm",
+      "source_line": 204
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "permGerm_coordinate",
+      "source_line": 209
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "permGerm_polynomial",
+      "source_line": 217
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "polyTranslatedIdeal",
+      "source_line": 232
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_perm_polyTranslatedIdeal",
+      "source_line": 236
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "translated_polyIdeal_eq",
+      "source_line": 246
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "polyTranslatedIdeal_origin_formal",
+      "source_line": 256
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "homogeneous_polynomial_span_pderiv_of_axis_hs",
+      "source_line": 272
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_rename_polynomial_span",
+      "source_line": 304
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "positive_initial_pderiv_of_zero_point_hs_persistence",
+      "source_line": 315
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "initial_pderiv_of_zero_point_hs_persistence",
+      "source_line": 392
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coneSheaf_translated_origin",
+      "source_line": 404
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-source-cone-polynomial-model",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneSheaf_isCoherent",
+        "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneTranslatedIdeal_eq",
+        "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneSheaf_translated_origin",
+        "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.cone_origin_formal"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "9bd2e615ef6da7986e13134d2252ef570f46e98f37c314479a2c42f64c6fdc77"
+    },
+    {
+      "label": "hir:actual-persistent-point-cone-ray",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.translated_cone_hs_eq_of_zero_point_persistence"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "214a2255cf6f86a111f57484e7442a512ccdfefd6adfd2cfbca36353d7770857"
+    },
+    {
+      "label": "hir:actual-persistent-point-source-cone-pderiv",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.initial_pderiv_of_zero_point_hs_persistence"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "a1b80b129b1a081af9a95a0c1623e4564eff2dab2388cdc042a265cb38de6019"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneSheaf_isCoherent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.initial_pderiv_of_zero_point_hs_persistence._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.homogeneous_span_initial_eq",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.map_rename_polynomial_span",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.positive_initial_pderiv_of_zero_point_hs_persistence",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.cone_origin_formal",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permLinear._proof_1",
+      "transitive_axioms": [
+        "propext"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.translated_polyIdeal_eq",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneFunctions._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyFunction_contDiff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.translated_poly_mk",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.map_perm_polyTranslatedIdeal",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneSheaf_translated_origin",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyFunction_hol",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm_polynomial",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.positive_initial_pderiv_of_zero_point_hs_persistence._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polynomial_coe_homogeneous",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyTranslatedIdeal_origin_formal",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneSheaf",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permGerm_coordinate",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyFunction",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualTranslatedInitialHS.actualTranslatedInitialFormalIdeal.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.homogeneous_polynomial_span_pderiv_of_axis_hs",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.initial_pderiv_of_zero_point_hs_persistence",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polynomial_contDiff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneTranslatedIdeal_eq",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.permLinear",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyTranslatedIdeal.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.coneFunctions",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyFunction.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.0.TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.polyTranslatedIdeal",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPersistentPointConeDerivatives.translated_cone_hs_eq_of_zero_point_persistence",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 37,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 35,
+    "Quot.sound, propext": 1,
+    "propext": 1
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-persistent-point-cone-derivatives/kernel.log",
+    "sha256": "e770720ac99b6ff20c33eba1e86731266df19c9cd2b13b79cd01177988cd6c6b",
+    "bytes": 86
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-persistent-point-cone-derivatives/actual-roots.log",
+    "sha256": "c304bbf4d97668b8f5472f4d489aec5c4a171053d21bdd77220c965b76cb2e31",
+    "bytes": 11358
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-persistent-point-cone-derivatives/ActualRoots.lean",
+    "sha256": "e7fddb3326018fa988fa51866f60f96c6e7b2aca31dff062de91b72ece55fd0e",
+    "bytes": 878
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/global-history/point-cone-derivatives/native.log",
+    "sha256": "73e819f0f3054d0dd1f90718be0cbbe09156109e73deda76fb55eb4e6d686908",
+    "bytes": 147
+  },
+  "native_build_jobs": 5048,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 447-line source, all finite polynomial, actual germ translation, homogeneous-span and coordinate-permutation helpers, and all THREE complete written BP proofs reviewed. The genuine finite initial vertex polynomials of the SAME original whole Taylor ideal define actual entire complex polynomial functions. Their actual finite functional germ span supplies a genuinely coherent whole sheaf without a coherence certificate. Literal representative polynomial induction proves its translated polynomial ideals and true translated origin stalk ideals are exactly the original whole translated initial polynomial ideals, with every finite span equality proved rather than only a zero-set equality. Actual origin Taylor evaluation maps these SAME generators to their literal polynomial inclusions, whose whole span is the genuine homogeneous initial ideal. Under actual original/current zero-direction normalized all-order HS persistence, the actual Bennett comparison gives normalized HS at most dehomogenized cone HS at the coordinate unit point at most original HS. Equal endpoints yield equality there at every order. Real homogeneous generator scaling induces genuine germ algebra isomorphisms along EVERY nonzero scalar ray; at scalar zero actual origin/formal HS transfer and homogeneous-initial HS equality give the original profile. Thus the whole SAME cone has the actual original profile on the entire coordinate line, including zero. For a finite homogeneous polynomial family, this true stalk equality gives genuine Macaulay rank constancy on the coordinate axis. The previously proved actual family coupled-normal producer therefore constructs real pivot neighbourhoods and tangent first-symbol derivative closure internally. Its origin germ ideal is exactly the actual polynomial span. A separate direct finite ideal-span proof shows an ideal generated by homogeneous polynomials equals its OWN homogeneous initial ideal: each homogeneous component of a coefficient-times-generator product remains in the ideal, and every nonzero homogeneous generator is its own initial form. Hence the derived tangent derivative preserves the literal whole polynomial cone ideal. A genuine continuous complex-linear coordinate swap and induced analytic germ algebra equivalence move an arbitrary pivot to the first coordinate, with the actual translated ideal and HS squares proved on all generators. Polynomial renaming, true partial differentiation and formal renaming commute literally. Applying derivative closure to each actual permuted generator and undoing the genuine equivalence gives derivative membership for every original cone generator. Full additive and Leibniz ideal-span induction extends this to EVERY element with arbitrary entire formal coefficient multiples. The dimension-positive reduction is forced by the actual Fin n pivot, so dimension zero has no additional hypothesis. The final original endpoint takes ONLY original analytic I, its pivot and actual all-order zero-point persistence: no supplied cone constancy, chart, rank, derivative or presentation certificate is used.",
+  "proven_scope": "Actual original zero-direction point HS persistence internally proves whole source-cone ray constancy and then literal pivot partial-derivative stability of the ENTIRE homogeneous initial formal ideal of the SAME original Taylor extension.",
+  "scope_limits": [
+    "Actual original/current all-order zero-direction normalized HS persistence is the explicit natural hypothesis. This is a proved source-cone derivative consequence, not yet the normalized all-vertex current-order converse.",
+    "The coordinate permutation is genuine and internal; arbitrary nonzero chart directions require their own source coordinate transport.",
+    "The result supplies an input for the algebraic point converse. Relative maximal standardness, uniform joint-profile cleanup and unrestricted G3/G8 history conclusions remain separate."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-persistent-point-cone-derivatives/review-config.json",
+    "sha256": "90f6512341767dc5b27961c54f709b17528eab34a3613dfb12a46e41de5c8030",
+    "bytes": 4904
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/global-history/point-cone-derivatives/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/global-history/point-cone-derivatives/peer-review-root.json"
+}

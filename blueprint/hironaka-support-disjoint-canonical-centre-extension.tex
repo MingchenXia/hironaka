@@ -1,0 +1,83 @@
+\section{Whole centres on covers disjoint only on the original cosupport}
+\label{sec:hironaka-support-disjoint-canonical-centre}
+
+\begin{theorem}[Exact whole centre traces on a support-disjoint cover]
+\label{hir:support-disjoint-whole-canonical-centre}
+\uses{hir:componentwise-canonical-centre-exact-trace,hir:open-restriction-marked,hir:invariant-driver,hir:centre-function-seq}
+\lean{Hironaka.HironakaSupportDisjointCanonicalCentre.parallelCentre_subset_original_cosupp,Hironaka.HironakaSupportDisjointCanonicalCentre.preimage_parallelCentre_support_disjoint,Hironaka.HironakaSupportDisjointCanonicalCentre.parallelCentre_admissible_support_disjoint}
+\leanok
+Let $M$ be an original marked ideal in the domain of a proved
+invariant $R$, put $S=\operatorname{cosupp}M$, and let $T:Y\to X$
+be an actual test prefix. Let original opens $U_i$ cover $S$,
+with the sets $U_i\cap S$ pairwise disjoint. Suppose each true
+restricted prefix $T|_{U_i}$ is canonical for $M|_{U_i}$.
+Form the union $C(T)$ of the whole local canonical maximum
+centres in the actual stage preimages of these opens.
+Then $C(T)\subset T^{-1}S$, its entire trace on each
+$T^{-1}U_i$ is exactly that whole local maximum centre,
+and $C(T)$ is a globally closed smooth admissible centre.
+The opens themselves may overlap away from $S$.
+\end{theorem}
+\begin{proof}
+A point of a local maximum belongs to its genuine local
+current cosupport. The whole current marked-record restriction
+dictionary identifies it with a point of the global current
+cosupport. Its original image lies in $S$, since every
+current cosupport maps into the original cosupport along
+an actual test prefix. This proves $C(T)\subset T^{-1}S$.
+
+If a point in $T^{-1}U_i$ lies in the union through the
+centre on $T^{-1}U_j$, its original image lies in both
+$U_i\cap S$ and $U_j\cap S$. Support disjointness forces
+$i=j$; injectivity of the true stage-open inclusion then
+identifies the point with the same whole local centre point.
+The reverse trace inclusion is immediate.
+
+The original cosupport $S$ is closed by coherence and
+regularity of the original carrier. The opens $U_i$ together
+with $X\setminus S$ cover $X$. On each actual stage preimage
+of $U_i$ the exact trace is genuinely admissible by the
+invariant's maximum-centre theorem and the whole-record
+restriction identity. On the preimage of $X\setminus S$
+the trace is empty and hence admissible. Admissibility
+descends from this genuine open cover: local complements
+give closedness, local flattenings give smoothness and
+the same local coordinates preserve every ordered boundary
+member. This proves global admissibility without cutting
+off any centre.
+\end{proof}
+
+\begin{theorem}[Actual proper support-disjoint refinement]
+\label{hir:support-disjoint-canonical-global-refinement}
+\uses{hir:support-disjoint-whole-canonical-centre,hir:resolution-driver,hir:open-restriction-tower}
+\lean{Hironaka.HironakaSupportDisjointCanonicalCentre.exists_support_disjoint_canonical_refinement}
+\leanok
+Under the preceding original and actual-prefix hypotheses,
+there is a genuine proper global blowup along $C(T)$.
+The enlarged global original prefix is a test prefix, and
+its actual restriction to every $U_i$ is canonical for
+$M|_{U_i}$, with every empty stage position retained.
+\end{theorem}
+\begin{proof}
+The constructed global centre is admissible and therefore
+lies in the current cosupport. The invariant-domain condition
+persists along the actual test prefix, so that cosupport
+has empty interior. Hence the centre also has empty interior.
+The genuine blowup-existence theorem applies to this global
+closed smooth centre; the resulting actual blowup is proper.
+Admissibility makes the enlarged original tower a test prefix.
+On each $U_i$ its true next centre is the entire inverse image
+of $C(T)$, which the preceding exact trace identifies with
+the whole local canonical maximum. Thus every true restricted
+prefix is extended by its genuine whole-maximum step and
+remains canonical, including when that maximum is empty.
+\end{proof}
+
+\begin{remark}
+This generalizes disjointness of ambient opens to disjointness
+only on the fixed ORIGINAL cosupport. It does not assume
+compatibility of chosen stage centres: their exact traces are
+proved using the actual projection to that same original
+cosupport. No general coherent cosupport is asserted to admit
+such a support-disjoint cover by compact-cosupport opens.
+\end{remark}

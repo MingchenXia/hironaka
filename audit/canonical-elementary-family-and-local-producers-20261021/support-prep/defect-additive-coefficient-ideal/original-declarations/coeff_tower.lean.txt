@@ -1,0 +1,39 @@
+/-- **Włodarczyk, Lemma `le:coeff`: `𝓒(𝔪) ≃ 𝔪`** (`N = M`, `𝔞` coherent, `d ≥ 1`): a tower is a
+multiple test blow-up of `𝓒(𝔪)` iff it is one of `𝔪`, and along it the cosupports of the transforms
+agree. -/
+theorem coeff_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) {Y : CMfd.{u} n} (T : BlowupTower X Y) :
+    (IsGeoTestTower (coeffMarked 𝔪) T ↔ IsGeoTestTower 𝔪 T) ∧
+      (IsGeoTestTower 𝔪 T →
+        (geoTransformAlong (coeffMarked 𝔪) T).cosupp = (geoTransformAlong 𝔪 T).cosupp) := by
+  have hfam := isAmbientFamily_derivMarked hN h𝔞
+  obtain ⟨hiff, heq⟩ := geoTransformAlong_msum (fun i => derivMarked 𝔪 i) hd hfam T
+  have hall : IsGeoTestTower 𝔪 T → ∀ i < 𝔪.d, IsGeoTestTower (derivMarked 𝔪 i) T :=
+    fun hT i hi => (inclusions_tower 𝔪 hN h𝔞 (le_of_lt hi) T hT).1
+  refine ⟨⟨fun hC => ?_, fun hT => (show IsGeoTestTower (msum _ _) T from hiff.mpr (hall hT))⟩,
+    fun hT => ?_⟩
+  · have := hiff.mp hC 0 hd
+    rwa [derivMarked_zero] at this
+  · obtain ⟨he, hfamT⟩ := heq (hall hT)
+    rw [show coeffMarked 𝔪 = msum (fun i => derivMarked 𝔪 i) 𝔪.d from rfl, he,
+      cosupp_msum hfamT hd]
+    ext x
+    simp only [Set.mem_ofPred_eq]
+    constructor
+    · intro hx
+      have := hx 0 hd
+      rwa [derivMarked_zero] at this
+    · intro hx i hi
+      obtain ⟨-, hNT, hNDT, -, -, -, hle⟩ := inclusions_tower 𝔪 hN h𝔞 (le_of_lt hi) T hT
+      have hdT : i ≤ (geoTransformAlong 𝔪 T).d := by
+        rw [d_geoTransformAlong]; exact le_of_lt hi
+      have h1 := cosupp_subset_cosupp_derivMarked hNT hdT hx
+      show x ∈ cosupport n (geoTransformAlong (derivMarked 𝔪 i) T).N
+        (geoTransformAlong (derivMarked 𝔪 i) T).ideal (geoTransformAlong (derivMarked 𝔪 i) T).d
+      rw [hNDT, d_geoTransformAlong, derivMarked_d]
+      have h1' : x ∈ cosupport n univ (iterDerivIdeal (geoTransformAlong 𝔪 T).ideal i)
+          ((geoTransformAlong 𝔪 T).d - i) := by
+        have := h1
+        rwa [MarkedIdeal.cosupp, derivMarked_N, hNT] at this
+      rw [d_geoTransformAlong] at h1'
+      exact cosupport_subset_of_le hle _ h1'

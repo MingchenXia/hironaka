@@ -1,0 +1,156 @@
+\section{Canonical sum-ideal separation with the same actual smooth Cartesian stages}
+
+Let $A,B\subset X^n$ be original analytic subsets, with $A$ of empty
+interior, $A\cap B$ compact, and
+\[
+ A\subset\overline{A\setminus B},\qquad
+ B\subset\overline{B\setminus A}.
+\]
+Let $E_0$ be an actual ordered SNC boundary. Define the unchanged
+auxiliary datum
+$M=(X,X,E_0,\mathcal I_A+\mathcal I_B,1)$.
+All sums and vanishing ideals below are their independently defined
+original functional ideals. No separator or future history is input.
+
+\begin{lemma}[The intrinsic sum datum is the exact whole smooth pullback]
+\label{hir:original-canonical-sum-intrinsic-source-record}
+\lean{Hironaka.HironakaOriginalCanonicalSumSeparation.sumMarkedIdeal,Hironaka.HironakaOriginalCanonicalSumSeparation.isInvDomain_sumMarkedIdeal,Hironaka.HironakaOriginalCanonicalSumSeparation.pullback_sumMarkedIdeal_eq}
+\uses{hir:actual-singular-vanishing-ideal-pullback-submersion,hir:submersion-relative-ideal-sums}
+\leanok
+For every genuine submersion $b:Y^m\to X^n$, the actual entire pulled
+record $b^*M$ is literally
+\[
+ N=(Y,Y,b^{-1}E_0,\mathcal I_{b^{-1}A}+\mathcal I_{b^{-1}B},1),
+\]
+retaining every original ordered boundary position. The source subsets
+and source ideal are intrinsic, and no source compactness is assumed.
+The stated original analytic, empty-interior and SNC hypotheses internally
+make $M$ an actual invariant-domain datum.
+\end{lemma}
+\begin{proof}
+The actual ambient preimage of $X$ is $Y$ and the marking stays one.
+The ordered boundary is the literal inverse-image list by the original
+marked pullback definition. Analyticity of $A,B$ gives coherence of both
+original vanishing ideals. The proved whole sum-pullback identity
+therefore writes the actual pulled ideal as the sum of their two actual
+pullbacks. Genuine singular-submersion vanishing-ideal equality identifies
+these with the independently defined whole source vanishing ideals of
+$b^{-1}A$ and $b^{-1}B$. Equality of every original record field proves
+the literal entire marked-record equality.
+For the last assertion, Cartan coherence gives coherence of the sum.
+The empty interior of $A$ makes its vanishing ideal nonzero along every
+point, and inclusion in the sum preserves this property. Together with
+the stated SNC boundary, these are exactly the ambient invariant-domain
+conditions for marking one.
+\end{proof}
+
+\begin{theorem}[Original analytic geometry internally selects a true canonical separator]
+\label{hir:original-canonical-sum-selected-terminal-separator}
+\lean{Hironaka.HironakaOriginalCanonicalSumSeparation.exists_canonical_sum_separation}
+\uses{hir:separation,hir:original-canonical-boundary-principalization-compact-cosupport}
+\leanok
+The original data internally produce an actual manifold $D$, a literal
+finite tower $T:X\leftarrow D$, and its whole ordered boundary
+$E_T=(M_T).E$, such that $T$ is a genuine canonical terminal resolution
+of the same auxiliary sum datum for the actual
+$\operatorname{canonicalInvariant}(n)$. Its centres lie over $A\cap B$,
+it is admissible relative to $E_0$, $E_T$ is SNC, and
+\[
+ T^*(\mathcal I_A+\mathcal I_B)=\mathcal O(-D_T),\qquad
+ |D_T|=T^{-1}(A\cap B),\qquad A_T\cap B_T=\varnothing.
+\]
+Here $D_T$ is the actual total exceptional divisor and $A_T,B_T$ are
+the whole original geometric strict transforms. The same selected map
+is proper, surjective, holomorphic and an isomorphism off $A\cap B$.
+The choice of $T$ precedes every smooth source in the next theorem.
+\end{theorem}
+\begin{proof}
+Cartan coherence and the original sum construction make
+$J=\mathcal I_A+\mathcal I_B$ coherent. Empty interior of the original
+analytic $A$ makes its vanishing ideal nonzero along every point; its
+inclusion in $J$ gives the same property for $J$. Its whole zero locus
+is exactly $A\cap B$. Thus the genuine compact-cosupport canonical
+driver applies to the unchanged original marked sum datum, with its
+SNC boundary and positive marking one. Choose the actual finite terminal
+tower it supplies, before choosing any smooth source.
+
+Actual canonical testness makes every centre admissible and confines its
+image to the original cosupport $A\cap B$. The genuine terminal
+principalization identity gives $T^*J=\mathcal O(-D_T)$; the actual zero
+locus pullback formula gives $|D_T|=T^{-1}(A\cap B)$. The accumulated
+whole boundary is SNC by true marked-transform geometry. The genuine
+separation lemma now applies to these actual principal ideal and support
+identities and the two stated original density conditions. It makes the
+whole conventional strict transforms $A_T,B_T$ disjoint. Finite actual
+blowup towers are holomorphic, proper and surjective. Their actual
+exceptional locus lies in $|D_T|$, so the same selected map is an
+isomorphism over the complement of $A\cap B$. No separation tower,
+principal ideal equality or terminal certificate was assumed.
+\end{proof}
+
+\begin{theorem}[Every genuine smooth source retains that same selected separator and whole geometry]
+\label{hir:original-canonical-sum-same-separator-smooth-square}
+\lean{Hironaka.HironakaOriginalCanonicalSumSeparation.exists_canonical_sum_separation}
+\uses{hir:original-canonical-sum-intrinsic-source-record,hir:original-canonical-sum-selected-terminal-separator,hir:original-canonical-boundary-principalization-smooth,hir:original-stopped-strict-transform-smooth-square}
+\leanok
+For the very $D,T$ chosen above, \emph{every} genuine submersion
+$b:Y^m\to X^n$ internally produces an actual finite tower $Q:Y\leftarrow C$
+and actual upper submersion $g:C\to D$. Their square is genuinely
+holomorphic Cartesian, $Tg=bQ$, and their literal lengths agree,
+including every empty pulled centre. The source tower is canonical and
+terminal for the intrinsic original sum datum $N$ above, using the
+actual $\operatorname{canonicalInvariant}(m)$. It is admissible with
+centres over $b^{-1}(A\cap B)$, its \emph{entire unfiltered} boundary
+satisfies
+\[
+ E_Q=g^{-1}E_T,
+\]
+and is SNC. Its total pullback of the whole intrinsic source sum ideal
+is its actual total exceptional divisor ideal. Its whole strict sets
+satisfy
+\[
+ (b^{-1}A)_Q=g^{-1}A_T,\qquad (b^{-1}B)_Q=g^{-1}B_T,
+\]
+and are disjoint. The source projection is holomorphic, proper,
+surjective and an isomorphism off $b^{-1}(A\cap B)$. No source
+compactness, source resolving tower or comparison certificate is input.
+\end{theorem}
+\begin{proof}
+Apply genuine stepwise smooth Cartesian blowup construction to the same
+selected actual $T$ and original $b$. It internally produces $Q,g$,
+including every empty inverse-image centre, with the actual universal
+property, submersion property, commuting projections and equal lengths.
+The existing actual ambient canonical comparison makes this same source
+history canonical for its original marked pullback. Actual whole marked
+transform comparison and target terminality make it terminal. The first
+lemma identifies this whole pulled source record with the literal
+intrinsic sum datum $N$. The same actual whole-transform equality gives
+$E_Q=E_T.\mathrm{map}(g^{-1})$, with no deletion or reindexing of empty
+or repeated old entries. Source canonical testness gives genuine SNC and
+admissibility. The whole zero-locus pullback formula identifies the
+source cosupport with $b^{-1}(A\cap B)$; actual canonical testness then
+confines every source centre over this original source set.
+Source terminal principalization gives the displayed
+whole intrinsic source sum-ideal equation. Properness, surjectivity and
+holomorphy follow from the actual source blowups; confinement of the
+actual exceptional locus gives the claimed source isomorphism.
+
+Put $O=X\setminus(A\cap B)$. Every actual target centre avoids this
+original open by its just-proved confinement. The original density
+conditions imply $A\subset\overline{A\cap O}$ and
+$B\subset\overline{B\cap O}$. The genuine preserved-open strict-transform
+formula writes each target strict set as the closure of its actual
+preimage on $O$. Actual submersions are continuous and open, so inverse
+image commutes with these closures. Apply the actual Cartesian strict-set
+theorem to this same $T,Q,g,O$ to obtain both asserted \emph{whole}
+strict-transform equalities, including exceptional points. Their
+intersection is empty because $A_T,B_T$ are disjoint. All source data
+were constructed after fixing the same target witness, so the target
+map has not been replaced for a different smooth source.
+\end{proof}
+
+This is a canonical functorial separation stage for finite mixed-dimension
+recursion. Its auxiliary sum history is canonical; no assertion requires
+its eventual composite with head resolution and tail recursion to be one
+canonical history of the vanishing ideal of the entire mixed-dimensional
+set. That finite ordered recursion remains a separate construction.

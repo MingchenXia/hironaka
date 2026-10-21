@@ -1,0 +1,62 @@
+/-- **The normal derivatives through a monomial chart, on the manifolds.**  Let `c''` be a flat chart at `π z`,
+`W` coordinates near `z` with `c''.ψ ∘ π = σⱼ ∘ W` on an open `O ∋ z`, and `c'` a flat chart at `z` with
+`c'.ψ = W - W z` near `z`.  If `g ∘ π = Wⱼ^d · h'` near `z`, then for normal directions `L` (`l ≠ j`, `k_C ≤ l`)
+`Wⱼ^d · ∂^L h' = Wⱼ^{|L|} · (∂^L g) ∘ π` near `z`. -/
+theorem nd_monomial_identity {π : Z → Y} (hπ : Continuous π) {z : Z} {S : Set Y} {S'' : Set Z}
+    {k'' k' kC : ℕ} (c'' : FlatChart n S (π z) k'') (c' : FlatChart n S'' z k') {W : Z → ComplexModel n}
+    {O : Set Z} (hO : IsOpen O) (hzO : z ∈ O) {j : Fin n}
+    (hWeq : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z')) (hc' : c'.ψ =ᶠ[𝓝 z] fun y => W y - W z)
+    {d : ℕ} {g : Y → ℂ} {h' : Z → ℂ} (hg : HolomorphicAt n g (π z)) (hh' : HolomorphicAt n h' z)
+    (hrel : ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ d * h' y) (L : List (Fin n)) (hL : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1) :
+    ∀ᶠ z' in 𝓝 z, W z' j ^ d * c'.nd L h' z' = W z' j ^ L.length * c''.nd L g (π z') := by
+  have hσc : Continuous (monomial (n := n) kC j) := (contDiff_monomial kC j).continuous
+  have hσd : Differentiable ℂ (monomial (n := n) kC j) := (contDiff_monomial kC j).differentiable (by simp)
+  have hσa : monomial kC j (W z) = 0 := by rw [← hWeq z hzO]; exact c''.ψ_self
+  obtain ⟨r₁, hr₁, hball₁⟩ := Metric.eventually_nhds_iff_ball.mp (c''.eventually_differentiableAt_comp_inv hg)
+  have hG₀ : DifferentiableOn ℂ (fun w => g (c''.inv w)) (ball 0 r₁) := fun w hw =>
+    (hball₁ w hw).differentiableWithinAt
+  obtain ⟨r₀, hr₀, hball₀⟩ := Metric.eventually_nhds_iff_ball.mp (c'.eventually_differentiableAt_comp_inv hh')
+  have hH : DifferentiableOn ℂ (fun u => h' (c'.inv u)) (ball 0 r₀) := fun u hu =>
+    (hball₀ u hu).differentiableWithinAt
+  obtain ⟨U, hU⟩ : ∃ U : Set (ComplexModel n), U = monomial kC j ⁻¹' ball 0 r₁ := ⟨_, rfl⟩
+  have hUo : IsOpen U := hU ▸ isOpen_ball.preimage hσc
+  have hUσ : MapsTo (monomial (n := n) kC j) U (ball 0 r₁) := fun w hw => by rw [hU] at hw; exact hw
+  have hGσ : DifferentiableOn ℂ (fun w => g (c''.inv (monomial kC j w))) U := fun w hw =>
+    (((hG₀ _ (hUσ hw)).differentiableAt (isOpen_ball.mem_nhds (hUσ hw))).comp w (hσd w)).differentiableWithinAt
+  have hW'inv := FlatChart.eventually_map_inv c' hc'
+  have hinv : Tendsto c'.inv (𝓝 (0 : ComplexModel n)) (𝓝 z) := c'.tendsto_inv
+  have hπinv : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=
+    (hπ.tendsto z).comp hinv
+  have hid : (fun u => (u + W z) j ^ d * h' (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)]
+      fun u => g (c''.inv (monomial kC j (u + W z))) := by
+    filter_upwards [hW'inv, hinv.eventually (hO.mem_nhds hzO), hinv.eventually hrel,
+      hπinv.eventually c''.eventually_inv_ψ] with u hu huO hurel huinv
+    have hu' : W (c'.inv u) - W z = u := hu
+    have hWu : W (c'.inv u) = u + W z := sub_eq_iff_eq_add.mp hu'
+    rw [← hWu, ← hurel, ← hWeq _ huO, huinv]
+  have hI := iterDeriv_congr_of_eventuallyEq hid (L.map bv)
+  have ht : Tendsto c'.ψ (𝓝 z) (𝓝 (0 : ComplexModel n)) := c'.tendsto_ψ
+  have hshift : ∀ᶠ z' in 𝓝 z, c'.ψ z' + W z ∈ U := by
+    have hcont : ContinuousAt (fun u : ComplexModel n => u + W z) 0 := (continuous_add_const (W z)).continuousAt
+    have h0 : (0 : ComplexModel n) + W z ∈ U := by
+      rw [hU, Set.mem_preimage, zero_add, hσa]; exact mem_ball_self hr₁
+    exact ht.eventually (hcont.eventually (hUo.mem_nhds h0))
+  have hLj : ∀ l ∈ L, ∀ (w : ComplexModel n) (t : ℂ), (fun u : ComplexModel n => (u + W z) j ^ d) (w + t • bv l) =
+      (fun u : ComplexModel n => (u + W z) j ^ d) w := fun l hl w t => by
+    have hjl : j ≠ l := Ne.symm (hL l hl).1
+    simp [bv, hjl]
+  have hcd : Differentiable ℂ (fun u : ComplexModel n => (u + W z) j ^ d) := fun u =>
+    (((EuclideanSpace.proj j : ComplexModel n →L[ℂ] ℂ).differentiableAt).comp u
+      (differentiableAt_id.add_const (W z))).pow d
+  filter_upwards [ht.eventually hI, ht.eventually (isOpen_ball.mem_nhds (mem_ball_self hr₀)), hshift, hc',
+    hO.mem_nhds hzO] with z' h1 h2 h3 h4 hz'O
+  have hlhs := iterDeriv_mul_of_const isOpen_ball hcd hH L hLj (c'.ψ z') h2
+  have hrhs1 := iterDeriv_comp_add hUo hGσ (W z) L h3
+  have hrhs2 := iterDeriv_comp_monomial (G := fun w => g (c''.inv w)) hUo isOpen_ball hUσ hG₀ L hL
+    (c'.ψ z' + W z) h3
+  have h4' : c'.ψ z' = W z' - W z := h4
+  have hWz' : c'.ψ z' + W z = W z' := by rw [h4']; abel
+  simp only [FlatChart.nd]
+  rw [hlhs, hrhs1, hrhs2, hWz'] at h1
+  rw [hWeq z' hz'O]
+  simpa [hWz'] using h1

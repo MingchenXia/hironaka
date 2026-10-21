@@ -1,0 +1,43 @@
+\section{The genuine differential prolongation is holomorphic on every fixed true jet}
+
+\begin{theorem}[Actual all-direction fixed-true-jet holomorphic evaluation]
+\label{hir:actual-dual-jet-prolongation-holomorphic-fixed-true-jet}
+\uses{hir:actual-dual-jet-differential-prolongation,hir:actual-centre-projected-dual-row-first-derivatives-holomorphic}
+\lean{Hironaka.HironakaActualDualJetProlongationHolomorphic.actualDualJetProlongation_holomorphic_fixed_jet}
+\leanok
+Fix one actual open $V\subset\mathbb C^d$, an original order $q$,
+one actual row family $\eta_r(c)$ and one tangent direction $a$.
+Suppose the original scalar coefficient functions $\eta_r$ and their
+actual directional derivative functions
+$c\mapsto D\eta_r(c)(a)$ are holomorphic on that same $V$.
+For every fixed genuine original next-order jet
+$v\in\operatorname{range}(\operatorname{finiteJet}_{q+1})$,
+the actual function
+\[
+ c\longmapsto(\nabla_a\eta)_c(v)
+\]
+is holomorphic on the same $V$. The original functions/domain are
+fixed before every point and fixed jet. In particular, the actual
+projected rows from an original HS-constant centre satisfy these
+hypotheses on their genuine per-order tangent opens. There is no
+surjectivity assumption onto the full multilinear-map product.
+\end{theorem}
+\begin{proof}
+Use the defining expression of the genuine prolongation on the same
+original next-order jet product. At each original row $r$, the two
+multilinear evaluations
+$v_{|r|}(v_r)$ and $v_{|r|+1}(Ta,v_r)$ are fixed complex scalars,
+because $v$, $a$ and the original direction tuple are fixed.
+The corresponding actual scalar function is therefore the sum of
+$D\eta_r(c)(a)$ times the first fixed scalar and $\eta_r(c)$ times
+the second fixed scalar. Each is holomorphic by the given actual
+coefficient and derivative-function hypotheses and the ordinary
+product/addition rules. The original row set is finite, so its true
+finite sum is holomorphic on that same domain. This sum is exactly
+the original constructed prolongation evaluated at the same actual
+jet $v$. The case $q=0$ is the genuine empty sum and is included.
+No independence of redundant word evaluations and no full-product
+jet realization is used. The accepted projected-row theorem provides
+both holomorphic-function hypotheses on each genuine original
+centre domain, chosen before its point quantifier.
+\end{proof}

@@ -1,0 +1,49 @@
+/-- **Włodarczyk `le:S` (2), the inclusion `⊆`** (GGT Proposition 5.6.4 (2)): along a multiple test blow-up `T` of
+`𝔪 = (X, X, E, 𝔞, μ)` with centres in the strict transforms of a closed submanifold `S`,
+`supp[𝓒(𝔪)|_S]_T ⊆ supp(𝔪_T)`. -/
+theorem cosupp_coeff_withN_tower_subset (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :
+    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp ⊆ (geoTransformAlong 𝔪 T).cosupp := by
+  intro x hx
+  obtain ⟨-, hRE, -⟩ := coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS
+  obtain ⟨-, hNT, -, hST, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT hTS
+  have hfam := isAmbientFamily_derivMarked hN h𝔞
+  have hall : ∀ i < 𝔪.d, IsGeoTestTower (derivMarked 𝔪 i) T :=
+    fun i hi => (inclusions_tower 𝔪 hN h𝔞 (le_of_lt hi) T hT).1
+  obtain ⟨-, hmsum⟩ := geoTransformAlong_msum (fun i => derivMarked 𝔪 i) hd hfam T
+  obtain ⟨he, hfamT⟩ := hmsum hall
+  -- `x` is in the cosupport of `𝓒(𝔪)_T` along `S_T`
+  have hx1 : x ∈ cosupport n (strictAlong T S) (geoTransformAlong (coeffMarked 𝔪) T).ideal (coeffMarked 𝔪).d := by
+    rw [hRE.cosupp_eq] at hx
+    have := hx
+    rwa [cosupp_withN, d_geoTransformAlong] at this
+  have hxS : x ∈ strictAlong T S := hx1.1
+  -- hence every `[𝓓^i 𝔪]_T` has order `≥ μ - i` along `S_T` at `x`
+  have hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal x (𝔪.d - i) := by
+    intro i hi
+    have hx2 := hx1
+    rw [show (geoTransformAlong (coeffMarked 𝔪) T) = msum (fun i => geoTransformAlong (derivMarked 𝔪 i) T) 𝔪.d
+      from he] at hx2
+    have hJ : ∀ i < 𝔪.d, ∀ y g, (idealPow (geoTransformAlong (derivMarked 𝔪 i) T).ideal
+        (sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) 𝔪.d i)).mem y g → HolomorphicAt n g y :=
+      fun _ _ _ _ hg => holomorphicAt_of_mem_idealPow hg
+    have hmark : (coeffMarked 𝔪).d = (Finset.range 𝔪.d).prod fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d := by
+      simp only [d_geoTransformAlong]; rfl
+    rw [hmark] at hx2
+    have hx3 := ((mem_cosupport_finSumIdeal hJ).mp hx2).2 i hi
+    have hD1 : ∀ j < 𝔪.d, 1 ≤ (geoTransformAlong (derivMarked 𝔪 j) T).d := fun j hj => by
+      rw [d_geoTransformAlong, derivMarked_d]; omega
+    have hpow := MarkedIdealOperationsAlong.cosupport_idealPow_mul_eq_along hST.2
+      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent (hfamT.coh i hi)) (one_le_sumExp hD1 i)
+      (geoTransformAlong (derivMarked 𝔪 i) T).d
+    rw [mul_sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) hi] at hpow
+    rw [hpow, d_geoTransformAlong, derivMarked_d] at hx3
+    exact hx3.2
+  -- the invariant gives the order of `𝔪_T`
+  have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT hTS x hxS
+  have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=
+    (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT).2.2.2.2.1
+  have hord := hgood.orderGE 𝔪 S hcohT hD
+  rw [MarkedIdeal.cosupp, hNT, d_geoTransformAlong]
+  exact ⟨mem_univ x, fun f hf => ⟨f, hord f hf, Eventually.of_forall fun _ _ => rfl⟩⟩

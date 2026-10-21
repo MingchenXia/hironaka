@@ -1,0 +1,88 @@
+\section{The actual intrinsic regular locus is open and dense}
+
+For an actual locally ringed space $A$ over our actual complex point, call
+$x$ intrinsically regular of dimension $d$ if an actual native holomorphic
+manifold on a coordinate open in $\mathbf C^d$ admits a genuine open
+immersion into $A$, over that same complex point, whose actual image
+contains $x$. This definition contains only the usual local manifold
+structure; it includes no resolution tower or desired regularity equality.
+Write $A_{\mathrm{reg}}$ for the union over all $d$ of these actual loci.
+
+\begin{theorem}[The intrinsic predicate is the original embedded regularity]
+\label{hir:intrinsic-complex-analytic-regularity-original-dictionary}
+\uses{hir:actual-intrinsic-manifold-chart-original-regularity,hir:actual-analytic-subspace-regular-native-manifold-chart}
+\lean{Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.intrinsicRegularAtDim,Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.intrinsicRegularLocus,Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.intrinsicRegularAtDim_model_iff}
+\leanok
+For every original subset $C\subset U\subset\mathbf C^n$, every actual
+$x\in C$, and every dimension $d$, intrinsic regularity of its constructed
+quotient model at $x$ is equivalent to the existing original
+$\operatorname{RegularAtDim}(C,x,d)$. No analyticity or coherence is needed
+for this local equivalence.
+\end{theorem}
+\begin{proof}
+An intrinsic regularity witness is an actual over-point native manifold
+open chart. Choose its actual source point over $x$ and apply the genuine
+native-chart-to-original-regularity theorem. Its conclusion concerns the
+same original subset $C$; the actual equality of image points identifies
+it with $x$. Conversely original regularity includes the genuine inequality
+$d\le n$. Write $n=d+t$ and use the original-regularity-to-native-chart
+construction. It internally constructs a genuine native manifold open chart,
+its structural triangle, and an actual preimage of $x$. These are precisely
+the intrinsic predicate witnesses. Neither implication assumes the other
+regularity assertion as a certificate.
+\end{proof}
+
+\begin{theorem}[The actual intrinsic regular locus is open]
+\label{hir:intrinsic-complex-analytic-regular-locus-open}
+\uses{hir:intrinsic-complex-analytic-regularity-original-dictionary}
+\lean{Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.isOpen_intrinsicRegularAtDim,Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.isOpen_intrinsicRegularLocus,Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.intrinsicSingularLocus,Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.isClosed_intrinsicSingularLocus}
+\leanok
+On every actual locally ringed space over the complex point, the intrinsic
+regular locus of each fixed dimension is open. Its union
+$A_{\mathrm{reg}}$ is therefore open. In particular its complement is
+an actual closed singular locus on every constructed abstract reduced
+complex analytic space.
+\end{theorem}
+\begin{proof}
+Choose an intrinsic chart witnessing regularity at a point. Its actual
+base map is an open embedding, so its whole image is an open neighbourhood
+of that point. The very same chart witnesses regularity at every point
+of this whole image: simply retain each actual source preimage. Thus every
+point of the fixed-dimension locus has an actual open neighbourhood
+contained in it. This proves openness. For the union over dimensions,
+retain the dimension of a witness at the given point and use its same
+open neighbourhood. The complement of an open set is closed.
+\end{proof}
+
+\begin{theorem}[Every actual abstract analytic space has a dense intrinsic regular locus]
+\label{hir:intrinsic-complex-analytic-regular-locus-dense}
+\uses{hir:intrinsic-complex-analytic-regularity-original-dictionary,hir:intrinsic-complex-analytic-regular-locus-open,hir:reduced-analytic-space-category,lag:regular-locus-dense}
+\lean{Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.exists_intrinsicRegularAtDim_mem_nhds,Hironaka.HironakaIntrinsicComplexAnalyticRegularLocus.dense_intrinsicRegularLocus}
+\leanok
+For every actual object $A$ of the constructed reduced complex analytic
+category, every actual neighbourhood of every point contains an intrinsic
+regular point of some dimension. Consequently $A_{\mathrm{reg}}$ is dense.
+The actual analytic atlas is the ordinary input; no local or global
+resolution data are supplied.
+\end{theorem}
+\begin{proof}
+Choose an actual analytic model chart covering the given point and a true
+source point over it. Continuity pulls the given neighbourhood back to
+a genuine neighbourhood of this source point in the actual analytic subset.
+Choose an actual open subset of that neighbourhood. Subtype topology
+writes it as the inverse image of a true open in its original ambient
+coordinate manifold. Original density of regular points for the genuine
+analytic subset supplies an original regular point in this ambient open.
+The first theorem gives a genuine over-point native manifold chart there.
+Compose that actual open immersion with the chosen analytic model chart.
+Composition of open immersions is an open immersion, and the two genuine
+structural triangles compose over the same complex point. The chosen
+actual source preimage proves that the resulting native manifold chart
+covers the actual image point. The original neighbourhood pullback puts
+this image point in the initially prescribed neighbourhood. Thus every
+neighbourhood meets $A_{\mathrm{reg}}$, exactly its density.
+\end{proof}
+
+This identifies the actual regular and singular loci needed for a future
+intrinsic resolution contract. Constructing resolution towers and proving
+their descent and termination remain distinct geometric tasks.

@@ -1,0 +1,79 @@
+\section{The genuine graded quotient after strict parameter elimination}
+
+Let $R$ be a commutative ring, $I,N$ ideals, and $v\in N$. Write
+$D_q(I)=\operatorname{im}(N^q\to R/(I+N^{q+1}))$. These are the actual
+power-image layers, with their inherited $R$-module structures. Throughout
+$I$ and $N$ are unchanged entire ideals. Suppose, for every $q\geq0$,
+$b\in N^q$ and $vb\in I+N^{q+2}$ imply $b\in I+N^{q+1}$.
+
+\begin{theorem}[The canonical layer map is onto]
+\label{hir:strict-parameter-layer-map-surjective}
+\lean{Hironaka.HironakaStrictFilteredGradedQuotient.adicLayer,Hironaka.HironakaStrictFilteredGradedQuotient.adicLayerMap,Hironaka.HironakaStrictFilteredGradedQuotient.adicLayerMap_surjective}
+\leanok
+The original quotient factor defines a canonical surjective map
+$D_q(I)\to D_q(I+(v))$ in every degree. It sends each original numerator
+$b\in N^q$ to the class of that same $b$.
+\end{theorem}
+\begin{proof}
+The inclusion $I+N^{q+1}\subset I+(v)+N^{q+1}$ defines the quotient
+factor. Its image on a class represented by $b\in N^q$ lies in the
+claimed target image. Every target layer element has just such an
+original representative $b\in N^q$, and its old class is a preimage.
+Both maps use the original quotient scalar actions.
+\end{proof}
+
+\begin{theorem}[Actual multiplication gives the degree-one symbol map]
+\label{hir:strict-parameter-symbol-map}
+\lean{Hironaka.HironakaStrictFilteredGradedQuotient.adicSymbolMul,Hironaka.HironakaStrictFilteredGradedQuotient.adicSymbolMul_apply}
+\leanok
+Multiplication by the original element $v$ gives an $R$-linear map
+$D_q(I)\to D_{q+1}(I)$, sending each original numerator $b$ to $vb$.
+\end{theorem}
+\begin{proof}
+If $b-b'\in I+N^{q+1}$, multiplying by $v$ gives
+$v(b-b')\in I+N^{q+2}$, because $vI\subset I$ and
+$vN^{q+1}\subset N^{q+2}$. Thus multiplication descends from the entire
+quotient. For $b\in N^q$, its image $vb$ lies in $N^{q+1}$, so this
+descended map restricts to the claimed power-image layers. Multiplication
+by a fixed element of a commutative ring is $R$-linear.
+\end{proof}
+
+\begin{theorem}[The entire positive-degree kernel is the actual symbol image]
+\label{hir:strict-parameter-whole-layer-kernel}
+\uses{hir:strict-parameter-layer-map-surjective,hir:strict-parameter-symbol-map,hir:regular-symbol-whole-principal-intersection}
+\lean{Hironaka.HironakaStrictFilteredGradedQuotient.ker_adicLayerMap_eq_range_adicSymbolMul,Hironaka.HironakaStrictFilteredGradedQuotient.adicLayerQuotientEquiv,Hironaka.HironakaStrictFilteredGradedQuotient.adicLayerQuotientEquiv_apply}
+\leanok
+In every degree $q+1$, the kernel of the canonical map to
+$D_{q+1}(I+(v))$ is exactly the image of
+$v:D_q(I)\to D_{q+1}(I)$. Consequently the quotient by this entire image
+is canonically $R$-linearly isomorphic to $D_{q+1}(I+(v))$.
+\end{theorem}
+\begin{proof}
+Take a kernel element represented by $b\in N^{q+1}$. Its vanishing in
+the target means $b=i+va+c$ with $i\in I$ and $c\in N^{q+2}$.
+Thus $b-c$ belongs to both $I+N^{q+1}$ and $I+(v)$. The strict
+intersection theorem gives $b-c=j+vh$ with $j\in I$ and $h\in N^q$.
+Modulo $I+N^{q+2}$ the entire old class of $b$ is therefore the image
+of the old degree-$q$ class of $h$ under actual multiplication by $v$.
+Conversely each such image is killed by the quotient imposing $v$.
+This proves equality of the whole kernel and image. The first
+isomorphism theorem and the proved surjectivity give the stated
+quotient equivalence, using the actual map and unchanged scalar action.
+No separatedness is required.
+\end{proof}
+
+\begin{theorem}[Degree zero is unchanged]
+\label{hir:strict-parameter-degree-zero}
+\lean{Hironaka.HironakaStrictFilteredGradedQuotient.adicLayer_zero_denominator,Hironaka.HironakaStrictFilteredGradedQuotient.adicLayerMap_zero_injective}
+\leanok
+The degree-zero denominators agree: $I+(v)+N=I+N$.
+\end{theorem}
+\begin{proof}
+Since $v\in N$, the entire principal ideal $(v)$ is contained in $N$.
+Both inclusions now follow by associativity of ideal sums. If two degree-zero source classes have equal images, their original
+numerator difference belongs to the target denominator, hence to the
+same old denominator by the displayed equality. The canonical map is
+therefore injective and, by the first theorem, surjective. Thus degree
+zero agrees under the canonical quotient factor, as required alongside
+the positive-degree quotient equivalences.
+\end{proof}

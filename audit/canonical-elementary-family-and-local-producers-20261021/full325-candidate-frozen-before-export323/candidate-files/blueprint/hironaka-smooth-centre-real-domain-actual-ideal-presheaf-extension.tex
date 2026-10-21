@@ -1,0 +1,135 @@
+\section{Actual ideal section presheaves and their whole colimit stalks}
+
+Keep the literal complex structure sheaf and the entire original germ
+membership ideal. On an actual open, take ALL sections whose actual germ
+at EVERY included point lies in the original whole ideal there. This gives
+the actual ideal section presheaf, independently of a chosen local finite
+family. Coherence is used to prove the whole stalk comparison, rather than
+supplied as an ideal-stalk or generation certificate.
+
+\begin{lemma}[Original coherent membership spreads on true original opens]
+\label{hir:real-domain-actual-original-coherent-membership-spread}
+\source{bierstone-milman08-functoriality}
+\uses{hir:actual-coherent-whole-point-quotient-column-dictionary}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.coherent_original_membership_eventually,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.coherent_original_membership_exists_open}
+\leanok
+If the original ideal $A$ is coherent and $A_y$ contains the original
+function germ $f$, there is a true original open neighbourhood $V$ of $y$
+on which $A_z$ contains the SAME original function $f$ at EVERY $z\in V$.
+\end{lemma}
+\begin{proof}
+Use the original finite presentation on an actual open $W$ containing $y$.
+Membership of $f$ at $y$ gives a finite holomorphic combination of that
+presentation, equal to $f$ on a genuine neighbourhood of $y$. Choose an
+open $V\subseteq W$ on which this equality holds and on which $f$ and all
+finitely many coefficients are holomorphic. At each $z\in V$ the SAME
+coefficients and finite family give the original local presentation of
+$f$: the identity holds on the open $V$, hence near $z$. The original
+presentation at $z$ therefore gives $A_z$ membership. No extension away
+from this real open or global finite presentation is used.
+\end{proof}
+
+\begin{definition}[The actual ideal section presheaf]
+\label{hir:real-domain-actual-ideal-section-presheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-complex-sheaf-original-section-germs,hir:real-domain-actual-complex-sheaf-stalk-whole-original-ideals}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualSectionIdeal,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualSectionIdeal_restrict,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionRestrict,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionStalk,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionGermHom,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionGermCocone,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealStalkToWholeHom,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealStalkToWholeHom_germ}
+\leanok
+For every actual open $V$, the ideal section module consists of ALL
+literal complex structure-sheaf sections $s$ with $\operatorname{germ}_z(s)$
+in the whole original ideal at EVERY $z\in V$. Actual open restrictions
+make these modules a genuine additive ideal section presheaf. Each actual
+section germ maps to its SAME original whole ideal germ, and these maps
+form a cocone on the actual neighbourhood diagram at every original point.
+\end{definition}
+\begin{proof}
+The section ideal is the intersection, over all $z\in V$, of the inverse
+images of the original whole stalk ideal under the actual section-to-stalk
+ring homomorphism. Hence it is an ideal, with the literal section ring
+operations. For $V\subseteq W$, the actual structure-sheaf germ identity
+identifies the germ of a restricted section at each $z\in V$ with its
+original germ on $W$. Thus restriction preserves this section ideal.
+Restriction identity and composition are inherited from the literal
+structure sheaf on all section values, so they define the stated additive
+presheaf. At a neighbourhood containing $y$, its actual section-to-stalk
+map lands in the whole original ideal at $y$ by the defining pointwise
+condition. The actual restriction germ identity proves compatibility of
+all these maps, giving the genuine colimit cocone without any stalk map
+or ideal comparison as an input.
+\end{proof}
+
+\begin{theorem}[The actual ideal section colimit is the entire original stalk ideal]
+\label{hir:real-domain-actual-ideal-section-whole-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-original-coherent-membership-spread,hir:real-domain-actual-ideal-section-presheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealStalkToWholeHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.sectionExtension_restrict_eventuallyEq,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.exists_actual_ideal_section_of_original_member,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionGermImage,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealSectionGermImage_eq_whole,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualIdealStalkWholeEquiv_germ}
+\leanok
+Original coherence internally gives a genuine additive equivalence from
+the literal colimit stalk of the actual ideal section presheaf to the
+ENTIRE original ideal in the literal structure-sheaf stalk. Its value on
+EVERY actual ideal section germ is its original structure-sheaf germ.
+No whole-ideal, stalk-injectivity, representative or generation certificate
+is a caller premise.
+\end{theorem}
+\begin{proof}
+The preceding cocone gives the actual colimit homomorphism. For injectivity
+represent each actual ideal presheaf stalk element by a true ideal section.
+Equality of their images gives equality of original structure-sheaf germs.
+The actual filtered neighbourhood colimit equality gives a true common
+original neighbourhood on which both structure-sheaf restrictions are
+literally equal. Their ideal subtype restrictions are therefore equal on
+that SAME actual open containing the point. The actual ideal presheaf
+colimit restriction identity gives the original ideal-presheaf stalk equality.
+
+For surjectivity first treat a generator of the entire original stalk
+ideal: it is the actual germ of an original membership function $f$.
+The first lemma spreads membership of the SAME $f$ to a true neighbourhood,
+and the literal structure-sheaf producer represents $f$ by an actual section.
+Shrink to the common open where that section extension equals $f$. At
+EVERY point of this open its actual germ is an original membership germ,
+so it is an actual ideal section with the prescribed germ. Now the set
+of such genuine ideal-section germs is an ideal in the actual ring stalk.
+Zero is represented by the zero section. To add two represented elements,
+restrict both actual sections to their true open intersection and add.
+To multiply a represented element by an arbitrary ring stalk element,
+represent the latter by an actual structure-sheaf section, restrict to
+the common open and multiply; the pointwise ideal property retains
+membership. Thus ideal-span induction gives EVERY element of the entire
+original ideal a true ideal-section germ preimage. This proves bijectivity
+and the stated whole equivalence, retaining all representative formulas.
+It does not yet identify quotient layers, the whole normal-cone sheaf,
+or its scalar-action stalks; those remain subsequent comparisons.
+\end{proof}
+
+
+\begin{theorem}[The actual centre vanishing ideal has the same entire ideal-presheaf stalk]
+\label{hir:real-domain-actual-centre-ideal-section-whole-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-ideal-section-presheaf,hir:real-domain-actual-ideal-section-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.vanishing_original_membership_eventually,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualCentreIdealSectionGermImage_eq_whole,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualCentreIdealStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualCentreIdealStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualIdealPresheaf.actualCentreIdealStalkWholeEquiv_germ}
+\leanok
+For EVERY original subset $C$ and original point $y$, the actual additive
+colimit stalk of the ideal section presheaf of the original vanishing ideal
+is internally equivalent to its ENTIRE ideal in the literal complex
+structure-sheaf stalk. The equivalence retains EVERY actual centre ideal
+section germ. No global coherence, regularity or desired centre-stalk
+certificate is required.
+\end{theorem}
+\begin{proof}
+An original vanishing-ideal member $f$ at $y$ is holomorphic and vanishes
+on $C$ in a true neighbourhood of $y$. Shrink to an original open on
+which both properties hold. At EVERY point of that open the SAME $f$
+is holomorphic near the point and vanishes on $C$ near it. Thus original
+vanishing membership spreads on actual original points, irrespective of
+any global analytic property of $C$. The preceding whole colimit proof
+uses coherence only to obtain this membership spreading for each original
+generator. Use the just proved vanishing membership spreading instead:
+EVERY original vanishing generator has a genuine actual ideal section
+preimage, the actual common-open addition and scalar multiplication close
+these germs to an ideal, and entire span induction supplies surjectivity.
+Injectivity uses only literal actual colimit equality and common open
+restrictions, independently of coherence. This internally proves the
+same entire additive stalk equivalence and all representative formulas
+for the actual centre vanishing ideal, without a global coherence
+extension or a chosen coordinate-plane certificate.
+\end{proof}

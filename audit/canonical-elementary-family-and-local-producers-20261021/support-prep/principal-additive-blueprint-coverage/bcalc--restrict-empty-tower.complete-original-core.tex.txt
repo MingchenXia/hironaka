@@ -1,0 +1,20 @@
+\begin{lemma}[A restricted tower whose centres miss the open set is empty]
+\label{bcalc:restrict-empty-tower}
+\uses{hir:blowup-tower,hir:open-restriction-tower,hir:tower-split,hir:centre-function}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.RestrictEmptyTower.CentresAvoid,TranscendentalNakamaye.Pending.RestrictEmptyTower.CentresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_refl,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_refl,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_step_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_step_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.preimage_val_eq_empty_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_of_centresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_of_centresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_append_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_append_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_head,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_head,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_head}
+\leanok
+Let \(T\) be a tower over \(X\) with centres \(C_i\subset X_i\) and projections \(p_i\colon X_i\to X\), and \(U\subset X\) open. The restriction \(T|_U\)
+(Lemma~\ref{hir:open-restriction-tower}) has only empty centres if and only if \(C_i\cap p_i^{-1}(U)=\emptyset\) for every \(i\). In particular, if every
+\(C_i\) lies in \(p_i^{-1}(F)\) for a set \(F\) with \(U\cap F=\emptyset\), then \(T|_U\) has only empty centres. Both conditions pass to concatenations
+\(T=T_0T_1\) (for \(T_1\), with \(U\) and \(F\) replaced by their preimages in the last stage of \(T_0\)), hence to the head \(T_0\) of a split of \(T\)
+(Lemma~\ref{hir:tower-split}).
+\end{lemma}
+\begin{proof}
+\leanok
+The centres of \(T|_U\) are the traces \(C_i\cap p_i^{-1}(U)\) of the centres of \(T\) on the open preimages of \(U\) (Lemma~\ref{hir:open-restriction-tower});
+a trace on an open subset is empty iff the set misses it. If \(C_i\subset p_i^{-1}(F)\) and \(U\cap F=\emptyset\), a point of \(C_i\cap p_i^{-1}(U)\) would map into
+\(U\cap F\). For \(T_0T_1\) the centres are those of \(T_0\) followed by those of \(T_1\), and the projections of the stages of \(T_1\) to \(X\) are those to the
+last stage of \(T_0\) followed by \(p_{T_0}\) (Definition~\ref{hir:blowup-tower}). The head of a split followed by its tail is \(T\)
+(Lemma~\ref{hir:tower-split}).
+\end{proof}

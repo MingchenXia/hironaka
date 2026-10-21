@@ -1,0 +1,16 @@
+\begin{lemma}[Order from normal derivatives, in \(\mathbb C^n\)]
+\label{mc:normal-taylor-model}
+\uses{mc:taylor-tail,mc:normal-vanishing}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.NormalTaylorOrder.bv,TranscendentalNakamaye.Pending.NormalTaylorOrder.NormalIdx,TranscendentalNakamaye.Pending.NormalTaylorOrder.NormalIdx.mono,TranscendentalNakamaye.Pending.NormalTaylorOrder.NormalIdx.append,TranscendentalNakamaye.Pending.NormalTaylorOrder.normalIdx_replicate,TranscendentalNakamaye.Pending.NormalTaylorOrder.InNormalPow.mul_of_one,TranscendentalNakamaye.Pending.NormalTaylorOrder.InNormalPow.comp_killCoord,TranscendentalNakamaye.Pending.NormalTaylorOrder.killCoord_bv,TranscendentalNakamaye.Pending.NormalTaylorOrder.inNormalPow_of_normalDeriv_aux,TranscendentalNakamaye.Pending.NormalTaylorOrder.inNormalPow_of_normalDeriv,TranscendentalNakamaye.Pending.NormalTaylorOrder.inNormalPow_one_of_apply_eq_zero}
+\leanok
+Let \(F\) be holomorphic near \(0\in\mathbb C^n\). If for every list \(L\) of normal directions \(e_l\), \(l\ge k\), with \(|L|<\mu\), the derivative \(\partial^LF\)
+agrees on the plane \(\mathbb C^k\times0\) near \(0\) with a germ of \(\mathfrak m_0^{\mu-|L|}\), then \(F\in\mathfrak m_0^\mu\).
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on the number of normal coordinates. Expand in the first one, \(u_k\), with the holomorphic Taylor tail (Lemma~\ref{mc:taylor-tail}):
+\(F(u)=\sum_{j<\mu}(j!)^{-1}(\partial^j_{e_k}F)(\mathrm{pr}\,u)\,u_k^j+u_k^\mu G\), where \(\mathrm{pr}\) kills \(u_k\). The coefficient
+\((\partial^j_{e_k}F)\circ\mathrm{pr}\) satisfies the hypothesis for the plane \(\mathbb C^{k+1}\times0\) with \(\mu-j\) (derivatives commute with \(\mathrm{pr}\),
+which maps \(\mathbb C^{k+1}\times0\) into \(\mathbb C^k\times0\) and preserves \(\mathfrak m_0^m\)), so it lies in \(\mathfrak m_0^{\mu-j}\) by induction.
+\end{proof}

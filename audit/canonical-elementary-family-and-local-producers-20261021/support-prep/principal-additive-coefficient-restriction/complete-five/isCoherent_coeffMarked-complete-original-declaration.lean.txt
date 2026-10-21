@@ -1,0 +1,3 @@
+theorem isCoherent_coeffMarked {𝔪 : MarkedIdeal n X} (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) :
+    (coeffMarked 𝔪).ideal.IsCoherent :=
+  (isAmbientFamily_derivMarked hN h𝔞).isCoherent_msum

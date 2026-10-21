@@ -1,0 +1,100 @@
+\section{One actual polydisc for all canonical normal coefficient functions}
+
+\begin{theorem}[Original canonical generators give all coefficient functions on one true domain]
+\label{hir:actual-uniform-canonical-coefficient-functions}
+\uses{hir:actual-canonical-reduced-analytic-coefficient-data,hir:actual-original-finite-family-coefficient-radius,hir:actual-relative-coefficient-common-polydisc-functions,hir:actual-convergent-original-taylor-realization}
+\lean{Hironaka.HironakaActualUniformCanonicalCoefficients.exists_uniform_canonical_coefficient_data}
+\leanok
+For every original whole germ ideal $I$ in the actual coordinate blocks
+$(u,z)$, internally construct one actual analytic vertex coefficient datum
+$P$. Its original generators have exactly the canonical reduced Taylor
+series of the same whole formal extension and generate the same original
+ideal. Every coefficient function of this same datum is holomorphic on
+its single actual open neighbourhood of zero, before all normal labels.
+Each coefficient function of this chosen datum is the literal convergent evaluation of the
+corresponding relative coefficient of that same canonical reduced series.
+\end{theorem}
+\begin{proof}
+Choose the genuine original canonical analytic reduced family once.
+The finite-family original Taylor mass theorem, transported through the
+literal dimension equality $0+n=n$, supplies one positive uniform full
+radius for all unchanged generator series. The genuine coefficient mass
+slicing theorem supplies the same base radius for every relative normal
+coefficient of every generator. Evaluate these actual relative series
+in the original base coordinates. All of these functions are holomorphic
+on the same actual open base polydisc, which contains zero.
+
+The genuine inverse Taylor realization theorem, transported through that
+same dimension equality, proves that the original Taylor germ of each
+such actual evaluation is exactly its unchanged relative coefficient
+series. Thus the original coefficient Taylor identities hold for these
+chosen functions. Keep the actual original generators, whole-ideal
+generation, initial vertices and monicity. Use the same true base
+polydisc and these actual functions as the coefficient fields of $P$.
+Their actual holomorphy proves all required low-coefficient regularity,
+coherence of their genuine principal ideals, and membership of the
+actual function in its own ideal. This constructs the complete genuine
+datum and the stronger all-label common-domain assertion internally.
+\end{proof}
+
+\begin{theorem}[All whole-diagram coefficient identities hold as functions on one common domain]
+\label{hir:actual-uniform-canonical-diagram-function-identities}
+\uses{hir:actual-uniform-canonical-coefficient-functions,hir:actual-initial-tangent-stable-pure-normal-vertices,hir:actual-pure-normal-reduced-diagram-coefficients}
+\lean{Hironaka.HironakaActualUniformCanonicalCoefficients.exists_uniform_canonical_diagram_data}
+\leanok
+Suppose the same whole homogeneous initial ideal is stable under the
+actual tangent partial derivatives. One internally produced datum $P$
+retains the preceding exact canonical generator Taylor identities and
+all-label common-domain holomorphy and, simultaneously for every normal
+label $(0,\gamma)$ in its actual whole diagram and every actual point
+of its same domain,
+\[
+ P_{a,\gamma}(u)=
+ \begin{cases}1&\gamma=a_z,\\0&\gamma\ne a_z.\end{cases}
+\]
+No finite cutoff or label-dependent shrinking is needed.
+\end{theorem}
+\begin{proof}
+Construct the one actual datum by the preceding theorem. Genuine tangent
+initial stability makes every actual vertex pure normal. Upperness of
+the whole diagram and the genuine reduced coefficient formula identify
+the entire formal relative coefficient at every diagram label with its
+literal constant zero or one series. The actual coefficient function
+chosen above is exactly the convergent evaluation of that entire series.
+Evaluating the constant series gives the same constant at every point
+of the same domain. The radius and datum were chosen before every label,
+so the resulting function identities hold simultaneously. No infinitely
+many independent neighbourhood identities have been intersected.
+\end{proof}
+
+\begin{theorem}[Original constant-HS centre geometry gives uniform canonical analytic functions]
+\label{hir:actual-original-hs-centre-uniform-canonical-functions}
+\uses{hir:actual-uniform-canonical-diagram-function-identities,hir:actual-original-coupled-normal-free-initial-cylinder,hir:actual-original-centre-reduced-normal-powers}
+\lean{Hironaka.HironakaActualUniformCanonicalCoefficients.exists_original_hs_centre_uniform_canonical_data}
+\leanok
+An original regular centre, original coherent ideal, and all-order
+original Hilbert--Samuel constancy produce one actual flattening and
+one actual canonical coefficient datum there. All coefficient functions
+are holomorphic on one actual common base neighbourhood and all preceding
+whole-diagram identities hold there simultaneously as function identities.
+The same original canonical generators lie in their actual prescribed
+whole normal powers. The original chart source, origin and centre
+identities are retained. No chart, family, radius, coefficient-support
+or normal-power certificate is supplied.
+\end{theorem}
+\begin{proof}
+Invoke the genuine coupled original normal-data producer once. It fixes
+one actual original flattening and the same literal flattened origin
+ideal, with whole tangent initial stability and actual normal-layer
+freeness. Apply the preceding construction to that same ideal and
+stability, obtaining one datum and all uniform function identities.
+The coupled stability and freeness give the actual canonical reduced
+normal powers. Each chosen unchanged original generator has exactly
+that reduced Taylor series; the genuine analytic/formal normal-power
+dictionary therefore puts it in the same actual whole normal power.
+Retain the original actual chart identities and this one produced datum.
+\end{proof}
+
+This constructs genuine uniform coefficient functions. A current-history
+Hilbert--Samuel persistence equivalence, normalized-versus-geometric
+strict-ideal equality and a terminating driver remain separate obligations.

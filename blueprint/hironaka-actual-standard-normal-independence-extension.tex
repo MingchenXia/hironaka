@@ -1,0 +1,53 @@
+\section{Actual standard normal monomial independence and canonical vertex support}
+\label{sec:hironaka-actual-standard-normal-independence}
+Let $B,R,N,T$ denote the actual tangent germ ring, ambient germ ring, normal coordinate ideal and Taylor map.
+Write $\widehat B=\mathbb C[[u]]$, $\widehat R=\mathbb C[[u,z]]$, $K=T(I)\widehat R$, and $K_f=T(I+\mathfrak m_B R)\widehat R$.
+
+\begin{theorem}[Literal formal standard normal monomials]
+\label{hir:actual-formal-normal-standard-basis}
+\uses{hir:actual-normal-truncation-standard-basis,hir:actual-relative-formal-original-ideal-quotient}
+\lean{Hironaka.HironakaActualStandardNormalIndependence.exists_formalNormalStandardBasis}
+\leanok
+If $R/(I+N^q)$ is finite free over $B$, the classes of the literal formal monomials $z^\gamma$, indexed by the bounded normal diagram complement of $K_f$, form a $\widehat B$-basis of $\widehat R/(K+\widehat N^q)$.
+\end{theorem}
+\begin{proof}
+Use the internally proved literal analytic normal-monomial basis of the same original quotient.
+Base change that actual basis to $\widehat B$ and map it through the genuine arbitrary-ideal relative formal quotient equivalence.
+Its pure-tensor numerator formula and the actual Taylor formula for each analytic normal monomial identify every basis vector with the displayed literal formal monomial class.
+No formal independence assumption is supplied.
+\end{proof}
+
+\begin{theorem}[Named normal-standard coefficient map injectivity]
+\label{hir:actual-normal-standard-map-injective}
+\uses{hir:actual-formal-normal-standard-basis,hir:actual-reduced-normal-support-standard-coefficients}
+\lean{Hironaka.HironakaActualStandardNormalIndependence.standardNormalMonomialMap_injective_of_fibre_diagram}
+\leanok
+Suppose the pure-normal diagrams of $K_f$ and $K$ agree, and $R/(I+N^q)$ is finite free over $B$.
+Then the named map which sends entire formal tangent coefficient arrays, zero on the forbidden original normal exponents, to their actual finite normal monomial combination modulo $K+\widehat N^q$ is injective.
+\end{theorem}
+\begin{proof}
+Restrict each coefficient array to the finite normal-standard labels of $K_f$.
+The entire displayed monomial sum equals its restriction because every excluded coefficient vanishes, using the proved pure-normal diagram equality.
+The preceding literal basis makes finite linear combination on this restricted family injective.
+Equality of images gives equality at every standard label; at excluded labels both coefficients are zero.
+Thus the original entire arrays, and hence the named subtype elements, agree.
+\end{proof}
+
+\begin{theorem}[Original constant-HS centre produces actual canonical vertex normal powers]
+\label{hir:actual-original-centre-reduced-normal-powers}
+\uses{hir:actual-normal-standard-map-injective,hir:actual-normal-fibre-diagram-original-comparison,hir:actual-original-coupled-normal-free-initial-cylinder,hir:actual-reduced-normal-support-from-monomial-injectivity,hir:actual-joint-cut-layer-truncation-free}
+\lean{Hironaka.HironakaActualStandardNormalIndependence.actual_reduced_vertices_mem_normal_powers_of_normal_free_and_initial_stable,Hironaka.HironakaActualStandardNormalIndependence.exists_original_hs_constant_centre_reduced_normal_powers}
+\leanok
+For an arbitrary original ideal $I$, assume that every whole original normal layer is free over $B$, and that the entire actual homogeneous initial ideal of $K=T(I)\widehat R$ is stable under every tangent formal partial derivative. Then every canonical degree-first reduced vertex series $F_a$ lies in $\widehat N^{\mathrm{normalweight}(a)}$. Moreover, the original coherent ideal and regular constant-Hilbert--Samuel centre internally produce one actual flattening with origin ideal $I_0$ and $K_0=T(I_0)\widehat R$ satisfying this canonical normal-power conclusion, without either extra premise.
+\end{theorem}
+\begin{proof}
+For the generic statement, the assumed actual whole normal-layer freeness gives all normal quotient freeness by the actual short exact truncation induction; the quotients are finite by the actual ambient normal-monomial representatives.
+The same-ideal tangential initial partial stability supplies pure-normal original/fibre diagram equality.
+The preceding named-map theorem therefore proves all-order injectivity from these original data.
+Apply the proved reduced-support theorem: each low normal coefficient array of $F_a$ vanishes at forbidden labels by actual reduced diagram support, and its monomial combination is zero in $K+\widehat N^q$ since $F_a\in K$ and reconstruction differs by $\widehat N^q$.
+Injectivity forces the whole low normal coefficient series to vanish, which is exactly membership in the genuine normal ideal power.
+For the original-only assertion call the genuine coupled normal-freeness and initial-stability producer once, retaining the same flattening and origin ideal. Its two actual outputs discharge the generic statement. No vertex-power or monomial-independence certificate is an input to this original-only endpoint.
+\end{proof}
+
+The assertion is whole canonical reduced-vertex normal support at the actual selected original centre point.
+General Bennett transformation, all exceptional charts and gluing, and the singular-stage resolution driver remain separate G8/G9 obligations.

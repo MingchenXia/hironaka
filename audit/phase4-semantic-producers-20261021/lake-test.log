@@ -1,0 +1,81 @@
+ℹ [4798/4996] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+ℹ [5690/5690] Built CheckAxioms (3.1s)
+info: scripts/CheckAxioms.lean:17:0: 'Hironaka.forall_isNonzeroAlongAt_univ_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:18:0: 'Hironaka.exists_principalization' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:19:0: 'Hironaka.exists_principalization_of_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:20:0: 'Hironaka.exists_principalization_of_subset_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:21:0: 'Hironaka.exists_principalization_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:22:0: 'Hironaka.exists_principalization_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:23:0: 'Hironaka.exists_embeddedResolution' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:24:0: 'Hironaka.exists_embeddedResolution_of_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:25:0: 'Hironaka.exists_embeddedResolution_of_subset_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:26:0: 'Hironaka.exists_embeddedResolution_pure' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:27:0: 'Hironaka.exists_embeddedResolution_pure_of_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:28:0: 'Hironaka.not_le_vanishingIdeal_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:29:0: 'Hironaka.exists_principalization_of_connected' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:30:0: 'Hironaka.exists_principalization_boundary_of_compactSpace' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:31:0: 'Hironaka.exists_principalization_boundary_of_subset_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:32:0: 'Hironaka.exists_principalization_boundary_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:33:0: 'Hironaka.exists_embeddedResolution_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:34:0: 'Hironaka.exists_embeddedResolution_pure_of_subset_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:35:0: 'Hironaka.exists_embeddedResolution_boundary_of_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:36:0: 'Hironaka.exists_embeddedResolution_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:37:0: 'Hironaka.exists_embeddedResolution_boundary_of_subset_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:38:0: 'Hironaka.exists_embeddedResolution_boundary_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:39:0: 'Hironaka.eq_iUnion_dimensionPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:40:0: 'Hironaka.isComplexAnalyticSubset_dimensionPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:41:0: 'Hironaka.exists_embeddedResolution_dimensionPart_of_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:42:0: 'Hironaka.exists_embeddedResolution_dimensionPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:43:0: 'Hironaka.exists_embeddedResolution_dimensionPart_boundary_of_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:44:0: 'Hironaka.canonicalResolution' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:45:0: 'Hironaka.exists_embeddedResolution_analytic_of_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:46:0: 'Hironaka.exists_embeddedResolution_analytic' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:47:0: 'Hironaka.exists_embeddedResolution_analytic_boundary_of_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:48:0: 'Hironaka.exists_embeddedResolution_analytic_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:49:0: 'Hironaka.exists_separation' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:50:0: 'Hironaka.isAdmissibleBlowupSequence_comp' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:51:0: 'Hironaka.isIsomorphismOver_compl_of_isAdmissibleBlowupSequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:52:0: 'Hironaka.exceptionalLocus_subset_of_isAdmissibleBlowupSequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:53:0: 'Hironaka.exists_embeddedResolution_analytic_of_subset_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:54:0: 'Hironaka.exists_embeddedResolution_analytic_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:55:0: 'Hironaka.exists_embeddedResolution_analytic_boundary_of_subset_isCompact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: scripts/CheckAxioms.lean:56:0: 'Hironaka.exists_embeddedResolution_analytic_boundary_local' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:57:0: 'Hironaka.exists_separation_of_subset_isCompact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:58:0: 'Hironaka.exists_restrict_opens' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: scripts/CheckAxioms.lean:61:0: axioms check: 13897 declarations, all within [propext, Classical.choice, Quot.sound]

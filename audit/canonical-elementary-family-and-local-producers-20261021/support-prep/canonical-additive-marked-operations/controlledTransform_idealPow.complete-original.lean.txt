@@ -1,0 +1,9 @@
+/-- **`σ^c(𝔞^k, μk) = σ^c(𝔞, μ)^k`**. -/
+theorem controlledTransform_idealPow (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)
+    (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ)) (k : ℕ) :
+    controlledTransform hπ (idealPow 𝔞 k) (μ * k) = idealPow (controlledTransform hπ 𝔞 μ) k := by
+  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞
+  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_idealPow hc𝔞 k) ?_).symm
+  rw [BlowupExceptionalDivisor.pullback_idealPow hπ.contMDiff h𝔞,
+    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, idealPow_mul (isCoherent_D hπ μ) hc𝔞,
+    idealPow_idealPow (isCoherent_ideal _)]

@@ -1,0 +1,45 @@
+\section{Original complex-submanifold charts and corestriction}
+
+\begin{lemma}[A closed complex submanifold is a complex manifold, and its inclusion an immersion]
+\label{ana:submanifold-complex-structure}
+\uses{ana:geometric-setting,ana:blowups}
+\lean{Hironaka.SubmanifoldChartedSpace.chartedSpace,Hironaka.SubmanifoldChartedSpace.isComplexManifold_chartedSpace,Hironaka.SubmanifoldChartedSpace.contMDiff_val}\upstreamlean{TranscendentalNakamaye.Pending.StepFourOnStrictTransform.fderiv_coordinateMap_val_injective}
+\mixedleanok
+Let \(W\) be a subset of a complex manifold \(X\) of dimension \(n\) which is regular of
+dimension \(k\le n\) at each of its points. With the subspace topology and the atlas of
+flattening charts (at each point, a holomorphic chart of \(X\) followed by a biholomorphism
+straightening \(W\) to \(\mathbf C^k\times0\), restricted to \(W\)), \(W\) is a complex manifold
+of dimension \(k\), and the inclusion \(W\hookrightarrow X\) is holomorphic, with injective
+differential in every pair of charts.
+\end{lemma}
+\begin{proof}
+\mixedleanok
+The transition between two flattening charts is the composite of holomorphic maps restricted
+to \(\mathbf C^k\times0\), hence holomorphic; Hausdorffness and second countability pass to
+the subspace. In a flattening chart \(F\) and the ambient chart it is built from, the inclusion
+reads \(\zeta\mapsto\Phi_F^{-1}(\zeta,0)\), which is holomorphic. In a flattening chart \(F\) and an
+ambient chart \(d\), the inclusion read in coordinates has the holomorphic left inverse \(w\mapsto\operatorname{pr}_k(F(d^{-1}(w)))\)
+near the image point, so its differential is injective.
+\end{proof}
+
+\begin{lemma}[Holomorphic maps into a submanifold]
+\label{ana:submanifold-corestriction}
+\uses{ana:submanifold-complex-structure}
+\source{transcendental-nakamaye-copy4-20260911:prop:principalization}
+\lean{Hironaka.SubmanifoldCodRestrict.contMDiff_codRestrict,Hironaka.SubmanifoldCodRestrict.contMDiff_restrictPreimage}
+\leanok
+Let \(W\subseteq X\) be as in Lemma~\ref{ana:submanifold-complex-structure}, with its complex
+structure. If \(f:M\to X\) is a holomorphic map of complex manifolds with \(f(M)\subseteq W\), then
+\(f\), regarded as a map \(M\to W\), is holomorphic. In particular, if \(\pi:Y\to X\) is holomorphic
+and \(W'\subseteq Y\) is regular of some dimension \(k'\) at each of its points, with
+\(\pi(W')\subseteq W\), then the restriction \(\pi|_{W'}:W'\to W\) is holomorphic.
+\end{lemma}
+\begin{proof}
+\leanok
+Let \(y\in M\) and let \(F\) be the flattening chart of \(W\) at \(f(y)\): a chart \(e_F\) of \(X\)
+followed by a biholomorphism \(\Phi_F\) straightening \(W\) to \(\mathbf C^k\times0\). The map
+\(f\) is continuous into \(W\) for the subspace topology, and in the chart \(F\) it reads
+\(z\mapsto\operatorname{pr}_k(\Phi_F(e_F(f(z))))\) near \(y\), a composite of holomorphic maps. For the
+second assertion apply the first to \(\pi\circ\iota_{W'}\), where the inclusion
+\(\iota_{W'}:W'\to Y\) is holomorphic by Lemma~\ref{ana:submanifold-complex-structure}.
+\end{proof}

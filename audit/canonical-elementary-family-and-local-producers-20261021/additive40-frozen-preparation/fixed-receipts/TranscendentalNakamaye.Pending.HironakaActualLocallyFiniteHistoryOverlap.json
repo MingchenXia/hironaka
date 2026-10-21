@@ -1,0 +1,913 @@
+{
+  "created_utc": "2026-10-21T02:24:12.878232+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G3": "actual LF-history overlap/cocycle and topological gluing internally constructed; original unrestricted scheduler and global analytic limit remain separate"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryOverlap.lean",
+    "sha256": "4394e246dcb6ddba863a6ba35ec34cee01f6e2dc5fbdca8c41d46367d9deedd0",
+    "bytes": 15645
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-locally-finite-history-overlap-extension.tex",
+    "sha256": "faf8d44f4197dce377053fc502f64441c6b38a11be42d85389d3680af424b25c",
+    "bytes": 6917
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryOverlap.ilean",
+      "sha256": "2c01d199fca029012f4ec32ffa5e4bfd04df30b13746457a4056ad5359a0cf09",
+      "bytes": 118487
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryOverlap.ilean.hash",
+      "sha256": "9e81b46fa1e8b3a8e117985aeb102868a7f5f8b5e96ed315297ac53e901589e6",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryOverlap.olean",
+      "sha256": "37f2af0fb5631d14cef33cd683e370536f94497af1f8086591501e56dbc5ea38",
+      "bytes": 779928
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryOverlap.olean.hash",
+      "sha256": "771bb555b4699707d1b3bedc7f91b05bd4b73710198f93c8cdd974a45e5c946c",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryOverlap.trace",
+      "sha256": "959330bc52d7a9e99f04830a821c405a1c9ac50ed1a16f5294c20fa2b650ba30",
+      "bytes": 3458
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "base_eq",
+      "source_line": 23
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "restrictPrefixComparison",
+      "source_line": 35
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "restrictPrefixComparison_proj",
+      "source_line": 82
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "stableIndex",
+      "source_line": 96
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "stableWindow",
+      "source_line": 99
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "point_mem_stableWindow",
+      "source_line": 102
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "stableWindow_avoids",
+      "source_line": 106
+    },
+    {
+      "kind": "abbrev",
+      "unqualified_source_name": "localEndpoint",
+      "source_line": 111
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "localProjection",
+      "source_line": 114
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "localProjection_contMDiff",
+      "source_line": 117
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "localPrefixProjection_isProperMap",
+      "source_line": 121
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "overlapOpen",
+      "source_line": 126
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "overlapToDirect",
+      "source_line": 132
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "intersection_avoids",
+      "source_line": 146
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "pairComparison",
+      "source_line": 157
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pairComparison_proj",
+      "source_line": 162
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "transition",
+      "source_line": 170
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "transition_projection",
+      "source_line": 179
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "transition_val",
+      "source_line": 184
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "overlapOpen_self",
+      "source_line": 189
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "transition_self",
+      "source_line": 194
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "transition_inter",
+      "source_line": 210
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "restrictedPair",
+      "source_line": 217
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "restrictedPair_proj",
+      "source_line": 223
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "restrictedPair_point",
+      "source_line": 230
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "transition_cocycle",
+      "source_line": 237
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "actualHistoryGlueCore",
+      "source_line": 265
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "actualHistoryGlueData",
+      "source_line": 281
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "actualHistoryGluedSpace",
+      "source_line": 284
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "actualHistoryLocalInclusion",
+      "source_line": 287
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualHistoryLocalInclusion_openEmbedding",
+      "source_line": 290
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualHistoryLocalInclusion_jointly_surjective",
+      "source_line": 295
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-locally-finite-prefix-comparison-restriction",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison_proj"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "b80c113545da554f4cc01b9bd18368e4ede5745db98a5223848908ffe3be13dc"
+    },
+    {
+      "label": "hir:actual-locally-finite-history-internal-window-atlas",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableIndex",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.point_mem_stableWindow",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow_avoids",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localProjection_contMDiff",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localPrefixProjection_isProperMap"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "676426676e13ad0106a3b3ed4a343493af795fbfd8f025f3274be7cd69b262c5"
+    },
+    {
+      "label": "hir:actual-locally-finite-history-whole-overlap-maps",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_projection"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "b44fd235aeb068ccb33d19952355a38c86e274fdfdae6896f231eb33251c5ad5"
+    },
+    {
+      "label": "hir:actual-locally-finite-history-overlap-cocycle-gluing",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_self",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_inter",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_cocycle",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "7b7f08dbdb14c79c22004505d5af8944cec6914bc2dcd404eae5ec8232a4f2b5"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.pairComparison._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.pairComparison._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGluedSpace._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.pairComparison_proj",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_14",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictedPair_proj",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_11",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_16",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapOpen_self",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_12",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison_proj",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_cocycle",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryLocalInclusion_openEmbedding",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.pairComparison",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGluedSpace",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryLocalInclusion",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_7",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictedPair._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableIndex",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.base_eq",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictedPair._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictedPair",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect._proof_5",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localProjection",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localPrefixProjection_isProperMap",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_5",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_val",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryLocalInclusion_jointly_surjective",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow_avoids",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_projection",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapOpen._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.intersection_avoids",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_self",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_inter",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableIndex._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_10",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_13",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localProjection_contMDiff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictedPair_point",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueData",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_9",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localEndpoint",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_8",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapOpen",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.overlapToDirect._proof_6",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.point_mem_stableWindow",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localEndpoint._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_15",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison._proof_6",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableIndex._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 74,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 74
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-overlap/kernel.log",
+    "sha256": "2c03c34e00d88874f7f284addc219ff292683286d52f7e056fe6625d2c25e889",
+    "bytes": 83
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-overlap/actual-roots.log",
+    "sha256": "2c3addd34e8194e721f9250ab0c028635084fdcbf95b4f0674e8d388531a8287",
+    "bytes": 18899
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-overlap/ActualRoots.lean",
+    "sha256": "199252f3b7de5a7486abf4e6c16fff162934259dbb778e46a224739e5e8a3d96",
+    "bytes": 872
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/global-history/limit-atlas/native.log",
+    "sha256": "172c7c38203ba34d2fe550ca66bb4f2e5fa4706e75321e3e0e0d19f4a34262a4",
+    "bytes": 144
+  },
+  "native_build_jobs": 4847,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 301-line source, all private restriction and nested-open comparison helpers, whole gluing definitions and all FOUR complete written BP proofs reviewed. A genuine whole prefix biholomorphism over an original open restricts to EVERY smaller open because its literal base equation, and that equation at inverse points, put both maps in the smaller inverse images; actual inverse laws and open inclusions supply genuine holomorphic restrictions. From ONE actual GrowingSeq with locally finite actual centre images, the proved stabilizing-window producer internally chooses each index and open, actual point coverage and all later centre avoidance. Each local endpoint and holomorphic projection is the genuine finite-prefix restriction; properness is correctly asserted only over its OWN open local base. On the intersection of two windows, avoidance already holds after the MINIMUM of the two cuts, so both selected prefixes admit a genuine late comparison over that SAME intersection. Actual nested-open biholomorphisms identify its source and target with the true saturated overlap opens, yielding the whole chosen transition, including exceptional points. Projection equations preserve third-window membership. Restricting all three pair comparisons to the same triple intersection and using genuine whole-projection uniqueness proves the actual triple cocycle for these SAME chosen maps, without an incoming comparison or cocycle certificate. The literal diagonal identity, real overlap intersections and true cocycle populate EVERY actual TopCat.GlueData.MkCore field. The actual categorical gluing then supplies its topological space, genuine open local inclusions and joint surjectivity. No Hausdorff/manifold/proper global projection conclusion is inserted into this topological-only endpoint.",
+  "proven_scope": "ONE actual locally finite GrowingSeq internally gives its stabilizing original cover, genuine finite endpoints, whole overlap biholomorphisms over the original base, literal triple cocycle and actual topological gluing with open embeddings and joint surjectivity.",
+  "scope_limits": [
+    "The ACTUAL GrowingSeq and locally finite actual centre images remain explicit input; an unrestricted original noncompact scheduler is not constructed.",
+    "Finite local projection properness is over each OWN original open base, not asserted for its composite into the entire base.",
+    "The final glued object here is a topological gluing. A genuine global complex manifold, separated/countable topology, proper holomorphic projection and finite-stage factorization remain downstream."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-overlap/review-config.json",
+    "sha256": "3eba4a52088e3153e7a12e60a9bbdf08c825493ad15a3a45a551a2179713965e",
+    "bytes": 3470
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/global-history/limit-atlas/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/global-history/limit-atlas/peer-review-root.json"
+}

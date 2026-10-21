@@ -1,0 +1,85 @@
+\section{Actual finite chart relations have homogeneous polynomial lifts}
+
+Fix a genuine point-chart pivot $e$ and direction parameters $b$.
+Write $\delta_{e,b}$ for the actual polynomial homomorphism sending
+$x_e$ to $1$ and $x_i$ to $b_i+x_i$ for $i\ne e$. Every ring below
+is the literal finite polynomial ring over $\mathbb C$.
+
+\begin{lemma}[Explicit actual rehomogenization]
+\label{hir:actual-polynomial-rehomogenization}
+\uses{hir:actual-point-polynomial-dehomogenization}
+\lean{Hironaka.HironakaActualPolynomialRehomogenization.actualPolynomialRehomogenization,Hironaka.HironakaActualPolynomialRehomogenization.actualPolynomialRehomogenization_homogeneous,Hironaka.HironakaActualPolynomialRehomogenization.actualPointDehomogenization_rehomogenization}
+\leanok
+Let $q$ be a complex polynomial of total degree at most $m$. Define
+\[
+ H_{e,b,m}(q)=\sum_{\alpha\in\operatorname{supp}q}
+ x_e^{m-|\alpha|}\,q_\alpha
+ \prod_i(x_i-b_i x_e)^{\alpha_i}.
+\]
+This polynomial is homogeneous of degree $m$. If every exponent in
+$\operatorname{supp}q$ has $\alpha_e=0$, then
+$\delta_{e,b}H_{e,b,m}(q)=q$ as whole finite polynomials.
+\end{lemma}
+\begin{proof}
+Each linear form $x_i-b_i x_e$ is homogeneous of degree one, including
+when that form is zero. The monomial product therefore has degree
+$|\alpha|$. Every support exponent satisfies $|\alpha|\le\deg q\le m$,
+so multiplication by $x_e^{m-|\alpha|}$ makes each summand homogeneous
+of degree exactly $m$. Their finite sum has that same degree, with zero
+polynomials allowed. Under the actual dehomogenization the pivot power
+is one. Each other linear form maps to $x_i$. The pivot linear form
+might instead map to the constant $1-b_e$, but its exponent is zero
+by the stated support condition. Thus each whole summand maps to
+$q_\alpha x^\alpha$. The genuine finite support expansion of $q$
+proves the whole polynomial equality.
+\end{proof}
+
+\begin{lemma}[Actual dehomogenization is injective in each fixed homogeneous degree]
+\label{hir:actual-homogeneous-polynomial-dehomogenization-injective}
+\uses{hir:actual-point-blowup-homogeneous-polynomial-factor,hir:actual-formal-blowup-all-directions-whole-power-reflection}
+\lean{Hironaka.HironakaActualPolynomialRehomogenization.actualPointDehomogenization_homogeneous_injective}
+\leanok
+If $P,Q$ are homogeneous polynomials of the same degree $D$ and
+$\delta_{e,b}P=\delta_{e,b}Q$, then $P=Q$.
+\end{lemma}
+\begin{proof}
+Include both polynomials in the actual formal series ring. The genuine
+whole homogeneous point-blowup factorization gives
+$\pi^*P=x_e^D\delta_{e,b}P$ and
+$\pi^*Q=x_e^D\delta_{e,b}Q$. Their right sides agree. The actual formal
+blowup homomorphism is injective for every genuine chart direction,
+so the whole formal inclusions of $P,Q$ agree. The genuine polynomial
+inclusion is injective, hence the original whole polynomials agree.
+\end{proof}
+
+\begin{theorem}[Every finite pivot-independent chart relation lifts to one homogeneous relation]
+\label{hir:actual-finite-polynomial-chart-relation-rehomogenization}
+\uses{hir:actual-polynomial-rehomogenization,hir:actual-homogeneous-polynomial-dehomogenization-injective}
+\lean{Hironaka.HironakaActualPolynomialRehomogenization.homogeneous_polynomial_relation_lift_at_degree,Hironaka.HironakaActualPolynomialRehomogenization.exists_homogeneous_polynomial_relation_lift}
+\leanok
+Let $f_i$ be a finite family of actual complex polynomials homogeneous
+of degrees $w_i$. Let $q_i$ be actual polynomials independent of the
+pivot coordinate, in the literal support sense of the first lemma.
+If $\sum_iq_i\delta_{e,b}f_i=0$, there are one integer $D\ge w_i$
+and homogeneous actual polynomials $P_i$ of degrees $D-w_i$ such that
+\[
+ \delta_{e,b}P_i=q_i,\qquad \sum_iP_if_i=0.
+\]
+No relation lift, source ideal, analytic flatness or convergence
+certificate is supplied.
+The same conclusion holds at any prescribed $D$ satisfying the natural
+finite bounds $w_i+\deg q_i\le D$.
+\end{theorem}
+\begin{proof}
+Choose the actual finite integer $D=\sum_i(w_i+\deg q_i)$.
+Every summand is nonnegative, so $D\ge w_i+\deg q_i$ for every index.
+Thus $\deg q_i\le D-w_i$, and the first lemma defines
+$P_i=H_{e,b,D-w_i}(q_i)$ with the required degree and exact
+whole dehomogenization. Each product $P_if_i$ is homogeneous of
+degree $(D-w_i)+w_i=D$, so the entire finite sum is homogeneous
+of degree $D$. Dehomogenization is a ring homomorphism; its image
+is exactly the assumed zero chart relation. The preceding fixed-degree
+injectivity lemma, comparing with the zero polynomial of degree $D$,
+forces the whole original sum to be zero. The construction also covers
+an empty family, when $D=0$ and both sums are zero.
+\end{proof}

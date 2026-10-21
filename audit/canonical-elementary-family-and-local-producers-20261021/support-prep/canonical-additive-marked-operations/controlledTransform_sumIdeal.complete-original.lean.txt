@@ -1,0 +1,15 @@
+/-- **`σ^c(𝔞 + 𝔟, μ) = σ^c(𝔞, μ) + σ^c(𝔟, μ)`**. -/
+theorem controlledTransform_sumIdeal (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)
+    (h𝔟 : 𝔟.IsCoherent) (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ))
+    (hle𝔟 : 𝔟.Le (idealPow (vanishingIdeal (n := n) C) μ)) :
+    controlledTransform hπ (sumIdeal 𝔞 𝔟) μ =
+      sumIdeal (controlledTransform hπ 𝔞 μ) (controlledTransform hπ 𝔟 μ) := by
+  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞
+  have hc𝔟 := isCoherent_controlledTransform hπ h𝔟 hle𝔟
+  have hol : ∀ {𝔠 : GermIdeal n Y}, 𝔠.IsCoherent → ∀ y g, 𝔠.mem y g → HolomorphicAt n g y :=
+    fun h𝔠 _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 hg
+  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_sumIdeal hc𝔞 hc𝔟) ?_).symm
+  rw [pullback_sumIdeal hπ.contMDiff (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg)
+      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg),
+    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, pullback_eq_mul_controlledTransform hπ h𝔟 hle𝔟,
+    mul_sumIdeal (hol (isCoherent_D hπ μ)) (hol hc𝔞) (hol hc𝔟)]

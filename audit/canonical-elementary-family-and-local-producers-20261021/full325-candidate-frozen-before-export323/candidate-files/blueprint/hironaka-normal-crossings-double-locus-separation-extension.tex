@@ -1,0 +1,223 @@
+\section{Actual NC separation supported in the original double locus}
+\label{sec:hironaka-normal-crossings-double-locus-separation}
+
+Let $H$ be a closed normal-crossings carrier in a complex manifold of
+dimension $n$, and write $\nu_H(x)$ for its intrinsic number of local
+branches. Its intrinsic double locus is
+$D_2(H)=\{x:2\leq\nu_H(x)\}$. This set is closed by the established
+upper semicontinuity of the actual branch count. A boundary adapted to
+$H$ is an already SNC list whose through members have simultaneous
+coordinate equations distinct from the original branches of $H$.
+All original strict transforms below are the actual differential
+strict transforms.
+
+\begin{lemma}[Pointwise branch count under an actual higher blowup]
+\label{hir:general-nc-higher-count-over-image}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.branchMultiplicity_strict_highest_le_image}
+\leanok
+\uses{hir:general-nc-higher-highest-relative-density,hir:general-nc-intrinsic-branch-multiplicity,hir:general-nc-highest-stratum-global-strict-count-decrease}
+Suppose every branch count of $H$ is at most $r\geq2$, and $\pi$ is
+an actual blowup of its whole $r$-branch stratum. For every point $z$
+of the blowup,
+\[
+ \nu_{H'}(z)\leq\nu_H(\pi(z)),\qquad H'=\operatorname{Strict}_{\pi}H.
+\]
+\end{lemma}
+\begin{proof}
+The established relative density off this higher stratum identifies
+the geometric and differential strict transforms. If $\pi(z)$ lies
+in the centre, its original count is at least $r$, whereas the actual
+strict-carrier count is at most $r-1$ by the genuine monomial blowup
+calculation. This proves the inequality there. Otherwise choose a
+centred NC presentation of $H$ at $\pi(z)$ with selected index set $S$.
+The actual blowup projection is locally biholomorphic off its centre;
+pulling this chart back gives a centred chart at $z$ with the same
+selected coordinates and literal original membership equation. The
+strict transform agrees with the inverse image on that domain.
+The intrinsic branch-count dictionary gives both counts as $|S|$,
+proving equality off the centre and the asserted inequality everywhere.
+\end{proof}
+
+\begin{lemma}[Actual higher towers do not increase branches over their images]
+\label{hir:general-nc-higher-tower-count-over-image}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.branchMultiplicity_strict_tower_le_image}
+\leanok
+\uses{hir:general-nc-higher-count-over-image,hir:general-nc-intrinsic-higher-separation-step}
+Let $T$ be any finite actual tower whose centres are genuine whole
+attained higher branch-count maxima of the current strict original,
+with its literal accumulated adapted boundary. Whenever its terminal
+strict original is NC, its branch count at $z$ is at most the original
+count at $T(z)$.
+\end{lemma}
+\begin{proof}
+Induct on the actual finite tower. For the identity tower the strict
+transform of the original closed carrier is itself, giving equality.
+For a last blowup, the recorded higher-centre condition supplies the
+current NC carrier, its actual bound $r\geq2$, and the exact whole
+centre. The previous lemma bounds the new count by the current count
+at the last projection. The induction hypothesis bounds that current
+count by the original count at the composite projection. The actual
+composition law for differential strict transforms identifies this
+two-step strict carrier with the strict carrier of the whole tower.
+Transitivity of these two inequalities completes the induction.
+\end{proof}
+
+\begin{theorem}[Every actual higher separation centre lies over the double locus]
+\label{hir:general-nc-higher-centres-over-double-locus}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.centresOver_doubleLocus_of_higherSeparationCentres,Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.isIsomorphismOver_compl_doubleLocus_of_higherSeparationCentres}
+\leanok
+\uses{hir:general-nc-higher-tower-count-over-image,hir:general-nc-intrinsic-higher-separation-step}
+Every centre of such a tower lies over $D_2(H)$, and its actual
+projection is an isomorphism over $D_2(H)^c$.
+\end{theorem}
+\begin{proof}
+Induct through the recorded centres. At a point of a current centre,
+the centre equation gives current original count at least its attained
+maximum $r\geq2$. The preceding tower inequality bounds this count
+above by the original count at its image. The image therefore belongs
+to $D_2(H)$; together with the induction hypothesis this proves the
+assertion for every centre. The complement of $D_2(H)$ is open.
+Restriction of the tower there has every centre empty. The actual
+empty-centre restriction theorem then puts the entire exceptional
+image in $D_2(H)$. The proved isomorphism theorem for a genuine blowup
+sequence outside its exceptional image gives the required isomorphism
+on the whole complement, including points on the one-branch locus.
+\end{proof}
+
+\begin{lemma}[Actual geometric boundary admissibility]
+\label{hir:general-nc-double-locus-geometric-admissibility}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.higherSeparationCentres_isAdmissibleBlowupSequence_doubleLocus}
+\leanok
+\uses{hir:general-nc-higher-centres-over-double-locus,hir:general-nc-actual-higher-separation-step}
+Every such actual higher-separation tower is a genuine admissible
+boundary blowup sequence over $D_2(H)$, from the original old boundary
+to its literal accumulated strict-old and exceptional list.
+\end{lemma}
+\begin{proof}
+Induct on the tower. The identity is the reflexive admissible
+sequence and has exactly the original boundary. At a last blowup,
+the recorded higher-centre condition gives an actual whole highest
+stratum in simultaneous original and old-boundary coordinates.
+Those coordinates prove that the centre has normal crossings with
+the current old boundary. Its containment over the original double
+locus is the preceding theorem evaluated at that recorded last
+centre. Apply the actual admissible-sequence step constructor to
+the induction hypothesis and this same blowup, centre, normal-crossing
+condition and containment. The resulting boundary is exactly the
+strict transform of each existing list member, followed by the
+exceptional preimage, which is the literal accumulated boundary.
+\end{proof}
+
+\begin{theorem}[A genuine permitted boundary prephase]
+\label{hir:general-nc-permitted-double-locus-prephase}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.naturalSeparation_doubleLocus_geometry,Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.naturalSeparation_permitted_geometry}
+\leanok
+\uses{hir:general-nc-double-locus-geometric-admissibility,hir:general-nc-internally-natural-geometric-separation}
+The internally constructed natural separation has at most $n-1$
+actual blowups and is a genuine admissible boundary sequence over
+$D_2(H)$. Its terminal strict original is smooth and transverse
+to its literal accumulated SNC boundary; appending that strict
+original is SNC. Every centre lies over $D_2(H)$, and the projection
+is an isomorphism on $D_2(H)^c$. More generally, for any closed
+permitted set $F$ with $D_2(H)\subseteq F$, the same internally
+constructed tower is an admissible boundary sequence with every centre
+over $F$ and is an isomorphism
+over $F^c$.
+\end{theorem}
+\begin{proof}
+Use the actual natural separation producer driven by the intrinsic
+finite range $\{0,\ldots,n\}$ and its internally chosen actual
+highest-stratum blowups. Its bounded recursion proves the length,
+terminal smoothness, transversality, literal SNC list, and genuine
+higher-centre condition. Apply the preceding theorem to that actual
+tower and the geometric boundary admissibility lemma. For the final
+assertion, each centre's inverse-image
+containment in $D_2(H)$ implies its inverse-image containment in $F$.
+Restrict to the open complement of the given closed set $F$; all
+these actual centres are empty there. The same genuine exceptional
+image and isomorphism theorems prove the asserted isomorphism over
+$F^c$ for this unchanged tower.
+\end{proof}
+
+This boundary prephase is supported precisely within the original
+multiple-branch locus. It supplies no marked-ideal cosupport or
+ordered-history condition. To use it with a prescribed permitted
+bad set, that set must contain the original double locus; this
+containment is an explicit geometric hypothesis, not an implicit
+change of the original good locus.
+
+\begin{lemma}[One branch is exactly actual hypersurface regularity]
+\label{hir:general-nc-one-branch-iff-regular}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.regularAtDim_iff_branchMultiplicity_eq_one}
+\leanok
+\uses{hir:general-nc-intrinsic-branch-multiplicity,hir:general-nc-count-one-smooth-terminal-pair}
+In positive ambient dimension, a point of an actual NC carrier is
+regular of dimension $n-1$ if and only if its intrinsic branch count
+equals one.
+\end{lemma}
+\begin{proof}
+An actual regular flattening identifies the whole carrier near the
+point with the last coordinate hyperplane. It is therefore a genuine
+NC presentation with a singleton selected set. The intrinsic branch
+dictionary gives count one. Conversely, suppose the intrinsic count
+at the point is one. The complement of the closed double locus is an
+open neighbourhood of that point. On this actual open submanifold,
+the NC carrier is the literal original trace and its branch counts
+are the original branch counts, because the inclusion is locally
+biholomorphic. All of them are at most one. The point belongs to the
+carrier by positivity of its count. The established actual count-one
+regularity theorem on this open submanifold supplies dimension
+$n-1$ regularity of the trace. The actual open-inclusion regularity
+dictionary transfers this regularity to the unchanged original carrier.
+\end{proof}
+
+\begin{lemma}[The actual double locus is the singular boundary locus]
+\label{hir:general-nc-double-locus-eq-singular-locus}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.doubleLocus_eq_diff_regularLocus}
+\leanok
+\uses{hir:general-nc-one-branch-iff-regular}
+In positive ambient dimension,
+\[
+ D_2(H)=H\setminus\operatorname{Reg}_{n-1}(H).
+\]
+\end{lemma}
+\begin{proof}
+A point of count at least two belongs to the carrier, by count
+positivity, and cannot be regular since regularity would give count
+one. Conversely a point of the carrier has positive integer count.
+If that count is less than two it equals one and is regular by the
+preceding equivalence. Every nonregular point of the carrier must
+therefore have count at least two. This proves equality pointwise.
+\end{proof}
+
+\begin{theorem}[Actual finite NC boundary separation preserves the original smooth locus]
+\label{hir:general-nc-original-smooth-locus-snc-prephase}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusSeparation.originalSeparation_singularLocus_geometry}
+\leanok
+\uses{hir:general-nc-double-locus-eq-singular-locus,hir:general-nc-permitted-double-locus-prephase,hir:general-nc-generated-prefix-whole-total-support}
+Every actual NC carrier in positive dimension internally produces
+an actual tower of at most $n-1$ higher-stratum blowups with centres
+over its original singular boundary locus. It is a genuine geometric
+admissible boundary sequence from the empty old list to its literal
+accumulated exceptional list. The terminal strict original is smooth
+and transverse to that list; appending the entire strict original
+gives a genuine SNC list whose whole union equals the whole original
+inverse image. The actual projection is an isomorphism on the entire
+complement of the original singular boundary locus.
+\end{theorem}
+\begin{proof}
+Apply the internally generated natural separation to the actual
+original vanishing ideal with marking one and empty old boundary.
+The preceding prephase theorem proves the finite length, geometric
+admissibility, smoothness, transversality, SNC list, centre support
+and isomorphism on the complement of the original double locus.
+The actual one-branch regularity equivalence identifies that locus
+with the original singular boundary locus, so the same tower has
+exactly the stated permitted support and good-locus isomorphism.
+The established literal original separation support dictionary
+identifies the entire preimage of the original carrier with the
+union of the unchanged terminal strict original and every accumulated
+exceptional member. This is precisely the appended SNC list already
+produced by this same original separation, yielding the whole
+inverse-image assertion without choosing local branch labels.
+\end{proof}

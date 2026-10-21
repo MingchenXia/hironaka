@@ -1,0 +1,93 @@
+\section{Signed coefficient-cone preservation by the actual owner division}
+
+The tangent-scaling chart needed for a relative-to-point comparison has a
+SIGNED coefficient weight: the exceptional exponent minus the sum of selected
+tangent exponents. Natural nonnegative coordinate-weight bounds do not cover
+this cone. The following actual coefficient induction uses the existing
+whole monic vertex family and genuine owner recursion, with no division
+solution or output cone certificate supplied.
+
+\begin{theorem}[The actual whole family division preserves genuine signed additive coefficient bounds]
+\label{hir:actual-family-division-signed-coefficient-bound}
+\uses{hir:actual-reduced-basis-entire-filtered-division}
+\lean{Hironaka.HironakaActualSignedConeDivision.familyDivisionCoefficient_eq_zero_of_signed_weight_lt,Hironaka.HironakaActualSignedConeDivision.familyFormalQuotient_signed_weight_bound,Hironaka.HironakaActualSignedConeDivision.familyFormalRemainder_signed_weight_bound}
+\leanok
+Let $\nu:\mathbb N^n\to\mathbb Z$ be an actual additive homomorphism and
+$c\in\mathbb Z$. Suppose each actual prescribed monic vertex series $B_a$
+has zero coefficient at every $\beta$ with $\nu(\beta)<\nu(a)$, and the
+actual input $F$ has zero coefficients below $c$. Then the genuine
+coefficient-recursive division coefficients vanish below $c$, every literal
+owner quotient has zero coefficient at $\beta$ if $\nu(\beta)+\nu(a)<c$,
+and the actual entire remainder vanishes below $c$. Signed weights are
+allowed to have negative coordinate values.
+\end{theorem}
+\begin{proof}
+Induct in the genuine well-founded monomial order used by the actual
+coefficient recursion, not in the possibly negative signed weight.
+At an exponent $\alpha$ below $c$, the original input coefficient is zero.
+A nonzero recursive tail summand comes from a genuine antidiagonal pair
+$\lambda+\beta=\alpha$ and a vertex $a$. The actual vertex support
+hypothesis gives $\nu(a)\le\nu(\beta)$. Additivity therefore gives
+$\nu(\lambda+a)\le\nu(\alpha)<c$. This recursive argument is strictly
+smaller in the genuine monomial order by the literal tail definition, so
+its coefficient is zero by induction. Every finite tail summand is zero,
+and the recursion gives the asserted coefficient zero.
+
+The genuine owner quotient at $\beta$ uses precisely the recursive
+coefficient at $\beta+a$ when the actual owner is $a$, and otherwise is
+zero. Additivity and the preceding induction give the shifted bound.
+The actual remainder uses the same recursive coefficient off the entire
+initial diagram and zero on it, giving its bound. No positivity or
+well-foundedness of $\nu$ has been invoked.
+\end{proof}
+
+\begin{theorem}[Every actual zero-direction blowup image has its genuine signed support cone]
+\label{hir:actual-zero-chart-signed-support-cone}
+\uses{hir:actual-formal-monomial-blowup-exponent-embedding}
+\lean{Hironaka.HironakaActualSignedConeDivision.actualBlowupConeWeight,Hironaka.HironakaActualSignedConeDivision.actualFormalBlowup_zero_coefficient_outside_cone}
+\leanok
+For a prescribed actual chart with pivot $e$ and selected coordinates $A$,
+put $\nu(\alpha)=\alpha_e-\sum_{i\in A\setminus\{e\}}\alpha_i$.
+Every genuine whole zero-direction blowup image has zero coefficient
+where $\nu(\alpha)<0$. This is an output from the actual substitution,
+without an assumed image or support formula.
+\end{theorem}
+\begin{proof}
+The literal actual monomial exponent map adds the sum of selected nonpivot
+exponents to the exceptional exponent and leaves every other exponent
+unchanged. The proved true coordinate-product formula gives this actual
+monomial image. Its signed weight is exactly the original nonnegative
+exceptional exponent. In the genuine whole substitution coefficient
+formula, every summand at a negative-weight exponent is therefore zero:
+its coordinate-product monomial cannot have that exponent. The actual
+coefficient finitary sum vanishes, proving the whole output support bound.
+\end{proof}
+
+\begin{theorem}[Actual image-family owner quotients and remainders retain the signed chart cone]
+\label{hir:actual-image-family-owner-division-signed-cone}
+\uses{hir:actual-family-division-signed-coefficient-bound,hir:actual-zero-chart-signed-support-cone}
+\lean{Hironaka.HironakaActualSignedConeDivision.actual_image_family_division_cone}
+\leanok
+Suppose an existing actual whole monic vertex family consists of specified
+actual zero-chart pullback series, and every one of its actual vertex labels
+has signed weight zero. For ANY original formal input series, dividing its
+actual zero-chart image by this same family gives literal owner quotients
+and an actual remainder supported in the nonnegative chart cone.
+The actual image-family equations and zero-weight labels are explicit natural
+input data; the quotient and remainder support bounds are outputs.
+\end{theorem}
+\begin{proof}
+The preceding unconditional actual-substitution theorem gives the cone
+support of every specified family member and of the actual input image.
+Since every vertex has signed weight zero, these are exactly the natural
+vertex and input support hypotheses of the first theorem at $c=0$.
+Its genuine recursive quotient and remainder bounds therefore prove the
+claim for this SAME family and input. No output quotient support condition
+or actual division solution is assumed.
+\end{proof}
+
+This establishes a genuine signed-cone operator estimate. Producing the
+required image monic family from an original relative retained-order chart,
+proving the converse actual range-cone dictionary and its analytic inverse
+convergence, and completing the relative maximal-filtered syzygy/HS criterion
+are separate obligations, not conclusions of this support estimate.

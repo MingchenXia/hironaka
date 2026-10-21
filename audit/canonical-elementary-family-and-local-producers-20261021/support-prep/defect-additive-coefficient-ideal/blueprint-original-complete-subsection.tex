@@ -1,0 +1,99 @@
+\subsection{Sums of marked ideals and the coefficient ideal}
+
+In this subsection all marked ideals are \((M,M,E,\mathfrak a,d)\) with \(N=M\); for ideals \(\mathfrak J_0,\dots,\mathfrak J_{m-1}\),
+\(\sum_{i<m}\mathfrak J_i\) is the ideal generated stalkwise by their germs.
+
+\begin{lemma}[Finite sums of ideals]
+\label{mc:finite-sum}
+\uses{mc:homogenized-coherent,mc:coherent-germs,hir:controlled-operations,hir:cosupport-basic,bcalc:controlled-transform-def}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_one,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_congr,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_le,TranscendentalNakamaye.Pending.CoefficientIdeal.isCoherent_finSumIdeal_of_lt,TranscendentalNakamaye.Pending.CoefficientIdeal.mem_cosupport_finSumIdeal,TranscendentalNakamaye.Pending.CoefficientIdeal.controlledTransform_finSumIdeal}
+\leanok
+Let \(\mathfrak J_0,\dots,\mathfrak J_{m-1}\) be coherent. Then \(\sum_{i<m}\mathfrak J_i\) is coherent; it is contained in every coherent ideal containing all
+\(\mathfrak J_i\); \(\operatorname{cosupp}(\sum_{i<m}\mathfrak J_i,\mu)=\bigcap_{i<m}\operatorname{cosupp}(\mathfrak J_i,\mu)\); and if \(m\ge1\) and
+\(\mathfrak J_i\subset\mathcal I_C^\mu\) for all \(i\), then \(\sigma^{\mathrm c}(\sum_{i<m}\mathfrak J_i,\mu)=\sum_{i<m}\sigma^{\mathrm c}(\mathfrak J_i,\mu)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Coherence: Lemma~\ref{mc:homogenized-coherent}. A germ of the sum is a holomorphic combination of germs of the \(\mathfrak J_i\); this gives the
+inclusion and, since a combination of germs vanishing to order \(\mu\) vanishes to order \(\mu\), the cosupport (the reverse inclusion because each
+\(\mathfrak J_i\) is contained in the sum). The controlled transform: induction on \(m\), starting from \(\sum_{i<1}\mathfrak J_i=\mathfrak J_0\), with
+\(\sum_{i<m+1}\mathfrak J_i=\sum_{i<m}\mathfrak J_i+\mathfrak J_m\) and \(\sigma^{\mathrm c}(\mathfrak a+\mathfrak b,\mu)=\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu)\)
+for coherent \(\mathfrak a,\mathfrak b\subset\mathcal I_C^\mu\) (Lemma~\ref{hir:controlled-operations}); the partial sums are contained in the coherent ideal \(\mathcal I_C^\mu\).
+\end{proof}
+
+\begin{definition}[Sum of finitely many marked ideals]
+\label{mc:marked-finite-sum}
+\uses{hir:marked-sum-product,mc:finite-sum,hir:marked-ideal-operations,hir:geo-transform-ambient,hir:bridge-consumers}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.mul_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.one_le_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.isCoherent_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.cosupp_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.isAdmissibleCentre_msum_iff,TranscendentalNakamaye.Pending.CoefficientIdeal.geoTransform_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.geoTransform}
+\leanok
+For marked ideals \(\underline{\mathcal I}_i=(M,N_i,E_i,\mathfrak a_i,\mu_i)\), \(i<m\),
+\[
+ \underline{\mathcal I}_0+\dots+\underline{\mathcal I}_{m-1}=\Bigl(M,N_0,E_0,\sum_{i<m}\mathfrak a_i^{\prod_{j\ne i}\mu_j},\prod_{j<m}\mu_j\Bigr).
+\]
+If \(m\ge1\), \(N_i=M\), \(E_i=E_0\), \(\mathfrak a_i\) is coherent and \(\mu_i\ge1\) for all \(i\), then the sum has coherent ideal and cosupport
+\(\bigcap_i\operatorname{cosupp}\underline{\mathcal I}_i\); a centre is admissible for it if and only if it is admissible for every \(\underline{\mathcal I}_i\), and then the
+transform of the sum is the sum of the transforms (Definition~\ref{hir:geo-transform}), whose summands again satisfy these hypotheses.
+\end{definition}
+\begin{proof}
+\leanok
+Write \(\mu=\prod_j\mu_j\) and \(e_i=\prod_{j\ne i}\mu_j\ge1\), so \(\mu_ie_i=\mu\). By Lemma~\ref{mc:finite-sum} and
+\(\operatorname{cosupp}(\mathfrak a^{e},\nu e)=\operatorname{cosupp}(\mathfrak a,\nu)\) for \(e\ge1\) (Lemma~\ref{hir:marked-ideal-operations}),
+\(\operatorname{cosupp}(\sum_i\mathfrak a_i^{e_i},\mu)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i^{e_i},\mu_ie_i)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i,\mu_i)\). The
+admissibility statement follows, as all \(E_i\) agree. For an admissible centre \(C\), \(\mathfrak a_i\subset\mathcal I_C^{\mu_i}\) (Lemma~\ref{hir:bridge-consumers}), so
+\(\mathfrak a_i^{e_i}\subset\mathcal I_C^{\mu}\), and by Lemmas~\ref{hir:geo-transform-ambient}, \ref{mc:finite-sum} and~\ref{hir:controlled-operations}
+\(\sigma^{\mathrm c}(\sum_i\mathfrak a_i^{e_i},\mu)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i^{e_i},\mu_ie_i)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i,\mu_i)^{e_i}\); the strict transform of \(M\)
+is the whole blowup, the \(E\) are transformed alike, the marks do not change, and the controlled transforms are coherent.
+\end{proof}
+
+\begin{lemma}[Multiple test blow-ups of a sum]
+\label{mc:marked-finite-sum-tower}
+\uses{mc:marked-finite-sum,hir:geo-transform}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.geoTransformAlong_msum}
+\leanok
+Under the hypotheses of Definition~\ref{mc:marked-finite-sum}, the multiple test blow-ups of \(\underline{\mathcal I}_0+\dots+\underline{\mathcal I}_{m-1}\) are exactly
+the simultaneous multiple test blow-ups of the \(\underline{\mathcal I}_i\), and along them the transform of the sum is the sum of the transforms.
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on the tower, using at each step that the transforms satisfy the hypotheses again and Definition~\ref{mc:marked-finite-sum}.
+\end{proof}
+This is part (1) of Włodarczyk's Lemma ``le:operations'' for \(m\) summands; for \(m=2\) it is Lemma~\ref{hir:marked-operations-transform}(1).
+
+\begin{definition}[Coefficient ideal]
+\label{mc:coefficient-ideal}
+\uses{mc:marked-finite-sum,mc:derivative-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0022}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.derivMarked_zero,TranscendentalNakamaye.Pending.CoefficientIdeal.coeffMarked,TranscendentalNakamaye.Pending.CoefficientIdeal.isAmbientFamily_derivMarked}
+\leanok
+The \emph{coefficient ideal} of \(\underline{\mathcal I}=(M,N,E,\mathfrak a,\mu)\) is
+\[
+ \mathcal C(\underline{\mathcal I})=\underline{\mathcal I}+\mathcal D(\underline{\mathcal I})+\dots+\mathcal D^{\mu-1}(\underline{\mathcal I}),
+\]
+i.e.\ \((\mathfrak a,\mu)+(\mathcal D\mathfrak a,\mu-1)+\dots+(\mathcal D^{\mu-1}\mathfrak a,1)\) (Definitions~\ref{mc:derivative-marked} and~\ref{mc:marked-finite-sum}).
+For \(N=M\) and \(\mathfrak a\) coherent, the summands satisfy the hypotheses of Definition~\ref{mc:marked-finite-sum}.
+\end{definition}
+
+\begin{lemma}[The coefficient ideal is equivalent to the marked ideal]
+\label{mc:coefficient-equivalent}
+\uses{mc:coefficient-ideal,mc:marked-finite-sum-tower,mc:inclusions-tower,mc:derivative-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0022}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.coeff_tower}
+\leanok
+Let \(\underline{\mathcal I}=(M,M,E,\mathfrak a,\mu)\) with \(\mathfrak a\) coherent and \(\mu\ge1\). A tower is a multiple test blow-up of
+\(\mathcal C(\underline{\mathcal I})\) if and only if it is one of \(\underline{\mathcal I}\), and along it
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\operatorname{cosupp}\underline{\mathcal I}_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:marked-finite-sum-tower} the multiple test blow-ups of \(\mathcal C(\underline{\mathcal I})\) are the simultaneous ones of the
+\(\mathcal D^i(\underline{\mathcal I})\), \(i<\mu\); the summand \(i=0\) is \(\underline{\mathcal I}\), and by Lemma~\ref{mc:inclusions-tower} every multiple test blow-up
+of \(\underline{\mathcal I}\) is one of every \(\mathcal D^i(\underline{\mathcal I})\). Along such a tower,
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\bigcap_{i<\mu}\operatorname{cosupp}[\mathcal D^i(\underline{\mathcal I})]_T\); the term \(i=0\) is
+\(\operatorname{cosupp}\underline{\mathcal I}_T\), and for every \(i\), \(\operatorname{cosupp}\underline{\mathcal I}_T\subset\operatorname{cosupp}\mathcal D^i(\underline{\mathcal I}_T)\subset
+\operatorname{cosupp}[\mathcal D^i(\underline{\mathcal I})]_T\) by Definition~\ref{mc:derivative-marked} and \([\mathcal D^i(\underline{\mathcal I})]_T\subset\mathcal D^i(\underline{\mathcal I}_T)\)
+(Lemma~\ref{mc:inclusions-tower}).
+\end{proof}
+This is Włodarczyk's Lemma ``le:coeff'', \(\mathcal C(\underline{\mathcal I})\simeq\underline{\mathcal I}\); the source assumes maximal order, which the proof does not use.
+

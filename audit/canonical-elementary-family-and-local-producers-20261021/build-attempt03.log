@@ -1,0 +1,355 @@
+ℹ [4743/4956] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4891/5163] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainSaturation (2.9s)
+✔ [4912/5167] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainDeformation (3.2s)
+✔ [4930/5167] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainInitialRelations (4.7s)
+✔ [4947/5167] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainGraphDictionary (7.3s)
+✔ [4960/5167] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainInitialEquality (6.1s)
+✔ [4970/5170] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainFinitePolynomialModel (5.3s)
+✔ [4979/5173] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainNearbyInitialKernel (6.4s)
+✔ [4982/5176] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainCoefficientAlgebra (8.7s)
+✔ [4994/5181] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainNearbyFreeness (11s)
+✔ [5004/5182] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainOriginalStalkFreeness (6.3s)
+✔ [5015/5182] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainOriginalCentreOpen (3.3s)
+✔ [5106/5209] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainIntrinsicStalkFreeness (3.0s)
+✔ [5283/5297] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualSheafStalk (5.6s)
+✔ [5287/5309] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualIdealPresheaf (4.9s)
+✔ [5291/5309] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualCentrePowerStalk (5.2s)
+✔ [5294/5309] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk (4.7s)
+✔ [5297/5309] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalLayerStalk (6.8s)
+✔ [5300/5309] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalLayerScalars (5.1s)
+✔ [5301/5309] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalLayerSheaf (7.2s)
+✔ [5302/5312] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf (18s)
+✔ [5303/5337] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf (15s)
+✔ [5306/5350] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedRingStalk (5.7s)
+✔ [5309/5350] Built Hironaka.Support.HolGermMkSubPrimeOriginalExact (1.8s)
+✔ [5312/5350] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf (3.0s)
+✔ [5314/5350] Built Hironaka.Resolution.HironakaActualFormalStandardMonomialHS (2.6s)
+✔ [5318/5390] Built Hironaka.Resolution.HironakaActualCentreJointJets (7.3s)
+✔ [5319/5390] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars (4.4s)
+✔ [5321/5390] Built Hironaka.Resolution.HironakaActualCentrePrincipalParts (13s)
+✔ [5327/5390] Built Hironaka.Resolution.HironakaActualFormalNormalTruncations (5.4s)
+✔ [5329/5390] Built Hironaka.Support.LocalGiraudRegularZeroSetOriginalExact (2.0s)
+✔ [5332/5401] Built Hironaka.MarkedIdeal.MaximalContact (2.7s)
+✔ [5337/5401] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualCentreRingSheaf (5.8s)
+✔ [5339/5401] Built Hironaka.Resolution.HironakaActualCentrePrincipalPartsFree (12s)
+✔ [5340/5401] Built Hironaka.Resolution.HironakaActualTangentDisplacementZeroQuotient (6.3s)
+✔ [5343/5401] Built Hironaka.Resolution.HironakaActualReducedNormalSupport (3.7s)
+✔ [5344/5401] Built Hironaka.Resolution.HironakaActualRelativeFormalQuotients (15s)
+✔ [5345/5401] Built Hironaka.Resolution.HironakaActualCentreContactCoordinates (3.7s)
+✔ [5347/5401] Built Hironaka.Resolution.HironakaActualMultilinearTaylorCoordinates (5.3s)
+✔ [5350/5401] Built Hironaka.Resolution.HironakaActualCentreDualJetSpan (8.6s)
+✔ [5352/5402] Built Hironaka.Resolution.HironakaActualHolomorphicGraphIdeal (8.5s)
+✔ [5354/5470] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk (4.7s)
+✔ [5355/5470] Built Hironaka.Resolution.HironakaActualProductMixedHS (17s)
+✔ [5357/5470] Built Hironaka.Resolution.HironakaActualCentrePrincipalPartsOrderSystem (16s)
+✔ [5363/5470] Built Hironaka.Analytic.SubmanifoldChartedSpace (3.8s)
+✔ [5367/5470] Built Hironaka.Resolution.HironakaActualDiagramStrictHSDrop (3.2s)
+✔ [5371/5470] Built Hironaka.Resolution.HironakaActualPolynomialAnalyticFlatness (4.3s)
+✔ [5375/5470] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualAmbientHS (13s)
+✔ [5379/5470] Built Hironaka.Resolution.HironakaActualProductHSProfileReflection (4.5s)
+✔ [5380/5470] Built Hironaka.Resolution.HironakaActualCentrePrincipalPartsGraded (12s)
+✔ [5381/5470] Built Hironaka.Resolution.HironakaActualPrincipalPartsResidueSymbols (37s)
+✔ [5383/5470] Built Hironaka.Resolution.HironakaActualOriginalVertexConvergence (3.7s)
+✔ [5385/5470] Built Hironaka.Resolution.HironakaActualTaylorReconstruction (3.6s)
+✔ [5387/5470] Built Hironaka.Analytic.SubmanifoldCodRestrict (3.1s)
+✔ [5388/5470] Built Hironaka.Analytic.SubmanifoldIdealRestriction (3.2s)
+✔ [5390/5470] Built Hironaka.Resolution.HironakaRelativeNormalNormalPowerSpread (9.1s)
+✔ [5393/5470] Built Hironaka.Resolution.HironakaActualFormalNormalSeries (6.8s)
+✔ [5394/5470] Built Hironaka.Resolution.HironakaActualExceptionalFibreRelations (8.2s)
+✔ [5396/5470] Built Hironaka.Resolution.HironakaActualPrincipalHSFormula (7.6s)
+✖ [5398/5470] Building Hironaka.Resolution.HironakaOriginalStoppedPrefixSmoothComparison (3.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:45:30: ambiguous identifier `IsInvDomain`, possible interpretations: [ResolutionInvariantSpec.IsInvDomain,
+ ResolutionInvariantSpec.IsInvDomain]
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:132:6: Unknown identifier `IsCanonical`
+
+Note: It is not possible to treat `IsCanonical` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:140:6: Unknown identifier `IsCanonical`
+
+Note: It is not possible to treat `IsCanonical` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:161:11: Unknown identifier `IsInvDomain`
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:170:5: Unknown identifier `not_centresAvoid_of_cosupp_eq_empty`
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:177:16: Unknown identifier `mem_maxLocus_iff_of_centresAvoid`
+error: Hironaka/Resolution/HironakaOriginalStoppedPrefixSmoothComparison.lean:158:49: unsolved goals
+n m : ℕ
+X : CMfd n
+Y : CMfd m
+inst✝ : CompactSpace X.carrier
+V : ClosedIrreducibleAnalyticSubvariety n X.carrier
+hV : V.dim < n
+hcoh : (vanishingIdeal V.carrier).IsCoherent
+b : Y.carrier → X.carrier
+hb : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ b
+M : MarkedIdeal n X.carrier := { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+hM : sorry := sorry
+P : (D : CMfd n) ×
+  { T // ResolutionDriver.IsCanonicalSegment M (fun {Y} => (canonicalInvariant n).inv M) T ∧ M.IsGeoResolution T } :=
+  compactCanonicalTower M ⋯
+N : MarkedIdeal m Y.carrier := markedPullback b M
+O : Opens X.carrier := regularOpen V
+U : Opens Y.carrier := { carrier := b ⁻¹' ↑O, is_open' := ⋯ }
+hcan : ResolutionInvariantSpec.IsCanonical M (fun {Y} => (canonicalInvariant n).inv M) ↑(compactCanonicalTower M ⋯).snd
+hres : M.IsGeoResolution ↑P.snd
+D₀ : CMfd n
+T₀ : BlowupTower X D₀
+R : BlowupTower D₀ P.fst
+hTR : T₀.append R = ↑P.snd
+hc₀ : ResolutionInvariantSpec.IsCanonical M (fun {Y} => (canonicalInvariant n).inv M) T₀
+hav₀ : CentresAvoid O T₀
+c : D₀.carrier
+hc : c ∈ ResolutionDriver.maxLocus ((canonicalInvariant n).inv M T₀) (M.geoTransformAlong T₀).cosupp
+hcO : T₀.proj c ∈ O
+hF : EmbeddingFields n n fun {X} => (canonicalInvariant n).inv :=
+  HironakaFromSeqInvariant.embeddingFields_of_seq (canonicalInvariant n)
+ht₀ : M.IsGeoTestTower T₀
+hadm :
+  (M.geoTransformAlong T₀).IsAdmissibleCentre
+    (ResolutionDriver.maxLocus ((canonicalInvariant n).inv M T₀) (M.geoTransformAlong T₀).cosupp)
+hCV :
+  ∀ (z : D₀.carrier),
+    T₀.proj z ∈ O →
+      (z ∈ ResolutionDriver.maxLocus ((canonicalInvariant n).inv M T₀) (M.geoTransformAlong T₀).cosupp ↔
+        T₀.proj z ∈ V.carrier)
+hdense : V.carrier ⊆ closure (V.carrier ∩ ↑(regularOpen V))
+hSC :
+  strictTransform n T₀.proj V.carrier ⊆
+    ResolutionDriver.maxLocus ((canonicalInvariant n).inv M T₀) (M.geoTransformAlong T₀).cosupp
+hlocal :
+  ∀ x ∈ strictTransform n T₀.proj V.carrier,
+    ∀ᶠ (y : D₀.carrier) in 𝓝 x,
+      y ∈ strictTransform n T₀.proj V.carrier ↔
+        y ∈ ResolutionDriver.maxLocus ((canonicalInvariant n).inv M T₀) (M.geoTransformAlong T₀).cosupp
+hreg₀ : ∀ x ∈ strictTransform n T₀.proj V.carrier, RegularAtDim (strictTransform n T₀.proj V.carrier) x V.dim
+hSM₀ : IsClosedSubmanifold n (strictTransform n T₀.proj V.carrier)
+hNC₀ : HasNormalCrossings n (strictTransform n T₀.proj V.carrier) (M.geoTransformAlong T₀).E
+⊢ ∃ D₀ T₀ R C₀ Q₀ g,
+    T₀.append R = ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd ∧
+      sorry ∧
+        { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.IsGeoTestTower T₀ ∧
+          CentresAvoid (regularOpen V) T₀ ∧
+            (∃
+                c ∈
+                  ResolutionDriver.maxLocus
+                    ((canonicalInvariant n).inv { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } T₀)
+                    ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T₀).cosupp,
+                T₀.proj c ∈ regularOpen V) ∧
+              IsActualTowerPullback b Q₀ T₀ g ∧
+                Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ g ∧
+                  Q₀.length = T₀.length ∧
+                    (∀ (z : C₀.carrier), T₀.proj (g z) = b (Q₀.proj z)) ∧
+                      HolomorphicSquarePullback b g Q₀.proj T₀.proj ∧
+                        sorry ∧
+                          (markedPullback b
+                                  { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).IsGeoTestTower
+                              Q₀ ∧
+                            (markedPullback b
+                                      { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                        d := 1 }).geoTransformAlong
+                                  Q₀ =
+                                markedPullback g
+                                  ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong
+                                    T₀) ∧
+                              ((markedPullback b
+                                          { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                            d := 1 }).geoTransformAlong
+                                      Q₀).E =
+                                  List.map (fun x => g ⁻¹' x)
+                                    ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong
+                                        T₀).E ∧
+                                CentresAvoid { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ } Q₀ ∧
+                                  CentresOver (singularLocus V) T₀ ∧
+                                    CentresOver (b ⁻¹' singularLocus V) Q₀ ∧
+                                      IsAdmissibleBlowupSequence n X.carrier [] (singularLocus V) D₀.carrier T₀.proj
+                                          ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                  d := 1 }.geoTransformAlong
+                                              T₀).E ∧
+                                        IsAdmissibleBlowupSequence m Y.carrier [] (b ⁻¹' singularLocus V) C₀.carrier
+                                            Q₀.proj
+                                            ((markedPullback b
+                                                    { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                      d := 1 }).geoTransformAlong
+                                                Q₀).E ∧
+                                          IsSNCDivisor n
+                                              ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                      d := 1 }.geoTransformAlong
+                                                  T₀).E ∧
+                                            IsSNCDivisor m
+                                                ((markedPullback b
+                                                        { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                          d := 1 }).geoTransformAlong
+                                                    Q₀).E ∧
+                                              strictTransform m Q₀.proj (b ⁻¹' V.carrier) =
+                                                  g ⁻¹' strictTransform n T₀.proj V.carrier ∧
+                                                IsClosedSubmanifold n (strictTransform n T₀.proj V.carrier) ∧
+                                                  IsClosedSubmanifold m (strictTransform m Q₀.proj (b ⁻¹' V.carrier)) ∧
+                                                    (∀ z ∈ strictTransform n T₀.proj V.carrier,
+                                                        RegularAtDim (strictTransform n T₀.proj V.carrier) z V.dim) ∧
+                                                      (∀ z ∈ strictTransform m Q₀.proj (b ⁻¹' V.carrier),
+                                                          RegularAtDim (strictTransform m Q₀.proj (b ⁻¹' V.carrier)) z
+                                                            (V.dim + (m - n))) ∧
+                                                        HasNormalCrossings n (strictTransform n T₀.proj V.carrier)
+                                                            ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                                    d := 1 }.geoTransformAlong
+                                                                T₀).E ∧
+                                                          HasNormalCrossings m
+                                                              (strictTransform m Q₀.proj (b ⁻¹' V.carrier))
+                                                              ((markedPullback b
+                                                                      { N := univ, E := [],
+                                                                        ideal := vanishingIdeal V.carrier,
+                                                                        d := 1 }).geoTransformAlong
+                                                                  Q₀).E ∧
+                                                            ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞
+                                                                T₀.proj ∧
+                                                              ContMDiff 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel m) ∞
+                                                                  Q₀.proj ∧
+                                                                IsProperMap T₀.proj ∧
+                                                                  IsProperMap Q₀.proj ∧
+                                                                    Surjective T₀.proj ∧
+                                                                      Surjective Q₀.proj ∧
+                                                                        T₀.proj '' exceptionalLocus n T₀.proj ⊆
+                                                                            singularLocus V ∧
+                                                                          Q₀.proj '' exceptionalLocus m Q₀.proj ⊆
+                                                                              b ⁻¹' singularLocus V ∧
+                                                                            IsIsomorphismOver n T₀.proj
+                                                                                ↑(regularOpen V) ∧
+                                                                              IsIsomorphismOver m Q₀.proj
+                                                                                ↑{ carrier := b ⁻¹' ↑(regularOpen V),
+                                                                                    is_open' := ⋯ }
+error: Lean exited with code 1
+✔ [5399/5486] Built Hironaka.Resolution.HironakaActualProjectionIntrinsicHS (4.8s)
+✔ [5400/5486] Built Hironaka.Resolution.HironakaActualJointBaseFibre (21s)
+✔ [5401/5486] Built Hironaka.Resolution.HironakaActualHomogeneousInitialTangentDerivatives (6.2s)
+✔ [5402/5486] Built Hironaka.Resolution.HironakaActualConvergentTaylorRealization (3.6s)
+✔ [5403/5486] Built Hironaka.Resolution.HironakaActualAnalyticSubspace (4.8s)
+✔ [5404/5486] Built Hironaka.Resolution.HironakaActualCylinderVanishingIdealExtension (4.3s)
+✖ [5405/5486] Building Hironaka.Resolution.HironakaActualSubmanifoldGermExtension (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaActualSubmanifoldGermExtension.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualSubmanifoldGermExtension.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualSubmanifoldGermExtension.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualSubmanifoldGermExtension.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualSubmanifoldGermExtension.setup.json --json
+error: Hironaka/Resolution/HironakaActualSubmanifoldGermExtension.lean:129:10: Unknown identifier `SubmanifoldRestrictLe.restrictIdeal_le_of_restrictLe`
+error: Lean exited with code 1
+✔ [5407/5486] Built Hironaka.Resolution.HironakaActualInvertibleIntrinsicHS (3.9s)
+✔ [5409/5486] Built Hironaka.Resolution.HironakaActualBlockProjectionIntrinsicHS (4.4s)
+✔ [5414/5486] Built Hironaka.Resolution.HironakaActualTranslatedInitialHS (2.4s)
+✔ [5415/5486] Built Hironaka.Resolution.HironakaActualCentreCoupledSymbols (8.1s)
+✔ [5416/5486] Built Hironaka.Resolution.HironakaActualPureNormalVertices (3.3s)
+✔ [5417/5486] Built Hironaka.Resolution.HironakaActualInitialNormalExtension (3.6s)
+✔ [5418/5486] Built Hironaka.Resolution.HironakaActualInitialSymbolRegularity (5.4s)
+✔ [5419/5486] Built Hironaka.Resolution.HironakaActualOriginalReducedVertexBasis (7.1s)
+✔ [5421/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceMaps (7.8s)
+✔ [5423/5626] Built Hironaka.Resolution.HironakaActualCylinderPullbackOrigin (3.3s)
+✔ [5425/5626] Built Hironaka.Resolution.HironakaActualHypersurfaceBlowupHS (3.0s)
+✔ [5427/5626] Built Hironaka.Resolution.HironakaActualTargetOpenBlockProjectionHS (4.1s)
+✔ [5428/5626] Built Hironaka.Resolution.HironakaActualInitialCoordinateQuotient (3.5s)
+✔ [5429/5626] Built Hironaka.Resolution.HironakaActualOwnerAnalyticDivision (6.0s)
+✔ [5430/5626] Built Hironaka.Resolution.HironakaReducedComplexAnalyticSpaces (3.5s)
+✔ [5431/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspacePresentationIndependence (4.1s)
+✔ [5436/5626] Built Hironaka.Analytic.TowerPreimageCompact (2.0s)
+✔ [5439/5626] Built Hironaka.Support.StepOneCanonicalStepDropOriginalExact (2.7s)
+✔ [5443/5626] Built Hironaka.Resolution.HironakaOriginalAllDepthCompactFullValues (2.9s)
+✔ [5444/5626] Built Hironaka.Resolution.HironakaOriginalAnalyticHSGenericDenominator (13s)
+✔ [5451/5626] Built Hironaka.Resolution.HironakaOriginalGlobalPrincipalization (3.0s)
+✔ [5453/5626] Built Hironaka.Resolution.HironakaOriginalReferenceValueCanonicalNextTransform (3.3s)
+✔ [5458/5626] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf (10s)
+✔ [5460/5626] Built Hironaka.Resolution.HironakaActualCylinderPullbackPoints (3.0s)
+✔ [5465/5626] Built Hironaka.Resolution.HironakaOriginalSmoothSubmersionIntrinsicHS (4.8s)
+✔ [5466/5626] Built Hironaka.Resolution.HironakaActualJointTangentCuts (28s)
+✔ [5467/5626] Built Hironaka.Resolution.HironakaActualNormalFibreDiagramCompare (3.4s)
+✔ [5468/5626] Built Hironaka.Resolution.HironakaActualNormalizedInitialRelations (6.6s)
+✔ [5469/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceOpenRestriction (4.1s)
+✔ [5475/5626] Built Hironaka.Resolution.HironakaOriginalGlobalSequencePrefixSplice (2.9s)
+✔ [5479/5626] Built Hironaka.Resolution.HironakaOriginalCentreAnalyticHSException (3.6s)
+✔ [5482/5626] Built Hironaka.Resolution.HironakaOriginalGlobalSNCPrincipalization (3.3s)
+✔ [5483/5626] Built Hironaka.Resolution.HironakaOriginalGlobalOffZero (3.6s)
+✔ [5484/5626] Built Hironaka.Resolution.HironakaOriginalReferenceValueBoundedStep (3.3s)
+✔ [5489/5626] Built Hironaka.Resolution.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf (8.6s)
+✔ [5491/5626] Built Hironaka.Resolution.HironakaActualSingularChartTransport (2.9s)
+✔ [5492/5626] Built Hironaka.Resolution.HironakaActualGraphFunctionalIdeal (3.0s)
+✔ [5494/5626] Built Hironaka.Resolution.HironakaOriginalSubmersionHSNeighborhoods (4.1s)
+✔ [5495/5626] Built Hironaka.Resolution.HironakaActualTangentCutLayers (26s)
+✔ [5496/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceManifoldCharts (5.1s)
+✔ [5497/5626] Built Hironaka.Resolution.HironakaActualLocalCommonGraphModel (5.2s)
+✔ [5498/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceResidue (11s)
+✔ [5499/5626] Built Hironaka.Resolution.HironakaActualTwoModelAnalyticGlueData (4.3s)
+✔ [5504/5626] Built Hironaka.Resolution.HironakaOriginalCurrentCompactCutGlobalTailPhase (3.6s)
+✔ [5505/5626] Built Hironaka.Resolution.HironakaOriginalCurveTranslationFamily (4.8s)
+✔ [5506/5626] Built Hironaka.Resolution.HironakaOriginalFiniteSimultaneousHSException (3.3s)
+✔ [5508/5626] Built Hironaka.Resolution.HironakaOriginalGlobalProperModification (3.3s)
+✔ [5509/5626] Built Hironaka.Resolution.HironakaOriginalReferenceValueCanonicalTailTransform (3.4s)
+✔ [5513/5626] Built Hironaka.Resolution.HironakaActualSingularSubmersionPullback (3.7s)
+✖ [5514/5626] Building Hironaka.Resolution.HironakaActualGraphContactCoefficient (3.9s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaActualGraphContactCoefficient.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualGraphContactCoefficient.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualGraphContactCoefficient.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualGraphContactCoefficient.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualGraphContactCoefficient.setup.json --json
+error: Hironaka/Resolution/HironakaActualGraphContactCoefficient.lean:82:8: Unknown identifier `LocalGiraudTransform.regularAtDim_zeroSet`
+error: Lean exited with code 1
+✔ [5516/5626] Built Hironaka.Resolution.HironakaOriginalCanonicalSmoothTupleVariation (3.4s)
+✔ [5517/5626] Built Hironaka.Resolution.HironakaActualHSConstantCentreAmbientConvolution (10s)
+✔ [5518/5626] Built Hironaka.Resolution.HironakaActualFixedFlatteningBlowupCoordinates (3.9s)
+✔ [5519/5626] Built Hironaka.Resolution.HironakaActualStandardNormalBases (13s)
+✔ [5520/5626] Built Hironaka.Resolution.HironakaActualCoupledNormalFreeness (63s)
+✔ [5521/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceLocalFunctions (3.9s)
+✔ [5522/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceIntrinsicHS (5.5s)
+✔ [5525/5626] Built Hironaka.Resolution.HironakaReducedComplexAnalyticGluing (3.5s)
+✔ [5526/5626] Built Hironaka.Resolution.HironakaOriginalTranslationFamilyHS (3.7s)
+✔ [5537/5626] Built Hironaka.Resolution.HironakaOriginalSmoothCurveFullHSVariation (3.3s)
+✔ [5542/5626] Built Hironaka.Resolution.HironakaActualFixedFlatteningHSComparison (3.7s)
+✔ [5543/5626] Built Hironaka.Resolution.HironakaActualStandardNormalIndependence (6.8s)
+✔ [5544/5626] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceIntrinsicLifting (3.8s)
+✔ [5547/5626] Built Hironaka.Resolution.HironakaOriginalSmoothCentreFamilyGerm (3.9s)
+✔ [5557/5626] Built Hironaka.Resolution.HironakaOriginalSmoothCurveWholeTupleBadBlowup (3.3s)
+✔ [5562/5626] Built Hironaka.Resolution.HironakaActualHSConstantCentreBennett (3.4s)
+✔ [5563/5626] Built Hironaka.Resolution.HironakaActualCanonicalNormalCoefficientData (4.8s)
+✔ [5564/5626] Built Hironaka.Resolution.HironakaActualWeightedGeneratorTransformJets (6.8s)
+✔ [5565/5626] Built Hironaka.Resolution.HironakaActualSuppliedFlatteningNormalPowers (9.6s)
+✔ [5566/5626] Built Hironaka.Resolution.HironakaReducedComplexAnalyticMorphismCharts (4.5s)
+✔ [5567/5626] Built Hironaka.Resolution.HironakaActualHolomorphicStalkSurjection (4.3s)
+✔ [5569/5626] Built Hironaka.Resolution.HironakaHomogeneousCanonicalTowerMaxima (3.5s)
+✔ [5576/5626] Built Hironaka.Resolution.HironakaOriginalDiscretePreparationFirstEntry (3.2s)
+✔ [5585/5626] Built Hironaka.Resolution.HironakaActualPointNormalizedSaturation (9.1s)
+✔ [5586/5626] Built Hironaka.Resolution.HironakaActualNormalFilteredOwnerDivision (7.1s)
+✔ [5587/5626] Built Hironaka.Resolution.HironakaActualUniformCanonicalCoefficients (4.8s)
+✔ [5588/5626] Built Hironaka.Resolution.HironakaActualCanonicalCoefficientDomains (3.9s)
+✔ [5589/5626] Built Hironaka.Resolution.HironakaActualPersistentHSIdealRigidity (4.9s)
+✔ [5590/5626] Built Hironaka.Resolution.HironakaActualCoefficientControlledTransform (7.5s)
+✔ [5591/5626] Built Hironaka.Resolution.HironakaActualBoundaryContactNormalPowers (3.5s)
+✔ [5592/5626] Built Hironaka.Resolution.HironakaActualIntrinsicIsoPairedWindows (3.9s)
+✖ [5593/5626] Building Hironaka.Resolution.HironakaActualAnalyticSubspaceRegularityConverse (3.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.setup.json --json
+error: Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.lean:64:4: Unknown identifier `exists_image_eq_graph`
+error: Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.lean:63:9: Tactic `rcases` failed: `x✝ : ?m.438` is not an inductive datatype
+error: Hironaka/Resolution/HironakaActualAnalyticSubspaceRegularityConverse.lean:140:8: Unknown identifier `AnalyticSubsetOpens.regularAtDim_image_val_iff.mp`
+error: Lean exited with code 1
+✔ [5594/5626] Built Hironaka.Resolution.HironakaHomogeneousCanonicalResolution (2.7s)
+✔ [5595/5626] Built Hironaka.Resolution.HironakaCanonicalWordHistoryUniqueness (3.2s)
+✔ [5600/5626] Built Hironaka.Resolution.HironakaOriginalDiscretePositiveCompanion (3.3s)
+✔ [5608/5626] Built Hironaka.Resolution.HironakaActualCommonMarkPersistentCosupport (6.7s)
+✔ [5609/5626] Built Hironaka.Resolution.HironakaActualCoefficientCosupportSpread (5.0s)
+✔ [5611/5626] Built Hironaka.Resolution.HironakaActualIntrinsicIsoCommonGraphSquare (3.8s)
+✖ [5612/5626] Building Hironaka.Resolution.HironakaHomogeneousCanonicalNeighbourhoods (3.1s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaHomogeneousCanonicalNeighbourhoods.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaHomogeneousCanonicalNeighbourhoods.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaHomogeneousCanonicalNeighbourhoods.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaHomogeneousCanonicalNeighbourhoods.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaHomogeneousCanonicalNeighbourhoods.setup.json --json
+error: Hironaka/Resolution/HironakaHomogeneousCanonicalNeighbourhoods.lean:205:4: Unknown identifier `MarkedIdealRestrictOpen.isGeoResolution_restrict`
+error: Lean exited with code 1
+✔ [5614/5626] Built Hironaka.Resolution.HironakaOriginalCurvePreparationCompanionSteps (3.3s)
+✔ [5620/5626] Built Hironaka.Resolution.HironakaActualPointTangentCoefficientHSDrop (4.9s)
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaOriginalStoppedPrefixSmoothComparison
+- Hironaka.Resolution.HironakaActualSubmanifoldGermExtension
+- Hironaka.Resolution.HironakaActualGraphContactCoefficient
+- Hironaka.Resolution.HironakaActualAnalyticSubspaceRegularityConverse
+- Hironaka.Resolution.HironakaHomogeneousCanonicalNeighbourhoods
+error: build failed

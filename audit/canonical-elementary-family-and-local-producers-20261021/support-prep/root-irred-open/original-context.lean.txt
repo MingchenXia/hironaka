@@ -1,0 +1,14 @@
+set_option autoImplicit false
+
+open Set Filter
+open scoped Topology
+
+namespace TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents
+
+open FirstPass FirstPass.NonKahlerLocus FirstPass.BlowupSequences
+
+noncomputable section
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+

@@ -1,0 +1,136 @@
+\section{The genuine point-normalized canonical ideal equals whole exceptional saturation}
+
+\begin{lemma}[The canonical analytic normalized member has its literal exceptional initial polynomial]
+\label{hir:actual-original-canonical-point-initial-polynomial-congruence}
+\uses{hir:actual-original-formal-taylor-maximal-power-kernel,hir:actual-original-canonical-reduced-vertex-basis,hir:actual-normal-polynomial-blowup-factorization,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{Hironaka.HironakaActualPointNormalizedSaturation.canonical_point_quotient_initial_congruence}
+\leanok
+Let $G_a$ be the actual canonical reduced analytic family of an original
+ideal $J$, with vertex degree $d_a$, and let $f_a$ be the literal finite
+polynomial of the degree $d_a$ homogeneous Taylor component of $G_a$.
+Every genuine actual point-chart quotient $e^{d_a}H_a=\pi^*G_a$ satisfies
+$H_a-\operatorname{ev}(\delta f_a)\in(e)$ in the entire original target
+germ ring, with the same actual direction parameters and coordinate germs.
+\end{lemma}
+\begin{proof}
+The canonical degree-first lower-support formula annihilates every Taylor
+coefficient below $d_a$. The genuine Taylor polynomial evaluation identity
+therefore gives
+$G_a-\operatorname{ev}(f_a)\in\mathfrak m^{d_a+1}$: through degree
+$d_a$ all its actual coefficients are zero. The actual chart sends this
+whole maximal power into $(e^{d_a+1})$, so its pullback is
+$e^{d_a+1}K$ for an actual analytic germ $K$. Genuine finite homogeneous
+polynomial factorization gives
+$\pi^*\operatorname{ev}(f_a)=e^{d_a}\operatorname{ev}(\delta f_a)$.
+Subtract this from the supplied true quotient equation and cancel the
+nonzero analytic germ $e^{d_a}$ in the actual domain. The result is
+$H_a-\operatorname{ev}(\delta f_a)=eK$, as claimed.
+\end{proof}
+
+\begin{theorem}[One actual normalized canonical family is exceptionally regular]
+\label{hir:actual-original-point-normalized-exceptional-regularity}
+\uses{hir:actual-original-canonical-point-initial-polynomial-congruence,hir:actual-original-point-polynomial-initial-relation-lifts,hir:actual-original-exceptional-fibre-polynomial-syzygies,hir:actual-finite-polynomial-chart-relation-rehomogenization}
+\lean{Hironaka.HironakaActualPointNormalizedSaturation.exists_original_point_exceptional_regular_canonical_family}
+\leanok
+An arbitrary original analytic origin ideal $J$ and actual point chart
+internally supply one actual normalized canonical family $H_a$, with
+$e^{d_a}H_a=\pi^*G_a$, whose whole ideal $N=(H_a)$ satisfies
+$eg\in N\iff g\in N$ for every actual analytic germ $g$.
+No transformed relation-generation, regularity or saturation certificate
+is supplied.
+\end{theorem}
+\begin{proof}
+Choose the actual family from the genuine canonical polynomial initial
+relation-lifting producer, and retain that same family throughout. By
+the preceding lemma its exceptional restriction is the literal
+$p_a=\delta f_a$. These polynomials are independent of the pivot variable.
+
+Suppose $eg=\sum_a H_aA_a$ in the actual target germ ring. Modulo $(e)$,
+this is the actual analytic polynomial relation $\sum_a p_aA_a=0$.
+The proved whole exceptional-fibre flatness and relation-generation
+producer supply finitely many pivot-free polynomial syzygies $c_{al}$
+and actual analytic $B_l$ with
+$A_a-\sum_l\operatorname{ev}(c_{al})B_l\in(e)$ and
+$\sum_a c_{al}p_a=0$. For each column, genuine finite rehomogenization
+internally gives one degree $D_l\ge d_a$ and homogeneous $P_{al}$ of
+degrees $D_l-d_a$, with $\delta P_{al}=c_{al}$ and
+$\sum_aP_{al}f_a=0$ as a whole polynomial identity.
+
+Use exactly these whole initial relations in the already fixed family's
+actual analytic lifting theorem. It produces actual $L_{al},R_{al}$
+with $\sum_aH_aL_{al}=0$ and
+$L_{al}=\operatorname{ev}(c_{al})+eR_{al}$. Consequently
+$A_a-\sum_lL_{al}B_l\in(e)$. Choose actual analytic $D_a$ with
+$A_a-\sum_lL_{al}B_l=eD_a$. Subtract the finite true target relations
+multiplied by their $B_l$ from the original whole equation. Interchanging
+the two finite sums gives $eg=e\sum_aH_aD_a$. Cancel the actual nonzero
+coordinate germ $e$ to get $g=\sum_aH_aD_a\in N$. The converse follows
+because $N$ is an ideal. This also includes the unit ideal and empty
+canonical family.
+\end{proof}
+
+\begin{theorem}[The actual normalized-member ideal is the whole total-pullback saturation]
+\label{hir:actual-original-point-normalized-total-saturation}
+\uses{hir:actual-original-point-normalized-exceptional-regularity,hir:actual-original-canonical-reduced-vertex-basis,hir:actual-analytic-normalized-member-ideal}
+\lean{Hironaka.HironakaActualPointNormalizedSaturation.actual_point_normalized_member_iff_total_saturation}
+\leanok
+For every original ideal $J$ and actual point chart, the independently
+defined whole analytic normalized-member ideal equals the entire
+exceptional saturation of the whole total pullback:
+\[
+ g\in J^{\mathrm{norm}}\iff
+ \exists q\ge0:\ e^qg\in\pi^*J.
+\]
+This whole normalized ideal is exceptionally regular. One finite power
+colon of the whole total pullback, with internally chosen bound
+$D=\sum_a d_a$, already equals it.
+\end{theorem}
+\begin{proof}
+Retain the same family from the preceding theorem and put $N=(H_a)$.
+Every $G_a$ belongs to $J\cap\mathfrak m^{d_a}$, so its true quotient
+$H_a$ is an actual normalized original member. Hence $N$ is contained
+in the independently defined normalized-member ideal. Conversely any
+normalized member $h$ satisfies $e^qh=\pi^*g$ for a true $g\in J$.
+The original actual canonical generators span all of $J$, and their
+pullbacks are $e^{d_a}H_a$, so $\pi^*J\subseteq N$. Repeated exceptional
+regularity of $N$ therefore gives $h\in N$. Whole ideal-span closure
+proves equality of the two entire ideals.
+
+The same argument gives $e^qg\in\pi^*J\Rightarrow g\in N$.
+For the reverse inclusion, take the actual uniform finite degree
+$D=\sum_a d_a$. Every $d_a\le D$. Multiplying each actual generator
+by $e^D$ gives
+$e^DH_a=e^{D-d_a}\pi^*G_a\in\pi^*J$. Thus the whole ideal $N$ is
+contained in $(\pi^*J:e^D)$. This proves the asserted equivalence,
+the one finite colon equality and exceptional regularity without a
+finite-jet or radical substitute.
+\end{proof}
+
+\begin{corollary}[The actual point-normalized ideal is the whole geometric strict ideal]
+\label{hir:actual-original-point-normalized-geometric-strict-ideal}
+\uses{hir:actual-original-point-normalized-total-saturation,hir:actual-original-analytic-geometric-strict-whole-saturation}
+\lean{Hironaka.HironakaActualPointNormalizedSaturation.actual_point_normalized_eq_geometric_strict}
+\leanok
+For an original analytic subset $W$ of actual ambient dimension $n\ge2$,
+the whole point-normalized ideal of its actual origin vanishing ideal is
+exactly the whole origin vanishing ideal of the literal actual geometric
+strict transform in every point chart.
+\end{corollary}
+\begin{proof}
+Apply the preceding original-ideal saturation theorem to the actual
+whole vanishing origin ideal of $W$. The genuine original analytic
+strict-pullback saturation theorem applies to the same point chart,
+with zero tangent block and normal dimension $n\ge2$. It identifies
+membership in the entire geometric strict ideal with the same actual
+existence of a power $e^q$ sending the numerator into that same whole
+total pullback. The two proved membership equivalences therefore give
+equality of the whole original ideals, with unchanged actual map,
+subset and origin.
+\end{proof}
+
+\begin{remark}
+The conclusion concerns genuine point blowups. The corresponding relative
+regular-centre relation module, transformed maximal-ideal standardness,
+reverse current Hilbert--Samuel persistence and uniform history remain
+separate; none follows merely from exceptional regularity.
+\end{remark}

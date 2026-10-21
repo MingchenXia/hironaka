@@ -1,0 +1,136 @@
+\section{Actual blowups restricted to arbitrary closed regular native contacts}
+
+Let $N\subset A^n$ be an actual original closed subset regular everywhere
+of dimension $k\le n$. Give $N$ its genuine native flattening atlas.
+A centre $D\subset N$ below is genuinely smooth, closed and nowhere dense
+inside this actual native manifold. The ambient centre is the literal
+image $C=j(D)$, and $\pi:Y^n\to A$ is an actual blowup along $C$.
+No global holomorphic retraction onto $N$ is assumed.
+
+\begin{theorem}[Actual native contact geometry and the entire matched centre ideal]
+\label{hir:actual-closed-contact-native-geometry}
+\uses{hir:actual-submanifold-whole-singular-vanishing-restriction,ana:submanifold-complex-structure,ana:submanifold-corestriction,ana:blowups}
+\lean{Hironaka.HironakaActualClosedContactBlowupRestriction.centre_pullback,Hironaka.HironakaActualClosedContactBlowupRestriction.strictChartedSpace,Hironaka.HironakaActualClosedContactBlowupRestriction.strict_isComplexManifold,Hironaka.HironakaActualClosedContactBlowupRestriction.restrictedProjection_contMDiff,Hironaka.HironakaActualClosedContactBlowupRestriction.restrictedProjection_factor}
+\leanok
+The actual strict contact
+$S=\overline{\pi^{-1}(N\setminus C)}$ has an internally constructed
+native complex manifold structure of dimension $k$. The literal
+corestriction $\sigma:S\to N$, $\sigma(z)=\pi(z)$, is genuinely
+holomorphic and satisfies $\pi j_S=j\sigma$. The whole independently
+defined original centre ideals satisfy $j^*\mathcal I_C=\mathcal I_D$.
+No chart, ambient germ extension or ideal equality is an input.
+\end{theorem}
+\begin{proof}
+The genuine entire singular-subset vanishing restriction theorem applies
+to the original $D\subset N$ and supplies the whole matched centre ideal;
+it constructs every needed ambient germ extension from actual original
+flattening charts. Since $N$ is actually closed and regular and contains
+$C$, the actual strict-submanifold theorem proves original regularity of
+every point of $S$ with the same dimension $k$. Its genuine native
+flattening atlas gives the required manifold structure and holomorphic
+inclusion. Actual continuity gives $\pi(S)\subseteq N$, so the literal
+map $\sigma$ is defined. Compose the holomorphic inclusion with $\pi$
+and apply the genuine native submanifold corestriction theorem; this
+proves its holomorphy. The factor identity is the exact equality of the
+literal underlying functions.
+\end{proof}
+
+\begin{theorem}[An actual lower blowup has a genuine proper lift with entire strict-contact image]
+\label{hir:actual-closed-contact-proper-strict-lift}
+\uses{hir:actual-closed-contact-native-geometry,hir:submersion-choice-image-trace-whole-pullback,ana:blowups}
+\lean{Hironaka.HironakaActualClosedContactBlowupRestriction.exists_unique_lift,Hironaka.HironakaActualClosedContactBlowupRestriction.lift_proper_and_range}
+\leanok
+For every independently given actual lower blowup $\rho:Z^k\to N$
+along the same original $D$, actual ambient universality constructs a
+unique holomorphic $\kappa:Z\to Y$ with $\pi\kappa=j\rho$.
+This actual lift is proper and its entire range is exactly $S$.
+\end{theorem}
+\begin{proof}
+Whole pullback composition and the preceding actual centre ideal
+identity identify $(j\rho)^*\mathcal I_C$ with
+$\rho^*\mathcal I_D$, which is invertible by the actual lower blowup
+definition. Genuine ambient universality constructs the unique lift.
+The literal inclusion $j$ is a closed embedding, hence proper. The
+actual lower blowup is proper, so $\pi\kappa=j\rho$ is proper;
+continuity of $\pi$ and the genuine Hausdorff criterion make $\kappa$
+proper. No global projection from $A$ is used.
+
+The complement of $\rho^{-1}D$ is genuinely dense. Its image under
+$\kappa$ lies in $\pi^{-1}(N\setminus C)$: actual commutation and
+injectivity of the literal inclusion prove both memberships. Continuity
+and closure therefore put the entire range in $S$. Conversely, for any
+$y$ in that defining dense subset of $S$, view $\pi(y)$ as its actual
+point of $N$. Surjectivity of $\rho$ supplies a preimage $z$.
+Commutation gives $\pi(\kappa z)=\pi(y)$, and both points lie off
+the ambient centre. Actual ambient off-centre injectivity gives
+$\kappa z=y$. The proper lift has closed entire range, so taking the
+whole closure proves $S\subseteq\operatorname{range}\kappa$.
+\end{proof}
+
+\begin{theorem}[The literal native contact projection is the full actual lower blowup]
+\label{hir:actual-closed-contact-full-restricted-blowup}
+\uses{hir:actual-closed-contact-native-geometry,hir:actual-closed-contact-proper-strict-lift,hir:geo-transform-wellformed,ana:blowup-existence,ana:submanifold-corestriction}
+\lean{Hironaka.HironakaActualClosedContactBlowupRestriction.restrictedProjection_invertible,Hironaka.HironakaActualClosedContactBlowupRestriction.exists_strictContact_diffeomorph,Hironaka.HironakaActualClosedContactBlowupRestriction.restrictedProjection_isBlowupAlong}
+\leanok
+From the original closed regular $N$, original smooth closed nowhere
+dense $D\subset N$ and the actual ambient blowup $\pi$ alone,
+the same literal $\sigma:S\to N$ is an actual blowup along $D$,
+including its universal property for test manifolds of every dimension.
+No lower blowup, inverse comparison or invertibility certificate is input.
+\end{theorem}
+\begin{proof}
+The actual exceptional ideal is invertible \emph{along} the same strict
+contact $S$. Genuine intrinsic ideal restriction makes its whole
+restriction invertible. The literal factor identity and whole centre
+pullback identify that restricted ideal with $\sigma^*\mathcal I_D$.
+This uses actual nonvanishing along the stratum; ambient invertibility
+alone is not substituted for it.
+
+Internally choose an actual lower blowup $\rho$ from the original smooth
+closed nowhere dense centre. The preceding theorem constructs $\kappa$
+and proves its entire strict-contact range. Genuine holomorphic native
+corestriction gives $\alpha:Z\to S$. Lower universality applied to
+the actual $\sigma$ and its proved whole centre invertibility constructs
+a holomorphic reverse map $\beta:S\to Z$. Lower universal uniqueness
+gives $\beta\alpha=1$. For the other identity use \emph{ambient}
+universality on $\pi j_S$, whose entire centre pullback was just proved
+invertible: both $\kappa\beta$ and $j_S$ are genuine lifts of this
+same actual map. Uniqueness gives $\kappa\beta=j_S$ and hence
+$\alpha\beta=1$. Thus these actual maps construct a true native
+biholomorphism. Transport every lower universal lift by this actual
+biholomorphism, and use its inverse for uniqueness, to verify every
+field of the actual restricted blowup definition.
+\end{proof}
+
+\begin{theorem}[Every singular subset retains its whole centre-relative strict closure]
+\label{hir:actual-closed-contact-every-subset-strict-closure}
+\uses{hir:actual-closed-contact-native-geometry,hir:actual-closed-contact-full-restricted-blowup}
+\lean{Hironaka.HironakaActualClosedContactBlowupRestriction.strictTransform_image}
+\leanok
+For \emph{every} original subset $W\subset N$, without smoothness,
+closedness, analyticity or coherence, the same actual inclusion satisfies
+\[
+ j_S\bigl(\overline{\sigma^{-1}(W\setminus D)}\bigr)
+ =\overline{\pi^{-1}(j(W)\setminus C)}.
+\]
+These are exactly the centre-relative \texttt{geoStrictTransform}
+closures. No ordinary exceptional-locus \texttt{strictTransform}
+equality is asserted.
+\end{theorem}
+\begin{proof}
+The literal corestriction identity gives the exact complement image
+$j_S(\sigma^{-1}(W\setminus D))
+=\pi^{-1}(j(W)\setminus C)$. For the reverse containment every point
+on the right already lies in the defining dense subset of $S$; its
+literal image as an intrinsic point lies in $W\setminus D$.
+The actual inclusion of $S$ is a closed embedding, so it commutes with
+the whole closure of every subset. Applying this native closure theorem
+to the exact complement equality proves the asserted entire equality.
+\end{proof}
+
+Whole controlled ideal restriction on this same actual blowup still needs
+its genuine cancellation/admissibility proof. Canonical invariant tails,
+maximal centres, ordered boundaries and effective proper resolution descent
+are not consequences of this one-step geometry. Ordinary strict transforms
+also require their own actual exceptional-locus or density dictionary;
+divisor-centre identity blowups make the distinction essential.

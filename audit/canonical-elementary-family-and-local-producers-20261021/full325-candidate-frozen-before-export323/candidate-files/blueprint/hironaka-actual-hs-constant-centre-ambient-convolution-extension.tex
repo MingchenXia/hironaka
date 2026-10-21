@@ -1,0 +1,94 @@
+\section{Ambient Hilbert--Samuel values at the actual selected centre point}
+\label{sec:hironaka-actual-hs-constant-centre-ambient-convolution}
+
+Write $B=\mathcal O_{\mathbb C^d,0}$ and
+$R=\mathcal O_{\mathbb C^{d+t},0}$ with their genuine tangent-coordinate
+scalar action. Let $N$ be the whole normal-coordinate ideal and let
+$G_q(I)=\operatorname{im}(N^q\to R/(I+N^{q+1}))$.
+The conclusions below concern the actual selected point, rather than
+an unspecified point of an accumulating generic open.
+
+\begin{lemma}[Finite free whole normal layers compute ambient Hilbert--Samuel values]
+\label{hir:actual-selected-normal-free-ambient-hs-convolution}
+\uses{hir:relative-normal-actual-power-lift-truncation-compatible-filtration,hir:relative-normal-original-nearby-ambient-weighted-layer-decomposition,hir:relative-normal-actual-weighted-layer-binomial-dimension}
+\lean{Hironaka.HironakaActualHSConstantCentreAmbientConvolution.hilbertSamuelValue_eq_normal_layer_convolution}
+\leanok
+Let $I\subset R$ be an actual whole ideal. Suppose every actual
+$G_q(I)$ is a finite free $B$-module. Then, for every $\ell\ge0$,
+\[
+ H_I(\ell)=\sum_{q=0}^{\ell}
+   \operatorname{rank}_B G_q(I)\binom{d+\ell-q}{d}.
+\]
+All powers and ranks in this formula refer to the unchanged original
+ideal and its actual tangent-base action.
+\end{lemma}
+\begin{proof}
+Choose the genuine $B$-linear lifts of the free normal layers to their
+whole normal powers. The resulting single whole representative map
+identifies every original truncation with its finite normal-degree
+coordinates, preserving every normal-filtration level. The true
+mixed ideal of order $s$ is $(\mathfrak m_B R+N)^s$, which equals
+the actual ambient maximal ideal to power $s$. The proved weighted
+quotient dictionary therefore identifies
+$R/(I+\mathfrak m_R^{\ell+1})$, as a complex vector space, with
+\[
+ \bigoplus_{q=0}^{\ell}
+ G_q(I)/\mathfrak m_B^{\ell+1-q}G_q(I).
+\]
+Every term is finite-dimensional: its actual finite free $B$-basis
+identifies it with one copy of $B/\mathfrak m_B^{\ell+1-q}$ per
+basis element. The actual base-jet dimension is
+$\binom{d+\ell-q}{d}$, and the number of basis elements is the
+finite free rank. Taking dimensions of this literal finite direct
+sum gives the stated formula, including $q=0$ and $\ell=0$.
+\end{proof}
+
+\begin{theorem}[Original constant-Hilbert--Samuel centre geometry gives the selected-point formula]
+\label{hir:actual-original-hs-constant-centre-ambient-convolution}
+\uses{hir:actual-original-centre-normal-layers-finite-free,hir:actual-selected-normal-free-ambient-hs-convolution,hir:smooth-centre-fixed-real-original-ambient-hs-dictionary}
+\lean{Hironaka.HironakaActualHSConstantCentreAmbientConvolution.exists_original_hs_constant_centre_ambient_convolution}
+\leanok
+Let $C$ be regular of dimension $d$ at $x$ in a complex manifold of
+dimension $d+t$. Let $\mathcal A$ be a coherent ideal whose entire
+intrinsic Hilbert--Samuel function is constant along $C$.
+There is one genuine local flattening $\Phi$ of $C$ with $\Phi(x)=0$
+such that, for the unchanged origin ideal $I_0$ of $\mathcal A$ in
+these coordinates, every actual $G_q(I_0)$ is finite free over $B$
+and, for every $\ell\ge0$,
+\[
+ H_{\mathcal A,x}(\ell)=\sum_{q=0}^{\ell}
+   \operatorname{rank}_B G_q(I_0)\binom{d+\ell-q}{d}.
+\]
+The geometric hypotheses are only regularity, coherence and intrinsic
+Hilbert--Samuel constancy. Finite freeness of the whole normal layers
+is produced internally from those original inputs.
+\end{theorem}
+\begin{proof}
+Apply the genuine original-centre normal-layer producer to the given
+regularity, coherence and all-order intrinsic constancy. It supplies
+one actual flattening $\Phi$, its whole coordinate-plane membership
+dictionary, and finite freeness of every whole normal layer of the
+same original ideal $I_0$. Retain those witnesses before applying
+the preceding dimension theorem.
+
+The genuine inverse flattening sends zero to $x$, because $\Phi(x)=0$
+and its true local inverse identities hold at the centre. The actual
+fixed-flattening whole-stalk algebra dictionary identifies the whole
+original ideal at $x$ with $I_0$ under a genuine complex germ algebra
+equivalence. That equivalence preserves the entire maximal ideal and
+all its powers; it therefore identifies every actual ambient jet
+quotient and preserves its complex dimension. Thus
+$H_{\mathcal A,x}(\ell)=H_{I_0}(\ell)$ at each order.
+The preceding formula for this same $I_0$ now gives the stated
+selected-point identity. The unchanged $\Phi$ and $I_0$ work for all
+degrees.
+\end{proof}
+
+\begin{remark}
+This is an actual ambient Hilbert--Samuel dictionary at the selected
+point of the original centre. It does not derive normal-power
+compatibility of canonical reduced vertices, Bennett nonincrease
+under arbitrary centre blowup, or termination of a sequence of
+centres inside the current strict-transform singular locus.
+Those remaining G8 producers are separate assertions.
+\end{remark}

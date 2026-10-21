@@ -1,0 +1,17 @@
+\begin{lemma}[The restricted coefficient ideal along multiple test blow-ups]
+\label{mc:coefficient-restriction-tower}
+\uses{mc:restrict-tower,mc:coefficient-equivalent,mc:restrict-order,mc:restrict-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.coeff_restrict_tower}
+\leanok
+Let \(S\subset M\) be a closed submanifold and \(T\) a multiple test blow-up of \(\underline{\mathcal I}\) with centres in the strict transforms of \(S\).
+Then \(T\) is a multiple test blow-up of \(\mathcal C(\underline{\mathcal I})|_S\), along it \([\mathcal C(\underline{\mathcal I})|_S]_T\) is
+restricted-equivalent to \(\mathcal C(\underline{\mathcal I})_T|_{S_T}\), and
+\(\operatorname{cosupp}\underline{\mathcal I}_T\cap S_T\subset\operatorname{cosupp}[\mathcal C(\underline{\mathcal I})|_S]_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:coefficient-equivalent}, \(T\) is a multiple test blow-up of \(\mathcal C(\underline{\mathcal I})\) and
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\operatorname{cosupp}\underline{\mathcal I}_T\). Lemma~\ref{mc:restrict-tower} for
+\(\underline{\mathcal B}=\mathcal C(\underline{\mathcal I})\) gives the first two statements, and the inclusion follows from Lemma~\ref{mc:restrict-order}.
+\end{proof}

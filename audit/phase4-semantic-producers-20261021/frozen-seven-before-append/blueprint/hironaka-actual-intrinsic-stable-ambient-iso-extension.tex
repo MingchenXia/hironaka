@@ -1,0 +1,57 @@
+\section{Intrinsic isomorphisms and genuine stable ambient coordinates}
+
+Write $E=\mathbf C^n$, $F=\mathbf C^m$ and retain the original ordered blocks in $E\oplus F$. The two coordinate-plane embeddings below are $x\mapsto(x,0)$ and $y\mapsto(0,y)$. They are closed embeddings with added zero coordinates, not cylinders with unrestricted extra coordinates.
+
+\begin{lemma}[Two actual triangular shears on their true opens]
+\label{hir:actual-stable-ambient-shears}
+\uses{hir:actual-intrinsic-iso-paired-original-windows}
+\lean{Hironaka.HironakaActualIntrinsicStableAmbientIso.stableAmbientIso}
+\leanok
+Let $A\subset E$ and $B\subset F$ be open, and let $f:E\to F$ and $g:F\to E$ be holomorphic on $A$ and $B$, respectively. Put
+\[
+ \Omega=\{(x,y):x\in A,\ f(x)+y\in B\},\qquad
+ \Lambda=\{(u,v):v\in B,\ u+g(v)\in A\}.
+\]
+These are open, and
+\[
+ \Psi(x,y)=(x-g(f(x)+y),\ f(x)+y),\qquad
+ \Theta(u,v)=(u+g(v),\ v-f(u+g(v)))
+\]
+are mutually inverse biholomorphisms $\Omega\rightleftarrows\Lambda$.
+\end{lemma}
+\begin{proof}
+On the open set $x\in A$ the map $(x,y)\mapsto f(x)+y$ is holomorphic, hence continuous; its inverse image of $B$, intersected with that open set, is $\Omega$. On $v\in B$ the map $(u,v)\mapsto u+g(v)$ is similarly continuous, giving the openness of $\Lambda$. If $(x,y)\in\Omega$, write $v=f(x)+y$ and $u=x-g(v)$. Then $v\in B$ and $u+g(v)=x\in A$, so $\Psi(x,y)\in\Lambda$. Conversely, if $(u,v)\in\Lambda$, put $x=u+g(v)$ and $y=v-f(x)$. Then $x\in A$ and $f(x)+y=v\in B$, so $\Theta(u,v)\in\Omega$. Substituting these formulas gives $\Theta\Psi(x,y)=(x,y)$ and $\Psi\Theta(u,v)=(u,v)$ without any inverse assumption on $f,g$. Holomorphy on the displayed opens follows from holomorphy of the projections, addition and subtraction, and composition with $f$ only at points of $A$ and with $g$ only at points of $B$. Thus both inverse maps are actual holomorphic maps on their true domains.
+\end{proof}
+
+\begin{lemma}[Whole stabilized subset comparison]
+\label{hir:actual-stable-ambient-subset-iso}
+\uses{hir:actual-stable-ambient-shears}
+\lean{Hironaka.HironakaActualIntrinsicStableAmbientIso.stableAmbientIso_plane_iff,Hironaka.HironakaActualIntrinsicStableAmbientIso.stablePlaneSubspaceIso}
+\leanok
+In the preceding situation let $C\subset E$ and $D\subset F$. Suppose $f$ maps $C\cap A$ into $D\cap B$, $g$ maps $D\cap B$ into $C\cap A$, and $gf(x)=x$ and $fg(y)=y$ on those respective subsets. Then
+\[
+ \Psi^{-1}\bigl(\Lambda\cap(\{0\}\times D)\bigr)
+   =\Omega\cap(C\times\{0\}).
+\]
+The same biholomorphism therefore induces an actual isomorphism of the whole reduced quotient-ringed subspaces of these two zero-coordinate planes.
+\end{lemma}
+\begin{proof}
+For $x\in C\cap A$, the source point $(x,0)$ lies in $\Omega$ because $f(x)\in B$. Its image is $(x-g(f(x)),f(x))=(0,f(x))$, which belongs to $\{0\}\times D$. Conversely, if $(0,v)\in\Lambda$ with $v\in D$, then $v\in D\cap B$ and its inverse image is $(g(v),v-f(g(v)))=(g(v),0)$, with $g(v)\in C\cap A$. Every point of $\Omega$ is the inverse image of its image under $\Psi$, so these two inclusions prove the entire displayed inverse-image equality. Restriction of the ambient biholomorphism and its inverse gives actual quotient-subspace morphisms. Their composites are identities on the whole quotient sheaves, by functoriality of actual subspace maps and the ambient inverse identities. No equality of structure sheaves is assumed.
+\end{proof}
+
+\begin{theorem}[A specified intrinsic isomorphism internally gives stable ambient coordinates]
+\label{hir:actual-intrinsic-iso-stable-ambient}
+\uses{hir:actual-intrinsic-iso-paired-original-windows,hir:actual-stable-ambient-subset-iso}
+\lean{Hironaka.HironakaActualIntrinsicStableAmbientIso.exists_actual_intrinsic_stable_ambient_iso}
+\leanok
+Let $C\subset U\subset\mathbf C^n$ and $D\subset V\subset\mathbf C^m$ be original closed analytic models, where $U,V$ are open. Let $e$ be a specified isomorphism of their actual reduced locally ringed models over the complex point. For every original point $c\in C$, there exist true coordinate opens $A\subset U$, $B\subset V$, containing $c,e(c)$, original maps $f,g$ holomorphic on those opens, and the actual ambient biholomorphism $\Psi:\Omega\to\Lambda$ of the first lemma, with the whole stabilized subset and quotient-subspace comparison of the second lemma. For every original $x\in C\cap A$ it retains the given isomorphism:
+\[
+ \Psi(x,0)=(0,e(x)).
+\]
+In particular the displayed true ambient neighborhoods contain $(c,0)$ and $(0,e(c))$. No ambient extension, neighborhood, inverse identity or stabilized comparison is an input.
+\end{theorem}
+\begin{proof}
+Apply the actual paired-window theorem to the given isomorphism and point. It constructs $A,B,f,g$ internally, with $f(x)=e(x)$ for every original $x\in C\cap A$, $g(y)=e^{-1}(y)$ on $D\cap B$, and the two inverse identities on those subsets. These maps are holomorphic only on the actual opens furnished by that theorem; no extension to larger ambient opens is used. Apply the two preceding lemmas to these exact maps and carrier subsets. They construct the actual ambient biholomorphism and whole quotient-model isomorphism. The point formula is $\Psi(x,0)=(x-g(f(x)),f(x))=(0,e(x))$. Its source and target membership follow from $x\in A$ and $f(x)\in B$; at $x=c$ these are the required neighborhood statements.
+\end{proof}
+
+This result is a concrete stable ambient embedding comparison. It does not assert invariance of canonical centres or invariant tails under addition of zero-coordinate equations, nor descent of proper resolution histories over an abstract atlas.

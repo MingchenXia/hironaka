@@ -1,0 +1,57 @@
+\section{Actual coefficient summability from genuine homogeneous analytic bounds}
+
+\begin{theorem}[Degree-band coefficient majorants imply actual whole-series summability]
+\label{hir:actual-degree-band-coefficient-summability}
+\uses{hir:actual-monomial-owner-absolute-bounds}
+\lean{Hironaka.HironakaActualHomogeneousCoefficientSummability.finite_mass_of_degree_band_majorants}
+Let $F$ and $P_k$ be actual formal series with
+$F_\alpha=(P_{|\alpha|})_\alpha$. Suppose every $P_k$ has finite
+actual coefficient mass at a fixed positive polyradius $\rho$,
+$|P_k|_\rho\leq b_k$, and $\sum_k b_k$ converges. Then the entire
+actual series $F$ has finite coefficient mass at $\rho$.
+No homogeneity of unused coefficients of $P_k$ is required.
+\leanok
+\end{theorem}
+\begin{proof}
+Partition all actual exponent vectors by their genuine total degree.
+On the degree-$k$ part the exact coefficient dictionary identifies
+the actual summand with that of $P_k$. Restricting a genuinely
+summable nonnegative family preserves summability, and its sum is
+at most the sum over the entire original exponent type. Thus every
+degree part is summable and its total is bounded by $|P_k|_\rho$,
+hence by $b_k$. The nonnegative comparison test makes the sequence
+of these actual degree-part sums summable. The genuine countable
+partition summability theorem then proves summability of the entire
+original coefficient family, which is exactly the asserted mass.
+\end{proof}
+
+\begin{theorem}[A positive multilinear radius and actual polynomial band bounds produce a genuine coefficient radius]
+\label{hir:actual-multilinear-bands-positive-coefficient-radius}
+\uses{hir:actual-degree-band-coefficient-summability}
+\lean{Hironaka.HironakaActualHomogeneousCoefficientSummability.exists_uniform_radius_of_multilinear_bands}
+Let $p$ be an actual formal multilinear series of positive convergence
+radius, and let $P_k$ be genuine finite coordinate polynomials.
+Suppose their actual uniform-radius coefficient masses satisfy
+$|P_k|_r\leq n^k\|p_k\|r^k$ for every $r>0$.
+There is a single $r>0$, chosen before $F$, such that every actual
+series with $F_\alpha=(P_{|\alpha|})_\alpha$ has finite absolute
+coefficient mass at the uniform polyradius $r$.
+\leanok
+\end{theorem}
+\begin{proof}
+Choose a positive finite $s$ strictly inside the actual convergence
+radius of $p$, and put $r=s/(n+1)$. Then $r>0$ and $nr\leq s$.
+The genuine multilinear-radius theorem gives summability of
+$\|p_k\|(nr)^k=n^k\|p_k\|r^k$. Every original $P_k$ has finite
+coefficient support and therefore finite mass without an analytic
+certificate. The displayed actual mass bound and exact degree-band
+coefficient dictionary now satisfy the previous theorem. This
+produces one genuine positive coefficient radius, including $n=0$,
+without assuming the desired whole-series coefficient summability.
+\end{proof}
+
+The polynomial/analytic Taylor coefficient dictionary and finite
+polynomial mass estimate are explicit inputs here; a separate actual
+Taylor producer must derive them for original holomorphic germs.
+The genuine multilinear convergence radius alone is not substituted
+for the whole coefficient-mass conclusion.

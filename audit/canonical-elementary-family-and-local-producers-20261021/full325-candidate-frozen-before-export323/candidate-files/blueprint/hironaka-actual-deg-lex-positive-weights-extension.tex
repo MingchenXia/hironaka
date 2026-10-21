@@ -1,0 +1,53 @@
+\section{One positive integer weight realizes all bounded deg-lex lower terms}
+
+\begin{theorem}[An explicit radix weight realizes bounded lexicographic comparisons]
+\label{hir:actual-bounded-lex-radix-weight}
+\lean{Hironaka.HironakaActualDegLexPositiveWeights.bounded_lex_radix_strict}
+Let $a,b\in\mathbb N^n$, $|a|\leq D$, and $a<_{\rm lex}b$,
+with the first coordinate having highest lexicographic priority.
+For $B=D+2$ the literal integer sum
+$L(a)=\sum_i a_i B^{n-i}$ satisfies $L(a)<L(b)$.
+The upper exponent $b$ need not be bounded.
+\leanok
+\end{theorem}
+\begin{proof}
+Choose the first differing coordinate $j$: all previous coordinates
+agree and $a_j<b_j$. All weights after $j$ are at most
+$B^{n-j-1}$. Their total contribution for $a$ is at most
+$D B^{n-j-1}<B^{n-j}$. Split each finite sum into the common
+initial part, coordinate $j$, and the remaining part. Increasing
+the $j$-th coefficient by one outweighs the entire remaining part
+of $a$; the remaining contribution of $b$ is nonnegative.
+This proves the asserted strict inequality directly in the natural
+numbers, including when the remaining index set is empty.
+\end{proof}
+
+\begin{theorem}[A single positive integer weight realizes every bounded deg-lex comparison]
+\label{hir:actual-deg-lex-positive-integer-weights}
+\uses{hir:actual-bounded-lex-radix-weight}
+\lean{Hironaka.HironakaActualDegLexPositiveWeights.exists_positive_weights_of_bounded_degLex}
+For every $n,D$ there is one $w\in\mathbb N_{>0}^n$ such that
+for every $a,b\in\mathbb N^n$, $|a|\leq D$ and
+$a<_{\rm deglex}b$ imply $w\cdot a<w\cdot b$.
+The same weight works for all such pairs, including arbitrarily
+large upper exponents.
+\leanok
+\end{theorem}
+\begin{proof}
+Use the previous literal radix weights, and choose
+$M=D B^n+1$. Set $w_i=M+B^{n-i}$, which is positive.
+Its literal weight on an exponent is $M|a|+L(a)$.
+For $|a|\leq D$, each radix factor is at most $B^n$, so
+$L(a)\leq D B^n<M$. If $|a|<|b|$, one extra unit of
+the common degree contribution outweighs the entire radix
+contribution of $a$, while $L(b)\geq0$. If the degrees are equal,
+the actual deg-lex relation is exactly the lexicographic relation,
+and the previous theorem applies. Both cases use the same explicitly
+constructed positive integer weight. When $n=0$ there are no strict
+comparisons, so the same construction satisfies the assertion.
+\end{proof}
+
+These weights are genuine outputs from the finite degree bound. They
+are intended to produce a common positive radius for actual analytic
+vertex division; this finite order theorem itself makes no analytic
+convergence, prepared-family or HS-history claim.

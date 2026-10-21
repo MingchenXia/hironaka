@@ -1,0 +1,140 @@
+\section{Actual exceptional jet exact sequences and the whole fibre HS profile}
+
+Write $R=\mathbb C[[x_1,\ldots,x_n]]$ and let $\mathfrak m$ be its
+genuine coordinate ideal. The fibre extension below is the literal
+whole span of the pivot-zero projections of the SAME generators.
+
+\begin{definition}[Actual finite jets, exceptional multiplication and fibre projection]
+\label{hir:actual-exceptional-finite-jet-maps}
+\uses{hir:actual-exceptional-pivot-zero-projection}
+\lean{TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.actualIdealJet,TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.exceptionalJetMul,TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.exceptionalJetFibreProjection}
+\leanok
+For an actual ideal $I$, define $V_q(I)=R/(I+\mathfrak m^q)$.
+Multiplication by the actual variable $x_e$ gives
+$u_q:V_q(I)\to V_{q+1}(I)$, and the literal quotient gives
+$v_q:V_{q+1}(I)\to V_{q+1}(I+(x_e))$.
+Both maps retain every original numerator and its genuine complex
+linear action.
+\end{definition}
+
+\begin{theorem}[The whole actual jet exact sequence and its rank recurrence]
+\label{hir:actual-exceptional-jet-exact-sequence-rank}
+\uses{hir:actual-exceptional-finite-jet-maps,hir:actual-exceptional-homogeneous-fibre-regular-initial-symbol}
+\lean{TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.exceptionalJetMul_injective,TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.exceptionalJetFibreProjection_kernel,TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.exceptionalJetDimension_add}
+\leanok
+If the actual whole colon identity
+$(I+\mathfrak m^{q+1}):x_e=I+\mathfrak m^q$ holds, then
+\[
+0\longrightarrow V_q(I)\xrightarrow{u_q}V_{q+1}(I)
+\xrightarrow{v_q}V_{q+1}(I+(x_e))\longrightarrow0
+\]
+is exact. Consequently the genuine finite complex dimensions satisfy
+$\dim V_{q+1}(I)=\dim V_q(I)+\dim V_{q+1}(I+(x_e))$.
+The colon input is the actual ideal identity proved in the preceding
+chapter; the original-data consumer below derives it internally.
+\end{theorem}
+\begin{proof}
+Multiplication sends $I+\mathfrak m^q$ into
+$I+\mathfrak m^{q+1}$, so $u_q$ is well defined. A class $[F]$ is in
+its kernel precisely when $x_eF\in I+\mathfrak m^{q+1}$; the disclosed
+whole colon equality puts $F$ in the original denominator, proving
+injectivity. The actual quotient map $v_q$ is surjective. If $[F]$
+lies in its kernel, write $F=A+x_eB+C$ with $A\in I$ and
+$C\in\mathfrak m^{q+1}$. Then $[F]=u_q[B]$ in the same middle jet.
+Conversely every $u_q[B]$ vanishes under $v_q$. Thus the entire kernel
+is the entire multiplication range. Every displayed quotient is
+finite dimensional by the genuine formal-jet theorem. Rank-nullity,
+the actual surjectivity of $v_q$ and injectivity of $u_q$ give the
+stated exact dimension addition.
+\end{proof}
+
+\begin{theorem}[A literal pivot-fixed family has all whole colon identities]
+\label{hir:actual-pivot-fixed-fibre-whole-colons}
+\uses{hir:actual-exceptional-pivot-projection-kernel-powers}
+\lean{TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.pivot_fixed_span_point_colon_eq,TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.span_add_pivot_eq_shadow_span_add_pivot}
+\leanok
+If each generator $p_i$ is fixed by the actual pivot-zero projection,
+then its whole span $J=(p_i)$ satisfies
+$(J+\mathfrak m^{q+1}):x_e=J+\mathfrak m^q$ for every $q$.
+For any original finite family $H_i$, its actual whole span and the
+literal shadow span $J=(\rho_e(H_i))$ have exactly the same whole
+ideal after adding $(x_e)$.
+\end{theorem}
+\begin{proof}
+Suppose $x_eF=\sum_i p_iA_i+B$ with
+$B\in\mathfrak m^{q+1}$. Projection and pivot fixedness give
+$0=\sum_i p_i\rho_e(A_i)+\rho_e(B)$.
+Subtract this whole identity from the first. Each difference
+$A_i-\rho_e(A_i)$ and $B-\rho_e(B)$ has zero projection and hence
+is divisible by the actual $x_e$. Write them as $x_eC_i$ and $x_eD$.
+The latter difference remains in $\mathfrak m^{q+1}$, so the actual
+coefficient shift puts $D\in\mathfrak m^q$.
+Cancelling the genuine nonzero variable in the whole series domain
+gives $F=\sum_i p_iC_i+D\in J+\mathfrak m^q$.
+The reverse inclusion follows by multiplying its two summands by
+$x_e$, giving the entire colon equality, with no homogeneity or
+incoming regularity premise.
+
+For the second assertion, each actual difference
+$H_i-\rho_e(H_i)$ lies in $(x_e)$ by the same genuine kernel theorem.
+Hence each original generator belongs to the shadow span plus
+$(x_e)$, and each shadow generator belongs to the original span plus
+$(x_e)$. Taking whole spans and adjoining $(x_e)$ gives both ideal
+inclusions and therefore exact equality.
+\end{proof}
+
+\begin{theorem}[Actual symbol regularity determines the entire fibre HS profile]
+\label{hir:actual-exceptional-regular-symbol-fibre-hs-profile}
+\uses{hir:actual-exceptional-jet-exact-sequence-rank,hir:actual-pivot-fixed-fibre-whole-colons}
+\lean{TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.genuineFormalHilbertSamuelValue_eq_shadow_of_colons}
+\leanok
+Let $I=(H_i)$ and let $J=(\rho_e(H_i))$ be its literal fibre extension.
+If $I$ has the whole colon identities at every order, then
+$H_I(\ell)=H_J(\ell)$ at every actual finite order.
+\end{theorem}
+\begin{proof}
+The actual projections are idempotent, so all generators of $J$ are
+pivot fixed and the preceding theorem supplies its whole colon
+identities internally. It also identifies the entire ideals
+$I+(x_e)=J+(x_e)$. At order zero both jet spaces $V_0$ are genuinely
+zero, since their denominators contain $\mathfrak m^0=R$.
+Induct on $q$. The two genuine rank recurrences express the dimensions
+of $V_{q+1}(I)$ and $V_{q+1}(J)$ as the dimensions at $q$ plus the
+dimensions of their actual fibre quotients. The induction hypothesis
+identifies the first summands, and the whole ideal equality after
+adding $(x_e)$ identifies the second summands. Hence every whole jet
+dimension agrees. Taking $q=\ell+1$ gives the actual entire HS profile
+identity.
+\end{proof}
+
+\begin{theorem}[The same original normalized family retains its whole fibre HS profile]
+\label{hir:actual-original-point-order-retaining-fibre-hs-profile}
+\uses{hir:actual-canonical-point-normalized-strict-filtered-division,hir:actual-exceptional-regular-symbol-fibre-hs-profile,hir:actual-original-formal-entire-hs-transfer}
+\lean{TranscendentalNakamaye.Pending.HironakaActualExceptionalJetHSComparison.exists_original_point_order_retaining_fibre_hs_family}
+\leanok
+An original analytic germ ideal and point chart internally choose ONE
+canonical normalized analytic family $H_a$ before every current-order
+hypothesis and every finite HS order. If every $H_a$ retains its own
+original vertex order, the entire independently named normalized ideal
+has the same actual HS profile as the literal whole fibre extension
+$(\rho_e(\widehat H_a))$ of this SAME family. No symbol-regularity,
+filtered-division or HS certificate is an input.
+\end{theorem}
+\begin{proof}
+Retain the exact same canonical family from the original-data strict
+symbol producer, including its whole normalized-ideal span and actual
+quotient equations. Under the disclosed all-current-order bounds,
+that producer internally gives every whole formal colon identity for
+the entire Taylor extension. Apply the preceding profile theorem to
+this same finite family, using the exact whole span equality and its
+literal pivot shadows. The genuine whole original/formal finite-jet
+equivalence identifies the normalized analytic HS value with the HS
+value of its entire Taylor extension. Substitution gives the stated
+all-order identity without selecting another family or assuming the
+target profile.
+\end{proof}
+
+Identifying the source homogeneous initial ideal with this fibre
+extension through actual invertible linear coordinates, the converse
+from HS persistence to every normalized order, positive-dimensional
+centres and the full current-history driver remain separate.

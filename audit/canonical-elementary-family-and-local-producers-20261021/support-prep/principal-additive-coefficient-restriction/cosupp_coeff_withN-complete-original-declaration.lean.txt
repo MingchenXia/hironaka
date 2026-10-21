@@ -1,0 +1,9 @@
+/-- **Włodarczyk `le:S`, the support** (GGT Proposition 5.6.4, first statement): for `𝔪 = (X, X, E, 𝔞, μ)` with
+`𝔞` coherent and `μ ≥ 1`, and ANY set `S`, `supp(𝔪) ∩ S = supp(𝓒(𝔪)|_S)`. -/
+theorem cosupp_coeff_withN (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)
+    (S : Set X) : (withN (coeffMarked 𝔪) S).cosupp = 𝔪.cosupp ∩ S := by
+  refine Subset.antisymm (fun x hx => ⟨cosupport_coeff_subset hN h𝔞 hd S hx, hx.1⟩) ?_
+  have h0 := (coeff_tower 𝔪 hN h𝔞 hd (BlowupTower.refl : BlowupTower X X)).2 trivial
+  rw [geoTransformAlong_refl, geoTransformAlong_refl] at h0
+  rw [← h0]
+  exact cosupp_inter_subset_cosupp_withN (𝔟 := coeffMarked 𝔪) hN S

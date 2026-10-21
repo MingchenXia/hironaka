@@ -1,0 +1,133 @@
+\section{Actual point-chart lifts of canonical initial relations}
+
+\begin{lemma}[Analytic normalization preserves a whole weighted syzygy]
+\label{hir:actual-analytic-normalized-weighted-syzygy}
+\uses{hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{Hironaka.HironakaActualNormalizedInitialRelations.exists_actual_normalized_syzygy}
+\leanok
+Let $G_a,C_a$ be a finite family of actual holomorphic origin germs,
+let $d_a\le D$, and suppose $C_a\in\mathfrak m^{D-d_a}$ and $\sum_a G_aC_a=0$.
+In an actual point blowup chart write $e$ for its exceptional coordinate
+and $\pi^*$ for the genuine analytic pullback. For any actual quotients
+$e^{d_a}H_a=\pi^*G_a$, there are actual holomorphic germs $L_a$
+with $e^{D-d_a}L_a=\pi^*C_a$ and the whole relation
+$\sum_a H_aL_a=0$.
+\end{lemma}
+\begin{proof}
+The whole point maximal ideal maps to the principal ideal $(e)$ under
+the actual chart. Consequently the given whole powers supply analytic
+quotients $L_a$ of $\pi^*C_a$. For every index, the equality
+$d_a+(D-d_a)=D$ gives
+$e^D H_aL_a=(e^{d_a}H_a)(e^{D-d_a}L_a)=\pi^*(G_aC_a)$.
+Sum these actual identities. The source whole relation makes their sum
+zero. The genuine coordinate germ $e$ is nonzero in the actual analytic
+germ domain, so cancellation of $e^D$ proves the claimed whole relation.
+\end{proof}
+
+\begin{theorem}[Every canonical homogeneous initial relation lifts in the same actual normalized family]
+\label{hir:actual-original-point-normalized-initial-relation-lifts}
+\uses{hir:actual-original-homogeneous-initial-analytic-syzygy,hir:actual-analytic-normalized-weighted-syzygy,hir:actual-normal-quotient-canonical-exceptional-restriction,hir:actual-original-formal-taylor-maximal-power-kernel}
+\lean{Hironaka.HironakaActualNormalizedInitialRelations.exists_original_point_normalized_initial_relation_lifts}
+\leanok
+For an arbitrary original analytic origin ideal $J$, fix its actual
+canonical reduced analytic family $G_a$ and vertex degrees $d_a$.
+Every actual point chart internally supplies one family $H_a$ with
+$e^{d_a}H_a=\pi^*G_a$, before all following choices of relations.
+Let $D\ge d_a$ for every index, and let $P_a$ be actual analytic germs
+whose whole Taylor series are homogeneous of degree $D-d_a$.
+Assume the literal homogeneous initial relation
+\[
+ \sum_a T(P_a)\operatorname{hom}_{d_a}T(G_a)=0.
+\]
+Then this same actual normalized family admits analytic germs $L_a,V_a,R_a$
+with
+\[
+ \sum_a H_aL_a=0,\qquad
+ e^{D-d_a}V_a=\pi^*P_a,\qquad L_a=V_a+eR_a.
+\]
+In particular the exceptional restriction of $L_a$ is the literal
+finite dehomogenization of the actual degree $D-d_a$ normal polynomial
+of $P_a$:
+\[
+ L_a-\operatorname{dehom}_{j,b}
+    \operatorname{hom}^{\rm normal}_{D-d_a}(P_a)\in(e).
+\]
+All sums and equalities concern whole actual analytic germs.
+\end{theorem}
+\begin{proof}
+The degree-first lower support of the actual canonical reduced Taylor
+series gives $G_a\in\mathfrak m^{d_a}$ by the whole original Taylor
+maximal-power dictionary. Thus the genuine chart internally supplies
+one analytic family $H_a$ with the displayed exceptional identities;
+fix it now.
+
+For the given literal homogeneous relation, actual analytic initial
+syzygy lifting supplies germs $C_a$ with $\sum_aG_aC_a=0$ and
+$P_a-C_a\in\mathfrak m^{D+1-d_a}$. Homogeneity of the entire Taylor
+series of $P_a$ gives $P_a\in\mathfrak m^{D-d_a}$. Since
+$D+1-d_a=(D-d_a)+1$, the correction belongs to this same lower power,
+so $C_a$ does too. Apply the preceding normalization lemma to the
+fixed $H_a$ and these actual $C_a$, obtaining analytic $L_a$ and the
+whole target relation.
+
+Actual exceptional division also gives analytic $V_a,R_a$ satisfying
+$e^{D-d_a}V_a=\pi^*P_a$ and
+$e^{D+1-d_a}R_a=\pi^*(C_a-P_a)$. Subtract the first equation from
+the corresponding equation for $L_a$. Since the two exponents differ
+by one, cancellation of the nonzero $e^{D-d_a}$ gives exactly
+$L_a-V_a=eR_a$. Finally the true normal homogeneous polynomial of
+$P_a$ has remainder in $\mathfrak m^{D+1-d_a}$, so its actual
+normalized quotient has the established exceptional restriction.
+That restriction for $V_a$, followed by the literal $eR_a$ correction,
+is the stated restriction for $L_a$.
+\end{proof}
+
+
+\begin{theorem}[Literal polynomial initial relations have exact analytic normalized lifts]
+\label{hir:actual-original-point-polynomial-initial-relation-lifts}
+\uses{hir:actual-original-point-normalized-initial-relation-lifts,hir:actual-normal-polynomial-blowup-factorization,hir:actual-original-polynomial-low-coefficient-separation,hir:actual-original-formal-taylor-algebra-embedding}
+\lean{Hironaka.HironakaActualNormalizedInitialRelations.exists_original_point_polynomial_relation_lifts}
+\leanok
+The same original ideal and actual point chart internally fix one actual
+normalized canonical family $H_a$ before all following relations. If finite
+complex polynomials $p_a$ are homogeneous of degree $D-d_a$, where
+$D\ge d_a$, and satisfy the literal whole formal relation
+$\sum_a p_a\operatorname{hom}_{d_a}T(G_a)=0$, there are actual analytic
+$L_a,R_a$ with the whole target relation $\sum_aH_aL_a=0$ and the exact
+whole-germ formula
+\[
+ L_a=\operatorname{dehom}_{j,b}(p_a)+eR_a.
+\]
+Here polynomial dehomogenization uses the actual chart coordinates,
+retains every original complex coefficient as its constant germ,
+and sets the pivot homogeneous coordinate to one.
+\end{theorem}
+\begin{proof}
+Evaluate each $p_a$ at the actual original coordinate germs to obtain
+$P_a$. The genuine Taylor algebra homomorphism sends this evaluation
+to the original polynomial $p_a$ included in formal series: this follows
+on constants and variables from its genuine coordinate formula, and
+then on the whole polynomial by its additive and multiplicative laws.
+Thus the preceding theorem applies and supplies $L_a,V_a,R_a$ for the
+same already fixed $H_a$.
+
+Map $p_a$ to the normal polynomial ring over the zero-dimensional
+actual base germ ring by its literal constant germs. Coefficientwise
+this preserves its stated degree homogeneity. Actual polynomial
+blowup factorization therefore gives
+$\pi^*P_a=e^{D-d_a}\operatorname{dehom}_{j,b}(p_a)$.
+The independently supplied normalization gives
+$\pi^*P_a=e^{D-d_a}V_a$. Cancel the genuine nonzero analytic germ
+$e^{D-d_a}$ to identify the whole $V_a$ with this literal polynomial
+dehomogenization. Substitute into the already proved whole analytic
+relation and exact $eR_a$ correction.
+\end{proof}
+
+\begin{remark}
+This is a genuine lift of polynomial initial relations to whole
+analytic relations in the same actual point-normalized family. The
+explicit condition $D\ge d_a$ is retained. Generation of all completed
+exceptional-fibre relations, exceptional regularity of the normalized
+ideal, equality with the total-pullback saturation, reverse current
+Hilbert--Samuel persistence and uniform history remain separate.
+\end{remark}

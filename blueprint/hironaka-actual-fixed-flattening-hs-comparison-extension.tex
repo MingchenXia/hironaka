@@ -1,0 +1,164 @@
+\section{Whole vanishing ideals and strict-transform Hilbert--Samuel values in fixed blowup coordinates}
+\label{sec:hironaka-actual-fixed-flattening-hs-comparison}
+
+Fix a genuine centred target flattening $\Phi$ at $x\in X$ and
+write $V=\Phi.\mathrm{target}$. For any original subset $W\subset X$,
+its literal model set is
+\[
+ A_\Phi(W)=\{a\in V:e_x^{-1}(\Phi^{-1}(a))\in W\}\subset\mathbb C^n.
+\]
+It is empty outside the true target. No global extension of the
+coordinate inverse is asserted holomorphic.
+
+\begin{theorem}[The same flattened original vanishing ideal is the whole model vanishing ideal]
+\label{hir:actual-fixed-flattening-whole-model-vanishing-ideal}
+\uses{hir:real-centre-domain-actual-flattened-coherent-family,hir:actual-flat-coordinate-open-biholomorphism,hir:actual-any-subset-open-whole-vanishing-ideal}
+\lean{Hironaka.HironakaActualFixedFlatteningHSComparison.actualFixedFlatteningSet,Hironaka.HironakaActualFixedFlatteningHSComparison.flattened_vanishing_mem_iff,Hironaka.HironakaActualFixedFlatteningHSComparison.originalFlattenedVanishingOriginIdeal_eq_model}
+\leanok
+Let $\Phi$ have its genuine source inside the original chart and
+$\Phi(x)=0$. For every $a\in V$, pulling back the original whole
+vanishing ideal of $W$ by the actual inverse flattening gives,
+at $a$, exactly the vanishing germs of $A_\Phi(W)$. Consequently
+the actual original origin ideal obtained by flattening that
+vanishing sheaf and translating by zero is literally
+$\mathcal I_{A_\Phi(W),0}$ inside the unchanged origin germ ring.
+This holds for any subset $W$; no analyticity or coherence of
+$W$ is required.
+\end{theorem}
+\begin{proof}
+The inverse flattening is holomorphic near each point of $V$.
+Every pulled original vanishing function vanishes on the literal
+model set. Finite holomorphic linear combinations do too, proving
+one membership implication.
+
+Conversely, suppose a holomorphic germ $f$ at $a$ vanishes on the
+model set. On the original flat domain define its inverse-coordinate
+expression $g(u)=f(\Phi(e_x(u)))$. Both factors are holomorphic
+there, so $g$ is holomorphic near the inverse image of $a$.
+This inverse expression vanishes on $W$ near that point: the
+forward coordinate lies in $V$, and the actual inverse identity
+places it in $A_\Phi(W)$. Its pullback is exactly $f$ near $a$
+by the true right inverse identity. Thus a single genuine pulled
+vanishing germ generates $f$.
+
+Zero lies in $V$ because $\Phi(x)=0$. Translation by zero is
+the actual identity map. Applying the membership equivalence
+to its finite generating expressions identifies the resulting
+origin generators with the genuine model vanishing germs;
+the vanishing ideal is already closed under finite holomorphic
+combinations. Taking the whole ideal spans proves the literal
+origin-ideal equality.
+\end{proof}
+
+\begin{theorem}[Every original Hilbert--Samuel value is computed in the same model set]
+\label{hir:actual-fixed-flattening-original-intrinsic-hs-equality}
+\uses{hir:actual-flat-coordinate-inverse-any-subset-intrinsic-hs,hir:actual-any-subset-open-intrinsic-hs}
+\lean{Hironaka.HironakaActualFixedFlatteningHSComparison.hilbertSamuelAt_eq_fixedFlattening_model}
+\leanok
+For the same actual flattening and any subset $W\subset X$,
+the intrinsic Hilbert--Samuel function of its whole vanishing
+ideal at $x$ equals the intrinsic function of the whole model
+vanishing ideal of $A_\Phi(W)$ at zero, at every order.
+\end{theorem}
+\begin{proof}
+The actual inverse flattening is a biholomorphism from the true
+target open $V$ to the original flat domain. Its inverse sends
+zero to $x$. Invariance under that genuine biholomorphism and
+the original open inclusion identifies the intrinsic function
+at $x$ with that of the inverse-image subset on $V$. The
+inverse-image subset equals $V\cap A_\Phi(W)$ by the literal
+definition. The genuine open-restriction dictionary identifies
+its whole stalk with the ambient model whole stalk at zero.
+Their actual ambient maximal-power quotients therefore have
+the same dimensions at every order.
+\end{proof}
+
+\begin{theorem}[A fixed actual polynomial blowup square retains the whole strict set and its intrinsic function]
+\label{hir:actual-fixed-flattening-strict-set-hs-equality}
+\uses{hir:actual-open-coordinate-geometric-strict-square,hir:actual-flat-coordinate-inverse-any-subset-intrinsic-hs,hir:actual-any-subset-open-intrinsic-hs}
+\lean{Hironaka.HironakaActualFixedFlatteningHSComparison.strictTransform_eq_fixedFlattening_preimage,Hironaka.HironakaActualFixedFlatteningHSComparison.hilbertSamuelAt_strict_eq_fixedFlattening_model}
+\leanok
+Let $\pi:Y\to X$ be holomorphic, $z\in Y$, and let the genuine
+centred local coordinates $\Phi$ at $\pi(z)$ and $\Theta$ at
+$z$ give the whole actual square
+\[
+ \Phi(e_{\pi(z)}(\pi(u)))=
+ P(\Theta(e_z(u))),\qquad
+ P=\pi^{\mathrm{normal}}_{k,j,b},
+\]
+with all source images in the true flat domain of $\Phi$.
+Put $U=\Theta.\mathrm{target}$ and let $c:U\to Y$ be its
+genuine inverse coordinates. Then for any subset $W\subset X$
+the whole strict sets satisfy
+\[
+ c^{-1}(\operatorname{strict}_\pi W)
+ =U\cap\operatorname{strict}_P A_\Phi(W).
+\]
+Consequently the intrinsic Hilbert--Samuel function of the
+actual strict-transform vanishing ideal at $z$ equals that
+of the model strict-transform vanishing ideal at zero, at
+every order. This requires no monic family, normal-power
+property or Hilbert--Samuel inequality.
+\end{theorem}
+\begin{proof}
+Use the actual inverse coordinate biholomorphisms
+$a:V\to X$ and $c:U\to Y$. The given whole square makes
+$P$ map $U$ into $V$, so it restricts to a genuine
+holomorphic map $Q:U\to V$ with $\pi c=aQ$.
+The open-coordinate strict-transform theorem applied first
+to $(\pi,Q,a,c)$ gives
+\[
+ \operatorname{strict}_Q(a^{-1}W)
+ =c^{-1}(\operatorname{strict}_\pi W).
+\]
+Applied to the actual open inclusions for $(P,Q)$, it gives
+\[
+ \operatorname{strict}_Q(V\cap A_\Phi(W))
+ =U\cap\operatorname{strict}_P A_\Phi(W).
+\]
+The two input subsets on $V$ are equal by definition, proving
+the whole strict-set identity. These identities include
+closures and the genuine exceptional loci; they do not
+discard points on the exceptional divisor.
+
+Zero lies in both genuine coordinate targets, and $c(0)=z$.
+The inverse-coordinate whole-stalk dictionary transports
+the original strict-transform intrinsic function to its
+preimage under $c$. Replace that whole subset by the
+proved strict-set identity, and then use the actual open
+inclusion dictionary on $U$. This gives the asserted
+equality at each order.
+\end{proof}
+
+\begin{theorem}[The original blowup internally supplies the same fixed-chart Hilbert--Samuel comparisons]
+\label{hir:actual-fixed-flattening-original-blowup-hs-comparisons}
+\uses{hir:actual-fixed-flattening-blowup-coordinate-square,hir:actual-fixed-flattening-original-intrinsic-hs-equality,hir:actual-fixed-flattening-strict-set-hs-equality,hir:actual-fixed-flattening-whole-model-vanishing-ideal}
+\lean{Hironaka.HironakaActualFixedFlatteningHSComparison.exists_actual_fixed_flattening_blowup_hs_comparisons}
+\leanok
+Let $\pi$ be the genuine blowup along $C$, and fix an actual
+centred flattening $\Phi$ of that same centre at $\pi(z)$.
+For every original subset $W$, the blowup internally supplies
+a normal pivot, parameters and genuine source coordinates
+such that both preceding intrinsic Hilbert--Samuel equalities
+hold at every order, using this unchanged supplied $\Phi$
+and its same whole model vanishing origin ideal.
+\end{theorem}
+\begin{proof}
+Construct the actual blowup square for the supplied flattening
+by the fixed-flattening coordinate theorem. Apply the whole
+model vanishing-ideal equality and original intrinsic equality
+to that same $\Phi$. Apply the whole strict-set and intrinsic
+equality theorem to the genuine source coordinates and literal
+square just constructed. Retain all source domains, the
+original target flattening and the same model set. Every
+order uses these unchanged witnesses, proving the conclusion.
+\end{proof}
+
+\begin{remark}
+These are exact coordinate and whole-ideal dictionaries.
+They supply the geometric transport required to apply a
+model Bennett inequality once the actual canonical reduced
+vertex normal-power condition is proved for this same
+original ideal. That condition and a terminating driver
+with centres in the current singular locus remain separate.
+\end{remark}

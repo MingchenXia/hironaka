@@ -1,0 +1,98 @@
+\section{Literal actual normal-layer section images and their whole original stalks}
+
+For an original ideal $A$ and subset $C$, write $I_A(V)$ and $J_C(V)$
+for their entire actual section ideals on a true original open $V$.
+The degree-$q$ section layer is defined FIRST as the literal image of
+$J_C(V)^q$ in the actual ring $\mathcal O(V)/(I_A(V)+J_C(V)^{q+1})$.
+Its operations are the inherited quotient addition and actual ambient
+section multiplication. No stalk equivalence defines these operations.
+
+\begin{definition}[True image layers on actual original opens]
+\label{hir:real-domain-actual-normal-layer-section-presheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-graded-literal-layers,hir:real-domain-actual-remainder-quotient-ring-presheaf,hir:real-domain-actual-centre-power-section-whole-germ-image}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerSection,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualWholeNormalLayer,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerRestrict,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerRestrict_class,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalk}
+\leanok
+For EVERY $A,C,q$, these literal actual image layers form an additive
+presheaf on true original opens. Every class of an actual power section
+restricts to the class of its SAME restricted actual section, and the
+degree-$q$ stalk is its genuine neighbourhood colimit.
+\end{definition}
+\begin{proof}
+Every section layer element has an actual degree-$q$ power representative.
+The actual quotient restriction maps its class to the class of that
+representative restricted to the smaller original open. The true power
+restriction dictionary puts that representative in the SAME degree
+power there; hence the entire image layer is preserved. Restrict the
+independently constructed quotient ring homomorphism to the entire
+image layer. It preserves zero and addition because the original quotient
+homomorphism does. Its formula holds for EVERY actual power representative.
+The quotient restriction identity and composition give the layer
+restriction identity and composition, since two layer elements are equal
+when their original quotient values are equal. These define the genuine
+additive presheaf and its literal neighbourhood colimit.
+\end{proof}
+
+\begin{lemma}[Actual image-layer germs retain all original power classes]
+\label{hir:real-domain-actual-normal-layer-whole-germ-map}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-section-presheaf,hir:real-domain-actual-remainder-quotient-ring-presheaf,hir:real-domain-actual-centre-power-section-whole-germ-image}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerSectionGermHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerSectionGermHom_class,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerGermCocone,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkToWholeHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkToWholeHom_germ}
+\leanok
+The genuine actual layer colimit has an internally constructed additive
+map to the ENTIRE original image of $J_{C,y}^q$ in
+$\mathcal O_y/(I_{A,y}+J_{C,y}^{q+1})$. EVERY class of a genuine power
+section maps to the class of its SAME actual original ring germ. This
+construction requires no coherence or caller stalk map.
+\end{lemma}
+\begin{proof}
+The true section-quotient germ homomorphism maps the whole section layer
+into the whole original layer: take an actual power representative and
+apply the proved true power germ dictionary. Restrict the existing
+quotient germ homomorphism to this entire image layer. It is additive,
+with the stated formula for every actual power section. The actual
+quotient-germ restriction identity proves compatibility of these layer
+maps, including all representatives. Thus they form a true neighbourhood
+cocone. The actual additive colimit universal property supplies the
+stated map, and its section-germ formula follows from the colimit cocone
+identity. The layer map was constructed from literal quotient and power
+sections before this whole-stalk comparison.
+\end{proof}
+
+\begin{theorem}[Entire original normal layers are literal actual image-layer colimit stalks]
+\label{hir:real-domain-actual-normal-layer-whole-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-whole-germ-map,hir:real-domain-actual-remainder-quotient-whole-ring-stalk-equivalence,hir:real-domain-actual-centre-power-section-whole-germ-image}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkToWholeHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkWholeEquiv_germ,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerStalk.actualNormalLayerStalkWholeEquiv_class}
+\leanok
+ONLY original coherence of $A$ internally makes the SAME actual map a
+genuine additive equivalence at EVERY $C,y,q$, including $q=0$. It
+identifies the literal image-layer presheaf colimit stalk with the ENTIRE
+original normal layer and retains EVERY actual power-class formula.
+No caller kernel, normal-layer equivalence or desired certificate is used.
+\end{theorem}
+\begin{proof}
+For surjectivity take an arbitrary whole original layer element and an
+original power representative of it. The true entire centre-power germ
+image dictionary internally supplies an actual power section on a true
+original neighbourhood with that SAME original ring germ. Its actual
+layer class has a genuine colimit germ, whose whole layer image is the
+required element by the preceding representative formula.
+
+For injectivity represent two actual layer colimit elements by actual
+layer sections on true original opens. Equality of their whole layer
+images gives equality of their whole original quotient values. Under the
+proved actual remainder-quotient colimit map, these are precisely the
+images of the corresponding genuine section-quotient colimit germs.
+Original coherence makes that SAME quotient map injective, so the two
+actual section-quotient colimit germs are equal. Actual presheaf colimit
+germ equality supplies a genuine common smaller original open on which
+the two restricted section quotient values are equal. The literal layer
+restrictions have exactly these quotient values. They are equal as
+subtypes, so genuine layer colimit germ extension gives equality of the
+original two layer colimit elements. Bijectivity upgrades the SAME
+additive map and retains every actual section and power-class formula.
+Independent colimit ambient module actions, descended centre scalars,
+bundled sheaf gluing and the associated whole direct-sum stalk remain
+subsequent constructions.
+\end{proof}

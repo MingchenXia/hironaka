@@ -1,0 +1,53 @@
+/- Complete original compact blowup surjectivity prerequisites. Draft only. -/
+import Hironaka.Resolution.StrictTransformComposition
+
+set_option autoImplicit false
+
+open Set Filter
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace Hironaka.StrictTransformComposition
+
+open Hironaka.BlowupSequences
+
+noncomputable section
+
+variable {n : ℕ}
+  {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+    [IsComplexManifold n X]
+  {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+    [IsComplexManifold n Y]
+  {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z]
+    [IsComplexManifold n Z]
+/-- **A blowup of a compact manifold is surjective**: it is an isomorphism over the
+dense complement of the centre, and its image is compact, hence closed. -/
+theorem surjective_of_isBlowupAlong [CompactSpace Y] {C : Set Y} {g : Z → Y}
+    (hg : IsBlowupAlong n C g) : Function.Surjective g := by
+  have := BlowupCompact.compactSpace_of_isBlowupAlong hg
+  have hclosed : IsClosed (range g) := (isCompact_range hg.contMDiff.continuous).isClosed
+  have hsub : Cᶜ ⊆ range g := fun y hy => by
+    obtain ⟨z, -, hz⟩ :=
+      (BlowupIsomorphismOff.isIsomorphismOver_compl_of_isBlowupAlong hg).1.2.2 hy
+    exact ⟨z, hz⟩
+  have hdense : closure Cᶜ = univ := by rw [closure_compl, hg.2.1, compl_empty]
+  intro y
+  have h := hclosed.closure_subset_iff.mpr hsub
+  rw [hdense] at h
+  exact h (mem_univ y)
+
+/-- **A blowup sequence of a compact manifold** has compact source and is surjective. -/
+theorem IsBlowupSequence.compactSpace_surjective [CompactSpace X] {f : Y → X}
+    (hf : IsBlowupSequence n X Y f) : CompactSpace Y ∧ Function.Surjective f := by
+  induction hf with
+  | refl => exact ⟨inferInstance, Function.surjective_id⟩
+  | step f C g _hf hg ih =>
+      obtain ⟨hcompact, hsurj⟩ := ih
+      have := hcompact
+      exact ⟨BlowupCompact.compactSpace_of_isBlowupAlong hg,
+        hsurj.comp (surjective_of_isBlowupAlong hg)⟩
+
+end
+
+end Hironaka.StrictTransformComposition

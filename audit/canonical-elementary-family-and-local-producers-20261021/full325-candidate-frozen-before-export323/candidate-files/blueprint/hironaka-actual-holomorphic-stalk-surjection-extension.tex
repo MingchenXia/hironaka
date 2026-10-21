@@ -1,0 +1,89 @@
+\section{Actual surjective holomorphic stalk maps give local left inverses}
+
+Let $f:O\to V$ be an original holomorphic map between actual coordinate
+opens $O\subset\mathbf C^d$ and $V\subset\mathbf C^n$, and $x\in O$.
+The hypothesis is surjectivity of its independently constructed native
+holomorphic sheaf-stalk pullback. No derivative, immersion, local inverse
+or desired function relation is supplied.
+
+\begin{theorem}[Original coordinate germs lift to genuine local target functions]
+\label{hir:actual-holomorphic-stalk-surjection-coordinate-lifts}
+\uses{hir:actual-analytic-subspace-intrinsic-local-holomorphic-lift}
+\lean{Hironaka.HironakaActualHolomorphicStalkSurjection.exists_local_coordinate_stalk_lift}
+\leanok
+If the actual native stalk map of $f$ at $x$ is surjective, every original
+source coordinate $j<d$ has an actual holomorphic representative $t_j$ on
+an actual target open $U_j\ni f(x)$ and an actual source open $W_j\ni x$,
+with $f(W_j)\subset U_j$, such that
+$t_j(f(y))=y_j$ for every actual $y\in W_j$.
+\end{theorem}
+\begin{proof}
+Take the actual global source coordinate section and its genuine germ at
+$x$. Surjectivity supplies an actual target stalk preimage. Represent that
+preimage by an original holomorphic section $t_j$ on $U_j$. The actual native
+stalk-map germ formula says that the pullback section and the source coordinate
+section have equal genuine germs. The actual colimit equality criterion gives
+an actual common source open $W_j$ where their restrictions agree. Its
+restriction inclusion into $f^{-1}U_j$ proves the whole mapping property.
+Evaluate the equality of these actual original sections at each point of
+$W_j$. The literal native holomorphic sheaf map is precomposition with the
+same original $f$, giving precisely the asserted original function identity.
+\end{proof}
+
+\begin{theorem}[Actual stalk surjectivity constructs a literal holomorphic local left inverse]
+\label{hir:actual-holomorphic-stalk-surjection-local-left-inverse}
+\uses{hir:actual-holomorphic-stalk-surjection-coordinate-lifts}
+\lean{Hironaka.HironakaActualHolomorphicStalkSurjection.exists_actual_local_holomorphic_left_inverse}
+\leanok
+Under the same actual stalk surjectivity hypothesis there are genuine opens
+$T\subset V$ containing $f(x)$ and $S\subset O$ containing $x$, and an actual
+holomorphic $H:T\to\mathbf C^d$, such that $f(S)\subset T$ and
+\[
+ H(f(y))=y\quad (y\in S)
+\]
+in the original ambient coordinate space $\mathbf C^d$.
+\end{theorem}
+\begin{proof}
+Lift each of the finitely many original source coordinates by the preceding
+theorem. Intersect their actual target opens to obtain $T$, and their actual
+source opens to obtain $S$. Every source point of $S$ maps into every lifted
+target open, hence into $T$. Restrict the genuine holomorphic $t_j$ to $T$
+and assemble the finite tuple through the actual continuous linear coordinate
+identification with $\mathbf C^d$. Its holomorphy follows from componentwise
+holomorphy and the genuine linear map. At every point of $S$, each component
+is the original source coordinate, proving the whole displayed identity.
+For $d=0$ the empty intersections are whole opens and the unique coordinate
+tuple satisfies the same identity.
+\end{proof}
+
+\begin{theorem}[The actual original coordinate derivative is injective]
+\label{hir:actual-holomorphic-stalk-surjection-injective-derivative}
+\uses{hir:actual-holomorphic-stalk-surjection-local-left-inverse}
+\lean{Hironaka.HironakaActualHolomorphicStalkSurjection.actualOpenVectorExtension,Hironaka.HironakaActualHolomorphicStalkSurjection.injective_fderiv_of_native_stalk_surjective}
+\leanok
+Extend the original coordinate expression of $f$ by zero outside its actual
+source open. Its genuine complex derivative at $x$ is injective whenever
+the actual native stalk pullback is surjective. Holomorphy of this total
+representative near $x$ is an output, not a global extension assumption.
+\end{theorem}
+\begin{proof}
+A function on an actual open, extended by zero elsewhere, agrees with the
+same original function throughout that open. The actual open-subtype
+holomorphy criterion therefore transfers its original holomorphy at every
+included point to the extension. Apply this to $f$, and twice to the local
+left inverse $H$ (first from $T$ to $V$, then from $V$ to $\mathbf C^n$).
+Both resulting total coordinate representatives are complex differentiable
+at the actual relevant points. The image of $S$ under its open subtype
+inclusion into $\mathbf C^d$ is a genuine ambient open neighbourhood of
+$x$. There the two extensions compose to the identity by the proved
+whole-neighbourhood left-inverse equation. Actual derivative congruence
+and the complex chain rule give $D\widetilde H\,D\widetilde f=1$ at $x$.
+Thus equal images under $D\widetilde f$ have equal images under this left
+inverse and are equal, proving injectivity. No inference from a mere
+topological holomorphic embedding is used.
+\end{proof}
+
+This constructs genuine analytic local splitting from the actual algebraic
+stalk surjection. A regular-model converse still requires constructing true
+ambient flattening coordinates from the split derivative and actual local
+image; no such converse or resolution descent is asserted here.

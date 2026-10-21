@@ -1,0 +1,604 @@
+{
+  "status": "PASS_STATIC_COMPLETE_ORIGINAL_SOURCE_CONTEXT_RECONSTRUCTION_AND_BP",
+  "reviewer": "/root/defect_descent",
+  "scope": "Independent entire draft and all captured written BP proofs; source-only static peer, not a build or expression acceptance.",
+  "destination_module": "Hironaka.Support.CoefficientRestrictionTowerIffOriginalExact",
+  "draft_path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/setup-additive-coefficient-tower/CoefficientRestrictionTowerIffOriginalExact.lean",
+  "draft_sha256": "1141755f1a8591188fb25d9f402df710bf1bf408a286c23ee2f603c4ceda9f26",
+  "draft_lines": 671,
+  "fixed_original_base_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "also_byte_identical_final_revision": "47cef49895832e3bfe492f66e1f2ac68785187dd",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CoefficientRestrictionTower.lean",
+  "source_git_blob": "bd1e459d51483d77ec55ed72d080882a1c1ebb1e",
+  "source_sha256": "97e1746c7826578a04f36426376cb2185779ee37d050930131367087b68ec3a4",
+  "normalized_integration_plan": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/additive40-prerequisite-integration-preparation/plan-before-import-closure.json",
+    "sha256": "2a3ccd5a7586541092616553f94b92846fbc5b3dce736d5f742da1dbbf8736d0"
+  },
+  "author_contract": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/setup-additive-coefficient-tower/extraction-audit.json",
+    "sha256": "f3374f73016c5450ae393f783875f8618f65db547fb5bc3ecf227372c169c024"
+  },
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv"
+  ],
+  "declarations": 12,
+  "all_complete_payloads_and_contexts": [
+    {
+      "index": 0,
+      "original_lines": [
+        54,
+        63
+      ],
+      "original_sha256": "441b8de057d42263616ebab4400c2f590209a943bf461e8a2f2160de9cbc5467",
+      "normalized_payload_sha256": "441b8de057d42263616ebab4400c2f590209a943bf461e8a2f2160de9cbc5467",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "original_lines": [
+        65,
+        79
+      ],
+      "original_sha256": "6e75d1ad5a82202741d9e5d51fd92cb888be8c5eaf7259cea251087744520750",
+      "normalized_payload_sha256": "6e75d1ad5a82202741d9e5d51fd92cb888be8c5eaf7259cea251087744520750",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "original_lines": [
+        81,
+        91
+      ],
+      "original_sha256": "b17dd5b861b72e6dad898c525d1c879ca58c64062d7a10f36987eb4e4af1e3a1",
+      "normalized_payload_sha256": "b17dd5b861b72e6dad898c525d1c879ca58c64062d7a10f36987eb4e4af1e3a1",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "original_lines": [
+        111,
+        142
+      ],
+      "original_sha256": "5583ac9b9d8d35f8c9128042faad2914932f8615e8681558c6cc4a9b33dc0601",
+      "normalized_payload_sha256": "e06ecbf5652e9635b895413ffff31b24e631ef550fb51c83a0d382b65c634885",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Tools",
+          "commands": [
+            "variable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "original_lines": [
+        144,
+        148
+      ],
+      "original_sha256": "0b2b855a1c99f8a1883ce05de165fc9a8e100686432151768c8b925579de1709",
+      "normalized_payload_sha256": "0b2b855a1c99f8a1883ce05de165fc9a8e100686432151768c8b925579de1709",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Tools",
+          "commands": [
+            "variable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "original_lines": [
+        158,
+        290
+      ],
+      "original_sha256": "8e5771ad1366c4fac177ac076f900d1e5dead9206f64aca6fe7de16c1b6647eb",
+      "normalized_payload_sha256": "8e5771ad1366c4fac177ac076f900d1e5dead9206f64aca6fe7de16c1b6647eb",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "OffCentre",
+          "commands": [
+            "variable {Y Z : CMfd.{u} n}"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "original_lines": [
+        315,
+        376
+      ],
+      "original_sha256": "7a7addba7c1f1cce68a775ea53f3803dbd6267e16a8c4505811bb23f17fe00dc",
+      "normalized_payload_sha256": "7a7addba7c1f1cce68a775ea53f3803dbd6267e16a8c4505811bb23f17fe00dc",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Centre",
+          "commands": [
+            "open BlowupFlatCoordinates BlowupMonomialCharts",
+            "variable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "original_lines": [
+        386,
+        571
+      ],
+      "original_sha256": "91eb4c3e69236e5a0b67f150551c7d0989fcc996c06e88586fa2c90319bb7389",
+      "normalized_payload_sha256": "91eb4c3e69236e5a0b67f150551c7d0989fcc996c06e88586fa2c90319bb7389",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "CentreStep",
+          "commands": [
+            "open BlowupFlatCoordinates BlowupMonomialCharts",
+            "variable {Y Z : CMfd.{u} n}"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "original_lines": [
+        579,
+        604
+      ],
+      "original_sha256": "07620bce103ffd9729cb37eb13d49e0ee18f93b36b422c25b176ac017effea9e",
+      "normalized_payload_sha256": "07620bce103ffd9729cb37eb13d49e0ee18f93b36b422c25b176ac017effea9e",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Tower",
+          "commands": []
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "original_lines": [
+        606,
+        654
+      ],
+      "original_sha256": "06d67720ce73c002e707646b4c5d98b43d5b199909e58f99b773398a0bba40d3",
+      "normalized_payload_sha256": "06d67720ce73c002e707646b4c5d98b43d5b199909e58f99b773398a0bba40d3",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Tower",
+          "commands": []
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "original_lines": [
+        656,
+        664
+      ],
+      "original_sha256": "2cb2259d918ced4e67346a0c45dedbd0065990ef79f828df4c49d37898e1f7fb",
+      "normalized_payload_sha256": "2cb2259d918ced4e67346a0c45dedbd0065990ef79f828df4c49d37898e1f7fb",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Tower",
+          "commands": []
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "original_lines": [
+        666,
+        695
+      ],
+      "original_sha256": "c7f171c3a8b539e69bcb3cf187b8e9e2dfec0066f2a5bb160b69ccccca265406",
+      "normalized_payload_sha256": "c7f171c3a8b539e69bcb3cf187b8e9e2dfec0066f2a5bb160b69ccccca265406",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter Metric",
+            "open scoped Topology Manifold ContDiff",
+            "universe u"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.CoefficientRestrictionTower",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": [
+            "variable {n : ℕ} {X : CMfd.{u} n}"
+          ]
+        },
+        {
+          "kind": "section",
+          "name": "Tower",
+          "commands": []
+        }
+      ]
+    }
+  ],
+  "entire_draft_reconstructed_from_normalized_original_chunks_and_recorded_context_layout": true,
+  "all_named_anonymous_sections_namespaces_balanced": true,
+  "original_local_context_commands_not_omitted": true,
+  "all_original_BP_nodes": [
+    {
+      "label": "mc:normal-coefficient-invariant",
+      "capture": "mc--normal-coefficient-invariant.complete-original-node.tex.txt",
+      "sha256": "ef4cded08c88f2c5f0013f7d298ae0a7ec34a24563e7fc2f63e20c3d5a80e26f",
+      "fixed_source_lines": [
+        1386,
+        1401
+      ],
+      "complete_written_proofs": 1,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.vanishesToOrderOn_of_isInSpanOnAt",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.isInSpanAt_comp_map",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.holomorphicAt_nd"
+      ],
+      "complete_node_bytes_exact": true
+    },
+    {
+      "label": "mc:normal-coefficient-step",
+      "capture": "mc--normal-coefficient-step.complete-original-node.tex.txt",
+      "sha256": "f7369da152737e150dc3383b4c2d01e3bced9e6112cdabf70d6950a8d0ef0e42",
+      "fixed_source_lines": [
+        1403,
+        1421
+      ],
+      "complete_written_proofs": 1,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower"
+      ],
+      "complete_node_bytes_exact": true
+    },
+    {
+      "label": "mc:coefficient-restriction-full",
+      "capture": "mc--coefficient-restriction-full.complete-original-node.tex.txt",
+      "sha256": "6587afab12b2ca2548f75376a3c41ce19ab6c73bf0ba58e038bc427999de62cd",
+      "fixed_source_lines": [
+        1423,
+        1440
+      ],
+      "complete_written_proofs": 1,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower",
+        "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff"
+      ],
+      "complete_node_bytes_exact": true
+    }
+  ],
+  "all_original_attachments_retained": true,
+  "mathematical_statement_or_proof_payload_edits": 0,
+  "findings": [],
+  "no_runtime_production_Git_or_original_evidence_edits": true,
+  "remaining_boundary": "Only frontier may install and adjust approved pure imports. Actual metadata closure, source replay, build, full strict expressions, kernel, axioms and bindings remain separate required gates."
+}

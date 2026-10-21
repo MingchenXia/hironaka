@@ -1,0 +1,86 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaSmoothCentreCoherentDomain
+
+/-! # Exact original saturation on a real nonlinear domain
+Only genuine finite generation near zero is used. Original regularity
+and coherence internally provide the flattening and real target family;
+true Oka coherence and germ Noetherianity supply the selected index,
+actual fixed-colon generators and one real open for ALL powers/unions.
+Complete mathematics precedes this source; no global extension is used.
+-/
+set_option autoImplicit false
+open Set Filter
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaSmoothCentreRealDomainSaturation
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf OkaIdealOperations
+  OkaCoherence HironakaSmoothCentreCoherentDomain HironakaRelativeNormalCoherentSaturation
+
+/-- The genuine restricted local coherence condition supplies the actual Oka finite presentation. -/
+theorem idealFGAt_of_coherentOn {n : ℕ} (I : GermIdeal n (ComplexModel n))
+    (W : Set (ComplexModel n)) (hI : CoherentOn I W) {y : ComplexModel n} (hy : y ∈ W) :
+    IdealFGAt I.mem y := by
+  obtain ⟨U, hU, hyU, _hUW, N, H, hH, hgen⟩ := hI y hy
+  refine ⟨U, hU, hyU, Fin N, inferInstance, H,
+    fun i => mdifferentiableOn_iff_differentiableOn.mp (hH i), ?_⟩
+  intro z hz g
+  rw [hgen z hz g, CoherentIdealColon.isInSpanAt_range_iff]
+  constructor
+  · rintro ⟨hg, a, ha, he⟩
+    exact ⟨hg.mono (fun _ h => h.differentiableAt), a,
+      fun i => (ha i).mono (fun _ h => h.differentiableAt), he⟩
+  · rintro ⟨hg, a, ha, he⟩
+    exact ⟨hg.mono (fun _ h => h.mdifferentiableAt), a,
+      fun i => (ha i).mono (fun _ h => h.mdifferentiableAt), he⟩
+
+section Original
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- ONLY original geometric/coherent data and an actual local multiplier supply exact real-domain saturation. -/
+theorem exists_original_regular_real_domain_exact_uniform_saturation {d : ℕ}
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := n) C x d)
+    (A : GermIdeal n M) (hA : A.IsCoherent) (h : ComplexModel n → ℂ) (hh : HolAt h 0) :
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x),
+      Φ.source ⊆ (chartAt (ComplexModel n) x).target ∧
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel n) x x) = 0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel n) x).source →
+        chartAt (ComplexModel n) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel n) x y) ∈ complexCoordinatePlane n d)) ∧
+      ∃ N : ℕ, ∃ U : Set (ComplexModel n), IsOpen U ∧ 0 ∈ U ∧ U ⊆ Φ.target ∧
+        let F := actualFlattenedOriginalSheaf A x Φ
+        (∀ y ∈ U, HolAt h y) ∧
+        (∀ y ∈ U, ∀ q : ℕ, ∀ g,
+          actualColonChain F.mem h (N+q) y g ↔ actualColonChain F.mem h N y g) ∧
+        (∀ y ∈ U, ∀ q : ℕ, N ≤ q → ∀ g, HolAt g y →
+          (F.mem y (fun z => g z * h z ^ q) ↔ F.mem y (fun z => g z * h z ^ N))) ∧
+        (∀ y ∈ U, ∀ g, (∃ q : ℕ, actualColonChain F.mem h q y g) ↔
+          actualColonChain F.mem h N y g) ∧
+        ∃ (μ : Type) (_hμ : Fintype μ) (S : μ → ComplexModel n → ℂ),
+          (∀ i, DifferentiableOn ℂ (S i) U) ∧
+          ∀ y ∈ U, ∀ g, actualColonChain F.mem h N y g ↔ InSpanAt S y g := by
+  obtain ⟨_, _, Φ, hsrc, h0, hflat⟩ := hreg
+  have h0T := actualFlattening_target_zero_mem x Φ h0
+  have hcoh := coherentOn_actualFlattenedOriginalSheaf A hA x Φ hsrc
+  have hfg := idealFGAt_of_coherentOn (actualFlattenedOriginalSheaf A x Φ) Φ.target hcoh h0T
+  let := isNoetherianRing_holGerm_euclidean n
+  obtain ⟨N, V, hV, h0V, hhV, hstab, hpow, hsat⟩ :=
+    exists_uniform_original_coherent_saturation_union (okaProperty_euclidean n) hfg hh
+  obtain ⟨O, hO, h0O, μ, hμ, S, hS, hgen⟩ :=
+    actualColonChain_finitely_generated (okaProperty_euclidean n) hfg hh N
+  let := hμ
+  let U := (V ∩ O) ∩ Φ.target
+  refine ⟨Φ, hsrc, h0, hflat, N, U, (hV.inter hO).inter Φ.isOpen_target,
+    ⟨⟨h0V, h0O⟩, h0T⟩, (fun _ hy => hy.2),
+    (fun y hy => hhV y hy.1.1), (fun y hy => hstab y hy.1.1),
+    (fun y hy => hpow y hy.1.1), (fun y hy => hsat y hy.1.1),
+    μ, hμ, S, (fun i => (hS i).mono (fun _ hy => hy.1.2)), ?_⟩
+  exact fun y hy => hgen y hy.1.2
+
+end Original
+end
+end Hironaka.HironakaSmoothCentreRealDomainSaturation

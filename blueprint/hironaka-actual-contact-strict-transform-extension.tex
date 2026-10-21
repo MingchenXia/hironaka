@@ -1,0 +1,98 @@
+\section{Every original singular subset through the same actual contact blowup}
+
+The actual contact-stratum projection has already been proved to be a genuine
+lower-dimensional blowup. Its entire strict-transform geometry now retains
+every original subset, including singular subsets, through the same inclusion.
+Throughout this section, ``strict transform'' means precisely the displayed
+\emph{centre-relative} geometric closure
+$\operatorname{geoStrictTransform}(\pi,C,W)
+=\overline{\pi^{-1}(W\setminus C)}$ used in the Lean statements.
+No equality for the repository's separate ordinary
+\texttt{strictTransform}, defined by removing the exceptional locus, is
+asserted without an additional exceptional-locus dictionary.
+
+\begin{theorem}[Whole strict transforms commute with an actual split contact]
+\label{hir:actual-contact-every-subset-strict-transform}
+\uses{hir:actual-retract-contact-centre-whole-ideal,ana:blowups}
+\lean{Hironaka.HironakaActualContactStrictTransform.strictTransform_image}
+\leanok
+Let $s:X^d\to A^{d+1}$ and $p:A\to X$ be actual holomorphic maps
+with $ps=1$. Let $\pi:Y\to A$ be an actual continuous map, and let
+$D,W\subset X$ be any original subsets. Put
+\[
+ S=\overline{\pi^{-1}(s(X)\setminus s(D))},\qquad
+ \sigma=p\pi|_S,\qquad j:S\hookrightarrow Y.
+\]
+Then the entire literal strict transforms satisfy
+\[
+ j\bigl(\overline{\sigma^{-1}(W\setminus D)}\bigr)
+ =\overline{\pi^{-1}(s(W)\setminus s(D))}.
+\]
+No smoothness, closedness, analyticity or coherence of $W$ is input.
+\end{theorem}
+\begin{proof}
+The actual split identity makes $s$ injective, and its range is closed by
+the fixed-locus argument. Thus every point $z\in S$ satisfies
+$\pi(jz)=s(\sigma z)$, by actual continuity and closure. This literal
+identity and injectivity prove the exact complement image equality
+\[
+ j\bigl(\sigma^{-1}(W\setminus D)\bigr)
+ =\pi^{-1}(s(W)\setminus s(D)).
+\]
+Indeed a point on the left has actual base $s(\sigma z)$ with
+$\sigma z\in W\setminus D$; any alleged membership in $s(D)$ contradicts
+the split identity. Conversely, if $\pi(y)=s(x)$ for $x\in W$ and
+$\pi(y)\notin s(D)$, then $y$ already lies in the defining dense subset
+of $S$. Its literal projection is $x$, and it cannot project into $D$.
+The actual subset $S$ is closed because it is a closure, so its native
+subtype inclusion is a genuine closed embedding. A continuous closed
+embedding commutes with the entire closure of every subset. Apply this
+native closure identity to the exact complement equality above. This
+proves equality of the whole strict closures, including the exceptional
+points, without any assumption on the regularity or closedness of $W$.
+\end{proof}
+
+\begin{theorem}[Every singular subset on a true graph open has the same actual restricted strict transform]
+\label{hir:actual-open-graph-every-subset-strict-transform}
+\uses{hir:actual-contact-every-subset-strict-transform,hir:actual-open-graph-contact-restricted-blowup,hir:actual-local-common-graph-model,hir:actual-intrinsic-manifold-chart-original-regularity}
+\lean{Hironaka.HironakaActualContactStrictTransform.openGraph_exists_restrictedBlowup_strictTransforms}
+\leanok
+Let $U\subset\mathbf C^d$ be an actual coordinate open, let an original
+scalar graph function be holomorphic only on $U$, and let $D\subset U$
+be an original smooth closed nowhere dense centre. For any actual ambient
+blowup of the true wide graph domain along the literal graph centre,
+there exists a genuine intrinsic complex manifold structure on the same
+actual strict graph $S$ for which the literal projection $\sigma:S\to U$
+is a full blowup along $D$. For \emph{every} original subset $W\subset U$,
+the same actual inclusion sends the entire lower \emph{centre-relative}
+strict transform $\overline{\sigma^{-1}(W\setminus D)}$ onto the entire
+ambient centre-relative strict transform of its literal graph image.
+All atlas and lower blowup data are outputs; no comparison map or
+strict-image certificate is a premise.
+\end{theorem}
+\begin{proof}
+Use the genuine scalar graph section and first projection on the actual
+wide domain. Their true holomorphy and split identity follow from the
+given holomorphy only on $U$ and the literal block coordinate formulas.
+The genuine graph-model isomorphism and native manifold-chart converse
+produce actual range regularity. Use this in the already proved actual
+strict-stratum atlas construction. The preceding original graph-contact
+theorem proves the full blowup universal property for the same literal
+restricted projection and the same intrinsic atlas construction. Keep
+these genuine witnesses; the range regularity proofs are propositions
+and do not change that actual charted-space construction.
+For each original $W\subset U$, apply the first theorem to the same
+actual section, projection and ambient map, using continuity of the
+given actual blowup. Its strict contact subtype and projection are
+literally those just constructed. This supplies the simultaneous entire
+strict-image identity for every $W$, with no smoothness or coherence
+condition on it. The centre remains closed inside its true source $U$;
+no extension to all of $\mathbf C^d$ is used.
+\end{proof}
+
+Whole intrinsic singular vanishing-ideal restriction, controlled coefficient
+records, canonical invariant tails and maximal-centre or history comparison
+are separate obligations; set equality alone does not prove them.
+In particular, if a lower centre is a divisor its blowup can be the identity;
+for a subset contained in that centre, the displayed centre-relative closure
+can then differ from the ordinary exceptional-locus strict transform.

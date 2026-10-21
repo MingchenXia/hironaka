@@ -1,0 +1,133 @@
+/-- **The invariant off the centre**: if `π z ∉ C` and `π z` is good for `T`, then `z` is good for the tower
+continued by the blowup `π` along `C` (the generators pull back, `π` is a local biholomorphism). -/
+theorem goodAt_step_of_notMem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}
+    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)
+    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)
+    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)
+    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)
+    (hSc : IsClosed (strictAlong T S)) {z : Z} (hzC : π z ∉ C) (hgood : GoodAt 𝔪 S T (π z)) :
+    GoodAt 𝔪 S (.step T C π hπ) z := by
+  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood
+  have hπc : Continuous π := hπ.contMDiff.continuous
+  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=
+    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)
+  have hSev : ∀ᶠ y in 𝓝 z, (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) := by
+    filter_upwards [(hπ.1.1.isOpen_compl.preimage hπc).mem_nhds hzC] with y hy
+    rw [strictAlong_step]
+    refine ⟨fun h => ?_, fun h => subset_closure ⟨h, hy⟩⟩
+    exact closure_minimal (preimage_mono sdiff_subset) (hSc.preimage hπc) h
+  -- the new coordinates `W = ψ ∘ π`
+  set W : Z → ComplexModel n := fun y => c.ψ (π y) with hWdef
+  have hev : ∀ᶠ y in 𝓝 z, π y ∈ BlowupFlatCoordinates.flatDomain c.Φ ∧
+      (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) :=
+    ((hπc.tendsto z).eventually c.eventually_mem_flatDomain).and hSev
+  obtain ⟨O, hOsub, hO, hzO⟩ := mem_nhds_iff.mp hev
+  have hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y := fun y hy =>
+    (c.mdifferentiableAt_ψ (hOsub hy).1).comp y (hπd y)
+  have hflat : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y ∈ complexCoordinatePlane n k) := fun y hy => by
+    rw [(hOsub hy).2]; exact c.flat (hOsub hy).1.1 (hOsub hy).1.2
+  have hinj : Function.Injective
+      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)) := by
+    set I := 𝓘(ℂ, ComplexModel n) with hI
+    have hrange : range I = univ := by simp [hI]
+    set e := chartAt (ComplexModel n) z with he
+    set e' := chartAt (ComplexModel n) (π z) with he'
+    set F : ComplexModel n → ComplexModel n := fun u => e' (π (e.symm u)) with hF
+    have hmd : MDifferentiableAt I I π z := hπd z
+    have hderiv : mfderiv I I π z = fderiv ℂ F (e z) := by
+      rw [hmd.mfderiv, hrange, fderivWithin_univ]
+      rfl
+    have hFinj : Function.Injective (fderiv ℂ F (e z)) := by
+      have hz : z ∉ BlowupSequences.exceptionalLocus n π :=
+        fun h => hzC (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ h)
+      simp only [exceptionalLocus, mem_ofPred_eq, not_not] at hz
+      rw [hderiv] at hz
+      exact hz.1
+    -- `W ∘ e⁻¹ = Φ ∘ F` near `e z`
+    have hzs : z ∈ e.source := mem_chart_source _ z
+    have hFz : F (e z) = e' (π z) := by simp only [hF, e.left_inv hzs]
+    have hloc : (fun ζ => W (e.symm ζ)) =ᶠ[𝓝 (e z)] fun ζ => c.Φ.toFun (F ζ) := by
+      filter_upwards with ζ
+      rfl
+    have hFd : DifferentiableAt ℂ F (e z) := by
+      have h := (contMDiffOn_iff.mp (hπ.contMDiff.contMDiffOn (s := univ))).2 z (π z)
+      have hset : (e.target ∩ e.symm ⁻¹' (univ ∩ π ⁻¹' e'.source)) ∈ 𝓝 (e z) := by
+        refine (e.continuousOn_symm.isOpen_inter_preimage e.open_target
+          (isOpen_univ.inter (hπc.isOpen_preimage _ e'.open_source))).mem_nhds ?_
+        exact ⟨e.map_source hzs, by rw [mem_preimage, e.left_inv hzs]; exact ⟨mem_univ _, mem_chart_source _ _⟩⟩
+      refine ((h.differentiableOn (by simp)).mono ?_).differentiableAt hset
+      intro u hu
+      exact ⟨⟨mem_univ _, hu.1⟩, mem_univ _, hu.2.2, mem_univ _⟩
+    have hΦd : DifferentiableAt ℂ c.Φ.toFun (F (e z)) := by
+      rw [hFz]
+      exact c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds c.Φ.center_mem_source)
+    have hcomp : HasFDerivAt (fun ζ => c.Φ.toFun (F ζ))
+        ((fderiv ℂ c.Φ.toFun (F (e z))).comp (fderiv ℂ F (e z))) (e z) :=
+      hΦd.hasFDerivAt.comp (e z) hFd.hasFDerivAt
+    rw [hloc.fderiv_eq, hcomp.fderiv]
+    refine (c.injective_fderiv_Φ ?_).comp hFinj
+    rw [hFz]; exact c.Φ.center_mem_source
+  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW c.ψ_self hinj hflat
+  -- `π ∘ c'.inv = c.inv` near `0`
+  have hWinv := FlatChart.eventually_map_inv c' hc'
+  have hπinv : ∀ᶠ u in 𝓝 (0 : ComplexModel n), π (c'.inv u) = c.inv u := by
+    have ht : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=
+      (hπc.tendsto z).comp c'.tendsto_inv
+    filter_upwards [hWinv, ht.eventually c.eventually_inv_ψ] with u hu hu'
+    rw [← hu', show c.ψ (π (c'.inv u)) = u from hu]
+  -- normal derivatives of pulled-back generators
+  have hnd : ∀ (g : Y → ℂ) (L : List (Fin n)), c'.nd L (g ∘ π) =ᶠ[𝓝 z] fun z' => c.nd L g (π z') := by
+    intro g L
+    have hgerm : (fun u => (g ∘ π) (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)] fun u => g (c.inv u) := by
+      filter_upwards [hπinv] with u hu
+      simp only [Function.comp_apply, hu]
+    have hiter := iterDeriv_congr_of_eventuallyEq hgerm (L.map bv)
+    filter_upwards [c'.tendsto_ψ.eventually hiter, hc'] with z' h1 h2
+    simp only [FlatChart.nd]
+    rw [h1, h2]
+  -- the transformed ideals at `z`
+  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T
+  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =
+      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by
+    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]
+  have hpb : ∀ {𝔟 : GermIdeal n Y} {g : Y → ℂ}, 𝔟.IsCoherent → 𝔟.mem (π z) g →
+      (GermIdeal.pullback (m := n) π 𝔟).mem z (g ∘ π) := fun {𝔟} {g} h𝔟 hg =>
+    InvertibleIdealQuotient.isInSpanAt_self (S := fun s => ∃ a, 𝔟.mem (π z) a ∧ s = a ∘ π) ⟨g, hg, rfl⟩
+      (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd)
+        (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔟 _ _ hg))
+  refine ⟨k, hkn, c', fun h => ∃ g, G g ∧ h = g ∘ π, ?_, ?_, ?_⟩
+  · rintro h ⟨g, hg, rfl⟩
+    rw [hideal]
+    exact GlueingTrivialAction.pullback_le_controlledTransform hπ hcohT 𝔪.d z _ (hpb hcohT (hGmem g hg))
+  · intro f hf
+    -- `f ∈ π^*𝔪_T` at `z` (off the centre the denominator contains `1`)
+    have hf' : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z f := by
+      have h1 := MarkedIdeals.MarkedIdeal.one_mem_idealPow (n := n)
+        (MarkedIdeals.MarkedIdeal.one_mem_pullback_vanishingIdeal (n := n) (π := π) hzC hπ.1.1) 𝔪.d
+      have hf2 := hf
+      rw [geoTransformAlong_step, geoTransform_ideal, hNT, MarkedIdeals.MarkedIdeal.geoStrictTransform_univ hπ, hd]
+        at hf2
+      have h3 := (InvertibleIdealQuotient.mem_colon_iff.mp hf2).2 _ h1
+      rw [BlowupTowerTransforms.restrictOn_univ (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT)]
+        at h3
+      exact NormalDerivativeChart.mem_congr_of_isCoherent (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT) h3
+        (Eventually.of_forall fun y => by simp)
+    refine RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)
+      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z f from hf')
+    obtain ⟨a, ha, rfl⟩ := ht
+    exact (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha)).mono fun s ⟨g, hg, hs⟩ => ⟨g, hg, hs⟩
+  · rintro h ⟨g, hg, rfl⟩ L hL hLlen
+    obtain ⟨K, s, a, hs, ha, hsum⟩ := hGder g hg L hL hLlen
+    have hdL : L.length ≤ 𝔪.d := hLlen.le
+    have hDideal : (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal =
+        controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 L.length) T).ideal
+          (geoTransformAlong (derivMarked 𝔪 L.length) T).d := by
+      rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN _ hdL) (hDcoh _ hdL) hπ]
+    refine ⟨K, fun i => s i ∘ π, fun i => a i ∘ π, fun i => ?_, fun i =>
+      HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (ha i), ?_⟩
+    · rw [hDideal]
+      exact GlueingTrivialAction.pullback_le_controlledTransform hπ (hDcoh _ hdL) _ z _
+        (hpb (hDcoh _ hdL) (hs i))
+    · filter_upwards [hnd g L, hSev, (hπc.tendsto z).eventually hsum] with z' h1 h2 h3 hz'
+      rw [h1]
+      exact h3 (h2.mp hz')

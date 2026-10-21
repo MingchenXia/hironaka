@@ -1,0 +1,98 @@
+\section{The actual singular-product functional pullback at every original point}
+
+All sets and functions below are actual original sets and functions. They
+need no coherence, smoothness or analytic presentation. For $x\in\mathbb C^n$
+write $\tau_x(z)=z+x$, $W_x=\tau_x^{-1}W$, and let
+$\mathcal S_x=\{s\circ\tau_x:s\in\mathcal S\}$ retain exactly the
+original functions. Every span is a finite holomorphic combination,
+including when its original generating family is infinite.
+
+\begin{lemma}[Actual translation retains whole functional relations and vanishing membership]
+\label{hir:actual-functional-translation-span-vanishing}
+\lean{Hironaka.HironakaActualCylinderPullbackPoints.isInSpanAt_translation_iff,Hironaka.HironakaActualCylinderPullbackPoints.vanishingIdeal_translation_iff}
+\uses{hir:actual-functional-span-origin-germ-span}
+\leanok
+At every actual point $x$, the original function $F$ belongs to the
+actual functional span of $\mathcal S$ at $x$ if and only if
+$F\circ\tau_x$ belongs to the actual span of $\mathcal S_x$ at zero.
+Moreover, $F\in\mathcal I_W$ at $x$ if and only if
+$F\circ\tau_x\in\mathcal I_{W_x}$ at zero.
+\end{lemma}
+\begin{proof}
+The actual maps $\tau_x$ and $\tau_{-x}$ are holomorphic, continuous,
+and inverse on the entire original coordinate space. Composing a
+finite local relation with $\tau_x$ composes each original coefficient
+and each original generator and pulls its actual neighbourhood back
+to a genuine neighbourhood of zero. Conversely compose with
+$z\mapsto z-x$. The literal identities $(z-x)+x=z$ recover the
+original generators and original function, so generator monotonicity
+and local function congruence give the reverse span implication.
+For vanishing membership the same two compositions retain
+holomorphy. Continuity pulls the actual local zero relation back to
+an actual neighbourhood. The literal inverse identities identify
+membership in the shifted set with membership in the same original
+set, proving both directions without replacing a set by a germ
+certificate or assuming a finite presentation.
+\end{proof}
+
+\begin{lemma}[The entire original projection family commutes with actual recentering]
+\label{hir:actual-cylinder-pullback-family-translation}
+\lean{Hironaka.HironakaActualCylinderPullbackPoints.translated_pullback_family_eq}
+\uses{hir:actual-functional-translation-span-vanishing,hir:actual-cylinder-pullback-functional-family-span}
+\leanok
+Let $p:\mathbb C^{k+t}\to\mathbb C^k$ be the true original coordinate
+projection and $x\in\mathbb C^{k+t}$. The entire translated family of
+functions $a\circ p$, where $a$ is in the original vanishing ideal of
+$W$ at $p(x)$, equals the original projection family for
+$W_{p(x)}$ at zero. Also
+$\tau_x^{-1}(W\times\mathbb C^t)=W_{p(x)}\times\mathbb C^t$.
+\end{lemma}
+\begin{proof}
+The actual linear projection satisfies $p(z+x)=p(z)+p(x)$.
+Thus translating $a\circ p$ gives $(a\circ\tau_{p(x)})\circ p$.
+The preceding vanishing equivalence puts this exact translated base
+function in the required original ideal at zero. In reverse, for any
+base function $b$ vanishing on $W_{p(x)}$ near zero, use the actual
+original function $a(y)=b(y-p(x))$. The preceding inverse translation
+puts $a$ in the original ideal at $p(x)$, and the same linear identity
+shows that translating $a\circ p$ recovers exactly $b\circ p$.
+Both are equalities of the entire original function families, not
+only their supports. The asserted set equality follows from the same
+actual projection identity at every original point.
+\end{proof}
+
+\begin{theorem}[Actual entire singular-product functional ideal pullback]
+\label{hir:actual-cylinder-functional-pullback-all-points}
+\lean{Hironaka.HironakaActualCylinderPullbackPoints.pullback_vanishingIdeal_mem_iff,Hironaka.HironakaActualCylinderPullbackPoints.pullback_vanishingIdeal_eq}
+\uses{hir:actual-functional-translation-span-vanishing,hir:actual-cylinder-pullback-family-translation,hir:actual-cylinder-functional-pullback-origin}
+\leanok
+For every original subset $W\subset\mathbb C^k$, the independently
+defined original functional ideals satisfy the entire equality
+\[
+ p^*\mathcal I_W=\mathcal I_{W\times\mathbb C^t}.
+\]
+This is equality at every original point, for every original function,
+with no coherence, finite-generation or desired equality assumption.
+\end{theorem}
+\begin{proof}
+Fix an arbitrary original point $x$ and an arbitrary original function
+$F$. By the definition of functional ideal pullback its membership is
+finite span membership in the entire original composed-function family
+at $p(x)$. The first lemma transports that actual relation to zero.
+The second lemma identifies exactly its translated family with the
+original pullback family of $W_{p(x)}$. The already proved original
+functional singular-product theorem at zero therefore identifies it
+with vanishing membership of the same translated $F$ in
+$W_{p(x)}\times\mathbb C^t$. The actual set identity of the second
+lemma and the reverse vanishing equivalence of the first lemma
+identify this with the original vanishing membership of $F$ on
+$W\times\mathbb C^t$ at $x$. Thus the independently defined
+memberships agree for every actual point and original function.
+Extensionality of the original functional ideals gives the entire
+asserted equality.
+\end{proof}
+
+The product statement is now valid at every point, including points
+outside the set. A genuine arbitrary submersion still requires transport
+through its actual local product coordinates; no such coordinate
+transport, resolution decrease or termination is assumed or inferred here.

@@ -1,0 +1,9 @@
+# Independent entire-source/context/BP peer: PASS
+
+All 241 draft lines, the active original FinSum/MSum/Tower contexts and every complete original selected statement/proof were read. The whole native parent is identical at fixed ordinary Git4c6 and47cef; all nine payloads match their exact original ranges and occur once unchanged. Independent reconstruction from original context blocks, frozen namespace relocation and pure imports gives the exact frozen draft. Original manifold/family/blowup variable positions and every section, anonymous noncomputable and namespace closing are retained.
+
+The finite-sum proof preserves genuine ideal containment through coherent span membership. Its controlled-transform induction uses the original common-mark/centre-power assumptions and real controlled sum identity. The finite marked-sum cosupport/admissibility proof uses actual positive exponents and common boundary, not an equality premise. The step preserves all ambient-family fields; the tower induction derives actual testness and whole transform equality in both directions. Finally the coefficient equivalence uses all genuine derivative-tower inclusions and the actual zeroth summand; no desired equivalence/history certificate or altered mark is input.
+
+The complete original shared coefficient-ideal subsection and all five full nodes/four written proofs were read and byte-compared to fixed source. All 21 original bindings remain, including existing ambient-family bindings and the definition node without its own separate written proof. No historical proof or acceptance status is invented. The referenced MarkedOps4/OrderMult1/DerivativeTower3 supports are genuine separate drafts, with future actual integration/gates still required.
+
+No Lean runtime, production source/BP edit, kernel/type-value export or new acceptance marker was performed.

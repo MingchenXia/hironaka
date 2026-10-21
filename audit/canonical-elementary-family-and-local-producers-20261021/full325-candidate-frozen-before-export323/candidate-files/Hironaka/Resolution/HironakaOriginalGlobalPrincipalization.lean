@@ -1,0 +1,148 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Support.OriginalInvertibleOpenCoverExact
+import Hironaka.Resolution.HironakaOriginalTerminalLocalBiholomorphism
+import Hironaka.Resolution.HironakaPrincipalization
+
+/-!
+# Principalization on the actual original global terminal manifold
+
+The original marked input constructs every finite terminal tower and every
+genuine biholomorphic saturated range.  The actual global pullback ideal is
+invertible by descent from these ranges.  Its ideal and support are retained on
+the same original global terminal manifold; globally scheduled blowup histories
+are a further producer.
+-/
+
+set_option autoImplicit false
+
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+
+universe u v
+
+namespace Hironaka.HironakaOriginalGlobalPrincipalization
+
+noncomputable section
+
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  HironakaOriginalTerminalAtlas HironakaOriginalTerminalManifold
+  HironakaOriginalTerminalLocalBiholomorphism
+
+open ResolutionInvariantSpec (IsInvDomain)
+open RelativePrincipalizationSpan InvertibleIdealQuotient GermIdealPullbackCalculus
+
+attribute [local instance] originalTerminalChartedSpace originalTerminalGluedSpace_isComplexManifold
+
+section OpenDescent
+
+variable {n : ℕ} {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+  [IsComplexManifold n Y] {ι : Type v}
+
+
+end OpenDescent
+
+section Original
+
+variable {n : ℕ} {X : CMfd.{u} n}
+
+/-- The genuine restricted global pullback equals the inverse-biholomorphic
+pullback of the original finite terminal tower's exceptional divisor ideal. -/
+theorem originalTerminalRange_pullback_ideal (M : MarkedIdeal n X) (hM : IsInvDomain n M)
+    (hN : M.N = univ) (hd : M.d = 1) (i : X) :
+    GermIdeal.pullback (m := n)
+        (Subtype.val : originalTerminalLocalRangeOpen M hM i → originalTerminalManifold M hM)
+        (GermIdeal.pullback (m := n)
+          (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) M.ideal) =
+      GermIdeal.pullback (m := n) (originalTerminalLocalBiholomorphism M hM i).symm
+        (BlowupTowerTransforms.exceptionalDivisor ((actualLocalTerminalAtlas M hM).tower i)).ideal := by
+  let A := actualLocalTerminalAtlas M hM
+  let M' := MarkedIdealBiholomorphism.MarkedIdeal.pullback (Subtype.val : A.openSet i → X) M
+  have hcoh := hM.isWellFormed.isCoherent
+  have hcoh' : M'.ideal.IsCoherent := isCoherent_pullback contMDiff_subtype_val hcoh
+  have hN' : M'.N = univ := by
+    change (Subtype.val : A.openSet i → X) ⁻¹' M.N = univ
+    rw [hN, preimage_univ]
+  have hpb := MarkedIdeal.pullback_eq_exceptionalDivisor_of_isGeoResolution M' hN' hcoh' hd
+    (A.tower i) (A.terminal i)
+  have hmap :
+      (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) ∘
+          (Subtype.val : originalTerminalLocalRangeOpen M hM i → originalTerminalManifold M hM) =
+        (Subtype.val : A.openSet i → X) ∘
+          ((A.tower i).proj ∘ (originalTerminalLocalBiholomorphism M hM i).symm) := by
+    funext q
+    exact congrArg Subtype.val (originalTerminalLocalRangeProjection_inverse M hM i q)
+  erw [← GermIdealTotalTransform.pullback_comp (originalTerminalGluedProjection_contMDiff M hM)
+    contMDiff_subtype_val hcoh, hmap,
+    GermIdealTotalTransform.pullback_comp contMDiff_subtype_val
+      ((A.tower i).contMDiff_proj.comp (originalTerminalLocalBiholomorphism M hM i).symm.contMDiff) hcoh,
+    GermIdealTotalTransform.pullback_comp (A.tower i).contMDiff_proj
+      (originalTerminalLocalBiholomorphism M hM i).symm.contMDiff hcoh', hpb]
+
+/-- Actual finite terminal principalization and the proved inverse biholomorphism
+make the true global ideal invertible on each actual saturated range. -/
+theorem originalTerminalRange_pullback_isInvertible (M : MarkedIdeal n X) (hM : IsInvDomain n M)
+    (hN : M.N = univ) (hd : M.d = 1) (i : X) :
+    (GermIdeal.pullback (m := n)
+      (Subtype.val : originalTerminalLocalRangeOpen M hM i → originalTerminalManifold M hM)
+      (GermIdeal.pullback (m := n)
+        (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) M.ideal)).IsInvertible := by
+  rw [originalTerminalRange_pullback_ideal M hM hN hd i]
+  apply GermIdealTotalTransform.isInvertible_pullback
+    (originalTerminalLocalBiholomorphism M hM i).symm.contMDiff
+    _ (BlowupTowerTransforms.exceptionalDivisor ((actualLocalTerminalAtlas M hM).tower i)).isInvertible
+  have he : exceptionalLocus n (originalTerminalLocalBiholomorphism M hM i).symm = ∅ := by
+    apply eq_empty_iff_forall_notMem.mpr
+    exact MarkedIdealBiholomorphism.notMem_exceptionalLocus_of_inverse
+      (originalTerminalLocalBiholomorphism M hM i).symm.contMDiff
+      (originalTerminalLocalBiholomorphism M hM i).contMDiff
+      (originalTerminalLocalBiholomorphism M hM i).symm_apply_apply
+      (originalTerminalLocalBiholomorphism M hM i).apply_symm_apply
+  rw [he, interior_empty]
+
+/-- Only original marked-domain input with whole ambient submanifold and mark one
+principalizes the actual ideal on the same original global terminal manifold. -/
+theorem originalTerminalGluedProjection_pullback_isInvertible
+    (M : MarkedIdeal n X) (hM : IsInvDomain n M) (hN : M.N = univ) (hd : M.d = 1) :
+    (GermIdeal.pullback (m := n)
+      (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) M.ideal).IsInvertible := by
+  apply isInvertible_of_open_cover
+    (isCoherent_pullback (originalTerminalGluedProjection_contMDiff M hM) hM.isWellFormed.isCoherent)
+    (originalTerminalLocalRangeOpen M hM)
+  · intro z
+    obtain ⟨i, y, he⟩ := originalTerminalLocalInclusion_jointly_surjective M hM z
+    exact ⟨i, y, he⟩
+  · exact originalTerminalRange_pullback_isInvertible M hM hN hd
+
+/-- The effective divisor has the actual global total-transform ideal. -/
+def originalTerminalPrincipalizationDivisor
+    (M : MarkedIdeal n X) (hM : IsInvDomain n M) (hN : M.N = univ) (hd : M.d = 1) :
+    EffectiveDivisor n (originalTerminalManifold M hM) where
+  ideal := GermIdeal.pullback (m := n)
+    (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) M.ideal
+  isInvertible := originalTerminalGluedProjection_pullback_isInvertible M hM hN hd
+
+theorem originalTerminalPrincipalizationDivisor_ideal
+    (M : MarkedIdeal n X) (hM : IsInvDomain n M) (hN : M.N = univ) (hd : M.d = 1) :
+    (originalTerminalPrincipalizationDivisor M hM hN hd).ideal =
+      GermIdeal.pullback (m := n)
+        (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) M.ideal := rfl
+
+/-- The support of the constructed divisor is the genuine inverse image of the
+original ideal's zero locus, for the same original global projection. -/
+theorem originalTerminalPrincipalizationDivisor_support
+    (M : MarkedIdeal n X) (hM : IsInvDomain n M) (hN : M.N = univ) (hd : M.d = 1) :
+    (originalTerminalPrincipalizationDivisor M hM hN hd).support =
+      (originalTerminalGluedProjection M hM : originalTerminalManifold M hM → X) ⁻¹' M.ideal.zeroLocus :=
+  BlowupExceptionalDivisor.zeroLocus_pullback (originalTerminalGluedProjection_contMDiff M hM)
+    hM.isWellFormed.isCoherent
+
+end Original
+
+end
+
+end Hironaka.HironakaOriginalGlobalPrincipalization

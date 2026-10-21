@@ -1,0 +1,42 @@
+\begin{lemma}[Base change of admissible sequences along open embeddings]
+\label{hir:base-change-open}
+\uses{hir:admissible-sequence,ana:blowups,bcalc:restrict-open,hir:biholomorphism-blowup,hir:biholomorphism-invariance,hir:snc-invariance,ana:regular-transport,ana:strict-transform-composition,hir:snc}
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.HironakaBaseChange.mfderiv_val_bijective,TranscendentalNakamaye.Pending.HironakaBaseChange.exceptionalLocus_val,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding,TranscendentalNakamaye.Pending.HironakaBaseChange.isOpenHoloEmbedding_val,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.contMDiff,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.exceptionalLocus_eq_empty,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.notMem_exceptionalLocus,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.isOpenEmbedding,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.continuous,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.isOpenMap,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.injective,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.isOpen_range,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.preimage_closure,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.pullsBackCoordinates,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.regularAtDim_preimage,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.hasNormalCrossings_preimage,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.isSNCDivisor_map_preimage,TranscendentalNakamaye.Pending.HironakaBaseChange.IsOpenHoloEmbedding.codRestrict,TranscendentalNakamaye.Pending.HironakaBaseChange.IsAdmissibleBlowupSequence.exists_baseChange,TranscendentalNakamaye.Pending.HironakaBaseChange.exceptionalLocus_eq_preimage,TranscendentalNakamaye.Pending.HironakaBaseChange.strictTransform_preimage_eq,TranscendentalNakamaye.Pending.HironakaBaseChange.IsAdmissibleBlowupSequence.exists_restrict_opens}
+\leanok
+Call a holomorphic map \(\iota\colon B\to A\) of complex manifolds of dimension \(n\) an \emph{open holomorphic embedding} if it is a biholomorphism of \(B\) onto an open
+subset \(O\subset A\) followed by the inclusion; for instance the inclusion of an open subset, and its co-restriction to any larger open subset.
+\begin{enumerate}
+\item The inclusion of an open subset has bijective differential at every point; hence an open holomorphic embedding has no exceptional points, is an open embedding,
+pulls back adapted coordinates, regular points of every dimension, normal crossings and divisors with simple normal crossings, and closures (\(\iota^{-1}\overline S=
+\overline{\iota^{-1}S}\)).
+\item (Base change.) Let \(f\colon Y\to A\) be an admissible blowup sequence of \((A,E_0)\) with centres over \(F\) (Definition~\ref{hir:admissible-sequence}), with divisor
+\(E\), and \(\iota\colon B\to A\) an open holomorphic embedding. There are an admissible blowup sequence \(f'\colon Y'\to B\) of \((B,\iota^{-1}E_0)\) with centres over
+\(\iota^{-1}(F)\), with divisor \(j^{-1}E\), and an open holomorphic embedding \(j\colon Y'\to Y\) with \(f\circ j=\iota\circ f'\) and \(j(Y')=f^{-1}(\iota(B))\).
+\item (Transport.) In (2), \(\operatorname{Exc}(f')=j^{-1}\operatorname{Exc}(f)\), and for every \(S\subset A\) the strict transform of \(\iota^{-1}(S)\) by \(f'\) is
+\(j^{-1}\) of the strict transform of \(S\) by \(f\).
+\item (Restriction.) In particular, for an open \(O\subset A\) the sequence \(f\) restricts to an admissible blowup sequence of \((O,E_0|_O)\) with centres over
+\(F\cap O\), whose total space is embedded by \(j\) onto \(f^{-1}(O)\), with \(\operatorname{Exc}\) and strict transforms as in (3).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) In the preferred charts the inclusion of an open subset is the identity near every point, so its differential is the identity; a biholomorphism has no exceptional
+points (Lemma~\ref{hir:biholomorphism-invariance}), and \(\operatorname{Exc}(g\circ h)=\operatorname{Exc}(h)\cup h^{-1}\operatorname{Exc}(g)\) by the chain rule. Maps
+without exceptional points pull back adapted coordinates and regular points (Lemmas~\ref{hir:snc-invariance} and~\ref{ana:regular-transport}). An open embedding is an
+open map, so preimages commute with closures.
+
+(2) By induction on \(f\). For the identity take \(Y'=B\), \(f'=\mathrm{id}\), \(j=\iota\). Let \(f\pi\) be obtained from \(f\) by a blowup \(\pi\colon Z\to Y\) along a
+centre \(C\) having only normal crossings with \(E\) and lying over \(F\), and let \((Y',f',j)\) be given for \(f\), with \(j\) a biholomorphism \(\Phi\colon Y'\to O\)
+onto the open set \(O=j(Y')\) followed by the inclusion. The restriction \(\pi^{-1}(O)\to O\) of \(\pi\) is the blowup of \(O\) along \(C\cap O\)
+(Lemma~\ref{bcalc:restrict-open}), and composing it with \(\Phi^{-1}\) gives a blowup \(\sigma\colon\pi^{-1}(O)\to Y'\) along \(\Phi^{-1}(C\cap O)=j^{-1}(C)\)
+(Lemma~\ref{hir:biholomorphism-blowup}). The centre \(j^{-1}(C)\) has only normal crossings with \(j^{-1}E\) by (1) and lies over \(\iota^{-1}(F)\) since
+\(f\circ j=\iota\circ f'\). So \(f'\sigma\) is admissible; take for the new \(j\) the inclusion of \(\pi^{-1}(O)\) in \(Z\). Since \(j\sigma\) is \(\pi\) on
+\(\pi^{-1}(O)\), the new divisor \(\big(\overline{\sigma^{-1}(j^{-1}H\setminus j^{-1}C)}\big)_{H\in E}\cup(\sigma^{-1}j^{-1}C)\) is the trace on \(\pi^{-1}(O)\) of
+\(\big(\overline{\pi^{-1}(H\setminus C)}\big)_{H\in E}\cup(\pi^{-1}C)\) (closures commute with restriction to open sets), \(f\pi\) agrees with \(\iota f'\sigma\) on
+\(\pi^{-1}(O)\), and \(\pi^{-1}(O)=\pi^{-1}f^{-1}(\iota(B))\).
+
+(3) By the chain rule, \(j^{-1}\operatorname{Exc}(f)=\operatorname{Exc}(f\circ j)=\operatorname{Exc}(\iota\circ f')=\operatorname{Exc}(f')\), as \(\iota\) and \(j\) have no
+exceptional points. Then \(f'^{-1}\iota^{-1}(S)\setminus\operatorname{Exc}(f')=j^{-1}(f^{-1}(S)\setminus\operatorname{Exc}(f))\), and closures commute with \(j^{-1}\) by
+(1). (4) is (2) and (3) for the inclusion of \(O\).
+\end{proof}

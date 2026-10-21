@@ -1,0 +1,19 @@
+\begin{lemma}[The support of the restricted coefficient ideal]
+\label{mc:coefficient-restriction-support}
+\uses{mc:restrict-marked,mc:restrict-order,mc:coefficient-equivalent,mc:finite-sum,hir:order-power,hir:giraud-support}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupport_coeff_subset,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupp_coeff_withN}
+\leanok
+For every set \(S\subset M\), \(\operatorname{cosupp}\underline{\mathcal I}\cap S=\operatorname{cosupp}(\mathcal C(\underline{\mathcal I})|_S)\).
+\end{lemma}
+\begin{proof}
+\leanok
+The inclusion \(\subset\) is Lemma~\ref{mc:coefficient-equivalent} (for the empty tower) followed by Lemma~\ref{mc:restrict-order}. Conversely, let
+\(x\in S\) with \(\operatorname{ord}_x(\mathcal C(\mathfrak a)|_S)\ge\mu_{\mathcal C}\). The ideal of \(\mathcal C(\underline{\mathcal I})\) contains
+\(g^e\) for every \(g\in\mathcal D^{\mu-1}\mathfrak a\), where \(e\) is the exponent of the last summand \((\mathcal D^{\mu-1}\mathfrak a,1)\), and
+\(\mu_{\mathcal C}=1\cdot e\ge1\). So \(g^e\), hence \(g\), vanishes at \(x\): \(x\in V(\mathcal D^{\mu-1}\mathfrak a)=\operatorname{cosupp}(\mathfrak a,\mu)\)
+(Lemma~\ref{hir:giraud-support}).
+\end{proof}
+This is the first statement of Włodarczyk's Lemma ``le:S'' (Proposition~5.6.4 of the analytic paper), with \(\mu_{\mathcal C}=\mu!\) in place of
+\(\operatorname{lcm}(1,\dots,\mu)\), which changes nothing. The source proves \(\supset\) by expanding the germs of \(\mathfrak a\) in coordinates normal to \(S\);
+the last summand of \(\mathcal C\) makes this unnecessary, and \(S\) need not be a submanifold.

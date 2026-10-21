@@ -1,0 +1,165 @@
+\section{Actual normal-filtered analytic owner division and relative initial relations}
+
+Let $R=\mathcal O_{\mathbb C^{d+t},0}$ be the actual original analytic
+germ ring, let $N=(z_1,\ldots,z_t)$ be the original normal-coordinate
+ideal, and write $\tau$ for its actual whole Taylor map. Put
+$K=\tau(I)\mathbb C[[u,z]]$ for an original ideal $I\subset R$.
+The finite actual degree-lex vertex labels are denoted by $a$, their
+literal normal weights by $w_a=\sum_{j=1}^t a_{d+j}$, with weight
+zero on every tangent coordinate and one on every normal coordinate,
+and their canonical reduced formal series by
+$F_a$. Throughout, a prescribed actual analytic family $G_a$ satisfies
+$\tau(G_a)=F_a$. Thus no independently chosen generating family replaces it.
+
+\begin{theorem}[Prescribed canonical analytic generators retain their literal recursive owner quotients]
+\label{hir:actual-prescribed-canonical-analytic-owner-division}
+\uses{hir:actual-original-canonical-reduced-vertex-basis,hir:actual-original-canonical-reduced-analytic-division,hir:actual-owner-division-formal-quotient-dictionary}
+\lean{Hironaka.HironakaActualNormalFilteredOwnerDivision.exists_prescribed_canonical_owner_division}
+\leanok
+For every actual $g\in R$, there are actual analytic germs $Q_a,s$ with
+\[
+ g=\sum_aG_aQ_a+s,\qquad
+ \tau(s)=\operatorname{Rem}_K(\tau(g)),\qquad
+ \tau(Q_a)=\operatorname{OwnerQuot}_{K,a}(\tau(g)).
+\]
+The last expression is the literal recursive quotient for the actual
+canonical reduced family and the unchanged whole ideal $K$.
+No analytic quotient, convergence or owner-support certificate is an input.
+\end{theorem}
+\begin{proof}
+The genuine analytic canonical reduced basis of $I$ has precisely the
+same whole Taylor images as the prescribed $G_a$. Injectivity of the
+actual Taylor map therefore identifies each of its analytic members
+with the corresponding prescribed $G_a$. Apply the proved whole analytic
+owner division for the canonical basis to $g$, and retain its actual
+analytic quotients and canonical remainder. Its whole owner-support
+condition and actual analytic identity identify the quotient Taylor
+series with the exact recursive formal quotients by the proved
+owner-supported relation uniqueness theorem. These identities concern
+the same prescribed members just identified, the same ideal $K$ and
+the same numerator $g$.
+\end{proof}
+
+\begin{theorem}[Actual normal powers produce whole shifted normal powers of these same analytic quotients]
+\label{hir:actual-prescribed-canonical-normal-filtered-division}
+\uses{hir:actual-prescribed-canonical-analytic-owner-division,hir:actual-formal-normal-power-contracts-exact-original-analytic-power,hir:actual-monic-family-centre-power-division}
+\lean{Hironaka.HironakaActualNormalFilteredOwnerDivision.exists_normal_filtered_canonical_division}
+\leanok
+Suppose additionally that every prescribed actual generator belongs to
+the genuine whole original power $G_a\in N^{w_a}$. For every
+$g\in N^q$, the preceding actual division has
+$Q_a\in N^{q-w_a}$. All whole analytic identities and literal recursive
+Taylor quotients above remain true for these same $Q_a$.
+The generator power hypotheses are the actual centre-compatible powers,
+not assumptions on any output quotient or relation.
+\end{theorem}
+\begin{proof}
+Apply the preceding theorem without choosing a new family. Actual Taylor
+normal-power naturality puts $\tau(g)$ in the whole formal normal power
+$\widehat N^q$ and every $F_a$ in $\widehat N^{w_a}$. The genuine
+coefficient recursion for this exact canonical formal family preserves
+all coordinate weights compatible with its coefficients. Its proved
+coordinate-power quotient bound therefore places the very same recursive
+quotient in $\widehat N^{q-w_a}$. The preceding exact Taylor identity
+identifies that series with $\tau(Q_a)$. The actual whole formal normal
+power contracts to the original analytic normal power, so
+$Q_a\in N^{q-w_a}$. Subtraction is truncated in the natural numbers,
+so the assertion includes $q<w_a$, $q=0$ and an empty normal block.
+\end{proof}
+
+\begin{theorem}[A whole normal-order relation error has a genuine same-family analytic syzygy correction]
+\label{hir:actual-prescribed-canonical-normal-syzygy-correction}
+\uses{hir:actual-prescribed-canonical-normal-filtered-division}
+\lean{Hironaka.HironakaActualNormalFilteredOwnerDivision.exists_normal_filtered_canonical_syzygy}
+\leanok
+Under the same prescribed-family and genuine generator-power hypotheses,
+if actual analytic $P_a$ satisfy $E=\sum_aG_aP_a\in N^q$, there are
+actual analytic $C_a$ with
+\[
+ \sum_aG_aC_a=0,\qquad P_a-C_a\in N^{q-w_a}.
+\]
+No exact syzygy or desired correction bound is assumed.
+\end{theorem}
+\begin{proof}
+The entire error belongs to $I$, since each $G_a$ does: injectivity of
+the actual Taylor map identifies each prescribed member with the genuine
+original canonical basis, whose whole analytic span is $I$.
+Apply the preceding normal-filtered division to this actual error $E$.
+Its canonical formal remainder vanishes because $\tau(E)\in K$.
+Actual Taylor injectivity makes the analytic remainder zero. Thus
+$E=\sum_aG_aQ_a$ with each $Q_a\in N^{q-w_a}$. Set
+$C_a=P_a-Q_a$. Distributing the finite sum gives
+$\sum_aG_aC_a=E-E=0$, and the literal difference
+$P_a-C_a=Q_a$ gives the asserted whole analytic correction power.
+\end{proof}
+
+\begin{theorem}[A literal relative homogeneous initial relation lifts to an actual analytic relation]
+\label{hir:actual-prescribed-canonical-relative-initial-syzygy}
+\uses{hir:actual-prescribed-canonical-normal-syzygy-correction,hir:actual-normal-homogeneous-polynomial,hir:actual-normal-homogeneous-entire-taylor-realization,hir:relative-normal-polynomial-jets-literal-variable-powers}
+\lean{Hironaka.HironakaActualNormalFilteredOwnerDivision.exists_normal_homogeneous_initial_syzygy}
+\leanok
+Under the same prescribed-family and genuine generator-power hypotheses
+$G_a\in N^{w_a}$, let $f_a\in B[z]$,
+$B=\mathcal O_{\mathbb C^d,0}$, be the actual
+normal homogeneous polynomial of degree $w_a$ of the same $G_a$.
+Suppose $D\ge w_a$ for every label, and let literal polynomials
+$p_a\in B[z]$ be homogeneous of degree $D-w_a$ with the whole
+polynomial identity $\sum_ap_af_a=0$. There are actual analytic
+$C_a$ such that
+\[
+ \sum_aG_aC_a=0,\qquad
+ \operatorname{ev}(p_a)-C_a\in N^{D+1-w_a}.
+\]
+The next-order analytic relation error is derived from the displayed
+whole polynomial relation, rather than supplied as a premise.
+\end{theorem}
+\begin{proof}
+The actual Taylor normal-power coefficient criterion gives
+$G_a-\operatorname{ev}(f_a)\in N^{w_a+1}$: all its coefficients of
+normal degree below $w_a$ vanish by the genuine generator-power
+hypothesis, and its degree $w_a$ coefficients cancel the actual
+homogeneous component. The literal homogeneous polynomial $p_a$ has no
+coefficient of normal degree below $D-w_a$, so actual normal polynomial
+evaluation puts it in $N^{D-w_a}$. Hence
+$\operatorname{ev}(p_a)(G_a-\operatorname{ev}(f_a))\in N^{D+1}$,
+using $w_a\le D$ to identify the sum of these two exponents.
+The whole polynomial relation, evaluated by the genuine ring map,
+makes $\sum_a\operatorname{ev}(p_a)\operatorname{ev}(f_a)=0$.
+Consequently the actual finite sum
+$\sum_aG_a\operatorname{ev}(p_a)$ lies in $N^{D+1}$. Apply the
+preceding analytic syzygy correction to this actual sum and that order.
+It gives exactly the claimed same-family relation and shifted powers.
+\end{proof}
+
+\begin{corollary}[Original Hilbert--Samuel constant regular-centre geometry supplies the prescribed normal-filtered analytic family]
+\label{hir:actual-original-hs-centre-normal-filtered-owner-division}
+\uses{hir:actual-original-hs-centre-canonical-coefficient-data,hir:actual-prescribed-canonical-normal-filtered-division}
+\lean{Hironaka.HironakaActualNormalFilteredOwnerDivision.exists_original_hs_centre_normal_filtered_division}
+\leanok
+An original coherent analytic ideal and a regular centre on which all
+original Hilbert--Samuel values are constant supply one actual flattening
+and one canonical analytic coefficient datum. For the literal original
+ideal in that same flattening, its unchanged canonical generators satisfy
+all the normal-filtered analytic division conclusions above, before
+quantifying over every numerator and every normal order. No incoming
+flattening, canonical family, normal-flatness or quotient bound is supplied.
+\end{corollary}
+\begin{proof}
+Use the actual original regular-centre canonical coefficient producer
+once. It fixes one flattening, the same original translated ideal and
+one actual coefficient datum whose generator Taylor images are exactly
+the canonical reduced series and whose original analytic generators
+belong to their whole normal powers. Retain all these same witnesses.
+For each numerator and order apply the second theorem to these exact
+generators, their actual Taylor identities and the internally produced
+original normal-power memberships. This constructs the asserted actual
+analytic quotients and remainder without making any new chart or
+family choice. The flattening and coefficient datum were fixed before
+all the numerators and orders.
+\end{proof}
+
+The results are source-side normal-filtered analytic division and relation
+lifting. Relative exceptional regularity and normalized saturation still
+require genuine relative polynomial rehomogenization and complete fibre
+relation lifting. Transformed maximal-ideal standardness, reverse current
+Hilbert--Samuel persistence and uniform history remain separate.

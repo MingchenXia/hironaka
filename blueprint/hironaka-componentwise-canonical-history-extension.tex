@@ -1,0 +1,151 @@
+\section{Actual locally terminal histories from componentwise compact cosupport}
+\label{sec:hironaka-componentwise-canonical-history}
+
+The fixed partition throughout this section is a disjoint open cover of
+the original ambient manifold. Restriction retains every actual stage,
+including empty steps on components which have already terminated.
+
+\begin{theorem}[Parallel whole maxima construct a growing actual history]
+\label{hir:componentwise-canonical-growing-history}
+\uses{hir:componentwise-canonical-global-refinement,hir:centre-function-seq,hir:open-restriction-tower}
+\lean{Hironaka.HironakaComponentwiseCanonicalHistory.ParallelSteps,Hironaka.HironakaComponentwiseCanonicalHistory.exists_parallel_canonical_sequence,Hironaka.HironakaComponentwiseCanonicalHistory.restricted_steps_are_maxima}
+\leanok
+Let $R$ be a proved resolution invariant, $M$ an original marked ideal
+of its domain, and $X=\coprod_aU_a$ a disjoint open cover. Then the
+original input internally constructs an actual growing sequence
+$T_j:X_j\to X$, starting with the reflexive original tower. Every
+$T_j$ is a genuine test prefix. Every actual restriction $T_j|_{U_a}$
+is canonical for $M|_{U_a}$, and the next actual blowup has centre
+\[
+ C_j=\bigcup_a\iota_{a,j}
+ \operatorname{maxLocus}(\operatorname{inv}(M|_{U_a},T_j|_{U_a}),
+                 \operatorname{cosupp}(M|_{U_a})_{T_j|_{U_a}}).
+\]
+In particular, each true restricted sequence is a growing sequence
+whose next centre is its whole canonical maximum.
+\end{theorem}
+\begin{proof}
+Take as states the actual towers over $X$ equipped with the facts
+that they are test prefixes and that all their restrictions to
+the fixed opens $U_a$ are canonical. The reflexive tower is a state.
+The global refinement theorem constructs a next state by blowing
+up the displayed whole union; its global admissibility supplies
+the test property and its exact traces supply the canonical
+properties of every restricted next tower. Choose such a next
+state for each state and iterate, beginning with the reflexive
+one. The recorded chosen blowups give the growing sequence
+equalities, without removing any stage.
+
+Restrict each recorded next blowup to $U_a$. The actual restricted
+blowup centre is the inverse image of $C_j$ in $T_j^{-1}(U_a)$.
+The exact trace theorem identifies this whole inverse image with
+the displayed local maximum. Thus the restricted growing sequence
+has exactly the required maximum steps.
+\end{proof}
+
+\begin{lemma}[A maximum sequence with compact original cosupport terminates]
+\label{hir:compact-cosupport-maximum-sequence-terminates}
+\uses{hir:centre-function-seq,hir:componentwise-canonical-growing-history,hir:resolution-driver}
+\lean{Hironaka.HironakaComponentwiseCanonicalHistory.eventually_resolves_maximum_sequence}
+\leanok
+Let $M$ be in the domain of $R$ with compact original cosupport.
+Every actual growing sequence, all of whose prefixes are canonical
+and all of whose next centres are the whole current maximum,
+is a resolution at every sufficiently late stage.
+\end{lemma}
+\begin{proof}
+The current cosupport is closed and lies inside the actual
+proper preimage of the original compact cosupport, and hence
+is compact at every stage. If it were nonempty at every stage,
+upper semicontinuity would give a nonempty whole maximum centre
+at every stage. Every such centre meets that same proper
+preimage of the original cosupport. Therefore the count of
+centres meeting the original cosupport at stage $j$ is exactly
+$j$, by induction on the recorded actual next-step equality.
+This contradicts per-sequence local finiteness of $R$ on that
+original compact set.
+
+Consequently some stage has empty cosupport. For every following
+admissible step, the image of the next cosupport is contained
+in the preceding cosupport. Induction therefore makes every
+later cosupport empty as well. Those later prefixes are still
+test prefixes because they are canonical, so they are resolutions.
+\end{proof}
+
+\begin{theorem}[Original componentwise compact input gives locally terminal actual histories]
+\label{hir:original-componentwise-compact-locally-terminal-history}
+\uses{hir:componentwise-canonical-growing-history,hir:compact-cosupport-maximum-sequence-terminates,hir:original-componentwise-compact-canonical-first-step,hir:componentwise-history-locally-finite-empty-tails}
+\lean{Hironaka.HironakaComponentwiseCanonicalHistory.exists_original_componentwise_locally_terminal_history}
+\leanok
+Let $M$ be an original marked ideal in the domain of the actual
+canonical invariant. Suppose the original cosupport on every
+connected ambient component is compact. Then the original input
+internally constructs a growing actual global test history,
+with the whole parallel component centres above, such that on
+each original component all sufficiently late actual restrictions
+are canonical resolutions. The required terminal stage may
+depend on the component; no common finite stage or global
+maximum invariant is assumed. Its actual centre images are closed
+and locally finite, and its actual later tails have the properties
+of the following general theorem.
+\end{theorem}
+\begin{proof}
+The literal connected components of a complex manifold are
+open and form a disjoint cover. Use these fixed original opens
+in the constructed parallel sequence. Restricting that actual
+sequence to a component retains all of its recorded actual
+stages and gives whole maximum steps. The domain condition
+and the genuine restricted-cosupport dictionary identify
+its original cosupport with the compact set in the hypothesis.
+Apply the preceding lemma separately to every component.
+The resulting component terminal times refer to this same
+constructed global history, rather than to independently
+chosen local histories. Apply the following general local-tail
+theorem to this sequence and these internally obtained terminal
+times to obtain the closed, locally finite centre images and
+the actual empty and isomorphic tails.
+\end{proof}
+
+\begin{theorem}[The constructed centres are locally finite and all late local tails are empty]
+\label{hir:componentwise-history-locally-finite-empty-tails}
+\uses{hir:componentwise-canonical-growing-history,bcalc:growing-seq-tail,hir:open-restriction-tower,hir:growing-canonical-sequence-closed-images,hir:growing-canonical-sequence-isomorphism-tail,hir:growing-sequence-empty-restricted-tails}
+\lean{Hironaka.HironakaComponentwiseCanonicalHistory.centreImage_parallel_sequence,Hironaka.HironakaComponentwiseCanonicalHistory.locally_finite_empty_tails_of_component_terminal}
+\leanok
+Let an actual parallel whole-maximum history be eventually a
+resolution on each member of its fixed original disjoint open
+partition. Then the images in $X$ of its actual next centres
+are closed and locally finite. Every member of the partition
+is a genuine open neighbourhood on which every sufficiently
+late actual step is an isomorphism and every entire finite
+later tail restricts to an empty-centre tower.
+\end{theorem}
+\begin{proof}
+At a late stage on one original component the restricted
+cosupport is empty. Its whole maximum centre is therefore
+empty. Exact whole traces imply that the actual global
+next centre misses the full preimage of that component.
+The actual centre image consequently misses this component
+at every late index. Only the finitely many earlier indices
+can meet that component, which proves local finiteness.
+Each actual centre is closed and its actual prefix projection
+is proper, so its entire image is closed.
+
+An actual blowup is an isomorphism off its actual centre,
+hence is an isomorphism over the preimage of this same open
+component at every late stage. The actual finite tail is
+formed by appending precisely these later recorded blowups.
+The prefix--tail projection identity identifies each tail
+centre's preimage of the component with its global one.
+Induction gives that every centre of the finite restricted
+tail is empty. No empty-step position is erased.
+\end{proof}
+
+\begin{remark}
+The global histories here need not be globally canonical:
+different components can have different maxima, with no
+largest value among them. Their actual restrictions to the
+fixed original components are canonical. Componentwise
+compact original cosupport is an explicit extra geometric
+hypothesis. This does not construct the unrestricted
+connected noncompact resolution scheduler.
+\end{remark}

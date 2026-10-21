@@ -1,0 +1,17 @@
+\begin{lemma}[The germ ring is a domain; zero sets are thin]
+\label{lag:germ-domain}
+\lean{TranscendentalNakamaye.Pending.RiemannExtension.dense_compl_zeroSet,TranscendentalNakamaye.Pending.RiemannExtension.isDomain_holGerm}
+\leanok
+If \(h\) is holomorphic on a connected open set \(U\subset\mathbb C^d\) and does
+not vanish identically near some point of \(U\), then \(h^{-1}(0)\) has empty
+interior in \(U\). The ring \(\mathcal O_d\) is an integral domain.
+\end{lemma}
+\begin{proof}
+\leanok
+The set of points near which \(h\) vanishes identically is open, and it is closed
+in \(U\) by the identity theorem (Taylor coefficients at a limit point vanish).
+It is not all of \(U\), so by connectedness it is empty; thus \(h^{-1}(0)\)
+contains no open set. If \(fg=0\) near \(0\) with \(f,g\) holomorphic on a ball
+\(B\) and \(f\) not identically zero near \(0\), then \(g=0\) on the dense set
+\(B\setminus f^{-1}(0)\), hence on \(B\) by continuity.
+\end{proof}

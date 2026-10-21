@@ -1,0 +1,14 @@
+def relocate(source):
+ lines=[];in_open=False
+ for line in source.splitlines(keepends=True):
+  match=re.fullmatch(r'import (TranscendentalNakamaye\.[\w.]+)\s*',line)
+  if match:lines.append('import '+names.new_mod(match.group(1))+'\n');continue
+  line=fq.sub('Hironaka.',names.rename_text_names(line))
+  if re.match(r'^\s*(namespace|end|section)\b',line):line=re.sub(r'(?<![\w.])(FirstPass|Pending)\.', '',line)
+  else:line=re.sub(r'(?<![\w.])(FirstPass|Pending)\.', 'Hironaka.',line)
+  if re.match(r'^\S',line) or re.match(r'^\s*open\b',line):in_open=bool(re.match(r'^\s*open\b',line))
+  if in_open:
+   line=' '.join(t for t in line.split(' ') if t.strip() not in ('FirstPass','Pending',*flat))
+   if re.fullmatch(r'\s*open\s*',line):line='\n'
+  lines.append(line)
+ return ''.join(lines)

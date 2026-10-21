@@ -1,0 +1,17 @@
+/-- **Some centre meets the smooth part**: along a multiple test blow-up of `(X, X, ∅, 𝓘_V, 1)` with empty final cosupport
+(a resolution), not every centre misses the preimage of `U = X ∖ V_sing` -- otherwise the cosupport over `U` would be the
+preimage of `V_reg ≠ ∅` (`mem_cosupp_iff_of_centresAvoid`; the projection is onto, `X` being compact). -/
+theorem not_centresAvoid_of_cosupp_eq_empty {k : ℕ} [CompactSpace X] (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hTt : IsGeoTestTower (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+    (hres : (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp = ∅) :
+    ¬ CentresAvoid (regularOpen V) T := by
+  intro hT
+  obtain ⟨x, hx⟩ := V.regularLocus_nonempty
+  obtain ⟨y, rfl⟩ := (StrictTransformComposition.IsBlowupSequence.compactSpace_surjective T.isBlowupSequence).2 x
+  have hyU : T.proj y ∈ regularOpen V := mem_regularOpen_of_regularAtDim hx
+  have hy := (mem_cosupp_iff_of_centresAvoid V.isClosed_carrier hdom (regularOpen V) T hTt hT hyU).mpr
+    (regularLocus_subset _ _ hx)
+  rw [hres] at hy
+  exact hy

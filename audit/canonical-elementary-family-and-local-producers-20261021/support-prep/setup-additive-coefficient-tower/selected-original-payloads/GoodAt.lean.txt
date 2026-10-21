@@ -1,0 +1,10 @@
+/-- **The coefficient invariant at a point** of the strict transform `S_T` of `S` along `T`: a flat chart `c` for `S_T`
+at `p` (dimension `k ≤ n`) and generators `G` of `(𝔪_T)_p` such that for every generator `g` and every list `L` of normal
+directions with `|L| < μ`, the normal derivative `∂^L g` restricts on `S_T` near `p` into `[𝓓^{|L|} 𝔪]_T`. -/
+def GoodAt (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (p : Y) : Prop :=
+  ∃ (k : ℕ) (_ : k ≤ n) (c : FlatChart n (strictAlong T S) p k) (G : (Y → ℂ) → Prop),
+    (∀ g, G g → (geoTransformAlong 𝔪 T).ideal.mem p g) ∧
+    (∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → IsInSpanAt (n := n) G p f) ∧
+    ∀ g, G g → ∀ L : List (Fin n), NormalIdx k L → L.length < 𝔪.d →
+      IsInSpanOnAt (n := n) (strictAlong T S) ((geoTransformAlong (derivMarked 𝔪 L.length) T).ideal.mem p) p
+        (c.nd L g)

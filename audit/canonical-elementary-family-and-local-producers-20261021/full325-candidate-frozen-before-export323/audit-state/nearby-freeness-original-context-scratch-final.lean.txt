@@ -1,0 +1,462 @@
+import Lean
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaSmoothCentreRealDomainCoefficientAlgebra
+import Hironaka.Resolution.HironakaRelativeNormalCanonicalCentreFreeness
+
+/-! # One true real nonvanishing open for all original nearby normal degrees
+Complete two-node mathematics precedes code. Original regularity/coherence
+supply actual coefficient quotient domains and every nearby original kernel.
+ONE uniform denominator gives ALL degrees on ONE actual open. Canonical centre
+actions are independently descended on associated layers, never truncations.
+-/
+set_option autoImplicit false
+open Set Filter
+open scoped DirectSum Topology Manifold ContDiff
+namespace Hironaka.HironakaSmoothCentreRealDomainNearbyFreeness
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf
+  HironakaSmoothCentreCoherentDomain HironakaSmoothCentreRealDomainCoefficientAlgebra
+  HironakaRelativeNormalIdeal HironakaRelativeNormalAssociatedGraded
+  HironakaRelativeNormalDeformationInitialRelations HironakaRelativeNormalCoherentTranslatedJets
+  HironakaRelativeNormalCoefficientFunctionAlgebra HironakaRelativeNormalUniformLocalization
+  HironakaRelativeNormalCoefficientPolynomialBaseChange HironakaRelativeNormalCoefficientAlgebraNearbyFreeness
+  HironakaRelativeNormalCentreScalars HironakaRelativeNormalCanonicalCentreFreeness
+attribute [local instance] coefficientSubalgebraRing
+
+section Original
+variable {d t : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel (d+t)) M] [IsComplexManifold (d+t) M]
+
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
+/-- ONLY original real-centre inputs construct one uniform actual nonvanishing free open for ALL original nearby associated modules. -/
+theorem exists_original_regular_real_nearby_associated_free_open
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)
+    (A : GermIdeal (d+t) M) (hA : A.IsCoherent) :
+    letI := tangentAlgebra d t
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x),
+      Φ.source ⊆ (chartAt (ComplexModel (d+t)) x).target ∧
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel (d+t)) x x) = 0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel (d+t)) x).source →
+        chartAt (ComplexModel (d+t)) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel (d+t)) x y) ∈ complexCoordinatePlane (d+t) d)) ∧
+      ∃ U : Set (ComplexModel d), IsOpen U ∧
+        (∀ V ∈ 𝓝 (0 : ComplexModel d), (V ∩ U).Nonempty) ∧
+        (∀ a ∈ U, tangentInclusion d t a ∈ Φ.target ∩ complexCoordinatePlane (d+t) d) ∧
+        let F := actualFlattenedOriginalSheaf A x Φ
+        ∀ a ∈ U, Module.Free (HolGerm (ComplexModel d))
+          (originalNormalAssociatedGraded d t
+            (originalCoherentOriginIdeal (actualTranslatedOriginalSheaf F (tangentInclusion d t a)))) := by
+  classical
+  let := tangentAlgebra d t
+  obtain ⟨Φ,hsrc,h0Φ,hflat,B,_hB,h0,hpoint,C0,_hC,hD,_hDf,W,hW,h0W,hWB,ρ,Q,_hhom,hρ,hideal⟩ :=
+    exists_original_regular_real_common_domain_initial_family C x hreg A hA
+  let F := actualFlattenedOriginalSheaf A x Φ
+  let D := coefficientOriginAlgebra d B h0 C0
+  let : IsDomain D := hD
+  let : Field (FractionRing D) := FractionRing.field D
+  let H : Ideal (MvPolynomial (Fin t) D) := Ideal.span (range Q)
+  let b := uniformLeadingDenominator (K := FractionRing D) t (MonomialOrder.degLex (σ := Fin t)) H
+  have hb : b ≠ 0 := uniformLeadingDenominator_ne_zero _ _ _
+  obtain ⟨c, hcb⟩ := Ideal.Quotient.mk_surjective b
+  let g : ComplexModel d → ℂ := (C0.val c).val
+  have hc0 : ((coefficientGermHom d B 0 h0).comp C0.val) c ≠ 0 := by
+    intro hz
+    have hc : c ∈ coefficientOriginKernel d B h0 C0 := hz
+    have he := Ideal.Quotient.eq_zero_iff_mem.mpr hc
+    rw [hcb] at he
+    exact hb he
+  have hg0 : (g : Germ (𝓝 (0 : ComplexModel d)) ℂ) ≠ 0 := by
+    intro hz
+    apply hc0
+    apply Subtype.ext
+    change (Germ.coeRingHom (𝓝 (0 : ComplexModel d))) (g ∘ actualAffineTranslation d 0) = 0
+    have hid : g ∘ actualAffineTranslation d 0 = g := by
+      funext z
+      simp only [Function.comp_apply, actualAffineTranslation, zero_add]
+    rw [hid]
+    exact hz
+  let U := {a : ComplexModel d | a ∈ W ∧ g a ≠ 0}
+  have hU : IsOpen U := by
+    apply isOpen_iff_mem_nhds.mpr
+    intro a ha
+    have hcont : ContinuousAt g a := ((C0.val c).property a (hWB ha.1)).self_of_nhds.continuousAt
+    filter_upwards [hW.mem_nhds ha.1, hcont.eventually_ne ha.2] with z hz hgz
+    exact ⟨hz, hgz⟩
+  have hmeet : ∀ V ∈ 𝓝 (0 : ComplexModel d), (V ∩ U).Nonempty := by
+    intro V hV
+    by_contra hn
+    apply hg0
+    apply Germ.coe_eq.mpr
+    filter_upwards [hV, hW.mem_nhds h0W] with a haV haW
+    by_contra hga
+    exact hn ⟨a, haV, haW, hga⟩
+  refine ⟨Φ,hsrc,h0Φ,hflat,U,hU,hmeet,(fun a ha => hpoint a (hWB ha.1)),?_⟩
+  dsimp only
+  intro a ha
+  have hvalue : (ρ a ha.1) b = coefficientGermHom d B a (hWB ha.1) (C0.val c) := by
+    rw [← hcb]
+    exact congrArg (fun f : C0 →ₐ[ℂ] HolGerm (ComplexModel d) => f c) (hρ a ha.1)
+  have hunit : IsUnit ((ρ a ha.1) b) := by
+    apply (HolGerm.isUnit_iff_eval_ne_zero ((ρ a ha.1) b)).mpr
+    rw [hvalue]
+    change g (actualAffineTranslation d a 0) ≠ 0
+    simpa only [actualAffineTranslation_zero] using ha.2
+  have hp := moduleFree_coefficient_image_at_uniform_denominator (K := FractionRing D)
+    t (MonomialOrder.degLex (σ := Fin t)) H (ρ a ha.1).toRingHom hunit
+  change Module.Free (HolGerm (ComplexModel d))
+    (MvPolynomial (Fin t) (HolGerm (ComplexModel d)) ⧸
+      Ideal.map (MvPolynomial.map (ρ a ha.1).toRingHom) (Ideal.span (range Q))) at hp
+  rw [hideal a ha.1] at hp
+  let : Module.Free (HolGerm (ComplexModel d))
+      (MvPolynomial (Fin t) (HolGerm (ComplexModel d)) ⧸ originalNormalInitialIdeal d t
+        (originalCoherentOriginIdeal (actualTranslatedOriginalSheaf F (tangentInclusion d t a)))) := hp
+  exact Module.Free.of_equiv (originalNormalAssociatedGradedQuotientEquiv d t _)
+
+
+/-- The SAME actual real open gives ALL original nearby canonical centre degrees finite/free/flat and the whole associated module free/flat. -/
+theorem exists_original_regular_real_all_degree_canonical_centre_free_open
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)
+    (A : GermIdeal (d+t) M) (hA : A.IsCoherent) :
+    letI := tangentAlgebra d t
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x),
+      Φ.source ⊆ (chartAt (ComplexModel (d+t)) x).target ∧
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel (d+t)) x x) = 0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel (d+t)) x).source →
+        chartAt (ComplexModel (d+t)) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel (d+t)) x y) ∈ complexCoordinatePlane (d+t) d)) ∧
+      ∃ U : Set (ComplexModel d), IsOpen U ∧
+        (∀ V ∈ 𝓝 (0 : ComplexModel d), (V ∩ U).Nonempty) ∧
+        (∀ a ∈ U, tangentInclusion d t a ∈ Φ.target ∩ complexCoordinatePlane (d+t) d) ∧
+        let F := actualFlattenedOriginalSheaf A x Φ
+        ∀ a ∈ U,
+        let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf F (tangentInclusion d t a))
+        letI : SMul (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t)
+          (originalNormalAssociatedGraded d t Ia) := (originalNormalAssociatedGradedCentreModule d t Ia).toSMul
+        letI := originalNormalAssociatedGradedCentreModule d t Ia
+        (Module.Free (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t) (originalNormalAssociatedGraded d t Ia) ∧
+          Module.Flat (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t) (originalNormalAssociatedGraded d t Ia)) ∧
+        ∀ q : ℕ,
+          letI : SMul (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t)
+            (originalNormalGradedPiece d t Ia q) := (originalNormalGradedPieceCentreModule d t Ia q).toSMul
+          letI := originalNormalGradedPieceCentreModule d t Ia q
+          Module.Finite (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t) (originalNormalGradedPiece d t Ia q) ∧
+          Module.Free (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t) (originalNormalGradedPiece d t Ia q) ∧
+          Module.Flat (HolGerm (ComplexModel (d+t)) ⧸ normalIdeal d t) (originalNormalGradedPiece d t Ia q) := by
+  let := tangentAlgebra d t
+  obtain ⟨Φ,hsrc,h0,hflat,U,hU,hmeet,hpoint,hwhole⟩ :=
+    exists_original_regular_real_nearby_associated_free_open C x hreg A hA
+  let F := actualFlattenedOriginalSheaf A x Φ
+  refine ⟨Φ,hsrc,h0,hflat,U,hU,hmeet,hpoint,?_⟩
+  dsimp only
+  intro a ha
+  let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf F (tangentInclusion d t a))
+  have hb : Module.Free (HolGerm (ComplexModel d)) (originalNormalAssociatedGraded d t Ia) := hwhole a ha
+  refine ⟨originalNormalAssociatedGradedCentre_free_flat_of_tangent_free d t Ia hb, ?_⟩
+  intro q
+  obtain ⟨hfree, hfinite⟩ := all_originalNormalGradedPiece_finite_free_of_associated_free d t Ia hb q
+  exact ⟨originalNormalGradedPieceCentre_finite_of_tangent_finite d t q Ia hfinite,
+    originalNormalGradedPieceCentre_free_flat_of_tangent_free d t q Ia hfree⟩
+
+
+end Original
+
+end
+end Hironaka.HironakaSmoothCentreRealDomainNearbyFreeness
+
+open Lean Elab Command
+
+namespace HironakaNativeMigrationCanonical
+
+def node (tag : String) (xs : List Json := []) : Json :=
+  toJson (Json.str tag :: xs)
+
+def nameTree : Name → Json
+  | .anonymous => node "anonymous"
+  | .str p s => node "str" [nameTree p,toJson s]
+  | .num p k => node "num" [nameTree p,toJson k]
+
+-- Only the exact original module in an actual private constant is renamed.
+-- Every namespace component, numerical index and auxiliary suffix is retained.
+def namespaceRules : List (Name × Name) := [(`TranscendentalNakamaye.FirstPass.NonKahlerLocus, `Hironaka), (`TranscendentalNakamaye.Pending.HironakaAPI2, `Hironaka), (`TranscendentalNakamaye.Pending.HironakaAPI3, `Hironaka), (`TranscendentalNakamaye.Pending.HironakaAPI4, `Hironaka), (`TranscendentalNakamaye.Pending.HironakaAPI, `Hironaka), (`TranscendentalNakamaye.Pending, `Hironaka), (`TranscendentalNakamaye.FirstPass, `Hironaka), (`TranscendentalNakamaye.Upstream, `Hironaka), (`TranscendentalNakamaye, `Hironaka)]
+
+def renameNamespace (n : Name) : Name := Id.run do
+  for (a,b) in namespaceRules do
+    if a.isPrefixOf n then return n.replacePrefix a b
+  return n
+
+def renamePrivate (mods : List (Name × Name)) (n : Name) : Name := Id.run do
+  -- Explicit full private-constant pairs are derived from actual moduleData.
+  -- Names must match after the documented namespace transformation, preserving
+  -- every private numerical index and every auxiliary suffix.
+  for (a,b) in mods do
+    if (`_private).isPrefixOf a && a == n then return b
+  for (a,b) in mods do
+    if (`_private ++ a).isPrefixOf n then
+      let rest := n.replacePrefix (`_private ++ a) .anonymous
+      match rest.components with
+      | index :: tail =>
+        let ns := tail.foldl (· ++ ·) .anonymous
+        return (`_private ++ b) ++ index ++ renameNamespace ns
+      | [] => return n
+  return renameNamespace n
+
+-- Raw component concatenation avoids Name.append's macro-scope handling
+-- on incomplete hygienic prefixes; every name component stays exact.
+def appendNameRaw (a : Name) : Name → Name
+  | .anonymous => a
+  | .str p s => .str (appendNameRaw a p) s
+  | .num p k => .num (appendNameRaw a p) k
+
+-- The embedded module after _@ may occur below an arbitrary binder prefix.
+-- All spelling, macro scopes, hygiene tags and numeric seeds are retained.
+def isHygieneContextTail (n : Name) : Bool :=
+  match n.components with
+  | .num .anonymous _ :: .str .anonymous "_hygCtx" :: _ => true
+  | .str .anonymous "_hyg" :: .num .anonymous _ :: _ => true
+  | _ => false
+
+-- Exact source of inherited binder contexts in reused/extracted declarations.
+-- Every pair is witnessed in actual standalone moduleData by
+-- RelocatedBinderOwnerProbe.lean. This changes only the module prefix.
+-- All numerical Name components, suffixes and every Expr node are retained.
+def relocatedBinderOrigins : List (Name × Name × Nat) := [
+  (`TranscendentalNakamaye.Pending.CoherentIdealColon, `Hironaka.Support.FiniteSpanRangeExact, 1599403507),
+  (`TranscendentalNakamaye.Pending.NonmonomialOrderTail, `Hironaka.Support.NonmonomialOrderTailExact, 723325965),
+  (`TranscendentalNakamaye.Pending.NonmonomialOrderTail, `Hironaka.Support.NonmonomialOrderTailExact, 1599678574),
+  (`TranscendentalNakamaye.Pending.GeneralValue, `Hironaka.Support.ControlledOriginalContextExact, 3899023525),
+  (`TranscendentalNakamaye.Pending.StepOneSeq, `Hironaka.Support.StepOneDropExact, 1711675205),
+  (`TranscendentalNakamaye.Pending.BlowupDerivativeIdeal, `Hironaka.Blowup.BlowupDerivativeMaximalOrder, 632439324),
+  (`TranscendentalNakamaye.Pending.BlowupDerivativeIdeal, `Hironaka.Blowup.BlowupDerivativeMaximalOrder, 2991156678),
+  (`TranscendentalNakamaye.Pending.ResolutionInvariantSeq, `Hironaka.Support.SharpGeometryExact, 927828394),
+  (`TranscendentalNakamaye.Pending.GermIdealOrder, `Hironaka.MarkedIdeal.GermIdealOrderValue, 3638836085)]
+
+-- This additional profile is restricted to five actual new declarations.
+-- CoherentIdealFiniteSpan owns the callee inherited in these exact proofs;
+-- the older CoherentSaturation declaration still inherits FiniteSpanRangeExact.
+-- Actual moduleData owners and exact binder names are verified separately.
+def newScopedOwnerRoots : List Name :=
+  ["_private.Hironaka.Resolution.HironakaRelativeNormalCoherentTranslatedJets.0.Hironaka.HironakaRelativeNormalCoherentTranslatedJets.actual_translated_origin_ideal_eq_span",
+   "Hironaka.HironakaRelativeNormalDeformationSaturation.finitely_generated_at_isCoherent",
+   "Hironaka.HironakaRelativeNormalDeformationSaturation.germIdeal_finitely_generated_at",
+   "_private.Hironaka.Resolution.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.0.Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actual_function_span_holomorphic_dictionary",
+   "_private.Hironaka.Resolution.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.0.Hironaka.HironakaRelativeNormalNearbyPolynomialCoefficientGerms.actual_translated_origin_ideal_from_fixed_functions"].map String.toName
+
+def scopedBinderOrigins (root : Name) : List (Name × Name × Nat) :=
+  if newScopedOwnerRoots.contains root then
+    relocatedBinderOrigins.map fun (a,b,k) =>
+      if a == `TranscendentalNakamaye.Pending.CoherentIdealColon && k == 1599403507 then
+        (a, `Hironaka.Coherence.CoherentIdealFiniteSpan, k)
+      else (a,b,k)
+  else relocatedBinderOrigins
+
+def renameContextAt (mods : List (Name × Name)) (root : Name) (pre n : Name) : Option Name := Id.run do
+  for (a,b,scope) in scopedBinderOrigins root do
+    let oldPre := appendNameRaw pre a
+    if oldPre.isPrefixOf n then
+      match (n.replacePrefix oldPre .anonymous).components with
+      | .num .anonymous k :: .str .anonymous "_hygCtx" :: _ =>
+        if k == scope then
+          return some (n.replacePrefix oldPre (appendNameRaw pre b))
+      | _ => pure ()
+  for (a,b) in mods do
+    let oldPre := appendNameRaw pre a
+    if a != b && oldPre.isPrefixOf n &&
+        isHygieneContextTail (n.replacePrefix oldPre .anonymous) then
+      return some (n.replacePrefix oldPre (appendNameRaw pre b))
+  return none
+
+def renameBinderOnce (mods : List (Name × Name)) (root : Name) (n : Name) : Name := Id.run do
+  let mut pre : Name := .anonymous
+  let mut previous : Name := .anonymous
+  let mut afterAt := false
+  for c in n.components do
+    pre := appendNameRaw pre c
+    if c == Name.mkSimple "_@" then
+      afterAt := true
+      if let some result := renameContextAt mods root pre n then return result
+      let internal := appendNameRaw (appendNameRaw pre (Name.mkSimple "_internal"))
+        (Name.num .anonymous 0)
+      if let some result := renameContextAt mods root internal n then return result
+    else if afterAt && previous == Name.mkSimple "_hygCtx" then
+      match c with
+      | .num .anonymous _ =>
+        if let some result := renameContextAt mods root pre n then return result
+      | _ => pure ()
+    previous := c
+  return n
+
+-- Rename every explicitly recognized module-context frame, including nested
+-- contexts after _hygCtx.<scope>. The exact tail guard retains all original
+-- numeric context hashes/scopes/seeds and all surrounding Name components.
+partial def renameBinder (mods : List (Name × Name)) (root : Name) (n : Name) : Name := Id.run do
+  let mut result := n
+  let mut changed := true
+  while changed do
+    let next := renameBinderOnce mods root result
+    changed := next != result
+    result := next
+  return result
+
+def levelTree : Level → Json
+  | .zero => node "zero"
+  | .succ u => node "succ" [levelTree u]
+  | .max u v => node "max" [levelTree u,levelTree v]
+  | .imax u v => node "imax" [levelTree u,levelTree v]
+  | .param n => node "param" [nameTree n]
+  | .mvar v => node "mvar" [nameTree v.name]
+
+def substringTree (s : Substring.Raw) : Json :=
+  node "substring" [toJson s.str,toJson s.startPos.byteIdx,toJson s.stopPos.byteIdx]
+
+def sourceInfoTree : SourceInfo → Json
+  | .original l p t e => node "original" [substringTree l,toJson p.byteIdx,substringTree t,toJson e.byteIdx]
+  | .synthetic p e c => node "synthetic" [toJson p.byteIdx,toJson e.byteIdx,toJson c]
+  | .none => node "none"
+
+def preresolvedTree : Syntax.Preresolved → Json
+  | .namespace n => node "namespace" [nameTree n]
+  | .decl n fs => node "declaration" [nameTree n,toJson fs]
+
+partial def syntaxTree : Syntax → Json
+  | .missing => node "missing"
+  | .node i k xs => node "syntaxNode" [sourceInfoTree i,nameTree k,toJson (xs.toList.map syntaxTree)]
+  | .atom i s => node "atom" [sourceInfoTree i,toJson s]
+  | .ident i r n ps => node "identifier" [sourceInfoTree i,substringTree r,nameTree n,toJson (ps.map preresolvedTree)]
+
+-- Entire metadata is encoded structurally, including syntax/source positions.
+-- No pretty-print representation, hash, dropping or metadata normalization.
+def dataTree : DataValue → Json
+  | .ofString s => node "string" [toJson s]
+  | .ofBool b => node "bool" [toJson b]
+  | .ofName n => node "name" [nameTree n]
+  | .ofNat k => node "nat" [toJson k]
+  | .ofInt k => node "int" [toJson k]
+  | .ofSyntax s => node "syntax" [syntaxTree s]
+
+def binderInfoTree : BinderInfo → Json
+  | .default => node "default"
+  | .implicit => node "implicit"
+  | .strictImplicit => node "strictImplicit"
+  | .instImplicit => node "instanceImplicit"
+
+structure DagState where
+  cache : ExprStructMap Nat := {}
+  nodes : Array Json := #[]
+
+-- ExprStructMap's BEq is Expr.equal; it keeps binder names and annotations.
+-- Ordinary ExprMap/Expr.eqv must never be used here.
+partial def internExpr (mods : List (Name × Name)) (root : Name) (e : Expr) : StateM DagState Nat := do
+  if let some id := (← get).cache.get? ⟨e⟩ then return id
+  let (tag,data,children) ← match e with
+    | .bvar k => pure ("bvar",[toJson k],[])
+    | .fvar f => pure ("fvar",[nameTree f.name],[])
+    | .mvar m => pure ("mvar",[nameTree m.name],[])
+    | .sort u => pure ("sort",[levelTree u],[])
+    | .const c us => pure ("constant",[nameTree (renamePrivate mods c),toJson (us.map levelTree)],[])
+    | .app f a => do
+      let fi ← internExpr mods root f
+      let ai ← internExpr mods root a
+      pure ("application",[],[fi,ai])
+    | .lam n t b i => do
+      let ti ← internExpr mods root t
+      let bi ← internExpr mods root b
+      pure ("lambda",[nameTree (renameBinder mods root n),binderInfoTree i],[ti,bi])
+    | .forallE n t b i => do
+      let ti ← internExpr mods root t
+      let bi ← internExpr mods root b
+      pure ("forall",[nameTree (renameBinder mods root n),binderInfoTree i],[ti,bi])
+    | .letE n t v b nd => do
+      let ti ← internExpr mods root t
+      let vi ← internExpr mods root v
+      let bi ← internExpr mods root b
+      pure ("let",[nameTree (renameBinder mods root n),toJson nd],[ti,vi,bi])
+    | .lit (.natVal k) => pure ("naturalLiteral",[toJson k],[])
+    | .lit (.strVal s) => pure ("stringLiteral",[toJson s],[])
+    | .mdata md b => do
+      let bi ← internExpr mods root b
+      pure ("metadata",[toJson (md.entries.map fun (n,v) => node "entry" [nameTree n,dataTree v])],[bi])
+    | .proj s i b => do
+      let bi ← internExpr mods root b
+      pure ("projection",[nameTree (renamePrivate mods s),toJson i],[bi])
+  let st ← get
+  let id := st.nodes.size
+  let record := Json.mkObj [("tag",toJson tag),("data",toJson data),("children",toJson children)]
+  set ({ cache := st.cache.insert ⟨e⟩ id, nodes := st.nodes.push record } : DagState)
+  return id
+
+def kind : ConstantInfo → String
+  | .axiomInfo _ => "axiom"
+  | .defnInfo _ => "definition"
+  | .thmInfo _ => "theorem"
+  | .opaqueInfo _ => "opaque"
+  | .quotInfo _ => "quotient"
+  | .inductInfo _ => "inductive"
+  | .ctorInfo _ => "constructor"
+  | .recInfo _ => "recursor"
+
+def exportModuleData (env : Environment) (modules : List (Name × Name))
+    (mods : List (Name × Name)) (out : String) : IO Unit := do
+  let handle ← IO.FS.Handle.mk out .write
+  let mut found : List Name := []
+  let mut count := 0
+  for i in [0:env.header.moduleNames.size] do
+    let m := env.header.moduleNames[i]!
+    if let some (_,canonicalModule) := modules.find? (fun p => p.1 == m) then
+      found := m :: found
+      for ci in env.header.moduleData[i]!.constants do
+        let value := ci.value? (allowOpaque := true)
+        if ["definition","theorem","opaque"].contains (kind ci) && value.isNone then
+          throw (IO.userError s!"Missing full actual body {ci.name}; no fallback")
+        let root := renamePrivate mods ci.name
+        let compute : StateM DagState (Nat × Option Nat) := do
+          let t ← internExpr mods root ci.type
+          let v ← value.mapM (internExpr mods root)
+          pure (t,v)
+        let ((typeRoot,valueRoot),dag) := compute.run {}
+        let record := Json.mkObj [
+          ("module",toJson canonicalModule.toString),
+          ("name",toJson (renamePrivate mods ci.name).toString),
+          ("exact_name_tree",nameTree (renamePrivate mods ci.name)),
+          ("kind",toJson (kind ci)),
+          ("levelParams",toJson (ci.levelParams.map nameTree)),
+          ("typeRoot",toJson typeRoot),
+          ("valueRoot",toJson valueRoot),
+          ("fullExprNodes",toJson dag.nodes)]
+        handle.putStrLn record.compress
+        handle.flush
+        count := count + 1
+  for (m,_) in modules do
+    unless found.contains m do
+      throw (IO.userError s!"Requested actual module not loaded {m}; no fallback")
+  handle.flush
+  IO.println s!"EXPORTED ALL {count} actual moduleData constants; COMPLETE Name/Level/Expr/DataValue/Syntax DAG; all types/definitions/theorem and opaque bodies; exact module private/hygienic-binder renaming only. ExprStructMap uses Expr.equal, NOT alpha Expr.eqv. ZERO fallback, unfolding, defeq, auxiliary skips or numeric erasure."
+
+end HironakaNativeMigrationCanonical
+
+
+run_cmd do
+  let names := #[`Hironaka.HironakaSmoothCentreRealDomainNearbyFreeness.exists_original_regular_real_nearby_associated_free_open,
+    `Hironaka.HironakaSmoothCentreRealDomainNearbyFreeness.exists_original_regular_real_all_degree_canonical_centre_free_open]
+  let mut records : Array String := #[]
+  for name in names do
+    let ci ← getConstInfo name
+    let value := ci.value? (allowOpaque := true)
+    unless value.isSome do throwError "Missing whole scratch proof {name}"
+    let compute : StateM HironakaNativeMigrationCanonical.DagState (Nat × Option Nat) := do
+      let t ← HironakaNativeMigrationCanonical.internExpr [] name ci.type
+      let v ← value.mapM (HironakaNativeMigrationCanonical.internExpr [] name)
+      pure (t,v)
+    let ((typeRoot,valueRoot),dag) := compute.run {}
+    let record := Json.mkObj [
+      ("module",toJson "Hironaka.Resolution.HironakaSmoothCentreRealDomainNearbyFreeness"),
+      ("name",toJson name.toString),("exact_name_tree",HironakaNativeMigrationCanonical.nameTree name),
+      ("kind",toJson (HironakaNativeMigrationCanonical.kind ci)),
+      ("levelParams",toJson (ci.levelParams.map HironakaNativeMigrationCanonical.nameTree)),
+      ("typeRoot",toJson typeRoot),("valueRoot",toJson valueRoot),("fullExprNodes",toJson dag.nodes)]
+    records := records.push record.compress
+  IO.FS.writeFile "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/nearby-freeness-priority-probe-copy.jsonl" (String.intercalate "\n" records.toList ++ "\n")
+  logInfo m!"READ_ONLY_ORIGINAL_INSTANCE_CONTEXT_DIAGNOSTIC {records.size} complete theorem bodies; not a production artifact"

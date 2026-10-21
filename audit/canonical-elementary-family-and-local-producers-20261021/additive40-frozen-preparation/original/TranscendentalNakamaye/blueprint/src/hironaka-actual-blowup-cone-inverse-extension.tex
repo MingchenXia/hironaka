@@ -1,0 +1,84 @@
+\section{The entire actual zero-chart cone and its convergent analytic inverse}
+
+Keep the actual zero-direction substitution $\sigma$, its literal injective
+exponent map $T$, and the signed weight $\nu(\beta)=\beta_e-\sum_{i\in A\setminus\{e\}}\beta_i$.
+All formal series are entire coefficient arrays, not finite jets. The coefficient
+inverse below is explicitly $[X^a]\mathcal C(F)=[X^{T(a)}]F$.
+
+\begin{theorem}[The whole actual chart image is exactly its nonnegative signed cone]
+\label{hir:actual-zero-chart-whole-cone-range}
+\uses{hir:actual-zero-chart-signed-support-cone,hir:actual-formal-monomial-blowup-coefficient-reflection}
+\lean{TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse,TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_blowup,TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualFormalBlowup_coefficientInverse,TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.mem_range_actualFormalBlowup_zero_iff}
+\leanok
+The literal coefficient inverse $\mathcal C$ satisfies $\mathcal C(\sigma G)=G$
+for every entire $G$. For every entire $F$ whose negative signed coefficients
+vanish, $\sigma\mathcal C(F)=F$. Consequently whole image membership is
+exactly this signed support condition; no preimage witness is assumed.
+\end{theorem}
+\begin{proof}
+The first equality is genuine coefficient reflection at the literal exponent
+$T(a)$. If $\nu(\beta)\ge0$, the selected nonpivot sum $s$ is at most
+$\beta_e$. Subtract $s\mathbf e_e$ from $\beta$ to obtain $a$. Since the
+nonpivot weight of $\mathbf e_e$ is zero, the weight of $a$ remains $s$,
+so $T(a)=\beta$. Coefficient reflection now says that the coefficient of
+$\sigma\mathcal C(F)$ at $\beta$ is $\mathcal C(F)_a=F_{T(a)}=F_\beta$.
+At a negative signed exponent the actual image coefficient and the assumed
+coefficient of $F$ are both zero. Whole coefficient extensionality proves
+the second equality. Necessity of support follows from the unconditional
+actual-chart cone theorem; sufficiency uses the explicit preimage just proved.
+\end{proof}
+
+\begin{theorem}[Actual inverse coefficients converge at the literal squared radius]
+\label{hir:actual-zero-chart-coefficient-inverse-convergence}
+\uses{hir:actual-zero-chart-whole-cone-range,hir:actual-monomial-owner-absolute-bounds}
+\lean{TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_summable,TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.actualBlowupCoefficientInverse_mass_le}
+\leanok
+Let $0<r\le1$. Actual absolute coefficient mass of an entire $F$ at the
+uniform radius $r$ implies actual absolute coefficient mass of $\mathcal C(F)$
+at the uniform radius $r^2$. Its latter mass is at most the former. Neither
+cone support nor output convergence is an incoming premise for this estimate.
+\end{theorem}
+\begin{proof}
+The literal insertion map satisfies $|T(a)|=|a|+s(a)\le2|a|$, because its
+selected nonpivot sum is at most total degree. For $0<r\le1$, this gives
+$r^{2|a|}\le r^{|T(a)|}$. Multiply by the actual nonnegative coefficient
+norm $|F_{T(a)}|$. Genuine injectivity of $T$ makes the corresponding right
+hand terms a summable subfamily of the original absolute coefficient mass.
+Termwise domination proves actual summability of the inverse coefficients
+at $r^2$. The same domination and the injective subfamily sum inequality
+prove the actual mass bound. This uses ordinary Archimedean absolute sums.
+\end{proof}
+
+\begin{theorem}[A convergent whole chart-cone series has a genuine original analytic preimage]
+\label{hir:actual-zero-chart-convergent-cone-original-preimage}
+\uses{hir:actual-zero-chart-whole-cone-range,hir:actual-zero-chart-coefficient-inverse-convergence,hir:actual-convergent-original-taylor-realization,hir:actual-original-taylor-positive-coefficient-mass,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.exists_analytic_preimage_of_convergent_cone,TranscendentalNakamaye.Pending.HironakaActualBlowupConeInverse.mem_range_actualAnalyticBlowupPullback_zero_iff}
+\leanok
+Every whole series of positive uniform coefficient-mass radius, supported in
+the actual nonnegative chart cone, has an original holomorphic germ whose
+unchanged actual Taylor series is the literal inverse $\mathcal C(F)$ and
+whose genuine zero-chart pullback has actual Taylor series $F$.
+For an actual original germ, belonging to the whole analytic pullback image
+is therefore equivalent to the nonnegative cone support of its own Taylor
+series. The actual source radius and analytic preimage are outputs.
+\end{theorem}
+\begin{proof}
+Shrink the given positive uniform radius to its minimum with one; actual
+coefficient mass is retained by coordinatewise radius domination. The second
+theorem gives convergent inverse coefficients at its positive square. Genuine
+original Taylor realization produces an actual holomorphic germ with exactly
+this entire inverse series; the true dimension reassociation preserves this
+identity for the unchanged ambient germ ring. Literal whole Taylor naturality
+for the genuine polynomial chart and the first theorem give $F$ as the
+Taylor series of the actual pullback. For a prescribed original target germ,
+its own positive mass radius is internally produced from actual analyticity.
+The preceding construction and actual Taylor injectivity identify the actual
+pullback with that target germ. Conversely a genuine analytic image has
+formal image Taylor series by the actual whole naturality square, and the
+unconditional chart-cone support law applies. No image or convergence
+certificate is assumed in either direction.
+\end{proof}
+
+This closes the actual cone-range and analytic inverse-image obligations.
+It does not construct a monic image family in a relative retained-order chart,
+identify current maximal standardness, or assert a Hilbert--Samuel history law.

@@ -1,0 +1,11 @@
+/-- **Every point of `S` is good** for the empty tower: in a flat chart, the normal derivatives of germs of `𝔞` lie in
+`𝓓^{|L|} 𝔞`. -/
+theorem goodAt_refl (𝔪 : MarkedIdeal n X) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X} (hS : IsClosedSubmanifold n S)
+    {p : X} (hp : p ∈ S) : GoodAt 𝔪 S (BlowupTower.refl : BlowupTower X X) p := by
+  obtain ⟨k, hk⟩ := hS.2 p hp
+  refine ⟨k, hk.1, FlatChart.ofRegularAtDim hk, 𝔪.ideal.mem p, fun g hg => hg,
+    fun f hf => InvertibleIdealQuotient.isInSpanAt_self hf
+      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔞 p f hf), fun g hg L _ _ => ?_⟩
+  have hmem := (FlatChart.ofRegularAtDim hk).nd_mem_iterDerivIdeal h𝔞 hg L
+  exact ⟨1, fun _ => (FlatChart.ofRegularAtDim hk).nd L g, fun _ => 1, fun _ => hmem,
+    fun _ => holomorphicAt_const 1, Eventually.of_forall fun y _ => by simp⟩

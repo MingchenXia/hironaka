@@ -1,0 +1,67 @@
+\begin{lemma}[Cosupports of sums, products and powers]
+\label{hir:marked-ideal-operations}
+\uses{hir:cosupport-basic,hir:order-basic,hir:order-power,hir:derivative-leibniz}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.IdealOrderArithmetic.vanishesToOrderOn_sum_mul,TranscendentalNakamaye.Pending.IdealOrderArithmetic.IsInSpanAt.vanishesToOrderOn,TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_sumIdeal,TranscendentalNakamaye.Pending.IdealOrderArithmetic.inter_cosupport_subset_cosupport_mul,TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_subset_cosupport_idealPow,TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq,TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_sumIdeal_idealPow}
+\leanok
+Let \(\mathfrak a,\mathfrak b\) be ideals of holomorphic germs and \(N\subset M\). Then
+\(\operatorname{cosupp}(\mathfrak a+\mathfrak b|_N,\mu)=\operatorname{cosupp}(\mathfrak a|_N,\mu)\cap\operatorname{cosupp}(\mathfrak b|_N,\mu)\),
+\(\operatorname{cosupp}(\mathfrak a|_N,\mu)\cap\operatorname{cosupp}(\mathfrak b|_N,\nu)\subset\operatorname{cosupp}(\mathfrak a\mathfrak b|_N,\mu+\nu)\) and
+\(\operatorname{cosupp}(\mathfrak a|_N,\mu)\subset\operatorname{cosupp}(\mathfrak a^\nu|_N,\mu\nu)\). For \(N=M\) and \(\nu\ge1\),
+\(\operatorname{cosupp}(\mathfrak a^\nu,\mu\nu)=\operatorname{cosupp}(\mathfrak a,\mu)\); hence for \(\mu,\nu\ge1\) the sum of marked ideals
+\((\mathfrak a,\mu)+(\mathfrak b,\nu)=(\mathfrak a^\nu+\mathfrak b^\mu,\mu\nu)\) has cosupport
+\(\operatorname{cosupp}(\mathfrak a,\mu)\cap\operatorname{cosupp}(\mathfrak b,\nu)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Germs vanishing to order \(\mu\) along \(N\) at \(x\) are closed under holomorphic combinations, and products add orders
+(Lemma~\ref{hir:order-basic}); this gives the first three statements (the first in both directions because
+\(\mathfrak a,\mathfrak b\subset\mathfrak a+\mathfrak b\)), the third by induction on \(\nu\). For the reverse inclusion of the fourth, if
+\(x\in\operatorname{cosupp}(\mathfrak a^\nu,\mu\nu)\) and \(g\in\mathfrak a_x\), then \(g^\nu\in(\mathfrak a^\nu)_x\subset\mathfrak m_x^{\nu\mu}\), so \(g\in\mathfrak m_x^\mu\) by
+Lemma~\ref{hir:order-power}. The last statement combines the first and the fourth.
+\end{proof}
+
+\begin{lemma}[Controlled transforms of products, powers and sums]
+\label{hir:controlled-operations}
+\uses{bcalc:controlled-transform,bcalc:exceptional-divisor}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_le_mul',TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_mono,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_idealPow,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_sumIdeal,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.pullback_sumIdeal,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.isCoherent_D,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_mul,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_idealPow,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal,TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal_idealPow}
+\leanok
+Let \(\sigma\) be a blowup along \(C\) and \(\mathfrak a\subset\mathcal I_C^\mu\), \(\mathfrak b\subset\mathcal I_C^\nu\) coherent. Then
+\(\sigma^{\mathrm c}(\mathfrak a\mathfrak b,\mu+\nu)=\sigma^{\mathrm c}(\mathfrak a,\mu)\,\sigma^{\mathrm c}(\mathfrak b,\nu)\), \(\sigma^{\mathrm c}(\mathfrak a^k,\mu k)=\sigma^{\mathrm c}(\mathfrak a,\mu)^k\),
+\(\sigma^{\mathrm c}(\mathfrak a+\mathfrak b,\mu)=\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu)\) if also \(\mathfrak b\subset\mathcal I_C^\mu\), and
+\(\sigma^{\mathrm c}(\mathfrak a^\nu+\mathfrak b^\mu,\mu\nu)=\sigma^{\mathrm c}(\mathfrak a,\mu)^\nu+\sigma^{\mathrm c}(\mathfrak b,\nu)^\mu\).
+\end{lemma}
+\begin{proof}
+\leanok
+Pullback commutes with products and sums of ideals and \(\mathfrak l(\mathfrak a+\mathfrak b)=\mathfrak l\mathfrak a+\mathfrak l\mathfrak b\); so, with \(\mathcal O(-\mu D)\) the
+\(\mu\)-th power of the exceptional ideal, \(\sigma^*(\mathfrak a\mathfrak b)=\mathcal O(-(\mu+\nu)D)\,\sigma^{\mathrm c}(\mathfrak a,\mu)\sigma^{\mathrm c}(\mathfrak b,\nu)\),
+\(\sigma^*(\mathfrak a^k)=\mathcal O(-\mu kD)\,\sigma^{\mathrm c}(\mathfrak a,\mu)^k\) and
+\(\sigma^*(\mathfrak a+\mathfrak b)=\mathcal O(-\mu D)(\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu))\), and the controlled transform is the unique coherent
+ideal with this property (Lemma~\ref{bcalc:controlled-transform}). For the last statement, \(\mathfrak a^\nu\subset\mathcal I_C^{\mu\nu}\) and
+\(\mathfrak b^\mu\subset\mathcal I_C^{\mu\nu}\); apply the sum rule and then the power rule.
+\end{proof}
+
+\begin{lemma}[Deleting the members that contain every centre]
+\label{hir:drop-containing-members}
+\uses{bcalc:nc-comparison,bcalc:sub-divisor,bcalc:nc-comparison-transform,hir:drop-members,hir:snc,mc:strict-along,hir:geo-transform-basic,hir:test-tower,hir:wellformed-tower}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.DropMembers.isGeoTestTower_withE_iff_of_centresIn_of_snc,TranscendentalNakamaye.Pending.DropMembers.isGeoTestTower_withE_iff_of_centresIn}
+\leanok
+Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed, \(E'\) a list of members of \(E\), and \(S\) a set contained in every member of \(E\) missing from
+\(E'\) (for instance \(S=N\cap\bigcap_{H\in A}H\) and \(E'=E_S\) the sequence \(E\) without the members of a set \(A\)). For towers whose centres lie in the
+strict transforms \(S_T\) of \(S\): \(T\) is a multiple test blow-up of \(\underline{\mathcal I}\) if and only if it is one of
+\(\underline{\mathcal I}'=(M,N,E',\mathfrak a,d)\), and along it the two transforms have the same submanifold, ideal and cosupport (Lemma~\ref{hir:drop-members});
+their sequences differ by members containing \(S_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on the tower. The members of the transformed \(E'\) are members of the transformed \(E\) (strict transforms of members of \(E'\), and the exceptional
+divisor, which is in both). A member of the transformed \(E\) missing from the transformed \(E'\) is the strict transform of a member \(H\) missing from \(E'\),
+and \(S_T\subset H_T\) by induction; strict transforms are monotone, so it contains \(S_{T'}\) after the next blowup. A centre \(C\subset S_T\) therefore
+lies in every member missing from the transformed \(E'\), and, the transform of \(\underline{\mathcal I}\) being well formed along a multiple test blow-up
+(Lemma~\ref{hir:wellformed-tower}), its divisor has simple normal crossings and the normal-crossings comparison (Theorem~\ref{bcalc:nc-comparison}) shows that \(C\)
+has only normal crossings with one divisor if and only if with the other. Submanifold, ideal and cosupport agree by Lemma~\ref{hir:drop-members}, so \(C\) is
+admissible for one transform if and only if for the other. Well-formedness is used only for the simple normal crossings of the transformed \(E\) along
+the multiple test blow-ups of \(\underline{\mathcal I}\); the lemma holds whenever these hold.
+\end{proof}

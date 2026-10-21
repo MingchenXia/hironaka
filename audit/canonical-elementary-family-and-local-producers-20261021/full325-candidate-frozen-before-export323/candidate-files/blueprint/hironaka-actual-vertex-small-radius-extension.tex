@@ -1,0 +1,58 @@
+\section{A genuine small polyradius for the actual deg-lex vertex family}
+\label{sec:hironaka-actual-vertex-small-radius}
+Let $G_a$ be a prescribed actual monic vertex family of a whole ideal, for the degree-lexicographic order. Suppose its literal tails $E_a=G_a-X^a$ have finite absolute coefficient mass at one positive polyradius $\eta$. The following produces the strict computed perturbation bound; it is not an additional prepared-family or small-norm certificate.
+
+\begin{theorem}[Anisotropic absolute coefficient mass comparison]
+\label{hir:actual-anisotropic-coefficient-mass}
+\uses{hir:actual-coefficient-mass-convolution}
+\lean{Hironaka.HironakaActualVertexSmallRadius.anisotropicRadius,Hironaka.HironakaActualVertexSmallRadius.radiusMonomial_anisotropic,Hironaka.HironakaActualVertexSmallRadius.finiteCoefficientMass_mono,Hironaka.HironakaActualVertexSmallRadius.coefficientMass_shrink_of_weight_gap}
+\leanok
+For positive $\eta$, positive $0<t<1$ and natural weights $w_i$, put $\rho_i=\eta_i t^{w_i}$. Then $0<\rho_i\le\eta_i$ and $\rho^\alpha=\eta^\alpha t^{w(\alpha)}$. Every series absolutely summable at $\eta$ is absolutely summable at $\rho$. If its nonzero coefficients all satisfy $w(\alpha)>k$, then
+\[
+ |F|_\rho\le t^{k+1}|F|_\eta.
+\]
+\end{theorem}
+\begin{proof}
+Multiplicativity of natural powers and finite products gives the displayed radius identity. Since $0<t<1$, each $t^{w_i}$ lies in $(0,1]$, giving the coordinate comparison. The weighted coefficient term at any smaller positive radius is bounded by the corresponding term at $\eta$; ordinary nonnegative summability comparison proves the asserted absolute convergence. Under the support condition, a zero coefficient contributes zero to both sides; otherwise $w(\alpha)\ge k+1$, and $t^{w(\alpha)}\le t^{k+1}$. Multiply this by $|F_\alpha|\eta^\alpha$ and sum the inequalities using the already proved source and output summability. This gives the stated mass bound.
+\end{proof}
+
+\begin{theorem}[The actual tail ratio contracts under anisotropic shrink]
+\label{hir:actual-vertex-tail-ratio-shrink}
+\uses{hir:actual-anisotropic-coefficient-mass,hir:actual-vertex-tail-operator-bound}
+\lean{Hironaka.HironakaActualVertexSmallRadius.vertexPerturbationConstant_shrink_le}
+\leanok
+If every nonzero coefficient of each literal tail $E_a$ satisfies $w(\alpha)>w(a)$, then the computed actual perturbation constants satisfy
+\[
+ c_\rho=\sum_a\frac{|E_a|_\rho}{\rho^a}
+ \le t\sum_a\frac{|E_a|_\eta}{\eta^a}=t c_\eta.
+\]
+\end{theorem}
+\begin{proof}
+The preceding theorem gives $|E_a|_\rho\le t^{w(a)+1}|E_a|_\eta$. Divide by the strictly positive $\rho^a=\eta^a t^{w(a)}$; cancel the common positive power of $t$. The result is $|E_a|_\rho/\rho^a\le t|E_a|_\eta/\eta^a$. Sum this finite collection of genuine inequalities over the actual whole-ideal vertices. These are the literal computed mass constants of the same prescribed family at the two radii.
+\end{proof}
+
+\begin{theorem}[The monic actual deg-lex family internally has a suitable strict tail weight]
+\label{hir:actual-deg-lex-vertex-tail-weight}
+\uses{hir:actual-deg-lex-positive-integer-weights,hir:actual-monic-vertex-family-whole-division}
+\lean{Hironaka.HironakaActualVertexSmallRadius.exists_actual_vertex_tail_weights}
+\leanok
+There exist positive natural coordinate weights for which every nonzero coefficient of every literal actual tail $G_a-X^a$ has weight strictly greater than the actual vertex $a$.
+\end{theorem}
+\begin{proof}
+Let $D$ be the maximum total degree of the finite actual whole-ideal vertex set, taking $D=0$ for an empty set. Obtain the genuine positive integer weights realizing every degree-lex comparison whose lower exponent has degree at most $D$. Fix a nonzero tail coefficient. Its exponent cannot equal $a$, because the prescribed actual family is monic at $a$. Away from $a$ the monomial contributes zero, so it is a nonzero coefficient of $G_a$. It cannot lie before $a$, by the genuine lower-coefficient vanishing of the actual monic family. The total monomial order therefore places it strictly after $a$. Since $\deg a\le D$, the internally produced weights give the required strict weight inequality. The same finite weight family works for every vertex and every coefficient.
+\end{proof}
+
+\begin{theorem}[One actual small radius gives convergent canonical reduced vertices]
+\label{hir:actual-deg-lex-vertex-small-radius}
+\uses{hir:actual-vertex-tail-ratio-shrink,hir:actual-deg-lex-vertex-tail-weight,hir:actual-reduced-vertex-absolute-convergence}
+\lean{Hironaka.HironakaActualVertexSmallRadius.exists_actual_vertex_small_radius,Hironaka.HironakaActualVertexSmallRadius.exists_actual_reduced_vertices_finite_mass}
+\leanok
+From the actual fixed-family tail summability at $\eta$, there exists a single positive $\rho\le\eta$ such that all literal tails are summable at $\rho$, the computed $c_\rho<1$, and every canonical reduced vertex series of the original whole ideal is absolutely summable at this same $\rho$.
+\end{theorem}
+\begin{proof}
+Choose the actual positive tail weights just produced. All mass summands are nonnegative, hence $c_\eta\ge0$. Set $t=1/(c_\eta+2)$; then $0<t<1$ and $t c_\eta<1$. The anisotropic radius is positive and at most $\eta$, and the same comparison gives summability of every literal tail there. The actual ratio theorem yields $c_\rho\le t c_\eta<1$. The genuine Banach Neumann division theorem now applies to the same original ideal and prescribed actual family at this one radius and proves absolute summability of all canonical reduced vertex series. Every choice precedes the universal vertex quantifier.
+\end{proof}
+
+\begin{remark}
+This removes the numerical small-tail premise from the actual deg-lex convergence producer. A positive-radius mass bound for Taylor series of actual holomorphic germs, and the faithful holomorphic realization of the resulting evaluated series, remain separate analytic dictionaries. No both-direction transformed Hilbert--Samuel criterion or resolution termination is asserted.
+\end{remark}

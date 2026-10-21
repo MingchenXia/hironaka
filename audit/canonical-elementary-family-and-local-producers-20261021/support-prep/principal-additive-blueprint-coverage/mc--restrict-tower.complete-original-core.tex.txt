@@ -1,0 +1,19 @@
+\begin{lemma}[Restriction along multiple test blow-ups]
+\label{mc:restrict-tower}
+\uses{mc:restrict-step,mc:restrict-order,mc:strict-along,hir:test-tower,hir:restricted-equivalence-basic,bcalc:strict-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_of_isGeoTestTower_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.restrict_tower}
+\leanok
+Let \(S\subset M\) be a closed submanifold. A multiple test blow-up of \(\underline{\mathcal B}|_S\) has its centres in the strict transforms of \(S\).
+Every multiple test blow-up \(T\) of \(\underline{\mathcal B}\) with centres in the strict transforms of \(S\) is a multiple test blow-up of
+\(\underline{\mathcal B}|_S\), and along it \([\underline{\mathcal B}|_S]_T\) is restricted-equivalent to \((\underline{\mathcal B}_T)|_{S_T}\); moreover
+\(\underline{\mathcal B}_T\) has \(N\) the whole space, both transformed ideals are coherent and \(S_T\) is a closed submanifold.
+\end{lemma}
+\begin{proof}
+\leanok
+An admissible centre lies in the cosupport, hence in \(N\), which is the strict transform of \(S\). For the second statement induct on \(T\). At a step
+with centre \(C\subset S_T\) admissible for \(\underline{\mathcal B}_T\), \(C\) is admissible for \((\underline{\mathcal B}_T)|_{S_T}\) by
+Lemma~\ref{mc:restrict-order}, hence for the restricted-equivalent \([\underline{\mathcal B}|_S]_T\); restricted-equivalent marked ideals have the same
+transform (Lemma~\ref{hir:restricted-equivalence-basic}), and Lemma~\ref{mc:restrict-step} applies. The strict transform of a closed submanifold
+containing the centre is a closed submanifold (Lemma~\ref{bcalc:strict-ideal}).
+\end{proof}

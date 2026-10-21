@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/drain_own_queued_expression_probe.py", line 14, in <module>
+    kids=subprocess.check_output(['ps','--ppid',str(driver),'-o','pid='],text=True).split()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ps', '--ppid', '259879', '-o', 'pid=']' returned non-zero exit status 1.

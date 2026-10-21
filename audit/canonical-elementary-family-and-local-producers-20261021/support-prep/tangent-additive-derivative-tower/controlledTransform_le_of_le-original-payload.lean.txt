@@ -1,0 +1,4 @@
+/-- **Controlled transforms are monotone in the ideal.** -/
+theorem controlledTransform_le_of_le (hπ : IsBlowupAlong n C π) {𝔟 𝔠 : GermIdeal n M}
+    (h : 𝔟.Le 𝔠) (μ : ℕ) : (controlledTransform hπ 𝔟 μ).Le (controlledTransform hπ 𝔠 μ) :=
+  fun y _ hf => ⟨hf.1, fun g hg => GermIdealPullbackCalculus.pullback_le_pullback h y _ (hf.2 g hg)⟩

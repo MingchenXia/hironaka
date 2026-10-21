@@ -1,0 +1,9 @@
+/-- **A multiple test blow-up of a restriction `𝔟|_S` has its centres in the strict transforms of `S`.** -/
+theorem centresIn_of_isGeoTestTower_withN (𝔟 : MarkedIdeal n X) (S : Set X) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower (withN 𝔟 S) T → CentresIn S T
+  | _, .refl, _ => trivial
+  | _, .step T C π hπ, hT => by
+      obtain ⟨hT0, hC⟩ := (isGeoTestTower_step_iff _ T C π hπ).mp hT
+      refine ⟨centresIn_of_isGeoTestTower_withN 𝔟 S T hT0, fun x hx => ?_⟩
+      rw [← N_geoTransformAlong_withN 𝔟 S T]
+      exact hC.subset_N hx

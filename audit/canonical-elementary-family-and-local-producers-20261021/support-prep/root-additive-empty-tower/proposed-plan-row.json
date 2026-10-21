@@ -1,0 +1,37 @@
+{
+  "destination_module": "Hironaka.Support.RestrictEmptyTowerCentresOverOriginalExact",
+  "destination_path": "Hironaka/Support/RestrictEmptyTowerCentresOverOriginalExact.lean",
+  "source_module": "TranscendentalNakamaye.Pending.RestrictEmptyTower",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/RestrictEmptyTower.lean",
+  "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "source_sha256": "6d2cc1a8ce711a3963635828705d6b5af62d0760a193b5b3e6e95387c2f5bdb1",
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_of_centresOver"
+  ],
+  "original_selected_source": "/-- **If the centres lie over a set disjoint from `U`, the restriction to `U` has only empty centres.** -/\ntheorem isEmptyTower_restrict_of_centresOver (U : Opens X) {F : Set X} (hUF : Disjoint (U : Set X) F)\n    {Y : CMfd.{u} n} (T : BlowupTower X Y) (h : CentresOver F T) : IsEmptyTower (restrict U T) :=\n  (isEmptyTower_restrict_iff U T).mpr (centresAvoid_of_centresOver U hUF T h)\n",
+  "original_payload_chunks": [
+    "/-- **If the centres lie over a set disjoint from `U`, the restriction to `U` has only empty centres.** -/\ntheorem isEmptyTower_restrict_of_centresOver (U : Opens X) {F : Set X} (hUF : Disjoint (U : Set X) F)\n    {Y : CMfd.{u} n} (T : BlowupTower X Y) (h : CentresOver F T) : IsEmptyTower (restrict U T) :=\n  (isEmptyTower_restrict_iff U T).mpr (centresAvoid_of_centresOver U hUF T h)\n"
+  ],
+  "original_selected_sha256": "f3dc449f866f3ace540c737bebe650c13736720199ba9bd6c1d0042827af19a5",
+  "canonical_source_layout": [
+    {
+      "canonical_administrative_context": "/- Complete original empty-restriction prerequisite, with unchanged type and proof. -/\nimport Hironaka.Invariant.RestrictEmptyTower\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace Hironaka.RestrictEmptyTower\n\nopen _root_.Hironaka _root_.Hironaka.BlowupSequences\nopen _root_.Hironaka.BlowupTowers _root_.Hironaka.BlowupTowerTransforms\n  _root_.Hironaka.BlowupTowerSplit\nopen _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)\n\nnoncomputable section\n\nvariable {n : \u2115} {X : CMfd.{u} n}\n\n",
+      "sha256": "d41d841b2775aa28a071d0924614dc1602f024ec0c34a41173c6b2d2d83c0418"
+    },
+    {
+      "original_payload_index": 0
+    },
+    {
+      "canonical_administrative_context": "\nend\n\nend Hironaka.RestrictEmptyTower\n",
+      "sha256": "f6ae152a9f5ab71c3763ccede76c627eb72ccdc3dc85a5a3e470d83b22b72805"
+    }
+  ],
+  "original_context_audit": "support-prep/root-additive-empty-tower/extraction-audit.json",
+  "imports": [
+    "Hironaka.Invariant.RestrictEmptyTower"
+  ],
+  "prepared_destination_sha256": "12dc41cc0c9711cec59dc3ea6272611704f4a217c6451fcb15f45585985c3838",
+  "proof_type_payload_edits": 0,
+  "production_installation_pending": true,
+  "installation_stage": "DRAFT_ONLY_PENDING_INDEPENDENT_PEER_AND_ALL_RUNTIME_GATES"
+}

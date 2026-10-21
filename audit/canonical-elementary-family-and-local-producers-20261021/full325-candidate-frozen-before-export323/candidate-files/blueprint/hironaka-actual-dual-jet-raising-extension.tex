@@ -1,0 +1,129 @@
+\section{Actual holomorphic raising matrices between true jet annihilators}
+
+Write $E_q=\operatorname{im}J_q$ for the image of the unchanged original
+finite jet map. Coordinate-word rows of a jet are retained with all their
+original relations. Let $G$ be an actual finite holomorphic family on a
+real open $U\subset\mathbb C^{d+t}$ and $T$ the actual tangent inclusion.
+Let $D\subset U$ be a real open and put $V=T^{-1}(D)$. Fix an
+actual holomorphic moving row $\eta$ on this entire $V$, whose first
+derivatives in the fixed tangent direction $a$ are holomorphic there
+and whose pairing with every original order-$q$ Macaulay column is
+zero there. Assume $G_i(Tc)=0$ for all $c\in V$. Choose an actual
+order-$(q+1)$ Macaulay pivot whose determinant is nonzero at every
+point of $D$ and whose size equals the rank of the same matrix
+at every actual tangent point $Tc\in D$.
+Denote its actual projected dual rows by $\theta_s(c)$.
+
+\begin{definition}[Explicit coefficients of the actual raising matrix]
+\label{hir:actual-dual-jet-raising-coefficients}
+\lean{Hironaka.HironakaActualDualJetRaising.actualDualJetRaisingCoefficient}
+\uses{hir:actual-dual-jet-differential-prolongation,hir:actual-fixed-quotient-retraction-and-true-jet-section}
+\leanok
+Let $R$ be the fixed linear retraction onto the true fixed quotient
+model of the chosen next-order pivot, and let $S$ be its fixed true-jet
+section obtained from the actual scalar-jet representative. For every
+next-order coordinate-word row $s$, define
+\[
+ B_s(c,a)=(\nabla_a\eta)_c\bigl(S(R e_s)\bigr).
+\]
+Here $e_s$ is the actual scalar array with value one at $s$ and zero
+elsewhere. The same $R$ and $S$ are fixed before $c$, $a$, and $\eta$.
+\end{definition}
+\begin{proof}
+The fixed retraction has values in the actual fixed quotient model.
+The fixed representative maps that model to actual germs, and its
+original finite jet therefore lies in $E_{q+1}$. The previously
+constructed differential prolongation is linear on the original jet
+codomain, so its restriction evaluates this specified true jet vector.
+This defines each coefficient without making any pointwise choice of an
+expansion and without asserting that scalar coordinate words form an
+independent jet basis.
+\end{proof}
+
+\begin{theorem}[Holomorphic raising on the entire actual next jet image]
+\label{hir:actual-dual-jet-holomorphic-raising-whole-true-image}
+\lean{Hironaka.HironakaActualDualJetRaising.actual_dual_jet_holomorphic_raising}
+\uses{hir:actual-dual-jet-raising-coefficients,hir:actual-dual-jet-prolongation-whole-original-ideal-zero,hir:actual-holomorphic-true-jet-annihilator-generation,hir:actual-dual-jet-prolongation-holomorphic-fixed-true-jet}
+\leanok
+Each specified function $c\mapsto B_s(c,a)$ is holomorphic on $V$.
+For every $c\in V$ and every $v\in E_{q+1}$ one has
+\[
+ (\nabla_a\eta)_c(v)=\sum_s B_s(c,a)\theta_s(c)(v).
+\]
+The higher annihilator and the coefficient functions are constructed
+internally from the stated original data.
+\end{theorem}
+\begin{proof}
+For every fixed true next jet vector, evaluation of the differential
+prolongation is a finite sum of the actual coefficient functions
+$\eta_r$ and $D\eta_r(a)$ multiplied by fixed multilinear evaluations.
+The two families of coefficient functions are holomorphic by hypothesis,
+so this evaluation is holomorphic. The constructed functional annihilates
+the entire original next-order ideal image: for old words this is the
+genuine differentiated annihilator identity, and for new maximal words
+it follows from $G_i(Tc)=0$ and the exact maximal-ideal-power jet kernel.
+The actual next-order pivot has the stated determinant and rank, so its
+whole quotient has the exact kernel $I_c+\mathfrak m^{q+1}$. Apply the
+holomorphic true-jet generation theorem to this actual moving functional.
+Its explicit coefficient functions are exactly the evaluations on
+$S(R e_s)$ above, and its equality holds for every member of $E_{q+1}$.
+Thus it supplies both the asserted holomorphic functions and the entire
+true-image equality, with no inference from pointwise coefficients to
+holomorphic coefficients.
+\end{proof}
+
+\begin{theorem}[Raising from original positive HS-constant centre geometry]
+\label{hir:actual-original-hs-positive-centre-dual-jet-raising}
+\uses{hir:actual-dual-jet-holomorphic-raising-whole-true-image,hir:actual-hs-constant-centre-origin-pivot-whole-frames,hir:actual-original-hs-zero-constant-centre-generators-vanish}
+\lean{Hironaka.HironakaActualDualJetRaising.exists_original_hs_positive_centre_dual_jet_raising}
+\leanok
+Let $A$ be an actual coherent ideal on a complex manifold, let $C$ be
+an actual regular centre of dimension $d$ at $x$, and assume the
+entire original intrinsic Hilbert--Samuel function is constant on $C$.
+Assume also $\operatorname{HS}_A(x,0)>0$. Then one actual original
+flattening, one actual coherent generating family, and a real generating
+open $U$ through zero are chosen before all orders. All those actual
+generators vanish on $U\cap\operatorname{im}T$. At every positive order
+$q$ there is an actual next-order pivot and a real domain $D\subset U$
+through zero on which its determinant is nonzero and whose size is the
+actual centre rank. On $V=T^{-1}(D)$, every actual moving old-order
+annihilating row with holomorphic coefficients and holomorphic first
+derivatives has exactly the explicit holomorphic raising coefficients
+and the whole true next-jet-image equality above. The next-order
+annihilator, next pivot, and coefficient functions are not supplied as
+certificates. The positivity hypothesis is explicit; the unit-ideal
+case is a separate assertion.
+\end{theorem}
+\begin{proof}
+Apply the original HS-constant-centre origin-pivot theorem. Its original
+flattening and finite original coherent generating family and real open
+precede all orders; retain its dictionary for the entire original
+translated ideals. At the origin the original intrinsic HS value is
+the dimension of the true order-one jet image minus the rank of the
+same original Macaulay matrix. The identical formula computes the
+order-zero HS value of the actual translated generating ideal.
+Consequently that value is positive at zero. Original HS constancy
+makes the original tangent Macaulay ranks equal to the origin rank,
+so the same formula makes the order-zero HS values equal at every
+actual tangent point in $U$. The order-zero positivity criterion makes
+every such ideal proper. Each actual translated generator lies in
+that proper ideal, hence in the local maximal ideal. Evaluation at
+zero of its translated germ is its original value at the actual tangent
+point. Thus every actual generator vanishes there.
+
+For each positive $q$, select the internally produced pivot at order
+$q+1$ and its actual determinant domain $D\subset U$ through zero.
+The same original HS constancy gives its actual rank everywhere along
+$D\cap\operatorname{im}T$. Restrict to the real tangent preimage
+$V=T^{-1}(D)$; it is open and contains zero. The fixed actual family is
+holomorphic there and the preceding paragraph supplies the generator
+vanishing. Therefore any actual old moving annihilator satisfying the
+stated ordinary holomorphic and column equations satisfies every
+hypothesis of the preceding raising theorem for that very same next
+pivot. That theorem gives the specified coefficient functions before
+points, their holomorphicity, and their equality on the entire true
+next jet image. All selections at different orders use the same family
+and original generating open; only the finite-order pivot domains vary.
+No common all-order domain or normal-flatness identification follows
+from this statement.
+\end{proof}

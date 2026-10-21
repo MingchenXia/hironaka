@@ -1,0 +1,99 @@
+\section{Actual native manifold charts imply original ambient regularity}
+
+The native chart is a genuine open immersion of locally ringed spaces over
+our actual complex point. No derivative rank, ambient flattening, or equality
+of the original subset with a parametrized image is supplied.
+
+\begin{theorem}[Actual stalk surjectivity yields a regular local image]
+\label{hir:actual-native-stalk-surjection-regular-local-image}
+\uses{hir:actual-holomorphic-stalk-surjection-injective-derivative,rem:constant-rank-submanifold}
+\lean{Hironaka.HironakaActualAnalyticSubspaceRegularityConverse.exists_regular_local_image_of_stalk_surjective}
+\leanok
+Let $f:O\to V$ be holomorphic, for actual coordinate opens
+$O\subset\mathbf C^d$ and $V\subset\mathbf C^n$. If its actual native
+holomorphic stalk pullback is surjective at $x$, there is an actual open
+$A\subset O$ containing $x$ such that every point of $f(A)$ is an original
+regular point of dimension $d$ of this same image in $\mathbf C^n$.
+\end{theorem}
+\begin{proof}
+Use the actual open extension of the coordinate expression of $f$; it is
+holomorphic at every point of the actual source open. The preceding genuine
+local-left-inverse theorem makes its actual derivative injective at $x$.
+The set of injective continuous linear maps from a finite-dimensional space
+is open. Holomorphy on the actual source open gives continuous derivative
+there. Intersecting with the inverse image of that open set gives a genuine
+source neighbourhood on which every derivative is injective. Its actual
+range dimension is therefore $d$ at every point, by the injective linear
+range dimension theorem. Apply the genuine constant-rank image theorem to
+this actual original map and open set. That theorem chooses complementary
+linear coordinates, constructs its actual graph parametrization, and uses
+the holomorphic inverse function theorem to flatten the image. It supplies
+an actual smaller source open $A$ containing $x$ and original regularity
+at every point of its same actual image. All values agree with the original
+$f$ on $A$; no global holomorphic extension is asserted.
+\end{proof}
+
+\begin{theorem}[A genuine holomorphic model chart forces original subset regularity]
+\label{hir:actual-holomorphic-model-chart-original-regularity}
+\uses{hir:actual-native-stalk-surjection-regular-local-image,hir:actual-analytic-subspace-holomorphic-map,hir:actual-analytic-subspace-univ-native-manifold}
+\lean{Hironaka.HironakaActualAnalyticSubspaceRegularityConverse.regularAtDim_of_holomorphic_model_open_immersion}
+\leanok
+Let $C\subset V$, and let $f:O\to V$ be holomorphic with $f(O)\subset C$.
+If the actual induced whole quotient-subspace map from the whole model on
+$O$ to the actual model on $C$ is an open immersion, then $C$ is an original
+regular subset of dimension $d$ at $f(x)$ for every $x\in O$.
+\end{theorem}
+\begin{proof}
+The actual whole-manifold model inclusion is an isomorphism, and an actual
+open immersion induces isomorphisms on its genuine stalks. The actual
+inclusion of the model on $C$ has surjective stalk map. Its whole commuting
+stalk square with the same $f$ therefore makes the native stalk map of
+$f$ surjective: lift a source germ through the open-immersion stalk
+isomorphism and the genuine ambient inclusion, and cancel the injective
+whole-manifold inclusion stalk. The preceding theorem gives an actual
+smaller parameter open $A$ and original regularity of its actual image.
+The actual model map is an open topological embedding, so the image of this
+same open $A$ is open in the actual subtype $C$. Subtype topology supplies
+an actual ambient open whose intersection with $C$ is exactly this same
+whole image. Including the coordinate open $V$ in $\mathbf C^n$ preserves
+openness and this exact equality. Original regularity is local under true
+intersection equality on an ambient open neighbourhood. Transfer the image
+regularity across that equality and then through the actual open subtype
+$V$. This proves regularity of the original $C$, rather than merely of a
+chosen image contained in $C$.
+\end{proof}
+
+\begin{theorem}[Any intrinsic native manifold chart implies original regularity]
+\label{hir:actual-intrinsic-manifold-chart-original-regularity}
+\uses{hir:actual-holomorphic-model-chart-original-regularity,hir:actual-analytic-subspace-intrinsic-local-holomorphic-lift,hir:actual-analytic-subspace-univ-native-manifold,hir:actual-analytic-subspace-open-restriction-iso}
+\lean{Hironaka.HironakaActualAnalyticSubspaceRegularityConverse.regularAtDim_of_native_manifold_chart}
+\leanok
+Let $j$ be any actual native locally ringed open immersion from the native
+holomorphic manifold on $O\subset\mathbf C^d$ to the constructed model of
+$C\subset V\subset\mathbf C^n$. Assume only its genuine structural triangle
+over the actual complex point. Then $C$ is an original regular subset of
+dimension $d$ at the original point $j(x)$ for every $x\in O$.
+\end{theorem}
+\begin{proof}
+Precompose $j$ with the internally constructed whole-manifold model
+isomorphism. The structural triangle makes the composite an actual
+complex-point-compatible morphism between our genuine quotient models.
+The intrinsic local ambient lifting theorem constructs, near $x$, a true
+holomorphic $f:T\to V$ carrying the whole source into $C$, and proves the
+entire locally ringed map square with this same original $j$. The actual
+open restriction of the source model, the whole-manifold isomorphism, and
+$j$ are open immersions; their composite is one. The whole proved map
+square therefore makes the induced model map of the constructed $f$ an
+open immersion. If this true source open is nested inside $O$, identify it with its actual
+open image in $\mathbf C^d$: the literal inclusion and the unique subtype
+representative are inverse holomorphic maps. Their genuine whole-model
+isomorphism transports the same model map to that actual coordinate open.
+Apply the preceding theorem there. Evaluating the same whole
+square on the actual original source point identifies $f(x)$ with $j(x)$,
+so its conclusion is exactly the asserted original regularity. No ambient
+extension, chart square, rank or flattening certificate is input.
+\end{proof}
+
+Together with the original-regularity-to-native-chart construction this is
+a presentation-independent local regularity dictionary. Resolution towers,
+their descent, and a terminal resolution driver are separate results.

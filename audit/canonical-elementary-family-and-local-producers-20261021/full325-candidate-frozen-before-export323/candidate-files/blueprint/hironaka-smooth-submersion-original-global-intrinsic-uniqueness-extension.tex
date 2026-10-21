@@ -1,0 +1,63 @@
+\section{The arbitrary-target original global smooth Cartesian arrow is intrinsic}
+
+The produced global smooth arrow is unique on the same original terminal
+manifolds. The uniqueness proof uses the actual finite geometry of each
+original source chart and the genuine whole source saturation dictionary;
+a whole finite history or compact target is no longer needed.
+
+\begin{lemma}[A genuine whole original Cartesian square restricts to an actual source terminal chart]
+\label{hir:actual-original-global-cartesian-square-source-chart-restriction}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalIntrinsicUniqueness.originalGlobalCartesianMap_sourceChart_cartesian}
+\leanok
+\uses{hir:original-terminal-local-actual-saturated-range-biholomorphism}
+Given a genuine whole Cartesian arrow on the same original terminal
+manifolds, its composite with any original source local inclusion is
+Cartesian over that actual source base open, with its actual finite source
+tower projection and the same whole original target projection.
+\end{lemma}
+\begin{proof}
+A cone over the actual source base open gives a cone over the original
+source by subtype inclusion. The genuine whole universal property
+constructs its holomorphic lift. Its source leg puts every lift value in
+the actual saturated range of the selected original source chart. The
+proved inverse biholomorphism therefore gives a holomorphic local lift.
+The whole local projection identity and subtype injectivity give its true
+local source leg; the genuine inverse equation gives its target leg.
+For any other local candidate, compose with the actual source inclusion.
+It is holomorphic and satisfies the same whole cone legs. Whole uniqueness
+identifies these included maps. The true source inclusion is injective,
+so it identifies the local lifts. The Cartesian premise is used solely
+for comparing genuine candidate arrows, not for producing the original
+whole arrow.
+\end{proof}
+
+\begin{theorem}[Only original inputs produce a unique whole smooth Cartesian arrow]
+\label{hir:original-arbitrary-target-global-intrinsic-smooth-cartesian-uniqueness}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalIntrinsicUniqueness.originalGlobalSmoothCartesianMap_eq,Hironaka.HironakaSmoothSubmersionOriginalGlobalIntrinsicUniqueness.existsUnique_originalGlobalSmoothMap}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:actual-original-global-cartesian-square-source-chart-restriction,hir:smooth-terminal-whole-pullback-map-intrinsic-uniqueness,hir:original-arbitrary-target-global-genuine-smooth-submersion,hir:original-arbitrary-target-global-holomorphic-cartesian-smooth-square}
+For only original marked-domain input and a genuine smooth map $f$, there
+is a unique genuine smooth submersion between the same original global
+terminal manifolds which commutes with their entire original projections
+and is Cartesian among all holomorphic maps of complex manifolds. Neither
+source nor target must be compact. More generally, any two holomorphic
+whole Cartesian arrows with those same entire projection identities agree.
+\end{theorem}
+\begin{proof}
+For each actual original source chart, the preceding lemma restricts both
+whole candidate squares to that same finite source tower. Composition with
+the genuine local inclusion preserves holomorphicity. The candidates'
+whole projection identities and the original source projection dictionary
+give both local projection identities for the same restricted original
+$f$. Intrinsic finite-source Cartesian-map uniqueness therefore identifies
+the two local arrows. Joint surjectivity of the actual original source
+inclusions proves equality of the whole arrows at every point.
+
+Existence is the already constructed genuine global arrow, with its proved
+submersion normal forms, entire projection identity, and full Cartesian
+law. Apply the just proved comparison theorem to that producer and any
+candidate satisfying the stated properties; submersion supplies the
+candidate's holomorphicity. This proves uniqueness without any whole
+history, compactness, scheduling, or desired uniqueness certificate.
+\end{proof}

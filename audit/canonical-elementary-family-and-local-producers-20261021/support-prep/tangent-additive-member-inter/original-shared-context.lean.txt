@@ -1,0 +1,26 @@
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+open Set Filter
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.MemberInterTowerAlong
+
+open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences
+open TranscendentalNakamaye.Pending.BlowupFlatCoordinates
+  TranscendentalNakamaye.Pending.BlowupMonomialCharts
+  TranscendentalNakamaye.Pending.BlowupLocalSurjectivity
+  TranscendentalNakamaye.Pending.BlowupStrictSubmanifold
+  TranscendentalNakamaye.Pending.BlowupSNCTransform TranscendentalNakamaye.Pending.NormalCrossings
+  TranscendentalNakamaye.Pending.SimultaneousNormalCrossings
+  TranscendentalNakamaye.Pending.BoundaryCount TranscendentalNakamaye.Pending.BlowupTowers
+  TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal
+  TranscendentalNakamaye.Pending.HomogenizedGlueingTower
+
+noncomputable section
+
+variable {n : ℕ}
+
+/-! ### One blowup: `(N ∩ H_S)' = N' ∩ ⋂_{i ∈ S} H_i'` -/

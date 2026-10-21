@@ -1,0 +1,338 @@
+import TranscendentalNakamaye.Pending.HironakaSharpActualIncidentCentreTraceResidual
+import TranscendentalNakamaye.Pending.HironakaSharpActualMaximumMemberOrders
+import TranscendentalNakamaye.Pending.HironakaSharpActualTraceIncidence
+
+/-! Original-only finite dynamic full-maximum histories in every positive carrier
+dimension.  Actual ambient member residuals and the entire original-plus-born
+SNC divisor are constructed inductively, not supplied as compatibility input.
+No sharp full-invariant decrease, original-good isomorphism or termination claim. -/
+set_option autoImplicit false
+open Set Filter TopologicalSpace Classical
+open scoped Topology Manifold ContDiff
+universe u
+namespace TranscendentalNakamaye.Pending.HironakaSharpActualDynamicIncidentHistory
+noncomputable section
+open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences BlowupTowers
+  HironakaSharpActualIncidentCentreTraceResidual HironakaSharpActualMaximumMemberOrders
+  HironakaSharpActualTraceIncidence HironakaSharpActualOriginalDynamicStep
+  HironakaSharpActualOriginalControlledHistory HironakaSharpActualDynamicDistinctCentre
+  HironakaSharpActualFiniteChronologicalHistory HironakaSharpActualChronologicalDistinctDefect
+  HironakaSharpActualFiniteMemberProduct HironakaSharpActualChronologicalNoOldFactor
+  HironakaSharpActualTotalNonmonomialTransport HironakaSharpActualTotalAccumulatedResidual
+  HironakaSharpActualCompositeTotalResidual
+  HironakaSharpActualChronologicalStrictStep HironakaSharpOriginalMemberProductDomain
+  HironakaSharpOriginalMemberProduct HironakaSharpOriginalProductTraceOrder
+  HironakaSharpOriginalAllBoundaryCentre HironakaCoherentTransformExtension
+  RelativePrincipalizationSpan RestrictedIdealExtension NormalCrossings NormalCrossingsComparison
+  SimultaneousNormalCrossings ResolutionInvariantDriver
+  MarkedIdeals MarkedIdeals.MarkedIdeal MonomialPartAlong DivisorExponentAlong
+  RestrictedIdealWeight RestrictedIdealQuotient IdealWeightPowers MarkedIdealOperationsAlong
+  InvertibleIdealQuotient NonmonomialTransformAlong HomogenizedGlueingTower GermIdealOrder
+  CanonicalCentres ResolutionDriver
+variable {n : ℕ} {X Y : CMfd.{u} n}
+
+/-- Actual whole-full-maximum choices, including every empty padding position.
+There is no ideal or ambient compatibility condition in this predicate. -/
+def DynamicMaximumHistory (hn : 0<n) (W : Set X) (E : List (Set X)) :
+    {Y : CMfd.{u} n} → BlowupTower X Y → Prop
+  | _,.refl => True
+  | _,.step T C _ _ => DynamicMaximumHistory hn W E T ∧
+      ((chronologicalDistinctDefect W E T=∅ ∧ C=∅) ∨
+        (C.Nonempty ∧ C=maxLocus ((invFamily hn (n+1)).inv
+          (currentProductMarked W E T) (.refl)) (chronologicalDistinctDefect W E T)))
+
+private def tracePacket (W : Set X) (E : List (Set X)) (T : BlowupTower X Y) : Prop :=
+  ∀ i : Fin E.length,
+    let A := geoTransformAlong (geometricTemplate W []) T
+    let H := strictAlong T (E.get i)
+    let I := restrictOn n A.N (vanishingIdeal (n := n) H)
+    IsSNCDivisor n [H] ∧ A.N ⊆ closure (A.N \ H) ∧ I.IsCoherent ∧
+      (∀ y ∈ A.N,IsNonzeroAlongAt A.N I y) ∧
+      nonmonomialPartAlong n A.N I A.E=
+        (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal
+
+private theorem full_boundary_decomposition (W : Set X) (E : List (Set X)) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+      (geoTransformAlong (geometricTemplate (univ : Set X) E) T).E=
+        E.map (strictAlong T) ++ (geoTransformAlong (geometricTemplate W []) T).E
+  | _,.refl => by simp [geometricTemplate,geoTransformAlong,strictAlong]
+  | _,.step T C π hπ => by
+    simp only [geoTransformAlong_step,geoTransform_E,full_boundary_decomposition W E T,
+      List.map_append,List.map_map,List.append_assoc]
+    rfl
+
+private theorem ambient_univ (E : List (Set X)) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+      (geoTransformAlong (geometricTemplate (univ : Set X) E) T).N=univ
+  | _,.refl => rfl
+  | _,.step T C π hπ => by
+    change BlowupStrictSubmanifold.geoStrictTransform π C
+      (geoTransformAlong (geometricTemplate (univ : Set X) E) T).N=univ
+    rw [ambient_univ E T,geoStrictTransform_univ hπ]
+
+private theorem trace_factor (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (T : BlowupTower X Y)
+    (hT : IsGeoTestTower (geometricTemplate W []) T) (hp : tracePacket W E T) (i : Fin E.length) :
+    let A := geoTransformAlong (geometricTemplate W []) T
+    let I := restrictOn n A.N (vanishingIdeal (n := n) (strictAlong T (E.get i)))
+    I=restrictOn n A.N ((monomialPartAlong n A.N I A.E).mul
+      (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal) := by
+  let A := geoTransformAlong (geometricTemplate W []) T
+  let I := restrictOn n A.N (vanishingIdeal (n := n) (strictAlong T (E.get i)))
+  have hw := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong
+    (show (geometricTemplate W []).IsWellFormed from
+      ⟨hW,isCoherent_unitIdeal,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩) T hT
+  obtain ⟨_hH,_hd,hcI,hnzI,hNm⟩ := hp i
+  obtain ⟨_hcR,_hcD,_hnzD,_hmD,_hNo,_hnzR,hFactor⟩ := parts_hypotheses hn
+    (⟨A.N,A.E,I,0⟩ : MarkedIdeal n Y) ⟨hw.isClosedSubmanifold_N,hcI,hw.isSNCDivisor,hw.isTransverse⟩ hnzI
+  have hWhole := restrictOn_eq_of_restrictLe hw.isClosedSubmanifold_N.1 hFactor.le hFactor.ge
+  change restrictOn n A.N I=restrictOn n A.N ((nonmonomialPartAlong n A.N I A.E).mul
+    (monomialPartAlong n A.N I A.E)) at hWhole
+  rw [hNm,RestrictLeCalculus.mul_comm'] at hWhole
+  have hNorm : restrictOn n A.N I=I := by
+    ext x g
+    exact ⟨fun hg => ⟨hg.1,IsInSpanOnAt.trans (fun a ha => ha.2) hg.2⟩,
+      fun hg => ⟨hg.1,IsInSpanAt.restrict (isInSpanAt_self hg hg.1)⟩⟩
+  exact hNorm.symm.trans hWhole
+
+private theorem continue_member (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) (T : BlowupTower X Y)
+    (hT : IsGeoTestTower (geometricTemplate W []) T) (hp : tracePacket W E T)
+    (i : Fin E.length) {C : Set Y} {Z : CMfd.{u} n} {π : Z → Y}
+    (hπ : IsBlowupAlong n C π) (hCN : C ⊆ (geoTransformAlong (geometricTemplate W []) T).N)
+    (hNC : HasNormalCrossings n C (geoTransformAlong (geometricTemplate W []) T).E)
+    (hlocal : ∀ p ∈ C,p ∈ strictAlong T (E.get i) →
+      ∀ᶠ q in 𝓝 p,q ∈ C → q ∈ strictAlong T (E.get i)) :
+    let A := geoTransformAlong (geometricTemplate W []) (.step T C π hπ)
+    let I := restrictOn n A.N (vanishingIdeal (n := n) (strictAlong (.step T C π hπ) (E.get i)))
+    IsSNCDivisor n [strictAlong (.step T C π hπ) (E.get i)] ∧
+      A.N ⊆ closure (A.N \ strictAlong (.step T C π hπ) (E.get i)) ∧
+      I.IsCoherent ∧ (∀ y ∈ A.N,IsNonzeroAlongAt A.N I y) ∧
+      nonmonomialPartAlong n A.N I A.E=
+        (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) (.step T C π hπ)).ideal := by
+  have hwA := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong
+    (show (geometricTemplate W []).IsWellFormed from
+      ⟨hW,isCoherent_unitIdeal,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩) T hT
+  obtain ⟨_hN,hAmbient,hcNew,hnzNew,hDenseNew,_hPr⟩ := actual_incident_centre_whole_strict_trace_geometry hn
+    hwA.isClosedSubmanifold_N (hp i).1 (hp i).2.1 hlocal hπ hCN
+  refine ⟨isSNCDivisor_of_sublist hAmbient (by simp [strictAlong_step]),hDenseNew,hcNew,hnzNew,?_⟩
+  let H := E.get i
+  let A := geoTransformAlong (geometricTemplate W []) T
+  let I := restrictOn n A.N (vanishingIdeal (n := n) (strictAlong T H))
+  let J := chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T
+  have hw0 : (geometricTemplate W []).IsWellFormed :=
+    ⟨hW,isCoherent_unitIdeal,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩
+  have hwA := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong hw0 T hT
+  obtain ⟨hHT,hDense,hcI,hnzI,hIH⟩ := hp i
+  obtain ⟨_hENew,_hTNew,hTraceRaw⟩ := actual_incident_accumulated_trace_nonmonomial_eq_total hn
+    hwA.isClosedSubmanifold_N hwA.isSNCDivisor hwA.isTransverse hHT hDense hlocal hNC hπ hCN
+  have hStep := actual_whole_total_nonmonomial_parts_transport hn hwA.isClosedSubmanifold_N hwA.isSNCDivisor
+    hwA.isTransverse hcI hnzI hπ hCN hNC
+  change nonmonomialPartAlong n A.N I A.E=J.ideal at hIH
+  change nonmonomialPartAlong n (BlowupStrictSubmanifold.geoStrictTransform π C A.N)
+    (nextTotalMarked A.N I C π).ideal (A.E.map (BlowupStrictSubmanifold.geoStrictTransform π C) ++ [π ⁻¹' C])=
+    nonmonomialPartAlong n (BlowupStrictSubmanifold.geoStrictTransform π C A.N)
+      (nextTotalMarked A.N (nonmonomialPartAlong n A.N I A.E) C π).ideal
+      (A.E.map (BlowupStrictSubmanifold.geoStrictTransform π C) ++ [π ⁻¹' C]) at hStep
+  rw [hIH] at hStep
+  have hRaw := HironakaSharpOriginalFirstMemberExceptionalFactor.geoTransform_zeroMark_ideal_eq_restricted_total
+    (⟨A.N,[],I,0⟩ : MarkedIdeal n _) rfl C π
+  change (nextTotalMarked A.N I C π).ideal=restrictOn n
+    (BlowupStrictSubmanifold.geoStrictTransform π C A.N) (GermIdeal.pullback (m := n) π I) at hRaw
+  have hNewN := BlowupStrictIdeal.isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold hπ hwA.isClosedSubmanifold_N hCN
+  have hHcur : IsClosedSubmanifold n (strictAlong T H) := MonomialPart.isClosedSubmanifold_get hn hHT (0 : Fin [strictAlong T H].length)
+  have hcHcur := VanishingIdealCoherent.isCoherent_vanishingIdeal hHcur
+  have hNorm := actual_normalized_pullback_restrictOn hwA.isClosedSubmanifold_N hNewN.1 hcHcur hπ.contMDiff
+    (fun y hy => BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπ.contMDiff.continuous hwA.isClosedSubmanifold_N.1 hy)
+  rw [hRaw,hNorm] at hStep
+  obtain ⟨hJN,hJE,_hJd,hwJ,hnzJ,hprJ⟩ := original_members_actual_finite_chronological_geometry
+    hn hW hE hdense i T hT
+  change J.N=A.N at hJN
+  change J.E=A.E at hJE
+  have hCJ : C ⊆ J.N := by rw [hJN]; exact hCN
+  have hNCJ : HasNormalCrossings n C J.E := by rw [hJE]; exact hNC
+  have hNo := original_members_actual_finite_chronological_no_exceptional_factor hn hW hE hdense
+    i T hT
+  have hNext := nextTotal_accumulated_nonmonomial_eq_nextStrict hn hwJ.isClosedSubmanifold_N hwJ.isSNCDivisor
+    hwJ.isTransverse hwJ.isCoherent hnzJ hprJ hπ hCJ hNCJ hNo
+  change nonmonomialPartAlong n (BlowupStrictSubmanifold.geoStrictTransform π C J.N)
+    (nextTotalMarked J.N J.ideal C π).ideal (J.E.map (BlowupStrictSubmanifold.geoStrictTransform π C) ++ [π ⁻¹' C])=
+    nextRelativeStrict J.N J.ideal C π at hNext
+  rw [hJN,hJE] at hNext
+  change nonmonomialPartAlong n (BlowupStrictSubmanifold.geoStrictTransform π C A.N)
+    (restrictOn n (BlowupStrictSubmanifold.geoStrictTransform π C A.N)
+      (vanishingIdeal (n := n) (BlowupStrictSubmanifold.geoStrictTransform π C (strictAlong T H))))
+    (A.E.map (BlowupStrictSubmanifold.geoStrictTransform π C) ++ [π ⁻¹' C])=nextRelativeStrict J.N J.ideal C π
+  rw [hJN]
+  exact hTraceRaw.trans (hStep.trans hNext)
+
+private theorem packet_refl (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) :
+    tracePacket W E (.refl : BlowupTower X X) := by
+  intro i
+  have hSingle : IsSNCDivisor n [E.get i] := isSNCDivisor_of_sublist hE (by simp)
+  have hDense : W ⊆ closure (W \ E.get i) := by
+    apply Subset.trans hdense
+    apply closure_mono
+    exact fun x hx => ⟨hx.1,fun hi => hx.2 (mem_iUnion₂.mpr ⟨E.get i,List.get_mem E i,hi⟩)⟩
+  obtain ⟨_hN,_hE,_hd,hw,hnz,_hpr⟩ := original_members_actual_finite_chronological_geometry
+    hn hW hE hdense i (.refl : BlowupTower X X) trivial
+  refine ⟨hSingle,hDense,hw.isCoherent,hnz,?_⟩
+  change nonmonomialPartAlong n W (restrictOn n W (vanishingIdeal (n := n) (E.get i))) []=_
+  rw [nonmonomialPartAlong_nil_eq_restrictOn]
+  ext x g
+  exact ⟨fun hg => ⟨hg.1,IsInSpanOnAt.trans (fun a ha => ha.2) hg.2⟩,
+    fun hg => ⟨hg.1,IsInSpanAt.restrict (isInSpanAt_self hg hg.1)⟩⟩
+
+private theorem choose_next (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) (hK : IsCompact W)
+    {d : ℕ} (hd : d+1≤n) (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1))
+    (T : BlowupTower X Y) (hT : IsGeoTestTower (originalMemberProductMarked W E 1) T)
+    (hFull : IsGeoTestTower (geometricTemplate (univ : Set X) E) T)
+    (hp : tracePacket W E T) :
+    ∃ C : Set Y,(geoTransformAlong (originalMemberProductMarked W E 1) T).IsAdmissibleCentre C ∧
+      (geoTransformAlong (geometricTemplate W []) T).IsAdmissibleCentre C ∧
+      (geoTransformAlong (geometricTemplate (univ : Set X) E) T).IsAdmissibleCentre C ∧
+      ((chronologicalDistinctDefect W E T=∅ ∧ C=∅) ∨
+        (C.Nonempty ∧ C=maxLocus ((invFamily hn (n+1)).inv (currentProductMarked W E T) .refl)
+          (chronologicalDistinctDefect W E T))) ∧
+      ∀ i : Fin E.length,∀ p ∈ C,p ∈ strictAlong T (E.get i) →
+        ∀ᶠ q in 𝓝 p,q ∈ C → q ∈ strictAlong T (E.get i) := by
+  by_cases hne : (chronologicalDistinctDefect W E T).Nonempty
+  · have hwM : (originalMemberProductMarked W E 1).IsWellFormed :=
+      ⟨hW,isCoherent_originalMemberProduct hn hE,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩
+    have hGeom := actual_original_test_history_template _ hwM T hT
+    obtain ⟨C,hneC,_hCZ,hCur,hTemp,hCeq,hProfile⟩ :=
+      exists_actual_dynamic_centre_member_order_profile hn hW hE hdense hK hd hr T hGeom hne
+    obtain ⟨C',_hneC',_hCZ',hOrig,_hLevel,hCeq'⟩ :=
+      exists_original_dynamic_distinct_centre hn hW hE hdense hK hd hr T hT hne
+    have hCC : C'=C := hCeq'.trans hCeq.symm
+    have hOrigC : (geoTransformAlong (originalMemberProductMarked W E 1) T).IsAdmissibleCentre C := hCC ▸ hOrig
+    let A := geoTransformAlong (geometricTemplate W []) T
+    let F := fun i : Fin E.length => (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal
+    have hwA := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong
+      (show (geometricTemplate W []).IsWellFormed from
+        ⟨hW,isCoherent_unitIdeal,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩) T hGeom
+    have hCN : C ⊆ A.N := hTemp.subset_N
+    have hInc : ∀ i : Fin E.length,∀ p ∈ C,
+        ∀ᶠ q in 𝓝 p,q ∈ C → (q ∈ strictAlong T (E.get i) ↔ p ∈ strictAlong T (E.get i)) := by
+      intro i p hpC
+      obtain ⟨hH,_hDense,_hcI,hnzI,_hNm⟩ := hp i
+      have hHsm : IsClosedSubmanifold n (strictAlong T (E.get i)) :=
+        MonomialPart.isClosedSubmanifold_get hn hH 0
+      obtain ⟨_hNi,_hEi,_hdi,hwi,_hnzi,_hpri⟩ :=
+        original_members_actual_finite_chronological_geometry hn hW hE hdense i T hGeom
+      have hunit : ∀ᶠ q in 𝓝 p,q ∈ C → ((F i).mem q 1 ↔ (F i).mem p 1) := by
+        filter_upwards [hProfile p hpC] with q hq hqC
+        have hs := (hq hqC).2.1
+        have hm : (i ∈ actualProperPositions F q ↔ i ∈ actualProperPositions F p) := by rw [hs]
+        simp only [actualProperPositions,Finset.mem_filter,Finset.mem_univ,true_and] at hm
+        exact not_iff_not.mp hm
+      apply eventually_trace_incidence_of_factor hn hwA.isClosedSubmanifold_N hHsm
+        hwA.isSNCDivisor hwA.isTransverse hnzI (F i) hwi.isCoherent hCN
+        (trace_factor hn hW T hGeom hp i) hpC ?_ hunit
+      filter_upwards [hProfile p hpC] with q hq hqC
+      exact (hq hqC).2.2
+    have hwFull : (geometricTemplate (univ : Set X) E).IsWellFormed :=
+      ⟨⟨isClosed_univ,fun x _ => ⟨n,AnalyticIrreducibleComponents.regularAtDim_univ x⟩⟩,
+        isCoherent_unitIdeal,hE,isTransverse_univ_of_isSNCDivisor hE⟩
+    have hwFullT := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong hwFull T hFull
+    have hNCFull : HasNormalCrossings n C (geoTransformAlong (geometricTemplate (univ : Set X) E) T).E := by
+      apply hasNormalCrossings_of_eventually_incident_containment hCur.1 hwFullT.isSNCDivisor
+      intro p hpC j hpj
+      have hj : (geoTransformAlong (geometricTemplate (univ : Set X) E) T).E.get j ∈
+          E.map (strictAlong T) ++ A.E := by
+        rw [←full_boundary_decomposition W E T]
+        exact List.get_mem _ j
+      rcases List.mem_append.mp hj with hj | hj
+      · obtain ⟨H,hHE,hHj⟩ := List.mem_map.mp hj
+        obtain ⟨i,rfl⟩ := List.mem_iff_get.mp hHE
+        rw [←hHj] at hpj ⊢
+        filter_upwards [hInc i p hpC] with q hq hqC
+        exact (hq hqC).mpr hpj
+      · obtain ⟨i,hi⟩ := List.mem_iff_get.mp hj
+        rw [←hi] at hpj ⊢
+        filter_upwards [hProfile p hpC] with q hq hqC
+        exact ((hq hqC).2.2 i).mpr hpj
+    have hFullAdm : (geoTransformAlong (geometricTemplate (univ : Set X) E) T).IsAdmissibleCentre C := by
+      refine ⟨hCur.1,?_,hNCFull⟩
+      change C ⊆ cosupport n _ _ (geoTransformAlong (geometricTemplate (univ : Set X) E) T).d
+      rw [d_geoTransformAlong]
+      change C ⊆ cosupport n _ _ 0
+      rw [cosupport_zero (fun _ _ hg => GermIdeal.IsCoherent.holomorphicAt_mem hwFullT.isCoherent hg),ambient_univ E T]
+      exact subset_univ C
+    refine ⟨C,hOrigC,hTemp,hFullAdm,Or.inr ⟨hneC,hCeq⟩,?_⟩
+    intro i p hpC hpH
+    filter_upwards [hInc i p hpC] with q hq hqC
+    exact (hq hqC).mpr hpH
+  · refine ⟨∅,isAdmissibleCentre_empty _,isAdmissibleCentre_empty _,isAdmissibleCentre_empty _,
+      Or.inl ⟨Set.not_nonempty_iff_eq_empty.mp hne,rfl⟩,?_⟩
+    intro i p hpC
+    exact False.elim hpC
+
+private theorem exists_prefix (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) (hK : IsCompact W)
+    {d : ℕ} (hd : d+1≤n) (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1)) :
+    ∀ k : ℕ,∃ (Y : CMfd.{u} n) (T : BlowupTower X Y),T.length=k ∧ DynamicMaximumHistory hn W E T ∧
+      IsGeoTestTower (originalMemberProductMarked W E 1) T ∧
+      IsGeoTestTower (geometricTemplate (univ : Set X) E) T ∧ tracePacket W E T
+  | 0 => ⟨X,.refl,rfl,trivial,trivial,trivial,packet_refl hn hW hE hdense⟩
+  | k+1 => by
+    obtain ⟨Y,T,hLen,hDyn,hT,hFull,hp⟩ := exists_prefix hn hW hE hdense hK hd hr k
+    obtain ⟨C,hOrig,hTemp,hFullAdm,hChoice,hInc⟩ := choose_next hn hW hE hdense hK hd hr T hT hFull hp
+    have hwM : (originalMemberProductMarked W E 1).IsWellFormed :=
+      ⟨hW,isCoherent_originalMemberProduct hn hE,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩
+    have hGeom := actual_original_test_history_template _ hwM T hT
+    have hThin : interior C=∅ := by
+      rcases hChoice with hEmpty | hMax
+      · rw [hEmpty.2,interior_empty]
+      · have hsub : C ⊆ (geoTransformAlong (originalMemberProductMarked W E 1) T).cosupp := hOrig.2.1
+        have hOrigDom := originalMemberProductMarked_isInvDomain hn hW hE hd hr hdense (q := 1) le_rfl
+        have hDomT := InvDomainTowerAlong.isInvDomain_geoTransformAlong hOrigDom T hT
+        exact eq_empty_of_subset_empty ((interior_mono hsub).trans (interior_cosupp_eq_empty hDomT).subset)
+    obtain ⟨Z,π,hπ⟩ := exists_blowup C hOrig.1 hThin
+    refine ⟨Z,.step T C π hπ,by simp only [BlowupTower.length_step,hLen],⟨hDyn,hChoice⟩,
+      ⟨hT,hOrig⟩,⟨hFull,hFullAdm⟩,?_⟩
+    intro i
+    exact continue_member hn hW hE hdense T hGeom hp i hπ hTemp.subset_N hTemp.2.2 (hInc i)
+
+/-- Original compact positive-dimensional smooth geometry internally constructs
+all actual dynamic prefixes and their whole original-plus-born trace equations. -/
+theorem exists_original_dynamic_incident_prefix (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) (hK : IsCompact W)
+    {d : ℕ} (hd : d+1≤n) (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1)) (k : ℕ) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y),T.length=k ∧ DynamicMaximumHistory hn W E T ∧
+      IsGeoTestTower (originalMemberProductMarked W E 1) T ∧
+      IsGeoTestTower (geometricTemplate (univ : Set X) E) T ∧
+      IsSNCDivisor n (E.map (strictAlong T) ++ (geoTransformAlong (geometricTemplate W []) T).E) ∧
+      ∀ i : Fin E.length,
+        let A := geoTransformAlong (geometricTemplate W []) T
+        let H := strictAlong T (E.get i)
+        let I := restrictOn n A.N (vanishingIdeal (n := n) H)
+        IsSNCDivisor n [H] ∧ A.N ⊆ closure (A.N \ H) ∧ I.IsCoherent ∧
+          (∀ y ∈ A.N,IsNonzeroAlongAt A.N I y) ∧
+          nonmonomialPartAlong n A.N I A.E=
+            (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal ∧
+          I=restrictOn n A.N ((monomialPartAlong n A.N I A.E).mul
+            (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal) := by
+  obtain ⟨Y,T,hLen,hDyn,hT,hFull,hp⟩ := exists_prefix hn hW hE hdense hK hd hr k
+  have hwFull : (geometricTemplate (univ : Set X) E).IsWellFormed :=
+    ⟨⟨isClosed_univ,fun x _ => ⟨n,AnalyticIrreducibleComponents.regularAtDim_univ x⟩⟩,
+      isCoherent_unitIdeal,hE,isTransverse_univ_of_isSNCDivisor hE⟩
+  have hSNC := (MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong hwFull T hFull).isSNCDivisor
+  rw [full_boundary_decomposition W E T] at hSNC
+  have hwM : (originalMemberProductMarked W E 1).IsWellFormed :=
+    ⟨hW,isCoherent_originalMemberProduct hn hE,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩
+  have hGeom := actual_original_test_history_template _ hwM T hT
+  refine ⟨Y,T,hLen,hDyn,hT,hFull,hSNC,?_⟩
+  intro i
+  obtain ⟨hH,hD,hc,hnz,hNm⟩ := hp i
+  exact ⟨hH,hD,hc,hnz,hNm,trace_factor hn hW T hGeom hp i⟩
+
+end
+end TranscendentalNakamaye.Pending.HironakaSharpActualDynamicIncidentHistory

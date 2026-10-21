@@ -1,0 +1,18 @@
+\begin{lemma}[The order of a power]
+\label{hir:order-power}
+\uses{hir:order-taylor,hir:polarization,mc:taylor-tail}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.OrderMultiplicativity.iterDeriv_ofFn_eq_iteratedFDeriv,TranscendentalNakamaye.Pending.OrderMultiplicativity.iterDeriv_eq_iteratedFDeriv,TranscendentalNakamaye.Pending.OrderMultiplicativity.mem_idealPow_pointIdeal_iff_iteratedFDeriv,TranscendentalNakamaye.Pending.OrderMultiplicativity.pow_mem_idealPow,TranscendentalNakamaye.Pending.OrderMultiplicativity.mem_idealPow_of_pow_mem}
+\leanok
+Let \(g\) be holomorphic near \(x\), \(\nu\ge1\) and \(\mu\in\mathbb N\). If \(g^\nu\in\mathfrak m_x^{\nu\mu}\), then \(g\in\mathfrak m_x^\mu\). In other words
+\(\operatorname{ord}_x(g^\nu)=\nu\operatorname{ord}_x(g)\).
+\end{lemma}
+\begin{proof}
+\leanok
+In a chart \(e\) at \(x\) with \(p=e(x)\) and \(G=g\circ e^{-1}\), Lemma~\ref{hir:order-taylor} says \(g\in\mathfrak m_x^q\) if and only if the
+iterated derivatives \(D^jG(p)\) vanish for \(j<q\) (iterated directional derivatives are the values of these symmetric multilinear maps).
+Suppose \(g\notin\mathfrak m_x^\mu\) and let \(a<\mu\) be least with \(D^aG(p)\ne0\). By Lemma~\ref{hir:polarization} there is \(y\) with
+\(D^aG(p)(y,\dots,y)\ne0\). The holomorphic function \(\varphi(t)=G(p+ty)\) of one variable has \(\varphi^{(j)}(0)=D^jG(p)(y,\dots,y)\), so it vanishes
+to order exactly \(a\) at \(0\), and \(\varphi^\nu\) to order exactly \(\nu a<\nu\mu\). But \(\varphi^\nu(t)=G^\nu(p+ty)\) and \(g^\nu\in\mathfrak m_x^{\nu\mu}\)
+gives \((\varphi^\nu)^{(j)}(0)=D^j(G^\nu)(p)(y,\dots,y)=0\) for \(j<\nu\mu\), a contradiction.
+\end{proof}

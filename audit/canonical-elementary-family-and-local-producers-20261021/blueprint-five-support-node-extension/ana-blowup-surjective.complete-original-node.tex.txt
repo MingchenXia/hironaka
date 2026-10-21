@@ -1,0 +1,32 @@
+\begin{lemma}[Blowup sequences are surjective]
+\label{ana:blowup-surjective}
+\uses{ana:blowups,ana:strict-transform-composition}
+\lean{TranscendentalNakamaye.Pending.StrictTransformComposition.surjective_of_isBlowupAlong,TranscendentalNakamaye.Pending.StrictTransformComposition.IsBlowupSequence.compactSpace_surjective,TranscendentalNakamaye.Pending.StrictTransformComposition.image_exceptionalLocus_subset_comp,TranscendentalNakamaye.Pending.StrictTransformComposition.not_strictTransform_subset_image_exceptionalLocus}
+\leanok
+Let \(X\) be a compact complex manifold and \(\mu:\widetilde X\to X\) a finite
+composition of blowups with smooth centres. Then \(\widetilde X\) is compact and
+\(\mu\) is surjective. If \(f:Y\to X\) and \(g:Z\to Y\) are surjective
+holomorphic maps between manifolds of the same dimension and
+\(V\not\subset(f\circ g)(\operatorname{Exc}(f\circ g))\), then
+\(V\not\subset f(\operatorname{Exc}(f))\) and
+\(\widetilde V^{f}\not\subset g(\operatorname{Exc}(g))\).
+\end{lemma}
+\begin{proof}
+\leanok
+A blowup \(g:Z\to Y\) along a nowhere dense centre \(C\) of a compact manifold is
+an isomorphism over \(Y\setminus C\), and \(Z\) is compact. Its image is compact,
+hence closed, and contains the dense set \(Y\setminus C\), so \(g\) is onto. By
+induction along the sequence every intermediate manifold is compact and the
+composition is onto.
+
+If \(y=f(x)\) with \(x\in\operatorname{Exc}(f)\), write \(x=g(w)\); then
+\(w\in g^{-1}\operatorname{Exc}(f)\subset\operatorname{Exc}(f\circ g)\), so
+\(f(\operatorname{Exc} f)\subset(f\circ g)(\operatorname{Exc}(f\circ g))\), which
+gives the first claim. For the second, suppose
+\(\widetilde V^{f}\subset g(\operatorname{Exc} g)\) and let \(v\in V\), \(v=f(y)\).
+If \(y\in\operatorname{Exc}(f)\), then \(v\in(f\circ g)(\operatorname{Exc}(f\circ g))\)
+as above. Otherwise \(y\in f^{-1}(V)\setminus\operatorname{Exc}(f)\subset\widetilde V^{f}\),
+so \(y=g(w)\) with \(w\in\operatorname{Exc}(g)\subset\operatorname{Exc}(f\circ g)\)
+and \(v=(f\circ g)(w)\). Thus \(V\subset(f\circ g)(\operatorname{Exc}(f\circ g))\), a
+contradiction.
+\end{proof}

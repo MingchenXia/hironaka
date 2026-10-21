@@ -1,0 +1,117 @@
+\section{Genuine first-symbol tangent differential closure of the original ideal}
+
+All derivatives below are the existing canonical original operations
+$D_wg=\operatorname{iteratedDerivativeGerm}[w](g)$ on whole
+holomorphic germs. The finite jets and maximal ideal are unchanged.
+
+\begin{theorem}[A zero old jet turns genuine prolongation into the original derivative-jet pairing]
+\label{hir:actual-zero-old-jet-prolongation-derivative-pairing}
+\uses{hir:actual-dual-jet-differential-prolongation,hir:actual-canonical-directional-germ-successor-scalar-jet}
+\lean{Hironaka.HironakaActualFirstSymbolTangentClosure.actualDualJetProlongation_eq_derivative_pairing_of_finiteJet_zero}
+\leanok
+If the true old jet $J_qg$ of an original whole germ is zero, then
+for every actual row family, parameter $c$ and tangent direction $a$,
+\[
+ (\nabla_a\eta)_c(J_{q+1}g)
+   =\sum_r\eta_r(c)(J_qD_{Ta}g)_r.
+\]
+No ideal, rank, row-kernel or derivative-closure certificate is used.
+\end{theorem}
+\begin{proof}
+Use an actual holomorphic representative of the same original germ.
+In the defining genuine prolongation sum, every term multiplying
+$D\eta_r(c)(a)$ is an actual coordinate evaluation of $J_qg$,
+so it is zero. The existing canonical derivative-germ successor-jet
+identity identifies the remaining original successor evaluation of
+$J_{q+1}g$ with the actual old scalar-jet coordinate of $D_{Ta}g$.
+Apply these equalities in the finite original row sum. This proves
+the exact identity, including the empty sum when $q=0$, inside the
+original jet spaces without a full-product realization claim.
+\end{proof}
+
+\begin{theorem}[Actual original constant-rank centre frames force first-symbol tangent closure]
+\label{hir:actual-original-centre-frame-first-symbol-tangent-closure}
+\uses{hir:actual-zero-old-jet-prolongation-derivative-pairing,hir:actual-centre-projected-dual-row-first-derivatives-holomorphic,hir:actual-dual-jet-prolongation-whole-original-ideal-zero,hir:actual-entire-point-quotient-pivot-frame}
+\lean{Hironaka.HironakaActualFirstSymbolTangentClosure.actual_projected_tangent_derivative_mem_ideal_sup_point_pow}
+\leanok
+Let one actual original family be holomorphic on a true open $U$.
+Use fixed genuine original pivot rows and columns on a real open
+$D\subset U$, with original determinant nonzero and original Macaulay
+rank equal to pivot size at every actual tangent point of $D$.
+For $p=Tc\in D$, put $I(p)$ equal to the entire unchanged original
+translated ideal. For every original germ
+$g\in I(p)\cap\mathfrak m^q$ and every tangent direction $a$,
+\[
+ D_{Ta}g\in I(p)+\mathfrak m^q.
+\]
+Neither the actual projected rows nor the desired derivative closure
+are caller inputs. No properness or positive-HS hypothesis is needed.
+\end{theorem}
+\begin{proof}
+If the same actual $I(p)$ is the unit ideal, the displayed membership
+is immediate. Otherwise it is proper. Its original generator germs
+belong to the original maximal ideal, hence each actual generator
+value at $p$ is zero by the original germ evaluation dictionary.
+
+Internally use the actual projected-coordinate row functions of the
+same original inverse-pivot projection. They are holomorphic on the
+real tangent open $T^{-1}(D)$. Every unchanged original Macaulay
+column lies in the true entire projection kernel there, by the
+actual rank/determinant facts; the exact actual dual pairing therefore
+makes every such moving row annihilate all original columns.
+The accepted genuine prolongation theorem consequently annihilates
+$J_{q+1}g$ at the same actual point, because $g$ belongs to the entire
+same original ideal and the original generators vanish there.
+
+The original point-power hypothesis gives $J_qg=0$ by its exact whole
+kernel. The preceding identity therefore turns each zero prolonged
+pairing into zero projected-row pairing with the actual old jet of
+$D_{Ta}g$. The exact projected-row pairing says that every coordinate
+of the original projected scalar jet of this same derivative germ is
+zero. Hence its genuine whole quotient coordinates are zero. Their
+entire original kernel is exactly $I(p)+\mathfrak m^q$, proving the
+asserted membership. Only first-symbol tangent differential closure
+has been proved, not stability of the entire original ideal itself.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centre geometry internally gives all-order first-symbol tangent closure]
+\label{hir:actual-original-hs-centre-first-symbol-tangent-closure}
+\uses{hir:actual-original-centre-frame-first-symbol-tangent-closure,hir:actual-hs-constant-centre-origin-pivot-whole-frames}
+\lean{Hironaka.HironakaActualFirstSymbolTangentClosure.exists_original_hs_constant_centre_first_symbol_tangent_closure}
+\leanok
+For an original coherent ideal along an actual regular centre with
+constant original intrinsic HS function, one genuine original
+flattening chart, original coherent generating family/open and real
+flattened open $U$ through zero precede every order. The literal
+original translated-sheaf ideals agree with the same actual family
+ideals on $U$. At each positive order $q=\ell+1$, actual original
+pivots internally give a genuine open $D_q\subset U$ through zero.
+For every actual tangent point $p\in D_q$, every whole original
+germ $g\in I(p)\cap\mathfrak m^q$ and every tangent direction $a$,
+the same canonical derivative satisfies
+$D_{Ta}g\in I(p)+\mathfrak m^q$.
+In particular this holds at the original origin ideal $I(0)$ for
+all positive orders, with the same original ideal and tangent space.
+No row, kernel, rank, flatness, derivative-closure or positive-HS
+certificate is supplied as a hypothesis.
+\end{theorem}
+\begin{proof}
+Apply the accepted genuine original HS-constant-centre origin-pivot
+producer. Its original flattening and original family/opens precede
+the universal order quantifier, and its whole translated-sheaf ideal
+dictionary identifies exactly the actual original $I(p)$.
+At each order it internally chooses a true pivot at zero and a true
+real open $D_q\subset U$ through zero with nonzero original minor.
+Original intrinsic HS constancy gives the actual centre-rank equality
+with that selected pivot size. All hypotheses of the preceding
+actual frame theorem are now internally proved for the same original
+family, chosen pivot and each actual point of $T^{-1}(D_q)$.
+Apply that theorem and use the whole original ideal equality, in both
+input and output, to obtain the stated closure for the literal
+original translated-sheaf ideals. Since $T0=0\in D_q$, the actual
+origin assertion follows at every positive order. Each domain is
+finite-order and genuine; no common all-order open is asserted.
+This is a first-symbol/initial tangent differential invariance result.
+Normal-flatness, compatible vertex-family selection and general
+Bennett remain separate mathematical targets.
+\end{proof}

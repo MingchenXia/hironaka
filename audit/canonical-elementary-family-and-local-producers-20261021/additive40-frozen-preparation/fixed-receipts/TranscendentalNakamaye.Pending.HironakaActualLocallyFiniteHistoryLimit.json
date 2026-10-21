@@ -1,0 +1,486 @@
+{
+  "created_utc": "2026-10-21T02:32:18.192621+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G3": "genuine actual LF-history complex limit and proper holomorphic projection constructed internally; unrestricted original scheduler and final resolution/functorial fields remain separate"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryLimit.lean",
+    "sha256": "44e7fbdb0e17d918e0ff52c1eb325bcd0b0354b51cbb73476c426fb6153f2d59",
+    "bytes": 14468
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-locally-finite-history-limit-extension.tex",
+    "sha256": "3306eb6c46cb4b93453a4a6bb2a1127a456bd5447b9e935d0f26f54e592e7720",
+    "bytes": 5879
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryLimit.ilean",
+      "sha256": "fcc523869da5b19b6788c04d20dc2e451353b8f450eac540d6e8f2ad3e9f0bf9",
+      "bytes": 80848
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryLimit.ilean.hash",
+      "sha256": "521b8c454cf1c1aaadaf411b7d8ee8afc15040eae6ec2d5affe8da9d2607883f",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryLimit.olean",
+      "sha256": "8ce1b4d2b92839eba5d74330fbc22f68b6502636cbe02dae7888ae2162502a3e",
+      "bytes": 478808
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryLimit.olean.hash",
+      "sha256": "e690630602d28e413ab1600bf53066263cae408302f14650e9037bcd79064764",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualLocallyFiniteHistoryLimit.trace",
+      "sha256": "9f5c4c598ae86d0bfe23e2d44c4be58547c9dc69af95673301af4abc61e6b071",
+      "bytes": 3525
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "localMap",
+      "source_line": 24
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "localMap_compatible",
+      "source_line": 28
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "gluedProjection",
+      "source_line": 36
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "gluedProjection_local",
+      "source_line": 41
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "localInclusion_range",
+      "source_line": 48
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "embeddingOverlap_eq",
+      "source_line": 67
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "transition_inclusion",
+      "source_line": 79
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "embeddingTransition",
+      "source_line": 87
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "embeddingTransition_inclusion",
+      "source_line": 98
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "base_cover",
+      "source_line": 105
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "limitSpace_t2",
+      "source_line": 108
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "limitSpace_secondCountable",
+      "source_line": 114
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "limitChartedSpace",
+      "source_line": 121
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "limitSpace_isComplexManifold",
+      "source_line": 129
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "limitManifold",
+      "source_line": 143
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "localInclusion_contMDiff",
+      "source_line": 148
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "gluedProjection_contMDiff",
+      "source_line": 156
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "gluedProjection_fibre",
+      "source_line": 183
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "gluedProjection_fibre_isCompact",
+      "source_line": 210
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "gluedProjection_isClosedMap",
+      "source_line": 217
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "gluedProjection_isProperMap",
+      "source_line": 259
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-locally-finite-history-limit-projection",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_local",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localInclusion_range",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition_inclusion"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "675ad79f214e3908f808d5bc54d5ec8612b2912e92dbfef3bc06a002a7a12c48"
+    },
+    {
+      "label": "hir:actual-locally-finite-history-limit-complex-manifold",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.limitManifold",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localInclusion_contMDiff",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_contMDiff"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "e43ff75e1adbe779af9b0b2f68bdddc96aaca6042952427ac090e8957556f35d"
+    },
+    {
+      "label": "hir:actual-locally-finite-history-limit-proper",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_fibre",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_isClosedMap",
+        "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_isProperMap"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "ed314b46291209dae474c9bb20f9f53c0fe8c0fd965da670b0e0c816cb32bf2a"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.limitSpace_isComplexManifold",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_fibre",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_contMDiff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_isClosedMap",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localInclusion_contMDiff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition._proof_6",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.limitSpace_secondCountable",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.base_cover",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_fibre_isCompact",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingOverlap_eq",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_isProperMap",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localMap._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localMap_compatible",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.limitSpace_t2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.0.TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.transition_inclusion",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition_inclusion",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localInclusion_range",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition._proof_5",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.limitManifold",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.localMap",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.limitChartedSpace",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_local",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 29,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 29
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-limit/kernel.log",
+    "sha256": "79d639b5375358b8f48bf9f19890a6af70656bbce1c71fb015770beba43c8e93",
+    "bytes": 81
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-limit/actual-roots.log",
+    "sha256": "b3d0f99b99e1f80981498d50bfa4390b6466671a0f053841b8d429969c144623",
+    "bytes": 7102
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-limit/ActualRoots.lean",
+    "sha256": "4604521bebafa652e03e2c3285157ba92e40d7117a57242941d8dcb7727c7369",
+    "bytes": 868
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/global-history/limit-manifold/native.log",
+    "sha256": "c9a58864314069e608dfc72353ab507e7aeca7119194f882ea2597dbe017d278",
+    "bytes": 142
+  },
+  "native_build_jobs": 4848,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 266-line source, all quotient descent, saturated-range, actual embedding-overlap and properness helpers/definitions, and all THREE complete written BP proofs reviewed. Actual whole transition projection equations give a compatible family of genuine finite-prefix maps; the actual topological multicoequalizer constructs the continuous global projection and literal local equations. Each local inclusion range is exactly the preimage of its original window: represent any global point in some actual endpoint, use its true projection membership to enter the actual overlap, and apply the actual transition/glue relation to represent it in the desired endpoint. These internally proved saturated ranges identify actual embedding overlaps with the previously constructed holomorphic overlap opens. The true base cover, actual open embeddings and saturated ranges discharge the generic separation and second-countability producers: distinct base images separate downstairs; equal-base points lie in one genuine Hausdorff finite endpoint; a countable original subcover and endpoint countable bases cover the entire glued space. Lifting real endpoint charts through the actual embeddings and using these SAME internally constructed holomorphic embedding transitions proves EVERY complex atlas field, giving a genuine CMfd of the original dimension. Actual local inclusions and the global projection are holomorphic by these actual lifted charts and the literal local projection identity. Every entire global fibre lies in its attached actual endpoint by the saturated range and equals the image of the true finite-prefix fibre, hence is compact. For any global closed subset, its actual endpoint pullback is closed and its image under the proper restricted finite prefix is closed in the OWN local base. The complement gives an actual base-open neighborhood missing the ENTIRE global image, again using the saturated range. Thus the actual global projection is closed; together with actual continuity and these proved compact fibres, the genuine closed-map criterion proves properness. No global topology, desired atlas, properness or finite common stopping-time certificate is incoming.",
+  "proven_scope": "Every ACTUAL GrowingSeq with locally finite actual centre images internally has its genuine Hausdorff second-countable complex limit manifold and whole proper holomorphic projection, with actual finite local endpoints and saturated inclusion ranges constructed from the same history.",
+  "scope_limits": [
+    "An actual GrowingSeq with locally finite actual centre images is still an explicit input; this theorem does not create the unrestricted original noncompact scheduler.",
+    "Finite-stage factorization, choice independence, terminality, canonical functoriality and original ideal/boundary resolution geometry are not supplied by this manifold/proper-projection theorem.",
+    "No original G3 closure is inferred from this conditional but genuine global analytic limit construction."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-locally-finite-history-limit/review-config.json",
+    "sha256": "289346d94127e976c2229fbdde7d4996a10515151ef7706a83b3117d44c9db57",
+    "bytes": 3904
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/global-history/limit-manifold/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/global-history/limit-manifold/peer-review-canonical.json"
+}

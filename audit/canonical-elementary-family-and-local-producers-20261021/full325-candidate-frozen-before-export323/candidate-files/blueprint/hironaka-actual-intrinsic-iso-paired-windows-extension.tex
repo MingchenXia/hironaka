@@ -1,0 +1,104 @@
+\section{An arbitrary intrinsic isomorphism produces genuine paired original windows}
+
+Let $C\subset U\subset\mathbf C^n$ and $D\subset V\subset\mathbf C^m$
+be actual original embedded analytic models, and let $e$ be any isomorphism
+of their actual locally ringed spaces over the same actual complex point.
+No ordinary ambient representative, inverse relation or paired domain is
+supplied.
+
+\begin{theorem}[Actual intrinsic maps have original coordinate representatives on real ambient opens]
+\label{hir:actual-intrinsic-iso-original-coordinate-window}
+\uses{hir:actual-analytic-subspace-intrinsic-local-holomorphic-lift,hir:actual-holomorphic-stalk-surjection-injective-derivative}
+\lean{Hironaka.HironakaActualIntrinsicIsoPairedWindows.exists_actual_original_coordinate_window}
+\leanok
+For any actual complex-point-compatible intrinsic model map $F$ and every
+actual source point $c$, there are an actual ambient coordinate open
+$A\subset U$ containing $c$ and an original total coordinate function
+$F_0:\mathbf C^n\to\mathbf C^m$, holomorphic on this actual $A$, such
+that for every original model point $y$ whose original coordinate lies
+in $A$, its original value $F_0(y)$ is exactly the coordinate of the
+actual base point $F(y)$.
+\end{theorem}
+\begin{proof}
+The genuine intrinsic local ambient lifting theorem constructs an actual
+holomorphic representative on a true open of $U$, with an entire actual
+locally ringed map square. Extend its target coordinate tuple by zero
+first from that true open to $U$, then from $U$ to the actual full
+coordinate space. The actual extension theorem retains every value on
+the genuine open and proves holomorphy there; none is claimed elsewhere.
+Its actual open image in $\mathbf C^n$ is $A$, contained in $U$ and
+containing the original point. Evaluate the whole actual map square at
+every original source point in the open. The constructed actual subspace
+map is literal original pullback, so its base value is precisely the
+asserted coordinate tuple. Subtype injectivity identifies membership in
+the ambient image with membership in the true original source open,
+proving the statement for every such original point. Holomorphy on $A$
+gives actual complex smoothness there.
+\end{proof}
+
+\begin{theorem}[The same intrinsic isomorphism internally supplies paired original inverse-only-on-subsets windows]
+\label{hir:actual-intrinsic-iso-paired-original-windows}
+\uses{hir:actual-intrinsic-iso-original-coordinate-window,hir:reduced-analytic-model-holomorphic-morphisms,ana:analytic-preimage}
+\lean{Hironaka.HironakaActualIntrinsicIsoPairedWindows.exists_actual_intrinsic_iso_paired_windows}
+\leanok
+At every actual source point, there are genuine ambient opens
+$U_1\subset U$, $V_1\subset V$ containing the corresponding actual
+points, and original coordinate functions $F_0,G_0$ holomorphic there.
+Their actual original subset windows are
+$W_1=(\operatorname{image}C)\cap U_1$ and
+$D_1=(\operatorname{image}D)\cap V_1$. They are analytic in these actual
+opens, $F_0(W_1)\subset D_1$, $G_0(D_1)\subset W_1$, and
+$G_0F_0=1$ on $W_1$, $F_0G_0=1$ on $D_1$.
+Their actual point values are those of the same given $e$ and $e^{-1}$.
+No reciprocal full-ambient mapping hypothesis is introduced.
+\end{theorem}
+\begin{proof}
+The structural triangle of the actual inverse follows by the genuine
+isomorphism identities. Apply the first theorem to $e$ at $c$ and to its
+actual inverse at $e(c)$, obtaining real opens $A,B$ and total original
+coordinate functions $F_0,G_0$. Their point values at the chosen points
+are the original coordinates of $e(c)$ and $c$. Put
+$U_1=A\cap F_0^{-1}B$ and $V_1=B\cap G_0^{-1}A$.
+These are actual opens because the maps are continuous on their true
+respective opens; both contain the stated points. Restrict the original
+holomorphy to these actual opens. For a point of $W_1$, the first proved
+point-value identity identifies $F_0$ with the same $e$; its membership
+in $B$ permits use of the inverse point-value identity. The actual base
+inverse identity then gives $G_0F_0=1$. This identity also puts the actual
+image in $V_1$, hence in $D_1$. The other direction is identical, using
+the actual inverse isomorphism. This reasoning only applies to actual
+points of the subsets and never asserts reciprocal ambient-domain
+invariance. Finally, each original analytic subset window is the true
+holomorphic preimage of its original analytic model under the genuine
+ambient open inclusion. Thus both are analytic in their true opens.
+\end{proof}
+
+\begin{theorem}[Any original intrinsic isomorphism supplies an actual common analytic graph presentation locally]
+\label{hir:actual-intrinsic-iso-common-analytic-graph-windows}
+\uses{hir:actual-intrinsic-iso-paired-original-windows,hir:actual-local-common-graph-model,hir:actual-local-common-graph-analytic-object}
+\lean{Hironaka.HironakaActualIntrinsicIsoPairedWindows.exists_actual_intrinsic_iso_common_graph}
+\leanok
+The paired windows internally constructed from the same arbitrary intrinsic
+isomorphism give an actual common analytic graph model in the same actual
+block coordinates, with genuine whole quotient-model isomorphisms from both
+original subset windows and actual complex-point structural triangles.
+No original representatives, paired window, common model or graph atlas
+are input.
+\end{theorem}
+\begin{proof}
+Use the genuine opens and original functions from the preceding theorem.
+The two original subset windows lie in their true coordinate opens, and
+all original subset maps and two inverse identities were proved there.
+Apply the genuine common-graph construction to exactly these same
+functions and windows. It constructs the two entire locally ringed
+isomorphisms and their actual structural triangles. Original analyticity
+of the first window, internally proved in the preceding theorem, makes
+this same common graph an actual object of the constructed analytic
+category by the genuine original-analytic-input consumer. No condition
+on a supplied graph atlas or output isomorphism has been assumed.
+\end{proof}
+
+The original coordinate values retain the given intrinsic map. A complete
+whole-map comparison square for specified chosen common-graph isomorphisms,
+canonical marked invariance under added graph equations, and resolution
+history descent are additional coupling theorems, not inferred here.

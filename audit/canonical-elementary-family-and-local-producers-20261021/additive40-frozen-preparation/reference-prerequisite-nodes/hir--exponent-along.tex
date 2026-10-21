@@ -1,0 +1,52 @@
+\begin{lemma}[Exponents along a submanifold]
+\label{hir:exponent-along}
+\uses{hir:exponent-locally-constant,hir:local-retraction,hir:point-power-pullback,hir:hadamard-bridge,hir:marked-ideal-operations,hir:cosupport,hir:cosupport-basic,hir:snc,bcalc:member-intersection-along}
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction,TranscendentalNakamaye.Pending.DivisorExponentAlong.exists_isLocalRetraction,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.mem_self,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.tendsto,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.eventually,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.eventually_comp_self,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.holomorphicAt_comp,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.eventually_eq_comp,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.vanishesToOrderOn_iff,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.eventually_eq_zero_of_forall,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.exists_not_vanishesToOrderOn,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsDivNearAlong,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_univ_iff,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_zero,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsDivNearAlong.mono,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsDivNearAlong.eventually,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_of_notMem,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_of_generators,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_of_forall_mem,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsLocalRetraction.mem_idealPow_vanishingIdeal_comp,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_iff,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_of_frequently,TranscendentalNakamaye.Pending.DivisorExponentAlong.divExpAlong,TranscendentalNakamaye.Pending.DivisorExponentAlong.divExpAlong_univ,TranscendentalNakamaye.Pending.DivisorExponentAlong.IsNonzeroAlongAt,TranscendentalNakamaye.Pending.DivisorExponentAlong.isNonzeroAlongAt_univ_iff,TranscendentalNakamaye.Pending.DivisorExponentAlong.exists_not_isDivNearAlong,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_divExpAlong,TranscendentalNakamaye.Pending.DivisorExponentAlong.not_isDivNearAlong_divExpAlong_succ,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_iff_le_divExpAlong,TranscendentalNakamaye.Pending.DivisorExponentAlong.eventually_divExpAlong_eq,TranscendentalNakamaye.Pending.DivisorExponentAlong.memberInter_singleton,TranscendentalNakamaye.Pending.DivisorExponentAlong.regularAtDim_inter_get,TranscendentalNakamaye.Pending.DivisorExponentAlong.eventually_divExpAlong_get_eq,TranscendentalNakamaye.Pending.DivisorExponentAlong.isDivNearAlong_get_iff_le}
+\leanok
+Let \(\mathfrak a\) be a coherent ideal of \(\mathcal O_M\), \(N\subset M\) regular at \(x\in N\), \(r\) a local holomorphic retraction onto \(N\) at \(x\)
+(Lemma~\ref{hir:local-retraction}), and \(H\subset M\) a set. Say that \(\mathfrak a\) is \emph{divisible by \(\mathcal I_{N\cap H}^e\) along \(N\) near \(x\)} if
+the points of \(N\cap H\) near \(x\) lie in \(\operatorname{cosupp}(\mathfrak a|_N,e)\).
+\begin{enumerate}
+\item For \(y\in N\) near \(x\) and \(f\) holomorphic at \(y\): \(f|_N\in\mathfrak m_{N,y}^q\) if and only if \(f\circ r\in\mathfrak m_y^q\). Hence a germ lying in
+\(\mathfrak m_{N,x}^q\) for every \(q\) vanishes on \(N\) near \(x\); and if \(\mathfrak a_x\) contains a germ which does not vanish identically on \(N\) near
+\(x\), there is a largest \(e=e^N_H(x)\) such that \(\mathfrak a\) is divisible by \(\mathcal I_{N\cap H}^e\) along \(N\) near \(x\).
+\item Let \(A\) be a submanifold at \(x\) which \(r\) maps into \(H\) near \(x\). If \(\mathfrak a\) is divisible by \(\mathcal I_{N\cap H}^e\) along \(N\) near \(x\), then
+\(g\circ r\in(\mathcal I_A^e)_x\) for every \(g\in\mathfrak a_x\); and \(g=g\circ r\) on \(N\) near \(x\). Conversely, if \(A\supset N\cap H\) and every germ of
+\(\mathfrak a_x\) agrees on \(N\) near \(x\) with a germ of \((\mathcal I_A^e)_x\), then \(\mathfrak a\) is divisible by \(\mathcal I_{N\cap H}^e\) along \(N\) near \(x\).
+In particular, if \(N\cap H\) is a submanifold at \(x\), divisibility along \(N\) near \(x\) means that every germ of \(\mathfrak a_x\) agrees on \(N\) near \(x\) with a
+germ of \((\mathcal I_{N\cap H}^e)_x\).
+\item (Identity principle along \(N\cap H\).) Let \(N\cap H\) be a submanifold at \(x\). If the points \(y\in N\cap H\) near which \(\mathfrak a\) is divisible by
+\(\mathcal I_{N\cap H}^e\) along \(N\) accumulate at \(x\), then \(\mathfrak a\) is divisible by \(\mathcal I_{N\cap H}^e\) along \(N\) near \(x\).
+\item If \(N\cap H\) is a submanifold at \(x\) and, for every \(y\in N\) near \(x\), \(\mathfrak a_y\) contains a germ not vanishing identically on \(N\) near \(y\),
+then \(e^N_H\) is constant on \(N\cap H\) near \(x\).
+\item For \(N=M\) these are the notions of Lemma~\ref{hir:exponent-locally-constant}. If \(n\ge1\), \(N\) is closed and \(E\) is a simple normal crossings
+divisor transverse to \(N\), then \(N\cap H\) is a submanifold at each of its points for every member \(H\) of \(E\), so (3) and (4) apply on \(N\cap H\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+The retraction data at \(x\) are retraction data at every point of \(N\) near \(x\), and \(r\circ r=r\) near \(x\).
+(1) If \(f=h\) on \(N\) near \(y\) with \(h\in\mathfrak m_y^q\), then \(f\circ r=h\circ r\) near \(y\), because \(r\) maps a neighbourhood of \(y\) into \(N\), near
+\(y\); and \(h\circ r\in\mathfrak m_y^q\) (Lemma~\ref{hir:point-power-pullback}, \(r(y)=y\)). Conversely \(f=f\circ r\) on \(N\) near \(y\). If
+\(f|_N\in\mathfrak m_{N,x}^q\) for all \(q\), then \(f\circ r\in\mathfrak m_x^q\) for all \(q\), so \(f\circ r\) vanishes near \(x\)
+(Lemma~\ref{hir:exponent-locally-constant}(2)) and \(f=f\circ r\) vanishes on \(N\) near \(x\). If \(g\in\mathfrak a_x\) does not vanish identically on \(N\) near
+\(x\), choose \(q\) with \(g|_N\notin\mathfrak m_{N,x}^q\): divisibility by \(\mathcal I_{N\cap H}^{q+1}\) along \(N\) near \(x\) would put \(x\) into
+\(\operatorname{cosupp}(\mathfrak a|_N,q+1)\).
+(2) Let \(g\in\mathfrak a_x\) and \(z\in A\) near \(x\). Then \(w=r(z)\in N\cap H\) is near \(x\), so \(w\in\operatorname{cosupp}(\mathfrak a|_N,e)\) and
+\(g\in\mathfrak a_w\) (coherence, Lemma~\ref{hir:hadamard-bridge}); by (1) at \(w\), \(g\circ r\in\mathfrak m_w^e\); pulling back by \(r\)
+(Lemma~\ref{hir:point-power-pullback}), \(g\circ r\circ r\in\mathfrak m_z^e\), and \(g\circ r\circ r=g\circ r\) near \(z\). So \(g\circ r\in\mathfrak m_z^e\) at the
+points \(z\in A\) near \(x\), and \(g\circ r\in(\mathcal I_A^e)_x\) by Lemma~\ref{hir:exponent-locally-constant}(1). Conversely, let \(s_1,\dots,s_K\) generate
+\(\mathfrak a\) near \(x\) and \(s_i=h_i\) on \(N\) near \(x\) with \(h_i\in(\mathcal I_A^e)_x\); at the points \(z\in N\cap H\subset A\) near \(x\),
+\(h_i\in(\mathcal I_A^e)_z\subset\mathfrak m_z^e\), so \(s_i|_N\in\mathfrak m_{N,z}^e\), and holomorphic combinations keep the order along \(N\)
+(Lemma~\ref{hir:marked-ideal-operations}); so \(z\in\operatorname{cosupp}(\mathfrak a|_N,e)\). For the last sentence take \(A=N\cap H\): \(r\) maps the points of
+\(N\cap H\) near \(x\) to themselves.
+(3) Let \(s_1,\dots,s_K\) generate \(\mathfrak a\) near \(x\). Near an accumulating point \(y\), \(s_i|_N\in\mathfrak m_{N,z}^e\) at the points \(z\in N\cap H\), i.e.
+\(s_i\circ r\in\mathfrak m_z^e\) by (1). The identity principle along the submanifold \(N\cap H\) for one germ (Lemma~\ref{hir:exponent-locally-constant}(3)),
+applied to \(s_i\circ r\), gives \(s_i\circ r\in(\mathcal I_{N\cap H}^e)_x\); since \(s_i=s_i\circ r\) on \(N\), the converse half of (2) applies.
+(4) Let \(e=e^N_H(x)\). Divisibility by \(\mathcal I_{N\cap H}^e\) along \(N\) near \(x\) is divisibility near every point close to \(x\); non-divisibility by
+\(\mathcal I_{N\cap H}^{e+1}\) persists at the points of \(N\cap H\) near \(x\) by (3). By (1) at those points (which have retractions),
+\(e^N_H(y)=e\) for \(y\in N\cap H\) near \(x\).
+(5) For \(N=M\) the cosupport along \(M\) is the ambient cosupport. The trace \(N\cap H\) of a member is a closed submanifold by
+Lemma~\ref{bcalc:member-intersection-along} (with the set of members \(\{H\}\)), and \(N\) has a local retraction at each of its points.
+\end{proof}

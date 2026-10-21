@@ -1,0 +1,26 @@
+\begin{lemma}[Sums and products of marked ideals under multiple test blow-ups]
+\label{hir:marked-operations-transform}
+\uses{hir:marked-sum-product,hir:controlled-operations,hir:marked-ideal-operations,hir:geo-transform-ambient}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.ext_of,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.cosupp_add,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.inter_cosupp_subset_cosupp_mul,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.IsAmbientPair,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.IsAmbientPair.geoTransform,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.isAdmissibleCentre_add_iff,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.IsAdmissibleCentre.mul,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.geoTransform_add,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.geoTransform_mul,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.geoTransformAlong_add,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.isGeoResolution_add_iff,Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.geoTransformAlong_mul}
+\leanok
+Let \(\underline{\mathcal I}_1=(M,M,E,\mathfrak a,\mu)\) and \(\underline{\mathcal I}_2=(M,M,E,\mathfrak b,\nu)\) with \(\mathfrak a,\mathfrak b\) coherent, and use the transform of
+Definition~\ref{hir:geo-transform}.
+\begin{enumerate}
+\item If \(\mu,\nu\ge1\), the multiple test blow-ups of \(\underline{\mathcal I}_1+\underline{\mathcal I}_2\) are exactly the simultaneous multiple test blow-ups of
+\(\underline{\mathcal I}_1\) and \(\underline{\mathcal I}_2\); along them the transform of the sum is the sum of the transforms. Hence a tower resolves the sum if
+and only if it is a simultaneous multiple test blow-up after which the two cosupports are disjoint.
+\item A simultaneous multiple test blow-up of \(\underline{\mathcal I}_1\) and \(\underline{\mathcal I}_2\) is a multiple test blow-up of
+\(\underline{\mathcal I}_1\cdot\underline{\mathcal I}_2\), and along it the transform of the product is the product of the transforms.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on the tower. For \(N=M\) the transformed ideals are controlled transforms (Lemma~\ref{hir:geo-transform-ambient}), and an admissible centre
+\(C\) of \((M,M,E,\mathfrak a,\mu)\) satisfies \(\mathfrak a\subset\mathcal I_C^\mu\) (Lemma~\ref{hir:bridge-consumers}). A centre is admissible for the sum if and only
+if it is admissible for both, since \(\operatorname{cosupp}(\mathfrak a^\nu+\mathfrak b^\mu,\mu\nu)=\operatorname{cosupp}(\mathfrak a,\mu)\cap\operatorname{cosupp}(\mathfrak b,\nu)\)
+(Lemma~\ref{hir:marked-ideal-operations}) and both have the same \(E\); a centre admissible for both is admissible for the product, since
+\(\operatorname{cosupp}(\mathfrak a,\mu)\cap\operatorname{cosupp}(\mathfrak b,\nu)\subset\operatorname{cosupp}(\mathfrak a\mathfrak b,\mu+\nu)\). At each step
+Lemma~\ref{hir:controlled-operations} identifies the transformed ideal; \(N\) stays \(M\), the \(E\) are transformed alike, the marks do not change, and
+coherence is preserved.
+\end{proof}

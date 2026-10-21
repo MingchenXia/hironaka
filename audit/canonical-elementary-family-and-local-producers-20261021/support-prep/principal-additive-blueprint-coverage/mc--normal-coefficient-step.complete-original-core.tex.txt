@@ -1,0 +1,19 @@
+\begin{lemma}[The coefficient invariant along multiple test blow-ups]
+\label{mc:normal-coefficient-step}
+\uses{mc:normal-coefficient-invariant,mc:nested-product-chart,mc:normal-derivative-monomial,mc:monomial-local-equation,mc:restrict-tower,mc:inclusions-tower,bcalc:strict-submanifold,bcalc:monomial-lift,bcalc:isomorphism-off-centre,bcalc:function-transform,hir:geo-transform-ambient,hir:bridge-consumers,hir:geo-transform-wellformed,ana:restricted-colon}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower}
+\leanok
+Along a multiple test blow-up of \(\underline{\mathcal I}\) with centres in the strict transforms of \(S\), every point of \(S_T\) is good.
+\end{lemma}
+\begin{proof}
+\leanok
+Induct on the tower; let \(\pi\) blow up \(C\subset S_T\) and \(z\in S_{T'}\). If \(\pi z\notin C\), \(\pi\) is a local biholomorphism near \(z\): pull back the chart and the
+generators. If \(\pi z\in C\), refine the chart at \(\pi z\) to a nested product-form chart (Lemma~\ref{mc:nested-product-chart}) and take the monomial chart \(W\) at
+\(z\) (Lemma~\ref{bcalc:strict-submanifold}): \(\sigma_j\circ W\) are the old coordinates, \(S_{T'}=W^{-1}(\mathbb C^k\times0)\), and \(W_j\) is a local equation of the
+exceptional divisor (Lemma~\ref{mc:monomial-local-equation}). The new chart is \(W-W(z)\); the new generators are \(h'\) with \(g\circ\pi=W_j^\mu h'\) (they generate the
+controlled transform after cancelling \(W_j^\mu\)). Lemma~\ref{mc:normal-derivative-monomial} gives
+\(W_j^\mu\,\partial^Lh'=W_j^{|L|}(\partial^Lg)\circ\pi\); on \(S_T\) the right side is \(W_j^{|L|}\sum a_i(s_i\circ\pi)\) with \(s_i\in[\mathcal D^{|L|}\mathfrak a]_T\subset\mathcal I_C^{\mu-|L|}\),
+so \(s_i\circ\pi=W_j^{\mu-|L|}s_i'\) with \(s_i'\in[\mathcal D^{|L|}\mathfrak a]_{T'}\); cancel \(W_j^\mu\) along \(S_{T'}\), where it vanishes on no relatively open set
+(\(S_{T'}\) is the closure of \(\pi^{-1}(S_T\setminus C)\)).
+\end{proof}

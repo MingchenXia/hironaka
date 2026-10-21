@@ -1,0 +1,111 @@
+\section{Genuine original smooth-basechange sections and entire HS neighborhoods}
+
+Smooth-basechange transport concerns neighborhoods in the ORIGINAL ambient
+manifolds, including an arbitrary actual carrier. Equality of profiles at
+two parameter points alone does not prove this neighborhood assertion.
+Construct a genuine local holomorphic section THROUGH the chosen source
+point, prove its original right-inverse equation, and only then transport
+actual open neighborhoods. This is the smooth-map part of the presentation
+comparison used in the setting of Lemma 13.7; it makes no assertion about
+infinitesimal or exceptional blowup stability.
+
+\begin{theorem}[Only the original submersion constructs an actual holomorphic section through the original point]
+\label{hir:original-submersion-actual-local-holomorphic-section}
+\uses{hir:actual-flat-open-linear-coordinate-biholomorphism,hir:submersion-adapted-actual-product-shrink}
+\source{bierstone-milman97-invent-math:page-0094}
+\lean{Hironaka.HironakaOriginalSubmersionHSNeighborhoods.exists_original_submersion_local_holomorphic_section}
+\leanok
+For an ORIGINAL map $f:Y^{n+r}\to X^n$ and a genuine holomorphic
+submersion condition at $y$, construct an ORIGINAL target open $D$ about
+$f(y)$ and an actual holomorphic map $\sigma:D\to Y$ satisfying
+$f\circ\sigma=\operatorname{id}_D$ and $\sigma(f(y))=y$. The target open,
+map, image membership, inverse equation and holomorphicity are all
+constructed internally. Neither a chosen local section nor a supplied
+coordinate/normal-form certificate is a premise. Zero dimensions are
+included.
+\end{theorem}
+\begin{proof}
+Normalize the genuine target chart internally at $f(y)$. Actual original
+submersion coordinates give true opens $R,S$ containing zero and a genuine
+source flattening whose target is the inverse fibre-first splitting image
+of $R\times S$; its target coordinate is exactly the normalized target
+coordinate of $f$. Restrict the target flattening to the ACTUAL open $S$.
+The true flat-domain inverse theorem gives actual source and target
+biholomorphisms on their genuine opens. For a point of the restricted
+original target open, take its actual normalized coordinate $v\in S$,
+form the true product point $(0,v)\in R\times S$, apply the inverse
+fibre-first splitting and then the ACTUAL source-coordinate inverse.
+This defines $\sigma$ on the genuine original target open. Each factor
+is holomorphic there, hence so is $\sigma$. The real adapted-coordinate
+identity says that $f(\sigma(x))$ has exactly the same target coordinate
+as $x$. Both points lie in the actual target flat-domain open, so its
+true inverse gives $f(\sigma(x))=x$. At the base point both normalized
+coordinates are zero; the actual source-coordinate inverse sends zero
+to the ORIGINAL point $y$. This proves the required section through $y$.
+\end{proof}
+
+\begin{theorem}[Every actual carrier and every function have BOTH original neighborhood directions under smooth basechange]
+\label{hir:original-submersion-actual-carrier-function-neighborhood-equivalence}
+\uses{hir:original-submersion-actual-local-holomorphic-section}
+\source{bierstone-milman97-invent-math:page-0094}
+\lean{Hironaka.HironakaOriginalSubmersionHSNeighborhoods.original_submersion_carrier_function_localConst_iff}
+\leanok
+For an ORIGINAL holomorphic map which is a genuine submersion at $y$,
+ANY actual subset $S\subset X$ and ANY function $g:X\to\Lambda$, $g$ is
+constant on $S$ in an ORIGINAL ambient neighborhood of $f(y)$ if and
+only if $g\circ f$ is constant on $f^{-1}(S)$ in an ORIGINAL ambient
+neighborhood of $y$, with the actual values at the indicated base points.
+No closedness, analyticity, regularity or local-constancy certificate for
+$S$ or $g$ is assumed.
+\end{theorem}
+\begin{proof}
+For the forward direction pull a genuine target open neighborhood back
+by the ORIGINAL continuous map $f$. This is an original source open
+neighborhood, and the literal preimage carrier gives the desired values.
+For the reverse direction construct the preceding actual section through
+$y$ before using the supplied source neighborhood. Its inverse image of
+that source open is open in its TRUE target-domain subtype and contains
+$f(y)$. The actual open inclusion of that domain maps this set to an
+ORIGINAL target open neighborhood. Every point of $S$ in this actual
+open lifts through the section to a source point in the supplied source
+open. The true right-inverse equation places the lift in $f^{-1}(S)$,
+and the source constancy together with the true base-point equation
+gives its original target value. This proves both directions in actual
+original ambient neighborhoods, without replacing the carrier by its
+parameterization or assuming an open-map theorem.
+\end{proof}
+
+\begin{theorem}[The ENTIRE existing original ambient HS neighborhood variation is exactly transported by genuine smooth basechange]
+\label{hir:original-submersion-entire-hs-actual-carrier-neighborhood-variation}
+\uses{hir:original-submersion-actual-carrier-function-neighborhood-equivalence,hir:original-smooth-submersion-entire-intrinsic-hs-profile-reflection}
+\source{bierstone-milman97-invent-math:page-0094}
+\lean{Hironaka.HironakaOriginalSubmersionHSNeighborhoods.actualEntireHSLocallyConstantAlong,Hironaka.HironakaOriginalSubmersionHSNeighborhoods.actualEntireHSNeighborhoodVariation,Hironaka.HironakaOriginalSubmersionHSNeighborhoods.original_submersion_entire_hs_carrier_localConst_iff,Hironaka.HironakaOriginalSubmersionHSNeighborhoods.original_submersion_entire_hs_neighborhood_variation_eq_preimage}
+\leanok
+For an ORIGINAL holomorphic submersion, an ORIGINAL coherent target ideal
+and ANY actual carrier $S$, local constancy of the ENTIRE EXISTING
+original ambient HS function along $S$ at $f(y)$ is equivalent in BOTH
+directions to local constancy of the ENTIRE EXISTING actual pullback HS
+function along $f^{-1}(S)$ at $y$. Consequently the literal HS-neighborhood
+variation locus for the pullback on the preimage carrier is EXACTLY the
+preimage of the original HS-neighborhood variation locus. All orders are
+retained simultaneously. This is the ORIGINAL ambient ideal and its
+actual pullback, not the HS of an ideal restricted to $S$.
+\end{theorem}
+\begin{proof}
+Apply the preceding ANY-function theorem to the true function which
+assigns to a target point its whole sequence of EXISTING original HS
+values. Function extensionality identifies equality of these actual
+values with equality at EVERY order. The independently proved actual
+smooth-product triangular reflection says, at every pair of source
+points, that equality of their ENTIRE pullback profiles is equivalent
+to equality of the ORIGINAL target profiles at their actual images.
+Use this BOTH-direction pointwise equivalence throughout the SAME actual
+source neighborhood. Thus constancy of the composed original profile
+is precisely constancy of the actual pullback profile, yielding the
+claimed neighborhood equivalence. Negating this equivalence pointwise
+gives BOTH membership directions in the literal variation-set equality.
+No analyticity of an arbitrary higher-dimensional variation locus,
+infinitesimal or blowup semicoherence, exceptional nonincrease, higher
+noncanonical original invariant comparison or complete scheduler is
+inferred.
+\end{proof}

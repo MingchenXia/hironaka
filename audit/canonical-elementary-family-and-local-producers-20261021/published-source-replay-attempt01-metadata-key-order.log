@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/sync_frozen_sources.py", line 136, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/sync_frozen_sources.py", line 124, in main
+    save('provenance.json',records);save('blueprint-provenance.json',bp_records);save('existing-blueprint-preservation.json',bp_existing)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/sync_frozen_sources.py", line 43, in save
+    if args.check:assert (A/path).read_bytes()==raw,path
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: provenance.json

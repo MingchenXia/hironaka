@@ -1,0 +1,11 @@
+/-- One admissible step keeps an ambient family ambient. -/
+theorem IsAmbientFamily.geoTransform (h : IsAmbientFamily 𝔪 m) (hπ : IsBlowupAlong n C π)
+    (hC : ∀ i < m, (𝔪 i).IsAdmissibleCentre C) :
+    IsAmbientFamily (fun i => (𝔪 i).geoTransform C π) m where
+  N i hi := geoTransform_N_eq_univ (h.N i hi) hπ
+  E i hi := by simp only [geoTransform_E, h.E i hi]
+  coh i hi := by
+    rw [geoTransform_ideal_eq_controlledTransform (h.N i hi) (h.coh i hi) hπ]
+    exact isCoherent_controlledTransform hπ (h.coh i hi)
+      (HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre (h.N i hi) (h.coh i hi) (hC i hi))
+  d i hi := h.d i hi

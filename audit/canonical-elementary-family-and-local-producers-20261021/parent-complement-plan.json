@@ -1,0 +1,161 @@
+{
+  "Hironaka/Resolution/HironakaSmoothCentreRealDomainSaturation.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "ca492f3e29e340043253e3d3089d901706a95cde7efa6b519ed269ff561d9974",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.RealDomainLocalCoherenceExact"
+    ],
+    "remove_complete_already_existing_declarations": [
+      {
+        "name": "idealFGAt_of_coherentOn",
+        "canonical_source": "/-- The genuine restricted local coherence condition supplies the actual Oka finite presentation. -/\ntheorem idealFGAt_of_coherentOn {n : \u2115} (I : GermIdeal n (ComplexModel n))\n    (W : Set (ComplexModel n)) (hI : CoherentOn I W) {y : ComplexModel n} (hy : y \u2208 W) :\n    IdealFGAt I.mem y := by\n  obtain \u27e8U, hU, hyU, _hUW, N, H, hH, hgen\u27e9 := hI y hy\n  refine \u27e8U, hU, hyU, Fin N, inferInstance, H,\n    fun i => mdifferentiableOn_iff_differentiableOn.mp (hH i), ?_\u27e9\n  intro z hz g\n  rw [hgen z hz g, CoherentIdealColon.isInSpanAt_range_iff]\n  constructor\n  \u00b7 rintro \u27e8hg, a, ha, he\u27e9\n    exact \u27e8hg.mono (fun _ h => h.differentiableAt), a,\n      fun i => (ha i).mono (fun _ h => h.differentiableAt), he\u27e9\n  \u00b7 rintro \u27e8hg, a, ha, he\u27e9\n    exact \u27e8hg.mono (fun _ h => h.mdifferentiableAt), a,\n      fun i => (ha i).mono (fun _ h => h.mdifferentiableAt), he\u27e9\n",
+        "sha256": "9bc53338f5004b978bec2f914140232471a7bfdaac6b531212847c03e9055fb5"
+      }
+    ],
+    "import_position": "before_original_imports",
+    "destination_sha256": "1244037fd5b9a3b605232286ccd4dfdefddd6c32421992396344d6130be3d6ba",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Resolution/HironakaSmoothCentreRealDomainInitialRelations.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "4c5fdd959390ba1282c39a6ee13a0f6307532138e9342e6c2c93048ed35533e8",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.RealDomainOriginDictionaryExact"
+    ],
+    "remove_complete_already_existing_declarations": [
+      {
+        "name": "mk_mem_originalOriginIdeal_iff_of_local",
+        "canonical_source": "/-- The literal WHOLE origin ideal has the actual representative dictionary from local generation alone. -/\ntheorem mk_mem_originalOriginIdeal_iff_of_local {n : \u2115} (I : GermIdeal n (ComplexModel n))\n    (hI : IdealFGAt I.mem 0) {f : ComplexModel n \u2192 \u2102} (hf : HolAt f 0) :\n    HolGerm.mk f hf \u2208 originalCoherentOriginIdeal I \u2194 I.mem 0 f := by\n  classical\n  obtain \u27e8U, hU, h0U, \u03bc, h\u03bc, S, hS, hgen\u27e9 := hI\n  let := h\u03bc\n  have hS0 : \u2200 i, HolAt (S i) 0 := fun i => holAt_of_differentiableOn hU (hS i) h0U\n  let K := Ideal.span (range fun i => HolGerm.mk (S i) (hS0 i))\n  have hdict (g : ComplexModel n \u2192 \u2102) (hg : HolAt g 0) : I.mem 0 g \u2194 HolGerm.mk g hg \u2208 K :=\n    (hgen 0 h0U g).trans (inSpanAt_zero_iff_mem_origin_span S hS0 hg)\n  have hK : originalCoherentOriginIdeal I = K := by\n    apply le_antisymm\n    \u00b7 apply Ideal.span_le.mpr\n      rintro g \u27e8a, ha, hIa, rfl\u27e9\n      exact (hdict a ha).mp hIa\n    \u00b7 apply Ideal.span_le.mpr\n      rintro g \u27e8i, rfl\u27e9\n      apply Ideal.subset_span\n      exact \u27e8S i, hS0 i, (hgen 0 h0U _).mpr (inSpanAt_self hS0 i), rfl\u27e9\n  rw [hK]\n  exact (hdict f hf).symm\n",
+        "sha256": "8b9d61dcc5d21c868d3393a89b17518449f89c62e67ee984baa0308a20d2cd5d"
+      }
+    ],
+    "import_position": "before_original_imports",
+    "destination_sha256": "caf94b2f4fd5ad0a9d933619168f47d7d38eee700a74bf4ec88889f316da0440",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Resolution/HironakaSmoothCentreRealDomainOriginalStalkFreeness.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "f023341efa86899b9b309c4d606c4c81c67abb925541ffadad33e81ba3012bc8",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.OriginalFixedFlatteningStalkDictionaryExact"
+    ],
+    "remove_complete_already_existing_declarations": [
+      {
+        "name": "whole_original_stalk_dictionary_at_actual_target",
+        "canonical_source": "/-- ANY fixed original flattening has the ENTIRE actual original stalk map/comap at EVERY real target point. -/\ntheorem whole_original_stalk_dictionary_at_actual_target\n    (A : GermIdeal n M) (hA : A.IsCoherent) (x : M)\n    (\u03a6 : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x))\n    (hsrc : \u03a6.source \u2286 (chartAt (ComplexModel n) x).target)\n    (a : ComplexModel n) (ha : a \u2208 \u03a6.target) :\n    let y := actualFlatteningInverseMap x \u03a6 a\n    let hy := actualNearbyPoint_mem_chart_source x \u03a6 hsrc a ha\n    let E := actualNearbyGermEquiv \u03a6 a ha\n    let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x \u03a6) a)\n    Ideal.map E.toRingEquiv.toRingHom Ia = wholeChartStalkIdeal A x y hy \u2227\n      Ia = Ideal.comap E.toRingEquiv.toRingHom (wholeChartStalkIdeal A x y hy) := by\n  classical\n  obtain \u27e8O,hO,_hyO,N,G,hG,hgen,U,hU,haU,_hUT,hMap,hH,hF\u27e9 :=\n    exists_local_original_pullback_generators A hA \u03a6.target \u03a6.isOpen_target\n      (actualFlatteningInverseMap_mdifferentiable x \u03a6 hsrc) a ha\n  let y := actualFlatteningInverseMap x \u03a6 a\n  let hy := actualNearbyPoint_mem_chart_source x \u03a6 hsrc a ha\n  let E := actualNearbyGermEquiv \u03a6 a ha\n  let Ia := originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x \u03a6) a)\n  have hhol : \u2200 i, HolAt ((G i \u2218 actualFlatteningInverseMap x \u03a6) \u2218 actualAffineTranslation n a) 0 :=\n    fun i => translated_function_holAt hU (hH i) haU\n  have hI := translated_origin_ideal_eq_span_of_real_generators\n    (actualFlattenedOriginalSheaf A x \u03a6) (fun i => G i \u2218 actualFlatteningInverseMap x \u03a6)\n      hU hH hF haU hhol\n  have hGy (i : Fin N) : HolomorphicAt n (G i) y :=\n    holomorphicAt_of_mdifferentiableOn hO (hG i) (hMap haU)\n  have hwhole := wholeChartStalkIdeal_eq_span_of_original_generators A x y hy G hGy (hgen y (hMap haU))\n  have hmap : Ideal.map E.toRingEquiv.toRingHom Ia = wholeChartStalkIdeal A x y hy := by\n    dsimp only [Ia]\n    rw [hI,Ideal.map_span,hwhole]\n    congr 1\n    ext g\n    constructor\n    \u00b7 rintro \u27e8_,\u27e8i,rfl\u27e9,rfl\u27e9\n      exact \u27e8i,(actualNearbyGermEquiv_original_function x \u03a6 hsrc a ha\n        (G i) (hGy i) (hhol i)).symm\u27e9\n    \u00b7 rintro \u27e8i,rfl\u27e9\n      exact \u27e8_,\u27e8i,rfl\u27e9,actualNearbyGermEquiv_original_function x \u03a6 hsrc a ha\n        (G i) (hGy i) (hhol i)\u27e9\n  refine \u27e8hmap,?_\u27e9\n  rw [\u2190 hmap,Ideal.comap_map_of_bijective E.toRingEquiv.toRingHom E.bijective]\n",
+        "sha256": "36fb8599641ae10c5e9c2c0c749b7d3a3a5a2073c4e4742e7487231e01fe3a60"
+      }
+    ],
+    "import_position": "before_original_imports",
+    "destination_sha256": "d356e5c19da58e2211cbf2677da0a05c97ce4a9b7a5c0555073b639f5953d928",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Resolution/HironakaOriginalGlobalPrincipalization.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "d4fb6858b6f8eaba757cb2d042b2fd6f249399f25b6623afae4510a5a306d932",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.OriginalInvertibleOpenCoverExact"
+    ],
+    "remove_complete_already_existing_declarations": [
+      {
+        "name": "isInvertible_of_open_cover",
+        "canonical_source": "/-- A coherent ideal is invertible if its actual restrictions to a covering family\nof open subsets are invertible. -/\ntheorem isInvertible_of_open_cover {\ud835\udd1e : GermIdeal n Y} (h\ud835\udd1e : \ud835\udd1e.IsCoherent)\n    (O : \u03b9 \u2192 Opens Y) (hcover : \u2200 y : Y, \u2203 i, y \u2208 O i)\n    (hinv : \u2200 i, (GermIdeal.pullback (m := n) (Subtype.val : O i \u2192 Y) \ud835\udd1e).IsInvertible) :\n    \ud835\udd1e.IsInvertible := by\n  intro y\n  obtain \u27e8i, hy\u27e9 := hcover y\n  obtain \u27e8U, hU, hyU, h, hh, hnon, hgen\u27e9 := hinv i \u27e8y, hy\u27e9\n  let H := extendOpens (O i) h\n  have hH : H \u2218 (Subtype.val : O i \u2192 Y) = h :=\n    funext fun q => extendOpens_val (O i) h q\n  refine \u27e8Subtype.val '' U, (O i).isOpen.isOpenMap_subtype_val U hU,\n    \u27e8\u27e8y, hy\u27e9, hyU, rfl\u27e9, H, ?_, ?_, ?_\u27e9\n  \u00b7 rintro z \u27e8q, hq, rfl\u27e9\n    have hq' : MDifferentiableAt \ud835\udcd8(\u2102, ComplexModel n) \ud835\udcd8(\u2102, \u2102)\n        (H \u2218 (Subtype.val : O i \u2192 Y)) q := by\n      rw [hH]\n      exact (hh q hq).mdifferentiableAt (hU.mem_nhds hq)\n    exact ((mdifferentiableAt_comp_val_iff (O i)).mp hq').mdifferentiableWithinAt\n  \u00b7 rintro W hW hWU \u27e8z, hz\u27e9\n    have hsub : (Subtype.val : O i \u2192 Y) \u207b\u00b9' W \u2286 U := by\n      intro q hq\n      obtain \u27e8q', hq', he\u27e9 := hWU hq\n      exact (Subtype.ext he : q' = q) \u25b8 hq'\n    have hne : ((Subtype.val : O i \u2192 Y) \u207b\u00b9' W).Nonempty := by\n      obtain \u27e8q, _, he\u27e9 := hWU hz\n      refine \u27e8q, ?_\u27e9\n      change q.val \u2208 W\n      rw [he]\n      exact hz\n    obtain \u27e8q, hq, hq0\u27e9 := hnon _ (hW.preimage continuous_subtype_val) hsub hne\n    exact \u27e8q.val, hq, by simpa only [H, extendOpens_val] using hq0\u27e9\n  \u00b7 rintro z \u27e8q, hq, rfl\u27e9 g\n    have hge : extendOpens (O i) (g \u2218 Subtype.val) =\u1da0[\ud835\udcdd q.val] g := by\n      filter_upwards [(O i).isOpen.mem_nhds q.property] with z hz\n      exact extendOpens_val (O i) (g \u2218 Subtype.val) \u27e8z, hz\u27e9\n    constructor\n    \u00b7 intro hg\n      have hlocal := (hgen q hq (g \u2218 Subtype.val)).mp\n        (MarkedIdealRestrictOpen.comp_val_mem_pullback_val (O i) h\ud835\udd1e hg)\n      have hspan : IsInSpanAt (n := n) (\u00b7 = H) q.val\n          (extendOpens (O i) (g \u2218 Subtype.val)) :=\n        (isInSpanAt_comp_val_iff (O i)).mp (hlocal.mono fun s hs => by\n          exact \u27e8H, rfl, hs.trans hH.symm\u27e9)\n      exact IsInSpanAt.congr' hspan hge\n    \u00b7 intro hg\n      have hlocal : IsInSpanAt (n := n) (\u00b7 = h) q (g \u2218 Subtype.val) :=\n        (isInSpanAt_comp contMDiff_subtype_val hg).mono fun s hs => by\n          obtain \u27e8s', rfl, rfl\u27e9 := hs\n          exact hH\n      have hmem := (MarkedIdealRestrictOpen.mem_pullback_val_iff (O i) h\ud835\udd1e).mp\n        ((hgen q hq (g \u2218 Subtype.val)).mpr hlocal)\n      exact HomogenizedIdeal.mem_congr h\ud835\udd1e hmem hge\n",
+        "sha256": "846ad0eb92973ccb32b5ced8087ea0fbaa762c97feb8fb8ac3943db8d3a8850b"
+      }
+    ],
+    "import_position": "before_original_imports",
+    "destination_sha256": "221c0964fc32d109ebbd35e0fb7851dcba7e5cae2cafb5fc4fe34bdbfa08b884",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/MarkedIdeal/MaximalContact.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "7b04e9de84663f8d7a8768325ec5a744a8002962dd973db918ac133f92f0a596",
+    "reuse_original_support_imports": [
+      "Hironaka.MarkedIdeal.MaximalOrderDefinition"
+    ],
+    "remove_complete_already_existing_declarations": [
+      {
+        "name": "iterDerivIdeal_iterDerivIdeal",
+        "canonical_source": "/-- `\ud835\udcd3^j(\ud835\udcd3^i \ud835\udd1e) = \ud835\udcd3^{i+j} \ud835\udd1e`. -/\ntheorem iterDerivIdeal_iterDerivIdeal (\ud835\udd1e : GermIdeal n M) (i : \u2115) :\n    \u2200 j, iterDerivIdeal (iterDerivIdeal \ud835\udd1e i) j = iterDerivIdeal \ud835\udd1e (i + j)\n  | 0 => rfl\n  | j + 1 => by\n    rw [iterDerivIdeal_succ, iterDerivIdeal_iterDerivIdeal \ud835\udd1e i j, \u2190 Nat.add_assoc,\n      iterDerivIdeal_succ]\n",
+        "sha256": "0400365972b2e4635e1259296f79a0eccfee95326b088c0f62254c1a0b213a3c"
+      },
+      {
+        "name": "IsMaximalOrder",
+        "canonical_source": "/-- **Maximal order** (Villamayor; W\u0142odarczyk \u00a72.7): `\ud835\udcd3^\u03bc(\ud835\udd1e) = \ud835\udcaa_M`. -/\ndef IsMaximalOrder (\ud835\udd1e : GermIdeal n M) (\u03bc : \u2115) : Prop :=\n  \u2200 x : M, (iterDerivIdeal \ud835\udd1e \u03bc).mem x (fun _ => 1)\n",
+        "sha256": "9e6a4bb89e8669afb1fd75d7543916dda2e9189984b09aeec252b12c92448db8"
+      },
+      {
+        "name": "IsMaximalOrder.iterDerivIdeal",
+        "canonical_source": "/-- **Derivatives of a marked ideal of maximal order** are of maximal order:\n`(\ud835\udcd3^i \ud835\udd1e, \u03bc - i)` for `i \u2264 \u03bc`. -/\ntheorem IsMaximalOrder.iterDerivIdeal {\ud835\udd1e : GermIdeal n M} {\u03bc : \u2115} (h : IsMaximalOrder \ud835\udd1e \u03bc)\n    {i : \u2115} (hi : i \u2264 \u03bc) : IsMaximalOrder (DerivativeIdeal.iterDerivIdeal \ud835\udd1e i) (\u03bc - i) := by\n  intro x\n  rw [iterDerivIdeal_iterDerivIdeal, Nat.add_sub_cancel' hi]\n  exact h x\n",
+        "sha256": "ef5ccbb33c51d66d9fcd7fb90119821d27d4529c4040b6aee6fc41f3790d34fb"
+      },
+      {
+        "name": "cosupport_add_subset_cosupport_iterDerivIdeal",
+        "canonical_source": "/-- **Giraud's inclusion, iterated** (`N = M`): `cosupp(\ud835\udd1e, \u03bc + j) \u2286 cosupp(\ud835\udcd3^j \ud835\udd1e, \u03bc)`. -/\ntheorem cosupport_add_subset_cosupport_iterDerivIdeal (\ud835\udd1e : GermIdeal n M) (\u03bc : \u2115) :\n    \u2200 j, cosupport n univ \ud835\udd1e (\u03bc + j) \u2286 cosupport n univ (iterDerivIdeal \ud835\udd1e j) \u03bc\n  | 0 => subset_rfl\n  | j + 1 => by\n    have h1 : cosupport n univ \ud835\udd1e (\u03bc + (j + 1)) \u2286 cosupport n univ (iterDerivIdeal \ud835\udd1e j) (\u03bc + 1) := by\n      rw [show \u03bc + (j + 1) = (\u03bc + 1) + j by omega]\n      exact cosupport_add_subset_cosupport_iterDerivIdeal \ud835\udd1e (\u03bc + 1) j\n    exact h1.trans (cosupport_succ_subset_cosupport_derivIdeal \u03bc)\n",
+        "sha256": "25267169c3055785b64d17e83c92d05efd97df8cff48f341c293fdd5f934e4ca"
+      }
+    ],
+    "import_position": "before_original_imports",
+    "destination_sha256": "186ddd664d6ffa7da02b122c2a5d2b804ead562ed690694bc11da60d9a349669",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Analytic/TowerPreimageCompact.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "7351596391f5182fd0a2bf28c16359f959b8caa701a84c0a3821980bdf807a31",
+    "reuse_original_support_imports": [
+      "Hironaka.Invariant.TowerRestrictionStep",
+      "Hironaka.Invariant.TowerCosupportCentreCounting"
+    ],
+    "remove_complete_already_existing_declarations": [
+      {
+        "name": "exists_restrict_step",
+        "canonical_source": "/-- **Restriction of a one-step extension**: the restriction to `U` of `T` followed by a blowup is the restriction of `T`\nfollowed by a blowup (along the trace of the centre); so restricted growing sequences are growing. -/\ntheorem exists_restrict_step (U : Opens X) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (\u03c0 : Z \u2192 Y)\n    (h\u03c0 : IsBlowupAlong n C \u03c0) :\n    \u2203 (\u03c0' : openPreimage (.step T C \u03c0 h\u03c0) U \u2192 openPreimage T U)\n      (h\u03c0' : IsBlowupAlong n ((Subtype.val : openPreimage T U \u2192 Y) \u207b\u00b9' C) \u03c0'),\n      restrict U (.step T C \u03c0 h\u03c0) = .step (restrict U T) ((Subtype.val : openPreimage T U \u2192 Y) \u207b\u00b9' C) \u03c0' h\u03c0' :=\n  \u27e8_, _, rfl\u27e9\n",
+        "sha256": "b0acc7e88640fd41ffa65eea9e3afc4dfcf683b01dabde0f08fc0a0173c005ee"
+      },
+      {
+        "name": "proj_mem_cosupp_append",
+        "canonical_source": "/-- **Along a multiple test blow-up `T S` the points of the cosupport lie over the cosupport at `T`** (closed submanifold `N`,\ncoherent ideal; one step at a time, `StepOneWellFounded.proj_mem_cosupp_step`). -/\ntheorem proj_mem_cosupp_append (hN : IsClosedSubmanifold n \ud835\udd2a.N) (h\ud835\udd1e : \ud835\udd2a.ideal.IsCoherent) {Y\u2080 : CMfd.{u} n}\n    (T : BlowupTower X Y\u2080) :\n    \u2200 {Y : CMfd.{u} n} (S : BlowupTower Y\u2080 Y), IsGeoTestTower \ud835\udd2a (T.append S) \u2192\n      \u2200 z \u2208 (geoTransformAlong \ud835\udd2a (T.append S)).cosupp, S.proj z \u2208 (geoTransformAlong \ud835\udd2a T).cosupp\n  | _, .refl, _, z, hz => hz\n  | _, .step S C \u03c0 h\u03c0, hT, z, hz => by\n      have hT' : IsGeoTestTower \ud835\udd2a (.step (T.append S) C \u03c0 h\u03c0) := hT\n      have h\u03c0z := StepOneWellFounded.proj_mem_cosupp_step hN h\ud835\udd1e (T.append S) C \u03c0 h\u03c0 hT' hz\n      exact proj_mem_cosupp_append hN h\ud835\udd1e T S hT'.1 (\u03c0 z) h\u03c0z\n\nopen Classical in",
+        "sha256": "8e6fe89d15696876a4183b076da56d2c2bbf380098f6ce9105842e1a97c0b06d"
+      },
+      {
+        "name": "countCentresMeeting_eq_inter_cosupp",
+        "canonical_source": "/-- **After the stage `T` the centres meeting `K` are counted against the compact part of the cosupport**: along a multiple\ntest blow-up `T S` (closed submanifold `N`, coherent ideal), a centre of `S` meets the preimage of `T\u207b\u00b9K` iff it meets the\npreimage of `T\u207b\u00b9K \u2229 cosupp \ud835\udd2a_T` (the centres are admissible, hence in the cosupport, which lies over the cosupport at `T`). -/\ntheorem countCentresMeeting_eq_inter_cosupp (hN : IsClosedSubmanifold n \ud835\udd2a.N) (h\ud835\udd1e : \ud835\udd2a.ideal.IsCoherent) (K : Set X)\n    {Y\u2080 : CMfd.{u} n} (T : BlowupTower X Y\u2080) :\n    \u2200 {Y : CMfd.{u} n} (S : BlowupTower Y\u2080 Y), IsGeoTestTower \ud835\udd2a (T.append S) \u2192\n      countCentresMeeting (T.proj \u207b\u00b9' K) S = countCentresMeeting (T.proj \u207b\u00b9' K \u2229 (geoTransformAlong \ud835\udd2a T).cosupp) S\n  | _, .refl, _ => rfl\n  | _, .step S C \u03c0 h\u03c0, hT => by\n      have hT' : IsGeoTestTower \ud835\udd2a (.step (T.append S) C \u03c0 h\u03c0) := hT\n      obtain \u27e8hTS, hC\u27e9 := (isGeoTestTower_step_iff \ud835\udd2a (T.append S) C \u03c0 h\u03c0).mp hT'\n      have ih := countCentresMeeting_eq_inter_cosupp hN h\ud835\udd1e K T S hTS\n      have hiff : (C \u2229 S.proj \u207b\u00b9' (T.proj \u207b\u00b9' K)).Nonempty \u2194\n          (C \u2229 S.proj \u207b\u00b9' (T.proj \u207b\u00b9' K \u2229 (geoTransformAlong \ud835\udd2a T).cosupp)).Nonempty := by\n        constructor\n        \u00b7 rintro \u27e8c, hcC, hcK\u27e9\n          exact \u27e8c, hcC, hcK, proj_mem_cosupp_append hN h\ud835\udd1e T S hTS c (hC.2.1 hcC)\u27e9\n        \u00b7 rintro \u27e8c, hcC, hcK, -\u27e9\n          exact \u27e8c, hcC, hcK\u27e9\n      show countCentresMeeting (T.proj \u207b\u00b9' K) S + (if (C \u2229 S.proj \u207b\u00b9' (T.proj \u207b\u00b9' K)).Nonempty then 1 else 0) =\n        countCentresMeeting (T.proj \u207b\u00b9' K \u2229 (geoTransformAlong \ud835\udd2a T).cosupp) S +\n          (if (C \u2229 S.proj \u207b\u00b9' (T.proj \u207b\u00b9' K \u2229 (geoTransformAlong \ud835\udd2a T).cosupp)).Nonempty then 1 else 0)\n      rw [ih]\n      by_cases h1 : (C \u2229 S.proj \u207b\u00b9' (T.proj \u207b\u00b9' K)).Nonempty\n      \u00b7 rw [if_pos h1, if_pos (hiff.mp h1)]\n      \u00b7 rw [if_neg h1, if_neg (fun h2 => h1 (hiff.mpr h2))]\n",
+        "sha256": "ff6313a6292e95e4757d2145b7fe20b8d8d7f1e579af8f8313ffd17db98e7a50"
+      }
+    ],
+    "import_position": "before_original_imports",
+    "destination_sha256": "02689177a11632be21c6497a050e2e822e5c820c8b4cc081960c8f69007bac50",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Resolution/HironakaActualFormalStandardMonomialHS.lean": {
+    "kind": "pure_existing_support_imports",
+    "initial_whole_copy_sha256": "b578bca4800ee14d06b507e292e0f2a9a76e75e219bdc9b9f51a51a13590571a",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.ActualDegreeLexBoundExact",
+      "Hironaka.Support.FormalStandardMonomialHSComplementExact"
+    ],
+    "destination_sha256": "5804776cf7ebf511f0953969c8bad728ee67280c22eade260774d4ec6eb742ff",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Resolution/HironakaActualTranslatedInitialHS.lean": {
+    "kind": "pure_existing_support_imports",
+    "initial_whole_copy_sha256": "d214c8587328cb2b234bdc2df1cf29681b7cb6409b13fa7cfc9448111ed5cd9c",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.TranslatedInitialHSOriginalExact"
+    ],
+    "destination_sha256": "4e847ff16724d647b608232a87d91fac38921fb63fe1c7963d8d36b855938252",
+    "proof_type_tokens_changed": 0
+  },
+  "Hironaka/Resolution/HironakaSmoothCentreRealDomainActualAmbientHS.lean": {
+    "kind": "complete_missing_original_complement",
+    "initial_whole_copy_sha256": "72066d67929e8e653f2cdb525d6fe3f302cb70c40b583e678f159dd69f0155d6",
+    "reuse_original_support_imports": [
+      "Hironaka.Support.GenuineAmbientJetAlgEquivExact",
+      "Hironaka.Support.OriginalFixedRealAmbientHSDictionaryExact"
+    ],
+    "destination_sha256": "e97b7f1a337fd4ce4810dfe0d354a3a65e70fa8aa22e8085e18876f17cec96bd",
+    "proof_type_tokens_changed": 0,
+    "remove_existing_original_context_and_declarations": "section GenuineLocalAlgebras\nvariable {R S : Type*} [CommRing R] [CommRing S] [Algebra \u2102 R] [Algebra \u2102 S]\n  [IsLocalRing R] [IsLocalRing S]\n\n/-- The genuine original local algebra map retains ALL actual ambient maximal-power quotient classes. -/\ndef actualLocalAmbientJetAlgEquiv (E : R \u2243\u2090[\u2102] S) (I : Ideal R) (s : \u2115) :\n    (R \u29f8 (I \u2294 IsLocalRing.maximalIdeal R ^ s)) \u2243\u2090[\u2102]\n      (S \u29f8 (Ideal.map E.toRingEquiv.toRingHom I \u2294 IsLocalRing.maximalIdeal S ^ s)) :=\n  Ideal.quotientEquivAlg _ _ E (by\n    rw [Ideal.map_sup,Ideal.map_pow,\n      IsLocalRing.map_maximalIdeal_of_surjective (E : R \u2192+* S) E.surjective]\n    rfl)\n\n/-- EVERY original ambient numerator keeps its SAME actual whole algebra image. -/\ntheorem actualLocalAmbientJetAlgEquiv_mk (E : R \u2243\u2090[\u2102] S) (I : Ideal R) (s : \u2115) (g : R) :\n    actualLocalAmbientJetAlgEquiv E I s\n      (Ideal.Quotient.mk (I \u2294 IsLocalRing.maximalIdeal R ^ s) g) =\n        Ideal.Quotient.mk\n          (Ideal.map E.toRingEquiv.toRingHom I \u2294 IsLocalRing.maximalIdeal S ^ s) (E g) := rfl\n\nend GenuineLocalAlgebras\n\n/-- The EXISTING original ambient HS is invariant under every genuine original complex germ algebra equivalence. -/\ntheorem actualAmbientHS_eq_of_genuineAlgEquiv {n : \u2115}\n    (E : HolGerm (ComplexModel n) \u2243\u2090[\u2102] HolGerm (ComplexModel n))\n    (I : Ideal (HolGerm (ComplexModel n))) (\u2113 : \u2115) :\n    hilbertSamuelValue (Ideal.map E.toRingEquiv.toRingHom I) \u2113 = hilbertSamuelValue I \u2113 :=\n  (actualLocalAmbientJetAlgEquiv E I (\u2113+1)).toLinearEquiv.finrank_eq.symm\n\nsection Manifold\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M]\n  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n\n/-- ANY fixed actual nonlinear flattening retains the SAME WHOLE original chart-stalk ambient HS at EVERY true target point. -/\ntheorem fixed_real_original_whole_stalk_ambient_hs_dictionary\n    (A : GermIdeal n M) (hA : A.IsCoherent) (x : M)\n    (\u03a6 : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x))\n    (hsrc : \u03a6.source \u2286 (chartAt (ComplexModel n) x).target)\n    (a : ComplexModel n) (ha : a \u2208 \u03a6.target) (\u2113 : \u2115) :\n    let y := actualFlatteningInverseMap x \u03a6 a\n    let hy := actualNearbyPoint_mem_chart_source x \u03a6 hsrc a ha\n    hilbertSamuelValue (wholeChartStalkIdeal A x y hy) \u2113 =\n      hilbertSamuelValue\n        (originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x \u03a6) a)) \u2113 := by\n  dsimp only\n  have hmap := (whole_original_stalk_dictionary_at_actual_target A hA x \u03a6 hsrc a ha).1\n  rw [\u2190 hmap]\n  exact actualAmbientHS_eq_of_genuineAlgEquiv (actualNearbyGermEquiv \u03a6 a ha) _ \u2113\n\nend Manifold\n\n",
+    "import_position": "after_original_imports"
+  }
+}

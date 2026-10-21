@@ -1,0 +1,92 @@
+\chapter{Actual higher-dimensional dynamic prefixes with the full ambient boundary}
+
+Fix a positive ambient dimension, a compact smooth carrier $W$ of pure
+positive dimension $d+1$, an ordered SNC divisor $E$, and
+$W\subset\overline{W\setminus\bigcup E}$.  The original positive marked
+input is the product of the original member ideals on $W$, with mark one
+and empty auxiliary boundary.  At every actual prefix $T$, let $N_T$ and
+$B_T$ be its actual strict carrier and entire born boundary, let $J_{i,T}$
+be the independently saturated chronological member ideals, and let
+$Z_T$ be the literal defect where their product order exceeds the number
+of distinct proper ideal germs.  The value used below is the full
+canonical invariant of their actual current product record.
+
+\begin{definition}[Actual full-maximum choice history]
+\label{hir:sharp-actual-dynamic-full-maximum-history}
+\uses{hir:sharp-original-actual-dynamic-distinct-max-centre}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualDynamicIncidentHistory.DynamicMaximumHistory}
+\leanok
+A finite actual blowup history is a dynamic full-maximum history if each
+of its prefixes has the same property and its last centre is the whole
+full-invariant maximum on $Z_T$ when that locus is nonempty, whereas it
+is empty when $Z_T$ is empty.  This definition records actual centre
+choices; it imposes no factor identity, ambient boundary compatibility,
+decrease, or termination requirement.
+\end{definition}
+
+\begin{theorem}[Original geometry internally produces every finite compatible dynamic prefix]
+\label{hir:sharp-actual-original-dynamic-full-boundary-prefix}
+\uses{hir:sharp-actual-dynamic-full-maximum-history,hir:sharp-actual-full-maximum-original-member-orders,hir:sharp-actual-incident-centre-all-exceptional-residual,hir:sharp-actual-factor-forces-trace-incidence,hir:sharp-local-incident-containment-actual-centre-normal-crossings,hir:sharp-actual-dynamic-first-defect-original-admissible-centre,hir:nonmonomial-transform}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualDynamicIncidentHistory.exists_original_dynamic_incident_prefix}
+\leanok
+For every natural number $k$, the stated original data internally produce
+an actual $k$-step dynamic full-maximum history $T$.  It is a genuine test
+history of the same original marked product and also of the whole ambient
+record with carrier $X$ and original boundary $E$.  Consequently its full
+ordered original-strict-plus-born divisor is SNC.  For every original
+position $i$, put $H_{i,T}=\operatorname{Strict}_T(E_i)$ and
+$I_{i,T}=\operatorname{Res}_{N_T}\mathcal I_{H_{i,T}}$.
+Then $H_{i,T}$ is smooth, $I_{i,T}$ is coherent and nonzero along $N_T$,
+and $N_T\subset\overline{N_T\setminus H_{i,T}}$.  As whole germ ideals,
+\[
+ \mathcal N_{N_T}(I_{i,T},B_T)=J_{i,T},\qquad
+ I_{i,T}=\operatorname{Res}_{N_T}\bigl(D_{i,T}J_{i,T}\bigr),\quad
+ D_{i,T}=\mathcal M_{N_T}(I_{i,T},B_T).
+\]
+No compatible history, centre-incidence profile, or desired ideal equality
+is a hypothesis.
+\end{theorem}
+\begin{proof}
+At the identity prefix, the original singleton SNC members give all trace
+geometry and their residuals are exactly the original relative ideals.
+Suppose an actual prefix has been constructed.  If $Z_T$ is empty, append
+an actual blowup along the empty centre.  Its centre conditions
+are vacuous, and all the continuation arguments below apply unchanged.
+Otherwise compactness of the true current carrier gives an attained
+maximum of the full invariant on the analytic $Z_T$.  The actual maximum
+centre theorem supplies a smooth admissible centre, constancy of every
+chronological member order and proper-position set, and constancy of
+every born-boundary incidence there.  The original controlled-product
+comparison makes this same centre admissible for the unchanged original
+positive marked input.
+
+Fix a centre point.  The induction hypothesis and the genuine
+monomial/nonmonomial factor theorem identify each whole ambient trace
+with its greatest born-monomial factor times its chronological member.
+Born incidence constancy and local constancy of the actual divisor
+exponents fix whether that monomial factor is a unit.  Constancy of the
+proper-position set fixes whether its chronological member is a unit.
+The zero locus of a coherent product is the union of its zero loci, so
+both facts together fix incidence with every original strict member.
+Thus, locally, the centre is contained in each member of the entire
+original-strict-plus-born divisor which it meets.  The genuine common
+coordinate insertion theorem makes it a normal-crossings centre for
+that entire SNC divisor.  Its actual blowup therefore appends a test
+step for the full ambient boundary record.
+
+For each original position, the higher-dimensional incident-centre
+continuation theorem compares the next true ambient trace and next raw
+pullback after removal of the entire old-plus-new born divisor.  Genuine
+total-transform transport of old monomial factors and the induction
+hypothesis replace the old residual by the same chronological member.
+The independent all-power strict recursion identifies its new residual
+with the next chronological member.  Hence the whole trace dictionary
+holds at the next prefix.  The incident-centre theorem independently
+supplies its smoothness, coherence, nonzero witnesses and density.
+Induction constructs the required actual history at every finite length.
+The final greatest-factor theorem supplies the stated whole factorization.
+This construction proves continuation and full ambient SNC preservation;
+it does not assert that the dynamic defect becomes empty, that the
+original good locus has already been preserved, or that a sharp invariant
+strictly decreases.
+\end{proof}

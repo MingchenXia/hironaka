@@ -1,0 +1,45 @@
+\section{Extending a blowup with compact centre from an open set}
+
+\begin{lemma}[Compact open centres are ambient centres]
+\label{hir:compact-open-centre-ambient}
+\uses{ana:submanifold-complex-structure,ana:geometric-setting}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaCompactOpenBlowupExtension.isClosedSubmanifold_image_val,Hironaka.HironakaCompactOpenBlowupExtension.interior_image_val_eq_empty}
+\leanok
+Let $X$ be a complex manifold, $U\subset X$ open, and $C\subset U$ a compact closed complex submanifold. Its image $\overline C$ under the inclusion $\iota:U\hookrightarrow X$ is a closed complex submanifold of $X$. If $C$ has empty interior in $U$, then $\overline C$ has empty interior in $X$.
+\end{lemma}
+\begin{proof}
+The continuous image of $C$ is compact and hence closed in the Hausdorff manifold $X$. At a point $\iota(c)$ of its image, the inclusion identifies an open neighbourhood with an open subset of $U$. A coordinate chart exhibiting $C$ as a complex coordinate subspace therefore exhibits $\overline C$ as the same coordinate subspace, with the same dimension. This proves the submanifold assertion, allowing different dimensions on different connected components. If $x$ belonged to the interior of $\overline C$, write $x=\iota(c)$. The inverse image under $\iota$ of this interior would be an open neighbourhood of $c$ contained in $C$, contradicting the assumed empty interior.
+\end{proof}
+
+\begin{theorem}[A prescribed open blowup has an ambient extension]
+\label{hir:compact-open-blowup-extension}
+\uses{hir:compact-open-centre-ambient,ana:blowups,bcalc:restrict-open}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaCompactOpenBlowupExtension.exists_extension}
+\leanok
+Let $U\subset X$ be open in a complex manifold, $C\subset U$ compact, and $\pi:Y\to U$ an actual blowup along $C$. There exist an actual blowup $\overline\pi:\overline Y\to X$ along $\iota(C)$ and a biholomorphism
+\[
+ \chi:Y\longrightarrow\overline\pi^{-1}(U)
+ \quad\text{such that}\quad
+ \overline\pi\circ\chi=\iota\circ\pi.
+\]
+The centre is the entire image of the prescribed centre, and the comparison realizes the prescribed blowup.
+\end{theorem}
+\begin{proof}
+The hypotheses on the prescribed blowup imply that $C$ is a closed complex submanifold with empty interior. Lemma~\ref{hir:compact-open-centre-ambient} gives these same properties for $\iota(C)$ in $X$, so its ambient blowup exists. Its restriction over $U$ is a blowup of $U$ along $\iota^{-1}\iota(C)=C$. The two blowups over $U$ therefore have unique holomorphic comparison maps in both directions by the universal property. Each composite commutes with the projection of its blowup. Uniqueness in that same universal property identifies each composite with the identity. These maps form $\chi$ and its holomorphic inverse, and their defining factorization equality gives the displayed equation.
+\end{proof}
+
+\begin{lemma}[Admissibility of a compact open centre is global]
+\label{hir:compact-open-centre-admissible}
+\uses{hir:compact-open-centre-ambient,hir:open-restriction-marked,hir:marked-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaCompactOpenBlowupExtension.isAdmissibleCentre_image_val}
+\leanok
+Let $M=(X,N,E,\mathfrak a,d)$ have coherent ideal and let $U\subset X$ be open. If a compact $C\subset U$ is an admissible centre for the actual restricted marked ideal $M|_U$, its entire image is an admissible centre for $M$.
+\end{lemma}
+\begin{proof}
+The image is a closed complex submanifold by Lemma~\ref{hir:compact-open-centre-ambient}. The exact restriction identity for cosupport gives
+$\iota(C)\subset\iota(\operatorname{cosupp}(M|_U))\subset\operatorname{cosupp}(M)$.
+Fix a point $x=\iota(c)$ of this centre. Admissibility in $U$ supplies a simultaneous holomorphic coordinate chart in which $C$ is a coordinate subspace and every ordered boundary member through $c$ is a coordinate hyperplane. Since $U$ is open, the same chart, restricted if necessary inside $U$, is an ambient chart at $x$. The equations for $C$ become the equations for its image, and those for every restricted boundary member become the equations for the same original boundary member near $x$. Hence the full centre has normal crossings with the whole ordered boundary $E$. These pointwise charts establish global admissibility.
+\end{proof}
