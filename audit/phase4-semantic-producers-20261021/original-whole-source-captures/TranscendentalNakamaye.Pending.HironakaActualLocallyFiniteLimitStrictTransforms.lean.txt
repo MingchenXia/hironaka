@@ -1,0 +1,269 @@
+import TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryFactors
+import TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory
+import TranscendentalNakamaye.Pending.HironakaBaseChange
+
+/-!
+# Genuine centre-relative strict transforms on an actual locally finite limit
+
+The infinite intersection is proved locally equal to ONE actual finite prefix.
+No limit subset, transition map, stagewise dictionary or history certificate is
+assumed. Ordinary exceptional-locus strict transforms are not identified with
+these centre-relative transforms. Blueprint:
+`hironaka-actual-locally-finite-limit-strict-transforms-extension.tex`.
+-/
+set_option autoImplicit false
+open Set Filter TopologicalSpace Classical Function
+open scoped Topology Manifold ContDiff
+universe u
+namespace TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteLimitStrictTransforms
+noncomputable section
+open FirstPass FirstPass.BlowupSequences BlowupTowers BlowupTowerTransforms
+  ResolutionInvariantSeq BlowupTowerIsoTail BlowupRestrictOpen HomogenizedGlueingTower MemberInterTowerAlong MemberInterLocusAlong
+  HironakaLocallyFiniteResolutionSequence HironakaActualLocallyFiniteHistoryComparison
+  HironakaActualLocallyFiniteHistoryOverlap HironakaActualLocallyFiniteHistoryLimit
+  HironakaActualLocallyFiniteHistoryFactors HironakaActualTowerLiftUniqueness
+variable {n : ℕ} {X : CMfd.{u} n}
+attribute [local instance] limitChartedSpace
+
+/-- The actual inverse image open in the genuine constructed limit. -/
+def limitWindow (s : GrowingSeq X) (hLF : LocallyFinite (centreImage s)) (U : Opens X) :
+    Opens (limitManifold s hLF) :=
+  ⟨gluedProjection s hLF ⁻¹' (U : Set X), U.isOpen.preimage (gluedProjection s hLF).continuous⟩
+
+/-- The stable-index factor is the actual identity on the WHOLE endpoint. -/
+theorem stableFactor_local (s : GrowingSeq X) (hLF : LocallyFinite (centreImage s))
+    (x : X) (z : localEndpoint s hLF x) :
+    stageFactor s hLF (stableIndex s hLF x) (actualHistoryLocalInclusion s hLF x z)=z.val := by
+  rw [stageFactor_local]
+  let N := stableIndex s hLF x
+  let U := stableWindow s hLF x
+  let f : localEndpoint s hLF x → localEndpoint s hLF x := fun q =>
+    ⟨localFactor s hLF N x q, by
+      change (s.stage N).2.proj (localFactor s hLF N x q)∈U
+      rw [localFactor_projection]
+      exact q.property⟩
+  have hf : ContMDiff 𝓘(ℂ,ComplexModel n) 𝓘(ℂ,ComplexModel n) ∞ f :=
+    contMDiff_opens_mk (localFactor_contMDiff s hLF N x) _
+  have he := actual_lift_unique (restrict U (s.stage N).2) .refl f hf (fun q => by
+    rw [BlowupTower.append_refl]
+    apply Subtype.ext
+    rw [proj_restrict,proj_restrict]
+    exact localFactor_projection s hLF N x q)
+  exact congrArg Subtype.val (congrFun he z)
+
+/-- The same actual factor, not a supplied inverse, gives the limit-window biholomorphism. -/
+def stableWindowDiffeomorph (s : GrowingSeq X) (hLF : LocallyFinite (centreImage s)) (x : X) :
+    localEndpoint s hLF x ≃ₘ⟮𝓘(ℂ,ComplexModel n),𝓘(ℂ,ComplexModel n)⟯
+      CMfd.of (n := n) (limitWindow s hLF (stableWindow s hLF x)) := by
+  let U := limitWindow s hLF (stableWindow s hLF x)
+  have hforward (q : localEndpoint s hLF x) : actualHistoryLocalInclusion s hLF x q∈U := by
+    change gluedProjection s hLF (actualHistoryLocalInclusion s hLF x q)∈stableWindow s hLF x
+    rw [gluedProjection_local]
+    exact q.property
+  have hbackward (z : U) : stageFactor s hLF (stableIndex s hLF x) z.val∈
+      openPreimage (s.stage (stableIndex s hLF x)).2 (stableWindow s hLF x) := by
+    change (s.stage (stableIndex s hLF x)).2.proj
+      (stageFactor s hLF (stableIndex s hLF x) z.val)∈stableWindow s hLF x
+    rw [stageFactor_projection]
+    exact z.property
+  let f : localEndpoint s hLF x → U := fun q => ⟨actualHistoryLocalInclusion s hLF x q,hforward q⟩
+  let g : U → localEndpoint s hLF x := fun z =>
+    ⟨stageFactor s hLF (stableIndex s hLF x) z.val,hbackward z⟩
+  refine {
+    toFun := f
+    invFun := g
+    left_inv := ?_
+    right_inv := ?_
+    contMDiff_toFun := ?_
+    contMDiff_invFun := ?_
+  }
+  · intro q
+    exact Subtype.ext (stableFactor_local s hLF x q)
+  · intro z
+    apply Subtype.ext
+    have hr : z.val∈range (actualHistoryLocalInclusion s hLF x) := by
+      rw [localInclusion_range]
+      exact z.property
+    obtain ⟨q,hq⟩ := hr
+    have hfactor : stageFactor s hLF (stableIndex s hLF x) z.val=q.val :=
+      (congrArg (stageFactor s hLF (stableIndex s hLF x)) hq).symm.trans
+        (stableFactor_local s hLF x q)
+    exact (congrArg (actualHistoryLocalInclusion s hLF x) (Subtype.ext hfactor)).trans hq
+  · exact contMDiff_opens_mk (localInclusion_contMDiff s hLF x) hforward
+  · exact contMDiff_opens_mk
+      ((stageFactor_contMDiff s hLF (stableIndex s hLF x)).comp contMDiff_subtype_val) hbackward
+
+/-- Every actual endpoint inclusion is genuinely open holomorphic. -/
+theorem isOpenHoloEmbedding_localInclusion (s : GrowingSeq X)
+    (hLF : LocallyFinite (centreImage s)) (x : X) :
+    HironakaBaseChange.IsOpenHoloEmbedding n
+      (actualHistoryLocalInclusion s hLF x : localEndpoint s hLF x → limitManifold s hLF) :=
+  ⟨limitWindow s hLF (stableWindow s hLF x),stableWindowDiffeomorph s hLF x,fun _ => rfl⟩
+
+/-- The actual subset is independently defined by EVERY recorded finite stage. -/
+def limitStrictTransform (s : GrowingSeq X) (hLF : LocallyFinite (centreImage s)) (B : Set X) :
+    Set (limitManifold s hLF) :=
+  ⋂ j : ℕ, stageFactor s hLF j ⁻¹' strictAlong (s.stage j).2 B
+
+/-- No finiteness of the original set or of the whole history is needed. -/
+theorem isClosed_limitStrictTransform (s : GrowingSeq X)
+    (hLF : LocallyFinite (centreImage s)) {B : Set X} (hB : IsClosed B) :
+    IsClosed (limitStrictTransform s hLF B) :=
+  isClosed_iInter fun j => (isClosed_strictAlong (s.stage j).2 hB).preimage
+    (stageFactor_contMDiff s hLF j).continuous
+
+/-- The same actual sequence preserves all original chain inclusions. -/
+theorem limitStrictTransform_mono (s : GrowingSeq X)
+    (hLF : LocallyFinite (centreImage s)) {A B : Set X} (hAB : A⊆B) :
+    limitStrictTransform s hLF A⊆limitStrictTransform s hLF B := by
+  intro z hz
+  exact mem_iInter.mpr fun j => strictAlong_mono (s.stage j).2 hAB (mem_iInter.mp hz j)
+
+private theorem mem_strictAlong_stage_of_empty_tail (s : GrowingSeq X)
+    (N r : ℕ) (U : Opens X) {B : Set X} (hB : IsClosed B)
+    (hEmpty : ResolutionInvariantExt.IsEmptyTower
+      (restrict (openPreimage (s.stage N).2 U) (tailTower s N r)))
+    (z : (s.stage (N+r)).1)
+    (hz : (tailTower s N r).proj z∈openPreimage (s.stage N).2 U) :
+    z∈strictAlong (s.stage (N+r)).2 B ↔
+      (tailTower s N r).proj z∈strictAlong (s.stage N).2 B := by
+  let W := openPreimage (s.stage N).2 U
+  let A := strictAlong (s.stage N).2 B
+  let q : openPreimage (tailTower s N r) W := ⟨z,hz⟩
+  have hA : IsClosed A := isClosed_strictAlong (s.stage N).2 hB
+  have he := ContactEmptyPrefix.strictAlong_of_isEmptyTower
+    (hA.preimage continuous_subtype_val) (restrict W (tailTower s N r)) hEmpty
+  rw [strictAlong_restrict] at he
+  have hi := Set.ext_iff.mp he q
+  change z∈strictAlong (tailTower s N r) A ↔
+    ((restrict W (tailTower s N r)).proj q).val∈A at hi
+  rw [proj_restrict] at hi
+  change z∈strictAlong (tailTower s N r) (strictAlong (s.stage N).2 B) ↔
+    (tailTower s N r).proj z∈strictAlong (s.stage N).2 B at hi
+  rw [←strictAlong_append,append_tailTower] at hi
+  exact hi
+
+/-- The infinite, independently defined centre-relative strict set equals ONE true prefix locally. -/
+theorem localInclusion_preimage_limitStrictTransform (s : GrowingSeq X)
+    (hLF : LocallyFinite (centreImage s)) {B : Set X} (hB : IsClosed B) (x : X) :
+    (actualHistoryLocalInclusion s hLF x) ⁻¹' limitStrictTransform s hLF B=
+      (Subtype.val : localEndpoint s hLF x → (s.stage (stableIndex s hLF x)).1) ⁻¹'
+        strictAlong (s.stage (stableIndex s hLF x)).2 B := by
+  ext q
+  constructor
+  · intro hq
+    have hh := mem_iInter.mp hq (stableIndex s hLF x)
+    change stageFactor s hLF (stableIndex s hLF x) (actualHistoryLocalInclusion s hLF x q)∈
+      strictAlong (s.stage (stableIndex s hLF x)).2 B at hh
+    rwa [stableFactor_local] at hh
+  · intro hq
+    apply mem_iInter.mpr
+    intro k
+    let N := stableIndex s hLF x
+    let U := stableWindow s hLF x
+    let z := actualHistoryLocalInclusion s hLF x q
+    have hEmpty : ResolutionInvariantExt.IsEmptyTower
+        (restrict (openPreimage (s.stage N).2 U) (tailTower s N k)) :=
+      (RestrictEmptyTower.isEmptyTower_restrict_iff _ _).mpr
+        (centresAvoid_tailTower s N U (stableWindow_avoids s hLF x) k)
+    have hTailN : (tailTower s N k).proj (stageFactor s hLF (N+k) z)=q.val := by
+      have hh := congrFun (stageFactor_tail s hLF N k) z
+      change (tailTower s N k).proj (stageFactor s hLF (N+k) z)=stageFactor s hLF N z at hh
+      exact hh.trans (stableFactor_local s hLF x q)
+    have hJ : stageFactor s hLF (N+k) z∈strictAlong (s.stage (N+k)).2 B :=
+      (mem_strictAlong_stage_of_empty_tail s N k U hB hEmpty
+        (stageFactor s hLF (N+k) z) (by rw [hTailN];exact q.property)).mpr (by
+          rw [hTailN]
+          exact hq)
+    have hJ' : stageFactor s hLF (k+N) z∈strictAlong (s.stage (k+N)).2 B := by
+      have hh := hJ
+      rw [Nat.add_comm N k] at hh
+      exact hh
+    have hDown : (tailTower s k N).proj (stageFactor s hLF (k+N) z)∈strictAlong (s.stage k).2 B := by
+      apply strictAlong_subset_preimage (tailTower s k N) (isClosed_strictAlong (s.stage k).2 hB)
+      rw [←strictAlong_append,append_tailTower]
+      exact hJ'
+    have hf := congrFun (stageFactor_tail s hLF k N) z
+    change (tailTower s k N).proj (stageFactor s hLF (k+N) z)=stageFactor s hLF k z at hf
+    rwa [hf] at hDown
+
+
+/-- Genuine centre-relative finite strict transforms are analytic at EVERY actual prefix. -/
+theorem isComplexAnalyticSubset_strictAlong {B : Set X}
+    (hB : IsComplexAnalyticSubset (n := n) B) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+      IsComplexAnalyticSubset (n := n) (strictAlong T B) := by
+  intro Y T
+  induction T with
+  | refl => exact hB
+  | @step Y Z T C π hπ ih =>
+    change IsComplexAnalyticSubset (n := n) (closure (π ⁻¹' (strictAlong T B\C)))
+    rw [preimage_sdiff]
+    exact ClosureDifferenceAnalytic.isComplexAnalyticSubset_closure_diff
+      (AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage hπ.contMDiff ih)
+      (AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage hπ.contMDiff
+        (AnalyticSubsetPreimage.isComplexAnalyticSubset_of_isClosedSubmanifold hπ.1))
+
+/-- Analyticity is proved for the independently defined ENTIRE intersection on the actual limit. -/
+theorem isComplexAnalyticSubset_limitStrictTransform (s : GrowingSeq X)
+    (hLF : LocallyFinite (centreImage s)) {B : Set X}
+    (hB : IsComplexAnalyticSubset (n := n) B) :
+    IsComplexAnalyticSubset (n := n) (limitStrictTransform s hLF B) := by
+  apply AnalyticSubsetOpens.isComplexAnalyticSubset_of_forall_opens
+  intro z
+  obtain ⟨x,q,rfl⟩ := actualHistoryLocalInclusion_jointly_surjective s hLF z
+  let U := limitWindow s hLF (stableWindow s hLF x)
+  let e := stableWindowDiffeomorph s hLF x
+  refine ⟨U,?_,?_⟩
+  · change gluedProjection s hLF (actualHistoryLocalInclusion s hLF x q)∈stableWindow s hLF x
+    rw [gluedProjection_local]
+    exact q.property
+  · have hA : IsComplexAnalyticSubset (n := n)
+        ((Subtype.val : localEndpoint s hLF x → (s.stage (stableIndex s hLF x)).1) ⁻¹'
+          strictAlong (s.stage (stableIndex s hLF x)).2 B) :=
+      AnalyticSubsetOpens.isComplexAnalyticSubset_preimage_val
+        (isComplexAnalyticSubset_strictAlong hB (s.stage (stableIndex s hLF x)).2)
+        (openPreimage (s.stage (stableIndex s hLF x)).2 (stableWindow s hLF x))
+    have he : (Subtype.val : U → limitManifold s hLF) ⁻¹' limitStrictTransform s hLF B=
+        e.symm ⁻¹' ((Subtype.val : localEndpoint s hLF x → (s.stage (stableIndex s hLF x)).1) ⁻¹'
+          strictAlong (s.stage (stableIndex s hLF x)).2 B) := by
+      ext v
+      have hh := Set.ext_iff.mp (localInclusion_preimage_limitStrictTransform s hLF hB.isClosed x) (e.symm v)
+      have heval : actualHistoryLocalInclusion s hLF x (e.symm v)=v.val :=
+        congrArg Subtype.val (e.apply_symm_apply v)
+      change v.val∈limitStrictTransform s hLF B ↔
+        (e.symm v).val∈strictAlong (s.stage (stableIndex s hLF x)).2 B
+      change actualHistoryLocalInclusion s hLF x (e.symm v)∈limitStrictTransform s hLF B ↔
+        (e.symm v).val∈strictAlong (s.stage (stableIndex s hLF x)).2 B at hh
+      rwa [heval] at hh
+    rw [he]
+    exact AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage e.symm.contMDiff hA
+
+/-- Original data internally choose the history before ALL original analytic limit sets. -/
+theorem exists_original_discrete_cut_limit_transforms
+    (M : MarkedIdeals.MarkedIdeal n X) (hM : ResolutionInvariantSpec.IsInvDomain n M)
+    (threshold : CanonicalCentres.ValTy n)
+    [DiscreteTopology (HironakaOriginalDiscreteFullCutCentres.strictCut
+      (CanonicalCentres.canonicalInvariant n) M .refl threshold)] :
+    ∃ (s : GrowingSeq X) (hLF : LocallyFinite (centreImage s)),
+      (∀ j,MarkedIdeals.MarkedIdeal.IsGeoTestTower M (s.stage j).2) ∧
+      (∀ j,centreImage s j⊆HironakaOriginalDiscreteFullCutCentres.strictCut
+        (CanonicalCentres.canonicalInvariant n) M .refl threshold) ∧
+      IsProperMap (gluedProjection s hLF) ∧
+      ContMDiff 𝓘(ℂ,ComplexModel n) 𝓘(ℂ,ComplexModel n) ∞
+        (gluedProjection s hLF : limitManifold s hLF → X) ∧
+      ∀ B : Set X,IsComplexAnalyticSubset (n := n) B →
+        IsComplexAnalyticSubset (n := n) (limitStrictTransform s hLF B) ∧
+        ∀ x : X,(actualHistoryLocalInclusion s hLF x) ⁻¹' limitStrictTransform s hLF B=
+          (Subtype.val : localEndpoint s hLF x → (s.stage (stableIndex s hLF x)).1) ⁻¹'
+            strictAlong (s.stage (stableIndex s hLF x)).2 B := by
+  obtain ⟨s,hTest,_hCan,_hSteps,_hClear,hImage,hLF,_hClosed,_hStable⟩ :=
+    HironakaOriginalDiscreteFullCutHistory.exists_original_discrete_full_cut_cleanup M hM threshold
+  refine ⟨s,hLF,hTest,hImage,gluedProjection_isProperMap s hLF,
+    gluedProjection_contMDiff s hLF,?_⟩
+  intro B hB
+  exact ⟨isComplexAnalyticSubset_limitStrictTransform s hLF hB,
+    localInclusion_preimage_limitStrictTransform s hLF hB.isClosed⟩
+
+end
+end TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteLimitStrictTransforms

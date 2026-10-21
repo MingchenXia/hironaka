@@ -1,0 +1,123 @@
+\section{Entire initial generation of the same exceptional family}
+
+Let $R=\mathbb C[[x_1,\ldots,x_n]]$, with its actual coordinate maximal
+ideal $\mathfrak m$, and let $\rho_e$ be the literal projection setting the
+exceptional coordinate $x_e$ equal to zero. Homogeneous components and all
+ideal spans below use the whole original formal series rings.
+
+\begin{theorem}[Exceptional filtered division generates the entire initial ideal]
+\label{hir:actual-exceptional-family-entire-initial-generation}
+\uses{hir:actual-exceptional-saturated-homogeneous-fibre-filtered-division,hir:actual-homogeneous-initial-component-derivative-dictionaries}
+\lean{Hironaka.HironakaActualExceptionalInitialGeneration.actualHomogeneousInitialIdeal_eq_exceptional_component_span}
+\leanok
+For a finite family $(H_i)$ with assigned degrees $d_i$, suppose
+$H_i\in\mathfrak m^{d_i}$, each $\rho_e H_i$ is homogeneous of degree
+$d_i$, and $x_eF\in(H_i)$ implies $F\in(H_i)$ for every whole $F$.
+Then
+\[
+ \operatorname{in}_{\mathfrak m}(H_i)
+   =\bigl((H_i)_{d_i}:i\bigr).
+\]
+The left side is the entire homogeneous initial ideal of the actual whole
+span, and the right side uses the degree components of these same generators.
+\end{theorem}
+\begin{proof}
+The exceptional filtered division theorem gives, for every
+$F\in(H_i)\cap\mathfrak m^q$, an exact whole identity
+$F=\sum_iH_iQ_i$ with $Q_i\in\mathfrak m^{q-d_i}$. If $d_i\le q$,
+the product homogeneous-component formula gives
+$(H_iQ_i)_q=(H_i)_{d_i}(Q_i)_{q-d_i}$, since all lower coefficients in
+both factors vanish. If $d_i>q$, the whole product has order at least
+$d_i>q$, so its degree-$q$ component is zero. Taking the component of the
+finite identity puts $F_q$ in the displayed component span. For every
+nonzero $F\in(H_i)$, choose its first nonzero degree $q$; its homogeneous
+initial form is this same $F_q$. These forms generate the whole initial
+ideal, proving the forward inclusion. Conversely each
+$H_i\in(H_i)\cap\mathfrak m^{d_i}$, so its degree-$d_i$ component
+belongs to the whole homogeneous initial ideal by actual degree lifting.
+Taking the whole span proves the reverse inclusion, including generators
+whose degree component is zero and empty families.
+\end{proof}
+
+\begin{theorem}[The same current forms have genuine homogeneous multiplier bands]
+\label{hir:actual-exceptional-family-homogeneous-multiplier-bands}
+\uses{hir:actual-exceptional-family-entire-initial-generation,hir:actual-homogeneous-family-shifted-filtered-division}
+\lean{Hironaka.HironakaActualExceptionalInitialGeneration.exists_exceptional_initial_homogeneous_bands}
+\leanok
+Under the same hypotheses, if $P$ is homogeneous of degree $q$ and belongs
+to the whole current initial ideal, then
+\[
+ P=\sum_i(H_i)_{d_i}A_i,
+\]
+where $A_i$ is homogeneous of degree $q-d_i$ and $A_i=0$ whenever
+$d_i>q$. Thus the coefficients are actual finite homogeneous polynomials;
+no polynomial relation or chosen finite representation is supplied.
+\end{theorem}
+\begin{proof}
+The preceding equality puts $P$ in the whole span of the homogeneous
+$(H_i)_{d_i}$. Homogeneous filtered division gives a whole representation
+$P=\sum_i(H_i)_{d_i}B_i$ with
+$B_i\in\mathfrak m^{q-d_i}$. Take its degree-$q$ component. If $d_i\le q$,
+homogeneity of the first factor leaves exactly
+$(H_i)_{d_i}(B_i)_{q-d_i}$. If $d_i>q$, every coefficient of the product
+at degree $q$ is zero. Set $A_i=(B_i)_{q-d_i}$ in the first case and
+$A_i=0$ in the second. These are homogeneous of the stated degrees, and
+homogeneous series in finitely many variables are their literal finite
+polynomials. The resulting finite identity is the assertion.
+\end{proof}
+
+\begin{theorem}[Original canonical point quotients give the actual entire initial span]
+\label{hir:actual-original-point-canonical-current-initial-generation}
+\uses{hir:actual-canonical-point-normalized-strict-filtered-division,hir:actual-exceptional-family-entire-initial-generation}
+\lean{Hironaka.HironakaActualExceptionalInitialGeneration.exists_original_point_canonical_initial_family}
+\leanok
+An original analytic germ ideal $J$ and an actual point chart choose one
+normalized canonical family $H_a$, before all current order bounds. Its
+whole span is the independently defined normalized-member ideal. Whenever
+each $H_a$ retains its own original vertex degree $d_a$, the entire
+homogeneous initial ideal of its actual Taylor extension equals
+$((\widehat H_a)_{d_a}:a)$. The family, original ideal and chart are the
+same in the normalization equations, whole span and initial equality.
+\end{theorem}
+\begin{proof}
+Choose the original canonical point family supplied by actual exceptional
+filtered division. Its whole analytic span is the independently defined
+normalized ideal, and the theorem supplies all shifted formal representations
+for this same family under exactly the actual current order bounds. The
+component argument in the first proof applies to these representations and
+the Taylor order bounds. It identifies every actual initial form with the
+same component span; its reverse inclusion follows from actual generator
+membership and order. No second normalized family is chosen.
+\end{proof}
+
+\begin{theorem}[Literal relative quotients give the same point initial generation]
+\label{hir:actual-relative-point-same-family-current-initial-generation}
+\uses{hir:actual-original-point-canonical-current-initial-generation,hir:actual-relative-point-prescribed-normalized-family}
+\lean{Hironaka.HironakaActualExceptionalInitialGeneration.canonical_relative_point_initial_generation}
+\leanok
+Fix the original canonical analytic generators $G_a$ of $J$, an actual
+relative chart with selected coordinates $A$, pivot $e$ and direction $b$,
+and prescribed actual quotients $e^{d_a}H_a=\beta_{A,e,b}^*G_a$.
+Let $\sigma$ scale precisely the tangent coordinates outside $A$ by $e$
+and fix all the normal coordinates. If every $\sigma H_a$ has actual
+maximal order at least $d_a$, then the entire homogeneous initial ideal of
+$(\widehat{\sigma H_a})$ is
+$((\widehat{\sigma H_a})_{d_a}:a)$.
+\end{theorem}
+\begin{proof}
+The literal chart composition gives
+$e^{d_a}\sigma H_a=\beta_{\mathrm{point},e,b_A}^*G_a$, with the original
+prescribed direction on $A$ and zero direction outside $A$. Choose the
+canonical point family from the preceding theorem for exactly that chart.
+Both families satisfy these same equations with the same numerator $G_a$.
+The actual analytic germ ring is a domain and the pivot germ is nonzero;
+cancelling $e^{d_a}$ therefore identifies each point quotient with
+$\sigma H_a$. Transfer the genuine current order bounds and the initial
+equality along this pointwise equality. This proves the assertion for the
+prescribed relative family, rather than for an independently chosen witness.
+\end{proof}
+
+These are statements about the actual current family and its whole initial
+ideal. The finite image-witness construction, total filtered descent to the
+relative chart, and the complete current-centre Hilbert--Samuel criterion
+require further arguments.

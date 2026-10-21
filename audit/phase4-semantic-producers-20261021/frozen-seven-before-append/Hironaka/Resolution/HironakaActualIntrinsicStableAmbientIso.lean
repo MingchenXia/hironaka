@@ -1,0 +1,258 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaActualIntrinsicIsoPairedWindows
+
+/-!
+# Intrinsic isomorphisms give actual stable ambient biholomorphisms
+
+Two explicit triangular shears work on genuine open domains, even when the
+original ambient representatives are holomorphic only on their given opens.
+The final producer takes only an original intrinsic iso and original point.
+-/
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+open Set TopologicalSpace CategoryTheory AlgebraicGeometry
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaActualIntrinsicStableAmbientIso
+noncomputable section
+open HironakaRelativeNormalIdeal HironakaActualCentreJointJets
+  HironakaActualAnalyticSubspace HironakaActualAnalyticSubspaceMaps
+  HironakaReducedComplexAnalyticSpaces HironakaActualIntrinsicIsoPairedWindows
+variable {n m : ℕ}
+
+/-- The original ordered direct-sum coordinates. -/
+def join (x : ComplexModel n) (y : ComplexModel m) : ComplexModel (n+m) :=
+  tangentInclusion n m x + actualJointNormalInclusion n m y
+
+@[simp] theorem first_join (x : ComplexModel n) (y : ComplexModel m) :
+    tangentProjection n m (join x y) = x := by
+  simp [join,tangentProjection_tangentInclusion]
+
+@[simp] theorem second_join (x : ComplexModel n) (y : ComplexModel m) :
+    actualJointNormalProjection n m (join x y) = y := by
+  simp [join]
+
+@[simp] theorem join_projections (z : ComplexModel (n+m)) :
+    join (tangentProjection n m z) (actualJointNormalProjection n m z) = z := by
+  ext i
+  refine Fin.addCases (fun j => ?_) (fun j => ?_) i <;> simp [join]
+
+/-- First graph addition followed by subtraction of the reverse graph. -/
+def stableForward (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+    (z : ComplexModel (n+m)) : ComplexModel (n+m) :=
+  join (tangentProjection n m z - g (f (tangentProjection n m z) + actualJointNormalProjection n m z))
+    (f (tangentProjection n m z) + actualJointNormalProjection n m z)
+
+/-- Literal inverse triangular composition, without an inverse assumption on f or g. -/
+def stableBackward (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+    (z : ComplexModel (n+m)) : ComplexModel (n+m) :=
+  join (tangentProjection n m z + g (actualJointNormalProjection n m z))
+    (actualJointNormalProjection n m z - f (tangentProjection n m z + g (actualJointNormalProjection n m z)))
+
+@[simp] theorem stableBackward_forward (f : ComplexModel n → ComplexModel m)
+    (g : ComplexModel m → ComplexModel n) (z : ComplexModel (n+m)) :
+    stableBackward f g (stableForward f g z) = z := by
+  simp [stableBackward,stableForward]
+
+@[simp] theorem stableForward_backward (f : ComplexModel n → ComplexModel m)
+    (g : ComplexModel m → ComplexModel n) (z : ComplexModel (n+m)) :
+    stableForward f g (stableBackward f g z) = z := by
+  simp [stableBackward,stableForward]
+
+private theorem isOpen_source (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (hf : ContDiffOn ℂ ∞ f A) :
+    IsOpen {z : ComplexModel (n+m) | tangentProjection n m z ∈ A ∧
+      f (tangentProjection n m z) + actualJointNormalProjection n m z ∈ B} := by
+  have hp : ContinuousOn (fun z : ComplexModel (n+m) => f (tangentProjection n m z))
+      ((tangentProjection n m) ⁻¹' A) :=
+    hf.continuousOn.comp (tangentProjection n m).continuous.continuousOn (fun _ hz => hz)
+  exact (hp.add (actualJointNormalProjection n m).continuous.continuousOn).isOpen_inter_preimage
+    (A.isOpen.preimage (tangentProjection n m).continuous) B.isOpen
+
+private theorem isOpen_target (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (g : ComplexModel m → ComplexModel n) (hg : ContDiffOn ℂ ∞ g B) :
+    IsOpen {z : ComplexModel (n+m) | actualJointNormalProjection n m z ∈ B ∧
+      tangentProjection n m z + g (actualJointNormalProjection n m z) ∈ A} := by
+  have hq : ContinuousOn (fun z : ComplexModel (n+m) => g (actualJointNormalProjection n m z))
+      ((actualJointNormalProjection n m) ⁻¹' B) :=
+    hg.continuousOn.comp (actualJointNormalProjection n m).continuous.continuousOn (fun _ hz => hz)
+  exact ((tangentProjection n m).continuous.continuousOn.add hq).isOpen_inter_preimage
+    (B.isOpen.preimage (actualJointNormalProjection n m).continuous) A.isOpen
+
+/-- A genuine open on which both original coordinate evaluations are defined. -/
+def sourceDomain (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (hf : ContDiffOn ℂ ∞ f A) : Opens (ComplexModel (n+m)) :=
+  ⟨_,isOpen_source A B f hf⟩
+
+/-- The matching genuine target open, with no ambient mapping assumption. -/
+def targetDomain (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (g : ComplexModel m → ComplexModel n) (hg : ContDiffOn ℂ ∞ g B) : Opens (ComplexModel (n+m)) :=
+  ⟨_,isOpen_target A B g hg⟩
+
+private theorem local_vector_contMDiff {d t : ℕ} (A : Opens (ComplexModel d))
+    (f : ComplexModel d → ComplexModel t) (hf : ContDiffOn ℂ ∞ f A) :
+    ContMDiff 𝓘(ℂ,ComplexModel d) 𝓘(ℂ,ComplexModel t) ∞ (fun x : A => f x.val) := by
+  intro x
+  exact contMDiffAt_subtype_iff.mpr ((hf.contDiffAt (A.isOpen.mem_nhds x.property)).contMDiffAt)
+
+/-- Two internally constructed inverse holomorphic shears on their true original opens. -/
+def stableAmbientIso (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+    (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B) :
+    sourceDomain A B f hf ≃ₘ⟮𝓘(ℂ,ComplexModel (n+m)),𝓘(ℂ,ComplexModel (n+m))⟯
+      targetDomain A B g hg where
+  toFun z := ⟨stableForward f g z.val,by
+    change actualJointNormalProjection n m (stableForward f g z.val) ∈ B ∧
+      tangentProjection n m (stableForward f g z.val) +
+        g (actualJointNormalProjection n m (stableForward f g z.val)) ∈ A
+    simpa [stableForward] using And.intro z.property.2 z.property.1⟩
+  invFun z := ⟨stableBackward f g z.val,by
+    change tangentProjection n m (stableBackward f g z.val) ∈ A ∧
+      f (tangentProjection n m (stableBackward f g z.val)) +
+        actualJointNormalProjection n m (stableBackward f g z.val) ∈ B
+    simpa [stableBackward] using And.intro z.property.2 z.property.1⟩
+  left_inv z := Subtype.ext (stableBackward_forward f g z.val)
+  right_inv z := Subtype.ext (stableForward_backward f g z.val)
+  contMDiff_toFun := by
+    apply (ContMDiff.subtypeVal_comp_iff (targetDomain A B g hg) _).mp
+    let p : sourceDomain A B f hf → A := fun z => ⟨tangentProjection n m z.val,z.property.1⟩
+    have hp : ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel n) ∞ p := by
+      apply (ContMDiff.subtypeVal_comp_iff A _).mp
+      exact (tangentProjection n m).contMDiff.comp contMDiff_subtype_val
+    have hv : ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel m) ∞
+        (fun z : sourceDomain A B f hf => f (tangentProjection n m z.val) + actualJointNormalProjection n m z.val) :=
+      ((local_vector_contMDiff A f hf).comp hp).add
+        ((actualJointNormalProjection n m).contMDiff.comp contMDiff_subtype_val)
+    let v : sourceDomain A B f hf → B := fun z =>
+      ⟨f (tangentProjection n m z.val) + actualJointNormalProjection n m z.val,z.property.2⟩
+    have hv' : ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel m) ∞ v :=
+      (ContMDiff.subtypeVal_comp_iff B v).mp hv
+    exact ((tangentInclusion n m).contMDiff.comp
+      (((tangentProjection n m).contMDiff.comp contMDiff_subtype_val).sub
+        ((local_vector_contMDiff B g hg).comp hv'))).add
+      ((actualJointNormalInclusion n m).contMDiff.comp hv)
+  contMDiff_invFun := by
+    apply (ContMDiff.subtypeVal_comp_iff (sourceDomain A B f hf) _).mp
+    let q : targetDomain A B g hg → B := fun z => ⟨actualJointNormalProjection n m z.val,z.property.1⟩
+    have hq : ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel m) ∞ q := by
+      apply (ContMDiff.subtypeVal_comp_iff B _).mp
+      exact (actualJointNormalProjection n m).contMDiff.comp contMDiff_subtype_val
+    have hu : ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel n) ∞
+        (fun z : targetDomain A B g hg => tangentProjection n m z.val + g (actualJointNormalProjection n m z.val)) :=
+      ((tangentProjection n m).contMDiff.comp contMDiff_subtype_val).add
+        ((local_vector_contMDiff B g hg).comp hq)
+    let u : targetDomain A B g hg → A := fun z =>
+      ⟨tangentProjection n m z.val + g (actualJointNormalProjection n m z.val),z.property.2⟩
+    have hu' : ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel n) ∞ u :=
+      (ContMDiff.subtypeVal_comp_iff A u).mp hu
+    exact ((tangentInclusion n m).contMDiff.comp hu).add
+      ((actualJointNormalInclusion n m).contMDiff.comp
+        (((actualJointNormalProjection n m).contMDiff.comp contMDiff_subtype_val).sub
+          ((local_vector_contMDiff A f hf).comp hu')))
+
+/-- The source subset uses literal zero added coordinates. -/
+def sourcePlane (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (hf : ContDiffOn ℂ ∞ f A)
+    (C : Set (ComplexModel n)) : Set (sourceDomain A B f hf) :=
+  {z | tangentProjection n m z.val ∈ C ∧ actualJointNormalProjection n m z.val = 0}
+
+/-- The target subset uses literal zero first coordinates in the SAME ambient model. -/
+def targetPlane (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (g : ComplexModel m → ComplexModel n) (hg : ContDiffOn ℂ ∞ g B)
+    (D : Set (ComplexModel m)) : Set (targetDomain A B g hg) :=
+  {z | actualJointNormalProjection n m z.val ∈ D ∧ tangentProjection n m z.val = 0}
+
+/-- Whole membership of the original stabilized subsets is transported by the SAME actual ambient iso. -/
+theorem stableAmbientIso_plane_iff (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+    (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B)
+    (C : Set (ComplexModel n)) (D : Set (ComplexModel m))
+    (hFD : ∀ x ∈ C ∩ A,f x ∈ D ∩ B) (hGC : ∀ y ∈ D ∩ B,g y ∈ C ∩ A)
+    (hgf : ∀ x ∈ C ∩ A,g (f x) = x) (hfg : ∀ y ∈ D ∩ B,f (g y) = y)
+    (z : sourceDomain A B f hf) :
+    z ∈ sourcePlane A B f hf C ↔ stableAmbientIso A B f g hf hg z ∈ targetPlane A B g hg D := by
+  constructor
+  · rintro ⟨hx,hy⟩
+    have hfx := hFD _ ⟨hx,z.property.1⟩
+    have hi := hgf _ ⟨hx,z.property.1⟩
+    change actualJointNormalProjection n m (stableForward f g z.val) ∈ D ∧
+      tangentProjection n m (stableForward f g z.val) = 0
+    simpa [stableForward,hy,hi] using And.intro hfx.1 (sub_self (tangentProjection n m z.val))
+  · rintro ⟨hv,hu⟩
+    change actualJointNormalProjection n m (stableForward f g z.val) ∈ D at hv
+    change tangentProjection n m (stableForward f g z.val) = 0 at hu
+    simp only [stableForward,first_join,second_join] at hv hu
+    have hp : tangentProjection n m z.val =
+        g (f (tangentProjection n m z.val) + actualJointNormalProjection n m z.val) := sub_eq_zero.mp hu
+    have hgy := hGC _ ⟨hv,z.property.2⟩
+    have hi := hfg _ ⟨hv,z.property.2⟩
+    have hz0 : actualJointNormalProjection n m z.val = 0 := by
+      rw [← hp] at hi
+      exact (add_left_cancel (show f (tangentProjection n m z.val) + 0 =
+        f (tangentProjection n m z.val) + actualJointNormalProjection n m z.val by simpa using hi)).symm
+    exact ⟨hp ▸ hgy.1,hz0⟩
+
+/-- The true ambient comparison internally gives the entire actual quotient-subspace isomorphism. -/
+def stablePlaneSubspaceIso (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+    (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B)
+    (C : Set (ComplexModel n)) (D : Set (ComplexModel m))
+    (hFD : ∀ x ∈ C ∩ A,f x ∈ D ∩ B) (hGC : ∀ y ∈ D ∩ B,g y ∈ C ∩ A)
+    (hgf : ∀ x ∈ C ∩ A,g (f x) = x) (hfg : ∀ y ∈ D ∩ B,f (g y) = y) :
+    actualSubspaceLocallyRingedSpace (n := n+m) (sourcePlane A B f hf C) ≅
+      actualSubspaceLocallyRingedSpace (n := n+m) (targetPlane A B g hg D) :=
+  actualSubspaceBiholomorphicIso (stableAmbientIso A B f g hf hg) _ _
+    (stableAmbientIso_plane_iff A B f g hf hg C D hFD hGC hgf hfg)
+
+/-- ANY specified original intrinsic iso internally constructs the SAME stable ambient
+biholomorphism, entire quotient-subspace comparison, and actual original-point formula. -/
+theorem exists_actual_intrinsic_stable_ambient_iso
+    {U : Opens (ComplexModel n)} {V : Opens (ComplexModel m)} {C : Set U} {D : Set V}
+    (e : actualSubspaceLocallyRingedSpace (n := n) C ≅ actualSubspaceLocallyRingedSpace (n := m) D)
+    (he : e.hom ≫ subspacePointMap (n := m) D = subspacePointMap (n := n) C)
+    (hC : IsComplexAnalyticSubset (n := n) C) (hD : IsComplexAnalyticSubset (n := m) D) (c : C) :
+    ∃ (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+      (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+      (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B),
+      A ≤ U ∧ B ≤ V ∧ c.val.val ∈ A ∧ (e.hom.base c).val.val ∈ B ∧
+      (∀ z : sourceDomain A B f hf,
+        z ∈ sourcePlane A B f hf (coordinateCarrier C) ↔
+          stableAmbientIso A B f g hf hg z ∈ targetPlane A B g hg (coordinateCarrier D)) ∧
+      ∃ E : actualSubspaceLocallyRingedSpace (n := n+m) (sourcePlane A B f hf (coordinateCarrier C)) ≅
+          actualSubspaceLocallyRingedSpace (n := n+m) (targetPlane A B g hg (coordinateCarrier D)),
+        E.hom ≫ subspacePointMap (n := n+m) (targetPlane A B g hg (coordinateCarrier D)) =
+          subspacePointMap (n := n+m) (sourcePlane A B f hf (coordinateCarrier C)) ∧
+        (∀ z : sourcePlane A B f hf (coordinateCarrier C),
+          (E.hom.base z).val = stableAmbientIso A B f g hf hg z.val) ∧
+        ∀ x : C,x.val.val ∈ A →
+          ∃ hz : join x.val.val (0 : ComplexModel m) ∈ sourceDomain A B f hf,
+            (stableAmbientIso A B f g hf hg ⟨join x.val.val (0 : ComplexModel m),hz⟩).val =
+              join (0 : ComplexModel n) (e.hom.base x).val.val := by
+  obtain ⟨A,B,f,g,hAU,hBV,hcA,hdB,hf,hg,_hCa,_hDa,hFD,hGC,hgf,hfg,hfval,_hgval⟩ :=
+    exists_actual_intrinsic_iso_paired_windows e he hC hD c
+  refine ⟨A,B,f,g,hf,hg,hAU,hBV,hcA,hdB,
+    stableAmbientIso_plane_iff A B f g hf hg (coordinateCarrier C) (coordinateCarrier D) hFD hGC hgf hfg,
+    stablePlaneSubspaceIso A B f g hf hg (coordinateCarrier C) (coordinateCarrier D) hFD hGC hgf hfg,?_,?_,?_⟩
+  · exact actualSubspaceMap_point (stableAmbientIso A B f g hf hg).contMDiff _
+  · intro z
+    rfl
+  · intro x hx
+    have hxC : x.val.val ∈ coordinateCarrier C := ⟨x.val,x.property,rfl⟩
+    have hfx := hFD x.val.val ⟨hxC,hx⟩
+    have hi := hgf x.val.val ⟨hxC,hx⟩
+    have hvalue := hfval x hx
+    have hz : join x.val.val (0 : ComplexModel m) ∈ sourceDomain A B f hf := by
+      change tangentProjection n m (join x.val.val (0 : ComplexModel m)) ∈ A ∧
+        f (tangentProjection n m (join x.val.val (0 : ComplexModel m))) +
+          actualJointNormalProjection n m (join x.val.val (0 : ComplexModel m)) ∈ B
+      simpa using And.intro hx hfx.2
+    refine ⟨hz,?_⟩
+    change stableForward f g (join x.val.val (0 : ComplexModel m)) = _
+    simp only [stableForward,first_join,second_join,add_zero]
+    rw [hi,sub_self,hvalue]
+
+end
+end Hironaka.HironakaActualIntrinsicStableAmbientIso

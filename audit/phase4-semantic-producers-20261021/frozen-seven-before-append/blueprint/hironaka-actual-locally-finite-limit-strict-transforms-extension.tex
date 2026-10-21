@@ -1,0 +1,141 @@
+\section{Actual centre-relative strict transforms on a locally finite composite}
+
+The locally finite composite in \cite{bierstone-milman97-invent-math},
+Theorem 13.4 and Lemma 13.7 (printed pages 298--301), must carry the actual
+strict transforms of the analytic chain. Throughout this chapter a strict
+transform means the iterated centre-relative closure
+$\overline{\pi^{-1}(A\setminus C)}$. No identification with an
+exceptional-locus strict transform is used. The actual history and local
+finiteness are genuine data for the general geometric construction; the
+last theorem constructs its history internally from original data in the
+stated discrete-upper-cut case. No unrestricted scheduler is asserted.
+
+\begin{theorem}[An actual stable endpoint is biholomorphic to its whole limit window]
+\label{hir:actual-lf-limit-stable-window-biholomorphism}
+\uses{hir:actual-locally-finite-history-finite-stage-factors,hir:actual-tower-tail-holomorphic-lift-uniqueness,hir:actual-locally-finite-history-limit-complex-manifold}
+\lean{Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.stableFactor_local,Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.stableWindowDiffeomorph,Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.isOpenHoloEmbedding_localInclusion}
+\leanok
+Let $s$ be an actual growing blowup history and suppose its actual centre
+images are locally finite. Write $p:L\to X$ for its constructed complex
+limit projection. For each chosen stable base window $U_x$ and its actual
+index $N_x$, the actual endpoint inclusion induces a biholomorphism
+\[
+ (s_{N_x})^{-1}U_x\ \simeq\ p^{-1}U_x.
+\]
+Its inverse is the actual finite-stage factor to stage $N_x$, restricted
+to this open. Both maps commute with their whole original projections.
+\end{theorem}
+\begin{proof}
+The actual factor to stage $N_x$, composed with the actual endpoint
+inclusion, has the same projection as that endpoint. Its values lie in
+the endpoint open by this projection equation. Regard it as a holomorphic
+self-map of the endpoint over its restricted finite prefix. Apply genuine
+finite-tower lift uniqueness to that prefix and its empty continuation:
+the self-map is the identity. Thus the factor followed by the endpoint
+inclusion is the identity on the endpoint. The entire range of the
+endpoint inclusion is exactly $p^{-1}U_x$. Every point of this latter open
+therefore has an endpoint preimage, and the identity just proved gives
+the other inverse identity. The inclusion is holomorphic by the genuine
+lifted-chart construction; the inverse is holomorphic by the proved
+holomorphicity of the actual finite-stage factor. Restricting these maps
+to their true opens gives the claimed biholomorphism and whole projection
+equations.
+\end{proof}
+
+\begin{theorem}[The actual infinite strict transform equals one finite prefix locally]
+\label{hir:actual-lf-limit-centre-relative-strict-dictionary}
+\uses{hir:actual-lf-limit-stable-window-biholomorphism,hir:actual-locally-finite-history-finite-stage-factor-compatibility}
+\lean{Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.limitStrictTransform,Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.localInclusion_preimage_limitStrictTransform,Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.isClosed_limitStrictTransform,Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.limitStrictTransform_mono}
+\leanok
+For a closed original subset $B\subset X$, define an actual subset of $L$ by
+\[
+ B_\infty=\bigcap_{j\geq0}p_j^{-1}(B_j),
+\]
+where $p_j:L\to s_j$ is the constructed actual stage factor and $B_j$ is
+the iterated centre-relative strict transform along the actual prefix.
+It is closed, is monotone in $B$, and its preimage under every actual
+stable endpoint inclusion is exactly $B_{N_x}$ on that endpoint.
+\end{theorem}
+\begin{proof}
+Each finite strict transform is closed: an empty prefix retains the given
+closed set, and a nonempty prefix ends in a closure. Each $p_j$ is
+continuous, so the displayed intersection is closed. Monotonicity follows
+at every finite stage from monotonicity of inverse image, set difference
+with the same centre, and closure; intersecting preserves inclusion.
+
+Membership in the intersection implies membership at $j=N_x$. The preceding
+theorem identifies the stage-$N_x$ factor of an endpoint point with that
+same endpoint point, proving one inclusion in the local equality.
+
+Conversely take an endpoint point in $B_{N_x}$ and any stage $k$. Use the
+actual factor at $J=N_x+k$. Its projection by the recorded tail from
+$N_x$ to $J$ is the original endpoint point, by the actual factor
+compatibility and the preceding theorem. On the inverse image of $U_x$
+that tail has only empty centres, by actual stable-window avoidance.
+The centre-relative strict transform of a closed set along an empty-centre
+tower is its ordinary inverse image: at each step the inverse image is
+closed, so the final closure changes nothing. Consequently the point at
+stage $J$ belongs to $B_J$. The actual tail from $k$ to $J=k+N_x$ maps
+$B_J$ into $B_k$, since the strict transform of a closed set lies in its
+inverse image at each step. Actual factor compatibility identifies this
+image with the stage-$k$ factor of the chosen limit point. It belongs to
+$B_k$. Since $k$ was arbitrary, the limit point lies in the entire
+intersection, proving the reverse inclusion.
+\end{proof}
+
+\begin{theorem}[Analytic chains have actual analytic transforms on the same limit]
+\label{hir:actual-lf-limit-analytic-centre-relative-strict-transforms}
+\uses{hir:actual-lf-limit-centre-relative-strict-dictionary,hir:actual-lf-limit-stable-window-biholomorphism}
+\lean{Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.isComplexAnalyticSubset_strictAlong,Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.isComplexAnalyticSubset_limitStrictTransform}
+\leanok
+For every original analytic subset $B\subset X$, the actual subset
+$B_\infty$ is analytic in the constructed complex limit. Thus every nested
+chain of original analytic subsets yields a nested chain of actual analytic
+subsets on that same limit, with the exact preceding finite-prefix dictionary.
+\end{theorem}
+\begin{proof}
+First prove analyticity of each finite centre-relative strict transform by
+induction on the actual prefix. The empty prefix gives $B$. At the next
+blowup the centre is a closed complex submanifold and hence analytic.
+Both its holomorphic inverse image and the inverse image of the previous
+analytic transform are analytic. The closure of their difference is
+analytic by the proved closure-difference theorem. This is precisely the
+centre-relative strict transform at that step.
+
+At any point of the limit choose a genuine stable endpoint containing it.
+The exact local dictionary identifies the pullback of $B_\infty$ with the
+analytic finite-prefix transform restricted to that endpoint. The genuine
+endpoint biholomorphism transports this analytic set to the actual limit
+window. These windows cover the limit, so locality of analytic presentations
+proves that $B_\infty$ is analytic. For a chain, apply the same construction
+to each original member. The monotonicity proved above gives every required
+inclusion; the histories and stage factors are unchanged.
+\end{proof}
+
+\begin{theorem}[Original discrete-upper-cut data internally give analytic limit transforms]
+\label{hir:original-discrete-cut-actual-analytic-limit-transforms}
+\uses{hir:actual-lf-limit-analytic-centre-relative-strict-transforms,hir:actual-locally-finite-history-limit-proper,hir:original-canonical-discrete-full-cut-cleanup}
+\lean{Hironaka.HironakaActualLocallyFiniteLimitStrictTransforms.exists_original_discrete_cut_limit_transforms}
+\leanok
+Let $M$ be actual original invariant-domain data and let its literal initial
+strict upper full-invariant cut at a threshold be discrete. There is an
+internally constructed original-admissible locally finite growing history,
+with every actual centre image contained in that cut, whose constructed
+proper holomorphic limit carries the analytic centre-relative transform
+of every original analytic subset and the exact stable-prefix dictionary.
+The whole original cosupport is allowed to be noncompact and
+positive-dimensional. No history or limit-space certificate is an input.
+\end{theorem}
+\begin{proof}
+Apply the original discrete-upper-cut cleanup producer to the given original
+data and threshold. It constructs one actual growing history, proves original
+geometric testness at every prefix, proves that its actual centre images
+lie in the initial strict cut, and proves their local finiteness. Apply the
+genuine limit construction to this same history and this proved local
+finiteness. Its projection is holomorphic and proper. Apply the preceding
+analytic-transform theorem to each original analytic subset, and use the
+proved stable-endpoint dictionary for this same history. These constructions
+use the chosen original history throughout, so the required statements hold
+simultaneously for every original analytic subset. Nothing in this argument
+asserts existence of such a history for a nondiscrete initial cut.
+\end{proof}

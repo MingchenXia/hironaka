@@ -1,0 +1,114 @@
+import TranscendentalNakamaye.Pending.BlowupTowerIsomorphism
+import TranscendentalNakamaye.Pending.BlowupExistence
+
+/-!
+# Extending a prescribed blowup with compact centre from an open set
+
+Compactness makes the entire open centre closed in the original manifold.
+Actual blowup existence and uniqueness then extend the prescribed geometric
+step, with an actual biholomorphism of the restricted targets over the base.
+Blueprint: `hironaka-compact-open-blowup-extension.tex`.
+-/
+set_option autoImplicit false
+open Set TopologicalSpace
+open scoped Topology Manifold ContDiff
+universe u
+namespace TranscendentalNakamaye.Pending.HironakaCompactOpenBlowupExtension
+noncomputable section
+open FirstPass FirstPass.BlowupSequences FirstPass.HolomorphicIdealSheaves
+  BlowupTowers BlowupExistence BlowupRestrictOpen BlowupUniqueness AnalyticSubsetOpens
+  MarkedIdeals MarkedIdealBiholomorphism
+
+section Topology
+variable {X : Type u} [TopologicalSpace X] {U : Opens X} {C : Set U}
+
+/-- Empty interior is preserved by the actual inclusion into the original space. -/
+theorem interior_image_val_eq_empty (hC : interior C = ∅) :
+    interior ((Subtype.val : U → X) '' C) = ∅ := by
+  apply eq_empty_iff_forall_notMem.mpr
+  intro x hx
+  obtain ⟨c, hc, rfl⟩ := interior_subset hx
+  have hsub : (Subtype.val : U → X) ⁻¹' interior ((Subtype.val : U → X) '' C) ⊆ C := by
+    intro p hp
+    obtain ⟨q, hq, heq⟩ := interior_subset hp
+    exact Subtype.val_injective heq ▸ hq
+  have hmem : c ∈ interior C := interior_maximal hsub
+    (isOpen_interior.preimage continuous_subtype_val) hx
+  simp only [hC, mem_empty_iff_false] at hmem
+
+end Topology
+
+variable {n : ℕ} {X : Type u} [TopologicalSpace X]
+  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
+  {U : Opens X} {C : Set U}
+
+/-- The whole image of a compact open complex submanifold is an ambient centre. -/
+theorem isClosedSubmanifold_image_val (hC : IsClosedSubmanifold n C)
+    (hK : IsCompact C) : IsClosedSubmanifold n ((Subtype.val : U → X) '' C) := by
+  refine ⟨(hK.image continuous_subtype_val).isClosed, ?_⟩
+  rintro x ⟨c, hc, rfl⟩
+  obtain ⟨k, hk⟩ := hC.2 c hc
+  exact ⟨k, regularAtDim_image_val_iff.mpr hk⟩
+
+/-- A prescribed actual blowup of an open set with compact centre is the
+restriction of a genuine ambient blowup, through its actual universal comparison. -/
+theorem exists_extension {Y : CMfd.{u} n} {π : Y → U}
+    (hπ : IsBlowupAlong n C π) (hK : IsCompact C) :
+    ∃ (Z : CMfd.{u} n) (q : Z → X) (hq : IsBlowupAlong n ((Subtype.val : U → X) '' C) q),
+      ∃ χ : Y ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯
+          (⟨q ⁻¹' (U : Set X), U.isOpen.preimage hq.contMDiff.continuous⟩ : Opens Z),
+        ∀ y : Y, q (χ y).val = (π y).val := by
+  obtain ⟨Z, tZ, cZ, mZ, q, hq⟩ := exists_isBlowupAlong
+    ((Subtype.val : U → X) '' C) (isClosedSubmanifold_image_val hπ.1 hK)
+    (interior_image_val_eq_empty hπ.2.1)
+  let : TopologicalSpace Z := tZ
+  let : ChartedSpace (ComplexModel n) Z := cZ
+  let : IsComplexManifold n Z := mZ
+  let V : Opens Z := ⟨q ⁻¹' (U : Set X), U.isOpen.preimage hq.contMDiff.continuous⟩
+  let r : V → U := fun p => ⟨q p.val, p.property⟩
+  have hr : IsBlowupAlong n C r := by
+    simpa only [Subtype.val_injective.preimage_image] using
+      isBlowupAlong_restrict hq U V.isOpen
+  obtain ⟨e, f, he, hf, hqe, _hπf, hfe, hef⟩ := exists_biholomorphism_over hπ hr
+  refine ⟨⟨Z⟩, q, hq, ⟨⟨e, f, congrFun hfe, congrFun hef⟩, he, hf⟩, ?_⟩
+  intro y
+  exact congrArg Subtype.val (congrFun hqe y)
+
+/-- Simultaneous coordinates for the whole ordered boundary pass from the
+open centre to its actual image in the original manifold. -/
+theorem hasNormalCrossings_image_val {E : List (Set X)}
+    (hC : NormalCrossings.HasNormalCrossings n C
+      (E.map ((Subtype.val : U → X) ⁻¹' ·))) :
+    NormalCrossings.HasNormalCrossings n ((Subtype.val : U → X) '' C) E := by
+  rintro _ ⟨c, hc, rfl⟩
+  obtain ⟨S₀, S, hcoord, hcard⟩ := hC c hc
+  let k : Fin E.length → Fin (E.map ((Subtype.val : U → X) ⁻¹' ·)).length :=
+    Fin.cast (List.length_map _).symm
+  refine ⟨S₀, fun i => S (k i), ?_, ?_⟩
+  · apply NormalCrossingsInvariance.isCoordinateFamilyAt_preimage_val_iff.mp
+    refine NormalCrossingsInvariance.IsCoordinateFamilyAt.reindex hcoord (Option.map k) ?_ ?_
+    · rintro (_ | i)
+      · exact Subtype.val_injective.preimage_image C
+      · simp [k]
+    · rintro (_ | i) <;> rfl
+  · intro i hi
+    apply hcard (k i)
+    simpa [NormalCrossingsInvariance.get_map_preimage, k] using hi
+
+/-- A compact centre admissible for the actual open restriction is admissible
+for the original coherent marked ideal, with its entire ordered boundary. -/
+theorem isAdmissibleCentre_image_val {M : MarkedIdeal n X}
+    (hI : M.ideal.IsCoherent)
+    (hC : (MarkedIdeal.pullback (Subtype.val : U → X) M).IsAdmissibleCentre C)
+    (hK : IsCompact C) : M.IsAdmissibleCentre ((Subtype.val : U → X) '' C) := by
+  refine ⟨isClosedSubmanifold_image_val hC.1 hK, ?_,
+    hasNormalCrossings_image_val hC.2.2⟩
+  rintro _ ⟨c, hc, rfl⟩
+  have hmem := hC.2.1 hc
+  rw [MarkedIdealRestrictOpen.cosupp_pullback_val M
+    (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hI hg) U]
+    at hmem
+  exact hmem
+
+end
+end TranscendentalNakamaye.Pending.HironakaCompactOpenBlowupExtension

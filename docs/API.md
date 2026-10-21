@@ -2,7 +2,7 @@
 
 ## Geometric setting
 
-All statements are about complex manifolds of dimension `n`, given unbundled:
+The original public API statements are about complex manifolds of dimension `n`, given unbundled:
 
 ```lean
 {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]

@@ -1,0 +1,121 @@
+\chapter{Higher-dimensional incident-centre ambient trace continuation}
+
+Let $N$ be a closed complex submanifold and let $H$ be an ambient SNC
+hypersurface, with $N\subset\overline{N\setminus H}$.  A smooth centre
+$C\subset N$ is locally contained in every member it meets if
+\[
+ p\in C\cap H\quad\Longrightarrow\quad
+ \text{there is an open }U\ni p\text{ with }C\cap U\subset H\cap U.
+\]
+This condition allows positive-dimensional centres and disconnected centres
+with both incident and nonincident components.  Throughout, the ambient
+dimension is positive.  Write $\operatorname{Res}_N$ for the whole
+relative ideal restriction, and $\mathcal N_N(-,E)$ for removal of the
+full greatest exceptional monomial factor.
+
+\begin{lemma}[Whole trace geometry for a locally incident centre]
+\label{hir:sharp-actual-incident-centre-whole-trace-geometry}
+\uses{hir:sharp-local-incident-containment-actual-centre-normal-crossings,hir:sharp-actual-first-ambient-strict-trace-greatest-factor-relative-strict,hir:sharp-actual-mixed-discrete-centre-whole-strict-trace-geometry-density}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualIncidentCentreTraceResidual.actual_incident_centre_whole_strict_trace_geometry}
+\leanok
+For an actual blowup $\pi:Y\to X$ along such a centre, put
+$N'=\operatorname{Strict}_\pi N$, $H'=\operatorname{Strict}_\pi H$,
+$D=\pi^{-1}C$, and $I'=\operatorname{Res}_{N'}\mathcal I_{H'}$.
+Then $N'$ is smooth, $[H',D]$ is SNC, $I'$ is coherent and nonzero
+along $N'$, $N'\subset\overline{N'\setminus H'}$, and at each point
+of $N'$ the entire ideal $I'$ has a holomorphic relative principal
+generator, in both ideal-membership directions.
+\end{lemma}
+\begin{proof}
+Local incident containment and the SNC coordinates for $H$ give normal
+crossings of $C$ with $[H]$: shrink around a centre point so that the
+incident hypersurface contains the whole restricted centre, then insert
+its coordinate into smooth centre coordinates.  The actual blowup SNC
+transformation theorem therefore makes $[H',D]$ SNC.  The strict carrier
+$N'$ is smooth because $C\subset N$.  Coherence of the two smooth
+vanishing ideals gives coherence of their relative restriction $I'$.
+
+The original density gives a nonzero germ of $\mathcal I_H$ along every
+point of $N$.  The actual zero-mark transform preserves nonzero germs
+along $N'$ and equals $\operatorname{Res}_{N'}\pi^*\mathcal I_H$.
+Every pulled-back vanishing germ vanishes on the actual closed strict
+transform $H'$, so the whole raw transform is contained in $I'$.
+Its nonzero witnesses thus give nonzero witnesses for $I'$.  A finite
+relative-span expression for a germ in $I'$ vanishes on $N'\cap H'$;
+a frequent nonzero witness forces density of $N'\setminus H'$.
+Finally the smooth SNC member $H'$ has a local principal vanishing
+ideal, and restriction of its two principal-span directions gives both
+asserted relative generator directions.
+\end{proof}
+
+\begin{theorem}[The whole trace residual is the independently saturated raw ideal]
+\label{hir:sharp-actual-incident-centre-trace-residual}
+\uses{hir:sharp-actual-incident-centre-whole-trace-geometry,hir:sharp-actual-raw-total-full-open-residual-germs,hir:sharp-actual-any-member-raw-residual-independent-allpower-strict,hir:sharp-actual-first-ambient-strict-trace-greatest-factor-relative-strict,hir:sharp-actual-nonmonomial-whole-open-germ-dictionary}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualIncidentCentreTraceResidual.actual_incident_trace_nonmonomial_eq_relative_strict,TranscendentalNakamaye.Pending.HironakaSharpActualIncidentCentreTraceResidual.actual_incident_trace_greatest_factor_dictionary}
+\leanok
+Under the preceding hypotheses let
+$J'=\operatorname{Sat}_{\mathcal I_D}^{\infty}
+(\operatorname{Res}_{N'}\pi^*\mathcal I_H)$, defined independently by
+all-power saturation.  Then, as whole germ ideals,
+\[
+ \mathcal N_{N'}(I',[D])=J',\qquad
+ I'=\operatorname{Res}_{N'}\bigl(M'J'\bigr),\quad
+ M'=\mathcal M_{N'}(I',[D]).
+\]
+The actual $M'$ is coherent, nonzero along $N'$, and monomial in $[D]$.
+The outer restriction and every exceptional factor are retained.
+\end{theorem}
+\begin{proof}
+At a point above $C\cap H$, local incident containment supplies an actual
+base open $U$ on which $C_U\subset H_U$.  Restrict the same blowup to its
+whole preimage.  Actual strict transforms commute with this restriction.
+The contained-centre whole trace factor theorem identifies the local
+trace residual with the independently defined local all-power saturation.
+The independent raw residual theorem identifies the local raw residual
+with that same saturation.  Whole pullback identities and the open
+dictionary for greatest-factor removal transport both memberships to
+the two global residuals, for every local function.  Restricting and
+extending a global function changes none of its coherent ideal germs.
+
+At a point projecting outside $H$, the closed complement of $H$ makes
+the original vanishing ideal a unit ideal.  Its actual pullback and the
+actual strict-member vanishing ideal are both units there, so both
+residuals consist of all holomorphic germs.  At a point outside $D$,
+the exceptional monomial ideal contains $1$, and both colon directions
+identify each residual with its own normalized input.  The actual
+isomorphism off the centre identifies the raw and strict vanishing
+ideals there.  These cases cover the whole ambient manifold and prove
+whole residual equality.  The independent raw theorem now gives $J'$.
+The genuine greatest-factor theorem supplies the geometry of $M'$ and
+the two factor inclusions; relative restriction extensionality and
+idempotence give the displayed whole factorization.
+\end{proof}
+
+\begin{theorem}[The same residual comparison retains every old exceptional member]
+\label{hir:sharp-actual-incident-centre-all-exceptional-residual}
+\uses{hir:sharp-actual-incident-centre-trace-residual,hir:sharp-actual-whole-monomial-product-residual,hir:sharp-actual-any-member-raw-residual-independent-allpower-strict}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualIncidentCentreTraceResidual.actual_incident_accumulated_trace_nonmonomial_eq_total}
+\leanok
+Suppose in addition that $E$ is SNC, $N$ is transverse to $E$, and the
+actual centre $C$ has normal crossings with $E$.  Put
+$E'=\operatorname{Strict}_\pi(E)\mathbin{+\!+}[D]$ and
+$P'=\operatorname{Res}_{N'}\pi^*\mathcal I_H$.
+Then $E'$ is SNC, $N'$ is transverse to $E'$, and
+\[
+ \mathcal N_{N'}(I',E')=\mathcal N_{N'}(P',E').
+\]
+\end{theorem}
+\begin{proof}
+The actual admissible blowup theorem gives the whole ordered exceptional
+list $E'$ and transversality of $N'$.  Independently factor $P'$ along
+$[D]$.  Its residual is the actual all-power saturation $J'$ by the raw
+residual theorem.  The preceding theorem factors $I'$ with the same
+$J'$.  Both single-exceptional monomial factors remain monomial with
+respect to the full list $E'$, because $[D]$ is a subfamily.  Removing
+all exceptional monomial factors from a whole normalized monomial
+product leaves the residual of its other factor.  Applying this fact
+to both factorizations gives the same $\mathcal N_{N'}(J',E')$ and hence
+the asserted equality.  This proves a higher-dimensional continuation
+identity.  It does not assert strict decrease of a modified invariant
+or termination of a sharp resolution history.
+\end{proof}
