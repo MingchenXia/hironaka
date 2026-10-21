@@ -28,7 +28,7 @@ Verification records are kept in [audit/](audit/).
 ## Documentation
 
 - [Public API and geometric setting](docs/API.md)
-- [Verified native scope and synchronization status](STATUS.md)
+- [Verified scope and remaining gaps](STATUS.md)
 - [Mathematical blueprint](blueprint/extensions.tex)
 
 Released under [Apache 2.0](LICENSE). Original modules credit Claude;

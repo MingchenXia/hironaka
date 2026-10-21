@@ -1,0 +1,98 @@
+\section{Literal mixed coefficient orders in the same relative chart}
+
+Let $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+and denote their genuine maximal ideals by $\mathfrak m_B,\mathfrak m_R$.
+All normal coefficients below are the actual analytic germs extracted from
+whole original normal-power quotients, not a chosen formal coefficient model.
+The existing formal mixed-power theorem already counts tangent and normal
+weights. The next results retain the actual analytic coefficient germs and
+compute their literal restrictions in the SAME actual normalized chart.
+
+\begin{theorem}[A whole actual point order is exactly its finite mixed analytic coefficient orders]
+\label{hir:actual-mixed-analytic-coefficient-point-orders}
+\uses{hir:actual-relative-coefficient-literal-formal-taylor-dictionary,hir:actual-original-formal-taylor-maximal-power-kernel}
+\lean{TranscendentalNakamaye.Pending.HironakaActualMixedCoefficientOrders.mem_maximal_pow_iff_actual_normal_coefficients}
+\leanok
+For every original $g\in R$ and actual finite $q$,
+\[
+ g\in\mathfrak m_R^q\quad\Longleftrightarrow\quad
+ \forall\gamma,\ |\gamma|<q\Longrightarrow
+ c_\gamma(g)\in\mathfrak m_B^{q-|\gamma|}.
+\]
+These are finitely many whole coefficient-germ conditions, including $q=0$
+and empty tangent or normal blocks.
+\end{theorem}
+\begin{proof}
+The whole original Taylor power criterion, transported by its genuine dimension
+reassociation, says that actual maximal-power membership is exactly vanishing
+of all actual Taylor coefficients below the given total degree. The actual
+Taylor normal-coefficient dictionary identifies the tangent coefficient at
+$\beta$ of $\widehat{c_\gamma(g)}$ with the coefficient at the literal joined
+exponent $(\beta,\gamma)$ of $\widehat g$. Its actual total degree is
+$|\beta|+|\gamma|$. Thus a whole order $q$ kills every tangent coefficient
+with $|\beta|<q-|\gamma|$, proving the displayed base power by the genuine
+base Taylor criterion. Conversely split every exponent below $q$ into its
+actual tangent and normal blocks. The latter has degree below $q$, and the
+former has degree below the corresponding displayed base-power bound.
+The assumed whole base power kills that exact Taylor coefficient. The original
+whole maximal-power criterion gives $g\in\mathfrak m_R^q$.
+\end{proof}
+
+\begin{theorem}[The actual total homogeneous part has its literal finite mixed coefficient bands]
+\label{hir:actual-mixed-homogeneous-coefficient-bands}
+\uses{hir:actual-formal-centre-power-relative-coefficients}
+\lean{TranscendentalNakamaye.Pending.HironakaActualMixedCoefficientOrders.actualFormalNormalCoefficient_homogeneousComponent}
+\leanok
+For an entire formal series $F$, its actual normal coefficient at $\gamma$
+in the total homogeneous component of degree $q$ is zero when $|\gamma|>q$,
+and otherwise is the actual tangent homogeneous component of degree
+$q-|\gamma|$ of $c_\gamma(F)$. In particular these normal labels form a
+finite bounded family; tangent-coefficient degrees are retained rather than
+silently replaced by zero.
+\end{theorem}
+\begin{proof}
+Compare the actual coefficient at every tangent exponent $\beta$.
+On the left, the literal homogeneous-component formula retains precisely the
+coefficient of $F$ whose joined exponent has degree $q$.
+The actual joined degree is $|\beta|+|\gamma|$. If $|\gamma|>q$ this is
+impossible and every coefficient is zero. Otherwise the equality is precisely
+$|\beta|=q-|\gamma|$, which is the actual coefficient condition in the
+indicated tangent homogeneous component. Whole formal-series extensionality
+proves the entire coefficient-series identity.
+\end{proof}
+
+\begin{theorem}[The same actual normalized quotient gives whole pivot-free coefficient identities and finite mixed base orders]
+\label{hir:actual-relative-quotient-mixed-fibre-coefficient-orders}
+\uses{hir:actual-mixed-analytic-coefficient-point-orders,hir:actual-normal-quotient-canonical-exceptional-restriction,hir:actual-relative-homogeneous-dehomogenization-injective}
+\lean{TranscendentalNakamaye.Pending.HironakaActualMixedCoefficientOrders.relative_quotient_pivot_free_coefficient,TranscendentalNakamaye.Pending.HironakaActualMixedCoefficientOrders.relative_quotient_mixed_coefficient_order}
+\leanok
+Fix actual original $G\in N^w$ and its SAME actual quotient
+$e^wH=\pi^*G$ in a prescribed relative normal-pivot chart. Let
+$p=\delta(f_w(G))\in B[z]$ be the literal dehomogenization of its actual
+normal homogeneous polynomial. For every pivot-free exponent $\gamma$,
+\[
+ c_\gamma(H)=p_\gamma\qquad\text{as whole original analytic germs in }B.
+\]
+Consequently a natural CURRENT order $H\in\mathfrak m_R^r$ internally gives
+$p_\gamma\in\mathfrak m_B^{r-|\gamma|}$ for every pivot-free
+$|\gamma|<r$. No desired coefficient equality or mixed base-order estimate is
+assumed, and no assertion of total-degree homogeneity follows from normal
+homogeneity alone.
+\end{theorem}
+\begin{proof}
+The genuine actual quotient restriction gives the WHOLE analytic congruence
+$H-\operatorname{ev}(p)\in(e)$ for this exact quotient and this exact source
+normal homogeneous polynomial. Its actual Taylor difference is divisible by
+the genuine formal pivot variable. At every joined exponent $(\beta,\gamma)$
+with zero pivot component, the actual variable-divisibility coefficient
+criterion therefore makes that coefficient zero. The literal actual normal
+coefficient dictionary for $H$ and for whole relative polynomial evaluation
+identifies this with equality of every Taylor coefficient of the actual base
+germs $c_\gamma(H)$ and $p_\gamma$. Actual base Taylor injectivity yields the
+entire germ equality. Under the disclosed natural current-order hypothesis,
+the first theorem produces the finite base power for $c_\gamma(H)$; substituting
+the internally proved equality gives the claimed actual coefficient bound.
+This is a concrete finite mixed coefficient constraint. Complete mixed-filtered
+syzygy lifting, current maximal-symbol regularity and relative forward HS remain
+subsequent obligations.
+\end{proof}

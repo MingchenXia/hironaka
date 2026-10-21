@@ -1,0 +1,29 @@
+\begin{lemma}[A restricted tower whose centres miss the open set is empty]
+\label{bcalc:restrict-empty-tower}
+\uses{hir:blowup-tower,hir:open-restriction-tower,hir:tower-split,hir:centre-function}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.RestrictEmptyTower.CentresAvoid,TranscendentalNakamaye.Pending.RestrictEmptyTower.CentresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_refl,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_refl,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_step_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_step_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.preimage_val_eq_empty_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_of_centresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_of_centresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_append_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_append_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_head,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_head,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_head}
+\leanok
+Let \(T\) be a tower over \(X\) with centres \(C_i\subset X_i\) and projections \(p_i\colon X_i\to X\), and \(U\subset X\) open. The restriction \(T|_U\)
+(Lemma~\ref{hir:open-restriction-tower}) has only empty centres if and only if \(C_i\cap p_i^{-1}(U)=\emptyset\) for every \(i\). In particular, if every
+\(C_i\) lies in \(p_i^{-1}(F)\) for a set \(F\) with \(U\cap F=\emptyset\), then \(T|_U\) has only empty centres. Both conditions pass to concatenations
+\(T=T_0T_1\) (for \(T_1\), with \(U\) and \(F\) replaced by their preimages in the last stage of \(T_0\)), hence to the head \(T_0\) of a split of \(T\)
+(Lemma~\ref{hir:tower-split}).
+\end{lemma}
+\begin{proof}
+\leanok
+The centres of \(T|_U\) are the traces \(C_i\cap p_i^{-1}(U)\) of the centres of \(T\) on the open preimages of \(U\) (Lemma~\ref{hir:open-restriction-tower});
+a trace on an open subset is empty iff the set misses it. If \(C_i\subset p_i^{-1}(F)\) and \(U\cap F=\emptyset\), a point of \(C_i\cap p_i^{-1}(U)\) would map into
+\(U\cap F\). For \(T_0T_1\) the centres are those of \(T_0\) followed by those of \(T_1\), and the projections of the stages of \(T_1\) to \(X\) are those to the
+last stage of \(T_0\) followed by \(p_{T_0}\) (Definition~\ref{hir:blowup-tower}). The head of a split followed by its tail is \(T\)
+(Lemma~\ref{hir:tower-split}).
+\end{proof}
+
+\paragraph{Re-basing Step~1a's restricted marked ideal.} In Step~1a of the maximal-order step (Proposition~\ref{hir:maximal-order-step}) the restricted
+marked ideal of Lemma~\ref{bcalc:member-restriction-domain} is formed at a stage depending on the point and restricted to a neighbourhood \(W\) of the image
+of the point. A nearby point whose stage is later is compared by re-basing across the steps between the two stages, which are empty over \(W\)
+(Lemma~\ref{bcalc:restrict-empty-tower}). The marked ideal formed at the earlier stage and transformed along these steps is then the one formed at the later
+stage, up to restricted equivalence (Definition~\ref{hir:restricted-equivalence}), which the invariant does not see (Definition~\ref{hir:centre-function}(7)).
+This is the lemma of the source on the commutativity of Step~1 with étale morphisms (the blow-ups whose centres ``do not hit the images'' pull
+back to isomorphisms, and \(\phi^*(\overline{\mathcal J}_{i_l|H^s_{\alpha i_l}})=\overline{\mathcal J}'_{j_{l'}|(H')^s_{\alpha j_{l'}}}\)), with steps of empty centre in place of
+isomorphisms.

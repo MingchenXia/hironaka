@@ -1,0 +1,20 @@
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+open Set Filter
+open scoped Topology Manifold
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.NormalCrossingsComparison
+
+open FirstPass FirstPass.BlowupSequences NormalCrossings BlowupSNCTransform
+  SimultaneousNormalCrossings RegularAtDimTransport RegularPatchPushforward MarkedIdeals
+  BlowupStrictSubmanifold
+
+noncomputable section
+
+variable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+
+variable [IsComplexManifold n X]
+

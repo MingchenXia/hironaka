@@ -1,0 +1,834 @@
+{
+  "status": "DRAFT_ONLY_COMPLETE_ORIGINAL_SAME_PARENT_CHAIN_PROVISIONAL_PENDING_ACTUAL_METADATA_CLOSURE",
+  "fixed_ordinary_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CoefficientRestrictionTower.lean",
+  "source_git_blob": "bd1e459d51483d77ec55ed72d080882a1c1ebb1e",
+  "whole_original_source_sha256": "97e1746c7826578a04f36426376cb2185779ee37d050930131367087b68ec3a4",
+  "draft_path": "CoefficientRestrictionTowerIffOriginalExact.lean",
+  "draft_sha256": "1141755f1a8591188fb25d9f402df710bf1bf408a286c23ee2f603c4ceda9f26",
+  "draft_lines": 671,
+  "destination_module": "Hironaka.Support.CoefficientRestrictionTowerIffOriginalExact",
+  "primary_requested_native_declaration": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff",
+  "selected_complete_declarations": 12,
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower",
+    "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff"
+  ],
+  "selected_payloads": [
+    {
+      "kind": "def",
+      "short_name": "GoodAt",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt",
+      "start_character": 2750,
+      "end_character": 3622,
+      "start_byte": 2831,
+      "end_byte": 3766,
+      "start_line": 54,
+      "end_line": 63,
+      "sha256": "441b8de057d42263616ebab4400c2f590209a943bf461e8a2f2160de9cbc5467",
+      "complete_original_payload": "/-- **The coefficient invariant at a point** of the strict transform `S_T` of `S` along `T`: a flat chart `c` for `S_T`\nat `p` (dimension `k ≤ n`) and generators `G` of `(𝔪_T)_p` such that for every generator `g` and every list `L` of normal\ndirections with `|L| < μ`, the normal derivative `∂^L g` restricts on `S_T` near `p` into `[𝓓^{|L|} 𝔪]_T`. -/\ndef GoodAt (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (p : Y) : Prop :=\n  ∃ (k : ℕ) (_ : k ≤ n) (c : FlatChart n (strictAlong T S) p k) (G : (Y → ℂ) → Prop),\n    (∀ g, G g → (geoTransformAlong 𝔪 T).ideal.mem p g) ∧\n    (∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → IsInSpanAt (n := n) G p f) ∧\n    ∀ g, G g → ∀ L : List (Fin n), NormalIdx k L → L.length < 𝔪.d →\n      IsInSpanOnAt (n := n) (strictAlong T S) ((geoTransformAlong (derivMarked 𝔪 L.length) T).ideal.mem p) p\n        (c.nd L g)\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "GoodAt.orderGE",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE",
+      "start_character": 3623,
+      "end_character": 4681,
+      "start_byte": 3767,
+      "end_byte": 4885,
+      "start_line": 65,
+      "end_line": 79,
+      "sha256": "6e75d1ad5a82202741d9e5d51fd92cb888be8c5eaf7259cea251087744520750",
+      "complete_original_payload": "/-- **The conclusion of the invariant**: at a good point `p ∈ S_T` where every `[𝓓^i 𝔪]_T` (`i < μ`) has order\n`≥ μ - i` along `S_T`, every germ of `𝔪_T` lies in `𝔪_p^μ`. -/\ntheorem GoodAt.orderGE (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} {T : BlowupTower X Y} {p : Y}\n    (hp : GoodAt 𝔪 S T p) (hcoh : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal p (𝔪.d - i)) :\n    ∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → (idealPow (pointIdeal n p) 𝔪.d).mem p f := by\n  obtain ⟨k, -, c, G, hGmem, hGgen, hGder⟩ := hp\n  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcoh\n  have hG : ∀ g, G g → (idealPow (pointIdeal n p) 𝔪.d).mem p g := by\n    intro g hg\n    refine c.mem_idealPow_of_vanishesToOrderOn (hhol p g (hGmem g hg)) fun L hL hLlen => ?_\n    exact vanishesToOrderOn_of_isInSpanOnAt (hGder g hg L hL hLlen) fun s hs =>\n      hD L.length hLlen s hs\n  intro f hf\n  exact mem_idealPow_of_isInSpanAt ((hGgen f hf).mono fun g hg => hG g hg)\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "goodAt_refl",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl",
+      "start_character": 4682,
+      "end_character": 5515,
+      "start_byte": 4886,
+      "end_byte": 5763,
+      "start_line": 81,
+      "end_line": 91,
+      "sha256": "b17dd5b861b72e6dad898c525d1c879ca58c64062d7a10f36987eb4e4af1e3a1",
+      "complete_original_payload": "/-- **Every point of `S` is good** for the empty tower: in a flat chart, the normal derivatives of germs of `𝔞` lie in\n`𝓓^{|L|} 𝔞`. -/\ntheorem goodAt_refl (𝔪 : MarkedIdeal n X) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X} (hS : IsClosedSubmanifold n S)\n    {p : X} (hp : p ∈ S) : GoodAt 𝔪 S (BlowupTower.refl : BlowupTower X X) p := by\n  obtain ⟨k, hk⟩ := hS.2 p hp\n  refine ⟨k, hk.1, FlatChart.ofRegularAtDim hk, 𝔪.ideal.mem p, fun g hg => hg,\n    fun f hf => InvertibleIdealQuotient.isInSpanAt_self hf\n      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔞 p f hf), fun g hg L _ _ => ?_⟩\n  have hmem := (FlatChart.ofRegularAtDim hk).nd_mem_iterDerivIdeal h𝔞 hg L\n  exact ⟨1, fun _ => (FlatChart.ofRegularAtDim hk).nd L g, fun _ => 1, fun _ => hmem,\n    fun _ => holomorphicAt_const 1, Eventually.of_forall fun y _ => by simp⟩\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "FlatChart.exists_of_map",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map",
+      "start_character": 6388,
+      "end_character": 8198,
+      "start_byte": 6700,
+      "end_byte": 8614,
+      "start_line": 111,
+      "end_line": 142,
+      "sha256": "5583ac9b9d8d35f8c9128042faad2914932f8615e8681558c6cc4a9b33dc0601",
+      "complete_original_payload": "/-- **A flat chart from a holomorphic map with injective derivative.** -/\ntheorem FlatChart.exists_of_map {S' : Set Z} {z : Z} {k : ℕ} {W : Z → ComplexModel n} {O : Set Z} (hO : IsOpen O)\n    (hzO : z ∈ O) (hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y) (hWz : W z = 0)\n    (hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)))\n    (hflat : ∀ y ∈ O, (y ∈ S' ↔ W y ∈ complexCoordinatePlane n k)) :\n    ∃ c : FlatChart n S' z k, c.ψ =ᶠ[𝓝 z] W := by\n  set e := chartAt (ComplexModel n) z with he\n  set Nset : Set (ComplexModel n) := e.target ∩ e.symm ⁻¹' O with hNset\n  have hNo : IsOpen Nset := e.continuousOn_symm.isOpen_inter_preimage e.open_target hO\n  have hzN : e z ∈ Nset := ⟨e.map_source (mem_chart_source _ z), by\n    rw [mem_preimage, e.left_inv (mem_chart_source _ z)]; exact hzO⟩\n  have hFd : DifferentiableOn ℂ (fun ζ => W (e.symm ζ)) Nset := fun ζ hζ => by\n    have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z) hζ.1\n    exact (mdifferentiableAt_iff_differentiableAt.mp ((hW _ hζ.2).comp _ h1)).differentiableWithinAt\n  obtain ⟨Θ, hΘN, hΘF, -⟩ := FirstPass.exists_localHolomorphicEquivAt hNo hzN hFd hinj\n  refine ⟨⟨Θ, fun ζ hζ => (hΘN hζ).1, ?_, ?_⟩, ?_⟩\n  · rw [hΘF]\n    show W (e.symm (e z)) = 0\n    rw [e.left_inv (mem_chart_source _ z)]; exact hWz\n  · intro y hy hyΘ\n    have hyO : y ∈ O := by\n      have h := (hΘN hyΘ).2\n      rwa [mem_preimage, e.left_inv hy] at h\n    rw [hΘF]\n    show y ∈ S' ↔ W (e.symm (e y)) ∈ _\n    rw [e.left_inv hy]; exact hflat y hyO\n  · filter_upwards [e.open_source.mem_nhds (mem_chart_source _ z)] with y hy\n    show Θ.toFun (e y) = W y\n    rw [hΘF]\n    show W (e.symm (e y)) = W y\n    rw [e.left_inv hy]\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "FlatChart.eventually_map_inv",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv",
+      "start_character": 8199,
+      "end_character": 8577,
+      "start_byte": 8615,
+      "end_byte": 9014,
+      "start_line": 144,
+      "end_line": 148,
+      "sha256": "0b2b855a1c99f8a1883ce05de165fc9a8e100686432151768c8b925579de1709",
+      "complete_original_payload": "/-- For a flat chart `c` with `c.ψ = W` near `z`, `W (c.inv u) = u` near `0`. -/\ntheorem FlatChart.eventually_map_inv {S' : Set Z} {z : Z} {k : ℕ} (c : FlatChart n S' z k) {W : Z → ComplexModel n}\n    (hcW : c.ψ =ᶠ[𝓝 z] W) : ∀ᶠ u in 𝓝 (0 : ComplexModel n), W (c.inv u) = u := by\n  filter_upwards [c.eventually_ψ_inv, c.tendsto_inv.eventually hcW] with u hu hu'\n  rw [← hu', hu]\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "goodAt_step_of_notMem",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem",
+      "start_character": 8673,
+      "end_character": 17080,
+      "start_byte": 9110,
+      "end_byte": 18018,
+      "start_line": 158,
+      "end_line": 290,
+      "sha256": "8e5771ad1366c4fac177ac076f900d1e5dead9206f64aca6fe7de16c1b6647eb",
+      "complete_original_payload": "/-- **The invariant off the centre**: if `π z ∉ C` and `π z` is good for `T`, then `z` is good for the tower\ncontinued by the blowup `π` along `C` (the generators pull back, `π` is a local biholomorphism). -/\ntheorem goodAt_step_of_notMem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}\n    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)\n    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)\n    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)\n    (hSc : IsClosed (strictAlong T S)) {z : Z} (hzC : π z ∉ C) (hgood : GoodAt 𝔪 S T (π z)) :\n    GoodAt 𝔪 S (.step T C π hπ) z := by\n  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood\n  have hπc : Continuous π := hπ.contMDiff.continuous\n  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=\n    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)\n  have hSev : ∀ᶠ y in 𝓝 z, (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) := by\n    filter_upwards [(hπ.1.1.isOpen_compl.preimage hπc).mem_nhds hzC] with y hy\n    rw [strictAlong_step]\n    refine ⟨fun h => ?_, fun h => subset_closure ⟨h, hy⟩⟩\n    exact closure_minimal (preimage_mono sdiff_subset) (hSc.preimage hπc) h\n  -- the new coordinates `W = ψ ∘ π`\n  set W : Z → ComplexModel n := fun y => c.ψ (π y) with hWdef\n  have hev : ∀ᶠ y in 𝓝 z, π y ∈ BlowupFlatCoordinates.flatDomain c.Φ ∧\n      (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) :=\n    ((hπc.tendsto z).eventually c.eventually_mem_flatDomain).and hSev\n  obtain ⟨O, hOsub, hO, hzO⟩ := mem_nhds_iff.mp hev\n  have hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y := fun y hy =>\n    (c.mdifferentiableAt_ψ (hOsub hy).1).comp y (hπd y)\n  have hflat : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y ∈ complexCoordinatePlane n k) := fun y hy => by\n    rw [(hOsub hy).2]; exact c.flat (hOsub hy).1.1 (hOsub hy).1.2\n  have hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)) := by\n    set I := 𝓘(ℂ, ComplexModel n) with hI\n    have hrange : range I = univ := by simp [hI]\n    set e := chartAt (ComplexModel n) z with he\n    set e' := chartAt (ComplexModel n) (π z) with he'\n    set F : ComplexModel n → ComplexModel n := fun u => e' (π (e.symm u)) with hF\n    have hmd : MDifferentiableAt I I π z := hπd z\n    have hderiv : mfderiv I I π z = fderiv ℂ F (e z) := by\n      rw [hmd.mfderiv, hrange, fderivWithin_univ]\n      rfl\n    have hFinj : Function.Injective (fderiv ℂ F (e z)) := by\n      have hz : z ∉ BlowupSequences.exceptionalLocus n π :=\n        fun h => hzC (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ h)\n      simp only [exceptionalLocus, mem_ofPred_eq, not_not] at hz\n      rw [hderiv] at hz\n      exact hz.1\n    -- `W ∘ e⁻¹ = Φ ∘ F` near `e z`\n    have hzs : z ∈ e.source := mem_chart_source _ z\n    have hFz : F (e z) = e' (π z) := by simp only [hF, e.left_inv hzs]\n    have hloc : (fun ζ => W (e.symm ζ)) =ᶠ[𝓝 (e z)] fun ζ => c.Φ.toFun (F ζ) := by\n      filter_upwards with ζ\n      rfl\n    have hFd : DifferentiableAt ℂ F (e z) := by\n      have h := (contMDiffOn_iff.mp (hπ.contMDiff.contMDiffOn (s := univ))).2 z (π z)\n      have hset : (e.target ∩ e.symm ⁻¹' (univ ∩ π ⁻¹' e'.source)) ∈ 𝓝 (e z) := by\n        refine (e.continuousOn_symm.isOpen_inter_preimage e.open_target\n          (isOpen_univ.inter (hπc.isOpen_preimage _ e'.open_source))).mem_nhds ?_\n        exact ⟨e.map_source hzs, by rw [mem_preimage, e.left_inv hzs]; exact ⟨mem_univ _, mem_chart_source _ _⟩⟩\n      refine ((h.differentiableOn (by simp)).mono ?_).differentiableAt hset\n      intro u hu\n      exact ⟨⟨mem_univ _, hu.1⟩, mem_univ _, hu.2.2, mem_univ _⟩\n    have hΦd : DifferentiableAt ℂ c.Φ.toFun (F (e z)) := by\n      rw [hFz]\n      exact c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds c.Φ.center_mem_source)\n    have hcomp : HasFDerivAt (fun ζ => c.Φ.toFun (F ζ))\n        ((fderiv ℂ c.Φ.toFun (F (e z))).comp (fderiv ℂ F (e z))) (e z) :=\n      hΦd.hasFDerivAt.comp (e z) hFd.hasFDerivAt\n    rw [hloc.fderiv_eq, hcomp.fderiv]\n    refine (c.injective_fderiv_Φ ?_).comp hFinj\n    rw [hFz]; exact c.Φ.center_mem_source\n  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW c.ψ_self hinj hflat\n  -- `π ∘ c'.inv = c.inv` near `0`\n  have hWinv := FlatChart.eventually_map_inv c' hc'\n  have hπinv : ∀ᶠ u in 𝓝 (0 : ComplexModel n), π (c'.inv u) = c.inv u := by\n    have ht : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=\n      (hπc.tendsto z).comp c'.tendsto_inv\n    filter_upwards [hWinv, ht.eventually c.eventually_inv_ψ] with u hu hu'\n    rw [← hu', show c.ψ (π (c'.inv u)) = u from hu]\n  -- normal derivatives of pulled-back generators\n  have hnd : ∀ (g : Y → ℂ) (L : List (Fin n)), c'.nd L (g ∘ π) =ᶠ[𝓝 z] fun z' => c.nd L g (π z') := by\n    intro g L\n    have hgerm : (fun u => (g ∘ π) (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)] fun u => g (c.inv u) := by\n      filter_upwards [hπinv] with u hu\n      simp only [Function.comp_apply, hu]\n    have hiter := iterDeriv_congr_of_eventuallyEq hgerm (L.map bv)\n    filter_upwards [c'.tendsto_ψ.eventually hiter, hc'] with z' h1 h2\n    simp only [FlatChart.nd]\n    rw [h1, h2]\n  -- the transformed ideals at `z`\n  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T\n  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]\n  have hpb : ∀ {𝔟 : GermIdeal n Y} {g : Y → ℂ}, 𝔟.IsCoherent → 𝔟.mem (π z) g →\n      (GermIdeal.pullback (m := n) π 𝔟).mem z (g ∘ π) := fun {𝔟} {g} h𝔟 hg =>\n    InvertibleIdealQuotient.isInSpanAt_self (S := fun s => ∃ a, 𝔟.mem (π z) a ∧ s = a ∘ π) ⟨g, hg, rfl⟩\n      (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd)\n        (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔟 _ _ hg))\n  refine ⟨k, hkn, c', fun h => ∃ g, G g ∧ h = g ∘ π, ?_, ?_, ?_⟩\n  · rintro h ⟨g, hg, rfl⟩\n    rw [hideal]\n    exact GlueingTrivialAction.pullback_le_controlledTransform hπ hcohT 𝔪.d z _ (hpb hcohT (hGmem g hg))\n  · intro f hf\n    -- `f ∈ π^*𝔪_T` at `z` (off the centre the denominator contains `1`)\n    have hf' : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z f := by\n      have h1 := MarkedIdeals.MarkedIdeal.one_mem_idealPow (n := n)\n        (MarkedIdeals.MarkedIdeal.one_mem_pullback_vanishingIdeal (n := n) (π := π) hzC hπ.1.1) 𝔪.d\n      have hf2 := hf\n      rw [geoTransformAlong_step, geoTransform_ideal, hNT, MarkedIdeals.MarkedIdeal.geoStrictTransform_univ hπ, hd]\n        at hf2\n      have h3 := (InvertibleIdealQuotient.mem_colon_iff.mp hf2).2 _ h1\n      rw [BlowupTowerTransforms.restrictOn_univ (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT)]\n        at h3\n      exact NormalDerivativeChart.mem_congr_of_isCoherent (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT) h3\n        (Eventually.of_forall fun y => by simp)\n    refine RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)\n      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z f from hf')\n    obtain ⟨a, ha, rfl⟩ := ht\n    exact (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha)).mono fun s ⟨g, hg, hs⟩ => ⟨g, hg, hs⟩\n  · rintro h ⟨g, hg, rfl⟩ L hL hLlen\n    obtain ⟨K, s, a, hs, ha, hsum⟩ := hGder g hg L hL hLlen\n    have hdL : L.length ≤ 𝔪.d := hLlen.le\n    have hDideal : (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal =\n        controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 L.length) T).ideal\n          (geoTransformAlong (derivMarked 𝔪 L.length) T).d := by\n      rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN _ hdL) (hDcoh _ hdL) hπ]\n    refine ⟨K, fun i => s i ∘ π, fun i => a i ∘ π, fun i => ?_, fun i =>\n      HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (ha i), ?_⟩\n    · rw [hDideal]\n      exact GlueingTrivialAction.pullback_le_controlledTransform hπ (hDcoh _ hdL) _ z _\n        (hpb (hDcoh _ hdL) (hs i))\n    · filter_upwards [hnd g L, hSev, (hπc.tendsto z).eventually hsum] with z' h1 h2 h3 hz'\n      rw [h1]\n      exact h3 (h2.mp hz')\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "nd_monomial_identity",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity",
+      "start_character": 18184,
+      "end_character": 22675,
+      "start_byte": 19136,
+      "end_byte": 23877,
+      "start_line": 315,
+      "end_line": 376,
+      "sha256": "7a7addba7c1f1cce68a775ea53f3803dbd6267e16a8c4505811bb23f17fe00dc",
+      "complete_original_payload": "/-- **The normal derivatives through a monomial chart, on the manifolds.**  Let `c''` be a flat chart at `π z`,\n`W` coordinates near `z` with `c''.ψ ∘ π = σⱼ ∘ W` on an open `O ∋ z`, and `c'` a flat chart at `z` with\n`c'.ψ = W - W z` near `z`.  If `g ∘ π = Wⱼ^d · h'` near `z`, then for normal directions `L` (`l ≠ j`, `k_C ≤ l`)\n`Wⱼ^d · ∂^L h' = Wⱼ^{|L|} · (∂^L g) ∘ π` near `z`. -/\ntheorem nd_monomial_identity {π : Z → Y} (hπ : Continuous π) {z : Z} {S : Set Y} {S'' : Set Z}\n    {k'' k' kC : ℕ} (c'' : FlatChart n S (π z) k'') (c' : FlatChart n S'' z k') {W : Z → ComplexModel n}\n    {O : Set Z} (hO : IsOpen O) (hzO : z ∈ O) {j : Fin n}\n    (hWeq : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z')) (hc' : c'.ψ =ᶠ[𝓝 z] fun y => W y - W z)\n    {d : ℕ} {g : Y → ℂ} {h' : Z → ℂ} (hg : HolomorphicAt n g (π z)) (hh' : HolomorphicAt n h' z)\n    (hrel : ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ d * h' y) (L : List (Fin n)) (hL : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1) :\n    ∀ᶠ z' in 𝓝 z, W z' j ^ d * c'.nd L h' z' = W z' j ^ L.length * c''.nd L g (π z') := by\n  have hσc : Continuous (monomial (n := n) kC j) := (contDiff_monomial kC j).continuous\n  have hσd : Differentiable ℂ (monomial (n := n) kC j) := (contDiff_monomial kC j).differentiable (by simp)\n  have hσa : monomial kC j (W z) = 0 := by rw [← hWeq z hzO]; exact c''.ψ_self\n  obtain ⟨r₁, hr₁, hball₁⟩ := Metric.eventually_nhds_iff_ball.mp (c''.eventually_differentiableAt_comp_inv hg)\n  have hG₀ : DifferentiableOn ℂ (fun w => g (c''.inv w)) (ball 0 r₁) := fun w hw =>\n    (hball₁ w hw).differentiableWithinAt\n  obtain ⟨r₀, hr₀, hball₀⟩ := Metric.eventually_nhds_iff_ball.mp (c'.eventually_differentiableAt_comp_inv hh')\n  have hH : DifferentiableOn ℂ (fun u => h' (c'.inv u)) (ball 0 r₀) := fun u hu =>\n    (hball₀ u hu).differentiableWithinAt\n  obtain ⟨U, hU⟩ : ∃ U : Set (ComplexModel n), U = monomial kC j ⁻¹' ball 0 r₁ := ⟨_, rfl⟩\n  have hUo : IsOpen U := hU ▸ isOpen_ball.preimage hσc\n  have hUσ : MapsTo (monomial (n := n) kC j) U (ball 0 r₁) := fun w hw => by rw [hU] at hw; exact hw\n  have hGσ : DifferentiableOn ℂ (fun w => g (c''.inv (monomial kC j w))) U := fun w hw =>\n    (((hG₀ _ (hUσ hw)).differentiableAt (isOpen_ball.mem_nhds (hUσ hw))).comp w (hσd w)).differentiableWithinAt\n  have hW'inv := FlatChart.eventually_map_inv c' hc'\n  have hinv : Tendsto c'.inv (𝓝 (0 : ComplexModel n)) (𝓝 z) := c'.tendsto_inv\n  have hπinv : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=\n    (hπ.tendsto z).comp hinv\n  have hid : (fun u => (u + W z) j ^ d * h' (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)]\n      fun u => g (c''.inv (monomial kC j (u + W z))) := by\n    filter_upwards [hW'inv, hinv.eventually (hO.mem_nhds hzO), hinv.eventually hrel,\n      hπinv.eventually c''.eventually_inv_ψ] with u hu huO hurel huinv\n    have hu' : W (c'.inv u) - W z = u := hu\n    have hWu : W (c'.inv u) = u + W z := sub_eq_iff_eq_add.mp hu'\n    rw [← hWu, ← hurel, ← hWeq _ huO, huinv]\n  have hI := iterDeriv_congr_of_eventuallyEq hid (L.map bv)\n  have ht : Tendsto c'.ψ (𝓝 z) (𝓝 (0 : ComplexModel n)) := c'.tendsto_ψ\n  have hshift : ∀ᶠ z' in 𝓝 z, c'.ψ z' + W z ∈ U := by\n    have hcont : ContinuousAt (fun u : ComplexModel n => u + W z) 0 := (continuous_add_const (W z)).continuousAt\n    have h0 : (0 : ComplexModel n) + W z ∈ U := by\n      rw [hU, Set.mem_preimage, zero_add, hσa]; exact mem_ball_self hr₁\n    exact ht.eventually (hcont.eventually (hUo.mem_nhds h0))\n  have hLj : ∀ l ∈ L, ∀ (w : ComplexModel n) (t : ℂ), (fun u : ComplexModel n => (u + W z) j ^ d) (w + t • bv l) =\n      (fun u : ComplexModel n => (u + W z) j ^ d) w := fun l hl w t => by\n    have hjl : j ≠ l := Ne.symm (hL l hl).1\n    simp [bv, hjl]\n  have hcd : Differentiable ℂ (fun u : ComplexModel n => (u + W z) j ^ d) := fun u =>\n    (((EuclideanSpace.proj j : ComplexModel n →L[ℂ] ℂ).differentiableAt).comp u\n      (differentiableAt_id.add_const (W z))).pow d\n  filter_upwards [ht.eventually hI, ht.eventually (isOpen_ball.mem_nhds (mem_ball_self hr₀)), hshift, hc',\n    hO.mem_nhds hzO] with z' h1 h2 h3 h4 hz'O\n  have hlhs := iterDeriv_mul_of_const isOpen_ball hcd hH L hLj (c'.ψ z') h2\n  have hrhs1 := iterDeriv_comp_add hUo hGσ (W z) L h3\n  have hrhs2 := iterDeriv_comp_monomial (G := fun w => g (c''.inv w)) hUo isOpen_ball hUσ hG₀ L hL\n    (c'.ψ z' + W z) h3\n  have h4' : c'.ψ z' = W z' - W z := h4\n  have hWz' : c'.ψ z' + W z = W z' := by rw [h4']; abel\n  simp only [FlatChart.nd]\n  rw [hlhs, hrhs1, hrhs2, hWz'] at h1\n  rw [hWeq z' hz'O]\n  simpa [hWz'] using h1\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "goodAt_step_of_mem",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem",
+      "start_character": 22786,
+      "end_character": 34960,
+      "start_byte": 23988,
+      "end_byte": 36939,
+      "start_line": 386,
+      "end_line": 571,
+      "sha256": "91eb4c3e69236e5a0b67f150551c7d0989fcc996c06e88586fa2c90319bb7389",
+      "complete_original_payload": "/-- **The invariant over the centre**: if `π z ∈ C`, `z` lies on the strict transform of `S_T` and `π z` is good for `T`,\nthen `z` is good for the tower continued by the blowup `π` along `C`.  The new coordinates are a monomial chart\n`x' = x / y_m` over nested product-form coordinates for `C ⊆ S_T`, the new generators are the controlled transforms\n`h' = W_j^{-μ} (g ∘ π)` of the old ones, and `W_j^μ ∂^L h' = W_j^{|L|} (∂^L g) ∘ π` (`nd_monomial_identity`). -/\ntheorem goodAt_step_of_mem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}\n    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)\n    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)\n    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)\n    (hCadm : (geoTransformAlong 𝔪 T).IsAdmissibleCentre C)\n    (hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C)\n    (hSc : IsClosed (strictAlong T S)) (hCS : C ⊆ strictAlong T S) {z : Z}\n    (hz : z ∈ strictAlong (.step T C π hπ) S) (hzC : π z ∈ C) (hgood : GoodAt 𝔪 S T (π z)) :\n    GoodAt 𝔪 S (.step T C π hπ) z := by\n  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood\n  have hπc : Continuous π := hπ.contMDiff.continuous\n  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=\n    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)\n  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcohT\n  -- nested product-form coordinates for `C ⊆ S_T` at `π z`\n  obtain ⟨kC, hkC⟩ := hπ.1.2 (π z) hzC\n  have hSreg : RegularAtDim (n := n) (strictAlong T S) (π z) k := ⟨hkn, hCS hzC, c.Φ, c.src, c.zero, c.flat⟩\n  have hkCk : kC ≤ k := BlowupStrictSubmanifold.le_of_regularAtDim_subset hkC hSreg hCS\n  obtain ⟨c'', hc''C, hc''nd⟩ := FlatChart.exists_nested c hkCk hkn hkC hCS\n  -- the monomial chart at `z`\n  obtain ⟨j, hj, O, hO, hzO, W, hWs, hWmem, hℓ, hiff⟩ :=\n    BlowupStrictSubmanifold.exists_local_geoStrictTransform hπ c''.src hc''C c''.flat\n      (mem_flatDomain_self c''.Φ)\n  obtain ⟨ℓ, ⟨hℓs, hℓπ⟩, -⟩ := BlowupLocalSurjectivity.existsUnique_monomialLift hπ c''.src hc''C hj\n  have hWeq : ∀ z' ∈ O, π z' ∈ flatDomain c''.Φ ∧\n      monomial kC j (W z') = c''.Φ.toFun (chartAt (ComplexModel n) (π z) (π z')) := by\n    intro z' hz'\n    have hw := hWmem z' hz'\n    have h1 := hℓ ℓ hℓs hℓπ z' hz' hw\n    have h2 := congrFun hℓπ (LiftedOpen.mk _ (W z') hw)\n    rw [Function.comp_apply, h1] at h2\n    have h3 := flatInverse_mem c''.Φ hw c''.src\n    rw [h2]\n    simp only [monomialChart, LiftedOpen.toModel_mk]\n    exact ⟨h3.1, h3.2.symm⟩\n  have hWeq' : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z') := fun z' hz' => (hWeq z' hz').2.symm\n  obtain ⟨hjk, hWz⟩ := (hiff z hzO).mp hz\n  have hCu : ∀ u ∈ O, (π u ∈ C ↔ W u j = 0) := fun u hu => by\n    rw [hc''C (hWeq u hu).1.1 (hWeq u hu).1.2, ← (hWeq u hu).2,\n      BlowupStrictSubmanifold.monomial_mem_plane_iff hj]\n  -- the new flat chart `W - W z`\n  have hW' : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) (fun y => W y - W z) y :=\n    fun y hy => ((hWs y hy).mdifferentiableAt (by simp)).sub mdifferentiableAt_const\n  have hflat' : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y - W z ∈ complexCoordinatePlane n k) := by\n    intro y hy\n    rw [BlowupStrictSubmanifold.sub_mem_plane_iff hWz]\n    exact (hiff y hy).trans ⟨fun h => h.2, fun h => ⟨hjk, h⟩⟩\n  have hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ) - W z) (chartAt (ComplexModel n) z z)) := by\n    set e := chartAt (ComplexModel n) z with he\n    have hFd : DifferentiableAt ℂ (fun ζ => W (e.symm ζ)) (e z) := by\n      have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z)\n        (e.map_source (mem_chart_source _ z))\n      have h2 : MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W (e.symm (e z)) := by\n        rw [e.left_inv (mem_chart_source _ z)]; exact (hWs z hzO).mdifferentiableAt (by simp)\n      exact mdifferentiableAt_iff_differentiableAt.mp (h2.comp _ h1)\n    rw [fderiv_sub_const]\n    refine (injective_iff_map_eq_zero _).mpr fun v hv => ?_\n    by_contra hv0\n    apply BlowupFibreDirection.fderiv_monomialInverse_ne_zero hO hWs hWmem hℓs (hℓ ℓ hℓs hℓπ) hzO hv0\n    rw [hFd.fderiv_restrictScalars ℝ]\n    exact hv\n  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW' (sub_self _) hinj hflat'\n  -- the local equation `W_j` of the exceptional divisor\n  have hl : BlowupFunctionTransform.IsLocalEquation hπ O (fun p => W p j) :=\n    GlueingTrivialAction.isLocalEquation_monomial hπ c''.src hc''C hj hO hWs hWeq\n  have hlhol : HolomorphicAt n (fun p => W p j ^ 𝔪.d) z := by\n    have h1 : HolomorphicAt n (fun p => W p j) z := by\n      filter_upwards [hO.mem_nhds hzO] with y hy\n      exact (hl.mdifferentiableOn y hy).mdifferentiableAt (hO.mem_nhds hy)\n    exact h1.mono fun y hy => hy.pow _\n  -- the transformed ideals\n  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T\n  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]\n  have hDideal : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 i) T).ideal (𝔪.d - i) := fun i hi => by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN i hi) (hDcoh i hi) hπ,\n      d_geoTransformAlong, derivMarked_d]\n  have h𝔪le : (geoTransformAlong 𝔪 T).ideal.Le (idealPow (vanishingIdeal (n := n) C) 𝔪.d) := by\n    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcohT hCadm\n    rwa [hd] at this\n  have hDle : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.Le\n      (idealPow (vanishingIdeal (n := n) C) (𝔪.d - i)) := fun i hi => by\n    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre (hDN i hi) (hDcoh i hi) (hDadm i hi)\n    rwa [d_geoTransformAlong, derivMarked_d] at this\n  -- `W_j` vanishes on no relatively open subset of the strict transform\n  have hnonS : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ strictAlong (.step T C π hπ) S).Nonempty →\n      ∃ y ∈ V ∩ strictAlong (.step T C π hπ) S, W y j ^ 𝔪.d ≠ 0 := by\n    rintro V hV hVO ⟨y₀, hy₀V, hy₀S⟩\n    rw [strictAlong_step] at hy₀S\n    obtain ⟨y₁, hy₁V, hy₁S, hy₁C⟩ :=\n      mem_closure_iff.mp (show y₀ ∈ closure (π ⁻¹' (strictAlong T S \\ C)) from hy₀S) V hV hy₀V\n    refine ⟨y₁, ⟨hy₁V, ?_⟩, pow_ne_zero _ fun h => hy₁C ((hCu y₁ (hVO hy₁V)).mpr h)⟩\n    rw [strictAlong_step]\n    exact subset_closure ⟨hy₁S, hy₁C⟩\n  have hnonU : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ univ).Nonempty → ∃ y ∈ V ∩ univ, W y j ^ 𝔪.d ≠ 0 := by\n    rintro V hV hVO ⟨y₀, hy₀V, -⟩\n    obtain ⟨y, hyV, hy⟩ := hl.nonvanishing V hV hVO ⟨y₀, hy₀V⟩\n    exact ⟨y, ⟨hyV, mem_univ _⟩, pow_ne_zero _ hy⟩\n  refine ⟨k, hkn, c', fun h' => ∃ g, G g ∧ HolomorphicAt n h' z ∧\n    ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ 𝔪.d * h' y, ?_, ?_, ?_⟩\n  · -- the new generators are germs of the transform\n    rintro h' ⟨g, hg, hh', hrel⟩\n    rw [hideal]\n    exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hGmem g hg) hh' hrel\n  · -- they generate it\n    intro f hf\n    have hfhol : HolomorphicAt n f z := (show (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f\n      by rw [← hideal]; exact hf).1\n    have hWf : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z\n        (fun y => W y j ^ 𝔪.d * f y) := by\n      have hf' : (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f := by rw [← hideal]; exact hf\n      refine (InvertibleIdealQuotient.mem_colon_iff.mp hf').2 _ ?_\n      exact (hl.idealPow_mem_iff 𝔪.d z hzO _).mpr (InvertibleIdealQuotient.isInSpanAt_self rfl hlhol)\n    -- every generator `g ∘ π` is `W_j^μ h'` with `h'` a new generator\n    have hgen : ∀ g, G g → IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧\n        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z (g ∘ π) := by\n      intro g hg\n      obtain ⟨h', hh', heq⟩ := BlowupFunctionTransform.exists_eq_pow_mul hl hzO (h𝔪le _ _ (hGmem g hg))\n      exact isInSpanAt_of_eq_mul ⟨h', ⟨g, hg, hh', heq.mono fun y hy => hy⟩, rfl⟩\n        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (hhol _ _ (hGmem g hg)))\n        (holomorphicAt_const 1) (heq.mono fun y hy => by simp only [one_mul]; exact hy)\n    have hspan : IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧\n        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z\n        (fun y => W y j ^ 𝔪.d * f y) := RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)\n      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z\n        (fun y => W y j ^ 𝔪.d * f y) from hWf)\n    · obtain ⟨-, K, t, b, ht, hb, hsum⟩ := hspan\n      choose h' hh' htdef using ht\n      refine ⟨hfhol, K, h', b, fun i => hh' i, hb, ?_⟩\n      have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within (W := univ) hO hnonU hzO\n        (F := f) (G := fun y => ∑ i, b i y * h' i y) hfhol\n        (HolomorphicAt.sum _ fun i _ => (hb i).mul (hh' i).choose_spec.2.1) ?_\n      · filter_upwards [hcan] with y hy using hy (mem_univ y)\n      · filter_upwards [hsum] with y hy _\n        rw [hy, Finset.mul_sum]\n        refine Finset.sum_congr rfl fun i _ => ?_\n        rw [htdef i]; ring\n    · obtain ⟨a, ha, rfl⟩ := ht\n      exact RelativePrincipalizationSpan.IsInSpanAt.trans (fun s hs => by\n          obtain ⟨g, hg, rfl⟩ := hs; exact hgen g hg)\n        (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha))\n  · -- the normal derivatives\n    rintro h' ⟨g, hg, hh', hrel⟩ L hL hLlen\n    have hgp : HolomorphicAt n g (π z) := hhol _ _ (hGmem g hg)\n    have hLj : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1 := fun l hl' => by\n      have := hL l hl'\n      exact ⟨fun h => by rw [h] at this; omega, by omega⟩\n    have hid := nd_monomial_identity hπc c'' c' hO hzO hWeq' hc' hgp hh' hrel L hLj\n    have hnd := (hπc.tendsto z).eventually (hc''nd L hL g hgp)\n    obtain ⟨K, s, aa, hs, haa, hsum⟩ := hGder g hg L hL hLlen\n    have hdL : L.length ≤ 𝔪.d := hLlen.le\n    have hex : ∀ i, ∃ s' : Z → ℂ, HolomorphicAt n s' z ∧\n        (s i ∘ π) =ᶠ[𝓝 z] fun y => W y j ^ (𝔪.d - L.length) * s' y := fun i =>\n      BlowupFunctionTransform.exists_eq_pow_mul hl hzO (hDle _ hdL _ _ (hs i))\n    choose s' hs'hol hs'eq using hex\n    have hs'mem : ∀ i, (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal.mem z (s' i) := fun i => by\n      rw [hDideal _ hdL]\n      exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hs i) (hs'hol i) (hs'eq i)\n    have hsub : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S → π z' ∈ strictAlong T S :=\n      Eventually.of_forall fun z' hz' =>\n        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπc hSc hz'\n    have hmul : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S →\n        W z' j ^ 𝔪.d * c'.nd L h' z' = W z' j ^ 𝔪.d * ∑ i, (aa i ∘ π) z' * s' i z' := by\n      filter_upwards [hid, hnd, (hπc.tendsto z).eventually hsum, eventually_all.mpr hs'eq, hsub] with\n        z' h1 h2 h3 h4 h5 hz'\n      rw [h1, h2, h3 (h5 hz'), Finset.mul_sum, Finset.mul_sum]\n      refine Finset.sum_congr rfl fun i _ => ?_\n      have h4i : s i (π z') = W z' j ^ (𝔪.d - L.length) * s' i z' := h4 i\n      have e : W z' j ^ 𝔪.d = W z' j ^ L.length * W z' j ^ (𝔪.d - L.length) := by\n        rw [← pow_add, Nat.add_sub_cancel' hdL]\n      rw [h4i, Function.comp_apply, e]\n      ring\n    have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within hO hnonS hzO\n      (FlatChart.holomorphicAt_nd c' hh' L)\n      (HolomorphicAt.sum _ fun i _ =>\n        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i)).mul (hs'hol i)) hmul\n    exact ⟨K, s', fun i => aa i ∘ π, hs'mem,\n      fun i => HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i), hcan⟩\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "goodAt_tower",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower",
+      "start_character": 35033,
+      "end_character": 36906,
+      "start_byte": 37012,
+      "end_byte": 39034,
+      "start_line": 579,
+      "end_line": 604,
+      "sha256": "07620bce103ffd9729cb37eb13d49e0ee18f93b36b422c25b176ac017effea9e",
+      "complete_original_payload": "/-- **Every point of the strict transform of `S` is good** along a multiple test blow-up of `𝔪` with centres in the\nstrict transforms of `S` (induction on the tower: `goodAt_refl`, `goodAt_step_of_mem`, `goodAt_step_of_notMem`). -/\ntheorem goodAt_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X}\n    (hS : IsClosedSubmanifold n S) :\n    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T → CentresIn S T →\n      ∀ p ∈ strictAlong T S, GoodAt 𝔪 S T p\n  | _, .refl => fun _ _ p hp => goodAt_refl 𝔪 h𝔞 hS hp\n  | _, .step T C π hπ => fun hT hTS z hz => by\n      obtain ⟨hT0, hC⟩ := (isGeoTestTower_step_iff 𝔪 T C π hπ).mp hT\n      obtain ⟨hTS0, hCS⟩ := hTS\n      obtain ⟨-, hNT, -, hSsub, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT0 hTS0\n      have hSc : IsClosed (strictAlong T S) := hSsub.1\n      have hpz : π z ∈ strictAlong T S :=\n        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπ.contMDiff.continuous hSc hz\n      have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT0 hTS0 (π z) hpz\n      have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=\n        (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT0).2.2.2.2.1\n      have hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ := fun i hi =>\n        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.1\n      have hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent := fun i hi =>\n        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.2.2.2.1\n      have hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C := fun i hi =>\n        ((isGeoTestTower_step_iff _ T C π hπ).mp (inclusions_tower 𝔪 hN h𝔞 hi (.step T C π hπ) hT).1).2\n      by_cases hzC : π z ∈ C\n      · exact goodAt_step_of_mem 𝔪 T hπ hNT hcohT hDN hDcoh hC hDadm hSc hCS hz hzC hgood\n      · exact goodAt_step_of_notMem 𝔪 T hπ hNT hcohT hDN hDcoh hSc hzC hgood\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "cosupp_coeff_withN_tower_subset",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset",
+      "start_character": 36907,
+      "end_character": 40041,
+      "start_byte": 39035,
+      "end_byte": 42383,
+      "start_line": 606,
+      "end_line": 654,
+      "sha256": "06d67720ce73c002e707646b4c5d98b43d5b199909e58f99b773398a0bba40d3",
+      "complete_original_payload": "/-- **Włodarczyk `le:S` (2), the inclusion `⊆`** (GGT Proposition 5.6.4 (2)): along a multiple test blow-up `T` of\n`𝔪 = (X, X, E, 𝔞, μ)` with centres in the strict transforms of a closed submanifold `S`,\n`supp[𝓒(𝔪)|_S]_T ⊆ supp(𝔪_T)`. -/\ntheorem cosupp_coeff_withN_tower_subset (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)\n    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)\n    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :\n    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp ⊆ (geoTransformAlong 𝔪 T).cosupp := by\n  intro x hx\n  obtain ⟨-, hRE, -⟩ := coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS\n  obtain ⟨-, hNT, -, hST, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT hTS\n  have hfam := isAmbientFamily_derivMarked hN h𝔞\n  have hall : ∀ i < 𝔪.d, IsGeoTestTower (derivMarked 𝔪 i) T :=\n    fun i hi => (inclusions_tower 𝔪 hN h𝔞 (le_of_lt hi) T hT).1\n  obtain ⟨-, hmsum⟩ := geoTransformAlong_msum (fun i => derivMarked 𝔪 i) hd hfam T\n  obtain ⟨he, hfamT⟩ := hmsum hall\n  -- `x` is in the cosupport of `𝓒(𝔪)_T` along `S_T`\n  have hx1 : x ∈ cosupport n (strictAlong T S) (geoTransformAlong (coeffMarked 𝔪) T).ideal (coeffMarked 𝔪).d := by\n    rw [hRE.cosupp_eq] at hx\n    have := hx\n    rwa [cosupp_withN, d_geoTransformAlong] at this\n  have hxS : x ∈ strictAlong T S := hx1.1\n  -- hence every `[𝓓^i 𝔪]_T` has order `≥ μ - i` along `S_T` at `x`\n  have hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal x (𝔪.d - i) := by\n    intro i hi\n    have hx2 := hx1\n    rw [show (geoTransformAlong (coeffMarked 𝔪) T) = msum (fun i => geoTransformAlong (derivMarked 𝔪 i) T) 𝔪.d\n      from he] at hx2\n    have hJ : ∀ i < 𝔪.d, ∀ y g, (idealPow (geoTransformAlong (derivMarked 𝔪 i) T).ideal\n        (sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) 𝔪.d i)).mem y g → HolomorphicAt n g y :=\n      fun _ _ _ _ hg => holomorphicAt_of_mem_idealPow hg\n    have hmark : (coeffMarked 𝔪).d = (Finset.range 𝔪.d).prod fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d := by\n      simp only [d_geoTransformAlong]; rfl\n    rw [hmark] at hx2\n    have hx3 := ((mem_cosupport_finSumIdeal hJ).mp hx2).2 i hi\n    have hD1 : ∀ j < 𝔪.d, 1 ≤ (geoTransformAlong (derivMarked 𝔪 j) T).d := fun j hj => by\n      rw [d_geoTransformAlong, derivMarked_d]; omega\n    have hpow := MarkedIdealOperationsAlong.cosupport_idealPow_mul_eq_along hST.2\n      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent (hfamT.coh i hi)) (one_le_sumExp hD1 i)\n      (geoTransformAlong (derivMarked 𝔪 i) T).d\n    rw [mul_sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) hi] at hpow\n    rw [hpow, d_geoTransformAlong, derivMarked_d] at hx3\n    exact hx3.2\n  -- the invariant gives the order of `𝔪_T`\n  have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT hTS x hxS\n  have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=\n    (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT).2.2.2.2.1\n  have hord := hgood.orderGE 𝔪 S hcohT hD\n  rw [MarkedIdeal.cosupp, hNT, d_geoTransformAlong]\n  exact ⟨mem_univ x, fun f hf => ⟨f, hord f hf, Eventually.of_forall fun _ _ => rfl⟩⟩\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "cosupp_coeff_withN_tower",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower",
+      "start_character": 40042,
+      "end_character": 40806,
+      "start_byte": 42384,
+      "end_byte": 43209,
+      "start_line": 656,
+      "end_line": 664,
+      "sha256": "2cb2259d918ced4e67346a0c45dedbd0065990ef79f828df4c49d37898e1f7fb",
+      "complete_original_payload": "/-- `supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T` along a multiple test blow-up of `𝔪` with centres in the strict transforms. -/\ntheorem cosupp_coeff_withN_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)\n    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)\n    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :\n    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S := by\n  refine Subset.antisymm (fun x hx => ⟨cosupp_coeff_withN_tower_subset 𝔪 hN h𝔞 hd hS T hT hTS hx, ?_⟩)\n    (coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS).2.2\n  have h := (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp_subset_N hx\n  rwa [N_geoTransformAlong_withN] at h\n",
+      "already_existing_public_helper": false
+    },
+    {
+      "kind": "theorem",
+      "short_name": "coeff_restrict_tower_iff",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff",
+      "start_character": 40807,
+      "end_character": 42918,
+      "start_byte": 43210,
+      "end_byte": 45537,
+      "start_line": 666,
+      "end_line": 695,
+      "sha256": "c7f171c3a8b539e69bcb3cf187b8e9e2dfec0066f2a5bb160b69ccccca265406",
+      "complete_original_payload": "/-- **Włodarczyk `le:S` in full** (GGT Proposition 5.6.4): for `𝔪 = (X, X, E, 𝔞, μ)` with `𝔞` coherent and `μ ≥ 1`\nand a closed submanifold `S`, a tower is a multiple test blow-up of `𝓒(𝔪)|_S` if and only if it is a multiple test\nblow-up of `𝔪` with centres in the strict transforms of `S`, and along it\n`supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T`. -/\ntheorem coeff_restrict_tower_iff (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)\n    {S : Set X} (hS : IsClosedSubmanifold n S) :\n    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →\n      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T ↔ IsGeoTestTower 𝔪 T ∧ CentresIn S T) ∧\n      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T →\n        (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S)\n  | _, .refl => ⟨⟨fun _ => ⟨trivial, trivial⟩, fun _ => trivial⟩, fun _ => cosupp_coeff_withN 𝔪 hN h𝔞 hd S⟩\n  | _, .step T C π hπ => by\n      obtain ⟨ih, -⟩ := coeff_restrict_tower_iff 𝔪 hN h𝔞 hd hS T\n      have hE : (geoTransformAlong (withN (coeffMarked 𝔪) S) T).E = (geoTransformAlong 𝔪 T).E :=\n        MarkedIdealEquivalence.MarkedIdeal.E_geoTransformAlong_eq (𝔪 := withN (coeffMarked 𝔪) S) (𝔫 := 𝔪) rfl T\n      have hiff : IsGeoTestTower (withN (coeffMarked 𝔪) S) (.step T C π hπ) ↔\n          IsGeoTestTower 𝔪 (.step T C π hπ) ∧ CentresIn S (.step T C π hπ) := by\n        rw [isGeoTestTower_step_iff, isGeoTestTower_step_iff, centresIn_step_iff]\n        constructor\n        · rintro ⟨h0, hC⟩\n          obtain ⟨hT0, hTS0⟩ := ih.mp h0\n          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0\n          refine ⟨⟨hT0, hC.1, fun x hx => (hcos ▸ hC.2.1 hx).1, hE ▸ hC.2.2⟩, hTS0, fun x hx => (hcos ▸ hC.2.1 hx).2⟩\n        · rintro ⟨⟨hT0, hC⟩, hTS0, hCS⟩\n          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0\n          refine ⟨ih.mpr ⟨hT0, hTS0⟩, hC.1, fun x hx => ?_, hE.symm ▸ hC.2.2⟩\n          rw [hcos]; exact ⟨hC.2.1 hx, hCS hx⟩\n      refine ⟨hiff, fun h => ?_⟩\n      obtain ⟨hT', hTS'⟩ := hiff.mp h\n      exact cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS _ hT' hTS'\n",
+      "already_existing_public_helper": false
+    }
+  ],
+  "original_payload_chunks": [
+    "/-- **The coefficient invariant at a point** of the strict transform `S_T` of `S` along `T`: a flat chart `c` for `S_T`\nat `p` (dimension `k ≤ n`) and generators `G` of `(𝔪_T)_p` such that for every generator `g` and every list `L` of normal\ndirections with `|L| < μ`, the normal derivative `∂^L g` restricts on `S_T` near `p` into `[𝓓^{|L|} 𝔪]_T`. -/\ndef GoodAt (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (p : Y) : Prop :=\n  ∃ (k : ℕ) (_ : k ≤ n) (c : FlatChart n (strictAlong T S) p k) (G : (Y → ℂ) → Prop),\n    (∀ g, G g → (geoTransformAlong 𝔪 T).ideal.mem p g) ∧\n    (∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → IsInSpanAt (n := n) G p f) ∧\n    ∀ g, G g → ∀ L : List (Fin n), NormalIdx k L → L.length < 𝔪.d →\n      IsInSpanOnAt (n := n) (strictAlong T S) ((geoTransformAlong (derivMarked 𝔪 L.length) T).ideal.mem p) p\n        (c.nd L g)\n",
+    "/-- **The conclusion of the invariant**: at a good point `p ∈ S_T` where every `[𝓓^i 𝔪]_T` (`i < μ`) has order\n`≥ μ - i` along `S_T`, every germ of `𝔪_T` lies in `𝔪_p^μ`. -/\ntheorem GoodAt.orderGE (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} {T : BlowupTower X Y} {p : Y}\n    (hp : GoodAt 𝔪 S T p) (hcoh : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal p (𝔪.d - i)) :\n    ∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → (idealPow (pointIdeal n p) 𝔪.d).mem p f := by\n  obtain ⟨k, -, c, G, hGmem, hGgen, hGder⟩ := hp\n  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcoh\n  have hG : ∀ g, G g → (idealPow (pointIdeal n p) 𝔪.d).mem p g := by\n    intro g hg\n    refine c.mem_idealPow_of_vanishesToOrderOn (hhol p g (hGmem g hg)) fun L hL hLlen => ?_\n    exact vanishesToOrderOn_of_isInSpanOnAt (hGder g hg L hL hLlen) fun s hs =>\n      hD L.length hLlen s hs\n  intro f hf\n  exact mem_idealPow_of_isInSpanAt ((hGgen f hf).mono fun g hg => hG g hg)\n",
+    "/-- **Every point of `S` is good** for the empty tower: in a flat chart, the normal derivatives of germs of `𝔞` lie in\n`𝓓^{|L|} 𝔞`. -/\ntheorem goodAt_refl (𝔪 : MarkedIdeal n X) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X} (hS : IsClosedSubmanifold n S)\n    {p : X} (hp : p ∈ S) : GoodAt 𝔪 S (BlowupTower.refl : BlowupTower X X) p := by\n  obtain ⟨k, hk⟩ := hS.2 p hp\n  refine ⟨k, hk.1, FlatChart.ofRegularAtDim hk, 𝔪.ideal.mem p, fun g hg => hg,\n    fun f hf => InvertibleIdealQuotient.isInSpanAt_self hf\n      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔞 p f hf), fun g hg L _ _ => ?_⟩\n  have hmem := (FlatChart.ofRegularAtDim hk).nd_mem_iterDerivIdeal h𝔞 hg L\n  exact ⟨1, fun _ => (FlatChart.ofRegularAtDim hk).nd L g, fun _ => 1, fun _ => hmem,\n    fun _ => holomorphicAt_const 1, Eventually.of_forall fun y _ => by simp⟩\n",
+    "/-- **A flat chart from a holomorphic map with injective derivative.** -/\ntheorem FlatChart.exists_of_map {S' : Set Z} {z : Z} {k : ℕ} {W : Z → ComplexModel n} {O : Set Z} (hO : IsOpen O)\n    (hzO : z ∈ O) (hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y) (hWz : W z = 0)\n    (hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)))\n    (hflat : ∀ y ∈ O, (y ∈ S' ↔ W y ∈ complexCoordinatePlane n k)) :\n    ∃ c : FlatChart n S' z k, c.ψ =ᶠ[𝓝 z] W := by\n  set e := chartAt (ComplexModel n) z with he\n  set Nset : Set (ComplexModel n) := e.target ∩ e.symm ⁻¹' O with hNset\n  have hNo : IsOpen Nset := e.continuousOn_symm.isOpen_inter_preimage e.open_target hO\n  have hzN : e z ∈ Nset := ⟨e.map_source (mem_chart_source _ z), by\n    rw [mem_preimage, e.left_inv (mem_chart_source _ z)]; exact hzO⟩\n  have hFd : DifferentiableOn ℂ (fun ζ => W (e.symm ζ)) Nset := fun ζ hζ => by\n    have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z) hζ.1\n    exact (mdifferentiableAt_iff_differentiableAt.mp ((hW _ hζ.2).comp _ h1)).differentiableWithinAt\n  obtain ⟨Θ, hΘN, hΘF, -⟩ := FirstPass.exists_localHolomorphicEquivAt hNo hzN hFd hinj\n  refine ⟨⟨Θ, fun ζ hζ => (hΘN hζ).1, ?_, ?_⟩, ?_⟩\n  · rw [hΘF]\n    show W (e.symm (e z)) = 0\n    rw [e.left_inv (mem_chart_source _ z)]; exact hWz\n  · intro y hy hyΘ\n    have hyO : y ∈ O := by\n      have h := (hΘN hyΘ).2\n      rwa [mem_preimage, e.left_inv hy] at h\n    rw [hΘF]\n    show y ∈ S' ↔ W (e.symm (e y)) ∈ _\n    rw [e.left_inv hy]; exact hflat y hyO\n  · filter_upwards [e.open_source.mem_nhds (mem_chart_source _ z)] with y hy\n    show Θ.toFun (e y) = W y\n    rw [hΘF]\n    show W (e.symm (e y)) = W y\n    rw [e.left_inv hy]\n",
+    "/-- For a flat chart `c` with `c.ψ = W` near `z`, `W (c.inv u) = u` near `0`. -/\ntheorem FlatChart.eventually_map_inv {S' : Set Z} {z : Z} {k : ℕ} (c : FlatChart n S' z k) {W : Z → ComplexModel n}\n    (hcW : c.ψ =ᶠ[𝓝 z] W) : ∀ᶠ u in 𝓝 (0 : ComplexModel n), W (c.inv u) = u := by\n  filter_upwards [c.eventually_ψ_inv, c.tendsto_inv.eventually hcW] with u hu hu'\n  rw [← hu', hu]\n",
+    "/-- **The invariant off the centre**: if `π z ∉ C` and `π z` is good for `T`, then `z` is good for the tower\ncontinued by the blowup `π` along `C` (the generators pull back, `π` is a local biholomorphism). -/\ntheorem goodAt_step_of_notMem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}\n    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)\n    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)\n    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)\n    (hSc : IsClosed (strictAlong T S)) {z : Z} (hzC : π z ∉ C) (hgood : GoodAt 𝔪 S T (π z)) :\n    GoodAt 𝔪 S (.step T C π hπ) z := by\n  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood\n  have hπc : Continuous π := hπ.contMDiff.continuous\n  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=\n    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)\n  have hSev : ∀ᶠ y in 𝓝 z, (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) := by\n    filter_upwards [(hπ.1.1.isOpen_compl.preimage hπc).mem_nhds hzC] with y hy\n    rw [strictAlong_step]\n    refine ⟨fun h => ?_, fun h => subset_closure ⟨h, hy⟩⟩\n    exact closure_minimal (preimage_mono sdiff_subset) (hSc.preimage hπc) h\n  -- the new coordinates `W = ψ ∘ π`\n  set W : Z → ComplexModel n := fun y => c.ψ (π y) with hWdef\n  have hev : ∀ᶠ y in 𝓝 z, π y ∈ BlowupFlatCoordinates.flatDomain c.Φ ∧\n      (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) :=\n    ((hπc.tendsto z).eventually c.eventually_mem_flatDomain).and hSev\n  obtain ⟨O, hOsub, hO, hzO⟩ := mem_nhds_iff.mp hev\n  have hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y := fun y hy =>\n    (c.mdifferentiableAt_ψ (hOsub hy).1).comp y (hπd y)\n  have hflat : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y ∈ complexCoordinatePlane n k) := fun y hy => by\n    rw [(hOsub hy).2]; exact c.flat (hOsub hy).1.1 (hOsub hy).1.2\n  have hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)) := by\n    set I := 𝓘(ℂ, ComplexModel n) with hI\n    have hrange : range I = univ := by simp [hI]\n    set e := chartAt (ComplexModel n) z with he\n    set e' := chartAt (ComplexModel n) (π z) with he'\n    set F : ComplexModel n → ComplexModel n := fun u => e' (π (e.symm u)) with hF\n    have hmd : MDifferentiableAt I I π z := hπd z\n    have hderiv : mfderiv I I π z = fderiv ℂ F (e z) := by\n      rw [hmd.mfderiv, hrange, fderivWithin_univ]\n      rfl\n    have hFinj : Function.Injective (fderiv ℂ F (e z)) := by\n      have hz : z ∉ BlowupSequences.exceptionalLocus n π :=\n        fun h => hzC (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ h)\n      simp only [exceptionalLocus, mem_ofPred_eq, not_not] at hz\n      rw [hderiv] at hz\n      exact hz.1\n    -- `W ∘ e⁻¹ = Φ ∘ F` near `e z`\n    have hzs : z ∈ e.source := mem_chart_source _ z\n    have hFz : F (e z) = e' (π z) := by simp only [hF, e.left_inv hzs]\n    have hloc : (fun ζ => W (e.symm ζ)) =ᶠ[𝓝 (e z)] fun ζ => c.Φ.toFun (F ζ) := by\n      filter_upwards with ζ\n      rfl\n    have hFd : DifferentiableAt ℂ F (e z) := by\n      have h := (contMDiffOn_iff.mp (hπ.contMDiff.contMDiffOn (s := univ))).2 z (π z)\n      have hset : (e.target ∩ e.symm ⁻¹' (univ ∩ π ⁻¹' e'.source)) ∈ 𝓝 (e z) := by\n        refine (e.continuousOn_symm.isOpen_inter_preimage e.open_target\n          (isOpen_univ.inter (hπc.isOpen_preimage _ e'.open_source))).mem_nhds ?_\n        exact ⟨e.map_source hzs, by rw [mem_preimage, e.left_inv hzs]; exact ⟨mem_univ _, mem_chart_source _ _⟩⟩\n      refine ((h.differentiableOn (by simp)).mono ?_).differentiableAt hset\n      intro u hu\n      exact ⟨⟨mem_univ _, hu.1⟩, mem_univ _, hu.2.2, mem_univ _⟩\n    have hΦd : DifferentiableAt ℂ c.Φ.toFun (F (e z)) := by\n      rw [hFz]\n      exact c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds c.Φ.center_mem_source)\n    have hcomp : HasFDerivAt (fun ζ => c.Φ.toFun (F ζ))\n        ((fderiv ℂ c.Φ.toFun (F (e z))).comp (fderiv ℂ F (e z))) (e z) :=\n      hΦd.hasFDerivAt.comp (e z) hFd.hasFDerivAt\n    rw [hloc.fderiv_eq, hcomp.fderiv]\n    refine (c.injective_fderiv_Φ ?_).comp hFinj\n    rw [hFz]; exact c.Φ.center_mem_source\n  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW c.ψ_self hinj hflat\n  -- `π ∘ c'.inv = c.inv` near `0`\n  have hWinv := FlatChart.eventually_map_inv c' hc'\n  have hπinv : ∀ᶠ u in 𝓝 (0 : ComplexModel n), π (c'.inv u) = c.inv u := by\n    have ht : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=\n      (hπc.tendsto z).comp c'.tendsto_inv\n    filter_upwards [hWinv, ht.eventually c.eventually_inv_ψ] with u hu hu'\n    rw [← hu', show c.ψ (π (c'.inv u)) = u from hu]\n  -- normal derivatives of pulled-back generators\n  have hnd : ∀ (g : Y → ℂ) (L : List (Fin n)), c'.nd L (g ∘ π) =ᶠ[𝓝 z] fun z' => c.nd L g (π z') := by\n    intro g L\n    have hgerm : (fun u => (g ∘ π) (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)] fun u => g (c.inv u) := by\n      filter_upwards [hπinv] with u hu\n      simp only [Function.comp_apply, hu]\n    have hiter := iterDeriv_congr_of_eventuallyEq hgerm (L.map bv)\n    filter_upwards [c'.tendsto_ψ.eventually hiter, hc'] with z' h1 h2\n    simp only [FlatChart.nd]\n    rw [h1, h2]\n  -- the transformed ideals at `z`\n  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T\n  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]\n  have hpb : ∀ {𝔟 : GermIdeal n Y} {g : Y → ℂ}, 𝔟.IsCoherent → 𝔟.mem (π z) g →\n      (GermIdeal.pullback (m := n) π 𝔟).mem z (g ∘ π) := fun {𝔟} {g} h𝔟 hg =>\n    InvertibleIdealQuotient.isInSpanAt_self (S := fun s => ∃ a, 𝔟.mem (π z) a ∧ s = a ∘ π) ⟨g, hg, rfl⟩\n      (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd)\n        (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔟 _ _ hg))\n  refine ⟨k, hkn, c', fun h => ∃ g, G g ∧ h = g ∘ π, ?_, ?_, ?_⟩\n  · rintro h ⟨g, hg, rfl⟩\n    rw [hideal]\n    exact GlueingTrivialAction.pullback_le_controlledTransform hπ hcohT 𝔪.d z _ (hpb hcohT (hGmem g hg))\n  · intro f hf\n    -- `f ∈ π^*𝔪_T` at `z` (off the centre the denominator contains `1`)\n    have hf' : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z f := by\n      have h1 := MarkedIdeals.MarkedIdeal.one_mem_idealPow (n := n)\n        (MarkedIdeals.MarkedIdeal.one_mem_pullback_vanishingIdeal (n := n) (π := π) hzC hπ.1.1) 𝔪.d\n      have hf2 := hf\n      rw [geoTransformAlong_step, geoTransform_ideal, hNT, MarkedIdeals.MarkedIdeal.geoStrictTransform_univ hπ, hd]\n        at hf2\n      have h3 := (InvertibleIdealQuotient.mem_colon_iff.mp hf2).2 _ h1\n      rw [BlowupTowerTransforms.restrictOn_univ (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT)]\n        at h3\n      exact NormalDerivativeChart.mem_congr_of_isCoherent (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT) h3\n        (Eventually.of_forall fun y => by simp)\n    refine RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)\n      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z f from hf')\n    obtain ⟨a, ha, rfl⟩ := ht\n    exact (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha)).mono fun s ⟨g, hg, hs⟩ => ⟨g, hg, hs⟩\n  · rintro h ⟨g, hg, rfl⟩ L hL hLlen\n    obtain ⟨K, s, a, hs, ha, hsum⟩ := hGder g hg L hL hLlen\n    have hdL : L.length ≤ 𝔪.d := hLlen.le\n    have hDideal : (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal =\n        controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 L.length) T).ideal\n          (geoTransformAlong (derivMarked 𝔪 L.length) T).d := by\n      rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN _ hdL) (hDcoh _ hdL) hπ]\n    refine ⟨K, fun i => s i ∘ π, fun i => a i ∘ π, fun i => ?_, fun i =>\n      HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (ha i), ?_⟩\n    · rw [hDideal]\n      exact GlueingTrivialAction.pullback_le_controlledTransform hπ (hDcoh _ hdL) _ z _\n        (hpb (hDcoh _ hdL) (hs i))\n    · filter_upwards [hnd g L, hSev, (hπc.tendsto z).eventually hsum] with z' h1 h2 h3 hz'\n      rw [h1]\n      exact h3 (h2.mp hz')\n",
+    "/-- **The normal derivatives through a monomial chart, on the manifolds.**  Let `c''` be a flat chart at `π z`,\n`W` coordinates near `z` with `c''.ψ ∘ π = σⱼ ∘ W` on an open `O ∋ z`, and `c'` a flat chart at `z` with\n`c'.ψ = W - W z` near `z`.  If `g ∘ π = Wⱼ^d · h'` near `z`, then for normal directions `L` (`l ≠ j`, `k_C ≤ l`)\n`Wⱼ^d · ∂^L h' = Wⱼ^{|L|} · (∂^L g) ∘ π` near `z`. -/\ntheorem nd_monomial_identity {π : Z → Y} (hπ : Continuous π) {z : Z} {S : Set Y} {S'' : Set Z}\n    {k'' k' kC : ℕ} (c'' : FlatChart n S (π z) k'') (c' : FlatChart n S'' z k') {W : Z → ComplexModel n}\n    {O : Set Z} (hO : IsOpen O) (hzO : z ∈ O) {j : Fin n}\n    (hWeq : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z')) (hc' : c'.ψ =ᶠ[𝓝 z] fun y => W y - W z)\n    {d : ℕ} {g : Y → ℂ} {h' : Z → ℂ} (hg : HolomorphicAt n g (π z)) (hh' : HolomorphicAt n h' z)\n    (hrel : ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ d * h' y) (L : List (Fin n)) (hL : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1) :\n    ∀ᶠ z' in 𝓝 z, W z' j ^ d * c'.nd L h' z' = W z' j ^ L.length * c''.nd L g (π z') := by\n  have hσc : Continuous (monomial (n := n) kC j) := (contDiff_monomial kC j).continuous\n  have hσd : Differentiable ℂ (monomial (n := n) kC j) := (contDiff_monomial kC j).differentiable (by simp)\n  have hσa : monomial kC j (W z) = 0 := by rw [← hWeq z hzO]; exact c''.ψ_self\n  obtain ⟨r₁, hr₁, hball₁⟩ := Metric.eventually_nhds_iff_ball.mp (c''.eventually_differentiableAt_comp_inv hg)\n  have hG₀ : DifferentiableOn ℂ (fun w => g (c''.inv w)) (ball 0 r₁) := fun w hw =>\n    (hball₁ w hw).differentiableWithinAt\n  obtain ⟨r₀, hr₀, hball₀⟩ := Metric.eventually_nhds_iff_ball.mp (c'.eventually_differentiableAt_comp_inv hh')\n  have hH : DifferentiableOn ℂ (fun u => h' (c'.inv u)) (ball 0 r₀) := fun u hu =>\n    (hball₀ u hu).differentiableWithinAt\n  obtain ⟨U, hU⟩ : ∃ U : Set (ComplexModel n), U = monomial kC j ⁻¹' ball 0 r₁ := ⟨_, rfl⟩\n  have hUo : IsOpen U := hU ▸ isOpen_ball.preimage hσc\n  have hUσ : MapsTo (monomial (n := n) kC j) U (ball 0 r₁) := fun w hw => by rw [hU] at hw; exact hw\n  have hGσ : DifferentiableOn ℂ (fun w => g (c''.inv (monomial kC j w))) U := fun w hw =>\n    (((hG₀ _ (hUσ hw)).differentiableAt (isOpen_ball.mem_nhds (hUσ hw))).comp w (hσd w)).differentiableWithinAt\n  have hW'inv := FlatChart.eventually_map_inv c' hc'\n  have hinv : Tendsto c'.inv (𝓝 (0 : ComplexModel n)) (𝓝 z) := c'.tendsto_inv\n  have hπinv : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=\n    (hπ.tendsto z).comp hinv\n  have hid : (fun u => (u + W z) j ^ d * h' (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)]\n      fun u => g (c''.inv (monomial kC j (u + W z))) := by\n    filter_upwards [hW'inv, hinv.eventually (hO.mem_nhds hzO), hinv.eventually hrel,\n      hπinv.eventually c''.eventually_inv_ψ] with u hu huO hurel huinv\n    have hu' : W (c'.inv u) - W z = u := hu\n    have hWu : W (c'.inv u) = u + W z := sub_eq_iff_eq_add.mp hu'\n    rw [← hWu, ← hurel, ← hWeq _ huO, huinv]\n  have hI := iterDeriv_congr_of_eventuallyEq hid (L.map bv)\n  have ht : Tendsto c'.ψ (𝓝 z) (𝓝 (0 : ComplexModel n)) := c'.tendsto_ψ\n  have hshift : ∀ᶠ z' in 𝓝 z, c'.ψ z' + W z ∈ U := by\n    have hcont : ContinuousAt (fun u : ComplexModel n => u + W z) 0 := (continuous_add_const (W z)).continuousAt\n    have h0 : (0 : ComplexModel n) + W z ∈ U := by\n      rw [hU, Set.mem_preimage, zero_add, hσa]; exact mem_ball_self hr₁\n    exact ht.eventually (hcont.eventually (hUo.mem_nhds h0))\n  have hLj : ∀ l ∈ L, ∀ (w : ComplexModel n) (t : ℂ), (fun u : ComplexModel n => (u + W z) j ^ d) (w + t • bv l) =\n      (fun u : ComplexModel n => (u + W z) j ^ d) w := fun l hl w t => by\n    have hjl : j ≠ l := Ne.symm (hL l hl).1\n    simp [bv, hjl]\n  have hcd : Differentiable ℂ (fun u : ComplexModel n => (u + W z) j ^ d) := fun u =>\n    (((EuclideanSpace.proj j : ComplexModel n →L[ℂ] ℂ).differentiableAt).comp u\n      (differentiableAt_id.add_const (W z))).pow d\n  filter_upwards [ht.eventually hI, ht.eventually (isOpen_ball.mem_nhds (mem_ball_self hr₀)), hshift, hc',\n    hO.mem_nhds hzO] with z' h1 h2 h3 h4 hz'O\n  have hlhs := iterDeriv_mul_of_const isOpen_ball hcd hH L hLj (c'.ψ z') h2\n  have hrhs1 := iterDeriv_comp_add hUo hGσ (W z) L h3\n  have hrhs2 := iterDeriv_comp_monomial (G := fun w => g (c''.inv w)) hUo isOpen_ball hUσ hG₀ L hL\n    (c'.ψ z' + W z) h3\n  have h4' : c'.ψ z' = W z' - W z := h4\n  have hWz' : c'.ψ z' + W z = W z' := by rw [h4']; abel\n  simp only [FlatChart.nd]\n  rw [hlhs, hrhs1, hrhs2, hWz'] at h1\n  rw [hWeq z' hz'O]\n  simpa [hWz'] using h1\n",
+    "/-- **The invariant over the centre**: if `π z ∈ C`, `z` lies on the strict transform of `S_T` and `π z` is good for `T`,\nthen `z` is good for the tower continued by the blowup `π` along `C`.  The new coordinates are a monomial chart\n`x' = x / y_m` over nested product-form coordinates for `C ⊆ S_T`, the new generators are the controlled transforms\n`h' = W_j^{-μ} (g ∘ π)` of the old ones, and `W_j^μ ∂^L h' = W_j^{|L|} (∂^L g) ∘ π` (`nd_monomial_identity`). -/\ntheorem goodAt_step_of_mem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}\n    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)\n    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)\n    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)\n    (hCadm : (geoTransformAlong 𝔪 T).IsAdmissibleCentre C)\n    (hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C)\n    (hSc : IsClosed (strictAlong T S)) (hCS : C ⊆ strictAlong T S) {z : Z}\n    (hz : z ∈ strictAlong (.step T C π hπ) S) (hzC : π z ∈ C) (hgood : GoodAt 𝔪 S T (π z)) :\n    GoodAt 𝔪 S (.step T C π hπ) z := by\n  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood\n  have hπc : Continuous π := hπ.contMDiff.continuous\n  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=\n    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)\n  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcohT\n  -- nested product-form coordinates for `C ⊆ S_T` at `π z`\n  obtain ⟨kC, hkC⟩ := hπ.1.2 (π z) hzC\n  have hSreg : RegularAtDim (n := n) (strictAlong T S) (π z) k := ⟨hkn, hCS hzC, c.Φ, c.src, c.zero, c.flat⟩\n  have hkCk : kC ≤ k := BlowupStrictSubmanifold.le_of_regularAtDim_subset hkC hSreg hCS\n  obtain ⟨c'', hc''C, hc''nd⟩ := FlatChart.exists_nested c hkCk hkn hkC hCS\n  -- the monomial chart at `z`\n  obtain ⟨j, hj, O, hO, hzO, W, hWs, hWmem, hℓ, hiff⟩ :=\n    BlowupStrictSubmanifold.exists_local_geoStrictTransform hπ c''.src hc''C c''.flat\n      (mem_flatDomain_self c''.Φ)\n  obtain ⟨ℓ, ⟨hℓs, hℓπ⟩, -⟩ := BlowupLocalSurjectivity.existsUnique_monomialLift hπ c''.src hc''C hj\n  have hWeq : ∀ z' ∈ O, π z' ∈ flatDomain c''.Φ ∧\n      monomial kC j (W z') = c''.Φ.toFun (chartAt (ComplexModel n) (π z) (π z')) := by\n    intro z' hz'\n    have hw := hWmem z' hz'\n    have h1 := hℓ ℓ hℓs hℓπ z' hz' hw\n    have h2 := congrFun hℓπ (LiftedOpen.mk _ (W z') hw)\n    rw [Function.comp_apply, h1] at h2\n    have h3 := flatInverse_mem c''.Φ hw c''.src\n    rw [h2]\n    simp only [monomialChart, LiftedOpen.toModel_mk]\n    exact ⟨h3.1, h3.2.symm⟩\n  have hWeq' : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z') := fun z' hz' => (hWeq z' hz').2.symm\n  obtain ⟨hjk, hWz⟩ := (hiff z hzO).mp hz\n  have hCu : ∀ u ∈ O, (π u ∈ C ↔ W u j = 0) := fun u hu => by\n    rw [hc''C (hWeq u hu).1.1 (hWeq u hu).1.2, ← (hWeq u hu).2,\n      BlowupStrictSubmanifold.monomial_mem_plane_iff hj]\n  -- the new flat chart `W - W z`\n  have hW' : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) (fun y => W y - W z) y :=\n    fun y hy => ((hWs y hy).mdifferentiableAt (by simp)).sub mdifferentiableAt_const\n  have hflat' : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y - W z ∈ complexCoordinatePlane n k) := by\n    intro y hy\n    rw [BlowupStrictSubmanifold.sub_mem_plane_iff hWz]\n    exact (hiff y hy).trans ⟨fun h => h.2, fun h => ⟨hjk, h⟩⟩\n  have hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ) - W z) (chartAt (ComplexModel n) z z)) := by\n    set e := chartAt (ComplexModel n) z with he\n    have hFd : DifferentiableAt ℂ (fun ζ => W (e.symm ζ)) (e z) := by\n      have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z)\n        (e.map_source (mem_chart_source _ z))\n      have h2 : MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W (e.symm (e z)) := by\n        rw [e.left_inv (mem_chart_source _ z)]; exact (hWs z hzO).mdifferentiableAt (by simp)\n      exact mdifferentiableAt_iff_differentiableAt.mp (h2.comp _ h1)\n    rw [fderiv_sub_const]\n    refine (injective_iff_map_eq_zero _).mpr fun v hv => ?_\n    by_contra hv0\n    apply BlowupFibreDirection.fderiv_monomialInverse_ne_zero hO hWs hWmem hℓs (hℓ ℓ hℓs hℓπ) hzO hv0\n    rw [hFd.fderiv_restrictScalars ℝ]\n    exact hv\n  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW' (sub_self _) hinj hflat'\n  -- the local equation `W_j` of the exceptional divisor\n  have hl : BlowupFunctionTransform.IsLocalEquation hπ O (fun p => W p j) :=\n    GlueingTrivialAction.isLocalEquation_monomial hπ c''.src hc''C hj hO hWs hWeq\n  have hlhol : HolomorphicAt n (fun p => W p j ^ 𝔪.d) z := by\n    have h1 : HolomorphicAt n (fun p => W p j) z := by\n      filter_upwards [hO.mem_nhds hzO] with y hy\n      exact (hl.mdifferentiableOn y hy).mdifferentiableAt (hO.mem_nhds hy)\n    exact h1.mono fun y hy => hy.pow _\n  -- the transformed ideals\n  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T\n  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]\n  have hDideal : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 i) T).ideal (𝔪.d - i) := fun i hi => by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN i hi) (hDcoh i hi) hπ,\n      d_geoTransformAlong, derivMarked_d]\n  have h𝔪le : (geoTransformAlong 𝔪 T).ideal.Le (idealPow (vanishingIdeal (n := n) C) 𝔪.d) := by\n    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcohT hCadm\n    rwa [hd] at this\n  have hDle : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.Le\n      (idealPow (vanishingIdeal (n := n) C) (𝔪.d - i)) := fun i hi => by\n    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre (hDN i hi) (hDcoh i hi) (hDadm i hi)\n    rwa [d_geoTransformAlong, derivMarked_d] at this\n  -- `W_j` vanishes on no relatively open subset of the strict transform\n  have hnonS : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ strictAlong (.step T C π hπ) S).Nonempty →\n      ∃ y ∈ V ∩ strictAlong (.step T C π hπ) S, W y j ^ 𝔪.d ≠ 0 := by\n    rintro V hV hVO ⟨y₀, hy₀V, hy₀S⟩\n    rw [strictAlong_step] at hy₀S\n    obtain ⟨y₁, hy₁V, hy₁S, hy₁C⟩ :=\n      mem_closure_iff.mp (show y₀ ∈ closure (π ⁻¹' (strictAlong T S \\ C)) from hy₀S) V hV hy₀V\n    refine ⟨y₁, ⟨hy₁V, ?_⟩, pow_ne_zero _ fun h => hy₁C ((hCu y₁ (hVO hy₁V)).mpr h)⟩\n    rw [strictAlong_step]\n    exact subset_closure ⟨hy₁S, hy₁C⟩\n  have hnonU : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ univ).Nonempty → ∃ y ∈ V ∩ univ, W y j ^ 𝔪.d ≠ 0 := by\n    rintro V hV hVO ⟨y₀, hy₀V, -⟩\n    obtain ⟨y, hyV, hy⟩ := hl.nonvanishing V hV hVO ⟨y₀, hy₀V⟩\n    exact ⟨y, ⟨hyV, mem_univ _⟩, pow_ne_zero _ hy⟩\n  refine ⟨k, hkn, c', fun h' => ∃ g, G g ∧ HolomorphicAt n h' z ∧\n    ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ 𝔪.d * h' y, ?_, ?_, ?_⟩\n  · -- the new generators are germs of the transform\n    rintro h' ⟨g, hg, hh', hrel⟩\n    rw [hideal]\n    exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hGmem g hg) hh' hrel\n  · -- they generate it\n    intro f hf\n    have hfhol : HolomorphicAt n f z := (show (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f\n      by rw [← hideal]; exact hf).1\n    have hWf : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z\n        (fun y => W y j ^ 𝔪.d * f y) := by\n      have hf' : (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f := by rw [← hideal]; exact hf\n      refine (InvertibleIdealQuotient.mem_colon_iff.mp hf').2 _ ?_\n      exact (hl.idealPow_mem_iff 𝔪.d z hzO _).mpr (InvertibleIdealQuotient.isInSpanAt_self rfl hlhol)\n    -- every generator `g ∘ π` is `W_j^μ h'` with `h'` a new generator\n    have hgen : ∀ g, G g → IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧\n        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z (g ∘ π) := by\n      intro g hg\n      obtain ⟨h', hh', heq⟩ := BlowupFunctionTransform.exists_eq_pow_mul hl hzO (h𝔪le _ _ (hGmem g hg))\n      exact isInSpanAt_of_eq_mul ⟨h', ⟨g, hg, hh', heq.mono fun y hy => hy⟩, rfl⟩\n        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (hhol _ _ (hGmem g hg)))\n        (holomorphicAt_const 1) (heq.mono fun y hy => by simp only [one_mul]; exact hy)\n    have hspan : IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧\n        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z\n        (fun y => W y j ^ 𝔪.d * f y) := RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)\n      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z\n        (fun y => W y j ^ 𝔪.d * f y) from hWf)\n    · obtain ⟨-, K, t, b, ht, hb, hsum⟩ := hspan\n      choose h' hh' htdef using ht\n      refine ⟨hfhol, K, h', b, fun i => hh' i, hb, ?_⟩\n      have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within (W := univ) hO hnonU hzO\n        (F := f) (G := fun y => ∑ i, b i y * h' i y) hfhol\n        (HolomorphicAt.sum _ fun i _ => (hb i).mul (hh' i).choose_spec.2.1) ?_\n      · filter_upwards [hcan] with y hy using hy (mem_univ y)\n      · filter_upwards [hsum] with y hy _\n        rw [hy, Finset.mul_sum]\n        refine Finset.sum_congr rfl fun i _ => ?_\n        rw [htdef i]; ring\n    · obtain ⟨a, ha, rfl⟩ := ht\n      exact RelativePrincipalizationSpan.IsInSpanAt.trans (fun s hs => by\n          obtain ⟨g, hg, rfl⟩ := hs; exact hgen g hg)\n        (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha))\n  · -- the normal derivatives\n    rintro h' ⟨g, hg, hh', hrel⟩ L hL hLlen\n    have hgp : HolomorphicAt n g (π z) := hhol _ _ (hGmem g hg)\n    have hLj : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1 := fun l hl' => by\n      have := hL l hl'\n      exact ⟨fun h => by rw [h] at this; omega, by omega⟩\n    have hid := nd_monomial_identity hπc c'' c' hO hzO hWeq' hc' hgp hh' hrel L hLj\n    have hnd := (hπc.tendsto z).eventually (hc''nd L hL g hgp)\n    obtain ⟨K, s, aa, hs, haa, hsum⟩ := hGder g hg L hL hLlen\n    have hdL : L.length ≤ 𝔪.d := hLlen.le\n    have hex : ∀ i, ∃ s' : Z → ℂ, HolomorphicAt n s' z ∧\n        (s i ∘ π) =ᶠ[𝓝 z] fun y => W y j ^ (𝔪.d - L.length) * s' y := fun i =>\n      BlowupFunctionTransform.exists_eq_pow_mul hl hzO (hDle _ hdL _ _ (hs i))\n    choose s' hs'hol hs'eq using hex\n    have hs'mem : ∀ i, (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal.mem z (s' i) := fun i => by\n      rw [hDideal _ hdL]\n      exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hs i) (hs'hol i) (hs'eq i)\n    have hsub : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S → π z' ∈ strictAlong T S :=\n      Eventually.of_forall fun z' hz' =>\n        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπc hSc hz'\n    have hmul : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S →\n        W z' j ^ 𝔪.d * c'.nd L h' z' = W z' j ^ 𝔪.d * ∑ i, (aa i ∘ π) z' * s' i z' := by\n      filter_upwards [hid, hnd, (hπc.tendsto z).eventually hsum, eventually_all.mpr hs'eq, hsub] with\n        z' h1 h2 h3 h4 h5 hz'\n      rw [h1, h2, h3 (h5 hz'), Finset.mul_sum, Finset.mul_sum]\n      refine Finset.sum_congr rfl fun i _ => ?_\n      have h4i : s i (π z') = W z' j ^ (𝔪.d - L.length) * s' i z' := h4 i\n      have e : W z' j ^ 𝔪.d = W z' j ^ L.length * W z' j ^ (𝔪.d - L.length) := by\n        rw [← pow_add, Nat.add_sub_cancel' hdL]\n      rw [h4i, Function.comp_apply, e]\n      ring\n    have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within hO hnonS hzO\n      (FlatChart.holomorphicAt_nd c' hh' L)\n      (HolomorphicAt.sum _ fun i _ =>\n        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i)).mul (hs'hol i)) hmul\n    exact ⟨K, s', fun i => aa i ∘ π, hs'mem,\n      fun i => HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i), hcan⟩\n",
+    "/-- **Every point of the strict transform of `S` is good** along a multiple test blow-up of `𝔪` with centres in the\nstrict transforms of `S` (induction on the tower: `goodAt_refl`, `goodAt_step_of_mem`, `goodAt_step_of_notMem`). -/\ntheorem goodAt_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X}\n    (hS : IsClosedSubmanifold n S) :\n    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T → CentresIn S T →\n      ∀ p ∈ strictAlong T S, GoodAt 𝔪 S T p\n  | _, .refl => fun _ _ p hp => goodAt_refl 𝔪 h𝔞 hS hp\n  | _, .step T C π hπ => fun hT hTS z hz => by\n      obtain ⟨hT0, hC⟩ := (isGeoTestTower_step_iff 𝔪 T C π hπ).mp hT\n      obtain ⟨hTS0, hCS⟩ := hTS\n      obtain ⟨-, hNT, -, hSsub, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT0 hTS0\n      have hSc : IsClosed (strictAlong T S) := hSsub.1\n      have hpz : π z ∈ strictAlong T S :=\n        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπ.contMDiff.continuous hSc hz\n      have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT0 hTS0 (π z) hpz\n      have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=\n        (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT0).2.2.2.2.1\n      have hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ := fun i hi =>\n        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.1\n      have hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent := fun i hi =>\n        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.2.2.2.1\n      have hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C := fun i hi =>\n        ((isGeoTestTower_step_iff _ T C π hπ).mp (inclusions_tower 𝔪 hN h𝔞 hi (.step T C π hπ) hT).1).2\n      by_cases hzC : π z ∈ C\n      · exact goodAt_step_of_mem 𝔪 T hπ hNT hcohT hDN hDcoh hC hDadm hSc hCS hz hzC hgood\n      · exact goodAt_step_of_notMem 𝔪 T hπ hNT hcohT hDN hDcoh hSc hzC hgood\n",
+    "/-- **Włodarczyk `le:S` (2), the inclusion `⊆`** (GGT Proposition 5.6.4 (2)): along a multiple test blow-up `T` of\n`𝔪 = (X, X, E, 𝔞, μ)` with centres in the strict transforms of a closed submanifold `S`,\n`supp[𝓒(𝔪)|_S]_T ⊆ supp(𝔪_T)`. -/\ntheorem cosupp_coeff_withN_tower_subset (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)\n    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)\n    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :\n    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp ⊆ (geoTransformAlong 𝔪 T).cosupp := by\n  intro x hx\n  obtain ⟨-, hRE, -⟩ := coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS\n  obtain ⟨-, hNT, -, hST, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT hTS\n  have hfam := isAmbientFamily_derivMarked hN h𝔞\n  have hall : ∀ i < 𝔪.d, IsGeoTestTower (derivMarked 𝔪 i) T :=\n    fun i hi => (inclusions_tower 𝔪 hN h𝔞 (le_of_lt hi) T hT).1\n  obtain ⟨-, hmsum⟩ := geoTransformAlong_msum (fun i => derivMarked 𝔪 i) hd hfam T\n  obtain ⟨he, hfamT⟩ := hmsum hall\n  -- `x` is in the cosupport of `𝓒(𝔪)_T` along `S_T`\n  have hx1 : x ∈ cosupport n (strictAlong T S) (geoTransformAlong (coeffMarked 𝔪) T).ideal (coeffMarked 𝔪).d := by\n    rw [hRE.cosupp_eq] at hx\n    have := hx\n    rwa [cosupp_withN, d_geoTransformAlong] at this\n  have hxS : x ∈ strictAlong T S := hx1.1\n  -- hence every `[𝓓^i 𝔪]_T` has order `≥ μ - i` along `S_T` at `x`\n  have hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal x (𝔪.d - i) := by\n    intro i hi\n    have hx2 := hx1\n    rw [show (geoTransformAlong (coeffMarked 𝔪) T) = msum (fun i => geoTransformAlong (derivMarked 𝔪 i) T) 𝔪.d\n      from he] at hx2\n    have hJ : ∀ i < 𝔪.d, ∀ y g, (idealPow (geoTransformAlong (derivMarked 𝔪 i) T).ideal\n        (sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) 𝔪.d i)).mem y g → HolomorphicAt n g y :=\n      fun _ _ _ _ hg => holomorphicAt_of_mem_idealPow hg\n    have hmark : (coeffMarked 𝔪).d = (Finset.range 𝔪.d).prod fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d := by\n      simp only [d_geoTransformAlong]; rfl\n    rw [hmark] at hx2\n    have hx3 := ((mem_cosupport_finSumIdeal hJ).mp hx2).2 i hi\n    have hD1 : ∀ j < 𝔪.d, 1 ≤ (geoTransformAlong (derivMarked 𝔪 j) T).d := fun j hj => by\n      rw [d_geoTransformAlong, derivMarked_d]; omega\n    have hpow := MarkedIdealOperationsAlong.cosupport_idealPow_mul_eq_along hST.2\n      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent (hfamT.coh i hi)) (one_le_sumExp hD1 i)\n      (geoTransformAlong (derivMarked 𝔪 i) T).d\n    rw [mul_sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) hi] at hpow\n    rw [hpow, d_geoTransformAlong, derivMarked_d] at hx3\n    exact hx3.2\n  -- the invariant gives the order of `𝔪_T`\n  have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT hTS x hxS\n  have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=\n    (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT).2.2.2.2.1\n  have hord := hgood.orderGE 𝔪 S hcohT hD\n  rw [MarkedIdeal.cosupp, hNT, d_geoTransformAlong]\n  exact ⟨mem_univ x, fun f hf => ⟨f, hord f hf, Eventually.of_forall fun _ _ => rfl⟩⟩\n",
+    "/-- `supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T` along a multiple test blow-up of `𝔪` with centres in the strict transforms. -/\ntheorem cosupp_coeff_withN_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)\n    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)\n    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :\n    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S := by\n  refine Subset.antisymm (fun x hx => ⟨cosupp_coeff_withN_tower_subset 𝔪 hN h𝔞 hd hS T hT hTS hx, ?_⟩)\n    (coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS).2.2\n  have h := (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp_subset_N hx\n  rwa [N_geoTransformAlong_withN] at h\n",
+    "/-- **Włodarczyk `le:S` in full** (GGT Proposition 5.6.4): for `𝔪 = (X, X, E, 𝔞, μ)` with `𝔞` coherent and `μ ≥ 1`\nand a closed submanifold `S`, a tower is a multiple test blow-up of `𝓒(𝔪)|_S` if and only if it is a multiple test\nblow-up of `𝔪` with centres in the strict transforms of `S`, and along it\n`supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T`. -/\ntheorem coeff_restrict_tower_iff (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)\n    {S : Set X} (hS : IsClosedSubmanifold n S) :\n    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →\n      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T ↔ IsGeoTestTower 𝔪 T ∧ CentresIn S T) ∧\n      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T →\n        (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S)\n  | _, .refl => ⟨⟨fun _ => ⟨trivial, trivial⟩, fun _ => trivial⟩, fun _ => cosupp_coeff_withN 𝔪 hN h𝔞 hd S⟩\n  | _, .step T C π hπ => by\n      obtain ⟨ih, -⟩ := coeff_restrict_tower_iff 𝔪 hN h𝔞 hd hS T\n      have hE : (geoTransformAlong (withN (coeffMarked 𝔪) S) T).E = (geoTransformAlong 𝔪 T).E :=\n        MarkedIdealEquivalence.MarkedIdeal.E_geoTransformAlong_eq (𝔪 := withN (coeffMarked 𝔪) S) (𝔫 := 𝔪) rfl T\n      have hiff : IsGeoTestTower (withN (coeffMarked 𝔪) S) (.step T C π hπ) ↔\n          IsGeoTestTower 𝔪 (.step T C π hπ) ∧ CentresIn S (.step T C π hπ) := by\n        rw [isGeoTestTower_step_iff, isGeoTestTower_step_iff, centresIn_step_iff]\n        constructor\n        · rintro ⟨h0, hC⟩\n          obtain ⟨hT0, hTS0⟩ := ih.mp h0\n          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0\n          refine ⟨⟨hT0, hC.1, fun x hx => (hcos ▸ hC.2.1 hx).1, hE ▸ hC.2.2⟩, hTS0, fun x hx => (hcos ▸ hC.2.1 hx).2⟩\n        · rintro ⟨⟨hT0, hC⟩, hTS0, hCS⟩\n          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0\n          refine ⟨ih.mpr ⟨hT0, hTS0⟩, hC.1, fun x hx => ?_, hE.symm ▸ hC.2.2⟩\n          rw [hcos]; exact ⟨hC.2.1 hx, hCS hx⟩\n      refine ⟨hiff, fun h => ?_⟩\n      obtain ⟨hT', hTS'⟩ := hiff.mp h\n      exact cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS _ hT' hTS'\n"
+  ],
+  "original_selected_source": "/-- **The coefficient invariant at a point** of the strict transform `S_T` of `S` along `T`: a flat chart `c` for `S_T`\nat `p` (dimension `k ≤ n`) and generators `G` of `(𝔪_T)_p` such that for every generator `g` and every list `L` of normal\ndirections with `|L| < μ`, the normal derivative `∂^L g` restricts on `S_T` near `p` into `[𝓓^{|L|} 𝔪]_T`. -/\ndef GoodAt (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (p : Y) : Prop :=\n  ∃ (k : ℕ) (_ : k ≤ n) (c : FlatChart n (strictAlong T S) p k) (G : (Y → ℂ) → Prop),\n    (∀ g, G g → (geoTransformAlong 𝔪 T).ideal.mem p g) ∧\n    (∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → IsInSpanAt (n := n) G p f) ∧\n    ∀ g, G g → ∀ L : List (Fin n), NormalIdx k L → L.length < 𝔪.d →\n      IsInSpanOnAt (n := n) (strictAlong T S) ((geoTransformAlong (derivMarked 𝔪 L.length) T).ideal.mem p) p\n        (c.nd L g)\n\n/-- **The conclusion of the invariant**: at a good point `p ∈ S_T` where every `[𝓓^i 𝔪]_T` (`i < μ`) has order\n`≥ μ - i` along `S_T`, every germ of `𝔪_T` lies in `𝔪_p^μ`. -/\ntheorem GoodAt.orderGE (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} {T : BlowupTower X Y} {p : Y}\n    (hp : GoodAt 𝔪 S T p) (hcoh : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal p (𝔪.d - i)) :\n    ∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → (idealPow (pointIdeal n p) 𝔪.d).mem p f := by\n  obtain ⟨k, -, c, G, hGmem, hGgen, hGder⟩ := hp\n  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcoh\n  have hG : ∀ g, G g → (idealPow (pointIdeal n p) 𝔪.d).mem p g := by\n    intro g hg\n    refine c.mem_idealPow_of_vanishesToOrderOn (hhol p g (hGmem g hg)) fun L hL hLlen => ?_\n    exact vanishesToOrderOn_of_isInSpanOnAt (hGder g hg L hL hLlen) fun s hs =>\n      hD L.length hLlen s hs\n  intro f hf\n  exact mem_idealPow_of_isInSpanAt ((hGgen f hf).mono fun g hg => hG g hg)\n\n/-- **Every point of `S` is good** for the empty tower: in a flat chart, the normal derivatives of germs of `𝔞` lie in\n`𝓓^{|L|} 𝔞`. -/\ntheorem goodAt_refl (𝔪 : MarkedIdeal n X) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X} (hS : IsClosedSubmanifold n S)\n    {p : X} (hp : p ∈ S) : GoodAt 𝔪 S (BlowupTower.refl : BlowupTower X X) p := by\n  obtain ⟨k, hk⟩ := hS.2 p hp\n  refine ⟨k, hk.1, FlatChart.ofRegularAtDim hk, 𝔪.ideal.mem p, fun g hg => hg,\n    fun f hf => InvertibleIdealQuotient.isInSpanAt_self hf\n      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔞 p f hf), fun g hg L _ _ => ?_⟩\n  have hmem := (FlatChart.ofRegularAtDim hk).nd_mem_iterDerivIdeal h𝔞 hg L\n  exact ⟨1, fun _ => (FlatChart.ofRegularAtDim hk).nd L g, fun _ => 1, fun _ => hmem,\n    fun _ => holomorphicAt_const 1, Eventually.of_forall fun y _ => by simp⟩\n\n/-- **A flat chart from a holomorphic map with injective derivative.** -/\ntheorem FlatChart.exists_of_map {S' : Set Z} {z : Z} {k : ℕ} {W : Z → ComplexModel n} {O : Set Z} (hO : IsOpen O)\n    (hzO : z ∈ O) (hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y) (hWz : W z = 0)\n    (hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)))\n    (hflat : ∀ y ∈ O, (y ∈ S' ↔ W y ∈ complexCoordinatePlane n k)) :\n    ∃ c : FlatChart n S' z k, c.ψ =ᶠ[𝓝 z] W := by\n  set e := chartAt (ComplexModel n) z with he\n  set Nset : Set (ComplexModel n) := e.target ∩ e.symm ⁻¹' O with hNset\n  have hNo : IsOpen Nset := e.continuousOn_symm.isOpen_inter_preimage e.open_target hO\n  have hzN : e z ∈ Nset := ⟨e.map_source (mem_chart_source _ z), by\n    rw [mem_preimage, e.left_inv (mem_chart_source _ z)]; exact hzO⟩\n  have hFd : DifferentiableOn ℂ (fun ζ => W (e.symm ζ)) Nset := fun ζ hζ => by\n    have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z) hζ.1\n    exact (mdifferentiableAt_iff_differentiableAt.mp ((hW _ hζ.2).comp _ h1)).differentiableWithinAt\n  obtain ⟨Θ, hΘN, hΘF, -⟩ := FirstPass.exists_localHolomorphicEquivAt hNo hzN hFd hinj\n  refine ⟨⟨Θ, fun ζ hζ => (hΘN hζ).1, ?_, ?_⟩, ?_⟩\n  · rw [hΘF]\n    show W (e.symm (e z)) = 0\n    rw [e.left_inv (mem_chart_source _ z)]; exact hWz\n  · intro y hy hyΘ\n    have hyO : y ∈ O := by\n      have h := (hΘN hyΘ).2\n      rwa [mem_preimage, e.left_inv hy] at h\n    rw [hΘF]\n    show y ∈ S' ↔ W (e.symm (e y)) ∈ _\n    rw [e.left_inv hy]; exact hflat y hyO\n  · filter_upwards [e.open_source.mem_nhds (mem_chart_source _ z)] with y hy\n    show Θ.toFun (e y) = W y\n    rw [hΘF]\n    show W (e.symm (e y)) = W y\n    rw [e.left_inv hy]\n\n/-- For a flat chart `c` with `c.ψ = W` near `z`, `W (c.inv u) = u` near `0`. -/\ntheorem FlatChart.eventually_map_inv {S' : Set Z} {z : Z} {k : ℕ} (c : FlatChart n S' z k) {W : Z → ComplexModel n}\n    (hcW : c.ψ =ᶠ[𝓝 z] W) : ∀ᶠ u in 𝓝 (0 : ComplexModel n), W (c.inv u) = u := by\n  filter_upwards [c.eventually_ψ_inv, c.tendsto_inv.eventually hcW] with u hu hu'\n  rw [← hu', hu]\n\n/-- **The invariant off the centre**: if `π z ∉ C` and `π z` is good for `T`, then `z` is good for the tower\ncontinued by the blowup `π` along `C` (the generators pull back, `π` is a local biholomorphism). -/\ntheorem goodAt_step_of_notMem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}\n    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)\n    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)\n    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)\n    (hSc : IsClosed (strictAlong T S)) {z : Z} (hzC : π z ∉ C) (hgood : GoodAt 𝔪 S T (π z)) :\n    GoodAt 𝔪 S (.step T C π hπ) z := by\n  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood\n  have hπc : Continuous π := hπ.contMDiff.continuous\n  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=\n    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)\n  have hSev : ∀ᶠ y in 𝓝 z, (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) := by\n    filter_upwards [(hπ.1.1.isOpen_compl.preimage hπc).mem_nhds hzC] with y hy\n    rw [strictAlong_step]\n    refine ⟨fun h => ?_, fun h => subset_closure ⟨h, hy⟩⟩\n    exact closure_minimal (preimage_mono sdiff_subset) (hSc.preimage hπc) h\n  -- the new coordinates `W = ψ ∘ π`\n  set W : Z → ComplexModel n := fun y => c.ψ (π y) with hWdef\n  have hev : ∀ᶠ y in 𝓝 z, π y ∈ BlowupFlatCoordinates.flatDomain c.Φ ∧\n      (y ∈ strictAlong (.step T C π hπ) S ↔ π y ∈ strictAlong T S) :=\n    ((hπc.tendsto z).eventually c.eventually_mem_flatDomain).and hSev\n  obtain ⟨O, hOsub, hO, hzO⟩ := mem_nhds_iff.mp hev\n  have hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y := fun y hy =>\n    (c.mdifferentiableAt_ψ (hOsub hy).1).comp y (hπd y)\n  have hflat : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y ∈ complexCoordinatePlane n k) := fun y hy => by\n    rw [(hOsub hy).2]; exact c.flat (hOsub hy).1.1 (hOsub hy).1.2\n  have hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)) := by\n    set I := 𝓘(ℂ, ComplexModel n) with hI\n    have hrange : range I = univ := by simp [hI]\n    set e := chartAt (ComplexModel n) z with he\n    set e' := chartAt (ComplexModel n) (π z) with he'\n    set F : ComplexModel n → ComplexModel n := fun u => e' (π (e.symm u)) with hF\n    have hmd : MDifferentiableAt I I π z := hπd z\n    have hderiv : mfderiv I I π z = fderiv ℂ F (e z) := by\n      rw [hmd.mfderiv, hrange, fderivWithin_univ]\n      rfl\n    have hFinj : Function.Injective (fderiv ℂ F (e z)) := by\n      have hz : z ∉ BlowupSequences.exceptionalLocus n π :=\n        fun h => hzC (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ h)\n      simp only [exceptionalLocus, mem_ofPred_eq, not_not] at hz\n      rw [hderiv] at hz\n      exact hz.1\n    -- `W ∘ e⁻¹ = Φ ∘ F` near `e z`\n    have hzs : z ∈ e.source := mem_chart_source _ z\n    have hFz : F (e z) = e' (π z) := by simp only [hF, e.left_inv hzs]\n    have hloc : (fun ζ => W (e.symm ζ)) =ᶠ[𝓝 (e z)] fun ζ => c.Φ.toFun (F ζ) := by\n      filter_upwards with ζ\n      rfl\n    have hFd : DifferentiableAt ℂ F (e z) := by\n      have h := (contMDiffOn_iff.mp (hπ.contMDiff.contMDiffOn (s := univ))).2 z (π z)\n      have hset : (e.target ∩ e.symm ⁻¹' (univ ∩ π ⁻¹' e'.source)) ∈ 𝓝 (e z) := by\n        refine (e.continuousOn_symm.isOpen_inter_preimage e.open_target\n          (isOpen_univ.inter (hπc.isOpen_preimage _ e'.open_source))).mem_nhds ?_\n        exact ⟨e.map_source hzs, by rw [mem_preimage, e.left_inv hzs]; exact ⟨mem_univ _, mem_chart_source _ _⟩⟩\n      refine ((h.differentiableOn (by simp)).mono ?_).differentiableAt hset\n      intro u hu\n      exact ⟨⟨mem_univ _, hu.1⟩, mem_univ _, hu.2.2, mem_univ _⟩\n    have hΦd : DifferentiableAt ℂ c.Φ.toFun (F (e z)) := by\n      rw [hFz]\n      exact c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds c.Φ.center_mem_source)\n    have hcomp : HasFDerivAt (fun ζ => c.Φ.toFun (F ζ))\n        ((fderiv ℂ c.Φ.toFun (F (e z))).comp (fderiv ℂ F (e z))) (e z) :=\n      hΦd.hasFDerivAt.comp (e z) hFd.hasFDerivAt\n    rw [hloc.fderiv_eq, hcomp.fderiv]\n    refine (c.injective_fderiv_Φ ?_).comp hFinj\n    rw [hFz]; exact c.Φ.center_mem_source\n  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW c.ψ_self hinj hflat\n  -- `π ∘ c'.inv = c.inv` near `0`\n  have hWinv := FlatChart.eventually_map_inv c' hc'\n  have hπinv : ∀ᶠ u in 𝓝 (0 : ComplexModel n), π (c'.inv u) = c.inv u := by\n    have ht : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=\n      (hπc.tendsto z).comp c'.tendsto_inv\n    filter_upwards [hWinv, ht.eventually c.eventually_inv_ψ] with u hu hu'\n    rw [← hu', show c.ψ (π (c'.inv u)) = u from hu]\n  -- normal derivatives of pulled-back generators\n  have hnd : ∀ (g : Y → ℂ) (L : List (Fin n)), c'.nd L (g ∘ π) =ᶠ[𝓝 z] fun z' => c.nd L g (π z') := by\n    intro g L\n    have hgerm : (fun u => (g ∘ π) (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)] fun u => g (c.inv u) := by\n      filter_upwards [hπinv] with u hu\n      simp only [Function.comp_apply, hu]\n    have hiter := iterDeriv_congr_of_eventuallyEq hgerm (L.map bv)\n    filter_upwards [c'.tendsto_ψ.eventually hiter, hc'] with z' h1 h2\n    simp only [FlatChart.nd]\n    rw [h1, h2]\n  -- the transformed ideals at `z`\n  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T\n  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]\n  have hpb : ∀ {𝔟 : GermIdeal n Y} {g : Y → ℂ}, 𝔟.IsCoherent → 𝔟.mem (π z) g →\n      (GermIdeal.pullback (m := n) π 𝔟).mem z (g ∘ π) := fun {𝔟} {g} h𝔟 hg =>\n    InvertibleIdealQuotient.isInSpanAt_self (S := fun s => ∃ a, 𝔟.mem (π z) a ∧ s = a ∘ π) ⟨g, hg, rfl⟩\n      (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd)\n        (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔟 _ _ hg))\n  refine ⟨k, hkn, c', fun h => ∃ g, G g ∧ h = g ∘ π, ?_, ?_, ?_⟩\n  · rintro h ⟨g, hg, rfl⟩\n    rw [hideal]\n    exact GlueingTrivialAction.pullback_le_controlledTransform hπ hcohT 𝔪.d z _ (hpb hcohT (hGmem g hg))\n  · intro f hf\n    -- `f ∈ π^*𝔪_T` at `z` (off the centre the denominator contains `1`)\n    have hf' : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z f := by\n      have h1 := MarkedIdeals.MarkedIdeal.one_mem_idealPow (n := n)\n        (MarkedIdeals.MarkedIdeal.one_mem_pullback_vanishingIdeal (n := n) (π := π) hzC hπ.1.1) 𝔪.d\n      have hf2 := hf\n      rw [geoTransformAlong_step, geoTransform_ideal, hNT, MarkedIdeals.MarkedIdeal.geoStrictTransform_univ hπ, hd]\n        at hf2\n      have h3 := (InvertibleIdealQuotient.mem_colon_iff.mp hf2).2 _ h1\n      rw [BlowupTowerTransforms.restrictOn_univ (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT)]\n        at h3\n      exact NormalDerivativeChart.mem_congr_of_isCoherent (GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff hcohT) h3\n        (Eventually.of_forall fun y => by simp)\n    refine RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)\n      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z f from hf')\n    obtain ⟨a, ha, rfl⟩ := ht\n    exact (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha)).mono fun s ⟨g, hg, hs⟩ => ⟨g, hg, hs⟩\n  · rintro h ⟨g, hg, rfl⟩ L hL hLlen\n    obtain ⟨K, s, a, hs, ha, hsum⟩ := hGder g hg L hL hLlen\n    have hdL : L.length ≤ 𝔪.d := hLlen.le\n    have hDideal : (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal =\n        controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 L.length) T).ideal\n          (geoTransformAlong (derivMarked 𝔪 L.length) T).d := by\n      rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN _ hdL) (hDcoh _ hdL) hπ]\n    refine ⟨K, fun i => s i ∘ π, fun i => a i ∘ π, fun i => ?_, fun i =>\n      HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (ha i), ?_⟩\n    · rw [hDideal]\n      exact GlueingTrivialAction.pullback_le_controlledTransform hπ (hDcoh _ hdL) _ z _\n        (hpb (hDcoh _ hdL) (hs i))\n    · filter_upwards [hnd g L, hSev, (hπc.tendsto z).eventually hsum] with z' h1 h2 h3 hz'\n      rw [h1]\n      exact h3 (h2.mp hz')\n\n/-- **The normal derivatives through a monomial chart, on the manifolds.**  Let `c''` be a flat chart at `π z`,\n`W` coordinates near `z` with `c''.ψ ∘ π = σⱼ ∘ W` on an open `O ∋ z`, and `c'` a flat chart at `z` with\n`c'.ψ = W - W z` near `z`.  If `g ∘ π = Wⱼ^d · h'` near `z`, then for normal directions `L` (`l ≠ j`, `k_C ≤ l`)\n`Wⱼ^d · ∂^L h' = Wⱼ^{|L|} · (∂^L g) ∘ π` near `z`. -/\ntheorem nd_monomial_identity {π : Z → Y} (hπ : Continuous π) {z : Z} {S : Set Y} {S'' : Set Z}\n    {k'' k' kC : ℕ} (c'' : FlatChart n S (π z) k'') (c' : FlatChart n S'' z k') {W : Z → ComplexModel n}\n    {O : Set Z} (hO : IsOpen O) (hzO : z ∈ O) {j : Fin n}\n    (hWeq : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z')) (hc' : c'.ψ =ᶠ[𝓝 z] fun y => W y - W z)\n    {d : ℕ} {g : Y → ℂ} {h' : Z → ℂ} (hg : HolomorphicAt n g (π z)) (hh' : HolomorphicAt n h' z)\n    (hrel : ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ d * h' y) (L : List (Fin n)) (hL : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1) :\n    ∀ᶠ z' in 𝓝 z, W z' j ^ d * c'.nd L h' z' = W z' j ^ L.length * c''.nd L g (π z') := by\n  have hσc : Continuous (monomial (n := n) kC j) := (contDiff_monomial kC j).continuous\n  have hσd : Differentiable ℂ (monomial (n := n) kC j) := (contDiff_monomial kC j).differentiable (by simp)\n  have hσa : monomial kC j (W z) = 0 := by rw [← hWeq z hzO]; exact c''.ψ_self\n  obtain ⟨r₁, hr₁, hball₁⟩ := Metric.eventually_nhds_iff_ball.mp (c''.eventually_differentiableAt_comp_inv hg)\n  have hG₀ : DifferentiableOn ℂ (fun w => g (c''.inv w)) (ball 0 r₁) := fun w hw =>\n    (hball₁ w hw).differentiableWithinAt\n  obtain ⟨r₀, hr₀, hball₀⟩ := Metric.eventually_nhds_iff_ball.mp (c'.eventually_differentiableAt_comp_inv hh')\n  have hH : DifferentiableOn ℂ (fun u => h' (c'.inv u)) (ball 0 r₀) := fun u hu =>\n    (hball₀ u hu).differentiableWithinAt\n  obtain ⟨U, hU⟩ : ∃ U : Set (ComplexModel n), U = monomial kC j ⁻¹' ball 0 r₁ := ⟨_, rfl⟩\n  have hUo : IsOpen U := hU ▸ isOpen_ball.preimage hσc\n  have hUσ : MapsTo (monomial (n := n) kC j) U (ball 0 r₁) := fun w hw => by rw [hU] at hw; exact hw\n  have hGσ : DifferentiableOn ℂ (fun w => g (c''.inv (monomial kC j w))) U := fun w hw =>\n    (((hG₀ _ (hUσ hw)).differentiableAt (isOpen_ball.mem_nhds (hUσ hw))).comp w (hσd w)).differentiableWithinAt\n  have hW'inv := FlatChart.eventually_map_inv c' hc'\n  have hinv : Tendsto c'.inv (𝓝 (0 : ComplexModel n)) (𝓝 z) := c'.tendsto_inv\n  have hπinv : Tendsto (fun u => π (c'.inv u)) (𝓝 (0 : ComplexModel n)) (𝓝 (π z)) :=\n    (hπ.tendsto z).comp hinv\n  have hid : (fun u => (u + W z) j ^ d * h' (c'.inv u)) =ᶠ[𝓝 (0 : ComplexModel n)]\n      fun u => g (c''.inv (monomial kC j (u + W z))) := by\n    filter_upwards [hW'inv, hinv.eventually (hO.mem_nhds hzO), hinv.eventually hrel,\n      hπinv.eventually c''.eventually_inv_ψ] with u hu huO hurel huinv\n    have hu' : W (c'.inv u) - W z = u := hu\n    have hWu : W (c'.inv u) = u + W z := sub_eq_iff_eq_add.mp hu'\n    rw [← hWu, ← hurel, ← hWeq _ huO, huinv]\n  have hI := iterDeriv_congr_of_eventuallyEq hid (L.map bv)\n  have ht : Tendsto c'.ψ (𝓝 z) (𝓝 (0 : ComplexModel n)) := c'.tendsto_ψ\n  have hshift : ∀ᶠ z' in 𝓝 z, c'.ψ z' + W z ∈ U := by\n    have hcont : ContinuousAt (fun u : ComplexModel n => u + W z) 0 := (continuous_add_const (W z)).continuousAt\n    have h0 : (0 : ComplexModel n) + W z ∈ U := by\n      rw [hU, Set.mem_preimage, zero_add, hσa]; exact mem_ball_self hr₁\n    exact ht.eventually (hcont.eventually (hUo.mem_nhds h0))\n  have hLj : ∀ l ∈ L, ∀ (w : ComplexModel n) (t : ℂ), (fun u : ComplexModel n => (u + W z) j ^ d) (w + t • bv l) =\n      (fun u : ComplexModel n => (u + W z) j ^ d) w := fun l hl w t => by\n    have hjl : j ≠ l := Ne.symm (hL l hl).1\n    simp [bv, hjl]\n  have hcd : Differentiable ℂ (fun u : ComplexModel n => (u + W z) j ^ d) := fun u =>\n    (((EuclideanSpace.proj j : ComplexModel n →L[ℂ] ℂ).differentiableAt).comp u\n      (differentiableAt_id.add_const (W z))).pow d\n  filter_upwards [ht.eventually hI, ht.eventually (isOpen_ball.mem_nhds (mem_ball_self hr₀)), hshift, hc',\n    hO.mem_nhds hzO] with z' h1 h2 h3 h4 hz'O\n  have hlhs := iterDeriv_mul_of_const isOpen_ball hcd hH L hLj (c'.ψ z') h2\n  have hrhs1 := iterDeriv_comp_add hUo hGσ (W z) L h3\n  have hrhs2 := iterDeriv_comp_monomial (G := fun w => g (c''.inv w)) hUo isOpen_ball hUσ hG₀ L hL\n    (c'.ψ z' + W z) h3\n  have h4' : c'.ψ z' = W z' - W z := h4\n  have hWz' : c'.ψ z' + W z = W z' := by rw [h4']; abel\n  simp only [FlatChart.nd]\n  rw [hlhs, hrhs1, hrhs2, hWz'] at h1\n  rw [hWeq z' hz'O]\n  simpa [hWz'] using h1\n\n/-- **The invariant over the centre**: if `π z ∈ C`, `z` lies on the strict transform of `S_T` and `π z` is good for `T`,\nthen `z` is good for the tower continued by the blowup `π` along `C`.  The new coordinates are a monomial chart\n`x' = x / y_m` over nested product-form coordinates for `C ⊆ S_T`, the new generators are the controlled transforms\n`h' = W_j^{-μ} (g ∘ π)` of the old ones, and `W_j^μ ∂^L h' = W_j^{|L|} (∂^L g) ∘ π` (`nd_monomial_identity`). -/\ntheorem goodAt_step_of_mem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}\n    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)\n    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)\n    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)\n    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)\n    (hCadm : (geoTransformAlong 𝔪 T).IsAdmissibleCentre C)\n    (hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C)\n    (hSc : IsClosed (strictAlong T S)) (hCS : C ⊆ strictAlong T S) {z : Z}\n    (hz : z ∈ strictAlong (.step T C π hπ) S) (hzC : π z ∈ C) (hgood : GoodAt 𝔪 S T (π z)) :\n    GoodAt 𝔪 S (.step T C π hπ) z := by\n  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood\n  have hπc : Continuous π := hπ.contMDiff.continuous\n  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=\n    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)\n  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcohT\n  -- nested product-form coordinates for `C ⊆ S_T` at `π z`\n  obtain ⟨kC, hkC⟩ := hπ.1.2 (π z) hzC\n  have hSreg : RegularAtDim (n := n) (strictAlong T S) (π z) k := ⟨hkn, hCS hzC, c.Φ, c.src, c.zero, c.flat⟩\n  have hkCk : kC ≤ k := BlowupStrictSubmanifold.le_of_regularAtDim_subset hkC hSreg hCS\n  obtain ⟨c'', hc''C, hc''nd⟩ := FlatChart.exists_nested c hkCk hkn hkC hCS\n  -- the monomial chart at `z`\n  obtain ⟨j, hj, O, hO, hzO, W, hWs, hWmem, hℓ, hiff⟩ :=\n    BlowupStrictSubmanifold.exists_local_geoStrictTransform hπ c''.src hc''C c''.flat\n      (mem_flatDomain_self c''.Φ)\n  obtain ⟨ℓ, ⟨hℓs, hℓπ⟩, -⟩ := BlowupLocalSurjectivity.existsUnique_monomialLift hπ c''.src hc''C hj\n  have hWeq : ∀ z' ∈ O, π z' ∈ flatDomain c''.Φ ∧\n      monomial kC j (W z') = c''.Φ.toFun (chartAt (ComplexModel n) (π z) (π z')) := by\n    intro z' hz'\n    have hw := hWmem z' hz'\n    have h1 := hℓ ℓ hℓs hℓπ z' hz' hw\n    have h2 := congrFun hℓπ (LiftedOpen.mk _ (W z') hw)\n    rw [Function.comp_apply, h1] at h2\n    have h3 := flatInverse_mem c''.Φ hw c''.src\n    rw [h2]\n    simp only [monomialChart, LiftedOpen.toModel_mk]\n    exact ⟨h3.1, h3.2.symm⟩\n  have hWeq' : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z') := fun z' hz' => (hWeq z' hz').2.symm\n  obtain ⟨hjk, hWz⟩ := (hiff z hzO).mp hz\n  have hCu : ∀ u ∈ O, (π u ∈ C ↔ W u j = 0) := fun u hu => by\n    rw [hc''C (hWeq u hu).1.1 (hWeq u hu).1.2, ← (hWeq u hu).2,\n      BlowupStrictSubmanifold.monomial_mem_plane_iff hj]\n  -- the new flat chart `W - W z`\n  have hW' : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) (fun y => W y - W z) y :=\n    fun y hy => ((hWs y hy).mdifferentiableAt (by simp)).sub mdifferentiableAt_const\n  have hflat' : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y - W z ∈ complexCoordinatePlane n k) := by\n    intro y hy\n    rw [BlowupStrictSubmanifold.sub_mem_plane_iff hWz]\n    exact (hiff y hy).trans ⟨fun h => h.2, fun h => ⟨hjk, h⟩⟩\n  have hinj : Function.Injective\n      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ) - W z) (chartAt (ComplexModel n) z z)) := by\n    set e := chartAt (ComplexModel n) z with he\n    have hFd : DifferentiableAt ℂ (fun ζ => W (e.symm ζ)) (e z) := by\n      have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z)\n        (e.map_source (mem_chart_source _ z))\n      have h2 : MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W (e.symm (e z)) := by\n        rw [e.left_inv (mem_chart_source _ z)]; exact (hWs z hzO).mdifferentiableAt (by simp)\n      exact mdifferentiableAt_iff_differentiableAt.mp (h2.comp _ h1)\n    rw [fderiv_sub_const]\n    refine (injective_iff_map_eq_zero _).mpr fun v hv => ?_\n    by_contra hv0\n    apply BlowupFibreDirection.fderiv_monomialInverse_ne_zero hO hWs hWmem hℓs (hℓ ℓ hℓs hℓπ) hzO hv0\n    rw [hFd.fderiv_restrictScalars ℝ]\n    exact hv\n  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW' (sub_self _) hinj hflat'\n  -- the local equation `W_j` of the exceptional divisor\n  have hl : BlowupFunctionTransform.IsLocalEquation hπ O (fun p => W p j) :=\n    GlueingTrivialAction.isLocalEquation_monomial hπ c''.src hc''C hj hO hWs hWeq\n  have hlhol : HolomorphicAt n (fun p => W p j ^ 𝔪.d) z := by\n    have h1 : HolomorphicAt n (fun p => W p j) z := by\n      filter_upwards [hO.mem_nhds hzO] with y hy\n      exact (hl.mdifferentiableOn y hy).mdifferentiableAt (hO.mem_nhds hy)\n    exact h1.mono fun y hy => hy.pow _\n  -- the transformed ideals\n  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T\n  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]\n  have hDideal : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) (.step T C π hπ)).ideal =\n      controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 i) T).ideal (𝔪.d - i) := fun i hi => by\n    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN i hi) (hDcoh i hi) hπ,\n      d_geoTransformAlong, derivMarked_d]\n  have h𝔪le : (geoTransformAlong 𝔪 T).ideal.Le (idealPow (vanishingIdeal (n := n) C) 𝔪.d) := by\n    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcohT hCadm\n    rwa [hd] at this\n  have hDle : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.Le\n      (idealPow (vanishingIdeal (n := n) C) (𝔪.d - i)) := fun i hi => by\n    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre (hDN i hi) (hDcoh i hi) (hDadm i hi)\n    rwa [d_geoTransformAlong, derivMarked_d] at this\n  -- `W_j` vanishes on no relatively open subset of the strict transform\n  have hnonS : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ strictAlong (.step T C π hπ) S).Nonempty →\n      ∃ y ∈ V ∩ strictAlong (.step T C π hπ) S, W y j ^ 𝔪.d ≠ 0 := by\n    rintro V hV hVO ⟨y₀, hy₀V, hy₀S⟩\n    rw [strictAlong_step] at hy₀S\n    obtain ⟨y₁, hy₁V, hy₁S, hy₁C⟩ :=\n      mem_closure_iff.mp (show y₀ ∈ closure (π ⁻¹' (strictAlong T S \\ C)) from hy₀S) V hV hy₀V\n    refine ⟨y₁, ⟨hy₁V, ?_⟩, pow_ne_zero _ fun h => hy₁C ((hCu y₁ (hVO hy₁V)).mpr h)⟩\n    rw [strictAlong_step]\n    exact subset_closure ⟨hy₁S, hy₁C⟩\n  have hnonU : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ univ).Nonempty → ∃ y ∈ V ∩ univ, W y j ^ 𝔪.d ≠ 0 := by\n    rintro V hV hVO ⟨y₀, hy₀V, -⟩\n    obtain ⟨y, hyV, hy⟩ := hl.nonvanishing V hV hVO ⟨y₀, hy₀V⟩\n    exact ⟨y, ⟨hyV, mem_univ _⟩, pow_ne_zero _ hy⟩\n  refine ⟨k, hkn, c', fun h' => ∃ g, G g ∧ HolomorphicAt n h' z ∧\n    ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ 𝔪.d * h' y, ?_, ?_, ?_⟩\n  · -- the new generators are germs of the transform\n    rintro h' ⟨g, hg, hh', hrel⟩\n    rw [hideal]\n    exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hGmem g hg) hh' hrel\n  · -- they generate it\n    intro f hf\n    have hfhol : HolomorphicAt n f z := (show (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f\n      by rw [← hideal]; exact hf).1\n    have hWf : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z\n        (fun y => W y j ^ 𝔪.d * f y) := by\n      have hf' : (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f := by rw [← hideal]; exact hf\n      refine (InvertibleIdealQuotient.mem_colon_iff.mp hf').2 _ ?_\n      exact (hl.idealPow_mem_iff 𝔪.d z hzO _).mpr (InvertibleIdealQuotient.isInSpanAt_self rfl hlhol)\n    -- every generator `g ∘ π` is `W_j^μ h'` with `h'` a new generator\n    have hgen : ∀ g, G g → IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧\n        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z (g ∘ π) := by\n      intro g hg\n      obtain ⟨h', hh', heq⟩ := BlowupFunctionTransform.exists_eq_pow_mul hl hzO (h𝔪le _ _ (hGmem g hg))\n      exact isInSpanAt_of_eq_mul ⟨h', ⟨g, hg, hh', heq.mono fun y hy => hy⟩, rfl⟩\n        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (hhol _ _ (hGmem g hg)))\n        (holomorphicAt_const 1) (heq.mono fun y hy => by simp only [one_mul]; exact hy)\n    have hspan : IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧\n        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z\n        (fun y => W y j ^ 𝔪.d * f y) := RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)\n      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z\n        (fun y => W y j ^ 𝔪.d * f y) from hWf)\n    · obtain ⟨-, K, t, b, ht, hb, hsum⟩ := hspan\n      choose h' hh' htdef using ht\n      refine ⟨hfhol, K, h', b, fun i => hh' i, hb, ?_⟩\n      have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within (W := univ) hO hnonU hzO\n        (F := f) (G := fun y => ∑ i, b i y * h' i y) hfhol\n        (HolomorphicAt.sum _ fun i _ => (hb i).mul (hh' i).choose_spec.2.1) ?_\n      · filter_upwards [hcan] with y hy using hy (mem_univ y)\n      · filter_upwards [hsum] with y hy _\n        rw [hy, Finset.mul_sum]\n        refine Finset.sum_congr rfl fun i _ => ?_\n        rw [htdef i]; ring\n    · obtain ⟨a, ha, rfl⟩ := ht\n      exact RelativePrincipalizationSpan.IsInSpanAt.trans (fun s hs => by\n          obtain ⟨g, hg, rfl⟩ := hs; exact hgen g hg)\n        (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha))\n  · -- the normal derivatives\n    rintro h' ⟨g, hg, hh', hrel⟩ L hL hLlen\n    have hgp : HolomorphicAt n g (π z) := hhol _ _ (hGmem g hg)\n    have hLj : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1 := fun l hl' => by\n      have := hL l hl'\n      exact ⟨fun h => by rw [h] at this; omega, by omega⟩\n    have hid := nd_monomial_identity hπc c'' c' hO hzO hWeq' hc' hgp hh' hrel L hLj\n    have hnd := (hπc.tendsto z).eventually (hc''nd L hL g hgp)\n    obtain ⟨K, s, aa, hs, haa, hsum⟩ := hGder g hg L hL hLlen\n    have hdL : L.length ≤ 𝔪.d := hLlen.le\n    have hex : ∀ i, ∃ s' : Z → ℂ, HolomorphicAt n s' z ∧\n        (s i ∘ π) =ᶠ[𝓝 z] fun y => W y j ^ (𝔪.d - L.length) * s' y := fun i =>\n      BlowupFunctionTransform.exists_eq_pow_mul hl hzO (hDle _ hdL _ _ (hs i))\n    choose s' hs'hol hs'eq using hex\n    have hs'mem : ∀ i, (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal.mem z (s' i) := fun i => by\n      rw [hDideal _ hdL]\n      exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hs i) (hs'hol i) (hs'eq i)\n    have hsub : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S → π z' ∈ strictAlong T S :=\n      Eventually.of_forall fun z' hz' =>\n        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπc hSc hz'\n    have hmul : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S →\n        W z' j ^ 𝔪.d * c'.nd L h' z' = W z' j ^ 𝔪.d * ∑ i, (aa i ∘ π) z' * s' i z' := by\n      filter_upwards [hid, hnd, (hπc.tendsto z).eventually hsum, eventually_all.mpr hs'eq, hsub] with\n        z' h1 h2 h3 h4 h5 hz'\n      rw [h1, h2, h3 (h5 hz'), Finset.mul_sum, Finset.mul_sum]\n      refine Finset.sum_congr rfl fun i _ => ?_\n      have h4i : s i (π z') = W z' j ^ (𝔪.d - L.length) * s' i z' := h4 i\n      have e : W z' j ^ 𝔪.d = W z' j ^ L.length * W z' j ^ (𝔪.d - L.length) := by\n        rw [← pow_add, Nat.add_sub_cancel' hdL]\n      rw [h4i, Function.comp_apply, e]\n      ring\n    have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within hO hnonS hzO\n      (FlatChart.holomorphicAt_nd c' hh' L)\n      (HolomorphicAt.sum _ fun i _ =>\n        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i)).mul (hs'hol i)) hmul\n    exact ⟨K, s', fun i => aa i ∘ π, hs'mem,\n      fun i => HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i), hcan⟩\n\n/-- **Every point of the strict transform of `S` is good** along a multiple test blow-up of `𝔪` with centres in the\nstrict transforms of `S` (induction on the tower: `goodAt_refl`, `goodAt_step_of_mem`, `goodAt_step_of_notMem`). -/\ntheorem goodAt_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X}\n    (hS : IsClosedSubmanifold n S) :\n    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T → CentresIn S T →\n      ∀ p ∈ strictAlong T S, GoodAt 𝔪 S T p\n  | _, .refl => fun _ _ p hp => goodAt_refl 𝔪 h𝔞 hS hp\n  | _, .step T C π hπ => fun hT hTS z hz => by\n      obtain ⟨hT0, hC⟩ := (isGeoTestTower_step_iff 𝔪 T C π hπ).mp hT\n      obtain ⟨hTS0, hCS⟩ := hTS\n      obtain ⟨-, hNT, -, hSsub, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT0 hTS0\n      have hSc : IsClosed (strictAlong T S) := hSsub.1\n      have hpz : π z ∈ strictAlong T S :=\n        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπ.contMDiff.continuous hSc hz\n      have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT0 hTS0 (π z) hpz\n      have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=\n        (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT0).2.2.2.2.1\n      have hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ := fun i hi =>\n        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.1\n      have hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent := fun i hi =>\n        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.2.2.2.1\n      have hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C := fun i hi =>\n        ((isGeoTestTower_step_iff _ T C π hπ).mp (inclusions_tower 𝔪 hN h𝔞 hi (.step T C π hπ) hT).1).2\n      by_cases hzC : π z ∈ C\n      · exact goodAt_step_of_mem 𝔪 T hπ hNT hcohT hDN hDcoh hC hDadm hSc hCS hz hzC hgood\n      · exact goodAt_step_of_notMem 𝔪 T hπ hNT hcohT hDN hDcoh hSc hzC hgood\n\n/-- **Włodarczyk `le:S` (2), the inclusion `⊆`** (GGT Proposition 5.6.4 (2)): along a multiple test blow-up `T` of\n`𝔪 = (X, X, E, 𝔞, μ)` with centres in the strict transforms of a closed submanifold `S`,\n`supp[𝓒(𝔪)|_S]_T ⊆ supp(𝔪_T)`. -/\ntheorem cosupp_coeff_withN_tower_subset (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)\n    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)\n    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :\n    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp ⊆ (geoTransformAlong 𝔪 T).cosupp := by\n  intro x hx\n  obtain ⟨-, hRE, -⟩ := coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS\n  obtain ⟨-, hNT, -, hST, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT hTS\n  have hfam := isAmbientFamily_derivMarked hN h𝔞\n  have hall : ∀ i < 𝔪.d, IsGeoTestTower (derivMarked 𝔪 i) T :=\n    fun i hi => (inclusions_tower 𝔪 hN h𝔞 (le_of_lt hi) T hT).1\n  obtain ⟨-, hmsum⟩ := geoTransformAlong_msum (fun i => derivMarked 𝔪 i) hd hfam T\n  obtain ⟨he, hfamT⟩ := hmsum hall\n  -- `x` is in the cosupport of `𝓒(𝔪)_T` along `S_T`\n  have hx1 : x ∈ cosupport n (strictAlong T S) (geoTransformAlong (coeffMarked 𝔪) T).ideal (coeffMarked 𝔪).d := by\n    rw [hRE.cosupp_eq] at hx\n    have := hx\n    rwa [cosupp_withN, d_geoTransformAlong] at this\n  have hxS : x ∈ strictAlong T S := hx1.1\n  -- hence every `[𝓓^i 𝔪]_T` has order `≥ μ - i` along `S_T` at `x`\n  have hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal x (𝔪.d - i) := by\n    intro i hi\n    have hx2 := hx1\n    rw [show (geoTransformAlong (coeffMarked 𝔪) T) = msum (fun i => geoTransformAlong (derivMarked 𝔪 i) T) 𝔪.d\n      from he] at hx2\n    have hJ : ∀ i < 𝔪.d, ∀ y g, (idealPow (geoTransformAlong (derivMarked 𝔪 i) T).ideal\n        (sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) 𝔪.d i)).mem y g → HolomorphicAt n g y :=\n      fun _ _ _ _ hg => holomorphicAt_of_mem_idealPow hg\n    have hmark : (coeffMarked 𝔪).d = (Finset.range 𝔪.d).prod fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d := by\n      simp only [d_geoTransformAlong]; rfl\n    rw [hmark] at hx2\n    have hx3 := ((mem_cosupport_finSumIdeal hJ).mp hx2).2 i hi\n    have hD1 : ∀ j < 𝔪.d, 1 ≤ (geoTransformAlong (derivMarked 𝔪 j) T).d := fun j hj => by\n      rw [d_geoTransformAlong, derivMarked_d]; omega\n    have hpow := MarkedIdealOperationsAlong.cosupport_idealPow_mul_eq_along hST.2\n      (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent (hfamT.coh i hi)) (one_le_sumExp hD1 i)\n      (geoTransformAlong (derivMarked 𝔪 i) T).d\n    rw [mul_sumExp (fun j => (geoTransformAlong (derivMarked 𝔪 j) T).d) hi] at hpow\n    rw [hpow, d_geoTransformAlong, derivMarked_d] at hx3\n    exact hx3.2\n  -- the invariant gives the order of `𝔪_T`\n  have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT hTS x hxS\n  have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=\n    (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT).2.2.2.2.1\n  have hord := hgood.orderGE 𝔪 S hcohT hD\n  rw [MarkedIdeal.cosupp, hNT, d_geoTransformAlong]\n  exact ⟨mem_univ x, fun f hf => ⟨f, hord f hf, Eventually.of_forall fun _ _ => rfl⟩⟩\n\n/-- `supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T` along a multiple test blow-up of `𝔪` with centres in the strict transforms. -/\ntheorem cosupp_coeff_withN_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)\n    (hd : 1 ≤ 𝔪.d) {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y)\n    (hT : IsGeoTestTower 𝔪 T) (hTS : CentresIn S T) :\n    (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S := by\n  refine Subset.antisymm (fun x hx => ⟨cosupp_coeff_withN_tower_subset 𝔪 hN h𝔞 hd hS T hT hTS hx, ?_⟩)\n    (coeff_restrict_tower 𝔪 hN h𝔞 hd hS T hT hTS).2.2\n  have h := (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp_subset_N hx\n  rwa [N_geoTransformAlong_withN] at h\n\n/-- **Włodarczyk `le:S` in full** (GGT Proposition 5.6.4): for `𝔪 = (X, X, E, 𝔞, μ)` with `𝔞` coherent and `μ ≥ 1`\nand a closed submanifold `S`, a tower is a multiple test blow-up of `𝓒(𝔪)|_S` if and only if it is a multiple test\nblow-up of `𝔪` with centres in the strict transforms of `S`, and along it\n`supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T`. -/\ntheorem coeff_restrict_tower_iff (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)\n    {S : Set X} (hS : IsClosedSubmanifold n S) :\n    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →\n      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T ↔ IsGeoTestTower 𝔪 T ∧ CentresIn S T) ∧\n      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T →\n        (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S)\n  | _, .refl => ⟨⟨fun _ => ⟨trivial, trivial⟩, fun _ => trivial⟩, fun _ => cosupp_coeff_withN 𝔪 hN h𝔞 hd S⟩\n  | _, .step T C π hπ => by\n      obtain ⟨ih, -⟩ := coeff_restrict_tower_iff 𝔪 hN h𝔞 hd hS T\n      have hE : (geoTransformAlong (withN (coeffMarked 𝔪) S) T).E = (geoTransformAlong 𝔪 T).E :=\n        MarkedIdealEquivalence.MarkedIdeal.E_geoTransformAlong_eq (𝔪 := withN (coeffMarked 𝔪) S) (𝔫 := 𝔪) rfl T\n      have hiff : IsGeoTestTower (withN (coeffMarked 𝔪) S) (.step T C π hπ) ↔\n          IsGeoTestTower 𝔪 (.step T C π hπ) ∧ CentresIn S (.step T C π hπ) := by\n        rw [isGeoTestTower_step_iff, isGeoTestTower_step_iff, centresIn_step_iff]\n        constructor\n        · rintro ⟨h0, hC⟩\n          obtain ⟨hT0, hTS0⟩ := ih.mp h0\n          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0\n          refine ⟨⟨hT0, hC.1, fun x hx => (hcos ▸ hC.2.1 hx).1, hE ▸ hC.2.2⟩, hTS0, fun x hx => (hcos ▸ hC.2.1 hx).2⟩\n        · rintro ⟨⟨hT0, hC⟩, hTS0, hCS⟩\n          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0\n          refine ⟨ih.mpr ⟨hT0, hTS0⟩, hC.1, fun x hx => ?_, hE.symm ▸ hC.2.2⟩\n          rw [hcos]; exact ⟨hC.2.1 hx, hCS hx⟩\n      refine ⟨hiff, fun h => ?_⟩\n      obtain ⟨hT', hTS'⟩ := hiff.mp h\n      exact cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS _ hT' hTS'\n",
+  "original_selected_sha256": "6e71f11cec1ef0830ba31b3f168c19311ff2ed82535a957c4109df419bf4dbad",
+  "canonical_source_layout": [
+    {
+      "canonical_administrative_context": "/- Complete original CoefficientRestrictionTower complement; provisional dependency closure. -/\nimport Hironaka.MarkedIdeal.CoefficientRestrictionTower\n",
+      "sha256": "0534a9032431ad5a02e032ab7cf21ad9df54783672858e6ec319330442c38606",
+      "kind": "Pure import of frozen original owner; no supplied certificate or proof alias."
+    },
+    {
+      "canonical_administrative_context": "\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n/-!\n# The restricted coefficient ideal along multiple test blow-ups: the support\n\nHironaka phase H3 (TN23-ENVELOPES); blueprint `mc:normal-coefficient-invariant`, `mc:coefficient-restriction-full`\n(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, proof of Lemma `le:S`; GGT 2008\n(`wlodarczyk09-analytic-resolution`), proof of Proposition 5.6.4 (2)-(3): the coefficients `c_{α f k}` of the\ntransforms `f_k` in the normal coordinates of the strict transforms `S_k` satisfy\n`c_{α f k}|_{S_k} ∈ (σ^k|_{S_k})^c(𝓓^{|α|}(𝓘)|_S)`.\n\n**The invariant** (`GoodAt`): at a point `p` of `S_T` there are a flat chart for `S_T` and generators of the transformed\nideal `𝔪_T` at `p` whose normal derivatives `∂^L` (`|L| < μ`) restrict on `S_T` into the transformed derivative ideals\n`[𝓓^{|L|} 𝔪]_T`.\n\n* `GoodAt.mem_cosupp` (the conclusion): at a good point of `S_T` where every `[𝓓^i 𝔪]_T` has order `≥ μ - i` along\n  `S_T`, the point lies in `cosupp 𝔪_T` (`NormalTaylorOrder`).\n* `goodAt_refl`: every point of `S` is good (normal derivatives of germs of `𝔞` lie in `𝓓^{|L|} 𝔞`).\n\nImport discipline (Hironaka phase): this module does not import, even transitively,\n`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.\n-/\n\nopen Set Filter Metric\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace Hironaka.CoefficientRestrictionTower\n\nopen Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform\n\nnoncomputable section\n\nvariable {n : ℕ} {X : CMfd.{u} n}\n\n",
+      "sha256": "fbbccb3bc173a5dcdbf130eb4ea88407b4e07368dd901d99c2ece14efa3001eb",
+      "original_context_start_byte": 188,
+      "original_context_end_byte": 2144,
+      "original_context_sha256": "789277de7288a6373827433d254b3637e22aeb42bac1c707cf36ccf6a0c2eed9"
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 2830,
+      "original_context_end_byte": 2831,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 0
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 3766,
+      "original_context_end_byte": 3767,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 1
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 4885,
+      "original_context_end_byte": 4886,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 2
+    },
+    {
+      "canonical_administrative_context": "\n/-! ### Tools -/\n\nsection Tools\n\nvariable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]\n\n",
+      "sha256": "ea22f4cd3d8e9f4e8bd152821a4c90abf0d283245f659a04f366b85e3f23620e",
+      "original_context_start_byte": 5763,
+      "original_context_end_byte": 5981,
+      "original_context_sha256": "ea22f4cd3d8e9f4e8bd152821a4c90abf0d283245f659a04f366b85e3f23620e"
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 6699,
+      "original_context_end_byte": 6700,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 3
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 8614,
+      "original_context_end_byte": 8615,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 4
+    },
+    {
+      "canonical_administrative_context": "\nend Tools\n\n/-! ### The step off the centre -/\n\nsection OffCentre\n\nvariable {Y Z : CMfd.{u} n}\n\n",
+      "sha256": "fe92cb4d16357a705f71e09ae542f263f7c144aa98abb9282bcdadfb046af07a",
+      "original_context_start_byte": 9014,
+      "original_context_end_byte": 9110,
+      "original_context_sha256": "fe92cb4d16357a705f71e09ae542f263f7c144aa98abb9282bcdadfb046af07a"
+    },
+    {
+      "original_payload_index": 5
+    },
+    {
+      "canonical_administrative_context": "\nend OffCentre\n\n/-! ### The step over the centre -/\n\nsection Centre\n\nopen BlowupFlatCoordinates BlowupMonomialCharts\n\nvariable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]\n\n",
+      "sha256": "9c820907c122025b74fe45c1c07efe372bd01fa06bc69d2338566cdd4f510ddb",
+      "original_context_start_byte": 18018,
+      "original_context_end_byte": 18320,
+      "original_context_sha256": "9c820907c122025b74fe45c1c07efe372bd01fa06bc69d2338566cdd4f510ddb"
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 19135,
+      "original_context_end_byte": 19136,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 6
+    },
+    {
+      "canonical_administrative_context": "\nend Centre\n\nsection CentreStep\n\nopen BlowupFlatCoordinates BlowupMonomialCharts\n\nvariable {Y Z : CMfd.{u} n}\n\n",
+      "sha256": "d2cbaebb31687d86652d2a37c8bf39596b2a5e89f0abb9cc2919f5722c44ddd6",
+      "original_context_start_byte": 23877,
+      "original_context_end_byte": 23988,
+      "original_context_sha256": "d2cbaebb31687d86652d2a37c8bf39596b2a5e89f0abb9cc2919f5722c44ddd6"
+    },
+    {
+      "original_payload_index": 7
+    },
+    {
+      "canonical_administrative_context": "\nend CentreStep\n\n/-! ### Along multiple test blow-ups -/\n\nsection Tower\n\n",
+      "sha256": "270a909021abb3c3ae388969243d3c423f796fcb65d91d4348140edd2bd6543d",
+      "original_context_start_byte": 36939,
+      "original_context_end_byte": 37012,
+      "original_context_sha256": "270a909021abb3c3ae388969243d3c423f796fcb65d91d4348140edd2bd6543d"
+    },
+    {
+      "original_payload_index": 8
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 39034,
+      "original_context_end_byte": 39035,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 9
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 42383,
+      "original_context_end_byte": 42384,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 10
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "original_context_start_byte": 43209,
+      "original_context_end_byte": 43210,
+      "original_context_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 11
+    },
+    {
+      "canonical_administrative_context": "\nend Tower\n\nend\n\nend Hironaka.CoefficientRestrictionTower\n",
+      "sha256": "eea498a7a90162ff3d4c675627a1a1d920989dff50b19353c1a528792e8e5865",
+      "original_context_start_byte": 45537,
+      "original_context_end_byte": 45617,
+      "original_context_sha256": "fbda8939b1a23fafd35ff49f27f0002c435ccd920eb264a4bac2012d73435e31"
+    }
+  ],
+  "original_context_commands_including_all_sections": [
+    {
+      "start_line": 5,
+      "end_line": 5,
+      "complete_original_command": "set_option autoImplicit false",
+      "sha256": "ea2fb9744c250fc2bc9f604090bfdd4c616d98051ec07ef4ec5b4f88f681524e"
+    },
+    {
+      "start_line": 6,
+      "end_line": 6,
+      "complete_original_command": "set_option linter.unusedSectionVars false",
+      "sha256": "dfded1f0be3d096fc6771c74d84fe46dde1fae8345158beb3d56b0fd016a50b3"
+    },
+    {
+      "start_line": 29,
+      "end_line": 29,
+      "complete_original_command": "open Set Filter Metric",
+      "sha256": "251f44e9d0a6bd9a54f10917135ecde611a987fafb1b0ac24da71c41537e2008"
+    },
+    {
+      "start_line": 30,
+      "end_line": 30,
+      "complete_original_command": "open scoped Topology Manifold ContDiff",
+      "sha256": "741a6a10f71e093e965a7e74b172a62b2ef414a686be79633fbf676ba9824654"
+    },
+    {
+      "start_line": 32,
+      "end_line": 32,
+      "complete_original_command": "universe u",
+      "sha256": "4c50f25cbc3564cbd3816e8d383a231895d65247d8fff57874732b11659d0ebe"
+    },
+    {
+      "start_line": 34,
+      "end_line": 34,
+      "complete_original_command": "namespace TranscendentalNakamaye.Pending.CoefficientRestrictionTower",
+      "sha256": "45e905e760ed90d071c542f7f8ce5c1970e7a1b552a9ebcf43053a97aef15f44"
+    },
+    {
+      "start_line": 36,
+      "end_line": 39,
+      "complete_original_command": "open FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal DerivativeIdealTower CoefficientIdeal\n  HomogenizedGlueingTower CoefficientIdealRestriction HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart\n  NormalDerivativeMonomial BlowupControlledTransform",
+      "sha256": "5b66a9bd6122c914621dd1bc43712e2c82a160a4ffb3b427918ddce6de8f53a1"
+    },
+    {
+      "start_line": 41,
+      "end_line": 41,
+      "complete_original_command": "noncomputable section",
+      "sha256": "e3eed6c918c6b5f803a97cb89d478aad13c09ba97ed60c87f611a083a9e14abd"
+    },
+    {
+      "start_line": 43,
+      "end_line": 43,
+      "complete_original_command": "variable {n : ℕ} {X : CMfd.{u} n}",
+      "sha256": "64b2dd09d8cdb8e634f2b333f09edb28239cd907b4830a38fb27f0e0f39435c5"
+    },
+    {
+      "start_line": 95,
+      "end_line": 95,
+      "complete_original_command": "section Tools",
+      "sha256": "add2cd9024704147b2a3dc9ae7f077547f7a517c9250e736465acdeb24df6701"
+    },
+    {
+      "start_line": 97,
+      "end_line": 98,
+      "complete_original_command": "variable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]",
+      "sha256": "1063ec49fc5b2b55460510e06712427a8d9e0d3d1a9035c38dca5e9e6ea002c2"
+    },
+    {
+      "start_line": 150,
+      "end_line": 150,
+      "complete_original_command": "end Tools",
+      "sha256": "a7bd8ceb4c9a449cedb743692647718615d2f9743e0e99e0dfc8f97898f03a70"
+    },
+    {
+      "start_line": 154,
+      "end_line": 154,
+      "complete_original_command": "section OffCentre",
+      "sha256": "d07742597adabb0fae6ab784a760c8759396f3f7a4e94a3fd3107cd1b09873b7"
+    },
+    {
+      "start_line": 156,
+      "end_line": 156,
+      "complete_original_command": "variable {Y Z : CMfd.{u} n}",
+      "sha256": "ac56846e8d038a7056e26fc1771f81c75ab5707eab60acf6cc83765cab70ce96"
+    },
+    {
+      "start_line": 292,
+      "end_line": 292,
+      "complete_original_command": "end OffCentre",
+      "sha256": "e4a8236727d15f44bb2bc0c81b0b39a1b39360e19f241dc6b9222beb8ec6b4f4"
+    },
+    {
+      "start_line": 296,
+      "end_line": 296,
+      "complete_original_command": "section Centre",
+      "sha256": "0e86968c2d6a38bbff479f2aaff60daf36f4ad67e88dc04751e831360c23c13a"
+    },
+    {
+      "start_line": 298,
+      "end_line": 298,
+      "complete_original_command": "open BlowupFlatCoordinates BlowupMonomialCharts",
+      "sha256": "d4017879100cde262894d6111302da038d8515f675e2957e69a01fa2d8fd8570"
+    },
+    {
+      "start_line": 300,
+      "end_line": 301,
+      "complete_original_command": "variable {Y Z : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]",
+      "sha256": "1063ec49fc5b2b55460510e06712427a8d9e0d3d1a9035c38dca5e9e6ea002c2"
+    },
+    {
+      "start_line": 378,
+      "end_line": 378,
+      "complete_original_command": "end Centre",
+      "sha256": "62a446905995b759e24bfdbd8fac82d2607e1273c62f033c5693b4adafcd9350"
+    },
+    {
+      "start_line": 380,
+      "end_line": 380,
+      "complete_original_command": "section CentreStep",
+      "sha256": "f022c83e0648ef528a6db0d6d0d45295c4be27f1dc4ecd223e537ac731cc1683"
+    },
+    {
+      "start_line": 382,
+      "end_line": 382,
+      "complete_original_command": "open BlowupFlatCoordinates BlowupMonomialCharts",
+      "sha256": "d4017879100cde262894d6111302da038d8515f675e2957e69a01fa2d8fd8570"
+    },
+    {
+      "start_line": 384,
+      "end_line": 384,
+      "complete_original_command": "variable {Y Z : CMfd.{u} n}",
+      "sha256": "ac56846e8d038a7056e26fc1771f81c75ab5707eab60acf6cc83765cab70ce96"
+    },
+    {
+      "start_line": 573,
+      "end_line": 573,
+      "complete_original_command": "end CentreStep",
+      "sha256": "a8388e9dc441d062a113c043ee531590a7b4dad5af74f8dbb76fa064eea3d00d"
+    },
+    {
+      "start_line": 577,
+      "end_line": 577,
+      "complete_original_command": "section Tower",
+      "sha256": "824ce3f3d1d43be2fdea38c69a6ed561036522b3bc388ac02e3ed3f1fe9812da"
+    },
+    {
+      "start_line": 697,
+      "end_line": 697,
+      "complete_original_command": "end Tower",
+      "sha256": "32d15825b5984d46f19a01ec040a5fe26fdd4453579bff5c5e0c6b23261997dc"
+    },
+    {
+      "start_line": 699,
+      "end_line": 699,
+      "complete_original_command": "end",
+      "sha256": "361e48d0308f20e32dba5fb56328baf18d72ef0ccb43b84f5c262d2a6a1fc6c8"
+    },
+    {
+      "start_line": 701,
+      "end_line": 701,
+      "complete_original_command": "end TranscendentalNakamaye.Pending.CoefficientRestrictionTower",
+      "sha256": "eb1496828fc362054c41146b060dbdb1fc5b9694100fea5e07179418b2284ce6"
+    }
+  ],
+  "original_section_scope_trace": [
+    [
+      34,
+      "open namespace",
+      "TranscendentalNakamaye.Pending.CoefficientRestrictionTower"
+    ],
+    [
+      41,
+      "open",
+      "(anonymous)"
+    ],
+    [
+      95,
+      "open",
+      "Tools"
+    ],
+    [
+      150,
+      "close",
+      "Tools"
+    ],
+    [
+      154,
+      "open",
+      "OffCentre"
+    ],
+    [
+      292,
+      "close",
+      "OffCentre"
+    ],
+    [
+      296,
+      "open",
+      "Centre"
+    ],
+    [
+      378,
+      "close",
+      "Centre"
+    ],
+    [
+      380,
+      "open",
+      "CentreStep"
+    ],
+    [
+      573,
+      "close",
+      "CentreStep"
+    ],
+    [
+      577,
+      "open",
+      "Tower"
+    ],
+    [
+      697,
+      "close",
+      "Tower"
+    ],
+    [
+      699,
+      "close",
+      "(anonymous)"
+    ],
+    [
+      701,
+      "close",
+      "TranscendentalNakamaye.Pending.CoefficientRestrictionTower"
+    ]
+  ],
+  "draft_section_scope_trace": [
+    [
+      33,
+      "open namespace",
+      "Hironaka.CoefficientRestrictionTower"
+    ],
+    [
+      40,
+      "open",
+      "(anonymous)"
+    ],
+    [
+      86,
+      "open",
+      "Tools"
+    ],
+    [
+      131,
+      "close",
+      "Tools"
+    ],
+    [
+      135,
+      "open",
+      "OffCentre"
+    ],
+    [
+      273,
+      "close",
+      "OffCentre"
+    ],
+    [
+      277,
+      "open",
+      "Centre"
+    ],
+    [
+      348,
+      "close",
+      "Centre"
+    ],
+    [
+      350,
+      "open",
+      "CentreStep"
+    ],
+    [
+      543,
+      "close",
+      "CentreStep"
+    ],
+    [
+      547,
+      "open",
+      "Tower"
+    ],
+    [
+      667,
+      "close",
+      "Tower"
+    ],
+    [
+      669,
+      "close",
+      "(anonymous)"
+    ],
+    [
+      671,
+      "close",
+      "Hironaka.CoefficientRestrictionTower"
+    ]
+  ],
+  "all_named_and_anonymous_closings_balanced": true,
+  "original_universe": "u",
+  "all_original_active_open_variable_include_local_instance_section_contexts_preserved": true,
+  "original_reused_helpers": [
+    {
+      "kind": "theorem",
+      "short_name": "vanishesToOrderOn_of_isInSpanOnAt",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.vanishesToOrderOn_of_isInSpanOnAt",
+      "start_character": 2096,
+      "end_character": 2749,
+      "start_byte": 2144,
+      "end_byte": 2830,
+      "start_line": 45,
+      "end_line": 52,
+      "sha256": "ddd30e181e5fd562b82013ec6052e81e2a0f846ec9928f8b984a4c2b6c1c4097",
+      "complete_original_payload": "/-- Restricted spans of germs vanishing to order `μ` along `W` vanish to order `μ` along `W`. -/\ntheorem vanishesToOrderOn_of_isInSpanOnAt {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n    [IsComplexManifold n M] {W : Set M} {S : (M → ℂ) → Prop} {z : M} {g : M → ℂ} {μ : ℕ}\n    (hg : IsInSpanOnAt (n := n) W S z g) (hS : ∀ s, S s → VanishesToOrderOn n W z μ s) :\n    VanishesToOrderOn n W z μ g := by\n  obtain ⟨K, s, c, hs, hc, hsum⟩ := hg\n  obtain ⟨h, hh, hgh⟩ := IdealOrderArithmetic.vanishesToOrderOn_sum_mul (N := W) hc fun k => hS _ (hs k)\n  exact ⟨h, hh, by filter_upwards [hsum, hgh] with p hp hp' hpW; rw [hp hpW, hp' hpW]⟩\n",
+      "already_existing_public_helper": true
+    },
+    {
+      "kind": "theorem",
+      "short_name": "isInSpanAt_comp_map",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.isInSpanAt_comp_map",
+      "start_character": 5733,
+      "end_character": 6387,
+      "start_byte": 5981,
+      "end_byte": 6699,
+      "start_line": 100,
+      "end_line": 109,
+      "sha256": "f106e683f6863865acc03cbc75c8f9f53e54ad610e9f677740a6ebf2bf25ee04",
+      "complete_original_payload": "/-- Spans pull back along holomorphic maps. -/\ntheorem isInSpanAt_comp_map {S : (Y → ℂ) → Prop} {π : Z → Y} {z : Z}\n    (hπ : ∀ᶠ w in 𝓝 z, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w)\n    {a : Y → ℂ} (ha : IsInSpanAt (n := n) S (π z) a) :\n    IsInSpanAt (n := n) (fun t => ∃ s, S s ∧ t = s ∘ π) z (a ∘ π) := by\n  obtain ⟨hah, K, t, c, ht, hc, hsum⟩ := ha\n  refine ⟨HadamardBridge.holomorphicAt_comp_map hπ hah, K, fun k => t k ∘ π, fun k => c k ∘ π,\n    fun k => ⟨t k, ht k, rfl⟩, fun k => HadamardBridge.holomorphicAt_comp_map hπ (hc k), ?_⟩\n  filter_upwards [hπ.self_of_nhds.continuousAt.eventually hsum] with p hp\n  simpa using hp\n",
+      "already_existing_public_helper": true
+    },
+    {
+      "kind": "theorem",
+      "short_name": "FlatChart.holomorphicAt_nd",
+      "native_name": "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.holomorphicAt_nd",
+      "start_character": 17382,
+      "end_character": 18183,
+      "start_byte": 18320,
+      "end_byte": 19135,
+      "start_line": 303,
+      "end_line": 313,
+      "sha256": "756d51199378bacd4bff1132b381bd4508eb83e8a23bf6d57567aa03352e1cbc",
+      "complete_original_payload": "/-- Normal derivatives of a holomorphic germ are holomorphic. -/\ntheorem FlatChart.holomorphicAt_nd {S : Set Y} {p : Y} {k : ℕ} (c : FlatChart n S p k) {f : Y → ℂ}\n    (hf : HolomorphicAt n f p) (L : List (Fin n)) : HolomorphicAt n (c.nd L f) p := by\n  obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.mp (c.eventually_differentiableAt_comp_inv hf)\n  have hFU : DifferentiableOn ℂ (fun u => f (c.inv u)) (ball 0 r) := fun z hz =>\n    (hball z hz).differentiableWithinAt\n  have hd := differentiableOn_iterDeriv hFU isOpen_ball (L.map bv)\n  refine holomorphicAt_comp_flat c.Φ c.mem_flatDomain ?_\n  rw [show c.Φ.toFun (chartAt (ComplexModel n) p p) = 0 from c.zero]\n  filter_upwards [isOpen_ball.mem_nhds (mem_ball_self hr)] with w hw\n  exact (hd w hw).differentiableAt (isOpen_ball.mem_nhds hw)\n",
+      "already_existing_public_helper": true
+    }
+  ],
+  "frozen_original_owner_import": {
+    "module": "Hironaka.MarkedIdeal.CoefficientRestrictionTower",
+    "path": "Hironaka/MarkedIdeal/CoefficientRestrictionTower.lean",
+    "sha256": "0c92b55ac5c4b6a0f09be1ec1bc689664fcd3af537e7c5bdbe2cee9c6850cab4",
+    "all_three_complete_original_reused_payloads_found_exactly": true
+  },
+  "blueprint": {
+    "source_path": "TranscendentalNakamaye/blueprint/src/maximal-contact.tex",
+    "fixed_git_blob": "7c14db23c89fc4f233fdd088235f586918d53802",
+    "whole_original_source_sha256": "a8d9739858e2c7a62c866cd3d77359d7acc50921ad53a2299c06565ed401ee65",
+    "complete_original_nodes": [
+      {
+        "label": "mc:normal-coefficient-invariant",
+        "capture": "mc--normal-coefficient-invariant.complete-original-node.tex.txt",
+        "start_line": 1386,
+        "end_line": 1401,
+        "start_byte": 127221,
+        "end_byte_exclusive_before_added_terminal_newline": 128953,
+        "complete_original_node_sha256": "ef4cded08c88f2c5f0013f7d298ae0a7ec34a24563e7fc2f63e20c3d5a80e26f",
+        "complete_written_proofs": 1,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.vanishesToOrderOn_of_isInSpanOnAt",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.isInSpanAt_comp_map",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.holomorphicAt_nd"
+        ],
+        "original_uses": [
+          "mc:flat-chart",
+          "mc:normal-derivative-ideal",
+          "mc:normal-taylor-order",
+          "mc:restrict-marked",
+          "mc:derivative-marked",
+          "ana:local-holomorphic-inverse"
+        ],
+        "statement_and_proof_edits": 0,
+        "public_complete_node_present_at_draft": false
+      },
+      {
+        "label": "mc:normal-coefficient-step",
+        "capture": "mc--normal-coefficient-step.complete-original-node.tex.txt",
+        "start_line": 1403,
+        "end_line": 1421,
+        "start_byte": 128955,
+        "end_byte_exclusive_before_added_terminal_newline": 131167,
+        "complete_original_node_sha256": "f7369da152737e150dc3383b4c2d01e3bced9e6112cdabf70d6950a8d0ef0e42",
+        "complete_written_proofs": 1,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_notMem",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.nd_monomial_identity",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_step_of_mem",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_tower"
+        ],
+        "original_uses": [
+          "mc:normal-coefficient-invariant",
+          "mc:nested-product-chart",
+          "mc:normal-derivative-monomial",
+          "mc:monomial-local-equation",
+          "mc:restrict-tower",
+          "mc:inclusions-tower",
+          "bcalc:strict-submanifold",
+          "bcalc:monomial-lift",
+          "bcalc:isomorphism-off-centre",
+          "bcalc:function-transform",
+          "hir:geo-transform-ambient",
+          "hir:bridge-consumers",
+          "hir:geo-transform-wellformed",
+          "ana:restricted-colon"
+        ],
+        "statement_and_proof_edits": 0,
+        "public_complete_node_present_at_draft": false
+      },
+      {
+        "label": "mc:coefficient-restriction-full",
+        "capture": "mc--coefficient-restriction-full.complete-original-node.tex.txt",
+        "start_line": 1423,
+        "end_line": 1440,
+        "start_byte": 131169,
+        "end_byte_exclusive_before_added_terminal_newline": 133179,
+        "complete_original_node_sha256": "6587afab12b2ca2548f75376a3c41ce19ab6c73bf0ba58e038bc427999de62cd",
+        "complete_written_proofs": 1,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower",
+          "TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff"
+        ],
+        "original_uses": [
+          "mc:normal-coefficient-step",
+          "mc:coefficient-restriction-tower",
+          "mc:coefficient-restriction-support",
+          "mc:marked-finite-sum-tower",
+          "mc:finite-sum",
+          "hir:order-power-along",
+          "hir:restricted-equivalence-basic"
+        ],
+        "statement_and_proof_edits": 0,
+        "public_complete_node_present_at_draft": false
+      }
+    ],
+    "all_original_bindings_retained": 15,
+    "selected12_and_reused3_covered": true,
+    "original_binding_classification_deferred_to_actual_owner_availability": true
+  },
+  "mathematical_statement_or_proof_edits": 0,
+  "old1159_sources_or_old619_chapters_edited": false,
+  "production_Git_Lean_kernel_Expr_invocations": false,
+  "actual_recursive_callee_closure_confirmed": false,
+  "pending": "Canonical actual-CI closure must confirm the selected same-parent set and outside-parent dependencies before any installation. No local elaboration, kernel, expression, or publication PASS is claimed."
+}

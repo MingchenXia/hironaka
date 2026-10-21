@@ -1,0 +1,68 @@
+\section{Actual local old branches are jointly SNC with the entire born boundary}
+\label{sec:nc-joint-branch-charts}
+
+\begin{lemma}[A genuine finite coordinate family with empty positions is SNC]
+\label{hir:nc-indexed-coordinate-family-empty-positions-snc}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateMember,TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateFamily,TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.isSNCDivisor_coordinateFamily}
+\leanok
+For a finite indexed family $A_i$ of coordinate subsets, each of cardinality
+at most one, let its member be empty when $A_i$ is empty and otherwise the
+coordinate hyperplane prescribed by $A_i$. If the nonempty $A_i$ are pairwise
+distinct, the entire ordered list of these actual members is SNC, with all
+empty index positions retained.
+\uses{hir:actual-coordinate-hyperplane-snc-list}
+\end{lemma}
+\begin{proof}
+Every nonempty $A_i$ is a singleton, so its member is an actual closed
+coordinate hyperplane; an empty position is closed as well. At a point $w$,
+translate by $-w$. For a member through $w$, its singleton coordinate vanishes
+at $w$, so its entire equation in the translated coordinates is the same
+coordinate equation. Empty positions never pass through $w$ and impose no
+coordinate condition. Every through-member has one coordinate and the
+assumed distinctness makes their coordinate subsets injective on the through
+indices. This is the entire SNC witness at every $w$.
+\end{proof}
+
+\begin{theorem}[Original joint NC data internally construct a whole genuine branch-and-boundary chart]
+\label{hir:nc-original-highest-joint-branch-chart}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart}
+\leanok
+Let an actual NC carrier $H$ be adapted to the ENTIRE retained boundary $E$,
+and let its branch multiplicity everywhere be at most $r$. At every actual
+point $x$ of its highest stratum $Z=\{\operatorname{mult}_H\ge r\}$, there are
+an actual open neighbourhood $U$ and a genuine finite old-branch list $B$ such
+that
+\[
+ H|_U=\bigcup B,\qquad Z|_U\subseteq A\quad(A\in B),\qquad
+ B\mathbin{+\!+}E|_U\ \text{is SNC}.
+\]
+All entries of $E|_U$ are retained, including those empty after shrinking.
+No local SNC list, selected branch, or joint-boundary certificate is supplied.
+\uses{hir:nc-indexed-coordinate-family-empty-positions-snc,hir:general-nc-simultaneous-original-boundary,hir:general-nc-highest-multiplicity-smooth-centre,hir:general-nc-actual-local-snc-branches}
+\end{theorem}
+\begin{proof}
+Take the actual common flattening at $x$. Its old coordinate subset is $S$;
+each retained boundary member through $x$ has its actual singleton coordinate
+subset, disjoint from $S$, and these subsets are injective on the through
+indices. Intersect the flattening domain with the complements of the finitely
+many retained boundary members not through $x$. This is a genuine open
+neighbourhood $U$ of $x$; it changes no original boundary index.
+
+Use the actual old coordinate equations on $U$ for $B$. Put their singleton
+coordinate subsets first, followed by the through-boundary coordinate subsets
+and an empty subset at every other original boundary position. The old
+singletons are distinct, the through-boundary subsets are injective, and
+old and boundary subsets are disjoint. Thus this whole indexed coordinate
+family satisfies the preceding lemma. The actual flattening biholomorphism,
+co-restricted to $U$, pulls its whole SNC list back. Its old block is exactly
+$B$; its born block is exactly $E|_U$, by the original through-member equations
+and the deliberate avoidance of every absent member. This proves the entire
+SNC concatenation with all positions retained.
+
+The original flattening identifies the union of $B$ with $H|_U$. Since $x$
+is a genuine highest point and the old count is bounded by $r$, the actual
+highest-stratum flattening theorem identifies $Z$ on this same domain with
+simultaneous vanishing of all coordinates in $S$. Every point of $Z|_U$
+therefore belongs to each original branch of $B$. These are every asserted
+field, all internally constructed from the SAME original joint coordinates.
+\end{proof}

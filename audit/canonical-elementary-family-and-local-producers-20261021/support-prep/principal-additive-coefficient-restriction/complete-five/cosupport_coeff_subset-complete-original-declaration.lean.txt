@@ -1,0 +1,32 @@
+/-- **The support of the coefficient ideal restricted to any set lies in the support** (`N = M`, `𝔞` coherent,
+`d ≥ 1`): `supp(𝓒(𝔪)|_A) ⊆ supp(𝔪)`.  Only the last summand `(𝓓^{d-1}𝔞, 1)` is used: on its support `𝓓^{d-1}𝔞`
+vanishes at the point, and `supp(𝔞, d) = V(𝓓^{d-1}𝔞)` (Giraud--Villamayor). -/
+theorem cosupport_coeff_subset {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) (A : Set M) :
+    cosupport n A (coeffMarked 𝔪).ideal (coeffMarked 𝔪).d ⊆ 𝔪.cosupp := by
+  have hhol : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x :=
+    hol_of_isCoherent h𝔞
+  set D : ℕ → ℕ := fun j => (derivMarked 𝔪 j).d with hD
+  have hD1 : ∀ j < 𝔪.d, 1 ≤ D j := fun j hj => by simp only [hD, derivMarked_d]; omega
+  set e := sumExp D 𝔪.d (𝔪.d - 1) with he
+  have he1 : 1 ≤ e := one_le_sumExp hD1 _
+  have hmark : (coeffMarked 𝔪).d = e := by
+    have := mul_sumExp D (show 𝔪.d - 1 < 𝔪.d by omega)
+    simp only [hD, derivMarked_d, show 𝔪.d - (𝔪.d - 1) = 1 by omega, one_mul] at this
+    exact this.symm
+  intro x hx
+  have hJ : ∀ i < 𝔪.d, ∀ y g, (idealPow (derivMarked 𝔪 i).ideal (sumExp D 𝔪.d i)).mem y g →
+      HolomorphicAt n g y := fun _ _ _ _ hg => holomorphicAt_of_mem_idealPow hg
+  have hx' := (mem_cosupport_finSumIdeal hJ).mp hx
+  have hlast := hx'.2 (𝔪.d - 1) (by omega)
+  have hzero : x ∈ (iterDerivIdeal 𝔪.ideal (𝔪.d - 1)).zeroLocus := by
+    intro g hg
+    have hghol : HolomorphicAt n g x := holomorphicAt_of_mem_iterDerivIdeal hhol (𝔪.d - 1) x g hg
+    have hpow : (idealPow (derivMarked 𝔪 (𝔪.d - 1)).ideal e).mem x (fun p => g p ^ e) :=
+      OrderMultiplicativity.pow_mem_idealPow hg hghol e
+    have hv := (hlast.2 _ hpow).mono (show 1 ≤ (coeffMarked 𝔪).d by rw [hmark]; exact he1)
+    have h0 := (vanishesToOrderOn_one_iff hx'.1 (holomorphicAt_of_mem_idealPow hpow)).mp hv
+    exact (pow_eq_zero_iff (by omega)).mp h0
+  rw [← OrderTaylor.cosupport_succ_eq_zeroLocus_iterDerivIdeal hhol, Nat.sub_add_cancel hd] at hzero
+  rw [MarkedIdeal.cosupp, hN]
+  exact hzero

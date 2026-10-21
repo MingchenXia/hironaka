@@ -1,0 +1,15 @@
+/-- **Localising the centres, several intersections at once** (Step 1a, "moving apart"): if the
+centres of `T` lie in the strict transforms of `A ∪ B`, with `B` closed and disjoint from the open
+set `U`, then the centres of the restriction of `T` to `U` lie in the strict transforms of `A ∩ U`. -/
+theorem centresIn_restrict_of_centresIn_union (U : Opens X) {A B : Set X} (hB : IsClosed B)
+    (hUB : Disjoint (U : Set X) B) : {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      CentresIn (A ∪ B) T → CentresIn ((↑) ⁻¹' A : Set U) (restrict U T)
+  | _, .refl, _ => trivial
+  | _, .step T C _ _, hT => by
+    refine ⟨centresIn_restrict_of_centresIn_union U hB hUB T hT.1, fun p hp => ?_⟩
+    rw [strictAlong_restrict U T A]
+    have hpC : p.1 ∈ strictAlong T A ∪ strictAlong T B := by
+      rw [← strictAlong_union]; exact hT.2 hp
+    rcases hpC with h | h
+    · exact h
+    · exact absurd (strictAlong_subset_preimage T hB h) (Set.disjoint_left.mp hUB p.2)

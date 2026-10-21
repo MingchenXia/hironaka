@@ -1,0 +1,98 @@
+\section{Actual complex residue fields and point values of subspace morphisms}
+\label{sec:hironaka-actual-analytic-subspace-residue}
+
+All stalks below are the independently constructed actual sheaf-colimit
+stalks, not substitute chart definitions. Let $C\subset M$ be an actual
+subset of a complex manifold and let $x\in C$.
+
+\begin{theorem}[The actual complex-point stalk is the original complex field]
+\label{hir:actual-analytic-complex-point-stalk-field}
+\uses{hir:reduced-analytic-complex-point-models,hir:real-domain-actual-complex-sheaf-stalk-whole-germ-equivalence}
+\lean{Hironaka.HironakaActualAnalyticSubspaceResidue.actualComplexPointStalkEquiv}
+\leanok
+The actual stalk at the point of the genuine zero-dimensional complex
+manifold is internally isomorphic as a ring to $\mathbf C$. Its map is
+the actual original chart-germ evaluation at zero, and its inverse is
+the actual constant germ.
+\end{theorem}
+\begin{proof}
+Use the proved actual sheaf-stalk/chart equivalence. A holomorphic germ
+on $\mathbf C^0$ is represented by an original function on a one-point
+space. Each such function equals its value at zero everywhere, so two
+such germs with the same actual value are equal. Conversely each
+complex number is the actual constant germ with that value. Thus
+actual germ evaluation is a bijective ring homomorphism and constructs
+a ring equivalence. Composing with the actual sheaf-stalk equivalence
+gives the asserted map on the original colimit stalk and its original
+constant inverse.
+\end{proof}
+
+\begin{theorem}[Every actual quotient-subspace stalk has its genuine complex residue evaluation]
+\label{hir:actual-analytic-subspace-stalk-residue-evaluation}
+\uses{hir:actual-analytic-subspace-inclusion-stalk,hir:actual-analytic-subspace-reduced-stalks,hir:actual-reduced-hilbert-samuel-tangent-value}
+\lean{Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceStalkEval,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceStalkConst,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceStalkEval_const,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceStalkEval_ker,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceStalkEval_surjective,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceStalkEval_inclusion,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceResidueFieldEquiv,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceResidueFieldEquiv_mk}
+\leanok
+There is an internally constructed actual surjective ring map
+$\operatorname{ev}_x:\mathcal O_{C,x}\to\mathbf C$ whose kernel is
+exactly the maximal ideal of the genuine actual local ring. The actual
+constant map $\mathbf C\to\mathcal O_{C,x}$ is its section. On every
+whole original ambient numerator it is the original point evaluation.
+\end{theorem}
+\begin{proof}
+At the genuine point $x\in C$, the entire original chart vanishing ideal
+lies in the original maximal ideal, which is precisely the kernel of
+actual germ evaluation. Therefore original evaluation descends through
+the entire actual chart quotient. Compose with the proved actual
+subspace stalk/chart quotient equivalence. Actual constant germs,
+taken modulo that entire ideal and transported back through the same
+equivalence, define a ring map section. The original constant evaluation
+identity proves that it is a section, hence evaluation is surjective.
+A surjective ring map from the actual local ring to a field has maximal
+kernel. Uniqueness of the actual local ring's maximal ideal therefore
+identifies this whole kernel exactly. The actual quotient-by-kernel
+isomorphism, transported through that proved equality, constructs the
+actual residue quotient equivalence and retains each original numerator.
+The original inclusion stalk
+numerator formula proves the displayed description on every original
+ambient germ.
+\end{proof}
+
+\begin{theorem}[Original complex structure supplies constants and every scalar-compatible morphism preserves point values]
+\label{hir:actual-analytic-subspace-scalar-map-point-values}
+\uses{hir:actual-analytic-complex-point-stalk-field,hir:actual-analytic-subspace-stalk-residue-evaluation,hir:actual-analytic-subspace-native-chart-pullback,hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspacePointMap_stalk_const,Hironaka.HironakaActualAnalyticSubspaceResidue.actualSubspaceMap_eval_of_point_compatible}
+\leanok
+The actual subspace structural morphism to the complex point sends its
+original constant stalk element $c$ to the actual constant $c$ in
+$\mathcal O_{C,x}$. For any genuine locally ringed morphism $F$ between
+two actual subspace models commuting with their original complex-point
+structural maps, every actual target stalk element $a$ satisfies
+\[
+ \operatorname{ev}_x(F_x^*a)=\operatorname{ev}_{F(x)}(a).
+\]
+No ambient holomorphic extension of $F$, scalar-preservation certificate
+on its stalks, or point-value equality is an input.
+\end{theorem}
+\begin{proof}
+The actual native sheaf-stalk/chart pullback compatibility computes the
+structural map as the original chart-germ pullback along the constant
+map to $\mathbf C^0$. An original germ there has the same value at every
+point, so this pullback is the original constant germ with that value.
+The genuine whole quotient inclusion formula therefore gives exactly
+the actual constant in the subspace stalk.
+
+Apply actual stalk functoriality to the proved complex structural
+triangle for $F$. Evaluating it on an actual constant point stalk
+element gives $F_x^*(c)=c$ for the constructed actual constant maps.
+Let $c=\operatorname{ev}_{F(x)}(a)$. The actual target element $a-c$
+has evaluation zero, so belongs to its entire maximal ideal. Since
+$F$ is a genuine locally ringed morphism, its stalk homomorphism sends
+that ideal into the source maximal ideal. Source evaluation therefore
+kills $F_x^*(a-c)$. Ring-map subtraction and the just derived constant
+identity give $\operatorname{ev}_x(F_x^*a)-c=0$, proving the assertion.
+\end{proof}
+
+These are actual point-value and complex residue-field dictionaries for
+the constructed locally ringed models. Lifting arbitrary intrinsic
+morphisms to actual ambient holomorphic maps, arbitrary analytic atlas
+comparisons and resolution descent remain separate obligations.

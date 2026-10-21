@@ -1,0 +1,81 @@
+\section{The actual common graph has its entire original functional ideal}
+
+The geometric common models use arbitrary original graph points. The actual
+origin holomorphic-germ graph formula is transported to the independently
+defined original functional ideals at every such point. Both the whole
+infinite family of original base vanishing functions and the literal finite
+graph equations are retained.
+
+\begin{theorem}[The whole original graph functional family at the origin]
+\label{hir:actual-graph-functional-ideal-origin}
+\uses{hir:actual-holomorphic-graph-entire-vanishing-ideal,hir:actual-functional-span-origin-germ-span,hir:actual-cylinder-pullback-functional-family-span}
+\lean{Hironaka.HironakaActualGraphFunctionalIdeal.graph_functional_mem_zero_iff}
+\leanok
+Let $f$ be holomorphic near the actual origin with $f(0)=0$, and let $W$
+be any original subset. A function germ belongs to the independently defined
+original vanishing ideal of the literal graph if and only if it is in the
+true finite holomorphic span of the union of all original pullbacks of
+functions vanishing on $W$ and the finite literal equations $y_i-f_i(x)$.
+No coherence, finite generating family or ideal equality is input.
+\end{theorem}
+\begin{proof}
+Each union generator is genuinely holomorphic at the origin. The whole
+literal holomorphic-germ span of the first family is the genuine original
+base ideal extension, by the actual infinite-family functional/germ span
+dictionary. The whole germ span of the graph equations is their actual
+finite graph relation ideal. Span induction, in both directions, identifies
+the union span with the sum of these entire ideals. The previously proved
+actual graph vanishing-ideal formula identifies that sum with the independent
+graph ideal. For any holomorphic function germ the actual functional/germ
+span dictionary now gives the claimed equivalence. In the forward direction
+holomorphy comes from original vanishing membership; in the reverse direction
+it comes from true finite span membership.
+\end{proof}
+
+\begin{theorem}[Recentring preserves the entire original graph and generator family]
+\label{hir:actual-graph-functional-recentering}
+\uses{hir:actual-holomorphic-graph-entire-vanishing-ideal,hir:actual-functional-translation-span-vanishing}
+\lean{Hironaka.HironakaActualGraphFunctionalIdeal.translated_graph_eq,Hironaka.HironakaActualGraphFunctionalIdeal.translated_graph_function_family_eq}
+\leanok
+At any original $x$, let $f_x(u)=f(u+x)-f(x)$ and
+$W_x=\{u:u+x\in W\}$. Translating the literal graph by $(x,f(x))$
+gives exactly the graph of $f_x$ over $W_x$. Translating its entire original
+union family gives exactly the union family at zero for this same graph.
+\end{theorem}
+\begin{proof}
+Both set conditions follow by the literal block projection identities and
+addition cancellation. For a pulled-back base function, use the actual
+whole original vanishing-membership translation theorem; composition with
+the block projection commutes with the actual translation. Conversely use
+the inverse base translation to construct an original member and the same
+identity. For a finite graph equation, substituting $z+(x,f(x))$ gives
+$y_i+f_i(x)-f_i(u+x)=y_i-(f_x)_i(u)$ exactly. Conversely the same literal
+identity supplies the original graph-equation generator. The union branches
+are preserved individually, so the assertion concerns the entire generating
+family, not only its support or zero set.
+\end{proof}
+
+\begin{theorem}[The independently defined whole original functional graph ideal at every actual graph point]
+\label{hir:actual-graph-functional-ideal-every-point}
+\uses{hir:actual-graph-functional-ideal-origin,hir:actual-graph-functional-recentering,hir:actual-functional-translation-span-vanishing}
+\lean{Hironaka.HironakaActualGraphFunctionalIdeal.graph_functional_mem_iff}
+\leanok
+For any original subset $W$, any original function $f$ genuinely holomorphic
+near $x$, and every original scalar function $F$, membership of $F$ in the
+independently defined original graph vanishing ideal at $(x,f(x))$ is
+exactly true finite holomorphic-span membership in the whole original
+base-vanishing pullback family together with the literal finite graph
+equations. The point $x$ is arbitrary; no centring or supplied functional
+ideal equality is assumed.
+\end{theorem}
+\begin{proof}
+The genuine translation and subtraction construct $f_x$, holomorphic near
+zero with $f_x(0)=0$. Transport the entire original graph vanishing membership
+by the actual translation theorem and the proved literal translated-set
+equality. Apply the origin theorem to this actual centred function and set.
+Replace its whole family by the proved translated original family, and use
+the actual finite-functional-span translation equivalence in reverse.
+This proves both directions for every original scalar numerator, giving
+the asserted entire original functional membership equality. No resolution
+or canonical-invariant property follows merely from this ideal dictionary.
+\end{proof}

@@ -1,0 +1,67 @@
+{
+  "destination_module": "Hironaka.Support.MarkedIdealOperationsMonotoneControlledOriginalExact",
+  "destination_path": "Hironaka/Support/MarkedIdealOperationsMonotoneControlledOriginalExact.lean",
+  "source_module": "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/MarkedIdealOperationsTransform.lean",
+  "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "source_git_blob_oid": "9ec78701b6d87287d3c98530140b07f907ff6889",
+  "source_sha256": "ddc2d3e73578c1486689b4216dfac9a5a019c5c555f14b5fc38a85eb9b5de347",
+  "source_equal_at_final45_revision": "47cef49895832e3bfe492f66e1f2ac68785187dd",
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_le_mul'",
+    "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_mono",
+    "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_idealPow",
+    "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal"
+  ],
+  "original_selected_source": "/-- Products are monotone. -/\ntheorem mul_le_mul' {𝔞 𝔞' 𝔟 𝔟' : GermIdeal n M} (h𝔞 : 𝔞.Le 𝔞') (h𝔟 : 𝔟.Le 𝔟') :\n    (𝔞.mul 𝔟).Le (𝔞'.mul 𝔟') := fun x _ hg =>\n  mem_mul_iff.mpr ((mem_mul_iff.mp hg).mono fun _ ⟨a, b, ha, hb, hs⟩ => ⟨a, b, h𝔞 x a ha, h𝔟 x b hb, hs⟩)\n\n/-- Powers are monotone in the ideal. -/\ntheorem idealPow_mono {𝔞 𝔟 : GermIdeal n M} (h : 𝔞.Le 𝔟) :\n    ∀ k : ℕ, (idealPow 𝔞 k).Le (idealPow 𝔟 k)\n  | 0 => fun _ _ hg => hg\n  | k + 1 => mul_le_mul' (idealPow_mono h k) h\n\n/-- **`σ^c(𝔞^k, μk) = σ^c(𝔞, μ)^k`**. -/\ntheorem controlledTransform_idealPow (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)\n    (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ)) (k : ℕ) :\n    controlledTransform hπ (idealPow 𝔞 k) (μ * k) = idealPow (controlledTransform hπ 𝔞 μ) k := by\n  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞\n  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_idealPow hc𝔞 k) ?_).symm\n  rw [BlowupExceptionalDivisor.pullback_idealPow hπ.contMDiff h𝔞,\n    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, idealPow_mul (isCoherent_D hπ μ) hc𝔞,\n    idealPow_idealPow (isCoherent_ideal _)]\n\n/-- **`σ^c(𝔞 + 𝔟, μ) = σ^c(𝔞, μ) + σ^c(𝔟, μ)`**. -/\ntheorem controlledTransform_sumIdeal (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)\n    (h𝔟 : 𝔟.IsCoherent) (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ))\n    (hle𝔟 : 𝔟.Le (idealPow (vanishingIdeal (n := n) C) μ)) :\n    controlledTransform hπ (sumIdeal 𝔞 𝔟) μ =\n      sumIdeal (controlledTransform hπ 𝔞 μ) (controlledTransform hπ 𝔟 μ) := by\n  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞\n  have hc𝔟 := isCoherent_controlledTransform hπ h𝔟 hle𝔟\n  have hol : ∀ {𝔠 : GermIdeal n Y}, 𝔠.IsCoherent → ∀ y g, 𝔠.mem y g → HolomorphicAt n g y :=\n    fun h𝔠 _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 hg\n  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_sumIdeal hc𝔞 hc𝔟) ?_).symm\n  rw [pullback_sumIdeal hπ.contMDiff (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg)\n      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg),\n    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, pullback_eq_mul_controlledTransform hπ h𝔟 hle𝔟,\n    mul_sumIdeal (hol (isCoherent_D hπ μ)) (hol hc𝔞) (hol hc𝔟)]\n",
+  "original_payload_chunks": [
+    "/-- Products are monotone. -/\ntheorem mul_le_mul' {𝔞 𝔞' 𝔟 𝔟' : GermIdeal n M} (h𝔞 : 𝔞.Le 𝔞') (h𝔟 : 𝔟.Le 𝔟') :\n    (𝔞.mul 𝔟).Le (𝔞'.mul 𝔟') := fun x _ hg =>\n  mem_mul_iff.mpr ((mem_mul_iff.mp hg).mono fun _ ⟨a, b, ha, hb, hs⟩ => ⟨a, b, h𝔞 x a ha, h𝔟 x b hb, hs⟩)\n",
+    "/-- Powers are monotone in the ideal. -/\ntheorem idealPow_mono {𝔞 𝔟 : GermIdeal n M} (h : 𝔞.Le 𝔟) :\n    ∀ k : ℕ, (idealPow 𝔞 k).Le (idealPow 𝔟 k)\n  | 0 => fun _ _ hg => hg\n  | k + 1 => mul_le_mul' (idealPow_mono h k) h\n",
+    "/-- **`σ^c(𝔞^k, μk) = σ^c(𝔞, μ)^k`**. -/\ntheorem controlledTransform_idealPow (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)\n    (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ)) (k : ℕ) :\n    controlledTransform hπ (idealPow 𝔞 k) (μ * k) = idealPow (controlledTransform hπ 𝔞 μ) k := by\n  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞\n  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_idealPow hc𝔞 k) ?_).symm\n  rw [BlowupExceptionalDivisor.pullback_idealPow hπ.contMDiff h𝔞,\n    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, idealPow_mul (isCoherent_D hπ μ) hc𝔞,\n    idealPow_idealPow (isCoherent_ideal _)]\n",
+    "/-- **`σ^c(𝔞 + 𝔟, μ) = σ^c(𝔞, μ) + σ^c(𝔟, μ)`**. -/\ntheorem controlledTransform_sumIdeal (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)\n    (h𝔟 : 𝔟.IsCoherent) (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ))\n    (hle𝔟 : 𝔟.Le (idealPow (vanishingIdeal (n := n) C) μ)) :\n    controlledTransform hπ (sumIdeal 𝔞 𝔟) μ =\n      sumIdeal (controlledTransform hπ 𝔞 μ) (controlledTransform hπ 𝔟 μ) := by\n  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞\n  have hc𝔟 := isCoherent_controlledTransform hπ h𝔟 hle𝔟\n  have hol : ∀ {𝔠 : GermIdeal n Y}, 𝔠.IsCoherent → ∀ y g, 𝔠.mem y g → HolomorphicAt n g y :=\n    fun h𝔠 _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 hg\n  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_sumIdeal hc𝔞 hc𝔟) ?_).symm\n  rw [pullback_sumIdeal hπ.contMDiff (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg)\n      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg),\n    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, pullback_eq_mul_controlledTransform hπ h𝔟 hle𝔟,\n    mul_sumIdeal (hol (isCoherent_D hπ μ)) (hol hc𝔞) (hol hc𝔟)]\n"
+  ],
+  "original_selected_sha256": "74866140a55411cf975ce68934901f7167b7f12b919d7e36356d1a411ddf3b67",
+  "canonical_source_layout": [
+    {
+      "canonical_administrative_context": "/-\nCopyright (c) 2026 Hironaka contributors. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Hironaka contributors\n-/\nimport Hironaka.MarkedIdeal.MarkedIdealOperationsTransform\nimport Hironaka.MarkedIdeal.ControlledProductTransformExact\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace Hironaka.MarkedIdealOperationsTransform\n\nopen Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences\nopen Hironaka.GermIdealOrder Hironaka.IdealWeightPowers\n  Hironaka.RestrictedIdealExtension Hironaka.GermIdealTotalTransform\n  Hironaka.GermIdealPullbackCalculus Hironaka.BlowupExceptionalDivisor\n  Hironaka.BlowupControlledTransform Hironaka.IdealOrderArithmetic\n  Hironaka.BlowupTowers Hironaka.MarkedIdeals\n\nnoncomputable section\n\nsection Algebra\n\nvariable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n\n",
+      "sha256": "4dc4715440379b52ec1fef2016b7a47d960ec8623dea292c2301a32671de0160"
+    },
+    {
+      "original_payload_index": 0
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 1
+    },
+    {
+      "canonical_administrative_context": "\nend Algebra\n\nsection Controlled\n\nvariable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]\n  [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]\n  [IsComplexManifold n Y] {C : Set X} {π : Y → X} {𝔞 𝔟 : GermIdeal n X} {μ ν : ℕ}\n\n",
+      "sha256": "27e4f087b3f87bd7d90be0de066e5d6e92c52be2b582fe3f1d63e7efeca4f50e"
+    },
+    {
+      "original_payload_index": 2
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 3
+    },
+    {
+      "canonical_administrative_context": "\nend Controlled\n\nend\n\nend Hironaka.MarkedIdealOperationsTransform\n",
+      "sha256": "8e681254a567481b0f7e43409aec96dc54163f186144700640a22c3166c58761"
+    }
+  ],
+  "original_context_audit": "support-prep/canonical-additive-marked-operations/extraction-audit.json",
+  "imports": [
+    "Hironaka.MarkedIdeal.MarkedIdealOperationsTransform",
+    "Hironaka.MarkedIdeal.ControlledProductTransformExact"
+  ],
+  "prepared_destination_sha256": "5cceab27a5d91ef54b3d0cf5c0aeaf7a350835d2be7c3f49156d1f5724255b41",
+  "proof_type_payload_edits": 0,
+  "production_installation_pending": true,
+  "installation_stage": "DRAFT_ONLY_PENDING_SEPARATE_PEER_AND_ALL_RUNTIME_GATES"
+}

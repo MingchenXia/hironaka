@@ -1,0 +1,7 @@
+# Fourth complete-original support extraction peer
+
+PASS, no findings. Read the entire SubmanifoldRestrictLeOriginalExact draft and whole fixed native original, complete selected include hval/doc/type/proof and all original context variables. The 11 source/provenance/context checks in the adjacent JSON pass. Raw original matches plan SHA and current frozen native source. The plan records published revision 4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07; this peer authenticates the preserved raw capture rather than claiming a new git-object retrieval. Selected payload is byte-identical; full draft is exactly recorded namespace/open mapping, wrapper imports and original context/payload/closing.
+
+The theorem retains source coherence, independent ambient/submanifold dimensions and the actual holomorphic inclusion hval. It takes each restricted source generator through the ambient finite RestrictLe equality, restricts that eventual identity along continuous subtype inclusion, composes actual holomorphic coefficients and applies true IsInSpanAt transitivity to every member of the entire restricted ideal. No ambient inclusion or converse is inferred. Existing partial member-holomorphy and actual new whole restrictIdeal APIs provide the dependencies; the extracted result is absent from the old partial.
+
+No source, production, comparator or runtime change and no re-export was performed. This is a separate source/context/provenance peer, not a fresh build or strict-expression acceptance result.

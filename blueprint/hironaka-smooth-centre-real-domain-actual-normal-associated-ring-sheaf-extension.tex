@@ -1,0 +1,71 @@
+\section{The genuine original associated ring sheaf}
+
+The actual ring presheaf $G$ retains its independently constructed section
+products. Its sheafification is taken in commutative rings on the original
+manifold, so the sheaf has genuine ring operations before any whole stalk
+comparison.
+
+\begin{definition}[The associated ring sheaf and original ambient morphism]
+\label{hir:real-domain-actual-normal-associated-ring-sheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-section-ring-presheaf,hir:real-domain-actual-normal-associated-section-ambient-ring-map}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingSheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingSheafUnit,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedAmbientRingSheafMap,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedAmbientRingSheafMap_app}
+\leanok
+There is a genuine associated ring sheaf $G^{\#}$, with its natural ring
+presheaf unit $G\to G^{\#}$ and natural structure-ring sheaf morphism
+$\mathcal O_M\to G^{\#}$. The latter sends every original holomorphic
+section to the sheafification of its original degree-zero class.
+\end{definition}
+\begin{proof}
+The standard ring-valued sheafification functor on the open-set site
+constructs $G^{\#}$ and its natural unit. Compose the already constructed
+actual degree-zero structure-ring presheaf morphism with this unit.
+Both its source and target are ring sheaves, so this composite is a
+ring sheaf morphism. The raw degree-zero section formula and the
+definition of the composite give the asserted formula on every open.
+The ring operations are those of ring-valued sheafification; none are
+transported through a whole stalk equivalence.
+\end{proof}
+
+\begin{theorem}[Every actual ring sheaf stalk retains the whole original ring]
+\label{hir:real-domain-actual-normal-associated-ring-sheaf-whole-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-sheaf,hir:real-domain-actual-normal-associated-ring-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingUnitStalkIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingSheafStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingSheafStalkWholeEquiv_unit}
+\leanok
+Original coherence of $A$ gives a ring isomorphism
+$(G^{\#})_y\simeq\bigoplus_q L_q(R_y,I_y,J_y)$ for every original point
+$y$. On the image of an arbitrary raw ring stalk element under the
+sheafification unit it equals the original whole ring-stalk map.
+\end{theorem}
+\begin{proof}
+The ring sheafification unit induces an isomorphism on every stalk.
+Invert this genuine ring stalk isomorphism, then compose with the
+previously proved whole original ring-stalk isomorphism. This gives
+the asserted isomorphism for the independently constructed sheaf
+ring operations. Evaluating on the image of a raw stalk element
+cancels the inverse unit isomorphism against the unit isomorphism,
+leaving exactly the original whole ring-stalk map.
+\end{proof}
+
+\begin{lemma}[Every original whole section germ is retained by the ring sheaf]
+\label{hir:real-domain-actual-normal-associated-ring-sheaf-original-germs}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-sheaf-whole-stalk-equivalence,hir:real-domain-actual-normal-associated-ring-stalk-whole-map}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingSheafStalkWholeEquiv_germ,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingSheaf.actualNormalAssociatedRingSheafStalkWholeEquiv_germ_of}
+\leanok
+The germ in $G^{\#}$ of the unit image of any actual original section
+maps to its original whole graded-ring germ class. In particular this
+holds in every original homogeneous degree and for every actual power
+representative, with the same representative and degree.
+\end{lemma}
+\begin{proof}
+Naturality of the induced stalk morphism says that the stalk unit sends
+a raw section germ to the sheaf germ of that section's unit image.
+Apply the preceding cancellation identity. The existing raw ring-stalk
+section formula identifies the result with the original whole ring
+section germ. Its homogeneous inclusion formula then gives the same
+whole layer class in the same degree. Substituting a genuine power
+representative in that formula gives the stated original power-class
+formula.
+\end{proof}

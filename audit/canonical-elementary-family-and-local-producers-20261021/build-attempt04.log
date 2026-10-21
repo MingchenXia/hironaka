@@ -1,0 +1,95 @@
+ℹ [4791/5195] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [5379/5473] Built Hironaka.Resolution.HironakaActualPrincipalJetMultiplication (7.5s)
+✔ [5397/5473] Built Hironaka.Support.CompactBlowupSurjectiveOriginalExact (2.2s)
+✔ [5399/5473] Built Hironaka.Resolution.HironakaActualPrincipalHSFormula (8.2s)
+✖ [5405/5489] Building Hironaka.Support.EmbeddedOriginalRegularPrefixExact (2.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/EmbeddedOriginalRegularPrefixExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/EmbeddedOriginalRegularPrefixExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/EmbeddedOriginalRegularPrefixExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/EmbeddedOriginalRegularPrefixExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/EmbeddedOriginalRegularPrefixExact.setup.json --json
+error: Hironaka/Support/EmbeddedOriginalRegularPrefixExact.lean:86:0: Unexpected name `Hironaka.EmbeddedFromResolution` after `end`: The current section is unnamed
+
+Hint: Delete the name `Hironaka.EmbeddedFromResolution` to end the current unnamed scope; outer named scopes can then be closed using additional `end` command(s):
+  end ̵H̵i̵r̵o̵n̵a̵k̵a̵.̵E̵m̵b̵e̵d̵d̵e̵d̵F̵r̵o̵m̵R̵e̵s̵o̵l̵u̵t̵i̵o̵n̵
+error: Lean exited with code 1
+✔ [5407/5489] Built Hironaka.Resolution.HironakaActualCylinderVanishingIdealExtension (4.3s)
+✔ [5408/5489] Built Hironaka.Support.SubmanifoldRestrictLeOriginalExact (2.8s)
+✔ [5416/5489] Built Hironaka.Resolution.HironakaActualInvertibleIntrinsicHS (3.7s)
+✔ [5424/5489] Built Hironaka.Resolution.HironakaActualCylinderPullbackOrigin (3.4s)
+✔ [5425/5489] Built Hironaka.Resolution.HironakaActualSubmanifoldGermExtension (3.2s)
+✔ [5428/5489] Built Hironaka.Resolution.HironakaActualHypersurfaceBlowupHS (3.2s)
+✔ [5432/5632] Built Hironaka.Resolution.HironakaActualOwnerAnalyticDivision (5.7s)
+✔ [5436/5632] Built Hironaka.Resolution.HironakaActualCylinderPullbackPoints (3.2s)
+✔ [5441/5632] Built Hironaka.Resolution.HironakaActualNormalizedInitialRelations (6.8s)
+✔ [5454/5632] Built Hironaka.Resolution.HironakaOriginalAnalyticHSGenericDenominator (13s)
+✔ [5456/5632] Built Hironaka.Support.RestrictEmptyTowerAppendOriginalExact (2.6s)
+✖ [5457/5632] Building Hironaka.Support.NormalCrossingsWellFormedSublistOriginalExact (2.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.setup.json --json
+error: Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.lean:34:0: Unexpected name `Hironaka.NormalCrossingsComparison` after `end`: The current section is unnamed
+
+Hint: Delete the name `Hironaka.NormalCrossingsComparison` to end the current unnamed scope; outer named scopes can then be closed using additional `end` command(s):
+  end ̵H̵i̵r̵o̵n̵a̵k̵a̵.̵N̵o̵r̵m̵a̵l̵C̵r̵o̵s̵s̵i̵n̵g̵s̵C̵o̵m̵p̵a̵r̵i̵s̵o̵n̵
+error: Lean exited with code 1
+✔ [5459/5632] Built Hironaka.Support.IrreducibleFullDimensionOpenOriginalExact (2.7s)
+✔ [5473/5632] Built Hironaka.Resolution.HironakaActualSingularChartTransport (2.9s)
+✔ [5477/5632] Built Hironaka.Resolution.HironakaActualGraphFunctionalIdeal (3.8s)
+✔ [5485/5632] Built Hironaka.Resolution.HironakaNormalCrossingsDoubleLocusMarkedCompatibility (3.6s)
+✔ [5490/5632] Built Hironaka.Resolution.HironakaOriginalCentreAnalyticHSException (3.6s)
+✔ [5495/5632] Built Hironaka.Resolution.HironakaOriginalGlobalOffZero (3.4s)
+✔ [5501/5632] Built Hironaka.Resolution.HironakaActualSingularSubmersionPullback (3.5s)
+✔ [5506/5632] Built Hironaka.Resolution.HironakaActualGraphContactCoefficient (3.7s)
+✔ [5517/5632] Built Hironaka.Resolution.HironakaOriginalCurveTranslationFamily (4.3s)
+✔ [5520/5632] Built Hironaka.Resolution.HironakaOriginalFiniteSimultaneousHSException (3.3s)
+✔ [5524/5632] Built Hironaka.Resolution.HironakaOriginalGlobalProperModification (2.9s)
+✔ [5529/5632] Built Hironaka.Resolution.HironakaActualPlaneContactBlowup (3.3s)
+✔ [5534/5632] Built Hironaka.Resolution.HironakaActualStandardNormalIndependence (6.9s)
+✔ [5539/5632] Built Hironaka.Resolution.HironakaOriginalTranslationFamilyHS (3.8s)
+✔ [5542/5632] Built Hironaka.Resolution.HironakaOriginalSmoothCurveFullHSVariation (3.1s)
+✖ [5547/5632] Building Hironaka.Resolution.HironakaActualPlaneContactBlowupRestriction (3.4s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaActualPlaneContactBlowupRestriction.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualPlaneContactBlowupRestriction.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaActualPlaneContactBlowupRestriction.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualPlaneContactBlowupRestriction.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaActualPlaneContactBlowupRestriction.setup.json --json
+error: Hironaka/Resolution/HironakaActualPlaneContactBlowupRestriction.lean:60:2: Unknown identifier `regularAtDim_geoStrictTransform`
+error: Lean exited with code 1
+✔ [5552/5632] Built Hironaka.Resolution.HironakaActualHSConstantCentreBennett (3.2s)
+✔ [5553/5632] Built Hironaka.Resolution.HironakaActualCanonicalNormalCoefficientData (4.8s)
+✔ [5554/5632] Built Hironaka.Resolution.HironakaActualWeightedGeneratorTransformJets (6.4s)
+✔ [5556/5632] Built Hironaka.Resolution.HironakaActualSuppliedFlatteningNormalPowers (8.8s)
+✔ [5561/5632] Built Hironaka.Resolution.HironakaOriginalSmoothCentreFamilyGerm (3.8s)
+✔ [5569/5632] Built Hironaka.Resolution.HironakaOriginalSmoothCurveWholeTupleBadBlowup (3.3s)
+✔ [5574/5632] Built Hironaka.Resolution.HironakaActualUniformCanonicalCoefficients (4.0s)
+✔ [5575/5632] Built Hironaka.Resolution.HironakaActualNormalFilteredOwnerDivision (7.5s)
+✔ [5576/5632] Built Hironaka.Resolution.HironakaActualCanonicalCoefficientDomains (4.7s)
+✔ [5577/5632] Built Hironaka.Resolution.HironakaActualPersistentHSIdealRigidity (5.2s)
+✔ [5578/5632] Built Hironaka.Resolution.HironakaActualCoefficientControlledTransform (7.0s)
+✔ [5579/5632] Built Hironaka.Resolution.HironakaActualBoundaryContactNormalPowers (3.4s)
+✔ [5581/5632] Built Hironaka.Resolution.HironakaActualAnalyticSubspaceRegularityConverse (3.9s)
+✔ [5589/5632] Built Hironaka.Resolution.HironakaOriginalDiscretePreparationFirstEntry (3.2s)
+✔ [5595/5632] Built Hironaka.Resolution.HironakaActualPointNormalizedSaturation (8.9s)
+✔ [5601/5632] Built Hironaka.Resolution.HironakaActualCommonMarkPersistentCosupport (7.2s)
+✔ [5602/5632] Built Hironaka.Resolution.HironakaActualCoefficientCosupportSpread (4.9s)
+✔ [5607/5632] Built Hironaka.Resolution.HironakaIntrinsicComplexAnalyticRegularLocus (3.0s)
+✔ [5610/5632] Built Hironaka.Resolution.HironakaOriginalDiscretePositiveCompanion (3.3s)
+✔ [5618/5632] Built Hironaka.Resolution.HironakaActualPointTangentCoefficientHSDrop (4.7s)
+✔ [5619/5632] Built Hironaka.Resolution.HironakaHomogeneousCanonicalNeighbourhoods (3.1s)
+✔ [5620/5632] Built Hironaka.Resolution.HironakaOriginalCurvePreparationCompanionSteps (3.1s)
+✔ [5626/5632] Built Hironaka.Resolution.HironakaNormalCrossingsCanonicalChartHistories (4.2s)
+✔ [5629/5632] Built Hironaka.Resolution.HironakaNormalCrossingsGlobalCanonicalResolution (3.2s)
+Some required targets logged failures:
+- Hironaka.Support.EmbeddedOriginalRegularPrefixExact
+- Hironaka.Support.NormalCrossingsWellFormedSublistOriginalExact
+- Hironaka.Resolution.HironakaActualPlaneContactBlowupRestriction
+error: build failed

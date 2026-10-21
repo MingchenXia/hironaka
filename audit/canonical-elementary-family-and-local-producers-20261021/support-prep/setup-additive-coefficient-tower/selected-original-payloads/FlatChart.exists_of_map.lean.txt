@@ -1,0 +1,32 @@
+/-- **A flat chart from a holomorphic map with injective derivative.** -/
+theorem FlatChart.exists_of_map {S' : Set Z} {z : Z} {k : ℕ} {W : Z → ComplexModel n} {O : Set Z} (hO : IsOpen O)
+    (hzO : z ∈ O) (hW : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W y) (hWz : W z = 0)
+    (hinj : Function.Injective
+      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)))
+    (hflat : ∀ y ∈ O, (y ∈ S' ↔ W y ∈ complexCoordinatePlane n k)) :
+    ∃ c : FlatChart n S' z k, c.ψ =ᶠ[𝓝 z] W := by
+  set e := chartAt (ComplexModel n) z with he
+  set Nset : Set (ComplexModel n) := e.target ∩ e.symm ⁻¹' O with hNset
+  have hNo : IsOpen Nset := e.continuousOn_symm.isOpen_inter_preimage e.open_target hO
+  have hzN : e z ∈ Nset := ⟨e.map_source (mem_chart_source _ z), by
+    rw [mem_preimage, e.left_inv (mem_chart_source _ z)]; exact hzO⟩
+  have hFd : DifferentiableOn ℂ (fun ζ => W (e.symm ζ)) Nset := fun ζ hζ => by
+    have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z) hζ.1
+    exact (mdifferentiableAt_iff_differentiableAt.mp ((hW _ hζ.2).comp _ h1)).differentiableWithinAt
+  obtain ⟨Θ, hΘN, hΘF, -⟩ := FirstPass.exists_localHolomorphicEquivAt hNo hzN hFd hinj
+  refine ⟨⟨Θ, fun ζ hζ => (hΘN hζ).1, ?_, ?_⟩, ?_⟩
+  · rw [hΘF]
+    show W (e.symm (e z)) = 0
+    rw [e.left_inv (mem_chart_source _ z)]; exact hWz
+  · intro y hy hyΘ
+    have hyO : y ∈ O := by
+      have h := (hΘN hyΘ).2
+      rwa [mem_preimage, e.left_inv hy] at h
+    rw [hΘF]
+    show y ∈ S' ↔ W (e.symm (e y)) ∈ _
+    rw [e.left_inv hy]; exact hflat y hyO
+  · filter_upwards [e.open_source.mem_nhds (mem_chart_source _ z)] with y hy
+    show Θ.toFun (e y) = W y
+    rw [hΘF]
+    show W (e.symm (e y)) = W y
+    rw [e.left_inv hy]

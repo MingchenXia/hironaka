@@ -1,0 +1,344 @@
+{
+  "created_utc": "2026-10-21T03:16:24.508553+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G9": "Actual highest old-branch charts jointly SNC with entire retained boundary now produced internally; global iterative count progress and termination remain open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaNormalCrossingsJointBranchCharts.lean",
+    "sha256": "3fb37250b286f25bfab6c879535f01ef9e81aa8aabeba567b29246fce7ed04dc",
+    "bytes": 13044
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-normal-crossings-joint-branch-charts-extension.tex",
+    "sha256": "01f37617d3818ad2ff86a7683ad305b3bee7122e45adfb5bd8a472acff554dec",
+    "bytes": 4255
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaNormalCrossingsJointBranchCharts.ilean",
+      "sha256": "361bda9654f0b3d51c94b32aa4c02991f5f74fb2a32aea4aada4c20f838c2205",
+      "bytes": 81644
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaNormalCrossingsJointBranchCharts.ilean.hash",
+      "sha256": "4ec7688dcdc8d8cb23bde23de8c20122dca4f6cc05ea680f041ce7178d2e4340",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaNormalCrossingsJointBranchCharts.olean",
+      "sha256": "d9dac7c28ec2634ee67027cce994454549827caeec3b7d6170657aa17aa6bfc1",
+      "bytes": 629744
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaNormalCrossingsJointBranchCharts.olean.hash",
+      "sha256": "3277c9e23e6146994c133a6c9c99c8289e6bbc14e5885b1a97b2b66b72c3ecb0",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaNormalCrossingsJointBranchCharts.trace",
+      "sha256": "6a1344d70670bd34f2a0a20f1fc4c0705a8351da6813f028c872113e0f522281",
+      "bytes": 3292
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "coordinateMember",
+      "source_line": 25
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "coordinateFamily",
+      "source_line": 28
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "mem_coordinateMember_iff",
+      "source_line": 31
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "translateAt",
+      "source_line": 36
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "isSNCDivisor_coordinateFamily",
+      "source_line": 52
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "injOn_append_nonempty",
+      "source_line": 95
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_highest_joint_branch_chart",
+      "source_line": 129
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:nc-indexed-coordinate-family-empty-positions-snc",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateMember",
+        "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateFamily",
+        "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.isSNCDivisor_coordinateFamily"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "fb6a8fc8abc2806408502589b0040828b0393c65d4c653288c65c94df06c70fc"
+    },
+    {
+      "label": "hir:nc-original-highest-joint-branch-chart",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "b692f2a7d33059a051de960cabce3cc7d133faead4748b71d1186661abfee766"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_6",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateMember",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.isSNCDivisor_coordinateFamily._simp_1_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateFamily",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.mem_coordinateMember_iff",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateFamily.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart._simp_1_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_5",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.isSNCDivisor_coordinateFamily",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_7",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.translateAt._proof_8",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.0.TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.injOn_append_nonempty",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.coordinateMember.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart._simp_1_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaNormalCrossingsJointBranchCharts.exists_highest_joint_branch_chart._simp_1_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 22,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 22
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/nc-joint-branch-charts/kernel.log",
+    "sha256": "72f6b13b579cec41eba8cf9118bc31b95eb6a7141c39813ce9f1bc80df5f935a",
+    "bytes": 82
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/nc-joint-branch-charts/actual-roots.log",
+    "sha256": "f3dbff239c5201ebc33bb19a509e87c2eea13e07c196591643696731553e1c97",
+    "bytes": 6145
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/nc-joint-branch-charts/ActualRoots.lean",
+    "sha256": "f1e9eb438b92c4bd6323e1f35bf0a8a6b357be6c4861f08eee41dfad517fc869",
+    "bytes": 870
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/canonical-centres/joint-branch-charts/native.log",
+    "sha256": "27e45b6bb7174a8ab367a3561f84066557ac7a295cc55e8ef3b89bb00e48d966",
+    "bytes": 143
+  },
+  "native_build_jobs": 4659,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 282-line source, all coordinate and finite-list helpers, and BOTH complete written BP proofs reviewed. Empty coordinate subsets define the actual EMPTY set, preserving every absent boundary position instead of replacing it by a full coordinate subspace. For each finite coordinate family with subsets of cardinality at most one and genuine injectivity on nonempty indices, every member is closed. Translation by the actual point gives true full local equations for all members through that point, with one coordinate each and injective through-index subsets, proving real SNC of the whole ordered family including empty positions. A direct Fin.append proof establishes injectivity for old singleton subsets followed by the retained boundary subsets, using actual old/boundary coordinate disjointness to exclude cross-block equality. From ONLY the original boundary-adapted NC carrier, a genuine whole original branch-count bound and an actual highest point, the original simultaneous flattening internally supplies old coordinate subset S and whole boundary index data. A finite open intersection avoids exactly the original boundary members absent at the base point; every original boundary index remains. The old singleton list is injective, present boundary subsets have cardinality one and are injective, and their disjointness from S is the genuine original joint-chart field. Thus the whole appended coordinate family is genuinely SNC. Actual open inclusion, the real flattening biholomorphism and the true target-open inclusion pull back this ENTIRE family. Literal finite-list splitting and whole member equations identify its old block with the constructed branch list and its full second block with the ENTIRE retained boundary pullback, including every empty slot. The actual old flattening equation identifies the whole original carrier pullback with the union of the old block. The genuine highest-superlevel flattening theorem, using the supplied whole branch-count bound and actual highest point, identifies the same highest stratum with simultaneous vanishing of ALL old coordinates, so its whole restriction lies in EVERY constructed branch. No supplied local SNC list, selected branch, global branch labelling or history data enter this producer.",
+  "proven_scope": "Original joint NC carrier/boundary data, an actual whole branch-count bound and a highest point internally construct a genuine old-branch chart jointly SNC with the ENTIRE retained boundary and with the whole highest stratum contained in each old branch.",
+  "scope_limits": [
+    "The original adapted carrier and entire retained boundary are natural inputs; the global branch-count bound and an actual highest point are explicit.",
+    "The result is a genuine local chart and whole ordered SNC list. It does not choose a global branch labelling, centre, history, canonical invariant equality or progress bound.",
+    "All empty retained boundary slots remain present. G9 general iteration, post-phase count decrease and termination are not established by this chart producer."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/nc-joint-branch-charts/review-config.json",
+    "sha256": "5b453f094ee8582884756d0c4bb121ed9d74bf32e029eed7a9328e2f6428c33d",
+    "bytes": 3962
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/canonical-centres/joint-branch-charts/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/canonical-centres/joint-branch-charts/peer-review-principal.json"
+}

@@ -1,0 +1,91 @@
+\section{True local normal crossings and monomial generators on the original global principalization}
+
+The original global effective divisor has the genuine local SNC geometry
+required by principalization in \cite{wlodarczyk05-hironaka}.  The local
+families below are the actual finite terminal boundaries, transported by
+the already proved genuine local range biholomorphisms.  Finite families
+are used on each actual range; a global scheduled blowup history remains
+a separate construction on a noncompact base.
+
+\begin{theorem}[Actual terminal boundaries give genuine SNC families on the global ranges]
+\label{hir:original-global-terminal-range-boundary-snc}
+\lean{Hironaka.HironakaOriginalGlobalSNCPrincipalization.originalTerminalRangeBoundary,Hironaka.HironakaOriginalGlobalSNCPrincipalization.originalTerminalRangeBoundary_isSNCDivisor}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-terminal-local-actual-saturated-range-biholomorphism,hir:biholomorphism-invariance,hir:original-input-covering-local-canonical-terminal-atlas}
+For original marked-domain input $M$, each genuine global range $V_i$
+carries the finite ordered family obtained by pulling the entire actual
+terminal boundary $E(M|_{U_i},T_i)$ back through $e_i^{-1}:V_i\to Y_i$.
+This actual family has simple normal crossings.  Every original order
+index and every empty boundary entry is retained.
+\end{theorem}
+\begin{proof}
+Restriction supplies the invariant-domain property of the original marked
+ideal on $U_i$.  The internally produced terminal tower is an actual
+test tower, so its entire transformed marked ideal is well formed; its
+actual ordered boundary consequently has SNC.  Both directions of the
+actual range biholomorphism are already holomorphic.  The genuine
+biholomorphic coordinate transport theorem pulls this actual SNC family
+back to $V_i$.  The operation is the map of the original whole list by
+inverse image, so it retains every list position, including empty entries.
+\end{proof}
+
+\begin{theorem}[The true global divisor restricts to exactly this SNC support]
+\label{hir:original-global-principalization-range-divisor-snc-support}
+\lean{Hironaka.HironakaOriginalGlobalSNCPrincipalization.originalTerminalRangePrincipalizationDivisor,Hironaka.HironakaOriginalGlobalSNCPrincipalization.originalTerminalRangePrincipalizationDivisor_ideal,Hironaka.HironakaOriginalGlobalSNCPrincipalization.originalTerminalRangePrincipalizationDivisor_support}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-global-terminal-range-boundary-snc,hir:original-terminal-range-true-principalized-ideal,hir:original-global-terminal-true-ideal-invertible,hir:principalization}
+Suppose additionally that $M$ has whole ambient submanifold, mark one,
+and empty initial boundary.  The actual restriction of the constructed
+global principalization divisor to each $V_i$ is an effective divisor
+whose ideal is the true restricted global pullback ideal and whose
+support is exactly the union of the actual ordered SNC family of the
+preceding theorem.
+\end{theorem}
+\begin{proof}
+The already proved range ideal dictionary says that the true restricted
+global pullback is $(e_i^{-1})^*\mathcal O(-E_{T_i})$ and is invertible.
+Take this true restricted ideal with its proved invertibility as the
+restricted effective divisor; it is literally the restriction of the
+global divisor ideal.  Empty original boundary restricts to empty
+boundary, so the actual tower support theorem identifies
+$\operatorname{supp}E_{T_i}$ with the union of the entire transformed
+boundary.  The zero locus of a coherent ideal pulls back to the inverse
+image of its zero locus under the genuine holomorphic inverse
+biholomorphism.  Thus the restricted divisor support is the inverse image
+of that union.  Inverse image commutes with union, and the transported
+whole list is exactly the family of those inverse images.  This proves
+the asserted equality for the actual global divisor restriction.
+\end{proof}
+
+\begin{theorem}[Actual restricted global ideal generators are units times coordinate monomials]
+\label{hir:original-global-principalization-range-unit-monomial-generator}
+\lean{Hironaka.HironakaOriginalGlobalSNCPrincipalization.exists_originalTerminalRange_unit_monomial_generator}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-global-principalization-range-divisor-snc-support,trace:actual-snc-divisor-local-monomial-generator}
+Under the preceding whole-ambient, mark-one and empty-boundary hypotheses,
+at every point of every actual original global range, the true restricted
+global pullback ideal has a genuine local holomorphic generator.  There
+are centered holomorphic coordinates adapted to the actual transported
+terminal boundary in which this generator is a nonvanishing holomorphic
+unit times a coordinate monomial with nonnegative integer exponents.
+The principal stalk identity is for the same actual restricted global
+ideal, not for a replacement local model.
+\end{theorem}
+\begin{proof}
+The preceding theorem constructs the actual restricted effective divisor,
+its entire genuine ordered SNC family, and their true support equality.
+The proved local SNC divisor generator theorem applies to exactly these
+objects.  Invertibility supplies a holomorphic local generator and all
+principal stalk identities.  SNC supplies centered holomorphic adapted
+coordinates with distinct hyperplanes for the members through the point.
+The actual support equality confines every zero of the coordinate
+generator germ to these coordinate hyperplanes.  Holomorphic coordinate
+factorization then gives nonnegative integer powers of coordinates and
+a holomorphic residual factor nonzero at the origin.  These are the
+asserted genuine unit and monomial.  The divisor ideal is literally the
+true restricted global pullback, so its principal stalk identities are
+those of that same global ideal.
+\end{proof}

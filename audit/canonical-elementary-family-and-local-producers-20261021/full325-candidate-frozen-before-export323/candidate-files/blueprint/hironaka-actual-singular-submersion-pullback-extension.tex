@@ -1,0 +1,116 @@
+\section{Genuine submersions preserve entire original singular vanishing ideals}
+
+Let $f:Y^m\to X^n$ be a genuine holomorphic submersion of complex
+manifolds. The original subset $N\subset X$ is completely arbitrary;
+no smoothness, closedness, analyticity or coherence is assumed for it.
+All functional ideals and pullbacks are their independently defined
+original ones, with actual finite local holomorphic relations.
+
+\begin{lemma}[The actual submersion inverse charts commute with the true product projection]
+\label{hir:actual-singular-submersion-inverse-product-coordinates}
+\lean{Hironaka.HironakaActualSingularSubmersionPullback.exists_inverse_product_coordinates}
+\uses{hir:submersion-nc-full-lifted-coordinates}
+\leanok
+Fix $y\in Y$, write $m=n+t$ as furnished by the actual submersion
+linear algebra, and supply any genuine centred target chart $\Phi$. The actual submersion
+internally produces a genuine centred source chart $\Xi$, with the
+same real source-domain inclusion, such that its literal inverse
+coordinate maps satisfy
+\[
+ f(q_\Xi(u))=q_\Phi(p(u))
+\]
+on a genuine neighbourhood of zero. Here $p:\mathbb C^{n+t}\to\mathbb C^n$
+is the actual first-block projection. No commutative-square or
+vanishing-ideal certificate is supplied.
+\end{lemma}
+\begin{proof}
+Use the genuine lifted-coordinate construction for the actual submersion
+at $y$ and the very supplied $\Phi$. It gives the same first $n$
+coordinate functions of $f$ on the entire true source coordinate domain,
+not merely an equality at $y$. The source target is an open neighbourhood
+of zero. For $u$ in it, the true inverse-domain theorem puts
+$z=q_\Xi(u)$ in the genuine source coordinate domain and gives
+$r_\Xi(z)=u$. The actual lifted dictionary gives $f(z)$ in the true
+target coordinate domain and, coordinate by coordinate,
+$p(u)=r_\Phi(f(z))$. Apply the literal target inverse identity
+$q_\Phi(r_\Phi(f(z)))=f(z)$. This proves the displayed commutation on
+that actual open neighbourhood, using the original maps throughout.
+\end{proof}
+
+\begin{lemma}[Whole original functional pullback in genuine local product coordinates]
+\label{hir:actual-singular-submersion-product-functional-dictionary}
+\lean{Hironaka.HironakaActualSingularSubmersionPullback.pullback_membership_of_inverse_product_coordinates}
+\uses{hir:actual-singular-chart-entire-functional-span,hir:actual-singular-chart-vanishing-membership,hir:actual-singular-chart-original-function-representative,hir:actual-cylinder-functional-pullback-all-points}
+\leanok
+In genuine supplied centred charts whose actual inverse maps commute
+locally with the true projection as above, for every original $N$ and
+original $F:Y\to\mathbb C$, actual functional pullback membership at
+$y$ is equivalent to actual vanishing membership of $F$ on $f^{-1}N$
+at $y$. The only local square used is the geometric map commutation;
+no ideal equality or coherence is assumed.
+\end{lemma}
+\begin{proof}
+The actual infinite-family span dictionary transports the defining
+original pullback family through the same source inverse chart.
+Let $W=q_\Phi^{-1}N$. An original base vanishing function $a$ at $f(y)$
+becomes the actual model base function $a\circ q_\Phi$ in
+$\mathcal I_W$ at zero. Local commutation identifies its original
+composed source generator with $(a\circ q_\Phi)\circ p$ on a genuine
+neighbourhood. This latter function is holomorphic there, so local
+function congruence and finite-span transitivity give one whole-span
+inclusion.
+
+Conversely, every model base vanishing function $b$ at zero has the
+literal original representative $a=b\circ r_\Phi$ in
+$(\mathcal I_N)_{f(y)}$, with $a\circ q_\Phi=b$ near zero. Pull this
+actual equality back through the continuous projection and intersect
+with the genuine commutation neighbourhood. It identifies the model
+source generator $b\circ p$ with the same original source generator
+$(a\circ f)\circ q_\Xi$ near zero. The latter is holomorphic by the
+actual map and chart holomorphy. The reverse finite-span transitivity
+therefore gives equality of the whole two functional spans.
+
+The already proved entire singular-product functional pullback equality
+identifies the model span with vanishing on $p^{-1}W$. Actual inverse-map
+commutation identifies this set locally with $q_\Xi^{-1}(f^{-1}N)$.
+Vanishing membership is invariant under this genuine local set equality.
+The actual inverse-chart vanishing dictionary then returns precisely
+the original membership of the same $F$ in
+$\mathcal I_{f^{-1}N}$ at $y$. Every argument concerns whole functions
+and finite actual relations, without an analytic-set presentation.
+\end{proof}
+
+\begin{theorem}[Actual entire singular vanishing ideal pullback under every genuine submersion]
+\label{hir:actual-singular-vanishing-ideal-pullback-submersion}
+\lean{Hironaka.HironakaActualSingularSubmersionPullback.pullback_vanishingIdeal_submersion}
+\uses{hir:actual-singular-submersion-inverse-product-coordinates,hir:actual-singular-submersion-product-functional-dictionary}
+\leanok
+For every genuine submersion $f:Y^m\to X^n$ and every original subset
+$N\subset X$, the entire independently defined original functional
+ideals satisfy
+\[
+ f^*\mathcal I_N=\mathcal I_{f^{-1}N}.
+\]
+No original subset regularity, coherence, chosen chart, map square or
+ideal-equality certificate is input.
+\end{theorem}
+\begin{proof}
+Fix an arbitrary actual source point. The actual submersion differential
+is surjective, so its genuine finite-dimensional linear algebra gives
+$m=n+t$ for an actual natural $t$. Genuine centred target coordinates
+exist at the actual image point; choose them with their actual source
+inclusion. The first lemma constructs the genuine source chart and the
+actual local inverse-map commutation for this same target chart. The
+second lemma then gives equality of the original memberships for every
+original source function at this point and every original subset $N$.
+Since the source point and function were arbitrary, extensionality of
+the original functional ideals gives the asserted entire equality.
+No compactness, analytic presentation or finite generating family was
+supplied; the singular product ideal was independently proved by true
+relative division and Nakayama before its functional transport.
+\end{proof}
+
+This proves the singular vanishing-ideal pullback dictionary for actual
+submersions. Additional current-history invariant comparisons and a
+finite resolving driver remain their separate obligations; they are
+not consequences asserted by this ideal equality alone.

@@ -1,0 +1,47 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Invariant.DropMembers
+import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+open Set Filter
+open scoped Topology Manifold
+
+universe u
+
+namespace Hironaka.DropMembers
+
+open Hironaka.BlowupSequences NormalCrossings BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  BlowupStrictSubmanifold NormalCrossingsComparison CoefficientIdealRestriction HomogenizedGlueingTower
+
+noncomputable section
+
+section Tower
+
+variable {n : ℕ} {X : CMfd.{u} n}
+
+/-- **Deleting the members that contain every centre** (`hir:drop-containing-members`): let `𝔪` be well formed, `E'` a
+list of members of `𝔪.E`, and `S` a set contained in every member of `𝔪.E` missing from `E'`. Along every tower with
+centres in the strict transforms of `S`, the test towers of `(M, N, E', 𝔞, d)` and of `𝔪` coincide, every member of the
+transformed `E'` is a member of the transformed `E`, and the members of the transformed `E` missing from the transformed
+`E'` contain the strict transform of `S`. -/
+theorem isGeoTestTower_withE_iff_of_centresIn (𝔪 : MarkedIdeal n X) (h𝔪 : 𝔪.IsWellFormed) {E' : List (Set X)}
+    {S : Set X} (hsub : ∀ H ∈ E', H ∈ 𝔪.E) (hA : ∀ H ∈ 𝔪.E, H ∉ E' → S ⊆ H) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → CentresIn S T →
+      (IsGeoTestTower ({ 𝔪 with E := E' } : MarkedIdeal n X) T ↔ IsGeoTestTower 𝔪 T) ∧
+      (∀ H ∈ (geoTransformAlong ({ 𝔪 with E := E' } : MarkedIdeal n X) T).E, H ∈ (geoTransformAlong 𝔪 T).E) ∧
+      (∀ H ∈ (geoTransformAlong 𝔪 T).E,
+        H ∉ (geoTransformAlong ({ 𝔪 with E := E' } : MarkedIdeal n X) T).E → strictAlong T S ⊆ H) :=
+  isGeoTestTower_withE_iff_of_centresIn_of_snc 𝔪
+    (fun T hT => (MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong h𝔪 T hT).isSNCDivisor) hsub hA
+
+end Tower
+
+end
+
+end Hironaka.DropMembers

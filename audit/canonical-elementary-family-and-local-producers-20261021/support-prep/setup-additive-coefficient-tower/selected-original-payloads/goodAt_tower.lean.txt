@@ -1,0 +1,26 @@
+/-- **Every point of the strict transform of `S` is good** along a multiple test blow-up of `𝔪` with centres in the
+strict transforms of `S` (induction on the tower: `goodAt_refl`, `goodAt_step_of_mem`, `goodAt_step_of_notMem`). -/
+theorem goodAt_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) {S : Set X}
+    (hS : IsClosedSubmanifold n S) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T → CentresIn S T →
+      ∀ p ∈ strictAlong T S, GoodAt 𝔪 S T p
+  | _, .refl => fun _ _ p hp => goodAt_refl 𝔪 h𝔞 hS hp
+  | _, .step T C π hπ => fun hT hTS z hz => by
+      obtain ⟨hT0, hC⟩ := (isGeoTestTower_step_iff 𝔪 T C π hπ).mp hT
+      obtain ⟨hTS0, hCS⟩ := hTS
+      obtain ⟨-, hNT, -, hSsub, -, -⟩ := restrict_tower 𝔪 hN h𝔞 hS T hT0 hTS0
+      have hSc : IsClosed (strictAlong T S) := hSsub.1
+      have hpz : π z ∈ strictAlong T S :=
+        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπ.contMDiff.continuous hSc hz
+      have hgood := goodAt_tower 𝔪 hN h𝔞 hS T hT0 hTS0 (π z) hpz
+      have hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent :=
+        (inclusions_tower 𝔪 hN h𝔞 (Nat.zero_le _) T hT0).2.2.2.2.1
+      have hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ := fun i hi =>
+        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.1
+      have hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent := fun i hi =>
+        (inclusions_tower 𝔪 hN h𝔞 hi T hT0).2.2.2.2.2.1
+      have hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C := fun i hi =>
+        ((isGeoTestTower_step_iff _ T C π hπ).mp (inclusions_tower 𝔪 hN h𝔞 hi (.step T C π hπ) hT).1).2
+      by_cases hzC : π z ∈ C
+      · exact goodAt_step_of_mem 𝔪 T hπ hNT hcohT hDN hDcoh hC hDadm hSc hCS hz hzC hgood
+      · exact goodAt_step_of_notMem 𝔪 T hπ hNT hcohT hDN hDcoh hSc hzC hgood

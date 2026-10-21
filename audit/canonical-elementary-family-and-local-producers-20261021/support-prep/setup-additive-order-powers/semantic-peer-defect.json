@@ -1,0 +1,120 @@
+{
+  "status": "PASS_STATIC_COMPLETE_ORIGINAL_SOURCE_CONTEXT_RECONSTRUCTION_AND_BP",
+  "reviewer": "/root/defect_descent",
+  "scope": "Independent entire draft and all captured written BP proofs; source-only static peer, not a build or expression acceptance.",
+  "destination_module": "Hironaka.Support.OrderMultiplicativityCosupportOriginalExact",
+  "draft_path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/setup-additive-order-powers/OrderMultiplicativityCosupportOriginalExact.lean",
+  "draft_sha256": "91375cfdae85ce3686ffa09923472bf9814128717dba4eb9be4a1c6b5bbe4824",
+  "draft_lines": 43,
+  "fixed_original_base_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "also_byte_identical_final_revision": "47cef49895832e3bfe492f66e1f2ac68785187dd",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/OrderMultiplicativity.lean",
+  "source_git_blob": "0b7e8929c187e7634319a9b9fb03e0f8ceb853ff",
+  "source_sha256": "e4ff0844c3977901f355971ee79f3408f528407ffe33de9534d6b7761e3c339a",
+  "normalized_integration_plan": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/additive40-prerequisite-integration-preparation/plan-before-import-closure.json",
+    "sha256": "2a3ccd5a7586541092616553f94b92846fbc5b3dce736d5f742da1dbbf8736d0"
+  },
+  "author_contract": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/setup-additive-order-powers/extraction-audit.json",
+    "sha256": "4c34d636be0643cf1c26226859c0a833c3fe46469d5a16651acd80bb4d8ab0a4"
+  },
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq"
+  ],
+  "declarations": 1,
+  "all_complete_payloads_and_contexts": [
+    {
+      "index": 0,
+      "original_lines": [
+        271,
+        279
+      ],
+      "original_sha256": "371911d9bf82adf313f86f3f94726127543201ceae9fea3e6d0efbfad04fa3c9",
+      "normalized_payload_sha256": "371911d9bf82adf313f86f3f94726127543201ceae9fea3e6d0efbfad04fa3c9",
+      "whole_original_payload_unique_in_fixed_source_and_draft": true,
+      "all_active_context_frames_exact_after_authorized_relocation": [
+        {
+          "kind": "root",
+          "name": "",
+          "commands": [
+            "set_option autoImplicit false",
+            "set_option linter.unusedSectionVars false",
+            "open Set Filter",
+            "open scoped Topology Manifold ContDiff"
+          ]
+        },
+        {
+          "kind": "namespace",
+          "name": "Hironaka.OrderMultiplicativity",
+          "commands": [
+            "open Hironaka.HolomorphicIdealSheaves",
+            "open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder\n  Hironaka.DerivativeIdeal Hironaka.OrderTaylor\n  Hironaka.HolomorphicTaylorTail Hironaka.IdealOrderArithmetic\n  Hironaka.RestrictedIdealExtension Hironaka.HolomorphicAnalytic"
+          ]
+        },
+        {
+          "kind": "noncomputable section",
+          "name": "",
+          "commands": []
+        },
+        {
+          "kind": "section",
+          "name": "Iterated",
+          "commands": [
+            "variable {n : ℕ}",
+            "variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]",
+            "variable {𝔞 𝔟 : GermIdeal n M}"
+          ]
+        }
+      ]
+    }
+  ],
+  "entire_draft_reconstructed_from_normalized_original_chunks_and_recorded_context_layout": true,
+  "all_named_anonymous_sections_namespaces_balanced": true,
+  "original_local_context_commands_not_omitted": true,
+  "all_original_BP_nodes": [
+    {
+      "label": "hir:marked-ideal-operations",
+      "capture": "hir--marked-ideal-operations.complete-original-node.tex.txt",
+      "sha256": "8af9b0abfdd1fdd437d419eac82f8cb528041d9c4aac22e915bd80721aafbc43",
+      "fixed_source_lines": [
+        599,
+        620
+      ],
+      "complete_written_proofs": 1,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.IdealOrderArithmetic.vanishesToOrderOn_sum_mul",
+        "TranscendentalNakamaye.Pending.IdealOrderArithmetic.IsInSpanAt.vanishesToOrderOn",
+        "TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_sumIdeal",
+        "TranscendentalNakamaye.Pending.IdealOrderArithmetic.inter_cosupport_subset_cosupport_mul",
+        "TranscendentalNakamaye.Pending.IdealOrderArithmetic.cosupport_subset_cosupport_idealPow",
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_idealPow_mul_eq",
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_sumIdeal_idealPow"
+      ],
+      "complete_node_bytes_exact": true
+    },
+    {
+      "label": "hir:order-power",
+      "capture": "hir--order-power.complete-original-node.tex.txt",
+      "sha256": "20b7cbfce0c30662b3ddef397a38e9887ad5c16b076f5b0e9b2ca0fadbd4400f",
+      "fixed_source_lines": [
+        580,
+        597
+      ],
+      "complete_written_proofs": 1,
+      "all_original_bindings": [
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.iterDeriv_ofFn_eq_iteratedFDeriv",
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.iterDeriv_eq_iteratedFDeriv",
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.mem_idealPow_pointIdeal_iff_iteratedFDeriv",
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.pow_mem_idealPow",
+        "TranscendentalNakamaye.Pending.OrderMultiplicativity.mem_idealPow_of_pow_mem"
+      ],
+      "complete_node_bytes_exact": true
+    }
+  ],
+  "all_original_attachments_retained": true,
+  "mathematical_statement_or_proof_payload_edits": 0,
+  "findings": [],
+  "no_runtime_production_Git_or_original_evidence_edits": true,
+  "remaining_boundary": "Only frontier may install and adjust approved pure imports. Actual metadata closure, source replay, build, full strict expressions, kernel, axioms and bindings remain separate required gates."
+}

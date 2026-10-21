@@ -1,0 +1,36 @@
+/- Complete original full-dimensional regular-set openness prerequisite. Draft only. -/
+import Hironaka.Analytic.AnalyticIrreducibleComponents
+
+set_option autoImplicit false
+
+open Set Filter
+open scoped Topology
+
+namespace Hironaka.AnalyticIrreducibleComponents
+
+open Hironaka.BlowupSequences
+
+noncomputable section
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+omit [IsComplexManifold n M] in
+/-- A set that is regular of full dimension at each of its points is open. -/
+theorem isOpen_of_forall_regularAtDim_self {W : Set M}
+    (hW : ∀ x ∈ W, RegularAtDim (n := n) W x n) : IsOpen W := by
+  refine isOpen_iff_mem_nhds.mpr fun x hx => ?_
+  obtain ⟨_, _, Φ, _, _, hflat⟩ := hW x hx
+  have hS : IsOpen ((complexChartAt (n := n) x).val.source ∩
+      (complexChartAt (n := n) x).val ⁻¹' Φ.source) :=
+    (complexChartAt (n := n) x).val.continuousOn.isOpen_inter_preimage
+      (complexChartAt (n := n) x).val.open_source Φ.isOpen_source
+  refine mem_of_superset (hS.mem_nhds ⟨mem_complexChartAt_source x, Φ.center_mem_source⟩) ?_
+  intro y hy
+  refine (hflat hy.1 hy.2).mpr ?_
+  intro i hi
+  exact absurd i.2 (not_lt.mpr hi)
+
+end
+
+end Hironaka.AnalyticIrreducibleComponents

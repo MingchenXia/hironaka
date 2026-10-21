@@ -1,0 +1,525 @@
+{
+  "created_utc": "2026-10-21T04:02:05.169686+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G8": "Genuine tangent-algebra-preserving normal pivot reindex and full arbitrary-direction chart conjugacy proved; no degree-lex owner equivariance or relative HS criterion inferred"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualNormalCoordinateReindex.lean",
+    "sha256": "97aaf37a8b8945f769710dc68af70d7b4ceb53b83996355739a2cf530d825ccb",
+    "bytes": 14108
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-normal-coordinate-reindex-extension.tex",
+    "sha256": "339492e8cd362faa12d1b89950d2a30a3e3a7579acda6b709010f902f7c42092",
+    "bytes": 7286
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualNormalCoordinateReindex.ilean",
+      "sha256": "56655a0f63e8fa41b1fa72fa260c30cb3869ba9b426ca8f33f7d8d990fb3d357",
+      "bytes": 78745
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualNormalCoordinateReindex.ilean.hash",
+      "sha256": "46e93ffb8c56b2f9d0657241cad6b7519c3000cb8e6e1ae33dbced83993b497d",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualNormalCoordinateReindex.olean",
+      "sha256": "4cd3765ad84b775a0444b9e64c713cfcdb18c65431a430a92267d668b44f2241",
+      "bytes": 475064
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualNormalCoordinateReindex.olean.hash",
+      "sha256": "3700c4fada6eaca7dc02c13d3e3423d3ad46194cd22d830e6bc4b644be964ec2",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualNormalCoordinateReindex.trace",
+      "sha256": "383354b1a3fea8f597e730273cd5bf8e029ff033c01f84806e86a67265fd8d94",
+      "bytes": 3259
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "coordinateLinearEquiv",
+      "source_line": 29
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "coordinateGermEquiv",
+      "source_line": 33
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coordinateGermEquiv_coordinate",
+      "source_line": 38
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualTaylor_coordinateGermEquiv",
+      "source_line": 46
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coordinateGermEquiv_polynomial",
+      "source_line": 60
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "firstNormalIndex",
+      "source_line": 73
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "normalPivotPermutation",
+      "source_line": 77
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "normalPivotPermutation_pivot",
+      "source_line": 80
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "normalPivotPermutation_tangent",
+      "source_line": 84
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "normalPivotPermutation_normal_set",
+      "source_line": 94
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_analyticCoordinateIdeal_coordinateGermEquiv",
+      "source_line": 116
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_formalCoordinateIdeal_rename",
+      "source_line": 128
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_normalIdeal_pow_normalPivotPermutation",
+      "source_line": 140
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_maximalIdeal_pow_coordinateGermEquiv",
+      "source_line": 146
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "map_formal_normal_pow_normalPivotPermutation",
+      "source_line": 170
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "normalPivotPermutation_tangentPullback",
+      "source_line": 176
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "normalPivotPermutation_tangent_mul",
+      "source_line": 198
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "rename_subst",
+      "source_line": 204
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "rename_chart_coordinates",
+      "source_line": 208
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "rename_actualFormalBlowup",
+      "source_line": 217
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coordinateGermEquiv_actualAnalyticBlowupPullback",
+      "source_line": 234
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "coordinateGermEquiv_analytic_chart_conjugacy",
+      "source_line": 252
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "image_tangentScalingVariables",
+      "source_line": 258
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-normal-reindex-whole-taylor",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateLinearEquiv",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_coordinate",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.actualTaylor_coordinateGermEquiv",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_polynomial"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "896fffb7bc4c939646a9aea61959490155b0bec34f6b161448b6fe6089be698a"
+    },
+    {
+      "label": "hir:actual-normal-reindex-pivot-powers",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.firstNormalIndex",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_pivot",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_normal_set",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_analyticCoordinateIdeal_coordinateGermEquiv",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_formalCoordinateIdeal_rename",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_normalIdeal_pow_normalPivotPermutation",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_formal_normal_pow_normalPivotPermutation",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_maximalIdeal_pow_coordinateGermEquiv",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangentPullback",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent_mul"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "0cd3cdd1b965b6d120f5c9335cd73abea16223f1af5f635f60136f888c2d9513"
+    },
+    {
+      "label": "hir:actual-normal-reindex-chart-conjugacy",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.rename_actualFormalBlowup",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_actualAnalyticBlowupPullback",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_analytic_chart_conjugacy",
+        "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.image_tangentScalingVariables"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "b129746026bbcc6af07e9a59e09841fc6df5e0952f44b3cbc5e7fe30b1f2785c"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.firstNormalIndex._proof_1",
+      "transitive_axioms": []
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_pivot",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.rename_actualFormalBlowup",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.actualTaylor_coordinateGermEquiv",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_analyticCoordinateIdeal_coordinateGermEquiv",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_actualAnalyticBlowupPullback",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.firstNormalIndex.eq_1",
+      "transitive_axioms": []
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv._proof_4",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.image_tangentScalingVariables",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.0.TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.rename_subst",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv._proof_3",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_normalIdeal_pow_normalPivotPermutation",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent._proof_1_3",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent_mul",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateLinearEquiv._proof_1",
+      "transitive_axioms": [
+        "propext"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateLinearEquiv",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_formalCoordinateIdeal_rename",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_formal_normal_pow_normalPivotPermutation",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_polynomial",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_analytic_chart_conjugacy",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.firstNormalIndex",
+      "transitive_axioms": []
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.0.TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.rename_chart_coordinates",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangentPullback",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.map_maximalIdeal_pow_coordinateGermEquiv",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_normal_set",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_coordinate",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 33,
+  "transitive_axiom_histogram": {
+    "(none)": 3,
+    "Classical.choice, Quot.sound, propext": 27,
+    "Quot.sound, propext": 2,
+    "propext": 1
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-normal-coordinate-reindex/kernel.log",
+    "sha256": "2ab26ad36586096f4e825c8fb9862f079c52e3ba242884a4ebb1453db170da4a",
+    "bytes": 79
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-normal-coordinate-reindex/actual-roots.log",
+    "sha256": "067b0df2fdca2e0697d7c250835475c485f15d03897a5e8db0be17ce69b007c9",
+    "bytes": 7723
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-normal-coordinate-reindex/ActualRoots.lean",
+    "sha256": "11b2ec2e67e1eb0e755d0c503435d86bb6fce020ac2790a4022b1c9d30d96de5",
+    "bytes": 864
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/global-history/normal-coordinate-reindex/native-build.log",
+    "sha256": "501c5977f56d9fd95618fde4a59962dd2506f793e120aabd43a5f34b7871f827",
+    "bytes": 140
+  },
+  "native_build_jobs": 4942,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 264-line source, every finite-index, coordinate-ideal and full substitution helper, and all THREE complete written BP proofs reviewed. The genuine continuous complex-linear coordinate isometry and actual germ algebra equivalence send each coordinate germ to the literal permuted coordinate. Actual full germ-to-formal uniqueness applies because these true coordinate images lie in the formal maximal ideal, deriving the ENTIRE Taylor/renaming square rather than only polynomial equality; polynomial universality gives the same original analytic evaluation square. A Fin t normal pivot internally supplies t>0. Its genuine swap with the first normal ambient index fixes EVERY tangent coordinate and preserves the WHOLE normal set. Mapping analytic/formal coordinate-ideal spans gives precisely the actual image coordinate set, so true ideal-map powers preserve all whole normal powers, including q=0. Actual origin evaluation is invariant under the genuine linear germ equivalence and its inverse, proving entire analytic maximal-ideal and all-power preservation. Whole tangent pullback is fixed for EVERY original tangent germ by the actual coordinate uniqueness theorem followed by true ambient Taylor injectivity, so multiplication gives linearity over the unchanged actual tangent germ algebra. For arbitrary actual chart constants, formal renaming is the genuine X-coordinate substitution. True composition of complete formal substitutions and literal chart coordinate identities give the whole chart square with selected set r(A), pivot r(e) and direction b composed with r inverse. This uses actual HasSubst composition, not a false inference that arbitrary formal homomorphisms agree from polynomial coordinates alone. The true analytic Taylor reindexing square and actual chart Taylor naturality identify the entire Taylor series of both genuine analytic compositions; actual injectivity gives whole germ equality and conjugacy by the real inverse. Finally bijective image of complements and singletons gives the literal tangent-scaling selected-set identity. No fixed degree-lex order, canonical reduced-vertex selection or owner-recursion equivariance is assumed or inferred.",
+  "proven_scope": "Actual tangent-algebra-fixing normal pivot swap, whole analytic/formal normal powers and analytic maximal powers; actual original polynomial/germ/formal Taylor reindexing and complete arbitrary-direction chart conjugacy, including the tangent-scaling selected set.",
+  "scope_limits": [
+    "The prescribed normal pivot internally supplies a nonempty normal block. This is a genuine coordinate/ideal/chart equivalence, not selection of a resolution chart or monic family.",
+    "Fixed degree-lex orders, canonical reduced vertices and owner recursions are NOT asserted equivariant. A fixed order may instead be chosen in the reindexed ring and entire analytic conclusions transported back.",
+    "Suitable same-family image generation, relative maximal standardness, original relative HS criterion and history laws remain separate."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-normal-coordinate-reindex/review-config.json",
+    "sha256": "bdb90a7db640e9ab3df28ee44bc91ba66782b1da03c0059f43ca0cdf87008e8e",
+    "bytes": 3970
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/global-history/normal-coordinate-reindex/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/global-history/normal-coordinate-reindex/peer-review-principal.json"
+}

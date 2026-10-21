@@ -1,0 +1,17 @@
+/-! Retain the actual original nonlinear centre chart-stalk ambient HS on its genuine real domain. -/
+set_option autoImplicit false
+open Set Filter
+open scoped Topology Manifold ContDiff DirectSum
+namespace Hironaka.HironakaSmoothCentreRealDomainActualAmbientHS
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm
+  HironakaHolomorphicPointJets HironakaRelativeNormalActualHSConvolution
+  HironakaSmoothCentreRealDomainOriginalStalkFreeness HironakaSmoothCentreNearbyStalks
+  HironakaSmoothCentreCoherentDomain HironakaSmoothCentreRelativeIdeal
+  HironakaSmoothCentreNearbyIdeal
+  HironakaHolomorphicJetRankLoci HironakaRelativeNormalIdeal HironakaRelativeNormalAssociatedGraded
+  HironakaRelativeNormalGradedAlgebra HironakaRelativeNormalCoherentTranslatedJets
+  HironakaRelativeNormalDeformationInitialRelations HironakaRelativeNormalNearbyUniformRanks
+  HironakaRelativeNormalActualWeightedTruncations
+  HironakaHolomorphicJetChartInvariance
+

@@ -1,0 +1,191 @@
+\section{Finite whole canonical values after the actual first NC step}
+\label{sec:hironaka-normal-crossings-first-step-finite-values}
+
+Assume $n>0$. Retain the unchanged original NC marking-one datum $M_H$,
+its positive highest branch count $r$, and a genuine blowup of its entire
+highest stratum. The invariant throughout is exactly
+$R_n=\mathrm{canonicalInvariant}(n)$. No equality of invariant depths,
+compactness, prescribed finite value image or later history is assumed.
+
+\begin{lemma}[The actual coordinate union has its intrinsic coordinate count]
+\label{hir:general-nc-coordinate-carrier-intrinsic-count}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.coordinateCarrier_branchMultiplicity}
+For the actual coordinate union $H_S$, the intrinsic branch count at $w$
+equals the number of selected coordinates vanishing at $w$.
+\uses{hir:general-nc-standard-coordinate-carrier}
+\end{lemma}
+\begin{proof}
+Translate $w$ to zero and restrict to the actual open neighbourhood on
+which every selected coordinate nonzero at $w$ remains nonzero. The whole
+carrier on this neighbourhood is then the union of precisely the selected
+coordinates that vanish at $w$. Translation leaves those coordinates
+unchanged because their values at $w$ are zero. This gives a genuine
+centred NC presentation with exactly that finite index set. The intrinsic
+branch-count theorem for an actual NC presentation identifies its
+cardinality with the intrinsic count.
+\end{proof}
+
+
+
+\begin{lemma}[The fixed entire coordinate-model first history is genuinely canonical]
+\label{hir:general-nc-entire-coordinate-first-history-canonical}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.coordinate_model_first_isCanonical}
+For the union of the last $r$ coordinate hyperplanes, with $r>0$ and
+exactly $r$ selected indices, the global highest stratum is the whole
+coordinate centre. Every genuine blowup of that centre is an actual
+first canonical test step for the unchanged original coordinate datum.
+\uses{hir:general-nc-coordinate-carrier-intrinsic-count,hir:general-nc-ambient-canonical-initial-full-maximum}
+\end{lemma}
+\begin{proof}
+The preceding formula bounds every coordinate count by $r$ and gives
+count $r$ at zero. A point has count at least $r$ precisely when all
+selected coordinates vanish: its selected vanishing-coordinate subset
+has full cardinality and hence equals the selected set. Thus its whole
+highest stratum is exactly the coordinate centre. Apply the actual
+ambient-dimensional initial full-maximum theorem to this original NC
+carrier, using zero for attainment. The centre of the given genuine
+blowup is consequently the entire whole maximum. The canonical-step
+constructor gives the first canonical history, and proved maximum
+admissibility gives its actual test-history property.
+\end{proof}
+
+\begin{theorem}[Finite whole model values on the actual exceptional fibre]
+\label{hir:general-nc-entire-model-finite-whole-fibre-values}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.finite_coordinate_first_fibre_values}
+The whole value image of $R_n$ on the actual transformed cosupport over
+zero in that same fixed entire coordinate-model first blowup is finite.
+\uses{hir:general-nc-entire-coordinate-first-history-canonical,hir:general-nc-finite-geometric-fibre-orbit-representatives}
+\end{theorem}
+\begin{proof}
+The preceding lemma supplies genuine entire-model canonicity. Actual
+diagonal base maps preserve the whole original coordinate carrier and
+therefore its entire vanishing-ideal marked record, including the empty
+boundary and marking one. Their actual lifted one-step history
+isomorphisms preserve the literal transformed cosupport by the whole
+transform law. The invariant's genuine tower-isomorphism law therefore
+makes the entire first-step values equal at each point and its actual
+diagonal image. The finite geometric representative producer supplies
+one fixed finite set $Q$ and, for every point of the fibre, such an actual
+lift taking it into $Q$. Its value thus belongs to the image of $Q$ under
+the fixed entire-model value function. This image is finite. Unused
+indexed points in $Q$ cause no difficulty, since only containment in
+that finite image is needed.
+\end{proof}
+
+\begin{lemma}[The actual original first history compares with the same entire model]
+\label{hir:general-nc-original-first-value-entire-coordinate-model}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.exists_highest_chart_entire_canonical_value}
+At a point over the original highest stratum, the original whole
+first-step value equals the fixed entire coordinate-model value at an
+actual point over zero, with transformed cosupport retained.
+\uses{hir:general-nc-first-step-whole-canonical-chart-value,hir:general-nc-entire-coordinate-first-history-canonical}
+\end{lemma}
+\begin{proof}
+Choose the highest-stratum chart at the actual image of the blown-up
+point. The actual one-step chart-history producer constructs the genuine
+history isomorphism, whole original-record identity and whole value
+equality on the literal coordinate open history. Its exact commuting
+projection takes the actual point to a coordinate-model point over zero,
+because the chosen chart is centred at its original image. The whole
+history transform and cosupport restriction identities put this actual
+image point in the literal transformed coordinate cosupport.
+
+The fixed entire-model history is canonical by the preceding lemma.
+Apply its proved open restriction law to the coordinate open target.
+Actual vanishing-ideal restriction identifies the pulled-back original
+record with the literal original coordinate-open datum. The whole
+cosupport restriction identity supplies its point hypothesis. Composing
+this restriction equality with the actual chart-history value equality
+gives the asserted equality with the SAME entire-model history. Only
+after this step is diagonal normalization used; no scaling is required
+to preserve the original chart's open target.
+\end{proof}
+
+\begin{lemma}[Finite original initial values and the actual off-centre branch]
+\label{hir:general-nc-initial-and-first-off-centre-finite-values}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.finite_initialValue_image,Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.finite_first_off_centre_values}
+Every proved invariant with dimension bound at least $n$ has a finite
+whole initial value image on an actual original NC carrier. For $R_n$,
+the actual first-step value image off the first centre is finite.
+\uses{hir:general-nc-generic-initial-value-flat-chart,hir:general-nc-ambient-canonical-initial-full-maximum}
+\end{lemma}
+\begin{proof}
+At every original carrier point, its actual NC presentation selects a
+subset $S$ of the finite coordinate index type. Generic whole initial
+chart transport identifies its entire value with that of $H_S$ at zero.
+There are only finitely many such selected subsets, so the original
+value image is contained in a finite range of actual model values.
+For the actual first canonical blowup, the proved off-centre invariant
+law leaves every whole value unchanged at its original image. Actual
+test-transform cosupport projection puts that image in the unchanged
+original cosupport, which equals the original carrier. Thus all
+off-centre first-step values belong to the same finite initial image.
+\end{proof}
+
+\begin{theorem}[Finite whole values after the actual first original NC blowup]
+\label{hir:general-nc-first-step-finite-entire-whole-values}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.finite_first_canonical_value_image,Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.exists_first_canonical_whole_maximum}
+From the actual original NC carrier, its positive attained highest
+stratum and a genuine blowup of that stratum, the entire first transformed
+cosupport has a finite whole $R_n$ value image. In particular a nonempty
+first transformed cosupport has an internally attained whole maximum.
+\uses{hir:general-nc-entire-model-finite-whole-fibre-values,hir:general-nc-original-first-value-entire-coordinate-model,hir:general-nc-initial-and-first-off-centre-finite-values}
+\end{theorem}
+\begin{proof}
+An actual highest-stratum NC chart at an attained point has precisely
+the last $r$ branches. The intrinsic chart-count theorem therefore
+derives that this selected coordinate set has cardinality $r$ from the
+original geometry. The actual highest-stratum blowup producer for the
+corresponding whole coordinate NC carrier internally chooses a fixed
+genuine entire-model blowup. Its actual whole highest centre is the
+coordinate centre by the coordinate-count lemma.
+
+Split the original first transformed cosupport into points over the
+centre and points off it. In the first case, centre the actual original
+chart at the point's original image. Whole history comparison with the
+SAME fixed entire model puts its value in that model's finite whole
+fibre image. In the second case, the preceding off-centre lemma gives
+a finite whole value image. Their union is finite, so the whole original
+first-step image is finite. If the transformed cosupport is nonempty,
+so is this finite image. Its finite linear order has an actual greatest
+element; choosing its actual preimage yields a transformed-cosupport
+point attaining the whole maximum. No compactness or maximum certificate
+is used, and no third or later step or terminal resolution follows
+from this finite first-stage statement alone.
+\end{proof}
+
+\begin{theorem}[Actual first-prefix resolution or a genuine second full canonical blowup]
+\label{hir:general-nc-actual-second-full-canonical-step}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepFiniteValues.first_canonical_step_terminal_or_second}
+For the same original datum and actual highest-stratum first blowup,
+either that actual first tower is a marked test resolution, or its
+nonempty whole full maximum internally supplies an actual second
+canonical test blowup. The original tower, chronological boundary and
+unchanged original invariant are retained literally.
+\uses{hir:general-nc-first-step-finite-entire-whole-values}
+\end{theorem}
+\begin{proof}
+The initial whole-maximum theorem makes the actual original first tower
+canonical and hence a test tower. If its transformed cosupport is empty,
+these exact two properties constitute a test resolution. Otherwise the
+preceding finite-image theorem supplies a point attaining its whole
+canonical maximum, so that entire maximum locus is nonempty. The proved
+invariant admissibility law makes this same entire maximum a closed
+smooth admissible centre for the unchanged current marked datum.
+Cosupports along actual test towers of a genuine original invariant
+domain have empty interior; hence their whole maximum loci have empty
+interior as well. Actual smooth-centre blowup existence therefore
+constructs a genuine blowup of that same entire maximum. Appending it
+to the literal original first tower gives an actual test step by the
+derived admissibility and a canonical step by the derived full-maximum
+identity. No second centre, value, history or existence certificate is
+input. This produces an actual second step when needed, without
+asserting a third step or global termination.
+\end{proof}

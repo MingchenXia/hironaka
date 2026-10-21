@@ -1,0 +1,20 @@
+set_option autoImplicit false
+
+open Set Filter
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.StrictTransformComposition
+
+open FirstPass FirstPass.BlowupSequences
+
+noncomputable section
+
+variable {n : ℕ}
+  {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+    [IsComplexManifold n X]
+  {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+    [IsComplexManifold n Y]
+  {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z]
+    [IsComplexManifold n Z]

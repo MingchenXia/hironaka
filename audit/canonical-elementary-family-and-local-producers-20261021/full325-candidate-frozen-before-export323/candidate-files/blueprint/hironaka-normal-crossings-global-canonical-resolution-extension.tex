@@ -1,0 +1,116 @@
+\section{Actual global canonical resolution of original normal-crossing carriers}
+
+\begin{theorem}[Finite entire coordinate maximum candidates at every actual length]
+\label{hir:general-nc-finite-entire-prefix-maximum-candidates}
+\uses{hir:canonical-word-finite-attained-maxima}
+\lean{Hironaka.HironakaNormalCrossingsGlobalCanonicalResolution.finite_coordinate_maximum_candidates}
+\leanok
+For each fixed actual prefix length $j$, only finitely many entire
+attained maximum values occur among all weak canonical histories of
+all original coordinate normal-crossing marking-one models in the
+given dimension. No geometric finite-orbit assertion or full value-image
+finiteness is assumed.
+\end{theorem}
+\begin{proof}
+There are finitely many subsets of the finite set of ambient coordinate
+indices. Each such subset fixes one whole original coordinate marked
+record. The genuine recipe-history theorem gives finitely many entire
+attained maximum candidates for this record at length $j$, retaining
+every empty and full-maximum historical slot. Take the finite union of
+these finite candidate sets over the actual coordinate subsets.
+\end{proof}
+
+\begin{theorem}[Every original general NC prefix attains its entire global maximum]
+\label{hir:general-nc-actual-entire-global-maximum}
+\uses{hir:general-nc-finite-entire-prefix-maximum-candidates,hir:general-nc-every-actual-canonical-prefix-coordinate-history,hir:general-nc-actual-chart-history-whole-value-and-cosupport,hir:homogeneous-every-whole-value-over-origin-neighbourhood,hir:homogeneous-model-every-prefix-whole-maximum}
+\lean{Hironaka.HironakaNormalCrossingsGlobalCanonicalResolution.nc_maxLocus_nonempty}
+\leanok
+For an original general normal-crossing carrier $H$, its unchanged
+whole datum $M_H=(X,X,\varnothing,I_H,1)$, and any actual weak canonical
+prefix with nonempty cosupport, the entire global invariant maximum
+is attained. No compactness, selected model histories, proposed maximum,
+finite value-image or termination certificate is an input.
+\end{theorem}
+\begin{proof}
+Fix an actual cosupport point and choose the internally produced
+original chart history at its image in $X$. It gives an entire
+coordinate canonical history of exactly the same length, with genuine
+whole cosupport and invariant comparisons on the literal restrictions.
+Its cosupport is nonempty, hence its entire maximum is attained by the
+genuine homogeneous model theorem. That maximum value is among the
+finite candidates of the first theorem.
+
+Every entire model value, including this maximum, is represented over
+the actual origin-neighbourhood chart target. Carry such a maximizing
+representative back through the actual chart-history biholomorphism.
+It is an actual point of the original cosupport with exactly that same
+candidate value. The original point's value is at most this value,
+by the actual whole model maximum and the genuine value comparison.
+Thus every original value is bounded above by an actually attained
+candidate value in one fixed finite set.
+
+Intersect that finite candidate set with the actual image of the
+original cosupport. This intersection is nonempty by the preceding
+construction. Its largest element is the value of an actual original
+cosupport point. Every original value is bounded by a member of the
+intersection, hence by this largest element. Its actual preimage is
+therefore a point of the entire original maximum locus.
+\end{proof}
+
+\begin{theorem}[A genuine global full-maximum successor for original general NC data]
+\label{hir:general-nc-actual-global-canonical-successor}
+\uses{hir:general-nc-actual-entire-global-maximum}
+\lean{Hironaka.HironakaNormalCrossingsGlobalCanonicalResolution.exists_nc_canonical_successor}
+\leanok
+Every nonterminal actual canonical prefix of that same original
+general NC datum internally supplies a genuine blowup of its nonempty
+entire global maximum, and an actual canonical test successor.
+\end{theorem}
+\begin{proof}
+The preceding theorem supplies nonemptiness of the actual whole maximum.
+The original NC geometry puts the unchanged original marked record in
+the invariant domain. The actual invariant theorem makes its whole
+maximum a closed smooth admissible centre, and the original positive
+mark and domain imply its interior is empty. Genuine smooth-centre
+blowup existence now produces an actual complex manifold and actual
+blowup along this centre. Append it to the same original prefix; actual
+admissibility gives testness and the literal full-maximum equation gives
+canonicality. No successor space or centre is supplied.
+\end{proof}
+
+\begin{theorem}[A literal finite canonical suffix and direct original canonical resolution]
+\label{hir:general-nc-actual-global-canonical-finite-resolution}
+\uses{hir:general-nc-actual-global-canonical-successor,hir:general-nc-actual-entire-global-maximum,hir:homogeneous-actual-finite-canonical-resolution-suffix}
+\lean{Hironaka.HironakaNormalCrossingsGlobalCanonicalResolution.exists_nc_resolution_suffix,Hironaka.HironakaNormalCrossingsGlobalCanonicalResolution.exists_canonicalInvariant_nc_resolution}
+\leanok
+For a proved resolution invariant with genuinely well-founded value
+order, every nonempty-centre canonical segment of the original datum
+of a general NC carrier has a literal finite appended suffix resolving
+that same datum. In particular the actual original
+$\operatorname{canonicalInvariant}(n)$ gives such a finite canonical
+resolution directly from $H$ alone, using its existing well-founded
+value-type instance. The ambient manifold and carrier need not be compact.
+\end{theorem}
+\begin{proof}
+Induct on an upper bound in the genuine well-founded value order,
+retaining the actual original prefix. If its cosupport is empty, the
+identity suffix suffices. Otherwise the second theorem gives its entire
+maximum and the third theorem constructs a true next blowup of that
+whole nonempty maximum. Every new cosupport value is strictly below
+the old entire maximum, by the actual on-centre strict decrease and
+off-centre invariance law of the proved resolution invariant. If the
+new cosupport is empty, this one step is the suffix. Otherwise its
+entire maximum is attained again by the second theorem, hence is
+strictly below the preceding bound. Apply the well-founded induction
+hypothesis to this same literal extended history. Append the one-step
+suffix to its returned actual suffix; associativity gives the required
+literal appended history and retains all nonempty whole-maximum centres.
+Start at the identity segment and specialize to the genuine existing
+well-founded value type of the actual canonical invariant in dimension
+$n$. No external numerical bound or terminal-history certificate is used.
+\end{proof}
+
+These results concern $I_H$ with marking one and empty original boundary.
+They do not yet permit an arbitrary merely normal-crossing initial
+boundary for an arbitrary marked datum; that original G9 endpoint and
+its joint strict-trace/admissibility/good-locus dictionary remain separate.

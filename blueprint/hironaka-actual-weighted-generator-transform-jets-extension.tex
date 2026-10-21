@@ -1,0 +1,95 @@
+\section{Actual weighted generator transforms and every exceptional jet}
+\label{sec:hironaka-actual-weighted-generator-transform-jets}
+Let $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$ and $N=(z_1,\ldots,z_t)$.
+Fix the genuine $j$-th normal blowup chart, with exceptional coordinate $e=z_j$ and its actual translated parameters $b$.
+Write $P_k(g)$ for the genuine finite normal homogeneous polynomial of degree $k$ of $g$, with its entire original $B$-germ coefficients, and $D_{j,b}$ for its literal dehomogenized evaluation ($z_j=1$, $z_i=b_i+z_i$ for $i\ne j$).
+
+\begin{theorem}[The whole finite normal band is the actual Taylor truncation]
+\label{hir:actual-weighted-transform-normal-band}
+\uses{hir:actual-normal-homogeneous-polynomial,hir:actual-normal-power-canonical-homogeneous-polynomial}
+\lean{Hironaka.HironakaActualWeightedGeneratorTransformJets.normalBandPolynomial,Hironaka.HironakaActualWeightedGeneratorTransformJets.actualNormalTaylorPolynomial_succ,Hironaka.HironakaActualWeightedGeneratorTransformJets.normalBandPolynomial_eq_Taylor,Hironaka.HironakaActualWeightedGeneratorTransformJets.normalBand_remainder}
+\leanok
+For $g\in N^m$ and every $q\ge0$,
+$\sum_{r<q}P_{m+r}(g)$ is exactly the genuine normal Taylor polynomial of $g$ below degree $m+q$.
+Consequently $g-\sum_{r<q}P_{m+r}(g)(z)\in N^{m+q}$.
+\end{theorem}
+\begin{proof}
+The coefficient at exponent $\gamma$ of the degree-$k$ polynomial is the stable actual analytic normal coefficient of $g$ when $|\gamma|=k$, and zero otherwise.
+Thus the $(k+1)$-truncation is the $k$-truncation plus $P_k(g)$, coefficient by coefficient: degrees below $k$ agree by actual coefficient stability, degree $k$ is supplied precisely by $P_k$, and higher degrees vanish on both sides.
+The $m$-truncation is zero because $g\in N^m$ forces all its entire low normal coefficient germs to vanish; higher coefficients of the truncation already vanish.
+Induction on $q$, using the preceding successor equality, proves the displayed band identity.
+Its evaluation remainder is the proved actual normal Taylor remainder in the whole ideal $N^{m+q}$.
+\end{proof}
+
+\begin{theorem}[The actual blowup keeps every weighted normal-band term]
+\label{hir:actual-weighted-transform-band-factorization}
+\uses{hir:actual-weighted-transform-normal-band,hir:actual-normal-polynomial-blowup-factorization,hir:actual-normal-dehomogenized-polynomial-family-ideal}
+\lean{Hironaka.HironakaActualWeightedGeneratorTransformJets.weightedTransformJet,Hironaka.HironakaActualWeightedGeneratorTransformJets.blowup_normalBand_factorization}
+\leanok
+Define $J_{m,q}(g)=\sum_{r<q}e^rD_{j,b}(P_{m+r}(g))$ using the actual entire analytic germs.
+The actual blowup pullback of the evaluated band is exactly $e^mJ_{m,q}(g)$.
+These are the literal dehomogenized coefficient germs over the entire original tangent ring.
+\end{theorem}
+\begin{proof}
+Each $P_{m+r}(g)$ is genuinely homogeneous of degree $m+r$ over $B$.
+The actual analytic blowup fixes every tangent coefficient and takes every normal variable to $e$ times its displayed dehomogenized coordinate.
+The proved whole homogeneous factorization is therefore $e^{m+r}D_{j,b}(P_{m+r}(g))$ for that term.
+Add the finitely many identities and factor $e^m$ using $e^{m+r}=e^me^r$.
+Dehomogenized evaluation contains no exceptional coordinate: the pivot has been replaced by $1$, every other normal coordinate is fixed by its contraction, and all tangent germs are fixed.
+The genuine contraction theorem hence fixes each entire coefficient germ, not only its finite jets.
+\end{proof}
+
+\begin{theorem}[Every actual weighted quotient has all its literal exceptional jets]
+\label{hir:actual-weighted-transform-all-exceptional-jets}
+\uses{hir:actual-weighted-transform-band-factorization}
+\lean{Hironaka.HironakaActualWeightedGeneratorTransformJets.actual_weighted_quotient_jet_remainder,Hironaka.HironakaActualWeightedGeneratorTransformJets.actual_weighted_quotient_jet_class}
+\leanok
+If $g\in N^m$ and $e^mH=\operatorname{blowup}^*g$ is the genuine analytic quotient equation, then for every $q$,
+\[
+ H-J_{m,q}(g)\in(e^q),\qquad [H]_{(e^q)}=[J_{m,q}(g)]_{(e^q)}.
+\]
+Thus every actual exceptional jet is expressed by the literal normal homogeneous coefficients of the same original generator.
+\end{theorem}
+\begin{proof}
+The band remainder is in $N^{m+q}$.
+The actual blowup maps this whole ideal to $(e^{m+q})$, so its pullback is $Ke^{m+q}$ for an actual analytic germ $K$.
+The quotient equation and band factorization identify this pullback with $e^m(H-J_{m,q}(g))$.
+Since the genuine coordinate germ $e$ is nonzero in the analytic germ domain, cancel $e^m$ to obtain $H-J_{m,q}(g)=e^qK$.
+This proves whole principal-ideal membership and hence equality in the true quotient ring.
+The same argument includes $m=0$ and $q=0$.
+\end{proof}
+
+\begin{theorem}[A genuine finite weighted vertex family retains every whole exceptional jet ideal]
+\label{hir:actual-weighted-generator-whole-jet-ideals}
+\uses{hir:actual-weighted-transform-all-exceptional-jets,hir:actual-reduced-centre-compatible-analytic-vertex-data,hir:actual-formal-strict-ideal-monic-family-generators,hir:actual-analytic-normalized-member-formal-inclusion}
+\lean{Hironaka.HironakaActualWeightedGeneratorTransformJets.exists_actual_weighted_transform_jets_of_vertex_data,Hironaka.HironakaActualWeightedGeneratorTransformJets.exists_actual_weighted_vertex_transform_jets}
+\leanok
+For any actual analytic monic vertex coefficient data $P$ for $I$ with its genuine generators $G_a=P.\mathrm{generator}(a)$ in $N^{w(a)}$, the following construction retains those prescribed generators. Moreover, the actual original ideal $I$ and its genuine canonical reduced normal powers internally produce such $P$ and normal-power membership before the blowup chart is chosen.
+For every actual normal chart there are genuine quotients $H_a$ with $e^{w(a)}H_a=\operatorname{blowup}^*G_a$, generating the entire actual normalized-member ideal.
+For every $q$, its image in $R/(e^q)$ is precisely the ideal spanned by $[J_{w(a),q}(G_a)]$.
+\end{theorem}
+\begin{proof}
+In the supplied-data statement retain the exact analytic monic vertex family in $P$. For the existence statement choose the actual analytic centre-compatible monic vertex coefficient data from the proved reduced normal powers, before choosing a blowup chart.
+Its actual normal powers construct genuine analytic quotients in each chart.
+Taylor naturality identifies their formal series with the normalized monic family, whose whole actual formal strict ideal is generated by the proved whole-division theorem.
+Every analytic normalized member maps into that formal strict ideal, while the actual quotient family belongs to the analytic normalized-member ideal.
+Faithful original/formal ideal contraction therefore identifies the entire analytic normalized-member ideal with the span of these same $H_a$.
+Apply the preceding exact quotient class formula to every generator.
+Mapping the whole span into $R/(e^q)$ and substituting these class identities proves both ideal inclusions, hence the exact asserted image ideal.
+\end{proof}
+
+\begin{theorem}[The original constant-HS centre produces the weighted transform dictionary]
+\label{hir:actual-original-weighted-generator-transform-jets}
+\uses{hir:actual-weighted-generator-whole-jet-ideals,hir:actual-original-centre-reduced-normal-powers}
+\lean{Hironaka.HironakaActualWeightedGeneratorTransformJets.exists_original_hs_constant_centre_weighted_transform_jets}
+\leanok
+Original coherence, regular-centre geometry and all-order original Hilbert--Samuel constancy supply one actual flattening $\Phi$, its unchanged origin ideal $I_0$, and the preceding weighted family and all-chart, all-order exceptional jet ideal dictionary for that same $I_0$.
+No weighted presentation, transform-tracking, equal-HS-at-new-point, or terminal-phase certificate is supplied.
+\end{theorem}
+\begin{proof}
+Invoke the original-only canonical reduced normal-power producer once and retain its actual flattening, original origin ideal and centre-membership equivalence.
+Those internally proved powers are exactly the hypothesis of the preceding family construction on this same ideal.
+Apply that construction, retaining its one source family before all normal charts and all jet orders.
+\end{proof}
+
+This is an actual finite exceptional-jet transform dictionary. It does not assert that equal Hilbert--Samuel values force a persistent weighted coefficient presentation, identify the driver invariant, or prove strict decrease or termination.

@@ -1,0 +1,36 @@
+\section{Actual singular centres have normal codimension at least two}
+\label{sec:hironaka-actual-singular-centre-codimension}
+
+\begin{theorem}[The true singular-locus bound forces centre codimension]
+\label{hir:actual-singular-centre-normal-codimension-two}
+\uses{rem:pure-singular-locus,rem:dimension-monotone,hir:analytic-dimzero-all-points-regular}
+\lean{Hironaka.HironakaActualSingularCentreCodimension.regular_singular_centre_add_two_le,Hironaka.HironakaActualSingularCentreCodimension.normal_codimension_two_of_regular_singular_centre}
+\leanok
+Let $W$ be an analytic pure $r$-dimensional subset of an $n$-manifold, with $r<n$, and let $C\subset W\setminus W_{\rm reg}$.
+At every genuine regular point of $C$ of dimension $k$, one has $k+2\le n$.
+In particular, if $n=k+t$, the actual normal codimension satisfies $t\ge2$.
+\end{theorem}
+\begin{proof}
+The regular point belongs to $C$ and therefore to the singular locus of $W$.
+If $r=0$, the analytic dimension-zero regularity theorem makes every point of $W$ regular of dimension zero, contradicting this singular membership. Thus $r>0$.
+The proved analytic singular-locus dimension bound is $\dim W_{\rm sing}\le r-1$.
+Monotonicity of actual analytic dimension under inclusion gives $\dim C\le r-1$, so its specified regular dimension satisfies $k\le r-1$.
+Since $r>0$ and $r<n$, natural-number arithmetic gives $k+2\le n$.
+Substitution of $n=k+t$ gives $2\le t$.
+\end{proof}
+
+\begin{theorem}[The same internally chosen singular blowup has this codimension]
+\label{hir:actual-original-chosen-singular-centre-codimension-two}
+\uses{hir:actual-singular-centre-normal-codimension-two,hir:actual-original-hs-constant-singular-centre-proper-blowup}
+\lean{Hironaka.HironakaActualSingularCentreCodimension.exists_actual_original_singular_centre_proper_blowup_codimension_two}
+\leanok
+Original compact nonsmooth pure analytic geometry of dimension $r<n$, with its original SNC boundary, internally chooses an actual admissible HS-constant singular centre and a proper blowup.
+For this same centre $C$, every actual regular dimension $k$ at every point satisfies $k+2\le n$.
+The whole chosen centre, original HS-constancy, actual blowup, properness, original regular-open isomorphism and the unchanged boundary conclusions are retained.
+\end{theorem}
+\begin{proof}
+Choose the genuine proper singular-centre blowup from the existing original-only producer, retaining its centre, blowup and every stated geometric field.
+That centre is contained in the actual singular locus of the same original pure analytic set.
+Apply the preceding dimension theorem to that inclusion for each original regular centre point and dimension.
+No new centre or target chart is chosen, and no codimension premise is inserted.
+\end{proof}

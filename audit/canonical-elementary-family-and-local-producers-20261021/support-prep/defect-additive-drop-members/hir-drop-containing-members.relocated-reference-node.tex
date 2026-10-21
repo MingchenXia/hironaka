@@ -1,0 +1,23 @@
+\begin{lemma}[Deleting the members that contain every centre]
+\label{hir:drop-containing-members}
+\uses{bcalc:nc-comparison,bcalc:sub-divisor,bcalc:nc-comparison-transform,hir:drop-members,hir:snc,mc:strict-along,hir:geo-transform-basic,hir:test-tower,hir:wellformed-tower}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.DropMembers.isGeoTestTower_withE_iff_of_centresIn_of_snc,Hironaka.DropMembers.isGeoTestTower_withE_iff_of_centresIn}
+\leanok
+Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed, \(E'\) a list of members of \(E\), and \(S\) a set contained in every member of \(E\) missing from
+\(E'\) (for instance \(S=N\cap\bigcap_{H\in A}H\) and \(E'=E_S\) the sequence \(E\) without the members of a set \(A\)). For towers whose centres lie in the
+strict transforms \(S_T\) of \(S\): \(T\) is a multiple test blow-up of \(\underline{\mathcal I}\) if and only if it is one of
+\(\underline{\mathcal I}'=(M,N,E',\mathfrak a,d)\), and along it the two transforms have the same submanifold, ideal and cosupport (Lemma~\ref{hir:drop-members});
+their sequences differ by members containing \(S_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on the tower. The members of the transformed \(E'\) are members of the transformed \(E\) (strict transforms of members of \(E'\), and the exceptional
+divisor, which is in both). A member of the transformed \(E\) missing from the transformed \(E'\) is the strict transform of a member \(H\) missing from \(E'\),
+and \(S_T\subset H_T\) by induction; strict transforms are monotone, so it contains \(S_{T'}\) after the next blowup. A centre \(C\subset S_T\) therefore
+lies in every member missing from the transformed \(E'\), and, the transform of \(\underline{\mathcal I}\) being well formed along a multiple test blow-up
+(Lemma~\ref{hir:wellformed-tower}), its divisor has simple normal crossings and the normal-crossings comparison (Theorem~\ref{bcalc:nc-comparison}) shows that \(C\)
+has only normal crossings with one divisor if and only if with the other. Submanifold, ideal and cosupport agree by Lemma~\ref{hir:drop-members}, so \(C\) is
+admissible for one transform if and only if for the other. Well-formedness is used only for the simple normal crossings of the transformed \(E\) along
+the multiple test blow-ups of \(\underline{\mathcal I}\); the lemma holds whenever these hold.
+\end{proof}

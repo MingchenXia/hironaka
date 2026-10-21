@@ -1,0 +1,86 @@
+\section{Actual point-normalized coefficients retain their literal source bands}
+
+Every series below belongs to the actual full formal ring. The point chart
+$(e,b)$ is arbitrary, and the exceptional quotient equation uses its literal
+blowup substitution. Write $P_d(F)$ for the actual finite degree-$d$
+source polynomial.
+
+\begin{theorem}[Every actual pivot coefficient is the literal dehomogeneous source-band coefficient]
+\label{hir:actual-point-normalized-all-pivot-coefficient-bands}
+\uses{hir:actual-point-exceptional-restriction-dehomogenized-polynomial,hir:actual-point-homogeneous-remainder-next-power,hir:actual-formal-blowup-normalized-member}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointNormalizedCoefficientBands.normalized_point_coefficient_band}
+\leanok
+Let $F\in\mathfrak m^w$ and let the genuine quotient satisfy
+$e^wH=\pi_b^*F$. For every $r\ge0$ and every pivot-free exponent
+$\gamma$,
+\[
+ [X^{\gamma+r\mathbf1_e}]H
+   =[X^\gamma]\operatorname{dehom}_{e,b} P_{w+r}(F).
+\]
+The source numerator, actual quotient and chart are retained for all labels.
+\end{theorem}
+\begin{proof}
+The actual source component and remainder theorem gives
+$F=P_w(F)+F_1$ with $F_1\in\mathfrak m^{w+1}$.
+Its genuine exceptional quotient $Q$ exists internally. Actual homogeneous
+blowup factorization gives
+$\pi_b^*P_w(F)=e^w\operatorname{dehom}_{e,b}P_w(F)$.
+Apply the literal substitution to the whole source decomposition and cancel
+the nonzero actual exceptional power in the formal domain. This yields
+\[
+ H=\operatorname{dehom}_{e,b}P_w(F)+eQ.
+\]
+The finite dehomogeneous polynomial is pivot free: every substituted
+variable is either $1$ or $b_i+X_i$ with $i\ne e$.
+
+Induct on $r$. At $r=0$, the $eQ$ coefficient at a pivot-free exponent is
+zero, so the displayed decomposition gives the assertion. At $r+1$, its
+finite polynomial coefficient is zero because that exponent has positive
+pivot value. The genuine monomial coefficient shift leaves the coefficient
+at $\gamma+r\mathbf1_e$ of $Q$. Apply the induction hypothesis to
+the actual numerator $F_1$, its power $w+1$ and its SAME quotient $Q$.
+The removed degree-$w$ source component has no coefficient in degree
+$w+1+r$, so its actual degree polynomial is exactly $P_{w+1+r}(F)$.
+This proves the formula at $r+1$. All cancellations and component
+equalities occur in the actual whole series ring.
+\end{proof}
+
+\begin{theorem}[Actual current powers and factors identify whole projected leading bands]
+\label{hir:actual-current-point-factor-source-band-dictionary}
+\uses{hir:actual-point-normalized-all-pivot-coefficient-bands,hir:actual-exceptional-pivot-projection-kernel-powers,hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointNormalizedCoefficientBands.dehom_band_coefficients_zero_of_current_power,TranscendentalNakamaye.Pending.HironakaActualPointNormalizedCoefficientBands.projected_current_factor_eq_source_band}
+\leanok
+Retain the same actual quotient and let $r\le q$. If $H\in\mathfrak m^q$,
+every band of $\operatorname{dehom}_{e,b}P_{w+r}(F)$ below degree
+$q-r$ vanishes. Independently, if its actual current degree-$q$ component factors as
+$H_q=e^rL$, then
+\[
+ \rho_e(L)=
+ \bigl(\operatorname{dehom}_{e,b}P_{w+r}(F)\bigr)_{q-r}
+\]
+as whole actual series.
+\end{theorem}
+\begin{proof}
+At a pivot-free exponent $\gamma$ of degree below $q-r$, the preceding
+formula identifies the source-band coefficient with the actual coefficient
+of $H$ at $\gamma+r\mathbf1_e$, whose degree is below $q$.
+The genuine maximal-power coefficient characterization makes it zero.
+At an exponent with positive pivot value, every dehomogeneous polynomial
+coefficient is already zero. This proves all lower-band vanishing.
+
+For the factor identity, genuine monomial multiplication in
+$H_q=e^rL$ implies that $L$ is homogeneous of degree $q-r$.
+Check every coefficient. At positive pivot exponent both sides vanish by
+literal pivot projection and dehomogeneous pivot freeness. At pivot-free
+degree unequal to $q-r$, both vanish by homogeneity. At pivot-free degree
+$q-r$, the actual coefficient shift identifies the coefficient of $L$
+with that of $H_q$, hence of $H$, at the shifted exponent of degree $q$.
+The preceding theorem identifies it with the literal source-band
+coefficient. Thus every genuine coefficient agrees, proving equality of
+the whole projected factor and the whole source band.
+\end{proof}
+
+These are actual coefficient and factor dictionaries. Whole current initial
+membership and genuine source directional tangent stability are separate
+geometric or algebraic producers; no desired order-retention conclusion is
+assumed or asserted here.

@@ -1,0 +1,9 @@
+namespace TranscendentalNakamaye.Pending.HironakaActualFormalNormalTruncations
+noncomputable section
+open FirstPass HolGerm HironakaRelativeNormalIdeal HironakaRelativeNormalMonomialBasis
+  HironakaActualCoefficientPresentationCentrePower HironakaActualFormalCoordinatePowerDivision
+  HironakaActualRelativeCoefficientGerms HironakaActualRelativeTaylorCoefficients
+variable (d t q : ℕ)
+local instance : Fintype (normalExponentIndex t q) := normalExponentFintype t q
+local instance : Algebra (MvPowerSeries (Fin d) ℂ) (MvPowerSeries (Fin (d+t)) ℂ) :=
+  (MvPowerSeries.rename (Fin.castAdd t : Fin d → Fin (d+t))).toRingHom.toAlgebra

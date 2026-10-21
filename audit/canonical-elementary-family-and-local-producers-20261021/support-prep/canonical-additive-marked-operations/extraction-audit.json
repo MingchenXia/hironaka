@@ -1,0 +1,290 @@
+{
+  "status": "DRAFT_ONLY_FOUR_COMPLETE_ORIGINAL_DECLARATIONS_SOURCE_STATIC_PASS_NO_RUNTIME",
+  "fixed_ordinary_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "ordinary_git_repository": "/workspace/archon-publish",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/MarkedIdealOperationsTransform.lean",
+  "source_git_blob_oid": "9ec78701b6d87287d3c98530140b07f907ff6889",
+  "source_sha256": "ddc2d3e73578c1486689b4216dfac9a5a019c5c555f14b5fc38a85eb9b5de347",
+  "source_line_count": 438,
+  "source_byte_identical_at_final45": true,
+  "whole_original_capture": "MarkedIdealOperationsTransform.whole-original.lean.txt",
+  "selected_complete_declarations": [
+    {
+      "native_name": "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_le_mul'",
+      "public_name": "Hironaka.MarkedIdealOperationsTransform.mul_le_mul'",
+      "original_lines": [
+        63,
+        66
+      ],
+      "scope": "Algebra",
+      "sha256": "adb9264be4615f89a94282bad7516f90e500805ad5cece77de170acd3e31fe54",
+      "complete_original_payload_file": "mul_le_mul_prime.complete-original.lean.txt",
+      "original_selected_source": "/-- Products are monotone. -/\ntheorem mul_le_mul' {𝔞 𝔞' 𝔟 𝔟' : GermIdeal n M} (h𝔞 : 𝔞.Le 𝔞') (h𝔟 : 𝔟.Le 𝔟') :\n    (𝔞.mul 𝔟).Le (𝔞'.mul 𝔟') := fun x _ hg =>\n  mem_mul_iff.mpr ((mem_mul_iff.mp hg).mono fun _ ⟨a, b, ha, hb, hs⟩ => ⟨a, b, h𝔞 x a ha, h𝔟 x b hb, hs⟩)\n"
+    },
+    {
+      "native_name": "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_mono",
+      "public_name": "Hironaka.MarkedIdealOperationsTransform.idealPow_mono",
+      "original_lines": [
+        68,
+        72
+      ],
+      "scope": "Algebra",
+      "sha256": "33e4dcf58c4e61a45c5c495ec504eed3b1a88b4830651fad26df49718db49355",
+      "complete_original_payload_file": "idealPow_mono.complete-original.lean.txt",
+      "original_selected_source": "/-- Powers are monotone in the ideal. -/\ntheorem idealPow_mono {𝔞 𝔟 : GermIdeal n M} (h : 𝔞.Le 𝔟) :\n    ∀ k : ℕ, (idealPow 𝔞 k).Le (idealPow 𝔟 k)\n  | 0 => fun _ _ hg => hg\n  | k + 1 => mul_le_mul' (idealPow_mono h k) h\n"
+    },
+    {
+      "native_name": "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_idealPow",
+      "public_name": "Hironaka.MarkedIdealOperationsTransform.controlledTransform_idealPow",
+      "original_lines": [
+        180,
+        188
+      ],
+      "scope": "Controlled",
+      "sha256": "c20e3b021617d7fbf43bf240f7cc16199d50b04a8210e4957b767988c9b84050",
+      "complete_original_payload_file": "controlledTransform_idealPow.complete-original.lean.txt",
+      "original_selected_source": "/-- **`σ^c(𝔞^k, μk) = σ^c(𝔞, μ)^k`**. -/\ntheorem controlledTransform_idealPow (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)\n    (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ)) (k : ℕ) :\n    controlledTransform hπ (idealPow 𝔞 k) (μ * k) = idealPow (controlledTransform hπ 𝔞 μ) k := by\n  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞\n  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_idealPow hc𝔞 k) ?_).symm\n  rw [BlowupExceptionalDivisor.pullback_idealPow hπ.contMDiff h𝔞,\n    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, idealPow_mul (isCoherent_D hπ μ) hc𝔞,\n    idealPow_idealPow (isCoherent_ideal _)]\n"
+    },
+    {
+      "native_name": "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal",
+      "public_name": "Hironaka.MarkedIdealOperationsTransform.controlledTransform_sumIdeal",
+      "original_lines": [
+        190,
+        204
+      ],
+      "scope": "Controlled",
+      "sha256": "376408120e8e8d7ad9b9c542859198e96081dc573d5233c8628e8242b4db564a",
+      "complete_original_payload_file": "controlledTransform_sumIdeal.complete-original.lean.txt",
+      "original_selected_source": "/-- **`σ^c(𝔞 + 𝔟, μ) = σ^c(𝔞, μ) + σ^c(𝔟, μ)`**. -/\ntheorem controlledTransform_sumIdeal (hπ : IsBlowupAlong n C π) (h𝔞 : 𝔞.IsCoherent)\n    (h𝔟 : 𝔟.IsCoherent) (hle𝔞 : 𝔞.Le (idealPow (vanishingIdeal (n := n) C) μ))\n    (hle𝔟 : 𝔟.Le (idealPow (vanishingIdeal (n := n) C) μ)) :\n    controlledTransform hπ (sumIdeal 𝔞 𝔟) μ =\n      sumIdeal (controlledTransform hπ 𝔞 μ) (controlledTransform hπ 𝔟 μ) := by\n  have hc𝔞 := isCoherent_controlledTransform hπ h𝔞 hle𝔞\n  have hc𝔟 := isCoherent_controlledTransform hπ h𝔟 hle𝔟\n  have hol : ∀ {𝔠 : GermIdeal n Y}, 𝔠.IsCoherent → ∀ y g, 𝔠.mem y g → HolomorphicAt n g y :=\n    fun h𝔠 _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 hg\n  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_sumIdeal hc𝔞 hc𝔟) ?_).symm\n  rw [pullback_sumIdeal hπ.contMDiff (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg)\n      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg),\n    pullback_eq_mul_controlledTransform hπ h𝔞 hle𝔞, pullback_eq_mul_controlledTransform hπ h𝔟 hle𝔟,\n    mul_sumIdeal (hol (isCoherent_D hπ μ)) (hol hc𝔞) (hol hc𝔟)]\n"
+    }
+  ],
+  "authentic_original_active_contexts_and_all_closings": [
+    {
+      "name": "options",
+      "original_lines": [
+        4,
+        5
+      ],
+      "sha256": "daf02537fa574f7c9bad34ae0b69a6b6858be62234a4f94ae548fb61d4d4b159",
+      "original_source": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n"
+    },
+    {
+      "name": "common",
+      "original_lines": [
+        40,
+        54
+      ],
+      "sha256": "c22c6398340d16dbcd98dfa53e1ed54c62ad56729bc94c364b7f8fb3a99dea62",
+      "original_source": "open Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.GermIdealOrder TranscendentalNakamaye.Pending.IdealWeightPowers\n  TranscendentalNakamaye.Pending.RestrictedIdealExtension TranscendentalNakamaye.Pending.GermIdealTotalTransform\n  TranscendentalNakamaye.Pending.GermIdealPullbackCalculus TranscendentalNakamaye.Pending.BlowupExceptionalDivisor\n  TranscendentalNakamaye.Pending.BlowupControlledTransform TranscendentalNakamaye.Pending.IdealOrderArithmetic\n  TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.MarkedIdeals\n\nnoncomputable section\n"
+    },
+    {
+      "name": "algebra",
+      "original_lines": [
+        58,
+        61
+      ],
+      "sha256": "2ae1e1f5933ca0662ace9f1e349c51a2227bf7a31ead98bd5ad103e62b93dc73",
+      "original_source": "section Algebra\n\nvariable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n"
+    },
+    {
+      "name": "close-algebra",
+      "original_lines": [
+        152,
+        152
+      ],
+      "sha256": "ab5762d9a2c801a171d479f0d226ae9cb75397e22abbb13e52b3776914f2c159",
+      "original_source": "end Algebra\n"
+    },
+    {
+      "name": "controlled",
+      "original_lines": [
+        156,
+        160
+      ],
+      "sha256": "618589b2b89851009c574fb194dda36a3f6f61d60378d6c45fd4e42473a5c661",
+      "original_source": "section Controlled\n\nvariable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]\n  [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]\n  [IsComplexManifold n Y] {C : Set X} {π : Y → X} {𝔞 𝔟 : GermIdeal n X} {μ ν : ℕ}\n"
+    },
+    {
+      "name": "close-controlled",
+      "original_lines": [
+        222,
+        222
+      ],
+      "sha256": "234d6b9b99a640d82a865541afadc213c9b65e6bd360185987f1aced5c771d8b",
+      "original_source": "end Controlled\n"
+    },
+    {
+      "name": "closing",
+      "original_lines": [
+        436,
+        438
+      ],
+      "sha256": "7700a4c8a8fca434b7857a0f29e3838486f193e8fff8959636f7f49773e194e2",
+      "original_source": "end\n\nend TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform\n"
+    }
+  ],
+  "original_Algebra_later_Y_variables_not_active_for_selected_algebra_declarations": true,
+  "original_Controlled_unused_nu_binder_retained": true,
+  "scope_commands": [
+    [
+      17,
+      "namespace Hironaka.MarkedIdealOperationsTransform"
+    ],
+    [
+      26,
+      "noncomputable section"
+    ],
+    [
+      28,
+      "section Algebra"
+    ],
+    [
+      44,
+      "end Algebra"
+    ],
+    [
+      46,
+      "section Controlled"
+    ],
+    [
+      78,
+      "end Controlled"
+    ],
+    [
+      80,
+      "end"
+    ],
+    [
+      82,
+      "end Hironaka.MarkedIdealOperationsTransform"
+    ]
+  ],
+  "scope_stack_empty": true,
+  "draft_file": "MarkedIdealOperationsMonotoneControlledOriginalExact.lean",
+  "draft_sha256": "5cceab27a5d91ef54b3d0cf5c0aeaf7a350835d2be7c3f49156d1f5724255b41",
+  "draft_lines": 82,
+  "selected_proof_type_token_edits": 0,
+  "only_four_theorem_commands": true,
+  "existing_pure_imports": [
+    {
+      "module": "Hironaka.MarkedIdeal.MarkedIdealOperationsTransform",
+      "path": "Hironaka/MarkedIdeal/MarkedIdealOperationsTransform.lean",
+      "sha256": "52e0464d98d84c11463c94f96daa66b1c9227ac3cecba943df379baf1667c4b7"
+    },
+    {
+      "module": "Hironaka.MarkedIdeal.ControlledProductTransformExact",
+      "path": "Hironaka/MarkedIdeal/ControlledProductTransformExact.lean",
+      "sha256": "acd14be5d51d91583483fd2a24e7d50b18c7258f1369c1f46fe926c2b9825496"
+    }
+  ],
+  "required_existing_helpers_actual_base_owners": [
+    {
+      "name": "Hironaka.MarkedIdealOperationsTransform.isCoherent_D",
+      "actual_base_physical_owners": [
+        "Hironaka.MarkedIdeal.ControlledProductTransformExact"
+      ]
+    },
+    {
+      "name": "Hironaka.MarkedIdealOperationsTransform.idealPow_idealPow",
+      "actual_base_physical_owners": [
+        "Hironaka.MarkedIdeal.MarkedIdealOperationsTransform"
+      ]
+    },
+    {
+      "name": "Hironaka.MarkedIdealOperationsTransform.mul_sumIdeal",
+      "actual_base_physical_owners": [
+        "Hironaka.MarkedIdeal.MarkedIdealOperationsTransform"
+      ]
+    },
+    {
+      "name": "Hironaka.MarkedIdealOperationsTransform.pullback_sumIdeal",
+      "actual_base_physical_owners": [
+        "Hironaka.MarkedIdeal.MarkedIdealOperationsTransform"
+      ]
+    }
+  ],
+  "actual_metadata_reuse": {
+    "receipt": "/workspace/archon-nakamaye/work/g1-g9-20261021-phase3/publication/native8-recursive-callee-closure/ordinary-recursive-closure-receipt.json",
+    "receipt_sha256": "2aa3892c7126d799a70edbc3c171175e5240eb6172a3981027c520a939d00af2",
+    "four_actual_CIs": 4,
+    "raw_edges_including_generated_recursion_wrapper": 347,
+    "ordinary_callees_outside_actual_base_and_selected_four": [],
+    "generated_wrapper": "idealPow_mono._f remains the actual original compiler-generated child of the full recursive theorem; not a fifth handwritten extraction"
+  },
+  "blueprint": {
+    "fixed_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+    "source_path": "TranscendentalNakamaye/blueprint/src/hironaka.tex",
+    "source_git_blob_oid": "d1a66c91bd9818471d469eed1de4b1e7c920bd31",
+    "whole_source_sha256": "135584f112c8123b0524077f93347417bb98b3cdb1f9fc46a4c1ad2370c8873e",
+    "complete_original_nodes": [
+      {
+        "label": "hir:controlled-operations",
+        "source_lines": [
+          682,
+          701
+        ],
+        "complete_original_node_file": "hir-controlled-operations.complete-original-node.tex.txt",
+        "sha256": "f3f050b208cca0e5ba46ea99c8d148ae39c3ed396bda8b048774e01f2cc1e278",
+        "written_proof_count": 1,
+        "all_original_lean_bindings": [
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_le_mul'",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_mono",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.idealPow_idealPow",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.mul_sumIdeal",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.pullback_sumIdeal",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.isCoherent_D",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_mul",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_idealPow",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal_idealPow"
+        ],
+        "role": "Direct original common node for all four selected declarations"
+      },
+      {
+        "label": "hir:marked-operations-transform",
+        "source_lines": [
+          713,
+          738
+        ],
+        "complete_original_node_file": "hir-marked-operations-transform.complete-original-node.tex.txt",
+        "sha256": "92c53a58c2ad3b3a3dd659dc3c7365950bccdb77bcce429d8834a44c640b7ddd",
+        "written_proof_count": 1,
+        "all_original_lean_bindings": [
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.ext_of",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.cosupp_add",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.inter_cosupp_subset_cosupp_mul",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.IsAmbientPair",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.IsAmbientPair.geoTransform",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.isAdmissibleCentre_add_iff",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.IsAdmissibleCentre.mul",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.geoTransform_add",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.geoTransform_mul",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.geoTransformAlong_add",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.isGeoResolution_add_iff",
+          "TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.MarkedIdeal.geoTransformAlong_mul"
+        ],
+        "role": "Entire contextual consumer node; its other declarations are not extracted here"
+      }
+    ],
+    "direct_bindings_for_all_four": "hir:controlled-operations",
+    "no_new_historical_proof_or_status_invented": true,
+    "all_other_original_bindings_retained_for_later_existing_or_upstream_classification": true,
+    "production_blueprint_changed": false
+  },
+  "relocation": {
+    "verifier_path": "/workspace/hironaka/audit/local-coefficients-and-curve-overlaps-20261015/verify_incremental_source.py",
+    "verifier_sha256": "e50b6ae9de725a3e598571f4441000505dafa552e77f6e1a9a2c7911039d5f84",
+    "namespace_map_path": "/workspace/hironaka/scripts/upstream_namespace_map.py",
+    "namespace_map_sha256": "3288e4879c78e75227926cebeec7e5c0e03a90df19639663c80a03f3cfa4bfe0",
+    "only_frozen_relocate_AST_executed": true,
+    "all_four_payloads_byte_unchanged_after_relocation": true,
+    "administrative_only": [
+      "Standard release header",
+      "Pure imports of existing actual public parent and ControlledProductTransformExact",
+      "Frozen namespace/open relocation",
+      "Original active Algebra/Controlled contexts with complete authentic closings"
+    ]
+  },
+  "runtime_build_kernel_expr_or_axiom_invoked": false,
+  "production_source_blueprint_or_git_modified": false
+}

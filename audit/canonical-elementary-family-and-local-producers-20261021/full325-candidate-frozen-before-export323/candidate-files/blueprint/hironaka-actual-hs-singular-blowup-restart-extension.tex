@@ -1,0 +1,81 @@
+\section{Actual singular HS blowups preserve the genuine geometry needed for the next step}
+
+Use the SAME actual reference-HS centre and projection already constructed from
+the original compact analytic pure current set and its entire ordered SNC boundary.
+The next carrier below is the literal geometric strict transform, and its next ideal
+is its genuine reduced vanishing ideal. This proves actual restart geometry;
+it does not identify that fresh ideal with the controlled transform of the old
+marked input, prove HS blowup nonincrease, or prove that repeated restarts terminate.
+
+\begin{lemma}[Actual geometric purity and density of the same-dimensional regular locus]
+\label{hir:actual-current-purity-regular-density-dictionary}
+\uses{lag:regular-locus-dense,lag:regular-point-basics}
+\lean{Hironaka.HironakaActualHSSingularBlowupRestart.actualPure_subset_closure_regularLocus,Hironaka.HironakaActualHSSingularBlowupRestart.actualPure_of_subset_closure_regularLocus}
+\leanok
+If an original complex analytic set $W$ is pure of dimension $d$, then
+$W\subseteq\overline{\operatorname{Reg}_dW}$. Conversely, for any actual set,
+this same density forces every one of its regular points to have dimension $d$.
+\end{lemma}
+\begin{proof}
+The genuine analytic regular-locus density theorem places $W$ in the closure
+of the union of its actual regular loci. Original geometric purity identifies
+the dimension of EVERY point in that union with $d$, giving the first inclusion.
+Conversely, at an actual regular point of dimension $j$, regular coordinates
+give a genuine neighborhood where every point of the set is $j$-regular.
+The assumed true closure supplies a $d$-regular point in that neighborhood.
+Uniqueness of actual local manifold dimension gives $j=d$. No caller dimension
+or regular-density certificate replaces the original analyticity/purity producer.
+\end{proof}
+
+\begin{theorem}[Every actual current-singular blowup preserves compact analytic purity]
+\label{hir:actual-singular-blowup-next-current-geometry}
+\uses{hir:actual-current-purity-regular-density-dictionary,hir:singular-centre-regular-density,hir:embedded-resolution-local,hir:admissible-calculus}
+\lean{Hironaka.HironakaActualHSSingularBlowupRestart.actual_singular_blowup_next_current_geometry}
+\leanok
+For an actual compact analytic pure current $W$ and a genuine blowup in a
+centre contained in $W\setminus\operatorname{Reg}_dW$, the literal next strict
+transform $W'$ is complex analytic, compact, and geometrically pure of the
+SAME dimension $d$.
+\end{theorem}
+\begin{proof}
+The actual blowup strict-transform theorem gives analyticity of the literal
+closure defining $W'$. The original pure regular-density dictionary and the
+genuine singular-centre density transport give $W'\subseteq
+\overline{\operatorname{Reg}_dW'}$. Its converse gives actual geometric purity,
+including every regular point on the exceptional divisor. Genuine properness
+makes the preimage of compact $W$ compact. The literal strict transform is
+closed and lies in that preimage because the original $W$ is closed, hence
+is actually compact. Neither transformed-presentation equality nor HS descent
+is used or asserted.
+\end{proof}
+
+\begin{theorem}[ONLY original input constructs the genuine next marked domain after the SAME singular HS first blowup]
+\label{hir:actual-hs-singular-first-blowup-genuine-next-input}
+\uses{hir:actual-current-full-hs-singular-first-blowup,hir:actual-singular-blowup-next-current-geometry,hir:actual-reference-whole-hs-same-boundary-marked-domain,hir:snc}
+\lean{Hironaka.HironakaActualHSSingularBlowupRestart.actual_singular_blowup_next_marked_domain,Hironaka.HironakaActualHSSingularBlowupRestart.exists_actual_hs_singular_first_blowup_genuine_next_input}
+\leanok
+ONLY the original compact analytic pure nonsmooth $W$, $d<n$, and original SNC
+list $E$ internally produce the actual singular reference, its actual whole-HS
+centre $C$, and the SAME genuine proper holomorphic blowup $\pi$. With literal
+$W'=\operatorname{Strict}_\pi W$ and ordered
+$E'=\operatorname{GeoStrict}_\pi(E)\mathbin{+\!+}[\pi^{-1}C]$, the actual
+tuple $(M',M',E',\mathcal I_{W'},1)$ belongs to the original invariant domain.
+The next carrier is genuinely compact, analytic and pure of dimension $d$;
+the projection remains biholomorphic over the ENTIRE original regular open.
+\end{theorem}
+\begin{proof}
+Apply the accepted original-only full-HS singular first-blowup producer.
+It constructs the actual reference, nonempty centre, real projection and
+ALL-boundary admissibility internally, and already gives proper holomorphicity,
+the entire regular-open inverse and the precise ordered SNC list. Apply the
+preceding actual current-singular blowup theorem to this SAME projection and
+centre; all its inputs have just been independently produced. The resulting
+actual pure next carrier has empty ambient interior since $d<n$. Its genuine
+analytic vanishing ideal is coherent, nonzero along the whole ambient carrier,
+and has order-one cosupport exactly $W'$. The literal unchanged ordered $E'$
+is SNC and transverse to the whole ambient carrier. These fields construct the
+genuine original next marked domain. No caller next-domain or strict-transform
+purity certificate occurs. This licenses another fresh singular HS first step
+if the actual next carrier is nonsmooth, without a termination claim or a
+comparison to the unproved transformed original semicoherent presentation.
+\end{proof}

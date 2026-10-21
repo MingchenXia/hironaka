@@ -1,0 +1,143 @@
+\section{Actual locally ringed models of embedded analytic subspaces}
+\label{sec:hironaka-actual-analytic-subspace}
+
+Let $M$ be a complex manifold, $C\subset M$, and $i:C\hookrightarrow M$
+its actual subspace inclusion. Write $\mathcal O_M$ for the genuine
+holomorphic structure sheaf and $\mathcal I_C$ for the whole vanishing
+ideal sheaf. The construction below applies to every subset; for a closed
+analytic $C$ it gives the locally ringed model needed for an analytic-space
+atlas. It does not assume smoothness of $C$, resolution data, or compatibility
+of local resolutions.
+
+\begin{definition}[The actual subspace structure sheaf]
+\label{hir:actual-analytic-subspace-structure-sheaf}
+\uses{hir:real-domain-actual-centre-ring-whole-sheaf-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspace.actualSubspaceSheaf}
+\leanok
+Form the genuine ambient quotient ring sheaf
+$\mathcal Q_C=(U\mapsto\mathcal O_M(U)/\mathcal I_C(U))^\#$.
+Define $\mathcal O_C=i^{-1}\mathcal Q_C$, namely the sheafification of
+the actual inverse-image presheaf on the subspace $C$.
+\end{definition}
+
+\begin{theorem}[Whole original quotient stalks on the actual subspace]
+\label{hir:actual-analytic-subspace-whole-stalk}
+\uses{hir:actual-analytic-subspace-structure-sheaf,hir:real-domain-actual-centre-ring-whole-sheaf-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspace.actualSubspaceStalkWholeEquiv,Hironaka.HironakaActualAnalyticSubspace.actualSubspaceStalkChartEquiv}
+\leanok
+For every $x\in C$, the actual stalk of $\mathcal O_C$ is naturally isomorphic
+to $\mathcal O_{M,x}/\mathcal I_{C,x}$, and thence to the whole original
+preferred-chart holomorphic germ quotient. The quotient numerator of every
+original ambient germ is retained by these identifications.
+\end{theorem}
+\begin{proof}
+The sheafification unit induces a stalk isomorphism. The inverse-image
+presheaf stalk at $x$ is canonically isomorphic to the original ambient
+quotient-sheaf stalk at $i(x)$, by the neighbourhood-colimit inverse-image
+stalk isomorphism. The already constructed whole quotient-sheaf stalk
+dictionary identifies this last ring with
+$\mathcal O_{M,i(x)}/\mathcal I_{C,i(x)}$.
+Compose these three actual ring isomorphisms in that order. The original
+whole holomorphic stalk isomorphism maps the entire vanishing ideal onto
+the entire preferred-chart vanishing ideal; it therefore induces the
+claimed quotient ring isomorphism. On each original quotient numerator,
+the old quotient-stalk formula, the inverse-image unit and the
+sheafification unit give exactly its original ambient germ class.
+\end{proof}
+
+\begin{theorem}[A genuine locally ringed subspace]
+\label{hir:actual-analytic-subspace-locally-ringed}
+\uses{hir:actual-analytic-subspace-whole-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspace.actualSubspaceLocallyRingedSpace}
+\leanok
+The actual topological subspace $C$ with $\mathcal O_C$ is a locally ringed
+space, without any smoothness assumption on $C$. Its quotient stalks are
+nonzero at every actual point of $C$.
+\end{theorem}
+\begin{proof}
+The original holomorphic stalk is a local ring. At an actual point $x\in C$,
+every germ in the whole vanishing ideal evaluates to zero at $x$; hence the
+ideal lies in the maximal ideal and is proper. Its quotient is consequently
+nonzero and is a local ring, since the quotient homomorphism is surjective.
+The preceding actual stalk isomorphism transports that local ring structure
+to the literal subspace sheaf stalk. Use the actual subspace topology and
+constructed sheaf, with these internally proved local-ring structures, to
+form the locally ringed space.
+\end{proof}
+
+\begin{theorem}[The genuine inclusion has the whole quotient stalk map]
+\label{hir:actual-analytic-subspace-inclusion-stalk}
+\uses{hir:actual-analytic-subspace-locally-ringed,hir:actual-analytic-subspace-whole-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspace.actualSubspaceInclusion,Hironaka.HironakaActualAnalyticSubspace.actualSubspaceInclusion_stalk}
+\leanok
+The actual inclusion $i:C\hookrightarrow M$ underlies a morphism of locally
+ringed spaces. Under the whole stalk dictionary its stalk map is exactly
+$\mathcal O_{M,x}\twoheadrightarrow\mathcal O_{M,x}/\mathcal I_{C,x}$.
+In particular every stalk map is surjective and its kernel is the whole
+original vanishing ideal. If $C$ is closed, its underlying continuous map
+is a closed topological embedding.
+\end{theorem}
+\begin{proof}
+Compose the actual ambient structure-sheaf quotient morphism with the
+unit of the inverse-image/direct-image adjunction and then with the
+direct image of the actual sheafification unit. This gives the genuine
+ringed-space morphism on the actual inclusion.
+Represent any ambient stalk element by an original holomorphic section.
+The stalk-map germ formula, the inverse-image unit formula and the
+sheafification stalk formula identify its image with the old ambient
+quotient germ. The preceding dictionary sends this to precisely the
+quotient class of the same original germ. Since every ambient germ has
+such a section representative, this proves the whole stalk formula.
+The quotient map is surjective, so the actual stalk map is surjective.
+A surjective homomorphism from a local ring onto a nonzero ring is local;
+therefore the ringed-space morphism is a locally ringed-space morphism.
+The displayed formula and injectivity of the dictionary show that its
+kernel is exactly the whole original vanishing ideal. The underlying map
+is the actual subspace inclusion, whose image is $C$; when $C$ is closed
+it is a closed embedding by the subspace topology.
+\end{proof}
+
+\begin{theorem}[The actual subspace has reduced local rings]
+\label{hir:actual-analytic-subspace-reduced-stalks}
+\uses{hir:actual-analytic-subspace-whole-stalk,hir:actual-analytic-subspace-locally-ringed}
+\lean{Hironaka.HironakaActualAnalyticSubspace.actualSectionIdeal_vanishing_iff,Hironaka.HironakaActualAnalyticSubspace.actualWholeVanishingStalkIdeal_isRadical,Hironaka.HironakaActualAnalyticSubspace.actualSubspaceStalk_isReduced}
+\leanok
+The actual section ideal on $U$ consists exactly of the sections vanishing on $C\cap U$. Every whole vanishing stalk ideal is radical. Consequently every actual
+subspace stalk is a reduced local ring. Neither smoothness, coherence nor
+a reducedness certificate is an input.
+\end{theorem}
+\begin{proof}
+First, the actual section ideal on an original open $U$ consists precisely
+of the holomorphic sections whose values vanish on $C\cap U$.
+Indeed, membership in the whole stalk ideal at an actual point of $C$
+implies zero value, because that ideal lies in the genuine maximal ideal.
+Conversely, a section vanishing on $C\cap U$ represents at every point of
+$U$ a genuine function germ vanishing on $C$ nearby; this germ is one of
+the generators of the actual whole vanishing stalk ideal. This proves
+both inclusions of the asserted section description. If a positive power
+of a section belongs to this section ideal, its values on $C\cap U$ have
+zero corresponding powers in $\mathbb C$, so they are zero. The section
+ideal is therefore radical.
+
+Now let an ambient germ $r$ have a power in the whole vanishing stalk
+ideal at $x$. Represent $r$ by a true section $s$ on an original open
+neighbourhood $U$. The proved whole ideal-section germ-image dictionary
+represents the germ of the power $s^m$ by an actual vanishing-ideal section
+on another neighbourhood. Equality of the two genuine stalk germs holds
+as section equality after restriction to a common smaller open $V$
+containing $x$. Hence $(s|_V)^m$ belongs to the actual section ideal on
+$V$. Its radicality gives $s|_V$ in that same ideal. Taking its germ and
+using restriction compatibility proves $r$ belongs to the whole original
+vanishing stalk ideal. Thus the whole ideal is radical.
+
+A nilpotent element of its quotient has an original ambient lift whose
+power belongs to the ideal; radicality puts that lift in the ideal, so
+the quotient element is zero. The whole actual subspace stalk dictionary
+transfers this reducedness to the literal subspace sheaf stalk. Its
+locality was proved above, giving the asserted reduced local rings.
+\end{proof}
+
+This constructs actual singular locally ringed models and their full
+ambient quotient maps. Presentation-independent comparisons on overlaps,
+effective analytic-space atlas gluing, and resolution descent remain
+separate obligations.

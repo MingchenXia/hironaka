@@ -1,0 +1,217 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Support.RealDomainOriginDictionaryExact
+import Hironaka.Resolution.HironakaSmoothCentreRealDomainDeformation
+
+/-! # Whole original initial relations in the actual real central family
+Actual finite generation near zero supplies every origin dictionary.
+The existing graph ideal/scaling/parameter-colon/central definitions
+are retained. Original geometric/coherent input internally supplies
+the real domains, selected index and entire initial-ideal inclusion.
+Complete mathematics precedes this source; global model coherence is
+neither a premise nor a conclusion of the original-input endpoint.
+-/
+set_option autoImplicit false
+open Set Filter
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaSmoothCentreRealDomainInitialRelations
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf OkaIdealOperations
+  OkaCoherence HironakaSmoothCentreCoherentDomain HironakaSmoothCentreRealDomainSaturation
+  HironakaSmoothCentreRealDomainDeformation HironakaRelativeNormalCoherentSaturation
+  HironakaRelativeNormalDeformationSaturation HironakaRelativeNormalDeformationInitialRelations
+  HironakaRelativeNormalIdeal HironakaRelativeNormalAssociatedGraded HironakaRelativeNormalMonomialBasis
+  HironakaHolomorphicJetChartInvariance RelativePrincipalizationSpan InvertibleIdealQuotient
+
+
+/-- EVERY literal colon has its WHOLE origin-ideal dictionary from the same genuine local presentation. -/
+theorem actualColonChain_origin_dictionary_of_local {n : ℕ} (I : GermIdeal n (ComplexModel n))
+    (hI : IdealFGAt I.mem 0) {h : ComplexModel n → ℂ} (hh : HolAt h 0)
+    (q : ℕ) {g : ComplexModel n → ℂ} (hg : HolAt g 0) :
+    actualColonChain I.mem h q 0 g ↔
+      HolGerm.mk g hg ∈ actualOriginColonChain (originalCoherentOriginIdeal I) (HolGerm.mk h hh) q := by
+  induction q generalizing g with
+  | zero => exact (mk_mem_originalOriginIdeal_iff_of_local I hI hg).symm
+  | succ q ih =>
+    change (HolAt g 0 ∧ actualColonChain I.mem h q 0 (fun z => g z * h z)) ↔ _
+    rw [and_iff_right hg, ih (hg.mul hh)]
+    simp only [actualOriginColonChain, Submodule.mem_colon_singleton, smul_eq_mul]
+    rfl
+
+/-- A true zero-fixing linear map pulls WHOLE original membership germs into the literal pulled ideal. -/
+theorem map_linear_originIdeal_le {n m : ℕ} (η : ComplexModel m →L[ℂ] ComplexModel n)
+    (I : GermIdeal n (ComplexModel n)) :
+    Ideal.map (compAlgHom η (Eventually.of_forall fun _ => η.differentiableAt) (map_zero _)).toRingHom
+      (originalCoherentOriginIdeal I) ≤
+        originalCoherentOriginIdeal (GermIdeal.pullback (m := m) η I) := by
+  apply Ideal.map_le_iff_le_comap.mpr
+  apply Ideal.span_le.mpr
+  rintro g ⟨f, hf, hIf, rfl⟩
+  change compAlgHom η _ _ (HolGerm.mk f hf) ∈ originalCoherentOriginIdeal (GermIdeal.pullback (m := m) η I)
+  rw [compAlgHom_mk]
+  have hc := holomorphic_comp η (Eventually.of_forall fun _ => η.differentiableAt) (map_zero _) hf
+  apply Ideal.subset_span
+  refine ⟨f ∘ η, hc, ?_, rfl⟩
+  apply GermIdeal.mem_pullback_iff.mpr
+  exact isInSpanAt_self ⟨f, by simpa only [map_zero] using hIf, rfl⟩
+    (hc.mono (fun _ h => h.mdifferentiableAt))
+
+private theorem originIdeal_le_sum_left {n : ℕ} (I J : GermIdeal n (ComplexModel n)) :
+    originalCoherentOriginIdeal I ≤ originalCoherentOriginIdeal (RestrictedIdealExtension.sumIdeal I J) := by
+  apply Ideal.span_le.mpr
+  rintro g ⟨f, hf, hIf, rfl⟩
+  apply Ideal.subset_span
+  refine ⟨f, hf, ?_, rfl⟩
+  change IsInSpanAt (n := n) (fun s => I.mem 0 s ∨ J.mem 0 s) 0 f
+  exact isInSpanAt_self (Or.inl hIf) (hf.mono (fun _ h => h.mdifferentiableAt))
+
+private theorem originIdeal_le_sum_right {n : ℕ} (I J : GermIdeal n (ComplexModel n)) :
+    originalCoherentOriginIdeal J ≤ originalCoherentOriginIdeal (RestrictedIdealExtension.sumIdeal I J) := by
+  apply Ideal.span_le.mpr
+  rintro g ⟨f, hf, hIf, rfl⟩
+  apply Ideal.subset_span
+  refine ⟨f, hf, ?_, rfl⟩
+  change IsInSpanAt (n := n) (fun s => I.mem 0 s ∨ J.mem 0 s) 0 f
+  exact isInSpanAt_self (Or.inr hIf) (hf.mono (fun _ h => h.mdifferentiableAt))
+
+/-- Every WHOLE original scaled member enters the EXISTING graph ideal without global coherence. -/
+theorem deformationScalingPullback_mem_originalIdeal_local (d t : ℕ)
+    (I : GermIdeal (d+t) (ComplexModel (d+t)))
+    (g : HolGerm (ComplexModel (d+t))) (hg : g ∈ originalCoherentOriginIdeal I) :
+    deformationScalingPullback d t g ∈ originalCoherentOriginIdeal (originalDeformationIdeal d t I) := by
+  have hleft := originIdeal_le_sum_left
+    (GermIdeal.pullback (m := deformationDimension d t) (deformationProjection d t) I) (deformationEquationIdeal d t)
+  have hright := originIdeal_le_sum_right
+    (GermIdeal.pullback (m := deformationDimension d t) (deformationProjection d t) I) (deformationEquationIdeal d t)
+  have hproj := map_linear_originIdeal_le (deformationProjection d t) I (Ideal.mem_map_of_mem _ hg)
+  have hp : tangentPullback (d+t) (1+t) g ∈ originalCoherentOriginIdeal (originalDeformationIdeal d t I) :=
+    hleft hproj
+  have hdiff := hright (deformationScalingPullback_sub_projection_mem d t g)
+  have he : deformationScalingPullback d t g =
+      (deformationScalingPullback d t g - tangentPullback (d+t) (1+t) g) + tangentPullback (d+t) (1+t) g := by ring
+  rw [he]
+  exact Ideal.add_mem _ hdiff hp
+
+private theorem initialSymbol_mem_selected_central_local (d t : ℕ)
+    (I : GermIdeal (d+t) (ComplexModel (d+t)))
+    (hD : IdealFGAt (originalDeformationIdeal d t I).mem 0) (N : ℕ)
+    (hN : ∀ f, (∃ q : ℕ, (originalDeformationColonIdeal d t I q).mem 0 f) ↔
+      (originalDeformationColonIdeal d t I N).mem 0 f)
+    (q : ℕ) (g : HolGerm (ComplexModel (d+t)))
+    (hIg : g ∈ originalCoherentOriginIdeal I) (hg : g ∈ normalIdeal d t ^ q) :
+    normalPolynomialEval d t (originalNormalInitialSymbol d t q g hg) ∈
+      originalCoherentOriginIdeal (originalDeformationCentralIdeal d t I N) := by
+  obtain ⟨G, hG, hcentral⟩ := exists_divided_scaling_initial_symbol d t q g hg
+  have hscaled := deformationScalingPullback_mem_originalIdeal_local d t I g hIg
+  have hmul : G * deformationParameterGerm d t ^ q ∈
+      originalCoherentOriginIdeal (originalDeformationIdeal d t I) := by
+    rw [mul_comm, ← hG]
+    exact hscaled
+  have hcolon := (mem_actualOriginColonChain_iff
+    (originalCoherentOriginIdeal (originalDeformationIdeal d t I)) (deformationParameterGerm d t) G q).mpr hmul
+  obtain ⟨f, hf, rfl⟩ := HolGerm.exists_eq_mk G
+  have hfunctional := (actualColonChain_origin_dictionary_of_local (originalDeformationIdeal d t I) hD
+    (Eventually.of_forall fun _ => (deformationParameter d t).differentiableAt) q hf).mpr hcolon
+  have hchosen := (hN f).mp ⟨q, hfunctional⟩
+  have horigin : HolGerm.mk f hf ∈ originalCoherentOriginIdeal (originalDeformationColonIdeal d t I N) :=
+    Ideal.subset_span ⟨f, hf, hchosen, rfl⟩
+  have hj := map_linear_originIdeal_le (deformationCentralInclusion d t)
+    (originalDeformationColonIdeal d t I N) (Ideal.mem_map_of_mem _ horigin)
+  change deformationCentralPullback d t (HolGerm.mk f hf) ∈
+    originalCoherentOriginIdeal (originalDeformationCentralIdeal d t I N) at hj
+  rwa [hcentral] at hj
+
+section Original
+variable {d t : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel (d+t)) M] [IsComplexManifold (d+t) M]
+
+/-- Original input supplies EVERY whole original initial-symbol membership in the SAME actual real central family. -/
+theorem exists_original_regular_real_central_initial_symbol_memberships
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)
+    (A : GermIdeal (d+t) M) (hA : A.IsCoherent) :
+    letI := tangentAlgebra d t
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x),
+      Φ.source ⊆ (chartAt (ComplexModel (d+t)) x).target ∧
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel (d+t)) x x) = 0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel (d+t)) x).source →
+        chartAt (ComplexModel (d+t)) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel (d+t)) x y) ∈ complexCoordinatePlane (d+t) d)) ∧
+      ∃ N : ℕ, ∃ U : Set (ComplexModel (deformationDimension d t)), IsOpen U ∧ 0 ∈ U ∧
+        U ⊆ (deformationProjection d t) ⁻¹' Φ.target ∧
+        let F := actualFlattenedOriginalSheaf A x Φ
+        CoherentOn (originalDeformationColonIdeal d t F N) U ∧
+        (∀ y ∈ U, ∀ q : ℕ, ∀ g, (originalDeformationColonIdeal d t F (N+q)).mem y g ↔
+          (originalDeformationColonIdeal d t F N).mem y g) ∧
+        (∀ y ∈ U, ∀ q : ℕ, N ≤ q → ∀ g, HolAt g y →
+          ((originalDeformationIdeal d t F).mem y (fun z => g z * deformationParameter d t z ^ q) ↔
+            (originalDeformationIdeal d t F).mem y (fun z => g z * deformationParameter d t z ^ N))) ∧
+        (∀ y ∈ U, ∀ g, (∃ q : ℕ, (originalDeformationColonIdeal d t F q).mem y g) ↔
+          (originalDeformationColonIdeal d t F N).mem y g) ∧
+        let B := (deformationCentralInclusion d t) ⁻¹' U
+        IsOpen B ∧ 0 ∈ B ∧ CoherentOn (originalDeformationCentralIdeal d t F N) B ∧
+        ∀ (q : ℕ) (g : HolGerm (ComplexModel (d+t)))
+          (_hIg : g ∈ originalCoherentOriginIdeal F) (hg : g ∈ normalIdeal d t ^ q),
+          normalPolynomialEval d t (originalNormalInitialSymbol d t q g hg) ∈
+            originalCoherentOriginIdeal (originalDeformationCentralIdeal d t F N) := by
+  let := tangentAlgebra d t
+  obtain ⟨Φ, hsrc, h0, hflat, N, U, hU, h0U, hUV, hcol, hchain, hpow, hsat, hB, h0B, hcent⟩ :=
+    exists_original_regular_real_exact_deformation_central_model C x hreg A hA
+  let F := actualFlattenedOriginalSheaf A x Φ
+  let V := (deformationProjection d t) ⁻¹' Φ.target
+  have hV : IsOpen V := Φ.isOpen_target.preimage (deformationProjection d t).continuous
+  have h0V : (0 : ComplexModel (deformationDimension d t)) ∈ V := by
+    change deformationProjection d t 0 ∈ Φ.target
+    simpa only [map_zero] using actualFlattening_target_zero_mem x Φ h0
+  have hF := coherentOn_actualFlattenedOriginalSheaf A hA x Φ hsrc
+  have hpull := coherentOn_pullback_of_local F Φ.target hF V hV (deformationProjection d t)
+    (fun _ _ => (deformationProjection d t).differentiableAt.mdifferentiableAt) (fun _ hz => hz)
+  have hEq := coherentOn_of_isCoherent (deformationEquationIdeal d t)
+    (deformationEquationIdeal_isCoherent d t) V hV
+  have hD := coherentOn_sum _ _ V hpull hEq
+  have hfg := idealFGAt_of_coherentOn (originalDeformationIdeal d t F) V hD h0V
+  exact ⟨Φ, hsrc, h0, hflat, N, U, hU, h0U, hUV, hcol, hchain, hpow, hsat, hB, h0B, hcent,
+    fun q g hIg hg => initialSymbol_mem_selected_central_local d t F hfg N (hsat 0 h0U) q g hIg hg⟩
+
+/-- Original input supplies the ENTIRE original initial-ideal inclusion into the SAME actual real central family. -/
+theorem exists_original_regular_real_central_initial_ideal_inclusion
+    (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)
+    (A : GermIdeal (d+t) M) (hA : A.IsCoherent) :
+    letI := tangentAlgebra d t
+    ∃ Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x),
+      Φ.source ⊆ (chartAt (ComplexModel (d+t)) x).target ∧
+      ∃ _h0 : Φ.toFun (chartAt (ComplexModel (d+t)) x x) = 0,
+      (∀ {y : M}, y ∈ (chartAt (ComplexModel (d+t)) x).source →
+        chartAt (ComplexModel (d+t)) x y ∈ Φ.source →
+        (y ∈ C ↔ Φ.toFun (chartAt (ComplexModel (d+t)) x y) ∈ complexCoordinatePlane (d+t) d)) ∧
+      ∃ N : ℕ, ∃ U : Set (ComplexModel (deformationDimension d t)), IsOpen U ∧ 0 ∈ U ∧
+        U ⊆ (deformationProjection d t) ⁻¹' Φ.target ∧
+        let F := actualFlattenedOriginalSheaf A x Φ
+        CoherentOn (originalDeformationColonIdeal d t F N) U ∧
+        (∀ y ∈ U, ∀ q : ℕ, ∀ g, (originalDeformationColonIdeal d t F (N+q)).mem y g ↔
+          (originalDeformationColonIdeal d t F N).mem y g) ∧
+        (∀ y ∈ U, ∀ q : ℕ, N ≤ q → ∀ g, HolAt g y →
+          ((originalDeformationIdeal d t F).mem y (fun z => g z * deformationParameter d t z ^ q) ↔
+            (originalDeformationIdeal d t F).mem y (fun z => g z * deformationParameter d t z ^ N))) ∧
+        (∀ y ∈ U, ∀ g, (∃ q : ℕ, (originalDeformationColonIdeal d t F q).mem y g) ↔
+          (originalDeformationColonIdeal d t F N).mem y g) ∧
+        let B := (deformationCentralInclusion d t) ⁻¹' U
+        IsOpen B ∧ 0 ∈ B ∧ CoherentOn (originalDeformationCentralIdeal d t F N) B ∧
+        Ideal.map (normalPolynomialEval d t).toRingHom
+          (originalNormalInitialIdeal d t (originalCoherentOriginIdeal F)) ≤
+            originalCoherentOriginIdeal (originalDeformationCentralIdeal d t F N) := by
+  let := tangentAlgebra d t
+  obtain ⟨Φ, hsrc, h0, hflat, N, U, hU, h0U, hUV, hcol, hchain, hpow, hsat, hB, h0B, hcent, hsymbols⟩ :=
+    exists_original_regular_real_central_initial_symbol_memberships C x hreg A hA
+  refine ⟨Φ, hsrc, h0, hflat, N, U, hU, h0U, hUV, hcol, hchain, hpow, hsat, hB, h0B, hcent, ?_⟩
+  apply Ideal.map_le_iff_le_comap.mpr
+  rw [originalNormalInitialIdeal_eq_span_original_relations]
+  apply Ideal.span_le.mpr
+  rintro P ⟨a, rfl⟩
+  exact hsymbols a.1 a.2.val a.2.property.1 a.2.property.2
+
+end Original
+end
+end Hironaka.HironakaSmoothCentreRealDomainInitialRelations

@@ -1,0 +1,110 @@
+\section{Actual diagonal lifts and exceptional direction normalization}
+\label{sec:hironaka-normal-crossings-diagonal-lift-orbits}
+
+Fix the actual coordinate centre $L_k=\{z_i=0:i\geq k\}$ in the
+lifted coordinate model and an actual blowup $\sigma:Z\to\mathbb C^n$
+along $L_k$. All monomial-chart lifts below are the genuine unique
+holomorphic lifts supplied by this blowup's universal property. We
+prove geometric point identities, without asserting a finite whole
+canonical value image or replacing the original one-step history.
+
+\begin{lemma}[Diagonal biholomorphisms and the whole monomial equation]
+\label{hir:general-nc-diagonal-monomial-chart-equation}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.diagonalEquiv,Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.diagonal_preimage_centre,Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.diagonal_preimage_carrier,Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.monomial_chartScale}
+Let every $a_i$ be nonzero. The diagonal map $D_a(z)_i=a_i z_i$ is an
+actual biholomorphism preserving $L_k$ and every selected coordinate
+hyperplane union. In the monomial chart of pivot $j\geq k$, put
+$T_{a,j}(w)_j=a_jw_j$, $T_{a,j}(w)_i=(a_i/a_j)w_i$ for $i\geq k$, $i\ne j$,
+and $T_{a,j}(w)_i=a_iw_i$ for $i<k$. Then the whole polynomial maps satisfy
+$m_j\circ T_{a,j}=D_a\circ m_j$ at every chart point.
+\end{lemma}
+\begin{proof}
+The diagonal inverse has coefficients $a_i^{-1}$, and coordinatewise
+linearity makes both maps holomorphic. Nonzero multiplication preserves
+each coordinate zero predicate, so both the whole centre and every
+coordinate union are preserved. For a nonpivot normal coordinate, the
+left side equals $(a_i/a_j)w_i\,a_jw_j=a_iw_iw_j$, using $a_j\ne0$.
+At the pivot and at every free coordinate, the monomial map retains
+that coordinate and both sides equal $a_iw_i$. These coordinatewise
+equalities prove the entire map equation, including all zero coordinates.
+\end{proof}
+
+
+
+\begin{theorem}[The actual diagonal lift has the actual chart point identity]
+\label{hir:general-nc-actual-diagonal-lift-chart-identity}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.exists_diagonal_history_lift_chart}
+The actual diagonal base biholomorphism has an actual whole one-step
+history lift $E_a$ on $Z$. For its genuine monomial lift $\ell_j$,
+$E_a(\ell_j(w))=\ell_j(T_{a,j}(w))$ at every actual chart point.
+\uses{hir:general-nc-one-step-history-universal-comparison,hir:general-nc-diagonal-monomial-chart-equation}
+\end{theorem}
+\begin{proof}
+Whole centre preservation and the actual universal comparison of the
+two genuine blowups construct an actual lifted biholomorphism and its
+whole one-step history isomorphism. The exact projection equation gives
+$\sigma\circ E_a\circ\ell_j=D_a\circ m_j$. The preceding whole monomial
+equation also gives $\sigma\circ\ell_j\circ T_{a,j}=D_a\circ m_j$.
+Both compared maps are actual holomorphic maps on the entire chart.
+The pullback of the centre ideal along $m_j$ is invertible, generated
+by its pivot coordinate. Composing the base with a centre-preserving
+diagonal biholomorphism retains that invertibility. Thus uniqueness in
+the actual blowup universal property applies to these two maps with the
+same projection and makes them equal. Evaluating at $w$ proves the
+asserted actual point identity. Equality of projections alone is not
+used as a substitute for this uniqueness argument.
+\end{proof}
+
+\begin{theorem}[Actual zero--one exceptional direction representatives]
+\label{hir:general-nc-actual-binary-direction-normalization}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.exists_binary_direction_history_lift}
+Every actual point over zero can be carried by an actual diagonal
+one-step history isomorphism to a genuine monomial-chart point whose
+free and pivot coordinates are zero and whose remaining normal
+coordinates belong to $\{0,1\}$. The pivot and its nonzero support are
+actual finite coordinate data.
+\uses{hir:general-nc-actual-diagonal-lift-chart-identity}
+\end{theorem}
+\begin{proof}
+Actual monomial-chart surjectivity gives a pivot $j\geq k$ and a genuine
+chart point $w$ mapping to the specified blown-up point. Its exact
+projection is zero, so the pivot coordinate and every free coordinate
+of $w$ are zero. Put $a_j=1$. At every other normal coordinate, put
+$a_i=1$ when $w_i=0$ and $a_i=w_i^{-1}$ otherwise; put $a_i=1$ at free
+coordinates. Every chosen coefficient is nonzero. The resulting
+$T_{a,j}(w)$ has precisely the asserted zero--one coordinates. The
+preceding actual lifted point identity sends the original blown-up
+point to the genuine chart lift of this exact finite-support vector.
+The proof constructs the base coefficients, actual lifted map and
+actual point equality internally. No invariant value, orbit
+equivalence, history isomorphism or finite-value certificate is input.
+To deduce finitely many whole canonical values, a separate comparison
+with a common literal canonical model history is still required.
+\end{proof}
+
+\begin{corollary}[An actual finite set of geometric fibre representatives]
+\label{hir:general-nc-finite-geometric-fibre-orbit-representatives}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsDiagonalLiftOrbits.exists_finite_geometric_orbit_representatives}
+There is an actual finite set $Q\subset Z$, depending only on the fixed
+actual coordinate blowup and its genuine chart lifts, such that each
+actual point over zero is carried into $Q$ by a genuine diagonal
+one-step history isomorphism. This is a geometric statement; no finite
+whole invariant value image is asserted.
+\uses{hir:general-nc-actual-binary-direction-normalization}
+\end{corollary}
+\begin{proof}
+For every pivot $j\geq k$ and every subset $S$ of the finite coordinate
+index type, take the actual chart lift of its binary support vector.
+Let $Q$ be the image of this finite indexing family. It is finite even
+when distinct indices give the same actual point. The preceding theorem
+constructs, for each point over zero, an actual pivot and support and
+a genuine diagonal history isomorphism sending it to precisely that
+indexed chart point. Hence its image belongs to this same fixed $Q$.
+If the indexing family is empty, actual monomial-chart surjectivity
+implies there is no point over zero, so the quantified conclusion
+still follows from that preceding theorem.
+\end{proof}

@@ -1,0 +1,135 @@
+\section{The actual canonical embedded prefix for a pure analytic carrier}
+
+Let $W$ be an original compact analytic subset of a complex manifold $X$,
+pure of dimension $d<n$, and let $E_0$ be an ordered SNC divisor such that
+$W\subseteq\overline{W\setminus|E_0|}$.  Write
+\[
+ M=(X,X,E_0,I_W,1),\qquad
+ O=X\setminus((W\setminus W_{\mathrm{reg},d})\cup|E_0|),\qquad
+ F=(W\setminus W_{\mathrm{reg},d})\cup(W\cap|E_0|).
+\]
+The ambient manifold need not be compact, and $W$ may be empty or reducible.
+
+\begin{theorem}[Original pure-carrier data retain the actual first-meeting canonical prefix]
+\label{hir:original-pure-boundary-canonical-first-prefix}
+\uses{hir:embedded-resolution-boundary,hir:canonical-resolution-compact-cosupport,hir:original-cosupport-persistence-avoided-open,hir:original-canonical-boundary-principalization-compact-cosupport}
+\lean{Hironaka.HironakaOriginalPureBoundaryCanonicalPrefix.boundaryGoodOpen,Hironaka.HironakaOriginalPureBoundaryCanonicalPrefix.exists_original_pure_boundary_canonical_prefix}
+\leanok
+From only these original data, internally choose the actual finite
+canonical terminal tower $P$ of $M$.  There are an actual canonical
+prefix $T:D\to X$ and its actual tail $R$ with $T\mathbin{+\!+}R=P$,
+whose centres avoid $O$.  If $W$ is nonempty, the next whole maximum
+locus of this same prefix meets its inverse image of $O$.  If $W$ is
+empty, $T$ is the identity and every centre of $P$ is empty.
+
+The same $T$ is an admissible sequence relative to $E_0$, all its
+centres lie over $F$, and its actual accumulated divisor $E_T$ is SNC.
+Its conventional strict carrier $W_T$ is a closed submanifold, regular
+of dimension $d$ everywhere, with normal crossings with its own $E_T$.
+Moreover,
+\[
+ \operatorname{Exc}p_T\subseteq\bigcup(E_T\text{ after }|E_0|)
+       \subseteq p_T^{-1}F,\qquad
+ p_T^{-1}(W\setminus W_{\mathrm{reg},d})\subseteq\operatorname{Exc}p_T.
+\]
+The same projection is holomorphic, proper, surjective, and an
+isomorphism over $X\setminus F$.
+\end{theorem}
+\begin{proof}
+The original analytic, pure positive-codimension carrier and original
+SNC divisor put $M$ in the invariant domain; its cosupport is exactly
+$W$.  Compactness of $W$ therefore supplies an actual finite canonical
+terminal tower $P$.  The original density hypotheses give
+$W\subseteq\overline{W\cap O}$, and each original boundary member is
+disjoint from $O$.
+
+If $W$ is nonempty, $W\cap O$ is nonempty.  Were every centre of $P$
+to avoid $O$, lift such an original point through the surjective whole
+projection.  Cosupport persistence over the avoided open would put its
+lift in the final cosupport, contradicting terminality.  Thus the
+actual first-centre splitting selects a prefix $T$, actual tail $R$,
+canonicality, avoidance and a next whole maximum point over $O$.
+Homogeneity of the original pure-dimensional carrier over the
+boundary-free $O$ identifies this whole maximum there with precisely
+$p_T^{-1}W$.  Its actual maximal locus is a smooth admissible centre.
+The analytic strict-transform continuation theorem then identifies
+$W_T$ locally at each of its points with that smooth centre, giving
+dimension $d$ and its normal crossings with $E_T$.
+
+If $W$ is empty, choose the identity prefix and the whole $P$ as tail.
+Empty original cosupport forces every actual canonical centre of $P$
+to be empty.  Its strict carrier is empty, so all the asserted regular
+and normal-crossings conditions hold directly.
+
+In both cases canonicality gives actual testness and the SNC boundary.
+All actual centres lie over $W$ and, by avoidance, over $X\setminus O$;
+their intersection is contained in $F$.  This gives the admissible
+sequence and exceptional-divisor support over $F$.  Its support is
+exactly the union of the new boundary members, and contains the entire
+exceptional locus, yielding the two displayed containments on the
+left.  Smoothness and dimension $d$ of the strict carrier give the
+displayed singular-preimage containment.  The finite blowup projection
+is holomorphic, proper and surjective; its exceptional image lies in
+$F$, so it is an isomorphism over the complement.
+\end{proof}
+
+\begin{theorem}[The same pure-carrier canonical prefix has a genuine smooth source]
+\label{hir:original-pure-boundary-prefix-smooth-comparison}
+\uses{hir:original-pure-boundary-canonical-first-prefix,hir:original-stopped-strict-transform-smooth-square,hir:smooth-original-ambient-canonical-history-values,hir:submersion-relative-control-joint-tower,hir:submersion-relative-regular-geometry,hir:submersion-relative-nc-transversality}
+\lean{Hironaka.HironakaOriginalPureBoundaryCanonicalPrefix.exists_original_pure_boundary_stopped_smooth_source}
+\leanok
+For any holomorphic submersion $b:Y\to X$, the same original data
+internally construct the preceding actual target prefix $T$, its tail,
+and an actual smooth pullback prefix $Q:C\to Y$ for the literal marked
+record $N=b^*M$.  Its upper map $g:C\to D$ is a holomorphic submersion
+in a genuine holomorphic Cartesian square, and $Q$ has the same actual
+length as $T$.  Its whole transformed record is $g^*M_T$, hence
+$E_Q=g^{-1}E_T$ as entire ordered lists.  The source is canonical for
+this literal $N$, with its own SNC divisor and an admissible sequence
+relative to $b^{-1}E_0$, all centres lying over $b^{-1}F$.
+
+The conventional strict carriers satisfy the whole equality
+\[
+ \operatorname{Strict}_{Q}(b^{-1}W)=g^{-1}\operatorname{Strict}_{T}(W).
+\]
+The source strict carrier is a closed submanifold, regular of dimension
+$d+(\dim Y-\dim X)$, with normal crossings with its own actual $E_Q$.
+Its projection is holomorphic, proper and surjective; its exceptional
+locus lies in the union of its new boundary members, this union lies
+over $b^{-1}F$, and it is an isomorphism over $Y\setminus b^{-1}F$.
+The complete target dictionary of the preceding theorem is retained.
+\end{theorem}
+\begin{proof}
+Invoke the preceding construction once and retain its same target
+prefix and tail.  Pull that actual prefix back one genuine blowup at
+a time under $b$.  The actual blowup universal properties supply the
+upper submersion and Cartesian square.  Original ambient invariant
+transport gives canonicality of $Q$ for $b^*M$, and the whole controlled
+record dictionary gives its testness and the literal ordered boundary
+equality.  The exact projection equations at each actual stage pull
+the whole target centre containment back to $b^{-1}F$.  Consequently
+the source sequence is admissible relative to its actual original
+boundary, and actual well-formedness gives its SNC divisor.
+
+The target centres avoid $O$, and $W\cap O$ is dense in $W$.
+Openness of both the original submersion and the actual upper
+submersion commutes inverse image with the relevant closures.  The
+genuine Cartesian projection equation and the strict-transform
+avoided-open dictionary therefore give the displayed whole strict
+carrier equality, including exceptional points.  Pulling the actual
+target regular coordinates back under $g$ gives the source dimension
+and closed smooth carrier.  Pulling its normal-crossings coordinates
+back gives normal crossings with the literal $g^{-1}E_T=E_Q$.
+The source new-boundary support formula and its actual centres over
+$b^{-1}F$ give its exceptional containments.  The actual finite source
+projection is holomorphic, proper and surjective, and is an isomorphism
+off this bad-set preimage.  No compactness of $Y$ is used.
+\end{proof}
+
+\begin{remark}
+The source canonical datum is literally $b^*M$.  No equality with a
+separately reduced vanishing ideal of $b^{-1}W$ is assumed or inferred.
+This source is the actual pullback of the selected target prefix;
+comparison with a separately stopped source and arbitrary empty-step
+counts is a further construction.
+\end{remark}

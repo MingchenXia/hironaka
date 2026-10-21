@@ -1,0 +1,83 @@
+\section{The whole section module of the actual associated ring}
+
+For the original ideal $A$ and subset $C$, let $G(U)=\bigoplus_q L_q(U)$
+be the independently constructed associated section ring. Its ambient
+action is multiplication by the original degree-zero image of $R(U)$.
+The graded algebra construction uses the given component actions, so
+this is also the componentwise direct-sum action.
+
+\begin{definition}[The ambient module presheaf of the original section ring]
+\label{hir:real-domain-actual-normal-associated-module-ring-presheaf}
+\uses{hir:real-domain-actual-normal-associated-section-ring-presheaf,hir:real-domain-actual-normal-associated-section-ambient-ring-map}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedRingModulePresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedRingModulePresheaf_presheaf}
+\leanok
+The additive presheaf underlying $G$, with its original ambient section
+action, is a module presheaf over the original structure-ring presheaf.
+Its restrictions are exactly the original ring restrictions.
+\end{definition}
+\begin{proof}
+For $U\subseteq V$, the actual ring restriction sends the degree-zero
+image of $r\in R(V)$ to the degree-zero image of $r|_U$. Since restriction
+preserves products, it sends $r\cdot g$ to $r|_U\cdot g|_U$ for every
+$g\in G(V)$. It also preserves addition, identities and composition.
+These identities supply the module presheaf laws on the same sections
+and the same restriction maps.
+\end{proof}
+
+\begin{lemma}[Every genuine homogeneous module embeds naturally]
+\label{hir:real-domain-actual-normal-associated-module-ring-degree-inclusions}
+\uses{hir:real-domain-actual-normal-associated-module-ring-presheaf,hir:real-domain-actual-normal-layer-module-presheaf-stalk-action}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedRingModuleDegreeMap}
+\leanok
+For every $q\geq0$, the inclusion $L_q(U)\to G(U)$ defines a morphism of
+ambient module presheaves, on all original opens.
+\end{lemma}
+\begin{proof}
+The direct sum has the componentwise ambient action, so its $q$th
+inclusion is ambient linear. The actual ring restriction on that
+inclusion is the inclusion in the same degree of the actual layer
+restriction. Thus these linear inclusions commute with every actual
+restriction and define the claimed morphism.
+\end{proof}
+
+\begin{theorem}[The original section ring is the whole module coproduct]
+\label{hir:real-domain-actual-normal-associated-module-ring-coproduct}
+\uses{hir:real-domain-actual-normal-associated-module-ring-degree-inclusions}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedRingModuleCofan,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedRingModuleCofanIsColimit}
+\leanok
+The module presheaf underlying the original section ring, with the
+preceding degree inclusions, is the coproduct of all original layer
+module presheaves.
+\end{theorem}
+\begin{proof}
+Given compatible morphisms $f_q:L_q\to P$ into a module presheaf $P$,
+define $f_U:G(U)\to P(U)$ on a finite sum by
+$f_U(\sum_q\iota_q x_q)=\sum_q f_{q,U}(x_q)$. The direct-sum universal
+property makes this well-defined and ambient linear. On a degree
+inclusion, commutation with restriction is exactly the naturality
+identity for $f_q$. Both sides are additive maps on a finite-support
+direct sum, so equality on all degree inclusions proves naturality
+for every section. The same formula gives $f\iota_q=f_q$. Any other
+module presheaf morphism with these identities agrees on every
+degree inclusion in every open and hence on every finite sum. This
+proves the full coproduct universal property.
+\end{proof}
+
+\begin{corollary}[The original module coproduct retains every ring degree]
+\label{hir:real-domain-actual-normal-associated-module-ring-presheaf-comparison}
+\uses{hir:real-domain-actual-normal-associated-module-ring-coproduct,hir:real-domain-actual-normal-associated-module-sheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedModuleRingPresheafIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingPresheaf.actualNormalAssociatedModuleRingPresheafIso_degree}
+\leanok
+There is a unique isomorphism from the previously constructed original
+module coproduct to the ambient module presheaf underlying $G$ that
+sends each categorical degree inclusion to the literal original
+section inclusion in that degree.
+\end{corollary}
+\begin{proof}
+Both objects satisfy the coproduct universal property for the same
+diagram of all original layer module presheaves. Their universal maps
+are inverse because each composite agrees with the identity on every
+degree inclusion. Their defining factorization identities give the
+stated degree formula. Uniqueness is the uniqueness clause of the
+same coproduct universal property.
+\end{proof}

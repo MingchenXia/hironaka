@@ -1,0 +1,4 @@
+/-- Products are monotone. -/
+theorem mul_le_mul' {𝔞 𝔞' 𝔟 𝔟' : GermIdeal n M} (h𝔞 : 𝔞.Le 𝔞') (h𝔟 : 𝔟.Le 𝔟') :
+    (𝔞.mul 𝔟).Le (𝔞'.mul 𝔟') := fun x _ hg =>
+  mem_mul_iff.mpr ((mem_mul_iff.mp hg).mono fun _ ⟨a, b, ha, hb, hs⟩ => ⟨a, b, h𝔞 x a ha, h𝔟 x b hb, hs⟩)

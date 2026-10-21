@@ -1,0 +1,325 @@
+ℹ [4788/5195] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [5519/5630] Built Hironaka.Resolution.HironakaOriginalIndependentStoppedSource (6.5s)
+✖ [5570/5630] Building Hironaka.Resolution.HironakaOriginalStoppedBoundaryTransport (5.7s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.setup.json --json
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:48:23: ambiguous identifier `maxLocus`, possible interpretations: [ResolutionDriver.maxLocus, ResolutionDriver.maxLocus]
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:49:29: ambiguous identifier `IsEmptyTower`, possible interpretations: [ResolutionInvariantExt.IsEmptyTower,
+ ResolutionInvariantExt.IsEmptyTower]
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:236:4: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:236:25: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:241:10: No goals to be solved
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:249:10: No goals to be solved
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:271:14: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:273:14: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:279:9: Invalid `⟨...⟩` notation: The expected type of this term could not be determined
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:306:17: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:308:16: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:376:46: Unknown identifier `IsEmptyTower`
+
+Note: It is not possible to treat `IsEmptyTower` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:390:32: Unknown identifier `IsEmptyTower`
+
+Note: It is not possible to treat `IsEmptyTower` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:439:17: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:448:14: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:478:12: Unknown identifier `first_meeting_boundary_transport`
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:525:13: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:528:14: Unknown identifier `maxLocus`
+
+Note: It is not possible to treat `maxLocus` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:529:53: Unknown identifier `IsEmptyTower`
+
+Note: It is not possible to treat `IsEmptyTower` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:558:13: Unknown identifier `independent_stopped_square_boundary`
+error: Hironaka/Resolution/HironakaOriginalStoppedBoundaryTransport.lean:551:48: unsolved goals
+n m : ℕ
+X : CMfd n
+Y : CMfd m
+inst✝ : CompactSpace X.carrier
+V : ClosedIrreducibleAnalyticSubvariety n X.carrier
+hV : V.dim < n
+hcoh : (vanishingIdeal V.carrier).IsCoherent
+b : Y.carrier → X.carrier
+hb : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ b
+D₀ : CMfd n
+T : BlowupTower X D₀
+R : BlowupTower D₀ (compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).fst
+E₀ : CMfd m
+S : BlowupTower Y E₀
+R' :
+  BlowupTower E₀
+    (chosenActualTower defaultSmoothBlowupChoices hb
+        ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd).fst
+G : E₀.carrier → D₀.carrier
+h :
+  T.append R = ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd ∧
+    S.append R' =
+        (chosenActualTower defaultSmoothBlowupChoices hb
+              ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+                    ⋯).snd).snd.fst ∧
+      IsCanonical { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+          (fun {Y} => (canonicalInvariant n).inv { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }) T ∧
+        CentresAvoid (regularOpen V) T ∧
+          (∃
+              c ∈
+                ResolutionDriver.maxLocus
+                  ((canonicalInvariant n).inv { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } T)
+                  ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T).cosupp,
+              T.proj c ∈ regularOpen V) ∧
+            IsCanonical (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 })
+                (fun {Y_1} =>
+                  (canonicalInvariant m).inv
+                    (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }))
+                S ∧
+              CentresAvoid { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ } S ∧
+                ((b ⁻¹' V.carrier).Nonempty →
+                    ∃
+                      z ∈
+                        ResolutionDriver.maxLocus
+                          ((canonicalInvariant m).inv
+                            (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }) S)
+                          ((markedPullback b
+                                  { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).geoTransformAlong
+                              S).cosupp,
+                      S.proj z ∈ { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ }) ∧
+                  (¬(b ⁻¹' V.carrier).Nonempty →
+                      S.length = 0 ∧
+                        ResolutionInvariantExt.IsEmptyTower
+                          (chosenActualTower defaultSmoothBlowupChoices hb
+                                ↑(compactCanonicalTower
+                                      { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+                                      ⋯).snd).snd.fst) ∧
+                    Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ G ∧
+                      (∀ (z : E₀.carrier), T.proj (G z) = b (S.proj z)) ∧
+                        HolomorphicSquarePullback b G S.proj T.proj ∧
+                          strictTransform m S.proj (b ⁻¹' V.carrier) = G ⁻¹' strictTransform n T.proj V.carrier ∧
+                            (markedPullback b
+                                    { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).IsGeoTestTower
+                                S ∧
+                              IsSNCDivisor m
+                                  ((markedPullback b
+                                          { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                            d := 1 }).geoTransformAlong
+                                      S).E ∧
+                                IsSNCDivisor n
+                                    ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong
+                                        T).E ∧
+                                  IsClosedSubmanifold n (strictTransform n T.proj V.carrier) ∧
+                                    (∀ z ∈ strictTransform n T.proj V.carrier,
+                                        RegularAtDim (strictTransform n T.proj V.carrier) z V.dim) ∧
+                                      HasNormalCrossings n (strictTransform n T.proj V.carrier)
+                                          ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                  d := 1 }.geoTransformAlong
+                                              T).E ∧
+                                        IsIsomorphismOver n T.proj ↑(regularOpen V) ∧
+                                          IsClosedSubmanifold m (strictTransform m S.proj (b ⁻¹' V.carrier)) ∧
+                                            (∀ z ∈ strictTransform m S.proj (b ⁻¹' V.carrier),
+                                                RegularAtDim (strictTransform m S.proj (b ⁻¹' V.carrier)) z
+                                                  (V.dim + (m - n))) ∧
+                                              HasNormalCrossings m (strictTransform m S.proj (b ⁻¹' V.carrier))
+                                                  (List.map (fun x => G ⁻¹' x)
+                                                    ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                            d := 1 }.geoTransformAlong
+                                                        T).E) ∧
+                                                CentresOver (b ⁻¹' singularLocus V) S ∧
+                                                  HironakaAdmissibleSequence.IsAdmissibleBlowupSequence m Y.carrier []
+                                                      (b ⁻¹' singularLocus V) E₀.carrier S.proj
+                                                      ((markedPullback b
+                                                              { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                                d := 1 }).geoTransformAlong
+                                                          S).E ∧
+                                                    ContMDiff 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel m) ∞ S.proj ∧
+                                                      IsProperMap S.proj ∧
+                                                        Surjective S.proj ∧
+                                                          S.proj '' exceptionalLocus m S.proj ⊆ b ⁻¹' singularLocus V ∧
+                                                            IsIsomorphismOver m S.proj
+                                                              ↑{ carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ }
+hTR : T.append R = ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd
+hSR :
+  S.append R' =
+    (chosenActualTower defaultSmoothBlowupChoices hb
+          ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd).snd.fst
+hcT :
+  IsCanonical { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+    (fun {Y} => (canonicalInvariant n).inv { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }) T
+haT : CentresAvoid (regularOpen V) T
+hmT :
+  ∃
+    c ∈
+      ResolutionDriver.maxLocus
+        ((canonicalInvariant n).inv { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } T)
+        ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T).cosupp,
+    T.proj c ∈ regularOpen V
+hcS :
+  IsCanonical (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 })
+    (fun {Y_1} =>
+      (canonicalInvariant m).inv (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }))
+    S
+haS : CentresAvoid { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ } S
+hmS :
+  (b ⁻¹' V.carrier).Nonempty →
+    ∃
+      z ∈
+        ResolutionDriver.maxLocus
+          ((canonicalInvariant m).inv
+            (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }) S)
+          ((markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).geoTransformAlong
+              S).cosupp,
+      S.proj z ∈ { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ }
+heS :
+  ¬(b ⁻¹' V.carrier).Nonempty →
+    S.length = 0 ∧
+      ResolutionInvariantExt.IsEmptyTower
+        (chosenActualTower defaultSmoothBlowupChoices hb
+              ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd).snd.fst
+hG : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ G
+hproj : ∀ (z : E₀.carrier), T.proj (G z) = b (S.proj z)
+hcart : HolomorphicSquarePullback b G S.proj T.proj
+hstrict : strictTransform m S.proj (b ⁻¹' V.carrier) = G ⁻¹' strictTransform n T.proj V.carrier
+htS : (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).IsGeoTestTower S
+hSNCS :
+  IsSNCDivisor m
+    ((markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).geoTransformAlong S).E
+hSNCT : IsSNCDivisor n ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T).E
+hSMT : IsClosedSubmanifold n (strictTransform n T.proj V.carrier)
+hrT : ∀ z ∈ strictTransform n T.proj V.carrier, RegularAtDim (strictTransform n T.proj V.carrier) z V.dim
+hNCT :
+  HasNormalCrossings n (strictTransform n T.proj V.carrier)
+    ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T).E
+hisoT : IsIsomorphismOver n T.proj ↑(regularOpen V)
+hSMS : IsClosedSubmanifold m (strictTransform m S.proj (b ⁻¹' V.carrier))
+hrS :
+  ∀ z ∈ strictTransform m S.proj (b ⁻¹' V.carrier),
+    RegularAtDim (strictTransform m S.proj (b ⁻¹' V.carrier)) z (V.dim + (m - n))
+hNCPull :
+  HasNormalCrossings m (strictTransform m S.proj (b ⁻¹' V.carrier))
+    (List.map (fun x => G ⁻¹' x)
+      ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T).E)
+hoverS : CentresOver (b ⁻¹' singularLocus V) S
+hadmS :
+  HironakaAdmissibleSequence.IsAdmissibleBlowupSequence m Y.carrier [] (b ⁻¹' singularLocus V) E₀.carrier S.proj
+    ((markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).geoTransformAlong S).E
+hholS : ContMDiff 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel m) ∞ S.proj
+hproperS : IsProperMap S.proj
+hsurjS : Surjective S.proj
+hExcS : S.proj '' exceptionalLocus m S.proj ⊆ b ⁻¹' singularLocus V
+hisoS : IsIsomorphismOver m S.proj ↑{ carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ }
+⊢ ∃ D₀ T R E₀ S R' G,
+    HasNormalCrossings m (strictTransform m S.proj (b ⁻¹' V.carrier))
+        ((markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).geoTransformAlong S).E ∧
+      List.filter (fun H => decide H.Nonempty)
+            ((markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }).geoTransformAlong
+                S).E =
+          List.filter (fun H => decide H.Nonempty)
+            (List.map (fun x => G ⁻¹' x)
+              ({ N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }.geoTransformAlong T).E) ∧
+        T.append R = ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 } ⋯).snd ∧
+          S.append R' =
+              (chosenActualTower defaultSmoothBlowupChoices hb
+                    ↑(compactCanonicalTower { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+                          ⋯).snd).snd.fst ∧
+            IsCanonical { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }
+                (fun {Y} =>
+                  (canonicalInvariant n).inv { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 })
+                T ∧
+              CentresAvoid (regularOpen V) T ∧
+                (∃ c ∈ sorry, T.proj c ∈ regularOpen V) ∧
+                  IsCanonical (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 })
+                      (fun {Y_1} =>
+                        (canonicalInvariant m).inv
+                          (markedPullback b { N := univ, E := [], ideal := vanishingIdeal V.carrier, d := 1 }))
+                      S ∧
+                    CentresAvoid { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ } S ∧
+                      ((b ⁻¹' V.carrier).Nonempty →
+                          ∃ z ∈ sorry, S.proj z ∈ { carrier := b ⁻¹' ↑(regularOpen V), is_open' := ⋯ }) ∧
+                        (¬(b ⁻¹' V.carrier).Nonempty → S.length = 0 ∧ sorry) ∧
+                          Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ G ∧
+                            (∀ (z : E₀.carrier), T.proj (G z) = b (S.proj z)) ∧
+                              HolomorphicSquarePullback b G S.proj T.proj ∧
+                                strictTransform m S.proj (b ⁻¹' V.carrier) = G ⁻¹' strictTransform n T.proj V.carrier ∧
+                                  (markedPullback b
+                                          { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                            d := 1 }).IsGeoTestTower
+                                      S ∧
+                                    IsSNCDivisor m
+                                        ((markedPullback b
+                                                { N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                  d := 1 }).geoTransformAlong
+                                            S).E ∧
+                                      IsSNCDivisor n
+                                          ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                  d := 1 }.geoTransformAlong
+                                              T).E ∧
+                                        IsClosedSubmanifold n (strictTransform n T.proj V.carrier) ∧
+                                          (∀ z ∈ strictTransform n T.proj V.carrier,
+                                              RegularAtDim (strictTransform n T.proj V.carrier) z V.dim) ∧
+                                            HasNormalCrossings n (strictTransform n T.proj V.carrier)
+                                                ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                        d := 1 }.geoTransformAlong
+                                                    T).E ∧
+                                              IsIsomorphismOver n T.proj ↑(regularOpen V) ∧
+                                                IsClosedSubmanifold m (strictTransform m S.proj (b ⁻¹' V.carrier)) ∧
+                                                  (∀ z ∈ strictTransform m S.proj (b ⁻¹' V.carrier),
+                                                      RegularAtDim (strictTransform m S.proj (b ⁻¹' V.carrier)) z
+                                                        (V.dim + (m - n))) ∧
+                                                    HasNormalCrossings m (strictTransform m S.proj (b ⁻¹' V.carrier))
+                                                        (List.map (fun x => G ⁻¹' x)
+                                                          ({ N := univ, E := [], ideal := vanishingIdeal V.carrier,
+                                                                  d := 1 }.geoTransformAlong
+                                                              T).E) ∧
+                                                      CentresOver (b ⁻¹' singularLocus V) S ∧
+                                                        HironakaAdmissibleSequence.IsAdmissibleBlowupSequence m
+                                                            Y.carrier [] (b ⁻¹' singularLocus V) E₀.carrier S.proj
+                                                            ((markedPullback b
+                                                                    { N := univ, E := [],
+                                                                      ideal := vanishingIdeal V.carrier,
+                                                                      d := 1 }).geoTransformAlong
+                                                                S).E ∧
+                                                          ContMDiff 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel m) ∞ S.proj ∧
+                                                            IsProperMap S.proj ∧
+                                                              Surjective S.proj ∧
+                                                                S.proj '' exceptionalLocus m S.proj ⊆
+                                                                    b ⁻¹' singularLocus V ∧
+                                                                  IsIsomorphismOver m S.proj
+                                                                    ↑{ carrier := b ⁻¹' ↑(regularOpen V),
+                                                                        is_open' := ⋯ }
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaOriginalStoppedBoundaryTransport
+error: build failed

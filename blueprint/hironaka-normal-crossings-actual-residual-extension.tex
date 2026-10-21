@@ -1,0 +1,122 @@
+\section{The actual nonmonomial residual along general NC separation}
+\label{sec:hironaka-normal-crossings-actual-residual}
+
+Throughout this section the ambient complex dimension is positive.
+
+Let $H$ be a genuine normal-crossings carrier, allowing local branches and
+self-intersections, and let $F$ be an actual finite indexed weighted SNC
+boundary adapted to $H$. Put $P=\prod_i\mathcal I_{F_i}^{a_i}$ and
+$I=P\mathcal I_H$. The entire boundary and every zero or empty historical
+entry are retained. The residual below is the actual intrinsic colon
+residual, rather than a supplied factorization datum. This is the first
+entry of the general marked invariant; equality of its lower history and
+colexicographic entries is a separate question.
+
+\begin{lemma}[The whole intrinsic monomial factor of the actual joint ideal]
+\label{hir:general-nc-actual-joint-monomial-factor}
+\uses{hir:general-nc-original-joint-pullback-exponents,hir:nc-ordered-tail-gamma-singleton-formula,hir:intrinsic-supported-ideal-monomial}
+\lean{Hironaka.HironakaNormalCrossingsActualResidual.monomialPart_joint_eq_componentPowerProduct}
+\leanok
+If the ambient dimension is positive, then the whole intrinsic monomial
+ideal of $I$ on the literal boundary $F$ equals $P$.
+\end{lemma}
+\begin{proof}
+The actual joint coordinate-product theorem computes the intrinsic
+exponent of $I$ at every boundary member through every point as its
+literal weight $a_i$. The actual ordinary SNC product theorem computes
+the exponent of $P$ on that same member as the same weight. Thus the
+definitions of the two intrinsic monomial ideals give equality at every
+stalk. Each factor ideal of $P$ is invertible, hence so is their actual
+finite product. The actual marking-one cosupport formula for that
+product says that every support point lies on a positive-weight member,
+so its support lies in the union of the literal boundary. The proved
+SNC-supported divisor theorem identifies the intrinsic monomial ideal
+of this same whole product with $P$. Combining the two equalities proves
+the assertion. Empty members and zero weights contribute no support.
+\end{proof}
+
+\begin{theorem}[The whole residual is the actual strict original ideal]
+\label{hir:general-nc-actual-joint-residual}
+\uses{hir:general-nc-actual-joint-monomial-factor,hir:monomial-part-ambient,hir:general-nc-whole-original-ideal-invertible,hir:monomial-part-along}
+\lean{Hironaka.HironakaNormalCrossingsActualResidual.nonmonomialPart_joint_eq_original,Hironaka.HironakaNormalCrossingsActualResidual.nonmonomialPartAlong_joint_eq_original}
+\leanok
+In positive ambient dimension the entire ambient nonmonomial part of
+$I$ on $F$ is $\mathcal I_H$. The same equality holds for the actual
+nonmonomial part along the whole ambient manifold.
+\end{theorem}
+\begin{proof}
+The whole NC ideal and the finite boundary product are invertible, so
+their product $I$ is invertible. The genuine intrinsic factorization is
+$I=\mathcal N(I)\mathcal M(I)$. Its residual is invertible, by the actual
+colon theorem for nested invertible ideals. Substituting the preceding
+whole monomial equality and commuting factors gives
+$P\mathcal N(I)=P\mathcal I_H$. Cancellation of the actual invertible
+factor $P$ gives the ambient equality. Along the whole manifold, a
+restricted span is exactly its ambient span: apply the defining
+neighbourhood equality at every point of the whole space. Thus the
+ambient extension of a coherent ideal along the whole manifold is the
+same ideal. The boundary exponents along the whole manifold are the
+ambient exponents, and the power-ideal spans give the same membership.
+Consequently both actual monomial ideals and both actual colon
+residuals agree, proving the second assertion.
+\end{proof}
+
+\begin{theorem}[The genuine first invariant entry at every actual prefix]
+\label{hir:general-nc-actual-prefix-first-entry}
+\uses{hir:general-nc-actual-joint-residual,hir:general-nc-generated-exact-original-weights,hir:general-nc-original-joint-pullback-exponents,bcalc:nonmonomial-order-local}
+\lean{Hironaka.HironakaNormalCrossingsActualResidual.higherSeparationCentres_nonmonomialPartAlong,Hironaka.HironakaNormalCrossingsActualResidual.higherSeparationCentres_nmOrd}
+\leanok
+At every actual recorded higher-stratum separation prefix, the entire
+nonmonomial ideal of the same original marking-one controlled transform
+is the vanishing ideal of its genuine differential strict original.
+Its actual nonmonomial order at every point is the intrinsic number of
+branches of that strict original.
+\end{theorem}
+\begin{proof}
+The actual higher-centre induction produces the literal current
+boundary-adapted strict original and the whole controlled-ideal
+dictionary $I_T=P_T\mathcal I_{H_T}$, where $P_T$ uses precisely the
+recorded historical weights $r-1$. The recorded carrier list is exactly
+the current marked boundary, and every boundary factor is genuinely
+invertible. Apply the preceding whole residual theorem to this actual
+pair and product, and transport across those literal equalities. For
+each natural $q$, membership in its actual residual order-$q$ set is
+therefore equivalent to $q$ being at most the intrinsic branch count,
+by the exact whole original-order theorem. The count plus one does not
+belong to the next order set, whereas each positive integer up to the
+count does. The definition as the least failed successor order thus
+gives equality of the natural nonmonomial order with that count.
+\end{proof}
+
+\begin{corollary}[Every genuine separation centre is the whole first-entry maximum]
+\label{hir:general-nc-actual-first-entry-maximum-centre}
+\uses{hir:general-nc-actual-prefix-first-entry,hir:general-nc-internal-original-test-tower,hir:general-nc-bounded-actual-separation-tower}
+\lean{Hironaka.HironakaNormalCrossingsActualResidual.higherSeparationCentre_eq_nmOrd_maxLocus}
+\leanok
+At every actual higher-stratum separation prefix, its next genuine
+highest-branch centre is exactly the whole maximum locus of the actual
+nonmonomial-order function on the same current marked cosupport.
+\end{corollary}
+\begin{proof}
+Let $r\ge2$ be the attained actual global branch maximum defining that
+centre. The preceding equality bounds the actual nonmonomial order of
+every point by $r$. Every centre point belongs to the current strict
+original, hence to the same current controlled cosupport, and has
+order $r$; it therefore belongs to the asserted maximum locus.
+Conversely take a point of that maximum locus. Choose an actual point
+of the nonempty geometric centre. This chosen point lies in the same
+cosupport and has order $r$, so maximality forces the first point to
+have order at least $r$. The first-entry identity puts it in the
+geometric highest-branch centre. This proves both whole-set inclusions.
+\end{proof}
+
+\begin{remark}
+These are whole residual and first-entry identities for the genuine
+original NC ideal, at the actual generated prefixes. They do not
+identify all lower history-sensitive entries of the general canonical
+invariant, or assert that its full maximum locus equals every geometric
+highest-branch locus. An unrelated additional marked ideal can have
+cosupport disjoint from the NC singular locus, so admissibility of the
+geometric separation for that ideal requires a different construction.
+The full canonical marked-ideal G9 endpoint remains open.
+\end{remark}

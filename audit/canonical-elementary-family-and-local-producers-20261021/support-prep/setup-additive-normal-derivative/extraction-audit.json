@@ -1,0 +1,371 @@
+{
+  "status": "DRAFT_ONLY_COMPLETE_ORIGINAL_SELECTED_SUPPORT_ACTUAL_ORDINARY_CLOSURE_MATCH",
+  "fixed_ordinary_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/NormalDerivativeChart.lean",
+  "source_git_blob": "24a7bc43f2ca5f087603529bce288e9e5f41392b",
+  "whole_original_source_sha256": "d506705829fc5ae95c604d89e39639ef95a803efd7f6e33e0f1dd89396d26783",
+  "destination_module": "Hironaka.Support.NormalDerivativeChartIdealOriginalExact",
+  "draft_path": "NormalDerivativeChartIdealOriginalExact.lean",
+  "draft_sha256": "7c911110dbdd9a52a2584cc0eac31fce2b61de7a392eff0d82707558aadd3fa4",
+  "draft_lines": 81,
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_nil",
+    "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_mem_iterDerivIdeal"
+  ],
+  "selected_payloads": [
+    {
+      "native_name": "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_nil",
+      "short_name": "nd_nil",
+      "start_byte": 7101,
+      "end_byte": 7332,
+      "start_line": 135,
+      "end_line": 138,
+      "complete_original_payload": "/-- The empty normal derivative is the function itself near `p`. -/\ntheorem nd_nil (f : M → ℂ) : c.nd [] f =ᶠ[𝓝 p] f := by\n  filter_upwards [c.eventually_inv_ψ] with y hy\n  simp only [nd, List.map_nil, iterDeriv_nil, hy]\n",
+      "sha256": "4a7e5cdf7922e264c89763d80a0023088b5c520cf1d25bff1590fcee4463b12e"
+    },
+    {
+      "native_name": "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_mem_iterDerivIdeal",
+      "short_name": "nd_mem_iterDerivIdeal",
+      "start_byte": 9079,
+      "end_byte": 12378,
+      "start_line": 167,
+      "end_line": 213,
+      "complete_original_payload": "/-- **Derivatives in a flat chart of a germ of `𝔟` lie in `𝓓^{|L|}(𝔟)`** (coherent `𝔟`): every coordinate derivative\nis a holomorphic combination of chart derivatives. -/\ntheorem nd_mem_iterDerivIdeal {𝔟 : GermIdeal n M} (h𝔟 : 𝔟.IsCoherent) {g : M → ℂ} (hg : 𝔟.mem p g) :\n    ∀ L : List (Fin n), (iterDerivIdeal 𝔟 L.length).mem p (c.nd L g)\n  | [] => mem_congr_of_isCoherent h𝔟 hg (c.nd_nil g).symm\n  | l :: L => by\n    have hhol : ∀ y g, 𝔟.mem y g → HolomorphicAt n g y := fun _ _ hg =>\n      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg\n    set e := complexChartAt (n := n) p with he\n    have hes : e.val = chartAt (ComplexModel n) p := rfl\n    have hps : p ∈ e.val.source := mem_complexChartAt_source p\n    -- the chart reading of `ψ` is `Φ` near `e p`\n    set Nset : Set (ComplexModel n) := e.val.target ∩ c.Φ.source with hNset\n    have hNo : IsOpen Nset := e.val.open_target.inter c.Φ.isOpen_source\n    have hpN : e.val p ∈ Nset := ⟨e.val.map_source hps, c.Φ.center_mem_source⟩\n    have hFeq : ∀ ζ ∈ Nset, (c.ψ ∘ e.val.symm) ζ = c.Φ.toFun ζ := fun ζ hζ => by\n      simp only [Function.comp_apply, ψ, ← hes, e.val.right_inv hζ.1]\n    have hFd : DifferentiableOn ℂ (c.ψ ∘ e.val.symm) Nset := fun ζ hζ =>\n      ((c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds hζ.2)).congr_of_eventuallyEq\n        (eventually_of_mem (hNo.mem_nhds hζ) fun ζ' hζ' => hFeq ζ' hζ')).differentiableWithinAt\n    have hinj : Function.Injective (fderiv ℂ (c.ψ ∘ e.val.symm) (e.val p)) := by\n      have hloc : (c.ψ ∘ e.val.symm) =ᶠ[𝓝 (e.val p)] c.Φ.toFun :=\n        eventually_of_mem (hNo.mem_nhds hpN) fun ζ' hζ' => hFeq ζ' hζ'\n      rw [hloc.fderiv_eq]\n      exact c.injective_fderiv_Φ c.Φ.center_mem_source\n    obtain ⟨cf, hcf, hceq⟩ := BlowupDerivativeIdeal.exists_coordDeriv_coeff hNo hpN hFd hinj\n    have hprev := nd_mem_iterDerivIdeal h𝔟 hg L\n    -- `G = ∂^L (g ∘ inv)` is holomorphic near `ψ p = 0`\n    obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.mp\n      (c.eventually_differentiableAt_comp_inv (hhol p g hg))\n    have hGU : DifferentiableOn ℂ (fun u => g (c.inv u)) (ball 0 r) := fun z hz =>\n      (hball z hz).differentiableWithinAt\n    have hdj := differentiableOn_iterDeriv hGU isOpen_ball (L.map bv)\n    have hGev : ∀ᶠ w in 𝓝 (c.ψ p), DifferentiableAt ℂ (iterDeriv (L.map bv) (fun u => g (c.inv u))) w := by\n      rw [c.ψ_self]\n      filter_upwards [isOpen_ball.mem_nhds (mem_ball_self hr)] with w hw\n      exact (hdj w hw).differentiableAt (isOpen_ball.mem_nhds hw)\n    have heq := hceq _ hGev l\n    have hmem : (iterDerivIdeal 𝔟 (L.length + 1)).mem p (fun y => ∑ m, cf l m y *\n        chartDeriv e (EuclideanSpace.single m 1) (iterDeriv (L.map bv) (fun u => g (c.inv u)) ∘ c.ψ) y) := by\n      refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun m _ => ?_\n      exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (hcf l m)\n        (chartDeriv_mem_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal hhol L.length) hps hprev)\n    refine DerivativeIdeal.isInSpanAt_congr hmem ?_\n    filter_upwards [heq] with y hy\n    simp only [nd, List.map_cons, iterDeriv_cons, dirDeriv]\n    exact hy.symm\n",
+      "sha256": "6c5637f401e1848795f07f9ca619dfeec8dcb7a30906419787fc0f22a02f9922"
+    }
+  ],
+  "original_payload_chunks": [
+    "/-- The empty normal derivative is the function itself near `p`. -/\ntheorem nd_nil (f : M → ℂ) : c.nd [] f =ᶠ[𝓝 p] f := by\n  filter_upwards [c.eventually_inv_ψ] with y hy\n  simp only [nd, List.map_nil, iterDeriv_nil, hy]\n",
+    "/-- **Derivatives in a flat chart of a germ of `𝔟` lie in `𝓓^{|L|}(𝔟)`** (coherent `𝔟`): every coordinate derivative\nis a holomorphic combination of chart derivatives. -/\ntheorem nd_mem_iterDerivIdeal {𝔟 : GermIdeal n M} (h𝔟 : 𝔟.IsCoherent) {g : M → ℂ} (hg : 𝔟.mem p g) :\n    ∀ L : List (Fin n), (iterDerivIdeal 𝔟 L.length).mem p (c.nd L g)\n  | [] => mem_congr_of_isCoherent h𝔟 hg (c.nd_nil g).symm\n  | l :: L => by\n    have hhol : ∀ y g, 𝔟.mem y g → HolomorphicAt n g y := fun _ _ hg =>\n      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg\n    set e := complexChartAt (n := n) p with he\n    have hes : e.val = chartAt (ComplexModel n) p := rfl\n    have hps : p ∈ e.val.source := mem_complexChartAt_source p\n    -- the chart reading of `ψ` is `Φ` near `e p`\n    set Nset : Set (ComplexModel n) := e.val.target ∩ c.Φ.source with hNset\n    have hNo : IsOpen Nset := e.val.open_target.inter c.Φ.isOpen_source\n    have hpN : e.val p ∈ Nset := ⟨e.val.map_source hps, c.Φ.center_mem_source⟩\n    have hFeq : ∀ ζ ∈ Nset, (c.ψ ∘ e.val.symm) ζ = c.Φ.toFun ζ := fun ζ hζ => by\n      simp only [Function.comp_apply, ψ, ← hes, e.val.right_inv hζ.1]\n    have hFd : DifferentiableOn ℂ (c.ψ ∘ e.val.symm) Nset := fun ζ hζ =>\n      ((c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds hζ.2)).congr_of_eventuallyEq\n        (eventually_of_mem (hNo.mem_nhds hζ) fun ζ' hζ' => hFeq ζ' hζ')).differentiableWithinAt\n    have hinj : Function.Injective (fderiv ℂ (c.ψ ∘ e.val.symm) (e.val p)) := by\n      have hloc : (c.ψ ∘ e.val.symm) =ᶠ[𝓝 (e.val p)] c.Φ.toFun :=\n        eventually_of_mem (hNo.mem_nhds hpN) fun ζ' hζ' => hFeq ζ' hζ'\n      rw [hloc.fderiv_eq]\n      exact c.injective_fderiv_Φ c.Φ.center_mem_source\n    obtain ⟨cf, hcf, hceq⟩ := BlowupDerivativeIdeal.exists_coordDeriv_coeff hNo hpN hFd hinj\n    have hprev := nd_mem_iterDerivIdeal h𝔟 hg L\n    -- `G = ∂^L (g ∘ inv)` is holomorphic near `ψ p = 0`\n    obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.mp\n      (c.eventually_differentiableAt_comp_inv (hhol p g hg))\n    have hGU : DifferentiableOn ℂ (fun u => g (c.inv u)) (ball 0 r) := fun z hz =>\n      (hball z hz).differentiableWithinAt\n    have hdj := differentiableOn_iterDeriv hGU isOpen_ball (L.map bv)\n    have hGev : ∀ᶠ w in 𝓝 (c.ψ p), DifferentiableAt ℂ (iterDeriv (L.map bv) (fun u => g (c.inv u))) w := by\n      rw [c.ψ_self]\n      filter_upwards [isOpen_ball.mem_nhds (mem_ball_self hr)] with w hw\n      exact (hdj w hw).differentiableAt (isOpen_ball.mem_nhds hw)\n    have heq := hceq _ hGev l\n    have hmem : (iterDerivIdeal 𝔟 (L.length + 1)).mem p (fun y => ∑ m, cf l m y *\n        chartDeriv e (EuclideanSpace.single m 1) (iterDeriv (L.map bv) (fun u => g (c.inv u)) ∘ c.ψ) y) := by\n      refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun m _ => ?_\n      exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (hcf l m)\n        (chartDeriv_mem_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal hhol L.length) hps hprev)\n    refine DerivativeIdeal.isInSpanAt_congr hmem ?_\n    filter_upwards [heq] with y hy\n    simp only [nd, List.map_cons, iterDeriv_cons, dirDeriv]\n    exact hy.symm\n"
+  ],
+  "original_selected_source": "/-- The empty normal derivative is the function itself near `p`. -/\ntheorem nd_nil (f : M → ℂ) : c.nd [] f =ᶠ[𝓝 p] f := by\n  filter_upwards [c.eventually_inv_ψ] with y hy\n  simp only [nd, List.map_nil, iterDeriv_nil, hy]\n\n/-- **Derivatives in a flat chart of a germ of `𝔟` lie in `𝓓^{|L|}(𝔟)`** (coherent `𝔟`): every coordinate derivative\nis a holomorphic combination of chart derivatives. -/\ntheorem nd_mem_iterDerivIdeal {𝔟 : GermIdeal n M} (h𝔟 : 𝔟.IsCoherent) {g : M → ℂ} (hg : 𝔟.mem p g) :\n    ∀ L : List (Fin n), (iterDerivIdeal 𝔟 L.length).mem p (c.nd L g)\n  | [] => mem_congr_of_isCoherent h𝔟 hg (c.nd_nil g).symm\n  | l :: L => by\n    have hhol : ∀ y g, 𝔟.mem y g → HolomorphicAt n g y := fun _ _ hg =>\n      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hg\n    set e := complexChartAt (n := n) p with he\n    have hes : e.val = chartAt (ComplexModel n) p := rfl\n    have hps : p ∈ e.val.source := mem_complexChartAt_source p\n    -- the chart reading of `ψ` is `Φ` near `e p`\n    set Nset : Set (ComplexModel n) := e.val.target ∩ c.Φ.source with hNset\n    have hNo : IsOpen Nset := e.val.open_target.inter c.Φ.isOpen_source\n    have hpN : e.val p ∈ Nset := ⟨e.val.map_source hps, c.Φ.center_mem_source⟩\n    have hFeq : ∀ ζ ∈ Nset, (c.ψ ∘ e.val.symm) ζ = c.Φ.toFun ζ := fun ζ hζ => by\n      simp only [Function.comp_apply, ψ, ← hes, e.val.right_inv hζ.1]\n    have hFd : DifferentiableOn ℂ (c.ψ ∘ e.val.symm) Nset := fun ζ hζ =>\n      ((c.Φ.toFun_holomorphic.differentiableAt (c.Φ.isOpen_source.mem_nhds hζ.2)).congr_of_eventuallyEq\n        (eventually_of_mem (hNo.mem_nhds hζ) fun ζ' hζ' => hFeq ζ' hζ')).differentiableWithinAt\n    have hinj : Function.Injective (fderiv ℂ (c.ψ ∘ e.val.symm) (e.val p)) := by\n      have hloc : (c.ψ ∘ e.val.symm) =ᶠ[𝓝 (e.val p)] c.Φ.toFun :=\n        eventually_of_mem (hNo.mem_nhds hpN) fun ζ' hζ' => hFeq ζ' hζ'\n      rw [hloc.fderiv_eq]\n      exact c.injective_fderiv_Φ c.Φ.center_mem_source\n    obtain ⟨cf, hcf, hceq⟩ := BlowupDerivativeIdeal.exists_coordDeriv_coeff hNo hpN hFd hinj\n    have hprev := nd_mem_iterDerivIdeal h𝔟 hg L\n    -- `G = ∂^L (g ∘ inv)` is holomorphic near `ψ p = 0`\n    obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.mp\n      (c.eventually_differentiableAt_comp_inv (hhol p g hg))\n    have hGU : DifferentiableOn ℂ (fun u => g (c.inv u)) (ball 0 r) := fun z hz =>\n      (hball z hz).differentiableWithinAt\n    have hdj := differentiableOn_iterDeriv hGU isOpen_ball (L.map bv)\n    have hGev : ∀ᶠ w in 𝓝 (c.ψ p), DifferentiableAt ℂ (iterDeriv (L.map bv) (fun u => g (c.inv u))) w := by\n      rw [c.ψ_self]\n      filter_upwards [isOpen_ball.mem_nhds (mem_ball_self hr)] with w hw\n      exact (hdj w hw).differentiableAt (isOpen_ball.mem_nhds hw)\n    have heq := hceq _ hGev l\n    have hmem : (iterDerivIdeal 𝔟 (L.length + 1)).mem p (fun y => ∑ m, cf l m y *\n        chartDeriv e (EuclideanSpace.single m 1) (iterDeriv (L.map bv) (fun u => g (c.inv u)) ∘ c.ψ) y) := by\n      refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun m _ => ?_\n      exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (hcf l m)\n        (chartDeriv_mem_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal hhol L.length) hps hprev)\n    refine DerivativeIdeal.isInSpanAt_congr hmem ?_\n    filter_upwards [heq] with y hy\n    simp only [nd, List.map_cons, iterDeriv_cons, dirDeriv]\n    exact hy.symm\n",
+  "original_selected_sha256": "c021d800367e85cdfdf553aa5fc3adf13c00f3b1b0cfb7360f48873ae6a624cd",
+  "canonical_source_layout": [
+    {
+      "canonical_administrative_context": "/- Complete original prerequisite; statement and mathematical proof unchanged. -/\nimport Hironaka.MarkedIdeal.NormalDerivativeChart\n\n",
+      "sha256": "285767403a7cde69106334513c1b3a51406bed8487eb4a76071bde8a64c5bd23"
+    },
+    {
+      "canonical_administrative_context": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\n",
+      "original_context": {
+        "start_line": 4,
+        "end_line": 5,
+        "original_source": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n",
+        "sha256": "daf02537fa574f7c9bad34ae0b69a6b6858be62234a4f94ae548fb61d4d4b159"
+      },
+      "sha256": "a503ba17d6a900b2708e949f5077a2d25a126ba460d6edfbdb98e3e365e4ebe5"
+    },
+    {
+      "canonical_administrative_context": "open Set Filter Metric\nopen scoped Topology Manifold ContDiff\n\n",
+      "original_context": {
+        "start_line": 26,
+        "end_line": 27,
+        "original_source": "open Set Filter Metric\nopen scoped Topology Manifold ContDiff\n",
+        "sha256": "af564dca1f28edd24a1f3322c2b38ab3b2438d62af7441044e937b136db53134"
+      },
+      "sha256": "4a506caf1661db083460abd92f844fee5daacb564f8d3d22c793ab5f88b8d483"
+    },
+    {
+      "canonical_administrative_context": "namespace Hironaka.NormalDerivativeChart\n\n",
+      "original_context": {
+        "start_line": 29,
+        "end_line": 29,
+        "original_source": "namespace TranscendentalNakamaye.Pending.NormalDerivativeChart\n",
+        "sha256": "91abfe7ef86236c517b128831f392d5361cf88ad584207a328c02a7222371bb8"
+      },
+      "sha256": "63179eb82589c87049ab3d68e42e95a582821f03f269a0ed1fbbc240e949a1de"
+    },
+    {
+      "canonical_administrative_context": "open Hironaka.HolomorphicIdealSheaves HolomorphicTaylorTail GermIdealOrder IdealWeightPowers\n  NormalTaylorOrder DerivativeIdeal BlowupFlatCoordinates\n\n",
+      "original_context": {
+        "start_line": 31,
+        "end_line": 32,
+        "original_source": "open FirstPass FirstPass.HolomorphicIdealSheaves HolomorphicTaylorTail GermIdealOrder IdealWeightPowers\n  NormalTaylorOrder DerivativeIdeal BlowupFlatCoordinates\n",
+        "sha256": "eb6ed49f135ba1e4259b91e6ec8d911f30a4e4b88bdd85cfa990f3b296f6e8d4"
+      },
+      "sha256": "72e4b09b769eaeb54dda23a8c358e03767c999c40bc409525e23c28ad1122729"
+    },
+    {
+      "canonical_administrative_context": "noncomputable section\n\n",
+      "original_context": {
+        "start_line": 34,
+        "end_line": 34,
+        "original_source": "noncomputable section\n",
+        "sha256": "e31ffdecccec9ca586049080a5f3eacc885d03b4f3128e7815e3ce8fd53fa738"
+      },
+      "sha256": "de2bdf29f369260cf4a3a3e2ce381fffbb8aeaa782f28a42ee531a2e6f1372fc"
+    },
+    {
+      "canonical_administrative_context": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n\n",
+      "original_context": {
+        "start_line": 36,
+        "end_line": 36,
+        "original_source": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n",
+        "sha256": "af9a0f85758c8c58fac5f2ff7f76472ee23441c70b2367a71671b435dce222ec"
+      },
+      "sha256": "b13f7e483c78f8304522e00a1924c5566d21ea4c0c03a757ca761fdf69f82d68"
+    },
+    {
+      "canonical_administrative_context": "namespace FlatChart\n\n",
+      "original_context": {
+        "start_line": 56,
+        "end_line": 56,
+        "original_source": "namespace FlatChart\n",
+        "sha256": "aeb8e344fe4aed056eec3baa7c759cc7224e6cb70c7a9cf3eaeeb73b859a9841"
+      },
+      "sha256": "2619a765021ca30550d903952e2506b32fdbba52e98e5ead7623a2098eb395e5"
+    },
+    {
+      "canonical_administrative_context": "variable {S : Set M} {p : M} {k : ℕ} (c : FlatChart n S p k)\n\n",
+      "original_context": {
+        "start_line": 58,
+        "end_line": 58,
+        "original_source": "variable {S : Set M} {p : M} {k : ℕ} (c : FlatChart n S p k)\n",
+        "sha256": "e066d85be53c88d627f24e5d3e31128ec7cc2e9fc4739cdff0a6d8b77919e5cf"
+      },
+      "sha256": "20a15d172a95acf37744d0e1c3c8214693eb139b9d2e6a46e18e1f66a5bcb193"
+    },
+    {
+      "original_payload_index": 0
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "original_payload_index": 1
+    },
+    {
+      "canonical_administrative_context": "\n",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "canonical_administrative_context": "end FlatChart\n\n",
+      "original_context": {
+        "start_line": 215,
+        "end_line": 215,
+        "original_source": "end FlatChart\n",
+        "sha256": "0de3176ea15172039415d3d31a449309d0a6a61fe517ed008b4edb2ef53172e8"
+      },
+      "sha256": "d52ea4921c624a3a1d8b9055f5e8c96752755f0977a3b6de8b5d76da485f26f6"
+    },
+    {
+      "canonical_administrative_context": "end\n\n",
+      "original_context": {
+        "start_line": 217,
+        "end_line": 217,
+        "original_source": "end\n",
+        "sha256": "48332fe667bc51ac4a51ba0efe734441c90def55c60a26d7db275ecbbcf42f15"
+      },
+      "sha256": "fda1a92ed27158b890b39db1ac4cf11759c505231c0740ffce85306841c23c84"
+    },
+    {
+      "canonical_administrative_context": "end Hironaka.NormalDerivativeChart\n\n",
+      "original_context": {
+        "start_line": 219,
+        "end_line": 219,
+        "original_source": "end TranscendentalNakamaye.Pending.NormalDerivativeChart\n",
+        "sha256": "5187c9b7ec282907150fe7201646168916b203fb3e8e3c70d0b128371fc38cd9"
+      },
+      "sha256": "ddef956f145d2e41f45a2f6e4c1f47f80b531b93b93cda6b23c8d0762ccbbe2e"
+    }
+  ],
+  "complete_original_active_contexts_before_payloads": [
+    {
+      "start_line": 4,
+      "end_line": 5,
+      "original_source": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n",
+      "sha256": "daf02537fa574f7c9bad34ae0b69a6b6858be62234a4f94ae548fb61d4d4b159"
+    },
+    {
+      "start_line": 26,
+      "end_line": 27,
+      "original_source": "open Set Filter Metric\nopen scoped Topology Manifold ContDiff\n",
+      "sha256": "af564dca1f28edd24a1f3322c2b38ab3b2438d62af7441044e937b136db53134"
+    },
+    {
+      "start_line": 29,
+      "end_line": 29,
+      "original_source": "namespace TranscendentalNakamaye.Pending.NormalDerivativeChart\n",
+      "sha256": "91abfe7ef86236c517b128831f392d5361cf88ad584207a328c02a7222371bb8"
+    },
+    {
+      "start_line": 31,
+      "end_line": 32,
+      "original_source": "open FirstPass FirstPass.HolomorphicIdealSheaves HolomorphicTaylorTail GermIdealOrder IdealWeightPowers\n  NormalTaylorOrder DerivativeIdeal BlowupFlatCoordinates\n",
+      "sha256": "eb6ed49f135ba1e4259b91e6ec8d911f30a4e4b88bdd85cfa990f3b296f6e8d4"
+    },
+    {
+      "start_line": 34,
+      "end_line": 34,
+      "original_source": "noncomputable section\n",
+      "sha256": "e31ffdecccec9ca586049080a5f3eacc885d03b4f3128e7815e3ce8fd53fa738"
+    },
+    {
+      "start_line": 36,
+      "end_line": 36,
+      "original_source": "variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n",
+      "sha256": "af9a0f85758c8c58fac5f2ff7f76472ee23441c70b2367a71671b435dce222ec"
+    },
+    {
+      "start_line": 56,
+      "end_line": 56,
+      "original_source": "namespace FlatChart\n",
+      "sha256": "aeb8e344fe4aed056eec3baa7c759cc7224e6cb70c7a9cf3eaeeb73b859a9841"
+    },
+    {
+      "start_line": 58,
+      "end_line": 58,
+      "original_source": "variable {S : Set M} {p : M} {k : ℕ} (c : FlatChart n S p k)\n",
+      "sha256": "e066d85be53c88d627f24e5d3e31128ec7cc2e9fc4739cdff0a6d8b77919e5cf"
+    }
+  ],
+  "complete_original_active_closings": [
+    {
+      "start_line": 215,
+      "end_line": 215,
+      "original_source": "end FlatChart\n",
+      "sha256": "0de3176ea15172039415d3d31a449309d0a6a61fe517ed008b4edb2ef53172e8"
+    },
+    {
+      "start_line": 217,
+      "end_line": 217,
+      "original_source": "end\n",
+      "sha256": "48332fe667bc51ac4a51ba0efe734441c90def55c60a26d7db275ecbbcf42f15"
+    },
+    {
+      "start_line": 219,
+      "end_line": 219,
+      "original_source": "end TranscendentalNakamaye.Pending.NormalDerivativeChart\n",
+      "sha256": "5187c9b7ec282907150fe7201646168916b203fb3e8e3c70d0b128371fc38cd9"
+    }
+  ],
+  "original_universe_context": "Original Type* binders retained literally; no explicit universe declarations inserted or rewritten.",
+  "no_active_include_omit_or_local_instance_commands_in_selected_context": true,
+  "scope_trace": [
+    [
+      10,
+      "namespace",
+      "Hironaka.NormalDerivativeChart"
+    ],
+    [
+      15,
+      "section",
+      ""
+    ],
+    [
+      19,
+      "namespace",
+      "FlatChart"
+    ],
+    [
+      76,
+      "end",
+      "FlatChart"
+    ],
+    [
+      78,
+      "end",
+      ""
+    ],
+    [
+      80,
+      "end",
+      "Hironaka.NormalDerivativeChart"
+    ]
+  ],
+  "all_named_and_anonymous_closings_balanced": true,
+  "frozen_original_owner_import": {
+    "module": "Hironaka.MarkedIdeal.NormalDerivativeChart",
+    "path": "Hironaka/MarkedIdeal/NormalDerivativeChart.lean",
+    "sha256": "7b22c974cff881d0de9d18109c0c5bfebb308ecffe5e16a4e9909080130e1f7f",
+    "unchanged": true
+  },
+  "actual_ordinary_closure": {
+    "path": "/workspace/archon-nakamaye/work/g1-g9-20261021-phase3/publication/native8-recursive-callee-closure/ordinary-source-declarations-by-parent.json",
+    "sha256": "fd27ba0d6be37a00f8189acabcff1acd7395bad50ae3e9447b225d898625f4b3",
+    "exact_same_parent_set_confirmed": true,
+    "runtime_not_repeated": true
+  },
+  "blueprint": {
+    "source_path": "TranscendentalNakamaye/blueprint/src/maximal-contact.tex",
+    "whole_original_source_sha256": "a8d9739858e2c7a62c866cd3d77359d7acc50921ad53a2299c06565ed401ee65",
+    "git_blob": "7c14db23c89fc4f233fdd088235f586918d53802",
+    "complete_original_nodes": [
+      {
+        "label": "mc:flat-chart",
+        "environment": "definition",
+        "capture": "mc--flat-chart.complete-original-node.tex.txt",
+        "start_line": 1329,
+        "end_line": 1338,
+        "start_byte": 120307,
+        "end_byte_exclusive_before_added_terminal_newline": 122804,
+        "sha256": "fe7139e6da8d2889ba09cdc9f6fc00dbaa049496c4b140a358f5ab3d45a0e5b3",
+        "complete_written_proofs": 0,
+        "complete_definition_nodes": 1,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.mem_congr_of_isCoherent",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ψ",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.inv",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ofRegularAtDim",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mem_flatDomain",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.ψ_self",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.zero_mem_target",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.inv_zero",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mem_flatDomain",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mdifferentiableAt_ψ",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mdifferentiableAt_ψ",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mdifferentiableAt_inv",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_mdifferentiableAt_inv",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_inv_ψ",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_ψ_inv",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_flat",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.tendsto_inv",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.tendsto_ψ",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.eventually_differentiableAt_comp_inv",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_nil",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.mem_idealPow_of_vanishesToOrderOn",
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.injective_fderiv_Φ"
+        ],
+        "all_original_uses": [
+          "mc:normal-taylor-order",
+          "fpgeom:complex-analytic-subvariety"
+        ],
+        "statement_and_proof_changes": 0,
+        "capture_only_not_installed": true
+      },
+      {
+        "label": "mc:normal-derivative-ideal",
+        "environment": "lemma",
+        "capture": "mc--normal-derivative-ideal.complete-original-node.tex.txt",
+        "start_line": 1340,
+        "end_line": 1351,
+        "start_byte": 122806,
+        "end_byte_exclusive_before_added_terminal_newline": 123427,
+        "sha256": "b75a13ec7b7960f1fd8d46163be94c139344b805e51e27c3a71e21b62b6e9240",
+        "complete_written_proofs": 1,
+        "complete_definition_nodes": 0,
+        "all_original_bindings": [
+          "TranscendentalNakamaye.Pending.NormalDerivativeChart.FlatChart.nd_mem_iterDerivIdeal"
+        ],
+        "all_original_uses": [
+          "mc:flat-chart",
+          "hir:derivative-ideal",
+          "mc:coordinate-derivatives"
+        ],
+        "statement_and_proof_changes": 0,
+        "capture_only_not_installed": true
+      }
+    ],
+    "original_bindings_retained_for_later_actual_local_upstream_classification": true
+  },
+  "mathematical_statement_or_proof_payload_edits": 0,
+  "production_source_BP_Git_edits": false,
+  "Lean_build_kernel_Expr_invocations": 0,
+  "publication_compile_or_expression_PASS_claimed": false,
+  "notes": [
+    "mc:flat-chart is the complete original definition node; nd_nil is the direct inverse-coordinate identity covered there. mc:normal-derivative-ideal supplies the complete original written proof for the substantive ideal-derivative assertion."
+  ]
+}

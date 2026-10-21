@@ -1,0 +1,48 @@
+ACTUAL_ORIGINAL_CONTROLLED_TRANSFORM_SUBSET TranscendentalNakamaye.Pending.MaximalContact.IsMaximalOrder.controlledTransform_of_subset_cosupport STANDARD_AXIOMS_ONLY
+ACTUAL_ORIGINAL_FULL_TYPE ∀ {n : Nat} {X : Type u} [inst : TopologicalSpace.{u} X]
+  [inst_1 :
+    @ChartedSpace.{0, u} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      X inst]
+  [@TranscendentalNakamaye.FirstPass.IsComplexManifold.{u} n X inst inst_1] {Y : Type u}
+  [inst_3 : TopologicalSpace.{u} Y]
+  [inst_4 :
+    @ChartedSpace.{0, u} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      Y inst_3]
+  [@TranscendentalNakamaye.FirstPass.IsComplexManifold.{u} n Y inst_3 inst_4] {C : Set.{u} X} {π : Y → X}
+  (hπ : @TranscendentalNakamaye.FirstPass.BlowupSequences.IsBlowupAlong.{u} n X inst inst_1 Y inst_3 inst_4 C π)
+  {𝔞 : @TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.GermIdeal.{u} n X inst inst_1}
+  (h𝔞 : @TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.GermIdeal.IsCoherent.{u} n X inst inst_1 𝔞) {μ : Nat}
+  (hmax : @TranscendentalNakamaye.Pending.MaximalContact.IsMaximalOrder.{u} n X inst inst_1 𝔞 μ)
+  (hsub :
+    @LE.le.{u} (Set.{u} X) (@Set.instLE.{u} X) C
+      (@TranscendentalNakamaye.Pending.GermIdealOrder.cosupport.{u} n X inst inst_1 (@Set.univ.{u} X) 𝔞 μ)),
+  @TranscendentalNakamaye.Pending.MaximalContact.IsMaximalOrder.{u} n Y inst_3 inst_4
+    (@TranscendentalNakamaye.Pending.BlowupControlledTransform.controlledTransform.{u} n X inst inst_1 Y inst_3 inst_4 C
+      π hπ 𝔞 μ)
+    μ

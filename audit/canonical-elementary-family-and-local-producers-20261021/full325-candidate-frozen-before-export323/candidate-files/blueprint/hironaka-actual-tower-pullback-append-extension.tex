@@ -1,0 +1,56 @@
+\section{Literal composition of actual smooth Cartesian blowup stages}
+
+\begin{lemma}[Actual pulled histories append with every literal centre retained]
+\label{hir:actual-smooth-cartesian-tower-append}
+\uses{hir:submersion-cartesian-tower-original-production}
+\lean{Hironaka.HironakaSmoothSubmersionCartesianTower.IsActualTowerPullback.append}
+\leanok
+Let $T:X\leftarrow D$ and $S:D\leftarrow Z$ be actual finite blowup
+towers. Suppose actual stepwise smooth pullbacks along $b:Y\to X$
+and the resulting upper submersion $g:D'\to D$ give towers $Q$ and
+$R$ with upper map $k:Z'\to Z$. Then the literal appended source
+$Q\mathbin{+}R$ is the actual stepwise pullback of the literal appended
+target $T\mathbin{+}S$, with the unchanged upper map $k$. Every empty
+centre and its position are retained.
+\end{lemma}
+\begin{proof}
+Induct on the actual pullback history of $S$. At its identity stage,
+appending the identity on each side gives the original actual history
+of $T$. At a successor stage, the source centre is literally the
+inverse image of the same target centre under the current actual upper
+submersion, and its upper arrow is the actual smooth Cartesian blowup
+lift. Append recursively to the preceding histories and use that very
+same geometric blowup, source centre and actual lift to extend their
+actual pullback history. The definition of tower append preserves each
+successor blowup literally. No centre deletion or replacement is made.
+\end{proof}
+
+\begin{theorem}[Original smooth geometry internally constructs the actual composite square]
+\label{hir:actual-selected-stage-composite-smooth-pullback}
+\uses{hir:actual-smooth-cartesian-tower-append,hir:submersion-cartesian-tower-original-production}
+\lean{Hironaka.HironakaActualTowerPullbackAppend.exists_actual_stagewise_composite}
+\leanok
+For any actual towers $T,S$ as above and genuine original submersion
+$b:Y\to X$, internally construct actual source towers $Q,R$ and actual
+upper arrows $g,k$ giving both stepwise pullbacks and their appended
+actual pullback. The composite square is genuinely holomorphic
+Cartesian, $k$ is a submersion, its projections commute, and its literal
+length is $\operatorname{length}(T)+\operatorname{length}(S)$.
+There is no source tower, source comparison, surjectivity or source
+compactness premise. No assertion makes stages chosen for distinct
+auxiliary ideals into one canonical history of a different ideal.
+\end{theorem}
+\begin{proof}
+Apply the genuine actual smooth blowup-tower construction to the fixed
+original $T$ and $b$, producing $Q,g$ and the actual first history.
+Its actual upper arrow $g$ is a submersion. Apply the same genuine
+construction to the unchanged $S$ along this actual $g$, producing
+$R,k$ and the actual second history. The preceding lemma appends these
+actual histories with the same upper $k$. The actual history theorem
+gives its genuine holomorphic Cartesian universal property, submersion
+property and commuting projections. Its literal length equals the
+length of the appended target. The original tower append length identity
+is exactly the sum of the two unchanged target lengths. All source
+towers and arrows have thus been constructed from the stated original
+geometry, before asserting the resulting composite properties.
+\end{proof}

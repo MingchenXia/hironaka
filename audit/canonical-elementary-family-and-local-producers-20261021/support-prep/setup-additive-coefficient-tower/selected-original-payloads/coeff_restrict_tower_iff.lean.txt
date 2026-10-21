@@ -1,0 +1,30 @@
+/-- **Włodarczyk `le:S` in full** (GGT Proposition 5.6.4): for `𝔪 = (X, X, E, 𝔞, μ)` with `𝔞` coherent and `μ ≥ 1`
+and a closed submanifold `S`, a tower is a multiple test blow-up of `𝓒(𝔪)|_S` if and only if it is a multiple test
+blow-up of `𝔪` with centres in the strict transforms of `S`, and along it
+`supp[𝓒(𝔪)|_S]_T = supp(𝔪_T) ∩ S_T`. -/
+theorem coeff_restrict_tower_iff (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)
+    {S : Set X} (hS : IsClosedSubmanifold n S) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T ↔ IsGeoTestTower 𝔪 T ∧ CentresIn S T) ∧
+      (IsGeoTestTower (withN (coeffMarked 𝔪) S) T →
+        (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp = (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S)
+  | _, .refl => ⟨⟨fun _ => ⟨trivial, trivial⟩, fun _ => trivial⟩, fun _ => cosupp_coeff_withN 𝔪 hN h𝔞 hd S⟩
+  | _, .step T C π hπ => by
+      obtain ⟨ih, -⟩ := coeff_restrict_tower_iff 𝔪 hN h𝔞 hd hS T
+      have hE : (geoTransformAlong (withN (coeffMarked 𝔪) S) T).E = (geoTransformAlong 𝔪 T).E :=
+        MarkedIdealEquivalence.MarkedIdeal.E_geoTransformAlong_eq (𝔪 := withN (coeffMarked 𝔪) S) (𝔫 := 𝔪) rfl T
+      have hiff : IsGeoTestTower (withN (coeffMarked 𝔪) S) (.step T C π hπ) ↔
+          IsGeoTestTower 𝔪 (.step T C π hπ) ∧ CentresIn S (.step T C π hπ) := by
+        rw [isGeoTestTower_step_iff, isGeoTestTower_step_iff, centresIn_step_iff]
+        constructor
+        · rintro ⟨h0, hC⟩
+          obtain ⟨hT0, hTS0⟩ := ih.mp h0
+          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0
+          refine ⟨⟨hT0, hC.1, fun x hx => (hcos ▸ hC.2.1 hx).1, hE ▸ hC.2.2⟩, hTS0, fun x hx => (hcos ▸ hC.2.1 hx).2⟩
+        · rintro ⟨⟨hT0, hC⟩, hTS0, hCS⟩
+          have hcos := cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS T hT0 hTS0
+          refine ⟨ih.mpr ⟨hT0, hTS0⟩, hC.1, fun x hx => ?_, hE.symm ▸ hC.2.2⟩
+          rw [hcos]; exact ⟨hC.2.1 hx, hCS hx⟩
+      refine ⟨hiff, fun h => ?_⟩
+      obtain ⟨hT', hTS'⟩ := hiff.mp h
+      exact cosupp_coeff_withN_tower 𝔪 hN h𝔞 hd hS _ hT' hTS'

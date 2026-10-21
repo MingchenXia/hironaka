@@ -1,0 +1,32 @@
+\begin{lemma}[Derivative ideals along multiple test blow-ups]
+\label{mc:inclusions-tower}
+\uses{mc:derivative-marked,mc:inclusions,hir:geo-transform,hir:geo-transform-ambient,hir:bridge-consumers,hir:giraud-support,hir:derivative-ideal-generators}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.DerivativeIdealTower.inclusions_tower}
+\leanok
+Let \(\underline{\mathcal I}=(M,M,E,\mathfrak a,d)\) with \(\mathfrak a\) coherent, \(j\le d\), and let \(T\) be a multiple test blow-up of \(\underline{\mathcal I}\)
+(Definition~\ref{hir:geo-transform}). Then \(T\) is a multiple test blow-up of \(\mathcal D^j(\underline{\mathcal I})\), and
+\[
+ [\mathcal D^j(\underline{\mathcal I})]_T\subset\mathcal D^j(\underline{\mathcal I}_T),
+\]
+i.e.\ the transformed ideal of \(\mathcal D^j(\underline{\mathcal I})\) is contained in \(\mathcal D^j\) of the transformed ideal of \(\underline{\mathcal I}\); both transforms
+have \(N\) the whole space, the same \(E\), and coherent ideals.
+\end{lemma}
+\begin{proof}
+\leanok
+Induction on \(T\); for the empty tower both sides are \(\mathcal D^j(\mathfrak a)\), coherent by Lemma~\ref{hir:derivative-ideal-generators}. Let \(T\) be followed by
+the blowup \(\sigma\) along an admissible centre \(C\) of \(\underline{\mathcal I}_T=(M_T,M_T,E_T,\mathfrak a_T,d)\), and write
+\(\mathfrak b_T\subset\mathcal D^j(\mathfrak a_T)\) for the transformed ideal of \(\mathcal D^j(\underline{\mathcal I})\), with mark \(d-j\) and the same \(E_T\).
+\(C\) is admissible for \((M_T,M_T,E_T,\mathfrak b_T,d-j)\): it is a closed submanifold with normal crossings with \(E_T\), and
+\(C\subset\operatorname{cosupp}(\mathfrak a_T,d)\subset\operatorname{cosupp}(\mathcal D^j\mathfrak a_T,d-j)\subset\operatorname{cosupp}(\mathfrak b_T,d-j)\)
+(Definition~\ref{mc:derivative-marked}). By Lemma~\ref{hir:bridge-consumers}, \(\mathfrak a_T\subset\mathcal I_C^{d}\) and \(\mathfrak b_T\subset\mathcal I_C^{d-j}\), so both
+transformed ideals are the coherent controlled transforms (Lemma~\ref{hir:geo-transform-ambient}), and by monotonicity and
+Lemma~\ref{mc:inclusions} (with mark \(d-j\) and \(r=j\))
+\[
+ \sigma^{\mathrm c}(\mathfrak b_T,d-j)\subset\sigma^{\mathrm c}(\mathcal D^j\mathfrak a_T,d-j)\subset\mathcal D^j(\sigma^{\mathrm c}(\mathfrak a_T,d)).
+\]
+\(N\) stays the whole space and both \(E\) are transformed alike.
+\end{proof}
+This is Włodarczyk's Lemma ``le:inclusions2''. His Lemma ``le:Giraud'' (the cosupports of the transforms lie on the strict transforms of a
+hypersurface of maximal contact) is Theorem~\ref{mc:giraud-tower} below: it follows from Lemma~\ref{mc:giraud-transform} and parts (2)--(3) of
+``le:Gi'' on open sets (Lemma~\ref{bcalc:giraud-local}) by induction on the tower.

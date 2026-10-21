@@ -1,0 +1,5 @@
+/-- **Well-formedness passes to a sublist of the divisor.** -/
+theorem isWellFormed_withE {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed) {E' : List (Set X)}
+    (hE' : E'.Sublist 𝔪.E) : ({ 𝔪 with E := E' } : MarkedIdeal n X).IsWellFormed :=
+  ⟨h𝔪.isClosedSubmanifold_N, h𝔪.isCoherent, isSNCDivisor_of_sublist h𝔪.isSNCDivisor hE',
+    isTransverse_of_forall_mem h𝔪.isTransverse fun _ hH => hE'.subset hH⟩

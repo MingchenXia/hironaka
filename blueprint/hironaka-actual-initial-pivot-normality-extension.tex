@@ -1,0 +1,154 @@
+\section{Actual source tangent stability and current homogeneous normal independence}
+
+All charts in this chapter have zero direction. Write $K$ for the
+actual original formal ideal, $K_0=\operatorname{in}(K)$ for its
+whole homogeneous initial ideal, and $e$ for the genuine pivot variable.
+Source tangent stability means the explicit natural property
+$\partial_e(K_0)\subseteq K_0$. It is not inferred from arbitrary
+source/axis HS equality. Its original geometric producer is separate.
+
+\begin{theorem}[Source tangent stability makes the same canonical source forms pivot free]
+\label{hir:actual-source-tangent-stable-canonical-forms-pivot-free}
+\uses{hir:actual-reduced-canonical-homogeneous-initial-span,hir:actual-reduced-formal-vertex-members,hir:actual-formal-ideal-initial-diagram-upper}
+\lean{Hironaka.HironakaActualInitialPivotNormality.canonical_source_form_pderiv_zero}
+\leanok
+If the actual whole source initial ideal is stable under
+$\partial_e$, every degree-$|a|$ form of the SAME canonical reduced
+source series has zero $\partial_e$ and is genuinely pivot free.
+\end{theorem}
+\begin{proof}
+That canonical form belongs to $K_0$, so its derivative belongs to
+$K_0$ by the stated natural tangent stability. At a source-diagram
+exponent $\beta$, the derivative coefficient is
+$(\beta_e+1)(G_a)_{\beta+\mathbf1_e}$ in the indicated homogeneous
+band. Upward closure puts the latter exponent in the source diagram.
+Canonical reduced sparsity kills its coefficient except possibly when
+$\beta+\mathbf1_e=a$. That case contradicts the actual minimality
+of $a$, since $\beta$ itself belongs to the source diagram. Hence the
+entire derivative is normal outside that diagram. The actual source
+initial diagram equals the original diagram, and a member of the
+whole initial ideal with all its diagram coefficients zero is zero.
+Thus the derivative vanishes. In characteristic zero, at every positive
+pivot exponent the derivative coefficient is a nonzero natural scalar
+times the original coefficient. Its vanishing kills every such
+coefficient, proving actual pivot freeness.
+\end{proof}
+
+\begin{theorem}[The genuine current strict ideal has the actual source initial shadow]
+\label{hir:actual-zero-point-tangent-stable-strict-shadow-dictionary}
+\uses{hir:actual-source-tangent-stable-canonical-forms-pivot-free,hir:actual-reduced-canonical-homogeneous-initial-span,hir:actual-point-exceptional-restriction-dehomogenized-polynomial,hir:actual-formal-strict-ideal-monic-family-generators}
+\lean{Hironaka.HironakaActualInitialPivotNormality.pivot_projection_strict_eq_source_initial}
+\leanok
+Under the same natural source tangent stability, the literal pivot
+projection of the independently defined whole zero-point formal strict
+ideal is exactly $K_0$. No shadow equality or selected family is input.
+\end{theorem}
+\begin{proof}
+Internally use the canonical reduced family, whose genuine point powers
+follow from degree-first leading coefficients. The actual family
+strict-generation theorem identifies the independently defined whole
+current strict ideal with its true normalized quotient span. For every
+such SAME quotient, actual exceptional restriction identifies its pivot
+shadow with the literal dehomogenization of its original degree form.
+The preceding theorem makes that degree form pivot free, so zero-chart
+dehomogenization fixes the whole form. Thus the actual ideal image is
+the whole span of the SAME source canonical degree forms. The entire
+source initial-span theorem identifies that whole span with $K_0$.
+Both ideal directions are therefore internally obtained.
+\end{proof}
+
+\begin{theorem}[Whole current colons divide actual homogeneous initial members]
+\label{hir:actual-current-colons-homogeneous-initial-pivot-cancellation}
+\uses{hir:actual-homogeneous-initial-ideal-degree-lift,hir:actual-original-point-persistent-hs-full-initial-colons}
+\lean{Hironaka.HironakaActualInitialPivotNormality.homogeneous_initial_pivot_cancel}
+\leanok
+Let $I$ be any actual whole formal ideal with all genuine colons
+$(I+\mathfrak m^{q+1}):e=I+\mathfrak m^q$. If $G$ is genuinely
+homogeneous of degree $q$ and $eG\in\operatorname{in}(I)$, then
+$G\in\operatorname{in}(I)$.
+\end{theorem}
+\begin{proof}
+The actual homogeneous initial-ideal degree-lift theorem at degree
+$q+1$ gives $L\in I\cap\mathfrak m^{q+1}$ with actual degree band
+$L_{q+1}=eG$. Its next-degree remainder puts
+$eG\in I+\mathfrak m^{q+2}$. The whole colon at $q+1$ gives
+$G\in I+\mathfrak m^{q+1}$. Write $G=A+B$ with $A\in I$ and
+$B\in\mathfrak m^{q+1}$. Homogeneity puts $G$ in
+$\mathfrak m^q$, hence $A\in\mathfrak m^q$, and its actual degree
+$q$ component is exactly $G$. The component of a true ideal member
+in its stated power belongs to the whole initial ideal, so
+$G\in\operatorname{in}(I)$. Every lift and remainder is an actual
+whole series; no graded-regularity certificate was assumed.
+\end{proof}
+
+\begin{theorem}[Actual homogeneous current members normal on the source diagram vanish]
+\label{hir:actual-current-initial-source-normal-independence}
+\uses{hir:actual-current-colons-homogeneous-initial-pivot-cancellation,hir:actual-homogeneous-initial-ideal-degree-lift,hir:actual-formal-normal-representative-unique,hir:actual-exceptional-pivot-projection-kernel-powers}
+\lean{Hironaka.HironakaActualInitialPivotNormality.homogeneous_source_normal_current_member_eq_zero}
+\leanok
+Let $I,K$ be actual whole formal ideals. Assume the actual whole
+current colons and the literal containment
+$\rho_e(I)\subseteq\operatorname{in}(K)$. A genuinely homogeneous
+member of $\operatorname{in}(I)$ whose coefficients vanish on the
+ENTIRE original $\Gamma(K)$ is zero. The containment is an explicit
+generic algebra input; the original-data application below derives it
+internally from natural source tangent stability.
+\end{theorem}
+\begin{proof}
+For a homogeneous current initial member $F$ of degree $q$, actual
+degree lifting gives $L\in I$ with $L_q=F$. Projection preserves
+genuine homogeneous bands. Thus $\rho_e(F)$ is the degree-$q$
+component of $\rho_e(L)\in\operatorname{in}(K)$ and belongs to
+that whole homogeneous initial ideal. Its coefficients on
+$\Gamma(K)=\Gamma(\operatorname{in}(K))$ vanish by literal projection
+and the stated original normality. Genuine normal-form uniqueness
+therefore makes $\rho_e(F)=0$, and the actual projection kernel gives
+$F=eG$.
+
+Induct on $q$. At degree zero, pivot divisibility and actual homogeneity
+force every coefficient of $F$ to vanish. At degree $q+1$, the genuine
+coefficient shift makes $G$ homogeneous of degree $q$. The preceding
+actual colon theorem puts $G$ in the current initial ideal. For every
+source-diagram exponent $\beta$, upward closure puts
+$\beta+\mathbf1_e$ in the same source diagram; the coefficient shift
+identifies $G_\beta$ with $F_{\beta+\mathbf1_e}=0$. Hence $G$ is
+again source normal. The induction hypothesis gives $G=0$, and
+therefore $F=0$. This uses no old/current diagram inclusion.
+\end{proof}
+
+\begin{theorem}[Natural source tangent stability supplies the qualified full point converse]
+\label{hir:actual-zero-point-tangent-stable-persistent-hs-order-converse}
+\uses{hir:actual-source-tangent-stable-canonical-forms-pivot-free,hir:actual-zero-point-tangent-stable-strict-shadow-dictionary,hir:actual-current-initial-source-normal-independence,hir:actual-canonical-zero-point-low-jet-normality-producer,hir:actual-original-point-persistent-hs-full-initial-colons,hir:actual-point-centre-whole-analytic-strict-generators}
+\lean{Hironaka.HironakaActualInitialPivotNormality.original_zero_point_persistent_hs_orders_of_source_tangent_stable}
+\leanok
+For an actual original analytic ideal and zero-direction point chart,
+assume its actual source/current HS values persist at every order and
+its SAME source homogeneous initial formal ideal is stable under the
+actual pivot derivative. Then every genuine canonical reduced-source
+normalized formal member retains its original vertex order. No
+selected family, desired shadow equality, initial regularity, output
+order or diagram-inclusion certificate is input.
+\end{theorem}
+\begin{proof}
+Actual original/formal strict generation identifies the entire current
+Taylor ideal with the independently defined formal strict ideal.
+Original HS persistence internally supplies all its whole colons by
+the genuine analytic-axis/Taylor/finite-jet theorem. Natural source
+tangent stability internally supplies its actual whole source-initial
+shadow dictionary by the second theorem. Canonical normalized member
+existence and its exact quotient equations are internally obtained from
+the original reduced family and its genuine point powers.
+
+If one such member failed its original power $\mathfrak m^{|a|}$,
+its actual least nonzero total degree $r$ would be below $|a|$.
+Its nonzero degree-$r$ component belongs to the entire current initial
+ideal, because the whole normalized member belongs to the independently
+defined strict ideal. The actual reduced-tail theorem makes this
+ENTIRE low component normal on the original source diagram. The
+preceding actual current/source normal-independence theorem forces
+that nonzero component to be zero, a contradiction. Hence every member
+has its required whole power. Source tangent stability is retained as
+a genuine geometric qualification; its derivation from persistent
+homogeneous-cone line geometry, arbitrary directions, relative maximal
+standardness and the full history driver remain separate.
+\end{proof}

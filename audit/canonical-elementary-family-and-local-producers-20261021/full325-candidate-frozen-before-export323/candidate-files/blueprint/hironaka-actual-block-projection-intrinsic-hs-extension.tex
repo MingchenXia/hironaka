@@ -1,0 +1,99 @@
+\section{Entire intrinsic HS under the actual second-block projection on every real open}
+
+The original coordinates are ordered as parameter block $u\in\mathbb C^r$
+followed by original block $z\in\mathbb C^n$. The map is the actual
+projection $b(u,z)=z$. Every ideal below is the entire original ideal with
+its original complex scalar action.
+
+\begin{lemma}[The genuine block interchange is an actual biholomorphism]
+\label{hir:actual-holomorphic-block-swap-projection-dictionary}
+\uses{hir:actual-cross-dimension-biholomorphic-intrinsic-hs}
+\lean{Hironaka.HironakaActualBlockProjectionIntrinsicHS.actualBlockSwapCoordinates,Hironaka.HironakaActualBlockProjectionIntrinsicHS.actualBlockSwapDiffeomorph,Hironaka.HironakaActualBlockProjectionIntrinsicHS.actualBlockSwap_firstProjection}
+\leanok
+The actual coordinate map $S(u,z)=(z,u)$ is a genuine complex-linear
+bijection $\mathbb C^{r+n}\to\mathbb C^{n+r}$ and an actual biholomorphism.
+The true first-block projection $p:\mathbb C^{n+r}\to\mathbb C^n$ satisfies
+$p\circ S=b$ at every original point.
+\end{lemma}
+\begin{proof}
+Compose the genuine original split-coordinate continuous linear equivalence,
+the actual product-interchange continuous linear equivalence, and the
+original inverse split-coordinate equivalence. Their actual inverses give
+the inverse map. All these maps are holomorphic, as are their inverses,
+so this is an actual biholomorphism. Applying the genuine split-coordinate
+projection/inclusion inverse identities shows that its first original
+block is exactly $z$, proving $p(S(u,z))=b(u,z)$ on the entire source.
+\end{proof}
+
+\begin{theorem}[The whole original second-block stalk pullback factors through the true block swap]
+\label{hir:actual-block-projection-entire-stalk-factorization}
+\uses{hir:actual-holomorphic-block-swap-projection-dictionary,hir:actual-original-whole-germ-pullback-functorial,hir:actual-coordinate-projection-entire-original-stalk-ideal,hir:actual-cross-dimension-biholomorphic-intrinsic-hs}
+\lean{Hironaka.HironakaActualBlockProjectionIntrinsicHS.actualGermPullback_blockProjection,Hironaka.HironakaActualBlockProjectionIntrinsicHS.wholeChartStalkIdeal_actual_block_projection,Hironaka.HironakaActualBlockProjectionIntrinsicHS.hilbertSamuelAt_actual_block_projection_eq_product}
+\leanok
+At every actual source point, the independently defined whole germ pullback
+of $b$ is the composition of the original tangent pullback by $p$ and the
+actual germ algebra equivalence induced by $S$. For ONLY original
+coherence, its entire original sheaf stalk ideal is the corresponding
+whole ideal image. Its EXISTING intrinsic HS at EVERY order equals the
+actual original smooth-product HS of that same original image stalk ideal.
+\end{theorem}
+\begin{proof}
+Apply actual whole-germ contravariant functoriality to the actual maps
+$p,S$, use the literal identity $p\circ S=b$, and substitute the genuine
+first-projection germ map. Coherence identifies the actual whole pulled-back
+ideal with this entire original image. The true ideal-image composition
+identity factors it as first extension by $p$ followed by the ACTUAL
+biholomorphic algebra equivalence of $S$. That equivalence preserves all
+actual maximal powers and original complex quotient dimensions, hence
+identifies the EXISTING intrinsic HS with the genuine smooth-product HS.
+These steps use both whole original ideal directions before any HS claim.
+\end{proof}
+
+\begin{lemma}[A true original open restriction retains the entire second-block projection ideal]
+\label{hir:actual-open-block-projection-entire-original-stalk}
+\uses{hir:actual-block-projection-entire-stalk-factorization,hir:actual-original-whole-germ-pullback-functorial,hir:actual-open-inclusion-whole-germ-pullback-identity}
+\lean{Hironaka.HironakaActualBlockProjectionIntrinsicHS.wholeChartStalkIdeal_actual_open_block_projection,Hironaka.HironakaActualBlockProjectionIntrinsicHS.hilbertSamuelAt_actual_open_block_projection_eq_product}
+\leanok
+For EVERY actual open $U\subset\mathbb C^{r+n}$ and actual $y\in U$, the
+whole original ideal pulled back by $b|_U$ is the same actual chart-stalk
+ideal as the global $b$-pullback at the actual point $y$ in the ambient
+model. Thus its entire EXISTING intrinsic HS is the same original
+smooth-product HS at every order.
+\end{lemma}
+\begin{proof}
+Use whole-germ functoriality for the actual open inclusion followed by
+$b$. The independently proved actual open-inclusion germ pullback is the
+original identity, retaining every original representative. Consequently
+the entire pullback algebra map is exactly the same actual global $b$
+map at the ambient original point. Apply the coherent whole ideal-image
+producer on both sides to get the literal full ideal equality. Its true
+quotient dimensions and the preceding block factorization prove the stated
+original HS equality. No pullback-composition or HS certificate is assumed.
+\end{proof}
+
+\begin{theorem}[Every original open-block HS order and both full-profile directions]
+\label{hir:actual-open-block-projection-intrinsic-hs-convolution-reflection}
+\uses{hir:actual-open-block-projection-entire-original-stalk,hir:actual-product-original-ambient-hs-convolution,hir:actual-product-entire-hs-profile-reflection}
+\lean{Hironaka.HironakaActualBlockProjectionIntrinsicHS.hilbertSamuelAt_actual_open_block_projection_convolution,Hironaka.HironakaActualBlockProjectionIntrinsicHS.hilbertSamuelAt_actual_open_block_projection_entire_profile_eq_iff}
+\leanok
+For ANY original coherent ideal $A$ on $\mathbb C^n$, ANY actual open
+$U\subset\mathbb C^{r+n}$, ANY actual $y\in U$, and EVERY order,
+\[
+ H_{(b|_U)^*A}(y,\ell)=\sum_{\alpha\in\mathbb N^r,\ |\alpha|\le\ell}
+ H_A(b(y),\ell-|\alpha|).
+\]
+At any two actual points of this same open, their ENTIRE pulled-back HS
+profiles agree if and only if the ENTIRE original profiles agree at their
+actual original block images.
+\end{theorem}
+\begin{proof}
+The preceding genuine whole ideal and original quotient dictionary identifies
+the left side with the actual smooth product of the original stalk ideal
+at $b(y)$ BEFORE any computation. The proved genuine mixed maximal-power
+quotient computes this EXACT original product HS by the stated all-order
+convolution. At two actual points, apply the same whole dictionary to both
+original stalk ideals and use the proved triangular reflection of the
+ENTIRE genuine product profiles. This gives both directions at ALL orders,
+with no supplied product profile equality or cancellation model. Zero
+parameter dimension and arbitrary actual opens are included.
+\end{proof}

@@ -1,0 +1,138 @@
+\section{Actual point order retention preserves the entire original HS profile}
+
+Let $R=\mathbb C[[x_1,\ldots,x_n]]$, with genuine maximal ideal
+$\mathfrak m$. All source generators below are the SAME canonical
+reduced series of the actual original ideal. No diagram inclusion in
+fixed coordinates is assumed.
+
+\begin{theorem}[The whole source initial ideal uses the same reduced canonical components]
+\label{hir:actual-reduced-canonical-homogeneous-initial-span}
+\uses{hir:actual-reduced-basis-entire-filtered-division,hir:actual-homogeneous-initial-ideal-hs-equality}
+\lean{Hironaka.HironakaActualPointOrderRetainingHS.actualHomogeneousInitialIdeal_eq_reduced_component_span}
+\leanok
+For an actual formal ideal $I$, let $G_a$ be its canonical reduced
+vertex series and $d_a=|a|$. Its entire homogeneous initial ideal is
+exactly the whole span of the actual components $(G_a)_{d_a}$.
+\end{theorem}
+\begin{proof}
+Degree-first leading exponents put each $G_a$ in
+$\mathfrak m^{d_a}$ and identify $d_a$ as its least nonzero degree.
+For $F\in I\cap\mathfrak m^q$, the genuine reduced canonical division
+gives $F=\sum_aQ_aG_a$, with each
+$Q_a\in\mathfrak m^{q-d_a}$. If $d_a\le q$, the actual degree-$q$
+component of this product is $(Q_a)_{q-d_a}(G_a)_{d_a}$, by the genuine
+finite convolution and the two lower order bounds. If $d_a>q$, that
+component vanishes because the whole product lies in
+$\mathfrak m^{q+1}$. Thus the degree-$q$ component of every such $F$
+lies in the displayed whole span. Apply this to the least degree of
+each nonzero member of $I$ to obtain the first ideal inclusion.
+Conversely each $G_a$ is an actual nonzero member of $I$ with least
+degree $d_a$, so its displayed component is its actual homogeneous
+initial form and belongs to the entire initial ideal. Taking the
+whole span proves the reverse inclusion.
+\end{proof}
+
+\begin{theorem}[The actual centred linear shear preserves every whole jet rank]
+\label{hir:actual-centred-shear-whole-hs-invariance}
+\uses{hir:actual-formal-blowup-all-directions-whole-power-reflection,hir:actual-original-formal-entire-hs-transfer}
+\lean{Hironaka.HironakaActualPointOrderRetainingHS.genuineFormalHilbertSamuelValue_centerShear}
+\leanok
+The genuine centred shear $\sigma_b(x_e)=x_e$,
+$\sigma_b(x_i)=x_i+b_ix_e$ for $i\ne e$ is an actual algebra
+automorphism of $R$. For every whole ideal $I$ and every finite
+order, $H_I=H_{\sigma_b(I)}$.
+\end{theorem}
+\begin{proof}
+The genuine inverse shear has parameters $-b$. Both actual whole
+substitutions preserve the coordinate ideal and hence every one of
+its powers. Therefore the same algebra automorphism maps the whole
+jet denominator $I+\mathfrak m^q$ exactly onto
+$\sigma_b(I)+\mathfrak m^q$. It induces a genuine complex algebra
+isomorphism of these entire quotient spaces. Its underlying complex
+linear equivalence identifies their finite dimensions. Taking
+$q=\ell+1$ gives each asserted HS value.
+\end{proof}
+
+\begin{theorem}[Homogeneous chart polynomials are the actual sheared source forms]
+\label{hir:actual-point-homogeneous-dehom-shear-identity}
+\uses{hir:actual-point-blowup-homogeneous-polynomial-factor,hir:actual-formal-blowup-all-directions-whole-power-reflection}
+\lean{Hironaka.HironakaActualPointOrderRetainingHS.centerShear_eq_dehom_of_homogeneous_dehom}
+\leanok
+Let $f$ be an actual homogeneous polynomial of degree $d$ and let
+$\delta_bf$ be its literal point-chart dehomogenization. If this
+actual polynomial is homogeneous of the same degree $d$, then
+$\sigma_b(f)=\delta_bf$ as entire formal series.
+\end{theorem}
+\begin{proof}
+The literal dehomogenization contains no pivot variable, because
+that variable was replaced by $1$. Its zero-direction
+dehomogenization is therefore the same whole polynomial. Genuine
+homogeneous blowup factorization gives
+$\pi_b^*f=x_e^d\delta_bf$ and
+$\pi_0^*(\delta_bf)=x_e^d\delta_bf$. The actual all-direction
+factorization also gives
+$\pi_b^*f=\pi_0^*\sigma_b(f)$. These identities identify the actual
+zero-chart blowup images of $\sigma_b(f)$ and $\delta_bf$.
+The proved injectivity of that actual whole formal blowup therefore
+gives the asserted entire series identity.
+\end{proof}
+
+\begin{theorem}[The same point family identifies the whole source initial ideal by a genuine shear]
+\label{hir:actual-point-order-retention-whole-source-shear-dictionary}
+\uses{hir:actual-reduced-canonical-homogeneous-initial-span,hir:actual-point-homogeneous-dehom-shear-identity,hir:actual-point-canonical-quotient-pure-coefficient}
+\lean{Hironaka.HironakaActualPointOrderRetainingHS.canonical_point_order_retention_shadow_span}
+\leanok
+Let $H_a$ be actual quotients of the SAME canonical original analytic
+reduced generators in an actual point chart. If each $H_a$ retains its
+original vertex order $d_a$, the actual shear maps the ENTIRE source
+homogeneous initial ideal exactly onto the whole literal span
+$(\rho_e(\widehat H_a))$.
+\end{theorem}
+\begin{proof}
+Literal coefficient comparison gives
+$\rho_e(\widehat H_a)=\delta_bf_a$, where $f_a$ is the degree-$d_a$
+polynomial component of the SAME original reduced canonical
+$\widehat G_a$. Indeed it gives every coefficient with zero pivot
+exponent, and both sides have zero coefficient at every other exponent.
+The actual chart polynomial has degree at most $d_a$, because every
+variable was replaced by a polynomial of degree at most one. The
+assumed current order puts $\widehat H_a$ and its pivot projection in
+$\mathfrak m^{d_a}$. Consequently the chart polynomial has no
+coefficients below $d_a$ and none above $d_a$, so it is homogeneous
+of degree $d_a$. The preceding actual shear identity identifies it
+with $\sigma_b(f_a)$ as a whole series. The first theorem identifies
+the entire source initial ideal with the span of these SAME reduced
+canonical components. The actual ideal image of that whole span is
+the span of their actual shear images, now exactly the indicated
+literal pivot shadows. This proves both whole ideal directions.
+\end{proof}
+
+\begin{theorem}[The same original order-retaining point family preserves all source HS values]
+\label{hir:actual-original-point-order-retention-entire-hs}
+\uses{hir:actual-original-point-order-retaining-fibre-hs-profile,hir:actual-point-order-retention-whole-source-shear-dictionary,hir:actual-centred-shear-whole-hs-invariance,hir:actual-homogeneous-initial-ideal-hs-equality,hir:actual-original-formal-entire-hs-transfer}
+\lean{Hironaka.HironakaActualPointOrderRetainingHS.exists_original_point_order_retaining_hs_family}
+\leanok
+An actual original analytic ideal $J$ and actual point chart select
+ONE canonical normalized analytic family $H_a$ before every
+current-order hypothesis and every finite HS order. If every $H_a$
+retains its original vertex order $d_a$, then the entire independently
+named normalized ideal has exactly the same actual HS values as $J$
+at all finite orders. The original quotient equations and whole
+normalized-ideal span are retained.
+\end{theorem}
+\begin{proof}
+Choose the exact original family from the whole fibre-profile theorem.
+Under the stated order bounds that theorem identifies every normalized
+HS value with that of its literal whole shadow span. The preceding
+same-family theorem identifies this span with the actual shear image
+of the entire source homogeneous initial ideal. Actual shear
+invariance and the genuine homogeneous-initial HS theorem identify
+its every HS value with that of the source Taylor ideal. Genuine
+original/formal jet transfer identifies those with the original $J$
+values. Composing these actual equalities proves the assertion for
+ONE chosen family, without a desired profile or standardness input.
+\end{proof}
+
+The converse from full HS persistence to all original normalized orders,
+positive-dimensional centres, full current-history tracking and the
+resolution driver remain separate.

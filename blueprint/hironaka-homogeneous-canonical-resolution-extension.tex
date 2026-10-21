@@ -1,0 +1,120 @@
+\section{Actual finite canonical resolution of the entire coordinate original models}
+\label{sec:hironaka-homogeneous-canonical-resolution}
+
+Let $H_S$ be an actual union of selected coordinate hyperplanes in the
+lifted complex coordinate space of ambient dimension $n$, and retain
+its whole original marked datum $M_S=(X,X,\varnothing,I_{H_S},1)$.
+Let $R$ be a proved resolution invariant in dimension at least $n$.
+For the finite-resolution assertions its actual value order is assumed
+well founded. This holds for the genuine ambient-dimensional canonical
+invariant: its actual value type is $\operatorname{ValTy}(n)$, with the
+proved well-founded order furnished by the dimension induction.
+
+\begin{lemma}[Actual strict progress below an attained entire maximum]
+\label{hir:homogeneous-actual-whole-maximum-strict-progress}
+\lean{Hironaka.HironakaHomogeneousCanonicalResolution.value_lt_old_maximum_after_blowup}
+For any actual invariant-domain datum, let an actual canonical prefix
+have an attained entire maximum at $x$. After a genuine blowup of its
+entire full maximum, every point of the new actual cosupport has whole
+value strictly less than the old whole value at $x$.
+\leanok
+\uses{hir:step-one-well-founded,hir:invariant-well-founded}
+\end{lemma}
+\begin{proof}
+The genuine full-maximum blowup extends the actual canonical prefix, so
+it is a test tower. Every point of the new actual cosupport projects
+into the preceding actual cosupport. If its projection belongs to the
+whole maximum, the invariant's actual decrease law gives a strict drop
+from the value at that projection, and this projection value equals
+the old maximum. If its projection is outside the whole maximum, the
+actual off-centre law leaves its value equal to that projection value.
+The projection value is at most the old maximum. Equality would make
+this projection a whole-maximum point, since it lies in the old
+cosupport and dominates all its values, contradicting the chosen
+case. Thus there is a strict drop in both cases. These are the actual
+whole-history decrease and projection laws, not a numerical surrogate
+of the invariant.
+\end{proof}
+
+\begin{theorem}[A literal finite resolution suffix for every homogeneous canonical segment]
+\label{hir:homogeneous-actual-finite-canonical-resolution-suffix}
+\lean{Hironaka.HironakaHomogeneousCanonicalResolution.exists_homogeneous_resolution_suffix}
+Suppose the actual value order of $R$ is well founded. Every actual
+finite canonical segment of $M_S$ with nonempty full-maximum centres
+admits a literal finite blowup suffix whose concatenation with that
+same given segment is a canonical segment with nonempty centres and
+an actual resolution of the same original datum.
+\leanok
+\uses{hir:homogeneous-model-every-prefix-whole-maximum,hir:homogeneous-model-every-prefix-actual-canonical-successor,hir:homogeneous-actual-whole-maximum-strict-progress}
+\end{theorem}
+\begin{proof}
+We prove the continuation assertion by well-founded induction on an
+upper bound $a$ for all whole values on the current cosupport, carrying
+the actual segment and its entire original datum. If the current
+cosupport is empty, the literal empty suffix is a resolution, since
+the actual canonical segment is a test tower.
+
+Otherwise the internally proved homogeneous whole-maximum theorem
+supplies a point $x$ in the entire current maximum. The genuine
+homogeneous successor producer constructs an actual blowup of that
+very whole maximum, which is nonempty. Appending this blowup extends
+the same actual segment with another nonempty full-maximum centre and
+is a genuine test step. If the resulting cosupport is empty, this
+single actual step is the required suffix.
+
+If it is nonempty, its internally produced whole maximum is attained
+at an actual point $z$. The strict-progress lemma gives
+$R(z)<R(x)\leq a$. All values on the new cosupport are bounded by
+$R(z)$. Apply the induction hypothesis to the actual extended segment
+with this strictly smaller bound. It returns a literal finite suffix
+of that extended segment. Prepending the actual just-constructed step
+to this suffix gives a literal suffix of the original given segment;
+associativity of concatenation identifies exactly the same final
+history, so both its canonical-segment and resolution properties are
+preserved. To start the induction for a nonempty given cosupport, use
+its internally attained actual maximum as the upper bound. No maximum,
+chosen future history, finite bound, or terminal model is supplied as
+an assumption.
+\end{proof}
+
+\begin{theorem}[Actual finite entire-coordinate canonical resolution]
+\label{hir:homogeneous-actual-entire-coordinate-canonical-resolution}
+\lean{Hironaka.HironakaHomogeneousCanonicalResolution.exists_homogeneous_canonical_resolution}
+For any such proved invariant with genuinely well-founded values,
+every original coordinate-union datum $M_S$ has an actual finite
+canonical resolution whose centres are all nonempty entire full
+maxima of its literal preceding histories.
+\leanok
+\uses{hir:homogeneous-actual-finite-canonical-resolution-suffix}
+\end{theorem}
+\begin{proof}
+Apply the literal-suffix theorem to the actual reflexive segment.
+Concatenation with that reflexive segment is the returned actual
+finite tower. Its canonical-segment property specifies nonempty
+entire full-maximum centres, and its resolution property includes
+actual test admissibility at every step and empty final cosupport.
+The datum remains the same original $M_S$ throughout.
+\end{proof}
+
+\begin{corollary}[The genuine ambient-dimensional canonical invariant resolves each entire coordinate original model]
+\label{hir:homogeneous-actual-canonicalInvariant-coordinate-resolution}
+\lean{Hironaka.HironakaHomogeneousCanonicalResolution.exists_canonicalInvariant_coordinate_resolution}
+For every ambient dimension $n$ and every selected coordinate union,
+the actual canonical invariant of dimension bound $n$ constructs an
+actual finite canonical resolution of the original marking-one datum
+with initially empty boundary and nonempty entire full-maximum centres.
+\leanok
+\uses{hir:homogeneous-actual-entire-coordinate-canonical-resolution,hir:canonical-centres}
+\end{corollary}
+\begin{proof}
+Use the genuine proved resolution invariant of dimension bound $n$.
+Its actual value type is precisely $\operatorname{ValTy}(n)$, whose
+linear and well-founded orders are supplied by the proved recursive
+dimension construction. The ambient dimension satisfies its own bound.
+The preceding theorem therefore applies without a well-foundedness
+certificate or an incoming resolution hypothesis. This uses the
+actual invariant of depth $n$ directly and no equality with a deeper
+invariant. The conclusion concerns entire coordinate original models;
+arbitrary original normal-crossing history globalization and unrelated
+marked ideals are separate assertions.
+\end{proof}

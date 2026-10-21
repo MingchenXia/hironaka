@@ -1,0 +1,80 @@
+\section{A genuine tangent partial-stable polynomial ideal is saturated by its actual coordinate variable}
+
+All polynomials below are the actual multivariate polynomials over a
+characteristic-zero field $k$; their variable set may be arbitrary.
+The partial derivative is the literal existing polynomial derivation,
+not an analytic differential or a formal-series replacement.
+
+\begin{theorem}[Literal polynomial partial differentiation is locally nilpotent on every whole polynomial]
+\label{hir:actual-polynomial-pderiv-locally-nilpotent}
+\lean{Hironaka.HironakaPDerivStablePolynomialXSaturation.exists_polynomial_pderiv_pow_zero}
+\leanok
+For every actual polynomial $P$ and coordinate $i$, there is a finite
+$N$ such that $D_i^N(P)=0$, where powers are the genuine endomorphism
+powers of the original polynomial partial derivative linear map.
+\end{theorem}
+\begin{proof}
+For a true monomial $aX^s$, induct on the actual exponent $s_i$.
+If it is zero, the literal monomial derivative formula gives zero
+at the first derivative. Otherwise that formula decreases the true
+$i$ exponent by one, so the induction hypothesis on the resulting
+monomial gives a finite vanishing iterate, and one more original
+derivative proves the assertion. Every actual polynomial is a finite
+sum of such monomials. For an addition of two already treated whole
+polynomials, add their finite nilpotence bounds; higher powers still
+vanish once the original bound vanishes. Linearity gives vanishing
+of their sum. This finite polynomial induction gives a genuine
+bound, not an input nilpotence or support certificate.
+\end{proof}
+
+\begin{theorem}[Exact successive original partial derivatives of coordinate multiplication]
+\label{hir:actual-polynomial-pderiv-coordinate-multiple-iterate}
+\lean{Hironaka.HironakaPDerivStablePolynomialXSaturation.polynomial_pderiv_pow_X_mul}
+\leanok
+For every $k\ge0$ and every whole polynomial $P$,
+\[
+ D_i^{k+1}(X_iP)=X_iD_i^{k+1}(P)+(k+1)D_i^k(P).
+\]
+All products, scalars, iterates and the coordinate variable in this
+identity are the literal original polynomial operations.
+\end{theorem}
+\begin{proof}
+For $k=0$, the original Leibniz rule and $D_iX_i=1$ give the formula.
+Differentiate the formula at $k$. Actual linearity differentiates
+the scalar term; Leibniz differentiates the coordinate multiple into
+$D_i^{k+1}(P)+X_iD_i^{k+2}(P)$. The remaining term is
+$(k+1)D_i^{k+1}(P)$, so combine these two genuine copies to obtain
+$(k+2)D_i^{k+1}(P)$. Endomorphism power composition identifies each
+successive derivative exactly and proves the induction step.
+\end{proof}
+
+\begin{theorem}[A genuine partial-stable original polynomial ideal is saturated by the same coordinate variable]
+\label{hir:actual-pderiv-stable-polynomial-coordinate-saturation}
+\uses{hir:actual-polynomial-pderiv-locally-nilpotent,hir:actual-polynomial-pderiv-coordinate-multiple-iterate}
+\lean{Hironaka.HironakaPDerivStablePolynomialXSaturation.X_mul_mem_iff_of_pderiv_stable}
+\leanok
+Let $J$ be any actual polynomial ideal and suppose $D_iP\in J$ for
+every whole $P\in J$. Then for every actual polynomial $P$,
+$X_iP\in J$ if and only if $P\in J$.
+No cylindrical-extension, normal-form, degree-bound or series
+saturation certificate is a premise.
+\end{theorem}
+\begin{proof}
+The reverse direction is ideal multiplication. For the forward
+direction, genuine derivative stability implies that every original
+iterate $D_i^{k+1}(X_iP)$ belongs to the same $J$. If
+$D_i^{k+1}(P)\in J$, the preceding exact coordinate-multiple formula
+and ideal subtraction therefore give $(k+1)D_i^k(P)\in J$.
+Characteristic zero makes the field scalar $k+1$ nonzero; multiply
+by its actual inverse to deduce $D_i^k(P)\in J$.
+
+Choose the genuine finite nilpotence bound of $P$ from the first
+theorem. The top derivative is zero and hence belongs to $J$.
+Apply the proved step downward through that finite bound to reach
+$D_i^0(P)=P\in J$. All memberships retain the same original ideal
+and whole polynomial. This is polynomial coordinate saturation;
+transfer to an entire formal initial cone or to genuine filtered
+original analytic ideals requires their separate whole-ideal and
+homogeneous-component dictionaries. No generic series saturation or
+normal flatness is concluded here.
+\end{proof}

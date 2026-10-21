@@ -1,0 +1,99 @@
+\section{An actual intrinsic old-NC-stratum centre from original marked data}
+\label{sec:nc-intrinsic-stratum-centre}
+
+Here the original marked ideal is whole-ambient, coherent, and has positive
+unchanged mark $d=j+1$. The original cosupport is compact. The old boundary
+is an arbitrary closed NC carrier $H$, with no global branch labels.
+The construction selects a genuine first permitted centre; no identification
+with the old ordered invariant, iteration or termination is asserted.
+
+\begin{theorem}[The whole derivative-stratum ideal detects the original permitted locus exactly]
+\label{hir:nc-intrinsic-stratum-detection-ideal}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsIntrinsicStratumCentre.stratumDetectionIdeal,TranscendentalNakamaye.Pending.HironakaNormalCrossingsIntrinsicStratumCentre.stratumDetectionMarked,TranscendentalNakamaye.Pending.HironakaNormalCrossingsIntrinsicStratumCentre.stratumDetectionIdeal_geometry}
+Let $Z=\{x:\operatorname{mult}_H(x)\ge r\}$ be an intrinsic highest branch
+level, with $r>0$ a global multiplicity bound. For original coherent $I$ set
+\[
+ K=I_Z+\mathcal D^j I.
+\]
+This is the actual coherent sum ideal, and its WHOLE zero locus is
+$V(K)=Z\cap\operatorname{cosupp}(I,j+1)$. No desired support ideal is input.
+\uses{hir:general-nc-highest-multiplicity-smooth-centre,hir:order-taylor}
+\leanok
+\end{theorem}
+\begin{proof}
+The intrinsic highest-level theorem makes $Z$ a genuine closed complex
+submanifold. Its whole vanishing ideal is coherent. The actual derivative
+ideal $\mathcal D^jI$ is coherent by repeated coherent differentiation;
+concatenating their local finite generators proves coherence of their
+actual sum. A germ lies in this sum precisely when it is a finite
+holomorphic combination of germs from the two ideals. Its value vanishes
+whenever both original ideals vanish. Conversely inclusion of each summand
+shows that vanishing of the entire sum forces vanishing of both summands.
+Thus its WHOLE zero locus is the intersection of their zero loci. The
+actual vanishing-ideal dictionary gives $V(I_Z)=Z$, and the proved exact
+Taylor-order dictionary gives
+$V(\mathcal D^jI)=\operatorname{cosupp}(I,j+1)$. Substitute these two
+actual equalities to obtain the displayed equality.
+\end{proof}
+
+\begin{theorem}[The original stratum internally supplies the actual auxiliary invariant domain]
+\label{hir:nc-intrinsic-stratum-detection-domain}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsIntrinsicStratumCentre.stratumDetectionMarked_isInvDomain}
+The actual marking-one datum $(X,K,1,[])$ lies in the domain of the genuine
+ambient-dimensional canonical invariant. No nonzero, flatness, maximum,
+history or invariant-domain certificate is incoming.
+\uses{hir:nc-intrinsic-stratum-detection-ideal,hir:general-nc-actual-highest-stratum-exists,hir:embedded-resolution-pure-dimensional}
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine positive-codimension highest-stratum coordinates give empty
+interior of $Z$. Its actual analytic local equations therefore include,
+at every ambient point, a germ of $I_Z$ which is frequently nonzero:
+otherwise all finitely many local equations would vanish identically on a
+neighbourhood and make $Z$ have interior. The real inclusion $I_Z\subseteq K$
+retains this very germ and its frequent nonvanishing, proving the whole
+ambient nonzero condition for $K$ internally. The preceding coherence,
+smooth whole ambient carrier and empty SNC boundary give actual
+wellformedness. The ambient carrier has dimension $n$ and the auxiliary
+mark is literally one. These are every actual invariant-domain field.
+\end{proof}
+
+\begin{theorem}[Original data internally select a nonempty intrinsic locally permitted NC blowup]
+\label{hir:nc-intrinsic-original-marked-first-centre}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsIntrinsicStratumCentre.exists_intrinsic_original_marked_nc_blowup}
+Assume the ORIGINAL cosupport is compact and its intersection with $Z$ is
+nonempty. From only these original data there are a nonempty smooth centre
+$C$ and a genuine universal blowup $\pi:Y\to X$. The centre is the actual
+WHOLE initial canonical maximum for the internally constructed datum $K$,
+and it lies in $Z\cap\operatorname{cosupp}(I,j+1)$. The same map is an
+isomorphism off the ORIGINAL cosupport. On actual neighbourhoods of all
+centre points the whole old branch list is SNC, its centre is admissible
+for the ORIGINAL ideal at its unchanged mark, and the actual restricted
+blowup has the complete old strict branches plus true new exceptional as
+SNC. Whole-ambient original local wellformedness is internally proved.
+No centre, maximum, local branch or history is supplied by a caller.
+\uses{hir:nc-intrinsic-stratum-detection-domain,hir:nc-highest-subcentre-actual-blowup,hir:centre-function}
+\leanok
+\end{theorem}
+\begin{proof}
+Use the actual marking-one datum just constructed. Its cosupport is its
+whole zero locus, hence exactly the ORIGINAL intersection already proved.
+It is genuinely compact as a closed subset of the original compact
+cosupport, and is nonempty by hypothesis. Genuine upper semicontinuity of
+the actual canonical invariant on the reflexive history therefore attains
+its WHOLE maximum on this very set. Take its entire maximum locus as $C$;
+it is nonempty and the actual canonical maximum-admissibility theorem
+makes it a closed smooth centre. Its cosupport containment gives BOTH
+$C\subseteq Z$ and $C\subseteq\operatorname{cosupp}(I,j+1)$ internally.
+
+Apply the proved highest-stratum subcentre construction to this actual
+$C$ and the ORIGINAL ideal and mark. It constructs a real universal
+blowup, gives its original off-cosupport isomorphism, and internally
+constructs the genuine entire local branch lists and actual restricted
+blowups. The local SNC/marked admissibility, unchanged original
+wellformedness and complete transformed old-branch/new-exceptional SNC
+fields all belong to that SAME map. The auxiliary mark-one datum selects
+only the first centre; no equality of auxiliary and old invariants or
+controlled transforms is used, and no further progress or termination is
+inferred.
+\end{proof}

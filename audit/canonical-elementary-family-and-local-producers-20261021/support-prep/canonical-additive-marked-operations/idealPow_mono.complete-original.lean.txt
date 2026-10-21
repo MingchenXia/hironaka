@@ -1,0 +1,5 @@
+/-- Powers are monotone in the ideal. -/
+theorem idealPow_mono {𝔞 𝔟 : GermIdeal n M} (h : 𝔞.Le 𝔟) :
+    ∀ k : ℕ, (idealPow 𝔞 k).Le (idealPow 𝔟 k)
+  | 0 => fun _ _ hg => hg
+  | k + 1 => mul_le_mul' (idealPow_mono h k) h

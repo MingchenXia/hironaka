@@ -1,0 +1,86 @@
+{
+  "status": "DRAFT_ONLY_COMPLETE_ORIGINAL_EXTRACTION_NO_RUNTIME_OR_PRODUCTION",
+  "source_module": "TranscendentalNakamaye.Pending.NormalCrossingsComparison",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/NormalCrossingsComparison.lean",
+  "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "source_sha256": "e485c8a37525329b4ac7dff5d7b4d0f28f2543b1455db1fb8340b017e02f4c5b",
+  "destination_module": "Hironaka.Support.NormalCrossingsWellFormedSublistOriginalExact",
+  "destination_path": "Hironaka/Support/NormalCrossingsWellFormedSublistOriginalExact.lean",
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.NormalCrossingsComparison.isWellFormed_withE"
+  ],
+  "original_selected_source": "/-- **Well-formedness passes to a sublist of the divisor.** -/\ntheorem isWellFormed_withE {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed) {E' : List (Set X)}\n    (hE' : E'.Sublist 𝔪.E) : ({ 𝔪 with E := E' } : MarkedIdeal n X).IsWellFormed :=\n  ⟨h𝔪.isClosedSubmanifold_N, h𝔪.isCoherent, isSNCDivisor_of_sublist h𝔪.isSNCDivisor hE',\n    isTransverse_of_forall_mem h𝔪.isTransverse fun _ hH => hE'.subset hH⟩\n",
+  "original_selected_sha256": "3239d887bcc3d688714a73ece89b5091656dc54707ca7d92ab7649e1faa6c787",
+  "original_payload_chunks": [
+    "/-- **Well-formedness passes to a sublist of the divisor.** -/\ntheorem isWellFormed_withE {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed) {E' : List (Set X)}\n    (hE' : E'.Sublist 𝔪.E) : ({ 𝔪 with E := E' } : MarkedIdeal n X).IsWellFormed :=\n  ⟨h𝔪.isClosedSubmanifold_N, h𝔪.isCoherent, isSNCDivisor_of_sublist h𝔪.isSNCDivisor hE',\n    isTransverse_of_forall_mem h𝔪.isTransverse fun _ hH => hE'.subset hH⟩\n"
+  ],
+  "original_context": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter\nopen scoped Topology Manifold\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.NormalCrossingsComparison\n\nopen FirstPass FirstPass.BlowupSequences NormalCrossings BlowupSNCTransform\n  SimultaneousNormalCrossings RegularAtDimTransport RegularPatchPushforward MarkedIdeals\n  BlowupStrictSubmanifold\n\nnoncomputable section\n\nvariable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]\n\nvariable [IsComplexManifold n X]\n\n",
+  "original_context_blocks": [
+    {
+      "original_lines": [
+        4,
+        5
+      ],
+      "text": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n"
+    },
+    {
+      "original_lines": [
+        47,
+        60
+      ],
+      "text": "open Set Filter\nopen scoped Topology Manifold\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.NormalCrossingsComparison\n\nopen FirstPass FirstPass.BlowupSequences NormalCrossings BlowupSNCTransform\n  SimultaneousNormalCrossings RegularAtDimTransport RegularPatchPushforward MarkedIdeals\n  BlowupStrictSubmanifold\n\nnoncomputable section\n\nvariable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]\n"
+    },
+    {
+      "original_lines": [
+        132,
+        132
+      ],
+      "text": "variable [IsComplexManifold n X]\n"
+    }
+  ],
+  "original_closing": "end TranscendentalNakamaye.Pending.NormalCrossingsComparison\n",
+  "imports": [
+    "Hironaka.Blowup.NormalCrossingsComparison"
+  ],
+  "existing_pure_import_sha256": {
+    "Hironaka/Blowup/NormalCrossingsComparison.lean": "3b807088f11f4eb778d09f5c29e11b02ef50f1eef642434ee985e11dc921ef28"
+  },
+  "existing_old_dependency_actual_module": {
+    "module": "Hironaka.Blowup.NormalCrossingsComparison",
+    "actual_roots": [
+      "Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_mem",
+      "Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_notMem._simp_1_1",
+      "Hironaka.NormalCrossingsComparison.IsPartialNCAt.insert",
+      "Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_notMem._simp_1_3",
+      "Hironaka.NormalCrossingsComparison.IsPartialNCAt.insert._proof_1_1",
+      "Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_notMem",
+      "Hironaka.NormalCrossingsComparison.isAdmissibleCentre_withE_iff",
+      "Hironaka.NormalCrossingsComparison.mem_complexCoordinatePlane_pred_iff._proof_1_1",
+      "Hironaka.NormalCrossingsComparison.mem_complexCoordinatePlane_pred_iff._proof_1_2",
+      "Hironaka.NormalCrossingsComparison.IsPartialNCAt.insert._simp_1_2",
+      "Hironaka.NormalCrossingsComparison.geoTransform_withE",
+      "Hironaka.NormalCrossingsComparison.isTransverse_of_forall_mem",
+      "Hironaka.NormalCrossingsComparison.isPartialNCAt_of_hasNormalCrossings",
+      "Hironaka.NormalCrossingsComparison.geoStrictTransform_mono",
+      "Hironaka.NormalCrossingsComparison.hasNormalCrossings_iff_of_forall_mem",
+      "Hironaka.NormalCrossingsComparison.mem_complexCoordinatePlane_pred_iff._proof_1",
+      "Hironaka.NormalCrossingsComparison.mem_complexCoordinatePlane_pred_iff",
+      "Hironaka.NormalCrossingsComparison.IsPartialNCAt",
+      "Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_notMem._simp_1_2",
+      "Hironaka.NormalCrossingsComparison.isSNCDivisor_of_sublist",
+      "Hironaka.NormalCrossingsComparison.forall_notMem_transformE",
+      "Hironaka.NormalCrossingsComparison.forall_mem_transformE",
+      "Hironaka.RegularAtDimTransport.LocalHolomorphicEquivAt.comp.congr_simp"
+    ]
+  },
+  "prepared_destination_sha256": "627122ba95c41eb4ba26c08ec369ea804ea67a8c10349000d9dfe9197575c482",
+  "proof_type_payload_edits": 0,
+  "administrative_changes": [
+    "Existing old module import replacing original transitive imports",
+    "Frozen canonical namespace/open relocation",
+    "Standard release header",
+    "Retain original options, universe, opens, noncomputable section and BOTH original variable commands (including IsComplexManifold at line132)"
+  ],
+  "production_installation_pending": true,
+  "runtime_compile_or_Expr_or_kernel_claimed": false
+}

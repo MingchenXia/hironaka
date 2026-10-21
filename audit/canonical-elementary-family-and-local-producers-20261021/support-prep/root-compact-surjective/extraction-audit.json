@@ -1,0 +1,23 @@
+{
+  "status": "DRAFT_COMPLETE_ORIGINAL_SOURCE_ONLY_NO_RUNTIME",
+  "source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "ordinary_git_checkout": "/workspace/archon-publish",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/StrictTransformComposition.lean",
+  "source_sha256": "f6e149e71a57477162e47c11ca2c933a427357215e75b4cca3971d42c47077ea",
+  "source_module": "TranscendentalNakamaye.Pending.StrictTransformComposition",
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.StrictTransformComposition.surjective_of_isBlowupAlong",
+    "TranscendentalNakamaye.Pending.StrictTransformComposition.IsBlowupSequence.compactSpace_surjective"
+  ],
+  "original_selected_source": "/-- **A blowup of a compact manifold is surjective**: it is an isomorphism over the\ndense complement of the centre, and its image is compact, hence closed. -/\ntheorem surjective_of_isBlowupAlong [CompactSpace Y] {C : Set Y} {g : Z \u2192 Y}\n    (hg : IsBlowupAlong n C g) : Function.Surjective g := by\n  have := BlowupCompact.compactSpace_of_isBlowupAlong hg\n  have hclosed : IsClosed (range g) := (isCompact_range hg.contMDiff.continuous).isClosed\n  have hsub : C\u1d9c \u2286 range g := fun y hy => by\n    obtain \u27e8z, -, hz\u27e9 :=\n      (BlowupIsomorphismOff.isIsomorphismOver_compl_of_isBlowupAlong hg).1.2.2 hy\n    exact \u27e8z, hz\u27e9\n  have hdense : closure C\u1d9c = univ := by rw [closure_compl, hg.2.1, compl_empty]\n  intro y\n  have h := hclosed.closure_subset_iff.mpr hsub\n  rw [hdense] at h\n  exact h (mem_univ y)\n\n/-- **A blowup sequence of a compact manifold** has compact source and is surjective. -/\ntheorem IsBlowupSequence.compactSpace_surjective [CompactSpace X] {f : Y \u2192 X}\n    (hf : IsBlowupSequence n X Y f) : CompactSpace Y \u2227 Function.Surjective f := by\n  induction hf with\n  | refl => exact \u27e8inferInstance, Function.surjective_id\u27e9\n  | step f C g _hf hg ih =>\n      obtain \u27e8hcompact, hsurj\u27e9 := ih\n      have := hcompact\n      exact \u27e8BlowupCompact.compactSpace_of_isBlowupAlong hg,\n        hsurj.comp (surjective_of_isBlowupAlong hg)\u27e9\n",
+  "original_selected_sha256": "04f77723a7f1f270dcf8e812ac5b59ec42ef99be5f5f956209b49fee72dbcad2",
+  "original_context": "set_option autoImplicit false\n\nopen Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.StrictTransformComposition\n\nopen FirstPass FirstPass.BlowupSequences\n\nnoncomputable section\n\nvariable {n : \u2115}\n  {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]\n    [IsComplexManifold n X]\n  {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]\n    [IsComplexManifold n Y]\n  {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z]\n    [IsComplexManifold n Z]\n",
+  "original_closing": "\nend\n\nend TranscendentalNakamaye.Pending.StrictTransformComposition\n",
+  "imports": [
+    "Hironaka.Resolution.StrictTransformComposition"
+  ],
+  "prepared_destination_sha256": "fbe21002709c8730d8bf8ef23874783eeac90a7b619e314b2bda1d9809926e81",
+  "proof_type_payload_edits": 0,
+  "production_installed": false,
+  "build_or_kernel_or_expression_PASS_claimed": false
+}

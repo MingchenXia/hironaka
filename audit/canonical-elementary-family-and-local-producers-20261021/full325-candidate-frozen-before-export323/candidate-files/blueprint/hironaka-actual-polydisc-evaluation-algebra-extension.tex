@@ -1,0 +1,85 @@
+\section{Actual holomorphic division on one internally constructed polydisc}
+
+\begin{theorem}[Actual convergent evaluation preserves monomials, addition and finite sums]
+\label{hir:actual-polydisc-evaluation-additive-algebra}
+\uses{hir:actual-coefficient-polydisc-uniform-evaluation}
+\lean{Hironaka.HironakaActualPolydiscEvaluationAlgebra.evaluation_monomial,Hironaka.HironakaActualPolydiscEvaluationAlgebra.evaluation_add,Hironaka.HironakaActualPolydiscEvaluationAlgebra.evaluation_finset_sum}
+Literal actual series evaluation sends $cX^a$ to $cz^a$. On the
+actual absolute coefficient domain it preserves addition and finite
+sums, throughout the closed original polydisc.
+\leanok
+\end{theorem}
+\begin{proof}
+For a monomial, all coefficients except the actual exponent are zero,
+so the actual infinite sum has its single stated value. For addition,
+the true formal coefficient map is additive. Distribute the actual
+monomial factor and use the already proved absolute summability to
+interchange the two actual sums. For a finite sum, coefficient
+linearity followed by the finite-sum interchange for genuinely
+summable families proves the assertion without any formal evaluation
+topology assumption.
+\end{proof}
+
+\begin{theorem}[Actual convergent evaluation preserves true formal convolution]
+\label{hir:actual-polydisc-evaluation-multiplicative-algebra}
+\uses{hir:actual-coefficient-polydisc-uniform-evaluation,hir:actual-polydisc-evaluation-additive-algebra}
+\lean{Hironaka.HironakaActualPolydiscEvaluationAlgebra.evaluation_mul}
+If $F,G$ have finite actual absolute coefficient mass, their literal
+evaluation satisfies $(FG)(z)=F(z)G(z)$ at every point of the entire
+closed polydisc, where $FG$ is the genuine formal convolution product.
+\leanok
+\end{theorem}
+\begin{proof}
+Both actual evaluated monomial families are absolutely summable.
+The product family indexed by two actual exponent vectors is therefore
+summable. The actual Cauchy-product theorem rewrites the product of
+the two actual sums as the sum over genuine finite antidiagonals.
+On an antidiagonal $a+b=c$, the literal monomials satisfy
+$z^az^b=z^c$. Thus its finite inner sum is precisely the genuine
+formal convolution coefficient multiplied by $z^c$. Summing gives
+the actual evaluation of the entire true formal product.
+\end{proof}
+
+\begin{theorem}[One internally chosen radius gives actual holomorphic vertex division]
+\label{hir:actual-common-radius-holomorphic-vertex-division}
+\uses{hir:actual-polydisc-evaluation-additive-algebra,hir:actual-polydisc-evaluation-multiplicative-algebra,hir:actual-coefficient-polydisc-holomorphy,hir:actual-deg-lex-vertex-small-radius,hir:actual-vertex-convergent-whole-division}
+\lean{Hironaka.HironakaActualPolydiscEvaluationAlgebra.exists_actual_holomorphic_vertex_division}
+Let $I$ be the actual whole formal ideal and $B$ its actual monic
+deg-lex vertex family. Suppose the actual finite generator tails have
+finite absolute mass at a positive radius $\eta$. There is one positive
+$\rho\leq\eta$, chosen before every numerator, such that every actual
+$F$ of finite mass at $\eta$ has actual convergent quotients $H_a$
+and the unchanged canonical whole-ideal remainder $S$. They satisfy
+both the literal whole formal division identity and, on the entire
+closed $\rho$-polydisc, the genuine function identity
+\[
+ F(z)=\sum_a B_a(z)H_a(z)+S(z).
+\]
+All the displayed generator, quotient and remainder evaluations are
+complex differentiable on the open $\rho$-polydisc. Neither weights,
+a strict norm bound, quotients, a canonical remainder convergence
+certificate, nor a holomorphic function identity is supplied.
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine bounded deg-lex weight construction and anisotropic
+shrink theorem internally choose one positive $\rho\leq\eta$ with
+the computed actual tail constant strictly less than one. This
+choice depends on the same original vertex family, before the
+numerator. Decreasing the radius preserves its actual coefficient
+mass. Apply the genuine complete complex coefficient-space inverse
+to obtain the actual owner quotients, canonical whole-ideal
+remainder and literal whole formal identity. The actual generator
+is its convergent tail plus its genuine single monomial, so it too
+has finite mass at this same radius. All quotients, generators and
+the remainder therefore give actual holomorphic functions by the
+proved polydisc theorem. Apply actual additive, finite-sum and
+multiplicative evaluation to the unchanged whole formal identity.
+The result is the asserted literal function identity on the entire
+closed polydisc, with holomorphy asserted on its open part.
+\end{proof}
+
+The initial fixed-radius coefficient-mass premise is the genuine
+analytic-series domain. Identifying arbitrary original holomorphic
+germs with these convergent series, persistent HS tracking and
+resolution termination remain separate obligations.

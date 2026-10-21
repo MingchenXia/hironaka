@@ -1,0 +1,262 @@
+{
+  "created_utc": "2026-10-21T03:12:32.862106+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G3": "Original discrete full-value upper cut now has an internally iterated genuine locally finite cleanup history, without incoming schedule or compact support; unrestricted higher-dimensional cleanup remains open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutHistory.lean",
+    "sha256": "d7b9730a4c509fafb45f9dd00cea0514c5287babe52804908fcfb26cef5c1876",
+    "bytes": 16151
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-original-discrete-full-cut-history-extension.tex",
+    "sha256": "f43160990045d299677fb88706d52b57012691be136bd1717ecd404997d624ab",
+    "bytes": 6001
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutHistory.ilean",
+      "sha256": "167d33e3406ef025dfc91e57e5a69ff685673bdfcfc881079bdc3305cea6213a",
+      "bytes": 111014
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutHistory.ilean.hash",
+      "sha256": "273865953df3b94a4fcf2bf687918fee4eb1e9ec751ffdf2232febed1673b6f0",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutHistory.olean",
+      "sha256": "0d5036db1d3742f7558081731d66bcab54d8b10bf48470f08d816b33497b74b4",
+      "bytes": 847152
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutHistory.olean.hash",
+      "sha256": "1c977e69e92ee01a22a90a4efe394c77b9ead3506bffb9ed24eebbde8fdf50d3",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutHistory.trace",
+      "sha256": "d541b4b2dc85c1ca71ef7810417a686dc2692e1646162e2e50a7f1cb355b9402",
+      "bytes": 3536
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "CutParallelSteps",
+      "source_line": 27
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_discrete_cut_sequence",
+      "source_line": 35
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "restricted_cut_step",
+      "source_line": 70
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "eventually_erases_cut",
+      "source_line": 99
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "lastCutCentreImage",
+      "source_line": 165
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "centreImage_cut_sequence",
+      "source_line": 169
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_discrete_cut_locally_finite_history",
+      "source_line": 184
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_original_discrete_full_cut_cleanup",
+      "source_line": 251
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:original-discrete-full-cut-actual-history",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.exists_discrete_cut_sequence",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.CutParallelSteps"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "03c1d684a098959e7bb2dbaaa4411b8eccd8afe0efb94e5e9ad8cbef1fe7c07c"
+    },
+    {
+      "label": "hir:original-discrete-full-cut-local-erasure",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.exists_discrete_cut_locally_finite_history"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "9820964ffd87bc41d5fd3550c447b8d17ffd28a8c853a9c5d9ad858ad605762b"
+    },
+    {
+      "label": "hir:original-canonical-discrete-full-cut-cleanup",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.exists_original_discrete_full_cut_cleanup"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "20d75025b7b1853b451594ecf21a272f6bb0d531816f5f2585f2608deb9d7d4b"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.0.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.centreImage_cut_sequence",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.0.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.lastCutCentreImage.match_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.CutParallelSteps",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.0.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.eventually_erases_cut._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.0.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.eventually_erases_cut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.0.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.lastCutCentreImage",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.exists_discrete_cut_locally_finite_history",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.0.TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.restricted_cut_step",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.exists_original_discrete_full_cut_cleanup",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutHistory.exists_discrete_cut_sequence",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 10,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 10
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-history/kernel.log",
+    "sha256": "526f431cdc4bdad83003ead7652986f1a07746e3842df590b72340106ba928fa",
+    "bytes": 80
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-history/actual-roots.log",
+    "sha256": "0129e04089fcf57a3e566475bf2be1c17b63e9a6c5b055004d3b734ad83c7ffb",
+    "bytes": 2907
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-history/ActualRoots.lean",
+    "sha256": "c145a89ef80480a0f8dcffa1fe06db659278b2d47ffebcd069d2087aad148b46",
+    "bytes": 866
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/global-history/discrete-full-cut-history/native.log",
+    "sha256": "0bc787f2928817e84b561518f288c30ab79711e71419c87ba80b9189fb659aa9",
+    "bytes": 141
+  },
+  "native_build_jobs": 4853,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 278-line source, its actual state recursion and all private count/trace helpers, and all THREE complete written BP proofs reviewed. Internal states are genuine finite original test towers together with canonical restrictions on the internally chosen original isolating windows. The actual empty tower supplies the initial state; the separately proved genuine global selected-cut refinement supplies the next state, real blowup map and literal whole centre equation. Iteration therefore constructs ONE actual GrowingSeq with actual recorded step maps and all same restricted canonical histories before any local stopping index is chosen. Actual restriction of each recorded step has exactly the true selected local whole maximum or empty centre, using the whole centre trace theorem, not a new local history. On a fixed internal window, per-sequence local finiteness of the proved canonical invariant bounds the TRUE counts of centres meeting the compact SINGLETON original point. Actual canonical nonincrease and whole cosupport projection show high-cut nonemptiness propagates backwards. Every high-cut stage has a nonempty selected whole maximum by the independently proved compactness of the ENTIRE actual high cut; every such selected centre lies over the SAME isolated original point, so its real singleton centre count increments by one. Induction yields j at most the actual count whenever the high cut survives at stage j. The true count bound thus erases the entire high cut at every j beyond m+1, although the whole original or local cosupport can be noncompact. Actual centre-image readout recovers the whole selected parallel centre. Its exact trace and eventual empty selection prove every late real centre avoids the whole base window; outside the CLOSED initial strict cut its open complement avoids every centre. These genuine local avoidance windows prove LocallyFinite for the family of all actual centre images. Each image is closed by actual finite-prefix properness and closed actual centres. The actual step maps are isomorphisms over these late windows, and the genuine tail restriction/centre avoidance equivalence proves EVERY whole late restricted finite tail is empty. Finally the original-only endpoint internally chooses the genuinely proved original canonicalInvariant n and specializes this SAME construction to the literal original initial full-value strict cut. No history, cover, canonical window choice, compact high cut, centre count or stopping witness is input.",
+  "proven_scope": "Only an original invariant-domain marked ideal and a discrete literal initial strict full-value cut produce an actual global original test GrowingSeq with same local canonical restrictions, genuine eventual high-cut erasure, actual closed locally finite centre images and whole empty/isomorphic tails near every original point.",
+  "scope_limits": [
+    "Discreteness of the ACTUAL initial full-value strict upper cut remains the explicit natural qualification. The entire original cosupport may be connected, positive-dimensional and noncompact.",
+    "The local reference cut is erased and the constructed history stabilizes locally, but remaining lower-value cosupport is not claimed resolved. Only actual window restrictions are canonical; whole-space canonicality is not inferred.",
+    "This proves the original relative dimension-zero high-cut cleanup seed. Unrestricted higher-dimensional joint-profile scheduling and general G3 remain open."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-history/review-config.json",
+    "sha256": "53d7337e16bb8a0d3bc2b84d8f4107254bf7b9360e3e13418bc1a316c0a3543e",
+    "bytes": 4434
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/global-history/discrete-full-cut-history/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/global-history/discrete-full-cut-history/peer-review-canonical.json"
+}

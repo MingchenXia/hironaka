@@ -1,0 +1,15 @@
+/-- **The conclusion of the invariant**: at a good point `p ∈ S_T` where every `[𝓓^i 𝔪]_T` (`i < μ`) has order
+`≥ μ - i` along `S_T`, every germ of `𝔪_T` lies in `𝔪_p^μ`. -/
+theorem GoodAt.orderGE (𝔪 : MarkedIdeal n X) (S : Set X) {Y : CMfd.{u} n} {T : BlowupTower X Y} {p : Y}
+    (hp : GoodAt 𝔪 S T p) (hcoh : (geoTransformAlong 𝔪 T).ideal.IsCoherent)
+    (hD : ∀ i < 𝔪.d, OrderGE n (strictAlong T S) (geoTransformAlong (derivMarked 𝔪 i) T).ideal p (𝔪.d - i)) :
+    ∀ f, (geoTransformAlong 𝔪 T).ideal.mem p f → (idealPow (pointIdeal n p) 𝔪.d).mem p f := by
+  obtain ⟨k, -, c, G, hGmem, hGgen, hGder⟩ := hp
+  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcoh
+  have hG : ∀ g, G g → (idealPow (pointIdeal n p) 𝔪.d).mem p g := by
+    intro g hg
+    refine c.mem_idealPow_of_vanishesToOrderOn (hhol p g (hGmem g hg)) fun L hL hLlen => ?_
+    exact vanishesToOrderOn_of_isInSpanOnAt (hGder g hg L hL hLlen) fun s hs =>
+      hD L.length hLlen s hs
+  intro f hf
+  exact mem_idealPow_of_isInSpanAt ((hGgen f hf).mono fun g hg => hG g hg)

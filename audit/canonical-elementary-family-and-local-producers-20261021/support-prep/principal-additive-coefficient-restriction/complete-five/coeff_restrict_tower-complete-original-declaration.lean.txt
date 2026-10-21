@@ -1,0 +1,19 @@
+/-- **Włodarczyk `le:S` (1) and the inclusion `⊆` of (2)** (GGT Proposition 5.6.4 (1)--(2)): let
+`𝔪 = (X, X, E, 𝔞, μ)` with `𝔞` coherent and `μ ≥ 1`, `S` a closed submanifold, and `T` a multiple test blow-up of
+`𝔪` whose centres lie in the strict transforms of `S`.  Then `T` is a multiple test blow-up of `𝓒(𝔪)|_S`, along it
+`[𝓒(𝔪)|_S]_T ≃ 𝓒(𝔪)_T|_{S_T}`, and `supp(𝔪_T) ∩ S_T ⊆ supp[𝓒(𝔪)|_S]_T`. -/
+theorem coeff_restrict_tower (𝔪 : MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)
+    {S : Set X} (hS : IsClosedSubmanifold n S) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T)
+    (hTS : CentresIn S T) :
+    IsGeoTestTower (withN (coeffMarked 𝔪) S) T ∧
+      RestrictEquiv (geoTransformAlong (withN (coeffMarked 𝔪) S) T)
+        (withN (geoTransformAlong (coeffMarked 𝔪) T) (strictAlong T S)) ∧
+      (geoTransformAlong 𝔪 T).cosupp ∩ strictAlong T S ⊆
+        (geoTransformAlong (withN (coeffMarked 𝔪) S) T).cosupp := by
+  obtain ⟨hiff, hcos⟩ := coeff_tower 𝔪 hN h𝔞 hd T
+  have hTc : IsGeoTestTower (coeffMarked 𝔪) T := hiff.mpr hT
+  obtain ⟨hsT, hNT, -, -, -, hRE⟩ :=
+    restrict_tower (coeffMarked 𝔪) hN (isCoherent_coeffMarked hN h𝔞) hS T hTc hTS
+  refine ⟨hsT, hRE, ?_⟩
+  rw [hRE.cosupp_eq, ← hcos hT]
+  exact cosupp_inter_subset_cosupp_withN hNT _

@@ -1,0 +1,432 @@
+{
+  "created_utc": "2026-10-21T03:07:32.784560+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G3": "Genuine original discrete-high-cut global next centre and refinement proved; iterated locally finite cut-erasure history and unrestricted scheduler remain open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutCentres.lean",
+    "sha256": "e347d8bfd65ece5bc6ffbc59a5d0c54de40fab713f288a7be551f6800e63a490",
+    "bytes": 18524
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-original-discrete-full-cut-centres-extension.tex",
+    "sha256": "32b92cd93fab503d78d49920e93564a191c93c818fd8da0afdca6767eca9985e",
+    "bytes": 6205
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutCentres.ilean",
+      "sha256": "756a7d72b60df6991848de3c6a67bceffb4b6a7f61eaf779542cb98b8079af5b",
+      "bytes": 91125
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutCentres.ilean.hash",
+      "sha256": "dedc03d01bd26fed8c63d223ccdc02fd7fcad137139e0d0538a3b4654b5691a8",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutCentres.olean",
+      "sha256": "fa16925e4e1fa9714dc11b4b902d48ef3150acff4902a3539cd0572fc4b4e041",
+      "bytes": 508184
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutCentres.olean.hash",
+      "sha256": "a57f935c6ebed2b49886d9ba9780d52fe767747797b51085f0d62f073a2603d1",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaOriginalDiscreteFullCutCentres.trace",
+      "sha256": "f349e8c88b9fc9520a6d2c3a19ea63e0c2754fdf09b82a375aec2cc093ded8da",
+      "bytes": 3272
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "def",
+      "unqualified_source_name": "strictCut",
+      "source_line": 26
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_step_value_le",
+      "source_line": 31
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_value_le_initial",
+      "source_line": 49
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "isClosed_strictCut",
+      "source_line": 71
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "cutWindow",
+      "source_line": 90
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "cutWindow_inter",
+      "source_line": 96
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "mem_cutWindow",
+      "source_line": 102
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "current_high_cut_subset_fibre",
+      "source_line": 111
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "isCompact_current_high_cut",
+      "source_line": 158
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "selectedMaximum",
+      "source_line": 175
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "selectedMaximum_cases",
+      "source_line": 180
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "selectedMaximum_subset_strictCut",
+      "source_line": 188
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "selectedMaximum_admissible",
+      "source_line": 199
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "selectedMaximum_nonempty_of_compact_high_cut",
+      "source_line": 211
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "parallelCutCentre",
+      "source_line": 227
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "parallelCutCentre_subset_initial_cut",
+      "source_line": 235
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "preimage_parallelCutCentre",
+      "source_line": 254
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_discrete_cut_refinement",
+      "source_line": 289
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:original-full-cut-canonical-initial-bound",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.canonical_value_le_initial",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.canonical_step_value_le"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "e241dc0c27e118855fa646a275717d6c2f6ee5fd30b7ec427043c7f18088add1"
+    },
+    {
+      "label": "hir:original-discrete-full-cut-compact-current-high-locus",
+      "kind": "lemma",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.strictCut",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.isClosed_strictCut",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.cutWindow",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.current_high_cut_subset_fibre",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.isCompact_current_high_cut"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "05755e7e4c4a48c5dfb202e354bd85db9aed62d51ee7ae1b38c3ca08abd5a7b0"
+    },
+    {
+      "label": "hir:original-discrete-full-cut-global-refinement",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.parallelCutCentre",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.preimage_parallelCutCentre",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.parallelCutCentre_subset_initial_cut",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum_nonempty_of_compact_high_cut",
+        "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.exists_discrete_cut_refinement"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "ffd6404de7d7cbd99d4c696512f4ea89990ee019f075de49cfadb383b8f5d893"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum_cases",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.canonical_step_value_le",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum.eq_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.parallelCutCentre",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.isClosed_strictCut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum_nonempty_of_compact_high_cut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.parallelCutCentre._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.mem_cutWindow",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum_subset_strictCut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.exists_discrete_cut_refinement",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.cutWindow_inter",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.parallelCutCentre._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.canonical_value_le_initial",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.cutWindow._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.strictCut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.cutWindow",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.current_high_cut_subset_fibre",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.isCompact_current_high_cut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum_admissible",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.selectedMaximum_subset_strictCut._simp_1_2",
+      "transitive_axioms": [
+        "propext"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.preimage_parallelCutCentre",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.parallelCutCentre_subset_initial_cut",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaOriginalDiscreteFullCutCentres.cutWindow._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 24,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 23,
+    "propext": 1
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-centres/kernel.log",
+    "sha256": "1d945a284b4c4ed549ae5978d8af43b7e3854f202b634b1f0a617cc323996bd2",
+    "bytes": 80
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-centres/actual-roots.log",
+    "sha256": "b203f94e5dcd40961b7909d31c07866140bc8dc57f9f869ce6231e9260608fc3",
+    "bytes": 5515
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-centres/ActualRoots.lean",
+    "sha256": "92341bf9719980fe6839cb1d45f085ab11e54c6a5ddcd82a3f62680075edc128",
+    "bytes": 866
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/global-history/discrete-full-cut/native.log",
+    "sha256": "b7b2737ccc186520e8343b93bb9568adaddd086e7c0311c16ef581ba02bd4418",
+    "bytes": 141
+  },
+  "native_build_jobs": 4550,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 342-line source and all THREE complete written BP proofs reviewed. Genuine actual canonical decrease at nonempty whole maximum centres and actual empty-step equality prove every current cosupport value is bounded by the value at its original projected point, retaining all empty positions. The actual local upper-bound form of invariant semicontinuity, together with closed current cosupport, proves each entire strict upper cut is closed. A disclosed discrete subtype of the ACTUAL initial full-value strict cut supplies internal isolating ambient opens with singleton trace on that original cut. Actual empty-prefix open naturality and the canonical initial bound force the ENTIRE current high cut over its isolated original point. Genuine finite-prefix properness makes that original fibre compact; closedness makes the entire high cut compact, without compactness of the local or original whole cosupport. A maximum attained on this compact high cut dominates the whole local cosupport, since every point outside it has value at most the threshold. The selected centre is therefore the whole actual local maximum when high points remain, and the actual empty centre otherwise. Every selected centre lies over its own isolated original cut point. Consequently the WHOLE union has exactly its selected centre as trace on each original window, including overlaps away from the initial cut. Above the cut these traces are real original admissible centres; off the CLOSED initial cut the whole centre is empty on an actual open preimage. Genuine locality therefore proves global closedness, smoothness, current cosupport inclusion and normal crossings with the ENTIRE ordered boundary. The actual original nonzero-domain condition gives empty interior, so actual global blowup existence and properness apply. Its literal restricted centre traces extend every SAME local canonical prefix by a whole maximum or an empty position. No analytic centre is truncated by a compact set, and no whole-space maximum or global canonicality is presumed.",
+  "proven_scope": "Under a discrete ACTUAL initial full-value upper cut, internal original isolating windows make each entire current high cut compact in a proper fibre. Every actual original global test prefix whose window restrictions are canonical admits a genuine global admissible proper refinement advancing the SAME local canonical restrictions.",
+  "scope_limits": [
+    "The discrete initial strict upper cut assumption is explicit; the original whole cosupport may be connected, positive-dimensional and noncompact.",
+    "The global refinement endpoint takes an actual original test prefix with the disclosed actual canonical restrictions. It proves a next centre and step, not an internally iterated history or a general scheduler.",
+    "Only window restrictions are canonical. Global canonicality, global termination and unrestricted G3 are not established here."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/original-discrete-full-cut-centres/review-config.json",
+    "sha256": "da9f81c58b9a16c22eaabf44d20e0332357df415ee0dece72ffcd9518404cca7",
+    "bytes": 3804
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/global-history/discrete-full-cut/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/global-history/discrete-full-cut/peer-review-root.json"
+}

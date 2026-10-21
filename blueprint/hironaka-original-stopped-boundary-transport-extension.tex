@@ -1,0 +1,166 @@
+\section{The actual boundary of an independently stopped smooth source}
+
+For an ordered boundary $E$, write $E^{\ne\varnothing}$ for the list obtained
+by deleting its empty members, without changing the order of any surviving
+member.  Empty steps and different stopping indices are permitted throughout.
+The original source marked record remains literally $b^*M$.
+
+\begin{lemma}[Empty boundary members do not affect normal crossings]
+\label{hir:normal-crossings-delete-empty-boundary}
+\uses{hir:snc}
+\lean{Hironaka.HironakaOriginalStoppedBoundaryTransport.hasNormalCrossings_filter_nonempty_iff}
+\leanok
+For every carrier $C$ and finite ordered boundary $E$, $C$ has normal
+crossings with $E$ if and only if it has normal crossings with
+$E^{\ne\varnothing}$.
+\end{lemma}
+\begin{proof}
+At a point of $C$, adapted coordinates are required only for boundary
+members containing that point.  Restrict a system for $E$ to the
+surviving indices to obtain a system for the filtered list.  Conversely,
+for each member of $E$ containing the point, the member is nonempty and
+has an index in the filtered list.  Assign to it the coordinate set at
+such an index.  Assign an arbitrary coordinate set to every member not
+containing the point.  The same coordinate chart therefore describes
+$C$ and every required boundary member; the coordinate sets of the
+members through the point still have cardinality one.  This proves both
+directions, including the empty filtered list.
+\end{proof}
+
+\begin{theorem}[Actual empty compression retains every nonempty boundary member]
+\label{hir:original-empty-compression-filtered-boundary}
+\uses{hir:original-empty-compression-preserves-first-open,hir:original-actual-empty-family-canonical-deletion,hir:original-interior-empty-geometric-dictionary,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalStoppedBoundaryTransport.empty_free_compression_preserves_boundary}
+\leanok
+Let $n>0$, let $M$ belong to the original invariant domain of bound $k$,
+and let $T$ be an actual canonical history whose centres avoid an
+original open $O$.  One can construct a canonical history $Q$ with
+nonempty actual centres and a biholomorphism $\chi$ from its endpoint to
+that of $T$ over the original base.  They retain the whole cosupport and
+invariant-value dictionary, avoidance and the next-maximum encounter,
+and also satisfy the ordered equality
+\[
+ ((\chi^{-1}E_T))^{\ne\varnothing}=E_Q^{\ne\varnothing}.
+\]
+Here $\chi^{-1}E_T$ means taking inverse images member by member.
+\end{theorem}
+\begin{proof}
+Induct on the actual finite length.  If every centre is nonempty, use
+the same history and the identity map.  Otherwise split off an actual
+empty step with its whole suffix.  The genuine empty blowup is
+biholomorphic to its base, and transporting the suffix identifies the
+whole original history with a history containing an explicit empty
+identity step.  The tower isomorphism transports the entire ordered
+boundary by inverse image.  The explicit identity step inserts exactly
+one empty entry in the ordered boundary of the deleted history, at the
+actual chronological position.  Filtering deletes this entry and no
+other entry.  Apply induction to the strictly shorter deleted history.
+Inverse image under a bijection preserves and reflects nonemptiness,
+so filtering commutes with this inverse image.  Composition gives the
+asserted ordered equality for the same endpoint map as the cosupport,
+value and avoidance dictionaries.  Those dictionaries transport the
+whole maximal locus by an order embedding and the projection identity,
+and hence retain its encounter with $O$.
+\end{proof}
+
+\begin{theorem}[The filtered boundary is intrinsic to the first-meeting map]
+\label{hir:original-first-meeting-filtered-boundary}
+\uses{hir:original-empty-compression-filtered-boundary,hir:original-first-meeting-nonempty-length,hir:original-actual-whole-projection-biholomorphic-map-uniqueness,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalStoppedBoundaryTransport.first_meeting_boundary_transport}
+\leanok
+Let $T_1,T_2$ be actual original canonical prefixes of the same marked
+record in its ambient invariant domain.  Suppose both avoid the same
+original open, and their next whole maximum loci meet its inverse
+images.  For every biholomorphism $\eta$ between their endpoints over the
+original base,
+\[
+ E_{T_1}^{\ne\varnothing}
+   =((\eta^{-1}E_{T_2}))^{\ne\varnothing}.
+\]
+\end{theorem}
+\begin{proof}
+Compress both histories with the preceding theorem.  Their nonempty
+lengths agree by avoidance and the next-maximum encounter.  Their actual
+equal-length canonical tower isomorphism transports the entire ordered
+compressed boundaries.  Combining this equality with the two filtered
+compression equalities gives the assertion for the composite endpoint
+biholomorphism.  Actual finite-tower projection uniqueness identifies
+that composite with the supplied over-base $\eta$.  In dimension zero
+the original domain forces the transformed cosupport to be empty, so a
+next maximal point cannot exist.  
+\end{proof}
+
+\begin{theorem}[The independent Cartesian source has its own transported boundary]
+\label{hir:original-independent-stopped-own-boundary}
+\uses{hir:original-first-meeting-filtered-boundary,hir:original-pulled-stopped-source-next-encounter,hir:original-independent-source-stopped-cartesian-comparison,hir:submersion-relative-control-joint-tower,hir:normal-crossings-delete-empty-boundary}
+\lean{Hironaka.HironakaOriginalStoppedBoundaryTransport.independent_stopped_square_boundary}
+\leanok
+Let $V$ be a closed irreducible analytic subvariety with $\dim V<n$
+and coherent vanishing ideal, let $M=(X,X,\varnothing,I_V,1)$, and let
+$N=b^*M$ for a holomorphic submersion $b$.  Let $T$ be an actual
+canonical target history avoiding the target good open and whose next
+whole maximum encounters that open.  Let $S$ be
+any independent canonical source history avoiding its inverse image;
+when $b^{-1}V$ is nonempty, require its next whole maximum encounter.
+For any actual holomorphic Cartesian square with upper submersion $G$
+and vertical maps $p_S,p_T$, the actual boundaries satisfy
+\[
+ E_S^{\ne\varnothing}
+  =((G^{-1}E_T))^{\ne\varnothing}.
+\]
+Thus, whenever the conventional source strict carrier is the inverse
+image of the target strict carrier, target normal crossings implies
+normal crossings of the source strict carrier with its own $E_S$.
+\end{theorem}
+\begin{proof}
+Construct an actual smooth pullback tower $Q$ of this same $T$.  Its
+whole transformed record gives $E_Q=g^{-1}E_T$.  The two genuine
+Cartesian universal properties construct inverse holomorphic maps
+between the endpoints of $S$ and $Q$, hence a biholomorphism $\eta$
+over the source base with $g\eta=G$.  If $b^{-1}V$ is nonempty, both
+$S$ and $Q$ have the required whole maximal encounter; apply the
+preceding theorem.  If it is empty, both histories have only empty
+actual centres.  Their initial boundary is empty, and induction on the
+actual steps shows that their transformed boundary lists have no
+nonempty members.  The equality for $Q$ and $g\eta=G$ then give the
+same conclusion.  Pull back the target normal-crossings coordinates
+under the submersion $G$, use the literal strict-carrier equality and
+replace its pulled boundary by $E_S$ using the filtered equality and
+the empty-member lemma.
+\end{proof}
+
+\begin{theorem}[Original embedded smooth comparison with the actual source boundary]
+\label{hir:original-independent-embedded-smooth-own-boundary}
+\uses{hir:original-independent-stopped-smooth-source-producer,hir:original-independent-stopped-own-boundary}
+\lean{Hironaka.HironakaOriginalStoppedBoundaryTransport.exists_original_independently_stopped_smooth_source_own_boundary}
+\leanok
+Under the original compact-target, coherent vanishing-ideal and
+positive-codimension hypotheses, every holomorphic submersion constructs
+the same full elementary stopped-source comparison as the independently
+stopped source theorem, with the additional conclusion that its
+conventional strict carrier has normal crossings with its own actual
+transformed boundary $E_S$.  This retains the internally selected
+target prefix, independent source prefix, both tails, actual canonical
+marked histories, Cartesian upper submersion, strict carriers, regular
+dimensions, admissibility, SNC boundaries, proper surjective maps and
+good-open isomorphisms.
+\end{theorem}
+\begin{proof}
+Invoke the original independently stopped source theorem once.  Retain
+all its witnesses and conclusions.  Its target and source canonical
+prefixes have exactly the avoidance and encounter properties required
+above, including the conditional encounter and genuine empty branch.
+Its upper map is a true Cartesian holomorphic submersion and its whole
+conventional strict carriers satisfy the required literal equality.
+The preceding theorem therefore supplies normal crossings with this
+same source's actual boundary.  Adjoin that conclusion to the unchanged
+elementary geometric dictionary.
+\end{proof}
+
+\begin{remark}
+Only empty boundary entries are deleted in the comparison.  No equality
+of the unfiltered ordered lists or actual stopping indices is asserted.
+The canonical source record is $b^*M$; identifying its whole ideal with
+the reduced vanishing ideal of $b^{-1}V$ requires the separate singular
+vanishing-ideal smooth-pullback theorem.
+\end{remark}

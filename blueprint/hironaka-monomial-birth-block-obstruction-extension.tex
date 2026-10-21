@@ -1,0 +1,84 @@
+\section{Actual monomial colex obstruction and intrinsic birth-block selections}
+\label{sec:hironaka-monomial-birth-block-obstruction}
+
+The following finite statements concern the actual ordered monomial
+recipe. They do not assert an analytic example for the entire
+history-sensitive canonical invariant. In particular, no identification
+of that entire value with the concrete monomial data is assumed.
+
+\begin{theorem}[An actual three-branch colex recipe changes under relabelling]
+\label{hir:actual-monomial-three-branch-colex-permutation-obstruction}
+\lean{Hironaka.HironakaMonomialBirthBlockObstruction.actual_colex_three_branch_obstruction}
+For ambient bound three, three unit exponents and marking two, the
+actual monomial invariant on the three indices is the key of the pair
+$\{1,2\}$. Its value on $\{1,2\}$ is strictly greater than on
+$\{0,1\}$. Swapping indices zero and two sends the selected pair to
+$\{0,1\}$, a different pair. Thus this actual ordered recipe is not
+invariant under arbitrary relabelling of equal initial branches.
+\leanok
+\uses{hir:monomial-invariant}
+\end{theorem}
+\begin{proof}
+A subset of the three unit-weight indices is feasible exactly when it
+has at least two members. The first key entry $3-|K|$ excludes the
+three-member subset in favour of every feasible pair. Each feasible
+pair has exponent sum two, so the last entry compares the pairs by
+colexicographic order. Among the three pairs, $\{1,2\}$ is the unique
+largest. On either two-member index set there is exactly one feasible
+pair, and $\{0,1\}<_{\rm colex}\{1,2\}$. The indicated transposition
+sends the larger pair to the smaller pair. These are evaluations of
+the actual finite feasible-set and key definitions; no claim about
+an unspecified full analytic invariant follows from them.
+\end{proof}
+
+\begin{theorem}[Invariance inside birth blocks is exactly whole-block selection]
+\label{hir:actual-intrinsic-birth-block-selection-characterization}
+\lean{Hironaka.HironakaMonomialBirthBlockObstruction.birthBlockClosed_iff_permutation_invariant}
+Let a finite selected set of boundary labels have assigned birth or
+colour labels. Its selection is invariant under every permutation
+preserving these labels if and only if membership is constant inside
+each birth or colour block. Equivalently, the selected set is a union
+of entire such blocks.
+\leanok
+\uses{hir:actual-monomial-three-branch-colex-permutation-obstruction}
+\end{theorem}
+\begin{proof}
+Suppose first that the selection is invariant. For two indices in the
+same block, their transposition preserves every birth label: it swaps
+two equal labels and fixes all others. Invariance of the finite set
+under this transposition makes membership of the two indices
+equivalent. Hence membership is constant on every block.
+
+Conversely, suppose membership is constant on each block. A
+birth-preserving permutation sends each selected index to another
+index in its same block, which is therefore selected. For the reverse
+inclusion, the inverse permutation also preserves birth labels; it
+takes every selected target index to a selected preimage. Thus the
+image of the actual finite selected set is exactly itself under each
+allowed permutation. This uses the actual permutation action on the
+indices, rather than a presumed invariance of the monomial recipe.
+\end{proof}
+
+\begin{corollary}[Three identical initial branches admit no symmetric minimal feasible pair]
+\label{hir:actual-three-branch-no-symmetric-minimal-feasible-pair}
+\lean{Hironaka.HironakaMonomialBirthBlockObstruction.no_permutation_invariant_two_of_three}
+There is no two-element subset of three indistinguishable initial
+branch labels which is invariant under all permutations. Consequently
+a permutation-invariant replacement of the preceding actual monomial
+recipe cannot retain its requirement of choosing one minimal feasible
+pair on this input.
+\leanok
+\uses{hir:actual-intrinsic-birth-block-selection-characterization,hir:actual-monomial-three-branch-colex-permutation-obstruction}
+\end{corollary}
+\begin{proof}
+Assign the same birth label to all three indices. The preceding
+characterization says that an invariant selected set has constant
+membership on all three. A two-element selected set is nonempty, so
+choose one selected index. Every index must then be selected, forcing
+the selected set to have cardinality three, a contradiction. For the
+actual unit-exponent marking-two recipe, the minimal feasible subsets
+are precisely the two-element subsets as already proved. The
+obstruction requires a genuinely different intrinsic selection or
+birth-block strategy; it supplies no strict-progress or termination
+assertion for such a replacement.
+\end{proof}

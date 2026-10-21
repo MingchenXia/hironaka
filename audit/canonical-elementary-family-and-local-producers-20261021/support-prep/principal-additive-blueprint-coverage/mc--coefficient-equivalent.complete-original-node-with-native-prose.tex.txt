@@ -1,0 +1,21 @@
+\begin{lemma}[The coefficient ideal is equivalent to the marked ideal]
+\label{mc:coefficient-equivalent}
+\uses{mc:coefficient-ideal,mc:marked-finite-sum-tower,mc:inclusions-tower,mc:derivative-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0022}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.coeff_tower}
+\leanok
+Let \(\underline{\mathcal I}=(M,M,E,\mathfrak a,\mu)\) with \(\mathfrak a\) coherent and \(\mu\ge1\). A tower is a multiple test blow-up of
+\(\mathcal C(\underline{\mathcal I})\) if and only if it is one of \(\underline{\mathcal I}\), and along it
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\operatorname{cosupp}\underline{\mathcal I}_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:marked-finite-sum-tower} the multiple test blow-ups of \(\mathcal C(\underline{\mathcal I})\) are the simultaneous ones of the
+\(\mathcal D^i(\underline{\mathcal I})\), \(i<\mu\); the summand \(i=0\) is \(\underline{\mathcal I}\), and by Lemma~\ref{mc:inclusions-tower} every multiple test blow-up
+of \(\underline{\mathcal I}\) is one of every \(\mathcal D^i(\underline{\mathcal I})\). Along such a tower,
+\(\operatorname{cosupp}\mathcal C(\underline{\mathcal I})_T=\bigcap_{i<\mu}\operatorname{cosupp}[\mathcal D^i(\underline{\mathcal I})]_T\); the term \(i=0\) is
+\(\operatorname{cosupp}\underline{\mathcal I}_T\), and for every \(i\), \(\operatorname{cosupp}\underline{\mathcal I}_T\subset\operatorname{cosupp}\mathcal D^i(\underline{\mathcal I}_T)\subset
+\operatorname{cosupp}[\mathcal D^i(\underline{\mathcal I})]_T\) by Definition~\ref{mc:derivative-marked} and \([\mathcal D^i(\underline{\mathcal I})]_T\subset\mathcal D^i(\underline{\mathcal I}_T)\)
+(Lemma~\ref{mc:inclusions-tower}).
+\end{proof}
+This is Włodarczyk's Lemma ``le:coeff'', \(\mathcal C(\underline{\mathcal I})\simeq\underline{\mathcal I}\); the source assumes maximal order, which the proof does not use.

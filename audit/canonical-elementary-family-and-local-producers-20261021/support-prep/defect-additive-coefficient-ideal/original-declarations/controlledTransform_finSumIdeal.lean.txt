@@ -1,0 +1,24 @@
+/-- **Controlled transforms of finite sums** (equal marks, `m ≥ 1`): for coherent `𝔍ᵢ ⊆ 𝓘_C^μ`,
+`σ^c(∑_{i<m} 𝔍ᵢ, μ) = ∑_{i<m} σ^c(𝔍ᵢ, μ)`. -/
+theorem controlledTransform_finSumIdeal (hπ : IsBlowupAlong n C π) {J : ℕ → GermIdeal n M} {μ : ℕ} :
+    ∀ {m : ℕ}, 1 ≤ m → (∀ i < m, (J i).IsCoherent) →
+      (∀ i < m, (J i).Le (idealPow (vanishingIdeal (n := n) C) μ)) →
+      controlledTransform hπ (finSumIdeal J m) μ =
+        finSumIdeal (fun i => controlledTransform hπ (J i) μ) m
+  | 0, h, _, _ => absurd h (by omega)
+  | 1, _, hJ, hle => by
+    rw [finSumIdeal_one (hJ 0 Nat.one_pos),
+      finSumIdeal_one (J := fun i => controlledTransform hπ (J i) μ)
+        (isCoherent_controlledTransform hπ (hJ 0 Nat.one_pos) (hle 0 Nat.one_pos))]
+  | m + 2, _, hJ, hle => by
+    have hJ' : ∀ i < m + 1, (J i).IsCoherent := fun i hi => hJ i (by omega)
+    have hle' : ∀ i < m + 1, (J i).Le (idealPow (vanishingIdeal (n := n) C) μ) :=
+      fun i hi => hle i (by omega)
+    have hB := GermIdealPullbackCalculus.isCoherent_idealPow
+      (BlowupExceptionalDivisor.isCoherent_vanishingIdeal_centre hπ) μ
+    rw [finSumIdeal_succ fun i hi => hJ i (by omega),
+      MarkedIdealOperationsTransform.controlledTransform_sumIdeal hπ (isCoherent_finSumIdeal_of_lt hJ')
+        (hJ (m + 1) (by omega)) (finSumIdeal_le hB hle') (hle (m + 1) (by omega)),
+      controlledTransform_finSumIdeal hπ (by omega) hJ' hle']
+    exact (finSumIdeal_succ (J := fun i => controlledTransform hπ (J i) μ) (μ := m + 1) fun i hi =>
+      isCoherent_controlledTransform hπ (hJ i (by omega)) (hle i (by omega))).symm

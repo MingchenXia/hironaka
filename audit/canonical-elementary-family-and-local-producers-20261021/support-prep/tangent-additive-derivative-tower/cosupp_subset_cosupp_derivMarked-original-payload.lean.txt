@@ -1,0 +1,9 @@
+/-- **Giraud** (`N = M`): `cosupp(𝔪) ⊆ cosupp(𝓓^j 𝔪)` for `j ≤ d`. -/
+theorem cosupp_subset_cosupp_derivMarked {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ) {j : ℕ}
+    (hj : j ≤ 𝔪.d) : 𝔪.cosupp ⊆ (derivMarked 𝔪 j).cosupp := by
+  intro y hy
+  have h1 : y ∈ cosupport n univ 𝔪.ideal ((𝔪.d - j) + j) := by
+    rw [Nat.sub_add_cancel hj, ← hN]; exact hy
+  have h2 := MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal 𝔪.ideal (𝔪.d - j) j h1
+  show y ∈ cosupport n 𝔪.N (iterDerivIdeal 𝔪.ideal j) (𝔪.d - j)
+  rw [hN]; exact h2

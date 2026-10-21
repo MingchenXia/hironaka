@@ -1,0 +1,107 @@
+\section{True open graph contacts through actual holomorphic retractions}
+
+A centre closed only inside its true coordinate open is never extended to
+all of the coordinate space. Actual holomorphic section and projection maps
+retain the genuine open domain and the entire original centre ideal.
+
+\begin{theorem}[A split holomorphic section retains the entire original centre ideal]
+\label{hir:actual-retract-contact-centre-whole-ideal}
+\uses{hir:actual-graph-section-whole-ideal-pullback}
+\lean{Hironaka.HironakaActualRetractContactLocalization.section_centre_pullback,Hironaka.HironakaActualRetractContactLocalization.range_section_closed,Hironaka.HironakaActualRetractContactLocalization.image_centre_eq}
+\leanok
+Let $X$ and $A$ be complex manifolds of dimensions $d$ and $d+1$,
+and let $s:X\to A$ and $p:A\to X$ be actual holomorphic maps with
+$ps=1_X$. For every original subset $D\subset X$,
+\[
+ s^*\mathcal I_{s(D)}=\mathcal I_D
+\]
+as entire independently defined original functional ideals. The actual
+range of $s$ is closed, and $s(D)=\operatorname{range}(s)\cap p^{-1}D$.
+No coherence, holomorphic extension or ideal-equality certificate is input.
+\end{theorem}
+\begin{proof}
+A genuine ambient vanishing germ at $s(x)$ composed with $s$ is holomorphic
+and vanishes on $D$ near $x$, by actual continuity. The true finite-span
+relation preserves this entire vanishing condition. Conversely any original
+$a\in\mathcal I_{D,x}$ gives the literal ambient function $a\circ p$,
+holomorphic near $s(x)$ and vanishing on $s(D)$ there because $ps=1$.
+Its exact pullback is $a$, so the one-term true span proves the reverse
+whole membership. The actual range is precisely the fixed locus of the
+continuous map $sp$, hence is closed in Hausdorff $A$. For a range point
+$s(x)$, membership of its projection in $D$ is exactly $x\in D$; this
+proves the stated whole subset identity and in particular preserves
+closedness of original closed centres inside the actual manifolds.
+\end{proof}
+
+\begin{theorem}[Actual split contact geometry produces the whole intrinsic restricted blowup]
+\label{hir:actual-retract-contact-restricted-blowup}
+\uses{hir:actual-retract-contact-centre-whole-ideal,hir:actual-plane-contact-restricted-blowup,ana:submanifold-complex-structure,ana:submanifold-corestriction,hir:geo-transform-wellformed,hir:submersion-choice-image-trace-whole-pullback,ana:blowup-existence,ana:blowups}
+\lean{Hironaka.HironakaActualRetractContactLocalization.restrictedProjection_isBlowupAlong}
+\leanok
+Suppose $X$ has dimension $d$, $A$ has dimension $d+1$, the actual range
+$N=\operatorname{range}s$ is originally regular of dimension $d$, and
+$D$ is an original smooth closed nowhere dense centre of $X$. For any
+actual ambient blowup $\pi:Y\to A$ along the same literal centre $s(D)$,
+the actual strict transform $S$ has a genuinely constructed intrinsic
+complex manifold structure and the literal map $p\pi|_S:S\to X$ is an
+actual blowup along $D$. The ordinary range regularity is geometric input;
+no restricted blowup or comparison map is supplied.
+\end{theorem}
+\begin{proof}
+Whole centre pullback from the first theorem and true cross-dimensional
+composition make the composed map from an internally chosen lower blowup
+$\rho:Z\to X$ have invertible entire ambient centre ideal. Actual ambient
+universality constructs its unique holomorphic lift $\kappa$.
+The identity $p\pi\kappa=\rho$ and genuine properness of the lower blowup
+make $\kappa$ proper. Actual exceptional-complement density and ambient
+off-centre injectivity prove its entire range is the same strict transform
+$S$: continuity gives containment in the strict closure, while lower
+surjectivity and ambient complement injectivity give the opposite dense
+subset containment in its closed image. Actual range regularity and the
+strict-submanifold theorem construct the genuine intrinsic flattening
+atlas on $S$. Its inclusion is holomorphic. The actual exceptional ideal
+is invertible ALONG $S$, so its entire intrinsic restriction is invertible.
+Since $\pi|_S=sp\pi|_S$, the first theorem and whole composition identify
+this ideal with $(p\pi|_S)^*\mathcal I_D$. Lower universality constructs
+a holomorphic reverse comparison. Lower universal uniqueness proves one
+inverse identity; ambient universal uniqueness for the entire invertible
+pullback along $\pi|_S$ proves the other. Thus the comparisons are genuine
+biholomorphisms. Composing every lower universal lift with these actual
+inverse maps verifies every field of the restricted blowup definition,
+including uniqueness for test manifolds of every dimension. No marked
+stratum is replaced by an incorrect full preimage.
+\end{proof}
+
+\begin{theorem}[Original scalar graphs on true coordinate opens supply the actual contact geometry]
+\label{hir:actual-open-graph-contact-restricted-blowup}
+\uses{hir:actual-retract-contact-restricted-blowup,hir:actual-local-common-graph-model,hir:actual-intrinsic-manifold-chart-original-regularity}
+\lean{Hironaka.HironakaActualRetractContactLocalization.openGraph_restrictedProjection_isBlowupAlong}
+\leanok
+For a true original coordinate open $U\subset\mathbf C^d$, an original
+scalar graph function holomorphic on this $U$, and an original smooth
+closed nowhere dense centre inside $U$, any actual blowup of the true
+wide graph ambient domain along its literal graph centre restricts to
+the genuine lower-dimensional blowup of $U$ along that same centre.
+All section/projection/range regularity and intrinsic strict-transform
+structure are internally produced from this original graph input.
+\end{theorem}
+\begin{proof}
+Use the actual graph section $x\mapsto(x,f(x))$ from $U$ to its genuine
+wide ambient domain, and the actual first block projection to $U$.
+Holomorphy on the actual open proves both are genuine holomorphic maps,
+and their literal composition is the identity. The actual wide graph
+parametrization and projection construct a genuine whole quotient-model
+isomorphism from the univ model of $U$. The native manifold-chart converse
+therefore proves original regularity of its entire actual graph range,
+without supplying a rank or flattening certificate. Every graph point is
+the actual section value at its first projection, so this proves the
+required range regularity at every point. Apply the preceding theorem
+to these same actual maps and the original centre in $U$. All whole centre
+identities and actual blowup comparisons are thereby internally supplied.
+The true domain $U$ is retained throughout; no globally closed centre or
+holomorphy outside $U$ is invented.
+\end{proof}
+
+Canonical invariant-tail, maximal-centre and history compatibility across
+these presentations, and effective proper resolution descent, remain
+separate G1 obligations.

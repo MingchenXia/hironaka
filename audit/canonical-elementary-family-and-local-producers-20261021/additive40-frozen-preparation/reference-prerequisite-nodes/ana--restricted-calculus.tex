@@ -1,0 +1,36 @@
+\begin{lemma}[Calculus of restricted inclusions]
+\label{ana:restricted-calculus}
+\uses{ana:restricted-ideals,ana:ideal-sheaves}
+\lean{TranscendentalNakamaye.Pending.RestrictLeCalculus.RestrictLe.trans,TranscendentalNakamaye.Pending.RestrictLeCalculus.restrictLe_of_le,TranscendentalNakamaye.Pending.RestrictLeCalculus.restrictLe_refl,TranscendentalNakamaye.Pending.RestrictLeCalculus.restrictLe_pullback,TranscendentalNakamaye.Pending.RestrictLeCalculus.restrictLe_of_restrictLe_mul_mul,TranscendentalNakamaye.Pending.RestrictLeCalculus.isInvertibleAlong_of_isInvertible,TranscendentalNakamaye.Pending.RestrictLeCalculus.idealPow_add,TranscendentalNakamaye.Pending.RestrictedIdealExtension.restrictOn_eq_sum_vanishingIdeal,TranscendentalNakamaye.Pending.RestrictedIdealExtension.isCoherent_restrictOn_of_isClosedSubmanifold}
+\leanok
+Let \(\mathfrak a,\mathfrak b,\mathfrak c,\mathfrak l\) be ideal sheaves on \(M\) and \(W\subseteq M\).
+\begin{enumerate}
+\item Restricted inclusions are transitive; if \(\mathfrak b\) is coherent, \(\mathfrak a\subseteq\mathfrak b\) implies
+\(\operatorname{Res}_W\mathfrak a\subseteq\operatorname{Res}_W\mathfrak b\), in particular
+\(\operatorname{Res}_W\mathfrak b\subseteq\operatorname{Res}_W\mathfrak b\).
+\item If \(f:Y\to M\) is holomorphic, \(W'\subseteq Y\) with \(f(W')\subseteq W\), \(\mathfrak b\) is coherent and
+\(\operatorname{Res}_W\mathfrak a\subseteq\operatorname{Res}_W\mathfrak b\), then
+\(\operatorname{Res}_{W'}(\mathfrak a\mathcal O_Y)\subseteq\operatorname{Res}_{W'}(\mathfrak b\mathcal O_Y)\).
+\item If \(\mathfrak a,\mathfrak b\) are coherent, \(\mathfrak l\) is invertible along \(W\) and
+\(\operatorname{Res}_W(\mathfrak a\mathfrak l)\subseteq\operatorname{Res}_W(\mathfrak b\mathfrak l)\), then
+\(\operatorname{Res}_W\mathfrak a\subseteq\operatorname{Res}_W\mathfrak b\).
+\item An invertible ideal whose zero locus contains no nonempty relatively open subset of \(W\) is invertible
+along \(W\); and \(\mathfrak a^{r+p}=\mathfrak a^r\mathfrak a^p\) for coherent \(\mathfrak a\).
+\item If \(\mathfrak a\) is coherent, \(\widetilde{\mathfrak a}^W=\mathfrak a+\mathcal I_W\); it is coherent when moreover
+\(W\) is a closed submanifold.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(i) Substitute the combinations; a germ of a coherent \(\mathfrak b\) is the combination of itself. (ii) Compose a
+relation \(a=\sum_id_ib_i\), valid on \(W\) near \(f(y)\), with \(f\): it holds on \(W'\) near \(y\) since
+\(f(W')\subseteq W\), and the \(b_i\circ f\) are germs of \(\mathfrak b\mathcal O_Y\) (combinations of the
+\(\mathfrak b\)-generators composed with \(f\), by coherence). (iii) Let \(h\) generate \(\mathfrak l\) near \(x\in W\) and
+\(g\in\mathfrak a_x\): \(gh\) agrees on \(W\) with \(\sum_ic_is_ih\), \(s_i\in\mathfrak b_x\), so \(h(g-\sum_ic_is_i)=0\) on
+\(W\) near \(x\), and \(g=\sum_ic_is_i\) on \(W\) near \(x\) because \(h\) vanishes on no nonempty relatively open subset
+of \(W\) and both sides are continuous. (iv) The generator of an invertible ideal is the required function; the
+power identity is induction on \(p\), with associativity and the unit ideal for coherent ideals. (v) If \(g\) agrees on
+\(W\) with \(\sum_ic_is_i\), then \(g-\sum_ic_is_i\) is holomorphic and vanishes on \(W\) near the point, a germ of
+\(\mathcal I_W\); the converse inclusion is clear. A sum of coherent ideals is coherent (concatenate the generators),
+and \(\mathcal I_W\) is coherent for a closed submanifold (Hadamard's lemma in flattening coordinates).
+\end{proof}

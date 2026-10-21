@@ -1,0 +1,164 @@
+\section{Original maximal order and tangent directions}
+\label{sec:maximal-contact}
+
+\subsection{Marked ideals of maximal order and tangent directions}
+
+In this subsection \((\mathfrak a,\mu)\) is a marked ideal on a complex manifold \(X\) with \(\mathfrak a\) coherent and \(\mu\ge1\),
+\(\mathcal D^i\) are the derivative ideals of Definition~\ref{hir:derivative-ideal}, and
+\(\operatorname{cosupp}(\mathfrak a,\mu)=\{x:\operatorname{ord}_x\mathfrak a\ge\mu\}\) (Definition~\ref{hir:cosupport}).
+
+\begin{definition}[Maximal order]
+\label{mc:maximal-order}
+\uses{hir:derivative-ideal,hir:cosupport}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.IsMaximalOrder}
+\leanok
+\((\mathfrak a,\mu)\) is \emph{of maximal order} if \(\mathcal D^\mu(\mathfrak a)=\mathcal O_X\), i.e.\ \(1\in\mathcal D^\mu(\mathfrak a)_x\) for every
+\(x\in X\).
+\end{definition}
+By Lemma~\ref{hir:order-taylor} this says \(\operatorname{ord}_x\mathfrak a\le\mu\) for every \(x\), Włodarczyk's definition.
+
+\begin{lemma}[Derivatives of a marked ideal of maximal order]
+\label{mc:maximal-order-derivative}
+\uses{mc:maximal-order}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.iterDerivIdeal_iterDerivIdeal,Hironaka.MaximalContact.IsMaximalOrder.iterDerivIdeal}
+\leanok
+If \((\mathfrak a,\mu)\) is of maximal order and \(0\le i\le\mu\), then \((\mathcal D^i(\mathfrak a),\mu-i)\) is of maximal order.
+\end{lemma}
+\begin{proof}
+\leanok
+\(\mathcal D^{\mu-i}(\mathcal D^i(\mathfrak a))=\mathcal D^\mu(\mathfrak a)=\mathcal O_X\), by the definition \(\mathcal D^{j+1}=\mathcal D\circ\mathcal D^j\) and induction on
+\(\mu-i\).
+\end{proof}
+
+\begin{definition}[Tangent direction]
+\label{mc:tangent-direction}
+\uses{hir:derivative-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.IsTangentDirection}
+\leanok
+Let \(U\subset X\) be open. A \emph{tangent direction} of \((\mathfrak a,\mu)\) on \(U\) is a function \(u\) whose germ at every
+point of \(U\) lies in \(\mathcal D^{\mu-1}(\mathfrak a)\) and which has multiplicity one: \(du(x)\ne0\) (equivalently, some partial
+derivative \(\partial^e_vu(x)\) in some chart \(e\) at \(x\) is nonzero) for every \(x\in U\) with \(u(x)=0\).
+\end{definition}
+By the implicit function theorem the zero set \(V(u)\) of a tangent direction is a closed submanifold of \(U\) of codimension
+one (or empty), a \emph{hypersurface of maximal contact}.
+
+\begin{lemma}[The cosupport lies on every tangent direction]
+\label{mc:tangent-direction-support}
+\uses{mc:tangent-direction,hir:giraud-support}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal,Hironaka.MaximalContact.apply_eq_zero_of_mem_cosupport,Hironaka.MaximalContact.IsTangentDirection.cosupport_inter_subset}
+\leanok
+If \(u\) is a tangent direction of \((\mathfrak a,\mu)\) on \(U\), then \(\operatorname{cosupp}(\mathfrak a,\mu)\cap U\subset V(u)\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{hir:giraud-support} (the inclusion \(\operatorname{cosupp}(\mathfrak a,j+1)\subset\operatorname{cosupp}(\mathcal D(\mathfrak a),j)\), applied
+\(\mu-1\) times), \(x\in\operatorname{cosupp}(\mathfrak a,\mu)\) implies \(x\in\operatorname{cosupp}(\mathcal D^{\mu-1}(\mathfrak a),1)\), i.e.\ every germ of
+\(\mathcal D^{\mu-1}(\mathfrak a)_x\) vanishes at \(x\); in particular \(u(x)=0\).
+\end{proof}
+
+\begin{lemma}[Existence of tangent directions]
+\label{mc:tangent-direction-exists}
+\uses{mc:maximal-order,mc:tangent-direction,mc:tangent-direction-support,hir:derivative-ideal-generators}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.exists_isTangentDirection}
+\leanok
+If \((\mathfrak a,\mu)\) is of maximal order and \(x\in\operatorname{cosupp}(\mathfrak a,\mu)\), then \((\mathfrak a,\mu)\) has a tangent direction on
+some open neighbourhood of \(x\).
+\end{lemma}
+\begin{proof}
+\leanok
+\(\mathcal D^{\mu-1}(\mathfrak a)\) is coherent (Lemma~\ref{hir:derivative-ideal-generators}); let \(f_1,\dots,f_m\) generate it on an open
+neighbourhood \(U_0\) of \(x\) inside the domain of a chart \(e\). By the same lemma, \(\mathcal D(\mathcal D^{\mu-1}(\mathfrak a))=\mathcal D^\mu(\mathfrak a)\) is
+generated near \(x\) by the \(f_i\) and the \(\partial^e_{e_j}f_i\); since it contains \(1\), not all of these vanish at \(x\). As in the proof
+of Lemma~\ref{mc:tangent-direction-support}, every germ of \(\mathcal D^{\mu-1}(\mathfrak a)_x\) vanishes at \(x\), so \(f_i(x)=0\) for all \(i\), and
+\(\partial^e_{e_j}f_i(x)\ne0\) for some \(i,j\). Then \(df_i(x)\ne0\), hence \(df_i\ne0\) on an open neighbourhood \(U\subset U_0\) of \(x\), and
+\(u=f_i|_U\) is a tangent direction on \(U\).
+\end{proof}
+
+\subsection{Derivative ideals under a blowup}
+
+In this subsection \(\pi\colon Y\to X\) is the blowup of the complex manifold \(X\) along \(C\)
+(Definition~\ref{ana:blowups}), \(D\) its exceptional divisor, so that \(\mathcal O_Y(-qD)=\pi^*(\mathcal I_C^q)\)
+(Lemma~\ref{bcalc:exceptional-divisor}), and \(\sigma^c(\mathfrak a,\mu)=(\pi^*\mathfrak a:\mathcal O_Y(-\mu D))\) is the
+controlled transform (Definition~\ref{bcalc:controlled-transform-def}). Marked ideals are taken with \(N\) the whole
+manifold. For a chart \(e\) and \(v\in\mathbf C^n\), \(\partial^e_v\) is the partial derivative of
+Definition~\ref{hir:derivative-ideal}; \(e_z\) is a chart at \(z\) and \(e_1,\dots,e_n\) the standard basis.
+
+\begin{lemma}[Villamayor: maximal order survives admissible blowups]
+\label{mc:maximal-order-transform}
+\uses{mc:inclusions,mc:maximal-order,hir:hadamard-bridge}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.IsMaximalOrder.controlledTransform,Hironaka.MaximalContact.IsMaximalOrder.controlledTransform_of_subset_cosupport}
+\leanok
+Let \((\mathfrak a,\mu)\) be a coherent marked ideal of maximal order with \(\mathfrak a\subset\mathcal I_C^\mu\) (for instance
+\(C\subset\operatorname{cosupp}(\mathfrak a,\mu)\)). Then \((\sigma^c(\mathfrak a,\mu),\mu)\) is of maximal order.
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:inclusions} with \(r=\mu\) and mark \(0\), \(\sigma^c(\mathcal D^\mu(\mathfrak a),0)\subset\mathcal D^\mu(\sigma^c(\mathfrak a,\mu))\). Since
+\(1\in\mathcal D^\mu(\mathfrak a)\) everywhere, \(1=1\circ\pi\in\pi^*\mathcal D^\mu(\mathfrak a)=\sigma^c(\mathcal D^\mu(\mathfrak a),0)\).
+\end{proof}
+\begin{lemma}[The first centre meeting the smooth part]
+\label{mc:first-centre-smooth-part}
+\uses{mc:centres-avoid-open,mc:embedding-properties,mc:embedding-properties-smooth-centre,ana:nonkahler-locus,lag:regular-point-basics,ana:regular-transport,ana:strict-transform-sequence,ana:strict-transform-blowup,ana:regular-component,ana:analytic-preimage,rem:open-subset-analytic,hir:resolution-driver}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.EmbeddedFromResolution.regularOpen,Hironaka.EmbeddedFromResolution.isClosed_singularLocus}\upstreamlean{TranscendentalNakamaye.Pending.EmbeddedFromResolution.mem_regularOpen_iff}\lean{Hironaka.EmbeddedFromResolution.regularAtDim_of_mem_regularOpen,Hironaka.EmbeddedFromResolution.mem_regularOpen_of_regularAtDim}\upstreamlean{TranscendentalNakamaye.Pending.EmbeddedFromResolution.strictTransform_eq_connectedComponentIn}\lean{Hironaka.EmbeddedFromResolution.mem_maxLocus_iff_of_centresAvoid}\upstreamlean{TranscendentalNakamaye.Pending.EmbeddedFromResolution.strictTransform_eq_connectedComponentIn_maxLocus}
+\mixedleanok
+Let \(X\) be compact, \(V\subset X\) a closed irreducible analytic subvariety and \(U=X\setminus V_{\mathrm{sing}}\), and suppose that the centres of \(T\) miss the
+preimages of \(U\).
+\begin{enumerate}
+\item \(V_{\mathrm{sing}}\) is closed. If \(C\) is a closed submanifold of \(X_T\) which over \(U\) is the preimage of \(V\), and \(c\in C\) lies over \(U\), then
+\(p_T(\operatorname{Exc}p_T)\subset V_{\mathrm{sing}}\) and the strict transform \(V_T\) of \(V\) is the connected component of \(C\) through \(c\); in particular
+\(V_T\) is regular of dimension \(\dim V\) at each of its points.
+\item Let \(\operatorname{inv}\) have the embedding properties in dimension \(\le k\), with \(\underline{\mathcal I}_V\) in its domain, and let \(T\) be a canonical
+segment of \(\underline{\mathcal I}_V\). If the maximum locus \(C\) of \(\operatorname{inv}_{\underline{\mathcal I}_V}(T)\) on \(\operatorname{cosupp}(\underline{\mathcal I}_V)_T\)
+contains a point \(c\) over \(U\), then over \(U\) it is the preimage of \(V\), and (1) applies to it.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\mixedleanok
+\(V_{\mathrm{sing}}\) is closed because regularity of a fixed dimension is an open condition on \(V\) (Lemma~\ref{lag:regular-point-basics}).
+(1) By Lemma~\ref{mc:centres-avoid-open}, \(p_T(\operatorname{Exc}p_T)\subset X\setminus U=V_{\mathrm{sing}}\), and over the open set \(O=p_T^{-1}(U)\) the strict transform \(S=V_T\)
+is \(p_T^{-1}(V)\). As \(p_T\) has bijective differential at \(c\) and \(V\) is regular of dimension \(\dim V\) at \(p_T(c)\in V_{\mathrm{reg}}\), \(S\) is regular of dimension
+\(\dim V\) at \(c\) (Lemma~\ref{ana:regular-transport}), and so is \(C\), which agrees with \(S\) on \(O\) (Lemma~\ref{lag:regular-point-basics}). Since
+\(V\not\subset p_T(\operatorname{Exc}p_T)\), \(S\) is a closed irreducible analytic subvariety (Lemma~\ref{ana:strict-transform-sequence}), hence the closure of the
+connected component \(S_c\) of its regular locus through \(c\) (Lemma~\ref{ana:strict-transform-blowup}). \(C\) is analytic (Lemma~\ref{ana:analytic-preimage}) and all its
+points are regular; let \(K\) be its connected component through \(c\). By the identity theorem along a component of a regular locus (an analytic set containing
+a nonempty relatively open part of the component contains the component; proof of Proposition~\ref{ana:regular-component}), applied on \(O\ni c\) where \(S\) and
+\(C\) agree, \(S_c\subset C\) and \(K\subset S\). The connected set \(S_c\) of regular points of \(C\) meets \(K\), so \(S_c\subset K\), and \(S=\overline{S_c}\subset C\).
+Let \(x\in S\); then \(x\in C\) has a neighbourhood \(W\) with \(C\cap W\) inside the component \(K_x\) of \(C\) through \(x\)
+(Proposition~\ref{ana:regular-component}(1)), and \(W\) meets \(S_c\subset K\), so \(K_x=K\) and \(x\in K\). Hence \(S=K\). All points of \(K\) are regular points of \(C\)
+of dimension \(\dim V\) (Proposition~\ref{ana:regular-component}(1)), and near each of them \(C\) lies in \(K=S\subset C\), so \(S\) is regular of dimension \(\dim V\) there.
+(2) \(T\) is a multiple test blow-up and \(C\) an admissible centre, in particular a closed submanifold (Corollary~\ref{mc:embedding-properties-smooth-centre}).
+Over \(U\) the cosupport is the preimage of \(V\) (Lemma~\ref{mc:centres-avoid-open}(3)) and contains \(C\). \(V\cap U=V_{\mathrm{reg}}\) is a closed submanifold of \(U\) of pure
+dimension \(\dim V\) (Lemma~\ref{rem:open-subset-analytic} for the traces), so by Corollary~\ref{mc:embedding-properties-smooth-centre} (the form of
+Lemma~\ref{mc:smooth-part-invariant}) the invariant is constant on the cosupport over \(U\); as \(c\) lies in the maximum locus, so does every point of the cosupport
+over \(U\).
+\end{proof}
+
+\begin{lemma}[The first centre meeting an open set]
+\label{mc:first-centre-exists}
+\uses{hir:canonical-segments,hir:resolution-driver,mc:centres-avoid-open,ana:blowup-surjective,hir:blowup-tower}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.EmbeddedFromResolution.exists_first_centre,Hironaka.EmbeddedFromResolution.not_centresAvoid_of_cosupp_eq_empty}
+\leanok
+\begin{enumerate}
+\item Let \(\operatorname{inv}\) be any value function, \(U\subset X\) open and \(T\) a canonical segment of a marked ideal on \(X\) (each centre empty or the
+maximum locus of \(\operatorname{inv}\) of the preceding part on the cosupport) whose centres do not all miss the preimages of \(U\). Then \(T=T'S\) where \(T'\) is a
+canonical segment whose centres miss the preimages of \(U\) and whose maximum locus, the next centre of \(T\), meets the preimage of \(U\).
+\item Let \(X\) be compact, \(V\subset X\) a closed irreducible analytic subvariety with \(\underline{\mathcal I}_V\) in the domain of the invariants in
+dimension \(\le k\), and \(T\) a multiple test blow-up of \(\underline{\mathcal I}_V\) with empty final cosupport. Then not all centres of \(T\) miss the preimages of
+\(X\setminus V_{\mathrm{sing}}\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Induction on \(T\). Let \(T\) be \(T_0\) followed by the blowup along \(C\). If not all centres of \(T_0\) miss the preimages of \(U\), the induction hypothesis
+applies to \(T_0\). Otherwise \(C\) meets the preimage of \(U\); so \(C\neq\emptyset\), \(C\) is the maximum locus at \(T_0\), and \(T'=T_0\).
+(2) Otherwise, take \(x\in V_{\mathrm{reg}}\) (nonempty by definition of the subvariety); \(p_T\) is onto (Lemma~\ref{ana:blowup-surjective}), and a point over \(x\) lies in the
+cosupport by Lemma~\ref{mc:centres-avoid-open}(3), against its emptiness.
+\end{proof}

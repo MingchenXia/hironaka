@@ -1,0 +1,117 @@
+\section{Finite weighted analytic coefficient compression and its actual controlled transform}
+\label{sec:hironaka-actual-weighted-coefficient-compression}
+
+All coefficient ideals in this section are ideals of entire original holomorphic germs.
+The finite coefficients come from an internally constructed analytic vertex family of the
+original ideal. Their positive individual weights are retained. The resulting common-mark
+ideal is a bounded algebraic prerequisite for a persistent Hilbert--Samuel presentation;
+no identification with a current Hilbert--Samuel locus is asserted.
+
+\begin{lemma}[A common positive mark retains every individual coefficient weight]
+\label{hir:actual-weighted-coefficient-common-mark}
+\lean{Hironaka.HironakaActualWeightedCoefficientCompression.weightedCommonMark_pos,Hironaka.HironakaActualWeightedCoefficientCompression.weight_mul_compressionExponent,Hironaka.HironakaActualWeightedCoefficientCompression.compressionExponent_pos}
+\leanok
+Let $L$ be finite and let $w_i>0$ for $i\in L$. Put
+$D=\prod_{i\in L}w_i$ and $r_i=D/w_i$. Then $D>0$ and
+$w_ir_i=D$ for every $i$. In particular $r_i>0$.
+For a family of actual analytic germs $c_i$, its compressed weighted ideal is
+$J(c,w)=(c_i^{r_i}:i\in L)$ with the single positive mark $D$.
+The empty family has $D=1$ and $J=0$.
+\end{lemma}
+\begin{proof}
+A finite product of positive natural numbers is positive, including the empty
+product. Each factor $w_i$ divides this product. Exact division therefore gives
+$w_i(D/w_i)=D$. If $D/w_i$ were zero, this equality would contradict $D>0$.
+The statements about the empty family follow from the empty product and empty span.
+\end{proof}
+
+\begin{theorem}[The whole compressed ideal has the correct actual one-blowup transform]
+\label{hir:actual-weighted-coefficient-compression-transform}
+\uses{hir:actual-weighted-coefficient-common-mark,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{Hironaka.HironakaActualWeightedCoefficientCompression.exists_actual_weighted_compression_blowup}
+\leanok
+Let $c_i$ be a finite family of original analytic germs, with positive weights $w_i$.
+Let $A$ be a coordinate centre, $e\in A$ a genuine pivot and $\pi$ its actual local
+analytic blowup map, with arbitrary direction parameters. Suppose
+$c_i\in I_A^{w_i}$ for every $i$. Then genuine analytic germs $c_i'$ are internally
+constructed such that
+\[
+ x_e^{w_i}c_i'=\pi^*c_i,\qquad
+ \pi^*J(c,w)=(x_e^D)J(c',w),\qquad
+ (\pi^*J(c,w):x_e^D)=J(c',w).
+\]
+Each Taylor series of $c_i'$ is the actual formal exceptional quotient of the
+Taylor series of that same $c_i$ at weight $w_i$.
+Both displayed ideal equalities concern the entire ideals, not their finite jets.
+\end{theorem}
+\begin{proof}
+Actual coordinate-centre powers pull back to the entire principal exceptional
+powers. Thus each given original member admits a genuine analytic quotient
+$c_i'$ with the first equality. Applying the actual Taylor homomorphism and
+using its exact blowup dictionary identifies this quotient with the actual
+formal exceptional quotient; uniqueness follows from cancellation of the
+nonzero formal exceptional variable.
+
+For $r_i=D/w_i$, the retained quotient equation gives
+$\pi^*(c_i^{r_i})=(x_e^{w_i}c_i')^{r_i}=x_e^D(c_i')^{r_i}$.
+The image of an ideal span is the span of its actual generator images, and the
+product with a principal ideal is the span of these literal products. These
+facts give both inclusions of the whole second equality.
+
+For the last equality, membership of $h$ in the colon means
+$h x_e^D=x_e^D k$ for some $k\in J(c',w)$, by the preceding whole ideal equality.
+The original analytic germ ring is a domain and the coordinate germ $x_e$ is
+nonzero, so cancellation gives $h=k$. Conversely, any such $h$ satisfies this
+membership by multiplication. This proves the whole colon equality, including
+an empty coefficient family.
+\end{proof}
+
+\begin{theorem}[An original analytic ideal internally supplies the weighted coefficient compression]
+\label{hir:actual-original-weighted-coefficient-compression}
+\uses{hir:actual-analytic-vertex-coefficient-data,hir:actual-local-coefficient-cosupport-normal-power,hir:actual-weighted-coefficient-compression-transform}
+\lean{Hironaka.HironakaActualWeightedCoefficientCompression.exists_original_weighted_coefficient_compression}
+\leanok
+Let $I$ be any original analytic germ ideal in coordinates $(u,y,z)$ of dimensions
+$k,s,t$. Internally choose its genuine analytic monic vertex generators and
+actual coefficient functions $c_{a,\gamma}(u,y)$ on their common real open
+neighbourhood $U$. Retain only the finite pairs with
+$|\gamma|<m_a$, where $m_a$ is the actual selected-centre vertex weight, and mark
+$c_{a,\gamma}$ by $m_a-|\gamma|>0$. These original coefficients and positive
+marks determine the common-mark compressed ideal above.
+
+For any genuine $y$-coordinate blowup pivot, suppose the actual local plane
+$U\cap\{y=0\}$ lies in the cosupport of each actual principal coefficient ideal
+at its own mark. Then the entire compressed ideal has both exact blowup and
+colon identities of the preceding theorem, using the actual analytic divided
+coefficient germs and the same original weights. No coefficient family,
+compressed ideal, exceptional quotient or transformed-ideal equality is input.
+\end{theorem}
+\begin{proof}
+The original analytic vertex-coefficient producer supplies all actual generators,
+all literal Taylor coefficient identities, the real common open neighbourhood
+and coherence of every low principal coefficient ideal on that neighbourhood.
+There are finitely many vertices. For each vertex, the normal exponents of
+degree below its finite weight form a finite set, so the displayed pairs form a
+finite dependent union. The strict degree inequality gives positivity of every
+retained difference mark, and the common product gives a positive mark even if
+this union is empty.
+
+For each retained pair, its actual coefficient function belongs to its true
+principal ideal at the origin. Coherence on $U$ and the given local-plane
+cosupport imply that its entire original germ belongs to the $y$-coordinate
+ideal to its retained difference mark. This uses the actual local normal-power
+criterion, with no global extension of the coefficient function. The analytic
+normal coordinate ideal is exactly the coordinate-centre ideal. Apply the
+preceding theorem simultaneously to this finite family. Its internally
+constructed quotients yield the stated entire image and colon identities, and
+its Taylor dictionary retains each original coefficient numerator.
+\end{proof}
+
+\begin{remark}
+This construction retains a genuine finite weighted analytic coefficient family
+and proves its whole controlled-transform algebra. A separate transformation
+theorem must still identify this presentation with the equal-Hilbert--Samuel
+locus of each literal current strict transform, with actual admissibility and
+singularity of the resulting centres. Strict phase drop and termination are not
+consequences of the identities proved here.
+\end{remark}

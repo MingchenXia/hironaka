@@ -1,0 +1,88 @@
+{
+  "status": "READ_ONLY_FIRST_DAG_ZERO_CONTEXT_FAMILY_CONFIRMED_PENDING_OWNER_REPLAY",
+  "module": "Hironaka.Resolution.HironakaActualCylinderVanishingIdealExtension",
+  "constant": "Hironaka.HironakaActualCylinderVanishingIdealExtension.cylinder_vanishingIdeal_le_extension_sup_normal_mul",
+  "field": "whole_value",
+  "report": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/final-per-module-expressions/Hironaka.Resolution.HironakaActualCylinderVanishingIdealExtension/attempt1/raw-complete-parent-comparison.json",
+    "sha256": "b847f38392be95cb9ca255f450dfa5d5d52426add384394bcdb5eaf012773977",
+    "module_counts": {
+      "Hironaka.Resolution.HironakaActualCylinderVanishingIdealExtension": {
+        "constants": 13,
+        "types_exact": 13,
+        "values_exact": 12,
+        "theorems": 13,
+        "theorem_proofs_exact": 12
+      }
+    },
+    "missing": [],
+    "native_extras": [],
+    "difference": {
+      "old_node": 158,
+      "native_node": 157,
+      "old": {
+        "children": [
+          156,
+          157
+        ],
+        "data": [],
+        "tag": "application"
+      },
+      "native": {
+        "children": [],
+        "data": [
+          [
+            "str",
+            [
+              "str",
+              [
+                "anonymous"
+              ],
+              "Complex"
+            ],
+            "commRing"
+          ],
+          []
+        ],
+        "tag": "constant"
+      }
+    }
+  },
+  "paired_path": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/support-prep/canonical-cylinder-context/paired-first-dag-paths.json",
+    "sha256": "197a1605970c4d6b69b8fcf0b1448f57f07ba6956b59d4103b147faee1d96f10",
+    "reported_first_node_reproduced": true
+  },
+  "classification": {
+    "class_instance_ancestor": true,
+    "actual_name_mismatch": false,
+    "owner_mismatch": false,
+    "selected_type_difference": false,
+    "old_path": [
+      "ZeroMemClass.zero",
+      "AddSubmonoidClass.toZeroMemClass",
+      "SubsemiringClass.toAddSubmonoidClass",
+      "SubringClass.toSubsemiringClass"
+    ],
+    "native_path": [
+      "ZeroMemClass.zero",
+      "AddSubmonoidClass.toZeroMemClass",
+      "AddSubgroupClass.toAddSubmonoidClass",
+      "SubringClass.addSubgroupClass"
+    ],
+    "complex_leaf_note": "Old CommRing projection application versus native Complex.commRing appears after the zero-class application ancestors diverge; both sides contain the same actual Complex ring chain. No replacement Complex instance is indicated."
+  },
+  "scope_preserving_recipe": {
+    "source": "/workspace/hironaka/Hironaka/Resolution/HironakaActualCylinderVanishingIdealExtension.lean",
+    "source_sha256_observed": "3f59e7c1b7e02d36ebb4125a1554302c53ef00471a66ad783d41a1b85e8e244b",
+    "exact_insertion_anchor": "/-- Actual relative Hadamard gives the whole original ideal inclusion with self-multiples needed by Nakayama. -/\n",
+    "before": "/-- Actual relative Hadamard gives the whole original ideal inclusion with self-multiples needed by Nakayama. -/\n",
+    "after": "attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in\n/-- Actual relative Hadamard gives the whole original ideal inclusion with self-multiples needed by Nakayama. -/\n",
+    "scope": "Entire target theorem only, including its actual generated proof auxiliaries if any; keep type/proof tokens byte-identical.",
+    "precedent": "Existing accepted same SubsemiringClass priority recipe in new-original-elaboration-contexts.json."
+  },
+  "honesty_bound": "Only exact first mismatch branch is classified here; fresh owner build plus full unchanged strict comparator across all roots must confirm all differences after context restoration. No theorem/body weakening or comparator defeq waiver is proposed.",
+  "runtime_performed": false,
+  "original_or_public_export_performed": false,
+  "source_production_comparator_edits": false
+}

@@ -1,0 +1,27 @@
+/-- **One step of `le:operations` (1)**: the transform of a sum is the sum of the transforms. -/
+theorem geoTransform_msum (h : IsAmbientFamily 𝔪 m) (hm : 1 ≤ m) (hπ : IsBlowupAlong n C π)
+    (hC : ∀ i < m, (𝔪 i).IsAdmissibleCentre C) :
+    (msum 𝔪 m).geoTransform C π = msum (fun i => (𝔪 i).geoTransform C π) m := by
+  have hle : ∀ i < m, (𝔪 i).ideal.Le (idealPow (vanishingIdeal (n := n) C) (𝔪 i).d) := fun i hi =>
+    HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre (h.N i hi) (h.coh i hi) (hC i hi)
+  have hIC := BlowupExceptionalDivisor.isCoherent_vanishingIdeal_centre hπ
+  have hlepow : ∀ i < m, (idealPow (𝔪 i).ideal (sumExp (fun j => (𝔪 j).d) m i)).Le
+      (idealPow (vanishingIdeal (n := n) C) ((Finset.range m).prod fun j => (𝔪 j).d)) :=
+      fun i hi => by
+    have := MarkedIdealOperationsTransform.idealPow_mono (hle i hi) (sumExp (fun j => (𝔪 j).d) m i)
+    rwa [MarkedIdealOperationsTransform.idealPow_idealPow hIC, mul_sumExp (fun j => (𝔪 j).d) hi]
+      at this
+  have hideal : ((msum 𝔪 m).geoTransform C π).ideal =
+      (msum (fun i => (𝔪 i).geoTransform C π) m).ideal := by
+    have hN : (msum 𝔪 m).N = univ := h.N 0 hm
+    rw [geoTransform_ideal_eq_controlledTransform hN h.isCoherent_msum hπ]
+    show controlledTransform hπ (finSumIdeal (fun i => idealPow (𝔪 i).ideal
+        (sumExp (fun j => (𝔪 j).d) m i)) m) ((Finset.range m).prod fun j => (𝔪 j).d) = _
+    rw [controlledTransform_finSumIdeal hπ hm
+      (fun i hi => GermIdealPullbackCalculus.isCoherent_idealPow (h.coh i hi) _) hlepow]
+    refine finSumIdeal_congr fun i hi => ?_
+    rw [geoTransform_ideal_eq_controlledTransform (h.N i hi) (h.coh i hi) hπ,
+      ← MarkedIdealOperationsTransform.controlledTransform_idealPow hπ (h.coh i hi) (hle i hi),
+      ← mul_sumExp (fun j => (𝔪 j).d) hi]
+    rfl
+  exact MarkedIdealOperationsTransform.MarkedIdeal.ext_of rfl rfl hideal rfl

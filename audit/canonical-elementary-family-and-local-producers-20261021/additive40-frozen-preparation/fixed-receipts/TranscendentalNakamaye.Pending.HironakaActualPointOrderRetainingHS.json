@@ -1,0 +1,397 @@
+{
+  "created_utc": "2026-10-21T02:48:16.290938+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G8": "genuine FORWARD point retained-order implies ENTIRE ORIGINAL source/normalized HS equality proved; converse and relative-centre criterion remain open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualPointOrderRetainingHS.lean",
+    "sha256": "f7df356188a3e04e67c487955668f36fbb123235cf605db7002f6eea3a13f970",
+    "bytes": 18362
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-point-order-retaining-hs-extension.tex",
+    "sha256": "1f1de6463fcd6bbfea8b5c20a26ae2bb2cee40da67bbfc278f0f95be26f2cd16",
+    "bytes": 7936
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPointOrderRetainingHS.ilean",
+      "sha256": "104825ecec4033779b24629cd6c07ed8832a49b001d473d7ad12641251ce2983",
+      "bytes": 121494
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPointOrderRetainingHS.ilean.hash",
+      "sha256": "c1dea563e77c15ce9577d21a4b5d1208f81c5d833c3bf8b6e172e4760a0fb0a5",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPointOrderRetainingHS.olean",
+      "sha256": "a8a12a72438e5bc9d4ad28f56a12dcab0d2c2f9f5a494ff99bb8ea0d465cdb42",
+      "bytes": 883904
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPointOrderRetainingHS.olean.hash",
+      "sha256": "6acc6a03843cac9f033ad307950e3a510dc6a7a5ef253bc6acae768495b12b94",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualPointOrderRetainingHS.trace",
+      "sha256": "66e6bd0b5ab5d147d6c9945dc4d3ab3ca7b91a29efa0f3ec52dd09c89e9f56b9",
+      "bytes": 3765
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "pointIdeal_eq_genuineVariables",
+      "source_line": 34
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "weight_point",
+      "source_line": 38
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "reduced_mem_power",
+      "source_line": 42
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "order_of_power",
+      "source_line": 48
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "reduced_component_member_span",
+      "source_line": 55
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualHomogeneousInitialIdeal_eq_reduced_component_span",
+      "source_line": 87
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "genuineFormalHilbertSamuelValue_centerShear",
+      "source_line": 116
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "dehom_pivot_independent",
+      "source_line": 127
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "dehom_zero_of_pivot_independent",
+      "source_line": 140
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "centerShear_eq_dehom_of_homogeneous_dehom",
+      "source_line": 157
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "dehom_totalDegree_le",
+      "source_line": 167
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_shadow_eq_dehom",
+      "source_line": 195
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_dehom_homogeneous",
+      "source_line": 215
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "canonical_point_order_retention_shadow_span",
+      "source_line": 254
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "exists_original_point_order_retaining_hs_family",
+      "source_line": 278
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-reduced-canonical-homogeneous-initial-span",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.actualHomogeneousInitialIdeal_eq_reduced_component_span"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "1dbdddc95f007a298bd5d0f46f589662e916862e23622a9f477f3008ba05d98d"
+    },
+    {
+      "label": "hir:actual-centred-shear-whole-hs-invariance",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.genuineFormalHilbertSamuelValue_centerShear"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "08490931a67ccd83d6ca2ea71031adffd2bef3bf2b75284ca70438eb6907b5b3"
+    },
+    {
+      "label": "hir:actual-point-homogeneous-dehom-shear-identity",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.centerShear_eq_dehom_of_homogeneous_dehom"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "975df41dd0f4031d18ab9cc2accd152109a90b34207ec5bc852bd9e4f3d6108b"
+    },
+    {
+      "label": "hir:actual-point-order-retention-whole-source-shear-dictionary",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.canonical_point_order_retention_shadow_span"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "dfa11254539359871024755ca7ebd268950372d713a08f6326a8baaa1e67d3f6"
+    },
+    {
+      "label": "hir:actual-original-point-order-retention-entire-hs",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.exists_original_point_order_retaining_hs_family"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "a6ca1b39e967f9ca0d7a5e1845abbd85f5b86bfe17657daca1e73933d2882d54"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.reduced_mem_power",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.dehom_pivot_independent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS._aux_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS___unexpand_TranscendentalNakamaye_Pending_HironakaActualFormalCoordinatePowerDivision_actualFormalCoordinateIdeal_1",
+      "transitive_axioms": []
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.reduced_component_member_span",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.dehom_zero_of_pivot_independent",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.reduced_component_member_span._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.termR",
+      "transitive_axioms": []
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.order_of_power",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.pointIdeal_eq_genuineVariables",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.dehom_totalDegree_le",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS._aux_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS___macroRules__private_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS_0_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS_termR_1",
+      "transitive_axioms": []
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS._aux_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS___unexpand_MvPowerSeries_1",
+      "transitive_axioms": []
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.actualHomogeneousInitialIdeal_eq_reduced_component_span",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.canonical_dehom_homogeneous",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.centerShear_eq_dehom_of_homogeneous_dehom",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.genuineFormalHilbertSamuelValue_centerShear",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.weight_point",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.exists_original_point_order_retaining_hs_family",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.term𝔪",
+      "transitive_axioms": []
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.canonical_shadow_eq_dehom",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.canonical_point_order_retention_shadow_span",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS._aux_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS___macroRules__private_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS_0_TranscendentalNakamaye_Pending_HironakaActualPointOrderRetainingHS_term𝔪_1",
+      "transitive_axioms": []
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.0.TranscendentalNakamaye.Pending.HironakaActualPointOrderRetainingHS.canonical_dehom_homogeneous._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 23,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 17,
+    "(none)": 6
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-point-order-retaining-hs/kernel.log",
+    "sha256": "e461493df7484e39c68f65c002009c897b7fc985006e69258bcd0710af2b123b",
+    "bytes": 77
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-point-order-retaining-hs/actual-roots.log",
+    "sha256": "564e56741601edd342e8bdf5c4c5f142cf9ca46bb5376c059c7e3a865aaebe87",
+    "bytes": 7119
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-point-order-retaining-hs/ActualRoots.lean",
+    "sha256": "7aeb58391336dbc181e950de23f84ed06137235c100be25e995920f55bbcbef9",
+    "bytes": 860
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/defect-descent/order-retaining-hs/native.log",
+    "sha256": "17cedf5cc30011fc1d0f480153b399a51bbcd6d78973d4c4a2e69850ca483ac3",
+    "bytes": 138
+  },
+  "native_build_jobs": 5121,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 299-line source, all private degree/component/polynomial helpers and all FIVE complete written BP proofs reviewed. Genuine reduced-canonical ENTIRE filtered division with degree-first original exponents identifies the WHOLE original homogeneous initial ideal with the span of the lowest-degree homogeneous components of the SAME original reduced basis. Taking each degree component of the exact finite division uses true coefficient convolution and exact shifted order bounds, with higher-degree basis terms vanishing; the reverse inclusion uses actual nonzero original basis membership and the true initial degree. The actual centred linear shear has its genuine inverse and preserves EVERY original maximal power, giving whole complex jet algebra isomorphisms and exact HS invariance, not a coordinate-profile assumption. If actual dehomogenization of a homogeneous source polynomial remains homogeneous of that SAME degree, the literal dehomogenization is pivot-free, so zero-direction dehomogenization fixes it. Genuine blowup/shear composition and actual homogeneous blowup factors identify the two zero-chart formal blowup images; actual whole formal blowup injectivity identifies the ENTIRE original sheared polynomial with the dehomogenized polynomial. For each prescribed normalized canonical quotient, the literal actual pure-coefficient dictionary identifies its whole pivot shadow with dehomogenization of the SAME original homogeneous component. Dehomogenization degree is at most the original vertex degree; the honest retained current order kills every lower coefficient, producing the required homogeneity internally. Thus the shear image of the WHOLE source homogeneous initial ideal is EXACTLY the whole shadow span of this SAME family. One internally chosen original normalized analytic family precedes ALL retained-order hypotheses and finite HS orders. Composing its genuine normalized-to-shadow HS theorem, this whole source shear dictionary, true shear HS invariance, genuine homogeneous-initial HS equality and original/formal jet transfer proves ALL normalized HS values equal the ORIGINAL J values. No fixed-coordinate diagram inclusion, original/source-profile equality, target standardness or HS certificate is assumed.",
+  "proven_scope": "For one original analytic ideal and point blowup chart, ONE internally chosen canonical normalized family retaining EVERY original vertex order implies equality of its independently named normalized ideal and original SOURCE ideal at ALL Hilbert-Samuel values. The genuine entire source homogeneous-initial span and invertible-shear dictionaries are exposed.",
+  "scope_limits": [
+    "The honest current all-vertex order lower bounds remain explicit; the reverse implication from HS persistence to all these bounds is not proved.",
+    "The result is for POINT centres and the independently named normalized ideal, with its genuine same-family equations retained.",
+    "Positive-dimensional centres, transformed maximal standardness, complete current-history tracking and the original G8 driver remain separate."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-point-order-retaining-hs/review-config.json",
+    "sha256": "f9d001623ce2a600f52d93929bfb7c1ce8a51d8e36e4ab5240055b04f189c13a",
+    "bytes": 3960
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/defect-descent/order-retaining-hs/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/defect-descent/point-order-retaining/peer-review-principal.json"
+}

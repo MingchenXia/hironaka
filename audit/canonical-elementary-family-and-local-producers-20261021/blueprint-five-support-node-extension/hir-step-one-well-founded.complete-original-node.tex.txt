@@ -1,0 +1,31 @@
+\begin{theorem}[The maximum drops along canonical segments; well-founded values resolve]
+\label{hir:step-one-well-founded}
+\uses{hir:step-one-bridge,hir:centre-function,hir:resolution-driver,hir:invariant-driver,hir:canonical-segments,bcalc:transform-off-centre,bcalc:inv-domain-stable}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality,kollar07-resolution}
+\lean{TranscendentalNakamaye.Pending.StepOneWellFounded.StepDrop,TranscendentalNakamaye.Pending.StepOneWellFounded.lt_of_mem_maxLocus,TranscendentalNakamaye.Pending.StepOneWellFounded.lt_of_isCanonical_append,TranscendentalNakamaye.Pending.StepOneWellFounded.lt_of_isCanonical_step,TranscendentalNakamaye.Pending.StepOneWellFounded.proj_mem_cosupp_step,TranscendentalNakamaye.Pending.StepOneWellFounded.stepDrop_of_resolutionInvariant,TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_of_wellFoundedLT,TranscendentalNakamaye.Pending.StepOneWellFounded.stepDrop_stepOneInvM,TranscendentalNakamaye.Pending.StepOneWellFounded.stepOneInvM_lt_of_isCanonical_append,TranscendentalNakamaye.Pending.StepOneWellFounded.isAdmissibleCentre_maxLocus_stepOneInvM,TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_stepOneInvM}
+\leanok
+Let \(\underline{\mathcal I}\) be a marked ideal on \(X\) and \(\operatorname{inv}\) a function on the towers over \(X\) such that after every step of a canonical segment
+(the centre \(C\) empty or the maximum locus) every point \(z\) of the new cosupport lies over the cosupport, with \(\operatorname{inv}(z)<\operatorname{inv}(\pi z)\) if
+\(\pi z\in C\) and \(\operatorname{inv}(z)=\operatorname{inv}(\pi z)\) otherwise.
+\begin{enumerate}
+\item If \(C\neq\emptyset\) is the maximum locus after a canonical segment \(T\), with value \(\lambda\), then along every canonical segment extending \(T\) by the blowup of
+\(C\) every value on the cosupport is \(<\lambda\).
+\item A resolution invariant (Definition~\ref{hir:centre-function}) has this property along its canonical segments; if its values are well-ordered, it resolves every
+marked ideal of its domain over a compact base by a canonical segment without empty centres, without using property (8).
+\item The masked Step 1 value of a marked ideal of maximal order in the domain has this property (with the maximum loci on \(\operatorname{cosupp}\underline{\mathcal J}_T\)),
+its maximum locus is an admissible centre, and if the values \(\Lambda\) of the lower invariant are well-ordered, it resolves \(\underline{\mathcal J}\) over a compact base
+by a canonical segment without empty centres.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\leanok
+(1) By induction along the extension. After the blowup of \(C\): a point over \(C\) has a value \(<\operatorname{inv}(\pi z)=\lambda\); a point off \(C\) keeps the value of
+\(\pi z\), a point of the cosupport outside the maximum locus, so \(<\lambda\). At a later step every value is \(<\) or \(=\) the value of its image, which is \(<\lambda\) by
+induction. The points of the cosupport lie over the cosupport: over the centre since the centre is admissible, off it since the blowup is an isomorphism there
+(Lemma~\ref{bcalc:transform-off-centre}).
+(2) Properties (3) and (4) of Definition~\ref{hir:centre-function} give the hypothesis, canonical segments being multiple test blow-ups
+(Theorem~\ref{hir:invariant-driver}). With (1) for one step, the hypotheses of the well-founded form of Theorem~\ref{hir:resolution-driver} hold: closed cosupports
+(Lemma~\ref{bcalc:inv-domain-stable}), (2), admissible maximum loci with empty interior (Theorem~\ref{hir:invariant-driver}), and the drop.
+(3) The same with Corollary~\ref{hir:step-one-bridge} in place of the fields; \(\mathbf N\times(\Lambda\cup\{\infty\})\), ordered lexicographically, is well-ordered
+when \(\Lambda\) is.
+\end{proof}

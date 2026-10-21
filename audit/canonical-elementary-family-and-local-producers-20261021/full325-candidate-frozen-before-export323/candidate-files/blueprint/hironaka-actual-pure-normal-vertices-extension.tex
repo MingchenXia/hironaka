@@ -1,0 +1,75 @@
+\section{Actual tangent partial stability forces genuinely pure normal vertices}
+
+\begin{theorem}[A partial-stable whole formal ideal has zero corresponding vertex exponent]
+\label{hir:actual-pderiv-stable-vertex-coordinate-zero}
+\uses{hir:actual-formal-initial-diagram-finite-monic-vertices}
+\lean{Hironaka.HironakaActualPureNormalVertices.vertex_coordinate_zero_of_pderiv_stable}
+\leanok
+Let $I$ be a whole complex formal series ideal stable under the genuine
+partial derivative $\partial_i$, and let $m$ be any actual monomial order.
+Every actual minimal exponent $a$ of its whole $m$-initial diagram has
+$a_i=0$.
+\end{theorem}
+\begin{proof}
+Suppose $a_i>0$ and put $b=a-e_i$. Then $b+e_i=a$ and $b\le a$.
+Choose the genuine monic formal vertex witness $F\in I$ with actual initial
+exponent $a$. The actual coefficient formula for differentiation gives
+$[X^b]\partial_iF=(b_i+1)$, which is nonzero over the complex field. If
+$c$ precedes $b$ in the same monomial order, its translation $c+e_i$
+precedes $b+e_i=a$. The coefficient of $F$ there is zero by its genuine
+initial exponent, hence $[X^c]\partial_iF=0$. Thus the genuine initial
+exponent of the actual derivative is exactly $b$. Partial stability puts
+this derivative in the SAME whole ideal, so $b$ is in its actual diagram.
+Minimality and $b\le a$ force $a\le b$, contradicting
+$b_i=a_i-1<a_i$. Therefore $a_i=0$.
+\end{proof}
+
+\begin{theorem}[The actual point diagram's vertices are pure normal under tangent initial stability]
+\label{hir:actual-initial-tangent-stable-pure-normal-vertices}
+\uses{hir:actual-pderiv-stable-vertex-coordinate-zero,hir:actual-homogeneous-initial-ideal-diagram-equality}
+\lean{Hironaka.HironakaActualPureNormalVertices.tangentExponent_vertex_zero_of_initial_tangent_pderiv,Hironaka.HironakaActualPureNormalVertices.vertex_eq_joined_normal_of_initial_tangent_pderiv}
+\leanok
+For the original coordinate blocks $(u,z)$ of sizes $d,t$, suppose the
+SAME whole homogeneous initial ideal of $K$ is stable under each actual
+$u$ partial derivative. Every actual degree-lexicographic vertex of $K$
+then has tangent block zero. Equivalently each is the literal joined
+exponent $(0,\gamma)$ of its unchanged normal block.
+\end{theorem}
+\begin{proof}
+The proved whole homogeneous-initial diagram theorem identifies its
+actual degree-lexicographic diagram with that of $K$. Its actual minimal
+vertices are therefore the SAME exponents. Apply the first theorem to
+this whole homogeneous initial ideal for each tangent coordinate, using
+the given actual stability. Each tangent coordinate of the original
+vertex is zero, so its actual tangent exponent is zero by function
+extensionality. The proved genuine two-block reconstruction then expresses
+the unchanged original exponent as the join of zero and its normal block.
+\end{proof}
+
+\begin{theorem}[Original Hilbert--Samuel constant centre geometry internally produces pure normal vertices]
+\label{hir:actual-original-hs-centre-pure-normal-vertices}
+\uses{hir:actual-initial-tangent-stable-pure-normal-vertices,hir:actual-original-hs-centre-whole-initial-tangent-pderiv}
+\lean{Hironaka.HironakaActualPureNormalVertices.exists_original_hs_constant_centre_pure_normal_vertices}
+\leanok
+Given an original regular $d$-dimensional centre in an actual complex
+$(d+t)$-manifold, an original coherent ideal and its all-order
+Hilbert--Samuel constancy along that centre, there is an actual original
+flattening chart in which every actual vertex of the SAME flattened
+origin ideal's genuine whole Taylor extension is pure normal. The chart
+retains its true source, origin and centre-flattening equations. No
+vertex, diagram-cylinder or pure-normal certificate is an input.
+\end{theorem}
+\begin{proof}
+Invoke the existing genuine original centre first-symbol and jet-frame
+producer ONCE. It supplies one actual flattening, its original domain and
+centre identities, and genuine tangent partial stability of the SAME
+flattened origin ideal's whole homogeneous initial ideal. Apply the
+preceding theorem to that exact ideal in that same chosen chart. Retain
+the original chart's actual source, origin and flattening identities,
+with the resulting zero tangent block for every original actual vertex.
+No independently chosen chart is combined with the produced ideal.
+\end{proof}
+
+Pure normal exponents are a genuine prerequisite for centre-relative exact
+analytic coefficient support. They do not assert persistence of the
+whole transformed Hilbert--Samuel profile or termination.

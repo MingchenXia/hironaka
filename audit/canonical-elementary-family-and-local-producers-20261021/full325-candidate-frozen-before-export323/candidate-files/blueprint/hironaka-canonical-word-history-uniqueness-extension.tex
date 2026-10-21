@@ -1,0 +1,85 @@
+\section{Exact canonical recipes determine entire histories and finitely many attained maxima}
+
+\begin{definition}[Literal empty or full-maximum recipe]
+\label{hir:canonical-word-history-recipe}
+\uses{hir:tower-isomorphism}
+\lean{Hironaka.HironakaCanonicalWordHistoryUniqueness.CanonicalWord}
+\leanok
+For an actual marked record $M$, actual history invariant and actual
+finite blowup tower $T$, a Boolean word records the literal recipe at
+every step, in reverse chronological order. False prescribes the empty
+centre; true prescribes the entire actual invariant maximum on the
+current actual cosupport. A true maximum may itself be empty. The
+identity tower has the empty word. No historical slot is deleted.
+\end{definition}
+
+\begin{theorem}[Actual recipe words and weak canonical histories]
+\label{hir:canonical-word-history-properties}
+\uses{hir:canonical-word-history-recipe}
+\lean{Hironaka.HironakaCanonicalWordHistoryUniqueness.CanonicalWord.isCanonical,Hironaka.HironakaCanonicalWordHistoryUniqueness.CanonicalWord.length_eq,Hironaka.HironakaCanonicalWordHistoryUniqueness.exists_canonicalWord}
+\leanok
+Every actual recipe gives a weak canonical history, its word length
+is exactly the actual tower length, and every weak canonical history
+has such a word. Empty and full recipes retain all historical positions.
+\end{theorem}
+\begin{proof}
+Induct on the actual tower. At the identity the empty word gives the
+identity weak canonical history and both lengths are zero. At a step,
+the preceding word is supplied by induction. The literal recipe says
+that the actual centre is empty or the entire current maximum, which
+is precisely the next weak canonical condition. Both lengths increase
+by one. Conversely the actual weak canonical condition supplies its
+empty-or-full alternative; prepend the corresponding Boolean to the
+preceding word. This includes the case in which both alternatives
+describe an empty actual centre.
+\end{proof}
+
+\begin{theorem}[The same recipe determines the entire actual history over a biholomorphism]
+\label{hir:canonical-word-history-whole-uniqueness}
+\uses{hir:canonical-word-history-properties,hir:tower-isomorphism}
+\lean{Hironaka.HironakaCanonicalWordHistoryUniqueness.exists_isTowerIso_of_canonicalWord}
+\leanok
+For an original marked record in the actual invariant domain and a
+genuine base biholomorphism, any two actual histories for the record
+and its literal pullback that realize the same word have a genuine
+whole tower isomorphism over that base biholomorphism. No nonempty-centre
+assumption, selected comparison or terminality is supplied.
+\end{theorem}
+\begin{proof}
+Induct on the common word and both actual towers. The empty word forces
+both towers to be identities, whose comparison is the given base map.
+For the next bit the induction hypothesis supplies a genuine isomorphism
+of the entire preceding histories. Its actual whole-record and cosupport
+dictionary, together with the true invariant history-isomorphism law,
+identifies the two entire current maximum loci by inverse image. For
+a false bit the two actual centres are empty, so inverse-image equality
+holds as well. The actual universal uniqueness of blowup along these
+corresponding centres constructs a genuine biholomorphism of the next
+spaces. Append its true projection commutation and centre equality to
+the preceding tower isomorphism. This proves the whole-history result
+without compressing any empty positions.
+\end{proof}
+
+\begin{theorem}[Only finitely many entire attained maxima occur at each fixed historical length]
+\label{hir:canonical-word-finite-attained-maxima}
+\uses{hir:canonical-word-history-whole-uniqueness}
+\lean{Hironaka.HironakaCanonicalWordHistoryUniqueness.finite_attained_maximum_values}
+\leanok
+For any original marked record in the actual invariant domain and any
+fixed natural length $j$, the set of entire maximum values attained by
+any actual weak canonical history of length $j$ is finite. This does
+not assert that any particular noncompact history has an attained maximum.
+\end{theorem}
+\begin{proof}
+Every such actual history supplies a Boolean word of exactly length
+$j$. For a fixed word, two possible histories are genuinely isomorphic
+over the identity by the preceding theorem. Their entire cosupports
+and invariant values correspond. Hence any attained maximum value in
+one equals any attained maximum value in the other: compare the image
+of a maximizing point with a maximizing point of the other history.
+The finite set of Boolean words of length $j$ therefore has at most
+one attained maximum value per word. Choose one realizing word for
+each candidate value. The established uniqueness makes this assignment
+injective, proving finiteness of the unchanged set of actual attained
+maximum values. No finite value-image or global maximum is assumed.
+\end{proof}

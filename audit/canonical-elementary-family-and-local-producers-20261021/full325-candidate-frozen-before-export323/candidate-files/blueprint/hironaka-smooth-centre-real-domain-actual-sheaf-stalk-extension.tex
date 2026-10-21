@@ -1,0 +1,155 @@
+\section{Literal complex structure-sheaf stalks and whole original relative modules}
+
+Use the actual sheaf of complex-smooth functions with complex scalar
+models: its sections are holomorphic functions, by complex differentiability
+and holomorphic smoothness. Its stalk is the genuine neighbourhood colimit,
+not a chosen chart ring by definition. The original germ-ideal membership
+record supplies ALL original membership functions. The whole ideal in the
+literal stalk is the span of their actual section germs. A bundled
+normal-cone sheaf and its stalk identification remain separate from these
+literal local-ring and relative-module dictionaries.
+
+\begin{lemma}[Actual complex structure-sheaf sections and original holomorphic function germs]
+\label{hir:real-domain-actual-complex-sheaf-original-section-germs}
+\source{bierstone-milman08-functoriality}
+\uses{hir:actual-coherent-whole-point-quotient-column-dictionary}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualComplexStructureSheaf,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualComplexStructureStalk,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualComplexSection,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionExtension,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionExtension_apply,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionExtension_contMDiffAt,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionExtension_holomorphicAt,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionChartRingHom,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionChartRingHom_restrict,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.exists_actual_section_of_original_holomorphicAt,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actual_section_germ_eq_of_extension_eventuallyEq}
+\leanok
+For every actual open $V$ of an original complex manifold, every actual
+$y\in V$, and every complex-smooth structure-sheaf section $s$ on $V$,
+its total extension by zero represents a genuine original holomorphic germ
+at $y$. Reading this representative in the actual preferred chart at $y$
+gives a homomorphism from the section ring to the whole holomorphic germ
+ring at zero. These homomorphisms are compatible with every actual open
+restriction containing $y$. Conversely EVERY original function holomorphic
+near $y$ is represented by a genuine complex-smooth section on a real open
+neighbourhood of $y$, and all such section representations have the SAME
+literal sheaf stalk germ.
+\end{lemma}
+\begin{proof}
+On the actual open $V$, the total extension agrees with $s$. Smoothness of
+the section over COMPLEX scalar models gives complex manifold
+differentiability at every point of $V$; the inclusion of this open has
+its genuine local inverse, so the extension is holomorphic at every
+included point. Only its germ at $y$ is used; no global holomorphic
+extension is asserted. The genuine chart inverse, recentered at $e_y(y)$,
+gives its whole original chart germ. Original equality of functions on
+$V$ proves preservation of constants, addition and multiplication on
+that neighbourhood, so the germ operation is a ring homomorphism. Under
+restriction to a smaller actual open, both extensions agree at every point
+of that smaller open; original eventual equality proves equality of their
+whole germs. Conversely an original holomorphic function is complex-smooth
+near every point of some real open neighbourhood, by holomorphic smoothness.
+Choose that open and restrict the actual function, obtaining a genuine
+section. For two such choices, intersect the opens; both restrictions are
+literally the SAME original function there. The actual colimit restriction
+identity makes their sheaf stalk germs equal. The same intersection
+argument proves that eventual equality of original representatives gives
+the same sheaf stalk germ, independently of every choice.
+\end{proof}
+
+\begin{theorem}[The actual complex structure-sheaf colimit stalk is the whole chart germ ring]
+\label{hir:real-domain-actual-complex-sheaf-stalk-whole-germ-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-complex-sheaf-original-section-germs}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.sectionChartCocone,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualStalkToChartHom,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualStalkToChartHom_germ,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualStalkToChartHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualStalkToChartHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualStalkChartEquiv,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualStalkChartEquiv_germ}
+\leanok
+At every original point $y$, internally construct a genuine ring equivalence
+from the LITERAL complex structure-sheaf colimit stalk to the whole
+holomorphic germ ring at zero in the preferred chart at $y$. Its value on
+EVERY actual section germ and on EVERY original holomorphic-function germ
+is precisely the original translated chart germ. No stalk equivalence,
+representative-surjectivity or inverse-chart certificate is supplied.
+\end{theorem}
+\begin{proof}
+The compatible section homomorphisms above form a cocone on the actual
+neighbourhood restriction diagram. The genuine commutative-ring colimit
+universal property gives the actual stalk homomorphism, with its stated
+formula on EVERY section. Each stalk element is the germ of an actual
+section. Suppose two stalk elements have equal images; choose real section
+representatives on their actual opens. Equality of whole chart germs says
+that their actual translated functions agree on a neighbourhood of zero.
+The true original chart map sends a real neighbourhood of $y$ into that
+neighbourhood, and its local inverse identities recover the SAME section
+values there. Intersect this original neighbourhood with both actual section
+opens and the true chart source. Their restrictions are equal on an actual
+open containing $y$. The colimit germ restriction identity therefore makes
+the two original stalk elements equal, proving injectivity.
+For surjectivity take an arbitrary whole germ represented by $F$ holomorphic
+near zero. Its actual original pullback $F(e_y(z)-e_y(y))$ is holomorphic
+near $y$, by the genuine chart chain rule. The preceding lemma represents
+this SAME actual function by a section on a true neighbourhood of $y$.
+Its stalk image is the original $F$ germ, because the recentered actual
+chart inverse composed with the chart map is the identity near zero in
+its true target. Thus every whole germ has a genuine section preimage.
+Bijectivity upgrades this actual homomorphism to the required ring
+equivalence; all displayed representative formulas come from its original
+colimit homomorphism.
+\end{proof}
+
+\begin{lemma}[Both whole original ideals are identified in the literal sheaf stalk]
+\label{hir:real-domain-actual-complex-sheaf-stalk-whole-original-ideals}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-complex-sheaf-stalk-whole-germ-equivalence,hir:actual-coherent-whole-point-quotient-column-dictionary}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualOriginalFunctionGerm,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualOriginalFunctionGerm_chart,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualOriginalFunctionGerm_eq_section,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualWholeSheafStalkIdeal,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.map_actualWholeSheafStalkIdeal,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.actualWholeSheafStalkIdeal_eq_map_chart,Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.map_actualWholeSheafCentreIdeal_pow}
+\leanok
+For any original germ ideal $A$, let its whole ideal in the actual sheaf
+stalk at $y$ be the span of ALL actual stalk germs of original holomorphic
+functions with $A$ membership at $y$. The internally constructed stalk
+equivalence maps this ENTIRE ideal onto the existing entire original
+preferred-chart stalk ideal. The same construction for the original centre
+vanishing ideal gives BOTH entire ideal dictionaries and ALL centre powers.
+Every actual section/function germ is retained; no selected generator ideal
+or caller ideal dictionary replaces it.
+\end{lemma}
+\begin{proof}
+The preceding actual germ formula sends each original membership-function
+stalk germ to its SAME original translated chart germ. Ring ideal images
+preserve spans. Consequently the image of the whole original stalk ideal
+is contained in the span of all original chart membership germs. Every
+original chart membership germ has its actual original function stalk
+preimage by that SAME formula, giving the reverse inclusion for the entire
+spans. Apply this argument also to every original function in the actual
+centre vanishing ideal. The resulting genuine ring equivalence preserves
+ideal products, so induction gives the whole centre-power dictionary at
+EVERY natural degree. Its inverse gives both whole inverse dictionaries.
+No coherence or coordinate-plane certificate is needed for these actual
+pointwise equivalence identities.
+\end{proof}
+
+\begin{theorem}[Original inputs supply all-degree relative freeness over the literal complex sheaf stalk]
+\label{hir:real-domain-original-all-relative-degrees-free-actual-sheaf-stalk-open}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:real-domain-original-intrinsic-all-degree-stalk-freeness-centre-open,hir:real-domain-actual-complex-sheaf-stalk-whole-original-ideals,hir:real-domain-all-relative-degrees-free-ring-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualSheafStalk.exists_original_regular_all_relative_degrees_free_actual_sheaf_stalk_open}
+\leanok
+ONLY original regular-centre geometry at $x$, original coherence and
+original ideal containment internally supply ONE true original open $O$
+with $x\in\overline{C\cap O}$. At EVERY original point $y\in C\cap O$,
+ALL genuine relative degree layers of the ENTIRE original ideals in the
+LITERAL complex structure-sheaf stalk are finite free and flat over its
+original centre quotient ring. Their ENTIRE associated sum is free and
+flat for the same independently descended centre quotient action.
+No actual sheaf stalk map, whole ideal, action, free-open or flatness
+certificate is a caller premise.
+\end{theorem}
+\begin{proof}
+The proved intrinsic original producer gives ONE actual original centre
+open, closure at $x$, and all-degree/whole properties in the preferred
+chart at EVERY included original point. For any such $y$, the preceding
+literal sheaf-stalk producer internally gives a true ring equivalence
+and BOTH entire original ideal dictionaries at that SAME point. Use the
+inverse equivalence in the proved canonical relative-module transfer.
+The genuine centre quotient-ring equivalence and actual power-image
+restrictions carry finite generators and free bases on EVERY degree to
+the literal sheaf stalk layers, and carry the whole direct-sum free basis
+to the actual whole associated sum. All actions are their independently
+defined ambient-product quotient descents, so these are precisely the
+stated original scalar actions. Free gives flat on the same actual
+module carriers and instances. The SAME original $O$ and closure are
+retained, with no degree-dependent shrinking. This identifies literal
+structure-sheaf stalk rings and original local relative modules; it does
+not yet identify a bundled normal-cone sheaf's stalk with that direct sum,
+or prove ambient mixed-degree Hilbert--Samuel transformation or blowup
+descent. Origin flatness and all-component density are not asserted.
+\end{proof}

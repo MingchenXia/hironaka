@@ -1,0 +1,283 @@
+{
+  "created_utc": "2026-10-21T03:16:24.579628+00:00",
+  "status": "satisfactory",
+  "phase": 3,
+  "module": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision",
+  "ledger_base": "403620c46252f76844df96d37ef69a19e0db91fe",
+  "gap_status": {
+    "G8": "True signed chart-cone preservation for whole actual owner division proved; suitable geometric family, converse range/inverse convergence and relative maximal standardness remain open"
+  },
+  "source": {
+    "path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HironakaActualSignedConeDivision.lean",
+    "sha256": "12f582f182070c53ad2ff571b967b3e428303a94f6e5a7e44da1311a36230148",
+    "bytes": 8430
+  },
+  "blueprint": {
+    "path": "TranscendentalNakamaye/blueprint/src/hironaka-actual-signed-cone-division-extension.tex",
+    "sha256": "dc43043b3985a39915401c287587cd374896facb52b4b3fc6c54d8773a918b1e",
+    "bytes": 5849
+  },
+  "artifacts": [
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualSignedConeDivision.ilean",
+      "sha256": "ffebee4f444ab61f0c4d95de955671ca2d09a0a13839795e084e26acf881e813",
+      "bytes": 44353
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualSignedConeDivision.ilean.hash",
+      "sha256": "2860b62da39479599b2d5e4162c0f5c53457cfbbc76276ac8c3ed37603ea893a",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualSignedConeDivision.olean",
+      "sha256": "7ef2ce35eea85041df9fd013a18c02fb4c4c8f2e70757fe98d4f9bf897053c78",
+      "bytes": 286784
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualSignedConeDivision.olean.hash",
+      "sha256": "3648193f09101abce60832dfc0a17f562c45504d86d26028e3fb425ec70a3992",
+      "bytes": 16
+    },
+    {
+      "path": "TranscendentalNakamaye/.lake/build/lib/lean/TranscendentalNakamaye/Pending/HironakaActualSignedConeDivision.trace",
+      "sha256": "939c49fbd36e86aaed53af06b7e4c1fe7c4f8b02529d9e3df4b0baa379480090",
+      "bytes": 3486
+    }
+  ],
+  "source_and_main_olean_unchanged_during_independent_checks": true,
+  "blueprint_marker_only_changes_permitted_during_checks": true,
+  "source_declaration_names_and_locations": [
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "familyDivisionCoefficient_eq_zero_of_signed_weight_lt",
+      "source_line": 24
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "familyFormalQuotient_signed_weight_bound",
+      "source_line": 64
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "familyFormalRemainder_signed_weight_bound",
+      "source_line": 81
+    },
+    {
+      "kind": "def",
+      "unqualified_source_name": "actualBlowupConeWeight",
+      "source_line": 96
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualBlowupConeWeight_image",
+      "source_line": 101
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actualFormalBlowup_zero_coefficient_outside_cone",
+      "source_line": 111
+    },
+    {
+      "kind": "theorem",
+      "unqualified_source_name": "actual_image_family_division_cone",
+      "source_line": 127
+    }
+  ],
+  "blueprint_nodes": [
+    {
+      "label": "hir:actual-family-division-signed-coefficient-bound",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyDivisionCoefficient_eq_zero_of_signed_weight_lt",
+        "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyFormalQuotient_signed_weight_bound",
+        "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyFormalRemainder_signed_weight_bound"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "40e6b773d08d2ac88185dd5b121336156ae32e24391bc88d32aff3758688e217"
+    },
+    {
+      "label": "hir:actual-zero-chart-signed-support-cone",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualBlowupConeWeight",
+        "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualFormalBlowup_zero_coefficient_outside_cone"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "0dcf8697ea5626f90a4932214081e9f00cbc02c1a372d576a667f95c7905cd46"
+    },
+    {
+      "label": "hir:actual-image-family-owner-division-signed-cone",
+      "kind": "theorem",
+      "attachments": [
+        "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actual_image_family_division_cone"
+      ],
+      "complete_proof_present": true,
+      "leanok": true,
+      "proof_sha256": "1ba06a8e0c80df121dee9fdc0fc88f4b252f33acb4dee4208d497584762b3b6a"
+    }
+  ],
+  "actual_roots": [
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyDivisionCoefficient_eq_zero_of_signed_weight_lt",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.0.TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualBlowupConeWeight_image._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualFormalBlowup_zero_coefficient_outside_cone._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualBlowupConeWeight._proof_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualFormalBlowup_zero_coefficient_outside_cone",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyDivisionCoefficient_eq_zero_of_signed_weight_lt._proof_1_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualBlowupConeWeight._proof_1",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "_private.TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.0.TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualBlowupConeWeight_image",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyFormalQuotient_signed_weight_bound",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.familyFormalRemainder_signed_weight_bound",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualBlowupConeWeight",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actualFormalBlowup_zero_coefficient_outside_cone._proof_1_2",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "TranscendentalNakamaye.Pending.HironakaActualSignedConeDivision.actual_image_family_division_cone",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "actual_root_count": 13,
+  "transitive_axiom_histogram": {
+    "Classical.choice, Quot.sound, propext": 13
+  },
+  "nonstandard_axioms": 0,
+  "sorryAx_reachable": false,
+  "all_private_generated_foreign_namespace_actual_roots_included": true,
+  "kernel_exit": 0,
+  "actual_all_root_audit_exit": 0,
+  "kernel_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-signed-cone-division/kernel.log",
+    "sha256": "4d71c4f418639695f753e6bb557d632a2d941d9f24fe7e3afe04e28e7e0fde6d",
+    "bytes": 74
+  },
+  "actual_roots_log": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-signed-cone-division/actual-roots.log",
+    "sha256": "8e4b1701bd35a2419138105b770d3b33d5e28f62ffd47b262b488cbe05c4dd81",
+    "bytes": 3296
+  },
+  "actual_roots_script": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-signed-cone-division/ActualRoots.lean",
+    "sha256": "86a8c891e587242d0153fe4bf0b6e8bc79620e7a3b46a4cccba0fc65a128a845",
+    "bytes": 854
+  },
+  "native_build_log": {
+    "path": "work/g1-g9-20261021-phase3/principal-parts/signed-cone/final-build.log",
+    "sha256": "6a9572c8c3ec943b2824c0f9f64c30df7bf5b8e944abc47eda7f8e7f473bbebc",
+    "bytes": 135
+  },
+  "native_build_jobs": 4919,
+  "native_build_wfail": true,
+  "native_build_exit": 0,
+  "native_build_owner": "Author/root; not repeated by independent reviewer",
+  "native_build_warning_headers": 0,
+  "native_build_error_headers": 0,
+  "mathematical_review": "ENTIRE frozen 153-line source including every recursion and chart-weight helper, and all THREE complete written BP proofs reviewed. A genuine additive weight takes values in INTEGER Z and may have negative coordinate weights. The proof inducts in the actual well-founded monomial order used by the existing whole owner coefficient recursion, never in this signed weight. At a tested exponent below the disclosed input bound, the true input coefficient vanishes. In every finite antidiagonal tail term, either the actual vertex coefficient vanishes or the natural vertex support hypothesis puts its signed weight at least the vertex label weight. Actual antidiagonal additivity then puts the genuine recursive exponent below the same input weight bound; the literal tail definition simultaneously certifies it is smaller in the genuine monomial order. The induction therefore kills that term, and every true division coefficient below the weight bound is zero. The actual owner quotient reads this SAME recursive coefficient at beta plus its actual vertex when owned, and is zero otherwise, giving the precise shifted weight bound. The actual whole remainder reads the same coefficient off the actual diagram and is zero on it, giving the unshifted bound. No positivity or well-foundedness of the signed weight is presumed. The literal chart weight is the exceptional exponent minus the sum of selected nonpivot coordinate exponents. Its genuine monomial-blowup exponent image has signed weight EXACTLY the original nonnegative exceptional exponent. Applying the actual whole formal substitution coefficient formula and actual coordinate-product monomial identity shows every individual summand at a negative-cone exponent is zero, deriving the output support cone for ANY actual zero-direction chart image. Finally a prescribed actual monic vertex family consisting of literal such image series, with the disclosed actual zero-weight vertex labels, satisfies the generic compatible vertex hypotheses internally. Its SAME actual owner quotients and remainder for any actual input image therefore lie in the nonnegative chart cone. Suitable family production, range surjectivity and inverse analytic convergence are not inputs smuggled in as conclusions.",
+  "proven_scope": "Actual whole owner coefficient recursion, shifted quotients and remainder preserve compatible additive SIGNED integer support bounds. Every actual zero-direction chart image internally has its signed support cone; a prescribed image monic family with zero-weight vertices gives cone-preserving actual owner division.",
+  "scope_limits": [
+    "The generic theorem retains explicit natural vertex/input support compatibility. Its final chart consumer retains prescribed actual image-family equations and zero signed-weight vertex labels.",
+    "This is a formal coefficient support theorem, not production of a geometric image monic family or an analytic inverse-image convergence theorem.",
+    "The converse actual range-cone dictionary, relative maximal-filtered syzygies, maximal standardness and the relative HS criterion remain separate."
+  ],
+  "review_findings": [],
+  "proof_threads": 1,
+  "reader_wrapper": "work/lean-runtime/lean-probe.sh",
+  "kernel_mode": "Installed Lean4.33.1 exact-module most-private replay against imported environment; not --fresh import-cone replay or a separate kernel implementation.",
+  "source_heartbeat_budgets": [],
+  "no_source_BP_edits_or_commits_by_reviewer": true,
+  "manual_review_metadata": {
+    "path": "work/g1-g9-20261021-phase3/independent/actual-signed-cone-division/review-config.json",
+    "sha256": "1651691e34f0b4a8735c62a4714af60451a14fe84cbe036dc2f759bafcb9e84e",
+    "bytes": 3987
+  },
+  "author_lane": "work/g1-g9-20261021-phase3/principal-parts/signed-cone/",
+  "all_blueprint_uses_resolve": true,
+  "semantic_peer": "work/g1-g9-20261021-phase3/principal-parts/signed-cone/peer-review-canonical.json"
+}

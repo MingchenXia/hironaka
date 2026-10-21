@@ -1,0 +1,22 @@
+\begin{lemma}[The first centre meeting an open set]
+\label{mc:first-centre-exists}
+\uses{hir:canonical-segments,hir:resolution-driver,mc:centres-avoid-open,ana:blowup-surjective,hir:blowup-tower}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.EmbeddedFromResolution.exists_first_centre,TranscendentalNakamaye.Pending.EmbeddedFromResolution.not_centresAvoid_of_cosupp_eq_empty}
+\leanok
+\begin{enumerate}
+\item Let \(\operatorname{inv}\) be any value function, \(U\subset X\) open and \(T\) a canonical segment of a marked ideal on \(X\) (each centre empty or the
+maximum locus of \(\operatorname{inv}\) of the preceding part on the cosupport) whose centres do not all miss the preimages of \(U\). Then \(T=T'S\) where \(T'\) is a
+canonical segment whose centres miss the preimages of \(U\) and whose maximum locus, the next centre of \(T\), meets the preimage of \(U\).
+\item Let \(X\) be compact, \(V\subset X\) a closed irreducible analytic subvariety with \(\underline{\mathcal I}_V\) in the domain of the invariants in
+dimension \(\le k\), and \(T\) a multiple test blow-up of \(\underline{\mathcal I}_V\) with empty final cosupport. Then not all centres of \(T\) miss the preimages of
+\(X\setminus V_{\mathrm{sing}}\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Induction on \(T\). Let \(T\) be \(T_0\) followed by the blowup along \(C\). If not all centres of \(T_0\) miss the preimages of \(U\), the induction hypothesis
+applies to \(T_0\). Otherwise \(C\) meets the preimage of \(U\); so \(C\neq\emptyset\), \(C\) is the maximum locus at \(T_0\), and \(T'=T_0\).
+(2) Otherwise, take \(x\in V_{\mathrm{reg}}\) (nonempty by definition of the subvariety); \(p_T\) is onto (Lemma~\ref{ana:blowup-surjective}), and a point over \(x\) lies in the
+cosupport by Lemma~\ref{mc:centres-avoid-open}(3), against its emptiness.
+\end{proof}

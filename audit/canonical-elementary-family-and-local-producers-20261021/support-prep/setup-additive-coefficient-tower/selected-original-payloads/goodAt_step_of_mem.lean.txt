@@ -1,0 +1,186 @@
+/-- **The invariant over the centre**: if `π z ∈ C`, `z` lies on the strict transform of `S_T` and `π z` is good for `T`,
+then `z` is good for the tower continued by the blowup `π` along `C`.  The new coordinates are a monomial chart
+`x' = x / y_m` over nested product-form coordinates for `C ⊆ S_T`, the new generators are the controlled transforms
+`h' = W_j^{-μ} (g ∘ π)` of the old ones, and `W_j^μ ∂^L h' = W_j^{|L|} (∂^L g) ∘ π` (`nd_monomial_identity`). -/
+theorem goodAt_step_of_mem (𝔪 : MarkedIdeal n X) {S : Set X} (T : BlowupTower X Y) {C : Set Y} {π : Z → Y}
+    (hπ : IsBlowupAlong n C π) (hNT : (geoTransformAlong 𝔪 T).N = univ)
+    (hcohT : (geoTransformAlong 𝔪 T).ideal.IsCoherent)
+    (hDN : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).N = univ)
+    (hDcoh : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.IsCoherent)
+    (hCadm : (geoTransformAlong 𝔪 T).IsAdmissibleCentre C)
+    (hDadm : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).IsAdmissibleCentre C)
+    (hSc : IsClosed (strictAlong T S)) (hCS : C ⊆ strictAlong T S) {z : Z}
+    (hz : z ∈ strictAlong (.step T C π hπ) S) (hzC : π z ∈ C) (hgood : GoodAt 𝔪 S T (π z)) :
+    GoodAt 𝔪 S (.step T C π hπ) z := by
+  obtain ⟨k, hkn, c, G, hGmem, hGgen, hGder⟩ := hgood
+  have hπc : Continuous π := hπ.contMDiff.continuous
+  have hπd : ∀ w, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=
+    fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)
+  have hhol := MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcohT
+  -- nested product-form coordinates for `C ⊆ S_T` at `π z`
+  obtain ⟨kC, hkC⟩ := hπ.1.2 (π z) hzC
+  have hSreg : RegularAtDim (n := n) (strictAlong T S) (π z) k := ⟨hkn, hCS hzC, c.Φ, c.src, c.zero, c.flat⟩
+  have hkCk : kC ≤ k := BlowupStrictSubmanifold.le_of_regularAtDim_subset hkC hSreg hCS
+  obtain ⟨c'', hc''C, hc''nd⟩ := FlatChart.exists_nested c hkCk hkn hkC hCS
+  -- the monomial chart at `z`
+  obtain ⟨j, hj, O, hO, hzO, W, hWs, hWmem, hℓ, hiff⟩ :=
+    BlowupStrictSubmanifold.exists_local_geoStrictTransform hπ c''.src hc''C c''.flat
+      (mem_flatDomain_self c''.Φ)
+  obtain ⟨ℓ, ⟨hℓs, hℓπ⟩, -⟩ := BlowupLocalSurjectivity.existsUnique_monomialLift hπ c''.src hc''C hj
+  have hWeq : ∀ z' ∈ O, π z' ∈ flatDomain c''.Φ ∧
+      monomial kC j (W z') = c''.Φ.toFun (chartAt (ComplexModel n) (π z) (π z')) := by
+    intro z' hz'
+    have hw := hWmem z' hz'
+    have h1 := hℓ ℓ hℓs hℓπ z' hz' hw
+    have h2 := congrFun hℓπ (LiftedOpen.mk _ (W z') hw)
+    rw [Function.comp_apply, h1] at h2
+    have h3 := flatInverse_mem c''.Φ hw c''.src
+    rw [h2]
+    simp only [monomialChart, LiftedOpen.toModel_mk]
+    exact ⟨h3.1, h3.2.symm⟩
+  have hWeq' : ∀ z' ∈ O, c''.ψ (π z') = monomial kC j (W z') := fun z' hz' => (hWeq z' hz').2.symm
+  obtain ⟨hjk, hWz⟩ := (hiff z hzO).mp hz
+  have hCu : ∀ u ∈ O, (π u ∈ C ↔ W u j = 0) := fun u hu => by
+    rw [hc''C (hWeq u hu).1.1 (hWeq u hu).1.2, ← (hWeq u hu).2,
+      BlowupStrictSubmanifold.monomial_mem_plane_iff hj]
+  -- the new flat chart `W - W z`
+  have hW' : ∀ y ∈ O, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) (fun y => W y - W z) y :=
+    fun y hy => ((hWs y hy).mdifferentiableAt (by simp)).sub mdifferentiableAt_const
+  have hflat' : ∀ y ∈ O, (y ∈ strictAlong (.step T C π hπ) S ↔ W y - W z ∈ complexCoordinatePlane n k) := by
+    intro y hy
+    rw [BlowupStrictSubmanifold.sub_mem_plane_iff hWz]
+    exact (hiff y hy).trans ⟨fun h => h.2, fun h => ⟨hjk, h⟩⟩
+  have hinj : Function.Injective
+      (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ) - W z) (chartAt (ComplexModel n) z z)) := by
+    set e := chartAt (ComplexModel n) z with he
+    have hFd : DifferentiableAt ℂ (fun ζ => W (e.symm ζ)) (e z) := by
+      have h1 := mdifferentiableAt_atlas_symm (I := 𝓘(ℂ, ComplexModel n)) (chart_mem_atlas (ComplexModel n) z)
+        (e.map_source (mem_chart_source _ z))
+      have h2 : MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) W (e.symm (e z)) := by
+        rw [e.left_inv (mem_chart_source _ z)]; exact (hWs z hzO).mdifferentiableAt (by simp)
+      exact mdifferentiableAt_iff_differentiableAt.mp (h2.comp _ h1)
+    rw [fderiv_sub_const]
+    refine (injective_iff_map_eq_zero _).mpr fun v hv => ?_
+    by_contra hv0
+    apply BlowupFibreDirection.fderiv_monomialInverse_ne_zero hO hWs hWmem hℓs (hℓ ℓ hℓs hℓπ) hzO hv0
+    rw [hFd.fderiv_restrictScalars ℝ]
+    exact hv
+  obtain ⟨c', hc'⟩ := FlatChart.exists_of_map hO hzO hW' (sub_self _) hinj hflat'
+  -- the local equation `W_j` of the exceptional divisor
+  have hl : BlowupFunctionTransform.IsLocalEquation hπ O (fun p => W p j) :=
+    GlueingTrivialAction.isLocalEquation_monomial hπ c''.src hc''C hj hO hWs hWeq
+  have hlhol : HolomorphicAt n (fun p => W p j ^ 𝔪.d) z := by
+    have h1 : HolomorphicAt n (fun p => W p j) z := by
+      filter_upwards [hO.mem_nhds hzO] with y hy
+      exact (hl.mdifferentiableOn y hy).mdifferentiableAt (hO.mem_nhds hy)
+    exact h1.mono fun y hy => hy.pow _
+  -- the transformed ideals
+  have hd : (geoTransformAlong 𝔪 T).d = 𝔪.d := d_geoTransformAlong 𝔪 T
+  have hideal : (geoTransformAlong 𝔪 (.step T C π hπ)).ideal =
+      controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d := by
+    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcohT hπ, hd]
+  have hDideal : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) (.step T C π hπ)).ideal =
+      controlledTransform hπ (geoTransformAlong (derivMarked 𝔪 i) T).ideal (𝔪.d - i) := fun i hi => by
+    rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform (hDN i hi) (hDcoh i hi) hπ,
+      d_geoTransformAlong, derivMarked_d]
+  have h𝔪le : (geoTransformAlong 𝔪 T).ideal.Le (idealPow (vanishingIdeal (n := n) C) 𝔪.d) := by
+    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcohT hCadm
+    rwa [hd] at this
+  have hDle : ∀ i ≤ 𝔪.d, (geoTransformAlong (derivMarked 𝔪 i) T).ideal.Le
+      (idealPow (vanishingIdeal (n := n) C) (𝔪.d - i)) := fun i hi => by
+    have := HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre (hDN i hi) (hDcoh i hi) (hDadm i hi)
+    rwa [d_geoTransformAlong, derivMarked_d] at this
+  -- `W_j` vanishes on no relatively open subset of the strict transform
+  have hnonS : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ strictAlong (.step T C π hπ) S).Nonempty →
+      ∃ y ∈ V ∩ strictAlong (.step T C π hπ) S, W y j ^ 𝔪.d ≠ 0 := by
+    rintro V hV hVO ⟨y₀, hy₀V, hy₀S⟩
+    rw [strictAlong_step] at hy₀S
+    obtain ⟨y₁, hy₁V, hy₁S, hy₁C⟩ :=
+      mem_closure_iff.mp (show y₀ ∈ closure (π ⁻¹' (strictAlong T S \ C)) from hy₀S) V hV hy₀V
+    refine ⟨y₁, ⟨hy₁V, ?_⟩, pow_ne_zero _ fun h => hy₁C ((hCu y₁ (hVO hy₁V)).mpr h)⟩
+    rw [strictAlong_step]
+    exact subset_closure ⟨hy₁S, hy₁C⟩
+  have hnonU : ∀ V : Set Z, IsOpen V → V ⊆ O → (V ∩ univ).Nonempty → ∃ y ∈ V ∩ univ, W y j ^ 𝔪.d ≠ 0 := by
+    rintro V hV hVO ⟨y₀, hy₀V, -⟩
+    obtain ⟨y, hyV, hy⟩ := hl.nonvanishing V hV hVO ⟨y₀, hy₀V⟩
+    exact ⟨y, ⟨hyV, mem_univ _⟩, pow_ne_zero _ hy⟩
+  refine ⟨k, hkn, c', fun h' => ∃ g, G g ∧ HolomorphicAt n h' z ∧
+    ∀ᶠ y in 𝓝 z, g (π y) = W y j ^ 𝔪.d * h' y, ?_, ?_, ?_⟩
+  · -- the new generators are germs of the transform
+    rintro h' ⟨g, hg, hh', hrel⟩
+    rw [hideal]
+    exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hGmem g hg) hh' hrel
+  · -- they generate it
+    intro f hf
+    have hfhol : HolomorphicAt n f z := (show (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f
+      by rw [← hideal]; exact hf).1
+    have hWf : (GermIdeal.pullback (m := n) π (geoTransformAlong 𝔪 T).ideal).mem z
+        (fun y => W y j ^ 𝔪.d * f y) := by
+      have hf' : (controlledTransform hπ (geoTransformAlong 𝔪 T).ideal 𝔪.d).mem z f := by rw [← hideal]; exact hf
+      refine (InvertibleIdealQuotient.mem_colon_iff.mp hf').2 _ ?_
+      exact (hl.idealPow_mem_iff 𝔪.d z hzO _).mpr (InvertibleIdealQuotient.isInSpanAt_self rfl hlhol)
+    -- every generator `g ∘ π` is `W_j^μ h'` with `h'` a new generator
+    have hgen : ∀ g, G g → IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧
+        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z (g ∘ π) := by
+      intro g hg
+      obtain ⟨h', hh', heq⟩ := BlowupFunctionTransform.exists_eq_pow_mul hl hzO (h𝔪le _ _ (hGmem g hg))
+      exact isInSpanAt_of_eq_mul ⟨h', ⟨g, hg, hh', heq.mono fun y hy => hy⟩, rfl⟩
+        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (hhol _ _ (hGmem g hg)))
+        (holomorphicAt_const 1) (heq.mono fun y hy => by simp only [one_mul]; exact hy)
+    have hspan : IsInSpanAt (n := n) (fun t => ∃ h', (∃ g', G g' ∧ HolomorphicAt n h' z ∧
+        ∀ᶠ y in 𝓝 z, g' (π y) = W y j ^ 𝔪.d * h' y) ∧ t = fun y => W y j ^ 𝔪.d * h' y) z
+        (fun y => W y j ^ 𝔪.d * f y) := RelativePrincipalizationSpan.IsInSpanAt.trans (fun t ht => ?_)
+      (show IsInSpanAt (n := n) (fun s => ∃ a, (geoTransformAlong 𝔪 T).ideal.mem (π z) a ∧ s = a ∘ π) z
+        (fun y => W y j ^ 𝔪.d * f y) from hWf)
+    · obtain ⟨-, K, t, b, ht, hb, hsum⟩ := hspan
+      choose h' hh' htdef using ht
+      refine ⟨hfhol, K, h', b, fun i => hh' i, hb, ?_⟩
+      have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within (W := univ) hO hnonU hzO
+        (F := f) (G := fun y => ∑ i, b i y * h' i y) hfhol
+        (HolomorphicAt.sum _ fun i _ => (hb i).mul (hh' i).choose_spec.2.1) ?_
+      · filter_upwards [hcan] with y hy using hy (mem_univ y)
+      · filter_upwards [hsum] with y hy _
+        rw [hy, Finset.mul_sum]
+        refine Finset.sum_congr rfl fun i _ => ?_
+        rw [htdef i]; ring
+    · obtain ⟨a, ha, rfl⟩ := ht
+      exact RelativePrincipalizationSpan.IsInSpanAt.trans (fun s hs => by
+          obtain ⟨g, hg, rfl⟩ := hs; exact hgen g hg)
+        (isInSpanAt_comp_map (Eventually.of_forall hπd) (hGgen a ha))
+  · -- the normal derivatives
+    rintro h' ⟨g, hg, hh', hrel⟩ L hL hLlen
+    have hgp : HolomorphicAt n g (π z) := hhol _ _ (hGmem g hg)
+    have hLj : ∀ l ∈ L, l ≠ j ∧ kC ≤ l.1 := fun l hl' => by
+      have := hL l hl'
+      exact ⟨fun h => by rw [h] at this; omega, by omega⟩
+    have hid := nd_monomial_identity hπc c'' c' hO hzO hWeq' hc' hgp hh' hrel L hLj
+    have hnd := (hπc.tendsto z).eventually (hc''nd L hL g hgp)
+    obtain ⟨K, s, aa, hs, haa, hsum⟩ := hGder g hg L hL hLlen
+    have hdL : L.length ≤ 𝔪.d := hLlen.le
+    have hex : ∀ i, ∃ s' : Z → ℂ, HolomorphicAt n s' z ∧
+        (s i ∘ π) =ᶠ[𝓝 z] fun y => W y j ^ (𝔪.d - L.length) * s' y := fun i =>
+      BlowupFunctionTransform.exists_eq_pow_mul hl hzO (hDle _ hdL _ _ (hs i))
+    choose s' hs'hol hs'eq using hex
+    have hs'mem : ∀ i, (geoTransformAlong (derivMarked 𝔪 L.length) (.step T C π hπ)).ideal.mem z (s' i) := fun i => by
+      rw [hDideal _ hdL]
+      exact BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul hl hzO (hs i) (hs'hol i) (hs'eq i)
+    have hsub : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S → π z' ∈ strictAlong T S :=
+      Eventually.of_forall fun z' hz' =>
+        BlowupStrictSubmanifold.geoStrictTransform_subset_preimage hπc hSc hz'
+    have hmul : ∀ᶠ z' in 𝓝 z, z' ∈ strictAlong (.step T C π hπ) S →
+        W z' j ^ 𝔪.d * c'.nd L h' z' = W z' j ^ 𝔪.d * ∑ i, (aa i ∘ π) z' * s' i z' := by
+      filter_upwards [hid, hnd, (hπc.tendsto z).eventually hsum, eventually_all.mpr hs'eq, hsub] with
+        z' h1 h2 h3 h4 h5 hz'
+      rw [h1, h2, h3 (h5 hz'), Finset.mul_sum, Finset.mul_sum]
+      refine Finset.sum_congr rfl fun i _ => ?_
+      have h4i : s i (π z') = W z' j ^ (𝔪.d - L.length) * s' i z' := h4 i
+      have e : W z' j ^ 𝔪.d = W z' j ^ L.length * W z' j ^ (𝔪.d - L.length) := by
+        rw [← pow_add, Nat.add_sub_cancel' hdL]
+      rw [h4i, Function.comp_apply, e]
+      ring
+    have hcan := RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within hO hnonS hzO
+      (FlatChart.holomorphicAt_nd c' hh' L)
+      (HolomorphicAt.sum _ fun i _ =>
+        (HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i)).mul (hs'hol i)) hmul
+    exact ⟨K, s', fun i => aa i ∘ π, hs'mem,
+      fun i => HadamardBridge.holomorphicAt_comp_map (Eventually.of_forall hπd) (haa i), hcan⟩

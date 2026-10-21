@@ -1,0 +1,87 @@
+/- Two complete original missing regular-prefix prerequisites. Draft only; not a production module. -/
+import Hironaka.Support.CompactBlowupSurjectiveOriginalExact
+import Hironaka.Resolution.EmbeddedFromResolution
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+universe u v
+
+namespace Hironaka.EmbeddedFromResolution
+
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism
+  BlowupTowerTransforms RestrictEmptyTower RegularLocusComponent
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)
+
+noncomputable section
+variable {n : ℕ}
+
+section Invariant
+
+variable {k : ℕ} {Λ : Type v} [LinearOrder Λ] {X : CMfd.{u} n}
+  {inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
+
+/-- **The maximum locus over `U`**: for a canonical segment `T` of `(X, X, ∅, 𝓘_V, 1)` whose centres miss the preimages of
+`U = X ∖ V_sing`, once the maximum locus meets the preimage of `U` it contains, over `U`, exactly the preimage of `V`
+(`EmbeddingFields.inv_eq_over_open_of_isEmptyTower_of_pureDim`: `V ∩ U = V_reg` is a closed submanifold of `U` of pure
+dimension `dim V`). -/
+theorem mem_maxLocus_iff_of_centresAvoid (hF : EmbeddingFields n k inv) (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hcan : IsCanonical (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)
+      (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)) T)
+    (hT : CentresAvoid (regularOpen V) T) {c : Y}
+    (hc : c ∈ ResolutionDriver.maxLocus (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+      (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp)
+    (hcU : T.proj c ∈ regularOpen V) {y : Y} (hy : T.proj y ∈ regularOpen V) :
+    y ∈ ResolutionDriver.maxLocus (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+        (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp ↔
+      T.proj y ∈ V.carrier := by
+  have hTt := hF.isGeoTestTower_of_isCanonical hdom T hcan
+  have hcos := mem_cosupp_iff_of_centresAvoid V.isClosed_carrier hdom (regularOpen V) T hTt hT hy
+  refine ⟨fun h => hcos.mp h.1, fun h => ?_⟩
+  have hys := hcos.mpr h
+  have hpure : ∀ x ∈ (Subtype.val : regularOpen V → X) ⁻¹' V.carrier,
+      RegularAtDim (n := n) ((Subtype.val : regularOpen V → X) ⁻¹' V.carrier) x V.dim := fun x hx =>
+    AnalyticSubsetOpens.regularAtDim_preimage_val_iff.mpr (regularAtDim_of_mem_regularOpen hx x.2)
+  have hZ : IsClosedSubmanifold n ((Subtype.val : regularOpen V → X) ⁻¹' V.carrier) :=
+    ⟨V.isClosed_carrier.preimage continuous_subtype_val, fun x hx => ⟨V.dim, hpure x hx⟩⟩
+  have heq := hF.inv_eq_over_open_of_isEmptyTower_of_pureDim hdom (regularOpen V) hZ hpure T hcan
+    ((isEmptyTower_restrict_iff (regularOpen V) T).mpr hT) (p := ⟨c, hcU⟩) (p' := ⟨y, hy⟩) hc.1 hys
+  refine ⟨hys, fun y' hy' => ?_⟩
+  rw [show inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T y =
+      inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T c from heq]
+  exact hc.2 y' hy'
+
+end Invariant
+
+section Stopping
+
+variable {Λ : Type v} [LinearOrder Λ] {X : CMfd.{u} n}
+
+/-- **Some centre meets the smooth part**: along a multiple test blow-up of `(X, X, ∅, 𝓘_V, 1)` with empty final cosupport
+(a resolution), not every centre misses the preimage of `U = X ∖ V_sing` -- otherwise the cosupport over `U` would be the
+preimage of `V_reg ≠ ∅` (`mem_cosupp_iff_of_centresAvoid`; the projection is onto, `X` being compact). -/
+theorem not_centresAvoid_of_cosupp_eq_empty {k : ℕ} [CompactSpace X] (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hTt : IsGeoTestTower (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+    (hres : (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp = ∅) :
+    ¬ CentresAvoid (regularOpen V) T := by
+  intro hT
+  obtain ⟨x, hx⟩ := V.regularLocus_nonempty
+  obtain ⟨y, rfl⟩ := (StrictTransformComposition.IsBlowupSequence.compactSpace_surjective T.isBlowupSequence).2 x
+  have hyU : T.proj y ∈ regularOpen V := mem_regularOpen_of_regularAtDim hx
+  have hy := (mem_cosupp_iff_of_centresAvoid V.isClosed_carrier hdom (regularOpen V) T hTt hT hyU).mpr
+    (regularLocus_subset _ _ hx)
+  rw [hres] at hy
+  exact hy
+
+end Stopping
+
+end
+end Hironaka.EmbeddedFromResolution

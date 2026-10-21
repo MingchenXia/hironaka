@@ -1,0 +1,83 @@
+\section{The actual canonical ordered head-and-tail resolution on a relatively compact base}
+\label{sec:hironaka-original-local-canonical-ordered-resolution}
+
+\begin{theorem}[Original locally good parts internally construct the same actual local ordered resolution]
+\label{hir:original-local-canonical-ordered-resolution-producer}
+\lean{Hironaka.HironakaOriginalLocalCanonicalOrderedResolution.exists_local_canonical_ordered_resolution}
+Let $E$ be an actual ordered SNC boundary on $X^n$, $G$ a closed bad
+set and $L$ an original finite ordered list of locally good parts,
+meeting pairwise only inside $G$. For any genuine open holomorphic
+embedding $\iota:B\to X$ whose whole image has a compact enclosure,
+these original data construct an actual finite blowup tower $T$ over
+$B$ with the genuine canonical ordered-resolution provenance for the
+literal inverse-image list, its labels and the entire ordered
+boundary. Thus each head is separated by precisely the same ordered
+individual sums, then resolved by an actual pure first-meeting stage,
+and the literal tail is resolved over the prescribed cut-down bad set.
+
+The actual tower has centres over $\iota^{-1}G$ and is admissible there,
+with SNC entire final boundary. Every whole strict part is regular of
+its original labelled dimension, has normal crossings with that same
+entire final boundary, and distinct ordered parts have disjoint whole
+strict transforms. Original parts and their intersections need not be
+compact. No resolution tree, local host or stopping certificate is an
+input; no single CAN history for an unrelated mixed ideal is asserted.
+\uses{hir:original-local-canonical-ordered-separator-host,hir:original-local-pure-head-actual-host-producer,hir:original-canonical-ordered-resolution-tree}
+\leanok
+\end{theorem}
+\begin{proof}
+Induct on the actual length of the original list. The empty list uses
+the actual identity tower and its literal inverse-image boundary.
+
+For $(A,d)::L_0$, apply the original-only local ordered separator to
+the actual head, tail and original open embedding. It constructs the
+actual separator tower $T_0$ on $B$ and a genuine final host with an
+actual compact-enclosed open embedding of its endpoint. Its entire
+source boundary, bad set and strict parts are the literal inverse
+images of their host counterparts. Every transformed original part
+is locally good on this host. The host head is genuinely disjoint from
+every host tail part. Whole closed-pair intersection containment is
+preserved relative to the host bad set, as follows at every actual
+strict stage by containment in whole original preimages.
+
+Apply the original-only local pure-head host producer to this actual
+host head and its actual compact-enclosed open embedding. It constructs
+the actual source first-meeting stage $T_1$, its genuine pure-head
+record and a further actual compact-enclosed host. The whole boundary
+and strict-part identities identify the head input exactly with the
+strict head of $T_0$, rather than a supplied comparison certificate.
+On the second host let $K$ be the finite union of all transformed tail
+parts, and cut the actual host bad set down to its intersection with
+$K$. Each transformed tail part remains locally good after this cut,
+since it is contained in $K$; closed-pair intersection containment
+puts every pairwise tail intersection in this same cut-down bad set.
+The actual resolved host head is disjoint from $K$.
+
+Apply induction to these original data on the actual second host and
+its actual compact-enclosed open embedding. The entire boundary,
+bad-set and strict-list dictionaries identify its actual source input
+with exactly the cut-down bad set and literal strict tail required by
+the canonical ordered-resolution constructor. Append the three actual
+towers $T_0,T_1,T_2$. This constructor therefore records the same
+individual-sum separator, actual first-meeting head and recursive
+cut-down tail, retaining every chronological empty position and label.
+Centres-over and admissibility compose for these literal actual towers;
+the tail cut-down bad set is a subset of the inverse image of the
+original bad set.
+
+For the geometry, the true open embeddings pull the resolved host
+head's regularity and normal crossings back to the actual endpoint of
+$T_1$. The actual tail bad set misses this whole head, because it lies
+in the union of tail parts. Hence all later actual centres miss the
+whole resolved head. The genuine preserved-open strict-transform law
+identifies its final strict transform with its entire inverse image.
+The normal-crossings and regularity preservation theorem for an actual
+admissible sequence disjoint from that head gives both required final
+properties. Every tail part has the asserted regularity and normal
+crossings by induction, with strict-transform composition identifying
+its whole final strict carrier. The disjoint resolved head and tail
+parts remain disjoint because all later whole strict transforms lie
+in their closed preimages. Pairwise tail disjointness is inherited from
+induction. These are whole statements on the same actual final tower,
+including exceptional points and all chronological boundary members.
+\end{proof}

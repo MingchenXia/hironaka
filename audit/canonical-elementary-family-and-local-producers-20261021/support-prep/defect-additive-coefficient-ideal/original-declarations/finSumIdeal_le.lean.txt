@@ -1,0 +1,5 @@
+/-- A finite sum of ideals contained in a coherent ideal `𝔅` is contained in `𝔅`. -/
+theorem finSumIdeal_le {J : ℕ → GermIdeal n M} {m : ℕ} {𝔅 : GermIdeal n M} (h𝔅 : 𝔅.IsCoherent)
+    (h : ∀ i < m, (J i).Le 𝔅) : (finSumIdeal J m).Le 𝔅 := fun y g hg =>
+  HomogenizedIdeal.mem_of_isInSpanAt h𝔅 (IsInSpanAt.mono (fun s ⟨i, hi, hs⟩ => h i hi y s hs)
+    (show IsInSpanAt (n := n) (fun s => ∃ i, i < m ∧ (J i).mem y s) y g from hg))

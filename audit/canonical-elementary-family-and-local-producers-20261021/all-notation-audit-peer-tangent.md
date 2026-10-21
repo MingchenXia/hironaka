@@ -1,0 +1,11 @@
+# Expanded notation audit: separate final static peer review
+
+**PASS for the static protocol; the actual isolation run and captures are still pending.** All four new files were read in full. The native sources contain exactly the configured twenty notation clauses across ten distinct owners. The expected inventory is sixty public definitions and 120 across both sides, with a later actual physical environment of 1,523 modules (1,159 old + 363 new + the root).
+
+Only private actual definitions whose literal types are `Lean.ParserDescr`, `Lean.Macro`, or `Lean.PrettyPrinter.Unexpander` can be classified. Their complete bodies stay in the lossless raw captures. The whole environment scan rejects additional new-module frontend roots and scans every other actual constant's type and complete available value for classified frontend dependencies. The thirteen upstream-only names must actually remain absent.
+
+The initial F1 provenance finding is resolved in these exact final bytes. The runner persists and hashes source, native, public-artifact and control inventories, both plan snapshots, runner/probe source, actual witness, log and exit. The classifier requires that run's successful sibling verification, rechecks all its evidence and current inputs, and matches the exact thirteen absent names to the current node-extract plan. This prevents accepting stale same-count isolation evidence with fresh raw captures.
+
+Compressed and uncompressed hashes, bytes, row counts, root names, theorem counts, capture exit and transport guards preserve complete raw parent coverage. The permitted name relocation identifies already captured records; it does not rewrite a DAG. Every other actual root reaches the unchanged frozen comparator, and any mathematical difference blocks success. Separate all-root kernel and transitive-axiom gates remain required. No raw frontend-body structural equality is asserted.
+
+The old three-parent classifier remains at `c263f43e…7359`; the frozen comparator remains at `28bc2ba4…4c063`. The accompanying JSON binds all four exact reviewed hashes and the full native clause inventory. This peer review only read files and parsed Python syntax: it did not execute either audit script, Lean, any exporter/comparator, kernel replay, or production edit, and it does not claim an actual isolation PASS.

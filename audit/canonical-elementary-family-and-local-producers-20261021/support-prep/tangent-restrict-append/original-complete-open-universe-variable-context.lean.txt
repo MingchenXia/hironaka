@@ -1,0 +1,16 @@
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.RestrictEmptyTower
+
+open FirstPass FirstPass.BlowupSequences
+open TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms
+  TranscendentalNakamaye.Pending.BlowupTowerSplit
+open TranscendentalNakamaye.Pending.ResolutionInvariantExt (IsEmptyTower)
+
+noncomputable section
+
+variable {n : ℕ} {X : CMfd.{u} n}
+

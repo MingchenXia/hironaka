@@ -1,0 +1,104 @@
+\section{Actual directional derivatives and first dehomogeneous normal bands}
+
+Fix the actual point chart $(e,b)$, write $S$ for its genuine source
+linear shear, and put $v_e=1$, $v_i=b_i$ for $i\ne e$.
+The derivation $\delta_v=\sum_i v_i\partial_i$ is literal polynomial
+differentiation. Normality always means coefficient vanishing on the
+ENTIRE original source diagram, not on a newly chosen diagram.
+
+\begin{theorem}[Directional differentiation preserves source normality and computes actual chart bands]
+\label{hir:actual-directional-normal-polynomial-dehom-euler}
+\uses{hir:actual-formal-ideal-initial-diagram-upper,hir:actual-point-exceptional-restriction-dehomogenized-polynomial}
+\lean{TranscendentalNakamaye.Pending.HironakaActualDirectionalNormalJet.directionalPolynomialDerivative,TranscendentalNakamaye.Pending.HironakaActualDirectionalNormalJet.directional_derivative_normal,TranscendentalNakamaye.Pending.HironakaActualDirectionalNormalJet.directional_derivative_homogeneous,TranscendentalNakamaye.Pending.HironakaActualDirectionalNormalJet.dehom_directional_derivative_coefficient}
+\leanok
+The literal directional derivative of a source-diagram-normal polynomial
+is again source-diagram normal. If $P$ is homogeneous of degree $d$ and
+$f=\operatorname{dehom}_{e,b}P$, then at every exponent $\beta$,
+\[
+ [X^\beta]\operatorname{dehom}_{e,b}(\delta_vP)
+   =(d-|\beta|)[X^\beta]f.
+\]
+The scalar difference is taken in $\mathbb C$. For $d>0$ the derivative is homogeneous of degree $d-1$;
+for $d=0$ it is zero.
+\end{theorem}
+\begin{proof}
+At a source-diagram exponent $\beta$, each derivative coefficient is
+$(\beta_i+1)P_{\beta+\mathbf1_i}$. Upward closure puts every latter
+exponent in the source diagram, so each summand is zero. This proves
+normality for the finite actual directional sum.
+
+For $i\ne e$, direct differentiation of each actual substitution
+$X_e\mapsto1$, $X_j\mapsto b_j+X_j$ shows
+$\partial_i f=\operatorname{dehom}(\partial_iP)$.
+The same identity follows for products by the Leibniz rule and for sums
+and constants by additivity; thus it holds for the entire polynomial.
+Apply dehomogenization to Euler's homogeneous identity
+$\sum_i X_i\partial_iP=dP$. Split the pivot term from the other
+actual coordinates and collect the constant factors $b_i$. It gives
+\[
+ \operatorname{dehom}(\delta_vP)+\sum_i X_i\partial_i f=df.
+\]
+For each monomial of $f$, the second sum multiplies its coefficient by
+the sum of its exponents, namely $|\beta|$. Taking its genuine
+coefficient gives the displayed identity. Each partial derivative of a
+degree-$d$ homogeneous polynomial is homogeneous of degree $d-1$,
+including the zero case, and finite constant linear combinations retain
+that homogeneity.
+\end{proof}
+
+\begin{theorem}[A first actual dehomogeneous normal band cannot belong to the sheared source initial ideal]
+\label{hir:actual-first-dehom-normal-band-initial-independence}
+\uses{hir:actual-directional-normal-polynomial-dehom-euler,hir:actual-point-homogeneous-dehom-shear-identity,hir:actual-formal-normal-representative-unique,hir:actual-homogeneous-initial-ideal-diagram-equality}
+\lean{TranscendentalNakamaye.Pending.HironakaActualDirectionalNormalJet.first_dehomogeneous_normal_band_eq_zero}
+\leanok
+Let $K$ be an actual whole source formal ideal and $P$ a homogeneous
+degree-$d$ polynomial normal on $\Gamma(K)$. Let $k\le d$, and assume
+the actual dehomogenization $f$ has every coefficient of degree below
+$k$ zero. If its whole degree-$k$ band belongs to the genuine sheared
+ideal $S(\operatorname{in}K)$, that band is zero.
+\end{theorem}
+\begin{proof}
+Induct on $d-k$. When $d=k$, the actual affine-linear dehomogenization
+has degree at most $d$, and all lower coefficients vanish. It is
+therefore genuinely homogeneous of degree $d$. The actual homogeneous
+dehomogenization/shear identity gives $S(P)=f$. The membership assumption
+and the genuine inverse shear imply $P\in\operatorname{in}K$.
+The whole initial diagram equals $\Gamma(K)$, whereas all coefficients
+of $P$ there vanish. Actual normal-representative uniqueness makes
+$P=0$, and hence its actual dehomogeneous band is zero.
+
+When $d>k$, apply the preceding directional derivative theorem. The
+polynomial $\delta_vP$ is homogeneous of degree $d-1$ and source
+normal. Its actual dehomogenization still has all bands below $k$ zero,
+and its degree-$k$ band is exactly $(d-k)f_k$. This band belongs to the
+same whole sheared ideal because $f_k$ does. The induction hypothesis
+makes it zero. The positive integer $d-k$ is a nonzero complex scalar,
+so scalar cancellation yields $f_k=0$. This argument retains the
+original diagram and uses no source/current diagram inclusion.
+\end{proof}
+
+\begin{theorem}[The same canonical higher source bands supply the normal input]
+\label{hir:actual-canonical-higher-band-dehom-initial-independence}
+\uses{hir:actual-first-dehom-normal-band-initial-independence,hir:actual-reduced-formal-vertex-members}
+\lean{TranscendentalNakamaye.Pending.HironakaActualDirectionalNormalJet.canonical_higher_dehomogeneous_band_eq_zero}
+\leanok
+For every SAME canonical reduced source series $G_a$, every degree
+$d>|a|$ source band satisfies the preceding independence statement
+internally, without an incoming source-normality premise.
+\end{theorem}
+\begin{proof}
+Take the actual finite degree-$d$ homogeneous polynomial of $G_a$.
+At a source-diagram exponent its coefficient equals the corresponding
+whole canonical reduced coefficient. Such a coefficient is zero except
+possibly at $a$. That exception cannot have degree $d>|a|$.
+Thus the entire actual source band is source normal. It is genuinely
+homogeneous by construction. The preceding theorem applies to its
+actual dehomogeneous bands and the explicitly stated whole sheared
+initial-ideal membership, proving the conclusion for this SAME source
+family.
+\end{proof}
+
+The chart-band vanishing and ideal membership here are explicit finite
+algebra hypotheses. Their derivation from a first offending current
+normalized band and original persistent point geometry is separate.
+No full arbitrary-direction or positive-centre HS criterion is asserted.

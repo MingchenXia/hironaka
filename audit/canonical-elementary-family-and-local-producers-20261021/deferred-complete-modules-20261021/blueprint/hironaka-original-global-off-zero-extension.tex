@@ -1,0 +1,96 @@
+\section{The same original global terminal projection is biholomorphic off the true zero locus}
+
+The off-zero clause of principalization in \cite{wlodarczyk05-hironaka}
+is retained by the actual global terminal gluing.  The proof uses genuine
+finite terminal projections and the already constructed original saturated
+ranges, on a base which need not be compact.  It constructs an actual
+biholomorphism of open complements without presupposing a global blowup
+schedule.
+
+\begin{theorem}[The actual original global projection is surjective]
+\label{hir:original-global-terminal-projection-surjective}
+\lean{Hironaka.HironakaOriginalGlobalOffZero.originalTerminalGluedProjection_surjective}
+\leanok
+\uses{hir:original-input-covering-local-canonical-terminal-atlas,hir:original-input-local-terminal-glued-whole-continuous-projection,hir:principalization-local}
+For every original marked ideal in the invariant domain, its actual global
+terminal projection $P:Y\to X$ is surjective, without compactness of $X$.
+\end{theorem}
+\begin{proof}
+Fix $x\in X$.  Its internally chosen original atlas open $U_x$ contains
+$x$.  The actual local terminal tower projection $p_x:Y_x\to U_x$ is
+surjective, since each genuine blowup is surjective and the finite composite
+is surjective.  Choose a point above $x$ in this actual tower and apply
+the original local inclusion.  The whole projection dictionary identifies
+its global image with $x$.  This constructs a preimage of every original
+base point.
+\end{proof}
+
+\begin{theorem}[The actual original global projection is an isomorphism off the original ideal]
+\label{hir:original-global-terminal-isomorphism-off-true-ideal}
+\lean{Hironaka.HironakaOriginalGlobalOffZero.originalLocalTerminalProjection_isIsomorphismOffZero,Hironaka.HironakaOriginalGlobalOffZero.originalTerminalGluedProjection_isIsomorphismOffZero}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-global-terminal-projection-surjective,hir:original-global-principalization-true-support,hir:original-terminal-range-true-principalized-ideal,hir:original-input-terminal-glued-local-range-whole-open-preimage}
+For an original marked ideal $M$ in the invariant domain, with whole
+ambient submanifold and mark one, the same original global projection
+$P$ maps $P^{-1}(X\setminus Z(M.\mathfrak a))$ bijectively to
+$X\setminus Z(M.\mathfrak a)$, and its differential is invertible at
+every point of this inverse image.
+\end{theorem}
+\begin{proof}
+On each actual local terminal tower, mark-one principalization identifies
+the total transform with the tower's effective exceptional divisor.
+Its support is the inverse image of the original zero locus.  Every
+exceptional point of the finite tower lies in that support.  Genuine
+finite blowup geometry therefore says that the tower projection is
+bijective and has invertible differential off that true zero locus.
+
+The global projection is surjective by the preceding theorem, so it is
+surjective over the complement.  Suppose two global points in this
+complement have the same original projection.  Represent the first in
+one actual local terminal chart.  Saturation of that range puts the
+second point in the very same local range; take its actual representative
+there.  The whole projection dictionary gives equal images under the
+same local tower projection, in its off-zero region.  Its proved
+injectivity identifies the representatives, and then the global points.
+
+For invertibility of the differential, represent an arbitrary off-zero
+global point by a genuine local point.  The composite of the local tower
+projection with the original base-open inclusion is unramified there:
+the tower differential is invertible, as is the base-open inclusion's
+differential.  This entire composite equals the global projection
+composed with the actual holomorphic local inclusion.  The chain rule in
+equal complex dimensions implies that an invertible composite
+differential has invertible global-projection differential.  This proves
+the claimed nonexceptionality at every off-zero global point.
+\end{proof}
+
+\begin{theorem}[The true global open complements are genuinely biholomorphic]
+\label{hir:original-global-terminal-genuine-off-zero-biholomorphism}
+\lean{Hironaka.HironakaOriginalGlobalOffZero.originalTerminalOffZeroBaseOpen,Hironaka.HironakaOriginalGlobalOffZero.originalTerminalOffZeroSourceOpen,Hironaka.HironakaOriginalGlobalOffZero.originalTerminalOffZeroBiholomorphism,Hironaka.HironakaOriginalGlobalOffZero.originalTerminalOffZeroBiholomorphism_point}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-global-terminal-isomorphism-off-true-ideal,hir:original-input-global-terminal-whole-projection-holomorphic}
+The actual opens $X\setminus Z(M.\mathfrak a)$ and its true inverse image
+inside the original global terminal manifold are genuinely biholomorphic.
+The forward map is the restriction of the same original global projection
+$P$, with both holomorphic directions proved.
+\end{theorem}
+\begin{proof}
+Coherence makes the original zero locus closed.  Its complement is
+therefore an actual open submanifold, and holomorphicity of $P$ makes
+its true inverse image open.  The preceding theorem constructs a
+bijection between these actual open submanifolds.  Its forward map is
+holomorphic because it is the original projection restricted to these
+opens.  Fix a point of the target complement and its actual inverse
+representative.  The original projection is unramified at that
+representative, so the holomorphic inverse function theorem supplies
+a local holomorphic inverse on a neighborhood of the target point.
+Intersect that neighborhood with the complement.  Every local inverse
+value lies in the true source complement because its projection is the
+target point.  Global off-zero injectivity therefore identifies this
+local inverse with the actual inverse of the constructed bijection on
+the whole neighborhood.  The actual inverse is holomorphic there, and
+this holds at every target point.  Bundle the bijection and the two
+proved holomorphic directions into the genuine biholomorphism.
+\end{proof}

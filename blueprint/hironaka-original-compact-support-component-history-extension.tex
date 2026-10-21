@@ -1,0 +1,143 @@
+\section{Actual noncompact histories from compact connected components of the original support}
+
+All components in this section are the actual connected components of the
+original analytic support, including components containing intersecting
+irreducible branches. The ambient manifold may be connected and noncompact.
+There is no assumption of a bound on the invariants or terminal lengths
+across components. Compactness of each support component is an explicit
+geometric restriction; arbitrary connected noncompact support remains outside
+this theorem.
+
+\begin{lemma}[Connected components of a genuine analytic support are locally finite]
+\label{hir:original-analytic-support-connected-components-locally-finite}
+\uses{rem:global-components}
+\lean{Hironaka.HironakaOriginalCompactSupportComponentHistory.supportComponents,Hironaka.HironakaOriginalCompactSupportComponentHistory.component_isClosed,Hironaka.HironakaOriginalCompactSupportComponentHistory.component_pairwise_disjoint,Hironaka.HironakaOriginalCompactSupportComponentHistory.sUnion_supportComponents,Hironaka.HironakaOriginalCompactSupportComponentHistory.locallyFinite_supportComponents}
+\leanok
+Let $S$ be a genuine analytic subset of a complex manifold. Its actual
+nonempty connected components form a locally finite family of closed,
+pairwise disjoint subsets whose union is $S$.
+\end{lemma}
+\begin{proof}
+Each connected component is preconnected, contained in $S$, and contains
+its defining point. Because $S$ is closed, the closure of such a component
+is still a preconnected subset of $S$ through that point. Maximality of
+the connected component places the closure in the component, proving
+closedness. Two components meeting at a point are the component through
+that same point and hence coincide. Their union is $S$ by the defining
+point of every component.
+
+Use the genuine locally finite global irreducible components of $S$.
+Each is the closure of a connected component of the full regular locus,
+so is preconnected and lies in one actual connected component of $S$.
+Near any ambient point, choose an open set meeting only finitely many
+global irreducible components. Every connected component meeting this
+open has a point in it; the actual irreducible-component union supplies
+an irreducible component through that point. This irreducible component
+meets the same open and lies wholly in that connected component. Thus
+the connected components meeting the open are contained in the image
+of a finite set of irreducible components. They form a finite set,
+which proves local finiteness without assuming local connectedness as
+an extra input.
+\end{proof}
+
+\begin{lemma}[The original components internally supply exact compact support windows]
+\label{hir:original-compact-support-component-windows}
+\uses{hir:original-analytic-support-connected-components-locally-finite}
+\lean{Hironaka.HironakaOriginalCompactSupportComponentHistory.componentWindow,Hironaka.HironakaOriginalCompactSupportComponentHistory.componentWindow_inter_support,Hironaka.HironakaOriginalCompactSupportComponentHistory.componentWindow_cover,Hironaka.HironakaOriginalCompactSupportComponentHistory.componentWindow_support_disjoint,Hironaka.HironakaOriginalCompactSupportComponentHistory.isCompact_restricted_component_cosupp}
+\leanok
+For an original marked ideal with genuine analytic cosupport $S$, let $C$
+be an actual connected component of $S$. The complement of the union of
+all other whole connected components is an actual open $U_C$, and
+$U_C\cap S=C$. These internally defined opens cover $S$ and are pairwise
+disjoint on $S$. If $C$ is compact, the entire original restricted
+cosupport on $U_C$ is compact.
+\end{lemma}
+\begin{proof}
+A subfamily of a locally finite closed family has closed union. Its
+complement therefore gives the stated actual open. Pairwise disjointness
+puts every point of $C$ in that complement; conversely a point of $S$
+is in some actual component and can belong to this complement only if
+that component is $C$. This proves the whole trace equation, and hence
+the cover and support-disjointness assertions. The exact coherent
+cosupport restriction law identifies the restricted cosupport with the
+inverse image of $C$. The actual subtype inclusion is an inducing map
+and $C$ lies entirely in its range. Compactness therefore lifts to its
+inverse image. No centre is truncated to make its support compact.
+\end{proof}
+
+\begin{theorem}[Original component compactness internally constructs a real locally finite history]
+\label{hir:original-compact-support-components-actual-history}
+\uses{hir:original-compact-support-component-windows,hir:support-disjoint-canonical-global-refinement,hir:support-disjoint-canonical-growing-history,hir:compact-cosupport-maximum-sequence-terminates}
+\lean{Hironaka.HironakaOriginalCompactSupportComponentHistory.LocallyTerminalComponentHistory,Hironaka.HironakaOriginalCompactSupportComponentHistory.exists_original_component_compact_locally_terminal_history}
+\leanok
+Let $M$ be an original marked ideal in the actual canonical invariant
+domain. Suppose every actual connected component of its original
+cosupport is compact. These original data internally produce one
+actual growing sequence of global elementary blowups. Every prefix is
+an original test tower and its restriction to each $U_C$ is canonical
+for the same original restricted marked datum; every restricted actual
+next centre is the whole actual maximum locus, with empty positions
+retained. On each $U_C$ this same constructed history is eventually a
+resolution. The actual centre images on the original base are closed
+and locally finite. Around every ambient point all sufficiently late
+actual blowup maps are isomorphisms, and every finite restricted tail
+is a genuine all-empty tower. No sequence, compatible atlas, schedule,
+terminal time or global maximum is an input.
+\end{theorem}
+\begin{proof}
+Coherence and the original invariant domain make the whole original
+cosupport analytic. Apply the preceding lemmas to its actual connected
+components, thereby constructing the whole support-disjoint open cover
+and the compact original restricted cosupports internally.
+
+Iterate the genuine support-disjoint canonical refinement theorem on
+the state consisting of the actual original global prefix, its test
+property and all its actual restricted canonical prefixes. At every
+step that theorem constructs a globally closed smooth admissible whole
+union of local maximum centres and an actual proper blowup. The current
+cosupport maps into the original one, so its whole centre trace on each
+window is exactly that window's maximum; overlaps outside the support
+contribute empty centres. This constructs the actual growing sequence
+before any terminal time is known.
+
+Fix one original component window. Its original restricted cosupport
+is compact. The actual per-sequence compact centre-count bound applies
+to the same restricted canonical history. If its cosupport never became
+empty, compactness and upper semicontinuity would give an attained
+nonempty whole maximum at every actual step, increasing that count at
+every step and contradicting the bound. Once empty, the true test
+transforms remain empty, so this same history is eventually a resolution.
+
+The support-disjoint centre trace now proves eventual avoidance of each
+window. Outside the original closed cosupport, every actual centre
+already misses the original open complement. Thus every ambient point
+has an open neighbourhood meeting only finitely many actual centre
+images. Their images are closed under actual proper prefix maps.
+The actual chosen successor maps are isomorphisms over the avoided
+neighbourhood, and literal restriction of each actual finite tail has
+only empty centres. The argument covers empty support and uses no
+uniform bound across components.
+\end{proof}
+
+\begin{corollary}[Original coherent ideals with component-compact zero locus]
+\label{hir:original-coherent-ideal-component-compact-scheduler}
+\uses{hir:original-compact-support-components-actual-history}
+\lean{Hironaka.HironakaOriginalCompactSupportComponentHistory.exists_original_ideal_component_compact_history}
+\leanok
+An original coherent holomorphic ideal, nonzero along the original
+ambient manifold, together with an original ordered SNC boundary,
+has the preceding actual global locally finite history whenever every
+actual connected component of its zero locus is compact. The literal
+original marked datum is $(X,X,E_0,I,1)$. No invariant-domain or history
+certificate is an extra input.
+\end{corollary}
+\begin{proof}
+The original coherence, nonzero condition and SNC boundary internally
+give the genuine canonical invariant domain for this literal marked
+datum. Its whole cosupport equals the original zero locus by the
+coherent marking-one formula. Rewrite the actual connected-component
+compactness assumption through that whole equality and apply the
+preceding original-only history producer. All intermediate global
+blowups and all local terminal/empty-tail conclusions belong to that
+same internally constructed history.
+\end{proof}

@@ -1,0 +1,87 @@
+\section{Entire original coefficient quotients for a smooth product}
+
+Let $B=\mathcal O_{\mathbb C^d,0}$ and
+$R=\mathcal O_{\mathbb C^{d+t},0}$, with the actual pullback by the first
+coordinate projection. Let $I\subset B$ be any whole original ideal and
+$J\subset R$ the ideal of the last $t$ coordinates. The following are
+quotients by $IR+J^s$, retaining the free-coordinate truncation. Computing
+ambient HS subsequently requires the mixed powers of the actual maximal
+ideal; a uniform normal cutoff alone is not that computation.
+
+\begin{lemma}[Whole extension ideals are exactly original scalar multiples in the true quotient]
+\label{hir:actual-product-entire-extension-ideal-module-quotient}
+\lean{Hironaka.HironakaActualProductTruncatedQuotient.actualExtendedIdealImage,Hironaka.HironakaActualProductTruncatedQuotient.actualExtendedIdealQuotientEquiv,Hironaka.HironakaActualProductTruncatedQuotient.actualExtendedIdealQuotientEquiv_mk}
+\leanok
+For any commutative complex algebras $B\to R$, actual ideals $I\subset B$
+and $K\subset R$, the image of $IR$ in the whole ring $Q=R/K$, restricted
+to its original $B$-module action, is exactly $I Q$. Hence the true
+quotient $R/(IR+K)$ is naturally $B$-linearly equivalent to $Q/IQ$.
+Every original numerator keeps its actual two quotient classes.
+\end{lemma}
+\begin{proof}
+An element of the extended ideal is a finite sum of original multiples
+of images of elements of $I$. Taking the actual quotient map sends such
+a sum to exactly a finite sum $\sum b_iq_i$ with $b_i\in I$ and $q_i\in Q$.
+Conversely choose an original representative in $R$ for each $q_i$; the
+same sum is then the quotient image of an element of $IR$. These prove
+both inclusions with the original scalar action. The kernel of the
+composite $R\to Q\to Q/IQ$ is precisely $IR+K$: a zero class means its
+first quotient agrees with that of some member of $IR$, so their
+original difference lies in $K$. Surjectivity of both actual quotient
+maps and this entire kernel identify the quotients. The construction
+sends the class of each $g\in R$ to the class of its actual class in $Q$.
+\end{proof}
+
+\begin{theorem}[Genuine product truncations have all original coefficient quotient coordinates]
+\label{hir:actual-product-normal-truncation-entire-coefficient-quotient}
+\uses{hir:actual-product-entire-extension-ideal-module-quotient,hir:relative-normal-basis-actual-entire-quotient-basis,hir:relative-normal-actual-free-quotient-coordinate-ideal}
+\lean{Hironaka.HironakaActualProductTruncatedQuotient.actualNormalPowerCoefficientIdeal,Hironaka.HironakaActualProductTruncatedQuotient.actualProductTruncationEquiv,Hironaka.HironakaActualProductTruncatedQuotient.actualProductTruncationEquiv_monomial_sum}
+\leanok
+Let $A_s=\{\alpha\in\mathbb N^t:|\alpha|<s\}$. For the genuine original
+coordinate projection, the entire original product quotient
+$R/(IR+J^s)$ is $B$-linearly equivalent to
+$\prod_{\alpha\in A_s}B/I$. Its original complex action is retained.
+For every finite original polynomial $\sum_{\alpha\in A_s}a_\alpha z^\alpha$,
+the equivalence gives exactly the classes $(a_\alpha\bmod I)_\alpha$.
+\end{theorem}
+\begin{proof}
+Actual original relative Hadamard division and true holomorphic
+coefficient separation have already constructed the genuine $B$-linear
+monomial equivalence $R/J^s\simeq B^{A_s}$; each basis vector is the class
+of its original normal monomial. Under this actual equivalence, $I(R/J^s)$
+is exactly the families with every coordinate in $I$. Indeed scalar
+multiples have their coordinates in $I$, and conversely a finite such
+family is the sum of its coordinate entries times the original unit
+coordinate vectors. Quotienting therefore gives $\prod_{A_s}B/I$.
+Compose with the preceding true extension-ideal quotient comparison.
+The existing genuine monomial combination formula shows that every
+original finite polynomial has the stated coefficient tuple. Restricting
+scalars along the original complex algebra action preserves these same
+maps and every original class.
+\end{proof}
+
+\begin{corollary}[Exact whole product membership and finite dimensions]
+\label{hir:actual-product-normal-truncation-coefficient-membership-dimension}
+\uses{hir:actual-product-normal-truncation-entire-coefficient-quotient}
+\lean{Hironaka.HironakaActualProductTruncatedQuotient.actualProductPolynomial_mem_iff,Hironaka.HironakaActualProductTruncatedQuotient.actualProductTruncationDimension,Hironaka.HironakaActualProductTruncatedQuotient.actualProductTruncationFinite}
+\leanok
+A genuine lower-degree original polynomial
+$\sum_{\alpha\in A_s}a_\alpha z^\alpha$ belongs to $IR+J^s$ if and only if
+EVERY whole original coefficient $a_\alpha$ belongs to $I$. If $B/I$ is
+finite-dimensional over the original complex field, then
+$\dim_\mathbb C R/(IR+J^s)=|A_s|\dim_\mathbb C B/I$; the product quotient
+is finite-dimensional. The statements include $s=0$ and zero free
+coordinate dimension.
+\end{corollary}
+\begin{proof}
+The actual quotient class is zero exactly when its image under the
+preceding genuine equivalence is zero, and the literal coefficient
+formula says exactly that each original coefficient class vanishes.
+For the dimension formula, restrict the genuine $B$-linear equivalence
+to the original complex scalars and compute the dimension of its finite
+product: each factor is the same actual $B/I$, so the dimension is its
+true dimension times the number of original indices. Finiteness follows
+from the actual finite product equivalence. When $A_s$ is empty both
+quotients are zero and all coordinate membership conditions are empty;
+no nonempty-index assumption was used.
+\end{proof}

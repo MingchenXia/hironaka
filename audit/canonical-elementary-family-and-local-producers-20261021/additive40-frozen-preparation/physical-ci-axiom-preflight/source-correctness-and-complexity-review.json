@@ -1,0 +1,64 @@
+{
+  "status": "SOURCE_ONLY_CORRECTNESS_REVIEW_AND_NEW_AUDIT_DRAFT_NO_RUNTIME",
+  "finding": "The old loop visits physical moduleData CIs, but collectAxioms receives only ci.name. Its imported extension lookup chooses env.getModuleIdxFor? Name; fallback chooses env.checked.find? Name. Consequently a physically different CI with that same Name is not necessarily inspected by the root-name call.",
+  "conditional_scope": "This is a potential coverage gap if same-name physical CIs have different own dependency payloads. Duplicate Names alone do not prove different bodies or nonstandard axioms, and no past gate failure is asserted.",
+  "old_gate_untouched": {
+    "path": "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/AllActualStandaloneRoots.lean",
+    "sha256": "96edbf71347f3a3860973901dba873c1886798f8e9ba0e8e4363e81f0a6a17a5"
+  },
+  "standard_Lean_collector": {
+    "path": "/workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/src/lean/Lean/Util/CollectAxioms.lean",
+    "sha256": "64f340d42f18c51ee83527f03fa69cc26415dd71dcf7fe71031b7760be90007d",
+    "import_cache_resolution": "ExportedAxiomsState.find? uses env.getModuleIdxFor? c and indexed Name cache",
+    "fallback_resolution": "CollectAxioms.collect uses env.checked.get.find? c",
+    "no_physical_CI_argument": true
+  },
+  "new_audit_source": {
+    "path": "/workspace/archon-nakamaye/work/g1-g9-20261021-phase3/publication/additive40-prep/physical-ci-axiom-preflight/AllActualStandaloneRootsPhysicalCI.lean",
+    "sha256": "859d409510268992fefbee9913f5eeba7de4c3644dcc25266b5dfb895f3fc0fb",
+    "lines": 162,
+    "syntax_or_runtime_check_performed": false
+  },
+  "source_semantic_checks": {
+    "actual_module_roster_exact_and_no_duplicates": true,
+    "all_physical_CI_observations_retained_without_global_Name_dedup": true,
+    "own_type_getUsedConstants_scanned": true,
+    "own_whole_value_allowOpaque_scanned": true,
+    "definition_theorem_opaque_body_none_fails": true,
+    "actual_axiomInfo_name_validated_directly": true,
+    "allowed_name_axiomInfo_type_strictly_matches_checked_standard_axiom": true,
+    "own_inductive_constructor_links_added_like_standard_collector": true,
+    "direct_callees_deduplicated_per_physical_CI": true,
+    "transitive_callee_cache_keyed_by_global_Name_semantics": true,
+    "unresolved_direct_callee_fails_without_fallback": true,
+    "standard_collector_called_on_callees_not_root_replacement": true,
+    "all_frontend_definitions_scanned_and_counted": true,
+    "global_Name_duplicates_reported_with_all_physical_owners": true,
+    "own_root_kind_and_actual_environment_resolution_owner_logged_separately": true,
+    "no_kernel_or_Expr_replay_added": true
+  },
+  "complexity": {
+    "own_payload_work": "Linear traversal of each actual CI own type/value, plus NameSet insertion for distinct direct constants; shared Expr behavior follows Lean Expr.getUsedConstants.",
+    "dedup": "Per-root type/value/constructor direct names unioned before transitive calls.",
+    "global_cache": "Each distinct global direct callee invokes standard collectAxioms at most once; imported declarations normally use Lean precomputed axiom entries.",
+    "bound": "O(total scanned physical type/value traversal + E log d + D standard cached collection); E=per-root deduplicated direct edges, d=per-root direct names, D=distinct environment callee names. No repeated whole kernel or AST export.",
+    "memory": "Per-root direct NameSet, global callee-to-small-axiom-array cache, and full per-physical-root JSON result rows; no Expr DAG serialization."
+  },
+  "execution_interface_for_publisher_after_review": {
+    "no_run_authorized_by_this_preparation": true,
+    "source": "lake env lean ABS_AUDIT_SOURCE (read-only, no -o/-i)",
+    "roster_env": "HIRONAKA_PHYSICAL_CI_ROSTER=final363 complete actual source module roster path",
+    "output_env": "HIRONAKA_PHYSICAL_CI_OUTPUT=fresh final-only audit JSON path",
+    "default_roster": "audit/canonical-elementary-family-and-local-producers-20261021/all-standalone-modules.txt",
+    "gate_scope": "Final-only complete metadata/axiom gate; retain old gate logs rather than replaying old kernel/Expr cohorts."
+  },
+  "limits": [
+    "No source-only review can assert successful elaboration or actual standard-axiom results; final runtime remains pending.",
+    "Transitive Expr.const references retain ordinary global Name semantics; each Hironaka physical root is checked separately, while standard collector resolves each callee through the checked imported environment.",
+    "The new audit does not establish equality of duplicate CI type/value payloads or replace whole-Expr and kernel gates.",
+    "A failure to resolve a direct imported callee is an explicit BLOCKED diagnostic; it is never silently treated as axiom-free."
+  ],
+  "observed_nonstandard_axiom_or_actual_different_duplicate_body": false,
+  "Lean_runtime_invocations": 0,
+  "production_or_frozen_tool_edits": 0
+}

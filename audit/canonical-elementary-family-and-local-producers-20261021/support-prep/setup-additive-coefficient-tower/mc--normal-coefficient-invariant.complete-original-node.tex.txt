@@ -1,0 +1,16 @@
+\begin{lemma}[The coefficient invariant]
+\label{mc:normal-coefficient-invariant}
+\uses{mc:flat-chart,mc:normal-derivative-ideal,mc:normal-taylor-order,mc:restrict-marked,mc:derivative-marked,ana:local-holomorphic-inverse}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientRestrictionTower.vanishesToOrderOn_of_isInSpanOnAt,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.GoodAt.orderGE,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.goodAt_refl,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.isInSpanAt_comp_map,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.exists_of_map,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.eventually_map_inv,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.FlatChart.holomorphicAt_nd}
+\leanok
+Let \(\underline{\mathcal I}=(X,X,E,\mathfrak a,\mu)\), \(\mathfrak a\) coherent, \(S\) a closed submanifold and \(T\) a tower. A point \(p\in S_T\) is \emph{good} if there are a flat chart
+for \(S_T\) at \(p\) and generators of \((\mathfrak a_T)_p\) whose normal derivatives \(\partial^L\), \(|L|<\mu\), restrict on \(S_T\) near \(p\) into
+\([\mathcal D^{|L|}\mathfrak a]_T\). At a good point where every \([\mathcal D^i\mathfrak a]_T\) has order \(\ge\mu-i\) along \(S_T\), every germ of \(\mathfrak a_T\) lies in
+\(\mathfrak m_p^\mu\). Every point of \(S\) is good for the empty tower.
+\end{lemma}
+\begin{proof}
+\leanok
+The first statement is Lemma~\ref{mc:normal-taylor-order} for the generators. For the empty tower take all germs of \(\mathfrak a\) as generators and
+Lemma~\ref{mc:normal-derivative-ideal}.
+\end{proof}

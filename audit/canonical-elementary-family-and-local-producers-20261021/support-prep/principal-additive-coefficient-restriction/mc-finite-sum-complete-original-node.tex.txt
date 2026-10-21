@@ -1,0 +1,17 @@
+\begin{lemma}[Finite sums of ideals]
+\label{mc:finite-sum}
+\uses{mc:homogenized-coherent,mc:coherent-germs,hir:controlled-operations,hir:cosupport-basic,bcalc:controlled-transform-def}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_one,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_congr,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_le,TranscendentalNakamaye.Pending.CoefficientIdeal.isCoherent_finSumIdeal_of_lt,TranscendentalNakamaye.Pending.CoefficientIdeal.mem_cosupport_finSumIdeal,TranscendentalNakamaye.Pending.CoefficientIdeal.controlledTransform_finSumIdeal}
+\leanok
+Let \(\mathfrak J_0,\dots,\mathfrak J_{m-1}\) be coherent. Then \(\sum_{i<m}\mathfrak J_i\) is coherent; it is contained in every coherent ideal containing all
+\(\mathfrak J_i\); \(\operatorname{cosupp}(\sum_{i<m}\mathfrak J_i,\mu)=\bigcap_{i<m}\operatorname{cosupp}(\mathfrak J_i,\mu)\); and if \(m\ge1\) and
+\(\mathfrak J_i\subset\mathcal I_C^\mu\) for all \(i\), then \(\sigma^{\mathrm c}(\sum_{i<m}\mathfrak J_i,\mu)=\sum_{i<m}\sigma^{\mathrm c}(\mathfrak J_i,\mu)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Coherence: Lemma~\ref{mc:homogenized-coherent}. A germ of the sum is a holomorphic combination of germs of the \(\mathfrak J_i\); this gives the
+inclusion and, since a combination of germs vanishing to order \(\mu\) vanishes to order \(\mu\), the cosupport (the reverse inclusion because each
+\(\mathfrak J_i\) is contained in the sum). The controlled transform: induction on \(m\), starting from \(\sum_{i<1}\mathfrak J_i=\mathfrak J_0\), with
+\(\sum_{i<m+1}\mathfrak J_i=\sum_{i<m}\mathfrak J_i+\mathfrak J_m\) and \(\sigma^{\mathrm c}(\mathfrak a+\mathfrak b,\mu)=\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu)\)
+for coherent \(\mathfrak a,\mathfrak b\subset\mathcal I_C^\mu\) (Lemma~\ref{hir:controlled-operations}); the partial sums are contained in the coherent ideal \(\mathcal I_C^\mu\).
+\end{proof}

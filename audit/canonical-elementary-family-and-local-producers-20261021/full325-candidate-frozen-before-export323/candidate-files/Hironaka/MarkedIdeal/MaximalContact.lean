@@ -1,0 +1,129 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.MarkedIdeal.MaximalOrderDefinition
+import Hironaka.MarkedIdeal.DerivativeIdeal
+
+set_option autoImplicit false
+
+/-!
+# Marked ideals of maximal order and tangent directions
+
+Hironaka phase H3 (TN23-ENVELOPES, agreed with TN-CLASSICAL on I-0981); blueprint
+`mc:maximal-order`, `mc:maximal-order-derivative`, `mc:tangent-direction`,
+`mc:tangent-direction-support`, `mc:tangent-direction-exists`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, §2.7 (Villamayor, Giraud).
+
+For a marked ideal `(𝔞, μ)` on the complex manifold `M` itself (`N = M`; derivative ideals
+`DerivativeIdeal.iterDerivIdeal`, cosupport `GermIdealOrder.cosupport univ`):
+
+* `IsMaximalOrder 𝔞 μ`: `𝓓^μ(𝔞) = 𝒪_M`;
+  `IsMaximalOrder.iterDerivIdeal`: `(𝓓^i 𝔞, μ - i)` is of maximal order for `i ≤ μ`
+  (`iterDerivIdeal_iterDerivIdeal : 𝓓^j(𝓓^i 𝔞) = 𝓓^{i+j} 𝔞`);
+* `cosupport_add_subset_cosupport_iterDerivIdeal`: `cosupp(𝔞, μ + j) ⊆ cosupp(𝓓^j 𝔞, μ)`
+  (iterating TN-CLASSICAL's `cosupport_succ_subset_cosupport_derivIdeal`);
+* `IsTangentDirection 𝔞 μ U u`: `u` is a germ of `𝓓^{μ-1}(𝔞)` at every point of the open set `U`
+  and has a nonvanishing partial derivative (in some chart) at every zero in `U`;
+  `IsTangentDirection.cosupport_subset`: `cosupp(𝔞, μ) ∩ U ⊆ V(u)` (for `μ ≥ 1`);
+* `exists_isTangentDirection`: a coherent marked ideal of maximal order has a tangent direction
+  near every point of its cosupport.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
+-/
+
+open Set Filter
+open scoped Topology Manifold
+
+namespace Hironaka.MaximalContact
+
+open Hironaka.HolomorphicIdealSheaves GermIdealOrder DerivativeIdeal
+
+noncomputable section
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+
+
+
+
+/-- **A tangent direction** of `(𝔞, μ)` on the open set `U` (Włodarczyk §2.7): a germ of
+`𝓓^{μ-1}(𝔞)` at every point of `U`, of multiplicity one (a nonvanishing partial derivative in
+some chart at each of its zeros in `U`). -/
+structure IsTangentDirection (𝔞 : GermIdeal n M) (μ : ℕ) (U : Set M) (u : M → ℂ) : Prop where
+  isOpen : IsOpen U
+  mem : ∀ x ∈ U, (iterDerivIdeal 𝔞 (μ - 1)).mem x u
+  multiplicity_one : ∀ x ∈ U, u x = 0 →
+    ∃ (e : ComplexChart n M) (v : ComplexModel n), x ∈ e.val.source ∧ chartDeriv e v u x ≠ 0
+
+/-- Every germ of `𝓓^{μ-1}(𝔞)` vanishes on `cosupp(𝔞, μ)`. -/
+theorem apply_eq_zero_of_mem_cosupport {𝔞 : GermIdeal n M}
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ) {x : M}
+    (hx : x ∈ cosupport n univ 𝔞 μ) {g : M → ℂ} (hg : (iterDerivIdeal 𝔞 (μ - 1)).mem x g) :
+    g x = 0 := by
+  have hx' : x ∈ cosupport n univ (iterDerivIdeal 𝔞 (μ - 1)) 1 := by
+    refine cosupport_add_subset_cosupport_iterDerivIdeal 𝔞 1 (μ - 1) ?_
+    rwa [Nat.add_sub_cancel' hμ]
+  exact (vanishesToOrderOn_one_iff (mem_univ x)
+    (holomorphicAt_of_mem_iterDerivIdeal h𝔞 (μ - 1) x g hg)).mp (hx'.2 g hg)
+
+/-- **The cosupport lies on every tangent direction**: `cosupp(𝔞, μ) ∩ U ⊆ V(u)`. -/
+theorem IsTangentDirection.cosupport_inter_subset {𝔞 : GermIdeal n M}
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ) {U : Set M} {u : M → ℂ}
+    (hu : IsTangentDirection 𝔞 μ U u) : cosupport n univ 𝔞 μ ∩ U ⊆ {x | u x = 0} :=
+  fun x hx => apply_eq_zero_of_mem_cosupport h𝔞 hμ hx.1 (hu.mem x hx.2)
+
+/-- **Existence of tangent directions** (Włodarczyk §2.7): a coherent marked ideal of maximal order
+has a tangent direction on a neighbourhood of every point of its cosupport. -/
+theorem exists_isTangentDirection {𝔞 : GermIdeal n M} (hcoh : 𝔞.IsCoherent)
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ)
+    (hmax : IsMaximalOrder 𝔞 μ) {x : M} (hx : x ∈ cosupport n univ 𝔞 μ) :
+    ∃ (U : Set M) (u : M → ℂ), x ∈ U ∧ IsTangentDirection 𝔞 μ U u := by
+  classical
+  -- generators of `𝓓^{μ-1}(𝔞)` near `x`
+  obtain ⟨U, hUo, hxU, N, s, hs, hgen⟩ := isCoherent_iterDerivIdeal hcoh (μ - 1) x
+  set e := complexChartAt (n := n) x
+  have hU'o : IsOpen (U ∩ e.val.source) := hUo.inter e.val.open_source
+  have hxU' : x ∈ U ∩ e.val.source := ⟨hxU, mem_complexChartAt_source x⟩
+  have hhol : ∀ i, ∀ z ∈ U, HolomorphicAt n (s i) z := fun i z hz =>
+    eventually_of_mem (hUo.mem_nhds hz) fun w hw => (hs i w hw).mdifferentiableAt (hUo.mem_nhds hw)
+  have hsmem : ∀ i, ∀ y ∈ U, (iterDerivIdeal 𝔞 (μ - 1)).mem y (s i) := fun i y hy =>
+    (hgen y hy (s i)).mpr (isInSpanAt_of_eq_mul ⟨i, rfl⟩ (hhol i y hy) (holomorphicAt_const 1)
+      (Eventually.of_forall fun _ => (one_mul _).symm))
+  -- `1 ∈ 𝓓(𝓓^{μ-1} 𝔞)_x = 𝓓^μ(𝔞)_x`, written with the one-chart generators
+  have h1 : (derivIdeal (iterDerivIdeal 𝔞 (μ - 1))).mem x (fun _ => 1) := by
+    have := hmax x
+    rwa [show μ = (μ - 1) + 1 by omega, iterDerivIdeal_succ] at this
+  have h1' := (derivIdeal_mem_iff_of_generators hU'o (fun i => (hs i).mono inter_subset_left)
+    (fun w hw => hgen w hw.1) e inter_subset_right hxU' _).mp h1
+  obtain ⟨-, K, t, a, ht, -, hsum⟩ := h1'
+  -- some generator does not vanish at `x`
+  have hne : ∃ k, t k x ≠ 0 := by
+    by_contra hall
+    push Not at hall
+    have h0 := hsum.self_of_nhds
+    simp only [hall, mul_zero, Finset.sum_const_zero] at h0
+    exact one_ne_zero h0
+  obtain ⟨k, hk⟩ := hne
+  obtain ⟨c, hc⟩ := ht k
+  rcases c with i | ⟨i, j⟩
+  · -- a generator of `𝓓^{μ-1}(𝔞)` vanishes on the cosupport
+    exact absurd (apply_eq_zero_of_mem_cosupport h𝔞 hμ hx (hsmem i x hxU)) (by
+      simpa [derivFamily, ← hc] using hk)
+  · -- a partial derivative `∂_j sᵢ` does not vanish at `x`; use `u = sᵢ`
+    have hk' : chartDeriv e (EuclideanSpace.single j 1) (s i) x ≠ 0 := by
+      simpa [derivFamily, ← hc] using hk
+    have hcont : ContinuousAt (chartDeriv e (EuclideanSpace.single j 1) (s i)) x :=
+      (holomorphicAt_chartDeriv hxU'.2 (hhol i x hxU)).self_of_nhds.continuousAt
+    obtain ⟨V, hVsub, hVo, hxV⟩ := eventually_nhds_iff.mp
+      (hcont.eventually (isOpen_ne.mem_nhds hk'))
+    refine ⟨V ∩ (U ∩ e.val.source), s i, ⟨hxV, hxU'⟩,
+      ⟨hVo.inter hU'o, fun y hy => hsmem i y hy.2.1, fun y hy _ => ?_⟩⟩
+    exact ⟨e, EuclideanSpace.single j 1, hy.2.2, hVsub y hy.1⟩
+
+end
+
+end Hironaka.MaximalContact

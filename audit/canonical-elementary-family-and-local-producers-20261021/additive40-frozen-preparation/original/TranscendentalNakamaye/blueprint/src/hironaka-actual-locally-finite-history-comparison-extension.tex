@@ -1,0 +1,76 @@
+\section{Actual late-prefix comparisons for locally finite histories}
+
+The history here is an actual growing sequence of global blowups, whose
+actual centre images are locally finite. No canonical invariant, original
+marked record, compatible finite-history atlas or overlap comparison is an
+input. These are coherence producers for the composite of a genuine locally
+finite history, rather than an existence assumption for such a history.
+
+\begin{lemma}[Actual local finiteness internally produces stabilizing windows]
+\label{hir:actual-locally-finite-history-stabilizing-windows}
+\uses{hir:growing-sequence-actual-centres,hir:growing-sequence-actual-tail-tower,hir:growing-sequence-empty-restricted-tails}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.exists_actual_stabilizing_window}
+\leanok
+For an actual growing sequence with locally finite actual centre images,
+every original base point has an actual open neighbourhood $U$ and an index
+$N$ such that every actual centre after $N$ misses its prefix inverse image
+of $U$. Every finite actual tail from $N$, restricted above $U$, is an
+all-empty tower. No invariant or global maximum is needed.
+\end{lemma}
+\begin{proof}
+Local finiteness supplies a neighbourhood meeting only finitely many actual
+centre images. Choose an actual open neighbourhood inside it and choose
+$N$ strictly above the finitely many indices meeting the larger neighbourhood.
+A later centre over this open would put its actual image among those finitely
+many indices, a contradiction. The actual tail tower is constructed from the
+recorded successor maps. Restricting every genuine step above this avoided
+open makes its centre empty, proving the all-empty assertion for every finite
+tail, including the zero tail.
+\end{proof}
+
+\begin{theorem}[The actual late prefixes have unique whole comparisons]
+\label{hir:actual-locally-finite-history-late-prefix-comparison}
+\uses{hir:actual-locally-finite-history-stabilizing-windows,hir:original-all-empty-tower-projection,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.exists_unique_late_prefix_comparison,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.latePrefixComparison,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.latePrefixComparison_proj}
+\leanok
+On an actual stabilizing window $U$ from index $N$, any two late actual
+restricted prefixes $T_i|_U$ and $T_j|_U$, with $i,j\ge N$, have a unique
+actual endpoint biholomorphism $\beta_{ij}$ such that
+$T_i|_U\circ\beta_{ij}=T_j|_U$. The comparison is constructed from the same
+recorded history, without an incoming endpoint map or comparison certificate.
+\end{theorem}
+\begin{proof}
+First compare any actual prefix $T_{N+r}|_U$ to $T_N|_U$. The literal
+constructed tail from $N$ to $N+r$ restricts to an all-empty tower. Its
+whole actual projection is a biholomorphism. The exact equality obtained by
+appending this actual tail to $T_N$ identifies its domain with the actual
+inverse image of $U$ at stage $N+r$. The real projection formula therefore
+constructs a biholomorphism to the stage-$N$ inverse image, commuting with the
+whole original restricted prefix projections. Compose the stage-$j$ map
+with the inverse of the stage-$i$ map to obtain the desired comparison.
+Two such endpoint biholomorphisms have equal composites with the actual
+finite restricted tower projection. Genuine whole-projection uniqueness for
+actual blowup towers forces them to agree. It requires no canonicity or
+terminal ideal assumption.
+\end{proof}
+
+\begin{lemma}[Actual late-prefix identity, inverse and cocycle]
+\label{hir:actual-locally-finite-history-comparison-cocycle}
+\uses{hir:actual-locally-finite-history-late-prefix-comparison}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.latePrefixComparison_self,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.latePrefixComparison_symm,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryComparison.latePrefixComparison_trans}
+\leanok
+These same constructed comparisons satisfy $\beta_{ii}=\mathrm{id}$,
+$\beta_{ij}^{-1}=\beta_{ji}$ and
+$\beta_{ij}\circ\beta_{jk}=\beta_{ik}$ on every actual stabilizing window.
+Every recorded empty position remains part of the underlying prefixes.
+\end{lemma}
+\begin{proof}
+The actual identity map commutes with the same prefix projection, so the
+proved uniqueness identifies it with $\beta_{ii}$. The genuine inverse
+commutes with the two projections by applying the original equation at its
+inverse point; uniqueness identifies it with $\beta_{ji}$. The actual
+composite of two comparisons commutes with the original projection by their
+two proved whole projection equations, so uniqueness identifies it with the
+third comparison. All maps act on the actual restricted endpoint manifolds;
+no deletion of empty positions or common raw stopping index is used.
+\end{proof}

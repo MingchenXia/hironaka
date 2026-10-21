@@ -1,0 +1,88 @@
+{
+  "status": "DRAFT_ONLY_EXACT_INTEGRATION_SIDECAR_NO_PRODUCTION_INSTALL",
+  "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "published_git_source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/DerivativeIdealTower.lean",
+  "source_module": "TranscendentalNakamaye.Pending.DerivativeIdealTower",
+  "native_project_source_path": "TranscendentalNakamaye/Pending/DerivativeIdealTower.lean",
+  "whole_original_source_capture": "audit/canonical-elementary-family-and-local-producers-20261021/support-prep/tangent-additive-derivative-tower/original-DerivativeIdealTower.lean",
+  "whole_original_source_sha256": "5d0a19bc9e64cc955eb1e40467c20b54fcaa0b540cc93ec08a5d91e9ace37851",
+  "destination_module": "Hironaka.Support.DerivativeIdealTowerOriginalExact",
+  "destination_path": "Hironaka/Support/DerivativeIdealTowerOriginalExact.lean",
+  "destination_logical_namespace": "Hironaka.DerivativeIdealTower",
+  "entire_draft_path": "audit/canonical-elementary-family-and-local-producers-20261021/support-prep/tangent-additive-derivative-tower/DerivativeIdealTowerOriginalExact.lean",
+  "entire_draft_sha256": "53188593456e9d883695212f80528ce13537423c07573523a0e4b0098d2bffdc",
+  "selected_complete_chunks": [
+    {
+      "declaration": "cosupp_subset_cosupp_derivMarked",
+      "original_inclusive_line_range": [
+        67,
+        75
+      ],
+      "complete_original_chunk": "/-- **Giraud** (`N = M`): `cosupp(\ud835\udd2a) \u2286 cosupp(\ud835\udcd3^j \ud835\udd2a)` for `j \u2264 d`. -/\ntheorem cosupp_subset_cosupp_derivMarked {\ud835\udd2a : MarkedIdeal n M} (hN : \ud835\udd2a.N = univ) {j : \u2115}\n    (hj : j \u2264 \ud835\udd2a.d) : \ud835\udd2a.cosupp \u2286 (derivMarked \ud835\udd2a j).cosupp := by\n  intro y hy\n  have h1 : y \u2208 cosupport n univ \ud835\udd2a.ideal ((\ud835\udd2a.d - j) + j) := by\n    rw [Nat.sub_add_cancel hj, \u2190 hN]; exact hy\n  have h2 := MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal \ud835\udd2a.ideal (\ud835\udd2a.d - j) j h1\n  show y \u2208 cosupport n \ud835\udd2a.N (iterDerivIdeal \ud835\udd2a.ideal j) (\ud835\udd2a.d - j)\n  rw [hN]; exact h2\n",
+      "complete_relocated_chunk": "/-- **Giraud** (`N = M`): `cosupp(\ud835\udd2a) \u2286 cosupp(\ud835\udcd3^j \ud835\udd2a)` for `j \u2264 d`. -/\ntheorem cosupp_subset_cosupp_derivMarked {\ud835\udd2a : MarkedIdeal n M} (hN : \ud835\udd2a.N = univ) {j : \u2115}\n    (hj : j \u2264 \ud835\udd2a.d) : \ud835\udd2a.cosupp \u2286 (derivMarked \ud835\udd2a j).cosupp := by\n  intro y hy\n  have h1 : y \u2208 cosupport n univ \ud835\udd2a.ideal ((\ud835\udd2a.d - j) + j) := by\n    rw [Nat.sub_add_cancel hj, \u2190 hN]; exact hy\n  have h2 := MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal \ud835\udd2a.ideal (\ud835\udd2a.d - j) j h1\n  show y \u2208 cosupport n \ud835\udd2a.N (iterDerivIdeal \ud835\udd2a.ideal j) (\ud835\udd2a.d - j)\n  rw [hN]; exact h2\n",
+      "original_chunk_sha256": "244735c1d183bb9dc43e68371bb5f69b0a6561edcc26d03eb6cde9444798530a",
+      "relocated_chunk_sha256": "244735c1d183bb9dc43e68371bb5f69b0a6561edcc26d03eb6cde9444798530a",
+      "draft_start_character": 692,
+      "draft_end_character_exclusive": 1218
+    },
+    {
+      "declaration": "controlledTransform_le_of_le",
+      "original_inclusive_line_range": [
+        80,
+        83
+      ],
+      "complete_original_chunk": "/-- **Controlled transforms are monotone in the ideal.** -/\ntheorem controlledTransform_le_of_le (h\u03c0 : IsBlowupAlong n C \u03c0) {\ud835\udd1f \ud835\udd20 : GermIdeal n M}\n    (h : \ud835\udd1f.Le \ud835\udd20) (\u03bc : \u2115) : (controlledTransform h\u03c0 \ud835\udd1f \u03bc).Le (controlledTransform h\u03c0 \ud835\udd20 \u03bc) :=\n  fun y _ hf => \u27e8hf.1, fun g hg => GermIdealPullbackCalculus.pullback_le_pullback h y _ (hf.2 g hg)\u27e9\n",
+      "complete_relocated_chunk": "/-- **Controlled transforms are monotone in the ideal.** -/\ntheorem controlledTransform_le_of_le (h\u03c0 : IsBlowupAlong n C \u03c0) {\ud835\udd1f \ud835\udd20 : GermIdeal n M}\n    (h : \ud835\udd1f.Le \ud835\udd20) (\u03bc : \u2115) : (controlledTransform h\u03c0 \ud835\udd1f \u03bc).Le (controlledTransform h\u03c0 \ud835\udd20 \u03bc) :=\n  fun y _ hf => \u27e8hf.1, fun g hg => GermIdealPullbackCalculus.pullback_le_pullback h y _ (hf.2 g hg)\u27e9\n",
+      "original_chunk_sha256": "491c865c06d6d4a252f213c87fc24956fee199d158cbbe6e4d2c743745357000",
+      "relocated_chunk_sha256": "491c865c06d6d4a252f213c87fc24956fee199d158cbbe6e4d2c743745357000",
+      "draft_start_character": 1352,
+      "draft_end_character_exclusive": 1690
+    },
+    {
+      "declaration": "inclusions_tower",
+      "original_inclusive_line_range": [
+        93,
+        153
+      ],
+      "complete_original_chunk": "/-- **W\u0142odarczyk, Lemma `le:inclusions2`** (`N = M`, transform with centre-relative strict\ntransforms): let `\ud835\udd2a = (X, X, E, \ud835\udd1e, d)` with `\ud835\udd1e` coherent and `j \u2264 d`.  Every multiple test blow-up\n`T` of `\ud835\udd2a` is a multiple test blow-up of `\ud835\udcd3^j(\ud835\udd2a)`, and `[\ud835\udcd3^j(\ud835\udd2a)]_T \u2286 \ud835\udcd3^j(\ud835\udd2a_T)`.  Along `T` both\ntransforms keep `N` the whole space and the same `E`, and their ideals stay coherent. -/\ntheorem inclusions_tower (\ud835\udd2a : MarkedIdeal n X) (hN : \ud835\udd2a.N = univ) (h\ud835\udd1e : \ud835\udd2a.ideal.IsCoherent)\n    {j : \u2115} (hj : j \u2264 \ud835\udd2a.d) :\n    {Y : CMfd.{u} n} \u2192 (T : BlowupTower X Y) \u2192 IsGeoTestTower \ud835\udd2a T \u2192\n      IsGeoTestTower (derivMarked \ud835\udd2a j) T \u2227\n      (geoTransformAlong \ud835\udd2a T).N = univ \u2227 (geoTransformAlong (derivMarked \ud835\udd2a j) T).N = univ \u2227\n      (geoTransformAlong (derivMarked \ud835\udd2a j) T).E = (geoTransformAlong \ud835\udd2a T).E \u2227\n      (geoTransformAlong \ud835\udd2a T).ideal.IsCoherent \u2227\n      (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal.IsCoherent \u2227\n      (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal.Le\n        (iterDerivIdeal (geoTransformAlong \ud835\udd2a T).ideal j)\n  | _, .refl => fun _ =>\n      \u27e8trivial, hN, hN, rfl, h\ud835\udd1e, isCoherent_iterDerivIdeal h\ud835\udd1e j, fun _ _ h => h\u27e9\n  | _, .step T C \u03c0 h\u03c0 => fun hT => by\n      obtain \u27e8hT0, hC\u27e9 := (isGeoTestTower_step_iff \ud835\udd2a T C \u03c0 h\u03c0).mp hT\n      obtain \u27e8hD, hNT, hNDT, hE, hcoh, hcohD, hle\u27e9 := inclusions_tower \ud835\udd2a hN h\ud835\udd1e hj T hT0\n      have hd : (geoTransformAlong \ud835\udd2a T).d = \ud835\udd2a.d := d_geoTransformAlong \ud835\udd2a T\n      have hdD : (geoTransformAlong (derivMarked \ud835\udd2a j) T).d = \ud835\udd2a.d - j :=\n        d_geoTransformAlong (derivMarked \ud835\udd2a j) T\n      -- the centre is admissible for the transform of `\ud835\udcd3^j(\ud835\udd2a)`\n      have hCD : (geoTransformAlong (derivMarked \ud835\udd2a j) T).IsAdmissibleCentre C := by\n        refine \u27e8hC.1, fun y hy => ?_, by rw [hE]; exact hC.2.2\u27e9\n        have h1 : y \u2208 cosupport n univ (geoTransformAlong \ud835\udd2a T).ideal ((\ud835\udd2a.d - j) + j) := by\n          have := hC.2.1 hy\n          rwa [MarkedIdeal.cosupp, hNT, hd, \u2190 Nat.sub_add_cancel hj] at this\n        have h2 := MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal\n          (geoTransformAlong \ud835\udd2a T).ideal (\ud835\udd2a.d - j) j h1\n        show y \u2208 cosupport n (geoTransformAlong (derivMarked \ud835\udd2a j) T).N\n          (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal (geoTransformAlong (derivMarked \ud835\udd2a j) T).d\n        rw [hNDT, hdD]\n        exact cosupport_subset_of_le hle (\ud835\udd2a.d - j) h2\n      have hleC : (geoTransformAlong \ud835\udd2a T).ideal.Le\n          (idealPow (vanishingIdeal (n := n) C) (\ud835\udd2a.d - j + j)) := by\n        rw [Nat.sub_add_cancel hj, \u2190 hd]\n        exact HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcoh hC\n      have hleCD : (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal.Le\n          (idealPow (vanishingIdeal (n := n) C) (geoTransformAlong (derivMarked \ud835\udd2a j) T).d) :=\n        HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNDT hcohD hCD\n      have hT' : (geoTransformAlong \ud835\udd2a (.step T C \u03c0 h\u03c0)).ideal =\n          controlledTransform h\u03c0 (geoTransformAlong \ud835\udd2a T).ideal (geoTransformAlong \ud835\udd2a T).d := by\n        rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcoh h\u03c0]\n      have hTD' : (geoTransformAlong (derivMarked \ud835\udd2a j) (.step T C \u03c0 h\u03c0)).ideal =\n          controlledTransform h\u03c0 (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal\n            (geoTransformAlong (derivMarked \ud835\udd2a j) T).d := by\n        rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNDT hcohD h\u03c0]\n      refine \u27e8(isGeoTestTower_step_iff (derivMarked \ud835\udd2a j) T C \u03c0 h\u03c0).mpr \u27e8hD, hCD\u27e9,\n        geoTransform_N_eq_univ hNT h\u03c0, geoTransform_N_eq_univ hNDT h\u03c0, ?_, ?_, ?_, ?_\u27e9\n      \u00b7 simp only [geoTransformAlong_step, geoTransform_E, hE]\n      \u00b7 rw [hT']\n        exact isCoherent_controlledTransform h\u03c0 hcoh\n          (HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcoh hC)\n      \u00b7 rw [hTD']\n        exact isCoherent_controlledTransform h\u03c0 hcohD hleCD\n      \u00b7 rw [hTD', hT', hdD, hd]\n        have hinc := BlowupDerivativeIdeal.controlledTransform_iterDerivIdeal_le h\u03c0 hcoh j (\ud835\udd2a.d - j)\n          hleC\n        rw [Nat.sub_add_cancel hj] at hinc\n        exact fun y g hg => hinc y g (controlledTransform_le_of_le h\u03c0 hle (\ud835\udd2a.d - j) y g hg)\n",
+      "complete_relocated_chunk": "/-- **W\u0142odarczyk, Lemma `le:inclusions2`** (`N = M`, transform with centre-relative strict\ntransforms): let `\ud835\udd2a = (X, X, E, \ud835\udd1e, d)` with `\ud835\udd1e` coherent and `j \u2264 d`.  Every multiple test blow-up\n`T` of `\ud835\udd2a` is a multiple test blow-up of `\ud835\udcd3^j(\ud835\udd2a)`, and `[\ud835\udcd3^j(\ud835\udd2a)]_T \u2286 \ud835\udcd3^j(\ud835\udd2a_T)`.  Along `T` both\ntransforms keep `N` the whole space and the same `E`, and their ideals stay coherent. -/\ntheorem inclusions_tower (\ud835\udd2a : MarkedIdeal n X) (hN : \ud835\udd2a.N = univ) (h\ud835\udd1e : \ud835\udd2a.ideal.IsCoherent)\n    {j : \u2115} (hj : j \u2264 \ud835\udd2a.d) :\n    {Y : CMfd.{u} n} \u2192 (T : BlowupTower X Y) \u2192 IsGeoTestTower \ud835\udd2a T \u2192\n      IsGeoTestTower (derivMarked \ud835\udd2a j) T \u2227\n      (geoTransformAlong \ud835\udd2a T).N = univ \u2227 (geoTransformAlong (derivMarked \ud835\udd2a j) T).N = univ \u2227\n      (geoTransformAlong (derivMarked \ud835\udd2a j) T).E = (geoTransformAlong \ud835\udd2a T).E \u2227\n      (geoTransformAlong \ud835\udd2a T).ideal.IsCoherent \u2227\n      (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal.IsCoherent \u2227\n      (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal.Le\n        (iterDerivIdeal (geoTransformAlong \ud835\udd2a T).ideal j)\n  | _, .refl => fun _ =>\n      \u27e8trivial, hN, hN, rfl, h\ud835\udd1e, isCoherent_iterDerivIdeal h\ud835\udd1e j, fun _ _ h => h\u27e9\n  | _, .step T C \u03c0 h\u03c0 => fun hT => by\n      obtain \u27e8hT0, hC\u27e9 := (isGeoTestTower_step_iff \ud835\udd2a T C \u03c0 h\u03c0).mp hT\n      obtain \u27e8hD, hNT, hNDT, hE, hcoh, hcohD, hle\u27e9 := inclusions_tower \ud835\udd2a hN h\ud835\udd1e hj T hT0\n      have hd : (geoTransformAlong \ud835\udd2a T).d = \ud835\udd2a.d := d_geoTransformAlong \ud835\udd2a T\n      have hdD : (geoTransformAlong (derivMarked \ud835\udd2a j) T).d = \ud835\udd2a.d - j :=\n        d_geoTransformAlong (derivMarked \ud835\udd2a j) T\n      -- the centre is admissible for the transform of `\ud835\udcd3^j(\ud835\udd2a)`\n      have hCD : (geoTransformAlong (derivMarked \ud835\udd2a j) T).IsAdmissibleCentre C := by\n        refine \u27e8hC.1, fun y hy => ?_, by rw [hE]; exact hC.2.2\u27e9\n        have h1 : y \u2208 cosupport n univ (geoTransformAlong \ud835\udd2a T).ideal ((\ud835\udd2a.d - j) + j) := by\n          have := hC.2.1 hy\n          rwa [MarkedIdeal.cosupp, hNT, hd, \u2190 Nat.sub_add_cancel hj] at this\n        have h2 := MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal\n          (geoTransformAlong \ud835\udd2a T).ideal (\ud835\udd2a.d - j) j h1\n        show y \u2208 cosupport n (geoTransformAlong (derivMarked \ud835\udd2a j) T).N\n          (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal (geoTransformAlong (derivMarked \ud835\udd2a j) T).d\n        rw [hNDT, hdD]\n        exact cosupport_subset_of_le hle (\ud835\udd2a.d - j) h2\n      have hleC : (geoTransformAlong \ud835\udd2a T).ideal.Le\n          (idealPow (vanishingIdeal (n := n) C) (\ud835\udd2a.d - j + j)) := by\n        rw [Nat.sub_add_cancel hj, \u2190 hd]\n        exact HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcoh hC\n      have hleCD : (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal.Le\n          (idealPow (vanishingIdeal (n := n) C) (geoTransformAlong (derivMarked \ud835\udd2a j) T).d) :=\n        HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNDT hcohD hCD\n      have hT' : (geoTransformAlong \ud835\udd2a (.step T C \u03c0 h\u03c0)).ideal =\n          controlledTransform h\u03c0 (geoTransformAlong \ud835\udd2a T).ideal (geoTransformAlong \ud835\udd2a T).d := by\n        rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNT hcoh h\u03c0]\n      have hTD' : (geoTransformAlong (derivMarked \ud835\udd2a j) (.step T C \u03c0 h\u03c0)).ideal =\n          controlledTransform h\u03c0 (geoTransformAlong (derivMarked \ud835\udd2a j) T).ideal\n            (geoTransformAlong (derivMarked \ud835\udd2a j) T).d := by\n        rw [geoTransformAlong_step, geoTransform_ideal_eq_controlledTransform hNDT hcohD h\u03c0]\n      refine \u27e8(isGeoTestTower_step_iff (derivMarked \ud835\udd2a j) T C \u03c0 h\u03c0).mpr \u27e8hD, hCD\u27e9,\n        geoTransform_N_eq_univ hNT h\u03c0, geoTransform_N_eq_univ hNDT h\u03c0, ?_, ?_, ?_, ?_\u27e9\n      \u00b7 simp only [geoTransformAlong_step, geoTransform_E, hE]\n      \u00b7 rw [hT']\n        exact isCoherent_controlledTransform h\u03c0 hcoh\n          (HadamardBridge.ideal_le_idealPow_of_isAdmissibleCentre hNT hcoh hC)\n      \u00b7 rw [hTD']\n        exact isCoherent_controlledTransform h\u03c0 hcohD hleCD\n      \u00b7 rw [hTD', hT', hdD, hd]\n        have hinc := BlowupDerivativeIdeal.controlledTransform_iterDerivIdeal_le h\u03c0 hcoh j (\ud835\udd2a.d - j)\n          hleC\n        rw [Nat.sub_add_cancel hj] at hinc\n        exact fun y g hg => hinc y g (controlledTransform_le_of_le h\u03c0 hle (\ud835\udd2a.d - j) y g hg)\n",
+      "original_chunk_sha256": "ddfeff0a532a12dfe33f0439bec986c19b208b5237e639e277292c6aa3b7754e",
+      "relocated_chunk_sha256": "ddfeff0a532a12dfe33f0439bec986c19b208b5237e639e277292c6aa3b7754e",
+      "draft_start_character": 1755,
+      "draft_end_character_exclusive": 5829
+    }
+  ],
+  "context_segments": [
+    {
+      "context_segment_index": 0,
+      "start_character": 0,
+      "end_character_exclusive": 692,
+      "sha256": "85e055e2bdba6c64df6364d44415573ffa1b26f41b10d20702fcbc5da3465aab",
+      "text": "import Hironaka.MarkedIdeal.DerivativeAmbientMarkedDataExact\nimport Hironaka.Blowup.BlowupDerivativeMaximalOrder\nimport Hironaka.MarkedIdeal.HadamardBridge\n\nset_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter\nopen scoped Topology Manifold\n\nuniverse u\n\nnamespace Hironaka.DerivativeIdealTower\n\nopen Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal\n  IdealWeightPowers BlowupControlledTransform BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal\n\nnoncomputable section\n\nsection OneSpace\n\nvariable {n : \u2115} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n\nvariable [IsComplexManifold n M]\n\n"
+    },
+    {
+      "context_segment_index": 1,
+      "start_character": 1218,
+      "end_character_exclusive": 1352,
+      "sha256": "453d764fb9855ea8e047d2542477737a130a187e8f74b1d448b783fb0055a400",
+      "text": "\nvariable {M' : Type u} [TopologicalSpace M'] [ChartedSpace (ComplexModel n) M']\n  [IsComplexManifold n M'] {C : Set M} {\u03c0 : M' \u2192 M}\n\n"
+    },
+    {
+      "context_segment_index": 2,
+      "start_character": 1690,
+      "end_character_exclusive": 1755,
+      "sha256": "788e3b0a889eed66a4e80a91c610c3f1ff4b19188f1c517d7dd7ca2348a56e9e",
+      "text": "\nend OneSpace\n\nsection Tower\n\nvariable {n : \u2115} {X : CMfd.{u} n}\n\n"
+    },
+    {
+      "context_segment_index": 3,
+      "start_character": 5829,
+      "end_character_exclusive": 5880,
+      "sha256": "bd8a5e6c7ac7ba4e957824586052ba14fed4480b4ca096556076b6853dfdc136",
+      "text": "\nend Tower\n\nend\n\nend Hironaka.DerivativeIdealTower\n"
+    }
+  ],
+  "all_selected_chunks_and_intervening_context_partition_entire_draft": true,
+  "source_and_draft_bytes_unchanged": true,
+  "runtime_invoked": false
+}

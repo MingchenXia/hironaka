@@ -1,0 +1,73 @@
+✔ [4711/4721] Built Hironaka.Resolution.HironakaActualSignedConeDivision (3.0s)
+✔ [4713/4723] Built Hironaka.Resolution.HironakaActualBlowupConeInverse (3.3s)
+✔ [4717/4727] Built Hironaka.Resolution.HironakaActualZeroPointReducedTail (3.2s)
+✔ [4720/4728] Built Hironaka.Resolution.HironakaActualExceptionalFilteredDivision (5.9s)
+✔ [4721/4728] Built Hironaka.Resolution.HironakaActualExceptionalJetHSComparison (4.9s)
+✔ [4723/4728] Built Hironaka.Resolution.HironakaActualPointOrderRetainingHS (4.9s)
+✔ [4724/4728] Built Hironaka.Resolution.HironakaActualExceptionalJetRigidity (3.9s)
+✔ [4725/4728] Built Hironaka.Resolution.HironakaActualAxisTaylorRigidity (4.2s)
+✔ [4726/4728] Built Hironaka.Resolution.HironakaActualInitialPivotNormality (4.3s)
+✔ [4727/4801] Built Hironaka.Resolution.HironakaActualDirectionalNormalJet (4.3s)
+ℹ [4735/4801] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [4897/4902] Built Hironaka.Resolution.HironakaActualTowerLiftUniqueness (2.9s)
+✔ [4898/4902] Built Hironaka.Resolution.HironakaActualLocallyFiniteHistoryComparison (3.5s)
+✔ [4899/4904] Built Hironaka.Resolution.HironakaActualLocallyFiniteHistoryOverlap (5.2s)
+✔ [4900/4909] Built Hironaka.Resolution.HironakaActualLocallyFiniteHistoryLimit (3.7s)
+✔ [4902/4909] Built Hironaka.Resolution.HironakaActualLocallyFiniteHistoryFactors (6.0s)
+✔ [4905/4909] Built Hironaka.Resolution.HironakaActualRelativePolynomialRehomogenization (5.8s)
+✔ [4906/4909] Built Hironaka.Resolution.HironakaActualRelativeExceptionalFibreRelations (5.9s)
+✔ [4907/4912] Built Hironaka.Resolution.HironakaActualRelativeNormalizedSaturation (9.4s)
+✔ [4908/4912] Built Hironaka.Resolution.HironakaActualMixedCoefficientOrders (4.6s)
+✔ [4909/4912] Built Hironaka.Resolution.HironakaActualRelativePointChartFactorization (3.6s)
+✔ [4910/4912] Built Hironaka.Resolution.HironakaActualTangentScalingFiltration (3.8s)
+✔ [4911/4919] Built Hironaka.Resolution.HironakaActualNormalCoordinateReindex (8.0s)
+✔ [4916/4921] Built Hironaka.Resolution.HironakaActualPointNormalizedCoefficientBands (3.7s)
+✔ [4917/4921] Built Hironaka.Resolution.HironakaActualPersistentPointConeDerivatives (5.5s)
+✔ [4919/4921] Built Hironaka.Resolution.HironakaActualZeroPointHSOrderCriterion (4.1s)
+✖ [4920/4924] Building Hironaka.Resolution.HironakaNormalCrossingsIntrinsicStratumCentre (2.0s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.setup.json --json
+error: Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.lean:51:29: Unknown identifier `le_sumIdeal_left`
+error: Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.lean:52:24: Unknown identifier `le_sumIdeal_right`
+error: Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.lean:72:13: Unknown identifier `isCoherent_iterDerivIdeal`
+error: Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.lean:68:78: unsolved goals
+n : ℕ
+X : CMfd n
+I : GermIdeal n X.carrier
+hI : I.IsCoherent
+j : ℕ
+H : Set X.carrier
+hH : IsNormalCrossingsCarrier H
+r : ℕ
+hbound : ∀ (x : X.carrier), branchMultiplicity hH x ≤ r
+hZ : IsClosedSubmanifold n {y | r ≤ branchMultiplicity hH y}
+hZI : (vanishingIdeal {y | r ≤ branchMultiplicity hH y}).IsCoherent
+⊢ (stratumDetectionIdeal I j {x | r ≤ branchMultiplicity hH x}).IsCoherent ∧
+    (stratumDetectionIdeal I j {x | r ≤ branchMultiplicity hH x}).zeroLocus =
+      {x | r ≤ branchMultiplicity hH x} ∩ cosupport n univ I (j + 1)
+error: Hironaka/Resolution/HironakaNormalCrossingsIntrinsicStratumCentre.lean:95:11: Unknown identifier `le_sumIdeal_left`
+error: Lean exited with code 1
+✔ [4923/4934] Built Hironaka.Resolution.HironakaOpenCarrierTestTowerExtension (2.7s)
+✔ [4932/4934] Built Hironaka.Resolution.HironakaOriginalDiscreteFullCutCentres (3.7s)
+✔ [4934/4967] Built Hironaka.Resolution.HironakaOriginalDiscreteFullCutHistory (5.2s)
+✔ [4967/4967] Built Hironaka.Resolution.HironakaSharpActualTraceIncidence (2.9s)
+Some required targets logged failures:
+- Hironaka.Resolution.HironakaNormalCrossingsIntrinsicStratumCentre
+error: build failed

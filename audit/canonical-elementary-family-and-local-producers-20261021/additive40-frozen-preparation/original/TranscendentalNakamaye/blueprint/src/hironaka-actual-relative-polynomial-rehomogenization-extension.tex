@@ -1,0 +1,99 @@
+\section{Genuine finite rehomogenization over the original analytic tangent ring}
+
+Let $B=\mathcal O_{\mathbb C^d,0}$ and $P=B[z_1,\ldots,z_t]$.
+Fix an actual normal pivot $j$ and actual complex chart directions $b_i$.
+The polynomial algebra map $\delta$ fixes every entire coefficient in $B$,
+sends $z_j$ to $1$ and sends $z_i$ to $b_i+z_i$ for $i\ne j$.
+Constants $b_i$ here are their genuine constant analytic germs.
+
+\begin{theorem}[Literal finite relative rehomogenization]
+\label{hir:actual-relative-finite-polynomial-rehomogenization}
+\uses{hir:actual-polynomial-rehomogenization}
+\lean{TranscendentalNakamaye.Pending.HironakaActualRelativePolynomialRehomogenization.relativePolynomialRehomogenization,TranscendentalNakamaye.Pending.HironakaActualRelativePolynomialRehomogenization.relativePolynomialRehomogenization_homogeneous,TranscendentalNakamaye.Pending.HironakaActualRelativePolynomialRehomogenization.relativePolynomialDehomogenization_rehomogenization}
+\leanok
+For a literal $q\in P$ and $m\ge\deg q$, the finite polynomial
+\[
+ R_m(q)=\sum_{\alpha\in\operatorname{supp}q}
+ z_j^{m-|\alpha|}q_\alpha\prod_i(z_i-b_i z_j)^{\alpha_i}
+\]
+is genuinely homogeneous of normal degree $m$. If $q$ has no pivot
+variable, then $\delta R_m(q)=q$. Every coefficient is the unchanged
+original analytic tangent germ; no formal homogeneous lift is input.
+\end{theorem}
+\begin{proof}
+For each supported exponent, $|\alpha|\le\deg q\le m$. Each
+$z_i-b_i z_j$ is homogeneous of normal degree one over the entire
+coefficient ring. Its indicated product has degree $|\alpha|$ and
+multiplying by $z_j^{m-|\alpha|}$ gives degree $m$. The actual finite
+sum remains homogeneous of that degree. Under $\delta$, every pivot
+power becomes $1$. For $i\ne j$, the linear expression becomes
+$(b_i+z_i)-b_i=z_i$. A supported exponent of the assumed pivot-free
+$q$ has $\alpha_j=0$, so its pivot factor is absent. Thus each entire
+summand becomes the original monomial $q_\alpha z^\alpha$.
+The finite support expansion of the actual polynomial $q$ proves the
+whole dehomogenization identity.
+\end{proof}
+
+\begin{theorem}[Actual relative homogeneous dehomogenization is injective]
+\label{hir:actual-relative-homogeneous-dehomogenization-injective}
+\uses{hir:actual-relative-polynomial-formal-taylor-coefficient,hir:actual-normal-polynomial-blowup-factorization,hir:actual-formal-blowup-all-directions-whole-power-reflection,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{TranscendentalNakamaye.Pending.HironakaActualRelativePolynomialRehomogenization.relativePolynomialDehomogenization_eval,TranscendentalNakamaye.Pending.HironakaActualRelativePolynomialRehomogenization.relativePolynomialDehomogenization_homogeneous_injective}
+\leanok
+Literal original normal-polynomial evaluation of $\delta P$ equals
+the actual dehomogenized normal-polynomial analytic germ, retaining all
+entire tangent coefficients. If two actual polynomials in $P$ are
+homogeneous of the same normal degree and have equal $\delta$ images,
+then the whole original polynomials are equal.
+\end{theorem}
+\begin{proof}
+Constants in $B$ are retained by both actual polynomial evaluations.
+For the pivot and every other normal variable the two evaluations have
+exactly the displayed actual coordinate-germ values. Polynomial
+induction by constants, addition and multiplication by a variable
+therefore proves the whole evaluation identity.
+
+Original normal-polynomial evaluation is injective: its actual whole
+Taylor normal coefficient at any exponent is the actual Taylor series
+of that polynomial coefficient, and the actual tangent Taylor map is
+injective. Now suppose $P,Q$ have the same normal degree $D$ and
+$\delta P=\delta Q$. Genuine normal-homogeneous blowup factorization
+gives $\pi^*\operatorname{ev}(P)=e^D\operatorname{ev}(\delta P)$
+and the same identity for $Q$. These actual analytic pullbacks are
+therefore equal. Their actual whole Taylor series are the genuine
+formal blowup images of the respective actual Taylor series. The
+proved actual formal blowup is injective in every original direction,
+so those original Taylor series agree. Actual Taylor injectivity and
+then normal-polynomial evaluation injectivity give $P=Q$ as entire
+polynomials over the original analytic coefficient ring.
+\end{proof}
+
+\begin{theorem}[Every finite pivot-free relative chart relation has an internally constructed whole homogeneous source relation]
+\label{hir:actual-relative-finite-polynomial-relation-rehomogenization}
+\uses{hir:actual-relative-finite-polynomial-rehomogenization,hir:actual-relative-homogeneous-dehomogenization-injective}
+\lean{TranscendentalNakamaye.Pending.HironakaActualRelativePolynomialRehomogenization.exists_relative_homogeneous_polynomial_relation_lift}
+\leanok
+Let a finite family $f_i\in P$ be homogeneous of degrees $w_i$, and
+let pivot-free $q_i\in P$ satisfy the whole polynomial relation
+$\sum_iq_i\delta f_i=0$. There are one actual integer $D\ge w_i$
+and actual $P_i\in P$ such that $P_i$ is homogeneous of degree
+$D-w_i$, $\delta P_i=q_i$, and $\sum_iP_if_i=0$ as a whole
+polynomial identity. No chosen degree bound or desired source relation
+is an input.
+\end{theorem}
+\begin{proof}
+Choose the genuine finite integer $D=\sum_i(w_i+\deg q_i)$.
+Nonnegativity gives $w_i+\deg q_i\le D$ and hence
+$\deg q_i\le D-w_i$ for every index. Apply the first theorem to
+$P_i=R_{D-w_i}(q_i)$. It gives the asserted homogeneity and exact
+$\delta P_i=q_i$. Each product $P_if_i$ is homogeneous of degree
+$(D-w_i)+w_i=D$, and so is their finite sum. Its dehomogenization is
+$\sum_iq_i\delta f_i=0$ by genuine polynomial homomorphism laws.
+The preceding homogeneous injectivity, comparing with the zero
+polynomial of degree $D$, therefore makes the whole source sum zero.
+All original analytic tangent coefficients have been retained throughout.
+\end{proof}
+
+This proves a whole actual relative polynomial relation lift. Analytic
+normalization and exceptional regularity require their separate genuine
+same-family analytic syzygy argument; no current Hilbert--Samuel or
+uniform-history criterion follows merely from this polynomial result.

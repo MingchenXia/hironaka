@@ -1,0 +1,113 @@
+\section{Uniqueness of the actual canonical first-meeting prefix}
+
+All prefixes in this section refer to the same original marked record and
+the same original good open set.  Canonical histories may contain different
+numbers of actual empty steps.  Comparisons concern their genuine maps over
+the original base, rather than equality of their stopping indices.
+
+\begin{theorem}[Actual empty compression preserves the avoided original open]
+\label{hir:original-empty-compression-preserves-first-open}
+\uses{hir:original-finite-family-empty-free-canonical-compression,hir:original-actual-empty-family-canonical-deletion,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalFirstMeetingPrefixUniqueness.empty_free_compression_preserves_avoidance}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+Let $n>0$, let $M$ belong to the original invariant domain of bound $k$,
+and let $T$ be an actual canonical history for the unchanged recursive
+family of bound $k$.  If all its centres avoid an original open $O$, one
+can internally remove every actual empty step to obtain a canonical
+history $Q$ whose actual centres are nonempty and still avoid $O$.
+There are a biholomorphism $\chi$ from the endpoint of $Q$ to that of $T$
+over the original base and one order embedding $F$ such that the whole
+cosupport and every current invariant value on it are transported by
+$\chi$ and $F$.  In particular, the next whole maximum of $T$ meets its
+inverse image of $O$ if and only if that of $Q$ does.
+\end{theorem}
+\begin{proof}
+Induct on the actual finite length.  If every centre is nonempty, retain
+the same tower, identity biholomorphism and identity order embedding.
+Otherwise split off a genuine empty step and its whole suffix.  The
+actual empty blowup is biholomorphic to its base; transport the entire
+suffix through this biholomorphism.  This identifies the original
+history with the transported history containing an explicit empty
+identity step.  Centre avoidance is invariant under this genuine
+stagewise tower isomorphism: the centres and their projection inverse
+images correspond, and the stage maps are bijective.  Removing the
+empty identity step preserves avoidance, since it contributes no centre
+and does not change any subsequent projection to the original base.
+The actual empty-deletion theorem supplies canonicality of the shorter
+history and its whole cosupport and value dictionary.  Apply induction
+to this strictly shorter actual history and compose its biholomorphism
+and order embedding with those from the deletion.  This terminates and
+gives the claimed whole dictionaries and avoided open.  A bijection of
+cosupports and an order embedding preserve and reflect the defining
+inequalities against every cosupport point, so they transport the whole
+maximum locus.  The over-base projection identity then preserves its
+encounter with $O$ in both directions.
+\end{proof}
+
+\begin{theorem}[Avoidance and the next whole maximum determine the nonempty length]
+\label{hir:original-first-meeting-nonempty-length}
+\uses{hir:canonical-resolution,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalFirstMeetingPrefixUniqueness.first_meeting_nonempty_lengths_eq}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+For an original resolution invariant and an original record in its
+domain, let $T_1,T_2$ be canonical segments with nonempty actual centres.
+If both avoid the same original open $O$, and each next whole maximal
+locus meets the inverse image of $O$, then $T_1,T_2$ have equal lengths.
+Consequently they are genuinely isomorphic towers over the original base.
+\end{theorem}
+\begin{proof}
+Suppose $T_1$ were longer.  Split it after exactly the number of steps of
+$T_2$.  Equal-length uniqueness for nonempty canonical segments gives a
+genuine stagewise tower isomorphism between $T_2$ and this prefix.  The
+whole cosupport and invariant dictionary transports the next maximal
+locus, so it meets the inverse image of $O$ at this prefix.  Its remaining
+tail is nonempty.  Its first actual centre is exactly that whole maximum,
+because the segment has nonempty canonical centres.  This centre meets
+the inverse image of $O$, contradicting avoidance of the whole $T_1$.
+The same argument with the roles reversed excludes $T_2$ being longer.
+Thus their lengths agree, and equal-length canonical uniqueness supplies
+the claimed tower isomorphism.
+\end{proof}
+
+\begin{theorem}[The original canonical first-meeting map is intrinsically unique]
+\label{hir:original-first-meeting-prefix-map-unique}
+\uses{hir:original-empty-compression-preserves-first-open,hir:original-first-meeting-nonempty-length,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\lean{Hironaka.HironakaOriginalFirstMeetingPrefixUniqueness.first_meeting_prefixes_existsUnique_biholomorphism}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+For the original ambient canonical invariant, let $T_1,T_2$ be any two
+actual finite canonical prefixes of the same original marked record in
+its invariant domain.  Suppose they avoid the same original open $O$ and
+their next whole maximal loci meet the inverse images of $O$.  There is
+a unique biholomorphism $\eta$ between their original endpoints over the
+unchanged original base.  No terminality, common actual length, supplied
+compression, comparison map, or equality of stopping indices is a premise.
+\end{theorem}
+\begin{proof}
+In positive dimension, compress both actual histories by the first
+theorem, retaining avoidance, the next-maximum encounter, and the two
+actual over-base endpoint biholomorphisms.  Their nonempty lengths agree
+by the preceding theorem.  Compare these compressed canonical segments
+by their actual tower isomorphism, then compose with the inverse and
+forward compression biholomorphisms.  Their whole projection formulas
+give the asserted equality over the unchanged original base.  Any two
+such biholomorphisms agree by the actual finite-tower projection
+uniqueness theorem, which uses the genuine successive blowup universal
+properties.  In ambient dimension zero the original invariant-domain
+predicate forces every transformed cosupport of a canonical history to
+be empty; the stipulated next maximal point cannot exist.  This covers
+all dimensions without imposing a false positive-dimension bound.
+\end{proof}
+
+\begin{remark}
+This theorem applies to independently chosen embedded first-meeting
+prefixes on the same original marked record and good open, including
+different actual empty-step counts.  Together with the actual smooth
+pullback comparison it concerns the same embedded stopped projection.
+Relabeling a singular source's ideal as its separately reduced vanishing
+ideal would additionally require a whole singular vanishing-ideal
+pullback theorem.  No such relabeling or arbitrary smooth-source stopping
+index law is asserted here.
+\end{remark}

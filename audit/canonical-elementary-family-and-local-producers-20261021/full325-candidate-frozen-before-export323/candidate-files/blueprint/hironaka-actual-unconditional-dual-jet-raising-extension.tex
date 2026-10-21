@@ -1,0 +1,132 @@
+\section{Unconditional holomorphic raising for original jet annihilators}
+
+\begin{theorem}[An actual nonzero generator gives a genuine open unit-ideal domain]
+\label{hir:actual-nonzero-generator-open-unit-ideal-domain}
+\uses{hir:actual-original-hs-zero-constant-centre-generators-vanish,hir:actual-every-original-ideal-finite-jet-columns}
+\lean{Hironaka.HironakaActualUnconditionalDualJetRaising.actual_translatedIdeal_eq_top_of_generator_ne_zero,Hironaka.HironakaActualUnconditionalDualJetRaising.exists_actual_tangent_unit_ideal_neighborhood}
+\leanok
+Let $G$ be an actual holomorphic family on a real open $U$, and let
+$V$ be real open with $T(V)\subset U$. If $c\in V$ and some actual
+$G_i(Tc)$ is nonzero, then there is a real open $Z$ with
+$c\in Z\subset V$ such that the entire original translated ideal
+$I_b$ is the unit ideal for every $b\in Z$. This is an actual open
+domain assertion, not merely a unit-ideal equality at one point.
+\end{theorem}
+\begin{proof}
+First, at any actual point where $G_i$ is nonzero, suppose the entire
+translated ideal were proper. It is contained in the local maximal
+ideal. Its actual translated generator belongs to it, so evaluating
+that germ at zero gives $G_i$ at the actual point equal to zero,
+a contradiction. Thus the translated ideal is the unit ideal.
+
+The actual composite $b\mapsto G_i(Tb)$ is holomorphic, hence
+continuous, on $V$. Let $Z$ be its nonzero locus inside $V$. The
+relative preimage of the open complement of zero is open in the
+ambient tangent space because $V$ is open. The chosen point belongs
+to $Z$, and $Z\subset V$. At every point of $Z$ the preceding
+argument applied to the same actual generator gives equality of the
+entire same translated ideal with the unit ideal.
+\end{proof}
+
+\begin{theorem}[The genuine constructed prolongation always annihilates the entire original next ideal jet]
+\label{hir:actual-unconditional-dual-jet-prolongation-whole-original-ideal}
+\uses{hir:actual-nonzero-generator-open-unit-ideal-domain,hir:actual-dual-jet-prolongation-whole-original-ideal-zero,hir:actual-dual-jet-prolongation-original-unit-ideal-zero}
+\lean{Hironaka.HironakaActualUnconditionalDualJetRaising.actualDualJetProlongation_whole_ideal_zero_unconditional}
+\leanok
+Let $G$ be actual holomorphic on $U$, let $V$ be actual open with
+$T(V)\subset U$, and let $\eta$ be an actual holomorphic moving
+old-order row annihilating every original Macaulay column on $V$.
+Then at every $c\in V$ and every tangent direction $a$, the actual
+constructed $\nabla_a\eta$ annihilates $J_{q+1}(g)$ for every
+$g\in I_c$. No generator-vanishing, positivity, higher-annihilator,
+or unit-domain certificate is an input.
+\end{theorem}
+\begin{proof}
+Fix $c$. If every $G_i(Tc)$ is zero, the actual next-column theorem
+and its entire-ideal consequence apply directly to the same family,
+old row and actual point. They include all new maximal-length words.
+
+Otherwise choose an actual nonzero generator at $Tc$. The preceding
+theorem constructs a real open $Z$ through $c$ inside $V$ on which
+the entire same original ideals are all unit ideals. Restrict the
+actual holomorphic coefficient functions and the old column equations
+to $Z$. The genuine unit-ideal prolongation theorem differentiates
+the whole fixed-jet pairing on this real open and identifies each
+successor with the original directional derivative germ. Consequently
+the same constructed prolongation at $c$ is zero on every actual
+next true jet, in particular on $J_{q+1}(g)$. The construction of the
+functional does not depend on the choice of its domain, so the
+restricted argument proves the claimed original value.
+\end{proof}
+
+\begin{theorem}[Unconditional explicit holomorphic raising on the entire true jet image]
+\label{hir:actual-unconditional-holomorphic-dual-jet-raising}
+\uses{hir:actual-unconditional-dual-jet-prolongation-whole-original-ideal,hir:actual-dual-jet-prolongation-holomorphic-fixed-true-jet,hir:actual-holomorphic-true-jet-annihilator-generation,hir:actual-dual-jet-raising-coefficients}
+\lean{Hironaka.HironakaActualUnconditionalDualJetRaising.actual_dual_jet_holomorphic_raising_unconditional}
+\leanok
+Let $D\subset U$ be real open and put $V=T^{-1}(D)$. Use an actual
+next-order pivot with nonzero determinant on $D$ and size equal to
+the actual centre rank there. Suppose $\eta$ and its first derivative
+functions in direction $a$ are holomorphic on $V$ and $\eta$ kills
+every old original Macaulay column there. Then the same specified
+raising coefficient functions $B_s(c,a)$ are holomorphic on $V$ and
+\[
+ (\nabla_a\eta)_c(v)=\sum_s B_s(c,a)\theta_s(c)(v)
+ \qquad(c\in V,\ v\in\operatorname{im}J_{q+1}).
+\]
+No generator-vanishing or properness hypothesis is needed.
+\end{theorem}
+\begin{proof}
+The actual constructed moving functional is holomorphic on every
+fixed true next jet because its defining finite sum uses only the
+given coefficient functions and their stated first derivatives. The
+preceding theorem supplies annihilation of the entire same original
+ideal jet without an extra properness hypothesis. Apply the genuine
+holomorphic true-jet generation theorem for the stated actual next
+pivot. Its coefficients evaluate this same moving functional on the
+one fixed original true-jet vector $S(R e_s)$, so they are exactly
+the previously specified functions $B_s$. That theorem gives their
+holomorphicity and equality on the entire true jet image, retaining
+all original relations between scalar coordinate words.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centre geometry supplies unconditional all-order raising]
+\label{hir:actual-original-hs-constant-centre-unconditional-dual-jet-raising}
+\uses{hir:actual-unconditional-dual-jet-prolongation-whole-original-ideal,hir:actual-original-hs-centre-holomorphic-true-jet-dual-generation,hir:actual-dual-jet-prolongation-holomorphic-fixed-true-jet,hir:actual-dual-jet-raising-coefficients}
+\lean{Hironaka.HironakaActualUnconditionalDualJetRaising.exists_original_hs_constant_centre_unconditional_dual_jet_raising}
+\leanok
+Only original coherent ideal data, an actual regular centre, and the
+entire intrinsic HS constancy on that centre internally supply one
+original flattening, one original finite generating family and real
+open $U$ before all orders. At every positive old order $q$ there
+are internally chosen actual next-order pivots and a real open
+$D\subset U$ through zero. On $V=T^{-1}(D)$, every actual moving
+old-order annihilating row with holomorphic coefficients and first
+derivative functions has the specified holomorphic raising
+coefficients and the displayed equality on the entire true next jet
+image. No positivity, generator-vanishing, properness, pivot, rank,
+or higher-annihilator certificate is a geometric caller input.
+\end{theorem}
+\begin{proof}
+Apply the original HS-constant-centre holomorphic true-jet generation
+producer. It internally chooses the same original flattening and
+coherent finite generating family and real open before all orders,
+with the entire translated-ideal dictionary. At each old positive
+order $q$, use its internally chosen actual pivot at order $q+1$.
+Its domain $D\subset U$ is real open through zero, and its true
+whole-ideal generation theorem holds on $V=T^{-1}(D)$.
+
+For an actual old moving row satisfying the stated ordinary
+holomorphic and column equations, form its genuine differential
+prolongation restricted to the actual next true-jet image. Fixed-vector
+evaluation is holomorphic by the accepted prolongation calculation.
+The unconditional entire-ideal theorem above proves the required
+next-ideal annihilation on this same $V$, including the unit-ideal
+case. Apply the internally supplied true-jet generation theorem to
+this constructed functional. The specified coefficients are exactly
+its evaluations on the original fixed representative vectors, which
+proves both asserted conclusions for all points and true jets.
+The order-dependent domains need not have a common all-order open;
+no identification with the normal-adic filtration or normal-flatness
+conclusion is asserted here.
+\end{proof}

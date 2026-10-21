@@ -1,0 +1,10 @@
+open Classical in
+/-- **A point of `N_T` lies on the strict transform of the intersection of `N` with the original
+members whose strict transforms pass through it** (Step 1a: the intersection `N ∩ H_S` a point with
+`s(x) = s` lies on). -/
+theorem mem_strictAlong_inter_memberInter_self (h𝔪 : 𝔪.IsWellFormed) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {z : Y} (hz : z ∈ (geoTransformAlong 𝔪 T).N) :
+    z ∈ strictAlong T
+      (𝔪.N ∩ memberInter 𝔪.E (Finset.univ.filter fun i => z ∈ strictAlong T (𝔪.E.get i))) := by
+  rw [strictAlong_inter_memberInter 𝔪 h𝔪 _ T hT]
+  exact ⟨hz, fun i hi => (Finset.mem_filter.mp hi).2⟩

@@ -1,0 +1,29 @@
+\begin{proposition}[A connected manifold is irreducible]
+\label{ana:manifold-irreducible}
+\uses{fpgeom:complex-analytic-subvariety,ana:nonkahler-locus,ana:blowups}
+\source{demailly-cadg:II.4.2}
+\lean{TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.isComplexAnalyticallyIrreducible_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.regularAtDim_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.exists_subvariety_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_of_regularAtDim_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.dim_eq_of_carrier_eq_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.isOpen_of_forall_regularAtDim_self,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_univ_of_isClosedConnectedSubmanifold_self}
+\leanok
+Let \(X\) be a connected complex manifold of dimension \(n\).
+\begin{enumerate}
+\item \(X\) is an irreducible analytic subset of itself, of dimension \(n\), and
+      \(n\) is the only dimension of a regular point of \(X\).
+\item A closed connected complex submanifold of \(X\) of dimension \(n\) is \(X\).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\leanok
+(1) Every point of \(X\) is a regular point of dimension \(n\). If
+\(X=B\cup C\) with \(B,C\) analytic and \(B\ne X\), then \(B\) has empty
+interior: an analytic subset containing a nonempty open set contains, by the
+identity theorem applied to its local equations along chains of coordinate balls,
+the whole connected manifold. Hence the closed set \(C\) contains the dense set
+\(X\setminus B\), so \(C=X\). A flattening of \(X\) of dimension \(k\) at a point
+maps an open neighbourhood of that point onto an open set contained in
+\(\mathbb C^k\times\{0\}\); a nonempty open subset of \(\mathbb C^n\) lies in that
+plane only if \(k=n\).
+
+(2) At each of its points a submanifold of dimension \(n\) contains a
+neighbourhood of that point, so it is open. It is also closed and nonempty, hence
+equal to the connected manifold \(X\).
+\end{proof}

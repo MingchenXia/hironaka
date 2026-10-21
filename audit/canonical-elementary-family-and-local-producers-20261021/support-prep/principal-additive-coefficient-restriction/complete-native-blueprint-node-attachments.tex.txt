@@ -1,0 +1,105 @@
+\begin{definition}[Restriction of a marked ideal to a set]
+\label{mc:restrict-marked}
+\uses{hir:marked-ideal,hir:order,mc:strict-along,mc:coefficient-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_N,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_E,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_ideal,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.withN_d,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupp_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.CentresIn,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_refl,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_step_iff,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.N_geoTransformAlong_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.N_coeffMarked,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.isCoherent_coeffMarked}
+\leanok
+For a set \(S\subset M\), the \emph{restriction} \(\underline{\mathcal B}|_S=(M,S,E,\mathfrak b,d)\) has the same \(E\), ideal and mark and \(N=S\); its cosupport is
+\(\{x\in S\mid \operatorname{ord}_x(\mathfrak b|_S)\ge d\}\) (Definition~\ref{hir:order}). A tower \(T\) has its \emph{centres in the strict transforms of \(S\)} if
+each centre \(C_i\) lies in the strict transform \(S_i\) of \(S\) (Definition~\ref{mc:strict-along}). The coefficient ideal \(\mathcal C(\underline{\mathcal I})\)
+has \(N=M\) and a coherent ideal.
+\end{definition}
+
+\begin{lemma}[Restriction along multiple test blow-ups]
+\label{mc:restrict-tower}
+\uses{mc:restrict-step,mc:restrict-order,mc:strict-along,hir:test-tower,hir:restricted-equivalence-basic,bcalc:strict-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.centresIn_of_isGeoTestTower_withN,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.restrict_tower}
+\leanok
+Let \(S\subset M\) be a closed submanifold. A multiple test blow-up of \(\underline{\mathcal B}|_S\) has its centres in the strict transforms of \(S\).
+Every multiple test blow-up \(T\) of \(\underline{\mathcal B}\) with centres in the strict transforms of \(S\) is a multiple test blow-up of
+\(\underline{\mathcal B}|_S\), and along it \([\underline{\mathcal B}|_S]_T\) is restricted-equivalent to \((\underline{\mathcal B}_T)|_{S_T}\); moreover
+\(\underline{\mathcal B}_T\) has \(N\) the whole space, both transformed ideals are coherent and \(S_T\) is a closed submanifold.
+\end{lemma}
+\begin{proof}
+\leanok
+An admissible centre lies in the cosupport, hence in \(N\), which is the strict transform of \(S\). For the second statement induct on \(T\). At a step
+with centre \(C\subset S_T\) admissible for \(\underline{\mathcal B}_T\), \(C\) is admissible for \((\underline{\mathcal B}_T)|_{S_T}\) by
+Lemma~\ref{mc:restrict-order}, hence for the restricted-equivalent \([\underline{\mathcal B}|_S]_T\); restricted-equivalent marked ideals have the same
+transform (Lemma~\ref{hir:restricted-equivalence-basic}), and Lemma~\ref{mc:restrict-step} applies. The strict transform of a closed submanifold
+containing the centre is a closed submanifold (Lemma~\ref{bcalc:strict-ideal}).
+\end{proof}
+
+\begin{lemma}[The support of the restricted coefficient ideal]
+\label{mc:coefficient-restriction-support}
+\uses{mc:restrict-marked,mc:restrict-order,mc:coefficient-equivalent,mc:finite-sum,hir:order-power,hir:giraud-support}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupport_coeff_subset,TranscendentalNakamaye.Pending.CoefficientIdealRestriction.cosupp_coeff_withN}
+\leanok
+For every set \(S\subset M\), \(\operatorname{cosupp}\underline{\mathcal I}\cap S=\operatorname{cosupp}(\mathcal C(\underline{\mathcal I})|_S)\).
+\end{lemma}
+\begin{proof}
+\leanok
+The inclusion \(\subset\) is Lemma~\ref{mc:coefficient-equivalent} (for the empty tower) followed by Lemma~\ref{mc:restrict-order}. Conversely, let
+\(x\in S\) with \(\operatorname{ord}_x(\mathcal C(\mathfrak a)|_S)\ge\mu_{\mathcal C}\). The ideal of \(\mathcal C(\underline{\mathcal I})\) contains
+\(g^e\) for every \(g\in\mathcal D^{\mu-1}\mathfrak a\), where \(e\) is the exponent of the last summand \((\mathcal D^{\mu-1}\mathfrak a,1)\), and
+\(\mu_{\mathcal C}=1\cdot e\ge1\). So \(g^e\), hence \(g\), vanishes at \(x\): \(x\in V(\mathcal D^{\mu-1}\mathfrak a)=\operatorname{cosupp}(\mathfrak a,\mu)\)
+(Lemma~\ref{hir:giraud-support}).
+\end{proof}
+
+\begin{definition}[Coefficient ideal]
+\label{mc:coefficient-ideal}
+\uses{mc:marked-finite-sum,mc:derivative-marked}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0022}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.derivMarked_zero,TranscendentalNakamaye.Pending.CoefficientIdeal.coeffMarked,TranscendentalNakamaye.Pending.CoefficientIdeal.isAmbientFamily_derivMarked}
+\leanok
+The \emph{coefficient ideal} of \(\underline{\mathcal I}=(M,N,E,\mathfrak a,\mu)\) is
+\[
+ \mathcal C(\underline{\mathcal I})=\underline{\mathcal I}+\mathcal D(\underline{\mathcal I})+\dots+\mathcal D^{\mu-1}(\underline{\mathcal I}),
+\]
+i.e.\ \((\mathfrak a,\mu)+(\mathcal D\mathfrak a,\mu-1)+\dots+(\mathcal D^{\mu-1}\mathfrak a,1)\) (Definitions~\ref{mc:derivative-marked} and~\ref{mc:marked-finite-sum}).
+For \(N=M\) and \(\mathfrak a\) coherent, the summands satisfy the hypotheses of Definition~\ref{mc:marked-finite-sum}.
+\end{definition}
+
+\begin{definition}[Sum of finitely many marked ideals]
+\label{mc:marked-finite-sum}
+\uses{hir:marked-sum-product,mc:finite-sum,hir:marked-ideal-operations,hir:geo-transform-ambient,hir:bridge-consumers}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.mul_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.one_le_sumExp,TranscendentalNakamaye.Pending.CoefficientIdeal.msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.isCoherent_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.cosupp_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.isAdmissibleCentre_msum_iff,TranscendentalNakamaye.Pending.CoefficientIdeal.geoTransform_msum,TranscendentalNakamaye.Pending.CoefficientIdeal.IsAmbientFamily.geoTransform}
+\leanok
+For marked ideals \(\underline{\mathcal I}_i=(M,N_i,E_i,\mathfrak a_i,\mu_i)\), \(i<m\),
+\[
+ \underline{\mathcal I}_0+\dots+\underline{\mathcal I}_{m-1}=\Bigl(M,N_0,E_0,\sum_{i<m}\mathfrak a_i^{\prod_{j\ne i}\mu_j},\prod_{j<m}\mu_j\Bigr).
+\]
+If \(m\ge1\), \(N_i=M\), \(E_i=E_0\), \(\mathfrak a_i\) is coherent and \(\mu_i\ge1\) for all \(i\), then the sum has coherent ideal and cosupport
+\(\bigcap_i\operatorname{cosupp}\underline{\mathcal I}_i\); a centre is admissible for it if and only if it is admissible for every \(\underline{\mathcal I}_i\), and then the
+transform of the sum is the sum of the transforms (Definition~\ref{hir:geo-transform}), whose summands again satisfy these hypotheses.
+\end{definition}
+\begin{proof}
+\leanok
+Write \(\mu=\prod_j\mu_j\) and \(e_i=\prod_{j\ne i}\mu_j\ge1\), so \(\mu_ie_i=\mu\). By Lemma~\ref{mc:finite-sum} and
+\(\operatorname{cosupp}(\mathfrak a^{e},\nu e)=\operatorname{cosupp}(\mathfrak a,\nu)\) for \(e\ge1\) (Lemma~\ref{hir:marked-ideal-operations}),
+\(\operatorname{cosupp}(\sum_i\mathfrak a_i^{e_i},\mu)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i^{e_i},\mu_ie_i)=\bigcap_i\operatorname{cosupp}(\mathfrak a_i,\mu_i)\). The
+admissibility statement follows, as all \(E_i\) agree. For an admissible centre \(C\), \(\mathfrak a_i\subset\mathcal I_C^{\mu_i}\) (Lemma~\ref{hir:bridge-consumers}), so
+\(\mathfrak a_i^{e_i}\subset\mathcal I_C^{\mu}\), and by Lemmas~\ref{hir:geo-transform-ambient}, \ref{mc:finite-sum} and~\ref{hir:controlled-operations}
+\(\sigma^{\mathrm c}(\sum_i\mathfrak a_i^{e_i},\mu)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i^{e_i},\mu_ie_i)=\sum_i\sigma^{\mathrm c}(\mathfrak a_i,\mu_i)^{e_i}\); the strict transform of \(M\)
+is the whole blowup, the \(E\) are transformed alike, the marks do not change, and the controlled transforms are coherent.
+\end{proof}
+
+\begin{lemma}[Finite sums of ideals]
+\label{mc:finite-sum}
+\uses{mc:homogenized-coherent,mc:coherent-germs,hir:controlled-operations,hir:cosupport-basic,bcalc:controlled-transform-def}
+\lean{TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_one,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_congr,TranscendentalNakamaye.Pending.CoefficientIdeal.finSumIdeal_le,TranscendentalNakamaye.Pending.CoefficientIdeal.isCoherent_finSumIdeal_of_lt,TranscendentalNakamaye.Pending.CoefficientIdeal.mem_cosupport_finSumIdeal,TranscendentalNakamaye.Pending.CoefficientIdeal.controlledTransform_finSumIdeal}
+\leanok
+Let \(\mathfrak J_0,\dots,\mathfrak J_{m-1}\) be coherent. Then \(\sum_{i<m}\mathfrak J_i\) is coherent; it is contained in every coherent ideal containing all
+\(\mathfrak J_i\); \(\operatorname{cosupp}(\sum_{i<m}\mathfrak J_i,\mu)=\bigcap_{i<m}\operatorname{cosupp}(\mathfrak J_i,\mu)\); and if \(m\ge1\) and
+\(\mathfrak J_i\subset\mathcal I_C^\mu\) for all \(i\), then \(\sigma^{\mathrm c}(\sum_{i<m}\mathfrak J_i,\mu)=\sum_{i<m}\sigma^{\mathrm c}(\mathfrak J_i,\mu)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Coherence: Lemma~\ref{mc:homogenized-coherent}. A germ of the sum is a holomorphic combination of germs of the \(\mathfrak J_i\); this gives the
+inclusion and, since a combination of germs vanishing to order \(\mu\) vanishes to order \(\mu\), the cosupport (the reverse inclusion because each
+\(\mathfrak J_i\) is contained in the sum). The controlled transform: induction on \(m\), starting from \(\sum_{i<1}\mathfrak J_i=\mathfrak J_0\), with
+\(\sum_{i<m+1}\mathfrak J_i=\sum_{i<m}\mathfrak J_i+\mathfrak J_m\) and \(\sigma^{\mathrm c}(\mathfrak a+\mathfrak b,\mu)=\sigma^{\mathrm c}(\mathfrak a,\mu)+\sigma^{\mathrm c}(\mathfrak b,\mu)\)
+for coherent \(\mathfrak a,\mathfrak b\subset\mathcal I_C^\mu\) (Lemma~\ref{hir:controlled-operations}); the partial sums are contained in the coherent ideal \(\mathcal I_C^\mu\).
+\end{proof}

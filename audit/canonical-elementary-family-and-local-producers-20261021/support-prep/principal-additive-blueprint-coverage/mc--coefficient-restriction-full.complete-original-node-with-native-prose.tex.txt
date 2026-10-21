@@ -1,0 +1,19 @@
+\begin{lemma}[The restricted coefficient ideal along multiple test blow-ups: full statement]
+\label{mc:coefficient-restriction-full}
+\uses{mc:normal-coefficient-step,mc:coefficient-restriction-tower,mc:coefficient-restriction-support,mc:marked-finite-sum-tower,mc:finite-sum,hir:order-power-along,hir:restricted-equivalence-basic}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0023}
+\lean{TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower_subset,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.cosupp_coeff_withN_tower,TranscendentalNakamaye.Pending.CoefficientRestrictionTower.coeff_restrict_tower_iff}
+\leanok
+Let \(\underline{\mathcal I}=(X,X,E,\mathfrak a,\mu)\) with \(\mathfrak a\) coherent and \(\mu\ge1\), and \(S\) a closed submanifold. A tower is a multiple test blow-up of
+\(\mathcal C(\underline{\mathcal I})|_S\) if and only if it is a multiple test blow-up of \(\underline{\mathcal I}\) with centres in the strict transforms of \(S\), and along it
+\(\operatorname{cosupp}[\mathcal C(\underline{\mathcal I})|_S]_T=\operatorname{cosupp}\underline{\mathcal I}_T\cap S_T\).
+\end{lemma}
+\begin{proof}
+\leanok
+The inclusion \(\supset\) is Lemma~\ref{mc:coefficient-restriction-tower}. Conversely, at \(x\) in the left side, \([\mathcal C(\underline{\mathcal I})|_S]_T\) is restricted-equivalent
+to \(\mathcal C(\underline{\mathcal I})_T|_{S_T}=\sum_i[\mathcal D^i\mathfrak a]_T^{e_i}\) (Lemma~\ref{mc:marked-finite-sum-tower}); along \(S_T\) the order of the sum is the minimum of the
+scaled orders (Lemma~\ref{hir:order-power-along}), so \([\mathcal D^i\mathfrak a]_T\) has order \(\ge\mu-i\) along \(S_T\) at \(x\), and the good point \(x\)
+(Lemma~\ref{mc:normal-coefficient-step}) lies in \(\operatorname{cosupp}\underline{\mathcal I}_T\). The test blow-ups correspond by induction on the tower: a centre inside \(S_T\) is admissible
+for one side iff for the other, since the cosupports correspond and \(E\) is the same.
+\end{proof}
+This is Włodarczyk's Lemma ``le:S'' (2)--(3) for the restriction keeping \(E\) (no member of \(E\) is dropped).

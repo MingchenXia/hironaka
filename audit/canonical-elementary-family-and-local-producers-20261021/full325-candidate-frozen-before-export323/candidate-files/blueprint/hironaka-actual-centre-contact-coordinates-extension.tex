@@ -1,0 +1,46 @@
+\section{Actual joint coordinates for the same centre and contact function}
+\label{sec:hironaka-actual-centre-contact-coordinates}
+
+\begin{theorem}[The actual contact differential survives in a normal coordinate]
+\label{hir:actual-centre-contact-last-normal-partial}
+\uses{bcalc:nested-flattening,hir:submersion-contact-coordinates-original-flag}
+\lean{Hironaka.HironakaActualCentreContactCoordinates.positive_dimension_of_chartDeriv_ne_zero,Hironaka.HironakaActualCentreContactCoordinates.flatPartial_last_ne_zero}
+\leanok
+Let $u$ be holomorphic at $x$, with nonzero differential there. Suppose actual centred coordinates $\psi$ flatten the hypersurface $H$ through $x$ onto the last-coordinate hyperplane, and $u$ vanishes on $H$ near $x$. Then $n>0$ and the actual partial derivative of $u$ with respect to the last coordinate of $\psi$ is nonzero at $x$.
+\end{theorem}
+\begin{proof}
+A nonzero original chart derivative implies $n>0$. For every earlier coordinate, the genuine flat coordinate vector field is tangent to the actual flattened hypersurface $H$. Because $u$ is a member of its whole vanishing ideal near $x$, preservation of that ideal puts the corresponding flat partial in the same vanishing ideal. It therefore vanishes at $x$. The actual chain rule expresses the chosen nonzero original chart derivative as the sum of original derivatives of the flat coordinates times these actual flat partials. All earlier terms are zero. If the last partial also vanished, the entire sum would be zero, contradicting the original nonzero derivative. This proves the assertion about the same literal $u$.
+\end{proof}
+
+\begin{theorem}[One actual chart flattens the same centre and retains the literal contact function]
+\label{hir:actual-centre-contact-joint-coordinates}
+\uses{hir:actual-centre-contact-last-normal-partial,bcalc:nested-flattening,hir:submersion-contact-coordinates-internal-original-chart}
+\lean{Hironaka.HironakaActualCentreContactCoordinates.contactCoords_same_normal_mem_centre_plane,Hironaka.HironakaActualCentreContactCoordinates.exists_actual_centre_contact_coordinates}
+\leanok
+Let the actual centre $C$ be regular of dimension $k$ at $x$. On an actual open neighbourhood $U$ of $x$, let $u$ be holomorphic and of multiplicity one at its zeros, and suppose $u=0$ on $C\cap U$. Then $k\le n-1$, $n>0$, and there are actual centred holomorphic coordinates $\theta$ on a genuine neighbourhood contained in $U$ such that
+\[
+ y\in C\quad\Longleftrightarrow\quad\theta(y)\in\mathbf C^k\times0,
+ \qquad \theta_{n-1}(y)=u(y).
+\]
+The construction changes only the last normal coordinate of one jointly flattened centre--hypersurface chart; all its other coordinates are retained.
+\end{theorem}
+\begin{proof}
+Intersect the same actual centre with $U$. Its regularity at $x$ is unchanged, and it is contained in $H=\{u=0\}\cap U$. Actual multiplicity one makes $H$ regular of dimension $n-1$. Inclusion of these genuine regular subsets gives $k\le n-1$. Nested flattening produces one actual centred chart $\psi$ simultaneously flattening $C\cap U$ and $H$. The first theorem makes its last partial of the literal $u$ nonzero.
+
+Replace only the last normal coordinate of $\psi$ by $u$, leaving all other coordinates unchanged. On the genuine open $O=U\cap\operatorname{dom}(\psi)$, $u=0$ if and only if the old last coordinate is zero: a point of $O$ belongs to $U$, so the exact flattening of $H=\{u=0\}\cap U$ gives both directions. Since $k\le n-1$, this equivalence shows that the entire centre plane is preserved by the replacement. The actual differential of the replacement is injective because the last partial of $u$ is nonzero. The holomorphic inverse-function construction therefore supplies actual centred holomorphic coordinates equal to this replaced map on a smaller genuine domain contained in both $U$ and the original flat domain. At $x$ both the old centred coordinates and $u(x)$ are zero, so recentering subtracts zero. The new last coordinate is exactly the original $u$, every other coordinate is the corresponding old $\psi$ coordinate, and the exact centre-plane equivalence follows as above. On the smaller domain $C\cap U$ equals the same original $C$.
+\end{proof}
+
+\begin{theorem}[Original marked data internally give joint coordinates for every actual smooth admissible centre]
+\label{hir:actual-original-marked-centre-contact-coordinates}
+\uses{hir:actual-centre-contact-joint-coordinates,mc:tangent-direction,mc:tangent-direction-exists}
+\lean{Hironaka.HironakaActualCentreContactCoordinates.exists_actual_marked_centre_contact_coordinates,Hironaka.HironakaActualCentreContactCoordinates.exists_original_maximal_order_centre_contact_coordinates}
+\leanok
+Let an original coherent ideal be marked by $m\ge1$, let the actual centre $C$ lie in its original order-$m$ cosupport, and let $C$ be regular at $x$. Any prescribed original tangent direction $u$ on $U\ni x$ internally supplies the preceding actual joint coordinates for this same $C$ and literal $u$. If the original coherent ideal has maximal order $m$, the original data internally choose the contact direction and its actual domain as well; no contact function, centre-flattening chart or joint-coordinate certificate is input to that endpoint.
+\end{theorem}
+\begin{proof}
+Every original tangent direction is an actual member of the $(m-1)$st derivative ideal. Coherence makes these members holomorphic on its genuine open domain. The original order-$m$ cosupport lies in the order-one cosupport of that derivative ideal, so its every member, including this same $u$, vanishes there. Thus $u=0$ on $C\cap U$, derived from original centre admissibility and not assumed as a desired chart property. The tangent-direction multiplicity-one condition is exactly the remaining genuine analytic hypothesis of the preceding joint-coordinate theorem. Apply that theorem without changing $C$ or $u$. Finally, maximal order and membership of $x$ in the actual centre supply an original tangent direction on a genuine neighbourhood by the proved original existence theorem; applying the prescribed-direction conclusion to that one internally chosen direction proves the original-data endpoint.
+\end{proof}
+
+\begin{remark}
+These are actual geometric joint coordinates for an original centre and contact function. Canonical normal freeness or a reduced standard basis in this altered flattening is not inferred. Persistent-point chart direction elimination, recursive weighted coefficient tracking, strict progress and termination require their own further producers.
+\end{remark}

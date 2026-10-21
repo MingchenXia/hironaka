@@ -1,0 +1,126 @@
+\section{The literal section graded ring and its actual whole stalk map}
+
+Let $A$ be the original germ ideal and $C$ any subset of the original complex
+manifold. On a true open $U$ write $R(U)$ for the actual holomorphic section
+ring, $I(U)$ for all actual ideal sections of $A$, and $J(U)$ for all actual
+sections vanishing on $C$. Put
+\[
+ L_q(U)=\operatorname{im}\bigl(J(U)^q\longrightarrow
+ R(U)/(I(U)+J(U)^{q+1})\bigr),\qquad
+ G(U)=\bigoplus_{q\geq0} L_q(U).
+\]
+These literal section rings and powers define the operations before any
+stalk comparison. This chapter constructs a ring presheaf and its entire
+actual stalk homomorphism; ring sheafification and its comparison with the
+previous module sheaf are subsequent constructions.
+
+\begin{lemma}[True layer products commute with original open restrictions]
+\label{hir:real-domain-actual-normal-section-layer-product-restriction}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-intrinsic-layer-product-independent,hir:real-domain-actual-normal-layer-section-presheaf,hir:real-domain-actual-centre-power-section-presheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalLayerRestrict_mul}
+\leanok
+For every true inclusion $U\subseteq V$, every $p,q\geq0$, and arbitrary
+$x\in L_p(V)$, $z\in L_q(V)$, the actual restriction sends the genuine
+product $xz\in L_{p+q}(V)$ to the product of the actual restrictions.
+\end{lemma}
+\begin{proof}
+Choose actual representatives $s\in J(V)^p$ and $t\in J(V)^q$ of $x$ and
+$z$. The previously constructed layer product is the class of $st$ in
+$L_{p+q}(V)$: its representative independence follows from
+$(I+J^{p+1})J^q\subseteq I+J^{p+q+1}$ and the corresponding containment
+with $p,q$ interchanged. True restriction is a ring homomorphism and sends
+each actual power into the same power on $U$. Thus restriction of $st$ is
+exactly $s|_U t|_U$. The actual layer restriction class formulas identify
+its class with the product of the two restricted classes. Every layer
+has such an actual representative, so this proves the assertion for all
+$x,z$, including degree zero.
+\end{proof}
+
+\begin{definition}[The genuine graded ring presheaf on all original opens]
+\label{hir:real-domain-actual-normal-associated-section-ring-presheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-section-layer-product-restriction,hir:relative-normal-intrinsic-graded-algebra,hir:real-domain-actual-normal-layer-section-presheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingSection,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingSectionCommRing,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingSectionAlgebra,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingRestrict,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingRestrict_of,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingSection_of_mul_of}
+\leanok
+The genuine finite-support section direct sum $G(U)$ carries its intrinsic
+commutative graded ring and $R(U)$-algebra structures. The actual degree
+restrictions extend to a genuine ring restriction $G(V)\to G(U)$, keeping
+every degree inclusion. These rings and restrictions form a genuine ring
+presheaf on the original manifold. Its multiplication on actual degree
+classes is $\iota_p[s]\,\iota_q[t]=\iota_{p+q}[st]$.
+\end{definition}
+\begin{proof}
+Use the existing intrinsic representative product on each actual section
+layer. Representative independence supplies the graded associative,
+commutative and distributive laws; its degree-zero class of $1$ is the
+unit. The finite-support direct sum therefore has the intrinsic graded
+commutative ring structure. Send each degree summand by its actual layer
+restriction followed by the same degree inclusion. The finite-support
+additive universal property gives one additive map on the entire direct
+sum. The first lemma proves its multiplicative law on two arbitrary
+homogeneous elements. Distributing finite sums extends this law to every
+pair of direct-sum elements. The actual degree-zero representative $1$
+restricts to $1$, so the map is unital. Equality of two additive maps out
+of a direct sum is determined on every degree inclusion. Actual layer
+restriction identity and composition therefore give whole ring
+restriction identity and composition, proving the presheaf laws. The
+intrinsic original homogeneous product formula gives the stated class
+formula in every degree.
+\end{proof}
+
+\begin{lemma}[Actual ambient sections act through the degree-zero ring map]
+\label{hir:real-domain-actual-normal-associated-section-ambient-ring-map}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-section-ring-presheaf,hir:relative-normal-intrinsic-graded-algebra}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingRestrict_algebraMap,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedAmbientRingMap}
+\leanok
+The true section algebra maps $R(U)\to G(U)$ form a morphism of ring
+presheaves from the literal original structure-ring presheaf. Each map
+sends $r$ to its true degree-zero class, and actual ring restrictions
+commute with these maps.
+\end{lemma}
+\begin{proof}
+The intrinsic section algebra map is exactly the degree-zero inclusion
+of the quotient class of $r\in J(U)^0=R(U)$. The whole ring restriction
+preserves this inclusion, and the actual power-class restriction sends
+$r$ to its literal structure-ring restriction. Hence the two composites
+are equal on every $r$, which is precisely naturality. This also proves
+the actual degree-zero formula without defining the algebra through a
+stalk equivalence.
+\end{proof}
+
+\begin{theorem}[The whole actual ring stalk has its genuine original graded ring map]
+\label{hir:real-domain-actual-normal-associated-ring-stalk-whole-map}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-section-ring-presheaf,hir:real-domain-actual-normal-layer-whole-germ-map,hir:relative-normal-intrinsic-graded-algebra}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualWholeNormalAssociatedRing,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualWholeNormalAssociatedRingCommRing,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalLayerSectionGermHom_mul,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingSectionGermHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingSectionGermHom_of,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingGermCocone,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingStalkToWholeHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingStalkToWholeHom_germ,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingPresheaf.actualNormalAssociatedRingStalkToWholeHom_power_class}
+\leanok
+For every original point $y$, the genuine neighbourhood colimit ring
+stalk of $G$ has an internally constructed unital ring homomorphism to
+$\bigoplus_q L_q(R_y,I_y,J_y)$, where $R_y$ is the actual original
+structure-sheaf stalk and $I_y,J_y$ are the whole original stalk ideals.
+Every actual homogeneous section germ maps to its SAME original power
+germ class. No coherence, prescribed stalk map, bijection, or global
+extension is an input to this ring homomorphism construction.
+\end{theorem}
+\begin{proof}
+The actual section germ of the original structure ring is a ring
+homomorphism and sends each true section power into its whole original
+stalk power. For arbitrary section layer classes choose actual power
+representatives $s,t$. The previously proved whole layer germ formulas
+send them to the classes of the actual germs of $s,t$. Since the actual
+structure-ring germ sends $st$ to the product of these germs, the layer
+germ maps preserve the genuine homogeneous products. The degree-zero
+class of $1$ maps to the whole original degree-zero class of $1$.
+Extend these additive layer germ maps to the genuine entire direct sum.
+The same homogeneous multiplication and finite-sum argument gives a
+unital ring homomorphism for every actual neighbourhood of $y$.
+Restriction followed by this homomorphism equals the original larger
+neighbourhood homomorphism on every homogeneous section class by the
+true section-germ restriction identity. Whole direct-sum equality
+follows, giving an actual ring cocone. The genuine neighbourhood-colimit
+universal property supplies the claimed whole stalk ring homomorphism.
+Its actual colimit-inclusion identity gives the formula for every
+original section germ, hence for every homogeneous power class.
+\end{proof}

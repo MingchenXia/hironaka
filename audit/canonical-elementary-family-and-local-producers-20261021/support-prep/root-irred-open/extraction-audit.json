@@ -1,0 +1,29 @@
+{
+  "status": "DRAFT_COMPLETE_ORIGINAL_SOURCE_ONLY_NO_RUNTIME",
+  "source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+  "ordinary_git_checkout": "/workspace/archon-publish",
+  "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/AnalyticIrreducibleComponents.lean",
+  "source_sha256": "55a98168034c65f579a9bee5d0e0e2bee862da837b2fcdf14be40232ff3f3ab9",
+  "source_module": "TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents",
+  "complete_original_declarations": [
+    "TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.isOpen_of_forall_regularAtDim_self"
+  ],
+  "original_selected_source": "omit [IsComplexManifold n M] in\n/-- A set that is regular of full dimension at each of its points is open. -/\ntheorem isOpen_of_forall_regularAtDim_self {W : Set M}\n    (hW : \u2200 x \u2208 W, RegularAtDim (n := n) W x n) : IsOpen W := by\n  refine isOpen_iff_mem_nhds.mpr fun x hx => ?_\n  obtain \u27e8_, _, \u03a6, _, _, hflat\u27e9 := hW x hx\n  have hS : IsOpen ((complexChartAt (n := n) x).val.source \u2229\n      (complexChartAt (n := n) x).val \u207b\u00b9' \u03a6.source) :=\n    (complexChartAt (n := n) x).val.continuousOn.isOpen_inter_preimage\n      (complexChartAt (n := n) x).val.open_source \u03a6.isOpen_source\n  refine mem_of_superset (hS.mem_nhds \u27e8mem_complexChartAt_source x, \u03a6.center_mem_source\u27e9) ?_\n  intro y hy\n  refine (hflat hy.1 hy.2).mpr ?_\n  intro i hi\n  exact absurd i.2 (not_lt.mpr hi)\n",
+  "original_selected_sha256": "d5ff39e5346a3890dda22b2a53c09bbf0e38aed78944ddd2c277ad6bec6c85fe",
+  "original_context": "set_option autoImplicit false\n\nopen Set Filter\nopen scoped Topology\n\nnamespace TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents\n\nopen FirstPass FirstPass.NonKahlerLocus FirstPass.BlowupSequences\n\nnoncomputable section\n\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M]\n  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]\n\n",
+  "original_closing": "\nend\n\nend TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents\n",
+  "imports": [
+    "Hironaka.Analytic.AnalyticIrreducibleComponents"
+  ],
+  "administrative_contexts": [
+    {
+      "before": "open Hironaka.NonKahlerLocus Hironaka.BlowupSequences",
+      "after": "open Hironaka.BlowupSequences",
+      "reason": "Original FirstPass.NonKahlerLocus namespace is flattened into the existing parent Hironaka namespace; the old public original module uses the same BlowupSequences open. No declaration type or proof token changes."
+    }
+  ],
+  "prepared_destination_sha256": "f3d93a2c6f2c5ceb79ec4d827ddcff49c461b1c304fa2f83de5face85802ce05",
+  "proof_type_payload_edits": 0,
+  "production_installed": false,
+  "build_or_kernel_or_expression_PASS_claimed": false
+}

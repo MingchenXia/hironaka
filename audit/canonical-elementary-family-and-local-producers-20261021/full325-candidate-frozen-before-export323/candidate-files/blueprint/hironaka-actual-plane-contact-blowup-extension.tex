@@ -1,0 +1,91 @@
+\section{A genuine one-step blowup lift onto the strict contact plane}
+
+Let $\iota(x)=(x,0)$ in $\mathbf C^{d+1}$, let $D\subset\mathbf C^d$
+be an original smooth nowhere dense closed centre, let $C=\iota(D)$ be
+its literal graph carrier and let $N=\iota(\mathbf C^d)$ be the actual
+contact plane. An arbitrary actual ambient blowup $\pi$ along $C$ is
+input. No comparison map, strict-transform image or canonical-invariant
+identity is supplied.
+
+\begin{theorem}[Matched actual centre ideals produce the unique holomorphic blowup lift]
+\label{hir:actual-plane-contact-blowup-universal-lift}
+\uses{hir:actual-graph-section-whole-ideal-pullback,hir:submersion-choice-image-trace-whole-pullback,ana:blowups}
+\lean{Hironaka.HironakaActualPlaneContactBlowup.exists_unique_plane_blowup_lift}
+\leanok
+For actual blowups $\rho:Z\to\mathbf C^d$ along $D$ and
+$\pi:Y\to\mathbf C^{d+1}$ along the same literal $C$, the actual map
+$\iota\rho$ has a unique genuine holomorphic lift $\kappa:Z\to Y$
+with $\pi\kappa=\iota\rho$.
+\end{theorem}
+\begin{proof}
+The genuine whole original graph-section theorem at $f=0$ proves
+$\iota^*\mathcal I_C=\mathcal I_D$ for every original numerator at every
+point. Actual whole ideal pullback composition across the two dimensions
+therefore gives $(\iota\rho)^*\mathcal I_C=\rho^*\mathcal I_D$.
+The latter is genuinely invertible by the input actual blowup property
+of $\rho$. The map $\iota\rho$ is genuinely holomorphic. Apply the
+actual universal property of the supplied ambient blowup $\pi$ to this
+same original map and its now-proved invertible whole ideal pullback.
+It produces the stated unique actual holomorphic lift; no lift or desired
+invertibility certificate is assumed.
+\end{proof}
+
+\begin{theorem}[The actual lift is proper and has the entire strict contact transform as its image]
+\label{hir:actual-plane-contact-blowup-whole-strict-image}
+\uses{hir:actual-plane-contact-blowup-universal-lift,hir:principalization-local,bcalc:exceptional-divisor,bcalc:isomorphism-off-centre}
+\lean{Hironaka.HironakaActualPlaneContactBlowup.plane_blowup_lift_proper_and_range}
+\leanok
+The actual holomorphic lift $\kappa$ is proper and
+\[
+ \operatorname{range}\kappa=\overline{\pi^{-1}(N\setminus C)},
+\]
+the same genuine ambient strict contact transform. No compactness assumption
+is introduced.
+\end{theorem}
+\begin{proof}
+The true first projection $p$ satisfies $p\pi\kappa=\rho$. Actual blowups
+are proper, and the actual proper-factor theorem into Hausdorff $Y$
+makes $\kappa$ proper. Its image is therefore closed. The actual
+exceptional-centre preimage $\rho^{-1}D$ has empty interior, so its
+complement is dense. At each point of that complement the proved whole
+map identity places $\kappa$ in $\pi^{-1}(N\setminus C)$. Continuity
+and the actual strict-transform closure imply every image point belongs
+to the latter closure. Conversely, take any actual point of
+$\pi^{-1}(N\setminus C)$. The plane relation supplies its unique original
+first coordinate outside $D$. Genuine lower blowup surjectivity provides
+a point of $Z$ over that coordinate. Its lift and the given ambient point
+have the same original ambient image outside $C$. The actual ambient
+blowup is injective over the centre complement, hence those two points
+are equal. Thus the preclosure set lies in the actual closed range of
+$\kappa$, so its entire closure does too. Both inclusions prove the
+asserted exact range.
+\end{proof}
+
+\begin{theorem}[Original one-step contact-plane data internally produce the lower blowup and strict-image comparison]
+\label{hir:actual-plane-contact-blowup-original-producer}
+\uses{hir:actual-plane-contact-blowup-universal-lift,hir:actual-plane-contact-blowup-whole-strict-image,ana:blowup-existence}
+\lean{Hironaka.HironakaActualPlaneContactBlowup.exists_original_plane_contact_blowup}
+\leanok
+From the original nowhere dense closed smooth $D$ and the same actual
+ambient blowup $\pi$ alone, internally produce an actual lower complex
+manifold $Z$, an actual blowup $\rho$ along $D$, and a genuine proper
+holomorphic map $\kappa$ over $\iota$, whose entire image is the actual
+strict contact transform above. No lower blowup, comparison map or image
+equality is input.
+\end{theorem}
+\begin{proof}
+Apply the genuine original blowup-existence theorem to the stated smooth,
+closed, nowhere dense $D$. It constructs a genuine lower manifold and
+actual blowup $\rho$. Use exactly this blowup in the first theorem to
+construct its unique genuine holomorphic lift to the same given $\pi$.
+The preceding theorem proves properness and the entire strict-image
+identity for that same map. The original nowhere-density condition is
+inside the contact plane: if $C=N$, the ambient strict transform is empty
+and the intrinsic component-deleting operation is excluded by the actual
+blowup definition. No such false boundary case is admitted.
+\end{proof}
+
+This is the genuine one-step lift and whole strict-image producer. An actual
+biholomorphism onto that strict transform, the whole restricted blowup
+universal property, and canonical invariant/centre/history comparison are
+additional assertions; none is inferred from surjectivity or properness alone.

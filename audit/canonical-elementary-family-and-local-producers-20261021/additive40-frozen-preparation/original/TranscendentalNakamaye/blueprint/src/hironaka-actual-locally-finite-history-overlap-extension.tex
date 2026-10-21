@@ -1,0 +1,100 @@
+\section{Internally constructed overlap maps of one actual locally finite history}
+
+The only global-history inputs are the actual growing blowup sequence and
+local finiteness of its actual centre images. The existence of the general
+noncompact scheduler is not inferred. All windows, local finite endpoints,
+whole overlap maps and their cocycle are constructed from these inputs.
+
+\begin{lemma}[Whole actual prefix comparisons restrict to smaller windows]
+\label{hir:actual-locally-finite-prefix-comparison-restriction}
+\uses{hir:actual-locally-finite-history-late-prefix-comparison}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.restrictPrefixComparison_proj}
+\leanok
+Any genuine endpoint biholomorphism between two actual finite prefixes
+restricted to an open $U$, commuting with their whole base projections,
+restricts to a genuine biholomorphism over every smaller open $V\subseteq U$.
+Its whole restricted projection equation holds on $V$.
+\end{lemma}
+\begin{proof}
+The original projection equation implies that the image of a point over $V$
+is again over $V$. Applying that equation to the inverse point gives the
+same fact for the genuine inverse. Restrict both actual maps using these
+membership facts. Their true inverse laws remain literal, and holomorphicity
+is inherited by the actual open inclusions. The original whole projection
+equation, followed by the defining restricted projection equations, gives
+the entire projection equation on $V$. No comparison is assumed on $V$.
+\end{proof}
+
+\begin{lemma}[The same actual history internally supplies the finite endpoint cover]
+\label{hir:actual-locally-finite-history-internal-window-atlas}
+\uses{hir:actual-locally-finite-history-stabilizing-windows}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableIndex,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.point_mem_stableWindow,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.stableWindow_avoids,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localProjection_contMDiff,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.localPrefixProjection_isProperMap}
+\leanok
+For each original base point choose its internally proved stabilizing window
+$U_x$ and index $N_x$. The actual finite local endpoint is the inverse image
+of $U_x$ in the actual stage $N_x$. These windows cover the original base;
+the literal original prefix projections are holomorphic and proper over
+their own local bases. All later actual centres miss these same windows.
+\end{lemma}
+\begin{proof}
+Apply the actual local-finiteness window producer at each original point
+and retain its actual chosen index, open, point membership and avoided-tail
+proof. Each local endpoint and projection are the genuine restriction of
+the recorded finite prefix. The point-membership fields prove the cover.
+Actual finite blowup projections and their genuine restrictions supply
+the local holomorphicity and properness; the retained avoidance field
+concerns every actual later centre. No local history or cover is supplied
+by the caller.
+\end{proof}
+
+\begin{theorem}[Actual pairwise overlap biholomorphisms are internally constructed]
+\label{hir:actual-locally-finite-history-whole-overlap-maps}
+\uses{hir:actual-locally-finite-history-internal-window-atlas,hir:actual-locally-finite-history-late-prefix-comparison,hir:actual-locally-finite-prefix-comparison-restriction}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_projection}
+\leanok
+The actual inverse images of $U_x\cap U_y$ in the stage-$N_x$ and
+stage-$N_y$ finite endpoints have a genuine whole biholomorphism over the
+original base. It induces a biholomorphism between the actual saturated
+overlap opens of the two local endpoint manifolds. Its projection equation
+holds on the entire overlap, including exceptional points.
+\end{theorem}
+\begin{proof}
+The intersection is stabilizing after $\min(N_x,N_y)$: whichever of the
+two indices is smaller already gives avoidance on this smaller open.
+Both actual prefix indices are at least this minimum. The genuine late-prefix
+comparison therefore supplies their actual whole biholomorphism over the
+intersection. Reversing the order of the two open factors is the literal
+identity on points. The actual nested-open biholomorphisms identify these
+direct finite-prefix inverse images with the saturated overlap opens in the
+local endpoints. Compose these genuine maps to obtain the overlap map.
+Their actual projection formulas give the whole asserted square.
+\end{proof}
+
+\begin{theorem}[The constructed actual overlaps supply genuine gluing data]
+\label{hir:actual-locally-finite-history-overlap-cocycle-gluing}
+\uses{hir:actual-locally-finite-history-whole-overlap-maps,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_self,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_inter,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.transition_cocycle,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteHistoryOverlap.actualHistoryGlueCore}
+\leanok
+These same internally chosen overlap maps have diagonal identity, preserve
+the actual third-window intersections and satisfy the genuine triple cocycle.
+Consequently the actual local finite endpoints determine topological gluing
+data, with no incoming overlap comparison or cocycle certificate.
+\end{theorem}
+\begin{proof}
+The diagonal comparison is the proved actual late-prefix identity; the
+nested-open identifications are mutually inverse. Its induced overlap map
+is therefore the literal identity. The whole projection equation preserves
+membership in every third original window, proving the true intersection
+condition.
+
+On a triple intersection restrict the three already constructed direct
+finite-prefix comparisons to the same smaller actual open. Their genuine
+projection equations show that the composite of the first two and the third
+are biholomorphisms between the same actual finite restricted endpoints
+over the same base. Actual whole-projection uniqueness forces equality.
+Evaluating this equality at the original triple-overlap point and undoing
+the literal nested-open identifications yields the cocycle for the same
+chosen maps, even though their original pairwise cuts differ. The actual
+open cover, diagonal, intersection condition and cocycle now populate every
+field of the genuine topological gluing construction.
+\end{proof}

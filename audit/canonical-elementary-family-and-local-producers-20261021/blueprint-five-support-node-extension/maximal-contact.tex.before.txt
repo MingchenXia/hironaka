@@ -1,0 +1,104 @@
+\section{Original maximal order and tangent directions}
+\label{sec:maximal-contact}
+
+\subsection{Marked ideals of maximal order and tangent directions}
+
+In this subsection \((\mathfrak a,\mu)\) is a marked ideal on a complex manifold \(X\) with \(\mathfrak a\) coherent and \(\mu\ge1\),
+\(\mathcal D^i\) are the derivative ideals of Definition~\ref{hir:derivative-ideal}, and
+\(\operatorname{cosupp}(\mathfrak a,\mu)=\{x:\operatorname{ord}_x\mathfrak a\ge\mu\}\) (Definition~\ref{hir:cosupport}).
+
+\begin{definition}[Maximal order]
+\label{mc:maximal-order}
+\uses{hir:derivative-ideal,hir:cosupport}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.IsMaximalOrder}
+\leanok
+\((\mathfrak a,\mu)\) is \emph{of maximal order} if \(\mathcal D^\mu(\mathfrak a)=\mathcal O_X\), i.e.\ \(1\in\mathcal D^\mu(\mathfrak a)_x\) for every
+\(x\in X\).
+\end{definition}
+By Lemma~\ref{hir:order-taylor} this says \(\operatorname{ord}_x\mathfrak a\le\mu\) for every \(x\), Włodarczyk's definition.
+
+\begin{lemma}[Derivatives of a marked ideal of maximal order]
+\label{mc:maximal-order-derivative}
+\uses{mc:maximal-order}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.iterDerivIdeal_iterDerivIdeal,Hironaka.MaximalContact.IsMaximalOrder.iterDerivIdeal}
+\leanok
+If \((\mathfrak a,\mu)\) is of maximal order and \(0\le i\le\mu\), then \((\mathcal D^i(\mathfrak a),\mu-i)\) is of maximal order.
+\end{lemma}
+\begin{proof}
+\leanok
+\(\mathcal D^{\mu-i}(\mathcal D^i(\mathfrak a))=\mathcal D^\mu(\mathfrak a)=\mathcal O_X\), by the definition \(\mathcal D^{j+1}=\mathcal D\circ\mathcal D^j\) and induction on
+\(\mu-i\).
+\end{proof}
+
+\begin{definition}[Tangent direction]
+\label{mc:tangent-direction}
+\uses{hir:derivative-ideal}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.IsTangentDirection}
+\leanok
+Let \(U\subset X\) be open. A \emph{tangent direction} of \((\mathfrak a,\mu)\) on \(U\) is a function \(u\) whose germ at every
+point of \(U\) lies in \(\mathcal D^{\mu-1}(\mathfrak a)\) and which has multiplicity one: \(du(x)\ne0\) (equivalently, some partial
+derivative \(\partial^e_vu(x)\) in some chart \(e\) at \(x\) is nonzero) for every \(x\in U\) with \(u(x)=0\).
+\end{definition}
+By the implicit function theorem the zero set \(V(u)\) of a tangent direction is a closed submanifold of \(U\) of codimension
+one (or empty), a \emph{hypersurface of maximal contact}.
+
+\begin{lemma}[The cosupport lies on every tangent direction]
+\label{mc:tangent-direction-support}
+\uses{mc:tangent-direction,hir:giraud-support}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal,Hironaka.MaximalContact.apply_eq_zero_of_mem_cosupport,Hironaka.MaximalContact.IsTangentDirection.cosupport_inter_subset}
+\leanok
+If \(u\) is a tangent direction of \((\mathfrak a,\mu)\) on \(U\), then \(\operatorname{cosupp}(\mathfrak a,\mu)\cap U\subset V(u)\).
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{hir:giraud-support} (the inclusion \(\operatorname{cosupp}(\mathfrak a,j+1)\subset\operatorname{cosupp}(\mathcal D(\mathfrak a),j)\), applied
+\(\mu-1\) times), \(x\in\operatorname{cosupp}(\mathfrak a,\mu)\) implies \(x\in\operatorname{cosupp}(\mathcal D^{\mu-1}(\mathfrak a),1)\), i.e.\ every germ of
+\(\mathcal D^{\mu-1}(\mathfrak a)_x\) vanishes at \(x\); in particular \(u(x)=0\).
+\end{proof}
+
+\begin{lemma}[Existence of tangent directions]
+\label{mc:tangent-direction-exists}
+\uses{mc:maximal-order,mc:tangent-direction,mc:tangent-direction-support,hir:derivative-ideal-generators}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.exists_isTangentDirection}
+\leanok
+If \((\mathfrak a,\mu)\) is of maximal order and \(x\in\operatorname{cosupp}(\mathfrak a,\mu)\), then \((\mathfrak a,\mu)\) has a tangent direction on
+some open neighbourhood of \(x\).
+\end{lemma}
+\begin{proof}
+\leanok
+\(\mathcal D^{\mu-1}(\mathfrak a)\) is coherent (Lemma~\ref{hir:derivative-ideal-generators}); let \(f_1,\dots,f_m\) generate it on an open
+neighbourhood \(U_0\) of \(x\) inside the domain of a chart \(e\). By the same lemma, \(\mathcal D(\mathcal D^{\mu-1}(\mathfrak a))=\mathcal D^\mu(\mathfrak a)\) is
+generated near \(x\) by the \(f_i\) and the \(\partial^e_{e_j}f_i\); since it contains \(1\), not all of these vanish at \(x\). As in the proof
+of Lemma~\ref{mc:tangent-direction-support}, every germ of \(\mathcal D^{\mu-1}(\mathfrak a)_x\) vanishes at \(x\), so \(f_i(x)=0\) for all \(i\), and
+\(\partial^e_{e_j}f_i(x)\ne0\) for some \(i,j\). Then \(df_i(x)\ne0\), hence \(df_i\ne0\) on an open neighbourhood \(U\subset U_0\) of \(x\), and
+\(u=f_i|_U\) is a tangent direction on \(U\).
+\end{proof}
+
+\subsection{Derivative ideals under a blowup}
+
+In this subsection \(\pi\colon Y\to X\) is the blowup of the complex manifold \(X\) along \(C\)
+(Definition~\ref{ana:blowups}), \(D\) its exceptional divisor, so that \(\mathcal O_Y(-qD)=\pi^*(\mathcal I_C^q)\)
+(Lemma~\ref{bcalc:exceptional-divisor}), and \(\sigma^c(\mathfrak a,\mu)=(\pi^*\mathfrak a:\mathcal O_Y(-\mu D))\) is the
+controlled transform (Definition~\ref{bcalc:controlled-transform-def}). Marked ideals are taken with \(N\) the whole
+manifold. For a chart \(e\) and \(v\in\mathbf C^n\), \(\partial^e_v\) is the partial derivative of
+Definition~\ref{hir:derivative-ideal}; \(e_z\) is a chart at \(z\) and \(e_1,\dots,e_n\) the standard basis.
+
+\begin{lemma}[Villamayor: maximal order survives admissible blowups]
+\label{mc:maximal-order-transform}
+\uses{mc:inclusions,mc:maximal-order,hir:hadamard-bridge}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.MaximalContact.IsMaximalOrder.controlledTransform,Hironaka.MaximalContact.IsMaximalOrder.controlledTransform_of_subset_cosupport}
+\leanok
+Let \((\mathfrak a,\mu)\) be a coherent marked ideal of maximal order with \(\mathfrak a\subset\mathcal I_C^\mu\) (for instance
+\(C\subset\operatorname{cosupp}(\mathfrak a,\mu)\)). Then \((\sigma^c(\mathfrak a,\mu),\mu)\) is of maximal order.
+\end{lemma}
+\begin{proof}
+\leanok
+By Lemma~\ref{mc:inclusions} with \(r=\mu\) and mark \(0\), \(\sigma^c(\mathcal D^\mu(\mathfrak a),0)\subset\mathcal D^\mu(\sigma^c(\mathfrak a,\mu))\). Since
+\(1\in\mathcal D^\mu(\mathfrak a)\) everywhere, \(1=1\circ\pi\in\pi^*\mathcal D^\mu(\mathfrak a)=\sigma^c(\mathcal D^\mu(\mathfrak a),0)\).
+\end{proof}

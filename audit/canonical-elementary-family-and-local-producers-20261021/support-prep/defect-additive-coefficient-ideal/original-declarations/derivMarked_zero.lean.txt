@@ -1,0 +1,4 @@
+/-- `𝓓^0(𝔪) = 𝔪`. -/
+theorem derivMarked_zero {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+    (𝔪 : MarkedIdeal n M) : derivMarked 𝔪 0 = 𝔪 := by
+  cases 𝔪; rfl

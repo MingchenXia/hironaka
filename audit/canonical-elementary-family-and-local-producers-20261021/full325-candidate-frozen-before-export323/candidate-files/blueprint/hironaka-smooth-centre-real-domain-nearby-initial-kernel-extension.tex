@@ -1,0 +1,157 @@
+\section{All original nearby initial ideals from one actual real polynomial family}
+
+Only original regular geometry and coherence are original inputs. Actual
+translations are applied to functions on their genuine real domains.
+Pullback and colon comparisons below are stalk membership dictionaries at
+actual points. No globally coherent extension of the flattened family and
+no map of arbitrary origin germs into unrelated nearby stalks is introduced.
+
+\begin{lemma}[True local finite presentations control inverse pullback and composition]
+\label{hir:real-domain-local-membership-inverse-pullback-calculus}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-centre-domain-local-span-composition,hir:real-centre-domain-original-pullback-coherence,trace:actual-finite-germ-ideal-pullback-generation}
+\lean{Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.coherentOn_holomorphicAt_mem,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.coherentOn_mem_congr,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.coherentOn_mem_of_isInSpanAt,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.mem_pullback_iff_of_real_local_inverse,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.pullback_comp_mem_of_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.pullback_sum_mem_of_real}
+\leanok
+At a point of a genuinely coherent real domain, every original ideal member
+is holomorphic; membership is invariant under equality near that point and
+closed under actual finite holomorphic spans. For a true local holomorphic
+inverse pair, membership in the actual pullback ideal is exactly original
+membership of the actual inverse composite. Actual pullback composition
+and pullback of sums have their whole membership dictionaries at any point
+whose actual source value lies in the corresponding real coherent domains.
+\end{lemma}
+\begin{proof}
+Choose the actual finite holomorphic generators near the stated source point.
+Their complete membership span makes every member holomorphic and preserves
+membership under an actual germ equality. Substitute finite representations
+of each member into a finite holomorphic span to obtain the same generator
+span, proving closure. For inverse pullback, compose an actual pulled member's
+finite span with the actual inverse. The inverse is holomorphic near the
+source point and is a true right inverse there, so the composed generators
+agree with actual original members. The just-proved closure gives original
+membership. Conversely compose an original member with the forward map; it
+is itself a literal pullback generator. The true left inverse makes this
+composite agree with the requested function near the pulled point, proving
+membership by the original finite span equality. For composition, each
+original member composed with the first map is a holomorphic intermediate
+pullback member, giving one inclusion. Substituting every intermediate
+pullback span into the final span gives the opposite inclusion. For sums,
+compose each finite sum generator and coefficient; an actual member of either
+factor becomes an actual member of the corresponding pullback, proving one
+inclusion. Conversely each actual pulled factor generator is an original sum
+generator after composition, and substituting its span gives the other
+inclusion. All regularity and closure are needed only at the actual source
+value, not at arbitrary ambient points outside the real domains.
+\end{proof}
+
+\begin{lemma}[The actual original deformation and all parameter colons translate at true centre points]
+\label{hir:real-domain-actual-point-deformation-and-all-colon-translation}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-local-membership-inverse-pullback-calculus,hir:relative-normal-affine-dnc-coordinates,hir:relative-normal-affine-dnc-equation-ideal,hir:relative-normal-affine-dnc-inverse,hir:real-domain-local-coherent-pullback}
+\lean{Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.coherentOn_originalDeformation_of_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.original_deformation_pullback_shift_mem_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.original_deformation_origin_translation_of_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.original_colon_origin_translation_of_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.coherentOn_actualTranslated_of_real}
+\leanok
+Let $F$ be genuinely coherent on a real open $T$, and let $\theta(a)$ be a
+true coordinate-centre point in $T$. Put $F_a=T_{\theta(a)}^*F$ and
+$b=\delta(\theta(a))$, with actual central inclusion $\delta$ and actual
+ambient translation $T_b(z)=b+z$. For every actual function $g$, the existing
+original deformation ideal of $F_a$ contains $g$ at zero precisely when the
+existing deformation of $F$ contains $g\circ T_{-b}$ at $b$.
+The same exact dictionary holds for EVERY actual repeated parameter colon.
+Both translated families have true local finite generation on their actual
+projection domains containing the stated points.
+\end{lemma}
+\begin{proof}
+The original deformation is literally projection pullback plus the genuine
+finite equation ideal. Its actual projection satisfies
+$p\circ T_b=T_{\theta(a)}\circ p$; every true equation and the actual parameter
+are unchanged by $T_b$ and $T_{-b}$. Apply the preceding actual local
+composition and sum dictionaries at zero, using real coherence of $F$ at
+$\theta(a)$ and genuine equation holomorphicity. They identify the translated
+original deformation membership with the pullback of the original deformation
+by $T_b$. The genuine real original deformation is coherent on $p^{-1}(T)$,
+which contains $b$. Its inverse pullback dictionary now gives exactly the
+stated actual inverse-composite membership at $b$. For the next colon,
+actual holomorphicity of $g$ at zero is equivalent to holomorphicity of its
+inverse composite at $b$. Its product with the actual parameter becomes the
+product of that inverse composite and the same actual parameter, by parameter
+invariance. Induction therefore gives the dictionary for every colon order,
+including zero. Real pullback/sum coherence gives the asserted actual local
+finite generation. No entire ambient ideal equality or globally coherent
+extension is asserted outside these actual domains.
+\end{proof}
+
+\begin{lemma}[The same actual index gives the entire translated central family]
+\label{hir:real-domain-same-index-whole-translated-central-dictionary}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-point-deformation-and-all-colon-translation,hir:real-domain-local-membership-inverse-pullback-calculus,hir:relative-normal-affine-dnc-coordinates,hir:real-domain-original-exact-deformation-central-model}
+\lean{Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.original_central_origin_membership_translation_of_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.original_central_whole_origin_translation_of_real,Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.original_translated_saturation_of_real}
+\leanok
+At a true base point with $b\in U$, where the actual selected colon is
+coherent on the real graph open $U$, the WHOLE origin ideal of the existing
+central family of $F_a$ at that SAME selected index equals the WHOLE origin
+ideal of the actual translated existing central family of $F$ at that index.
+All functional parameter-colon stability and entire saturation-union data
+at $b$ become the corresponding entire data at zero for $F_a$.
+\end{lemma}
+\begin{proof}
+The preceding ALL-colon inverse membership dictionary and the true inverse
+pullback dictionary for the selected colon on $U$ identify the selected
+translated colon memberships at zero. Pull them back by the actual central
+inclusion. The true coordinate identity
+$\delta\circ T_{\theta(a)}=T_b\circ\delta$ and the preceding local composition
+calculus identify exactly the two existing central membership spans at zero.
+Spanning all their actual holomorphic membership germs in both directions
+therefore gives the WHOLE origin-ideal equality. For functional stability,
+replace an arbitrary actual function at zero by its actual inverse composite
+at $b$ in the two colon dictionaries and use the SAME-index all-point identity
+on $U$. For the whole union, the same substitution carries every original
+colon order, so the entire increasing existential union at zero equals the
+selected colon by the supplied entire union identity at $b$. The index is
+unchanged and all data are actual functions and whole germ ideals.
+\end{proof}
+
+\begin{theorem}[One genuine real base open supplies all original nearby initial polynomial kernels]
+\label{hir:real-domain-original-all-nearby-initial-polynomial-kernels}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-same-index-whole-translated-central-dictionary,hir:real-domain-original-all-translated-central-polynomial-kernels,hir:real-domain-whole-origin-local-dictionary,hir:real-domain-all-whole-graph-colon-central-dictionaries,hir:real-domain-entire-graph-colon-central-reverse-inclusion,hir:relative-normal-deformation-divided-scaling-lift,hir:relative-normal-homogeneous-whole-analytic-contraction}
+\lean{Hironaka.HironakaSmoothCentreRealDomainNearbyInitialKernel.exists_original_regular_real_all_nearby_initial_polynomial_kernels}
+\leanok
+Original regular-centre geometry and original coherence internally supply
+one true flattening, one actual selected index and one real base open
+containing zero. Every base point lies in the true flattening target and
+centre plane. At EVERY point of this SAME open the ENTIRE original normal
+initial ideal of the actual translated original flattened family equals
+the homogeneous polynomial ideal generated by the SAME finite original
+relation family with its actual translated coefficient functions. Its actual
+analytic image is the WHOLE existing central ideal at the SAME index, with
+its entire polynomial preimage equal to that original initial ideal.
+\end{theorem}
+\begin{proof}
+Use the original real finite polynomial-kernel producer to supply the true
+flattening, index, graph and central opens, complete finite polynomial
+presentation and base open. Each included actual base point lies in the
+real flattened target and centre plane; its actual central image lies in
+the same graph open because the central open is its true preimage.
+The preceding local dictionaries transport the SAME selected functional
+saturation and whole central family to its actual translated original family.
+This translated family is coherent on the genuine translated target; the
+existing translated deformation is coherent on its true projection preimage.
+They supply actual finite generation near zero. For every original translated
+$g\in I_a\cap J^q$, genuine division constructs its whole scaled quotient;
+whole scaling membership, the actual local origin dictionary and the transported
+entire saturation-union dictionary put that quotient in the SAME selected
+colon. True central pullback gives every original initial symbol, so spanning
+ALL original relations gives the entire forward inclusion. The exact whole
+graph-colon/central dictionary and genuine reverse analytic graph-colon
+inclusion give the reverse WHOLE inclusion without any global coherence
+premise. Thus the existing central origin ideal of $F_a$ equals the analytic
+image of the ENTIRE original initial ideal at that same index. Substitute the
+preceding whole translated central equality and the internally supplied
+polynomial-kernel equality from the finite family. The original whole initial
+ideal is homogeneous; genuine whole homogeneous analytic contraction identifies
+its entire polynomial preimage with itself. The displayed finite-family kernel
+has that same polynomial preimage, so it equals the ENTIRE original nearby
+initial ideal. All points retain one actual base open, one index and one
+finite family. The subsequent uniform denominator/free-module construction and
+original nonlinear stalk transport remain separate obligations.
+\end{proof}

@@ -1,0 +1,108 @@
+\section{Independent finite ordered trees determine the same elementary map}
+
+The auxiliary trees retain every original empty position and every whole
+chronological boundary. The set $G$ passed to a tail merely restricts its
+allowed support in the original existence proof; it is not an input to
+any auxiliary canonical choice. Consequently the comparison below allows
+arbitrary, unrelated $G,G'$. All base maps are actual biholomorphisms.
+Write $cL$ for the labelled list of closures of carriers, $L^+$ for
+deletion of precisely empty carriers, and $\Phi^*L$ for labelled inverse
+image. No incoming comparison of stages is assumed.
+
+\begin{theorem}[Independent actual trees compare from closure-normalized ordered input]
+\label{hir:original-canonical-ordered-closure-choice}
+\uses{hir:original-canonical-separation-chain-filtered-choice,hir:original-pure-head-unique-empty-base-comparison,hir:original-empty-filtered-parts-tree-projection-neutrality,hir:original-ordered-recursion-literal-boundary,hir:original-separation-chain-whole-strict-normal-form}
+\lean{Hironaka.HironakaOriginalCanonicalOrderedChoice.ordered_choice_over_base_closedParts}
+\leanok
+Let $\Phi:X'\simeq X$ be an actual original biholomorphism. Let $T,S$
+be any actual finite ordered canonical resolution trees on original
+input $(E,G,L)$ and $(E',G',L')$, respectively. Suppose
+\[
+ (E')^+=(\Phi^*E)^+,
+ \qquad (cL')^+=\Phi^*((cL)^+).
+\]
+There is a unique actual final biholomorphism $\eta$ satisfying
+$T\eta=\Phi S$. This same map carries the entire ordered final boundary
+after deletion of precisely empty members. Moreover for every original
+subset $P\subseteq X$, the entire conventional strict transform of
+$\Phi^{-1}P$ under $S$ equals $\eta^{-1}$ of its strict transform under
+$T$. No closedness of deeper raw carriers is required.
+\end{theorem}
+\begin{proof}
+Use strong induction on the sum of the two raw list lengths. The
+literal closure-normalized lists distinguish only genuinely empty
+carriers: closure is empty exactly when the original carrier is empty,
+and an actual biholomorphism preserves emptiness. If the normalized
+list is empty, both actual trees contain only empty centres. Their
+genuine projection biholomorphisms identify their final spaces over
+$\Phi$. The exact whole chronological boundary formula consists of
+the pulled initial boundary followed by the original number of empty
+members. Filtering this literal formula and the initial boundary
+identity gives the result for the same composed map. A zero-length
+tree is handled directly, so no closed-boundary assumption is invented
+for an empty original list.
+
+Otherwise expose the two actual head/tail constructors. If an exposed
+head is empty, its entire actual separator chain has empty centres.
+The actual pure head also has empty original cosupport and hence all
+centres empty. Their actual prefix projection is a biholomorphism;
+its entire boundary is the original pulled boundary followed by empty
+positions. For any deeper carrier, the conventional strict transform
+through this prefix is the inverse image of its actual closure.
+Thus the remaining actual tail and the unchanged opposite tree satisfy
+the normalized input and filtered boundary identities over the composed
+base biholomorphism. Apply the induction hypothesis, whose raw length
+sum has decreased, then compose the actual projection equations. This
+retains all original stages and merely compares their maps; none is
+silently deleted.
+
+When both exposed heads are nonempty, equality of the ordered
+closure-normalized lists gives equal labels and corresponding head
+closures. Replace the head of each actual separator chain by its own
+closure: a nil chain remains nil, while a nonnil chain already proves
+that its actual original head is analytic and closed, so its whole
+record remains unchanged. Their remaining closure-normalized tails
+also correspond. The genuine separator-chain comparison therefore
+constructs the actual upper biholomorphism for these same two actual
+separator towers, with entire filtered boundary and whole strict-set
+transport. The strict transform depends only on the original closure,
+so these identities identify the same actual pure-head inputs. Genuine pure-head choice comparison then constructs its
+actual upper biholomorphism and filtered boundary identity. Apply whole
+strict-set transport twice to the remaining labelled carriers. The
+strict transform depends only on their actual closures, is closed,
+and takes an originally empty carrier to empty. Consequently the
+remaining actual tails again have matching ordered normalized input
+and filtered initial boundaries. Their raw length sum is smaller.
+The induction hypothesis gives the final actual biholomorphism;
+composition of the two prefix squares yields $T\eta=\Phi S$ and
+retains the same final boundary identity.
+
+In every case actual holomorphic projection uniqueness gives uniqueness
+of this final map. Finally the genuine projection square, its actual
+biholomorphic upper and lower maps, and closure-normal-form strict
+transform comparison give the whole strict-set identity for every
+original subset $P$. No equality of raw lengths, boundary positions,
+whole mixed-ideal canonical history or stopping indices is used.
+\end{proof}
+
+\begin{corollary}[Literal filtered input already determines the elementary map]
+\label{hir:original-canonical-ordered-filtered-choice}
+\uses{hir:original-canonical-ordered-closure-choice}
+\lean{Hironaka.HironakaOriginalCanonicalOrderedChoice.ordered_choice_over_base}
+\leanok
+The preceding conclusion holds when its labelled input premise is
+replaced by the literal identity $(L')^+=\Phi^*(L^+)$. Thus independently
+chosen finite algorithms with different empty labelled slots and empty
+chronological boundary positions have the same actual elementary map
+up to their unique over-base biholomorphism.
+\end{corollary}
+\begin{proof}
+Apply labelled closure to the literal filtered-list identity. Closure
+commutes with inverse image under the actual base homeomorphism, and
+taking closure preserves and reflects carrier nonemptiness. Therefore
+closure commutes with deletion of precisely empty carriers, giving
+exactly the normalized input identity of the preceding theorem.
+Apply that theorem to the two original actual trees. Its unique map,
+whole ordered filtered boundary and whole strict-set identities are
+unchanged.
+\end{proof}

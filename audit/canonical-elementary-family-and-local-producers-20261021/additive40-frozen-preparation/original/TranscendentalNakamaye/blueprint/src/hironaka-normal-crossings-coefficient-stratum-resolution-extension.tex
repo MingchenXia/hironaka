@@ -1,0 +1,109 @@
+\section{The actual selected-zero append resolves the whole coefficient stratum}
+\label{sec:nc-coefficient-stratum-resolution}
+
+Selected and remaining components refer to the actual smooth connected
+components of the original coefficient carrier. The selected components are
+kept even when the coefficient ideal vanishes identically along them. The
+finite construction below uses a real blowup of their whole strict union;
+it does not assume an invariant-domain nonvanishing condition on that union.
+
+\begin{theorem}[The entire selected strict union remains a genuine permissible centre]
+\label{hir:nc-coefficient-selected-strict-geometry}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsCoefficientStratumResolution.selected_strict_geometry}
+\leanok
+Let $L$ be well formed, $F$ its actual selected component union and $R$ its
+remaining component union. Along ANY genuine $L$-test tower whose actual
+centres lie in the strict transforms of $R$, the strict union $F_T$ is closed
+smooth, transverse to the WHOLE current boundary, and contained in the SAME
+current $L_T.\mathrm{cosupp}$. The entire current carrier is the disjoint
+union $R_T\cup F_T$.
+\uses{hir:smooth-selected-components,hir:dimtwo-unselected-smooth-components,hir:original-all-level-contact-remainder-nonzero-geometry,hir:wellformed-tower,bcalc:transform-off-centre}
+\end{theorem}
+\begin{proof}
+Initially $F$ and $R$ are disjoint closed smooth component unions with union
+$L.N$, and the defining selection gives $F\subseteq L.\mathrm{cosupp}$.
+Strict transforms preserve their finite union and their disjointness. Near
+any point of $F_T$, the complement of the closed $R_T$ identifies the entire
+$F_T$ germ with the actual smooth current carrier germ. This proves smoothness
+and inherits transversality to the whole current boundary from the genuine
+well-formed transform of $L$.
+
+Prove the cosupport inclusion by induction on the actual tower. At a next
+centre, its containment in $R_T$ and disjointness from $F_T$ put every point
+above $F_T$ off that centre. The genuine strict projection inclusion sends
+it into $F_T$, where the induction hypothesis supplies actual current
+cosupport membership. The true off-centre controlled-transform law then
+supplies the next cosupport membership. This uses the SAME ideal and mark at
+every stage, including all exceptional points of earlier blowups.
+\end{proof}
+
+\begin{theorem}[A positive-codimension smooth carrier has an internally constructed whole resolution]
+\label{hir:nc-coefficient-zero-selected-append-resolution}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsCoefficientStratumResolution.exists_resolution_of_positive_codimension_carrier}
+\leanok
+For a closed smooth marked carrier with coherent ideal, positive marking,
+empty original boundary, compact original cosupport and a regular dimension
+bound $k<n$, there is an actual finite resolution of the WHOLE marked datum.
+Every actual centre lies in its literal strict carrier. No nonvanishing,
+phase, maximum, or test-history certificate is an input.
+\uses{hir:nc-coefficient-selected-strict-geometry,hir:nc-coefficient-remainder-finite-parent-phase,ana:blowups,bcalc:transform-off-centre}
+\end{theorem}
+\begin{proof}
+The true nonzero-remainder phase internally chooses a finite canonical terminal
+remainder tower $P$, and derives genuine parent testness on the SAME tower.
+Its actual final parent cosupport misses $R_P$. By the preceding theorem,
+$C=F_P$ is a closed smooth centre in the SAME parent cosupport and transverse
+to its whole accumulated boundary.
+
+The genuine dimension bound for test-tower strict carriers is still $k<n$.
+If $C$ had an interior point, it would be regular there of ambient dimension
+$n$; inclusion into the current carrier would force $n\le k$, a contradiction.
+Thus $C$ has empty interior, and the actual smooth-centre blowup exists, also
+when $C$ is empty. Append it to $P$. All actual parent centre fields are now
+proved, so this is a genuine parent test tower.
+
+The current parent carrier is $R_P\cup C$. Blowing up the whole component
+$C$ erases its strict transform. The new carrier is consequently the strict
+transform of $R_P$. Any point of its new cosupport projects into $R_P$ and
+lies off $C$, by the genuine strict projection inclusion and disjointness.
+The true off-centre reverse cosupport law would put its image in the preceding
+parent cosupport, contradicting its already proved avoidance of $R_P$.
+The new whole cosupport is empty. The true parent test history itself supplies
+all centre-in-carrier containments, so the asserted finite whole resolution
+has been constructed from original data alone.
+\end{proof}
+
+\begin{theorem}[Original marked NC data internally resolve the whole highest coefficient stratum]
+\label{hir:nc-original-whole-coefficient-stratum-resolution}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsCoefficientStratumResolution.exists_original_nc_coefficient_stratum_resolution}
+\leanok
+Let an original coherent ideal have positive marking and compact original
+cosupport, and let an actual NC carrier have branch multiplicity everywhere
+at most $r>0$. Set $Z=\{\operatorname{mult}_H\ge r\}$ and
+$L=\mathcal C(M)|_Z$, where $M$ is the SAME whole-ambient empty-boundary original
+marked datum. There is an internally constructed finite ACTUAL $L$-resolution
+which is a genuine ORIGINAL $M$-test tower with every centre in the literal
+strict transforms of $Z$, and
+\[
+ M_T.\mathrm{cosupp}\cap Z_T=\varnothing.
+\]
+\uses{hir:nc-coefficient-zero-selected-append-resolution,hir:general-nc-highest-multiplicity-smooth-centre,mc:coefficient-restriction-full,mc:coefficient-restriction-support}
+\end{theorem}
+\begin{proof}
+The true highest stratum is closed smooth of regular dimension $n-r$.
+The actual coefficient ideal is coherent; its marking is the product of
+the positive derivative markings, and its boundary is empty. Its entire
+original cosupport is exactly the original marked cosupport intersected with
+$Z$, hence is compact. If $n>0$, positivity of $r$ gives $n-r<n$, so the
+preceding producer constructs the actual whole $L$-resolution. In dimension
+zero the positive highest stratum is empty, since actual branch multiplicity
+is at most zero; the identity tower is already such a resolution.
+
+The full coefficient-restriction tower equivalence supplies true original
+$M$-testness and all centres in $Z_T$ on the SAME tower. Its exact entire
+cosupport dictionary identifies the empty terminal $L$-cosupport with
+$M_T.\mathrm{cosupp}\cap Z_T$, proving the assertion. This clears the actual
+marked cosupport from the strict highest stratum. It does not assert a smaller
+GLOBAL old branch count away from the permitted cosupport, nor a subsequent
+open-history extension or complete G9 iteration.
+\end{proof}

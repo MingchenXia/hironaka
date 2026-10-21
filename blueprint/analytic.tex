@@ -1,0 +1,108 @@
+\section{Original analytic prerequisites and submanifold charts}
+
+\begin{lemma}[A closed complex submanifold is a complex manifold, and its inclusion an immersion]
+\label{ana:submanifold-complex-structure}
+\uses{ana:geometric-setting,ana:blowups}
+\lean{Hironaka.SubmanifoldChartedSpace.chartedSpace,Hironaka.SubmanifoldChartedSpace.isComplexManifold_chartedSpace,Hironaka.SubmanifoldChartedSpace.contMDiff_val}\upstreamlean{TranscendentalNakamaye.Pending.StepFourOnStrictTransform.fderiv_coordinateMap_val_injective}
+\mixedleanok
+Let \(W\) be a subset of a complex manifold \(X\) of dimension \(n\) which is regular of
+dimension \(k\le n\) at each of its points. With the subspace topology and the atlas of
+flattening charts (at each point, a holomorphic chart of \(X\) followed by a biholomorphism
+straightening \(W\) to \(\mathbf C^k\times0\), restricted to \(W\)), \(W\) is a complex manifold
+of dimension \(k\), and the inclusion \(W\hookrightarrow X\) is holomorphic, with injective
+differential in every pair of charts.
+\end{lemma}
+\begin{proof}
+\mixedleanok
+The transition between two flattening charts is the composite of holomorphic maps restricted
+to \(\mathbf C^k\times0\), hence holomorphic; Hausdorffness and second countability pass to
+the subspace. In a flattening chart \(F\) and the ambient chart it is built from, the inclusion
+reads \(\zeta\mapsto\Phi_F^{-1}(\zeta,0)\), which is holomorphic. In a flattening chart \(F\) and an
+ambient chart \(d\), the inclusion read in coordinates has the holomorphic left inverse \(w\mapsto\operatorname{pr}_k(F(d^{-1}(w)))\)
+near the image point, so its differential is injective.
+\end{proof}
+
+\begin{lemma}[Holomorphic maps into a submanifold]
+\label{ana:submanifold-corestriction}
+\uses{ana:submanifold-complex-structure}
+\source{transcendental-nakamaye-copy4-20260911:prop:principalization}
+\lean{Hironaka.SubmanifoldCodRestrict.contMDiff_codRestrict,Hironaka.SubmanifoldCodRestrict.contMDiff_restrictPreimage}
+\leanok
+Let \(W\subseteq X\) be as in Lemma~\ref{ana:submanifold-complex-structure}, with its complex
+structure. If \(f:M\to X\) is a holomorphic map of complex manifolds with \(f(M)\subseteq W\), then
+\(f\), regarded as a map \(M\to W\), is holomorphic. In particular, if \(\pi:Y\to X\) is holomorphic
+and \(W'\subseteq Y\) is regular of some dimension \(k'\) at each of its points, with
+\(\pi(W')\subseteq W\), then the restriction \(\pi|_{W'}:W'\to W\) is holomorphic.
+\end{lemma}
+\begin{proof}
+\leanok
+Let \(y\in M\) and let \(F\) be the flattening chart of \(W\) at \(f(y)\): a chart \(e_F\) of \(X\)
+followed by a biholomorphism \(\Phi_F\) straightening \(W\) to \(\mathbf C^k\times0\). The map
+\(f\) is continuous into \(W\) for the subspace topology, and in the chart \(F\) it reads
+\(z\mapsto\operatorname{pr}_k(\Phi_F(e_F(f(z))))\) near \(y\), a composite of holomorphic maps. For the
+second assertion apply the first to \(\pi\circ\iota_{W'}\), where the inclusion
+\(\iota_{W'}:W'\to Y\) is holomorphic by Lemma~\ref{ana:submanifold-complex-structure}.
+\end{proof}
+
+\begin{lemma}[Blowup sequences are surjective]
+\label{ana:blowup-surjective}
+\uses{ana:blowups,ana:strict-transform-composition}
+\lean{Hironaka.StrictTransformComposition.surjective_of_isBlowupAlong,Hironaka.StrictTransformComposition.IsBlowupSequence.compactSpace_surjective,Hironaka.StrictTransformComposition.image_exceptionalLocus_subset_comp,Hironaka.StrictTransformComposition.not_strictTransform_subset_image_exceptionalLocus}
+\leanok
+Let \(X\) be a compact complex manifold and \(\mu:\widetilde X\to X\) a finite
+composition of blowups with smooth centres. Then \(\widetilde X\) is compact and
+\(\mu\) is surjective. If \(f:Y\to X\) and \(g:Z\to Y\) are surjective
+holomorphic maps between manifolds of the same dimension and
+\(V\not\subset(f\circ g)(\operatorname{Exc}(f\circ g))\), then
+\(V\not\subset f(\operatorname{Exc}(f))\) and
+\(\widetilde V^{f}\not\subset g(\operatorname{Exc}(g))\).
+\end{lemma}
+\begin{proof}
+\leanok
+A blowup \(g:Z\to Y\) along a nowhere dense centre \(C\) of a compact manifold is
+an isomorphism over \(Y\setminus C\), and \(Z\) is compact. Its image is compact,
+hence closed, and contains the dense set \(Y\setminus C\), so \(g\) is onto. By
+induction along the sequence every intermediate manifold is compact and the
+composition is onto.
+
+If \(y=f(x)\) with \(x\in\operatorname{Exc}(f)\), write \(x=g(w)\); then
+\(w\in g^{-1}\operatorname{Exc}(f)\subset\operatorname{Exc}(f\circ g)\), so
+\(f(\operatorname{Exc} f)\subset(f\circ g)(\operatorname{Exc}(f\circ g))\), which
+gives the first claim. For the second, suppose
+\(\widetilde V^{f}\subset g(\operatorname{Exc} g)\) and let \(v\in V\), \(v=f(y)\).
+If \(y\in\operatorname{Exc}(f)\), then \(v\in(f\circ g)(\operatorname{Exc}(f\circ g))\)
+as above. Otherwise \(y\in f^{-1}(V)\setminus\operatorname{Exc}(f)\subset\widetilde V^{f}\),
+so \(y=g(w)\) with \(w\in\operatorname{Exc}(g)\subset\operatorname{Exc}(f\circ g)\)
+and \(v=(f\circ g)(w)\). Thus \(V\subset(f\circ g)(\operatorname{Exc}(f\circ g))\), a
+contradiction.
+\end{proof}
+
+\begin{proposition}[A connected manifold is irreducible]
+\label{ana:manifold-irreducible}
+\uses{fpgeom:complex-analytic-subvariety,ana:nonkahler-locus,ana:blowups}
+\source{demailly-cadg:II.4.2}
+\lean{Hironaka.AnalyticIrreducibleComponents.isComplexAnalyticallyIrreducible_univ,Hironaka.AnalyticIrreducibleComponents.regularAtDim_univ}\upstreamlean{TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.exists_subvariety_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_of_regularAtDim_univ,TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.dim_eq_of_carrier_eq_univ}\lean{Hironaka.AnalyticIrreducibleComponents.isOpen_of_forall_regularAtDim_self}\upstreamlean{TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_univ_of_isClosedConnectedSubmanifold_self}
+\mixedleanok
+Let \(X\) be a connected complex manifold of dimension \(n\).
+\begin{enumerate}
+\item \(X\) is an irreducible analytic subset of itself, of dimension \(n\), and
+      \(n\) is the only dimension of a regular point of \(X\).
+\item A closed connected complex submanifold of \(X\) of dimension \(n\) is \(X\).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\mixedleanok
+(1) Every point of \(X\) is a regular point of dimension \(n\). If
+\(X=B\cup C\) with \(B,C\) analytic and \(B\ne X\), then \(B\) has empty
+interior: an analytic subset containing a nonempty open set contains, by the
+identity theorem applied to its local equations along chains of coordinate balls,
+the whole connected manifold. Hence the closed set \(C\) contains the dense set
+\(X\setminus B\), so \(C=X\). A flattening of \(X\) of dimension \(k\) at a point
+maps an open neighbourhood of that point onto an open set contained in
+\(\mathbb C^k\times\{0\}\); a nonempty open subset of \(\mathbb C^n\) lies in that
+plane only if \(k=n\).
+
+(2) At each of its points a submanifold of dimension \(n\) contains a
+neighbourhood of that point, so it is open. It is also closed and nonempty, hence
+equal to the connected manifold \(X\).
+\end{proof}

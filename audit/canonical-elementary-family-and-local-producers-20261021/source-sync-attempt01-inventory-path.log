@@ -1,0 +1,17 @@
+fatal: path 'work/g1-g9-20261020/independent/twenty-one-new-independent-manifest.json' does not exist in '82934a028fb2c94d5a706bf66343fd4614e8a884'
+Traceback (most recent call last):
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/sync_frozen_sources.py", line 135, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/sync_frozen_sources.py", line 63, in main
+    raw=show(path);obj=json.loads(raw);mods=obj['modules']
+        ^^^^^^^^^^
+  File "/workspace/hironaka/audit/canonical-elementary-family-and-local-producers-20261021/sync_frozen_sources.py", line 31, in show
+    def show(path):return subprocess.check_output(git+['show',args.revision+':'+path])
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '--git-dir=/workspace/archon-nakamaye/.archon-horizon/vcs/workspace.git', '--work-tree=/workspace/archon-nakamaye', 'show', '82934a028fb2c94d5a706bf66343fd4614e8a884:work/g1-g9-20261020/independent/twenty-one-new-independent-manifest.json']' returned non-zero exit status 128.

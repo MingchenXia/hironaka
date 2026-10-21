@@ -1,0 +1,34 @@
+{
+  "status": "STATIC_CORE_PROTOCOL_REVIEW_PASS_WITH_ONE_PROVENANCE_GUARD_FINDING",
+  "reviewed_sha256": {
+    "notation-frontend-owners-plan.json": "306d978c31eb48e8ed72d1e8cf6fcb7c55dbd968f1403d948fe7e67e6e83b421",
+    "ParserLogicalIsolationAllNotationTemplate.lean": "16b4ecb09e005ce645a479bfc0e3ded9cfad493be3a31a53feaa2f29fb8b333f",
+    "run_all_notation_isolation_final.py": "9c350d2529456a416f0602bb778c0e12b72642a713f669e9638968eb7fe1ffad",
+    "compare_all_typed_notation_parents.py": "a344a28580593e9a0dcf2590f3201efc77d4824a57cb641c9252b44315679672"
+  },
+  "scope": "Read-only whole-script review and AST parsing only; no runner, Lean probe, exporter, comparator, kernel replay or production edit.",
+  "expected_owners": 10,
+  "native_notation_clauses_checked": 20,
+  "expected_public_frontend_definitions": 60,
+  "expected_both_sides": 120,
+  "actual_full_runtime_gate_claimed": false,
+  "frozen_comparator_sha256": "28bc2ba40004520f5c9f483adf5e2cd2e2491c0de7bb0355ff642b176ca4c063",
+  "old_three_classifier_sha256": "c263f43efd85f1cf36155f240397467066f544692b7247203a62897db0bd7359",
+  "passed_static_checks": [
+    "Every configured native owner has exactly its configured literal notation-clause count.",
+    "Actual frontend inventory requires private definitions with complete bodies and literal actual types ParserDescr/Macro/Unexpander, independently per physical owner on both sides.",
+    "Actual whole environment scan rejects further new-module frontend roots and other constant dependencies on the classified public roots in types and whole values.",
+    "Runner guards old/new physical source counts, new import closure, exact thirteen upstream-only names, source/native/control/public-artifact stability and shared-lock fair-reader execution.",
+    "Raw gzip and uncompressed hashes, row/byte/name/theorem counts, capture exit and transport status all remain checked.",
+    "Original Name remapping is used only to identify the already-renamed raw capture record; no Expr/Name/binder/number/proof normalization is introduced.",
+    "Every nonclassified actual root reaches the unchanged frozen comparator; raw differences must be confined to the exact typed frontend inventory.",
+    "Old three-parent classifier and frozen comparator actual file hashes remain unchanged."
+  ],
+  "finding": {
+    "id": "F1",
+    "status": "REPORTED_TO_ROOT_AWAITING_DELTA",
+    "location": "compare_all_typed_notation_parents.py main witness intake",
+    "issue": "The classifier validates witness content/counts but does not bind it to a successful runner exit/verification and current source/native/public-artifact/control fingerprints. It also does not verify the current exact thirteen upstream-only absence names. A stale witness from a same-count environment can therefore be combined with fresh raw captures.",
+    "requested_fix": "Bind the supplied witness to its successful sibling runner receipt and persisted input fingerprints (including controls), revalidate those before classification, and assert the actual absent-name list equals the current node-extract plan."
+  }
+}

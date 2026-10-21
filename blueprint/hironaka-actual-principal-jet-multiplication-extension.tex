@@ -1,0 +1,106 @@
+\section{Actual principal multiplication on the original finite jets}
+
+Write $R=\mathcal O_{\mathbb C^n,0}$ for the actual ring of holomorphic
+germs, $\mathfrak m$ for its actual maximal ideal, and $[g]_s$ for the
+class of the original germ $g$ modulo $\mathfrak m^s$. Scalar actions are
+always the original constant-germ actions. The arguments include $n=0$
+and units. The zero germ is excluded only when choosing its finite order.
+The analytic order-product input is the actual point-ideal cancellation
+proved earlier; no proposed Hilbert--Samuel value is an input here.
+
+\begin{lemma}[Every nonzero original holomorphic germ has a genuine finite order]
+\label{hir:actual-nonzero-holomorphic-germ-finite-order}
+\lean{Hironaka.HironakaActualPrincipalJetMultiplication.exists_actual_finite_order,Hironaka.HironakaActualPrincipalJetMultiplication.actualGermOrder,Hironaka.HironakaActualPrincipalJetMultiplication.actualGermOrder_spec,Hironaka.HironakaActualPrincipalJetMultiplication.actualGermOrder_unique}
+\leanok
+\uses{hir:whole-point-power-ring-dictionary}
+For every $0\ne f\in R$ there is a unique $\mu\in\mathbb N$ such that
+$f\in\mathfrak m^\mu$ and $f\notin\mathfrak m^{\mu+1}$.
+Choose this actual order by the least $a$ for which
+$f\notin\mathfrak m^{a+1}$. In particular the choice is made from the
+original germ, rather than from a supplied order or quotient certificate.
+\end{lemma}
+\begin{proof}
+The actual holomorphic germ ring is Noetherian and local. Krull intersection
+therefore gives $\bigcap_{k\ge0}\mathfrak m^k=0$, since the actual maximal
+ideal is proper. If $f$ belonged to every positive power, it would also
+belong to the zeroth power $R$, and hence to this intersection, contradicting
+$f\ne0$. Thus the least $\mu$ exists. For $\mu=0$ membership in
+$\mathfrak m^0$ is automatic; for $\mu=b+1$ its minimality gives
+$f\in\mathfrak m^{b+1}$. The defining nonmembership supplies the other
+assertion. If another $\nu$ had both properties, $\nu>\mu$ would imply
+$f\in\mathfrak m^\nu\subset\mathfrak m^{\mu+1}$; exchanging the two
+indices rules out $\mu>\nu$. This proves uniqueness.
+\end{proof}
+
+\begin{lemma}[Exact cancellation of actual maximal powers]
+\label{hir:actual-principal-maximal-power-cancellation}
+\lean{Hironaka.HironakaActualPrincipalJetMultiplication.actual_mul_mem_maximal_pow_iff}
+\leanok
+\uses{hir:actual-nonzero-holomorphic-germ-finite-order,hir:whole-point-power-ring-dictionary,hir:order-product}
+For actual original germs $f,g$, if
+$f\in\mathfrak m^\mu\setminus\mathfrak m^{\mu+1}$, then for every
+$s\ge0$,
+\[
+ fg\in\mathfrak m^{s+\mu}\quad\Longleftrightarrow\quad
+ g\in\mathfrak m^s.
+\]
+\end{lemma}
+\begin{proof}
+Choose actual holomorphic representatives $F,G$ of the two original germs.
+The whole point-ideal dictionary converts the nonmembership of $f$ and
+the membership of $fg$ into the corresponding actual point-ideal statements
+for $F$ and $GF$. The proved analytic cancellation of orders then gives
+$G\in\mathfrak m_0^s$. Applying the dictionary back proves the forward
+direction for the original whole germ $g$. In the reverse direction,
+multiply $f\in\mathfrak m^\mu$ and $g\in\mathfrak m^s$ and use
+$\mathfrak m^\mu\mathfrak m^s=\mathfrak m^{\mu+s}$ and commutativity
+of the exponents. Nothing is inferred from the dimensions of any quotient.
+\end{proof}
+
+\begin{theorem}[The genuine multiplication jet map retains every original numerator]
+\label{hir:actual-principal-multiplication-jet-map}
+\lean{Hironaka.HironakaActualPrincipalJetMultiplication.actualPrincipalMulLinear,Hironaka.HironakaActualPrincipalJetMultiplication.actualPrincipalJetMul,Hironaka.HironakaActualPrincipalJetMultiplication.actualPrincipalJetMul_mk}
+\leanok
+\uses{hir:actual-principal-maximal-power-cancellation}
+If $f\in\mathfrak m^\mu$, actual multiplication by this same $f$ induces
+an $R$-linear map
+\[
+ M_{f,s}:R/\mathfrak m^s\longrightarrow R/\mathfrak m^{s+\mu},
+ \qquad [g]_s\longmapsto[fg]_{s+\mu}.
+\]
+It is also complex-linear for the original scalar actions. Its displayed
+formula holds for every original germ $g$, not merely for chosen monomials.
+\end{theorem}
+\begin{proof}
+Multiplication by $f$ is additive and $R$-linear because $R$ is commutative.
+The inclusion $f\mathfrak m^s\subset\mathfrak m^{\mu+s}$ makes its
+composition with the actual target quotient map vanish on the actual
+source ideal. Descend this very map through the source quotient. By the
+defining quotient formula its value on every original class is exactly
+$[fg]_{s+\mu}$. Restricting scalars through the original constant-germ map
+proves complex linearity without changing either the map or its values.
+\end{proof}
+
+\begin{theorem}[Injectivity and the whole original principal image]
+\label{hir:actual-principal-multiplication-jet-injective-image}
+\lean{Hironaka.HironakaActualPrincipalJetMultiplication.actualPrincipalJetMul_injective,Hironaka.HironakaActualPrincipalJetMultiplication.actualPrincipalJetMul_range_iff}
+\leanok
+\uses{hir:actual-principal-multiplication-jet-map,hir:actual-principal-maximal-power-cancellation}
+If also $f\notin\mathfrak m^{\mu+1}$, the genuine map $M_{f,s}$ is
+injective. Its range consists of exactly the classes of all original
+elements of the entire principal ideal $(f)$ in
+$R/\mathfrak m^{s+\mu}$. In particular every class $[h]_{s+\mu}$ belongs
+to that range if and only if it has an original representative congruent
+to an original multiple of $f$ modulo $\mathfrak m^{s+\mu}$.
+\end{theorem}
+\begin{proof}
+If $M_{f,s}([g]_s)=0$, the actual quotient criterion gives
+$fg\in\mathfrak m^{s+\mu}$. Exact cancellation gives
+$g\in\mathfrak m^s$, so $[g]_s=0$; additivity then gives injectivity.
+Every source class has an original representative $g$, and its image is
+the actual class of $fg\in(f)$. Conversely an arbitrary original element
+of $(f)$ is $fg$ for some original $g\in R$, so its actual class is the
+image of $[g]_s$. These two directions prove equality of the whole image,
+including the final congruence formulation. No kernel, image equality,
+scalar action or Hilbert--Samuel comparison is supplied as a hypothesis.
+\end{proof}

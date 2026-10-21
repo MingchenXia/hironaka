@@ -1,0 +1,109 @@
+\section{Literal point-normalization coefficients retain the canonical reduced tail}
+
+This chapter concerns the genuine zero-direction point chart. The
+source diagram is always the ACTUAL diagram of the original whole
+ideal in its original coordinates. It is not asserted to lie in the
+current diagram.
+
+\begin{definition}[The actual source exponent of a low current point term]
+\label{hir:actual-zero-point-low-source-exponent}
+\uses{hir:actual-formal-monomial-blowup-coefficient-reflection}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroPointReducedTail.zeroPointLowSourceExponent}
+\leanok
+For a pivot $e$, weight $w$ and current exponent $\beta$, define
+$L_{e,w}(\beta)=\beta+(\beta_e+w-|\beta|)\mathbf1_e$,
+where the natural subtraction is evaluated as
+$\beta_e+(w-|\beta|)$. In the stated low-degree range $|\beta|<w$
+this has ordinary integer meaning, is above $\beta$, and has strictly
+larger pivot component.
+\end{definition}
+
+\begin{theorem}[The actual whole normalized coefficient has its literal source exponent]
+\label{hir:actual-zero-point-low-coefficient-source-dictionary}
+\uses{hir:actual-zero-point-low-source-exponent,hir:actual-formal-monomial-blowup-coefficient-reflection}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroPointReducedTail.zeroPointLowSourceExponent_blowup,TranscendentalNakamaye.Pending.HironakaActualZeroPointReducedTail.normalized_zero_point_low_coefficient}
+\leanok
+For $|\beta|<w$, the actual monomial blowup exponent of
+$L_{e,w}(\beta)$ is exactly $\beta+w\mathbf1_e$.
+Consequently every actual whole quotient $x_e^wH=\pi_0^*F$
+satisfies $H_\beta=F_{L_{e,w}(\beta)}$. No coefficient formula or
+source-support certificate is assumed.
+\end{theorem}
+\begin{proof}
+Write $k=w-|\beta|>0$. The lifted exponent equals
+$\beta+(\beta_e+k)\mathbf1_e$, so its nonpivot components are those
+of $\beta$ and its total degree is $w+\beta_e$.
+The genuine zero point blowup retains all nonpivot components and
+replaces the pivot component by that total degree. Its actual image
+is therefore $\beta+w\mathbf1_e$ at every coordinate. Take that
+actual coefficient in the defining whole quotient equation. Genuine
+multiplication by $x_e^w$ shifts the coefficient by exactly
+$w\mathbf1_e$, giving $H_\beta$ on one side. The actual injective
+monomial blowup coefficient theorem gives precisely the indicated
+source coefficient on the other. This proves the entire numerical
+coefficient equality for each low exponent.
+\end{proof}
+
+\begin{theorem}[Every low normalized canonical coefficient vanishes on the entire original diagram]
+\label{hir:actual-zero-point-canonical-low-tail-normality}
+\uses{hir:actual-zero-point-low-coefficient-source-dictionary,hir:actual-reduced-formal-vertex-members}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroPointReducedTail.canonical_zero_point_low_coefficient_zero_on_source_diagram}
+\leanok
+Let $I$ be an actual original formal ideal, let $G_a$ be its SAME
+canonical reduced vertex series, and put $w=|a|$. For any genuine
+whole quotient $x_e^wH_a=\pi_0^*G_a$, every coefficient of $H_a$
+at a source-diagram exponent $\beta\in\Gamma(I)$ with
+$|\beta|<|a|$ is zero. Thus each homogeneous component of degree
+below $|a|$ is normal outside the ENTIRE original diagram.
+The literal source reduced-support condition is produced by the
+canonical family itself, and no desired target obstruction is input.
+\end{theorem}
+\begin{proof}
+For such a $\beta$, put $\alpha=L_{e,w}(\beta)$. The preceding
+actual coefficient dictionary gives $(H_a)_\beta=(G_a)_\alpha$.
+Since $\alpha\ge\beta$ and the original diagram is upward closed,
+$\alpha\in\Gamma(I)$. On its entire original diagram the actual
+canonical reduced series has coefficient zero except at its single
+vertex $a$. If $\alpha=a$, then $\beta\le a$ and
+$\beta\in\Gamma(I)$; actual vertex minimality gives $a\le\beta$.
+But the low-degree lift has $\alpha_e>\beta_e$, contradicting these
+two inequalities. Hence $\alpha\ne a$ and the genuine reduced
+coefficient is zero. The homogeneous-component coefficient formula
+then gives the same entire source-diagram normality at every degree
+below $|a|$.
+\end{proof}
+
+\begin{theorem}[Original data internally choose one whole normalized family with finite low-jet normality]
+\label{hir:actual-canonical-zero-point-low-jet-normality-producer}
+\uses{hir:actual-zero-point-canonical-low-tail-normality,hir:actual-point-centre-canonical-vertex-powers,hir:actual-formal-blowup-normalized-member}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroPointReducedTail.exists_canonical_zero_point_normalized_low_jet}
+\leanok
+An actual original formal ideal and actual pivot internally select ONE
+whole canonical normalized family before every coefficient and finite
+order. It satisfies its actual quotient equations and all the preceding
+source-diagram low-coefficient vanishings. Its literal finite jet
+through degrees below each original vertex degree, and each such
+homogeneous component, have zero coefficient on the ENTIRE original
+diagram. No selected family, source power or obstruction certificate
+is an input.
+\end{theorem}
+\begin{proof}
+The degree-first canonical leading coefficient and its lower coefficient
+vanishing internally place each source reduced series in the true
+point-power of its original vertex degree. The genuine formal blowup
+division theorem therefore constructs the normalized quotient of each
+of these SAME series. Choose that entire family once. Its actual
+quotient equations hold by the defining division theorem, so the
+preceding result gives every low coefficient vanishing. The actual
+finite truncation retains exactly coefficients below the stated degree
+and kills all others; hence every source-diagram coefficient of the
+whole finite jet is zero. The homogeneous-component formula likewise
+retains a coefficient only at its stated low degree, where the same
+vanishing applies. These are exact actual finite polynomials and
+whole homogeneous series, not an assumed current normal-form model.
+\end{proof}
+
+Turning a nonzero such component into a strict current-jet rank drop
+still requires an actual comparison with the current lower-vertex
+initial span. No source/current diagram inclusion, arbitrary-direction
+extension, all-vertex HS converse or history termination is inferred.

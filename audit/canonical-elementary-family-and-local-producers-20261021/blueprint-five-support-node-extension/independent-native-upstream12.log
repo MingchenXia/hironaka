@@ -1,0 +1,870 @@
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.exists_subvariety_univ OWNER TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.exists_subvariety_univ : ∀ {n : Nat}
+  {M : Type u_1} [inst : TopologicalSpace.{u_1} M]
+  [inst_1 :
+    @ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      M inst]
+  [inst_2 : @TranscendentalNakamaye.FirstPass.IsComplexManifold.{u_1} n M inst inst_1] [@ConnectedSpace.{u_1} M inst],
+  @Exists.{u_1 + 1} (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.{u_1} n M inst inst_1 inst_2)
+    fun (V : @TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.{u_1} n M inst inst_1 inst_2) =>
+    And
+      (@Eq.{u_1 + 1} (Set.{u_1} M)
+        (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u_1} n M inst inst_1 inst_2 V)
+        (@Set.univ.{u_1} M))
+      (@Eq.{1} Nat
+        (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.dim.{u_1} n M inst inst_1 inst_2 V) n)
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_of_regularAtDim_univ OWNER TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_of_regularAtDim_univ : ∀ {n : Nat}
+  {M : Type u_1} [inst : TopologicalSpace.{u_1} M]
+  [inst_1 :
+    @ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      M inst]
+  {x : M} {k : Nat} (h : @TranscendentalNakamaye.FirstPass.RegularAtDim.{u_1} n M inst inst_1 (@Set.univ.{u_1} M) x k),
+  @Eq.{1} Nat k n
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.dim_eq_of_carrier_eq_univ OWNER TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.dim_eq_of_carrier_eq_univ : ∀ {n : Nat}
+  {M : Type u_1} [inst : TopologicalSpace.{u_1} M]
+  [inst_1 :
+    @ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      M inst]
+  [inst_2 : @TranscendentalNakamaye.FirstPass.IsComplexManifold.{u_1} n M inst inst_1]
+  (V : @TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.{u_1} n M inst inst_1 inst_2)
+  (hV :
+    @Eq.{u_1 + 1} (Set.{u_1} M)
+      (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u_1} n M inst inst_1 inst_2 V)
+      (@Set.univ.{u_1} M)),
+  @Eq.{1} Nat (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.dim.{u_1} n M inst inst_1 inst_2 V)
+    n
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_univ_of_isClosedConnectedSubmanifold_self OWNER TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.AnalyticIrreducibleComponents.eq_univ_of_isClosedConnectedSubmanifold_self : ∀
+  {n : Nat} {M : Type u_1} [inst : TopologicalSpace.{u_1} M]
+  [inst_1 :
+    @ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      M inst]
+  [@ConnectedSpace.{u_1} M inst] {W : Set.{u_1} M}
+  (hW : @TranscendentalNakamaye.FirstPass.BlowupSequences.IsClosedConnectedSubmanifold.{u_1} n M inst inst_1 W n),
+  @Eq.{u_1 + 1} (Set.{u_1} M) W (@Set.univ.{u_1} M)
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.EmbeddedFromResolution.mem_regularOpen_iff OWNER TranscendentalNakamaye.Pending.EmbeddedFromResolution AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.EmbeddedFromResolution.mem_regularOpen_iff : ∀ {n : Nat} {M : Type u_1}
+  [inst : TopologicalSpace.{u_1} M]
+  [inst_1 :
+    @ChartedSpace.{0, u_1} (TranscendentalNakamaye.FirstPass.ComplexModel n)
+      (@PiLp.topologicalSpace.{0, 0}
+        (@OfNat.ofNat.{0} ENNReal (nat_lit 2)
+          (@instOfNatAtLeastTwo.{0} ENNReal (nat_lit 2)
+            (@AddMonoidWithOne.toNatCast.{0} ENNReal
+              (@AddCommMonoidWithOne.toAddMonoidWithOne.{0} ENNReal ENNReal.instAddCommMonoidWithOne))
+            PiLp.innerProductSpace._proof_1))
+        (Fin n) (fun (x : Fin n) => Complex) fun (i : Fin n) =>
+        @UniformSpace.toTopologicalSpace.{0} Complex
+          (@PseudoMetricSpace.toUniformSpace.{0} Complex
+            (@SeminormedRing.toPseudoMetricSpace.{0} Complex
+              (@SeminormedCommRing.toSeminormedRing.{0} Complex
+                (@NormedCommRing.toSeminormedCommRing.{0} Complex
+                  (@CommCStarAlgebra.toNormedCommRing.{0} Complex instCommCStarAlgebraComplex))))))
+      M inst]
+  [inst_2 : @TranscendentalNakamaye.FirstPass.IsComplexManifold.{u_1} n M inst inst_1]
+  {V : @TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.{u_1} n M inst inst_1 inst_2} {x : M},
+  Iff
+    (@Membership.mem.{u_1, u_1} M (@TopologicalSpace.Opens.{u_1} M inst)
+      (@SetLike.instMembership.{u_1, u_1} (@TopologicalSpace.Opens.{u_1} M inst) M
+        (@TopologicalSpace.Opens.instSetLike.{u_1} M inst))
+      (@TranscendentalNakamaye.Pending.EmbeddedFromResolution.regularOpen.{u_1} n M inst inst_1 inst_2 V) x)
+    (Not
+      (@Membership.mem.{u_1, u_1} M (Set.{u_1} M) (@Set.instMembership.{u_1} M)
+        (@TranscendentalNakamaye.FirstPass.NonKahlerLocus.singularLocus.{u_1} n M inst inst_1 inst_2 V) x))
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.EmbeddedFromResolution.strictTransform_eq_connectedComponentIn OWNER TranscendentalNakamaye.Pending.EmbeddedFromResolution AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.EmbeddedFromResolution.strictTransform_eq_connectedComponentIn : ∀
+  {n : Nat} {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  [@CompactSpace.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)]
+  (V :
+    @TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X))
+  {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  (T : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y)
+  (hT :
+    @TranscendentalNakamaye.Pending.RestrictEmptyTower.CentresAvoid.{u} n X
+      (@TranscendentalNakamaye.Pending.EmbeddedFromResolution.regularOpen.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)
+      Y T)
+  {C : Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)}
+  (hC :
+    @TranscendentalNakamaye.FirstPass.BlowupSequences.IsClosedSubmanifold.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y) C)
+  (hCV :
+    ∀ (y : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y),
+      @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TopologicalSpace.Opens.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X))
+          (@SetLike.instMembership.{u, u}
+            (@TopologicalSpace.Opens.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X))
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TopologicalSpace.Opens.instSetLike.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)))
+          (@TranscendentalNakamaye.Pending.EmbeddedFromResolution.regularOpen.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T y) →
+        Iff
+          (@Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+            (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+            (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)) C y)
+          (@Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+            (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+            (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T y)))
+  {c : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y}
+  (hc :
+    @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+      (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+      (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)) C c)
+  (hcU :
+    @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TopologicalSpace.Opens.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X))
+      (@SetLike.instMembership.{u, u}
+        (@TopologicalSpace.Opens.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X))
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TopologicalSpace.Opens.instSetLike.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)))
+      (@TranscendentalNakamaye.Pending.EmbeddedFromResolution.regularOpen.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T c)),
+  And
+    (@LE.le.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+      (@Set.instLE.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+      (@Set.image.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+        (@TranscendentalNakamaye.FirstPass.BlowupSequences.exceptionalLocus.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)))
+      (@TranscendentalNakamaye.FirstPass.NonKahlerLocus.singularLocus.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+    (And
+      (@Eq.{u + 1} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+        (@TranscendentalNakamaye.FirstPass.BlowupSequences.strictTransform.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+          (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+        (@connectedComponentIn.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y) C c))
+      (∀ (x : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y),
+        @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+            (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+            (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+            (@TranscendentalNakamaye.FirstPass.BlowupSequences.strictTransform.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+              (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+            x →
+          @TranscendentalNakamaye.FirstPass.RegularAtDim.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+            (@TranscendentalNakamaye.FirstPass.BlowupSequences.strictTransform.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+              (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+            x
+            (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.dim.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)))
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.EmbeddedFromResolution.strictTransform_eq_connectedComponentIn_maxLocus OWNER TranscendentalNakamaye.Pending.EmbeddedFromResolution AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.EmbeddedFromResolution.strictTransform_eq_connectedComponentIn_maxLocus : ∀
+  {n k : Nat} {Λ : Type v} [inst : LinearOrder.{v} Λ] {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  {inv :
+    {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} →
+      @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) →
+        {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} →
+          @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y →
+            @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y → Λ}
+  [@CompactSpace.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)]
+  (hF :
+    @TranscendentalNakamaye.Pending.EmbeddedFromResolution.EmbeddingFields.{u, v} n k Λ inst
+      fun {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} => @inv X)
+  (V :
+    @TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X))
+  (hdom :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsInvDomain.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) k
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+        (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+        (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+          (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+  {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  (T : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y)
+  (hcan :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsCanonical.{u, v} n X Λ inst
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+        (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+        (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+          (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      (fun {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} =>
+        @inv X
+          (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+            (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+            (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          Y)
+      Y T)
+  (hT :
+    @TranscendentalNakamaye.Pending.RestrictEmptyTower.CentresAvoid.{u} n X
+      (@TranscendentalNakamaye.Pending.EmbeddedFromResolution.regularOpen.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)
+      Y T)
+  {c : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y}
+  (hc :
+    @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+      (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+      (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+      (@TranscendentalNakamaye.Pending.ResolutionDriver.maxLocus.{v, u} Λ inst
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+        (@inv X
+          (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+            (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+            (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          Y T)
+        (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.cosupp.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoTransformAlong.{u} n X
+            (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+              (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+              (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+            Y T)))
+      c)
+  (hcU :
+    @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TopologicalSpace.Opens.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X))
+      (@SetLike.instMembership.{u, u}
+        (@TopologicalSpace.Opens.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X))
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TopologicalSpace.Opens.instSetLike.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)))
+      (@TranscendentalNakamaye.Pending.EmbeddedFromResolution.regularOpen.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T c)),
+  And
+    (@LE.le.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+      (@Set.instLE.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+      (@Set.image.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+        (@TranscendentalNakamaye.FirstPass.BlowupSequences.exceptionalLocus.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)))
+      (@TranscendentalNakamaye.FirstPass.NonKahlerLocus.singularLocus.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+    (And
+      (@Eq.{u + 1} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+        (@TranscendentalNakamaye.FirstPass.BlowupSequences.strictTransform.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+          (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+        (@connectedComponentIn.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.ResolutionDriver.maxLocus.{v, u} Λ inst
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+            (@inv X
+              (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+                (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+                (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                  (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+                (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+              Y T)
+            (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.cosupp.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoTransformAlong.{u} n X
+                (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.mk.{u} n
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                  (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                  (@Set.univ.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X))
+                  (@List.nil.{u} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)))
+                  (@TranscendentalNakamaye.FirstPass.HolomorphicIdealSheaves.vanishingIdeal.{u} n
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                    (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+                  (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                Y T)))
+          c))
+      (∀ (x : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y),
+        @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+            (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+            (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+            (@TranscendentalNakamaye.FirstPass.BlowupSequences.strictTransform.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+              (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+            x →
+          @TranscendentalNakamaye.FirstPass.RegularAtDim.{u} n
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+            (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+            (@TranscendentalNakamaye.FirstPass.BlowupSequences.strictTransform.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.proj.{u} n X Y T)
+              (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.carrier.{u} n
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+                (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V))
+            x
+            (@TranscendentalNakamaye.FirstPass.ClosedIrreducibleAnalyticSubvariety.dim.{u} n
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+              (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.isComplexManifold.{u} n X) V)))
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.StepOneWellFounded.stepDrop_of_resolutionInvariant OWNER TranscendentalNakamaye.Pending.StepOneWellFounded AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.StepOneWellFounded.stepDrop_of_resolutionInvariant : ∀ {n : Nat}
+  {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} {Λ : Type v} [inst : LinearOrder.{v} Λ] {k : Nat}
+  (R : @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.{u, v} n k Λ inst)
+  {𝔪 :
+    @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)}
+  (h :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsInvDomain.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) k 𝔪),
+  @TranscendentalNakamaye.Pending.StepOneWellFounded.StepDrop.{u, v} n X Λ inst 𝔪
+    fun {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} =>
+    @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.inv.{u, v} n k Λ inst R X 𝔪 Y
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_of_wellFoundedLT OWNER TranscendentalNakamaye.Pending.StepOneWellFounded AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_of_wellFoundedLT : ∀ {n : Nat}
+  {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} {Λ : Type v} [inst : LinearOrder.{v} Λ] {k : Nat}
+  [@CompactSpace.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)]
+  [@WellFoundedLT.{v} Λ
+      (@Preorder.toLT.{v} Λ
+        (@PartialOrder.toPreorder.{v} Λ
+          (@SemilatticeInf.toPartialOrder.{v} Λ
+            (@Lattice.toSemilatticeInf.{v} Λ
+              (@DistribLattice.toLattice.{v} Λ (@instDistribLatticeOfLinearOrder.{v} Λ inst))))))]
+  (R : @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.{u, v} n k Λ inst)
+  {𝔪 :
+    @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)}
+  (h :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsInvDomain.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) k 𝔪),
+  @Exists.{u + 2} (TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n)
+    fun (Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n) =>
+    @Exists.{u + 2} (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y)
+      fun (T : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y) =>
+      And
+        (@TranscendentalNakamaye.Pending.ResolutionDriver.IsCanonicalSegment.{u, v} n X Λ inst 𝔪
+          (fun {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} =>
+            @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.inv.{u, v} n k Λ inst R X 𝔪 Y)
+          Y T)
+        (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.IsGeoResolution.{u} n X Y 𝔪 T)
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.StepOneWellFounded.stepOneInvM_lt_of_isCanonical_append OWNER TranscendentalNakamaye.Pending.StepOneWellFounded AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.StepOneWellFounded.stepOneInvM_lt_of_isCanonical_append : ∀ {n : Nat}
+  {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} {Λ : Type v} [inst : LinearOrder.{v} Λ] {k : Nat}
+  (R :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.{u, v} n
+      (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      Λ inst)
+  (𝔍 :
+    @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X))
+  (h :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsInvDomain.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) k 𝔍)
+  (hmax :
+    @TranscendentalNakamaye.Pending.HomogenizedIdealAlong.IsMaximalOrderAlong.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.N.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.ideal.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.d.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍))
+  (hn : @LT.lt.{0} Nat instLTNat (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0))) n)
+  {Y Z : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  (T : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y)
+  (C : Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+  (π :
+    @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Z →
+      @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+  (hπ :
+    @TranscendentalNakamaye.FirstPass.BlowupSequences.IsBlowupAlong.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Z)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Z)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Z) C π)
+  (hC :
+    @Eq.{u + 1} (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)) C
+      (@TranscendentalNakamaye.Pending.ResolutionDriver.maxLocus.{v, u} (Lex.{v} (Prod.{0, v} Nat (WithTop.{v} Λ)))
+        (@Prod.Lex.instLinearOrder.{0, v} Nat (WithTop.{v} Λ) Nat.instLinearOrder (@WithTop.linearOrder.{v} Λ inst))
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+        (@TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+          (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          Λ inst R 𝔍 Y T)
+        (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.cosupp.{u} n
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+          (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoTransformAlong.{u} n X 𝔍 Y T))))
+  {x₀ : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y}
+  (hx₀ :
+    @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+      (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y))
+      (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)) C x₀)
+  {W : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  (S : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n Z W)
+  (hcan :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsCanonical.{u, v} n X
+      (Lex.{v} (Prod.{0, v} Nat (WithTop.{v} Λ)))
+      (@Prod.Lex.instLinearOrder.{0, v} Nat (WithTop.{v} Λ) Nat.instLinearOrder (@WithTop.linearOrder.{v} Λ inst)) 𝔍
+      (fun {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} =>
+        @TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+          (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          Λ inst R 𝔍 Y)
+      W
+      (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.append.{u} n X Z
+        (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.step.{u} n X Y Z T C π hπ) W S))
+  (z : @TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n W),
+  @Membership.mem.{u, u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n W)
+      (Set.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n W))
+      (@Set.instMembership.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n W))
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.cosupp.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n W)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n W)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n W)
+        (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoTransformAlong.{u} n X 𝔍 W
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.append.{u} n X Z
+            (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.step.{u} n X Y Z T C π hπ) W S)))
+      z →
+    @LT.lt.{v} (Lex.{v} (Prod.{0, v} Nat (WithTop.{v} Λ)))
+      (@Prod.Lex.instLT.{0, v} Nat (WithTop.{v} Λ) instLTNat
+        (@Preorder.toLT.{v} (WithTop.{v} Λ)
+          (@WithTop.instPreorder.{v} Λ
+            (@PartialOrder.toPreorder.{v} Λ
+              (@SemilatticeInf.toPartialOrder.{v} Λ
+                (@Lattice.toSemilatticeInf.{v} Λ
+                  (@DistribLattice.toLattice.{v} Λ (@instDistribLatticeOfLinearOrder.{v} Λ inst))))))))
+      (@TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+        (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+        Λ inst R 𝔍 W
+        (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.append.{u} n X Z
+          (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.step.{u} n X Y Z T C π hπ) W S)
+        z)
+      (@TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+        (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+        Λ inst R 𝔍 Y T x₀)
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.StepOneWellFounded.isAdmissibleCentre_maxLocus_stepOneInvM OWNER TranscendentalNakamaye.Pending.StepOneWellFounded AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.StepOneWellFounded.isAdmissibleCentre_maxLocus_stepOneInvM : ∀ {n : Nat}
+  {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} {Λ : Type v} [inst : LinearOrder.{v} Λ] {k : Nat}
+  (R :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.{u, v} n
+      (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      Λ inst)
+  (𝔍 :
+    @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X))
+  (h :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsInvDomain.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) k 𝔍)
+  (hmax :
+    @TranscendentalNakamaye.Pending.HomogenizedIdealAlong.IsMaximalOrderAlong.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.N.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.ideal.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.d.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍))
+  (hn : @LT.lt.{0} Nat instLTNat (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0))) n)
+  {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n}
+  (T : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y)
+  (hcan :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsCanonical.{u, v} n X
+      (Lex.{v} (Prod.{0, v} Nat (WithTop.{v} Λ)))
+      (@Prod.Lex.instLinearOrder.{0, v} Nat (WithTop.{v} Λ) Nat.instLinearOrder (@WithTop.linearOrder.{v} Λ inst)) 𝔍
+      (fun {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} =>
+        @TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+          (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          Λ inst R 𝔍 Y)
+      Y T),
+  @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.IsAdmissibleCentre.{u} n
+    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+    (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+    (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoTransformAlong.{u} n X 𝔍 Y T)
+    (@TranscendentalNakamaye.Pending.ResolutionDriver.maxLocus.{v, u} (Lex.{v} (Prod.{0, v} Nat (WithTop.{v} Λ)))
+      (@Prod.Lex.instLinearOrder.{0, v} Nat (WithTop.{v} Λ) Nat.instLinearOrder (@WithTop.linearOrder.{v} Λ inst))
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+      (@TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+        (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+        Λ inst R 𝔍 Y T)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.cosupp.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n Y)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n Y)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n Y)
+        (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.geoTransformAlong.{u} n X 𝔍 Y T)))
+UPSTREAM_WITNESS TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_stepOneInvM OWNER TranscendentalNakamaye.Pending.StepOneWellFounded AXIOMS [propext,
+ Classical.choice,
+ Quot.sound]
+UPSTREAM_TYPE TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_stepOneInvM : ∀ {n : Nat}
+  {X : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} {Λ : Type v} [inst : LinearOrder.{v} Λ] {k : Nat}
+  (R :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantExt.ResolutionInvariant.{u, v} n
+      (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      Λ inst)
+  (𝔍 :
+    @TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X))
+  [@CompactSpace.{u} (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)]
+  [@WellFoundedLT.{v} Λ
+      (@Preorder.toLT.{v} Λ
+        (@PartialOrder.toPreorder.{v} Λ
+          (@SemilatticeInf.toPartialOrder.{v} Λ
+            (@Lattice.toSemilatticeInf.{v} Λ
+              (@DistribLattice.toLattice.{v} Λ (@instDistribLatticeOfLinearOrder.{v} Λ inst))))))]
+  (h :
+    @TranscendentalNakamaye.Pending.ResolutionInvariantSpec.IsInvDomain.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) k 𝔍)
+  (hmax :
+    @TranscendentalNakamaye.Pending.HomogenizedIdealAlong.IsMaximalOrderAlong.{u} n
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.N.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.ideal.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍)
+      (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.d.{u} n
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.carrier.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.topologicalSpace.{u} n X)
+        (@TranscendentalNakamaye.Pending.BlowupTowers.CMfd.chartedSpace.{u} n X) 𝔍))
+  (hn : @LT.lt.{0} Nat instLTNat (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0))) n),
+  @Exists.{u + 2} (TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n)
+    fun (Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n) =>
+    @Exists.{u + 2} (@TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y)
+      fun (T : @TranscendentalNakamaye.Pending.BlowupTowers.BlowupTower.{u} n X Y) =>
+      And
+        (@TranscendentalNakamaye.Pending.ResolutionDriver.IsCanonicalSegment.{u, v} n X
+          (Lex.{v} (Prod.{0, v} Nat (WithTop.{v} Λ)))
+          (@Prod.Lex.instLinearOrder.{0, v} Nat (WithTop.{v} Λ) Nat.instLinearOrder (@WithTop.linearOrder.{v} Λ inst)) 𝔍
+          (fun {Y : TranscendentalNakamaye.Pending.BlowupTowers.CMfd.{u} n} =>
+            @TranscendentalNakamaye.Pending.StepOneValueMasked.stepOneInvM.{u, v} n X
+              (@HSub.hSub.{0, 0, 0} Nat Nat Nat (@instHSub.{0} Nat instSubNat) k
+                (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+              Λ inst R 𝔍 Y)
+          Y T)
+        (@TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal.IsGeoResolution.{u} n X Y 𝔍 T)
+UPSTREAM_WITNESSES 12 actual owned constants; standard axioms only

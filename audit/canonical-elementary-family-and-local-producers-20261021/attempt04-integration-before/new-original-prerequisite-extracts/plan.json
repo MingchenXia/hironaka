@@ -1,0 +1,89 @@
+[
+  {
+    "destination_module": "Hironaka.Support.HolGermMkSubPrimeOriginalExact",
+    "destination_path": "Hironaka/Support/HolGermMkSubPrimeOriginalExact.lean",
+    "source_module": "TranscendentalNakamaye.Pending.HolomorphicGermRing",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HolomorphicGermRing.lean",
+    "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+    "source_sha256": "96153b860adc2738d9b5211b4bac80fc500f53c4527b3b4ac3d77d40c29cb447",
+    "complete_original_declarations": [
+      "TranscendentalNakamaye.Pending.HolGerm.mk_sub'",
+      "TranscendentalNakamaye.Pending.HolGerm.constHom_apply"
+    ],
+    "original_selected_source": "theorem mk_sub' (f g : E \u2192 \u2102) (hf : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 f z)\n    (hg : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 g z) :\n    mk (f - g) (eventually_differentiableAt_sub hf hg) = mk f hf - mk g hg :=\n  rfl\n\ntheorem constHom_apply (c : \u2102) :\n    constHom c = mk (fun _ : E => c) (eventually_differentiableAt_const c) :=\n  rfl\n",
+    "original_selected_sha256": "f84e4925fe670bbb0bc965c0ae66da92c977cf6cbb66c0f4775341ccb321fef1",
+    "original_context": "set_option autoImplicit false\nnamespace TranscendentalNakamaye.Pending\nopen Filter Topology\nvariable (E : Type*) [NormedAddCommGroup E] [NormedSpace \u2102 E]\nnamespace HolGerm\nvariable {E}\n",
+    "original_closing": "end HolGerm\nend TranscendentalNakamaye.Pending\n",
+    "imports": [
+      "Hironaka.Support.HolGermSubExact"
+    ],
+    "prepared_destination_sha256": "4be8693273eb36f84a04127d2a2fa6be371e612c761284e2da7998f664524d9f",
+    "proof_type_payload_edits": 0,
+    "production_installation_pending": true,
+    "complete_original_ranges": [
+      {
+        "begin": "theorem mk_sub'",
+        "end_exclusive": "theorem mk_neg"
+      },
+      {
+        "begin": "theorem constHom_apply",
+        "end_exclusive": "theorem mk_const"
+      }
+    ],
+    "original_payload_chunks": [
+      "theorem mk_sub' (f g : E \u2192 \u2102) (hf : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 f z)\n    (hg : \u2200\u1da0 z in \ud835\udcdd 0, DifferentiableAt \u2102 g z) :\n    mk (f - g) (eventually_differentiableAt_sub hf hg) = mk f hf - mk g hg :=\n  rfl\n",
+      "theorem constHom_apply (c : \u2102) :\n    constHom c = mk (fun _ : E => c) (eventually_differentiableAt_const c) :=\n  rfl\n"
+    ]
+  },
+  {
+    "destination_module": "Hironaka.Support.LocalGiraudRegularZeroSetOriginalExact",
+    "destination_path": "Hironaka/Support/LocalGiraudRegularZeroSetOriginalExact.lean",
+    "source_module": "TranscendentalNakamaye.Pending.LocalGiraudTransform",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/LocalGiraudTransform.lean",
+    "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+    "source_sha256": "807fd93f24efe6ea7794f511c1a7588b3685a6dfa9b11166556f4de3757fbadf",
+    "complete_original_declarations": [
+      "TranscendentalNakamaye.Pending.LocalGiraudTransform.regularAtDim_zeroSet"
+    ],
+    "original_selected_source": "/-- **The zero set of a function of multiplicity one is a hypersurface**: regular of dimension\n`n - 1` at each of its points in `U`. -/\ntheorem regularAtDim_zeroSet {U : Set X} (hU : IsOpen U) {u : X \u2192 \u2102}\n    (hu : \u2200 x \u2208 U, HolomorphicAt n u x)\n    (hu1 : \u2200 x \u2208 U, u x = 0 \u2192 \u2203 (e : ComplexChart n X) (v : ComplexModel n),\n      x \u2208 e.val.source \u2227 chartDeriv e v u x \u2260 0)\n    {x : X} (hx : x \u2208 U) (hux : u x = 0) :\n    RegularAtDim (n := n) ({y | u y = 0} \u2229 U) x (n - 1) := by\n  obtain \u27e8e, v, hxe, hd\u27e9 := hu1 x hx hux\n  obtain \u27e8hn, W, hWs, hWinj, hWu\u27e9 := exists_hypersurface_coords (hu x hx) hxe hd\n  have hO : IsOpen (U \u2229 (chartAt (ComplexModel n) x).source) :=\n    hU.inter (chartAt (ComplexModel n) x).open_source\n  have hxO : x \u2208 U \u2229 (chartAt (ComplexModel n) x).source := \u27e8hx, mem_chart_source _ x\u27e9\n  have hplane : \u2200 y, W y \u2208 complexCoordinatePlane n (n - 1) \u2194 u y = 0 := fun y => by\n    rw [mem_plane_pred_iff hn, hWu]\n  obtain \u27e8\u0398, h\u0398t, h\u03980, h\u0398\u27e9 :=\n    exists_recentred_coords hO (fun z' hz' => hWs z' hz'.2 (hu z' hz'.1)) hxO hWinj\n  refine \u27e8Nat.sub_le n 1, \u27e8hux, hx\u27e9, \u0398, h\u0398t, h\u03980, fun {y} hy hy\u0398 => ?_\u27e9\n  obtain \u27e8hyO, h\u0398y\u27e9 := h\u0398 hy hy\u0398\n  rw [h\u0398y, sub_mem_plane_iff ((hplane x).mpr hux), hplane]\n  exact \u27e8fun h => h.1, fun h => \u27e8h, hyO.1\u27e9\u27e9\n",
+    "original_selected_sha256": "7ea47e9e6373a16c554f3c7a2f726347239cb921152a916ee46d1f3250917f0d",
+    "original_context": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.LocalGiraudTransform\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences DerivativeIdeal\n  BlowupStrictSubmanifold BlowupStrictIdeal BlowupFunctionTransform BlowupSNCTransform\n  SimultaneousNormalCrossings BlowupRestrictOpen GeneratorMultiplicityOne RelativePrincipalizationSpan\n  BlowupExceptionalDivisor AnalyticSubsetOpens\n\nnoncomputable section\n\nvariable {n : \u2115}\n\n/-! ### The zero set of a function of multiplicity one -/\n\nsection Hypersurface\n\nvariable {X : Type*} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]\n  [IsComplexManifold n X]\n\n",
+    "original_closing": "end Hypersurface\nend\nend TranscendentalNakamaye.Pending.LocalGiraudTransform\n",
+    "imports": [
+      "Hironaka.MarkedIdeal.LocalGiraudTransform"
+    ],
+    "prepared_destination_sha256": "be102ed5fde7e34f188b41f1a7d5b48809da462416ffefedb010c580b758a350",
+    "proof_type_payload_edits": 0,
+    "production_installation_pending": true,
+    "original_payload_chunks": [
+      "/-- **The zero set of a function of multiplicity one is a hypersurface**: regular of dimension\n`n - 1` at each of its points in `U`. -/\ntheorem regularAtDim_zeroSet {U : Set X} (hU : IsOpen U) {u : X \u2192 \u2102}\n    (hu : \u2200 x \u2208 U, HolomorphicAt n u x)\n    (hu1 : \u2200 x \u2208 U, u x = 0 \u2192 \u2203 (e : ComplexChart n X) (v : ComplexModel n),\n      x \u2208 e.val.source \u2227 chartDeriv e v u x \u2260 0)\n    {x : X} (hx : x \u2208 U) (hux : u x = 0) :\n    RegularAtDim (n := n) ({y | u y = 0} \u2229 U) x (n - 1) := by\n  obtain \u27e8e, v, hxe, hd\u27e9 := hu1 x hx hux\n  obtain \u27e8hn, W, hWs, hWinj, hWu\u27e9 := exists_hypersurface_coords (hu x hx) hxe hd\n  have hO : IsOpen (U \u2229 (chartAt (ComplexModel n) x).source) :=\n    hU.inter (chartAt (ComplexModel n) x).open_source\n  have hxO : x \u2208 U \u2229 (chartAt (ComplexModel n) x).source := \u27e8hx, mem_chart_source _ x\u27e9\n  have hplane : \u2200 y, W y \u2208 complexCoordinatePlane n (n - 1) \u2194 u y = 0 := fun y => by\n    rw [mem_plane_pred_iff hn, hWu]\n  obtain \u27e8\u0398, h\u0398t, h\u03980, h\u0398\u27e9 :=\n    exists_recentred_coords hO (fun z' hz' => hWs z' hz'.2 (hu z' hz'.1)) hxO hWinj\n  refine \u27e8Nat.sub_le n 1, \u27e8hux, hx\u27e9, \u0398, h\u0398t, h\u03980, fun {y} hy hy\u0398 => ?_\u27e9\n  obtain \u27e8hyO, h\u0398y\u27e9 := h\u0398 hy hy\u0398\n  rw [h\u0398y, sub_mem_plane_iff ((hplane x).mpr hux), hplane]\n  exact \u27e8fun h => h.1, fun h => \u27e8h, hyO.1\u27e9\u27e9\n"
+    ]
+  },
+  {
+    "destination_module": "Hironaka.Support.StepOneCanonicalStepDropOriginalExact",
+    "destination_path": "Hironaka/Support/StepOneCanonicalStepDropOriginalExact.lean",
+    "source_module": "TranscendentalNakamaye.Pending.StepOneWellFounded",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/StepOneWellFounded.lean",
+    "published_source_revision": "4c6cdc79e7f8e506fb4b9a820c0a7b2946ad2a07",
+    "source_sha256": "46cc726e65446955c2af68f6a9e79fa1b064e0d7bfbb6e6a38f3b5fc664db91e",
+    "complete_original_declarations": [
+      "TranscendentalNakamaye.Pending.StepOneWellFounded.lt_of_isCanonical_append",
+      "TranscendentalNakamaye.Pending.StepOneWellFounded.lt_of_isCanonical_step"
+    ],
+    "original_selected_source": "/-- **The maximum drops along canonical segments**: let the step along `C` follow a canonical segment `T`, `C` the maximum\nlocus of `inv T` on the cosupport, and `x\u2080 \u2208 C`.  Along every canonical segment extending this step, every value on the\ncosupport is smaller than the value of `x\u2080`, the maximum at `T`. -/\ntheorem lt_of_isCanonical_append {\ud835\udd2a : MarkedIdeal n X} {inv : \u2200 {Y : CMfd.{u} n}, BlowupTower X Y \u2192 Y \u2192 \u039b}\n    (hdrop : StepDrop \ud835\udd2a inv) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (\u03c0 : Z \u2192 Y) (h\u03c0 : IsBlowupAlong n C \u03c0)\n    (hC : C = maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) {x\u2080 : Y} (hx\u2080 : x\u2080 \u2208 C) :\n    \u2200 {W : CMfd.{u} n} (S : BlowupTower Z W), IsCanonical \ud835\udd2a inv ((BlowupTower.step T C \u03c0 h\u03c0).append S) \u2192\n      \u2200 z \u2208 (geoTransformAlong \ud835\udd2a ((BlowupTower.step T C \u03c0 h\u03c0).append S)).cosupp,\n        inv ((BlowupTower.step T C \u03c0 h\u03c0).append S) z < inv T x\u2080\n  | _, .refl, hcan, z, hz => by\n      obtain \u27e8hpz, h1, h2\u27e9 := hdrop T C \u03c0 h\u03c0 hcan z hz\n      subst hC\n      exact lt_of_mem_maxLocus hx\u2080 hpz \u27e8h1, h2\u27e9\n  | _, .step S C' \u03c0' h\u03c0', hcan, z, hz => by\n      obtain \u27e8hpz, h1, h2\u27e9 := hdrop _ C' \u03c0' h\u03c0' hcan z hz\n      have ih := lt_of_isCanonical_append hdrop T C \u03c0 h\u03c0 hC hx\u2080 S hcan.1 (\u03c0' z) hpz\n      by_cases hz' : \u03c0' z \u2208 C'\n      \u00b7 exact (h1 hz').trans ih\n      \u00b7 exact (h2 hz').trans_lt ih\n\n/-- **The one-step drop** (the hypothesis `hdec` of `ResolutionDriver.exists_isGeoResolution_of_wellFounded_invariant`):\nblowing up the maximum locus after a canonical segment, every value on the new cosupport is smaller than the maximum. -/\ntheorem lt_of_isCanonical_step {\ud835\udd2a : MarkedIdeal n X} {inv : \u2200 {Y : CMfd.{u} n}, BlowupTower X Y \u2192 Y \u2192 \u039b}\n    (hdrop : StepDrop \ud835\udd2a inv) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsCanonical \ud835\udd2a inv T)\n    {x\u2080 : Y} (hx\u2080 : x\u2080 \u2208 maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) (\u03c0 : Z \u2192 Y)\n    (h\u03c0 : IsBlowupAlong n (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) \u03c0) :\n    \u2200 z \u2208 (geoTransformAlong \ud835\udd2a (BlowupTower.step T (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) \u03c0 h\u03c0)).cosupp,\n      inv (BlowupTower.step T (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) \u03c0 h\u03c0) z < inv T x\u2080 :=\n  lt_of_isCanonical_append hdrop T _ \u03c0 h\u03c0 rfl hx\u2080 BlowupTower.refl\n    (\u27e8hT, Or.inr rfl\u27e9 : IsCanonical \ud835\udd2a inv T \u2227 (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp = \u2205 \u2228\n      maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp = maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp))\n",
+    "original_selected_sha256": "0c57d80232447f3a6c6cfb992d01c919d99af52197517cf565bb21b4ef02ff40",
+    "original_context": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u v\n\nnamespace TranscendentalNakamaye.Pending.StepOneWellFounded\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal\n  TranscendentalNakamaye.Pending.StepOneValueMasked TranscendentalNakamaye.Pending.MarkedIdealRestrictOpen\n  TranscendentalNakamaye.Pending.ResolutionInvariantOrder TranscendentalNakamaye.Pending.HomogenizedIdealAlong\nopen TranscendentalNakamaye.Pending.ResolutionDriver (maxLocus IsCanonicalSegment isCanonicalSegment_step_iff)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantSpec (IsInvDomain IsCanonical)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantExt (ResolutionInvariant)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top maxLocus_eq_level\n  interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment)\n\nnoncomputable section\n\nvariable {n : \u2115}\n\n/-! ### The drop of the maximum along canonical segments -/\n\nsection Drop\n\nvariable {X : CMfd.{u} n} {\u039b : Type v} [LinearOrder \u039b]\n\n",
+    "original_closing": "end Drop\nend\nend TranscendentalNakamaye.Pending.StepOneWellFounded\n",
+    "imports": [
+      "Hironaka.Invariant.StepOneWellFounded"
+    ],
+    "prepared_destination_sha256": "107a6694f240682ca30cead92ad79baeb331d0ce85e03aed6ba86c95e857afe2",
+    "proof_type_payload_edits": 0,
+    "production_installation_pending": true,
+    "original_payload_chunks": [
+      "/-- **The maximum drops along canonical segments**: let the step along `C` follow a canonical segment `T`, `C` the maximum\nlocus of `inv T` on the cosupport, and `x\u2080 \u2208 C`.  Along every canonical segment extending this step, every value on the\ncosupport is smaller than the value of `x\u2080`, the maximum at `T`. -/\ntheorem lt_of_isCanonical_append {\ud835\udd2a : MarkedIdeal n X} {inv : \u2200 {Y : CMfd.{u} n}, BlowupTower X Y \u2192 Y \u2192 \u039b}\n    (hdrop : StepDrop \ud835\udd2a inv) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (\u03c0 : Z \u2192 Y) (h\u03c0 : IsBlowupAlong n C \u03c0)\n    (hC : C = maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) {x\u2080 : Y} (hx\u2080 : x\u2080 \u2208 C) :\n    \u2200 {W : CMfd.{u} n} (S : BlowupTower Z W), IsCanonical \ud835\udd2a inv ((BlowupTower.step T C \u03c0 h\u03c0).append S) \u2192\n      \u2200 z \u2208 (geoTransformAlong \ud835\udd2a ((BlowupTower.step T C \u03c0 h\u03c0).append S)).cosupp,\n        inv ((BlowupTower.step T C \u03c0 h\u03c0).append S) z < inv T x\u2080\n  | _, .refl, hcan, z, hz => by\n      obtain \u27e8hpz, h1, h2\u27e9 := hdrop T C \u03c0 h\u03c0 hcan z hz\n      subst hC\n      exact lt_of_mem_maxLocus hx\u2080 hpz \u27e8h1, h2\u27e9\n  | _, .step S C' \u03c0' h\u03c0', hcan, z, hz => by\n      obtain \u27e8hpz, h1, h2\u27e9 := hdrop _ C' \u03c0' h\u03c0' hcan z hz\n      have ih := lt_of_isCanonical_append hdrop T C \u03c0 h\u03c0 hC hx\u2080 S hcan.1 (\u03c0' z) hpz\n      by_cases hz' : \u03c0' z \u2208 C'\n      \u00b7 exact (h1 hz').trans ih\n      \u00b7 exact (h2 hz').trans_lt ih\n\n/-- **The one-step drop** (the hypothesis `hdec` of `ResolutionDriver.exists_isGeoResolution_of_wellFounded_invariant`):\nblowing up the maximum locus after a canonical segment, every value on the new cosupport is smaller than the maximum. -/\ntheorem lt_of_isCanonical_step {\ud835\udd2a : MarkedIdeal n X} {inv : \u2200 {Y : CMfd.{u} n}, BlowupTower X Y \u2192 Y \u2192 \u039b}\n    (hdrop : StepDrop \ud835\udd2a inv) {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsCanonical \ud835\udd2a inv T)\n    {x\u2080 : Y} (hx\u2080 : x\u2080 \u2208 maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) (\u03c0 : Z \u2192 Y)\n    (h\u03c0 : IsBlowupAlong n (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) \u03c0) :\n    \u2200 z \u2208 (geoTransformAlong \ud835\udd2a (BlowupTower.step T (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) \u03c0 h\u03c0)).cosupp,\n      inv (BlowupTower.step T (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp) \u03c0 h\u03c0) z < inv T x\u2080 :=\n  lt_of_isCanonical_append hdrop T _ \u03c0 h\u03c0 rfl hx\u2080 BlowupTower.refl\n    (\u27e8hT, Or.inr rfl\u27e9 : IsCanonical \ud835\udd2a inv T \u2227 (maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp = \u2205 \u2228\n      maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp = maxLocus (inv T) (geoTransformAlong \ud835\udd2a T).cosupp))\n"
+    ],
+    "original_context_before_unused_open_subset": "set_option autoImplicit false\nset_option linter.unusedSectionVars false\n\nopen Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u v\n\nnamespace TranscendentalNakamaye.Pending.StepOneWellFounded\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal\n  TranscendentalNakamaye.Pending.StepOneValueMasked TranscendentalNakamaye.Pending.MarkedIdealRestrictOpen\n  TranscendentalNakamaye.Pending.ResolutionInvariantOrder TranscendentalNakamaye.Pending.HomogenizedIdealAlong\nopen TranscendentalNakamaye.Pending.ResolutionDriver (maxLocus IsCanonicalSegment isCanonicalSegment_step_iff\n  exists_isGeoResolution_of_wellFounded_invariant)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantSpec (IsInvDomain IsCanonical)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantExt (ResolutionInvariant)\nopen TranscendentalNakamaye.Pending.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top maxLocus_eq_level\n  interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment)\n\nnoncomputable section\n\nvariable {n : \u2115}\n\n/-! ### The drop of the maximum along canonical segments -/\n\nsection Drop\n\nvariable {X : CMfd.{u} n} {\u039b : Type v} [LinearOrder \u039b]\n\n",
+    "omitted_unused_original_open_identifier": "ResolutionDriver.exists_isGeoResolution_of_wellFounded_invariant (not used in either selected type/proof)"
+  }
+]

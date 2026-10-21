@@ -1,0 +1,99 @@
+\section{Actual proper holomorphic principalization geometry of the same original projection}
+
+The global principalization projection has the intrinsic geometry of a
+proper holomorphic modification.  Its exceptional analytic witnesses are
+the true original ideal zero locus and the true support of the already
+constructed global effective divisor.  A whole inverse section is
+constructed from the genuine complement biholomorphism.  This expanded
+geometric statement asserts no globally scheduled blowup history.
+
+\begin{lemma}[The true global divisor support has empty interior]
+\label{hir:original-global-principalization-divisor-support-thin}
+\lean{Hironaka.HironakaOriginalGlobalProperModification.originalTerminalPrincipalizationDivisor_interior_support_eq_empty}
+\leanok
+\uses{hir:original-global-terminal-true-ideal-invertible}
+For original marked-domain input with whole ambient submanifold and mark
+one, the support of the actual global principalization divisor has empty
+interior.
+\end{lemma}
+\begin{proof}
+Suppose a point belongs to the interior of that support.  Actual
+invertibility supplies a local holomorphic generator $g$ on an open
+neighborhood $U$ which vanishes identically on no nonempty open subset
+of $U$.  The support interior intersected with $U$ is an actual
+nonempty open subset.  Choose a point there where $g$ is nonzero.
+The genuine principal stalk identity puts $g$ in the divisor ideal at
+that point, whereas membership in the support says every member of
+the same actual ideal vanishes there.  This contradiction proves the
+empty-interior assertion.
+\end{proof}
+
+\begin{theorem}[The original zero locus and actual divisor support are genuine thin analytic loci]
+\label{hir:original-global-principalization-true-thin-analytic-loci}
+\lean{Hironaka.HironakaOriginalGlobalProperModification.originalTerminalPrincipalization_analytic_loci}
+\leanok
+\uses{hir:original-global-principalization-divisor-support-thin,hir:original-global-terminal-projection-surjective,hir:original-global-principalization-true-support,bcalc:cosupport-analytic}
+Both the true original zero locus $B=Z(M.\mathfrak a)$ and the actual
+global divisor support $A=\operatorname{supp}D$ are closed analytic
+subsets with empty interior, and $P^{-1}B=A$.
+\end{theorem}
+\begin{proof}
+Original coherence identifies its true zero locus with the common zero
+set of finitely many holomorphic generators on every actual neighborhood,
+so $B$ is analytic and closed.  The genuine holomorphic projection pulls
+it back to an analytic closed subset, which equals $A$ by the true global
+support identity.  The preceding lemma proves the empty interior of $A$.
+If $B$ had an interior point, actual surjectivity of $P$ supplies a
+preimage.  The inverse image of the interior of $B$ is an open
+neighborhood of that preimage, contained in $P^{-1}B=A$.  This would put
+the preimage in the interior of $A$, a contradiction.  Thus $B$ also
+has empty interior.
+\end{proof}
+
+\begin{theorem}[Original data construct a whole genuine inverse section off the actual loci]
+\label{hir:original-global-terminal-whole-off-zero-inverse-section}
+\lean{Hironaka.HironakaOriginalGlobalProperModification.exists_originalTerminalWholeInverseSection}
+\leanok
+\uses{hir:original-global-terminal-genuine-off-zero-biholomorphism,hir:original-global-terminal-projection-surjective,hir:original-global-principalization-true-support}
+There exists a whole map $s:X\to Y$ which is holomorphic on
+$X\setminus Z(M.\mathfrak a)$, satisfies $Ps(x)=x$ there, and satisfies
+$sP(y)=y$ outside the actual global divisor support.  No inverse map or
+regularity certificate is an input.
+\end{theorem}
+\begin{proof}
+On the true target complement use the already proved genuine inverse
+of the actual complement biholomorphism, followed by the true source-open
+inclusion.  On the original zero locus choose any actual preimage using
+the independently proved surjectivity of $P$.  These two definitions
+give a whole map, including empty manifolds.  Its restriction to the
+true target complement is exactly the actual holomorphic inverse, so
+the whole map is holomorphic on that complement.  The true
+biholomorphism right inverse gives $Ps(x)=x$ there.  For $y$ outside the
+actual divisor support, the true support equality puts $P(y)$ in the
+target complement, and the true biholomorphism left inverse gives
+$sP(y)=y$.  Both equations are for the same original projection.
+\end{proof}
+
+\begin{theorem}[The same original global principalization has full intrinsic proper modification geometry]
+\label{hir:original-global-principalization-actual-proper-modification-geometry}
+\lean{Hironaka.HironakaOriginalGlobalProperModification.originalTerminalGlobalProperModification_geometry}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-terminal-glued-projection-proper,hir:original-input-global-terminal-whole-projection-holomorphic,hir:original-global-principalization-true-thin-analytic-loci,hir:original-global-terminal-whole-off-zero-inverse-section}
+Only the original marked-domain input with whole ambient submanifold and
+mark one gives the same global projection $P$ proper and holomorphic,
+with the actual closed nowhere-dense analytic loci $A=\operatorname{supp}D$
+and $B=Z(M.\mathfrak a)$, true equality $P^{-1}B=A$, and a whole
+holomorphic inverse off these loci with both genuine inverse equations.
+\end{theorem}
+\begin{proof}
+The original proper-projection theorem applies to the same actual
+original gluing and constructs properness without a schedule or a
+compact-base assumption.  The original terminal-manifold theorem proves
+holomorphicity of that same entire map.  The second theorem supplies
+the actual closed analytic empty-interior loci and their true inverse-image
+equality.  The third theorem constructs the whole inverse section and
+its holomorphicity and inverse equations.  Together these are precisely
+the asserted intrinsic geometric properties, for the actual original
+projection and its actual principalization divisor.
+\end{proof}

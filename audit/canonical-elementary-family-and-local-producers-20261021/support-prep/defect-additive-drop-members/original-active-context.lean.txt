@@ -1,0 +1,18 @@
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+open Set Filter
+open scoped Topology Manifold
+
+universe u
+
+namespace TranscendentalNakamaye.Pending.DropMembers
+
+open FirstPass FirstPass.BlowupSequences NormalCrossings BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  BlowupStrictSubmanifold NormalCrossingsComparison CoefficientIdealRestriction HomogenizedGlueingTower
+
+noncomputable section
+
+section Tower
+
+variable {n : ℕ} {X : CMfd.{u} n}

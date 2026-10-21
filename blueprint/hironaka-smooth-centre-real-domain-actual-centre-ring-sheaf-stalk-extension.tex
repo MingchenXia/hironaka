@@ -1,0 +1,92 @@
+\section{The whole original centre ring-sheaf stalk}
+
+Keep the already constructed original centre quotient ring presheaf and
+its genuine ring sheaf. Let $R_y$ be the actual original structure-ring
+stalk and $J_y$ the whole original vanishing ideal of $C$ in that stalk.
+
+\begin{definition}[Original centre quotient germs]
+\label{hir:real-domain-actual-centre-ring-original-quotient-germs}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-quotient-ring-sheaf,hir:real-domain-actual-centre-ideal-section-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingSectionGermHom,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingSectionGermHom_mk,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingGermCocone,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingStalkToWholeHom,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingStalkToWholeHom_germ}
+\leanok
+Every actual quotient section on an original neighbourhood maps to
+$R_y/J_y$ by taking the same original numerator germ. These genuine ring
+maps form the neighbourhood cocone, hence give a ring map from the
+actual centre quotient presheaf stalk to the whole original quotient.
+\end{definition}
+\begin{proof}
+Every centre section germ belongs to $J_y$ by its pointwise definition,
+so the quotient-ring universal property constructs the quotient germ
+map. Actual germ restriction keeps every numerator, proving the
+neighbourhood cocone naturality. The genuine ring colimit yields the
+whole stalk map and its formula on every original quotient section germ.
+\end{proof}
+
+\begin{theorem}[The actual centre quotient presheaf stalk is the whole original quotient]
+\label{hir:real-domain-actual-centre-ring-whole-presheaf-stalk}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-ring-original-quotient-germs,hir:real-domain-actual-centre-ideal-section-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingStalkToWholeHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingStalkWholeEquiv}
+\leanok
+The actual quotient germ ring map is bijective and hence a ring
+isomorphism onto the whole original $R_y/J_y$. Every original quotient
+numerator retains exactly its original germ class.
+\end{theorem}
+\begin{proof}
+Surjectivity follows by choosing an ambient representative of any
+quotient class, then an actual holomorphic section germ representing it.
+For injectivity represent two actual stalk elements by actual quotient
+sections and restrict their numerators to one common original open.
+Equality of their whole quotient germs says their difference germ lies
+in $J_y$. The independently proved whole centre-section germ image
+identity provides a true original centre section representing that
+difference germ, without any coherence assumption. Actual germ equality
+then gives a smaller original open where the restricted numerator
+difference equals that centre section. It belongs to the actual centre
+section ideal there, so the two quotient sections agree there. Actual
+stalk germ extensionality proves equality of the original stalk elements.
+\end{proof}
+
+\begin{theorem}[The genuine centre ring sheaf has the whole original quotient stalk]
+\label{hir:real-domain-actual-centre-ring-whole-sheaf-stalk}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-ring-whole-presheaf-stalk,hir:real-domain-actual-centre-quotient-ring-sheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingUnitStalkIso,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingSheafStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingSheafStalkWholeEquiv_unit,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingSheafStalkWholeEquiv_germ,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingSheafStalkWholeEquiv_ambientHom}
+\leanok
+The genuine original centre ring sheaf stalk is ring-isomorphic to
+$R_y/J_y$. Every unit image of an original quotient section germ keeps
+the same whole original quotient numerator, and the actual ambient
+stalk morphism becomes the original quotient map $R_y\to R_y/J_y$.
+\end{theorem}
+\begin{proof}
+The genuine ring sheafification unit is internally an isomorphism on
+actual ring stalks. Compose its inverse with the preceding whole
+presheaf-stalk isomorphism. Its unit and germ identities retain every
+original quotient section germ. Represent any ambient scalar by a true
+original section; stalk functoriality for the actual quotient sheaf
+morphism and the quotient numerator identity give exactly its original
+whole quotient class.
+\end{proof}
+
+\begin{theorem}[The global centre ring-sheaf action agrees with the original whole quotient action]
+\label{hir:real-domain-actual-centre-ring-sheaf-whole-action}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-ring-whole-sheaf-stalk,hir:real-domain-actual-centre-ring-sheaf-stalk-factorization,hir:real-domain-actual-normal-associated-ring-sheaf-centre-ring-map}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheafStalk.actualCentreRingAssociatedSheafStalkHom_whole}
+\leanok
+For coherent original $A$, identifying the genuine centre ring-sheaf
+stalk with the whole original $R_y/J_y$ makes its actual ring homomorphism
+to the associated ring-sheaf stalk exactly the previously independently
+constructed quotient ring homomorphism. Every whole quotient scalar
+therefore keeps the same original ambient product.
+\end{theorem}
+\begin{proof}
+Choose an ambient numerator $r$ for an arbitrary whole quotient scalar.
+The actual ambient centre stalk image is sent by the preceding genuine
+ring isomorphism to $[r]$, so it is the inverse image of this scalar.
+The global sheaf factorization sends it to the same original ambient
+associated-ring stalk image of $r$. The earlier genuine quotient ring
+homomorphism has exactly this numerator formula. Quotient numerator
+surjectivity therefore proves equality for every scalar.
+\end{proof}

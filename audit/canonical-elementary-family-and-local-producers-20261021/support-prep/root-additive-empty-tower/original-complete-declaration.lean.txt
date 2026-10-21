@@ -1,0 +1,4 @@
+/-- **If the centres lie over a set disjoint from `U`, the restriction to `U` has only empty centres.** -/
+theorem isEmptyTower_restrict_of_centresOver (U : Opens X) {F : Set X} (hUF : Disjoint (U : Set X) F)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (h : CentresOver F T) : IsEmptyTower (restrict U T) :=
+  (isEmptyTower_restrict_iff U T).mpr (centresAvoid_of_centresOver U hUF T h)
