@@ -60,7 +60,8 @@
     "whole_native_target_and_all_output_fields_preserved": true,
     "no_auxiliary_hypothesis_output_certificate_or_axiom": true,
     "no_geometric_integrality_or_perfectness": true,
-    "full_root_imports_wrapper_once": true
+    "full_root_imports_wrapper_once": true,
+    "wrapper_imports_documented_native_root": true
   },
   "audit_source": {
     "all_env_constants_enumerated": true,
@@ -82,7 +83,7 @@
     "installed_Lake_source_semantics_receipt": "LakeWarningPolicyReview.json"
   },
   "source_files_sha256": {
-    "Hironaka/DeJong.lean": "588a898076413a9ceb23e9926c67311eadd5163907acab056bfb29318cb153b2",
+    "Hironaka/DeJong.lean": "7c3d9933a9abbf60ff0db5d172b3853eaa0b63d4e0b414a35c2c8a39daa502d2",
     "Hironaka.lean": "e3fa06aa263f31a943771ceeb974f2bd21196fc231fd84e35f576e3baf02292f",
     "lakefile.toml": "26d583e808866678003f1f60caff33eefddab330d314bddd23144a33e1e9d4dd",
     "lake-manifest.json": "3e4b1e4f64c1962e89a4fa955ec369af4b5bb35db01a810e4e0eaa0266b0cb39",
@@ -94,13 +95,40 @@
     "vendor/DeJongAlterations/DeJongAlterations.lean": "4cc50e87909d2c59204a9f7bf275b410ae2a7458d488dbfd3023bda974c2381a"
   },
   "pending_root_verification": [
-    "Fresh combined import build",
-    "Compiled endpoint #check and recursive complete-owner std3 audit",
-    "Final dependency warning inventory and documentation/build-evidence receipt"
+    "Final warm combined build after baseline full build finishes, using this exact final native-root import",
+    "Final combined complete-owner recursive std3 audit and compiled endpoint signatures",
+    "Final kernel replay and warning/documentation evidence as planned by ROOT"
   ],
   "issues": [],
   "source_edits": false,
   "git_mutations": false,
   "network_calls": false,
-  "builds": false
+  "builds": false,
+  "previous_review": {
+    "path": "/workspace/scratch/dejong-hironaka-integration/IntegrationSourceIndependentReview.before-native-root-import.json",
+    "sha256": "85f6b142635a9f2c710d3c99e43853faa9de4816b496eabc8e65fb2115681f81",
+    "result": "GOOD for earlier wrapper direct-endpoint import"
+  },
+  "final_import_review": {
+    "result": "GOOD",
+    "wrapper_import": "DeJongAlterations",
+    "only_source_delta": "Replace direct final-endpoint import with the generated narrow native package root import; all theorem statements, bodies and headers byte-identical.",
+    "native_root_direct_imports": [
+      "DeJongAlterations.StableModificationBridge.AlterationUnconditional"
+    ],
+    "generated_native_root_adds_mathematical_declarations": false,
+    "original_native_proof_modules": 1112,
+    "final_dependency_imported_module_count_expected": 1113,
+    "reason": "Makes the documented native import root part of default combined builds, retaining exactly the same complete native proof cone.",
+    "all1112_original_source_hashes_rechecked": true
+  },
+  "historical_selective_result": {
+    "path": "SelectiveDeJongAuditResult.json",
+    "sha256": "6d6914584913a6e03335115ddbea55fff7cc227fadca22661c19eced45502a04",
+    "result": "PASS for earlier direct-endpoint wrapper import; historical selective audit only",
+    "declarations": 23612,
+    "imported_original_proof_modules": 1112,
+    "not_rerun": true,
+    "note": "Generated native root introduces zero constants and one imported module. Final combined audit, rather than reclassifying this older selective run, must certify the final import graph."
+  }
 }

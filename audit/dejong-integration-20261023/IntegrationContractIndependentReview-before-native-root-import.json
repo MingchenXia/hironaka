@@ -1,0 +1,50 @@
+{
+  "reviewer": "/root/target_integration_review",
+  "status": "GOOD",
+  "scope": "Independent read-only source review of ROOT-authored API integration, dependency/manifest contract, recursive audit coverage and warning/build configuration. Own six authored docs are explicitly excluded from this independent acceptance.",
+  "source_checked_sha256": {
+    "Hironaka/DeJong.lean": "588a898076413a9ceb23e9926c67311eadd5163907acab056bfb29318cb153b2",
+    "Hironaka.lean": "e3fa06aa263f31a943771ceeb974f2bd21196fc231fd84e35f576e3baf02292f",
+    "scripts/CheckAxioms.lean": "c617583645f46867a66b35624c484aa0eedd052bd98f216c7d34f43a621ecdc7",
+    "lakefile.toml": "26d583e808866678003f1f60caff33eefddab330d314bddd23144a33e1e9d4dd",
+    "lake-manifest.json": "3e4b1e4f64c1962e89a4fa955ec369af4b5bb35db01a810e4e0eaa0266b0cb39",
+    "lean-toolchain": "3e237b01ed208f3feae92c0848414c030fedbe2068f698e93c0d20aea4811a01",
+    ".github/workflows/ci.yml": "e8a026c643ee1c32d9ff0202ec11ac9c6edf7f35fa016945173aa610f8157604",
+    "vendor/DeJongAlterations/DeJongAlterations.lean": "4cc50e87909d2c59204a9f7bf275b410ae2a7458d488dbfd3023bda974c2381a",
+    "vendor/DeJongAlterations/lakefile.toml": "52b54040405f034b1e20845e4ab2c81dcc565a3689901ca95a2b66ad8a1d327e",
+    "vendor/DeJongAlterations/lake-manifest.json": "060d5aa9ed61d71d0478ee416c0a2548e8312c2530b84b44e73bab1b5a8a9df3",
+    "vendor/DeJongAlterations/lean-toolchain": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+    "vendor/DeJongAlterations/SOURCE.json": "8990344bd2bec80086eb137ea18a052e0314475f32b775889de6728f71ae4eb9",
+    "vendor/DeJongAlterations/DeJongAlterations/Theorem.lean": "6ca7b202fdfea3df751da5cc0324a60d8cbc2848ac6596d0126cdfb39f095713"
+  },
+  "api_findings": [
+    "Hironaka.deJongAlterationTheorem has exactly (k : Type u) [Field k] and the unchanged native DeJongAlterations.DeJongAlterationTheorem k output; body applies the actual proved native arbitrary-field endpoint directly.",
+    "Hironaka.exists_alterationWithBoundary quantifies original native Scheme X, actual structure map p, natural IsVariety p proof, EVERY original closed Z and properness proof. Result is Nonempty of the unchanged native AlterationWithBoundary p (Z : Set X); body specializes the first endpoint. No desired-output/stability/projectivity/valuation/finite-model or other certificate input.",
+    "The original native output retains integral variety/source/compactification, actual alteration and open immersion, both original field-structure triangles, projectivity and intrinsic regularity, whole native strict SNC divisor, and EXACT inclusion-image of alteration-preimage Z UNION original compactification complement. No geometric-integrality, perfectness, or imperfect-field smoothness premise/conclusion is inserted.",
+    "Full public Hironaka root imports Hironaka.DeJong exactly once. Vendored native root imports ONLY completed arbitrary-field endpoint; original source namespace is retained."
+  ],
+  "axiom_audit_findings": [
+    "Every environment constant is selected by Hironaka OR DeJongAlterations namespace OR exact module ownership via env.const2ModIdx/env.header.moduleNames; adopted native namespaces are covered.",
+    "No isInternalDetail/private/generated filter remains. Every selected declaration recursively collectAxioms is restricted to propext/Classical.choice/Quot.sound.",
+    "Separate nonzero owner counters reject an empty audit for either package. Explicit #check @ universal public/native endpoints and #print axioms both new public endpoints are included."
+  ],
+  "packaging_findings": [
+    "Actual root Lake config AND lockfile use local path vendor/DeJongAlterations, not a private git fetch. Root+vendor runtime dependencies are only existing public Lean/mathlib packages.",
+    "Effective Lean versions and all nine shared transitive dependency commit revisions match exactly. Private original source commit187095 is provenance only. Native 1112 source-byte independent audit is delegated to source_export_audit, not duplicated here.",
+    "Narrow vendored root, native source manifest and fixed original source revision match planned complete endpoint cone. Parent normalized stale top manifest name TranscendentalNakamaye to DeJongAlterations as packaging metadata only; all nine pins unchanged.",
+    "Root Hironaka warningAsError=true preserves fatal local warnings. Vendored config leaves original warnings visible/nonfatal. Workflow has no global --wfail; ROOT separately checked lean-action@v1 build-args default empty. No claim that a global --wfail build passed."
+  ],
+  "resolved_notes": [
+    {
+      "issue": "Vendored original manifest incorrectly retained top-level package name TranscendentalNakamaye",
+      "resolution": "ROOT normalized top-level name to DeJongAlterations; dependency revisions/native source unchanged."
+    },
+    {
+      "issue": "Original root and vendor lean-toolchain files have different newline bytes",
+      "resolution": "Effective contents identical leanprover/lean4:v4.33.1; no semantic mismatch."
+    }
+  ],
+  "independence": "No changes to reviewed ROOT-authored files, no build invocations, no git mutations, no own-doc independent acceptance.",
+  "compiled_validation_boundary": "This is source-contract review, not fresh combined compiled proof evidence. ROOT reports selective leaf5044 jobs PASS with55 upstream/0local warnings; full combined-root build/audit remains with ROOT. No polling or duplicate builds performed.",
+  "issues": []
+}
