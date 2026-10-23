@@ -1,0 +1,13 @@
+Hironaka.deJongAlterationTheorem : ∀ (k : Type u_1) [inst : Field k], DeJongAlterations.DeJongAlterationTheorem k
+Hironaka.exists_alterationWithBoundary : ∀ (k : Type u_1) [inst : Field k] (X : AlgebraicGeometry.Scheme)
+  (p : X ⟶ AlgebraicGeometry.Spec (CommRingCat.of k)),
+  DeJongAlterations.IsVariety p →
+    ∀ (Z : TopologicalSpace.Closeds ↥X), Z ≠ ⊤ → Nonempty (DeJongAlterations.AlterationWithBoundary p ↑Z)
+DeJongAlterations.StableModificationBridge.AlterationUnconditional.deJongAlterationTheorem : ∀ (k : Type u_1)
+  [inst : Field k], DeJongAlterations.DeJongAlterationTheorem k
+'Hironaka.deJongAlterationTheorem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hironaka.exists_alterationWithBoundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DeJongAlterations.StableModificationBridge.AlterationUnconditional.deJongAlterationTheorem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Selective import audit PASS: 23612 declarations, 23610 DeJongAlterations owners, 2 wrapper owners, 910 dependency owners outside namespace, 8894 internal/private/generated constants included; only standard3

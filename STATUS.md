@@ -1,5 +1,29 @@
 # Current scope
 
+## De Jong alterations over arbitrary fields
+
+The proved native alteration theorem is integrated through the local package
+[`vendor/DeJongAlterations`](vendor/DeJongAlterations). Its original native
+producer sources are extracted from source commit
+`187095a1888ecadb1f365e6d4dc0cb75dcd61eff`, preserving their bytes and
+contributor/license headers. The proof sources are included in this repository;
+building the integration does not require access to the private source repository.
+`Hironaka.deJongAlterationTheorem` has only `(k : Type u) [Field k]` as inputs;
+`Hironaka.exists_alterationWithBoundary` specializes it to an actual variety and
+prescribed proper closed subset. Both are available from `import Hironaka.DeJong`
+and the full `import Hironaka`.
+
+The output retains the original variety, genuine alteration, regular projective
+compactification and the whole strict SNC boundary, with its exact prescribed
+support. Geometric integrality and perfectness are not assumed. The separate
+perfect-field generically-étale refinement and other independent paper results
+are outside this integration. See [the API and source provenance](docs/DEJONG.md).
+Combined-build and recursive-axiom verification for this integration is recorded
+in [its verification receipt](audit/dejong-integration-20261023/validation.json).
+The earlier analytic verification numbers below describe their own checkpoints.
+
+## Original complex-analytic scope
+
 This table describes the accepted native formalization at
 [the current native checkpoint](https://github.com/MingchenXia/archon-nakamaye/commit/636442a87402a67de1f914cb4120ee28c3ed6ad7).
 The standalone export is recorded separately below; native verification

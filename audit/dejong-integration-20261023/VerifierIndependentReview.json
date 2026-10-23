@@ -1,0 +1,68 @@
+{
+  "result": "GOOD",
+  "reviewer": "/root/source_export_audit",
+  "scope": "Read-only public source-verifier review and one normal Python execution; current progress validation honesty. No Lean build/source/Git/network mutation.",
+  "tool": {
+    "path": "scripts/check_dejong_source.py",
+    "sha256": "d1783bc07dd783c556229ca5aa5bf6eb97de8cd16fa0550983233e033ad82981",
+    "stdlib_imports": [
+      "hashlib",
+      "json",
+      "pathlib",
+      "re"
+    ],
+    "external_private_repository_or_filesystem_required": false,
+    "network_calls": false,
+    "subprocess_or_Git_required": false,
+    "cwd_independent_checkout_root_resolution": true,
+    "read_only_files_and_stdout": true,
+    "checks": {
+      "module_to_relative_source_path_mapping": true,
+      "duplicate_module_inventory_rejected": true,
+      "SHA256_of_every_actual_source": true,
+      "canonical_Git_SHA1_blob_header_plus_content": true,
+      "each_source_line_count_and_total_lines": true,
+      "extra_and_missing_source_modules_detected": true,
+      "public_import_and_regular_import_lines_parsed": true,
+      "complete_actual_local_import_closure_equals_inventory": true,
+      "imports_outside_DJA_only_public_Mathlib_and_Lean_namespaces": true,
+      "same_root_and_vendor_Git_dependency_pins": true,
+      "same_root_and_vendor_Lean_toolchain": true
+    },
+    "frozen_SOURCE_modules_match_independent1112closure": true,
+    "trust_boundary": "This is an internal consistency/reproduction checker against committed SOURCE.json. It does not claim by itself to authenticate private upstream provenance or prove Lean theorems. Independent source Gitblob review and compiled checks are recorded separately.",
+    "execution": {
+      "command": [
+        "python",
+        "scripts/check_dejong_source.py"
+      ],
+      "cwd": "/workspace/hironaka",
+      "returncode": 0,
+      "stdout": "de Jong source check: 1112 exact proof modules; complete import closure; dependency pins match\n",
+      "times_executed_by_reviewer": 1
+    }
+  },
+  "progress_validation": {
+    "path": "audit/dejong-integration-20261023/validation.json",
+    "sha256_at_review": "a22880f226f63a4205cb3b26141dade918e064973d153ee88bc28a8ebbb0e40a",
+    "overall_status": "in_progress",
+    "selective_public_build": "PASS5044jobs",
+    "selective_axiom_audit": "PASS23612constants; referenced result clearlySELECTIVE and NOTfullHironaka",
+    "combined_build": "running",
+    "combined_axiom_audit": "pending",
+    "kernel_replay": "pending",
+    "all_five_copied_review_hashes_match": true,
+    "source_inventory_hash_matches_actual1112records": true,
+    "upstream55warnings_preserved_inventory": true,
+    "does_not_claim_full_integration_verification_complete": true
+  },
+  "issues": [],
+  "remaining_root_tasks": [
+    "Finish full combined root build, combined complete-owner recursive axiom audit and planned kernel replay",
+    "Replace conservative progress statuses only after actual checks finish successfully"
+  ],
+  "builds": false,
+  "source_edits": false,
+  "git_mutations": false,
+  "network_calls": false
+}

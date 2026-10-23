@@ -5,11 +5,16 @@ testDriver = "CheckAxioms"
 
 [leanOptions]
 autoImplicit = false
+warningAsError = true
 
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
 rev = "0df444a360eaa60ab8c11dca51a86af692955474"
+
+[[require]]
+name = "DeJongAlterations"
+path = "vendor/DeJongAlterations"
 
 [[lean_lib]]
 name = "Hironaka"
