@@ -1,5 +1,5 @@
 {
-  "status": "in_progress",
+  "status": "PASS",
   "objective": "Integrate the proved unconditional arbitrary-field de Jong alteration theorem into the public Hironaka package",
   "source_revision": "187095a1888ecadb1f365e6d4dc0cb75dcd61eff",
   "target_base": "dfce539bb587275734d8c818f186f839d40fb60b",
@@ -95,21 +95,51 @@
       "scope_note": "Historical pre-native-root-import evidence: 1112 original source modules and the public wrapper. Final graph adds one generated zero-constant native root."
     },
     "combined_build": {
-      "status": "running",
+      "status": "PASS",
       "command": [
         "lake",
         "build"
-      ]
+      ],
+      "env": {
+        "LEAN_NUM_THREADS": "2"
+      },
+      "exit_code": 0,
+      "started_utc": "2026-10-23T01:10:28.641152+00:00",
+      "completed_utc": "2026-10-23T01:10:40.289056+00:00",
+      "elapsed_seconds": 11.648,
+      "log": "final-root-build.log",
+      "log_sha256": "fe71f715bff175c120520b3ba0298289807f43218ebc4882d6f4ed4193999bb7",
+      "receipt": "final-root-build-result.json",
+      "receipt_sha256": "fbeb118ac048a7403d6040af759045973200e594ddc95c9281c74c6c9bde1e73",
+      "jobs": 7315,
+      "warning_count": 55,
+      "hironaka_warning_count": 0,
+      "scope": "Final full Hironaka root with generated narrow native DeJongAlterations root and all original Hironaka imports"
     },
     "combined_axiom_audit": {
-      "status": "pending",
+      "status": "PASS",
       "command": [
         "lake",
         "test"
-      ]
+      ],
+      "env": {
+        "LEAN_NUM_THREADS": "2"
+      },
+      "exit_code": 0,
+      "started_utc": "2026-10-23T01:10:46.423731+00:00",
+      "completed_utc": "2026-10-23T01:10:54.022511+00:00",
+      "elapsed_seconds": 7.599,
+      "log": "combined-axioms.log",
+      "log_sha256": "9ccbf0e072f5d8258c0dd398a7de70e46697d131498f84f1f8b65d6b0bcadc33",
+      "receipt": "combined-axioms-result.json",
+      "receipt_sha256": "53f26d7de2b429923ead1339426df4787d158341906518e465d228bb52e86611",
+      "declarations": 47807,
+      "hironaka_owned": 24197,
+      "dejong_owned": 23610,
+      "scope": "Every Hironaka or DeJongAlterations namespace or exact module-owned declaration, including private/generated and adopted native namespaces; recursive axiom collection"
     },
     "kernel_replay": {
-      "status": "pending",
+      "status": "PASS",
       "command": [
         "lake",
         "env",
@@ -121,7 +151,15 @@
       "env": {
         "LEAN_NUM_THREADS": "1"
       },
-      "scope": "New public API module and vendored final endpoint; all imported declarations are covered by the recursive combined axiom audit."
+      "scope": "New public API module and vendored final endpoint; all imported declarations are covered by the recursive combined axiom audit.",
+      "exit_code": 0,
+      "started_utc": "2026-10-23T01:11:00.669157+00:00",
+      "completed_utc": "2026-10-23T01:11:12.483272+00:00",
+      "elapsed_seconds": 11.814,
+      "log": "kernel-replay.log",
+      "log_sha256": "09935ec0ffb589366d8aac0dfa24796383bb53d34756e911dffb62124e827ff1",
+      "receipt": "kernel-replay-result.json",
+      "receipt_sha256": "cf0a058b948abd26853f1f9e5b08d6b647f52eea20a6c5a8af3b0b845e667fb3"
     },
     "source_inventory": {
       "status": "PASS",
@@ -170,7 +208,12 @@
     "StaticDocumentationValidation.json": {
       "path": "StaticDocumentationValidation.json",
       "sha256": "9ce42213c7745f5eaa804241ebeb4dc7ebbf74f9e346bc7034c961e44daad65a",
-      "role": "documentation-author static validation"
+      "role": "Historical documentation-author preflight before the final native-root import and build; its wrapper and compiled metadata hashes are historical, superseded by the final independent documentation review"
+    },
+    "FinalDocumentationIndependentReview.json": {
+      "path": "FinalDocumentationIndependentReview.json",
+      "sha256": "152e1d34885e2967db0c38a4ce16070d06b8f8d351aae1757da4347ad6f92216",
+      "role": "Independent final documentation and compiled-binding review after final build/audit/kernel PASS"
     }
   },
   "warning_policy": {
@@ -183,5 +226,18 @@
   "ci": "skipped by user instruction; all publication commits use [skip ci]",
   "scope_note": "Preserves original X, proper closed Z, genuine alteration, integral regular projective compactification and exact whole strict SNC boundary. No geometric integrality/perfectness/output-producer premise. Existing analytic gap inventory and separate perfect-field refinement are not changed or claimed solved.",
   "generated_native_root_modules": 1,
-  "final_import_note": "Hironaka.DeJong imports the generated narrow DeJongAlterations root, which imports only the final endpoint; default build therefore provides both documented native and Hironaka imports."
+  "final_import_note": "Hironaka.DeJong imports the generated narrow DeJongAlterations root, which imports only the final endpoint; default build therefore provides both documented native and Hironaka imports.",
+  "completed_utc": "2026-10-23T01:11:12.483272+00:00",
+  "final_check_inputs_sha256": {
+    "Hironaka.lean": "e3fa06aa263f31a943771ceeb974f2bd21196fc231fd84e35f576e3baf02292f",
+    "Hironaka/DeJong.lean": "7c3d9933a9abbf60ff0db5d172b3853eaa0b63d4e0b414a35c2c8a39daa502d2",
+    "lakefile.toml": "26d583e808866678003f1f60caff33eefddab330d314bddd23144a33e1e9d4dd",
+    "lake-manifest.json": "3e4b1e4f64c1962e89a4fa955ec369af4b5bb35db01a810e4e0eaa0266b0cb39",
+    "lean-toolchain": "3e237b01ed208f3feae92c0848414c030fedbe2068f698e93c0d20aea4811a01",
+    "scripts/CheckAxioms.lean": "c617583645f46867a66b35624c484aa0eedd052bd98f216c7d34f43a621ecdc7",
+    "vendor/DeJongAlterations/DeJongAlterations.lean": "4cc50e87909d2c59204a9f7bf275b410ae2a7458d488dbfd3023bda974c2381a",
+    "vendor/DeJongAlterations/SOURCE.json": "8990344bd2bec80086eb137ea18a052e0314475f32b775889de6728f71ae4eb9",
+    "vendor/DeJongAlterations/lakefile.toml": "52b54040405f034b1e20845e4ab2c81dcc565a3689901ca95a2b66ad8a1d327e",
+    "vendor/DeJongAlterations/lake-manifest.json": "060d5aa9ed61d71d0478ee416c0a2548e8312c2530b84b44e73bab1b5a8a9df3"
+  }
 }
