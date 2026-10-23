@@ -1,0 +1,4 @@
+theorem derivMarkedAlong_eq_derivMarked {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) (j : ℕ) : derivMarkedAlong 𝔪 j = derivMarked 𝔪 j :=
+  MarkedIdealOperationsTransform.MarkedIdeal.ext_of rfl rfl
+    (show iterDerivIdealAlong 𝔪.N 𝔪.ideal j = iterDerivIdeal 𝔪.ideal j by rw [hN, iterDerivIdealAlong_univ h𝔞]) rfl

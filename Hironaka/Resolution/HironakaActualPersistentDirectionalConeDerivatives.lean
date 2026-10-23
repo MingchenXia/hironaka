@@ -1,0 +1,683 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaActualPointNormalizedBennett
+import Hironaka.Resolution.HironakaActualSuppliedFlatteningNormalPowers
+import Mathlib.RingTheory.MvPowerSeries.Rename
+import Hironaka.Resolution.HironakaActualDirectionalPivotNormality
+import Hironaka.Resolution.HironakaActualPersistentPointConeDerivatives
+
+/-! Genuine arbitrary-direction original point persistence produces SOURCE directional stability on the SAME original cone, using its actual inverse linear shear and whole translated-ideal ranks. No sheared canonical basis or stability certificate is input. -/
+set_option autoImplicit false
+open Set Filter Classical
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaActualPersistentDirectionalConeDerivatives
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf
+  HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan HironakaHolomorphicJetRankLoci
+  HironakaHolomorphicJetChartInvariance HironakaRelativeNormalMonomialBasis
+  HironakaActualFormalInitialDiagram HironakaActualHomogeneousInitialHS
+  HironakaActualFiniteInitialGeneration HironakaActualTranslatedInitialHS
+  HironakaActualPointNormalizedBennett HironakaActualPointInitialIdealInclusion
+  HironakaActualUnshiftedInitialHSTransfer HironakaActualPointUnitCoordinateChange
+  HironakaActualCoefficientPresentationCentrePower HironakaActualAnalyticStrictGenerators
+  HironakaActualSuppliedFlatteningNormalPowers HironakaActualHSConstantCentreJetFrames
+  HironakaActualCentreCoupledSymbols HironakaRelativeNormalIdeal
+  HironakaActualHomogeneousInitialTangentDerivatives HironakaActualOriginalFormalTaylor
+  HironakaActualOriginalFormalHSTransfer HironakaSmoothCentreRealDomainActualAmbientHS
+open HironakaActualPersistentPointConeDerivatives HironakaActualDirectionalNormalJet
+  HironakaActualFormalBlowupAllDirections HironakaActualFormalBlowupMemberGeneration
+variable {n : ℕ}
+
+
+/-- The literal source linear substitution, without changing its generators. -/
+def polynomialShear (e : Fin n) (b : Fin n → ℂ) :
+    MvPolynomial (Fin n) ℂ →ₐ[ℂ] MvPolynomial (Fin n) ℂ :=
+  MvPolynomial.aeval (fun i => MvPolynomial.X i+if i=e then 0 else MvPolynomial.C (b i)*MvPolynomial.X e)
+
+private def shearLinear (e : Fin n) (b : Fin n → ℂ) : ComplexModel n ≃ₗ[ℂ] ComplexModel n where
+  toFun z := (EuclideanSpace.equiv (𝕜 := ℂ) (ι := Fin n)).symm
+    (fun i => z i+if i=e then 0 else b i*z e)
+  invFun z := (EuclideanSpace.equiv (𝕜 := ℂ) (ι := Fin n)).symm
+    (fun i => z i-if i=e then 0 else b i*z e)
+  left_inv z := by ext i;by_cases hi : i=e <;> simp [hi]
+  right_inv z := by ext i;by_cases hi : i=e <;> simp [hi]
+  map_add' z w := by ext i;by_cases hi : i=e <;> simp [hi];ring
+  map_smul' c z := by ext i;by_cases hi : i=e <;> simp [hi];ring
+
+private def shearGerm (e : Fin n) (b : Fin n → ℂ) :
+    HolGerm (ComplexModel n) ≃ₐ[ℂ] HolGerm (ComplexModel n) where
+  toRingEquiv := HolGerm.comapEquiv (shearLinear e b).toContinuousLinearEquiv
+  commutes' _ := rfl
+
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
+private theorem shearGerm_coordinate (e : Fin n) (b : Fin n → ℂ) (i : Fin n) :
+    shearGerm e b (coordinateGerm i)=
+      coordinateGerm i+if i=e then 0 else HolGerm.constHom (b i)*coordinateGerm e := by
+  change HolGerm.comapEquiv (shearLinear e b).toContinuousLinearEquiv
+    (HolGerm.mk (fun z : ComplexModel n => z i) _)=_
+  rw [HolGerm.comapEquiv_mk]
+  by_cases hi : i=e
+  · simp only [if_pos hi,add_zero]
+    apply HolGerm.mk_eq_mk_iff.mpr
+    exact Eventually.of_forall fun z => by simp [shearLinear,hi]
+  · rw [if_neg hi]
+    change HolGerm.mk _ _=HolGerm.mk (fun z : ComplexModel n => z i) _+
+      HolGerm.mk (fun _ : ComplexModel n => b i) (eventually_differentiableAt_const (b i))*HolGerm.mk (fun z : ComplexModel n => z e) _
+    rw [←HolGerm.mk_mul,←HolGerm.mk_add]
+    apply HolGerm.mk_eq_mk_iff.mpr
+    exact Eventually.of_forall fun z => by simp [shearLinear,hi]
+
+private theorem polynomialShear_homogeneous (e : Fin n) (b : Fin n → ℂ)
+    (f : MvPolynomial (Fin n) ℂ) (d : ℕ) (hf : f.IsHomogeneous d) :
+    (polynomialShear e b f).IsHomogeneous d := by
+  have hh (i : Fin n) : (MvPolynomial.X i+if i=e then 0 else MvPolynomial.C (b i)*MvPolynomial.X e : MvPolynomial (Fin n) ℂ).IsHomogeneous 1 := by
+    apply (MvPolynomial.isHomogeneous_X ℂ i).add
+    split_ifs
+    · intro β hβ
+      exact (hβ (by simp)).elim
+    · exact (MvPolynomial.isHomogeneous_X ℂ e).C_mul _
+  simpa only [one_mul,polynomialShear] using hf.aeval _ hh
+
+private theorem polynomialShear_coe (e : Fin n) (b : Fin n → ℂ)
+    (f : MvPolynomial (Fin n) ℂ) :
+    (polynomialShear e b f : MvPowerSeries (Fin n) ℂ)=
+      actualFormalCenterShear univ e b (f : MvPowerSeries (Fin n) ℂ) := by
+  rw [actualFormalCenterShear,MvPowerSeries.substAlgHom_apply,MvPowerSeries.subst_coe]
+  induction f using MvPolynomial.induction_on with
+  | C c => simp [polynomialShear];rfl
+  | add f g hf hg => simpa only [map_add,MvPolynomial.coe_add] using congrArg₂ (·+·) hf hg
+  | mul_X f i hf =>
+    simp only [map_mul,polynomialShear,MvPolynomial.aeval_X,MvPolynomial.coe_mul] at hf ⊢
+    rw [hf]
+    congr 1
+    by_cases hi : i=e <;> simp [actualFormalCenterShearCoordinates,hi]
+
+private theorem directional_mul_X (e : Fin n) (b : Fin n → ℂ)
+    (f : MvPolynomial (Fin n) ℂ) (j : Fin n) :
+    directionalPolynomialDerivative e b (f*MvPolynomial.X j)=
+      directionalPolynomialDerivative e b f*MvPolynomial.X j+MvPolynomial.C (if j=e then 1 else b j)*f := by
+  simp only [directionalPolynomialDerivative,Derivation.leibniz,smul_eq_mul,mul_add]
+  rw [Finset.sum_add_distrib]
+  have hfirst : (∑ i : Fin n,MvPolynomial.C (if i=e then 1 else b i)*
+      (f*MvPolynomial.pderiv i (MvPolynomial.X j)))=MvPolynomial.C (if j=e then 1 else b j)*f := by
+    have hterm (i : Fin n) : MvPolynomial.C (if i=e then 1 else b i)*
+        (f*MvPolynomial.pderiv i (MvPolynomial.X j))=
+        if i=j then MvPolynomial.C (if j=e then 1 else b j)*f else 0 := by
+      by_cases hi : i=j
+      · subst i;simp [MvPolynomial.pderiv_X]
+      · simp [MvPolynomial.pderiv_X,hi,Ne.symm hi]
+    simp_rw [hterm]
+    simp
+  have hsecond : (∑ i : Fin n,MvPolynomial.C (if i=e then 1 else b i)*
+      (MvPolynomial.X j*MvPolynomial.pderiv i f))=
+      (∑ i : Fin n,MvPolynomial.C (if i=e then 1 else b i)*MvPolynomial.pderiv i f)*MvPolynomial.X j := by
+    rw [Finset.sum_mul]
+    apply Finset.sum_congr rfl
+    intro i _
+    ring
+  rw [hfirst,hsecond,add_comm]
+
+private theorem directional_add (e : Fin n) (b : Fin n → ℂ)
+    (f g : MvPolynomial (Fin n) ℂ) :
+    directionalPolynomialDerivative e b (f+g)=
+      directionalPolynomialDerivative e b f+directionalPolynomialDerivative e b g := by
+  simp only [directionalPolynomialDerivative,map_add,mul_add,Finset.sum_add_distrib]
+
+/-- The exact directional chain rule for the literal actual source shear. -/
+theorem polynomialShear_directional_chain (e : Fin n) (b : Fin n → ℂ)
+    (f : MvPolynomial (Fin n) ℂ) :
+    MvPolynomial.pderiv e (polynomialShear e b f)=
+      polynomialShear e b (directionalPolynomialDerivative e b f) := by
+  induction f using MvPolynomial.induction_on with
+  | C c => simp [polynomialShear,directionalPolynomialDerivative]
+  | add f g hf hg => simp only [map_add,directional_add,hf,hg]
+  | mul_X f j hf =>
+    have hSX : polynomialShear e b (MvPolynomial.X j)=
+        MvPolynomial.X j+if j=e then 0 else MvPolynomial.C (b j)*MvPolynomial.X e := by
+      rw [polynomialShear,MvPolynomial.aeval_X]
+    have hSC : polynomialShear e b (MvPolynomial.C (if j=e then 1 else b j))=
+        MvPolynomial.C (if j=e then 1 else b j) := (polynomialShear e b).commutes _
+    have hc : MvPolynomial.pderiv e
+        (MvPolynomial.X j+if j=e then 0 else MvPolynomial.C (b j)*MvPolynomial.X e)=
+        MvPolynomial.C (if j=e then 1 else b j) := by
+      by_cases hj : j=e <;> simp [hj,Derivation.leibniz]
+    rw [directional_mul_X]
+    simp only [map_add,map_mul,hSX,hSC,Derivation.leibniz,smul_eq_mul,hf,hc]
+    ring
+
+private theorem polynomial_contDiff {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+    (P : MvPolynomial (Fin n) ℂ) (x : Fin n → E → ℂ) (hx : ∀ i, ContDiff ℂ ∞ (x i)) :
+    ContDiff ℂ ∞ (fun z => MvPolynomial.eval (fun i => x i z) P) := by
+  induction P using MvPolynomial.induction_on with
+  | C c => simpa only [MvPolynomial.eval_C] using (contDiff_const : ContDiff ℂ ∞ (fun _ : E => c))
+  | add P Q hP hQ => simpa only [MvPolynomial.eval_add] using hP.add hQ
+  | mul_X P i hP => simpa only [MvPolynomial.eval_mul,MvPolynomial.eval_X] using hP.mul (hx i)
+
+private def polyFunction (P : MvPolynomial (Fin n) ℂ) (z : ComplexModel n) : ℂ :=
+  MvPolynomial.eval (fun i => z i) P
+
+private theorem polyFunction_contDiff (P : MvPolynomial (Fin n) ℂ) :
+    ContDiff ℂ ∞ (polyFunction P) :=
+  polynomial_contDiff (E := ComplexModel n) P (fun i z => z i)
+    (fun i => (EuclideanSpace.proj i : ComplexModel n →L[ℂ] ℂ).contDiff)
+
+private theorem polyFunction_hol (P : MvPolynomial (Fin n) ℂ) (p : ComplexModel n) :
+    HolAt (polyFunction P) p :=
+  Eventually.of_forall fun _ => ((polyFunction_contDiff P).differentiable (by simp)).differentiableAt
+
+private theorem translated_poly_mk (p : ComplexModel n) (P : MvPolynomial (Fin n) ℂ) :
+    actualUnshiftedTranslatedPolynomialEval n (fun i => p i) P =
+      translatedGerm p (polyFunction P) (polyFunction_hol P p) := by
+  induction P using MvPolynomial.induction_on with
+  | C c =>
+    simp only [actualUnshiftedTranslatedPolynomialEval,MvPolynomial.aeval_C,translatedGerm,polyFunction,MvPolynomial.eval_C]
+    rfl
+  | add P Q hP hQ =>
+    rw [map_add,hP,hQ]
+    unfold translatedGerm
+    rw [← HolGerm.mk_add]
+    apply HolGerm.mk_eq_mk_iff.mpr
+    exact Eventually.of_forall fun z => MvPolynomial.eval_add.symm
+  | mul_X P i hP =>
+    rw [map_mul,hP,actualUnshiftedTranslatedPolynomialEval,MvPolynomial.aeval_X]
+    unfold translatedGerm
+    change HolGerm.mk (fun z => polyFunction P (z+p)) _ *
+      (coordinateGerm i+algebraMap ℂ _ (p i)) = _
+    change HolGerm.mk (fun z => polyFunction P (z+p)) _ *
+      (HolGerm.mk (fun z => z i) _+HolGerm.mk (fun _ => p i) (eventually_differentiableAt_const (p i))) = _
+    rw [← HolGerm.mk_add,← HolGerm.mk_mul]
+    apply HolGerm.mk_eq_mk_iff.mpr
+    exact Eventually.of_forall fun z => by simp [polyFunction,MvPolynomial.eval_mul,MvPolynomial.eval_X]
+
+
+private theorem polynomial_coe_homogeneous (P : MvPolynomial (Fin n) ℂ) (d : ℕ)
+    (hP : P.IsHomogeneous d) : (P : MvPowerSeries (Fin n) ℂ).IsHomogeneous d := by
+  intro a ha
+  apply hP
+  simpa only [MvPolynomial.coeff_coe] using ha
+
+private theorem homogeneous_span_initial_eq {ι : Type*}
+    (P : ι → MvPolynomial (Fin n) ℂ) (d : ι → ℕ) (hP : ∀ i,(P i).IsHomogeneous (d i)) :
+    actualHomogeneousInitialIdeal (Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)))=
+      Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)) := by
+  let J : Ideal (MvPowerSeries (Fin n) ℂ) := Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ))
+  have hcomponent (F : MvPowerSeries (Fin n) ℂ) (hF : F∈J) (q : ℕ) :
+      MvPowerSeries.homogeneousComponent q F∈J := by
+    obtain ⟨c,hc⟩ := Finsupp.mem_ideal_span_range_iff_exists_finsupp.mp hF
+    rw [←hc]
+    change MvPowerSeries.homogeneousComponent q (∑ i∈c.support,c i*(P i : MvPowerSeries (Fin n) ℂ))∈J
+    rw [map_sum]
+    apply Ideal.sum_mem
+    intro i _
+    by_cases hi : d i≤q
+    · rw [homogeneousComponent_mul_homogeneous_of_le q (d i) _ _ (polynomial_coe_homogeneous _ _ (hP i)) hi]
+      exact Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨i,rfl⟩)
+    · rw [homogeneousComponent_mul_homogeneous_of_lt q (d i) _ _ (polynomial_coe_homogeneous _ _ (hP i)) (lt_of_not_ge hi)]
+      exact Ideal.zero_mem _
+  apply le_antisymm
+  · apply Ideal.span_le.mpr
+    rintro _ ⟨F,rfl⟩
+    exact hcomponent F.val F.property.1 _
+  · apply Ideal.span_le.mpr
+    rintro _ ⟨i,rfl⟩
+    change (P i : MvPowerSeries (Fin n) ℂ)∈_
+    by_cases hz : (P i : MvPowerSeries (Fin n) ℂ)=0
+    · rw [hz]; exact Ideal.zero_mem _
+    have hh : (P i : MvPowerSeries (Fin n) ℂ).IsHomogeneous (d i) :=
+      polynomial_coe_homogeneous (P i) (d i) (hP i)
+    have hd : actualHomogeneousInitialDegree (P i : MvPowerSeries (Fin n) ℂ) hz=d i := by
+      have hc := hh ((actualInitialExponent_spec MonomialOrder.degLex (P i : MvPowerSeries (Fin n) ℂ) hz).1)
+      simpa [actualHomogeneousInitialDegree,normalExponentDegree,Finsupp.degree_eq_sum,Finsupp.weight_eq_sum] using hc
+    have hf : actualHomogeneousInitialForm (P i : MvPowerSeries (Fin n) ℂ) hz=(P i : MvPowerSeries (Fin n) ℂ) := by
+      rw [actualHomogeneousInitialForm,hd]
+      exact (MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent.mp hh).symm
+    rw [←hf]
+    exact Ideal.subset_span ⟨⟨_,Ideal.subset_span ⟨i,rfl⟩,hz⟩,rfl⟩
+private def permLinear (r : Fin n ≃ Fin n) : ComplexModel n ≃L[ℂ] ComplexModel n :=
+  (LinearIsometryEquiv.piLpCongrLeft 2 ℂ ℂ r.symm).toContinuousLinearEquiv
+
+private def permGerm (r : Fin n ≃ Fin n) :
+    HolGerm (ComplexModel n) ≃ₐ[ℂ] HolGerm (ComplexModel n) where
+  toRingEquiv := HolGerm.comapEquiv (permLinear r)
+  commutes' _ := rfl
+
+private theorem permGerm_coordinate (r : Fin n ≃ Fin n) (i : Fin n) :
+    permGerm r (coordinateGerm i)=coordinateGerm (r i) := by
+  change HolGerm.comapEquiv (permLinear r) (HolGerm.mk (fun z : ComplexModel n => z i) _)=
+    HolGerm.mk (fun z : ComplexModel n => z (r i)) _
+  rw [HolGerm.comapEquiv_mk]
+  apply HolGerm.mk_eq_mk_iff.mpr
+  exact Eventually.of_forall fun z => rfl
+
+private theorem permGerm_polynomial (r : Fin n ≃ Fin n) (p : Fin n → ℂ)
+    (P : MvPolynomial (Fin n) ℂ) :
+    permGerm r (actualUnshiftedTranslatedPolynomialEval n (fun i => p (r i)) P)=
+      actualUnshiftedTranslatedPolynomialEval n p (MvPolynomial.rename r P) := by
+  have he : (permGerm r).toAlgHom.comp
+      (actualUnshiftedTranslatedPolynomialEval n (fun i => p (r i)))=
+      (actualUnshiftedTranslatedPolynomialEval n p).comp (MvPolynomial.rename r) := by
+    apply MvPolynomial.algHom_ext
+    intro i
+    simp only [AlgHom.comp_apply,actualUnshiftedTranslatedPolynomialEval,MvPolynomial.aeval_X,
+      MvPolynomial.rename_X]
+    change permGerm r (coordinateGerm i+algebraMap ℂ _ (p (r i)))=_
+    rw [map_add,permGerm_coordinate,AlgEquiv.commutes]
+  exact DFunLike.congr_fun he P
+
+private def polyTranslatedIdeal {ι : Type*} (P : ι → MvPolynomial (Fin n) ℂ) (p : Fin n → ℂ) :
+    Ideal (HolGerm (ComplexModel n)) :=
+  Ideal.span (range fun i => actualUnshiftedTranslatedPolynomialEval n p (P i))
+
+private theorem map_perm_polyTranslatedIdeal {ι : Type*} (r : Fin n ≃ Fin n)
+    (P : ι → MvPolynomial (Fin n) ℂ) (p : Fin n → ℂ) :
+    Ideal.map (permGerm r).toRingEquiv.toRingHom (polyTranslatedIdeal P (fun i => p (r i)))=
+      polyTranslatedIdeal (fun i => MvPolynomial.rename r (P i)) p := by
+  rw [polyTranslatedIdeal,polyTranslatedIdeal,Ideal.map_span,← Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  exact permGerm_polynomial r p (P i)
+
+private theorem translated_polyIdeal_eq {ι : Type*} (P : ι → MvPolynomial (Fin n) ℂ)
+    (p : ComplexModel n) :
+    translatedIdeal (fun i => polyFunction (P i)) p (fun i => polyFunction_hol (P i) p)=
+      polyTranslatedIdeal P (fun i => p i) := by
+  unfold translatedIdeal polyTranslatedIdeal
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  exact (translated_poly_mk p (P i)).symm
+
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
+private theorem polyTranslatedIdeal_origin_formal {ι : Type*} (P : ι → MvPolynomial (Fin n) ℂ) :
+    Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom (polyTranslatedIdeal P 0)=
+      Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)) := by
+  rw [polyTranslatedIdeal,Ideal.map_span,← Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  have he : (actualUnshiftedTaylorAlgHom n).comp (actualUnshiftedTranslatedPolynomialEval n 0)=
+      MvPolynomial.coeToMvPowerSeries.algHom ℂ := by
+    apply MvPolynomial.algHom_ext
+    intro j
+    simp only [AlgHom.comp_apply,actualUnshiftedTranslatedPolynomialEval,MvPolynomial.aeval_X,
+      actualUnshiftedTaylor_coordinate,Pi.zero_apply,map_zero,add_zero]
+    simp
+  exact DFunLike.congr_fun he (P i)
+
+private theorem homogeneous_polynomial_span_pderiv_of_axis_hs
+    {t : ℕ} {ι : Type*} [Fintype ι]
+    (P : ι → MvPolynomial (Fin (1+t)) ℂ) (d : ι → ℕ)
+    (hP : ∀ i,(P i).IsHomogeneous (d i))
+    (hHS : ∀ p : ComplexModel (1+t), p∈complexCoordinatePlane (1+t) 1 → ∀ ℓ,
+      hilbertSamuelValue (polyTranslatedIdeal P (fun i => p i)) ℓ=
+        hilbertSamuelValue (polyTranslatedIdeal P 0) ℓ)
+    (F : MvPowerSeries (Fin (1+t)) ℂ)
+    (hF : F∈Ideal.span (range fun i => (P i : MvPowerSeries (Fin (1+t)) ℂ))) :
+    MvPowerSeries.pderiv ℂ 0 F∈Ideal.span (range fun i => (P i : MvPowerSeries (Fin (1+t)) ℂ)) := by
+  let G := fun i => polyFunction (P i)
+  have hG : ∀ i,DifferentiableOn ℂ (G i) univ :=
+    fun i => ((polyFunction_contDiff (P i)).differentiable (by simp)).differentiableOn
+  have hr p (_hp : p∈(univ : Set (ComplexModel (1+t))))
+      (hplane : p∈complexCoordinatePlane (1+t) 1) (ℓ : ℕ) :
+      Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) G p))=
+        Module.finrank ℂ (LinearMap.range (originalMacaulayLinearMap (ℓ+1) G 0)) := by
+    apply originalMacaulay_rank_eq_of_translated_hs_eq ℓ G p 0
+      (fun i => polyFunction_hol (P i) p) (fun i => polyFunction_hol (P i) 0)
+    rw [translated_polyIdeal_eq,translated_polyIdeal_eq]
+    exact hHS p hplane ℓ
+  obtain ⟨_hf,hD⟩ := actual_family_coupled_normal_data 1 t G univ isOpen_univ (mem_univ _) hG hr
+  have hI : Ideal.span (range fun i => HolGerm.mk (G i)
+      (HironakaActualHSZeroCentreVanishing.actual_family_holomorphicAt isOpen_univ G hG 0 (mem_univ _) i))=
+      polyTranslatedIdeal P 0 := by
+    have he := translated_polyIdeal_eq P (0 : ComplexModel (1+t))
+    have hzero : (fun i => (0 : ComplexModel (1+t)) i)=(0 : Fin (1+t) → ℂ) := by funext i; rfl
+    rw [hzero] at he
+    exact (translatedIdeal_zero_eq_span (1+t) G _ _).symm.trans he
+  rw [hI,polyTranslatedIdeal_origin_formal,homogeneous_span_initial_eq P d hP] at hD
+  exact hD 0 F hF
+
+private theorem map_rename_polynomial_span {ι : Type*} (r : Fin n ≃ Fin n)
+    (P : ι → MvPolynomial (Fin n) ℂ) :
+    Ideal.map (MvPowerSeries.renameEquiv ℂ r).toRingEquiv.toRingHom
+      (Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)))=
+      Ideal.span (range fun i => (MvPolynomial.rename r (P i) : MvPowerSeries (Fin n) ℂ)) := by
+  rw [Ideal.map_span,← Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  exact MvPowerSeries.rename_coe r (P i)
+
+
+/-- Actual arbitrary-direction persistence fixes the original cone HS profile
+on the ENTIRE actual ray, including the origin. -/
+theorem translated_cone_hs_eq_of_point_persistence
+    (I : Ideal (HolGerm (ComplexModel n))) (e : Fin n) (b : Fin n → ℂ)
+    (hPersist : ∀ ℓ,hilbertSamuelValue
+      (actualAnalyticNormalizedMemberIdeal I univ e b) ℓ=hilbertSamuelValue I ℓ)
+    (c : ℂ) (ℓ : ℕ) :
+    hilbertSamuelValue (actualUnshiftedTranslatedInitialIdeal
+      (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I)
+      (fun i => c*(if i=e then 1 else b i))) ℓ=hilbertSamuelValue I ℓ := by
+  let K := Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I
+  let v : Fin n → ℂ := fun i => if i=e then 1 else b i
+  have hp : (actualPointUnitBasePoint e b).ofLp=v := rfl
+  have hunit : hilbertSamuelValue (actualUnshiftedTranslatedInitialIdeal K v) ℓ=
+      hilbertSamuelValue I ℓ := by
+    apply le_antisymm (hilbertSamuelValue_actual_original_translated_initial_le n I v ℓ)
+    rw [←hPersist ℓ]
+    have hb := hilbertSamuelValue_actual_point_normalized_le_dehomogenized_initial n I e b ℓ
+    rw [hilbertSamuelValue_actualDehomogenizedInitialIdeal_eq_translated,hp] at hb
+    exact hb
+  by_cases hc : c=0
+  · subst c
+    have he : (fun i => (0 : ℂ)*(if i=e then 1 else b i))=(0 : Fin n → ℂ) := by funext i;simp
+    rw [he,hilbertSamuelValue_eq_actual_unshifted_formal_extension,
+      actualUnshiftedTranslatedInitialIdeal_formal_extension]
+    have h0 := cone_origin_formal K
+    rw [actualUnshiftedTranslatedInitialIdeal_formal_extension] at h0
+    rw [h0,←genuineFormalHilbertSamuelValue_homogeneous_initial,
+      ←hilbertSamuelValue_eq_actual_unshifted_formal_extension n I]
+  · have hformal := actualTranslatedInitialIdeal_nonzero_ray_hs K v c hc ℓ
+    rw [hilbertSamuelValue_eq_genuine_formal_extension,hilbertSamuelValue_eq_genuine_formal_extension,
+      actualTranslatedInitialIdeal_formal_extension,actualTranslatedInitialIdeal_formal_extension] at hformal
+    rw [hilbertSamuelValue_eq_actual_unshifted_formal_extension,
+      actualUnshiftedTranslatedInitialIdeal_formal_extension,
+      show (fun i => c*(if i=e then 1 else b i))=c • v from rfl,
+      hformal,←actualUnshiftedTranslatedInitialIdeal_formal_extension,
+      ←hilbertSamuelValue_eq_actual_unshifted_formal_extension]
+    exact hunit
+
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
+private theorem shearGerm_translated_polynomial (e : Fin n) (b p : Fin n → ℂ)
+    (f : MvPolynomial (Fin n) ℂ) :
+    shearGerm e b (actualUnshiftedTranslatedPolynomialEval n
+      (fun i => p i+if i=e then 0 else b i*p e) f)=
+      actualUnshiftedTranslatedPolynomialEval n p (polynomialShear e b f) := by
+  have he : (shearGerm e b).toAlgHom.comp (actualUnshiftedTranslatedPolynomialEval n
+      (fun i => p i+if i=e then 0 else b i*p e))=
+      (actualUnshiftedTranslatedPolynomialEval n p).comp (polynomialShear e b) := by
+    apply MvPolynomial.algHom_ext
+    intro i
+    simp only [AlgHom.comp_apply,actualUnshiftedTranslatedPolynomialEval,MvPolynomial.aeval_X,
+      polynomialShear,map_add]
+    change shearGerm e b (coordinateGerm i+algebraMap ℂ _ (p i+if i=e then 0 else b i*p e))=_
+    rw [map_add,shearGerm_coordinate,AlgEquiv.commutes]
+    have hconst (c : ℂ) : (algebraMap ℂ (HolGerm (ComplexModel n))) c=HolGerm.constHom c := rfl
+    by_cases hi : i=e
+    · simp [hi,hconst]
+    · simp [hi,hconst]
+      ring
+  exact DFunLike.congr_fun he f
+
+private theorem map_shear_polyTranslatedIdeal {ι : Type*} (e : Fin n) (b : Fin n → ℂ)
+    (P : ι → MvPolynomial (Fin n) ℂ) (p : Fin n → ℂ) :
+    Ideal.map (shearGerm e b).toRingEquiv.toRingHom
+      (polyTranslatedIdeal P (fun i => p i+if i=e then 0 else b i*p e))=
+      polyTranslatedIdeal (fun i => polynomialShear e b (P i)) p := by
+  rw [polyTranslatedIdeal,polyTranslatedIdeal,Ideal.map_span,←Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  exact shearGerm_translated_polynomial e b p (P i)
+
+private theorem map_shear_polynomial_span {ι : Type*} (e : Fin n) (b : Fin n → ℂ)
+    (P : ι → MvPolynomial (Fin n) ℂ) :
+    Ideal.map (actualFormalCenterShear univ e b).toRingHom
+      (Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)))=
+      Ideal.span (range fun i => (polynomialShear e b (P i) : MvPowerSeries (Fin n) ℂ)) := by
+  rw [Ideal.map_span,←Set.range_comp]
+  apply congrArg Ideal.span
+  apply congrArg Set.range
+  funext i
+  exact (polynomialShear_coe e b (P i)).symm
+
+/-- Actual translated-ideal HS constancy on the whole pivot axis gives true
+pivot derivative stability of the ENTIRE homogeneous polynomial span. -/
+theorem homogeneous_polynomial_span_pderiv_of_line_hs {ι : Type*} [Fintype ι]
+    (P : ι → MvPolynomial (Fin n) ℂ) (d : ι → ℕ)
+    (hP : ∀ i,(P i).IsHomogeneous (d i)) (e : Fin n)
+    (hHS : ∀ (c : ℂ) (ℓ : ℕ),
+      hilbertSamuelValue (polyTranslatedIdeal P (fun i => c*(if i=e then 1 else 0))) ℓ=
+        hilbertSamuelValue (polyTranslatedIdeal P 0) ℓ)
+    (F : MvPowerSeries (Fin n) ℂ)
+    (hF : F∈Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ))) :
+    MvPowerSeries.pderiv ℂ e F∈Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)) := by
+  obtain ⟨t,hn⟩ : ∃ t,n=1+t := ⟨n-1,by have he := e.isLt;omega⟩
+  subst n
+  let r : Fin (1+t) ≃ Fin (1+t) := Equiv.swap 0 e
+  let P' := fun a => MvPolynomial.rename r (P a)
+  let J : Ideal (MvPowerSeries (Fin (1+t)) ℂ) := Ideal.span (range fun a => (P a : MvPowerSeries (Fin (1+t)) ℂ))
+  let J' : Ideal (MvPowerSeries (Fin (1+t)) ℂ) := Ideal.span (range fun a => (P' a : MvPowerSeries (Fin (1+t)) ℂ))
+  have hline (p : ComplexModel (1+t)) (hp : p∈complexCoordinatePlane (1+t) 1) (ℓ : ℕ) :
+      hilbertSamuelValue (polyTranslatedIdeal P' (fun i => p i)) ℓ=
+        hilbertSamuelValue (polyTranslatedIdeal P 0) ℓ := by
+    have hq : (fun i => p (r i))=(fun i => p 0*(if i=e then 1 else 0)) := by
+      funext i
+      by_cases hi : i=e
+      · subst i;simp [r]
+      · have hr0 : r i≠0 := by
+          intro h
+          have hre : r e=0 := by simp [r]
+          exact hi (r.injective (h.trans hre.symm))
+        have hv : 1≤(r i).val := by
+          have hn : (r i).val≠0 := by intro he;exact hr0 (Fin.ext he)
+          omega
+        simp only [if_neg hi,mul_zero]
+        exact hp (r i) hv
+    have he := actualAmbientHS_eq_of_genuineAlgEquiv (permGerm r)
+      (polyTranslatedIdeal P (fun i => p (r i))) ℓ
+    rw [map_perm_polyTranslatedIdeal,hq] at he
+    exact he.trans (hHS (p 0) ℓ)
+  have hHS' : ∀ p : ComplexModel (1+t),p∈complexCoordinatePlane (1+t) 1 → ∀ ℓ,
+      hilbertSamuelValue (polyTranslatedIdeal P' (fun i => p i)) ℓ=
+        hilbertSamuelValue (polyTranslatedIdeal P' 0) ℓ := by
+    intro p hp ℓ
+    have h0 := hline 0 (by intro i _;rfl) ℓ
+    have hz : (fun i => (0 : ComplexModel (1+t)) i)=(0 : Fin (1+t) → ℂ) := by funext i;rfl
+    rw [hz] at h0
+    exact (hline p hp ℓ).trans h0.symm
+  have hD : ∀ G∈J',MvPowerSeries.pderiv ℂ 0 G∈J' :=
+    homogeneous_polynomial_span_pderiv_of_axis_hs P' d
+      (fun a => (hP a).rename_isHomogeneous) hHS'
+  have hmap : Ideal.map (MvPowerSeries.renameEquiv ℂ r).toRingEquiv.toRingHom J=J' :=
+    map_rename_polynomial_span r P
+  have hgen (a : ι) : MvPowerSeries.pderiv ℂ e (P a : MvPowerSeries (Fin (1+t)) ℂ)∈J := by
+    have ha : (P' a : MvPowerSeries (Fin (1+t)) ℂ)∈J' := Ideal.subset_span ⟨a,rfl⟩
+    have hd := hD _ ha
+    have he : MvPowerSeries.pderiv ℂ 0 (P' a : MvPowerSeries (Fin (1+t)) ℂ)=
+        MvPowerSeries.rename r (MvPowerSeries.pderiv ℂ e (P a : MvPowerSeries (Fin (1+t)) ℂ)) := by
+      rw [MvPowerSeries.pderiv_coe,MvPowerSeries.pderiv_coe,MvPowerSeries.rename_coe]
+      have hh := MvPolynomial.pderiv_rename r.injective e (P a)
+      have hre : r e=0 := by simp [r]
+      rw [hre] at hh
+      exact congrArg (fun Q : MvPolynomial (Fin (1+t)) ℂ => (Q : MvPowerSeries (Fin (1+t)) ℂ)) hh
+    rw [he,←hmap] at hd
+    exact (Ideal.apply_mem_of_equiv_iff (f := (MvPowerSeries.renameEquiv ℂ r).toRingEquiv)).mp hd
+  change MvPowerSeries.pderiv ℂ e F∈J
+  induction hF using Submodule.span_induction with
+  | mem G hG => obtain ⟨a,rfl⟩ := hG;exact hgen a
+  | zero => rw [map_zero];exact J.zero_mem
+  | add G H _ _ hG hH => simpa only [map_add] using J.add_mem hG hH
+  | smul A G hG ih =>
+    change MvPowerSeries.pderiv ℂ e (A*G)∈J
+    rw [Derivation.leibniz,smul_eq_mul,smul_eq_mul]
+    exact J.add_mem (J.mul_mem_left A ih) (J.mul_mem_right _ hG)
+
+/-- Original-only arbitrary-direction actual point HS persistence gives the
+natural SOURCE directional polynomial derivative stability, on the SAME whole
+source initial ideal. No new sheared canonical basis or stability premise. -/
+theorem initial_directional_of_point_hs_persistence
+    (I : Ideal (HolGerm (ComplexModel n))) (e : Fin n) (b : Fin n → ℂ)
+    (hPersist : ∀ ℓ,hilbertSamuelValue
+      (actualAnalyticNormalizedMemberIdeal I univ e b) ℓ=hilbertSamuelValue I ℓ)
+    (f : MvPolynomial (Fin n) ℂ)
+    (hf : (f : MvPowerSeries (Fin n) ℂ)∈
+      actualHomogeneousInitialIdeal (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I)) :
+    (directionalPolynomialDerivative e b f : MvPowerSeries (Fin n) ℂ)∈
+      actualHomogeneousInitialIdeal (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I) := by
+  let K := Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I
+  let P := actualInitialVertexPolynomial K
+  let Q := fun a => polynomialShear e b (P a)
+  have hK : actualHomogeneousInitialIdeal K=
+      Ideal.span (range fun a => (P a : MvPowerSeries (Fin n) ℂ)) := by
+    rw [actualHomogeneousInitialIdeal_eq_initial_vertex_span]
+    apply congrArg Ideal.span
+    apply congrArg Set.range
+    funext a
+    exact (actualInitialVertexPolynomial_coe K a).symm
+  have hline (c : ℂ) (ℓ : ℕ) :
+      hilbertSamuelValue (polyTranslatedIdeal Q (fun i => c*(if i=e then 1 else 0))) ℓ=
+        hilbertSamuelValue I ℓ := by
+    let p : Fin n → ℂ := fun i => c*(if i=e then 1 else 0)
+    have hp : (fun i => p i+if i=e then 0 else b i*p e)=
+        (fun i => c*(if i=e then 1 else b i)) := by
+      funext i
+      by_cases hi : i=e <;> simp [p,hi,mul_comm]
+    have he := actualAmbientHS_eq_of_genuineAlgEquiv (shearGerm e b)
+      (polyTranslatedIdeal P (fun i => p i+if i=e then 0 else b i*p e)) ℓ
+    rw [map_shear_polyTranslatedIdeal,hp] at he
+    exact he.trans (translated_cone_hs_eq_of_point_persistence I e b hPersist c ℓ)
+  have hHS : ∀ (c : ℂ) (ℓ : ℕ),
+      hilbertSamuelValue (polyTranslatedIdeal Q (fun i => c*(if i=e then 1 else 0))) ℓ=
+        hilbertSamuelValue (polyTranslatedIdeal Q 0) ℓ := by
+    intro c ℓ
+    have h0 := hline 0 ℓ
+    have hz : (fun i => (0 : ℂ)*(if i=e then 1 else 0))=(0 : Fin n → ℂ) := by funext i;simp
+    rw [hz] at h0
+    exact (hline c ℓ).trans h0.symm
+  have hD : ∀ G∈Ideal.map (actualFormalCenterShear univ e b).toRingHom (actualHomogeneousInitialIdeal K),
+      MvPowerSeries.pderiv ℂ e G∈
+        Ideal.map (actualFormalCenterShear univ e b).toRingHom (actualHomogeneousInitialIdeal K) := by
+    rw [hK,map_shear_polynomial_span]
+    exact homogeneous_polynomial_span_pderiv_of_line_hs Q
+      (fun a => normalExponentDegree a.val)
+      (fun a => polynomialShear_homogeneous e b (P a) _ (actualInitialVertexPolynomial_isHomogeneous K a)) e hHS
+  have hs := Ideal.mem_map_of_mem (actualFormalCenterShear univ e b).toRingHom hf
+  have hd := hD _ hs
+  change MvPowerSeries.pderiv ℂ e (actualFormalCenterShear univ e b (f : MvPowerSeries (Fin n) ℂ))∈_ at hd
+  rw [←polynomialShear_coe,MvPowerSeries.pderiv_coe,polynomialShear_directional_chain,polynomialShear_coe] at hd
+  exact (Ideal.apply_mem_of_equiv_iff (f := (actualFormalCenterShearAlgEquiv univ e b).toRingEquiv)).mp hd
+
+
+open HironakaActualDirectionalPivotNormality HironakaHolomorphicPointJets
+  HironakaActualOriginalReducedVertexBasis HironakaActualAnalyticBlowupTaylor
+  HironakaHolomorphicJetMonomialSpan HironakaRelativeNormalActualBaseJetDimension
+
+/-- Genuine original-only arbitrary-direction persistence forces EVERY SAME
+canonical normalized member order; source directional stability is internal. -/
+theorem original_point_persistent_hs_orders
+    (I : Ideal (HolGerm (ComplexModel n))) (e : Fin n) (b : Fin n → ℂ)
+    (hPersist : ∀ ℓ,hilbertSamuelValue
+      (actualAnalyticNormalizedMemberIdeal I univ e b) ℓ=hilbertSamuelValue I ℓ) :
+    ∀ (a : actualInitialVertices MonomialOrder.degLex (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I))
+      (H : MvPowerSeries (Fin n) ℂ),
+      (MvPowerSeries.X e)^(normalExponentDegree a.val)*H=actualFormalBlowup univ e b
+        (HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries MonomialOrder.degLex
+          (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I) a) →
+      H∈HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal n univ^(normalExponentDegree a.val) := by
+  exact original_directional_persistent_hs_orders_of_source_stable I e b
+    (initial_directional_of_point_hs_persistence I e b hPersist) hPersist
+
+private theorem unshiftedTaylor_property_iff (n : ℕ)
+    (P : (m : ℕ) → (HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) → Prop) :
+    P n (actualUnshiftedTaylorAlgHom n) ↔ P (0+n) (originalTaylorAlgHom n) := by
+  have hc {m : ℕ} (hm : m=n)
+      (f : HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) :
+      P n (cast (congrArg (fun j => HolGerm (ComplexModel j) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) hm) f) ↔ P m f := by
+    subst m
+    rfl
+  exact hc (Nat.zero_add n) (originalTaylorAlgHom n)
+
+private theorem originalTaylor_analytic_point_blowup (j : Fin n) (b : Fin (0+n) → ℂ)
+    (g : HolGerm (ComplexModel (0+n))) :
+    originalTaylorAlgHom n (actualAnalyticBlowupPullback
+      (actualTangentCentreVariables 0 n) (j.natAdd 0) b g)=
+      actualFormalBlowup univ j (fun i => b (i.natAdd 0)) (originalTaylorAlgHom n g) := by
+  let P (m : ℕ) (τ : HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) : Prop :=
+    ∀ (hm : m=n) (e : Fin m) (b : Fin m → ℂ) (g : HolGerm (ComplexModel m)),
+      τ (actualAnalyticBlowupPullback univ e b g)=
+        actualFormalBlowup univ (Fin.cast hm e) (fun i => b (Fin.cast hm.symm i)) (τ g)
+  have h : P n (actualUnshiftedTaylorAlgHom n) := by
+    intro hm e b g
+    have he : Fin.cast hm e=e := by apply Fin.ext;rfl
+    have hb : (fun i => b (Fin.cast hm.symm i))=b := by funext i;congr 1
+    rw [he,hb]
+    exact DFunLike.congr_fun (actualTaylor_analyticBlowupPullback univ e b) g
+  have h' := ((unshiftedTaylor_property_iff n P).mp h) (Nat.zero_add n) (j.natAdd 0) b g
+  have he : Fin.cast (Nat.zero_add n) (j.natAdd 0)=j := by apply Fin.ext;simp
+  have hb : (fun i => b (Fin.cast (Nat.zero_add n).symm i))=(fun i => b (i.natAdd 0)) := by
+    funext i;congr 1;apply Fin.ext;simp
+  have hA : actualTangentCentreVariables 0 n=univ := by
+    ext i
+    simp only [actualTangentCentreVariables,mem_range,mem_univ,iff_true]
+    exact ⟨Fin.cast (Nat.zero_add n) i,Fin.ext (by simp)⟩
+  simpa only [he,hb,hA] using h'
+
+private theorem originalTaylor_canonical_quotient_order
+    (I : Ideal (HolGerm (ComplexModel (0+n)))) (j : Fin n) (b : Fin (0+n) → ℂ)
+    (hPersist : ∀ ℓ,hilbertSamuelValue
+      (actualAnalyticNormalizedMemberIdeal I (actualTangentCentreVariables 0 n) (j.natAdd 0) b) ℓ=hilbertSamuelValue I ℓ)
+    (a : actualInitialVertices MonomialOrder.degLex (Ideal.map (originalTaylorAlgHom n).toRingHom I))
+    (H : HolGerm (ComplexModel (0+n)))
+    (hH : (coordinateGerm (j.natAdd 0))^(normalExponentDegree a.val)*H=
+      actualAnalyticBlowupPullback (actualTangentCentreVariables 0 n) (j.natAdd 0) b (originalReducedVertexBasis I a)) :
+    H∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (0+n)))^(normalExponentDegree a.val) := by
+  let P (m : ℕ) (τ : HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) : Prop :=
+    ∀ (hm : m=n) (I : Ideal (HolGerm (ComplexModel m))) (e : Fin m) (b : Fin m → ℂ),
+      (∀ ℓ,hilbertSamuelValue (actualAnalyticNormalizedMemberIdeal I univ e b) ℓ=hilbertSamuelValue I ℓ) →
+      ∀ (a : actualInitialVertices MonomialOrder.degLex (Ideal.map τ.toRingHom I)) (F : MvPowerSeries (Fin n) ℂ),
+        (MvPowerSeries.X (Fin.cast hm e))^(normalExponentDegree a.val)*F=
+          actualFormalBlowup univ (Fin.cast hm e) (fun i => b (Fin.cast hm.symm i))
+            (HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries MonomialOrder.degLex (Ideal.map τ.toRingHom I) a) →
+        F∈HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal n univ^(normalExponentDegree a.val)
+  have h : P n (actualUnshiftedTaylorAlgHom n) := by
+    intro hm I e b hp
+    have he : Fin.cast hm e=e := by apply Fin.ext;rfl
+    have hb : (fun i => b (Fin.cast hm.symm i))=b := by funext i;congr 1
+    rw [he,hb]
+    exact original_point_persistent_hs_orders I e b hp
+  have hA : actualTangentCentreVariables 0 n=univ := by
+    ext i
+    simp only [actualTangentCentreVariables,mem_range,mem_univ,iff_true]
+    exact ⟨Fin.cast (Nat.zero_add n) i,Fin.ext (by simp)⟩
+  have hPersist' := hPersist
+  rw [hA] at hPersist'
+  have hp := ((unshiftedTaylor_property_iff n P).mp h) (Nat.zero_add n) I (j.natAdd 0) b hPersist'
+  have he : Fin.cast (Nat.zero_add n) (j.natAdd 0)=j := by apply Fin.ext;simp
+  have hb : (fun i => b (Fin.cast (Nat.zero_add n).symm i))=(fun i => b (i.natAdd 0)) := by
+    funext i;congr 1;apply Fin.ext;simp
+  rw [he,hb] at hp
+  have hEq := congrArg (originalTaylorAlgHom n) hH
+  rw [map_mul,map_pow,show originalTaylorAlgHom n (coordinateGerm (j.natAdd 0))=MvPowerSeries.X j by
+      simpa only [normalCoordinate] using originalTaylorAlgHom_coordinate n j,originalTaylor_analytic_point_blowup,
+    originalReducedVertexBasis_taylor] at hEq
+  have hPow := hp a (originalTaylorAlgHom n H) hEq
+  apply (mem_original_maximal_pow_iff_formal_coefficients_zero n _ H).mpr
+  rw [show HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal n univ=genuineFormalVariables n by
+    simp [HironakaActualFormalCoordinatePowerDivision.actualFormalCoordinateIdeal,genuineFormalVariables]] at hPow
+  exact (mem_genuineFormalVariables_pow_iff_coefficients_zero n _ _).mp hPow
+
+/-- ONE original canonical analytic point family is fixed BEFORE either side
+of the arbitrary-direction entire HS/order equivalence. -/
+theorem exists_original_point_hs_iff_orders_family
+    (I : Ideal (HolGerm (ComplexModel (0+n)))) (j : Fin n) (b : Fin (0+n) → ℂ) :
+    ∃ H : actualInitialVertices MonomialOrder.degLex
+        (Ideal.map (originalTaylorAlgHom n).toRingHom I) → HolGerm (ComplexModel (0+n)),
+      (∀ a,(coordinateGerm (j.natAdd 0))^(normalExponentDegree a.val)*H a=
+        actualAnalyticBlowupPullback (actualTangentCentreVariables 0 n) (j.natAdd 0) b (originalReducedVertexBasis I a)) ∧
+      actualAnalyticNormalizedMemberIdeal I (actualTangentCentreVariables 0 n) (j.natAdd 0) b=Ideal.span (range H) ∧
+      ((∀ ℓ,hilbertSamuelValue (actualAnalyticNormalizedMemberIdeal I (actualTangentCentreVariables 0 n)
+          (j.natAdd 0) b) ℓ=hilbertSamuelValue I ℓ) ↔
+        ∀ a,H a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (0+n)))^(normalExponentDegree a.val)) := by
+  obtain ⟨H,hH,hSpan,hForward⟩ := HironakaActualPointOrderRetainingHS.exists_original_point_order_retaining_hs_family I j b
+  refine ⟨H,hH,hSpan,?_,?_⟩
+  · intro hp a
+    exact originalTaylor_canonical_quotient_order I j b hp a (H a) (hH a)
+  · exact hForward
+
+end
+end Hironaka.HironakaActualPersistentDirectionalConeDerivatives

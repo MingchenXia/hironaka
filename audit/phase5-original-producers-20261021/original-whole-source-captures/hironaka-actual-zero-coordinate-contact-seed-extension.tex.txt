@@ -1,0 +1,137 @@
+\chapter{The actual marking-one zero-coordinate contact seed}
+
+Let $W\subset\mathbf C^n$ be an original analytic subset. In the same
+original coordinates $(x,z)\in\mathbf C^{n+1}$ put
+$J=\mathcal I_{W\times\{0\}}$, $Z=\{z=0\}$, and
+$M_J=(\mathbf C^{n+1},\mathbf C^{n+1},[],J,1)$. Let $p(x,z)=x$
+and $s(x)=(x,0)$. No canonical value or comparison history is an input.
+
+\begin{lemma}[The original added coordinate supplies genuine maximal contact]
+\label{hir:actual-zero-coordinate-genuine-contact-seed}
+\uses{hir:actual-graph-normal-tangent-direction,mc:homogenized-along-maximal-order}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.zero_coordinate_tangent,TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.zero_coordinate_maximal_order}
+\leanok
+The same coordinate $z$ is a genuine marking-one tangent direction
+of $J$ along the whole ambient manifold, on the whole ambient open.
+The original ideal has maximal order at most one everywhere.
+\end{lemma}
+\begin{proof}
+The zero graph equation is precisely $z$, so the actual graph-normal
+contact theorem gives membership in $J$ at every point and normal
+derivative exactly one. The whole-ambient equivalence between ordinary
+and along-carrier tangent directions therefore gives the claimed
+actual tangent direction. In the preferred Euclidean chart, the
+normal derivative function of this same $z$ is identically one.
+Since $z\in J$, this function belongs to the actual derivative ideal
+$\mathcal D J$ at every point. Thus $\mathcal D J=\mathcal O$ in the
+marking-one maximal-order sense. Its whole-ambient along-carrier
+equivalence gives maximal order at most one. No supplied tangent or
+order certificate was used.
+\end{proof}
+
+\begin{lemma}[The actual StepOne object retains exactly the same marked ideal]
+\label{hir:actual-zero-coordinate-stepone-object}
+\uses{mc:homogenized-basic,mc:homogenized-along-basic,mc:coefficient-ideal}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.stepOne_zero_marked,TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.coefficient_stepOne_zero_marked}
+\leanok
+For the actual definitions used by the canonical construction,
+\[
+ \operatorname{stepOneMarked}(\mathbf C^{n+1},J,1)=M_J,
+ \qquad \mathcal C_{\mathbf C^{n+1}}
+     (\operatorname{stepOneMarked}(\mathbf C^{n+1},J,1))=M_J.
+\]
+These are equalities of the entire marked records, including their
+carrier, ordered empty boundary, ideal and marking.
+\end{lemma}
+\begin{proof}
+The zero-graph set is the intersection of $p^{-1}W$ with the zero
+fibre of the actual normal projection, hence is analytic. Cartan
+coherence therefore gives coherence of its original vanishing ideal
+$J$. On the whole ambient carrier, along-carrier homogenization
+equals ordinary homogenization. At marking one the latter is exactly
+$J$. Thus the actual homogenized marked record is $M_J$.
+
+At marking one the coefficient sum has just its index-zero summand.
+Its derivative order is zero, and the product of the other marks is
+the empty product one. The ideal power $J^1$ is exactly $J$: the
+definition gives $\mathcal O\cdot J$, and finite holomorphic span
+closure for the coherent ideal gives equality. The one-summand
+finite ideal sum is likewise exactly $J$. The other three record
+fields are literally unchanged. This proves the first actual
+StepOne equality, and applying the same coefficient computation to
+it proves the second.
+\end{proof}
+
+\begin{lemma}[The actual lower contact object and its entire original trace]
+\label{hir:actual-zero-coordinate-whole-contact-lower-object}
+\uses{hir:actual-zero-coordinate-whole-functional-ideal,hir:actual-zero-coordinate-stepone-object,hir:actual-graph-section-whole-ideal-pullback,hir:actual-holomorphic-graph-original-quotient}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.zero_contact_restrictEquiv,TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.zero_section_pullback,TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.zeroQuotientAlgEquiv,TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.zeroQuotientAlgEquiv_mk}
+\leanok
+Restrict the actual coefficient object of the preceding lemma to the
+same $Z$. Its entire marked record is restricted-equivalent to
+$(\mathbf C^{n+1},Z,[],p^*\mathcal I_W,1)$. Moreover
+$s^*J=\mathcal I_W$ as whole functional germ ideals, and the literal
+zero-graph trace gives an actual algebra isomorphism
+\[
+ \mathcal O_{\mathbf C^{n+1},0}/J_0
+       \simeq_{\mathbf C}\mathcal O_{\mathbf C^n,0}/\mathcal I_{W,0}.
+\]
+Every original numerator class is taken to its actual zero-section
+restriction class.
+\end{lemma}
+\begin{proof}
+At each point of $Z$, the entire zero-coordinate ideal theorem writes
+every member of $J$ as a finite holomorphic sum of original base
+vanishing pullbacks and the same literal normal coordinate. Each
+base term belongs to $p^*\mathcal I_W$. On $Z$, each normal-coordinate
+term vanishes, and hence has the empty restricted-span expression.
+Substitution in the finite sum gives the required restricted ideal
+inclusion. Conversely every base pullback vanishes on
+$W\times\{0\}$, and finite holomorphic sums preserve this vanishing,
+so the opposite inclusion holds even in the ambient ideal. The
+carrier $Z$, boundary $[]$ and marking one agree literally, giving
+the full restricted equivalence of marked records.
+
+The actual graph-section pullback theorem for the zero graph proves
+$s^*J=\mathcal I_W$ for every original representative at every base
+point. At the origin, the entire graph trace theorem identifies
+$J_0$ with the inverse image of $\mathcal I_{W,0}$ under the actual
+surjective trace. Its quotient algebra isomorphism therefore gives
+the displayed full quotient. The original graph quotient numerator
+formula, specialized to the zero graph, proves the assertion for
+every numerator. All these constructions use this same $J,z,Z,s$.
+\end{proof}
+
+\begin{theorem}[Original analytic data produce the actual contact-tail seed]
+\label{hir:actual-original-zero-coordinate-contact-tail-seed}
+\uses{hir:actual-zero-coordinate-genuine-contact-seed,hir:actual-zero-coordinate-stepone-object,hir:actual-zero-coordinate-whole-contact-lower-object}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroCoordinateContactSeed.original_zero_coordinate_contact_tail_seed}
+\leanok
+The original analytic $W$ internally supplies all the preceding
+conclusions for the same actual $J$ and $z$. For every genuine open
+$A\subset\mathbf C^{n+1}$, the actual canonical-construction
+\texttt{contactMarked} at the empty prefix, using this $z$, is
+exactly the open restriction to $A$ of $(Z,[],J,1)$. Thus its full
+marked record, restricted ideal and quotient seed are established
+before any comparison of target values or histories is requested.
+\end{theorem}
+\begin{proof}
+Construct the analytic zero graph and its coherence internally as
+above, and apply the first three lemmas. Unfold the actual
+\texttt{contactMarked} definition at the empty prefix. Its
+transformed StepOne record is its original record, its second
+coefficient operation is exactly the one in the second lemma, and
+the strict transform of $\mathbf C^{n+1}\cap\{z=0\}$ is the same
+$Z$. It is therefore literally the open pullback to $A$ of
+$(Z,[],J,1)$. This uses no chosen lower value, canonical prefix,
+comparison history or descent certificate. The full ideal and
+quotient conclusions are those already constructed for this same
+original family.
+\end{proof}
+
+This is a contact-tail seed in the actual canonical construction.
+It does not yet identify the inductive invariant on this closed
+contact embedding with the lower ambient invariant, prove stability
+of canonical centres or histories under adding zero-coordinate
+generators, or prove proper resolution descent. In particular it
+does not substitute smooth cylinder base change for those claims.

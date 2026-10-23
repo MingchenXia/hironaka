@@ -1,0 +1,182 @@
+import TranscendentalNakamaye.Pending.HironakaNormalCrossingsMultiplicityStrata
+
+/-!
+# Original labelled normal crossings boundaries
+
+Each original member is an actual union of distinct local coordinate
+hyperplanes. Different labels have disjoint coordinate branch sets.
+The whole list, including every empty position, is retained. These
+geometric conditions do not assume a resolving or admissible history.
+Blueprint: `hironaka-normal-crossings-labelled-boundary-extension.tex`.
+-/
+
+set_option autoImplicit false
+open Set Filter TopologicalSpace Classical
+open scoped Topology Manifold ContDiff
+universe u
+
+namespace TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary
+
+noncomputable section
+open FirstPass FirstPass.BlowupSequences NormalCrossings BlowupFlatCoordinates
+  HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsMultiplicityStrata
+
+variable {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M]
+
+/-- An original member may have several local branches, with its label retained.
+Distinct labels share no local branch; absent labels have empty branch sets. -/
+def IsNormalCrossingsBoundary (B : List (Set M)) : Prop :=
+  (∀ H ∈ B, IsClosed H) ∧
+    ∀ x : M, ∃ (Φ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) x x))
+      (S : Fin B.length → Finset (Fin n)),
+      Φ.source ⊆ (chartAt (ComplexModel n) x).target ∧
+      Φ.toFun (chartAt (ComplexModel n) x x) = 0 ∧
+      (∀ i j, i ≠ j → Disjoint (S i) (S j)) ∧
+      ∀ i y, y ∈ flatDomain Φ → (y ∈ B.get i ↔ ∃ a ∈ S i, flatCoord Φ a y = 0)
+
+private theorem union_coordinates {B : List (Set M)} (hB : IsNormalCrossingsBoundary (n := n) B)
+    (x : M) :
+    ∃ (Φ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) x x))
+      (S : Fin B.length → Finset (Fin n)),
+      Φ.source ⊆ (chartAt (ComplexModel n) x).target ∧
+      Φ.toFun (chartAt (ComplexModel n) x x) = 0 ∧
+      (∀ i j, i ≠ j → Disjoint (S i) (S j)) ∧
+      (∀ i y, y ∈ flatDomain Φ → (y ∈ B.get i ↔ ∃ a ∈ S i, flatCoord Φ a y = 0)) ∧
+      (∀ y ∈ flatDomain Φ, y ∈ (⋃ H ∈ B, H) ↔
+        ∃ a ∈ Finset.univ.biUnion S, flatCoord Φ a y = 0) := by
+  obtain ⟨Φ, S, hsrc, h0, hdis, hEq⟩ := hB.2 x
+  refine ⟨Φ, S, hsrc, h0, hdis, hEq, ?_⟩
+  intro y hy
+  constructor
+  · intro hyU
+    obtain ⟨H, hHB, hyH⟩ := mem_iUnion₂.mp hyU
+    obtain ⟨i, rfl⟩ := List.mem_iff_get.mp hHB
+    obtain ⟨a, hai, hya⟩ := (hEq i y hy).mp hyH
+    exact ⟨a, Finset.mem_biUnion.mpr ⟨i, Finset.mem_univ _, hai⟩, hya⟩
+  · rintro ⟨a, ha, hya⟩
+    obtain ⟨i, _, hai⟩ := Finset.mem_biUnion.mp ha
+    exact mem_iUnion₂.mpr ⟨B.get i, List.get_mem _ _, (hEq i y hy).mpr ⟨a, hai, hya⟩⟩
+
+/-- The actual finite union, using precisely the common labelled coordinates. -/
+theorem isNormalCrossingsCarrier_union {B : List (Set M)}
+    (hB : IsNormalCrossingsBoundary (n := n) B) : IsNormalCrossingsCarrier (n := n) (⋃ H ∈ B, H) := by
+  refine ⟨(List.finite_toSet B).isClosed_biUnion hB.1, fun x => ?_⟩
+  obtain ⟨Φ, S, hsrc, h0, _, _, hU⟩ := union_coordinates hB x
+  exact ⟨Φ, hsrc, h0, Finset.univ.biUnion S, hU⟩
+
+/-- The one-member condition permits arbitrary genuine NC selfcrossings. -/
+theorem isNormalCrossingsBoundary_singleton_iff (H : Set M) :
+    IsNormalCrossingsBoundary (n := n) [H] ↔ IsNormalCrossingsCarrier (n := n) H := by
+  constructor
+  · intro h
+    simpa using isNormalCrossingsCarrier_union h
+  · intro h
+    refine ⟨by simpa using h.1, fun x => ?_⟩
+    obtain ⟨Φ, hsrc, h0, S, hEq⟩ := h.2 x
+    refine ⟨Φ, (fun _ => S), hsrc, h0, ?_, ?_⟩
+    · intro i j hne
+      apply (hne ?_).elim
+      apply Fin.ext
+      have hi := i.isLt
+      have hj := j.isLt
+      simp only [List.length_singleton] at hi hj
+      omega
+    · intro i y hy
+      simpa using hEq y hy
+
+/-- Actual SNC coordinates, restricted away from all absent original labels. -/
+theorem isNormalCrossingsBoundary_of_snc {B : List (Set M)}
+    (hB : IsSNCDivisor n B) : IsNormalCrossingsBoundary (n := n) B := by
+  refine ⟨hB.1, fun x => ?_⟩
+  obtain ⟨C, ⟨Φ, hsrc, h0, hEq⟩, hcard, hinj⟩ := hB.2 x
+  let W : Set M := ⋂ i : Fin B.length, if x ∈ B.get i then univ else (B.get i)ᶜ
+  have hWo : IsOpen W := by
+    apply isOpen_iInter_of_finite
+    intro i
+    split_ifs
+    · exact isOpen_univ
+    · exact (hB.1 _ (List.get_mem _ _)).isOpen_compl
+  have hxW : x ∈ W := by
+    apply mem_iInter.mpr
+    intro i
+    split_ifs with hi
+    · exact mem_univ _
+    · exact hi
+  let e := chartAt (ComplexModel n) x
+  let V := e.target ∩ e.symm ⁻¹' W
+  have hVo : IsOpen V := e.isOpen_inter_preimage_symm hWo
+  have hxV : e x ∈ V := ⟨e.map_source (mem_chart_source _ x), by
+    change e.symm (e x) ∈ W
+    rwa [e.left_inv (mem_chart_source _ x)]⟩
+  let Θ := Φ.restrict V hVo (e x) ⟨Φ.center_mem_source, hxV⟩
+  let S := fun i : Fin B.length => if x ∈ B.get i then C i else ∅
+  have hflat (y : M) (hy : y ∈ flatDomain Θ) : y ∈ flatDomain Φ ∧ y ∈ W := by
+    refine ⟨⟨hy.1, hy.2.1⟩, ?_⟩
+    have hh : e.symm (e y) ∈ W := hy.2.2.2
+    rwa [e.left_inv hy.1] at hh
+  refine ⟨Θ, S, (fun _ hz => hsrc hz.1), h0, ?_, ?_⟩
+  · intro i j hne
+    by_cases hi : x ∈ B.get i
+    · by_cases hj : x ∈ B.get j
+      · simp only [S, if_pos hi, if_pos hj]
+        obtain ⟨a, ha⟩ := Finset.card_eq_one.mp (hcard i hi)
+        obtain ⟨b, hb⟩ := Finset.card_eq_one.mp (hcard j hj)
+        apply Finset.disjoint_left.mpr
+        intro k hki hkj
+        have hka : k = a := by simpa only [ha, Finset.mem_singleton] using hki
+        have hkb : k = b := by simpa only [hb, Finset.mem_singleton] using hkj
+        apply hne
+        apply hinj hi hj
+        rw [ha, hb, hka.symm.trans hkb]
+      · simp only [S, if_neg hj, Finset.disjoint_empty_right]
+    · simp only [S, if_neg hi, Finset.disjoint_empty_left]
+  · intro i y hy
+    by_cases hi : x ∈ B.get i
+    · have he := hEq i hi (hflat y hy).1.1 (hflat y hy).1.2
+      obtain ⟨a, ha⟩ := Finset.card_eq_one.mp (hcard i hi)
+      change y ∈ B.get i ↔ ∃ a ∈ (if x ∈ B.get i then C i else ∅),
+        Φ.toFun (chartAt (ComplexModel n) x y) a = 0
+      rw [if_pos hi, ha]
+      simpa only [ha, coordSubspace, mem_ofPred_eq, Finset.mem_singleton,
+        forall_eq, exists_eq_left, complexChartAt] using he
+    · have hyi : y ∉ B.get i := by
+        have hh := mem_iInter.mp (hflat y hy).2 i
+        rw [if_neg hi] at hh
+        exact hh
+      change y ∈ B.get i ↔ ∃ a ∈ (if x ∈ B.get i then C i else ∅), flatCoord Θ a y = 0
+      simp only [if_neg hi, Finset.notMem_empty, false_and, exists_false, hyi]
+
+variable [IsComplexManifold n M]
+
+/-- Count one makes the unchanged original labelled list an actual SNC list. -/
+theorem isSNCDivisor_of_branchMultiplicity_le_one {B : List (Set M)}
+    (hB : IsNormalCrossingsBoundary (n := n) B)
+    (hcount : ∀ x : M, branchMultiplicity (isNormalCrossingsCarrier_union hB) x ≤ 1) :
+    IsSNCDivisor n B := by
+  refine ⟨hB.1, fun x => ?_⟩
+  obtain ⟨Φ, S, hsrc, h0, hdis, hEq, hU⟩ := union_coordinates hB x
+  have hScard : (Finset.univ.biUnion S).card ≤ 1 := by
+    rw [← branchMultiplicity_eq_card (isNormalCrossingsCarrier_union hB) Φ h0 _ hU]
+    exact hcount x
+  have hcard (i : Fin B.length) (hi : x ∈ B.get i) : (S i).card = 1 := by
+    have hne : (S i).Nonempty := by
+      obtain ⟨a, ha, _⟩ := (hEq i x (mem_flatDomain_self Φ)).mp hi
+      exact ⟨a, ha⟩
+    have hsub : S i ⊆ Finset.univ.biUnion S := fun a ha =>
+      Finset.mem_biUnion.mpr ⟨i, Finset.mem_univ _, ha⟩
+    have hle := (Finset.card_le_card hsub).trans hScard
+    have hpos := Finset.card_pos.mpr hne
+    omega
+  refine ⟨S, ⟨Φ, hsrc, h0, ?_⟩, hcard, ?_⟩
+  · intro i hi y hys hyΦ
+    rw [hEq i y ⟨hys, hyΦ⟩]
+    obtain ⟨a, ha⟩ := Finset.card_eq_one.mp (hcard i hi)
+    simp [ha, coordSubspace, flatCoord, complexChartAt]
+  · intro i hi j hj he
+    by_contra hne
+    obtain ⟨a, ha, _⟩ := (hEq i x (mem_flatDomain_self Φ)).mp hi
+    exact Finset.disjoint_left.mp (hdis i j hne) ha (he ▸ ha)
+
+end
+end TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary

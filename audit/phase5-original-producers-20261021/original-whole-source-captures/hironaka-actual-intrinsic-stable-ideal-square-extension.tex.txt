@@ -1,0 +1,145 @@
+\chapter{Whole zero-coordinate ideals and the specified intrinsic sheaf square}
+
+Keep the original ordered coordinates $\mathbf C^n\oplus\mathbf C^m$.
+Write $p,q$ for the two projections. All ideals below are the original
+functional vanishing germ ideals, and all locally ringed spaces use their
+actual reduced quotient structure sheaves.
+
+\begin{lemma}[The entire ideal after adjoining zero coordinates]
+\label{hir:actual-zero-coordinate-whole-functional-ideal}
+\uses{hir:actual-graph-functional-ideal-every-point}
+\lean{TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare.zero_coordinate_functional_mem_iff}
+\leanok
+For every subset $W\subset\mathbf C^n$, every $x\in\mathbf C^n$, and
+every original function $F:\mathbf C^{n+m}\to\mathbf C$, the germ of $F$
+at $(x,0)$ belongs to $\mathcal I_{W\times\{0\}}$ if and only if it is a
+finite holomorphic linear combination of the entire family
+\[
+ \{a\circ p:a\in\mathcal I_{W,x}\}\ \cup\ \{y_1,\ldots,y_m\}.
+\]
+Here each $a$ is an original function representative holomorphic near $x$.
+The statement includes all such representatives, not a prescribed finite
+generating family, and does not require coherence or analyticity of $W$.
+\end{lemma}
+\begin{proof}
+Apply the entire original functional graph ideal theorem to the constant
+zero map $f:\mathbf C^n\to\mathbf C^m$. It is holomorphic near every
+original point, its graph section is exactly $(x,0)$, and its graph carrier
+is exactly $W\times\{0\}$. Its original graph equations are
+$y_i-f_i(p(z))=y_i$. The base part of its generating family is precisely
+all original representatives of $\mathcal I_{W,x}$ composed with $p$.
+Substitution in both directions of the graph theorem proves the displayed
+equivalence for every original $F$. Thus this is equality of the complete
+functional germ ideals, including the finite holomorphic span operation;
+it is not merely equality of their zero sets.
+\end{proof}
+
+\begin{lemma}[Whole ideal and marked-record comparison under the same shears]
+\label{hir:actual-stable-plane-whole-ideal}
+\uses{hir:actual-stable-ambient-subset-iso,hir:biholomorphism-transform}
+\lean{TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare.stable_pullback_vanishingIdeal,TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare.stable_pullback_marked}
+\leanok
+Use the actual opens and mutually inverse shears $\Psi:\Omega\to\Lambda$
+from the stable ambient comparison. Assume the original subset identities
+$f(C\cap A)\subset D\cap B$, $g(D\cap B)\subset C\cap A$, $gf=1$ on
+$C\cap A$ and $fg=1$ on $D\cap B$. Put
+$C_0=\Omega\cap(C\times\{0\})$ and
+$D_0=\Lambda\cap(\{0\}\times D)$. Then
+\[
+ \Psi^*\mathcal I_{D_0}=\mathcal I_{C_0}.
+\]
+For the actual marked records with whole ambient carrier, empty ordered
+boundary and marking one, the same map satisfies
+\[
+ \Psi^*(\Lambda,\varnothing,\mathcal I_{D_0},1)
+   =(\Omega,\varnothing,\mathcal I_{C_0},1).
+\]
+\end{lemma}
+\begin{proof}
+The actual subset comparison gives $\Psi^{-1}D_0=C_0$ for this same
+biholomorphism. We spell out why this gives the full pullback ideal.
+A target function vanishing near $\Psi(z)$ on $D_0$ pulls back to a
+holomorphic function vanishing near $z$ on $C_0$. Finite holomorphic
+linear combinations of these functions still vanish there. Conversely,
+if $F$ vanishes near $z$ on $C_0$, then $F\circ\Psi^{-1}$ is a genuine
+target holomorphic germ vanishing on $D_0$ near $\Psi(z)$, and its
+pullback is exactly $F$. This is also the original biholomorphic
+pullback theorem, with the identity map on the source and its whole
+vanishing-ideal identity. Therefore the equality holds for all original
+function representatives at every source point. In the marked record,
+the inverse image of the whole carrier is whole, the inverse-image map
+of the empty list is empty, the ideal field is the equality just proved,
+and the positive marking remains one. These four fields give the full
+record equality.
+\end{proof}
+
+\begin{lemma}[The whole quotient-sheaf square retains the specified isomorphism]
+\label{hir:actual-stable-plane-specified-sheaf-square}
+\uses{hir:actual-stable-ambient-subset-iso,hir:actual-analytic-subspace-holomorphic-map,hir:actual-analytic-subspace-intrinsic-map-faithful}
+\lean{TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare.stable_specified_sheaf_square}
+\leanok
+Let $e:C\simeq D$ be a specified intrinsic isomorphism of the actual
+original reduced models over the complex point, with $C\subset U$,
+$D\subset V$. Suppose $A\subset U$, $B\subset V$ are the actual opens
+above and $f(x)=e(x)$ for every original $x\in C\cap A$.
+Let $E:C_0\simeq D_0$ be the actual quotient-subspace isomorphism
+induced by the same $\Psi$. The two original coordinate projections
+induce actual quotient-model maps $P:C_0\to C$ and $Q:D_0\to D$.
+They satisfy the equality of entire locally ringed-space morphisms
+\[
+                  Q\circ E=e\circ P.
+\]
+\end{lemma}
+\begin{proof}
+The first projection maps the true open $\Omega$ holomorphically into
+$U$, because $p(z)\in A\subset U$. On $C_0$ its value belongs to $C$.
+Likewise $q:\Lambda\to V$ is holomorphic and maps $D_0$ into $D$.
+The actual quotient-map construction therefore supplies $P,Q$ on
+the complete quotient sheaves, and both preserve the complex
+structural morphism. The ambient-induced $E$ also preserves that
+morphism, as does the given $e$. At every original point $z=(x,0)$ of
+$C_0$, the second coordinate of $\Psi(z)$ is $f(x)=e(x)$. Hence the
+two displayed composites have identical base maps. Faithfulness of
+actual reduced model morphisms over the complex point gives equality
+of the entire locally ringed-space maps. Its proof uses values of
+all local quotient sections and their actual vanishing ideal, so
+the conclusion is equality of the full sheaf maps, not an assumed
+stalk comparison or a point-map-only conclusion.
+\end{proof}
+
+\begin{theorem}[Original intrinsic data internally produce the whole ideal/sheaf square]
+\label{hir:actual-intrinsic-stable-ideal-square-producer}
+\uses{hir:actual-intrinsic-iso-paired-original-windows,hir:actual-stable-plane-whole-ideal,hir:actual-stable-plane-specified-sheaf-square}
+\lean{TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare.exists_actual_intrinsic_stable_ideal_square}
+\leanok
+Given only an original intrinsic isomorphism $e$ over the complex point,
+original analytic models $C\subset U$, $D\subset V$ and an original
+point $c\in C$, there exist genuine opens $A\subset U$, $B\subset V$
+containing $c,e(c)$ and actual holomorphic representatives $f,g$ such
+that the same internally constructed stable ambient biholomorphism
+has both whole vanishing-ideal and marked-record equalities of the
+second lemma and the entire specified-$e$ quotient-sheaf square of
+the third lemma. No ambient extension, prescribed comparison map,
+ideal equality or descent witness is an input.
+\end{theorem}
+\begin{proof}
+The original paired-window producer applied to $e$ and $c$ constructs
+$A,B,f,g$ internally. It gives all four subset inverse identities,
+holomorphy on those true opens, and the identity $f(x)=e(x)$ for
+every original $x\in C\cap A$. Apply the whole-ideal lemma to
+these exact data, giving the ideal equality and the four-field
+marked-record equality for their same shears. Apply the sheaf-square
+lemma to those same data and to the original $e$. Its coordinate
+projections are constructed from $A\subset U$, $B\subset V$;
+faithfulness supplies their entire sheaf square. The paired-window
+membership statements place $c,e(c)$ in the produced opens. All
+required output maps, ideal equalities and sheaf equalities have
+therefore been constructed from the original inputs.
+\end{proof}
+
+This proves the whole ideal and specified intrinsic sheaf bridge for
+added zero-coordinate planes. Invariance of canonical invariant tails,
+centres and histories under adjoining the zero-coordinate generators,
+and proper resolution descent over an abstract analytic atlas, remain
+separate proof obligations. No smooth cylinder base-change statement
+is used to discharge either obligation.

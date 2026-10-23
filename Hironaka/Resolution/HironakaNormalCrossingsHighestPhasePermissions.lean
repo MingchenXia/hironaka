@@ -1,0 +1,171 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaNormalCrossingsPermittedCountDrop
+
+/-!
+# Genuine old-branch admissibility at every actual highest-phase centre
+
+Actual highest-stratum containment and real joint branch test histories derive
+local marked admissibility with the WHOLE old/current boundary. Every
+permutation of the actual old branches is allowed; the entire retained/born
+list keeps its order. No permission follows merely from endpoint NC geometry.
+Blueprint: `hironaka-normal-crossings-highest-phase-permissions-extension.tex`.
+-/
+set_option autoImplicit false
+open Set Filter TopologicalSpace
+open scoped Topology Manifold ContDiff
+universe u
+namespace Hironaka.HironakaNormalCrossingsHighestPhasePermissions
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupTowers BlowupTowerTransforms BlowupTowerSplit HomogenizedGlueingTower MemberInterTowerAlong
+  MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism MarkedIdealRestrictOpen
+  NormalCrossings NormalCrossingsComparison GermIdealOrder CoefficientIdealRestriction
+  HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsBoundaryTransform
+  HironakaNormalCrossingsMultiplicityStrata HironakaNormalCrossingsPermittedCountDrop
+  HironakaNormalCrossingsOpenRestrictionSeparation
+  HironakaBoundaryCoefficientBranchHistories HironakaNormalCrossingsHighestSubcentreAdmissibility
+variable {n : ℕ} {X Y Z : CMfd.{u} n}
+
+/-- The SAME actual restricted carrier/ideal/mark, with every old branch and the
+ENTIRE current boundary, really admits the centre for every old permutation. -/
+def HasLocalJointBranchCentre (M : MarkedIdeal n X) (H C : Set X) : Prop :=
+  ∀ x∈C,∃ (U : Opens X) (B : List (Set U)),x∈U ∧
+    IsSNCDivisor n (B++(MarkedIdeal.pullback (Subtype.val : U → X) M).E) ∧
+    (Subtype.val : U → X) ⁻¹' H=(⋃ A∈B,A) ∧
+    ∀ F : List (Set U),B.Perm F →
+      ({MarkedIdeal.pullback (Subtype.val : U → X) M with
+        E:=F++(MarkedIdeal.pullback (Subtype.val : U → X) M).E} : MarkedIdeal n U).IsAdmissibleCentre
+          ((Subtype.val : U → X) ⁻¹' C)
+
+/-- Permission is retained at EVERY genuine step, using its literal current
+marked record and literal strict original old carrier. -/
+def HasJointBranchPermissions (M : MarkedIdeal n X) (H : Set X) :
+    {Y : CMfd.{u} n} → BlowupTower X Y → Prop
+  | _,.refl => True
+  | _,.step T C _ _ => HasJointBranchPermissions M H T ∧
+      HasLocalJointBranchCentre (geoTransformAlong M T) (strictAlong T H) C
+
+private theorem strict_list_union (T : BlowupTower X Y) (B : List (Set X)) :
+    strictAlong T (⋃ A∈B,A)=⋃ A∈B.map (strictAlong T),A := by
+  have hcons {A : Type u} (S : Set A) (L : List (Set A)) : (⋃ D∈S::L,D)=S∪(⋃ D∈L,D) := by
+    ext p
+    simp
+  induction B with
+  | nil => simpa using StepOneEmptyPrefix.strictAlong_empty T
+  | cons A B ih => rw [hcons,strictAlong_union,ih,List.map_cons,hcons]
+
+private theorem local_permission_of_test_highest
+    (I : GermIdeal n X) (hI : I.IsCoherent) (d : ℕ)
+    {H : Set X} {E : List (Set X)} (h : IsBoundaryAdaptedCarrier (n:=n) H E)
+    {r : ℕ} (hbound : ∀ x : X,branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x≤r)
+    (T : BlowupTower X Y) (C : Set Y) (π : Z → Y) (hπ : IsBlowupAlong n C π)
+    (hT : IsGeoTestTower (⟨univ,E,I,d⟩ : MarkedIdeal n X) (.step T C π hπ))
+    (hTZ : CentresIn {x | r≤branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x}
+      (.step T C π hπ)) :
+    HasLocalJointBranchCentre (geoTransformAlong (⟨univ,E,I,d⟩ : MarkedIdeal n X) T)
+      (strictAlong T H) C := by
+  let M : MarkedIdeal n X := ⟨univ,E,I,d⟩
+  let Cut := {x | r≤branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x}
+  have hCut : IsClosed Cut := isClosed_branchMultiplicity_superlevel _ _
+  intro y hy
+  have hx : T.proj y∈Cut := strictAlong_subset_preimage T hCut (hTZ.2 hy)
+  obtain ⟨U,B,hxU,_hInitialSNC,hUnion,hJointTest,hPrefix⟩ :=
+    exists_highest_joint_branch_histories I hI d h hbound (.step T C π hπ) hT hTZ hx
+  let V : Opens Y := openPreimage T U
+  let P := restrict U T
+  let MU := MarkedIdeal.pullback (Subtype.val : U → X) M
+  let MB := localBranchMarked U (B++E.map (fun A => (Subtype.val : U → X) ⁻¹' A)) univ I d
+  let F := B.map (strictAlong P)
+  have hWF : (geoTransformAlong MB P).IsWellFormed := by
+    cases T <;> exact (hPrefix 1).1
+  have hEntire : (geoTransformAlong MB P).E=F++(geoTransformAlong MU P).E := by
+    cases T <;> exact (hPrefix 1).2
+  have hRewrite := geoTransformAlong_restrict U HomogenizedGlueingTower.isClosedSubmanifold_univ hI T hT.1
+  have hSNC : IsSNCDivisor n
+      (F++(MarkedIdeal.pullback (Subtype.val : V → Y) (geoTransformAlong M T)).E) := by
+    have hs := hWF.isSNCDivisor
+    rw [hEntire,hRewrite] at hs
+    exact hs
+  have hOld : (Subtype.val : V → Y) ⁻¹' strictAlong T H=(⋃ A∈F,A) := by
+    rw [←strictAlong_restrict U T H,hUnion]
+    exact strict_list_union P B
+  have hNC : HasNormalCrossings n ((Subtype.val : V → Y) ⁻¹' C)
+      (F++(MarkedIdeal.pullback (Subtype.val : V → Y) (geoTransformAlong M T)).E) := by
+    have hc := hJointTest.2.2.2
+    change HasNormalCrossings n ((Subtype.val : V → Y) ⁻¹' C) (geoTransformAlong MB P).E at hc
+    rw [hEntire,hRewrite] at hc
+    exact hc
+  have hCurrentI : (geoTransformAlong M T).ideal.IsCoherent :=
+    (isClosedSubmanifold_N_and_isCoherent_geoTransformAlong
+      HomogenizedGlueingTower.isClosedSubmanifold_univ hI T hT.1).2
+  have hCU : (MarkedIdeal.pullback (Subtype.val : V → Y) (geoTransformAlong M T)).IsAdmissibleCentre
+      ((Subtype.val : V → Y) ⁻¹' C) := IsAdmissibleCentre.pullback_val
+        (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hCurrentI hg)
+        hT.2 V
+  refine ⟨V,F,hxU,hSNC,hOld,?_⟩
+  intro F' hF
+  refine ⟨hCU.1,hCU.2.1,?_⟩
+  apply hasNormalCrossings_of_forall_mem hNC
+  intro A hA
+  rcases List.mem_append.mp hA with hA | hA
+  · exact List.mem_append_left _ (hF.mem_iff.mpr hA)
+  · exact List.mem_append_right _ hA
+
+/-- Genuine testness and actual highest-cut containment derive old-branch
+permissions at EVERY actual centre; no permission history is assumed. -/
+theorem permissions_of_test_highest
+    (I : GermIdeal n X) (hI : I.IsCoherent) (d : ℕ)
+    {H : Set X} {E : List (Set X)} (h : IsBoundaryAdaptedCarrier (n:=n) H E)
+    {r : ℕ} (hbound : ∀ x : X,branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x≤r) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+      IsGeoTestTower (⟨univ,E,I,d⟩ : MarkedIdeal n X) T →
+      CentresIn {x | r≤branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x} T →
+      HasJointBranchPermissions (⟨univ,E,I,d⟩ : MarkedIdeal n X) H T
+  | _,.refl,_,_ => trivial
+  | _,.step T C π hπ,hT,hTZ =>
+      ⟨permissions_of_test_highest I hI d h hbound T hT.1 hTZ.1,
+        local_permission_of_test_highest I hI d h hbound T C π hπ hT hTZ⟩
+
+/-- Every actual prefix retains the genuine permission of every one of its
+own centres, including all literal empty-centre positions. -/
+theorem HasJointBranchPermissions.head (M : MarkedIdeal n X) (H : Set X) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),HasJointBranchPermissions M H T →
+      ∀ j : ℕ,HasJointBranchPermissions M H (head T j)
+  | _,T,h,0 => by cases T <;> exact h
+  | _,.refl,_,_+1 => trivial
+  | _,.step T _ _ _,h,j+1 => HasJointBranchPermissions.head M H T h.1 j
+
+/-- Original data internally select a genuinely attained highest old count
+and the SAME real phase with actual old-branch permissions at every step. -/
+theorem exists_original_highest_phase_with_permissions
+    (I : GermIdeal n X) (hI : I.IsCoherent) (d : ℕ) (hd : 1≤d)
+    (hK : IsCompact (cosupport n univ I d))
+    {H : Set X} {E : List (Set X)} (h : IsBoundaryAdaptedCarrier (n:=n) H E)
+    (hne : H.Nonempty) :
+    ∃ r : ℕ,0<r ∧ r≤n ∧
+      (∀ x : X,branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x≤r) ∧
+      {x : X | branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x=r}.Nonempty ∧
+      let M : MarkedIdeal n X := ⟨univ,E,I,d⟩
+      let Cut := {x : X | r≤branchMultiplicity (isNormalCrossingsCarrier_of_boundaryAdapted h) x}
+      let L := withN (CoefficientIdeal.coeffMarked M) Cut
+      ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y),IsGeoResolution L T ∧
+        IsGeoTestTower M T ∧ CentresIn Cut T ∧ HasJointBranchPermissions M H T ∧
+        ∃ hc : IsBoundaryAdaptedCarrier (n:=n) (strictAlong T H) (geoTransformAlong M T).E,
+          ∃ U : Opens Y,(U : Set Y)=(strictAlong T Cut)ᶜ ∧ (geoTransformAlong M T).cosupp⊆U ∧
+            ∀ y : U,branchMultiplicity
+              (isNormalCrossingsCarrier_of_boundaryAdapted (boundaryAdapted_open U hc)) y≤r-1 := by
+  obtain ⟨r,hr,hrn,hbound,hatt,_hCut,_hReg,_hSub⟩ :=
+    exists_highest_multiplicity_stratum (isNormalCrossingsCarrier_of_boundaryAdapted h) hne
+  obtain ⟨Y,T,hres,hT,hTZ,hPair,U,hUeq,hU,hcount⟩ :=
+    exists_original_phase_permitted_count_drop I hI d hd hK h hr hbound
+  refine ⟨r,hr,hrn,hbound,hatt,?_⟩
+  dsimp only
+  exact ⟨Y,T,hres,hT,hTZ,permissions_of_test_highest I hI d h hbound T hT hTZ,
+    hPair,U,hUeq,hU,hcount⟩
+
+end
+end Hironaka.HironakaNormalCrossingsHighestPhasePermissions
