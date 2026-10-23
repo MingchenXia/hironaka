@@ -8,11 +8,30 @@ The original public API statements are about complex manifolds of dimension `n`,
 {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
 ```
 
-where `ComplexModel n = EuclideanSpace ℂ (Fin n)` and `IsComplexManifold n X` asks for a Hausdorff, second countable topological space with a holomorphic atlas (Mathlib's `IsManifold 𝓘(ℂ, ℂⁿ) ∞`). Everything is complex-analytic. The original global finite-sequence existence theorems assume **compactness**: either `X` is compact, or the relevant set (`Z(𝔞)`, `V`, `W`) is compact; otherwise the results hold over open sets contained in a compact set, or over a **relatively compact** neighbourhood of any compact set.
+where `ComplexModel n = EuclideanSpace ℂ (Fin n)` and `IsComplexManifold n X` asks for a Hausdorff, second countable topological space with a holomorphic atlas (Mathlib's `IsManifold 𝓘(ℂ, ℂⁿ) ∞`). These original API statements are complex-analytic. The original global finite-sequence existence theorems assume **compactness**: either `X` is compact, or the relevant set (`Z(𝔞)`, `V`, `W`) is compact; otherwise the results hold over open sets contained in a compact set, or over a **relatively compact** neighbourhood of any compact set.
 
 Vocabulary (all in this library): `GermIdeal n X` is an ideal sheaf of holomorphic germs, with `IsCoherent`, `zeroLocus` (`Z(𝔞)`), `pullback`; `EffectiveDivisor` is an invertible ideal sheaf `𝒪(-D)` with its support; `ClosedIrreducibleAnalyticSubvariety` and `IsComplexAnalyticSubset` are analytic subsets; `Hironaka.singularLocus V = V \ V_reg` (`V_sing`), and `W_sing = W \ regularLocus W d`; `IsSNCDivisor n E` says that the closed members of the list `E` have simple normal crossings (at every point the members through it are distinct coordinate hyperplanes of one chart); an *admissible blowup sequence* of `(X, E₀)` over `F` (`HironakaAdmissibleSequence.IsAdmissibleBlowupSequence n X E₀ F X' f E`) is a finite composition `f : X' → X` of blowups with smooth centres, each centre having only normal crossings with the divisor accumulated so far and lying over `F`; `E` starts with the strict transforms of the members of `E₀`, then has one member per blowup. `exceptionalLocus` (`Exc f`), `strictTransform` and `IsIsomorphismOver` have their usual meaning.
 
-## What is proved
+## De Jong alterations over arbitrary fields
+
+`Hironaka.DeJong` is a separate scheme-theoretic API, also exported by
+`import Hironaka`. Its field has no characteristic, perfectness or
+algebraic-closedness restriction. The input variety is integral, separated and
+of finite type; it need not be geometrically integral.
+
+| theorem | statement |
+|---|---|
+| `Hironaka.deJongAlterationTheorem` | For every field `k`, the unchanged native proposition `DeJongAlterations.DeJongAlterationTheorem k`. Its only inputs are `(k : Type u) [Field k]`. |
+| `Hironaka.exists_alterationWithBoundary` | For an actual `k`-variety `X` and any prescribed proper closed subset `Z`, a genuine alteration `Y → X`, an open immersion `j : Y → Ybar`, an integral regular projective `k`-variety `Ybar`, and a strict SNC boundary whose support is exactly `j(f⁻¹(Z)) ∪ (Ybar \ j(Y))`. |
+
+The boundary includes the effective Cartier, reducedness, regular-intersection
+and pure-codimension conditions of the native strict SNC definition. This API
+does not assert that the alteration is birational, nor add the separate
+perfect-field generically-étale refinement. Over an imperfect field,
+regularity of the compactification is the stated conclusion.
+See [the detailed API, fixed source and verification](DEJONG.md).
+
+## Original complex-analytic API
 
 The original API surface consists of the 42 theorems of the modules `Hironaka.API`, `Hironaka.API2`, `Hironaka.API3`, `Hironaka.API4`. They are restatements, with the internal machinery hidden, of the theorems of the `Hironaka.Resolution.*` modules. All of them are stated in the namespace `Hironaka`.
 

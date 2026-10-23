@@ -1,0 +1,95 @@
+\section{De Jong alterations over arbitrary fields}
+
+This section uses schemes over a field. The earlier complex-analytic
+compactness assumptions and the canonical analytic-resolution goals do not
+enter these statements. The source is de Jong's alteration theorem
+\cite[Theorem~4.1]{dejong96-alterations}. All scheme, alteration and divisor
+terms below have their native meanings in \texttt{DeJongAlterations}.
+The complete native producer cone is included as a local vendored package.
+
+\begin{theorem}[Alteration with regular projective compactification]
+\label{thm:hironaka-dejong-alteration}
+\source{de Jong 1996, Theorem 4.1, printed page 66}
+\lean{Hironaka.deJongAlterationTheorem,DeJongAlterations.StableModificationBridge.AlterationUnconditional.deJongAlterationTheorem}
+Let $k$ be any field, $X$ an integral separated finite-type $k$-scheme,
+and $Z\subsetneq X$ a prescribed closed subset. There are an integral
+$k$-variety $Y$, an alteration $f:Y\to X$, and an open immersion
+$j:Y\hookrightarrow\overline Y$ into an integral regular projective
+$k$-variety such that an effective reduced strict normal-crossings divisor
+$D$ on $\overline Y$ has exactly the support
+\[
+ |D|=j\bigl(f^{-1}(Z)\bigr)\cup
+       \bigl(\overline Y\setminus j(Y)\bigr).
+\]
+The alteration and open immersion commute with the original structure
+maps to $\operatorname{Spec}k$. No perfectness or geometric-integrality
+hypothesis is imposed.
+\end{theorem}
+\begin{proof}
+First suppose $k$ is algebraically closed. The proved stable-modification
+construction accepts four ingredients: existence and uniqueness over the
+valuation rings arising in that construction, numerical-stability openness
+for its actual generic-smooth families, and projectivity of the resulting
+stable modification. The valuation-existence and valuation-uniqueness
+theorems provide the first two ingredients. Projectivity is proved using
+the actual global marked dualizing line bundle: positive degrees on its
+native normalized components give good sections on the original closed
+fibres, and the closed-fibre projectivity criterion applies. Stability
+openness is proved on one original base neighborhood by extending actual
+fibre sections, constructing a relative affine map and comparing a
+positive power of that same line bundle with the pulled-back hyperplane
+bundle. The resulting positive native component degrees imply numerical
+stability; the proper bad-image complement gives the required open set.
+Thus all inputs to the generic-smooth alteration construction are proved.
+Its nodal-family resolution produces $f,j,\overline Y,D$ with the stated
+regularity, projectivity and full strict normal-crossings boundary.
+
+Now let $k$ be arbitrary and put $L=\overline k$. The scheme $X_L$ need
+not be integral or reduced. Choose a reduced irreducible component $C_L$
+dominating $X$ and descend it to an integral component model $C_E$
+over a finite intermediate extension $E/k$. The map $C_E\to X$ is a
+finite alteration, while $C_L\to X$ is surjective; consequently the
+inverse image of the prescribed proper subset $Z$ remains proper.
+Apply the algebraically closed case to $C_L$ and this inverse image.
+
+Finite presentation descends the resulting alteration, open immersion
+and projective compactification to one finite intermediate field. Descend
+the finitely many actual boundary components and all their intersections
+to a common further finite extension and refine the whole diagram to
+that level. The genuine faithfully-flat Cartier descent theorem, whole
+ideal pullback and sum identities, and descent of regularity and pure
+codimension reconstruct the effective reduced strict normal-crossings
+divisor there. The original open-immersion Cartesian square and the
+surjective scalar projection descend the entire support equality,
+including both the original prescribed inverse image and the
+compactification complement.
+
+Finally compose the descended alteration with the finite component
+alteration to $X$, and compose the structure maps with the finite map to
+$\operatorname{Spec}k$. The result is still an alteration, and finite
+base-field restriction preserves projectivity of the same
+compactification. Its underlying scheme is regular. The retained whole
+coefficient triangles and support identity give exactly the native
+output over $k$. This is the proved arbitrary-field endpoint imported by
+\texttt{Hironaka.deJongAlterationTheorem}.
+\end{proof}
+
+\begin{corollary}[The prescribed-boundary public API]
+\label{cor:hironaka-dejong-prescribed-boundary}
+\uses{thm:hironaka-dejong-alteration}
+\lean{Hironaka.exists_alterationWithBoundary}
+For a field $k$, an actual structure map
+$p:X\to\operatorname{Spec}k$ satisfying the native variety condition,
+and a closed $Z\ne X$, the type of native
+\texttt{AlterationWithBoundary} outputs for the original $p,Z$ is
+nonempty. This retains every alteration, structure-map, regularity,
+projectivity and strict normal-crossings field, as well as the exact
+boundary support above.
+\end{corollary}
+\begin{proof}
+Apply the preceding theorem at the original field $k$, then specialize
+its universal quantifiers to the given original $X,p$, its variety proof,
+and the prescribed $Z$ with its properness proof. The resulting term has
+exactly the native nonempty-output type; no replacement of the target,
+boundary or coefficient maps is made.
+\end{proof}

@@ -1,0 +1,183 @@
+{
+  "status": "in_progress",
+  "objective": "Integrate the proved unconditional arbitrary-field de Jong alteration theorem into the public Hironaka package",
+  "source_revision": "187095a1888ecadb1f365e6d4dc0cb75dcd61eff",
+  "target_base": "dfce539bb587275734d8c818f186f839d40fb60b",
+  "architecture": "Vendored local Lake subpackage with exact native proof bytes; no runtime access to the private development repository",
+  "source_modules": 1112,
+  "source_lines": 249074,
+  "source_inventory": "../../vendor/DeJongAlterations/SOURCE.json",
+  "source_inventory_sha256": "8990344bd2bec80086eb137ea18a052e0314475f32b775889de6728f71ae4eb9",
+  "public_endpoints": [
+    "Hironaka.deJongAlterationTheorem",
+    "Hironaka.exists_alterationWithBoundary"
+  ],
+  "universal_type": "forall (k : Type u) [Field k], DeJongAlterations.DeJongAlterationTheorem k",
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "checks": {
+    "selective_public_build": {
+      "status": "PASS",
+      "command": [
+        "lake",
+        "build",
+        "+Hironaka.DeJong"
+      ],
+      "jobs": 5044,
+      "warning_messages": [
+        "warning: DeJongAlterations/Algebra/NodeFittingFormalUniversal.lean:119:0: automatically included section variable(s) unused in theorem `DeJongAlterations.Algebra.NodeFittingFormalUniversal.universalLift_coordinate`:",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:100:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:101:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:139:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:140:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:141:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:142:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:143:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:149:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:150:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:151:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:152:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:153:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:164:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:165:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:166:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:167:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:168:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:176:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:177:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:178:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:179:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:180:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:181:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:182:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:183:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:197:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:198:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:199:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:200:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:201:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:202:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:203:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusAlgebra.lean:204:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusSplit.lean:142:29: Variable name `hW` is not explicitly referenced.",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenusSplit.lean:166:29: Variable name `hW` is not explicitly referenced.",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenus.lean:114:29: Variable name `hW` is not explicitly referenced.",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenus.lean:134:29: Variable name `hW` is not explicitly referenced.",
+        "warning: DeJongAlterations/StableModification/BlowDown/ComponentGenus.lean:243:7: `Set.union_diff_cancel` has been deprecated: Use `Set.union_sdiff_cancel` instead",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentAlgebra.lean:316:8: Overlapping instance parameters in `isRegularLocalRing_of_flat`:",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentScheme.lean:76:7: Variable name `x` is not explicitly referenced.",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentScheme.lean:127:0: automatically included section variable(s) unused in theorem `DeJongAlterations.StableModification.BlowDown.NumericalDescent.finiteType_sections`:",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentScheme.lean:137:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentScheme.lean:138:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentScheme.lean:152:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/NumericalDescentScheme.lean:153:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/Gluing/MarksLocal.lean:169:8: Overlapping instance parameters in `mem_throughOpen_self`:",
+        "warning: DeJongAlterations/StableModification/Gluing/MarksModel.lean:83:0: automatically included section variable(s) unused in theorem `DeJongAlterations.StableModification.Gluing.StableVal.IsoOver.apply_section_eq`:",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:56:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:65:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:76:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:106:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:191:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:204:2: Try this: ",
+        "warning: DeJongAlterations/StableModification/BlowDown/ClosureLocalScheme.lean:223:2: Try this: "
+      ],
+      "warning_count": 55,
+      "log_sha256": "ff4faff0576334664185e412135a77921d1716ff8e27fef5c08feca5bbb2b492",
+      "completed_epoch": 1792713713.07918
+    },
+    "selective_public_axiom_audit": {
+      "path": "SelectiveDeJongAuditResult.json",
+      "sha256": "6d6914584913a6e03335115ddbea55fff7cc227fadca22661c19eced45502a04"
+    },
+    "combined_build": {
+      "status": "running",
+      "command": [
+        "lake",
+        "build"
+      ]
+    },
+    "combined_axiom_audit": {
+      "status": "pending",
+      "command": [
+        "lake",
+        "test"
+      ]
+    },
+    "kernel_replay": {
+      "status": "pending",
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "-v",
+        "Hironaka.DeJong",
+        "DeJongAlterations.StableModificationBridge.AlterationUnconditional"
+      ],
+      "env": {
+        "LEAN_NUM_THREADS": "1"
+      },
+      "scope": "New public API module and vendored final endpoint; all imported declarations are covered by the recursive combined axiom audit."
+    },
+    "source_inventory": {
+      "status": "PASS",
+      "command": [
+        "python3",
+        "scripts/check_dejong_source.py"
+      ],
+      "modules": 1112,
+      "checked": [
+        "SHA-256",
+        "Git blob SHA-1",
+        "line counts",
+        "exact module set",
+        "complete import closure",
+        "dependency pins",
+        "toolchain"
+      ]
+    }
+  },
+  "reviews": {
+    "IntegrationSourceIndependentReview.json": {
+      "path": "IntegrationSourceIndependentReview.json",
+      "sha256": "85f6b142635a9f2c710d3c99e43853faa9de4816b496eabc8e65fb2115681f81"
+    },
+    "IntegrationContractIndependentReview.json": {
+      "path": "IntegrationContractIndependentReview.json",
+      "sha256": "01e9cafee58b500a7e4e429f2ee950525e3b2a40190d6473ee137ce81928ee21"
+    },
+    "SelectiveDeJongAuditResult.json": {
+      "path": "SelectiveDeJongAuditResult.json",
+      "sha256": "6d6914584913a6e03335115ddbea55fff7cc227fadca22661c19eced45502a04"
+    },
+    "VendorFormattingInventory.json": {
+      "path": "VendorFormattingInventory.json",
+      "sha256": "da01fcc52a4915ee943d371989ba981f8a798c5f2c93a9501bd8a2b8a6f1c523"
+    },
+    "LakeWarningPolicyReview.json": {
+      "path": "LakeWarningPolicyReview.json",
+      "sha256": "8fbb7f32b8656db554c0fead47b40b55915108b8a44077bca8501600fdff539a"
+    },
+    "VerifierIndependentReview.json": {
+      "path": "VerifierIndependentReview.json",
+      "sha256": "2e9f7b1aad55f75cb13a60725b9cf926b55ea2c85a303431bfe411e21bc6a2a6",
+      "role": "independent source-verifier review"
+    },
+    "StaticDocumentationValidation.json": {
+      "path": "StaticDocumentationValidation.json",
+      "sha256": "9ce42213c7745f5eaa804241ebeb4dc7ebbf74f9e346bc7034c961e44daad65a",
+      "role": "documentation-author static validation"
+    }
+  },
+  "warning_policy": {
+    "hironaka_warningAsError": true,
+    "vendor_options": "unchanged from original package",
+    "upstream_warning_messages": 55,
+    "warnings_suppressed": false,
+    "global_wfail_used": false
+  },
+  "ci": "skipped by user instruction; all publication commits use [skip ci]",
+  "scope_note": "Preserves original X, proper closed Z, genuine alteration, integral regular projective compactification and exact whole strict SNC boundary. No geometric integrality/perfectness/output-producer premise. Existing analytic gap inventory and separate perfect-field refinement are not changed or claimed solved."
+}

@@ -1,0 +1,64 @@
+{
+  "result": "CONFIRMED by exact installed Lean4.33.1/Lake source inspection; no build was run",
+  "reviewer": "/root/source_export_audit",
+  "findings": [
+    "CLI --wfail sets one global failLv=.warning.",
+    "reportJob classifies a logged warning in any nonoptional job as a failure, without a root-package/dependency-package test.",
+    "Module fetch replays saved traces even for up-to-date/cached compiled modules, so prebuilding dependencies does not by itself make --wfail warning-free.",
+    "Printing options such as --quiet do not change failure classification and must not be used as a workaround.",
+    "LeanLib.leanOptions composes each library own package options; adding warningAsError=true only to Hironaka package enforces local Hironaka warnings as errors without changing the DeJongAlterations package configuration.",
+    "Lean built-in warningAsError converts logged warning severity into an error; it does not suppress warning messages."
+  ],
+  "recommendation": "Set Hironaka [leanOptions] warningAsError=true and use/document ordinary lake build for the integrated default. Keep all upstream linter options and logs intact; inventory their warning modules/counts. This preserves fatal-warning discipline for Hironaka own modules and leaves dependency warnings visible. If literal global lake build --wfail must remain the success criterion, genuinely repair upstream warnings and pin that newly checked source revision instead.",
+  "source_evidence": [
+    {
+      "role": "global_wfail_cli",
+      "path": "/workspace/.tools/lean-4.33.1-linux/src/lean/lake/Lake/CLI/Main.lean",
+      "sha256": "4b95ab56b87319c0a1e2b55d0d31e3c077977a376020c326579d0802b9399010"
+    },
+    {
+      "role": "global_build_job_failure",
+      "path": "/workspace/.tools/lean-4.33.1-linux/src/lean/lake/Lake/Build/Run.lean",
+      "sha256": "37815f29c099d38ff76417054e5ac349895fe87ab585b295231fddf86f8c0ff6"
+    },
+    {
+      "role": "module_cached_log_replay",
+      "path": "/workspace/.tools/lean-4.33.1-linux/src/lean/lake/Lake/Build/Module.lean",
+      "sha256": "cd7b3e4802980fb9a9c1ed116650b2a95231917e4e024ca5b46b4f3821effa5c"
+    },
+    {
+      "role": "per_package_library_options",
+      "path": "/workspace/.tools/lean-4.33.1-linux/src/lean/lake/Lake/Config/LeanLib.lean",
+      "sha256": "cf2fa832d3d0994131f3a6372c721d72cc5d55e1ac02f21a1f897df77743e09b"
+    },
+    {
+      "role": "lean_warning_as_error",
+      "path": "/workspace/.tools/lean-4.33.1-linux/src/lean/Lean/Log.lean",
+      "sha256": "02baad29b943ef9f7dbd26627b147c306505393a4578030c63d41d95816953ab"
+    }
+  ],
+  "specific_lines": {
+    "Lake/CLI/Main.lean": 287,
+    "Lake/Build/Run.lean": [
+      121,
+      125,
+      128
+    ],
+    "Lake/Build/Module.lean": [
+      1030,
+      1050,
+      1069
+    ],
+    "Lake/Config/LeanLib.lean": [
+      188,
+      194
+    ],
+    "Lean/Log.lean": [
+      55,
+      56,
+      113
+    ]
+  },
+  "source_edits": false,
+  "builds": false
+}
