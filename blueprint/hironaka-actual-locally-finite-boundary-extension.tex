@@ -1,0 +1,180 @@
+\section{The entire chronological boundary on an actual locally finite limit}
+\label{sec:actual-locally-finite-boundary}
+This is the full boundary companion to the locally finite composite in
+\cite{bierstone-milman97-invent-math}, Theorem~13.4 and Lemma~13.7
+(printed pages 298--301), with the finite ordered boundary convention of
+\cite{bierstone-milman08-functoriality}, Definitions~2.1--2.2.
+The history in this chapter is a genuine growing sequence of blowups of a complex
+manifold $X$, with locally finite images of its actual centres.  It is not an
+assumption that an arbitrary original problem admits such a history.  All strict
+transforms here are centre-relative closures.  Let $M$ be an original well-formed
+marked ideal and suppose that every recorded prefix is an actual test tower for
+$M$.  Write $E_j$ for its entire ordered transformed boundary at stage $j$ and
+write $E_j[k]=\varnothing$ beyond the length of that list.  Empty births are
+retained.  Let $p_j:X_\infty\to X_j$ be the already constructed actual factors.
+
+\begin{lemma}[Finite chronological positions and genuine empty tails]
+\label{hir:actual-lf-boundary-finite-calculus}
+\uses{hir:geo-transform-basic,bcalc:tower-restrict,hir:actual-locally-finite-history-finite-stage-factor-compatibility}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.isClosed_boundaryReadout,Hironaka.HironakaActualLocallyFiniteBoundary.boundaryReadout_old_slot,Hironaka.HironakaActualLocallyFiniteBoundary.boundaryReadout_empty_tower,Hironaka.HironakaActualLocallyFiniteBoundary.mem_boundary_stage_of_empty_tail}
+\leanok
+Every prefix boundary member is closed.  Each original position of the boundary
+of any marked ideal becomes exactly its centre-relative strict transform along
+any finite tower.  Along a tower with only empty centres, every natural-number
+readout is the inverse image of the original readout.  Consequently, on an open
+set on which the actual tail from $N$ to $N+r$ is empty, membership in every slot
+of $E_{N+r}$ is equivalent to membership in the same slot of $E_N$ after the
+actual tail projection.
+\end{lemma}
+\begin{proof}
+A transformed old member is a closure, hence is closed, and a new member is the
+inverse image of the closed actual centre.  This proves closedness by induction.
+For a position in the original list, the map-and-append definition of the full
+boundary selects the mapped old position at each step.  Induction therefore
+identifies its successive transforms with the strict transform along the tower.
+If the centre is empty, the strict transform of a closed set $H$ is exactly
+$\pi^{-1}H$, since that inverse image is closed.  The newly appended member is
+empty.  Induction shows that the entire transformed list is its original list
+pulled back by the actual projection, followed by one empty position for every
+step.  Padding a list by empty positions does not change any readout, including
+out-of-range positions.  Finally restrict the actual tail over the given open.
+The genuine marked restriction theorem identifies both full finite boundary
+lists with their ambient traces, and the preceding empty-tail identity supplies
+the asserted equivalence on their actual common endpoint.
+\end{proof}
+
+\begin{definition}[The independently defined entire limit boundary]
+\label{hir:actual-lf-boundary-definition}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.limitBoundaryMember}
+\leanok
+For every natural-number position $k$, define an actual subset of the actual limit by
+\[
+ E_\infty[k]=\bigcap_{r\geq0}p_{k+1+r}^{-1}\bigl(E_{k+1+r}[k]\bigr).
+\]
+There is one index for each original position followed by every actual exceptional
+birth; a position is never removed when its member becomes empty.
+\end{definition}
+
+\begin{theorem}[Exact whole-prefix boundary in each stable window]
+\label{hir:actual-lf-boundary-stable-window}
+\uses{hir:actual-lf-boundary-finite-calculus,hir:actual-lf-boundary-definition,hir:actual-lf-limit-stable-window-biholomorphism}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.stage_length,Hironaka.HironakaActualLocallyFiniteBoundary.localInclusion_preimage_limitBoundaryMember}
+\leanok
+Let $U$ be the actual stable window chosen from the local finiteness of this same
+history, let $N$ be its actual stable index, and identify its endpoint with the
+limit over $U$ by the constructed biholomorphism.  Simultaneously for every $k$,
+the pullback of $E_\infty[k]$ is exactly the trace of $E_N[k]$.  In particular the
+whole window misses every position $k\geq\#E_0+N$.
+\end{theorem}
+\begin{proof}
+The prefix at stage $j$ has length $j$, by induction from the actual empty stage
+and the actual one-step equalities.  For the forward implication in the displayed
+intersection take $r=N$, so that its selected stage is $k+1+N$.  The tail from
+$N$ to that stage is genuinely empty over $U$.  The finite lemma identifies its
+readout with $E_N[k]$, and compatibility of the actual factor with that tail,
+together with the exact stable-index factor identity, gives the assertion.
+For the reverse implication fix an arbitrary selected stage $J=k+1+r$.  Advance
+the given stable endpoint to stage $N+J$.  Its tail from $N$ is empty over $U$,
+so the finite lemma gives membership in the $k$th boundary there.  Now regard
+that stage as $J+N$.  Since $J\geq k+1$, position $k$ is already present in the
+full stage-$J$ boundary, regardless of the initial boundary length.  Its boundary
+at stage $J+N$ is its centre-relative strict transform along that actual tail.
+This strict transform lies in the inverse image of the closed original member.
+Projecting along the actual tail, and using compatibility of the actual factors,
+gives membership in $E_J[k]$.  This holds for every $r$, proving the entire
+intersection equality.  The final assertion is the literal list-length formula
+$\#E_N=\#E_0+N$, with empty positions still counted.
+\end{proof}
+
+\begin{theorem}[Closed analytic members and a genuinely locally finite family]
+\label{hir:actual-lf-boundary-analytic-locally-finite}
+\uses{hir:actual-lf-boundary-stable-window,hir:snc,ana:analytic-preimage,hir:curve-predicates-locally-finite-union}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.isClosed_limitBoundaryMember,Hironaka.HironakaActualLocallyFiniteBoundary.locallyFinite_limitBoundaryMember,Hironaka.HironakaActualLocallyFiniteBoundary.isComplexAnalyticSubset_limitBoundaryMember,Hironaka.HironakaActualLocallyFiniteBoundary.isComplexAnalyticSubset_limitBoundarySupport}
+\leanok
+Every $E_\infty[k]$ is closed and complex analytic, and the complete indexed family
+$(E_\infty[k])_{k\in\mathbb N}$ is locally finite.  Its entire union is a closed complex analytic subset.
+\end{theorem}
+\begin{proof}
+Each defining intersection is an intersection of inverse images of closed actual
+finite boundary members by continuous actual stage factors, so it is closed.
+For a point of the limit choose one of its actual stable endpoint representatives.
+The image of that entire endpoint is an open neighbourhood.  By the previous
+theorem only positions less than $\#E_0+N$ can meet this neighbourhood; the finite
+set of these natural numbers proves local finiteness in the usual topological
+sense.  Well-formedness and the genuine test property imply that every finite
+prefix boundary has simple normal crossings.  Each of its members is therefore
+locally a coordinate hyperplane, hence analytic; an absent position is empty and
+analytic.  The exact whole-window equality identifies the trace of each limit
+member with that finite analytic member under the actual window biholomorphism.
+Analyticity pulls back by that holomorphic inverse and is local on an open cover,
+which proves analyticity of the entire independently defined limit member.
+Local finiteness gives a neighbourhood on which only finitely many members can
+meet; the union there is the corresponding finite union of analytic sets.
+Hence the entire union is analytic, and therefore closed.
+\end{proof}
+
+\begin{definition}[Locally finite indexed simple normal crossings boundary]
+\label{hir:actual-lf-boundary-indexed-snc}
+\uses{hir:snc}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.IsLocallyFiniteSNCDivisor}
+\leanok
+A family $(D_i)_{i\in I}$ of subsets of a complex $n$-manifold is a locally finite
+simple normal crossings boundary if it is locally finite, each member is closed,
+and at every point one centred holomorphic coordinate system identifies all
+members through that point with distinct coordinate hyperplanes.  Empty members
+are allowed and retain their indices.  This is the indexed locally finite
+boundary convention used when a finite boundary is continued along a locally
+finite history.
+\end{definition}
+
+\begin{lemma}[Exact finite-list and indexed-family interface]
+\label{hir:actual-lf-boundary-list-indexed-interface}
+\uses{hir:actual-lf-boundary-indexed-snc,hir:snc}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.isLocallyFiniteSNCDivisor_boundaryReadout_iff}
+\leanok
+For every finite ordered list $E$, the family $k\mapsto E[k]$, padded by empty
+sets, is a locally finite indexed simple normal crossings boundary if and only
+if $E$ is a simple normal crossings divisor in the original finite-list sense.
+\end{lemma}
+\begin{proof}
+Only positions below the length of $E$ can meet any neighbourhood, so the padded
+family is locally finite.  From the finite-list coordinate witness at a point,
+assign its specified singleton coordinate set to each in-range position and
+assign the empty coordinate set to every later position.  A later member is
+empty, so imposes no coordinate condition.  The coordinate equations and
+singleton cardinalities for every member through the point are therefore
+exactly those of the original list.  The original injectivity of its coordinate
+sets gives injectivity for the passing natural-number positions, since both are
+in range.  Closedness is unchanged, with empty sets outside the list.  Conversely
+restrict the indexed coordinate witness along the literal injection of the
+finite index set into the natural numbers.  The same equations, cardinalities
+and injectivity prove the original finite-list condition; closedness is read at
+the same actual positions.  No nonempty position or historical index is merged.
+\end{proof}
+
+\begin{theorem}[The constructed entire limit boundary has simple normal crossings]
+\label{hir:actual-lf-boundary-whole-indexed-snc}
+\uses{hir:actual-lf-boundary-list-indexed-interface,hir:actual-lf-boundary-stable-window,hir:actual-lf-boundary-analytic-locally-finite,hir:actual-lf-limit-stable-window-biholomorphism}
+\lean{Hironaka.HironakaActualLocallyFiniteBoundary.isLocallyFiniteSNCDivisor_limitBoundaryMember}
+\leanok
+The complete constructed family $(E_\infty[k])_{k\in\mathbb N}$ is a locally
+finite indexed simple normal crossings boundary on the genuine actual limit.
+\end{theorem}
+\begin{proof}
+Closedness and local finiteness have already been proved for the independently
+defined complete family.  At a given limit point take an actual stable endpoint
+representative and its actual whole window.  The original well-formed marked
+ideal and testness of its same finite prefix give its genuine finite simple
+normal crossings boundary.  Restrict that entire list to the prefix endpoint
+open; simple normal crossings is preserved by this actual inclusion.  The
+finite-list interface supplies one simultaneous coordinate witness for the
+entire padded endpoint family, with singleton and injectivity conditions at
+precisely the passing indices.  The whole-prefix equality identifies that
+family with the pullback of the constructed limit family.  The inverse of the
+actual window biholomorphism pulls its adapted coordinates to the limit window,
+with the same coordinate index sets.  Adapted coordinates
+on an open subset are adapted ambient coordinates at the same point.  Thus the
+same witness proves the required ambient indexed-family condition.  This uses
+the actual constructed maps and full boundary lists; no boundary comparison,
+normal-crossings certificate or scheduler is assumed.
+\end{proof}

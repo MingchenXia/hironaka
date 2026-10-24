@@ -1,0 +1,17 @@
+theorem isTangentDirectionAlong_univ_iff (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} {U : Set M}
+    {u : M → ℂ} : IsTangentDirectionAlong univ 𝔞 μ U u ↔ MaximalContact.IsTangentDirection 𝔞 μ U u := by
+  constructor
+  · rintro ⟨hU, hmem, hmult⟩
+    refine ⟨hU, fun x hx => ?_, fun x hx hux => ?_⟩
+    · rw [← iterDerivIdealAlong_univ h𝔞]
+      exact hmem x hx
+    · obtain ⟨e, ξ, hξ, hne⟩ := hmult x hx hux
+      obtain ⟨m, -, hm⟩ := Finset.exists_ne_zero_of_sum_ne_zero hne
+      exact ⟨e, EuclideanSpace.single m 1, hξ.mem_source, right_ne_zero_of_mul hm⟩
+  · rintro ⟨hU, hmem, hmult⟩
+    refine ⟨hU, fun x hx => ?_, fun x hx hux => ?_⟩
+    · rw [iterDerivIdealAlong_univ h𝔞]
+      exact hmem x hx
+    · obtain ⟨e, v, hxe, hne⟩ := hmult x hx hux
+      exact ⟨e, fun m _ => v m, isTangentField_univ hxe fun m => holomorphicAt_const _,
+        by rw [fieldDeriv_const]; exact hne⟩

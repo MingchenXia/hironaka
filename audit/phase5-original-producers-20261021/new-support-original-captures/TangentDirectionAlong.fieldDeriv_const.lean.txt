@@ -1,0 +1,6 @@
+theorem fieldDeriv_const (e : ComplexChart n M) (v : ComplexModel n) (f : M → ℂ) (p : M) :
+    fieldDeriv e (fun m _ => v m) f p = chartDeriv e v f p := by
+  simp only [fieldDeriv, chartDeriv]
+  conv_rhs => rw [← sum_smul_single v]
+  rw [map_sum]
+  exact Finset.sum_congr rfl fun m _ => by rw [map_smul, smul_eq_mul]

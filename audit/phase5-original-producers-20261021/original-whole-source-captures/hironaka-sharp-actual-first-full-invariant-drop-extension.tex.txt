@@ -1,0 +1,147 @@
+\section{The first sharp blowup has a well-defined chronological local full-value drop}
+
+Fix positive ambient dimension $n$ and the actual invariant
+$R=\operatorname{invFamily}(n+1)$. The full invariant is guaranteed to
+respect open restriction along canonical histories. A sharp centre is a
+maximum on FIRST, and need not be the maximum on the entire cosupport.
+We therefore retain the unchanged original marked input and the actual
+restricted history, rather than identifying an unrestricted global TEST
+value with its local canonical values.
+
+\begin{definition}[The domain and value of chronological canonical windows]
+\label{hir:sharp-actual-chronological-canonical-window-value}
+\uses{hir:canonical-centres,hir:canonical-segments}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.CanonicalWindowAt,TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.canonicalWindowValue}
+\leanok
+For an original marked ideal $M$, an actual finite tower $T$ and a current
+point $z$, a canonical window is a base open $U$ containing $T(z)$ such
+that the actual restricted tower $T|_U$ is canonical for $M|_U$ and $z$
+belongs to its actual transformed cosupport. On the set of points admitting
+such a window, define the chronological local full value by the full value
+of one chosen actual window. The original marked input and every recorded
+position of $T|_U$ are retained.
+\end{definition}
+
+\begin{theorem}[Independence from every actual canonical window]
+\label{hir:sharp-actual-chronological-window-independence}
+\uses{hir:sharp-actual-chronological-canonical-window-value,hir:step-one-nearby,bcalc:restrict-nested}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.canonicalWindowValue_eq}
+\leanok
+If $M$ belongs to the domain of $R$, the defined local value equals the
+actual full chronological value on every canonical window at the same
+point of the same original tower.
+\end{theorem}
+\begin{proof}
+Let $U$ be the chosen window and $V$ any other actual canonical window.
+The domain of $M$ pulls back to both opens. Restrict each canonical history
+to $U\cap V$. The actual nested restriction isomorphisms identify the two
+histories there, including every empty position, and the whole transformed
+cosupport restriction theorem identifies their point. Full-value open
+restriction and actual tower-isomorphism invariance on these canonical
+histories equate both values with this common intersection value. This is
+the actual two-opens theorem for the sequence-form invariant. No
+canonicality of the global tower is used.
+\end{proof}
+
+\begin{theorem}[The sharp FIRST maximum is an entire ordinary maximum on an actual window]
+\label{hir:sharp-actual-first-centre-ordinary-maximum-window}
+\uses{hir:sharp-original-first-distinct-defect-restricted-maximum-centre,hir:sharp-original-member-product-actual-marked-domain-global-order-loci,hir:canonical-centres}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.original_first_maximum_windows}
+\leanok
+Let $W$ be a closed smooth carrier of fixed positive dimension $d+1\le n$,
+let $E$ be the entire original SNC divisor, and assume
+$W\subset\overline{W\setminus\bigcup E}$. Put
+$M=(W,\varnothing,\prod_{H\in E}I_H,1)$, let $Z$ be its independently
+defined original FIRST defect, and let $C$ be the whole full-value maximum
+on $Z$. For every $x\in C$ there is an actual open neighbourhood $U$ of
+$x$ such that $C\cap U$ is the entire ordinary maximum of the actual
+full invariant of $M|_U$ on its whole cosupport.
+\end{theorem}
+\begin{proof}
+The original product theorem supplies coherence, nonzero restriction and
+the domain of $M$. A point in FIRST has positive product order, so FIRST
+is contained in the whole cosupport. At $x$, upper semicontinuity of the
+actual initial full invariant gives a neighbourhood where every cosupport
+value is at most its value at $x$. The genuine same-value saturation of
+FIRST gives a second neighbourhood where a carrier point with the same
+full value as $x$ lies in FIRST. Intersect these neighbourhoods.
+
+The maximum on FIRST has one constant full value. Hence on this
+intersection its trace is exactly the whole cosupport level of $x$:
+the reverse inclusion uses same-value saturation, and the forward
+inclusion uses the original maximum equation. The point $x$ attains the
+level and upper semicontinuity bounds every other cosupport point.
+Actual open restriction along the canonical empty tower identifies the
+initial restricted values, and the whole cosupport pullback identity
+therefore identifies this level with the entire ordinary maximum on $U$.
+No local maximum equation is assumed.
+\end{proof}
+
+\begin{theorem}[Strict defined local full-value drop for the same first sharp step]
+\label{hir:sharp-actual-first-step-chronological-local-drop}
+\uses{hir:sharp-actual-first-centre-ordinary-maximum-window,hir:sharp-actual-chronological-window-independence,hir:canonical-centres,hir:canonical-segments}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.original_first_window_drop,TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.original_first_window_comparison}
+\leanok
+For the same original data and maximum $C$, let $\pi$ be any actual blowup
+of $C$ with $C$ an admissible centre of $M$. Every point of the entire
+actual new transformed cosupport admits a canonical window of the same
+one-step original history. Its defined chronological local full value
+is strictly smaller than the original initial full value of its image
+over $C$, and equals that original value off $C$.
+\end{theorem}
+\begin{proof}
+Choose the neighbourhood from the preceding theorem at the image of the
+point. Restrict the actual blowup to this open. Its centre is nonempty,
+since it contains the image point, and equals the entire ordinary maximum.
+Thus the actual restricted one-step history is canonical. The actual
+TEST restriction theorem puts the new point in its whole transformed
+cosupport; this internally supplies membership in the domain of the
+defined local value. Apply the full-invariant decrease theorem to this
+actual canonical restricted step. The initial open restriction equality
+identifies its right-hand value with the unchanged original initial
+value. Window independence identifies its left-hand value with the
+defined chronological local value. The tower is never restarted at its
+current marked transform.
+
+Off $C$, choose the actual open complement of this closed admissible
+centre. The restricted centre is empty and the actual one-step tower is
+therefore canonical. Whole TEST cosupport restriction again supplies
+the new point. The invariant's actual empty-step theorem, followed by
+initial open restriction, gives exact equality with the unchanged original
+value. This covers the entire new cosupport, including the case that its
+part over the centre is empty.
+\end{proof}
+
+\begin{theorem}[Original inputs produce the sharp blowup and its strict local drop]
+\label{hir:sharp-actual-original-first-blowup-local-full-drop}
+\uses{hir:sharp-actual-first-step-chronological-local-drop,hir:sharp-actual-initial-dynamic-whole-good-blowup,hir:sharp-actual-initial-full-maximum-source-equality}
+\lean{TranscendentalNakamaye.Pending.HironakaSharpActualFirstFullInvariantDrop.exists_actual_initial_sharp_blowup_with_local_drop}
+\leanok
+Under the preceding original geometric hypotheses, compactness of $W$
+and nonemptiness of its actual initial FIRST defect internally produce
+one nonempty actual sharp centre and one actual proper blowup. They retain
+the original and actual-product admissibility, the actual initial dynamic
+maximum equation, the whole original-good isomorphism, smooth strict
+carrier and whole original-strict-plus-born SNC divisor. At every point
+of the same original positive product's entire new cosupport,
+the canonical-window domain, strict defined local full-value drop over
+the centre, and exact equality off it are conclusions, with no incoming
+window, history, local maximum or decrease certificate.
+\end{theorem}
+\begin{proof}
+Choose the actual first sharp blowup from the original-input construction.
+The initial whole product/quotient comparison identifies its actual
+dynamic maximum with the original FIRST maximum, using the same centre
+and projection. Apply the preceding theorem to this same original product
+record and this same actual blowup. Retain all the original geometric
+witnesses. This adds the internally constructed domain and strict local
+drop to that chosen blowup, without a second existential choice.
+\end{proof}
+
+The value here is the chronological full value on genuinely canonical
+windows. It is not asserted equal to the unconstrained global value of a
+noncanonical TEST tower. Extending these windows through later sharp
+steps, comparing the evolving chronological product with the unchanged
+original positive history, and proving strict modified-invariant
+termination in higher dimension remain open. In particular this first-step
+producer does not close G4.

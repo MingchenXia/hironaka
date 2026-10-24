@@ -1,0 +1,146 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaNormalCrossingsLabelledBoundary
+import Hironaka.Resolution.HironakaNormalCrossingsBiholomorphicMultiplicity
+
+/-!
+# Whole labelled NC pullback and memberwise simplicity
+
+Actual local coordinate readers transport every original label at once.
+Memberwise intrinsic count bounds give SNC for the entire original list
+or its literal open trace, with all empty slots retained.
+Blueprint: `hironaka-normal-crossings-labelled-boundary-transport-extension.tex`.
+-/
+set_option autoImplicit false
+open Set Filter TopologicalSpace Classical
+open scoped Topology Manifold ContDiff
+universe u
+
+namespace Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport
+noncomputable section
+open Hironaka.BlowupSequences NormalCrossings NormalCrossingsInvariance
+  BlowupFlatCoordinates HironakaNormalCrossingsLocalBranches
+  HironakaNormalCrossingsMultiplicityStrata HironakaNormalCrossingsLabelledBoundary
+  HironakaNormalCrossingsBiholomorphicMultiplicity
+
+variable {n : ℕ} {Y : Type u} [TopologicalSpace Y]
+  [ChartedSpace (ComplexModel n) Y]
+
+/-- Each original member has exactly its own part of the actual shared NC coordinates. -/
+theorem isNormalCrossingsCarrier_get {B : List (Set Y)}
+    (hB : IsNormalCrossingsBoundary (n := n) B) (i : Fin B.length) :
+    IsNormalCrossingsCarrier (n := n) (B.get i) := by
+  refine ⟨hB.1 _ (List.get_mem _ _), fun x => ?_⟩
+  obtain ⟨Φ, S, hsrc, h0, _, hEq⟩ := hB.2 x
+  exact ⟨Φ, hsrc, h0, S i, hEq i⟩
+
+variable [IsComplexManifold n Y]
+
+/-- Memberwise simplicity suffices; different original labels may still intersect. -/
+theorem isSNCDivisor_of_member_branchMultiplicity_le_one {B : List (Set Y)}
+    (hB : IsNormalCrossingsBoundary (n := n) B)
+    (hcount : ∀ (i : Fin B.length) (x : Y),
+      branchMultiplicity (isNormalCrossingsCarrier_get hB i) x ≤ 1) :
+    IsSNCDivisor n B := by
+  refine ⟨hB.1, fun x => ?_⟩
+  obtain ⟨Φ, S, hsrc, h0, hdis, hEq⟩ := hB.2 x
+  have hcard (i : Fin B.length) (hi : x ∈ B.get i) : (S i).card = 1 := by
+    have hle : (S i).card ≤ 1 := by
+      rw [← branchMultiplicity_eq_card (isNormalCrossingsCarrier_get hB i) Φ h0 _ (hEq i)]
+      exact hcount i x
+    have hne : (S i).Nonempty := by
+      obtain ⟨a, ha, _⟩ := (hEq i x (mem_flatDomain_self Φ)).mp hi
+      exact ⟨a, ha⟩
+    have hpos := Finset.card_pos.mpr hne
+    omega
+  refine ⟨S, ⟨Φ, hsrc, h0, ?_⟩, hcard, ?_⟩
+  · intro i hi y hys hyΦ
+    rw [hEq i y ⟨hys, hyΦ⟩]
+    obtain ⟨a, ha⟩ := Finset.card_eq_one.mp (hcard i hi)
+    simp [ha, coordSubspace, flatCoord, complexChartAt]
+  · intro i hi j _hj he
+    by_contra hne
+    obtain ⟨a, ha, _⟩ := (hEq i x (mem_flatDomain_self Φ)).mp hi
+    exact Finset.disjoint_left.mp (hdis i j hne) ha (he ▸ ha)
+
+variable {Z : Type u} [TopologicalSpace Z]
+  [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]
+
+/-- A single genuine full reader pulls back every original position and branch set. -/
+theorem isNormalCrossingsBoundary_preimage {g : Z → Y}
+    (hg : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ g)
+    (hexc : ∀ z, z ∉ exceptionalLocus n g) {B : List (Set Y)}
+    (hB : IsNormalCrossingsBoundary (n := n) B) :
+    IsNormalCrossingsBoundary (n := n) (B.map (g ⁻¹' ·)) := by
+  refine ⟨?_, fun z => ?_⟩
+  · intro H hH
+    obtain ⟨A, hA, rfl⟩ := List.mem_map.mp hH
+    exact (hB.1 A hA).preimage hg.continuous
+  · obtain ⟨Φ, S, _hsrc, h0, hdis, hEq⟩ := hB.2 (g z)
+    obtain ⟨Θ, hΘsrc, hΘ0, hΘ⟩ := exists_pullback_flat_coordinates hg (hexc z) Φ
+    let c : Fin (B.map (g ⁻¹' ·)).length → Fin B.length := Fin.cast (List.length_map _)
+    refine ⟨Θ, (fun i => S (c i)), hΘsrc, hΘ0.trans h0, ?_, ?_⟩
+    · intro i j hne
+      exact hdis (c i) (c j) (fun he => hne (Fin.cast_injective _ he))
+    · intro i y hy
+      rw [get_map_preimage]
+      obtain ⟨hdom, hcoord⟩ := hΘ y hy
+      change g y ∈ B.get (c i) ↔ ∃ a ∈ S (c i),
+        Θ.toFun (chartAt (ComplexModel n) z y) a = 0
+      rw [hcoord]
+      exact hEq (c i) (g y) hdom
+
+/-- The literal list pullback is reflected by the actual inverse biholomorphism. -/
+theorem isNormalCrossingsBoundary_diffeomorph_iff
+    (φ : Z ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y) (B : List (Set Y)) :
+    IsNormalCrossingsBoundary (n := n) (B.map (φ ⁻¹' ·)) ↔
+      IsNormalCrossingsBoundary (n := n) B := by
+  have hφ (z : Z) : z ∉ exceptionalLocus n φ :=
+    MarkedIdealBiholomorphism.notMem_exceptionalLocus_of_inverse
+      φ.contMDiff φ.symm.contMDiff φ.apply_symm_apply φ.symm_apply_apply z
+  have hψ (y : Y) : y ∉ exceptionalLocus n φ.symm :=
+    MarkedIdealBiholomorphism.notMem_exceptionalLocus_of_inverse
+      φ.symm.contMDiff φ.contMDiff φ.symm_apply_apply φ.apply_symm_apply y
+  constructor
+  · intro h
+    have hp := isNormalCrossingsBoundary_preimage φ.symm.contMDiff hψ h
+    have he : (B.map (φ ⁻¹' ·)).map (φ.symm ⁻¹' ·) = B := by
+      rw [List.map_map]
+      conv_rhs => rw [← List.map_id B]
+      apply List.map_congr_left
+      intro H _hH
+      ext y
+      change φ (φ.symm y) ∈ H ↔ y ∈ H
+      rw [φ.apply_symm_apply]
+    rwa [he] at hp
+  · exact isNormalCrossingsBoundary_preimage φ.contMDiff hφ
+
+/-- The actual open trace retains the full list and every literal empty position. -/
+theorem isNormalCrossingsBoundary_open (U : Opens Y) {B : List (Set Y)}
+    (hB : IsNormalCrossingsBoundary (n := n) B) :
+    IsNormalCrossingsBoundary (n := n) (B.map ((Subtype.val : U → Y) ⁻¹' ·)) :=
+  isNormalCrossingsBoundary_preimage contMDiff_subtype_val
+    (by intro x; rw [HironakaBaseChange.exceptionalLocus_val]; exact notMem_empty x) hB
+
+/-- Counts are required only on this actual open, for the original labelled members. -/
+theorem isSNCDivisor_open_of_member_branchMultiplicity_le_one
+    (U : Opens Y) {B : List (Set Y)} (hB : IsNormalCrossingsBoundary (n := n) B)
+    (hcount : ∀ (i : Fin B.length) (x : U),
+      branchMultiplicity (isNormalCrossingsCarrier_get hB i) (x : Y) ≤ 1) :
+    IsSNCDivisor n (B.map ((Subtype.val : U → Y) ⁻¹' ·)) := by
+  have hBU := isNormalCrossingsBoundary_open U hB
+  apply isSNCDivisor_of_member_branchMultiplicity_le_one hBU
+  intro i x
+  let c : Fin B.length := Fin.cast (List.length_map _) i
+  have hp : IsNormalCrossingsCarrier (n := n) ((Subtype.val : U → Y) ⁻¹' B.get c) := by
+    simpa only [get_map_preimage] using isNormalCrossingsCarrier_get hBU i
+  have hc := branchMultiplicity_preimage contMDiff_subtype_val
+    (fun y => by rw [HironakaBaseChange.exceptionalLocus_val]; exact notMem_empty y)
+    (isNormalCrossingsCarrier_get hB c) hp x
+  simpa only [get_map_preimage] using hc.le.trans (hcount c x)
+
+end
+end Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport

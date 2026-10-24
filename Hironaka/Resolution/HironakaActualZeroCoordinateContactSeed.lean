@@ -1,0 +1,281 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Support.ZeroCoordinateTangentUnivExact
+import Hironaka.Support.ZeroCoordinateHomogenizedUnivExact
+import Hironaka.Resolution.HironakaActualIntrinsicStableIdealSquare
+import Hironaka.Resolution.HironakaActualGraphContactCoefficient
+import Hironaka.Invariant.MaximalOrderStepOneB
+import Hironaka.Analytic.FibreDimensionLowerBound
+
+/-!
+# The actual StepOne zero-coordinate contact seed
+
+The same original zero graph ideal, coordinate and smooth contact plane give
+the actual homogenized/coefficient marked object and its whole contact trace.
+No lower invariant value or canonical comparison history is an input.
+Closed-contact invariant-tail and history stabilization remain unproved here.
+-/
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+open Set Filter Classical TopologicalSpace
+open scoped Topology Manifold ContDiff
+namespace Hironaka.HironakaActualZeroCoordinateContactSeed
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves HolGerm
+  HironakaRelativeNormalIdeal HironakaActualCentreJointJets
+  HironakaActualHolomorphicGraphIdeal HironakaActualGraphFunctionalIdeal
+  HironakaActualGraphContactCoefficient HironakaActualIntrinsicStableIdealSquare
+  HironakaActualIntrinsicStableAmbientIso
+  MarkedIdeals HomogenizedIdealAlong HomogenizedGlueingAlongTower
+  CoefficientIdeal HomogenizedGlueing DerivativeIdeal IdealWeightPowers
+  RelativePrincipalizationSpan RestrictedIdealWeight
+  MarkedIdealOperationsAlong.MarkedIdeal MaximalOrderStepOneB BlowupTowers
+variable {n : ℕ}
+
+/-- The same literal zero graph map used in every construction below. -/
+def zeroFunction (n : ℕ) : ComplexModel n → ComplexModel 1 := fun _ => 0
+
+/-- The actual added coordinate is the corresponding original graph equation. -/
+def addedCoordinate (n : ℕ) : ComplexModel (n+1) → ℂ := graphFunction (zeroFunction n) 0
+
+/-- The original zero-coordinate graph carrier. -/
+def zeroCarrier (W : Set (ComplexModel n)) : Set (ComplexModel (n+1)) := graphCarrier (zeroFunction n) W
+
+/-- Its entire original functional vanishing ideal. -/
+def zeroIdeal (W : Set (ComplexModel n)) : GermIdeal (n+1) (ComplexModel (n+1)) :=
+  vanishingIdeal (n := n+1) (zeroCarrier W)
+
+private theorem zeroIdeal_hol (W : Set (ComplexModel n)) :
+    ∀ x g, (zeroIdeal W).mem x g → HolomorphicAt (n+1) g x := fun _ _ hg => hg.1
+
+/-- The same actual marking-one record, before any coefficient operation. -/
+def zeroMarked (W : Set (ComplexModel n)) : MarkedIdeal (n+1) (ComplexModel (n+1)) :=
+  ⟨univ, [], zeroIdeal W, 1⟩
+
+/-- The whole actual contact plane in the same original ambient coordinates. -/
+def zeroPlane (n : ℕ) : Set (ComplexModel (n+1)) := {z | actualJointNormalProjection n 1 z = 0}
+
+private theorem zeroPlane_eq (n : ℕ) : {z | addedCoordinate n z = 0} = zeroPlane n := by
+  ext z
+  constructor
+  · intro hz
+    change actualJointNormalProjection n 1 z = 0
+    ext i
+    have hi : i = 0 := Fin.eq_zero i
+    subst i
+    simpa [addedCoordinate, graphFunction, zeroFunction] using hz
+  · intro hz
+    have h := congrArg (fun v : ComplexModel 1 => v 0) hz
+    simpa [addedCoordinate, graphFunction, zeroFunction] using h
+
+private theorem zeroCarrier_analytic {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    IsComplexAnalyticSubset (n := n+1) (zeroCarrier W) := by
+  have hp : IsComplexAnalyticSubset (n := n+1) ((tangentProjection n 1) ⁻¹' W) :=
+    AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage (tangentProjection n 1).contMDiff hW
+  have hq : IsComplexAnalyticSubset (n := n+1)
+      ((actualJointNormalProjection n 1) ⁻¹' ({0} : Set (ComplexModel 1))) :=
+    AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage
+    (actualJointNormalProjection n 1).contMDiff
+    (FibreDimensionLowerBound.isComplexAnalyticSubset_singleton (0 : ComplexModel 1))
+  have he : zeroCarrier W = (tangentProjection n 1) ⁻¹' W ∩
+      (actualJointNormalProjection n 1) ⁻¹' ({0} : Set (ComplexModel 1)) := rfl
+  rw [he]
+  exact hp.inter hq
+
+private theorem zeroIdeal_coherent {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    (zeroIdeal W).IsCoherent := CartanIrreducible.cartanCoherence _ (zeroCarrier_analytic hW)
+
+/-- The actual added coordinate is a genuine global tangent direction of the SAME original J. -/
+theorem zero_coordinate_tangent (W : Set (ComplexModel n)) :
+    TangentDirectionAlong.IsTangentDirectionAlong univ (zeroIdeal W) 1 univ (addedCoordinate n) := by
+  apply (TangentDirectionAlong.isTangentDirectionAlong_univ_iff (𝔞 := zeroIdeal W) (zeroIdeal_hol W)).mpr
+  have h := graphFunction_isTangentDirection (zeroFunction n) W ⊤ contDiff_const.contDiffOn 0
+  simpa only [zeroIdeal, zeroCarrier, addedCoordinate, Opens.coe_top, preimage_univ] using h
+
+/-- Genuine derivative one proves the original whole ideal is of maximal order one. -/
+theorem zero_coordinate_maximal_order {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    IsMaximalOrderAlong univ (zeroIdeal W) 1 := by
+  apply (isMaximalOrderAlong_univ_iff (zeroIdeal_coherent hW)).mpr
+  intro x
+  change (derivIdeal (zeroIdeal W)).mem x (fun _ => 1)
+  have hu := (zero_coordinate_tangent W).mem x (mem_univ x)
+  change (zeroIdeal W).mem x (addedCoordinate n) at hu
+  let v := actualJointNormalInclusion n 1 (EuclideanSpace.single 0 1)
+  have hd := chartDeriv_mem_derivIdeal (𝔞 := zeroIdeal W) (v := v) (e := complexChartAt x)
+    (zeroIdeal_hol W) (mem_complexChartAt_source x) hu
+  have he : chartDeriv (complexChartAt x) v (addedCoordinate n) = fun _ => 1 := by
+    funext y
+    have h := graphFunction_chartDeriv_eq_one (zeroFunction n) y (differentiableAt_const _) (0 : Fin 1)
+    simpa only [v, addedCoordinate, complexChartAt, chartAt_self_eq] using h
+  rwa [he] at hd
+
+private theorem idealPow_one_coherent {k : ℕ} {M : Type} [TopologicalSpace M]
+    [ChartedSpace (ComplexModel k) M] [IsComplexManifold k M]
+    (J : GermIdeal k M) (hJ : J.IsCoherent) : idealPow J 1 = J := by
+  rw [idealPow_succ, idealPow_zero, BlowupControlledTransform.unitIdeal_mul hJ]
+
+private theorem coeffMarked_one_coherent {k : ℕ} {M : Type} [TopologicalSpace M]
+    [ChartedSpace (ComplexModel k) M] [IsComplexManifold k M]
+    (J : GermIdeal k M) (hJ : J.IsCoherent) :
+    coeffMarked (⟨univ, [], J, 1⟩ : MarkedIdeal k M) = (⟨univ, [], J, 1⟩ : MarkedIdeal k M) := by
+  have he : sumExp (fun i : ℕ => 1-i) 1 0 = 1 := by simp [sumExp]
+  have h0 : (idealPow (iterDerivIdeal J 0) (sumExp (fun i : ℕ => 1-i) 1 0)).IsCoherent := by
+    simpa only [iterDerivIdeal_zero, he, idealPow_one_coherent J hJ] using hJ
+  apply MarkedIdealOperationsTransform.MarkedIdeal.ext_of
+  · rfl
+  · rfl
+  · change finSumIdeal (fun i => idealPow (iterDerivIdeal J i) (sumExp (fun j : ℕ => 1-j) 1 i)) 1 = J
+    rw [finSumIdeal_one h0, iterDerivIdeal_zero, he, idealPow_one_coherent J hJ]
+  · simp [coeffMarked, msum]
+
+private theorem coefficient_zero_marked {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    coeffMarkedAlong (zeroMarked W) = zeroMarked W := by
+  rw [coeffMarkedAlong_eq_coeffMarked (𝔪 := zeroMarked W) rfl (zeroIdeal_hol W)]
+  exact coeffMarked_one_coherent (zeroIdeal W) (zeroIdeal_coherent hW)
+
+/-- The ACTUAL canonical-construction StepOne record is exactly the original zero-graph record. -/
+theorem stepOne_zero_marked {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    stepOneMarked univ (zeroIdeal W) 1 = zeroMarked W := by
+  have hh : homogenizedMarkedAlong univ (zeroIdeal W) 1 = zeroMarked W := by
+    apply MarkedIdealOperationsTransform.MarkedIdeal.ext_of
+    · rfl
+    · rfl
+    · change homogenizedIdealAlong univ (zeroIdeal W) 1 = zeroIdeal W
+      rw [homogenizedIdealAlong_univ (zeroIdeal_hol W),
+        HomogenizedIdeal.homogenizedIdeal_one (zeroIdeal_coherent hW)]
+    · rfl
+  change coeffMarkedAlong (homogenizedMarkedAlong univ (zeroIdeal W) 1) = _
+  rw [hh, coefficient_zero_marked hW]
+
+/-- The SECOND actual coefficient operation uses the same complete J/mark-one record. -/
+theorem coefficient_stepOne_zero_marked {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    coeffMarkedAlong (stepOneMarked univ (zeroIdeal W) 1) = zeroMarked W := by
+  rw [stepOne_zero_marked hW, coefficient_zero_marked hW]
+
+/-- The actual raw lower object is restricted-equivalent to the original base ideal on the SAME Z. -/
+theorem zero_contact_restrictEquiv {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W) :
+    RestrictEquiv (CoefficientIdealRestriction.withN
+      (coeffMarkedAlong (stepOneMarked univ (zeroIdeal W) 1)) (zeroPlane n))
+      (⟨zeroPlane n, [], GermIdeal.pullback (m := n+1) (tangentProjection n 1)
+        (vanishingIdeal (n := n) W), 1⟩ : MarkedIdeal (n+1) (ComplexModel (n+1))) := by
+  rw [coefficient_stepOne_zero_marked hW]
+  refine ⟨rfl, rfl, rfl, ?_, ?_⟩
+  · intro x hx g hg
+    have hxp : tangentInclusion n 1 (tangentProjection n 1 x) = x := by
+      have hq : actualJointNormalProjection n 1 x = 0 := hx
+      simpa only [HironakaActualIntrinsicStableAmbientIso.join, hq, map_zero, add_zero]
+        using (join_projections (n := n) (m := 1) x)
+    have hspan := (zero_coordinate_functional_mem_iff (m := 1) W (tangentProjection n 1 x) g).mp
+      (show (vanishingIdeal (n := n+1) (zeroCoordinateCarrier (m := 1) W)).mem
+        (tangentInclusion n 1 (tangentProjection n 1 x)) g by rw [hxp]; exact hg)
+    rw [hxp] at hspan
+    refine IsInSpanOnAt.trans ?_ (IsInSpanAt.restrict
+      (show IsInSpanAt (n := n+1) (zeroCoordinateFamily (m := 1) W (tangentProjection n 1 x)) x g from hspan))
+    rintro s (⟨a,ha,rfl⟩ | ⟨i,rfl⟩)
+    · have hhol : HolomorphicAt (n+1) (a ∘ tangentProjection n 1) x :=
+        ha.1.comp_contMDiff (Eventually.of_forall fun _ => (tangentProjection n 1).contMDiff.contMDiffAt)
+      have hpull : (GermIdeal.pullback (m := n+1) (tangentProjection n 1)
+          (vanishingIdeal (n := n) W)).mem x (a ∘ tangentProjection n 1) := by
+        change IsInSpanAt (n := n+1) (fun s => ∃ b,
+          (vanishingIdeal (n := n) W).mem (tangentProjection n 1 x) b ∧
+            s = b ∘ tangentProjection n 1) x (a ∘ tangentProjection n 1)
+        exact InvertibleIdealQuotient.isInSpanAt_self ⟨a,ha,rfl⟩ hhol
+      exact IsInSpanAt.restrict (show IsInSpanAt (n := n+1)
+        (fun s => (GermIdeal.pullback (m := n+1) (tangentProjection n 1)
+          (vanishingIdeal (n := n) W)).mem x s) x (a ∘ tangentProjection n 1) from
+        InvertibleIdealQuotient.isInSpanAt_self hpull hhol)
+    · refine ⟨0, Fin.elim0, Fin.elim0, (fun i => Fin.elim0 i), (fun i => Fin.elim0 i), ?_⟩
+      refine Eventually.of_forall fun y hy => ?_
+      simp only [Fin.sum_univ_zero]
+      have he := congrArg (fun v : ComplexModel 1 => v i) hy
+      exact he
+  · intro x _hx g hg
+    change (GermIdeal.pullback (m := n+1) (tangentProjection n 1)
+      (vanishingIdeal (n := n) W)).mem x g at hg
+    obtain ⟨hgh, K, s, a, hs, _ha, hsum⟩ := hg
+    have hzero : ∀ i, ∀ᶠ y in 𝓝 x, y ∈ zeroCarrier W → s i y = 0 := by
+      intro i
+      obtain ⟨b, hb, hsb⟩ := hs i
+      filter_upwards [(tangentProjection n 1).continuous.continuousAt.eventually hb.2]
+        with y hy hA
+      rw [hsb]
+      exact hy hA.1
+    have hJ : (zeroIdeal W).mem x g := by
+      refine ⟨hgh, ?_⟩
+      filter_upwards [hsum, eventually_all.mpr hzero] with y h1 h2 hA
+      rw [h1]
+      exact Finset.sum_eq_zero fun i _ => by rw [h2 i hA, mul_zero]
+    exact IsInSpanAt.restrict (show IsInSpanAt (n := n+1)
+      (fun s => (zeroIdeal W).mem x s) x g from
+        InvertibleIdealQuotient.isInSpanAt_self hJ hJ.1)
+
+/-- The same actual zero section pulls the WHOLE original J back to the original base vanishing ideal. -/
+theorem zero_section_pullback (W : Set (ComplexModel n)) :
+    GermIdeal.pullback (m := n) (tangentInclusion n 1) (zeroIdeal W) = vanishingIdeal (n := n) W := by
+  apply GermIdeal.ext
+  funext x F
+  apply propext
+  have hf : ∀ᶠ y in nhds x, DifferentiableAt ℂ (zeroFunction n) y :=
+    Eventually.of_forall fun _ => differentiableAt_const _
+  have he : graphSection (zeroFunction n) = tangentInclusion n 1 := by
+    funext y
+    simp only [graphSection, zeroFunction, map_zero, add_zero]
+  have h := graphSection_pullback_mem_iff (zeroFunction n) x hf W F
+  rw [he] at h
+  exact h
+
+/-- The entire ORIGINAL quotient, using the same actual zero-graph trace. -/
+def zeroQuotientAlgEquiv (W : Set (ComplexModel n)) :
+    (HolGerm (ComplexModel (n+1)) ⧸ AnalyticGermDecomposition.vanishingIdeal (zeroCarrier W)) ≃ₐ[ℂ]
+      HolGerm (ComplexModel n) ⧸ AnalyticGermDecomposition.vanishingIdeal W :=
+  graphQuotientAlgEquiv (zeroFunction n) (Eventually.of_forall fun _ => differentiableAt_const _) rfl W
+
+/-- EVERY original numerator retains its literal zero-section restriction class. -/
+theorem zeroQuotientAlgEquiv_mk (W : Set (ComplexModel n)) (G : HolGerm (ComplexModel (n+1))) :
+    zeroQuotientAlgEquiv W (Ideal.Quotient.mk _ G) =
+      Ideal.Quotient.mk _ (graphTrace (zeroFunction n)
+        (Eventually.of_forall fun _ => differentiableAt_const _) rfl G) :=
+  graphQuotientAlgEquiv_mk _ _ _ W G
+
+private theorem zero_contact_on_open {W : Set (ComplexModel n)} (hW : IsComplexAnalyticSubset (n := n) W)
+    (A : Opens (ComplexModel (n+1))) :
+    contactMarked univ (zeroIdeal W) 1 (addedCoordinate n) (.refl : BlowupTower
+      (CMfd.of (n := n+1) (ComplexModel (n+1))) (CMfd.of (n := n+1) (ComplexModel (n+1)))) A =
+      MarkedIdealBiholomorphism.MarkedIdeal.pullback (Subtype.val : A → ComplexModel (n+1))
+        (⟨zeroPlane n, [], zeroIdeal W, 1⟩ : MarkedIdeal (n+1) (ComplexModel (n+1))) := by
+  unfold contactMarked
+  change MarkedIdealBiholomorphism.MarkedIdeal.pullback (Subtype.val : A → ComplexModel (n+1))
+    (CoefficientIdealRestriction.withN (coeffMarkedAlong (stepOneMarked univ (zeroIdeal W) 1))
+      (univ ∩ {x | addedCoordinate n x = 0})) = _
+  rw [coefficient_stepOne_zero_marked hW, univ_inter, zeroPlane_eq]
+  rfl
+
+/-- ONLY original analytic W supplies the actual marked/ideal/quotient seed before ANY target value/history. -/
+theorem original_zero_coordinate_contact_tail_seed {W : Set (ComplexModel n)}
+    (hW : IsComplexAnalyticSubset (n := n) W) :
+    TangentDirectionAlong.IsTangentDirectionAlong univ (zeroIdeal W) 1 univ (addedCoordinate n) ∧
+    IsMaximalOrderAlong univ (zeroIdeal W) 1 ∧
+    stepOneMarked univ (zeroIdeal W) 1 = zeroMarked W ∧
+    coeffMarkedAlong (stepOneMarked univ (zeroIdeal W) 1) = zeroMarked W ∧
+    (∀ A : Opens (ComplexModel (n+1)),
+      contactMarked univ (zeroIdeal W) 1 (addedCoordinate n) (.refl : BlowupTower
+        (CMfd.of (n := n+1) (ComplexModel (n+1))) (CMfd.of (n := n+1) (ComplexModel (n+1)))) A =
+      MarkedIdealBiholomorphism.MarkedIdeal.pullback (Subtype.val : A → ComplexModel (n+1))
+        (⟨zeroPlane n, [], zeroIdeal W, 1⟩ : MarkedIdeal (n+1) (ComplexModel (n+1)))) ∧
+    RestrictEquiv (CoefficientIdealRestriction.withN
+      (coeffMarkedAlong (stepOneMarked univ (zeroIdeal W) 1)) (zeroPlane n))
+      (⟨zeroPlane n, [], GermIdeal.pullback (m := n+1) (tangentProjection n 1)
+        (vanishingIdeal (n := n) W), 1⟩ : MarkedIdeal (n+1) (ComplexModel (n+1))) ∧
+    GermIdeal.pullback (m := n) (tangentInclusion n 1) (zeroIdeal W) = vanishingIdeal (n := n) W ∧
+    ∀ G : HolGerm (ComplexModel (n+1)), zeroQuotientAlgEquiv W (Ideal.Quotient.mk _ G) =
+      Ideal.Quotient.mk _ (graphTrace (zeroFunction n)
+        (Eventually.of_forall fun _ => differentiableAt_const _) rfl G) :=
+  ⟨zero_coordinate_tangent W, zero_coordinate_maximal_order hW, stepOne_zero_marked hW,
+    coefficient_stepOne_zero_marked hW, zero_contact_on_open hW,
+    zero_contact_restrictEquiv hW, zero_section_pullback W, zeroQuotientAlgEquiv_mk W⟩
+
+end
+end Hironaka.HironakaActualZeroCoordinateContactSeed

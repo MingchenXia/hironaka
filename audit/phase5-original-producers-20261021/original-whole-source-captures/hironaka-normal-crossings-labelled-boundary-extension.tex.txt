@@ -1,0 +1,120 @@
+\section{Normal crossings with the original boundary labels retained}
+\label{sec:nc-labelled-boundary}
+
+An original boundary member may have several distinct local branches.
+The labels of the original finite list are retained, including empty
+members. The local condition below permits such selfcrossings, while
+requiring that two different labels have no common local branch. It
+extends the simple normal crossings boundary convention of
+Bierstone--Milman (2008), Definition 2.1, by allowing several coordinate hyperplanes
+in a single labelled member. The statements concern actual local
+geometry; they do not construct a resolution history or assert its
+centre admissibility.
+
+\begin{definition}[A labelled normal crossings boundary]
+\label{hir:labelled-normal-crossings-boundary}
+\source{bierstone-milman08-functoriality}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary.IsNormalCrossingsBoundary}
+\leanok
+A finite ordered list $B=(H_i)$ is a normal crossings boundary if every
+$H_i$ is closed and, at every $x$, there are centred holomorphic
+coordinates and pairwise disjoint finite coordinate sets $S_i$ such that
+on that same coordinate neighbourhood
+\[
+ H_i=\bigcup_{a\in S_i}\{z_a=0\}.
+\]
+The equality holds for every original position $i$, including positions
+whose member does not contain $x$; their set $S_i$ is empty.
+\uses{hir:general-normal-crossings-carrier,hir:snc}
+\end{definition}
+
+\begin{lemma}[The actual union is a normal crossings carrier]
+\label{hir:labelled-nc-union-carrier}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary.isNormalCrossingsCarrier_union}
+\leanok
+If $B$ is a labelled normal crossings boundary, then its actual union
+$H=\bigcup_iH_i$ is a normal crossings carrier. In any of the common
+coordinates in the definition, its coordinate branch set is exactly
+$S=\bigcup_iS_i$.
+\uses{hir:labelled-normal-crossings-boundary,hir:general-normal-crossings-carrier}
+\end{lemma}
+\begin{proof}
+The union is closed because the list is finite and all its members are
+closed. Fix the common coordinates at $x$. A point belongs to the union
+if and only if it belongs to some $H_i$, if and only if some coordinate
+indexed by some $S_i$ vanishes. This is exactly the vanishing of one of
+the coordinates indexed by the finite union $S$. The same coordinates
+are centred at $x$ and have the required domain, so they give the
+asserted normal crossings carrier.
+\end{proof}
+
+\begin{lemma}[A single label retains arbitrary normal crossings]
+\label{hir:labelled-nc-singleton-equivalence}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary.isNormalCrossingsBoundary_singleton_iff}
+\leanok
+The one-member boundary $[H]$ has labelled normal crossings if and only
+if $H$ is a normal crossings carrier. Thus the labelled condition does
+not require each original member to be smooth.
+\uses{hir:labelled-nc-union-carrier,hir:general-normal-crossings-carrier}
+\end{lemma}
+\begin{proof}
+The union of the one-member list is exactly $H$, so one implication
+follows from the union lemma. Conversely, take the actual centred NC
+coordinates of $H$ and give the unique label its entire coordinate
+branch set. There are no two distinct positions, so pairwise
+disjointness is vacuous. The same local equality and closedness give
+the required labelled boundary.
+\end{proof}
+
+\begin{lemma}[Every simple normal crossings boundary has labelled normal crossings]
+\label{hir:snc-supplies-labelled-nc}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary.isNormalCrossingsBoundary_of_snc}
+\leanok
+Every actual SNC list, with its order and all empty positions unchanged,
+is a labelled normal crossings boundary.
+\uses{hir:labelled-normal-crossings-boundary,hir:snc}
+\end{lemma}
+\begin{proof}
+At $x$, take the actual common SNC coordinates and their coordinate
+sets $C_i$. For every member not containing $x$, remove that closed
+member from the neighbourhood. The finite intersection of these open
+complements is an open neighbourhood of $x$. Restrict the same
+holomorphic coordinate equivalence to its inverse image in the chart;
+its centre and its coordinate functions are unchanged. Put $S_i=C_i$
+for members through $x$ and $S_i=\varnothing$ for all others.
+
+For a member through $x$, $C_i$ has exactly one element, so its
+coordinate-subspace equation is precisely the union-of-hyperplanes
+equation for $S_i$. For an absent member, its trace on the restricted
+neighbourhood and the union indexed by its empty $S_i$ are both empty.
+Two nonempty $S_i,S_j$ are singletons. If they shared a coordinate they
+would be equal, contradicting the injectivity of the actual SNC
+coordinate family for distinct through positions. All other pairs
+contain an empty set. This proves the required pairwise disjointness
+and every labelled local equality on the same actual neighbourhood.
+\end{proof}
+
+\begin{theorem}[Intrinsic total branch count one makes the original list simple]
+\label{hir:labelled-nc-count-one-snc}
+\lean{TranscendentalNakamaye.Pending.HironakaNormalCrossingsLabelledBoundary.isSNCDivisor_of_branchMultiplicity_le_one}
+\leanok
+Let $B$ be a labelled NC boundary and $H$ its actual union. If the
+intrinsic branch multiplicity of $H$ is at most one at every point,
+then the entire original list $B$ is an SNC boundary.
+\uses{hir:labelled-nc-union-carrier,hir:general-nc-exact-nearby-branch-count,hir:snc}
+\end{theorem}
+\begin{proof}
+Fix $x$ and the actual labelled NC coordinates. Their total coordinate
+branch set is $S=\bigcup_iS_i$, by the union lemma. The actual
+coordinate formula for intrinsic branch multiplicity gives
+$|S|\le1$. If $x\in H_i$, the labelled local equality at the centre
+gives an element of $S_i$. Since $S_i\subset S$, it follows that
+$|S_i|=1$. For this singleton, the union-of-hyperplanes equation equals
+its coordinate-subspace equation, giving the required common SNC
+coordinates for every through member. If two through positions had
+equal coordinate sets, those equal nonempty sets would contradict
+their pairwise disjointness unless the positions were identical.
+Hence the coordinate assignment is injective on the through positions.
+Closedness was retained from the original boundary. These are exactly
+the SNC conditions for the unchanged entire list $B$.
+\end{proof}

@@ -1,0 +1,43 @@
+ℹ [4752/4982] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✔ [5517/5707] Built Hironaka.Support.ZeroCoordinateDerivativeUnivExact (2.2s)
+✖ [5518/5707] Building Hironaka.Support.ZeroCoordinateHomogenizedUnivExact (2.8s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.setup.json --json
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:29:89: Unknown identifier `derivMarked`
+
+Note: It is not possible to treat `derivMarked` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:34:79: Unknown identifier `coeffMarked`
+
+Note: It is not possible to treat `coeffMarked` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:35:26: Unknown identifier `coeffMarked`
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:41:35: Unknown identifier `MaximalContact.IsMaximalOrder`
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:42:10: Unknown identifier `CompanionReduction.isMaximalOrder_of_forall_notMem`
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:44:11: Unknown identifier `MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal`
+error: Hironaka/Support/ZeroCoordinateHomogenizedUnivExact.lean:45:9: No goals to be solved
+error: Lean exited with code 1
+✖ [5611/5707] Building Hironaka.Support.ZeroCoordinateTangentUnivExact (2.5s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/ZeroCoordinateTangentUnivExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ZeroCoordinateTangentUnivExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ZeroCoordinateTangentUnivExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/ZeroCoordinateTangentUnivExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/ZeroCoordinateTangentUnivExact.setup.json --json
+error: Hironaka/Support/ZeroCoordinateTangentUnivExact.lean:30:57: Unknown identifier `MaximalContact.IsTangentDirection`
+error: Hironaka/Support/ZeroCoordinateTangentUnivExact.lean:34:4: No goals to be solved
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Support.ZeroCoordinateHomogenizedUnivExact
+- Hironaka.Support.ZeroCoordinateTangentUnivExact
+error: build failed

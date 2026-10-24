@@ -1,0 +1,246 @@
+import TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableAmbientIso
+import TranscendentalNakamaye.Pending.HironakaActualGraphFunctionalIdeal
+import TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism
+
+/-!
+# Entire zero-coordinate ideals and the specified intrinsic sheaf square
+
+The same actual stable ambient comparison transports whole original ideals.
+Its coordinate projections give the exact entire quotient-sheaf square with
+the specified original intrinsic map. Canonical zero-generator stabilization
+and proper resolution descent are not asserted here.
+-/
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+open Set Filter Classical TopologicalSpace CategoryTheory AlgebraicGeometry
+open scoped Topology Manifold ContDiff
+namespace TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare
+noncomputable section
+open FirstPass FirstPass.HolomorphicIdealSheaves MarkedIdeals
+  HironakaRelativeNormalIdeal HironakaActualCentreJointJets
+  HironakaActualGraphFunctionalIdeal HironakaActualHolomorphicGraphIdeal
+  HironakaActualAnalyticSubspace HironakaActualAnalyticSubspaceMaps
+  HironakaActualAnalyticSubspaceLocalFunctions HironakaReducedComplexAnalyticSpaces
+  HironakaActualIntrinsicIsoPairedWindows HironakaActualIntrinsicStableAmbientIso
+variable {n m : ℕ}
+
+/-- The literal added-zero-coordinate carrier, with no unrestricted cylinder coordinates. -/
+def zeroCoordinateCarrier (W : Set (ComplexModel n)) : Set (ComplexModel (n+m)) :=
+  {z | tangentProjection n m z ∈ W ∧ actualJointNormalProjection n m z = 0}
+
+/-- The entire original vanishing family plus every literal added coordinate. -/
+def zeroCoordinateFamily (W : Set (ComplexModel n)) (x : ComplexModel n) :
+    (ComplexModel (n+m) → ℂ) → Prop := fun s =>
+  (∃ a : ComplexModel n → ℂ, (vanishingIdeal (n := n) W).mem x a ∧
+    s = a ∘ tangentProjection n m) ∨
+  ∃ i : Fin m, s = fun z => z (i.natAdd n)
+
+/-- At EVERY original point the added-zero ideal is the entire original finite functional span. -/
+theorem zero_coordinate_functional_mem_iff (W : Set (ComplexModel n))
+    (x : ComplexModel n) (F : ComplexModel (n+m) → ℂ) :
+    (vanishingIdeal (n := n+m) (zeroCoordinateCarrier (m := m) W)).mem
+        (tangentInclusion n m x) F ↔
+      IsInSpanAt (n := n+m) (zeroCoordinateFamily (m := m) W x) (tangentInclusion n m x) F := by
+  have hf : ∀ᶠ u in nhds x, DifferentiableAt ℂ (fun _ : ComplexModel n => (0 : ComplexModel m)) u :=
+    Eventually.of_forall fun _ => differentiableAt_const _
+  have hz (i : Fin m) :
+      HironakaActualGraphFunctionalIdeal.graphFunction
+          (fun _ : ComplexModel n => (0 : ComplexModel m)) i =
+        (fun z : ComplexModel (n+m) => z (i.natAdd n)) := by
+    funext z
+    change z (i.natAdd n) - 0 = z (i.natAdd n)
+    exact sub_zero _
+  have he : graphFunctionFamily (fun _ : ComplexModel n => (0 : ComplexModel m)) W x =
+      zeroCoordinateFamily (m := m) W x := by
+    funext s
+    apply propext
+    simp only [graphFunctionFamily, zeroCoordinateFamily, hz]
+  have h := graph_functional_mem_iff (fun _ : ComplexModel n => (0 : ComplexModel m)) x hf W F
+  rw [he] at h
+  simpa only [zeroCoordinateCarrier, graphCarrier, graphSection, map_zero, add_zero] using h
+
+private theorem pullback_vanishing_of_iso {k : ℕ} {X Y : Type}
+    [TopologicalSpace X] [TopologicalSpace Y]
+    [ChartedSpace (ComplexModel k) X] [IsComplexManifold k X]
+    [ChartedSpace (ComplexModel k) Y] [IsComplexManifold k Y]
+    (χ : X ≃ₘ⟮𝓘(ℂ,ComplexModel k),𝓘(ℂ,ComplexModel k)⟯ Y) (D : Set Y) :
+    GermIdeal.pullback (m := k) χ (vanishingIdeal (n := k) D) =
+      vanishingIdeal (n := k) (χ ⁻¹' D) := by
+  have hi : GermIdeal.pullback (m := k) (id : X → X)
+      (vanishingIdeal (n := k) (χ ⁻¹' D)) = vanishingIdeal (n := k) (χ ⁻¹' D) :=
+    GermIdeal.ext (funext fun _ => funext fun _ =>
+      propext BlowupExistenceCodimOne.pullback_id_vanishingIdeal_mem_iff)
+  have h := MarkedIdealBiholomorphism.pullback_vanishingIdeal_preimage
+    (φ := χ) (ψ := χ.symm) χ.contMDiff χ.symm.contMDiff
+    χ.apply_symm_apply χ.symm_apply_apply (g := (id : X → X)) contMDiff_id D
+  simpa only [Function.comp_id, hi] using h.symm
+
+section SameWindows
+variable (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+  (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+  (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B)
+  (C : Set (ComplexModel n)) (D : Set (ComplexModel m))
+  (hFD : ∀ x ∈ C ∩ A, f x ∈ D ∩ B) (hGC : ∀ y ∈ D ∩ B, g y ∈ C ∩ A)
+  (hgf : ∀ x ∈ C ∩ A, g (f x) = x) (hfg : ∀ y ∈ D ∩ B, f (g y) = y)
+include hFD hGC hgf hfg
+
+/-- The SAME stable ambient iso pulls back the entire independently defined original ideal. -/
+theorem stable_pullback_vanishingIdeal :
+    GermIdeal.pullback (m := n+m) (stableAmbientIso A B f g hf hg)
+        (vanishingIdeal (n := n+m) (targetPlane A B g hg D)) =
+      vanishingIdeal (n := n+m) (sourcePlane A B f hf C) := by
+  have hp : (stableAmbientIso A B f g hf hg) ⁻¹' targetPlane A B g hg D =
+      sourcePlane A B f hf C := by
+    ext z
+    exact (stableAmbientIso_plane_iff A B f g hf hg C D hFD hGC hgf hfg z).symm
+  rw [pullback_vanishing_of_iso, hp]
+
+/-- Whole carrier, entire ideal, empty ordered boundary and marking all belong to the SAME map. -/
+theorem stable_pullback_marked :
+    MarkedIdealBiholomorphism.MarkedIdeal.pullback (stableAmbientIso A B f g hf hg)
+      (⟨univ, [], vanishingIdeal (n := n+m) (targetPlane A B g hg D), 1⟩ :
+        MarkedIdeal (n+m) (targetDomain A B g hg)) =
+      (⟨univ, [], vanishingIdeal (n := n+m) (sourcePlane A B f hf C), 1⟩ :
+        MarkedIdeal (n+m) (sourceDomain A B f hf)) := by
+  dsimp only [MarkedIdealBiholomorphism.MarkedIdeal.pullback]
+  rw [stable_pullback_vanishingIdeal A B f g hf hg C D hFD hGC hgf hfg]
+  simp only [preimage_univ, List.map_nil]
+end SameWindows
+
+section OriginalModels
+variable {U : Opens (ComplexModel n)} {V : Opens (ComplexModel m)}
+
+/-- The true source projection lands in the original ambient open. -/
+def sourceProjection (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (hf : ContDiffOn ℂ ∞ f A) (hAU : A ≤ U) :
+    sourceDomain A B f hf → U := fun z => ⟨tangentProjection n m z.val, hAU z.property.1⟩
+
+/-- The true target projection lands in the original target ambient open. -/
+def targetProjection (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (g : ComplexModel m → ComplexModel n) (hg : ContDiffOn ℂ ∞ g B) (hBV : B ≤ V) :
+    targetDomain A B g hg → V := fun z => ⟨actualJointNormalProjection n m z.val, hBV z.property.1⟩
+
+private theorem sourceProjection_holo (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (hf : ContDiffOn ℂ ∞ f A) (hAU : A ≤ U) :
+    ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel n) ∞ (sourceProjection A B f hf hAU) := by
+  apply (ContMDiff.subtypeVal_comp_iff U _).mp
+  exact (tangentProjection n m).contMDiff.comp contMDiff_subtype_val
+
+private theorem targetProjection_holo (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (g : ComplexModel m → ComplexModel n) (hg : ContDiffOn ℂ ∞ g B) (hBV : B ≤ V) :
+    ContMDiff 𝓘(ℂ,ComplexModel (n+m)) 𝓘(ℂ,ComplexModel m) ∞ (targetProjection A B g hg hBV) := by
+  apply (ContMDiff.subtypeVal_comp_iff V _).mp
+  exact (actualJointNormalProjection n m).contMDiff.comp contMDiff_subtype_val
+
+private theorem sourceProjection_maps (C : Set U) (A : Opens (ComplexModel n))
+    (B : Opens (ComplexModel m)) (f : ComplexModel n → ComplexModel m)
+    (hf : ContDiffOn ℂ ∞ f A) (hAU : A ≤ U) :
+    ∀ z ∈ sourcePlane A B f hf (coordinateCarrier C), sourceProjection A B f hf hAU z ∈ C := by
+  intro z hz
+  obtain ⟨u,hu,he⟩ := hz.1
+  have he' : u = sourceProjection A B f hf hAU z := Subtype.ext he
+  exact he' ▸ hu
+
+private theorem targetProjection_maps (D : Set V) (A : Opens (ComplexModel n))
+    (B : Opens (ComplexModel m)) (g : ComplexModel m → ComplexModel n)
+    (hg : ContDiffOn ℂ ∞ g B) (hBV : B ≤ V) :
+    ∀ z ∈ targetPlane A B g hg (coordinateCarrier D), targetProjection A B g hg hBV z ∈ D := by
+  intro z hz
+  obtain ⟨u,hu,he⟩ := hz.1
+  have he' : u = targetProjection A B g hg hBV z := Subtype.ext he
+  exact he' ▸ hu
+
+/-- Actual original source quotient projection, including its complete sheaf map. -/
+def sourceModelProjection (C : Set U) (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (hf : ContDiffOn ℂ ∞ f A) (hAU : A ≤ U) :
+    actualSubspaceLocallyRingedSpace (n := n+m) (sourcePlane A B f hf (coordinateCarrier C)) ⟶
+      actualSubspaceLocallyRingedSpace (n := n) C :=
+  actualSubspaceMap (sourceProjection_holo A B f hf hAU) (sourceProjection_maps C A B f hf hAU)
+
+/-- Actual original target quotient projection, including its complete sheaf map. -/
+def targetModelProjection (D : Set V) (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (g : ComplexModel m → ComplexModel n) (hg : ContDiffOn ℂ ∞ g B) (hBV : B ≤ V) :
+    actualSubspaceLocallyRingedSpace (n := n+m) (targetPlane A B g hg (coordinateCarrier D)) ⟶
+      actualSubspaceLocallyRingedSpace (n := m) D :=
+  actualSubspaceMap (targetProjection_holo A B g hg hBV) (targetProjection_maps D A B g hg hBV)
+
+private theorem sourceModelProjection_point (C : Set U) (A : Opens (ComplexModel n))
+    (B : Opens (ComplexModel m)) (f : ComplexModel n → ComplexModel m)
+    (hf : ContDiffOn ℂ ∞ f A) (hAU : A ≤ U) :
+    sourceModelProjection C A B f hf hAU ≫ subspacePointMap (n := n) C =
+      subspacePointMap (n := n+m) (sourcePlane A B f hf (coordinateCarrier C)) :=
+  actualSubspaceMap_point _ _
+
+private theorem targetModelProjection_point (D : Set V) (A : Opens (ComplexModel n))
+    (B : Opens (ComplexModel m)) (g : ComplexModel m → ComplexModel n)
+    (hg : ContDiffOn ℂ ∞ g B) (hBV : B ≤ V) :
+    targetModelProjection D A B g hg hBV ≫ subspacePointMap (n := m) D =
+      subspacePointMap (n := n+m) (targetPlane A B g hg (coordinateCarrier D)) :=
+  actualSubspaceMap_point _ _
+
+/-- The stable ambient induced isomorphism forms the ENTIRE sheaf square with the specified e. -/
+theorem stable_specified_sheaf_square {C : Set U} {D : Set V}
+    (e : actualSubspaceLocallyRingedSpace (n := n) C ≅ actualSubspaceLocallyRingedSpace (n := m) D)
+    (he : e.hom ≫ subspacePointMap (n := m) D = subspacePointMap (n := n) C)
+    (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+    (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+    (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B) (hAU : A ≤ U) (hBV : B ≤ V)
+    (hFD : ∀ x ∈ coordinateCarrier C ∩ A, f x ∈ coordinateCarrier D ∩ B)
+    (hGC : ∀ y ∈ coordinateCarrier D ∩ B, g y ∈ coordinateCarrier C ∩ A)
+    (hgf : ∀ x ∈ coordinateCarrier C ∩ A, g (f x) = x)
+    (hfg : ∀ y ∈ coordinateCarrier D ∩ B, f (g y) = y)
+    (hFval : ∀ x : C, x.val.val ∈ A → f x.val.val = (e.hom.base x).val.val) :
+    (stablePlaneSubspaceIso A B f g hf hg (coordinateCarrier C) (coordinateCarrier D)
+        hFD hGC hgf hfg).hom ≫ targetModelProjection D A B g hg hBV =
+      sourceModelProjection C A B f hf hAU ≫ e.hom := by
+  apply actualSubspaceMap_eq_of_base_eq
+  · rw [Category.assoc, targetModelProjection_point]
+    exact actualSubspaceMap_point _ _
+  · rw [Category.assoc, he, sourceModelProjection_point]
+  · apply ConcreteCategory.hom_ext
+    intro z
+    apply Subtype.ext
+    apply Subtype.ext
+    have hz0 : actualJointNormalProjection n m z.val.val = 0 := z.property.2
+    have hx := hFval ((sourceModelProjection C A B f hf hAU).base z) z.val.property.1
+    change f (tangentProjection n m z.val.val) = _ at hx
+    change actualJointNormalProjection n m (stableForward f g z.val.val) =
+      (e.hom.base ((sourceModelProjection C A B f hf hAU).base z)).val.val
+    simpa only [stableForward, second_join, hz0, add_zero] using hx
+
+/-- ONLY the original e, analytic models and point internally produce the SAME complete ideal/sheaf square. -/
+theorem exists_actual_intrinsic_stable_ideal_square {C : Set U} {D : Set V}
+    (e : actualSubspaceLocallyRingedSpace (n := n) C ≅ actualSubspaceLocallyRingedSpace (n := m) D)
+    (he : e.hom ≫ subspacePointMap (n := m) D = subspacePointMap (n := n) C)
+    (hC : IsComplexAnalyticSubset (n := n) C) (hD : IsComplexAnalyticSubset (n := m) D) (c : C) :
+    ∃ (A : Opens (ComplexModel n)) (B : Opens (ComplexModel m))
+      (f : ComplexModel n → ComplexModel m) (g : ComplexModel m → ComplexModel n)
+      (hf : ContDiffOn ℂ ∞ f A) (hg : ContDiffOn ℂ ∞ g B) (hAU : A ≤ U) (hBV : B ≤ V)
+      (hFD : ∀ x ∈ coordinateCarrier C ∩ A, f x ∈ coordinateCarrier D ∩ B)
+      (hGC : ∀ y ∈ coordinateCarrier D ∩ B, g y ∈ coordinateCarrier C ∩ A)
+      (hgf : ∀ x ∈ coordinateCarrier C ∩ A, g (f x) = x)
+      (hfg : ∀ y ∈ coordinateCarrier D ∩ B, f (g y) = y),
+      c.val.val ∈ A ∧ (e.hom.base c).val.val ∈ B ∧
+      GermIdeal.pullback (m := n+m) (stableAmbientIso A B f g hf hg)
+          (vanishingIdeal (n := n+m) (targetPlane A B g hg (coordinateCarrier D))) =
+        vanishingIdeal (n := n+m) (sourcePlane A B f hf (coordinateCarrier C)) ∧
+      MarkedIdealBiholomorphism.MarkedIdeal.pullback (stableAmbientIso A B f g hf hg)
+        (⟨univ, [], vanishingIdeal (n := n+m) (targetPlane A B g hg (coordinateCarrier D)), 1⟩ :
+          MarkedIdeal (n+m) (targetDomain A B g hg)) =
+        (⟨univ, [], vanishingIdeal (n := n+m) (sourcePlane A B f hf (coordinateCarrier C)), 1⟩ :
+          MarkedIdeal (n+m) (sourceDomain A B f hf)) ∧
+      (stablePlaneSubspaceIso A B f g hf hg (coordinateCarrier C) (coordinateCarrier D)
+          hFD hGC hgf hfg).hom ≫ targetModelProjection D A B g hg hBV =
+        sourceModelProjection C A B f hf hAU ≫ e.hom := by
+  obtain ⟨A,B,f,g,hAU,hBV,hcA,hdB,hf,hg,_ha,_hb,hFD,hGC,hgf,hfg,hFval,_hGval⟩ :=
+    exists_actual_intrinsic_iso_paired_windows e he hC hD c
+  exact ⟨A,B,f,g,hf,hg,hAU,hBV,hFD,hGC,hgf,hfg,hcA,hdB,
+    stable_pullback_vanishingIdeal A B f g hf hg (coordinateCarrier C) (coordinateCarrier D)
+      hFD hGC hgf hfg,
+    stable_pullback_marked A B f g hf hg (coordinateCarrier C) (coordinateCarrier D)
+      hFD hGC hgf hfg,
+    stable_specified_sheaf_square e he A B f g hf hg hAU hBV hFD hGC hgf hfg hFval⟩
+end OriginalModels
+
+end
+end TranscendentalNakamaye.Pending.HironakaActualIntrinsicStableIdealSquare
