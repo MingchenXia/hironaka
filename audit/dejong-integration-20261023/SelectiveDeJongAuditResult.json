@@ -1,0 +1,65 @@
+{
+  "result": "PASS",
+  "reviewer": "/root/source_export_audit",
+  "scope": "SELECTIVE import Hironaka.DeJong ONLY; not full Hironaka root. Fresh compiled selective-import proof/constant audit after ROOT leaf build.",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "/workspace/scratch/dejong-hironaka-integration/SelectiveDeJongAudit.lean"
+  ],
+  "cwd": "/workspace/hironaka",
+  "returncode": 0,
+  "build_command_used": false,
+  "output_artifact_option_used": false,
+  "source_or_git_mutations": false,
+  "no_shared_olean_or_ilean_output_written": true,
+  "rerun_after_PASS": false,
+  "summary": {
+    "wrapper_module_owners": 2,
+    "scope": "SELECTIVE import Hironaka.DeJong only; not full Hironaka root",
+    "result": "PASS",
+    "internal_owned_constants_included": 8894,
+    "declarations": 23612,
+    "deJong_owners_outside_namespace": 910,
+    "deJong_module_owners": 23610,
+    "deJong_imported_modules": 1112,
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "raw_files_sha256": {
+    "SelectiveDeJongAudit.lean": "dd974d1683ccc50340363e41cd21cd2a3f880770f6785f28b34bb300b748e51d",
+    "SelectiveDeJongAudit.log": "2e0bc6e50eb21618623dc9417e2cac062010aad6a2c45a73410627766ce44e63",
+    "SelectiveDeJongAuditRows.json": "6c05139835547047f1b544b4ef156e941fbbaab136907f264172c9262de7ccaa",
+    "SelectiveDeJongAuditSummary.json": "6892a76ecd3785f2488742ed9ce9eccb1b5ca39141e14800932dea20c7331a3e"
+  },
+  "integrated_sources_sha256": {
+    "Hironaka/DeJong.lean": "588a898076413a9ceb23e9926c67311eadd5163907acab056bfb29318cb153b2",
+    "vendor/DeJongAlterations/SOURCE.json": "8990344bd2bec80086eb137ea18a052e0314475f32b775889de6728f71ae4eb9",
+    "vendor/DeJongAlterations/lakefile.toml": "52b54040405f034b1e20845e4ab2c81dcc565a3689901ca95a2b66ad8a1d327e",
+    "vendor/DeJongAlterations/lake-manifest.json": "060d5aa9ed61d71d0478ee416c0a2548e8312c2530b84b44e73bab1b5a8a9df3",
+    "lakefile.toml": "26d583e808866678003f1f60caff33eefddab330d314bddd23144a33e1e9d4dd",
+    "lake-manifest.json": "3e4b1e4f64c1962e89a4fa955ec369af4b5bb35db01a810e4e0eaa0266b0cb39"
+  },
+  "compiled_endpoints": {
+    "Hironaka.deJongAlterationTheorem": "forall (k : Type u) [Field k], DeJongAlterations.DeJongAlterationTheorem k",
+    "Hironaka.exists_alterationWithBoundary": "forall (k : Type u) [Field k] (X : Scheme) (p : X to Spec k), IsVariety p -> forall closed Z, Z != top -> Nonempty (AlterationWithBoundary p Z)",
+    "native_upstream_endpoint": "forall (k : Type u) [Field k], DeJongAlterations.DeJongAlterationTheorem k",
+    "all_three_recursive_print_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "coverage": "EVERY environment constant in DeJongAlterations namespace OR owned by any imported DeJongAlterations module OR exact wrapper module Hironaka.DeJong; no private/generated/internal exclusion. Program counted isInternalDetail only for an included-statistic, never filtered on it. Both dependency and wrapper ownership counts guarded nonempty.",
+  "notes": [
+    "All23612 individual audit rows revalidated against standard3 allowlist.",
+    "910 counts dependency module-owned constants outside public DeJongAlterations namespace; this includes private/generated as well as adopted native-namespace APIs.",
+    "8894 isInternalDetail=true included constants; all compiler-generated constants are audited regardless of this classification.",
+    "ROOT combined full Hironaka root audit remains separate."
+  ],
+  "observed_at_utc": "2026-10-23T00:07:52.460043+00:00"
+}

@@ -1,0 +1,62 @@
+{
+  "status": "PASS_STATIC_SOURCE_ONLY_COMBINED_BUILD_NOT_STARTED",
+  "utc": "2026-10-25T06:53:13.496745+00:00",
+  "mechanical_receipt_sha256": "bb87c03b72611b3ab8913f01ca5b1eae768f3caabbf7dc3abbebdd24d5b268d9",
+  "preparation_script_sha256": "7e3c55f16e394878585797b1fb7c1ea066dc2a07eb8d974271966238b2855396",
+  "source_only_prepare_exit": 0,
+  "source_only_noop_check_exit": 0,
+  "vendored_dejong_source_checker": {
+    "command": "python3 scripts/check_dejong_source.py",
+    "exit": 0,
+    "stdout": "de Jong source check: 1112 exact proof modules; complete import closure; dependency pins match"
+  },
+  "all_new_17_modules_source_reachable": true,
+  "total_hironaka_source_import_closure": 1560,
+  "new_whole_chapters": 14,
+  "new_complete_written_proofs": 52,
+  "git_diff_check_exit": 0,
+  "only_modified_preexisting_tracked_files": [
+    "Hironaka.lean",
+    "STATUS.md",
+    "blueprint/extensions.tex"
+  ],
+  "original_worktree_head": "668ccdac96b962a30f2f12fff2b3f4fbda20ef75",
+  "original_worktree_clean": true,
+  "new_worktree_lake_cache_absent": true,
+  "README_main_unchanged_sha256": "bbedb6f615dc08df7013dfc3e594319375c7208ce5bb339cba666d8231739bc0",
+  "STATUS_sha256": "6c4c809f66c2f367c06dd40f818786e1bccc98af997ce399309a97b1e25f76e1",
+  "build_cache_inventory_readonly": {
+    "lib/lean/.olean": {
+      "files": 1562,
+      "bytes": 1027617600
+    },
+    "lib/lean/.hash": {
+      "files": 3124,
+      "bytes": 49984
+    },
+    "lib/lean/.trace": {
+      "files": 1562,
+      "bytes": 6024355
+    },
+    "lib/lean/.ilean": {
+      "files": 1562,
+      "bytes": 76715751
+    },
+    "ir/setup_json": {
+      "files": 1562,
+      "bytes": 4536005638
+    },
+    "ir/c_hash": {
+      "files": 1562,
+      "bytes": 24992
+    },
+    "ir/.c": {
+      "files": 1562,
+      "bytes": 10953778
+    }
+  },
+  "resource_plan": "Copy only compatible standalone lib/lean plus corresponding .c/.c.hash into a separate cache after root coordination; never copy .setup.json, symlink or hardlink old outputs. DeJong vendor has no known existing cache here; budget cold vendor separately. Freshness sentinel before any broad build.",
+  "builds_kernels_or_Expr_replays": 0,
+  "all_jobs_reaped": true,
+  "commits_pushes_remote_merges": 0
+}

@@ -1,11 +1,39 @@
 # Current scope
 
-This table describes the accepted native formalization at
-[the current native checkpoint](https://github.com/MingchenXia/archon-nakamaye/commit/eef2a7286318c05dda607a2909399937ccaa4c27).
-The standalone export is recorded separately below; native verification
-metrics refer to the linked native checkpoint.
+## De Jong alterations over arbitrary fields
 
-Four original gaps are closed: **G2, G5, G6 and G7**. General
+The proved native alteration theorem is integrated through the local package
+[`vendor/DeJongAlterations`](vendor/DeJongAlterations). Its original native
+producer sources are extracted from source commit
+`187095a1888ecadb1f365e6d4dc0cb75dcd61eff`, preserving their bytes and
+contributor/license headers. The proof sources are included in this repository;
+building the integration does not require access to the private source repository.
+`Hironaka.deJongAlterationTheorem` has only `(k : Type u) [Field k]` as inputs;
+`Hironaka.exists_alterationWithBoundary` specializes it to an actual variety and
+prescribed proper closed subset. Both are available from `import Hironaka.DeJong`
+and the full `import Hironaka`.
+
+The output retains the original variety, genuine alteration, regular projective
+compactification and the whole strict SNC boundary, with its exact prescribed
+support. Geometric integrality and perfectness are not assumed. The separate
+perfect-field generically-étale refinement and other independent paper results
+are outside this integration. See [the API and source provenance](docs/DEJONG.md).
+Combined-build and recursive-axiom verification for this integration is recorded
+in [its verification receipt](audit/dejong-integration-20261023/validation.json).
+The earlier analytic verification numbers below describe their own checkpoints.
+
+## Standalone complex-analytic scope
+
+The table below describes the standalone analytic export at the fixed
+[fourteen-module checkpoint](https://github.com/MingchenXia/hironaka/commit/668ccdac96b962a30f2f12fff2b3f4fbda20ef75),
+whose native source is
+[`eef2a728`](https://github.com/MingchenXia/archon-nakamaye/commit/eef2a7286318c05dda607a2909399937ccaa4c27).
+
+The separately advanced [native checkpoint](https://github.com/MingchenXia/archon-nakamaye/commit/6ae2122a9cf82f1469b68fe41e8e6cf115075d6a)
+has five closed goals (G2, G5, G6, G7 and G9); its 67-module increment
+is not exported here, where G9 remains open.
+
+Four original gaps are closed in this export: **G2, G5, G6 and G7**. General
 **G1, G3, G4, G8 and G9 remain open**. These labels describe mathematical scope.
 
 | Gap | Status and scope |
@@ -38,15 +66,16 @@ records the full mapping and checks.
 
 ## Verification and source
 
-The latest native increment contains 14 independently checked modules,
+The fixed native increment underlying this export contains 14 independently checked modules,
 324 actual compiled-root observations, 52 complete proof nodes and six
 geometric definitions. Its bounded aggregate passes 5,657 warm build jobs.
 These are native verification metrics.
 
 The standalone export adds the same 14 whole modules and proof chapters,
 plus eight complete original auxiliary declarations in three support modules.
-The full build passes 5,707 jobs with zero warnings; all 81 local blueprint
-bindings resolve. The public axiom check covers 14,001 declarations.
+At that standalone checkpoint the full build passed 5,707 jobs with zero
+warnings; all 81 local blueprint bindings resolved. Its public axiom check
+covered 14,001 declarations.
 
 [The current verification receipt](audit/phase5-original-producers-20261021/publication-verification.json)
 records source replay, exact new-module kernel checks, actual compiled-payload
@@ -55,6 +84,13 @@ has separate typed/source and no-logical-dependent checks; raw structural
 differences remain recorded, and parser-body equality is not claimed.
 The previous [checkpoint](audit/phase4-semantic-producers-20261021/publication-verification.json)
 and accepted mathematical sources remain unchanged.
+
+The [combined integration verification](audit/phase5-main-integration-20261025/publication-verification.json)
+records the actual rebuild of both libraries under main's unchanged
+configuration, followed by the default build, test and 83 current bindings.
+Its test checks 48,147 registered names with standard axioms;
+vendor warning logs are retained. The 17 historical kernel checks are
+reused only after exact identity of their rebuilt kernel artifacts.
 
 Two complete modules, `HironakaOriginalGlobalOffZero` and
 `HironakaOriginalGlobalProperModification`, remain deferred because an existing

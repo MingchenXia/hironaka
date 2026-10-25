@@ -9,6 +9,7 @@ import Hironaka.API
 import Hironaka.API2
 import Hironaka.API3
 import Hironaka.API4
+import Hironaka.DeJong
 import Hironaka.Analytic.AnalyticDescendingChain
 import Hironaka.Analytic.AnalyticDimensionBasics
 import Hironaka.Analytic.AnalyticGermDecomposition
