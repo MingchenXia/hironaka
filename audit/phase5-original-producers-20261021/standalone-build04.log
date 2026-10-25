@@ -1,0 +1,36 @@
+ℹ [4740/4956] Replayed Hironaka.Support.MarkedIdealAddEquationExact
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:4:0: equations:
+@[backward_defeq] theorem Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} : ∀ {n : ℕ} {M : Type u}
+  [inst : TopologicalSpace M] [inst_1 : ChartedSpace (Hironaka.ComplexModel n) M]
+  (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M),
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+info: Hironaka/Support/MarkedIdealAddEquationExact.lean:5:0: Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add.eq_1.{u} {n : ℕ} {M : Type u} [TopologicalSpace M]
+  [ChartedSpace (Hironaka.ComplexModel n) M] (𝔪₁ 𝔪₂ : Hironaka.MarkedIdeals.MarkedIdeal n M) :
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂ =
+    { N := 𝔪₁.N, E := 𝔪₁.E,
+      ideal :=
+        Hironaka.RestrictedIdealExtension.sumIdeal (Hironaka.IdealWeightPowers.idealPow 𝔪₁.ideal 𝔪₂.d)
+          (Hironaka.IdealWeightPowers.idealPow 𝔪₂.ideal 𝔪₁.d),
+      d := 𝔪₁.d * 𝔪₂.d }
+✖ [5648/5707] Building Hironaka.Support.ZeroCoordinateDerivativeUnivExact (2.6s)
+trace: .> LEAN_PATH=/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Cli/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/batteries/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/Qq/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/aesop/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/proofwidgets/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/importGraph/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/plausible/.lake/build/lib/lean:/workspace/archon-nakamaye/TranscendentalNakamaye/.lake/packages/mathlib/.lake/build/lib/lean:/workspace/hironaka/.lake/build/lib/lean /workspace/archon-nakamaye/work/lean-runtime/lean-4.33.1-linux/bin/lean /workspace/hironaka/Hironaka/Support/ZeroCoordinateDerivativeUnivExact.lean -o /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ZeroCoordinateDerivativeUnivExact.olean -i /workspace/hironaka/.lake/build/lib/lean/Hironaka/Support/ZeroCoordinateDerivativeUnivExact.ilean -c /workspace/hironaka/.lake/build/ir/Hironaka/Support/ZeroCoordinateDerivativeUnivExact.c --setup /workspace/hironaka/.lake/build/ir/Hironaka/Support/ZeroCoordinateDerivativeUnivExact.setup.json --json
+error: Hironaka/Support/ZeroCoordinateDerivativeUnivExact.lean:55:28: Unknown identifier `holomorphicAt_of_mem_iterDerivIdeal`
+error: Hironaka/Support/ZeroCoordinateDerivativeUnivExact.lean:53:13: unsolved goals
+n : ℕ
+M : Type u_1
+inst✝² : TopologicalSpace M
+inst✝¹ : ChartedSpace (ComplexModel n) M
+inst✝ : IsComplexManifold n M
+𝔞 : GermIdeal n M
+h𝔞 : ∀ (x : M) (g : M → ℂ), 𝔞.mem x g → HolomorphicAt n g x
+j : ℕ
+⊢ derivIdealAlong univ (iterDerivIdeal 𝔞 j) = derivIdeal (iterDerivIdeal 𝔞 j)
+error: Lean exited with code 1
+Some required targets logged failures:
+- Hironaka.Support.ZeroCoordinateDerivativeUnivExact
+error: build failed

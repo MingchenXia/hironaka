@@ -1,0 +1,4 @@
+theorem homogenizedIdealAlong_univ (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) (μ : ℕ) :
+    homogenizedIdealAlong univ 𝔞 μ = HomogenizedIdeal.homogenizedIdeal 𝔞 μ := by
+  rw [homogenizedIdeal_eq_homSum]
+  exact homSum_congr (fun i _ => iterDerivIdealAlong_univ h𝔞 i) (iterDerivIdealAlong_univ h𝔞 (μ - 1))

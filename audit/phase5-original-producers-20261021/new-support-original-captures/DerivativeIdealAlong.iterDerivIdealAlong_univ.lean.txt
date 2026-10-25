@@ -1,0 +1,6 @@
+theorem iterDerivIdealAlong_univ (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) :
+    ∀ j, iterDerivIdealAlong univ 𝔞 j = iterDerivIdeal 𝔞 j
+  | 0 => rfl
+  | j + 1 => by
+    rw [iterDerivIdealAlong, iterDerivIdealAlong_univ h𝔞 j, iterDerivIdeal_succ,
+      derivIdealAlong_univ (holomorphicAt_of_mem_iterDerivIdeal h𝔞 j)]

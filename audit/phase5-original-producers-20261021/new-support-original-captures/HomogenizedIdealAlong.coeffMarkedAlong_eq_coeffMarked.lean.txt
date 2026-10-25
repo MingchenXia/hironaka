@@ -1,0 +1,6 @@
+theorem coeffMarkedAlong_eq_coeffMarked {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) : coeffMarkedAlong 𝔪 = coeffMarked 𝔪 := by
+  unfold coeffMarkedAlong coeffMarked
+  congr 1
+  funext i
+  exact derivMarkedAlong_eq_derivMarked hN h𝔞 i

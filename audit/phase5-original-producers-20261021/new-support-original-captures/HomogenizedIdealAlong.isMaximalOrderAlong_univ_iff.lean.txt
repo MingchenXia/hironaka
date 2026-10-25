@@ -1,0 +1,8 @@
+theorem isMaximalOrderAlong_univ_iff (h𝔞 : 𝔞.IsCoherent) {μ : ℕ} :
+    IsMaximalOrderAlong univ 𝔞 μ ↔ MaximalContact.IsMaximalOrder 𝔞 μ := by
+  refine ⟨CompanionReduction.isMaximalOrder_of_forall_notMem h𝔞, fun h x hx => ?_⟩
+  have hx' : x ∈ cosupport n univ (iterDerivIdeal 𝔞 μ) 1 := by
+    refine MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal 𝔞 1 μ ?_
+    rwa [Nat.add_comm]
+  have h1 := (vanishesToOrderOn_one_iff hx'.1 (holomorphicAt_const 1)).mp (hx'.2 _ (h x))
+  exact one_ne_zero h1
