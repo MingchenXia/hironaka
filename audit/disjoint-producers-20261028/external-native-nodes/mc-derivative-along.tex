@@ -1,0 +1,15 @@
+\begin{definition}[Derivative ideal along a submanifold]
+\label{mc:derivative-along}
+\uses{hir:derivative-ideal,hir:marked-ideal}
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.DerivativeIdealAlong.fieldDeriv,TranscendentalNakamaye.Pending.DerivativeIdealAlong.IsTangentField,TranscendentalNakamaye.Pending.DerivativeIdealAlong.DerivGenAlong,TranscendentalNakamaye.Pending.DerivativeIdealAlong.derivIdealAlong,TranscendentalNakamaye.Pending.DerivativeIdealAlong.iterDerivIdealAlong,TranscendentalNakamaye.Pending.DerivativeIdealAlong.holomorphicAt_fieldDeriv}
+\leanok
+Let \(N\subset M\) and \(x\in M\). A holomorphic vector field \(\xi=\sum_m\xi_m\,\partial^e_{e_m}\) near \(x\) (in a chart \(e\) at \(x\)) is \emph{tangent to
+\(N\) at \(x\)} if \(\xi(g)\in(\mathcal I_N)_x\) for every \(g\in(\mathcal I_N)_x\). The \emph{derivative ideal of \(\mathfrak a\) along \(N\)},
+\(\mathcal D_N(\mathfrak a)\), is generated at \(x\) by the germs of \(\mathfrak a_x\), the germs of \((\mathcal I_N)_x\), and the derivatives \(\xi(f)\) of
+\(f\in\mathfrak a_x\) along vector fields \(\xi\) tangent to \(N\) at \(x\); \(\mathcal D_N^0(\mathfrak a)=\mathfrak a\) and
+\(\mathcal D_N^{j+1}(\mathfrak a)=\mathcal D_N(\mathcal D_N^j(\mathfrak a))\).
+\end{definition}
+For a closed submanifold \(N\) the derivations of \(\mathcal O_N\) are induced by the ambient derivations preserving \(\mathcal I_N\), so the restriction
+of \(\mathcal D_N(\mathfrak a)\) to \(N\) is the derivative ideal of \(\mathfrak a|_N\) in the sense of Bierstone and Milman.
+

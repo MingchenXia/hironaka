@@ -1,0 +1,103 @@
+\begin{theorem}[The lower value of Step 1bb: any tangent direction, biholomorphisms, open sets, representatives, empty prefixes]
+\label{mc:contact-lower-value}
+\uses{mc:tangent-change-opens,mc:contact-stage-kept,mc:contact-marked-canonical,hir:tower-isomorphism,mc:tower-isomorphism-basic,mc:tower-isomorphism-transform,mc:tower-isomorphism-append,hir:step-one-value,hir:step-one-value-masked,hir:step-one-value-masked-basic,hir:step-one-lower-domain,hir:step-one-compare,hir:biholomorphism-invariance,hir:open-restriction-tower,hir:open-restriction-marked,hir:canonical-segments,bcalc:restrict-nested,bcalc:tower-restrict,mc:restriction-operations-along,mc:contact-stage-tail,mc:contact-representative,hir:marked-equivalence-basic,hir:restricted-equivalence,mc:contact-empty-prefix,bcalc:restrict-empty-tower,hir:wellformed-tower,hir:tower-split,hir:geo-transform-basic,hir:tower-sequence,hir:centre-function}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_eq,TranscendentalNakamaye.Pending.ContactLowerValue.origMembers_isTowerIso,TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_isTowerIso,TranscendentalNakamaye.Pending.ContactLowerValue.origMembers_restrict,TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_restrict,TranscendentalNakamaye.Pending.ContactLowerValue.origMembers_restrictEquiv,TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_representative,TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_emptyPrefix,TranscendentalNakamaye.Pending.ContactLowerValue.centresAvoid_of_isEmptyTower,TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_emptyPrefix_rebase,TranscendentalNakamaye.Pending.ContactLowerValue.lowerValueL_zero_emptyPrefix_refl}
+\leanok
+Let \(\underline{\mathcal J}=(X,N,E,\mathfrak a,d)\) be well formed with \(d\ge1\), \(\overline{\underline{\mathcal J}}=\mathcal C_N(\mathcal H_N(\underline{\mathcal J}))\) with the divisor
+\(E\), \(\operatorname{inv}\) a resolution invariant (Definition~\ref{hir:centre-function}), and \(\underline{\mathcal S}^E_{w,T_0}|_W\) the marked ideal of
+Theorem~\ref{mc:tangent-change-opens}(2). In the masked value function of Step 1 (Definition~\ref{hir:step-one-value-masked}) the lower value at level \(0\) of a point
+\(p\) along a split \(T_0T_1\) is the value of \(\operatorname{inv}\) for \(\underline{\mathcal S}^E_{w,T_0}|_W\) along \(T_1|_W\) at \(p\), where \(p_0\) is the image of \(p\) at
+the last stage of \(T_0\), \(W\) the mask of \(p_0\) and \(w\) the tangent direction chosen at the base point of \(p\); \(p\) has \emph{lower data at level \(0\)} if
+\(p_0\in W\), this marked ideal lies in the domain of \(\operatorname{inv}\), \(T_1|_W\) is a canonical segment of it and \(p\) lies in its cosupport along \(T_1|_W\).
+\begin{enumerate}
+\item (Any tangent direction.) Let \(T_0T_1\) be a multiple test blow-up of \(\overline{\underline{\mathcal J}}\) and \(p\in\operatorname{cosupp}\overline{\underline{\mathcal J}}_{T_0T_1}\)
+with lower data at level \(0\). Let \(u\) be a tangent direction of \((\mathfrak a|_N,d)\) along \(N\) on an open set \(U\), and \(V\subset T_0^{-1}U\) an open set containing
+\(p_0\) and meeting none of the first \(\#E\) members of the divisor of \(\overline{\underline{\mathcal J}}_{T_0}\), such that \(\underline{\mathcal S}^E_{u,T_0}|_V\) lies in the
+domain of \(\operatorname{inv}\) and \(T_1|_V\) is a canonical segment of it. Then the lower value of \(p\) is the value of \(\underline{\mathcal S}^E_{u,T_0}|_V\) along
+\(T_1|_V\) at \(p\).
+\item (Biholomorphisms.) Let \(\Phi\colon X'\to X\) be a biholomorphism, \(T_0'\) a tower isomorphic to \(T_0\) over \(\Phi\) with last-stage biholomorphism \(\chi_0\)
+(Definition~\ref{hir:tower-isomorphism}), and \(T_1'\) isomorphic to \(T_1\) over \(\chi_0\) with last-stage biholomorphism \(\chi\). If \(T_0\) is a multiple test blow-up of
+\(\overline{\underline{\mathcal J}}\), the original members of \(\Phi^*\underline{\mathcal J}\) at the last stage of \(T_0'\) are the \(\chi_0\)-preimages of those of
+\(\underline{\mathcal J}\) at the last stage of \(T_0\). If \(T_0T_1\) is a multiple test blow-up of \(\overline{\underline{\mathcal J}}\), \(\chi(p')\) lies in
+\(\operatorname{cosupp}\overline{\underline{\mathcal J}}_{T_0T_1}\), \(p'\) has lower data at level \(0\) for \(\Phi^*\underline{\mathcal J}\) along \(T_0'T_1'\) and \(\chi(p')\)
+has lower data at level \(0\) for \(\underline{\mathcal J}\) along \(T_0T_1\), then the lower values of \(p'\) and of \(\chi(p')\) agree.
+\item (Open sets.) Let \(U\subset X\) be open, \(T_0'\) a tower over \(U\) isomorphic to \(T_0|_U\) over the identity of \(U\) with last-stage biholomorphism
+\(\chi_0\), and \(T_1'\) isomorphic to \(T_1|_{T_0^{-1}U}\) over \(\chi_0\) with last-stage biholomorphism \(\chi\). If \(T_0\) is a multiple test blow-up of
+\(\overline{\underline{\mathcal J}}\), the original members of \(\underline{\mathcal J}|_U\) at the last stage of \(T_0|_U\) are the traces on \(T_0^{-1}U\) of those of
+\(\underline{\mathcal J}\) at the last stage of \(T_0\). If \(T_0T_1\) is a multiple test blow-up of \(\overline{\underline{\mathcal J}}\), \(\chi(p')\), a point of the last stage of
+\(T_0T_1\) over \(U\), lies in \(\operatorname{cosupp}\overline{\underline{\mathcal J}}_{T_0T_1}\), \(p'\) has lower data at level \(0\) for \(\underline{\mathcal J}|_U\) along
+\(T_0'T_1'\) and \(\chi(p')\) has lower data at level \(0\) for \(\underline{\mathcal J}\) along \(T_0T_1\), then the lower values of \(p'\) and of \(\chi(p')\) agree.
+\item (Representatives.) Restricted-equivalent marked ideals \(\underline{\mathcal J}\simeq\underline{\mathcal J}'\) (Definition~\ref{hir:restricted-equivalence}) have the same original
+members along every tower. If \(\underline{\mathcal J}'\) has a coherent ideal, \(T_0T_1\) is a multiple test blow-up of \(\overline{\underline{\mathcal J}}\) and
+\(p\in\operatorname{cosupp}\overline{\underline{\mathcal J}}_{T_0T_1}\) has lower data at level \(0\) along \(T_0T_1\) both for \(\underline{\mathcal J}\) and for
+\(\underline{\mathcal J}'\), then its two lower values agree.
+\item (Empty prefixes.) Let \(P\) be a tower over \(X\) all of whose centres are empty and \(\underline{\mathcal J}_P\) the transform. If \(PH_0T_1\) is a multiple test
+blow-up of \(\overline{\underline{\mathcal J}}\) and \(z\) a point of its cosupport with lower data at level \(0\) for \(\underline{\mathcal J}\) along the split \((PH_0)T_1\)
+and for \(\underline{\mathcal J}_P\) along the split \(H_0T_1\), the two lower values of \(z\) agree. If \(P=P_1P_2\) and \(z\) has lower data at level \(0\) for
+\(\underline{\mathcal J}\) along the split \(P_1(P_2T_1)\) and for \(\underline{\mathcal J}_P\) along the split of \(T_1\) with the empty tower as head, the two lower values
+of \(z\) agree as well; in particular, for \(P_1\) the empty tower, lower data along the splits of \(PT_1\) and of \(T_1\) with the empty tower as
+head give equal lower values. (Every tower with only empty centres has its centres missing every open set.)
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\leanok
+(1) Let \(x\) be the base point of \(p\) and \(w\) the tangent direction chosen at \(x\). Since \(p_0\) lies in its mask, \(x\) lies in the open set of \(w\), so \(w\) is a
+tangent direction there (Lemma~\ref{hir:step-one-compare}); \(x\) lies in \(\operatorname{cosupp}\underline{\mathcal J}\), because the image of a point of the cosupport along a
+multiple test blow-up lies in the cosupport and \(\overline{\underline{\mathcal J}}\) has the cosupport of \(\underline{\mathcal J}\) (Lemma~\ref{hir:step-one-lower-domain}). The mask lies
+over the open set of \(w\) and misses the original members, and \(V\) lies over \(U\) and misses them. Theorem~\ref{mc:tangent-change-opens}(2) for \(w\) and \(u\) at \(x\), with the
+open sets \(W\) and \(V\), compares the two values at \(p\): \(p\) lies over \(W\cap V\), over the neighbourhood of \(x\) given there, and in the cosupport.
+(2) By Theorem~\ref{mc:contact-stage-kept}(1), \(\mathcal C(\mathcal H(\Phi^*\underline{\mathcal J}))=\Phi^*\overline{\underline{\mathcal J}}\), and by
+Lemma~\ref{mc:tower-isomorphism-transform} its transform along \(T_0'\) is the \(\chi_0\)-pullback of the transform of \(\overline{\underline{\mathcal J}}\) along \(T_0\), whose divisor
+consists of the preimages of the members; this gives the original members. The concatenations \(T_0'T_1'\) and \(T_0T_1\) are isomorphic over \(\Phi\) with last-stage
+biholomorphism \(\chi\) (Lemma~\ref{mc:tower-isomorphism-append}), so \(T_0'T_1'\) is a multiple test blow-up of \(\Phi^*\overline{\underline{\mathcal J}}\) and \(p'\) lies in its
+cosupport (Lemma~\ref{mc:tower-isomorphism-transform}). The image of \(\chi(p')\) at the last stage of \(T_0\) is \(\chi_0(p_0')\), \(p_0'\) the image of \(p'\) at the last stage of
+\(T_0'\), and its base point is \(\Phi(x')\), \(x'\) the base point of \(p'\) (Lemma~\ref{mc:tower-isomorphism-basic}). Let \(W\) be the mask of \(\chi_0(p_0')\), \(w\) the tangent
+direction chosen at \(\Phi(x')\) and \(W'=\chi_0^{-1}(W)\). By Theorem~\ref{mc:contact-stage-kept}(1), \(\underline{\mathcal S}^E_{w\circ\Phi,T_0'}|_{W'}\), formed from
+\(\Phi^*\underline{\mathcal J}\), lies in the domain, \(T_1'|_{W'}\) is a canonical segment of it, and its value at \(p'\) is the value of \(\underline{\mathcal S}^E_{w,T_0}|_W\) at
+\(\chi(p')\), the lower value of \(\chi(p')\). The function \(w\circ\Phi\) is a tangent direction of \(\Phi^*\underline{\mathcal J}\) on the preimage of the open set of \(w\)
+(Theorem~\ref{mc:contact-marked-canonical}), over which \(W'\) lies; \(W'\) contains \(p_0'\) and misses the original members of \(\Phi^*\underline{\mathcal J}\), the preimages of those
+of \(\underline{\mathcal J}\), which \(W\) misses. Since \(\Phi^*\underline{\mathcal J}\) is well formed (Lemma~\ref{hir:biholomorphism-invariance}), (1) for \(\Phi^*\underline{\mathcal J}\),
+\(w\circ\Phi\) and \(W'\) gives the lower value of \(p'\) as this value.
+(3) By Theorem~\ref{mc:contact-stage-kept}(2), \(\mathcal C(\mathcal H(\underline{\mathcal J}|_U))=\overline{\underline{\mathcal J}}|_U\), and its transform along \(T_0|_U\) is the
+restriction of the transform of \(\overline{\underline{\mathcal J}}\) along \(T_0\) to \(T_0^{-1}U\) (Lemma~\ref{hir:open-restriction-tower}); this gives the original members.
+The tower \(T_0|_U\) followed by \(T_1|_{T_0^{-1}U}\) is a multiple test blow-up of \(\overline{\underline{\mathcal J}}|_U\) whose cosupport is the trace of
+\(\operatorname{cosupp}\overline{\underline{\mathcal J}}_{T_0T_1}\) (Lemmas~\ref{hir:open-restriction-tower} and~\ref{hir:canonical-segments}); along the isomorphism over the
+identity, under which \(\overline{\underline{\mathcal J}}|_U\) pulls back to itself (Lemma~\ref{mc:restriction-operations-along}), so is \(T_0'T_1'\), and \(p'\) lies in its
+cosupport (Lemmas~\ref{mc:tower-isomorphism-append} and~\ref{mc:tower-isomorphism-transform}). The images of \(\chi(p')\) in the last stages of \(T_0|_U\) and \(T_0\) agree
+(Lemma~\ref{bcalc:tower-restrict}). Let \(W\) be the mask of the image \(p_0\) of \(\chi(p')\) at the last stage of \(T_0\), \(w\) the tangent direction chosen at its base
+point, and \(W_1=W\cap T_0^{-1}U\), which contains \(p_0\). By Lemma~\ref{bcalc:restrict-nested}(2), \(\underline{\mathcal S}^E_{w,T_0}|_{W_1}\) lies in the domain, \(T_1|_{W_1}\)
+is a canonical segment of it, and at \(\chi(p')\), which lies in its cosupport (the trace of \(\operatorname{cosupp}\overline{\underline{\mathcal J}}_{T_0T_1}\),
+Theorem~\ref{mc:contact-stage-tail}), its value is the lower value of \(\chi(p')\). Theorem~\ref{mc:contact-stage-kept}(2) passes to the marked ideal formed from
+\(\underline{\mathcal J}|_U\) along \(T_0|_U\) with \(w|_U\) on \(W_1\), seen in \(T_0^{-1}U\), and Theorem~\ref{mc:contact-stage-kept}(1), along the isomorphisms over the identity
+(with \(\mathrm{id}^*=\mathrm{id}\)), to the one formed along \(T_0'\) on \(W'=\chi_0^{-1}(W_1)\), with the same value at \(p'\). The function \(w|_U\) is a tangent direction of
+\(\underline{\mathcal J}|_U\) on the trace of the open set of \(w\) (Theorem~\ref{mc:contact-marked-canonical}), over which \(W'\) lies; \(W'\) contains the image of \(p'\) and
+misses the original members of \(\underline{\mathcal J}|_U\) at the last stage of \(T_0'\): by (2) for the identity of \(U\) these are the \(\chi_0\)-preimages of those at
+the last stage of \(T_0|_U\), which are the traces of those of \(\underline{\mathcal J}\), missed by \(W\). Since \(\underline{\mathcal J}|_U\) is well formed
+(Lemma~\ref{hir:open-restriction-marked}), (1) for \(\underline{\mathcal J}|_U\), \(w|_U\) and \(W'\) gives the lower value of \(p'\) as this value.
+(4) The divisor of a transform depends only on the divisor and the tower (Lemma~\ref{hir:marked-equivalence-basic}), and \(\overline{\underline{\mathcal J}}\),
+\(\overline{\underline{\mathcal J}'}\) carry the common divisor \(E\); this gives the original members. \(\underline{\mathcal J}'\) is well formed (same submanifold and divisor,
+coherent ideal), and \(\overline{\underline{\mathcal J}}\simeq\overline{\underline{\mathcal J}'}\) (Theorem~\ref{mc:contact-representative}), so the two have the same multiple test blow-ups
+and cosupports (Lemma~\ref{hir:marked-equivalence-basic}). Let \(x\) be the base point of \(p\), \(w\) the tangent direction of \(\underline{\mathcal J}\) chosen at \(x\) and \(W\)
+the mask of the image \(p_0\) of \(p\) for \(\underline{\mathcal J}\). By Theorem~\ref{mc:contact-representative} there are an open \(O\ni x\) and a tangent direction \(v\) of
+\((\mathfrak a'|_N,d)\) along \(N\) on \(O\) with \(v=w\) on \(N\cap O\). On \(W_1=W\cap T_0^{-1}O\), which contains \(p_0\), \(\underline{\mathcal S}^E_{w,T_0}|_{W_1}\) lies in the
+domain with \(T_1|_{W_1}\) a canonical segment (Lemma~\ref{bcalc:restrict-nested}(2)); by Theorem~\ref{mc:contact-stage-kept}(4) so does the marked ideal formed from
+\(\underline{\mathcal J}'\) with \(v\) on \(W_1\), with the same values on the cosupport, where \(p\) lies (Theorem~\ref{mc:contact-stage-tail}). \(W_1\) lies over the open sets of
+\(w\) and of \(v\) and misses the common original members; (1) for \(\underline{\mathcal J}\) with \(w\) and for \(\underline{\mathcal J}'\) with \(v\), on \(W_1\), gives the two lower values
+as these two equal values.
+(5) \(\underline{\mathcal J}_P\) is well formed with mark \(d\) (Lemmas~\ref{hir:wellformed-tower} and~\ref{hir:geo-transform-basic}; \(P\) is a multiple test blow-up,
+Lemma~\ref{hir:canonical-segments}), \(H_0T_1\) is a multiple test blow-up of \(\mathcal C(\mathcal H(\underline{\mathcal J}_P))\) and \(z\) lies in its cosupport
+(Theorem~\ref{mc:contact-empty-prefix}(2), restricted-equivalent marked ideals having the same multiple test blow-ups and cosupports, Lemma~\ref{hir:marked-equivalence-basic}, and
+concatenation is associative, Lemma~\ref{hir:tower-sequence}). Let \(W\) be the mask of the image \(z_0\) of \(z\) for \(\underline{\mathcal J}\) at the last stage of \(PH_0\),
+\(w\) the tangent direction chosen at the base point, \(W'\) the mask of \(z_0\) for \(\underline{\mathcal J}_P\) at the last stage of \(H_0\), and \(W_1=W\cap W'\), which
+contains \(z_0\). By Lemma~\ref{bcalc:restrict-nested}(2), \(\underline{\mathcal S}^E_{w,PH_0}|_{W_1}\) lies in the domain with \(T_1|_{W_1}\) a canonical segment; by
+Theorem~\ref{mc:contact-empty-prefix}(4) so does the marked ideal formed from \(\underline{\mathcal J}_P\) along \(H_0\) with \(w\circ p_P\) on \(W_1\), with the same values on the
+cosupport, where \(z\) lies (Theorem~\ref{mc:contact-stage-tail}). \(W_1\) lies over the open set of \(w\), and over the preimage of that open set, on which \(w\circ p_P\) is a
+tangent direction of \(\underline{\mathcal J}_P\) (Theorem~\ref{mc:contact-empty-prefix}(3)); it misses the original members of \(\underline{\mathcal J}\) (inside \(W\)) and those of
+\(\underline{\mathcal J}_P\) (inside \(W'\)). (1) on both sides gives the two lower values as these two equal values. In the second case, the value for
+\(\underline{\mathcal J}\) along \(P_1(P_2T_1)\) is first re-based across \(P_2\), whose centres are empty (Lemma~\ref{hir:tower-split}) and so miss the mask
+(Lemma~\ref{bcalc:restrict-empty-tower}): by Lemma~\ref{hir:step-one-compare}(3) it is the value of the marked ideal formed along \(P_1P_2\) with the tangent direction chosen at the
+base point, on the preimage \(W_2\) of the mask, along \(T_1|_{W_2}\), which lies in the domain with a canonical restricted tail; then the argument above applies with \(W_2\) in
+place of \(W\) and the empty tower in place of \(H_0\). The particular case is the second one with \(P_1\) the empty tower and \(P_2=P\), the empty tower followed
+by \(P\) being \(P\) (Lemma~\ref{hir:tower-sequence}).
+\end{proof}

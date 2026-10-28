@@ -1,0 +1,155 @@
+{
+  "status": "PREPARED_TWO_COMPLETE_ORIGINAL_SUPPORT_DECLARATIONS_AND_WRITTEN_PROOFS",
+  "native_revision": "6e453e142420e6a64ccfdb5cadd15abc2379f581",
+  "support_extracts": [
+    {
+      "source_module": "TranscendentalNakamaye.Pending.CodimOnePartCanonical",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CodimOnePartCanonical.lean",
+      "source_parent_capture": "support-original-parents/CodimOnePartCanonical.lean",
+      "source_parent_sha256": "e78061640bfd6681b8dc65c3990bbf84d51ab77e6348b6f07b92701adc164e69",
+      "original_import": "Hironaka.Invariant.CodimOnePartCanonical",
+      "destination_module": "Hironaka.Support.CodimOneCanonicalEquivalenceOriginalExact",
+      "destination_path": "Hironaka/Support/CodimOneCanonicalEquivalenceOriginalExact.lean",
+      "draft_capture": "draft-source/CodimOneCanonicalEquivalenceOriginalExact.lean",
+      "draft_sha256": "396cfe8e772b77e186043d90891313f7cfd6284c2c9b6fbbb00a74d193ed3c23",
+      "destination_sha256": "396cfe8e772b77e186043d90891313f7cfd6284c2c9b6fbbb00a74d193ed3c23",
+      "original_context_segments": [
+        "open Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.CodimOnePartCanonical\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal\n  TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.HomogenizedGlueingTower TranscendentalNakamaye.Pending.MarkedIdealRestrictOpen\n  TranscendentalNakamaye.Pending.CodimOneSupportAlong TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism\n  TranscendentalNakamaye.Pending.MarkedIdealTowerTransport TranscendentalNakamaye.Pending.BoundaryCount\n  TranscendentalNakamaye.Pending.BlowupStrictSubmanifold TranscendentalNakamaye.Pending.GermIdealOrder\n  TranscendentalNakamaye.Pending.MarkedIdealEquivalence\n\nnoncomputable section\n\nvariable {n : \u2115}\n\nsection Tower\n\nvariable {X X' : CMfd.{u} n} {\ud835\udd2a : MarkedIdeal n X}\n\n",
+        "\nend Tower\n\nend\n\nend TranscendentalNakamaye.Pending.CodimOnePartCanonical\n"
+      ],
+      "original_context_prefix_ranges": [
+        [
+          65,
+          84
+        ],
+        [
+          283,
+          286
+        ]
+      ],
+      "original_context_suffix_ranges": [
+        [
+          355,
+          356
+        ],
+        [
+          439,
+          441
+        ]
+      ],
+      "selected_original_declarations": [
+        {
+          "original_name": "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_wEquiv",
+          "inclusive_lines": [
+            345,
+            353
+          ],
+          "original_text": "/-- **Equivalent marked ideals with the same `N` have the same codimension-one part along every\nmultiple test blow-up** (property (7) for the replacement of `\ud835\udd2a` by `\ud835\udcd2(\ud835\udcd7(\ud835\udd2a))`). -/\ntheorem codimOnePartAlong_geoTransformAlong_of_wEquiv {\ud835\udd2b : MarkedIdeal n X}\n    (h : MarkedIdealEquivalence.MarkedIdeal.WEquiv \ud835\udd2a \ud835\udd2b)\n    (hN : \ud835\udd2a.N = \ud835\udd2b.N) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower \ud835\udd2a T) :\n    codimOnePartAlong (geoTransformAlong \ud835\udd2a T).N (geoTransformAlong \ud835\udd2a T).ideal (geoTransformAlong \ud835\udd2a T).d =\n      codimOnePartAlong (geoTransformAlong \ud835\udd2b T).N (geoTransformAlong \ud835\udd2b T).ideal\n        (geoTransformAlong \ud835\udd2b T).d :=\n  codimOnePartAlong_congr (by rw [N_geoTransformAlong, N_geoTransformAlong, hN]) ((h.2 T).2 hT)\n",
+          "sha256": "da70599a761b64ee943b29a1f7ad77f790332a5ff0af7fd1013d6edaa74a338d"
+        }
+      ],
+      "additional_pure_support_imports": [],
+      "administrative_elaboration_contexts": [],
+      "source_type_proof_payload_changes": 0
+    },
+    {
+      "source_module": "TranscendentalNakamaye.Pending.CodimOnePartTowerAlong",
+      "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CodimOnePartTowerAlong.lean",
+      "source_parent_capture": "support-original-parents/CodimOnePartTowerAlong.lean",
+      "source_parent_sha256": "73ad560297fe4851267e2bc842a895f8500f2764cbd23e5ae9d76728945f31be",
+      "original_import": "Hironaka.Invariant.CodimOnePartTowerAlong",
+      "destination_module": "Hironaka.Support.CodimOneTowerEmptyOriginalExact",
+      "destination_path": "Hironaka/Support/CodimOneTowerEmptyOriginalExact.lean",
+      "draft_capture": "draft-source/CodimOneTowerEmptyOriginalExact.lean",
+      "draft_sha256": "2175e102ee5a21a5e8cb2b0d327c47535bf21e2a773deacf71b1fbffe46e0cbb",
+      "destination_sha256": "2175e102ee5a21a5e8cb2b0d327c47535bf21e2a773deacf71b1fbffe46e0cbb",
+      "original_context_segments": [
+        "open Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.CodimOnePartTowerAlong\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal\n  TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.HomogenizedGlueingTower TranscendentalNakamaye.Pending.MarkedIdealRestrictOpen\n  TranscendentalNakamaye.Pending.CodimOneSupportAlong TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism\n  TranscendentalNakamaye.Pending.CodimOnePartCanonical TranscendentalNakamaye.Pending.GermIdealOrder\n  TranscendentalNakamaye.Pending.HomogenizedIdealAlong TranscendentalNakamaye.Pending.TangentDirectionAlong\n  TranscendentalNakamaye.Pending.MaximalContactAlongTower TranscendentalNakamaye.Pending.TransformOffCentre\n  TranscendentalNakamaye.Pending.DivisorExponentAlong TranscendentalNakamaye.Pending.CoefficientIdealRestriction\n  TranscendentalNakamaye.Pending.MarkedIdealEquivalence TranscendentalNakamaye.Pending.ContactEquivalenceAlong\n  TranscendentalNakamaye.Pending.GiraudAlong TranscendentalNakamaye.Pending.BlowupStrictSubmanifold\n\nnoncomputable section\n\nvariable {n : \u2115}\n\n/-! ### The codimension-one part along towers -/\n\nsection Tower\n\nvariable {X : CMfd.{u} n} (\ud835\udd2a : MarkedIdeal n X)\n\n",
+        "\nend Tower\n\nend\n\nend TranscendentalNakamaye.Pending.CodimOnePartTowerAlong\n"
+      ],
+      "original_context_prefix_ranges": [
+        [
+          59,
+          87
+        ]
+      ],
+      "original_context_suffix_ranges": [
+        [
+          153,
+          154
+        ],
+        [
+          373,
+          375
+        ]
+      ],
+      "selected_original_declarations": [
+        {
+          "original_name": "TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_eq_empty",
+          "inclusive_lines": [
+            142,
+            151
+          ],
+          "original_text": "/-- **If the codimension-one part along `N` is empty, it stays empty along every multiple test\nblow-up** (`\ud835\udd2a` well formed, of maximal order along `N`, `d \u2265 1`). -/\ntheorem codimOnePartAlong_geoTransformAlong_eq_empty (h\ud835\udd2a : \ud835\udd2a.IsWellFormed) (h\u03bc : 1 \u2264 \ud835\udd2a.d)\n    (hmax : IsMaximalOrderAlong \ud835\udd2a.N \ud835\udd2a.ideal \ud835\udd2a.d) (hZ : codimOnePartAlong \ud835\udd2a.N \ud835\udd2a.ideal \ud835\udd2a.d = \u2205)\n    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower \ud835\udd2a T) :\n    codimOnePartAlong (geoTransformAlong \ud835\udd2a T).N (geoTransformAlong \ud835\udd2a T).ideal\n      (geoTransformAlong \ud835\udd2a T).d = \u2205 := by\n  have h := codimOnePartAlong_geoTransformAlong_subset \ud835\udd2a h\ud835\udd2a h\u03bc hmax T hT\n  rw [hZ, preimage_empty] at h\n  exact subset_empty_iff.mp h\n",
+          "sha256": "41bd92e3e3131fe2fb283cf270fa428dc7c74089bea468cc3ed95f1771e5d73a"
+        }
+      ],
+      "additional_pure_support_imports": [],
+      "administrative_elaboration_contexts": [],
+      "source_type_proof_payload_changes": 0
+    }
+  ],
+  "original_blueprint_nodes": [
+    {
+      "label": "bcalc:codim-one-part-canonical",
+      "source_path": "TranscendentalNakamaye/blueprint/src/blowup-calculus.tex",
+      "source_revision": "6e453e142420e6a64ccfdb5cadd15abc2379f581",
+      "source_parent_capture": "support-original-parents/blowup-calculus.tex",
+      "source_parent_sha256": "277afc030c8112bd2e48bde0072b6cedbcbf610adbad3bf6e51f8c36e2218fac",
+      "source_label_line": 1580,
+      "complete_original_node_and_proof_capture": "original-support-blueprint-nodes/bcalc-codim-one-part-canonical.tex",
+      "capture_sha256": "b9d9f09e36dd795b2f8e5616b0dbf7833e33f707028f8550063e32308e676db5",
+      "original_native_attachments": [
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.mem_codimOnePartAlong_iff_of_eventually",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.mem_codimOnePartAlong_congr",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_congr",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.cosupport_pullback",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_pullback",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_pullback_val",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_transport",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_restrict",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_restrictEquiv",
+        "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_wEquiv"
+      ],
+      "original_node_preserved_as_provenance_not_added_as_broad_local_binding_claim": true
+    },
+    {
+      "label": "bcalc:codim-one-part-tower",
+      "source_path": "TranscendentalNakamaye/blueprint/src/blowup-calculus.tex",
+      "source_revision": "6e453e142420e6a64ccfdb5cadd15abc2379f581",
+      "source_parent_capture": "support-original-parents/blowup-calculus.tex",
+      "source_parent_sha256": "277afc030c8112bd2e48bde0072b6cedbcbf610adbad3bf6e51f8c36e2218fac",
+      "source_label_line": 1673,
+      "complete_original_node_and_proof_capture": "original-support-blueprint-nodes/bcalc-codim-one-part-tower.tex",
+      "capture_sha256": "bcdc470351b3b2d2d79c1d7bc4d0beaaff0a129879a3599d26bbedeacf0299ca",
+      "original_native_attachments": [
+        "TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_subset",
+        "TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_eq_empty"
+      ],
+      "original_node_preserved_as_provenance_not_added_as_broad_local_binding_claim": true
+    }
+  ],
+  "local_written_BP_supplement": {
+    "draft_capture": "draft-blueprint/additive-producers12-20-original-codim-support.tex",
+    "draft_sha256": "1551f88d86bada306e0dcbc30aa5ec9b976f3cc1d287970b49fe3623bdb7f90a",
+    "destination_path": "blueprint/additive-producers12-20-original-codim-support.tex",
+    "complete_written_proofs": 2,
+    "literal_bindings": 2,
+    "new_local_labels": 2,
+    "ready_markers": 0,
+    "not_claimed_whole_original_BP_chapter": true
+  },
+  "old33_source_BP_artifacts_unchanged": true,
+  "no_public_install": true,
+  "compiler_used_for_this_preparation": false
+}

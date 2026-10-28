@@ -1,0 +1,90 @@
+\section{Whole coefficient records on arbitrary carriers}
+
+The derivative ideals along a subset are defined even when the subset
+is not globally regular. Their naturality under local biholomorphisms
+therefore has an algebraic consequence on such subsets. This extends
+the naturality in \dcref{mc:homogenized-along-etale}: regularity and
+coherence are unnecessary for the equalities below. All ideals under
+consideration have holomorphic members. No assertion of coherence of a
+derivative ideal on a singular carrier is made.
+
+\begin{lemma}[Pullback of powers with holomorphic members]
+\label{hir:actual-holomorphic-power-pullback}
+\uses{mc:homogenized-basic}
+\lean{Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_mul,Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_idealPow}
+\leanok
+For a holomorphic map between complex manifolds of arbitrary dimensions,
+and an ideal $I$ whose members are holomorphic,
+$f^*(I^q)=(f^*I)^q$ for every $q\geq0$.
+\end{lemma}
+\begin{proof}
+The pullback of the unit ideal is the unit ideal: every pullback germ
+is holomorphic, and conversely a holomorphic germ is its own coefficient
+times the pullback of $1$. This proves the assertion at $q=0$.
+Exact product pullback requires only holomorphic members and also holds between different dimensions. Indeed,
+composing a finite holomorphic expression in products of source members
+gives an expression in products of pullback members. Conversely, write
+each of two pullback members as a finite holomorphic combination of
+composed source members. Multiplying the expressions and distributing
+gives the finite double sum with coefficients the products of the two
+coefficients; each generator is the composition of the corresponding
+source product. This proves the reverse inclusion. Every member of a
+power is holomorphic, since the zeroth power is the holomorphic unit
+ideal and every positive power is a holomorphic span of products.
+Applying the product identity to $I^q I$ and the induction hypothesis
+proves the assertion at $q+1$.
+\end{proof}
+
+\begin{lemma}[Pullback of every finite holomorphic sum]
+\label{hir:actual-holomorphic-finite-sum-pullback}
+\uses{hir:actual-holomorphic-power-pullback}
+\lean{Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_finSumIdeal,Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_homSum}
+\leanok
+If each $J_i$ for $i<r$ has holomorphic members, then
+$f^*(\sum_{i<r}J_i)=\sum_{i<r}f^*J_i$, including $r=0$. In particular pullback commutes with $\sum_{i<r} A_i B^i$ when the $A_i$ and $B$ have holomorphic members.
+\end{lemma}
+\begin{proof}
+A germ on the left is a finite holomorphic combination of compositions
+$a\circ f$, where $a$ is a finite holomorphic combination of members of
+the $J_i$ for $i<r$. Composing this latter combination gives a finite
+combination of composed individual members, since composition preserves
+holomorphicity of its coefficients. Flattening the two finite sums puts
+the germ in the right side. Conversely a member of the right side is a
+finite combination of members of individual $f^*J_i$. Expand each of
+these as a finite combination of composed source members. A source
+member of $J_i$ belongs to the source sum by the one-term expression
+with coefficient $1$. Thus every expanded generator belongs to the
+pullback of the source sum, and flattening proves the required
+inclusion. These arguments use no selected index and remain valid for
+the empty family: the only expressions then are empty sums and their
+holomorphic combinations. Apply this identity to $J_i=A_iB^i$. Product pullback and the preceding power identity identify each summand with $(f^*A_i)(f^*B)^i$, proving the stated particular case.
+\end{proof}
+
+\begin{theorem}[Whole homogenized and coefficient records on arbitrary carriers]
+\label{hir:actual-nonregular-whole-coefficient-naturality}
+\uses{hir:actual-holomorphic-power-pullback,hir:actual-holomorphic-finite-sum-pullback,mc:homogenized-along-etale}
+\lean{Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_homMarkedAlong,Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_coeffMarkedAlong,Hironaka.HironakaActualNonregularCoefficientNaturality.pullback_coeff_homMarkedAlong}
+\leanok
+Let $M=(N,E,I,d)$ have arbitrary carrier $N$, holomorphic ideal members,
+and any natural mark $d$. For a holomorphic local biholomorphism $f$,
+the whole homogenized record and the whole coefficient record commute
+with pullback. Neither global regularity of $N$, coherence, nor positive
+mark is required.
+\end{theorem}
+\begin{proof}
+The derivative identity along an arbitrary subset is
+$f^*D_N^iI=D_{f^{-1}N}^i(f^*I)$. Every member of each such derivative
+ideal is holomorphic. Put $T=D_N^{d-1}I$. Homogenization is the finite
+sum of $D_N^iI\,T^i$ for $i<d$. Product pullback, power pullback, and
+finite-sum pullback identify this whole ideal with the corresponding
+homogenized ideal on $f^{-1}N$. The coefficient ideal is the finite sum
+of the prescribed marked-sum powers of $D_N^iI$ for $i<d$. The same
+power and finite-sum identities identify its whole ideal, with the
+identical exponents because the mark is unchanged by pullback. For
+$d=0$ both finite sums are empty and the preceding finite-sum identity
+still applies. In both constructions the carrier is $f^{-1}N$, the
+boundary is the pullback of the same entire positioned list, and the
+output mark is computed from the same original marks. Equality of
+these fields and of the whole ideals proves equality of the whole
+marked records. Every member of the homogenized ideal is holomorphic because it is a finite holomorphic span. Applying the coefficient identity to this homogenized record and then the homogenization identity proves the whole composite identity for $\mathcal C_N(\mathcal H_N(M))$.
+\end{proof}

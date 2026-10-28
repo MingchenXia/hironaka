@@ -1,0 +1,105 @@
+\section{Actual prescribed blowups and the entire mark-one controlled split}
+
+Every controlled transform below has its ORIGINAL mark one. The old ideal
+is the actual source restriction of a coherent ideal and may be nonradical.
+Only the regular full normal plane is identified with its vanishing ideal;
+the old controlled ideal is never replaced by a radical strict-support ideal.
+
+\begin{lemma}[Whole controlled transport over prescribed genuine blowups]
+\label{hir:disjoint-actual-controlled-transport}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointActualControlledSplit.controlled_pullback_over}
+\leanok
+For genuine blowups $\sigma:P\to N$ and $\rho:Z\to N$ of the same original
+centre and a genuine biholomorphism $E:Z\to P$ with $\sigma E=\rho$, the whole
+pullback by $E$ of the original coherent admissible ideal's mark-one controlled
+transform equals its actual mark-one controlled transform by $\rho$.
+\end{lemma}
+\begin{proof}
+Actual total transform composition and $\sigma E=\rho$ identify the whole
+total ideals. The exceptional ideals are the total pullbacks of the SAME
+original centre ideal; the same composition therefore identifies them, and
+hence their first powers. Original admissibility gives the actual factorization
+of each total ideal by its invertible exceptional ideal and its coherent
+controlled ideal. Pull the $\sigma$ factorization through $E$; whole coherent
+product pullback and the actual exceptional equality yield the factorization
+for $\rho$ with the pulled-back controlled ideal as remaining factor. Genuine
+invertible-factor uniqueness identifies that coherent factor with the actual
+controlled transform by the prescribed $\rho$.
+\end{proof}
+
+\begin{lemma}[Actual current cosupport lies on the genuine strict full contact]
+\label{hir:disjoint-actual-controlled-strict-contact}
+\uses{hir:disjoint-actual-controlled-transport}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointActualControlledSplit.current_cosupport_mem_strict_contact}
+\leanok
+Let $N$ be closed regular and contain the actual ambient blowup centre $C$.
+If the original coherent ambient ideal $J$ contains $\mathcal I_N$, every
+actual mark-one controlled-cosupport point lies in the entire geometric
+strict transform of $N$.
+\end{lemma}
+\begin{proof}
+Pullback and the original colon are monotone in their numerator. Thus the
+controlled transform of $\mathcal I_N$ is contained in the controlled transform
+of $J$. The actual mark-one controlled transform of the regular normal ideal
+is precisely the vanishing ideal of the actual geometric strict $N$.
+Every member of the ambient controlled ideal vanishes at a point of its
+mark-one cosupport. Hence all members of the strict-contact vanishing ideal
+vanish there. The strict contact is closed, so its genuine vanishing ideal's
+zero locus is exactly that contact. This proves membership without a
+strict-contact certificate or radicalization of the old ideal.
+\end{proof}
+
+\begin{theorem}[Actual whole nonradical controlled trace and reconstruction]
+\label{hir:disjoint-actual-whole-controlled-split}
+\uses{hir:disjoint-actual-controlled-strict-contact,hir:disjoint-actual-controlled-transport,hir:disjoint-matched-whole-coherent-trace,hir:actual-closed-contact-full-restricted-blowup,hir:relative-normal-whole-hadamard,hir:disjoint-same-flattening-normal-kernel}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointActualControlledSplit.exists_actual_controlled_split}
+\leanok
+Let $N\subset A$ be closed regular of dimension $d$ in dimension $d+t$.
+Let $C=\operatorname{val}_N(D)$, let $\pi$ be its genuine ambient blowup, and
+let $\rho$ be a prescribed genuine blowup of the original intrinsic centre
+$D$ on the SAME native $N$. Let $J$ be coherent with
+$\mathcal I_N\subset J\subset\mathcal I_C$, and set
+$I=\operatorname{val}_N^*J$, without any radicality hypothesis.
+At an actual controlled-cosupport point $y$, suppose the ordinary source
+joint flattening at $\pi(y)$ identifies $C,N$ with the coordinate $k,d$ planes
+and is centered at zero. Internally construct the actual strict-contact
+biholomorphism $E$ over $\rho$, the genuine ambient chart $\Theta$ and a
+matched original intrinsic chart $\Psi$ at $z=E^{-1}(y)$. Then
+\[
+ \operatorname{map}(\operatorname{planeTrace})(J'_\Theta)=I'_\Psi,
+ \qquad
+ J'_\Theta=\operatorname{comap}(\operatorname{planeTrace})(I'_\Psi),
+\]
+where $J'$ and $I'$ are the ENTIRE actual mark-one controlled ideals of the
+prescribed $\pi$ and $\rho$. No target chart, trace, ideal split or comparison
+is an input. This is the local producer over a source centre point, not a
+complete canonical-history comparison.
+\end{theorem}
+\begin{proof}
+The preceding lemma places $y$ on the actual strict contact. Its canonical
+native regular atlas and the two genuine blowup universal properties construct
+$E$ over $\rho$. Apply actual strict-contact blowup coordinates to the original
+source joint flattening and the derived contact membership. This constructs
+$\Theta$ with its ENTIRE local strict-contact plane equation. The matched
+coherent trace theorem constructs $\Psi$ from this same $\Theta$ and this
+actual $E$, and identifies the whole normal trace of every coherent ambient
+ideal with its actual intrinsic pullback.
+
+Apply actual whole closed-contact controlled restriction to $J$ with its
+original admissibility, retaining mark one. The intrinsic original ideal is
+exactly the source restriction $I$ by definition. Apply the preceding genuine
+controlled transport through $E$. Thus the actual pullback used by the matched
+trace theorem is precisely the controlled ideal for the prescribed $\rho$,
+including all nonradical structure. This proves the first equality.
+
+The controlled ideal of $J$ contains the vanishing ideal of the strict full
+contact, as in the membership argument. Every normal coordinate of $\Theta$
+is an actual local vanishing germ of this contact, and its entire adapted
+germ is the corresponding original normal coordinate germ. Thus the whole
+normal ideal lies in $J'_\Theta$. Relative Hadamard division identifies that
+ideal with the entire kernel of actual plane trace. The trace is surjective,
+so the comap of the map of $J'_\Theta$ is $J'_\Theta$ plus that kernel, hence
+is $J'_\Theta$ itself. Substitute the proved entire old-controlled trace to
+obtain the second equality. No all-orders saturation or vanishing ideal of
+the old singular support is used.
+\end{proof}

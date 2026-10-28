@@ -1,0 +1,34 @@
+\section{The actual contact mask and its section comparison}
+\begin{definition}[The true section mask overlap]
+\label{hir:actual-section-mask-overlap}
+\uses{hir:actual-open-zero-section-models}
+\lean{Hironaka.HironakaActualMaskSectionRepresentative.baseMask,Hironaka.HironakaActualMaskSectionRepresentative.overlap,Hironaka.HironakaActualMaskSectionRepresentative.toMask,Hironaka.HironakaActualMaskSectionRepresentative.sectionToMask,Hironaka.HironakaActualMaskSectionRepresentative.overlapProjection,Hironaka.HironakaActualMaskSectionRepresentative.overlapRetraction}
+\leanok
+For an actual open mask $O\subseteq p^{-1}U$, put $W=s^{-1}O$ and
+$V=O\cap p^{-1}W$. The genuine maps are $q:V\to O$, $s_O:W\to O$,
+$p_V:V\to W$ and $r_V:V\to V$, with $r_V(z)=s(p(z))$.
+\end{definition}
+\begin{lemma}[Whole section representatives on the genuine mask overlap]
+\label{hir:actual-mask-section-whole-representative}
+\uses{hir:actual-section-mask-overlap,hir:actual-retraction-whole-restricted-representative,hir:submersion-choice-image-trace-whole-pullback}
+\lean{Hironaka.HironakaActualMaskSectionRepresentative.restrictEquiv_actual_mask_section}
+\leanok
+For $A\subseteq U$ and an ideal $J$ on the original mask $O$ with holomorphic
+members, the records on $V$ with the same carrier $s(A)\cap V$, same list $E$
+and mark $d$, and whole ideals $q^*J$ and $p_V^*(s_O^*J)$ are restricted equivalent.
+\end{lemma}
+\begin{proof}
+Continuity of the genuine section and projection makes $W,V$ open.
+If $z\in V$, then $p(z)\in W$, so $s(p(z))\in O$; the actual identity
+$p(s(x))=x$ also gives $p(s(p(z)))\in W$. Thus $r_V$ is a genuine typed map,
+not an assumed endomap of $O$. All four maps are holomorphic by their actual
+subtype inclusions and the original section and projection.
+For $z$ in the same carrier, its normal component vanishes, so the true linear
+splitting identity gives $r_V(z)=z$. The preceding retraction theorem gives
+restricted equivalence between $q^*J$ and $r_V^*(q^*J)$.
+The literal equality $q\circ r_V=s_O\circ p_V$ and whole holomorphic germ-ideal
+pullback composition identify this latter ideal with $p_V^*(s_O^*J)$.
+This proves both whole restricted containments on the original lifted carrier.
+No equality of $O$ with a cylinder, or global map $O\to O$ induced by $s\circ p$,
+is assumed.
+\end{proof}

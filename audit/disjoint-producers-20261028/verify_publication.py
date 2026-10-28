@@ -1,0 +1,117 @@
+"""Read-only source/evidence verification; --artifacts also checks local caches.
+
+This script never invokes Lean, a build, Git, or the network.
+"""
+from pathlib import Path
+import hashlib
+import json
+import re
+import sys
+
+A = Path(__file__).resolve().parent
+S = A.parents[1]
+E = S / 'audit/additive-producers12-20-20261028'
+sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+artifacts = '--artifacts' in sys.argv
+assert set(sys.argv[1:]) <= {'--artifacts'}
+v = json.loads((A / 'publication-verification.json').read_text())
+manifest = json.loads((A / 'publication-evidence-manifest.json').read_text())
+assert v['status'] == 'PASS_SOURCE_FAITHFUL_COMPOSITE49_PUBLICATION'
+assert (v['whole_original_modules'], v['complete_original_support_files'], v['complete_original_support_declarations']) == (43, 6, 9)
+assert (v['physical_modules'], v['actual_physical_declarations'], v['literal_bindings']) == (49, 978, 270)
+assert (v['complete_written_proofs'], v['ready_nodes'], v['whole_original_blueprint_chapters']) == (132, 143, 38)
+assert v['unique_new_target_kernels'] == v['unique_new_allphysical_type_wholevalue_audits'] == 49
+assert v['unattached_ordinal_helper_nodes_not_ready'] == 2
+assert v['old_kernel_or_Expr_gate_replays'] == 0
+assert not v['merge_authorized'] and not v['source_goal_closure_claimed']
+assert v['standalone_original_closed'] == ['G2', 'G5', 'G6', 'G7']
+assert v['standalone_original_open'] == ['G1', 'G3', 'G4', 'G8', 'G9']
+assert not v['native_G9_backlog_exported'] and not v['README_changed']
+
+for relative, digest in manifest['files'].items():
+    assert '.lake' not in Path(relative).parts and '__pycache__' not in Path(relative).parts
+    assert not relative.endswith('.pyc')
+    assert sha(S / relative) == digest, relative
+old_guards = json.loads((A / 'plan.json').read_text())['old_file_guards']
+assert len(old_guards) == 3678
+for relative, digest in old_guards.items():
+    assert sha(S / relative) == digest, relative
+
+for key in ['prior33_publication', 'prior33_independent_review', 'prior31_unique_pair_review',
+            'independent_review', 'current_root_frontend', 'final_compiled_umbrella_binding_probe',
+            'latest_root_marker_acceptance']:
+    row = v[key]
+    assert sha(S / row['path']) == row['sha256'], row['path']
+prior33 = json.loads((S / v['prior33_publication']['path']).read_text())
+assert prior33['status'] == 'PASS_SOURCE_FAITHFUL_COMPOSITE33_PUBLICATION'
+assert len(prior33['source_modules']) == 33
+assert v['source_modules'][:33] == prior33['source_modules']
+assert len(v['source_modules']) == len({row['module'] for row in v['source_modules']}) == 49
+for row in v['source_modules']:
+    assert sha(S / row['source_path']) == row['source_sha256']
+    if artifacts:
+        for relative, digest in row['all_compiled_parts'].items():
+            assert sha(S / relative) == digest, relative
+if artifacts:
+    for relative, digest in v['current_root_artifacts'].items():
+        assert sha(S / relative) == digest, relative
+
+cohorts = v['source_cohorts']
+assert [len(row['modules']) for row in cohorts] == [33, 16]
+assert [row['native_revision'] for row in cohorts] == [
+    '53bb34a4a1607f358638012e2d9cb1d27818ca91',
+    '6e453e142420e6a64ccfdb5cadd15abc2379f581',
+]
+assert len({module for row in cohorts for module in row['modules']}) == 49
+assert sum(row['unique_kernel_checks'] for row in cohorts) == 49
+assert sum(row['unique_physical_audits'] for row in cohorts) == 49
+assert sum(row['physical_declarations'] for row in cohorts) == 978
+
+peer = json.loads((S / v['independent_review']['path']).read_text())
+assert peer['before_after_pin_count'] == 4601 and peer['before_after_all_unchanged']
+assert peer['composite_modules'] == 49 and peer['composite_physical_declarations'] == 978
+assert peer['final_actual_current_compiled_umbrella_bindings'] == 270
+assert peer['new_all_gate_exits_zero'] and peer['new_gate_warnings'] == 0
+assert not peer['remaining_findings']
+before = json.loads((E / 'independent/before-pins.json').read_text())
+after = json.loads((E / 'independent/after-pins.json').read_text())
+assert before == after and len(after) == 4601
+markers = {row['path']: row for row in v['support_blueprint_marker_changes']}
+for relative, pin in after.items():
+    parts = Path(relative).parts
+    if '.lake' in parts:
+        # Archived private binary captures are intentionally not published.
+        # Current project cache artifacts are optional in a source checkout.
+        if not artifacts or parts[0] != '.lake':
+            continue
+    expected = pin['sha256']
+    if relative in markers:
+        row = markers[relative]
+        assert expected in {row['premarker_sha256'], row['ready_sha256']}
+        expected = row['ready_sha256']
+    assert sha(S / relative) == expected, relative
+
+texts = []
+for row in v['whole_blueprint_pins']:
+    assert sha(S / row['path']) == row['sha256']
+    texts.append((S / row['path']).read_text())
+assert len(texts) == 38
+for row in v['support_blueprint_marker_changes']:
+    path = S / row['path']
+    before_path = S / row['premarker_capture']
+    assert sha(path) == row['ready_sha256']
+    assert sha(before_path) == row['premarker_sha256']
+    text = path.read_text()
+    assert text.count('\\leanok') == row['nodes'] and '\\notready' not in text
+    before_text = before_path.read_text()
+    if before_text.count('\\notready') == row['nodes']:
+        assert before_text.replace('\\notready', '\\leanok') == text
+    else:
+        assert '\\notready' not in before_text
+        assert text.replace('\\leanok\n', '') == before_text
+    texts.append(text)
+assert sum(text.count('\\begin{proof}') for text in texts) == 132
+assert sum(text.count('\\leanok') for text in texts) == 143
+bindings = [name.strip() for text in texts for group in re.findall(r'\\lean\{([^}]+)\}', text) for name in group.split(',') if name.strip()]
+assert len(bindings) == len(set(bindings)) == 270
+print('PASS: 49 source-faithful modules; 270 checked bindings, 978 physical declarations, 132 proofs, 143 ready nodes; original open goals unchanged' + ('; local artifacts match' if artifacts else ''))

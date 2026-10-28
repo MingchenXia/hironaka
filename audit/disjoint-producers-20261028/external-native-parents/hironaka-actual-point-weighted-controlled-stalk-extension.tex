@@ -1,0 +1,126 @@
+\section{The actual controlled weighted sheaf stalk in a genuine point blowup chart}
+
+Let $P$ be the prescribed original analytic vertex coefficient data, with its
+real coefficient open $U\subset\mathbf C^s$ containing zero. Its powered
+coefficient functions define the actual coherent ideal $J_P$ on $U$, with
+the unchanged positive common mark $D$. Let $\pi:Y\to U$ be a genuine global
+blowup along the actual point $0_U$. At a point $y\in Y$, retain a genuine
+centred source chart $\Theta$ whose actual affine square is
+$\pi(\Theta^{-1}u)=\pi_{e,b}(u)$ in the literal base coordinates.
+All inverse identities are used on their genuine open domains. This is a
+qualified point-chart assertion and does not assert the affine map itself
+is a global blowup.
+
+\begin{lemma}[Whole finite original generators in the actual affine square]
+\label{hir:actual-point-chart-whole-weighted-total-stalk}
+\uses{trace:actual-finite-germ-ideal-pullback-generation,hir:submersion-germ-colon-adapted-stalk,hir:actual-original-coherent-weighted-coefficient-marked}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointWeightedControlledStalk.actual_weighted_total_stalk}
+\leanok
+For any finite actual holomorphic coefficient family on $U$, the whole
+adapted origin stalk of its genuine sheaf total pullback is the literal
+ring pullback of the entire powered coefficient germ ideal.
+\end{lemma}
+\begin{proof}
+The original functions, restricted to their actual open subtype, are
+holomorphic and generate their whole finite-function ideal at every point.
+The actual holomorphic map $\pi$ pulls this full finite presentation back
+to the literal functions $c_i\circ\pi$, including the original powers.
+The true inverse source chart transports both directions of every finite
+holomorphic relation to the origin. In that chart the actual affine square
+identifies each pulled-back function germ with the composition of the same
+original coefficient function and $\pi_{e,b}$. This identity holds on a
+neighbourhood of zero inside the real chart target; it is not a global
+holomorphic extension. Germ composition and its power law therefore identify
+each actual generator with the ring image of its original powered germ.
+Both whole ideals are their complete finite spans, proving equality.
+\end{proof}
+
+\begin{lemma}[The real exceptional denominator has the literal pivot power stalk]
+\label{hir:actual-point-chart-exceptional-power-stalk}
+\uses{hir:sharp-actual-geometric-transform-full-relative-saturation-dictionary,bcalc:hyperplane-ideal,hir:sharp-actual-relative-product-exceptional-power-sum-algebra}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointWeightedControlledStalk.actual_exceptional_power_stalk}
+\leanok
+In this same genuine point blowup and same source chart, the entire stalk
+of every actual exceptional ideal power is $(e^q)$, including $q=0$.
+\end{lemma}
+\begin{proof}
+Actual blowup geometry identifies the full exceptional ideal with the
+vanishing ideal of $\pi^{-1}\{0_U\}$. In the stated real source domain,
+the affine square makes membership in this inverse image equivalent to
+$\pi_{e,b}(u)=0$. Every component of the point chart map is divisible by
+$u_e$, and its pivot component equals $u_e$; hence this condition is exactly
+$u_e=0$. Genuine coordinate Hadamard division identifies the entire original
+vanishing ideal at $y$ with the single actual coordinate function
+$h=\Theta_e$. This derives the principal denominator from the original
+geometry rather than assuming a stalk equation. Finite holomorphic product
+span substitution gives the exact generator $h^q$ for every ideal power;
+the unit denominator is the case $q=0$. The true inverse chart sends the
+same actual $h$ to the literal coordinate $e$, so its whole power stalk is
+precisely $(e^q)$.
+\end{proof}
+
+\begin{theorem}[Whole actual controlled sheaf stalk is the genuine ring colon]
+\label{hir:actual-point-weighted-controlled-stalk-colon}
+\uses{hir:actual-point-chart-whole-weighted-total-stalk,hir:actual-point-chart-exceptional-power-stalk,hir:submersion-germ-colon-original-stalk-quotient,bcalc:controlled-transform}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointWeightedControlledStalk.actual_weighted_controlled_stalk}
+\leanok
+The whole adapted origin stalk of the actual sheaf controlled transform
+$\sigma^c_\pi(J_P,D)$ equals
+\[
+ (\pi_{e,b}^*\operatorname{Compress}(c(P)):e^D).
+\]
+No total-stalk, exceptional-stalk or controlled-stalk equality is an input.
+\end{theorem}
+\begin{proof}
+The original finite powered functions give coherence of $J_P$. Genuine
+blowup pullback gives coherence of its whole total transform, and the
+actual exceptional ideal and all its powers are coherent. The entire
+adapted-stalk colon theorem thus applies directly to the defining actual
+sheaf controlled transform. It identifies that stalk with the colon of the
+whole total-transform stalk by the whole exceptional-power stalk. Substitute
+the first two lemmas. A ring colon by the principal ideal $(e^D)$ is the
+colon tested by its same generator $e^D$: closure under every multiplier
+gives both directions. This is the displayed whole-ideal equality.
+\end{proof}
+
+\begin{theorem}[Same canonical weighted data track the true controlled sheaf stalk]
+\label{hir:actual-original-point-weighted-controlled-stalk-tracking}
+\uses{hir:actual-point-weighted-controlled-stalk-colon,hir:actual-original-point-weighted-coefficient-tracking}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointWeightedControlledStalk.exists_original_point_weighted_controlled_stalk_tracking}
+\leanok
+The original ideal internally supplies ONE exact canonical datum $P$ before
+all genuine point blowups of its real coefficient domain and all qualified
+actual chart squares. The actual point centre is admissible for this same
+marked coefficient ideal, and its controlled transform is coherent. In each
+base-pivot chart with zero normal contact
+directions, the entire controlled sheaf stalk equals the unchanged
+common-mark compression of the actual low coefficients of the SAME
+normalized original generators $H_a$. That stalk lies in
+$\mathfrak m_y^D$ exactly when the entire actual normalized/source point
+HS profile is unchanged.
+\end{theorem}
+\begin{proof}
+Choose the canonical datum by the original-only weighted tracking theorem,
+which already retains its whole canonical Taylor generators, real domain
+and original positive marks before all chart pivots and directions. Its
+original all-coefficient centre cosupport, restricted along the genuine open
+inclusion, gives every coefficient its actual individual point order at
+$0_U$. Exact positive-weight compression gives the whole marked cosupport
+there. The real point centre is a closed submanifold by the given blowup,
+and the initial ordered boundary is empty, so this proves admissibility.
+Actual Hadamard centre-power inclusion then proves coherence of the same
+controlled transform. A
+genuine blowup with the supplied real affine square falls under the
+preceding theorem; thus its actual controlled sheaf stalk is the stated
+whole germ colon. For this same $P,e,b$, the original-only weighted tracking
+producer supplies the actual original-generator quotients $H_a$ and proves
+that very colon equals their complete low-coefficient compression. Its
+whole point-power equivalence is the entire normalized/source HS profile
+criterion. Substitution gives both conclusions for the actual sheaf stalk,
+without choosing another source or transformed canonical basis.
+\end{proof}
+
+This statement preserves the supplied global blowup and real chart square.
+It does not construct compatible maximal-contact or old-boundary charts at
+every permissible centre, prove the positive-dimensional-centre converse,
+or propagate a current recursive invariant through a history.

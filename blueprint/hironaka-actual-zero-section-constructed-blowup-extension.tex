@@ -1,0 +1,174 @@
+\section{Constructing the ambient blowup from the original zero-section data}
+
+Let $X=\mathbb C^d$, $M=\mathbb C^{d+t}$, and let $i:X\to M$ and
+$P:M\to X$ be the actual first-coordinate inclusion and projection. Write
+$N=\mathbb C^d\times\{0\}$ and $Q=\mathrm{id}_M-iP$. All dimensions
+$d,t\geq0$ are allowed. The original datum in the final theorem is a
+genuine blowup $p:B\to X$ along $C$. An ambient blowup, a comparison map,
+smoothness of an image centre or of a strict carrier, and a desired sheaf
+identity are not additional inputs.
+
+We use the existing geometric blowup construction of a nowhere dense
+closed submanifold, adapted here by explicitly constructing the centre's
+local product flattenings before invoking its universal property. This
+is the zero-section geometric step, not independence of a canonical
+resolution algorithm. The strict carrier is literally
+$\overline{\pi^{-1}(N\setminus i(C))}$, the existing
+\texttt{geoStrictTransform}, including when $C$ is a Cartier centre.
+
+\begin{lemma}[Actual product extension of a local flattening]
+\label{hir:actual-zero-section-product-flattening}
+\uses{hir:actual-zero-section-whole-carrier-regular}
+\lean{Hironaka.HironakaActualZeroSectionCentreGeometry.actual_zeroSection_localEquiv,Hironaka.HironakaActualZeroSectionCentreGeometry.actual_zeroSection_localEquiv_plane_iff}
+\leanok
+Let $\Phi$ be an actual local holomorphic equivalence at $x\in X$,
+with source $U$ and target $V$. On the actual open sets $P^{-1}U$ and
+$P^{-1}V$, the formulas
+\[
+ \bar\Phi(z)=i\Phi(Pz)+Qz,\qquad
+ \bar\Phi^{-1}(w)=i\Phi^{-1}(Pw)+Qw
+\]
+give a local holomorphic equivalence at $ix$. For every $k\leq d$,
+\[
+ \bar\Phi(z)\in\mathbb C^k\times\{0\}\subset M
+ \quad\Longleftrightarrow\quad
+ z\in N\ \text{and}\ \Phi(Pz)\in\mathbb C^k\times\{0\}\subset X.
+\]
+\end{lemma}
+\begin{proof}
+The identity $Pi=\mathrm{id}_X$ gives $PQ=0$, $Qi=0$ and $Q^2=Q$.
+Consequently $P\bar\Phi(z)=\Phi(Pz)$ and $Q\bar\Phi(z)=Qz$.
+The preimages defining the two domains are open by continuity of $P$;
+the base point $ix$ belongs to the first because $P(ix)=x$. Actual
+holomorphic composition with the complex linear maps $i,P$, followed by
+addition and subtraction, proves holomorphy on the indicated domains.
+The displayed projection identity and the original domain mapping
+properties give both new domain mapping properties. On $P^{-1}U$,
+\[
+ \bar\Phi^{-1}\bar\Phi(z)
+ =i\Phi^{-1}(\Phi(Pz))+Qz=iPz+Qz=z.
+\]
+On $P^{-1}V$ the other composition equals $iPz+Qz=z$ by the other
+original inverse identity. These establish all clauses of an actual
+local holomorphic equivalence.
+
+At the actual index $j<d$, the $j$th coordinate of $\bar\Phi(z)$ is
+$\Phi(Pz)_j$. At the actual normal index $d+j$, it is exactly $z_{d+j}$.
+If $\bar\Phi(z)$ lies in the ambient $k$-plane, $k\leq d$ makes every
+normal coordinate of $z$ zero, and its tangent coordinates with index
+at least $k$ give the base $k$-plane condition on $\Phi(Pz)$.
+Conversely, these two conditions set every ambient coordinate of index
+at least $k$ to zero: use the base condition for indices below $d$ and
+the normal condition for the remaining indices. This proves the whole
+equivalence without a permutation of coordinates.
+\end{proof}
+
+\begin{lemma}[The actual image of every original closed submanifold]
+\label{hir:actual-zero-section-image-closed-submanifold}
+\uses{hir:actual-zero-section-product-flattening,hir:actual-zero-section-whole-carrier-regular}
+\lean{Hironaka.HironakaActualZeroSectionCentreGeometry.actual_zeroSection_image_eq,Hironaka.HironakaActualZeroSectionCentreGeometry.actual_zeroSection_image_regular,Hironaka.HironakaActualZeroSectionCentreGeometry.actual_zeroSection_image_closedSubmanifold}
+\leanok
+For every subset $C\subset X$,
+\[
+ i(C)=P^{-1}C\cap N.
+\]
+If $C$ is closed, its image is closed. If $C$ is regular of dimension
+$k$ at $x$, $i(C)$ is regular of that same dimension at $ix$.
+In particular every actual closed submanifold $C$ has an actual closed
+submanifold $i(C)$ in $M$; its dimension may vary across components.
+\end{lemma}
+\begin{proof}
+If $z=ix$ for $x\in C$, then $Pz=x$ and $z\in N$. If $Pz\in C$ and
+$z\in N$, the actual identity $iPz=z$ proves $z\in i(C)$.
+The projection is continuous and $N$ is closed, so the intersection
+formula proves the closedness assertion.
+
+At an actual regular point $x$, choose the original local flattening
+$\Phi$, of dimension $k\leq d$, with $\Phi(x)=0$. Preferred charts on
+the actual model spaces are identities. Extend this actual flattening
+by the preceding lemma. Its value at $ix$ is zero, because $Q(ix)=0$.
+On its source $P^{-1}U$, the base flattening and the intersection formula
+give
+\[
+ z\in i(C)\ \Longleftrightarrow\ z\in N\text{ and }Pz\in C
+ \ \Longleftrightarrow\ z\in N\text{ and }\Phi(Pz)\in\mathbb C^k\times\{0\}.
+\]
+The final condition is exactly the ambient $k$-plane condition by the
+preceding lemma. Also $k\leq d\leq d+t$. These are all clauses of the
+original \texttt{RegularAtDim} definition. Applying this at every point
+of $C$, with its own original regular dimension, proves that $i(C)$ is
+a closed submanifold. No whole-space ideal or origin germ replaces the
+actual subsets in this argument.
+\end{proof}
+
+\begin{lemma}[The actual image centre has no interior]
+\label{hir:actual-zero-section-image-empty-interior}
+\uses{hir:actual-zero-section-image-closed-submanifold}
+\lean{Hironaka.HironakaActualZeroSectionCentreGeometry.actual_zeroSection_image_interior_eq_empty}
+\leanok
+For every subset $C\subset X$, if $\operatorname{int}(C)=\varnothing$,
+then $\operatorname{int}(i(C))=\varnothing$.
+\end{lemma}
+\begin{proof}
+Suppose $z$ belongs to the interior of $i(C)$. Then $z=ix$ for some
+$x\in C$. The actual continuous map $i$ makes
+$U=i^{-1}(\operatorname{int}(i(C)))$ open, and $x\in U$.
+Every $y\in U$ has $iy\in i(C)$; applying $P$ and using $Pi=\mathrm{id}$
+gives $y\in C$. Thus $U$ is an open subset of $C$ containing $x$,
+contradicting $\operatorname{int}(C)=\varnothing$.
+This proof also applies when $t=0$, so it does not use the existence of
+a normal coordinate. When $d=0$, the same proof forces the original
+centre to be empty, as required. An empty centre introduces no special
+choice of a point or of a flattening.
+\end{proof}
+
+\begin{theorem}[Construct the actual ambient blowup from the base blowup]
+\label{hir:actual-zero-section-constructed-blowup-comparison}
+\source{demailly-cadg:VII.12.2,demailly-cadg:VII.12.3}
+\uses{hir:actual-zero-section-image-closed-submanifold,hir:actual-zero-section-image-empty-interior,bex:blowup-exists,hir:actual-zero-section-blowup-whole-geometric-comparison}
+\lean{Hironaka.HironakaActualZeroSectionConstructedBlowup.actualConstructedZeroSectionComparisonFor,Hironaka.HironakaActualZeroSectionConstructedBlowup.exists_actual_constructed_zeroSection_blowup_comparison}
+\leanok
+Input only an actual $d$-dimensional complex manifold $B$ and a genuine
+blowup $p:B\to X$ along $C$. Set
+\[
+ Y=\operatorname{BlowupSpace}(d+t,i(C)),\qquad
+ \pi=\operatorname{blowupProj}(d+t,i(C)).
+\]
+Equip this actual existing construction with its actual topology,
+flattening atlas and complex manifold structure. Then $\pi$ is a
+genuine blowup along $i(C)$. The whole actual strict carrier
+$S=\overline{\pi^{-1}(N\setminus i(C))}$ receives its actual
+$d$-dimensional complex manifold structure and a genuine biholomorphism
+$E:B\simeq S$, with
+\[
+ \pi(Eb)=i(pb),\qquad p(E^{-1}y)=P(\pi y),\qquad
+ \operatorname{range}(\mathrm{incl}\circ E)=S,
+\]
+and the entire ideal sheaves satisfy
+\[
+ (\mathrm{incl}\circ E)^*(\pi^*\mathcal I_{i(C)})=p^*\mathcal I_C.
+\]
+The existing geometric construction, not a caller-supplied ambient
+blowup, is used in this conclusion.
+\end{theorem}
+\begin{proof}
+The original genuine blowup implies that $C$ is an actual closed
+submanifold and has empty interior. The two preceding lemmas prove the
+same statements for its actual image. Use this internally produced
+closed-submanifold fact to instantiate the existing
+\texttt{BlowupSpace} topology and its genuine atlas and complex manifold.
+The existing blowup construction's universal-property theorem, applied
+to the internally proved empty-interior statement, proves that this
+literal $\pi$ is an \texttt{IsBlowupAlong} map.
+
+Apply the genuine prescribed-pair comparison to the original $p$ and
+this newly constructed $\pi$. That theorem internally constructs the
+strict carrier's atlas, both holomorphic maps, and their inverse
+identities by the two genuine universal uniqueness clauses. Its entire
+commuting, range and exceptional-sheaf conclusions give exactly the
+ones stated here. No new smoothness, invertibility, comparison or ideal
+certificate is required from the caller. All input and constructed
+centres remain the actual whole subsets. The product flattening and
+empty-interior arguments cover $t=0$, $d=0$, and the empty centre, so
+the same construction applies in those cases.
+\end{proof}

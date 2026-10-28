@@ -1,0 +1,17 @@
+\begin{lemma}[Uniqueness of lifts]
+\label{bex:lift-unique}
+\uses{bex:atlas}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.exists_not_mem_of_isOpen,TranscendentalNakamaye.Pending.BlowupConstruction.lift_eqOn}
+\leanok
+Let \(g\colon W\to X\) be a holomorphic map from a complex manifold with \(g^*\mathcal I_C\) invertible. Then \(g^{-1}(X\setminus C)\) is dense
+in \(W\), and two continuous maps \(h_1,h_2\colon W'\to\tilde X\) on an open set \(W'\subset W\) with \(\pi\circ h_1=\pi\circ h_2=g\) on \(W'\)
+coincide.
+\end{lemma}
+\begin{proof}
+\leanok
+Suppose a nonempty open \(W_1\) satisfies \(g(W_1)\subset C\). Let \(w\in W_1\) and \(u\) a generator of \(g^*\mathcal I_C\) near \(w\). Then \(u\) lies
+in \(g^*\mathcal I_C\) at \(w\): near \(w\), \(u=\sum_lc_l\,(b_l\circ g)\) with \(b_l\in\mathcal I_{C,g(w)}\). Each \(b_l\) vanishes on \(C\) near
+\(g(w)\), so \(u\) vanishes on a nonempty open subset of \(W_1\) near \(w\), which the generator does not. For the second statement, a point of
+\(\tilde X\) over \(x\notin C\) is \((x,0)\), so \(h_1=h_2\) on \(W'\cap g^{-1}(X\setminus C)\), a dense subset of \(W'\); and
+\(\{h_1\ne h_2\}\) is open since \(\tilde X\) is Hausdorff (Theorem~\ref{bex:atlas}). An open set missing a dense set is empty.
+\end{proof}

@@ -1,0 +1,259 @@
+\section{Existence of the blowup along a smooth centre}
+\label{sec:blowup-existence}
+
+This section constructs the blowup of a complex manifold \(X\) of dimension \(n\) (Hausdorff, second countable) along a nowhere dense
+closed submanifold \(C\) in the sense of Definition~\ref{ana:blowups}, and so proves Lemma~\ref{ana:blowup-existence}. The construction
+is Demailly's, \emph{Complex analytic and differential geometry}, VII.12: as a set the blowup is \((X\setminus C)\sqcup P(NC)\), and its
+manifold structure is given by an explicit atlas whose coordinate changes are holomorphic because of a division lemma of Hadamard type.
+The route differs from the source as follows.
+\begin{enumerate}
+\item The components of \(C\) may have different dimensions (Definition~\ref{ana:blowups} only asks that \(C\) be regular of some dimension at
+each of its points); nothing below uses a fixed codimension.
+\item The normal coordinates are the \emph{last} \(n-k\) coordinates: a flattening chart maps \(C\) onto \(\mathbf C^k\times0\) (Demailly:
+\(C=\{z_1=\dots=z_s=0\}\)), and flattening charts are arbitrary biholomorphisms of open sets, not products of balls.
+\item No normal bundle is constructed. The tangent space \(T_xX\) is identified with \(\mathbf C^n\) by the preferred chart at \(x\), the tangent
+space \(T_xC\) is defined as the common kernel of the differentials of the germs of the ideal of \(C\) at \(x\), and a point of \(P(N_xC)\) is
+recorded as the subspace \(T_xC+\mathbf C\xi\) of \(T_xX\) (\(\xi\notin T_xC\)).
+\item The universal property of Definition~\ref{ana:blowups} is not part of Demailly's definition (12.3); it is proved here
+(Lemmas~\ref{bex:lift-unique} and~\ref{bex:lift-local}).
+\end{enumerate}
+
+\paragraph{Notation.} For \(x\in X\) let \(e_x\) be the preferred chart at \(x\). For a function \(f\) holomorphic near \(x\) let
+\(d_xf:=D(f\circ e_x^{-1})(e_x(x))\colon\mathbf C^n\to\mathbf C\), and let \(\mathcal I_{C,x}\) be the set of functions holomorphic near \(x\) that
+vanish on \(C\) near \(x\). The \emph{tangent space} of \(C\) at \(x\) is
+\[
+ T_xC:=\bigcap_{f\in\mathcal I_{C,x}}\ker d_xf\subset\mathbf C^n .
+\]
+A \emph{flattening chart} \(c=(y_0,k,\Phi,j)\) consists of a point \(y_0\in X\), a biholomorphism \(\Phi\) between open subsets of \(\mathbf C^n\)
+with \(\Phi.\mathrm{source}\subset e_{y_0}.\mathrm{target}\) such that, for \(x\) in the \emph{flat domain}
+\(D_\Phi=\{x\in e_{y_0}.\mathrm{source}:e_{y_0}(x)\in\Phi.\mathrm{source}\}\), \(x\in C\) if and only if \(\Phi(e_{y_0}(x))\in\mathbf C^k\times0\),
+and a \emph{normal index} \(j\) with \(k\le j<n\). Its \emph{flat coordinates} are \(\tau_i=(\Phi\circ e_{y_0})_i\) on \(D_\Phi\);
+\(\tau_i\in\mathcal I_{C,x}\) for \(x\in D_\Phi\) and \(i\ge k\). Since \(C\) is a closed submanifold, every point of \(C\) lies in the flat domain of
+a flattening (Definition~\ref{ana:blowups}). We write \(\sigma_j\colon\mathbf C^n\to\mathbf C^n\) for the monomial map
+\(\sigma_j(w)_i=w_iw_j\) (\(k\le i\ne j\)), \(\sigma_j(w)_i=w_i\) otherwise.
+
+\begin{lemma}[Hadamard's lemma in flattening coordinates]
+\label{bex:hadamard}
+\uses{ana:blowups}
+\lean{TranscendentalNakamaye.Pending.CoordinatePlaneDivision.exists_eq_coord_mul,TranscendentalNakamaye.Pending.CoordinatePlaneDivision.exists_eq_sum_coord_mul,TranscendentalNakamaye.Pending.BlowupFlatCoordinates.flatCoord,TranscendentalNakamaye.Pending.BlowupFlatCoordinates.flatDomain,TranscendentalNakamaye.Pending.BlowupFlatCoordinates.holomorphicAt_flatCoord,TranscendentalNakamaye.Pending.BlowupFlatCoordinates.flatCoord_mem_vanishingIdeal,TranscendentalNakamaye.Pending.BlowupFlatCoordinates.exists_eq_sum_flatCoord}
+\leanok
+\begin{enumerate}
+\item Let \(F\) be holomorphic near a point \(q\in\mathbf C^k\times0\subset\mathbf C^n\) and vanish on \(\mathbf C^k\times0\) near \(q\). Then
+\(F(u)=\sum_{i\ge k}u_iH_i(u)\) near \(q\) with \(H_i\) holomorphic near \(q\).
+\item For a flattening chart and \(x\in D_\Phi\), every \(f\in\mathcal I_{C,x}\) is \(\sum_{i\ge k}b_i\tau_i\) near \(x\) with \(b_i\) holomorphic near \(x\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Induction on the number of normal coordinates: \(F(u)-F(u_1,\dots,u_{n-1},0)=u_n\int_0^1\partial_nF(u_1,\dots,u_{n-1},tu_n)\,dt\).
+(2) Apply (1) to \(F=f\circ(\Phi\circ e_{y_0})^{-1}\) at \(\Phi(e_{y_0}(x))\) if \(x\in C\); if \(x\notin C\) some \(\tau_i(x)\ne0\) and
+\(f=(f/\tau_i)\,\tau_i\) near \(x\).
+\end{proof}
+
+\begin{lemma}[The tangent space in flattening coordinates]
+\label{bex:tangent-flat}
+\uses{bex:hadamard}
+\lean{TranscendentalNakamaye.Pending.BlowupSpaceTangent.differentiableAt_comp_chart_symm,TranscendentalNakamaye.Pending.BlowupSpaceTangent.differentiableAt_chart_comp_chart_symm,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff,TranscendentalNakamaye.Pending.BlowupSpaceTangent.chartAt_symm_self,TranscendentalNakamaye.Pending.BlowupSpaceTangent.differentiableAt_germ,TranscendentalNakamaye.Pending.BlowupSpaceTangent.tendsto_chartAt_symm,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_congr,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_zero,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_mul,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_sum,TranscendentalNakamaye.Pending.BlowupSpaceTangent.tangentSpace,TranscendentalNakamaye.Pending.BlowupSpaceTangent.mem_tangentSpace,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_eq_zero_of_mem_tangentSpace,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatMap,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatInvMap,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatVec,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatInvMap_flat,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatInverse_flatMap_eventually,TranscendentalNakamaye.Pending.BlowupSpaceTangent.differentiableAt_flatMap,TranscendentalNakamaye.Pending.BlowupSpaceTangent.differentiableAt_flatInvMap,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatMap_flatInvMap_eventually,TranscendentalNakamaye.Pending.BlowupSpaceTangent.fderiv_flatMap_flatVec,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_flatCoord,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_flatCoord_flatVec,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_flatVec,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatCoord_eq_zero,TranscendentalNakamaye.Pending.BlowupSpaceTangent.mem_tangentSpace_iff,TranscendentalNakamaye.Pending.BlowupSpaceTangent.flatVec_not_mem_tangentSpace,TranscendentalNakamaye.Pending.BlowupSpaceTangent.exists_sub_smul_mem_of_mem_sup_span,TranscendentalNakamaye.Pending.BlowupSpaceTangent.sup_span_eq_of_sub_smul_mem,TranscendentalNakamaye.Pending.BlowupSpaceTangent.exists_sub_smul_mem_of_sup_span_eq,TranscendentalNakamaye.Pending.BlowupSpaceTangent.germDiff_apply_of_sub_smul_mem}
+\leanok
+Let \(c\) be a flattening chart and \(x\in C\cap D_\Phi\).
+\begin{enumerate}
+\item \(d_xf\) vanishes on \(T_xC\) for every \(f\in\mathcal I_{C,x}\).
+\item \(T_xC=\{\xi\in\mathbf C^n:d_x\tau_i(\xi)=0\text{ for all }i\ge k\}\).
+\item The linear map \(\xi\mapsto(d_x\tau_i(\xi))_{i}\) is an isomorphism \(\mathbf C^n\to\mathbf C^n\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) is the definition of \(T_xC\). In (2), ``\(\subset\)'' holds because \(\tau_i\in\mathcal I_{C,x}\) for \(i\ge k\). Conversely, for
+\(f\in\mathcal I_{C,x}\) write \(f=\sum_{i\ge k}b_i\tau_i\) near \(x\) (Lemma~\ref{bex:hadamard}); since \(\tau_i(x)=0\) for \(i\ge k\) (as \(x\in C\)), the
+product rule gives \(d_xf=\sum_{i\ge k}b_i(x)\,d_x\tau_i\), which vanishes wherever all \(d_x\tau_i\), \(i\ge k\), do. (3) The map is the
+differential at \(e_x(x)\) of \(\Phi\circ e_{y_0}\circ e_x^{-1}\), which has the holomorphic local inverse \(e_x\circ e_{y_0}^{-1}\circ\Phi^{-1}\).
+\end{proof}
+
+\begin{definition}[The blowup as a set]
+\label{bex:blowup-space}
+\uses{bex:tangent-flat}
+\source{demailly-cadg:VII.12.1}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.IsBlowupPoint,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.base,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.dir,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.ext,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.isBlowupPoint,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.dir_eq_bot,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.exists_dir,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.dirVec,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.dirVec_not_mem,TranscendentalNakamaye.Pending.BlowupConstruction.BlowupSpace.dir_eq_sup_dirVec,TranscendentalNakamaye.Pending.BlowupConstruction.blowupProj,TranscendentalNakamaye.Pending.BlowupConstruction.offPoint,TranscendentalNakamaye.Pending.BlowupConstruction.excPoint,TranscendentalNakamaye.Pending.BlowupConstruction.eq_offPoint,TranscendentalNakamaye.Pending.BlowupConstruction.eq_of_base_eq_of_not_mem,TranscendentalNakamaye.Pending.BlowupConstruction.extVal,TranscendentalNakamaye.Pending.BlowupConstruction.extVal_of_not_mem,TranscendentalNakamaye.Pending.BlowupConstruction.extVal_of_mem,TranscendentalNakamaye.Pending.BlowupConstruction.exists_extVal_eq_mul,TranscendentalNakamaye.Pending.BlowupConstruction.exists_extVal_excPoint_eq_mul}
+\leanok
+Let \(\tilde X\) be the set of pairs \((x,L)\), \(x\in X\) and \(L\subset\mathbf C^n\) a linear subspace, such that either \(x\notin C\) and
+\(L=0\), or \(x\in C\) and \(L=T_xC+\mathbf C\xi\) for some \(\xi\notin T_xC\); let \(\pi(x,L)=x\). For \(p=(x,L)\) with \(x\in C\) fix
+\(\xi_p\notin T_xC\) with \(L=T_xC+\mathbf C\xi_p\). For \(f\) holomorphic near \(x\) put \(f^\flat(p)=f(x)\) if \(x\notin C\) and
+\(f^\flat(p)=d_xf(\xi_p)\) if \(x\in C\).
+\end{definition}
+If \(T_xC+\mathbf C\xi=T_xC+\mathbf C\xi'\) with \(\xi,\xi'\notin T_xC\), then \(\xi'=a\xi+t\) with \(a\ne0\) and \(t\in T_xC\); so for
+\(f,g\in\mathcal I_{C,x}\) the quotient \(f^\flat(p)/g^\flat(p)\) does not depend on the choice of \(\xi_p\) (Lemma~\ref{bex:tangent-flat}(1)). It is
+Demailly's extension \((f/g)^\sim\) of \(f/g\). Conversely, by Lemma~\ref{bex:tangent-flat}(2), if \(x\in C\cap D_\Phi\) and
+\((d_x\tau_i(\xi'))_{i\ge k}=a\,(d_x\tau_i(\xi))_{i\ge k}\) with \(a\ne0\), then \(\xi'-a\xi\in T_xC\) and \(T_xC+\mathbf C\xi=T_xC+\mathbf C\xi'\).
+
+\begin{lemma}[The monomial charts]
+\label{bex:monomial-chart}
+\uses{bex:blowup-space,bex:tangent-flat}
+\source{demailly-cadg:VII.12.1,demailly-cadg:VII.12.2}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.τ,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.dom,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.τ_eq_zero,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.τ_mem_vanishingIdeal,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.target,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.isOpen_target,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.pt_mem_dom,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.flat_pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.τ_pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.pt_mem_iff,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.normalVec,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.normalVec_j,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.junk,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.invFun,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toFun,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.source,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.invFun_of_ne,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.flatVec_normalVec_not_mem,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.invFun_of_eq,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.base_invFun,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.monomial_toFun,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.eq_excPoint,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toFun_apply_j,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toFun_apply_normal,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toFun_apply_of_not,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.map_source,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.pt_toFun,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toFun_j_eq_zero_iff,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.monomial_apply_of_not,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.map_target,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.left_inv,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.right_inv,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toPartialEquiv,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.blowupProj_invFun,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.e,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.toPartialEquiv,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.source_eq,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.target_eq,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.apply_eq,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.symm_apply_of_not_mem}
+\leanok
+Let \(c=(y_0,k,\Phi,j)\) be a flattening chart, \(U_c=\{p\in\tilde X:\pi(p)\in D_\Phi,\ \tau_j^\flat(p)\ne0\}\), and
+\(\chi_c(p)=w\) with \(w_i=\tau_i(\pi(p))\) for \(i<k\) or \(i=j\), and \(w_i=\tau_i^\flat(p)/\tau_j^\flat(p)\) for \(k\le i\ne j\). Then
+\(\Phi(e_{y_0}(\pi(p)))=\sigma_j(\chi_c(p))\), and \(\chi_c\) is a bijection of \(U_c\) onto \(\sigma_j^{-1}(\Phi.\mathrm{target})\). Its inverse
+sends \(w\) to \((x,0)\) if \(w_j\ne0\) and to \((x,T_xC+\mathbf C\xi_w)\) if \(w_j=0\), where \(x=(\Phi\circ e_{y_0})^{-1}(\sigma_j(w))\) and
+\(\xi_w\) is the vector with \(d_x\tau_i(\xi_w)=v_i\) for all \(i\) (Lemma~\ref{bex:tangent-flat}(3)), \(v_i=0\) for \(i<k\), \(v_j=1\), \(v_i=w_i\) for
+\(k\le i\ne j\). Similarly, for a chart \(e\) of \(X\), \(\chi_e(p)=e(\pi(p))\) is a bijection of
+\(U_e=\pi^{-1}(e.\mathrm{source}\setminus C)\) onto \(e(e.\mathrm{source}\setminus C)\) with inverse \(z\mapsto(e^{-1}(z),0)\).
+\end{lemma}
+\begin{proof}
+\leanok
+Let \(p\in U_c\), \(x=\pi(p)\), \(w=\chi_c(p)\). If \(x\notin C\) then \(\tau^\flat=\tau\) at \(p\), \(w_j=\tau_j(x)\ne0\) and
+\(w_iw_j=\tau_i(x)\) for \(k\le i\ne j\). If \(x\in C\) then \(\tau_i(x)=0\) for \(i\ge k\), \(w_j=0\) and \(\sigma_j(w)_i=w_iw_j=0\) for
+\(k\le i\ne j\). In both cases \(\sigma_j(w)=\Phi(e_{y_0}(x))\in\Phi.\mathrm{target}\), so \(x\) is recovered from \(w\). If \(w_j\ne0\) then
+\(\sigma_j(w)\notin\mathbf C^k\times0\), so \(x\notin C\) and \(p=(x,0)\). If \(w_j=0\) then \(x\in C\), and
+\((d_x\tau_i(\xi_p))_{i\ge k}=\tau_j^\flat(p)\,(v_i)_{i\ge k}=\tau_j^\flat(p)\,(d_x\tau_i(\xi_w))_{i\ge k}\), so \(p=(x,T_xC+\mathbf C\xi_w)\) by the
+remark after Definition~\ref{bex:blowup-space}. Conversely, for \(w\in\sigma_j^{-1}(\Phi.\mathrm{target})\) the pair described is a point of
+\(\tilde X\) (for \(w_j=0\): \(\sigma_j(w)\in\mathbf C^k\times0\), so \(x\in C\), and \(\xi_w\notin T_xC\) because \(v_j=1\)); it lies in \(U_c\), as
+\(\tau_j^\flat=\tau_j(x)=w_j\ne0\), resp.\ \(\tau_j^\flat=a\,v_j=a\ne0\) when \(\xi_p=a\xi_w+t\); and \(\chi_c\) maps it to \(w\), the ratios being
+\(a\,v_i/a\,v_j=w_i\). The statement about \(\chi_e\) is clear.
+\end{proof}
+
+\begin{lemma}[Extended quotients are holomorphic in the monomial charts]
+\label{bex:ratio-holomorphic}
+\uses{bex:monomial-chart,bex:hadamard}
+\source{demailly-cadg:VII.12.2}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.ratio,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.flatRep,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.flatRep_monomial,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.monomial_apply_j,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.ratio_of_ne,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.ratio_of_eq,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.differentiableAt_flatRep,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.differentiableAt_comp_pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.continuousAt_pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.hadamardExpr,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.normalVec_apply,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.monomial_mul_eq,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.fderiv_sum_coord_mul,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.differentiableAt_ratio}
+\leanok
+Let \(c=(y_0,k,\Phi,j)\) be a flattening chart, \(V\subset X\) open, and \(f\) holomorphic on \(V\) and zero on \(C\cap V\). Then
+\(G_f(w)=f^\flat(\chi_c^{-1}(w))/\tau_j^\flat(\chi_c^{-1}(w))\) is holomorphic on the open set
+\(\{w\in\sigma_j^{-1}(\Phi.\mathrm{target}):(\Phi\circ e_{y_0})^{-1}(\sigma_j(w))\in V\}\).
+\end{lemma}
+\begin{proof}
+\leanok
+Let \(w_0\) be in this set and \(u_0=\sigma_j(w_0)\). If \((w_0)_j\ne0\), then near \(w_0\) the points \(\chi_c^{-1}(w)\) lie off \(C\) and
+\(G_f(w)=f((\Phi\circ e_{y_0})^{-1}(\sigma_j(w)))/w_j\). Let \((w_0)_j=0\), so \(u_0\in\mathbf C^k\times0\). The function
+\(F=f\circ(\Phi\circ e_{y_0})^{-1}\) is holomorphic near \(u_0\) and vanishes on \(\mathbf C^k\times0\) near \(u_0\); by
+Lemma~\ref{bex:hadamard}, \(F(u)=\sum_{i\ge k}u_iH_i(u)\) near \(u_0\). For \(w\) near \(w_0\) with \(w_j\ne0\),
+\[
+ G_f(w)=\frac{F(\sigma_j(w))}{w_j}=H_j(\sigma_j(w))+\sum_{k\le i\ne j}w_i\,H_i(\sigma_j(w)).
+\]
+For \(w\) near \(w_0\) with \(w_j=0\), let \(x=(\Phi\circ e_{y_0})^{-1}(\sigma_j(w))\in C\) and \(\xi_w\) be as in Lemma~\ref{bex:monomial-chart}; since
+\(\xi_p=a\xi_w+t\) (\(a\ne0\), \(t\in T_xC\)) and \(d_x\tau_j(\xi_w)=1\), \(G_f(w)=d_xf(\xi_w)\). Near \(e_x(x)\),
+\(f\circ e_x^{-1}=F\circ(\Phi\circ e_{y_0}\circ e_x^{-1})\), and \(D(\Phi\circ e_{y_0}\circ e_x^{-1})(\xi_w)=v\); so, with \(u=\sigma_j(w)\),
+\[
+ G_f(w)=DF(u)(v)=\sum_{i\ge k}v_iH_i(u)+\sum_{i\ge k}u_i\,DH_i(u)(v)=H_j(\sigma_j(w))+\sum_{k\le i\ne j}w_i\,H_i(\sigma_j(w)),
+\]
+because \(u_i=0\) for \(i\ge k\). So \(G_f\) is given near \(w_0\) by a single holomorphic expression.
+\end{proof}
+
+\begin{theorem}[The blowup is a complex manifold]
+\label{bex:atlas}
+\uses{bex:monomial-chart,bex:ratio-holomorphic,bex:tangent-flat}
+\source{demailly-cadg:VII.12.2,demailly-cadg:VII.12.3}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.blowupAtlas,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toPartialEquiv_source,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toPartialEquiv_target,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toPartialEquiv_apply,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.toPartialEquiv_symm_apply,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.continuousOn_pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.isOpen_target_inter_pt,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.isOpen_dom,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.holomorphicAt_τ,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.mem_source_iff,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.extVal_invFun_ne,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.differentiableAt_ratio_τ,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.continuousOn_ratio_τ,TranscendentalNakamaye.Pending.BlowupConstruction.OffChart.toPartialEquiv_symm_apply_of_not_mem,TranscendentalNakamaye.Pending.BlowupConstruction.transSource,TranscendentalNakamaye.Pending.BlowupConstruction.transSource_flat_flat,TranscendentalNakamaye.Pending.BlowupConstruction.isOpen_transSource_flat_flat,TranscendentalNakamaye.Pending.BlowupConstruction.differentiableOn_flat_flat,TranscendentalNakamaye.Pending.BlowupConstruction.transSource_flat_off,TranscendentalNakamaye.Pending.BlowupConstruction.isOpen_transSource_flat_off,TranscendentalNakamaye.Pending.BlowupConstruction.differentiableAt_chart_pt,TranscendentalNakamaye.Pending.BlowupConstruction.differentiableOn_flat_off,TranscendentalNakamaye.Pending.BlowupConstruction.transSource_off_flat,TranscendentalNakamaye.Pending.BlowupConstruction.isOpen_transSource_off_flat,TranscendentalNakamaye.Pending.BlowupConstruction.differentiableOn_off_flat,TranscendentalNakamaye.Pending.BlowupConstruction.transSource_off_off,TranscendentalNakamaye.Pending.BlowupConstruction.isOpen_transSource_off_off,TranscendentalNakamaye.Pending.BlowupConstruction.differentiableOn_off_off,TranscendentalNakamaye.Pending.BlowupConstruction.isOpen_transSource_and_differentiableOn,TranscendentalNakamaye.Pending.BlowupConstruction.isClosed_centre,TranscendentalNakamaye.Pending.BlowupConstruction.exists_flattening,TranscendentalNakamaye.Pending.BlowupConstruction.flatK,TranscendentalNakamaye.Pending.BlowupConstruction.flatΦ,TranscendentalNakamaye.Pending.BlowupConstruction.flatΦ_spec,TranscendentalNakamaye.Pending.BlowupConstruction.mkFlat,TranscendentalNakamaye.Pending.BlowupConstruction.mkFlat_y₀,TranscendentalNakamaye.Pending.BlowupConstruction.mkFlat_Φ,TranscendentalNakamaye.Pending.BlowupConstruction.mkFlat_j,TranscendentalNakamaye.Pending.BlowupConstruction.exists_mem_flatSource,TranscendentalNakamaye.Pending.BlowupConstruction.exists_chart,TranscendentalNakamaye.Pending.BlowupConstruction.prefChart,TranscendentalNakamaye.Pending.BlowupConstruction.prefChart_mem,TranscendentalNakamaye.Pending.BlowupConstruction.mem_prefChart_source,TranscendentalNakamaye.Pending.BlowupConstruction.blowupCore,TranscendentalNakamaye.Pending.BlowupConstruction.topologicalSpace,TranscendentalNakamaye.Pending.BlowupConstruction.chartedSpace,TranscendentalNakamaye.Pending.BlowupConstruction.atlasHomeo,TranscendentalNakamaye.Pending.BlowupConstruction.atlasHomeo_toPartialEquiv,TranscendentalNakamaye.Pending.BlowupConstruction.isOpen_source_of_mem,TranscendentalNakamaye.Pending.BlowupConstruction.atlasHomeo_mem_atlas,TranscendentalNakamaye.Pending.BlowupConstruction.exists_eq_atlasHomeo,TranscendentalNakamaye.Pending.BlowupConstruction.isManifold,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.isOpen_source,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.homeo,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.homeo_source,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.homeo_apply,TranscendentalNakamaye.Pending.BlowupConstruction.continuousAt_proj_symm,TranscendentalNakamaye.Pending.BlowupConstruction.continuous_blowupProj,TranscendentalNakamaye.Pending.BlowupConstruction.exists_separating_of_common,TranscendentalNakamaye.Pending.BlowupConstruction.exists_separating_of_base_eq,TranscendentalNakamaye.Pending.BlowupConstruction.t2Space,TranscendentalNakamaye.Pending.BlowupConstruction.secondCountableTopology,TranscendentalNakamaye.Pending.BlowupConstruction.isComplexManifold,TranscendentalNakamaye.Pending.BlowupConstruction.contMDiffAt_proj_symm,TranscendentalNakamaye.Pending.BlowupConstruction.contMDiff_blowupProj}
+\leanok
+The maps \(\chi_c\) (\(c\) a flattening chart) and \(\chi_e\) (\(e\) a chart of \(X\)) form a holomorphic atlas of \(\tilde X\): every point of
+\(\tilde X\) lies in the domain of one of them, and every coordinate change has an open domain and is holomorphic. For the topology it defines,
+\(\tilde X\) is Hausdorff and second countable, hence a complex manifold of dimension \(n\), and \(\pi\) is holomorphic, with
+\(\pi\circ\chi_c^{-1}=(\Phi\circ e_{y_0})^{-1}\circ\sigma_j\) and \(\pi\circ\chi_e^{-1}=e^{-1}\).
+\end{theorem}
+\begin{proof}
+\leanok
+\emph{Covering.} A point \((x,0)\), \(x\notin C\), lies in \(U_{e_x}\). For \(p=(y,L)\) with \(y\in C\), take a flattening at \(y\); since
+\(\xi_p\notin T_yC\), Lemma~\ref{bex:tangent-flat}(2) gives a normal index \(j\) with \(d_y\tau_j(\xi_p)\ne0\), i.e.\ \(p\in U_c\).
+
+\emph{Coordinate changes.} Between two charts \(\chi_e,\chi_{e'}\) it is a coordinate change of \(X\). From \(\chi_e\) to \(\chi_c\) it is
+\(z\mapsto\chi_c(e^{-1}(z),0)\), whose coordinates are \(\tau_i(e^{-1}z)\) and \(\tau_i(e^{-1}z)/\tau_j(e^{-1}z)\), on the open set where
+\(e^{-1}z\in D_\Phi\setminus C\) and \(\tau_j(e^{-1}z)\ne0\). From \(\chi_c\) to \(\chi_e\) it is \(w\mapsto e((\Phi\circ e_{y_0})^{-1}(\sigma_j w))\) on the
+open set where \(w_j\ne0\) and \((\Phi\circ e_{y_0})^{-1}(\sigma_jw)\in e.\mathrm{source}\). From \(\chi_c\) to \(\chi_{c'}\), \(c'=(y_1,k',\Phi',j')\) with
+flat coordinates \(\tau'\): on \(U_c\), \(\tau_i'^\flat/\tau_{j'}'^\flat=(\tau_i'^\flat/\tau_j^\flat)/(\tau_{j'}'^\flat/\tau_j^\flat)\), so in the coordinates \(w\) of
+\(\chi_c\) the coordinate change is
+\[
+ w\longmapsto\Bigl(\tau_i'\bigl((\Phi\circ e_{y_0})^{-1}(\sigma_jw)\bigr)\ (i<k'\text{ or }i=j'),\quad G_{\tau_i'}(w)/G_{\tau_{j'}'}(w)\ (k'\le i\ne j')\Bigr),
+\]
+on the set where \((\Phi\circ e_{y_0})^{-1}(\sigma_jw)\in D_{\Phi'}\) and \(G_{\tau_{j'}'}(w)\ne0\). The functions \(\tau_i'\), \(i\ge k'\), are holomorphic on
+\(D_{\Phi'}\) and vanish on \(C\cap D_{\Phi'}\), so by Lemma~\ref{bex:ratio-holomorphic} the \(G\) are holomorphic, the domain is open and the change
+is holomorphic.
+
+So the charts generate a topology in which each \(U\) is open and each \(\chi\) a homeomorphism onto an open subset of \(\mathbf C^n\), and the atlas
+is holomorphic. The formulas for \(\pi\circ\chi^{-1}\) (Lemma~\ref{bex:monomial-chart}) show that \(\pi\) is continuous and holomorphic.
+
+\emph{Hausdorff.} Let \(p\ne q\). If \(\pi(p)\ne\pi(q)\), pull back disjoint neighbourhoods in \(X\) by \(\pi\). Otherwise \(\pi(p)=\pi(q)=y\in C\)
+(over a point off \(C\) there is one point). Fix a flattening at \(y\) and normal indices \(j,l\) with \(p\in U_{(\Phi,j)}\), \(q\in U_{(\Phi,l)}\). If
+\(q\in U_{(\Phi,j)}\) or \(p\in U_{(\Phi,l)}\), the two points lie in one chart domain and are separated by the chart. Otherwise
+\(\tau_j^\flat(q)=0=\tau_l^\flat(p)\), so \(l\ne j\), \(|\chi_{(\Phi,j)}(p)_l|=0\) and \(|\chi_{(\Phi,l)}(q)_j|=0\); the open sets
+\(\{r\in U_{(\Phi,j)}:|\chi_{(\Phi,j)}(r)_l|<1\}\ni p\) and \(\{r\in U_{(\Phi,l)}:|\chi_{(\Phi,l)}(r)_j|<1\}\ni q\) are disjoint, since on
+\(U_{(\Phi,j)}\cap U_{(\Phi,l)}\) the product \(\chi_{(\Phi,j)}(r)_l\,\chi_{(\Phi,l)}(r)_j=(\tau_l^\flat/\tau_j^\flat)(\tau_j^\flat/\tau_l^\flat)\) is \(1\).
+
+\emph{Second countability.} Countably many charts of \(X\) cover \(X\), and since \(C\) is closed in the second countable space \(X\),
+countably many flat domains \(D_{\Phi_m}\) cover \(C\). The corresponding countably many chart domains cover \(\tilde X\) (as in the covering step), and
+each is homeomorphic to an open subset of \(\mathbf C^n\).
+\end{proof}
+
+\begin{lemma}[The exceptional divisor]
+\label{bex:proj-invertible}
+\uses{bex:atlas,bex:hadamard}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.exists_coord_ne_zero_of_mem_nhds,TranscendentalNakamaye.Pending.BlowupConstruction.holomorphicAt_comp_blowupProj,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.holomorphicAt_coord,TranscendentalNakamaye.Pending.BlowupConstruction.FlatChart.τ_base_eq,TranscendentalNakamaye.Pending.BlowupConstruction.isInvertible_pullback_blowupProj}
+\leanok
+The ideal \(\pi^*\mathcal I_C\) is invertible: on \(U_c\) it is generated by \(\tau_j\circ\pi\), which is the coordinate \(w_j\) of \(\chi_c\), and on
+\(\pi^{-1}(X\setminus C)\) it is the unit ideal.
+\end{lemma}
+\begin{proof}
+\leanok
+Off \(C\) the constant \(1\) lies in \(\mathcal I_C\) (it vanishes on \(C\) near points off the closed set \(C\)). On \(U_c\),
+\(\tau_j\in\mathcal I_C\) on \(D_\Phi\), so \(\tau_j\circ\pi\) lies in the pullback. Conversely every \(b\in\mathcal I_{C,\pi(p)}\) is
+\(\sum_{i\ge k}\beta_i\tau_i\) near \(\pi(p)\) (Lemma~\ref{bex:hadamard}), and \(\tau_i\circ\pi\circ\chi_c^{-1}=\sigma_j(w)_i\) is \(w_iw_j\) or \(w_j\) for
+\(i\ge k\); so \(b\circ\pi\) is a holomorphic multiple of \(w_j\). Finally \(w_j\) vanishes on no nonempty open subset of the chart.
+\end{proof}
+
+\begin{lemma}[Uniqueness of lifts]
+\label{bex:lift-unique}
+\uses{bex:atlas}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.exists_not_mem_of_isOpen,TranscendentalNakamaye.Pending.BlowupConstruction.lift_eqOn}
+\leanok
+Let \(g\colon W\to X\) be a holomorphic map from a complex manifold with \(g^*\mathcal I_C\) invertible. Then \(g^{-1}(X\setminus C)\) is dense
+in \(W\), and two continuous maps \(h_1,h_2\colon W'\to\tilde X\) on an open set \(W'\subset W\) with \(\pi\circ h_1=\pi\circ h_2=g\) on \(W'\)
+coincide.
+\end{lemma}
+\begin{proof}
+\leanok
+Suppose a nonempty open \(W_1\) satisfies \(g(W_1)\subset C\). Let \(w\in W_1\) and \(u\) a generator of \(g^*\mathcal I_C\) near \(w\). Then \(u\) lies
+in \(g^*\mathcal I_C\) at \(w\): near \(w\), \(u=\sum_lc_l\,(b_l\circ g)\) with \(b_l\in\mathcal I_{C,g(w)}\). Each \(b_l\) vanishes on \(C\) near
+\(g(w)\), so \(u\) vanishes on a nonempty open subset of \(W_1\) near \(w\), which the generator does not. For the second statement, a point of
+\(\tilde X\) over \(x\notin C\) is \((x,0)\), so \(h_1=h_2\) on \(W'\cap g^{-1}(X\setminus C)\), a dense subset of \(W'\); and
+\(\{h_1\ne h_2\}\) is open since \(\tilde X\) is Hausdorff (Theorem~\ref{bex:atlas}). An open set missing a dense set is empty.
+\end{proof}
+
+\begin{lemma}[Local existence of lifts]
+\label{bex:lift-local}
+\uses{bex:atlas,bex:hadamard}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.contMDiffAt_of_mem_chart,TranscendentalNakamaye.Pending.BlowupConstruction.exists_local_lift_of_not_mem,TranscendentalNakamaye.Pending.BlowupConstruction.exists_local_lift_of_mem,TranscendentalNakamaye.Pending.BlowupConstruction.exists_local_lift}
+\leanok
+Let \(g\colon W\to X\) be a holomorphic map from a complex manifold with \(g^*\mathcal I_C\) invertible, and \(w_0\in W\). There are an open
+\(W_0\ni w_0\) and a holomorphic \(h\colon W_0\to\tilde X\) with \(\pi\circ h=g\) on \(W_0\).
+\end{lemma}
+\begin{proof}
+\leanok
+If \(g(w_0)\notin C\), take \(h(w)=(g(w),0)=\chi_e^{-1}(e(g(w)))\) on \(g^{-1}(e.\mathrm{source}\setminus C)\). Let \(g(w_0)\in C\); take a flattening
+at \(g(w_0)\) with flat coordinates \(\tau_i\), and a generator \(u\) of \(g^*\mathcal I_C\) near \(w_0\). The functions \(f_i=\tau_i\circ g\), \(i\ge k\),
+lie in \(g^*\mathcal I_C\), so \(f_i=a_iu\) near \(w_0\) with \(a_i\) holomorphic. And \(u\) lies in \(g^*\mathcal I_C\):
+\(u=\sum_lc_l\,(b_l\circ g)\) near \(w_0\) with \(b_l\in\mathcal I_{C,g(w_0)}\), and \(b_l=\sum_{i\ge k}\beta_{li}\tau_i\) near \(g(w_0)\)
+(Lemma~\ref{bex:hadamard}), so \(u=\sum_{i\ge k}\gamma_if_i=u\sum_{i\ge k}\gamma_ia_i\) near \(w_0\) with \(\gamma_i\) holomorphic. If all
+\(a_i(w_0)\) vanished, \(1-\sum\gamma_ia_i\) would be nonzero near \(w_0\) and \(u\) would vanish on a neighbourhood of \(w_0\), which a generator
+does not. So \(a_j(w_0)\ne0\) for some \(j\ge k\). Near \(w_0\) let \(z(w)_i=\tau_i(g(w))\) for \(i<k\) or \(i=j\), and
+\(z(w)_i=a_i(w)/a_j(w)\) for \(k\le i\ne j\). Since \(\tau_i(g(w))=a_iu=(a_i/a_j)\,\tau_j(g(w))\), \(\sigma_j(z(w))=\Phi(e_{y_0}(g(w)))\in\Phi.\mathrm{target}\);
+so \(h=\chi_{(\Phi,j)}^{-1}\circ z\) is defined and holomorphic near \(w_0\), and \(\pi\circ h=(\Phi\circ e_{y_0})^{-1}\circ\sigma_j\circ z=g\)
+(Theorem~\ref{bex:atlas}).
+\end{proof}
+
+\begin{theorem}[The blowup exists]
+\label{bex:blowup-exists}
+\uses{bex:atlas,bex:proj-invertible,bex:lift-unique,bex:lift-local,ana:blowups}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.exists_lift,TranscendentalNakamaye.Pending.BlowupConstruction.isBlowupAlong_blowupProj}
+\leanok
+Let \(C\) be a nowhere dense closed submanifold of a complex manifold \(X\). Then \(\pi\colon\tilde X\to X\) is a blowup of \(X\) along \(C\) in
+the sense of Definition~\ref{ana:blowups}.
+\end{theorem}
+\begin{proof}
+\leanok
+\(\tilde X\) is a complex manifold of dimension \(n\) and \(\pi\) is holomorphic (Theorem~\ref{bex:atlas}), and \(\pi^*\mathcal I_C\) is invertible
+(Lemma~\ref{bex:proj-invertible}). Let \(g\colon W\to X\) be holomorphic, \(W\) a complex manifold of any dimension, with \(g^*\mathcal I_C\)
+invertible. Every point of \(W\) has a neighbourhood with a holomorphic lift of \(g\) (Lemma~\ref{bex:lift-local}); two such lifts agree on the
+overlap of their domains (Lemma~\ref{bex:lift-unique}), so they glue to a holomorphic \(h\colon W\to\tilde X\) with \(\pi\circ h=g\), and \(h\) is
+unique by Lemma~\ref{bex:lift-unique}.
+\end{proof}

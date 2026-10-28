@@ -1,0 +1,243 @@
+\section{Empty-boundary canonical values on an actual closed section}
+The target is equality of the actual recursively defined invariant families,
+with the same index, on the genuine closed-section carrier and its native base.
+The original source domain internally gives the base domain; no invariant
+value, selected lower value or comparison history is an input. The conclusion concerns empty boundaries and empty histories; comparison of born-boundary histories and intrinsic descent remain separate obligations.
+
+\begin{lemma}[Original regularity through a native subspace isomorphism]
+\label{hir:actual-section-regularity-native-iso}
+\lean{Hironaka.HironakaActualSectionInitialValues.regularAtDim_of_actual_subspace_iso}
+\lean{Hironaka.HironakaActualSectionInitialValues.actualSectionSubspaceIso}
+\lean{Hironaka.HironakaActualSectionInitialValues.regularAtDim_actual_section_iff}
+\leanok
+An isomorphism over the complex point between the actual reduced subspaces
+of open vector models preserves every original ambient regularity dimension.
+In particular, $A\subseteq U$ is regular of dimension $k$ at $x$ if and only
+if its actual closed-section image is regular of dimension $k$ at $s(x)$.
+\end{lemma}
+\begin{proof}
+An original regular point of dimension $k$ supplies an actual native manifold
+open chart from an open set in $\mathbb C^k$, whose image contains that point.
+Compose this chart with the given native isomorphism. An isomorphism is an
+open immersion, and composition with the original open immersion is an open
+immersion. The composite still lies over the complex point, by the original
+chart's scalar square and the given scalar square. Its base map carries the
+chosen chart point to the specified image point. The genuine native-chart
+regularity converse therefore gives original ambient regularity of dimension
+$k$ at that image. Apply the same argument to the inverse isomorphism for the
+reverse implication. For a section, its actual holomorphic section and projection
+restrict to mutually inverse subset maps, hence give the native isomorphism;
+there is no ambient biholomorphism assertion.
+\end{proof}
+
+\begin{lemma}[The actual special-locus dictionary in the successor induction]
+\label{hir:actual-section-codimension-one-dictionary}
+\lean{Hironaka.HironakaActualSectionInitialValues.source_cosupport_eq_lifted}
+\lean{Hironaka.HironakaActualSectionInitialValues.section_codimOnePart_iff}
+\leanok
+For an original whole ideal $J$ with holomorphic members, every actual support
+$\operatorname{cosupp}_{s(A)}(J,d)$ is exactly the closed-section image of
+$\operatorname{cosupp}_{A}(s^*J,d)$. Their actual codimension-one parts relative
+to the respective carriers correspond under the same section.
+\end{lemma}
+\begin{proof}
+Composition by the genuine section pulls back each ambient point-ideal power.
+Thus an ambient order-$q$ representative of a function along $s(A)$ pulls back
+to an order-$q$ representative along $A$. Conversely compose an order-$q$
+representative on the base with the true projection. On the entire same lifted
+carrier its equality with the source function follows from $s(p(z))=z$.
+For whole ideals, every original member supplies its genuine pullback member;
+in the reverse direction substitute this scalar order dictionary into each
+finite-span generator of the whole pullback. This identifies every order
+threshold, hence every support. Every point of a source support lies on the
+lifted carrier and equals $s(p(z))$, giving equality of the entire sets.
+The actual codimension-one part consists precisely of a carrier regularity
+of dimension $k+1$ together with support regularity of dimension $k$.
+Apply the preceding native regularity equivalence separately to these two
+sets, for each $k$, and retain the same existential $k$ in both directions.
+\end{proof}
+
+\begin{lemma}[Tangent descent on the genuine open carrier]
+\label{hir:actual-open-section-tangent-descent}
+\lean{Hironaka.HironakaActualSectionInitialValues.open_section_tangent_descent}
+\lean{Hironaka.HironakaActualSectionInitialValues.open_section_regular_contact}
+\leanok
+Let $A$ be closed regular in the original open $U$, and let $J$ be coherent on
+$p^{-1}U$. A genuine tangent direction $u$ along $s(A)$, vanishing at $s(x)$,
+restricts to a genuine tangent direction $u\circ s$ along $A$ on some actual
+open neighbourhood $W$ of $x$. No closed regularity in the whole vector space
+is imposed on $A$.
+\end{lemma}
+\begin{proof}
+Choose an actual flattening $\Phi$ for $A$ in $U$ at $x$. Its true product
+flattening is $(\Phi\circ p,q)$; its source is contained in the actual open
+ambient chart target, because $\Phi$'s source is contained in the chart target
+of $U$. Its carrier plane has exactly the original dimension $k$ of $A$.
+The source direction gives an actual tangent field with nonzero derivative at
+$s(x)$. In this product flattening some partial with index $j<k$ is nonzero.
+Since $k\le n$, this index is an actual base index. The genuine open
+closed-section partial identity identifies it with the same base partial of
+$u\circ s$. This identity is used only on the actual flattening target.
+Holomorphy makes this base partial continuous near $x$, so it stays nonzero on
+an actual open neighbourhood. Intersect that neighbourhood with the section
+preimage of the source tangent open and the true domain of $\Phi$.
+On this intersection the whole iterated-derivative closed-section equality
+puts $u\circ s$ in the actual tangent ideal at every point. The actual flat
+coordinate field in the chosen base direction is tangent to $A$ and has the
+nonzero derivative just retained. These are precisely all fields of a genuine
+base tangent direction. Its zero carrier is closed regular in the constructed
+open neighbourhood by the original tangent-contact regularity theorem.
+\end{proof}
+
+\begin{lemma}[The projected representative stays in the original domain]
+\label{hir:actual-section-projected-domain}
+\lean{Hironaka.HironakaActualSectionInitialValues.section_projected_domain}
+\leanok
+For an empty-boundary original domain record $(A,[],I,d)$ in $U$, the
+record $(s(A),[],p^*I,d)$ on the full genuine product open belongs to the
+same index domain.
+\end{lemma}
+\begin{proof}
+The source carrier is closed regular by the actual product flattening of the
+original base carrier. Coherence pulls back under the actual holomorphic
+projection. The empty list is SNC and transverse to every closed regular
+carrier. At $z\in s(A)$ write $z=s(p(z))$. The base dimension bound and the
+actual section regularity equivalence give the same bound at $z$.
+For nonzero restricted ideals choose a genuine base ideal member $g$ which is
+nonzero at points of $A$ arbitrarily near $p(z)$. The actual projection
+pullback contains $g\circ p$. If this member vanished on the lifted carrier
+throughout some neighbourhood of $s(p(z))$, pulling that neighbourhood back
+by the continuous actual section would make $g$ vanish on $A$ near $p(z)$,
+contradicting the chosen base member. Thus the required source member and
+frequent nonvanishing are internally produced. The mark remains positive and
+unchanged. These are all four fields of the ordinary invariant domain.
+\end{proof}
+
+\begin{lemma}[The original source domain internally gives the native base domain]
+\label{hir:actual-section-original-source-domain}
+\lean{Hironaka.HironakaActualSectionInitialValues.section_domain_of_original_source}
+\leanok
+If the original empty-boundary record $(s(A),[],J,d)$ is in the ordinary
+index-$q$ domain, then $(A,[],s^*J,d)$ is in that same original domain.
+No base domain or comparison certificate is an input.
+\end{lemma}
+\begin{proof}
+The inverse image of the actual closed source carrier under the continuous
+section is exactly $A$, hence $A$ is closed. At each $x\in A$, source
+regularity at $s(x)$ and the native section regularity equivalence give the
+same base regularity dimension, so they also give the source dimension bound
+on the base. Coherence pulls back under the actual holomorphic section, and
+the empty list is SNC and transverse to this closed regular carrier.
+For nonzero restricted ideals take a genuine source member $g$ nonzero
+arbitrarily near $s(x)$ on $s(A)$. Its actual section composition belongs to
+$s^*J$. If that composition vanished near $x$ on $A$, the continuous projection
+would pull this neighbourhood back to one near $s(x)$. On $s(A)$ the actual
+identity $s(p(z))=z$ would then force $g$ to vanish there near $s(x)$, a
+contradiction. Thus the entire nonzero-domain field is internally produced.
+The original positive mark is unchanged. These constructions give all fields
+of the ordinary base domain.
+\end{proof}
+
+\begin{theorem}[Original empty-prefix cross-ambient values]
+\label{hir:actual-closed-section-all-index-initial-values}
+\lean{Hironaka.HironakaActualSectionInitialValues.actual_initial_family_values}
+\leanok
+Let $U\subseteq\mathbb C^n$ with $n>0$, and let $s:U\to p^{-1}U$ be the actual
+closed section. For an original ideal $J$ on $p^{-1}U$, an original subset
+$A\subseteq U$ and mark $d$, put $M=(s(A),[],J,d)$ and
+$B=(A,[],s^*J,d)$. If the original source record belongs to the ordinary invariant
+domain at index $q$, then at every $x\in\operatorname{cosupp}(B)$ the actual index-$q$ invariant of
+$M$ at $s(x)$ along the empty history equals that of $B$ at $x$ along the empty
+history. The comparison uses the same value type, with no dimension shift.
+\end{theorem}
+\begin{proof}
+First construct the actual base domain from the preceding original-source
+domain theorem. Prove the comparison with both natural domains by induction
+on $q$, generalizing the original open set, ambient dimension, carrier,
+ideal, mark and point. At $q=0$ both actual functions are the defining constant
+zero function. For the successor, use the actual general-step definition.
+The whole closed-retraction order dictionary identifies every scalar threshold
+of the two restricted original ideals. With empty boundary, the monomial part
+is the unit ideal; the nonmonomial part represents the original restricted
+ideal. Thus the two original nonmonomial orders are equal. Their whole order masks have the same section preimage: on the ordinary
+domain the higher-order loci are closed, so the complement-of-closure mask
+definition reduces to the complement of the actual order locus; the preceding
+whole order dictionary applies at every base point. Their empty histories
+have the same empty regime split. If this common order is zero, the empty-list
+monomial invariants are identical, completing this branch.
+
+At an original cosupport point this common order is at least the original
+positive mark. Thus the companion takes its nonmonomial-only branch. Its
+nonmonomial ideal is the actual restricted extension of the original ideal,
+which is restricted equivalent to the original representative. Actual StepOne
+representative invariance therefore replaces it by that original ideal with
+the common order as mark, on the true order mask. If the common order is positive, form the two actual companions on their genuine
+order masks. Their whole restricted ideals correspond: the empty monomial parts
+are units, and the companion's two defining branches are the same finite sums,
+products and powers after the whole restriction dictionary. The actual section
+order masks may differ off the carrier; use their genuine section-mask overlap,
+not a supposed cylinder identity. On that overlap the whole source ideal is
+restricted equivalent to the true projection pullback of its section restriction.
+Same-ambient representative invariance and actual open restriction compare these
+records with the product-open representatives to which the induction applies.
+
+The masked induction comparison used here is established as follows. 
+Flatten the genuine nested open $W$ to its affine open image $W_0$ by the
+actual subtype-coordinate biholomorphism $e$. Transport the whole base record
+by $e^{-1}$, obtaining a genuine ordinary domain record $B_0$. Lift its entire
+ideal by the genuine projection on $p^{-1}W_0$, retaining its closed-section
+carrier. The projected-domain lemma internally gives its original domain.
+The literal projection-section identity and whole pullback composition identify
+its section pullback with the entire ideal of $B_0$. Thus the actual product
+induction hypothesis applies. Base tower-isomorphism invariance identifies the
+resulting base value with the original value on $W$.
+
+The actual product-coordinate biholomorphism carries this source record to
+$C=p_U^{-1}W$, inside $p^{-1}U$. Its entire ideal is $p_C^*(J|_s)$:
+compose the actual projection square with $e^{-1}$ and use whole pullback
+composition. Its carrier is exactly the same section carrier, by the actual
+whole-carrier coordinate identity. Restrict this record and the original
+source record to the genuine intersection $V=O\cap C$. The actual mask
+representative theorem internally identifies their restricted whole ideals,
+with the same carrier, empty list and mark. Ordinary open restriction and
+biholomorphic transport construct their domains; the whole cosupport dictionary
+places the comparison point in both of their cosupports.
+
+At the empty prefix both canonicality predicates are the defining trivial
+predicate. Same-ambient representative invariance therefore identifies the
+two actual restricted invariant values. The genuine open-restriction field
+identifies each of them with the value of its original record; no history
+restriction is silently identified with a head. The actual product and base
+biholomorphism fields, followed by the product induction comparison already
+proved above, give the required masked equality. All carrier, ideal, domain,
+cosupport and point identifications are internally obtained from the original
+mask and genuine maps; none is an incoming comparison certificate.
+
+
+The companions have maximal order and are in the ordinary domain, by the actual
+companion-domain and order-bound theorems on the order masks. Their levels are
+zero because the original lists are empty. Whole closed-section derivatives,
+holomorphic sums and powers identify their actual homogenized and coefficient
+ideals. Their whole cosupports correspond. The preceding regularity equivalence,
+applied to their original carriers and their whole cosupports, identifies the
+actual codimension-one special parts. At special points both StepOne values
+are the defining pair $(0,\infty)$.
+
+At a nonspecial point take the source's actual chosen tangent direction. The
+whole closed-section differential identity and the actual contact-neighbourhood
+construction restrict this same equation to a genuine base tangent direction,
+on an actual open neighbourhood with closed regular contact carrier. The
+source and base lower contact records are in index-$q$ domain: their carrier
+dimensions drop by one, their marks are positive, and the actual lower-domain
+construction derives nonzero restricted ideals and the point's cosupport.
+Both lower tails are empty, so their canonicality is the defining trivial
+predicate. The actual level-zero tangent-change anchor computes the two lower
+values through this same equation, with internally derived lower data; no lower
+canonicality or value equality is accepted as input. The whole differential,
+homogenized and coefficient dictionaries identify the base contact record with
+the section restriction of the source contact record. Apply the genuine mask
+representative/open comparison above and the induction hypothesis at index $q$
+to those two actual lower records. Their lower values agree; hence their entire
+StepOne pairs agree. Their actual companion values and the original general
+lexicographic pairs therefore agree. This proves the successor case.
+\end{proof}

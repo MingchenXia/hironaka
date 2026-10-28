@@ -1,0 +1,65 @@
+\section{Compact escape of actual centre footprints}
+\begin{theorem}[Compact-exhaustion escape criterion]
+\label{hir:disjoint-compact-exhaustion-escape}
+\lean{Hironaka.HironakaDisjointCompactExhaustionEscape.locallyFinite_iff_exhaustion_escape}
+\leanok
+Let $K_m$ be a compact exhaustion of a topological space and $F_i$ an arbitrary
+natural-number-indexed family of subsets. The family is locally finite if
+and only if, for every $m$, some $N$ satisfies $F_i\cap K_m=\varnothing$ for
+all $i\ge N$. Empty footprints and repeated footprints retain their indices.
+\end{theorem}
+\begin{proof}
+If the family is locally finite, compactness of $K_m$ gives finitely many
+indices meeting $K_m$: choose at each point a neighbourhood meeting finitely
+many members, extract a finite subcover, and take the finite union of its
+finite index sets. A finite subset of the natural numbers is bounded, so
+all indices after a strictly larger bound miss $K_m$. Conversely, at a point
+$x$ choose $K_m$ which is a neighbourhood of $x$, as provided by the interior
+nesting of a compact exhaustion. Its meeting indices lie in the finite set
+of indices strictly below the escaping threshold $N$. Thus this very
+neighbourhood witnesses local finiteness.
+\end{proof}
+\begin{theorem}[Actual closed-tail protected opens]
+\label{hir:disjoint-compact-escape-protected-opens}
+\uses{hir:disjoint-compact-exhaustion-escape}
+\lean{Hironaka.HironakaDisjointCompactExhaustionEscape.protectedOpen,Hironaka.HironakaDisjointCompactExhaustionEscape.protectedOpen_mono,Hironaka.HironakaDisjointCompactExhaustionEscape.exists_compact_subset_protectedOpen}
+\leanok
+Suppose each $F_i$ is closed and the escape condition holds. The literal
+sets $U_N=X\setminus\bigcup_{i\ge N}F_i$ are increasing open sets. Every
+compact subset of $X$ is contained in some $U_N$, and these opens cover $X$.
+\end{theorem}
+\begin{proof}
+The preceding criterion proves local finiteness. Every tail subfamily is
+locally finite, so its union of closed members is closed; its complement
+is the asserted literal open. Increasing $N$ removes members from the union,
+so the complements increase. For a compact set $L$, choose an exhaustion
+member $K_m$ containing it. Escape supplies one $N$ for which every member
+of the entire tail misses $K_m$. No point of $L$ therefore belongs to that
+tail union, proving $L\subset U_N$. Singletons are compact, giving the cover.
+\end{proof}
+\begin{theorem}[Escape produces local finiteness of actual centre images]
+\label{hir:disjoint-actual-centre-exhaustion-escape}
+\uses{hir:disjoint-compact-exhaustion-escape,hir:disjoint-compact-escape-protected-opens,hir:growing-canonical-sequence-closed-images}
+\lean{Hironaka.HironakaDisjointCompactExhaustionEscape.actual_centres_locallyFinite,Hironaka.HironakaDisjointCompactExhaustionEscape.actual_centres_compact_protected,Hironaka.HironakaDisjointCompactExhaustionEscape.actual_centres_choice_escape}
+\leanok
+For any genuine growing blowup sequence on the original base, escape of its
+actual centre footprints along a compact exhaustion proves their actual
+local finiteness and supplies increasing literal closed-tail-complement opens
+containing every compact set. No global canonicality, chosen invariant,
+resolving-block existence, fair selection, or local-finiteness certificate is
+an input. A second-countable locally compact base supplies the compact
+exhaustion itself.
+\end{theorem}
+\begin{proof}
+Apply the first theorem to the literal images of the actual centres under
+the actual finite-prefix projections. Each is closed because the actual
+centre is closed and the genuine prefix projection is proper. Apply the
+second theorem to those same footprints. In a locally compact second-countable
+space, countably many relatively compact neighbourhoods cover the space;
+finite accumulation and recursive compact enlargement provide a compact
+exhaustion with each member inside the interior of the next. Thus the
+compact-exhaustion existence theorem supplies the required exhaustion under
+these ordinary topological hypotheses. This argument proves a criterion for
+an existing sequence; it does not select centres or construct a fair global
+resolution scheduler.
+\end{proof}

@@ -1,0 +1,130 @@
+\section{Actual analytic gluing over saturated Hausdorff base windows}
+
+The following extra hypotheses describe gluing over the same original base.
+They are not consequences of arbitrary analytic open overlap data: gluing two
+lines along their punctured lines gives the line with two origins and fails
+these saturated-window hypotheses. No canonical centre or invariant comparison
+is assumed, and no original Hironaka goal is closed here.
+
+\begin{definition}[Original saturated base windows]
+\label{hir:disjoint-analytic-saturated-base-windows}
+\uses{hir:actual-two-model-overlap-isomorphisms}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.SaturatedBase}
+\leanok
+Let $A$ be the original two-model holomorphic overlap datum, with its actual
+closed analytic carriers $C_i$, $i\in\{0,1\}$. Let $X$ be a Hausdorff space.
+An original saturated base datum consists of open sets $W_i\subset X$ and
+continuous maps $p_i:C_i\to X$ landing in $W_i$, such that for $i\ne j$ the
+actual carrier overlap is exactly $p_i^{-1}(W_j)$ and its actual original
+transition preserves $p_i$. These are ordinary maps, opens and subset equations;
+there is no glued object, separation certificate or sheaf morphism in the input.
+\end{definition}
+
+\begin{lemma}[Actual continuous projection and entire chart ranges]
+\label{hir:disjoint-analytic-saturated-glued-projection}
+\uses{hir:actual-two-model-native-glue-data,hir:disjoint-analytic-saturated-base-windows}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.topData}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedTop}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.chartMap}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedProjection}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.projection_chart}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.chart_range_saturated}
+\leanok
+On the original native topological gluing of $A$, the maps $p_i$ give a genuine
+continuous map $p$ with $p\circ\iota_i=p_i$. Moreover the entire original chart
+range satisfies $\operatorname{range}(\iota_i)=p^{-1}(W_i)$.
+\end{lemma}
+\begin{proof}
+Reuse the existing original two-model locally-ringed-space gluing datum and
+forget to topological spaces. On diagonal overlaps compatibility is identity.
+On off-diagonal overlaps it is exactly the given ordinary transition/base
+compatibility, so the actual multicoequalizer universal property constructs
+$p$ and gives its stated equations. Every chart point projects into its own
+window, proving one range inclusion. For the converse, represent an arbitrary
+glued point by a point of chart $j$, using genuine joint surjectivity. If
+$j=i$ it is already in the range. Otherwise its projection lying in $W_i$
+places that original point in the actual $j,i$ overlap by saturation. Its
+actual transition is an original point of chart $i$, and the original gluing
+relation identifies its image with the same glued point. This proves the
+other inclusion on the whole chart range, not merely near a chosen point.
+\end{proof}
+
+\begin{theorem}[Genuine separation and second countability]
+\label{hir:disjoint-analytic-saturated-glued-separation}
+\uses{hir:disjoint-analytic-saturated-glued-projection}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedTop_t2}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedTop_secondCountable}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.overlapGraph}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.overlapGraph_eq_equalizer}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.overlapGraph_isClosed}
+\leanok
+The actual topological gluing is Hausdorff and second countable. In particular
+the actual off-diagonal original overlap graph is closed in $C_0\times C_1$.
+No separation or second-countability property of the glued target is an input.
+\end{theorem}
+\begin{proof}
+For distinct glued points with distinct $p$-images, choose disjoint open
+neighbourhoods of their images in the original Hausdorff base and pull them
+back by the actual continuous $p$. For two distinct points with the same
+$p$-image, choose an actual chart containing the first point. The entire
+range equation just proved puts the second point in the same actual chart.
+That chart is a closed analytic subset of an original coordinate open, hence
+Hausdorff. Separate the two original representatives there. The canonical
+chart inclusion is a genuine open embedding, so the images of these two
+open sets are disjoint open neighbourhoods of the two glued points. This
+constructs Hausdorff separation in both cases.
+
+The actual map from the disjoint union of the two original carriers to the
+gluing is continuous, open and surjective: each canonical inclusion is a
+continuous open embedding, and actual joint surjectivity supplies surjectivity.
+Each original carrier is second countable, hence so is their finite disjoint
+union. The images of a countable source basis under an open quotient map
+form a countable basis of the target, proving genuine second countability.
+Finally identify the off-diagonal transition graph with the equalizer of the
+two canonical chart maps on $C_0\times C_1$. A genuine transition gives equal
+glued images by the native gluing condition. Conversely equal glued images
+have equal images under the actual continuous projection. Saturation and
+the second point's base-window membership place the first point in the
+actual overlap. Its genuine transition has that same glued image, and the
+second canonical chart map is injective, so the transition is the original
+second point. This proves both directions of the actual graph equality. Their maps are continuous and the derived target is Hausdorff,
+so this graph is closed. The original transition and its inverse are used
+only on the actual analytic carriers; no ambient inverse chart is asserted.
+\end{proof}
+
+\begin{theorem}[The actual glued reduced complex analytic space]
+\label{hir:disjoint-analytic-saturated-glued-space}
+\uses{hir:disjoint-analytic-saturated-glued-separation,hir:actual-two-model-complex-structural-compatibility,hir:reduced-analytic-original-two-model-gluing}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedNative}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.underlyingGluingIso}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.underlyingGluingHomeomorph}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedNative_t2}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.gluedNative_secondCountable}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.actualSaturatedAnalyticSpace}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.actualSaturatedChartMap}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointAnalyticSaturatedGluing.actualSaturatedChartMap_properties}
+\leanok
+The original native locally-ringed-space gluing, with its actual descended
+complex structural map, is an object of the repository's category of reduced
+complex analytic spaces. Its original chart maps are open immersions over the
+same complex point and jointly cover the entire glued object.
+\end{theorem}
+\begin{proof}
+Reuse the existing native reduced-analytic gluing producer, whose explicit
+Hausdorff hypothesis is now discharged by the preceding genuine theorem.
+The existing original overlap maps already preserve the actual structural
+morphisms to the complex point. Their proved compatibility is the exact
+multicoequalizer compatibility condition, so the actual native universal
+property constructs a structural morphism from the unchanged locally ringed
+gluing, with the genuine chart/structural-map equations. The canonical
+forgetful gluing isomorphism identifies its underlying space with the actual
+topological gluing considered above. Transport the proved Hausdorffness and
+second countability through this genuine canonical homeomorphism. The native
+canonical chart maps are actual open immersions and jointly surjective by
+the existing gluing theorem. Each source is its original closed analytic
+coordinate model, and its structural equation is the one just constructed.
+At every glued point choose its actual chart representative. These facts give
+all fields of the original local-analytic-model predicate and therefore the
+native reduced complex analytic space object, without a desired-object or
+isomorphism certificate supplied by the caller.
+\end{proof}

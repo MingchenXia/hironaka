@@ -1,0 +1,120 @@
+\section{Actual local properness descends through saturated analytic gluing}
+
+We retain the original same-Hausdorff-base saturated two-model datum. In
+addition, the actual base windows cover the base and each original projection,
+corestricted to its own base window, is proper. Properness into that window
+is the hypothesis; properness into the entire base is not assumed. No global
+proper map, desired analytic morphism or canonical comparison is input.
+
+\begin{definition}[The actual window projection]
+\label{hir:disjoint-proper-actual-window-projection}
+\uses{hir:disjoint-analytic-saturated-glued-projection,hir:disjoint-analytic-saturated-glued-space}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.windowProjection}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.windowProjection_continuous}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.nativeProjection}
+\leanok
+For the original saturated base datum $B$, let $p_i^W:C_i\to W_i$ be the
+literal corestriction of $B.p_i$ using its original landing proof. Let $p$
+be the actual continuous glued projection already constructed, and let $p^N$
+be its composition with the canonical native-to-topological gluing
+homeomorphism. These are functions on the unchanged actual glued objects.
+\end{definition}
+
+\begin{lemma}[Entire local image and fibre dictionaries]
+\label{hir:disjoint-proper-entire-window-dictionaries}
+\uses{hir:disjoint-proper-actual-window-projection,hir:disjoint-analytic-saturated-glued-projection}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.window_image_dictionary}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.fibre_dictionary}
+\leanok
+For every subset $S$ of the actual topological gluing,
+\[
+ (\operatorname{val}_{W_i})^{-1}(p(S))=p_i^W(\iota_i^{-1}(S)).
+\]
+For every $x\in W_i$, the entire original fibre satisfies
+\[
+ p^{-1}\{x\}=\iota_i((p_i^W)^{-1}\{(x,h_x)\}).
+\]
+\end{lemma}
+\begin{proof}
+For the first equality, take a glued point in $S$ projecting to the specified
+base-window point. Its projection lies in $W_i$, so the already proved
+entire chart-range saturation gives an original representative in $C_i$.
+The actual chart/projection equation makes its corestricted projection the
+specified window point, proving membership in the right image. Conversely
+an original chart representative in the right image supplies its actual
+glued image in $S$; the same literal projection equation gives the original
+base value. For the fibre equality, every glued point projecting to $x\in W_i$
+again has an actual chart-$i$ representative. Its corestricted projection
+is exactly $(x,h_x)$ by subtype extensionality. Conversely any such original
+local fibre point has actual glued projection $x$. No fibre comparison or
+surjectivity certificate is assumed.
+\end{proof}
+
+\begin{theorem}[Actual local properness gives global properness]
+\label{hir:disjoint-proper-global-glued-projection}
+\uses{hir:disjoint-proper-entire-window-dictionaries,hir:disjoint-analytic-saturated-glued-space}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.gluedProjection_isClosedMap}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.gluedProjection_compact_fibres}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.gluedProjection_isProper}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.nativeProjection_isProper}
+\leanok
+If the actual $W_i$ cover the original Hausdorff base and every actual $p_i^W$
+is proper, then the actual glued projection $p$ and its unchanged native
+version $p^N$ are proper.
+\end{theorem}
+\begin{proof}
+Fix a closed subset $S$ of the actual gluing. Its inverse image under each
+continuous original chart inclusion is closed. The proper local projection
+$p_i^W$ is closed, so the preceding whole image dictionary shows that the
+trace of $p(S)$ in every $W_i$ is closed. To see global closedness explicitly,
+for a point outside $p(S)$ choose a base window containing it, using the
+original cover. The complement of that closed trace is open in the window;
+its image under the genuine open window inclusion is an open neighbourhood
+in the original base, and the whole trace equality makes it disjoint from
+$p(S)$. Thus $p(S)$ is closed in the entire base.
+
+For any base point $x$, choose an original window containing it. The local
+proper projection has compact fibre over the actual subtype point $(x,h_x)$.
+Its image under the genuine continuous chart inclusion is compact. The whole
+fibre dictionary identifies this image with the entire original fibre of $p$.
+Consequently the already constructed continuous $p$ is closed with compact
+fibres; the proper-map criterion proves genuine global properness. The
+canonical native gluing homeomorphism is proper, so composition gives the
+properness of $p^N$ on the unchanged native glued analytic object.
+\end{proof}
+
+\begin{theorem}[Actual proper analytic map descent]
+\label{hir:disjoint-proper-analytic-map-descent}
+\uses{hir:disjoint-proper-global-glued-projection,hir:reduced-analytic-glue-effective-map-descent,hir:disjoint-analytic-saturated-glued-space}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.native_chart_homeomorph}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.nativeProjection_chart}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.descendedMap}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.descendedMap_chart}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.descendedMap_base_eq}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.descendedMap_isProper}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointProperAnalyticGluing.exists_actual_proper_analytic_map}
+\leanok
+Let $Q$ be a given reduced complex analytic space. For the same saturated
+base datum with base the underlying space of $Q$, suppose the original chart
+maps to $Q$ are genuine locally ringed morphisms over the complex point,
+compatible on the actual native overlaps, with their underlying projections
+exactly the original $p_i$. Under the actual covering and window-properness
+hypotheses above, construct a genuine analytic morphism from the actual glued
+analytic space to $Q$, with all the original chart restrictions, whose
+underlying map is proper. No such global morphism or properness certificate
+is supplied.
+\end{theorem}
+\begin{proof}
+Apply the existing effective analytic map descent to these original compatible
+chart morphisms and their genuine complex-point equations. It constructs the
+actual morphism $F$ and its exact original chart restrictions. The canonical
+forgetful gluing isomorphisms carry each native chart inclusion to the same
+original topological chart inclusion: this is their existing genuine
+multicoequalizer chart equation, composed through the locally-ringed,
+ringed, presheafed and topological forgetful functors. Hence on every original
+chart, $F$ and $p^N$ have the same underlying point map, namely the given
+$p_i$. Genuine native chart joint surjectivity makes these underlying maps
+equal on the entire glued space. Substitute this equality into the actual
+properness of $p^N$ proved above. This proves properness of the constructed
+analytic morphism while retaining every original chart restriction.
+\end{proof}

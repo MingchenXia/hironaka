@@ -1,0 +1,165 @@
+\section{The actual compatible-thread limit of a given locally finite history}
+\label{sec:actual-thread-lf-limit}
+
+Only the actual growing blowup history and indexed footprint local finiteness
+are inputs. The topology is the dependent product subspace topology on actual
+compatible threads, fixed before the atlas. No scheduler, terminality, atlas,
+sections, overlaps or desired properness certificates are supplied. Original
+failed784 and historical uncompiled813 are separately preserved; this chapter
+specifies the genuine repaired producer, not a claim that either old draft compiled.
+
+\begin{definition}[Actual maps, threads and stabilized coordinates]
+\label{hir:actual-thread-lf-data}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualStepMap,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualTail,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.ActualCompatibleThread,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualStableOpen,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualSigma,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimitManifold}
+\leanok
+\uses{hir:growing-sequence-actual-centres}
+Choose the genuine adjacent maps from the actual stage extensions, retaining
+all empty steps. Actual finite tails are their stage-dependent iteration.
+A thread is the actual tuple compatible with every adjacent map. Put
+$O_N=X\setminus\bigcup_{i\geq N}F_i$, $V_N=P_N^{-1}O_N$. The stable coordinate
+map sends a point of $V_N$ backwards by genuine finite projections and forwards
+by the actual inverse projections of empty restricted finite tails. The
+resulting thread map is $\sigma_N$; its product-subspace topology is not altered
+when the complex atlas is subsequently constructed.
+\end{definition}
+
+\begin{lemma}[The SAME finite tails and increasing exhausted stable opens]
+\label{hir:actual-thread-lf-tails-cover}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualTail_eq_existing,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualTail_append_stage,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualTail_append,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.exists_compact_subset_actualStableOpen,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualStableOpen_cover}
+\leanok
+\uses{hir:actual-thread-lf-data,hir:growing-sequence-actual-tail-tower,hir:growing-canonical-sequence-closed-images}
+The tails are exactly the original actual tails, with literal concatenation
+and projection identities. The $O_N$ increase, cover $X$, and contain each
+compact subset for some internally produced $N$.
+\end{lemma}
+\begin{proof}
+Induct on the actual dependent stage extension. The identity tail is the
+identity tower; the successor appends the chosen actual adjacent blowup.
+This proves equality with the original tails and both concatenation identities.
+Every footprint is closed by properness of the real finite prefix projection.
+Local finiteness persists for the indexed tail, so its whole union is closed.
+For a compact set, only finitely many actual footprint indices meet it.
+Bound this finite set of natural numbers and add one. The compact set then
+avoids the entire tail. Singletons give coverage. No global stabilization
+index or scheduler is inferred.
+\end{proof}
+
+\begin{lemma}[Internally constructed sections and entire thread ranges]
+\label{hir:actual-thread-lf-saturated-charts}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualStableEquiv,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualSigma_recovers_thread,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualSigmaHomeomorph,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualSigma_openEmbedding,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualSigma_range}
+\leanok
+\uses{hir:actual-thread-lf-tails-cover,hir:growing-sequence-empty-restricted-tails}
+The actual restricted empty tails produce $\sigma_N$ as a homeomorphism from
+$V_N$ onto the ENTIRE open $p_\infty^{-1}O_N$ in the fixed thread topology.
+\end{lemma}
+\begin{proof}
+Each finite tail beyond $N$ has empty restricted centres over $O_N$:
+a meeting point would put its actual footprint in $O_N$. The genuine
+empty-tower projection theorem produces its biholomorphism, with forward
+function equal to the whole restricted projection. The actual original-base
+square identifies its domain with the corresponding stable stage open.
+Its inverse gives the later coordinates of $\sigma_N$; earlier coordinates
+are actual finite projections. Finite concatenation proves adjacent
+compatibility, using injectivity of the empty-tail biholomorphism for later
+coordinates. Product continuity holds coordinate by coordinate.
+
+The $N$th coordinate is the starting point, hence gives injectivity.
+Conversely, for any compatible thread over $O_N$, earlier coordinates are
+its actual projections and later coordinates are forced by the same injective
+empty-tail projection. Thus its entire thread is recovered from coordinate
+$N$. The inverse is continuous coordinate evaluation, and the saturated range
+is the inverse image of $O_N$ by the continuous actual base projection.
+This gives both the homeomorphism and open embedding, without an incoming
+thread range or atlas certificate.
+\end{proof}
+
+\begin{lemma}[The actual complex atlas and both chart directions]
+\label{hir:actual-thread-lf-complex-atlas}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimitChartedSpace,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualSigmaBiholomorph,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimitStageProjection_contMDiff,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimitBaseProjection_contMDiff}
+\leanok
+\uses{hir:actual-thread-lf-saturated-charts,hir:terminal-atlas-actual-lifted-holomorphic-manifold,hir:terminal-atlas-actual-local-inclusion-holomorphic}
+The SAME thread topology has a genuine Hausdorff second-countable complex
+manifold structure, with internally produced biholomorphic stable charts.
+Every actual stage and base projection is holomorphic.
+\end{lemma}
+\begin{proof}
+On overlap take the other stage coordinate of the actual thread. Recovery
+puts it in the other chart and proves the exact inclusion square. Reversing
+the indices gives its inverse, so these actual holomorphic coordinate maps
+give whole biholomorphic overlaps. Lift the finite-stage charts through the
+constructed open embeddings. The genuine lifted-atlas theorem gives complex
+chart compatibility. Hausdorffness is inherited from the actual dependent product subtype.
+Second countability follows from the genuine saturated-projection atlas
+on this fixed topology and the actual second-countable base; no new topology
+or second-countability certificate is supplied.
+
+Inverse holomorphicity is proved separately: on a lifted chart, the inverse
+stable map equals the original finite-stage inverse chart composed with that
+lifted chart. The equality holds on the actual chart source by injectivity
+and the literal lifted-chart formula. Maximal-atlas holomorphicity of both
+chart maps proves this local expression holomorphic. Thus both directions
+are genuinely holomorphic; no holomorphic-homeomorphism shortcut is used.
+Locally every stage projection is the known holomorphic stable coordinate
+map composed with this inverse. The base map is its actual prefix composition.
+\end{proof}
+
+\begin{theorem}[Every whole stage projection is proper]
+\label{hir:actual-thread-lf-proper-projections}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimitStageProjection_isProperMap,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimitBaseProjection_isProperMap}
+\leanok
+\uses{hir:actual-thread-lf-tails-cover,hir:actual-thread-lf-saturated-charts,hir:actual-thread-lf-complex-atlas}
+Every actual stage projection, and the base projection, is a proper map.
+\end{theorem}
+\begin{proof}
+For compact $K$ in stage $i$, its image in the original base is compact.
+Choose a cutoff containing this entire image and enlarge it to $N\geq i$.
+The WHOLE preimage of $K$ by the genuine finite tail from $N$ to $i$ is compact
+by properness of actual finite blowup towers, and it lies in $V_N$ by the
+original-base square. The compact-preimage theorem for the inducing subtype
+map applies because this entire containment in its range is proved.
+Thread recovery identifies the entire $i$th projection preimage of $K$ with
+the image of this compact set under $\sigma_N$, so it is compact.
+The actual target manifold is locally compact Hausdorff; the genuine
+compact-preimage characterization gives properness. Composition with the
+proper actual zeroth prefix gives properness of the base map. An arbitrary
+open embedding is never asserted proper.
+\end{proof}
+
+\begin{theorem}[The actual continuous and holomorphic universal cones]
+\label{hir:actual-thread-lf-universal-cones}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimit_universal_continuous,TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actualLimit_universal_holomorphic}
+\leanok
+\uses{hir:actual-thread-lf-saturated-charts,hir:actual-thread-lf-complex-atlas}
+Every continuous compatible cone has a unique continuous lift. Every
+holomorphic compatible cone from any source complex dimension and universe
+has a unique holomorphic lift into the SAME constructed limit.
+\end{theorem}
+\begin{proof}
+The lift is the actual coordinate tuple with the supplied natural cone
+compatibility. Product-subtype continuity proves continuity, and equality of
+all coordinates proves uniqueness. For a holomorphic cone, choose a stable
+open containing the actual base value at a source point. Its inverse image
+is an actual source neighborhood; there the tuple equals $\sigma_N$ composed
+with the genuine $N$th source map restricted to $V_N$, by recovery.
+Both factors are holomorphic. This proves local holomorphicity at every
+source point and the same coordinate uniqueness. No source chart, cutoff,
+limit comparison, or desired holomorphicity certificate is supplied.
+\end{proof}
+
+\begin{theorem}[Given-history geometric endpoint]
+\label{hir:actual-thread-lf-geometric-endpoint}
+\lean{TranscendentalNakamaye.Pending.HironakaActualLocallyFiniteBlowupLimitGeometry.actual_given_locallyFinite_blowup_limit_geometry}
+\leanok
+\uses{hir:actual-thread-lf-proper-projections,hir:actual-thread-lf-saturated-charts,hir:actual-thread-lf-complex-atlas}
+The actual given footprint-LF history has the constructed complex limit,
+all proper holomorphic stage/base projections, and the internally produced
+saturated stable charts covering the whole limit.
+\end{theorem}
+\begin{proof}
+Collect the independently proved holomorphicity and whole properness for
+each actual stage, those of the actual base projection, and the full range
+and cover identities of the actual stable charts. These refer to the same
+constructed thread carrier and topology throughout. No native terminality,
+coherent state, continuation history or internally fair global scheduling
+is inferred from this purely geometric endpoint.
+\end{proof}

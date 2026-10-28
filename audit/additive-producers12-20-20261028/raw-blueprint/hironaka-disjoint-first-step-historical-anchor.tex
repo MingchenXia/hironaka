@@ -1,0 +1,193 @@
+\section{The first full ambient historical normal anchor}
+
+\begin{definition}[Original normal contact and a genuine first step]
+\label{hir:disjoint-first-step-normal-history}
+\uses{hir:disjoint-coherent-normal-record,hir:disjoint-coherent-normal-initial-value}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.normalContact}
+\leanok
+Let $n>0$, let $M=(\mathbf C^n,\mathbf C^n,\varnothing,I,1)$ lie in the
+depth-$q$ invariant domain, and put $J=J(I)$ in the whole ambient space
+$\mathbf C^{n+1}$. Let $C$ be empty or the first maximum locus of the
+depth-$q$ invariant of $M$. Choose an actual blowup $\Pi$ along $s(C)$ and
+write $S$ for this one-step tower from the original stabilized space. Put
+$O=\mathbf C^{n+1}$, regarded as the whole original open, and let $K_t$ be
+the original contact marked ideal for the literal coordinate $t$, formed
+before this blowup and restricted to $O$. In every value below the starting
+marked ideals are these original $J$ and $K_t$; the tail is the genuine $S$.
+\end{definition}
+
+\begin{lemma}[No divisorial support gives unit monomial stalks]
+\label{hir:disjoint-full-ambient-unit-monomial-stalk}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.one_mem_monomial_of_empty_codimOne}
+\leanok
+Let $A$ be a coherent ideal on a complex manifold of dimension $m+1$,
+with whole carrier and mark one, of maximal order one. Suppose its
+codimension-one cosupport part is empty. For any simple normal crossings
+boundary $E$, the constant one belongs to the monomial-part stalk at every point.
+\end{lemma}
+\begin{proof}
+Fix a point $y$ and a member $F$ of $E$ through $y$. Suppose its exponent
+is positive. Divisibility by its actual exponent, followed by lowering the
+exponent to one, gives a neighborhood of $y$ on which $F$ is contained in
+the cosupport. Choose an open neighborhood $V$ with this containment.
+Simple normal crossings makes $F$ smooth of dimension $m$ at $y$, hence
+$F\cap V$ is smooth of dimension $m$ there. Its containment in the analytic
+cosupport gives local dimension at least $m$ for that cosupport. The whole
+carrier has dimension $m+1$ and the marked ideal has maximal order one;
+therefore the codimension-one criterion puts $y$ in its codimension-one
+part, a contradiction. Thus every boundary member through $y$ has exponent
+zero. Its zeroth ideal power contains one. These memberships give one in
+the monomial-part stalk by the definition, with no condition from members missing $y$.
+\end{proof}
+
+\begin{lemma}[The actual upper first stage and its original clocks]
+\label{hir:disjoint-first-step-upper-clocks}
+\uses{hir:disjoint-first-step-normal-history,hir:disjoint-full-ambient-unit-monomial-stalk,hir:disjoint-coherent-normal-initial-value}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_upper_isCanonical,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.original_members_nil,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.original_level_zero,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_current_boundary,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_nmOrd_eq_one,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_not_special,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_order_run,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_step_run}
+\leanok
+The actual $S$ is canonical for the depth-$(q+1)$ invariant of $J$.
+Its current boundary is exactly $[\Pi^{-1}s(C)]$. The original-member list
+is empty. At every point of the transformed cosupport, its nonmonomial
+order is one, its original level is zero, and it is nonspecial. Both its
+original order run and its original Step One run have length one, so their
+heads are the original identity tower and their tails are the whole $S$.
+\end{lemma}
+\begin{proof}
+The initial normal recoding identifies the full ambient first maximum
+with $s(C)$ when $C$ is the base first maximum. If $C$ is empty, $s(C)$ is
+empty. Thus in either allowed case the actual first blowup is canonical.
+The domain theorem makes it an actual test tower. The transformed boundary
+is the strict transforms of the empty original list followed by the
+inverse-image centre, proving the asserted singleton including empty centres.
+Original members are the prefix of length zero of this current list, hence
+the original level is zero.
+
+The initial codimension-one part is empty because the initial stabilized
+record is nonspecial at every point. Maximal order is one, so its
+codimension-one part remains empty along this actual test tower. The same
+fact rules out the level-zero special branch, while the positive-level
+special branch contradicts level zero. Maximal order also persists along
+the test. Apply the preceding unit-monomial-stalk lemma to the current
+coherent ideal and its actual simple normal crossings boundary. For a member
+$g$ of its nonmonomial part at a cosupport point, multiply by the monomial
+member one in the defining colon. This puts $g$ in the original ideal on
+the whole carrier, so $g$ vanishes at that point. Thus every member of the
+nonmonomial part vanishes, giving nonmonomial order at least one. Canonical order
+monotonicity bounds it by the nonmonomial order of its original image,
+which is one by the initial normal order theorem. It is therefore one.
+The original image is in the original cosupport, where both the original
+order-one regime and nonspecial level-zero regime hold. The recursive
+definition of the run for this real one-step tower adds one to its zero
+initial run. The recursive split then has original head and actual full tail.
+\end{proof}
+
+\begin{lemma}[The literal original contact has the same real first centre]
+\label{hir:disjoint-first-step-literal-contact-canonical}
+\uses{hir:disjoint-first-step-normal-history,hir:disjoint-coherent-normal-whole-trace,hir:disjoint-coherent-normal-initial-value}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_contact_isCanonical,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_contact_cosupport,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_contact_boundary}
+\leanok
+The original $K_t$ lies in the depth-$q$ domain and its restricted actual
+one-step tower is canonical. Its transformed cosupport is exactly the
+whole-open trace of the transformed cosupport of $J$. Its current boundary
+retains the same born member, with the literal chronological label zero.
+\end{lemma}
+\begin{proof}
+For mark one, homogenization and coefficient formation leave the whole
+coherent ideal unchanged. Thus the original literal $t$-contact is precisely
+the whole-open restriction of $(H,\varnothing,J(I),1)$. Its natural contact
+domain follows from the original full ambient domain, the actual tangent
+direction, and absence of the codimension-one part. At the identity tower
+both contact tails are canonical identities. The zero-level contact anchor
+therefore identifies its finite value with the second component of the
+established original normal Step One initial formula. That component is
+the entire depth-$q$ base value, a consequence of the whole functional section
+identity $s^*J(I)=I$ and the initial section value theorem. The contact-tail
+cosupport dictionary at the identity gives exactly the section image of the
+base cosupport. Hence its entire initial maximum is $s(C)$ when $C$ is the base
+maximum. The empty-centre case remains empty on restriction. This proves
+canonicality of its actual first step independently of any future value
+comparison. The contact-tail cosupport theorem applies to the literal
+original tangent direction and the genuine upper test tower. It gives the
+whole asserted transformed cosupport equality. Its transform appends the
+inverse-image centre after the empty original list, retaining that born slot.
+\end{proof}
+
+\begin{theorem}[Actual Step One value through the original normal contact]
+\label{hir:disjoint-first-step-step-one-anchor}
+\uses{hir:disjoint-first-step-upper-clocks,hir:disjoint-first-step-literal-contact-canonical}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_stepOne_value}
+\leanok
+At every point $y$ of the full ambient transformed cosupport, Step One
+evaluated from the original $J$ along $S$ equals
+\[
+ \left(0,\;R_q^+(K_t,S|_O,y)\right),
+\]
+where the second entry is finite and its lower value is taken along the
+actual one-step original contact history.
+\end{theorem}
+\begin{proof}
+At the original stage, the established normal Step One initial value is
+$(0,R_q(M,\mathrm{id},x))$. Thus its first maximum also equals the original
+base first maximum lifted by $s$. This makes the same real $S$ canonical
+for the original maximal-order Step One function. The canonical-tail
+theorem supplies the actual selected lower record's domain, canonical tail,
+mask membership, and cosupport membership. The upper-clock lemma identifies
+the selected split as original head and real one-step tail, with level zero.
+The literal coordinate $t$ is an actual original tangent direction on the
+whole ambient open; the empty original-member list misses that open. The
+preceding lemma supplies the independently proved domain and canonicality
+of its literal contact tail. Therefore the zero-level contact anchor
+identifies the selected lower value with the actual value for $K_t$ along
+$S|_O$. Nonspecialness selects the finite branch in the definition of Step
+One. Substitution gives the displayed equality.
+\end{proof}
+
+\begin{theorem}[The first full ambient historical anchor]
+\label{hir:disjoint-first-step-full-historical-anchor}
+\uses{hir:disjoint-first-step-upper-clocks,hir:disjoint-first-step-step-one-anchor}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_historical_value,TranscendentalNakamaye.Pending.HironakaDisjointFirstStepHistoricalAnchor.firstStep_historical_maximum_locus}
+\leanok
+The original full ambient invariant after this actual first blowup satisfies
+\[
+ R^+_{q+1}(J,S,y)=\iota_q\bigl(R_q^+(K_t,S|_O,y)\bigr)
+\]
+on its entire transformed cosupport. Its next maximum locus is precisely
+the image of the maximum locus of this literal contact historical value.
+This assertion includes empty transformed cosupports.
+\end{theorem}
+\begin{proof}
+The upper-clock lemma puts the general invariant in its positive-order
+branch with order one, with companion formed at the original stage and
+the whole real $S$ as its tail. The initial order-one mask is the whole
+original ambient open. On it the companion of the initial empty-boundary
+mark-one record is restricted-equivalent to the original $J$: its
+nonmonomial ideal with empty boundary is the restriction of the whole ideal,
+and the companion uses the branch where order equals the mark. Its domain
+and maximal order follow from the companion-domain theorem. The original
+Step One tail is canonical by the preceding initial-centre argument;
+restriction to the whole order mask and restricted-equivalence invariance
+therefore make the companion tail canonical. Representative invariance and whole-open
+restriction invariance identify its value with original Step One for $J$
+along $S$. The preceding theorem gives $(0,R_q^+(K_t,S|_O,y))$ for this value.
+Substitution into the general positive-order constructor gives exactly
+$\iota_q$ of that actual contact historical value, with both finite
+inclusions. The contact cosupport dictionary identifies all points on which
+these values are compared. Since $\iota_q$ is an order embedding, a point
+dominates that entire contact cosupport exactly when its image dominates
+the entire full ambient transformed cosupport. This proves the maximum
+locus equality. If either cosupport is empty, the dictionary makes both
+empty and both defining maximum loci are empty.
+\end{proof}
+
+\begin{remark}[The boundary correction in a further comparison]
+This historical anchor does not identify its contact value with the raw
+base value after the blowup. For a nonbottom monomial branch, the ambient
+dimension in its key increases by one while its chronological subset stays
+fixed. A further cross-ambient historical identification therefore uses
+the recursive same-index dimension map, not the unmodified base value.
+For example, the first transform of $(x^2,1)$ on a line has ideal $(x)$ and
+born boundary $[x=0]$, with monomial key $(0,1,\{0\})$. The first $x$-chart
+transform of $(x^2,t)$ has contact ideal $(x)$ in a plane and key
+$(1,1,\{0\})$. The theorem retains the actual lower history and does not
+restart the current marked ideal with that born member as original boundary.
+\end{remark}

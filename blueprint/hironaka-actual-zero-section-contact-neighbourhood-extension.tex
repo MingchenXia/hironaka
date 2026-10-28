@@ -1,0 +1,45 @@
+\section{Actual closed-section contact neighbourhoods from the same original direction}
+
+Let $s(x)=(x,0)$ and $A^0=s(A)$ for an original closed regular $A\subset\mathbb C^n$. The closed section is not a smooth-cylinder projection. A source tangent direction need not restrict to one on the entire inverse image of its domain: away from $A$, a source derivative can occur only in the added normal direction. The construction below starts at an original point of $A$ and internally produces a neighbourhood with a genuine base-tangent derivative.
+
+\begin{lemma}[The same product flattening identifies each tangential partial]
+\label{hir:actual-zero-section-contact-product-partial}
+\uses{hir:actual-zero-section-submanifold-product-flattening}
+\lean{Hironaka.HironakaActualZeroSectionContactNeighbourhood.product_flat_partial_zero_section}
+\leanok
+Let $\Phi$ be an actual original base flattening at $x$, and let $\Gamma(v,z)=(\Phi(v),z)$ be its actual product equivalence. For $y$ in the original flat domain, $g$ holomorphic at $s(y)$ and every original index $i<n$,
+\[
+ \partial^{\Gamma}_{i}g(s(y))=\partial_i^\Phi(g\circ s)(y).
+\]
+\end{lemma}
+\begin{proof}
+The literal section squares give $\Gamma(s(y))=s(\Phi(y))$ and $\Gamma^{-1}(s(v))=s(\Phi^{-1}(v))$. Both genuine flat partials are the ordinary differential of the original function composed with the corresponding inverse coordinates. Put $G=g\circ\Gamma^{-1}$. The source inverse sends $\Gamma(s(y))$ to $s(y)$, so $G$ is genuinely differentiable at that point. The second square gives the literal identity $G\circ s=(g\circ s)\circ\Phi^{-1}$. Apply the actual derivative chain rule to the holomorphic linear inclusion $s$ at $\Phi(y)$, and evaluate at the original basis vector $e_i$. Its image is exactly the original first-block vector $e_i$ in the ambient product. Substitution in the two flat-partial formulas proves the equality.
+\end{proof}
+
+\begin{theorem}[The original source direction constructs a genuine target contact neighbourhood]
+\label{hir:actual-zero-section-contact-neighbourhood}
+\uses{hir:actual-zero-section-contact-product-partial,hir:actual-zero-section-submanifold-whole-iterated-derivative,mc:tangent-direction-along,mc:contact-hypersurface-along}
+\lean{Hironaka.HironakaActualZeroSectionContactNeighbourhood.exists_actual_zero_section_contact_neighbourhood}
+\leanok
+Let the original coherent ideal $J$ have a tangent direction $u$ along $A^0$ on an original open $U$. If $x\in A$, $s(x)\in U$ and $u(s(x))=0$, there exists an internally constructed base open $W\ni x$, contained in $s^{-1}U$, on which the SAME $u\circ s$ is a genuine tangent direction of $s^*J$ along $A$. No target direction, flat derivative, invariant value or comparison history is an input.
+\end{theorem}
+\begin{proof}
+Original regularity of $A$ at $x$ supplies its actual dimension $k$ and flattening $\Phi$. Its independently constructed product flattening $\Gamma$ flattens $A^0$ with the same $k$. The source tangent-direction data give a holomorphic vector field tangent to $A^0$ whose derivative of $u$ is nonzero at $s(x)$. In the genuine flat-coordinate expansion of that derivative, every coefficient belonging to a normal coordinate vanishes at $s(x)$, because the field preserves the actual vanishing ideal of $A^0$. Some tangential flat partial $\partial_j^\Gamma u(s(x))$ with $j<k\le n$ is therefore nonzero. The preceding chain rule identifies it with the corresponding original-base partial $\partial_j^\Phi(u\circ s)(x)$.
+
+That base flat partial is holomorphic on the true flat domain, hence continuous at $x$. Choose an actual open neighbourhood on which it remains nonzero and intersect it with $s^{-1}U$ and the original flat domain, yielding $W$. At every point of $W$, the original membership $u\in\mathcal D_{A^0}^{\mu-1}J$ pulls back to whole-ideal membership of $u\circ s$, which is exactly membership in $\mathcal D_A^{\mu-1}(s^*J)$ by the already proved all-iterate dictionary. The actual coordinate vector field $\partial_j^\Phi$ is holomorphic and tangent to $A$ throughout that flat domain; its derivative of the same $u\circ s$ is nonzero throughout $W$. Thus it supplies the genuine multiplicity-one condition at every zero on $W$, and both conditions of the actual target tangent direction hold on this internally constructed open.
+\end{proof}
+
+\begin{theorem}[The actual lower contact carrier is closed regular on that open]
+\label{hir:actual-zero-section-lower-contact-carrier}
+\uses{hir:actual-zero-section-contact-neighbourhood,mc:contact-hypersurface-along}
+\lean{Hironaka.HironakaActualZeroSectionContactNeighbourhood.exists_actual_zero_section_regular_contact}
+\leanok
+For the same original data, the open $W$ can be chosen as above so that the actual lower carrier $(A\cap\{u\circ s=0\})|_W$ is closed regular in the genuine open manifold $W$. Before any masks, the source lower carrier satisfies the literal identity
+\[
+ A^0\cap\{u=0\}=s\bigl(A\cap\{u\circ s=0\}\bigr).
+\]
+No global closedness outside $W$, boundary transversality, canonical invariant equality or matching history is asserted.
+\end{theorem}
+\begin{proof}
+Use the preceding internally constructed neighbourhood and its actual target tangent direction. The target function is holomorphic on $W$, since it belongs there to an actual iterated coherent derivative ideal. Its zero fibre is closed in $W$, so intersecting the preimage of the original closed $A$ gives closedness of the actual lower carrier. At each of its points, the genuine tangent-direction contact theorem constructs local coordinates replacing one original tangential coordinate by $u\circ s$, proving regularity of dimension one less than the local carrier dimension. The actual open-inclusion chart equivalence transfers this regularity to $W$. Finally, every point of $A^0$ has the literal form $s(p(z))$ by its independently defined zero-normal equation. Consequently its additional equation $u(z)=0$ is precisely $u(s(p(z)))=0$. This proves both inclusions in the displayed set equality without using a supplied contact-carrier identification.
+\end{proof}

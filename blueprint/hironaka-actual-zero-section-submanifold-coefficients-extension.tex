@@ -1,0 +1,60 @@
+\section{Whole marked coefficient data through an arbitrary closed carrier section}
+
+Let $s(x)=(x,0)$ and let $A\subset\mathbb C^n$ be an original closed regular carrier. Its independent lift is $A^0=s(A)$, with the literal added coordinate zero. Every ideal below is the entire functional germ ideal. Marked records keep the original ordered boundary list and marking; no wellformedness of an arbitrarily pulled-back boundary, canonical value, centre or history is assumed or concluded.
+
+\begin{theorem}[The whole homogenized ideal of the original closed lift]
+\label{hir:actual-zero-section-submanifold-whole-homogenized-ideal}
+\uses{hir:actual-zero-section-submanifold-whole-iterated-derivative,mc:homogenized-along-basic}
+\lean{Hironaka.HironakaActualZeroSectionSubmanifoldCoefficients.zero_section_submanifold_homogenizedIdealAlong}
+\leanok
+For every original coherent $J$ and every marking $\mu$, the SAME closed section satisfies
+\[
+ s^*\mathcal H_{A^0}(J,\mu)=\mathcal H_A(s^*J,\mu).
+\]
+\end{theorem}
+\begin{proof}
+The actual lifted-carrier geometry gives closed regularity of $A^0$, so each whole $\mathcal D_{A^0}^iJ$ and the tangent ideal $T_{A^0}=\mathcal D_{A^0}^{\mu-1}J$ is coherent. The previously proved whole derivative dictionary gives $s^*\mathcal D_{A^0}^iJ=\mathcal D_A^i(s^*J)$ for every $i$, including the exact tangent ideal. Expand $\mathcal H_{A^0}=\sum_{i<\mu}(\mathcal D_{A^0}^iJ)T_{A^0}^i$. General holomorphic pullback preserves the actual finite sum, product and every power of coherent ideals, without requiring the section to be a submersion. Substitute those whole derivative and tangent-ideal equalities separately in every summand. The resulting whole sum is exactly $\sum_{i<\mu}\mathcal D_A^i(s^*J)T_A^i$, the independently defined target homogenized ideal. This also covers $\mu=0$, for which both sums are empty.
+\end{proof}
+
+\begin{theorem}[The entire homogenized marked record on the original carrier]
+\label{hir:actual-zero-section-submanifold-whole-homogenized-marked}
+\uses{hir:actual-zero-section-submanifold-whole-homogenized-ideal}
+\lean{Hironaka.HironakaActualZeroSectionSubmanifoldCoefficients.zero_section_submanifold_homMarkedAlong}
+\leanok
+For every original marked record $\mathfrak M$ with coherent ideal and carrier $A^0$,
+\[
+ s^*\operatorname{homAlong}(\mathfrak M)=\operatorname{homAlong}(s^*\mathfrak M).
+\]
+\end{theorem}
+\begin{proof}
+The true section membership identity gives $s^{-1}(A^0)=A$. In both marked records, the carrier is that same preimage, the entire ordered boundary is the same termwise preimage of the original list, and the marking is the same original integer. The whole ideal equality is the preceding homogenized-ideal theorem with the original ideal and marking. Equality of all four fields therefore gives equality of the entire records; no new boundary transversality or canonical-domain fact is asserted.
+\end{proof}
+
+\begin{theorem}[The entire coefficient marked record retains the same derivative marks]
+\label{hir:actual-zero-section-submanifold-whole-coefficient-marked}
+\uses{hir:actual-zero-section-submanifold-whole-iterated-derivative,mc:coefficient-ideal,mc:marked-finite-sum}
+\lean{Hironaka.HironakaActualZeroSectionSubmanifoldCoefficients.zero_section_submanifold_coeffMarkedAlong}
+\leanok
+For every SAME original record $\mathfrak M$ with coherent ideal and carrier $A^0$,
+\[
+ s^*\operatorname{coeffAlong}(\mathfrak M)=\operatorname{coeffAlong}(s^*\mathfrak M).
+\]
+\end{theorem}
+\begin{proof}
+For the original marking $d$, expand the actual marked sum as the finite whole ideal sum of $(\mathcal D_{A^0}^iJ)^{e_i}$ over $i<d$, where $e_i$ is the actual product of the OTHER derivative marks $d-j$. The resulting marking is the actual product of all those same derivative marks. Pullback preserves this finite sum and each power because every actual derivative ideal is coherent on the original closed regular lifted carrier. Replace each pulled-back derivative by $\mathcal D_A^i(s^*J)$ using the whole derivative dictionary, while preserving each literal $e_i$ and the full product marking. The coefficient marked record on the target has exactly this whole ideal. Its carrier and every original ordered boundary position are the same literal preimages as on the left, so equality of all fields proves the assertion, including $d=0$.
+\end{proof}
+
+\begin{theorem}[The actual coefficient-after-homogenization composite]
+\label{hir:actual-zero-section-submanifold-whole-coefficient-homogenized}
+\uses{hir:actual-zero-section-submanifold-whole-homogenized-marked,hir:actual-zero-section-submanifold-whole-coefficient-marked}
+\lean{Hironaka.HironakaActualZeroSectionSubmanifoldCoefficients.zero_section_submanifold_coeff_homMarkedAlong}
+\leanok
+For the SAME original record,
+\[
+ s^*\operatorname{coeffAlong}(\operatorname{homAlong}(\mathfrak M))=
+ \operatorname{coeffAlong}(\operatorname{homAlong}(s^*\mathfrak M)).
+\]
+\end{theorem}
+\begin{proof}
+Actual homogenization of a coherent ideal along a closed regular carrier is coherent and retains that original carrier, boundary and mark. Apply the coefficient-record theorem to this actual homogenized record. Then substitute the already proved homogenized-record equality in its right-hand side. This compares the entire specified composite without assuming any incoming differential, invariant-value or history comparison.
+\end{proof}

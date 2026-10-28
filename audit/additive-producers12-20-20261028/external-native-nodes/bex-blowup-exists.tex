@@ -1,0 +1,16 @@
+\begin{theorem}[The blowup exists]
+\label{bex:blowup-exists}
+\uses{bex:atlas,bex:proj-invertible,bex:lift-unique,bex:lift-local,ana:blowups}
+\lean{TranscendentalNakamaye.Pending.BlowupConstruction.exists_lift,TranscendentalNakamaye.Pending.BlowupConstruction.isBlowupAlong_blowupProj}
+\leanok
+Let \(C\) be a nowhere dense closed submanifold of a complex manifold \(X\). Then \(\pi\colon\tilde X\to X\) is a blowup of \(X\) along \(C\) in
+the sense of Definition~\ref{ana:blowups}.
+\end{theorem}
+\begin{proof}
+\leanok
+\(\tilde X\) is a complex manifold of dimension \(n\) and \(\pi\) is holomorphic (Theorem~\ref{bex:atlas}), and \(\pi^*\mathcal I_C\) is invertible
+(Lemma~\ref{bex:proj-invertible}). Let \(g\colon W\to X\) be holomorphic, \(W\) a complex manifold of any dimension, with \(g^*\mathcal I_C\)
+invertible. Every point of \(W\) has a neighbourhood with a holomorphic lift of \(g\) (Lemma~\ref{bex:lift-local}); two such lifts agree on the
+overlap of their domains (Lemma~\ref{bex:lift-unique}), so they glue to a holomorphic \(h\colon W\to\tilde X\) with \(\pi\circ h=g\), and \(h\) is
+unique by Lemma~\ref{bex:lift-unique}.
+\end{proof}

@@ -24,10 +24,15 @@ The earlier analytic verification numbers below describe their own checkpoints.
 
 ## Standalone complex-analytic scope
 
-The table below describes the standalone analytic export at the fixed
-[fourteen-module checkpoint](https://github.com/MingchenXia/hironaka/commit/668ccdac96b962a30f2f12fff2b3f4fbda20ef75),
-whose native source is
-[`eef2a728`](https://github.com/MingchenXia/archon-nakamaye/commit/eef2a7286318c05dda607a2909399937ccaa4c27).
+The table below describes the standalone analytic export, including 43 additional
+whole modules and six original support modules. Its first 33 modules use fixed
+native source
+[`53bb34a4`](https://github.com/MingchenXia/archon-nakamaye/commit/53bb34a4a1607f358638012e2d9cb1d27818ca91);
+the next 16 use
+[`6e453e14`](https://github.com/MingchenXia/archon-nakamaye/commit/6e453e142420e6a64ccfdb5cadd15abc2379f581).
+The earlier
+[fourteen-module checkpoint](https://github.com/MingchenXia/hironaka/commit/668ccdac96b962a30f2f12fff2b3f4fbda20ef75)
+is retained unchanged.
 
 The separately advanced [native checkpoint](https://github.com/MingchenXia/archon-nakamaye/commit/6ae2122a9cf82f1469b68fe41e8e6cf115075d6a)
 has five closed goals (G2, G5, G6, G7 and G9); its 67-module increment
@@ -38,9 +43,9 @@ Four original gaps are closed in this export: **G2, G5, G6 and G7**. General
 
 | Gap | Status and scope |
 |---|---|
-| G1 — categories | Open. A specified intrinsic isomorphism of reduced analytic models gives a genuine stable ambient comparison with the same point map. Canonical stabilization, abstract embedding independence and proper resolution descent remain. Separately verified characteristic-zero algebraic strong/functorial endpoints do not complete the analytic-space goal. |
+| G1 — categories | Open. A specified intrinsic isomorphism of reduced analytic models gives a genuine stable ambient comparison with the same point map. Coherent normal stabilization has an exact initial depth-shift law. Prescribed finite mark-one histories lift with all original prefixes, whole nonradical controlled ideals and ordered old/born boundaries. Canonical ambient histories have an original normal-contact history anchor in the same ambient dimension. Comparison with the intrinsic base history, abstract embedding independence and proper resolution descent remain. Separately verified characteristic-zero algebraic strong/functorial endpoints do not complete the analytic-space goal. |
 | G2 — canonical elementary resolution | Closed at its original elementary-morphism scope: principalization, irreducible, pure, own dimension-part, mixed and separation families, including compact and local forms and genuine smooth Cartesian comparisons. |
-| G3 — noncompact global construction | Open. Smooth-curve and compact-component histories, discrete full-value cut scheduling, and proper limits, finite-stage factors and actual centre-relative limit strict transforms of given locally finite histories are proved. Unrestricted noncompact scheduling remains. |
+| G3 — noncompact global construction | Open. Smooth-curve and compact-component histories, discrete full-value cut scheduling, and proper limits, finite-stage factors and actual centre-relative limit strict transforms of given locally finite histories are proved. Compact-exhaustion escape characterizes local finiteness; saturated windows give analytic gluing and compatible local proper maps give a global proper map. An unrestricted escaping blowup scheduler remains. |
 | G4 — sharp resolution | Open. The original smooth-curve case is complete. Arbitrary-dimensional incident-centre residual geometry and genuine finite dynamic prefixes retain the whole boundary and ideal factors. Actual finite dynamic prefixes avoid the original good locus, and the first canonical window has a strict full-invariant drop. Recursive current-open value comparisons, termination and general global scheduling remain. |
 | G5 — dimension components | Closed. Each dimension part is exactly the union of the genuine global irreducible components of that dimension. |
 | G6 — complete SNC divisor sums | Closed. Finite and locally finite sums use actual global coefficients and whole local ideal equality, including disconnected boundary members and zero coefficients. |
@@ -66,7 +71,22 @@ records the full mapping and checks.
 
 ## Verification and source
 
-The fixed native increment underlying this export contains 14 independently checked modules,
+The [additional producer verification](audit/disjoint-producers-20261028/publication-verification.json)
+records 49 physical modules: 43 whole original modules and six support modules
+containing nine complete original auxiliary declarations. Their types and entire
+proof values pass strict expression comparison with their fixed native snapshots.
+The export includes 38 whole original blueprint chapters and 12 support proofs:
+132 complete written proofs, 270 checked literal bindings and 143 ready nodes.
+Two unattached ordinal helpers remain unmarked. All 978 actual physical
+declarations are covered by the 49 unique module kernel checks and whole-value
+audits. The original 33 modules and their compiled parts are reused after exact
+identity checks; 3,678 guarded existing files remain byte-identical. Validation
+uses bounded new-module builds and changed-source umbrella frontends. Historical
+failed comparisons and the inherited broad-build warning log are retained.
+These prerequisites do not close another original gap, and no new clean
+full-project build is claimed.
+
+The earlier fixed native increment contains 14 independently checked modules,
 324 actual compiled-root observations, 52 complete proof nodes and six
 geometric definitions. Its bounded aggregate passes 5,657 warm build jobs.
 These are native verification metrics.
@@ -77,7 +97,7 @@ At that standalone checkpoint the full build passed 5,707 jobs with zero
 warnings; all 81 local blueprint bindings resolved. Its public axiom check
 covered 14,001 declarations.
 
-[The current verification receipt](audit/phase5-original-producers-20261021/publication-verification.json)
+[That checkpoint's verification receipt](audit/phase5-original-producers-20261021/publication-verification.json)
 records source replay, exact new-module kernel checks, actual compiled-payload
 axiom checks and full mathematical-expression comparisons. Generated notation
 has separate typed/source and no-logical-dependent checks; raw structural

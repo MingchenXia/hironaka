@@ -1,0 +1,43 @@
+\section{Original codimension-one history declarations restored for this export}
+
+The existing standalone chapter records these two original declarations as
+upstream-only. Their complete original source, section contexts, and original
+native blueprint nodes and proofs at revision
+\texttt{6e453e142420e6a64ccfdb5cadd15abc2379f581} are retained in the audit.
+The following precise local attachments and complete written proofs complement
+the existing chapter. They add no hypothesis, new mathematical result, or
+resolution closure claim.
+
+\begin{lemma}[Weak equivalence preserves the current codimension-one part]
+\label{hir:additive-export-codim-equivalence-history}
+\uses{bcalc:codim-one-part-canonical}
+\lean{Hironaka.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_wEquiv}
+Let $M,L$ be weakly equivalent marked ideals on the same ambient manifold,
+with the same underlying submanifold $N$. For every actual finite $M$-test
+tower $T$, the codimension-one parts of $M_T$ and $L_T$ are equal.
+No coherence, closedness, or equality of their marked ideals is assumed.
+\end{lemma}
+\begin{proof}
+The transformed underlying submanifold is the strict transform along the
+same physical tower of the original submanifold. Thus the equality of the
+original submanifolds gives equality of the two current submanifolds.
+Weak equivalence gives equality of the two current cosupports along this
+same $M$-test tower. The codimension-one part depends only on the underlying
+submanifold and that cosupport, so the congruence theorem for those two sets
+gives the asserted equality.
+\end{proof}
+
+\begin{lemma}[An empty codimension-one part stays empty]
+\label{hir:additive-export-codim-empty-history}
+\uses{bcalc:codim-one-part-tower}
+\lean{Hironaka.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_eq_empty}
+Let $M$ be well formed, of maximal order along its underlying submanifold,
+with mark at least one and empty original codimension-one part. Along every
+actual finite $M$-test tower $T$, its current codimension-one part is empty.
+\end{lemma}
+\begin{proof}
+The codimension-one tower theorem puts the current codimension-one part
+inside the inverse image, under the actual projection of $T$, of the
+original codimension-one part. That original set is empty, so its inverse
+image is empty. A subset of the empty set is empty, proving the claim.
+\end{proof}

@@ -1,0 +1,35 @@
+\begin{proposition}[The codimension-one part along \(N\) is canonical]
+\label{bcalc:codim-one-part-canonical}
+\uses{bcalc:codim-one-part-along-def,bcalc:regular-point-transport,hir:biholomorphism-transform,hir:open-restriction-marked,hir:open-restriction-tower,hir:tower-transport,hir:tower-transport-resolution,hir:restricted-equivalence,hir:restricted-equivalence-basic,hir:marked-equivalence,hir:marked-equivalence-basic,mc:strict-along,hir:cosupport,rem:dimension,rem:open-subset-analytic}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{TranscendentalNakamaye.Pending.CodimOnePartCanonical.mem_codimOnePartAlong_iff_of_eventually,TranscendentalNakamaye.Pending.CodimOnePartCanonical.mem_codimOnePartAlong_congr,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_congr,TranscendentalNakamaye.Pending.CodimOnePartCanonical.cosupport_pullback,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_pullback,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_pullback_val,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_transport,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_restrict,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_restrictEquiv,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_wEquiv}
+\leanok
+Write \(R_N(\mathfrak a,\mu)\) for the codimension-one part along \(N\) of \(\operatorname{cosupp}(\mathfrak a|_N,\mu)\) (Definition~\ref{bcalc:codim-one-part-along-def}), and
+\(R(\underline{\mathcal I})=R_N(\mathfrak a,d)\) for \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\). Let \(\mathfrak a\) consist of holomorphic germs.
+\begin{enumerate}
+\item (Locality) Whether \(x\in R_N(\mathfrak a,\mu)\) depends only on the germs at \(x\) of \(N\) and of \(\operatorname{cosupp}(\mathfrak a|_N,\mu)\); equal cosupports along the
+same \(N\) give equal codimension-one parts.
+\item (Biholomorphisms) For a biholomorphism \(\Phi\colon M'\to M\), \(\operatorname{cosupp}((\Phi^*\mathfrak a)|_{\Phi^{-1}N},\mu)=\Phi^{-1}\operatorname{cosupp}(\mathfrak a|_N,\mu)\)
+and \(R_{\Phi^{-1}N}(\Phi^*\mathfrak a,\mu)=\Phi^{-1}R_N(\mathfrak a,\mu)\).
+\item (Open sets) For \(U\subset M\) open, \(R_{N\cap U}(\mathfrak a|_U,\mu)=R_N(\mathfrak a,\mu)\cap U\).
+\item (Transported towers) If \(\mathfrak a\) is coherent, \(T\) a tower over \(M\) and \(\Phi^*T\) its transport with last-stage biholomorphism \(\Phi_T\)
+(Definition~\ref{hir:tower-transport}), then \(R(\Phi^*\underline{\mathcal I}_{\Phi^*T})=\Phi_T^{-1}R(\underline{\mathcal I}_T)\).
+\item (Restricted towers) If \(N\) is a closed submanifold, \(\mathfrak a\) coherent, \(T\) a multiple test blow-up of \(\underline{\mathcal I}\) and \(T|_U\) its restriction
+(Lemma~\ref{hir:open-restriction-tower}), then \(R((\underline{\mathcal I}|_U)_{T|_U})\) is the trace of \(R(\underline{\mathcal I}_T)\) on the open preimage of \(U\).
+\item (Representatives) If \(\underline{\mathcal I}\) and \(\underline{\mathcal J}\) are restricted-equivalent (Definition~\ref{hir:restricted-equivalence}; \(N\) closed, coherent
+ideals), then \(R(\underline{\mathcal I}_T)=R(\underline{\mathcal J}_T)\) for every tower \(T\); if they are equivalent (Definition~\ref{hir:marked-equivalence}) with the same \(N\),
+then \(R(\underline{\mathcal I}_T)=R(\underline{\mathcal J}_T)\) for every multiple test blow-up \(T\) of \(\underline{\mathcal I}\).
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\leanok
+(1) Regularity of a given dimension at \(x\) depends only on the germ of the set at \(x\) (Remark~\ref{rem:dimension}). (2) The cosupport identity is that of
+Lemma~\ref{hir:biholomorphism-transform} for the marked ideal \((M,N,\emptyset,\mathfrak a,\mu)\); then apply Lemma~\ref{bcalc:regular-point-transport} to \(N\) and to the
+cosupport. (3) The cosupport restricts (Lemma~\ref{hir:open-restriction-marked}), and regular points of \(A\cap U\) in \(U\) are those of \(A\) in \(U\)
+(Remark~\ref{rem:open-subset-analytic}). (4) For the empty tower this is (2); from the first blowup on the two transforms are equal and \(\Phi_T\) is the identity
+(Lemma~\ref{hir:tower-transport-resolution}). (5) Along a multiple test blow-up \(N_T\) stays a closed submanifold and \(\mathfrak a_T\) coherent, and the transform of
+\(\underline{\mathcal I}|_U\) along \(T|_U\) is the restriction of \(\underline{\mathcal I}_T\) to the open preimage of \(U\) (Lemma~\ref{hir:open-restriction-tower}); apply (3).
+(6) Restricted-equivalent marked ideals have the same \(N\) and cosupport, and equal transforms from the first blowup on
+(Lemmas~\ref{hir:restricted-equivalence-basic} and~\ref{hir:marked-equivalence-basic}); equivalent marked ideals have equal cosupports along their multiple test
+blow-ups (Definition~\ref{hir:marked-equivalence}), and \(N_T\) is the iterated strict transform of \(N\), the same for both (Lemma~\ref{mc:strict-along}); apply (1).
+\end{proof}

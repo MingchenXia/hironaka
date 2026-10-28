@@ -1,0 +1,116 @@
+\section{Complete original auxiliary statements used by the new export}
+
+This page supplies explicit source-facing statements and complete proofs for
+five original auxiliary declarations at native revision
+\texttt{53bb34a4a1607f358638012e2d9cb1d27818ca91}. The Lean declarations and
+their original contexts are copied unchanged, apart from the canonical
+namespace relocation, into three new support files. This page is new
+documentation; it is not presented as an original native blueprint chapter.
+The older whole proofs of the canonical invariant, codimension-one contact
+and Hadamard bridge remain unchanged.
+
+\begin{lemma}[The general step's actual value]
+\label{pub:canonical-general-step-value}
+\lean{Hironaka.CanonicalCentres.generalStep_inv}
+\notready
+Let $n>0$, let $\Lambda$ be a well-founded linearly ordered type, and let $R$
+be a resolution invariant in dimension at most $k$ on $n$-dimensional complex
+manifolds. For every original marked ideal $M$, actual tower $T$ and endpoint
+$y$, the value of $\operatorname{generalStep}(R)$ is exactly
+\[
+ \operatorname{genInv}\bigl((J,S,z)\mapsto
+       \operatorname{stepOneInvM}(R,J,S,z)\bigr)(M,T,y).
+\]
+\end{lemma}
+\begin{proof}
+The definition of the general step applies the invariant constructor
+\texttt{ofWellFounded} to this literal value function, with the independently
+proved invariant and well-foundedness properties. That constructor retains
+the supplied value function as its \texttt{inv} field. Projecting the field
+therefore gives the displayed expression by definitional equality.
+\end{proof}
+
+\begin{lemma}[The actual successor family]
+\label{pub:canonical-invariant-successor}
+\lean{Hironaka.CanonicalCentres.invFamily_succ}
+\notready
+For $n>0$ and every $k\in\mathbb N$,
+\[
+ \operatorname{invFamily}_n(k+1)
+   =\operatorname{generalStep}(\operatorname{invFamily}_n(k)).
+\]
+This is equality of the entire invariant records, with the given proof of
+$n>0$ used on both sides.
+\end{lemma}
+\begin{proof}
+The family is defined by recursion: its zero value is the dimension-zero
+invariant and its successor clause is the general step of the preceding
+family member. Evaluating that successor clause gives the asserted equality
+by reflexivity.
+\end{proof}
+
+\begin{lemma}[A tangent equation near a codimension-one point]
+\label{pub:codim-one-contact-local-equation}
+\lean{Hironaka.CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff_eq_zero}
+\notready
+Let $N$ be a closed complex submanifold of an $n$-dimensional complex manifold,
+let $I$ be coherent and let $\mu\ge1$. Suppose $u$ is an actual tangent direction
+along $(N,I,\mu)$ on its source neighbourhood $U$. If $x\in U$ belongs to the
+codimension-one part $R$ of $S=\operatorname{cosupp}(I|_N,\mu)$, then, on a
+neighbourhood of $x$,
+\[
+       y\in R\quad\Longleftrightarrow\quad y\in N\ \text{and}\ u(y)=0.
+\]
+\end{lemma}
+\begin{proof}
+Membership of $x$ in $R$ supplies an integer $k$ such that $N$ is regular of
+dimension $k+1$ and $S$ is regular of dimension $k$ at $x$. The original local
+description of the codimension-one part gives, near $x$, the equivalence
+$y\in R\Longleftrightarrow y\in S$.
+Coherence and the closed smooth carrier make $S$ analytic. Its local dimension
+at $x$ is at least $k$, by the displayed regularity. The original
+maximal-contact dimension lemma applied to this actual tangent direction
+therefore gives, near $x$, $y\in S\Longleftrightarrow y\in N\land u(y)=0$.
+Intersect the two neighbourhoods and compose their equivalences. These are
+exactly the two eventual statements used by the original Lean proof.
+\end{proof}
+
+\begin{lemma}[Coherence of the actual controlled transform]
+\label{pub:hadamard-controlled-transform-coherent}
+\lean{Hironaka.HadamardBridge.isCoherent_controlledTransform_of_subset_cosupport}
+\notready
+Let $\pi:Y\to X$ be an actual blowup along $C$ between $n$-dimensional complex
+manifolds, let $I$ be coherent, and let $\mu\in\mathbb N$. If
+$C\subset\operatorname{cosupp}(I,\mu)$ on the whole ambient carrier, then the
+actual controlled transform $\operatorname{controlledTransform}(\pi,I,\mu)$
+is coherent.
+\end{lemma}
+\begin{proof}
+The blowup hypothesis supplies the genuine closed smooth centre. The original
+Hadamard bridge, applied to $I$ and the stated whole-centre order bound, gives
+$I\subset\mathcal I_C^\mu$. The original coherence theorem for the controlled
+transform takes precisely coherence of $I$, the actual blowup and this ideal
+inclusion as inputs. Applying it proves the assertion. This argument also
+retains the original permitted case $\mu=0$.
+\end{proof}
+
+\begin{lemma}[The whole controlled factorization]
+\label{pub:hadamard-whole-controlled-factor}
+\lean{Hironaka.HadamardBridge.pullback_eq_mul_controlledTransform_of_subset_cosupport}
+\notready
+Let $\pi:Y\to X$ be an actual blowup along $C$, let $I$ be coherent and let
+$\mu\in\mathbb N$. If $C\subset\operatorname{cosupp}(I,\mu)$, then
+\[
+ \pi^*I=\mathcal I_{\mathrm{Exc}(\pi)}^{\mu}
+          \operatorname{controlledTransform}(\pi,I,\mu)
+\]
+as whole functional ideal sheaves on $Y$.
+\end{lemma}
+\begin{proof}
+The original Hadamard bridge gives the actual inclusion
+$I\subset\mathcal I_C^\mu$ from coherence and the order bound on the whole
+smooth centre. Apply the original whole controlled-factorization theorem with
+this inclusion and the prescribed blowup. Its exceptional invertible factor
+is precisely the displayed ideal power; no proposed target factorization is
+an input.
+\end{proof}

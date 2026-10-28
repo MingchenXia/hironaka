@@ -1,0 +1,77 @@
+\section{Matched native coordinates and whole coherent normal trace}
+
+\begin{lemma}[The given flattening induces an actual native intrinsic chart]
+\label{hir:disjoint-matched-intrinsic-chart}
+\uses{ana:submanifold-complex-structure}
+\lean{Hironaka.HironakaDisjointMatchedControlledTrace.exists_matched_coordinates}
+\leanok
+Let $S$ be a regular $d$-dimensional submanifold of a complex manifold
+of dimension $d+t$, with its existing native flattening atlas. Let $y\in S$,
+and let $\Theta$ be a genuine ambient flattening at $y$, centered at zero,
+which identifies the entire local $S$ with the standard $d$-plane. Given any
+genuine biholomorphism $E:Z\to S$, with $z=E^{-1}(y)$, construct actual local
+coordinates $\Psi$ at $z$ in the existing native atlas, centered at zero, such
+that the inverse coordinate maps satisfy near zero
+\[
+ \operatorname{val}_S E(\Psi^{-1}(u))
+   =\Theta^{-1}(u,0).
+\]
+No matching chart or germ comparison is an input.
+\end{lemma}
+\begin{proof}
+Package the given ambient chart and the given $\Theta$ as a flattening datum
+for $S$, retaining its literal plane equation. The intrinsic chart supplied
+by this datum belongs to the existing native atlas, whose atlas contains
+every such genuine flattening datum. Its inverse is the original ambient
+inverse coordinate map evaluated at the standard plane inclusion, as follows
+from the explicit inverse-chart construction. Pull this intrinsic chart back
+through the genuine $E$. Compose its coordinate map with the inverse preferred
+chart at $z$. Smoothness of both $E$ and its inverse, and holomorphic native
+chart transitions, make this an actual local biholomorphism between original
+coordinate opens. Its value at the preferred coordinate of $z$ is zero.
+The true inverse-chart identities cancel the preferred chart and $E$, giving
+the displayed entire inverse-coordinate equation on a genuine neighbourhood
+of zero.
+\end{proof}
+
+\begin{theorem}[Whole coherent ideal trace in the matched coordinates]
+\label{hir:disjoint-matched-whole-coherent-trace}
+\uses{hir:disjoint-matched-intrinsic-chart,hir:relative-normal-whole-hadamard}
+\lean{Hironaka.HironakaDisjointMatchedControlledTrace.exists_matched_coherent_trace}
+\leanok
+The same constructed $\Psi$ works for EVERY coherent ambient ideal $A$:
+\[
+ \operatorname{map}(\operatorname{planeTrace})
+       (\operatorname{adaptedIdeal}_{y,\Theta}(A))
+ =\operatorname{adaptedIdeal}_{z,\Psi}
+       ((\operatorname{val}_S\circ E)^*A).
+\]
+This is an equality of entire germ ideals, including all nonradical structure.
+\end{theorem}
+\begin{proof}
+The inverse-coordinate equation identifies the trace of the adapted germ of
+every original ambient holomorphic member with the adapted germ of its actual
+composition by $\operatorname{val}_S\circ E$. This composition is a genuine
+member of the whole pullback ideal, so mapping the entire ambient adapted
+span gives one inclusion. Conversely take any generator of the adapted whole
+pullback ideal. Its defining original pullback membership gives a finite sum
+of composed original ambient members with holomorphic intrinsic coefficients
+on an actual neighbourhood. Move this same finite span through the actual
+intrinsic inverse coordinates. Every resulting generator is the trace of the
+corresponding original adapted ambient member by the preceding equation.
+The finite span therefore belongs to the mapped ambient ideal. Taking all
+adapted generators gives the other inclusion. Coherence supplies holomorphicity
+of original members; no flatness of a closed inclusion, radical vanishing
+replacement, target trace certificate or finite target presentation is used.
+\end{proof}
+
+\begin{remark}
+This dictionary applies on arbitrary genuine ambient open manifolds; the
+flattening only asserts a local plane equation and does not assert that the
+original source open is a product. To obtain the full controlled split for
+prescribed ambient and base blowups, one must additionally construct their
+canonical strict-contact biholomorphism and apply actual whole controlled
+restriction with the original mark one. Until that consumer is supplied,
+this theorem alone does not assert that a particular base controlled ideal
+is the resulting trace, nor does it prove ambient-independent histories.
+\end{remark}

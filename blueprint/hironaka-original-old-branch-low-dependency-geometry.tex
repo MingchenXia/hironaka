@@ -1,0 +1,198 @@
+\section{Low-dependency geometry for the original-branch prephase}
+
+The following declarations reproduce the accepted geometric statements at
+checkpoint \texttt{636442a87402a67de1f914cb4120ee28c3ed6ad7}, with genuine
+proof bodies and narrower imports. They introduce no new hypothesis or
+mathematical closure. In particular, neither a phase certificate nor an
+ambient extension is supplied by the caller. All statements below have passed their scoped kernel and transitive
+standard-axiom checks.
+
+\begin{lemma}[The actual projection of an empty tower]
+\label{hir:original-old-branch-empty-projection}
+\uses{hir:blowup-tower,hir:general-nc-open-actual-empty-blowup-isomorphism}
+\lean{Hironaka.HironakaOriginalOldBranchEmptyProjection.exists_empty_tower_projection}
+\leanok
+For an actual finite geometric tower $T:Y\to X$ all of whose centres
+are empty, there is a biholomorphism $\beta:Y\to X$ such that
+$\beta(y)=T(y)$ for every $y$. This includes every empty step and does
+not replace the given tower.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower. The identity projection is the identity
+biholomorphism. At an empty last centre, the genuine empty-centre
+blowup theorem gives a biholomorphism from the last space to its
+predecessor, equal to the prescribed last blowup map. Compose it with
+the induction hypothesis. Their equality with the two prescribed
+projections gives equality with the entire projection.
+\end{proof}
+
+\begin{lemma}[Intrinsic old count on the same empty tower]
+\label{hir:original-old-branch-empty-count}
+\uses{hir:original-old-branch-empty-projection,hir:general-nc-biholomorphic-intrinsic-multiplicity}
+\lean{Hironaka.HironakaOriginalOldBranchCountDrop.branchMultiplicity_empty_tower}
+\leanok
+Let $H$ be a normal-crossings carrier and $T:Y\to X$ an actual
+all-empty tower. If $H^T$ is a normal-crossings carrier, its intrinsic
+branch multiplicity at $y$ equals the multiplicity of $H$ at $T(y)$.
+No count comparison or biholomorphism is an input.
+\end{lemma}
+\begin{proof}
+Induction on the tower shows $H^T=T^{-1}H$: the empty-centre strict
+transform is closure of the inverse image, already closed because
+$H$ is closed. The preceding lemma identifies this actual inverse
+image with $\beta^{-1}H$. Intrinsic multiplicity is invariant under
+the genuine biholomorphism $\beta$.
+\end{proof}
+
+\begin{lemma}[The same original phase has global high-cut control]
+\label{hir:original-old-branch-lowdep-high-cut}
+\uses{hir:nc-original-coefficient-phase-global-old-born-carrier,hir:nc-highest-joint-retained-boundary-histories,hir:nc-old-block-current-high-subset-strict-original-high,hir:original-old-branch-empty-count}
+\lean{Hironaka.HironakaOriginalOldBranchCountDrop.exists_original_phase_high_cut_control}
+\leanok
+Let $I$ be coherent, $d\ge1$, and $\operatorname{cosupp}(X,E,I,d)$
+compact. Let $(H,E)$ be an adapted NC pair and suppose its intrinsic
+old count is at most $r>0$ everywhere. Put
+$M=(X,E,I,d)$, $Z=\{x:r\le b_H(x)\}$, and
+$L=\operatorname{coeff}(M)|_Z$.
+There is one actual tower $T$ resolving $L$, testing $M$, with centres
+in successive strict transforms of $Z$, such that
+\[
+ \operatorname{cosupp}(M_T)\cap Z^T=\varnothing,
+ \qquad (H^T,E_{M,T})\text{ is adapted},\qquad
+ \{y:r\le b_{H^T}(y)\}\subset Z^T.
+\]
+The entire retained and born boundary is the actual boundary of $M_T$.
+\end{lemma}
+\begin{proof}
+Use the actual accepted original coefficient-phase producer to select
+$T$, its original testness, centres in $Z$, clearing, and global adapted
+carrier. Fix a final point $y$. If $T(y)\in Z$, choose an actual initial
+joint SNC presentation near $T(y)$ whose augmented tower is tested.
+The accepted member-intersection theorem for its literal old block
+puts every transformed old-count superlevel in the strict transform
+of the initial superlevel. Intrinsic multiplicity of this local union
+equals its literal branch count, and restriction identifies these
+counts with the initial and final intrinsic counts. Thus count at
+least $r$ at $y$ implies $y\in Z^T$.
+
+If $T(y)\notin Z$, restrict the same tower over $X\setminus Z$.
+All its centres are empty, since the original centres lie over $Z$.
+The preceding empty-count lemma identifies its final old count with
+the initial old count at $T(y)$, which is strictly less than $r$.
+This excludes that case from the final high locus and proves the
+global inclusion, without imposing repair outside the permitted locus.
+\end{proof}
+
+\begin{lemma}[A genuine whole-cosupport one-phase count drop]
+\label{hir:original-old-branch-lowdep-count-drop}
+\uses{hir:original-old-branch-lowdep-high-cut}
+\lean{Hironaka.HironakaOriginalOldBranchCountDrop.exists_original_phase_permitted_count_drop}
+\leanok
+Under exactly the preceding natural hypotheses, the same $T$ admits
+the actual open $U=Y\setminus Z^T$ containing its entire current
+cosupport; the restricted old count on $U$ is at most $r-1$.
+The resolution, original testness, centres-in-$Z$ history, and global
+adapted carrier remain outputs for this same tower.
+\end{lemma}
+\begin{proof}
+The strict transform of the closed superlevel $Z$ is closed, so its
+complement is open. Clearing puts the entire cosupport in this
+complement. Global high-cut control makes its old count strictly less
+than $r$, hence at most $r-1$. Intrinsic multiplicity commutes with
+restriction, giving the asserted restricted count.
+\end{proof}
+
+\begin{lemma}[Whole compact cosupport along the actual test projection]
+\label{hir:original-old-branch-lowdep-current-compact}
+\uses{hir:geo-transform-coherent,bcalc:transform-off-centre-tower,hir:principalization-local}
+\lean{Hironaka.HironakaOriginalOldBranchCompactExtension.current_cosupport_compact,Hironaka.HironakaOriginalOldBranchCompactExtension.current_cosupport_compact_of_wellFormed}
+\leanok
+If $M$ has closed smooth ambient submanifold, coherent ideal, and
+compact entire cosupport, then every actual $M$-test tower $T$ has
+compact entire current cosupport and
+\[
+ \operatorname{cosupp}(M_T)\subset T^{-1}\operatorname{cosupp}(M).
+\]
+The well-formed variant states both conclusions together.
+\end{lemma}
+\begin{proof}
+Controlled-transform cosupport inclusion along the actual test tower
+gives the displayed inclusion. Coherence and closed smoothness are
+preserved along the tower, so current cosupport is closed.
+The actual projection is proper; its inverse image of the original
+compact cosupport is compact. Its closed subset given by the current
+cosupport is therefore compact. No progress or termination theorem
+enters this proof.
+\end{proof}
+
+\begin{lemma}[Restriction preserves whole-cosupport compactness]
+\label{hir:original-old-branch-lowdep-restricted-compact}
+\uses{hir:open-restriction-marked}
+\lean{Hironaka.HironakaOriginalOldBranchCompactExtension.restricted_cosupport_compact}
+\leanok
+If $I_M$ is coherent, $\operatorname{cosupp}(M)$ is compact, and an
+open $U$ contains that entire cosupport, then the cosupport of
+$M|_U$ is compact in $U$.
+\end{lemma}
+\begin{proof}
+Coherence identifies the restricted cosupport with the inverse image
+of the original cosupport under inclusion. Its image in the ambient
+space is the original cosupport, since the open contains every one of
+its points. Compactness in an open subtype is equivalent to compactness
+of that image.
+\end{proof}
+
+\begin{lemma}[The actual open image has a holomorphic inverse]
+\label{hir:original-old-branch-lowdep-open-image}
+\uses{hir:base-change-open}
+\lean{Hironaka.HironakaOriginalOldBranchCompactExtension.exists_open_image_equiv}
+\leanok
+For an actual open holomorphic embedding $g:Z\to Y$ and any open
+$V\subset Z$, there are an open $W=g(V)\subset Y$ and a
+biholomorphism $\chi:V\to W$ with $\chi(v)=g(v)$.
+\end{lemma}
+\begin{proof}
+Write the embedding as a biholomorphism $\Phi:Z\to O$ followed by
+the inclusion of the actual open $O\subset Y$. This factorization
+makes $g$ open, so $W=g(V)$ is open. Restrict $g$ to $V$, codomain
+restricted to $W$. Its inverse sends $w$ to $\Phi^{-1}(w)$; image
+membership proves this lies in $V$. The two inverse identities follow
+from those of $\Phi$, and both restrictions are holomorphic through
+the corresponding open inclusions.
+\end{proof}
+
+\begin{lemma}[The same prescribed finite history extends ambiently]
+\label{hir:original-old-branch-lowdep-compact-extension}
+\uses{hir:original-old-branch-lowdep-current-compact,hir:original-old-branch-lowdep-restricted-compact,hir:compact-open-blowup-extension,hir:compact-open-centre-admissible,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOriginalOldBranchCompactExtension.exists_extension}
+\leanok
+Let $M$ have closed smooth ambient submanifold, coherent ideal, and
+compact entire cosupport, and let $U$ contain that entire cosupport.
+For every prescribed actual finite $M|_U$-test tower $S$, there is an
+actual $M$-test tower $Q$ and an isomorphism of entire towers
+\[
+ S\cong Q|_U
+\]
+over the identity on $U$. Neither an ambient extension operation nor
+its conclusion is a hypothesis.
+\end{lemma}
+\begin{proof}
+Induct on the prescribed tower. The identity tower extends by the
+identity. Suppose the actual prefix has extension $Q$ and whole-tower
+isomorphism $e$. The next prescribed centre is a closed subset of the
+compact current local cosupport, so is compact. Transfer it by $e$
+to the current open over $U$. Its whole image is compact and is an
+actual ambient closed smooth centre.
+
+Apply actual compact-centre blowup extension, which follows from
+blowup existence and universal uniqueness, to the prescribed next
+map after this transfer. Transform compatibility for the whole-tower
+isomorphism identifies the transferred local centre as admissible for
+the actual restricted current marked ideal. Compact-centre
+admissibility under inclusion gives admissibility for its whole ambient
+image, with every ordered boundary entry. Append this actual ambient
+blowup to $Q$. The universal comparison of the prescribed and restricted
+blowups extends $e$ to an isomorphism of the entire towers. This proves
+the inductive step for the same prescribed history.
+\end{proof}
+

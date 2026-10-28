@@ -1,0 +1,52 @@
+\chapter{Closed zero-section differential ideals for every original carrier}
+
+Let $s(x)=(x,0)$ and $p(x,z)=x$ in the SAME original ordered coordinates. For an original closed regular carrier $A\subset\mathbb C^n$, define $A^0=\{(x,z):x\in A,\ z=0\}$ independently. The section is a genuine closed embedding; $A^0$ is not the cylinder $p^{-1}A$.
+
+\begin{definition}[The closed original carrier lift and its product flattening]
+\label{hir:actual-zero-section-submanifold-lift}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.liftedCarrier, TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.productFlat}
+\leanok
+For the original carrier $A$, put $A^0=\{(x,z):x\in A,\ z=0\}$. For a genuine original local holomorphic equivalence $\Phi$ about $x$, its product equivalence has source $p^{-1}(\operatorname{source}\Phi)$, target $p^{-1}(\operatorname{target}\Phi)$ and the literal formulas $\Gamma(u,z)=(\Phi(u),z)$ and $\Gamma^{-1}(u,z)=(\Phi^{-1}(u),z)$. The new normal coordinate remains zero on the closed section.
+\end{definition}
+
+\begin{lemma}[Actual original carrier geometry gives compatible closed flattenings]
+\label{hir:actual-zero-section-submanifold-product-flattening}
+\uses{hir:actual-zero-section-submanifold-lift,mc:flat-chart}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.liftedCarrier_closed_submanifold, TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.productFlat_section, TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.productFlat_inverse_section}
+\leanok
+The independently defined $A^0$ is genuinely closed regular. At every $x\in A$, original regularity internally supplies a genuine flattening $\Phi$ of $A$, and the SAME literal product formula $\Gamma(x,z)=(\Phi(x),z)$ is an actual local holomorphic equivalence flattening $A^0$ of the same carrier dimension. Its inverse is $(u,z)\mapsto(\Phi^{-1}(u),z)$. Both exact projection/section squares and the same full carrier flattening follow internally; no caller lifted-carrier atlas or comparison certificate is an input.
+\end{lemma}
+\begin{proof}
+Closedness is the intersection of the true closed inverse image $p^{-1}A$ with the original normal zero fibre. At $x\in A$, unpack genuine original regularity to obtain $k$ and its actual local holomorphic flattening $\Phi$. Lift its source and target by $p$ and use the displayed product maps. Their actual derivatives are sums of the holomorphic tangent inclusion of $\Phi\circ p$ and the literal normal projection; the inverse has the same construction with $\Phi^{-1}$. Original inverse identities and the true two-block projection/inclusion identities prove both genuine local inverse equations. The product sends $s(x)$ to zero because $\Phi(x)=0$. In its coordinates, membership in $A^0$ is precisely membership of the original first block in $\mathbb C^k\times0$ AND vanishing of the unchanged final coordinate, exactly the actual ambient coordinate $k$-plane. This proves true regularity and the two literal closed-section/projection squares, retaining all original coordinates.
+\end{proof}
+
+\begin{theorem}[Whole derivatives for the independently lifted original carrier]
+\label{hir:actual-zero-section-submanifold-whole-derivative}
+\uses{hir:actual-zero-section-submanifold-product-flattening,mc:derivative-along-coherent}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.zero_section_submanifold_derivIdealAlong}
+\leanok
+For every original coherent ambient germ ideal $J$ and original closed regular $A$,
+\[
+ s^*(\mathcal D_{A^0}J)=\mathcal D_A(s^*J)
+\]
+as ENTIRE functional germ ideals at every original point. No target derivative inclusion or invariant value is a hypothesis.
+\end{theorem}
+\begin{proof}
+At $x\notin A$, actual closedness gives a neighbourhood disjoint from $A$ and the true unit-ideal description of along-carrier derivatives. Both sides are therefore exactly the holomorphic germs. At $x\in A$, choose a genuine original finite coherent presentation $G_a$ of the SAME $J$ at $s(x)$, and choose the internally matched flattenings from the preceding lemma. Actual pullback substitution supplies the complete presentation $G_a\circ s$ of $s^*J$ on one true base open.
+
+The actual flat-generator formulas for along-carrier derivatives give the original generators, carrier-normal coordinate functions, and the actual tangent partial derivatives. Under the SAME closed section, the original base-normal coordinate $\Phi_i$ is preserved, the single newly added normal coordinate becomes zero, and the genuine differential chain rule identifies every tangent partial in $\Gamma$ with the corresponding partial of $G_a\circ s$ in $\Phi$. The normal inverse-square identity is literal before any derivatives. Thus every generator of either whole presentation lies in the other finite holomorphic span. Substitution in every finite germ expression proves both entire ideal inclusions. No smooth-cylinder derivative equality is substituted for this closed-carrier argument.
+\end{proof}
+
+\begin{theorem}[All iterated along-carrier derivatives of the same original ideal]
+\label{hir:actual-zero-section-submanifold-whole-iterated-derivative}
+\uses{hir:actual-zero-section-submanifold-whole-derivative,mc:derivative-along-coherent}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionSubmanifoldDifferentials.zero_section_submanifold_iterDerivIdealAlong}
+\leanok
+For the SAME original $A,J$ and every $q\in\mathbb N$,
+\[
+ s^*(\mathcal D_{A^0}^qJ)=\mathcal D_A^q(s^*J).
+\]
+\end{theorem}
+\begin{proof}
+The actual preceding geometry supplies closed regularity of $A^0$. Original coherence therefore gives coherence of every actual current $\mathcal D_{A^0}^qJ$ internally. For $q=0$ the equation is literal. Apply the whole first-derivative theorem to this SAME current ideal at the successor, then substitute the induction hypothesis. No iterated equality is supplied as input. This establishes the differential data required when recursive contact carriers become proper submanifolds of the original zero plane, without asserting any cross-ambient canonical invariant/centre/history equality or proper descent.
+\end{proof}

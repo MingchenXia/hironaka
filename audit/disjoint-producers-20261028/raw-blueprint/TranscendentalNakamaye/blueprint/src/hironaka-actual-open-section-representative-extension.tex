@@ -1,0 +1,36 @@
+\section{Whole representatives on the fixed closed section}
+\begin{lemma}[A holomorphic retraction preserves the restricted whole ideal]
+\label{hir:actual-retraction-whole-restricted-representative}
+\uses{hir:restricted-equivalence}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenSectionRepresentative.restrictEquiv_retraction}
+\leanok
+Let $r:M\to M$ be holomorphic and fix every point of $A$. For an ambient ideal
+$J$ with holomorphic members, $(A,E,J,d)$ and $(A,E,r^*J,d)$ are restricted
+equivalent, with exactly the same carrier, boundary list and mark.
+\end{lemma}
+\begin{proof}
+At $x\in A$, every $g\in J_x$ gives a genuine pullback member $g\circ r$,
+since $r(x)=x$. Its one-generator span restricts on $A$ to a span for $g$,
+because $r$ fixes $A$. Conversely a whole pullback member is a finite
+holomorphic linear combination of $a_i\circ r$ with $a_i\in J_{r(x)}=J_x$.
+Each such composite equals $a_i$ on $A$, so its restricted span lies in the
+restricted ideal of $J_x$. Substituting these restricted spans into the entire
+finite combination gives the reverse containment. The other three fields of
+restricted equivalence are literal identities. No ambient ideal equality is asserted.
+\end{proof}
+\begin{lemma}[The genuine open closed-section representative]
+\label{hir:actual-open-section-whole-representative}
+\uses{hir:actual-open-zero-section-models,hir:actual-retraction-whole-restricted-representative}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenSectionRepresentative.restrictEquiv_actual_open_section}
+\leanok
+For the actual typed section $s:U\to p^{-1}U$, projection $p$, and any
+$A\subseteq U$, the records $(s(A),E,J,d)$ and $(s(A),E,(s\circ p)^*J,d)$
+are restricted equivalent. The carrier remains the same closed section $s(A)$.
+\end{lemma}
+\begin{proof}
+The actual section and projection are holomorphic, hence so is their composite.
+For $z\in s(A)$ the added normal projection is zero. The genuine linear splitting
+identity expresses $z$ as $s(p(z))$ plus the inclusion of that zero normal
+projection, so $s(p(z))=z$. Apply the preceding whole restricted-ideal theorem
+on this exact carrier. No cylinder replaces it at any step.
+\end{proof}

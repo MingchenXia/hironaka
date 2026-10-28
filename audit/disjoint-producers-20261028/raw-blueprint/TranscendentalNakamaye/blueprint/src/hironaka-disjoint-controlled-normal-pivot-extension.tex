@@ -1,0 +1,75 @@
+\section{The actual mark-one controlled normal generator}
+
+All controlled transforms in this section have the fixed mark one. This is
+not exceptional saturation over all orders: for $I=(x^2)$ and $J=(x^2,t)$,
+the $x$-pivot transform is $(x,t')$, whereas division over all orders would
+include $x^2/x^2=1$. No radicalization of the original ideal is used.
+
+\begin{lemma}[The whole actual normal quotient]
+\label{hir:disjoint-controlled-normal-quotient}
+\uses{hir:actual-centre-weighted-chart-stalk}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointControlledNormalPivot.normal_quotient_mem}
+\leanok
+Let $U\subset\mathbb C^{d+1}$ contain zero, let the original coordinate centre
+be given by $x_k=\cdots=x_d=0$, and let $\pi$ be a genuine blowup of this
+centre. Let $J$ be any coherent original ideal on $U$ containing the last
+coordinate germ at $\pi(y)=0$. In any actual native blowup chart at $y$,
+with owner $e$, direction $b$ and centered coordinates, the entire adapted
+mark-one controlled ideal contains $1$ if $e=d$, and contains $t'+b_d$
+if $e\ne d$. The chart is required to have its actual original blowup square;
+no transformed-ideal comparison is supplied.
+\end{lemma}
+\begin{proof}
+The actual chart square identifies the adapted germ of the total transform
+of the last source coordinate with the literal polynomial blowup pullback.
+Source membership gives membership of this whole germ in the actual total
+ideal. If the owner is $d$, this pullback is the exceptional coordinate $a$.
+Otherwise it is $a(t'+b_d)$. The genuine exceptional-divisor stalk theorem
+identifies the entire exceptional ideal with the principal ideal $(a)$ in
+this same chart. Whole coherent adapted-colon formation identifies the
+actual mark-one controlled stalk with the colon of its actual total stalk
+by $(a)$. Thus $1$, respectively $t'+b_d$, belongs to that entire colon.
+The coherent source ideal and actual exceptional ideal suffice for this
+argument; no admissibility or equality of target ideals is assumed.
+\end{proof}
+
+\begin{theorem}[Native normal-owner exclusion and centered normal containment]
+\label{hir:disjoint-controlled-normal-pivot-exclusion}
+\uses{hir:disjoint-controlled-normal-quotient,hir:relative-normal-whole-hadamard}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointControlledNormalPivot.exists_actual_normal_free_controlled_chart}
+\leanok
+Assume $k\le d$. At every point $y$ over zero in the actual mark-one controlled
+cosupport of $J$, the genuine global blowup internally supplies an actual
+native chart whose owner satisfies $k\le e<d$, whose last direction is zero,
+and whose entire adapted controlled ideal contains the centered last normal
+coordinate. In particular the whole kernel of restriction to the centered normal plane
+lies in this controlled ideal. At a point represented by a normal-owner chart the adapted controlled
+stalk is the unit ideal; that point therefore cannot lie in the actual
+controlled cosupport.
+\end{theorem}
+\begin{proof}
+The genuine coordinate-centre chart theorem chooses a native owner, direction
+and centered holomorphic chart, retaining the original blowup map square.
+Every member of the actual mark-one controlled ideal vanishes at $y$, by the
+original definition of cosupport. Every germ of its entire adapted ideal
+therefore has zero evaluation: its generators have this property under the
+actual inverse chart at zero, and evaluation preserves finite sums and
+products. The preceding normal-quotient theorem excludes the last coordinate
+as owner, since its unit would evaluate to one. Together with the actual
+owner bound and $k\le d$, this gives $k\le e<d$. The same theorem places
+$t'+b_d$ in the actual controlled ideal. Evaluation at zero is $b_d$, so the
+actual cosupport forces $b_d=0$. Thus the centered normal generator itself
+belongs to the entire controlled ideal; closure under holomorphic multiples
+then gives containment of its whole principal ideal. This principal ideal
+is exactly the full kernel of the actual normal-plane trace, by relative
+Hadamard division, giving the asserted entire kernel containment.
+\end{proof}
+
+\begin{remark}
+For the natural full ambient ideal $J=I+(t)$ the original normal-membership
+hypothesis is automatic, for arbitrary coherent, possibly nonradical $I$.
+This result does not identify the remaining trace with the controlled ideal
+on a prescribed original base blowup. That matching native-chart trace and
+whole reconstruction remain a separate obligation; no original ambient
+independence or canonical-history theorem is concluded here.
+\end{remark}

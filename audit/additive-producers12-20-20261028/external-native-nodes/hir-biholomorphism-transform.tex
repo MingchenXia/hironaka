@@ -1,0 +1,18 @@
+\begin{lemma}[Naturality of the transform under biholomorphisms]
+\label{hir:biholomorphism-transform}
+\uses{hir:biholomorphism-blowup,hir:geo-transform,hir:order-invariance}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.MarkedIdeal.pullback,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.MarkedIdeal.cosupp_pullback,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.MarkedIdeal.geoTransform_pullback}
+\leanok
+Let \(\varphi\colon M'\to M\) be a biholomorphism with inverse \(\psi\) and \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\); put
+\(\varphi^*\underline{\mathcal I}=(M',\varphi^{-1}N,\varphi^{-1}E,\varphi^*\mathfrak a,d)\). Then \(\operatorname{cosupp}\varphi^*\underline{\mathcal I}=\varphi^{-1}\operatorname{cosupp}\underline{\mathcal I}\), and if
+\(\mathfrak a\) is coherent and \(\sigma\colon Y\to M\) is holomorphic, the transform of \(\varphi^*\underline{\mathcal I}\) along \(\psi\circ\sigma\) with centre \(\varphi^{-1}(C)\) equals
+the transform of \(\underline{\mathcal I}\) along \(\sigma\) with centre \(C\) (Definition~\ref{hir:geo-transform}).
+\end{lemma}
+\begin{proof}
+\leanok
+Orders along \(N\) pull back along holomorphic maps (Lemma~\ref{hir:point-power-pullback} applied to the germ that \(g\) agrees with on \(N\)); apply this to
+\(\varphi\) and to \(\psi\), as in Lemma~\ref{hir:order-invariance}. For the transform: \((\psi\circ\sigma)^{-1}(\varphi^{-1}A\setminus\varphi^{-1}C)=\sigma^{-1}(A\setminus C)\) gives the same
+\(N'\) and \(E'\); \((\psi\circ\sigma)^*\varphi^*\mathfrak a=\sigma^*(\varphi\circ\psi)^*\mathfrak a=\sigma^*\mathfrak a\) and \((\psi\circ\sigma)^*\mathcal I_{\varphi^{-1}C}=\sigma^*\mathcal I_C\)
+(Lemma~\ref{hir:biholomorphism-blowup}) give the same ideal.
+\end{proof}

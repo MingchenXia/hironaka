@@ -1,0 +1,54 @@
+\section{Actual coefficient and homogenized marked ideals on the closed zero section}
+
+Let $s(x)=(x,0)$ be the SAME original closed zero section and $Z=s(\mathbb C^n)$. Let $M$ be an original well-formed marked ideal on $\mathbb C^{n+1}$ whose literal carrier is $Z$. Its whole ordered boundary and original mark are retained. Write $s^*M$ for the actual cross-dimensional marked pullback: inverse-image carrier, entrywise inverse-image boundary, whole functional ideal pullback, unchanged mark. No target comparison or history is supplied.
+
+\begin{theorem}[The entire actual homogenized marked object on the closed section]
+\label{hir:actual-zero-section-whole-homogenized-marked}
+\uses{hir:actual-zero-section-whole-iterated-derivative-ideal,mc:homogenized-along-basic,mc:homogenized-basic}
+\lean{Hironaka.HironakaActualZeroSectionCoefficientIdeals.zero_section_homMarkedAlong}
+\leanok
+The entire marked records satisfy
+\[
+ s^*\mathcal H_Z(M)=\mathcal H(s^*M).
+\]
+In particular the whole ideal equality is
+$s^*\mathcal H_Z(J,\mu)=\mathcal H(s^*J,\mu)$ for the SAME original $J=M.\mathrm{ideal}$ and $\mu=M.d$.
+\end{theorem}
+\begin{proof}
+Original well-formedness gives coherence of the same $J$ and genuine closed regularity of the literal carrier $Z$. Thus every $\mathcal D_Z^iJ$ and the actual tangent ideal $\mathcal D_Z^{\mu-1}J$ are coherent. Expand the actual homogenized ideal as its whole finite sum
+$\sum_{i<\mu}\mathcal D_Z^iJ\,(\mathcal D_Z^{\mu-1}J)^i$.
+Whole functional pullback under the actual holomorphic section commutes with these finite sums, products and powers. These are general holomorphic span identities; no submersion hypothesis is used. The proved closed-section differential theorem identifies each pulled-back derivative factor with $\mathcal D^i(s^*J)$ and the tangent factor with $\mathcal D^{\mu-1}(s^*J)$. Hence every whole summand and therefore the entire homogenized ideal agrees. The carrier, all ordered boundary positions and marking fields on both sides are the same literal marked pullback fields. Equality of the four fields proves the entire record equality, including the empty-sum case $\mu=0$.
+\end{proof}
+
+\begin{theorem}[The entire actual coefficient marked object with unchanged marks]
+\label{hir:actual-zero-section-whole-coefficient-marked}
+\uses{hir:actual-zero-section-whole-iterated-derivative-ideal,mc:coefficient-ideal,mc:marked-finite-sum}
+\lean{Hironaka.HironakaActualZeroSectionCoefficientIdeals.zero_section_coeffMarkedAlong}
+\leanok
+The entire actual coefficient marked records satisfy
+\[
+ s^*\mathcal C_Z(M)=\mathcal C(s^*M).
+\]
+The original derivative marks $\mu-i$, their literal sum exponents and their whole product marking are unchanged; no radical or mark-one replacement occurs.
+\end{theorem}
+\begin{proof}
+Unfold the actual coefficient definition as the marked finite sum of derivative records. Its ideal is the finite sum of $(\mathcal D_Z^iJ)^{e_i}$, where $e_i$ is the literal product of all other derivative marks. Original closed carrier geometry and coherence give coherence of every derivative and each such power. General holomorphic pullback commutes with this entire finite sum and all these powers. The closed-section whole iterated differential theorem identifies the pulled-back derivative ideal for EVERY $i$ with $\mathcal D^i(s^*J)$. Thus every summand is exactly the corresponding ordinary coefficient summand with the SAME $e_i$, proving equality of the whole ideals. The carrier and entire ordered boundary use the same inverse-image operations on both sides. The marking is the same literal finite product. Equality of all record fields proves the claim; zero and empty index cases are included by the actual definitions.
+\end{proof}
+
+\begin{theorem}[The same closed-section canonical-construction coefficient--homogenization seed]
+\label{hir:actual-zero-section-whole-coefficient-homogenized-seed}
+\uses{hir:actual-zero-section-whole-homogenized-marked,hir:actual-zero-section-whole-coefficient-marked}
+\lean{Hironaka.HironakaActualZeroSectionCoefficientIdeals.zero_section_coeff_homMarkedAlong}
+\leanok
+For the SAME original $M$, the actual composite used by the canonical construction obeys the entire marked-record identity
+\[
+ s^*\bigl(\mathcal C_Z(\mathcal H_Z(M))\bigr)
+       =\mathcal C\bigl(\mathcal H(s^*M)\bigr).
+\]
+Every original boundary label and its position is retained, and the actual input mark is used throughout.
+\end{theorem}
+\begin{proof}
+The actual homogenized original record keeps exactly the same carrier and ordered boundary. Its ideal is coherent by genuine original well-formedness and along-carrier homogenization coherence. Apply the whole coefficient computation, whose proof requires only that original ideal coherence and the actual closed carrier geometry, to this SAME homogenized record. It gives the coefficient of its actual marked pullback. Substitute the preceding entire homogenized-record identity. Both substitutions preserve the same original family and every marking/boundary field. No invariant value, chosen centre or comparison history is an input.
+\end{proof}
+
+These are closed-contact algebraic identities in the actual canonical construction. They do not yet prove cross-ambient canonical invariant-tail equality, stabilization of centres/histories under added zero generators, or proper intrinsic resolution descent.
