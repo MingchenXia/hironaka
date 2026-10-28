@@ -1,0 +1,27 @@
+\begin{lemma}[Coherence and cosupports of \(\mathcal H_N\) and \(\mathcal C_N\)]
+\label{mc:homogenized-along-basic}
+\uses{mc:homogenized-along,mc:derivative-along-coherent,mc:tangent-direction-along-basic,mc:hom-sum,mc:hom-sum-order,mc:finite-sum,hir:order-power-along,mc:marked-finite-sum}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0020}
+\lean{TranscendentalNakamaye.Pending.HomogenizedIdealAlong.isCoherent_tangentIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.isCoherent_homogenizedIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.isCoherent_coeffMarkedAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.isCoherent_homMarkedAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.le_homogenizedIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.orderGE_homogenizedIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.cosupport_homogenizedIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.cosupp_homMarkedAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.cosupport_coeffSummand,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.cosupp_coeffMarkedAlong}
+\leanok
+\begin{enumerate}
+\item If \(\mathfrak a\) is coherent and \(N\) is a closed submanifold, \(\mathcal H_N(\mathfrak a)\) and the ideal of \(\mathcal C_N(\underline{\mathcal I})\) are coherent.
+\item \(\mathfrak a\subset\mathcal H_N(\mathfrak a)\) and \(\operatorname{cosupp}(\mathcal H_N(\mathfrak a)|_N,\mu)=\operatorname{cosupp}(\mathfrak a|_N,\mu)\), for every set \(N\).
+\item If \(N\) is regular at each of its points and \(d\ge1\), the \(i\)-th summand of \(\mathcal C_N(\underline{\mathcal I})\) has
+\(\operatorname{cosupp}((\mathcal D_N^i\mathfrak a)^{e_i}|_N,\mu_{\mathcal C})=\operatorname{cosupp}((\mathcal D_N^i\mathfrak a)|_N,d-i)\), and
+\(\operatorname{cosupp}\mathcal C_N(\underline{\mathcal I})=\operatorname{cosupp}\underline{\mathcal I}\).
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) The \(\mathcal D_N^i(\mathfrak a)\) are coherent (Corollary~\ref{mc:derivative-along-coherent}), and finite sums, products and powers of coherent ideals are coherent
+(Definition~\ref{mc:hom-sum}, Lemma~\ref{mc:finite-sum}).
+(2) The summand \(i=0\) is \(\mathfrak a\cdot\mathcal O=\mathfrak a\), so \(\operatorname{cosupp}(\mathcal H_N(\mathfrak a)|_N,\mu)\subset\operatorname{cosupp}(\mathfrak a|_N,\mu)\). Conversely, at
+\(x\in\operatorname{cosupp}(\mathfrak a|_N,\mu)=\operatorname{cosupp}(\mathfrak a|_N,(\mu-i)+i)\), \(\operatorname{ord}_x((\mathcal D_N^i\mathfrak a)|_N)\ge\mu-i\) for \(i<\mu\)
+(Lemma~\ref{mc:tangent-direction-along-basic}(1)), in particular \(\operatorname{ord}_x(T_N(\mathfrak a)|_N)\ge1\), and Lemma~\ref{mc:hom-sum-order} gives
+\(\operatorname{ord}_x(\mathcal H_N(\mathfrak a)|_N)\ge\mu\).
+(3) \((d-i)\,e_i=\mu_{\mathcal C}\), so the first statement is \(\operatorname{cosupp}(\mathfrak b^{\nu}|_N,(d-i)\nu)=\operatorname{cosupp}(\mathfrak b|_N,d-i)\) with \(\nu=e_i\ge1\)
+(Lemma~\ref{hir:order-power-along}). The cosupport of a finite sum with a common mark is the intersection of the cosupports (Lemma~\ref{mc:finite-sum}, whose proof
+is valid along any \(N\)), so \(\operatorname{cosupp}\mathcal C_N(\underline{\mathcal I})=\bigcap_{i<d}\operatorname{cosupp}((\mathcal D_N^i\mathfrak a)|_N,d-i)\). The term \(i=0\) is
+\(\operatorname{cosupp}\underline{\mathcal I}\), and it is contained in every other term by Lemma~\ref{mc:tangent-direction-along-basic}(1).
+\end{proof}

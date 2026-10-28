@@ -1,0 +1,65 @@
+\chapter{Closed-section differential data on the actual open models}
+
+Fix an original open $U\subset\mathbb C^n$. The actual ambient model is $V=p^{-1}U\subset\mathbb C^{n+1}$, with genuine closed section $s_U(x)=(x,0)$ and retraction $p_U$. An original carrier $A$ is only assumed closed regular IN the true open manifold $U$. No closedness in the whole affine ambient space is inferred. Its independent lifted carrier is $A^0=\{z\in V:p_U(z)\in A,\ q(z)=0\}$.
+
+\begin{definition}[The original open models and closed section]
+\label{hir:actual-open-zero-section-models}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.productOpen,TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.zeroSection,TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.projection,TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.liftedCarrier,TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.productFlat}
+\leanok
+Let $V=p^{-1}U$, $s_U(x)=(x,0)$, $p_U(z)=p(z)$ and $A^0=\{z\in V:p_Uz\in A,\ qz=0\}$. For an original local flattening $\Phi$, put $\Gamma(v,z)=(\Phi(v),z)$ with inverse $(v,z)\mapsto(\Phi^{-1}(v),z)$ and source and target lifted by $p$. These retain the literal original coordinate order and the original open-subspace charts.
+\end{definition}
+
+\begin{lemma}[Actual open-carrier geometry supplies the same product flattening]
+\label{hir:actual-open-zero-section-carrier-geometry}
+\uses{hir:actual-open-zero-section-models,hir:actual-zero-section-submanifold-product-flattening,rem:open-subset-analytic}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.zeroSection_contMDiff,TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.projection_contMDiff,TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.liftedCarrier_closed_submanifold}
+\leanok
+The section and projection are genuinely holomorphic and $p_Us_U=\mathrm{id}$. Every original closed regular $A\subset U$ has a genuinely closed regular independent lift $A^0\subset V$. If an original local chart flattening $\Phi$ flattens $A$, its SAME product formula $\Gamma(v,z)=(\Phi(v),z)$ is an actual source flattening at $s_Ux$, with the same carrier dimension; its inverse is $(v,z)\mapsto(\Phi^{-1}(v),z)$.
+\end{lemma}
+\begin{proof}
+The restricted section and projection are holomorphic because composition with each actual open inclusion is the corresponding holomorphic linear coordinate map; their compositions are literally the original identities. Closedness of $A^0$ follows from the closed inverse image of $A$ under $p_U$ and the closed zero fibre of $q$.
+
+At an original point $x\in A$, unpack regularity IN $U$, giving a true local equivalence $\Phi$ in the preferred open-subspace chart, whose source is contained in that chart's actual target. The restricted chart maps a point of $U$ to its original affine coordinates. Lift the source and target of $\Phi$ by $p$ and use the displayed product formulas and their inverse; differentiability follows from the original holomorphic equivalence and the two linear coordinate blocks. The two inverse equations follow from the original inverse equations and the literal block projections. The lifted source is contained in the actual target of the chart of $V$: its first block belongs to the original $\Phi$ source, hence to $U$. In these coordinates, membership in $A^0$ is exactly membership of the first transformed block in $\mathbb C^k\times0$ and vanishing of the added block, which is the actual $k$-coordinate plane of the ambient product. Every point of $A^0$ is the section of its original projection, so this gives regularity at all its points, without an incoming lifted atlas or global affine closedness assumption.
+\end{proof}
+
+\begin{lemma}[The true open-subspace inverse coordinates give the same partials]
+\label{hir:actual-open-zero-section-flat-partials}
+\uses{hir:actual-open-zero-section-carrier-geometry,mc:field-chain-rule}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.product_partial_zero_section}
+\leanok
+For the same original flattening and every original tangent coordinate $i<n$, the actual flat partial of a source holomorphic germ $g$ at $s_Uy$ restricts to the flat partial of the SAME $g\circ s_U$ at $y$.
+\end{lemma}
+\begin{proof}
+The forward flat-coordinate section square is literal, since the preferred charts of the actual open models are the original affine coordinate inclusions. On the true target of $\Phi$, its inverse belongs to its true source, hence to $U$. The actual inverse chart of the open manifold then returns that very original point. The product inverse belongs to $V$ for the same reason, so on this target the inverse-coordinate section square is exact. Thus the two scalar functions $g\circ\Gamma^{-1}\circ s$ and $(g\circ s_U)\circ\Phi^{-1}$ agree on an actual neighbourhood of the transformed point. They are genuinely differentiable there. The ordinary derivative chain rule for the literal linear section, evaluated at the same original coordinate vector, identifies their derivatives. Equality on that neighbourhood identifies the derivatives of the actual inverse-chart representatives as well. Substitution in the genuine flat-partial formulas proves the assertion; no identity outside the actual chart target is asserted or used.
+\end{proof}
+
+\begin{theorem}[Entire differential ideals on the actual open models]
+\label{hir:actual-open-zero-section-whole-derivative}
+\uses{hir:actual-open-zero-section-flat-partials,mc:derivative-along-coherent}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.zero_section_derivIdealAlong}
+\leanok
+For every original coherent germ ideal $J$ on the genuine open ambient $V$ and every original closed regular $A\subset U$,
+\[
+ s_U^*(\mathcal D_{A^0}J)=\mathcal D_A(s_U^*J)
+\]
+as ENTIRE functional germ ideals on $U$.
+\end{theorem}
+\begin{proof}
+At a base point outside $A$, actual closedness IN $U$ supplies a genuine open neighbourhood disjoint from $A$. The along-derivative ideals on both sides contain the unit germ and consist exactly of all holomorphic germs, so they coincide there. At a base point in $A$, choose its original flattening and the internally matched product flattening, and choose actual finite coherent generators $G_a$ for the SAME source ideal near its section point. Shrink that genuine source open to the true product flat domain. Pullback gives the whole finite presentation by $G_a\circ s_U$ on its actual base preimage open.
+
+The along-derivative generator formula in each true flat chart consists of the original $G_a$, all carrier-normal flat coordinates and all carrier-tangential flat partials. The section preserves every original base-normal coordinate, sends the one new normal coordinate to zero, and identifies every original tangent partial by the preceding genuine open-chart chain rule. Therefore every pulled-back source generator belongs to the whole base finite span; the only extra generator is zero. Conversely each base generator is the restriction of its original first-block source generator. Substituting in every finite holomorphic span gives both whole ideal inclusions at the point. Since this covers all actual points of $U$, it proves equality of the entire functional ideals.
+\end{proof}
+
+\begin{theorem}[Every actual iterated differential ideal on the true open models]
+\label{hir:actual-open-zero-section-whole-iterated-derivative}
+\uses{hir:actual-open-zero-section-whole-derivative,mc:derivative-along-coherent}
+\lean{TranscendentalNakamaye.Pending.HironakaActualOpenZeroSectionDifferentials.zero_section_iterDerivIdealAlong}
+\leanok
+For the SAME original open models, $A,J$ and every $q\in\mathbb N$,
+\[
+ s_U^*(\mathcal D_{A^0}^{q}J)=\mathcal D_A^{q}(s_U^*J).
+\]
+\end{theorem}
+\begin{proof}
+The actual lifted carrier is closed regular IN $V$, so coherence gives coherence of every genuine current iterated derivative ideal on $V$. At zero iterations the equality is literal. At a successor, apply the preceding entire first-derivative theorem to this SAME current coherent ideal and substitute the induction hypothesis. All operations therefore remain in the true open manifolds required by the recursive contact construction, with no closedness in a larger affine space or desired derivative, canonical-value or history equality assumed.
+\end{proof}

@@ -1,0 +1,24 @@
+\begin{lemma}[Product rule and chain rule along a vector field]
+\label{mc:field-chain-rule}
+\uses{mc:derivative-along,hir:derivative-ideal-generators,hir:order-along-flat}
+\lean{TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.fieldDeriv_eventuallyEq_sum_mul,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.flatPartial,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.holomorphicAt_flatPartial,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.flatPartial_eq,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.chartDeriv_eq_sum_flat,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.fieldDeriv_eventuallyEq_sum_flatPartial}
+\leanok
+Let \(\xi\) be a holomorphic vector field near \(y\), written in a chart \(e\) at \(y\).
+\begin{enumerate}
+\item If \(f=\sum_ia_is_i\) near \(y\) with \(a_i,s_i\) holomorphic near \(y\), then \(\xi(f)=\sum_i\big(\xi(a_i)\,s_i+a_i\,\xi(s_i)\big)\) near \(y\).
+\item Let \(\psi=\Phi\circ e_x\) be flattening coordinates of a submanifold at a point \(x\) as in Lemma~\ref{hir:order-along-flat}, with
+domain \(D_\Phi\ni y\), and write \(\partial/\partial\psi_j\) for the derivative along the coordinate field \(\xi_{e_j}\) of that lemma, so that
+\((\partial h/\partial\psi_j)(p)=D(h\circ\psi^{-1})(\psi(p))\,e_j\). Then for \(h\) holomorphic near \(y\),
+\[\xi(h)=\sum_{j=1}^n\xi(\psi_j)\,\frac{\partial h}{\partial\psi_j}\qquad\text{near }y.\]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\leanok
+(1) Apply the product rule for the partial derivatives \(\partial^e_{e_m}\) (Lemma~\ref{hir:derivative-ideal-generators}) to each term of
+\(\xi=\sum_m\xi_m\partial^e_{e_m}\) and exchange the two finite sums.
+(2) Let \(p\) be near \(y\), in the domain of \(e\) and in \(D_\Phi\). Near \(e(p)\), \(h\circ e^{-1}=(h\circ\psi^{-1})\circ G\) with
+\(G=\psi\circ e^{-1}=\Phi\circ(e_x\circ e^{-1})\), which is holomorphic at \(e(p)\) (a transition map of the atlas followed by \(\Phi\)). By the chain rule
+\(\partial^e_vh(p)=D(h\circ\psi^{-1})(\psi(p))\,DG(e(p))\,v\), and the \(j\)-th coordinate of \(DG(e(p))\,v\) is \(\partial^e_v\psi_j(p)\); expanding
+\(DG(e(p))\,v=\sum_j(\partial^e_v\psi_j(p))\,e_j\) gives \(\partial^e_vh=\sum_j\partial^e_v\psi_j\,\partial h/\partial\psi_j\). Multiply by \(\xi_m\) with \(v=e_m\) and sum
+over \(m\).
+\end{proof}

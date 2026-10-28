@@ -1,0 +1,104 @@
+[
+  {
+    "kind": "complete_original_support_extract",
+    "source_revision": "53bb34a4a1607f358638012e2d9cb1d27818ca91",
+    "source_module": "TranscendentalNakamaye.Pending.CanonicalCentres",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CanonicalCentres.lean",
+    "source_parent_sha256": "4326cec0cdf851cf41e1fde6184810d6498955ef40912a729cee08943a8a89ea",
+    "source_parent_capture": "support-original-parents/TranscendentalNakamaye/TranscendentalNakamaye/Pending/CanonicalCentres.lean",
+    "destination_module": "Hironaka.Support.CanonicalInvariantStepDefinitionsOriginalExact",
+    "destination_path": "Hironaka/Support/CanonicalInvariantStepDefinitionsOriginalExact.lean",
+    "draft_capture": "support-drafts/CanonicalInvariantStepDefinitionsOriginalExact.lean",
+    "draft_sha256": "574e00e330036c7379d903d0520c4c8a432f392e374b388f70ccfd61069fa777",
+    "original_import": "Hironaka.Invariant.CanonicalCentres",
+    "original_context_segments": [
+      "open Set Filter TopologicalSpace\nopen scoped Topology Manifold ContDiff\n\nuniverse u v\n\nnamespace TranscendentalNakamaye.Pending.CanonicalCentres\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.MarkedIdeals TranscendentalNakamaye.Pending.MarkedIdeals.MarkedIdeal\n  TranscendentalNakamaye.Pending.BlowupTowers TranscendentalNakamaye.Pending.BlowupTowerTransforms\n  TranscendentalNakamaye.Pending.ResolutionInvariantSeq TranscendentalNakamaye.Pending.StepOnePhase\n  TranscendentalNakamaye.Pending.StepOneWellFounded TranscendentalNakamaye.Pending.MaxOrderValue\n  TranscendentalNakamaye.Pending.GeneralValue\nopen TranscendentalNakamaye.Pending.ResolutionInvariantSpec (IsInvDomain IsCanonical countCentresMeeting)\nopen TranscendentalNakamaye.Pending.ResolutionDriver (maxLocus)\nopen TranscendentalNakamaye.Pending.MonomialInvariant (Val)\n\nnoncomputable section\n\nvariable {n : \u2115}\n\nsection Step\n\nvariable {k : \u2115} {\u039b : Type v} [LinearOrder \u039b]\n\n",
+      "\nend Step\n\n",
+      "\nend\n\nend TranscendentalNakamaye.Pending.CanonicalCentres\n"
+    ],
+    "selected_original_declarations": [
+      {
+        "inclusive_lines": [
+          136,
+          141
+        ],
+        "original_text": "/-- The invariant of the general step is the general value of the masked Step 1 value. -/\ntheorem generalStep_inv [WellFoundedLT \u039b] (R : ResolutionInvariant.{u, v} n k \u039b) (hn : 0 < n) {X : CMfd.{u} n}\n    (\ud835\udd2a : MarkedIdeal n X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (y : Y) :\n    (generalStep R hn).inv \ud835\udd2a T y =\n      genInv (fun {X} \ud835\udd0d {Y} T y => Seq.StepOneValueMasked.stepOneInvM (X := X) R \ud835\udd0d (Y := Y) T y) \ud835\udd2a T y :=\n  rfl\n",
+        "sha256": "4d62466dd953fca99514668f740ea14ffb9efcc19c8f42a3b6681e6ea029e147"
+      },
+      {
+        "inclusive_lines": [
+          179,
+          181
+        ],
+        "original_text": "/-- The invariant in dimension `\u2264 k + 1` is the general step of the one in dimension `\u2264 k`. -/\ntheorem invFamily_succ (hn : 0 < n) (k : \u2115) : invFamily.{u} hn (k + 1) = generalStep (invFamily.{u} hn k) hn :=\n  rfl\n",
+        "sha256": "c09653f0159468d6dd708173d79f3055bf431590f1137d5df9cc253ea3894f8f"
+      }
+    ],
+    "proof_or_type_token_edits": 0,
+    "balanced_closures_explicit": true,
+    "additional_pure_support_imports": [],
+    "administrative_elaboration_contexts": []
+  },
+  {
+    "kind": "complete_original_support_extract",
+    "source_revision": "53bb34a4a1607f358638012e2d9cb1d27818ca91",
+    "source_module": "TranscendentalNakamaye.Pending.CodimOneSupportAlong",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CodimOneSupportAlong.lean",
+    "source_parent_sha256": "3df2f84f70a4e417a4786061d58f5f7b9c2b0714384ea7d1731cb436c8fb47ae",
+    "source_parent_capture": "support-original-parents/TranscendentalNakamaye/TranscendentalNakamaye/Pending/CodimOneSupportAlong.lean",
+    "destination_module": "Hironaka.Support.CodimOneSupportZeroCharacterizationOriginalExact",
+    "destination_path": "Hironaka/Support/CodimOneSupportZeroCharacterizationOriginalExact.lean",
+    "draft_capture": "support-drafts/CodimOneSupportZeroCharacterizationOriginalExact.lean",
+    "draft_sha256": "a9c67f101b064f116d48fc2b0696e0ea6808987ea3da23ff29b9d678f3303c87",
+    "original_import": "Hironaka.MarkedIdeal.CodimOneSupportAlong",
+    "original_context_segments": [
+      "open Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.CodimOneSupportAlong\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences GermIdealOrder\n  RelativePrincipalizationSpan MarkedIdeals CodimOneSupport TangentDirectionAlong GiraudAlong\n  HomogenizedIdealAlong AnalyticDimensionBasics RegularPointDimension DerivativeIdealAlongCoherent\n  CodimOneCentreAlong TransformOffCentre DerivativeIdealAlong\n\nnoncomputable section\n\nvariable {n : \u2115}\n\nsection Support\n\nvariable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M] {N : Set M} {\ud835\udd1e : GermIdeal n M} {\u03bc : \u2115}\n\n",
+      "\nend Support\n\nend\n\nend TranscendentalNakamaye.Pending.CodimOneSupportAlong\n"
+    ],
+    "selected_original_declarations": [
+      {
+        "inclusive_lines": [
+          214,
+          225
+        ],
+        "original_text": "/-- **Near a point of the codimension-one part along `N`, the support is `N \u2229 V(u)` for any tangent\ndirection `u` along `N`.** -/\ntheorem eventually_mem_codimOnePartAlong_iff_eq_zero (h\ud835\udd1e : \ud835\udd1e.IsCoherent)\n    (hN : IsClosedSubmanifold n N) (h\u03bc : 1 \u2264 \u03bc) {U : Set M} {u : M \u2192 \u2102}\n    (hu : IsTangentDirectionAlong N \ud835\udd1e \u03bc U u) {x : M} (hxU : x \u2208 U)\n    (hx : x \u2208 codimOnePartAlong N \ud835\udd1e \u03bc) :\n    \u2200\u1da0 y in \ud835\udcdd x, y \u2208 codimOnePartAlong N \ud835\udd1e \u03bc \u2194 y \u2208 N \u2227 u y = 0 := by\n  obtain \u27e8k, hNk, hS\u27e9 := hx\n  filter_upwards [eventually_mem_codimOnePartAlong_iff \u27e8k, hNk, hS\u27e9,\n    eventually_mem_iff_of_locDimGE_along h\ud835\udd1e hN h\u03bc (isComplexAnalyticSubset_cosupport_along h\ud835\udd1e hN h\u03bc)\n      subset_rfl hu hxU hNk (locDimGE_of_regularAtDim hS)] with y h1 h2\n  rw [h1, h2]\n",
+        "sha256": "113d61ee2ebf9fddc4c5fecb205a213d7bdd922b1399e720344ef9b21e7d71fc"
+      }
+    ],
+    "proof_or_type_token_edits": 0,
+    "balanced_closures_explicit": true,
+    "additional_pure_support_imports": [],
+    "administrative_elaboration_contexts": []
+  },
+  {
+    "kind": "complete_original_support_extract",
+    "source_revision": "53bb34a4a1607f358638012e2d9cb1d27818ca91",
+    "source_module": "TranscendentalNakamaye.Pending.HadamardBridge",
+    "source_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/HadamardBridge.lean",
+    "source_parent_sha256": "3be2eb9c18e976ea564a12ae4ca9aa58ef247b0187792edc088b2f78738e1193",
+    "source_parent_capture": "support-original-parents/TranscendentalNakamaye/TranscendentalNakamaye/Pending/HadamardBridge.lean",
+    "destination_module": "Hironaka.Support.HadamardControlledCoherenceOriginalExact",
+    "destination_path": "Hironaka/Support/HadamardControlledCoherenceOriginalExact.lean",
+    "draft_capture": "support-drafts/HadamardControlledCoherenceOriginalExact.lean",
+    "draft_sha256": "f25684e47b02e7cf61699f8286c18c511649e733c935ca356d0d8f04837f6e22",
+    "original_import": "Hironaka.MarkedIdeal.HadamardBridge",
+    "original_context_segments": [
+      "open Set Filter\nopen scoped Topology Manifold ContDiff\n\nuniverse u\n\nnamespace TranscendentalNakamaye.Pending.HadamardBridge\n\nopen FirstPass FirstPass.HolomorphicIdealSheaves FirstPass.BlowupSequences\nopen TranscendentalNakamaye.Pending.IdealWeightPowers TranscendentalNakamaye.Pending.GermIdealOrder\n  TranscendentalNakamaye.Pending.DerivativeIdeal TranscendentalNakamaye.Pending.HolomorphicTaylorTail\n  TranscendentalNakamaye.Pending.OrderTaylor TranscendentalNakamaye.Pending.BlowupFlatCoordinates\n\nnoncomputable section\n\nvariable {n : \u2115} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]\n  [IsComplexManifold n M]\n\nsection Consumers\n\nopen BlowupExceptionalDivisor BlowupControlledTransform MarkedIdeals\n\nvariable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]\n  {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]\n  {C : Set X} {\u03c0 : Y \u2192 X} {\ud835\udd1e : GermIdeal n X} {\u03bc : \u2115}\n\n",
+      "\nend Consumers\n\nend\n\nend TranscendentalNakamaye.Pending.HadamardBridge\n"
+    ],
+    "selected_original_declarations": [
+      {
+        "inclusive_lines": [
+          220,
+          225
+        ],
+        "original_text": "/-- **The controlled transform along a centre in the cosupport is coherent.** -/\ntheorem isCoherent_controlledTransform_of_subset_cosupport (h\u03c0 : IsBlowupAlong n C \u03c0)\n    (h\ud835\udd1e : \ud835\udd1e.IsCoherent) (hsub : C \u2286 cosupport n univ \ud835\udd1e \u03bc) :\n    (controlledTransform h\u03c0 \ud835\udd1e \u03bc).IsCoherent :=\n  isCoherent_controlledTransform h\u03c0 h\ud835\udd1e\n    (le_idealPow_vanishingIdeal_of_subset_cosupport h\ud835\udd1e h\u03c0.1 hsub)\n",
+        "sha256": "985e7f4d2e57f405e023db09af567dcf26ade6b9e46baf89ea3ec3117f3cbdd3"
+      }
+    ],
+    "proof_or_type_token_edits": 0,
+    "balanced_closures_explicit": true,
+    "additional_pure_support_imports": [],
+    "administrative_elaboration_contexts": []
+  }
+]

@@ -1,0 +1,47 @@
+\section{Whole derivative ideals on the actual closed zero section}
+
+In the original ordered coordinates let $s(x)=(x,0)$ and $Z=s(\mathbb C^n)\subset\mathbb C^{n+1}$. The map $s$ is a genuine CLOSED embedding. This chapter does not replace it by a smooth cylinder projection. All pullbacks below are the entire functional germ-ideal pullbacks.
+
+\begin{lemma}[The literal tangent derivatives on the same closed section]
+\label{hir:actual-zero-section-tangent-derivatives}
+\uses{mc:derivative-along,mc:flat-chart}
+\lean{Hironaka.HironakaActualZeroSectionDifferentialIdeals.tangent_derivative_zero_section}
+\leanok
+For every actual ambient holomorphic germ $g$ at $s(x)$ and every original base coordinate $i$, the actual derivative of $g\circ s$ in coordinate $i$ equals, as a whole germ at $x$, the ambient tangent-coordinate derivative of $g$ in coordinate $i$ composed with this SAME $s$. Normal coordinate functions restrict identically to zero.
+\end{lemma}
+\begin{proof}
+The original section is the actual linear tangent inclusion. Its differential sends the base standard vector $e_i$ to the original ambient standard vector with the same tangent label. The genuine differential chain rule therefore identifies the two derivatives wherever $g$ is holomorphic, and the holomorphic germ supplies this condition on an actual neighbourhood of $s(x)$. Pull this neighbourhood back by the continuous section. The preferred Euclidean charts are the identity, so their actual chart derivatives are exactly these differentials. The actual last-coordinate projection of $s$ is zero, giving the normal-coordinate assertion identically.
+\end{proof}
+
+\begin{theorem}[The whole actual along-carrier derivative restricts to the intrinsic derivative]
+\label{hir:actual-zero-section-whole-derivative-ideal}
+\uses{hir:actual-zero-section-tangent-derivatives,mc:derivative-along,mc:derivative-along-coherent}
+\lean{Hironaka.HironakaActualZeroSectionDifferentialIdeals.zero_section_derivIdealAlong}
+\leanok
+For every ORIGINAL coherent ambient ideal $J$,
+\[
+ s^*(\mathcal D_Z J)=\mathcal D(s^*J).
+\]
+This is equality of the ENTIRE actual germ ideals at every original base point, not merely equality on an incoming list of generators.
+\end{theorem}
+\begin{proof}
+At $s(x)$ choose a genuine coherent presentation $G_1,\ldots,G_r$ of the same $J$ on an actual ambient open neighbourhood $U$. Actual functional pullback and finite holomorphic substitution show that $G_a\circ s$ generate the whole ideal $s^*J$ on $s^{-1}U$.
+
+Use the identity flattening of the literal plane $Z$ in the original Euclidean chart. The genuine flat-chart formula for $\mathcal D_ZJ$ gives exactly three types of generators: the same $G_a$, normal coordinate functions, and the tangent partial derivatives of these same $G_a$. Pull this WHOLE finite presentation back along $s$. The normal functions become zero, and the first lemma identifies every tangent derivative with the derivative of the same restricted $G_a$. The actual one-chart formula for $\mathcal D(s^*J)$ has precisely the remaining two types of generators. Each original generator of either presentation therefore belongs to the other whole holomorphic span; substituting these finite relations gives both inclusions for EVERY germ member. Coherence chose the presentation internally, and no derivative comparison or restricted ideal equality was assumed.
+\end{proof}
+
+\begin{theorem}[Every actual iterated derivative uses the same original ideal]
+\label{hir:actual-zero-section-whole-iterated-derivative-ideal}
+\uses{hir:actual-zero-section-whole-derivative-ideal,mc:derivative-along-coherent}
+\lean{Hironaka.HironakaActualZeroSectionDifferentialIdeals.zero_section_iterDerivIdealAlong}
+\leanok
+For the SAME original coherent $J$ and every $q\in\mathbb N$,
+\[
+ s^*(\mathcal D_Z^q J)=\mathcal D^q(s^*J).
+\]
+\end{theorem}
+\begin{proof}
+The plane $Z$ is genuinely closed and regular, as follows directly from its original coordinate description. Hence every along-carrier iterated derivative of the original coherent ideal is coherent by the actual along-carrier coherence theorem. Induct on $q$. For $q=0$ both sides are literally $s^*J$. At the successor apply the preceding whole-ideal theorem to the SAME current $\mathcal D_Z^qJ$, whose coherence has just been derived, and substitute the induction hypothesis. No incoming equality, ideal family, derivative stability, invariant value or history certificate is an input.
+\end{proof}
+
+These are actual CLOSED-contact differential identities. Canonical invariant-tail comparison across ambient dimensions, equality of canonical centres/history under zero-coordinate generators and proper intrinsic descent remain separate requirements.

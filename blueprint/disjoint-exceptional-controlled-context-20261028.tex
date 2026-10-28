@@ -1,0 +1,53 @@
+\section{Original exceptional controlled-transform context}
+
+These are two complete original declarations from
+\texttt{ExceptionalIdealPushforward} at the fixed native revision
+\texttt{53bb34a4a1607f358638012e2d9cb1d27818ca91}, with their original active
+contexts and unchanged Lean proof bodies. This is newly written source-facing
+documentation, not a purported original native blueprint chapter. They also
+restore authentic earlier simplifier context; no auxiliary proof number is
+renamed or prescribed. Let $\pi:Y\to X$ be an actual blowup along $C$ between
+$n$-dimensional complex manifolds, and write $D$ for its exceptional divisor.
+
+\begin{lemma}[Exceptional containment forces higher original order]
+\label{pub:controlled-exceptional-containment-higher-order}
+\uses{pub:hadamard-whole-controlled-factor}
+\lean{Hironaka.ExceptionalIdealPushforward.mem_cosupport_succ_of_controlledTransform_le}
+\leanok
+Let $I$ be coherent and $\mu\in\mathbb N$, with
+$C\subset\operatorname{cosupp}(I,\mu)$. Suppose $\pi(z)\in C$ and every
+germ of the controlled transform at $z$ lies in $\mathcal I_D$ at $z$. Then
+$\pi(z)\in\operatorname{cosupp}(I,\mu+1)$.
+\end{lemma}
+\begin{proof}
+Take any representative $a\in I_{\pi(z)}$. Coherence makes $a$ holomorphic
+near $\pi(z)$, so $a\circ\pi$ is holomorphic near $z$ and belongs to the
+whole pullback ideal at $z$. The genuine controlled factorization puts it in
+$\mathcal I_D^\mu\operatorname{controlledTransform}(\pi,I,\mu)$ there.
+The assumed inclusion for the controlled factor therefore puts $a\circ\pi$
+in $\mathcal I_D^{\mu+1}$ at $z$.
+The original exceptional-ideal pushforward lemma applies at this actual point
+over $C$: it yields $a\in\mathcal I_C^{\mu+1}$ at $\pi(z)$. Each germ of
+$\mathcal I_C$ vanishes at $\pi(z)$, so this power is contained in the
+$(\mu+1)$-st maximal-ideal power. This proves the stated order bound for every
+original member $a$, hence the whole cosupport assertion.
+\end{proof}
+
+\begin{lemma}[A genuine controlled member outside the exceptional ideal]
+\label{pub:controlled-member-outside-exceptional}
+\uses{pub:controlled-exceptional-containment-higher-order}
+\lean{Hironaka.ExceptionalIdealPushforward.exists_not_mem_exceptionalDivisor}
+\leanok
+Keep coherence, $C\subset\operatorname{cosupp}(I,\mu)$ and $\pi(z)\in C$,
+and suppose $\pi(z)\notin\operatorname{cosupp}(I,\mu+1)$. Then there is a
+representative $g$ in the actual controlled-transform ideal at $z$ which is
+not in the actual exceptional ideal at $z$.
+\end{lemma}
+\begin{proof}
+If no such member existed, negating the existential and simplifying the
+conjunction would say that every controlled-transform member at $z$ belongs
+to the exceptional ideal. The preceding lemma would then put $\pi(z)$ in
+$\operatorname{cosupp}(I,\mu+1)$, contradicting the hypothesis. This is the
+literal contradiction argument in the original proof, including the original
+simplification of the negated existential.
+\end{proof}

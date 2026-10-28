@@ -1,0 +1,54 @@
+\section{Flattening genuine nested section opens}
+\begin{lemma}[Actual base and product coordinate identities]
+\label{hir:actual-nested-section-coordinate-equivalences}
+\lean{Hironaka.HironakaActualNestedSectionCoordinates.globalImage,Hironaka.HironakaActualNestedSectionCoordinates.baseEquiv,Hironaka.HironakaActualNestedSectionCoordinates.productWindow,Hironaka.HironakaActualNestedSectionCoordinates.productEquiv,Hironaka.HironakaActualNestedSectionCoordinates.windowSection,Hironaka.HironakaActualNestedSectionCoordinates.windowProjection}
+\leanok
+\uses{hir:actual-mask-section-whole-representative}
+Let U be an open subset of complex n-space and W an open subset of U.
+Its image W0 under the open inclusion is open in complex n-space.
+The natural map W to W0 is a biholomorphism, as is the natural map from
+C=p_U^{-1}(W), regarded inside p^{-1}(U), to p^{-1}(W0).
+\end{lemma}
+\begin{proof}
+The image W0 is open because an open subspace inclusion is open. Each map
+forgets one subtype and leaves the underlying affine point unchanged. A point
+of W0 has the unique corresponding point of U and belongs to W; this gives
+the inverse base map. A point of p^{-1}(W0) has projection in W0, hence in U,
+and its corresponding U-point belongs to W. This gives the inverse product
+map. Both compositions are the identity on the underlying affine points,
+hence on the subtypes. Each direction is holomorphic: after composing with
+the actual open inclusion its coordinate functions are the coordinate identity.
+The local holomorphicity criterion for open inclusions then proves the claim.
+\end{proof}
+\begin{lemma}[The same literal section and projection squares]
+\label{hir:actual-nested-section-coordinate-squares}
+\lean{Hironaka.HironakaActualNestedSectionCoordinates.section_square,Hironaka.HironakaActualNestedSectionCoordinates.projection_square}
+\leanok
+\uses{hir:actual-nested-section-coordinate-equivalences}
+With these two genuine biholomorphisms e and b, write sC for the section W to C
+and pC for its actual projection. Then b composed with sC is the section of W0
+composed with e, and e composed with pC is its projection composed with b.
+\end{lemma}
+\begin{proof}
+For the section square both underlying affine values are the same literal
+linear zero inclusion applied to the original n-vector. For the projection
+square both are the same literal linear projection applied to the original
+(n+1)-vector. Equality of subtype elements follows from equality of these
+values; no inverse chart outside its target is used.
+\end{proof}
+\begin{lemma}[The entire section carrier is retained]
+\label{hir:actual-nested-section-coordinate-carrier}
+\lean{Hironaka.HironakaActualNestedSectionCoordinates.carrier_iff}
+\leanok
+\uses{hir:actual-nested-section-coordinate-squares}
+For any subset A of W, the set of z in C with pC(z) in A and last normal
+coordinate zero corresponds under b exactly to the lifted section carrier
+of e(A) in p^{-1}(W0).
+\end{lemma}
+\begin{proof}
+The preceding projection square identifies the new projected point with e(pC(z)).
+Because e is injective, membership of this point in e(A) is equivalent to
+pC(z) belonging to A. The last normal coordinate is unchanged because b
+leaves the entire affine vector unchanged. Conjoining these two equivalences
+gives the whole carrier equality, with no replacement by a cylinder.
+\end{proof}

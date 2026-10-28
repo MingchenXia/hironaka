@@ -1,0 +1,14 @@
+\begin{corollary}[Coherence of \(\mathcal D_N\)]
+\label{mc:derivative-along-coherent}
+\uses{mc:derivative-along-generators,mc:derivative-along-basic,ana:blowups}
+\lean{TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.derivIdealAlong_mem_of_notMem,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.isCoherent_derivIdealAlong,TranscendentalNakamaye.Pending.DerivativeIdealAlongCoherent.isCoherent_iterDerivIdealAlong}
+\leanok
+Let \(\mathfrak a\) be coherent and \(N\subset M\) a closed submanifold. Then \(\mathcal D_N^j(\mathfrak a)\) is coherent for every \(j\ge0\). Off \(N\),
+\(\mathcal D_N(\mathfrak a)\) is the unit ideal.
+\end{corollary}
+\begin{proof}
+\leanok
+At \(x\in N\), take flattening coordinates of \(N\) at \(x\) and generators of \(\mathfrak a\) on an open \(U\ni x\); on \(U\cap D_\Phi\) the finitely many functions of
+Proposition~\ref{mc:derivative-along-generators} are holomorphic and generate \(\mathcal D_N(\mathfrak a)\). At \(x\notin N\), on the open set \(M\setminus N\) every
+holomorphic germ lies in \(\mathcal I_N\subset\mathcal D_N(\mathfrak a)\), so the constant \(1\) generates. Induct on \(j\).
+\end{proof}

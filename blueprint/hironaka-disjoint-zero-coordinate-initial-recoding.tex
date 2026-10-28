@@ -1,0 +1,171 @@
+\section{Initial canonical recoding under a zero-coordinate embedding}
+
+\begin{definition}[The full ambient zero-coordinate record]
+\label{hir:disjoint-zero-coordinate-initial-record}
+\uses{hir:canonical-centres}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.baseMarked,Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.initialEmbedding}
+\leanok
+Let $n>0$, let $W\subset\mathbf C^n$ be analytic, and let $I=\mathcal I_W$ be
+its whole vanishing ideal. Write $M=(\mathbf C^n,\mathbf C^n,\varnothing,I,1)$.
+Let $s(x)=(x,0)$ and $p(x,t)=x$. The stabilized record is the original
+$J=(\mathbf C^{n+1},\mathbf C^{n+1},\varnothing,\mathcal I_{s(W)},1)$;
+in particular its smooth carrier is the full ambient manifold.
+For each recursive value type define
+\[
+ \iota_q(v)=(1,\operatorname{inr}((0,v)))\in\operatorname{ValTy}_{q+1},
+\]
+where both displayed finite values retain their finite inclusions into the
+top extensions.
+\end{definition}
+
+\begin{lemma}[Stabilized order and the nonspecial initial regime]
+\label{hir:disjoint-zero-coordinate-initial-regime}
+\uses{hir:disjoint-zero-coordinate-initial-record,hir:actual-zero-coordinate-genuine-contact-seed,hir:actual-zero-coordinate-whole-contact-lower-object}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_isInvDomain,Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_cosupport,Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_initial_orderMask,Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_order_one,Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_not_special}
+\leanok
+Suppose $M$ belongs to the invariant domain of dimension at most $q$.
+Then $J$ belongs to the domain of dimension at most $q+1$. Its cosupport is
+$s(\operatorname{cosupp}M)$, its nonmonomial order is one on that cosupport,
+and its initial level is zero with no special points. Its initial order-one
+mask is the whole stabilized ambient manifold.
+\end{lemma}
+\begin{proof}
+The original graph-ideal calculation gives
+$\mathcal I_{s(W)}=p^*I+(t)$ and $s^*\mathcal I_{s(W)}=I$.
+The coordinate $t$ belongs to this ideal and has normal derivative one.
+Thus the ideal is coherent, has order at most one everywhere, and is
+nonzero at every ambient point. A cosupport point has $t=0$; its remaining
+vanishing conditions are exactly those of $I$ at its projection. Conversely,
+these conditions imply vanishing of every generator of $p^*I+(t)$, hence
+of their entire ideal. Because the boundary is empty, the nonmonomial
+order is the ordinary order, and it is exactly one on the cosupport.
+The dimension condition on $M$ gives $n\le q$; the full stabilized carrier
+therefore has dimension $n+1\le q+1$. Empty boundaries are simple normal
+crossings and transverse to each full carrier, proving the domain claim.
+There are no original boundary members, so the initial level is zero.
+If a point belonged to the codimension-one part of the stabilized
+cosupport, the maximal-contact equation $t$ would identify that cosupport
+locally with the entire plane $t=0$. Every original germ in $I$ at the
+projected point would consequently vanish on a neighborhood in
+$\mathbf C^n$: pull it back by $p$, use its vanishing on the stabilized
+cosupport, then restrict by $s$. This contradicts the nonzero-along-carrier
+condition in the original domain. The positive-level special case is
+impossible because the level is zero. Thus there are no special points.
+\end{proof}
+
+\begin{lemma}[The actual initial contact value]
+\label{hir:disjoint-zero-coordinate-initial-contact-value}
+\uses{hir:disjoint-zero-coordinate-initial-regime,hir:actual-zero-coordinate-stepone-object,hir:actual-zero-coordinate-whole-contact-lower-object,hir:actual-closed-section-all-index-initial-values,mc:contact-lower-value}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_stepOne_initial_value}
+\leanok
+At every $x\in\operatorname{cosupp}M$, Step One for $J$, using the actual
+inductive canonical family of depth $q$ in ambient dimension $n+1$, has
+initial value $(0,\operatorname{inv}_q(M,x))$.
+\end{lemma}
+\begin{proof}
+The marking-one homogenized and coefficient records of the stabilized
+ideal are the original stabilized record. The actual normal coordinate
+$t$ is a global maximal-contact direction. Its coefficient record on
+$H=\{t=0\}$ is literally
+$(\mathbf C^{n+1},H,\varnothing,\mathcal I_{s(W)},1)$; the whole ideal
+restricts by $s$ to $I$, with no choice of generators imposed on the invariant.
+This record is in the depth-$q$ domain: its carrier has dimension $n\le q$,
+and projection and section identify its restricted ideal with the original
+nonzero ideal $I$. Restrict both ambient manifolds to their whole open sets
+and apply the existing initial closed-section value theorem to this literal
+record. The identity $s^*\mathcal I_{s(W)}=I$ then gives its depth-$q$ value
+exactly as $\operatorname{inv}_q(M,x)$.
+The actual independently chosen Step One direction can be replaced by $t$
+by the maximal-contact reference-independence theorem. Its required lower
+domain is the preceding coefficient domain; the chosen lower domain and
+cosupport follow from the nonspecial initial regime. Every relevant tower
+and restricted tail is empty, so canonicity is automatic and both run
+clocks are zero. The whole-open restriction property of the invariant
+then gives precisely the stated finite lower value. The outer Step One
+level is zero by the preceding lemma.
+\end{proof}
+
+\begin{theorem}[Full ambient initial depth-shift law]
+\label{hir:disjoint-zero-coordinate-initial-value}
+\uses{hir:disjoint-zero-coordinate-initial-contact-value,hir:disjoint-zero-coordinate-initial-record}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_initial_value}
+\leanok
+For the actual original canonical family and every
+$x\in\operatorname{cosupp}M$,
+\[
+ \operatorname{inv}_{q+1}(J,s(x))
+ =\iota_q\bigl(\operatorname{inv}_q(M,x)\bigr).
+\]
+\end{theorem}
+\begin{proof}
+The first component of the general invariant is the nonmonomial order,
+which is one by the stabilized-order lemma. Its initial order mask is the
+whole ambient manifold. With empty boundary and mark one, the initial
+companion on this mask is restricted-equivalent to the stabilized marked
+ideal itself: the monomial factor is the unit ideal and the nonmonomial
+factor is its original ideal restricted to the carrier. The actual
+maximal-order Step One invariant is unchanged under this representative
+change and under the whole-open identification. Its value is the finite
+pair computed in the preceding lemma. The definition of the general
+invariant therefore gives exactly the finite right-branch expression
+$\iota_q(\operatorname{inv}_q(M,x))$.
+\end{proof}
+
+\begin{theorem}[The first full ambient maximum locus]
+\label{hir:disjoint-zero-coordinate-initial-centre}
+\uses{hir:disjoint-zero-coordinate-initial-value}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_initial_maximum_locus,Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_canonical_initial_maximum_locus}
+\leanok
+The initial maximum locus of the full ambient depth-$(q+1)$ invariant of
+$J$ is the zero-section image of the initial maximum locus of the original
+depth-$q$ invariant of $M$. When $q=n$, this is the first-centre comparison
+for the actual canonical invariants in ambient dimensions $n+1$ and $n$.
+\end{theorem}
+\begin{proof}
+The map $\iota_q$ preserves and reflects order: every added coordinate and
+branch is constant, and the finite inclusions in top extensions preserve
+and reflect the remaining order. The stabilized cosupport is exactly the
+zero-section image of the original one. At each of its points substitute
+the depth-shift law into the defining comparison with every other
+cosupport point. Reflection of order gives exactly the old maximum
+condition at the projected point; preservation of order proves the
+converse. This argument also applies when the cosupport is empty: both
+maximum loci are then empty by their definitions. For $q=n>0$, the
+canonical invariant is definitionally the corresponding inductive family;
+the same identification in dimension $n+1$ gives the claimed canonical
+first-centre formula.
+\end{proof}
+
+\begin{lemma}[Empty cosupport is preserved]
+\label{hir:disjoint-zero-coordinate-initial-empty}
+\uses{hir:disjoint-zero-coordinate-initial-regime}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.stabilized_cosupport_eq_empty_iff}
+\leanok
+The stabilized cosupport is empty if and only if the original cosupport is
+empty.
+\end{lemma}
+\begin{proof}
+The stabilized cosupport is the zero-section image of the original one.
+A point of the latter gives its section point in the former. Conversely,
+the projection of any point of the former belongs to the latter. Thus one
+is empty exactly when the other is empty.
+\end{proof}
+
+\begin{lemma}[The whole base space is excluded by the natural domain]
+\label{hir:disjoint-zero-coordinate-initial-proper}
+\uses{hir:disjoint-zero-coordinate-initial-record}
+\lean{Hironaka.HironakaDisjointZeroCoordinateInitialRecoding.base_domain_ne_univ}
+\leanok
+The original invariant-domain hypothesis implies $W\ne\mathbf C^n$.
+\end{lemma}
+\begin{proof}
+If $W=\mathbf C^n$, every germ in its vanishing ideal vanishes on a whole
+neighborhood. At the origin this contradicts the required existence of a
+member germ nonzero arbitrarily nearby.
+\end{proof}
+
+\begin{remark}
+The theorem includes $W=\varnothing$ and every other empty-cosupport case.
+It is an initial-state law. It does not assert stabilization of finite
+histories or intrinsic descent of a complete resolution algorithm.
+\end{remark}

@@ -1,0 +1,50 @@
+\section{Whole vanishing-ideal zero loci: original auxiliary declarations}
+
+This new source-facing proof page records three complete auxiliary declarations
+from the unchanged native module \texttt{VanishingIdealZeroLocus} at source
+revision \texttt{53bb34a4a1607f358638012e2d9cb1d27818ca91}. It is newly written
+documentation of those proofs, not an alleged original native blueprint
+chapter. Let $M$ be a complex manifold of dimension $n$. For any subset
+$A\subset M$, $\mathcal I_A$ is the functional ideal of holomorphic germs
+vanishing near the point on $A$, and $Z(\mathcal I_A)$ is its whole common zero
+locus. No coherence or global holomorphic representatives are assumed.
+
+\begin{lemma}[Original points are common zeros]
+\label{pub:vanishing-zero-locus-subset}
+\lean{Hironaka.VanishingIdealZeroLocus.subset_zeroLocus_vanishingIdeal}
+\notready
+For every $A\subset M$, one has $A\subset Z(\mathcal I_A)$.
+\end{lemma}
+\begin{proof}
+Let $x\in A$ and let $g$ represent an element of the functional ideal at $x$.
+By the definition of that ideal, on a neighbourhood of $x$ the function $g$
+vanishes at every point of $A$. Applying this neighbourhood statement at $x$
+gives $g(x)=0$. This holds for every such $g$, as required.
+\end{proof}
+
+\begin{lemma}[Closed-set complement supplies a unit]
+\label{pub:vanishing-zero-locus-reverse}
+\lean{Hironaka.VanishingIdealZeroLocus.zeroLocus_vanishingIdeal_subset}
+\notready
+If $A$ is closed in $M$, then $Z(\mathcal I_A)\subset A$.
+\end{lemma}
+\begin{proof}
+Suppose $x\notin A$. The open complement $M\setminus A$ is a neighbourhood
+of $x$. The constant holomorphic function $1$ therefore vanishes on the
+intersection of that neighbourhood with $A$, since this intersection is empty.
+Thus its germ belongs to $\mathcal I_A$ at $x$. If $x$ were a common zero,
+applying the common-zero condition to this actual constant representative
+would give $1=0$ in $\mathbb C$, a contradiction.
+\end{proof}
+
+\begin{theorem}[The whole zero locus]
+\label{pub:vanishing-zero-locus-whole}
+\uses{pub:vanishing-zero-locus-subset,pub:vanishing-zero-locus-reverse}
+\lean{Hironaka.VanishingIdealZeroLocus.zeroLocus_vanishingIdeal}
+\notready
+For every closed $A\subset M$, one has $Z(\mathcal I_A)=A$.
+\end{theorem}
+\begin{proof}
+The preceding two lemmas give both whole-set inclusions. Antisymmetry of set
+inclusion gives the asserted equality.
+\end{proof}

@@ -1,0 +1,49 @@
+{
+  "exit": 0,
+  "seconds": 5.495,
+  "command": [
+    "/workspace/archon-nakamaye/work/lean-runtime/lean-probe.sh",
+    "flock",
+    "-s",
+    "/workspace/archon-nakamaye/work/lean-runtime/lean-build.lock",
+    "lake",
+    "env",
+    "lean",
+    "--run",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/frozen-tools/BoundedSelectedSupportV3.lean",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/support-full-expressions-attempt01/batch-01/original-modules.tsv",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/support-full-expressions-attempt01/batch-01/public-modules.tsv",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/support-full-expressions-attempt01/batch-01/actual-module-owner-inputs.tsv",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/support-full-expressions-attempt01/batch-01/original.fifo",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/support-full-expressions-attempt01/batch-01/public.fifo",
+    "/workspace/hironaka-phase5-main-integration/audit/disjoint-producers-20261028/support-full-expressions-attempt01/batch-01/actual-private-pairs.json"
+  ],
+  "errors": [],
+  "all_children_and_capture_threads_reaped": true,
+  "captures": {
+    "original": {
+      "Hironaka.Support.CanonicalInvariantStepDefinitionsOriginalExact": {
+        "actual_roots": 2,
+        "names": [
+          "Hironaka.CanonicalCentres.generalStep_inv",
+          "Hironaka.CanonicalCentres.invFamily_succ"
+        ],
+        "uncompressed_bytes": 23441,
+        "uncompressed_sha256": "3115e8623b05b64237cbe54e0b4ada6c710ddf98edbc2a9554462795e9ca5e3c",
+        "gzip_sha256": "9f7fa44900ab0ae33e36ddc78439b9abd4b41d13ba84283fdec7b98fbcbc80f6"
+      }
+    },
+    "public": {
+      "Hironaka.Support.CanonicalInvariantStepDefinitionsOriginalExact": {
+        "actual_roots": 2,
+        "names": [
+          "Hironaka.CanonicalCentres.invFamily_succ",
+          "Hironaka.CanonicalCentres.generalStep_inv"
+        ],
+        "uncompressed_bytes": 23441,
+        "uncompressed_sha256": "3377032a9d75371fa07b2f402a508e24588a5ddedbd2b837ab7358dd8ac246a8",
+        "gzip_sha256": "653a23ff8a5771b53bac0bf7293d3070b8dce264cef54131858d524f6dd9226d"
+      }
+    }
+  }
+}

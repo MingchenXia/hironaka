@@ -1,0 +1,19 @@
+\begin{lemma}[\(\mathcal H_N\) and \(\mathcal C_N\) are étale-local]
+\label{mc:homogenized-along-etale}
+\uses{mc:homogenized-along,mc:derivative-along-etale,mc:derivative-along-coherent,mc:pullback-finite-sum,hir:controlled-operations}
+\source{wlodarczyk05-hironaka}
+\lean{TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_tangentIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_homogenizedIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_coeffMarkedAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_homMarkedAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.isLocalInverseAt_of_contMDiff,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_homogenizedIdealAlong_of_inverse,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_coeffMarkedAlong_of_inverse,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_homMarkedAlong_of_inverse,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_val_homogenizedIdealAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_val_coeffMarkedAlong,TranscendentalNakamaye.Pending.HomogenizedIdealAlong.pullback_val_homMarkedAlong}
+\leanok
+Let \(\varphi\colon M'\to M\) be a holomorphic local biholomorphism, \(\mathfrak a\) coherent and \(N\) a closed submanifold. Then
+\(\varphi^*T_N(\mathfrak a)=T_{\varphi^{-1}N}(\varphi^*\mathfrak a)\), \(\varphi^*\mathcal H_N(\mathfrak a)=\mathcal H_{\varphi^{-1}N}(\varphi^*\mathfrak a)\),
+\(\varphi^*\mathcal C_N(\underline{\mathcal I})=\mathcal C_{\varphi^{-1}N}(\varphi^*\underline{\mathcal I})\) and
+\(\varphi^*\mathcal H_N(\underline{\mathcal I})=\mathcal H_{\varphi^{-1}N}(\varphi^*\underline{\mathcal I})\) (\(d\ge1\)). In particular this holds for biholomorphisms and for
+inclusions of open sets.
+\end{lemma}
+\begin{proof}
+\leanok
+\(\varphi^*\mathcal D_N^j(\mathfrak a)=\mathcal D^j_{\varphi^{-1}N}(\varphi^*\mathfrak a)\) (Proposition~\ref{mc:derivative-along-etale}); pullbacks commute with finite sums, products
+and powers of coherent ideals (Lemma~\ref{mc:pullback-finite-sum}), and the \(\mathcal D_N^j(\mathfrak a)\) are coherent (Corollary~\ref{mc:derivative-along-coherent}). The
+submanifold of \(\varphi^*\underline{\mathcal I}\) is \(\varphi^{-1}N\) and the marks are unchanged. A biholomorphism and the inclusion of an open set are holomorphic local
+biholomorphisms (Proposition~\ref{mc:derivative-along-etale}).
+\end{proof}

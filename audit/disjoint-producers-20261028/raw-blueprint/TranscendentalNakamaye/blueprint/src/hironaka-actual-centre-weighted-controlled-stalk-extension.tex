@@ -1,0 +1,58 @@
+\chapter{Actual controlled coefficient stalks over arbitrary coordinate centres}
+\label{chap:actual-centre-weighted-controlled-stalk}
+
+The chart is constructed from the genuine global blowup and the original coordinate centre. It is not an additional comparison certificate. We retain every original coefficient and its positive marking. This extends the qualified point-centre dictionary to arbitrary centre dimension; it does not assert a relative Hilbert--Samuel converse or a comparison along arbitrary histories. The geometric input is the actual universal blowup local inverse; the coefficient quotient calculation follows the same normal Taylor expansion as Bierstone--Milman 1997, introductory equation (0.3), printed pp.~210--211. The adaptation retains arbitrary finite analytic coefficient families as entire germ ideals, rather than only a single hypersurface equation.
+
+\begin{lemma}[Whole total coefficient ideal in a real centre chart]
+\label{hir:actual-centre-weighted-total-stalk}
+\uses{hir:actual-point-weighted-controlled-stalk-colon}
+\source{bierstone-milman97-invent-math}
+\lean{TranscendentalNakamaye.Pending.HironakaActualCentreWeightedControlledStalk.actual_weighted_total_stalk}
+\leanok
+Let $U\subset\mathbb C^n$ be open, $0\in U$, let $S\subset\{1,\ldots,n\}$ and choose a pivot $e\in S$. Suppose a genuine map $\pi:Y\to U$ has centred source coordinates $z$ in which $\pi=\beta_{S,e,b}$. For finitely many functions $c_i$ holomorphic on $U$, with original weights $w_i$ and common mark $m$, the entire adapted total-transform ideal is
+\[
+ \beta_{S,e,b}^*(\langle c_i^{m/w_i}\rangle).
+\]
+\end{lemma}
+\begin{proof}
+The original functions $c_i^{m/w_i}$ generate the original ideal as a whole germ ideal at every point of its domain. Pullback along the holomorphic map generates the total transform by their actual compositions with $\pi$. Passing to the adapted origin germ preserves a finite holomorphic span in both directions: an original coefficient is composed with the inverse coordinates, and conversely an adapted holomorphic coefficient is composed with the forward coordinates. The actual chart square identifies each composed powered generator with $\beta_{S,e,b}^*(c_i)^{m/w_i}$. Taking the entire finite span gives the stated ideal equality. No reduction of the marking or replacement of the functions is made.
+\end{proof}
+
+\begin{lemma}[Actual exceptional powers and controlled stalk]
+\label{hir:actual-centre-weighted-controlled-stalk}
+\uses{hir:actual-centre-weighted-total-stalk}
+\source{bierstone-milman97-invent-math}
+\lean{TranscendentalNakamaye.Pending.HironakaActualCentreWeightedControlledStalk.actual_exceptional_power_stalk, TranscendentalNakamaye.Pending.HironakaActualCentreWeightedControlledStalk.actual_weighted_controlled_stalk}
+\leanok
+Let $C=U\cap\{x_i=0:i\in S\}$ and let $\pi$ be the genuine blowup of $C$. In the same actual chart, the whole exceptional ideal power $\mathcal I_E^q$ has adapted stalk $(z_e^q)$, including $q=0$. Consequently the controlled common-mark coefficient ideal has entire adapted stalk
+\[
+ \beta_{S,e,b}^*(\langle c_i^{m/w_i}\rangle):(z_e^m).
+\]
+\end{lemma}
+\begin{proof}
+The exceptional ideal is the vanishing ideal of the actual inverse centre. The exact chart square and $e\in S$ imply that $\pi(z)\in C$ if and only if $z_e=0$: membership implies vanishing of the pivot coordinate, while vanishing of the pivot makes every coordinate indexed by $S$ vanish. Coordinate Hadamard division therefore generates the entire exceptional ideal by the actual pivot function. Finite product span substitution gives generation of its $q$th power by the $q$th pivot power; for $q=0$, this is the unit ideal. The adapted germ of the pivot function is $z_e$, because the forward and inverse coordinates are genuine inverses. The controlled transform is the coherent total-transform ideal colon the exceptional common-mark power. The adapted-stalk functor preserves this colon by its actual inverse coordinate equivalence. Substitution of the whole total ideal and exceptional power proves the formula.
+\end{proof}
+
+\begin{theorem}[The chart and the whole coefficient stalk from the actual blowup]
+\label{hir:actual-centre-weighted-chart-stalk}
+\uses{hir:actual-centre-weighted-controlled-stalk,hir:actual-fixed-flattening-blowup-coordinate-square}
+\source{bierstone-milman97-invent-math}
+\lean{TranscendentalNakamaye.Pending.HironakaActualCentreWeightedControlledStalk.exists_actual_coordinate_centre_weighted_stalk}
+\leanok
+Let $C=U\cap\mathbb C^k$ and $\pi:Y\to U$ be a genuine global blowup. At any $y$ over $0$, there exist a normal pivot $e\ge k$, direction parameters $b$, and centred source coordinates, with $b_e=0$ and all tangential parameters zero, such that the entire controlled common-mark coefficient stalk is the actual powered-coefficient pullback colon $(z_e^m)$ in those same coordinates.
+\end{theorem}
+\begin{proof}
+The identity coordinates on $U$ flatten precisely the prescribed coordinate centre, and are centred at $\pi(y)=0$. Retain this very flattening. The universal blowup local-inverse theorem supplies a monomial local inverse at $y$. Its differential is injective, because the actual universal lift is a local inverse. Recentring this inverse yields a genuine holomorphic source coordinate equivalence. Its pivot coordinate and every tangent coordinate at $y$ are zero, by the base point equation. Subtracting its value thus leaves tangent coordinates unchanged and gives exactly the normal affine blowup map with the asserted parameters. The preceding entire controlled-stalk formula applies to these internally constructed coordinates. This proves existence before the formula is used, rather than assuming a chart square.
+\end{proof}
+
+\begin{theorem}[The same original coefficient family on a positive-dimensional centre]
+\label{hir:actual-centre-prescribed-coefficient-stalk}
+\uses{hir:actual-centre-weighted-chart-stalk,hir:actual-coefficient-controlled-same-family-ideals,hir:actual-commonmark-function-cosupport}
+\source{bierstone-milman97-invent-math}
+\lean{TranscendentalNakamaye.Pending.HironakaActualCentreWeightedControlledStalk.exists_actual_prescribed_coefficient_controlled_stalk}
+\leanok
+Fix the original actual coefficient datum $P$ in dimensions $(k+s)+t$. Assume its coordinate centre lies in every original weighted coefficient cosupport. For every genuine global blowup of that centre in the actual coefficient domain and every point over $0$, there are internally constructed source coordinates and a normal base pivot such that the entire controlled coefficient-sheaf stalk is the weighted compression of the low normal coefficients of the same normalized original generators. The whole normalized generator quotient equations and the original positive common mark are retained.
+\end{theorem}
+\begin{proof}
+The original coefficient functions are holomorphic on their genuine domain. Their weighted cosupport intersection equals the cosupport of their common-mark ideal, by the positive-weight power-order criterion. Pullback along the open inclusion preserves the original order vanishing, so the actual coordinate centre lies in the common-mark cosupport. Since the genuine blowup centre is a closed submanifold and the boundary is empty, this proves its actual admissibility; the controlled ideal is coherent. Construct source coordinates and the normal base pivot by the preceding theorem. The pivot belongs to the original set of normal base variables. The existing whole coefficient-quotient calculation for the fixed datum $P$ then constructs normalized generators $H_a$ satisfying each original exceptional-power equation. Taking every original low normal coefficient gives the common-mark factorization of the actual pulled-back compression and hence its entire pivot colon, since the pivot is a nonzero divisor. The previous genuine controlled-stalk equality identifies this very colon with the controlled sheaf stalk. Thus the stalk equals the whole weighted low-coefficient compression of these same $H_a$, with all original weights intact.
+\end{proof}

@@ -1,0 +1,134 @@
+\section{Explicit ordinal coordinates for the canonical invariant}
+
+\begin{definition}[Chronological binary coordinate]
+\label{hir:disjoint-invariant-ordinal-colex}
+\lean{Hironaka.HironakaDisjointInvariantOrdinal.chronologicalCode,Hironaka.HironakaDisjointInvariantOrdinal.chronologicalCode_eq_sum}
+\leanok
+For a finite set $K$ of chronological divisor positions, put
+$c(K)=\sum_{i\in K}2^i$. The actual positions themselves are used as exponents.
+\end{definition}
+
+\begin{lemma}[Bounded ordinal blocks]
+\label{hir:disjoint-invariant-ordinal-blocks}
+Suppose $r:E\longrightarrow\mathrm{Ord}$ is strictly increasing and
+$r(x)<B$ for every $x$, with $0<B$. Then
+$(n,x)\longmapsto Bn+r(x)$ is strictly increasing for the lexicographic
+order on $\mathbb N\times E$, and every value is below $B\omega$.
+\end{lemma}
+\begin{proof}
+For each $n$ and $x$, strict monotonicity of addition in its right argument
+and distributivity give
+$Bn+r(x)<Bn+B=B(n+1)<B\omega$; the last strict inequality follows from
+$n+1<\omega$ and $B>0$. If $n<m$, then $n+1\le m$, so
+$Bn+r(x)<B(n+1)\le Bm\le Bm+r(y)$. If $n=m$ and $x<y$, then
+$Bn+r(x)<Bn+r(y)$, again by strict monotonicity in the right argument.
+These are exactly the two cases of the lexicographic strict order.
+\end{proof}
+
+\begin{lemma}[Adding endpoints and summing blocks]
+\label{hir:disjoint-invariant-ordinal-endpoints}
+Suppose $r:E\longrightarrow\mathrm{Ord}$ and $s:F\longrightarrow\mathrm{Ord}$
+are strictly increasing with positive bounds $B,C$. Adjoining a greatest
+point to $E$, retaining $r$ and assigning $B$ to the new point, gives a
+strictly increasing map bounded by $B+1$. If $B$ is a limit ordinal,
+adjoining a least point, assigning it zero and assigning $r(x)+1$ to $x$,
+gives a strictly increasing map bounded by $B$. The lexicographic sum
+$E\mathbin{\oplus}F$ has strictly increasing coordinates $r(x)$ on the
+left and $B+s(y)$ on the right, all below $B+C$.
+\end{lemma}
+\begin{proof}
+Every old coordinate is strictly below the new greatest coordinate $B$,
+and both kinds of coordinate lie below $B+1$. The new least coordinate
+zero is strictly below each successor $r(x)+1$. Ordinal successor is
+strictly increasing; because $B$ is a limit ordinal and $r(x)<B$, each
+successor remains strictly below $B$. For the sum, a left coordinate is
+below $B$, while each right coordinate is at least $B$. Comparisons
+within the left component are unchanged; comparisons within the right
+component are preserved by strict monotonicity of addition in its right
+argument. Left coordinates lie below $B\le B+C$, and right coordinates
+lie below $B+C$ by their bound $s(y)<C$.
+\end{proof}
+
+\begin{definition}[Recursive ordinal coordinates]
+\label{hir:disjoint-invariant-ordinal-code}
+\uses{hir:disjoint-invariant-ordinal-colex,hir:canonical-centres}
+\lean{Hironaka.HironakaDisjointInvariantOrdinal.monomialCode,Hironaka.HironakaDisjointInvariantOrdinal.valueCode,Hironaka.HironakaDisjointInvariantOrdinal.valueBound}
+\leanok
+Write $\beta=(\omega\omega)\omega=\omega^3$ and put
+$M(a,b,K)=(\omega\omega)a+\omega b+c(K)$.
+Set $A_0=\omega$, $L_q=(A_q+1)\omega$,
+$D_q=\beta+(L_q+1)$, and $A_{q+1}=D_q\omega$.
+The original value type in dimension zero is $\mathbb N$, with coordinate
+$r_0(n)=n$. To define the next coordinate on the original recursive type
+\[
+\mathbb N\times_{\mathrm{lex}}
+\bigl((\{\bot\}\cup\operatorname{Val})\mathbin{\oplus}
+(\mathbb N\times_{\mathrm{lex}}(\operatorname{ValTy}_q\cup\{\top\})
+\cup\{\top\})\bigr),
+\]
+first put $t_q(v)=r_q(v)$ on finite lower values and $t_q(\top)=A_q$.
+Set $u_q(s,v)=(A_q+1)s+t_q(v)$, and set $u_q(\top)=L_q$ for the
+additional greatest point. On the left component set
+$z_q(\bot)=0$ and $z_q(a,b,K)=M(a,b,K)+1$; on the right component set
+$z_q(w)=\beta+u_q(w)$. Finally put
+$r_{q+1}(o,w)=D_qo+z_q(w)$.
+All sums and products here are ordinal operations in the displayed order.
+\end{definition}
+
+\begin{theorem}[Embedding of the original value type]
+\label{hir:disjoint-invariant-ordinal-embedding}
+\uses{hir:disjoint-invariant-ordinal-code,hir:disjoint-invariant-ordinal-blocks,hir:disjoint-invariant-ordinal-endpoints}
+\lean{Hironaka.HironakaDisjointInvariantOrdinal.valueEmbedding,Hironaka.HironakaDisjointInvariantOrdinal.valueCode_lt_bound,Hironaka.HironakaDisjointInvariantOrdinal.valueCode_lt_iff}
+\leanok
+For each $q$, the recursive coordinate $r_q$ is an order embedding of the
+original $\operatorname{ValTy}_q$ into the ordinals, and $r_q(v)<A_q$
+for every value $v$.
+\end{theorem}
+\begin{proof}
+Binary expansion is the inverse of the natural-number/colexicographic
+finite-subset order isomorphism. Thus $c(K)$ preserves strict colex order,
+and its ordinal cast is below $\omega$. Apply the bounded-block lemma
+first to $(b,K)$ with bound $\omega$, then to $(a,(b,K))$ with bound
+$\omega\omega$. The result is exactly $M$, strictly increasing and
+bounded by $\beta$. The ordinal $\beta$ is a limit ordinal because it is
+a positive ordinal multiplied by $\omega$.
+The base map $n\mapsto n$ is strictly increasing and bounded by $\omega$.
+Assume inductively that $r_q$ is strictly increasing and bounded by the
+positive ordinal $A_q$. The greatest-point construction gives $t_q$ with
+bound $A_q+1$. The block lemma gives $u_q$ with bound $L_q$, and another
+greatest-point construction extends its domain with bound $L_q+1$.
+The least-point construction applied to $M$ gives the left component
+coordinates with bound $\beta$. The sum construction therefore gives
+$z_q$ with bound $D_q$. Applying the block lemma to the outer natural
+coordinate gives $r_{q+1}$ with bound $A_{q+1}$. Positivity is preserved
+throughout by addition, successor, and multiplication by $\omega$.
+This proves strict monotonicity and the stated bounds by induction.
+For linear orders a strictly increasing map is injective. It reflects
+strict order as well: if $r_q(x)<r_q(y)$ but $x\not<y$, then $y\le x$,
+so monotonicity would give $r_q(y)\le r_q(x)$, a contradiction. Reflection
+of non-strict order follows by taking the negation of the reversed strict
+inequality. Hence the map is an order embedding.
+\end{proof}
+
+\begin{theorem}[Evaluation on the canonical invariant]
+\label{hir:disjoint-invariant-ordinal-evaluation}
+\uses{hir:disjoint-invariant-ordinal-embedding,hir:canonical-centres}
+\lean{Hironaka.HironakaDisjointInvariantOrdinal.actualValueCode,Hironaka.HironakaDisjointInvariantOrdinal.actualValueCode_lt_bound,Hironaka.HironakaDisjointInvariantOrdinal.actualValueCode_lt_iff}
+\leanok
+In positive ambient dimension, evaluate $r_q$ directly on the canonical
+invariant of an original marked ideal, original tower, and point. The
+result lies below $A_q$, and comparison of two such coordinates is
+equivalent to comparison of the original invariant values.
+\end{theorem}
+\begin{proof}
+Each evaluated canonical invariant has the original type
+$\operatorname{ValTy}_q$. Apply the preceding range bound and order
+reflection to these values. No domain condition is needed for these
+type-theoretic conclusions.
+\end{proof}
+
+\begin{remark}
+The binary coordinate retains every original chronological label. These
+coordinates quantify the already defined value order. They make no
+assertion of geometric strict decrease or termination of a new driver.
+\end{remark}

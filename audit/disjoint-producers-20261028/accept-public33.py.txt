@@ -1,0 +1,105 @@
+from pathlib import Path
+import hashlib, json, re, shutil, subprocess
+
+S = Path('/workspace/hironaka-phase5-main-integration')
+A = S / 'audit/disjoint-producers-20261028'
+E = A / 'additive-oldbranch-attachments-20261028'
+sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+read = lambda p: json.loads(p.read_text())
+peer = read(E / 'independent/final-review.json')
+assert peer['status'] == 'PASS_ADDITIVE2_AND_COMPOSITE33_EXPORT_REVIEW'
+assert not peer['remaining_findings']
+assert peer['before_after_all_unchanged'] and peer['all33_strict_full_types_values_proofs_pass']
+assert peer['final_current_root_literal_bindings_probe']['all209present']
+assert peer['composite_unique_target_kernels'] == peer['composite_unique_all_actual_physical_audits'] == 33
+assert peer['composite_physical_roots'] == 748
+for rel, pin in read(E / 'independent/after-pins.json').items():
+    assert sha(S / rel) == pin['sha256'], rel
+plan = read(A / 'plan.json')
+for rel, pin in plan['old_file_guards'].items():
+    assert sha(S / rel) == pin, rel
+assert len(plan['old_file_guards']) == 3678
+before = A / 'root-acceptance-premarker'
+assert not before.exists()
+before.mkdir()
+marker_changes = []
+for rel, nodes in peer['new_support_pages_need_root_ready_markers_after_acceptance'].items():
+    p = S / rel
+    text = p.read_text()
+    assert text.count('\\notready') == nodes and '\\leanok' not in text
+    q = before / p.name
+    shutil.copyfile(p, q)
+    old_sha = sha(p)
+    p.write_text(text.replace('\\notready', '\\leanok'))
+    marker_changes.append({'path': rel, 'nodes': nodes, 'premarker_capture': str(q.relative_to(S)),
+                           'premarker_sha256': old_sha, 'ready_sha256': sha(p)})
+assert sum(x['nodes'] for x in marker_changes) == 10
+for rel in ['STATUS.md', 'docs/API.md']:
+    p = S / rel
+    text = p.read_text().replace('27 additional\nwhole modules', '29 additional\nwhole modules')
+    text = text.replace('records 31 new physical modules: 27 whole original modules',
+                        'records 33 new physical modules: 29 whole original modules')
+    p.write_text(text)
+sources = read(A / 'public31-release-freeze-final.json')['sources'] + read(E / 'final-additive2-freeze.json')['sources']
+assert len(sources) == 33 and len({x['module'] for x in sources}) == 33
+for row in sources:
+    assert sha(S / row['source_path']) == row['source_sha256']
+    for rel, pin in row['all_compiled_parts'].items():
+        assert sha(S / rel) == pin, rel
+paths = set(read(A / 'author-release-handoff.json')['explicit_publication_paths'])
+paths.update(x['source_path'] for x in sources)
+paths.update(['STATUS.md', 'docs/API.md'])
+publication = {
+    'status': 'PASS_SOURCE_FAITHFUL_COMPOSITE33_PUBLICATION',
+    'native_revision': plan['native_revision'], 'standalone_base': plan['standalone_base'],
+    'whole_original_modules': 29, 'complete_original_support_files': 4,
+    'complete_original_support_declarations': 7, 'physical_modules': 33,
+    'whole_original_blueprint_chapters': 26, 'complete_written_proofs': 100,
+    'literal_bindings': 209, 'actual_physical_declarations': 748,
+    'unique_new_target_kernels': 33, 'unique_new_allphysical_type_wholevalue_audits': 33,
+    'strict_full_expression_types_values_and_proofs': 'PASS_ALL33',
+    'numeric_or_proof_name_rewrites': False, 'old_kernel_or_Expr_gate_replays': 0,
+    'copied_original_blueprint_pages_unchanged': 26,
+    'ready_nodes': 108, 'unattached_ordinal_helper_nodes_not_ready': 2,
+    'support_blueprint_marker_changes': marker_changes,
+    'old_guard_files_byte_preserved': 3678, 'README_changed': False,
+    'independent_review': {'path': str((E / 'independent/final-review.json').relative_to(S)),
+                           'sha256': sha(E / 'independent/final-review.json')},
+    'prior31_unique_pair_review': {'path': str((A / 'independent/verified31-pairs.json').relative_to(S)),
+                                   'sha256': sha(A / 'independent/verified31-pairs.json')},
+    'current_root_frontend': {'path': str((E / 'narrow-current-root-frontend.json').relative_to(S)),
+                              'sha256': sha(E / 'narrow-current-root-frontend.json'), 'exit': 0},
+    'source_modules': sources, 'publication_paths': sorted(paths),
+    'standalone_original_closed': ['G2', 'G5', 'G6', 'G7'],
+    'standalone_original_open': ['G1', 'G3', 'G4', 'G8', 'G9'],
+    'native_G9_backlog_exported': False, 'source_goal_closure_claimed': False,
+    'merge_authorized': False,
+    'build_scope': 'Exact new-module batches, independent new-target kernels/physical audits and changed-source root frontend. No new clean full-project build claimed.',
+    'historical_failures': 'All original failed comparisons, stale freezes, the eight-binding failure and the inherited vendor-warning broad build are retained as historical evidence.'
+}
+(A / 'publication-verification.json').write_text(json.dumps(publication, indent=2) + '\n')
+(A / 'README.md').write_text('''# Source-faithful Hironaka prerequisites
+
+The current receipt is `publication-verification.json`: 33 new modules
+(29 whole originals and four support modules), 100 complete written proofs,
+209 checked literal bindings and 748 actual physical declarations. Source is
+fixed at native commit `53bb34a4a1607f358638012e2d9cb1d27818ca91`.
+
+Every new module passes strict full type/proof-value expression comparison,
+an independent exact target kernel check and an audit of every actual physical
+declaration's own type and whole opaque proof value. The previous 31-module
+gates are reused by exact identity; two whole original modules supply all eight
+initially missing blueprint bindings. Existing 3,678 guarded files, including
+the project README, remain unchanged. Only ten newly written support nodes
+receive ready markers; all 26 original blueprint pages remain unchanged.
+
+`verify_publication.py` checks the published source/documentation/evidence pins;
+`--artifacts` also checks the original local compiled-artifact pins.
+Historical failed comparisons and the inherited broad-build warning log remain
+in this directory. They are not presented as new clean validation.
+
+G1/G3/G4/G8/G9 remain open in this standalone export. The separate native G9
+increment is not exported. No merge is authorized.
+''')
+shutil.copyfile('/tmp/accept-hironaka-public33.py', A / 'accept-public33.py.txt')
+print(json.dumps({k: publication[k] for k in ['status', 'physical_modules', 'literal_bindings', 'actual_physical_declarations', 'ready_nodes']}))

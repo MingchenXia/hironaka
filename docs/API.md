@@ -100,3 +100,21 @@ The principalization hypothesis "`𝔞` is nonzero at every point" is written ou
 | `Hironaka.exists_restrict_opens` | `f` admissible for `(X, E₀)` over `F` with divisor `E`, `O ⊆ X` open: `f'` admissible for `(O, E₀\|O)` over `F ∩ O` with divisor `j⁻¹E`, `j : Y' → Y` holomorphic open embedding without exceptional points onto `f⁻¹(O)`, `f ∘ j = f'`, `Exc f' = j⁻¹ Exc f`, strict transform of `S ∩ O` by `f'` = `j⁻¹` (strict transform of `S` by `f`). |
 
 The underlying statements in terms of towers of blowups are part of the library as well: `Hironaka.HironakaAdmissibleSequence.exists_tower_embedded_of_isCanonical`, `Hironaka.HironakaEmbeddedBoundary.exists_tower_embedded_of_isCanonical`.
+
+## Invariant, controlled-ideal and gluing prerequisites
+
+The following modules are available through `import Hironaka`. Their original
+theorem namespaces and hypotheses are preserved; they do not assert the remaining
+general canonical stabilization or noncompact resolution theorem.
+
+| Module suffix in `Hironaka.Resolution` | Proved scope |
+|---|---|
+| `HironakaDisjointZeroCoordinateInitialRecoding`, `HironakaDisjointCoherentNormalRecoding` | The exact initial invariant depth shift and first canonical maximum locus under normal stabilization, including arbitrary coherent nonradical ideals. |
+| `HironakaDisjointControlledNormalPivot`, `HironakaDisjointFlattenedNormalKernel` | Actual current normal-pivot exclusion and whole local normal-kernel containment. |
+| `HironakaDisjointMatchedControlledTrace`, `HironakaDisjointActualControlledSplit`, `HironakaDisjointActualGlobalControlledSplit` | Matched actual ambient/native blowup charts and whole controlled-ideal trace and reconstruction at every current cosupport point. |
+| `HironakaDisjointCompactExhaustionEscape` | Local finiteness of actual centres is equivalent to compact-exhaustion escape, with corresponding protected opens; an escaping sequence is not supplied. |
+| `HironakaDisjointAnalyticSaturatedGluing`, `HironakaDisjointProperAnalyticGluing` | Actual analytic gluing over saturated windows, including Hausdorffness and second countability, and a global proper analytic map from compatible local proper maps. |
+| `HironakaDisjointInvariantOrdinal` | Exact ordinal encoding of the full recursive value type and chronological boundary labels; geometric descent and termination remain separate. |
+
+The [scope and verification record](../STATUS.md#verification-and-source) gives
+the fixed native source and complete source, blueprint and expression audits.

@@ -1,0 +1,23 @@
+\begin{theorem}[Whole actual controlled sheaf stalk is the genuine ring colon]
+\label{hir:actual-point-weighted-controlled-stalk-colon}
+\uses{hir:actual-point-chart-whole-weighted-total-stalk,hir:actual-point-chart-exceptional-power-stalk,hir:submersion-germ-colon-original-stalk-quotient,bcalc:controlled-transform}
+\lean{TranscendentalNakamaye.Pending.HironakaActualPointWeightedControlledStalk.actual_weighted_controlled_stalk}
+\leanok
+The whole adapted origin stalk of the actual sheaf controlled transform
+$\sigma^c_\pi(J_P,D)$ equals
+\[
+ (\pi_{e,b}^*\operatorname{Compress}(c(P)):e^D).
+\]
+No total-stalk, exceptional-stalk or controlled-stalk equality is an input.
+\end{theorem}
+\begin{proof}
+The original finite powered functions give coherence of $J_P$. Genuine
+blowup pullback gives coherence of its whole total transform, and the
+actual exceptional ideal and all its powers are coherent. The entire
+adapted-stalk colon theorem thus applies directly to the defining actual
+sheaf controlled transform. It identifies that stalk with the colon of the
+whole total-transform stalk by the whole exceptional-power stalk. Substitute
+the first two lemmas. A ring colon by the principal ideal $(e^D)$ is the
+colon tested by its same generator $e^D$: closure under every multiplier
+gives both directions. This is the displayed whole-ideal equality.
+\end{proof}

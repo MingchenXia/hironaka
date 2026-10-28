@@ -1,0 +1,53 @@
+\section{The actual strict contact forces the same zero-normal blowup chart}
+
+The original centre and contact are simultaneously flattened by a genuine original local coordinate map $\Phi$. This is source geometry, not a supplied blowup square. We retain this same $\Phi$ throughout the actual blowup. In particular, zero contact-normal chart directions are derived from membership in the actual strict transform of the contact, rather than being imposed on a polynomial chart. The coordinate calculation follows the geometric blowup charts used in Bierstone--Milman 1997; the coefficient transform to which it supplies the missing geometric qualification is introductory equation (0.3), printed pp.~210--211.
+
+\begin{theorem}[Actual strict contact and the whole affine square in the same coordinates]
+\label{hir:actual-strict-contact-zero-normal-blowup-coordinates}
+\uses{hir:actual-fixed-flattening-blowup-coordinate-square,bcalc:snc-chart}
+\source{bierstone-milman97-invent-math}
+\lean{Hironaka.HironakaActualStrictContactBlowupCoordinates.exists_actual_strict_contact_blowup_coordinates}
+\leanok
+Let $\pi:Y\to X$ be the genuine global blowup of $C$. At $y\in Y$, retain one genuine target coordinate map $\Phi$, centred at $\pi(y)$, in which the whole original centre is $\mathbb C^k\times0$ and the whole original contact $N$ is $\mathbb C^d\times0$. If $y$ belongs to the actual centre-relative strict transform $N'$, then there exist internally constructed genuine centred source coordinates $\Theta$, a pivot $e$ and direction parameters $b$, such that
+\[
+ k\le e<d,\qquad b_e=0,\qquad b_i=0\ (i<k\text{ or }i\ge d),
+\]
+and the literal whole local square is
+\[
+ \Phi\circ\pi=\beta_{\{i\ge k\},e,b}\circ\Theta.
+\]
+In these \emph{same} source coordinates, the entire actual strict contact is exactly the coordinate $d$-plane. Neither the affine square, the pivot qualification, vanishing normal directions nor the transformed contact equation is an input.
+\end{theorem}
+\begin{proof}
+Use the actual universal blowup local inverse for the retained centre flattening $\Phi$. It gives a normal pivot $e\ge k$, an open neighbourhood $O$ of $y$, and an actual holomorphic inverse coordinate map $W$ on $O$, with the true monomial base square and actual universal-lift inverse identity. The strict-transform-in-a-monomial-chart theorem applies to the original contact flattened by this same $\Phi$. It identifies membership of $u\in O$ in the independently defined $N'$ with the conjunction that $e<d$ and every contact-normal component $W_i(u)$, $i\ge d$, vanishes. Applying this at $y$ proves both the pivot bound and every required contact-normal component of $W(y)$ is zero.
+
+The genuine inverse identity makes the complex differential of $W$ injective at $y$. Recentring $W$ therefore gives an actual local holomorphic source-coordinate equivalence $\Theta$, with $\Theta(u)=W(u)-W(y)$ on a true neighbourhood of $y$. Since the target point is centred, the base monomial square makes $W_e(y)=0$ and makes every centre-tangent component $W_i(y)$, $i<k$, zero. Put $b_i=W_i(y)$. Thus $b_e=0$, every tangent parameter is zero, and the already proved contact-normal components give every contact-normal parameter zero as well.
+
+The explicit monomial recentering formula, using the tangent and pivot vanishings just proved, identifies the actual monomial square with the stated affine blowup map in these very source coordinates. Finally, subtracting $W(y)$ preserves the entire coordinate $d$-plane because $W(y)$ belongs to that plane. Substitution in the whole strict-transform chart description proves that $N'$ is precisely the coordinate $d$-plane in the same $\Theta$. All local domains and inverse identities are those constructed by the genuine blowup, so no polynomial map is declared to be a global blowup and no transformed-contact certificate is assumed.
+\end{proof}
+
+
+\begin{lemma}[Whole strict vanishing stalk in the same actual square]
+\label{hir:actual-strict-contact-whole-stalk-dictionary}
+\uses{hir:actual-fixed-flattening-strict-set-hs-equality,hir:actual-fixed-flattening-whole-model-vanishing-ideal,hir:actual-strict-contact-zero-normal-blowup-coordinates}
+\source{bierstone-milman97-invent-math}
+\lean{Hironaka.HironakaActualStrictContactBlowupCoordinates.strictFlattenedOriginIdeal_eq_model}
+\leanok
+In the actual square internally constructed above, the entire origin ideal of the original flattened vanishing sheaf of the genuine global strict transform of any subset $W$ equals the whole vanishing origin ideal of the strict transform of the literal original model of $W$. This concerns the whole geometric strict ideal, with no marking or controlled-transform substitution.
+\end{lemma}
+\begin{proof}
+The genuine open-coordinate strict-transform square identifies the two entire strict subsets on the target of the same source-coordinate map $\Theta$. Its target is an open neighbourhood of zero. The literal flattened strict subset is the intersection of that target with the inverse image of the original global strict subset. Thus this literal flattened subset and the model strict subset have equal germs at zero. The already proved whole original-flattened vanishing-ideal dictionary identifies the original flattened stalk with the vanishing origin ideal of this literal flattened subset. Express both vanishing origin ideals as analytic germ vanishing ideals: represent an arbitrary holomorphic germ by one actual holomorphic function, and use the exact vanishing-membership equivalences. Invariance of the analytic germ vanishing ideal under eventual equality of subsets gives the required whole ideal equality. No persistence, strict-stalk equality, saturation equality or transformed HS condition is supplied.
+\end{proof}
+
+
+\begin{theorem}[Same contact chart with the whole actual geometric strict stalk]
+\label{hir:actual-strict-contact-whole-chart-endpoint}
+\uses{hir:actual-strict-contact-zero-normal-blowup-coordinates,hir:actual-strict-contact-whole-stalk-dictionary}
+\source{bierstone-milman97-invent-math}
+\lean{Hironaka.HironakaActualStrictContactBlowupCoordinates.exists_actual_strict_contact_whole_stalk_chart}
+\leanok
+For the original genuine global blowup, retained joint contact/centre flattening and actual strict-contact point, the same internally constructed chart satisfies every pivot, zero-normal and whole strict-contact conclusion above, together with the whole geometric strict vanishing-stalk dictionary for any original subset $W$.
+\end{theorem}
+\begin{proof}
+Construct the genuine source chart and its entire affine square from the original geometric data by the first theorem. Apply the whole-stalk dictionary to that square, which was just constructed internally. Return that equality with the same chart, pivot, parameters and contact equations. Thus the endpoint accepts no chart-square, strict-stalk, saturation, persistence or history certificate.
+\end{proof}
