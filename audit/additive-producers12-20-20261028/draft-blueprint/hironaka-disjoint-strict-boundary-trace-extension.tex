@@ -1,0 +1,81 @@
+\section{Literal whole old and born boundary trace under the actual comparison}
+
+\begin{theorem}[Every original strict boundary label has its exact native trace]
+\label{hir:disjoint-every-original-strict-boundary-trace}
+\uses{hir:disjoint-embedded-whole-boundary-nc,bcalc:trace-strict-transform,hir:actual-closed-contact-every-subset-strict-closure}
+\lean{Hironaka.HironakaDisjointStrictBoundaryTrace.every_original_strict_trace}
+\leanok
+Assume positive ambient dimension $d+t>0$. Let $N$ be closed regular with its actual native atlas, $E$ its entire ordered
+ambient SNC boundary transverse to $N$, and $D\subset N$ NC with the literal
+entire ordered trace. Let $\pi$ be a genuine ambient blowup along $v(D)$ and
+let $F:Z\simeq N'$ be an actual native biholomorphism over the prescribed
+intrinsic map $\rho$, with the literal restricted projection composed with
+$F$ equal to $\rho$. For EVERY original index $i$, including an empty member,
+\[
+ F^{-1}(v_{N'}^{-1}(\operatorname{strict}_{\pi}E_i))
+   =\operatorname{strict}_{\rho}(v_N^{-1}E_i).
+\]
+No ambient centre NC, target trace, controlled-ideal equality or tower
+comparison certificate is assumed.
+\end{theorem}
+\begin{proof}
+First the genuine embedded boundary-lift producer derives ambient centre NC
+from the original intrinsic NC and ambient carrier transversality. The
+existing whole geometric intersection theorem therefore gives
+$(E_i\cap N)'=E_i'\cap N'$ for every original index. Its actual monomial-chart
+proof already covers both the centre-contained and free-coordinate cases;
+no unconditional controlled-transform interpretation is introduced here.
+The literal source image $v_N(v_N^{-1}E_i)$ is exactly $E_i\cap N$.
+The existing actual closed-contact strict-image theorem identifies the
+image under $v_{N'}$ of the intrinsic restricted-projection strict transform
+of $v_N^{-1}E_i$ with the ambient strict transform of this literal image.
+Combining these two whole SET identities and injectivity of the literal
+subtype inclusion identifies $v_{N'}^{-1}E_i'$ with that intrinsic strict
+transform, on the ENTIRE strict contact.
+
+Pull back this equality by $F$. A homeomorphism pulls back closure to closure,
+and the exact projection square pulls back the complement-of-centre inverse
+image to $\rho^{-1}(v_N^{-1}E_i\setminus D)$. Taking the actual closure is
+precisely the centre-relative geometric strict transform for $\rho$. This
+keeps original indices; empty members obey the same equalities without a
+special exclusion or relabelling.
+\end{proof}
+
+\begin{theorem}[The born exceptional member is the literal lower exceptional preimage]
+\label{hir:disjoint-born-exceptional-trace}
+\lean{Hironaka.HironakaDisjointStrictBoundaryTrace.born_exceptional_trace}
+\leanok
+For an actual closed regular native $N$, a genuine ambient blowup $\pi$
+along $v_N(D)$, and an actual native comparison $F$ satisfying the literal
+projection square over $\rho$,
+$F^{-1}(v_{N'}^{-1}(\pi^{-1}v_N(D)))=\rho^{-1}D$.
+\end{theorem}
+\begin{proof}
+At any $z\in Z$, applying the original inclusion to the actual projection
+square gives $\pi(v_{N'}Fz)=v_N(\rho z)$. Membership of this point in $v_N(D)$
+is equivalent to $\rho z\in D$ by injectivity of the literal inclusion.
+This born-member conclusion requires neither positive ambient dimension
+nor an SNC/transversality or intrinsic centre-NC hypothesis.
+This is an entire pointwise equality of sets, not a reduced support or local
+exceptional-coordinate assertion.
+\end{proof}
+
+\begin{theorem}[The entire ordered old-plus-born boundary dictionary]
+\label{hir:disjoint-whole-old-born-boundary-trace}
+\uses{hir:disjoint-every-original-strict-boundary-trace,hir:disjoint-born-exceptional-trace}
+\lean{Hironaka.HironakaDisjointStrictBoundaryTrace.whole_old_born_boundary_trace}
+\leanok
+Assume the hypotheses of the first theorem, including explicitly
+positive ambient dimension $d+t>0$. Pullback by $v_{N'}\circ F$ of the literal entire list
+$[\operatorname{strict}_{\pi}E_i]++[\pi^{-1}v_N(D)]$ equals
+$[\operatorname{strict}_{\rho}(v_N^{-1}E_i)]++[\rho^{-1}D]$.
+\end{theorem}
+\begin{proof}
+List mapping preserves concatenation and the final singleton. On the old
+list apply the first theorem at the SAME original index of each member; no
+permutation or omission is allowed. On the final singleton apply the second
+theorem. The resulting literal list equality retains all original positions,
+including empty old members, and appends precisely the same born member.
+This is a one-step boundary dictionary, not yet a recursive finite-history
+Lift or a canonical invariant comparison.
+\end{proof}

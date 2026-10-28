@@ -1,0 +1,184 @@
+\chapter{The actual zero section and prescribed genuine blowups}
+
+Fix $d,t\geq0$. Throughout, $X=\mathbb C^d$, $M=\mathbb C^{d+t}$,
+$i=\operatorname{tangentInclusion}(d,t)$ and
+$P=\operatorname{tangentProjection}(d,t)$ are the actual globally
+holomorphic coordinate maps, with $Pi=\mathrm{id}_X$. Let
+$N=\mathbb C^d\times\{0\}\subset M$, $C\subset X$, and $\bar C=i(C)$.
+The geometric comparison starts with two prescribed genuine blowups
+$p:B\to X$ along $C$ and $\pi:Y\to M$ along $\bar C$, in the original
+\texttt{IsBlowupAlong} sense. Thus smoothness, closedness and nowhere
+density of each actual centre are already part of the original blowup
+data. The theorem does not take a desired comparison map, strict-carrier
+smoothness, sheaf identity or equivalence as an extra hypothesis.
+
+Write $S=\overline{\pi^{-1}(N\setminus\bar C)}$, literally the existing
+\texttt{geoStrictTransform}. This is not replaced by the different
+definition using the differential exceptional locus, including at Cartier
+centres. The algebraic zero-section normalized-ideal dictionaries and this
+whole geometric comparison have distinct roles; neither stands in for the
+other. No canonical choice of centre or independence of a resolution
+algorithm is asserted here.
+
+\begin{lemma}[The whole actual zero-section carrier is smooth]
+\label{hir:actual-zero-section-whole-carrier-regular}
+\uses{hir:actual-zero-section-whole-centre-sheaf}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupLift.actual_zeroSection_plane_closed,TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupLift.actual_zeroSection_plane_regular,TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupLift.actual_zeroSection_range}
+\leanok
+The actual coordinate plane $N$ is closed, is exactly the range of $i$,
+and is regular of complex dimension $d$ at every one of its actual points.
+These assertions hold also when either coordinate block is empty.
+\end{lemma}
+\begin{proof}
+The plane is the intersection of the zero sets of the continuous actual
+normal coordinate functions, so it is closed. The actual coordinate
+retraction identities give $i(X)\subset N$ and $iPz=z$ for every
+$z\in N$, proving the whole range equality. At $z\in N$ the actual
+translation $w\mapsto w-z$ with inverse $v\mapsto v+z$ is a global
+holomorphic change of coordinates centred at $z$. Since every normal
+coordinate of $z$ is zero, $w\in N$ if and only if $w-z\in N$.
+This is precisely the original pointwise \texttt{RegularAtDim} condition
+of dimension $d$ in the actual model chart. No smoothness certificate for
+the strict transform is involved.
+\end{proof}
+
+\begin{theorem}[The genuine ambient lift and its whole exceptional ideal]
+\label{hir:actual-zero-section-genuine-blowup-lift}
+\uses{hir:actual-zero-section-whole-centre-sheaf,hir:submersion-choice-image-trace-whole-pullback,bex:lift-unique,bcalc:exceptional-divisor}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupLift.existsUnique_actual_zeroSection_blowup_lift,TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupLift.actual_zeroSection_lift_exceptional_ideal}
+\leanok
+The original pair of genuine blowups internally produces one unique
+holomorphic map $f:B\to Y$ with $\pi f=ip$. For every actual such lift,
+the entire ideal sheaves satisfy
+\[
+ f^*(\pi^*\mathcal I_{\bar C})=p^*\mathcal I_C.
+\]
+These are whole sheaves at all points, not only origin ideals.
+\end{theorem}
+\begin{proof}
+The accepted actual zero-section retraction theorem proves
+$i^*\mathcal I_{\bar C}=\mathcal I_C$ at every point for every subset
+$C$. Actual holomorphic pullback composition across the two actual
+dimensions therefore gives
+$(ip)^*\mathcal I_{\bar C}=p^*\mathcal I_C$. The right side is
+invertible by the genuine base blowup. The universal property of the
+ambient blowup tests source manifolds of every dimension, so it applies
+to the actual $d$-dimensional $B$ and the actual holomorphic map $ip$.
+It gives existence and uniqueness of $f$. For any actual lift, whole
+pullback composition and $\pi f=ip$ give the displayed exceptional
+ideal equality by the same calculation. The only member holomorphy needed
+by composition is present in the literal vanishing ideal definition.
+\end{proof}
+
+\begin{lemma}[The actual lift lands in the entire strict carrier]
+\label{hir:actual-zero-section-lift-in-whole-strict-carrier}
+\uses{hir:actual-zero-section-genuine-blowup-lift,hir:actual-zero-section-whole-carrier-regular,bex:lift-unique}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupLift.actual_zeroSection_lift_mem_geoStrictTransform}
+\leanok
+Every actual holomorphic lift $f$ of the preceding square maps every
+point of $B$ into $S$. The density needed for this conclusion is produced
+internally from the original base blowup.
+\end{lemma}
+\begin{proof}
+The true invertibility of $p^*\mathcal I_C$ implies that no nonempty
+open subset of $B$ maps entirely into $C$: a local invertible generator
+would then vanish identically on a nonempty open, contradicting its
+actual nonvanishing clause. This is the existing
+\texttt{BlowupConstruction.exists\_not\_mem\_of\_isOpen} theorem.
+Thus $p^{-1}(X\setminus C)$ meets every nonempty open in $B$.
+For any point $b\in B$ and open neighbourhood $V$ of $f(b)$, the actual
+continuous inverse image $f^{-1}V$ is a nonempty open. Choose $b'$ in it
+with $p(b')\notin C$. The commuting square gives
+$\pi f(b')=i p(b')\in N\setminus\bar C$, where the nonmembership uses
+the genuine all-point inverse-image identity $i^{-1}\bar C=C$.
+Consequently $V$ meets $\pi^{-1}(N\setminus\bar C)$. The actual closure
+criterion proves $f(b)\in S$ for every $b$. No closed-image or properness
+argument, and no supplied density or range-equality certificate, is used.
+\end{proof}
+
+\begin{theorem}[The actual strict carrier receives its genuine manifold structure]
+\label{hir:actual-zero-section-strict-carrier-manifold}
+\uses{hir:actual-zero-section-whole-carrier-regular,bcalc:strict-submanifold,ana:submanifold-corestriction}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupComparison.actual_zeroSection_strict_regular}
+\leanok
+Every point of the actual whole strict carrier $S$ is regular of dimension
+$d$. In particular the existing flattening atlas supplies a genuine
+$d$-dimensional complex manifold on its actual subspace topology, with
+holomorphic subtype inclusion into $Y$.
+\end{theorem}
+\begin{proof}
+The original carrier $N$ is closed and regular of dimension $d$ at every
+point by the first lemma, and $\bar C\subset N$ holds from the actual
+zero-section inclusion. Apply the original
+\texttt{regularAtDim\_geoStrictTransform} theorem to the genuine ambient
+blowup. It proves regularity at every point of the entire $S$, including
+points over the centre. The actual
+\texttt{SubmanifoldChartedSpace.chartedSpace} construction and its proved
+complex-manifold and inclusion-holomorphy theorems now supply the stated
+structure; they do not require a caller atlas, smooth strict carrier or
+equivalence. The accepted corestriction theorem applies to maps with values
+in this exact atlas.
+\end{proof}
+
+\begin{theorem}[A genuine biholomorphism with the whole ambient strict carrier]
+\label{hir:actual-zero-section-blowup-whole-geometric-comparison}
+\uses{hir:actual-zero-section-genuine-blowup-lift,hir:actual-zero-section-lift-in-whole-strict-carrier,hir:actual-zero-section-strict-carrier-manifold,ana:submanifold-corestriction,bcalc:exceptional-divisor}
+\lean{TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupComparison.actualZeroSectionComparisonFor,TranscendentalNakamaye.Pending.HironakaActualZeroSectionBlowupComparison.exists_actual_zeroSection_blowup_comparison}
+\leanok
+From the original genuine pair of blowups, internally construct the genuine
+manifold structure on $S$ and a biholomorphism $E:B\simeq S$ with
+\[
+ \pi(E(b))=i(p(b)),\qquad
+ p(E^{-1}(s))=P(\pi(s)).
+\]
+The entire ambient range of its forward inclusion is exactly $S$, and its
+whole exceptional-ideal pullback is $p^*\mathcal I_C$ as above.
+\end{theorem}
+\begin{proof}
+Choose the unique ambient lift $f$ once, and use the preceding two results
+to corestrict this same actual map to a holomorphic $f_S:B\to S$ in the
+genuine flattening atlas. Define $q:S\to X$ by
+$q=P\pi\operatorname{incl}$; all three actual maps are holomorphic.
+The whole closure is contained in $\pi^{-1}N$, since $N$ is closed and
+$\pi$ is continuous. The real retraction identity on $N$ therefore gives
+$iq=\pi\operatorname{incl}$ pointwise, as whole functions.
+
+The existing actual exceptional ideal is invertible \emph{along} $S$.
+Indeed a local exceptional generator cannot vanish on a nonempty
+relatively open subset of this closure, because that subset meets its
+defining off-centre set, where the ideal contains one. This is the proved
+\texttt{MarkedIdeals.MarkedIdeal.isInvertibleAlong\_geoStrictTransform}
+at power one; the power-one identification follows from the actual ideal
+power recursion and coherence. The actual restriction theorem
+\texttt{SubmanifoldIdealRestriction.isInvertible\_restrictIdeal} converts
+this along-$S$ property into genuine invertibility of
+$\operatorname{incl}^*(\pi^*\mathcal I_{\bar C})$ on the constructed
+manifold $S$. An ambient invertibility claim alone would not suffice here.
+The whole sheaf identities already proved give
+\[
+ q^*\mathcal I_C=q^*i^*\mathcal I_{\bar C}
+ =(iq)^*\mathcal I_{\bar C}
+ =(\pi\operatorname{incl})^*\mathcal I_{\bar C}
+ =\operatorname{incl}^*(\pi^*\mathcal I_{\bar C}).
+\]
+Thus the true base universal property supplies a holomorphic
+$g:S\to B$ with $pg=q$.
+
+Now $qf_S=Pip=p$, so $pgf_S=p$. The genuine base universal uniqueness
+compares $gf_S$ with $\mathrm{id}_B$ and gives $gf_S=\mathrm{id}_B$.
+For the other inverse, the two actual holomorphic ambient maps
+$\operatorname{incl}f_Sg$ and $\operatorname{incl}$ lift the same map
+$iq=\pi\operatorname{incl}$; its centre pullback has already been proved
+invertible. Ambient universal uniqueness gives their equality, and subtype
+injectivity gives $f_Sg=\mathrm{id}_S$. These two genuine inverse identities
+construct $E$ with inverse $g$. They also prove its entire ambient range
+is exactly $S$. The whole exceptional-ideal assertion follows from the
+earlier all-point sheaf calculation for this same lift.
+
+No connectivity, compactness or positive-dimensional-block hypothesis is
+used. Empty centres and $d=0$ or $t=0$ are covered by the genuine blowup
+data. A centre equal to the nonempty entire base cannot satisfy the original
+nowhere-density clause. This is a comparison for prescribed actual centres;
+it does not assert that two embeddings produce the same canonical centres,
+an arbitrary compatible tower, or abstract analytic resolution descent.
+\end{proof}

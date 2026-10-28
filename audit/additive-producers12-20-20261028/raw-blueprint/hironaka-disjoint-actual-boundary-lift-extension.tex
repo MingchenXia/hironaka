@@ -1,0 +1,65 @@
+\section{Actual product extension of an entire labelled boundary}
+
+\begin{theorem}[Whole labelled normal crossings under the actual zero section]
+\label{hir:disjoint-product-whole-boundary-lift}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointActualBoundaryLift.hasNormalCrossings_zeroSection}
+\leanok
+Let $D\subset\mathbb C^d$ have normal crossings with the ordered list
+$B=[B_i]$. Write $p:\mathbb C^{d+t}\to\mathbb C^d$ for the actual first-coordinate
+projection and $s$ for its zero section. Then $s(D)$ has normal crossings with
+the ENTIRE ordered list $[p^{-1}B_i]$, retaining every original position,
+including empty members. No ambient normal-crossings certificate is supplied.
+\end{theorem}
+\begin{proof}
+Fix $s(x)\in s(D)$. Unpack the intrinsic normal-crossings coordinates at
+$x$: a genuine local biholomorphism $\Phi$ with true open source and target,
+centered at zero, a coordinate mask $S_D$ for $D$, and singleton masks $S_i$
+for every member through $x$. Use the existing actual product extension
+$F(z)=s(\Phi(pz))+z-s(pz)$, whose inverse is the identical expression with
+$\Phi^{-1}$. Its source and target are the inverse images of the actual
+source and target of $\Phi$, hence are genuinely open. The inverse equations
+follow from $ps=\mathrm{id}$; this uses no product-neighbourhood assertion
+about an arbitrary ambient source open.
+
+For each tangent index $j$, $F(z)_{j}=\Phi(pz)_j$; every normal coordinate
+is unchanged. Consequently a lifted intrinsic mask is zero exactly when
+its original mask is zero after $\Phi p$. The image centre is cut out by
+the lifted $S_D$ AND every normal coordinate. Indeed these normal equations
+put $z=s(pz)$, and then the original centre equation is exactly $pz\in D$.
+Every boundary member is cut out by its lifted singleton mask; casting
+indices is injective, so its cardinality remains one. Apply these formulas
+to the same $F$ for ALL original positions. This is precisely the actual
+ambient normal-crossings definition, not a germwise choice of unrelated
+coordinates for individual boundary members.
+\end{proof}
+
+\paragraph{Generic embedded consumer: exact remaining implementation route.}
+The intended consumer has a closed regular native submanifold $N\subset X$,
+an entire ordered SNC divisor $E$ transverse to $N$, and an intrinsic closed
+regular centre $D\subset N$ having normal crossings with the literal ordered
+trace $[\operatorname{val}^{-1}E_i]$. Its conclusion must construct normal
+crossings of $\operatorname{val}(D)$ with ALL $E$, then its genuine ambient
+blowup and comparison with a prescribed intrinsic blowup. This paragraph is
+a source-facing proof route, not an accepted theorem or additional input.
+
+At each centre point, unpack transversality to get ONE ambient coordinate
+system in which $N$ is a coordinate plane and ALL active $E_i$ are tangent
+coordinate hyperplanes. Permute normal indices last. Restriction gives an
+actual intrinsic chart of the existing native atlas. Read the intrinsic
+$D$-and-trace chart relative to this chart and extend THAT transition by the
+preceding actual product construction. Intersect its true source with the
+original ambient chart target and shrink its inverse target accordingly;
+no source open is replaced by a global product. On the resulting true
+neighbourhood, the boundary equations are independent of normal coordinates,
+so their intrinsic equations give precisely the ambient equations. The same
+extended chart straightens $\operatorname{val}(D)$, proving its regularity
+jointly rather than assuming an image-regularity equivalence. Closedness is
+closedness of $D$ followed by the closed embedding of $N$. Empty interior
+follows from the intrinsic empty-interior condition when $N=X$; in positive
+codimension it follows directly from the normal coordinate equations. Source
+mark-one cosupport containment follows from functorial evaluation of the
+literal restricted ideal. Only AFTER these geometric facts are proved may
+actual blowup existence be invoked, followed by the actual closed-contact
+universal comparison with the prescribed intrinsic blowup. This final
+embedded native-chart/open-domain transport is not supplied by the product
+model theorem and remains to be implemented separately.

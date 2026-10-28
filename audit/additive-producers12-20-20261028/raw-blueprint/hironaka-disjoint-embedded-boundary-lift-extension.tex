@@ -1,0 +1,69 @@
+\section{Intrinsic admissible centres and the entire ambient boundary}
+
+\begin{theorem}[Native intrinsic normal crossings lift across a transverse embedding]
+\label{hir:disjoint-embedded-whole-boundary-nc}
+\uses{bcalc:snc-simultaneous,lag:regular-point-basics,hir:disjoint-matched-intrinsic-chart}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointEmbeddedBoundaryLift.hasNormalCrossings_native_image}
+\leanok
+Let $N$ be a regular $d$-dimensional submanifold of a complex manifold
+$X$ of positive dimension $d+t$, equipped with its existing native complex atlas.
+Global closedness is not needed for this local NC conclusion.
+Let $E$ be the entire ordered SNC boundary of $X$, transverse to $N$. If
+$D\subset N$ has normal crossings with the literal ordered trace
+$[\operatorname{val}^{-1}E_i]$, then its literal ambient image
+$\operatorname{val}(D)$ has normal crossings with the entire original $E$.
+No ambient centre-NC, joint centre chart, or history lift is an input.
+\end{theorem}
+\begin{proof}
+Fix $x\in D$. First apply the existing simultaneous-coordinate theorem to
+the centre $N$ and carrier $N$ themselves: its needed ambient NC is precisely
+the already supplied transversality of $N$, not the desired NC of $D$.
+This gives one actual chart straightening $N$ to a standard coordinate plane
+and all active boundary members to distinct tangent coordinate hyperplanes.
+Subtract its value at $x$. This preserves the carrier plane and every active
+boundary equation, because those coordinates vanish at $x$. The resulting
+chart $\Theta$ is centered. If its plane index is $b$, its local regular
+dimension is $\min(n,b)$, where $n=d+t$. Regular-point dimension uniqueness
+identifies this with $d$. Thus its actual plane is precisely the $d$-plane,
+and each active boundary slot is below $d$ (if $b>n$, then $d=n$, so this
+still follows). Ambient positive dimension is explicitly assumed, exactly
+as required by the stock simultaneous-coordinate theorem.
+
+Apply the matched-native-coordinate construction to THIS $\Theta$ and the
+identity diffeomorphism of the existing native $N$. It gives genuine native
+coordinates $\Psi$, centered at zero, such that on a true neighbourhood of
+zero the inverse native coordinates, followed by inclusion in $X$, agree
+with the inverse ambient $\Theta$ on the zero plane. Unpack the intrinsic
+normal-crossings hypothesis at $x$, obtaining one centered intrinsic chart
+$\Phi$ for $D$ and all literal traced boundary members. The actual transition
+$F=\Phi\circ\Psi^{-1}$ is a genuine local biholomorphism at zero, with source
+the intersection of the true target of $\Psi$ and the inverse image of the
+true source of $\Phi$. Extend $F$ by the identity in the normal directions,
+using the actual product equivalence. This is a map with actual inverse and
+actual open source and target, not a formal extension of coordinate germs.
+
+All equations just obtained hold on neighbourhoods of zero. Intersect their
+finitely many neighbourhoods, the true domains of the inverse charts, the
+ambient $\Theta$ target, and the inverse projection of the transition source.
+Choose an open neighbourhood of zero inside this intersection. Restrict the
+actual composition of $\Theta$ and the product transition to its inverse
+image, with inverse target restricted correspondingly. This is the required
+true shrinking: an arbitrary ambient source open is never declared a full
+product. On this source, $N$ is the zero plane. For any ambient coordinate
+point $z$, its zero-plane projection corresponds to the actual native point
+in the matching $\Psi$ coordinates. The old transverse boundary equations
+depend only on tangent coordinates, so membership in each active ambient
+$E_i$ is equivalent to membership of that projected native point in the
+literal trace. The intrinsic $\Phi$ equations then give its lifted singleton
+mask after the extended transition. The same calculation for $D$, together
+with all unchanged normal coordinates being zero, gives its ambient image
+mask. One actual chart therefore straightens the image centre and EVERY
+original active boundary member simultaneously. Each lifted singleton has
+cardinality one, proving exactly the ambient NC definition. All original
+positions and empty members are retained.
+\end{proof}
+
+\paragraph{Scope.} This theorem is a geometric NC producer. Actual ambient
+blowup construction, empty-interior and source cosupport transport, prescribed
+intrinsic blowup comparison, and finite-history recursion are subsequent
+consumers. They are not additional hypotheses or asserted outputs here.

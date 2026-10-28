@@ -1,0 +1,62 @@
+\section{A genuine constructed ambient blowup from intrinsic centre geometry}
+
+\begin{theorem}[Actual ambient blowup with prescribed intrinsic comparison and whole born boundary]
+\label{hir:disjoint-constructed-ambient-boundary-lift}
+\uses{hir:disjoint-embedded-whole-boundary-nc,bcalc:snc-simultaneous,lag:regular-point-basics,bex:blowup-exists,bcalc:snc-transform-nc,hir:actual-closed-contact-full-restricted-blowup}
+\lean{Hironaka.HironakaDisjointConstructedAmbientLift.exists_constructed_ambient_lift}
+\leanok
+Let $N$ be a closed regular native submanifold of dimension $d$ in a complex
+manifold $X$ of dimension $d+t$, with $t>0$. Let $E$ be its entire ordered
+ambient SNC boundary, transverse to $N$. Let $D\subset N$ have normal
+crossings with the literal entire ordered trace of $E$, and let
+$\rho:Z\to N$ be a prescribed genuine intrinsic blowup along $D$.
+Internally construct an actual complex manifold $Y$ and actual global map
+$\pi:Y\to X$ which IS a genuine blowup of the literal image
+$C=\operatorname{val}(D)$. Prove ambient NC of $C$ with all original $E$,
+SNC of $E'=[E_i',\pi^{-1}C]$, and transversality of $E'$ to the entire strict
+transform $N'$. On the genuine native atlas of $N'$, produce an actual
+biholomorphism $F:Z\simeq N'$ whose literal restricted projection composed
+with $F$ is exactly the prescribed $\rho$. Neither an ambient blowup nor
+ambient centre NC, regularity, empty interior or comparison is an input.
+\end{theorem}
+\begin{proof}
+The prescribed intrinsic blowup implies that $D$ is closed in native $N$.
+Since $N$ is closed in $X$, its literal inclusion is a closed embedding;
+therefore its entire image $C$ is closed in $X$. The embedded whole-boundary
+NC producer, applied to the given transversality and literal entire traced
+boundary, internally proves that $C$ has NC with ALL original $E$.
+
+To obtain the required regularity directly from those proved charts, fix
+$x\in C$. The simultaneous-coordinate theorem applies to $C\subset N$,
+the given SNC boundary and transversality, and the just PROVED ambient NC.
+It supplies an actual chart with $C$ a standard coordinate plane. Subtract
+the coordinate value of $x$; that value belongs to the same plane, so the
+plane membership equation is unchanged. The chart is now centered, and
+its exact regular dimension is $\min(d+t,a)$ if the supplied plane index is
+$a$. Thus every actual point of $C$ is regular. Combined with the proved
+closedness, this is an actual closed-submanifold proof. No generic native
+image-regularity equivalence or desired regularity certificate is invoked.
+
+The carrier $N$ has empty interior. Otherwise choose a point in its open
+interior. On that genuine neighbourhood it agrees with the whole ambient
+manifold. Regular-point locality then makes it regular of ambient dimension
+$d+t$ there, whereas its original native regularity has dimension $d$.
+Dimension uniqueness contradicts $t>0$. Since $C\subset N$, monotonicity of
+interior gives empty interior for $C$ as well.
+
+Apply the existing actual blowup-existence factory to this internally proved
+closed regular centre with empty interior. Its output is an actual manifold
+and actual map with the full genuine blowup property, not a map postulated
+as a new premise. The actual simultaneous-NC blowup calculus proves that
+all strict original boundary members, followed by the entire NEW exceptional
+member, form an SNC list, transverse to the entire strict $N'$. The actual
+closed-contact blowup restriction supplies the native atlas on $N'$ and,
+by the two genuine universal properties, a biholomorphism from the prescribed
+$Z$ to this entire $N'$, over the original $\rho$. This retains every old
+label and appends the born member once, without filtering or reindexing.
+\end{proof}
+
+\paragraph{Scope.} This is an actual one-step geometry builder. Source
+coherent ideal admissibility transport, ambient controlled-ideal production,
+canonicality and recursion over an entire base history are subsequent
+consumers, not assumed or asserted here.

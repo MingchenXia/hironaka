@@ -1,0 +1,102 @@
+\section{Actual finite controlled histories over a closed contact}
+
+\begin{definition}[The contact along an ambient tower]
+\label{hir:disjoint-finite-contact-along}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFiniteControlledHistory.contactAlong}
+\leanok
+For a closed contact $N\subset X$ and an actual ambient blowup tower $U$, let
+$N_U$ be $N$ at the empty tower and the centre-relative strict transform of
+$N_V$ when the last step extends $V$. Every physical step, including a blowup
+along the empty centre, is retained.
+\end{definition}
+
+\begin{definition}[Compatible physical prefixes]
+\label{hir:disjoint-finite-coupling}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFiniteControlledHistory.fullMarked,TranscendentalNakamaye.Pending.HironakaDisjointFiniteControlledHistory.Endpoint,TranscendentalNakamaye.Pending.HironakaDisjointFiniteControlledHistory.CoupledHistory}
+\uses{hir:disjoint-finite-contact-along}
+\leanok
+The full marked data associated with an ordered boundary $B$ and ideal $J$
+have carrier the whole ambient space and mark one. An endpoint coupling is a
+map $\eta$ from an original lower endpoint to an upper endpoint which is a
+biholomorphism onto the actual native contact $N_U$, satisfies the whole
+functional ideal and ordered boundary dictionaries, and commutes with the
+original total projections. It also records closed regularity of $N_U$,
+coherence and normal containment of the upper ideal, and simple normal
+crossings of the entire upper boundary transverse to $N_U$.
+A coupled history starts with the original inclusion at both empty towers.
+At each physical successor it retains its preceding coupling, the new
+endpoint coupling, the equality $C'=\eta(C)$ of the upper and lower centres,
+and the exact square $\pi\circ\eta'=\eta\circ\rho$. Thus every prefix uses
+the same endpoint map in its preceding and following step squares.
+\end{definition}
+
+\begin{theorem}[Constructed finite controlled history]
+\label{hir:disjoint-finite-controlled-history}
+\lean{TranscendentalNakamaye.Pending.HironakaDisjointFiniteControlledHistory.exists_actual_finite_controlled_history}
+\uses{hir:disjoint-finite-contact-along,hir:disjoint-finite-coupling,hir:disjoint-functional-controlled-successor,hir:geo-transform-ambient,hir:bridge-consumers,hir:biholomorphism-blowup,hir:biholomorphism-transform,hir:biholomorphism-invariance,hir:disjoint-native-mark-one-source-cosupport,hir:disjoint-embedded-whole-boundary-nc}
+\leanok
+Let $X$ be a complex manifold of dimension $d+t$, where $t>0$, let $N$ be a
+closed regular submanifold of constant dimension $d$, and let $B$ be an
+ordered simple normal crossings divisor transverse to $N$. Let $J$ be a
+coherent ideal containing the entire vanishing ideal of $N$. On the native
+manifold $N$, set $M=(N,N,B|_N,J|_N,1)$, and on $X$ set
+$A=(X,X,B,J,1)$. For every prescribed finite multiple test blowup $T$ of $M$,
+there exists an actual ambient multiple test blowup $U$ of $A$, with exactly
+the same length. Its contact $N_U$ is closed and regular of dimension $d$;
+its entire ordered boundary is simple normal crossings and transverse to
+$N_U$; its transformed ideal is coherent and contains $I_{N_U}$.
+There is one biholomorphism $F$ from the original final space of $T$ onto
+$N_U$ such that the projection square commutes, the whole functional
+pullback of the transformed ambient ideal is the original transformed ideal
+$M_T$, and the whole ordered boundary pulled back by the same $F$ is
+$E(M_T)$. The constructed pair carries a coupled history: every physical
+prefix has these endpoint assertions, the upper centre is exactly the image
+of the prescribed lower centre, and successive endpoint embeddings commute
+with the actual original step maps. Empty old boundary members and every born exceptional member are
+retained in their original order. Neither an ambient lift nor any equality
+at a sought successor is an input.
+\end{theorem}
+\begin{proof}
+Induct on the prescribed tower, extending at its last physical step. At the
+empty tower take the empty ambient tower, the given contact, and the identity
+of its native manifold. Coherence, normal containment, and divisor properties
+are precisely the source assumptions; both dictionaries and the projection
+square are identities.
+
+Suppose the preceding ambient tower and its comparison $F$ have been
+constructed, and write $D$ and $\rho$ for the prescribed next original
+centre and map. Transport this centre to the native current contact by
+$F(D)$, and rebase its actual blowup map to $F\circ\rho$. This is a genuine
+blowup: apply the universal-property invariance under the inverse
+biholomorphism $F^{-1}$. Pull back the original current marked ideal by
+$F^{-1}$. Its entire ideal equals the literal restriction of the current
+ambient ideal, by the preceding whole functional equality and composition
+with $F^{-1}$. Its ordered divisor equals the literal traced ambient divisor,
+by composing the preceding whole ordered-list equality with $F^{-1}$.
+Normal crossings and admissibility transfer through this biholomorphism.
+The original current carrier is the whole native space and its mark remains
+one. The Hadamard inclusion therefore gives the full lower ideal inclusion
+in the first power of the centre ideal.
+
+Apply the functional controlled successor theorem to these derived source
+data. It internally constructs the actual next ambient blowup, the next
+regular closed contact, its coherent ideal containing the entire new normal
+ideal, and one comparison over $F\circ\rho$ carrying the whole ideal and
+ordered boundary. The ambient image centre is admissible: its cosupport
+inclusion follows from the lower mark-one inclusion, and its normal crossings
+follow from the native normal crossings and transversality of the old ambient
+boundary. Append this actual blowup to the constructed ambient tower. Both
+lengths increase by one. The full ambient carrier remains the whole space,
+so its marked ideal transform is its controlled transform. Naturality of the
+lower marked transform under $F^{-1}$ identifies the rebased successor ideal
+and whole boundary with the original prescribed successor. The two commuting
+projection squares compose to the required original projection square.
+The new ambient centre is precisely the image of $F(D)$ under the native
+inclusion, equivalently the image of the original $D$ under the preceding
+endpoint embedding; this follows by applying $F^{-1}$ and $F$. Retain this
+centre equality, the new step square, and the previous coupled history in
+the successor history. The
+successor's other geometric and normal-ideal conclusions give exactly the
+induction assertions. No step is deleted, so the argument also retains empty
+centres and empty boundary slots.
+\end{proof}

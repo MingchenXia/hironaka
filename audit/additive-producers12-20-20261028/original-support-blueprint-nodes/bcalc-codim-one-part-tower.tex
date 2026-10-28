@@ -1,0 +1,24 @@
+\begin{theorem}[The codimension-one part along a multiple test blow-up lies over the original one]
+\label{bcalc:codim-one-part-tower}
+\uses{bcalc:codim-one-part-along-def,bcalc:codim-one-part-along,bcalc:codim-one-local-along,bcalc:codim-one-part-off-centre,bcalc:transform-off-centre-tower,hir:giraud-tower-along,mc:tangent-direction-along-exists,mc:strict-along,hir:wellformed-tower,hir:test-tower}
+\source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
+\lean{TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_subset,TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_eq_empty}
+\leanok
+Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed, of maximal order along \(N\), with \(d\ge1\), and let \(T\) be a multiple test blow-up of
+\(\underline{\mathcal I}\) with projection \(p\). Then \(R(\underline{\mathcal I}_T)\subset p^{-1}(R(\underline{\mathcal I}))\). In particular, if \(R(\underline{\mathcal I})=\emptyset\),
+then \(R(\underline{\mathcal I}_T)=\emptyset\) for every multiple test blow-up \(T\).
+\end{theorem}
+\begin{proof}
+\leanok
+Induction on \(T\); for the empty tower there is nothing to prove. Let \(T'\) be \(T\) followed by the blowup \(\pi\) along \(C\), with projection \(p'=p\circ\pi\),
+and \(x\in R(\underline{\mathcal I}_{T'})\). Then \(x\) lies in the cosupport of \(\underline{\mathcal I}_{T'}\), so \(p'(x)\) lies in that of \(\underline{\mathcal I}\)
+(Corollary~\ref{bcalc:transform-off-centre-tower}), and by maximal order there is a tangent direction \(u\) along \(N\) on an open \(U\ni p'(x)\)
+(Proposition~\ref{mc:tangent-direction-along-exists}). Put \(A=N\cap V(u)\cap U\). By Theorem~\ref{hir:giraud-tower-along} there are an open \(O\ni x\) and a function \(w\)
+on \(O\), controlled on \(N_{T'}\) as in the last sentence of Lemma~\ref{bcalc:codim-one-local-along}, whose zero set in \(N_{T'}\cap O\) is the strict transform
+\(A_{T'}\) (Definition~\ref{mc:strict-along}). By Theorem~\ref{bcalc:codim-one-part-along}(3), \(R(\underline{\mathcal I}_{T'})=N_{T'}\cap V(w)\) near \(x\); hence near \(x\)
+the points of \(A_{T'}\cap O\) lie in \(R(\underline{\mathcal I}_{T'})\), and \(x\in A_{T'}=\overline{\pi^{-1}(A_T\setminus C)}\). So every neighbourhood of \(x\) contains a point
+\(y\in\pi^{-1}(A_T\setminus C)\) so close to \(x\) that \(y\in A_{T'}\cap O\) lies in \(R(\underline{\mathcal I}_{T'})\). As \(\pi(y)\notin C\), \(\pi(y)\in R(\underline{\mathcal I}_T)\)
+(Lemma~\ref{bcalc:codim-one-part-off-centre}), and \(p'(y)=p(\pi(y))\in R(\underline{\mathcal I})\) by induction. Since \(R(\underline{\mathcal I})\) is closed
+(Theorem~\ref{bcalc:codim-one-part-along}(2)) and \(p'\) continuous, \(x\in p'^{-1}(R(\underline{\mathcal I}))\). The transforms along multiple test blow-ups stay well
+formed (Lemma~\ref{hir:wellformed-tower}), which the cited results need at each stage.
+\end{proof}

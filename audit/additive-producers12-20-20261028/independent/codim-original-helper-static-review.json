@@ -1,0 +1,125 @@
+{
+  "status": "PASS_TWO_ORIGINAL_CODIM_HELPERS_STATEMENTS_PROOFS_CONTEXTS_AND_BP_STATIC_REVIEW",
+  "native_revision": "6e453e142420e6a64ccfdb5cadd15abc2379f581",
+  "support_extraction_plan_sha256": "9dd4264ab72b02faef9135f861ed5b40a7419dd0470ae979cc220e56587e9435",
+  "original_parent_and_context_reviews": [
+    {
+      "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CodimOnePartCanonical.lean",
+      "source_parent_sha256": "e78061640bfd6681b8dc65c3990bbf84d51ab77e6348b6f07b92701adc164e69",
+      "source_parent_capture": "support-original-parents/CodimOnePartCanonical.lean",
+      "selected_original_declarations": [
+        {
+          "name": "TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_wEquiv",
+          "inclusive_lines": [
+            345,
+            353
+          ],
+          "complete_statement_and_proof_read": true,
+          "original_text_sha256": "da70599a761b64ee943b29a1f7ad77f790332a5ff0af7fd1013d6edaa74a338d"
+        }
+      ],
+      "original_active_context_prefix_ranges": [
+        [
+          65,
+          84
+        ],
+        [
+          283,
+          286
+        ]
+      ],
+      "original_active_context_suffix_ranges": [
+        [
+          355,
+          356
+        ],
+        [
+          439,
+          441
+        ]
+      ],
+      "exact_original_active_context_ranges_read_and_matched": true,
+      "draft_path": "draft-source/CodimOneCanonicalEquivalenceOriginalExact.lean",
+      "draft_sha256": "396cfe8e772b77e186043d90891313f7cfd6284c2c9b6fbbb00a74d193ed3c23",
+      "draft_whole_source_read": true
+    },
+    {
+      "source_parent_path": "TranscendentalNakamaye/TranscendentalNakamaye/Pending/CodimOnePartTowerAlong.lean",
+      "source_parent_sha256": "73ad560297fe4851267e2bc842a895f8500f2764cbd23e5ae9d76728945f31be",
+      "source_parent_capture": "support-original-parents/CodimOnePartTowerAlong.lean",
+      "selected_original_declarations": [
+        {
+          "name": "TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_eq_empty",
+          "inclusive_lines": [
+            142,
+            151
+          ],
+          "complete_statement_and_proof_read": true,
+          "original_text_sha256": "41bd92e3e3131fe2fb283cf270fa428dc7c74089bea468cc3ed95f1771e5d73a"
+        }
+      ],
+      "original_active_context_prefix_ranges": [
+        [
+          59,
+          87
+        ]
+      ],
+      "original_active_context_suffix_ranges": [
+        [
+          153,
+          154
+        ],
+        [
+          373,
+          375
+        ]
+      ],
+      "exact_original_active_context_ranges_read_and_matched": true,
+      "draft_path": "draft-source/CodimOneTowerEmptyOriginalExact.lean",
+      "draft_sha256": "2175e102ee5a21a5e8cb2b0d327c47535bf21e2a773deacf71b1fbffe46e0cbb",
+      "draft_whole_source_read": true
+    }
+  ],
+  "original_native_BP_provenance_reviews": [
+    {
+      "label": "bcalc:codim-one-part-canonical",
+      "capture": "original-support-blueprint-nodes/bcalc-codim-one-part-canonical.tex",
+      "capture_sha256": "b9d9f09e36dd795b2f8e5616b0dbf7833e33f707028f8550063e32308e676db5",
+      "whole_original_node_and_proof_read": true,
+      "original_native_attachments_kept_as_provenance_only": true,
+      "source_parent_sha256": "277afc030c8112bd2e48bde0072b6cedbcbf610adbad3bf6e51f8c36e2218fac"
+    },
+    {
+      "label": "bcalc:codim-one-part-tower",
+      "capture": "original-support-blueprint-nodes/bcalc-codim-one-part-tower.tex",
+      "capture_sha256": "bcdc470351b3b2d2d79c1d7bc4d0beaaff0a129879a3599d26bbedeacf0299ca",
+      "whole_original_node_and_proof_read": true,
+      "original_native_attachments_kept_as_provenance_only": true,
+      "source_parent_sha256": "277afc030c8112bd2e48bde0072b6cedbcbf610adbad3bf6e51f8c36e2218fac"
+    }
+  ],
+  "new_local_BP": {
+    "path": "draft-blueprint/additive-producers12-20-original-codim-support.tex",
+    "sha256": "1551f88d86bada306e0dcbc30aa5ec9b976f3cc1d287970b49fe3623bdb7f90a",
+    "whole_statement_and_two_complete_proofs_read": true,
+    "ready_markers": 0
+  },
+  "contracts": {
+    "weak_equivalence_history": "On one n-dimensional base, WEquiv(M,L), equality M.N=L.N, and an actual M-test tower imply equality of whole current codimension-one parts. No separate coherence, closedness, canonicality or target codim-equality input. Current-carrier equality follows N_geoTransformAlong and original carrier equality; current-cosupport equality follows WEquiv.2 and actual testness; codimOnePartAlong_congr combines these.",
+    "empty_history": "EXPLICIT original marked-ideal section parameter M, M.IsWellFormed, mark>=1, maximal order along N, original codimOne part empty, and actual M-test T imply current codimOne part empty. Proof applies the original codimOnePartAlong_geoTransformAlong_subset, rewrites the actual inverse image of empty to empty, then uses subset_empty_iff."
+  },
+  "nonobvious_context_requirements": [
+    "Canonical helper section has implicit {M} and {X X\u2032 : CMfd.{u} n}; unused X\u2032 is present in copied context but is not a new theorem hypothesis.",
+    "Tower helper original marked ideal is EXPLICIT (M : MarkedIdeal n X), not an implicit binder; extraction preserves this.",
+    "The Tower empty helper consumes the pre-existing named codimOnePartAlong_geoTransformAlong_subset; its visibility belongs to the author ordinary-callee preflight, not to a new proof rewrite.",
+    "No extra local instance, omit/include directive, positivity-of-n or nonzero-ideal hypothesis surrounds either selected original declaration."
+  ],
+  "mathematical_findings": [],
+  "scope_or_context_drift_findings": [],
+  "source_type_or_proof_payload_edits": 0,
+  "initial_administrative_assertion_corrected": "Initial static context comparison mistakenly expected one extra prefix newline. Exact recorded original prefix ranges already include that blank line; prefix now compared byte-exactly and suffix compared with its intentional separator newline. No compiler or source mutation occurred.",
+  "compiler_used": false,
+  "kernel_or_Expr_replay": false,
+  "source_BP_git_mutations": false,
+  "parent_retains_canonical_relocation_and_export_gate_authority": true
+}

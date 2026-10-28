@@ -1,0 +1,19 @@
+\begin{lemma}[Blowups under biholomorphisms of the base]
+\label{hir:biholomorphism-blowup}
+\uses{ana:blowups}
+\lean{TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.notMem_exceptionalLocus_of_inverse,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.isClosedSubmanifold_preimage,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.preimage_preimage_eq,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.pullback_vanishingIdeal_preimage,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.isBlowupAlong_comp_inverse,TranscendentalNakamaye.Pending.MarkedIdealBiholomorphism.isBlowupAlong_empty_of_inverse}
+\leanok
+Let \(\varphi\colon M'\to M\) be a biholomorphism with inverse \(\psi\). Then \(\varphi\) has no exceptional points, \(\varphi^{-1}(C)\) is a closed
+submanifold for every closed submanifold \(C\), and \(g^*\mathcal I_{\varphi^{-1}A}=(\varphi\circ g)^*\mathcal I_A\) for every holomorphic map \(g\) into \(M'\) and every
+\(A\subset M\). If \(\sigma\colon Y\to M\) is a blowup along \(C\), then \(\psi\circ\sigma\colon Y\to M'\) is a blowup along \(\varphi^{-1}(C)\); in particular every
+biholomorphism is a blowup along the empty set.
+\end{lemma}
+\begin{proof}
+\leanok
+The chain rule applied to \(\psi\circ\varphi=\mathrm{id}\) and \(\varphi\circ\psi=\mathrm{id}\) shows that the differentials are invertible; regularity of \(C\) pulls back
+along the local biholomorphism \(\varphi\). A generator \(t\circ g\) of \(g^*\mathcal I_{\varphi^{-1}A}\) equals \((t\circ\psi)\circ(\varphi\circ g)\) with
+\(t\circ\psi\in\mathcal I_A\), and a generator \(s\circ\varphi\circ g\) of \((\varphi\circ g)^*\mathcal I_A\) is \((s\circ\varphi)\circ g\) with \(s\circ\varphi\in\mathcal I_{\varphi^{-1}A}\). Hence
+\((\psi\circ\sigma)^*\mathcal I_{\varphi^{-1}C}=\sigma^*\mathcal I_C\) is invertible, \(\varphi^{-1}(C)\) has empty interior (\(\varphi\) is a homeomorphism), and the universal
+property of \(\sigma\) applied to \(\varphi\circ g\) gives that of \(\psi\circ\sigma\): \(g^*\mathcal I_{\varphi^{-1}C}=(\varphi\circ g)^*\mathcal I_C\), and \(\sigma\circ h=\varphi\circ g\) if and only if
+\(\psi\circ\sigma\circ h=g\). For the last statement take \(\sigma=\mathrm{id}_M\), a blowup along \(\emptyset\).
+\end{proof}
