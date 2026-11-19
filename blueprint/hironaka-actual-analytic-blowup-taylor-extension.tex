@@ -1,0 +1,74 @@
+\section{Actual holomorphic blowup coordinate substitution and genuine analytic quotients}
+
+We use the genuine polynomial map of an exceptional coordinate chart, whose
+coordinates are $x_e=u_e$, $x_i=u_e(b_i+u_i)$ for other centre coordinates,
+and $x_i=u_i$ outside the centre. This constructs an actual map and an actual
+pullback of original holomorphic germs. It does not assert global chart
+existence or convergence of an arbitrary prescribed formal series.
+
+\begin{theorem}[The whole genuine Taylor map commutes with actual blowup coordinate pullback]
+\label{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\uses{hir:actual-formal-germ-hom-coordinate-uniqueness,hir:actual-formal-blowup-coordinate-power-image}
+\lean{Hironaka.HironakaActualAnalyticBlowupTaylor.actualAnalyticBlowupMap,Hironaka.HironakaActualAnalyticBlowupTaylor.differentiable_actualAnalyticBlowupMap,Hironaka.HironakaActualAnalyticBlowupTaylor.actualAnalyticBlowupMap_zero,Hironaka.HironakaActualAnalyticBlowupTaylor.actualAnalyticBlowupPullback,Hironaka.HironakaActualAnalyticBlowupTaylor.actualAnalyticBlowupPullback_coordinate,Hironaka.HironakaActualAnalyticBlowupTaylor.actualTaylor_analyticBlowup_coordinate,Hironaka.HironakaActualAnalyticBlowupTaylor.actualTaylor_analyticBlowupPullback}
+\leanok
+For every finite coordinate centre, exceptional index and complex direction,
+the actual polynomial coordinate map is holomorphic and sends the origin to
+the origin. Its genuine whole-germ pullback has the literal coordinate
+formula. The entire original Taylor homomorphism after this actual pullback
+is exactly the existing independently defined formal blowup substitution
+after the original Taylor homomorphism.
+\end{theorem}
+\begin{proof}
+Construct the actual vector-valued map by assembling its polynomial
+coordinate functions using the genuine continuous linear coordinate equivalence. Each coordinate
+function is holomorphic by addition and multiplication of genuine linear
+coordinate functions, so the actual vector map is holomorphic. Every
+coordinate is zero at the origin. Actual germ composition therefore gives a
+genuine algebra homomorphism. Evaluate each original coordinate germ using
+the actual coordinate formula. The two independently defined algebra maps
+to the formal series ring then agree on all genuine coordinate germs, by the
+original Taylor coordinate dictionary and the existing true formal blowup
+coordinate formula. Their coordinate images lie in the genuine formal
+maximal ideal: each centre image has the actual exceptional-variable factor,
+and every other image is a formal variable. The previously proved whole-germ
+coordinate uniqueness theorem gives equality on the entire original germ
+ring, without a supplied continuity or desired map-identity certificate.
+\end{proof}
+
+\begin{theorem}[Genuine exceptional division produces an analytic quotient with the exact original normalized formal series]
+\label{hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality,hir:actual-formal-normal-power-contracts-exact-original-analytic-power,hir:actual-formal-blowup-normalized-member}
+\lean{Hironaka.HironakaActualAnalyticBlowupTaylor.actualAnalyticCoordinateIdeal,Hironaka.HironakaActualAnalyticBlowupTaylor.map_actualAnalyticCoordinateIdeal_taylor,Hironaka.HironakaActualAnalyticBlowupTaylor.actualTaylor_mem_coordinateCentre_pow,Hironaka.HironakaActualAnalyticBlowupTaylor.map_actualAnalyticCoordinateIdeal_blowup,Hironaka.HironakaActualAnalyticBlowupTaylor.map_actualAnalyticCoordinateIdeal_pow_blowup,Hironaka.HironakaActualAnalyticBlowupTaylor.exists_actualAnalyticBlowup_quotient,Hironaka.HironakaActualAnalyticBlowupTaylor.actualAnalyticCoordinateIdeal_normal,Hironaka.HironakaActualAnalyticBlowupTaylor.exists_actualAnalyticBlowup_quotient_of_formal_normal_pow}
+\leanok
+Let the exceptional index $e$ belong to the coordinate-centre set $A$.
+For any actual analytic germ in that original coordinate-centre ideal power
+of order $q$, its actual holomorphic coordinate-chart pullback is divisible
+by the genuine exceptional coordinate germ to power $q$, with an actual
+holomorphic germ quotient. The Taylor series of that quotient is precisely
+the existing normalized formal member of the Taylor series of the original
+analytic germ. The same conclusion for a standard normal centre follows
+from formal normal-power membership of the Taylor series alone.
+\end{theorem}
+\begin{proof}
+The actual coordinate formulas identify the image of the entire original
+coordinate-centre ideal with the principal ideal of the actual exceptional
+coordinate: each centre coordinate image has this factor, and the
+exceptional coordinate itself is among the original centre generators.
+The actual ideal-map power identity therefore puts the pullback of every
+member of the original centre power into the actual principal power.
+Membership in that principal ideal constructs a genuine analytic quotient
+with the original product identity.
+
+Apply the genuine Taylor homomorphism to that product identity. The actual
+coordinate dictionary maps the exceptional germ to its literal formal
+variable, and whole-map naturality identifies the numerator with the
+existing formal blowup substitution. Thus the genuine quotient's Taylor
+series satisfies the exact defining product identity of the existing
+normalized formal member. The genuine formal exceptional variable is
+nonzero, and cancellation in the actual formal series domain gives its
+uniqueness. For the standard normal centre, the already proved exact
+normal-power contraction first recovers genuine analytic power membership
+from the formal hypothesis; the same actual quotient construction applies.
+No analytic preimage for an arbitrary formal reduced vertex is assumed or
+constructed by this argument.
+\end{proof}

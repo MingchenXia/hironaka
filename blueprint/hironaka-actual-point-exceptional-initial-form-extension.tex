@@ -1,0 +1,97 @@
+\section{Actual exceptional normalization retains the true initial homogeneous form}
+
+Fix the actual coordinate-centre blowup chart, with genuine exceptional
+variable $x_e$. All normalized members below are the existing internally
+constructed quotients of the actual blowup substitution by the stated true
+exceptional power; their original definitions are unchanged.
+
+\begin{theorem}[Whole centre precision becomes whole exceptional precision]
+\label{hir:actual-normalized-member-exceptional-precision}
+\uses{hir:actual-formal-blowup-normalized-member}
+\lean{Hironaka.HironakaActualPointExceptionalInitialForm.actualNormalizedFormalMember_sub_mem_exceptional_power}
+\leanok
+Suppose $F,G\in C^d$ and $F-G\in C^{d+r}$ in the entire actual formal ring,
+where $C$ is the coordinate centre ideal. The difference of their actual
+$d$-normalized members belongs to the whole exceptional ideal power
+$(x_e)^r$, for every $r\in\mathbb N$.
+\end{theorem}
+\begin{proof}
+Let $N_F,N_G$ be the actual $d$-normalized quotients, and internally form
+the actual $(d+r)$-normalized quotient $H$ of the whole member $F-G$.
+Their genuine product identities give
+\[
+ x_e^d(N_F-N_G)=\pi^*(F-G)=x_e^{d+r}H
+ =x_e^d(x_e^rH).
+\]
+The actual variable $x_e$ is nonzero in the true formal domain, so genuine
+cancellation of $x_e^d$ gives $N_F-N_G=x_e^rH$. This is literal membership
+in the whole principal power $(x_e)^r$. The zero precision and zero
+normalization degree are included. No equality or quotient certificate is
+supplied as an input.
+\end{proof}
+
+\begin{lemma}[The entire point-centre remainder has the next true power]
+\label{hir:actual-point-homogeneous-remainder-next-power}
+\uses{hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualPointExceptionalInitialForm.actual_point_homogeneous_component_and_remainder}
+\leanok
+For $F\in\mathfrak m^d$, its literal degree-$d$ homogeneous component
+$F_d$ belongs to $\mathfrak m^d$ and $F-F_d$ belongs to
+$\mathfrak m^{d+1}$, as entire formal ideal memberships.
+\end{lemma}
+\begin{proof}
+The all-variable coordinate weight is total degree. Every coefficient of
+$F_d$ outside degree $d$ is zero, proving its first whole membership.
+At every exponent of degree below $d+1$, either its degree is $d$ and
+the coefficients of $F$ and $F_d$ cancel, or its degree is below $d$
+and both are zero by the actual input $F\in\mathfrak m^d$.
+The whole coordinate-power coefficient criterion gives the next membership.
+\end{proof}
+
+\begin{definition}[The actual finite polynomial of the whole homogeneous component]
+\label{hir:actual-point-initial-homogeneous-polynomial}
+\lean{Hironaka.HironakaActualPointExceptionalInitialForm.actualPointHomogeneousPolynomial}
+\leanok
+Set $P_d(F)=\operatorname{trunc}_{<d+1}(F_d)$, using the existing literal
+finite total-degree truncation to the original polynomial ring.
+\end{definition}
+
+\begin{lemma}[The polynomial inclusion is the entire original homogeneous component]
+\label{hir:actual-point-initial-polynomial-whole-inclusion}
+\uses{hir:actual-point-initial-homogeneous-polynomial}
+\lean{Hironaka.HironakaActualPointExceptionalInitialForm.actualPointHomogeneousPolynomial_coe}
+\leanok
+The genuine polynomial inclusion of $P_d(F)$ equals the entire series $F_d$.
+\end{lemma}
+\begin{proof}
+At each exponent of degree below $d+1$, the actual truncation retains its
+coefficient. At any remaining exponent the degree differs from $d$, so
+the actual homogeneous-component coefficient is zero. Equality of every
+coefficient proves the entire polynomial-inclusion identity.
+\end{proof}
+
+\begin{theorem}[The actual exceptional restriction depends only on the true homogeneous initial polynomial]
+\label{hir:actual-point-exceptional-initial-polynomial-restriction}
+\uses{hir:actual-normalized-member-exceptional-precision,hir:actual-point-homogeneous-remainder-next-power,hir:actual-point-initial-polynomial-whole-inclusion}
+\lean{Hironaka.HironakaActualPointExceptionalInitialForm.actual_point_normalized_member_congr_homogeneous_polynomial}
+\leanok
+For every actual $F\in\mathfrak m^d$, the actual $d$-normalized member
+of $F$ and the actual $d$-normalized member of the entire polynomial
+inclusion of $P_d(F)$ differ by a member of $(x_e)$. Thus they have the
+same whole class on the exceptional hyperplane in this true point chart.
+\end{theorem}
+\begin{proof}
+Use the preceding entire polynomial-inclusion identity to supply its
+actual point-power membership. The genuine remainder theorem makes the
+difference of the two original whole numerators a member of
+$\mathfrak m^{d+1}$. Apply the general exceptional-precision theorem
+with $r=1$. The resulting principal first power is exactly $(x_e)$.
+This compares the actual normalized quotients, including every coefficient
+in the entire exceptional restriction, without inferring an infinite
+equality from a fixed finite jet.
+\end{proof}
+
+This is the initial-form interface for the point-centre Bennett argument.
+The dehomogenized polynomial comparison and the resulting all-order
+Hilbert--Samuel inequality are further obligations, not consequences
+claimed here. General positive-dimensional permissible centres remain open.

@@ -1,0 +1,129 @@
+\section{Genuine local member branches for an actual discrete blowup centre}
+
+An actual global discrete centre can contain both points on an original
+member and points away from it. It is incorrect to assume that the entire
+centre lies in every original member. Resolve these genuine local branches
+and retain the true ambient strict traces of
+\cite[Remark~12.6, pp.~293--295]{bierstone-milman97-invent-math}.
+
+\begin{lemma}[Actual zero-dimensional centre geometry constructs both real local incidence branches]
+\label{hir:sharp-actual-discrete-centre-member-source-open-branches}
+\uses{hir:sharp-actual-curve-strict-projection-local-inverse}
+\lean{Hironaka.HironakaSharpActualDiscreteCentreMemberLocalBranch.exists_actual_discrete_centre_member_open_branch}
+\leanok
+Let $C$ be genuinely regular of dimension zero at each of its actual
+points and let $H$ be actually closed. For EVERY $p\in C$, an actual
+source open $U\ni p$ is internally constructed such that its centre trace
+is precisely the singleton $p$. If $p\in H$, this true centre trace is
+contained in the actual $H$ trace. If $p\notin H$, that entire $H$ trace
+is empty. No selected open, local branch or centre-containment certificate
+is input.
+\end{lemma}
+\begin{proof}
+True zero-dimensional regularity gives an actual isolating neighborhood
+of $p$ in $C$. If $p\in H$, retain that neighborhood; its actual centre
+trace is the point $p$ and hence lies in $H$. If $p\notin H$, intersect
+it with the genuine open complement of $H$. It still contains $p$,
+still isolates the actual centre, and now misses the entire member.
+Both singleton directions follow from genuine point membership.
+\end{proof}
+
+\begin{lemma}[True normalized vanishing traces have BOTH full germ directions on actual source opens]
+\label{hir:sharp-actual-normalized-vanishing-open-full-germ-dictionary}
+\uses{ana:restricted-ideals,hir:open-restriction-marked}
+\lean{Hironaka.HironakaSharpActualDiscreteCentreMemberLocalBranch.actual_normalized_vanishing_open_germ_iff}
+\leanok
+For ANY actual carrier $N$, a genuine closed smooth $H$ and an actual
+open $U$, a germ of $\operatorname{Res}_{N\cap U}\mathcal I_{H\cap U}$
+is precisely a germ whose actual extension by zero belongs to
+$\operatorname{Res}_N\mathcal I_H$. These are BOTH full relative germ
+directions, retaining normal germs and off-carrier units.
+\end{lemma}
+\begin{proof}
+Genuine smooth vanishing-ideal coherence applies to $H$. The actual
+open vanishing-germ dictionary and genuine coherent ideal pullback
+membership first identify the ENTIRE ideal of the actual $H$ trace with
+the actual open pullback of $\mathcal I_H$. Independently, both true
+restricted finite-span substitution directions commute with the real
+open extension/restriction maps. Substitute the first whole ideal identity
+in that normalized open span dictionary. No zero-set-only identification
+or desired ideal dictionary is input.
+\end{proof}
+
+\begin{theorem}[An actual incident discrete-centre branch produces the true restricted strict-trace factor and the original whole germ dictionary]
+\label{hir:sharp-actual-incident-discrete-centre-restricted-member-factor}
+\source{bierstone-milman97-invent-math:page-0087,bierstone-milman97-invent-math:page-0088}
+\uses{hir:sharp-actual-discrete-centre-member-source-open-branches,hir:sharp-actual-normalized-vanishing-open-full-germ-dictionary,hir:sharp-actual-first-ambient-strict-trace-greatest-factor-relative-strict,bcalc:restrict-open,hir:open-restriction-marked,bcalc:snc-transform}
+\lean{Hironaka.HironakaSharpActualDiscreteCentreMemberLocalBranch.exists_actual_incident_discrete_member_restricted_factor}
+\leanok
+ONLY actual smooth $N$, singleton SNC $H$, genuine density of $N\setminus H$
+in $N$, actual discrete $C\subset N$, its actual blowup $\pi$ and an
+actual $p\in C\cap H$ internally construct $U\ni p$, its real preimage
+open $V$, and the SAME restricted blowup $\rho:V\to U$. On these actual
+opens the genuine centre lies in BOTH actual carriers. The actual local
+ambient strict trace $I_U'$ is coherent and nonzero along its actual
+strict carrier, its actual nonmonomial part is the independently defined
+local all-power STRICT $J_U'$, and its actual greatest factor $D_U'$
+satisfies the WHOLE true identity
+$I_U'=\operatorname{Res}_{N_U'}(D_U'J_U')$.
+
+Moreover both local geometric strict transforms are EXACTLY the inverse
+images of the original geometric strict transforms under $V\hookrightarrow Y$.
+At EVERY actual point of $V$, EVERY local germ belongs to $I_U'$ iff its
+real extension belongs to the TRUE original ambient strict-trace ideal
+$\operatorname{Res}_{N'}\mathcal I_{H'}$. The entire global centre is NOT
+assumed contained in $H$; no local map, factor or germ certificate is input.
+\end{theorem}
+\begin{proof}
+The first lemma internally isolates the actual centre at $p$ inside $H$.
+The actual inverse-image open and genuine blowup restriction theorem give
+the SAME restricted map and its genuine blowup proof. True open pullback
+gives smooth $N_U$ and singleton SNC $H_U$. Because the inclusion of an
+actual open is continuous and open, its inverse image commutes with true
+closure; hence the original density gives genuine density of
+$N_U\setminus H_U$ in $N_U$. Actual centre containment supplies both
+required inclusions. Apply the independently proved genuine first-step
+factor producer to THESE actual restricted inputs, obtaining all local
+coherence, nonzero, actual residual and whole factor conclusions internally.
+
+True geometric strict transforms commute with restriction to this SAME
+source open, proving both geometric set identities. To use the normalized
+full germ dictionary, original zero-dimensional centre isolation at each
+centre point transfers genuine singleton normal crossings to the actual
+centre. The real ambient SNC blowup theorem therefore makes the true
+original ambient strict member smooth, independently of any assumed
+carrier transversality. Apply the preceding actual normalized vanishing
+open dictionary to THIS true member, and substitute the two actual strict
+transform set identities. This proves both whole germ directions on the
+entire actual preimage open, not merely the selected point. Chronological
+gluing, exponent transport and the separate $\tau_D$ driver remain subsequent
+consumers of these real local data.
+\end{proof}
+
+\begin{theorem}[The genuine nonincident branch makes every true ambient strict-trace germ a unit germ]
+\label{hir:sharp-actual-nonincident-discrete-member-strict-trace-unit-open}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:sharp-actual-discrete-centre-member-source-open-branches,bcalc:strict-submanifold,ana:restricted-ideals}
+\lean{Hironaka.HironakaSharpActualDiscreteCentreMemberLocalBranch.exists_actual_nonincident_discrete_member_trace_unit_open}
+\leanok
+For an actual discrete centre point $p\notin H$, the internally chosen
+$U\ni p$ makes the TRUE original ambient strict trace have exactly ALL
+holomorphic germs at EVERY point of $\pi^{-1}U$, along ANY actual strict
+carrier. This is a full relative unit-germ dictionary, not an asserted
+nonincident factor or order model.
+\end{theorem}
+\begin{proof}
+The first lemma chooses the actual source open disjoint from the entire
+closed $H$. The genuine strict transform of $H$ lies in $\pi^{-1}H$,
+so it misses the entire preimage open. This strict transform is actually
+closed, by its geometric closure definition. At each real point of this
+open its actual complement therefore gives a neighborhood on which every
+holomorphic germ vanishes vacuously along the true strict member. Thus
+that germ belongs to the genuine strict-member vanishing ideal, and its
+self relative span puts it in the true normalized trace. The converse is
+the literal holomorphic component of normalized membership. This covers
+every actual germ on the entire preimage open without coherence or a
+supplied unit certificate. Together with the incident producer this
+closes the real local incidence gap; whole chronological ambient factor
+transport, $\tau_D$, full sharp $\Sigma$ and termination are still separate.
+\end{proof}

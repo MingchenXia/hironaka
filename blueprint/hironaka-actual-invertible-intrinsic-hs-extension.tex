@@ -1,0 +1,107 @@
+\section{The existing intrinsic HS of an original invertible ideal}
+
+Let $X$ be a complex manifold of dimension $n$. All charts below are the
+actual preferred charts, centred at the actual point $x$; all stalk ideals
+are the entire independently defined ideals of original function germs.
+
+\begin{lemma}[Both original point-power directions in the actual centred chart]
+\label{hir:actual-centred-chart-original-point-power-dictionary}
+\lean{Hironaka.HironakaActualInvertibleIntrinsicHS.chartTranslatedGerm_mem_maximal_pow_iff}
+\leanok
+\uses{hir:whole-point-power-ring-dictionary,hir:point-power-pullback}
+For every original function $g$ holomorphic near $x$, every $q\ge0$, its
+actual centred preferred-chart germ belongs to the actual maximal ideal
+power $\mathfrak m^q$ if and only if
+$g\in\mathfrak m_x^q$ in the original manifold point-ideal encoding.
+\end{lemma}
+\begin{proof}
+Write $e$ for the actual preferred chart at $x$ and $p=e(x)$. The actual
+map $b(z)=e^{-1}(z+p)$ is holomorphic near zero, sends zero to $x$, and
+its actual inverse $a(y)=e(y)-p$ is holomorphic near $x$ and sends $x$ to
+zero. These assertions hold on their genuine chart domains, which are
+neighbourhoods of the two specified points. Original point-ideal powers
+pull back under either holomorphic map. The forward pullback gives
+$g\circ b\in\mathfrak m_0^q$ from $g\in\mathfrak m_x^q$; the actual
+whole ring/point-power dictionary identifies this with membership of its
+original centred germ in $\mathfrak m^q$. Conversely pull back the
+point-power representative by $a$ and use the genuine identity
+$b(a(y))=y$ on the actual original chart neighbourhood. Germ invariance
+of point-power membership then gives the original $g\in\mathfrak m_x^q$.
+\end{proof}
+
+\begin{theorem}[The entire original stalk retains every original order condition]
+\label{hir:actual-whole-chart-stalk-original-order-dictionary}
+\lean{Hironaka.HironakaActualInvertibleIntrinsicHS.wholeChartStalkIdeal_le_maximal_pow_iff}
+\leanok
+\uses{hir:actual-centred-chart-original-point-power-dictionary,hir:order}
+For any ideal of holomorphic germs $A$, its whole actual chart-stalk ideal
+$I_x$ satisfies
+\[
+ I_x\subset\mathfrak m^q\quad\Longleftrightarrow\quad
+ \operatorname{OrderGE}(X,A,x,q).
+\]
+The right hand side is the existing original order condition, with ambient
+carrier $X$, rather than a newly defined order.
+\end{theorem}
+\begin{proof}
+If $I_x\subset\mathfrak m^q$, each original $A$-membership germ maps to
+an actual element of $I_x$, so the preceding two-sided dictionary puts
+the original function in $\mathfrak m_x^q$. This supplies the original
+ambient order condition using the function itself as representative.
+Conversely the original ambient order condition gives actual original
+point-power membership: the agreement on the entire carrier is germ
+agreement. The preceding dictionary therefore puts every generator in
+the defining whole original stalk span inside $\mathfrak m^q$. Closure
+under arbitrary original ring combinations gives the required inclusion
+for the entire original ideal.
+\end{proof}
+
+\begin{theorem}[Original invertibility internally supplies a nonzero principal whole stalk]
+\label{hir:actual-invertible-nonzero-principal-whole-stalk}
+\lean{Hironaka.HironakaActualInvertibleIntrinsicHS.exists_actual_nonzero_principal_whole_stalk}
+\leanok
+\uses{hir:actual-finite-original-whole-chart-stalk-span}
+For ONLY original invertibility of $A$ and every actual $x$, there is an
+actual $0\ne f\in\mathcal O_{\mathbb C^n,0}$ for which the entire
+original chart-stalk ideal is $(f)$.
+\end{theorem}
+\begin{proof}
+Original invertibility gives a genuine neighbourhood $U$ of $x$ and one
+original holomorphic generator $h$ which vanishes identically on no
+nonempty open subset of $U$. Use this same $h$ as the singleton finite
+original generator family. The whole original generator-span theorem,
+in both directions, identifies the entire actual chart-stalk ideal with
+the span of its actual centred germ $f$. If $f=0$, its representative
+$h(e^{-1}(z+p))$ vanishes on a genuine neighbourhood of zero. Pull this
+neighbourhood back through the actual map $a(y)=e(y)-p$ and intersect it
+with $U$ and the actual chart source. This is a genuine open neighbourhood
+of $x$ on which $h=0$, contradicting the original nonvanishing clause.
+Thus $f\ne0$, as required.
+\end{proof}
+
+\begin{theorem}[Original ideal order and the entire existing intrinsic HS]
+\label{hir:actual-invertible-original-order-entire-intrinsic-hs}
+\lean{Hironaka.HironakaActualInvertibleIntrinsicHS.exists_actual_original_order_intrinsic_hs}
+\leanok
+\uses{hir:actual-invertible-nonzero-principal-whole-stalk,hir:actual-whole-chart-stalk-original-order-dictionary,hir:actual-nonzero-holomorphic-germ-finite-order,hir:actual-principal-entire-hilbert-samuel-formula,hir:actual-intrinsic-whole-stalk-hilbert-samuel-value}
+For ONLY original invertibility of $A$ and every $x$, internally there is
+$\mu\in\mathbb N$ such that the EXISTING original order is $\mu$ and,
+simultaneously at EVERY $\ell\ge0$,
+\[
+ H_A(x,\ell)=\binom{n+\ell}{n}
+ -\begin{cases}\binom{n+\ell-\mu}{n},&\mu\le\ell,\\0,&\ell<\mu.\end{cases}
+\]
+\end{theorem}
+\begin{proof}
+The preceding producer supplies the entire actual stalk $(f)$ with
+$f\ne0$. Choose its genuine finite order $\mu$ internally. Because
+$(f)\subset\mathfrak m^q$ exactly when $f\in\mathfrak m^q$, the whole
+original order dictionary gives original order at least $\mu$. No
+original order condition with $q>\mu$ can hold: it would put $f$ in
+$\mathfrak m^q\subset\mathfrak m^{\mu+1}$, contrary to its actual
+finite order. Taking the supremum in the EXISTING definition proves
+original order exactly $\mu$. Finally the EXISTING intrinsic manifold HS
+is by definition the quotient dimension of this same entire actual
+chart-stalk ideal. Apply the preceding genuine principal HS calculation
+at every order. The same internally chosen $\mu$ works for all $\ell$.
+\end{proof}

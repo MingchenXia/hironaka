@@ -1,0 +1,89 @@
+\section{Actual restriction and flattening of padded comparison maps}
+
+All histories below are genuine finite blowup towers. Restriction retains
+all original centre positions, and padding means actual identity blowups of
+the empty centre. The geometric operations precede the comparison of maps.
+This does not compress an original history or assert manifold descent.
+
+\begin{theorem}[The true restriction of a padded history has an actual flattened history]
+\label{hir:sharp-actual-padded-history-open-flattening}
+\uses{mc:tower-isomorphism-restrict-append,hir:sharp-actual-identity-empty-padding-open-restriction}
+\lean{Hironaka.HironakaSharpActualCurvePaddedComparisonRestriction.exists_padded_history_open_flattening}
+\leanok
+Let $P:X\leftarrow Y$ and $S:Y\leftarrow Z$ be actual finite towers, let
+$L$ be a natural number and let $U\subset X$ be an actual open.
+Restrict the genuine padded history $P*(S*\operatorname{Empty}^{L-\ell(S)})$
+to $U$. Construct a genuine stagewise isomorphism over $\mathrm{id}_U$
+to the history consisting of the actual restrictions of $P$ and $S$,
+followed by $L-\ell(S)$ genuine identity-empty blowups on the actual restricted
+endpoint. The terminal map is identity on underlying points of $Z$.
+\end{theorem}
+\begin{proof}
+Apply the actual append-restriction isomorphism first to $P$ and the entire
+padded tail. Apply it again to $S$ and its actual identity-empty tail on the
+true inverse-image open of $U$ in $Y$. The proved genuine empty-tail
+restriction isomorphism replaces that last restricted tail by the same number
+of actual identity-empty blowups on the true restricted endpoint of $S$.
+Append it to the reflexive comparison of the restricted $S$ history, then
+compose with the second append-restriction comparison. Append this actual
+tail comparison to the reflexive comparison of restricted $P$, and compose
+with the first comparison. Every component endpoint map is identity on
+underlying points, so their actual composite has exactly that point map.
+Restriction preserves the actual tail length, hence its padding count is
+literally the count used in the padded restricted history. Each constituent
+has a genuine stepwise blowup and centre dictionary; no new compatibility
+certificate is supplied.
+\end{proof}
+
+\begin{theorem}[A true padded comparison restricts to the exact flattened histories]
+\label{hir:sharp-actual-padded-comparison-open-restriction}
+\uses{hir:sharp-actual-padded-history-open-flattening,hir:sharp-actual-stagewise-comparison-open-restriction,mc:tower-isomorphism-append}
+\lean{Hironaka.HironakaSharpActualCurvePaddedComparisonRestriction.exists_padded_comparison_open_restriction}
+\leanok
+Let an actual stagewise comparison over a genuine base biholomorphism
+$\Phi:X'\to X$ identify two actual prefix-and-tail histories padded to the
+same numerical cut $L$. For every genuine target open $U$, internally take
+the source open $\Phi^{-1}U$. Construct a genuine stagewise comparison over
+the actual restricted $\Phi$ of the two padded restricted prefix-and-tail
+histories. Its terminal underlying point map is exactly the old terminal
+biholomorphism. All empty trace centres and all padding positions are retained.
+\end{theorem}
+\begin{proof}
+The actual full projection square internally identifies the terminal source
+open with the inverse image of the terminal target open. The proved stagewise
+restriction theorem therefore gives a genuine comparison of the restrictions
+of the two full padded histories, with the exact old terminal point map.
+Independently construct both genuine flattened padded-history comparisons by
+the preceding theorem. Invert the source flattening, compose it with the
+restricted original comparison, then compose with the target flattening.
+The two flattening base maps are actual identities, so the composite base map
+is the genuine restricted $\Phi$. Both flattenings are identity on underlying
+endpoint points, including their true inverses. Thus the composite endpoint
+map has exactly the old terminal point map. This proves actual geometric
+restriction before using any uniqueness of comparison maps.
+\end{proof}
+
+\begin{theorem}[The actual restricted comparison agrees with every direct comparison]
+\label{hir:sharp-actual-padded-restriction-direct-comparison}
+\uses{hir:sharp-actual-padded-comparison-open-restriction,hir:sharp-actual-terminal-recipe-padding-independence}
+\lean{Hironaka.HironakaSharpActualCurvePaddedComparisonRestriction.padded_comparison_open_restriction_direct}
+\leanok
+For the exact flattened restricted prefix and tail histories just constructed,
+every direct actual stagewise comparison over the same restricted base map
+agrees with the constructed restriction, even when its padding cut is different.
+Assume both numerical cuts bound both actual tail lengths. Its terminal map sends
+each actual source point to the old terminal image as an underlying point.
+\end{theorem}
+\begin{proof}
+Both maps are genuine stagewise isomorphisms of the same actual restricted
+prefixes and tails over the same base biholomorphism. Restriction preserves
+the actual lengths, so both cuts still bound both tails. Extend both genuine
+padded histories by actual identity-empty blowups to the common sum of the
+cuts, retaining every position and the same endpoint maps. Actual blowup
+uniqueness at each successor of these fixed histories identifies the two
+terminal biholomorphisms. Substitute this actual
+equality into the underlying-point dictionary of the preceding construction.
+This applies to direct retained-recipe comparisons once their histories have
+been genuinely identified with these exact restrictions; it does not assume
+that nested-history identification or global gluing.
+\end{proof}

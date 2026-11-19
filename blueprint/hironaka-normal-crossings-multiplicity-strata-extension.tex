@@ -1,0 +1,136 @@
+\section{Intrinsic highest-multiplicity strata of normal-crossing carriers}
+\label{sec:hironaka-normal-crossings-multiplicity-strata}
+
+These statements concern the geometry of an original general
+normal-crossing carrier. They produce an intrinsic first centre without
+choosing an ordering of its local branches. They do not assert that this
+centre is contained in the cosupport of an additional marked ideal.
+
+\begin{definition}[Intrinsic local branch multiplicity]
+\label{hir:general-nc-intrinsic-branch-multiplicity}
+\lean{Hironaka.HironakaNormalCrossingsMultiplicityStrata.branchMultiplicity,Hironaka.HironakaNormalCrossingsMultiplicityStrata.branchMultiplicity_eq_card,Hironaka.HironakaNormalCrossingsMultiplicityStrata.branchMultiplicity_le,Hironaka.HironakaNormalCrossingsMultiplicityStrata.branchMultiplicity_pos_iff}
+\uses{hir:actual-normal-crossing-chart-branch-correspondence}
+\leanok
+For an actual normal-crossing carrier $H$ in a complex manifold of
+dimension $n$, let $b_H(x)$ be the number of distinct coordinate
+hyperplanes in an actual centred flattening of its germ at $x$.
+\end{definition}
+\begin{proof}
+An actual flattening exists by the normal-crossing condition. Any two
+flattenings have the uniquely produced branch bijection of the overlap
+theorem, so the numbers agree. Thus the definition is independent of
+the flattening. Its values lie between zero and $n$. Since the
+flattening sends $x$ to zero, $x$ lies in $H$ exactly when its selected
+coordinate set is nonempty, equivalently when $b_H(x)>0$.
+\end{proof}
+
+\begin{lemma}[The exact nearby branch count]
+\label{hir:general-nc-exact-nearby-branch-count}
+\lean{Hironaka.HironakaNormalCrossingsMultiplicityStrata.branchMultiplicity_eq_filter_card}
+\uses{hir:general-nc-intrinsic-branch-multiplicity}
+\leanok
+Fix an actual flattening $F$ at $x$ with selected coordinate set $S$.
+On a neighbourhood of $x$, the original local branch multiplicity at
+$y$ equals the number of coordinates $i\in S$ for which $F_i(y)=0$.
+\end{lemma}
+\begin{proof}
+The flattening identifies $H$ with the selected hyperplane union on its
+whole open domain. Fix a point $y$ in that domain and write
+$S_y=\{i\in S:F_i(y)=0\}$. Every coordinate indexed by $S\setminus S_y$
+is nonzero at $y$. The finitely many open nonvanishing neighbourhoods
+have an intersection on which none of these coordinates contributes
+to the union. Translate the actual coordinate map by $F(y)$. It has
+an actual translated inverse and is centred at $y$. For $i\in S_y$,
+its coordinate $i$ equals the original $F_i$, since $F_i(y)=0$.
+Thus these coordinates describe exactly the original carrier germ at
+$y$. Express this actual local holomorphic coordinate equivalence in
+the preferred chart at $y$ using the two actual chart maps and their
+inverses. It is an actual centred flattening with selected set $S_y$.
+The defining overlap independence gives $b_H(y)=|S_y|$. The argument
+holds for every $y$ in the domain of the original flattening, so that
+whole domain is the required neighbourhood of $x$.
+\end{proof}
+
+\begin{lemma}[Closed intrinsic multiplicity superlevels]
+\label{hir:general-nc-closed-multiplicity-superlevels}
+\lean{Hironaka.HironakaNormalCrossingsMultiplicityStrata.isClosed_branchMultiplicity_superlevel,Hironaka.HironakaNormalCrossingsMultiplicityStrata.branchMultiplicity_superlevel_subset}
+\uses{hir:general-nc-exact-nearby-branch-count}
+\leanok
+For every nonnegative integer $r$, the intrinsic set
+$C_r=\{x:b_H(x)\ge r\}$ is closed. For $r>0$ it is contained in $H$.
+\end{lemma}
+\begin{proof}
+At a point with $b_H(x)<r$, take an actual flattening with
+$|S|=b_H(x)$. On its domain the preceding exact count is the cardinality
+of a subset of $S$, so it remains strictly less than $r$. Thus the
+complement of $C_r$ is open and $C_r$ is closed. If $r>0$, every
+point of $C_r$ has positive branch multiplicity and hence lies in $H$.
+\end{proof}
+
+\begin{theorem}[The genuine highest-multiplicity centre]
+\label{hir:general-nc-highest-multiplicity-smooth-centre}
+\lean{Hironaka.HironakaNormalCrossingsMultiplicityStrata.highest_superlevel_flattening,Hironaka.HironakaNormalCrossingsMultiplicityStrata.regularAtDim_highest_superlevel,Hironaka.HironakaNormalCrossingsMultiplicityStrata.isClosedSubmanifold_highest_superlevel}
+\uses{hir:general-nc-closed-multiplicity-superlevels,hir:general-nc-exact-nearby-branch-count,fpgeom:complex-analytic-subvariety}
+\leanok
+Suppose $r>0$ bounds the original branch multiplicity everywhere.
+Then $C_r=\{x:b_H(x)=r\}$ is an actual closed smooth submanifold.
+At each of its points it has dimension $n-r$, and an actual original
+normal-crossing chart expresses it as the intersection of all of the
+$r$ local original branches. These intersections agree as actual
+germs on every chart overlap, independently of any branch ordering.
+\end{theorem}
+\begin{proof}
+The upper bound identifies $C_r$ with the closed superlevel above.
+At a point of $C_r$, take a flattening with selected set $S$ of size
+$r$. The exact nearby-count theorem says a nearby point has count
+at least $r$ exactly when every coordinate in $S$ vanishes. Thus the
+actual centre germ is precisely the coordinate subspace cut out by
+$S$. The original flattening has an invertible differential. Its distinct
+selected coordinate rows are linearly independent: any linear relation
+can be evaluated on the inverse image of each corresponding coordinate
+basis vector to make its coefficient zero. These $r$ holomorphic
+functions cut out the whole centre germ. The holomorphic implicit
+function theorem therefore gives an actual regular flattening to the
+dimension-$(n-r)$ coordinate plane; $r\le n$ follows from the
+selected-set cardinality. Together with closedness this proves
+the entire centre is an actual closed smooth submanifold.
+The overlap theorem matches every local original branch uniquely;
+its finite-intersection conclusion therefore identifies the whole
+centre germ on every overlap. No matching or smooth-centre
+certificate is assumed. If the level is empty, closed smoothness is
+vacuous and the pointwise dimension assertion has no instances.
+\end{proof}
+
+\begin{corollary}[A nonempty intrinsic highest stratum]
+\label{hir:general-nc-actual-highest-stratum-exists}
+\lean{Hironaka.HironakaNormalCrossingsMultiplicityStrata.exists_highest_multiplicity_stratum}
+\uses{hir:general-nc-highest-multiplicity-smooth-centre}
+\leanok
+If $H$ is nonempty, there is a positive integer $r\le n$ attained
+by $b_H$ and bounding it everywhere, so its intrinsic highest
+stratum is a nonempty actual closed smooth centre. No compactness
+is required.
+\end{corollary}
+\begin{proof}
+The nonempty range of $b_H$ is contained in the finite set
+$\{0,\ldots,n\}$ and therefore has a largest attained value $r$.
+A point of $H$ has positive branch multiplicity, hence $r>0$.
+Choose a point attaining $r$; it lies in the highest stratum.
+Apply the preceding theorem with the actual global upper bound.
+In dimension zero the normal-crossing carrier must be empty, so
+the nonemptiness hypothesis does not arise.
+\end{proof}
+
+\begin{remark}
+An actual blowup of this intrinsic smooth centre is available from
+the proved geometric existence theorem. Using it to lower the number
+of strict original branches requires its genuine coordinate-chart
+calculation and compatibility with any accumulated exceptional
+boundary. A marked-ideal resolution that must preserve the complement
+of its original cosupport cannot use this centre unless its required
+cosupport containment has also been proved.
+The ordered monomial invariant retains its colexicographic tie-break
+on branch indices. The intrinsic branch count and its centre do not
+prove that this ordered canonical sequence is independent of an
+arbitrary initial permutation of those indices.
+\end{remark}

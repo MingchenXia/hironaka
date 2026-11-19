@@ -1,0 +1,179 @@
+\section{An independently stopped smooth source for the same embedded target map}
+
+The original target record is $M=(X,X,\varnothing,I_V,1)$, and the source
+record is literally $N=b^*M$.  No identification of its whole ideal
+$b^*I_V$ with a separately reduced vanishing ideal is made.  The good open
+is $O=X\setminus\operatorname{Sing}V$ and $U=b^{-1}O$.  Empty pulled-back
+carriers and actual empty source steps are included.
+
+\begin{lemma}[Cosupport persists over an original avoided open]
+\label{hir:original-cosupport-persistence-avoided-open}
+\uses{bcalc:restrict-empty-tower,hir:open-restriction-marked,bcalc:transform-off-centre,hir:smooth-centre}
+\lean{Hironaka.HironakaOriginalIndependentStoppedSource.mem_cosupp_iff_of_centresAvoid}
+\leanok
+For an original well-formed marked record $A$, an actual test tower $S$
+and an original open $U$ avoided by all its actual centres, a point $z$
+over $U$ belongs to the transformed cosupport if and only if its original
+projection belongs to the original cosupport of $A$.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower.  For the identity tower the assertion is
+literal equality.  At an added blowup, avoidance says that a point whose
+original projection lies in $U$ maps outside the actual centre.  The
+whole off-centre controlled-transform dictionary identifies membership
+in the new cosupport with membership of its image in the preceding
+cosupport.  The preceding transform has a closed smooth ambient carrier
+and a coherent ideal by actual testness, so this dictionary applies.
+The induction hypothesis gives original cosupport membership, and the
+literal composite projection formula completes the equivalence.
+\end{proof}
+
+\begin{theorem}[The actual pulled stopped prefix has a next source encounter, or is empty]
+\label{hir:original-pulled-stopped-source-next-encounter}
+\uses{hir:original-canonical-embedded-stopped-smooth-comparison,hir:smooth-original-ambient-canonical-history-values,hir:submersion-relative-control-joint-tower,hir:original-cosupport-persistence-avoided-open}
+\lean{Hironaka.HironakaOriginalIndependentStoppedSource.source_maximum_meets_pulled_regular_open,Hironaka.HironakaOriginalIndependentStoppedSource.canonical_histories_empty_of_original_cosupp_empty}
+\leanok
+Let $V$ be the original irreducible target, let $b$ be any holomorphic
+submersion, and let $Q$ be an actual smooth pullback of a canonical target
+prefix $T$ avoiding $O$, whose next whole maximum meets $O$.
+If $b^{-1}V$ is nonempty, the next whole maximum of the actual source
+prefix for $N$ meets $U$.  If $b^{-1}V$ is empty, every actual finite
+canonical history for $N$ has only empty centres and is already a
+geometric resolution.
+\end{theorem}
+\begin{proof}
+The submersion $b$ is open.  Pulling back the density
+$V\subseteq\overline{V\cap O}$ shows that a nonempty $b^{-1}V$ contains a
+point over $V\cap O$.  Surjectivity of the actual source tower projection
+lifts that point to its endpoint.  The actual square puts its target
+image over $V\cap O$.  The target first-meeting maximum contains exactly
+the preimage of $V$ over $O$, so this target image belongs to the whole
+target maximum.  The source cosupport is the true preimage cosupport.
+Its original ambient invariant values are the images of the target
+values under one order embedding with the genuine fibre dimension.
+Thus this source point dominates every source cosupport point and is
+itself a whole source maximum over $U$.
+
+If $b^{-1}V$ is empty, the original source cosupport is empty by the
+actual original cosupport pullback formula.  Every transformed
+cosupport of an actual test tower lies over that original empty set.
+Hence every current maximum is empty.  A canonical centre is empty or
+that whole current maximum, so induction proves that every actual
+centre is empty.  The transformed cosupport is empty as well, giving
+genuine geometric terminality.
+\end{proof}
+
+\begin{theorem}[An independent source first-meeting map compares with the same target]
+\label{hir:original-independent-source-stopped-cartesian-comparison}
+\uses{hir:original-pulled-stopped-source-next-encounter,hir:original-first-meeting-prefix-map-unique,hir:original-ambient-terminal-choice-intrinsic-unique-comparison,hir:original-stopped-strict-transform-smooth-square,hir:submersion-relative-regular-geometry,hir:submersion-relative-nc-transversality}
+\lean{Hironaka.HironakaOriginalIndependentStoppedSource.independent_source_prefix_comparison}
+\leanok
+Keep the preceding actual target prefix $T$ and its actual pulled-back
+source $Q$.  Let $S$ be any independently chosen actual finite canonical
+history for the literal $N$.  When $b^{-1}V$ is nonempty, suppose $S$
+avoids $U$ and its next whole maximum meets $U$.  Then there is a unique
+biholomorphism from the endpoint of $S$ to that of $Q$ over $Y$.
+Composing it with the actual upper map of $Q$ gives a holomorphic
+submersion $g$ on the independent endpoint, with
+\[
+ p_T g=b p_S
+\]
+and the genuine holomorphic Cartesian universal property.  The whole
+conventional strict transform is exactly
+\[
+ \operatorname{Str}_{p_S}(b^{-1}V)
+       =g^{-1}\operatorname{Str}_{p_T}(V).
+\]
+If the target strict carrier is smooth and has normal crossings with
+its actual boundary, its pullback through $g$ has the corresponding
+regularity and normal crossings with the literal pulled target boundary.
+The actual independent source boundary is SNC by canonical testness.
+No equality of the two full indexed boundary lists is asserted.
+\end{theorem}
+\begin{proof}
+If $b^{-1}V$ is nonempty, the preceding theorem supplies the next maximum
+encounter for $Q$.  Both actual source prefixes are canonical for the
+same literal $N$, avoid the same $U$, and their next whole maxima meet
+$U$.  First-meeting-prefix uniqueness therefore supplies the unique
+over-$Y$ biholomorphism.  If $b^{-1}V$ is empty, both source histories are
+genuine canonical terminal histories by the preceding theorem, so
+original terminal comparison supplies that unique biholomorphism.
+
+In either case conjugating the actual upper map by this source
+biholomorphism gives a submersion, the original projection equality, and
+the holomorphic Cartesian property: transfer a cone through the inverse
+biholomorphism and use the actual Cartesian lift and its uniqueness.
+A biholomorphic square over the same original source transports the
+conventional strict transform; combine this with the actual pulled
+strict-transform equality.  Genuine smooth pullback gives the stated
+carrier regularity and normal crossings with the pulled target
+boundary.  Independent source canonicality gives actual testness, whose
+well-formed transform gives SNC for its own actual boundary.  Different
+empty-step counts may insert different empty indexed members, so these
+two boundary statements are kept distinct.
+\end{proof}
+
+\begin{theorem}[Original input internally supplies an independently stopped smooth source]
+\label{hir:original-independent-stopped-smooth-source-producer}
+\uses{hir:original-independent-source-stopped-cartesian-comparison,hir:original-cosupport-persistence-avoided-open,hir:original-canonical-embedded-stopped-smooth-comparison,hir:original-global-finite-smooth-source-history}
+\lean{Hironaka.HironakaOriginalIndependentStoppedSource.exists_original_independently_stopped_smooth_source}
+\leanok
+For an original compact target $X$, an original irreducible $V$ of
+dimension less than $n$ with coherent whole vanishing ideal, and any
+holomorphic submersion $b:Y\to X$, internally construct the target
+canonical first-meeting prefix and an independent source prefix as in
+the preceding theorem.  The source is chosen as a prefix of an
+internally constructed whole finite canonical terminal source history,
+with the exact remaining tail retained.  If $b^{-1}V$ is empty choose the
+identity prefix; otherwise its next whole maximum meets $U$.
+The same original target stopped projection admits the resulting genuine
+smooth Cartesian upper map and the whole strict-transform equality.
+The target's actual SNC boundary, strict-carrier regularity and normal
+crossings and good-open isomorphism are retained.  The independent source
+projection is a proper holomorphic surjective admissible blowup sequence
+with centres over $b^{-1}\operatorname{Sing}V$, is an isomorphism over $U$,
+and its actual boundary is SNC.  Its whole strict carrier is closed
+smooth of dimension $\dim V+(m-n)$ at every point, with normal crossings
+with the literal pulled target boundary.  In the empty-carrier branch
+the identity prefix has length zero and every actual centre of the
+constructed whole source history is proved empty.
+No source compactness, source history, comparison map or stopping index
+is supplied by the caller.
+\end{theorem}
+\begin{proof}
+The compact target producer constructs its actual whole canonical
+terminal history and the genuine target first-meeting prefix.  Pull
+back the entire terminal history by the actual smooth-tower producer;
+this independently constructs a whole finite canonical geometric
+terminal history for $N$ on all of $Y$.
+
+If the pulled carrier is empty, choose the identity source prefix and
+the entire constructed source tower as its remaining tail.  Otherwise
+openness and original regular-locus density supply an original
+cosupport point in $U$.  If the whole terminal source history avoided
+$U$, lift that point by its surjective projection.  The first lemma
+would keep it in final cosupport, contradicting genuine terminality.
+The actual first-centre theorem therefore selects an independent
+canonical source prefix avoiding $U$ with a next whole maximum over
+$U$, together with its exact remaining tail and factorization into the
+constructed full source history.  Apply the preceding comparison
+theorem to this internally selected source prefix and the unchanged
+target prefix.  The whole strict-transform equality and genuine upper
+submersion transfer target closed smoothness and its exact dimension,
+and normal crossings with the pulled target boundary.  Actual source
+canonical testness gives its own SNC boundary, and actual source
+avoidance gives centres over the inverse singular set, admissibility,
+exceptional-image containment and the good-open isomorphism.  Its actual
+finite blowup projection is proper, holomorphic and surjective.  All
+source choices and both necessary branches are therefore internal
+original-input constructions.
+\end{proof}
+
+\begin{remark}
+The theorem compares genuine independent endpoint maps for the literal
+pulled marked record.  It does not claim equality of actual stopping
+indices, equality of indexed boundary lists with different empty
+positions, or $b^*I_V=I_{b^{-1}V}$ for singular $V$.  Normal crossings
+with the independent source's own indexed boundary requires its
+empty-member boundary transport, beyond the map comparison here.
+\end{remark}

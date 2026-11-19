@@ -1,0 +1,100 @@
+\section{A genuine finite permitted boundary prephase at every marking}
+\label{sec:hironaka-normal-crossings-any-mark-prephase}
+
+Let $H$ be an intrinsic normal-crossing carrier, and let $E$ be a
+finite actual SNC boundary admitting simultaneous adapted coordinates
+with $H$. The original double locus must lie in the original marked
+cosupport. This is a qualified permitted prephase: it does not replace
+the case of an arbitrary merely-NC initial boundary whose selfcrossings
+can lie outside the original cosupport.
+
+\begin{theorem}[Every actual higher-old-branch history is a test history at the unchanged marking]
+\label{hir:general-nc-any-mark-higher-history-test-and-double-cosupport}
+\lean{Hironaka.HironakaNormalCrossingsAnyMarkPrephase.higherSeparationCentres_isGeoTestTower_and_double_subset_cosupp}
+Let $M$ be a well-formed whole-ambient marked datum, and suppose the
+original double locus of an actual NC carrier $H$ lies in $M$'s
+cosupport. A genuine finite history whose every centre is a nonempty
+highest old-branch superlevel of count at least two, with actual
+adapted coordinates for the current literal boundary, is an actual
+geometric test history for this same datum. The entire final strict
+old-carrier double locus lies in the actual final cosupport. The
+original marking is arbitrary and unchanged at every step.
+\uses{hir:general-nc-actual-highest-step-any-mark-double-cosupport,hir:general-nc-intrinsic-higher-separation-step}
+\leanok
+\end{theorem}
+\begin{proof}
+Induct on the literal finite history. At length zero the differential
+strict transform by the identity is the original closed carrier, so
+the original double-locus inclusion is precisely the required one;
+the empty history is a test history.
+
+For a final step, its genuine higher-centre record supplies actual
+adapted coordinates for the previous strict old carrier and its
+literal accumulated boundary, a global upper bound $r\geq2$ on the
+old-branch count, and equality of the actual centre with that highest
+superlevel. Induction supplies a true previous test history and its
+entire double-locus cosupport inclusion. Actual admissible-transform
+well-formedness gives coherence of the current ideal and the actual
+current smooth carrier; the whole-ambient transform dictionary keeps
+that carrier equal to the whole current manifold.
+
+Apply the any-mark highest-step theorem to this very current datum.
+It internally gives admissibility of the actual next centre and
+places the entire new old-carrier double locus in the literal
+controlled cosupport at its unchanged mark. The genuine whole-ambient
+transform dictionary identifies that controlled cosupport with the
+actual next marked datum. Composition of actual differential strict
+transforms identifies the new old carrier with the strict transform
+along the whole appended history. Thus append exactly this admissible
+step to the previous test history and transport the proved inclusion
+along that actual carrier equality. No intermediate cosupport or
+admissibility certificate is supplied by the caller.
+\end{proof}
+
+\begin{theorem}[The internally constructed finite separation is permitted for the original ideal at every marking]
+\label{hir:general-nc-any-mark-original-permitted-finite-prephase}
+\lean{Hironaka.HironakaNormalCrossingsAnyMarkPrephase.naturalSeparation_isGeoTestTower_of_doubleLocus_subset_cosupp}
+For every original coherent ideal $I$, natural marking $d$ and actual
+adapted pair $(H,E)$, suppose the original double locus lies in the
+literal whole-ambient cosupport of $(I,d)$. Form the actual original
+marked datum $(X,E,I,d)$ and its internally constructed natural
+old-branch separation. This same finite history is a genuine test
+history. Every recorded prefix has its entire current old-carrier
+double locus in its actual current cosupport. Its length is at most
+$n-1$; the terminal strict old carrier is closed and smooth, is
+transverse to the literal accumulated boundary, and adjoining it to
+that boundary is SNC. Every centre lies over the original cosupport,
+the history is an actual admissible blowup sequence permitted there,
+and its projection is an isomorphism on the whole complement of that
+original cosupport.
+\uses{hir:general-nc-any-mark-higher-history-test-and-double-cosupport,hir:general-nc-permitted-double-locus-prephase,hir:general-nc-bounded-actual-separation-tower}
+\leanok
+\end{theorem}
+\begin{proof}
+Use the original coherent ideal, original boundary and original mark
+to form the literal whole-ambient marked datum. Its boundary is
+actually SNC by the given simultaneous adapted coordinates, and the
+whole ambient carrier is closed, smooth and transverse to that
+boundary. Thus this original datum is well formed.
+
+Choose its genuine natural old-branch separation. The construction
+already supplies an actual higher-centre record at every performed
+step, the strict old-carrier bound by one at the end, and length at
+most $n-1$. Apply the preceding theorem to these actual centre records
+to obtain its test-history property and every actual prefix
+cosupport inclusion. The prefix statement follows by the same
+induction, taking at each step the actual adapted old carrier supplied
+by that very step's centre record.
+
+The existing actual separation geometry makes the entire terminal
+strict old carrier closed and smooth, gives its genuine transversality
+to the literal accumulated boundary, and makes their appended list
+SNC. The original marked cosupport is closed by coherence. Apply the
+actual permitted-set separation geometry with this same closed set:
+the assumed original double-locus inclusion places every actual
+centre over it and makes the literal tower an admissible blowup
+sequence permitted there. The centres avoid its entire complement;
+the actual blowup projection is therefore an isomorphism on that
+whole complement. All these conclusions concern the same internally
+chosen tower and the unchanged original ideal and marking.
+\end{proof}

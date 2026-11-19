@@ -1,0 +1,103 @@
+\section{Actual analytic realization of normal weighted components}
+
+\begin{definition}[The genuine normal homogeneous polynomial of an original analytic germ]
+\label{hir:actual-normal-homogeneous-polynomial}
+\uses{hir:actual-relative-coefficient-polynomial-truncations,hir:actual-relative-coefficient-germ-stability}
+\lean{Hironaka.HironakaActualNormalHomogeneousComponents.actualNormalHomogeneousPolynomial,Hironaka.HironakaActualNormalHomogeneousComponents.actualNormalHomogeneousPolynomial_coefficient,Hironaka.HironakaActualNormalHomogeneousComponents.actualNormalHomogeneousPolynomial_isHomogeneous}
+\leanok
+For an original ambient analytic germ $g$ in $d+t$ coordinates and
+$q\ge0$, take the degree-$q$ homogeneous component of its genuine
+normal Taylor polynomial modulo the $(q+1)$-st normal power. This is a
+finite polynomial in the normal variables with original entire tangent
+holomorphic germs as coefficients. Its coefficient at $\gamma$ is the
+actual stable relative coefficient of $g$ if $|\gamma|=q$, and zero
+otherwise. It is homogeneous of normal degree $q$.
+\end{definition}
+\begin{proof}
+The normal Taylor polynomial is constructed by the inverse of the
+actual normal-power quotient basis. Its coefficients of degree below
+$q+1$ are the genuine stable relative coefficient germs. The original
+finite polynomial homogeneous-component map retains exactly coefficients
+of degree $q$, all of which lie in that range, and replaces all other
+coefficients by zero. Its genuine homogeneous-component theorem gives
+the stated normal homogeneity. No infinite series is evaluated away
+from its origin.
+\end{proof}
+
+\begin{theorem}[The actual analytic normal symbol realizes the entire formal weighted component]
+\label{hir:actual-normal-homogeneous-entire-taylor-realization}
+\uses{hir:actual-normal-homogeneous-polynomial,hir:actual-relative-polynomial-formal-taylor-coefficient,hir:actual-relative-coefficient-literal-formal-taylor-dictionary,hir:actual-weighted-component-definition}
+\lean{Hironaka.HironakaActualNormalHomogeneousComponents.actualTaylor_normalHomogeneousPolynomial}
+\leanok
+Evaluate that genuine finite normal polynomial using the original
+normal coordinate germs and actual tangent pullback. Its entire original
+Taylor series is exactly the actual weight-$q$ component of the entire
+Taylor series of $g$, with weights zero on the tangent block and one
+on the normal block.
+\end{theorem}
+\begin{proof}
+Every actual exponent splits uniquely into its original tangent exponent
+$\beta$ and normal exponent $\gamma$. The genuine relative polynomial
+Taylor dictionary identifies its joined coefficient with the $\beta$
+coefficient of the true tangent Taylor series of the polynomial's
+$\gamma$ coefficient. If $|\gamma|=q$, the preceding coefficient formula
+and the literal whole relative-coefficient dictionary identify this
+with the original joined coefficient of Taylor$(g)$. Otherwise it is
+zero. The actual weight of a joined exponent is precisely
+$|\gamma|$, so this is exactly the coefficient rule for the original
+weighted component at every exponent. Genuine formal coefficient
+extensionality proves equality of the entire series.
+\end{proof}
+
+\begin{theorem}[The entire analytic vertex-symbol ideal has precisely the genuine weighted formal extension]
+\label{hir:actual-analytic-normal-vertex-symbol-formal-extension}
+\uses{hir:actual-normal-homogeneous-entire-taylor-realization,hir:actual-analytic-vertex-coefficient-data}
+\lean{Hironaka.HironakaActualNormalHomogeneousComponents.actualAnalyticNormalVertexComponentIdeal,Hironaka.HironakaActualNormalHomogeneousComponents.actualAnalyticNormalVertexComponentIdeal_formal_extension}
+\leanok
+For genuine analytic monic vertex data of the original ideal $I$, span
+the actual normal homogeneous polynomial evaluations of the actual
+vertex members, each at the normal weight of its true vertex exponent.
+The entire original Taylor extension of this analytic ideal is exactly
+the span of the genuine formal weighted components of those same
+original Taylor members at those same vertex weights.
+\end{theorem}
+\begin{proof}
+The original Taylor algebra homomorphism sends each actual analytic
+generator to its displayed entire formal component by the preceding
+theorem. The image of a whole ideal span is the whole span of the actual
+images. Applying this literal identity to the actual generator range
+gives both entire ideal directions, retaining the original coefficients,
+vertex weights and monomial order.
+\end{proof}
+
+\begin{theorem}[Only the original analytic ideal supplies every whole analytic vertex-symbol HS bound]
+\label{hir:actual-original-analytic-normal-vertex-symbol-hs-bound}
+\uses{hir:actual-original-analytic-vertex-coefficient-data-existence,hir:actual-analytic-normal-vertex-symbol-formal-extension,hir:actual-weighted-vertex-ideal-hs-bound,hir:actual-unshifted-original-formal-hs-transfer}
+\lean{Hironaka.HironakaActualNormalHomogeneousComponents.exists_actualAnalyticNormalVertexComponentIdeal_hs_le}
+\leanok
+Every original analytic ideal internally supplies genuine analytic monic
+vertex data for which the entire actual normal-symbol ideal has every
+unchanged original analytic Hilbert--Samuel value at most the
+corresponding unchanged original value of $I$.
+\end{theorem}
+\begin{proof}
+Construct genuine analytic vertex coefficient data from the original
+ideal using the proved existence theorem. Their actual Taylor members
+belong to the genuine whole formal extension, have coefficient one at
+the actual vertices and vanish below them, hence give a genuine monic
+vertex family for that entire original formal ideal. The preceding
+whole ideal image identity identifies the actual analytic symbol ideal's
+formal extension with its genuine weighted vertex-component ideal.
+The proved weighted diagram inclusion and standard-index injection give
+the all-order genuine formal HS inequality. The actual whole Taylor
+quotient equivalence identifies each of these genuine formal dimensions
+with the unchanged original analytic HS value. Combining these facts
+proves every order simultaneously, with no coefficient, convergence,
+comparison or finite-generator certificate supplied by the caller.
+\end{proof}
+
+This constructs actual analytic normal symbols and their full HS bound.
+Their comparison with actual exceptional normalized quotients still
+requires genuine centre-power compatibility and the true exceptional
+restriction calculation. Selection of general permissible centres and
+the general positive-dimensional Bennett theorem remain open.

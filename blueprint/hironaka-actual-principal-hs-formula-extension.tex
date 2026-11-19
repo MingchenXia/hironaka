@@ -1,0 +1,91 @@
+\section{Every original Hilbert--Samuel value of an actual principal germ ideal}
+
+Let $R=\mathcal O_{\mathbb C^n,0}$ with its original constant-germ complex
+action and actual maximal ideal $\mathfrak m$. For $f\ne0$ let $\mu$ be
+its internally chosen actual order. Write
+$H_{(f)}(\ell)=\dim_{\mathbb C}R/((f)+\mathfrak m^{\ell+1})$ for the
+existing intrinsic quotient dimension. This identifies the dependence of
+the hypersurface Hilbert--Samuel function on its order that is used, for
+example, in \cite[Example 11.15, p.~291]{bierstone-milman97-invent-math}.
+Here that dependence follows directly from genuine original finite jets;
+no proposed HS profile, abstract replacement ring or comparison certificate
+is an input. The general nonprincipal case requires further geometry.
+
+\begin{theorem}[The actual principal jet quotient is the genuine cokernel]
+\label{hir:actual-principal-jet-projection-kernel}
+\lean{Hironaka.HironakaActualPrincipalHSFormula.actualPrincipalJetProjection,Hironaka.HironakaActualPrincipalHSFormula.actualPrincipalJetProjection_mk,Hironaka.HironakaActualPrincipalHSFormula.actualPrincipalJetProjection_surjective,Hironaka.HironakaActualPrincipalHSFormula.actualPrincipalJetProjection_kernel}
+\leanok
+\uses{hir:actual-principal-multiplication-jet-map,hir:actual-principal-multiplication-jet-injective-image}
+The actual quotient projection
+\[
+ P_{f,q}:R/\mathfrak m^q\longrightarrow R/((f)+\mathfrak m^q)
+\]
+is complex-linear, surjective, and sends the class of EVERY original $g$
+to the class of this same $g$. If $f\in\mathfrak m^\mu$ and $q=s+\mu$,
+its whole kernel is the range of the genuine map $M_{f,s}$.
+\end{theorem}
+\begin{proof}
+Descend the actual original quotient map along
+$\mathfrak m^q\subset(f)+\mathfrak m^q$. This retains every original
+representative, its original complex action, and is surjective because
+each target class has such a representative. A class $[g]_q$ is in its
+kernel exactly when $g\in(f)+\mathfrak m^q$. Express such a $g$ as
+$h+k$ with $h\in(f)$ and $k\in\mathfrak m^q$. Its class equals $[h]_q$,
+which lies in the whole principal image by the preceding genuine image
+theorem. Conversely any original multiple of $f$ maps to zero in the
+target quotient. These two implications identify the entire kernel with
+the actual range, before taking any dimensions.
+\end{proof}
+
+\begin{theorem}[The actual finite-jet exact dimension identity]
+\label{hir:actual-principal-jet-exact-dimensions}
+\lean{Hironaka.HironakaActualPrincipalHSFormula.actualPrincipalJetDimension_add}
+\leanok
+\uses{hir:actual-principal-jet-projection-kernel,hir:actual-principal-multiplication-jet-injective-image,hir:actual-point-quotient-finite-dimensional}
+If $f\in\mathfrak m^\mu\setminus\mathfrak m^{\mu+1}$, then for every
+$s\ge0$ the genuine original quotients satisfy
+\[
+ \dim_{\mathbb C}R/((f)+\mathfrak m^{s+\mu})
+ +\dim_{\mathbb C}R/\mathfrak m^s
+ =\dim_{\mathbb C}R/\mathfrak m^{s+\mu}.
+\]
+\end{theorem}
+\begin{proof}
+All the actual maximal-power quotients are finite-dimensional, as are their
+principal quotients and subspaces. The preceding surjective projection
+has whole kernel equal to the actual multiplication range. Genuine
+injectivity of $M_{f,s}$ identifies the dimension of that range with the
+dimension of its actual source $R/\mathfrak m^s$. Rank--nullity for the
+actual original projection gives the displayed identity. This also covers
+$s=0$, whose source quotient is zero, and $\mu=0$, when multiplication by
+the unit is bijective and the principal quotient is zero.
+\end{proof}
+
+\begin{theorem}[Every actual original principal Hilbert--Samuel order]
+\label{hir:actual-principal-entire-hilbert-samuel-formula}
+\lean{Hironaka.HironakaActualPrincipalHSFormula.hilbertSamuelValue_actual_principal,Hironaka.HironakaActualPrincipalHSFormula.hilbertSamuelValue_actual_principal_order}
+\leanok
+\uses{hir:actual-nonzero-holomorphic-germ-finite-order,hir:actual-principal-jet-exact-dimensions,hir:relative-normal-actual-base-jet-binomial-dimension,hir:actual-hilbert-samuel-point-value}
+For every actual nonzero original holomorphic germ $f$, every $\ell\ge0$,
+and its actual order $\mu$,
+\[
+ H_{(f)}(\ell)=\binom{n+\ell}{n}
+ -\begin{cases}\binom{n+\ell-\mu}{n},&\mu\le\ell,\\0,&\ell<\mu.\end{cases}
+\]
+This is the existing HS quotient dimension of the entire actual principal
+ideal, including zero ambient dimension and units.
+\end{theorem}
+\begin{proof}
+The actual finite-order producer supplies both original maximal-power
+conditions. If $\ell<\mu$, then $(f)\subset\mathfrak m^{\ell+1}$, so
+the entire original quotient is exactly $R/\mathfrak m^{\ell+1}$ and the
+actual base-jet binomial dimension proves the formula. If $\mu\le\ell$,
+put $s=\ell-\mu+1$. Then $s+\mu=\ell+1$ and both ambient-power
+quotients in the preceding exact dimension identity have positive cutoffs.
+Their actual monomial counts are respectively
+$\binom{n+\ell-\mu}{n}$ and $\binom{n+\ell}{n}$. Subtract the former
+from the identity. Its nonnegativity follows already from that identity,
+so natural subtraction gives precisely the stated original HS value.
+No flatness, blowup comparison or semicoherent transformed presentation is
+deduced from this principal calculation alone.
+\end{proof}

@@ -1,0 +1,102 @@
+\section{Effective divisors and finite component sums}
+
+Effective divisors on a complex manifold are represented by their invertible
+ideal sheaves. The following arithmetic uses these actual ideals, so that a
+component factorization yields an equality of effective divisors, including
+multiplicities, rather than only an equality of supports.
+
+\begin{definition}[Addition and zero for effective divisors]
+\label{hir:effective-divisor-addition}
+The zero divisor has ideal $\mathcal O_X$. For effective divisors $D$ and $G$,
+define $D+G$ by
+$\mathcal O_X(-D-G)=\mathcal O_X(-D)\mathcal O_X(-G)$.
+\lean{Hironaka.HironakaEffectiveDivisorSum.instZeroEffectiveDivisor,Hironaka.HironakaEffectiveDivisorSum.instAddEffectiveDivisor}
+\leanok
+\end{definition}
+The unit ideal is invertible, with generator $1$. Products of invertible
+ideals are invertible: on the intersection of their generator neighborhoods
+the product generator is the product of the two generators. Its nonvanishing
+on every nonempty open subset follows by successively avoiding the zero sets
+of the two generators. Thus both operations produce effective divisors.
+
+\begin{lemma}[Commutative additive arithmetic]
+\label{hir:effective-divisor-additive-monoid}
+\uses{hir:effective-divisor-addition}
+Effective divisors form a commutative additive monoid. Two effective divisors
+are equal if and only if their invertible ideals are equal.
+\lean{Hironaka.HironakaEffectiveDivisorSum.instAddCommMonoidEffectiveDivisor,Hironaka.HironakaEffectiveDivisorSum.effectiveDivisor_eq_of_ideal_eq}
+\leanok
+\end{lemma}
+\begin{proof}
+The representation of a divisor consists of its ideal and the proposition
+that the ideal is invertible, so equality of the ideals gives equality of
+the divisors. Commutativity of products of ideals follows by interchanging
+the two factors of each product generator. Associativity follows by
+expanding finite holomorphic combinations twice and collecting their
+products. The unit ideal is neutral because an ideal absorbs holomorphic
+combinations of its members, while every member is its own product with
+$1$. Invertible ideals are coherent, so these identities apply to all
+effective divisors and prove the monoid laws.
+\end{proof}
+
+\begin{lemma}[Natural multiples and their support]
+\label{hir:effective-divisor-multiples}
+\uses{hir:effective-divisor-additive-monoid}
+For every $a\in\mathbb N$ and every effective divisor $D$,
+$\mathcal O_X(-aD)=\mathcal O_X(-D)^a$.
+The support of $0$ is empty, the support of $D+G$ is
+$\operatorname{Supp}D\cup\operatorname{Supp}G$, and for $a>0$ the support
+of $aD$ is the support of $D$.
+\lean{Hironaka.HironakaEffectiveDivisorSum.ideal_nsmul,Hironaka.HironakaEffectiveDivisorSum.support_zero,Hironaka.HironakaEffectiveDivisorSum.support_add,Hironaka.HironakaEffectiveDivisorSum.support_nsmul}
+\leanok
+\end{lemma}
+\begin{proof}
+The ideal identity follows by induction on $a$, using the unit ideal at
+$a=0$ and multiplication by $\mathcal O_X(-D)$ at the successor step.
+At a point outside the zero loci of two ideals choose a nonzero value from
+each; their product is a product generator with nonzero value. At a point
+of either zero locus every product generator, and hence every holomorphic
+combination of them, vanishes. This proves the union identity for support.
+The unit ideal contains $1$, so has empty zero locus. The support of a
+positive multiple follows by induction and the union identity.
+\end{proof}
+
+\begin{lemma}[A smooth hypersurface defines an effective divisor]
+\label{hir:smooth-hypersurface-effective-divisor}
+A closed smooth hypersurface $H$ defines an effective divisor $[H]$ with
+ideal $\mathcal I_H$ and support $H$; the empty hypersurface is permitted.
+\lean{Hironaka.HironakaEffectiveDivisorSum.hypersurfaceDivisor,Hironaka.HironakaEffectiveDivisorSum.ideal_hypersurfaceDivisor,Hironaka.HironakaEffectiveDivisorSum.support_hypersurfaceDivisor}
+\leanok
+\end{lemma}
+\begin{proof}
+Flattening coordinates identify $H$ locally with the vanishing of one
+coordinate. Hadamard division shows that this coordinate generates
+$\mathcal I_H$ there. Off the closed set $H$ the generator is $1$.
+A hypersurface has empty ambient interior, since a regular point of an
+open subset of the ambient manifold has dimension $n$, whereas a regular
+point of $H$ has dimension $n-1$. Thus its local generator is identically
+zero on no nonempty open subset. This proves invertibility. Members of
+$\mathcal I_H$ vanish at every point of $H$, and off $H$ the germ of $1$
+is a member; hence its support is exactly $H$.
+\end{proof}
+
+\begin{theorem}[Actual finite component sum]
+\label{hir:component-product-effective-sum}
+\uses{hir:effective-divisor-multiples,hir:smooth-hypersurface-effective-divisor}
+For a finite list $A=((H_1,a_1),\ldots,(H_s,a_s))$ of closed smooth
+hypersurfaces with natural coefficients, the effective divisor
+$\sum_{i=1}^s a_i[H_i]$ has ideal
+$\mathcal I_{H_1}^{a_1}\cdots\mathcal I_{H_s}^{a_s}$.
+Consequently an equality of an effective divisor's ideal with this product
+gives equality of that divisor with this finite sum.
+\lean{Hironaka.HironakaEffectiveDivisorSum.ideal_componentSum,Hironaka.HironakaEffectiveDivisorSum.eq_componentSum_of_ideal_eq}
+\leanok
+\end{theorem}
+\begin{proof}
+Construct each $[H_i]$ by the preceding lemma. Starting with the zero
+divisor, form the finite sum using addition and natural multiplication.
+Induction on the list, with the power identity for each summand and the
+product identity for addition, gives the asserted ideal. Equality of
+ideals then gives equality of effective divisors. This argument permits
+the empty list, zero coefficients and repeated hypersurfaces.
+\end{proof}

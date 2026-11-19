@@ -1,0 +1,141 @@
+\section{Effective gluing over the actual complex point}
+
+Let $D$ be genuine native locally ringed open gluing data with pieces
+$X_i$ and overlap maps $f_{ij},t_{ij}$. Let
+$\sigma_i:X_i\to\mathrm{pt}_{\mathbb C}$ be their actual structural maps.
+Assume the usual overlap equality
+$f_{ij}\sigma_i=t_{ij}f_{ji}\sigma_j$.
+
+\begin{theorem}[The actual complex structural map descends uniquely]
+\label{hir:reduced-analytic-glue-complex-structural-map}
+\uses{hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaReducedComplexAnalyticGluing.gluedPointMap,Hironaka.HironakaReducedComplexAnalyticGluing.gluedPointMap_ι,Hironaka.HironakaReducedComplexAnalyticGluing.gluedPointMap_unique}
+The actual native glued locally ringed space has an internally
+constructed, unique map to the complex point whose restriction to
+each genuine chart inclusion is $\sigma_i$.
+\leanok
+\end{theorem}
+\begin{proof}
+The overlap equalities are precisely the two-arrow compatibility
+conditions for the native gluing multicoequalizer. Its actual descent
+map constructs the structural morphism. The multicoequalizer's actual
+chart equations prove the prescribed restrictions, and its morphism
+extensionality proves uniqueness. No global structural map is supplied.
+\end{proof}
+
+\begin{theorem}[Countably many actual analytic charts give second countability]
+\label{hir:reduced-analytic-glue-second-countable}
+\uses{hir:reduced-analytic-space-category}
+\lean{Hironaka.HironakaReducedComplexAnalyticGluing.secondCountable_glued}
+If the index type is countable and every original piece over the
+complex point is an object of the actual analytic category, the
+genuine glued topological space is second countable.
+\leanok
+\end{theorem}
+\begin{proof}
+The native chart inclusions are actual open immersions, hence open
+embeddings. Each is a homeomorphism onto its actual open range. These
+ranges inherit second countability from the original analytic pieces.
+They form a countable open cover by genuine joint surjectivity of the
+native chart inclusions. The countable open-cover theorem proves
+second countability of the actual glued space.
+\end{proof}
+
+\begin{theorem}[Actual local analytic models glue to an analytic object]
+\label{hir:reduced-analytic-glue-object}
+\uses{hir:reduced-analytic-glue-complex-structural-map,hir:reduced-analytic-glue-second-countable,hir:reduced-analytic-space-category,hir:reduced-analytic-abstract-stalks-reduced}
+\lean{Hironaka.HironakaReducedComplexAnalyticGluing.hasAnalyticCharts_glued,Hironaka.HironakaReducedComplexAnalyticGluing.gluedAnalyticSpace}
+If the index type is countable, the original pieces are actual analytic
+objects, and the genuine glued topological space is Hausdorff, the
+constructed glued space over the complex point is an object of the
+reduced complex analytic category. Its stalks are reduced local rings.
+\leanok
+\end{theorem}
+\begin{proof}
+Second countability is proved above; Hausdorffness is the stated
+topological gluing condition. Every actual glued point comes from a
+point of an original piece. Choose a genuine closed analytic local
+model at that original point and compose its actual open immersion
+with the native chart inclusion. Composition is an open immersion,
+and the proved structural-map descent equation makes it a chart over
+the complex point. Its actual image contains the given glued point.
+Thus the required analytic local-model property is derived from the
+original pieces. Bundle this property in the native full subcategory.
+Its stalks are reduced by the already proved analytic-model stalk
+theorem, rather than by a new reducedness assumption.
+\end{proof}
+
+\begin{theorem}[The original pieces remain actual open charts]
+\label{hir:reduced-analytic-glue-chart-morphisms}
+\uses{hir:reduced-analytic-glue-object,hir:reduced-analytic-glue-complex-structural-map}
+\lean{Hironaka.HironakaReducedComplexAnalyticGluing.gluedChartMap,Hironaka.HironakaReducedComplexAnalyticGluing.gluedChartMaps_properties}
+The native inclusions are genuine morphisms of the analytic category,
+their underlying locally ringed maps are actual open immersions, and
+their images cover the entire actual glued space.
+\leanok
+\end{theorem}
+\begin{proof}
+Each structural-map descent equation is exactly the commutative
+triangle defining its slice morphism. The native full subcategory
+therefore gives the genuine analytic morphism. Its underlying map is
+the unchanged native chart inclusion, so actual open immersion and
+whole-space coverage are the native gluing theorems themselves.
+\end{proof}
+
+\begin{theorem}[Actual compatible complex-structural maps descend effectively]
+\label{hir:reduced-analytic-glue-effective-map-descent}
+\uses{hir:reduced-analytic-glue-object,hir:reduced-analytic-glue-chart-morphisms,hir:reduced-analytic-glue-complex-structural-map}
+\lean{Hironaka.HironakaReducedComplexAnalyticGluing.gluedAnalyticMap,Hironaka.HironakaReducedComplexAnalyticGluing.exists_unique_glued_analytic_map}
+Actual locally ringed maps from the original pieces to an analytic
+object, compatible on the genuine overlaps and over the complex point,
+internally construct a unique morphism from the glued analytic object
+with exactly these actual chart restrictions.
+\leanok
+\end{theorem}
+\begin{proof}
+Use the actual native multicoequalizer to construct the global locally
+ringed map from the given compatible piece maps. On every original
+chart, its composition with the target structural map equals the
+source structural map, by the given local triangles and the proved
+descent equations. Multicoequalizer extensionality therefore proves
+the actual global structural triangle. It is a genuine slice morphism,
+hence an analytic-category morphism. Its actual chart restrictions
+are the original maps by the native descent equations. If another
+analytic morphism has those same restrictions, native multicoequalizer
+extensionality makes its underlying locally ringed map equal to this
+one. Slice and full-subcategory extensionality prove uniqueness.
+\end{proof}
+
+\begin{theorem}[Original two-model holomorphic data construct an actual analytic space]
+\label{hir:reduced-analytic-original-two-model-gluing}
+\uses{hir:reduced-analytic-glue-object,hir:reduced-analytic-glue-chart-morphisms,hir:actual-two-model-native-glue-data,hir:actual-two-model-complex-structural-compatibility,hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaReducedComplexAnalyticGluing.actualTwoModelAnalyticSpace,Hironaka.HironakaReducedComplexAnalyticGluing.actualTwoModelChartMap,Hironaka.HironakaReducedComplexAnalyticGluing.actualTwoModelChartMap_properties}
+Let the input consist of two original closed analytic models, original
+open overlaps, actual holomorphic transition functions, and their
+inverse identities on the original subsets. If the actual constructed
+glued topological space is Hausdorff, these ordinary data internally
+construct an object of the analytic category. Its underlying locally
+ringed space is the actual native gluing, and the unchanged original
+model inclusions are genuine analytic open immersions covering it.
+\leanok
+\end{theorem}
+\begin{proof}
+The actual quotient-model construction produces the native overlap
+maps, inverse isomorphisms and gluing data from the original functions.
+Its proved structural-map compatibilities provide precisely the
+descent equations above. Each original closed analytic model has the
+proved actual analytic local-model property. The two-element index
+type is countable. Apply the proved actual gluing construction with
+the stated Hausdorff condition. Its underlying object is literally
+the native glued locally ringed space, and its chart maps are the
+unchanged native inclusions by definition. Their structural triangles,
+open immersion properties and joint coverage have already been
+proved. Thus no locally ringed gluing datum, local-model certificate,
+or analytic-space object is supplied by the caller.
+\end{proof}
+
+Hausdorffness is an explicit condition: gluing Hausdorff pieces along
+opens can produce a non-Hausdorff space. These results construct an
+actual scalar-compatible analytic atlas gluing and its effective map
+descent. Compatibility and descent of resolution centres, blowups and
+terminal resolution histories remain separate geometric obligations.

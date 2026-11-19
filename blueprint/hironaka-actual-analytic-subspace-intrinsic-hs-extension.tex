@@ -1,0 +1,113 @@
+\section{Intrinsic whole-stalk Hilbert--Samuel profiles across actual presentations}
+
+Let $C\subset M^n$ and $D\subset N^m$ be actual subsets of complex manifolds.
+Every ring used here is the genuine sheaf-colimit stalk or the entire
+original vanishing-ideal quotient, and $n$ and $m$ may differ. The input
+is an actual locally ringed isomorphism over the original complex point,
+not an ambient biholomorphism or a supplied scalar-compatible stalk map.
+
+\begin{theorem}[The actual complex structure produces genuine whole-stalk algebra maps]
+\label{hir:actual-analytic-subspace-intrinsic-stalk-algebra}
+\uses{hir:actual-analytic-subspace-stalk-residue-evaluation,hir:actual-analytic-subspace-scalar-map-point-values}
+\lean{Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceStalkAlgebra,Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceStalkChartAlgEquiv,Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceStalkMapAlgHom,Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceIsoStalkAlgEquiv}
+\leanok
+The actual original constant map equips each actual stalk with its genuine
+$\mathbf C$-algebra structure. Its whole original chart-quotient equivalence
+is a $\mathbf C$-algebra equivalence. Any actual model morphism commuting
+with the original complex-point maps induces a genuine $\mathbf C$-algebra
+map on its whole stalks; if it is an actual isomorphism, the same original
+stalk map is an internally constructed $\mathbf C$-algebra equivalence.
+\end{theorem}
+\begin{proof}
+Use the constructed actual constant ring homomorphism $\mathbf C\to\mathcal
+O_{C,x}$ for the algebra structure. Its definition through the actual whole
+chart quotient immediately shows that the chart equivalence preserves the
+original scalar constants. Apply stalk functoriality to the actual complex
+structural triangle of a morphism. The previously proved structural-point
+stalk formula identifies both structural images of a complex constant with
+the actual constant. Thus the original whole stalk ring map preserves every
+scalar, which constructs its algebra-map structure without a scalar
+certificate premise. For an isomorphism, the actual native stalk map is an
+isomorphism of commutative rings; retaining the same map and its just proved
+scalar identity upgrades that genuine ring equivalence to an algebra
+equivalence. No ambient map is selected in this construction.
+\end{proof}
+
+\begin{theorem}[An intrinsic actual isomorphism preserves every entire maximal-power quotient]
+\label{hir:actual-analytic-subspace-intrinsic-maximal-jets}
+\uses{hir:actual-analytic-subspace-intrinsic-stalk-algebra}
+\lean{Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceIsoJetAlgEquiv,Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceIsoJetAlgEquiv_mk}
+\leanok
+For an original isomorphism $e:C\simeq D$ over the complex point and every
+$q\ge0$, its original stalk map induces a genuine $\mathbf C$-algebra
+equivalence
+\[
+ \mathcal O_{D,e(x)}/\mathfrak m_{D,e(x)}^q
+   \simeq_{\mathbf C} \mathcal O_{C,x}/\mathfrak m_{C,x}^q.
+\]
+On every original numerator it sends its class to the class of the same
+actual original stalk pullback.
+\end{theorem}
+\begin{proof}
+The actual stalk algebra equivalence is surjective, so it maps the entire
+maximal ideal of the actual target local ring onto that of the actual source
+local ring. Images of ideals commute with products, hence with every power,
+including power zero. The actual quotient-algebra equivalence therefore
+constructs the displayed map. Its original quotient numerator formula
+retains the original stalk pullback on every class.
+\end{proof}
+
+\begin{theorem}[The original ambient Hilbert--Samuel function is the actual intrinsic profile]
+\label{hir:actual-analytic-subspace-intrinsic-hs-dictionary}
+\uses{hir:actual-analytic-subspace-intrinsic-stalk-algebra,hir:actual-analytic-subspace-inclusion-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceStalkJetChartAlgEquiv,Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceStalkJet_finiteDimensional,Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.actualSubspaceStalkHS_eq_original}
+\leanok
+Define the actual intrinsic profile by
+$H_C(x,\ell)=\dim_{\mathbf C}(\mathcal O_{C,x}/\mathfrak m_{C,x}^{\ell+1})$.
+This is exactly the existing original
+$\operatorname{hilbertSamuelAt}(I_C,x,\ell)$, with no replacement of the
+whole original vanishing ideal by chosen generators. Every actual maximal-power quotient is finite dimensional,
+including order zero.
+\end{theorem}
+\begin{proof}
+The actual whole-stalk chart algebra equivalence identifies
+$\mathcal O_{C,x}$ with the entire original quotient $A/I$, where $A$ is
+the original holomorphic germ algebra. Its maximal ideal is the image of
+$\mathfrak m_A$, because the actual quotient map is surjective between
+local rings and $x\in C$ ensures $I$ is proper. Consequently its $q$th power
+is the image of $\mathfrak m_A^q$. Transport the whole actual maximal-power
+quotient through the chart equivalence. The genuine quotient-of-quotient
+algebra isomorphism then identifies it with $A/(I+\mathfrak m_A^q)$.
+The original ambient finite-jet construction proves that these whole original
+quotients are finite dimensional; transport through the constructed equivalence
+gives finite dimensionality of each actual intrinsic quotient. Taking actual
+complex vector-space dimensions at $q=\ell+1$ gives precisely
+the existing original definition of the Hilbert--Samuel value, hence the
+claimed equality of actual functions.
+\end{proof}
+
+\begin{theorem}[Original intrinsic isomorphisms preserve the complete existing Hilbert--Samuel profile]
+\label{hir:actual-analytic-subspace-intrinsic-hs-invariance}
+\uses{hir:actual-analytic-subspace-intrinsic-maximal-jets,hir:actual-analytic-subspace-intrinsic-hs-dictionary}
+\lean{Hironaka.HironakaActualAnalyticSubspaceIntrinsicHS.hilbertSamuelAt_vanishing_intrinsic_iso}
+\leanok
+For any actual original complex-point-compatible model isomorphism
+$e:C\simeq D$, every $x\in C$ and every $\ell\ge0$ satisfy
+\[
+ \operatorname{hilbertSamuelAt}(I_C,x,\ell)
+ =\operatorname{hilbertSamuelAt}(I_D,e(x),\ell).
+\]
+The ambient dimensions are independent. Only the original isomorphism and
+its actual complex-point structural triangle are inputs.
+\end{theorem}
+\begin{proof}
+At each order, the actual intrinsic quotient algebra equivalence gives a
+complex linear equivalence, hence equality of the actual dimensions. Apply
+the proved original/intrinsic dictionary on both sides. The construction
+works for every order of the same original isomorphism; no finite-order
+truncation certificate or ambient equality is used.
+\end{proof}
+
+This is an intrinsic overlap invariant for the actual locally ringed models.
+Descent of resolution towers and terminal resolution on arbitrary abstract
+analytic spaces remain separate obligations.

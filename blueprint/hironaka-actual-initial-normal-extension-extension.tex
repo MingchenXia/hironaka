@@ -1,0 +1,103 @@
+\section{The same whole actual initial cone is the extension of its literal normal contraction}
+
+Keep the actual tangent/normal blocks $\operatorname{Fin}(d+t)$,
+with the original normal embedding $\nu=\operatorname{Fin.natAdd}(d)$.
+Let $r$ be literal polynomial rename along $\nu$, let $\rho$ be
+literal formal-series rename along the same embedding, and let
+$\iota_t,\iota_{d+t}$ be the existing polynomial-series inclusions.
+All contractions below use these actual homomorphisms.
+
+\begin{theorem}[Actual polynomial and entire-series normal renaming commute, also on whole ideal extensions]
+\label{hir:actual-polynomial-series-normal-rename-square}
+\lean{Hironaka.HironakaActualInitialNormalExtension.polynomialSeries_normalRename_square,Hironaka.HironakaActualInitialNormalExtension.polynomialSeries_normalExtension_map}
+\leanok
+The existing genuine homomorphisms satisfy
+$\iota_{d+t}\circ r=\rho\circ\iota_t$.
+Consequently, for every actual polynomial ideal $L$ in the original
+normal variables,
+\[
+ \operatorname{map}(\iota_{d+t})(\operatorname{map}(r)(L))
+ =\operatorname{map}(\rho)(\operatorname{map}(\iota_t)(L)).
+\]
+These are whole original ideal equalities, not just coefficient
+values or a newly selected normal ideal.
+\end{theorem}
+\begin{proof}
+The existing genuine rename theorem for the literal inclusion says
+for every original polynomial that formal renaming of its included
+series equals inclusion of its polynomial rename. This is exactly
+equality of the two composite ring homomorphisms by homomorphism
+extensionality. Actual ideal-map composition gives both displayed
+whole ideal sides as the map of $L$ by the respective composite;
+the homomorphism equality gives their equality. Finite normal
+indices ensure the actual series rename has finite fibres, also in
+the empty tangent or empty normal block cases.
+\end{proof}
+
+\begin{theorem}[Genuine polynomial tangent partial stability forces the same whole actual formal initial ideal to be its normal extension]
+\label{hir:actual-whole-initial-normal-extension-of-polynomial-tangent-stability}
+\uses{hir:actual-polynomial-series-normal-rename-square,hir:actual-whole-initial-ideal-polynomial-contraction-extension,hir:differential-stable-normal-polynomial-cylinder}
+\lean{Hironaka.HironakaActualInitialNormalExtension.actualHomogeneousInitialIdeal_eq_normal_extension_of_tangent_pderiv}
+\leanok
+Let $K$ be any actual entire formal ideal in the original ambient
+series ring, and let $J=\operatorname{actualHomogeneousInitialIdeal}(K)$.
+If every literal polynomial whose series inclusion lies in this same
+$J$ retains that membership after every actual tangent polynomial
+partial derivative, then
+\[
+ J=\operatorname{Ideal.map}(\rho)
+       \bigl(\operatorname{Ideal.comap}(\rho)(J)\bigr).
+\]
+The ideal on the right is the literal formal normal-variable
+contraction of the same whole $J$.
+\end{theorem}
+\begin{proof}
+Set $J_{\rm pol}=\operatorname{comap}(\iota_{d+t})(J)$, the literal
+polynomial contraction. The hypothesis is exactly genuine tangent
+partial stability of this actual polynomial ideal. Apply the actual
+finite-block polynomial cylindrical criterion to obtain
+$J_{\rm pol}=\operatorname{map}(r)(\operatorname{comap}(r)(J_{\rm pol}))$.
+The accepted whole initial-ideal contraction theorem says
+$J=\operatorname{map}(\iota_{d+t})(J_{\rm pol})$, using every genuine
+homogeneous initial form. The preceding commuting square therefore
+writes this unchanged entire $J$ as $\operatorname{map}(\rho)(L)$,
+where $L$ is extension by $\iota_t$ of the actual normal polynomial
+contraction. For any genuine ideal map, extending, contracting, and
+extending again gives the same whole extended ideal. Apply this
+actual map/comap identity to $L$ and substitute the proved equality
+$J=\operatorname{map}(\rho)(L)$. It gives exactly the displayed
+identity with the literal full formal contraction of $J$; no
+surjectivity of polynomial inclusion or convergence of arbitrary
+formal coefficients is assumed.
+\end{proof}
+
+\begin{theorem}[Only original HS-constant centre geometry gives the same original origin initial cone as a whole normal extension]
+\label{hir:actual-original-hs-centre-whole-initial-normal-extension}
+\uses{hir:actual-whole-initial-normal-extension-of-polynomial-tangent-stability,hir:actual-original-hs-centre-whole-initial-tangent-pderiv}
+\lean{Hironaka.HironakaActualInitialNormalExtension.exists_original_hs_constant_centre_initial_normal_extension}
+\leanok
+From the original coherent ideal, actual regular centre and original
+intrinsic HS constancy, choose one actual original flattening,
+original generating family and genuine opens before all orders as
+in the accepted tangent partial theorem. Retain exactly its literal
+original origin ideal $I_0$, its actual whole Taylor extension
+$K_0=\operatorname{map}(\operatorname{actualUnshiftedTaylorAlgHom})(I_0)$,
+and the same $J_0=\operatorname{actualHomogeneousInitialIdeal}(K_0)$.
+Then $J_0=\operatorname{map}(\rho)(\operatorname{comap}(\rho)(J_0))$.
+There is no normal-form, derivative-stability, normal-flatness or
+compatible vertex-family certificate among the caller inputs.
+\end{theorem}
+\begin{proof}
+The accepted original geometric tangent theorem internally chooses
+one original flattening/family/opens, retains the entire translated
+original-sheaf ideal dictionary, and proves literal polynomial
+partial stability of this exact $J_0$ in every original tangent
+coordinate. Its input assumptions are only the stated original
+geometry. Apply the preceding whole actual normal-extension theorem
+to the literal same $K_0$ and that internally proved stability.
+All original geometric witnesses and ideal dictionaries are retained.
+This is a closed-fibre origin initial-cone identity. No common
+all-order open, canonical reduced basis, original whole normal-power
+membership, normal flatness or general Bennett theorem follows here
+without their separate genuine filtered/analytic bridges.
+\end{proof}

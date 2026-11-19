@@ -1,0 +1,197 @@
+\section{Actual coherent controlled transforms across order-mask boundaries}
+
+The constructed general invariant forms its literal companion on an open
+order mask. The following producers use the actual globally defined
+companion and coefficient ideals, with their actual colon-controlled
+transforms, and prove their exact restriction identities. In particular
+the extension is the same ideal used by the actual invariant on the mask,
+not an independently supplied ideal or extension certificate.
+
+\begin{lemma}[Coherence of the actual colon along a carrier without inclusion]
+\label{hir:coherent-transform-colon-without-inclusion}
+\uses{ana:restricted-ideals,oka:coherent-colon}
+\lean{Hironaka.HironakaCoherentTransformExtension.isCoherent_colonAlong_without_inclusion}
+\leanok
+If the genuine ideals $I$, $\mathcal I_N$, and $L$ are coherent, their actual
+colon along $N$ is coherent, without any inclusion of $I|_N$ in $L|_N$.
+\end{lemma}
+\begin{proof}
+By its actual definition the colon along $N$ is
+$(I+\mathcal I_N):L$. The actual restricted ideal is coherent by coherent
+sum, and the actual colon of two coherent ideals is coherent by the already
+proved Oka colon theorem. No invertible quotient interpretation or restricted
+inclusion is used in this coherence conclusion.
+\end{proof}
+
+\begin{lemma}[Actual blowup coherence and nonzero-along preservation]
+\label{hir:coherent-transform-step-without-admissibility}
+\uses{hir:coherent-transform-colon-without-inclusion,bcalc:strict-submanifold,bcalc:transform-off-centre,bcalc:inv-domain-stable}
+\lean{Hironaka.HironakaCoherentTransformExtension.isCoherent_geoTransform_ideal_without_inclusion,Hironaka.HironakaCoherentTransformExtension.isNonzeroAlongAt_geoTransform_without_admissibility}
+\leanok
+For an actual blowup along $C\subseteq N$, a genuine closed smooth carrier
+$N$ and coherent $I$, the actual colon-controlled transform $I'$ is coherent.
+If $I$ is genuinely nonzero along $N$ at every point, $I'$ is genuinely
+nonzero along the actual strict transform $N'$ at every point. The centre
+need not lie in the cosupport of this candidate marked ideal.
+\end{lemma}
+\begin{proof}
+The actual strict transform of the closed smooth $N$ is closed smooth.
+Its vanishing ideal is coherent. The actual pullback of $I$ is coherent,
+as are the actual pullback centre ideal and its actual mark power.
+The actual transformed ideal is exactly the colon along $N'$ of these
+ideals, so the preceding producer proves coherence.
+Away from the actual centre, the actual blowup is locally biholomorphic,
+and its actual controlled transform is nonzero along $N'$ by the genuine
+off-centre transform identity. At a point over the centre, suppose every
+germ of the transformed coherent ideal vanished on $N'$ near that point.
+Actual finite coherent generators make this vanishing true for every germ
+at nearby points. Genuine points of the actual strict transform lying over
+$N\setminus C$ accumulate at this point, by the actual closure definition.
+Choose one such nearby point. Its off-centre nonzero germ contradicts the
+produced local vanishing. This proves the actual nonzero property without
+any candidate admissibility hypothesis.
+\end{proof}
+
+\begin{theorem}[Entire actual candidate transforms along a true carrier tower]
+\label{hir:coherent-transform-entire-tower}
+\uses{hir:coherent-transform-step-without-admissibility,hir:tower-split}
+\lean{Hironaka.HironakaCoherentTransformExtension.geoTransformAlong_N_eq_of_N_eq,Hironaka.HironakaCoherentTransformExtension.geoTransformAlong_E_eq_of_E_eq,Hironaka.HironakaCoherentTransformExtension.isClosedSubmanifold_and_isCoherent_geoTransformAlong_sameCarrier,Hironaka.HironakaCoherentTransformExtension.isNonzeroAlongAt_geoTransformAlong_sameCarrier}
+\leanok
+Let $T$ be an actual geometric test tower for $\mathfrak m$. Any genuine
+candidate $\mathfrak j$ with the same initial carrier, a closed smooth
+carrier and coherent ideal has an actual globally coherent colon-controlled
+transform at every prefix of $T$ and exactly the same transformed carrier.
+If its initial ideal is genuinely nonzero along this carrier, its actual
+entire transformed ideal remains so. No test-tower condition for the
+candidate is assumed.
+\end{theorem}
+\begin{proof}
+The actual carrier recursion depends only on the previous carrier and
+literal centre and map, so induction proves equality of the transformed
+carriers. If the initial boundaries also agree, the entire transformed
+boundaries agree by the identical map-and-append recursion; initial carrier
+equality alone is not used to assert boundary equality. Each actual centre
+of the true test tower is contained in the
+transformed carrier of $\mathfrak m$, hence in the candidate's identical
+carrier. Apply the preceding actual blowup producers at the literal step.
+Induction retains genuine closed smoothness, coherence, and nonzero along
+at every step. Reflexive towers and empty centres are included without
+removing any literal tower steps.
+\end{proof}
+
+\begin{theorem}[Exact open restriction of the entire actual controlled transform]
+\label{hir:coherent-transform-restriction-identity}
+\uses{hir:coherent-transform-entire-tower,hir:open-restriction-marked,bcalc:tower-restrict}
+\lean{Hironaka.HironakaCoherentTransformExtension.geoTransformAlong_restrict_sameCarrier}
+\leanok
+In the preceding situation, for any actual open $U$, the literal transformed
+restriction of the candidate along the actual restricted tower equals the
+open pullback of its globally defined actual controlled transform, as marked
+ideals: carrier, divisor, ideal and mark all agree.
+\end{theorem}
+\begin{proof}
+Induct on the actual tower. The genuine one-step restriction equality uses
+only coherence of the input and output controlled ideals; both have been
+internally produced at every actual prefix by the preceding theorem.
+The true open-preimage restriction keeps the literal centre preimage and
+literal restricted blowup map. Apply that actual one-step equality and the
+inductive marked-ideal equality. The result is an exact equality, including
+the actual ambient germs, not just equality of supports or stalk orders.
+\end{proof}
+
+\begin{lemma}[Actual invariant domain for entire candidates]
+\label{hir:coherent-transform-entire-domain}
+\uses{hir:coherent-transform-entire-tower,bcalc:inv-domain-stable}
+\lean{Hironaka.HironakaCoherentTransformExtension.isInvDomain_geoTransformAlong_sameCarrier}
+\leanok
+If the candidate is in the actual dimension-$k$ invariant domain and shares
+the genuine initial carrier and boundary with the well-formed template,
+its actual entire controlled transform along the true template test tower
+is in the same actual invariant domain, even without candidate admissibility.
+\end{lemma}
+\begin{proof}
+Use the produced actual closed smooth carrier, coherent ideal and nonzero
+along property. The genuine transformed carrier and boundary agree exactly
+with the template's, so its actual SNC and transversality conclusions apply.
+The candidate's actual initial carrier dimension bound transfers to the
+template's equal initial carrier; genuine strict-transform dimension
+preservation then gives this bound at every literal stage and equality of
+carriers returns it to the candidate. The actual mark is unchanged and
+positive. These are precisely the real invariant-domain fields.
+\end{proof}
+
+\begin{lemma}[Genuine nonzero-along coefficient companion]
+\label{hir:coherent-transform-coefficient-nonzero}
+\uses{hir:step-one-lower-domain,hir:coherent-transform-entire-domain}
+\lean{Hironaka.HironakaCoherentTransformExtension.isNonzeroAlongAt_barMarked,Hironaka.HironakaCoherentTransformExtension.isInvDomain_barMarked}
+\leanok
+For a genuine coherent positive-mark ideal nonzero along its carrier, its
+actual coefficient-of-homogenized ideal is genuinely nonzero along that
+carrier. Consequently this actual marked construction preserves the true
+invariant domain.
+\end{lemma}
+\begin{proof}
+Choose an actual original ideal germ $g$ nonzero at arbitrarily nearby
+carrier points. The genuine homogenized ideal contains the original ideal,
+so it contains the same actual germ. The coefficient marked sum has its
+actual index-zero summand, since the mark is positive. This summand contains
+the actual power $g^e$ for its actual coefficient-sum exponent $e$, and the
+actual sum therefore contains this genuine power germ. It is nonzero at
+every one of the same nearby carrier points, including when $e=0$.
+This proves genuine nonzero along internally. Coherence, positive mark,
+and equality of the actual carrier and boundary follow from the actual
+coefficient construction. Retaining the same real dimension bound produces
+all invariant-domain fields.
+\end{proof}
+
+\begin{theorem}[The literal order-mask companion has a true coherent entire transform]
+\label{hir:coherent-transform-literal-companion-extension}
+\uses{hir:coherent-transform-entire-tower,hir:coherent-transform-restriction-identity,bcalc:companion-open,bcalc:companion-rebase}
+\lean{Hironaka.HironakaCoherentTransformExtension.coherent_nonzero_companion_transform_and_mask_identity}
+\leanok
+For an actual invariant-domain datum, an actual true head tower and an
+actual true tail, and a positive order $o$, the actual globally defined
+companion formed at that head has a coherent, genuinely nonzero-along,
+entire controlled transform along the tail. Its pullback to the actual
+order-mask preimage equals exactly the literal transformed companion used
+by the constructed general invariant on that actual restricted tail.
+\end{theorem}
+\begin{proof}
+The true head-stage datum lies in the actual invariant domain. The actual
+companion, formed from its actual nonmonomial and monomial ideals, has the
+same carrier, is coherent, has positive mark, and is genuinely nonzero
+along its carrier by the actual companion-domain producer; maximal order
+outside the mask is unnecessary. Apply the same-carrier entire transform
+producer along the actual true tail. At the initial mask the literal
+companion equals the restriction of this global companion by the actual
+companion/open pullback theorem. The exact open restriction identity then
+identifies its literal transformed marked ideal with the open pullback of
+the produced actual entire controlled transform. Thus the literal invariant
+uses this exact entire ideal on the mask.
+\end{proof}
+
+\begin{theorem}[The actual coefficient companion also extends with its literal transform]
+\label{hir:coherent-transform-literal-coefficient-extension}
+\uses{hir:coherent-transform-entire-tower,hir:coherent-transform-restriction-identity,hir:coherent-transform-literal-companion-extension,hir:step-one-lower-domain,hir:coherent-transform-coefficient-nonzero}
+\lean{Hironaka.HironakaCoherentTransformExtension.coherent_coefficient_transform_and_mask_identity}
+\leanok
+The actual coefficient-of-homogenized companion used by literal masked
+Step 1 has a controlled transform in the genuine invariant domain along the same true
+tail. Its carrier, divisor, ideal and mark restrict exactly to the actual
+coefficient companion transformed along the literal restricted tail.
+\end{theorem}
+\begin{proof}
+The actual global companion is well formed. Its actual homogenized
+coefficient ideal is coherent with the same carrier, and positive mark,
+by the proved actual coefficient construction. Its genuine nonzero along
+property and real invariant-domain fields are internally produced by the
+preceding power-germ argument. Apply the actual entire-domain producer along
+the true tail. Coefficient-of-homogenization commutes with
+actual open pullback, since the actual companion is coherent, its actual
+carrier is closed smooth, and its actual mark is positive. Combine this
+initial exact identity, the actual companion/open identity, and the exact
+entire transform restriction theorem. This identifies the literal
+restricted coefficient transform with the produced actual entire marked
+ideal. Full General2 whole-superlevel descent and the general G3 sequence
+are still open; coherence alone does not assert global maximal order.
+\end{proof}

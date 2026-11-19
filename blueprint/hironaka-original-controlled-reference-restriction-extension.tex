@@ -1,0 +1,133 @@
+\section{Controlled restriction to a smaller strict carrier}
+
+Marked ideals on a smooth carrier represent ideals of its structure sheaf;
+their ambient representatives are compared by actual restricted holomorphic
+spans. The controlled transform of \cite[Definition~2.2]{bierstone-milman08-functoriality}
+uses the same exceptional power for two records with the same marking.
+The following comparison requires admissibility only for the full reference
+record. The smaller carrier need not contain the centre, and its history
+need not be a test history.
+
+\begin{theorem}[One-sided controlled restriction from a genuine admissible reference]
+\label{hir:original-controlled-reference-restriction-step}
+\uses{hir:restricted-calculus,hir:marked-operations-along-step,hir:geo-transform-basic,bcalc:strict-geo,bcalc:function-transform,mc:transform-along-pullback}
+\lean{Hironaka.HironakaOriginalControlledReferenceRestriction.restrictLe_geoTransform_of_admissible_reference}
+\leanok
+Let $B=(X,N,E,I,d)$ and $K=(X,S,F,A,d)$ be actual marked records.
+Assume that $N$ is closed smooth, $I$ is coherent, $S$ is closed,
+$S\subseteq N$, and $A|_S\subseteq I|_S$ in the literal restricted
+holomorphic-span sense. Let $C$ be admissible for $B$, and let
+$\pi:Y\to X$ be an actual blowup of $C$. Put
+$N'=\overline{\pi^{-1}(N\setminus C)}$ and
+$S'=\overline{\pi^{-1}(S\setminus C)}$, and let $I'$ and $A'$ be the
+actual controlled ideals of these same records. Then
+\[
+                 A'|_{S'}\subseteq I'|_{S'}.
+\]
+The marking may be zero. No admissibility for $K$, containment $C\subseteq S$,
+smoothness of $S'$ or coherence of $A'$ is assumed.
+\end{theorem}
+\begin{proof}
+Set $L=(\pi^*\mathcal I_C)^d$. The definition of the restricted colon gives
+$LA'|_{S'}\subseteq(\pi^*A)|_{S'}$ without any coherence or divisibility
+hypothesis: each generating product $u v$, with $u\in L$ and
+$v\in A'$, is by the colon definition a restricted holomorphic span of
+$\pi^*A$; expand a finite sum of such products and compose its finite
+span relations.
+
+Since $S$ is closed, continuity gives $\pi(S')\subseteq S$.
+Pulling back the original restricted span relations, with their actual
+holomorphic coefficient functions, therefore gives
+$(\pi^*A)|_{S'}\subseteq(\pi^*I)|_{S'}$.
+The genuine Hadamard divisibility theorem for the admissible reference
+$B$ gives $(\pi^*I)|_{N'}=LI'|_{N'}$. Monotonicity of closure gives
+$S'\subseteq N'$, so restriction and transitivity yield
+\[
+                    LA'|_{S'}\subseteq LI'|_{S'}.
+\]
+The reference controlled ideal $I'$ is coherent, by its genuine
+admissibility and coherent numerator.
+
+To cancel $L$, choose at $z\in S'$ a true holomorphic generator $h$ of
+$L$ on an open neighbourhood $U$. It vanishes on no nonempty relatively
+open subset of $S'$. Indeed every open set meeting $S'$ meets the dense
+set $\pi^{-1}(S\setminus C)$; at such a point $L$ is the unit ideal, so
+its generator cannot vanish. This argument also covers the zeroth power.
+For $f\in A'_z$, the actual colon makes $f$ holomorphic. The displayed
+product inclusion writes $hf$ on $S'$ as a finite holomorphic span of
+germs of $LI'$. Expand each generating product and express its $L$
+factor as $h$ times a genuine holomorphic cofactor. Coherence of $I'$
+then collects the other factors into germs $t_i\in I'_z$, giving
+$hf=h\sum_i a_i t_i$ on $S'$ near $z$.
+The nonzero locus of $h$ is relatively dense in $S'\cap U$;
+continuity of the two holomorphic functions extends their equality
+from that dense locus to all of $S'$ near $z$. Thus
+$f=\sum_i a_i t_i$ on $S'$ near $z$, precisely the required restricted
+span. This proves the inclusion at every point without a smaller-record
+test or a supplied quotient germ.
+\end{proof}
+
+\begin{theorem}[Entire original reference histories preserve the one-sided restricted comparison]
+\label{hir:original-controlled-reference-restriction-history}
+\uses{hir:original-controlled-reference-restriction-step,hir:wellformed-tower,hir:geo-transform-basic}
+\lean{Hironaka.HironakaOriginalControlledReferenceRestriction.restrictLe_geoTransformAlong_of_reference_test}
+\leanok
+Let $B$ be a genuine well-formed original marked record and $K$ any
+actual marked record with closed carrier contained in $B$'s carrier,
+the same marking, and $K.\mathrm{ideal}|_{K.N}\subseteq
+B.\mathrm{ideal}|_{K.N}$. For every genuine original $B$ test history
+$T$, the actual current $K$ carrier is closed and contained in the
+actual current $B$ carrier, the markings remain equal, and
+\[
+ (K_T.\mathrm{ideal})|_{K_T.N}
+       \subseteq (B_T.\mathrm{ideal})|_{K_T.N}.
+\]
+This concerns the literal original controlled history of $K$; it neither
+assumes nor constructs a $K$ test history.
+\end{theorem}
+\begin{proof}
+Induct on the genuine blowup-history constructor. For the reflexive
+history the four assertions are exactly the original hypotheses.
+For a successor, the original test predicate first supplies the genuine
+shorter $B$ test history and admissibility of its next centre for the
+actual current $B$ record. Original well-formedness along that shorter
+test supplies its actual smooth carrier and coherent ideal. The
+induction hypothesis supplies the closed smaller carrier, its inclusion,
+the same marking and the restricted ideal comparison. Apply the first
+theorem to these actual current records and that same actual blowup.
+The new smaller carrier is closed because it is a closure. Its inclusion
+in the new reference carrier follows by applying preimage and closure
+to the old carrier inclusion, after deleting the same centre. The
+controlled construction retains both old markings. These four facts
+are exactly the induction assertions at the successor. All original
+positions and empty steps remain part of the same history.
+\end{proof}
+
+\begin{theorem}[Reference cosupport on the actual smaller current carrier]
+\label{hir:original-controlled-reference-current-cosupport}
+\uses{hir:original-controlled-reference-restriction-history,hir:marked-operations-along-step}
+\lean{Hironaka.HironakaOriginalControlledReferenceRestriction.reference_cosupp_inter_carrier_subset}
+\leanok
+Under the hypotheses of the preceding theorem, at every genuine
+original reference test history $T$ one has
+\[
+                    B_T.\mathrm{cosupp}\cap K_T.N
+                    \subseteq K_T.\mathrm{cosupp}.
+\]
+The smaller-carrier membership is retained explicitly here. It will be
+constructed from the actual retained-positive regime of the original
+member run, rather than assumed in that original-input consumer.
+\end{theorem}
+\begin{proof}
+Take a point in the displayed intersection. Every germ of the actual
+reference ideal has order at least the current reference marking along
+its current carrier. Restrict its genuine maximal-ideal-power witness
+to the contained current smaller carrier; the same witness still proves
+the same order. The history theorem expresses each germ of the current
+smaller ideal on that carrier as a finite holomorphic combination of
+these reference germs. Each product and finite sum retains the common
+order, so every smaller germ has that order. The markings are equal by
+the history theorem, and actual smaller-carrier membership was part of
+the given intersection. This is exactly membership in its cosupport.
+No converse inclusion or smaller test predicate is used.
+\end{proof}

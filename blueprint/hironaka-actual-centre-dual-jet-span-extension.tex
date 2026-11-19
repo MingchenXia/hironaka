@@ -1,0 +1,116 @@
+\section{The true original finite-jet annihilator is spanned by actual projected rows}
+
+The actual finite-jet space here is the genuine image
+$E_q=\operatorname{range}(\operatorname{finiteJet}_q)$, not the full
+redundant word-coordinate array. For the unchanged original translated
+ideal $I(p)$, write $J_q(p)$ for its image in this same $E_q$.
+Projected row coefficients are the actual specified functions
+$\eta_{a,r}(c)=(P(Tc)e_r)_a$ from the preceding construction.
+
+\begin{theorem}[Actual projected rows separate exactly the entire original ideal image in the true finite-jet space]
+\label{hir:actual-projected-dual-rows-separate-true-jet-ideal-image}
+\uses{hir:actual-centre-projected-dual-row-pairing,hir:actual-entire-point-quotient-pivot-frame,hir:actual-finite-linear-jet-kernel}
+\lean{Hironaka.HironakaActualCentreDualJetSpan.actualProjectedDualRow_separates_true_jet_image}
+\leanok
+At a genuine original constant-rank pivot point $p=Tc$, for every
+$v\in E_q$, all projected row pairings with its actual derivative
+coordinate array vanish if and only if $v\in J_q(p)$. The latter is
+the image of the entire original ideal, with actual holomorphic
+multipliers.
+\end{theorem}
+\begin{proof}
+Choose an actual original germ $g$ whose actual jet is $v$, using the
+definition of the genuine range $E_q$. The exact projected-row pairing
+identity identifies simultaneous zero pairings with zero of the
+original whole-germ quotient coordinates. Their entire kernel is
+$I(p)+\mathfrak m^q$. If $g=a+b$ with $a\in I(p)$ and
+$b\in\mathfrak m^q$, the actual finite-jet kernel kills $b$, so the
+same original $v$ is the jet of $a\in I(p)$. Conversely, if $v$ is the
+jet of such an $a$, the original germ difference $g-a$ has actual jet
+zero, hence lies in the same original $\mathfrak m^q$. Thus $g$ lies
+in that precise whole quotient kernel. This proves both implications
+inside the genuine original jet image.
+\end{proof}
+
+\begin{theorem}[The specified projected coordinate rows span the entire annihilator on the genuine original jet image]
+\label{hir:actual-projected-dual-rows-span-whole-true-jet-annihilator}
+\uses{hir:actual-projected-dual-rows-separate-true-jet-ideal-image,hir:actual-centre-projected-dual-row-pairing,hir:actual-entire-point-quotient-pivot-frame}
+\lean{Hironaka.HironakaActualCentreDualJetSpan.actualProjectedDualRow_spans_true_jet_annihilator}
+\leanok
+At the same genuine pivot point, let $\lambda:E_q\to\mathbb C$ be an
+actual linear functional annihilating the image of the entire
+original ideal $I(p)$. There are actual complex coefficients $b_a$
+such that for every $v\in E_q$,
+\[
+ \lambda(v)=\sum_a b_a\sum_r\eta_{a,r}(c)
+   (\operatorname{finiteCoordinateArray}_q(v))_r.
+\]
+No dual spanning or frame certificate is assumed. This is pointwise
+spanning on the true jet image; it is not a basis claim for redundant
+word rows or a holomorphic module-basis assertion.
+\end{theorem}
+\begin{proof}
+Compose $\lambda$ with the actual finite-jet map corestricted to its
+genuine image. The resulting functional $L$ on the whole original
+germ ring kills $I(p)$ by assumption, and kills $\mathfrak m^q$ by
+the exact actual finite-jet kernel. Hence it kills their sum, which
+is exactly the kernel of the genuine surjective whole quotient
+coordinate map $Q$ onto the fixed true quotient model.
+
+Descend $L$ through this entire kernel and the actual first-isomorphism
+linear equivalence of the surjective $Q$. This gives a true functional
+$f$ on that fixed model satisfying $f(Qg)=L(g)$ for every whole germ.
+Use the ordinary vector-space linear extension theorem to extend $f$
+from the actual fixed-model subspace to the full coordinate array;
+this extension is only a proof device. Let $b_a$ be the extended
+functional's value on the actual coordinate vector $e_a$.
+
+For every genuine actual jet $v$, choose a whole germ $g$ representing
+it. Its projected scalar coordinate array is the underlying vector of
+$Qg$ in the true fixed model, so the extended functional there equals
+$f(Qg)=L(g)=\lambda(v)$. Finite coordinate decomposition expresses
+this extended functional as the sum of its values $b_a$ on $e_a$
+times the original projected coordinates. Apply the exact actual
+projected-row pairing identity to each projected coordinate. This
+proves precisely the displayed finite row combination on the true
+jet image. No holomorphic dependence of the extension or coefficients
+is inferred.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centre geometry internally yields all-order true dual spanning and separation]
+\label{hir:actual-original-hs-centre-true-jet-dual-spanning}
+\uses{hir:actual-projected-dual-rows-span-whole-true-jet-annihilator,hir:actual-hs-constant-centre-origin-pivot-whole-frames,hir:actual-centre-projected-dual-row-first-derivatives-holomorphic}
+\lean{Hironaka.HironakaActualCentreDualJetSpan.exists_original_hs_constant_centre_true_jet_dual_spanning}
+\leanok
+For one original coherent germ ideal and an actual regular centre on
+which its original intrinsic HS function is constant, one genuine
+original flattening chart and one original generating family/open,
+and one real flattened $U$ containing zero, precede all jet orders.
+At each order, actual original pivots and genuine real domains through
+zero internally give the specified projected rows. At every actual
+centre point in that per-order domain, these rows separate exactly
+the entire original ideal image in $E_q$ and span its entire dual
+annihilator as above. No moving row, dual frame, spanning, matrix-rank
+or nonzero-minor certificate is a caller input.
+\end{theorem}
+\begin{proof}
+Apply the accepted original HS-constant-centre origin-pivot theorem.
+It chooses the same genuine original flattening, generating family
+and open, and flattened $U$ before the universal order quantifier.
+At every order it internally selects actual pivot rows/columns and
+a real open $D_q\subset U$ containing zero, with a true nonzero
+original minor. On the actual tangent centre, its genuine projection
+kernel is the entire unchanged original Macaulay image. Its original
+HS constancy supplies the actual rank equality with the internally
+chosen pivot size. Apply the two preceding pointwise theorems at
+$Tc\in D_q$, using the original family germs supplied by genuine
+holomorphicity on the same $U$. The actual parameter domain
+$T^{-1}(D_q)$ is open and contains zero. Every original object and
+all whole-ideal images are retained. The coefficients in the dual
+spanning conclusion are chosen only after a point and functional;
+no common all-order domain, holomorphic coefficient choice or
+holomorphic module basis is claimed. The existing genuine moving-row
+connection and root-owned full adjoint prolongation can consume these
+specified rows without converting redundant word coordinates into a
+basis.
+\end{proof}

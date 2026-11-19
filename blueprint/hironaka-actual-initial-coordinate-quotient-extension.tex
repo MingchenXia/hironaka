@@ -1,0 +1,124 @@
+\section{Actual initial ideals after a tangent coordinate quotient}
+
+Write $S=\mathbb C[[z_1,\ldots,z_n]]$ and
+$\mathfrak m=(z_1,\ldots,z_n)$. For an entire ideal $K\subset S$,
+write $\operatorname{in}(K)$ for its entire homogeneous initial ideal
+inside the same formal series ring.
+
+\begin{lemma}[Initial ideals preserve inclusion]
+\label{hir:actual-initial-coordinate-quotient-monotonicity}
+\lean{Hironaka.HironakaActualInitialCoordinateQuotient.actualInitialIdeal_mono}
+\leanok
+If $K\subset L$, then $\operatorname{in}(K)\subset\operatorname{in}(L)$.
+\end{lemma}
+\begin{proof}
+Each generator of $\operatorname{in}(K)$ is the actual initial form of
+a nonzero member $F\in K$. The same nonzero series belongs to $L$,
+so the same form is a generator of $\operatorname{in}(L)$. Taking the
+ideal spans gives the inclusion.
+\end{proof}
+
+\begin{theorem}[A regular tangent symbol commutes with the whole initial ideal]
+\label{hir:actual-initial-coordinate-quotient-regular-symbol-equality}
+\uses{hir:actual-initial-coordinate-quotient-monotonicity,hir:regular-symbol-whole-successor-division,hir:actual-homogeneous-initial-component-derivative-dictionaries}
+\lean{Hironaka.HironakaActualInitialCoordinateQuotient.actualInitialIdeal_add_coordinate_of_regular_symbol}
+\leanok
+Suppose the actual symbol of $z_i$ is regular: for every $q\geq0$,
+$b\in\mathfrak m^q$ and $z_i b\in K+\mathfrak m^{q+2}$ imply
+$b\in K+\mathfrak m^{q+1}$. Then
+\[
+ \operatorname{in}(K+(z_i))=\operatorname{in}(K)+(z_i).
+\]
+Both sides are the entire actual ideals in $S$.
+\end{theorem}
+\begin{proof}
+The reverse inclusion follows from monotonicity and the fact that the
+initial form of the member $z_i$ of $K+(z_i)$ is $z_i$ itself.
+
+For the forward inclusion, consider a nonzero $F\in K+(z_i)$ and write
+$F=G+z_iH$ with $G\in K$. Let $r$ be its order. If $r=0$, the degree
+zero component of $z_iH$ vanishes. The degree zero component of $F$
+therefore equals that of $G$, which belongs to $\operatorname{in}(K)$.
+
+Suppose $r=q+1$. Since $F\in\mathfrak m^{q+1}$,
+$z_iH=F-G$ belongs to $K+\mathfrak m^{q+1}$. Regularity of the
+actual initial symbol and strict successor division give
+$H\in K+\mathfrak m^q$. Write $H=A+B$ with
+$A\in K$ and $B\in\mathfrak m^q$, and put $G'=G+z_iA$.
+Then $G'\in K$ and $F=G'+z_iB$. Both $F$ and $z_iB$ belong to
+$\mathfrak m^{q+1}$, so $G'$ belongs to this power too. Taking the
+degree $q+1$ component gives
+\[
+ F_{q+1}=G'_{q+1}+z_iB_q.
+\]
+The first summand belongs to $\operatorname{in}(K)$ because
+$G'\in K\cap\mathfrak m^{q+1}$, and the second belongs to $(z_i)$.
+Thus every actual generating initial form lies in
+$\operatorname{in}(K)+(z_i)$, which proves the forward inclusion.
+\end{proof}
+
+\begin{corollary}[Initial tangent stability produces the quotient equality]
+\label{hir:actual-initial-coordinate-quotient-equality}
+\uses{hir:actual-initial-coordinate-quotient-regular-symbol-equality,hir:actual-initial-tangent-formal-regular-symbol}
+\lean{Hironaka.HironakaActualInitialCoordinateQuotient.actualInitialIdeal_add_coordinate}
+\leanok
+If the polynomial contraction of $\operatorname{in}(K)$ is stable under
+$\partial/\partial z_i$, then
+$\operatorname{in}(K+(z_i))=\operatorname{in}(K)+(z_i)$ for the entire
+actual ideals in $S$.
+\end{corollary}
+\begin{proof}
+Initial tangent stability gives the actual regular-symbol implication in
+every degree. The preceding theorem then applies to the unchanged $K$.
+\end{proof}
+
+\begin{theorem}[Remaining tangent differentiations survive the actual quotient]
+\label{hir:actual-initial-coordinate-quotient-remaining-differentiation}
+\uses{hir:actual-initial-coordinate-quotient-equality}
+\lean{Hironaka.HironakaActualInitialCoordinateQuotient.actualInitialIdeal_add_coordinate_pderiv}
+\leanok
+Retain the preceding hypotheses, and suppose additionally that the entire
+ideal $\operatorname{in}(K)$ is stable under $\partial/\partial z_j$,
+where $j\ne i$. Then the entire ideal
+$\operatorname{in}(K+(z_i))$ is stable under this same partial derivative.
+\end{theorem}
+\begin{proof}
+By the quotient equality this ideal is
+$\operatorname{in}(K)+(z_i)$. The first summand is stable by assumption.
+The generator $z_i$ of the second summand has zero $z_j$ derivative.
+For every formal multiplier $A$, the product rule therefore puts
+$\partial_j(Az_i)=(\partial_jA)z_i$ in $(z_i)$. The sum is consequently
+stable under $\partial_j$ on every one of its actual members.
+\end{proof}
+
+\begin{theorem}[Entire initial ideals commute with every distinct ordered tangent cut]
+\label{hir:actual-initial-coordinate-quotient-ordered-cuts}
+\uses{hir:actual-initial-coordinate-quotient-equality,hir:actual-initial-coordinate-quotient-remaining-differentiation}
+\lean{Hironaka.HironakaActualInitialCoordinateQuotient.successiveCoordinateQuotient,Hironaka.HironakaActualInitialCoordinateQuotient.actualInitialIdeal_successive_coordinate_quotients}
+\leanok
+Let $L=(i_1,\ldots,i_r)$ be a list of distinct coordinate indices.
+Assume that the entire initial ideal $\operatorname{in}(K)$ is stable
+under every $\partial_{i_a}$. Starting with $K$, successively add
+$(z_{i_1}),\ldots,(z_{i_r})$, and denote the resulting actual ideal by
+$K_L$. Then the entire actual initial ideal of $K_L$ is obtained by
+the same successive additions to $\operatorname{in}(K)$.
+Moreover every partial derivative $\partial_j$ under which
+$\operatorname{in}(K)$ was stable remains stable on
+$\operatorname{in}(K_L)$ whenever $j$ is absent from $L$.
+\end{theorem}
+\begin{proof}
+Induct on the list. The empty list changes neither ideal, and retains
+every original differentiation. Suppose $L$ begins with $i$ and has
+tail $L'$. The whole formal derivative in $z_i$ restricts to polynomial
+partial differentiation on actual polynomial members of the initial
+ideal. The one-coordinate theorem therefore gives
+$\operatorname{in}(K+(z_i))=\operatorname{in}(K)+(z_i)$.
+Every index in $L'$ differs from $i$, so the remaining-differentiation
+theorem gives its whole partial stability on this new initial ideal.
+The induction hypothesis now applies to $K+(z_i)$ and $L'$. Its ideal
+equality, combined with the first-step equality, gives exactly the
+asserted ordered sequence of additions. If $j$ is absent from $L$,
+then $j\ne i$ and $j$ is absent from $L'$. Its original stability
+survives the first step by the remaining-differentiation theorem and
+survives the tail by induction. This proves both assertions.
+\end{proof}

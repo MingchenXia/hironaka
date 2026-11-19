@@ -1,0 +1,405 @@
+\section{Divisor exponents of genuine ideal powers}
+\label{sec:hironaka-divisor-extension}
+
+The monomial factor in W{\l}odarczyk's Step~2 is a product of principal
+divisor ideals, with multiplicities.  The following local algebra records
+how those multiplicities change when an ideal is replaced by a genuine
+ideal power.  It is an extension of the order and divisor-exponent calculus,
+not a construction of the global decomposition of every principalizing
+divisor into the members of a prescribed simple normal crossings family.
+
+\begin{lemma}[Successor thresholds for ideal powers]
+\label{hir:divisor-power-successor-threshold}
+\uses{hir:order-power,hir:order-basic,hir:cosupport}
+\lean{Hironaka.HironakaDivisorPowers.cosupport_idealPow_mul_succ_eq}
+\leanok
+Let $\mathfrak a$ be an ideal of holomorphic germs on a complex manifold
+$M$, and let $k\geq 1$ and $e\geq 0$ be integers.  Then
+\[
+ \operatorname{cosupp}(\mathfrak a^k,ke+1)
+ =\operatorname{cosupp}(\mathfrak a,e+1).
+\]
+\end{lemma}
+\begin{proof}
+If every germ of $\mathfrak a_x$ has order at least $e+1$, then every
+product of $k$ such germs has order at least $k(e+1)$.  Finite sums and
+holomorphic multiples preserve this lower bound.  Since
+$ke+1\leq k(e+1)$, every germ of $(\mathfrak a^k)_x$ has order at least
+$ke+1$.  Conversely, if a germ $g\in\mathfrak a_x$ has order at most $e$,
+then multiplicativity of the order gives
+$\operatorname{ord}_x(g^k)\leq ke$.  The germ $g^k$ belongs to
+$(\mathfrak a^k)_x$, so this stalk does not have order at least $ke+1$.
+These two implications prove the equality.
+\end{proof}
+
+\begin{lemma}[Divisibility thresholds for ideal powers]
+\label{hir:divisor-power-divisibility-threshold}
+\uses{hir:divisor-power-successor-threshold,hir:divisor-exponent}
+\lean{Hironaka.HironakaDivisorPowers.isDivNear_idealPow_mul_succ_iff}
+\leanok
+For a subset $H\subset M$, a point $x\in M$, $k\geq1$ and $e\geq0$,
+the ideal $\mathfrak a^k$ has order at least $ke+1$ along $H$ near $x$
+if and only if $\mathfrak a$ has order at least $e+1$ along $H$ near $x$.
+\end{lemma}
+\begin{proof}
+Apply Lemma~\ref{hir:divisor-power-successor-threshold} at each point
+of $H$ in a neighbourhood of $x$.  The equality of the two cosupports
+identifies the two neighbourhood conditions in both directions.
+\end{proof}
+
+\begin{lemma}[A power of a nonzero ideal stalk is nonzero]
+\label{hir:divisor-power-nonzero}
+\uses{hir:order-power,hir:divisor-exponent}
+\lean{Hironaka.HironakaDivisorPowers.isNonzeroAt_idealPow}
+\leanok
+If $\mathfrak a_x$ contains a holomorphic germ which does not vanish
+identically near $x$, then $(\mathfrak a^k)_x$ has the same property for
+every integer $k\geq0$.
+\end{lemma}
+\begin{proof}
+Choose such a germ $g$.  Its power $g^k$ lies in $(\mathfrak a^k)_x$.
+At each point where $g$ is nonzero, $g^k$ is nonzero; these points occur
+arbitrarily close to $x$.  This also covers $k=0$, since $g^0=1$.
+\end{proof}
+
+\begin{theorem}[Divisor exponents scale with ideal powers]
+\label{hir:divisor-exponent-ideal-power}
+\uses{hir:divisor-power-divisibility-threshold,hir:divisor-power-nonzero,hir:divisor-exponent}
+\dcref{W{\l}odarczyk 2005, Step 2}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaDivisorPowers.divExp_idealPow}
+\leanok
+Let $x\in H\subset M$, and let $\mathfrak a$ be an ideal of holomorphic
+germs whose stalk at $x$ is nonzero.  For every integer $k\geq0$,
+\[
+ e_H(\mathfrak a^k,x)=k\,e_H(\mathfrak a,x).
+\]
+\end{theorem}
+\begin{proof}
+Put $e=e_H(\mathfrak a,x)$.  Nonvanishing makes this exponent finite:
+$\mathfrak a$ has order at least $e$ along $H$ near $x$, and it does not
+have order at least $e+1$ there.  Products of germs give divisibility of
+$\mathfrak a^k$ to order $ke$, so its exponent is at least $ke$.
+For $k\geq1$, Lemma~\ref{hir:divisor-power-divisibility-threshold}
+rules out divisibility to order $ke+1$.  Lemma~\ref{hir:divisor-power-nonzero}
+ensures that its exponent is also finite, hence is at most $ke$.
+For $k=0$, the ideal is the unit ideal and its germ $1$ has order zero
+at every point of $H$; its exponent is therefore zero.
+\end{proof}
+
+\begin{lemma}[Successor thresholds along a submanifold]
+\label{hir:divisor-power-successor-threshold-along}
+\uses{hir:divisor-power-successor-threshold,hir:exponent-along,hir:order-basic}
+\lean{Hironaka.HironakaDivisorPowers.cosupport_idealPow_mul_succ_eq_along,Hironaka.HironakaDivisorPowers.isDivNearAlong_idealPow_mul_succ_iff}
+\leanok
+Let $N$ be a submanifold of $M$. For $k\geq1$ and $e\geq0$,
+\[
+ \operatorname{cosupp}(\mathfrak a^k|_N,ke+1)
+ =\operatorname{cosupp}(\mathfrak a|_N,e+1).
+\]
+Consequently the corresponding neighbourhood divisibility conditions
+along $N\cap H$ agree.
+\end{lemma}
+\begin{proof}
+The inclusion from right to left follows by multiplying germs vanishing
+to order $e+1$ on $N$, and using $ke+1\leq k(e+1)$.
+For the reverse inclusion, fix $x\in N$ and a holomorphic retraction
+$r$ onto $N$ near $x$.  A germ $g$ has order at least $q$ on $N$ at
+$x$ if and only if $g\circ r$ has ambient order at least $q$.
+If $g$ fails to have restricted order $e+1$, then
+$g\circ r$ has ambient order at most $e$, and its $k$-th power has
+ambient order at most $ke$.  Since
+$(g^k)\circ r=(g\circ r)^k$, the germ $g^k\in\mathfrak a^k_x$ fails
+to have restricted order $ke+1$.  This proves the reverse inclusion.
+Applying the equality pointwise near $x$ proves the divisibility assertion.
+\end{proof}
+
+\begin{lemma}[Restricted nonvanishing survives powers]
+\label{hir:divisor-power-nonzero-along}
+\uses{hir:divisor-power-nonzero,hir:exponent-along}
+\lean{Hironaka.HironakaDivisorPowers.isNonzeroAlongAt_idealPow}
+\leanok
+If $\mathfrak a_x$ contains a holomorphic germ whose restriction does
+not vanish identically on $N$ near $x$, then $(\mathfrak a^k)_x$ has
+the same property, for every $k\geq0$.
+\end{lemma}
+\begin{proof}
+Choose the germ $g$ in the assumption.  Then $g^k$ belongs to
+$(\mathfrak a^k)_x$ and is nonzero at each point of $N$ where $g$ is
+nonzero. Such points occur arbitrarily close to $x$.
+\end{proof}
+
+\begin{theorem}[Divisor exponents of powers along a submanifold]
+\label{hir:divisor-exponent-ideal-power-along}
+\uses{hir:divisor-power-successor-threshold-along,hir:divisor-power-nonzero-along,hir:exponent-along}
+\dcref{W{\l}odarczyk 2005, Step 2}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaDivisorPowers.divExpAlong_idealPow}
+\leanok
+Let $N$ be a submanifold, $x\in N\cap H$, and suppose
+$\mathfrak a_x|_N$ is nonzero. For every $k\geq0$,
+\[
+ e_{H|_N}(\mathfrak a^k,x)=k\,e_{H|_N}(\mathfrak a,x).
+\]
+\end{theorem}
+\begin{proof}
+Let $e=e_{H|_N}(\mathfrak a,x)$.  A local holomorphic retraction
+onto $N$ and nonvanishing ensure that this exponent is finite.
+Products give restricted divisibility of $\mathfrak a^k$ to order $ke$.
+For $k\geq1$, Lemma~\ref{hir:divisor-power-successor-threshold-along}
+excludes restricted divisibility to order $ke+1$, since it would imply
+divisibility of $\mathfrak a$ to order $e+1$. Restricted nonvanishing
+survives powers, so the exponent of $\mathfrak a^k$ is finite and equals
+$ke$. When $k=0$, its unit germ has order zero on $N$, which gives
+the asserted equality.
+\end{proof}
+
+\begin{lemma}[An invertible divisor ideal has nonzero stalks]
+\label{hir:divisor-ideal-nonzero}
+\uses{ana:ideal-sheaves,hir:divisor-exponent}
+\lean{Hironaka.HironakaDivisorPowers.isNonzeroAt_of_isInvertible}
+\leanok
+Every stalk of an invertible divisor ideal contains a holomorphic germ
+which does not vanish identically near that point.
+\end{lemma}
+\begin{proof}
+Near a point $x$, choose a principal generator $g$ for the ideal.
+Invertibility includes the fact that $g$ vanishes identically on no
+nonempty open subset of that neighbourhood. Every open neighbourhood
+of $x$ therefore contains a point where $g$ is nonzero. The germ $g$
+belongs to the ideal stalk at $x$ and has the asserted property.
+\end{proof}
+
+\begin{corollary}[Multiplicities of powers of an actual divisor ideal]
+\label{hir:divisor-ideal-power-multiplicity}
+\uses{hir:divisor-ideal-nonzero,hir:divisor-exponent-ideal-power}
+\lean{Hironaka.HironakaDivisorPowers.divExp_divisor_idealPow}
+\leanok
+For an effective divisor $D$ on $M$, $x\in H$, and $k\geq0$,
+\[
+ e_H(\mathcal O(-D)^k,x)=k\,e_H(\mathcal O(-D),x).
+\]
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{hir:divisor-exponent-ideal-power} to the actual
+invertible ideal $\mathcal O(-D)$; its holomorphic nonzero stalk members
+are supplied by Lemma~\ref{hir:divisor-ideal-nonzero}.
+\end{proof}
+
+\subsection{Removing a genuine connected smooth component}
+
+The next results construct one global multiplicity and a residual
+effective divisor from the actual invertible ideal. The component is
+assumed connected: a possibly disconnected member of a simple normal
+crossings list need not carry one global multiplicity.
+
+\begin{lemma}[Local constancy of an ideal exponent on a smooth carrier]
+\label{hir:divisor-exponent-locally-constant-carrier}
+\uses{hir:divisor-exponent}
+\lean{Hironaka.HironakaDivisorResidual.isLocallyConstant_divExp_on_submanifold}
+\leanok
+Let $W\subset M$ be a closed submanifold and $\mathfrak a$ a coherent
+ideal nonzero at every stalk. The function
+$x\mapsto e_W(\mathfrak a,x)$ on $W$ is locally constant.
+\end{lemma}
+\begin{proof}
+At each $x\in W$, the regularity of $W$ and nonvanishing of
+$\mathfrak a$ in a neighbourhood give local constancy of the divisor
+exponent on $W$. Restrict this neighbourhood to the subspace $W$.
+Thus every point of $W$ has a neighbourhood on which the displayed
+function equals its value at that point.
+\end{proof}
+
+\begin{lemma}[A connected carrier supplies one actual multiplicity]
+\label{hir:divisor-exponent-connected-carrier}
+\uses{hir:divisor-exponent-locally-constant-carrier,hir:divisor-exponent}
+\lean{Hironaka.HironakaDivisorResidual.exists_divExp_on_connected_submanifold}
+\leanok
+Let $W$ be a nonempty connected closed submanifold of fixed dimension
+and $\mathfrak a$ a coherent ideal nonzero at every stalk. There is
+$a\in\mathbb N$ such that, for every $x\in W$ and $r\geq0$,
+\[
+ \mathfrak a\text{ has order at least }r\text{ along }W
+ \text{ near }x \quad\Longleftrightarrow\quad r\leq a.
+\]
+\end{lemma}
+\begin{proof}
+A locally constant function on a connected space is constant: each
+nonempty fibre is both open and closed, so its complement is empty.
+Choose $p\in W$ and put $a=e_W(\mathfrak a,p)$. By
+Lemma~\ref{hir:divisor-exponent-locally-constant-carrier},
+$e_W(\mathfrak a,x)=a$ for every $x\in W$. Nonzero stalks ensure
+that the finite exponent characterizes divisibility, proving the
+displayed equivalence.
+\end{proof}
+
+\begin{lemma}[A smooth hypersurface has empty interior]
+\label{hir:divisor-smooth-carrier-empty-interior}
+\uses{hir:snc}
+\lean{Hironaka.HironakaDivisorResidual.interior_eq_empty_of_smooth_hypersurface}
+\leanok
+If $W$ is a closed smooth submanifold of dimension $d$ in an
+$n$-dimensional complex manifold and $d+1=n$, then $W$ has empty
+interior.
+\end{lemma}
+\begin{proof}
+An interior point of $W$ has an open neighbourhood contained in $W$;
+in the ambient chart it is therefore regular of dimension $n$.
+But every point of $W$ is regular of dimension $d$. The dimension
+of a regular germ is unique, so $d=n$, contrary to $d+1=n$.
+\end{proof}
+
+\begin{theorem}[Actual residual after removing a connected smooth component]
+\label{hir:divisor-connected-component-residual}
+\uses{hir:divisor-exponent-connected-carrier,hir:divisor-smooth-carrier-empty-interior,hir:divisor-ideal-nonzero,hir:hadamard-bridge}
+\dcref{W{\l}odarczyk 2005, Step 2}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaDivisorResidual.exists_residual_on_connected_hypersurface}
+\leanok
+Let $D$ be an effective divisor on an $n$-dimensional complex
+manifold $M$, and let $W$ be a nonempty connected closed smooth
+submanifold of dimension $d$ with $d+1=n$. There exist $a\geq0$
+and an effective divisor $R$ on $M$ such that
+\[
+ \begin{aligned}
+ e_W(\mathcal O(-D),x)&=a &&(x\in W),\\
+ \mathcal O(-D)&=\mathcal I_W^a\mathcal O(-R),\\
+ \mathcal O(-R)&=(\mathcal O(-D):\mathcal I_W^a),
+ \end{aligned}
+\]
+and $W$ is not contained in the support of $R$.
+\end{theorem}
+\begin{proof}
+The ideal $\mathcal O(-D)$ is coherent and has nonzero stalks.
+Lemma~\ref{hir:divisor-exponent-connected-carrier} therefore supplies
+the constant finite exponent $a$. At every $x\in W$, all germs of
+$\mathcal O(-D)_x$ vanish to order at least $a$ on $W$. The Hadamard
+bridge gives the global inclusion
+$\mathcal O(-D)\subset\mathcal I_W^a$, including the stalks off $W$.
+
+The smooth hypersurface ideal $\mathcal I_W$ is invertible: locally
+on $W$ it is generated by one flattening coordinate, and off $W$
+by $1$; its local generator vanishes identically on no open subset
+because $W$ has empty interior. Its power $\mathcal I_W^a$ is
+invertible as well. The colon ideal
+$\mathfrak r=(\mathcal O(-D):\mathcal I_W^a)$ is invertible.
+Indeed, for local generators $u$ and $v$ of these two nested
+invertible ideals, the inclusion gives $u=qv$ with $q$ holomorphic.
+The germ $q$ generates the colon ideal: cancellation by $v$ proves
+one inclusion, and multiplication by $v$ proves the other.
+Nonvanishing of $u$ on every nonempty open set forces the same
+nonvanishing for $q$. Thus $\mathfrak r=\mathcal O(-R)$ for an
+effective divisor $R$, and the same cancellation yields
+$\mathcal O(-D)=\mathcal I_W^a\mathcal O(-R)$.
+
+If $W$ were contained in the support of $R$, every germ of the
+coherent ideal $\mathcal O(-R)$ would vanish on $W$ near its base
+point: membership propagates to nearby stalks, and each such germ
+vanishes at the points of $W$. Hence
+$\mathcal O(-R)\subset\mathcal I_W$, and the product identity would
+give $\mathcal O(-D)\subset\mathcal I_W^{a+1}$.
+At any $p\in W$ this implies divisibility to order $a+1$, contradicting
+the characterization of the exponent $a$. Therefore $W$ is not
+contained in the support of $R$.
+\end{proof}
+
+\begin{corollary}[Powers of the actual component factorization]
+\label{hir:divisor-connected-component-residual-power}
+\uses{hir:divisor-connected-component-residual}
+\lean{Hironaka.HironakaDivisorResidual.exists_residual_power_on_connected_hypersurface}
+\leanok
+Under the hypotheses of Theorem~\ref{hir:divisor-connected-component-residual},
+for each $k\geq0$ the same actual $a$ and residual $R$ satisfy
+\[
+ \mathcal O(-D)^k=\mathcal I_W^{ak}\mathcal O(-R)^k.
+\]
+\end{corollary}
+\begin{proof}
+Construct $a$ and $R$ by the preceding theorem, then take the $k$-th
+power of its whole ideal identity. Products of coherent ideals commute
+and associate, so the $k$-th power of a product is the product of the
+$k$-th powers, and $(\mathcal I_W^a)^k=\mathcal I_W^{ak}$.
+The exponent zero gives the unit ideal on both sides.
+\end{proof}
+
+\begin{definition}[Finite product of component powers]
+\label{hir:divisor-finite-component-product}
+\uses{ana:ideal-sheaves}
+\lean{Hironaka.HironakaDivisorResidual.componentPowerProduct}
+\leanok
+For a finite ordered list $A=((W_1,a_1),\ldots,(W_s,a_s))$ of subsets
+of $M$ and nonnegative integers, put
+\[
+ P(A)=\mathcal I_{W_1}^{a_1}\cdots\mathcal I_{W_s}^{a_s},\qquad
+ P(\varnothing)=\mathcal O_M.
+\]
+\end{definition}
+
+\begin{lemma}[Coherence of a finite component product]
+\label{hir:divisor-finite-component-product-coherent}
+\uses{hir:divisor-finite-component-product}
+\lean{Hironaka.HironakaDivisorResidual.isCoherent_componentPowerProduct}
+\leanok
+If every $W_i$ is a closed submanifold, then $P(A)$ is coherent.
+\end{lemma}
+\begin{proof}
+The vanishing ideal of each closed submanifold is coherent. Powers
+and products of coherent ideals are coherent. Induction on the list,
+starting from the coherent unit ideal, proves the claim.
+\end{proof}
+
+\begin{theorem}[Extraction along a finite family of connected hypersurfaces]
+\label{hir:divisor-finite-connected-component-residual}
+\uses{hir:divisor-connected-component-residual,hir:divisor-finite-component-product-coherent}
+\lean{Hironaka.HironakaDivisorResidual.exists_residual_on_finite_connected_hypersurfaces}
+\leanok
+Let $E=(W_1,\ldots,W_s)$ be a finite list of nonempty connected closed
+smooth hypersurfaces in $M$, and $D$ an effective divisor. There exist
+nonnegative integers $a_1,\ldots,a_s$ and an effective divisor $R$ such that
+\[
+ \mathcal O(-D)=\mathcal I_{W_1}^{a_1}\cdots
+ \mathcal I_{W_s}^{a_s}\mathcal O(-R),
+ \qquad \operatorname{Supp}(R)\subset\operatorname{Supp}(D),
+\]
+and no $W_i$ is contained in $\operatorname{Supp}(R)$.
+The list may be empty and may contain repeated members.
+\end{theorem}
+\begin{proof}
+Induct on the length. For the empty list take $R=D$; the product is
+the unit ideal. For $E=(W,E')$, Theorem~\ref{hir:divisor-connected-component-residual}
+produces $a$ and $D_1$ with
+$\mathcal O(-D)=\mathcal I_W^a\mathcal O(-D_1)$ and
+$W\not\subset\operatorname{Supp}(D_1)$. The induction hypothesis
+applied to $D_1$ and $E'$ produces $A'$ and $R$ with
+$\mathcal O(-D_1)=P(A')\mathcal O(-R)$,
+$\operatorname{Supp}(R)\subset\operatorname{Supp}(D_1)$, and no
+member of $E'$ contained in $\operatorname{Supp}(R)$.
+Associativity of coherent ideal products gives
+$\mathcal O(-D)=(\mathcal I_W^aP(A'))\mathcal O(-R)$.
+A zero of every germ of $\mathcal O(-D_1)$ is a zero of every germ
+of its product with $\mathcal I_W^a$, so
+$\operatorname{Supp}(D_1)\subset\operatorname{Supp}(D)$.
+These inclusions give the asserted support inclusion and also rule
+out $W\subset\operatorname{Supp}(R)$.
+The members of $E'$ are handled by the induction hypothesis. The
+argument does not require the members to be distinct, so repeated
+members satisfy the same conclusion.
+\end{proof}
+
+\begin{remark}[Scope of the multiplicity calculation]
+Each exponent extracted from a single connected component is defined
+by neighbourhood divisibility of stalks. In the finite theorem, $a_i$
+is the exponent of the intermediate divisor after the preceding members
+have been removed; these exponents follow the order of the list. They
+are not asserted to be the exponents of the original $D$ for every list
+position. In particular a repeated member has exponent zero after its
+first removal. For a smooth hypersurface the local exponent agrees with the largest
+power of its vanishing ideal dividing the stalk.  Constructing a global
+identity $\mathcal O(-D)=\prod_i\mathcal I_{E_i}^{a_i}$ for a general
+simple-normal-crossings-supported divisor $D$, and then identifying
+$D=\sum_i a_iE_i$, remains an additional obligation.
+The finite extraction theorem leaves an actual residual factor. It
+does not prove this factor is the unit ideal from an SNC support
+assumption, nor does it refine disconnected SNC members into their
+connected components.
+\end{remark}

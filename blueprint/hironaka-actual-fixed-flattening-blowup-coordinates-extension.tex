@@ -1,0 +1,106 @@
+\section{Actual blowup coordinates for a fixed centre flattening}
+\label{sec:hironaka-actual-fixed-flattening-blowup-coordinates}
+
+The centre coordinates used to study an original ideal must also be
+the coordinates used to express its actual blowup. The following
+construction starts with a supplied genuine flattening and retains
+that same map throughout.
+
+\begin{theorem}[The whole blowup square retains a supplied centre flattening]
+\label{hir:actual-fixed-flattening-blowup-coordinate-square}
+\uses{bcalc:monomial-lift,hir:actual-monomial-local-inverse-complex-injective,hir:actual-smooth-centre-monomial-recentring,ana:local-holomorphic-inverse}
+\lean{Hironaka.HironakaActualFixedFlatteningBlowupCoordinates.exists_actual_fixed_flattening_blowup_coordinates}
+\leanok
+Let $\pi:Y\to X$ be a genuine blowup along $C$ in complex dimension
+$n$, and let $z\in Y$. Fix a genuine local holomorphic coordinate
+equivalence $\Phi$ at $\pi(z)$, defined inside its original chart,
+with $\Phi(\pi(z))=0$, such that throughout its domain
+\[
+ u\in C\quad\Longleftrightarrow\quad
+ \Phi(u)\in\mathbb C^k\times0.
+\]
+There are an actual normal pivot $j\ge k$, parameters $b$ with
+$b_j=0$ and $b_i=0$ for $i<k$, and genuine local coordinates
+$\Theta$ centred at $z$, with $\Theta(z)=0$, such that the entire
+source coordinate neighborhood maps into the domain of this same
+fixed $\Phi$ and
+\[
+ \Phi(\pi(u))=
+ \pi^{\mathrm{normal}}_{k,j,b}(\Theta(u)).
+\]
+Here the displayed coordinate expressions include the original
+ambient charts. The target flattening is exactly the supplied
+$\Phi$; no further centre flattening is chosen.
+\end{theorem}
+\begin{proof}
+The point $\pi(z)$ lies in the true domain of $\Phi$. Apply the
+actual blowup monomial local-inverse theorem using the supplied
+source inclusion and centre-membership equivalence. It produces a
+normal pivot $j\ge k$, a genuine open neighborhood $O$ of $z$,
+and a holomorphic map $W$ on $O$ with
+\[
+ m_{k,j}(W(u))=\Phi(\pi(u)).
+\]
+All images $\pi(u)$ lie in the domain of the supplied $\Phi$.
+The actual monomial lift for this same $\Phi$ is a local left
+inverse of $W$. Therefore the complex differential of $W$ at $z$
+is injective. The holomorphic inverse function theorem gives true
+centred local coordinates $\Theta$ whose expression on a smaller
+open neighborhood is $W(u)-W(z)$.
+
+At $z$ the monomial square equals zero. Its tangent rows are
+$W(z)_i$ for $i<k$, and its pivot row is $W(z)_j$, so all these
+coordinates vanish. Put $b=W(z)$. The exact monomial recentering
+identity gives
+\[
+ m_{k,j}(W(u))=
+ \pi^{\mathrm{normal}}_{k,j,b}(W(u)-W(z))
+\]
+at every point of the smaller neighborhood, including points on
+the exceptional divisor. Combining these two literal identities
+proves the whole square. Every invocation used the original fixed
+$\Phi$, and the source inclusion is inherited from the same
+local-inverse construction.
+\end{proof}
+
+\begin{theorem}[Original constant-Hilbert--Samuel centre geometry supplies the same free-layer and blowup coordinates]
+\label{hir:actual-original-free-normal-layers-fixed-blowup-coordinates}
+\uses{hir:actual-original-centre-normal-layers-finite-free,hir:actual-fixed-flattening-blowup-coordinate-square}
+\lean{Hironaka.HironakaActualFixedFlatteningBlowupCoordinates.exists_original_hs_constant_centre_free_normal_blowup_coordinates}
+\leanok
+Let $\pi:Y\to X$ be a genuine blowup along $C$ in dimension
+$d+t$, and let $z\in Y$. Suppose $C$ is regular of dimension $d$
+at $\pi(z)$, and let $\mathcal A$ be a coherent ideal whose entire
+intrinsic Hilbert--Samuel function is constant along $C$.
+There is one genuine centred flattening $\Phi$ of $C$ such that
+every whole original normal layer of the actual unchanged origin
+ideal $I_0$ of $\mathcal A$ in these coordinates is finite free
+over $\mathcal O_{\mathbb C^d,0}$, and this same $\Phi$ occurs in
+the whole actual blowup square of the preceding theorem at $z$.
+The source coordinates, actual normal pivot and parameters are
+produced together with these same witnesses.
+\end{theorem}
+\begin{proof}
+Apply the original-only normal-layer producer at $\pi(z)$ to
+the given centre regularity, original coherence and all-order
+intrinsic constancy. It gives one actual centred flattening
+$\Phi$, its whole original centre-membership equivalence and,
+for the same actual origin ideal $I_0$, finite freeness of every
+normal layer. Retain those witnesses. Apply the preceding theorem
+to this very $\Phi$ and its genuine source and membership data.
+The resulting source coordinates, pivot and parameters express
+the original blowup in this retained target flattening. Since
+the target map has not changed, the definition of $I_0$ and every
+previously obtained normal-layer freeness statement remain the
+same. This proves the simultaneous conclusion.
+\end{proof}
+
+\begin{remark}
+The first theorem needs only the supplied actual flattening data
+and the full blowup predicate. The second theorem obtains the
+normal-layer and target-chart witnesses from original geometry,
+without a freeness or compatibility certificate as input.
+Neither assertion proves reduced-vertex normal-power compatibility,
+general Bennett nonincrease or termination of a singular-centre
+resolution sequence.
+\end{remark}

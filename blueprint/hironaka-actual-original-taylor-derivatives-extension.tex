@@ -1,0 +1,64 @@
+\section{Whole original Taylor expansion commutes with genuine analytic differentiation}
+
+Let $R$ be the original holomorphic germ ring in $n$ coordinates, let
+$T:R\to\mathbb C[[x_1,\ldots,x_n]]$ be its genuine original Taylor map,
+and let $D_i$ be actual differentiation of holomorphic representatives
+in the true $i$th coordinate direction. This is the existing whole analytic
+germ derivative; it is independent of representatives.
+
+\begin{lemma}[Actual analytic polynomial differentiation retains the original complex coefficients]
+\label{hir:actual-original-polynomial-coordinate-derivative}
+\uses{hir:relative-normal-basis-actual-derivation-evaluation,hir:actual-original-canonical-finite-taylor-polynomial}
+\lean{Hironaka.HironakaActualOriginalTaylorDerivatives.originalDerivative_polynomialEval}
+\leanok
+For every genuine complex polynomial $P$, one has
+$D_i(P(x))=(\partial_iP)(x)$ in the whole original analytic germ ring.
+\end{lemma}
+\begin{proof}
+Lift the genuine complex coefficients to their actual constant germs on the
+zero-dimensional base. The existing entire relative polynomial derivative
+theorem identifies analytic differentiation with formal polynomial
+differentiation under evaluation in the normal coordinates. Polynomial
+differentiation commutes with this actual coefficient lift: each coefficient
+at $\alpha$ on both sides is the actual lifted value of
+$(\alpha_i+1)[x^{\alpha+e_i}]P$. Actual zero-base coefficient evaluation is
+the original complex polynomial evaluation. Combining these equalities
+gives the asserted whole germ identity.
+\end{proof}
+
+\begin{theorem}[Entire actual Taylor series commute with original coordinate differentiation]
+\label{hir:actual-whole-original-taylor-coordinate-derivative}
+\uses{hir:actual-original-polynomial-coordinate-derivative,hir:actual-original-formal-taylor-algebra-embedding,hir:relative-normal-basis-actual-derivation-evaluation}
+\lean{Hironaka.HironakaActualOriginalTaylorDerivatives.originalTaylorAlgHom_coordinate_derivative}
+\leanok
+For every whole original analytic germ $g$ and every actual coordinate $i$,
+\[
+ T(D_i g)=\partial_iT(g)
+\]
+as equality of the entire genuine formal power series. In particular every
+coefficient satisfies
+$[x^\alpha]T(D_i g)=(\alpha_i+1)[x^{\alpha+e_i}]T(g)$.
+\end{theorem}
+\begin{proof}
+First, for every complex polynomial $Q$, its genuine evaluated germ has
+Taylor coefficient $[x^\alpha]Q$. To verify this without a convergence
+assumption, subtract its canonical original Taylor polynomial through degree
+$|\alpha|$. The genuine polynomial remainder is in the entire maximal
+ideal power $\mathfrak m^{|\alpha|+1}$; original polynomial coefficient
+detection forces equality of the coefficients at $\alpha$.
+
+Now fix $\alpha$, put $k=|\alpha|$, and use the genuine original Taylor
+polynomial $P$ of $g$ through degree $k+1$. Its whole analytic remainder is
+in $\mathfrak m^{k+2}$. Actual analytic coordinate differentiation lowers
+that whole power into $\mathfrak m^{k+1}$, so the actual coefficient at
+$\alpha$ of $T(D_i g-D_i(P(x)))$ is zero. The preceding polynomial
+derivative identity and the verified polynomial coefficient dictionary show
+that $[x^\alpha]T(D_i g)=[x^\alpha]\partial_iP$.
+The latter coefficient is
+$(\alpha_i+1)[x^{\alpha+e_i}]P$.
+The degree of $\alpha+e_i$ is $k+1$, so the genuine stabilized Taylor
+coefficient dictionary makes this exactly
+$(\alpha_i+1)[x^{\alpha+e_i}]T(g)$.
+This is the literal coefficient formula for the actual formal derivative.
+Equality at every actual exponent proves equality of the entire series.
+\end{proof}

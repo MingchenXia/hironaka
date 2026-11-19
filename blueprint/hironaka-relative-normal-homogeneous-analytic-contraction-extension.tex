@@ -1,0 +1,37 @@
+\section{Genuine whole contraction for homogeneous polynomial ideals under analytic normal evaluation}
+This OWN OFFLIB continuation recovers entire homogeneous polynomial ideals from their genuine analytic extensions. It uses real finite multiplier jets and whole coefficient separation, without a flatness certificate. Arbitrary nonhomogeneous polynomial ideals need not have this property.
+
+\begin{theorem}[A genuine homogeneous polynomial ideal is exactly the contraction of its whole analytic extension]
+\label{hir:relative-normal-homogeneous-whole-analytic-contraction}
+\lean{Hironaka.HironakaRelativeNormalHomogeneousAnalyticContraction.normalPolynomialEval_mem_analytic_map_iff,Hironaka.HironakaRelativeNormalHomogeneousAnalyticContraction.whole_homogeneous_analytic_contraction}
+\uses{hir:relative-normal-graph-central-actual-bounded-polynomial-jets,hir:relative-normal-graded-whole-initial-ideal,hir:relative-normal-basis-actual-coefficient-separation,hir:relative-normal-graph-diagonal-central-homogeneous-jet}
+\leanok
+Let $H$ be an actual homogeneous ideal in the normal polynomial ring over the ENTIRE base holomorphic germ ring. A true polynomial $P$ belongs to $H$ if and only if its whole analytic normal evaluation belongs to the genuine entire analytic ideal image of $H$. Thus the actual inverse image of that whole analytic ideal is precisely $H$. No caller flatness, representative, coefficient or output certificate is supplied.
+\end{theorem}
+\begin{proof}
+The forward direction is true ideal-map membership. Conversely, membership in the actual analytic image ideal gives a genuine finite sum of actual holomorphic germ multipliers times evaluations of actual polynomials $R_i\in H$. Choose a natural $q$ strictly larger than the degree of EVERY actual exponent in the finite support of $P$, internally from that finite support. For each true analytic multiplier select its genuine bounded polynomial representative $Q_i$ modulo original $J^q$ by the actual normal monomial basis. The true analytic remainder of every product lies in $J^q$, hence whole evaluation of $P-Q$ lies in $J^q$ for the SAME actual polynomial $Q=\sum_i Q_iR_i\in H$.
+
+For every $k<q$, the whole original low-coefficient dictionary identifies the actual degree-$k$ homogeneous parts of $P$ and $Q$. Genuine homogeneity of the actual $H$ puts this whole component of $Q$ in $H$, so the SAME component of $P$ belongs to $H$. Every component of $P$ of degree at least $q$ is literally zero by the internally chosen support bound. Thus EVERY actual homogeneous component of $P$ belongs to $H$. The genuine finite homogeneous decomposition reconstructs the ENTIRE $P$ as a finite sum of such actual components, proving $P\in H$. Ideal extensionality gives equality of the actual inverse-image ideal with $H$. This is whole polynomial contraction for genuine homogeneous ideals, without declaring all analytic extensions faithfully flat.
+\end{proof}
+
+\begin{theorem}[Equality of whole analytic extensions identifies the genuine homogeneous polynomial ideals]
+\label{hir:relative-normal-homogeneous-analytic-extension-faithful}
+\lean{Hironaka.HironakaRelativeNormalHomogeneousAnalyticContraction.whole_homogeneous_analytic_images_equal}
+\uses{hir:relative-normal-homogeneous-whole-analytic-contraction}
+\leanok
+For two actual homogeneous polynomial ideals $H,K$, equality of their genuine entire analytic normal-evaluation ideal images implies $H=K$.
+\end{theorem}
+\begin{proof}
+Apply the actual inverse-image operation of the SAME actual normal evaluation ring map to the whole analytic ideal equality. The preceding actual homogeneous contraction identifies its two sides exactly with the original whole $H$ and $K$. No ideal, degree, generator or free-frame correspondence is externally supplied. This ordinary algebraic comparison will be consumed with nearby homogeneous ideals internally constructed from actual original coefficient germs.
+\end{proof}
+
+\begin{theorem}[Only original coherent input internally gives the entire original polynomial kernel dictionary of its actual selected central model]
+\label{hir:relative-normal-original-central-whole-polynomial-kernel}
+\lean{Hironaka.HironakaRelativeNormalHomogeneousAnalyticContraction.exists_original_coherent_whole_central_polynomial_kernel}
+\uses{hir:relative-normal-graph-central-whole-origin-ideal-equality,hir:relative-normal-homogeneous-whole-analytic-contraction,hir:relative-normal-graded-whole-initial-ideal}
+\leanok
+Only original coherent $I$ internally supplies SAME genuine $N,U$, coherent selected original central model and its true all-point/all-power saturation dictionaries, such that for EVERY actual normal polynomial $P$, whole evaluation belongs to the ENTIRE selected original central origin ideal if and only if $P$ belongs to the WHOLE original normal initial ideal.
+\end{theorem}
+\begin{proof}
+The genuine original-input whole central equality producer internally selects $N,U$ and identifies the entire selected central origin ideal with the actual analytic extension of the WHOLE original initial ideal. Its genuine homogeneity is internally proved by the original associated-graded producer from the actual original ideal, rather than assumed as a caller kernel or initial-ideal certificate. Apply the first theorem to this SAME actual homogeneous initial ideal and substitute the true whole central equality. Retain every genuine original $N,U$ and actual colon, parameter-power, saturation and coherence output. This is the whole origin polynomial kernel dictionary. The actual nearby original normal-cone/Rees identity and single all-order free open remain subsequent independent producers.
+\end{proof}

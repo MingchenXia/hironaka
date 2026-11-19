@@ -1,0 +1,76 @@
+\section{Whole strict ideals at actual persistent Hilbert--Samuel points}
+\label{sec:hironaka-actual-persistent-hs-ideal-rigidity}
+The existing whole-ideal jet detection theorem already proves that $I\subset J$ and equality of every actual Hilbert--Samuel value imply $I=J$ in the original analytic germ ring. It uses true positive maximal thickenings and Noetherian-local Krull separation. We reuse that theorem rather than introduce a second rigidity assumption or a replacement numerical model.
+Throughout the normal blowup conclusions below the normal codimension satisfies $t\ge2$.
+
+\begin{theorem}[Actual source strict vanishing ideal in a fixed blowup square]
+\label{hir:actual-persistent-fixed-source-strict-ideal}
+\uses{hir:actual-fixed-flattening-whole-model-vanishing-ideal,hir:actual-fixed-flattening-strict-set-hs-equality}
+\lean{Hironaka.HironakaActualPersistentHSIdealRigidity.originalVanishingOriginIdeal_eq_of_eventually_eq,Hironaka.HironakaActualPersistentHSIdealRigidity.originalFlattenedStrictOriginIdeal_eq_model}
+\leanok
+Actual subsets with the same membership germ at zero have the same whole original vanishing origin ideal.
+Consequently, in a genuine supplied flattening blowup square $(\Phi,\Theta)$, the unchanged original strict-transform ideal flattened by $\Theta$ and translated by zero equals the whole model strict vanishing origin ideal for the same target set $A_\Phi(W)$.
+\end{theorem}
+\begin{proof}
+Represent each original analytic germ by an actual holomorphic function. Membership in a whole original vanishing origin ideal means precisely eventual vanishing on that set.
+An eventual equality of set membership transports that condition in both directions, giving whole ideal equality.
+For the actual blowup square, the proved entire open-coordinate strict-set equality identifies the inverse image of the original strict set under the genuine source inverse with the model strict set on the full target of $\Theta$.
+That target is an open neighbourhood of zero. Hence intersecting with it gives the same set germ at zero, and the preceding argument identifies the whole vanishing ideals.
+The proved original flattened vanishing origin ideal dictionary identifies the source ideal with precisely this target-intersected inverse image ideal.
+\end{proof}
+
+\begin{theorem}[Persistent entire HS forces the whole geometric strict ideal to be the actual normalized ideal]
+\label{hir:actual-persistent-normalized-geometric-ideal}
+\uses{hir:actual-proper-ideal-inclusion-finite-hs-separation,hir:actual-normal-normalized-hs-le-translated-components,hir:actual-every-translated-normal-vertex-hs-bound,hir:actual-normal-geometric-strict-normalized-inclusion}
+\lean{Hironaka.HironakaActualPersistentHSIdealRigidity.actual_normalized_ideal_eq_geometric_of_persistent_hs}
+\leanok
+Let $I$ be the whole vanishing origin ideal of the actual model subset $A$, and let $P$ be actual analytic monic vertex data for this same $I$, with genuine normal membership $P_a\in N^{w(a)}$.
+If the actual geometric strict transform in the $j$-chart has the same entire intrinsic HS function at zero as $I$, then its whole vanishing origin ideal equals the actual analytic normalized-member ideal of $I$ in that chart.
+\end{theorem}
+\begin{proof}
+For $t\ge2$, the genuine differential exceptional locus contains the entire exceptional hyperplane.
+Every actual normalized analytic member therefore vanishes on the actual geometric strict set, giving the proved whole inclusion $N_{\rm norm}\subset J_{\rm geom}$.
+The prescribed actual monic family and its true normal powers give the proved normalized-ideal bound $H_{N_{\rm norm}}\le H_I$ through the true translated normal-component ideal.
+Whole inclusion gives $H_{J_{\rm geom}}\le H_{N_{\rm norm}}$.
+The natural persistent-point hypothesis identifies $H_{J_{\rm geom}}=H_I$ at every order, so both bounds are equalities at every order.
+Apply the existing original whole-ideal HS rigidity under the actual inclusion. This proves $N_{\rm norm}=J_{\rm geom}$, not merely equality of dimensions or formal initial data.
+\end{proof}
+
+\begin{theorem}[The same prescribed family generates the actual persistent strict stalk]
+\label{hir:actual-persistent-fixed-family-strict-jets}
+\uses{hir:actual-persistent-fixed-source-strict-ideal,hir:actual-persistent-normalized-geometric-ideal,hir:actual-weighted-generator-whole-jet-ideals,hir:actual-fixed-flattening-original-blowup-hs-comparisons}
+\lean{Hironaka.HironakaActualPersistentHSIdealRigidity.exists_actual_persistent_fixed_family_strict_jets}
+\leanok
+For a genuine arbitrary blowup and a supplied target flattening $\Phi$, retain its unchanged original ideal $I_0$ and actual analytic vertex data $P$ with genuine normal powers.
+At an actual point $z$ whose entire original/strict HS functions agree, the blowup internally constructs a source chart $\Theta$, genuine normal pivot and parameters, and actual quotients of this same $P_a$.
+Their span equals the entire original strict-transform ideal in $\Theta$, which equals the actual normalized-member ideal of $I_0$.
+For every $q$, its image modulo the actual exceptional power $(e^q)$ is precisely the span of the literal weighted jets $\sum_{r<q}e^rD(P_{w(a)+r}(P_a))$.
+\end{theorem}
+\begin{proof}
+Construct the actual source coordinates for the supplied target $\Phi$; no second target map is chosen.
+The fixed-chart dictionaries retain the whole target ideal $I_0$ and both actual intrinsic HS equalities.
+The genuine pivot index $J\ge d$ becomes $j=J-d<t$.
+Transport the natural original persistent HS equalities through these exact dictionaries to obtain persistence in the actual model chart.
+The preceding whole normalized/geometric ideal equality applies to the same $I_0$ and prescribed family $P$.
+The first theorem identifies that geometric ideal with the unchanged original strict ideal flattened by the source $\Theta$.
+Finally construct the genuine weighted quotients and all exceptional jet images for the same $P$ from the all-order weighted transform dictionary. Substitution of the whole strict/normalized ideal equality retains the identical quotient family and every literal jet numerator.
+\end{proof}
+
+\begin{theorem}[Original geometry internally produces the persistent-point strict ideal dictionary]
+\label{hir:actual-original-persistent-strict-ideal-jets}
+\uses{hir:actual-persistent-fixed-family-strict-jets,hir:actual-original-weighted-generator-transform-jets}
+\lean{Hironaka.HironakaActualPersistentHSIdealRigidity.exists_original_hs_constant_centre_persistent_strict_jets}
+\leanok
+Original analytic-subset coherence, a genuine regular HS-constant centre of codimension at least two, and actual all-order HS persistence at the chosen blowup point supply the preceding whole strict-ideal and all-exceptional-jet dictionary.
+The actual flattening, origin ideal and source family are constructed internally and retained throughout; no incoming ideal-equality, transformed-family, persistent-presentation or terminal-phase certificate is supplied.
+\end{theorem}
+\begin{proof}
+Call the original weighted-generator producer once on the actual original vanishing ideal and HS-constant regular centre.
+It fixes one $\Phi$, unchanged $I_0$ and actual analytic vertex coefficient family $P$ with the proved genuine normal powers.
+Retain these data and apply the preceding supplied-family theorem to the genuine blowup and the natural entire HS persistence at its chosen point.
+This constructs the one actual source chart and the whole ideal/jet statements without identifying independently chosen coordinate or generator witnesses.
+\end{proof}
+
+\begin{remark}
+Codimension at least two is essential for this normalized/geometric statement with the repository's differential-exceptional definition of geometric strict transform. A normal codimension-one blowup is the identity and its geometric strict transform is the original closure, whereas normalization of $I=(e)$ gives the unit ideal. Thus equality of HS alone does not justify the asserted ideal equality in that case. No strict invariant decrease, weighted coefficient cosupport tracking, or terminating singular-stage phase is asserted here.
+\end{remark}

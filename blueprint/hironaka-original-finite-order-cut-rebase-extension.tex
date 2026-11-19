@@ -1,0 +1,84 @@
+\section{True order monotonicity and companion rebasing for finite noncanonical cuts}
+
+\begin{theorem}[The actual order is constant on each centre and never increases]
+\label{hir:original-finite-order-cut-order-nonincreasing}
+\uses{hir:original-finite-order-cut-history,bcalc:nonmonomial-order-canonical,bcalc:nonmonomial-order-local}
+\lean{Hironaka.HironakaOriginalFiniteOrderCutRebase.orderCutTower_centre_order_eq,Hironaka.HironakaOriginalFiniteOrderCutRebase.orderCutTower_nmOrd_step_le,Hironaka.HironakaOriginalFiniteOrderCutRebase.orderCutTower_nmOrd_le_proj}
+\leanok
+In a literal finite order-cut history, every pair of actual points of a
+centre has the same nonmonomial order. For an original DOMAIN$(b)$ marked
+ideal in positive ambient dimension, every actual new cosupport point
+projects into the previous cosupport and has order at most that of its
+image. The same assertion holds for EVERY genuine finite tail of the
+history. No canonicality or desired monotonicity condition is an input.
+\end{theorem}
+\begin{proof}
+For two centre points, actual admissibility puts each in the true old
+cosupport. The ordinary recipe gives each order inequality whenever the
+reference order is positive. If that order is zero, its inequality follows
+from nonnegativity. Hence both inequalities hold, even at order zero,
+proving equality on the entire centre.
+
+At an actual new cosupport point over the centre, use this internally
+proved constant centre order in the genuine original one-step order
+theorem; it includes order zero by the actual unit-cofactor argument.
+Off the centre the original actual order and cosupport pullback theorems
+give equality and old cosupport membership. Induct on the literal finite
+tail, using its genuine last-step cut and chaining the two real natural
+inequalities. Empty positions remain actual blowup positions.
+\end{proof}
+
+\begin{theorem}[The genuine stage immediately before an order run has strictly larger order]
+\label{hir:original-finite-order-cut-before-run-start}
+\uses{hir:original-finite-order-cut-order-nonincreasing,bcalc:nonmonomial-order-regime}
+\lean{Hironaka.HironakaOriginalFiniteOrderCutRebase.orderCutTower_succ_le_before_start}
+\leanok
+For an actual current cosupport point of order $q$, if its actual order-$q$
+run is shorter than the original history, the genuine stage one step
+before its run start has an actual cosupport image of order at least
+$q+1$. The stage and image are the literal head/tail split of the original
+history, without deleting any position.
+\end{theorem}
+\begin{proof}
+Use the actual run's genuine failure of the order-$q$ regime one stage
+before its start. The preceding true tail monotonicity puts the image
+in the actual cosupport with order at least $q$. If it were equal to $q$,
+that actual image would satisfy the very regime predicate known to fail.
+The natural inequality is therefore strict, giving order at least $q+1$.
+\end{proof}
+
+\begin{theorem}[Earlier order masks are genuinely avoided and the actual companion rebases]
+\label{hir:original-finite-order-cut-companion-rebase}
+\uses{hir:original-finite-order-cut-order-nonincreasing,bcalc:nonmonomial-order-regime,bcalc:companion-rebase}
+\lean{Hironaka.HironakaOriginalFiniteOrderCutRebase.orderCutTower_centresOrdGt,Hironaka.HironakaOriginalFiniteOrderCutRebase.orderCutTower_centresAvoid_and_companion_rebase}
+\leanok
+Suppose a literal prefix followed by an actual middle and one actual next
+blowup is an order-cut history. If a true cosupport reference just before
+that last blowup has order at least $q+1$, every actual centre of that
+middle-with-last-step lies in the genuine order-$q+1$ threshold at its
+stage. Thus every genuine earlier open on which old cosupport order is
+at most $q$ is avoided by ALL these centres. For positive $q$, internally
+obtain the actual whole relative-ideal equivalence between its original
+companion transported across this real restricted history and the actual
+new companion restricted to that same inverse-image open.
+\end{theorem}
+\begin{proof}
+Induct on the actual middle. For the last centre the reference is a true
+positive old cosupport point, so the ordinary recipe puts every centre
+point above its order and hence in the actual threshold. For a preceding
+middle step, genuine one-step order monotonicity projects that SAME
+reference into the true preceding cosupport and retains its lower bound.
+The induction hypothesis supplies all preceding thresholds. The genuine
+recursive threshold predicate therefore holds for the entire actual
+middle-with-last-step.
+
+Apply the existing true threshold-avoidance theorem with original DOMAIN
+on the genuine prefix and the supplied earlier-open order bound. This
+proves ALL-centre avoidance and preservation of that actual bound over
+the open. The actual companion rebase theorem now applies to this genuine
+restricted empty history, giving the whole relative-ideal equivalence.
+No equivalence, centre avoidance or numeric value is a caller certificate.
+The equivalence is a genuine geometric conclusion; numerical rebasing for
+arbitrary noncanonical lower histories and the full global driver remain
+open.
+\end{proof}

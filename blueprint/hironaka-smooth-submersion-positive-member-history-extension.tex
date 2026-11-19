@@ -1,0 +1,81 @@
+\section{Actual positive member histories under smooth pullback}
+\label{hir:smooth-positive-member-history-section}
+This extension supplies the positive-boundary branch needed in the smooth
+comparison of the original recursive invariant. It uses the literal marked
+ideal, the original indexed divisor, the actual coefficient-homogenized ideal
+$\overline J$, and actual Cartesian test histories. The zero-boundary
+codimension-one branch, chosen tangent-direction masks, and the complete
+higher recursive comparison remain separate obligations. No equality of
+chosen tangent directions or of the entire higher invariant is assumed. This is the smooth-map extension of the
+original Step One construction in Wlodarczyk,
+proof of the marked-ideal resolution proposition, Step 1aa/1ab.
+
+\begin{lemma}[The actual coefficient-homogenized record]
+\label{hir:smooth-bar-record}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.pullback_barMarked,Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.bar_stage_dictionary,Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.bar_original_members_dictionary,Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.bar_level_dictionary}
+\uses{hir:submersion-relative-differential-whole-homogenized-coefficient,hir:submersion-relative-control-joint-tower,hir:submersion-cartesian-tower-actual-history}
+\leanok
+For a smooth holomorphic map $f:Y\to X$ and an original well-formed marked
+ideal $J$, $f^*\overline J=\overline{f^*J}$. If $Q\to T$ is an actual
+Cartesian history and $T$ is a geometric test history for $\overline J$,
+then $Q$ is a test history for $\overline{f^*J}$ and their entire transformed
+records correspond under the actual last-stage smooth map $g$.
+\end{lemma}
+\begin{proof}
+Relative derivative ideals, homogenization and coefficient ideals commute
+with smooth pullback, including the actual carrier, marking and full divisor
+list. Apply those two identities successively to $\overline J=C_N(H_N(J))$.
+The established geometric Cartesian controlled-transform identity, applied
+to the well-formed $\overline J$, gives both the test-history assertion and
+the transformed record. The original $|E|$ strict transforms are the initial
+$|E|$ entries of that transformed record, so their lists and boundary counts
+are exactly pulled back.
+\end{proof}
+
+\begin{lemma}[Actual member locus and positive special branch]
+\label{hir:smooth-positive-member-special}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.bar_member_locus_dictionary,Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.positive_isSpecial_dictionary,Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.positive_stepRegime_dictionary,Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.positive_stepRegime_run}
+\uses{hir:smooth-bar-record}
+\leanok
+At every stage, the original member-intersection locus of the cosupport of
+$\overline{f^*J}$ is the inverse image of the literal original member locus
+for $\overline J$. If the target boundary count at $g(y)$ is positive,
+$y$ is special for the source Step One history if and only if $g(y)$ is
+special for the target history. For every fixed positive boundary count
+$s$, the actual Step One regime at level $s$ corresponds at all points,
+and its complete recursive run index is unchanged.
+\end{lemma}
+\begin{proof}
+A smooth map is continuous and open; thus it maps the neighbourhood filter
+at $y$ onto the neighbourhood filter at $g(y)$. In the definition of the
+member locus, transport the cosupport, carrier, full original divisor list,
+and the quantified nearby member-intersection condition with this exact
+filter equality. The special branch at positive boundary count is precisely
+membership in this member locus; the level-zero alternative is false.
+For a fixed positive $s$, points whose level differs from $s$ satisfy neither
+regime, and the remaining points use the preceding special-point comparison.
+Induction on the actual history compares the regime at every intermediate
+stage and therefore the recursive run index.
+\end{proof}
+
+\begin{lemma}[The actual positive member mask]
+\label{hir:smooth-positive-member-mask}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionPositiveMemberHistory.IsActualTowerPullback.positive_maskA_dictionary}
+\uses{hir:smooth-positive-member-special}
+\leanok
+For any point of positive boundary count, the literal Step One member mask
+$A_{f^*J,Q}(y)$ is $g^{-1}A_{J,T}(g(y))$.
+\end{lemma}
+\begin{proof}
+The condition excluding every original member missing the base point
+corresponds by the original list dictionary. In the remaining condition,
+if a point has the same boundary count as the base point, this count is
+positive, and the preceding special-point comparison applies; if the counts
+differ, both exclusions are false. The raw sets in the two masks therefore
+correspond exactly. For a continuous open map, inverse image commutes with
+interior, proving the statement for the actual open masks. No chosen contact
+mask is substituted for these masks.
+\end{proof}

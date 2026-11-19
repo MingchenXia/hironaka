@@ -1,0 +1,159 @@
+\section{A genuine global dimension-drop variation locus for the ORIGINAL FULL invariant}
+
+Bierstone--Milman\cite{bierstone-milman97-invent-math}, Lemma 13.7 and its
+proof, printed pages 300--301, removes smooth components where the actual
+augmented invariant is locally constant, then extends a smaller-dimensional
+bad locus away from the selected window. This chapter supplies the ACTUAL
+ORIGINAL FULL-invariant part of that input. It does not assert simultaneous
+Hilbert--Samuel constancy, transformed coefficient comparison or the driver.
+
+\begin{lemma}[Actual minima and actual first higher component values produce a genuine proper analytic jump subset]
+\label{hir:actual-full-value-component-proper-analytic-jump}
+\uses{hir:original-all-depth-arbitrary-full-history-global-analytic,hir:invariant-order,hir:dimension-part-global-component-union,rem:thin-dimension-drop}
+\source{bierstone-milman97-invent-math:page-0095}
+\lean{Hironaka.HironakaOriginalFullValueVariationLocus.exists_actual_component_minimum_analytic_jump}
+\leanok
+Let $f$ have a true well-founded linear value order and genuine analytic FULL
+cuts on an actual carrier. For every actual global component $B$ of a
+pure-$q$ analytic subset of that carrier, internally construct its ACTUAL
+minimum value $a_B$ and its literal jump subset
+$E_B=\{x\in B:a_B<f(x)\}$. This SAME subset is genuinely analytic, is proper
+in $B$, and has dimension at most $q-1$. No generic value, next value,
+proper-subset, order bound or analytic jump certificate is input.
+\end{lemma}
+\begin{proof}
+The genuine global component is nonempty. Original well-foundedness applied
+to its ACTUAL value image supplies a least member, genuinely attained at a
+real component point, and gives $a_B\le f$ on ALL of $B$. If no value exceeds
+$a_B$, the literal jump subset is empty. Otherwise well-foundedness applied
+to the actual attained higher values supplies a real least higher $c_B$.
+On $B$, $a_B<f(x)$ holds EXACTLY when $c_B\le f(x)$: one direction uses
+minimality in the actual higher image, the other $a_B<c_B$. Consequently
+$E_B$ is the genuine intersection of analytic $B$ with the ACTUAL global
+$c_B$-cut. The minimum-attaining point proves $B$ is not contained in that
+cut BEFORE dimension drop is invoked. If an open part of $B$ lay in $E_B$,
+it would meet the genuine regular-locus component whose closure is $B$.
+The PROVED analytic continuation theorem would put that ENTIRE component,
+and hence its closure, in the actual cut, contradicting the minimum point.
+Thus the proper intersection is genuinely thin in $B$. Actual geometric
+purity bounds its dimension by $q$; the proved thin analytic dimension-drop
+theorem gives $\dim E_B\le q-1$.
+\end{proof}
+
+\begin{lemma}[Genuine locally finite analytic unions preserve an arbitrary actual dimension bound]
+\label{hir:actual-locally-finite-analytic-union-full-dimension-bound}
+\uses{hir:curve-predicates-locally-finite-union,hir:dimension-three-actual-finite-analytic-union-dimone}
+\source{bierstone-milman97-invent-math:page-0095}
+\lean{Hironaka.HironakaOriginalFullValueVariationLocus.analytic_dimLE_iUnion_of_actual_locallyFinite}
+\leanok
+A genuine locally finite family of actual analytic subsets, each with true
+geometric dimension at most $r$, has an actual analytic union of geometric
+dimension at most $r$. No dimension labels replace actual regular dimensions.
+\end{lemma}
+\begin{proof}
+Actual local finiteness supplies a real open neighborhood of each point on
+which the full union agrees with a TRUE finite subunion. The proved finite
+analytic union theorem preserves the actual bound at EVERY regular point.
+Genuine locality of regular dimension transports it through the exact local
+set equality to the whole union. Actual locally finite analytic equations
+already prove its analyticity. No ambient compactness or global finite
+component family is required.
+\end{proof}
+
+\begin{theorem}[The literal FULL-value nonsmooth/nonconstant locus is globally analytic and dimension-decreasing]
+\label{hir:actual-full-value-smooth-local-constancy-bad-locus-analytic}
+\uses{hir:actual-full-value-component-proper-analytic-jump,hir:actual-locally-finite-analytic-union-full-dimension-bound,rem:pure-singular-locus}
+\source{bierstone-milman97-invent-math:page-0095}
+\lean{Hironaka.HironakaOriginalFullValueVariationLocus.actualValueVariationLocus,Hironaka.HironakaOriginalFullValueVariationLocus.actualValueVariationLocus_analytic_dimLE}
+\leanok
+For actual analytic pure-$q$ $S$ in the genuine full-cut carrier, define
+$F=\{x\in S:\neg(\operatorname{Reg}_q(S,x)\ \land\ f|_S\text{ is locally constant at }x)\}$
+using the LITERAL actual function. This SAME $F$ is globally analytic,
+lies in $S$, and has dimension at most $q-1$, strictly below $q$ when $q>0$.
+In particular every point of $S\setminus F$ is genuinely smooth of dimension
+$q$ and the ACTUAL full function is locally constant on $S$ there.
+\end{theorem}
+\begin{proof}
+Construct the preceding ACTUAL $a_B,E_B$ for EVERY genuine global component,
+then form the real union of these $E_B$ and the actual pure singular locus
+of $S$. Component local finiteness passes to these actual subsets. The first
+two lemmas and the genuine singular-locus theorem prove this actual union
+analytic with dimension bound $q-1$.
+
+Identify it with the literal stated $F$ in BOTH directions. Outside the union,
+a point is regular of dimension $q$ and belongs to a genuine global component
+$B$. Its actual regular flattening supplies a true open neighborhood where
+$S$ lies in that SAME component. Intersect with the complement of the actual
+closed $E_B$. On this real neighborhood every actual $S$ point has value
+$a_B$, so the whole actual function is locally constant there.
+Conversely, suppose a real regular point has the stated local constancy and
+lies in some $E_B$. Its value is strictly larger than the independently
+attained minimum of $B$, so the actual higher cut defining $E_B$ contains
+the whole local $S$ trace. That true open trace meets the real regular-locus
+component generating $B$ by closure. Analytic continuation again forces ALL
+of $B$ into that cut, contradicting its genuine minimum point. A regular
+point is not in the actual singular locus either. These are BOTH exact
+literal bad-locus directions, not merely an envelope or caller certificate.
+The actual union's analytic/dimension assertions therefore concern precisely
+$F$. The zero-dimensional actual geometry is supplied separately below;
+no full terminating history is inferred from this dimension bound.
+\end{proof}
+
+\begin{theorem}[ONLY original histories produce the FULL-value variation locus, and the actual reference extension's locus avoids a true selected window]
+\label{hir:original-full-value-reference-extension-variation-avoids-window}
+\uses{hir:actual-full-value-smooth-local-constancy-bad-locus-analytic,hir:original-full-reference-pure-global-extension,hir:original-all-depth-arbitrary-full-history-global-analytic,hir:canonical-centres}
+\source{bierstone-milman97-invent-math:page-0095}
+\lean{Hironaka.HironakaOriginalFullValueVariationLocus.original_full_value_variation_locus_analytic,Hironaka.HironakaOriginalFullValueVariationLocus.exists_original_reference_extension_variation_avoids_window}
+\leanok
+At ANY actual ORIGINAL canonical history/depth, every actual pure analytic
+$S$ contained in the current cosupport has the preceding genuine global
+FULL-value variation locus. Moreover ONLY original domain/history and a true
+reference cosupport point internally construct the actual global reference
+extension $S$, a dimension $q$, and a real window containing that point such
+that the literal global bad locus is analytic, has dimension at most $q-1$,
+and is DISJOINT from the entire selected window. No caller variation-locus,
+constancy, avoidance, local centre or extension certificate is input.
+\end{theorem}
+\begin{proof}
+The original all-history theorem internally supplies EVERY global analytic
+FULL cut of the SAME actual original invariant, whose genuine order is
+well-founded. Apply the preceding theorem to the actual analytic pure subset.
+For the original-only reference consumer, the genuine reference-extension
+producer FIRST supplies its actual global pure analytic $S$, exact local
+full-reference trace and real regularity on its true selected window.
+Independently original upper semicontinuity internally supplies a true open
+neighborhood bounding current-cosupport values by the attained reference
+value. Intersect these TWO actual windows. Since $S$ lies in the ORIGINAL
+full reference cut, its values there are also bounded below by that same
+reference value, hence equal it at EVERY actual trace point. On this SAME
+real window the original extension is regular of dimension $q$ and the
+actual FULL function is locally constant on $S$ at each point. By the
+literal bad-locus dictionary, the ENTIRE bad locus misses that window.
+Its global analytic/dimension geometry was constructed independently from
+the real component jumps. This supplies the ORIGINAL invariant's genuine
+smaller-dimensional outside-window locus for a future auxiliary-chain step;
+simultaneous HS terms, preparation after noncanonical steps, original
+coefficient transformed semicoherence and BM13.4 termination remain OPEN.
+\end{proof}
+
+\begin{lemma}[The literal variation locus is EMPTY in genuine analytic dimension zero]
+\label{hir:actual-full-value-zero-dimensional-variation-empty}
+\uses{hir:actual-full-value-smooth-local-constancy-bad-locus-analytic,hir:analytic-dimzero-all-points-regular}
+\source{bierstone-milman97-invent-math:page-0095}
+\lean{Hironaka.HironakaOriginalFullValueVariationLocus.actualValueVariationLocus_zero_empty}
+\leanok
+For ANY actual function on a genuine analytic pure-zero-dimensional set,
+the SAME literal nonsmooth/nonconstant locus is empty. No full-cut analytic,
+value-order finiteness, discreteness or locally constant certificate is input.
+\end{lemma}
+\begin{proof}
+The proved genuine analytic dimension-zero theorem internally supplies
+regularity of dimension zero at every actual carrier point. Its real
+flattening gives a true open neighborhood whose carrier trace is the
+singleton of that SAME point. Every actual function is constant on this
+actual trace. Thus every genuine carrier point satisfies BOTH regularity
+and true local constancy in the independently defined literal good predicate;
+none belongs to the literal bad locus. This proves the zero-dimensional
+base geometry for the ORIGINAL-value part, without asserting simultaneous
+HS transformed presentations or the terminating auxiliary-chain driver.
+\end{proof}

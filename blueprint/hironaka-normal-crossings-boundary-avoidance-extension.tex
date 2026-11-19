@@ -1,0 +1,100 @@
+\section{Actual old-branch superlevels avoid born boundary and preserve marked cosupport}
+\label{sec:hironaka-normal-crossings-boundary-avoidance}
+
+Here an actual boundary-adapted pair $(H,E)$ consists of an intrinsic
+normal-crossing carrier $H$ and a genuine finite SNC list $E$ with
+simultaneous coordinates: the local coordinates of the distinct $H$
+branches are disjoint from those of every boundary member through the
+point. The members of $E$ may be the actual born exceptional members;
+no initial merely-NC boundary is silently made SNC.
+
+\begin{theorem}[Every intrinsic old-branch superlevel is dense away from the actual boundary]
+\label{hir:general-nc-actual-branch-superlevel-off-boundary-density}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryAvoidance.branch_superlevel_subset_closure_off_boundary}
+For every actual boundary-adapted pair $(H,E)$ and every natural $r$,
+the intrinsic branch-count superlevel $D_r(H)$ is contained in the
+closure of $D_r(H)\setminus |E|$. In particular the entire actual
+double locus is approximated by actual double-locus points outside
+the born boundary.
+\uses{hir:general-nc-simultaneous-original-boundary,hir:general-nc-exact-nearby-branch-count}
+\leanok
+\end{theorem}
+\begin{proof}
+Fix a point of the superlevel and genuine simultaneous centred
+coordinates. Let $S$ be its actual old-branch coordinate set. The
+intrinsic branch-count formula gives $r\leq |S|$. Take the vector
+whose coordinates in $S$ are zero and whose other coordinates are
+one. Multiply it by a small nonzero complex parameter and apply the
+actual inverse chart. The resulting actual points tend to the fixed
+point and, eventually, belong to the genuine chart target and any
+prescribed neighbourhood.
+
+Every old-branch coordinate stays zero, so the exact original-chart
+branch-count formula gives the same count $|S|$ at these points.
+Every boundary member through the fixed point has a singleton
+coordinate outside $S$; that coordinate is the nonzero parameter,
+so none of these boundary members contains the perturbed point.
+The finitely many boundary members not through the fixed point are
+closed, so one further genuine neighbourhood avoids all of them.
+Thus every neighbourhood meets $D_r(H)\setminus |E|$, proving the
+asserted closure inclusion. Empty boundary lists and zero-dimensional
+cases are covered by the same finite coordinate argument.
+\end{proof}
+
+\begin{theorem}[Actual closed current cosupport propagates across the born boundary at every mark]
+\label{hir:general-nc-actual-closed-cosupport-off-boundary-propagation}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryAvoidance.branch_superlevel_subset_cosupp_of_off_boundary}
+Let an actual current marked datum have coherent ideal and closed
+smooth ambient carrier, and let $(H,E)$ be adapted with its actual
+boundary list. If its actual cosupport contains $D_r(H)\setminus|E|$,
+then it contains the whole $D_r(H)$. The marking is arbitrary and the
+same current ideal, carrier and mark are retained.
+\uses{hir:general-nc-actual-branch-superlevel-off-boundary-density,hir:order-power-along}
+\leanok
+\end{theorem}
+\begin{proof}
+The actual coherent-ideal cosupport on the actual closed smooth
+carrier is closed at the given marking. It contains the assumed
+actual off-boundary superlevel, hence contains its closure. The
+preceding genuine density theorem places the entire superlevel
+inside that same closure. Compose these inclusions. No extra ideal
+power or exceptional-factor premise is introduced.
+\end{proof}
+
+\begin{theorem}[A genuine highest-old-branch blowup preserves double-locus cosupport for every marking]
+\label{hir:general-nc-actual-highest-step-any-mark-double-cosupport}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryAvoidance.highest_step_doubleLocus_subset_controlled_cosupport}
+For a whole ambient well-formed marked datum and an actual adapted
+carrier $H$, suppose its actual original double locus is contained in
+the original marked cosupport. Every genuine blowup of a highest
+old-branch superlevel of count at least two is an actual admissible
+step for this same datum. The actual strict old-carrier double locus
+is contained in the literal marking-$d$ controlled cosupport of the
+same original ideal after this step, for every marking $d$.
+\uses{hir:general-nc-actual-closed-cosupport-off-boundary-propagation,hir:general-nc-boundary-transform-original-count-step,hir:general-nc-higher-count-over-image}
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine highest old-branch centre is closed and smooth and has
+actual normal crossings with the given SNC boundary. Its count is
+at least two, so the original double-locus hypothesis puts this very
+centre in the actual original cosupport. It is therefore admissible
+for the same original marked datum.
+
+Actual highest-stratum blowup geometry supplies the transformed
+adapted pair, including the literal new exceptional member. Outside
+its whole actual boundary, a point is outside that exceptional
+member, hence projects off the actual centre. The exact original-image
+branch-count bound sends an actual new double-locus point to an
+actual original double-locus point. The hypothesis puts its image
+in the original cosupport. The genuine off-centre controlled-transform
+law then puts the point in the actual new cosupport. Actual admissible
+transform well-formedness makes this current cosupport closed.
+Apply the preceding propagation theorem to the same transformed
+adapted pair. This gives the entire new double-locus inclusion,
+including exceptional points. Finally the literal whole-ambient
+transform dictionary identifies the current ideal and mark with the
+actual marking-$d$ controlled transform of the original ideal.
+No marking-one restriction, stronger centre-power condition, or
+full initial-NC resolution is asserted.
+\end{proof}

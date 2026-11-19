@@ -1,0 +1,181 @@
+\section{An actual interior empty step with the original history retained}
+\label{chap:hironaka-original-interior-empty-history}
+
+The source-facing goal is the empty-step invariance used in W\l odarczyk's
+resolution invariant: original boundary members remain original, whereas a new
+exceptional member belongs to the later history.  This chapter supplies an
+unrebased geometric prerequisite.  Throughout, the same initial marked ideal
+and the same initial space are retained.  No value from the transformed initial
+marked ideal is substituted for a value from the original history.
+
+The step treated here is the genuine blowup of the empty centre with identity
+projection.  It is sufficient to isolate deletion of a redundant interior stage
+without a change of manifold.  Arbitrary empty-centre biholomorphisms and the
+complete recursive invariant comparison still require further proofs.
+
+\begin{definition}[The original history with an interior identity empty step]
+\label{hir:original-interior-empty-history}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorEmptyHistory.interiorEmptyHistory,Hironaka.HironakaOriginalInteriorEmptyHistory.proj_interiorEmptyHistory,Hironaka.HironakaOriginalInteriorEmptyHistory.length_interiorEmptyHistory}
+\leanok
+For actual blowup towers $H:X\leftarrow A$ and $S:A\leftarrow Y$, let
+\[
+ H\epsilon S=(H\,\xleftarrow{\mathrm{id}_A}\,A)S,
+ \qquad C_\epsilon=\varnothing.
+\]
+The identity is an actual blowup along the empty centre: the empty vanishing
+ideal is the unit ideal, and the blowup universal property has the identity as
+its unique lift.  The initial space, final space and all stages of $H$ and $S$
+are retained.  The composite projection of $H\epsilon S$ is literally that of
+$HS$, and its length is $|H|+1+|S|$.
+\end{definition}
+
+\begin{lemma}[The actual geometric dictionary without rebasing]
+\label{hir:original-interior-empty-geometric-dictionary}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorEmptyHistory.geometric_dictionary,Hironaka.HironakaOriginalInteriorEmptyHistory.whole_record_of_nonempty_tail}
+\leanok
+\uses{hir:original-interior-empty-history,bcalc:monomial-invariant-empty-member}
+Let $J=(N,E,I,d)$ be well formed and let $H$ be an actual test tower of $J$.
+For any actual tower $S$ starting at the final stage of $H$, put
+$j=|E|+|H|$, $J^+=(J)_{H\epsilon S}$ and $J^-=(J)_{HS}$.
+Then
+\[
+ N^+=N^-,\quad d^+=d^-,\quad E^+=(E^-).\operatorname{insert}_j(\varnothing),
+ \quad\operatorname{cosupp}J^+=\operatorname{cosupp}J^-.
+\]
+Their codimension-one cosupport parts along $N^+=N^-$ also agree.
+If $S$ has at least one blowup, the entire literal record satisfies
+$J^+=\operatorname{insertEmpty}_j(J^-)$.
+No admissibility hypothesis on the tail $S$ is required for these comparisons.
+\end{lemma}
+\begin{proof}
+Write $K=J_H$, and let $B$ be the transform of $K$ by the identity empty
+blowup with its appended empty boundary member removed.  Closedness of $K.N$
+and of every member of $K.E$ implies that their strict transforms by this
+identity map equal themselves.  The empty-step ideal comparison on $K.N$,
+together with the identity pullback of its coherent ideal, gives restricted
+equivalence $B\sim_N K$.  Both ideals are coherent: $K$ is a stage of a true
+test tower, and the empty centre is admissible for $K$.
+
+The actual transform definition, including its ordered boundary list, gives
+\[
+J^+=\operatorname{insertEmpty}_j(B_S).
+\]
+Restricted equivalence preserves cosupports along every tail and, after the
+first blowup, the entire transformed records are equal.  The carrier and
+boundary transforms along any tower depend only on their initial carrier and
+boundary, so $(B_S).N=(K_S).N$ and $(B_S).E=(K_S).E$, also for an empty tail.
+The mark is retained by every transform.  Inserting an empty boundary member
+changes neither the carrier, ideal, mark nor cosupport.  Finally the
+codimension-one part depends only on the carrier and cosupport, which have
+just been proved equal.  If $S$ is nonempty, apply equality of transforms of
+restricted-equivalent coherent marked ideals after its first blowup; this
+proves the claimed literal record equality.
+\end{proof}
+
+\begin{lemma}[The original Step One members and all special branches]
+\label{hir:original-interior-empty-step-one-dictionary}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorEmptyHistory.original_members_dictionary,Hironaka.HironakaOriginalInteriorEmptyHistory.level_dictionary,Hironaka.HironakaOriginalInteriorEmptyHistory.isSpecial_dictionary,Hironaka.HironakaOriginalInteriorEmptyHistory.stepRegime_dictionary}
+\leanok
+\uses{hir:original-interior-empty-geometric-dictionary,hir:step-one-value-masked}
+Let the original marked ideal $M$ be well formed, and let $H$ be an actual test
+tower of the original coefficient-homogenized marked ideal $\overline M$.
+For every actual tail $S$, the ordered list of original members, its indexed
+membership count at every point, both branches of the Step One special locus,
+and each fixed Step One regime coincide for $H\epsilon S$ and $HS$.
+This includes the zero-member codimension-one branch.
+\end{lemma}
+\begin{proof}
+The coefficient-homogenized marked ideal is well formed and has the same
+initial boundary list as $M$.  Apply the geometric dictionary to $\overline M$.
+The first $|M.E|$ elements of its transformed boundary list are precisely the
+original members.  Since $j=|M.E|+|H|\geq |M.E|$, insertion at $j$ leaves this
+whole ordered prefix unchanged.  Consequently its membership count agrees
+pointwise.  In the zero-member branch, the dictionary identifies the actual
+carrier and codimension-one cosupport part.  In the positive branch it
+identifies the actual carrier, ordered original-member list and cosupport;
+these are all arguments of the member-intersection locus.  Both special
+predicates therefore coincide.  A fixed regime is the conjunction of equality
+to its chosen level and failure of the special predicate, so it also coincides.
+\end{proof}
+
+\begin{lemma}[The actual contact and member masks of the original history]
+\label{hir:original-interior-empty-masks}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorEmptyHistory.maskA_dictionary,Hironaka.HironakaOriginalInteriorEmptyHistory.maskB_dictionary,Hironaka.HironakaOriginalInteriorEmptyHistory.lowerMask_dictionary}
+\leanok
+\uses{hir:original-interior-empty-history,hir:original-interior-empty-step-one-dictionary}
+Under the preceding hypotheses, at each final point $p$ the actual open sets
+$\operatorname{maskA}(M,H\epsilon S,p)$ and
+$\operatorname{maskB}(M,H\epsilon S,p)$ equal their counterparts for $HS$.
+Hence the actual lower mask agrees at every level.
+\end{lemma}
+\begin{proof}
+The raw set whose interior defines the member mask uses only the ordered
+original members, their levels and the special predicate at each point.
+All of these agree by the preceding lemma, so its interior agrees.
+
+For the zero-level contact mask, the initial marked ideal is literally the
+same $M$.  Both composite projections equal that of $HS$.  Thus the chosen
+tangent-direction pair is evaluated at exactly the same initial point; its
+choice is not replaced or identified using a transport certificate.  The
+remaining raw-set arguments are absence from each original member and
+absence from the actual codimension-one cosupport part.  The geometric and
+Step One dictionaries prove both equalities.  The raw sets and their interiors
+therefore agree.  The lower mask selects the contact mask at level zero and
+the member mask at every positive level, which completes the proof.
+\end{proof}
+
+\begin{lemma}[The exact actual fixed-regime run across the interior insertion]
+\label{hir:original-interior-empty-regime-run}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorEmptyHistory.stepRegime_run_dictionary}
+\leanok
+\uses{hir:original-interior-empty-step-one-dictionary}
+Fix any Step One level $s$ under the preceding hypotheses.  At $y\in Y$ put
+$r=\operatorname{run}_{M,s}(HS,y)$, $t=|S|$, and
+$b=\operatorname{stepRegime}_{M,s}(H,S.\operatorname{proj}(y))$.
+Then the actual recursively computed run satisfies
+\[
+ \operatorname{run}_{M,s}(H\epsilon S,y)=
+ \begin{cases}
+ r,&r<t,\\
+ r+1,&t\le r\text{ and }b,\\
+ t,&t\le r\text{ and }\neg b.
+ \end{cases}
+\]
+This is an equality of the literal original fixed-regime run, not a supplied
+comparison of split times.  No final regime membership is assumed.
+\end{lemma}
+\begin{proof}
+Induct on the actual tail $S$.  For the empty tail, its length is zero and its
+projection is the identity.  The new last step is the identity empty blowup,
+so the defining recursion gives $\operatorname{run}(H,y)+1$ precisely when
+$H,y$ satisfies the chosen regime, and zero otherwise.  This is the stated
+formula, including the third case when a run of $H$ itself is nonzero but its
+current point fails the regime.
+
+For a tail ending in $\pi$, the special-branch and level dictionary makes the
+predecessor regime test identical in both histories.  If that test fails,
+both runs are zero, which is shorter than the now positive tail length.
+If it holds, both recursively computed predecessor runs increase by one.
+Apply the induction hypothesis at $\pi y$.  The inequality $r<t$ is preserved
+when both sides increase by one; in the other cases the old run, or the tail
+length respectively, increases by one.  The base-point test $b$ is unchanged
+because the tail projection composes with $\pi$.  These three cases give the
+formula.
+\end{proof}
+
+These results give geometric producers and the actual fixed-regime run for retaining the original history when
+an interior empty step is removed.  They do not yet identify the recursive
+invariant's lower marked ideals or restricted tails, prove the whole higher value
+unchanged, provide local regularity of its maximum locus, or construct global
+maximum scheduling on a noncompact space.  The full G3 goal remains open.
+The argument is an adaptation of the empty-step part of the marked-ideal
+resolution invariant, using the existing literal controlled-transform and
+original-member definitions; it does not supply an independent resolution
+driver.  Source routes: \texttt{wlodarczyk05-hironaka}, resolution-invariant
+empty-step property and original boundary histories; \texttt{bierstone-milman08-functoriality},
+marked-ideal equivalence and blowup histories.

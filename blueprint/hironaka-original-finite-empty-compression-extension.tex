@@ -1,0 +1,126 @@
+\section{Internally removing all actual empty steps of a finite canonical history}
+
+Keep the ORIGINAL marked record and all of its indexed boundary members.
+The ordered-boundary route of
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality} is adapted by
+repeatedly deleting only an actual empty blowup and its internally normalized
+suffix. Each deletion strictly decreases the actual finite history length.
+The result concerns a GIVEN whole finite canonical history, not existence
+of an infinite or noncompact global resolution schedule.
+
+\begin{lemma}[A failed actual nonempty-centre condition locates a true empty step]
+\label{hir:original-finite-history-actual-empty-step-occurrence}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:blowup-tower}
+\lean{Hironaka.HironakaOriginalFiniteEmptyCompression.exists_actual_empty_step_split}
+\leanok
+If some actual recorded centre of a finite tower is empty, the ENTIRE
+tower is literally $H\pi S$, with a genuine actual empty-centre blowup
+$\pi$ and its SAME original entire suffix $S$. Otherwise every recorded
+centre is nonempty. No chosen split or comparison history is supplied.
+\end{lemma}
+\begin{proof}
+Use the actual tower recursion. The empty tower has no failing centre.
+For a last step, if its actual centre is empty, take the actual preceding
+tower as $H$ and the empty suffix. If its actual centre is nonempty but
+some earlier centre fails, the actual preceding tower fails the same
+condition. The recursion supplies its entire empty-step split $H\pi S$.
+Append the original last step to THIS $S$. The actual append recursion
+identifies the whole resulting tower with the given tower. Thus the split
+retains every original later step and records a genuine empty blowup.
+\end{proof}
+
+\begin{theorem}[The original whole family history internally compresses all empty steps]
+\label{hir:original-finite-family-empty-free-canonical-compression}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-finite-history-actual-empty-step-occurrence,hir:original-actual-empty-family-canonical-deletion,hir:original-recursive-chronological-history-value-maps}
+\lean{Hironaka.HironakaOriginalFiniteEmptyCompression.original_recursive_family_empty_free_compression}
+\leanok
+At EVERY actual family depth $k$, ONLY the original bound-$k$ marked record
+and the GIVEN entire actual $R_k$ canonical tower $T$ internally supply a
+whole canonical tower $Q$ over the SAME original base, an actual final
+biholomorphism $\chi:Z\to Y$, and ONE strict order embedding $F$ of the
+actual depth-$k$ value type. Every actual recorded centre of $Q$ is
+nonempty and $|Q|\leq|T|$. Whole projections satisfy $p_T\chi=p_Q$ and
+ENTIRE original transformed cosupport satisfies
+\[
+ \operatorname{cosupp}M_T=\chi^{-1}_{\rm inv}
+   (\operatorname{cosupp}M_Q),\qquad
+ R_k(M,T,y)=F\bigl(R_k(M,Q,\chi^{-1}y)\bigr)
+\]
+for EVERY original cosupport point $y$. Here the displayed preimage uses
+the inverse map $\chi^{-1}:Y\to Z$. The actual original and compressed
+histories are terminal geometric resolutions exactly together. The SAME
+strict $F$ therefore reflects all mixed-point strict, weak and equality
+comparisons; no maximum existence or compressed history/value certificate
+is a caller input.
+\end{theorem}
+\begin{proof}
+Use strong induction on the actual whole length, uniformly over every
+actual final manifold and every original canonical tower of that length.
+If every centre is nonempty, choose $Q=T$, identity final biholomorphism
+and identity order embedding. All dictionaries are literal identities.
+Otherwise the first lemma internally gives a true whole empty-step split.
+The genuine actual empty-deletion producer constructs the normalized
+suffix, deleted whole canonical tower $D$, final biholomorphism
+$\chi_D:D_{\rm final}\to Y$, entire cosupport equality, full-value formula
+with strict chronological embedding $H_{k,j}$, and terminal iff. Its
+normalized suffix has the original suffix length, so
+$|D|=|H|+|S|<|H|+1+|S|=|T|$. Apply the length induction to this INTERNALLY
+supplied $D$ and its internally derived whole canonicality. It gives
+$Q$, final $\chi_Q$, and a single strict embedding $F_Q$ with the entire
+dictionaries. Choose $\chi=\chi_Q$ followed by $\chi_D$ and
+$F=H_{k,j}\circ F_Q$. Composition of genuine strict embeddings is strict.
+
+The actual whole normalization isomorphism commutes with original base
+projections; the identity empty insertion has literally the deleted
+projection. Compose these projection identities with the induction's
+actual projection identity to obtain $p_T\chi=p_Q$. Compose the two
+entire inverse-preimage cosupport identities. At each original cosupport
+point the first identity supplies a genuine $D$ cosupport point, so the
+induction's WHOLE value formula applies there. Substitution into the
+single-deletion WHOLE formula gives precisely $F$. Compose actual terminal
+iff statements. The induction constructs a finite tower with every centre
+nonempty; it never postulates its existence or chooses a desired value
+comparison. The ONE strict $F$ supplies all mixed-point order reflection
+because the actual values at both points use this same embedding.
+\end{proof}
+
+\begin{theorem}[The actual maximal-order Step One history has the same full compression]
+\label{hir:original-finite-step-empty-free-canonical-compression}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-finite-history-actual-empty-step-occurrence,hir:original-actual-empty-step-canonical-deletion,hir:original-recursive-chronological-history-value-maps}
+\lean{Hironaka.HironakaOriginalFiniteEmptyCompression.original_recursive_step_empty_free_compression}
+\leanok
+For EVERY lower depth $k$, original bound-$(k+1)$ maximal-order input and
+its GIVEN entire actual masked Step One canonical history internally give
+such a whole nonempty-centre canonical history, shorter-or-equal actual
+length, true final biholomorphism, SAME original projection dictionary,
+ENTIRE cosupport equality, terminal iff and ONE strict embedding of the
+entire masked Step One value type computing all original cosupport values.
+Every true level and lower order, chosen-contact zero and empty histories
+are included. No compressed canonicality, lower history, value, branch
+or termination certificate is supplied.
+\end{theorem}
+\begin{proof}
+Use strong induction on the actual entire tower length, retaining the
+same original maximal-order record and all of its indexed members. If
+all actual centres are nonempty, take the original whole tower and both
+identities. Otherwise internally locate an actual empty step and its
+entire original suffix. The actual Step One empty-deletion producer gives
+deleted WHOLE Step One canonicality, the real normalized suffix of exactly
+the old suffix length, its final biholomorphism, entire cosupport/whole
+values and terminal iff. Thus its actual length is strictly smaller. The
+length induction on THIS internally supplied original canonical deleted
+history gives a whole nonempty-centre $Q$ and one strict embedding $F_Q$.
+Compose actual final biholomorphisms and the single-deletion masked
+chronological embedding $S_{k,j}$ with $F_Q$. Whole projection identities
+compose using actual identity-insertion projection equality. Entire
+cosupport equalities compose via inverse maps. At every actual original
+cosupport point they internally give the intermediate cosupport membership,
+so substitution of the two genuine masked WHOLE formulas gives the stated
+one-map formula. True terminal iff statements compose. This uses the
+entire actual masked Step One values at every original branch and lower
+order, rather than a monomial or independently chosen contact surrogate.
+No noncompact scheduling or global gluing conclusion is asserted.
+\end{proof}

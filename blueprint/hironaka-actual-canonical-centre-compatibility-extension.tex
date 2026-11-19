@@ -1,0 +1,51 @@
+\section{Canonical centre compatibility from any genuine monic family}
+
+Let $J\subseteq S=\mathbb C[[x_1,\ldots,x_n]]$, fix a monomial order,
+and let $V$ be its actual initial vertices. Write $R_J$ for the unique
+normal representative modulo the entire ideal $J$, supported outside its
+initial diagram. For a coordinate centre $A$, write $C_A$ for its formal
+ideal and $w_A$ for the corresponding coordinate weight.
+
+\begin{lemma}[The canonical normal representative preserves the whole centre filtration]
+\label{hir:actual-canonical-remainder-centre-power-from-family}
+\uses{hir:actual-monic-family-canonical-remainder,hir:actual-monic-family-centre-power-division}
+\lean{Hironaka.HironakaActualCanonicalCentreCompatibility.actualFormalRemainder_mem_coordinate_power_of_family}
+\leanok
+Suppose a genuine monic vertex family $(B_\alpha)$ satisfies
+$B_\alpha\in C_A^{w_A(\alpha)}$ for every actual vertex. Then for every
+$q\geq0$ and every $F\in C_A^q$, one has $R_J(F)\in C_A^q$.
+\end{lemma}
+\begin{proof}
+The same-family weighted recursion preserves the weight lower bound $q$
+of $F$: every coefficient of its actual remainder at weight less than $q$
+vanishes. Indeed, the coefficient formulation of each hypothesis
+$B_\alpha\in C_A^{w_A(\alpha)}$ is exactly the lower-weight vanishing
+condition required by that recursion. Likewise the whole power membership
+of $F$ gives the required numerator coefficient vanishings. The coefficient
+criterion for the entire coordinate power therefore puts this actual family
+remainder in $C_A^q$. Independence of the normal representative from the
+chosen monic family identifies this same remainder with $R_J(F)$.
+\end{proof}
+
+\begin{theorem}[Centre compatibility of the canonical reduced members is equivalent to that of some monic family]
+\label{hir:actual-canonical-centre-compatibility-iff-monic-family}
+\uses{hir:actual-canonical-remainder-centre-power-from-family,hir:actual-reduced-basis-entire-filtered-division}
+\lean{Hironaka.HironakaActualCanonicalCentreCompatibility.actualReducedVertexSeries_mem_coordinate_power_of_family,Hironaka.HironakaActualCanonicalCentreCompatibility.actualReducedVertexCentreCompatibility_iff_exists_family}
+\leanok
+Every centre-compatible monic vertex family forces the actual canonical
+reduced members $F_\alpha$ to lie in $C_A^{w_A(\alpha)}$.
+Consequently the existence of such a monic family is equivalent to this
+same literal compatibility for all canonical reduced members.
+\end{theorem}
+\begin{proof}
+The genuine monomial $x^\alpha$ belongs to $C_A^{w_A(\alpha)}$ by the
+whole coordinate-power coefficient criterion. The preceding lemma puts
+$R_J(x^\alpha)$ in the same power. The actual canonical reduced vertex
+member is $F_\alpha=x^\alpha-R_J(x^\alpha)$; subtraction in that entire
+ideal proves its required membership. This proves one implication of the
+equivalence. Conversely the existing canonical reduced family is itself
+a genuine monic vertex family, with actual ideal membership, coefficient
+$1$ and all preceding coefficients zero. Literal compatibility of its
+members thus supplies the required family. No assertion of convergence
+of these formal canonical members is used in either direction.
+\end{proof}

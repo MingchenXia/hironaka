@@ -1,0 +1,66 @@
+\section{Actual canonical local stages retain genuine relatively compact open hosts}
+\label{sec:hironaka-actual-open-tower-hosts}
+
+\begin{theorem}[A genuine actual tower pullback of an open embedding is an open embedding]
+\label{hir:actual-open-tower-upper-embedding}
+\lean{Hironaka.HironakaActualOpenTowerHosts.upper_isOpenHoloEmbedding,Hironaka.HironakaActualOpenTowerHosts.upper_range_eq}
+Let $Q$ be an actual smooth Cartesian blowup pullback of a finite
+actual tower $T$ along an actual open holomorphic embedding $b:Y\to X$.
+Then its actual upper map $g:C\to D$ is an open holomorphic embedding.
+Its whole image is $T^{-1}(b(Y))$.
+\uses{hir:submersion-cartesian-tower-whole-universal}
+\leanok
+\end{theorem}
+\begin{proof}
+Write the given base embedding as the actual biholomorphism
+$\Phi:Y\simeq O$ followed by inclusion of the actual open $O\subset X$.
+Let $V=T^{-1}(O)\subset D$. On $V$ the two actual holomorphic maps
+$u=\Phi^{-1}\circ T$ and $v:V\hookrightarrow D$ form a cone over the
+actual base square. The genuine holomorphic universal property of the
+actual tower pullback supplies $w:V\to C$ with $Qw=u$ and $gw=v$.
+The actual projection commutation puts every $g(c)$ in $V$, giving a
+holomorphic $e:C\to V$. The equality $gw=v$ says $ew=\mathrm{id}_V$.
+For the other composite, both $we$ and $\mathrm{id}_C$ are holomorphic
+lifts of the same cone $(Q,g)$. Indeed the $g$-components agree by
+$gw=v$, and the $Q$-components agree by the actual projection square
+and the inverse identities for $\Phi$. Uniqueness in the actual
+universal property gives $we=\mathrm{id}_C$. Thus $e,w$ form an
+actual biholomorphism onto the whole open $V$, and $g$ is its inclusion.
+For completeness the literal whole-image equality also follows directly
+from the actual universal square: for any $d$ with $T(d)=b(y)$, use
+the constant cone from the actual manifold $Y$ with values $y,d$,
+and evaluate its genuine universal lift at that same $y$. This gives
+an actual preimage of $d$ under $g$. The other inclusion is the actual
+projection commutation. Thus its whole range is $T^{-1}(b(Y))$, with
+no replacement of either actual history or upper map.
+\end{proof}
+
+\begin{theorem}[Actual proper finite stages preserve a compact enclosure of the whole source range]
+\label{hir:actual-open-tower-compact-host}
+\lean{Hironaka.HironakaActualOpenTowerHosts.upper_range_subset_compact}
+Let $U\subset X$ be an actual open containing the closure of the image
+of an original open holomorphic embedding $\iota:B\to X$, and assume
+that this closure is compact. Let $T$ be any actual finite blowup
+tower over $U$, and $Q$ its actual pullback along the actual
+corestriction $b:B\to U$. Then the whole range of the actual upper
+map is contained in a compact set in the actual target of $T$.
+In particular the source endpoint remains a genuine relatively compact
+open submanifold of this host.
+\uses{hir:actual-open-tower-upper-embedding}
+\leanok
+\end{theorem}
+\begin{proof}
+The inverse image $L$ of $\overline{\iota(B)}$ under the inclusion
+$U\hookrightarrow X$ is compact: since that whole closure is contained
+in $U$, it is the image of the original compact closure under the
+continuous subtype corestriction into $U$. A finite actual blowup
+projection $T$ is genuinely proper, so its whole inverse image
+$K=T^{-1}(L)$ is compact. Actual projection commutation puts the
+projection of every upper image point $g(q)$ at $b(Q(q))$, which lies
+in $L$ because $\iota(Q(q))$ belongs to its original image and hence
+to its closure. Thus the whole actual range of $g$ is contained in
+this same compact $K$. The preceding theorem proves the actual upper
+map is an open holomorphic embedding. These are natural geometric
+consequences of the original range enclosure and actual finite
+blowup square, rather than an assumed host for a future algorithm.
+\end{proof}

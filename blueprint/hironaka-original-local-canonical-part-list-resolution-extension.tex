@@ -1,0 +1,101 @@
+\section{The actual ordered individual-sum separator on a relatively compact open base}
+\label{sec:hironaka-original-local-canonical-part-list-resolution}
+
+\begin{theorem}[The same ordered canonical separator retains an actual relatively compact host]
+\label{hir:original-local-canonical-ordered-separator-host}
+\lean{Hironaka.HironakaOriginalLocalCanonicalPartListResolution.exists_local_canonical_ordered_separator}
+Let $E$ be the actual ordered SNC boundary on $X^n$, $G$ a closed bad
+set, and $(A,d)$ and the finite ordered list $L$ original locally good
+parts relative to $(E,G)$. Thus the parts are analytic, of the stated
+proper pure dimensions, regular and boundary-free off $G$, and dense
+there; compactness of parts is not assumed. Suppose $A\cap B\subset G$
+for every $(B,e)\in L$. Let $\iota:B_0\to X$ be a genuine open
+holomorphic embedding whose whole range lies in a compact set.
+
+These original data internally produce a finite actual tower $T$ over
+$B_0$ with the genuine ordered canonical separation-chain provenance
+for precisely the individual sums in $L$, the entire accumulated
+boundary, and centres over $\iota^{-1}G$. All the corresponding whole
+strict parts are separated from the head.
+
+In addition they produce an actual final host $H$, its ordered SNC
+boundary $E_H$ and closed bad set $G_H$, a transformation $P$ of
+original sets, and an actual open holomorphic embedding $j$ of the
+source endpoint into $H$ whose whole range lies in a compact set.
+The entire source boundary is $j^{-1}E_H$, and
+$j^{-1}G_H=T^{-1}(\iota^{-1}G)$. The operation $P$ carries every
+original locally good part to a locally good part with the same
+label, preserves disjointness of whole closed sets, and transports every
+closed-pair intersection containment $S\cap R\subset G$ to
+$P(S)\cap P(R)\subset G_H$. For every original
+closed set $S$ dense off $G$ gives the whole equality
+\[
+ S_T(\iota^{-1}S)=j^{-1}P(S).
+\]
+The host head $P(A)$ is disjoint from every host tail part $P(B)$.
+No canonical history, host, compact intersection or comparison
+certificate is an input.
+\uses{hir:original-local-canonical-sum-prescribed-open-producer,hir:actual-open-tower-upper-embedding,hir:actual-open-tower-compact-host,hir:original-canonical-ordered-separator-chain}
+\leanok
+\end{theorem}
+\begin{proof}
+Induct on the actual length of $L$. For the empty list use the actual
+identity history, the original host $X$, $P=\mathrm{id}$ and the given
+$\iota$. The whole boundary and bad-set identities are literal, the
+whole identity strict transform of any closed set is itself, and all
+remaining assertions follow from the original data.
+
+For $(B,e)::L'$, original local goodness and the actual intersection
+condition give both mutual-density inclusions. Choose a relatively
+compact open $U$ containing the compact closure of the entire original
+range of $\iota$. Apply the proved original-only local individual-sum
+producer on $U$ to $I_A+I_B$. It constructs an actual canonical terminal
+target stage $T_0$ and, along the actual corestriction of $\iota$, an
+actual canonical terminal source stage $Q_0$ with its whole intrinsic
+sum input. Its actual upper map $g_0$ is an open holomorphic embedding
+and has a compact enclosure by the genuine universal-square and proper
+host theorems.
+
+On the actual endpoint host of $T_0$ let $P_0(S)$ be the conventional
+strict transform of $S\cap U$; let $G_0=T_0^{-1}(G\cap U)$ and let
+$E_1$ be the entire actual boundary. Admissibility over $G\cap U$
+transports every original locally good part to a locally good part
+$P_0(S)$ with its same label. Whole strict transforms lie in whole
+preimages, so $P_0$ preserves disjointness of closed sets and transports every closed-pair
+intersection containment into the whole inverse-image bad set; in
+particular the intersections of
+$P_0(A)$ with the remaining parts still lie in $G_0$.
+
+Apply induction to these genuine host data and to the actual compact-
+enclosed open embedding $g_0$. This gives an actual source suffix
+$Q_1$ and a genuine final host with transformation $P_1$. Append the
+actual towers $Q_0,Q_1$, and set $P=P_1\circ P_0$. The exact whole
+boundary identity of the first actual Cartesian stage and its whole
+strict squares identify the independently intrinsic input of the suffix.
+Consequently the genuine separation-chain constructor records exactly
+these same canonical terminal individual-sum stages, in the same order.
+Admissibility and centres-over compose on these actual towers; the
+actual projection square identifies the whole final bad-set inverse
+image. The final host and compact enclosure are the actual ones supplied
+by induction, not new assumed witnesses.
+
+For the whole strict dictionary take an original closed $S$ dense off
+$G$. Open inverse images preserve this genuine density, and its strict
+transform $P_0(S)$ is closed and dense off $G_0$ under the actual first
+admissible stage. The preserved-open actual Cartesian strict-square
+theorem identifies the whole $Q_0$ strict transform with
+$g_0^{-1}P_0(S)$. Apply the inductive whole dictionary to $P_0(S)$, then
+the genuine strict-transform composition theorem for the two actual
+source stages. This proves the asserted entire equality, including all
+exceptional points. Inductive local-goodness and disjointness transport
+prove the corresponding whole properties of $P$. For the additional
+closed-pair intersection dictionary, whole strict-transform containment
+in the original closed preimages sends $S\cap R\subset G$ to
+$P_0(S)\cap P_0(R)\subset G_0$; apply the same inductive dictionary
+to these two genuinely closed strict transforms. The host separation
+of the first pair is retained because $P_1$ preserves disjointness;
+all remaining pairs are separated by induction. Pulling these whole
+host separations back through $j$ proves source separation. This is the
+same ordered individual-sum algorithm, without any compactness premise
+on the original parts or their intersections.
+\end{proof}

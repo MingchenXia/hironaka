@@ -1,0 +1,95 @@
+\section{Intrinsic dimension parts in the ordered smooth recursion}
+
+Let $b:Y^m\to X^n$ be an actual holomorphic submersion and put
+$r=m-n$ in natural-number arithmetic.  The $k$-dimensional part is the
+actual closure of the intrinsic dimension-$k$ regular locus.  No
+global inequality $n\le m$ is imposed when $Y$ is empty.
+
+\begin{lemma}[Whole dimension parts commute with smooth inverse image]
+\label{hir:original-dimension-part-smooth-shift}
+\uses{hir:original-smooth-intrinsic-regular-locus}
+\lean{Hironaka.HironakaOriginalCanonicalDimensionList.dimensionPart_preimage_eq_shift}
+\leanok
+For every original subset $W\subseteq X$ and every $k\in\mathbb N$,
+\[
+ (b^{-1}W)^{(k+r)}=b^{-1}(W^{(k)}).
+\]
+\end{lemma}
+\begin{proof}
+The actual intrinsic regular-locus equality identifies the source
+dimension-$(k+r)$ locus with the inverse image of the target
+dimension-$k$ locus.  A holomorphic submersion is continuous and open,
+so inverse image commutes with closure.  Taking closures of this
+literal regular-locus equality gives the claimed whole-set equality.
+\end{proof}
+
+\begin{lemma}[Every low source dimension part is actually empty]
+\label{hir:original-dimension-part-below-smooth-fibre-empty}
+\uses{hir:original-smooth-intrinsic-regular-locus}
+\lean{Hironaka.HironakaOriginalCanonicalDimensionList.dimensionPart_preimage_eq_empty_of_lt_fibre}
+\leanok
+For every original $W\subseteq X$ and every $j<r$, the intrinsic
+source part $(b^{-1}W)^{(j)}$ is empty.
+\end{lemma}
+\begin{proof}
+If a source point were regular of dimension $j$, genuine regularity
+reflection at that point would imply $r\le j$, contrary to $j<r$.
+Thus the entire dimension-$j$ regular locus is empty, and so is its
+closure.  The argument is pointwise and includes an empty source.
+\end{proof}
+
+\begin{lemma}[The entire non-pure singular set is an actual inverse image]
+\label{hir:original-nonpure-singular-set-smooth-pullback}
+\uses{hir:original-smooth-intrinsic-regular-locus}
+\lean{Hironaka.HironakaOriginalCanonicalDimensionList.singularSet_preimage_eq}
+\leanok
+The singular set obtained by removing \emph{all} intrinsic regular
+dimensions satisfies
+\[
+ \operatorname{Sing}(b^{-1}W)=b^{-1}\operatorname{Sing}(W).
+\]
+\end{lemma}
+\begin{proof}
+A singular source point lies in $b^{-1}W$ and cannot lie over a target
+regular point, since smooth pullback would make it regular in the
+target dimension plus $r$.  Conversely, any regular source point of
+any dimension reflects to a regular target point of its dimension
+minus $r$.  These two actual implications identify the complements
+of the unions of all regular strata inside the two whole carriers.
+No purity, analyticity or ideal-equality hypothesis is used.
+\end{proof}
+
+\begin{lemma}[The increasing intrinsic dimension list is the shifted pulled list]
+\label{hir:original-increasing-dimension-list-smooth-pullback}
+\uses{hir:original-dimension-part-smooth-shift,hir:original-dimension-part-below-smooth-fibre-empty}
+\lean{Hironaka.HironakaOriginalCanonicalDimensionList.nonempty_dimension_list_preimage}
+\leanok
+List the source pairs $((b^{-1}W)^{(j)},j)$ for $0\le j<m$ in
+increasing order and delete exactly those pairs with empty carrier.
+The resulting ordered list is literally the list of
+$(b^{-1}(W^{(k)}),k+r)$ for $0\le k<n$, again deleting exactly empty
+carriers.  This is equality of whole ordered labelled sets, rather
+than only equality of their unions.
+\end{lemma}
+\begin{proof}
+If the source has a point, the actual submersion at that point gives
+$n\le m$, hence $m=r+n$.  Split its increasing range into $0\le j<r$
+and the shifted range $j=r+k$, $0\le k<n$.  Every part in the first
+range is empty by the preceding lemma.  The preceding whole-part
+equality identifies every ordered pair in the second range with its
+pulled target pair, including its shifted dimension label.  Filtering
+removes the first range and agrees on the second range.
+
+If the source is empty, every subset of it is empty.  Both filtered
+lists are therefore empty, independently of their unfiltered lengths.
+Thus the literal filtered-list equality holds without a false global
+dimension inequality for an empty source.
+\end{proof}
+
+\begin{remark}
+This chapter supplies the actual ordered input dictionary for the
+mixed-dimensional finite recursion.  These lemmas alone do not
+construct its canonical separation or resolution stages, identify its
+composite projection, or close the non-pure elementary functoriality
+contract.
+\end{remark}

@@ -1,0 +1,93 @@
+\section{Actual boundary bookkeeping and empty inputs of the ordered recursion}
+
+\begin{lemma}[Changing the auxiliary ideal never changes the literal geometric boundary]
+\label{hir:original-ordered-recursion-literal-boundary}
+\uses{hir:original-canonical-ordered-separator-chain,hir:original-canonical-ordered-resolution-tree}
+\lean{Hironaka.HironakaOriginalCanonicalEmptyParts.geoTransformAlong_boundary_eq,Hironaka.HironakaOriginalCanonicalEmptyParts.separation_chain_boundary,Hironaka.HironakaOriginalCanonicalEmptyParts.ordered_resolution_boundary}
+\leanok
+For any actual tower, original marked records with the same initial
+ordered boundary have the same literal final boundary. In particular
+the recorded final boundary of an actual ordered separation chain or
+ordered resolution tree is the boundary obtained by transforming any
+original marked record with that same initial list along the same
+entire appended tower. No assertion makes the auxiliary ideals equal
+or the composite canonical for a different ideal.
+\end{lemma}
+\begin{proof}
+Induct on the literal tower. At length zero the assertion is the given
+list equality. At every actual blowup the next boundary is exactly
+the current list mapped by the same geometric strict transform, followed
+by the inverse image of the same centre. The ideal, carrier and mark
+fields do not occur in that formula, so equal current lists give equal
+next lists. For a separation chain, induct over its actual terminal
+sum stages. Transform composition along the literal append and the
+preceding boundary identity identify the next initial list with the
+recorded sum-stage boundary; the recursive assertion then gives the
+chain's recorded final list. For an ordered resolution tree, apply this
+chain result to its actual separator, the same boundary identity to its
+actual pure head, and the recursive tree assertion to its actual tail.
+Transform composition along both literal appends gives exactly the
+claimed whole final boundary of the same original tower.
+\end{proof}
+
+\begin{lemma}[An actually empty head makes its entire separation chain empty]
+\label{hir:original-empty-head-separation-chain-all-empty}
+\uses{hir:original-disjoint-sum-all-empty-canonical-stage}
+\lean{Hironaka.HironakaOriginalCanonicalEmptyParts.separation_chain_empty_of_head_empty}
+\leanok
+If the original head of an actual canonical separation chain is empty,
+every actual centre of the entire chain is empty, regardless of its
+ordered tail parts. No empty-stage or neutrality certificate is input.
+\end{lemma}
+\begin{proof}
+Induct on the actual chain. Its identity case has no centres. In a
+successor, the genuine sum datum contains the vanishing ideal of the
+empty original head. The head is disjoint from its current opposite
+part, and the genuine canonical empty-sum theorem makes this actual
+sum tower all-empty. The strict transform of the actual empty head
+is again empty. Apply induction to the unchanged recursive chain.
+The literal append of two all-empty histories has every centre empty,
+which proves the assertion for the entire same chain.
+\end{proof}
+
+\begin{theorem}[An empty filtered input forces the whole actual resolution tree projection-neutral]
+\label{hir:original-empty-filtered-parts-tree-projection-neutrality}
+\uses{hir:original-ordered-recursion-literal-boundary,hir:original-empty-head-separation-chain-all-empty,hir:original-all-empty-whole-boundary}
+\lean{Hironaka.HironakaOriginalCanonicalEmptyParts.ordered_resolution_empty_of_all_parts_empty,Hironaka.HironakaOriginalCanonicalEmptyParts.existsUnique_empty_parts_projection}
+\leanok
+Let an actual ordered canonical resolution tree have a literally empty
+input list after filtering exactly empty carriers. If every original
+boundary member is closed, every centre of its same appended tower is
+empty, and there is a unique actual biholomorphism to the original base
+equal to its projection. Every original closed subset has strict
+transform equal to its inverse image. Its recorded whole boundary is
+the original inverse-image list followed by precisely one empty entry
+per actual blowup; after filtering it is the filtered original list
+pulled back under that same biholomorphism. No compactness, ambient
+positivity, supplied deletion history or final isomorphism is assumed.
+This is the empty-input case, not the entire recursive uniqueness theorem.
+\end{theorem}
+\begin{proof}
+The empty filtered list says every original input carrier is empty.
+Induct on the actual resolution tree. Its head separation chain is
+all-empty by the preceding lemma. Its head strict carrier remains
+empty, so its actual canonical pure-head history has original empty
+cosupport and is all-empty as well. Every twice-transformed tail carrier
+is still empty; induction makes its actual tail all-empty. The two
+literal appends are therefore all-empty. This argument never uses the
+permitted bad-set index to infer a centre or a comparison.
+
+An actual blowup of the empty centre is a genuine biholomorphism equal
+to its projection. Induction on the just-proved all-empty tower composes
+these actual maps, giving its actual biholomorphic projection. Any other
+such map has the same underlying projection and hence equals it. A
+biholomorphism has no differential exceptional points, and inverse
+images of closed sets are closed, so its genuine strict transform is
+exactly inverse image for every original closed subset. The first lemma
+identifies the tree's recorded final boundary with the boundary of the
+same entire tower. The genuine all-empty boundary formula retains each
+original member as its inverse image and appends precisely one empty
+member per performed blowup. Substitute the actual projection identity
+and filter these genuinely empty entries to obtain the stated ordered
+filtered identity, without changing the whole unfiltered assertion.
+\end{proof}

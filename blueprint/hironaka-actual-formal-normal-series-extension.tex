@@ -1,0 +1,128 @@
+\section{Whole actual normal-series currying and relative polynomial flatness}
+
+\begin{theorem}[Whole formal normal coefficients give an actual algebra equivalence]
+\label{hir:actual-whole-formal-normal-series-equivalence}
+\uses{hir:actual-formal-centre-power-relative-coefficients}
+\lean{Hironaka.HironakaActualFormalNormalSeries.formalNormalSeriesEquiv,Hironaka.HironakaActualFormalNormalSeries.formalNormalSeriesEquiv_coefficient}
+\leanok
+Literal entire normal coefficient extraction gives a genuine algebra
+isomorphism
+\[
+ \mathbb C[[u_1,\ldots,u_d,z_1,\ldots,z_t]]
+ \simeq_{\mathbb C}
+ \mathbb C[[u_1,\ldots,u_d]][[z_1,\ldots,z_t]],
+ \quad F\longmapsto(\gamma\mapsto F_\gamma).
+\]
+Every coefficient is the original coefficient at the joined exponent.
+This is an entire series-ring equivalence, including empty coordinate
+blocks, without a formal completion identification supplied as input.
+\end{theorem}
+\begin{proof}
+Split each actual exponent into its literal first and second coordinate
+blocks. Their joined exponent recovers it, and splitting a joined
+exponent recovers both blocks. Consequently coefficient currying and
+uncurrying are inverse functions on the entire series spaces.
+Zero, addition and constants are retained coefficientwise. For
+multiplication, a decomposition of a joined exponent into two
+nonnegative exponents is equivalent to one decomposition of its
+normal block and one of its tangent block. The splitting and joining
+identities give an actual bijection between these finite antidiagonal
+index types. Reindex the genuine convolution sum by this bijection;
+the two finite convolutions are exactly the product in the iterated
+power-series ring. This proves multiplicativity on whole series.
+The same literal coefficient formula proves preservation of complex
+constants, giving the stated algebra equivalence.
+\end{proof}
+
+\begin{theorem}[Actual relative polynomial evaluation has its literal whole Taylor scalar dictionary]
+\label{hir:actual-relative-polynomial-whole-taylor-dictionary}
+\uses{hir:actual-whole-formal-normal-series-equivalence,hir:actual-relative-polynomial-formal-taylor-coefficient}
+\lean{Hironaka.HironakaActualFormalNormalSeries.formalNormalSeries_normalPolynomialEval}
+\leanok
+Put $B=\mathcal O_{\mathbb C^d,0}$ and
+$\widehat B=\mathbb C[[u_1,\ldots,u_d]]$. For every literal
+$P\in B[z_1,\ldots,z_t]$, curry the actual whole Taylor series of its
+actual analytic normal-polynomial evaluation. The result is exactly
+$P$ with each coefficient replaced by its actual whole Taylor series,
+then included into $\widehat B[[z]]$. The formal first-block scalar
+embedding is therefore the actual Taylor image of the genuine analytic
+first-block pullback.
+\end{theorem}
+\begin{proof}
+For a constant polynomial with actual analytic coefficient $b$, the
+genuine whole Taylor naturality for the tangent inclusion identifies
+its Taylor series with the first-block rename of the actual Taylor
+series of $b$. Literal joined coefficient extraction of this rename
+is zero at nonzero normal exponents and the same original series at
+normal exponent zero. This proves the constant case. For each variable,
+actual analytic normal evaluation is the genuine normal coordinate
+germ, whose actual Taylor series is its literal formal variable.
+Currying its coefficients gives the corresponding iterated formal
+normal variable. Both sides are ring homomorphisms, so polynomial
+induction by constants, addition and multiplication by a variable
+proves the whole equality for every polynomial. The constant case
+also proves the entire scalar compatibility.
+\end{proof}
+
+\begin{theorem}[Entire actual relative polynomial evaluation is flat]
+\label{hir:actual-relative-polynomial-analytic-flatness}
+\uses{hir:actual-relative-polynomial-whole-taylor-dictionary,hir:actual-original-polynomial-analytic-flatness,hir:actual-original-taylor-faithfully-flat}
+\lean{Hironaka.HironakaActualFormalNormalSeries.normalPolynomialEval_flat}
+\leanok
+The genuine entire ring map
+$B[z_1,\ldots,z_t]\to\mathcal O_{\mathbb C^{d+t},0}$
+given by original tangent pullback on every analytic coefficient and
+literal original normal coordinate evaluation is flat. No relative
+flatness, desired completion equality or analytic relation-generation
+certificate is supplied.
+\end{theorem}
+\begin{proof}
+The actual Taylor map $B\to\widehat B$ is faithfully flat, in
+particular flat. Its genuine polynomial base change is flat: the
+actual tensor-product polynomial equivalence identifies
+$\widehat B\otimes_B B[z]$ with $\widehat B[z]$ and retains each
+literal polynomial coefficient map. The Noetherian polynomial ring
+$\widehat B[z]$ has flat actual completion in the ideal of its normal
+variables. The genuine polynomial variables-adic completion
+isomorphism identifies this completion with $\widehat B[[z]]$ over
+that whole polynomial ring. Thus the composite map from $B[z]$ to
+$\widehat B[[z]]$ is flat. The first theorem transports it to the
+whole formal ring in all actual coordinates. The second theorem
+identifies the resulting ring map with actual relative polynomial
+evaluation followed by the actual whole Taylor map of
+$\mathcal O_{\mathbb C^{d+t},0}$. That latter Taylor map is
+faithfully flat. Apply the genuine faithful-target flatness descent
+proved earlier, with the exact scalar tower just established. The
+result is flatness of the stated entire original analytic evaluation.
+\end{proof}
+
+\begin{corollary}[Every actual analytic relation on relative polynomials is generated by whole polynomial syzygies]
+\label{hir:actual-relative-polynomial-analytic-relations}
+\uses{hir:actual-relative-polynomial-analytic-flatness}
+\lean{Hironaka.HironakaActualFormalNormalSeries.relative_analytic_relation_iff_polynomial_syzygies}
+\leanok
+For any finite family $p_i\in B[z]$ and actual analytic germs
+$A_i\in\mathcal O_{\mathbb C^{d+t},0}$, the literal whole identity
+$\sum_i\operatorname{ev}(p_i)A_i=0$ holds if and only if there are
+finitely many whole polynomial syzygies $c_{il}\in B[z]$ and actual
+analytic germs $b_l$ such that
+$A_i=\sum_l\operatorname{ev}(c_{il})b_l$ and
+$\sum_i p_ic_{il}=0$. The finite number, polynomial coefficients
+and actual analytic multipliers are all produced internally.
+\end{corollary}
+\begin{proof}
+Equip the actual target analytic ring with the scalar action of the
+literal relative polynomial evaluation map. The proved whole flatness
+and the genuine finite equational criterion for flat modules express
+every finite relation as a finite sum of whole relations over that
+polynomial ring. Under the actual scalar-action formula these identities
+are precisely the displayed actual analytic multiplier identities.
+Conversely substitute the finite multiplier expressions, distribute
+multiplication and interchange the finite sums. Every polynomial column
+has zero entire sum, and actual evaluation preserves that zero, so the
+original analytic sum is zero. No output syzygy generation is assumed.
+\end{proof}
+
+No exceptional relation lifting or relative normalized saturation is
+asserted here. These require their own genuine coefficient and syzygy
+arguments after this entire relative flatness producer.

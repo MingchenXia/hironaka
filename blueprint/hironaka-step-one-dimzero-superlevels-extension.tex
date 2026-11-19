@@ -1,0 +1,60 @@
+\section{All actual Step 1 thresholds over the zero-dimensional invariant}
+
+The canonical induction uses the genuine constant zero-dimensional
+invariant as its lower base. This permits all Step 1 thresholds, including
+finite lower second entries, to be handled without a supplied analytic
+presentation. The construction implements the dimension-zero base of
+W{\l}odarczyk\cite{wlodarczyk05-hironaka}, Proposition
+\texttt{pr:resol}, Step 1. General positive-order companion/history
+thresholds and the BM13.7 auxiliary-chain scheduler remain open.
+
+\begin{lemma}[The actual finite lower value is the genuine constant]
+\label{hir:step-one-dimzero-actual-lower-value}
+\lean{Hironaka.HironakaStepOneDimZeroAnalyticSuperlevels.lowerValue_ofDimZero_eq}
+\leanok
+Let the lower invariant be the actual per-sequence invariant
+$R_0=\operatorname{ofDimZero}(\Lambda,l_0)$. At a nonspecial point of
+the actual cosupport along any actual test tower of the homogenized
+coefficient ideal of a well-formed positive-mark maximal-order ideal,
+the genuine historical masked lower value equals the finite value $l_0$.
+\end{lemma}
+\begin{proof}
+The actual nonspecial lower-mask theorem excludes the junk value
+$\infty$, and hence the point lies in its actual historical mask.
+Unfold the actual masked lower-value definition on this mask. The
+actual invariant of the lower marked ideal along the actual restricted
+tail is definitionally the constant $l_0$; no lower ideal, history,
+or restricted tower is supplied as a certificate.
+\end{proof}
+
+\begin{theorem}[Whole actual Step 1 thresholds at the lower base]
+\label{hir:step-one-dimzero-all-superlevels}
+\uses{hir:step-one-dimzero-actual-lower-value,hir:step-one-top-threshold-analytic,hir:actual-step-one-level-analytic-superlevels}
+\lean{Hironaka.HironakaStepOneDimZeroAnalyticSuperlevels.isComplexAnalyticSubset_stepOneInvM_ofDimZero_superlevel,Hironaka.HironakaStepOneDimZeroAnalyticSuperlevels.isComplexAnalyticSubset_canonical_stepOne_base_superlevel}
+\leanok
+For the genuine lower base $R_0$, every whole actual Step 1 superlevel
+at $(s,\alpha)$ on the actual transformed cosupport is globally
+analytic, for arbitrary $\alpha\in\Lambda\cup\{\infty\}$. In
+particular this holds for the actual canonical base
+$\operatorname{invFamily}(0)$ with its natural-number zero value.
+\end{theorem}
+\begin{proof}
+At a nonspecial cosupport point, the preceding lemma makes the second
+entry exactly $l_0$. At a special point it is top. If
+$\alpha\le l_0$, the superlevel is precisely the actual cosupport
+intersected with the actual level superlevel $\{s(y)\ge s\}$.
+If $\alpha\nleq l_0$, only special points can contribute at level
+exactly $s$, while higher levels always contribute; the entire locus
+is the already produced actual $(s,\infty)$ superlevel. Both cases
+are analytic by the genuine derivative-ideal cosupport producer and
+the preceding actual geometric superlevel theorems. Unfolding the
+actual canonical recursion identifies its zero-dimensional base with
+$\operatorname{ofDimZero}(\mathbb N,0)$.
+
+The comparison includes top, an empty cosupport, empty or repeated
+original members, excessive level thresholds, disconnected geometry,
+and zero-dimensional carrier components. Positive ambient dimension
+is explicit. This proves the whole maximal-order Step 1 base layer;
+it does not identify arbitrary full positive-order canonical companion
+thresholds or construct a global noncompact resolving sequence.
+\end{proof}

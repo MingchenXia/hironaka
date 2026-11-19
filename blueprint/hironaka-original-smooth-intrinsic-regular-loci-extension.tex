@@ -1,0 +1,95 @@
+\section{Intrinsic regular and bad loci under actual smooth submersions}
+
+Let $b:Y^m\to X^n$ be a genuine holomorphic submersion and put
+$r=m-n$ in natural-number notation.  Every point of $Y$ supplies
+$n\leq m$ from its actual submersion derivative.  No global dimension
+inequality is imposed when $Y$ is empty.
+
+\begin{theorem}[The entire intrinsic regular locus is the exact inverse image]
+\label{hir:original-smooth-intrinsic-regular-locus}
+\uses{hir:smooth-submersion-original-regularity-reflection,hir:submersion-relative-regular-geometry}
+\lean{Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.regularAtDim_preimage_iff,Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.regularLocus_preimage_eq}
+\leanok
+For every original subset $W\subseteq X$, every $d\in\mathbb N$ and
+every actual point $y\in Y$,
+\[
+ \operatorname{RegularAtDim}(b^{-1}W,y,d+r)
+ \iff \operatorname{RegularAtDim}(W,b(y),d).
+\]
+Consequently the whole intrinsic sets satisfy
+$\operatorname{Reg}_{d+r}(b^{-1}W)=b^{-1}\operatorname{Reg}_d(W)$.
+No analyticity, coherence, ideal equality or incoming source regularity
+certificate is a premise.
+\end{theorem}
+\begin{proof}
+The actual forward regularity theorem pulls back a target regular
+flattening to source dimension $d+r$.  Conversely apply the proved
+regularity reflection theorem to source regularity of dimension
+$j=d+r$.  It constructs target regularity of dimension $j-r=d$.
+Thus the two pointwise conditions are equivalent.  Extensionality gives
+the equality of the entire regular loci.  On an empty source there are
+no points to check, so the same equality holds without an unjustified
+global comparison of ambient dimensions.
+\end{proof}
+
+\begin{theorem}[The original pure and boundary density conditions pull back]
+\label{hir:original-smooth-intrinsic-pure-boundary-density}
+\uses{hir:original-smooth-intrinsic-regular-locus,hir:submersion-relative-regular-geometry,hir:embedded-resolution-boundary}
+\lean{Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.pure_regular_density_preimage,Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.boundary_density_preimage}
+\leanok
+If $W\subseteq\overline{\operatorname{Reg}_d W}$, then
+$b^{-1}W\subseteq\overline{\operatorname{Reg}_{d+r}(b^{-1}W)}$.
+For every finite ordered family $E_0$, if
+$W\subseteq\overline{W\setminus|E_0|}$, then
+$b^{-1}W\subseteq\overline{b^{-1}W\setminus|b^{-1}E_0|}$.
+The source may be empty or noncompact.
+\end{theorem}
+\begin{proof}
+A genuine holomorphic submersion is continuous and open.  For any set
+$A$, these properties give
+$b^{-1}\overline A=\overline{b^{-1}A}$.  Pull back the original pure
+density inclusion and use this equality.  The preceding whole
+regular-locus equality identifies its resulting right side with the
+closure of the source regular locus of dimension $d+r$.  Apply the same
+open inverse-image argument to the boundary density inclusion.
+Inverse image commutes with set difference and with the finite union
+of the actual ordered family members.  Its resulting set is precisely
+$b^{-1}W\setminus|b^{-1}E_0|$, proving the second assertion.
+\end{proof}
+
+\begin{theorem}[Intrinsic singular, boundary-bad and actual good opens commute exactly]
+\label{hir:original-smooth-intrinsic-singular-boundary-good}
+\uses{hir:original-smooth-intrinsic-regular-locus,hir:original-pure-boundary-canonical-first-prefix,hir:submersion-relative-nc-transversality}
+\lean{Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.singular_set_preimage_eq,Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.boundary_bad_set_preimage_eq,Hironaka.HironakaOriginalSmoothIntrinsicRegularLoci.boundary_good_open_preimage_eq}
+\leanok
+For any $W$ and ordered family $E_0$, the inverse image of the intrinsic
+dimension-$d$ singular set is the intrinsic dimension-$(d+r)$ singular
+set of $b^{-1}W$.  The entire boundary-bad sets satisfy
+\[
+ b^{-1}\bigl((W\setminus\operatorname{Reg}_dW)\cup(W\cap|E_0|)\bigr)
+ =((b^{-1}W)\setminus\operatorname{Reg}_{d+r}(b^{-1}W))
+     \cup((b^{-1}W)\cap|b^{-1}E_0|).
+\]
+If $W$ is analytic and $E_0$ is SNC, construct the source analytic set
+and its actual pulled SNC family internally.  The actual intrinsic
+boundary-free regular open of these source data is exactly the open
+inverse image of the original boundary-free regular open.
+\end{theorem}
+\begin{proof}
+Use the entire regular-locus equality in the inverse-image formula for
+$W\setminus\operatorname{Reg}_dW$.  This gives the first equality.
+Distribute inverse image over the union and intersection defining the
+boundary-bad set, and replace the inverse image of the finite boundary
+union by the union of its literal inverse-image list.  This proves the
+displayed equality as whole sets.
+
+For the open statement, holomorphic inverse image supplies source
+analyticity and actual submersion pullback supplies SNC for the entire
+source boundary family.  Its boundary-free regular open is the
+complement of the source singular set union the whole source boundary
+support.  Apply the just-proved singular-set equality and the actual
+boundary union equality, then commute inverse image with complement.
+Both open sets have exactly the same underlying set, proving their
+literal equality as opens.  No assertion about equality of ideals is
+used anywhere in this argument.
+\end{proof}

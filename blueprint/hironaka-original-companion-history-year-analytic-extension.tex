@@ -1,0 +1,153 @@
+\section{Actual companion history-year thresholds have global analytic equations}
+
+The historical companion construction uses the first year at which a point
+has its current positive nonmonomial order. Its chronological year is genuine
+geometry of the original finite blowup tower, not an extra value certificate.
+The analytic threshold below includes the actual higher-order baseline,
+exactly as a lexicographic companion threshold does. On the actual fixed-order
+stratum it is the literal lower bound on that first year.
+
+Bierstone--Milman\cite{bierstone-milman08-functoriality}, Section 7, Step II.B,
+defines the companion value at this first year and retains it under earlier
+isomorphisms. The present construction gives analytic equations for this actual
+history-selection layer. It is one input for the genuine semicoherent
+companion presentations required by Bierstone--Milman\cite{bierstone-milman97-invent-math},
+Remark 6.14 and Lemma 13.7. It does not identify a whole recursive lower
+companion superlevel with this history-year threshold, and does not construct
+the simultaneous Hilbert--Samuel auxiliary-chain presentation.
+
+\begin{lemma}[Internally coherent nonmonomial ideals produce every actual prefix-order threshold]
+\label{hir:original-companion-history-prefix-order-analytic-equations}
+\lean{Hironaka.HironakaOriginalCompanionHistoryYearAnalytic.isCoherent_originalHistoryNonmonomialIdeal,Hironaka.HironakaOriginalCompanionHistoryYearAnalytic.isComplexAnalyticSubset_originalHistoryOrderSuperlevel}
+\leanok
+\source{bierstone-milman08-functoriality,bierstone-milman97-invent-math}
+\uses{hir:monomial-part-along,hir:canonical-first-entry-analytic-superlevel,hir:tower-split}
+In positive ambient dimension, for an original invariant-domain marked ideal
+and an actual admissible finite
+tower, let $P_j$ be its actual prefix in the literal split with the last
+$j$ stages and let $\rho_j$ be its actual tail
+projection. The nonmonomial ideal of the actual prefix transform is coherent.
+For every natural threshold $a$, the actual locus
+\[
+ H_{j,a}=\rho_j^{-1}\{x\in N_j:a\le\nu_j(x)\}
+\]
+is globally analytic, without compactness or a dimension restriction on its
+carrier. Its finite local equations are produced from the actual prefix
+nonmonomial ideal and composed with the true holomorphic tail projection.
+\end{lemma}
+\begin{proof}
+Admissibility passes to every actual prefix. The original domain transport
+therefore gives the prefix's coherent ideal, closed smooth carrier, SNC
+boundary, genuine transversality and nonvanishing along the carrier.
+Nonmonomial division on its actual SNC charts makes its actual nonmonomial
+ideal coherent. At threshold zero the order locus is the entire actual
+prefix carrier. At threshold $a>0$ it is the intersection of that carrier
+with the zero locus of the coherent derivative ideal of order $a-1$ along
+it. Those derivative generators and the carrier's actual local defining
+functions give finite holomorphic equations. The actual tail projection is
+a finite composition of genuine holomorphic blowup maps. Composing the
+finite defining functions with this projection presents exactly $H_{j,a}$
+on its inverse-image neighborhood. Thus every such whole prefix threshold
+is genuinely analytic; no closedness-to-analyticity implication is used.
+\end{proof}
+
+\begin{definition}[Literal enhanced companion history-year threshold]
+\label{hir:original-companion-history-year-threshold}
+\lean{Hironaka.HironakaOriginalCompanionHistoryYearAnalytic.companionHistoryYearSuperlevel}
+\leanok
+For a genuine finite tower $T$ of length $t$, let $R_q(y)$ be the literal
+number of trailing blowups whose previous images lie in the actual regime
+``current cosupport and nonmonomial order $q$''. Define
+\[
+ L_{q,r}(T)=\{y\in\operatorname{cosupp}M_T:
+                 q\le\nu_T(y),\ R_q(y)\le r\}.
+\]
+On the actual order-$q$ stratum, this is the lower bound $t-r$ on the
+chronological companion starting year $t-R_q(y)$. No new invariant is
+substituted for the original value or its actual history.
+\end{definition}
+\begin{proof}
+The original trailing-run recursion computes $R_q$ from the real successive
+points and original transformed ideals. The displayed set is defined by
+that same literal function and actual current order. If the current order
+is $q$, the original definition starts the companion precisely at the
+prefix preceding these $R_q(y)$ trailing blowups. Its year is $t-R_q(y)$.
+For $r\le t$, natural subtraction makes $R_q(y)\le r$ equivalent to
+$t-r\le t-R_q(y)$; the bound $R_q(y)\le t$ follows from the genuine finite
+tower. Thus the claimed history dictionary uses the original actual split.
+\end{proof}
+
+\begin{lemma}[The entire actual history-year threshold has a finite analytic recursion]
+\label{hir:original-companion-history-year-whole-step-dictionary}
+\lean{Hironaka.HironakaOriginalCompanionHistoryYearAnalytic.companionHistoryYearSuperlevel_step_zero,Hironaka.HironakaOriginalCompanionHistoryYearAnalytic.companionHistoryYearSuperlevel_step_succ}
+\leanok
+\source{bierstone-milman08-functoriality}
+\uses{hir:original-companion-history-year-threshold,bcalc:nonmonomial-order-canonical,hir:regime-run}
+Write $T'=T\sigma$ for an actual canonical successor blowup of a value
+which dominates the actual nonmonomial order. Put
+$B_q(T')=\operatorname{cosupp}M_{T'}\cap\{\nu_{T'}\ge q\}$ and
+$A_{q+1}(T)=\{x\in N_T:\nu_T(x)\ge q+1\}$. Then the exact entire identities are
+\[
+ L_{q,0}(T')=B_q(T')\cap\sigma^{-1}A_{q+1}(T),
+\]
+\[
+ L_{q,r+1}(T')=B_q(T')\cap
+       \sigma^{-1}\bigl(A_{q+1}(T)\cup L_{q,r}(T)\bigr).
+\]
+These identities include higher-order current points and all actual special
+or nonspecial points, not merely a selected contact open.
+\end{lemma}
+\begin{proof}
+At a current cosupport point of order at least $q$, genuine canonical
+order monotonicity puts its previous image in the actual previous cosupport
+with order at least $q$. Its previous regime holds exactly when that
+previous order equals $q$. If it holds, the literal trailing-run recursion
+adds one to the previous run. If it does not, the run is zero; the previous
+order is then at least $q+1$, which is exactly the displayed actual order
+locus by the genuine nonmonomial-order dictionary. Hence run zero is
+exactly that first case. For the bound $r+1$, either that zero-run case
+holds, or the previous regime holds and the previous run is at most $r$.
+In the latter case the previous image belongs to $L_{q,r}(T)$.
+Conversely previous membership in $L_{q,r}(T)$ either already has order
+larger than $q$, giving zero current run, or has order exactly $q$, giving
+a current run at most $r+1$. This proves both directions of both entire
+identities. The order monotonicity and cosupport inheritance are derived
+from the actual domain, canonical centre, and blowup; they are not supplied
+as history dictionaries.
+\end{proof}
+
+\begin{theorem}[Only original canonical inputs produce genuine global analytic companion history-year thresholds]
+\label{hir:original-companion-history-year-global-analytic-producer}
+\lean{Hironaka.HironakaOriginalCompanionHistoryYearAnalytic.isComplexAnalyticSubset_originalCompanionHistoryYearSuperlevel}
+\leanok
+\source{bierstone-milman08-functoriality,bierstone-milman97-invent-math}
+\uses{hir:original-companion-history-prefix-order-analytic-equations,hir:original-companion-history-year-whole-step-dictionary,hir:canonical-centres}
+For only an original invariant-domain marked ideal, its literal constructed
+canonical invariant and an actual canonical finite history, every
+$L_{q,r}(T)$ is globally analytic. This holds in every induction dimension in positive ambient dimension,
+without compactness, a curve envelope, finite value range, or any caller
+analyticity or presentation hypothesis.
+\end{theorem}
+\begin{proof}
+The literal constructed canonical value has first entry the genuine current
+nonmonomial order. It therefore supplies order dominance internally, and
+its actual canonical history is admissible by the proved original
+canonical-domain transport. Induct on the genuine finite tower. For the
+reflexive tower every run is zero, so the desired locus is the intersection
+of its actual cosupport and its actual order-$q$ threshold; both have the
+actual coherent equations of the first lemma. At a successor, apply the
+preceding entire step dictionaries. The new actual cosupport and order
+threshold are analytic by internally transported original coherence.
+The old order-$q+1$ locus and old history-year locus are analytic by the
+first lemma and induction. Finite union and intersection of their actual
+finite equations, followed by composition with the genuine holomorphic
+successor blowup, give the exact equations in either dictionary. This
+constructs the entire analytic locus at each step. It uses upper
+semicontinuity nowhere as a substitute for analytic equations.
+
+The next companion-presentation step must use these actual chronological
+strata to freeze the positive member/contact lower marked presentations and
+compare their true restricted histories. The arbitrary recursive lower
+thresholds and auxiliary-chain Hilbert--Samuel presentations are still
+separate mathematical producers; this theorem does not assume them.
+\end{proof}

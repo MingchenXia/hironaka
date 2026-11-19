@@ -1,0 +1,94 @@
+\section{Genuine finite-prefix splicing keeps the SAME original global sequence and history}
+
+A phase constructed after a genuine original prefix must be fed to the
+ORIGINAL per-sequence finiteness theorem. Replacing the invariant by the one
+of the current marked record would discard real earlier history. Instead
+splice the ACTUAL finite prefix and ACTUAL later sequence, preserving every
+stage, centre, map and empty step. This chapter constructs that real global
+sequence before its scheduling consumer.
+
+\begin{definition}[Actual one-step and finite-tower prefix splicing]
+\label{hir:original-global-sequence-actual-prefix-splice}
+\uses{hir:blowup-tower,hir:centre-function-seq}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGlobalSequencePrefixSplice.prependStep,Hironaka.HironakaOriginalGlobalSequencePrefixSplice.prependTower}
+\leanok
+For a genuine blowup $Y\to X$ and actual GrowingSeq over $Y$, form a real
+GrowingSeq over $X$ whose stage zero is the literal identity and stage
+$i+1$ is the actual blowup followed by the actual old stage $i$.
+For ANY actual finite prefix $T$, recursively prepend its real last step
+and then its real earlier prefix. All original positions are retained.
+\end{definition}
+\begin{proof}
+The zero stage is the actual identity on the original base. At successor
+zero, the old sequence's genuine zero identity makes the new first stage
+exactly the actual one-step tower. At every later successor, retain the old
+sequence's genuine centre, actual map and actual blowup proof; genuine tower
+append followed by a last step gives the exact new successor equation.
+Thus these are actual GrowingSeq fields, not a schedule certificate.
+Finite-prefix recursion terminates on the real tower. In particular every
+actual empty-centre step stays in its original chronological position.
+\end{proof}
+
+\begin{lemma}[Exact real stage dictionary after the entire original prefix]
+\label{hir:original-global-prefix-splice-exact-stage}
+\uses{hir:original-global-sequence-actual-prefix-splice,hir:blowup-tower}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGlobalSequencePrefixSplice.prependTower_stage_length_add}
+\leanok
+At index $\operatorname{length}(T)+i$, the spliced sequence has EXACTLY the
+actual old stage manifold and the actual whole tower $T$ appended to its
+old stage $i$. Equality is equality of the real dependent manifold/tower
+pair, not merely equality of projections or an isomorphism certificate.
+\end{lemma}
+\begin{proof}
+Induct on the actual prefix $T$. At the identity prefix, old and new
+sequences agree and genuine identity append is the original tower. At a
+real last step, move one actual successor into the old one-step-prepended
+sequence. Apply the induction dictionary and its actual successor-stage
+formula. Associativity of REAL tower append identifies that whole recorded
+tower with the original last step followed by the old stage. Both actual
+final manifolds are the same, so this proves equality of the entire pair.
+\end{proof}
+
+\begin{theorem}[Every actual spliced stage is canonical for the SAME original full-history invariant]
+\label{hir:original-global-prefix-splice-same-original-canonical}
+\uses{hir:original-global-prefix-splice-exact-stage,hir:canonical-segments}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGlobalSequencePrefixSplice.prependTower_canonical}
+\leanok
+If the real original prefix $T$ is canonical and every ACTUAL appended
+$T$-plus-later stage is canonical for the SAME original invariant/input,
+then EVERY stage of the spliced real GrowingSeq is canonical for that SAME
+original invariant/input. No current-marked rebasing is performed.
+\end{theorem}
+\begin{proof}
+Induct on the actual original prefix. At identity the supplied actual
+appended canonicalities are exactly the original old-stage canonicalities.
+At a genuine last step, original canonicality supplies its true earlier
+canonical prefix. The new one-step-prepended tail has identity stage, whose
+appended original tower is that true earlier prefix; at a real successor
+its actual appended tower is the original full prefix appended to the old
+stage, by genuine append associativity. Thus the provided ORIGINAL
+canonicality proves every such stage. Apply the induction hypothesis to
+this actual earlier prefix and actual one-step-prepended sequence.
+This includes every original intermediate prefix and empty step.
+\end{proof}
+
+\begin{lemma}[Actual original centre counts on spliced stages retain the real prefix and tail contributions]
+\label{hir:original-global-prefix-splice-entire-count-dictionary}
+\uses{hir:original-global-prefix-splice-exact-stage,bcalc:growing-seq-tail}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGlobalSequencePrefixSplice.count_prependTower_length_add}
+\leanok
+For ANY original base set $K$, the literal global centre count of the spliced
+stage $\operatorname{length}(T)+i$ equals the actual count of $T$ plus the
+actual old-stage count on the TRUE $T$-preimage of $K$.
+\end{lemma}
+\begin{proof}
+Apply the exact dependent-pair stage equality to the real original count
+function. Its result is the count of the ACTUAL appended tower. The proved
+literal append count recursion splits this into the prefix count and the
+old-stage count over the true projection preimage. No numerical bound,
+pointwise replacement count or final-history identification is assumed.
+\end{proof}

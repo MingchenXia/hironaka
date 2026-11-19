@@ -1,0 +1,159 @@
+\section{Actual entire companion curve loci in dimension two}
+
+These producers start from the actual global coefficient companion and its
+literal controlled transform. No maximal-order condition outside the actual
+order mask, caller-supplied exceptional set, or special-locus certificate is
+assumed. They provide the global curve geometry required for subsequent
+General2 superlevel descent; that complete descent and G3 remain open.
+
+\begin{lemma}[The actual component germ at an actual regular point]
+\label{hir:general-two-curve-component-germ}
+\uses{ana:regular-component}
+\lean{Hironaka.HironakaGeneralTwoCompanionCurveLoci.eventually_mem_iff_globalComponent_of_regular}
+\leanok
+If $B$ is an actual global component of an analytic $A$, and $x\in B$ is an
+actual regular point of $A$, then $A$ and $B$ have the same germ at $x$.
+\end{lemma}
+\begin{proof}
+Write $B=\overline C$, where $C$ is the genuine connected component of
+the actual regular locus through its actual generating regular point.
+An actual regular flattening at $x$ has a connected flat-ball neighbourhood
+whose trace on $A$ lies in the component of the regular locus through $x$.
+Since $x\in\overline C$, this open neighbourhood meets $C$. The common
+regular point identifies the two genuine connected components. Thus $x$
+belongs to $C$ and on a smaller actual open neighbourhood the whole $A$
+lies in $C\subseteq B$. Conversely $B\subseteq A$ follows from the true
+analytic component theorem. This gives equality of the actual germs.
+\end{proof}
+
+\begin{lemma}[A regular cosupport curve has an actual surface carrier]
+\label{hir:general-two-curve-carrier-surface}
+\uses{hir:one-dimensional-actual-cosupport-dimension,ana:component-local-filling}
+\lean{Hironaka.HironakaGeneralTwoCompanionCurveLoci.regularAtDim_carrier_two_of_cosupport_one}
+\leanok
+For an actual dimension-two invariant-domain marked ideal, an actual
+regular dimension-one point of its positive-mark cosupport is an actual
+regular dimension-two point of its carrier.
+\end{lemma}
+\begin{proof}
+The genuine closed smooth carrier has an actual regular dimension $j\le2$
+at the point. Inclusion of the real cosupport forces $1\le j$. If $j=1$,
+the actual analytic filling lemma applied to the dimension-one cosupport
+and this regular carrier makes the whole carrier lie in the cosupport on
+a neighbourhood. This contradicts actual coherent nonzero along: choose
+a real nonzero germ, express it using the actual finite coherent generators,
+and shrink so that every generator belongs to the actual ideal at each
+nearby point. Positive cosupport order makes every such generator zero
+on the carrier there. Their actual finite holomorphic combination makes
+the chosen germ zero at all nearby carrier points, contradicting its
+genuine frequent nonzero points. Hence $j=2$. No global maximal-order
+condition is used.
+\end{proof}
+
+\begin{lemma}[A genuine boundary-containing curve is in the member locus]
+\label{hir:general-two-curve-boundary-special}
+\uses{hir:general-two-curve-component-germ,hir:dimtwo-boundary-trace-dimension,bcalc:member-intersection}
+\lean{Hironaka.HironakaGeneralTwoCompanionCurveLoci.mem_memberInterLocus_of_regular_component_subset_member}
+\leanok
+Let an actual marked ideal be in the dimension-two invariant domain and
+let $F$ be a finite list of genuine members of its actual SNC boundary.
+If an actual global cosupport component $B$ contains an actual regular
+curve point $x$ and $B$ is contained in one member of $F$ through $x$,
+then $x$ belongs to the actual member-intersection locus for $F$.
+\end{lemma}
+\begin{proof}
+The preceding germ theorem makes $B$ an actual regular dimension-one set
+at $x$. Its containing member has a genuine closed smooth trace $H$ on
+the carrier, by the actual SNC transversality theorem. The true adapted
+coordinate dimension-drop producer bounds this trace by one. Actual
+regular dimension monotonicity and $B\subseteq H$ force the trace to have
+dimension exactly one at $x$. The true analytic filling lemma therefore
+gives $B=H$ as germs at $x$. Since $B$ lies in the real cosupport, the whole
+trace $H$ lies in that cosupport near $x$. Every nearby carrier point on
+all members of $F$ through $x$ lies in this one chosen member, hence in
+$H$ and in the real cosupport. This is precisely the actual member locus.
+\end{proof}
+
+\begin{theorem}[An internally produced zero-dimensional exception to specialness]
+\label{hir:general-two-curve-special-exception}
+\uses{hir:curve-predicates-singular-envelope,hir:curve-predicates-finite-exception,hir:general-two-curve-carrier-surface,hir:general-two-curve-boundary-special}
+\lean{Hironaka.HironakaGeneralTwoCompanionCurveLoci.exists_analytic_dimzero_stage_special_exception}
+\leanok
+An actual dimension-two invariant-domain ideal and any finite list $F$ of
+its genuine boundary members internally produce an analytic zero-dimensional
+$Z$ contained in the actual cosupport. Outside $Z$, a point of zero actual
+$F$ count belongs to the actual codimension-one part, and a point of positive
+actual $F$ count belongs to the actual member locus.
+\end{theorem}
+\begin{proof}
+The actual coherent nonzero positive-mark ideal internally yields an
+analytic cosupport of dimension at most one. Its actual dimension-zero
+part and the genuine singular locus of its pure dimension-one part give
+an analytic zero-dimensional regular-curve exception. Apply the proved
+finite analytic-predicate producer to the actual members of $F$, which
+are analytic by their genuine SNC geometry. Its exception is the locally
+finite union of the actual proper intersections of global cosupport
+components with those members. Union the two produced zero-dimensional
+sets to obtain $Z$. At a cosupport point outside $Z$ the actual cosupport
+is regular of dimension one and the carrier is regular of dimension two,
+giving the actual codimension-one part directly by its definition. At
+positive actual count choose an actual indexed member through the point
+and an actual global cosupport component containing it. The finite-predicate
+dictionary forces that whole component into the chosen member. The preceding
+real trace filling producer gives the actual member locus. Infinite global
+component families are handled by their genuine local finiteness; they are
+not replaced by a finite global family. Repeated or empty original members
+are allowed.
+\end{proof}
+
+\begin{theorem}[Entire actual companion special locus]
+\label{hir:general-two-entire-companion-special-exception}
+\uses{hir:coherent-transform-literal-coefficient-extension,hir:general-two-curve-special-exception}
+\lean{Hironaka.HironakaGeneralTwoCompanionCurveLoci.exists_analytic_dimzero_entire_companion_exception}
+\leanok
+For a genuine dimension-two datum, a true head tower, a true tail tower,
+and positive order, the entire transformed actual coefficient companion
+has an internally produced analytic zero-dimensional $Z$ such that every
+point of its real cosupport outside $Z$ is an actual Step 1 special point.
+\end{theorem}
+\begin{proof}
+The actual entire coefficient-companion invariant-domain producer supplies
+all genuine domain fields, without companion admissibility or maximal order
+outside the mask. Take $F$ to be precisely the actual first original-length
+members of its transformed boundary. Every such member is genuinely in the
+actual SNC boundary. Apply the preceding producer. Its actual count is
+the literal Step 1 level. The two actual alternatives are precisely the
+zero-level codimension-one and positive-level member-locus alternatives
+of the actual Step 1 special predicate.
+\end{proof}
+
+\begin{theorem}[The literal masked companion has the same actual special predicate]
+\label{hir:general-two-literal-mask-special-exception}
+\uses{hir:general-two-entire-companion-special-exception,hir:coherent-transform-literal-coefficient-extension,bcalc:codim-one-part-canonical,bcalc:member-locus-canonical,bcalc:boundary-count-canonical}
+\lean{Hironaka.HironakaGeneralTwoCompanionCurveLoci.isSpecial_literal_companion_mask_iff,Hironaka.HironakaGeneralTwoCompanionCurveLoci.exists_analytic_dimzero_literal_companion_exception}
+\leanok
+On the actual order-mask preimage the literal restricted companion's
+special predicate equals the actual entire companion's special predicate.
+Consequently all literal masked nonspecial cosupport points lie in the
+preimage of an internally produced global analytic zero-dimensional $Z$.
+\end{theorem}
+\begin{proof}
+Use the proved exact marked-ideal equality between the literal masked
+coefficient transform and the restriction of its actual global transform.
+The actual initial companion boundary is the true open restriction of
+the global companion boundary, so its length is exactly unchanged. Taking
+that many original members in the transformed equality commutes with the
+actual list map; hence literal original members are exactly the open
+preimages of the entire original members, including duplicates. The true
+boundary-count preimage theorem gives equality of literal levels. Actual
+coherent open cosupport restriction and regular-point transport give
+equality of the codimension-one parts. The genuine subtype open embedding
+maps the actual neighbourhood filter onto the ambient filter, so the actual
+member-locus preimage theorem gives equality of the member loci. Substituting
+these exact dictionaries into the real special predicate proves both
+directions. Pull back the preceding internally constructed $Z$, and use
+the actual coherent cosupport pullback identity to exclude every nonspecial
+point outside it. The global $Z$ is retained, not an unrelated analytic set
+living only on the mask. These producers do not yet assert complete
+General2 superlevel descent or the full global resolution sequence.
+\end{proof}

@@ -1,0 +1,57 @@
+\section{Archimedean coefficient convolution and the actual vertex-tail operator}
+\label{sec:hironaka-actual-analytic-vertex-perturbation}
+For a positive polyradius $\rho$, let $|F|_\rho=\sum_\alpha |F_\alpha|\rho^\alpha$ be the ordinary complex absolute coefficient sum. The source domain consists of series for which this nonnegative family is summable.
+
+\begin{theorem}[Absolute coefficient convolution is submultiplicative]
+\label{hir:actual-coefficient-mass-convolution}
+\uses{hir:actual-monomial-owner-absolute-bounds}
+\lean{Hironaka.HironakaActualAnalyticVertexPerturbation.coefficientMass_nonneg,Hironaka.HironakaActualAnalyticVertexPerturbation.coefficientMass_add_le,Hironaka.HironakaActualAnalyticVertexPerturbation.finiteCoefficientMass_add,Hironaka.HironakaActualAnalyticVertexPerturbation.finiteCoefficientMass_mul,Hironaka.HironakaActualAnalyticVertexPerturbation.coefficientMass_mul_le,Hironaka.HironakaActualAnalyticVertexPerturbation.finiteCoefficientMass_sum,Hironaka.HironakaActualAnalyticVertexPerturbation.coefficientMass_sum_le}
+\leanok
+If $F$ and $G$ have finite absolute coefficient sums at $\rho$, then $F+G$ and $FG$ do also, and
+\[
+ |F+G|_\rho\le |F|_\rho+|G|_\rho,
+ \qquad |FG|_\rho\le |F|_\rho|G|_\rho.
+\]
+Every absolute coefficient sum is nonnegative. A finite sum of absolutely summable series is absolutely summable, and its mass is bounded by the sum of the individual masses.
+\end{theorem}
+\begin{proof}
+The coefficient triangle inequality bounds each weighted coefficient of $F+G$ by the sum of the two corresponding nonnegative weighted coefficient terms. Summability and the stated bound follow by comparison. For multiplication, the coefficient at $\alpha$ is the finite sum of $F_\beta G_\gamma$ over $\beta+\gamma=\alpha$. The triangle inequality, multiplicativity of complex norms, and $\rho^{\beta+\gamma}=\rho^\beta\rho^\gamma$ bound its weighted absolute value by the convolution of the two nonnegative weighted coefficient families. Their product family on all pairs is summable: first sum each row, then sum the resulting fixed multiple of the first family. Partitioning all pairs by their sum proves summability of the convolution. The Cauchy product identity gives its total sum as $|F|_\rho|G|_\rho$. Comparison proves both product conclusions. The zero series has mass zero, so induction on a finite indexing set gives the finite-sum conclusions from the addition assertion. Nonnegativity follows since every summand is nonnegative.
+\end{proof}
+
+\begin{theorem}[The literal actual finite vertex-tail map is bounded]
+\label{hir:actual-vertex-tail-operator-bound}
+\uses{hir:actual-coefficient-mass-convolution,hir:actual-monomial-owner-absolute-bounds,hir:actual-monic-vertex-family-whole-division}
+\lean{Hironaka.HironakaActualAnalyticVertexPerturbation.vertexPerturbationMap,Hironaka.HironakaActualAnalyticVertexPerturbation.vertexPerturbationConstant,Hironaka.HironakaActualAnalyticVertexPerturbation.vertexPerturbation_summable,Hironaka.HironakaActualAnalyticVertexPerturbation.vertexPerturbation_bound}
+\leanok
+Let $G_a$ be a prescribed actual monic vertex family of a whole formal ideal $I$, indexed by its actual finite vertices. Put $E_a=G_a-X^a$, and let $Q_a$ be the actual diagram-owner quotient projection. Define the literal complex-linear map
+\[
+ T(F)=\sum_a E_aQ_aF,
+ \qquad c_\rho=\sum_a \frac{|E_a|_\rho}{\rho^a}.
+\]
+If each $E_a$ and $F$ has finite absolute coefficient sum at $\rho$, then $T(F)$ has finite absolute coefficient sum there and
+\[
+ |T(F)|_\rho\le c_\rho |F|_\rho.
+\]
+\end{theorem}
+\begin{proof}
+Each summand is the product of a summable tail and the summable actual quotient projection of $F$, so the preceding convolution theorem and finite-sum assertion give summability. The product and sum bounds yield $|T(F)|_\rho\le\sum_a |E_a|_\rho |Q_aF|_\rho$. The actual owner estimate gives $\rho^a|Q_aF|_\rho\le |F|_\rho$. Divide by the positive $\rho^a$, multiply by the nonnegative $|E_a|_\rho$, and sum over the finite actual vertex set. This gives exactly the stated constant and bound. Multiplication by the fixed $E_a$, composition with the already complex-linear $Q_a$, and finite addition prove that $T$ is complex-linear.
+\end{proof}
+
+\begin{theorem}[Exact perturbed leading-monomial reconstruction]
+\label{hir:actual-vertex-tail-reconstruction}
+\uses{hir:actual-vertex-tail-operator-bound,hir:actual-monomial-owner-whole-division}
+\lean{Hironaka.HironakaActualAnalyticVertexPerturbation.vertexPerturbation_reconstruction}
+\leanok
+For every whole formal series $F$, without any convergence assumption,
+\[
+ F+T(F)=\sum_a G_aQ_aF+RF,
+\]
+where $R$ is the actual monomial-owner remainder, whose coefficients vanish on the entire initial diagram of $I$.
+\end{theorem}
+\begin{proof}
+For each actual vertex, $G_a=X^a+E_a$. Multiply by the same $Q_aF$ and sum this equality over the finite vertex set. The resulting sum of leading-monomial terms plus $RF$ equals $F$ by the whole actual monomial division identity. The remaining sum is exactly $T(F)$, proving the displayed whole-series identity.
+\end{proof}
+
+\begin{remark}
+These statements produce the actual finite perturbation operator and its ordinary complex absolute-norm bound. They assume only source and generator-tail summability, with no assumption about convergence of any resulting quotient, product or perturbation. The analytic Taylor-radius dictionary, a sufficiently small perturbation constant, inversion by a convergent Neumann series, and holomorphy of the resulting evaluations remain separate obligations before an actual convergent reduced analytic standard family is obtained.
+\end{remark}

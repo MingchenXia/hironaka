@@ -1,0 +1,121 @@
+\section{Whole controlled ideals on the same actual closed contact blowup}
+
+Let $N\subset A^n$ be an original closed subset regular everywhere of
+dimension $k\le n$, with its actual native flattening atlas. Let
+$D\subset N$ be an original smooth closed nowhere dense centre, put
+$C=j(D)$ for the literal inclusion $j:N\hookrightarrow A$, and let
+$\pi:Y^n\to A$ be an actual blowup along $C$. The preceding genuine
+closed-contact construction gives the same native strict contact
+$S=\overline{\pi^{-1}(N\setminus C)}$, its inclusion $j_S:S\hookrightarrow Y$
+and the literal actual blowup $\sigma:S\to N$ with
+$\pi j_S=j\sigma$. No global retraction, supplied comparison map or
+desired ideal restriction equality is an input.
+
+\begin{theorem}[Original admissibility and the whole total ideal square]
+\label{hir:actual-closed-contact-original-admissibility-total-square}
+\uses{hir:actual-closed-contact-native-geometry,hir:actual-closed-contact-full-restricted-blowup,hir:crossdim-entire-unit-power-pullback,hir:submersion-choice-image-trace-whole-pullback}
+\lean{Hironaka.HironakaActualClosedContactControlledRestriction.restricted_original_admissibility,Hironaka.HironakaActualClosedContactControlledRestriction.restricted_totalTransform}
+\leanok
+For any original coherent ideal $I$ on $A$ and any mark $\mu\in\mathbb N$,
+original admissibility $I\subseteq\mathcal I_C^\mu$ gives actual lower
+admissibility $j^*I\subseteq\mathcal I_D^\mu$. The whole ideal square is
+\[
+ j_S^*(\pi^*I)=\sigma^*(j^*I).
+\]
+Both are equalities or inclusions of the independently defined entire
+functional germ ideals, rather than identities only on a chosen finite
+generating family.
+\end{theorem}
+\begin{proof}
+Apply actual whole-ideal pullback monotonicity to the original
+admissibility inclusion. The genuine holomorphic pullback theorem for
+powers applies to $j$: the actual ambient centre ideal is coherent
+because $\pi$ is an actual blowup. It identifies the upper ideal with
+$(j^*\mathcal I_C)^\mu$. The genuine whole singular-subset germ
+extension theorem already proved $j^*\mathcal I_C=\mathcal I_D$, so
+this gives precisely the asserted lower admissibility. No submersion
+property of the inclusion is used.
+
+For the square, apply genuine whole pullback composition first to
+$\pi\circ j_S$ and then to $j\circ\sigma$. All members of $I$ are
+holomorphic by its original coherence. The actual literal function
+identity $\pi j_S=j\sigma$ identifies the intermediate pullbacks,
+proving the whole ideal equality on the same actual $S$.
+\end{proof}
+
+\begin{theorem}[The same entire exceptional denominator restricts exactly]
+\label{hir:actual-closed-contact-exceptional-denominator-restriction}
+\uses{hir:actual-closed-contact-original-admissibility-total-square,hir:actual-closed-contact-full-restricted-blowup,hir:crossdim-entire-unit-power-pullback,bcalc:exceptional-divisor}
+\lean{Hironaka.HironakaActualClosedContactControlledRestriction.restricted_exceptionalIdeal,Hironaka.HironakaActualClosedContactControlledRestriction.restricted_exceptionalIdeal_power}
+\leanok
+Write $L_\pi=\pi^*\mathcal I_C$ and
+$L_\sigma=\sigma^*\mathcal I_D$ for the actual exceptional divisor
+ideals of these same two blowups. Then, for every $q\in\mathbb N$,
+\[
+ j_S^*L_\pi=L_\sigma,\qquad j_S^*(L_\pi^q)=L_\sigma^q.
+\]
+The lower blowup and its denominator are internally produced from the
+original closed regular contact, original smooth nowhere dense centre
+and the actual ambient blowup.
+\end{theorem}
+\begin{proof}
+The genuine contact restriction theorem proves that the literal
+$\sigma$ is a full actual blowup along $D$, using both genuine
+universal properties. By definition the actual exceptional ideal of
+each blowup is the entire pullback of its original centre ideal.
+Apply the preceding whole total square with $I=\mathcal I_C$, which
+is coherent by the actual ambient blowup. The actual centre identity
+$j^*\mathcal I_C=\mathcal I_D$ identifies the resulting entire ideal
+with the actual $L_\sigma$.
+
+The actual ambient exceptional ideal is coherent because it is
+invertible. Generic holomorphic whole pullback of powers along the
+actual inclusion $j_S$ therefore gives
+$j_S^*(L_\pi^q)=(j_S^*L_\pi)^q$. Substitute the just-proved actual
+exceptional ideal identity. This also covers $q=0$.
+\end{proof}
+
+\begin{theorem}[The whole controlled ideal restricts on this same actual blowup]
+\label{hir:actual-closed-contact-whole-controlled-ideal-restriction}
+\uses{hir:actual-closed-contact-original-admissibility-total-square,hir:actual-closed-contact-exceptional-denominator-restriction,hir:crossdim-entire-product-pullback,bcalc:controlled-transform}
+\lean{Hironaka.HironakaActualClosedContactControlledRestriction.restricted_controlledTransform}
+\leanok
+For an original coherent ideal $I$ and original admissibility
+$I\subseteq\mathcal I_C^\mu$, the same literal $\sigma$ satisfies the
+whole independently defined controlled-ideal equality
+\[
+ j_S^*\bigl((\pi^*I:L_\pi^\mu)\bigr)
+   =\bigl(\sigma^*(j^*I):L_\sigma^\mu\bigr).
+\]
+The original mark $\mu$ is unchanged. No colon-pullback compatibility,
+controlled-ideal equality or output factorisation is assumed.
+\end{theorem}
+\begin{proof}
+Put $Q=(\pi^*I:L_\pi^\mu)$, the actual ambient controlled
+transform. Original coherence and original admissibility give its
+genuine coherence and the whole actual factorisation
+$\pi^*I=L_\pi^\mu Q$. Pull this equality back along the genuine
+holomorphic $j_S$. Generic holomorphic whole pullback of products
+applies because both factors are coherent; it does not require an
+inclusion to be a submersion. Use the first theorem for its left side
+and the second theorem for its first factor. This gives the actual
+whole factorisation
+\[
+ \sigma^*(j^*I)=L_\sigma^\mu\,j_S^*Q.
+\]
+The entire ideal $j_S^*Q$ is genuinely coherent by holomorphic
+pullback of the proved ambient coherent controlled ideal. The actual
+exceptional power $L_\sigma^\mu$ is invertible for this same lower
+blowup. Cancellation of an invertible ideal identifies the displayed
+coherent quotient uniquely with the independently defined lower colon
+ideal. This proves the stated equality without commuting a colon
+through a general closed immersion.
+\end{proof}
+
+These are one-step whole-ideal results for the same actual contact and
+the same actual original admissible blowup. The strict contact above
+uses the centre-relative \texttt{geoStrictTransform} closure. No ordinary
+exceptional-locus strict-transform equality, canonical invariant tail,
+maximal-centre equality, ordered boundary comparison or canonical
+resolution descent is inferred. A tower statement still needs actual
+compatible contact and centre data at every stage.

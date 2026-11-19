@@ -1,0 +1,52 @@
+\section{Every actual smooth chart arrow has the full original global target square}
+
+The genuine original target terminal manifold already has true saturated
+local ranges. This supplies a full original target Cartesian law for each
+internally constructed smooth chart arrow, on arbitrary noncompact targets.
+The domain is still the actual restricted original source finite terminal
+chart; compatibility and source descent remain separate.
+
+\begin{theorem}[Actual target saturation upgrades each original smooth chart square]
+\label{hir:original-local-smooth-arrow-actual-global-target-cartesian}
+\uses{hir:original-local-terminal-actual-smooth-chart-arrow,hir:original-terminal-local-actual-saturated-range-biholomorphism,hir:original-input-terminal-glued-local-range-whole-open-preimage,hir:original-terminal-local-actual-range-whole-projection-dictionary}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalLocalGlobalArrow.originalLocalTerminalSmoothGlobalArrow,Hironaka.HironakaSmoothSubmersionOriginalLocalGlobalArrow.originalLocalTerminalSmoothGlobalArrow_properties}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+For only original marked-domain input and a genuine smooth map $f:Y\to X$,
+every pair of original local atlas indices constructs a holomorphic arrow
+from the actual restricted original source terminal chart to the same
+original global target terminal manifold. Its entire original-base projection
+commutes with $f$. Its square with the source nested-base tower projection
+and the same entire original global target projection is Cartesian among
+all holomorphic maps of complex manifolds.
+\end{theorem}
+\begin{proof}
+Compose the internally constructed actual local terminal arrow with the
+original target local inclusion. Both maps are holomorphic. The original
+inclusion's whole projection formula and the local arrow's whole original
+projection identity prove the asserted pointwise global equality.
+
+For the full Cartesian law, fix a complex manifold $W$, a holomorphic
+map $a$ to the actual nested source base, and a holomorphic map $b$ to
+the original global target satisfying the original-base cone equation.
+Every image of the actual nested base map lies in the true target open
+$V_j$. The cone equation puts the entire image of $b$ in the true inverse
+image of $V_j$ under the original global target projection. Saturation
+identifies this inverse image with the actual range of the original
+$j$-th local inclusion. Regard $b$ as a holomorphic map to that actual
+open range, then compose it with the proved genuine local inverse
+biholomorphism. This constructs an actual holomorphic $b_j:W\to D_j$.
+Its inclusion is exactly $b$ pointwise. The whole original range projection
+dictionary turns the original-base cone into the true local cone over
+$V_j$, as an equality in the literal target subtype.
+
+Apply the actual local Cartesian law to $(a,b_j)$ to obtain the unique
+holomorphic lift to the genuine restricted source terminal chart. Its
+source leg is unchanged. Its target leg, followed by the original local
+inclusion, is exactly $b$. For any other global candidate, actual local
+inclusion injectivity turns its target leg into the finite local target
+leg $b_j$. It is therefore a candidate for the same true finite local
+cone, and the finite law identifies it with the constructed lift. Thus
+the full original global target square is Cartesian; the sought entire
+global source arrow and its overlap compatibility are never assumed.
+\end{proof}

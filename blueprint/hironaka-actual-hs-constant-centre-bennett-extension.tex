@@ -1,0 +1,162 @@
+\section{Intrinsic Bennett nonincrease for an actual constant-Hilbert--Samuel centre}
+\label{sec:hironaka-actual-hs-constant-centre-bennett}
+
+All Hilbert--Samuel functions below are those of the entire original
+reduced vanishing ideals. The strict transforms and blowups are the
+actual geometric ones. A fixed-flattening intermediate records the
+exact use of canonical reduced normal powers; the geometric endpoints
+produce that property from the original hypotheses.
+
+\begin{theorem}[Reduced normal powers in the supplied chart give actual geometric nonincrease]
+\label{hir:actual-fixed-chart-reduced-centre-geometric-bennett}
+\uses{hir:actual-fixed-flattening-original-blowup-hs-comparisons,hir:actual-reduced-centre-geometric-bennett}
+\lean{Hironaka.HironakaActualHSConstantCentreBennett.hilbertSamuelAt_actual_fixed_flattening_blowup_le}
+\leanok
+Let $\pi:Y\to X$ be the genuine blowup along $C$ in dimension
+$d+t$, and fix a genuine centred flattening $\Phi$ of the same
+centre at $\pi(z)$ to $\mathbb C^d\times0$. For any $W\subset X$,
+let $I_0$ be its whole original vanishing origin ideal in this
+same flattening, including the actual zero translation.
+Suppose each canonical reduced vertex series of the actual
+whole Taylor ideal of $I_0$ belongs to the normal-coordinate
+ideal to the normal weight of its vertex. Then for every
+order $\ell$,
+\[
+ H_{\operatorname{strict}_\pi W,z}(\ell)
+ \le H_{W,\pi(z)}(\ell).
+\]
+This intermediate hypothesis is precisely the genuine canonical
+reduced normal-power property for the supplied original ideal.
+\end{theorem}
+\begin{proof}
+Apply the fixed-flattening blowup comparison theorem to the
+supplied $\Phi$. It internally constructs true source coordinates,
+an actual normal pivot $J\ge d$ and parameters, retaining the same
+target map and the literal model subset $A_\Phi(W)$. Its whole
+origin-ideal equality identifies $I_0$ with the model vanishing
+origin ideal, so the given canonical reduced normal powers
+apply to that identical ideal.
+
+Since $J<d+t$ and $J\ge d$, the integer $J-d$ is a genuine
+normal index $j<t$, with $J=d+j$. Thus the actual whole polynomial
+square is exactly the normal-indexed model blowup used by the
+proved reduced-centre geometric Bennett theorem. That model
+theorem gives its Hilbert--Samuel inequality at zero. The two
+proved exact intrinsic comparisons identify the left side with
+the actual strict-transform value at $z$ and the right side
+with the original value at $\pi(z)$. Substituting them proves
+the assertion, including exceptional points and every order.
+\end{proof}
+
+\begin{theorem}[Original constant-Hilbert--Samuel regular-centre geometry gives actual nonincrease]
+\label{hir:actual-original-hs-constant-centre-geometric-bennett}
+\uses{hir:actual-original-centre-reduced-normal-powers,hir:actual-fixed-chart-reduced-centre-geometric-bennett}
+\lean{Hironaka.HironakaActualHSConstantCentreBennett.hilbertSamuelAt_actual_hs_constant_centre_blowup_le}
+\leanok
+Let $\pi$ be a genuine blowup along $C$ in dimension $d+t$,
+and let $z\in Y$. Suppose $C$ is regular of dimension $d$ at
+$\pi(z)$ and $W$ is an original complex analytic subset.
+Suppose its entire intrinsic Hilbert--Samuel function is
+constant along $C$, with value that at $\pi(z)$.
+Then the preceding actual strict-transform inequality holds
+at $z$ in every order. No chart, free-module, monic-family,
+canonical-series or compatibility certificate is an input.
+\end{theorem}
+\begin{proof}
+The whole original vanishing ideal of $W$ is coherent by the
+proved analytic coherence theorem. Apply the original-only
+canonical reduced-normal-power producer to this same ideal,
+the given regular centre and its all-order intrinsic constancy.
+It chooses one actual flattening $\Phi$, its true domain,
+zero-centering and whole centre-membership equivalence, and
+proves canonical reduced normal powers for its same origin
+ideal $I_0$.
+
+Retain that $\Phi$ before constructing any blowup source
+coordinates. Apply the preceding fixed-chart theorem directly
+to this supplied flattening and the internally proved normal
+powers. It constructs the actual source square for that very
+$\Phi$ and gives the asserted intrinsic inequality. There is
+no identification of independently chosen coordinate maps.
+\end{proof}
+
+\begin{theorem}[Every point of the genuine blowup satisfies Bennett nonincrease]
+\label{hir:actual-all-point-hs-constant-smooth-centre-bennett}
+\uses{hir:actual-original-hs-constant-centre-geometric-bennett,hir:actual-blowup-off-centre-intrinsic-reduced-hs}
+\lean{Hironaka.HironakaActualHSConstantCentreBennett.hilbertSamuelAt_actual_hs_constant_smooth_centre_blowup_le}
+\leanok
+Let $\pi:Y\to X$ be the genuine blowup along a closed complex
+submanifold $C$ of an ambient complex manifold of dimension $n$.
+Let $W\subset X$ be complex analytic, and suppose every two
+points of $C$ have the same entire intrinsic Hilbert--Samuel
+function for $W$. Then for every $z\in Y$ and every order
+$\ell$ the actual strict-transform value at $z$ is at most
+the original value at $\pi(z)$.
+The centre may have different dimensions on different components.
+\end{theorem}
+\begin{proof}
+If $\pi(z)\notin C$, the genuine complement biholomorphism
+identifies the whole actual strict-transform stalk with the
+original stalk, so their intrinsic values are equal.
+If $\pi(z)\in C$, closed-submanifold regularity supplies its
+actual local centre dimension $d\le n$. Write $n=d+t$ using
+the genuine nonnegative difference. Pairwise constancy on $C$
+gives the entire original function at every centre point equal
+to that at $\pi(z)$. Apply the preceding original-only theorem
+in this actual dimension decomposition. It proves the desired
+inequality for that point and every order. These two cases
+cover all points of the actual blowup.
+\end{proof}
+
+\begin{theorem}[Original singular geometry gives a proper singular-centre blowup with all-point nonincrease]
+\label{hir:actual-original-singular-centre-proper-bennett-blowup}
+\uses{hir:actual-original-hs-constant-singular-centre-proper-blowup,hir:actual-all-point-hs-constant-smooth-centre-bennett}
+\lean{Hironaka.HironakaActualHSConstantCentreBennett.exists_actual_original_singular_centre_proper_blowup_bennett}
+\leanok
+Let $W$ be a compact complex analytic subset, pure of dimension
+$d<n$, which is not a closed complex submanifold. Let $E$ be
+the entire original ordered simple-normal-crossings boundary.
+Then the original geometry supplies a nonempty centre
+$C\subset W\setminus\operatorname{Reg}_d(W)$ admissible for
+the original marked vanishing ideal with this same boundary,
+and a genuine proper blowup $\pi:Y\to X$ along $C$, such that
+the entire original intrinsic Hilbert--Samuel function is
+constant along $C$ and
+\[
+ H_{\operatorname{strict}_\pi W,z}(\ell)
+ \le H_{W,\pi(z)}(\ell)
+ \quad\text{for all }z\in Y\text{ and }\ell\ge0.
+\]
+The blowup is an isomorphism over the complement of the current
+singular locus and retains the full genuine transformed SNC
+boundary. The centre is the actual canonical maximum for the
+same internally formed auxiliary Hilbert--Samuel reference ideal.
+\end{theorem}
+\begin{proof}
+Apply the original compact pure nonsmooth singular-centre
+producer with the entire given boundary. It chooses a genuine
+singular reference point, a nonempty admissible centre $C$
+inside that same current singular locus, and the proper
+blowup, regular-open inverse and transformed SNC boundary.
+It proves constancy of every original intrinsic HS order
+on this same centre, relative to the chosen reference point,
+and identifies the centre with the actual auxiliary canonical
+maximum.
+
+Admissibility supplies genuine closed-submanifold regularity
+of $C$. If $x,y\in C$, their HS values both equal the chosen
+reference value in every order, hence are equal to one another.
+The preceding all-point original smooth-centre Bennett theorem
+therefore applies to the very same $C$ and actual blowup.
+It gives the displayed inequality at every point, including
+over $C$, while all previously constructed geometric and
+boundary witnesses are retained unchanged.
+\end{proof}
+
+\begin{remark}
+The assertions concern actual one-step geometric nonincrease.
+They do not identify the auxiliary centre invariant with the
+original driver invariant, prove strict decrease, or assert a
+finite terminating resolution sequence whose centres lie in
+each current strict-transform singular locus.
+\end{remark}

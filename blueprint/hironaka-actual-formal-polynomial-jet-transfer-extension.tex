@@ -1,0 +1,116 @@
+\section{Actual finite polynomial jets transfer the coordinate comparisons to every formal ideal}
+
+Put $S_n=\mathbb C[[X_1,\ldots,X_n]]$, with its genuine complex action
+and actual variable ideal $\mathfrak n_n$. Retain the actual Taylor
+embedding $\mathcal T_n:R_n\hookrightarrow S_n$ of the original
+holomorphic germ ring. This closes the FORMAL raw coordinate comparisons
+of \cite[Lemmas~7.25--7.26, p.~270]{bierstone-milman97-invent-math}
+from the already proved original holomorphic comparisons. The finite
+polynomial ideal below is constructed from the given actual formal ideal;
+no analytic realization of the whole ideal is assumed. Exceptional
+division, transformed standard bases and the strict Bennett inequality
+remain subsequent obligations.
+
+\begin{lemma}[An internally constructed original polynomial ideal has the same entire formal jet thickening]
+\label{hir:actual-formal-polynomial-jet-whole-thickening}
+\uses{hir:actual-formal-vertex-series-whole-ideal-generation,hir:actual-formal-coefficients-original-polynomial-approximation,hir:actual-formal-variable-power-coefficient-kernel}
+For an arbitrary actual ideal $K\subset S_n$ and $\ell\in\mathbb N$,
+let $f_a$ be its internally fixed monic degree-first vertex series.
+Define the actual ORIGINAL polynomial germ ideal
+\[
+ J_\ell(K)=\bigl(\operatorname{trunc}_{<\ell+1}(f_a)(x):
+                 a\in\operatorname{Vert}\mathcal N(K)\bigr)\subset R_n.
+\]
+This is a genuine finite family and, in BOTH whole ideal directions,
+\[
+ K+\mathfrak n_n^{\ell+1}
+ =\mathcal T_{n*}J_\ell(K)+\mathfrak n_n^{\ell+1}.
+\]
+\lean{Hironaka.HironakaActualFormalPolynomialJetTransfer.actualPolynomialJetIdeal,Hironaka.HironakaActualFormalPolynomialJetTransfer.actualPolynomialJetIdeal_generator_remainder,Hironaka.HironakaActualFormalPolynomialJetTransfer.actualPolynomialJetIdeal_whole_thickening}
+\leanok
+\end{lemma}
+\begin{proof}
+The genuine Dickson vertex family is finite, and actual formal division
+has already proved $K=(f_a)_a$. Each displayed generator is literal
+original coordinate evaluation of the true polynomial truncation of the
+SAME $f_a$. Its Taylor coefficients below degree $\ell+1$ agree with
+those of $f_a$. The actual whole-power coefficient kernel therefore puts
+$\mathcal T_n(\operatorname{trunc}_{<\ell+1}(f_a)(x))-f_a$ in
+$\mathfrak n_n^{\ell+1}$. Thus every $f_a$ belongs to the right-hand
+whole ideal. Conversely the Taylor image of every actual original
+polynomial generator belongs to the left-hand whole ideal. Actual span
+and ideal-map universal properties give the two whole inclusions; both
+include the SAME variable power. Empty vertex families and unit ideals
+require no separate dimension or generating-family certificate.
+\end{proof}
+
+\begin{theorem}[The same internally chosen polynomial ideal compares source and image jets for every actual centered holomorphic map]
+\label{hir:actual-formal-polynomial-jet-pullback-hs-identities}
+\uses{hir:actual-formal-polynomial-jet-whole-thickening,hir:actual-formal-original-pullback-substitution-polynomials,hir:actual-original-formal-taylor-entire-pullback-naturality,hir:actual-original-formal-entire-hs-transfer}
+Let $\eta:(\mathbb C^m,0)\to(\mathbb C^n,0)$ be an actual centered
+holomorphic map, $\varphi:R_n\to R_m$ its original germ pullback,
+and $\widehat\varphi:S_n\to S_m$ the genuine substitution constructed
+from its actual Taylor coordinate images. For the SAME internally
+constructed $J=J_\ell(K)$, BOTH whole target thickenings agree:
+\[
+ \widehat\varphi_*K+\mathfrak n_m^{\ell+1}
+ =\mathcal T_{m*}(\varphi_*J)+\mathfrak n_m^{\ell+1}.
+\]
+Consequently the genuine original and formal Hilbert--Samuel values obey
+\[
+ H_K(\ell)=H_J(\ell),\qquad
+ H_{\widehat\varphi_*K}(\ell)=H_{\varphi_*J}(\ell).
+\]
+No image ideal, quotient bijection or HS identity is an input.
+\lean{Hironaka.HironakaActualFormalPolynomialJetTransfer.actualPolynomialJetIdeal_pullback_thickening,Hironaka.HironakaActualFormalPolynomialJetTransfer.actualPolynomialJetIdeal_source_hs,Hironaka.HironakaActualFormalPolynomialJetTransfer.actualPolynomialJetIdeal_pullback_hs}
+\leanok
+\end{theorem}
+\begin{proof}
+Apply the true whole ideal map $\widehat\varphi_*$ to the preceding
+source thickening equality and add the actual target variable power.
+The already proved genuine centered-substitution power inclusion
+$\widehat\varphi_*(\mathfrak n_n^{\ell+1})\subset
+\mathfrak n_m^{\ell+1}$ absorbs the extra source-power image on BOTH
+sides. Whole original/formal Taylor naturality identifies the remaining
+right-hand ideal with $\mathcal T_{m*}(\varphi_*J)$, giving the displayed
+whole target equality. The source equality and this target equality
+identify the actual formal quotient ideals at order $\ell$.
+The existing genuine original/formal whole-jet complex algebra
+equivalences then identify their dimensions with the actual original
+values of $J$ and $\varphi_*J$, respectively. Every scalar action is
+the existing complex action. The polynomial ideal is allowed to depend
+on $\ell$; the argument is made separately for each actual HS value.
+\end{proof}
+
+\begin{theorem}[Every genuine formal ideal satisfies the raw coordinate and elementary triangular HS comparisons]
+\label{hir:actual-formal-coordinate-and-triangular-hs-inequalities}
+\uses{hir:actual-formal-polynomial-jet-pullback-hs-identities,hir:actual-coordinate-specialization-all-order-hs-inequality,hir:actual-triangular-substitution-all-order-hs-inequality}
+For EVERY actual formal ideal in the indicated ring and every $\ell$,
+\[
+ H_K(\ell)\le H_{L_{0*}K}(\ell),\qquad
+ H_K(\ell)\le H_{S_{b*}K}(\ell),
+\]
+where $L_0(u,v)=(0,v)$ on $\mathbb C^{r+n}$ and
+$S_b(u_1,u_2,v)=(u_1,u_1(b+u_2),v)$ on $\mathbb C^{2+n}$,
+and the formal maps are the genuine substitutions induced by these SAME
+actual original polynomial maps. All directions $b\in\mathbb C$ and
+all formal ideals are included, without an analytic convergence premise.
+\lean{Hironaka.HironakaActualFormalPolynomialJetTransfer.actualFormalCoordinateSpecialization,Hironaka.HironakaActualFormalPolynomialJetTransfer.actualFormalTriangularSubstitution,Hironaka.HironakaActualFormalPolynomialJetTransfer.genuineFormalHilbertSamuelValue_coordinate_specialization,Hironaka.HironakaActualFormalPolynomialJetTransfer.genuineFormalHilbertSamuelValue_triangular_substitution}
+\leanok
+\end{theorem}
+\begin{proof}
+Fix $\ell$ and construct the actual finite original polynomial ideal
+$J_\ell(K)$ from the first lemma. For $L_0$ use its existing actual
+complex linearity, holomorphicity and zero-center formula; for $S_b$ use
+the existing actual polynomial holomorphicity and zero-center formula.
+The preceding theorem supplies BOTH true source/image HS identities
+for the chosen actual map. Apply, respectively, the already proved
+original whole-ideal coordinate-specialization or triangular-substitution
+inequality to this actual original $J_\ell(K)$. Substitute the two true
+HS identities to obtain the displayed formal inequality. The concrete
+consumers supply each original comparison from its proved theorem;
+no desired inequality, lift or dimension comparison is a caller premise.
+These are the raw formal substitutions of Lemmas~7.25--7.26, before any
+division by an exceptional equation. They do not assert the strict
+transform inequality or construct a transformed standard basis.
+\end{proof}

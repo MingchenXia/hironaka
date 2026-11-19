@@ -1,0 +1,110 @@
+\section{Actual pivot correspondence and global joint-point uniqueness}
+
+\begin{lemma}[Repivoting the same actual chart preserves the whole coordinate geometry]
+\label{hir:submersion-blowup-pivot-same-coordinate-support}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.repivot,Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.repivot_eq_self_of_pivot,Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.matching_pivot_extended_support}
+\uses{hir:submersion-adapted-blowup-entire-monomial-dictionary,hir:submersion-adapted-blowup-actual-smooth-chart-map,bex:blowup-space}
+Replace only the normal pivot in an actual flattening blowup chart. Its
+base domain and all unnormalized coordinate functions remain the same. Repivoting to the original pivot returns the identical entire chart record.
+For actual matching source and target charts with the genuine block normal
+index and pivot dictionary, let the source chart parameter project into
+the target chart target. At every actual source-chart point $q$, with actual
+flat-chart image $z$, EVERY normal coordinate $i$ has nonzero extended value
+at $z$ exactly when its corresponding rotated source coordinate has nonzero
+extended value at $q$. Thus repivoting to an actual target pivot containing
+$z$ produces a true source pivot chart containing $q$.
+\end{lemma}
+\begin{proof}
+The repivoted chart is the same literal flattening record with only its
+pivot and its normal-index proof replaced; its base domain and every raw
+coordinate are definitionally unchanged. For the old pivot, both extended
+values are nonzero by actual chart membership. For another normal index,
+the genuine target right-inverse gives target parameter equal to the drop
+of the source parameter. Evaluating coordinate $i$ gives equality of the
+target and rotated source parameter entries. The actual monomial chart
+formulas write these entries as extended-value numerator divided by their
+respective old-pivot extended value. Both denominators are genuinely
+nonzero. Therefore the numerators are nonzero simultaneously. This uses
+only the ordinary entire chart formulas, including at every point of the
+exceptional divisor, not a density argument away from it. The source base
+remains in the identical domain, hence its new chart membership follows.
+\end{proof}
+
+\begin{lemma}[Original geometry produces one complete matching pivot family]
+\label{hir:submersion-blowup-pivot-original-family}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.exists_original_matching_pivot_family}
+\uses{hir:submersion-blowup-pivot-same-coordinate-support,hir:submersion-adapted-actual-product-shrink,hir:submersion-adapted-blowup-cover-original-index}
+Only the original submersion at an actual point and a genuine centre
+flattening internally produce a SAME source flattening, SAME target
+flattening, and matching monomial charts for every genuine normal pivot.
+At a specified actual exceptional source-blowup point, a genuine member
+contains that point. Every member has the true product target, whole
+inverse-point square and genuine block-index dictionary.
+\end{lemma}
+\begin{proof}
+Produce the genuine product neighbourhood $R\times S$ and source flattening
+$\Psi$ from the original submersion and centre flattening. Restrict the
+SAME target flattening to $S$; its whole coordinate functions are unchanged.
+Use the source point's actual non-tangent direction and the actual tangent
+flattening dictionary to find a nonzero source normal extended coordinate.
+Its index is genuinely $r+j$ for a unique target normal index $j$. This
+member is a true source chart containing the specified point. Repivot both
+SAME flattenings at any genuine target normal index. The actual block
+monomial identity gives the product target for each member. The original
+whole inverse-flattening square gives its entire point square after that
+SAME block monomial identity. No chart family, pivot, product coverage or
+comparison output certificate is supplied.
+\end{proof}
+
+\begin{theorem}[Canonical original blowup points are uniquely determined by BOTH projections]
+\label{hir:submersion-blowup-pivot-canonical-joint-unique}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.canonical_actualLift_joint_unique}
+\uses{hir:submersion-blowup-pivot-same-coordinate-support,hir:submersion-blowup-pivot-original-family,hir:submersion-global-lift-whole-chart-equality,hir:submersion-blowup-local-cone-entire-join,hir:submersion-adapted-blowup-cover-original-index}
+Only original global submersion, genuine closed smooth nowhere-dense centre
+and two actual source-blowup points with equal source base and equal actual
+canonical lift image imply equality of those points, with no chart input.
+\end{theorem}
+\begin{proof}
+Off the source centre, the actual blowup has a unique point over its base.
+At an exceptional common base, internally choose the genuine target centre
+flattening and preceding SAME matching family containing the first point.
+The second point's actual non-tangent direction in this SAME source
+flattening produces its own member. Entire universal-chart equality puts
+both actual canonical images in their true corresponding target charts.
+Their images are equal. The preceding whole extended-coordinate support
+correspondence in the second point's own member therefore puts the second
+point in the first point's SAME source chart. Actual whole chart equality
+and the original two projection equalities now give equal bases and equal
+flat-chart images in one SAME chart. The true split-coordinate joint-point
+uniqueness from the local-cone producer forces equality. Empty centres and
+zero-dimensional cases use the actual off-centre branch; an exceptional
+case supplies the genuine normal pivot internally.
+\end{proof}
+
+\begin{theorem}[Arbitrary genuine choices have the actual unique compatible point]
+\label{hir:submersion-blowup-pivot-chosen-joint-unique}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.actualLift_joint_unique,Hironaka.HironakaSmoothSubmersionBlowupPivotCompatibility.existsUnique_actual_compatible_point}
+\uses{hir:submersion-blowup-pivot-canonical-joint-unique,hir:submersion-blowup-choice-actual-conjugate,hir:submersion-blowup-compatible-arbitrary-choices,hir:submersion-monomial-dimension}
+Only original arbitrary-dimensional submersion and genuine primitive
+source/target blowup choices internally give joint injectivity of their
+source projection and actual lift. Every genuine compatible pair $(y,z)$
+has exactly one actual point $p$ with $\pi'p=y$ and $Gp=z$.
+\end{theorem}
+\begin{proof}
+For actual source points, the original submersion at their base internally
+gives $n\leq m$ and a genuine $r$ with $m=n+r$. Produce the actual identity
+base comparisons with the canonical choices; their whole projection and
+conjugation formulas turn equal original projections into equal canonical
+projections. Apply the preceding genuine canonical joint-point uniqueness
+and invert the source comparison. Existence for every genuine compatible
+pair is the existing actual internally produced compatible-point theorem;
+uniqueness follows from the just-proved joint injectivity. The actual
+compatible base point also supplies the dimension bound internally. Empty
+manifolds require no fabricated point. This is a pointwise universal
+property, not yet global holomorphic gluing of every cone, full Cartesian
+manifold universal property, or higher-invariant driver identification.
+\end{proof}

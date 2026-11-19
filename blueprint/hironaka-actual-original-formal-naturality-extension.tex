@@ -1,0 +1,112 @@
+\section{Genuine original holomorphic pullback and actual formal substitution commute}
+
+Let $\eta:(\mathbb C^m,0)\to(\mathbb C^n,0)$ be an ACTUAL map
+holomorphic on a neighborhood of the original origin, with $\eta(0)=0$.
+Its existing genuine original germ pullback is
+$\varphi:R_n\to R_m$, where $R_k=\mathcal O_{\mathbb C^k,0}$.
+Keep the ACTUAL original Taylor complex algebra embeddings
+$\mathcal T_k:R_k\hookrightarrow S_k=\mathbb C[[X_1,\ldots,X_k]]$.
+This supplies the actual analytic/formal compatibility for the coordinate
+substitutions used in \cite[\S7, pp.~267--274]{bierstone-milman97-invent-math}.
+It precedes exceptional division and strict transformation; it assumes no
+desired Taylor diagram, completion equivalence or transformation certificate.
+
+\begin{lemma}[The actual centered holomorphic map internally supplies local pullback and genuine formal coordinate images]
+\label{hir:actual-original-pullback-local-formal-coordinate-images}
+\uses{hir:actual-original-formal-taylor-algebra-embedding,hir:actual-original-formal-taylor-constants-coordinates,hir:actual-original-formal-variable-power-extension,hir:actual-formal-variable-power-coefficient-kernel}
+The ACTUAL original pullback preserves evaluation at the genuine original
+origin, hence maps $\mathfrak m_n$ into $\mathfrak m_m$.
+The literal formal coordinate images
+$A_i=\mathcal T_m(\varphi(x_i))\in S_m$ belong to the actual formal
+variable ideal and each has genuine constant coefficient zero.
+\lean{Hironaka.HironakaActualOriginalFormalNaturality.compAlgHom_eval,Hironaka.HironakaActualOriginalFormalNaturality.map_maximalIdeal_compAlgHom_le,Hironaka.HironakaActualOriginalFormalNaturality.map_maximal_pow_compAlgHom_le,Hironaka.HironakaActualOriginalFormalNaturality.actualFormalCoordinateImages,Hironaka.HironakaActualOriginalFormalNaturality.actualFormalCoordinateImages_mem_variables,Hironaka.HironakaActualOriginalFormalNaturality.actualFormalCoordinateImages_constant_zero}
+\leanok
+\end{lemma}
+\begin{proof}
+For a genuine original representative $f$, the existing pullback has
+the ACTUAL representative $f\circ\eta$, whose value at the true
+origin is $f(\eta(0))=f(0)$. This proves the evaluation equality on
+EVERY actual germ. The existing original maximal-ideal kernel therefore
+gives the whole original ideal inclusion. Each original coordinate germ
+$x_i$ vanishes at the actual origin, so its true pullback belongs to
+$\mathfrak m_m$. Actual Taylor extension sends that entire maximal
+ideal to the genuine formal variable ideal. The real formal first-power
+coefficient kernel then kills the genuine degree-zero coefficient of
+each SAME $A_i$. Every local property and zero coefficient is thus
+constructed from the actual holomorphic map and its actual center.
+\end{proof}
+
+\begin{theorem}[The genuine formal substitution preserves actual powers and matches every literal polynomial]
+\label{hir:actual-formal-original-pullback-substitution-polynomials}
+\uses{hir:actual-original-pullback-local-formal-coordinate-images,hir:actual-formal-coefficients-original-polynomial-approximation,hir:actual-original-formal-taylor-constants-coordinates}
+The preceding SAME actual family constructs the genuine formal complex
+algebra substitution $\widehat\varphi:S_n\to S_m$, $X_i\mapsto A_i$.
+It maps each whole actual formal variable power $\mathfrak n_n^q$
+into $\mathfrak n_m^q$. For EVERY actual polynomial $P$ in the
+original coordinates,
+\[
+ \widehat\varphi(P)=\mathcal T_m\bigl(\varphi(P(x_1,\ldots,x_n))\bigr).
+\]
+\lean{Hironaka.HironakaActualOriginalFormalNaturality.actualFormalPullback,Hironaka.HironakaActualOriginalFormalNaturality.actualFormalPullback_X,Hironaka.HironakaActualOriginalFormalNaturality.map_variables_actualFormalPullback_le,Hironaka.HironakaActualOriginalFormalNaturality.map_variables_pow_actualFormalPullback_le,Hironaka.HironakaActualOriginalFormalNaturality.originalTaylor_polynomial_pullback}
+\leanok
+\end{theorem}
+\begin{proof}
+The true coordinate family is finite and has actual zero constant
+coefficients, so the genuine formal substitution construction applies
+internally. Its literal variable formula gives exactly the SAME $A_i$,
+and its constants have the existing complex action. Since each actual
+$A_i$ belongs to $\mathfrak n_m$, image of the genuine variable span
+is contained in that ideal; actual image-of-power and ideal-power
+monotonicity give the assertion for EVERY whole power.
+Both displayed polynomial maps are genuine original complex algebra
+maps. On every actual scalar they agree by their true algebra
+commutation, and on every original coordinate variable they agree by
+the original coordinate Taylor formula and the literal substitution
+variable formula. Actual polynomial algebra-map extensionality gives
+the displayed identity at EVERY polynomial, including constants and
+the empty coordinate family.
+\end{proof}
+
+\begin{theorem}[Every actual original Taylor numerator and whole ideal extension commute with the genuine pullback]
+\label{hir:actual-original-formal-taylor-entire-pullback-naturality}
+\uses{hir:actual-formal-original-pullback-substitution-polynomials,hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-formal-variable-power-extension,hir:actual-formal-variable-power-coefficient-kernel}
+For EVERY actual original germ $g\in R_n$,
+\[
+ \mathcal T_m(\varphi(g))=\widehat\varphi(\mathcal T_n(g)).
+\]
+For EVERY original ideal $I\subset R_n$, the actual WHOLE ideal images
+satisfy
+\[
+ \widehat\varphi_*(S_n\mathcal T_n(I))
+ =S_m\mathcal T_m(\varphi_*I).
+\]
+All rings, complex scalar actions, germ representatives and formal
+coordinate numerators are the genuine existing ones.
+\lean{Hironaka.HironakaActualOriginalFormalNaturality.originalTaylor_compAlgHom,Hironaka.HironakaActualOriginalFormalNaturality.map_whole_original_ideal_formal_pullback}
+\leanok
+\end{theorem}
+\begin{proof}
+Fix any actual target exponent $\alpha$, put $k=|\alpha|$, and take
+the internally constructed original Taylor polynomial $P_k(g)$.
+The genuine original remainder $e=g-P_k(g)(x)$ belongs to the actual
+$\mathfrak m_n^{k+1}$. The true local original pullback maps this
+whole power into $\mathfrak m_m^{k+1}$. Actual original Taylor
+extension then puts $\mathcal T_m(\varphi(e))$ in the true formal
+$\mathfrak n_m^{k+1}$. Independently,
+$\mathcal T_n(e)\in\mathfrak n_n^{k+1}$ and the preceding actual
+substitution power inclusion puts
+$\widehat\varphi(\mathcal T_n(e))$ in the SAME true target power.
+The genuine coefficient kernel therefore kills the coefficient at
+$\alpha$ of BOTH actual errors. On the actual polynomial term the two
+maps agree by the preceding theorem. Thus their coefficients at the
+arbitrary actual $\alpha$ agree. Equality of EVERY genuine coefficient
+proves the entire formal series equality, with no analytic convergence
+or desired commutative-diagram premise assumed.
+Finally actual extension of a WHOLE ideal is functorial for the actual
+ring homomorphisms. Compose the genuine maps in either order and use
+the just proved equality on EVERY original numerator. The two actual
+composite homomorphisms agree, so their WHOLE ideal images agree in
+BOTH directions. This statement concerns pullback and extension before
+exceptional division; it does not claim invariance of HS under an
+arbitrary noninvertible map or any strict Bennett comparison.
+\end{proof}

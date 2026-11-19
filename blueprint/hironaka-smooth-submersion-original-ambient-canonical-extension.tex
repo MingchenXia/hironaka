@@ -1,0 +1,138 @@
+\section{Literal ambient canonical invariants under smooth pullback}
+
+Retain the original canonical invariant $C_n=R^{(n)}_n$, its unchanged
+recursive value type $\mathcal V_n$, all original marked records, indexed
+boundary entries and literal whole histories. The zero ambient invariant is
+the actual original dimension-zero invariant. All statements below concern
+actual smooth Cartesian blowup histories. Empty manifolds and empty centres
+are included. The construction specializes the depth-parametric comparison
+without asserting a dimension inequality on an empty source manifold.
+
+\begin{lemma}[Actual ambient domain and honest value-type specialization]
+\label{hir:smooth-original-ambient-domain-value-specialization}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.canonicalInvariant_eq_invFamily, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.ambientDimensionMap, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.strictMono_ambientDimensionMap, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.ambientDimensionMap_comparisons, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.original_ambient_domain_pullback}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-original-recursive-family-values-canonical,hir:smooth-actual-value-recursive-dimension-maps}
+A smooth pullback of an original marked record in the ambient bound-$n$
+domain belongs to the ambient bound-$m$ domain. For $n\leq m$, the map
+\[
+ A_{n,m}:\mathcal V_n\longrightarrow\mathcal V_m,
+ \qquad A_{n,m}(v)=D_{m-n,n}(v),
+\]
+uses the literal equality $(m-n)+n=m$ to identify ONLY its target value
+type. It is strictly increasing and reflects strict order, weak order and
+equality. For $n>0$, the unchanged ambient invariant is literally the
+original depth-$n$ family.
+\end{lemma}
+\begin{proof}
+The genuine original domain pullback producer gives well-formedness,
+positive marking, nonzero germs along the source marked submanifold, and
+bound $n+(m-n)$. At every actual source marked point $y$, surjectivity of
+the actual differential gives $n\leq m$ by finite-dimensional linear
+algebra. Consequently $n+(m-n)=m$ at that point, converting the original
+regular-dimension bound to $m$. This is a pointwise proof, so an empty
+source needs no impossible global inequality. All other domain fields are
+exactly those supplied by the original pullback theorem. For the value map,
+transport along the natural-number equality is the order isomorphism that
+becomes the identity after that equality is substituted. Its composition
+with the previously proved strict $D_{m-n,n}$ is strict, and strict maps of
+linear orders reflect all three comparisons. If $n$ is positive, writing
+$n=a+1$ unfolds the unchanged definition of $C_n$ to $R^{(n)}_n$;
+proof irrelevance identifies the two proofs of positivity.
+\end{proof}
+
+\begin{lemma}[The actual zero and empty-source whole histories]
+\label{hir:smooth-original-ambient-zero-empty-histories}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.original_ambient_canonical_empty_of_dim_zero, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.original_empty_source_history, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.original_source_empty_of_dimension_drop}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-original-zero-family-history,hir:smooth-original-ambient-domain-value-specialization}
+If the target ambient dimension is zero, EVERY original canonical target
+history of an original domain record has all its literal centres empty;
+its actual Cartesian source history also has all centres empty, hence is
+canonical for the actual ambient source invariant. If $n>m$, the actual
+source manifold is empty, so EVERY source history has all literal centres
+empty and is canonical for its actual ambient invariant. No source
+canonicality or empty-history certificate is assumed.
+\end{lemma}
+\begin{proof}
+In target ambient dimension zero, the original domain theorem makes the
+entire transformed target cosupport empty along each preceding canonical
+history. Induct on the literal target tower: its current canonical centre
+is either empty or the maximum locus of that empty cosupport, which is
+empty. Actual Cartesian centres are literal preimages of these empty sets;
+induction therefore proves the whole source empty history. The genuine
+empty-history canonicality theorem applies to its actual source invariant
+in any source dimension. For $n>m$, an actual source point would have a
+surjective differential from dimension $m$ onto dimension $n$, contradicting
+$n>m$. Hence the source is empty. At each stage a point of any centre
+projects through the preceding whole tower to a source point, so every
+centre is empty, again giving actual source canonicality. These arguments
+retain empty steps and their full original lengths.
+\end{proof}
+
+\begin{theorem}[Whole actual ambient canonicality and values in every dimension]
+\label{hir:smooth-original-ambient-canonical-history-values}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.IsActualTowerPullback.original_ambient_canonical, Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.IsActualTowerPullback.original_ambient_value}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-original-ambient-domain-value-specialization,hir:smooth-original-ambient-zero-empty-histories,hir:smooth-original-recursive-family-values-canonical}
+From ONLY the original ambient bound-$n$ marked domain, original whole
+$C_n$-canonical target history and actual smooth Cartesian pair, construct
+WHOLE source $C_m$-canonicality internally. At EVERY actual source point $z$
+whose image lies in the actual transformed target cosupport, internally
+obtain $n\leq m$ from the genuine differential at its original projection;
+the entire actual values satisfy
+\[
+ C_m(f^*M,Q,z)=A_{n,m}(C_n(M,T,gz)).
+\]
+No source or lower canonicality, branch, value comparison, source
+compactness or smooth surjectivity is a premise.
+\end{theorem}
+\begin{proof}
+For whole canonicity, target dimension zero and $n>m$ are the preceding
+actual empty-history cases. Otherwise $0<n\leq m$, hence $m>0$.
+The complete original recursive theorem at target depth $n$ supplies
+actual source canonicity at depth $(m-n)+n$; the equality to $m$ and the
+literal positive-ambient identification of both invariants give precisely
+source $C_m$-canonicality. For a value point, its original projection is an
+actual source point, so the differential internally gives $n\leq m$.
+If $n=0$, actual transformed target cosupport is empty; the asserted point
+cannot exist. If $n>0$, then $m>0$, and the complete depth-$n$ value formula
+applies. Transport its source value along $(m-n)+n=m$; dependent equality
+substitution proves that this transported value is the actual original
+$R^{(m)}_m$ value, rather than an unrelated value on an identified carrier.
+Apply the literal ambient-invariant equalities to both sides. This is exactly
+the displayed formula for the unchanged original invariants.
+\end{proof}
+
+\begin{theorem}[Original compact-target ambient canonical terminal constructor]
+\label{hir:smooth-original-ambient-canonical-terminal-constructor}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalAmbientCanonical.exists_original_smooth_ambient_canonical_resolution}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-original-ambient-canonical-history-values,hir:invariant-driver-seq,hir:submersion-relative-control-joint-tower}
+For an original compact target in EVERY ambient dimension, original smooth
+map and original ambient-domain marked record, internally construct BOTH
+literal whole ambient canonical terminal histories, a genuine Cartesian
+witness, equal history lengths and exact marked-transform and cosupport
+preimage dictionaries. The source is in its actual ambient domain.
+Neither source compactness, source surjectivity, nor terminal/canonical
+history certificates are assumed.
+\end{theorem}
+\begin{proof}
+Apply the actual original per-sequence resolution driver to $C_n$ and the
+original domain to obtain the whole canonical target resolution. Construct
+its literal whole source Cartesian tower using the genuine smooth tower
+producer. The first lemma gives its ambient domain, and the preceding
+whole theorem gives source ambient canonicality internally in every
+dimension. Target terminality provides actual target testness; genuine
+relative marked and cosupport dictionaries supply whole source testness,
+exact transform equality and preimage cosupport. The preimage of the empty
+target terminal cosupport is empty, proving source terminality. The actual
+Cartesian witness gives equal lengths and literal preimage centres at every
+step. This is the ambient specialization of the actual original smooth
+family construction; arbitrary noncompact global scheduling and unrelated
+Hironaka source frontiers are not concluded.
+\end{proof}

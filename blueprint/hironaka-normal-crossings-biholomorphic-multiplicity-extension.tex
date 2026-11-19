@@ -1,0 +1,141 @@
+\section{Actual whole NC multiplicity under biholomorphic geometry}
+\label{sec:hironaka-normal-crossings-biholomorphic-multiplicity}
+
+Intrinsic original branch cardinality must be transported before highest
+centres can be aligned. The statements below use actual whole carrier
+coordinates and actual biholomorphisms; no branch matching, count equality,
+maximum identity or naturality certificate is supplied.
+
+\begin{lemma}[An actual full-coordinate reader under a local biholomorphism]
+\label{hir:general-nc-actual-local-biholomorphic-coordinate-reader}
+\lean{Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.exists_pullback_flat_coordinates}
+\leanok
+\uses{hir:general-nc-actual-local-snc-branches}
+A holomorphic map with bijective differential at a point internally
+produces, from any actual original centred holomorphic coordinate map,
+an actual coordinate map at that point. It reads the entire same
+original coordinate vector, and maps its whole genuine domain into the
+whole original coordinate domain.
+\end{lemma}
+\begin{proof}
+Let $e$ be the actual preferred chart at the source point $z$, and $e'$
+the preferred chart at its image. On the genuine open set
+$N=e.\mathrm{target}\cap e^{-1}(g^{-1}(e'.\mathrm{source}))$,
+read the actual map as $F=e'\circ g\circ e^{-1}$. This open set contains
+$e(z)$, and the manifold holomorphic coordinate formula gives actual
+holomorphicity of $F$ there. The genuine manifold derivative formula
+identifies its derivative with the original bijective manifold
+differential. The actual holomorphic inverse-function theorem thus
+produces a genuine local holomorphic equivalence $\Psi$ with actual
+source contained in $N$ and actual function equal to $F$ on that
+source. Compose it with the original coordinate equivalence $\Phi$,
+using the genuine composite source $\Psi.\mathrm{source}\cap
+\Psi^{-1}(\Phi.\mathrm{source})$. This source lies in the actual
+preferred chart target and contains $e(z)$. Actual chart inverse
+identities show at every point of its whole flat domain that the
+image lies in the original flat domain and that the entire coordinate
+vector is exactly $\Phi(e'(g(y)))$. Its centre value is the original
+centre value. No hyperplane or branch correspondence is a hypothesis.
+\end{proof}
+
+\begin{lemma}[Internally produced entire NC carrier and simultaneous boundary]
+\label{hir:general-nc-whole-biholomorphic-carrier-pair}
+\lean{Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.isNormalCrossingsCarrier_preimage,Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.boundaryAdapted_preimage}
+\leanok
+\uses{hir:general-nc-actual-local-biholomorphic-coordinate-reader,hir:general-nc-simultaneous-original-boundary}
+An actual NC carrier pulls back to an actual NC carrier under every
+holomorphic map with bijective differential everywhere. Its entire
+original selected-coordinate union equation is produced internally.
+An actual boundary-adapted pair likewise pulls back to an actual
+boundary-adapted pair with the literal preimage boundary list.
+\end{lemma}
+\begin{proof}
+At an arbitrary source point apply the actual preceding reader to the
+original coordinate map at its actual image. The whole original NC
+union equation pulls back to the union of exactly the same finite
+selected hyperplanes on the whole actual new domain. The original
+closed carrier pulls back to a closed carrier by continuity. For a
+boundary-adapted pair use the same actual reader simultaneously for
+its whole original union and all original boundary equations. A
+through preimage member is precisely a through original member, so
+the genuine singleton sizes, disjointness from original selected
+indices and through-member injectivity are unchanged. The literal
+preimage list has the same length; its actual indexed elements are
+the preimages of the original indexed elements. This proves every
+pair field on a genuine common domain, without assuming local
+matching of branches or boundary equations in the new coordinates.
+Empty selected sets, zero ambient dimension, empty finite boundary
+and disconnected manifolds are included.
+\end{proof}
+
+\begin{theorem}[Genuine intrinsic original branch multiplicity invariance]
+\label{hir:general-nc-biholomorphic-intrinsic-multiplicity}
+\lean{Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.branchMultiplicity_preimage,Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.branchMultiplicity_diffeomorph}
+\leanok
+\uses{hir:general-nc-whole-biholomorphic-carrier-pair,hir:general-nc-intrinsic-branch-multiplicity,hir:original-normal-crossing-branch-overlap}
+The intrinsic original branch count of the actual pulled-back whole
+carrier at $z$ equals the intrinsic original count at $g(z)$. In
+particular it is invariant under every actual biholomorphism of
+whole NC carriers, independently of all initial coordinate branch
+labels or coordinate choices.
+\end{theorem}
+\begin{proof}
+Choose the original actual centred coordinates and selected finite
+set at $g(z)$. The entire pulled-back union coordinates were just
+produced with exactly that same selected set. The genuine intrinsic
+cardinality theorem, based on unique actual coordinate-germ overlap
+bijections, identifies the two intrinsic counts with the cardinality
+of this same actual set. Thus they are equal. Arbitrary proofs of
+the NC property do not change this intrinsic number. In the
+biholomorphic case the original map has bijective differential by
+its actual holomorphic inverse and the two derivative chain rules;
+therefore the preceding actual local proof applies at every point.
+No count equality or branch permutation is a supplied certificate.
+\end{proof}
+
+\begin{theorem}[Actual whole superlevels and unique attained maximum alignment]
+\label{hir:general-nc-biholomorphic-whole-highest-centre}
+\lean{Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.range_branchMultiplicity_diffeomorph,Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.superlevel_branchMultiplicity_diffeomorph,Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.branchMultiplicity_bound_diffeomorph_iff,Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.attained_maximum_eq,Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity.exists_unique_biholomorphic_highest_centre}
+\leanok
+\uses{hir:general-nc-biholomorphic-intrinsic-multiplicity,hir:general-nc-highest-multiplicity-smooth-centre}
+Under an actual biholomorphism, the entire original branch-count
+value sets, every actual superlevel, all uniform bounds and the
+count-at-most-one stopping condition agree by genuine preimage.
+Every nonempty original carrier internally has one unique attained
+positive whole global maximum. Its entire highest centre is
+therefore uniquely determined and corresponds by the exact
+biholomorphic preimage, without a supplied maximum or centre
+alignment certificate.
+\end{theorem}
+\begin{proof}
+The pointwise actual count identity gives exact equality for every
+superlevel. Actual surjectivity gives equality of the two whole
+value sets and both directions for every uniform bound and stopping
+condition. The genuine finite count-image theorem internally
+produces a positive attained maximum for a nonempty original
+carrier. If $r$ and $s$ are two attained bounds, evaluate the $s$
+bound at an actual $r$-attaining point and the $r$ bound at an actual
+$s$-attaining point: $r\le s$ and $s\le r$, hence $r=s$.
+Surjectivity transports attainment as well as the bound, so the
+maximum is the same on the actual pulled-back whole carrier. The
+entire maximum stratum is its actual superlevel at that same
+internally produced integer, giving the exact whole-centre
+preimage identity. The empty-carrier case has identically zero
+count and an invariant terminal condition; it requires no positive
+maximum. These statements make no assertion that restriction to
+an arbitrary open subset preserves a global maximum.
+\end{proof}
+
+\begin{remark}
+The produced whole-union and pair dictionaries, intrinsic count
+identity and unique actual highest-centre correspondence are the
+mathematical prerequisites for arbitrary genuine blowup-choice
+comparison of the finite geometric separation tower. Actual analytic
+blowup uniqueness and its already proved comparison cocycle will
+then be applied to these genuinely aligned centres. The subsequent
+finite choice-comparison construction remains a separate new
+obligation. The old marked-ideal ordered invariant retains its
+colexicographic label tie-break, and extra marked cosupport
+admissibility is not a consequence of these geometric identities.
+Full canonical marked-ideal general-NC G9 remains open.
+\end{remark}

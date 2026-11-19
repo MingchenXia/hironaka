@@ -1,0 +1,83 @@
+\section{Actual analytic axis specialization gives whole formal jet rigidity}
+
+\begin{theorem}[The genuine whole Taylor map commutes with coordinate-zero contraction]
+\label{hir:actual-whole-taylor-axis-zero-dictionary}
+\uses{hir:actual-axis-contraction-whole-coordinate-dictionary,hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-formal-entire-hs-transfer,hir:actual-exceptional-pivot-projection-kernel-powers}
+\lean{Hironaka.HironakaActualAxisTaylorRigidity.originalTaylor_axis_zero,Hironaka.HironakaActualAxisTaylorRigidity.unshiftedTaylor_axis_zero}
+\leanok
+For every genuine original analytic germ $g$, the actual whole Taylor
+series of $\alpha_e^*g$ is $\rho_e(\widehat g)$, where $\alpha_e$
+is the actual coordinate-zero contraction and $\rho_e$ is the literal
+full formal pivot projection. This holds for the genuine origin and
+unshifted coordinate dictionaries without a supplied Taylor identity.
+\end{theorem}
+\begin{proof}
+The actual contraction fixes every coordinate generator of the whole
+maximal ideal except the pivot, which it kills. It therefore maps
+that whole ideal and every power into themselves. For a given
+coefficient exponent $\beta$, choose the actual finite Taylor
+polynomial through degree $|\beta|$. Its genuine remainder lies in
+the next whole maximal power. Pulling back by the actual contraction
+keeps that power, so its actual Taylor coefficient at $\beta$ is
+zero. The same is true after formal pivot projection of the original
+Taylor remainder, because the literal projection preserves every
+whole formal maximal power. Actual polynomial induction proves that
+Taylor and contraction commute for this finite polynomial: constants
+are fixed, the pivot goes to zero and each other coordinate is fixed.
+The two whole remainder arguments therefore identify the desired
+coefficient. Every exponent is obtained, hence the entire series are
+equal. Actual dimension transport gives the same unshifted dictionary.
+\end{proof}
+
+\begin{theorem}[The two independently defined whole ideal images commute]
+\label{hir:actual-whole-taylor-axis-ideal-image-dictionary}
+\uses{hir:actual-whole-taylor-axis-zero-dictionary}
+\lean{Hironaka.HironakaActualAxisTaylorRigidity.map_unshiftedTaylor_axis_zero}
+\leanok
+For every whole original analytic ideal $I$, the entire Taylor
+extension of the actual axis image $\alpha_e^*I$ equals the actual
+formal pivot image of the entire Taylor extension of $I$.
+\end{theorem}
+\begin{proof}
+The preceding theorem identifies the actual two composite algebra
+homomorphisms on every original germ. The whole ideal-image composition
+law identifies Taylor extension of the actual axis image with the
+image under the first composite, and formal projection of the Taylor
+extension with the image under the second composite. Substitution of
+the genuine composite equality gives both entire ideal directions;
+no generator, completion or image equality has been assumed.
+\end{proof}
+
+\begin{theorem}[Original point HS persistence internally forces every exceptional initial-colon identity]
+\label{hir:actual-original-point-persistent-hs-full-initial-colons}
+\uses{hir:actual-original-point-persistent-hs-axis-profile,hir:actual-whole-taylor-axis-ideal-image-dictionary,hir:actual-exceptional-entire-shadow-hs-colon-rigidity,hir:actual-unshifted-original-formal-hs-transfer,hir:actual-point-centre-whole-analytic-strict-generators}
+\lean{Hironaka.HironakaActualAxisTaylorRigidity.original_point_persistent_hs_initial_colons}
+\leanok
+Let $N$ be the independently defined actual point-normalized ideal of
+an original analytic ideal $A$. If $H_N=H_A$ at every finite order,
+then the entire Taylor extension $I=\widehat N$ satisfies
+$(I+\mathfrak m^{q+1}):x_e=I+\mathfrak m^q$ for every $q$.
+Its actual exceptional multiplications on the genuine full jet
+quotients are therefore all injective. No chosen normalized family,
+formal shadow equality, graded regularity or desired standardness
+certificate is an input.
+\end{theorem}
+\begin{proof}
+The genuine Bennett sandwich internally identifies the entire actual
+analytic axis-image profile of $N$ with its own profile under the
+given source/current persistence. Genuine original/formal whole jet
+transfer and the preceding whole image dictionary turn this into
+entire HS equality of $I$ with its literal formal pivot image.
+Internally choose actual finite canonical point-normalized generators
+from the original ideal. Their genuine whole span gives $N$, and
+whole ideal images give $I$ as the Taylor-family span and its pivot
+image as the span of the literal shadows of that SAME family.
+The proved same-ring HS rigidity theorem therefore supplies each
+whole colon identity. The actual quotient multiplication theorem
+makes each map injective. Every auxiliary family and dictionary was
+constructed internally; this proves actual necessary full filtered
+regularity, and does not infer retention of all normalized vertex orders.
+\end{proof}
+
+All-vertex normalized order retention from HS persistence, relative
+maximal standardness and the full current-history driver remain separate.

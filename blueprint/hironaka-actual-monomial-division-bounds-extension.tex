@@ -1,0 +1,55 @@
+\section{Bounded whole-diagram monomial division for absolutely convergent complex series}
+\label{sec:hironaka-actual-monomial-division-bounds}
+Let $\Gamma$ be the actual initial diagram of a whole formal ideal. Its genuine finite vertices and the already constructed actual division-owner function partition every exponent of $\Gamma$ among its dominating vertices. For a positive real polyradius $\rho$ write
+\[
+ |F|_\rho=\sum_\alpha |F_\alpha|\rho^\alpha,
+ \qquad \rho^\alpha=\prod_j\rho_j^{\alpha_j}.
+\]
+The input domain is the natural space of series for which this absolute coefficient sum is finite. No convergence hypothesis is supplied for the resulting quotient or remainder.
+
+\begin{theorem}[Literal finite monomial division on the actual whole diagram]
+\label{hir:actual-monomial-owner-whole-division}
+\uses{hir:actual-formal-vertex-owner-coefficient-recursion}
+\lean{Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerQuotient,Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerRemainder,Hironaka.HironakaActualMonomialDivisionBounds.monomial_owner_division,Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerRemainder_diagram}
+\leanok
+The actual coefficient projections
+\[
+ (Q_aF)_\beta=\begin{cases}F_{\beta+a}&\text{if owner}(\beta+a)=a,\\0&\text{otherwise},\end{cases}
+ \qquad
+ (RF)_\alpha=\begin{cases}F_\alpha&\alpha\notin\Gamma,\\0&\alpha\in\Gamma\end{cases}
+\]
+are complex-linear maps and give the whole identity $F=\sum_a X^aQ_aF+RF$. The remainder has zero coefficients on the entire actual diagram.
+\end{theorem}
+\begin{proof}
+Linearity follows coefficient by coefficient since the owner depends only on the actual diagram and exponent, not on $F$. At an exponent outside the diagram no vertex owns it, so every quotient contribution is zero and the remainder coefficient is $F_\alpha$. At an exponent in the diagram its unique owner $a$ lies below it. The coefficient of $X^aQ_aF$ is then $F_\alpha$; every other owner contribution and the remainder are zero. This proves the identity at every exponent. The remainder's displayed formula proves the whole diagram support assertion directly.
+\end{proof}
+
+\begin{theorem}[The actual monomial partition is bounded in the complex absolute coefficient norm]
+\label{hir:actual-monomial-owner-absolute-bounds}
+\uses{hir:actual-monomial-owner-whole-division}
+\lean{Hironaka.HironakaActualMonomialDivisionBounds.radiusMonomial,Hironaka.HironakaActualMonomialDivisionBounds.coefficientMass,Hironaka.HironakaActualMonomialDivisionBounds.HasFiniteCoefficientMass,Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerQuotient_summable,Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerQuotient_bound,Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerRemainder_summable,Hironaka.HironakaActualMonomialDivisionBounds.monomialOwnerRemainder_bound}
+\leanok
+For every positive polyradius and every source series with finite $|F|_\rho$, every actual quotient and the actual remainder are absolutely summable at that same radius, and
+\[
+ \rho^a|Q_aF|_\rho\le |F|_\rho,
+ \qquad |RF|_\rho\le |F|_\rho.
+\]
+\end{theorem}
+\begin{proof}
+The shift $\beta\mapsto\beta+a$ is injective and $\rho^{\beta+a}=\rho^\beta\rho^a$. Thus each scaled quotient summand is either the corresponding original nonnegative summand or zero. Pulling an absolutely summable nonnegative series back along this injection preserves summability and cannot increase its sum. Positivity of $\rho^a$ gives quotient summability and the claimed scaled norm bound. The remainder summands are directly bounded by the source summands, so the same comparison proves their summability and norm bound. These are ordinary complex absolute norms; no nonarchimedean Gauss norm or quotient-convergence assumption is used.
+\end{proof}
+
+\begin{theorem}[The resulting series genuinely converge on the indicated complex polydisc]
+\label{hir:actual-monomial-owner-polydisc-convergence}
+\uses{hir:actual-monomial-owner-absolute-bounds}
+\lean{Hironaka.HironakaActualMonomialDivisionBounds.summable_polydisc_evaluation}
+\leanok
+Every series with finite absolute coefficient sum at $\rho$ has an absolutely convergent monomial evaluation at each complex $z$ with $|z_j|\le\rho_j$. Hence the preceding actual quotients and remainder have genuine absolutely convergent evaluations throughout this polydisc, bounded by their proved absolute coefficient sums.
+\end{theorem}
+\begin{proof}
+For every exponent, the norm of its evaluated monomial is bounded by the product of the corresponding radius powers. Multiplying by the coefficient norm bounds that evaluation summand by the source absolute coefficient summand. The ordinary nonnegative comparison theorem gives summability of the norms and therefore absolute complex convergence. Summing the same inequalities gives the evaluation bound. Apply this to the quotient and remainder summability already proved.
+\end{proof}
+
+\begin{remark}
+This is the genuine bounded leading-monomial partition needed before perturbing to arbitrary analytic vertex generators. A holomorphic-germ Taylor-radius dictionary, analytic holomorphy of the resulting sum, and the small-tail finite-family Neumann contraction still require separate proofs. No convergence or prepared-family certificate containing those conclusions is assumed or claimed here.
+\end{remark}

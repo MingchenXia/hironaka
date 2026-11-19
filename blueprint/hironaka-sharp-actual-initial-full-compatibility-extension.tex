@@ -1,0 +1,130 @@
+\section{The actual initial sharp maximum and the original normal-crossings locus}
+
+The ambient complex dimension is positive. The original ordered boundary has
+simple normal crossings, the carrier is a closed smooth submanifold, and its
+complement of the whole boundary is dense. Original boundary positions remain
+the factors of the chronological product; its initial auxiliary boundary is
+empty. The results below compare these independently defined initial objects.
+They do not replace the entire sharp bad locus by the first defect.
+
+\begin{lemma}[The entire initial germ quotient and proper-class count]
+\label{hir:sharp-actual-initial-germ-quotient-source}
+\uses{hir:sharp-actual-chronological-distinct-defect-objects}
+\lean{Hironaka.HironakaSharpActualInitialFullCompatibility.initial_actual_germ_relation_iff_source_trace,Hironaka.HironakaSharpActualInitialFullCompatibility.initial_actual_distinct_count_eq_source}
+At every ambient point, equality of two entire initial chronological member
+ideals is equivalent to equality of the corresponding original restricted
+trace ideals. Their proper-position sets and the cardinalities of their
+actual proper germ-class images therefore agree. This includes points outside
+the carrier, unit factors, and coincident proper germ classes.
+\end{lemma}
+\begin{proof}
+An initial chronological member is the carrier restriction of the vanishing
+ideal of its original boundary member. Membership of a function in this
+restricted ideal means that it is holomorphic and belongs to the original
+restricted trace span. Thus equality of whole member predicates implies trace
+span equivalence for every holomorphic function. Conversely, trace span
+equivalence preserves the conjunction with holomorphy and hence the entire
+member predicate for every function. For the constant function one,
+holomorphy always holds, so the two proper-position predicates agree.
+The identity on the original finite position set consequently induces a
+bijection of the two genuine germ quotients. It maps the image of the proper
+positions in one quotient onto the corresponding image in the other. These
+finite images have equal cardinality.
+\leanok
+\end{proof}
+
+\begin{lemma}[The whole initial product is the restriction of the original product]
+\label{hir:sharp-actual-initial-product-source-restriction}
+\uses{hir:sharp-original-chronological-full-product-geometry-order-sum}
+\lean{Hironaka.HironakaSharpActualInitialFullCompatibility.initial_actual_product_eq_restrictOn_source,Hironaka.HironakaSharpActualInitialFullCompatibility.source_product_restrictEquiv_actual_initial}
+The entire initial chronological product equals the carrier restriction of the
+entire original ordered member product. The two marking-one product records
+are restricted equivalent, with exactly the same carrier and empty auxiliary
+boundary.
+\end{lemma}
+\begin{proof}
+Apply finite relative-product normalization to the ordered list of original
+vanishing ideals. Coherence of each member follows from the original smooth
+SNC member geometry. The normalized relative product of their carrier
+restrictions is exactly the carrier restriction of their ambient product.
+At the identity history this is the literal chronological member list,
+including every original position. Restriction to the carrier is equivalent
+to the original ideal in both restricted-span directions. Their carrier,
+empty auxiliary boundary and marking one coincide, yielding restricted
+equivalence of the full records.
+\leanok
+\end{proof}
+
+\begin{theorem}[The literal actual initial defect is the original first defect]
+\label{hir:sharp-actual-initial-defect-source-equality}
+\uses{hir:sharp-actual-initial-germ-quotient-source,hir:sharp-actual-initial-product-source-restriction}
+\lean{Hironaka.HironakaSharpActualInitialFullCompatibility.initial_actual_defect_eq_source_first,Hironaka.HironakaSharpActualInitialFullCompatibility.initial_actual_defect_subset_sharp_bad}
+The actual chronological distinct defect at the identity history equals the
+original first defect, in every carrier dimension. It is contained in the
+original sharp bad locus and therefore avoids every original smooth
+normal-crossings point, including good boundary intersections.
+\end{theorem}
+\begin{proof}
+Both defect definitions require membership in the original carrier. At such
+a point their proper-class counts agree by the first lemma. Their product
+orders agree by the second lemma and invariance of the ordinary trace order
+under carrier restriction of a coherent nonzero ideal. Hence the strict
+inequalities defining the two defects are identical. Outside the carrier,
+neither defect has a point. The proved original first-defect inclusion in the
+sharp bad locus now gives the asserted containment without a dimension-one
+argument.
+\leanok
+\end{proof}
+
+\begin{theorem}[Equality of the entire initial invariant and its actual maximum]
+\label{hir:sharp-actual-initial-full-maximum-source-equality}
+\uses{hir:sharp-actual-initial-defect-source-equality,hir:sharp-actual-initial-product-source-restriction,hir:sharp-original-noncompact-current-product-domain}
+\lean{Hironaka.HironakaSharpActualInitialFullCompatibility.source_full_value_eq_actual_initial_on_first_defect,Hironaka.HironakaSharpActualInitialFullCompatibility.initial_actual_dynamic_maximum_eq_source}
+Suppose also that the original carrier has fixed positive pure dimension
+$d+1\leq n$. On the same first defect, every entry of the full original
+product invariant equals the corresponding entry of the full actual initial
+product invariant. Their maximum loci on the same first defect are equal.
+No maximum-attainment or compactness assumption is needed for these
+equalities.
+\end{theorem}
+\begin{proof}
+Original geometry supplies both product records as inputs of the invariant
+domain. The preceding restricted equivalence preserves their full invariant
+at the identity history. A first-defect point has product order strictly
+greater than a nonnegative proper-class count, hence at least one, so it lies
+in the marking-one cosupport required by this invariant comparison. All full
+values on the same defect therefore agree. A point bounds every full value
+of one record on this set if and only if it bounds every value of the other.
+Combining this with the actual-defect equality proves equality of their
+entire maximum loci, including the case where both are empty.
+\leanok
+\end{proof}
+
+\begin{theorem}[The actual initial dynamic maximum has a whole-good-preserving blowup]
+\label{hir:sharp-actual-initial-dynamic-whole-good-blowup}
+\uses{hir:sharp-actual-initial-full-maximum-source-equality,hir:sharp-actual-initial-defect-source-equality}
+\lean{Hironaka.HironakaSharpActualInitialFullCompatibility.exists_actual_initial_dynamic_sharp_blowup}
+If the original carrier is compact of the stated positive pure dimension and
+the actual initial distinct defect is nonempty, there is a genuine analytic
+blowup of its entire actual full dynamic maximum. The same nonempty centre
+is admissible for the original marking-one product, the actual initial
+product, and the embedded carrier with the entire original ordered boundary.
+It belongs to the original sharp bad locus. The blowup is proper and is an
+isomorphism over every original good point. Its strict carrier is smooth and
+the entire original boundary after strict transform, together with the new
+exceptional member, has simple normal crossings.
+\end{theorem}
+\begin{proof}
+Transfer nonemptiness of the actual defect to the identical original first
+defect. The original first-defect blowup producer supplies its genuine entire
+maximum centre, original-product and embedded-boundary admissibility, the
+analytic blowup, properness, whole-good isomorphism, smooth strict carrier,
+and the full transformed SNC list. Restricted equivalence gives admissibility
+for the actual initial product as well. The preceding full maximum equality
+identifies this same already constructed centre with the actual dynamic
+maximum, so neither its geometry nor the blowup is an assumed certificate.
+This constructs an actual first sharp step. Full-history comparison, strict
+decrease of the modified invariant, recursive intersection phases and a
+general terminal sharp endpoint remain separate obligations.
+\leanok
+\end{proof}

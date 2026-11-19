@@ -1,0 +1,98 @@
+\section{Actual native manifold charts at original regular model points}
+
+All quotient models are the genuine reduced locally ringed subspaces
+constructed from the entire original vanishing sheaf. Regularity is the
+original geometric condition $\operatorname{RegularAtDim}(C,x,d)$, with
+its actual local flattening, rather than an assumed manifold chart.
+
+\begin{theorem}[The actual model of the whole manifold is the native manifold]
+\label{hir:actual-analytic-subspace-univ-native-manifold}
+\uses{hir:actual-analytic-subspace-inclusion-stalk,hir:actual-analytic-subspace-reduced-stalks,hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaActualAnalyticSubspaceManifoldCharts.actualSubspaceUnivIso,Hironaka.HironakaActualAnalyticSubspaceManifoldCharts.actualSubspaceUnivIso_hom,Hironaka.HironakaActualAnalyticSubspaceManifoldCharts.actualSubspaceUnivIso_inv_point}
+\leanok
+The actual quotient-subspace model of the whole complex manifold is
+internally isomorphic to its native locally ringed space. The forward
+map is the original actual subspace inclusion, and the inverse commutes
+with the original complex-point structural maps.
+\end{theorem}
+\begin{proof}
+Every actual original section in the whole-manifold vanishing ideal
+is zero at each point of its domain, hence is the zero function.
+The genuine entire ideal-section germ-image equality therefore proves
+that the whole actual vanishing stalk ideal is zero. The original
+inclusion stalk map has that entire kernel and is surjective, so it is
+a genuine ring isomorphism at each point. The literal whole-subtype
+inclusion is a topological open embedding. The native stalk criterion
+therefore makes the same actual locally ringed inclusion an open
+immersion. Its image is the whole manifold, so the native universal
+property lifts the identity map through it. This constructs its actual
+inverse; open-immersion monicity gives both inverse identities. The
+original inclusion structural triangle, composed with this genuine
+inverse identity, proves the complex-point triangle for the inverse.
+\end{proof}
+
+\begin{theorem}[Different-dimensional plane projection gives an actual native manifold model]
+\label{hir:actual-analytic-coordinate-plane-native-manifold}
+\uses{hir:actual-analytic-subspace-univ-native-manifold,hir:actual-analytic-subspace-mutual-restriction-iso}
+\lean{Hironaka.HironakaActualAnalyticSubspaceManifoldCharts.actualCoordinatePlaneManifoldIso,Hironaka.HironakaActualAnalyticSubspaceManifoldCharts.actualCoordinatePlaneManifoldIso_inv_point}
+\leanok
+Let $\Omega\subset\mathbf C^{d+t}$ be an actual open. Write $\pi$ for the
+first-coordinate projection and $\iota$ for the zero-normal insertion.
+Put $V=\iota^{-1}\Omega$ and $R=\Omega\cap\pi^{-1}V$. The actual model
+of $R\cap(\mathbf C^d\times0)$ is internally isomorphic over the complex
+point to the native manifold $V\subset\mathbf C^d$.
+\end{theorem}
+\begin{proof}
+The domains $V$ and $R$ are actual opens because $\pi$ and $\iota$ are
+continuous linear maps. Projection is a genuine holomorphic map
+$R\to V$, and insertion is a genuine holomorphic map $V\to R$.
+Their composition on $V$ is the identity. On the actual coordinate-plane
+subset of $R$, insertion after projection is also the identity. They
+carry that whole subset and the whole $V$ into each other. The proved
+ambient-extension-independent quotient-subspace construction therefore
+produces an actual different-dimensional model isomorphism, using
+inverse identities only on those subsets. Compose it with the preceding
+native identification of the whole $V$ model. The actual holomorphic
+map structural triangles and the native-model triangle prove compatibility
+with the complex point. In particular projection of arbitrary points of
+$\Omega$ is not presumed to stay in $\Omega$; the actual shrinking $R$
+is part of the construction.
+\end{proof}
+
+\begin{theorem}[Original regularity supplies a genuine native manifold open chart]
+\label{hir:actual-analytic-subspace-regular-native-manifold-chart}
+\uses{hir:actual-analytic-coordinate-plane-native-manifold,hir:actual-analytic-subspace-open-restriction-iso,hir:actual-flat-coordinate-open-biholomorphism}
+\lean{Hironaka.HironakaActualAnalyticSubspaceManifoldCharts.exists_actual_regular_subspace_manifold_chart}
+\leanok
+If $C\subset M^{d+t}$ and $\operatorname{RegularAtDim}(C,x,d)$ in the
+original geometric sense, internally construct an actual open
+$V\subset\mathbf C^d$ and a genuine locally ringed morphism from the
+native manifold $V$ to the actual model of $C$. It is an actual open
+immersion over the complex point and its genuine image contains $x$.
+No manifold structure, isomorphism of sheaves, chart or stalk-equivalence
+certificate on $C$ is an input.
+\end{theorem}
+\begin{proof}
+Take the same actual centred flattening $\Phi$ from original regularity.
+Its true flat domain is genuinely biholomorphic to the actual open
+$\Omega=\Phi.\operatorname{target}$. Use $R$ and $V$ from the preceding
+theorem. Pull $R$ back through that actual flat-coordinate biholomorphism
+to a genuine open of the flat domain. Restricting the actual coordinate
+functions and their actual inverses gives a biholomorphism from this
+open to $R$. The original whole-set regularity equivalence identifies
+its restricted $C$ with the whole coordinate-plane subset of $R$.
+The actual quotient-subspace mutual restriction theorem therefore gives
+an internally constructed whole model isomorphism. Compose it with
+the preceding native plane-model isomorphism. Invert this isomorphism
+and follow it by both genuine actual open-subspace inclusions into $C$.
+The result is a genuine open immersion, and each actual structural
+triangle gives its complex-point compatibility. The original point
+maps to zero under the centred flattening; zero belongs to $R$ and its
+inverse image is the original point. The actual inverse identities
+therefore give a point of $V$ mapping to $x$, proving image coverage.
+The construction also applies when $d=0$ or $t=0$.
+\end{proof}
+
+These are genuine smooth local charts for the actual reduced embedded
+models. Abstract resolution descent and termination remain distinct G1
+obligations.

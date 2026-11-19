@@ -1,0 +1,95 @@
+\section{Finite canonical histories identify the original global terminal manifold}
+
+The local-to-global comparison in
+\cite{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+can be made on the already constructed original terminal manifold whenever
+an actual finite canonical terminal history is available. The finite history
+is genuine geometric input; no local comparison or compatibility datum is
+assumed. For compact original bases the canonical driver supplies this
+history internally. The construction below does not assert existence of a
+finite history on an arbitrary noncompact base.
+
+\begin{definition}[Actual local comparison with a finite terminal history]
+\label{hir:original-global-terminal-finite-local-comparison}
+\uses{hir:original-terminal-open-actual-history-data,hir:original-input-covering-local-canonical-terminal-atlas,hir:original-independent-local-terminal-overlap-unique-comparison}
+\lean{Hironaka.HironakaOriginalTerminalFiniteIdentification.finiteTerminalLocalComparison,Hironaka.HironakaOriginalTerminalFiniteIdentification.finiteTerminalLocalComparison_proj}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Let $M$ be an original marked ideal in the invariant domain on $X$, and
+let $T:D\to X$ be an actual finite canonical terminal history. For every
+original atlas open $U_i$, construct a biholomorphism
+$c_i:D_i\to p_T^{-1}U_i$ from the original local final space. It satisfies
+$p_T(c_i(y))=p_i(y)$ at every point.
+\end{definition}
+\begin{proof}
+Restrict the actual history $T$ to the entire open $X$. Its base is the
+literal whole-open subtype and its final space is the literal whole
+projection preimage. Both are canonically biholomorphic to the original
+spaces by subtype inclusion. The original restriction theorem supplies
+canonicality and terminality. Compare this actual whole-open history with
+the original history on $U_i$, over the common open $U_i$. The common-open
+comparison theorem supplies a genuine biholomorphism, including both
+holomorphic directions and the whole projection equality. The local
+history's preimage of its entire base is canonically its whole final space;
+the whole-open history's preimage of $U_i$ is canonically the literal
+$p_T^{-1}U_i$ by forgetting the redundant whole-open subtype. Composing
+these actual subtype identifications gives $c_i$ and the stated equality.
+\end{proof}
+
+\begin{lemma}[Finite local comparisons obey the original gluing relation]
+\label{hir:original-global-terminal-finite-local-compatibility}
+\uses{hir:original-global-terminal-finite-local-comparison,hir:original-independent-local-pairwise-terminal-triple-transition-laws,hir:original-terminal-overlap-further-restriction-intrinsic-naturality}
+\lean{Hironaka.HironakaOriginalTerminalFiniteIdentification.finiteTerminalLocalComparison_transition}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+On every actual original overlap, the finite local comparison after the
+original transition equals the first finite local comparison, as an equality
+of points of $D$.
+\end{lemma}
+\begin{proof}
+Use the original triple-transition theorem on the histories over $U_i$,
+$U_j$, and the entire open $X$, with the third history the actual restriction
+of $T$ to $X$. Every point of the first overlap also lies over $X$, so the
+required third-open membership is automatic. That theorem identifies the
+first-to-third comparison with the composite first-to-second-to-third
+comparison. The smaller-open comparison theorem identifies these actual
+comparisons with the restrictions of the comparisons defining $c_i$ and
+$c_j$. Forget the redundant literal whole-open subtypes. The resulting
+equality is precisely the claimed identity in $D$.
+\end{proof}
+
+\begin{theorem}[The original global terminal manifold is biholomorphic to a finite terminal history]
+\label{hir:original-global-terminal-finite-whole-biholomorphism}
+\uses{hir:original-global-terminal-finite-local-compatibility,hir:original-terminal-local-actual-saturated-range-biholomorphism,hir:original-input-local-terminal-glued-whole-continuous-projection}
+\lean{Hironaka.HironakaOriginalTerminalFiniteIdentification.originalTerminalFiniteBiholomorphism,Hironaka.HironakaOriginalTerminalFiniteIdentification.originalTerminalFiniteBiholomorphism_proj}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+For the same original input and actual finite canonical terminal history,
+there is a genuine biholomorphism $C:\widetilde X_M\to D$ from the original
+global terminal manifold. It equals $c_i$ on every original local inclusion,
+and its entire projection is the same original glued projection:
+$p_T C=P_M$.
+\end{theorem}
+\begin{proof}
+The preceding compatibility gives a continuous map from the actual
+topological gluing to $D$. Its equality with each $c_i$ proves the whole
+projection identity, since the original inclusions are jointly surjective.
+For surjectivity choose, for a point $d\in D$, the original atlas index at
+$p_T(d)$; the corresponding open contains that base point, so $d$ belongs
+to $p_T^{-1}U_i$ and the inverse of $c_i$ supplies a preimage.
+For injectivity, equal images have equal base projections. The saturation
+identity therefore puts both original global points in the same original
+local range. Use that range's actual local inverse representatives. Their
+images under the same injective $c_i$ coincide, so the representatives and
+then the global points coincide.
+
+To prove forward holomorphicity at a global point, use an original saturated
+range containing it. On that genuine open neighborhood the glued map is
+$c_i$ composed with the actual local range inverse. Both are holomorphic.
+For inverse holomorphicity at $d$, use the true open neighborhood
+$p_T^{-1}U_i$ selected above. There the inverse equals the original local
+inclusion composed with $c_i^{-1}$. Both are holomorphic. Equality on these
+actual open neighborhoods transfers the regularity to the whole maps.
+Bundle bijectivity and the two proved holomorphic directions. These
+arguments also include empty manifolds and dimension zero.
+\end{proof}

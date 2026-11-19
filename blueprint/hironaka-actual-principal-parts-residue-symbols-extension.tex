@@ -1,0 +1,90 @@
+\section{Actual residue symbols of the joint principal parts}
+
+Let $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+n},0}$,
+$N$ the normal-coordinate ideal and $M=R\mathfrak m_B$ the entire
+image of the actual base maximal ideal. Set
+$Q_q=R/(I+N^q)$ and
+$G_q=\operatorname{im}(N^q\to Q_{q+1})$.
+
+\begin{theorem}[Whole residue layer equivalence]
+\label{hir:actual-principal-parts-residue-layer}
+\lean{Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalResidueLayerMap,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalResidueLayerMap_tmul_mk,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalResidueLayerMap_surjective,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalResidueLayerMap_injective,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalResidueLayerEquiv}
+\leanok
+\uses{hir:relative-normal-uniformtrunc-original-short-exact,hir:relative-normal-original-fibre-tensor-algebra}
+If the actual lower quotient $Q_q$ is flat over $B$, the formula
+$c\otimes[g]\mapsto c[g]$ gives a complex-linear equivalence
+\[
+ \mathbb C\otimes_B G_q\simeq
+ \operatorname{im}\bigl(N^q\to R/(I+M+N^{q+1})\bigr).
+\]
+It retains every original whole numerator and holds also for $q=0$.
+\end{theorem}
+\begin{proof}
+The original full truncation sequence
+$0\to G_q\to Q_{q+1}\to Q_q\to0$ is exact. Flatness of its actual
+last term implies that tensoring the inclusion $G_q\to Q_{q+1}$ by
+any base module is injective, in particular by $\mathbb C$ with its
+actual origin-evaluation $B$-algebra structure. The previously constructed whole residue
+truncation equivalence identifies
+$\mathbb C\otimes_B Q_{q+1}$ with $R/(I+M+N^{q+1})$ and sends
+$c\otimes[g]$ to $c[g]$. Its composite with the tensor inclusion
+therefore lands in the stated entire layer and is injective.
+Every member of that layer has a representative $g\in N^q$; its
+preimage is $1\otimes[g]$. Thus the composite is surjective as well.
+No positivity is used, so the same argument includes $q=0$.
+\end{proof}
+
+\begin{theorem}[Actual symbol multiplication commutes with residue]
+\label{hir:actual-principal-parts-residue-symbol-square}
+\lean{Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalLayerSymbolMul,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalLayerSymbolMul_mk,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalFibreLayer_base_smul,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalFibreLayerScalarTower,Hironaka.HironakaActualPrincipalPartsResidueSymbols.originalResidueLayerMap_symbol}
+\leanok
+\uses{hir:actual-principal-parts-residue-layer}
+For an actual $v\in N$, multiplication by $v$ defines the original
+symbol maps $G_q\to G_{q+1}$ and their genuine fibre counterparts.
+The residue-layer maps commute with these symbol maps; whenever the
+lower quotients are flat, their equivalences identify the full tensor
+symbol with the same actual multiplication on the whole fibre layers.
+\end{theorem}
+\begin{proof}
+Multiplication by $v$ takes $I+N^{q+1}$ into $I+N^{q+2}$ and takes
+$N^q$ into $N^{q+1}$, so the stated maps are well-defined on whole
+classes. For a pure tensor $c\otimes[g]$, both composites have the
+same actual value $c[vg]$. For $b\in B$, the germ $b-b(0)$ belongs
+to $\mathfrak m_B$; its pullback therefore vanishes in the fibre quotient.
+Consequently the actual $B$-action on its entire layer factors through
+origin evaluation.
+This proves the required scalar compatibility for the fibre layer; the
+restriction of its symbol map to $\mathbb C$ is linear. Pure tensors
+span the entire tensor product, so the equality holds for every member.
+\end{proof}
+
+\begin{theorem}[The actual original joint family supplies the equivalences]
+\label{hir:actual-principal-parts-joint-residue-symbols}
+\lean{Hironaka.HironakaActualPrincipalPartsResidueSymbols.exists_original_hs_constant_centre_residue_layers}
+\leanok
+\uses{hir:actual-principal-parts-residue-layer,hir:actual-principal-parts-residue-symbol-square,hir:actual-centre-whole-principal-parts-finite-free,hir:actual-hs-constant-centre-whole-split-order-system}
+Let $x$ be a point where $C$ is regular of dimension $d$ in a complex
+manifold of dimension $d+t$, and let $A$ be a coherent germ ideal whose
+entire intrinsic Hilbert--Samuel function is constant along $C$.
+These original data supply one unchanged actual joint family $J$ and,
+at every order $q$, prove
+bijectivity of the named numerator-preserving residue-layer map and
+provide the preceding entire degree-$q$ complex-linear equivalence.
+These same maps satisfy the symbol square. No additional flatness
+or residue-isomorphism hypothesis is required.
+\end{theorem}
+\begin{proof}
+The established original principal-parts producer makes the whole lower
+quotient $R/(J+N^q)$ finite free over the actual tangent germ ring.
+A free module is flat. Apply the whole residue-layer theorem to this
+same quotient and unchanged $J,N,M$. Its numerator formula gives the
+same symbol square. At order zero the lower quotient is zero and is
+flat directly. Applying the original-only all-order producer retains
+one family before choosing any order, so all these constructions refer
+to the same original joint ideal.
+\end{proof}
+
+The fibre ideal remains $J+M$ in the unchanged joint ring. Identifying
+its actual quotient with the original unjoint $c=0$ germ-ring ideal,
+and transporting this dictionary through further tangent cuts, are
+separate assertions.

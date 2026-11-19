@@ -1,0 +1,154 @@
+\section{Marking-one controlled compatibility of the actual double-locus prephase}
+\label{sec:hironaka-normal-crossings-double-locus-marked-compatibility}
+
+Let $H$ be a genuine NC carrier, and let $E$ be an actual finite SNC
+boundary simultaneously adapted to $H$. Let $I$ be any coherent ambient
+ideal, with marking one. The geometric input in this section is only
+$D_2(H)\subseteq V(I)$: the ideal vanishes on the original multiple-branch
+locus. Neither the entire carrier $H\subseteq V(I)$ nor any transformed
+cosupport, centre-admissibility or canonical-history certificate is assumed.
+
+\begin{lemma}[Axes force a zero constant and linear jet]
+\label{hir:general-nc-double-axes-zero-first-jet}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.inNormalPow_two_of_axis_vanishing}
+\leanok
+A holomorphic germ $F$ at zero in positive-dimensional complex coordinate
+space, vanishing near zero on every coordinate axis, belongs to the square
+of its maximal ideal.
+\end{lemma}
+\begin{proof}
+The zero vector lies on any coordinate axis, so $F(0)=0$. Along the $i$th
+axis the actual one-variable germ $t\mapsto F(te_i)$ is zero. Its derivative
+at zero is therefore zero. The actual chain rule identifies that derivative
+with $dF_0(e_i)$. The coordinate vectors form a basis, so $dF_0=0$. Every
+iterated derivative of order less than two is either the value or a first
+directional derivative and consequently vanishes at zero. The proved
+holomorphic Taylor ideal-power criterion gives membership in the square
+of the maximal ideal, with the same original germ.
+\end{proof}
+
+\begin{lemma}[The actual NC double locus has no linear equations at a triple point]
+\label{hir:general-nc-double-locus-square-point-ideal}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.mem_pointIdeal_sq_of_vanishes_doubleLocus}
+\leanok
+If $x$ has at least three actual local branches of $H$, every holomorphic
+germ at $x$ vanishing on $D_2(H)$ near $x$ belongs to $\mathfrak m_x^2$.
+\uses{hir:general-nc-double-axes-zero-first-jet,hir:general-nc-intrinsic-branch-multiplicity}
+\end{lemma}
+\begin{proof}
+Take an actual centred NC chart with selected original branch set $S$.
+The intrinsic branch dictionary gives $|S|\geq3$. On each coordinate
+axis, every selected coordinate except possibly its own index vanishes.
+Thus at least two selected branch coordinates vanish there. The actual
+nearby branch-count dictionary puts the inverse image of that axis in
+$D_2(H)$. Pull the given holomorphic germ through the genuine chart
+inverse. The resulting holomorphic germ at zero vanishes on every
+coordinate axis, so the previous lemma gives its zero value and zero
+linear jet and membership in the square of the coordinate maximal ideal.
+The actual flattening coordinates all vanish at $x$; the proved ideal-power
+pullback criterion therefore puts the unchanged original germ in
+$\mathfrak m_x^2$.
+\end{proof}
+
+\begin{lemma}[Actual square containment along a highest triple-or-higher stratum]
+\label{hir:general-nc-double-locus-ideal-square-highest-centre}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.ideal_le_highestCentre_square_of_doubleLocus_subset_zeroLocus}
+\leanok
+Suppose $r\geq3$ bounds every branch count of $H$, let $C$ be the actual
+whole $r$-branch stratum, and suppose $D_2(H)\subseteq V(I)$ for a coherent
+ideal $I$. Then $I\subseteq I_C^2$.
+\uses{hir:general-nc-double-locus-square-point-ideal,hir:general-nc-highest-multiplicity-smooth-centre}
+\end{lemma}
+\begin{proof}
+A germ belonging to the coherent ideal at a point belongs to that same
+ideal throughout some actual neighbourhood. Every such germ therefore
+vanishes on $D_2(H)$ in that neighbourhood by the given zero-locus
+containment. At each point of $C$ there are at least three branches, so
+the previous lemma proves order at least two for every germ of $I$ there.
+Thus $C\subseteq\operatorname{cosupp}(I,2)$. The actual highest-stratum
+theorem proves that $C$ is a closed smooth centre. The established
+coherent Hadamard theorem applied to this actual centre and the derived
+order-two cosupport yields $I\subseteq I_C^2$.
+\end{proof}
+
+\begin{lemma}[An extra exceptional factor remains after the actual marking-one division]
+\label{hir:general-nc-square-centre-exceptional-controlled-cosupport}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.exceptional_subset_controlled_cosupport_of_square}
+\leanok
+For an actual blowup of $C$, if $I\subseteq I_C^2$,
+the entire exceptional divisor belongs to the cosupport of the actual
+marking-one controlled transform of $I$.
+\end{lemma}
+\begin{proof}
+Actual ideal pullback takes $I_C^2$ to $I_D^2$, where $D$ is the exceptional
+divisor, so $\pi^*I\subseteq I_D^2$. The marking-one controlled transform
+is the actual colon $(\pi^*I:I_D)$. Monotonicity of the numerator gives
+$(\pi^*I:I_D)\subseteq(I_D^2:I_D)=I_D$, where the last equality is the
+proved cancellation theorem for the invertible exceptional ideal. Every
+germ of the controlled transform therefore vanishes on the entire
+exceptional divisor. For marking one and full ambient carrier, the actual
+cosupport-one dictionary is exactly that zero locus, proving the claim.
+\end{proof}
+
+\begin{theorem}[The actual transformed double locus remains in controlled cosupport]
+\label{hir:general-nc-double-locus-controlled-one-step}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.doubleLocus_strict_subset_controlled_cosupport}
+\leanok
+Under $D_2(H)\subseteq V(I)$, every actual higher highest-stratum blowup
+is admissible for $(I,1)$ relative to the same old boundary, and the double
+locus of the actual strict original is contained in its actual controlled
+cosupport.
+\uses{hir:general-nc-double-locus-ideal-square-highest-centre,hir:general-nc-square-centre-exceptional-controlled-cosupport,hir:general-nc-higher-count-over-image}
+\end{theorem}
+\begin{proof}
+The actual centre has branch count $r\geq2$, so it lies in $D_2(H)$ and
+therefore in the marking-one cosupport. The simultaneous pair coordinates
+give its genuine smoothness and normal crossings with the current old
+boundary, proving actual admissibility. Away from the centre the genuine
+blowup chart identifies the strict original branch count with its original
+count at the image. A point of the new double locus there therefore maps
+into the original double locus, and the proved off-centre controlled-transform
+cosupport dictionary puts it in the new cosupport. Over the centre, if
+$r=2$ the actual global strict count is at most one, so there is no new
+double-locus point. If $r\geq3$, the preceding square-containment and
+exceptional-factor lemmas put every exceptional point in the new controlled
+cosupport. These cases cover the whole actual transformed double locus.
+\end{proof}
+
+\begin{theorem}[The same actual NC boundary prephase is an unrelated marking-one test tower]
+\label{hir:general-nc-double-locus-original-ideal-test-prephase}
+\lean{Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.higherSeparationCentres_isGeoTestTower_and_double_subset_cosupp,Hironaka.HironakaNormalCrossingsDoubleLocusMarkedCompatibility.naturalSeparation_isGeoTestTower_of_doubleLocus_subset_zeroLocus}
+\leanok
+Under the original geometric input $D_2(H)\subseteq V(I)$, the internally
+generated natural NC separation is a genuine test tower for the unchanged
+marked datum $(X,X,E,I,1)$. Every actual intermediate double locus lies
+in the same current controlled cosupport. Its terminal boundary is the
+literal strict-old and exceptional list, and its actual projection is an
+isomorphism outside the original double locus. In particular every centre
+lies over the original $V(I)$ and the actual projection is an isomorphism
+on the entire original complement $V(I)^c$. The same test-tower and current
+double-locus containment assertions hold for any actual finite tower of
+genuine higher-separation centres whose current strict original is NC.
+\uses{hir:general-nc-double-locus-controlled-one-step,hir:general-nc-permitted-double-locus-prephase}
+\end{theorem}
+\begin{proof}
+Induct on an actual finite higher-stratum tower. Initially
+the carrier is the whole ambient manifold, the ideal is the given original
+$I$, and the double-locus cosupport assertion is exactly the given geometric
+zero-locus containment and the marking-one dictionary. The one-step theorem
+derives admissibility of the actual next internally chosen centre and
+preserves the double-locus containment for the actual controlled transform.
+The actual transformed full ambient carrier is again the full ambient
+manifold, the marking remains one, and the literal boundary is precisely
+the strict old list followed by the actual exceptional preimage. The real
+test-tower step constructor then records the whole unchanged-ideal history.
+The actual differential strict-transform composition dictionary identifies
+the terminal carrier of this same composite. Apply this proved induction
+to the internally generated natural higher-centre separation. The previous
+geometric separation theorem gives its length bound, terminal SNC geometry
+and original-double-locus complement isomorphism. The original zero locus
+is closed by coherence and contains the double locus by hypothesis. Its
+actual permitted-set separation consumer puts every centre over $V(I)$
+and proves the isomorphism on $V(I)^c$. No canonical lower-history identity
+or marking greater than one is asserted.
+\end{proof}

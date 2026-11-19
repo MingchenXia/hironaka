@@ -1,0 +1,46 @@
+\section{Literal normal-polynomial functions for the whole original nearby central model}
+This OWN OFFLIB continuation replaces the arbitrary whole evaluation representatives by genuine finite normal-polynomial functions with the SAME genuine coefficient functions. All original data and finite families are selected internally. Nearby original normal-cone identification and one all-order free open remain OPEN.
+
+\begin{lemma}[Actual normal monomials are entire functions with their true whole germs]
+\label{hir:relative-normal-central-literal-monomial-functions}
+\lean{Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalMonomialFunction,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalMonomialFunction_differentiableAt,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalMonomialFunction_whole_germ}
+\uses{hir:relative-normal-ideal-actual-coordinates,hir:relative-normal-basis-actual-finite-exponents}
+\leanok
+For an actual exponent $\alpha$, the literal function on the original ambient model is the product of its actual normal coordinates raised to the entries of $\alpha$. It is holomorphic everywhere and its whole origin germ is the SAME product of the actual original normal coordinate germs, including the empty product when there are no normal coordinates.
+\end{lemma}
+\begin{proof}
+Each actual coordinate is a genuine continuous complex linear functional, hence complex differentiable at every point. Its natural power remains differentiable, and the genuinely finite product is differentiable everywhere. The whole germ map preserves each finite product and natural power; the germ of each actual coordinate is exactly its defined original normal coordinate. Thus its true whole germ equals the SAME actual germ product. Empty products are literal one, so no dimension, nonzero or invertibility certificate enters.
+\end{proof}
+
+\begin{lemma}[Literal finite polynomial functions have genuine whole evaluation and actual specialization dictionaries]
+\label{hir:relative-normal-central-literal-polynomial-functions}
+\lean{Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalPolynomialFunction,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualCoefficientFunctionPullback_holomorphic,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualCoefficientFunctionPullback_whole_germ,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalPolynomialFunction_holomorphic,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalPolynomialFunction_whole_germ,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalPolynomialFunction_differentiableAt,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalPolynomialFunction_specialization}
+\uses{hir:relative-normal-central-literal-monomial-functions,hir:relative-normal-analytic-coefficients-common-open,hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary,hir:relative-normal-basis-actual-finite-exponents}
+\leanok
+For EVERY actual polynomial $P$ over entire base holomorphic germs, define its ambient function as the finite sum of its actual coefficient representatives composed with original tangent projection, times the literal actual normal monomial functions. Its whole origin germ is exactly original normal-polynomial evaluation. At EVERY ambient point its value is evaluation at the actual normal coordinates of the genuine coefficient-function specialization at that point's true tangent projection. On every genuine coefficient-holomorphic open it is genuinely holomorphic over the actual projection preimage.
+\end{lemma}
+\begin{proof}
+The support is genuinely finite. Each actual coefficient representative has the SAME entire base germ, and true tangent-projection pullback produces its SAME original ambient coefficient germ. Multiply by the preceding genuine monomial germs and sum over actual finite support. The actual finite monomial expansion of $P$ and the whole evaluation ring map identify this whole germ with its true original evaluation, rather than a point value or truncated jet. At every actual point, the genuine specialization coefficient formula gives exactly the same coefficient function values; the finite polynomial monomial expansion gives the pointwise equality without mapping all origin germs to a nearby stalk. Over an actual coefficient-holomorphic open, genuine complex chain rule, finite products and sums give actual differentiability throughout its projection preimage, hence genuine holomorphicity there.
+\end{proof}
+
+\begin{lemma}[A true finite original relation family has ONE whole functional comparison open]
+\label{hir:relative-normal-central-finite-polynomial-representative-comparison}
+\lean{Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.exists_actual_original_polynomial_function_comparison_open,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.actualNormalPolynomialSpan,Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.exists_actual_original_polynomial_span_comparison_open}
+\uses{hir:relative-normal-central-literal-polynomial-functions,hir:relative-normal-deformation-finite-evaluation-representatives}
+\leanok
+The internally selected finite original homogeneous relation family shares ONE genuine open containing the origin, on which its literal normal-polynomial functions equal the SAME previously selected entire analytic evaluation representatives for EVERY relation and at EVERY point. Their entire finite spans are consequently equivalent at EVERY point of this SAME open and for EVERY germ.
+\end{lemma}
+\begin{proof}
+Both actual whole origin germs of each relation's functions equal the SAME original analytic evaluation by the preceding lemma and the existing exact original representative dictionary. Genuine whole germ equality gives an eventual equality of these functions near the origin. Because the internally selected relation family is truly finite, intersect these actual equality neighbourhoods to obtain ONE genuine open on which every relation equality holds throughout. At any point of this open, the SAME open is a true neighbourhood. Every finite coefficient relation witnessing span membership on one family therefore witnesses membership in the other family: restrict its true eventual equality to this actual neighbourhood and replace each of the finitely many actual generator values by its equal value. Retain the whole holomorphic germ of the tested function and of every multiplier. This proves BOTH membership directions for ALL germs, without caller family identities or generator dictionaries.
+\end{proof}
+
+\begin{theorem}[Only original coherent input gives its whole nearby central ideal by literal homogeneous coefficient polynomials]
+\label{hir:relative-normal-central-original-whole-polynomial-model}
+\lean{Hironaka.HironakaRelativeNormalGraphCentralPolynomialModel.exists_original_whole_central_polynomial_model}
+\uses{hir:relative-normal-central-finite-polynomial-representative-comparison,hir:relative-normal-central-literal-polynomial-functions,hir:relative-normal-graph-central-nearby-whole-finite-model-and-saturation,hir:relative-normal-analytic-coefficients-common-open,hir:relative-normal-analytic-coefficients-whole-polynomial-dictionary,hir:relative-normal-analytic-coefficients-original-finite-inputs}
+\leanok
+Only original coherent $I$ internally supplies SAME $N$ and ONE actual open containing the origin. At EVERY point of this open, original selected central membership for EVERY whole germ is equivalent to the finite span of the literal normal-polynomial functions of the SAME finite original homogeneous relations. Every true coefficient function is holomorphic at the actual tangent projection throughout this open, the original homogeneous degree and specialization dictionary are retained, and the SAME true all-power original colon/parameter/saturation dictionaries hold at every actual central image.
+\end{theorem}
+\begin{proof}
+Choose the SAME genuine selected central model and its whole finite-span equality open internally from the preceding original-input central finite-model producer. Intersect with the genuine finite functional comparison open just constructed and the actual tangent-projection preimage of the common coefficient-holomorphic open of the SAME internally selected original relation family. The origin remains because actual tangent projection sends zero to zero; continuity makes the intersection genuinely open. The preceding full span equivalence and the retained exact original finite model dictionary identify original selected central membership with the entire literal polynomial-functional span at EVERY point and for EVERY germ. Genuine coefficient holomorphicity, the actual pointwise specialization formula and original homogeneous relation degrees persist on this SAME open. Restrict every original all-power colon, parameter-power and saturation-union dictionary to its actual central images. No arbitrary original-germ-to-nearby-germ map or nearby normal-cone equality is assumed. Identifying this genuine homogeneous analytic model with the WHOLE nearby original graded ideal is the next independent producer.
+\end{proof}

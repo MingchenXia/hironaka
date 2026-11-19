@@ -1,0 +1,78 @@
+\section{Literal finite generators of the actual pulled-back ideal}
+
+These supplementary bridges use the actual function-germ definition of
+ideal pullback. They retain the literal original finite family under
+composition with a holomorphic map. They do not substitute a zero-set
+relation for generation and need no assumed principalization or target
+finite presentation. The second bridge obtains the original family
+from genuine coherence.
+
+\begin{theorem}[The complete finite stalk pulls back to its literal family]
+\label{trace:actual-finite-germ-ideal-pullback-generation}
+\uses{ana:ideal-sheaves,oka:coherent-colon,fpgeom:complex-manifold}
+\source{demailly-cadg}
+\lean{Hironaka.FiniteGermIdealPullbackGenerators.mem_pullback_iff_of_finite_generation}
+\leanok
+Let $f:Y\to X$ be holomorphic near $y$, and let $\mathfrak a$ be an
+actual ideal of function germs on $X$. Suppose $G_i$ are actual
+holomorphic germs at $f(y)$ and present its complete stalk:
+\[
+ \forall a,\quad a\in\mathfrak a_{f(y)}
+ \quad\Longleftrightarrow\quad [a]\in([G_i])_{f(y)}.
+\]
+Then for every literal $F:Y\to\mathbb C$,
+\[
+ F\in(f^*\mathfrak a)_y
+ \quad\Longleftrightarrow\quad [F]\in([G_i\circ f])_y.
+\]
+The source and target dimensions may differ, and may be zero; empty
+finite generator families use the actual empty span.
+\end{theorem}
+\begin{proof}
+The actual pullback stalk consists of finite holomorphic combinations
+of $a\circ f$ with $a\in\mathfrak a_{f(y)}$. For such a generator,
+unpack the given complete finite generation into actual coefficients
+$b_i$ holomorphic near $f(y)$ and a genuine neighborhood identity
+$a=\sum_i b_iG_i$. Holomorphy of $f$ supplies its continuity and the
+actual holomorphic pullbacks of $a$ and each $b_i$. Pull the
+neighborhood equality back under $f$. This gives
+$a\circ f=\sum_i(b_i\circ f)(G_i\circ f)$ near $y$, so every
+pullback generator is in the finite pulled-back span. Substitution
+of these actual relations in a finite span gives the forward inclusion.
+
+Each $G_i$ belongs to its own original finite span by its actual
+holomorphy. The reverse original generation implication therefore
+places $G_i$ in $\mathfrak a_{f(y)}$. Consequently $G_i\circ f$ is
+an actual generator of the pullback stalk and is holomorphic near
+$y$. Substitution in every finite combination gives the reverse
+inclusion. No coherence, measure or comparison certificate is used
+in this first bridge.
+\end{proof}
+
+\begin{theorem}[Coherence internally supplies the literal pulled-back finite presentation]
+\label{trace:actual-coherent-pullback-finite-generators}
+\uses{trace:actual-finite-germ-ideal-pullback-generation,ana:ideal-sheaves,fpgeom:complex-manifold}
+\source{demailly-cadg}
+\lean{Hironaka.FiniteGermIdealPullbackGenerators.exists_finite_generators_pullback_of_isCoherent}
+\leanok
+For an actual coherent ideal $\mathfrak a$, a map $f$ holomorphic near
+$y$, and arbitrary $y$, there are an actual open $U\ni f(y)$ and
+literal finite $G_i$ holomorphic on $U$ that present every original
+stalk on $U$, with the complete additional equivalence
+\[
+ \forall F,\quad F\in(f^*\mathfrak a)_y
+ \quad\Longleftrightarrow\quad[F]\in([G_i\circ f])_y.
+\]
+No target presentation is an input.
+\end{theorem}
+\begin{proof}
+Apply the actual coherence property at $f(y)$. It supplies $U$, all
+literal holomorphic generators $G_i$, and their complete generation
+relation at every point of $U$. Holomorphy on the genuine open $U$
+implies holomorphy of each generator germ at its center. Apply the
+preceding pullback theorem to the supplied relation at $f(y)$.
+Return the same original $U$ and family with their original all-stalk
+relation and the new full pullback relation. Thus later genuine
+principalization consumers receive the literal original generators,
+not an independently assumed coordinate presentation.
+\end{proof}

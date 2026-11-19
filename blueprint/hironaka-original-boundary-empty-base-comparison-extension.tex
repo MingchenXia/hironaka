@@ -1,0 +1,109 @@
+\section{Actual canonical stage comparisons over a genuine base biholomorphism}
+
+Let $\Phi:X'\simeq X$ be an actual biholomorphism of original complex
+manifolds of the same dimension. Source initial records below have the
+same whole submanifold, ideal and marking as the actual $\Phi^*M$;
+their ordered initial boundaries agree after deleting only empty members.
+No transported tower, comparison map or insertion history is input.
+
+\begin{lemma}[The genuine transported tower supplies the entire stage dictionary]
+\label{hir:original-empty-base-actual-transport-dictionary}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyBaseComparison.canonical_transport_dictionary}
+\uses{hir:tower-isomorphism,hir:canonical-centres}
+\leanok
+For an original invariant-domain datum $M$ and an actual canonical tower
+$T$, the actual tower transport $Q=\Phi^*T$, with its internally
+constructed final biholomorphism $\beta$, is canonical for the actual
+ambient canonical invariant on $\Phi^*M$. Its domain is genuine, the
+whole projections commute, and its entire transformed marked record is
+exactly $\beta^*(M_T)$. Its whole actual maximum locus is the inverse
+image under $\beta$ of the target whole maximum locus. Target terminality
+implies source terminality, and every original open avoided by all target
+centres has its actual $\Phi$-preimage avoided by all transported centres.
+These statements include ambient dimension zero.
+\end{lemma}
+\begin{proof}
+Genuine tower transport constructs each actual source centre and blowup,
+and its actual tower isomorphism gives the commuting projections and
+the final biholomorphism. The original domain pulls back under the real
+base biholomorphism. Actual canonical-invariant isomorphism invariance
+therefore gives canonicality of this same transported tower in every
+ambient dimension. Whole marked-transform comparison gives the entire
+record equality and its whole cosupport pullback. The true invariant
+isomorphism formula at all actual target cosupport points, together with
+surjectivity of $\beta$, gives equality of the entire maximum loci.
+Actual resolution invariance under this genuine tower isomorphism gives
+terminality whenever the target is terminal. Finally induct through this
+actual isomorphism. At each stage the source centre is exactly the inverse
+image of the target centre, and the projection square identifies the
+source preimage of $\Phi^{-1}O$ with the inverse image of the target
+preimage of $O$. Target disjointness therefore gives source disjointness
+at every actual centre. No zero-dimensional exceptional case is replaced
+by a positive-dimensional invariant.
+\end{proof}
+
+\begin{theorem}[Terminal stages compare over the prescribed base biholomorphism]
+\label{hir:original-empty-boundary-terminal-base-comparison}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyBaseComparison.terminal_choice_over_base_across_empty_boundaries}
+\uses{hir:original-empty-base-actual-transport-dictionary,hir:original-boundary-empty-filter-terminal-choice,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\leanok
+Let $M$ be an original invariant-domain datum on $X$, and let the original
+source record $M'$ on $X'$ have the same whole submanifold, ideal and
+marking as $\Phi^*M$, with the same literal ordered nonempty initial
+boundary. Any actual canonical terminal histories $S$ for $M'$ and $T$
+for $M$ internally have a unique actual final biholomorphism $\eta$ with
+\[
+ T\eta=\Phi S.
+\]
+The same map transports their entire ordered final boundaries after
+deleting precisely empty members. A source domain or final comparison
+certificate is not added as a premise.
+\end{theorem}
+\begin{proof}
+Internally construct the actual transport $Q,\beta$ of the same chosen
+$T$ by the preceding lemma. It is canonical and terminal for the literal
+whole record $\Phi^*M$ and has its actual pulled domain. The source
+record $M'$ differs from that record only in empty original boundary
+positions. The proved same-base empty-filter comparison on $X'$ therefore
+constructs its unique actual over-base map $\kappa:S_{\rm final}\simeq
+Q_{\rm final}$, carrying the entire ordered filtered final boundary.
+Set $\eta=\beta\kappa$. The actual transport projection equation and
+the proved equation for $\kappa$ give $T\eta=\Phi S$. Whole transport
+of the marked record gives the exact entire boundary pullback under
+$\beta$. Since this map is bijective, filtering nonempty members commutes
+with its inverse-image list map. Compose that identity with the actual
+filtered-boundary identity for $\kappa$; literal list-map composition
+gives the claimed equality for the same $\eta$. Any other actual final
+biholomorphism satisfying the displayed projection equation has the same
+projection through the actual tower $T$, so intrinsic actual projection
+uniqueness identifies it with $\eta$.
+\end{proof}
+
+\begin{theorem}[First-meeting stages compare over the prescribed base biholomorphism]
+\label{hir:original-empty-boundary-first-meeting-base-comparison}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyBaseComparison.first_meeting_choice_over_base_across_empty_boundaries}
+\uses{hir:original-empty-base-actual-transport-dictionary,hir:original-boundary-empty-filter-first-meeting-choice,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\leanok
+Under the same original-record conditions, let actual canonical prefixes
+$S,T$ avoid respectively $\Phi^{-1}O,O$, and let their next actual whole
+maximum loci meet these corresponding original opens. Then their final
+manifolds have a unique actual biholomorphism $\eta$ satisfying
+$T\eta=\Phi S$, carrying the entire ordered final boundaries after
+deletion of precisely empty members. Terminality, a common stopping
+index and a stage comparison are not assumed.
+\end{theorem}
+\begin{proof}
+The first lemma internally transports $T$ to $Q,\beta$ on $X'$ and gives
+actual canonicality and avoidance of $\Phi^{-1}O$. Choose the inverse
+image under the actual bijection $\beta$ of the original next-maximum
+point for $T$. The proved whole maximum-locus equality places it in the
+actual whole maximum locus of $Q$, and the true projection square places
+its projection in $\Phi^{-1}O$. Thus $S$ and this same $Q$ satisfy the
+genuine same-base empty-filter first-meeting comparison. It produces
+$\kappa$ and the full ordered filtered-boundary identity without
+terminality or a common stopping index. Compose with $\beta$ exactly as
+in the terminal case. Whole transport of the marked record and literal
+inverse-image list composition prove the asserted boundary equality.
+The actual projection uniqueness theorem gives uniqueness of the same
+composed $\eta$ over the prescribed $\Phi$.
+\end{proof}

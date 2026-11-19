@@ -1,0 +1,139 @@
+\section{Dimension parts and genuine global irreducible components}
+
+Let $A$ be a closed analytic subset of a complex manifold $M$ of dimension $n$.
+The global irreducible components are the closures of the connected components
+of the regular locus, as in \cite{demailly-cadg}, II.5.3. A set has pure
+geometric dimension $k$ when every one of its regular points has dimension $k$.
+This characterization uses actual local manifold dimensions; it assigns no
+extraneous dimension certificate. Write $A^{(k)}=\overline{\operatorname{Reg}_k(A)}$.
+
+\begin{lemma}[Pure geometric dimension of a global component]
+\label{hir:global-component-pure-geometric-dimension}
+\uses{ana:regular-component,ana:pure-dimension,rem:global-components}
+\source{demailly-cadg}
+\dcref{II.5.3}
+\lean{Hironaka.HironakaDimensionGlobalComponents.isPureDim_closure_component,Hironaka.HironakaDimensionGlobalComponents.exists_unique_isPureDim_of_mem_globalComponents}
+\leanok
+Every global irreducible component of $A$ has a unique pure geometric dimension
+$k\leq n$.
+\end{lemma}
+\begin{proof}
+A global component $B$ is the closure of the connected component $C$ through
+some regular point $c$ of $A$, say of dimension $k$. All points of $C$ are
+regular points of $A$ of dimension $k$, and they are also regular points of
+$B$ of dimension $k$. In particular $B$ has a regular point of dimension $k$.
+The closure $B$ is an irreducible analytic set. Pure dimensionality of an
+irreducible analytic set therefore implies that every regular point of $B$
+has dimension $k$. The local dimension at $c$ is at most $n$. If $B$ also has
+pure dimension $j$, its regular point $c$ gives $j=k$, proving uniqueness.
+\end{proof}
+
+\begin{lemma}[Closed unions of global components]
+\label{hir:closed-global-component-subunion}
+\uses{rem:global-components}
+\source{demailly-cadg}
+\dcref{II.5.3}
+\lean{Hironaka.HironakaDimensionGlobalComponents.isClosed_sUnion_globalComponents_subfamily}
+\leanok
+The union of any subfamily of the global irreducible components of $A$ is
+closed in $M$.
+\end{lemma}
+\begin{proof}
+Every global component is closed, and their family is locally finite. Any
+subfamily remains locally finite. A locally finite union of closed sets is
+closed: at a point outside the union, choose a neighborhood meeting only
+finitely many members, and remove those finitely many closed sets from the
+neighborhood. The resulting neighborhood misses the entire union.
+\end{proof}
+
+\begin{theorem}[The irreducible-component description of dimension parts]
+\label{hir:dimension-part-global-component-union}
+\uses{hir:global-component-pure-geometric-dimension,hir:closed-global-component-subunion,hir:embedded-resolution-dimension-parts}
+\source{demailly-cadg}
+\dcref{II.5.3}
+\lean{Hironaka.HironakaDimensionGlobalComponents.dimensionPart_eq_sUnion_globalComponents}
+\leanok
+For every $k\in\mathbb N$, the dimension part $A^{(k)}$ is exactly the union
+of the global irreducible components of $A$ of pure geometric dimension $k$.
+No compactness, empty-interior, or positive-dimension assumption is required.
+\end{theorem}
+\begin{proof}
+Let $S$ be that union. If $c$ is a regular point of $A$ of dimension $k$,
+the closure of its connected component in the regular locus is a global
+component of pure dimension $k$ containing $c$. Hence
+$\operatorname{Reg}_k(A)\subset S$. The preceding lemma makes $S$ closed,
+so $A^{(k)}\subset S$.
+
+Conversely, let $B$ be a global component of pure dimension $k$, and write
+$B=\overline C$ for the regular-locus component through a regular point $c$
+of $A$ of dimension $j$. That same point is regular of dimension $j$ on $B$,
+so pure dimension $k$ gives $j=k$. Every point of $C$ is then regular of
+dimension $k$ on $A$, and therefore
+$B=\overline C\subset\overline{\operatorname{Reg}_k(A)}=A^{(k)}$.
+Taking the union gives $S\subset A^{(k)}$ and the claimed equality.
+\end{proof}
+
+\begin{lemma}[Geometric purity of the dimension part]
+\label{hir:dimension-part-geometric-purity}
+\uses{hir:embedded-resolution-dimension-parts,lag:regular-point-basics}
+\lean{Hironaka.HironakaDimensionGlobalComponents.isPureDim_dimensionPart}
+\leanok
+Every regular point of $A^{(k)}$ has local manifold dimension $k$.
+\end{lemma}
+\begin{proof}
+The regular points of dimension $k$ on $A^{(k)}$ are dense in $A^{(k)}$.
+At a regular point $y$ of dimension $j$ on that set, choose a neighborhood
+where all points of $A^{(k)}$ are regular of dimension $j$. Density supplies
+a regular point of dimension $k$ inside this neighborhood. Uniqueness of
+local manifold dimension at that point gives $j=k$.
+\end{proof}
+
+
+\begin{lemma}[Component membership in a dimension part]
+\label{hir:global-component-dimension-part-criterion}
+\uses{hir:global-component-pure-geometric-dimension,hir:dimension-part-global-component-union,lag:regular-point-basics}
+\lean{Hironaka.HironakaDimensionGlobalComponents.isPureDim_iff_subset_dimensionPart_of_mem_globalComponents}
+\leanok
+A global irreducible component $B$ of $A$ is contained in $A^{(k)}$ if and
+only if it has pure geometric dimension $k$.
+\end{lemma}
+\begin{proof}
+The reverse implication follows from the union description. For the forward
+implication, write $B=\overline C$ where $C$ is the regular-locus component
+through a regular point $c$ of $A$ of dimension $j$. Since $c\in B\subset
+A^{(k)}$, every neighborhood of $c$ meets $\operatorname{Reg}_k(A)$. Take a
+neighborhood where all points of $A$ are regular of dimension $j$. A point
+of $\operatorname{Reg}_k(A)$ in it has both dimensions $k$ and $j$, so $j=k$.
+The component-purity lemma gives pure dimension $k$ for $B$.
+\end{proof}
+
+\begin{theorem}[Pure local decompositions of a dimension part]
+\label{hir:dimension-part-local-decomposition}
+\uses{ana:dimension-strata,lag:local-statement,hir:embedded-resolution-dimension-parts}
+\source{demailly-cadg}
+\dcref{II.4.24, II.5.3}
+\lean{Hironaka.HironakaDimensionGlobalComponents.localDecomposition_dimensionPart,Hironaka.HironakaDimensionGlobalComponents.exists_localDecomposition_dimensionPart}
+\leanok
+At every point of $A^{(k)}$ there is a finite local analytic decomposition
+of $A^{(k)}$ whose pieces all have dimension $k$. More precisely, from any
+local analytic decomposition $A\cap U=\bigcup_i A_i$ with piece dimensions
+$d_i$, retain exactly the indices with $d_i=k$. They give such a decomposition
+on the same $U$, with the same holomorphic equations for each retained piece,
+dense regular loci and pairwise relatively thin intersections.
+\end{theorem}
+\begin{proof}
+The local stratum-closure theorem identifies
+$A^{(k)}\cap U=\bigcup_{d_i=k} A_i$. The selected index set is finite, so
+choose a bijection from a finite consecutive index set onto it. Transport
+the retained pieces and their equations along this bijection. Their union
+is the displayed dimension part. The neighborhood is unchanged, hence
+remains open, contains the chosen point and lies in its preferred chart.
+Holomorphicity of every equation, the equation descriptions of each piece,
+purity and density of its regular locus remain exactly the corresponding
+properties of the original piece. The assigned dimension is $k$ because
+the index is selected. Distinct selected indices remain distinct original
+indices by injectivity of the bijection, so the relatively thin-intersection
+property is inherited as well. Finally any point of $A^{(k)}$ lies in $A$;
+existence of the original analytic local decomposition at that point supplies
+the asserted decomposition of $A^{(k)}$.
+\end{proof}

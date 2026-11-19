@@ -1,0 +1,125 @@
+\section{Actual global histories for discrete original cosupport}
+\label{sec:hironaka-discrete-cosupport-canonical-history}
+
+\begin{theorem}[Original discrete cosupport internally gives compact isolating opens]
+\label{hir:original-discrete-cosupport-isolating-opens}
+\uses{hir:open-restriction-marked,hir:marked-ideal,hir:invariant-driver}
+\lean{Hironaka.HironakaDiscreteCosupportCanonicalHistory.isolatingOpen,Hironaka.HironakaDiscreteCosupportCanonicalHistory.isolatingOpen_inter_cosupp,Hironaka.HironakaDiscreteCosupportCanonicalHistory.isolatingOpen_cover,Hironaka.HironakaDiscreteCosupportCanonicalHistory.isolatingOpen_support_disjoint,Hironaka.HironakaDiscreteCosupportCanonicalHistory.isCompact_isolating_cosupp}
+\leanok
+Let $M$ be an original marked ideal with coherent ideal and
+discrete original cosupport $S$. From these original data
+one can internally choose opens $U_a$, indexed by $a\in S$,
+such that $a\in U_a$, $U_a\cap S=\{a\}$, and the entire
+original restricted cosupport of $M|_{U_a}$ is a compact
+singleton. These opens cover $S$ and are pairwise disjoint
+on $S$. They need not be disjoint in the ambient manifold.
+\end{theorem}
+\begin{proof}
+Discreteness of the subspace $S$ makes each singleton open
+in $S$. By the literal subspace-topology definition choose
+an ambient open $U_a$ whose intersection with $S$ is precisely
+$\{a\}$. This also gives $a\in U_a$, the cover property,
+and disjointness on $S$ of opens indexed by distinct points.
+The coherent original marked-record restriction dictionary
+identifies the entire cosupport of $M|_{U_a}$ with the
+inverse image of $S$ under the true open inclusion. The
+displayed intersection equality identifies that actual
+inverse image with the singleton represented by $a$ inside
+$U_a$. Singletons are compact, which proves compactness
+of the genuine restricted original cosupport.
+\end{proof}
+
+\begin{theorem}[Support-disjoint refinement constructs an actual growing history]
+\label{hir:support-disjoint-canonical-growing-history}
+\uses{hir:support-disjoint-canonical-global-refinement,hir:componentwise-canonical-growing-history,hir:support-disjoint-whole-canonical-centre}
+\lean{Hironaka.HironakaDiscreteCosupportCanonicalHistory.exists_support_disjoint_canonical_sequence,Hironaka.HironakaDiscreteCosupportCanonicalHistory.restricted_steps_are_support_maxima}
+\leanok
+Let original opens $U_i$ cover the original cosupport $S$,
+with pairwise disjoint intersections $U_i\cap S$, and let
+$M$ belong to the domain of a proved invariant $R$.
+Then the original input internally constructs a genuine
+global growing test history, blowing up the whole union
+of the current canonical maximum centres on the true
+restrictions to the fixed opens $U_i$. All those actual
+restrictions remain canonical. Every next restricted
+centre is its entire current maximum, including empty
+centres, and every recorded absolute stage is retained.
+\end{theorem}
+\begin{proof}
+Use as states the actual global test prefixes equipped
+with canonical restrictions to the fixed original opens.
+The original reflexive tower is a state. The genuine
+support-disjoint global refinement supplies a next state,
+including its actual blowup map and whole parallel centre.
+Choose a next state for each state and iterate from the
+reflexive one. The exact recorded next-step equalities
+give a true growing sequence. Restrict each actual blowup
+to $U_i$; its true centre is the inverse image of the whole
+parallel centre. The proved support-disjoint trace formula
+identifies it with the entire local current maximum.
+Thus the same restricted sequence has actual whole-maximum
+steps, without deleting empty stages.
+\end{proof}
+
+\begin{theorem}[Original discrete cosupport gives a locally terminal noncompact elementary history]
+\label{hir:original-discrete-cosupport-locally-terminal-history}
+\uses{hir:original-discrete-cosupport-isolating-opens,hir:support-disjoint-canonical-growing-history,hir:compact-cosupport-maximum-sequence-terminates,hir:growing-canonical-sequence-closed-images,hir:growing-canonical-sequence-isomorphism-tail,hir:growing-sequence-empty-restricted-tails}
+\lean{Hironaka.HironakaDiscreteCosupportCanonicalHistory.locally_finite_empty_tails_support_disjoint,Hironaka.HironakaDiscreteCosupportCanonicalHistory.exists_original_discrete_cosupport_locally_terminal_history}
+\leanok
+Let $M$ be an original marked ideal of the actual canonical
+invariant's domain, and suppose only the additional geometric
+hypothesis that its original cosupport is discrete. Then
+the original input internally constructs an actual growing
+global test history, with globally closed smooth admissible
+centres and proper actual blowups, whose restrictions to
+the internally chosen isolating opens are canonical and
+eventually resolutions. The actual centre images are
+closed and locally finite. Every point of the original
+ambient manifold has a genuine open neighbourhood over
+which all sufficiently late actual step maps are
+isomorphisms and every entire finite later tail restricts
+to an empty-centre tower. The ambient manifold may be
+connected and noncompact; the terminal times may be unbounded.
+\end{theorem}
+\begin{proof}
+The invariant-domain condition makes the original cosupport
+$S$ closed. Choose the isolating opens above internally.
+Apply the constructed support-disjoint growing history to
+them. The same actual restricted history on each $U_a$
+has whole maximum steps and compact original cosupport,
+the literal singleton above. Per-sequence finiteness and
+properness therefore give an eventual resolution for this
+same restriction by the compact-original-cosupport theorem.
+
+For sufficiently late indices on $U_a$, its current
+cosupport and hence its whole maximum centre are empty.
+The exact whole-centre trace formula implies that the
+actual next global centre misses the full preimage of
+$U_a$. Outside the closed original cosupport, every
+current cosupport and every constructed centre are absent
+at every stage, so the fixed genuine open $X\setminus S$
+is avoided from the start. These opens cover the ambient
+manifold and each meets actual centre images at only
+finitely many indices. This proves local finiteness.
+Actual centre images are closed because each actual
+centre is closed and its entire prefix projection is proper.
+
+Every actual step missing such an open preimage is an
+isomorphism over it, by the genuine off-centre blowup
+isomorphism. The actual prefix--tail projection equality
+then shows inductively that every centre of any entire
+later finite tail restricts to the empty set on that same
+open. This gives the asserted actual empty and isomorphic
+tails. No centres are cut off and no independently chosen
+terminal histories or stage-alignment certificates are used.
+\end{proof}
+
+\begin{remark}
+Discreteness is a hypothesis on the ORIGINAL cosupport,
+not on any selected stage centre. It includes empty
+cosupport, when the internally chosen family is empty
+and the whole ambient open has empty tails from the start.
+An arbitrary positive-dimensional coherent cosupport need
+not be discrete. The unrestricted connected noncompact
+elementary scheduler remains a separate obligation.
+\end{remark}

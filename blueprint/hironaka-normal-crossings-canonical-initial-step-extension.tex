@@ -1,0 +1,130 @@
+\section{The first NC step for the actual ambient-dimensional canonical invariant}
+\label{sec:hironaka-normal-crossings-canonical-initial-step}
+
+Let $H$ be an actual NC carrier in a complex manifold of dimension $n$,
+and let $M_H=(X,X,\varnothing,I_H,1)$ be its unchanged original marked datum.
+For a proved resolution invariant $R$ whose dimension bound is $k\geq n$,
+write $V^R_H(x)=R(M_H,\mathrm{refl},x)$. Its value space is arbitrary.
+The ambient-dimensional canonical invariant is specifically
+$R_n=\mathrm{canonicalInvariant}(n)$, with values in $\mathrm{ValTy}(n)$.
+It is distinct from the previously considered family of depth $n+1$;
+no equality between invariant depths is assumed. All histories below are
+the initial reflexive history or the actual single step constructed from it.
+
+\begin{lemma}[Whole NC chart transport for any proved invariant]
+\label{hir:general-nc-generic-initial-value-flat-chart}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsCanonicalInitialStep.initialValue_eq_coordinate_model}
+Suppose an actual centred flattening at $x\in H$ identifies the whole
+carrier on its open chart domain with the coordinate union $H_S$.
+For every proved resolution invariant $R$ of dimension bound $k\geq n$,
+$V^R_H(x)=V^R_{H_S}(0)$, with its entire value retained.
+\uses{hir:general-nc-standard-coordinate-carrier,hir:general-nc-initial-full-value-flat-chart}
+\end{lemma}
+\begin{proof}
+The actual NC original-domain theorem gives a well-formed marking-one
+datum of dimension at most $n$. Increasing the dimension bound to $k$
+preserves each domain condition. The actual chart and its actual inverse
+give a biholomorphism from the open flat domain to the lifted open target,
+taking $x$ to zero and the whole carrier trace to the trace of $H_S$.
+Composition with the chart and its inverse identifies the whole vanishing
+ideal, as a predicate on holomorphic germs. The pulled-back marked data
+therefore agree in all four fields: full ambient carrier, empty boundary,
+whole ideal and marking one. The analogous whole-record identity under
+an open inclusion follows by restricting the same vanishing predicate.
+
+The reflexive tower is canonical for $R$ without an assumption on values.
+Apply $R$'s proved restriction law to the original open domain, its whole
+tower-isomorphism law to the actual biholomorphism, and its restriction
+law to the coordinate-model target. The points involved belong to their
+literal original cosupports, which equal the corresponding NC carriers.
+The three whole-value equalities and the whole-record identities give
+the asserted equality. No formula for a value or equality of two different
+invariant families is used.
+\end{proof}
+
+\begin{lemma}[Whole highest-stratum constancy for any proved invariant]
+\label{hir:general-nc-generic-initial-highest-stratum-constant}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsCanonicalInitialStep.initialValue_eq_of_highest_branch_count}
+Suppose $r>0$ bounds every original branch count. Any two points of count
+$r$ have the same entire initial value for every proved invariant $R$
+of dimension bound at least $n$.
+\uses{hir:general-nc-generic-initial-value-flat-chart,hir:general-nc-highest-stratum-branch-adapted-coordinates}
+\end{lemma}
+\begin{proof}
+At each of the two points, the actual highest-stratum coordinate producer
+identifies the whole original carrier with the union of the last $r$
+coordinate hyperplanes. Thus both genuine charts give the same coordinate
+model with the same selected coordinate set. Positivity puts both points
+in the original carrier. The preceding whole-value transport sends each
+value to that same model value at zero. Taking the composite of one
+equality and the inverse of the other proves the assertion.
+\end{proof}
+
+\begin{lemma}[The first entry of the actual ambient-dimensional canonical invariant]
+\label{hir:general-nc-ambient-canonical-initial-first-entry}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsCanonicalInitialStep.canonicalInitialValue_lt_of_branch_count_lt}
+Assume $n>0$. If $\nu_H(x)<\nu_H(y)$, then
+$V^{R_n}_H(x)<V^{R_n}_H(y)$ for the actual ambient-dimensional canonical
+invariant $R_n$.
+\uses{hir:general-nc-actual-prefix-first-entry,hir:canonical-centres}
+\end{lemma}
+\begin{proof}
+Write $n=m+1$. By its defining positive-dimensional clause, $R_n$ is
+exactly the family at depth $m+1=n$. Its first lexicographic component
+is the actual nonmonomial order of the unchanged original datum at the
+reflexive history. The actual original residual calculation identifies
+this order with the intrinsic branch count; the differential strict
+transform at the identity is the original closed carrier itself.
+Consequently the asserted strict inequality follows in the first
+lexicographic component, independently of every later component. This
+uses the definition at depth $n$, not a comparison with depth $n+1$.
+\end{proof}
+
+\begin{theorem}[The actual ambient-dimensional initial canonical maximum]
+\label{hir:general-nc-ambient-canonical-initial-full-maximum}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsCanonicalInitialStep.canonicalInitialMaximum_eq_highest_stratum}
+Assume $n>0$ and that $r>0$ is an attained upper bound on the original
+branch count. The whole maximum locus of $V^{R_n}_H$ on the unchanged
+original cosupport is exactly $\{x:r\leq\nu_H(x)\}$.
+\uses{hir:general-nc-generic-initial-highest-stratum-constant,hir:general-nc-ambient-canonical-initial-first-entry}
+\end{theorem}
+\begin{proof}
+The original cosupport equals $H$. Specialize whole highest-stratum
+constancy to the proved invariant $R_n$, whose dimension bound is exactly
+$n$. Every point of count $r$ has the same whole value as an attained
+reference point. Every remaining point of $H$ has strictly smaller count
+and hence strictly smaller whole value by the first-component inequality.
+Thus every highest-stratum point is a whole maximum. Conversely, a point
+of smaller count cannot be a maximum because the reference point has a
+strictly larger value. These two inclusions give the stated equality.
+\end{proof}
+
+\begin{theorem}[An actual first canonical step for the ambient-dimensional driver]
+\label{hir:general-nc-original-ambient-canonical-first-step}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsCanonicalInitialStep.exists_canonicalInvariant_initial_blowup}
+Assume $n>0$. From only a nonempty original NC carrier, one obtains an
+attained positive highest count $r\leq n$, its whole highest stratum,
+and a genuine blowup along that very stratum. The actual one-step tower
+is a test tower for $M_H$ and is canonical for
+$\mathrm{canonicalInvariant}(n)$ itself.
+\uses{hir:general-nc-ambient-canonical-initial-full-maximum,hir:general-nc-highest-stratum-actual-blowup}
+\end{theorem}
+\begin{proof}
+The finite range of actual branch counts, bounded by $n$, supplies an
+attained positive maximum from the nonempty original carrier. The genuine
+highest-stratum blowup producer gives the smooth centre and an actual
+blowup. The preceding theorem identifies that same centre with the whole
+maximum of the exact ambient-dimensional invariant. Its proved maximum
+admissibility law therefore makes this actual blowup a test step for
+the unchanged original marking-one datum. The canonical-step constructor
+uses the derived whole-maximum equality and the reflexive initial history,
+so it gives canonicity for the same $R_n$. No maximum, centre, history or
+termination certificate is an input. No second step, arbitrary marked
+datum, or identification of later branch maxima with full canonical
+maxima is asserted.
+\end{proof}

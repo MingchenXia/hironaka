@@ -1,0 +1,82 @@
+\section{Actual recentred polynomial coordinates for a point-centre blowup}
+
+\begin{lemma}[The genuine point monomial map after recentering]
+\label{hir:actual-point-monomial-recentring}
+\uses{bcalc:monomial-lift}
+\lean{Hironaka.HironakaActualPointBlowupCoordinates.actual_point_monomial_recentre}
+\leanok
+Let $j$ be an actual coordinate and let $v_j=0$. The original monomial
+map for the zero-dimensional coordinate centre, evaluated at $w$, is
+exactly the actual analytic point-chart polynomial with parameter $v$,
+evaluated at $w-v$.
+\end{lemma}
+\begin{proof}
+At coordinate $j$ both sides are $w_j$, since $v_j=0$.
+At a different coordinate $i$, the second expression is
+$(w_j-v_j)(v_i+w_i-v_i)=w_jw_i$, the original monomial coordinate.
+Coordinate extensionality gives the entire vector identity.
+\end{proof}
+
+\begin{lemma}[A genuine monomial local inverse has injective complex chart differential]
+\label{hir:actual-monomial-local-inverse-complex-injective}
+\uses{bcalc:monomial-lift}
+\lean{Hironaka.HironakaActualPointBlowupCoordinates.fderiv_complex_monomial_inverse_injective}
+\leanok
+Suppose $W$ is an actual holomorphic monomial local inverse on an open
+neighbourhood of $z$, with genuine holomorphic lift $\ell$ satisfying
+$\ell(W(u))=u$ there. Then the complex differential of $W$ written in
+the original preferred chart at $z$ is injective.
+\end{lemma}
+\begin{proof}
+The actual holomorphicity of $W$ and of the inverse preferred chart makes
+that chart expression complex differentiable. The existing genuine
+real differential calculation for the local inverse proves that every
+nonzero vector has nonzero image: differentiating the true local
+identity $\ell\circ W=\mathrm{id}$ gives a left inverse. Restricting
+scalars of the actual complex differential gives that same real
+differential. Its zero kernel therefore gives a zero kernel for the
+complex differential, hence injectivity.
+\end{proof}
+
+\begin{theorem}[Original point-centre blowups have actual recentred point-polynomial coordinates]
+\label{hir:actual-point-centre-blowup-coordinate-normal-form}
+\uses{hir:actual-point-monomial-recentring,hir:actual-monomial-local-inverse-complex-injective,bcalc:snc-chart,ana:local-holomorphic-inverse}
+\lean{Hironaka.HironakaActualPointBlowupCoordinates.exists_actual_point_blowup_coordinates}
+\leanok
+Let $\pi:Y\to X$ satisfy the original full blowup universal property,
+and suppose its original centre is regular of dimension zero at
+$\pi(z)$. Then there are actual source and target local holomorphic
+coordinate equivalences $\Theta,\Phi$, both centred at zero, an actual
+coordinate $j$ and actual parameters $b$ with $b_j=0$, such that on the
+entire source coordinate neighbourhood the original map satisfies
+\[
+ \Phi(e_{\pi(z)}(\pi(u)))
+ =\pi^{\mathrm{point}}_{j,b}(\Theta(e_z(u))).
+\]
+The source coordinate neighbourhood maps into the actual target
+coordinate neighbourhood. No normal-form or Hilbert--Samuel comparison
+certificate is a premise.
+\end{theorem}
+\begin{proof}
+Unpack the original zero-dimensional regularity at $\pi(z)$ to obtain
+an actual centred flattening $\Phi$ for the same centre. The original
+blowup universal property gives a genuine monomial lift and a genuine
+holomorphic local inverse $W$ near $z$, with the actual monomial square
+and the identity $\ell\circ W=\mathrm{id}$. The second lemma proves
+injectivity of its complex chart differential. The existing actual
+holomorphic inverse function theorem, followed by subtraction of $W(z)$,
+therefore supplies a genuine centred local equivalence $\Theta$ whose
+actual coordinate expression is $W(u)-W(z)$ on a smaller real open
+neighbourhood. At $z$ the actual monomial square has value zero; its
+$j$ coordinate is $W(z)_j$, so this coordinate is zero. Set $b=W(z)$.
+The first lemma identifies the original monomial square on the entire
+smaller neighbourhood with the asserted actual polynomial square.
+The construction of the genuine monomial inverse already ensures that
+the original images lie in the actual flattening domain.
+\end{proof}
+
+This constructs the actual coordinate normal form from the original
+blowup and zero-dimensional regularity. Transport of geometric strict
+transforms and intrinsic Hilbert--Samuel values through these actual
+coordinate opens is a subsequent step; positive-dimensional centres
+remain separate.

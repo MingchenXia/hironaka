@@ -1,0 +1,136 @@
+\section{Independent actual separation chains with empty labelled parts}
+
+Every chain below is the literal original chronological chain of canonical
+terminal stages for the successive original sum vanishing ideals. Its
+whole accumulated boundary is retained, including empty positions. The
+head is fixed, while labelled tail parts may contain empty sets in arbitrary
+positions. The input lists are compared only after deleting these empty
+carriers, with all surviving labels and their order retained.
+
+\begin{lemma}[Whole strict carriers and genuine closed-carrier list normal forms]
+\label{hir:original-separation-chain-whole-strict-normal-form}
+\lean{Hironaka.HironakaOriginalCanonicalSeparationChainChoice.strictTransform_closure_eq,Hironaka.HironakaOriginalCanonicalSeparationChainChoice.strictTransform_preimage_of_projection_square,Hironaka.HironakaOriginalCanonicalSeparationChainChoice.closedParts}
+\uses{ana:strict-transform-composition}
+\leanok
+The ordinary strict transform under any actual holomorphic map depends
+only on the closure of its original carrier. Consequently any genuine
+biholomorphic square of actual projections transports the whole ordinary
+strict set of every carrier. Replacing each labelled carrier by its true
+closure preserves its label and nonemptiness. These closed-carrier lists
+commute with original biholomorphic inverse images and actual successive
+strict transforms after the latter are closed.
+\end{lemma}
+\begin{proof}
+Compose the actual holomorphic map with the identity on its base. The
+proved strict-transform composition formula says its strict transform
+equals the strict transform of the identity's strict set. The identity's
+differential exceptional locus is empty, so that strict set is exactly
+the original closure. This proves the first assertion. For a genuine
+biholomorphic projection square apply the known whole strict-square
+formula to that original closure. A homeomorphism commutes with closure
+and its inverse image; applying the first assertion on both source and
+target removes those closures and gives the assertion for every carrier.
+Closure does not change nonemptiness, and a strict transform is already
+closed by its original definition. Apply these whole set equalities at
+every literal labelled list position. Labels and order do not change.
+This normal form is derived from the actual sets; it is not an input
+tracking or deletion certificate.
+\end{proof}
+
+\begin{lemma}[An empty labelled sum stage has its actual unique neutral projection]
+\label{hir:original-separation-chain-empty-sum-domain-projection}
+\lean{Hironaka.HironakaOriginalCanonicalSeparationChainChoice.empty_sum_stage_projection}
+\uses{hir:original-empty-sum-stage-unique-projection-neutrality,hir:original-ambient-terminal-choice-intrinsic-unique-comparison}
+\leanok
+Let an actual chain stage have original analytic head $A$, an empty
+tail carrier $B$, its original sum marked datum $M$, its genuine domain,
+and an actual canonical stage tower $T$. Its projection is an actual
+biholomorphism $\beta$, and every original closed strict set is its
+literal inverse image. The entire output boundary is
+$M.E.\mathrm{map}(\beta^{-1})$ followed by exactly $T.length$ empty
+born positions. Its filtered boundary is precisely the filtered actual
+pullback of the original boundary. The genuine domain already supplied
+by the chain is used; empty interior of $A$ is not an extra premise.
+\end{lemma}
+\begin{proof}
+Coherence and marking one identify the actual cosupport with the whole
+zero locus of the original sum ideal, which is $A\cap B=\varnothing$.
+The original domain and actual canonicality therefore force every actual
+centre empty and make the same stage terminal. Compare this actual
+terminal tower with the actual identity tower for the same sum datum.
+Genuine terminal projection uniqueness gives its unique actual
+biholomorphism $\beta$, equal to the actual projection at every point.
+Its differential exceptional locus is empty, so the original strict
+transform of a closed set is its actual inverse image. The whole
+all-empty-tower boundary formula retains every original member and
+appends one empty member per actual chronological step. Filtering those
+empty born members gives the last assertion. No different stage or
+projection has been substituted.
+\end{proof}
+
+\begin{theorem}[Independent original separation chains have one whole comparison over the prescribed base]
+\label{hir:original-canonical-separation-chain-filtered-choice}
+\lean{Hironaka.HironakaOriginalCanonicalSeparationChainChoice.separation_chain_choice_over_base_closedParts,Hironaka.HironakaOriginalCanonicalSeparationChainChoice.separation_chain_choice_over_base}
+\uses{hir:original-separation-chain-whole-strict-normal-form,hir:original-separation-chain-empty-sum-domain-projection,hir:original-empty-boundary-terminal-base-comparison,hir:original-actual-whole-projection-biholomorphic-map-uniqueness}
+\leanok
+Let $\Phi:X'\simeq X$ be an actual original biholomorphism. Suppose
+two actual canonical separation chains have fixed heads $\Phi^{-1}A,A$,
+original boundaries agreeing after actual $\Phi$-pullback and deletion
+of empty members, and labelled tail lists whose ordered nonempty
+carriers and labels agree by the same inverse image. Their actual final
+manifolds internally have a unique biholomorphism $\eta$ over $\Phi$.
+That same map transports the entire ordered final boundary after deleting
+precisely empty members, and transports every whole original closed
+strict set. No chain comparison, insertion history, common stage count
+or nonempty-stage list is input.
+More generally, the same conclusion holds when the ordered nonempty
+labelled lists agree after replacing every carrier by its actual closure.
+No closedness premise on the deeper raw entries is required.
+\end{theorem}
+\begin{proof}
+First prove the stronger induction statement comparing the genuine
+closed-carrier normal forms of the labelled tails. Induct strongly on
+the sum of the two original raw tail lengths. If both lists are empty,
+their actual chains are identity towers, and the required map is
+exactly $\Phi$; the stated original filtered-boundary identity gives
+the boundary assertion.
+
+If the source raw head is empty, its actual first sum stage has the
+genuine neutral projection $\beta$ of the preceding lemma. Its actual
+remaining chain has the strictly smaller raw tail. Regard its base
+biholomorphism as $\Phi\beta$. The actual closed source head pulls back
+exactly, the whole boundary differs by only the proved empty born
+positions, and the first lemma transports the genuine closed-carrier
+tail normal form. Apply the induction hypothesis to this same remaining
+source chain and the unchanged target chain. The actual projection
+equation for $\beta$ turns its final square into the required square for
+the original full source chain. If instead the target raw head is empty,
+perform the symmetric construction with the actual target neutral
+projection and base map $\beta^{-1}\Phi$. Again one raw length decreases,
+and the actual projection equation recovers the original full square.
+
+Otherwise both raw heads are nonempty. The equality of ordered filtered
+closed-carrier lists identifies their labels and their actual current
+analytic carriers by $\Phi$; these current carriers are closed by their
+actual chain constructors. The original whole sum-pullback dictionary
+identifies the submanifold, whole ideal and marking of the two first
+stages, and their initial boundaries have the stated filtered equality.
+The genuine base-biholomorphism terminal-stage comparison therefore
+constructs an actual first-stage map $\chi$ with its entire ordered
+filtered-boundary identity. The first lemma transports the actual strict
+head and the whole labelled closed-carrier tails through $\chi$. Apply
+the induction hypothesis to the two actual remaining chains over
+$\chi$; both raw lengths decrease. Composing the two actual projection
+equations proves the required square of the original entire appended
+chains, and the actual final filtered-boundary assertion is exactly
+that of the induction hypothesis.
+
+Finally the public literal ordered nonempty-tail hypothesis implies the
+closed-carrier normal-form hypothesis by the first lemma, so no added
+closedness assumption on deeper raw entries is needed. Any two actual
+final maps with the proved original projection square are equal by
+actual tower projection uniqueness. Applying the whole strict-square
+formula to this same map gives the asserted whole closed strict sets.
+Thus the map, boundary and strict-set assertions all concern the same
+original chain projections.
+\end{proof}

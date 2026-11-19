@@ -1,0 +1,69 @@
+\section{True smooth products reflect the entire original HS profile}
+
+The product here is exactly the original holomorphic coordinate projection
+$\mathbb C^{d+t}\to\mathbb C^d$ and its whole ideal extension. Its HS is the
+existing local-ring function, computed by the genuine mixed-power quotient.
+
+\begin{lemma}[The unique degree-zero original normal monomial]
+\label{hir:actual-product-unique-degree-zero-monomial}
+\uses{hir:relative-normal-basis-actual-finite-exponents}
+\lean{Hironaka.HironakaActualProductHSProfileReflection.actualNormalExponentDegree_eq_zero_iff,Hironaka.HironakaActualProductHSProfileReflection.actualProductZeroIndex,Hironaka.HironakaActualProductHSProfileReflection.actualProductZeroIndex_degree}
+\leanok
+The actual normal exponent degree is zero precisely for the zero exponent.
+In the genuine finite exponent family for order $\ell+1$, this zero exponent
+is the unique degree-zero index. Every other index has positive degree.
+\end{lemma}
+\begin{proof}
+Every original nonnegative exponent entry is at most their finite sum.
+If the sum is zero, each entry is therefore zero, so the entire exponent
+is zero; conversely the zero exponent has zero sum. The zero exponent has
+degree less than $\ell+1$ and hence defines an actual index. Equality of
+whole exponents is equality of these subtype indices. Consequently every
+other original index has nonzero, and thus positive, degree.
+\end{proof}
+
+\begin{lemma}[True product HS comparison at the first differing order]
+\label{hir:actual-product-hs-first-difference-comparison}
+\uses{hir:actual-product-unique-degree-zero-monomial,hir:actual-product-original-ambient-hs-convolution}
+\lean{Hironaka.HironakaActualProductHSProfileReflection.actualProductHSRemainder,Hironaka.HironakaActualProductHSProfileReflection.actualProductHS_zeroTerm_add_remainder,Hironaka.HironakaActualProductHSProfileReflection.actualProductHSRemainder_eq_of_lower_orders,Hironaka.HironakaActualProductHSProfileReflection.actualProductHS_comparison_of_lower_orders}
+\leanok
+For ANY two whole original ideals $I,K\subset\mathcal O_{\mathbb C^d,0}$,
+if their actual HS values agree at all orders less than $\ell$, then
+comparison of their genuine product HS at order $\ell$ is exactly
+comparison of their original HS at that order, for equality, strict order
+and weak order.
+\end{lemma}
+\begin{proof}
+Split each genuine convolution sum into its unique zero-exponent term
+and the finite sum over all other original indices. The zero term is
+exactly $H_I(\ell)$, respectively $H_K(\ell)$. At every other index of
+degree $q>0$, the coefficient is the existing original value at order
+$\ell-q<\ell$; hence these two terms agree by the hypothesis. Their entire
+finite remainder sums are therefore the same actual natural number $c$.
+The two product values are $H_I(\ell)+c$ and $H_K(\ell)+c$. Cancellation
+of addition in the natural numbers proves each of the three comparisons.
+\end{proof}
+
+\begin{theorem}[Every original finite prefix and the whole original HS profile are reflected by the true smooth product]
+\label{hir:actual-product-entire-hs-profile-reflection}
+\uses{hir:actual-product-hs-first-difference-comparison}
+\lean{Hironaka.HironakaActualProductHSProfileReflection.actualProductHS_prefix_eq_iff,Hironaka.HironakaActualProductHSProfileReflection.actualProductHS_entire_profile_eq_iff}
+\leanok
+For every cutoff $N$, equality of the genuine product HS at all orders
+less than $N$ is equivalent to equality of the original HS at all such
+orders. In particular the entire genuine product profiles agree at all
+orders if and only if the entire ORIGINAL profiles agree at all orders.
+\end{theorem}
+\begin{proof}
+For the forward finite-prefix assertion, use strong induction on an
+original order $\ell<N$. All smaller original values agree by the
+induction hypothesis; the preceding equality comparison therefore
+recovers equality at $\ell$ from the assumed genuine product equality.
+For the reverse assertion, each original convolution argument
+$\ell-|\alpha|$ is at most $\ell<N$, so every actual term agrees and the
+finite sums agree. For entire profiles, apply the recovered finite-prefix
+assertion with cutoff $\ell+1$ at each arbitrary original order $\ell$;
+the reverse direction follows by the same actual convolution formula.
+These arguments include zero free-coordinate dimension and make no
+HS-cancellation or comparison assumption about the desired product.
+\end{proof}

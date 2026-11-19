@@ -1,0 +1,219 @@
+\section{Positions of centres at the current stage}
+
+The literal obligation in Bierstone--Milman \cite{bierstone-milman97-invent-math},
+Theorem~1.6(1), is a statement about each current strict transform: a centre is
+contained in its singular locus, or the current transform is smooth and the
+centre is contained in its intersection with the accumulated divisor. The
+results in this section distinguish the part forced by a marked-ideal tower
+from the additional producer needed for that literal obligation.
+
+\begin{lemma}[Transport away from the accumulated divisor]
+\label{hir:stage-cosupport-off-boundary}
+\uses{hir:geo-transform,hir:admissible-calculus}
+\lean{Hironaka.HironakaStageCenters.preimage_boundary_subset_boundary_geoTransform,Hironaka.HironakaStageCenters.notMem_boundary_geoTransform,Hironaka.HironakaStageCenters.notMem_initial_boundary_of_notMem_boundary,Hironaka.HironakaStageCenters.exceptionalLocus_subset_boundary,Hironaka.HironakaStageCenters.mem_cosupp_geoTransformAlong_iff_of_notMem_boundary,Hironaka.HironakaStageCenters.mem_cosupp_iff_mem_strictTransform_of_notMem_boundary,Hironaka.HironakaStageCenters.cosupp_subset_strictTransform_union_boundary}
+\leanok
+Let $\mathfrak m=(X,N,E_0,\mathfrak a,d)$ have closed smooth $N$ and coherent
+$\mathfrak a$, and let $T$ be a multiple test blowup. At a point $y$ outside
+the accumulated divisor $|E_T|$, membership in the current cosupport is
+equivalent to membership of $T(y)$ in the original cosupport. In particular,
+for $\mathfrak m=(X,X,E_0,\mathcal I_W,1)$ with $W$ closed analytic, this is
+equivalent to $y\in W_T$, where $W_T$ is the actual strict transform. Thus
+$\operatorname{cosupp}(\mathfrak m_T)\subset W_T\cup|E_T|$.
+\end{lemma}
+\begin{proof}
+Induct on the recorded tower. There is nothing to transform at the initial
+stage. Write a final step as $\pi:Z\to Y$ with centre $C$. The new divisor
+contains $\pi^{-1}C$, so $z\notin|E_{T\pi}|$ implies $\pi(z)\notin C$.
+It also implies $\pi(z)\notin|E_T|$: if $\pi(z)\in H\in E_T$ and
+$\pi(z)\notin C$, then $z\in\pi^{-1}(H\setminus C)$ and hence belongs
+to the recorded strict transform of $H$. Off $\pi^{-1}C$ the controlled
+transform agrees, locally up to a unit, with the pullback of the old ideal;
+the blowup is a local biholomorphism. Consequently its cosupport is the
+preimage of the old cosupport there. Apply the induction hypothesis.
+
+For the final specialization, the original cosupport is exactly $W$. The
+exceptional locus of the tower projection is contained in $|E_T|$, by
+induction using the exceptional-locus composition formula. Away from that
+locus the strict transform of a closed set is its inverse image. This proves
+the equivalence. For any point of the cosupport, either it belongs to $|E_T|$
+or the equivalence puts it in $W_T$.
+\end{proof}
+
+\begin{lemma}[Regularity and singularity at an unramified point]
+\label{hir:stage-regularity-unramified}
+\uses{ana:strict-transform-composition}
+\lean{Hironaka.HironakaStageCenters.regularAtDim_strictTransform_iff_of_notMem_exceptionalLocus}
+\leanok
+Let $f:Y\to X$ be holomorphic between complex manifolds of the same dimension,
+$W\subset X$ closed, and $y\notin\operatorname{Exc}f$. For every $d$,
+\[
+ \operatorname{Reg}_d(W_f,y)\quad\Longleftrightarrow\quad
+ \operatorname{Reg}_d(W,f(y)).
+\]
+\end{lemma}
+\begin{proof}
+The holomorphic inverse function theorem gives open neighbourhoods of $y$
+and $f(y)$ and a holomorphic inverse section $s$ through $y$. Restricting $s$
+to its open domain gives an actual holomorphic map of complex manifolds.
+The chain rule applied to $f\circ s=\mathrm{id}$ shows that both
+differentials are bijective. The inverse section therefore transports
+flattening coordinates in both directions; this identifies regularity of
+$f^{-1}W$ at $y$ with regularity of $W$ at $f(y)$.
+The exceptional locus is closed, and on its open complement the strict
+transform of closed $W$ has the same germ as $f^{-1}W$. Replace that germ in
+the equivalence. This also transports the corresponding singular loci.
+\end{proof}
+
+\begin{definition}[The recorded-stage predicate]
+\label{hir:recorded-stage-centres}
+\lean{Hironaka.HironakaStageCenters.StageCentres}
+\leanok
+For a predicate $P(T,C)$ on an actual prefix tower and its next centre,
+$\operatorname{StageCentres}(P,T)$ is true for the identity tower. For an
+extended tower $T\pi$ with recorded centre $C$, it means
+$\operatorname{StageCentres}(P,T)$ and $P(T,C)$. Thus it checks every actual
+recorded centre and its own prefix projection and accumulated boundary.
+No centre-containment evidence is built into the definition.
+\end{definition}
+
+\begin{theorem}[Every recorded centre outside the boundary]
+\label{hir:stage-centres-outside-boundary}
+\uses{hir:stage-cosupport-off-boundary,hir:stage-regularity-unramified}
+\lean{Hironaka.HironakaStageCenters.stageCentresInStrictTransformOrBoundary_of_isGeoTestTower,Hironaka.HironakaStageCenters.stageCentresSingularOffBoundary_of_isGeoTestTower}
+\leanok
+For every actual multiple test tower of $(X,X,E_0,\mathcal I_W,1)$, each
+recorded centre $C_j$ is contained in $W_j\cup|E_j|$. If in addition all
+centres lie over
+$W\setminus\operatorname{Reg}_d(W)\cup(W\cap|E_0|)$, then
+\[
+ C_j\setminus|E_j|\subset
+ W_j\setminus\operatorname{Reg}_d(W_j).
+\]
+These are properties of every recorded step, not merely of the final support.
+\end{theorem}
+\begin{proof}
+At a recorded step admissibility says $C_j\subset\operatorname{cosupp}
+\mathfrak m_j$. Apply Lemma~\ref{hir:stage-cosupport-off-boundary}.
+For the second assertion a point $c\in C_j\setminus|E_j|$ is in $W_j$
+and is unramified for the prefix projection. Its image lies in the prescribed
+original bad set. It cannot lie in the initial boundary: outside the
+accumulated divisor the image is outside the initial boundary, by the same
+induction used in Lemma~\ref{hir:stage-cosupport-off-boundary}. Thus its image
+is singular of dimension $d$. Lemma~\ref{hir:stage-regularity-unramified}
+shows that $c$ is singular in the current strict transform. Induct on the
+tower to obtain the stated property at every prefix.
+\end{proof}
+
+\begin{theorem}[Compact pure-dimensional resolution with recorded positions]
+\label{hir:embedded-stage-positions-off-boundary}
+\uses{hir:stage-centres-outside-boundary,hir:embedded-resolution-pure-dimensional}
+\lean{Hironaka.HironakaStageCenters.exists_tower_embeddedResolution_pure_stage_positions}
+\leanok
+A compact pure-dimensional analytic set $W$ of dimension $d<n$ has an actual
+finite test tower, admissible over its singular set, with smooth strict
+transform of dimension $d$ having normal crossings with the accumulated
+divisor. Every recorded centre belongs to the current strict transform or
+the current divisor, and its part outside that divisor is in the current
+singular locus.
+\end{theorem}
+\begin{proof}
+Initialize the actual vanishing ideal with mark one and empty boundary.
+Cartan coherence and the pure-dimensional empty-interior theorem put it in
+the domain. Its compact cosupport equals $W$. The canonical compact-cosupport
+driver produces a finite actual resolution tower. Truncate it before its
+first centre meeting the regular open set, using the existing identity-principle
+construction. The resulting actual tower has smooth normal-crossings strict
+transform, and all its centres avoid the preimage of that regular open set.
+Thus they lie over the original singular set, which gives admissibility with
+that bad locus. Apply Theorem~\ref{hir:stage-centres-outside-boundary} to the
+recorded tower. No property of an exceptional centre inside the divisor is
+silently inferred here.
+\end{proof}
+
+\begin{lemma}[A fresh canonical maximum detects a nonsmooth current set]
+\label{hir:fresh-current-centre-singular}
+\uses{hir:canonical-centres,hir:embedded-resolution-pure-dimensional}
+\lean{Hironaka.HironakaStageCenters.fresh_maxLocus_subset_singular_of_not_isClosedSubmanifold,Hironaka.HironakaStageCenters.exists_fresh_admissibleCentre_subset_singular}
+\leanok
+Let $W$ be a compact analytic set of pure dimension $d<n$. If $W$ is not a
+closed smooth submanifold, the actual canonical invariant, initialized on
+$(X,X,[],\mathcal I_W,1)$, has a nonempty smooth admissible maximum locus
+$C$ contained in the singular locus of the present $W$.
+\end{lemma}
+\begin{proof}
+Cartan coherence and empty interior put the actual vanishing ideal in the
+domain of the canonical invariant. Its initial cosupport is $W$. Upper
+semicontinuity on the compact nonempty set $W$ produces a maximum, and the
+admissibility theorem produces a closed smooth centre $C\subset W$.
+Suppose that $C$ meets the regular locus. On the open complement of the
+singular locus, regularity has constant dimension $d$; restriction to that
+open set and invariance under local biholomorphisms make all its cosupport
+points have the same invariant. Since one belongs to the global maximum,
+all do. Hence $C$ and $W$ agree on that open set. The regular locus is dense
+in $W$, and $C$ is closed, so $W\subset C$. The analytic filling argument
+in the smooth manifold $C$, with the pure-dimensional density hypothesis,
+shows that $W$ and $C$ have equal germs at every point of $W$. Therefore
+$W$ is a closed smooth submanifold, contrary to hypothesis. Thus $C$
+contains no regular point of $W$, proving $C\subset\operatorname{Sing}W$.
+No premise asserts this centre containment: it is produced from the actual
+canonical maximum and the geometry of its initial cosupport.
+\end{proof}
+
+\begin{theorem}[A genuine singular blowup and the next current ideal]
+\label{hir:fresh-current-singular-blowup}
+\uses{hir:fresh-current-centre-singular,hir:geo-transform}
+\lean{Hironaka.HironakaStageCenters.exists_fresh_singular_blowup_subvariety}
+\leanok
+Let $V$ be a compact irreducible analytic subvariety of dimension $d<n$ which
+is not smooth. There is a nonempty smooth centre $C\subset\operatorname{Sing}V$
+and an actual blowup $\pi:Y\to X$ along $C$. The actual current strict
+transform is the carrier of a compact irreducible analytic subvariety $V'$ of
+dimension $d$. The new boundary $[\pi^{-1}C]$ has simple normal crossings,
+and the freshly initialized marked ideal
+$(Y,Y,[\pi^{-1}C],\mathcal I_{V'},1)$ belongs to the actual domain of the
+canonical invariant.
+\end{theorem}
+\begin{proof}
+Apply Lemma~\ref{hir:fresh-current-centre-singular} to $V$. The centre has
+empty interior because it is contained in $V$ and $d<n$. Demailly's explicit
+blowup construction therefore supplies the manifold $Y$ and map $\pi$.
+Its exceptional image is contained in $C\subset\operatorname{Sing}V$.
+Choose a regular point of $V$, which exists for an irreducible analytic
+subvariety. It is outside that image, so $V$ is not contained in the
+exceptional image. The strict-transform irreducibility and dimension theorem
+then constructs $V'$ with the stated carrier and dimension. The strict
+transform is closed inside $\pi^{-1}V$, which is compact by properness of
+the actual blowup; hence $V'$ is compact.
+
+The centre is admissible for $(X,X,[],\mathcal I_V,1)$, so its actual marked
+transform is well formed and its boundary $[\pi^{-1}C]$ is SNC. The present
+subvariety $V'$ is analytic of dimension $d<n$, so its actual vanishing ideal
+is coherent and nonzero at every point. These properties, together with the
+SNC boundary transverse to the whole ambient manifold, construct the domain
+membership of the freshly initialized ideal. This statement constructs one
+honest geometric step and its continuation data; it does not assert a bound
+on repeated fresh initialization.
+\end{proof}
+
+\paragraph{The remaining literal producer.}
+None of the preceding results closes the obligation on centres contained in
+$|E_j|$. It is insufficient to identify the controlled cosupport with the
+strict transform. For example, the reduced curve ideal
+$(y^2-x^3,z)$ in $\mathbb C^3$, blown up at the origin, has controlled ideal
+$(x(y'^2-x),z')$ in the $x$-chart, whereas its strict transform has ideal
+$(y'^2-x,z')$. The controlled ideal has an additional exceptional branch
+$\{x=z'=0\}$, and extracting divisorial common factors does not remove it.
+This calculation illustrates the missing implication; it is not a claimed
+counterexample to the actual maximum centre.
+
+A dynamic-current-ideal route can apply the fresh-centre producer to each
+actual current analytic strict transform, with the actual accumulated
+boundary. To turn this into finite embedded resolution one must prove an
+invariant of these freshly initialized current ideals that strictly
+decreases under those steps, remains compatible with restriction and boundary
+history, and stops precisely at the smooth normal-crossings locus. The
+existing decrease theorem concerns controlled transforms of one initial
+marked ideal and does not prove this reinitialization statement.
+The second alternative, for smooth current $W_j$, further needs centres
+contained in $W_j\cap|E_j|$; initial marked-ideal principalization by itself
+can instead choose the whole smooth $W_j$. Both obligations remain explicit.

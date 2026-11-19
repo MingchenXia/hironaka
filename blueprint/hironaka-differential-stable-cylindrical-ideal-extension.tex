@@ -1,0 +1,108 @@
+\section{Differentially stable polynomial ideals and normal cylinders}
+
+All ideals in this chapter are the entire original polynomial ideals. Let
+$R$ be a commutative $\mathbb Q$-algebra. The only scalar cancellation used
+below is multiplication by the image of a nonzero rational inverse. No
+reducedness or domain hypothesis on $R$ is needed.
+
+\begin{lemma}[Every coefficient of a differential ideal remains in the ideal]
+\label{hir:differential-stable-polynomial-coefficients}
+\lean{Hironaka.HironakaDifferentialStableCylindricalIdeal.polynomial_C_coeff_mem_of_derivative_stable}
+\leanok
+Let $J\subseteq R[T]$ be an ideal such that $f'\in J$ for every $f\in J$.
+Then $C([T^m]f)\in J$ for every $f\in J$ and every $m\geq0$.
+\end{lemma}
+\begin{proof}
+We use strong induction on the degree bound $N=\deg f$, treating the zero
+polynomial as having natural degree zero. If $N=0$, then $f=C([T^0]f)$
+and all its positive coefficients vanish, giving the assertion.
+Suppose $N>0$. The natural degree of $f'$ is strictly less than $N$,
+including when $f'=0$. It belongs to $J$ by the stated closure hypothesis.
+Induction therefore gives $C([T^{m-1}]f')\in J$ for every $m>0$.
+The coefficient derivative formula identifies this polynomial with
+$C(m[T^m]f)$. Multiplying it by $C(1/m)$, with the rational inverse
+mapped to $R$, proves $C([T^m]f)\in J$ for every $m>0$.
+Every positive-degree term $C([T^m]f)T^m$ thus lies in $J$.
+The finite sum of all these terms also lies in $J$; subtracting it from
+$f\in J$ leaves exactly $C([T^0]f)$. This proves the zero coefficient
+as well and completes the induction.
+\end{proof}
+
+\begin{theorem}[One-variable differential ideals are coefficient extensions]
+\label{hir:differential-stable-polynomial-extension}
+\uses{hir:differential-stable-polynomial-coefficients}
+\lean{Hironaka.HironakaDifferentialStableCylindricalIdeal.polynomial_eq_map_C_comap_of_derivative_stable}
+\leanok
+Under the preceding hypotheses, write $C:R\longrightarrow R[T]$ for the
+constant-polynomial embedding. Then $J=C_*(C^{-1}J)$.
+\end{theorem}
+\begin{proof}
+The extension of the contraction is contained in $J$, since each of its
+generators $C(a)$ belongs to $J$ and $J$ is an ideal. Conversely, let
+$f\in J$. The preceding lemma shows that every coefficient of $f$ lies
+in $C^{-1}J$. Hence each term $C([T^m]f)T^m$ belongs to its extension.
+Their finite sum is $f$, proving the reverse inclusion.
+\end{proof}
+
+\begin{theorem}[Differential stability in all finite polynomial variables]
+\label{hir:differential-stable-finite-polynomial-extension}
+\uses{hir:differential-stable-polynomial-extension}
+\lean{Hironaka.HironakaDifferentialStableCylindricalIdeal.mvPolynomial_eq_map_C_comap_of_pderiv_stable}
+\leanok
+Let $J\subseteq R[T_0,\ldots,T_{d-1}]$ satisfy
+$\partial_i f\in J$ for every $i<d$ and every $f\in J$.
+For the actual constant-polynomial embedding $C:R\longrightarrow R[T]$,
+one has $J=C_*(C^{-1}J)$.
+\end{theorem}
+\begin{proof}
+Induct on $d$. With no variables every polynomial is its constant, and
+the assertion follows directly. For $d+1$ variables, single out $T_0$
+and regard the same polynomial ring as $S[T_0]$, where
+$S=R[T_1,\ldots,T_d]$. The coordinate algebra isomorphism sends
+$\partial_0$ to ordinary differentiation in $T_0$: both operations agree
+on constants and every variable and obey the additive and product rules.
+The preceding theorem therefore identifies $J$ with the extension of its
+contraction $J_1$ to $S$.
+For every $g\in J_1$ and each remaining variable $T_i$, its constant image
+belongs to $J$. Differentiating that image gives the constant image of
+$\partial_i g$, which belongs to $J$ by the original hypothesis.
+Thus $J_1$ is stable under all its $d$ partial derivatives. Induction
+identifies $J_1$ with the extension of its contraction to $R$.
+Extensions compose, and the two successive contractions equal contraction
+along the composite constant embedding. This yields the claimed equality
+for the same original $J$.
+\end{proof}
+
+\begin{theorem}[Tangent differential stability gives a genuine normal cylinder]
+\label{hir:differential-stable-normal-polynomial-cylinder}
+\uses{hir:differential-stable-finite-polynomial-extension}
+\lean{Hironaka.HironakaDifferentialStableCylindricalIdeal.ideal_eq_normal_extension_of_tangent_pderiv_stable}
+\leanok
+Let $J\subseteq\mathbb C[X_0,\ldots,X_{d+t-1}]$. Assume that for every
+$i<d$ and \emph{every} $f\in J$, one has $\partial_i f\in J$.
+Let $\iota:\mathbb C[Z_0,\ldots,Z_{t-1}]\longrightarrow
+\mathbb C[X_0,\ldots,X_{d+t-1}]$ be the genuine embedding
+$Z_j\mapsto X_{d+j}$. Then
+\[
+ J=\iota_*(\iota^{-1}J).
+\]
+\end{theorem}
+\begin{proof}
+The coordinate bijection separating the first $d$ and last $t$ variables
+identifies the same original polynomial ring with
+$\mathbb C[Z_0,\ldots,Z_{t-1}][T_0,\ldots,T_{d-1}]$.
+It sends the actual normal embedding $\iota$ to the constant-coefficient
+embedding and sends every stated tangent derivative to the corresponding
+partial derivative in the $T$ variables. These identities hold on
+coefficients and variables, hence on sums and products and therefore on
+every polynomial. The image of $J$ consequently satisfies the preceding
+theorem over the coefficient $\mathbb Q$-algebra $\mathbb C[Z]$.
+Transport its extension--contraction equality back through this genuine
+coordinate isomorphism. The resulting contraction and extension are
+literally those of $J$ along $Z_j\mapsto X_{d+j}$, proving the formula.
+This includes $d=0$ and $t=0$.
+\end{proof}
+
+The criterion requires differential stability of the entire ideal. It does
+not infer that hypothesis from a chosen family of generators, and it makes
+no assertion of analytic normal flatness or of reduced-basis centre powers.

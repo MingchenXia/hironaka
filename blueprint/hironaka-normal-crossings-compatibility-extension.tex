@@ -1,0 +1,159 @@
+\section{Actual normal crossings branch compatibility}
+
+The local normal crossings branch construction produces genuine SNC
+lists on actual open coordinate domains.  The following identities and
+actual-sequence constructions remove dependence on branch labels and
+make actual divisor transforms commute with open restriction.  These
+are compatibility ingredients; comparison and descent of canonical
+centres under changes of coordinates remain separate obligations.
+
+\begin{lemma}[Intrinsic ideals ignore branch labels]
+\label{hir:nc-intrinsic-ideal-member-independence}
+\uses{hir:monomial-part-ambient}
+\lean{Hironaka.HironakaNormalCrossingsCompatibility.monomialPart_eq_of_mem_iff,Hironaka.HironakaNormalCrossingsCompatibility.nonmonomialPart_eq_of_mem_iff}
+\leanok
+If two finite boundary lists $E,F$ have the same members, the actual
+monomial and nonmonomial ideals of every ideal $I$ agree for these lists.
+\end{lemma}
+\begin{proof}
+The monomial ideal consists of holomorphic germs $g$ such that, for
+every member $H$ through the given point $y$, the germ $g$ lies in
+$I_H^{e_H(I,y)}$.  This condition depends only on membership in the
+family of sets, not on the index or ordering.  For each index in $F$,
+its member occurs at some index in $E$, so the latter condition implies
+the former with the identical carrier, exponent and power ideal.
+The reverse implication uses the reverse membership equality.
+This proves equality of every complete ideal stalk.  The nonmonomial
+ideal is the actual colon $(I:\mathcal M_E(I))$, so this proved equality
+of monomial ideals proves equality of their nonmonomial ideals as well.
+The argument requires no SNC, coherence or nonvanishing premise.
+\end{proof}
+
+\begin{theorem}[Relabelling a genuine admissible blowup sequence]
+\label{hir:nc-actual-sequence-permutation}
+\uses{hir:admissible-sequence}
+\lean{Hironaka.HironakaNormalCrossingsCompatibility.exists_permuted_admissible_sequence}
+\leanok
+Let $f:Y\to X$ be an actual finite admissible blowup sequence with
+initial list $E_0$, accumulated final list $E$, and centres over $Z$.
+For every permutation $F_0$ of $E_0$, there is an actual final list
+$F$ which is a permutation of $E$, such that the same actual $f$
+is an admissible blowup sequence from $F_0$, with centres over $Z$
+and final list $F$.
+\end{theorem}
+\begin{proof}
+Induct on the actual finite blowup sequence.  The empty sequence is
+the identity; take $F=F_0$.  For the last genuine blowup
+$\pi:Y\to Y_1$ with actual centre $C$, induction relabels the
+preceding sequence with final list $F_1$, a permutation of $E_1$.
+For each index in $F_1$, choose the identical actual member
+in $E_1$ and assign its adapted coordinate set.  Keep the actual
+centre coordinates and the actual holomorphic chart unchanged.
+Every adapted equation and singleton-coordinate condition is then
+the identical old condition, proving normal crossings of the same
+centre $C$ with $F_1$.  Keep the same actual blowup, preceding projection, and
+containment of the centre over $Z$.  Their actual step constructor
+gives a genuine admissible sequence with final list
+\[
+ F=\bigl(\overline{\pi^{-1}(H\setminus C)}\bigr)_{H\in F_1}
+       \mathbin{+\!+}[\pi^{-1}C].
+\]
+Applying the strict-transform set function to the permutation of
+$E_1,F_1$ and adjoining the identical exceptional member proves
+that this actual $F$ is a permutation of the actual final $E$.
+The projection and every geometric centre and blowup were preserved
+in the construction.  No comparison of independently selected
+canonical centres is asserted.
+\end{proof}
+
+\begin{lemma}[Actual finite admissible sequences preserve SNC]
+\label{hir:nc-actual-sequence-preserves-snc}
+\uses{hir:admissible-sequence}
+\lean{Hironaka.HironakaNormalCrossingsCompatibility.isSNCDivisor_of_admissible_sequence}
+\leanok
+An actual finite admissible blowup sequence starting at an SNC list
+has an SNC accumulated final list.
+\end{lemma}
+\begin{proof}
+Induct on the actual sequence.  For the identity the accumulated
+list is the given initial SNC list.  At a genuine last blowup,
+induction makes the preceding accumulated list SNC, and actual
+admissibility makes its centre have normal crossings with that list.
+The single-blowup SNC coordinate theorem therefore proves SNC
+for the list of actual strict transforms followed by the actual
+exceptional preimage.  This is exactly the accumulated list in
+the finite-sequence construction, proving the assertion.
+\end{proof}
+
+\begin{theorem}[Actual divisor blowup transforms commute with open restriction]
+\label{hir:nc-actual-divisor-blowup-open-square}
+\uses{hir:actual-divisor-open-germ-exponent-dictionary,hir:base-change-open}
+\lean{Hironaka.HironakaNormalCrossingsCompatibility.totalTransform_restrictDivisor}
+\leanok
+For an actual blowup $\pi:Y\to X$ with genuine smooth centre, an
+actual effective divisor $D$ on $X$, and an open subset $U\subset X$,
+let $V=\pi^{-1}U$ and $\pi_U:V\to U$ be the actual restricted blowup.
+There is an equality of genuine effective divisors
+\[
+ \pi_U^*(D|_U)=(\pi^*D)|_V.
+\]
+\end{theorem}
+\begin{proof}
+The original smooth-centre blowup and its actual open restriction are
+genuine blowups, hence their exceptional loci have empty interior.
+Their actual pullback ideals are therefore invertible and give the
+stated effective divisors.  Write the actual inclusions as
+$\iota_U:U\to X$ and $\iota_V:V\to Y$.  Their maps satisfy the actual
+commuting square
+$\iota_U\circ\pi_U=\pi\circ\iota_V$.
+Pullback composition for the coherent ideal $I_D$ gives
+\[
+ \pi_U^*(\iota_U^*I_D)
+  =(\iota_U\circ\pi_U)^*I_D
+  =(\pi\circ\iota_V)^*I_D
+  =\iota_V^*(\pi^*I_D).
+\]
+These are the complete actual divisor ideals, not just equations of
+supports or chosen generators.  An effective divisor is determined
+by its invertible ideal, so the ideal equality proves the asserted
+actual divisor equality.
+\end{proof}
+
+\begin{theorem}[Actual transformed divisors retain the full branch dictionary]
+\label{hir:nc-actual-sequence-transformed-divisor-dictionary}
+\uses{hir:nc-actual-sequence-preserves-snc,hir:locally-finite-original-component-product}
+\lean{Hironaka.HironakaNormalCrossingsCompatibility.exists_transformed_component_dictionary}
+\leanok
+Let $D$ be an actual effective divisor supported on the initial SNC
+list of a genuine finite admissible sequence $f:Y\to X$.  Its actual
+total transform $D'$ has ideal $f^*I_D$, and its genuine connected
+final-boundary component family is locally finite.  One actual
+coefficient function on these carriers equals the exponent of $D'$
+at every point of each carrier.  Near every point of $Y$ there is a
+finite positive list of distinct genuine carriers whose ideal-power
+product agrees with the complete ideal stalk of $D'$ at every point
+of that neighbourhood.
+\end{theorem}
+\begin{proof}
+Construct $D'$ by induction on the actual finite blowup sequence.
+For the identity use $D$; coherence gives the actual identity pullback
+equality.  For a genuine last blowup $\pi$, pull back the preceding
+actual effective divisor.  Its exceptional locus has empty interior,
+so this pullback ideal is invertible.  Coherent pullback composition
+identifies its ideal with the pullback of the original $I_D$ under
+the actual composite projection.  Its support is the preimage of the
+preceding actual support.  At every actual step, a preimage point on an old boundary
+member either lies over the centre, hence belongs to the actual
+exceptional preimage, or belongs to the preimage of that member
+minus the centre, hence to its actual strict transform.  Induction
+therefore puts $f^{-1}\bigcup E_0$ inside the union of the final
+accumulated boundary.  This proves the required support containment
+of $D'$.  The preceding SNC induction supplies a genuine SNC final
+list.  Apply the genuine SNC locally-finite divisor theorem to this
+actual $D'$ and actual final list.  Its produced coefficients and
+positive finite lists give precisely all asserted original
+$D'$-exponent and complete-stalk identities.  This assumes an actual
+geometric sequence, but supplies no factorization or coefficient
+certificate and makes no claim that a canonical sequence has yet
+been chosen for a general normal crossings carrier.
+\end{proof}

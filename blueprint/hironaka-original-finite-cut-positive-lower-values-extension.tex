@@ -1,0 +1,86 @@
+\section{Genuine positive-level fixed lower values from finite original cuts}
+
+Throughout the ambient dimension is positive. All cut histories below are the
+literal original admissible Step One cut histories; no canonicality or lower
+TEST is supplied.
+
+\begin{theorem}[Actual lower geometry at a specified current level]
+\label{hir:original-finite-cut-specified-level-lower-data}
+\uses{hir:original-finite-level-cut-current-lower-tests}
+\lean{Hironaka.HironakaOriginalFiniteCutPositiveLowerValues.finite_cut_lower_data_at_level}
+\leanok
+Let $J$ lie in ORIGINAL DOMAIN$(2)$ and have maximal order. Let $T$ be an
+actual finite admissible level-cut history. If $z$ is in its actual current
+cosupport, is nonspecial, and has level $s$, form its actual run for regime
+$s$, head $H$, tail $S$, mask $W$ and original lower marked reference $K$.
+Then $K$ lies in DOMAIN$(1)$, $S|W$ is a genuine TEST, the actual point $z$
+lies in its current cosupport, and on the WHOLE inverse mask that cosupport
+is exactly the original current cosupport at level $s$.
+\end{theorem}
+\begin{proof}
+Apply the genuine finite-level-cut lower-data producer to the ORIGINAL
+DOMAIN$(2)$ input. It constructs the lower DOMAIN, TEST, current DOMAIN,
+actual endpoint and whole cosupport dictionary at the independently computed
+level of $z$. Regard this entire assertion, including its real mask, lower
+reference and dependent restricted history, as one proposition indexed by a
+natural number. Transport that WHOLE proposition along the actual equality
+between the level of $z$ and $s$. This changes no geometric input and supplies
+no lower TEST or point certificate.
+\end{proof}
+
+\begin{theorem}[Positive-level original Step One value uses one fixed actual lower reference]
+\label{hir:original-finite-cut-positive-fixed-lower-value}
+\uses{hir:original-finite-cut-specified-level-lower-data,hir:original-positive-curve-lower-value-rebase,hir:original-finite-stepone-cut-actual-middle-history,hir:step-one-compare}
+\lean{Hironaka.HironakaOriginalFiniteCutPositiveLowerValues.finite_cut_positive_stepone_eq_fixed_lower}
+\leanok
+Let $J$ lie in ORIGINAL DOMAIN$(2)$ and have maximal order. Fix $d\ge0$
+and an actual finite original Step One cut history for the lower invariant
+of depth $d+1$. Let $z$ be a nonspecial actual current-cosupport point of
+positive level $s+1$. Form its actual regime-run head $H$, tail $S$, mask
+$W$ and original lower reference $K$. For EVERY actual current-cosupport
+point $p$ of $K$ along $S|W$, the UNCHANGED ORIGINAL Step One value at the
+underlying point $p$ is
+\[
+ \bigl(s+1,\,\operatorname{FULL}_{d+1}(K,S|W,p)\bigr).
+\]
+The lower reference and history are those computed at $z$; no CAN, lower
+TEST, membership, mask-avoidance or numerical comparison is an input.
+\end{theorem}
+\begin{proof}
+The actual cut history supplies an upper TEST and a literal level-cut
+history. The true coefficient/homogenization equivalence supplies the SAME
+original $\bar J$ TEST and whole cosupport dictionary. Apply the first
+producer at $z$ before comparing any values. Its whole current-cosupport
+dictionary puts the underlying $p$ in the original current cosupport with
+actual level $s+1$.
+
+The genuine mask/regime lemma shows that $p$ is nonspecial and its actual
+regime run covers the entire tail $S$. The actual run-length bound makes
+that tail's length equal to the run at $z$, so the run at $p$ starts at or
+before the run at $z$. Apply the first producer again at $p$ to obtain its
+independently computed lower DOMAIN, TEST, actual mask point and current
+cosupport. The actual head-regime identity gives its head level $s+1$.
+
+Enlarge only the real dimension bound from $2$ to $d+2$, retaining the SAME
+well-formed marked record, positive mark and nonzero-along-carrier proof.
+The literal cut history now satisfies the hypotheses of the genuine middle
+history producer. It constructs a real middle tower $B$ between the two
+actual run heads, proves BOTH exact concatenation identities, and proves
+that EVERY centre of $B$ avoids the earlier actual mask. No canonical lower
+data is used. The later head levels at $p$ and $z$ agree: mask membership
+gives the upper bound and true level nonincrease along the tail gives the
+lower bound.
+
+Apply the genuine positive curve lower-value comparison to this actual
+middle history. Its upper TEST follows from the exact concatenation
+identity; both lower DOMAINs, actual TESTs and endpoint cosupports were
+constructed above; the actual middle producer supplies all-centre avoidance.
+The exact two tower identities identify its earlier split with the split
+computed at $p$ and its later split with the fixed split computed at $z$.
+Consequently it identifies the ORIGINAL finite masked lower value at $p$
+with the ORIGINAL FULL value of the fixed reference $K$. Finally unfold the
+unchanged nonspecial Step One branch at $p$ and insert its actual level
+$s+1$. Every true empty position remains in the actual histories. This
+closes only the positive-level branch; the zero-level contact-direction
+comparison and the general arbitrary-history driver remain OPEN.
+\end{proof}

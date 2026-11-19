@@ -1,0 +1,183 @@
+% All complete mathematical proofs precede Lean implementation.
+\section{Entire intrinsic coefficient ideals in the genuine contact parameters}
+
+\begin{lemma}[Actual parameter-open maps are holomorphic into the original ambient manifold]
+\label{hir:submersion-contact-param-coeff-actual-open-maps}
+\uses{hir:submersion-contact-parameters-internal-joint-charts,ana:restricted-calculus}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.parameterMapOn,Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.parameterMapOn_contMDiff}
+\leanok
+Restrict each genuine inverse-coordinate parameter map constructed from the
+original contact to its actual parameter open. This actual map is holomorphic
+at every point, in the genuine parameter dimension. The original and
+parameter carrier universes may
+differ; no lift of the original carrier or supplied smoothness certificate
+is required.
+\end{lemma}
+\begin{proof}
+The previous actual parameter construction proves holomorphicity of each
+ambient-valued inverse-coordinate map on its entire actual open. At a true
+point of that open, openness makes its domain a neighbourhood; that whole
+holomorphic-on statement therefore gives actual holomorphicity at its ambient
+model point. Compose with the genuine smooth open inclusion to obtain the
+actual everywhere holomorphic map from the open manifold. Actual source
+membership is automatic for a point of the subtype.  No nonempty open is assumed: all maps and statements remain
+literal on an empty subtype.
+\end{proof}
+
+\begin{lemma}[Entire true contact restriction disappears under its actual parameter pullback]
+\label{hir:submersion-contact-param-coeff-whole-restriction}
+\uses{ana:restricted-calculus,ana:ideal-sheaves}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.whole_parameter_pullback_restrictOn}
+\leanok
+For ANY original coherent ideal $I$, actual holomorphic map $\sigma$ and
+primitive actual image containment $\sigma(Z)\subset C$, internally prove the
+ENTIRE ideal equality
+\[\sigma^*(\operatorname{restrictOn}_C I)=\sigma^*I.\]
+No closedness, finite generation frame, quotient ideal or desired equality is
+supplied. This applies to the actual contact parameters produced above.
+\end{lemma}
+\begin{proof}
+An actual pulled-back restricted-ideal generator is a true original function
+$a$ with an actual finite restricted span relation near $\sigma(z)$: it agrees
+on $C$ with a finite sum of true members $s_i$ of the entire original ideal,
+with genuine holomorphic coefficient functions $b_i$. Continuity of the
+actual holomorphic map pulls back the neighbourhood of that relation. The
+primitive image containment places every nearby parameter point in $C$, so
+the actual pulled-back function is the entire germ sum
+$\sum_i(b_i\circ\sigma)(s_i\circ\sigma)$. Original coherence internally
+supplies holomorphicity of every $s_i$; genuine holomorphic composition gives
+holomorphicity of all coefficient and generator compositions. Each actual
+$s_i\circ\sigma$ belongs to the true pullback of $I$ by its actual one-term
+span. Thus the finite relation gives membership in the whole pullback ideal.
+Transitivity of true germ spans handles every outer pullback combination.
+For the converse, original coherence gives the actual inclusion of $I$ into
+its entire contact restriction; monotonicity of the literal pullback span
+then gives the reverse inclusion. Stalk/function extensionality proves the
+whole ideal equality at every point, including empty spaces and zero
+parameter dimension. No ambient closed contact assertion is used.
+\end{proof}
+
+\begin{lemma}[Entire coherent pullback composition uses the actual carrier universes]
+\label{hir:submersion-contact-param-coeff-cross-universe-composition}
+\uses{ana:ideal-sheaves,hir:submersion-choice-image-trace-whole-pullback}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.coherent_parameter_pullback_comp,Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.whole_parameter_markedPullback_comp}
+\leanok
+For actual holomorphic maps of ANY ambient dimensions and ANY three carrier
+universes, the entire coherent original ideal pullback along the composite
+equals the actual iterated pullback. The ENTIRE marked record composition
+retains the exact carrier, every literal old boundary member and mark.
+\end{lemma}
+\begin{proof}
+For a genuine original ideal member $a$ at the composite image, original
+coherence gives holomorphicity there. Its true first composition belongs to
+the first actual pullback ideal by a genuine one-term span, with coefficient
+one. Its further composition is therefore an actual generator of the
+iterated pullback. Conversely, an actual member of the iterated pullback has
+a finite span of first-pullback members composed with the second map. Each
+first-pullback member has its actual finite original span. Composing that
+finite span along the true holomorphic second map, then using actual span
+transitivity and the literal equality of function compositions, expresses
+the entire member in the composite pullback. Stalk/function extensionality
+gives whole ideal equality. No argument identifies the three type universes.
+For marked records the carrier is literal iterated preimage, the boundary is
+the same full original list mapped by genuine preimage composition, the mark
+is unchanged and the ideal is the just-proved entire equality. Extensionality
+of all four fields gives the true complete marked identity. This supplies the
+actual different-universe parameter application of the existing whole
+composition mathematics, rather than assuming a caller composite ideal.
+\end{proof}
+
+\begin{theorem}[The actual intrinsic contact coefficient model has its entire original trace ideal]
+\label{hir:submersion-contact-param-coeff-intrinsic-whole-model}
+\uses{hir:submersion-contact-param-coeff-actual-open-maps,hir:submersion-contact-param-coeff-whole-restriction,hir:submersion-contact-restriction-whole-reduced-record,mc:derivative-along-coherent,mc:homogenized-along-basic,ana:ideal-sheaves}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.intrinsicCoefficient,Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.whole_intrinsic_parameter_record}
+\leanok
+For the true original coefficient datum and actual contact parameter map,
+construct the genuine intrinsic marked model with full parameter carrier,
+every literal coefficient-boundary trace, entire original coefficient ideal
+pulled back along the actual parameter map, and the exact coefficient mark.
+Internally prove it equals the whole actual pullback of the contact-restricted
+coefficient model, and that its ideal is coherent. Empty or repeated boundary
+members are retained; boundary transversality is not asserted.
+\end{theorem}
+\begin{proof}
+Define its carrier to be the entire actual parameter open, its boundary to be
+the literal original coefficient-boundary list mapped by actual parameter
+preimage, its ideal to be the whole pullback of the original coefficient
+ideal and its mark to be the original coefficient mark. Actual contact
+membership proves that preimage of the contact carrier is the entire
+parameter carrier. The contact coefficient record already has the exact
+same boundary and mark. Node two gives equality of its entire pulled-back
+restricted ideal with the true original coefficient trace ideal. Thus all
+four fields are internally equal. Original coherence and actual smooth
+carrier geometry give coherence of the ENTIRE original relative coefficient
+ideal, including the zero-mark empty finite sum case. Its pullback is coherent
+by the genuine finite local holomorphic-generator pullback theorem. The
+actual intrinsic carrier is therefore the full regular parameter manifold;
+no original boundary member is filtered, merged or relabelled. This does not
+infer SNC for its boundary or canonicality of this new model.
+\end{proof}
+
+\begin{theorem}[Original-only contact parameters produce the true entire smaller-dimensional coefficient square]
+\label{hir:submersion-contact-param-coeff-internal-whole-square}
+\uses{hir:submersion-contact-parameters-internal-joint-charts,hir:submersion-contact-param-coeff-intrinsic-whole-model,hir:submersion-contact-param-coeff-cross-universe-composition,hir:submersion-relative-differential-whole-homogenized-coefficient,hir:submersion-relative-regular-geometry,hir:smooth-relative-whole-cosupport,hir:smooth-relative-whole-ideal-thresholds,hir:smooth-relative-extended-order}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.exists_actual_intrinsic_contact_coefficient_square}
+\leanok
+ONLY original coherent marked datum, closed smooth carrier, genuine whole
+original contact direction, actual point over that contact and genuine
+arbitrary-dimensional submersion internally produce the actual target and
+source intrinsic coefficient models and their genuine smaller-dimensional
+parameter submersion. The ENTIRE source intrinsic marked model equals the
+actual pullback of the entire target intrinsic model. Every relative order
+threshold, the order including infinity, and whole cosupport are pulled back
+exactly. No caller chart, square, ideal/model/coherence/submersion/value or
+canonical certificate is supplied.
+\end{theorem}
+\begin{proof}
+The true original contact parameter construction internally supplies positive
+$k$, $m=n+t$, the actual opens and parameter maps, both ENTIRE contact
+parameterizations, their actual projection square and the genuine smaller
+submersion with fibre $\mathbf C^t$. Node four internally constructs the two
+intrinsic coefficient models from the SAME original marked datum and its
+actual original submersion pullback. Genuine relative derivative/coefficient
+pullback gives equality of the ENTIRE source ambient coefficient marked
+record with the actual original pullback record, retaining all four fields.
+Pulling it along the actual source parameter map and using node three gives
+its entire record as the pullback along the composite original map. The
+internally produced whole parameter square identifies that composite with
+the actual target parameter map composed with the actual smaller projection.
+Node three on that composite therefore gives the desired ENTIRE source
+intrinsic record as the true smaller-dimensional pullback of the target
+intrinsic record. All target/source contact restrictions have already been
+identified by node two, not assumed as quotient certificates. Node four
+supplies actual target coherence. The genuine relative order and cosupport
+submersion producers now apply to this actual smaller submersion and entire
+intrinsic target ideal; the full carrier is genuine and the entire source
+record is the produced equality. They give every threshold, order including
+infinity and whole cosupport preimage. No boundary SNC or higher invariant
+equality follows from these coefficient records alone.
+\end{proof}
+
+\begin{theorem}[Original marked maximal-order data internally select the whole intrinsic coefficient square]
+\label{hir:submersion-contact-param-coeff-original-only-consumer}
+\uses{hir:submersion-tangent-contact-original-joint-existence,hir:submersion-tangent-contact-closed-open-carriers,hir:smooth-relative-whole-cosupport,hir:submersion-contact-param-coeff-internal-whole-square}
+\lean{Hironaka.HironakaSmoothSubmersionContactParameterCoefficientIdeals.exists_original_only_intrinsic_contact_coefficient_square}
+\leanok
+ONLY original coherent marked datum, actual closed smooth original carrier,
+positive mark, genuine submersion, actual source cosupport point and maximal
+original image order internally supply the preceding intrinsic coefficient
+models and every entire dictionary. No contact or reduced model is input.
+\end{theorem}
+\begin{proof}
+The true original maximal-order producer chooses the actual original open
+and whole contact function and both actual tangent directions. The genuine
+whole cosupport pullback places the image in actual original cosupport.
+Original contact inclusion and actual open membership put that image on the
+true contact. Apply the preceding original-direction producer. It constructs
+all dimensions, actual opens/maps, intrinsic marked models, whole trace
+ideals, coherence, smaller submersion, complete marked square and genuine
+relative order/cosupport conclusions internally. Independent contact choice
+comparison, boundary SNC, complete higher invariant functoriality, canonical
+driver identification, general noncompact termination and whole G3/G8 remain
+OPEN. Formal registration and native publication await root recovery.
+\end{proof}

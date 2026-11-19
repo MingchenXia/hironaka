@@ -1,0 +1,252 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaSharpActualDynamicIncidentHistory
+import Hironaka.Resolution.HironakaSharpActualFamilyDefectOpenNaturality
+import Hironaka.Resolution.HironakaOriginalEmptyHeadPrefix
+import Hironaka.Resolution.HironakaSharpOriginalFirstDefectOpenNaturality
+
+/-!
+# Actual higher-dimensional dynamic prefixes preserve original NC-good
+
+The whole FIRST defect through a genuine all-empty history is identified with
+the independently defined original FIRST defect. Restriction and induction
+then derive original-good avoidance; no avoidance hypothesis is supplied.
+Full sharp invariant decrease and higher-dimensional termination remain open.
+-/
+set_option autoImplicit false
+open Set Filter TopologicalSpace Classical
+open scoped Topology Manifold ContDiff
+universe u
+namespace Hironaka.HironakaSharpActualNormalCrossingsGoodPreservation
+noncomputable section
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupTowers
+  BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal HomogenizedGlueingTower
+  HironakaSharpActualDynamicIncidentHistory HironakaSharpActualFamilyDefectOpenNaturality
+  HironakaSharpActualChronologicalDistinctDefect HironakaSharpActualFiniteChronologicalHistory
+  HironakaSharpActualFiniteMemberProduct HironakaSharpActualOriginalControlledHistory
+  HironakaSharpActualOriginalDynamicStep HironakaSharpActualDynamicDistinctCentre
+  HironakaSharpOriginalProductTraceOrder HironakaSharpOriginalMemberProductDomain
+  HironakaSharpOriginalMemberProduct HironakaSharpOriginalMultiBoundaryBadLocus
+  HironakaSharpOriginalRestrictedDistinctDefectCentre HironakaSharpOriginalDistinctDefectPhase
+  HironakaSharpOriginalFirstDefectOpenNaturality HironakaSharpActualCompositeTotalResidual
+  HironakaCoherentTransformExtension NormalCrossings NormalCrossingsInvariance
+  RelativePrincipalizationSpan RestrictedIdealExtension MonomialPartAlong MonomialPartEtale
+  IdealWeightPowers DivisorExponentAlong NonmonomialOrderLocal CompanionRebase
+  ResolutionInvariantExt RestrictEmptyTower HironakaAdmissibleSequence HironakaAdmissibleCalculus
+variable {n m : ℕ} {X Y : CMfd.{u} n}
+
+private theorem nonmonomial_replicate_empty (N : Set X) (I : GermIdeal n X) (k : ℕ) :
+    nonmonomialPartAlong n N I (List.replicate k ∅)=restrictOn n N I := by
+  induction k with
+  | zero => exact nonmonomialPartAlong_nil_eq_restrictOn N I
+  | succ k ih =>
+    rw [show List.replicate (k+1) (∅ : Set X)=List.replicate k ∅ ++ [∅] by
+      rw [List.replicate_add,List.replicate_one],nonmonomialPartAlong_append_empty]
+    exact ih
+
+private theorem empty_member_formula (hn : 0<n) {W : Set X} {E : List (Set X)}
+    (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) (T : BlowupTower X Y) (he : IsEmptyTower T)
+    (i : Fin E.length) :
+    (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal=
+      restrictOn n (T.proj ⁻¹' W) (GermIdeal.pullback T.proj (vanishingIdeal (n := n) (E.get i))) := by
+  let M := originalRelativeMemberMarked W (E.get i)
+  have ht := isGeoTestTower_of_isEmptyTower (geometricTemplate W []) T he
+  have h := original_member_composite_total_residual_eq hn hW hE hdense i T ht
+  have hN : (geoTransformAlong M T).N=T.proj ⁻¹' W := by
+    rw [N_geoTransformAlong]
+    exact ContactEmptyPrefix.strictAlong_of_isEmptyTower hW.1 T he
+  have hB : (geoTransformAlong M T).E=List.replicate T.length ∅ := by
+    simpa only [M,originalRelativeMemberMarked,List.map_nil,List.nil_append] using
+      HironakaOriginalBoundaryCanonicalPrincipalization.boundary_of_all_empty_tower M
+        (fun H hH => False.elim (List.not_mem_nil hH)) T he
+  change nonmonomialPartAlong n (geoTransformAlong M T).N
+    (GermIdeal.pullback T.proj (vanishingIdeal (n := n) (E.get i))) (geoTransformAlong M T).E=_ at h
+  rw [hN,hB,nonmonomial_replicate_empty] at h
+  exact h.symm
+
+private theorem count_of_inverse_germ_dictionary
+    (β : Y ≃ₘ⟮𝓘(ℂ,ComplexModel n),𝓘(ℂ,ComplexModel n)⟯ X)
+    (F : Fin m → GermIdeal n X) (G : Fin m → GermIdeal n Y) (y : Y)
+    (hm : ∀ i g,(G i).mem y g ↔ (F i).mem (β y) (g ∘ β.symm)) :
+    actualDistinctProperCount G y=actualDistinctProperCount F (β y) := by
+  have hRel : ∀ i j,(actualIdealGermSetoid F (β y)).r i j ↔
+      (actualIdealGermSetoid G y).r i j := by
+    intro i j
+    constructor
+    · intro h g
+      exact (hm i g).trans ((h (g ∘ β.symm)).trans (hm j g).symm)
+    · intro h g
+      have hh := (hm i (g ∘ β)).symm.trans ((h (g ∘ β)).trans (hm j (g ∘ β)))
+      simpa only [Function.comp_def,β.apply_symm_apply] using hh
+  let eQ := Quotient.congr (Equiv.refl (Fin m)) hRel
+  have hProper : actualProperPositions G y=actualProperPositions F (β y) := by
+    ext i
+    simp only [actualProperPositions,Finset.mem_filter,Finset.mem_univ,true_and]
+    exact not_congr (hm i 1)
+  have hmk : Quotient.mk (actualIdealGermSetoid G y)=eQ ∘ Quotient.mk (actualIdealGermSetoid F (β y)) := by
+    funext i
+    exact (Quotient.congr_mk (Equiv.refl (Fin m)) hRel i).symm
+  change ((actualProperPositions G y).image (Quotient.mk (actualIdealGermSetoid G y))).card=_
+  rw [hProper,hmk,←Finset.image_image,Finset.card_image_of_injective _ eQ.injective]
+  rfl
+
+private theorem initial_restricted_count (W : Set X) (E : List (Set X)) (x : X) :
+    actualDistinctProperCount (fun i : Fin E.length => restrictOn n W (vanishingIdeal (n := n) (E.get i))) x=
+      distinctProperTraceGermCount (n := n) W E x := by
+  let F := fun i : Fin E.length => restrictOn n W (vanishingIdeal (n := n) (E.get i))
+  have hRel : ∀ i j,(actualIdealGermSetoid F x).r i j ↔ (traceGermSetoid (n := n) W E x).r i j := by
+    intro i j
+    constructor
+    · intro h g hg
+      exact ⟨fun hs => ((h g).mp ⟨hg,hs⟩).2,fun hs => ((h g).mpr ⟨hg,hs⟩).2⟩
+    · intro h g
+      exact ⟨fun hg => ⟨hg.1,(h g hg.1).mp hg.2⟩,fun hg => ⟨hg.1,(h g hg.1).mpr hg.2⟩⟩
+  let eQ := Quotient.congr (Equiv.refl (Fin E.length)) hRel
+  have hProper : properTraceMembers (n := n) W E x=actualProperPositions F x := by
+    ext i
+    simp only [properTraceMembers,actualProperPositions,Finset.mem_filter,Finset.mem_univ,true_and]
+    apply not_congr
+    exact ⟨fun h => ⟨holomorphicAt_const 1,h⟩,fun h => h.2⟩
+  have hmk : Quotient.mk (traceGermSetoid (n := n) W E x)=eQ ∘ Quotient.mk (actualIdealGermSetoid F x) := by
+    funext i
+    exact (Quotient.congr_mk (Equiv.refl (Fin E.length)) hRel i).symm
+  symm
+  change ((properTraceMembers (n := n) W E x).image (Quotient.mk (traceGermSetoid (n := n) W E x))).card=_
+  rw [hProper,hmk,←Finset.image_image,Finset.card_image_of_injective _ eQ.injective]
+  rfl
+
+/-- Genuine whole chronological FIRST through ANY actual all-empty history. -/
+theorem chronologicalDistinctDefect_of_isEmptyTower (hn : 0<n)
+    {W : Set X} {E : List (Set X)} (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) {d : ℕ} (hd : d+1≤n)
+    (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1))
+    (T : BlowupTower X Y) (he : IsEmptyTower T) :
+    chronologicalDistinctDefect W E T=T.proj ⁻¹' originalDistinctDefectPhase W E := by
+  obtain ⟨β,hβ⟩ := HironakaOriginalEmptyHeadPrefix.exists_empty_tower_projection T he
+  have hfun : (β : Y → X)=T.proj := funext hβ
+  let F := fun i : Fin E.length => restrictOn n W (vanishingIdeal (n := n) (E.get i))
+  let G := fun i : Fin E.length => (chronologicalMarked (originalRelativeMemberMarked W (E.get i)) T).ideal
+  have hcount : ∀ y,actualDistinctProperCount G y=distinctProperTraceGermCount (n := n) W E (T.proj y) := by
+    intro y
+    apply Eq.trans (count_of_inverse_germ_dictionary β F G y ?_)
+    · rw [initial_restricted_count,hfun]
+    · intro i g
+      rw [show G i=restrictOn n (T.proj ⁻¹' W) (GermIdeal.pullback T.proj (vanishingIdeal (n := n) (E.get i))) from
+        empty_member_formula hn hW hE hdense T he i,←hfun]
+      exact mem_restrictOn_pullback_iff_of_local
+        (VanishingIdealCoherent.isCoherent_vanishingIdeal (MonomialPart.isClosedSubmanifold_get hn hE i))
+        (isLocalInverseAt_diffeo β y)
+  have ht := isGeoTestTower_of_isEmptyTower (originalMemberProductMarked W E 1) T he
+  have hg := isGeoTestTower_of_isEmptyTower (geometricTemplate W []) T he
+  have hdom := originalMemberProductMarked_isInvDomain hn hW hE hd hr hdense (q := 1) le_rfl
+  have hord : ∀ y,ordinaryTraceOrder (geoTransformAlong (geometricTemplate W []) T).N
+      (chronologicalMemberProduct W E T) y=ordinaryTraceOrder W (originalMemberProduct (n := n) E) (T.proj y) := by
+    intro y
+    have hc := (original_product_nmOrd_eq_current hn hW hE hdense 1 T ht y).trans
+      (currentProductMarked_nmOrd_eq_ordinaryTraceOrder hn hW hE hdense T hg y)
+    exact hc.symm.trans (nmOrd_congr fun q => mem_ordGe_geoTransformAlong_of_isEmptyTower hn hdom q T he y)
+  have hN : (geoTransformAlong (geometricTemplate W []) T).N=T.proj ⁻¹' W := by
+    rw [N_geoTransformAlong]
+    exact ContactEmptyPrefix.strictAlong_of_isEmptyTower hW.1 T he
+  ext y
+  change (y ∈ (geoTransformAlong (geometricTemplate W []) T).N ∧ actualDistinctProperCount G y <
+      ordinaryTraceOrder (geoTransformAlong (geometricTemplate W []) T).N
+        (relativeIdealListProduct (geoTransformAlong (geometricTemplate W []) T).N (List.ofFn G)) y) ↔ _
+  rw [←chronological_product_eq_actual_family_product W E T,hcount,hord,hN]
+  rfl
+
+/-- Original-good avoidance is DERIVED from actual dynamic choices and the
+unchanged original positive TEST, retaining every empty chronological step. -/
+theorem dynamic_history_centresAvoid_originalGood (hn : 0<n)
+    {W : Set X} {E : List (Set X)} (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) {d : ℕ} (hd : d+1≤n)
+    (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1)) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+      IsGeoTestTower (originalMemberProductMarked W E 1) T → DynamicMaximumHistory hn W E T →
+      CentresAvoid (⟨originalGoodLocus (n := n) W E,isOpen_originalGoodLocus hW.1 hE.1⟩ : Opens X) T
+  | _,.refl,_,_ => trivial
+  | _,.step T C π hπ,hTest,hDyn => by
+    let U : Opens X := ⟨originalGoodLocus (n := n) W E,isOpen_originalGoodLocus hW.1 hE.1⟩
+    have hAvoid : CentresAvoid U T := dynamic_history_centresAvoid_originalGood hn hW hE hdense hd hr T hTest.1 hDyn.1
+    have hEmpty := (isEmptyTower_restrict_iff U T).mpr hAvoid
+    have hw : (originalMemberProductMarked W E 1).IsWellFormed :=
+      ⟨hW,isCoherent_originalMemberProduct hn hE,isSNCDivisor_nil,isTransverse_nil_of_isClosedSubmanifold hW⟩
+    have hGeom := actual_original_test_history_template _ hw T hTest.1
+    let WU := (Subtype.val : U → X) ⁻¹' W
+    let EU := E.map ((Subtype.val : U → X) ⁻¹' ·)
+    have hWU := BlowupRestrictOpen.isClosedSubmanifold_preimage_val hW U
+    have hEU := isSNCDivisor_map_preimage (pullsBackCoordinates_val U) continuous_subtype_val hE
+    have hrU : ∀ x ∈ WU,RegularAtDim (n := n) WU x (d+1) :=
+      fun x hx => AnalyticSubsetOpens.regularAtDim_preimage_val_iff.mpr (hr x.val hx)
+    have hdenseU : WU ⊆ closure (WU \ ⋃ H ∈ EU,H) := by
+      intro x hx
+      have hp : x ∈ (Subtype.val : U → X) ⁻¹' closure (W \ ⋃ H ∈ E,H) := hdense hx
+      erw [(U.isOpen.isOpenMap_subtype_val).preimage_closure_eq_closure_preimage
+        continuous_subtype_val (W \ ⋃ H ∈ E,H)] at hp
+      convert hp using 1
+      congr 1
+      ext z
+      simp [WU,EU]
+    have hNo : ∀ x ∈ chronologicalDistinctDefect W E T,x ∉ T.proj ⁻¹' (U : Set X) := by
+      intro x hx hxU
+      let z : openPreimage T U := ⟨x,hxU⟩
+      have hz : z ∈ chronologicalDistinctDefect (X := CMfd.of (n := n) U) WU EU (restrict U T) := by
+        rw [chronologicalDistinctDefect_open hn hW hE hdense T hGeom U]
+        exact hx
+      rw [chronologicalDistinctDefect_of_isEmptyTower hn hWU hEU hdenseU hd hrU (restrict U T) hEmpty] at hz
+      change (restrict U T).proj z ∈ originalDistinctDefectPhase (X := CMfd.of (n := n) U) WU EU at hz
+      rw [original_first_defect_open hn hW hE hdense U] at hz
+      exact Set.disjoint_left.mp (originalDistinctDefectPhase_disjoint_good hn hW hE hdense)
+        hz ((restrict U T).proj z).property
+    refine ⟨hAvoid,Set.disjoint_left.mpr ?_⟩
+    intro x hx hxU
+    rcases hDyn.2 with ⟨_hZ,hC⟩ | ⟨_hne,hC⟩
+    · rw [hC] at hx
+      exact hx
+    · rw [hC] at hx
+      exact hNo x hx.1 hxU
+
+/-- Every centre lies over the TRUE original sharp bad locus; this is an
+output of dynamic FIRST preservation, not an input support certificate. -/
+theorem dynamic_history_centresOver_originalSharpBad (hn : 0<n)
+    {W : Set X} {E : List (Set X)} (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) {d : ℕ} (hd : d+1≤n)
+    (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1))
+    (T : BlowupTower X Y) (hTest : IsGeoTestTower (originalMemberProductMarked W E 1) T)
+    (hDyn : DynamicMaximumHistory hn W E T) :
+    CentresOver (originalSharpBadLocus (n := n) W E) T := by
+  have h := centresOver_compl_of_centresAvoid
+    (⟨originalGoodLocus (n := n) W E,isOpen_originalGoodLocus hW.1 hE.1⟩ : Opens X) T
+      (dynamic_history_centresAvoid_originalGood hn hW hE hdense hd hr T hTest hDyn)
+  change CentresOver (originalGoodLocus (n := n) W E)ᶜ T at h
+  rwa [←originalSharpBadLocus_eq_compl_good] at h
+
+/-- ONLY original compact positive-dimensional smooth/SNC/density data choose
+the SAME actual finite prefix before deriving whole original-good isomorphism. -/
+theorem exists_original_dynamic_good_preserving_prefix (hn : 0<n)
+    {W : Set X} {E : List (Set X)} (hW : IsClosedSubmanifold n W) (hE : IsSNCDivisor n E)
+    (hdense : W ⊆ closure (W \ ⋃ H ∈ E,H)) (hK : IsCompact W) {d : ℕ} (hd : d+1≤n)
+    (hr : ∀ x ∈ W,RegularAtDim (n := n) W x (d+1)) (k : ℕ) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y),T.length=k ∧ DynamicMaximumHistory hn W E T ∧
+      IsGeoTestTower (originalMemberProductMarked W E 1) T ∧
+      IsGeoTestTower (geometricTemplate (univ : Set X) E) T ∧
+      IsSNCDivisor n (E.map (strictAlong T) ++ (geoTransformAlong (geometricTemplate W []) T).E) ∧
+      CentresOver (originalSharpBadLocus (n := n) W E) T ∧
+      IsAdmissibleBlowupSequence n X E (originalSharpBadLocus (n := n) W E) Y T.proj
+        (geoTransformAlong (geometricTemplate (univ : Set X) E) T).E ∧
+      IsProperMap T.proj ∧ IsIsomorphismOver n T.proj (originalGoodLocus (n := n) W E) := by
+  obtain ⟨Y,T,hLen,hDyn,hTest,hFull,hSNC,_hTrace⟩ :=
+    exists_original_dynamic_incident_prefix hn hW hE hdense hK hd hr k
+  have hOver := dynamic_history_centresOver_originalSharpBad hn hW hE hdense hd hr T hTest hDyn
+  have hAdm := isAdmissibleBlowupSequence_proj (geometricTemplate (univ : Set X) E)
+    (originalSharpBadLocus (n := n) W E) T hFull hOver
+  refine ⟨Y,T,hLen,hDyn,hTest,hFull,hSNC,hOver,hAdm,HironakaLocalPrincipalization.isProperMap_proj T,?_⟩
+  have hIso := IsAdmissibleBlowupSequence.isIsomorphismOver_compl hAdm
+  simpa only [originalSharpBadLocus_eq_compl_good,compl_compl] using hIso
+
+end
+end Hironaka.HironakaSharpActualNormalCrossingsGoodPreservation

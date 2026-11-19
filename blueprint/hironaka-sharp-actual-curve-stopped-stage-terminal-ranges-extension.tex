@@ -1,0 +1,67 @@
+\section{Actual stopped-stage and retained terminal range identification}
+
+\begin{theorem}[The stopped uniform prefix retains the original finite terminal point]
+\label{hir:sharp-actual-curve-stopped-prefix-terminal-biholomorphism}
+\uses{hir:sharp-actual-curve-uniform-prefix-eventual-empty,hir:tower-isomorphism}
+\lean{Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.stoppedPrefixBiholomorphism,Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.stoppedPrefixBiholomorphism_stagewise,Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.stoppedPrefixBiholomorphism_projection}
+\leanok
+For a genuine finite blowup history $T$ and every $k$ at least its literal
+length, the actual uniform-prefix endpoint is biholomorphic to the SAME
+terminal manifold of $T$. The whole actual prefix is stagewise isomorphic,
+over the identity of the original base, to $T$ followed by exactly
+$k-\operatorname{length}(T)$ genuine empty identity steps. Its original
+projection at every actual point is exactly the projection of that SAME
+terminal point. No terminal identification or history-isomorphism
+certificate is input.
+\end{theorem}
+\begin{proof}
+The genuine entire endpoint-and-history packet identity identifies the
+uniform prefix with the SAME terminal manifold equipped with $T$ and
+its literal empty identity tail. On this packet use the actual identity
+biholomorphism and reflexive whole-history isomorphism. Transport the
+entire existence assertion through the genuine packet identity, keeping
+both the endpoint type and actual history together. This constructs the
+required biholomorphism and full stagewise isomorphism. Its actual
+projection square is the original tower-isomorphism projection square.
+The entire empty identity tail has projection the identity, and the
+actual concatenation projection formula therefore identifies this square
+with the stated original terminal projection at EVERY point, including
+all exceptional and centre points. Every padding position is retained.
+\end{proof}
+
+\begin{theorem}[Every stopped-stage chart is the same genuine retained terminal range]
+\label{hir:sharp-actual-curve-stopped-stage-terminal-range}
+\uses{hir:sharp-actual-curve-stopped-prefix-terminal-biholomorphism,hir:sharp-actual-endpoint-local-range-biholomorphism,hir:sharp-actual-curve-original-uniform-stage-atlas}
+\lean{Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.stoppedStageTerminalRangeBiholomorphism,Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.stoppedStageTerminalRangeBiholomorphism_projection,Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.originalStoppedStageTerminalRangeBiholomorphism,Hironaka.HironakaSharpActualCurveStoppedStageTerminalRanges.originalStoppedStageTerminalRangeBiholomorphism_projection}
+\leanok
+For actual retained histories with their genuine cover, fix one original
+chart and let $L$ be the literal length of its full local history. For
+every $k\ge L$, the actual stage-$k$ inclusion range is biholomorphic to
+the SAME retained terminal inclusion range. The original projections
+agree on the ENTIRE actual range under this biholomorphism. Only original
+positive-dimensional smooth pure curve, ordered SNC and density data
+internally give such identifications around every original point at each
+$L+r$. No range, terminal map, history isomorphism or numerical certificate
+is input to this original-only construction.
+\end{theorem}
+\begin{proof}
+Use the actual stage-range inverse biholomorphism to return to the
+uniform-prefix endpoint of the chosen full local history. Apply the
+first theorem, then apply the actual terminal-range inclusion
+biholomorphism. This composition is the claimed genuine range
+biholomorphism. The whole glued projection formula on the original
+terminal range identifies its image with the full local history
+projection of the terminal point. The first theorem identifies this
+with the uniform-prefix projection of the SAME actual source point.
+The stage-range glued projection formula and its true inverse law then
+identify it with the original stage projection of the given range point.
+This proves the exact ENTIRE square, with no exceptional set removed.
+
+For original data use the internally constructed actual chart at the
+given original point and its actual full history. Its literal length
+satisfies $L\le L+r$, so the preceding construction supplies all actual
+biholomorphisms and squares internally. This identifies each stopped
+range; compatibility of THESE identifications on different original
+charts, a global terminal identification and compact finite stopping are
+subsequent conclusions, not hypotheses or consequences asserted here.
+\end{proof}

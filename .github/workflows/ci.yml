@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      cache_tag:
+        description: Published build cache tag for this commit
+        type: string
+        required: false
+
+jobs:
+  build:
+    runs-on: ${{ inputs.cache_tag && 'ubuntu-24.04' || 'ubuntu-latest' }}
+    permissions:
+      contents: read
+    env:
+      LEAN_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ${{ inputs.cache_tag && 'source' || '.' }}
+      - name: Build (with the Mathlib cache)
+        if: ${{ !inputs.cache_tag }}
+        uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true
+          test: false
+      - name: Check out build cache tooling
+        if: inputs.cache_tag
+        uses: actions/checkout@v4
+        with:
+          ref: 52c1cbbf09f112fa97b379063201cfca44688b4f
+          path: cache-tools
+          persist-credentials: false
+      - name: Prepare the runner and install the pinned Lean release
+        if: inputs.cache_tag
+        env:
+          DRAFT_TAG: ${{ inputs.cache_tag }}
+          SOURCE_REF: ${{ github.sha }}
+          INITIAL_FREE_GIB: "36"
+        run: |
+          set -euo pipefail
+          bash cache-tools/scripts/recover-disk.sh
+          python3 cache-tools/scripts/install_lean.py source "$RUNNER_TEMP/hironaka-lean" --pin cache-tools/lean-asset.json
+      - name: Restore the published cache for this commit
+        if: inputs.cache_tag
+        working-directory: source
+        env:
+          CACHE_TAG: ${{ inputs.cache_tag }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          [[ "$CACHE_TAG" == "build-cache-lean-$(sed 's|^leanprover/lean4:v||' lean-toolchain)-${GITHUB_SHA:0:12}" ]]
+          lake env true
+          cache_dir=$(mktemp -d "$RUNNER_TEMP/hironaka-cache.XXXXXX")
+          gh release download "$CACHE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --pattern cache.json --pattern 'cache-*.tar.zst.part' --dir "$cache_dir"
+          python3 ../cache-tools/cache_tools/vendor/cache.py restore "$cache_dir" \
+            --project "$PWD" --lean "$(command -v lean)"
+      - name: Check the restored Lake build
+        if: inputs.cache_tag
+        working-directory: source
+        run: lake --no-build build
+      - name: Axioms of every declaration
+        working-directory: ${{ inputs.cache_tag && 'source' || '.' }}
+        run: lake env lean scripts/CheckAxioms.lean
+      - name: Kernel replay (leanchecker)
+        working-directory: ${{ inputs.cache_tag && 'source' || '.' }}
+        run: lake env leanchecker Hironaka

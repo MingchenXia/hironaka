@@ -1,0 +1,198 @@
+\section{Actual full normal-crossings pullback under complex submersions}
+The sole geometric inputs are a genuine holomorphic submersion between the
+actual manifolds and the entire original finite SNC family. Surjectivity is
+used only for global nonempty-index and global-maximum statements. No pulled
+SNC, ideal, exponent, maximum, centre or naturality certificate is an input.
+
+\begin{lemma}[Actual normalized complement and full lifted coordinates]
+\label{hir:submersion-nc-full-lifted-coordinates}
+\uses{hir:submersion-monomial-dimension}
+\lean{Hironaka.HironakaSmoothSubmersionNormalCrossings.complementCoordinates,Hironaka.HironakaSmoothSubmersionNormalCrossings.first_block_coordinate,Hironaka.HironakaSmoothSubmersionNormalCrossings.liftedCoordinatesAdd,Hironaka.HironakaSmoothSubmersionNormalCrossings.liftedCoordinatesAdd_dictionary,Hironaka.HironakaSmoothSubmersionNormalCrossings.exists_lifted_coordinates}
+\leanok
+Let $f:Y^m\to X^n$ be a genuine complex submersion at an actual y. For every
+actual centred holomorphic coordinate change Phi at f(y), there is a genuine
+centred preferred-chart change Xi at y and an injection $rho:Fin(n)\to Fin(m)$
+such that its true domain maps into Phi's true domain and, throughout that
+whole domain, Xi's rho(j) coordinate is Phi's j coordinate composed with f.
+\end{lemma}
+\begin{proof}
+Use the actual submersion witnesses: open maximal-atlas charts phi and psi,
+and an actual continuous complex-linear equivalence
+$L:C^m\simeq C^n\times F$, such that $psi f phi^{-1}$ is first projection on the
+entire true submersion chart domain. The projection through L is surjective,
+so finite dimension gives n<=m. Second projection through L is likewise
+surjective, so F is finite dimensional. The actual equivalence gives
+m=n+dim F; hence dim F=m-n. An actual complex basis of F and finite-dimensional
+continuity produce a continuous linear equivalence $F\simeq C^{(m-n)}$.
+The canonical first/last finite-index split identifies $C^m$ with
+$C^n\times C^{(m-n)}$, with its first-coordinate injection rho.
+
+Compose the target preferred chart, Phi, and the inverse of psi to form the
+actual local biholomorphism $Gamma=Phi e_X psi^{-1}$. This is defined on the
+true open chart overlap and is holomorphic in both directions, by maximal
+atlas compatibility and the two genuine Phi holomorphic directions. Form
+Gamma times the fibre translation $v\mapsto v-v_0$, $v_0=(L phi(y))_2$.
+Compose the entire true partial-homeomorphism chain
+ $e_Y^{-1}$, phi, L, Gamma times fibre translation, the actual finite-index
+split inverse (with the chosen actual F-coordinate equivalence).
+Every composition is restricted to its true open source and target, so
+this chain is an actual local biholomorphism. Its source contains $e_Y(y)$,
+as Gamma sends psi(f(y)) to zero; fibre translation sends $v_0$ to zero.
+It therefore gives a genuine centred preferred-chart Xi. On its entire
+true source, the original submersion chart equation gives first-coordinate
+identity. The last finite coordinates are unconstrained. Source restriction
+ensures the domain maps into the true original Phi domain. No inverse
+function or local-coordinate certificate is assumed; all charts, complements,
+restrictions and inverse functions are constructed from actual witnesses.
+This argument includes n=0, m=n, empty complement and zero-dimensional source;
+it only asserts pointwise existence where an actual y exists.
+\end{proof}
+
+\begin{theorem}[The whole literal SNC family pulls back]
+\label{hir:submersion-nc-entire-snc-preimage}
+\uses{hir:submersion-nc-full-lifted-coordinates}
+\lean{Hironaka.HironakaSmoothSubmersionNormalCrossings.isSNCDivisor_preimage_submersion}
+\leanok
+If the entire original E is SNC, then the entire literal list
+$E.map(f^{-1})$ is SNC in dimension m, without surjectivity.
+\end{theorem}
+\begin{proof}
+Each member is closed, and f is genuinely continuous, so each entire
+preimage is closed. At an actual y apply original whole SNC at f(y) to
+obtain one genuine common centred Phi and its literal finite-index subsets.
+Lift that SAME whole coordinate system using the preceding lemma, sending
+all subsets by the actual injection rho. A through pulled member is exactly
+an original through member. The entire-domain coordinate equation therefore
+identifies each pulled member with its true mapped coordinate subspace.
+Mapped through subsets retain singleton cardinality. Finite-subset mapping
+by an injection reflects equality; hence the actual original through-index
+injectivity gives actual pulled through-index injectivity. This is the full
+SNC definition for all literal indices, including empty members and zero
+source/target dimensions. No entry is deleted and no pulled-SNC assumption
+occurs.
+\end{proof}
+
+\begin{theorem}[Every whole actual member ideal pulls back exactly]
+\label{hir:submersion-nc-whole-member-ideal}
+\uses{hir:submersion-nc-full-lifted-coordinates,hir:submersion-nc-entire-snc-preimage}
+\lean{Hironaka.HironakaSmoothSubmersionNormalCrossings.pullback_vanishingIdeal_snc_member}
+\leanok
+For every original literal SNC member C, the COMPLETE ideal $f^* I_C$ equals
+the COMPLETE vanishing ideal $I_{(f^{-1}C)}$, at EVERY actual stalk of Y.
+\end{theorem}
+\begin{proof}
+If f(y) is outside the closed C, the actual original ideal is unit near
+f(y), and both pulled and actual preimage ideals are unit near y. If f(y)
+is on C, the SAME true original SNC chart gives C's actual singleton
+coordinate u. Actual Hadamard division gives its COMPLETE vanishing ideal
+generated by u at every nearby stalk. Lift the whole chart as above; the
+actual preimage is exactly the corresponding singleton coordinate u f.
+Hadamard division in the actual m-dimensional chart gives its COMPLETE
+vanishing ideal generated by u f, at every nearby stalk. By the definition
+of genuine ideal pullback, u f belongs to $f^*I_C$, and every pulled generator
+is locally an actual holomorphic multiple of u f. Finite holomorphic sums
+remain multiples, while every multiple of u f is in the pullback span.
+Both complete ideals therefore coincide at y. Actual holomorphicity follows
+from the genuine submersion and original chart domains. This covers every
+stalk, without any caller ideal equality or support-only substitution.
+For n=0 no original member can pass through an actual f(y), by original
+SNC; hence only the unit case occurs. For empty Y the full equality is
+extensional on its genuinely empty domain.
+\end{proof}
+
+\begin{theorem}[Whole indexed marked product and intrinsic exponents]
+\label{hir:submersion-nc-whole-indexed-product}
+\uses{hir:submersion-nc-entire-snc-preimage,hir:submersion-nc-whole-member-ideal,hir:nc-ordered-tail-whole-indexed-product}
+\lean{Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledWeights,Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledWeights_carriers,Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledWeights_powers,Hironaka.HironakaSmoothSubmersionNormalCrossings.pullback_componentPowerProduct,Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledWeights_isSNCDivisor,Hironaka.HironakaSmoothSubmersionNormalCrossings.markedPullback_indexed_dictionary,Hironaka.HironakaSmoothSubmersionNormalCrossings.isInvDomain_pulled_indexed_product,Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledIndex,Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledWeights_get,Hironaka.HironakaSmoothSubmersionNormalCrossings.pullback_indexed_product_divExp,Hironaka.HironakaSmoothSubmersionNormalCrossings.indexed_product_unit_pullback_of_inactive}
+\leanok
+Let F be an actual finite carrier-power list whose entire original carrier
+list is SNC. Put $f^*F=F.map(C,a\mapsto(f^{-1}C,a))$. Then its entire actual
+carrier list is SNC and its COMPLETE component power product equals the
+genuine pullback of the original COMPLETE product. Its whole-ambient
+mark-one marked datum is exactly the original genuine marked pullback.
+Every true through-index intrinsic exponent equals the original actual
+power. All literal zero powers and empty/repeated historical entries remain.
+\end{theorem}
+\begin{proof}
+The second theorem internally supplies the entire pulled SNC family.
+Every original member ideal is coherent and invertible by actual SNC.
+The third theorem identifies its entire genuine pullback ideal with the
+actual pulled vanishing ideal. Genuine pullback preserves coherent whole
+ideal powers, multiplication and unit. Induction on the actual finite list
+therefore proves the WHOLE product equality, including the empty product.
+The carrier lists, full marked ambient and marking one agree definitionally,
+so whole ideal equality gives full marked equality. In positive source
+dimension the actual complete pulled SNC product dictionary computes every
+through exponent from the SAME whole ideal; alternatively the genuine
+submersion exponent dictionary reads the original exponent at its actual
+image point. In dimension zero there are no true through indices. No
+coefficient factorization, pulled-SNC or intrinsic exponent certificate is
+supplied.
+\end{proof}
+
+\begin{theorem}[True global active indices and old singleton centre]
+\label{hir:submersion-nc-actual-active-maximum}
+\uses{hir:submersion-nc-whole-indexed-product,hir:submersion-monomial-key-order,hir:submersion-monomial-original-max-locus,hir:nc-ordered-tail-actual-global-singleton-centre}
+\lean{Hironaka.HironakaSmoothSubmersionNormalCrossings.activeIndices_pulled_iff,Hironaka.HironakaSmoothSubmersionNormalCrossings.activeIndices_pulled_eq,Hironaka.HironakaSmoothSubmersionNormalCrossings.maxLocus_indexed_product_pullback,Hironaka.HironakaSmoothSubmersionNormalCrossings.singletonKey_pulled,Hironaka.HironakaSmoothSubmersionNormalCrossings.singletonKey_pulled_le_iff,Hironaka.HironakaSmoothSubmersionNormalCrossings.exists_common_actual_gamma_maximum_centre}
+\leanok
+If the genuine submersion is surjective, the actual nonempty positive
+literal index family of $f^*F$ is exactly that of F. For each actual nonempty
+positive singleton maximum in F, the internally generated actual old-gamma
+maximum centre of the pulled WHOLE marked product is precisely the entire
+preimage of the internally generated original centre. The maximum literal
+index is the same, including every old colex tie break.
+\end{theorem}
+\begin{proof}
+Natural powers and literal index length are unchanged. Whole preimage
+nonemptiness reflects original nonemptiness by surjectivity and preserves
+it in the other direction for every actual member; hence active families
+agree exactly under the literal same-index equivalence. In the nonempty
+case an actual source preimage point produces the genuine n<=m inequality.
+All singleton cardinalities are one, so their dimension-first coordinates
+change uniformly from n-1 to m-1, with the same actual coefficient and old
+colex singleton. Actual key comparison is preserved and reflected; unique
+literal maximum indices, produced internally by the finite families, agree.
+The preceding whole marked equality and the actual gamma-order theorem
+identify the literal maximum locus on the actual cosupport with the whole
+preimage of the original locus. The original internally produced maximum
+locus is its entire selected nonempty Cartier carrier, so the pulled
+internally produced centre is exactly its entire preimage. The inactive
+case gives whole unit products on both sides and no canonical centre.
+For empty manifolds, surjectivity makes the source and target active
+families empty; there is no spurious ambient dimension inequality assertion.
+No global maximum-preimage claim is made for a nonsurjective submersion.
+\end{proof}
+
+\begin{theorem}[Actual next Cartier control respects the entire pulled history]
+\label{hir:submersion-nc-actual-cartier-control}
+\uses{hir:submersion-nc-actual-active-maximum,hir:submersion-nc-whole-indexed-product,hir:nc-ordered-tail-actual-cartier-coefficient-drop}
+\lean{Hironaka.HironakaSmoothSubmersionNormalCrossings.pulledWeights_dividedWeights,Hironaka.HironakaSmoothSubmersionNormalCrossings.isBlowupAlong_id_indexed_member,Hironaka.HironakaSmoothSubmersionNormalCrossings.actual_Cartier_and_admissibility_pullback,Hironaka.HironakaSmoothSubmersionNormalCrossings.markedPullback_geoTransform_indexed_positive,Hironaka.HironakaSmoothSubmersionNormalCrossings.controlled_pullback_intrinsic_exponents,Hironaka.HironakaSmoothSubmersionNormalCrossings.controlled_pulled_coefficient_sum}
+\leanok
+For every positive original literal factor, including the internally generated
+maximum index, the true identity Cartier blowups and their SAME complete mark-one controlled transforms
+commute with genuine pullback: every literal old strict carrier and its
+coefficient agrees, the selected old empty carrier is retained with zero
+power, and the actual new selected carrier is appended with power k-1.
+The whole new controlled marked datum and every true intrinsic through
+exponent agree by the actual pulled indexed dictionary. The actual full
+coefficient sum drops by one on both sides. This whole next-step dictionary
+does not require surjectivity; only the preceding global maximum comparison
+uses surjectivity.
+\end{theorem}
+\begin{proof}
+Both selected carriers are actual members of their internally proved entire
+SNC lists. True Cartier universal property and genuine positive-factor
+admissibility supply their actual identity blowups and controlled division.
+Actual indexed Cartier control replaces the selected old index by (empty,0)
+and appends its same actual carrier with exponent k-1, leaving every other
+literal entry. Entire preimage commutes with that actual finite-list set
+operation, empty carrier and append. Thus the two actual normalized lists
+are exact whole preimages with unchanged real coefficients. The preceding
+WHOLE indexed ideal pullback equality gives exact controlled marked equality.
+True intrinsic exponents use those SAME controlled ideals, and actual
+coefficient arithmetic gives new sum plus one equal to old on both sides.
+This proves the actual NEXT ordered monomial step, not naturality of a full
+higher-dimensional blowup driver. Full finite procedure comparison and its
+empty-step deletion for nonsurjective opens are separate remaining work;
+prior general separation's identification with the old driver is OPEN.
+\end{proof}

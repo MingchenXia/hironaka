@@ -1,0 +1,153 @@
+\section{The actual current embedding dimension}
+\label{sec:hironaka-current-embedding-dimension}
+
+The rank of the complete reduced current ideal detects singular points
+even when that ideal has order one. The following construction extends
+the exact Jacobian criterion of \cite{demailly-cadg}, II.4.31, to every
+embedding-dimension superlevel and to its actual global maximum locus.
+The finite-minor presentation agrees with the support description in
+\cite{bierstone-milman97-invent-math}, Proposition~10.1; the present
+construction uses the entire original reduced ideal at every nearby stalk.
+It is a first geometric layer for the current-centre condition in
+\cite{bierstone-milman97-invent-math}, Theorem~1.6(1). It does not assert
+that this first value decreases under arbitrary singular-centre blowups;
+normal flatness and the higher Hilbert--Samuel entries remain necessary.
+
+\begin{definition}[Embedding dimension of the complete original ideal]
+\label{hir:current-embedding-dimension}
+\lean{Hironaka.HironakaCurrentEmbeddingDimension.embeddingDimension}
+\leanok
+\uses{rem:tangent-space}
+For a set $A$ in an $n$-dimensional complex manifold and $x$ in the
+ambient manifold, let $e(A,x)$ be the dimension of the common kernel,
+in the actual preferred chart at $x$, of the differentials of all
+holomorphic germs in the complete vanishing ideal $I_{A,x}$.
+\end{definition}
+
+\begin{lemma}[An actual chart-independent finite value]
+\label{hir:embedding-dimension-chart-independent}
+\lean{Hironaka.HironakaCurrentEmbeddingDimension.embeddingDimension_eq_finrank_tangentSpaceIn,Hironaka.HironakaCurrentEmbeddingDimension.embeddingDimension_le,Hironaka.HironakaCurrentEmbeddingDimension.embeddingDimension_eq_of_regularAtDim}
+\leanok
+\uses{hir:current-embedding-dimension,rem:tangent-space}
+The same value is the dimension of that actual common kernel in any
+chart containing $x$. It lies between $0$ and $n$. At a genuine regular
+point of dimension $d$ it equals $d$.
+\end{lemma}
+\begin{proof}
+The actual chart-transition derivative is an invertible linear map.
+The chain rule carries the common kernel for all original ideal germs
+to the common kernel in the other chart. Restricting this invertible derivative gives a linear isomorphism
+between the two common kernels. This proves equality of their dimensions. The common kernel
+is a subspace of $\mathbb C^n$, so its dimension is at most $n$.
+At a regular point the actual flattening identifies it with the image
+of the differential of the dimension-$d$ parametrization. That
+differential is injective and its range has dimension $d$.
+\end{proof}
+
+\begin{lemma}[The actual complete-ideal rank dictionary]
+\label{hir:embedding-dimension-cartan-rank-nullity}
+\uses{hir:embedding-dimension-chart-independent,ana:stokes-cartan-generators,rem:tangent-space}
+\lean{Hironaka.HironakaCurrentEmbeddingDimension.rank_add_embeddingDimension_of_cartanGenerators}
+\leanok
+Let holomorphic functions $s_1,\ldots,s_N$ generate the entire ideal of $A$
+at every point of an open neighbourhood $U$ and cut out $A$ there. At
+$x\in A\cap U$, in every genuine chart containing $x$,
+\[
+ \dim\operatorname{span}\{ds_i(x):1\le i\le N\}+e(A,x)=n.
+\]
+\end{lemma}
+\begin{proof}
+Each $s_i$ is an original ideal germ, so a vector in the kernel of every
+original ideal differential lies in every $\ker ds_i(x)$. Conversely, an
+arbitrary ideal germ has a finite holomorphic expression $\sum_i a_i s_i$
+near $x$. Since all $s_i(x)=0$, its differential is $\sum_i a_i(x)ds_i(x)$.
+Thus the common kernel of all actual ideal differentials is exactly the
+common kernel of these finitely many $ds_i(x)$. Chart independence identifies
+its dimension with $e(A,x)$. Rank-nullity for the linear map having these
+covectors as its rows gives the displayed equality: its rank equals the
+dimension of their span.
+\end{proof}
+
+\begin{lemma}[Every actual embedding-dimension superlevel is analytic]
+\label{hir:embedding-dimension-superlevels-analytic}
+\lean{Hironaka.HironakaCurrentEmbeddingDimension.isComplexAnalyticSubset_embeddingDimension_superlevel}
+\leanok
+\uses{hir:embedding-dimension-chart-independent,hir:embedding-dimension-cartan-rank-nullity,ana:stokes-cartan-generators,rem:tangent-space,ana:stokes-singular-locus-analytic}
+Let $A$ be an arbitrary analytic set. For every integer $q\ge0$,
+the actual whole locus $\{x\in A:e(A,x)\ge q\}$ is analytic, without
+pure dimensionality, a supplied equation family or a constant-rank
+certificate.
+\end{lemma}
+\begin{proof}
+If $q>n$ the actual subspace dimension bound makes the locus empty.
+Otherwise, at an arbitrary ambient point, produce actual Cartan
+generators $s_1,\ldots,s_N$ of the entire original ideal on one open
+neighbourhood. They cut out $A$ on that neighbourhood. At a point of
+$A$, differentiating an arbitrary holomorphic ideal combination gives
+a linear combination of the $ds_i$, since all $s_i$ vanish at that
+point. Thus the actual common kernel of all ideal differentials is
+exactly the common kernel of these finitely many differentials.
+Rank-nullity gives
+\[
+ e(A,x)+\dim\operatorname{span}\{ds_i(x)\}=n.
+\]
+Consequently $e(A,x)\ge q$ if and only if the latter rank is less than
+$n-q+1$, equivalently all $(n-q+1)$-minors of the actual Jacobian
+vanish. In the true chart this whole locus is therefore cut out by
+the original generators and the finite family of these minors.
+Their derivatives and determinants are holomorphic on the same
+neighbourhood, so this is a genuine local analytic presentation.
+The chart-independent dimension equality proves it represents the
+whole stated intrinsic locus. For $q=0$ the excessive-size minors are
+automatically zero and the locus is precisely $A$; empty generator
+families and $n=0$ are included in the same finite presentation.
+\end{proof}
+
+\begin{lemma}[The entire pure singular locus is the first strict superlevel]
+\label{hir:pure-singular-embedding-dimension-threshold}
+\lean{Hironaka.HironakaCurrentEmbeddingDimension.regularAtDim_iff_embeddingDimension_le,Hironaka.HironakaCurrentEmbeddingDimension.diff_regularLocus_eq_embeddingDimension_superlevel}
+\leanok
+\uses{hir:embedding-dimension-superlevels-analytic,hir:embedding-dimension-cartan-rank-nullity,rem:pure-singular-locus,hir:embedding-dimension-chart-independent}
+\source{demailly-cadg:II.4.31}
+Let $A$ be analytic and pure of dimension $d\le n$. At each $x\in A$,
+regularity of dimension $d$ is equivalent to $e(A,x)\le d$.
+Hence $A\setminus\operatorname{Reg}_d A$ is exactly
+$\{x\in A:e(A,x)\ge d+1\}$.
+\end{lemma}
+\begin{proof}
+At a regular-$d$ point the preceding actual tangent-space theorem gives
+$e(A,x)=d$. Conversely if $e(A,x)\le d$, choose actual all-stalk Cartan
+generators at $x$. The true kernel dictionary and rank-nullity give
+rank at least $n-d$ for their differentials, hence a nonzero
+$(n-d)$-minor. The actual pure-dimensional Jacobian criterion then
+produces a flattening of the entire set $A$ at this same point of
+dimension $d$. It uses all original generators to identify the
+selected equations' smooth zero set with $A$, by regular density and
+the holomorphic identity theorem. Negating this exact equivalence
+gives the displayed whole singular-locus equality.
+\end{proof}
+
+\begin{theorem}[An internally produced singular maximum locus]
+\label{hir:actual-embedding-dimension-maximum-singular-locus}
+\lean{Hironaka.HironakaCurrentEmbeddingDimension.exists_maximum_embeddingDimension_singular_locus}
+\leanok
+\uses{hir:embedding-dimension-superlevels-analytic,hir:pure-singular-embedding-dimension-threshold}
+If a pure analytic set $A$ of dimension $d\le n$ has a singular point,
+its actual embedding dimension has an internally attained global
+maximum $q>d$. Its entire maximum locus is nonempty, analytic, and
+contained in the actual current singular locus of $A$. No compactness,
+attained-maximum or selected-component hypothesis is needed.
+\end{theorem}
+\begin{proof}
+The actual values on $A$ lie in the finite set $\{0,\ldots,n\}$.
+A singular point makes their image nonempty, so this finite image has
+a maximum $q$ attained at an actual point of $A$. The singular point's
+value is at least $d+1$, hence $q>d$. Since every actual value on $A$
+is at most $q$, the maximum locus is exactly the internally produced
+superlevel $\{x\in A:e(A,x)\ge q\}$. Its analyticity is the preceding
+genuine finite-minor producer. At each point of the locus $q>d$, so
+the exact singular-threshold theorem places that point in
+$A\setminus\operatorname{Reg}_d A$. This is a produced analytic
+maximum locus; it does not assume that the locus is smooth or claim
+a resolution/descent theorem from this first value alone.
+\end{proof}

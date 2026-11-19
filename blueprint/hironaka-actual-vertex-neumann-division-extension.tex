@@ -1,0 +1,62 @@
+\section{Actual convergent vertex division from the computed tail bound}
+\label{sec:hironaka-actual-vertex-neumann-division}
+Fix a positive polyradius $\rho$, a whole formal ideal $I$, and a prescribed actual monic vertex family $G_a$. Let $Q_a,R$ be the actual whole-diagram monomial-owner projections, $T(F)=\sum_a(G_a-X^a)Q_aF$, and $c_\rho=\sum_a|G_a-X^a|_\rho/\rho^a$. In addition to absolute summability of each fixed generator tail, assume the concrete numerical inequality $c_\rho<1$. No quotient, remainder, inverse, or convergence certificate is supplied.
+
+\begin{theorem}[Actual weighted coefficients identify the source with a complex Banach space]
+\label{hir:actual-weighted-coefficient-banach-dictionary}
+\uses{hir:actual-coefficient-mass-convolution}
+\lean{Hironaka.HironakaActualVertexNeumannDivision.CoefficientBanachSpace,Hironaka.HironakaActualVertexNeumannDivision.seriesOfLp,Hironaka.HironakaActualVertexNeumannDivision.lpOfSeries,Hironaka.HironakaActualVertexNeumannDivision.seriesOfLp_finiteMass,Hironaka.HironakaActualVertexNeumannDivision.seriesOfLp_mass,Hironaka.HironakaActualVertexNeumannDivision.seriesOfLp_lpOfSeries,Hironaka.HironakaActualVertexNeumannDivision.lpOfSeries_norm}
+\leanok
+The map $F\mapsto(\rho^\alpha F_\alpha)_\alpha$ identifies all series of finite $|\cdot|_\rho$ with the genuine complex Banach space $\ell^1$ on the exponent set. Its inverse sends $x$ to the entire formal series with coefficient $x_\alpha/\rho^\alpha$. Both maps are complex-linear, and $|F|_\rho$ equals the ordinary $\ell^1$ norm of its image.
+\end{theorem}
+\begin{proof}
+Every $\rho^\alpha$ is strictly positive. Thus multiplication and division by these fixed complex scalars are inverse coefficientwise linear operations. For every exponent, $|x_\alpha/\rho^\alpha|\rho^\alpha=|x_\alpha|$. Therefore the decoded coefficient mass is summable exactly when the original sequence has summable norms, and its sum is the genuine $\ell^1$ norm. The forward formula has the same equality in the other direction. The usual complete complex $\ell^1$ space supplies completeness; no completeness assumption about formal power series in their coefficient topology is used.
+\end{proof}
+
+\begin{theorem}[The actual computed perturbation has a genuine convergent inverse]
+\label{hir:actual-vertex-tail-neumann-solution}
+\uses{hir:actual-weighted-coefficient-banach-dictionary,hir:actual-vertex-tail-operator-bound}
+\lean{Hironaka.HironakaActualVertexNeumannDivision.vertexPerturbationCLM,Hironaka.HironakaActualVertexNeumannDivision.vertexPerturbationCLM_norm_le,Hironaka.HironakaActualVertexNeumannDivision.exists_neumann_vertex_solution}
+\leanok
+The literal actual operator $T$ transports to a continuous complex-linear endomorphism of this Banach space with operator norm at most the computed $c_\rho$. Consequently, for every source $F$ of finite coefficient mass there exists $U$ of finite coefficient mass such that
+\[
+ U+T(U)=F,
+ \qquad |U|_\rho\le\frac{|F|_\rho}{1-c_\rho}.
+\]
+\end{theorem}
+\begin{proof}
+Decode a Banach-space vector, apply the actual finite operator $T$, and encode the result. The already proved output summability makes this a well-defined complex-linear map, and its actual bound transports unchanged through the norm identities. Thus its operator norm is at most $c_\rho<1$. In the complete normed ring of continuous endomorphisms, the geometric series for $-T$ converges and is a two-sided inverse to $1+T$. Apply that inverse to the encoded $F$ and decode to obtain $U$. The whole equation gives $U=F-T(U)$, hence $|U|_\rho\le |F|_\rho+c_\rho|U|_\rho$. Since $1-c_\rho>0$, rearranging and dividing gives the displayed bound.
+\end{proof}
+
+\begin{theorem}[Whole actual vertex division and the canonical remainder converge]
+\label{hir:actual-vertex-convergent-whole-division}
+\uses{hir:actual-vertex-tail-neumann-solution,hir:actual-vertex-tail-reconstruction,hir:actual-monic-family-canonical-remainder,hir:actual-formal-normal-representative-unique}
+\lean{Hironaka.HironakaActualVertexNeumannDivision.exists_absolute_vertex_division,Hironaka.HironakaActualVertexNeumannDivision.actualFormalRemainder_summable_of_tail_bound}
+\leanok
+There exist actual owner-supported quotient series $H_a$ and an entire-diagram normal remainder $S$, all absolutely summable at the same $\rho$, satisfying
+\[
+ F=\sum_aG_aH_a+S,
+ \quad S=\operatorname{Rem}_I(F),
+ \quad |S|_\rho\le\frac{|F|_\rho}{1-c_\rho},
+ \quad \rho^a|H_a|_\rho\le\frac{|F|_\rho}{1-c_\rho}.
+\]
+Here $\operatorname{Rem}_I$ is the already constructed genuine canonical whole-ideal formal remainder.
+\end{theorem}
+\begin{proof}
+Take the actual $U$ just constructed and set $H_a=Q_aU$ and $S=RU$. The exact whole reconstruction and $U+T(U)=F$ prove the division identity. The earlier actual owner estimates prove quotient and remainder summability and bound their scaled masses by $|U|_\rho$, giving the displayed bounds. The owner formulas give the disjoint owner support of every quotient and zero remainder coefficients on the entire actual diagram. Each prescribed $G_a$ belongs to the original whole ideal, so the division identity gives $F-S\in I$. Uniqueness of the whole-ideal normal representative then identifies $S$ with the actual canonical remainder, without changing the family or ideal.
+\end{proof}
+
+\begin{theorem}[The genuine canonical reduced vertex series are absolutely convergent]
+\label{hir:actual-reduced-vertex-absolute-convergence}
+\uses{hir:actual-vertex-convergent-whole-division,hir:actual-reduced-formal-vertex-members}
+\lean{Hironaka.HironakaActualVertexNeumannDivision.actualReducedVertexSeries_summable_of_tail_bound}
+\leanok
+Under the same actual fixed-family summability and numerical tail bound, every canonical reduced vertex series of the original whole ideal is absolutely summable at $\rho$.
+\end{theorem}
+\begin{proof}
+A single monomial is absolutely summable at every positive polyradius. Apply the preceding canonical remainder convergence to $X^a$. The actual canonical reduced vertex series is exactly $X^a-\operatorname{Rem}_I(X^a)$. Negation preserves coefficient norms, and the proved addition comparison shows that this difference is absolutely summable.
+\end{proof}
+
+\begin{remark}
+The strict bound on the explicitly computed generator-tail masses is a concrete analytic norm hypothesis. Producing a suitable positive polyradius from actual holomorphic monic generators still requires a separate small-radius argument. Holomorphy and the actual Taylor dictionary for the resulting evaluated series are also distinct bridges; neither those bridges nor persistent Hilbert--Samuel tracking or termination are asserted here.
+\end{remark}

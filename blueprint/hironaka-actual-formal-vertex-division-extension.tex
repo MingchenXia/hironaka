@@ -1,0 +1,125 @@
+\section{Actual formal division by internally constructed vertex series}
+
+Keep the ACTUAL whole formal ideal $I\subset S=\mathbb C[[X_1,\ldots,X_n]]$,
+its genuine initial diagram $\mathcal N$, its internally constructed finite
+vertex set $V$, and the internally chosen genuine monic series $f_a\in I$
+with lowest exponent $a$, for $a\in V$. All products are the genuine
+finite-antidiagonal formal products. The construction below is a direct
+coefficient version of formal division in
+\cite[Theorem~3.17, Lemma~7.3, pp.~261--264]{bierstone-milman97-invent-math}.
+We allow any fixed internally chosen owner of each exponent in the diagram;
+this refines the same vertex cones into disjoint parts. The usual first-vertex
+partition is one such choice. This harmless partition convention does not
+assume or modify the whole ideal or the actual series ring.
+
+\begin{lemma}[Actual vertex owners and well founded genuine coefficient recursion]
+\label{hir:actual-formal-vertex-owner-coefficient-recursion}
+\uses{hir:actual-formal-initial-diagram-finite-monic-vertices,hir:actual-formal-initial-exponent-coefficient-product}
+Internally choose for each $c\in\mathcal N$ one actual $o(c)\in V$ with
+$o(c)\le c$; for $c\notin\mathcal N$, put $o(c)=\mathrm{none}$.
+For every actual $F\in S$ there is a genuinely well defined complex
+coefficient function $t_F(c)$ given by
+\[
+ t_F(c)=[X^c]F-
+ \sum_{a\in V}\sum_{\beta+\gamma=c\atop\beta+a\prec c,\ o(\beta+a)=a}
+ t_F(\beta+a)[X^\gamma]f_a .
+\]
+Every displayed inner sum is the actual finite exponent antidiagonal;
+every recursive call is strictly smaller in the genuine well monomial
+order. Neither the owner nor a coefficient solution is a caller premise.
+\lean{Hironaka.HironakaActualFormalVertexDivision.exists_actualDivisionOwner,Hironaka.HironakaActualFormalVertexDivision.actualDivisionOwner,Hironaka.HironakaActualFormalVertexDivision.actualDivisionOwner_le,Hironaka.HironakaActualFormalVertexDivision.actualDivisionOwner_eq_none_iff,Hironaka.HironakaActualFormalVertexDivision.actualVertexSeries,Hironaka.HironakaActualFormalVertexDivision.actualVertexSeries_spec,Hironaka.HironakaActualFormalVertexDivision.actualVertexSeries_coefficient,Hironaka.HironakaActualFormalVertexDivision.actualVertexSeries_coefficient_lower,Hironaka.HironakaActualFormalVertexDivision.actualDivisionCoefficient,Hironaka.HironakaActualFormalVertexDivision.actualDivisionTail,Hironaka.HironakaActualFormalVertexDivision.actualDivisionCoefficient_eq}
+\leanok
+\end{lemma}
+\begin{proof}
+The actual finite-vertex coverage theorem gives an actual dominating
+vertex for every diagram exponent, so choice constructs the stated
+owner, with the stated pointwise inequality. Outside the actual diagram
+there is no owner. Apply well founded recursion to the actual well
+monomial exponent order. At stage $c$, the formula uses only the finitely
+many actual antidiagonal pairs and only the already defined values at
+$\beta+a\prec c$. Thus it gives an actual complex number at every
+exponent, with the displayed defining equation. No infinite numerical
+sum or convergence assertion enters the construction.
+\end{proof}
+
+\begin{theorem}[Actual formal quotients and remainder have the required disjoint supports]
+\label{hir:actual-formal-vertex-division-supports}
+\uses{hir:actual-formal-vertex-owner-coefficient-recursion}
+Define GENUINE actual formal series $Q_a(F),R(F)\in S$ by their coefficients:
+\[
+ [X^\beta]Q_a(F)=
+ \begin{cases}t_F(\beta+a)&o(\beta+a)=a,\\0&\text{otherwise},\end{cases}
+ \qquad
+ [X^c]R(F)=
+ \begin{cases}t_F(c)&c\notin\mathcal N,\\0&c\in\mathcal N.\end{cases}
+\]
+The shifted supports $a+\operatorname{supp}Q_a(F)$ lie in the actual
+disjoint owner parts of $\mathcal N$, and
+$\operatorname{supp}R(F)\cap\mathcal N=\varnothing$.
+\lean{Hironaka.HironakaActualFormalVertexDivision.actualFormalQuotient,Hironaka.HironakaActualFormalVertexDivision.actualFormalRemainder,Hironaka.HironakaActualFormalVertexDivision.actualFormalQuotient_support,Hironaka.HironakaActualFormalVertexDivision.actualFormalRemainder_coefficient_diagram}
+\leanok
+\end{theorem}
+\begin{proof}
+An actual formal series is an arbitrary complex coefficient function on
+the actual exponent set, with its existing genuine ring operations.
+The displayed functions therefore define actual series directly.
+A nonzero quotient coefficient forces its defining owner condition;
+that condition places the shifted exponent in the true diagram. Distinct
+owners cannot have the same shifted exponent because an actual owner
+is a single value. A remainder coefficient at a diagram exponent is
+literally zero by its definition, proving the last assertion.
+\end{proof}
+
+\begin{theorem}[The actual finite sum of genuine formal products equals the original series]
+\label{hir:actual-formal-vertex-division-identity}
+\uses{hir:actual-formal-vertex-division-supports,hir:actual-formal-initial-exponent-coefficient-product}
+For EVERY actual $F\in S$, the internally constructed series satisfy the
+WHOLE genuine formal equality
+\[
+ F=\sum_{a\in V} Q_a(F)f_a+R(F).
+\]
+\lean{Hironaka.HironakaActualFormalVertexDivision.actual_formal_vertex_division}
+\leanok
+\end{theorem}
+\begin{proof}
+Fix an actual exponent $c$ and expand the coefficient of the displayed
+finite sum using the genuine product antidiagonals. The terms with
+$\beta+a\prec c$ are exactly the correction sum in the defining
+recursion, by the actual quotient coefficient formula.
+For every remaining antidiagonal pair, a nonzero coefficient of $f_a$
+forces $a\preceq\gamma$. If $\beta+a\not\prec c=\beta+\gamma$,
+ordered cancellation then forces $\gamma=a$. Such a term exists only
+when $a\le c$ pointwise, has $\beta=c-a$, and contributes $t_F(c)$
+exactly when $o(c)=a$, since $f_a$ has actual coefficient $1$ there.
+Thus if $c\in\mathcal N$, exactly its one genuine owner contributes
+that remaining $t_F(c)$ and the remainder coefficient is zero. If
+$c\notin\mathcal N$, no owner contributes and the actual remainder
+coefficient is $t_F(c)$. In both cases the coefficient of the whole right
+side is the correction plus $t_F(c)$, which is precisely $[X^c]F$
+by the true recursion equation. Equality of EVERY actual coefficient
+proves the actual formal ring equality.
+\end{proof}
+
+\begin{theorem}[Internally constructed actual vertex series generate the whole original formal ideal]
+\label{hir:actual-formal-vertex-series-whole-ideal-generation}
+\uses{hir:actual-formal-vertex-division-identity,hir:actual-formal-ideal-initial-diagram-upper}
+For every actual $F\in I$, its internally constructed remainder is zero.
+Consequently $I$ is generated by the internally constructed finite actual
+family $(f_a)_{a\in V}$, with the genuine whole-series coefficient
+decomposition of the preceding theorem. This includes the zero and unit
+ideals and requires no basis, quotient, or division certificate.
+\lean{Hironaka.HironakaActualFormalVertexDivision.actualFormalRemainder_eq_zero_of_mem,Hironaka.HironakaActualFormalVertexDivision.actual_formal_ideal_member_division,Hironaka.HironakaActualFormalVertexDivision.actual_formal_ideal_eq_span_vertex_series}
+\leanok
+\end{theorem}
+\begin{proof}
+Each actual $f_a$ belongs to the SAME whole ideal $I$, so the actual finite
+sum $\sum Q_a(F)f_a$ belongs to $I$. The genuine identity therefore
+puts $R(F)$ in $I$. If this actual remainder were nonzero, its actual
+lowest nonzero coefficient exponent would belong to $\mathcal N$
+by the definition of that diagram. But the actual remainder has zero
+coefficient at every diagram exponent, contradicting its genuine
+lowest nonzero coefficient. Thus $R(F)=0$. The resulting identity puts
+every actual member of $I$ in the span of the actual $f_a$; the converse
+inclusion follows from their actual membership in $I$. This proves BOTH
+whole ideal inclusions internally.
+\end{proof}

@@ -1,0 +1,184 @@
+\section{Entire member controlled transforms along the genuine original tail}
+
+The positive-level datum is the actual member remainder constructed above.
+Its original test tail need not be admissible for this smaller carrier.
+The following arguments use the genuine strict transforms of the original SNC
+intersection to construct every domain field of its entire controlled transform.
+They then identify all fields with the literal lower transform on the original
+mask at every actual stage. They do not assert that the entire candidate tail
+is canonical, or complete the level-zero contact and deeper companion descent.
+
+\begin{lemma}[Strict transforms of actual closed component partitions]
+\label{hir:member-tail-actual-clopen-strict}
+\uses{hir:member-lower-extension-actual-remaining-germ,hir:dimtwo-unselected-smooth-components,bcalc:member-intersection-tower}
+\lean{Hironaka.HironakaStepOneMemberTailExtension.strictAlong_eq_inter_preimage_of_closed_partition,Hironaka.HironakaStepOneMemberTailExtension.eventually_mem_strictAlong_iff_of_closed_partition}
+\leanok
+Let a closed set H be the disjoint union of closed A and B. Along any genuine
+blowup tower T, their actual strict transforms satisfy
+\[
+ A_T=H_T\cap T^{-1}A,
+\]
+and at every point of $A_T$ its actual local germ equals that of $H_T$. In
+particular this holds for the genuine remaining and selected smooth components
+of the original member intersection.
+\end{lemma}
+\begin{proof}
+For one blowup, preimages commute with unions and removing the centre does too;
+closure of a finite union is the union of the closures. Induction proves
+$H_T=A_T\cup B_T$. Each strict transform of an initially closed set is closed
+and lies over that set, by continuity of the actual projection and the closure
+in the strict-transform definition. Since A and B are disjoint, these two
+preimage containments make $A_T$ and $B_T$ disjoint. The first inclusion of the
+displayed identity follows from monotonicity and the preimage containment.
+Conversely, a point of $H_T$ over A belongs to $A_T$ or $B_T$; the latter case would
+put its image in the disjoint set B. The complement of the closed $B_T$ is a
+neighbourhood of every $A_T$ point, and on it $H_T$ and $A_T$ are equal. This is the
+asserted genuine local-germ equality, without a chosen component chart.
+\end{proof}
+
+\begin{lemma}[Actual member and deleted-boundary geometry at every stage]
+\label{hir:member-tail-actual-geometry}
+\uses{hir:member-tail-actual-clopen-strict,hir:member-lower-extension-actual-domain,bcalc:member-restriction-domain,bcalc:member-intersection-tower}
+\lean{Hironaka.HironakaStepOneMemberTailExtension.memberRemainder_strict_carrier_geometry,Hironaka.HironakaStepOneMemberTailExtension.memberRemainder_transform_geometry}
+\leanok
+Let J be a true well-formed marked ideal of dimension at most k, S a nonempty set of actual indexed boundary members, and T a genuine
+J-test tower. The strict transform of its actual remainder carrier is closed
+and smooth, has dimension at most k-1, and is transverse to the actual boundary
+of the entire transformed remainder datum. That boundary is SNC.
+\end{lemma}
+\begin{proof}
+At each literal stage the genuine original test tower supplies well formedness
+of $J_T$, dimension at most k, and its full transformed SNC boundary. The actual
+strict transform of $H=N\cap H_S$ is exactly $N_T$ intersected with the strict
+transforms of the indexed original members in S. Those are precisely the
+members at the original indices embedded in the current index set. This
+embedded set is nonempty. The genuine simultaneous-coordinate intersection
+therefore is closed and smooth, drops dimension by at least one, and is
+transverse to the full current boundary with those actual indices deleted.
+By the preceding partition result the actual remainder transform has that
+same local smooth germ at each of its points. Regularity and transversality
+transport through this actual germ equality, and regular inclusion gives its
+stated dimension bound.
+
+The boundary transformation only maps the existing list by genuine strict
+transform and appends the new exceptional member. Consequently the transformed
+initial deleted list is a sublist of the transformed full list at every stage.
+Its original members are exactly the strict transforms of initial members
+whose indices are outside S. Its later exceptional suffix is the same as the
+full boundary's suffix: both begin empty, and at the next stage both are mapped
+by the same strict-transform map and receive the same appended exceptional
+member. Each of these original retained indices is outside the embedded S;
+each exceptional suffix index is beyond all original indices and also outside
+it. Thus every actual candidate member belongs to the actual deleted current
+boundary. The sublist proves SNC, and this real membership inclusion proves
+transversality using the genuine simultaneous coordinates already obtained.
+No candidate admissibility or centre-containment assertion is used.
+\end{proof}
+
+\begin{lemma}[Coherent controlled ideal and true nonzero along a smooth strict carrier]
+\label{hir:member-tail-actual-coherent-nonzero}
+\uses{hir:coherent-transform-colon-without-inclusion,hir:coherent-transform-step-without-admissibility,hir:member-tail-actual-geometry}
+\lean{Hironaka.HironakaStepOneMemberTailExtension.isCoherent_geoTransform_ideal_of_smooth_strict,Hironaka.HironakaStepOneMemberTailExtension.isNonzeroAlongAt_geoTransform_of_smooth_strict,Hironaka.HironakaStepOneMemberTailExtension.isInvDomain_geoTransformAlong_memberRemainder}
+\leanok
+For an actual blowup, an actual coherent ideal with nonzero germs along its
+closed smooth carrier has coherent controlled transform and nonzero germs
+along the entire transformed carrier whenever that actual strict carrier is
+closed and smooth. No containment of the centre in the candidate carrier is
+required. The actual member remainder has these properties along every
+literal prefix of the original test tower.
+\end{lemma}
+\begin{proof}
+The actual transformed ideal is the colon of its actual pulled-back ideal,
+restricted to the genuine strict carrier, by the pulled-back centre ideal to
+the original mark. Coherence of the pulled-back ideal, actual smooth carrier
+vanishing ideal, actual smooth centre vanishing ideal and its actual power
+prove coherence by the general coherent-colon theorem; no restricted inclusion
+hypothesis is needed.
+
+Outside the literal centre the actual blowup is biholomorphic, and the genuine
+controlled-transform dictionary carries an original germ frequently nonzero
+along the carrier to such a transformed germ. At a remaining transformed
+carrier point, suppose no actual ideal germ is frequently nonzero. Actual
+coherence and its finite generators then make every transformed ideal member
+vanish on the transformed carrier near that point. The actual strict-carrier
+closure definition supplies arbitrarily nearby points above the original
+carrier outside the centre. At such a point the preceding nonzero-germ
+producer gives a germ frequently nonzero on the transformed carrier; its
+frequent nonzero points can also be chosen in the neighbourhood where every
+actual ideal member vanishes, a contradiction. This proves true nonzero along
+the entire actual strict carrier.
+
+Induct along the literal original tower. The original remainder-domain
+producer supplies initial coherence and nonzero along. The preceding geometric
+lemma internally supplies each actual smooth strict carrier. The one-step
+argument supplies the next actual coherence and nonzero fields. Combining
+those with its actual SNC boundary, transversality, positive unchanged mark
+and genuine lower dimension bound gives the entire lower invariant domain
+at every original prefix.
+\end{proof}
+
+\begin{theorem}[Exact controlled-transform identity on the entire original mask tail]
+\label{hir:member-tail-actual-mask-transform-identity}
+\uses{hir:member-tail-actual-coherent-nonzero,hir:member-lower-extension-actual-mask-identity,hir:open-restriction-marked}
+\lean{Hironaka.HironakaStepOneMemberTailExtension.geoTransformAlong_restrict_memberRemainder,Hironaka.HironakaStepOneMemberTailExtension.memberLowerExtension_tail_domain_and_mask_identity}
+\leanok
+At a genuine positive-level head, let R be the entire actual member lower
+extension and U the literal original mask. At every literal stage T of the
+genuine remaining original test tail, its actual controlled transform is in
+the lower invariant domain and
+\[
+ (R|_U)_{T|_U}=R_T|_{T^{-1}U}.
+\]
+Here $R|_U$ is exactly the original literal lowerMarked, so the equality is the
+entire marked-ideal dictionary for its literal masked tail, including its true
+ideal, carrier, indexed boundary and mark.
+\end{theorem}
+\begin{proof}
+At the initial stage the exact member-extension mask identity identifies $R|_U$
+with literal lowerMarked in all its fields. For the next actual blowup, old
+and new candidate coherence have already been internally proved. Genuine open
+pullback commutes with its actual ideal restriction, pulled-back centre power
+and coherent colon. The exact one-step open controlled-transform theorem
+therefore gives equality of the actual ideals. Actual carrier strict transform,
+the indexed boundary map and appended exceptional member, and the unchanged
+mark satisfy the same open dictionary, yielding full marked-ideal equality.
+Inducting proves the displayed identity at every genuine stage. The preceding
+producer simultaneously proves the entire lower domain at all those stages.
+This uses the actual original tower, never a caller-supplied admissible
+candidate tower or transformed-ideal equality certificate.
+\end{proof}
+
+\begin{theorem}[Original General3 data produce every literal member-tail domain and dictionary]
+\label{hir:member-tail-actual-general-three-consumer}
+\uses{hir:member-tail-actual-mask-transform-identity,hir:member-lower-extension-actual-general-three-consumer,hir:general-three-actual-companion-domain-dictionary,hir:regime-run}
+\lean{Hironaka.HironakaStepOneMemberTailExtension.exists_actual_companion_member_tail_extension}
+\leanok
+Original true domain3 and its actual canonical constructed invFamily3 tower,
+at an actual positive-order point and genuine positive-level nonspecial
+companion point, internally produce the actual regimeRun head member extension,
+its entire domain2 controlled transform at every literal remaining prefix, and
+its exact equality on the original mask with every literal lowerMarked tail
+transform. No lower datum, lower domain, smooth strict-carrier data, candidate
+admissibility or whole-tail equality is supplied as a certificate.
+\end{theorem}
+\begin{proof}
+The genuine original canonical-tail producer supplies actual companion domain3,
+maximal order and the literal canonical Step1 tail. Its true bridge supplies
+the genuine barMarked test tower. Compute the actual own-level regimeRun and
+split that literal tower. The actual run-head producer gives the true positive
+head level, original-mask head image, internally nonempty member set and entire
+initial domain2 extension. The split test-tower identity supplies the genuine
+remaining tail of the actual transformed head barMarked. Apply the preceding
+entire-tail producer to each literal prefix of that tail and its original mask.
+Its exact initial equality is with the original positive-level lowerMarked;
+the exact transformed dictionary is consequently the actual one used by the
+literal constructed lower value at every stage. The construction uses only the
+original canonical data and computed true objects.
+\end{proof}
+
+\begin{remark}
+The actual entire lower domain and mask dictionary are produced. Canonicality
+of this entire candidate tower, the deeper General2 companion-history extension,
+the true level-zero contact extension, whole General3 finite-threshold descent
+and general global termination remain OPEN.
+\end{remark}

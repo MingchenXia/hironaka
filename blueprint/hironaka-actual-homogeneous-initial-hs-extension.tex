@@ -1,0 +1,132 @@
+\section{The genuine homogeneous initial ideal has the actual original Hilbert--Samuel function}
+
+Work in the existing $S=\mathbb C[[X_1,\ldots,X_n]]$ with its genuine
+variable ideal $\mathfrak n$, complex action and degree-first monomial order.
+For actual nonzero $F$ let $a(F)$ be its internally constructed least
+coefficient exponent, put $d(F)=|a(F)|$, and define the actual homogeneous
+initial form $\operatorname{in}F=[F]_{d(F)}$, where $[F]_q$ is the genuine
+homogeneous degree-$q$ component of the SAME formal series.
+For an actual ideal $I$ define
+\[
+ \operatorname{in}I=(\operatorname{in}F:0\ne F\in I)\subset S.
+\]
+This is exactly the homogeneous initial ideal in
+\cite[\S7, Remark~7.6 and Lemma~7.7, pp.~263--264]{bierstone-milman97-invent-math}.
+We prove the actual whole diagram and Hilbert--Samuel identities internally,
+without a supplied basis, rank, flat-degeneration or dimension certificate.
+
+\begin{lemma}[True homogeneous components and literal initial exponents]
+\label{hir:actual-homogeneous-initial-form-coefficients}
+\uses{hir:actual-formal-initial-exponent-coefficient-product,hir:actual-formal-degreelex-initial-exponent-power-kernel}
+The genuine lowest total order of actual nonzero $F$ is $d(F)$.
+Its actual initial form has coefficient $[X^\alpha]F$ in degree $d(F)$
+and zero in every other degree; it is nonzero and has exactly the SAME
+least degree-first exponent $a(F)$.
+For any true homogeneous $B$ of degree $d$ and any actual $H$, its
+true degree-$q$ product component is
+\[
+ [HB]_q=\begin{cases}0&q<d,\\{}[H]_{q-d}B&q\ge d.\end{cases}
+\]
+\lean{Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialDegree,Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialDegree_eq_order,Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialForm,Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialForm_ne_zero,Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialForm_initialExponent,Hironaka.HironakaActualHomogeneousInitialHS.homogeneousComponent_mul_homogeneous_of_le,Hironaka.HironakaActualHomogeneousInitialHS.homogeneousComponent_mul_homogeneous_of_lt}
+\leanok
+\end{lemma}
+\begin{proof}
+The actual minimum exponent has a true nonzero coefficient. Every
+exponent of lower total degree precedes it in the actual degree-first
+order and therefore has zero coefficient. This proves that the genuine
+formal total order is exactly $d(F)$. The actual homogeneous-component
+coefficient formula retains the nonzero minimum coefficient and kills
+all other degrees. Every exponent preceding $a(F)$ has either zero
+original coefficient or zero projected coefficient, so actual minimum
+uniqueness gives the SAME exponent for $\operatorname{in}F$.
+For the product formula use the true finite antidiagonal convolution.
+When the target exponent has total degree $q$, a nonzero coefficient
+from $B$ has degree $d$, forcing the complementary exponent from $H$
+to have degree $q-d$. If $q<d$ there is no such actual antidiagonal
+pair. If $q\ge d$, replacing $H$ by its actual degree-$(q-d)$
+component therefore leaves precisely the same degree-$q$ coefficients.
+The product of the two actual homogeneous components is homogeneous
+of degree $q$, so all its other coefficients vanish as well. Actual
+coefficient extensionality proves the displayed full series identity.
+\end{proof}
+
+\begin{theorem}[Every actual homogeneous initial-ideal component lifts into the original whole ideal]
+\label{hir:actual-homogeneous-initial-ideal-degree-lift}
+\uses{hir:actual-homogeneous-initial-form-coefficients}
+For EVERY actual $G\in\operatorname{in}I$ and EVERY $q\in\mathbb N$,
+there exists an actual $F_q\in I\cap\mathfrak n^q$ such that
+$[F_q]_q=[G]_q$.
+\lean{Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialIdealIndex,Hironaka.HironakaActualHomogeneousInitialHS.actualHomogeneousInitialIdeal,Hironaka.HironakaActualHomogeneousInitialHS.actual_initial_product_degree_lift,Hironaka.HironakaActualHomogeneousInitialHS.actual_homogeneous_initial_ideal_degree_lift}
+\leanok
+\end{theorem}
+\begin{proof}
+Actual ideal-span membership internally supplies a finite original
+combination $G=\sum_i H_i\operatorname{in}f_i$, with genuine nonzero
+$f_i\in I$ and genuine formal coefficients $H_i$. Write $d_i=d(f_i)$.
+For $q<d_i$ the preceding product formula gives a zero degree-$q$
+component, and we choose zero for that summand's original lift.
+For $q\ge d_i$, choose the actual original member
+$[H_i]_{q-d_i}f_i\in I$. Its genuine order is at least
+$(q-d_i)+d_i=q$, so it belongs to the actual whole $\mathfrak n^q$.
+The true lowest-order product formula gives its degree-$q$ component
+as $[H_i]_{q-d_i}\operatorname{in}f_i$, which is exactly the degree-$q$
+component of $H_i\operatorname{in}f_i$ by the preceding lemma.
+The finite actual sum of these chosen original lifts belongs to BOTH
+$I$ and $\mathfrak n^q$. The genuine homogeneous-component map is
+complex linear, so the sum's actual degree-$q$ component is exactly
+$[G]_q$. This constructs the lift from actual finite original
+coefficients and true product convolution; no desired lift is assumed.
+\end{proof}
+
+\begin{theorem}[Both whole genuine degree-first initial diagrams coincide]
+\label{hir:actual-homogeneous-initial-ideal-diagram-equality}
+\uses{hir:actual-homogeneous-initial-ideal-degree-lift,hir:actual-homogeneous-initial-form-coefficients}
+The genuine actual diagrams satisfy
+$\mathcal N(\operatorname{in}I)=\mathcal N(I)$.
+\lean{Hironaka.HironakaActualHomogeneousInitialHS.actual_homogeneous_initial_ideal_diagram}
+\leanok
+\end{theorem}
+\begin{proof}
+If an actual exponent is the least exponent of nonzero $F\in I$,
+the preceding lemma says that it is also the least exponent of the
+SAME nonzero $\operatorname{in}F\in\operatorname{in}I$. This gives
+one whole diagram inclusion.
+Conversely let $G\in\operatorname{in}I$ be nonzero, let $a=a(G)$,
+and put $q=|a|$. Apply the preceding actual degree-lift theorem to
+obtain $F_q\in I\cap\mathfrak n^q$ with $[F_q]_q=[G]_q$.
+The actual coefficient at $a$ survives this equality and is nonzero.
+Every exponent preceding $a$ in the genuine degree-first order has
+degree at most $q$. If its degree is less than $q$, its coefficient
+in $F_q$ vanishes by true whole-power membership. If its degree is
+$q$, its coefficient agrees with that of $G$ by the actual homogeneous
+component equality, and vanishes by the true minimality of $a(G)$.
+Thus $F_q$ is nonzero and has exactly least exponent $a$.
+This puts the arbitrary actual exponent in $\mathcal N(I)$ and proves
+the reverse whole inclusion.
+\end{proof}
+
+\begin{theorem}[Actual homogeneous initial ideals preserve every genuine Hilbert--Samuel value]
+\label{hir:actual-homogeneous-initial-ideal-hs-equality}
+\uses{hir:actual-homogeneous-initial-ideal-diagram-equality,hir:actual-formal-and-original-hs-standard-monomial-count}
+For EVERY actual ideal $I$ and every $\ell\in\mathbb N$,
+\[
+ \dim_{\mathbb C}S/(I+\mathfrak n^{\ell+1})
+ =\dim_{\mathbb C}S/(\operatorname{in}I+\mathfrak n^{\ell+1}).
+\]
+Both quotients use the genuine existing complex scalar action and
+actual whole ideals. In particular the genuine homogeneous initial
+ideal has exactly the actual original formal Hilbert--Samuel function.
+\lean{Hironaka.HironakaActualHomogeneousInitialHS.genuineFormalHilbertSamuelValue_homogeneous_initial}
+\leanok
+\end{theorem}
+\begin{proof}
+The existing genuine formal division constructs the actual finite
+standard-monomial basis of EACH whole displayed quotient. Its dimension
+is therefore exactly the number of actual exponents of degree at most
+$\ell$ outside that ideal's true degree-first diagram. The preceding
+BOTH whole diagram inclusions make these actual finite index sets
+identical. Their true finite cardinalities, and hence the existing
+complex vector-space dimensions, agree. The argument covers the zero
+and unit ideals and the empty coordinate family. No formal-series
+scalar transport, finite rank premise or HS comparison is supplied.
+\end{proof}

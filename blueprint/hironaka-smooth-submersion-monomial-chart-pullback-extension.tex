@@ -1,0 +1,58 @@
+\section{Actual Cartesian fibre-product geometry of the monomial blowup charts}
+Let $n,r,k$ be natural numbers and $j\in\operatorname{Fin}(n)$. The fibre-first source coordinates are $\mathbb C^{r+n}=\mathbb C^r\times\mathbb C^n$. Write $\operatorname{fib}$ and $\operatorname{drop}$ for the two genuine finite continuous linear projections and $\operatorname{join}$ for their genuine continuous linear inverse. Let $j'=r+j$ be the literal shifted index. The target monomial map is the existing actual polynomial $\sigma_{k,j}$, which multiplies coordinates $i\geq k$, $i\neq j$ by the pivot coordinate $w_j$. The source map is the actual $\sigma_{r+k,j'}$. No chart-square, smoothness, lift or universality conclusion is an input.
+
+\begin{theorem}[Entire genuine fibre-first finite coordinate dictionary]
+\label{hir:submersion-monomial-chart-blocks}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialChartPullback.splitCoordinates,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.fibreProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.blockProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.joinCoordinates,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.fibreProjection_join,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.blockProjection_join,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.joinCoordinates_projections,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.fibreProjection_apply,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.blockProjection_apply,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_fibreProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_blockProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_joinCoordinates,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.fibreInclusion,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.blockInclusion,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.joinCoordinates_eq_add}
+\leanok
+The internally defined maps $\operatorname{fib},\operatorname{drop},\operatorname{join}$ are holomorphic, with $\operatorname{fib}(\operatorname{join}(a,b))=a$, $\operatorname{drop}(\operatorname{join}(a,b))=b$ and $\operatorname{join}(\operatorname{fib}(w),\operatorname{drop}(w))=w$. Each genuine fibre coordinate and each shifted target coordinate is read literally, including $r=0$ and $k=0$.
+\end{theorem}
+\begin{proof}
+Use the actual finite Euclidean continuous linear equivalence for the split of $\operatorname{Fin}(r+n)$ into $\operatorname{Fin}(r)$ and $\operatorname{Fin}(n)$. The two actual projections are continuous linear maps and join is the inverse actual continuous linear equivalence. Their inverse identities follow from its actual left and right inverse equalities. The coordinate formula is obtained by the true sum-index equivalence; hence no chosen coordinate-index certificate is needed. Continuous linear maps are holomorphic. If either block is empty, the genuine finite equivalence still gives these SAME identities.
+\end{proof}
+
+\begin{theorem}[Actual source monomial map retains all fibres and drops to the true target map]
+\label{hir:submersion-monomial-chart-commutation}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialChartPullback.fibreProjection_monomial,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.blockProjection_monomial,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.monomial_eq_join}
+\leanok
+\uses{hir:submersion-monomial-chart-blocks}
+For EVERY actual $w$, the polynomial source chart projection has $\operatorname{fib}(\sigma_{r+k,j'}(w))=\operatorname{fib}(w)$ and $\operatorname{drop}(\sigma_{r+k,j'}(w))=\sigma_{k,j}(\operatorname{drop}(w))$. Equivalently its entire polynomial is $\operatorname{join}(\operatorname{fib}(w),\sigma_{k,j}(\operatorname{drop}(w)))$.
+\end{theorem}
+\begin{proof}
+Every fibre index has value below $r$, hence below $r+k$, and is different from $j'=r+j$. The actual source monomial formula therefore leaves it unchanged. At a shifted target index $r+i$ the inequality $r+k\leq r+i$ is exactly $k\leq i$, and $r+i\neq r+j$ is exactly $i\neq j$. Read the shifted coordinate of the source polynomial using the preceding genuine finite dictionary. Both its multiplication branch and its unchanged branch are therefore exactly the target monomial coordinate. Equality of the entire finite vectors proves the written formulas; join's true inverse then proves the whole polynomial equality.
+\end{proof}
+
+\begin{theorem}[The actual lifted monomial-chart map is a genuine complex submersion]
+\label{hir:submersion-monomial-chart-smooth-drop}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialChartPullback.isSubmersionOfComplement_blockProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.isSubmersion_blockProjection}
+\leanok
+\uses{hir:submersion-monomial-chart-blocks}
+The actual map $\operatorname{drop}:\mathbb C^{r+n}\to\mathbb C^n$ is a genuine complex submersion with the actual fibre complement $\mathbb C^r$.
+\end{theorem}
+\begin{proof}
+Use actual global complex vector-space charts on source and target. The true continuous linear split followed by the actual factor interchange is an equivalence from the source model to target model times the SAME fibre complement. In these genuine maximal-atlas charts the map is literally the first projection. Thus the definition of submersion with complement holds at every actual point. No derivative-rank or submersion conclusion is caller data. For $r=0$ this is the genuine isomorphism case; an empty target coordinate index only means there is no chosen pivot chart.
+\end{proof}
+
+\begin{theorem}[Every actual holomorphic cone has an internally constructed unique monomial-chart lift]
+\label{hir:submersion-monomial-chart-cartesian}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialChartPullback.coneLift,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.coneLift_contMDiff,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.coneLift_projection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.coneLift_drop,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.coneLift_unique,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.existsUnique_monomial_lift}
+\leanok
+\uses{hir:submersion-monomial-chart-blocks,hir:submersion-monomial-chart-commutation}
+For every space $P$ genuinely charted on the complex $\ell$-model, in particular every genuine complex $\ell$-manifold, any holomorphic $u:P\to\mathbb C^{r+n}$ and $v:P\to\mathbb C^n$ with $\operatorname{drop}u=\sigma_{k,j}v$ have a unique actual holomorphic $w:P\to\mathbb C^{r+n}$ satisfying $\sigma_{r+k,j'}w=u$ and $\operatorname{drop}w=v$. No nonvanishing, invertibility, dense-image or exclusion of exceptional cones is required.
+\end{theorem}
+\begin{proof}
+Define the genuine lift $w=\operatorname{join}(\operatorname{fib}u,v)$. Its actual component functions are holomorphic; join is the sum of the genuine fibre and block continuous linear inclusions, so the lift is holomorphic. The whole source polynomial dictionary gives $\sigma' w=\operatorname{join}(\operatorname{fib}u,\sigma v)$, which is $u$ by the true compatible square and join's actual inverse. Its drop is $v$ by the real inverse identity. A competing lift $w'$ has drop $v$ and fibre $\operatorname{fib}(\sigma' w')=\operatorname{fib}u$, using actual fibre preservation; the entire coordinate split therefore forces $w'=w$. This proof also applies if both maps are entirely within the pivot-zero exceptional hyperplane, where ideal-invertibility alone would not supply a lift.
+\end{proof}
+
+\begin{theorem}[Literal product-open chart domains retain the entire holomorphic Cartesian square]
+\label{hir:submersion-monomial-chart-open-cartesian}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialChartPullback.baseProductOpen,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.targetChartOpen,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.sourceChartOpen,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.baseOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.targetOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.sourceOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.liftedOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_baseOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_targetOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_sourceOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.contMDiff_liftedOpenProjection,Hironaka.HironakaSmoothSubmersionMonomialChartPullback.existsUnique_open_monomial_lift}
+\leanok
+\uses{hir:submersion-monomial-chart-blocks,hir:submersion-monomial-chart-commutation,hir:submersion-monomial-chart-cartesian}
+Let $R\subseteq\mathbb C^r$ and $S\subseteq\mathbb C^n$ be actual opens. The source base is the literal open $\{a:\operatorname{fib}a\in R,\operatorname{drop}a\in S\}$, the target base is $S$, the actual source monomial chart is $\{w:\operatorname{fib}w\in R,\sigma\operatorname{drop}w\in S\}$ and the target chart is $\{v:\sigma v\in S\}$. Their literal source/target polynomial projections and drop maps are holomorphic. Every actual compatible holomorphic cone into these SAME base and chart opens has a unique genuine holomorphic lift into the SAME source monomial-chart open.
+\end{theorem}
+\begin{proof}
+All displayed sets are open by genuine polynomial continuity and finite continuous linear projections. The entire monomial dictionary shows that the polynomial projection lands in the literal source base and drop lands in the literal target chart. Their subtype-valued maps are holomorphic by the actual open-subtype holomorphic equivalence. Given a genuine compatible cone, compose with the literal inclusions and apply the preceding explicit join lift. Its actual fibre is the original source fibre in $R$ and its actual target monomial image is the target chart's given point in $S$, so its value lies in the written source chart open. Subtype-valued holomorphicity follows from the genuine included join map. The two square identities and uniqueness follow by inclusion injectivity from the entire model identities. Empty opens retain these literal statements.
+\end{proof}
+
+These are actual full monomial model and product-open chart producers. They do not assume a Cartesian certificate. To apply them to the original arbitrary blowup lift requires internally adapted original submersion/centre charts, genuine arbitrary-choice comparison, and all-chart gluing of the actual lift. Those next geometric conclusions, higher invariant functoriality, old general-driver identification and general noncompact termination remain open.

@@ -1,0 +1,115 @@
+\section{Actual original complex Taylor polynomials and stable coefficients}
+
+This is the convergent original-coefficient bridge toward the formal
+standard-basis setting of \cite[\S7]{bierstone-milman97-invent-math}.
+Every polynomial is evaluated at the ACTUAL original coordinate germs,
+with the ORIGINAL constant-germ complex action. The already proved
+zero-tangential-block identification $\mathbb C^{0+n}=\mathbb C^n$
+retains these same coordinates. No formal-series multiplication or division
+is asserted in this chapter.
+Write $R=\mathcal O_{\mathbb C^n,0}$, $\mathfrak m$ for its actual
+maximal ideal, $X^\alpha$ for the actual coordinate monomial, and
+$|\alpha|=\sum_i\alpha_i$ for the true original exponent degree.
+
+\begin{lemma}[Actual original polynomial evaluation separates all lower coefficients]
+\label{hir:actual-original-polynomial-low-coefficient-separation}
+\uses{hir:relative-normal-basis-actual-coefficient-separation,hir:relative-normal-actual-zero-base-complex-algebra}
+\lean{Hironaka.HironakaActualOriginalTaylorPolynomial.originalPolynomialEval,Hironaka.HironakaActualOriginalTaylorPolynomial.originalPolynomialEval_monomial,Hironaka.HironakaActualOriginalTaylorPolynomial.normalPolynomialEval_original_coefficient_lift,Hironaka.HironakaActualOriginalTaylorPolynomial.originalPolynomial_coefficient_eq_zero_of_eval_mem}
+\leanok
+The actual evaluation $\operatorname{ev}:\mathbb C[X_1,\ldots,X_n]\to R$
+is an algebra homomorphism with
+$\operatorname{ev}(aX^\alpha)=a\,X^\alpha$ in the original whole ring.
+If $\operatorname{ev}(P)\in\mathfrak m^q$, EVERY actual coefficient
+$[X^\alpha]P$ with $|\alpha|<q$ is zero.
+\end{lemma}
+\begin{proof}
+Use literal original coordinate germs in polynomial evaluation; its
+monomial formula is the original finite product formula. Map the same
+complex polynomial coefficients to their actual zero-dimensional
+constant germs. True zero-block pullback of each such constant is the
+SAME original ambient complex constant, so evaluating this coefficient
+lift by the existing whole normal polynomial map gives precisely
+$\operatorname{ev}(P)$. The actual zero-tangent normal ideal is
+$\mathfrak m$. Existing genuine whole normal coefficient separation
+therefore annihilates every coefficient below $q$ as a zero-dimensional
+whole germ; actual evaluation at its unique point gives the displayed
+original complex coefficient zero. This includes zero dimension and
+$q=0$, where the lower-coefficient condition is empty.
+\end{proof}
+
+\begin{theorem}[Every original numerator has a canonical genuine finite Taylor polynomial]
+\label{hir:actual-original-canonical-finite-taylor-polynomial}
+\uses{hir:actual-original-polynomial-low-coefficient-separation,hir:relative-normal-actual-base-jet-complex-monomial-dictionary}
+\lean{Hironaka.HironakaActualOriginalTaylorPolynomial.originalJetCoordinates,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_coefficient_low,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_coefficient_high,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_quotient_class,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_remainder,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_unique,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_add,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_smul}
+\leanok
+For every original $g\in R$ and $k\ge0$, internally define
+$T_k(g)\in\mathbb C[X]$ using the actual distinct-monomial complex
+coordinates of the TRUE quotient $R/\mathfrak m^{k+1}$.
+Its coefficients vanish when $|\alpha|\ge k+1$, and
+\[
+ g-\operatorname{ev}(T_k(g))\in\mathfrak m^{k+1}.
+\]
+It is the UNIQUE polynomial with that coefficient support bound and that
+actual whole remainder. The construction is complex linear in the
+original numerator.
+\end{theorem}
+\begin{proof}
+Apply the inverse of the already constructed original complex monomial
+quotient equivalence to the ACTUAL class of $g$. If its coordinate tuple
+is $c_\alpha$, set $T_k(g)=\sum_{|\alpha|<k+1}c_\alpha X^\alpha$.
+The genuine finite original exponent family gives the asserted support
+bound. Expanding its coefficient tuple as the finite sum of standard
+basis vectors and using the actual monomial-class formula for that SAME
+quotient equivalence proves that the class of its evaluation is exactly
+the original class of $g$. This is precisely the stated whole remainder.
+If $P$ has the same support bound and remainder, evaluation of
+$P-T_k(g)$ lies in $\mathfrak m^{k+1}$. The first lemma annihilates all
+its lower coefficients; both original support bounds annihilate the
+others. Polynomial coefficient extensionality gives uniqueness.
+All constituent quotient, inverse-basis and coefficient combination maps
+are linear for the original complex action, giving linearity.
+\end{proof}
+
+\begin{theorem}[True original Taylor coefficients stabilize across all actual truncations]
+\label{hir:actual-original-taylor-coefficient-stabilization}
+\uses{hir:actual-original-canonical-finite-taylor-polynomial,hir:actual-original-polynomial-low-coefficient-separation}
+\lean{Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorPolynomial_coefficient_stable,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorCoefficientMap,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorCoefficientMap_eq_coefficient}
+\leanok
+If $k\le l$ and $|\alpha|<k+1$, then
+$[X^\alpha]T_l(g)=[X^\alpha]T_k(g)$.
+Thus the original complex coefficient
+$c_\alpha(g):=[X^\alpha]T_{|\alpha|}(g)$ equals
+$[X^\alpha]T_k(g)$ for EVERY $k$ with $|\alpha|<k+1$.
+\end{theorem}
+\begin{proof}
+The true higher remainder belongs to $\mathfrak m^{l+1}\subseteq
+\mathfrak m^{k+1}$, and the true lower remainder belongs there too.
+Subtracting these genuine original whole remainders shows that
+$\operatorname{ev}(T_l(g)-T_k(g))\in\mathfrak m^{k+1}$.
+Actual lower polynomial coefficient separation gives the first equality.
+Apply it with lower truncation $|\alpha|$ to obtain the stated equality
+for the actual stable coefficient. No coefficient compatibility premise
+is supplied by a caller.
+\end{proof}
+
+\begin{theorem}[All genuine original coefficients give a faithful complex linear map]
+\label{hir:actual-original-all-taylor-coefficients-faithful}
+\uses{hir:actual-original-taylor-coefficient-stabilization,hir:actual-whole-ideal-maximal-filtration-separated}
+\lean{Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorCoefficientMap_eq_zero_iff,Hironaka.HironakaActualOriginalTaylorPolynomial.originalTaylorCoefficientMap_injective}
+\leanok
+The actual original coefficient map
+$g\mapsto(c_\alpha(g))_\alpha$ is complex linear and injective into the
+actual coefficient function space $(\mathbb N^n\to\mathbb C)$.
+\end{theorem}
+\begin{proof}
+Linearity follows from the true finite polynomial construction at the
+original degree $|\alpha|$. If all actual coefficients of $g$ vanish,
+stabilization annihilates every lower coefficient of EVERY $T_k(g)$;
+its genuine support bound annihilates the others, so $T_k(g)=0$.
+The true remainder then places the original $g$ in EVERY
+$\mathfrak m^{k+1}$. Whole original ideal separation at $I=0$ gives
+$g=0$. Apply this kernel conclusion to a difference, using actual
+complex linearity, to obtain injectivity. This is a faithful original
+linear coefficient map; formal-series algebra multiplication remains the
+next explicit obligation.
+\end{proof}

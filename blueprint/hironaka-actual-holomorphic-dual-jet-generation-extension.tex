@@ -1,0 +1,122 @@
+\section{Genuine holomorphic generation by original projected dual rows}
+
+The actual jet space is always
+$E_q=\operatorname{range}(\operatorname{finiteJet}_q)$. For fixed
+actual pivot rows let $K_q$ be the genuine fixed quotient model,
+a subspace of the true scalar-jet image inside the word array.
+Repeated word rows are not declared independent.
+
+\begin{theorem}[One fixed retraction and fixed true-jet section]
+\label{hir:actual-fixed-quotient-retraction-and-true-jet-section}
+\uses{hir:actual-entire-point-quotient-pivot-frame,hir:actual-fixed-entire-scalar-jet-representatives}
+\lean{Hironaka.HironakaActualHolomorphicDualJetGeneration.actualFixedQuotientRetraction,Hironaka.HironakaActualHolomorphicDualJetGeneration.actualFixedTrueJetSection,Hironaka.HironakaActualHolomorphicDualJetGeneration.actualFixedQuotientRetraction_apply,Hironaka.HironakaActualHolomorphicDualJetGeneration.actualDualGenerationVector,Hironaka.HironakaActualHolomorphicDualJetGeneration.actualDualGenerationCoefficient}
+\leanok
+There is a specified complex-linear retraction $R$ of the full scalar
+array onto the actual fixed model $K_q$, independent of nearby points
+and moving functionals. Its value on the underlying array of every
+$v\in K_q$ is exactly $v$. The specified section $S:K_q\to E_q$
+is the actual finite jet of the already fixed whole-germ scalar-jet
+representative. Put
+$u_a=S(R e_a)\in E_q$ and, for an actual moving functional
+$\Lambda(c):E_q\to\mathbb C$, define the genuine coefficient function
+$b_a(c)=\Lambda(c)(u_a)$.
+\end{theorem}
+\begin{proof}
+The inclusion of the genuine fixed-model subspace into scalar arrays
+is injective. Use the existing vector-space linear left-inverse theorem
+once to specify its linear retraction $R$; its true left-inverse
+identity gives $R(v)=v$ on that subspace. For $S$, include $K_q$ into
+the actual scalar-jet range, apply the already fixed whole-germ
+representative, then apply the original finite-jet map corestricted
+to its genuine image $E_q$. Each map is an actual complex-linear map,
+and every representative has exactly its original scalar jet. These
+choices depend on the fixed order and actual fixed pivot rows, not
+on a point, functional or later jet order. Consequently each $u_a$
+is a fixed genuine original jet vector, and each displayed $b_a$ is
+an actual scalar function given by evaluation on that fixed vector.
+\end{proof}
+
+\begin{theorem}[Every genuine holomorphic moving true-jet annihilator has explicit holomorphic projected-row coefficients]
+\label{hir:actual-holomorphic-true-jet-annihilator-generation}
+\uses{hir:actual-fixed-quotient-retraction-and-true-jet-section,hir:actual-centre-projected-dual-row-pairing,hir:actual-entire-point-quotient-pivot-frame,hir:actual-finite-linear-jet-kernel}
+\lean{Hironaka.HironakaActualHolomorphicDualJetGeneration.actual_holomorphic_true_jet_annihilator_generation}
+\leanok
+Use one unchanged original holomorphic family on a real open $U$ and
+actual original pivots on $D\subset U$, with nonzero pivot determinant
+and actual centre rank equal to pivot size. Let $V=T^{-1}(D)$. Suppose
+$\Lambda(c)$ is an actual moving linear functional on $E_q$, with
+$c\mapsto\Lambda(c)(v)$ holomorphic on $V$ for every fixed true jet
+$v$, and suppose it kills the jet of every germ in the entire original
+translated ideal at each actual $Tc\in D$.
+
+The explicitly specified functions $b_a(c)=\Lambda(c)(u_a)$ are
+holomorphic on the same $V$. For every $c\in V$ and $v\in E_q$,
+\[
+ \Lambda(c)(v)=\sum_a b_a(c)\sum_r\eta_{a,r}(c)
+      (\operatorname{finiteCoordinateArray}_q(v))_r.
+\]
+The functions $b_a$ are fixed before the universal point quantifier.
+No holomorphic choice of a pointwise dual expansion is assumed.
+\end{theorem}
+\begin{proof}
+Holomorphicity of $b_a$ is holomorphicity of the original moving
+functional evaluated on the one actual fixed vector $u_a$.
+
+Fix an actual point and true jet $v$, and represent $v$ by a whole
+original germ $g$. Let $Q$ be the genuine whole quotient coordinates
+and let $h$ be the fixed whole-germ representative of $Qg\in K_q$.
+The accepted fixed-representative identity gives $Qh=Qg$ for this
+same original pivot. Thus $g-h$ belongs to the entire original kernel
+$I(Tc)+\mathfrak m^q$. The functional kills the ideal part by its
+actual whole-ideal annihilation hypothesis and kills the point-power
+part by the exact original finite-jet kernel. Therefore
+$\Lambda(c)(v)=\Lambda(c)(S(Qg))$.
+
+The underlying scalar array of $Qg$ is exactly the original projected
+scalar jet $P(Tc)\operatorname{finiteCoordinateArray}_q(v)$. Since
+$R$ fixes every true fixed-model vector, the latter functional value
+is the composite actual array functional $\Lambda(c)\circ S\circ R$
+applied to that array. Decompose it in the genuine finite coordinate
+vectors $e_a$. The value of this composite on $e_a$ is precisely the
+previously specified function $b_a(c)$. Its coordinate sum is therefore
+$\sum_a b_a(c)(P(Tc)\operatorname{finiteCoordinateArray}_q(v))_a$.
+Finally apply the exact projected-row pairing identity to each
+coordinate. This proves the displayed equality for the same explicit
+holomorphic coefficient functions on the whole actual domain. The
+argument never promotes pointwise spanning to a module-basis claim.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centre geometry internally supplies all-order holomorphic dual generation]
+\label{hir:actual-original-hs-centre-holomorphic-true-jet-dual-generation}
+\uses{hir:actual-holomorphic-true-jet-annihilator-generation,hir:actual-hs-constant-centre-origin-pivot-whole-frames}
+\lean{Hironaka.HironakaActualHolomorphicDualJetGeneration.exists_original_hs_constant_centre_holomorphic_dual_generation}
+\leanok
+Only original coherent ideal data, actual regular centre geometry and
+original intrinsic HS constancy internally choose one actual original
+flattening, original generating family/open, and real flattened open
+$U$ through zero before all orders. At each order they internally
+choose genuine original pivots and an actual real open $D_q\subset U$
+through zero. Every actual holomorphic moving functional on the true
+$E_q$ annihilating the entire original ideal jets on
+$V_q=T^{-1}(D_q)$ then has precisely the explicit holomorphic
+coefficient functions above in those specified original projected rows.
+No pivot, rank, dual-frame, spanning or holomorphic-expansion certificate
+is a caller input to the geometric producer.
+\end{theorem}
+\begin{proof}
+Apply the accepted original HS-constant-centre origin-pivot theorem,
+whose original chart, original coherent generating family and real
+generating open, and flattened $U$ precede every order. At each order,
+its actual maximal pivot at zero gives a true real open $D_q\subset U$
+through zero on which the original determinant is nonzero. Original
+HS constancy gives the actual centre rank equality with that same
+selected pivot size. Thus every hypothesis of the preceding genuine
+holomorphic-generation theorem is internally proved for these same
+objects and $V_q$. Apply it to each actual moving functional and its
+ordinary holomorphic/whole-ideal-annihilation hypotheses, using the
+fixed retraction and fixed actual representatives for those very
+pivot rows. The coefficient functions are specified before their
+pointwise equality and are holomorphic on the same actual per-order
+domain. No common all-order domain, holomorphic module basis, joint
+principal-parts presentation or normal-flatness theorem is claimed.
+\end{proof}

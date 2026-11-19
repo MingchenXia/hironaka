@@ -1,0 +1,78 @@
+/- Complete original prerequisites; mathematical statements and proofs are unchanged. -/
+import Hironaka.Blowup.BlowupTowerSplit
+import Hironaka.Blowup.BlowupTowerIsoTail
+
+set_option autoImplicit false
+set_option linter.unusedSectionVars false
+
+/-!
+# Splitting a tower, along restriction to open sets and along isomorphisms of towers
+
+Blueprint `hir:tower-split-iso` (`blueprint/src/hironaka.tex`, Hironaka phase H4).  In the maximal-order case and the
+general step (`hir:maximal-order-step`, `hir:general-step`) the lower-dimensional invariant at a point is computed along the
+tail of the split of the segment at a stage depending on the point (`BlowupTowerSplit.split`).  Properties (5) and (6) of
+`hir:centre-function` for the new invariant compare the split of a restricted tower `T|_U`, resp. of an isomorphic tower
+`T'`, with the split of `T`; this module gives the comparison as isomorphisms of towers (TN23's `IsTowerIso`), so that
+properties (5) and (6) of the inductive invariant apply to the pieces.  Source: Włodarczyk 2005 (arXiv `hiron.tex`), the
+commutativity of the resolution procedure of Step 1 with étale morphisms (the induced sequence `φ^*(X_i)_{i_l ≤ i ≤ i_{l+1}}`
+of each part of the resolution).
+
+The restriction `restrict U T` of a tower is not definitionally the concatenation of the restricted pieces (the stages agree
+only propositionally), so the comparisons are isomorphisms of towers whose last-stage maps are the identity on points.
+
+## Main results
+
+* `IsTowerIso.congr_last`, `IsTowerIso.congr_base`: an isomorphism of towers may be stated with any pointwise equal
+  last-stage map, resp. base biholomorphism;
+* `isTowerIso_restrict_of_append_eq`: the form `T₀.append T₁ = T` of TN23's `isTowerIso_restrict_append`;
+  `openPreimage_head_tail`, `isTowerIso_restrict_head_tail`: the restriction of `T` is isomorphic to the concatenation of
+  the restrictions of the head and of the tail of its split;
+* `exists_isTowerIso_split_restrict`: **the split of a restricted tower is the restriction of the split** -- the head of
+  `split (restrict U T) j` is isomorphic over `id_U` to `restrict U (head T j)`, and its tail, over that isomorphism, to
+  `restrict (openPreimage (head T j) U) (tail T j)` with last-stage map the identity on points; `proj_tail_split_restrict`:
+  the head isomorphism sends the image of a point in the head stage of the restricted split to its image in the head stage
+  of the split;
+* `IsTowerIso.exists_split`: **splits correspond along isomorphisms of towers** -- for `IsTowerIso Φ T' T χ` the heads of the
+  splits at `j` are isomorphic over `Φ` and the tails over that isomorphism, with last-stage map `χ`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
+-/
+
+open Set TopologicalSpace
+open scoped Manifold ContDiff
+
+universe u
+
+namespace Hironaka.BlowupTowerSplitIso
+
+open Hironaka.BlowupSequences
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerIsomorphism Hironaka.BlowupTowerSplit
+  Hironaka.BlowupRestrictOpen Hironaka.BlowupTowerIsoTail
+
+noncomputable section
+
+variable {n : ℕ}
+
+/-! ### Changing the maps of an isomorphism of towers -/
+
+section Congr
+
+variable {X X' : CMfd.{u} n} {Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X} {Y' Y : CMfd.{u} n}
+  {T' : BlowupTower X' Y'} {T : BlowupTower X Y} {χ : Y' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y}
+
+
+
+/-- An isomorphism of towers may be stated over any pointwise equal base biholomorphism. -/
+theorem IsTowerIso.congr_base (h : IsTowerIso Φ T' T χ)
+    {Φ' : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X} (hΦ : ∀ p, Φ' p = Φ p) : IsTowerIso Φ' T' T χ := by
+  obtain rfl : Φ' = Φ := Diffeomorph.ext hΦ
+  exact h
+
+end Congr
+
+
+end
+
+end Hironaka.BlowupTowerSplitIso

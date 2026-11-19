@@ -1,0 +1,52 @@
+\section{Actual fibre-first adaptation and product shrinking of original submersion charts}
+Let the original complex manifold dimensions be $n+r$ and $n$. At an actual source point $y$ the original map $f$ is a genuine complex submersion. Let $\Phi$ be an actual centred holomorphic flattening chart of the original target smooth centre $C$, with target normal coordinates $j\geq k$. These are primitive geometric data, not assumed lifted charts, commuting-coordinate or product-domain conclusions.
+
+\begin{lemma}[Actual finite block rotation and whole plane dictionary]
+\label{hir:submersion-adapted-fibre-first-rotation}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.rotateBlocks,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.rotateBlocks_target,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.rotateBlocks_fibre,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.rotateLinear,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.rotateLinear_apply,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.rotateLinear_plane,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.fibreFirstSplit,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.adaptedTargetProjection,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.adaptedTargetProjection_apply,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.adaptedTargetProjection_plane}
+\uses{hir:submersion-monomial-chart-blocks}
+
+The genuine permutation of $\operatorname{Fin}(n+r)$ obtained by finite-sum decomposition, factor interchange and the actual equality $r+n=n+r$ moves every original target coordinate $j<n$ to literal coordinate $r+j$, and every original complement coordinate $n+i$ to literal coordinate $i<r$. The SAME actual finite split reads the whole target block after this rotation. Its actual complex linear isometry $L$ internally identifies the entire original target-normal coordinate plane with the contiguous source plane of tangent dimension $r+k$.
+\end{lemma}
+\begin{proof}
+Decompose each original finite index into the genuine disjoint blocks $\operatorname{Fin}n+\operatorname{Fin}r$. Interchange the two summands and join using finite addition. The actual final finite cast preserves integer values. Thus the displayed formulas follow from finite-sum inverse identities. For the whole plane equivalence, a rotated coordinate of value at least $r+k$ cannot arise from the complement block, whose values are below $r$. It uniquely arises from target coordinate $j$ with $j\geq k$; its value is exactly the original target coordinate. Conversely every such target index moves to a source normal index. This proves both directions for every vector, including $n=0$, $r=0$, and $k\geq n$.
+\end{proof}
+
+\begin{lemma}[Actual postcomposition retains the entire local holomorphic chart]
+\label{hir:submersion-adapted-holomorphic-postcomposition}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.postcomposeLinear}
+\uses{}
+
+Postcomposing any genuine local holomorphic equivalence $\Xi$ with $L$ internally constructs a genuine local holomorphic equivalence with the SAME original source, actual target $L^{-1}_{\mathrm{inv}}(\Xi.\mathrm{target})$, forward map $L\Xi$ and inverse $\Xi^{-1}L^{-1}$. Its source, inverse, all coordinates and centre have their literal dictionaries.
+\end{lemma}
+\begin{proof}
+The target is open by continuity of the genuine inverse isometry. The original open source and centre remain unchanged. The holomorphic forward map is the composition with the actual complex continuous linear map; the inverse composition is holomorphic on its actual target. The original inverse identities together with $L^{-1}L=1$ and $LL^{-1}=1$ prove both inverse identities and actual source/target membership. At a centred chart $L(0)=0$. The finite permutation formula gives every individual shifted target and complement coordinate, not only a plane or cardinality statement.
+\end{proof}
+
+\begin{theorem}[Original submersion internally produces the SAME whole centre adapted chart]
+\label{hir:submersion-adapted-whole-original-centre}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.adaptedCoordinates,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.adaptedCoordinates_dictionary,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.adaptedCoordinates_whole_centre}
+\uses{hir:submersion-nc-full-lifted-coordinates,hir:submersion-adapted-fibre-first-rotation,hir:submersion-adapted-holomorphic-postcomposition}
+
+The actual submersion and original target flattening internally construct a centred source chart $\Psi$ with source contained in the preferred source chart target. On its entire genuine flat domain, $f$ lands in the original target flat domain and every shifted coordinate $r+j$ is exactly $(\Phi\circ e_{fy})_j\circ f$. If the entire original target centre has the actual equations $j\geq k$, the entire original preimage $f^{-1}C$ has the contiguous equations of the source coordinate plane of tangent dimension $r+k$ on this SAME source chart.
+\end{theorem}
+\begin{proof}
+Apply the existing actual submersion chart construction $\operatorname{liftedCoordinatesAdd}$ to the original submersion, actual target chart and its genuine zero-centre equality. Its fixed target-first block dictionary holds at every original source flat-domain point and gives true target-domain membership. Postcompose with the preceding internally constructed finite block rotation. Its original source is unchanged, the centre stays zero, and every target coordinate moves to literal $r+j$. Apply the actual target whole-centre equation and the whole plane dictionary in both directions. No chart, injection, centre equation for the preimage or adapted-chart conclusion is assumed.
+\end{proof}
+
+\begin{theorem}[The actual chart internally supplies a true product-open shrink]
+\label{hir:submersion-adapted-actual-product-shrink}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.exists_product_open_inside,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.restrictTarget,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.exists_adapted_product_coordinates,Hironaka.HironakaSmoothSubmersionAdaptedProductCoordinates.exists_adapted_product_centre_coordinates}
+\uses{hir:submersion-adapted-fibre-first-rotation,hir:submersion-adapted-holomorphic-postcomposition,hir:submersion-adapted-whole-original-centre}
+
+The SAME actual centred source chart internally supplies genuine opens $R\subset\mathbb C^r$ and $S\subset\mathbb C^n$, each containing zero, whose fibre-first product lies inside its actual target and whose target factor lies inside the original target chart target. The actual inverse point map also commutes: $f(e_y^{-1}\Psi^{-1}w)=e_{fy}^{-1}\Phi^{-1}(\operatorname{drop}w)$ for EVERY $w$ in the entire actual source product target. Restricting the source chart to the inverse image of this product gives an actual local holomorphic chart with literal target exactly this product. On this entire actual restricted source domain the original map written in the original target chart is exactly the actual target block projection, and the whole preimage-centre equations remain those of the SAME contiguous source normal indices.
+\end{theorem}
+\begin{proof}
+The actual target contains zero because the constructed source centre is zero and belongs to its genuine source. Its preimage under the genuine finite fibre-first join is therefore an open neighbourhood of $(0,0)$ in the actual product topology. The product neighbourhood basis produces true open neighbourhood factors $R_0,S_0$ whose whole product is inside this preimage. Intersect $S_0$ with the actual original target chart target, also a genuine open neighbourhood of zero. The resulting $R,S$ retain the entire product inclusion. Restrict the original source to the inverse image of this literal product; it is open by the original chart's continuous-on source. The restricted target is exactly the product, the centre remains included, and original inverse identities give both directions and membership. Every genuine product point has an actual original inverse source point. The already produced whole coordinate dictionary proves the entire written-map projection and centre equations there. The actual source inverse point lies in the genuine source flat domain and has source coordinates exactly $w$. Its genuine target flat-domain membership and coordinate equality, followed by BOTH original target inverse identities, prove the entire inverse point square. This shrink is produced internally from the actual chart and its topology, never assumed as a chart or product-domain certificate.
+\end{proof}
+
+These are original geometric chart producers. Genuine arbitrary-choice blowup charts must still be connected to these SAME products and glued to identify the actual universal blowup lift with the true smooth Cartesian polynomial model. General higher invariant, old colex driver identification, G3/G8 and general noncompact termination remain open. Formal registration and native publication are pending root recovery; this chapter is OWN OFFLIB mathematics.

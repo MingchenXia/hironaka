@@ -1,0 +1,117 @@
+\section{Actual original remainder quotient presheaves and their entire ring stalks}
+
+Keep the literal complex structure sheaf, the entire original ideal
+section presheaf, and the literal centre-power section presheaves. On each
+actual open $V$ put $K_q(V)=I_A(V)+J_C(V)^q$ in its true section ring and
+form the actual quotient ring. Every truncated quotient retains its
+ambient ring operations; no centre-quotient scalar action on a higher
+truncation is asserted. The normal layer and its separately annihilated
+centre action remain subsequent constructions.
+
+\begin{lemma}[Both whole remainder section-germ inclusions are supplied internally]
+\label{hir:real-domain-actual-remainder-section-whole-germ-image}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-ideal-section-whole-stalk-equivalence,hir:real-domain-actual-centre-power-section-whole-germ-image}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderSectionIdeal,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualWholeRemainderIdeal,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderSectionIdeal_restrict,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderSectionIdeal_germ_mem,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.exists_actual_remainder_section_of_whole_member}
+\leanok
+For original coherent $A$, EVERY original subset $C$, point $y$ and degree
+$q$, the image of ALL actual $K_q$ sections under actual original ring
+germs is exactly the ENTIRE ideal $I_{A,y}+J_{C,y}^q$. Every entire
+remainder element is represented by a genuine actual remainder section
+on a true neighbourhood. No finite generator, kernel or remainder-image
+certificate is a caller premise.
+\end{lemma}
+\begin{proof}
+Actual ring restriction preserves $I_A$ by its pointwise entire ideal
+condition and preserves $J_C^q$ by the proved literal power restriction
+identity. Ideal images preserve sums, hence all restrictions preserve the
+ENTIRE $K_q$. Likewise each actual section germ maps the whole sum into
+the stated entire original stalk sum. The set of actual $K_q$ germs is
+a real ideal: zero is represented by a zero section, addition uses true
+common-open restrictions, and multiplication by an arbitrary ring stalk
+scalar uses its genuine section representative on a real common open.
+For the reverse whole inclusion take any element of the stalk sum and
+write it as an element of $I_{A,y}$ plus an element of $J_{C,y}^q$.
+Original coherence and the proved entire ideal section dictionary give
+a genuine original ideal section representative of the first element.
+The proved entire power dictionary gives a true power section representing
+the second element. Restrict both to their SAME original open intersection
+and add. Its entire actual sum membership and the actual ring-germ addition
+identity give the required remainder section representative. Thus both
+whole inclusions and all actual remainder representatives are internally
+constructed from the original inputs.
+\end{proof}
+
+\begin{definition}[The literal actual remainder quotient-ring presheaf]
+\label{hir:real-domain-actual-remainder-quotient-ring-presheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-remainder-section-whole-germ-image,hir:real-domain-actual-complex-sheaf-original-section-germs}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderSectionQuotient,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientRestrict,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientRestrict_mk,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalk,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientSectionGermHom,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientSectionGermHom_mk,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientGermCocone,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkToWholeHom,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkToWholeHom_germ}
+\leanok
+For EVERY $A,C,q$, the literal section quotients by $K_q(V)$ form a genuine
+commutative-ring presheaf on actual original opens. At each original point,
+their actual section-class germs map to the ENTIRE original ring quotient
+by $I_{A,y}+J_{C,y}^q$. The actual maps form a true neighbourhood cocone,
+so the literal quotient-presheaf colimit stalk has a genuine ring
+homomorphism to that original whole quotient, with EVERY representative
+formula $[s]\mapsto[\operatorname{germ}_y(s)]$.
+\end{definition}
+\begin{proof}
+The actual restriction ring homomorphism maps the ENTIRE source remainder
+ideal into the ENTIRE target remainder ideal. Quotient descent therefore
+gives the actual section quotient restriction. On EVERY class represented
+by an actual section it is the literal class of the restricted section.
+Every quotient class has such a representative; the true structure-sheaf
+restriction identity and composition prove quotient restriction identity
+and composition on every class. These make the stated actual ring
+presheaf. The original actual germ ring homomorphism kills the source
+remainder after passage to the entire original quotient, by the proved
+whole forward inclusion. Quotient descent gives each section-class germ
+map. On every section representative the actual restriction germ identity
+proves their compatibility, and quotient representative surjectivity
+extends this identity to all classes. This constructs the genuine actual
+neighbourhood cocone, whose literal colimit ring map has the stated formula.
+No coherence is needed for this forward construction.
+\end{proof}
+
+\begin{theorem}[Actual remainder quotient colimit stalks are the whole original ring quotients]
+\label{hir:real-domain-actual-remainder-quotient-whole-ring-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-remainder-quotient-ring-presheaf,hir:real-domain-actual-remainder-section-whole-germ-image}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkToWholeHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkWholeEquiv_germ,Hironaka.HironakaSmoothCentreRealDomainActualRemainderQuotientStalk.actualRemainderQuotientStalkWholeEquiv_germ_mk}
+\leanok
+ONLY original coherence of $A$ internally makes the preceding actual
+colimit ring map a genuine ring equivalence at EVERY original $C,y,q$.
+It identifies the LITERAL remainder-quotient presheaf stalk with the
+ENTIRE original ring-stalk quotient and retains EVERY section-class
+representative formula, including $q=0$. No caller stalk equivalence,
+whole kernel or desired quotient comparison is supplied.
+\end{theorem}
+\begin{proof}
+For surjectivity represent an arbitrary entire original quotient class
+by an actual ring stalk element. That element has a genuine original
+structure-sheaf section representative near the point. Its literal
+section quotient class gives an actual quotient-presheaf colimit germ
+mapping to the required original class.
+
+For injectivity represent two actual quotient-presheaf colimit elements
+by real section quotient classes on original opens, and each such class
+by an actual structure-sheaf section. Restrict both sections and their
+classes to the true open intersection. Equality of their whole original
+quotient images says that the original ring germ of their section
+DIFFERENCE lies in the ENTIRE original remainder ideal. The first lemma
+internally supplies a genuine remainder section whose original germ is
+this SAME difference. Actual structure-sheaf colimit germ equality gives
+a real common smaller open on which the restricted difference equals
+that restricted remainder section. True restriction preserves the
+entire remainder, so the difference lies in the actual smaller-open
+remainder ideal. The two actual section quotient classes are therefore
+equal on that SAME open. The literal quotient-presheaf colimit germ
+restriction identity identifies the two original colimit elements.
+This proves genuine injectivity. Bijectivity upgrades the SAME original
+ring map, retaining every displayed formula and all ring operations.
+The comparison supplies actual truncated RINGS only; no inappropriate
+centre quotient action or origin flatness is inferred. Genuine normal
+layers, bundled sheaf gluing, whole direct-sum stalks and ambient
+Hilbert--Samuel/blowup descent remain subsequent comparisons.
+\end{proof}

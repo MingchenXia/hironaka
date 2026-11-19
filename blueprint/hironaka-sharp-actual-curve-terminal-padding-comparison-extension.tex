@@ -1,0 +1,115 @@
+\section{Actual terminal sharp-curve recipes with unequal stopping lengths}
+
+The histories in this chapter retain their actual literal difference
+recipes. A terminal geometry witness alone does not determine such a
+recipe. Each empty padding position is a genuine blowup and remains in
+the ordered exceptional list. We compare those real histories after
+padding to a common length and prove that the resulting terminal map
+does not depend on that length.
+
+\begin{theorem}[Literal difference recipes concatenate exactly]
+\label{hir:sharp-actual-difference-recipe-concatenation}
+\uses{hir:sharp-original-curve-literal-ambient-difference-history-order-bound,hir:geo-transform-basic}
+\lean{Hironaka.HironakaSharpActualCurveTerminalPaddingComparison.actual_difference_recipe_append_iff}
+\leanok
+For actual towers $P$, $S$, $R$, the appended tail $SR$ is a literal
+difference recipe on $P$ if and only if $S$ is such a recipe on $P$ and
+$R$ is such a recipe on the actual full prefix $PS$.
+\end{theorem}
+\begin{proof}
+Induct on the actual constructors of $R$. For the reflexive tail,
+appending changes neither tower and the second recipe condition is
+true. At a successor, the recipe consists of the shorter recipe and
+the equality between its actual next centre and the independently
+computed difference on its full old prefix. The induction hypothesis
+splits the shorter recipe into the claimed two pieces. Actual tower
+associativity identifies $(PS)R$ with $P(SR)$, so the two next-centre
+equalities are literally the same. Reassemble the conjunction in both
+directions. No step, including an empty centre, is removed.
+\end{proof}
+
+\begin{theorem}[Actual terminated recipes can be padded to every larger length]
+\label{hir:sharp-original-curve-terminal-recipe-actual-padding}
+\uses{hir:sharp-actual-difference-recipe-concatenation,hir:sharp-original-curve-terminal-difference-actual-padding}
+\lean{Hironaka.HironakaSharpActualCurveTerminalPaddingComparison.original_curve_terminal_recipe_padding}
+\leanok
+Take positive ambient dimension and the original smooth curve, ordered
+SNC and whole-family density data. Let $P$ be ANY original product TEST,
+let $S$ be a genuine literal-difference recipe on $P$, and assume its
+ACTUAL endpoint difference is empty. For every $L\ge\operatorname{length}S$,
+construct the actual tail
+\[
+ S_L=S\,B_{L-\operatorname{length}S}(Y_S).
+\]
+It has length exactly $L$, is a genuine literal-difference recipe on
+the SAME original prefix, and its actual endpoint difference is empty.
+\end{theorem}
+\begin{proof}
+The real original recipe TEST theorem first supplies the genuine TEST
+of $PS$. The preceding actual identity-empty producer then applies to
+this true current prefix and its computed empty difference. It supplies
+the real padding recipe and the actual empty endpoint difference. The
+first theorem concatenates the original and padding recipes. Exact
+tower length additivity and the proved length of the identity-empty
+tail give $\operatorname{length}S+(L-\operatorname{length}S)=L$.
+The endpoint manifold is the actual old endpoint because the padding
+projections are identities; all added positions are retained.
+\end{proof}
+
+\begin{theorem}[Unequal terminated actual recipes have unique common-length comparisons]
+\label{hir:sharp-original-curve-unequal-terminal-recipe-comparison}
+\uses{hir:sharp-original-curve-terminal-recipe-actual-padding,hir:sharp-original-curve-equal-length-difference-recipe-comparison,hir:sharp-actual-stagewise-tower-comparison-unique}
+\lean{Hironaka.HironakaSharpActualCurveTerminalPaddingComparison.exists_unique_terminal_recipe_comparison}
+\leanok
+For the SAME original curve data, let $P',P$ have an actual stagewise
+isomorphism over the identity, and let $P$ be a genuine original TEST.
+Let $S',S$ be actual literal-difference recipes on these respective
+prefixes with ACTUAL empty endpoint differences. Their lengths may
+differ. For every $L$ at least both lengths, construct a UNIQUE genuine
+terminal biholomorphism that is the terminal map of an actual stagewise
+isomorphism of their full padded histories $P'S'_L$ and $PS_L$ over the
+identity.
+\end{theorem}
+\begin{proof}
+Actual tower-isomorphism transport of the original TEST internally
+supplies the TEST of $P'$. Apply the preceding theorem independently
+to both real terminal recipes. Both resulting recipes have exactly
+length $L$. The proved equal-length actual recipe comparison now
+constructs a genuine tail isomorphism over the supplied prefix map and
+the actual full-history isomorphism over the identity. The fixed-tower
+stagewise uniqueness theorem proves uniqueness among ALL terminal
+biholomorphisms that give such actual stagewise isomorphisms. No
+terminal-map or centre-matching certificate is supplied. This does not
+claim uniqueness among arbitrary holomorphic maps over a composite
+projection.
+\end{proof}
+
+\begin{theorem}[The genuine terminal comparison is independent of the padding length]
+\label{hir:sharp-actual-terminal-recipe-padding-independence}
+\uses{hir:sharp-actual-identity-empty-padding-comparison,hir:sharp-actual-stagewise-tower-comparison-unique,mc:tower-isomorphism-append}
+\lean{Hironaka.HironakaSharpActualCurveTerminalPaddingComparison.terminal_padding_comparison_extend,Hironaka.HironakaSharpActualCurveTerminalPaddingComparison.terminal_padding_comparison_independent}
+\leanok
+For fixed actual prefixes and tails, an actual padded stagewise
+comparison at any common length $L$ extends to $L+r$ with the SAME
+terminal map. Consequently two genuine comparisons constructed at
+possibly different common lengths have exactly the same terminal
+biholomorphism. This extension fact itself only requires the actual
+stagewise comparisons and the true length bounds.
+\end{theorem}
+\begin{proof}
+Append to the given comparison the actual comparison between $r$
+identity-empty tails induced by its own genuine terminal map. Actual
+tower associativity and the exact concatenation law for identity-empty
+tails identify the resulting histories with the histories padded to
+$L+r$. The elementary subtraction equality
+$(L+r)-s=(L-s)+r$, valid for $s\le L$, supplies the exact numbers of
+retained slots on each side. The terminal map remains unchanged.
+
+For comparisons at $L$ and $L'$, extend the first by $L'$ and the second
+by $L$. Both now compare the same actual full histories at length
+$L+L'$, using commutativity of addition for the second. Fixed-tower
+stagewise uniqueness equates their terminal maps. The argument does
+not delete the empty slots, identify the two differently sized tower
+objects, or assert canonical compression. Actual restriction of local
+recipes and their overlap cocycles remain subsequent consumers.
+\end{proof}

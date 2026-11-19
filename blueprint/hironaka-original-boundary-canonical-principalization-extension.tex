@@ -1,0 +1,135 @@
+\section{Canonical elementary principalization with an original boundary}
+
+The initial ordered SNC boundary may be nonempty.  Compactness is required
+only of the original ideal's zero locus; the ambient manifold and a smooth
+source may be noncompact.  All total transforms below are whole germ ideals.
+
+\begin{lemma}[The entire ordered boundary of an actual empty history]
+\label{hir:original-all-empty-whole-boundary}
+\uses{hir:geo-transform,hir:blowup-tower}
+\lean{Hironaka.HironakaOriginalBoundaryCanonicalPrincipalization.boundary_of_all_empty_tower}
+\leanok
+Let $M$ be any original marked record whose initial boundary members are
+closed, and let $T$ be any actual finite blowup tower with every actual
+centre empty.  For its whole projection $p$,
+\[
+ E_T=(p^{-1}E_0)\mathbin{+\!+}
+        [\varnothing,\ldots,\varnothing]_{\operatorname{length}T}.
+\]
+The first list consists of the inverse images of every original member,
+in its original order.  No coherence, canonicality, terminality or
+incoming boundary comparison is assumed.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower.  The identity tower has its original ordered
+boundary and length zero.  At an actual empty-centre blowup $\pi$, the
+strict transform of a closed old member $H$ is
+$\overline{\pi^{-1}(H\setminus\varnothing)}=\pi^{-1}H$, since $\pi$ is
+continuous.  Each inverse image of an original closed member remains
+closed.  The strict transform of an empty member is empty, and the newly
+appended member is exactly $\pi^{-1}\varnothing=\varnothing$.
+Distribute this operation over the induction formula.  The original
+inverse images compose to those under the new whole projection, and
+the empty suffix gains exactly one member.  This proves the literal
+ordered equality, including zero-length and empty ambient cases.
+\end{proof}
+
+\begin{theorem}[Canonical boundary principalization with compact zero locus]
+\label{hir:original-canonical-boundary-principalization-compact-cosupport}
+\uses{hir:canonical-resolution-compact-cosupport,hir:principalization-boundary,hir:admissible-sequence,hir:original-global-terminal-finite-whole-biholomorphism}
+\lean{Hironaka.HironakaOriginalBoundaryCanonicalPrincipalization.compactCosupportCanonicalTower,Hironaka.HironakaOriginalBoundaryCanonicalPrincipalization.canonical_boundary_principalization}
+\leanok
+Let $I$ be a coherent ideal on a complex manifold $X$, nonzero as a germ
+at every point, with compact zero locus.  Let $E_0$ be an original ordered
+SNC divisor and $M=(X,X,E_0,I,1)$.  The actual compact-cosupport canonical
+driver internally supplies a finite tower $T:D\to X$.  Retain this same
+$T$, its projection $p$, its effective exceptional divisor $D_T$, and its
+actual accumulated boundary $E_T$.  Then $T$ is canonical and terminal,
+$p$ is holomorphic, proper and surjective, all its centres lie over
+$Z(I)$, and it is an admissible sequence relative to $E_0$.  Moreover,
+\[
+ p^*I=I_{D_T},\qquad E_T\text{ is SNC},\qquad
+ \operatorname{supp}D_T
+   =\bigcup_{H\in E_T\text{ after its first }|E_0|\text{ members}} H
+   =p^{-1}Z(I).
+\]
+The exceptional locus lies in $\operatorname{supp}D_T$, and $p$ is an
+isomorphism over $X\setminus Z(I)$.  There is a genuine biholomorphism
+$\eta_X$ from the original glued terminal manifold of $M$ to $D$ with
+$p\eta_X=P_M$, its original glued projection.
+\end{theorem}
+\begin{proof}
+The original SNC boundary is transverse to the whole ambient manifold.
+Together with coherence and germwise nonvanishing, this puts the literal
+$M$ in the ambient invariant domain.  Its original cosupport is exactly
+$Z(I)$, hence is compact.  Apply the actual compact-cosupport driver to
+this record and choose one of its genuine finite canonical terminal
+towers.  Every actual centre lies over the original cosupport, and the
+test-tower dictionary gives admissibility relative to the original
+ordered boundary.  A finite actual blowup projection is holomorphic,
+proper and surjective.
+
+At mark one and whole ambient carrier, the actual terminal dictionary
+gives the asserted equality of whole total-transform ideals.  Actual
+well-formedness gives SNC for the same $E_T$.  The tower exceptional
+support formula removes exactly the original $|E_0|$ members, giving the
+first support equality.  The zero-locus pullback formula and the whole
+ideal equality give the second.  Exceptional-locus containment therefore
+puts its image over $Z(I)$, so the actual blowup sequence is an
+isomorphism over the complement.  Apply the original finite-terminal
+identification to this same canonical terminal tower to obtain
+$\eta_X$ and its literal projection identity.
+\end{proof}
+
+\begin{theorem}[The same boundary principalization under an arbitrary smooth base map]
+\label{hir:original-canonical-boundary-principalization-smooth}
+\uses{hir:original-canonical-boundary-principalization-compact-cosupport,hir:original-global-finite-smooth-source-history,hir:smooth-original-finite-terminal-intrinsic-smooth-map,hir:original-global-finite-terminal-smooth-map-cartesian,hir:submersion-relative-control-joint-tower}
+\lean{Hironaka.HironakaOriginalBoundaryCanonicalPrincipalization.canonical_boundary_principalization_smooth_base_change}
+\leanok
+Retain the preceding original data and its same internally chosen
+canonical tower $T$.  Every holomorphic submersion $b:Y\to X$ internally
+constructs an actual finite canonical terminal tower $S:C\to Y$ for
+$N=b^*M$, with initial boundary $b^{-1}E_0$.  No compactness of $Y$ or
+of the pulled zero locus is required.  Put $q=S.\mathrm{proj}$.
+Its whole ideal is principalized by its own exceptional divisor $D_S$,
+and its own accumulated boundary $E_S$ is SNC.  There are holomorphic
+submersions $g:C\to D$ and
+$G:\widetilde Y_N\to\widetilde X_M$ such that
+\[
+ pg=bq,\qquad P_MG=bP_N,\qquad
+ \eta_XG=g\eta_Y,\qquad E_S=g^{-1}E_T.
+\]
+Both projection squares are holomorphic Cartesian squares.  Here
+$\eta_X,\eta_Y$ are the genuine finite-to-glued terminal
+biholomorphisms for these same histories.  The same target whole-ideal
+principalization and SNC boundary are retained in the conclusion.
+\end{theorem}
+\begin{proof}
+Retain the target selected by the preceding theorem.  Construct its
+actual smooth pullback one blowup at a time.  Its source centres are the
+literal inverse images of the target centres, and each upper map is a
+holomorphic submersion with the genuine Cartesian universal property.
+The whole marked-record dictionary and original ambient invariant
+transport give canonicality and terminality for the literal $N$ on this
+finite source history.  Its domain supplies coherence and SNC; applying
+the mark-one terminal identity to its whole ambient ideal gives
+$q^*(b^*I)=I_{D_S}$.
+
+The source whole-record dictionary gives the literal indexed equality
+$E_S=g^{-1}E_T$ for the actual upper map.  The intrinsic finite terminal
+map equals this actual map by its genuine terminal Cartesian uniqueness,
+so the equality holds for the same $g$ used in the projection comparison.
+The finite/global comparison conjugates this $g$ by $\eta_X,\eta_Y$ to
+the stated $G$.  Biholomorphic conjugation preserves submersion and the
+Cartesian universal property.  Its definition gives
+$\eta_XG=g\eta_Y$, and the finite identification identities give both
+glued projection equations.  Thus no independent source compactness or
+source-history certificate has entered the construction.
+\end{proof}
+
+\begin{remark}
+These are full terminal ideal principalizations, with an arbitrary
+original SNC boundary.  They are distinct from the stopped prefix used
+for embedded resolution.  The source ideal is the literal $b^*I$;
+no singular reduced vanishing ideal is relabeled as this pullback.
+\end{remark}

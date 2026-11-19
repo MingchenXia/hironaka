@@ -1,0 +1,97 @@
+\section{Actual finite sharp recipes over genuine base biholomorphisms}
+
+Write $\Delta(P)$ for the independently defined whole original-member
+ideal-germ difference after the actual history $P$. A literal difference
+recipe takes its next centre to be exactly $\Delta(P)$, retaining every
+empty centre as a genuine step. Let $W$ be a closed smooth pure curve in
+an ambient manifold of positive dimension, let $E$ be the original ordered
+SNC family, and suppose $W$ is the closure of its complement of that family.
+For a genuine base biholomorphism $\Phi:X'\to X$, the source data are
+$W'=\Phi^{-1}W$ and the positionwise ordered family $E'=\Phi^{-1}E$.
+The initial product record still has empty exceptional list.
+
+\begin{theorem}[Finite literal recipes over a genuine base biholomorphism]
+\label{hir:sharp-actual-curve-biholo-finite-difference-recipes}
+\uses{hir:sharp-original-curve-biholomorphic-base-next-stage-comparison,hir:sharp-original-curve-equal-length-difference-recipe-comparison}
+\lean{Hironaka.HironakaSharpActualCurveBiholomorphicRecipes.exists_actual_biholo_difference_recipe_comparison}
+\leanok
+Let actual prefixes $P',P$ have a genuine stagewise isomorphism over $\Phi$,
+with endpoint biholomorphism $\chi_0$, and assume only the target prefix is
+an original product TEST. If $S',S$ are literal difference recipes on the
+source and target, respectively, of the same finite length, construct a
+true stagewise isomorphism of their tails over $\chi_0$ and of their full
+histories over $\Phi$, with the same terminal biholomorphism.
+\end{theorem}
+\begin{proof}
+Induct on the actual pair of finite tails. A reflexive tail has length zero,
+so equality of lengths forces the other tail to be reflexive too; use the
+actual prefix comparison. If exactly one tail is a successor, equality of
+lengths is impossible. In the two-successor case, their predecessor tails
+have equal lengths. The induction hypothesis constructs the actual earlier
+tail and full-history isomorphisms. The target predecessor is an original
+TEST: construct this from its literal recipe and the original target prefix.
+The genuine biholomorphic whole-difference dictionary then identifies the
+actual source difference centre with the inverse image of the actual target
+difference centre under the earlier terminal map. Substitute the two literal
+recipe centre identities. Both successor arrows are their given actual
+blowups, so the same-centre universal property constructs the true next
+biholomorphism and commuting square. Extend the actual tail isomorphism by
+this step and concatenate it with the prefix isomorphism. At no point is a
+centre equality or source TEST supplied as a new hypothesis.
+\end{proof}
+
+\begin{theorem}[Unequal terminal recipes have genuine padded comparisons]
+\label{hir:sharp-actual-curve-biholo-terminal-padded-recipes}
+\uses{hir:sharp-actual-curve-biholo-finite-difference-recipes,hir:sharp-actual-original-curve-biholomorphic-base-inputs,hir:sharp-original-curve-terminal-recipe-actual-padding,hir:sharp-actual-stagewise-tower-comparison-unique}
+\lean{Hironaka.HironakaSharpActualCurveBiholomorphicRecipes.exists_unique_biholo_terminal_recipe_comparison}
+\leanok
+Under the same original hypotheses and actual prefix isomorphism, let both
+literal difference recipes terminate with their actual whole difference
+empty. For every $L$ at least both tail lengths, append the actual identity
+blowups of the empty centre to give both tails length $L$. There exists a
+unique genuine full stagewise isomorphism over $\Phi$ of these actual padded
+histories. The terminal manifolds and terminal map are those of the original
+tails; every added empty position remains in the padded histories.
+\end{theorem}
+\begin{proof}
+The genuine base biholomorphism first constructs the source closed smooth
+curve, its SNC family and its whole-family density. The whole original
+product pullback identity retains all four marked fields. Actual prefix
+isomorphism and the original target TEST therefore construct the original
+source prefix TEST. Apply the actual terminal recipe padding producer on
+each side, using these independently justified inputs. It supplies the
+literal padded recipes, their exact common length and actual terminal
+difference emptiness. Apply the preceding finite comparison to these real
+tails. Its terminal biholomorphism is a full stagewise comparison of the
+actual padded histories. Any second such comparison has the same terminal
+map by actual fixed-tower uniqueness, proved by true one-step blowup
+uniqueness, so the biholomorphism itself is unique. No empty step is removed
+and no ambient ideal identity is inferred by deleting its normalization.
+\end{proof}
+
+\begin{theorem}[Two-phase retained recipes compare at every common terminal cut]
+\label{hir:sharp-actual-curve-biholo-two-phase-padded-recipes}
+\uses{hir:sharp-actual-curve-biholo-terminal-padded-recipes,hir:sharp-original-curve-biholomorphic-base-next-stage-comparison,hir:sharp-original-curve-whole-first-defect-original-admissible-centre,hir:sharp-actual-terminal-recipe-padding-independence}
+\lean{Hironaka.HironakaSharpActualCurveBiholomorphicRecipes.exists_unique_biholo_two_phase_recipe_comparison}
+\leanok
+Take any actual blowup of the computed original FIRST centre on each side,
+and on each such actual first stage take a literal terminating difference
+recipe. At every common tail length $L$, their real empty-padded full
+histories admit a unique actual stagewise comparison over $\Phi$.
+The terminal biholomorphism is independent of $L$.
+\end{theorem}
+\begin{proof}
+Start with the reflexive original prefixes and the genuine base
+biholomorphism. The computed FIRST-centre naturality and actual blowup
+universal property construct the first-stage comparison. The target
+reflexive history is an original TEST, and the internally proved original
+FIRST-centre admissibility constructs the target first-stage TEST.
+Apply the preceding theorem to these exact first-stage prefixes and the
+two literal terminating tails. For two choices $L,K$, extend both actual
+padded comparisons to the true common size $L+K$ by appending actual empty
+blowups. Actual fixed-history uniqueness identifies their endpoint maps;
+the identity empty maps leave those endpoint maps unchanged. Thus the
+comparison is independent of the common cut. This compares genuine retained
+recipes; it neither assigns a recipe to an arbitrary sharp endpoint nor
+asserts overlap cocycles or geometric descent.
+\end{proof}

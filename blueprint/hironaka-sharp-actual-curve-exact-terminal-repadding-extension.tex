@@ -1,0 +1,92 @@
+\section{The same actual terminal comparison at every genuine padding cut}
+
+\begin{lemma}[An equal auxiliary identity suffix preserves the actual comparison]
+\label{hir:sharp-actual-curve-equal-identity-padding-cancellation}
+\uses{hir:tower-isomorphism,hir:sharp-actual-identity-empty-padding-comparison}
+\lean{Hironaka.HironakaSharpActualCurveExactTerminalRepadding.isTowerIso_of_equal_identity_padding}
+\leanok
+Suppose two genuine histories are followed by exactly the SAME number
+of auxiliary identity blowups at empty centres. If their padded histories
+are genuinely stagewise isomorphic over an actual base biholomorphism
+with terminal map $e$, then the two ENTIRE original histories are
+stagewise isomorphic over the SAME base with exactly the SAME terminal
+map $e$. Every original position, including its genuine empty steps,
+is retained. This removes only a common auxiliary suffix in a comparison;
+it is not a compression or canonicality assertion about a resolution.
+\end{lemma}
+\begin{proof}
+Induct on the common auxiliary length. At zero the assertion is precisely
+the given comparison. At a successor, genuine last-step inversion of
+the given whole tower isomorphism gives a comparison of the preceding
+histories and its actual predecessor terminal biholomorphism $a$.
+The actual last-step square has identity maps on both sides, so it
+says pointwise that $e=a$. State the preceding comparison with this
+pointwise equal SAME terminal map $e$ and apply the induction hypothesis.
+This keeps the original histories untouched and does not remove any of
+their own empty steps.
+\end{proof}
+
+\begin{theorem}[Every genuine common terminal cut retains the already chosen map]
+\label{hir:sharp-actual-curve-exact-terminal-repadding}
+\uses{hir:sharp-actual-curve-equal-identity-padding-cancellation,hir:sharp-actual-terminal-recipe-padding-independence}
+\lean{Hironaka.HironakaSharpActualCurveExactTerminalRepadding.terminal_comparison_at_any_cut}
+\leanok
+Let two genuine histories have fixed prefixes and finite terminal tails.
+Suppose an actual stagewise comparison at a genuine common padding cut
+$L$ has terminal biholomorphism $e$. At EVERY other common cut $K$ at
+least the two literal tail lengths, the actual histories padded to $K$
+are stagewise isomorphic with this SAME already chosen terminal map $e$.
+No newly chosen comparison, desired point equality or canonical
+empty-step compression is assumed.
+\end{theorem}
+\begin{proof}
+Genuinely extend the given comparison from $L$ to $L+K$, retaining its
+actual terminal map $e$. Because each literal tail length is at most
+$K$, the resulting auxiliary length on each side is the auxiliary length
+for cut $K$, followed by exactly $L$ extra identity steps. The original
+whole-history concatenation identity and the literal identity-tail
+concatenation identity express the extended histories as the cut-$K$
+histories followed by that SAME auxiliary suffix. Apply the first lemma.
+Its conclusion is the complete stagewise comparison of the cut-$K$
+histories, with precisely the original map $e$. All genuine prefix and
+tail positions on both sides remain intact; only the common extra
+auxiliary suffix has served in the proof. This supplies the already
+chosen-map compatibility needed for stopped-stage/terminal range gluing;
+that geometric gluing is not itself concluded here.
+\end{proof}
+
+\begin{theorem}[Every actual stopped-stage comparison retains the same terminal point]
+\label{hir:sharp-actual-curve-stopped-comparison-terminal-square}
+\uses{hir:sharp-actual-curve-exact-terminal-repadding,hir:sharp-actual-curve-stopped-prefix-terminal-biholomorphism,hir:sharp-actual-stagewise-tower-comparison-unique}
+\lean{Hironaka.HironakaSharpActualCurveExactTerminalRepadding.stopped_comparison_of_padded,Hironaka.HironakaSharpActualCurveExactTerminalRepadding.stopped_chosen_comparison_terminal_square}
+\leanok
+Suppose actual padded finite histories have a genuine stagewise
+comparison with terminal map $e$. At every $k$ at least BOTH original
+history lengths, the actual stopped-prefix terminal identifications
+conjugate $e$ to a genuine full stage-$k$ tower comparison. Consequently
+EVERY actual full comparison chosen on these SAME uniform prefixes has
+exactly this terminal square, at EVERY point. No desired point formula
+or terminal compatibility certificate is supplied.
+\end{theorem}
+\begin{proof}
+The equality of genuine padded-history lengths supplies one common total
+length $L$. Their auxiliary lengths are precisely $L$ minus the respective
+original lengths. Apply the preceding theorem to these histories viewed
+as terminal tails over their reflexive base prefixes, with new cut $k$.
+This yields a genuine stagewise comparison of the two original histories
+padded to literal length $k$, with exactly the original terminal map $e$.
+The stopped-prefix terminal identifications are actual whole-history
+isomorphisms onto those very histories. Compose the first with the new
+comparison and the inverse of the second. This gives the asserted
+stage-$k$ comparison over the SAME base map; the composite base identity
+maps do not change it.
+
+Any already chosen full comparison on the SAME uniform-prefix histories
+is equal to this one by the actual fixed-history universal uniqueness.
+Evaluate the equality at an arbitrary actual point and apply the target
+terminal identification. Its true inverse law gives precisely the
+original terminal map applied to the source terminal point. This proves
+the ENTIRE square, retaining the SAME chosen stage and terminal maps.
+No arbitrary projection-map uniqueness, numerical canonicality or removal
+of original empty positions is used.
+\end{proof}

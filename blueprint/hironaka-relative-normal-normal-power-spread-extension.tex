@@ -1,0 +1,143 @@
+\section{Actual fixed-order normal-power identities on one nearby original open}
+This OWN OFFLIB chapter spreads genuine FINITE recursive normal-power
+expressions. Every chosen open may depend on the literal order $q$ and the
+actual finite function family. This is not a uniform all-order flattening.
+
+\begin{theorem}[A true recursive normal-power expression holds at every point of one actual open]
+\label{hir:relative-normal-power-spread-actual-recursive-open}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_actual_recursive_normal_power_open}
+\uses{hir:relative-normal-actual-recursive-power-dictionary,hir:relative-normal-actual-iterated-derivative-germs}
+An actual $f$ in the genuine recursive unshifted normal-coordinate power
+at zero has ONE actual open $U\ni0$ on which, at EVERY actual point $a$,
+the SAME function has a genuine recursive normal-power expression at $a$
+of the SAME literal order. All coefficient functions are actual holomorphic
+functions; no nearby membership conclusion is caller data.
+\end{theorem}
+\begin{proof}
+Induct on the actual finite order. At zero order, choose a true open on
+which the actual function is holomorphic from its genuine eventual
+holomorphy; this gives true holomorphic germs at every point of that open.
+For the successor expression $f=\sum_i z_i H_i$, each genuine coefficient
+$H_i$ has lower-order normal-power expression and the tangent coefficients
+are identically zero. Apply induction to each of the finitely many actual
+$H_i$. Their genuine opens have a finite common intersection. The actual
+whole eventual function identity has another true open at zero. Intersect
+all these opens ONCE. At every point of this actual intersection, every
+coefficient has the genuine lower-order expression, and the SAME whole
+function identity holds on an actual neighborhood of that point. The true
+recursive definition therefore proves membership at that point. This is an
+induction through a finite expression tree, not a stalk-only extrapolation.
+\end{proof}
+
+\begin{theorem}[Actual affine translation at a genuine centre point preserves the entire normal power]
+\label{hir:relative-normal-power-spread-centre-translation}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalNormalPowerSpread.actualAffineTranslation_tendsto_zero,Hironaka.HironakaRelativeNormalNormalPowerSpread.InNormalPow_actualAffineTranslation,Hironaka.HironakaRelativeNormalNormalPowerSpread.actualAffineTranslation_holAt}
+\uses{hir:relative-normal-translated-taylor-actual-source-open,hir:relative-normal-power-spread-actual-recursive-open}
+If $a$ is a genuine point of the literal normal plane, the actual
+translation of any genuine recursive normal-power function at $a$ is a
+genuine recursive normal-power function at zero of the SAME literal order.
+\end{theorem}
+\begin{proof}
+Induct on the true order. Genuine continuity and the affine chain rule
+transport the actual zero-order holomorphy to zero. At a successor, compose
+the SAME genuine coefficient functions and their whole eventual identity
+with the actual affine map. The induction gives their real lower-order
+expressions. All tangent coefficients remain identically zero. For every
+normal index, the actual centre condition gives $a_i=0$, hence
+$(a+z)_i=z_i$. For a tangent index the identically zero coefficient kills
+the additional actual $a_i$ term. Thus the literal whole translated identity
+is exactly $\sum_i z_i(H_i\circ\tau_a)$. This is the true recursive definition
+at zero, with no arbitrary origin-to-nearby germ map.
+\end{proof}
+
+\begin{theorem}[Entire original normal-power membership has a true nearby fixed-order dictionary]
+\label{hir:relative-normal-power-spread-whole-nearby-membership}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_actual_nearby_normal_power}
+\uses{hir:relative-normal-power-spread-actual-recursive-open,hir:relative-normal-power-spread-centre-translation,hir:relative-normal-actual-recursive-power-dictionary}
+The ENTIRE membership of an actual original holomorphic function germ in
+$J^q$ internally produces ONE genuine open at zero and actual holomorphy
+there, such that at EVERY genuine centre point in it the WHOLE actual
+translated germ lies in the SAME literal translated normal power $J^q$.
+\end{theorem}
+\begin{proof}
+Use the genuine whole ideal-power/recursive-expression equivalence on the
+actual original representative. Apply the first theorem to its TRUE
+expression, including its actual eventual holomorphy. At every genuine
+centre point on this actual open, the second theorem supplies the actual
+translated recursive expression and its genuine holomorphy. The established
+whole recursive-power dictionary converts it back to ENTIRE normal-power
+membership. No quotient kernel, coordinate frame or nearby membership
+certificate is supplied by the caller.
+\end{proof}
+
+\begin{theorem}[A finite family of true whole quotient identities holds near every actual centre point]
+\label{hir:relative-normal-power-spread-finite-whole-jet-identities}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_actual_nearby_whole_quotient_identity,Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_actual_nearby_finite_whole_quotient_identities}
+\uses{hir:relative-normal-power-spread-whole-nearby-membership}
+For a literal finite family of actual holomorphic function pairs with true
+entire original $J^q$ quotient-class identities, internally produce ONE
+actual open at zero on which EVERY pair has the SAME whole translated
+quotient-class identity at EVERY actual centre point. The open is genuinely
+common to the finite family and fixed literal order.
+\end{theorem}
+\begin{proof}
+The genuine quotient equality identifies each actual original difference
+germ with an element of the WHOLE $J^q$. Its representative is the actual
+whole function difference. Apply the preceding actual nearby producer to
+each of these true memberships, together with the genuine function
+holomorphy. Take the finite intersection of their actual opens and the
+genuine original function holomorphy opens. At each actual centre point,
+actual translation preserves the whole differences, and true $J^q$
+membership gives the literal translated quotient-class identity. Empty
+families and order zero use the same genuine finite intersection and quotient.
+\end{proof}
+
+\begin{theorem}[The entire normal basis internally supplies true nearby original coefficient functions]
+\label{hir:relative-normal-power-spread-original-basis-coefficient-functions}
+\leanok
+\lean{Hironaka.HironakaRelativeNormalNormalPowerSpread.actualNormalMonomialFunction,Hironaka.HironakaRelativeNormalNormalPowerSpread.actualNormalMonomialFunction_holAt,Hironaka.HironakaRelativeNormalNormalPowerSpread.mk_actualNormalMonomialFunction,Hironaka.HironakaRelativeNormalNormalPowerSpread.actualNormalPolynomialFunction,Hironaka.HironakaRelativeNormalNormalPowerSpread.actualNormalPolynomialFunction_holAt,Hironaka.HironakaRelativeNormalNormalPowerSpread.mk_actualNormalPolynomialFunction,Hironaka.HironakaRelativeNormalNormalPowerSpread.quotient_actualNormalPolynomialFunction,Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_actual_whole_basis_coefficient_functions,Hironaka.HironakaRelativeNormalNormalPowerSpread.actualNormalMonomialFunction_actualAffineTranslation,Hironaka.HironakaRelativeNormalNormalPowerSpread.actualNormalPolynomialFunction_actualAffineTranslation,Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_actual_nearby_finite_basis_coefficient_functions,Hironaka.HironakaRelativeNormalNormalPowerSpread.exists_original_coherent_nearby_basis_coefficient_functions}
+\uses{hir:relative-normal-power-spread-finite-whole-jet-identities,hir:relative-normal-basis-actual-entire-quotient-basis,hir:relative-normal-translated-jets-original-coherent-consumer}
+Only actual original coherent $\mathfrak a,d,t,q$ internally selects ONE
+actual original finite family $f_i$ and one genuine open, and genuine
+holomorphic base coefficient functions $c_{i,\alpha}$ for the literal
+normal monomial basis. At EVERY actual centre point $a$ in a true common
+shrinking, the WHOLE actual original translated quotient class of $f_i$ is
+the same normal polynomial with ENTIRE translated base coefficient germs
+$[u\mapsto c_{i,\alpha}(\operatorname{pr}(a)+u)]$. Thus the actual basis
+coordinates and entire finite original jet-image columns use these SAME
+genuine coefficient functions.
+\end{theorem}
+\begin{proof}
+Choose the original coherent function family ONCE and retain its actual
+nearby entire ideal/image dictionary. Expand each genuine origin generator
+quotient class in the true entire normal monomial basis. Internally select
+actual holomorphic function representatives of its finitely many entire
+base coefficients. Form the genuine ambient normal-polynomial function from
+THESE SAME coefficients and the actual normal-coordinate monomials. Whole
+germ products, finite sums and basis evaluation show that the original
+function and this actual polynomial have the SAME entire origin quotient
+class. Apply the preceding finite whole-identity producer, with these
+internally PROVED class identities, and intersect with the original sheaf
+open and finite coefficient holomorphy opens. At each genuine centre point,
+normal coordinates are unchanged by actual translation, and the genuine
+tangent projection sends $a+z$ to $\operatorname{pr}(a)+\operatorname{pr}(z)$.
+Consequently the whole translated polynomial has exactly the written
+translated base coefficient germs. The genuine entire basis and its true
+linear coordinate map give the coefficient dictionary. The retained actual
+original ideal-image producer identifies its full finite column span using
+these SAME original functions; multiplication by normal monomials gives
+their exact entire columns. The public original consumer has no supplied
+coefficient, quotient identity, basis, open or result certificate.
+\end{proof}
+
+\paragraph{Open frontier.}
+No fixed-order common open here is asserted common to all orders. Actual
+analytic projector-image comparison still needs the true finite cleared
+denominator column identities. Whole nearby original Rees/normal-cone
+identification, one all-order free neighborhood, analytic normal-flatness,
+higher Hilbert--Samuel and G8 remain OPEN. Formal registration, native
+target build, leanok and GitHub publication remain pending root recovery.

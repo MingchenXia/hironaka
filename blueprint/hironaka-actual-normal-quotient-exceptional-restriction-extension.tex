@@ -1,0 +1,118 @@
+\section{Actual normal initial coefficients in genuine exceptional quotients}
+
+\begin{theorem}[Actual normal-power membership identifies the canonical homogeneous polynomial]
+\label{hir:actual-normal-power-canonical-homogeneous-polynomial}
+\uses{hir:actual-relative-coefficient-polynomial-truncations,hir:relative-normal-basis-actual-coefficient-separation,hir:actual-normal-homogeneous-polynomial}
+Let $g$ be an actual original ambient holomorphic germ belonging to the
+whole original normal ideal power $N^q$. Its genuine normal Taylor
+polynomial $T_{q+1}(g)$ is homogeneous of normal degree $q$.
+Consequently the actual polynomial
+$P_q(g)=\operatorname{homogeneousComponent}_q(T_{q+1}(g))$ equals
+$T_{q+1}(g)$, and $g-\operatorname{normalPolynomialEval}(P_q(g))$
+belongs to the whole original power $N^{q+1}$.
+\lean{Hironaka.HironakaActualNormalQuotientExceptionalRestriction.actualNormalTaylorPolynomial_isHomogeneous_of_mem_normal_pow,Hironaka.HironakaActualNormalQuotientExceptionalRestriction.actualNormalHomogeneousPolynomial_eq_truncation_of_mem_normal_pow,Hironaka.HironakaActualNormalQuotientExceptionalRestriction.actual_normal_homogeneousComponent_remainder}
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine Taylor remainder is in $N^{q+1}\subseteq N^q$.
+Since $g\in N^q$, subtracting that remainder shows that evaluation
+of the whole finite Taylor polynomial lies in $N^q$. Actual original
+normal-power coefficient separation therefore kills every coefficient
+of normal degree below $q$ as an entire tangent germ. The original
+Taylor polynomial's proved high-coefficient identity kills every
+coefficient of degree at least $q+1$. Thus every nonzero supported
+coefficient has normal degree exactly $q$, which is ordinary
+homogeneity for the genuine normal polynomial. Its degree-$q$
+homogeneous component is itself. Substitution in the original genuine
+Taylor remainder proves the last whole-ideal membership.
+\end{proof}
+
+\begin{theorem}[The actual blowup fixes every tangent coefficient and factors the whole homogeneous polynomial]
+\label{hir:actual-normal-polynomial-blowup-factorization}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality,hir:relative-normal-entire-germ-retraction,hir:relative-normal-basis-actual-derivation-evaluation}
+Use the actual normal block, $j\in\{0,\ldots,t-1\}$ and $e=d+j$.
+The genuine original analytic blowup pullback $B$ fixes
+$\mathrm{tangentPullback}(a)$ for every original tangent germ $a$.
+For every actual homogeneous normal polynomial $P$ of degree $q$
+with genuine tangent-germ coefficients,
+\[
+ B(\operatorname{normalPolynomialEval}(P))
+ =x_e^q\operatorname{eval}_2(\mathrm{tangentPullback},r)(P),
+ \qquad r_j=1,\quad r_i=b_i+x_i\ (i\ne j).
+\]
+\lean{Hironaka.HironakaActualNormalQuotientExceptionalRestriction.actualAnalyticBlowupPullback_tangentPullback,Hironaka.HironakaActualNormalQuotientExceptionalRestriction.actualAnalyticBlowupPullback_normalPolynomial_homogeneous}
+\leanok
+\end{theorem}
+\begin{proof}
+The actual polynomial blowup fixes each tangent coordinate at every
+actual point. Hence its composition with the original tangent
+projection is exactly that projection. Genuine holomorphic
+representatives show that composition by this map fixes every entire
+original tangent coefficient germ. Apply finite polynomial evaluation
+under the actual ring homomorphism $B$. The proved original normal
+coordinate formulas are $B(x_j)=x_e$ and
+$B(x_i)=x_e(b_i+x_i)$ for $i\ne j$. Thus every normal variable
+acquires one factor $x_e$, with the stated remaining entry. Expand the
+finite polynomial into its supported coefficient monomials. Each
+exponent has degree $q$, so its genuine product has precisely the
+factor $x_e^q$. Factoring this from the finite sum proves the entire
+original germ equality with the same actual tangent coefficients.
+\end{proof}
+
+\begin{theorem}[Every actual normalized quotient has the canonical entire exceptional restriction]
+\label{hir:actual-normal-quotient-canonical-exceptional-restriction}
+\uses{hir:actual-normal-power-canonical-homogeneous-polynomial,hir:actual-normal-polynomial-blowup-factorization,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+Let $g\in N^q$ be an original ambient holomorphic germ, and let $H$
+be any actual original normalized quotient with the genuine product
+identity $x_e^qH=B(g)$. For the internally constructed canonical
+polynomial $P_q(g)$ from the first theorem,
+\[
+ H-\operatorname{eval}_2(\mathrm{tangentPullback},r)(P_q(g))
+ \in (x_e)
+\]
+in the whole original analytic germ ring.
+\lean{Hironaka.HironakaActualNormalQuotientExceptionalRestriction.actual_analytic_normal_quotient_initial_restriction}
+\leanok
+\end{theorem}
+\begin{proof}
+Write $D$ for the displayed actual finite dehomogenized polynomial
+evaluation. The original remainder $R=g-\operatorname{normalPolynomialEval}(P_q(g))$
+lies in $N^{q+1}$. The genuine blowup sends the whole original normal
+ideal to $(x_e)$ and its $(q+1)$st power to $(x_e^{q+1})$.
+Therefore $B(R)=x_e^{q+1}K$ for an actual original holomorphic germ
+$K$. The preceding true homogeneous factorization and the genuine
+product identity give $B(R)=x_e^q(H-D)$. The actual coordinate germ
+$x_e$ is nonzero, as certified by its genuine nonzero coordinate
+derivative. The original holomorphic germ ring is a domain, so cancel
+the nonzero factor $x_e^q$ and obtain $H-D=x_eK$. This is exactly
+membership in the whole original principal ideal $(x_e)$. No
+restriction equality, convergence certificate or formal nonzero-point
+evaluation was supplied.
+\end{proof}
+
+\begin{theorem}[Only original normal-power membership produces the quotient and its canonical restriction]
+\label{hir:actual-normal-initial-quotient-exists-with-restriction}
+\uses{hir:actual-normal-quotient-canonical-exceptional-restriction,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+From the original input $g\in N^q$ alone, there exists an actual
+original holomorphic germ $H$ with both the true product
+$x_e^qH=B(g)$ and the entire canonical exceptional restriction of the
+preceding theorem.
+\lean{Hironaka.HironakaActualNormalQuotientExceptionalRestriction.exists_actual_analytic_normal_initial_quotient}
+\leanok
+\end{theorem}
+\begin{proof}
+The original normal ideal equals the actual selected-coordinate ideal
+for the same normal block. The existing genuine analytic exceptional
+division theorem, applied to its whole $q$th power membership,
+constructs the original holomorphic quotient and true product identity.
+Apply the preceding proved canonical restriction theorem to that
+internally produced quotient. Both required conclusions follow from
+the original input, with no supplied output certificate.
+\end{proof}
+
+The canonical polynomial is the literal degree-$q$ homogeneous
+component of the original $(q+1)$-truncation, matching the separate
+actual normal homogeneous-component producer by definition. The
+general positive-dimensional permissible-centre Bennett theorem,
+coefficient-cosupport compatibility and subsequent whole-ideal HS
+composition remain separate and open.

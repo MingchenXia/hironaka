@@ -1,0 +1,135 @@
+\section{Genuine actual normal-layer module sheaves and all original nearby free stalks}
+
+The raw section power images need not satisfy global gluing. Their actual
+module sheafification is therefore constructed explicitly; its real sheaf
+stalks are compared with the true raw colimit stalks by the canonical
+sheafification unit. The module action on the sheafification comes from
+the actual section module presheaf, independently of the subsequent
+whole original layer dictionary.
+
+\begin{definition}[The genuine sheafification of actual image-layer modules]
+\label{hir:real-domain-actual-normal-layer-module-sheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-module-presheaf-stalk-action,hir:real-domain-actual-complex-sheaf-original-section-germs}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualComplexStructureRingSheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerModuleSheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafModulePresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnit,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnit_section_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafSectionModule}
+\leanok
+The literal complex structure sheaf, viewed as a sheaf of rings, and the
+actual section image-layer module presheaf internally define a genuine
+sheaf of modules by module sheafification. Its underlying additive sheaf
+is the actual additive sheafification of the SAME original image-layer
+presheaf. The true module sheafification unit gives every genuine original
+section layer its actual sheaf section image. No sheaf or gluing
+certificate is a caller premise.
+\end{definition}
+\begin{proof}
+Forgetting commutativity preserves the genuine structure-sheaf gluing
+condition and its SAME actual restriction ring maps. Apply module
+sheafification over this genuine ring sheaf with its identity ring map
+to the independently constructed actual section-layer module presheaf.
+The module sheafification construction glues the locally represented
+section modules and supplies the genuine sheaf condition; its underlying
+additive sheaf is exactly additive sheafification. The adjunction unit
+is a true module-presheaf morphism. Thus its actual section maps are
+additive and respect every original section-ring scalar. Its underlying
+additive map is the canonical additive sheafification unit, giving the
+stated actual section images before any stalk comparison.
+\end{proof}
+
+\begin{theorem}[The actual sheafification unit gives an ambient-linear whole stalk equivalence]
+\label{hir:real-domain-actual-normal-layer-sheaf-unit-stalk-linear-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-module-sheaf,hir:real-domain-actual-normal-layer-whole-stalk-ambient-linear-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalk,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkModule,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalk_germ_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkHom_bijective,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkHom_germ,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkHom_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkLinear,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkLinearEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkWholeLinearEquiv}
+\leanok
+At EVERY $A,C,y,q$, the actual module-sheaf stalk has an independent
+action of the literal complex structure-sheaf ring stalk. The canonical
+unit from the raw layer colimit stalk to this true sheaf stalk is a
+genuine ambient-linear equivalence. Every original actual section germ
+maps to the germ of its SAME actual unit section image. Original
+coherence of $A$ then internally gives an ambient-linear equivalence
+from the genuine sheaf stalk to the ENTIRE original normal layer.
+\end{theorem}
+\begin{proof}
+Apply the genuine filtered-colimit module construction to the underlying
+module presheaf of the actual sheafification. This defines its stalk
+action before any equivalence. Functoriality of genuine neighbourhood
+colimits gives the unit stalk map and every section-germ formula.
+Represent an arbitrary raw layer colimit element by an actual layer
+section and an arbitrary ring-stalk scalar on a true smaller open inside
+that section's open. True restriction retains both germs. The genuine
+unit section map is module-linear on this actual open. The two independent
+colimit product formulas therefore prove the unit stalk map is linear
+for the original arbitrary scalar and element.
+
+The stalk functor sends the additive sheafification unit to an isomorphism:
+evaluation of a sheaf at a point is represented by its skyscraper sheaf
+adjunction, so composing the sheafification adjunction with this stalk
+functor preserves its unit as an isomorphism. Equivalently, local sections
+of sheafification are locally germs of actual original sections, and
+germ equality is witnessed after true restriction. Thus the SAME linear
+unit map is bijective. Invert it and compose with the already proved
+original-coherence whole-layer linear equivalence. This supplies the
+actual sheaf-stalk comparison, retaining the stated every-section formula.
+\end{proof}
+
+\begin{theorem}[Actual sheaf stalk centre scalars descend from the independent action]
+\label{hir:real-domain-actual-normal-layer-sheaf-stalk-centre-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-sheaf-unit-stalk-linear-equivalence,hir:real-domain-actual-normal-layer-colimit-centre-scalars}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalk_isTorsionByCentre,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkCentreModule,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkCentre_mk_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafUnitStalkCentreLinearEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkWholeCentreLinearEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkWholeCentreLinearEquiv_germ_unit,Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.actualNormalLayerSheafStalkWholeCentreLinearEquiv_power_class}
+\leanok
+The ENTIRE original centre ideal annihilates the independent genuine
+module-sheaf stalk action. Its canonical centre quotient action descends
+before the whole original layer comparison. ONLY original coherence of
+$A$ gives a genuine centre-linear equivalence of this actual sheaf stalk
+with the ENTIRE original normal layer, for BOTH independent canonical
+centre actions and EVERY original section-class formula.
+\end{theorem}
+\begin{proof}
+Take an arbitrary sheaf stalk element. Surjectivity of the actual linear
+unit supplies a raw layer colimit preimage. An arbitrary entire centre
+ideal element annihilates that raw element by the already proved genuine
+centre-section and power-section multiplication argument. Unit linearity
+then shows the same scalar annihilates the given sheaf stalk element.
+Thus the entire centre ideal annihilates the actual independently
+defined sheaf stalk action. Quotient scalar descent therefore gives its
+canonical centre action, acting by the same ambient product on every
+actual ambient scalar representative. The raw action and the whole
+original layer action were each independently descended with this same
+formula. Choose an ambient representative for an arbitrary centre quotient
+scalar; ambient linearity proves both unit and whole comparison are
+centre-linear. Their true bijectivity supplies the centre-linear
+equivalences, and the unit section-germ identity retains every original
+section image and power-class formula. No scalar action on a higher
+remainder truncation is asserted.
+\end{proof}
+
+\begin{theorem}[One original accumulating open makes every genuine normal-layer sheaf stalk degree finite, free and flat]
+\label{hir:real-domain-original-all-actual-normal-layer-sheaf-degrees-free-open}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-sheaf-stalk-centre-equivalence,hir:real-domain-original-all-actual-normal-layer-colimit-degrees-free-open}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalLayerSheaf.exists_original_regular_all_actual_layer_sheaf_degrees_free_open}
+\leanok
+ONLY original centre regularity at $x$, original coherence and original
+ideal containment internally give ONE true original open $O$ with
+$x\in\overline{C\cap O}$ such that at EVERY $y\in C\cap O$ and EVERY
+degree $q$, the genuine module-sheaf stalk of the actual section power
+image is finite, free and flat over $\mathcal O_y/J_{C,y}$ with its
+independently descended canonical action. No caller sheaf, action,
+free open or desired freeness certificate is required.
+\end{theorem}
+\begin{proof}
+The original raw layer colimit freeness producer internally gives ONE
+true open with the stated closure property and all raw degree stalks
+finite and free for their independently descended actual centre scalars.
+At each original centre point and every degree the preceding genuine
+centre-linear unit equivalence carries these properties to the SAME
+actual sheaf stalk. Finite generation transfers under its surjective
+linear map and a free basis transfers under its linear equivalence.
+That genuine free module is flat. All constructions retain the same
+original open for all points and degrees. The statement concerns actual
+sheafified degree modules; whole graded direct-sum sheaf stalks,
+geometric normal-cone ring gluing, ambient Hilbert--Samuel transformation
+and blowup descent remain subsequent obligations. No origin-flatness or
+density in every component is inferred.
+\end{proof}

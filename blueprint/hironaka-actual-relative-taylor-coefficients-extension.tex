@@ -1,0 +1,71 @@
+\section{The literal genuine relative Taylor coefficient dictionary}
+
+The actual relative coefficients were constructed by inversion of the true
+normal-power quotient basis, and already have a common holomorphic domain for
+any finite family and finite degree bound. We now identify their entire
+original Taylor series with the literal normal coefficients of the original
+ambient Taylor expansion. This uses the actual coefficient convention of
+formal power series and introduces no unproved raw-derivative convention.
+
+\begin{lemma}[The entire genuine formal coefficient of an actual normal polynomial]
+\label{hir:actual-relative-polynomial-formal-taylor-coefficient}
+\uses{hir:actual-original-taylor-tangent-coordinate-naturality,hir:relative-normal-basis-actual-entire-quotient-basis}
+\lean{Hironaka.HironakaActualRelativeTaylorCoefficients.actualTangentFormalEmbedding,Hironaka.HironakaActualRelativeTaylorCoefficients.actualNormalFormalEmbedding,Hironaka.HironakaActualRelativeTaylorCoefficients.actualJoinedExponent_tangent_embedding,Hironaka.HironakaActualRelativeTaylorCoefficients.actualJoinedExponent_normal_embedding,Hironaka.HironakaActualRelativeTaylorCoefficients.actualUnshiftedTaylor_normalExponentMonomial,Hironaka.HironakaActualRelativeTaylorCoefficients.coefficient_tangent_rename_joined,Hironaka.HironakaActualRelativeTaylorCoefficients.coefficient_tangent_rename_mul_normal_monomial,Hironaka.HironakaActualRelativeTaylorCoefficients.coefficient_actualTaylor_normalPolynomial_monomial,Hironaka.HironakaActualRelativeTaylorCoefficients.actualFormalNormalCoefficient_normalPolynomialEval}
+\leanok
+Let $P$ be any finite polynomial in the normal variables with coefficients in
+$\mathcal O_{\mathbb C^d,0}$. Evaluate $P$ using the actual tangent pullback
+and actual ambient normal coordinate germs. The literal formal normal
+coefficient at every normal exponent $\gamma$ of the genuine ambient Taylor
+series of that evaluation is the genuine tangential Taylor series of the
+entire original polynomial coefficient $P_\gamma$.
+\end{lemma}
+\begin{proof}
+For one actual monomial $a Z^\alpha$, the genuine ambient Taylor
+homomorphism sends the actual tangent pullback of $a$ to the literal variable
+renaming of its genuine tangential Taylor series, by whole-map coordinate
+naturality. It sends every actual normal coordinate to the corresponding
+original formal variable. Multiplicativity therefore gives the product of
+that renamed series with the true normal monomial. The coefficient at the
+joined original exponent $(\beta,\gamma)$ equals the $\beta$ coefficient of
+Taylor$(a)$ if $\gamma=\alpha$, and is zero otherwise: the true renamed
+series has no nonzero normal exponent, and genuine monomial multiplication
+shifts exponents exactly. This is coefficient equality with the original
+numerical coefficients, including zero coefficients and empty coordinate
+blocks. Add the finitely many actual polynomial monomials. Additivity of
+the actual Taylor homomorphisms and coefficient maps gives the statement
+for the entire original polynomial and every tangential exponent.
+\end{proof}
+
+\begin{theorem}[Every genuine relative coefficient has exactly its original formal Taylor series]
+\label{hir:actual-relative-coefficient-literal-formal-taylor-dictionary}
+\uses{hir:actual-relative-polynomial-formal-taylor-coefficient,hir:actual-relative-coefficient-polynomial-truncations,hir:actual-relative-coefficient-germ-stability,hir:actual-relative-coefficient-common-finite-domain}
+\lean{Hironaka.HironakaActualRelativeTaylorCoefficients.actualJoinedExponent_normal_weight,Hironaka.HironakaActualRelativeTaylorCoefficients.actualFormalNormalCoefficient_actualTaylor,Hironaka.HironakaActualRelativeTaylorCoefficients.exists_actual_finite_coefficient_common_domain_with_Taylor}
+\leanok
+For any actual holomorphic ambient germ $g$ and any normal exponent
+$\gamma$, the literal $\gamma$ normal coefficient of the genuine entire
+ambient Taylor series equals the genuine tangential Taylor series of the
+actual stable relative coefficient germ of $g$ at $\gamma$.
+Consequently every finite family of actual analytic ambient germs has
+actual holomorphic coefficient representatives on one genuine common open
+for every prescribed finite low-degree range, satisfying these literal
+entire formal-series identities.
+\end{theorem}
+\begin{proof}
+Take $q=|\gamma|+1$ and the genuine canonical relative polynomial $P_q(g)$
+constructed from the actual normal-power quotient. Its actual remainder
+$g-P_q(g)$ belongs to the whole original normal ideal power of order $q$.
+The genuine ambient Taylor homomorphism maps this entire ideal into the
+actual formal normal ideal power, by its true normal-coordinate generator
+dictionary and the actual ideal-map power identity. Every coefficient with
+normal degree below $q$ vanishes in that ideal power, regardless of its
+tangential exponent. Thus the literal normal coefficient at $\gamma$ of
+Taylor$(g)$ equals that of Taylor$(P_q(g))$. Apply the preceding polynomial
+identity. By construction, the entire $\gamma$ coefficient of $P_q(g)$ is
+the actual stable relative coefficient germ. This proves equality of the
+whole formal tangential series, with no convergence assertion for an
+arbitrary prescribed formal series. Finally use the already constructed
+actual finite coefficient representatives and their genuine common
+holomorphic domain, and substitute the whole-series equality just proved.
+This does not construct the full general reduced coefficient presentation
+or prove transformed stability or Bennett inequalities.
+\end{proof}

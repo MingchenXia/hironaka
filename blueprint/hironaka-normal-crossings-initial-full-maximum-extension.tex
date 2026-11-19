@@ -1,0 +1,132 @@
+\section{The actual full canonical maximum at the initial NC history}
+\label{sec:hironaka-normal-crossings-initial-full-maximum}
+
+Assume the ambient complex dimension $n$ is positive. For an actual NC
+carrier $H$, let $M_H=(X,X,\varnothing,I_H,1)$ be its unchanged original
+marked datum, and let $V_H(x)$ be the whole value of the actual canonical
+family of depth $n+1$ at the reflexive tower. Every assertion in this
+section concerns this initial empty boundary and empty history. No
+later chronological or companion history is identified with branch count.
+
+\begin{lemma}[The genuine coordinate NC model]
+\label{hir:general-nc-standard-coordinate-carrier}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsInitialFullMaximum.coordinateCarrier_isNormalCrossings}
+For a finite set $S$ of actual coordinate indices, the whole union
+$H_S=\bigcup_{i\in S}\{z_i=0\}$ in the lifted complex coordinate model
+is a genuine NC carrier.
+\end{lemma}
+\begin{proof}
+Every coordinate hyperplane is closed, so their finite union is closed.
+At a point $w$, let $S_w$ be those selected
+indices for which $w_i=0$. Restrict the translation chart $z\mapsto z-w$
+to the open neighbourhood on which all selected coordinates nonzero
+at $w$ remain nonzero. On that actual domain, membership in the whole
+original union is equivalent to vanishing of at least one selected
+coordinate in $S_w$, and the corresponding translated coordinate has
+the same value because $w_i=0$. This is exactly the centred NC
+presentation of the whole carrier. An empty selected set gives an
+empty union and the empty local branch presentation.
+\end{proof}
+
+\begin{lemma}[Whole initial values under an actual NC flattening]
+\label{hir:general-nc-initial-full-value-flat-chart}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsInitialFullMaximum.initialFullValue_eq_coordinate_model}
+Let an actual centred NC flattening at a point of $H$ identify the whole
+carrier on its genuine chart domain with the selected coordinate union
+$H_S$. Then $V_H(x)=V_{H_S}(0)$, including every lower entry of the
+full reflexive invariant.
+\uses{hir:general-nc-standard-coordinate-carrier,hir:general-nc-actual-local-snc-branches}
+\end{lemma}
+\begin{proof}
+The genuine flattening and its genuine inverse give an actual
+biholomorphism from the open flat domain to the lifted open target.
+It takes the original point to zero and takes the whole carrier trace
+to the literal trace of $H_S$. At every point of these domains,
+composition with this actual biholomorphism and its inverse identifies
+the entire holomorphic vanishing-ideal predicates: a holomorphic germ
+vanishes on one trace if and only if its transported germ vanishes on
+the other. Consequently the actual pulled-back marked data have the
+same full ambient carrier, empty boundary, whole original ideal and
+marking one. Their actual invariant domains follow from the proved NC
+original-domain theorem and actual open/biholomorphic transport.
+
+The reflexive history is genuinely canonical without any additional
+condition. Apply the full invariant's proved open restriction law to
+the original flat domain, its whole tower-isomorphism law to the actual
+flattening biholomorphism, and its open restriction law to the coordinate
+target. The original point belongs to the original marked cosupport
+and zero belongs to the coordinate marked cosupport. These three exact
+value equalities, with the whole marked-data identities just proved,
+give the claimed equality of full values.
+\end{proof}
+
+\begin{lemma}[Full initial values agree on the genuine highest branch stratum]
+\label{hir:general-nc-initial-full-highest-stratum-constant}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsInitialFullMaximum.initialFullValue_eq_of_highest_branch_count}
+Suppose every original branch count is at most $r>0$. Any two points of
+branch count $r$ have the same whole full initial canonical value.
+\uses{hir:general-nc-initial-full-value-flat-chart,hir:general-nc-highest-stratum-branch-adapted-coordinates}
+\end{lemma}
+\begin{proof}
+The actual highest-stratum coordinate producer gives a centred
+flattening at each point in which the original carrier is the union of
+the last $r$ coordinate hyperplanes. Both actual charts therefore use
+the same selected coordinate set, without choosing or comparing global
+branch labels. Positivity of $r$ puts both points in the original
+carrier. The preceding whole-value transport sends each full initial
+value to the same coordinate-model value at zero. Transitivity proves
+their equality, with all lower entries retained.
+\end{proof}
+
+\begin{theorem}[The actual initial full maximum is the whole highest branch stratum]
+\label{hir:general-nc-initial-whole-full-maximum}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsInitialFullMaximum.initialFullMaximum_eq_highest_stratum}
+Suppose the positive bound $r$ is attained and bounds every original
+branch count. The actual whole maximum locus of $V_H$ on its actual
+original cosupport is exactly $\{x:r\leq\nu_H(x)\}$.
+\uses{hir:general-nc-initial-full-highest-stratum-constant,hir:general-nc-actual-prefix-first-entry}
+\end{theorem}
+\begin{proof}
+The actual original cosupport is exactly $H$. Its genuine first full
+entry is the intrinsic original branch count. Fix an attained point
+of count $r$. Every other point of count $r$ has its same whole full
+value by the preceding lemma. At every remaining point of $H$, the
+first entry is strictly smaller than $r$, so the actual lexicographic
+full value is strictly smaller, regardless of its later entries.
+Thus every point of the whole $r$-branch stratum is a full maximum.
+Conversely a full maximum cannot have smaller branch count, since its
+value would be strictly below the attained reference value. All counts
+are bounded by $r$, so the maximum lies in precisely that stratum.
+Both set inclusions retain the entire original cosupport.
+\end{proof}
+
+\begin{theorem}[An actual first full canonical blowup from only the original NC carrier]
+\label{hir:general-nc-original-first-full-canonical-blowup}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsInitialFullMaximum.exists_initial_full_canonical_blowup}
+Every nonempty actual original NC carrier internally supplies an attained
+positive highest branch count, its nonempty whole highest stratum and
+a genuine blowup of that stratum. The actual one-step tower is a test
+tower for the unchanged original marked datum and is canonical for its
+whole full invariant.
+\uses{hir:general-nc-initial-whole-full-maximum,hir:general-nc-highest-stratum-actual-blowup}
+\end{theorem}
+\begin{proof}
+The finite intrinsic count range, bounded by $n$, supplies an attained
+positive maximum from nonemptiness of the original carrier. The actual
+highest-stratum producer gives its genuine smooth centre and actual
+blowup. The preceding theorem identifies that very centre with the
+entire actual initial full maximum on the same original cosupport.
+The centre is smooth, lies in the marking-one cosupport and has normal
+crossings with the empty old boundary, proving the actual first test
+step. The actual full canonical-history step constructor uses precisely
+the derived full-maximum equality and the reflexive initial history.
+No compactness, supplied maximum, value formula, centre, finite history
+or termination certificate is an input. At branch count one the
+genuine blowup may be Cartier; no differential strict carrier is erased
+by assertion. No second or later full canonical step is claimed.
+\end{proof}

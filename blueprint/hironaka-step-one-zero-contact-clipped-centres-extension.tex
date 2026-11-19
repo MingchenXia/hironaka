@@ -1,0 +1,173 @@
+\section{Actual zero-contact stalks and admissible clipped original centres}
+Let $L$ be the actual enlarged contact coefficient model and let $k$ be the
+number of original historical boundary entries. Write $A$ for the true union
+of components of $L.N$ not contained in its actual cosupport, $B$ for the
+selected union, and $L^{\rm rem}$ for the already constructed remainder.
+The ordered remainder boundary retains exactly $k$ empty historical entries.
+All towers below are the SAME literal original towers; their maps blow up
+their original centres. Admissibility of a clipped centre does not identify
+any of these maps with a blowup along that clipped centre.
+
+\begin{theorem}[Entire controlled ideals agree on the actual selected-component complement]
+\label{hir:zero-contact-remainder-open-ideal-dictionary}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactClippedCentres.remainder_controlled_ideal_open_eq}
+\uses{hir:zero-contact-actual-remainder-definition,hir:member-tail-actual-clopen-strict,hir:coherent-transform-restriction-identity}
+For closed smooth $L.N$, coherent $L.ideal$, every natural $k$, and every
+actual test tower $T$ of $L$, put $G=M\setminus B$. The entire controlled
+ideals of $L^{\rm rem}$ and $L$ restricted to $T^{-1}G$ are equal.
+\end{theorem}
+\begin{proof}
+Both component subunions are closed smooth and disjoint, with union $L.N$.
+Thus $G$ is genuinely open and $A=L.N\cap G$. At each strict point of $A$,
+closedness of the strict selected union gives a neighborhood where strict
+remaining and full contact carrier membership agree. The actual parent test
+tower gives smooth full strict carriers; these identical local germs and
+closedness give smooth remaining strict carriers at every literal prefix.
+Induction on the original tower now proves coherence of the entire remaining
+controlled ideal: pull back the actual coherent ideal and take its coherent
+colon along the actual smooth strict carrier by the power of the actual
+exceptional ideal. This does not require the centre to lie in the remainder.
+
+Initially on $G$, the remaining and full records have the same carrier, ideal
+and mark. Replacing the full record's boundary by the remaining boundary makes
+the whole restricted records equal. Changing only the boundary leaves the
+entire transformed carrier, ideal and mark unchanged by the literal recursion.
+Coherent controlled transformation commutes with genuine open restriction
+at every prefix, since both source and target ideals have just been proved
+coherent. Induct on the original tower and compare these two restrictions.
+This gives equality of entire ideals on the whole inverse image of $G$.
+\end{proof}
+
+\begin{theorem}[All actual stalks and all ordinary-order traces agree on the remaining carrier]
+\label{hir:zero-contact-remainder-all-stalk-orders}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactClippedCentres.remainder_actual_stalk_and_all_orders}
+\uses{hir:zero-contact-remainder-open-ideal-dictionary,hir:member-tail-actual-clopen-strict}
+Under the preceding genuine inputs, at EVERY point of the actual remaining
+strict carrier, membership of EVERY ambient function in the two controlled
+ideal stalks is equivalent. At that point, membership in their along-carrier
+ordinary-order cosupports is equivalent for EVERY natural threshold.
+\end{theorem}
+\begin{proof}
+The strict transform of the closed remaining carrier lies over that carrier,
+so every such point belongs to $T^{-1}G$. A coherent ideal restricted to an
+open set has exactly its original stalk there: restrict an ambient function,
+then extend it back; the extension agrees with the original near the point,
+and coherent germ membership is invariant under this agreement. Apply this
+in both directions to the entire open ideal equality just proved. This gives
+the asserted equivalence for all functions, without finite-generator or
+coordinate-only truncation.
+
+The closed strict partition also gives identical remaining and full carrier
+membership germs near the point. In the definition of order at least $q$,
+a function agrees on the carrier with a germ in the $q$th power of the point
+ideal. Intersect its witnessing neighborhood with the neighborhood of exact
+carrier membership to transfer this witness in each direction. Combine this
+all-order identity with all-function ideal-stalk equivalence and with actual
+point membership in both carriers. This proves the claimed cosupport trace
+dictionary for every $q$, including zero.
+\end{proof}
+
+\begin{theorem}[An actual parent centre internally produces an admissible clipped centre]
+\label{hir:zero-contact-remainder-clipped-admissible}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactClippedCentres.remainder_clipped_centre_isAdmissible}
+\uses{hir:zero-contact-remainder-all-stalk-orders,hir:zero-contact-actual-remainder-definition,hir:member-tail-actual-clopen-strict}
+Assume in addition $k\leq\#L.E$. For any actual parent test prefix $T$ and
+actual admissible parent centre $C$, the set
+$C\cap (L^{\rm rem})_T.N$ is an admissible centre of the actual entire
+remaining controlled datum at that SAME prefix.
+\end{theorem}
+\begin{proof}
+The intersection is closed. At a point of it, actual parent admissibility
+puts the entire centre in the full current carrier. The exact remaining/full
+carrier membership germ therefore makes the clipped centre germ equal to
+the original centre germ. Its actual regular coordinate presentation
+transfers across this identity, proving closed smoothness. The all-order
+stalk dictionary at the unchanged marking transfers the original
+centre's true cosupport inclusion to the remaining controlled datum.
+
+The boundary recursion gives precisely $k$ empty entries followed by the
+full transformed boundary with its first $k$ entries dropped. Indeed strict
+transform preserves an empty entry; mapping commutes with dropping, and each
+new exceptional entry is appended beyond the first $k$ entries, whose length
+bound persists at every prefix. Normal-crossing coordinates of the original
+centre restrict to this actual dropped sublist. Transfer those same
+coordinates to the clipped centre by its exact membership germ, shrinking
+the chart source within the witnessing neighborhood. Adding the $k$ empty
+entries imposes no additional incident coordinate condition. This internally
+proves all three fields of actual admissibility. No new blowup map is claimed.
+\end{proof}
+
+\begin{theorem}[Every literal original centre has an admissible actual clipping]
+\label{hir:zero-contact-remainder-all-literal-clipped-centres}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactClippedCentres.remainder_all_literal_clipped_centres}
+\uses{hir:zero-contact-remainder-clipped-admissible}
+For the same genuine full contact test tower, EVERY actual recorded centre,
+evaluated at its SAME literal prefix, has an admissible intersection with
+the current true remaining carrier.
+\end{theorem}
+\begin{proof}
+Induct on the actual tower. A zero-length tower records no centre. At a literal
+last blowup the true parent test condition supplies both its actual earlier
+test tower and admissibility of its actual last centre. Apply the induction
+hypothesis to all earlier recorded centres, then the preceding theorem at
+the actual last prefix. Their conjunction is exactly the recursive property
+of all recorded centres. This is produced as output, never supplied as input.
+\end{proof}
+
+\begin{theorem}[Original zero-level Step1 produces one remainder with the complete stalk and centre dictionary]
+\label{hir:zero-contact-original-clipped-centres}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactClippedCentres.exists_actual_zero_contact_clipped_centres}
+\uses{hir:zero-contact-remainder-whole-masked-prefixes,hir:zero-contact-remainder-all-stalk-orders,hir:zero-contact-remainder-all-literal-clipped-centres,hir:zero-contact-actual-enlarged-coherent-model}
+Original domain-three maximal-order data, the literal constructed canonical
+Step1 tower and an actual nonspecial zero-level cosupport point internally
+produce ONE true chosen tangent open and the SAME actual remainder. On it,
+the joint output includes the existing whole original masked record dictionary,
+true domain two at every literal original tail prefix, all-function stalk and
+all-threshold ordinary-order dictionaries at every remaining point at every
+prefix, and admissible clippings of EVERY literal restricted original centre.
+\end{theorem}
+\begin{proof}
+Use the existing original-input producer to obtain one true chosen tangent
+open, its actual mask inclusion and the complete whole-record/domain
+dictionary. Actual Giraud and the original canonical bridge internally give
+the enlarged contact model's genuine test tower on its full tangent inverse
+image. Original closed smoothness and coherence internally give the enlarged
+model's true smooth carrier and coherent ideal; the literal ordered boundary
+has at least its original historical length. Apply the preceding stalk and
+order producer to every literal prefix of that SAME test tower, and the
+all-centres producer to the SAME whole restricted tail. Retain all original
+whole-mask equalities and lower domains already produced. All objects in
+this conjunction use the one chosen tangent open; no candidate admissibility,
+nonzero, canonicality, lower domain or identity is a caller certificate.
+\end{proof}
+
+\begin{theorem}[Literal General3 internally supplies the actual companion and clipped-centre output]
+\label{hir:zero-contact-general-three-clipped-centres}
+\leanok
+\lean{Hironaka.HironakaStepOneZeroContactClippedCentres.exists_actual_general_three_clipped_centres}
+\uses{hir:general-three-actual-companion-domain-dictionary,hir:zero-contact-original-clipped-centres}
+Original domain-three data and literal canonical invFamily3, at a true positive
+ordinary-order point and an actual nonspecial zero-level point in its true
+companion cosupport, internally produce the entire preceding joint output
+for that SAME actual companion and literal companion tail.
+\end{theorem}
+\begin{proof}
+The genuine original companion producer internally gives its domain-three
+datum, its maximal-order property and literal canonical Step1 tail, together
+with the exact original cosupport dictionary. Apply the preceding theorem
+to those actual data and the given real companion cosupport point. Its full
+conjunction is returned unchanged, with the actual original companion and
+tail substituted. No independent contact model or tower is supplied.
+\end{proof}
+
+\paragraph{Open frontier.}
+The original maps still blow up their original centres. Construction of a
+clipped blowup tower and its comparison with the original maps, candidate
+canonicality, deeper zero-contact histories, cross-contact patch descent,
+whole original zero-level and General3 superlevels, and general noncompact
+global termination remain open.

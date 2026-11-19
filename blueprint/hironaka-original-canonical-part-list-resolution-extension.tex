@@ -1,0 +1,93 @@
+\section{Actual canonical stages of the ordered part recursion}
+
+The objects below retain actual finite blowup towers and their literal
+ordered boundary lists. A canonical sum stage means a terminal canonical
+history of the actual mark-one sum of the two original vanishing ideals,
+with its genuine invariant-domain proof. It does not mean a canonical
+history of the union of the two parts.
+
+\begin{definition}[A finite ordered canonical separator chain]
+\label{hir:original-canonical-ordered-separator-chain}
+\uses{hir:original-canonical-sum-intrinsic-source-record}
+\lean{Hironaka.HironakaOriginalCanonicalPartListResolution.CanonicalSeparationChain}
+\leanok
+For an original ordered boundary $E$, head carrier $A$ and labelled
+list $L$, an actual ordered canonical separator chain is defined
+recursively. For $L=[]$ it is the identity tower with boundary $E$.
+For $L=(B,e)::L_0$, first take an actual canonical terminal sum stage
+for $(I_A+I_B,E,1)$. Continue with the strict transform of $A$, the
+ordered strict transforms of $L_0$, and the entire actual accumulated
+boundary of this sum stage. The chain is the literal append of the
+first stage and this recursively constructed tail. The dimension
+labels are retained at every stage, including empty-carrier labels.
+\end{definition}
+
+\begin{theorem}[Original good parts internally construct the same canonical ordered separator and smooth source]
+\label{hir:original-canonical-ordered-separator-producer}
+\uses{hir:original-canonical-ordered-separator-chain,hir:original-canonical-sum-selected-terminal-separator,hir:original-canonical-sum-same-separator-smooth-square,hir:original-stopped-strict-transform-smooth-square,hir:actual-smooth-cartesian-tower-append}
+\lean{Hironaka.HironakaOriginalCanonicalPartListResolution.exists_canonical_ordered_separator}
+\leanok
+Let $E$ be an original SNC list, $G$ closed, $(A,d)$ an original
+compact good part relative to $(E,G)$, and $L$ an original finite
+ordered list of such good parts. Suppose $A\cap B\subseteq G$ for
+every carrier $B$ in $L$. These original data internally construct an
+actual finite ordered canonical separator chain $T$ and its whole
+boundary $E_T$. It is admissible over $G$, has SNC boundary, and its
+head strict transform is disjoint from every strict tail part.
+
+After fixing this same $T$, every genuine holomorphic submersion
+$b:Y^m\to X^n$ internally supplies an actual source tower $Q$ and
+upper submersion $g$ with holomorphic Cartesian projection square.
+The source is an ordered canonical separator chain for the intrinsic
+pulled carriers and dimension labels shifted by $m-n$, its entire
+boundary is literally $g^{-1}E_T$, and it is admissible over $b^{-1}G$.
+The whole strict transform of the head and of each original list
+part is the $g$-inverse image of its target strict transform. In
+particular their actual source strict transforms are disjoint.
+No source compactness or incoming finite history is assumed.
+\end{theorem}
+\begin{proof}
+Induct on the ordered list length. The empty list uses the actual
+identity tower; its smooth source is the actual identity square.
+For $(B,e)::L_0$, original good-part hypotheses give genuine analytic
+carriers, empty interior of $A$, compact $A\cap B$ and density of
+each carrier away from the other. Apply the canonical sum separator
+once, fixing its actual target tower before any source is chosen.
+Its actual centres lie over $A\cap B\subseteq G$. The admissible
+strict-transform theorem carries every remaining original good part
+to a compact good part relative to the same whole accumulated SNC
+boundary and the inverse image of $G$. Apply the induction hypothesis
+to this actual transformed ordered list and head. Append the actual
+towers. Admissibility composes. The first separated pair stays
+disjoint under all later strict transforms; the induction hypothesis
+gives disjointness from the remaining parts.
+
+For a given $b$, construct the actual source of the first sum stage
+using its proved intrinsic sum-record dictionary and actual universal
+blowup square. Apply the induction hypothesis to its actual upper
+submersion. Append these actual source towers; genuine actual-pullback
+append gives a Cartesian square for the same full target append.
+Every original part is dense away from $G$, and the actual target
+centres lie over $G$. Thus the genuine preserved-open strict-square
+theorem identifies all whole source strict transforms, including
+exceptional points. It also identifies the source labels used by
+the next separator stage with the intrinsic pulls of those target
+labels. Literal ordered boundary pullback identifies the entire
+intermediate boundaries. These actual equalities let the source
+canonical sum stages and recursive chain be appended with their true
+intrinsic inputs. The projection identity identifies the recursive
+source bad sets, so the source admissible sequences compose over
+$b^{-1}G$. Final whole boundary equality follows from the last
+recursive stage, and source disjointness follows by inverse image
+of the proved target disjointness. All choices were internal and
+all original stage positions are retained.
+\end{proof}
+
+\begin{remark}
+This is the genuine ordered finite separation subroutine. The next
+mixed-dimensional resolution step must resolve the separated head,
+cut the later bad set down to the remaining parts, and iterate while
+retaining this same composite map. No assertion that such a composite
+is one canonical history of the whole mixed-dimensional ideal is
+made here.
+\end{remark}

@@ -1,0 +1,92 @@
+\section{Actual normal-coordinate reindexing and chart conjugacy}
+
+All reindexings below are genuine coordinate permutations. The polynomial,
+formal and original analytic germ rings are independently reindexed by the
+same permutation. A fixed degree-lex order in the reindexed ring is not
+identified with the original degree-lex order. No transport of a canonical
+owner division or of reduced vertices is asserted.
+
+\begin{theorem}[The actual whole germ reindexing has the literal Taylor square]
+\label{hir:actual-normal-reindex-whole-taylor}
+\uses{hir:actual-formal-germ-hom-coordinate-uniqueness}
+\lean{Hironaka.HironakaActualNormalCoordinateReindex.coordinateLinearEquiv,Hironaka.HironakaActualNormalCoordinateReindex.coordinateGermEquiv,Hironaka.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_coordinate,Hironaka.HironakaActualNormalCoordinateReindex.actualTaylor_coordinateGermEquiv,Hironaka.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_polynomial}
+\leanok
+For every coordinate permutation $r$, there is a genuine complex-linear
+coordinate equivalence and its original germ algebra equivalence $P_r$, with
+$P_r(x_i)=x_{r(i)}$. The whole original Taylor map satisfies
+$\tau P_r=\operatorname{rename}_r\tau$. The polynomial renaming has precisely
+this same literal analytic evaluation, for every entire polynomial.
+\end{theorem}
+\begin{proof}
+Take the linear isometry $z\mapsto(i\mapsto z_{r(i)})$ and pull back actual
+holomorphic representatives. Composition with its inverse gives a genuine
+whole germ equivalence, preserving every constant. Applying it to coordinate
+representatives gives $x_{r(i)}$. The two maps from the original germ ring
+to formal series agree on these actual coordinates, whose images have zero
+constant term. Actual Hadamard decomposition and finite Taylor remainders
+therefore make the two maps agree on every entire germ. Polynomial
+universality gives the evaluation square from the same coordinate identity.
+\end{proof}
+
+\begin{theorem}[A prescribed normal pivot is carried to the first normal coordinate]
+\label{hir:actual-normal-reindex-pivot-powers}
+\uses{hir:actual-normal-reindex-whole-taylor,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualNormalCoordinateReindex.firstNormalIndex,Hironaka.HironakaActualNormalCoordinateReindex.normalPivotPermutation,Hironaka.HironakaActualNormalCoordinateReindex.normalPivotPermutation_pivot,Hironaka.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent,Hironaka.HironakaActualNormalCoordinateReindex.normalPivotPermutation_normal_set,Hironaka.HironakaActualNormalCoordinateReindex.map_analyticCoordinateIdeal_coordinateGermEquiv,Hironaka.HironakaActualNormalCoordinateReindex.map_formalCoordinateIdeal_rename,Hironaka.HironakaActualNormalCoordinateReindex.map_normalIdeal_pow_normalPivotPermutation,Hironaka.HironakaActualNormalCoordinateReindex.map_formal_normal_pow_normalPivotPermutation,Hironaka.HironakaActualNormalCoordinateReindex.map_maximalIdeal_pow_coordinateGermEquiv,Hironaka.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangentPullback,Hironaka.HironakaActualNormalCoordinateReindex.normalPivotPermutation_tangent_mul}
+\leanok
+In $d+t$ coordinates, any prescribed normal pivot $j$ admits an actual
+permutation fixing every tangent coordinate, preserving the whole normal
+coordinate set, and carrying $j$ to the first normal coordinate. Its whole
+analytic and formal normal ideals, all their powers, and every genuine
+analytic maximal power are preserved. The whole original tangent pullback
+is fixed, so the tangent algebra structure is retained.
+\end{theorem}
+\begin{proof}
+The normal pivot itself supplies $t>0$. Swap its ambient index with the
+first normal ambient index. Both indices belong to the normal block, and
+every tangent index differs from both. Thus the swap fixes the tangent
+block and preserves exactly the normal block, including when the pivot
+already is first. Mapping a coordinate-ideal span by either genuine
+coordinate equivalence maps its generators exactly to the coordinates of
+the image set. This proves whole ideal equalities; ideal-map powers give
+all powers, including the zeroth. Evaluation at the origin is unchanged
+by the linear equivalence, so the true maximal ideal is preserved and
+again so are all powers. For tangent pullback, apply the entire Taylor
+square and its injectivity: both maps have the same actual tangent
+coordinate images and hence agree on every original tangent germ.
+\end{proof}
+
+\begin{theorem}[The genuine whole blowup charts are conjugate under reindexing]
+\label{hir:actual-normal-reindex-chart-conjugacy}
+\uses{hir:actual-normal-reindex-whole-taylor,hir:actual-normal-reindex-pivot-powers,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualNormalCoordinateReindex.rename_actualFormalBlowup,Hironaka.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_actualAnalyticBlowupPullback,Hironaka.HironakaActualNormalCoordinateReindex.coordinateGermEquiv_analytic_chart_conjugacy,Hironaka.HironakaActualNormalCoordinateReindex.image_tangentScalingVariables}
+\leanok
+For any selected coordinate set $A$, pivot $e$, and actual chart constants
+$b$, the same whole formal and analytic charts satisfy
+\[
+ P_r\,\beta_{A,e,b}=\beta_{rA,r(e),b\circ r^{-1}}P_r.
+\]
+Consequently the genuine analytic conjugate $P_r\beta P_r^{-1}$ is precisely
+the displayed reindexed chart. The selected tangent-scaling set
+$S^c\cup\{e\}$ becomes $(rS)^c\cup\{r(e)\}$, so both the relative normal
+chart and the tangent-scaling chart have this literal square.
+\end{theorem}
+\begin{proof}
+Renaming is the genuine formal substitution $X_i\mapsto X_{r(i)}$.
+Composition of actual formal substitutions gives, on the two sides,
+substitution by the corresponding reindexed chart coordinates. For an
+index outside $A$ both are $X_{r(i)}$; the pivot gives $X_{r(e)}$; every
+other selected index gives
+$X_{r(e)}(b_i+X_{r(i)})$. Thus the coordinate families are identical and
+the substitutions agree on every entire formal series. The whole Taylor
+square for reindexing and the actual analytic blowup square identify the
+Taylor series of both analytic compositions with this same formal series.
+Injectivity of the unchanged original Taylor map proves their whole germ
+equality. Substitute $P_r^{-1}g$ to get the conjugacy formula. Finally a
+bijection carries complements and singletons to their literal complements
+and singletons, proving the tangent-scaling selected-set identity.
+\end{proof}
+
+These equalities permit working with a fixed monomial order in the permuted
+ring and transporting the resulting whole analytic division back through
+$P_r$. They do not assert that fixed degree-lex canonical vertices or owner
+recursions commute with an arbitrary permutation.

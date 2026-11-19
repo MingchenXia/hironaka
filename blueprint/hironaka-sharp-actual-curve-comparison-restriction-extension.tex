@@ -1,0 +1,89 @@
+\section{Genuine restriction of comparison histories and empty padding}
+
+The common-open cocycle does not by itself identify a direct common-open map
+with the restriction of a previously constructed pairwise map. The actual
+geometric restriction operations below supply the first needed comparison.
+No canonical compression or deletion of empty steps is used.
+
+\begin{lemma}[Actual restrictions of a biholomorphism to matching opens]
+\label{hir:sharp-actual-comparison-open-biholomorphism}
+\uses{mc:tower-isomorphism-basic,bcalc:restrict-nested}
+\lean{Hironaka.HironakaSharpActualCurveComparisonRestriction.preimageOpen,Hironaka.HironakaSharpActualCurveComparisonRestriction.openRestriction,Hironaka.HironakaSharpActualCurveComparisonRestriction.openRestriction_val}
+\leanok
+For a genuine biholomorphism $\Phi:X'\to X$ and actual opens $U'\subset X'$,
+$U\subset X$ with $U'=\Phi^{-1}U$, construct a genuine restricted
+biholomorphism $U'\to U$ whose underlying map is exactly $\Phi$.
+Its inverse is the actual restriction of $\Phi^{-1}$. In particular the
+source open can be constructed internally as the genuine inverse image of $U$.
+\end{lemma}
+\begin{proof}
+Send an actual source subtype point $x$ to $\Phi(x)$ with its target membership
+supplied by the actual inverse-image equality. Send a target subtype point
+$y$ to $\Phi^{-1}(y)$; applying the real inverse equation gives its source
+membership. The two genuine inverse laws identify both subtype composites
+with their identities. Compose the actual holomorphic maps with open
+inclusions and use the genuine open-subtype holomorphic criterion for both
+directions. This constructs the claimed biholomorphism and exact underlying
+point maps without extending any germ or choosing a new ambient map.
+\end{proof}
+
+\begin{theorem}[Actual stagewise comparisons restrict to every genuine base open]
+\label{hir:sharp-actual-stagewise-comparison-open-restriction}
+\uses{hir:sharp-actual-comparison-open-biholomorphism,mc:tower-isomorphism-basic,mc:restrict-tower}
+\lean{Hironaka.HironakaSharpActualCurveComparisonRestriction.openPreimage_eq_preimage,Hironaka.HironakaSharpActualCurveComparisonRestriction.IsTowerIso.open_restriction}
+\leanok
+Given an actual stagewise isomorphism of two finite towers over $\Phi$ and
+any genuine target base open $U$, restrict the target history to $U$ and
+the source history to the actual inverse-image open $\Phi^{-1}U$.
+Construct an actual stagewise isomorphism of those exact restricted histories.
+The new base map is the genuine restricted $\Phi$, and the terminal map is
+exactly the restriction of the original terminal biholomorphism. Every actual
+successor, including every centre with empty trace, remains in the history.
+\end{theorem}
+\begin{proof}
+Induct on the genuine stagewise isomorphism. For reflexive towers the preceding
+open biholomorphism is exactly the required reflexive comparison. At a
+successor, the induction hypothesis constructs the genuine previous restricted
+comparison with its exact underlying original point map. The full projection
+commuting equation identifies the actual terminal source open with the
+inverse image of the actual terminal target open under the given next
+biholomorphism. Construct its genuine restriction by the preceding lemma.
+
+Both original arrows restrict to actual blowups of the traces of their
+centres. The true old centre-preimage law and the exact underlying previous
+restricted map identify these two trace centres in both directions.
+The real old blowup square gives the next restricted square by subtype
+extensionality. Extend the genuine restricted stagewise isomorphism with
+these actual blowup proofs, centre law and next biholomorphism. Its underlying
+terminal map is the given original one by construction. No centre or
+restriction compatibility certificate is a new premise, and an empty trace
+is retained as a genuine blowup step.
+\end{proof}
+
+\begin{theorem}[Restricting genuine identity empty tails preserves every actual padding position]
+\label{hir:sharp-actual-identity-empty-padding-open-restriction}
+\uses{hir:sharp-actual-comparison-open-biholomorphism,hir:sharp-actual-identity-empty-padding,mc:restrict-tower}
+\lean{Hironaka.HironakaSharpActualCurveComparisonRestriction.identityEmptyTail_openPreimage,Hironaka.HironakaSharpActualCurveComparisonRestriction.identityEmptyRestriction,Hironaka.HironakaSharpActualCurveComparisonRestriction.identityEmptyTail_open_restriction,Hironaka.HironakaSharpActualCurveComparisonRestriction.identityEmptyRestriction_val}
+\leanok
+For an actual open $U\subset Y$ and every $r$, the actual restriction to $U$
+of the genuine $r$-step identity empty-centre tower on $Y$ is stagewise
+isomorphic over the identity of $U$ to the genuine $r$-step identity
+empty-centre tower on $U$. The terminal map is the identity on underlying
+points. No step is deleted.
+\end{theorem}
+\begin{proof}
+The actual composite projection of the identity empty tail is the identity,
+so its actual inverse-image terminal open has exactly the points of $U$.
+The equality of these opens gives the genuine endpoint biholomorphism by the
+preceding open construction. Induct on $r$. The zero case is the actual
+reflexive comparison. At a successor, the restricted original arrow is the
+actual restriction of the identity blowup of the empty centre. Its source
+and target opens have the same underlying points, its map is the true
+identity on those points, and the trace centre is genuinely empty.
+The target padding arrow is the actual identity blowup of the empty centre
+on $U$. The two empty centres match, and both squares commute on every
+actual point. Extend the preceding stagewise comparison by this actual
+successor. The exact endpoint point map and length $r+1$ are retained.
+This proves genuine padding transport; it does not identify arbitrary
+ambient ideal representatives after deleting their normalizations.
+\end{proof}

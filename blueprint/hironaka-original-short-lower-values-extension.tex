@@ -1,0 +1,155 @@
+\section{Actual recursively constructed lower values along original short histories}
+
+The invariant is the actual recursively constructed family $\operatorname{invFamily}(n,k)$.
+No property of an arbitrary lower invariant, desired value equality or
+boundary-insertion certificate is assumed.  The initial marked ideal and
+entire actual original histories remain fixed.  The proved original short
+positive, short zero-contact and crossing diagrams provide the selected
+records; here the original short diagrams are consumed by actual values.
+The crossing diagram has a different actual lower tail and still requires
+recursive transport through that history.
+
+\begin{theorem}[The whole actual zero lower value, in every recursive dimension]
+\label{hir:original-interior-full-family-zero-lower-value}
+\lean{Hironaka.HironakaOriginalShortLowerValues.original_zero_lowerValue}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-actual-zero-lower-record,hir:original-invariant-empty-actual,hir:step-one-value-masked}
+Let $n>0$, $k\geq0$, $M$ originally well formed, $H$ an actual test history
+of $\overline M$, $P$ a nonempty actual tail and $Q$ any subsequent actual
+history.  Set $j=|M.E|+|H|$.  The actual zero lower value of $M$ formed at
+$H\epsilon P$ and computed along $Q$ is
+\[
+ \operatorname{WithTop.map}(\operatorname{shiftFamily}(k,j))
+    \bigl(\operatorname{lowerValue}_k(M,0,HP,Q,y)\bigr).
+\]
+Both lower values use the unchanged original family and the unchanged
+original lowerMarkedM definition, including the actual missing-mask top value.
+\end{theorem}
+\begin{proof}
+The actual whole zero lower record theorem supplies its future empty
+insertion at $j$, the whole mask equality and the actual lower-boundary
+index bound.  Identify the equal actual opens, keeping their genuine
+dependent carrier types.  If the projection of $y$ misses the old mask,
+it misses the new equal mask: both values are top, which the map preserves.
+Otherwise the real lower value is the actual invariant on the real
+restricted $Q$ at the corresponding actual subtype point.  The inserted
+lower record and the proved actual all-$k$ invariant insertion theorem
+give precisely shiftFamily$(k,j)$ of the old value on that same whole
+restricted history.  Coercing into WithTop gives the stated formula.
+The needed insertion theorem is proved for this specific recursive family
+and supplied internally; it is not a hypothesis about a proposed invariant.
+\end{proof}
+
+\begin{theorem}[The positive lower value at its actual index]
+\label{hir:original-interior-full-family-positive-lower-value}
+\lean{Hironaka.HironakaOriginalShortLowerValues.original_positive_lowerValue}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-actual-positive-lower-record,hir:original-interior-actual-positive-lower-index,hir:original-invariant-empty-actual}
+With the same original inputs, at every positive lower index $s+1$ put
+\[
+ p=Q.\operatorname{proj}(y),
+ \qquad c=\operatorname{interiorPositiveLowerIndex}(M,H,P,p).
+\]
+The actual lower value formed at $H\epsilon P$ is
+WithTop.map$(\operatorname{shiftFamily}(k,c))$ of the actual lower value
+formed at $HP$, both computed along the same literal $Q$.
+\end{theorem}
+\begin{proof}
+The true member filter computes $c$ in the actual whole lower boundary,
+and the actual positive lower producer supplies the whole record insertion
+there and equality of the actual masks.  The previous argument now applies
+with this actual $c$: the missing-mask branch is top on both sides, while
+the genuine masked branch invokes the proved specific all-$k$ insertion
+theorem on the actual lower record and the entire actual restriction of
+$Q$.  No empty-prefix hypothesis is needed.  The index may lie beyond the
+empty original prefix, so no uniform replacement of $c$ by zero is asserted.
+\end{proof}
+
+\begin{theorem}[The literal own-level short zero Step One value]
+\label{hir:original-interior-full-family-short-zero-step-one-value}
+\lean{Hironaka.HironakaOriginalShortLowerValues.actual_short_zero_stepOne_value}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-selected-all-level-short-splits,hir:original-interior-selected-zero-short-lower-diagram,hir:original-interior-full-family-zero-lower-value,hir:original-interior-empty-step-one-dictionary}
+Let $S$ be an actual tail and $y$ an actual point whose original current
+level is zero and whose actual zero-level run $r$ satisfies $r<|S|$.
+For every $k$, the actual Step One value over invFamily$(n,k)$ along
+$H\epsilon S$ equals
+\[
+ \operatorname{pairShift}(\operatorname{shiftFamily}(k,j))
+    \bigl(\operatorname{stepOneInvM}_k(M,HS,y)\bigr),
+ \qquad j=|M.E|+|H|.
+\]
+No current nonspecialness or canonical-lower-value certificate is required.
+\end{theorem}
+\begin{proof}
+The actual level and special-point dictionaries identify the corresponding
+original branches.  At a special point both actual values are $(0,\top)$,
+and the map preserves this value.  Otherwise the actual short split theorem
+computes the new current-level run as $r$ and supplies both complete split
+records.  Their actual heads are $HP$ and $H\epsilon P$, with the same
+literal $Q$, where $P=\operatorname{head}(S,r)$ and $Q=\operatorname{tail}(S,r)$.
+The strict run inequality gives $|P|=|S|-r>0$ internally.  Apply the first
+theorem to these actual inputs; the lower value is changed by exactly
+WithTop.map$(\operatorname{shiftFamily}(k,j))$.  The unchanged outer level
+zero gives the asserted whole lexicographic pair formula.
+\end{proof}
+
+\begin{theorem}[The literal own-level short positive Step One value]
+\label{hir:original-interior-full-family-short-positive-step-one-value}
+\lean{Hironaka.HironakaOriginalShortLowerValues.actual_short_positive_stepOne_value}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-selected-positive-short-splits,hir:original-interior-selected-positive-short-lower-diagram,hir:original-interior-full-family-positive-lower-value,hir:original-interior-empty-step-one-dictionary}
+If instead the actual current level is $s+1$ and its actual run $r$ is
+shorter than $|S|$, put $P=\operatorname{head}(S,r)$,
+$Q=\operatorname{tail}(S,r)$, $p=Q.\operatorname{proj}(y)$ and let $c$
+be the actual filtered lower insertion index.  The actual new Step One
+value is pairShift$(\operatorname{shiftFamily}(k,c))$ of the actual old value.
+\end{theorem}
+\begin{proof}
+Both actual levels and special branches agree.  At special points the
+lower entry is top and is preserved.  At nonspecial points the proved
+positive short splits supply the identical actual run, selected stage and
+tail $Q$.  The computed selected prefix has positive length by the strict
+run inequality.  The second theorem gives the actual lower-value map at
+its genuine computed index $c$, and retaining the outer actual level
+$s+1$ gives the pair formula.  No comparison of different computed indices
+or both-zero monomial spectra is inferred from this pointwise equation.
+\end{proof}
+
+\begin{theorem}[Order and dominance on the entire actual short-zero spectrum]
+\label{hir:original-interior-full-family-short-zero-spectrum-order}
+\lean{Hironaka.HironakaOriginalShortLowerValues.actual_short_zero_spectrum_comparisons,Hironaka.HironakaOriginalShortLowerValues.maxLocus_actual_short_zero_spectrum}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-full-family-short-zero-step-one-value,hir:original-invariant-empty-map-strict}
+For a fixed original $M,H,S$ and every $k$, let $Z$ be any set of actual
+points, each with actual level zero and actual zero-level run shorter
+than $|S|$.  The entire old and new actual Step One spectra on $Z$ have
+the same strict order, weak order and equality comparisons.  Their
+maximum-dominance loci on $Z$ are equal.
+\end{theorem}
+\begin{proof}
+The third theorem maps every actual value on $Z$ by the same map
+\[
+ \operatorname{pairShift}(\operatorname{shiftFamily}(k,j)),
+ \qquad j=|M.E|+|H|.
+\]
+This index does not depend on the selected point or run.  The proved shiftFamily is
+strictly increasing, as is its WithTop extension and therefore the whole
+lexicographic pair map.  Strictly increasing maps on linear orders reflect
+and preserve strict order, weak order and equality.  Apply these facts to
+any two actual points of $Z$.  Membership in the maximum-dominance locus
+is membership in $Z$ together with domination of every actual value on
+$Z$; the weak-order equivalence proves equality of those predicates.
+This does not assert maximum existence and makes no noncompact scheduling claim.
+\end{proof}
+
+The crossing original diagrams remain real inputs for a subsequent
+recursive history transport theorem.  This chapter closes the actual
+short-branch whole lower-value producer at every $k$ and its uniform
+zero-spectrum order comparison.  It does not identify complete outer
+general invariants across arbitrary unrebased middle deletions or close G3.

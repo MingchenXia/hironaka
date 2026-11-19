@@ -1,0 +1,79 @@
+\section{Lifting actual tangent-symbol regularity from the closed fibre}
+
+Let $B$ be a commutative local ring with residue field $k$, let $R$ be
+a commutative $B$-algebra, let $I,N\subset R$ be entire ideals and
+$v\in N$. Write $D_q=\operatorname{im}(N^q\to R/(I+N^{q+1}))$, with
+the scalar action induced from the given $B$-algebra structure. The
+actual multiplication map $f_q:D_q\to D_{q+1}$ sends the original
+numerator $b$ to $vb$. Assume each $D_q$ is finite free over $B$ and
+each actual residue-field map $k\otimes_B f_q$ is injective. The latter
+is an explicit fibre condition; no conclusion about a particular
+geometric family is asserted without proving that condition there.
+
+\begin{theorem}[Closed-fibre injectivity splits the actual symbol map]
+\label{hir:local-actual-symbol-map-splits}
+\uses{hir:strict-parameter-symbol-map}
+\lean{Hironaka.HironakaLocalSymbolRegularity.adicSymbolMul_split_of_residue_injective}
+\leanok
+For every $q$, the actual $B$-linear map $f_q$ has a $B$-linear left
+inverse, and is therefore injective. It suffices here that $D_q$ be
+finite and $D_{q+1}$ finite free.
+\end{theorem}
+\begin{proof}
+The local-ring split-injection theorem applies to the genuine map
+$f_q$, since its source is finite, its target is finite free and its
+residue-field tensor is injective. It supplies a $B$-linear map $r_q$
+with $r_qf_q=1$. If $f_qx=f_qy$, applying $r_q$ proves $x=y$.
+This concerns the actual layer elements and their unchanged scalar
+structure, rather than only a comparison of dimensions.
+\end{proof}
+
+\begin{theorem}[The original whole-ideal regular-symbol implication follows]
+\label{hir:local-actual-symbol-whole-regularity}
+\uses{hir:local-actual-symbol-map-splits}
+\lean{Hironaka.HironakaLocalSymbolRegularity.regular_symbol_of_residue_injective}
+\leanok
+For every original $b\in N^q$,
+\[
+ vb\in I+N^{q+2}\quad\Longrightarrow\quad b\in I+N^{q+1}.
+\]
+Thus the ordinary entire-ideal regular-symbol hypothesis is internally
+proved from the preceding finite-module and actual fibre assumptions.
+\end{theorem}
+\begin{proof}
+The original $b$ represents an element $[b]\in D_q$. The given
+membership says precisely that the genuine class $[vb]=f_q[b]$ in
+$D_{q+1}$ is zero. Since $f_q$ is injective, $[b]=0$ in $D_q$.
+The original ideal quotient dictionary now gives
+$b\in I+N^{q+1}$. Every numerator and denominator is unchanged.
+\end{proof}
+
+\begin{theorem}[Each literal parameter-quotient layer remains finite free]
+\label{hir:local-actual-symbol-quotient-layers-free}
+\uses{hir:local-actual-symbol-whole-regularity,hir:strict-parameter-whole-layer-kernel,hir:strict-parameter-degree-zero}
+\lean{Hironaka.HironakaLocalSymbolRegularity.adicLayer_after_parameter_finite_free}
+\leanok
+For every $q$, the literal layer
+$\operatorname{im}(N^q\to R/(I+(v)+N^{q+1}))$ is finite free over the
+original $B$.
+\end{theorem}
+\begin{proof}
+The canonical original layer map onto this layer is surjective, so
+finiteness descends from $D_q$. At degree zero it is also injective,
+since $v\in N$ leaves the degree-zero denominator unchanged; hence
+it transfers the given free structure on $D_0$.
+
+In positive degree $q+1$, the whole-ideal regularity proved above and
+the strict filtered quotient theorem identify the entire kernel of
+the canonical layer map with the image of the actual $f_q$. This
+equality remains true after restricting scalars from $R$ to $B$:
+both kernels and images have the same underlying elements and the
+original $B$-action. We therefore have the genuine exact sequence
+$D_q\xrightarrow{f_q}D_{q+1}\to D_{q+1}(I+(v))\to0$.
+The local-ring presentation theorem says its cokernel is free when
+the first two modules are finite, the middle one free and the
+residue-field tensor of the first map injective. These are precisely
+the stated assumptions. Its conclusion concerns the literal target
+layer in this sequence, completing every positive degree. No
+separatedness, generic localization or additional basis is used.
+\end{proof}

@@ -1,0 +1,40 @@
+\section{Internally selected genuine matching blowup charts cover every original exceptional point}
+Continue with only original genuine submersion, original closed smooth centre and an actual point $p$ of its true canonical source blowup whose base lies in the original preimage centre. A pivot, matching chart, direction image or coverage conclusion is not supplied.
+
+\begin{lemma}[Every actual source normal index has a unique original target index]
+\label{hir:submersion-adapted-blowup-cover-original-index}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedBlowupCoverage.exists_original_target_normal_index}
+\uses{hir:submersion-adapted-fibre-first-rotation}
+
+An actual source index $a$ of value at least $r+k$ has a genuine target index $j<n$ of value $a-r$, with $j\geq k$ and whose actual fibre-first rotation is exactly $a$.
+\end{lemma}
+\begin{proof}
+Since $a<n+r$ and $a\geq r$, integer subtraction gives $a-r<n$ and $r+(a-r)=a$. Construct the actual finite target index using that strict bound. The genuine finite rotation formula gives its value $r+j=a$ and hence exact finite-index equality. The normal bound gives $k\leq j$; injectivity of the finite rotation and first-block inclusion gives uniqueness. This includes zero complement dimension. In target dimension zero the original bounds would be contradictory, so no fabricated index is produced.
+\end{proof}
+
+\begin{theorem}[Original direction internally selects a genuine matching chart containing its actual point]
+\label{hir:submersion-adapted-blowup-cover-original-direction}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedBlowupCoverage.exists_actual_matching_flat_chart_at_exceptional_point}
+\uses{hir:submersion-adapted-actual-product-shrink,hir:submersion-adapted-blowup-entire-monomial-dictionary,hir:submersion-adapted-blowup-cover-original-index,bex:tangent-flat,bex:blowup-space,bex:monomial-chart}
+
+Given the original genuine submersion at $p.\mathrm{base}$ and an actual target centre flattening there, internally produce its SAME actual product source chart first, then a genuine original target normal pivot $j$, and actual matching target/source \texttt{FlatChart}s with their entire exact product-target and point-square dictionaries, such that the original blowup point $p$ belongs to the produced actual source chart. No direction, pivot or source-chart coverage certificate is input.
+\end{theorem}
+\begin{proof}
+Use the original adapted product producer to choose the genuine $R,S,\Psi$ BEFORE selecting the pivot. Its actual source centre equations and actual preferred-chart-source condition identify the entire original source tangent space with the common kernel of all source normal coordinate differentials. The original exceptional blowup point has a genuine direction vector outside this actual tangent space, by the original blowup-space definition. Hence some actual source normal coordinate has genuinely nonzero differential on that direction. The preceding integer producer identifies it with the rotation of an actual target normal pivot $j$. Restrict the original target chart to the SAME internally produced $S$ and form the two actual \texttt{FlatChart}s using $\Psi$ and this pivot. Their full target and point-square dictionaries follow from the preceding whole polynomial split and inverse point square. At $p$, the actual base lies in $\Psi$'s flat domain, and the actual extended pivot value is the real coordinate differential on its actual exceptional direction, which is nonzero. Thus $p$ is genuinely in this SAME produced source chart. Both chart membership conditions are internally proved; no geometric output certificate enters.
+\end{proof}
+
+\begin{theorem}[Only the original closed smooth centre supplies coverage of every exceptional source point]
+\label{hir:submersion-adapted-blowup-cover-whole-exceptional}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedBlowupCoverage.exists_original_exceptional_matching_charts}
+\uses{hir:submersion-adapted-blowup-cover-original-direction,hir:submersion-relative-regular-geometry}
+
+The original genuine global submersion and original closed smooth target centre internally supply the true source closed smooth centre needed for the genuine canonical blowup manifolds. EVERY actual original source blowup point whose base lies in that preimage centre is contained in a genuinely matching source chart from the preceding producer, with actual target chart, SAME product target and whole base-point square. A target flattening, pivot or matching-chart hypothesis is not supplied here.
+\end{theorem}
+\begin{proof}
+The actual source closed smooth preimage is supplied by the existing original submersion regularity producer. The actual target image of the source base belongs to the original centre. Its original closed smooth regularity internally supplies its actual centred flattening, preferred source inclusion and whole original centre equations. Apply the preceding genuine direction/pivot producer at the actual source base. Thus every actual exceptional source point obtains a real matching pair and its whole dictionaries from the original geometry alone.
+\end{proof}
+
+This closes the actual exceptional matching-chart coverage step, not identification with the global universal lift. Its whole local-chart equality, off-centre case, arbitrary-choice transport and full Cartesian gluing remain necessary. Higher invariant/old driver/G3/G8/noncompact termination remain OPEN. OWN OFFLIB only, formal registration/native/publication pending root recovery.

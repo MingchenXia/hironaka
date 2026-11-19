@@ -1,0 +1,127 @@
+\section{The entire chronological product and its dynamic maximum on open sets}
+
+Throughout this section, the ambient dimension $n$ is positive.
+
+The chronological product is formed from the separately propagated original
+members. Its boundary is the full ordered geometric boundary, including every
+exceptional member born along the history. The following comparison keeps both
+lists in their original roles. It concerns restriction of a given history; it
+does not assert decrease or termination of the sharp resolution procedure.
+
+\begin{theorem}[The current product lies in the invariant domain without compactness]
+\label{hir:sharp-original-noncompact-current-product-domain}
+\uses{hir:sharp-original-chronological-full-product-geometry-order-sum,hir:sharp-original-all-member-actual-finite-chronological-history,hir:geo-transform-wellformed}
+\lean{Hironaka.HironakaSharpActualDynamicMaximumOpen.currentProductMarked_isInvDomain_of_pure}
+\leanok
+Let the original closed smooth carrier have fixed pure dimension
+$d+1\leq n$, let the ordered original boundary have simple normal crossings,
+and suppose its complement is dense in the carrier. After any finite genuine
+geometric test history for the unit template, the actual current marking-one
+chronological product belongs to the domain of the canonical invariant in
+dimension at most $n+1$. No compactness is required.
+\end{theorem}
+\begin{proof}
+The unit template is well formed, so its transform along the test history
+has closed smooth carrier, simple-normal-crossings boundary and the required
+transversality. Induct along the history to preserve the original pure
+dimension: at the identity it is the hypothesis; at a last blowup the actual
+centre lies in the previous carrier, so the strict-transform regularity
+theorem preserves dimension $d+1$ at each point of the new carrier. An empty
+carrier causes no exception. The true chronological member product has a
+coherent ideal and is nonzero along this current carrier by the independently
+proved original-member geometry and finite-product theorem. Its marking is
+one, and $d+1\leq n+1$. These are exactly the domain requirements. Compactness
+does not enter any of these arguments.
+\end{proof}
+
+\begin{theorem}[Restriction of the entire current marked product]
+\label{hir:sharp-original-current-product-marked-open}
+\uses{hir:sharp-actual-relative-finite-product-open,hir:sharp-original-members-whole-chronological-open-naturality,hir:open-restriction-tower}
+\lean{Hironaka.HironakaSharpActualDynamicMaximumOpen.currentProductMarked_open}
+\leanok
+Let $W$ be a closed smooth carrier, $E$ an ordered simple-normal-crossings
+boundary, and suppose that $W\setminus |E|$ is dense in $W$. Let $T$ be any
+finite geometric test history for the unit marked template of $W$. For an open
+set $U$ in the original ambient manifold, pullback to the endpoint over $U$ of
+the entire current product marked ideal equals the independently formed
+current product for $W\cap U$, the ordered list $E|_U$, and $T|_U$.
+\end{theorem}
+\begin{proof}
+The geometric-transform restriction identity gives the same current carrier
+and the same entire ordered boundary on both sides. This includes each born
+exceptional member, since the identity concerns the complete marked record of
+the unit template. The unit ideal restricts to the unit ideal, so the initial
+templates in that identity are exactly those specified in the statement.
+For each original position, the chronological restriction theorem identifies
+the pullback of its entire current ideal with the independently propagated
+ideal on the restricted history. Pullback of the recursively carrier-relative
+finite product is the product of these pullbacks. The finite list indexed by
+the restricted boundary has the same length as the original list; transport
+along this length equality identifies every position without discarding empty
+members or identifying coincident members. Thus the entire product ideals
+coincide. Both markings equal one. These four equalities prove equality of the
+marked records.
+\end{proof}
+
+\begin{theorem}[Restriction of every full current invariant value on the actual defect]
+\label{hir:sharp-original-current-full-value-open}
+\uses{hir:sharp-original-current-product-marked-open,hir:sharp-original-noncompact-current-product-domain,hir:sharp-original-chronological-distinct-defect-open}
+\lean{Hironaka.HironakaSharpActualDynamicMaximumOpen.current_full_value_open}
+\leanok
+In addition, suppose the original carrier is smooth of fixed
+positive pure dimension $d+1\leq n$. At every point of the endpoint over $U$ whose image
+lies in the actual chronological distinct defect, the full canonical
+invariant of the restricted current product equals the full invariant of the
+original current product at that image.
+\end{theorem}
+\begin{proof}
+Original geometry and the genuine history place the current product in the
+domain of the canonical invariant. Membership in the distinct defect means
+that its product order is strictly greater than its number of distinct proper
+germ classes, hence at least one. The point therefore lies in the cosupport
+of the current marking-one product. Apply the open-restriction law of the full
+invariant at the identity history and the endpoint open set. The preceding
+whole-record equality identifies its pulled-back marked ideal with the
+independently formed restricted current product. This proves equality of the
+full values, including all later entries of the invariant.
+\end{proof}
+
+\begin{theorem}[A dynamic maximum restricts exactly when its trace is nonempty]
+\label{hir:sharp-original-current-dynamic-maximum-open}
+\uses{hir:sharp-original-current-full-value-open,hir:sharp-original-chronological-distinct-defect-open}
+\lean{Hironaka.HironakaSharpActualDynamicMaximumOpen.current_dynamic_maximum_open_of_meeting}
+\leanok
+Under the preceding hypotheses, if the endpoint over $U$ meets the maximum
+locus of the full current invariant on the actual chronological distinct
+defect, then the maximum locus for the independently restricted current data
+is exactly its preimage.
+\end{theorem}
+\begin{proof}
+The entire distinct defect restricts to its preimage, retaining the true
+quotient of proper germ classes. Choose a point of the original maximum in
+the endpoint open. The preceding theorem preserves all full values on that
+preimage. Any restricted maximum has value at least that of the chosen point
+and at most the original maximum, so it has the original maximum value.
+Conversely, any point of the original maximum bounds all restricted values
+after the same value identification. These two implications give equality
+of the maximum loci.
+\end{proof}
+
+\begin{theorem}[Omitting the dynamic maximum strictly lowers every local full value]
+\label{hir:sharp-original-current-value-below-omitted-maximum}
+\uses{hir:sharp-original-current-full-value-open,hir:sharp-original-chronological-distinct-defect-open}
+\lean{Hironaka.HironakaSharpActualDynamicMaximumOpen.current_full_value_lt_of_maximum_trace_empty}
+\leanok
+Under the same hypotheses, fix a point of the original dynamic maximum. If
+its whole maximum locus has empty trace in the endpoint over $U$, then every
+point of the restricted actual distinct defect has full invariant strictly
+smaller than the invariant at the fixed point.
+\end{theorem}
+\begin{proof}
+Transport the local defect membership and its full value to the original
+endpoint. The maximum property gives a weak inequality. If equality held,
+the transported point would itself bound every full value on the original
+defect and would therefore lie in the original maximum locus. It is also in
+the endpoint over $U$, contradicting the empty-trace hypothesis. The weak
+inequality is consequently strict.
+\end{proof}

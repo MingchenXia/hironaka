@@ -1,0 +1,79 @@
+\section{Actual compatible relative coefficient germs on real finite domains}
+
+These are actual holomorphic base germs extracted internally from the
+original normal-power quotient basis. They provide genuine coefficient
+data for the local presentation route of
+\cite[Theorem 9.4, pp.~277--278]{bierstone-milman97-invent-math}.
+The construction uses entire polynomial quotient classes and does not
+identify raw derivatives with coefficients or discard factorials. The
+subsequent equality with literal normal coefficients of the full original
+formal Taylor series remains a separate dictionary goal.
+
+\begin{theorem}[Canonical actual relative polynomial truncations]
+\label{hir:actual-relative-coefficient-polynomial-truncations}
+\uses{hir:relative-normal-basis-actual-entire-quotient-basis}
+\lean{Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalJetCoordinates,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial_coefficient,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial_coefficient_high,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial_remainder,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial_unique}
+\leanok
+For every original holomorphic germ $g\in\mathcal O_{\mathbb C^{d+t},0}$
+and every degree $q$, construct an actual polynomial $P_q(g)$ in the real
+normal variables with coefficients in the ENTIRE actual tangential germ
+ring. All its normal terms have degree less than $q$, its evaluation
+satisfies $g-P_q(g)\in(z)^q$, and these two properties determine it uniquely.
+This includes degree zero and either empty coordinate block.
+\end{theorem}
+\begin{proof}
+Apply the inverse of the internally proved actual normal-monomial quotient
+basis to the genuine quotient class of $g$. Sum these actual coordinates
+against their original distinct normal monomials. The quotient-basis map
+identifies its actual evaluation class with the original class of $g$;
+hence their difference belongs to the whole normal power. The finite sum
+has exactly the asserted coefficients and no higher coefficient. For
+uniqueness, the difference of two proposed evaluated polynomials lies in
+the normal power. Genuine lower-coefficient separation annihilates every
+low coefficient of the difference. Both high coefficients already vanish,
+so the entire original polynomials agree.
+\end{proof}
+
+\begin{theorem}[One actual coefficient germ is independent of every later truncation]
+\label{hir:actual-relative-coefficient-germ-stability}
+\uses{hir:actual-relative-coefficient-polynomial-truncations}
+\lean{Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial_coefficient_stable,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalAnalyticCoefficientGerm,Hironaka.HironakaActualRelativeCoefficientGerms.actualNormalTaylorPolynomial_coefficient_eq_germ}
+\leanok
+For every actual normal exponent $\gamma$, the coefficient of $z^\gamma$
+in $P_q(g)$ is independent of all $q>|\gamma|$. In particular the choice
+$q=|\gamma|+1$ defines one genuine entire tangential holomorphic germ
+$c_\gamma(g)$, and every actual truncation has precisely these coefficients.
+\end{theorem}
+\begin{proof}
+First compare $P_q(g)$ and $P_r(g)$ for $q\le r$. Their genuine remainders
+lie in $(z)^q$ and $(z)^r\subset(z)^q$, so their difference has evaluated
+normal order at least $q$. Original coefficient separation gives equality
+at every exponent of degree less than $q$. For arbitrary truncations above
+$|\gamma|$, compare each with the actual truncation at $|\gamma|+1$.
+The equality is in the entire base germ ring, not only after evaluation
+at the origin.
+\end{proof}
+
+\begin{theorem}[Actual finite coefficient families have a common real holomorphic domain]
+\label{hir:actual-relative-coefficient-common-finite-domain}
+\uses{hir:actual-relative-coefficient-germ-stability}
+\lean{Hironaka.HironakaActualRelativeCoefficientGerms.exists_actual_finite_coefficient_common_domain}
+\leanok
+Given any finite family of actual original holomorphic germs and any finite
+normal degree bound, construct genuine representatives of all their actual
+coefficient germs and ONE open neighbourhood of the tangential origin on
+which every coefficient below that bound is holomorphic. The same actual
+representatives realize the stable coefficients in every later truncation.
+No uniform domain for infinitely many coefficients is asserted.
+\end{theorem}
+\begin{proof}
+Each internally constructed coefficient is a genuine holomorphic germ,
+so choose an actual representative holomorphic near zero. The family of
+original germs is finite, and so is the family of distinct normal exponents
+below the given degree bound. Intersect their actual holomorphic
+neighbourhoods and take a common open neighbourhood of zero. Every chosen
+function is holomorphic there, represents the same whole original germ,
+and hence satisfies all previously proved stable coefficient equalities.
+This uses no extension holomorphic outside that domain and no convergence
+claim about an infinite arbitrary formal reduced basis.
+\end{proof}

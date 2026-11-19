@@ -1,0 +1,104 @@
+\section{Original dimension-zero canonical histories under smooth pullback}
+
+This is the genuine base of the history-length and invariant-depth induction
+for smooth functoriality. The original domain has dimension bound zero,
+but the source has the actual added fibre dimension $t=m-n$. All boundaries,
+including empty and repeated entries, and every empty blowup step are retained.
+We use the original family $R^{(n)}_k$ and its unchanged strict map $D_{t,k}$.
+Sources are W\l odarczyk's dimension induction and extensions by empty blowups
+and Bierstone--Milman's smooth functoriality
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}.
+
+\begin{theorem}[The original zero-dimensional canonical history is empty]
+\label{hir:smooth-original-zero-canonical-empty}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalZeroFamilyHistory.original_zero_canonical_empty}
+\leanok
+\uses{hir:centre-function,hir:canonical-centres}
+Let $n>0$, let $M$ be in the original invariant domain with dimension bound
+zero, and let the original whole history $T$ be canonical for $R^{(n)}_0$.
+Then every literal centre of $T$ is empty.
+\end{theorem}
+\begin{proof}
+Induct on the actual history. The trivial history has no centres. For a
+last step, its preceding history is canonical and hence an actual test
+history by the original family's invariant property. The original domain's
+nonzero-along condition and dimension-zero regularity imply empty cosupport
+at every such test stage. The maximum locus on that empty cosupport is
+empty. The definition of canonicality therefore makes the last centre
+empty whether it is an explicitly empty extension or a maximum centre.
+Combine this with the induction hypothesis. This uses the original domain,
+not a caller-supplied vanishing or empty-history certificate.
+\end{proof}
+
+\begin{theorem}[Actual pullback retains every empty step]
+\label{hir:smooth-actual-empty-history-pullback}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalZeroFamilyHistory.IsActualTowerPullback.empty_history}
+\leanok
+\uses{hir:submersion-relative-control-joint-tower}
+For a genuine actual Cartesian smooth history pair $(Q,T)$, if every
+literal centre of $T$ is empty then every literal centre of $Q$ is empty.
+\end{theorem}
+\begin{proof}
+Induct on the actual Cartesian witness. Its trivial case is immediate.
+Each actual source centre is the literal preimage of the target centre
+under the actual preceding stage map. The preimage of the proved empty
+set is empty; the induction hypothesis treats the whole preceding pair.
+No step is removed or reindexed.
+\end{proof}
+
+\begin{theorem}[Actual original zero-family base, with true source depth]
+\label{hir:smooth-original-zero-family-history}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalZeroFamilyHistory.original_zero_actual_family_history}
+\leanok
+\uses{hir:smooth-original-zero-canonical-empty,hir:smooth-actual-empty-history-pullback,hir:submersion-relative-invariant-domain,hir:submersion-relative-control-joint-tower,hir:smooth-actual-value-recursive-dimension-maps}
+Let $n,m>0$, $t=m-n$, and let an actual smooth Cartesian pair $(Q,T)$
+pull back the original $M$ and its original $R^{(n)}_0$-canonical history,
+with $M$ in the original dimension-zero domain. Internally obtain the true
+source domain of dimension $t$, both empty histories, canonicality of $Q$
+for the actual original $R^{(m)}_t$, empty final cosupports, and terminal
+geometric resolutions on both sides. On the actual source cosupport the
+whole value equality $R^{(m)}_t(f^*M,Q,z)=D_{t,0}(R^{(n)}_0(M,T,gz))$
+holds.
+\end{theorem}
+\begin{proof}
+The first two theorems construct both empty histories from the original
+inputs. The actual pair supplies its base submersion, so the existing
+whole marked-domain theorem constructs the source domain with bound
+$0+t=t$. Every empty history is canonical for every value function; apply
+this established geometric lemma to the actual original source family.
+Target canonicality supplies target testness, and the established
+dimension-zero cosupport theorem gives its empty final cosupport. The
+actual whole marked and cosupport dictionaries supply source testness
+and source cosupport equal to the literal preimage of the target's empty
+cosupport. These are precisely both terminal-resolution definitions.
+The final equality is a quantified assertion on this proved empty
+cosupport, and follows by contradiction from membership. It asserts no
+nonvacuous equality between the actual source constant and a formal seed.
+All source canonicality, testness and vanishing data are outputs.
+\end{proof}
+
+\begin{theorem}[Original input constructs the full base history]
+\label{hir:smooth-original-zero-family-constructor}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalZeroFamilyHistory.exists_original_zero_actual_family_history}
+\leanok
+\uses{hir:smooth-original-zero-family-history,hir:submersion-relative-control-original-all-heads}
+Given only the original smooth $f$, positive ambient dimensions, original
+dimension-zero domain $M$ and original canonical $T$, construct the actual
+whole $Q,g$ internally with unchanged length, the preceding full base
+conclusion, the literal whole transformed marked record, and the genuine
+cosupport-preimage dictionary.
+\end{theorem}
+\begin{proof}
+Apply the existing actual tower constructor to $f,T$ to obtain $Q,g$ and
+its genuine Cartesian witness. Apply the preceding theorem to that
+internally obtained witness. Its target testness and original
+well-formedness give the actual whole transformed marked equality and
+cosupport dictionary, and the actual witness gives unchanged length.
+No source history, canonicality, value certificate or compactness is a
+premise. This closes the true zero-depth base; positive-depth contact
+recursion and the general canonical driver remain separate obligations.
+\end{proof}

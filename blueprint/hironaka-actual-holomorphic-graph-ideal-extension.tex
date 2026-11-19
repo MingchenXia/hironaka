@@ -1,0 +1,106 @@
+\section{The entire actual graph ideal and genuine added graph equations}
+
+Let $W\subset\mathbf C^d$ be any original subset, and let
+$f:\mathbf C^d\to\mathbf C^t$ be an original function holomorphic on a
+neighbourhood of zero, with $f(0)=0$. Let $p,q$ be the actual first and
+last block projections. The graph is the literal original set
+$\Gamma_f(W)=\{z:pz\in W,\ qz=f(pz)\}$; its vanishing ideal is the
+independently defined ideal of actual holomorphic germs vanishing on that
+set near zero. In particular it is not defined as a kernel or comap.
+
+\begin{theorem}[Actual triangular shears identify the whole graph kernel]
+\label{hir:actual-holomorphic-graph-whole-trace-kernel}
+\uses{hir:relative-normal-entire-plane-kernel}
+\lean{Hironaka.HironakaActualHolomorphicGraphIdeal.graphShearAlgEquiv,Hironaka.HironakaActualHolomorphicGraphIdeal.graphTrace_tangentPullback,Hironaka.HironakaActualHolomorphicGraphIdeal.ker_graphTrace_eq_graphRelations}
+\leanok
+The literal shears $\gamma_\pm(z)=z\pm\iota_q f(pz)$ are inverse original
+functions, holomorphic near zero and fixing zero. Their actual whole-germ
+pullbacks are inverse complex algebra maps. Actual restriction to
+$s(x)=\iota_p x+\iota_q f(x)$ gives a surjective whole-germ algebra map
+$T_f$ satisfying $T_f p^*=1$, and
+\[
+ \ker T_f=\bigl(z_{d+i}-f_i(pz):i<t\bigr).
+\]
+\end{theorem}
+\begin{proof}
+The first projection of each normal inclusion is zero. Thus each shear
+preserves $p$, and their literal compositions cancel the same original
+normal increment. Original holomorphy follows by composing the given
+actual $f$ with the genuine linear block projection and inclusion and
+adding or subtracting the identity. The zero value follows from $f(0)=0$.
+Their actual germ pullbacks are inverse on every genuine original
+representative by these same identities. The actual graph section has
+$p s=1$, so whole restriction gives the stated retraction. Moreover
+$\gamma_-s=\iota_p$. Hence restriction after pullback by $\gamma_-$
+is exactly the genuine plane trace on every whole germ. The genuine
+Hadamard theorem identifies the entire plane-trace kernel with the ideal
+of actual normal coordinates. Transport this whole kernel through the
+constructed shear algebra equivalence. Each actual normal coordinate
+pulls back literally to $z_{d+i}-f_i(pz)$, so ideal image of its whole
+finite span is exactly the displayed graph-relation ideal. This proves
+both kernel inclusions for whole germs.
+\end{proof}
+
+\begin{theorem}[The independently defined whole graph vanishing ideal]
+\label{hir:actual-holomorphic-graph-entire-vanishing-ideal}
+\uses{hir:actual-holomorphic-graph-whole-trace-kernel}
+\lean{Hironaka.HironakaActualHolomorphicGraphIdeal.graph_vanishingIdeal_eq_comap,Hironaka.HironakaActualHolomorphicGraphIdeal.graph_vanishingIdeal_eq}
+\leanok
+For every original subset $W$, the actual independently defined whole
+vanishing ideal satisfies
+\[
+ \mathcal I_{\Gamma_f(W),0}=T_f^{-1}(\mathcal I_{W,0})
+ =p^*\mathcal I_{W,0}+\bigl(z_{d+i}-f_i(pz):i<t\bigr).
+\]
+There is no analyticity, smoothness, coherence, representative or ideal
+equality hypothesis on $W$.
+\end{theorem}
+\begin{proof}
+Take an actual original holomorphic representative $F$ of any ambient
+germ. If it vanishes on the literal graph near zero, pull that genuine
+neighbourhood back by the actual continuous section $s$, which fixes
+zero. For $x\in W$, the actual point $s(x)$ belongs to the graph, so
+$F\circ s$ vanishes on $W$ near zero. Conversely, pull a genuine local
+zero relation for $F\circ s$ back by $p$. Every original point of the
+literal graph satisfies $s(pz)=z$, by its actual last-block relation and
+the two genuine block projections. This gives the original zero relation
+for $F$ on the graph. Membership of arbitrary representatives in the
+independently defined vanishing ideals is exactly such a local zero
+relation. This proves the first equality, rather than assuming it.
+For the second, the actual retraction implies that every germ $g$ with
+$T_f g\in\mathcal I_W$ decomposes as
+$p^*(T_f g)+(g-p^*T_f g)$. The first term belongs to the actual whole
+extension and the second to the whole kernel. Conversely both the whole
+extension and whole kernel map into $\mathcal I_W$. Use the proved
+kernel formula to obtain exactly the stated whole ideal equality.
+\end{proof}
+
+\begin{theorem}[The actual whole graph quotient is the original base quotient]
+\label{hir:actual-holomorphic-graph-original-quotient}
+\uses{hir:actual-holomorphic-graph-entire-vanishing-ideal}
+\lean{Hironaka.HironakaActualHolomorphicGraphIdeal.graphQuotientAlgEquiv,Hironaka.HironakaActualHolomorphicGraphIdeal.graphQuotientAlgEquiv_mk}
+\leanok
+There is a genuine complex algebra equivalence
+\[
+ \mathcal O_{d+t,0}/\mathcal I_{\Gamma_f(W),0}
+ \simeq_{\mathbf C}\mathcal O_{d,0}/\mathcal I_{W,0},\qquad
+ [g]\longmapsto[T_f g].
+\]
+It uses the independently defined entire graph ideal, not a supplied
+quotient dictionary.
+\end{theorem}
+\begin{proof}
+Compose the actual graph trace with the actual base quotient map. It is
+surjective because both maps are surjective: the first has the genuine
+whole-germ section $p^*$ and the second is the genuine quotient map.
+The actual zero-class criterion identifies its whole kernel with
+$T_f^{-1}(\mathcal I_W)$, which the preceding theorem proves equal to
+the independently defined graph ideal. The first algebra isomorphism
+theorem therefore gives the displayed equivalence, with its asserted
+literal action on every original quotient numerator.
+\end{proof}
+
+These are actual added graph equations and a genuine whole-ideal
+stabilization dictionary. Canonical marked invariance under adjoining
+these equations, comparison of complete resolution histories, and effective
+resolution descent are separate geometric statements.

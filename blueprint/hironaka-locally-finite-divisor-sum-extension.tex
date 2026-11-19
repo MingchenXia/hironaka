@@ -1,0 +1,169 @@
+\section{The genuine locally finite divisor sum}
+\label{sec:hironaka-locally-finite-divisor-sum}
+
+Let $D$ be an actual effective divisor supported on an SNC boundary $E$.
+The members of $E$ may be disconnected, and the ambient manifold need
+not be compact.  Multiplicities belong to the genuine connected carriers
+$\mathcal C(E)$, rather than to the original list members.  Their local
+finiteness and the intrinsic monomial identity give an actual divisor
+sum on a neighbourhood of every point.
+
+\begin{lemma}[Powers depend on the whole stalk]
+\label{hir:ideal-power-stalk-congruence}
+\lean{Hironaka.HironakaLocallyFiniteDivisorSum.idealPow_mem_iff_of_mem_iff}
+\leanok
+Suppose $I_x=J_x$ as complete holomorphic ideal stalks.  Then
+$(I^r)_x=(J^r)_x$ for every $r\ge0$.  In particular, if two closed sets
+agree near $x$, all powers of their actual vanishing ideals agree at $x$.
+\end{lemma}
+\begin{proof}
+For $r=0$, both powers are the holomorphic unit ideal.  If the assertion
+holds for $r$, a generator of $(I^{r+1})_x$ is a product of a member of
+$(I^r)_x$ with a member of $I_x$.  Both factors belong to their corresponding
+$J$ stalks, so the product belongs to the generating family for
+$(J^{r+1})_x$.  This also holds for every finite holomorphic linear
+combination, and hence gives inclusion of the whole product stalk.
+Interchanging $I$ and $J$ gives equality.  For vanishing ideals, equality
+of the sets near $x$ makes the eventual vanishing condition identical
+for every holomorphic germ, giving the required original stalk equality.
+\end{proof}
+
+\begin{lemma}[Support of an actual finite hypersurface sum]
+\label{hir:finite-component-sum-support-containment}
+\uses{hir:component-product-effective-sum,hir:effective-divisor-multiples}
+\lean{Hironaka.HironakaLocallyFiniteDivisorSum.support_componentSum_subset}
+\leanok
+For a finite weighted family $A=((C_i,b_i))$ of closed smooth
+hypersurfaces, the actual effective sum $G=\sum_i b_i C_i$ satisfies
+$\operatorname{Supp}G\subseteq\bigcup_i C_i$ and
+$I_G=\prod_i I_{C_i}^{b_i}$.
+\end{lemma}
+\begin{proof}
+The genuine hypersurface divisor has ideal $I_{C_i}$ and support $C_i$.
+A zero multiple is the zero divisor and has empty support; a positive
+multiple retains support $C_i$.  Actual divisor addition is multiplication
+of invertible ideals.  Its support is the union of the two supports:
+at a point outside both zero loci, each coherent factor contains a unit
+germ, whose product is a unit; at a point in either zero locus, every
+product germ vanishes.  Induction on the finite list proves the support
+containment.  The same induction, using the actual power identity for
+natural multiples, proves the stated complete ideal identity.
+\end{proof}
+
+\begin{lemma}[One actual coefficient on every genuine component]
+\label{hir:locally-finite-original-divisor-coefficients}
+\uses{hir:connected-boundary-component-multiplicities,hir:connected-boundary-components-locally-finite}
+\lean{Hironaka.HironakaLocallyFiniteDivisorSum.exists_original_coefficients_boundaryComponents}
+\leanok
+In positive ambient dimension there is a single function
+$a:\mathcal C(E)\to\mathbb N$ such that, for every $C\in\mathcal C(E)$
+and every original point $y\in C$,
+$e_C(I_D,y)=a(C)$.  The family of the actual carriers is locally finite.
+\end{lemma}
+\begin{proof}
+The actual connected-component exponent theorem supplies $a(C)$ and the
+equivalence $\operatorname{IsDivNear}(I_D,C,r,y)\Longleftrightarrow r\le a(C)$
+at every point of $C$.  Invertibility gives a nonzero germ in each stalk
+of $I_D$, so the genuine finite divisor exponent characterizes exactly
+the same divisibility thresholds.  Taking $r=a(C)$ and
+$r=e_C(I_D,y)$ gives the two inequalities and therefore equality.
+The local finiteness theorem applies to the genuine connected boundary
+carriers without any compactness assumption.
+\end{proof}
+
+\begin{lemma}[The complete stalk dictionary for a finite local refinement]
+\label{hir:monomial-local-component-product-dictionary}
+\uses{hir:ideal-power-stalk-congruence,hir:finite-component-sum-support-containment,hir:component-product-original-exponent,hir:intrinsic-supported-ideal-monomial,hir:boundary-component-germ-divisibility}
+\lean{Hironaka.HironakaLocallyFiniteDivisorSum.monomialPart_mem_iff_componentPowerProduct_of_refinement}
+\leanok
+Let $F$ be a finite list of distinct genuine components of $E$ containing
+every component through $x$.  Assign to $C\in F$ the actual original
+coefficient $a(C)$.  Then the entire intrinsic monomial stalk of $I_D$
+at $x$ equals the actual product stalk $\prod_{C\in F}I_C^{a(C)}$.
+\end{lemma}
+\begin{proof}
+Every original member $H_i$ through $x$ has a genuine component $C$
+through $x$.  It belongs to $F$.  The two carriers agree on a neighbourhood
+of $x$, so their actual vanishing-ideal powers have the same whole stalk.
+Their genuine divisor exponents are equal by the component-to-parent
+germ bridge, and are $a(C)$.  Conversely, every $C\in F$ through $x$
+has an original parent $H_i$ with the same germ at $x$.  Thus the
+definition of the intrinsic monomial stalk, as simultaneous membership
+in all the relevant powered vanishing ideals, is unchanged by replacing
+$E$ with $F$.
+
+Form the actual effective sum $G=\sum_{C\in F}a(C)C$.  The preceding
+support lemma makes it SNC-supported, and its full ideal is the actual
+component-power product.  The genuine weighted SNC exponent calculation
+identifies $e_C(I_G,x)=a(C)$ for every $C$ through $x$, including crossing
+points and zero coefficients.  Hence the intrinsic monomial stalks of
+$I_D$ and $I_G$ relative to $F$ are identical.  The actual SNC-supported
+divisor identity gives $I_G=\mathcal M(I_G,F)$.  Combining these complete
+stalk identities proves the claim.  No ideal factorization of $D$ was
+assumed in this argument.
+\end{proof}
+
+\begin{theorem}[Positive local finite products with original coefficients]
+\label{hir:locally-finite-original-component-product}
+\uses{hir:locally-finite-original-divisor-coefficients,hir:monomial-local-component-product-dictionary,hir:intrinsic-supported-ideal-monomial}
+\lean{Hironaka.HironakaLocallyFiniteDivisorSum.exists_positive_locallyFinite_original_component_products,Hironaka.HironakaLocallyFiniteDivisorSum.exists_locallyFinite_original_component_products}
+\leanok
+In every ambient dimension, there is one actual coefficient function
+$a:\mathcal C(E)\to\mathbb N$ with
+$a(C)=e_C(I_D,y)$ for all $y\in C$.  The carrier family is locally finite.
+For every $x$ there are an open neighbourhood $U$ and a finite list of
+distinct actual carriers with positive coefficients,
+$A=((C_i,a(C_i)))$, such that for every $y\in U$ and every holomorphic
+germ represented by $g$,
+\[
+ g\in(I_D)_y\quad\Longleftrightarrow\quad
+ g\in\left(\prod_i I_{C_i}^{a(C_i)}\right)_y.
+\]
+\end{theorem}
+\begin{proof}
+First suppose the ambient dimension is positive.  Select the single
+genuine function $a$ above.  Local finiteness gives an open neighbourhood
+$U$ of $x$ meeting only finitely many genuine boundary components.
+Enumerate those components once to obtain $F$.  Their genuine geometry
+and the finite-refinement theorem make $F$ SNC.  At any $y\in U$, every
+genuine component containing $y$ meets $U$ and therefore belongs to $F$.
+The preceding dictionary applies at every such $y$.  Since $D$ is
+actually SNC-supported, $I_D=\mathcal M(I_D,E)$, which proves the desired
+whole-stalk equality with the full weighted product on $F$.
+
+Delete exactly those pairs whose coefficient is zero.  Every deleted
+factor is $I_C^0=\mathcal O$.  The remaining products are coherent, so
+multiplication by the holomorphic unit ideal leaves the entire actual
+product ideal unchanged.  Induction on the weighted list verifies this
+without changing any stalk.  The retained coefficients are positive,
+remain values of the same global function $a$, and the retained carriers
+remain distinct.
+
+In dimension zero, the SNC coordinate condition permits no member
+through any point.  The genuine component family and the support of
+$D$ are empty.  A coherent ideal with empty zero locus is the unit ideal.
+Choose the unique function on the empty component family, $U$ equal to
+the ambient manifold, and the empty product.  All assertions follow,
+including the vacuous original-point coefficient statement.
+\end{proof}
+
+\begin{corollary}[The actual local divisor sum]
+\label{hir:locally-finite-actual-divisor-sum-stalks}
+\uses{hir:locally-finite-original-component-product,hir:finite-component-sum-support-containment}
+\lean{Hironaka.HironakaLocallyFiniteDivisorSum.exists_locallyFinite_original_component_sums}
+\leanok
+With the same genuine global function $a$, each local list $A$ defines
+an actual effective divisor $G_U=\sum_{(C,b)\in A}bC$.  At every point
+$y\in U$, the complete stalks of $I_D$ and $I_{G_U}$ are equal.
+Thus these sums give the locally finite effective-divisor dictionary
+with the original divisor's actual multiplicities, without compactness.
+\end{corollary}
+\begin{proof}
+Each retained carrier is an actual closed smooth hypersurface, so it
+defines a genuine invertible hypersurface ideal and effective divisor.
+The genuine finite-sum ideal identity is
+$I_{G_U}=\prod_{(C,b)\in A}I_C^b$.  Substitute this identity in the
+whole-stalk equivalence of the theorem.  All coefficients and carrier
+conditions remain those produced there.  In dimension zero the local
+list is empty and the actual sum is the zero divisor.
+\end{proof}

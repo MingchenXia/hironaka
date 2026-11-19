@@ -1,0 +1,202 @@
+\section{The actual tangent-parameter connection on the original translated jets}
+
+\begin{theorem}[Every original jet is analytic on the same actual tangent parameter domain]
+\label{hir:actual-tangent-parameter-all-order-jet-analyticity}
+\uses{hir:relative-normal-entire-germ-retraction}
+\lean{Hironaka.HironakaActualTangentJetConnection.actual_tangent_translated_jet_analytic}
+\leanok
+Let $g$ be an original holomorphic function on a genuine open subset
+$U\subset\mathbb C^{d+t}$, and let $T:\mathbb C^d\to\mathbb C^{d+t}$
+be the actual tangent inclusion. On the same genuine parameter domain
+$V=T^{-1}(U)$, for every order $j$ and every fixed actual tuple
+$v=(v_1,\ldots,v_j)$ of ambient vectors, the scalar function
+\[
+ c\longmapsto D_z^j[g(z+Tc)]_{z=0}(v)
+\]
+is analytic. The original function $g$ and domain $U$ are fixed before
+all orders and tuples, and $V$ contains zero whenever $U$ does.
+\end{theorem}
+\begin{proof}
+Translation of the actual function gives the exact identity
+$D_z^j[g(z+Tc)]_{z=0}=D^jg(Tc)$, valid for the original total function
+and all actual parameters. On $U$, genuine complex differentiability
+and openness give analyticity of $g$. Its actual iterated Fr\'echet
+derivative of every order is analytic there. Compose that analytic
+map with the original continuous complex linear tangent inclusion,
+then apply the existing continuous complex linear evaluation at the
+fixed tuple $v$. This gives analyticity at every point of $T^{-1}(U)$.
+That preimage is open by continuity of $T$, and $T0=0$ gives the
+asserted zero membership without changing the original domain.
+\end{proof}
+
+\begin{theorem}[The genuine tangent derivative raises the unchanged original jet order]
+\label{hir:actual-tangent-parameter-original-jet-connection}
+\uses{hir:actual-tangent-parameter-all-order-jet-analyticity}
+\lean{Hironaka.HironakaActualTangentJetConnection.actual_tangent_translated_jet_fderiv}
+\leanok
+For the same original $g,U,T$, every $c$ with $Tc\in U$, every order
+$j$, fixed actual tuple $v$, and actual tangent vector $a$, one has
+\[
+ D_c\bigl(D_z^j[g(z+Tc)]_{z=0}(v)\bigr)(a)
+ =D^{j+1}g(Tc)(Ta,v).
+\]
+There is no normal-flatness, constant-rank or differential-equation
+certificate among the hypotheses.
+\end{theorem}
+\begin{proof}
+Use the exact whole translated-jet identity from the preceding proof
+as an equality of actual parameter functions. The map $x\mapsto D^jg(x)$
+is genuinely differentiable at $Tc$ because the original function is
+analytic on the genuine open $U$. Evaluation at the fixed tuple is a
+continuous complex linear map. The original Fr\'echet chain rule for
+composition with $T$ therefore evaluates the parameter derivative as
+$D_x(D^jg(x)(v))_{x=Tc}(Ta)$. By the actual recursive definition of the
+iterated Fr\'echet derivative, together with differentiation of fixed
+multilinear evaluation, this is exactly $D^{j+1}g(Tc)(Ta,v)$.
+The argument applies to every actual order, including order zero,
+without changing the original function or introducing an extension
+analytic outside $U$.
+\end{proof}
+
+This is an actual connection identity for the original translated jets.
+The original Macaulay columns also contain actual word multipliers in
+the jet variable. Their tangent connection must retain the derivative
+of those multipliers as a correction term. Neither the identities here
+nor the existence of constant-rank quotient frames asserts genuine
+compatible-family selection or normal flatness.
+
+\begin{theorem}[Actual mixed directions commute in every genuine analytic jet]
+\label{hir:actual-analytic-directional-jet-commutation}
+\uses{hir:actual-tangent-parameter-original-jet-connection}
+\lean{Hironaka.HironakaActualTangentJetConnection.actual_analytic_directional_jet}
+\leanok
+Let $f$ be a genuine analytic scalar function near an actual point $x$
+of a complex normed vector space. For every actual direction $w$, order
+$j$, and fixed tuple $v$,
+\[
+ D^j[y\mapsto Df(y)(w)](x)(v)=D^{j+1}f(x)(w,v).
+\]
+\end{theorem}
+\begin{proof}
+The derivative map of $f$ is analytic near $x$, and evaluation at the
+fixed direction $w$ is continuous complex linear. Hence its scalar
+evaluation is analytic near $x$ too. Genuine analytic iterated
+Fr\'echet derivatives are symmetric. Reverse all $j+1$ slots of the
+right hand side: it becomes the successor jet with the reversed tuple
+$v$ followed by $w$. The recursive right-currying formula identifies
+this with $D^j(Df)(x)(\operatorname{reverse}v)(w)$. Continuous linear
+evaluation at $w$ commutes with the actual iterated derivative, so this
+is the jet of the actual scalar directional derivative at the reversed
+tuple. Symmetry of this scalar analytic jet reverses those $j$ slots
+back to $v$. Both reversals are genuine finite permutations, so the
+argument also covers $j=0$.
+\end{proof}
+
+\begin{theorem}[A genuine parameter derivative of a fibre jet is the actual joint successor jet]
+\label{hir:actual-joint-parameter-fibre-jet-connection}
+\uses{hir:actual-independent-parameter-normal-derivative-holomorphic,hir:actual-tangent-parameter-original-jet-connection}
+\lean{Hironaka.HironakaActualTangentJetConnection.actual_joint_fibre_jet_parameter_fderiv}
+\leanok
+Let $F$ be an original holomorphic function on a genuine open
+$D\subset\mathbb C^r\times\mathbb C^n$, and suppose $(p,0)\in D$.
+For every order $j$, fixed fibre tuple $v$, and actual parameter
+direction $a$,
+\[
+ D_p\bigl(D_z^jF(p,z)_{z=0}(v)\bigr)(a)
+ =D^{j+1}F(p,0)((a,0),(0,v_1),\ldots,(0,v_j)).
+\]
+\end{theorem}
+\begin{proof}
+The axis map $b\mapsto(b,0)$ is continuous. Since $D$ is genuinely
+open and contains $(p,0)$, a whole neighborhood of $p$ maps into $D$.
+There the actual independent-parameter slice theorem identifies each
+fibre jet with the original joint jet evaluated at the fixed tuple
+$((0,v_1),\ldots,(0,v_j))$. This is an equality of actual functions
+on a neighborhood, so their actual parameter derivatives at $p$ agree.
+The original joint jet is analytic at $(p,0)$, hence differentiable.
+Fixed multilinear evaluation followed by the original Fr\'echet chain
+rule for the actual linear axis inclusion gives its derivative in
+direction $(a,0)$. The actual successor-jet left-currying identity is
+exactly the displayed right hand side. The whole construction uses the
+original domain $D$ and function $F$ without any global extension.
+\end{proof}
+
+\begin{theorem}[The corrected tangent connection for the unchanged original Macaulay entries]
+\label{hir:actual-original-macaulay-tangent-connection-corrected}
+\uses{hir:actual-joint-parameter-fibre-jet-connection,hir:actual-analytic-directional-jet-commutation,hir:actual-holomorphic-family-whole-fibre-macaulay-dictionary}
+\lean{Hironaka.HironakaActualTangentJetConnection.actual_original_macaulay_tangent_fderiv}
+\leanok
+Fix original functions $G_i$, each holomorphic on the same genuine open
+$U\subset\mathbb C^{d+t}$. Let $M_q(G,Tc)$ be the unchanged original
+Macaulay matrix. For a row given by the actual tuple $v$ of length $j$,
+a column with actual word multiplier $\phi(z)$ and member $g=G_i$, and
+an actual tangent direction $a$, the exact derivative of this original
+matrix entry is
+\[
+ D_c\bigl(D_z^j[\phi(z)g(z+Tc)]_{z=0}(v)\bigr)(a)
+ =D_z^{j+1}[\phi(z)g(z+Tc)]_{z=0}(Ta,v)
+  -D_z^j[(D\phi(z)(Ta))g(z+Tc)]_{z=0}(v).
+\]
+The derivative of the word multiplier is retained as the displayed
+correction. The original $G_i,U$ are fixed before every order and entry.
+\end{theorem}
+\begin{proof}
+For fixed original word $\phi$, form the actual function
+$F(c,z)=\phi(z)g(z+Tc)$ on the genuine open
+$D=\{(c,z)\mid z+Tc\in U\}$. It is holomorphic there: actual words are
+polynomials, the addition map is complex linear, and the original $g$
+is holomorphic on $U$. The preceding parameter-fibre connection
+identifies the left hand side with the joint successor jet of $F$ at
+$(c,0)$ in directions $((a,0),(0,v))$. The actual slice dictionary
+identifies the first term on the right with that same joint successor
+jet in directions $((0,Ta),(0,v))$.
+
+Set $w=(-a,Ta)$. Its image under the actual addition map
+$(b,z)\mapsto z+Tb$ is zero. The ordinary product and chain rules,
+valid throughout $D$, therefore give the literal identity
+$DF(b,z)(w)=(D\phi(z)(Ta))g(z+Tb)$: the derivative of $g$ cancels
+because its actual argument has zero variation. This identity holds
+on a genuine neighborhood of every point of $D$. Its right hand side
+is holomorphic there because the actual derivative map of $F$ is
+analytic there and evaluation at the fixed direction $w$ is continuous
+linear. Equality on the actual open $D$ transfers that analyticity.
+The genuine directional-jet commutation theorem and the actual fibre
+slice dictionary identify the correction jet with the joint successor
+jet in directions $(w,(0,v))$.
+
+Finally $(0,Ta)=(a,0)+w$. Linearity of the first actual slot of the
+same joint multilinear derivative says that its value in direction
+$(0,Ta)$ is the sum of its values in directions $(a,0)$ and $w$.
+Subtract the exact correction just identified. This proves the formula
+for the actual word-multiplied jet, hence for the unchanged original
+Macaulay entry at its actual row and column. No global analytic
+extension of any $G_i$, constant-rank premise or compatibility
+certificate enters the argument.
+\end{proof}
+
+\begin{theorem}[The true word correction is an explicit finite original polynomial]
+\label{hir:actual-original-word-directional-correction}
+\uses{hir:actual-original-macaulay-tangent-connection-corrected}
+\lean{Hironaka.HironakaActualTangentJetConnection.actual_wordFunction_fderiv}
+\leanok
+For an actual word $w=(i_1,\ldots,i_m)$ and ambient direction $b$, its
+actual polynomial function satisfies
+\[
+ D\phi_w(z)(b)=\sum_{k=1}^{m}b_{i_k}
+       \prod_{\ell\ne k}z_{i_\ell}.
+\]
+In particular the correction in the preceding formula is the genuine
+finite lower-word polynomial, including repeated letters and the zero
+correction for the empty word.
+\end{theorem}
+\begin{proof}
+Each actual coordinate function has its original continuous linear
+coordinate projection as its Fr\'echet derivative. The finite product
+rule differentiates the product over the actual word positions. Its
+$k$-th summand differentiates that actual position, evaluating the
+projection on $b$, and retains every other actual position. Thus it
+is precisely the displayed product over the finite set with $k$
+removed. The finite sum counts repeated letters separately, as the
+actual product rule does. For the empty word the product is one and
+the derivative and empty sum are both zero.
+\end{proof}

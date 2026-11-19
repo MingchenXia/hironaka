@@ -1,0 +1,119 @@
+\section{Actual translated homogeneous initial ideals have no larger Hilbert--Samuel values}
+
+For a genuine formal ideal $I\subset S=\mathbb C[[X_1,\ldots,X_n]]$,
+retain the actual finite homogeneous vertex polynomials $P_a$ of degrees
+$d_a=|a|$. Their whole ideal is the actual $\operatorname{in}I$.
+For a genuine coordinate vector $p=(p_i)\in\mathbb C^n$, define the
+actual ORIGINAL ideal
+\[
+ I_p^{\rm poly}=(P_a(p+x))_a\subset R_n
+\]
+by literal polynomial evaluation at the SAME actual original coordinate
+germs. Define $J_p=(P_a(p+X))_a\subset S$ by genuine polynomial
+substitution. This is the homogeneous-translation comparison in
+\cite[proof of Theorem~7.20, p.~271]{bierstone-milman97-invent-math},
+before criterion (7.27). We construct the actual family and rescaling
+maps internally, without a supplied family, flatness or HS comparison.
+
+\begin{lemma}[The actual finite homogeneous polynomials give literal original translated germs and whole formal translated ideals]
+\label{hir:actual-translated-initial-polynomial-whole-ideals}
+\uses{hir:actual-original-polynomial-initial-ideal-realization,hir:actual-original-formal-taylor-constants-coordinates}
+Each actual $P_a$ is a genuine homogeneous polynomial of degree $d_a$.
+Its original translated germ has the ACTUAL globally holomorphic
+representative $z\mapsto P_a(p_i+z_i)_i$. The genuine original Taylor
+map extends the entire translated original ideal in BOTH directions:
+\[
+ \mathcal T_{n*}I_p^{\rm poly}=J_p.
+\]
+At $p=0$ these are exactly the already constructed original polynomial
+initial ideal and the actual whole $\operatorname{in}I$, respectively.
+\lean{Hironaka.HironakaActualTranslatedInitialHS.actualInitialVertexPolynomial_isHomogeneous,Hironaka.HironakaActualTranslatedInitialHS.actualTranslatedPolynomialEval,Hironaka.HironakaActualTranslatedInitialHS.actualTranslatedInitialIdeal,Hironaka.HironakaActualTranslatedInitialHS.actualTranslatedInitialFormalIdeal,Hironaka.HironakaActualTranslatedInitialHS.actualTranslatedInitialIdeal_formal_extension}
+\leanok
+\end{lemma}
+\begin{proof}
+The preceding ENTIRE polynomial-inclusion identity identifies every
+coefficient of $P_a$ with its actual homogeneous initial series.
+Nonzero coefficients therefore have genuine total degree $d_a$,
+which proves actual polynomial homogeneity. Evaluation at the original
+coordinate germs plus genuine complex constants is a true complex
+algebra map. Induction on the actual polynomial, using constants,
+addition and multiplication by a coordinate, gives precisely the
+displayed original function representative. The SAME induction proves
+global holomorphicity from the actual complex-linear coordinate maps.
+The two actual polynomial algebra maps obtained by original evaluation
+then Taylor, and by substitution $X_i\mapsto X_i+p_i$, agree on every
+genuine scalar and variable. True polynomial algebra-map
+extensionality identifies them. Applying the whole ideal-span map
+gives BOTH displayed whole ideal directions. Setting $p=0$ retains
+the SAME unshifted original polynomials and actual initial ideal.
+\end{proof}
+
+\begin{theorem}[A genuine holomorphic ray family has true nonzero-parameter rescaling isomorphisms]
+\label{hir:actual-translated-initial-ray-family-isomorphisms}
+\uses{hir:actual-translated-initial-polynomial-whole-ideals,hir:actual-nonlinear-full-quotient-hilbert-samuel-invariance,hir:actual-holomorphic-family-fibre-hs-closed-superlevels}
+Internally enumerate the actual finite vertex family and construct the
+genuine joint polynomial family
+$G_a(t,z)=P_a(t p+z)$ on $\mathbb C\times\mathbb C^n$.
+Its entire actual original fibre ideal at $t$ is exactly
+$I_{tp}^{\rm poly}$. For every actual nonzero $c\in\mathbb C$,
+the genuine centered complex-linear isomorphism $z\mapsto cz$
+induces an ACTUAL original germ complex algebra equivalence carrying
+the WHOLE $I_{cp}^{\rm poly}$ to the WHOLE $I_p^{\rm poly}$.
+Consequently their existing original HS values agree at EVERY order.
+\lean{Hironaka.HironakaActualTranslatedInitialHS.actualScalarGermAlgEquiv,Hironaka.HironakaActualTranslatedInitialHS.actualRayInitialFamily,Hironaka.HironakaActualTranslatedInitialHS.actualRayInitialFamily_holomorphic,Hironaka.HironakaActualTranslatedInitialHS.actualRayInitialFibreIdeal_eq,Hironaka.HironakaActualTranslatedInitialHS.actualTranslatedInitialIdeal_nonzero_ray_hs}
+\leanok
+\end{theorem}
+\begin{proof}
+The actual vertex family is genuinely finite, so its internal finite
+enumeration supplies the SAME actual polynomial generators at every
+parameter. Each coordinate $tp_i+z_i$ is jointly holomorphic; induction
+on the actual polynomials proves joint holomorphicity on the full
+actual product domain. The preceding representative formula identifies
+EACH true original fibre germ, and actual ideal-span membership in both
+directions gives the whole fibre ideal dictionary.
+The actual scalar map has continuous complex-linear inverse
+$z\mapsto c^{-1}z$. The existing genuine germ pullback along this
+actual linear equivalence preserves all complex constants, hence gives
+the actual original complex algebra equivalence with its existing
+scalar action. On each genuine coordinate it acts by $x_i\mapsto cx_i$.
+For a true homogeneous polynomial of degree $d$, its actual finite
+monomial expansion gives $P(cw)=c^dP(w)$: multiply each genuine
+monomial's coordinate powers and use that every nonzero coefficient
+has the SAME total degree $d$. Thus each original generator pulls
+back as $P_a(cp+cx)=c^{d_a}P_a(p+x)$. The nonzero actual complex
+factor $c^{d_a}$ is invertible. Actual multiplication and its inverse
+give BOTH whole ideal inclusions. The already proved genuine algebra
+equivalence invariance of actual original whole-jet dimensions then
+gives the assertion for EVERY existing HS value.
+\end{proof}
+
+\begin{theorem}[Every actual translated initial ideal has genuine HS values bounded by the original formal ideal]
+\label{hir:actual-translated-initial-all-order-hs-dominance}
+\uses{hir:actual-translated-initial-ray-family-isomorphisms,hir:actual-original-polynomial-initial-ideal-realization,hir:actual-original-formal-entire-hs-transfer}
+For EVERY genuine formal ideal $I$, every actual coordinate vector $p$
+and EVERY $\ell\in\mathbb N$,
+\[
+ H_{I_p^{\rm poly}}(\ell)=H_{J_p}(\ell)\le H_I(\ell).
+\]
+All functions are genuine whole-ideal complex quotient dimensions.
+\lean{Hironaka.HironakaActualTranslatedInitialHS.hilbertSamuelValue_actual_translated_initial_le,Hironaka.HironakaActualTranslatedInitialHS.genuineFormalHilbertSamuelValue_translated_initial_le}
+\leanok
+\end{theorem}
+\begin{proof}
+Fix $\ell$ and put $h=H_{I_p^{\rm poly}}(\ell)$. Actual original
+holomorphic-fibre HS upper semicontinuity makes the parameter set
+$\{t:H_{I_{tp}^{\rm poly}}(\ell)\ge h\}$ genuinely closed.
+The preceding actual rescaling isomorphisms put EVERY nonzero complex
+parameter in this set. Density of the punctured complex line therefore
+puts zero in it. Hence
+$H_{I_p^{\rm poly}}(\ell)\le H_{I_0^{\rm poly}}(\ell)$.
+The SAME internally constructed unshifted original polynomial ideal
+has every HS value equal to $H_I$ by the preceding original initial
+ideal realization. This gives the original inequality. The actual
+whole original/formal Taylor extension identity from the first lemma
+and the genuine whole-jet complex algebra equivalence give the formal
+equality and hence the formal inequality. No desired rank, degeneration
+or HS comparison is a premise. This does not assert strictness for
+$p\ne0$: the additional actual presentation properties (4),(5), their
+geometric transforms and the strict Bennett comparison remain open.
+\end{proof}

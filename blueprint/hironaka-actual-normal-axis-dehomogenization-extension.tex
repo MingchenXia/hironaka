@@ -1,0 +1,130 @@
+\section{Actual exceptional-axis specialization of analytic normal symbols}
+
+\begin{definition}[The genuine tangent-coefficient dehomogenized evaluation and whole family ideal]
+\label{hir:actual-normal-dehomogenized-polynomial-family-ideal}
+Use the actual $d$ tangent and $t$ normal coordinates, an actual
+normal index $j$ and $e=d+j$. For every finite polynomial in the
+normal variables with coefficients in the entire original tangent
+germ ring, let $D_{j,b}$ be actual polynomial evaluation by the
+original $\mathrm{tangentPullback}$ and the entries
+$r_j=1$, $r_i=b_i+x_i$ for $i\ne j$.
+For an actual family $(P_a)$, its dehomogenized ideal is the entire
+original ideal spanned by the actual evaluations $D_{j,b}(P_a)$.
+\lean{Hironaka.HironakaActualNormalAxisDehomogenization.actualDehomogenizedNormalPolynomialEval,Hironaka.HironakaActualNormalAxisDehomogenization.actualDehomogenizedNormalFamilyIdeal}
+\leanok
+\end{definition}
+\begin{proof}
+Every coefficient has the original actual tangent-germ ring map and
+every displayed normal entry is a genuine original ambient germ.
+The original finite polynomial evaluation universal property therefore
+supplies the ring homomorphism $D_{j,b}$. Its values on the actual
+family are ordinary original holomorphic germs, whose original ideal
+span defines the whole family ideal. No formal nonzero-point
+evaluation or new germ-ring representation is involved.
+\end{proof}
+
+\begin{theorem}[True exceptional-axis contraction fixes every entire analytic dehomogenized polynomial]
+\label{hir:actual-normal-axis-fixed-analytic-dehomogenization}
+\uses{hir:actual-normal-dehomogenized-polynomial-family-ideal,hir:relative-normal-entire-germ-retraction,hir:actual-axis-contraction-whole-coordinate-dictionary}
+For every scalar $c$, the existing actual exceptional-axis germ map
+$\rho_c$ fixes every $\mathrm{tangentPullback}(a)$ for every original
+tangent germ $a$, and fixes $D_{j,b}(P)$ for every actual finite
+normal polynomial $P$ with those entire tangent coefficients.
+This includes the true zero contraction $c=0$.
+\lean{Hironaka.HironakaActualNormalAxisDehomogenization.actualAxisContractionGerm_tangentPullback,Hironaka.HironakaActualNormalAxisDehomogenization.actualAxisContractionGerm_dehomogenizedNormalPolynomial}
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine axis contraction scales only the actual normal coordinate
+$e$. Every tangent coordinate is different from $e$, so the entire
+actual tangent projection composed with that map is unchanged.
+Representing an arbitrary tangent germ by its actual holomorphic
+function proves its whole pullback is fixed. The exceptional
+dehomogenizing entry is the constant one, and all other normal entries
+are the original fixed coordinates plus fixed complex constants.
+Compose finite polynomial evaluation with the actual contraction
+ring homomorphism: its coefficient map and every variable entry are
+unchanged, so every whole actual evaluation is fixed, even at $c=0$.
+\end{proof}
+
+\begin{theorem}[Original normal-compatible generators place the entire canonical dehomogenized ideal in the actual zero image]
+\label{hir:actual-normal-components-in-axis-normalized-image}
+\uses{hir:actual-normal-axis-fixed-analytic-dehomogenization,hir:actual-normal-initial-quotient-exists-with-restriction,hir:actual-analytic-normalized-member-ideal}
+Let $I$ be an original analytic germ ideal. For every original
+$g\in I\cap N^q$, the actual canonical polynomial $P_q(g)$ satisfies
+$D_{j,b}(P_q(g))\in\rho_0(J)$, where $J$ is the unchanged original
+whole analytic normalized-member ideal of $I$ in this chart.
+Consequently any actual family $g_a\in I\cap N^{q_a}$ has its
+entire canonical dehomogenized family ideal contained in $\rho_0(J)$.
+\lean{Hironaka.HironakaActualNormalAxisDehomogenization.actual_dehomogenized_normal_component_mem_axis_normalized_image,Hironaka.HironakaActualNormalAxisDehomogenization.actualDehomogenizedNormalFamilyIdeal_le_axis_normalized_image}
+\leanok
+\end{theorem}
+\begin{proof}
+Original normal-power membership internally constructs a genuine
+quotient $H$ with its true product and with
+$H-D_{j,b}(P_q(g))\in(x_e)$. The original numerator membership and
+that true product put $H$ among the actual original generators of $J$.
+The genuine zero contraction sends the entire principal ideal $(x_e)$
+to zero, while the preceding theorem fixes the entire dehomogenized
+polynomial. Thus $\rho_0(H)=D_{j,b}(P_q(g))$, which lies in the whole
+actual image ideal $\rho_0(J)$. Apply this to every actual family
+member and then the original span universal property to obtain the
+entire ideal inclusion, with ordinary source memberships retained.
+\end{proof}
+
+\begin{theorem}[Both whole unit-coordinate image directions identify the genuine translated family]
+\label{hir:actual-normal-unit-dehomogenized-family-image}
+\uses{hir:actual-normal-dehomogenized-polynomial-family-ideal,hir:actual-normal-unit-analytic-coefficient-dictionary,hir:actual-normal-unit-whole-germ-hs,hir:actual-point-unit-homogeneous-polynomial-dictionary,hir:actual-translated-normal-family-nonzero-ray-hs}
+Let $(P_a)$ be an actual family of finite normal polynomials, each
+homogeneous of its actual degree $q_a$. Put $p_j=1$ and $p_i=b_i$
+for $i\ne j$. The proved original normal-unit germ equivalence $E$
+sends the entire dehomogenized family ideal exactly onto the unchanged
+actual translated normal family ideal at $p$. Their original HS values
+are equal at every order.
+\lean{Hironaka.HironakaActualNormalAxisDehomogenization.map_actualNormalUnit_dehomogenizedFamily,Hironaka.HironakaActualNormalAxisDehomogenization.hilbertSamuelValue_dehomogenizedNormalFamily_eq_translated}
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine finite tangent-coefficient dictionary gives
+$E(D_{j,b}(P_a))=v^{q_a}P_a(x+p)$ in the entire original germ ring,
+where $v=(1+x_e)^{-1}$ is the already constructed true unit.
+Each image generator is therefore in the translated ideal, proving
+one whole span inclusion. Conversely that image generator is already
+in the actual image ideal; multiply it by the genuine original inverse
+power $(1+x_e)^{q_a}$. The original two unit identities cancel the
+factor $v^{q_a}$, recovering the actual translated generator.
+The original span universal property gives the reverse whole
+inclusion. Original all-order HS invariance of the genuine $E$ and
+the exact whole image equality prove the asserted equality of the
+unchanged quotient dimensions.
+\end{proof}
+
+\begin{theorem}[Every original normalized HS value is bounded by the actual canonical translated family under ordinary normal compatibility]
+\label{hir:actual-normal-normalized-hs-le-translated-components}
+\uses{hir:actual-normal-components-in-axis-normalized-image,hir:actual-normal-unit-dehomogenized-family-image,hir:actual-axis-zero-all-hs,hir:actual-whole-analytic-ideal-hs-antitone}
+For every original ideal $I$, every actual family $g_a\in I$ with
+ordinary source membership $g_a\in N^{q_a}$, and every order $\ell$,
+the original HS value of the unchanged normalized-member ideal is at
+most that of the actual canonical dehomogenized family ideal, and
+hence at most that of the genuine translated canonical family at $p$.
+\lean{Hironaka.HironakaActualNormalAxisDehomogenization.hilbertSamuelValue_actual_normal_normalized_le_dehomogenized,Hironaka.HironakaActualNormalAxisDehomogenization.hilbertSamuelValue_actual_normal_normalized_le_translated}
+\leanok
+\end{theorem}
+\begin{proof}
+The existing true axis-specialization theorem gives
+$H_J(\ell)\le H_{\rho_0(J)}(\ell)$ for the entire original ideal.
+The proved entire canonical dehomogenized ideal inclusion into
+$\rho_0(J)$ and original ideal-HS antitonicity give
+$H_{\rho_0(J)}(\ell)\le H_D(\ell)$. Compose them. Every internally
+constructed canonical polynomial is genuinely homogeneous of its
+specified normal degree, so the preceding actual unit-family image
+equality identifies $H_D(\ell)$ with the actual translated canonical
+family value. This yields both asserted original all-order bounds.
+\end{proof}
+
+The source memberships $g_a\in N^{q_a}$ are ordinary compatibility
+inputs, not a supplied HS or coefficient-cosupport certificate. Their
+eventual derivation from genuine permissible-centre geometry, the
+translated-family source-HS comparison and general positive-dimensional
+Bennett remain separate. The normal-codimension-one geometric identity
+must still be separated from the normalized ideal.

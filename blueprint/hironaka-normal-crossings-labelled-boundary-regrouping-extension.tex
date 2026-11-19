@@ -1,0 +1,81 @@
+\section{Regrouping actual branches without losing original boundary labels}
+\label{sec:nc-labelled-boundary-regrouping}
+
+The groups in this chapter are explicit finite sets of original list
+positions. They supply only combinatorial provenance, not any desired
+geometric or history conclusion. An empty group remains an empty
+labelled position. Retained or born members can be kept individually by
+using their singleton position sets.
+
+\begin{theorem}[Disjoint groups of an actual labelled NC boundary remain labelled NC]
+\label{hir:labelled-nc-actual-disjoint-regrouping}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryRegrouping.isNormalCrossingsBoundary_grouped}
+\leanok
+Let $F$ be an actual labelled NC boundary, and let $G_i$ be pairwise
+disjoint finite sets of positions in $F$, indexed by a finite ordered
+set. Form the entire ordered list
+\[
+                   H_i=\bigcup_{j\in G_i}F_j.
+\]
+This list, with each group and empty position retained, is labelled NC.
+The conclusion includes every group in the given order; the groups
+need not cover all positions of $F$.
+\uses{hir:labelled-normal-crossings-boundary}
+\end{theorem}
+\begin{proof}
+Each $H_i$ is closed, being a finite union of the original closed
+members. At $x$, take the common actual NC coordinates of $F$, with
+pairwise disjoint coordinate branch sets $S_j$. Give the new position
+$i$ the coordinate set $T_i=\bigcup_{j\in G_i}S_j$. Its local union
+equation follows in both directions: a point belongs to $H_i$ exactly
+when it belongs to some $F_j$ with $j\in G_i$, exactly when a
+coordinate in the corresponding $S_j$ vanishes, exactly when a
+coordinate in $T_i$ vanishes.
+
+For distinct new positions $i,k$, suppose a coordinate belonged to both
+$T_i,T_k$. There would be $j\in G_i$ and $l\in G_k$ with that
+coordinate in both $S_j,S_l$. The disjointness of $G_i,G_k$ implies
+$j\ne l$, whereas the original labelled NC condition says that
+$S_j,S_l$ are disjoint. This contradiction proves the required
+pairwise disjointness of the $T_i$. Thus the very same actual chart
+gives all labelled equations and disjoint branch sets for the new
+entire ordered list.
+\end{proof}
+
+\begin{corollary}[Actual SNC branches can be assembled into their original labels]
+\label{hir:actual-snc-branches-supply-labelled-nc-groups}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryRegrouping.isNormalCrossingsBoundary_grouped_of_snc}
+\leanok
+If the original finite branch list $F$ is SNC, the ordered finite unions
+of any pairwise disjoint position groups are labelled NC. In
+particular an original member may group several actual branches,
+while any retained or born positions can be kept as singleton groups.
+\uses{hir:labelled-nc-actual-disjoint-regrouping,hir:snc-supplies-labelled-nc}
+\end{corollary}
+\begin{proof}
+Actual SNC geometry supplies labelled NC geometry for the unchanged
+whole list $F$. Apply the disjoint regrouping theorem to that very
+list and the given position groups. Its actual finite unions are
+exactly the required original labelled members. Singleton groups
+return their original member, and empty groups return the empty set;
+both statements follow directly from finite union membership.
+\end{proof}
+
+\begin{corollary}[An injective selection retains labelled NC geometry]
+\label{hir:labelled-nc-injective-original-position-selection}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryRegrouping.isNormalCrossingsBoundary_reindex}
+\leanok
+Every injective ordered selection of positions from an actual labelled
+NC boundary is labelled NC, with each selected member unchanged.
+This includes permutation of its entire ordered index set.
+\uses{hir:labelled-nc-actual-disjoint-regrouping}
+\end{corollary}
+\begin{proof}
+For the selection $\sigma$, use the singleton position group
+$G_i=\{\sigma(i)\}$. If two distinct positions shared a group element,
+their images under $\sigma$ would be equal, contradicting
+injectivity. The groups are therefore pairwise disjoint. Apply the
+regrouping theorem. Each resulting finite union over its singleton is
+exactly the selected original member, so the entire resulting list
+is the stated ordered selection, including any selected empty member.
+\end{proof}

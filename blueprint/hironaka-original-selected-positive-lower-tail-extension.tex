@@ -1,0 +1,68 @@
+\section{The actual selected positive lower tail after an interior empty step}
+
+The original Step One value uses the actual run of the current level to choose
+its assignment stage.  The following producer computes its actual lower-history
+diagram when that run stays inside the final tail; it does not assume a desired
+comparison of assignment stages or lower values.
+
+\begin{lemma}[The genuine selected short positive run and its full splits]
+\label{hir:original-interior-selected-positive-short-splits}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalSelectedPositiveLowerTail.actual_short_positive_splits}
+\leanok
+\uses{hir:original-interior-empty-regime-run,hir:tower-split}
+Let $M$ be originally well formed, $H$ an actual test tower of $\overline M$,
+$S$ any actual tail and $y$ its final point. Suppose the actual original level
+at $(HS,y)$ equals $s+1$. Put
+$r=\operatorname{regimeRun}(\operatorname{stepRegime}(M,s+1),HS,y)$, and suppose
+$r<|S|$.  The actual run at the actual current level of $H\epsilon S,y$ is
+also $r$.  Put $D=(\operatorname{split}(S,r)).\operatorname{stage}$,
+$P=\operatorname{head}(S,r)$ and $Q=\operatorname{tail}(S,r)$.
+Then the full original splits selected by those literal runs are precisely
+$(D,HP,Q)$ and $(D,H\epsilon P,Q)$, respectively.  In particular they have
+the same actual stage and the same whole actual tail $Q$.
+\end{lemma}
+\begin{proof}
+The original level dictionary supplies the same actual current level in both
+histories.  The proved exact run formula gives equality to $r$ because the
+old run is shorter than $|S|$.  The split of a concatenation inside its final
+tail is obtained by recursively removing the same last $r$ blowups from $S$;
+thus its full stage/head/tail record is $(D,HP,Q)$.  Apply that actual split
+formula also to the prefix $H\epsilon$, and substitute the internally computed
+new run $r$.  This gives the two claimed literal full splits.  No comparison
+of heads or tails was an input.
+\end{proof}
+
+\begin{theorem}[The actual masked lower-record and restricted-tail diagram]
+\label{hir:original-interior-selected-positive-short-lower-diagram}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalSelectedPositiveLowerTail.actual_short_positive_lower_diagram}
+\leanok
+\uses{hir:original-interior-selected-positive-short-splits,hir:original-interior-actual-positive-lower-record,hir:original-interior-actual-positive-lower-index,hir:original-interior-empty-masks}
+Under the preceding hypotheses, write $p=Q.\operatorname{proj}(y)$.
+The actual lower masks at the two selected original heads agree.
+The actual masked lower marked ideal at $H\epsilon P,p$ is the true empty
+insertion at the internally computed filtered-prefix index $c$ into the
+actual lower marked ideal at $HP,p$, at level $s+1$.  This $c$ is within the
+actual old lower boundary.  The whole restricted actual tails $Q|_{W^+}$ and
+$Q|_{W^-}$ agree under the equality of the actual masks, with heterogeneous
+equality expressing only their retained dependent endpoint carrier types.
+\end{theorem}
+\begin{proof}
+Since $r<|S|$, the actual prefix $P$ has length $|S|-r>0$.  Apply the actual
+positive lower-record producer to $M,H,P,p$, using this internally proved
+nonempty prefix.  It gives the asserted whole lower record and its valid
+computed insertion index without a bound inside an empty original prefix.
+The original lower-mask dictionary gives equality of $W^+$ and $W^-$.
+Both restricted histories are restrictions of the same actual tail $Q$ from
+the preceding full-split computation.  Substitution of that actual open-set
+equality proves equality of their whole restricted tower records.  No
+supplied lower record, mask, assignment-stage or restricted-tail equality
+is needed.
+\end{proof}
+
+This is the actual short-run positive lower-history producer.  The case where
+the selected run crosses the interior empty step, the zero-contact carrier,
+the complete lower-value transport/order comparison, higher recursive values
+and noncompact maximum scheduling remain open.  The index $c$ can extend past
+an empty original prefix, so a uniform recursive value map is not inferred.

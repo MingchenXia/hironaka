@@ -1,0 +1,163 @@
+\section{The actual blowup of the highest original branch stratum}
+\label{sec:hironaka-normal-crossings-highest-stratum-blowup}
+
+These statements concern the strict transform of the original carrier.
+They do not count the new exceptional component as an original branch.
+They construct the next original-branch value by actual monomial charts,
+without identifying an ordered invariant under arbitrary permutations.
+
+\begin{lemma}[Coordinates adapted to the whole intrinsic highest stratum]
+\label{hir:general-nc-highest-stratum-branch-adapted-coordinates}
+\lean{Hironaka.HironakaNormalCrossingsHighestStratumBlowup.exists_highest_stratum_branch_adapted_coordinates}
+\uses{hir:general-nc-highest-multiplicity-smooth-centre,hir:general-nc-exact-nearby-branch-count}
+\leanok
+Let $H$ be an actual normal-crossing carrier with all original local
+branch counts at most $r$. At a point $x$ of its highest stratum $C_r$,
+there are actual centred coordinates in which $C_r$ is the plane of
+dimension $n-r$ and $H$ is the union of precisely the last $r$
+coordinate hyperplanes. These coordinates are produced from the original
+flattening, without a supplied simultaneous-flattening witness.
+\end{lemma}
+\begin{proof}
+Take an actual original flattening with selected set $S$. The intrinsic
+highest-stratum theorem gives $|S|=r$ and expresses the entire centre
+on that chart domain as the simultaneous vanishing of the selected
+coordinates. Since $|S|\le n$, there is a permutation of the $n$
+indices sending $S$ onto the last $r$ indices: choose bijections on $S$
+and its complement to these two blocks and combine them. The resulting
+linear coordinate permutation is a holomorphic linear isomorphism.
+Postcompose the actual flattening with this map, and precompose its
+actual inverse with the inverse permutation. The new maps have the
+same actual source, a permuted open target and both inverse identities.
+Their centre value is zero. The selected-coordinate union is now the
+union of the last $r$ coordinate hyperplanes, and the selected-coordinate
+intersection is precisely the dimension-$(n-r)$ plane. This produces
+both whole-set dictionaries on one actual open domain.
+\end{proof}
+
+\begin{lemma}[The intrinsic positive highest stratum admits an actual blowup]
+\label{hir:general-nc-highest-stratum-actual-blowup}
+\lean{Hironaka.HironakaNormalCrossingsHighestStratumBlowup.interior_highest_superlevel_eq_empty,Hironaka.HironakaNormalCrossingsHighestStratumBlowup.exists_highest_stratum_blowup}
+\uses{hir:general-nc-highest-multiplicity-smooth-centre}
+\leanok
+If $r>0$ bounds all original branch counts, the actual closed smooth
+highest stratum $C_r$ has empty interior and its complex blowup exists.
+\end{lemma}
+\begin{proof}
+The entire centre is closed and regular of dimension $n-r$ at every
+one of its points. At any hypothetical interior point, the centre is
+the whole ambient manifold on a neighbourhood and hence regular of
+dimension $n$ there. Uniqueness of the dimension of an actual regular
+flattening would give $n=n-r$. At a point of the centre, the actual
+branch bound gives $r\le n$, so this contradicts $r>0$. Thus the centre
+has empty interior. The proved complex blowup existence theorem applies
+to this actual closed smooth centre, producing its manifold, projection
+and genuine blowup-along-centre property. An empty highest level also
+has empty interior and is covered by the same existence theorem.
+\end{proof}
+
+\begin{lemma}[The genuine local strict-original-carrier calculation]
+\label{hir:general-nc-highest-stratum-local-strict-branch-drop}
+\lean{Hironaka.HironakaNormalCrossingsHighestStratumBlowup.mem_strict_carrier_iff_of_actual_chart}
+\uses{hir:general-nc-highest-stratum-branch-adapted-coordinates}
+\leanok
+Consider a genuine monomial chart of the blowup of $C_r$, with pivot
+$j$ among the last $r$ coordinates and its actual lift inverse.
+On this chart the strict transform of $H$ is exactly the union of the
+remaining last-coordinate hyperplanes, with the pivot omitted. The
+exceptional hypersurface is the pivot-coordinate zero set.
+\end{lemma}
+\begin{proof}
+Choose the produced branch-adapted coordinates at the base point.
+The actual blowup universal property supplies a monomial local inverse
+$W$ with pivot $j\ge n-r$ and an actual holomorphic lift inverse on its
+open domain. In those coordinates the monomial projection sends the
+pivot coordinate to itself, each other normal coordinate to its
+product with the pivot, and each tangential coordinate to itself.
+The centre preimage is therefore exactly $W_j=0$.
+
+On the base chart the original carrier is a finite union of the actual
+coordinate zero sets. Local equality on a base neighbourhood pulls back
+to local equality on the blowup by continuity of the actual projection.
+Membership in the closure of the preimage outside the centre depends
+only on this local equality. Closure commutes with this finite union,
+so its strict transform is the finite union of the branch strict
+transforms. The pivot branch has no points outside the centre in this
+chart and its strict transform misses the chart. For a remaining normal
+coordinate $i$, outside $W_j=0$ its pulled back zero equation is exactly
+$W_i=0$. Every point of $W_i=0$ in the chart is a limit of points there
+with $W_j\ne0$, because the coordinates $i$ and $j$ are distinct and
+the actual chart has an open model domain. Thus its genuine strict
+transform is the whole $W_i=0$ set. Conversely any such limit remains
+in that zero set by continuity. These are the two directions of the
+whole strict-original-carrier dictionary; no transform membership
+certificate is an input.
+\end{proof}
+
+\begin{lemma}[Actual centred strict-original coordinates and the lower count]
+\label{hir:general-nc-highest-stratum-over-centre-count-decrease}
+\lean{Hironaka.HironakaNormalCrossingsHighestStratumBlowup.exists_strict_carrier_coordinates_over_highest}
+\uses{hir:general-nc-highest-stratum-local-strict-branch-drop,hir:general-nc-intrinsic-branch-multiplicity}
+\leanok
+At every blowup point above the centre, the original strict carrier
+has an actual centred normal-crossing flattening with at most $r-1$
+branches. The exceptional equation is simultaneously a coordinate
+hyperplane with a different index from all of these branches.
+\end{lemma}
+\begin{proof}
+The actual monomial local inverse has injective differential, as follows
+by differentiating its genuine lift inverse. Express it in the preferred
+chart at the blowup point, apply the holomorphic inverse function
+theorem and subtract its centre value. This produces actual centred
+coordinates. Among the $r-1$ remaining normal coordinates, retain
+exactly those vanishing at the point. The finitely many other coordinates
+are nonzero on one smaller open neighbourhood, so they contribute
+no branch there. For each retained coordinate, subtraction of the
+centre value changes nothing. The preceding whole strict-transform
+dictionary thus gives a genuine centred NC flattening of the original
+strict carrier. Its selected set has at most $r-1$ elements. Since
+the point is above the centre, the pivot coordinate vanishes there;
+its translated equation is still the actual exceptional equation,
+and the pivot is distinct from each remaining selected index.
+\end{proof}
+
+\begin{theorem}[A genuine global first step with smaller original branch count]
+\label{hir:general-nc-highest-stratum-global-strict-count-decrease}
+\lean{Hironaka.HironakaNormalCrossingsHighestStratumBlowup.isNormalCrossingsCarrier_strict_highest,Hironaka.HironakaNormalCrossingsHighestStratumBlowup.branchMultiplicity_strict_highest_le,Hironaka.HironakaNormalCrossingsHighestStratumBlowup.exists_highest_stratum_blowup_strict_count_decrease}
+\uses{hir:general-nc-highest-stratum-actual-blowup,hir:general-nc-highest-stratum-over-centre-count-decrease,hir:general-nc-actual-highest-stratum-exists}
+\leanok
+If $H$ is nonempty, its internally produced maximum $r>0$ and the
+blowup of its whole intrinsic maximum stratum produce an actual strict
+normal-crossing carrier $H'$ with all original branch counts at most
+$r-1$. The construction requires neither compactness nor a global
+ordering of the original branches.
+\end{theorem}
+\begin{proof}
+Produce the attained positive actual maximum and its smooth whole
+centre, then its genuine blowup. The strict carrier is closed by its
+closure definition. Above the centre use the preceding produced
+centred chart and lower count. Away from the centre the actual blowup
+is a local biholomorphism and the strict carrier equals the preimage
+of $H$: the original carrier is closed, so local closure outside the
+centre gives exactly this preimage. Compose an actual original
+flattening at the image point with the actual local inverse coordinates
+of this biholomorphism. The resulting centred chart gives the whole
+strict-carrier union with the same original selected indices, hence
+the same intrinsic count. The image point is outside the global
+maximum stratum, so that integer count is strictly less than $r$,
+equivalently at most $r-1$. These two cases prove actual NC everywhere
+and the claimed global strict-original count bound. The chosen maximum
+and centre were intrinsic; no assertion about the old ordered algorithm
+was used.
+\end{proof}
+
+\begin{remark}
+The new exceptional branch can restore the total boundary count to $r$;
+the decrease asserted here counts only strict original branches.
+Compatibility with previously accumulated exceptional boundary requires
+a further simultaneous-coordinate producer. For an additional marked
+ideal, this centre need not be contained in its cosupport. Consequently
+this first geometric step alone does not supply the required marked-ideal
+admissibility, cosupport-complement isomorphism or canonical global
+sequence descent.
+\end{remark}

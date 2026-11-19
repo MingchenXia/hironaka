@@ -1,0 +1,88 @@
+\section{A literal tangent-cone coefficient forces finite strict HS progress}
+
+This chapter concerns genuine point blowup charts. It does not infer an
+initial-diagram inclusion, transformed standardness, or the full all-vertex
+order criterion from exceptional saturation. The obstruction is a literal
+coefficient of a prescribed original canonical vertex polynomial.
+
+\begin{theorem}[Pure coefficients of the same canonical normalized quotient]
+\label{hir:actual-point-canonical-quotient-pure-coefficient}
+\uses{hir:actual-original-canonical-point-initial-polynomial-congruence}
+\lean{Hironaka.HironakaActualPointTangentCoefficientHSDrop.canonical_point_quotient_pure_coefficient}
+\leanok
+For an original analytic germ ideal $J$, let $G_a$ be its actual canonical
+reduced vertex generator, of degree $d_a$. In a genuine point chart with
+pivot $j$ and direction $b$, put
+$p_a=\delta_{j,b}(\operatorname{in}_{d_a}G_a)$, using the literal complex
+polynomial dehomogenization. Every actual quotient
+$e^{d_a}H_a=\pi^*G_a$ satisfies
+$[X^\gamma]\widehat H_a=[X^\gamma]p_a$ for every exponent with
+$\gamma_j=0$.
+\end{theorem}
+\begin{proof}
+The genuine same-generator exceptional initial congruence gives
+$H_a-\operatorname{ev}(p_a)\in(e)$. Its whole Taylor image is divisible
+by $X_j$, because the original Taylor algebra map sends this same
+coordinate germ to $X_j$. Every coefficient with pivot exponent zero
+therefore vanishes in that difference. The original Taylor image of
+the actual polynomial evaluation is literally the included polynomial,
+by the algebra-map coordinate equations. Subtracting coefficients
+proves the claimed identity for the same quotient.
+\end{proof}
+
+\begin{theorem}[An internally measured source minimum gives a strict finite drop]
+\label{hir:actual-point-low-tangent-coefficient-strict-hs-drop}
+\uses{hir:actual-point-canonical-quotient-pure-coefficient,hir:actual-original-point-normalized-exceptional-regularity,hir:actual-hs-profile-point-power-detection,hir:actual-original-canonical-reduced-vertex-basis}
+\lean{Hironaka.HironakaActualPointTangentCoefficientHSDrop.hilbertSamuelValue_point_normalized_lt_of_low_dehom_coefficient}
+\leanok
+Let $\mu$ be the infimum in $\mathbb N$ of the degrees of the actual
+canonical initial vertices of $J$. Suppose some original vertex $a$
+and pure exponent $\gamma_j=0$ have
+$r=|\gamma|<\mu$ and $[X^\gamma]p_a\ne0$.
+Then the entire independently defined point-normalized ideal $N$ has
+$H_N(r)<H_J(r)$. No normalized quotient, order certificate or diagram
+comparison is an input. The empty vertex family has $\mu=0$ and hence
+cannot satisfy the disclosed coefficient witness.
+\end{theorem}
+\begin{proof}
+Each canonical original generator has no Taylor coefficients below its
+own vertex degree. All vertex degrees are at least $\mu>r$, so each
+generator belongs to the actual maximal-ideal power $\mathfrak m^{r+1}$.
+Their genuine whole span is $J$, giving $J\subseteq\mathfrak m^{r+1}$.
+Thus the actual finite-jet HS value $H_J(r)$ equals the ambient value.
+
+Internally choose the genuine canonical normalized family once. Its
+member $H_a$ lies in the independently defined whole normalized ideal.
+The preceding theorem and the nonzero literal coefficient show
+$H_a\notin\mathfrak m^{r+1}$. Consequently that whole ideal is not
+contained in this power. The genuine finite-jet kernel/rank criterion
+makes its HS value different from the ambient value, while the natural
+surjection from the ambient finite jet gives the upper bound by that
+value. These two facts give strict inequality at precisely $r$.
+\end{proof}
+
+\begin{theorem}[The whole original geometric strict ideal has the same strict drop]
+\label{hir:actual-geometric-point-low-tangent-coefficient-strict-hs-drop}
+\uses{hir:actual-point-low-tangent-coefficient-strict-hs-drop,hir:actual-original-point-normalized-geometric-strict-ideal}
+\lean{Hironaka.HironakaActualPointTangentCoefficientHSDrop.hilbertSamuelValue_geometric_strict_lt_of_low_dehom_coefficient,Hironaka.HironakaActualPointTangentCoefficientHSDrop.dehom_coefficient_eq_zero_of_entire_point_hs_persistence}
+\leanok
+For an original analytic subset in dimension $n\ge2$, the same source
+coefficient witness gives the strict finite drop for the entire actual
+geometric strict-transform vanishing ideal in that point chart. In
+particular, persistence of the entire original HS profile forces every
+such pure dehomogenized coefficient below $\mu$ to vanish.
+\end{theorem}
+\begin{proof}
+Apply the preceding result to the literal entire original origin ideal.
+The genuine point-normalization/saturation/geometric-strict theorem
+identifies the entire normalized ideal with the entire independently
+defined geometric strict ideal, for this same actual map and carrier.
+Substitution gives the strict inequality, without an incoming ideal
+equality certificate. For the persistence assertion, a nonzero
+coefficient would give this strict inequality at its finite degree,
+contradicting the assumed equality there.
+\end{proof}
+
+Only the layer below the internally measured minimum degree is tested.
+The all-vertex normalized-order criterion, current-history driver,
+strict recursive invariant descent and termination remain separate.

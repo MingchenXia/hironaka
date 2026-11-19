@@ -1,0 +1,93 @@
+\section{The whole exceptional restriction is the actual dehomogenized initial polynomial}
+
+Fix a genuine point chart with exceptional coordinate $e$ and actual
+direction parameters $b$. All polynomial operations below are the literal
+finite operations in $\mathbb C[x_1,\ldots,x_n]$.
+
+\begin{definition}[The actual point-chart polynomial dehomogenization]
+\label{hir:actual-point-polynomial-dehomogenization}
+\lean{Hironaka.HironakaActualPointDehomogenizedInitial.actualPointDehomogenization}
+\leanok
+Define the actual complex polynomial algebra homomorphism
+$\delta_{e,b}$ by $x_e\mapsto1$ and $x_i\mapsto b_i+x_i$ for $i\ne e$.
+\end{definition}
+
+\begin{lemma}[Whole polynomial inclusion retains literal chart evaluation]
+\label{hir:actual-point-polynomial-dehomogenization-inclusion}
+\uses{hir:actual-point-polynomial-dehomogenization}
+\lean{Hironaka.HironakaActualPointDehomogenizedInitial.actualPointDehomogenization_coe}
+\leanok
+The actual formal inclusion of $\delta_{e,b}P$ is precisely the finite
+polynomial evaluation at $1$ in coordinate $e$ and $b_i+x_i$ otherwise.
+\end{lemma}
+\begin{proof}
+Both maps preserve the original complex constants, addition and
+multiplication. On each actual variable they have the displayed identical
+value. Polynomial induction proves equality for every finite original
+polynomial, hence equality of the entire formal inclusions.
+\end{proof}
+
+\begin{theorem}[The actual point blowup factors every homogeneous polynomial]
+\label{hir:actual-point-blowup-homogeneous-polynomial-factor}
+\uses{hir:actual-point-polynomial-dehomogenization-inclusion,hir:actual-formal-blowup-coordinate-power-image}
+\lean{Hironaka.HironakaActualPointDehomogenizedInitial.actualFormalBlowup_homogeneous_polynomial}
+\leanok
+For every actual homogeneous polynomial $P$ of degree $d$, the existing
+actual blowup substitution satisfies
+\[
+ \pi^*P=x_e^d\delta_{e,b}P
+\]
+as equality of entire actual formal series.
+\end{theorem}
+\begin{proof}
+Every actual point-blowup coordinate is $x_e$ times its genuine
+dehomogenized coordinate. The original formal substitution on a finite
+polynomial is its actual polynomial evaluation. Expand that polynomial
+as its finite support sum of coefficient monomials. Each monomial has
+total degree $d$, so its evaluated product contains exactly the common
+factor $x_e^d$. Factor this from the finite sum and use the preceding
+actual polynomial-inclusion identity. No substitution into an arbitrary
+nonconvergent series at a nonzero point occurs.
+\end{proof}
+
+\begin{lemma}[The actual whole degree-$d$ polynomial is genuinely homogeneous]
+\label{hir:actual-point-initial-polynomial-homogeneous}
+\uses{hir:actual-point-initial-polynomial-whole-inclusion}
+\lean{Hironaka.HironakaActualPointDehomogenizedInitial.actualPointHomogeneousPolynomial_isHomogeneous}
+\leanok
+For every entire actual series $F$, its actual polynomial $P_d(F)$ is
+homogeneous of degree $d$, including when it is zero.
+\end{lemma}
+\begin{proof}
+The whole polynomial inclusion equals the actual homogeneous component.
+Every nonzero polynomial coefficient is therefore a nonzero coefficient of
+that same whole component, whose literal homogeneity forces total degree
+$d$. This is exactly the actual polynomial homogeneity predicate.
+\end{proof}
+
+\begin{theorem}[Every whole exceptional restriction is the genuine finite dehomogenized initial polynomial]
+\label{hir:actual-point-exceptional-restriction-dehomogenized-polynomial}
+\uses{hir:actual-point-exceptional-initial-polynomial-restriction,hir:actual-point-blowup-homogeneous-polynomial-factor,hir:actual-point-initial-polynomial-homogeneous}
+\lean{Hironaka.HironakaActualPointDehomogenizedInitial.actual_point_normalized_member_congr_dehomogenization}
+\leanok
+For every $F\in\mathfrak m^d$, its existing actual $d$-normalized quotient
+differs from the entire inclusion of $\delta_{e,b}P_d(F)$ by a member of
+the entire exceptional ideal $(x_e)$. Thus their whole classes on the
+exceptional hyperplane agree, with an internally constructed finite
+polynomial on the right.
+\end{theorem}
+\begin{proof}
+The preceding original-normalization theorem internally supplies the
+point-power membership of the entire inclusion of $P_d(F)$ and the
+exceptional congruence of its normalized quotient with that of $F$.
+Its proved genuine polynomial homogeneity gives the actual blowup
+factorization with quotient $\delta_{e,b}P_d(F)$. The actual nonzero
+exceptional variable makes the existing normalized quotient unique, so it
+is exactly that polynomial inclusion. Substitute this equality in the
+entire exceptional congruence. No quotient equality certificate, analytic
+lift, or convergence input is added.
+\end{proof}
+
+The next Bennett obligations compare the entire generated specialized
+ideals and their all-order Hilbert--Samuel values. Those inequalities and
+the general positive-dimensional permissible-centre argument remain open.

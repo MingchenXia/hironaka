@@ -1,0 +1,92 @@
+\section{Genuine coefficient division preserves actual compatible weight filtrations}
+
+Keep the genuine internally constructed finite monic vertex series of an
+ACTUAL whole formal ideal $I$, the actual owner partition and actual
+coefficient-recursive division. Let $w_i\in\mathbb N$ be actual coordinate
+weights and put $w(\alpha)=\sum_i w_i\alpha_i$. This is the coefficient
+mechanism behind the centre-order quotient bounds of
+\cite[Lemma~7.22, Corollary~7.24, pp.~269--270]{bierstone-milman97-invent-math}.
+The following states its genuine weight compatibility assumption explicitly;
+it does not assert that arbitrary chosen centres automatically satisfy it.
+
+\begin{lemma}[True compatible vertex coefficients force genuine recursive weight vanishing]
+\label{hir:actual-formal-division-recursive-weight-vanishing}
+\uses{hir:actual-formal-vertex-owner-coefficient-recursion,hir:actual-formal-initial-diagram-finite-monic-vertices}
+Suppose EACH actual internally constructed vertex series $f_a$ has zero
+coefficient at EVERY exponent $\gamma$ with $w(\gamma)<w(a)$.
+If an ACTUAL $F\in S$ has zero coefficient below weight $d$, then
+its actual internally constructed division coefficient $t_F(c)$ is zero
+for EVERY $c$ with $w(c)<d$.
+\lean{Hironaka.HironakaActualFormalWeightedDivision.actualDivisionCoefficient_eq_zero_of_weight_lt}
+\leanok
+\end{lemma}
+\begin{proof}
+Use well founded induction in the SAME actual monomial order that defines
+the genuine division recursion. At exponent $c$ with $w(c)<d$, the
+actual numerator coefficient is zero. Consider an actual correction
+summand indexed by vertex $a$ and genuine pair $\beta+\gamma=c$.
+If the actual coefficient of $f_a$ at $\gamma$ is zero, the genuine
+product is zero. Otherwise the stated weight compatibility forces
+$w(a)\le w(\gamma)$. Thus
+$w(\beta+a)=w(\beta)+w(a)\le w(\beta)+w(\gamma)=w(c)<d$.
+Every recursive correction uses only $\beta+a\prec c$, so induction
+annihilates its actual recursive coefficient. The finite whole correction
+sum is therefore zero, and the actual defining equation yields
+$t_F(c)=0$. The compatibility concerns actual vertex coefficients and
+the conclusion concerns genuinely constructed quotients; no desired
+quotient bound or recursion solution is a premise.
+\end{proof}
+
+\begin{theorem}[Actual whole formal division quotients retain their genuine weight bounds]
+\label{hir:actual-formal-division-quotient-remainder-weight-bounds}
+\uses{hir:actual-formal-division-recursive-weight-vanishing,hir:actual-formal-vertex-division-supports,hir:actual-formal-vertex-series-whole-ideal-generation}
+Under the preceding actual coefficient hypotheses, EVERY coefficient
+of $Q_a(F)$ at $\beta$ vanishes if $w(\beta)+w(a)<d$;
+EVERY actual remainder coefficient below weight $d$ vanishes.
+For an actual $F\in I$, these are bounds on the genuine WHOLE series
+coefficients in the internally proved equality $F=\sum_aQ_a(F)f_a$.
+For $0$--$1$ coordinate weights, they are precisely the coefficient
+centre-order bounds $w(\beta)\ge d-w(a)$ for the nonzero quotient terms.
+\lean{Hironaka.HironakaActualFormalWeightedDivision.actualFormalQuotient_coefficient_weight_bound,Hironaka.HironakaActualFormalWeightedDivision.actualFormalRemainder_coefficient_weight_bound,Hironaka.HironakaActualFormalWeightedDivision.actual_formal_ideal_member_weighted_division}
+\leanok
+\end{theorem}
+\begin{proof}
+An actual quotient coefficient is either zero by the actual owner condition,
+or is precisely $t_F(\beta+a)$. Additivity of the actual weight and
+the preceding lemma give its vanishing under the displayed strict
+inequality. An actual remainder coefficient is likewise either literally
+zero or the actual $t_F(c)$, giving its bound. For $F\in I$ the
+already proved WHOLE ideal member division identity has zero remainder;
+it uses exactly these SAME genuinely constructed quotients. For coordinate
+indicator weights the weight is the actual sum of the selected coordinate
+exponents, so the displayed inequality is the stated usual centre-order
+coefficient bound, with the nonnegative truncated subtraction convention.
+\end{proof}
+
+\begin{theorem}[Degree-lex division internally preserves the genuine formal maximal filtration]
+\label{hir:actual-formal-degreelex-division-maximal-filtration}
+\uses{hir:actual-formal-division-quotient-remainder-weight-bounds,hir:actual-formal-degreelex-initial-exponent-power-kernel,hir:actual-formal-variable-power-coefficient-kernel}
+For the ACTUAL degree-lex initial diagram of ANY actual formal ideal,
+weight compatibility for total degree holds internally. If
+$F\in\mathfrak n^d$, then the genuine remainder is in
+$\mathfrak n^d$, and its SAME actual quotient series satisfy
+\[
+ [X^\beta]Q_a(F)=0\quad\text{whenever}\quad |\beta|+|a|<d.
+\]
+This conclusion needs only the ACTUAL whole ideal and ACTUAL formal power
+membership; no vertex compatibility certificate is supplied in this case.
+\lean{Hironaka.HironakaActualFormalWeightedDivision.actualWeight_one,Hironaka.HironakaActualFormalWeightedDivision.actualVertexSeries_total_degree_compatible,Hironaka.HironakaActualFormalWeightedDivision.actual_formal_degreelex_division_maximal_filtration}
+\leanok
+\end{theorem}
+\begin{proof}
+Every actual vertex series has lowest degree-lex exponent exactly $a$.
+An exponent $\gamma$ of degree smaller than $|a|$ is strictly smaller
+in the true degree-first order, so its actual coefficient is zero.
+This internally supplies the preceding weight compatibility for the
+constant weight family $w_i=1$. The true maximal-power coefficient
+kernel supplies numerator vanishing below total degree $d$.
+Apply the preceding actual quotient and remainder bounds, and use the
+BOTH-direction true maximal-power kernel again to place the genuine
+remainder in $\mathfrak n^d$. No transformed standard basis or general
+strict Bennett inequality is asserted by this filtration result.
+\end{proof}

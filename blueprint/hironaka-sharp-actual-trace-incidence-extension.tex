@@ -1,0 +1,99 @@
+\section{Actual monomial support on the same boundary-incidence stratum}
+
+\begin{lemma}[The whole monomial part is a unit precisely when every incident exponent vanishes]
+\label{hir:sharp-actual-monomial-unit-incidence}
+\uses{hir:monomial-part-along,hir:exponent-along}
+\lean{Hironaka.HironakaSharpActualTraceIncidence.one_mem_monomialPartAlong_iff}
+\leanok
+At a point of the actual carrier, the constant germ one belongs to the
+whole monomial part if and only if every boundary member through that
+point has exponent zero. This includes the empty boundary and zero
+exponents; no chosen local equation or unit certificate is supplied.
+\end{lemma}
+\begin{proof}
+For an incident member with positive exponent, every germ of the
+corresponding positive power of its vanishing ideal vanishes at the
+point: expand its outer product span and evaluate, using the vanishing
+of the last factor. Every relative finite span of such germs also
+vanishes there, since the point belongs to the carrier. Thus membership
+of the constant one in the monomial part would give one equal to zero.
+Conversely, if every incident exponent is zero, each required ideal
+power is the unit ideal. The constant one is its own single relative
+generator, which satisfies every clause of the actual monomial-part
+definition. No condition is imposed by a nonincident member.
+\end{proof}
+
+\begin{theorem}[Actual monomial-unit status is locally constant on a fixed incidence stratum]
+\label{hir:sharp-actual-monomial-unit-stable-boundary-stratum}
+\uses{hir:sharp-actual-monomial-unit-incidence,hir:exponent-along}
+\lean{Hironaka.HironakaSharpActualTraceIncidence.eventually_monomial_unit_of_stable_incidence}
+\leanok
+In positive ambient dimension, let the actual smooth carrier be transverse to an original SNC boundary,
+and let the actual ideal be coherent and nonzero along the carrier.
+On a subset of the carrier whose whole boundary-incidence profile is
+locally constant at a point, membership of one in the whole monomial
+part is locally constant at that same point.
+\end{theorem}
+\begin{proof}
+For each of the finitely many members incident at the point, the
+genuine divisor-exponent theorem gives constancy of its actual exponent
+on the nearby trace in the carrier. Intersect these finitely many real
+neighbourhood conditions with the given whole incidence neighbourhood.
+A nearby point of the subset has exactly the same incident members,
+and the exponent on each of them is the same. The preceding unit
+criterion therefore has exactly the same truth value at both points.
+Members absent at the original point remain absent and require no
+exponent comparison.
+\end{proof}
+
+\begin{lemma}[Restriction to the actual carrier preserves the whole zero locus there]
+\label{hir:sharp-actual-restricted-whole-zero-locus}
+\uses{ana:restricted-calculus}
+\lean{Hironaka.HironakaSharpActualTraceIncidence.zeroLocus_restrictOn_iff}
+\leanok
+At a point of the carrier, the whole restricted extension of a coherent
+ideal vanishes if and only if the original whole ideal vanishes.
+\end{lemma}
+\begin{proof}
+Every original germ belongs to the restricted extension, so vanishing of
+the extension implies vanishing of the original ideal. Conversely every
+germ of the extension agrees on the carrier, near the point, with a finite
+holomorphic combination of original ideal germs. At a point of the carrier
+where all original germs vanish, evaluate this actual finite equality.
+Every summand vanishes, hence so does the extension germ. This proves both
+directions for the entire ideal.
+\end{proof}
+
+\begin{theorem}[A genuine whole trace factor and the two actual profiles force constant old-member incidence]
+\label{hir:sharp-actual-factor-forces-trace-incidence}
+\uses{hir:sharp-actual-monomial-unit-stable-boundary-stratum,hir:sharp-actual-restricted-whole-zero-locus,hir:sharp-actual-full-maximum-original-member-orders}
+\lean{Hironaka.HironakaSharpActualTraceIncidence.eventually_trace_incidence_of_factor}
+\leanok
+In positive ambient dimension, let a smooth carrier be transverse to an actual SNC born boundary, and let
+$H$ be an actual closed smooth old member whose trace ideal is nonzero
+along the carrier. Suppose the current whole trace has the actual factor
+$I_H|_N=(D J)|_N$, where $D$ is its actual monomial part and $J$ is coherent.
+This equality is the explicitly retained current-stage induction hypothesis.
+On a subset of the carrier, assume its whole born-boundary incidence
+profile and the unit profile of this same $J$ are locally constant at a
+point. Then incidence with the actual old member $H$ is locally constant
+on that same subset near that point. No centre is replaced by pieces.
+\end{theorem}
+\begin{proof}
+The true monomial-part theorem makes $D$ coherent. The preceding actual
+exponent and incidence argument makes membership of one in $D$ locally
+constant. For any coherent ideal, failure of unit membership is equivalent
+to vanishing of the entire ideal: a germ with nonzero value has a genuine
+holomorphic inverse near the point, which puts one in the ideal; and one
+cannot vanish there. Thus the whole zero-locus profiles of $D$ and $J$ are
+both locally constant on the same subset near the chosen point.
+
+The zero locus of the actual product $D J$ is their union. Indeed every
+product germ vanishes if either factor ideal vanishes, whereas nonvanishing
+germs in both factors give a nonvanishing product. The preceding restriction
+lemma preserves this union at every point of the carrier. Substitute the
+explicit whole trace factor and the actual closed vanishing-ideal dictionary
+to identify incidence with $H$ with that union. Intersect the two actual
+profile neighbourhoods. The truth value of their union, hence of incidence
+with $H$, is constant there on the original unchanged subset.
+\end{proof}

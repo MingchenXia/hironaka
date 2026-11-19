@@ -1,0 +1,76 @@
+\section{The original centre quotient ring sheaf acts globally}
+
+On every genuine original open $U$, let $J(U)$ be all actual holomorphic
+sections whose germs belong to the whole original vanishing ideal of $C$
+at every point of $U$. Use the literal quotient $\mathcal O(U)/J(U)$;
+its restriction maps descend from actual holomorphic restrictions.
+
+\begin{definition}[The genuine original centre quotient ring sheaf]
+\label{hir:real-domain-actual-centre-quotient-ring-sheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-ideal-section-presheaf,hir:real-domain-actual-normal-associated-ring-sheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingSection,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingRestrict,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingRestrict_mk,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingSheaf,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingSheafUnit,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreAmbientRingMap,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreAmbientRingSheafMap,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreAmbientRingSheafMap_app}
+\leanok
+The literal section quotients form a ring presheaf on the original
+space. Its ring-valued sheafification is the actual centre quotient ring
+sheaf. The original structure ring sheaf has a genuine quotient morphism
+to this sheaf, given on every original section by its literal quotient
+class followed by the sheafification unit.
+\end{definition}
+\begin{proof}
+Actual restriction preserves every pointwise centre germ condition.
+The quotient-ring universal property therefore descends restriction to
+the section quotients. On every numerator it is the quotient class of
+the same restricted holomorphic section. This proves identity and
+composition, hence the presheaf laws. Apply genuine ring-valued
+sheafification. The numerator quotient maps are natural by their
+restriction formula; compose them with the unit to obtain the original
+structure ring sheaf morphism.
+\end{proof}
+
+\begin{theorem}[The actual associated ring sheaf is a global centre algebra]
+\label{hir:real-domain-actual-centre-ring-sheaf-associated-map}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-quotient-ring-sheaf,hir:real-domain-actual-normal-associated-ring-sheaf,hir:relative-normal-intrinsic-graded-algebra}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualNormalAssociatedSection_algebraMap_centre_zero,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSectionHom,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSectionHom_mk,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedPresheafMap,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSheafMap,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSheafMap_unit,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSheafMap_unit_mk,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSheafMap_factorization}
+\leanok
+For every original ideal $A$ and set $C$, there is a genuine ring sheaf
+morphism from the actual centre quotient ring sheaf to the actual
+associated ring sheaf. Composing it with the original quotient morphism
+gives exactly the existing ambient ring sheaf morphism. Every original
+numerator retains the same degree-zero section class followed by the
+associated-ring sheafification unit.
+\end{theorem}
+\begin{proof}
+The actual ambient section algebra map is the degree-zero class in
+$\mathcal O(U)/(A(U)+J(U))$, inserted in the direct sum. A member of
+$J(U)$ has zero class in this quotient, hence zero image in the actual
+associated section ring. The quotient universal property gives a ring
+map from $\mathcal O(U)/J(U)$ to the actual associated section ring.
+Every numerator keeps its original ambient algebra image. The already
+proved naturality of that image gives a natural ring presheaf map.
+Compose with the associated-ring unit and extend uniquely through the
+centre ring sheafification. The extension identity proves the numerator
+formula on every true original open. Extensionality on every original
+section then proves the whole ambient factorization. No coherent-ideal
+assumption or stalk comparison supplies this global morphism.
+\end{proof}
+
+\begin{theorem}[The global factorization retains actual ambient stalk scalars]
+\label{hir:real-domain-actual-centre-ring-sheaf-stalk-factorization}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-ring-sheaf-associated-map,hir:real-domain-actual-normal-associated-ring-sheaf-ambient-scalars}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreAmbientRingSheafStalkHom,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSheafStalkHom,Hironaka.HironakaSmoothCentreRealDomainActualCentreRingSheaf.actualCentreRingAssociatedSheafStalkHom_factorization}
+\leanok
+Applying genuine ring stalk functoriality to the global quotient
+factorization gives two actual ring stalk maps whose composition is the
+existing actual ambient stalk ring homomorphism. Thus every actual
+ambient stalk scalar keeps its original image under this global centre
+ring-sheaf action.
+\end{theorem}
+\begin{proof}
+The genuine ring stalk functor preserves composition. Apply it to the
+proved equality of global ring sheaf morphisms and then to an arbitrary
+actual ambient stalk element. This uses the already constructed maps;
+it does not transport operations through the whole ring dictionary.
+\end{proof}

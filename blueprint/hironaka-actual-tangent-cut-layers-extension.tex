@@ -1,0 +1,177 @@
+\section{Whole tangent-cut quotients and their actual normal symbols}
+\label{sec:hironaka-actual-tangent-cut-layers}
+
+Let $B$ be the ring of holomorphic germs in the original tangent variables
+$u$, let $R$ be the joint germ ring in $(u;v,w)$, and let $R_0$ be the
+original germ ring in $(u,w)$. Write $\psi:R\to R_0$ for the actual map
+obtained by setting the tangent displacement $v$ equal to zero. Its
+kernel is the whole ideal $V=(v_1,\ldots,v_d)$, and its scalar action
+fixes the original ring $B$. Put $N=(v,w)$ and $N_0=(w)$. The previously
+proved generator identities give $\psi(N^s)=N_0^s$ for every natural $s$.
+All ideals and layers below are whole ideals and whole module images.
+
+\begin{lemma}[Exact contraction of every tangent-cut truncation]
+\label{hir:actual-tangent-cut-truncation-contraction}
+\uses{hir:tangent-displacement-zero-kernel,hir:tangent-displacement-zero-normal-ideal,hir:tangent-displacement-zero-base-algebra}
+\lean{Hironaka.HironakaActualTangentCutLayers.map_tangentCutTruncation,Hironaka.HironakaActualTangentCutLayers.comap_tangentCutTruncation}
+\leanok
+For every whole ideal $K\subset R$ containing $V$ and every $s\ge0$,
+\[
+ \psi(K+N^s)=\psi(K)+N_0^s,\qquad
+ \psi^{-1}(\psi(K)+N_0^s)=K+N^s.
+\]
+\end{lemma}
+\begin{proof}
+Extension of ideals preserves sums and powers, and the actual normal
+generator computation gives $\psi(N)=N_0$. This proves the first
+identity. Since $\psi$ is surjective, contraction of the extension of
+any ideal $D$ is $D+\ker\psi$. Apply this to $D=K+N^s$. The kernel is
+the actual middle-coordinate ideal $V$, already contained in $K$ and
+hence in $D$. Thus the contracted ideal is $D$, proving the second
+identity.
+\end{proof}
+
+\begin{theorem}[The whole quotient dictionary over the original base]
+\label{hir:actual-tangent-cut-truncation-dictionary}
+\uses{hir:actual-tangent-cut-truncation-contraction,hir:tangent-displacement-zero-original-ideal}
+\lean{Hironaka.HironakaActualTangentCutLayers.tangentCutTruncationAlgEquiv,Hironaka.HironakaActualTangentCutLayers.tangentCutTruncationAlgEquiv_mk,Hironaka.HironakaActualTangentCutLayers.actualTangentCutTruncationAlgEquiv,Hironaka.HironakaActualTangentCutLayers.actualTangentCutTruncationAlgEquiv_mk}
+\leanok
+For every $K\supset V$, the literal map $[g]\mapsto[\psi(g)]$ is a
+$B$-algebra isomorphism
+\[
+ R/(K+N^s)\ \simeq_B\ R_0/(\psi(K)+N_0^s).
+\]
+In particular, if $I\subset R_0$ is any original ideal and $J$ is its
+actual joint translated extension, then
+\[
+ R/((J+V)+N^s)\ \simeq_B\ R_0/(I+N_0^s),
+ \qquad [g]\longmapsto[\psi(g)].
+\]
+\end{theorem}
+\begin{proof}
+The contraction identity makes the literal quotient map well-defined
+and injective: if the images of $g$ and $h$ agree, then
+$\psi(g-h)$ belongs to the target denominator, so $g-h$ belongs to
+the source denominator. Surjectivity of $\psi$ lifts a representative
+of every target class, proving surjectivity of the quotient map. The
+actual map $\psi$ fixes all original tangent germs, so this is an
+isomorphism of $B$-algebras and has the displayed numerator formula.
+For the specialization take $K=J+V$. The actual translated-ideal
+retraction gives $\psi(J)=I$, while $\psi(V)=0$ follows from the
+proved kernel identity. Therefore $\psi(K)=I$, and $V\subset K$.
+Substituting these two derived identities proves the assertion with
+the same representative map.
+\end{proof}
+
+\begin{theorem}[The entire normal layers retain their literal numerators]
+\label{hir:actual-tangent-cut-whole-layer-dictionary}
+\uses{hir:actual-tangent-cut-truncation-dictionary}
+\lean{Hironaka.HironakaActualTangentCutLayers.tangentCutLayerEquiv,Hironaka.HironakaActualTangentCutLayers.tangentCutLayerMap_mk,Hironaka.HironakaActualTangentCutLayers.actualTangentCutLayerEquiv,Hironaka.HironakaActualTangentCutLayers.actualTangentCutLayerMap_mk}
+\leanok
+For every $q\ge0$ the preceding dictionary restricts to a $B$-linear
+isomorphism of the whole images
+\[
+ \operatorname{im}\bigl(N^q\to R/(K+N^{q+1})\bigr)
+ \ \simeq_B\
+ \operatorname{im}\bigl(N_0^q\to R_0/(\psi(K)+N_0^{q+1})\bigr).
+\]
+For every actual numerator $g\in N^q$ its image is the class of
+$\psi(g)$, including degree zero. Taking $K=J+V$ gives the same
+whole-layer statement with the unchanged original ideal $I$ on the
+right.
+\end{theorem}
+\begin{proof}
+Use the quotient isomorphism at order $q+1$. If a source layer class
+is represented by $g\in N^q$, its image is represented by
+$\psi(g)\in N_0^q$, so restricting and corestricting the quotient
+map gives a $B$-linear layer map with the stated numerator formula.
+It is injective because its ambient quotient map is injective.
+For surjectivity take a target layer representative $h\in N_0^q$.
+The actual equality $\psi(N^q)=N_0^q$ and surjectivity of $\psi$
+give $g\in N^q$ with $\psi(g)=h$. The class of $g$ is therefore a
+source layer representative mapping to the chosen target class.
+This proves bijectivity of the same named layer map. The argument
+uses no positive-degree hypothesis, so it includes $q=0$. The
+specialization uses the already derived identity $\psi(J+V)=I$.
+\end{proof}
+
+\begin{theorem}[Actual multiplication symbols commute with the dictionary]
+\label{hir:actual-tangent-cut-layer-symbols}
+\uses{hir:actual-tangent-cut-whole-layer-dictionary,hir:tangent-displacement-zero-normal-ideal}
+\lean{Hironaka.HironakaActualTangentCutLayers.tangentCutLayerMap_symbol,Hironaka.HironakaActualTangentCutLayers.actualTangentCutLayerMap_symbol,Hironaka.HironakaActualTangentCutLayers.actualTangentCutLayerMap_tangentSymbol_zero,Hironaka.HironakaActualTangentCutLayers.actualTangentCutLayerMap_normalSymbol}
+\leanok
+For every $a\in N$ and every degree $q$, the entire layer dictionary
+intertwines multiplication by the actual symbol of $a$ with
+multiplication by the actual symbol of $\psi(a)\in N_0$. This also
+holds for $K=J+V$ and the unchanged original ideal $I$. In particular,
+every tangent-displacement symbol becomes zero and every normal-displacement
+symbol becomes the same original normal-coordinate symbol.
+\end{theorem}
+\begin{proof}
+Take any source layer element and represent it by $g\in N^q$.
+Multiplication by $a$ is represented by the literal product
+$ag\in N^{q+1}$, modulo $K+N^{q+2}$. The preceding numerator formula
+sends this class to the class of $\psi(ag)$ modulo
+$\psi(K)+N_0^{q+2}$. Since $\psi$ is a ring homomorphism,
+$\psi(ag)=\psi(a)\psi(g)$. This is exactly the result of first
+applying the layer dictionary and then multiplying by the actual
+normal symbol of $\psi(a)$. Equality of their ambient classes is
+equality in the target layer, proving the assertion for every
+element. Substitution of $K=J+V$ gives the final statement. The actual
+trace kills each tangent-displacement coordinate and sends each normal
+displacement coordinate to the corresponding original normal coordinate.
+Applying these literal coordinate identities to the proved multiplication
+formula gives both stated coordinate cases.
+\end{proof}
+
+\begin{theorem}[Original coherent constant-Hilbert--Samuel geometry gives all original normal layers finite free]
+\label{hir:actual-original-centre-normal-layers-finite-free}
+\uses{hir:actual-original-joint-all-tangent-cuts-free,hir:actual-tangent-cut-whole-layer-dictionary,hir:tangent-displacement-zero-original-ideal}
+\lean{Hironaka.HironakaActualTangentCutLayers.tangentDisplacementIdeal_le_allTangentCuts,Hironaka.HironakaActualTangentCutLayers.map_allTangentCuts,Hironaka.HironakaActualTangentCutLayers.exists_original_hs_constant_centre_normal_layers_finite_free}
+\leanok
+Let $C$ be regular of dimension $d$ at $x$ in a complex manifold of
+dimension $d+t$. Let $\mathcal A$ be a coherent ideal whose actual
+Hilbert--Samuel functions at all points of $C$ equal the function at $x$.
+There is one actual local holomorphic flattening $\Phi$ of $C$ at $x$,
+with $\Phi(x)=0$, such that, for the unchanged origin ideal $I_0$
+of the original ideal in these coordinates, every whole original layer
+\[
+ \operatorname{im}\bigl(N_0^q\to R_0/(I_0+N_0^{q+1})\bigr)
+\]
+is a finite free module over the original tangent germ ring $B$,
+simultaneously for every $q\ge0$.
+\end{theorem}
+\begin{proof}
+The actual all-tangent-cut theorem applied to the given geometry
+constructs one flattening $\Phi$, the actual translated original origin
+ideal $I_0$, its actual joint extension $J$, and finite free whole
+joint layers after successively adjoining the displacement coordinates
+$v_1,\ldots,v_d$. Denote the resulting whole ideal by $K$.
+Every $v_i$ occurs in this actual cut list, so every generator of $V$
+belongs to $K$ and hence $V\subset K$.
+
+At each cut the ideal is enlarged by a principal ideal generated by
+one $v_i$. Extension by $\psi$ takes this principal ideal to zero,
+because the actual coordinate trace of $v_i$ is zero. Induction over
+the finite cut list therefore gives $\psi(K)=\psi(J)=I_0$. Both
+identities are derived from the literal list and the original joint
+retraction, without changing $\Phi$ or $I_0$.
+
+Apply the whole $B$-linear layer dictionary to this same $K$ and the
+derived inclusion $V\subset K$. Its target is the original whole
+normal layer for $\psi(K)=I_0$. The source layer is exactly the whole
+joint layer already proved finite free after the cuts. A linear
+isomorphism carries a finite generating family to a finite generating
+family and carries a basis to a basis. Thus the original target layer
+is finite free in each degree $q$. The same constructed $\Phi$ and
+$I_0$ work for every degree, proving the simultaneous assertion.
+\end{proof}
+
+\begin{remark}
+The dictionaries themselves assume neither freeness nor regularity.
+The last theorem obtains finite freeness from the same original
+geometric input via the actual all-cut producer. It is a statement
+about the point germ of a regular centre with constant actual
+Hilbert--Samuel functions; Bennett comparison, Hilbert--Samuel descent
+under blowup, and singular-centre resolution remain separate assertions.
+\end{remark}

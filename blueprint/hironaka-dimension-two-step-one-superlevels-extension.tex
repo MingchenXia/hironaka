@@ -1,0 +1,178 @@
+\section{Whole maximal-order Step 1 thresholds on carriers of dimension at most two}
+
+All dimensions below are genuine complex analytic dimensions. The construction
+uses actual SNC intersections and the identity theorem on the genuine global
+components, as in Demailly\cite{demailly-cadg}, II.5.3. It treats the full actual
+masked Step 1 value, including its actual historical lower entry, rather than a
+caller-supplied tuple. This does not yet establish the full general invariant's
+dynamic companion/history gluing or the higher-dimensional global sequence.
+
+\begin{lemma}[The genuine remainder of a smooth analytic carrier]
+\label{hir:dimtwo-unselected-smooth-components}
+\uses{hir:smooth-selected-components}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.remainingComponents,Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.isClosedSubmanifold_remainingComponents,Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.remainingComponents_eq_diff_selected,Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.thin_inter_remainingComponents,Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.analytic_dimzero_inter_remainingComponents}
+\leanok
+For a closed smooth analytic set $H$ and an analytic set $A$, let $H^-$ be
+the union of the genuine global components of $H$ which are not contained
+in $A$. Then $H^-$ is closed and smooth, equals $H$ minus the union of the
+components contained in $A$, and $A\cap H^-$ is thin in $H^-$. If $H$
+has dimension at most one, $A\cap H^-$ is analytic and has dimension zero.
+\end{lemma}
+\begin{proof}
+The regular locus of $H$ is $H$, so its regular connected components are
+its actual connected components. Each is closed, and at every one of its
+points a genuine open neighbourhood meets $H$ only in that component.
+The genuine global component family is locally finite. Every subfamily's
+union is therefore closed and has, near each of its points, the same germ
+as $H$, proving smoothness. Two such components meeting at a point are
+equal, by the connected-component equality at a common point. Coverage by
+the actual global components then proves the stated difference identity.
+If an open $O$ meets $H^-$ and $O\cap H^-\subseteq A$, choose the actual
+unselected component $B$ through a point of that intersection. Its nonempty
+relatively open trace is contained in $A$. Analytic continuation on its
+connected regular component makes the whole component, hence its closure,
+contained in the closed analytic $A$, contradicting its unselected property.
+Thus every such trace is empty, which is exactly thinness. If $H$ has
+dimension at most one, the remaining union has the same bound by regular
+submanifold inclusion. Its intersection with $A$ is analytic, and genuine
+thin analytic dimension drop makes this intersection zero-dimensional.
+\end{proof}
+
+\begin{lemma}[Genuine dimension of a transverse boundary trace]
+\label{hir:dimtwo-boundary-trace-dimension}
+\uses{bcalc:snc-simultaneous,bcalc:member-intersection-along}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.dimLE_inter_get_of_dimLE_two}
+\leanok
+Let the closed smooth carrier $N$ have pointwise dimension at most two,
+and let an actual SNC divisor $E$ be transverse to $N$. Each actual trace
+$N\cap E_i$ is closed smooth and has dimension at most one.
+\end{lemma}
+\begin{proof}
+At a point of the trace, genuine simultaneous adapted coordinates flatten
+the trace and $N$ to coordinate planes of dimensions $k_C$ and $k_N$ and
+make $E_i$ the hyperplane with coordinate $s_i=0$, where $s_i<k_N$.
+The true dimensions of the planes are their ambient-truncated dimensions.
+Since the trace lies in $E_i$, its free coordinate plane cannot contain
+coordinate $s_i$: otherwise perturb the actual coordinate value in that
+direction by a small complex scalar. The actual coordinate target is open,
+so this perturbation remains in the target. The actual inverse chart then
+produces a trace point whose $s_i$ coordinate is nonzero, a contradiction.
+Hence $\min(k_C,n)\le s_i<\min(k_N,n)$. Actual uniqueness of the regular
+dimension and the genuine dimension bound on $N$ give
+$\min(k_N,n)\le2$, proving that the trace dimension is at most one.
+\end{proof}
+
+\begin{lemma}[Actual isolated maximal-order remainder]
+\label{hir:dimtwo-cosupport-codimtwo-remainder}
+\uses{bcalc:codim-one-along,hir:analytic-dimzero-all-points-regular}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.isComplexAnalyticSubset_cosupport_diff_codimOnePartAlong,Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.dimLE_cosupport_diff_codimOnePartAlong_of_dimLE_two}
+\leanok
+For a coherent positive-mark ideal of maximal order along a genuine closed
+smooth carrier $N$ of pointwise dimension at most two, its actual cosupport
+minus its actual codimension-one part is closed analytic and has dimension zero.
+\end{lemma}
+\begin{proof}
+The genuine codimension-one part is closed and relatively open in the
+actual cosupport. Its complement in the cosupport is closed; near any of
+its points it agrees with the analytic cosupport on the open complement
+of that closed codimension-one part, so it is analytic. At a regular point
+of this remainder, choose the actual regular dimension of $N$, at most two.
+If that dimension is zero, regular submanifold inclusion forces remainder
+dimension zero. If it is one or two, the genuine maximal-contact filling
+and codimension-one remainder theorem makes the remainder dimension
+strictly less than respectively zero or one. The former case is impossible
+and the latter forces dimension zero.
+\end{proof}
+
+\begin{lemma}[Actual finite unions in analytic dimension zero]
+\label{hir:dimtwo-finite-dimzero-union}
+\uses{hir:analytic-dimzero-all-points-regular}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.analytic_dimzero_union,Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.analytic_dimzero_finset_union}
+\leanok
+A finite indexed union of genuine closed analytic sets of dimension at
+most zero is analytic and has dimension at most zero, including an empty union.
+\end{lemma}
+\begin{proof}
+The actual zero-dimensional analytic sets are closed and discrete, and
+every point is regular of dimension zero. Their finite union is analytic
+by finite analytic union and is closed and discrete. At a point of the
+union, choose an open neighbourhood in which the union is that singleton,
+and a member containing the point. The member and union have identical
+germs there, so its genuine zero-dimensional regularity transfers to the
+union. Uniqueness of regular dimension excludes all other regular dimensions.
+Induction on the finite index set proves the general assertion; the empty
+union has no regular points and its analytic presentation is the constant
+unit equation.
+\end{proof}
+
+\begin{theorem}[Actual zero-dimensional envelope for all nonspecial points]
+\label{hir:dimtwo-stepone-nonspecial-envelope}
+\uses{hir:dimtwo-unselected-smooth-components,hir:dimtwo-boundary-trace-dimension,hir:dimtwo-cosupport-codimtwo-remainder,rem:thin-dimension-drop,hir:member-inter-locus-analytic-components,hir:dimtwo-finite-dimzero-union}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.exists_analytic_dimzero_nonspecial_envelope}
+\leanok
+For an actual maximal-order well-formed positive-mark Step 1 datum on a
+carrier of pointwise dimension at most two, and any actual geometric test
+tower of its actual coefficient marked ideal, there is a genuinely closed
+analytic zero-dimensional set $Z$ containing every actual nonspecial point
+of its transformed cosupport.
+\end{theorem}
+\begin{proof}
+Internally produce the actual transformed coherence, SNC divisor,
+transversality, maximal order and dimension bound. At level zero, nonspecial
+points lie in the actual isolated remainder of the preceding lemma. At
+positive level, choose an actual original boundary member through the point
+and its actual smooth trace $H_i$ on the transformed carrier. If its genuine
+global component is contained in the actual cosupport $A$, a true local
+component neighbourhood shows that the intersection of all original members
+through the point, on the carrier, has germ contained in $A$. The point
+is special, a contradiction. Hence it lies in $A\cap H_i^-$.
+Each $H_i^-$ is actual closed smooth of dimension at most one, and its
+intersection with $A$ is thin by analytic continuation. Genuine thin
+analytic dimension drop makes this closed analytic intersection zero-dimensional.
+Take the union of the actual level-zero remainder with the finitely many
+actual original-member remainders. Each is genuinely closed and discrete;
+a finite union remains closed and discrete, and is analytic. At each point
+its singleton germ gives actual regular dimension zero. This is the required
+actual envelope. No global finite component family or history certificate
+is an assumption.
+\end{proof}
+
+\begin{theorem}[Every whole actual Step 1 superlevel is analytic in carrier dimension two]
+\label{hir:dimtwo-whole-stepone-superlevels}
+\uses{hir:dimtwo-stepone-nonspecial-envelope,hir:step-one-top-threshold-analytic,hir:analytic-dimzero-subsets-and-constancy}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.isComplexAnalyticSubset_stepOneInvM_superlevel}
+\leanok
+Let the lower invariant be any genuine constructed sequence-resolution
+invariant. Under the preceding actual Step 1 hypotheses, every superlevel
+of the whole actual masked Step 1 value, with finite or infinite lower
+threshold and all actual historical entries retained, is globally analytic.
+\end{theorem}
+\begin{proof}
+Fix the whole threshold $(s,\alpha)$. Its actual superlevel is the union of
+the already internally produced whole threshold $(s,\infty)$ superlevel
+and the points of the former superlevel outside the latter. Special points
+have infinite lower entry and hence cannot lie in the difference. Actual
+cosupport nonspecial points lie in the produced zero-dimensional envelope.
+Every subset of a genuine closed zero-dimensional analytic set is closed
+smooth and analytic, so this actual difference is analytic. Union with the
+actual top superlevel proves the assertion. This argument uses the literal
+actual historical value; it neither assumes local constancy nor replaces
+that value with a proxy tuple.
+\end{proof}
+
+\begin{corollary}[Actual canonical lower-invariant application]
+\label{hir:dimtwo-canonical-stepone-superlevels}
+\uses{hir:dimtwo-whole-stepone-superlevels,hir:canonical-centres}
+\lean{Hironaka.HironakaDimensionTwoStepOneAnalyticSuperlevels.isComplexAnalyticSubset_canonical_stepOne_two_superlevel}
+\leanok
+The preceding complete superlevel conclusion applies directly to Step 1
+with the actual canonical dimension-one lower invariant used in the
+constructed dimension-two recursion.
+\end{corollary}
+\begin{proof}
+Instantiate the genuine lower invariant by the already constructed canonical
+dimension-one invariant and retain its literal actual value function. All
+geometric data and the zero-dimensional envelope were produced independently
+of any assumption on this invariant's thresholds. The preceding theorem
+therefore gives exactly its actual Step 1 superlevels.
+\end{proof}

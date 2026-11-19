@@ -1,0 +1,120 @@
+\section{Evaluate the genuine original ambient Hilbert--Samuel convolution}
+
+Use the SAME actual tangent algebra $B=\mathcal O_{\mathbb C^d,0}$,
+ambient algebra $R=\mathcal O_{\mathbb C^{d+t},0}$ and genuine normal
+layers $L_q=\operatorname{image}(J^q\to R/(I+J^{q+1}))$. All complex
+actions are the original constant-germ actions. The actual weighted
+decomposition has already identified the EXISTING ambient quotient,
+with every original numerator retained. We now evaluate its dimensions.
+Blowup nonincrease, stabilization and the singular-centre driver remain
+separate open obligations.
+
+\begin{lemma}[An actual ideal multiple of finite coefficient families is coordinatewise membership]
+\label{hir:relative-normal-actual-free-quotient-coordinate-ideal}
+\lean{Hironaka.HironakaRelativeNormalActualHSConvolution.actualCoefficientIdeal}
+\leanok
+For a commutative ring $B$, an actual ideal $K$ and a finite index $A$,
+$K(B^A)$ consists exactly of families whose every coordinate belongs to $K$.
+\end{lemma}
+\begin{proof}
+Each generator $b v$ with $b\in K$ has every coordinate in $K$, and
+coordinatewise ideal membership is closed under finite sums and the
+original $B$ action. This gives one inclusion. Conversely every such
+family $v$ is the actual finite sum $\sum_{a\in A}v_a e_a$. Each genuine
+coordinate coefficient $v_a$ belongs to $K$, so every summand belongs
+to $K(B^A)$, proving the other inclusion. Empty indices give the zero
+module on both sides.
+\end{proof}
+
+\begin{theorem}[An actual finite free quotient has genuine original quotient coefficients]
+\label{hir:relative-normal-actual-finite-free-quotient-dictionary}
+\uses{hir:relative-normal-actual-free-quotient-coordinate-ideal}
+\lean{Hironaka.HironakaRelativeNormalActualHSConvolution.actualFreeCoefficientIdeal,Hironaka.HironakaRelativeNormalActualHSConvolution.actualFreeQuotientEquiv,Hironaka.HironakaRelativeNormalActualHSConvolution.actualFreeQuotientComplexEquiv}
+\leanok
+For a genuine finite free $B$ module $L$ and actual ideal $K$, an internally
+chosen genuine basis with finite index $A$ gives
+$L/(KL)\simeq_B (B/K)^A$. If $B$ is a complex algebra and $L$ has its
+original compatible complex action, this is also genuinely complex-linear.
+\end{theorem}
+\begin{proof}
+Choose a basis of the actual finite free module internally. Its genuine
+finite coefficient isomorphism maps $KL$ to $K(B^A)$, since it preserves
+every original scalar product and is surjective on the whole module.
+Apply the preceding coordinatewise equality and the actual finite-product
+quotient map. Its kernel is exactly those coefficient families and it is
+surjective by lifting each actual quotient coordinate. This constructs
+the asserted whole quotient isomorphism. The original scalar tower makes
+the basis maps complex-linear. For each coordinate the module quotient
+and ring quotient retain exactly the same original representative; the
+genuine complex algebra quotient map proves complex scalar preservation
+on every such representative. Thus no quotient action is transported or
+invented and no desired basis or quotient dictionary is supplied by a caller.
+\end{proof}
+
+\begin{theorem}[Actual finite free layer quotients have the true rank factor]
+\label{hir:relative-normal-actual-finite-free-quotient-dimension}
+\uses{hir:relative-normal-actual-finite-free-quotient-dictionary}
+\lean{Hironaka.HironakaRelativeNormalActualHSConvolution.actualFreeQuotientDimension,Hironaka.HironakaRelativeNormalActualHSConvolution.actualFreeQuotientFinite}
+\leanok
+If $B$ is a genuine nontrivial complex algebra and the actual quotient $B/K$ is finite-dimensional, then
+the original complex dimension of $L/(KL)$ is
+$\operatorname{rank}_B(L)\dim_{\mathbb C}(B/K)$.
+\end{theorem}
+\begin{proof}
+The preceding actual complex-linear isomorphism identifies the whole
+quotient with a finite family of genuine $B/K$ coordinates. The dimension
+of a finite family is the sum of its coordinate dimensions. All coordinates
+have the same actual quotient dimension, so this sum is $|A|$ times that
+dimension. The actual finite basis cardinality is the genuine $B$ module
+rank, proving the formula. The same isomorphism internally supplies the
+required finite-dimensionality of the original quotient.
+\end{proof}
+
+\begin{theorem}[Every actual weighted normal layer has its original tangent binomial dimension]
+\label{hir:relative-normal-actual-weighted-layer-binomial-dimension}
+\uses{hir:relative-normal-actual-finite-free-quotient-dimension,hir:relative-normal-actual-base-jet-binomial-dimension}
+\lean{Hironaka.HironakaRelativeNormalActualHSConvolution.actualOriginalFreeJetDimension,Hironaka.HironakaRelativeNormalActualHSConvolution.actualOriginalWeightedLayerFinite,Hironaka.HironakaRelativeNormalActualHSConvolution.actualOriginalWeightedLayerDimension}
+\leanok
+For each genuine finite free normal layer $L_q$ and $q\leq\ell$, the
+original complex dimension of
+$L_q/\mathfrak m_B^{\ell+1-q}L_q$ is
+$\operatorname{rank}_B(L_q)\binom{d+\ell-q}{d}$.
+\end{theorem}
+\begin{proof}
+The positive exponent $\ell+1-q$ equals $(\ell-q)+1$. The actual
+original base jet $B/\mathfrak m_B^{(\ell-q)+1}$ is finite-dimensional
+by its genuine finite monomial coordinates, and its dimension is the
+previously proved binomial weight. Apply the actual finite free rank
+factor to this same ideal and this same original normal layer.
+\end{proof}
+
+\begin{theorem}[Original coherence alone produces the actual ambient Hilbert--Samuel convolution on one open]
+\label{hir:relative-normal-original-nearby-ambient-hs-convolution}
+\uses{hir:relative-normal-actual-weighted-layer-binomial-dimension,hir:relative-normal-original-nearby-ambient-weighted-layer-decomposition}
+\lean{Hironaka.HironakaRelativeNormalActualHSConvolution.exists_original_nearby_actual_ambient_hs_convolution,Hironaka.HironakaRelativeNormalActualHSConvolution.exists_original_nearby_actual_ambient_hs_constancy}
+\leanok
+For every original coherent ideal sheaf $I$, there are the SAME nearby
+open $U\subset\mathbb C^d$ meeting every neighbourhood of zero and one
+actual rank sequence $r_q$, such that for every $a\in U$ and every
+$\ell\geq0$, its actual translated origin ideal $I_a$ satisfies
+\[
+ H_{R/I_a}(\ell)=\dim_{\mathbb C}R/(I_a+\mathfrak m_R^{\ell+1})
+ =\sum_{q<\ell+1}r_q\binom{d+\ell-q}{d}.
+\]
+In particular these actual ambient Hilbert--Samuel functions agree for
+every pair of points of this SAME open and at every order.
+\end{theorem}
+\begin{proof}
+Use the actual original-coherence producer for one nearby open, all genuine
+free finite normal layers and their uniform actual ranks. Its previously
+constructed whole complex-linear ambient quotient isomorphism identifies
+$R/(I_a+\mathfrak m_R^{\ell+1})$ with the finite direct sum of the SAME
+weighted actual layers, indexed by $q<\ell+1$. Each is finite-dimensional
+and has the rank times binomial dimension just proved. Dimension of the
+actual finite direct sum is the sum of these dimensions, and its actual
+layer ranks are $r_q$ on this same open. The existing Hilbert--Samuel
+definition is precisely this original ambient quotient dimension, yielding
+the equality. Its right side is independent of $a$, giving the asserted
+whole-open all-order constancy. No caller dimension, splitting, normal
+flatness, desired constancy or Hilbert--Samuel certificate occurs.
+\end{proof}

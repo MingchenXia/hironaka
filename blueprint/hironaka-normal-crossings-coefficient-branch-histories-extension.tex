@@ -1,0 +1,94 @@
+\section{Actual old-branch and born-boundary histories of the coefficient phase}
+\label{sec:nc-coefficient-branch-histories}
+
+The old NC carrier is represented by genuine local branches; no global branch
+labelling is imposed. The coefficient phase retains the original marked ideal
+and every actual chronological step. Its old local branches can be put back
+into its genuine marked test histories because every actual centre lies in
+their common strict transform. The comparison is a test-history statement;
+it does not assert equality with the old ordered canonical invariant.
+
+\begin{theorem}[Literal entire old and born boundary decomposition]
+\label{hir:nc-history-entire-old-born-boundary}
+\lean{Hironaka.HironakaNormalCrossingsCoefficientBranchHistories.entire_old_born_boundary}
+\leanok
+For an original marked record $M$ with empty boundary, any actual finite
+boundary list $B$, and EVERY actual finite tower $T$, the WHOLE transformed
+boundary of the record obtained by inserting $B$ is
+\[
+ (M[B])_T.E=\bigl(\operatorname{strict}_T(A)\bigr)_{A\in B}\mathbin{+\!+}M_T.E.
+\]
+This retains all original indices and all chronological empty entries.
+\uses{hir:geo-transform}
+\end{theorem}
+\begin{proof}
+At the empty tower the original boundary of $M$ is empty, so the displayed
+identity is literal. At one actual blowup, transform every entry of the
+previous whole list by its actual centre-relative strict transform and append
+exactly the new exceptional inverse image. Mapping the inductive concatenation
+gives the transformed original branch block followed by the transformed
+born block; the appended new member belongs to the latter. Composition of
+the strict transforms is precisely the tower strict transform. This proves
+the literal ordered equality by induction, including empty old members and
+empty centres.
+\end{proof}
+
+\begin{theorem}[Actual original NC charts give entire marked branch histories]
+\label{hir:nc-highest-stratum-actual-local-branch-histories}
+\lean{Hironaka.HironakaNormalCrossingsCoefficientBranchHistories.exists_highest_stratum_local_branch_histories}
+\leanok
+Let $M=(X,\varnothing,\mathcal I,d)$ with coherent original ideal, and let an
+actual NC carrier $H$ have branch multiplicity everywhere at most $r$.
+Put $Z=\{\operatorname{mult}_H\ge r\}$. For ANY genuine $M$-test tower $T$
+whose actual centres lie in the strict transforms of $Z$, every original
+$x\in Z$ has an actual open chart $U$ and genuine SNC branch list $B$ with
+$H|_U=\bigcup B$, such that the SAME actual restricted tower is a genuine test
+tower of $(U,B,\mathcal I|_U,d)$. At EVERY prefix, the ENTIRE marked record is
+well formed and its WHOLE boundary is exactly the old-branch strict block
+followed by the SAME born-only block of the restricted original history.
+No local history, local centre condition, or current SNC certificate is supplied.
+\uses{hir:nc-history-entire-old-born-boundary,hir:nc-highest-subcentre-actual-branches,hir:general-restrict-open,hir:drop-containing-members,hir:wellformed-tower}
+\end{theorem}
+\begin{proof}
+The genuine original highest-stratum flattening supplies $U$ and its full
+coordinate branch list $B$. It proves both $H|_U=\bigcup B$ and containment
+of the ENTIRE original $Z|_U$ in every member of $B$. Restrict the actual
+original test tower to $U$. Restricting the actual centre containments gives
+centres in the literal strict transforms of $Z|_U$.
+
+The original record with boundary $B$ is well formed: its carrier is the whole
+open manifold, the original ideal pullback is coherent, and the actual branch
+list is SNC. Apply the proved whole-history drop-containing-members equivalence
+in the direction that ADDS the branch list to the restricted empty-boundary
+history. Every required dropped-member containment was just derived from the
+actual original chart. It follows that the SAME restricted tower, with its
+SAME centres and maps, is a genuine branch-marked test history. Every prefix
+inherits actual testness. The actual well-formed-transform theorem supplies
+its complete current geometry, including SNC of the WHOLE boundary. The
+preceding literal list identity identifies that boundary with exactly its
+original branch strict transforms followed by ALL actual born members.
+\end{proof}
+
+\begin{theorem}[An original coefficient remainder phase has genuine local old-and-born SNC histories]
+\label{hir:nc-original-coefficient-phase-local-branch-histories}
+\lean{Hironaka.HironakaNormalCrossingsCoefficientBranchHistories.exists_original_nc_coefficient_phase_branch_histories}
+\leanok
+For original coherent $\mathcal I$, positive mark, compact original cosupport,
+and an actual NC carrier with the same highest-count bound, one internally
+chosen finite coefficient nonzero-remainder phase has ALL the original
+properties of the finite phase and also the actual local branch histories
+of the preceding theorem at every original point of $Z$.
+\uses{hir:nc-original-coefficient-remainder-finite-phase,hir:nc-highest-stratum-actual-local-branch-histories}
+\end{theorem}
+\begin{proof}
+Apply the original-only finite coefficient phase producer. It internally
+constructs one actual finite remainder-canonical terminal tower and proves
+its actual ORIGINAL marked testness and centres in the strict transforms of
+$Z$, besides its entire final cosupport avoidance. Apply the preceding
+actual chart-history construction to that SAME tower, at each original
+point of $Z$. Retain its original canonical remainder, coefficient and
+original test histories, whole controlled cosupport dictionary and terminal
+remainder avoidance unchanged. Every additional local boundary and history
+field has therefore been derived internally from the original data.
+No selected-zero-component phase or strict global decrease is asserted.
+\end{proof}

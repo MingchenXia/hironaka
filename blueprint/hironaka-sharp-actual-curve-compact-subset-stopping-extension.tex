@@ -1,0 +1,91 @@
+\section{Actual finite stopping over every original compact subset}
+
+\begin{lemma}[Compactness internally bounds a finite chosen collection of actual stopped opens]
+\label{hir:sharp-actual-curve-compact-stopped-open-bound}
+\uses{hir:sharp-actual-curve-original-stopped-open-cover,hir:sharp-actual-curve-global-centres-locally-stationary}
+\lean{Hironaka.HironakaSharpActualCurveCompactSubsetStopping.exists_compact_stopped_open_bound,Hironaka.HironakaSharpActualCurveCompactSubsetStopping.globalCentres_avoid_subset_of_stopped_open}
+\leanok
+For the SAME actual retained atlas and its true original open cover, every
+compact subset $K$ of the original ambient manifold lies in the actual
+stopped open $U_{N+1}$ for some natural $N$. Every true global centre at
+all stages $k\ge N+1$ avoids the ENTIRE actual projection preimage of $K$.
+No bound, finite atlas or stationarity certificate is supplied.
+\end{lemma}
+\begin{proof}
+The actual increasing opens $U_k$ cover the entire original ambient space.
+Apply the genuine finite-subcover theorem to the ordinary compact subset
+$K$. Take the maximum of this FINITE chosen set of natural indices and
+increase to a positive stage. Each chosen open lies in the resulting
+actual stopped open by proved monotonicity, so it contains $K$. This
+construction also handles the empty compact set; no least bound is claimed.
+
+For any later stage and any point projecting into $K$, membership in the
+constructed stopped open gives an actual original chart containing its
+projection, with literal full history length at most the constructed
+bound and hence at most this later stage. The genuine local stationarity
+theorem makes the actual whole centre disjoint from the ENTIRE projection
+preimage of that chart. It therefore excludes the given point. This is
+whole-set disjointness for every later centre, retaining actual empty steps.
+\end{proof}
+
+\begin{theorem}[The genuine original-base finite prefix identifies the whole compact preimage on an actual neighborhood]
+\label{hir:sharp-actual-curve-compact-finite-prefix-terminal-identification}
+\uses{hir:sharp-actual-curve-stopped-open-global-biholomorphism,hir:sharp-actual-curve-original-global-prefix-tower}
+\lean{Hironaka.HironakaSharpActualCurveCompactSubsetStopping.positivePrefixTerminalBiholomorphism,Hironaka.HironakaSharpActualCurveCompactSubsetStopping.positivePrefixTerminalBiholomorphism_projection,Hironaka.HironakaSharpActualCurveCompactSubsetStopping.positivePrefixTerminalBiholomorphism_symm_projection,Hironaka.HironakaSharpActualCurveCompactSubsetStopping.positivePrefixTerminalBiholomorphism_preimage}
+\leanok
+At every positive stage $N+1$, the SAME already constructed original-base
+finite global blowup prefix has a genuine terminal biholomorphism on the
+ENTIRE preimage of its actual stopped open $U_{N+1}$ onto the ENTIRE
+terminal projection preimage of that SAME open. Its literal length is
+$N+1$ and its original projection square commutes. Under this SAME map,
+membership in the preimage of ANY original subset, and in particular a
+compact $K\subseteq U_{N+1}$, agrees in BOTH directions. No new history or
+endpoint map is an input.
+\end{theorem}
+\begin{proof}
+Use the original-base prefix already transported by the internally proved
+zero-stage projection biholomorphism. Its endpoint is EXACTLY the actual
+positive uniform stage, its literal length is the stated positive natural
+number, and its whole projection is the actual stage projection. That
+projection identity identifies its genuine open preimage of $U_{N+1}$
+with the actual stopped-stage open, on every point. The genuine equal-open
+biholomorphism therefore transports the previously constructed stopped-open
+biholomorphism to this SAME original-base prefix endpoint. The equal-open
+map preserves underlying points, so the previously proved entire stopped
+projection identity is exactly the original finite-prefix projection
+identity. Taking membership in any original subset gives BOTH directions
+on its entire inverse image; evaluating at the genuine inverse gives the
+inverse point identity as well. No manifold structure is put on a possibly
+nonopen compact subset.
+\end{proof}
+
+\begin{theorem}[Only original curve geometry and ordinary compactness give a genuine compact finite stopping witness]
+\label{hir:sharp-actual-curve-original-compact-subset-finite-stopping}
+\uses{hir:sharp-actual-curve-compact-stopped-open-bound,hir:sharp-actual-curve-compact-finite-prefix-terminal-identification,hir:sharp-actual-original-endpoint-comparison-atlas}
+\lean{Hironaka.HironakaSharpActualCurveCompactSubsetStopping.originalPositivePrefixTerminalBiholomorphism,Hironaka.HironakaSharpActualCurveCompactSubsetStopping.original_compact_subset_finite_stopping}
+\leanok
+Only the original positive-dimensional smooth pure curve, ordered SNC and
+density data, together with an ordinary compact subset $K$ of the original
+ambient space, internally give a natural $N$, an actual original open
+neighborhood $U_{N+1}$ of $K$, and the SAME genuine finite original-base
+global blowup prefix and terminal identification above. All later true
+centres avoid the whole preimage of $K$. The target is the SAME retained
+global sharp endpoint and the SAME local histories, not an unrelated
+terminal witness. No uniform bound over a noncompact ambient space is
+asserted.
+\end{theorem}
+\begin{proof}
+Construct the retained actual atlas and its genuine original cover from
+ONLY the original geometric inputs. Apply the first lemma to the actual
+ordinary compact $K$, producing the positive finite stage and the actual
+open neighborhood containing it. Apply the second theorem at THIS
+internally produced stage, using the already constructed actual global
+successors, original zero-stage base transport and stopped terminal maps.
+All original local prefix/tail histories and their empty positions are
+therefore the SAME retained data throughout. The resulting biholomorphism
+identifies every point of the entire compact preimage by the proved
+projection identity and both inverse laws. The first lemma gives every
+later-centre avoidance statement. This is genuine finite stopping over
+compact subsets; the general original ambient result remains local
+stationarity without a maximum over its point-indexed infinite family.
+\end{proof}

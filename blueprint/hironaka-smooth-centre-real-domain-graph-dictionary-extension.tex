@@ -1,0 +1,140 @@
+\section{Whole graph and selected central dictionaries on actual real domains}
+
+The flattened original family is used only on the genuine flattening target.
+All local generation and all saturation data below are obtained from original
+regular geometry and original coherence. The ambient graph, trace, equations,
+parameter and central inclusion retain their literal original definitions.
+
+\begin{lemma}[Local holomorphic membership gives exact whole pullback and sum ideals]
+\label{hir:real-domain-whole-linear-pullback-and-sum-dictionary}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-whole-origin-local-dictionary,hir:relative-normal-analytic-graph-origin-ideal-operations}
+\lean{Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.holAt_mem_of_idealFGAt, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalOriginIdeal_pullback_eq_of_holMem, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalOriginIdeal_sum_eq_of_holMem}
+\leanok
+Suppose every member at zero of a germ ideal is actually holomorphic near
+zero. A zero-fixing continuous complex linear map carries its whole origin
+ideal onto the whole origin ideal of its literal pullback. For two ideals
+with this actual holomorphic-membership property, the whole origin ideal of
+the literal sum is the sum of their whole origin ideals. A genuine local
+finite analytic presentation supplies the stated holomorphic-membership
+property.
+\end{lemma}
+\begin{proof}
+A local finite presentation gives the holomorphicity of every member by its
+complete finite-span dictionary. For a pulled member, unfold the literal
+pullback span of composites of actual original members. The assumed
+holomorphicity makes each original member a whole original membership germ;
+its composite is its genuine germ pullback. Pass the finite span equality
+to germs to put every pulled membership germ in the whole ideal image. In the
+other direction every pulled whole membership germ is itself a literal
+pullback generator, so spanning gives the reverse inclusion. For a sum
+member, unfold its finite span of actual members of either factor. Each
+member of either factor is holomorphic and its whole germ lies in the
+corresponding whole origin ideal. The finite whole sum lies in their ideal
+sum. Conversely an actual member of either factor is itself a literal sum
+generator; spanning the two entire origin ideals gives the other inclusion.
+\end{proof}
+
+\begin{lemma}[Actual local generation gives the entire graph quotient dictionary]
+\label{hir:real-domain-whole-graph-trace-dictionary}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-whole-linear-pullback-and-sum-dictionary,hir:relative-normal-analytic-graph-whole-kernel,hir:relative-normal-analytic-graph-original-quotient,hir:relative-normal-analytic-graph-split-surjection}
+\lean{Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalDeformationOriginIdeal_eq_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.graphTrace_kernel_le_original_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.graphTrace_map_originalOriginIdeal_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalOriginIdeal_eq_graphTrace_comap_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalGraphQuotientMap_kernel_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalGraphQuotientEquiv_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalGraphQuotientEquiv_apply_mk_of_local}
+\leanok
+A genuine finite analytic presentation of the original family near zero
+identifies the whole origin ideal of the existing projection-plus-equations
+graph family with the trace preimage of the entire actual scaled original
+ideal. Its trace image is that entire scaled ideal. Thus the whole graph
+quotient is genuinely isomorphic to the whole graph-coordinate ring modulo
+the actual scaled original ideal, carrying every quotient representative to
+its actual trace class.
+\end{lemma}
+\begin{proof}
+The preceding lemma identifies the whole existing graph ideal with the sum
+of the whole projection pullback and the genuine equation ideal. The actual
+whole trace kills every equation, and its actual whole kernel is exactly
+that equation ideal. Taking the trace image therefore gives the entire
+scaled original ideal by composition of the projection and trace maps.
+The true graph-base pullback is a right inverse to trace, so trace is
+surjective. The image-preimage formula for a surjective homomorphism returns
+the original graph ideal plus the trace kernel. The kernel already lies in
+that graph ideal, so the preimage is exactly the whole original graph ideal.
+Apply the surjective quotient-kernel theorem and transport by this exact
+kernel equality. The resulting map carries every whole quotient
+representative to its literal trace class by construction.
+\end{proof}
+
+\begin{lemma}[All whole parameter colons and true central images]
+\label{hir:real-domain-all-whole-graph-colon-central-dictionaries}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-whole-graph-trace-dictionary,hir:real-domain-whole-origin-local-dictionary,hir:relative-normal-analytic-graph-colons-central}
+\lean{Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalOriginColon_eq_graphTrace_comap_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.graphTrace_map_originalOriginColon_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalOriginIdeal_actualColon_of_local, Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.originalCentralOriginIdeal_eq_graphColon_image_of_local}
+\leanok
+For every nonnegative colon order, the actual whole graph colon is the
+trace image of the entire original whole parameter colon; its trace
+preimage is exactly that original colon. If the genuine graph family has
+an actual finite analytic presentation near zero, the whole origin ideal
+of the existing central family at each order is exactly the actual central
+graph image of that whole graph colon.
+\end{lemma}
+\begin{proof}
+Membership in the whole parameter colon means that multiplication by the
+actual parameter germ to that order belongs to the original whole graph
+ideal. Its preceding trace-preimage dictionary, multiplicativity and the
+true parameter trace formula give exactly membership in the whole graph
+colon. Surjectivity of trace gives the asserted entire image equality.
+For an actual holomorphic representative, the local finite-generation
+colon dictionary identifies actual repeated-colon membership with the
+whole parameter-colon membership. Every whole germ has an actual
+holomorphic representative; span both directions of this dictionary to
+identify the whole origin ideal of the actual colon with the entire whole
+parameter colon. Every member of this colon is holomorphic by its literal
+definition (and at order zero by local generation). The first lemma gives
+the exact whole central linear pullback image. Its central map factors
+through actual graph trace and the true graph central map. Compose the
+whole ideal images and use the whole colon trace-image equality. This gives
+the asserted exact central graph image at every order.
+\end{proof}
+
+\begin{theorem}[Original input supplies one exact whole saturated graph model]
+\label{hir:real-domain-original-whole-selected-graph-model}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-all-whole-graph-colon-central-dictionaries,hir:real-domain-whole-graph-trace-dictionary,hir:real-domain-original-exact-deformation-central-model,hir:real-domain-original-entire-initial-ideal-inclusion,hir:real-domain-coherence-actual-finite-analytic-presentation}
+\lean{Hironaka.HironakaSmoothCentreRealDomainGraphDictionary.exists_original_regular_real_whole_graph_model}
+\leanok
+Original regular-centre geometry and original coherence supply a genuine
+flattening, one selected saturation index and actual real open domains.
+All previously stated real-domain coherence, all-point colon stability,
+all-power identities, whole saturation-union identities and entire forward
+initial-ideal inclusion hold at those same witnesses. In addition the
+entire graph colon stabilizes at that same index and its entire increasing
+union equals that colon; the whole origin ideal of the same central family
+is its exact whole graph-central image. The whole original graph quotient
+has the actual quotient isomorphism and every trace-class formula above.
+No graph, index, open, central ideal or result certificate is an original
+input.
+\end{theorem}
+\begin{proof}
+Use the original-input real-domain initial-ideal producer to obtain the
+flattening, index, opens and all retained identities. Original real-domain
+coherence supplies actual finite analytic presentations of the flattened
+family and its genuine graph family near zero. Apply the preceding whole
+dictionaries to those internally obtained presentations. For whole
+parameter-colon stabilization, choose an actual holomorphic representative
+of an arbitrary whole ambient germ. The exact actual colon dictionary and
+the all-point colon-stability identity at zero identify its membership at
+all subsequent orders with membership at the selected order. Their whole
+trace images give the same stabilization of graph colons. If a whole graph
+germ lies in any graph colon, lift it by the actual graph-base pullback,
+whose trace is that same germ. The exact whole trace-preimage dictionary
+puts this actual lift in the corresponding original whole colon. Choose
+its holomorphic representative and use the supplied entire functional
+saturation-union identity at zero to put it in the selected original
+colon. Apply trace to return the same graph germ in the selected graph
+colon. Conversely the selected colon lies in its own union. This proves
+the entire union dictionary at the same index. The preceding exact
+central-image and quotient constructions finish the asserted outputs.
+All domains stay inside their true projection or central preimages; the
+reverse whole initial-ideal inclusion, graded kernel and nearby uniform
+freeness remain separate obligations.
+\end{proof}

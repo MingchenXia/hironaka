@@ -1,0 +1,57 @@
+\section{One original centre family for free jets and tangent symbols}
+
+\begin{lemma}[Actual zero-translation generators]
+\label{hir:actual-coupled-zero-translation-generators}
+\lean{Hironaka.HironakaActualCentreCoupledSymbols.translatedIdeal_zero_eq_span}
+\leanok
+For a family of holomorphic functions near the origin, its genuine
+translated germ ideal at zero equals the entire ideal spanned by the actual
+untranslated origin germs. The equality is independent of the proofs of
+holomorphicity used to form those germs.
+\end{lemma}
+\begin{proof}
+The translated representative of each function at zero is the same function:
+addition of zero changes no argument. Thus the two representatives agree on
+a neighbourhood of zero, hence give identical holomorphic germs. Equality of
+the complete generating ranges gives equality of their whole ideal spans.
+\end{proof}
+
+\begin{theorem}[Coupled all-order freeness and initial tangent stability]
+\label{hir:actual-coupled-centre-free-jets-initial-symbols}
+\lean{Hironaka.HironakaActualCentreCoupledSymbols.exists_original_hs_constant_centre_coupled_symbols}
+\leanok
+\uses{hir:actual-coupled-zero-translation-generators,hir:actual-hs-constant-centre-all-order-principal-parts-free,hir:actual-original-centre-frame-first-symbol-tangent-closure,hir:actual-original-first-symbol-whole-initial-pderiv-transfer}
+Let $C$ be regular of dimension $d$ at $x$ in a complex manifold of
+dimension $d+t$, and let $A$ be a coherent ideal with its whole intrinsic
+Hilbert--Samuel sequence constant along $C$. These original data supply
+one flattening chart, one neighbourhood and one actual finite generator
+family $H$, with origin ideal $I_0$ and actual joint ideal $J$.
+They simultaneously prove:
+\[
+ I_0=(H_1,\ldots,H_r),\qquad
+ R/(J+N^q)\text{ finite projective and free over }B\quad(q>0),
+\]
+and stability of the whole genuine Taylor initial ideal of $I_0$ under
+every tangent coordinate derivative. Both formal-series stability and its
+literal polynomial version hold. Here $B$ is the actual tangent germ ring,
+$R$ the unchanged joint germ ring and $N$ its entire normal-coordinate ideal.
+\end{theorem}
+\begin{proof}
+Apply the original all-order principal-parts producer once. It supplies one
+chart and generator family, all original stalk identifications, and at each
+order an actual invertible pivot minor with its constant rank, together
+with finite projectivity and freeness of the whole quotient. Retain all
+these witnesses, rather than choosing a second flattening for tangent
+stability. The zero-translation lemma identifies the same origin ideal
+with the span of the same origin germs.
+
+At order $q>0$, the same pivot and rank data give the projected tangent
+derivative identity. For an actual $g\in I_0\cap\mathfrak m^q$ it says
+$\partial_i g\in I_0+\mathfrak m^q$. The genuine Taylor derivative
+identity and homogeneous component argument therefore show that the
+entire initial ideal is stable under the same tangent derivative. The
+zero-base Taylor coordinate identification retains exactly the original
+unshifted germ coordinates. Finally the polynomial-to-series derivative
+identity restricts this whole-series conclusion to every polynomial.
+All degrees use the original family fixed before the choice of $q$.
+\end{proof}

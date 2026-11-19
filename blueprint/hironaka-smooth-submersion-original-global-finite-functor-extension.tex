@@ -1,0 +1,83 @@
+\section{Intrinsic uniqueness of actual global terminal smooth arrows}
+
+Actual finite histories give a uniqueness test on the genuine original global
+terminal manifold. It applies to the global smooth arrows already constructed
+and proves that their entire values do not depend on choices of finite
+histories. The compact-target endpoint is therefore an intrinsic global
+Cartesian smooth arrow. Arbitrary noncompact-target gluing remains separate.
+
+\begin{theorem}[The original global smooth Cartesian arrow is intrinsically unique]
+\label{hir:original-global-finite-smooth-cartesian-arrow-unique}
+\uses{hir:original-global-terminal-finite-whole-biholomorphism,hir:smooth-terminal-whole-pullback-map-intrinsic-uniqueness,hir:original-global-finite-terminal-smooth-map-cartesian}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFiniteFunctor.originalGlobalSmoothMap_eq}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Let $f:Y\to X$ be a genuine smooth map, $M$ an original invariant-domain
+marked ideal, and $S:E\to Y$ an actual finite canonical terminal history
+for $f^*M$. Any two holomorphic arrows between the same original global
+terminal manifolds, commuting with their same entire original projections
+and making their squares holomorphically Cartesian, are equal as whole maps.
+\end{theorem}
+\begin{proof}
+Construct the genuine original finite identification
+$C_Y:\widetilde Y_{f^*M}\to E$. Precompose both arrows with $C_Y^{-1}$.
+Their projection equalities now have the source projection $S$, because
+$SC_Y=P_{f^*M}$. Their Cartesian laws also have that source projection:
+given a cone, use its unique original global lift and compose it with
+$C_Y$ to obtain a finite-source lift. Its source leg follows from the
+whole projection identity and its target leg from the inverse equations.
+Conversely precomposing any finite-source candidate with $C_Y^{-1}$ gives
+an original global candidate. Original uniqueness and injectivity of $C_Y$
+prove uniqueness of this finite-source lift.
+
+The intrinsic finite-source projection theorem identifies the two resulting
+maps from $E$: its proof constructs mutually inverse automorphisms of the
+actual finite source tower by the two Cartesian universal properties, then
+uses genuine finite tower projection uniqueness to identify that
+automorphism with identity. Compose this equality with $C_Y$ and cancel
+the genuine inverse to recover equality at every original global point.
+\end{proof}
+
+\begin{theorem}[The actual global finite smooth arrow does not depend on either finite history]
+\label{hir:original-global-finite-smooth-map-history-choice-independent}
+\uses{hir:original-global-finite-smooth-cartesian-arrow-unique,hir:original-global-finite-terminal-smooth-map-cartesian}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFiniteFunctor.originalGlobalFiniteSmoothMap_choice_independent}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Two choices of actual finite canonical terminal source and target histories
+produce exactly the same smooth arrow on the same original global terminal
+manifolds, including differing counts of actual empty blowup steps.
+\end{theorem}
+\begin{proof}
+The original global finite smooth-map producer proves holomorphicity, the
+same whole projection equality, and the full holomorphic Cartesian law
+for each pair of actual histories. Apply the preceding uniqueness theorem
+using the first actual source history. The second pair need not share any
+stage or length with the first: both produced arrows act on the same
+original global source and target and use the same entire original
+projections, so all uniqueness hypotheses are genuine producer outputs.
+\end{proof}
+
+\begin{theorem}[A compact original target has a unique genuine global Cartesian smooth arrow]
+\label{hir:original-compact-global-terminal-smooth-arrow-existsUnique}
+\uses{hir:original-compact-global-terminal-smooth-map-cartesian,hir:original-global-finite-smooth-cartesian-arrow-unique,hir:original-global-finite-smooth-source-history}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFiniteFunctor.existsUnique_originalCompactGlobalSmoothMap}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+For a compact original target $X$, any genuine smooth map $Y\to X$, and
+only the original marked ideal $M$ and invariant-domain predicate, there
+exists exactly one global smooth Cartesian arrow between the original
+terminal manifolds, with their same whole original projection equality.
+No compactness of $Y$, finite histories, local maps or compatibility
+certificates are caller inputs.
+\end{theorem}
+\begin{proof}
+The compact-target producer constructs an actual smooth arrow and all
+three asserted properties internally. For uniqueness, the compact target
+driver constructs its finite target history, and genuine smooth pullback
+constructs the entire actual finite canonical terminal source history.
+Use that true source history in the first uniqueness theorem to identify
+any other arrow having the three asserted properties with the internally
+constructed arrow. All existence and history data are producer outputs;
+the argument does not assume the sought global map or its uniqueness.
+\end{proof}

@@ -1,0 +1,257 @@
+\section{Actual relative normal Taylor coefficients and whole ideal-power kernels}
+\label{sec:hironaka-relative-normal-taylor-coefficients}
+
+Write $R=\mathcal O_{\mathbf C^{d+t},0}$, $B=\mathcal O_{\mathbf C^d,0}$,
+$J=(z_{d+1},\ldots,z_{d+t})$ and use the genuine tangential projection and
+inclusion. The actual base algebra is pullback from this projection. Normal
+Taylor coefficients are entire holomorphic germs on the actual plane, not
+point evaluations. The source analytic input is the genuine convergent
+one-variable Taylor remainder used in \cite{bierstone-milman97-invent-math}
+and in the normal-coordinate expansion of maximal contact; the proof below
+uses the previously established actual holomorphic Taylor remainder, rather
+than formal power-series or kernel certificates. Smooth-centre transport uses
+the preceding original-regularity producer. Arbitrary original ideal quotients
+need not be free or flat; normal-flat centre selection and higher-HS descent
+remain OPEN.
+
+\begin{lemma}[Entire original iterated derivative germs]
+\label{hir:relative-normal-actual-iterated-derivative-germs}
+\uses{mc:taylor-tail}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.eventually_holomorphic_iterDeriv,Hironaka.HironakaRelativeNormalTaylorCoefficients.iterDeriv_eventually_congr,Hironaka.HironakaRelativeNormalTaylorCoefficients.iteratedDerivativeGerm,Hironaka.HironakaRelativeNormalTaylorCoefficients.iteratedDerivativeGerm_mk}
+\leanok
+Every fixed list of actual ambient vectors defines a complex-linear map on
+entire holomorphic germs by the original iterated directional derivative.
+On each original holomorphic representative its value is exactly that
+original derivative germ.
+\end{lemma}
+\begin{proof}
+Take an original holomorphic representative on a genuine open neighbourhood.
+Complex holomorphicity of the derivative follows by differentiating on that
+open set, and induction gives holomorphicity of every actual iterated
+partial derivative. Two representatives agree on a genuine neighbourhood;
+there their derivatives agree, and the same induction proves eventual equality
+of their iterated derivatives. Hence the entire output germ is independent
+of the chosen original representative. The original derivative is additive
+and commutes with constant complex scalars on a common actual holomorphic
+neighbourhood. Induction proves both identities for every fixed derivative
+list. Passing those real identities to whole germs proves complex linearity.
+\end{proof}
+
+\begin{lemma}[Normal derivatives preserve the genuine entire tangential scalar action]
+\label{hir:relative-normal-actual-tangential-linearity}
+\uses{hir:relative-normal-actual-iterated-derivative-germs,hir:relative-normal-entire-germ-retraction}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.normalVector,Hironaka.HironakaRelativeNormalTaylorCoefficients.tangentProjection_normalVector,Hironaka.HironakaRelativeNormalTaylorCoefficients.iterDeriv_eventually_tangent_mul,Hironaka.HironakaRelativeNormalTaylorCoefficients.iteratedDerivativeGerm_tangent_mul}
+\leanok
+For every original base germ $a\in B$, ambient germ $g\in R$ and list of normal
+coordinate vectors, the entire iterated derivative of $(\pi^*a)g$ equals
+$(\pi^*a)$ times the entire corresponding derivative of $g$.
+\end{lemma}
+\begin{proof}
+Take actual holomorphic representatives on a common neighbourhood. The actual
+projection kills every normal basis vector. Its complex chain rule therefore
+makes the derivative of $a\circ\pi$ in each of these actual normal directions
+zero throughout that neighbourhood. The true product rule gives the first
+normal derivative identity. All subsequent derivatives stay holomorphic on
+the same neighbourhood; induction applies the same zero-derivative and
+product-rule identities. Passing to the whole germs proves the formula for
+every original entire $a$ and $g$. This is genuine base-module linearity,
+not merely complex linearity of point coefficients.
+\end{proof}
+
+\begin{definition}[Actual finite relative normal Taylor coefficient map]
+\label{hir:relative-normal-actual-coefficient-map}
+\uses{hir:relative-normal-actual-iterated-derivative-germs,hir:relative-normal-actual-tangential-linearity,hir:relative-normal-entire-germ-retraction}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.relativeTaylorCoefficient,Hironaka.HironakaRelativeNormalTaylorCoefficients.relativeTaylorCoefficient_add,Hironaka.HironakaRelativeNormalTaylorCoefficients.relativeTaylorCoefficient_tangent_mul,Hironaka.HironakaRelativeNormalTaylorCoefficients.normalTaylorCoefficients}
+\leanok
+For $q\in\mathbf N$, index by all ordered normal coordinate words $w$ of length
+$r<q$. Define
+\[
+ T_q(g)_w=\frac1{r!}\,i^*(\partial_{w_1}\cdots\partial_{w_r}g)\in B.
+\]
+This is a genuine $B$-linear map from the entire original ring $R$ to the
+finite actual product of whole base germ rings. The ordered index may repeat
+monomials; its image retains the actual derivative symmetries. No independence
+of the redundant word family is asserted.
+\end{definition}
+
+\begin{lemma}[Actual recursive normal powers equal the complete ring ideal powers]
+\label{hir:relative-normal-actual-recursive-power-dictionary}
+\uses{hir:relative-normal-entire-plane-kernel,mc:normal-vanishing}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.mem_normalIdeal_pow_of_InNormalPow,Hironaka.HironakaRelativeNormalTaylorCoefficients.mem_normalIdeal_pow_iff_InNormalPow}
+\leanok
+An entire original germ belongs to $J^q$ exactly when an actual holomorphic
+representative has a recursive normal-power expression of degree $q$ near
+zero. The expression uses only genuine normal-coordinate factors, with
+holomorphic original coefficients; it is independent of representative.
+\end{lemma}
+\begin{proof}
+At degree zero both sides contain every holomorphic germ. In a recursive
+expression of degree $q+1$, the tangential coefficients are identically zero.
+Read its actual finite sum and products as entire germs, split tangential and
+normal coordinates, and use the already proved degree-$q$ inclusion. Each
+remaining term is a genuine normal coordinate in $J$ times a member of $J^q$,
+so the entire sum belongs to $J^{q+1}$.
+
+Conversely the actual recursive-expression germs form an ideal: zero and
+addition use the real recursive expressions, and multiplying by an arbitrary
+whole original holomorphic germ multiplies its actual coefficient functions.
+At degree one each actual normal coordinate has its genuine one-term
+recursive expression. For the induction step, $J^{q+1}=JJ^q$. A normal
+coordinate times any actual degree-$q$ expression has its literal next-degree
+recursive expression. Finite span induction over all genuine generators of
+$J$, with ideal closure under arbitrary entire multipliers, proves the whole
+product ideal inclusion. Eventual equality of original representatives
+preserves the actual recursive expression, completing both directions.
+\end{proof}
+
+\begin{lemma}[Vanishing actual normal derivatives produce a genuine normal-power expression]
+\label{hir:relative-normal-actual-normal-vanishing-taylor}
+\uses{mc:taylor-tail,hir:relative-normal-actual-recursive-power-dictionary}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.inNormalPow_of_normal_derivatives_zero}
+\leanok
+If all original normal coordinate derivatives of orders $<q$ of an actual
+holomorphic function vanish on the genuine coordinate plane near zero, then
+that original function has an actual recursive normal-power expression of
+degree $q$ near zero. Only normal derivatives are assumed.
+\end{lemma}
+\begin{proof}
+Induct on the number of normal coordinates, uniformly in $q$. With none,
+positive $q$ includes the empty derivative, so the original function is zero
+near zero and has the genuine zero expression; $q=0$ is holomorphicity.
+Otherwise let $z_j$ be the first normal coordinate and let $p_j$ kill it. The
+actual convergent Taylor theorem gives, on a genuine neighbourhood,
+\[
+ f(z)=\sum_{a<q}\frac{z_j^a}{a!}
+       (\partial_j^a f)(p_jz)+z_j^q h(p_jz,z_j)
+\]
+with a jointly holomorphic true remainder $h$. Every other normal basis
+vector is fixed by $p_j$. The true linear chain rule identifies its iterated
+derivatives of $(\partial_j^a f)\circ p_j$ with the corresponding derivatives
+of $f$ with $a$ copies of the direction $j$ appended. On the smaller plane
+with $z_j=0$ these vanish below order $q-a$, by the actual original hypothesis.
+The induction hypothesis gives a genuine degree-$(q-a)$ expression in the
+remaining normal coordinates for each coefficient. Allowing also $z_j$
+preserves that expression; multiplication by $z_j^a$ raises its true degree
+to $q$. The last term has its direct degree-$q$ expression because the
+remainder is genuinely holomorphic. Finite sum, actual constant scalars and
+the true original Taylor neighbourhood equality complete the result.
+\end{proof}
+
+\begin{theorem}[Exact entire normal-power kernel and genuine coefficient uniqueness]
+\label{hir:relative-normal-actual-whole-power-kernel}
+\uses{hir:relative-normal-actual-coefficient-map,hir:relative-normal-actual-recursive-power-dictionary,hir:relative-normal-actual-normal-vanishing-taylor}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.InNormalPow_dirDeriv,Hironaka.HironakaRelativeNormalTaylorCoefficients.InNormalPow_iterDeriv,Hironaka.HironakaRelativeNormalTaylorCoefficients.InNormalPow_vanishes_plane,Hironaka.HironakaRelativeNormalTaylorCoefficients.relativeTaylorCoefficient_mk_eq_zero_iff,Hironaka.HironakaRelativeNormalTaylorCoefficients.exists_normal_word,Hironaka.HironakaRelativeNormalTaylorCoefficients.normalTaylorCoefficients_eq_zero_of_mem,Hironaka.HironakaRelativeNormalTaylorCoefficients.mem_normalIdeal_pow_of_normalTaylorCoefficients_eq_zero,Hironaka.HironakaRelativeNormalTaylorCoefficients.ker_normalTaylorCoefficients,Hironaka.HironakaRelativeNormalTaylorCoefficients.normalTaylorCoefficients_eq_iff}
+\leanok
+The complete kernel of the actual $B$-linear map $T_q$ is exactly $J^q$,
+restricted to the genuine base scalar action. Consequently two entire
+original germs have the same actual relative normal Taylor coefficient tuple
+if and only if their difference belongs to the whole ideal $J^q$.
+\end{theorem}
+\begin{proof}
+A normal derivative lowers a recursive normal power by at most one. This
+follows directly from the actual product rule for each normal-coordinate
+factor and ideal closure: differentiating that factor removes at most one
+true normal factor, and differentiating its original holomorphic coefficient
+removes none. Iterate to see that derivatives of order $r<q$ still have at
+least one genuine normal factor and vanish on the actual plane. Thus every
+actual $T_q$ coefficient is the zero entire base germ.
+
+Conversely suppose the whole coefficient tuple is zero. Each original normal
+derivative restricted to the actual plane is therefore zero on a genuine
+base neighbourhood; its factorial is nonzero. There are only finitely many
+ordered words below $q$, so these neighbourhoods have a genuine common
+intersection. Pull it back by the actual tangential projection. Every nearby
+actual plane point is the inclusion of its true projection, so all those
+original derivatives vanish there simultaneously. Every finite normal-index
+list below $q$ is one of the actual indexed words. Apply the preceding true
+normal-only Taylor theorem, then the complete recursive-power dictionary,
+to obtain membership of the entire original germ in $J^q$. The equality-of-
+coefficients assertion now follows from real base linearity applied to the
+whole difference. It concerns the uniquely determined actual coefficient
+tuple; the redundant ordered-word scalar representation is not unique.
+\end{proof}
+
+\begin{theorem}[Actual all-degree whole quotient presentation by finite normal words]
+\label{hir:relative-normal-actual-all-degree-range-presentation}
+\uses{hir:relative-normal-actual-whole-power-kernel,hir:relative-normal-all-power-representatives}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.normalTaylorQuotientEquiv,Hironaka.HironakaRelativeNormalTaylorCoefficients.range_normalTaylorCoefficients_eq_span_words}
+\leanok
+For every $q$, the entire original quotient $R/J^q$ is genuinely isomorphic
+as a $B$-module to the actual image of $T_q$. That actual image is the finite
+$B$-span of the internally computed coefficient tuples of genuine normal
+words below degree $q$.
+\end{theorem}
+\begin{proof}
+The exact whole kernel and the true quotient/range theorem give the genuine
+module isomorphism. Take any entire original germ. The previous actual
+relative Hadamard producer gives a finite whole-base normal-word representative
+whose remainder belongs to the actual $J^q$. The exact kernel sends that
+entire remainder to zero. Genuine base linearity sends the representative to
+its actual finite base linear combination of the computed word tuples.
+Thus the entire range is contained in that actual finite span; the reverse
+inclusion follows because each genuine word tuple is the image of its actual
+whole word germ. This proves the exact range dictionary and finite module
+presentation internally, retaining all genuine relations of the ordered
+word family rather than declaring a redundant family to be a basis.
+\end{proof}
+
+\begin{theorem}[Whole original ideal columns and literal entire relative quotient]
+\label{hir:relative-normal-actual-whole-ideal-column-presentation}
+\uses{hir:relative-normal-actual-all-degree-range-presentation,hir:actual-every-original-ideal-finite-jet-columns}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.map_span_ideal_normalTaylorCoefficients_eq_word_columns,Hironaka.HironakaRelativeNormalTaylorCoefficients.exists_original_generators_normalTaylor_columns,Hironaka.HironakaRelativeNormalTaylorCoefficients.relativeIdealCoefficientQuotientMap,Hironaka.HironakaRelativeNormalTaylorCoefficients.ker_relativeIdealCoefficientQuotientMap,Hironaka.HironakaRelativeNormalTaylorCoefficients.relativeIdealTaylorQuotientEquiv}
+\leanok
+For every whole original ideal $I\subset R$, genuine Noetherianity internally
+produces original holomorphic generators, simultaneously for all $q$. The
+entire image of $I$ under $T_q$ is exactly the finite $B$-span of the actual
+normal-word-times-generator tuples. The literal whole quotient
+$R/(I+J^q)$ is genuinely isomorphic to the actual coefficient-image module
+modulo this entire actual ideal-image submodule.
+\end{theorem}
+\begin{proof}
+Choose genuine finite original whole generators using actual local
+Noetherianity and actual holomorphic representatives of those germs. Every
+entire ideal member is an actual finite generator combination with whole
+ambient coefficient germs. Apply the true all-degree normal-word
+representative producer to each such coefficient. Multiplying its genuine
+remainder in $J^q$ by the whole original generator keeps it in $J^q$, so the
+exact actual Taylor kernel discards it. Genuine base linearity identifies
+its remaining image with the finite actual normal-word-times-generator
+column span. Conversely every one of those actual columns comes from a
+literal original ideal member, proving the other inclusion. The genuine
+second quotient theorem with the proved complete kernel identifies the
+whole quotient by $I+J^q$ with precisely the coefficient range modulo that
+whole ideal image. The generator family is original and fixed for every
+$q$; neither an input matrix nor an ideal-image equality is supplied. The
+same original smooth-centre flattening internally transports these complete
+ideal/power/relative presentation dictionaries to actual centre stalks.
+No normal-flatness or free-quotient conclusion follows for arbitrary $I$.
+\end{proof}
+
+
+\begin{theorem}[Original regular centre produces actual whole-power Taylor kernels]
+\label{hir:relative-normal-original-centre-taylor-kernel}
+\uses{hir:relative-normal-actual-whole-power-kernel,hir:smooth-centre-actual-closed-centre-relative-consumer}
+\lean{Hironaka.HironakaRelativeNormalTaylorCoefficients.transportedNormalTaylorCoefficients,Hironaka.HironakaRelativeNormalTaylorCoefficients.ker_transportedNormalTaylorCoefficients,Hironaka.HironakaRelativeNormalTaylorCoefficients.exists_regular_relative_Taylor_kernel}
+\leanok
+Actual original regularity of a centre at a point internally supplies genuine
+nonlinear holomorphic flattening, its entire germ algebra isomorphism $E$ and
+the whole original vanishing stalk $K=E(J)$. Over the internally transported
+entire tangential algebra, the genuine maps $g\mapsto T_q(E^{-1}g)$ are
+base-linear and have complete kernel $K^q$, simultaneously for every $q$.
+\end{theorem}
+\begin{proof}
+Apply the preceding original-regularity producer. It constructs true local
+coordinates from the actual geometric regularity and proves equality of the
+ENTIRE original vanishing stalk with the image of the genuine normal ideal.
+Define the transported base action by $a\cdot g=E(\pi^*a)g$. Since the genuine
+inverse germ algebra isomorphism carries this actual product to
+$(\pi^*a)E^{-1}g$, the proved entire tangential linearity of $T_q$ gives base
+linearity of the displayed actual transported map. It vanishes precisely when
+$E^{-1}g\in J^q$, by the complete normal-power kernel. Surjectivity and
+injectivity of the actual whole germ isomorphism identify this with
+$g\in E(J^q)=E(J)^q=K^q$. The selected coordinates and complete stalk equality
+are produced from the original regularity; neither is an input. The same
+coordinates serve every degree. This transports genuine normal coefficients
+and whole powers, with no flatness assertion for any quotient by an additional
+original ideal.
+\end{proof}

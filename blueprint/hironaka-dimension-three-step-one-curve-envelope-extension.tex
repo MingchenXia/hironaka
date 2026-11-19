@@ -1,0 +1,139 @@
+\section{Actual dimension-three Step 1 curve envelope and special thresholds}
+
+All loci below are genuinely constructed from actual coherent ideals, actual smooth
+carriers and literal original SNC members. The main original dimension-three
+canonical consumer internally produces its companion domain and actual test
+history. A closed analytic dimension-one envelope is a geometric reduction;
+arbitrary closed subsets of that envelope are not inferred analytic. Finite
+lower-threshold gluing across this curve, whole General3 analyticity and global
+termination remain open.
+
+\begin{lemma}[Dimension of the actual maximal-order remainder]
+\label{hir:dimension-three-maximal-remainder-dimone}
+\uses{bcalc:codim-one-part-along,rem:dimension-monotone}
+\lean{Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.dimLE_cosupport_diff_codimOnePartAlong_of_dimLE_three}
+\leanok
+In a genuine closed smooth carrier of dimension at most three, for a coherent
+ideal of positive actual maximal order, the true cosupport minus its actual
+codimension-one part has dimension at most one.
+\end{lemma}
+\begin{proof}
+The bound concerns the true remainder itself; its separately proved analytic
+structure is used later in constructing the envelope. At each regular point
+of the remainder, take the actual local carrier dimension supplied by smoothness. If it is zero, monotonicity already bounds the remainder dimension
+by zero. Otherwise the genuine maximal-order tangent-direction theorem bounds
+the remainder's regular dimension strictly below one less than this actual
+carrier dimension. The true carrier bound three then gives dimension at most
+one, including variable-dimensional carrier components. No lower-dimension
+exception or thinness certificate is assumed.
+\end{proof}
+
+\begin{lemma}[Actual transverse boundary traces and unselected remainder]
+\label{hir:dimension-three-boundary-unselected-trace-dimone}
+\uses{bcalc:snc-simultaneous,hir:dimtwo-unselected-smooth-components,rem:thin-dimension-drop}
+\lean{Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.dimLE_inter_get_of_dimLE_three,Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.analytic_dimone_inter_remainingComponents}
+\leanok
+Every actual transverse SNC member trace on a smooth dimension-at-most-three
+carrier has dimension at most two. Its actual cosupport intersection with the
+union of genuine trace components not contained in cosupport is analytic of
+dimension at most one.
+\end{lemma}
+\begin{proof}
+Read the actual carrier, singleton member trace and indexed boundary member in
+the same genuine adapted coordinate chart. The member's coordinate lies among
+the carrier's free coordinates. If the trace retained this coordinate as free,
+a small actual perturbation in this coordinate would remain in the flattened
+trace but have nonzero member coordinate, contradicting its exact flattening
+identity. Thus the trace has at most one less genuine free coordinate than the
+carrier, hence at most two. Genuine locally finite smooth component subfamilies
+are closed and smooth. Analytic continuation on a trace component shows that
+an open piece of its intersection with cosupport would force the entire true
+component into cosupport, contradicting its actual unselected definition.
+This internally proves thinness. Genuine thin dimension drop gives dimension
+at most one. No component-absence certificate is an input.
+\end{proof}
+
+\begin{lemma}[Dimension preserved by actual finite analytic unions]
+\label{hir:dimension-three-actual-finite-analytic-union-dimone}
+\uses{rem:global-components,ana:regular-component,rem:dimension-monotone}
+\lean{Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.analytic_dimLE_union,Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.analytic_dimLE_finset_union}
+\leanok
+A finite union of actual analytic sets with dimension at most d is analytic and
+has dimension at most d.
+\end{lemma}
+\begin{proof}
+Finite products of actual generators give union analyticity. At a regular point
+of a binary union, take the closure of its genuine connected regular component.
+This is an actual analytic irreducible set and that point retains its real
+regular dimension on the closure. Intersecting the closure with each actual
+analytic member expresses it as a union of two genuine analytic subsets. True
+irreducibility therefore forces the entire closure into one original member.
+Actual dimension monotonicity bounds its regular dimension by that member's
+bound. Finite induction proves the indexed union, with the empty union having
+no regular points.
+\end{proof}
+
+\begin{theorem}[Internally constructed actual nonspecial curve envelope]
+\label{hir:dimension-three-actual-nonspecial-curve-envelope}
+\uses{hir:dimension-three-maximal-remainder-dimone,hir:dimension-three-boundary-unselected-trace-dimone,hir:dimension-three-actual-finite-analytic-union-dimone,hir:step-one-lower-domain}
+\lean{Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.exists_analytic_dimone_nonspecial_envelope}
+\leanok
+For a true well-formed maximal-order datum with carrier dimension at most three
+and a literal true test tower for its actual barMarked datum, there is a closed
+analytic set of dimension at most one containing every genuine nonspecial
+point of the actual current cosupport.
+\end{theorem}
+\begin{proof}
+The actual barMarked datum and literal true tower internally produce current
+well-formedness, coherence, positive transformed order, actual maximal order
+and current carrier dimension bound. Take the genuine cosupport remainder
+from the first lemma and, for each actual indexed original boundary member,
+the true unselected-component trace intersection from the second lemma.
+Their actual finite union with the remainder is the claimed analytic envelope.
+If the current level is zero, failure of true specialness puts the point in
+the codimension-one remainder. If the level is positive, the literal boundary
+count supplies an actual incident original member. Were its true connected
+trace component selected, analytic continuation and the exact memberInterLocus
+component dictionary would make the point special. Its nonspecialness forces
+membership in the actual unselected trace intersection. Empty/repeated indexed
+members and disconnected carriers are handled by these actual dictionaries.
+\end{proof}
+
+\begin{theorem}[Actual original General3 companion envelope]
+\label{hir:dimension-three-actual-general-companion-curve-envelope}
+\uses{hir:dimension-three-actual-nonspecial-curve-envelope,hir:general-three-actual-companion-domain-dictionary,hir:step-one-seq}
+\lean{Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.exists_actual_companion_dimone_nonspecial_envelope}
+\leanok
+Original domain3 and a literal canonical constructed invFamily3 tower at a
+positive-order current point internally produce an actual closed analytic
+curve envelope for nonspecial points of the true companion on its entire
+literal order-mask tail preimage.
+\end{theorem}
+\begin{proof}
+The real General3 canonical-tail producer internally supplies actual mask
+membership, true companion domain3/maximal order and actual canonical Seq
+Step1 restricted tail. Its genuine Step1 bridge gives the actual barMarked
+test tower. The preceding producer then applies to that actual companion,
+with all geometric inputs supplied internally by original actual data.
+\end{proof}
+
+\begin{theorem}[Actual original special and higher-level top thresholds]
+\label{hir:dimension-three-actual-general-special-top-thresholds}
+\uses{hir:general-three-actual-companion-domain-dictionary,hir:general-three-actual-companion-threshold-dictionary,hir:step-one-top-threshold-analytic,hir:step-one-seq}
+\lean{Hironaka.HironakaDimensionThreeStepOneCurveEnvelope.isComplexAnalyticSubset_general_three_top_threshold_on_actual_patch}
+\leanok
+Under the same original actual domain3 and canonical tower, every entire
+General3 threshold (q,inr(s,top)), for arbitrary actual natural s, is analytic
+on the entire literal order-mask preimage. No nonspecialness hypothesis is used.
+\end{theorem}
+\begin{proof}
+The exact whole General3/companion cosupport threshold dictionary rewrites the
+entire original set as the true companion Step1 top-lower-entry threshold.
+Actual companion domain and canonical-tail data internally supply its real
+barMarked true test tower and exact original/barMarked current cosupport
+bridge. The genuine top-threshold producer constructs analytic derivative
+cosupport, true codimension-one and actual member-intersection loci, together
+with actual indexed level superlevels, proving this entire Step1 set analytic
+for every s. This includes actual special and higher-level points without
+extending the nonspecial current-level theorem to arbitrary finite thresholds.
+\end{proof}

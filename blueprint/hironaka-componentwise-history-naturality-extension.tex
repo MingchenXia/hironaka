@@ -1,0 +1,129 @@
+\section{Biholomorphic naturality of the actual parallel histories}
+\label{sec:hironaka-componentwise-history-naturality}
+
+All histories in this section retain their absolute stage positions,
+including the actual empty blowups after local termination. A tower
+isomorphism includes the stage maps, the projection squares and the
+whole centres at every preceding stage.
+
+\begin{theorem}[Whole parallel centres transport under actual tower isomorphisms]
+\label{hir:componentwise-parallel-centre-biholomorphic-transport}
+\uses{hir:componentwise-canonical-centre-exact-trace,mc:tower-isomorphism-basic,mc:tower-isomorphism-transform,mc:tower-iso-opens,mc:contact-marked-canonical,hir:centre-function-seq,hir:open-restriction-marked}
+\lean{Hironaka.HironakaComponentwiseHistoryNaturality.pullbackOpen,Hironaka.HironakaComponentwiseHistoryNaturality.localMaximum_transport,Hironaka.HironakaComponentwiseHistoryNaturality.parallelCentre_transport}
+\leanok
+Let $\Phi:X'\simeq X$ be an actual biholomorphism, $M$ an original
+marked ideal in the domain of a proved invariant $R$, and
+$X=\coprod_iU_i$ a disjoint open partition. Let $U'_i$ be matching
+opens, so $U'_i=\Phi^{-1}(U_i)$. Suppose actual towers $T'$ and $T$
+are isomorphic over $\Phi$, with last map $\chi$, and that each
+actual restriction $T|_{U_i}$ is canonical for $M|_{U_i}$.
+Then the entire parallel centres satisfy
+\[
+ \chi^{-1}C_R(M,T,(U_i))
+   =C_R(\Phi^*M,T',(U'_i)).
+\]
+In particular the equality concerns every whole centre, including
+empty centres, with no centre correspondence assumed.
+\end{theorem}
+\begin{proof}
+The base and last-stage biholomorphisms restrict to the matching
+true opens. Restricting the actual tower isomorphism gives a
+tower isomorphism between $T'|_{U'_i}$ and $T|_{U_i}$ over the
+restricted base biholomorphism. Pullback along the literal
+commuting open-inclusion square identifies the original marked
+record on $U'_i$ with the pullback of the original one on $U_i$,
+including its ordered boundary.
+
+The genuine transformed cosupports are inverse images under
+the last restricted biholomorphism. Property (6) of $R$ equates
+their invariant values at corresponding cosupport points,
+since the target restricted prefix is canonical. Surjectivity
+therefore equates their entire maximum loci, even when empty.
+For a point on the source stage choose the unique partition
+member containing its target original image. The exact whole
+trace formula for each parallel union reduces membership in
+both sides to this same corresponding local maximum. This
+proves the claimed entire centre equality.
+\end{proof}
+
+\begin{theorem}[Actual parallel sequences are isomorphic independently of blowup choices]
+\label{hir:componentwise-parallel-history-choice-independence}
+\uses{hir:componentwise-parallel-centre-biholomorphic-transport,hir:componentwise-canonical-growing-history,mc:tower-isomorphism-basic,ana:blowups}
+\lean{Hironaka.HironakaComponentwiseHistoryNaturality.parallel_sequences_isTowerIso}
+\leanok
+For matching disjoint original open partitions under $\Phi$, let
+$s$ and $s'$ be any actual growing parallel whole-maximum histories
+of $M$ and $\Phi^*M$, with the restrictions of $s$ canonical on
+each member of its partition. Then for every absolute index $j$
+their actual recorded prefixes are isomorphic over $\Phi$.
+No isomorphism between stages is an input.
+\end{theorem}
+\begin{proof}
+At index zero both actual prefixes are reflexive, so $\Phi$
+itself gives their tower isomorphism. Suppose the preceding
+prefix isomorphism has last map $\chi$. The preceding theorem
+internally proves that the two actual next whole parallel
+centres correspond under $\chi$.
+
+Compose the target next blowup with $\chi^{-1}$. It is an
+actual blowup along the source next centre. The two genuine
+blowups along that same centre are biholomorphic over the
+source preceding stage by their universal properties: each
+factors uniquely through the other, and uniqueness makes
+the composites identities. The resulting next-stage
+biholomorphism commutes with the actual blowup maps. Together
+with the internally proved centre correspondence this extends
+the preceding tower isomorphism. Induction gives every prefix
+isomorphism, without deleting empty positions or identifying
+independently chosen blowups by definitional equality.
+\end{proof}
+
+\begin{theorem}[Original input internally gives biholomorphically corresponding locally terminal histories]
+\label{hir:original-componentwise-histories-biholomorphic}
+\uses{hir:componentwise-parallel-history-choice-independence,hir:original-componentwise-compact-locally-terminal-history,hir:componentwise-history-locally-finite-empty-tails}
+\lean{Hironaka.HironakaComponentwiseHistoryNaturality.exists_original_componentwise_histories_biholomorphic}
+\leanok
+Let $M$ be an original marked ideal of the canonical invariant's
+domain, with compact original cosupport on every connected
+ambient component, and let $\Phi:X'\simeq X$ be an actual
+biholomorphism. The original input internally constructs two
+actual growing global test histories on $M$ and $\Phi^*M$,
+using the literal original components $U_i$ and their actual
+preimages $\Phi^{-1}(U_i)$. All their corresponding restricted
+prefixes are canonical. Their actual parallel steps retain
+every empty position, and at every absolute index the whole
+recorded global prefixes are isomorphic over $\Phi$.
+On each corresponding pair of component opens, both actual
+restrictions are resolutions after one common local terminal
+time. Both sequences have locally finite actual centre images.
+\end{theorem}
+\begin{proof}
+Construct the first actual history from the original componentwise
+compact input. Pull back the literal disjoint component cover
+under $\Phi$; it is a disjoint open cover of $X'$. The original
+domain condition transports under $\Phi$, so the parallel
+construction internally supplies a second actual test history
+on that pulled-back original record and cover. Its blowup
+choices may be independent of those of the first history.
+Apply the preceding choice-independence theorem to these
+two actual constructed sequences. This internally gives all
+whole-prefix tower isomorphisms over $\Phi$.
+
+The first history resolves on an original component after
+its internally obtained terminal time. Restrict the actual
+prefix isomorphism at every later index to the corresponding
+component opens. The literal original pullback square and
+the transformed-cosupport dictionary transport the genuine
+test and empty-cosupport conditions, so the second restricted
+history resolves at those same indices. Finally apply the
+proved local-terminal-history criterion to the second
+sequence to obtain local finiteness of its actual centre
+images; the first sequence already has that property.
+\end{proof}
+
+\begin{remark}
+This is naturality under ambient biholomorphisms for the constructed
+componentwise histories. It does not assert naturality under an
+arbitrary smooth submersion, a common finite global terminal time,
+or an unrestricted connected noncompact elementary scheduler.
+\end{remark}

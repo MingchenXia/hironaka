@@ -1,0 +1,91 @@
+\section{The actual positive lower record after an interior empty step}
+
+The initial marked ideal, original members and complete original head remain
+fixed.  This chapter computes the actual lower marked ideal at a positive
+Step One level after insertion of an interior identity empty blowup.  It uses
+actual full records, not an assumed equality of lower values.
+
+\begin{lemma}[Future empty insertion in a member restriction]
+\label{hir:interior-future-empty-member-restriction}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorPositiveLower.future_memberRestrict_insertEmpty}
+\leanok
+\uses{hir:positive-member-empty-filter,hir:original-interior-empty-geometric-dictionary}
+Let $J$ be any marked ideal, $E_0$ its specified original-member list,
+$p$ a point, and $j\leq |J.E|$.  Write
+\[
+ c=\bigl|(J.E.\operatorname{take}(j)).\operatorname{filter}
+       (W\notin E_0\text{ or }p\notin W)\bigr|.
+\]
+Inserting an empty future member at $j$ in $J$, while leaving $E_0$ unchanged,
+commutes with the actual member restriction through $p$, with insertion
+index $c$ in the restricted boundary list.
+\end{lemma}
+\begin{proof}
+The empty member never passes through $p$.  It is therefore never among the
+selected members, even if $E_0$ already contains an empty member.  Insertion
+changes neither the carrier intersection nor the coefficient ideal nor the
+mark of the member restriction.  Its actual boundary is the original whole
+boundary filtered by failure to be an original member through $p$.
+The inserted empty member is retained by this filter.  Induction on the
+first $j$ boundary elements shows that filtering an insertion of a retained
+element inserts it after exactly the retained elements of that prefix.
+This is precisely $c$, and proves equality of all literal marked fields.
+\end{proof}
+
+\begin{definition}[The actual lower index of the interior future member]
+\label{hir:original-interior-actual-positive-lower-index}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorPositiveLower.interiorPositiveLowerIndex,Hironaka.HironakaOriginalInteriorPositiveLower.interiorPositiveLowerIndex_le_boundary}
+\leanok
+\uses{hir:interior-future-empty-member-restriction}
+For original histories $H:X\leftarrow A$ and $S:A\leftarrow Y$, set
+$J=\overline M_{HS}$, $E_0=\operatorname{origMembers}(M,HS)$,
+$j=|M.E|+|H|$ and let $c$ be the preceding filtered-prefix cardinal.
+Then $c$ is at most the length of the actual boundary of the original
+positive lower marked ideal, at every positive Step One level.
+\end{definition}
+\begin{proof}
+The actual positive lower marked ideal is the pullback of the member
+restriction to the actual member mask.  Its boundary is the filtered whole
+boundary $J.E$, then mapped by the mask inclusion preimage.  Mapping retains
+its length.  The filtered first $j$ elements form a sublist of this whole
+filtered boundary, so its length $c$ is bounded by the actual lower boundary
+length.  This argument does not require zero lower nonmonomial order or a
+bound inside an empty original prefix.
+\end{proof}
+
+\begin{theorem}[The genuine original positive lower record]
+\label{hir:original-interior-actual-positive-lower-record}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalInteriorPositiveLower.original_positive_lower_record}
+\leanok
+\uses{hir:original-interior-empty-masks,hir:original-interior-empty-step-one-dictionary,hir:original-interior-actual-positive-lower-index}
+Let $M$ be originally well formed and $H$ an actual test tower of
+$\overline M$.  For every nonempty actual tail $S$, every final point $p$,
+and every positive Step One level $s+1$, the actual masked lower marked
+ideal for $M$ at $H\epsilon S,p$ equals the actual lower marked ideal for
+$M$ at $HS,p$ with an empty boundary member inserted at the computed
+index $c$.  Equality is heterogeneous only because the equal mask opens
+are kept as their respective literal carrier types.  All fields agree
+under the equality of those actual masks.
+\end{theorem}
+\begin{proof}
+The nonempty-tail whole-record producer gives
+$\overline M_{H\epsilon S}=\operatorname{insertEmpty}_j(\overline M_{HS})$.
+The original-member producer supplies the unchanged entire $E_0$ and
+$j\leq|J.E|$ follows from the actual transformed boundary length.
+Apply the future member-restriction lemma to these actual records.  The
+member mask producer gives equality of the two literal open masks.
+Pullback of an empty insertion maps its empty member to the empty set and
+commutes with insertion at the same computed index.  Substituting the mask
+equality therefore proves the stated actual masked lower-record equality.
+The masked positive lower definition is exactly this member-mask pullback.
+\end{proof}
+
+The boundary index is computed from the actual retained prefix; it may extend
+past the empty original prefix.  No assertion of a common recursive value
+shift, equality of lower values, or global order/scheduling follows here.
+The zero-contact lower carrier still needs its own local closedness comparison
+on the chosen contact open.  Actual restricted lower tail histories and full
+higher recursive invariant comparisons remain open.

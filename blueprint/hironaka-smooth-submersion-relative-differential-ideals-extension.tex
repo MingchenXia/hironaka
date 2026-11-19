@@ -1,0 +1,203 @@
+\section{Actual tangent differential ideals along the entire original carrier under submersions}
+
+\begin{lemma}[Actual fibre-first projection and every coordinate direction]
+\label{hir:submersion-relative-differential-actual-linear-projection}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.actualTargetProjectionLinear,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.actualTargetProjectionLinear_apply,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.actualTargetIndex,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.rotateBlocks_target_eq,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.actualTargetProjectionLinear_single_target,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.actualTargetProjectionLinear_single_fibre,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.exists_targetIndex_of_fibre_le}
+\uses{hir:submersion-adapted-fibre-first-rotation}
+\leanok
+The genuine existing fibre-first split internally gives a continuous complex
+linear map $P:\mathbb C^{n+t}\to\mathbb C^n$, whose original whole coordinate
+function is precisely the actual adaptedTargetProjection. For EVERY real
+source coordinate direction, $P(e_i)=0$ for $i<t$, and $P(e_{t+j})=e_j$
+for EVERY original target index $j$. No desired matrix or direction dictionary
+is supplied. The formulas include empty coordinate blocks.
+\end{lemma}
+\begin{proof}
+Take the second projection of the actual continuous linear fibreFirstSplit,
+which was constructed from the real whole coordinate permutation and direct
+sum splitting. Its explicit original coordinate identity says
+$(Pw)_j=w_{\operatorname{rotate}(\operatorname{castAdd}(j))}$, and the true
+permutation producer identifies this original index with $t+j$. Apply it to
+each actual standard coordinate vector. A fibre index $i<t$ cannot equal
+$t+j$, so every coordinate is zero. At $i=t+j$ the coordinate is the actual
+Kronecker delta at $j$. Coordinate extensionality gives the WHOLE linear
+identities, rather than a claim restricted to chosen nonzero directions.
+\end{proof}
+
+\begin{lemma}[Genuine common chart inverse produces the actual entire differential chain rule]
+\label{hir:submersion-relative-differential-actual-inverse-chain-rule}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.adaptedCoordinates_inverse_projection,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.adaptedCoordinates_flatMap_projection,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.adaptedCoordinates_fderiv_original_comp,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.adaptedCoordinates_flatPartial_target,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.adaptedCoordinates_flatPartial_fibre,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.adaptedCoordinates_flatCoord_target}
+\uses{hir:submersion-relative-differential-actual-linear-projection,hir:submersion-adapted-whole-original-centre,hir:order-along-flat,bex:hadamard,mc:derivative-along-generators}
+\leanok
+ONLY an actual submersion at a real source point, ANY genuine original centred
+target holomorphic coordinates, and an original holomorphic function internally
+produce real source coordinates on which its ENTIRE pulled function is the
+original flattened function composed with $P$. The entire differential on the
+true open chart is $D(F\circ\phi^{-1})(Pw)\circ P$; in particular all actual
+fibre partials vanish and every lifted target partial is the true pulled
+original target partial. No inverse/function/differential comparison
+certificate is an original caller input.
+\end{lemma}
+\begin{proof}
+Use the genuine existing internally constructed fibre-first adapted chart,
+whose whole forward coordinate square holds on its actual flat domain.
+Every point of its actual target has a genuine flat inverse source point,
+whose coordinates are that whole point. Apply the forward coordinate square
+and both true target inverse identities to obtain the WHOLE inverse projection
+square on its entire actual target. Compose that square with the
+original function $F$. Around every actual point of this open target, the
+genuine target-chart inverse and the given holomorphic function are
+holomorphic, so the entire equality holds on a real neighbourhood there.
+Derivative congruence for equal actual germs and the ordinary complex chain
+rule identify its derivative with the derivative of the true flattened target
+function composed with the actual continuous linear $P$. Apply this equality
+to every source coordinate direction and use node one. The actual
+flatPartial definition is exactly this differential evaluated on that
+coordinate direction, by the proved field/flattening identity. Consequently
+the fibre rows are genuinely zero and the target rows are their actual pulled
+functions, at EVERY true source point of the common neighbourhood, not merely
+at a supplied sample point.
+\end{proof}
+
+\begin{lemma}[Original smooth carrier supplies the same actual finite tangent generator rows]
+\label{hir:submersion-relative-differential-original-finite-rows}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.holomorphicAt_derivFamilyAlong,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.target_derivFamilyAlong_in_source_span,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.source_derivFamilyAlong_in_target_span,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.derivFamilyAlong_pullback_spans_iff}
+\uses{hir:submersion-relative-differential-actual-inverse-chain-rule,hir:submersion-adapted-whole-original-centre,mc:derivative-along-generators,mc:derivative-along-coherent,trace:actual-finite-germ-ideal-pullback-generation}
+\leanok
+For ANY genuine original centred target chart, actual original finite
+functions holomorphic at the real image point, and genuine submersion, the
+ENTIRE generated stalk span of their pulled target derivative family equals
+the span of the true source derivative family in the internally constructed
+fibre-first chart of tangent dimension $t+k$. EVERY target normal and tangent
+row has its actual source row, and EVERY source row is a pulled target row or
+a genuine zero fibre row. These are actual function calculations, with no
+caller span or derivative equality certificate. In the whole original-ideal
+consumer of node four, original coherence and closed smoothness internally
+choose these genuine target charts and finite functions; no presentation or
+source frame is a primitive input to that consumer.
+\end{lemma}
+\begin{proof}
+At an actual point over $N$, original smoothness internally chooses its true
+flattening coordinates of carrier dimension $k$. Original coherence internally
+chooses finite original functions on one true neighbourhood; intersect that
+neighbourhood with the target flat chart. The actual fibre-first chart producer
+then gives source fibre dimension $t$, a true preimage carrier cut by the last
+$n-k$ coordinates, and carrier dimension $t+k$. Restrict its actual open to
+the preimage of the chosen target presentation open. Whole coherent pullback
+presents the original pulled ideal by the same actual functions composed
+with $f$; no prescribed source frame is assumed.
+
+Apply the actual flat derivative-along generator theorem to both real
+carriers and their internally obtained true presentations. On the target it
+uses the original functions, the actual normal coordinates $j\ge k$ and
+the true tangential partials $j<k$. On the source it uses the pulled functions,
+normal coordinates $t+j$ with $j\ge k$, fibre tangential partials $i<t$ and
+lifted target tangential partials $t+j$ with $j<k$. The actual original
+coordinate square identifies the normal rows, and node two identifies every
+derivative row; the additional fibre rows are zero. Every target row has its
+actual source row and every source row is a target pullback or an actual zero
+row. Finite span transitivity and the actual zero membership prove equality
+of the ENTIRE generated stalks. Empty generator families, zero tangent/fibre
+blocks and repeated functions remain literal. No arbitrary source tangent
+field is omitted: the original generator theorem proves that the whole
+intrinsic tangent-field derivative ideal is exactly this finite family.
+\end{proof}
+
+\begin{theorem}[Entire original tangent derivative ideal commutes with genuine smooth pullback]
+\label{hir:submersion-relative-differential-whole-one-step}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_derivIdealAlong_add,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_derivIdealAlong}
+\uses{hir:submersion-relative-differential-original-finite-rows,mc:derivative-along-coherent,mc:derivative-along-generators,hir:submersion-relative-regular-geometry,hir:submersion-adapted-whole-original-centre,hir:submersion-monomial-dimension,trace:actual-finite-germ-ideal-pullback-generation}
+\leanok
+ONLY original coherent $I$, original closed smooth $N$ and genuine arbitrary
+possibly non-surjective submersion $f$ internally prove the ENTIRE original
+identity
+$f^*\mathcal D_N(I)=\mathcal D_{f^{-1}N}(f^*I)$.
+There is no caller output certificate, positivity, compactness or ambient
+ideal inclusion assumption.
+\end{theorem}
+\begin{proof}
+For every actual source point over $N$, actual submersion geometry internally
+provides $m=n+t$ and node three identifies the entire stalk ideals, using the
+same genuine original finite functions. Target and source derivative ideals
+are coherent from the actual original carrier geometry. Use the genuine old derivative-family presentation in each actual flat
+chart. Compose every finite target span relation with the actual holomorphic
+map, and use every real target row membership for the reverse inclusion.
+This identifies the actual WHOLE pulled derivative ideal with the pulled
+target-family span. Node three and the true source family presentation then
+give membership equivalence for EVERY source function; the actual span
+definitions themselves exclude nonholomorphic members.
+
+Off $f^{-1}N$, the source derivative-along ideal is the entire holomorphic
+unit ideal, because it contains the whole vanishing ideal of the closed
+carrier. The target derivative-along ideal contains the genuine unit function
+at the true image point for the same reason. Its actual pullback therefore
+contains every source holomorphic function and excludes every nonholomorphic
+one. This proves the entire membership equivalence there as well. Whole
+GermIdeal extensionality proves the identity. If the source is empty the
+same extensionality is vacuous and no false dimension inequality is asserted.
+All original ambient/carrier dimension-zero cases are legitimate; neither a
+centre cosupport nor a canonical driver has been claimed.
+\end{proof}
+
+\begin{theorem}[Every actual iterated derivative and literal tangent ideal is transported]
+\label{hir:submersion-relative-differential-whole-iterations}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_iterDerivIdealAlong,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_tangentIdealAlong}
+\uses{hir:submersion-relative-differential-whole-one-step,mc:derivative-along-coherent,hir:along-calculus}
+\leanok
+Under only the same original inputs, EVERY natural iterate has the true
+ENTIRE pullback identity, and therefore the literal tangent ideal with
+index $\mu-1$ does too for EVERY natural $\mu$. No finite-order witness or
+iteration/result certificate is supplied.
+\end{theorem}
+\begin{proof}
+Induct on the actual natural iteration index. At zero the statement is the
+literal original ideal pullback. At the successor, actual coherence of EVERY
+original iterate follows from the closed original carrier and coherence of
+$I$. Apply the whole one-step identity to that real iterate, then use the
+induction equality inside the literal next derivative-along operation. This
+produces every whole iterate internally. The tangent ideal is literally the
+iterate at the natural truncated difference $\mu-1$; substitute that actual
+index, including $\mu=0$ where the difference is zero. There is no infinity
+or stabilization claim hidden in this natural induction.
+\end{proof}
+
+\begin{theorem}[Actual relative homogenization and entire coefficient records at every mark]
+\label{hir:submersion-relative-differential-whole-homogenized-coefficient}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_homogenizedIdealAlong,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_homMarkedAlong,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.pullback_coeffMarkedAlong,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.homMarkedAlong_cosupp_preimage,Hironaka.HironakaSmoothSubmersionRelativeDifferentialIdeals.coeffMarkedAlong_cosupp_preimage}
+\uses{hir:submersion-relative-differential-whole-iterations,hir:along-calculus,mc:homogenized-along,mc:homogenized-along-basic,mc:marked-finite-sum,hir:crossdim-entire-product-pullback,hir:crossdim-entire-unit-power-pullback,hir:crossdim-entire-finite-sum-pullback,hir:crossdim-literal-marked-pullback,hir:smooth-relative-whole-cosupport}
+\leanok
+ONLY an original coherent marked ideal on a closed smooth carrier, ANY
+natural mark $d$ and actual submersion internally produce ENTIRE relative
+homogenized ideal/marked record and relative coefficient marked record pullback
+identities, and their true whole relative cosupport preimages. ALL N/E/I/d
+fields use the original literal definitions. No higher constructed invariant
+or canonical driver is assumed as a substitute for these identities.
+\end{theorem}
+\begin{proof}
+Unfold the genuine relative homogenized ideal: its finitely many summands
+are the true iterated derivative ideals multiplied by actual powers of the
+literal tangent ideal. Their coherence is internally produced from the
+original coherent $I$ and closed smooth $N$. Node five identifies every true
+iterate and tangent ideal. Actual whole product, power and finite-sum
+pullback identities therefore identify the entire homogenized ideal, including
+all original source multipliers. Marked extensionality preserves the real
+carrier preimage, the complete ordered boundary list-map, the whole actual
+ideal and the unchanged mark.
+
+The coefficient marked ideal is the literal finite marked sum of derivative
+marked ideals with marks $d-i$ for $i<d$. Its old actual definition ALWAYS
+retains N/E from its term zero, including $d=0$, and has actual ideal powers
+whose exponents are its literal common-mark construction. Node five and genuine whole powers/finite
+sums identify that ENTIRE ideal; numerical exponents and marking are literally
+the same. Four-field extensionality gives the whole record identity. Genuine
+relative whole-order/cosupport pullback applies to these original coherent
+whole ideals and their actual carriers, giving the whole preimage sets.
+At $d=0$ its original sum ideal is the genuine empty finite-span ideal, its
+mark is the literal empty product $1$, and its N/E fields still belong to term
+zero; actual empty finite-span pullback and the unchanged empty product give
+the same full record identity. Homogenization likewise works for every natural
+index, including its actual empty sum at zero. These are actual analytic calculus producers.
+Arbitrary unrelated-ideal centre admissibility, higher constructed invariant/
+old canonical driver identification, noncompact termination, whole G3/G8 and
+formal/native/publication remain subsequent work.
+\end{proof}

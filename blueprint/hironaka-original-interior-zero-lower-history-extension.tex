@@ -1,0 +1,181 @@
+\section{The original zero-contact lower record across an interior empty step}
+
+The initial marked ideal and its actual chosen tangent direction are retained.
+The argument is an explicit adaptation of the Step One contact construction
+and empty-history functoriality: the contact zero set is closed only on the
+chosen tangent open, so it is first replaced there by a genuinely closed
+representative.  No contact, lower-record, tail or value comparison is an
+input.  An absent tangent choice is handled by its actual empty open.
+
+\begin{lemma}[Closed carriers across an interior identity empty blowup]
+\label{hir:original-interior-empty-closed-strict-carrier}
+\lean{Hironaka.HironakaOriginalInteriorZeroLowerHistory.strictAlong_closed_interior_empty}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-empty-history,bcalc:strict-submanifold}
+For every closed subset $B\subseteq X$ and actual histories $H,S$,
+the entire strict transforms of $B$ along $H\epsilon S$ and $HS$ are equal,
+where $\epsilon$ is the genuine identity empty blowup.  No testness of either
+history is required.
+\end{lemma}
+\begin{proof}
+The strict transform $B_H$ is closed: at the empty history this is the
+hypothesis, and at every last blowup step the strict transform is a closure.
+The identity empty blowup takes $B_H$ to the closure of $B_H$, hence to $B_H$
+itself.  Strict transformation along a concatenation is transformation first
+along its head and then along its tail, by induction on the actual last steps
+of that tail.  Applying the same tail $S$ to these equal carriers proves the
+claim, including an empty $H$ or $S$.
+\end{proof}
+
+\begin{lemma}[A closed representative of the actual chosen contact carrier]
+\label{hir:original-chosen-contact-closed-representative}
+\lean{Hironaka.HironakaOriginalInteriorZeroLowerHistory.chosen_contact_closed_representative}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:step-one-lower-domain,mc:tangent-direction-along,mc:contact-empty-prefix}
+Let $M$ be well formed and $x\in X$.  Put $(U,w)=\operatorname{tangentChoice}(M,x)$
+and $A=M.N\cap V(w)$.  The actual set $U$ is open, and there exists a closed
+$B\subseteq X$ such that $A\cap U=B\cap U$.
+\end{lemma}
+\begin{proof}
+If the original tangent-direction existence condition fails, the actual
+choice is $(\varnothing,0)$; take $B=\varnothing$.  The open is empty and
+both intersections are empty.  Otherwise the choice specification gives
+a tangent direction on its actual open $U$.  Its derivative-ideal membership
+and coherence of the original ideal imply holomorphicity of $w$ at every
+point of $U$, hence continuity there.  Set
+$B=M.N\cap\overline{V(w)\cap U}$, which is closed because $M.N$ is closed.
+If $z\in A\cap U$, then $z\in B\cap U$ by inclusion into the closure.
+Conversely, if $z\in B\cap U$ and $w(z)\ne0$, continuity at $z$ supplies
+a neighbourhood on which $w$ is nonzero.  Since
+$z\in\overline{V(w)\cap U}$, that neighbourhood meets $V(w)\cap U$, a
+contradiction.  Thus $w(z)=0$ and $z\in A\cap U$.
+\end{proof}
+
+\begin{theorem}[The whole actual masked contact carrier]
+\label{hir:original-interior-zero-contact-carrier}
+\lean{Hironaka.HironakaOriginalInteriorZeroLowerHistory.masked_contact_carrier_dictionary}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-chosen-contact-closed-representative,hir:original-interior-empty-closed-strict-carrier,hir:original-interior-empty-masks,mc:strict-along-local}
+Let $M$ be originally well formed, $H,S$ actual histories and $p$ a final
+point.  The strict transforms of the actual original chosen contact carrier
+in the two histories $HS$ and $H\epsilon S$ have equal traces on the actual
+zero-contact mask for $HS,p$.  The tangent direction in the second history
+is the same literal chosen direction.
+\end{theorem}
+\begin{proof}
+The composite projections of the two histories are equal, so their
+projections of $p$ and hence their original tangent-choice input agree.
+Choose the closed representative $B$ supplied by the preceding lemma for
+this actual input.  Strict transforms are local over an open subset:
+sets agreeing on $U$ have transforms agreeing over the projection preimage
+of $U$.  To see this along a tower, induct on its actual last steps.  At
+one step, intersecting a closure with the open projection preimage equals
+the closure relative to that open; the agreed preimages outside the same
+centre therefore give agreed strict transforms there.  The induction gives
+the whole-tower statement.  Both contact transforms thus agree, over this
+same projection preimage, with their respective transforms of $B$.
+Those entire transforms of $B$ are equal by the closed-carrier lemma.
+Every point of the actual mask belongs to its defining set, since the mask
+is its interior; its projection therefore lies in $U$.  Restricting the
+preceding equality to the entire actual mask proves equality of its contact
+carrier traces.  This also covers the absent-choice branch, whose actual
+mask has no points.
+\end{proof}
+
+\begin{theorem}[The entire original zero-contact lower marked record]
+\label{hir:original-interior-actual-zero-lower-record}
+\lean{Hironaka.HironakaOriginalInteriorZeroLowerHistory.zeroLowerIndex_le_boundary,Hironaka.HironakaOriginalInteriorZeroLowerHistory.original_zero_lower_record}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-zero-contact-carrier,hir:original-interior-empty-geometric-dictionary,hir:original-interior-empty-masks,hir:step-one-value-masked}
+Let $M$ be originally well formed, $H$ an actual test history of $\overline M$,
+$S$ a nonempty actual tail, and $p$ any final point.  Put
+$j=|M.E|+|H|$.  The actual original masked lower marked ideal at level zero
+for $H\epsilon S,p$ equals that for $HS,p$ with one empty boundary entry
+inserted at $j$.  The index $j$ is bounded by the actual whole lower boundary.
+Equality is heterogeneous only because the two equal actual masks remain
+their respective literal carrier types.
+\end{theorem}
+\begin{proof}
+The nonempty-tail producer supplies the entire actual record
+\[
+ \overline M_{H\epsilon S}=\operatorname{insertEmpty}_j(\overline M_{HS}).
+\]
+The coefficient construction along the carrier depends on its carrier,
+ideal and mark and retains the entire boundary, so it commutes with this
+future empty insertion.  The zero lower record changes its carrier to the
+strict transform of the chosen original contact carrier.  The preceding
+theorem identifies the full trace of that carrier on the actual old mask.
+The original mask dictionary identifies the two whole actual mask opens.
+Pullback along their inclusions therefore gives equal carrier, coefficient
+ideal and mark.  Its boundary is the full transformed boundary mapped by
+preimage; mapping commutes with list insertion and takes an empty set to
+an empty set.  This proves equality of all four marked fields with the
+stated insertion.  The old lower boundary has length
+$|M.E|+|H|+|S|$, because coefficient formation retains the full boundary
+and mapping by inclusion preserves length.  It therefore bounds $j$.
+\end{proof}
+
+\begin{theorem}[The actual current-level short splits at every level]
+\label{hir:original-interior-selected-all-level-short-splits}
+\lean{Hironaka.HironakaOriginalInteriorZeroLowerHistory.actual_short_all_level_splits}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-empty-regime-run,hir:original-interior-empty-step-one-dictionary,hir:tower-split}
+Let $M,H,S,y$ be as above, with $S$ any tail.  Set
+$\ell=\operatorname{level}(M,HS,y)$ and
+$r=\operatorname{run}_{M,\ell}(HS,y)$, and suppose $r<|S|$.
+The actual current-level run in $H\epsilon S$ is precisely $r$.
+Writing $D=\operatorname{stage}(S,r)$, $P=\operatorname{head}(S,r)$ and
+$Q=\operatorname{tail}(S,r)$, the two entire actual split records are
+$(D,HP,Q)$ and $(D,H\epsilon P,Q)$.
+\end{theorem}
+\begin{proof}
+The actual level dictionary identifies the new current level with $\ell$.
+The original run formula uses its first branch because $r<|S|$, and gives
+the same $r$.  Since $r\leq|S|$, the actual concatenation split is obtained
+by removing precisely the last $r$ steps from $S$, leaving head $HP$ and
+tail $Q$.  Induction on those last steps supplies the full split record,
+not merely the lengths.  Applying the same computation to the actual
+prefix $H\epsilon$ gives head $H\epsilon P$, with exactly the same stage
+$D$ and tail $Q$.  No positivity of $\ell$ is required.
+\end{proof}
+
+\begin{theorem}[The genuine selected short zero-contact lower diagram]
+\label{hir:original-interior-selected-zero-short-lower-diagram}
+\lean{Hironaka.HironakaOriginalInteriorZeroLowerHistory.actual_short_zero_lower_diagram}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-interior-selected-all-level-short-splits,hir:original-interior-actual-zero-lower-record,hir:original-interior-empty-masks,bcalc:tower-restrict}
+Let $M$ be originally well formed, $H$ an actual test history of $\overline M$,
+$S$ an actual tail and $y$ an actual final point with
+$\operatorname{level}(M,HS,y)=0$.  Assume that its actual zero-level run
+$r$ satisfies $r<|S|$.  Put $P=\operatorname{head}(S,r)$,
+$Q=\operatorname{tail}(S,r)$, $p=Q.\operatorname{proj}(y)$ and
+$j=|M.E|+|H|$.  The new actual current-level run is $r$, its selected
+zero lower record is the old actual selected zero lower record with an
+empty boundary entry inserted at $j$, and $j$ is a valid actual lower
+boundary index.  The two whole actual restricted tails of the common
+literal $Q$ are equal under equality of the respective actual masks.
+\end{theorem}
+\begin{proof}
+The preceding all-level short split theorem applies at the actual current
+level zero.  It supplies both whole splits and the actual shared stage and
+tail $Q$.  The selected prefix $P$ has length $|S|-r>0$, derived directly
+from the given strict inequality.  Thus the original zero lower record
+theorem applies to $H,P,p$ and supplies its full record comparison and the
+valid whole-boundary index.  The original all-level mask dictionary at
+level zero identifies the two actual masks; replacing one mask by that
+proved equal open makes the entire restricted $Q$ records reflexively
+equal, including all their centres, blowup data and projections.
+No contact, selected-prefix nonemptiness, lower-index, lower-record or
+restricted-tail comparison is supplied by the caller.
+\end{proof}
+
+These statements compare the actual zero-contact carrier, whole lower
+records and whole restricted tails in the short-run branch.  They do not
+assert transport of complete higher recursive invariant values, a global
+maximum, noncompact scheduling or completion of the G3 parent.

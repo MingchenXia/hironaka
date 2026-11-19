@@ -1,0 +1,77 @@
+\section{Intrinsic complex morphisms have genuine local holomorphic lifts}
+
+The input throughout is a genuine locally ringed morphism between the
+constructed quotient-subspace models which commutes with the original
+complex-point structural maps. No ambient extension is supplied.
+
+\begin{theorem}[Local original representatives of intrinsic scalar pullbacks]
+\label{hir:actual-analytic-subspace-intrinsic-scalar-lift}
+\uses{hir:actual-analytic-subspace-local-ambient-section,hir:actual-analytic-subspace-scalar-map-point-values}
+\lean{Hironaka.HironakaActualAnalyticSubspaceIntrinsicLifting.actualSubspaceMap_local_scalar_lift}
+\leanok
+Let $F:(C,\mathcal O_C)\to(D,\mathcal O_D)$ be such a morphism, where
+$C\subset M$ and $D\subset N$ are actual subsets of complex manifolds.
+For every original global holomorphic section $a$ of the ambient target
+and every $x\in C$, there are an actual ambient neighbourhood $O$ of $x$
+and an original holomorphic section $t$ on $O$ such that
+$t(y)=a(F(y))$ for every $y\in C\cap O$.
+\end{theorem}
+\begin{proof}
+Pull back $a$ by the composite of $F$ with the genuine target inclusion.
+This is a section of the genuine source quotient sheaf on the actual
+preimage of the whole target, which contains $x$. The whole local ambient
+representative theorem constructs $O$ and $t$, retaining equality of the
+entire germs at every point of $C\cap O$. Apply genuine residue evaluation
+to that equality. Actual stalk-map composition and the actual germ formula
+identify its right side with the pullback under $F$ of the target inclusion
+germ of $a$. Complex-point compatibility gives intrinsic evaluation
+naturality. The original target inclusion numerator formula identifies the
+remaining evaluation with $a(F(y))$. The original source numerator formula
+identifies the other side with $t(y)$, proving the whole-neighbourhood
+pointwise identity.
+\end{proof}
+
+\begin{theorem}[Actual local ambient holomorphic lift and whole intrinsic morphism square]
+\label{hir:actual-analytic-subspace-intrinsic-local-holomorphic-lift}
+\uses{hir:actual-analytic-subspace-intrinsic-scalar-lift,hir:actual-analytic-subspace-intrinsic-map-faithful,hir:actual-analytic-subspace-open-restriction-iso,hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaActualAnalyticSubspaceIntrinsicLifting.exists_actualSubspaceMap_local_holomorphic_lift}
+\leanok
+Let $C\subset M$, let $V\subset\mathbf C^m$ be an actual open and
+$D\subset V$. Let $F$ be any genuine complex-point-compatible locally
+ringed morphism from the actual model of $C$ to the actual model of $D$.
+For every $x\in C$ there exist an actual ambient open neighbourhood
+$O\subset M$ of $x$ and a genuine holomorphic map $f:O\to V$, carrying
+$C\cap O$ into $D$, such that the entire induced quotient-sheaf morphism
+is exactly the restriction of $F$ by the actual open-subspace inclusion.
+In particular the equality holds for the whole structure-sheaf maps,
+not just their continuous base maps or residue values.
+\end{theorem}
+\begin{proof}
+Each of the finitely many standard coordinate functions on $V$ is an
+original global holomorphic section. Apply the preceding theorem to these
+sections and intersect their actual ambient neighbourhoods. Their original
+holomorphic representatives assemble, through the genuine finite-dimensional
+linear identification of coordinate tuples with $\mathbf C^m$, into a map
+$g$ holomorphic at every point of that intersection. At every point of its
+intersection with $C$, coordinate equality proves $g(y)=F(y)$ in the ambient
+$\mathbf C^m$. In particular $g(x)\in V$. Continuity at $x$ and openness
+of $V$ give a genuine smaller ambient open neighbourhood on which $g$ takes
+values in $V$. Restrict $g$ there to obtain $f:O\to V$. Its holomorphy
+follows from that of $g$ and the actual open-subtype smoothness criterion.
+For $y\in C\cap O$, the proved equality $f(y)=F(y)$ puts $f(y)$ in $D$.
+
+The quotient-sheaf morphism induced by $f$ is compatible with the actual
+complex point. So is the composite of the actual open-subspace inclusion
+with $F$, by the same genuine structural triangles and functoriality.
+Their continuous base maps agree at every source point by the proved
+coordinate identities. Intrinsic model-map faithfulness therefore equates
+the entire locally ringed morphisms, yielding the asserted whole square.
+An empty coordinate family ($m=0$) gives the whole first intersection and
+the unique map to $\mathbf C^0$; the same continuity and faithfulness
+arguments apply without a nonzero-dimension assumption.
+\end{proof}
+
+This proves local ambient lifting of arbitrary intrinsic complex morphisms
+between the actual reduced embedded models. Effective resolution descent
+on arbitrary abstract analytic spaces and its terminal resolution driver
+remain separate obligations.

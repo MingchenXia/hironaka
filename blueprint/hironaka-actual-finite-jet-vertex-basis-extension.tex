@@ -1,0 +1,123 @@
+\section{Actual finite jet bases from original and homogeneous vertex series}
+
+Keep the genuine $S=\mathbb C[[X_1,\ldots,X_n]]$, its true variable
+ideal $\mathfrak n$, and the genuine degree-first monomial order.
+For $q\in\mathbb N$ let $B_q=\{\alpha:|\alpha|<q\}$.
+We construct the actual whole-jet bases underlying
+\cite[Lemma~7.7(a),(b), pp.~263--264]{bierstone-milman97-invent-math}.
+As in the actual division chapter, use the internally fixed owner
+partition of the genuine diagram; choosing an arbitrary fixed owner
+rather than the first vertex changes only the partition, not the proof.
+The displayed vectors are actual classes of full series; replacing a
+factor by the corresponding finite Taylor truncation gives the same
+whole-jet class by the genuine variable-power coefficient kernel.
+
+\begin{lemma}[True bounded triangular series give a basis of the genuine whole jet quotient]
+\label{hir:actual-finite-jet-triangular-series-basis}
+\uses{hir:actual-formal-variable-power-coefficient-kernel,hir:actual-formal-standard-monomial-whole-jet-basis}
+Suppose a genuine finite family $V_\alpha\in S$, $\alpha\in B_q$,
+has actual coefficient one at $\alpha$ and zero at every exponent
+preceding $\alpha$. Then the actual complex linear map
+\[
+ (c_\alpha)\longmapsto\left[\sum_{\alpha\in B_q}c_\alpha V_\alpha\right]
+ \quad\text{from }\mathbb C^{B_q}\text{ to }S/\mathfrak n^q
+\]
+is a genuine complex linear equivalence. Its inverse and the whole
+quotient use the existing complex scalar actions.
+\lean{Hironaka.HironakaActualFiniteJetVertexBasis.actualFiniteJetExponentFintype,Hironaka.HironakaActualFiniteJetVertexBasis.actualWholeFormalJet,Hironaka.HironakaActualFiniteJetVertexBasis.actualWholeFormalJetFinite,Hironaka.HironakaActualFiniteJetVertexBasis.actualWholeFormalJet_finrank,Hironaka.HironakaActualFiniteJetVertexBasis.actualTriangularJetLift,Hironaka.HironakaActualFiniteJetVertexBasis.actualTriangularJetMap,Hironaka.HironakaActualFiniteJetVertexBasis.actualTriangularJetMap_injective,Hironaka.HironakaActualFiniteJetVertexBasis.actualTriangularJetEquiv}
+\leanok
+\end{lemma}
+\begin{proof}
+The literal finite sum followed by the actual quotient map is complex
+linear. Suppose a nonzero coefficient vector maps to zero. Its true
+nonempty finite coefficient support has a least degree-first exponent
+$\alpha_0$. At that exponent the genuine series sum has coefficient
+$c_{\alpha_0}\ne0$: the diagonal term has coefficient one; earlier
+indices have zero scalar coefficient by minimality; later indices have
+zero series coefficient at $\alpha_0$ by the stated genuine triangular
+coefficient condition. But the sum belongs to the actual whole
+$\mathfrak n^q$, whose genuine coefficient kernel kills this coefficient
+since $|\alpha_0|<q$. This contradiction proves actual injectivity.
+The existing actual standard-monomial basis for the zero ideal identifies
+$S/\mathfrak n^q$ with $\mathbb C^{B_q}$: its genuine zero-ideal diagram
+is empty, so its actual finite standard index set is exactly $B_q$.
+Thus BOTH actual finite dimensions are the SAME internally proved
+cardinality. Actual finite-dimensional injectivity therefore gives
+surjectivity, and constructs the true linear inverse. No basis,
+inverse, dimension equality or rank certificate is supplied.
+\end{proof}
+
+\begin{theorem}[The genuine division owners internally supply both actual triangular vertex families]
+\label{hir:actual-finite-jet-owned-vertex-series-triangular}
+\uses{hir:actual-formal-initial-diagram-finite-monic-vertices,hir:actual-formal-vertex-owner-coefficient-recursion,hir:actual-homogeneous-initial-form-coefficients}
+Fix an actual ideal $I$. For $\alpha\notin\mathcal N(I)$ set
+$V_\alpha=X^\alpha$. For $\alpha\in\mathcal N(I)$ let $a$ be its
+internally fixed actual owning vertex and set
+\[
+ V_\alpha=X^{\alpha-a}f_a.
+\]
+Define $V^{\rm in}_\alpha$ by replacing the SAME actual $f_a$ by its
+actual homogeneous initial form, and keeping $X^\alpha$ outside the
+diagram. Every actual series in BOTH genuine families is nonzero,
+has least degree-first exponent $\alpha$, and actual coefficient one
+there. In particular BOTH families satisfy the preceding actual
+triangular coefficient hypotheses internally.
+\lean{Hironaka.HironakaActualFiniteJetVertexBasis.actualFiniteJetVertexSeries,Hironaka.HironakaActualFiniteJetVertexBasis.actualFiniteJetVertexSeries_spec,Hironaka.HironakaActualFiniteJetVertexBasis.actualOwnedJetSeries,Hironaka.HironakaActualFiniteJetVertexBasis.actualOwnedJetSeries_spec,Hironaka.HironakaActualFiniteJetVertexBasis.actualOwnedJetSeries_triangular}
+\leanok
+\end{theorem}
+\begin{proof}
+The actual owner lies pointwise below $\alpha$, so the genuine exponent
+$\alpha-a$ exists and satisfies $(\alpha-a)+a=\alpha$.
+The true internally chosen $f_a$ has nonzero coefficient one at $a$
+and actual least exponent $a$. The preceding homogeneous-initial-form
+theorem gives precisely the SAME nonzero minimum and coefficient for
+$\operatorname{in}f_a$. The actual monomial has nonzero coefficient
+one and least exponent $\alpha-a$. Genuine formal convolution's
+leading-product theorem therefore gives nonvanishing, least exponent
+$\alpha$, and coefficient one for EACH of the two actual products.
+Every preceding coefficient is zero by the independently proved true
+minimum property. Outside the actual diagram, all assertions follow
+from the literal genuine monomial coefficient formula. Thus all family
+properties are constructed from the SAME real ideal, owners and series,
+without a supplied standard-basis or triangular model.
+\end{proof}
+
+\begin{theorem}[Both actual whole jet bases and their genuine complex linear comparison]
+\label{hir:actual-finite-jet-original-initial-vertex-bases}
+\uses{hir:actual-finite-jet-owned-vertex-series-triangular,hir:actual-finite-jet-triangular-series-basis}
+For EVERY actual ideal $I$ and EVERY $q$, BOTH actual lists
+$[V_\alpha]$ and $[V^{\rm in}_\alpha]$, $\alpha\in B_q$, are bases
+of the genuine whole quotient $S/\mathfrak n^q$.
+Their internally constructed complex linear equivalences give a true
+complex linear automorphism of that SAME actual jet vector space,
+sending each $[V_\alpha]$ to the SAME indexed $[V^{\rm in}_\alpha]$.
+For every actual exponent $\beta$ and every actual $F$, replacing $F$
+by its genuine finite Taylor truncation of degree less than $q-|\beta|$
+in $[X^\beta F]$ gives exactly the SAME whole jet class.
+\lean{Hironaka.HironakaActualFiniteJetVertexBasis.actualVertexWholeJetEquiv,Hironaka.HironakaActualFiniteJetVertexBasis.actualVertexWholeJetEquiv_single,Hironaka.HironakaActualFiniteJetVertexBasis.actualVertexWholeJetBasis,Hironaka.HironakaActualFiniteJetVertexBasis.actualVertexJetInitialComparison,Hironaka.HironakaActualFiniteJetVertexBasis.actualVertexJetInitialComparison_generator,Hironaka.HironakaActualFiniteJetVertexBasis.actualWholeFormalJet_monomial_truncation}
+\leanok
+\end{theorem}
+\begin{proof}
+The preceding theorem independently supplies every genuine triangular
+coefficient hypothesis for BOTH actual families. Apply the proved
+whole-jet linear-equivalence construction to each family. Its literal
+finite-sum formula sends the actual coordinate unit vector at $\alpha$
+to exactly the respective displayed genuine quotient class.
+Compose the inverse for the original family with the forward equivalence
+for the homogeneous family. The actual inverse laws give a genuine
+complex linear automorphism of the SAME jet vector space and, on each
+literal coordinate vector, give the asserted class formula.
+For the truncation assertion, the genuine monomial $X^\beta$ belongs
+to $\mathfrak n^{|\beta|}$ by its actual single coefficient, and
+the true Taylor truncation remainder belongs to
+$\mathfrak n^{q-|\beta|}$ by the actual lower-coefficient kernel.
+Their product belongs to $\mathfrak n^{|\beta|+(q-|\beta|)}$, hence
+to $\mathfrak n^q$. The actual difference of the two displayed
+numerators is precisely that product, proving equality of the SAME
+whole quotient classes, including $q<|\beta|$.
+This proves both actual source lists are bases, including zero jets,
+zero and unit ideals, and the empty coordinate family. It asserts a
+complex linear change of basis, not a ring or geometric blowup
+isomorphism. Transform stability, geometric center compatibility and
+the strict Bennett comparison remain subsequent source obligations.
+\end{proof}

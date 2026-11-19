@@ -1,0 +1,55 @@
+\section{One original flattening couples normal freeness and the initial cylinder}
+
+\begin{theorem}[Actual finite free normal layers and the same initial cylinder]
+\label{hir:actual-original-coupled-normal-free-initial-cylinder}
+\lean{Hironaka.HironakaActualCoupledNormalFreeness.exists_original_hs_constant_centre_coupled_normal_data}
+\leanok
+\uses{hir:actual-coupled-centre-free-jets-initial-symbols,hir:actual-joint-all-coordinate-cuts-free,hir:actual-tangent-cut-whole-layer-dictionary,hir:actual-whole-initial-normal-extension-of-polynomial-tangent-stability}
+Let $C$ be regular of dimension $d$ at $x$ in a complex manifold of
+ dimension $d+t$, and let $\mathcal A$ be a coherent ideal whose entire
+ intrinsic Hilbert--Samuel function is constant along $C$.
+There is a single genuine local flattening $\Phi$ of $C$ with
+$\Phi(x)=0$, retaining the actual chart-source and coordinate-plane
+membership dictionaries, such that the following hold for the unchanged
+origin ideal $I_0$ of $\mathcal A$ in that flattening. Every whole
+normal layer $G_q(I_0)$ is finite free over
+$B=\mathcal O_{\mathbb C^d,0}$. The actual homogeneous initial ideal
+$J=\operatorname{in}(\widehat I_0)$ is stable under every tangential
+formal derivative, including the literal polynomial derivatives, and
+\[
+ J=\rho(\rho^{-1}(J))\,\mathbb C[[u,x]],
+ \qquad \rho:\mathbb C[[x]]\longrightarrow\mathbb C[[u,x]]
+\]
+is the actual normal-variable renaming map. No free-layer,
+initial-stability or cylinder certificate is an input.
+\end{theorem}
+\begin{proof}
+Apply the original coupled-symbol producer once. Keep its single
+flattening, coherent generators, exact origin-ideal equality, finite
+free joint normal truncations, and both initial-derivative stability
+statements for that same origin ideal. Identify the whole joint ideal
+with the image of $I_0$ under the actual centre joint pullback using the
+retained generator equality. The order-zero joint quotient is zero;
+every positive joint normal truncation is finite free by the coupled
+producer. The actual split normal-filtration sequence therefore makes
+all joint normal layers finite free.
+
+Cut each distinct tangential displacement coordinate in order. At each
+cut the current initial-derivative stability and genuine symbol square
+give injectivity on the current residue layer; the established cut
+recursion supplies finite freeness of every resulting layer. The whole
+image of the final cut ideal under the actual displacement-zero trace
+is exactly $I_0$, and that trace kills the whole displacement ideal.
+Its actual $B$-linear layer isomorphisms transfer finite freeness to
+every whole original normal layer of $I_0$.
+
+No flattening or ideal was reselected during this construction, so the
+two original initial-derivative stability conclusions still apply to
+this very $I_0$. Apply the proved polynomial differential-stability
+contraction--extension theorem to obtain the displayed equality of
+whole formal ideals under the literal normal-variable renaming map.
+The construction also covers order zero and empty tangent or normal
+coordinate blocks. It proves these simultaneous conclusions only;
+canonical reduced-vertex normal powers and blowup decrease require
+further arguments.
+\end{proof}

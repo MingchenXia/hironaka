@@ -1,0 +1,105 @@
+\section{The SAME actual finite vertex initial forms generate the entire homogeneous initial ideal}
+
+Keep $S=\mathbb C[[X_1,\ldots,X_n]]$, its genuine variable ideal
+$\mathfrak n$, the actual degree-first vertices of $I\subset S$,
+the internally constructed monic series $f_a$, and their literal initial
+forms $g_a=\operatorname{in}f_a$. Put $d_a=|a|$ and $J=(g_a)_a$.
+We construct the whole finite generation statement in
+\cite[Remark~7.6, p.~263]{bierstone-milman97-invent-math}, then its
+genuine original polynomial realization. No supplied analytic model,
+initial ideal equality or HS comparison is an input.
+
+\begin{lemma}[Actual filtered division computes every original homogeneous component in the finite initial-form span]
+\label{hir:actual-finite-initial-span-member-components}
+\uses{hir:actual-formal-vertex-series-whole-ideal-generation,hir:actual-formal-degreelex-division-maximal-filtration,hir:actual-homogeneous-initial-form-coefficients,hir:actual-formal-variable-power-coefficient-kernel}
+Every actual $f_a$ belongs to the true whole $\mathfrak n^{d_a}$.
+For every actual $F\in\mathfrak n^q$, its SAME actual division
+coefficient $Q_a(F)$ belongs to $\mathfrak n^{q-d_a}$. Consequently
+\[
+ [Q_a(F)f_a]_q=
+ \begin{cases}[Q_a(F)]_{q-d_a}g_a&d_a\le q,\\0&d_a>q.\end{cases}
+\]
+If also $F\in I$, then the entire actual $[F]_q$ belongs to $J$.
+\lean{Hironaka.HironakaActualFiniteInitialGeneration.actualInitialVertexSpan,Hironaka.HironakaActualFiniteInitialGeneration.actualVertexSeries_mem_degree_power,Hironaka.HironakaActualFiniteInitialGeneration.actualFormalQuotient_mem_shifted_power,Hironaka.HironakaActualFiniteInitialGeneration.actualFormalQuotient_vertex_product_component,Hironaka.HironakaActualFiniteInitialGeneration.actualFormalMember_component_mem_initial_vertex_span}
+\leanok
+\end{lemma}
+\begin{proof}
+The actual minimum of $f_a$ is $a$, so every coefficient of total
+degree below $d_a$ vanishes. The true whole-power coefficient kernel
+gives $f_a\in\mathfrak n^{d_a}$. The already proved actual maximal
+filtration of division says that every coefficient of $Q_a(F)$ with
+$|\beta|+d_a<q$ vanishes. If $|\beta|<q-d_a$, this strict inequality
+holds; the SAME actual coefficient kernel proves the shifted power
+membership, including $q<d_a$ where the bound is zero.
+For $d_a\le q$, the true lowest-order product-component formula at
+orders $q-d_a,d_a$ gives the displayed product, and the degree-$d_a$
+component of $f_a$ is exactly $g_a$. For $q<d_a$, the actual whole
+product belongs to $\mathfrak n^{d_a}\subset\mathfrak n^{q+1}$;
+its degree-$q$ component is therefore zero. For an actual $F\in I$,
+apply genuine degree-$q$ projection to its already proved WHOLE actual
+member division $F=\sum_a Q_a(F)f_a$. Each projected summand is zero
+or a genuine formal multiple of a SAME $g_a$, hence lies in $J$.
+The actual finite sum proves the asserted whole component membership.
+\end{proof}
+
+\begin{theorem}[Both whole ideal inclusions give the genuine finite homogeneous initial generators]
+\label{hir:actual-finite-initial-vertex-whole-generation}
+\uses{hir:actual-finite-initial-span-member-components,hir:actual-homogeneous-initial-ideal-degree-lift}
+For EVERY actual formal ideal $I$, the SAME genuine finite family obeys
+\[
+ \operatorname{in}I=(\operatorname{in}f_a)_a.
+\]
+\lean{Hironaka.HironakaActualFiniteInitialGeneration.actualHomogeneousInitialIdeal_eq_initial_vertex_span}
+\leanok
+\end{theorem}
+\begin{proof}
+For any actual nonzero $F\in I$, let $q$ be its true minimum total
+degree. The genuine order/kernel theorem puts $F$ in the WHOLE
+$\mathfrak n^q$, and its literal $[F]_q$ is exactly
+$\operatorname{in}F$. The preceding lemma puts this generator in
+the actual finite span $J$. Applying the true ideal-span universal
+property to EVERY actual initial generator gives
+$\operatorname{in}I\subset J$. Conversely each genuine nonzero
+$f_a$ belongs to the original WHOLE $I$, so its SAME actual initial
+form is one of the defining generators of $\operatorname{in}I$.
+The actual finite span therefore satisfies $J\subset\operatorname{in}I$.
+This proves BOTH whole ideal directions, without inferring ideal
+equality merely from equal diagrams or Hilbert--Samuel functions.
+\end{proof}
+
+\begin{theorem}[An internally constructed finite original polynomial ideal realizes the entire initial ideal and all its HS values]
+\label{hir:actual-original-polynomial-initial-ideal-realization}
+\uses{hir:actual-finite-initial-vertex-whole-generation,hir:actual-formal-coefficients-original-polynomial-approximation,hir:actual-original-formal-entire-hs-transfer,hir:actual-homogeneous-initial-ideal-hs-equality}
+For each actual vertex let $P_a=\operatorname{trunc}_{<d_a+1}(g_a)$,
+an actual polynomial. Then its genuine formal inclusion is exactly $g_a$.
+Define the actual ORIGINAL ideal $I^{\rm poly}\subset R_n$ generated
+by the literal original polynomial germs $P_a(x)$. It satisfies
+\[
+ \mathcal T_{n*}I^{\rm poly}=\operatorname{in}I,\qquad
+ H_{I^{\rm poly}}(\ell)=H_I(\ell)\quad\text{for EVERY }\ell\in\mathbb N.
+\]
+The SAME original polynomial ideal works simultaneously for all $\ell$.
+\lean{Hironaka.HironakaActualFiniteInitialGeneration.actualInitialVertexPolynomial,Hironaka.HironakaActualFiniteInitialGeneration.actualInitialVertexPolynomial_coe,Hironaka.HironakaActualFiniteInitialGeneration.actualOriginalInitialVertexIdeal,Hironaka.HironakaActualFiniteInitialGeneration.actualOriginalInitialVertexIdeal_formal_extension,Hironaka.HironakaActualFiniteInitialGeneration.actualOriginalInitialVertexIdeal_hs}
+\leanok
+\end{theorem}
+\begin{proof}
+Each genuine $g_a$ is homogeneous of degree $d_a$. For coefficients
+below $d_a+1$, actual polynomial truncation retains the SAME original
+coefficient. For every higher coefficient, homogeneity makes the
+original coefficient zero and genuine truncation makes the polynomial
+coefficient zero. Equality of all actual coefficients proves the
+ENTIRE included-polynomial identity $P_a=g_a$ in $S$.
+Actual original coordinate polynomial evaluation followed by true
+Taylor is the genuine polynomial-series inclusion. The WHOLE Taylor
+image of the actual original finite span is therefore exactly the
+actual finite span $(g_a)_a$, which is $\operatorname{in}I$ by the
+preceding BOTH whole inclusions. The existing original/formal whole
+jet complex algebra equivalence identifies every original HS value
+with that of this formal extension. The already proved true
+homogeneous-initial HS identity then identifies it with $H_I$.
+The original ideal is defined once from the SAME finite vertex family;
+it does not depend on $\ell$. This realizes the homogeneous INITIAL
+ideal by genuine polynomials, not the arbitrary original formal ideal.
+The geometric transformed-presentation and strict Bennett obligations
+remain open.
+\end{proof}

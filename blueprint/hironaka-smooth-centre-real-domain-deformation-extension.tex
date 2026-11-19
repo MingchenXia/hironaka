@@ -1,0 +1,128 @@
+\section{The actual original deformation and central family on real domains}
+
+The original graph deformation is its EXISTING sum of the pullback by
+the original coordinate projection and the genuine polynomial graph
+equations. It is used on the true inverse image of the flattening
+target under that projection. This retains the original equation model
+and does not replace it by a different scaling ideal.
+
+\begin{lemma}[Real local coherent pullback]
+\label{hir:real-domain-local-coherent-pullback}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-centre-domain-local-span-composition,hir:real-centre-domain-original-pullback-coherence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainDeformation.coherentOn_pullback_of_local}
+\leanok
+Let $I$ be coherent on an actual open $W$ and let $f$ be holomorphic on
+an actual open $V$ with $f(V)\subset W$. The EXISTING literal pullback
+$f^*I$ is coherent on $V$, with actual composed local generators.
+\end{lemma}
+\begin{proof}
+At $y\in V$, choose the real local finite holomorphic generators of $I$
+on an open $O$ containing $f(y)$ and contained in $W$. Continuity of $f$
+at $y$ supplies a smaller actual open $U$ containing $y$, contained in
+$V\cap f^{-1}(O)$. The original generators composed with $f$ are
+holomorphic on $U$. At every $z\in U$, compose the complete original
+finite membership relations at $f(z)$ to generate every actual
+pullback member. Conversely each actual original generator is an
+original member at $f(z)$, so its composite is itself a literal
+pullback generator. The two finite spans have the same membership at
+every $z\in U$, which proves real local coherence on $V$.
+\end{proof}
+
+\begin{lemma}[A genuine finite presentation supplies real local coherence]
+\label{hir:real-domain-finite-presentation-local-coherence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-coherence-actual-finite-analytic-presentation}
+\lean{Hironaka.HironakaSmoothCentreRealDomainDeformation.exists_open_coherentOn_of_idealFGAt}
+\leanok
+An actual finite analytic presentation near zero of a literal germ
+ideal supplies one actual open $O$ containing zero on which that SAME
+ideal is coherent. No statement outside $O$ is made.
+\end{lemma}
+\begin{proof}
+Let $s_\mu$ be the actual finitely indexed holomorphic functions and
+let $O$ be the true presentation neighbourhood. Reindex the finite
+set by the integers below its cardinality. The finite sums and their
+coefficient germs are unchanged by this bijection, so the actual
+membership dictionary becomes the original finite holomorphic
+membership condition. For every $y\in O$, the SAME open $O$ and SAME
+family satisfy that condition, with $O\subset O$. This is precisely
+coherence on the real open $O$.
+\end{proof}
+
+\begin{theorem}[Original input supplies the true real-open graph deformation]
+\label{hir:real-domain-original-graph-deformation-coherence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-local-coherent-pullback,hir:real-centre-domain-actual-flattened-coherent-family,hir:relative-normal-deformation-original-ideal,hir:relative-normal-deformation-equations}
+\lean{Hironaka.HironakaSmoothCentreRealDomainDeformation.exists_original_regular_real_graph_deformation_domain}
+\leanok
+Original regular-centre geometry and original coherence of $A$
+internally supply a genuine flattening $\Phi$ and the actual original
+flattened ideal $F=f^*A$. Its EXISTING original graph deformation $D$
+is coherent on the TRUE open
+$V=\operatorname{projection}^{-1}(\Phi.\mathrm{target})$, which
+contains zero. No extension of $F$ outside the target is assumed.
+\end{theorem}
+\begin{proof}
+Original data supply the actual flattening, zero in its target and
+real target coherence of $F$. The actual coordinate projection is a
+holomorphic linear map and takes zero to zero. Its inverse image of
+the actual target is therefore a genuine open $V$ containing zero,
+and the preceding local pullback theorem gives coherence of its
+literal pullback on $V$. The actual polynomial graph equations are
+holomorphic everywhere and form a finite family, hence their EXISTING
+ideal is coherent. At any point of $V$, choose real finite generators
+of the pulled ideal and of the equation ideal on genuine open
+neighbourhoods. Intersect those neighbourhoods and concatenate the two
+finite families. Substitution of their actual finite relations shows
+that this concatenated family generates every member of the literal
+sum ideal, and each concatenated generator is itself a literal sum
+member. Thus it presents the EXISTING original deformation at every
+point of that intersection. This proves its coherence on $V$.
+\end{proof}
+
+\begin{theorem}[Original input supplies the same-index exact real central model]
+\label{hir:real-domain-original-exact-deformation-central-model}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-original-graph-deformation-coherence,hir:real-domain-finite-presentation-local-coherence,hir:real-domain-original-exact-uniform-saturation,hir:relative-normal-deformation-central-restriction}
+\lean{Hironaka.HironakaSmoothCentreRealDomainDeformation.exists_original_regular_real_exact_deformation_central_model}
+\leanok
+Original regular-centre geometry and original coherence internally
+supply the actual $\Phi,F,D$, one integer $N$, and one actual open $U$
+containing zero inside that TRUE projection domain, such that ALL
+subsequent actual parameter colons equal the SAME selected colon at
+every point of $U$, every actual parameter power above $N$ has the
+same membership condition as the selected power, and the whole
+saturation union is exactly that fixed colon. That actual fixed colon
+is coherent on $U$. The EXISTING original central ideal at the SAME
+$N$ is coherent on the REAL open
+$B=\operatorname{centralInclusion}^{-1}(U)$, which contains zero.
+No stable index, fixed-colon family, central coherence or whole
+saturation certificate is a caller premise.
+\end{theorem}
+\begin{proof}
+The preceding original-input producer supplies real local coherence
+of $D$ on $V$ containing zero. Its actual finite analytic presentation
+near zero allows the genuine Noetherian and Oka uniform saturation
+proof with the internally defined linear deformation parameter.
+It selects a stable index $N$ and one genuine open $U_0$ on which
+all actual parameter-colon, power and whole-union identities hold.
+Oka's theorem gives an actual finite analytic presentation of that
+fixed colon near zero. The finite-presentation lemma gives an open
+$O$ containing zero on which the SAME fixed colon is coherent.
+Intersect $U_0$, $O$ and $V$ to obtain $U$. Restrict the actual finite
+presentations to this true smaller open; all identities persist at
+every actual point of $U$. The actual central inclusion is a
+holomorphic linear map fixing zero, so $B$ is genuinely open and
+contains zero. The real local pullback theorem gives coherence of
+the literal pullback of the actual fixed colon on $B$. By the
+EXISTING definition this is precisely the original central ideal
+at the SAME selected $N$. The argument neither asserts global model
+coherence nor identifies this ideal with a desired graded kernel.
+\end{proof}
+
+Whole original central polynomial-kernel and graded-cone dictionaries,
+uniform graded relation spreading and nearby freeness must now be
+proved using these actual real-domain families. Intrinsic sheaf
+normal-flatness, Hilbert--Samuel comparison and blowing-up descent
+remain further producers.

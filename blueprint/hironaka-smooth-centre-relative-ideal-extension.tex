@@ -1,0 +1,176 @@
+\section{Actual whole smooth-centre relative ideals in original nonlinear coordinates}
+\label{sec:hironaka-smooth-centre-relative-ideal}
+
+The input is actual original regularity of the smooth centre at an original
+point. The flattening, entire germ algebra equivalence, whole vanishing-ideal
+and all-power dictionaries, base algebra and finite relative quotient modules
+are produced internally. A caller does not supply a flattening, ideal map,
+power identity or finite-generation certificate. Module finiteness is not
+normal flatness or freeness; higher-Hilbert--Samuel transformation and full G8
+termination remain open.
+
+\begin{lemma}[Actual original flattening is genuinely recentered at zero]
+\label{hir:smooth-centre-original-recentred-flattening}
+\lean{Hironaka.HironakaSmoothCentreRelativeIdeal.recenteredEquiv,Hironaka.HironakaSmoothCentreRelativeIdeal.recenteredEquiv_zero,Hironaka.HironakaSmoothCentreRelativeIdeal.flatteningGermEquiv}
+\uses{hir:actual-nonlinear-local-germ-algebra-isomorphism}
+\leanok
+Any actual local holomorphic equivalence $\Phi$ at original coordinate $p$ with
+$\Phi(p)=0$ gives a true zero-centred local holomorphic equivalence
+$\Psi(z)=\Phi(z+p)$, with inverse $\Psi^{-1}(w)=\Phi^{-1}(w)-p$ and the actual
+translated original source and original target. It internally induces the
+whole complex germ algebra equivalence $E=\Psi^*$.
+\end{lemma}
+\begin{proof}
+The true translated source is open by continuity of addition and contains
+zero because the original source contains $p$. Keep the genuine original
+open target. Holomorphicity of both true maps follows by composition with
+actual translation and subtraction. The actual original inverse identities
+and cancellation of the translations prove both new inverse identities and
+both source/target mapping properties. Its real value at zero is zero, so the
+previous genuine nonlinear whole-germ construction applies to this actual
+zero-centred equivalence. This is not a germ-isomorphism input certificate.
+\end{proof}
+
+\begin{lemma}[ALL original flattened coordinate germs match the true entire map]
+\label{hir:smooth-centre-whole-flattened-coordinate-dictionary}
+\lean{Hironaka.HironakaSmoothCentreRelativeIdeal.flatteningGermEquiv_coordinateGerm}
+\uses{hir:smooth-centre-original-recentred-flattening}
+\leanok
+Let $e$ be the genuine preferred chart at the original point $x$ and $p=e(x)$.
+For EVERY actual original ambient coordinate $j$, the entire germ
+$E(z_j)$ equals the true translated preferred-chart germ of the original
+function $y\mapsto\Phi(e(y))_j$.
+\end{lemma}
+\begin{proof}
+The actual composition dictionary reads $E(z_j)$ as the whole original germ
+of $z\mapsto\Phi(z+p)_j$. The genuine preferred-chart germ of the original
+flattened coordinate reads $z\mapsto\Phi(e(e^{-1}(z+p)))_j$. On the true original
+open chart target near $p$, the actual inverse chart identity makes those
+original functions identical. Translating that real neighbourhood to zero
+proves equality of the ENTIRE germs, not just their point values or jets.
+\end{proof}
+
+\begin{theorem}[Actual smooth centre supplies its complete normal ideal dictionary]
+\label{hir:smooth-centre-entire-vanishing-stalk-normal-ideal}
+\lean{Hironaka.HironakaSmoothCentreRelativeIdeal.whole_vanishing_stalk_eq_map_normalIdeal}
+\uses{hir:smooth-centre-whole-flattened-coordinate-dictionary,hir:relative-normal-entire-plane-kernel,bex:hadamard}
+\leanok
+In ambient dimension $d+t$, take a genuine original flattening of $C$ at $x$
+with its actual source inside the preferred-chart target, value zero at $x$,
+and actual centre/coordinate-plane membership dictionary. Its actual entire
+map $E$ above satisfies
+\[
+ E(J)=I_{C,x},
+\]
+where $J$ is the COMPLETE coordinate-plane normal ideal and $I_{C,x}$ is the
+ENTIRE preferred-chart stalk ideal formed from ALL original vanishing germs.
+\end{theorem}
+\begin{proof}
+Use the genuine flattening, its true source inside the original target, its
+real zero-centre value and actual bidirectional centre/plane membership
+dictionary. Every normal
+flattened coordinate vanishes on the original centre near $x$, so its ENTIRE
+preferred-chart germ is an actual generator of the WHOLE original vanishing
+stalk ideal. The preceding real coordinate dictionary and genuine ideal map
+of the full coordinate span prove $E(J)\subseteq I_{C,x}$.
+
+Conversely, take ANY literal original holomorphic vanishing germ. Actual
+Hadamard division in this very original flattening internally gives an entire
+finite original holomorphic coefficient family, tangential coefficients
+identically zero, and an actual neighbourhood equality of that original
+function with the finite sum of normal flattened-coordinate multiples.
+Read the actual entire sum/product germ equality in the original preferred
+chart; the real first-$d$/last-$t$ split discards the zero coefficients.
+Every remaining normal-coordinate whole germ is in $E(J)$ by the previous
+dictionary, so the entire sum lies there. The WHOLE original ideal is the
+full span of ALL these membership germs; ideal closure proves the other
+inclusion. No selected generator, whole ideal identity or kernel conclusion
+is supplied. Zero codimension and zero ambient dimension give the actual zero
+normal ideal and agree with the genuine open-centre vanishing stalk.
+\end{proof}
+
+\begin{lemma}[All actual powers and entire original quotient algebras transport]
+\label{hir:smooth-centre-entire-normal-powers-quotient-transport}
+\lean{Hironaka.HironakaSmoothCentreRelativeIdeal.map_normalIdeal_pow,Hironaka.HironakaSmoothCentreRelativeIdeal.transportedPowerQuotientAlgEquiv}
+\uses{hir:smooth-centre-entire-vanishing-stalk-normal-ideal}
+\leanok
+For every natural $q$, $E(J^q)=I_{C,x}^q$. For every whole original ideal $I$,
+the genuine full quotient by $I+I_{C,x}^q$ is transported from the entire
+quotient by $E^{-1}(I)+J^q$. No ideal-power or quotient equality is input.
+\end{lemma}
+\begin{proof}
+The actual algebra equivalence is a ring equivalence, so genuine ideal maps
+preserve multiplication and EVERY natural power. Apply this true map-power
+law to the already manufactured full ideal equality. The actual inverse
+ideal is the full preimage of $I$ under the true ring map $E$, and actual
+surjectivity identifies its entire image back with $I$. Actual ideal-map
+preservation of sums and powers then proves the whole sum ideal equality.
+The genuine ring/complex-algebra quotient-equivalence theorem transports the
+literal ENTIRE quotients using exactly that proved equality. At $q=0$ the
+actual sum ideals are top and both whole quotients are zero.
+\end{proof}
+
+\begin{theorem}[Actual transported whole base algebra produces finite relative quotients]
+\label{hir:smooth-centre-entire-relative-base-quotients-finite}
+\lean{Hironaka.HironakaSmoothCentreRelativeIdeal.exists_normalWord_coefficient_representative,Hironaka.HironakaSmoothCentreRelativeIdeal.transportedNormalAlgebra,Hironaka.HironakaSmoothCentreRelativeIdeal.transportedWordSpan,Hironaka.HironakaSmoothCentreRelativeIdeal.exists_transported_normalWord_representative,Hironaka.HironakaSmoothCentreRelativeIdeal.finite_quotient_sup_mapped_normalIdeal_pow}
+\uses{hir:smooth-centre-entire-normal-powers-quotient-transport,hir:relative-normal-all-power-representatives,hir:relative-normal-entire-power-quotients-finite}
+\leanok
+Use the actual composite $R_d\xrightarrow{\pi^*}R\xrightarrow E R$ as the
+whole tangential germ algebra on the original preferred stalk. Then for EVERY
+$q$ and whole original $I$, the literal original quotient $R/(I+I_{C,x}^q)$
+is a finite module over this actual ENTIRE base germ ring.
+\end{theorem}
+\begin{proof}
+Take any ENTIRE original stalk germ $g$ and its actual full inverse $E^{-1}g$.
+The previous relative producer internally gives a finite whole tangential
+normal-word representative modulo the actual $J^q$. Apply the actual entire
+algebra map $E$ to this finite sum and whole remainder. The real composite
+base algebra makes each transported coefficient literally the original
+$R_d$ scalar action. Thus $g$ has the internally produced finite span of
+actual transported normal words as its representative, with remainder in
+$E(J^q)=I_{C,x}^q$. This is a genuine all-power original representative, not a
+finite-module certificate. The actual finite word index and original quotient
+map send this finite entire-base span onto EVERY member of the literal
+quotient by $I+I_{C,x}^q$, because the true remainder is in that actual sum
+ideal. Genuine finite span/image generators yield Module.Finite. The exact
+base action and full ideal transport are constructed internally; no flat or
+free graded module conclusion is asserted.
+\end{proof}
+
+\begin{theorem}[Actual closed smooth centres produce the relative germ geometry at every point]
+\label{hir:smooth-centre-actual-closed-centre-relative-consumer}
+\lean{Hironaka.HironakaSmoothCentreRelativeIdeal.exists_regular_relative_ideal,Hironaka.HironakaSmoothCentreRelativeIdeal.exists_closed_smooth_relative_ideal}
+\uses{hir:smooth-centre-entire-vanishing-stalk-normal-ideal,hir:smooth-centre-entire-normal-powers-quotient-transport,hir:smooth-centre-entire-relative-base-quotients-finite,ana:blowups}
+\leanok
+Actual $\operatorname{RegularAtDim}(C,x,d)$ in ambient dimension $d+t$
+internally produces the genuine original flattening, real source and
+bidirectional centre/plane dictionary, whole normal ideal and every power
+identity, every entire original quotient transport and actual finite modules
+over the internally transported whole tangential germ algebra. In particular,
+an actual closed smooth centre, with possibly different dimensions on its
+components, supplies at every original member point these data in that point's
+actual dimension and codimension. No caller supplies the flattening, ideal,
+power, quotient or module conclusion.
+\end{theorem}
+\begin{proof}
+First unpack original regularity: it supplies a genuine original
+flattening, its source inside the true preferred-chart target, zero image of
+the original point, and the real bidirectional centre/plane dictionary. Apply
+the entire vanishing-stalk theorem to this actual flattening. All actual
+powers and entire original quotients then transport by the genuine
+map-power and quotient constructions. The actual composite base algebra and
+finite whole-word representative producer give every relative finite module.
+All conclusion data have therefore been constructed from original regularity.
+
+The genuine closed smooth centre structure supplies at each actual member
+point its actual regular dimension $d$ with $d\leq n$. Put $t=n-d$; their
+natural sum is the ambient dimension. Apply this actual regular-point
+producer in precisely that original ambient space. All flattening, entire
+ideal and power transports, base action and finite-generation evidence are
+therefore supplied internally from the ORIGINAL centre geometry. No uniform
+component dimension, compactness or connectivity is assumed. The empty
+centre conclusion is the honest universal statement over no points. This
+is the local relative algebra foundation; producing an actual normal-flat
+selected resolution centre and proving higher-HS transformation/descent are
+still subsequent obligations.
+\end{proof}

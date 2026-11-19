@@ -1,0 +1,87 @@
+\section{Extending prescribed finite histories over the entire cosupport}
+\label{sec:open-cosupport-history-extension}
+This is a geometric continuation bridge for a prescribed actual finite history,
+not an existence assumption for local resolving histories or an unrestricted
+locally finite scheduling rule.  We retain the same original marked ideal,
+its complete ordered boundary and every actual admissibility condition.  The
+open set contains the entire cosupport.  Compactness is not required.
+
+\begin{lemma}[Closed entire cosupport makes the actual centre globally closed]
+\label{hir:open-cosupport-global-centre}
+\uses{hir:geo-transform-wellformed,hir:base-change-open}
+\lean{Hironaka.HironakaOpenCosupportHistoryExtension.isClosed_image_val_of_closed_carrier,Hironaka.HironakaOpenCosupportHistoryExtension.isAdmissibleCentre_image_val}
+\leanok
+Let $M$ be a well-formed marked ideal on a complex manifold $X$ and let the open
+$U$ contain its entire cosupport.  Every centre admissible for the actual marked
+restriction to $U$ has globally closed image in $X$, and that entire image is an
+admissible centre for the same original $M$ and its complete ordered boundary.
+\end{lemma}
+\begin{proof}
+We first give the topological argument.  Let $F\subset U\subset X$ with $F$
+closed in $X$, and let $C$ be closed in $U$ with its image contained in $F$.
+Write $C=U\cap B$ for some closed $B\subset X$, using the induced topology.
+The image of $C$ is exactly $F\cap B$: one inclusion follows from its containment
+in $F$, and for the other $F\subset U$.  Hence that image is closed in $X$.
+Apply this to the actual original cosupport $F$, whose closedness follows from
+coherence and the closed smooth original carrier.  The exact cosupport formula
+for open marked restriction puts the centre image inside $F$.  Its local
+regularity is transported by the genuine open inclusion, so its closed image is
+a closed submanifold.  The same cosupport formula proves admissibility along the
+whole image; the actual simultaneous normal-crossing coordinates for the local
+centre and all original ordered boundary members descend along the open
+inclusion.  These are precisely all original admissibility conditions.
+\end{proof}
+
+\begin{theorem}[Extend a prescribed actual step through its universal comparison]
+\label{hir:open-cosupport-actual-step-extension}
+\uses{hir:open-cosupport-global-centre,ana:blowups,bcalc:restrict-open,hir:biholomorphism-blowup}
+\lean{Hironaka.HironakaOpenCosupportHistoryExtension.exists_step_extension}
+\leanok
+With the preceding original inputs, let $\pi:Y\to U$ be a prescribed actual
+blowup along such an admissible centre $C$.  There is an actual blowup
+$q:Z\to X$ along the entire image of $C$, with that image admissible for the
+original $M$, and a genuine biholomorphism
+$Y\simeq q^{-1}U$ over the original inclusion $U\to X$.
+\end{theorem}
+\begin{proof}
+The image centre is a genuine globally closed submanifold by the lemma.  Empty
+interior passes from $C$ to its open image, so actual blowup existence applies
+to this centre in $X$.  Restrict that resulting blowup over $U$.  Its centre is
+literally $C$, since the inclusion is injective.  The genuine universal
+uniqueness theorem for two blowups along the same entire ideal produces the
+biholomorphism from the prescribed $Y$, its genuine holomorphic inverse and the
+exact projection square.  No map, global closedness proof, inverse or comparison
+square is an incoming assumption.
+\end{proof}
+
+\begin{theorem}[Extend the same entire finite history and transformed marked record]
+\label{hir:open-cosupport-actual-finite-history-extension}
+\uses{hir:open-cosupport-actual-step-extension,hir:geo-transform-basic,bcalc:tower-restrict,hir:tower-isomorphism}
+\lean{Hironaka.HironakaOpenCosupportHistoryExtension.exists_extension}
+\leanok
+Every prescribed actual finite test tower $T$ of the marked restriction of the
+same original well-formed $M$ to $U$ is the open restriction of an actual ambient
+test tower $Q$ of $M$, through a constructed isomorphism of the entire towers.
+The whole transformed marked record of $T$ is exactly the pullback of the
+original transformed marked record of $Q$ by its actual endpoint map over $U$.
+\end{theorem}
+\begin{proof}
+Induct on the prescribed tower.  For the empty history use the actual identity.
+Suppose the whole shorter history has been extended to $Q$, with its actual
+endpoint biholomorphism over $U$ and whole marked restriction identity.  Move
+the next actual centre and blowup through that biholomorphism.  The whole record
+identity transports the given actual local admissibility to the open preimage
+of $U$ in the endpoint of $Q$.  Every point of the current ambient cosupport
+projects into the original cosupport, by the actual test projection theorem.
+Thus its entire current cosupport lies in that open preimage.  The current
+ambient marked ideal is well-formed by genuine admissible transformation.
+The preceding step theorem therefore constructs its actual ambient next
+blowup and universal endpoint comparison without any compactness hypothesis.
+Append that step to $Q$.  The constructed projection square and the literal
+identity of its centre traces satisfy the step constructor for an actual
+isomorphism of the two entire towers.  The original marked-ideal open
+restriction theorem and whole-record transport along this actual tower
+isomorphism prove the final equality of all transformed fields, including the
+entire ideal and ordered boundary.  Hence the ambient tower is an actual test
+tower, and neither its testness nor its output comparison was supplied.
+\end{proof}

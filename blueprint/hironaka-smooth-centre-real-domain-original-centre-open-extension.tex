@@ -1,0 +1,91 @@
+\section{An actual relatively open original centre locus}
+
+All points and opens live in the original manifold and centre. A coordinate
+nonvanishing open need not contain zero; its actual original centre image is
+relatively open and accumulates at the original point. One fixed genuine
+flattening is retained. Density on unrelated components and origin flatness
+are not asserted.
+
+\begin{lemma}[The same genuine flattening gives an original relatively open centre image]
+\label{hir:real-domain-fixed-flattening-original-relative-centre-open}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-centre-domain-actual-flattened-coherent-family}
+\lean{Hironaka.HironakaSmoothCentreRealDomainOriginalCentreOpen.originalCentreBaseOpen,Hironaka.HironakaSmoothCentreRealDomainOriginalCentreOpen.isOpen_originalCentreBaseOpen,Hironaka.HironakaSmoothCentreRealDomainOriginalCentreOpen.originalCentreBaseOpen_centre_eq_image,Hironaka.HironakaSmoothCentreRealDomainOriginalCentreOpen.originalCentreBaseOpen_mem_closure}
+\leanok
+Fix a genuine original centre flattening $\Phi$ centred at $x$, with its
+source in the true chart target and $\Phi(e(x))=0$. Let $U$ be a real base
+open meeting every neighbourhood of zero whose tangent inclusion lies in
+$\Phi$'s actual target. Write $F(y)=\Phi(e(y))$, $\theta$ for tangent inclusion
+and $p$ for tangent projection. The ORIGINAL open
+\[
+ O=\operatorname{flatDomain}(\Phi)\cap (p\circ F)^{-1}(U)
+\]
+has its entire centre intersection equal to
+\[
+ C\cap O=\{\operatorname{flatInverse}(\theta(a)):a\in U\}.
+\]
+Every point of $O$ lies in the actual original chart and flattening domain,
+and $x\in\overline{C\cap O}$. Thus the displayed original centre locus is
+relatively open and meets every original neighbourhood of $x$.
+\end{lemma}
+\begin{proof}
+The original chart is continuous at each point of its open source, and the
+true flattening is holomorphic, hence continuous, at each point of its open
+source. Their composite $F$ and the linear tangent projection are therefore
+continuous at every point of the open flattening domain. At a point of $O$,
+intersect that domain neighbourhood with the inverse image of the base open
+under this locally continuous map. This is a neighbourhood contained in $O$,
+so $O$ is open and remains in the stated real domain.
+For an actual $a\in U$, the true inverse target/chart identities put its
+inverse point inside the flattening domain and give its flattened value
+$\theta(a)$. This value lies in the coordinate centre plane; the original
+centre flattening relation puts the inverse point in $C$. Tangent projection
+of $\theta(a)$ is $a$, so it also lies in $O$. Conversely, for $y\in C\cap O$
+the true centre relation puts $F(y)$ in the coordinate plane. On that plane
+its normal coordinates are zero, and its tangent coordinates are precisely
+$p(F(y))$, so $\theta(p(F(y)))=F(y)$. The actual left inverse chart/flattening
+identity now gives $y=\operatorname{flatInverse}(\theta(p(F(y))))$; the base
+point lies in $U$ by the definition of $O$. These prove both complete image
+inclusions. At zero the genuine inverse is $x$. It is continuous near zero
+on its true target, and tangent inclusion is continuous. Given any original
+neighbourhood of $x$, their actual composite preimage is a neighbourhood of
+zero. The assumed base-open accumulation supplies a point of $U$ in that
+preimage, whose genuine inverse belongs to $C\cap O$. Thus every original
+neighbourhood meets the displayed locus and $x$ belongs to its closure.
+\end{proof}
+
+\begin{theorem}[Original inputs supply all-degree stalk freeness on a true relatively open centre locus]
+\label{hir:real-domain-original-relative-centre-open-all-stalk-degrees-free}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:real-domain-fixed-flattening-original-relative-centre-open,hir:real-domain-original-all-nearby-relative-stalks-free-open}
+\lean{Hironaka.HironakaSmoothCentreRealDomainOriginalCentreOpen.allRelativeIdealDegreesFree,Hironaka.HironakaSmoothCentreRealDomainOriginalCentreOpen.exists_original_regular_relative_centre_open_all_stalk_degrees_free}
+\leanok
+ONLY original regular-centre geometry, original ideal coherence and original
+ideal containment supply one genuine original flattening and one ORIGINAL
+open $O$ in its actual domain, with $x\in\overline{C\cap O}$. At EVERY original
+point $y\in C\cap O$, ALL genuine original relative degree layers are finite
+free and flat over their independently descended original fixed-chart centre
+stalk quotient, for ALL natural degrees simultaneously. The ENTIRE original
+associated direct sum is free and flat for that same centre action. No
+coordinate-to-original locus, rank, flatness, chart bridge or free-open
+certificate is supplied.
+\end{theorem}
+\begin{proof}
+The original true stalk-freeness producer internally supplies the SAME genuine
+flattening and actual base open $U$, with its whole original nonlinear stalk
+dictionaries and all-degree canonical centre-module freeness/flatness.
+Apply the preceding actual topological producer to obtain $O$ and its ENTIRE
+centre intersection/image equality, retaining that same flattening. For an
+arbitrary original $y\in C\cap O$, the equality supplies an actual $a\in U$
+whose true inverse point is exactly $y$. The internally proved original
+stalk statement at that point gives the claimed whole and ALL-degree
+properties. Substitute this actual point equality. Its original chart-source
+membership proofs are propositions, so the original whole ideals, power
+layers and their independently descended centre actions are the same
+actual objects. Thus the original stalk conclusion holds at EVERY original
+point of the relatively open centre locus, with no degree-dependent
+shrinking. The first theorem gives closure at $x$ and the actual original
+geometric domain. This is still a genuine fixed-chart stalk statement;
+intrinsic chart independence and a literal sheaf normal-cone identification
+remain subsequent obligations.
+\end{proof}

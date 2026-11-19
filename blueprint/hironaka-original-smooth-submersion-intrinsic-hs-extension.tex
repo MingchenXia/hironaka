@@ -1,0 +1,116 @@
+\section{Original all-order intrinsic HS under a genuine holomorphic submersion}
+
+The local smooth-product comparison needed in the analytic scheduling
+argument concerns the ORIGINAL ambient ideal and its whole maximal-power
+quotients. It cannot be obtained by restricting that ideal to a smooth
+centre, or by extending a chart inverse beyond its genuine target. Here
+only an actual original holomorphic submersion and original coherence are
+inputs. The local coordinates, actual inverse maps and whole ideal
+comparison are constructed before computing any HS order. This supplies
+local smooth-pullback transport for the setting of Lemma 13.7, rather than
+its exceptional blowup comparison or termination.
+
+\begin{lemma}[A true local flattening and linear coordinate change give an actual biholomorphism of genuine opens]
+\label{hir:actual-flat-open-linear-coordinate-biholomorphism}
+\uses{hir:actual-flat-domain-biholomorphism}
+\source{bierstone-milman97-invent-math:page-0094}
+\lean{Hironaka.HironakaOriginalSmoothSubmersionIntrinsicHS.actualFlatLinearTarget,Hironaka.HironakaOriginalSmoothSubmersionIntrinsicHS.actualFlatLinearDiffeomorph}
+\leanok
+Given an actual normalized local holomorphic flattening of an original
+manifold, whose source is inside the genuine preferred-chart target,
+and a genuine complex continuous linear equivalence of model spaces,
+construct the biholomorphism from the actual flat-domain open to the
+linear image of the ACTUAL flattening target. The forward map is the
+literal linear change composed with the flattening and original chart;
+the inverse is the actual inverse chart and inverse flattening composed
+with the inverse linear change. Both inverse equations and holomorphic
+directions are proved on these genuine opens. Different but isomorphic
+model-dimension labels are allowed; no arbitrary total inverse is used
+outside its real target.
+\end{lemma}
+\begin{proof}
+The actual source consists precisely of original chart-source points
+whose original chart coordinates lie in the flattening source. Its true
+open property follows from the genuine chart and flattening. The actual
+target is the inverse image of the flattening target by the inverse
+linear equivalence, hence is open. Forward target membership follows
+from flattening target membership and the actual linear inverse law.
+Backward source membership follows from the assumed containment in the
+original chart target and the actual flattening inverse law. In each
+composite, first cancel the genuine linear inverse, then the flattening
+inverse on its true source or target, then the original chart inverse
+on its true domain. This proves both actual inverse equations. Each
+factor is holomorphic on precisely these actual opens; composition and
+the actual open-subtype criterion prove both holomorphic directions.
+\end{proof}
+
+\begin{theorem}[Only original inputs give the genuine smooth-pullback formula for every EXISTING intrinsic HS order]
+\label{hir:original-smooth-submersion-all-order-intrinsic-hs-convolution}
+\uses{hir:actual-flat-open-linear-coordinate-biholomorphism,hir:submersion-adapted-actual-product-shrink,hir:actual-target-open-block-projection-hs-convolution-reflection,hir:actual-cross-dimension-biholomorphic-intrinsic-hs,hir:actual-open-intrinsic-whole-ideal-hs-restriction}
+\source{bierstone-milman97-invent-math:page-0094}
+\lean{Hironaka.HironakaOriginalSmoothSubmersionIntrinsicHS.hilbertSamuelAt_original_submersion_convolution}
+\leanok
+Let $f:Y^{n+r}\to X^n$ be an ORIGINAL holomorphic map which is a genuine
+submersion at an actual point $y$, and let $A$ be an ORIGINAL coherent
+ideal on $X$. Then at EVERY order $\ell$ the EXISTING intrinsic HS of the
+actual pullback ideal at $y$ is the sum of the EXISTING original HS of
+$A$ at $f(y)$, shifted by the degree of EACH actual monomial in $r$ free
+coordinates of degree at most $\ell$. Zero target and free dimensions
+are included. No coordinate chart, smooth-product ideal comparison,
+rank, convolution, normal-flatness or HS certificate is input.
+\end{theorem}
+\begin{proof}
+Normalize a true target preferred chart internally using the actual
+regularity of the whole original target manifold. The genuine original
+submersion supplies adapted source coordinates whose second block is
+exactly that target coordinate of $f$ throughout the actual flat-domain
+open. The proved actual product shrinking gives actual opens about the
+base points and a genuine source flattening. Compose its actual linear
+fibre-first splitting with the inverse standard block splitting. The
+preceding lemma supplies the true source biholomorphism into the
+resulting ACTUAL model open. Apply the same lemma with identity linear
+change to the actual target chart. The actual adapted-coordinate
+identity gives the literal commuting square with the true block map
+between those opens; genuine target membership is proved before using
+any ideal.
+
+Restrict the ORIGINAL ideal to the real target open and pull back by the
+true inverse target biholomorphism. This ideal is coherent on ITS TRUE
+codomain open. Both original stalk image directions and genuine whole
+original-stalk pullback composition identify the actual pullback stalks
+in the commuting square. The actual source and target biholomorphisms preserve the
+EXISTING intrinsic HS, as do the genuine original open inclusions.
+The independently proved ACTUAL-target-open block-projection theorem
+therefore computes this SAME pullback HS. Its true free-coordinate
+convolution contains every monomial and shifted original target HS
+order. Thus the displayed sum is the actual original pullback HS at
+$y$, for every $\ell$. Coherence of a total chart inverse outside its
+true open target is never assumed or needed.
+\end{proof}
+
+\begin{theorem}[Entire original profiles are reflected by an original holomorphic submersion]
+\label{hir:original-smooth-submersion-entire-intrinsic-hs-profile-reflection}
+\uses{hir:original-smooth-submersion-all-order-intrinsic-hs-convolution,hir:actual-product-entire-hs-profile-reflection}
+\source{bierstone-milman97-invent-math:page-0094}
+\lean{Hironaka.HironakaOriginalSmoothSubmersionIntrinsicHS.hilbertSamuelAt_original_submersion_entire_profile_eq_iff}
+\leanok
+For an ORIGINAL holomorphic submersion of fixed relative dimension and
+an ORIGINAL coherent target ideal, equality of the ENTIRE existing
+pullback HS profiles at ANY two original source points is equivalent
+in BOTH directions to equality of the ENTIRE original target HS
+profiles at their actual image points. This is the actual original
+ambient function, not the HS of an ideal restricted to a centre.
+\end{theorem}
+\begin{proof}
+Apply the preceding internally constructed all-order formula separately
+at the two original source points. In each case the shifted values are
+those of the same original target ideal at its true image. They are
+therefore the two genuine smooth-product HS profiles for the same free
+dimension. The proved triangular reflection of entire product profiles
+gives both implications; its induction retains every order and the
+constant term has coefficient one. No local coordinate choices enter
+the conclusion, and no exceptional blowup nonincrease, arbitrary
+original noncanonical higher-history comparison, semicoherent
+coefficient transform or complete scheduling driver follows from this
+smooth-map comparison alone.
+\end{proof}

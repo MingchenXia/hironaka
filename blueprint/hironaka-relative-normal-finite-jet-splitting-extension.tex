@@ -1,0 +1,142 @@
+\section{Internally split actual finite original normal jets}
+Let $B=\mathcal O_{\mathbf C^d,0}$ and $R=\mathcal O_{\mathbf C^{d+t},0}$
+be the genuine entire holomorphic germ rings, $J=(y_1,\ldots,y_t)$ the
+actual normal ideal, and $I$ an arbitrary actual original ideal.
+Write $b$ for the SAME internally constructed nonzero base germ of the
+actual original all-order truncation producer. No caller provides $b$,
+a basis, section, kernel, matrix or flatness/result certificate.
+
+\begin{theorem}[The actual original finite-jet surjection and whole ideal kernel]
+\label{hir:relative-normal-finite-jet-original-projection}
+\lean{Hironaka.HironakaRelativeNormalFiniteJetSplitting.ambientNormalJet,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetProjection,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetProjection_mk,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetProjection_surjective,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualIdealJetMap,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualIdealJetMap_apply,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualIdealJetMap_projection_exact}
+\leanok
+\uses{hir:relative-normal-uniformtrunc-original-short-exact,hir:relative-normal-basis-actual-entire-quotient-basis}
+For every literal $q$, the actual $B$-linear projection
+$\pi_q:R/J^q\to R/(I+J^q)$ is surjective and takes EVERY actual numerator
+to the same original numerator class. Its entire kernel is precisely
+the actual image of the original $I$ in $R/J^q$. This is an exact
+sequence of whole actual modules, not pointwise values.
+\end{theorem}
+\begin{proof}
+The genuine inclusion $J^q\subseteq I+J^q$ defines the actual quotient
+factor algebra map. Every target quotient class has its actual original
+numerator, which provides a preimage. If a source class maps to zero,
+its actual numerator $g$ lies in $I+J^q$. Write $g=a+c$ with actual
+$a\in I$, $c\in J^q$; the source class is exactly the actual image of $a$.
+Conversely every actual $a\in I$ maps to zero. These entire numerator
+identities identify the literal whole kernel with the range of the
+true original ideal inclusion.
+\end{proof}
+
+\begin{theorem}[The same internally selected denominator preserves the entire exact sequence]
+\label{hir:relative-normal-finite-jet-same-denominator}
+\lean{Hironaka.HironakaRelativeNormalFiniteJetSplitting.originalJetDenominators,Hironaka.HironakaRelativeNormalFiniteJetSplitting.originalJetBase,Hironaka.HironakaRelativeNormalFiniteJetSplitting.localizedAmbientNormalJet,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetProjection,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedIdealJetMap,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetProjection_surjective,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedIdealJetMap_projection_exact,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetBasis,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetBasis_apply,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedAmbientJet_finite_free}
+\leanok
+\uses{hir:relative-normal-finite-jet-original-projection,hir:relative-normal-uniformtrunc-all-orders-finite-free,hir:relative-normal-basis-actual-entire-quotient-basis}
+Localize ALL these genuine modules and maps at powers of the SAME actual
+$b$. The actual finite-jet map remains surjective and the entire original
+ideal-image sequence remains exact. Both the ambient actual finite jet
+module and the actual original quotient are finite free over $B_b$.
+The ambient basis is the genuinely localized actual normal monomial basis.
+Every true numerator/denominator pair retains its literal original numerator
+and the SAME denominator; $q=0$ and empty index sets are literal.
+\end{theorem}
+\begin{proof}
+Use the actual original uniform denominator and its proved genuine entire
+nonvanishing, not a point value. The actual localization functor maps each
+literal true quotient map and actual original ideal inclusion, retaining
+numerator and denominator. Genuine localization surjectivity and exactness
+apply to the actual whole exact sequence above. The actual normal monomial
+basis of $R/J^q$ localizes to a true basis of the ambient module over $B_b$;
+its index is the actual finite family of exponents of degree below $q$.
+The proved actual SAME-denominator original truncation theorem supplies
+finite freeness of the target for EVERY $q$. Thus all hypotheses used here
+are internally produced from the actual original ideal.
+\end{proof}
+
+\begin{theorem}[Actual projectivity internally supplies a whole section and complementary projections]
+\label{hir:relative-normal-finite-jet-internal-projective-split}
+\lean{Hironaka.HironakaRelativeNormalFiniteJetSplitting.exists_actualLocalizedJetSection,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetSection,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetSection_spec,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualLocalizedJetSection_apply,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetP,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQ,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetP_comp_self,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetP_apply,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQ_apply,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetProjection_P,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetProjection_Q,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetP_add_Q,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQ_comp_self,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetP_eq_zero_iff,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQ_projection_exact,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQ_range_eq_originalIdealImage}
+\leanok
+\uses{hir:relative-normal-finite-jet-same-denominator}
+For each actual $q$, genuine target projectivity internally supplies a
+$B_b$-linear section $s_q$ of the actual surjection. Put
+$P_q=s_q\pi_q$ and $Q_q=1-P_q$. Then $P_q^2=P_q$, $Q_q^2=Q_q$,
+$P_q+Q_q=1$, $\pi_qP_q=\pi_q$, $\pi_qQ_q=0$, and
+$\ker P_q=\ker\pi_q=\operatorname{im}Q_q$.
+\end{theorem}
+\begin{proof}
+The actual finite free target is genuinely projective. Apply its true
+projective lifting property to the ACTUAL surjection and its literal
+identity map. This internally supplies $s_q$ and the WHOLE linear-map
+identity $\pi_qs_q=1$. Compose these actual maps to get $P_q$.
+Associativity and the section identity give $P_q^2=P_q$.
+For every actual ambient vector $x$, $Q_qx=x-P_qx$; direct linear-map
+algebra gives the stated complementary identities. If $\pi_qx=0$,
+then $P_qx=0$ and $Q_qx=x$, so $x$ lies in the actual range of $Q_q$.
+Conversely $\pi_qQ_q=0$ puts its entire range in the actual kernel.
+Applying $\pi_q$ to $P_qx$ proves equality of both whole kernels.
+No section or projection identity is caller data.
+\end{proof}
+
+\begin{theorem}[The actual finite matrices retain the complete original ideal-image dictionary]
+\label{hir:relative-normal-finite-jet-actual-idempotent-matrices}
+\lean{Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetPMatrix,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQMatrix,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetPMatrix_mul_self,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQMatrix_mul_self,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetPMatrix_add_QMatrix,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetIdealColumn,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQMatrix_apply,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetIdealColumn_mem_originalIdealImage,Hironaka.HironakaRelativeNormalFiniteJetSplitting.actualJetQ_basis_expansion,Hironaka.HironakaRelativeNormalFiniteJetSplitting.mem_originalIdealJetImage_iff_actual_columns}
+\leanok
+\uses{hir:relative-normal-finite-jet-internal-projective-split}
+In the actual localized normal monomial basis, the real finite coefficient
+matrices of $P_q,Q_q$ have entries in the genuine $B_b$ and satisfy
+$P_qP_q=P_q$, $Q_qQ_q=Q_q$, $P_q+Q_q=1$.
+The ENTIRE image of $Q_q$ is precisely the actual localized original
+ideal image supplied above. Every column of its true coefficient matrix
+therefore has an actual original-ideal-image witness, and every vector
+in this entire image has an actual finite combination of these SAME columns.
+\end{theorem}
+\begin{proof}
+Apply the true basis coordinate equivalence to the actual linear maps.
+Each actual entry is the coordinate of the whole image of one true basis
+vector. The genuine basis-to-matrix composition dictionary carries the
+preceding whole linear-map identities to actual matrix identities.
+The true localized exact sequence and whole projection-kernel equality
+identify the entire range of $Q_q$ with the actual localized ideal image.
+Its true finite basis expansion writes $Q_qx$ as the finite combination
+of its actual basis-vector images with genuine coordinates of $x$.
+Conversely all such combinations lie in the actual whole range by linearity.
+This supplies real coefficient identities suitable for subsequent finite
+analytic representative spreading; that spreading has not yet been asserted.
+\end{proof}
+
+\begin{theorem}[The original coherent equation model selects its genuine finite jet splitting]
+\label{hir:relative-normal-finite-jet-original-saturation-consumer}
+\lean{Hironaka.HironakaRelativeNormalFiniteJetSplitting.exists_original_coherent_finiteJet_split}
+\leanok
+\uses{hir:relative-normal-finite-jet-actual-idempotent-matrices,hir:relative-normal-analytic-graph-original-saturated-consumer}
+Only original coherent $\mathfrak a,d,t$ internally supply its actual whole
+origin ideal $I$, the SAME real nonzero $b$, and the internally selected
+actual saturation $N,U$. At the genuine finite order $N+1$ the whole
+ambient jet projection, original quotient, actual internally produced
+section/projections and real finite matrices have the exact dictionaries
+above. The actual graph quotient and the original SAME-$U$ all-point
+saturation identities are retained. No fixed index or finite matrix is
+supplied as a conclusion certificate.
+\end{theorem}
+\begin{proof}
+Construct the actual whole origin ideal from true original coherent stalk
+members. Apply the genuine actual graph-saturation producer to these SAME
+original inputs, internally retaining its $N,U$ and full original functional
+saturation identities. Apply the actual finite-jet constructions at literal
+order $N+1$ to this actual original ideal and its SAME internally selected
+uniform denominator. Their true quotient freeness supplies projectivity,
+the true original surjection supplies the section, and the actual monomial
+basis gives real finite coefficient matrices. Return these actual joint
+constructions and identities, with no external index, basis, section,
+projection, kernel or flatness certificate.
+\end{proof}
+
+\paragraph{Open frontier.}
+The actual finite localized coefficient identities still require true common
+holomorphic representatives and an actual denominator-nonzero open before
+nearby analytic assertions. Even a fixed-$q$ analytic spread does not by
+itself give one all-$q$ neighborhood. The whole nearby ORIGINAL Rees/graded
+cone dictionary, reverse analytic initial ideal, analytic extension flatness,
+nearby all-degree freeness, analytic normal-flatness, higher HS and G8 remain OPEN.

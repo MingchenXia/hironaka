@@ -1,0 +1,242 @@
+\section{Connected components of a simple normal crossings boundary}
+
+The smooth members of a simple normal crossings boundary need not be
+connected or irreducible, as in Bierstone--Milman\cite{bierstone-milman08-functoriality},
+Definition 2.1. Multiplicities are therefore assigned to their genuine connected
+components. The global component theorem of Demailly\cite{demailly-cadg},
+\dcref{II.5.3}, supplies local finiteness; compactness is used only when selecting
+a finite refinement.
+
+\begin{definition}[The connected boundary components]
+\label{hir:connected-boundary-components}
+\uses{hir:snc}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.boundaryComponents,Hironaka.HironakaConnectedBoundaryComponents.sUnion_boundaryComponents,Hironaka.HironakaConnectedBoundaryComponents.boundaryComponents_eq_empty_of_isSNCDivisor_zero}
+\leanok
+For an ordered finite family \(E=[H_1,\ldots,H_s]\) of closed subsets of a
+complex manifold, let \(\mathcal C(E)\) be the family of all nonempty connected
+components of its members. Equivalently, its members are the sets
+\(\operatorname{Conn}_{H_i}(x)\), where \(x\in H_i\); each set is included once
+in the family. Then
+\[
+ \bigcup_{C\in\mathcal C(E)}C=\bigcup_i H_i.
+\]
+For an SNC family in ambient dimension zero, \(\mathcal C(E)\) is empty.
+\end{definition}
+\begin{proof}
+Every connected component of \(H_i\) is contained in \(H_i\). Conversely,
+if \(x\in H_i\), the component \(\operatorname{Conn}_{H_i}(x)\) contains
+\(x\), and is one of the specified members. These two containments prove
+the identity, including when the family is empty.
+In ambient dimension zero, the simple normal crossings condition admits no
+member through any point: its defining coordinate singleton would be a
+singleton in the empty coordinate set. All members are therefore empty, and
+the connected component family is empty as well.
+\end{proof}
+
+\begin{lemma}[The actual geometry of a boundary component]
+\label{hir:connected-boundary-component-geometry}
+\uses{hir:connected-boundary-components,rem:global-components}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.component_geometry}
+\leanok
+Let \(E\) be a simple normal crossings boundary in a complex manifold of
+dimension \(m+1\). Every \(C\in\mathcal C(E)\) is a nonempty closed connected
+complex submanifold of dimension \(m\). It is a component of some \(H_i\),
+and at every \(x\in C\) there is an open neighbourhood \(U\) with
+\(H_i\cap U=C\cap U\).
+\end{lemma}
+\begin{proof}
+The normal crossings coordinates exhibit \(H_i\) locally as one coordinate
+hyperplane; exchanging its defining coordinate with the last coordinate
+exhibits dimension \(m\). Thus \(H_i\) is analytic and all its points are
+regular. A connected component of \(H_i\) is closed: its closure is connected,
+is contained in the closed set \(H_i\), and hence remains in the same maximal
+connected component. The regular locus of \(H_i\) is all of \(H_i\), so its
+global analytic components are precisely these already closed connected
+components. At a regular point the connected component contains a sufficiently
+small connected coordinate neighbourhood inside \(H_i\). This gives an
+ambient open neighbourhood on which \(C\) and \(H_i\) agree, and transports
+the hyperplane flattening to \(C\). The point defining the component supplies
+its nonemptiness, and its connectedness is the defining maximality property.
+\end{proof}
+
+\begin{lemma}[Local finiteness and compact selection]
+\label{hir:connected-boundary-components-locally-finite}
+\uses{hir:connected-boundary-component-geometry,rem:global-components}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.exists_isOpen_finite_boundaryComponents,Hironaka.HironakaConnectedBoundaryComponents.locallyFinite_boundaryComponents,Hironaka.HironakaConnectedBoundaryComponents.finite_boundaryComponents_inter_compact}
+\leanok
+For a simple normal crossings boundary \(E\), the family \(\mathcal C(E)\)
+is locally finite. For every compact set \(K\), only finitely many
+\(C\in\mathcal C(E)\) meet \(K\).
+\end{lemma}
+\begin{proof}
+The components of each \(H_i\) are its global analytic components, so the
+global component theorem makes that family locally finite. At an arbitrary
+point, intersect the finitely many open neighbourhoods supplied for the
+original members \(H_i\). The resulting open neighbourhood meets only finitely
+many of their components, and hence only finitely many members of
+\(\mathcal C(E)\). To prove the compact assertion, choose such a neighbourhood
+at each point of \(K\). A finite subcover exists. A component meeting \(K\)
+meets one of these finitely many neighbourhoods, and therefore belongs to the
+finite union of their finite meeting families.
+\end{proof}
+
+\begin{lemma}[Normal crossings survive finite component refinement]
+\label{hir:snc-connected-component-refinement}
+\uses{hir:connected-boundary-component-geometry,hir:snc}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.isSNCDivisor_component_refinement}
+\leanok
+Let \(F\) be a finite list of distinct members of \(\mathcal C(E)\), where
+\(E\) is simple normal crossings. Then \(F\) is simple normal crossings.
+\end{lemma}
+\begin{proof}
+Every member of \(F\) is closed by the component geometry lemma. Fix a point
+\(x\) and normal crossings coordinates for \(E\). For each component in
+\(F\) through \(x\), choose its original member \(H_i\) and an open
+neighbourhood on which the two agree. Intersect these finitely many
+neighbourhoods and restrict the coordinate chart to the intersection. The
+selected components through \(x\) are now precisely the corresponding
+coordinate hyperplanes. Two such components with the same original member
+and containing \(x\) are the same connected component. Since the list has no
+repetitions, their indices are equal. Distinct original members through
+\(x\) have distinct defining coordinates by the original simple normal
+crossings condition. The selected hyperplanes are therefore distinct, which
+is the required condition for \(F\).
+\end{proof}
+
+\begin{theorem}[Finite refinement near a compact set]
+\label{hir:compact-connected-boundary-refinement}
+\uses{hir:connected-boundary-components-locally-finite,hir:snc-connected-component-refinement,hir:connected-boundary-components}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.exists_finite_refinement_on_compact,Hironaka.HironakaConnectedBoundaryComponents.exists_finite_refinement_of_support_subset_isCompact}
+\leanok
+For a simple normal crossings boundary \(E\) and a compact set \(K\), there
+is a finite list \(F\), with no repetitions, whose members are exactly those
+connected boundary components meeting \(K\). All its members are nonempty
+closed connected smooth hypersurfaces, \(F\) is simple normal crossings, and
+there is an open neighbourhood \(U\supset K\) such that
+\[
+ U\cap |F|=U\cap |E|,
+ \qquad K\cap |F|=K\cap |E|.
+\]
+If \(|E|\subset K\), then \(|F|=|E|\).
+\end{theorem}
+\begin{proof}
+List once each of the finitely many components meeting \(K\). The component
+geometry and finite refinement lemmas give the stated smoothness and normal
+crossings. The inclusion \(|F|\subset|E|\) follows from component containment.
+The union of the omitted components is closed. Indeed, at a point outside
+that union choose an open neighbourhood meeting only finitely many components,
+and remove those finitely many closed omitted components from the neighbourhood.
+The result is an open neighbourhood disjoint from the entire omitted union.
+No omitted component meets \(K\). Its closed union therefore has an open
+complement \(U\) containing \(K\). If \(x\in U\cap|E|\), choose an
+original member containing \(x\). Its connected component through \(x\)
+cannot be omitted, and thus appears in \(F\). This gives the support equality
+on \(U\), and hence on \(K\). If the original support is contained in
+\(K\), every nonempty component meets \(K\), so the same argument gives
+the global support equality.
+\end{proof}
+
+\begin{lemma}[Divisibility depends on the local component]
+\label{hir:boundary-component-germ-divisibility}
+\uses{hir:connected-boundary-component-geometry,hir:divisor-exponent}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.isDivNear_connectedComponent_iff,Hironaka.HironakaConnectedBoundaryComponents.divExp_connectedComponent_eq}
+\leanok
+Let \(C\) be the connected component of \(H_i\) through a point of an SNC
+boundary. At every \(x\in C\), a holomorphic germ ideal has the same local
+divisibility exponents along \(C\) and along \(H_i\). In particular, their
+maximal divisorial exponents at \(x\) are equal.
+\end{lemma}
+\begin{proof}
+Choose an open neighbourhood \(U\) of \(x\) on which \(H_i\) and \(C\)
+agree. For each integer \(r\), the defining local condition says that the
+points of the carrier near \(x\) lie in the order-\(r\) cosupport. Intersecting
+its neighbourhood with \(U\) makes the two conditions identical. The sets of
+admissible powers therefore agree. Their maximal exponent, with the same
+totalized convention when all powers are admissible, is equal.
+\end{proof}
+
+\begin{lemma}[Componentwise values glue locally constantly]
+\label{hir:boundary-component-function-gluing}
+\uses{hir:connected-boundary-component-geometry}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.isLocallyConstant_component_function}
+\leanok
+For any function \(a\) on \(\mathcal C(E)\), the function on \(H_i\) assigning
+to \(x\) the value of \(a\) on the connected component of \(H_i\) through
+\(x\) is locally constant.
+\end{lemma}
+\begin{proof}
+Fix \(x\in H_i\) and its connected component \(C\). Choose an ambient open
+neighbourhood \(U\) on which \(H_i\) and \(C\) agree. Every point of
+\(H_i\cap U\) belongs to \(C\), and its connected component in \(H_i\)
+is therefore the same set \(C\). The assigned value on this neighbourhood
+is consequently constant. These relative neighbourhoods prove local
+constancy at every point of \(H_i\).
+\end{proof}
+
+\begin{theorem}[Multiplicities on genuine boundary components]
+\label{hir:connected-boundary-component-multiplicities}
+\uses{hir:connected-boundary-component-geometry,hir:divisor-exponent-connected-carrier,hir:boundary-component-germ-divisibility,hir:boundary-component-function-gluing}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.exists_multiplicities_boundaryComponents,Hironaka.HironakaConnectedBoundaryComponents.exists_multiplicities_glued_boundaryComponents}
+\leanok
+Let \(D\) be an effective divisor and \(E\) a simple normal crossings
+boundary. There is a function \(a:\mathcal C(E)\to\mathbb N\) such that,
+for every \(C\in\mathcal C(E)\), \(x\in C\) and \(r\in\mathbb N\),
+the ideal of \(D\) is locally divisible by \(\mathcal I_C^r\) at \(x\)
+if and only if \(r\le a(C)\).
+On every original member \(H_i\), the induced function assigning
+\(a(\operatorname{Conn}_{H_i}(x))\) to \(x\) is locally constant, and
+characterizes divisibility along \(H_i\) by the same inequality.
+\end{theorem}
+\begin{proof}
+An invertible divisor ideal is coherent and has a nonzero stalk member at
+every point. Its divisorial exponent along a smooth carrier is locally
+constant. Each \(C\) is nonempty and connected, so this locally constant
+function is constant on \(C\). Choose its value as \(a(C)\). The actual
+maximal-exponent divisibility characterization gives the asserted equivalence
+at every point. Choice of these values over the component family gives the
+single function \(a\); there is no requirement that different connected
+components of one original member receive the same value.
+The component-function gluing lemma proves local constancy on the original
+member. The local divisibility lemma transfers its characterization from
+the connected component to that original member at each of its points.
+\end{proof}
+
+\begin{theorem}[Actual residual factorization after compact refinement]
+\label{hir:compact-refined-boundary-residual}
+\uses{hir:compact-connected-boundary-refinement,hir:divisor-finite-connected-component-residual}
+\lean{Hironaka.HironakaConnectedBoundaryComponents.exists_residual_on_compact_SNC_components}
+\leanok
+Suppose the support of a simple normal crossings boundary \(E\) is contained
+in a compact set. For every effective divisor \(D\), there is a finite
+connected component refinement \(F\) with \(|F|=|E|\), a list of
+coefficients \(b_C\), and an effective residual divisor \(R\) such that
+\[
+ \mathcal O(-D)=\left(\prod_{C\in F}\mathcal I_C^{b_C}\right)
+                  \mathcal O(-R),\qquad
+ \operatorname{Supp}(R)\subset\operatorname{Supp}(D),
+ \qquad C\not\subset\operatorname{Supp}(R)\quad(C\in F).
+\]
+The coefficients in this factorization are extracted in order from successive
+intermediate residual divisors.
+\end{theorem}
+\begin{proof}
+Take the finite refinement of the preceding theorem. Each member is a
+nonempty connected closed smooth hypersurface, so the finite connected
+hypersurface residual theorem applies. Its induction successively removes
+the maximal coefficient of the next member using the actual invertible colon
+ideal. At each step the complete ideal factors as the chosen hypersurface
+power times the new residual. Associating these equalities produces the
+displayed product factorization. Support inclusion at each step preserves
+noncontainment already obtained for earlier members, and gives the final
+support inclusion. Empty refinements give the empty product and residual
+\(D\), as required.
+\end{proof}
+
+\begin{remark}
+On a noncompact manifold, a single disconnected smooth member can have
+infinitely many connected components. The full component family is locally
+finite; its finite selection near a compact set is not a global finite
+refinement unless the original support is contained in that compact set.
+An equality with a divisor sum additionally requires proving the residual
+ideal is the unit ideal under the appropriate support hypothesis.
+\end{remark}

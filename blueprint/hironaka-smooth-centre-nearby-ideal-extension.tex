@@ -1,0 +1,107 @@
+\section{The whole original smooth-centre ideal at every real nearby centre point}
+
+Fix the genuine flattening and its actual target neighbourhood from the
+original-input nearby stalk dictionary. For a target point $a$ on the
+coordinate plane, the actual centred map $\Psi_a$ still flattens the
+same original centre: subtracting $a$ changes only tangential
+coordinates. The following identifications concern whole actual ideals
+and all their powers.
+
+\begin{lemma}[The actual normal-coordinate germs at a nearby centre point]
+\label{hir:nearby-centre-actual-normal-coordinate-germs}
+\source{bierstone-milman08-functoriality}
+\uses{hir:nonlinear-nearby-actual-germ-equivalence,hir:nonlinear-nearby-actual-generator-transport}
+\lean{Hironaka.HironakaSmoothCentreNearbyIdeal.actualNearbyGermEquiv_normalCoordinate}
+\leanok
+Let $n=d+t$, $a\in\Phi.\mathrm{target}\cap\mathbb C^d$, and
+$y=\operatorname{chart}_x^{-1}(\Phi^{-1}(a))$. The entire actual map
+$E_a$ sends every coordinate normal germ to the original translated
+chart germ of the corresponding actual flattened coordinate at $y$.
+\end{lemma}
+\begin{proof}
+The image of coordinate $j$ is represented by
+$\Phi(z+\Phi^{-1}(a))_j-a_j$. Since $j$ is normal and $a$ lies on
+the coordinate plane, $a_j=0$. On the genuine translated source,
+$z+\Phi^{-1}(a)$ lies in the original chart target, so composing the
+actual flattened coordinate with the inverse original chart gives
+$\Phi(z+\Phi^{-1}(a))_j$. The original chart value of $y$ is exactly
+$\Phi^{-1}(a)$. Thus the two actual representatives agree on a genuine
+neighbourhood of zero and determine the same whole germ.
+\end{proof}
+
+\begin{theorem}[The whole original nearby vanishing ideal is the whole nonlinear image]
+\label{hir:nearby-centre-whole-original-vanishing-ideal}
+\source{bierstone-milman08-functoriality}
+\uses{hir:nearby-centre-actual-normal-coordinate-germs,hir:nonlinear-centre-original-regular-stalk-bridge}
+\lean{Hironaka.HironakaSmoothCentreNearbyIdeal.whole_nearby_vanishing_stalk_eq_map_normalIdeal,Hironaka.HironakaSmoothCentreNearbyIdeal.whole_nearby_vanishing_stalk_pow_eq_map}
+\leanok
+For every actual centre-plane target point $a$, the whole original
+fixed-chart vanishing stalk ideal at $y$ equals $E_a(J)$, where $J$
+is the whole coordinate-plane normal ideal. Consequently every true
+power of that whole original ideal equals the image of the
+corresponding true power of $J$.
+\end{theorem}
+\begin{proof}
+Take an arbitrary original holomorphic membership function $g$ in the
+vanishing ideal at $y$. The genuine original flattening and Hadamard
+division give actual holomorphic coefficients $b_j$ near $y$ such that
+$g=\sum_j b_j\Phi_j$ there; all tangential coefficients can be chosen
+zero. Translate this finite actual equality into the fixed original
+chart. Its whole germ is the sum of coefficient germs times the normal
+coordinate germs identified in the preceding lemma. Every summand is
+therefore in $E_a(J)$, so every original membership germ and their
+whole generated ideal are contained in $E_a(J)$.
+Conversely each actual normal flattened coordinate vanishes on the
+original centre on its genuine neighbourhood at $y$. Its original
+germ is a genuine membership germ and equals the image of the
+corresponding normal coordinate. Since these coordinate germs
+generate $J$, the whole ideal $E_a(J)$ is contained in the whole
+original vanishing stalk ideal. This proves equality. A ring map
+preserves products of ideals, hence every true power, proving the
+asserted all-power identities.
+\end{proof}
+
+\begin{theorem}[Original input internally supplies one whole nearby relative-ideal bridge]
+\label{hir:nearby-centre-original-same-open-whole-relative-ideal-bridge}
+\source{bierstone-milman08-functoriality}
+\uses{hir:nearby-centre-whole-original-vanishing-ideal,hir:nonlinear-nearby-original-whole-stalk-dictionary}
+\lean{Hironaka.HironakaSmoothCentreNearbyIdeal.exists_original_regular_same_open_nearby_relative_ideal_bridge}
+\leanok
+Original regular-centre geometry, original coherence and actual
+original ideal containment $A\subset I_C$ supply one actual flattening
+and one actual open $U$ containing zero in its target. At every
+$a\in U\cap\mathbb C^d$, the corresponding original point $y$ belongs
+to $C$, the whole original ideal $I_{A,x,y}$ is contained in the whole
+original centre ideal $I_{C,x,y}$, and the same entire actual map $E_a$
+identifies both whole ideals with the actual translated pullback ideal
+and $J$, respectively. Both whole ideals and every whole original
+centre power are supplied internally on this SAME $U$.
+No nearby original ideal or ideal-map identification is supplied by
+the caller.
+\end{theorem}
+\begin{proof}
+Use the original-input actual nearby whole-stalk producer to choose the
+single genuine flattening and $U$. For $a$ on the plane, its actual
+inverse lies in the original flattening source, its original chart
+inverse is $y$, and the actual chart/flattening identities give its
+flattened image as $a$. The genuine original centre flattening
+therefore gives $y\in C$. Actual original containment carries every
+original membership germ of $A$ into the centre vanishing ideal, so
+it gives the entire original stalk ideal inclusion. The preceding
+whole vanishing-ideal theorem identifies the whole centre ideal with
+$E_a(J)$; the whole nearby original stalk dictionary identifies the
+whole $A$ ideal with the image of its actual translated pullback ideal.
+An actual ring equivalence preserves every true ideal power, so each
+whole original centre power is the image of the corresponding true
+coordinate normal power. Thus both entire ideal-map dictionaries and
+all genuine centre powers are supplied from the stated original data
+on the single actual neighbourhood.
+\end{proof}
+
+This supplies a pointwise whole-ideal bridge on a single actual
+neighbourhood. The genuine relative power quotient/layer and
+independently descended canonical centre-scalar dictionary follows
+from these whole ideal maps. Uniform graded kernel spreading and
+freeness on this genuine domain, intrinsic sheaf normal-flatness,
+ambient mixed-degree Hilbert--Samuel comparison and actual blowing-up
+descent remain further producers.

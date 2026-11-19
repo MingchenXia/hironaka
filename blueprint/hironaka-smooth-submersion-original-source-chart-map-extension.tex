@@ -1,0 +1,89 @@
+\section{The entire original source terminal charts carry genuine smooth comparison maps}
+
+Target-chart compatibility glues the actual smooth arrows on each entire
+original source local terminal manifold. The full global-target Cartesian
+laws also glue: their actual cone lifts are compatible by the pointwise
+uniqueness supplied by the same genuine local universal properties.
+
+\begin{lemma}[A genuine holomorphic Cartesian square is jointly injective on points]
+\label{hir:holomorphic-cartesian-square-joint-point-injectivity}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalSourceChartMap.holomorphicSquarePullback_jointInjective}
+\leanok
+Suppose a square of complex manifolds commutes at every point and is
+Cartesian among holomorphic maps. Two source-final points with the same
+source-base and target-final legs are equal.
+\end{lemma}
+\begin{proof}
+Use the source-final complex manifold itself as a test manifold. Constant
+maps to the two common leg values form a holomorphic cone, by the actual
+pointwise commutation equation. The two constant maps to the given source
+points are holomorphic lifts of exactly that cone. The genuine universal
+property identifies these whole constant maps. Evaluate the equality at
+the first given source point to obtain the asserted equality of points.
+No point test manifold or nonemptiness certificate is needed; the given
+point supplies the evaluation.
+\end{proof}
+
+\begin{theorem}[Only original inputs glue all target indices on each entire source terminal chart]
+\label{hir:original-entire-source-terminal-chart-holomorphic-comparison}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalSourceChartMap.originalSourceChartSmoothMap,Hironaka.HironakaSmoothSubmersionOriginalSourceChartMap.originalSourceChartSmoothMap_local,Hironaka.HironakaSmoothSubmersionOriginalSourceChartMap.originalSourceChartSmoothMap_contMDiff,Hironaka.HironakaSmoothSubmersionOriginalSourceChartMap.originalSourceChartSmoothMap_proj}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:original-local-smooth-global-arrow-target-chart-compatibility,hir:original-local-smooth-arrow-actual-global-target-cartesian}
+For only original marked-domain input and a genuine smooth map, each entire
+original source terminal chart carries a holomorphic map to the same
+original global target terminal manifold. Its restriction over each true
+target atlas open is exactly the internally produced local arrow, and
+its entire original projection commutes with $f$.
+\end{theorem}
+\begin{proof}
+The true source final opens above the target atlas opens cover the entire
+source chart: at a source point choose the target atlas index at the actual
+$f$-image of its original projection. The actual target point lies in its
+chosen target open. The preceding compatibility theorem identifies the
+produced arrows on every literal intersection. Glue this genuine covering
+family of functions. On each covering open, the whole glued map equals
+the original local arrow. Holomorphicity transfers from this exact equality
+on a true open neighborhood of every point. The same local equality and
+the local arrow's entire original projection formula prove the whole
+projection equation at each source-chart point.
+\end{proof}
+
+\begin{theorem}[Each entire original source-chart square is holomorphically Cartesian]
+\label{hir:original-entire-source-terminal-chart-global-target-cartesian}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalSourceChartMap.originalSourceChartSmoothMap_cartesian}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:original-entire-source-terminal-chart-holomorphic-comparison,hir:holomorphic-cartesian-square-joint-point-injectivity,hir:original-local-smooth-arrow-actual-global-target-cartesian}
+The map on each entire original source terminal chart is Cartesian with
+its actual finite source tower projection, the original $f$ restricted
+to that source base open, and the same entire original global target
+terminal projection.
+\end{theorem}
+\begin{proof}
+Fix an arbitrary complex manifold $W$ and a holomorphic cone. The inverse
+images, under its source-base map, of the actual target-chart source
+opens cover $W$. On each genuine open the full local global-target square
+constructs a holomorphic lift to the literal source-final preimage; compose
+with its actual source-final inclusion to obtain a map to the entire
+source terminal chart. Its source leg is the original cone's source-base
+map, and its target leg is the original cone's target map, using the
+whole glued-map local formula.
+
+At an intersection, the second lift's source leg places its actual value
+in the first source-final preimage. Regard it as a point of that true
+subtype. Both actual values have the same two local square legs, since
+the glued-map local formula identifies the first local target arrow with
+the entire chart map on this preimage. The first lemma identifies these
+points, and subtype inclusion identifies their values in the entire
+chart. Thus the constructed holomorphic local lifts genuinely agree on
+every actual intersection. Glue them. Equality with each local lift on
+its true open gives holomorphicity and both whole cone legs.
+
+For uniqueness, at any point choose a covering target open. An arbitrary
+candidate's source leg puts its value in the same actual source-final
+preimage. Its target leg and the whole glued-map local formula give the
+same two local square legs as the constructed lift. Pointwise joint
+injectivity identifies the values. This holds at every point, proving
+uniqueness of the entire holomorphic lift.
+\end{proof}

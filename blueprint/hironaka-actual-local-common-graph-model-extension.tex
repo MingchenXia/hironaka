@@ -1,0 +1,128 @@
+\section{A genuine common graph model from original local maps}
+
+Let $W\subset U\subset\mathbf C^n$ and $D\subset V\subset\mathbf C^m$,
+where $U,V$ are actual opens. Let original functions $f:\mathbf C^n\to
+\mathbf C^m$ and $g:\mathbf C^m\to\mathbf C^n$ be holomorphic on these
+actual opens. Assume only $f(W)\subset D$, $g(D)\subset W$, and the
+actual identities $gf=1$ on $W$, $fg=1$ on $D$. No identity outside
+these original subsets or mutually preserved ambient opens is assumed.
+
+\begin{theorem}[Containing-open restriction is a genuine whole-model isomorphism]
+\label{hir:actual-local-common-graph-containing-open-iso}
+\uses{hir:actual-analytic-subspace-open-restriction-iso,hir:actual-analytic-subspace-biholomorphic-comparison}
+\lean{Hironaka.HironakaActualLocalCommonGraphModel.containingOpenSubspaceIso,Hironaka.HironakaActualLocalCommonGraphModel.coordinateOpenSubspaceIso,Hironaka.HironakaActualLocalCommonGraphModel.containingOpenSubspaceIso_hom_point,Hironaka.HironakaActualLocalCommonGraphModel.coordinateOpenSubspaceIso_hom_point}
+\leanok
+If an actual open contains every point of an original subset, its actual
+quotient-model restriction map is an isomorphism. In particular, for
+coordinate opens $B\subset A$ and $C\subset A$ whose every original point
+lies in $B$, the actual model on the inverse image of $C$ in $B$ is
+isomorphic to the actual model on $C$ in $A$.
+\end{theorem}
+\begin{proof}
+The actual open-subspace restriction map is a genuine open immersion by
+the already proved whole-ideal/stalk dictionary. Its base map is
+surjective: retain each original point with its given actual open
+membership. A surjective open immersion is an actual locally ringed
+isomorphism. For two coordinate opens, the literal inclusion of $B$
+identifies it holomorphically with the genuine open
+$\{a\in A:a\in B\}$ of $A$. Both inverse functions simply retain the
+same original ambient value, and open-subtype holomorphy proves that this
+is an actual biholomorphism. Its actual whole quotient-model isomorphism,
+followed by the containing-open isomorphism just proved, gives the
+asserted comparison. Each map was constructed from genuine holomorphic
+subspace maps, so its actual complex-point triangle follows from the proved
+holomorphic subspace structural compatibility; inverse triangles follow
+by the genuine inverse isomorphism identities. No stalk or sheaf
+isomorphism is supplied.
+\end{proof}
+
+\begin{theorem}[Actual wide graph models]
+\label{hir:actual-local-common-graph-wide-model-isos}
+\uses{hir:actual-analytic-subspace-mutual-restriction-iso,hir:actual-local-common-graph-containing-open-iso}
+\lean{Hironaka.HironakaActualLocalCommonGraphModel.firstGraphModelIso,Hironaka.HironakaActualLocalCommonGraphModel.secondGraphModelIso,Hironaka.HironakaActualLocalCommonGraphModel.firstGraphModelIso_hom_point,Hironaka.HironakaActualLocalCommonGraphModel.secondGraphModelIso_hom_point}
+\leanok
+The actual model of $W$ in $U$ is isomorphic to its literal graph model
+in the actual wide coordinate open $p^{-1}U\subset\mathbf C^{n+m}$.
+The actual model of $D$ in $V$ is isomorphic to its literal reverse graph
+model in $q^{-1}V$. Both are genuine whole locally ringed isomorphisms
+over the same actual complex point.
+\end{theorem}
+\begin{proof}
+For the first graph, the actual original map
+$x\mapsto\iota_p x+\iota_q f(x)$ lands in $p^{-1}U$ because its first
+projection is $x$. Holomorphy on the true source open follows from the
+given original holomorphy and genuine block linear maps. Projection back
+to $U$ is holomorphic on the entire wide open. These actual maps carry
+$W$ into the literal graph and the graph back into $W$. Their two
+inverse identities hold exactly on those original subsets, by the
+literal graph equations. The genuine mutual-restriction theorem
+constructs the entire quotient-sheaf isomorphism. Every actual holomorphic
+subspace map preserves the complex-point structural map, so both
+triangles hold. The second graph is constructed in the same original
+block order using $y\mapsto\iota_p g(y)+\iota_q y$ and the actual last
+projection on $q^{-1}V$. The same argument gives its actual isomorphism
+and structural triangle; no permutation or reciprocal ambient mapping
+hypothesis is needed.
+\end{proof}
+
+\begin{theorem}[Original inverse-only-on-subsets maps give one actual common graph model]
+\label{hir:actual-local-common-graph-model}
+\uses{hir:actual-local-common-graph-wide-model-isos,hir:actual-local-common-graph-containing-open-iso}
+\lean{Hironaka.HironakaActualLocalCommonGraphModel.actualCommonGraphModelIsos}
+\leanok
+Under the stated original hypotheses, both actual models are genuinely
+isomorphic over the actual complex point to the same literal graph model
+inside the actual common coordinate open $p^{-1}U\cap q^{-1}V$.
+No locally ringed transition isomorphism or common-model certificate is
+input.
+\end{theorem}
+\begin{proof}
+Every point of the first wide graph has first block in $W$ and second
+block its actual value under $f$, hence in $D\subset V$. Thus its
+entire graph subset lies in the actual common open. Likewise every
+point of the second wide graph has last block in $D$ and first block
+its actual value under $g$, hence in $W\subset U$. Apply the genuine
+containing-coordinate-open whole-model isomorphisms to restrict both
+wide graph models to the actual common open. There their two literal
+sets agree: from $x\in W$ and $y=f(x)$ one gets $y\in D$ and
+$g(y)=g(f(x))=x$; conversely from $y\in D$ and $x=g(y)$ one gets
+$x\in W$ and $f(x)=f(g(y))=y$. These use inverse identities only at
+actual points of the original subsets. Substituting this proved set
+equality identifies the second restricted graph model with exactly the
+first. Compose the actual isomorphisms from the preceding theorem and
+these actual restriction isomorphisms. Their genuine complex-point
+triangles compose, proving the asserted common model in the same original
+block coordinates. No ambient shrink was claimed invariant under both
+$f$ and $g$ away from the subsets.
+\end{proof}
+
+\begin{theorem}[The common graph is an actual abstract analytic object]
+\label{hir:actual-local-common-graph-analytic-object}
+\uses{hir:actual-local-common-graph-model,hir:reduced-analytic-space-category,hir:reduced-analytic-embedded-model-object}
+\lean{Hironaka.HironakaActualLocalCommonGraphModel.hasAnalyticCharts_commonGraphModel}
+\leanok
+If the original $W$ in its actual coordinate open $U$ is analytic, the
+constructed common graph model is an actual object of the reduced complex
+analytic category. No analytic atlas or common-space certificate for the
+graph is supplied.
+\end{theorem}
+\begin{proof}
+Internally construct the common graph isomorphisms from the preceding
+theorem and retain the first genuine isomorphism. The common graph's actual
+underlying space is a subtype of its true Euclidean coordinate open, hence
+Hausdorff and second countable. At every actual graph point, use the original
+analytic model on $W\subset U$ itself as its analytic chart, mapped by this
+internally produced whole isomorphism. An isomorphism is an open immersion;
+the preceding theorem proves its structural triangle over the same actual
+complex point. Its actual inverse base point supplies the required actual
+source preimage of every graph point. These prove precisely the ordinary
+analytic local-model property. No resolution tower or desired local chart
+isomorphism certificate is assumed.
+\end{proof}
+
+This supplies a common whole quotient model. The earlier graph ideal
+formula supplies actual added graph equations at a centered point.
+Extracting these paired original local representatives and windows from
+an arbitrary intrinsic isomorphism is a further consumer of the genuine
+local ambient lifting theorem. Canonical invariance under adding graph
+equations and resolution history descent remain separate theorems.

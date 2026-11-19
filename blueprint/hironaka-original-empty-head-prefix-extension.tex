@@ -1,0 +1,70 @@
+\section{Actual projection neutrality of an empty recursive head}
+
+\begin{lemma}[Every actual all-empty tower has its own biholomorphic projection]
+\label{hir:original-all-empty-tower-projection}
+\uses{hir:original-empty-filtered-parts-tree-projection-neutrality}
+\lean{Hironaka.HironakaOriginalEmptyHeadPrefix.exists_empty_tower_projection}
+\leanok
+An actual finite blowup tower whose every actual centre is empty has a
+genuine biholomorphism to its original base whose underlying map is
+literally that tower's entire projection.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower. The identity tower uses the identity
+biholomorphism. At an actual step, the empty-tower hypothesis gives
+both an empty preceding history and an empty final centre. The genuine
+empty-blowup theorem makes the final blowup map a biholomorphism.
+Compose it with the inductively constructed preceding projection.
+The actual projection formula for an appended step proves equality
+of the whole underlying map. No chosen terminal-resolution certificate
+is used.
+\end{proof}
+
+\begin{theorem}[The actual separator and pure-head prefix of an empty head]
+\label{hir:original-empty-head-prefix-projection}
+\uses{hir:original-all-empty-tower-projection,hir:original-empty-head-separation-chain-all-empty,hir:original-pure-head-unique-empty-base-comparison}
+\lean{Hironaka.HironakaOriginalEmptyHeadPrefix.exists_empty_head_prefix_projection}
+\leanok
+Let an actual ordered separator chain start with head $A=\varnothing$,
+original boundary $E$, arbitrary raw labelled tail and actual tower
+$T_0$. Let $T_1$ be an actual pure-head stage for the actual strict
+transform of this head and the separator's recorded boundary. Write
+$T=T_0\mathbin{+}T_1$ and let $E_f$ be the whole boundary recorded by
+this actual pure-head stage. Then every actual centre of $T$ is empty,
+and its projection is a genuine biholomorphism $\beta$ to the original
+base. The entire chronological boundary is exactly
+\[
+ E_f=E.map(\beta^{-1})+ [\varnothing]^{T.length}.
+\]
+Consequently its filtered nonempty list is exactly the filtered list
+of $E.map(\beta^{-1})$. For every original subset $P$, including
+nonclosed raw tails, its conventional strict transform is exactly
+$\beta^{-1}(\overline P)$. No closedness assumption on those raw
+subsets or on the raw tail is imposed.
+\end{theorem}
+\begin{proof}
+The genuine empty-head separator theorem forces every actual centre
+of $T_0$ empty. Its actual strict head is empty. The whole original
+cosupport of the following pure-head marked ideal is therefore empty,
+so its genuine canonical history $T_1$ also has only empty centres.
+The actual append formula gives this for the same whole prefix $T$.
+Apply the preceding lemma to construct its actual projection $\beta$.
+
+The original boundary is closed: a nonempty separator supplies its
+actual invariant-domain SNC boundary; when the chain is nil, its
+boundary is unchanged and the actual pure-head SNC record supplies
+it. The genuine separator boundary identity and independence of
+geometric boundary transport from the auxiliary ideal identify $E_f$
+with the boundary of the same whole $T$ starting at $E$. The actual
+all-empty boundary theorem therefore gives precisely the full list
+of original inverse images followed by one empty entry for every
+actual centre. Filtering the latter entries gives the stated exact
+ordered-list equality.
+
+A genuine biholomorphism has empty differential exceptional locus.
+The definition of the conventional strict transform thus reduces to
+the closure of its inverse image of $P$. The actual homeomorphism is
+open and continuous, so this is the inverse image of the closure of
+$P$. This proves the whole-set formula for arbitrary raw subsets,
+without replacing them by closed inputs as a premise.
+\end{proof}

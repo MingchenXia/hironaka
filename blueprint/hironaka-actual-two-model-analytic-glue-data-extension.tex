@@ -1,0 +1,96 @@
+\section{Native two-model gluing data from actual holomorphic overlap maps}
+\label{sec:hironaka-actual-two-model-analytic-glue-data}
+
+For $i\in\{0,1\}$, take actual coordinate opens $U_i\subset\mathbf C^{n_i}$
+and original closed analytic subsets $C_i\subset U_i$, with their
+independently constructed actual reduced quotient-subspace models. Let $O_{ij}\subset U_i$ be actual overlap
+opens. Suppose ordinary original holomorphic maps
+$f_{ij}:O_{ij}\to O_{ji}$ carry $C_i\cap O_{ij}$ into $C_j\cap O_{ji}$,
+and $f_{ji}f_{ij}(x)=x$ for $x\in C_i\cap O_{ij}$ when $i\ne j$.
+No whole ambient inverse identity or locally ringed transition map is input.
+
+\begin{theorem}[The original overlap maps construct genuine model isomorphisms]
+\label{hir:actual-two-model-overlap-isomorphisms}
+\uses{hir:actual-analytic-subspace-mutual-restriction-iso,hir:actual-analytic-subspace-open-restriction-iso}
+\lean{Hironaka.HironakaActualTwoModelAnalyticGlueData.actualOverlapIso}
+\leanok
+For distinct $i,j$, the original overlap maps internally construct an actual
+locally ringed isomorphism between the actual models of $C_i\cap O_{ij}$
+and $C_j\cap O_{ji}$. Their maps into their own original chart models are
+the genuine actual open immersions constructed from the original open
+inclusions. The two actual transition maps are inverse on the entire
+structure sheaves.
+\end{theorem}
+\begin{proof}
+Apply the previously proved actual restriction-isomorphism construction
+to $f_{ij},f_{ji}$ on the two actual overlap subsets. Its ordinary inputs
+are precisely holomorphicity, the two subset containments and the two
+inverse identities only on those subsets. It gives actual mutually
+inverse morphisms of the whole reduced quotient sheaves. Independently,
+each overlap-to-chart map is the previously constructed actual
+open-subspace map and hence a genuine open immersion. No locally ringed
+isomorphism or open-immersion certificate was supplied.
+\end{proof}
+
+\begin{theorem}[The actual holomorphic two-model input constructs native gluing data]
+\label{hir:actual-two-model-native-glue-data}
+\uses{hir:actual-two-model-overlap-isomorphisms}
+\lean{Hironaka.HironakaActualTwoModelAnalyticGlueData.actualTwoModelGlueData}
+\leanok
+The two actual original chart models, their actual open overlap models
+and the constructed transition morphisms internally form genuine native
+locally ringed space gluing data. No native gluing datum or structure-sheaf
+cocycle is part of the input.
+\end{theorem}
+\begin{proof}
+Use the native gluing-data variant whose off-diagonal overlaps are indexed
+only by distinct indices. Put the actual two chart models in its chart
+positions, the actual overlap models in its off-diagonal positions, and
+the actual open-subspace inclusions in its inclusion positions. Their
+proved open-immersion property supplies both monomorphisms and all required
+pullbacks. Use the actual morphism of the first theorem in each transition
+position. The actual inverse identities of those constructed isomorphisms
+prove the required two-transition identity. There are no three pairwise
+distinct indices in the two-element indexing type, so every off-diagonal
+triple-overlap obligation is eliminated by that proved indexing fact.
+The native conversion fills the diagonal positions with the actual charts
+and identities and derives its full repeated-index cocycle laws. The
+resulting whole gluing datum has actual open inclusion morphisms, since
+the new diagonal identifications are actual isomorphisms and the original
+off-diagonal inclusions are the proved actual open immersions.
+\end{proof}
+
+\begin{theorem}[Every actual overlap retains the original complex structural morphism]
+\label{hir:actual-two-model-complex-structural-compatibility}
+\uses{hir:actual-two-model-native-glue-data,hir:reduced-analytic-model-holomorphic-morphisms}
+\lean{Hironaka.HironakaActualTwoModelAnalyticGlueData.actualTwoModelGlueData_point_compatible}
+\leanok
+For the native gluing datum $D$, let $p_i:D.U_i\to\mathrm{point}_{\mathbf C}$
+be the actual chart model's original complex structural morphism. Then
+for every pair $i,j$ the genuine original compatibility is
+\[
+ D.f_{ij}\,p_i=D.t_{ij}\,D.f_{ji}\,p_j.
+\]
+Thus these same actual gluing data carry compatible actual complex
+structural maps; no scalar-compatibility triangle is input.
+\end{theorem}
+\begin{proof}
+Each off-diagonal open inclusion is an actual holomorphic subspace map,
+so its proved structural-map compatibility identifies its composite with
+$p_i$ with the original overlap model's complex structural map. Each
+actual transition is the actual holomorphic subspace map of the unchanged
+original $f_{ij}$, so its structural-map compatibility identifies its
+composite with the reverse overlap model's structural map with that same
+source overlap structural map. Combining the two actual identities proves
+the displayed equation. The native diagonal positions and transitions
+are actual identities, so their equations follow from the identity laws.
+This retains the original complex structure on the entire overlap maps.
+\end{proof}
+
+These are genuine two-chart native gluing data from ordinary original
+holomorphic maps, including maps between different ambient dimensions.
+Gluing two Hausdorff charts can produce a non-Hausdorff space, so the
+Hausdorff condition for an analytic-space result is a separate natural
+topological hypothesis. An arbitrary-index atlas requires genuine
+triple-overlap comparison and cocycle producers beyond this two-model
+construction. No resolution or resolution-descent conclusion is asserted.

@@ -1,0 +1,81 @@
+\section{Actual local holomorphic coordinates for abstract analytic morphisms}
+
+Objects are the genuine Hausdorff second-countable locally ringed spaces
+over the original complex point which admit actual analytic-subspace charts.
+Their morphisms are the original morphisms in that slice, without supplied
+ambient holomorphic extensions.
+
+\begin{theorem}[A genuine chart receives an intrinsic model map after actual ambient restriction]
+\label{hir:reduced-analytic-morphism-local-chart-factor}
+\uses{hir:actual-analytic-subspace-open-restriction-iso,hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaReducedComplexAnalyticMorphismCharts.exists_actual_model_chart_factor}
+\leanok
+Let $Z$ be an actual locally ringed space over the complex point and
+$F:C\to Z$ a genuine complex-point-compatible morphism from an actual
+subspace model $C\subset M$. Let $j:D\to Z$ be a genuine open-immersion
+chart over the complex point, with $D\subset V\subset\mathbf C^m$.
+If $F(x)$ belongs to the actual image of $j$, there are an actual ambient
+open $T\subset M$ containing $x$ and an internally constructed genuine
+complex-point-compatible model morphism $H:(C\cap T)\to D$ whose whole
+composite with $j$ equals the actual restriction of $F$.
+\end{theorem}
+\begin{proof}
+The actual image of the open immersion $j$ is open. Its inverse image
+under the continuous base of $F$ is therefore a genuine open of $C$
+containing $x$. The induced subspace topology writes that open as $C\cap T$
+for an actual ambient open $T$. The composite of the genuine actual
+open-subspace map with $F$ consequently has its entire topological image
+in the image of $j$. The native universal property of an actual locally
+ringed open immersion constructs the lift $H$ and proves the whole
+factorization, including structure sheaves. Compose that equality with
+the structural map of $Z$ to the complex point. The genuine structural
+triangles of $j$, $F$ and the actual open-subspace inclusion prove the
+required complex-point triangle for $H$. Neither $H$ nor a sheaf
+factorization is supplied as input.
+\end{proof}
+
+\begin{theorem}[Every abstract intrinsic analytic morphism has genuine local holomorphic chart form]
+\label{hir:reduced-analytic-morphism-actual-holomorphic-charts}
+\uses{hir:reduced-analytic-morphism-local-chart-factor,hir:actual-analytic-subspace-intrinsic-local-holomorphic-lift,hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaReducedComplexAnalyticMorphismCharts.exists_actual_holomorphic_morphism_charts}
+\leanok
+For any morphism $F:A\to B$ in the constructed category of reduced complex
+analytic spaces and any $x\in A$, internally choose actual analytic
+models $C\subset U\subset\mathbf C^n$ and $D\subset V\subset\mathbf C^m$
+with genuine complex-point-compatible open charts $i:C\to A$ and
+$j:D\to B$, and a point $c\in C$ with $i(c)=x$. There are actual source
+opens $T\subset U$ containing $c$ and $W\subset T$ containing the same
+point, and a genuine holomorphic $f:W\to V$ carrying the corresponding
+actual restricted source subset into $D$, such that
+\[
+  j\circ f_* = F\circ i\circ r_T\circ r_W
+\]
+as whole locally ringed morphisms. Here $r_T,r_W$ are the independently
+constructed actual quotient-subspace open inclusions and $f_*$ is the
+actual morphism induced by the original holomorphic map. The source
+composite $i\circ r_T\circ r_W$ is a genuine open immersion whose image
+contains $x$.
+\end{theorem}
+\begin{proof}
+The actual local-model property of $A$ chooses $i$ and $c$ over $x$;
+that of $B$ chooses $j$ over $F(x)$. The original slice-morphism equation
+shows that the composite $F\circ i$ is complex-point compatible. The
+preceding theorem constructs the actual ambient open $T$ and the whole
+intrinsic factor $H$ into $D$. Apply genuine intrinsic local holomorphic
+lifting to $H$ at the actual point of $C\cap T$. It constructs an actual
+open $W\subset T$, an original holomorphic $f:W\to V$, the actual subset
+mapping property, and the entire intrinsic square
+$f_*=H\circ r_W$. Compose this square with $j$ and use the proved whole
+factorization $jH=F i r_T$. Associativity gives exactly the asserted
+whole locally ringed square. Both actual restriction maps and $i$ are
+open immersions, so their composite is one. The literal nested-subtype
+point formed from $c\in T$ and $c\in W$ maps to $x$, proving actual
+coverage. All charts, restricted opens and holomorphic representatives
+are constructed from the original object/morphism inputs; the two opens
+are honest successive open restrictions of the original coordinate model.
+\end{proof}
+
+This gives intrinsic morphisms of the actual abstract analytic category
+their genuine local holomorphic realization. It does not assert that
+resolution towers or their coherent ideals descend across arbitrary
+analytic charts, nor that such a tower terminates.

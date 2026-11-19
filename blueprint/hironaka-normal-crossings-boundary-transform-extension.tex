@@ -1,0 +1,163 @@
+\section{The original normal-crossing carrier with accumulated boundary}
+\label{sec:hironaka-normal-crossings-boundary-transform}
+
+\begin{definition}[A simultaneous original carrier and boundary]
+\label{hir:general-nc-simultaneous-original-boundary}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryTransform.IsBoundaryAdaptedCarrier}
+\uses{hir:general-normal-crossings-carrier}
+\leanok
+A closed original normal-crossing carrier $H$ and a finite list $E$ of
+closed hypersurfaces are boundary adapted if, at every point $x$, there
+are actual centred holomorphic coordinates on an open neighbourhood,
+a finite selected coordinate set $S$, and coordinate sets $B_i$ for the
+members of $E$. On the whole neighbourhood, $H$ is the union of the
+coordinate hyperplanes indexed by $S$. For each $E_i$ through $x$, $B_i$
+is a singleton and $E_i$ is its coordinate hyperplane on that same
+neighbourhood. The singletons for the through members are distinct and
+disjoint from $S$. There is no condition on the coordinate sets of
+members not through $x$. In particular this definition is meaningful
+in dimension zero and for empty through families.
+\end{definition}
+
+\begin{lemma}[The actual empty-boundary producer and geometric consumers]
+\label{hir:general-nc-boundary-empty-producer}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryTransform.boundaryAdapted_nil,Hironaka.HironakaNormalCrossingsBoundaryTransform.isNormalCrossingsCarrier_of_boundaryAdapted,Hironaka.HironakaNormalCrossingsBoundaryTransform.isSNCDivisor_of_boundaryAdapted,Hironaka.HironakaNormalCrossingsBoundaryTransform.hasNormalCrossings_highest_boundary}
+\uses{hir:general-nc-simultaneous-original-boundary,hir:general-nc-intrinsic-branch-multiplicity}
+\leanok
+Every actual original NC carrier is boundary adapted with the empty
+list. Any boundary adapted pair produces an actual original NC carrier
+and an actual SNC boundary. Its intrinsic highest original-branch
+stratum has only normal crossings with that actual boundary.
+\end{lemma}
+\begin{proof}
+For the empty list use the actual original coordinates and selected
+set; there are no boundary equations or distinctness conditions. For a
+general pair, discarding the boundary equations gives an actual NC
+flattening for the entire carrier. Discarding the union equation gives
+one common actual coordinate system for every through boundary member;
+their singleton equations and distinctness give precisely SNC.
+At a point of the highest original stratum, the intrinsic count theorem
+identifies the whole stratum on the original chart with the intersection
+of all selected hyperplanes. Those very equations, together with the
+existing singleton boundary equations on the same domain, give actual
+normal-crossing coordinates for the whole centre and the boundary.
+No centre coordinate system is supplied separately.
+\end{proof}
+
+\begin{lemma}[Joint coordinates adapted to the whole highest stratum]
+\label{hir:general-nc-highest-original-boundary-coordinates}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryTransform.exists_highest_joint_coordinates}
+\uses{hir:general-nc-boundary-empty-producer,hir:general-nc-highest-multiplicity-smooth-centre}
+\leanok
+Suppose all original branch counts are at most $r$. At a point of its
+highest stratum there are actual centred coordinates in which the
+whole centre is the dimension-$(n-r)$ plane, the entire original
+carrier is the union of the last $r$ coordinate hyperplanes, and every
+through old boundary member is one of the distinct first $n-r$
+coordinate hyperplanes. These coordinates and boundary indices are
+internally produced from the simultaneous original pair.
+\end{lemma}
+\begin{proof}
+Take actual simultaneous coordinates and their selected set $S$.
+The intrinsic highest-stratum dictionary gives $|S|=r$ and the centre
+as the whole intersection of those selected equations. Choose a
+permutation sending $S$ onto the last $r$ indices and its complement
+onto the first $n-r$ indices. Postcomposition with that holomorphic
+linear isomorphism, and precomposition of the actual inverse with its
+inverse, gives an actual coordinate map on the same open source.
+Transport each old boundary coordinate set by this permutation.
+Singletons and their distinctness are preserved. Disjointness from $S$
+places every through old boundary singleton in the first block.
+The original union and the centre intersection are transported on
+the whole actual domain, producing all claimed dictionaries together.
+\end{proof}
+
+\begin{lemma}[Actual joint transformed coordinates over the centre]
+\label{hir:general-nc-joint-boundary-coordinates-over-centre}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryTransform.exists_joint_coordinates_over_highest}
+\uses{hir:general-nc-highest-original-boundary-coordinates,hir:general-nc-highest-stratum-local-strict-branch-drop}
+\leanok
+In the genuine blowup of the highest original stratum, every point
+above the centre has one actual centred coordinate system simultaneously
+expressing the whole original strict carrier, every through strict
+old boundary member and the new exceptional member. The original
+selected set has at most $r-1$ indices. All boundary equations are
+distinct singleton coordinates disjoint from that selected set.
+\end{lemma}
+\begin{proof}
+Use the produced joint base coordinates. The genuine blowup supplies
+a monomial local inverse $W$, pivot $j$ in the last block, and its
+actual holomorphic lift inverse. Differentiating those inverse
+identities gives an invertible differential for $W$, so its actual
+recentred local coordinates exist. In the uncentred monomial chart,
+the original strict carrier is exactly the union of the last-block
+hyperplanes other than the pivot, by the proved genuine finite-union
+strict-closure calculation. A through old boundary member has index
+in the first block. Its pivot is distinct, and its original coordinate
+is unchanged by the monomial projection. The actual strict-transform
+calculation therefore gives exactly that same coordinate hyperplane.
+The new exceptional member is exactly the pivot hyperplane.
+
+Every through strict old member maps to a through old base member,
+because it lies in the preimage of that closed member. Its coordinate
+thus vanishes at the blowup point. The pivot also vanishes because
+the point is above the centre. Subtracting the centre value preserves
+all these equations. Retain among the remaining original indices
+exactly those whose coordinate vanishes at the point, and shrink to
+one open neighbourhood on which the finitely many other coordinates
+remain nonzero. The entire original union is then precisely the union
+of this retained set, whose size is at most $r-1$. All old boundary
+indices are tangential and mutually distinct; the new pivot is normal
+and is omitted from the retained original set. Hence every through
+boundary singleton is distinct and disjoint from the entire retained
+original set on the same actual coordinate domain.
+\end{proof}
+
+\begin{theorem}[A genuine boundary-preserving original-count step]
+\label{hir:general-nc-boundary-transform-original-count-step}
+\lean{Hironaka.HironakaNormalCrossingsBoundaryTransform.boundaryAdapted_strict_highest,Hironaka.HironakaNormalCrossingsBoundaryTransform.isSNCDivisor_strict_highest_boundary,Hironaka.HironakaNormalCrossingsBoundaryTransform.branchMultiplicity_boundary_strict_highest_le,Hironaka.HironakaNormalCrossingsBoundaryTransform.exists_highest_boundary_blowup_count_decrease}
+\uses{hir:general-nc-joint-boundary-coordinates-over-centre,hir:general-nc-highest-stratum-global-strict-count-decrease,hir:general-nc-boundary-empty-producer}
+\leanok
+The genuine highest-original-stratum blowup of a boundary adapted pair
+produces a boundary adapted pair consisting of the whole strict
+original carrier and the list of strict old boundary members followed
+by the actual new exceptional member. The new list is genuinely SNC
+and every original branch count is at most $r-1$. For a nonempty
+original carrier, the positive attained maximum and the entire step
+are internally produced without compactness or global original labels.
+\end{theorem}
+\begin{proof}
+All transformed original and old boundary sets are closed by their
+strict-closure definition, and the exceptional member is closed by
+continuity of the actual projection and closedness of the actual
+centre. Above the centre use the jointly produced coordinates of the
+preceding lemma. Off the centre use the actual blowup local
+biholomorphism to transport one original simultaneous coordinate
+system. On its actual open inverse domain, strict transforms of the
+closed original and old boundary sets equal their preimages. Thus the
+same original selected set and the same old coordinate singletons
+give the entire strict original carrier and every through strict old
+member together. The exceptional member does not pass through the
+point, so assign its unused coordinate set the empty set. Through
+singleton cardinality, distinctness and disjointness are inherited
+from the actual original pair. These two cases give a boundary adapted
+pair at every actual point; its boundary consumer proves SNC.
+
+Above the centre the genuine original-count chart has at most $r-1$
+indices. Off it the intrinsic count is unchanged and the image point
+is outside the highest stratum, so its integer count is strictly
+below $r$. This proves the global bound. If the original carrier is
+nonempty, the actual finite intrinsic count image first produces its
+positive attained maximum and smooth whole centre, and the proved
+complex blowup existence theorem produces the genuine blowup. Applying
+the preceding result to these actual objects produces the whole step.
+\end{proof}
+
+\begin{remark}
+These are statements about actual simultaneous geometric carriers and
+boundary equations. They do not assert that the total branch count
+decreases, that a separately marked ideal contains the centre in its
+cosupport, or that the old ordered monomial algorithm is independent
+of its colexicographic branch-label tie-break. Canonical marked-ideal
+global sequence descent remains a separate obligation.
+\end{remark}

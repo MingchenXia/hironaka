@@ -1,0 +1,122 @@
+\section{Actual presentation maps of reduced analytic subspace models}
+\label{sec:hironaka-actual-analytic-subspace-maps}
+
+The locally ringed models in this section are the actual vanishing-quotient
+sheaves on the genuine topological subspaces constructed previously. No
+structure-sheaf isomorphism is part of the input. Let $f:M\to N$ be an actual
+holomorphic map of complex manifolds, with $f(C)\subset D$.
+
+\begin{theorem}[The actual subspace inclusion is a monomorphism]
+\label{hir:actual-analytic-subspace-inclusion-mono}
+\uses{hir:actual-analytic-subspace-inclusion-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceInclusion_mono}
+\leanok
+The constructed inclusion of each actual subspace model into its original
+ambient manifold is a monomorphism of locally ringed spaces.
+\end{theorem}
+\begin{proof}
+Its underlying map is the injective actual subtype inclusion, and every
+stalk map is the surjective original quotient homomorphism, hence an
+epimorphism of rings. Suppose two locally ringed morphisms become equal
+after composing with this inclusion. Underlying injectivity makes their
+continuous maps equal. At every source point, the two stalk maps agree
+after precomposition by the inclusion stalk epimorphism, so they agree.
+A morphism of ring sheaves is determined by all of its stalk maps, hence
+the two locally ringed morphisms coincide. This proves the monomorphism
+assertion without a closedness or smoothness assumption on the subspace.
+\end{proof}
+
+\begin{theorem}[Actual holomorphic maps descend to the whole quotient structure sheaves]
+\label{hir:actual-analytic-subspace-holomorphic-map}
+\uses{hir:actual-analytic-subspace-structure-sheaf,hir:actual-analytic-subspace-reduced-stalks,hir:actual-analytic-subspace-inclusion-stalk}
+\lean{Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceMap,Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceMap_inclusion,Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceMap_stalk}
+\leanok
+The actual restriction $g:C\to D$, $g(x)=f(x)$, underlies an internally
+constructed morphism of the actual locally ringed subspace models. Its
+composition with the target inclusion equals the source inclusion followed
+by the actual ambient holomorphic morphism. On whole original stalk
+numerators its pullback is exactly
+\[
+ [r]\longmapsto[f^*r],
+\]
+with each class taken modulo the entire original vanishing ideal.
+\end{theorem}
+\begin{proof}
+On an original target open $U$, compose each genuine holomorphic section
+with $f$ on $f^{-1}U$. A section vanishing on $D\cap U$ pulls back to one
+vanishing on $C\cap f^{-1}U$, since $f(C)\subset D$. The actual section
+vanishing criterion therefore proves that this ring homomorphism sends
+the entire target section ideal into the entire source section ideal.
+It descends to the full quotient rings. Composition of actual section
+restrictions commutes with pullback, so these maps form a genuine
+quotient-presheaf morphism. The sheafification universal property extends
+it to the actual ambient quotient sheaves, retaining every original
+quotient numerator.
+
+Let $i_C,i_D$ be the subtype inclusions. Compose this quotient-sheaf map
+with the original inverse-image adjunction unit for $i_C$ and its actual
+sheafification unit. The equality $f i_C=i_D g$ identifies the resulting
+map with a map from the target ambient quotient sheaf to $i_{D*}g_*\mathcal
+O_C$. The genuine inverse-image adjunction for $i_D$, followed by its
+sheafification universal property, gives $\mathcal O_D\to g_*\mathcal O_C$.
+The two universal-property unit equations show that its composite with
+the target inclusion map is exactly the original ambient pullback
+followed by the source inclusion map. This proves the claimed equality
+of actual ringed morphisms, rather than assuming it.
+
+Apply the stalk functor to this equality. The two inclusion stalk maps
+are the actual whole quotient maps, giving the displayed numerator
+formula. To prove the descended stalk map is local, lift any of its
+input elements through the surjective target inclusion stalk map. If its
+image is a unit, the composite ambient/source-inclusion stalk map is a
+unit on that lift. Both actual constituent stalk maps are local, so the
+lift is a unit. Its quotient class is therefore a unit. Thus every
+constructed stalk map is local, giving the genuine locally ringed morphism.
+\end{proof}
+
+\begin{theorem}[Identity and composition retain the actual subspace models]
+\label{hir:actual-analytic-subspace-map-functor-laws}
+\uses{hir:actual-analytic-subspace-inclusion-mono,hir:actual-analytic-subspace-holomorphic-map}
+\lean{Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceMap_id,Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceMap_comp}
+\leanok
+The internally constructed subspace maps preserve actual identities and
+composition of original holomorphic maps carrying the specified subsets.
+\end{theorem}
+\begin{proof}
+Compose the proposed identity equality with the actual target inclusion.
+Both sides equal that inclusion, by the preceding commutative square
+and the actual ambient identity law. Cancel the inclusion monomorphism.
+For two composable original holomorphic maps, compose the proposed
+composition equality with the final target inclusion. The two proved
+commutative squares make both sides the source inclusion followed by the
+same composite ambient holomorphic map. The ambient composition law
+identifies these maps exactly. Cancel the final inclusion monomorphism.
+\end{proof}
+
+\begin{theorem}[Actual ambient biholomorphisms induce actual subspace isomorphisms]
+\label{hir:actual-analytic-subspace-biholomorphic-comparison}
+\uses{hir:actual-analytic-subspace-map-functor-laws,hir:actual-analytic-subspace-holomorphic-map}
+\lean{Hironaka.HironakaActualAnalyticSubspaceMaps.actualSubspaceBiholomorphicIso}
+\leanok
+Let $e:M\simeq N$ be an actual ambient biholomorphism satisfying
+$x\in C$ if and only if $e(x)\in D$. Then it internally constructs an
+actual isomorphism of the two reduced locally ringed subspace models.
+Its underlying map is the literal restriction of $e$, its inverse is the
+literal restriction of $e^{-1}$, and its forward and inverse morphisms
+commute with the actual ambient inclusions.
+\end{theorem}
+\begin{proof}
+The subset equivalence implies that $e$ carries $C$ into $D$. Applying
+it to $e^{-1}(y)$ proves that $e^{-1}$ carries $D$ into $C$. Both maps are
+actual holomorphic maps, so the preceding construction gives two genuine
+locally ringed subspace morphisms, each with its actual inclusion square.
+Their two composites are the constructed restrictions of $e^{-1}e$ and
+$ee^{-1}$ by the proved composition law. The genuine inverse identities
+and the actual identity law make both composites identity morphisms.
+These morphisms therefore form the asserted locally ringed isomorphism.
+No isomorphism of quotient sheaves or resolution data was supplied.
+\end{proof}
+
+This comparison is induced by an actual ambient biholomorphism. Comparison
+between unrelated local embeddings of the same abstract analytic space,
+effective atlas gluing and resolution descent remain further obligations.

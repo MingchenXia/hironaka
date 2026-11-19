@@ -1,0 +1,71 @@
+\section{Actual original Taylor coefficients from convergent multilinear expansions}
+\label{sec:hironaka-actual-multilinear-taylor-coordinates}
+Let $E=\mathbb C^n$ with its actual coordinate basis $e_i$. For a continuous $j$-linear form $p_j:E^j\to\mathbb C$, define the literal polynomial
+\[
+ P_j=\sum_{w:\{0,\dots,j-1\}\to\{0,\dots,n-1\}}
+ p_j(e_{w(0)},\dots,e_{w(j-1)})X^{\sum_\ell e_{w(\ell)}}.
+\]
+Repeated words are all retained: their contributions add in the same ordinary polynomial coefficient.
+
+\begin{theorem}[The actual coordinate polynomial is the multilinear diagonal]
+\label{hir:actual-multilinear-coordinate-polynomial}
+\uses{hir:actual-original-canonical-finite-taylor-polynomial}
+\lean{Hironaka.HironakaActualMultilinearTaylorCoordinates.coordinateWordExponent,Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearCoordinatePolynomial,Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearCoordinatePolynomial_homogeneous,Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearCoordinatePolynomial_coeff_ne_zero_degree,Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearCoordinatePolynomial_eval}
+\leanok
+The literal polynomial $P_j$ is homogeneous of degree $j$, and its actual evaluation at every original $z\in E$ equals $p_j(z,\dots,z)$.
+\end{theorem}
+\begin{proof}
+Every word exponent is the sum of $j$ coordinate unit exponents, so its total degree is $j$. Each displayed monomial, and hence their finite sum, is homogeneous of that degree. Write each argument $z=\sum_i z_i e_i$ and use multilinearity to expand all $j$ arguments simultaneously. Each resulting word contributes $p_j(e_{w(0)},\dots,e_{w(j-1)})\prod_\ell z_{w(\ell)}$, which is exactly the evaluation of its displayed monomial. Summing over the same finite word family gives the asserted whole function equality. Empty words and dimension zero follow from the same finite expansion.
+\end{proof}
+
+\begin{theorem}[Actual analytic finite truncations have genuine whole maximal-power remainders]
+\label{hir:actual-multilinear-finite-jet-dictionary}
+\uses{hir:actual-multilinear-coordinate-polynomial,hir:whole-point-power-derivative-kernel,hir:actual-original-canonical-finite-taylor-polynomial}
+\lean{Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearPartialPolynomial,Hironaka.HironakaActualMultilinearTaylorCoordinates.originalTaylorPolynomial_eq_multilinearPartial}
+\leanok
+Suppose the actual holomorphic representative $f$ has a genuine multilinear power series $p$ at the origin. Its already constructed actual original Taylor polynomial of order $k$ is exactly $\sum_{j=0}^k P_j$, with no supplied jet or coefficient identification.
+\end{theorem}
+\begin{proof}
+Truncate the actual multilinear series by retaining its terms through degree $k$ and setting all others to zero. Its finite sum is exactly the evaluation of $\sum_{j=0}^kP_j$ by the preceding theorem, and this finite function has the truncated series as a genuine analytic power series. The actual difference $f-\sum_{j=0}^kP_j$ has a genuine power series whose terms of orders through $k$ are all zero. The iterated derivative formula expresses each derivative of order $j\le k$ at the origin as the finite sum, over permutations, of that zero $j$-linear term. Thus every such derivative vanishes. The genuine whole maximal-ideal-power/derivative dictionary puts the actual difference germ in $\mathfrak m^{k+1}$. Homogeneity of each $P_j$ supplies the genuine degree bound on the finite sum. The already proved uniqueness of the actual original finite Taylor polynomial therefore identifies the two actual polynomials.
+\end{proof}
+
+\begin{theorem}[Every actual original formal coefficient has its literal multilinear coordinate expansion]
+\label{hir:actual-original-taylor-multilinear-coefficient}
+\uses{hir:actual-multilinear-finite-jet-dictionary,hir:actual-original-taylor-coefficient-stabilization,hir:actual-original-formal-taylor-algebra-embedding}
+\lean{Hironaka.HironakaActualMultilinearTaylorCoordinates.originalTaylor_coefficient_eq_multilinearCoordinatePolynomial}
+\leanok
+For every exponent $\alpha$, the coefficient of the actual original Taylor algebra map applied to the same germ of $f$ equals the $\alpha$ coefficient of $P_{|\alpha|}$.
+\end{theorem}
+\begin{proof}
+The actual original stabilized coefficient agrees with the coefficient of its true Taylor polynomial of order $|\alpha|$. The preceding theorem identifies that polynomial with the sum of the literal coordinate polynomials through this order. Every summand except $P_{|\alpha|}$ is homogeneous of a different degree and therefore has zero $\alpha$ coefficient. The remaining coefficient is precisely the asserted one, in the same original polynomial and germ coordinate systems.
+\end{proof}
+
+\begin{theorem}[The literal homogeneous coordinate polynomial has an exponential coefficient-mass bound]
+\label{hir:actual-multilinear-coordinate-polynomial-mass}
+\uses{hir:actual-multilinear-coordinate-polynomial,hir:actual-coefficient-mass-convolution}
+\lean{Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearCoordinatePolynomial_finiteMass,Hironaka.HironakaActualMultilinearTaylorCoordinates.multilinearCoordinatePolynomial_mass_le}
+\leanok
+At every positive uniform polyradius $r$, the genuine formal coercion of $P_j$ is absolutely summable, and
+\[
+ |P_j|_r\le n^j\|p_j\|r^j.
+\]
+\end{theorem}
+\begin{proof}
+Each displayed word monomial is a finite-support series and has exact coefficient mass $|p_j(e_w)|r^j$, since its exponent has total degree $j$. The actual basis vectors have norm one, so the multilinear operator-norm estimate gives $|p_j(e_w)|\le\|p_j\|$. The finite-sum coefficient triangle inequality bounds the mass of their sum by the sum of these masses. There are exactly $n^j$ words, so their sum is at most $n^j\|p_j\|r^j$. This also covers the empty word and the empty nonzero-degree word family in dimension zero.
+\end{proof}
+
+\begin{theorem}[Every actual original holomorphic germ has finite mass at a genuinely produced positive radius]
+\label{hir:actual-original-taylor-positive-coefficient-mass}
+\uses{hir:actual-original-taylor-multilinear-coefficient,hir:actual-multilinear-coordinate-polynomial-mass,hir:actual-multilinear-bands-positive-coefficient-radius}
+\lean{Hironaka.HironakaActualMultilinearTaylorCoordinates.exists_originalTaylor_finiteMass}
+\leanok
+For every original holomorphic germ $g\in\mathcal O_{\mathbb C^n,0}$ there exists $r>0$ for which its already constructed actual original formal Taylor algebra map has finite absolute coefficient mass at the uniform polyradius $r$.
+No analytic expansion, positive radius, coefficient identification or summability certificate is supplied.
+\end{theorem}
+\begin{proof}
+Choose a genuine holomorphic representative of the original germ. Its actual holomorphy near the origin produces a genuine analytic multilinear expansion $p$ there, whose convergence radius is positive. The preceding original coefficient theorem gives the exact degree-band dictionary with the literal polynomials $P_j$. The preceding coordinate mass theorem gives their actual exponential coefficient bound at every positive radius. The genuine homogeneous-band summability theorem therefore produces a positive uniform radius at which the entire original coefficient family is absolutely summable. This is precisely the mass of the same original Taylor algebra map; all intermediate expansions and the radius were constructed from the original germ.
+\end{proof}
+
+\begin{remark}
+This supplies the original holomorphic-germ-to-positive-coefficient-radius dictionary needed by the actual small-radius and Neumann division producers. Faithful Taylor identification for the resulting evaluated series, and complete transformed relation/Hilbert--Samuel tracking or termination, remain separate statements.
+\end{remark}

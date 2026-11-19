@@ -1,0 +1,94 @@
+\section{The whole associated ring and module sheaves agree}
+
+Let $G^{\#}$ be the genuine ring sheafification of the original section
+graded ring. The original structure-ring sheaf morphism
+$\alpha:\mathcal O_M\to G^{\#}$ is already defined by the actual
+degree-zero classes. The statements here use this action directly,
+before any whole stalk dictionary. They require no coherence assumption.
+
+\begin{definition}[The actual ring sheaf as an ambient module sheaf]
+\label{hir:real-domain-actual-normal-associated-ring-ambient-module-sheaf}
+\uses{hir:real-domain-actual-normal-associated-ring-sheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingSheafSection,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingSheafSectionAlgebra,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingSheafModulePresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingAmbientModuleSheaf}
+\leanok
+The underlying additive sheaf of $G^{\#}$ becomes a genuine ambient
+module sheaf by $r\cdot s=\alpha_U(r)s$ on every original open $U$.
+\end{definition}
+\begin{proof}
+Each $\alpha_U$ is a ring homomorphism, so multiplication by its images
+defines a module structure. For $U\subseteq V$, naturality of $\alpha$
+and multiplicativity of ring restriction give
+$(\alpha_V(r)s)|_U=\alpha_U(r|_U)s|_U$. Thus the ring restrictions are
+semilinear for the actual structure-ring restrictions. The additive
+presheaf is a sheaf because forgetting commutative ring operations
+preserves the limits expressing the sheaf condition. This supplies
+the module sheaf with its original sections and restrictions.
+\end{proof}
+
+\begin{lemma}[The true ring sheafification unit is ambient linear]
+\label{hir:real-domain-actual-normal-associated-ring-module-sheaf-unit}
+\uses{hir:real-domain-actual-normal-associated-ring-ambient-module-sheaf,hir:real-domain-actual-normal-associated-module-ring-presheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingModuleSheafUnit}
+\leanok
+The original ring sheafification unit $G\to G^{\#}$ is a morphism
+of ambient module presheaves, with the same map on every whole section.
+\end{lemma}
+\begin{proof}
+The ambient ring sheaf morphism is defined as the original ambient
+ring presheaf morphism followed by the ring sheafification unit.
+The unit preserves multiplication, so it sends
+$\operatorname{im}(r)s$ to $\alpha_U(r)$ times the unit image of $s$.
+This is precisely ambient linearity. Its naturality is the naturality
+of the original ring sheafification unit.
+\end{proof}
+
+\begin{theorem}[The whole module sheafification agrees with the actual ring sheaf]
+\label{hir:real-domain-actual-normal-associated-module-ring-sheaf-comparison}
+\uses{hir:real-domain-actual-normal-associated-ring-module-sheaf-unit,hir:real-domain-actual-normal-associated-module-ring-presheaf-comparison}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingModuleSheafLift,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingModuleSheafLift_toSheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingModuleSheafLiftIsIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedModuleRingSheafIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedRingModuleSheafLift_unit,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedModuleRingSheafIso_unit}
+\leanok
+The previously constructed associated module sheaf is isomorphic to
+the actual ambient module sheaf underlying $G^{\#}$. The isomorphism
+extends the original whole section comparison followed by the true
+ring sheafification unit.
+\end{theorem}
+\begin{proof}
+First apply module sheafification to the isomorphism from the original
+module coproduct to the module presheaf underlying $G$. The preceding
+linear unit extends uniquely from this latter presheaf to its module
+sheafification by the sheafification adjunction. After forgetting
+module structures, this extension is the canonical comparison from
+the additive sheafification of the additive presheaf underlying $G$
+to the additive sheaf underlying its commutative-ring sheafification.
+The forgetful functor from commutative rings to abelian groups preserves
+limits and filtered colimits. On the open-set site, it therefore
+commutes with the two covering-colimit and matching-limit operations
+constructing sheafification; their canonical comparison is an
+isomorphism and has exactly the original unit factorization. Hence
+the additive extension is an isomorphism. The forgetful functor from
+module sheaves to additive sheaves reflects isomorphisms: an inverse
+to an additive bijection that respects scalar multiplication also
+respects scalar multiplication, by applying the original bijection.
+Thus the linear extension is a module sheaf isomorphism. Composing
+with the first sheafified isomorphism proves the assertion. The
+adjunction unit identity gives the stated whole section factorization.
+\end{proof}
+
+\begin{corollary}[Every original degree is retained by the whole sheaf comparison]
+\label{hir:real-domain-actual-normal-associated-module-ring-sheaf-degrees}
+\uses{hir:real-domain-actual-normal-associated-module-ring-sheaf-comparison,hir:real-domain-actual-normal-associated-module-ring-presheaf-comparison}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedModuleRingSheafIso_degree,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedModuleRingSheaf.actualNormalAssociatedModuleRingSheafIso_degree_apply}
+\leanok
+For every $q$, the whole sheaf comparison sends the original module
+coproduct degree map, followed by its module sheafification unit,
+to the literal original degree-$q$ section inclusion followed by
+the ring sheafification unit, on every original open.
+\end{corollary}
+\begin{proof}
+Precompose the whole section unit factorization with the categorical
+degree-$q$ inclusion. The original presheaf comparison sends that
+inclusion to the literal degree-$q$ section inclusion. Associativity
+then gives the asserted identity of morphisms. Evaluating on any
+original open and any original layer section gives its stated
+section formula.
+\end{proof}

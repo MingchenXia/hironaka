@@ -1,0 +1,74 @@
+\section{Exact original saturation on the real nonlinear domain}
+
+The original flattened ideal is coherent on its real target. The actual
+Oka and Noetherian saturation arguments require finite generation near
+zero, rather than coherence on the whole ambient model. Thus they apply
+to this true local domain without any extension assumption.
+
+\begin{lemma}[Real local coherence supplies the actual finite analytic presentation]
+\label{hir:real-domain-coherence-actual-finite-analytic-presentation}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-centre-domain-original-pullback-coherence,hir:relative-normal-coherent-saturation-finite-span}
+\lean{Hironaka.HironakaSmoothCentreRealDomainSaturation.idealFGAt_of_coherentOn}
+\leanok
+If an actual germ ideal $F$ is coherent on a real open $W$ and $y\in W$,
+then its literal membership predicate has an actual finite holomorphic
+presentation near $y$. No coherence outside $W$ is needed.
+\end{lemma}
+\begin{proof}
+The real local coherence gives an actual open $V$ containing $y$,
+contained in $W$, with finitely many actual holomorphic generators and
+complete membership at every point of $V$. On a complex Euclidean
+model, holomorphic manifold derivatives and the corresponding complex
+Fr\'echet derivatives agree. Hence those actual generators and
+coefficient germs give precisely a finite analytic span presentation
+on $V$. Both implications of the membership dictionary are the same
+actual finite equality with the same coefficient functions.
+\end{proof}
+
+\begin{theorem}[Original input supplies one real domain for exact all-power saturation]
+\label{hir:real-domain-original-exact-uniform-saturation}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-coherence-actual-finite-analytic-presentation,hir:real-centre-domain-actual-flattened-coherent-family,hir:relative-normal-coherent-saturation-neighborhood-stability}
+\lean{Hironaka.HironakaSmoothCentreRealDomainSaturation.exists_original_regular_real_domain_exact_uniform_saturation}
+\leanok
+Let $A$ be originally coherent, let $C$ be originally regular at $x$,
+and let $h$ be an actual holomorphic function near zero in the ambient
+model. Original data internally supply a genuine flattening $\Phi$,
+an integer $N$, and ONE actual open $U$ containing zero in the real
+$\Phi.\mathrm{target}$, such that for $F=f^*A$ and EVERY $y\in U$:
+all actual repeated colons $F:h^{N+q}$ equal $F:h^N$; multiplication
+by every power $h^q$ for $q\geq N$ has exactly the same membership
+condition as multiplication by $h^N$; and the whole saturation union
+is exactly $F:h^N$. One internally selected finite actual holomorphic
+family presents this same fixed colon at every point of the SAME $U$.
+The caller supplies no stable index, nearby equality, finite colon
+family or saturation certificate.
+\end{theorem}
+\begin{proof}
+Original regularity and original coherence give the genuine flattening
+and coherence of $F$ on its real target, with zero in that target.
+The preceding lemma gives actual finite analytic generation near zero.
+The ambient holomorphic germ ring is Noetherian, so its ascending chain
+of actual repeated colons by the actual germ of $h$ has two equal
+successive ideals at an internally selected index $N$. The actual
+whole finite span dictionary identifies those ideals with the genuine
+origin membership conditions. Oka's theorem supplies actual local
+finite presentations of both successive analytic colons. Spread the
+finite functional membership witnesses of each presentation in the
+other to one open neighbourhood; the two inclusions give equality of
+the whole actual colon membership conditions at every nearby point.
+Iterating the literal colon definition gives equality of every later
+colon with that fixed colon at those same points. The original finite
+analytic presentation gives holomorphic ideal membership and closure
+under multiplication by $h$. Repeated colons are therefore exactly
+colon by actual powers, proving the stated all-power dictionary, and
+the increasing-chain property together with later stabilization proves
+that the entire saturation union equals the fixed colon.
+Oka's theorem also supplies finite actual holomorphic generators of
+that fixed colon near zero. Intersect their presentation open with the
+stability open and the actual real flattening target. The resulting
+single open still contains zero and carries all stated equalities and
+the same fixed finite presentation. No property outside the real
+domain has been assumed or inferred.
+\end{proof}

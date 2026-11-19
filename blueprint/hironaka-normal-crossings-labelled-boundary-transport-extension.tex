@@ -1,0 +1,128 @@
+\section{Actual transport and memberwise simplicity of labelled NC boundaries}
+\label{sec:nc-labelled-boundary-transport}
+
+Every list below retains its original ordered positions. In particular,
+an open restriction retains an empty trace as an empty position. These
+are geometric operations on labelled boundaries; no resolution history
+or branch-tracking certificate is an input.
+
+\begin{lemma}[Each original label is an actual NC carrier]
+\label{hir:labelled-nc-each-original-carrier}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport.isNormalCrossingsCarrier_get}
+\leanok
+Every member of a labelled NC boundary is an NC carrier, with precisely
+its own coordinate branch set in the common labelled coordinates.
+\uses{hir:labelled-normal-crossings-boundary}
+\end{lemma}
+\begin{proof}
+Closedness holds for every original member by definition. At any point,
+take the common labelled coordinates and select the coordinate set of
+the specified position. The definition gives the full local union of
+the corresponding coordinate hyperplanes on that very neighbourhood.
+The coordinates have the required centre and domain, so this is the
+actual NC-carrier condition for that original member.
+\end{proof}
+
+\begin{theorem}[Memberwise count one makes the entire labelled boundary simple]
+\label{hir:labelled-nc-memberwise-count-one-snc}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport.isSNCDivisor_of_member_branchMultiplicity_le_one}
+\leanok
+Let $B$ be a labelled NC boundary. If every original member has intrinsic
+branch multiplicity at most one at every point, then the unchanged
+entire list $B$ is SNC. Different original members may meet.
+\uses{hir:labelled-nc-each-original-carrier,hir:general-nc-exact-nearby-branch-count,hir:snc}
+\end{theorem}
+\begin{proof}
+Fix common labelled coordinates at $x$, with pairwise disjoint sets
+$S_i$. The exact intrinsic count formula for the actual NC carrier of
+the $i$th member gives $|S_i|\le1$. A member through $x$ has at least
+one branch, because its local union equality holds at the centre.
+Consequently its $S_i$ is a singleton. The union-of-hyperplanes
+equation for that singleton is its coordinate-subspace equation, so
+the same coordinates give the SNC family equations. Two distinct
+through positions cannot have equal singleton sets, since their sets
+are disjoint. The coordinate assignment is therefore injective on
+through positions. Together with the original closedness, these are
+exactly the SNC conditions for the entire original list.
+\end{proof}
+
+\begin{theorem}[A genuine local biholomorphism transports every original label]
+\label{hir:labelled-nc-whole-local-biholomorphic-pullback}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport.isNormalCrossingsBoundary_preimage}
+\leanok
+Let $g:Z\to Y$ be holomorphic between complex manifolds of the same
+dimension, with invertible differential everywhere. If $B$ is labelled
+NC on $Y$, the literal ordered list $(g^{-1}H_i)_i$ is labelled NC on
+$Z$. A single common actual coordinate reader transports every member
+and every branch set, including absent and empty members.
+\uses{hir:labelled-normal-crossings-boundary,hir:general-nc-actual-local-biholomorphic-coordinate-reader}
+\end{theorem}
+\begin{proof}
+The inverse image of each closed member is closed by continuity. At
+$z$, take the common original labelled coordinates at $g(z)$. The
+actual local holomorphic inverse-function theorem produces a centred
+coordinate equivalence at $z$ whose domain maps into the original
+flat domain and whose entire coordinate vector is the original vector
+composed with $g$. Give each inverse-image position exactly the
+coordinate set of its original position. The ordered map of a list
+preserves its positions, so the corresponding index map is injective
+and all pairwise disjointness statements are unchanged. On the actual
+new flat domain, substitute the entire coordinate-vector identity in
+the original labelled local equality. This proves the exact local
+equality for each literal inverse-image member. The same reader works
+for all positions, proving the asserted labelled NC condition.
+\end{proof}
+
+\begin{corollary}[A genuine biholomorphism reflects labelled NC geometry]
+\label{hir:labelled-nc-biholomorphic-equivalence}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport.isNormalCrossingsBoundary_diffeomorph_iff}
+\leanok
+For a genuine biholomorphism $g:Z\simeq Y$, the literal inverse-image
+list is labelled NC if and only if the original list is labelled NC.
+\uses{hir:labelled-nc-whole-local-biholomorphic-pullback}
+\end{corollary}
+\begin{proof}
+The forward transport follows from the preceding theorem and the
+actual inverse differential. For reflection apply that theorem to the
+genuine inverse $g^{-1}$. For each original member $H_i$, its double
+inverse image is exactly $H_i$, since $g(g^{-1}y)=y$. Mapping this
+pointwise equality through the entire ordered list identifies the
+result with the original list, with every empty position retained.
+\end{proof}
+
+\begin{corollary}[Literal open restriction retains every labelled member]
+\label{hir:labelled-nc-actual-open-restriction}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport.isNormalCrossingsBoundary_open}
+\leanok
+The complete ordered trace of a labelled NC boundary on any actual
+open is labelled NC, with its original order and empty slots unchanged.
+\uses{hir:labelled-nc-whole-local-biholomorphic-pullback,hir:base-change-open}
+\end{corollary}
+\begin{proof}
+The inclusion of an actual open is holomorphic and its differential
+is invertible at every point. Apply the whole labelled pullback theorem
+to this inclusion. Its literal inverse images are precisely the full
+ordered open trace, including every empty inverse image.
+\end{proof}
+
+\begin{theorem}[Memberwise original counts on an open supply its entire SNC trace]
+\label{hir:labelled-nc-memberwise-original-open-snc}
+\lean{Hironaka.HironakaNormalCrossingsLabelledBoundaryTransport.isSNCDivisor_open_of_member_branchMultiplicity_le_one}
+\leanok
+If $B$ is labelled NC and every original member has intrinsic branch
+count at most one at all points of an actual open $U$, then the entire
+literal trace of $B$ on $U$ is SNC. No count condition outside $U$ is
+required, and different labels may intersect on $U$.
+\uses{hir:labelled-nc-actual-open-restriction,hir:labelled-nc-memberwise-count-one-snc,hir:general-nc-biholomorphic-intrinsic-multiplicity}
+\end{theorem}
+\begin{proof}
+The open-restriction theorem supplies labelled NC coordinates for the
+entire trace. For any traced position, the exact list map identifies
+its member with the literal preimage of the corresponding original
+member. The genuine local biholomorphic count law for the open
+inclusion identifies its intrinsic branch count at every $u\in U$
+with that of this original member at the underlying ambient point.
+The hypothesis bounds the latter by one. Apply the memberwise theorem
+to these actual trace members. Its output is SNC for the entire same
+ordered trace, with no deletion or relabelling.
+\end{proof}

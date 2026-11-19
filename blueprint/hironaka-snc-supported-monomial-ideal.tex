@@ -1,0 +1,156 @@
+\section{The intrinsic monomial ideal for a disconnected SNC boundary}
+\label{sec:hironaka-snc-supported-monomial-ideal}
+
+The members of a finite SNC list need not be connected.  Their divisor
+exponents are locally constant on their smooth carriers, and can differ
+between connected components.  The intrinsic monomial ideal uses these
+actual stalk exponents and remains globally defined.  The following
+argument identifies it with the actual ideal of every effective divisor
+supported on the boundary, without assuming any global multiplicity for
+a disconnected member.  It implements the monomial/nonmonomial
+decomposition of W{\l}odarczyk's Step~2 at the level of genuine ideals.
+
+\begin{lemma}[The intrinsic monomial ideal is invertible]
+\label{hir:intrinsic-monomial-invertible}
+\uses{hir:monomial-part-ambient}
+\lean{Hironaka.HironakaSNCSupportedMonomialIdeal.isInvertible_monomialPart}
+\leanok
+Let $n>0$, let $E$ be a finite SNC list, and let $\mathfrak a$ be a
+coherent ideal with a nonzero stalk at every point.  Its intrinsic
+monomial ideal $\mathcal M(\mathfrak a)$ is invertible.
+\end{lemma}
+\begin{proof}
+The existing genuine monomial generator theorem supplies, near each
+$x$, an open set $U$ and a holomorphic function $m$ generating every
+stalk of $\mathcal M(\mathfrak a)$ on $U$.  At each $y\in U$, points
+where $m$ is nonzero occur arbitrarily close to $y$.
+If $V\subseteq U$ is a nonempty open set, choose $y\in V$; the latter
+property supplies $z\in V$ with $m(z)\ne0$.
+Thus $m$ vanishes identically on no nonempty open subset of $U$.
+These are exactly the local generator and nonvanishing properties of
+an invertible holomorphic ideal.
+\end{proof}
+
+\begin{lemma}[The intrinsic nonmonomial ideal is the actual colon]
+\label{hir:intrinsic-nonmonomial-colon}
+\uses{hir:monomial-part-ambient}
+\lean{Hironaka.HironakaSNCSupportedMonomialIdeal.nonmonomialPart_eq_colon}
+\leanok
+For every germ ideal $\mathfrak a$ and finite boundary list $E$,
+\[
+ \mathcal N(\mathfrak a)=
+ (\mathfrak a:\mathcal M(\mathfrak a)).
+\]
+\end{lemma}
+\begin{proof}
+Both sides consist, at every point, of holomorphic germs $f$ such that
+$fm$ belongs to $\mathfrak a$ for every germ
+$m\in\mathcal M(\mathfrak a)$.  The product $fm=mf$ identifies the two
+membership conditions, and hence the complete germ ideals.
+\end{proof}
+
+\begin{lemma}[The nonmonomial part of an effective divisor is invertible]
+\label{hir:intrinsic-divisor-nonmonomial-invertible}
+\uses{hir:intrinsic-monomial-invertible,hir:intrinsic-nonmonomial-colon,hir:monomial-part-ambient,hir:divisor-ideal-nonzero,ana:actual-invertible-ideal-quotient}
+\lean{Hironaka.HironakaSNCSupportedMonomialIdeal.isInvertible_nonmonomialPart}
+\leanok
+If $n>0$ and $E$ is a finite SNC list, the intrinsic nonmonomial ideal
+of an effective divisor $D$ is an actual invertible ideal.
+\end{lemma}
+\begin{proof}
+The ideal $I_D$ is invertible, hence coherent with nonzero stalks.
+The first lemma makes $\mathcal M(I_D)$ invertible, and the existing
+divisor-exponent and Hadamard calculus gives
+$I_D\subseteq\mathcal M(I_D)$ at all original points.
+The actual colon of two nested invertible ideals is invertible: locally
+their generators have a holomorphic quotient, and cancellation against
+the nonzero divisor generator proves that this quotient generates the
+entire colon stalk.  Apply that theorem and the preceding colon identity.
+\end{proof}
+
+\begin{lemma}[An SNC boundary has no point in dimension zero]
+\label{hir:snc-dimension-zero-empty}
+\uses{hir:snc}
+\lean{Hironaka.HironakaSNCSupportedMonomialIdeal.notMem_member_of_dim_zero,Hironaka.HironakaSNCSupportedMonomialIdeal.monomialPart_eq_unitIdeal_of_dim_zero}
+\leanok
+On a complex zero-dimensional manifold, every member of a finite SNC
+list is empty, and the intrinsic monomial ideal of any ideal is the
+holomorphic unit ideal.
+\end{lemma}
+\begin{proof}
+If $x$ belonged to a member, an adapted SNC chart would cut that member
+out by a set of exactly one coordinate.  There are no coordinates in
+dimension zero, so such a coordinate set cannot exist.
+Thus there is no active member at any point.  The definition of the
+intrinsic monomial ideal consequently imposes only holomorphicity on
+its germs, which is the unit ideal.
+\end{proof}
+
+\begin{theorem}[The genuine nonmonomial residual is the unit ideal]
+\label{hir:intrinsic-supported-nonmonomial-unit}
+\uses{hir:intrinsic-divisor-nonmonomial-invertible,hir:divisor-supported-local-component,hir:monomial-part-ambient,hir:snc-dimension-zero-empty}
+\dcref{W{\l}odarczyk 2005, Step 2}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaSNCSupportedMonomialIdeal.nonmonomialPart_eq_unitIdeal_of_support_subset}
+\leanok
+Let $E$ be a finite SNC list on a complex manifold of any dimension,
+and let $D$ be an effective divisor with
+$\operatorname{Supp}D\subseteq\bigcup_{W\in E}W$.
+Then its complete intrinsic nonmonomial ideal is the unit ideal:
+\[
+ \mathcal N(I_D)=\mathcal O_M.
+\]
+No connectedness of the members is required.
+\end{theorem}
+\begin{proof}
+First suppose $n>0$.  The nonmonomial ideal is invertible by the previous
+lemma, so it defines an actual effective divisor $R$.
+The genuine factorization
+$I_D=\mathcal N(I_D)\mathcal M(I_D)$ implies
+$\operatorname{Supp}R\subseteq\operatorname{Supp}D$:
+if all germs of its first factor vanish at a point, all germs of the
+product vanish there as well.
+If $x\in\operatorname{Supp}R$, the actual local component producer
+gives $W\in E$ through $x$ with $W$ locally contained in
+$\operatorname{Supp}R$.
+The existing maximal-exponent extraction theorem supplies a germ
+$f\in\mathcal N(I_D)_x$ which does not belong to $(I_W)_x$.
+Coherence propagates membership of this same germ $f$ to nearby points.
+At every such point in $W$, local support containment therefore gives
+$f=0$.  Since $f$ is holomorphic, this says precisely
+$f\in(I_W)_x$, a contradiction.
+Thus $R$ has empty support, and a coherent ideal with empty zero locus
+is the unit ideal, as proved by dividing by a nonvanishing stalk member.
+
+When $n=0$, the preceding lemma shows that the boundary union is empty,
+so the actual support of $D$ is empty and $I_D=\mathcal O_M$.
+Every holomorphic germ then belongs to the nonmonomial ideal: its
+product with any holomorphic monomial-ideal germ still belongs to
+$\mathcal O_M$.  Conversely nonmonomial-ideal germs are holomorphic by
+definition.  This proves the asserted equality in dimension zero too.
+\end{proof}
+
+\begin{theorem}[The actual supported ideal equals its intrinsic monomial ideal]
+\label{hir:intrinsic-supported-ideal-monomial}
+\uses{hir:intrinsic-supported-nonmonomial-unit,hir:monomial-part-ambient,hir:snc-dimension-zero-empty}
+\lean{Hironaka.HironakaSNCSupportedMonomialIdeal.ideal_eq_monomialPart_of_support_subset}
+\leanok
+For every finite SNC list $E$ and every effective divisor $D$ with
+$\operatorname{Supp}D\subseteq\bigcup_{W\in E}W$, there is equality of
+the complete original germ ideals
+\[
+ I_D=\mathcal M(I_D).
+\]
+\end{theorem}
+\begin{proof}
+For positive ambient dimension, substitute the proved unit residual
+into the genuine factorization
+$I_D=\mathcal N(I_D)\mathcal M(I_D)$.
+The monomial ideal is coherent, so multiplication by the holomorphic
+unit ideal leaves it unchanged.  In dimension zero, the boundary is
+empty, hence the supported ideal and its monomial ideal are both the
+unit ideal.  This proves the equality at all original stalks in every
+dimension.  The statement permits disconnected members: their actual
+locally constant exponents are retained in $\mathcal M(I_D)$, rather
+than replaced by unjustified globally fixed integers.
+\end{proof}

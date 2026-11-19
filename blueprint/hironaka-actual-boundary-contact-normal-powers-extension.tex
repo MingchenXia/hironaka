@@ -1,0 +1,100 @@
+\section{Literal contact coordinates in the transverse-boundary branch}
+
+Throughout the ambient complex dimension $n$ is positive.  The ordered divisor
+$E$ is simple normal crossings.  The contact carrier is its actual zero set on
+its genuine open domain.  Transversality of that carrier to $E$ is an explicit
+geometric hypothesis; normal crossings of the centre with $E$ alone does not
+imply it.  Ordinary preservation of the transformed old-plus-born SNC boundary
+is coordinate independent and does not require this extra contact hypothesis.
+
+\begin{lemma}[Centred simultaneous coordinates with the actual dimensions]
+\label{lem:actual-boundary-contact-centred-coordinates}
+\lean{Hironaka.HironakaActualBoundaryContactNormalPowers.exists_centred_transverse_centre_hypersurface_coordinates}
+\uses{bcalc:snc-simultaneous}
+\leanok
+Let $x\in C\subset H$, with $C$ regular of dimension $d$ at $x$ and $H$ regular
+of dimension $n-1$ there.  Suppose that $C$ has normal crossings with $E$ and
+$H$ is transverse to $E$.  There are centred holomorphic coordinates $\psi$
+in which $C=\mathbb C^d\times0$, $H=\mathbb C^{n-1}\times0$, and every original
+member $E_i$ through $x$ is $\{\psi_{s_i}=0\}$, where the $s_i$ are distinct
+and $s_i<n-1$.  In particular $d\le n-1$.
+\end{lemma}
+\begin{proof}
+Simultaneous normal-crossings coordinates give a local biholomorphism making
+$C$ and $H$ the final-coordinate planes of dimensions $a$ and $b$, and all
+members through $x$ distinct coordinate hyperplanes indexed below $b$.
+Subtract its value at $x$.  That value lies in both planes and in every such
+hyperplane, so subtraction preserves every membership equivalence.  The
+result is centred.  A final-coordinate plane indexed by $a$ equals the one
+indexed by $\min(n,a)$; hence these coordinates exhibit regularity of $C$ of
+dimension $\min(n,a)$ and of $H$ of dimension $\min(n,b)$.  Uniqueness of
+regular dimension gives these minima as $d$ and $n-1$.  Inclusion of the two
+regular germs gives $d\le n-1<n$, so $a=d$ and $b=n-1$.  Thus all old member
+indices are below $n-1$, as required.
+\end{proof}
+
+\begin{theorem}[The same literal contact function and all old boundary members]
+\label{thm:actual-boundary-contact-literal-coordinates}
+\lean{Hironaka.HironakaActualBoundaryContactNormalPowers.exists_actual_boundary_contact_coordinates}
+\uses{lem:actual-boundary-contact-centred-coordinates,hir:actual-centre-contact-joint-coordinates}
+\leanok
+Let $U$ be open with $x\in U$, and let $u$ be holomorphic on $U$, with nonzero
+differential at each of its zeros.  Let $C$ be regular of dimension $d$ at
+$x$, satisfy $u=0$ on $C\cap U$, and have normal crossings with $E$.  Assume
+that $H=\{u=0\}\cap U$ is transverse to $E$.  There is a genuine centred
+chart $\Theta$, with domain contained in $U$, in which $C$ is the $d$-plane,
+the last coordinate is the literal function $u$, and every old member
+through $x$ is its original distinct coordinate hyperplane indexed below
+$n-1$.
+\end{theorem}
+\begin{proof}
+The nonzero differential makes $H$ regular of dimension $n-1$ at $x$.
+The set $C\cap U$ is regular of dimension $d$ at $x$ and has the same local
+normal-crossings coordinates with $E$ as $C$, by restriction to the open
+neighbourhood $U$.  It is contained in $H$.  Apply the preceding lemma.
+Write $l=n-1$.  The tangent derivatives of $u$ in all coordinates $i<l$
+vanish because $u$ vanishes on $H$.  The chain rule and $du_x\ne0$ therefore
+force its $l$th partial derivative to be nonzero.  Replace only coordinate
+$l$ by $u$.  The differential is invertible, so the holomorphic inverse
+function theorem on $U\cap\operatorname{dom}\psi$ gives a genuine smaller
+chart.  Its value at $x$ is zero.  The equation $u=0$ is exactly the old
+last-coordinate equation on this domain.  Thus replacement preserves the
+entire centre plane, and each old boundary coordinate is unchanged because
+its index is less than $l$.  The resulting chart has all the asserted whole
+set identities and remains inside $U$.
+\end{proof}
+
+\begin{theorem}[Original marked data give boundary contact coordinates and the same canonical normal powers]
+\label{thm:actual-boundary-contact-same-normal-powers}
+\lean{Hironaka.HironakaActualBoundaryContactNormalPowers.exists_original_boundary_contact_reduced_normal_powers}
+\uses{thm:actual-boundary-contact-literal-coordinates,hir:actual-supplied-flattening-canonical-normal-powers}
+\leanok
+Write $n=d+t$.  Let $A$ be an actual coherent ideal, $m\ge1$, and $u$ an
+original tangent direction of $(A,m)$ on $U\ni x$.  Let the actual regular
+centre $C$ of dimension $d$ at $x$ lie in $\operatorname{cosupp}(A,m)$ and
+have normal crossings with $E$.  Suppose that all Hilbert--Samuel values of
+$A$ are constant along $C$, and that the actual contact carrier
+$\{u=0\}\cap U$ is transverse to $E$.  A chart satisfying the preceding
+theorem exists, and the canonical reduced formal standard-basis vertex
+series of the whole actual flattened origin ideal, in that exact chart,
+belong to the corresponding powers of the actual normal-coordinate ideal,
+with exponent equal to each vertex's normal weight.
+\end{theorem}
+\begin{proof}
+Coherence makes every member of every original derivative ideal
+holomorphic.  Tangent-direction membership in $D^{m-1}A$ and the original
+centre cosupport condition imply $u=0$ on $C\cap U$; the same original
+tangent direction supplies the nonzero differential at its zeros.  The
+preceding theorem therefore constructs one literal-contact,
+whole-old-boundary chart $\Theta$ without a coordinate certificate input.
+Apply the supplied-flattening normal-powers theorem to this prescribed
+$\Theta$, its proved true centre equality, original coherence, and the
+original all-order Hilbert--Samuel constancy.  That theorem uses the same
+flattened whole ideal throughout and proves the canonical reduced vertex
+normal-power inclusions for it.  No second flattening is selected.
+\end{proof}
+
+This is the transverse-contact branch.  No deduction of contact
+transversality from ordinary maximal contact, preservation of arbitrary
+contact directions by all old boundary members, persistent weighted
+Hilbert--Samuel tracking, strict decrease, or termination is asserted.

@@ -1,0 +1,118 @@
+\section{The actual finite dehomogenized initial ideal inside the analytic exceptional specialization}
+
+\begin{theorem}[Actual original ideal members retain every prescribed finite initial component]
+\label{hir:actual-point-original-initial-polynomial-lift}
+\uses{hir:actual-analytic-ideal-member-finite-jet-lift,hir:actual-formal-extension-whole-ideal-intersections}
+\lean{Hironaka.HironakaActualPointInitialIdealInclusion.exists_actual_original_point_initial_polynomial_lift}
+\leanok
+Let $I$ be an ideal of the original analytic germ ring and let $F$ belong
+to its entire formal extension and to the actual formal point ideal power
+$\mathfrak m^d$. There is an internally produced original $g\in I$
+in the actual analytic point ideal power $\mathfrak m^d$ whose whole
+degree-$d$ homogeneous polynomial is precisely that of $F$.
+\end{theorem}
+\begin{proof}
+Whole Taylor extension preserves the intersection of the original ideals
+$I$ and $\mathfrak m^d$, and sends the latter to the corresponding actual
+formal point ideal power. Thus $F$ belongs to the formal extension of the
+whole original intersection. The genuine finite-jet lifting theorem for
+an extended ideal internally produces $g$ in that original intersection
+whose Taylor coefficients agree with $F$ at every total degree below
+$d+1$. In particular their degree-$d$ homogeneous components agree
+coefficient by coefficient, and therefore so do the literal finite
+polynomials retaining those components. This uses finite approximation of
+formal coefficients, rather than convergence of a selected formal series.
+\end{proof}
+
+\begin{theorem}[Every actual extended initial polynomial gives a member of the true specialized normalized ideal]
+\label{hir:actual-point-dehomogenized-component-in-specialized-ideal}
+\uses{hir:actual-point-original-initial-polynomial-lift,hir:actual-axis-contraction-fixes-dehomogenized-polynomial,hir:actual-analytic-point-initial-restriction-producer}
+\lean{Hironaka.HironakaActualPointInitialIdealInclusion.actual_dehomogenized_component_mem_axis_normalized_image}
+\leanok
+With the preceding actual $F$ and $d$, the original analytic evaluation of
+$\delta_{e,b}P_dF$ belongs to the whole image, under the actual coordinate-zero
+pullback $L_0^*$, of the original analytic point-normalized member ideal.
+\end{theorem}
+\begin{proof}
+Produce the original $g$ from the preceding theorem. The genuine analytic
+blowup divisibility theorem constructs an actual analytic quotient $H$
+with $x_e^dH$ equal to the actual blowup pullback of $g$. Thus $H$ belongs
+to the original normalized member ideal by its unchanged whole definition.
+The actual analytic exceptional restriction theorem gives
+$H-\delta_{e,b}P_d(Tg)\in(x_e)$. Its finite polynomial is exactly
+$P_dF$. Apply the true whole pullback $L_0^*$: it kills the entire principal
+ideal $(x_e)$ and fixes the genuine dehomogenized polynomial germ. Hence
+$L_0^*H=\delta_{e,b}P_dF$, proving actual membership in the whole image.
+\end{proof}
+
+\begin{definition}[The genuine finite analytic dehomogenized initial ideal]
+\label{hir:actual-point-dehomogenized-initial-ideal}
+\lean{Hironaka.HironakaActualPointInitialIdealInclusion.actualDehomogenizedInitialIdeal}
+\leanok
+For an actual formal ideal $K$, let its dehomogenized initial ideal in the
+original analytic germ ring be the span of the actual analytic evaluations
+of $\delta_{e,b}P_a$, where $a$ runs over the finite actual degree-lex
+vertices of $K$ and $P_a$ is the unchanged literal initial polynomial of
+the corresponding actual vertex series. This ideal is independent of the
+Hilbert--Samuel truncation order.
+\end{definition}
+
+\begin{theorem}[The entire finite initial ideal lies in the true axis-zero normalized image]
+\label{hir:actual-point-whole-initial-ideal-inclusion}
+\uses{hir:actual-point-dehomogenized-component-in-specialized-ideal,hir:actual-point-dehomogenized-initial-ideal}
+\lean{Hironaka.HironakaActualPointInitialIdealInclusion.actualDehomogenizedInitialIdeal_le_axis_normalized_image}
+\leanok
+For every original ideal $I$ and actual point-blowup chart $(e,b)$,
+the entire actual dehomogenized initial ideal of $T(I)$ is contained in
+$L_0^*$ of the entire analytic normalized member ideal of $I$.
+\end{theorem}
+\begin{proof}
+For an actual degree-lex vertex $a$, its unchanged actual vertex series
+belongs to $T(I)$. Every coefficient of total degree below $|a|$ vanishes
+by its degree-first initial exponent, so it belongs to the actual whole
+point ideal power $\mathfrak m^{|a|}$. Its degree-$|a|$ homogeneous
+polynomial is exactly the previously defined actual initial vertex
+polynomial, by the original vertex exponent identity. Apply the preceding
+component membership theorem to this actual series. Every generator of
+the genuine finite ideal therefore belongs to the same whole specialized
+normalized ideal. The universal property of ideal span gives the whole
+inclusion, including the zero and unit ideal cases.
+\end{proof}
+
+\begin{lemma}[Whole original ideal inclusion reverses every intrinsic Hilbert--Samuel value]
+\label{hir:actual-whole-analytic-ideal-hs-antitone}
+\lean{Hironaka.HironakaActualPointInitialIdealInclusion.hilbertSamuelValue_antitone_original_ideal}
+\leanok
+For any two original analytic ideals $I\subseteq J$ and every $\ell\ge0$,
+$H_J(\ell)\le H_I(\ell)$.
+\end{lemma}
+\begin{proof}
+Adding the same actual maximal ideal power preserves the inclusion. The
+actual quotient map from the quotient by $I+\mathfrak m^{\ell+1}$
+onto the quotient by $J+\mathfrak m^{\ell+1}$ is a surjective complex
+linear map. The original source quotient is finite dimensional, as
+proved for every original analytic ideal. Surjectivity therefore gives
+the claimed inequality of the actual quotient dimensions.
+\end{proof}
+
+\begin{theorem}[All normalized point-ideal values are bounded by the actual finite dehomogenized initial ideal]
+\label{hir:actual-point-normalized-hs-le-dehomogenized-initial}
+\uses{hir:actual-axis-zero-all-hs,hir:actual-point-whole-initial-ideal-inclusion,hir:actual-whole-analytic-ideal-hs-antitone}
+\lean{Hironaka.HironakaActualPointInitialIdealInclusion.hilbertSamuelValue_actual_point_normalized_le_dehomogenized_initial}
+\leanok
+For any original analytic ideal $I$, actual point-blowup chart $(e,b)$,
+and every $\ell\ge0$, the original analytic normalized member ideal has
+Hilbert--Samuel value bounded by that of the actual finite dehomogenized
+initial ideal of $T(I)$.
+\end{theorem}
+\begin{proof}
+Apply the genuine axis-specialization theorem to the original normalized
+member ideal: all its values are bounded by those of its true whole
+coordinate-zero image. The proved entire finite initial ideal inclusion
+and original ideal antitonicity bound the latter values by those of the
+same actual finite dehomogenized initial ideal. Transitivity gives the
+conclusion at every order, with no supplied numerical comparison.
+\end{proof}
+
+The remaining comparison with translated homogeneous initial ideals
+uses genuine local coordinate inverses and unit factors.

@@ -1,0 +1,88 @@
+\section{Properness of the original terminal glued projection}
+
+The local-to-global resolution route of \cite{wlodarczyk05-hironaka}
+uses proper local terminal projections. We adapt this step directly to the
+actual point-indexed terminal atlas: its genuine saturated inclusion ranges
+identify the whole fibres and spread closed-image complements. This does not
+require a compact original manifold or an assumed proper global projection.
+The space here retains its actual glued topology; its complex structure is
+constructed independently.
+
+\begin{lemma}[Whole original glued fibres are compact local-fibre images]
+\label{hir:original-terminal-glued-whole-compact-fibres}
+\lean{Hironaka.HironakaOriginalTerminalProperProjection.originalTerminalGluedProjection_fibre,Hironaka.HironakaOriginalTerminalProperProjection.originalTerminalGluedProjection_fibre_isCompact}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-input-terminal-glued-local-range-whole-open-preimage,hir:original-input-covering-local-canonical-terminal-atlas}
+Let $M$ be an original marked ideal in the domain of the actual canonical
+invariant, let $A$ be its internally constructed local terminal atlas, and
+let $P:G\to X$ be its actual glued projection. For every $x\in X$, put
+$u_x=(x\in U_x)$. Then the ENTIRE fibre satisfies
+\[
+ P^{-1}\{x\}=\Gamma_x\bigl(\pi_x^{-1}\{u_x\}\bigr),
+\]
+and is compact. No local-history, covering, fibre or properness certificate
+is a caller premise.
+\end{lemma}
+\begin{proof}
+The actual original singleton local producer supplies $x\in U_x$ and the
+finite terminal tower $\pi_x:F_x\to U_x$. Each genuine finite blowup tower
+projection is proper, so its inverse image of the compact singleton
+$\{u_x\}$ is compact. For $z$ in the whole left-hand fibre, its projection
+belongs to $U_x$. The actual saturated range equality therefore writes
+$z=\Gamma_x(y)$. The entire local projection equation gives
+$\pi_x(y)$ with underlying original point $x$; injectivity of the open
+inclusion identifies it with $u_x$. Conversely a point in that local fibre
+maps under $\Gamma_x$ to projection $x$ by the same entire local equation.
+Thus both inclusions give the stated equality. The actual open embedding
+$\Gamma_x$ is continuous, so its image of the compact local fibre is compact.
+\end{proof}
+
+\begin{lemma}[The original entire glued projection is closed]
+\label{hir:original-terminal-glued-whole-closed-projection}
+\lean{Hironaka.HironakaOriginalTerminalProperProjection.originalTerminalGluedProjection_isClosedMap}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-input-terminal-glued-local-range-whole-open-preimage,hir:original-input-local-terminal-glued-whole-continuous-projection,hir:original-input-covering-local-canonical-terminal-atlas}
+For the same original input, $P$ maps EVERY closed subset of the actual
+whole glued space to a closed subset of the original manifold.
+\end{lemma}
+\begin{proof}
+Fix a closed subset $C\subseteq G$ and $x\notin P(C)$. The true local
+embedding is continuous, so $C_x=\Gamma_x^{-1}(C)$ is closed in $F_x$.
+Properness of the actual local tower makes $\pi_x(C_x)$ closed in $U_x$.
+Its open complement $V_x$ contains $u_x$: otherwise a local representative
+in $C_x$ above $u_x$ would, by the entire local projection equation, give
+$x\in P(C)$. Since $U_x$ is an original open subset, its inclusion maps
+$V_x$ to an open original neighborhood of $x$.
+This ENTIRE neighborhood avoids $P(C)$. Indeed, if an original point
+$z$ in it were $P(w)$ with $w\in C$, then $P(w)\in U_x$ and the true
+saturated range equality would give $w=\Gamma_x(y)$. The whole local
+projection equation and injectivity of the open inclusion identify
+$\pi_x(y)$ with the original representative of $z$ in $V_x$. But $y\in C_x$,
+so this representative belongs to $\pi_x(C_x)$, contradicting the definition
+of $V_x$. Every point outside $P(C)$ therefore has an original open
+neighborhood in its complement. That complement is open, and $P(C)$ is closed.
+\end{proof}
+
+\begin{theorem}[Original-input proper terminal glued projection]
+\label{hir:original-terminal-glued-projection-proper}
+\lean{Hironaka.HironakaOriginalTerminalProperProjection.originalTerminalGluedProjection_isProperMap}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-terminal-glued-whole-compact-fibres,hir:original-terminal-glued-whole-closed-projection,hir:original-input-local-terminal-glued-whole-continuous-projection}
+For ONLY an original marked ideal in the actual canonical invariant domain,
+the internally constructed whole glued projection $P:G\to X$ is proper.
+The original manifold need not be compact, and neither global separation
+nor a supplied global resolution or scheduled history is an input.
+\end{theorem}
+\begin{proof}
+The actual glued projection is continuous by its genuine topological
+coequalizer construction. The preceding lemma proves it is closed on the
+whole space, and the first lemma supplies compactness of every entire
+fibre. The topological characterization of proper maps by continuity,
+closedness and compact fibres now proves properness of this actual $P$.
+This constructs properness of the glued map; identification of its
+geometric resolution data and construction of a noncompact scheduled
+blowup history remain separate source obligations.
+\end{proof}

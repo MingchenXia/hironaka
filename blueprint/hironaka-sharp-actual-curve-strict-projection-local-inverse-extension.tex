@@ -1,0 +1,82 @@
+\section{A genuine local inverse of the actual strict projection on a smooth curve}
+
+The first-step exponent comparison requires actual raw pullback order
+preservation on the curve even above the centre. An off-centre ambient
+biholomorphism alone cannot supply this. Construct the genuine local inverse
+along the two actual carriers first. This uses the real monomial blowup
+charts behind \cite[Proposition 3.13 and Remark 12.6]{bierstone-milman97-invent-math};
+it does not assume the desired curve isomorphism or an order certificate.
+
+\begin{lemma}[The genuine zero-centre monomial chart is the identity on the actual curve plane]
+\label{hir:sharp-actual-zero-centre-monomial-curve-plane-identity}
+\uses{bcalc:monomial-lift,bcalc:strict-submanifold}
+\lean{Hironaka.HironakaSharpActualCurveStrictProjectionLocalInverse.actual_monomial_on_curve_plane_eq_self}
+\leanok
+For the genuine monomial blowup map with centre dimension zero, if the
+chosen actual chart index $j$ satisfies $j<1$ and $w$ belongs to the
+actual coordinate curve plane $\mathbb C^1\times0$, then $\sigma_j(w)=w$.
+This is a literal equality of the actual coordinate vectors, including
+$w=0$ and ambient dimension one.
+\end{lemma}
+\begin{proof}
+The actual inequality forces the index to be zero. At that coordinate
+the genuine monomial map keeps $w_j$. Every other coordinate has index
+at least one and is zero by the true curve-plane membership; its product
+with $w_j$ remains zero. Coordinate extensionality proves the equality.
+\end{proof}
+
+\begin{theorem}[Actual discrete-centre smooth-curve strict projection has a real local inverse along its carriers]
+\label{hir:sharp-actual-curve-strict-projection-local-inverse}
+\source{bierstone-milman97-invent-math:page-0087}
+\uses{hir:sharp-actual-zero-centre-monomial-curve-plane-identity,bcalc:strict-submanifold,bcalc:monomial-lift}
+\lean{Hironaka.HironakaSharpActualCurveStrictProjectionLocalInverse.exists_actual_curve_strict_projection_local_inverse}
+\leanok
+Let $\pi:Y\to X$ be an ACTUAL blowup with $C\subset N$, where $N$
+is genuinely closed smooth and regular of dimension one at all its
+points, and $C$ is genuinely regular of dimension zero at all its points.
+Let $N'$ be the ACTUAL geometric strict transform, and let $z\in N'$
+lie above $C$. These original geometric inputs internally construct an
+ambient map $s:X\to Y$, holomorphic near $\pi z$, with $s(\pi z)=z$,
+such that near $\pi z$ EVERY actual $x\in N$ satisfies
+$s(x)\in N'$ and $\pi s(x)=x$, and near $z$ EVERY actual $y\in N'$
+satisfies $s(\pi y)=y$. No selected chart, local inverse, curve model,
+pullback ideal identity or order-preservation certificate is input.
+\end{theorem}
+\begin{proof}
+Actual nested flattening at $\pi z$ simultaneously gives the true centre
+plane of dimension zero and the true carrier plane of dimension one.
+The genuine blowup local monomial inverse has some actual chart index
+$j$, a true open neighborhood of $z$, and holomorphic coordinate map
+$W$ with its genuine monomial lift $\ell$. Actual strict-carrier
+membership forces $j<1$ and $W(z)$ into the real curve plane. The first
+lemma therefore makes the monomial map the identity on this plane.
+The genuine equality $\ell(W(y))=y$ and
+$\pi\ell(w)=\Phi^{-1}(\sigma_j(w))$ give, for every nearby actual
+strict-carrier point, the literal identity
+$W(y)=\Phi(\pi y)$. At $z$, nested centering yields $W(z)=0$.
+
+The actual monomial domain is open and contains this real zero vector.
+Use its genuine lifted-open model to extend its lift to an ambient map
+near zero; outside that domain choose the fixed actual point $z$.
+Its coordinate map is the identity near zero, so the real lifted-open
+holomorphic criterion and the actual lift prove holomorphicity there.
+Compose this genuine map with the actual flattening coordinates to
+obtain $s$. The already proved equality at $z$ gives $s(\pi z)=z$.
+For nearby actual carrier points, the first lemma and BOTH true inverse
+flattening laws imply $\pi s(x)=x$.
+
+True centre regularity of dimension zero supplies an actual neighborhood
+on which $C$ is the singleton $\pi z$. A nearby carrier point outside
+$C$ lifts into $N'$ by the genuine off-centre strict-transform membership
+dictionary. A point inside $C$ is precisely $\pi z$, whose lift is the
+already known $z\in N'$. Thus the entire actual carrier neighborhood is
+mapped into $N'$. Finally the independently proved nearby identity
+$W(y)=\Phi(\pi y)$ and the genuine monomial lift inverse law give
+$s(\pi y)=y$ for EVERY nearby strict-carrier point, including points over
+$C$. These are both actual inverse equations along the actual carriers,
+not a replacement ambient inverse asserted at exceptional points.
+
+Relative germ/order transport, actual contact-order decrease, mixed
+incident-member chronological factors, the separate $\tau_D$ phase,
+full sharp $\Sigma$ and termination remain subsequent consumers.
+\end{proof}

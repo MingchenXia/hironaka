@@ -1,0 +1,71 @@
+\section{Genuine global finite blowup prefixes over the original space}
+
+\begin{theorem}[Actual global successor blowups construct every literal finite prefix]
+\label{hir:sharp-actual-curve-genuine-global-prefix-tower}
+\uses{hir:sharp-actual-curve-global-successor-blowup,hir:sharp-actual-curve-global-successor-quotient-map}
+\lean{Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformGlobalTower,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformGlobalTower_length,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformGlobalTower_projection}
+\leanok
+For actual retained histories covering the original complex manifold,
+every natural $k$ determines a genuine global blowup tower from the actual
+zero stage to the actual $k$th stage, with literal length $k$. Its steps
+are precisely the already constructed actual global centres and successors,
+including every genuine empty step. Composing its projection with the
+actual zero-stage projection is exactly the original $k$th projection.
+No finite-prefix tower or blowup certificate is an input.
+\end{theorem}
+\begin{proof}
+At zero take the actual reflexive history of the actual zero-stage
+manifold. Once the first $k$ actual steps have been constructed, append
+the actual global centre and actual successor at $k$. Its complete original
+blowup predicate has already been proved, so this is a genuine additional
+constructor of the original blowup-tower type. Its endpoint is precisely
+the actual stage $k+1$, and its length is the previous length plus one.
+Induction therefore gives literal length $k$, without deleting any step.
+For the projection identity, the zero case is the identity. At a
+successor the tower projection is the previous projection composed with
+the SAME actual successor. The inductive identity followed by the exact
+global successor projection square gives the original stage-$k+1$
+projection at every point. Thus the equality holds on the entire source.
+\end{proof}
+
+\begin{theorem}[The actual prefixes are genuine blowup histories over the original base]
+\label{hir:sharp-actual-curve-original-global-prefix-tower}
+\uses{hir:sharp-actual-curve-genuine-global-prefix-tower,hir:sharp-actual-curve-uniform-initial-stage,hir:tower-transport}
+\lean{Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformOriginalTransport,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformOriginalTransport_zero,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformOriginalPositiveTower,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformOriginalPositiveTower_length,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformOriginalPositiveTower_projection,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.uniformOriginalPositiveTower_successor,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.originalUniformPositiveTower,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.originalUniformPositiveTower_length,Hironaka.HironakaSharpActualCurveGlobalPrefixTowers.originalUniformPositiveTower_projection}
+\leanok
+For the same actual histories and cover, transport the genuine prefixes
+along the internally proved inverse of the actual zero-stage projection.
+The zero history is reflexive over the original space. For every positive
+length $k+1$ the endpoint is precisely the actual stage $k+1$, its entire
+projection is precisely the original stage projection, and its literal
+length is $k+1$. The positive prefixes extend each other by the SAME
+actual successor maps and centres at all subsequent positive stages.
+Only original positive-dimensional smooth pure curve, ordered SNC and
+density data internally supply these genuine original-base prefixes.
+Neither an initial isomorphism nor a desired finite history is assumed.
+\end{theorem}
+\begin{proof}
+Apply the original tower-transport construction to the actual finite
+prefix and the inverse of the actual initial projection biholomorphism.
+At the reflexive history this produces the reflexive history on the
+original base. At a genuine first blowup, the original target transport
+moves its centre by the actual inverse initial biholomorphism and composes
+its projection with the actual initial projection. The genuine blowup
+universal property is preserved by this actual biholomorphic base change.
+Its endpoint biholomorphism is the identity of the actual first stage.
+Every further step therefore has exactly its original endpoint, centre
+and successor map. The construction does not change any literal length.
+This also proves the exact positive-prefix extension identity.
+
+The original transport projection square states that the inverse initial
+biholomorphism composed with the transported projection equals the actual
+zero-base tower projection composed with its endpoint identification.
+At positive length that endpoint identification is the identity. Apply
+the actual initial biholomorphism and use both inverse laws. The preceding
+whole projection identity then identifies the resulting map with the
+original actual stage projection. Finally instantiate the internally
+constructed original histories and cover. All histories, centres and
+maps are genuine original objects. No global finite upper bound on the
+local stopping lengths, canonical scheduler, or terminal identification
+is inferred from these finite-prefix statements.
+\end{proof}

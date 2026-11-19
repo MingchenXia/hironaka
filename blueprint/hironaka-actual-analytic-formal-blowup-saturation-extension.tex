@@ -1,0 +1,62 @@
+\section{Genuine analytic and formal blowup saturation on the same chart}
+
+Let $R_n$ be the original germ ring on $\mathbb C^n$ and $T_n:R_n\to S_n$
+the existing unshifted Taylor map. Let $P$ be the genuine holomorphic
+polynomial blowup chart map with its actual original germ pullback $P^*$,
+and $\widehat P$ the independently defined formal blowup homomorphism.
+The chosen exceptional coordinate is $u=z_e$, with $e$ in the centre set.
+All statements use the actual existing origin-colon chain $C_q$.
+
+\begin{theorem}[Whole total-transform ideals have the literal formal Taylor image]
+\label{hir:actual-analytic-formal-blowup-whole-total-ideal}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualAnalyticFormalBlowupSaturation.map_analyticBlowup_totalIdeal}
+\leanok
+For every entire original ideal $I\subseteq R_n$,
+\[
+ T_n(P^*(I)R_n)S_n=\widehat P(T_n(I)S_n)S_n.
+\]
+No generating family, formal comparison certificate or Taylor-square
+hypothesis is supplied.
+\end{theorem}
+\begin{proof}
+The previously proved genuine Taylor naturality identity is the equality
+of the two entire algebra homomorphisms $T_n\circ P^*=\widehat P\circ T_n$.
+Ideal extension along a composite is the composite of ideal extensions.
+Applying that identity to the entire original ideal gives both ideal
+inclusions simultaneously. The chart is the actual holomorphic polynomial
+map and its independently defined formal substitution.
+\end{proof}
+
+\begin{theorem}[One true analytic colon computes the entire formal blowup saturation]
+\label{hir:actual-analytic-formal-blowup-whole-saturation}
+\uses{hir:actual-analytic-formal-blowup-whole-total-ideal,hir:actual-formal-extension-whole-colon-saturation}
+\lean{Hironaka.HironakaActualAnalyticFormalBlowupSaturation.exists_actual_analytic_formal_blowup_saturation}
+\leanok
+For every original ideal $I$, every actual centre set and exceptional chart,
+there is an internally chosen $N\geq0$ for which the actual analytic chain
+$C_q(P^*I,u)$ is constant for all $q\geq N$ and, for every formal $F$,
+\[
+ (\exists q\geq0:\ F\in C_q(\widehat P(T_n(I)S_n),x_e))
+ \quad\Longleftrightarrow\quad
+ F\in T_n(C_N(P^*I,u))S_n.
+\]
+This is equality of the entire formal saturation with extension of the
+one true original analytic saturated ideal. Zero/unit ideals and arbitrary
+formal $F$ are included. Geometric closure identification and compatibility
+with a specified formal reduced vertex basis are not assumed or claimed here.
+\end{theorem}
+\begin{proof}
+Reassociate the dimension equality $0+n=n$ in the already proved original
+Taylor saturation theorem; this is exactly the definition of the existing
+unshifted Taylor map, with no new map or action. Apply the whole saturation
+theorem to the actual analytic ideal $P^*I$ and its actual exceptional germ
+$u$. It internally supplies one original Noetherian index $N$, actual
+analytic stability, and the entire formal membership equivalence for every
+formal $F$. The preceding whole total-transform identity identifies the
+formal starting ideal. The genuine coordinate Taylor identity sends the
+actual exceptional germ $u$ to the formal variable $x_e$. Substituting these
+two identities yields exactly the stated formal blowup saturation on the
+same chart, with the same original analytic ideal and the same $N$.
+No arbitrary formal coefficient is declared convergent.
+\end{proof}

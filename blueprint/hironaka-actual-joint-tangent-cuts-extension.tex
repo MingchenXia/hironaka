@@ -1,0 +1,146 @@
+\section{Actual tangent cuts of the joint normal layers}
+
+Let $S=\mathcal O_{\mathbb C^{d+n},0}$ over the actual tangent germ
+ring $B=\mathcal O_{\mathbb C^d,0}$, let $N$ be its whole displacement
+ideal, and let $\sigma:S\to\mathcal O_{\mathbb C^n,0}$ be the proved
+zero-base trace. Write $Q_q(K)=S/(K+N^q)$ and
+$G_q(K)=\operatorname{im}(N^q\to Q_{q+1}(K))$.
+
+\begin{theorem}[Actual complex tensor symbol injectivity]
+\label{hir:actual-joint-cut-complex-symbol}
+\lean{Hironaka.HironakaActualJointTangentCuts.complexTensorSymbol_injective_of_ambient_regular}
+\leanok
+\uses{hir:actual-joint-base-fibre-layer-symbols,hir:actual-principal-parts-residue-layer,hir:actual-principal-parts-residue-symbol-square}
+Suppose the actual lower whole quotient $Q_q(K)$ is flat over $B$.
+If multiplication by $\sigma v$ is a regular degree-$q$ symbol on the
+actual ambient maximal-ideal layer of $\sigma_*K$, for $v\in N$, then
+the actual symbol $G_q(K)\to G_{q+1}(K)$ remains injective after
+complex origin-residue tensoring.
+\end{theorem}
+\begin{proof}
+The actual lower-flatness hypothesis makes the named residue-layer map
+injective. The whole zero-base layer isomorphism transports multiplication
+by $v$ on the actual fibre to multiplication by $\sigma v$ on the
+actual ambient layer. Regularity makes this ambient symbol injective:
+if two representatives $g,h$ have equal products modulo the next whole
+denominator, then $\sigma v(g-h)$ lies in that denominator, so
+regularity puts $g-h$ in the current denominator. Thus the actual fibre
+symbol is injective. The literal tensor/residue symbol square then
+shows that equal tensor-symbol values have equal residue-layer images;
+injectivity of the actual residue-layer map proves equality of the
+original tensors.
+\end{proof}
+
+\begin{theorem}[The actual short exact filtration retains all free truncations]
+\label{hir:actual-joint-cut-layer-truncation-free}
+\lean{Hironaka.HironakaActualJointTangentCuts.normalTruncations_free_of_layers,Hironaka.HironakaActualJointTangentCuts.normalLayers_finite_free_of_truncations}
+\leanok
+\uses{hir:relative-normal-uniformtrunc-original-short-exact}
+If every whole $G_q(K)$ is free over $B$, then every whole $Q_q(K)$
+is free over $B$. Conversely, finite free truncations give finite free
+whole layers. Zero-order quotients and layers retain their literal meanings.
+\end{theorem}
+\begin{proof}
+The actual sequence $0\to G_q(K)\to Q_{q+1}(K)\to Q_q(K)\to0$
+is exact. The zero quotient $Q_0(K)$ is zero and hence free. Inductively,
+projectivity of the free last term supplies a section, giving
+$Q_{q+1}(K)\simeq G_q(K)\oplus Q_q(K)$ and proving freeness.
+For the converse, projectivity of $Q_q(K)$ splits the same sequence,
+so $G_q(K)$ is a direct summand of the finite free $Q_{q+1}(K)$.
+Its projection is surjective, proving finite generation; its inclusion
+has that projection as retraction, proving projectivity. A finite
+projective module over the local ring $B$ is free.
+\end{proof}
+
+\begin{theorem}[One actual tangent cut preserves every free layer]
+\label{hir:actual-joint-cut-layer-free}
+\lean{Hironaka.HironakaActualJointTangentCuts.normalLayers_after_parameter_finite_free}
+\leanok
+\uses{hir:actual-joint-cut-complex-symbol,hir:actual-joint-cut-layer-truncation-free,hir:actual-base-complex-symbol-criterion}
+Suppose all actual whole $G_q(K)$ are finite free over $B$, and the
+actual ambient maximal-ideal symbol of $\sigma v$ is regular in every
+degree for $\sigma_*K$. Then every whole layer of
+$K+(v)$ with respect to the unchanged actual displacement ideal $N$
+is finite free over $B$.
+\end{theorem}
+\begin{proof}
+The preceding filtration theorem gives freeness, hence flatness, of
+every actual lower $Q_q(K)$. The preceding complex-symbol theorem
+therefore proves injectivity of every actual complex-residue tensor
+symbol. The canonical base-residue-field dictionary identifies this
+with injectivity after tensoring by the genuine local residue field of
+$B$. The local splitting criterion applies to the finite source layer
+and finite free target layer: the symbol inclusion splits over $B$.
+For positive degrees, the actual kernel theorem identifies the quotient
+layer for $K+(v)$ with the cokernel of that split symbol, hence a finite
+projective and therefore free module. In degree zero the actual layer
+quotient map is an isomorphism, so the same conclusion holds directly.
+\end{proof}
+
+\begin{theorem}[Every distinct actual coordinate cut retains the whole free filtration]
+\label{hir:actual-joint-all-coordinate-cuts-free}
+\lean{Hironaka.HironakaActualJointTangentCuts.jointCoordinateCuts,Hironaka.HironakaActualJointTangentCuts.map_jointCoordinateCuts,Hironaka.HironakaActualJointTangentCuts.normalLayers_after_coordinate_cuts_finite_free}
+\leanok
+\uses{hir:actual-joint-cut-layer-free,hir:actual-initial-coordinate-quotient-ordered-cuts}
+Let $L$ be a list of distinct original ambient coordinate indices and
+let $K_L$ be obtained from the unchanged joint ideal $K$ by successively
+adding the corresponding actual normal coordinate germs. Suppose all
+whole $G_q(K)$ are finite free over $B$, and the genuine homogeneous
+initial ideal of the Taylor extension of $\sigma_*K$ is stable under
+partial differentiation in every coordinate of $L$. Then every whole
+$G_q(K_L)$ is finite free over $B$. Moreover $\sigma_*K_L$ is literally
+obtained from $\sigma_*K$ by the same ordered ambient coordinate cuts.
+\end{theorem}
+\begin{proof}
+Induct on the ordered list. The empty list changes neither ideal nor
+filtration. Suppose the next index is $i$ and the tail is $L'$. The
+proved actual initial-symbol theorem makes coordinate $i$ a regular
+symbol on every actual ambient maximal-ideal layer. The preceding
+one-cut theorem therefore gives finite freeness of every whole joint
+layer after adding its actual displacement coordinate. Ideal extension
+preserves sums and generated principal ideals, and the true zero-base
+trace sends this displacement coordinate to the same ambient coordinate;
+thus the new fibre ideal is exactly the ambient coordinate quotient.
+The proved initial-coordinate-quotient theorem identifies its genuine
+initial ideal with the old initial ideal plus that formal coordinate.
+Because no remaining index equals $i$, differentiation in each remaining
+coordinate preserves both the old initial ideal and the added coordinate
+ideal, by the proved remaining-derivative stability theorem. These are
+exactly the hypotheses for the tail. Induction proves the assertion
+for the entire ordered list in every degree, including degree zero.
+\end{proof}
+
+\begin{theorem}[Original constant-Hilbert--Samuel geometry supplies every tangent cut]
+\label{hir:actual-original-joint-all-tangent-cuts-free}
+\lean{Hironaka.HironakaActualJointTangentCuts.exists_original_hs_constant_centre_all_tangent_cut_layers_free}
+\leanok
+\uses{hir:actual-joint-all-coordinate-cuts-free,hir:actual-joint-cut-layer-truncation-free,hir:actual-coupled-centre-free-jets-initial-symbols}
+Let $A$ be a coherent germ ideal on a complex manifold, and let $x$ lie
+on a dimension-$d$ regular centre along which the entire intrinsic
+Hilbert--Samuel function is constant. Then one actual flattening at
+$x$ supplies its original origin ideal $I_0$ and its true joint
+extension $J=L^*I_0$ such that every whole displacement layer remains
+finite free over the original tangent germ ring after successively
+killing all $d$ actual tangent-displacement coordinates.
+\end{theorem}
+\begin{proof}
+Use the coupled original geometric producer once, retaining its one
+flattening and its actual original ideal $I_0$. It simultaneously gives
+all positive joint truncations finite free and the actual initial
+partial-derivative stability along every tangent coordinate. Its literal
+origin-generator equality identifies the same joint ideal with $L^*I_0$.
+The zero truncation is the actual zero module, so every joint truncation
+is finite free. The proved short exact filtration theorem therefore
+gives all initial whole joint layers finite free. The entire zero-base
+retraction sends the same $J$ to $I_0$. Apply the preceding ordered-cut
+theorem to the list of all tangent coordinate indices; these indices
+are distinct because the actual coordinate inclusion is injective.
+All hypotheses are thus produced from the original geometric data, and
+the result holds in every degree for one unchanged actual family.
+\end{proof}
+
+The final theorem supplies the entire tangent-cut transport from one
+common original coherent constant-Hilbert--Samuel geometric family.
+The subsequent actual zero-displacement quotient must still identify
+these layers with the original centre-normal filtration. The complete
+higher Hilbert--Samuel transformation theorem remains separate.

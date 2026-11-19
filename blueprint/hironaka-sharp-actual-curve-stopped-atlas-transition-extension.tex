@@ -1,0 +1,116 @@
+\section{The actual stopped-stage and terminal atlas transitions}
+
+\begin{lemma}[Actual stopped terminal identifications restrict to their true matching opens]
+\label{hir:sharp-actual-curve-stopped-terminal-open-biholomorphism}
+\uses{hir:sharp-actual-curve-stopped-prefix-terminal-biholomorphism,hir:sharp-actual-curve-stopped-prefix-open-terminal-square}
+\lean{Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.stoppedTerminalOpenBiholomorphism,Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.stoppedTerminalOpenBiholomorphism_val,Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.stoppedTerminalOpenBiholomorphism_flattening}
+\leanok
+For a genuine finite history, an original base open and a stage at least
+the literal history length, its actual stopped terminal biholomorphism
+restricts to a genuine biholomorphism between the ENTIRE stage preimage
+of that base open and its ENTIRE original terminal preimage. Its point
+map is exactly the already constructed stopped terminal identification.
+For any genuine open-prefix flattening, composing with this restricted
+map is exactly the stopped restricted-history identification.
+\end{lemma}
+\begin{proof}
+The genuine stopped projection square identifies the stage projection
+with the terminal projection composed with the actual terminal
+biholomorphism. Taking inverse images of the original open gives the
+ENTIRE matching-open equality. Restrict the actual biholomorphism to
+those two opens; its genuine inverse laws and both holomorphic maps
+restrict as well. Its underlying terminal point formula is unchanged.
+The preceding open-prefix terminal-square theorem gives equality of
+the underlying terminal points after any genuine flattening. Both
+values lie in that SAME original terminal open, so subtype equality
+proves the asserted entire restricted-map identity.
+\end{proof}
+
+\begin{theorem}[The same actual padded terminal comparison gives the chosen restricted-stage square]
+\label{hir:sharp-actual-curve-stopped-restricted-comparison-square}
+\uses{hir:sharp-actual-curve-stopped-terminal-open-biholomorphism,hir:sharp-actual-curve-stopped-comparison-terminal-square,hir:sharp-actual-curve-stopped-prefix-open-terminal-natural}
+\lean{Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.stopped_restricted_comparison_square}
+\leanok
+Consider genuine finite histories and genuine base opens on both sides.
+Let their actual whole restricted histories, with actual identity
+padding, have a genuine comparison with terminal map $e$. At a stage
+at least BOTH literal original lengths, suppose an actual full
+comparison of their restricted uniform prefixes has already been
+chosen. The two genuine matching-open stopped terminal maps then
+intertwine THIS chosen stage map with THIS same terminal map $e$
+on EVERY actual point. No desired square or arbitrary projection-map
+uniqueness is input.
+\end{theorem}
+\begin{proof}
+Internally construct the genuine uniform-prefix open flattening on
+each side. Conjugate the given restricted-stage map by the first
+flattening and the inverse of the second. Composing their genuine
+whole-history isomorphisms gives an actual comparison of the two
+uniform prefixes of the whole restricted histories, over the SAME
+original base map. Open restriction preserves both literal lengths,
+so both prefixes are stopped. Apply the actual chosen stopped-prefix
+terminal-square theorem to this very comparison and the given genuine
+padded terminal comparison.
+
+The first lemma identifies each stopped restricted-prefix map with
+the corresponding matching-open terminal map composed with its
+actual flattening. Evaluate the obtained square at the inverse of
+the source flattening applied to an arbitrary original restricted-stage
+point. The source inverse law makes its source point the given point;
+the target inverse law makes the target flattening of its conjugated
+image precisely the chosen restricted-stage image. Substitution gives
+exactly the asserted ENTIRE square, for the already chosen maps.
+\end{proof}
+
+\begin{theorem}[The actual uniform-stage transitions preserve the same retained terminal atlas]
+\label{hir:sharp-actual-curve-stopped-atlas-transition-square}
+\uses{hir:sharp-actual-curve-stopped-restricted-comparison-square,hir:sharp-actual-curve-original-uniform-stage-atlas,hir:sharp-actual-curve-uniform-prefix-open-restriction,mc:tower-isomorphism-restrict-append,hir:sharp-actual-endpoint-local-range-biholomorphism}
+\lean{Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.stoppedPoint_overlap_mem,Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.stoppedAtlasTransition_square,Hironaka.HironakaSharpActualCurveStoppedAtlasTransition.originalStoppedAtlasTransition_square}
+\leanok
+For the SAME actual retained atlas, fix two original charts and a stage
+at least BOTH full local-history lengths. The actual uniform-stage
+transition sends stopped terminal points by exactly the SAME original
+terminal transition, throughout their ENTIRE genuine overlap. The
+stopped source point lies in the true original terminal overlap by its
+actual projection, not by an assumed domain equality. Only original
+positive-dimensional smooth pure curve, ordered SNC and density data
+internally give this square at every stage equal to the sum of the two
+actual local lengths plus any natural number. No atlas, history,
+terminal-square or compatibility certificate is supplied to that
+original-only consumer.
+\end{theorem}
+\begin{proof}
+Write each actual full local history as its retained prefix followed
+by its retained tail. On the actual intersection base open, genuine
+concatenation restriction gives a full isomorphism from the restriction
+of that WHOLE local history to the concatenation of its two actual
+restrictions. Its terminal map is the genuine equal-open map, retaining
+all underlying terminal points. Append on each side precisely the
+identity padding already present in the actual terminal atlas
+comparison. Conjugating that SAME comparison by these two genuine
+append-restriction maps supplies a true padded comparison between the
+two canonical whole restricted histories. Its terminal map is precisely
+the SAME terminal atlas map conjugated by identity-on-points equal-open
+maps; no new comparison is chosen.
+
+The actual uniform-stage atlas already supplies a full comparison on
+the two restricted uniform prefixes: its reflexive tail and zero cut
+remove none of their actual steps. Apply the preceding theorem to this
+SAME chosen comparison and the just constructed genuine padded comparison.
+For an actual stage overlap point, use its actual equal-open map into
+the common-base endpoint open. The stopped projection square puts its
+stopped terminal point in the original terminal overlap. All genuine
+append and overlap equal-open maps retain the same underlying terminal
+point. Taking that point in the preceding ENTIRE square therefore gives
+exactly the stated original terminal transition applied to the stopped
+point. No original projection injectivity or exceptional-point removal
+is used.
+
+Finally instantiate the internally constructed original retained atlas
+and the stage given by the sum of its two actual finite local lengths
+plus the additional natural number. Both required bounds hold for these
+actual lengths. All original opens, histories, comparisons and domain
+memberships have thus been internally supplied. Gluing these compatible
+maps over the union of stopped opens, and any compact uniform finite
+stopping theorem, remain subsequent conclusions.
+\end{proof}

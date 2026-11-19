@@ -1,0 +1,125 @@
+\section{Intrinsic scalars on the associated ring sheaf}
+
+Keep the actual associated ring sheaf and its original structure-ring
+sheaf morphism. All ambient actions below are induced by that genuine
+morphism; the whole original ring already has its representative algebra
+structure.
+
+\begin{definition}[Actual ambient ring stalk scalars]
+\label{hir:real-domain-actual-normal-associated-ring-sheaf-ambient-scalars}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-sheaf,hir:relative-normal-intrinsic-graded-algebra}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkAmbientHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkAlgebra,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualWholeNormalAssociatedRingAlgebra}
+\leanok
+The actual structure-ring sheaf morphism induces a ring homomorphism
+$R_y\to(G^{\#})_y$ and hence the actual ambient algebra action on the
+associated ring sheaf stalk. The whole original ring retains its
+intrinsic representative $R_y$-algebra structure independently.
+\end{definition}
+\begin{proof}
+Apply the genuine ring stalk functor to the actual structure-ring sheaf
+morphism. Its unital ring homomorphism defines the ambient algebra
+action by multiplication with its image. On the whole original ring use
+the already constructed degree-zero representative algebra map and
+representative products. Both actions precede their comparison.
+\end{proof}
+
+\begin{theorem}[The whole original ring dictionary is ambient algebra linear]
+\label{hir:real-domain-actual-normal-associated-ring-sheaf-whole-algebra-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-sheaf-ambient-scalars,hir:real-domain-actual-normal-associated-ring-sheaf-original-germs}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSectionGermHom_algebraMap,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkWholeEquiv_algebraMap,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkWholeAlgEquiv}
+\leanok
+For coherent original $A$, the same whole ring-stalk isomorphism is an
+$R_y$-algebra isomorphism for both independent actions.
+\end{theorem}
+\begin{proof}
+Represent an arbitrary scalar in $R_y$ by an actual holomorphic section
+on a true neighbourhood. The stalk functor germ identity sends it under
+the actual ambient ring morphism to the unit image of its original
+degree-zero section class. The ring-sheaf whole germ formula sends this
+to the original whole degree-zero germ class. This is exactly the
+intrinsic whole algebra map of the same scalar: the degree-zero quotient
+germ map keeps the same original scalar germ. Thus the existing ring
+isomorphism commutes with every ambient algebra map. Multiplicativity
+then makes it ambient linear for the two original actions.
+\end{proof}
+
+\begin{theorem}[Actual centre scalars and the previous whole module sheaf agree]
+\label{hir:real-domain-actual-normal-associated-ring-module-centre-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-sheaf-whole-algebra-equivalence,hir:relative-normal-actual-associated-centre-scalars,hir:real-domain-actual-normal-associated-sheaf-whole-centre-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalk_isTorsionByCentre,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkCentreModule,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkCentre_mk_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkWholeCentreLinearEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingModuleSheafStalkCentreLinearEquiv}
+\leanok
+The actual centre ideal $J_y$ annihilates the independent associated
+ring-sheaf stalk action. Its canonical action therefore descends to
+$R_y/J_y$ before comparison. The whole ring dictionary is centre linear,
+and composing it with the inverse dictionary for the previous actual
+associated module sheaf gives a centre-linear equivalence between these
+two genuine stalks.
+\end{theorem}
+\begin{proof}
+Each centre scalar annihilates every whole original homogeneous layer,
+by the original power containments, hence every finite sum in the whole
+ring. Apply the ambient-linear ring dictionary to a centre scalar times
+an arbitrary actual ring-sheaf stalk element. Its whole image is zero,
+so injectivity proves actual centre annihilation. The canonical quotient
+module construction now descends the actual action to $R_y/J_y$.
+Choose an ambient representative of any centre quotient scalar. Both
+canonical quotient actions are the corresponding ambient actions, so
+ambient linearity gives centre linearity. Compose with the inverse
+already proved centre-linear dictionary for the independently acted
+actual associated module sheaf. These are genuine modules; neither
+action is defined by transporting this equivalence.
+\end{proof}
+
+\begin{definition}[The actual centre quotient ring acts by a genuine ring homomorphism]
+\label{hir:real-domain-actual-normal-associated-ring-sheaf-centre-ring-map}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-module-centre-equivalence,hir:real-domain-actual-normal-associated-ring-sheaf-ambient-scalars}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkAmbientHom_centre_zero,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkCentreHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkCentreHom_mk,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkCentreAlgebra,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafStalkCentreAlgebra_mk_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.actualNormalAssociatedRingSheafCentreAlgebraWholeLinearEquiv}
+\leanok
+The true ambient stalk ring homomorphism factors through a genuine ring
+homomorphism $R_y/J_y\to(G^{\#})_y$. Its induced algebra action sends
+each quotient representative $[r]$ to the original ambient product with
+$r$, exactly as the independently descended centre module action does.
+\end{definition}
+\begin{proof}
+Apply actual centre annihilation to the ring stalk unit $1$. The actual
+ambient action is multiplication by the ambient ring homomorphism, so
+its value on every member of $J_y$ is zero. The genuine quotient-ring
+universal property therefore gives the stated ring homomorphism. On
+every quotient class $[r]$ it equals the same actual ambient ring image
+of $r$. Multiplication with that image defines its algebra action, so
+the quotient representative product is the original ambient product.
+The canonical centre module quotient has the same representative
+formula. Every quotient scalar has a representative, so these formulas
+describe the same actual scalar action for all centre scalars.
+\end{proof}
+
+\begin{theorem}[One original accumulating centre open makes actual ring stalks free and flat]
+\label{hir:real-domain-original-actual-normal-associated-ring-sheaf-free-open}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-ring-module-centre-equivalence,hir:real-domain-actual-normal-associated-ring-sheaf-centre-ring-map,hir:real-domain-original-actual-normal-associated-sheaf-free-open}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.exists_original_regular_actual_associated_ring_sheaf_free_open,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedRingScalars.exists_original_regular_actual_associated_ring_sheaf_algebra_free_open}
+\leanok
+If the original $C$ is regular of dimension $d$ at $x$, the original
+$A$ is coherent, and $A\leq\mathcal I_C$, there is one true open $O$
+with $x\in\overline{C\cap O}$ such that every actual whole associated
+ring-sheaf stalk at $y\in C\cap O$ is free and flat over the actual
+centre quotient ring for both its canonical descended module action and
+its genuine quotient-ring algebra action.
+\end{theorem}
+\begin{proof}
+Use the already proved original accumulating centre open on which the
+whole actual associated module-sheaf stalk is free and flat. At every
+point on this same open, the preceding centre-linear equivalence
+identifies the actual ring-sheaf stalk with that actual module-sheaf
+stalk. Transport its free basis through this linear equivalence. The
+resulting module is free, hence flat. The quotient-ring algebra has the
+same representative scalar formula; composing its whole centre-linear
+dictionary with the inverse module-sheaf dictionary gives the same
+free-basis transport for its genuine algebra action. The open and its original
+accumulation property are unchanged; no extra density, origin flatness,
+or prescribed free-open certificate is an input.
+\end{proof}

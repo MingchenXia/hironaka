@@ -1,0 +1,106 @@
+\section{Actual nonprincipal HS under the elementary triangular blowup substitution}
+
+In the original ring $R=\mathcal O_{\mathbb C^{2+n},0}$ write actual
+coordinates as $(u_1,u_2,v)$, and fix ANY original $b\in\mathbb C$. The
+actual polynomial map
+\[
+ S_b(u_1,u_2,v)=(u_1,u_1(b+u_2),v)
+\]
+fixes zero. Its ENTIRE germ pullback image ideal is formed in the SAME
+original ambient ring with the original complex action. The assertion
+below is the convergent-holomorphic instance of
+\cite[Lemma 7.26, p.~270]{bierstone-milman97-invent-math}. This is the raw
+substitution comparison, before division by exceptional factors; it does
+not assert the strict-transform Bennett inequality.
+
+\begin{lemma}[An actual polynomial deformation has genuine local inverses off the zero parameter]
+\label{hir:actual-triangular-deformation-genuine-inverse}
+\uses{hir:actual-original-holomorphic-map-whole-germ-pullback,hir:actual-nonlinear-full-quotient-hilbert-samuel-invariance}
+\lean{Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularDeformation,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularSubstitution,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularInverse,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularInverseDomain,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularDeformation_zero,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularJoint_contDiff,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularDeformation_contDiff,Hironaka.HironakaActualTriangularSubstitutionHS.isOpen_actualTriangularInverseDomain,Hironaka.HironakaActualTriangularSubstitutionHS.differentiableOn_actualTriangularInverse,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularInverse_left,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularInverse_right,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularLocalEquiv,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularGerm,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularGerm_mk,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularGermEquiv,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularGermEquiv_apply,Hironaka.HironakaActualTriangularSubstitutionHS.hilbertSamuelValue_actual_triangular_nonzero}
+\leanok
+The ACTUAL maps
+\[
+ F_{t,b}(u_1,u_2,v)
+ =(u_1,t u_2+(1-t)u_1(b+u_2),v)
+\]
+are jointly holomorphic in the original complex parameter and original
+coordinates, fix zero, and have $F_{0,b}=S_b$. If $t\ne0$, on the actual
+open set $D_t=\{u:t+(1-t)u_1\ne0\}$ containing zero, a genuine
+two-sided holomorphic inverse is
+\[
+ Q_{t,b}(w_1,w_2,v)
+ =\left(w_1,\frac{w_2-(1-t)b w_1}{t+(1-t)w_1},v\right).
+\]
+Their actual entire germ pullbacks consequently give a genuine algebra
+equivalence and preserve every EXISTING original HS value.
+\end{lemma}
+\begin{proof}
+Each displayed forward coordinate is an actual polynomial in $t$ and the
+original coordinates, hence is holomorphic jointly; at zero all coordinate
+values vanish. The denominator is nonzero at the original centre whenever
+$t\ne0$, so $D_t$ is a genuine neighbourhood of zero. The actual inverse
+formula is holomorphic on this same open. Both maps preserve the first
+coordinate, hence preserve $D_t$ in both directions. Substitution in the
+second coordinate and cancellation of its actual nonzero denominator
+give BOTH inverse identities there, while all other coordinates are
+unchanged. This constructs an actual local holomorphic equivalence, not
+an inverse-function certificate. The true whole germ composition maps of
+these real inverses are a genuine algebra equivalence; therefore they
+preserve the true maximal powers and the original complex dimensions of
+every entire original ideal quotient.
+\end{proof}
+
+\begin{theorem}[One actual joint family retains every original whole substitution ideal]
+\label{hir:actual-triangular-deformation-whole-fibre-ideal}
+\uses{hir:actual-triangular-deformation-genuine-inverse,hir:actual-coordinate-specialization-whole-fibre-ideal,hir:actual-holomorphic-family-whole-fibre-macaulay-dictionary}
+\lean{Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularDomain,Hironaka.HironakaActualTriangularSubstitutionHS.isOpen_actualTriangularDomain,Hironaka.HironakaActualTriangularSubstitutionHS.axis_mem_actualTriangularDomain,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularFamily,Hironaka.HironakaActualTriangularSubstitutionHS.differentiableOn_actualTriangularFamily,Hironaka.HironakaActualTriangularSubstitutionHS.actualTriangularFibreIdeal_eq_map_original_span}
+\leanok
+For ANY original ideal $I\subset R$, internally choose finitely many
+original holomorphic generator representatives $g_i$ on ONE actual
+neighbourhood $V$ of zero. Then the actual functions
+$g_i(F_{t,b}(z))$ are jointly holomorphic on the real domain
+$\{(t,z):F_{t,b}(z)\in V\}$, which contains the entire parameter axis.
+At EVERY parameter their whole original fibre ideal is exactly the
+ENTIRE actual image ideal $R\,F_{t,b}^*(I)$.
+\end{theorem}
+\begin{proof}
+Actual Noetherian finite generation and genuine holomorphic germ
+representatives supply the single original family and its common actual
+neighbourhood. The real polynomial joint map from the preceding lemma
+gives openness of the displayed domain and actual holomorphicity of
+these same functions there. Because it fixes the original zero for all
+parameters, the whole actual parameter axis lies in this domain. The
+genuine whole fibre-ideal producer identifies the fibre with the entire
+ideal span of the original composed generator germs. Actual germ
+composition identifies each with its literal original pullback, and
+mapping the ENTIRE original finite ideal span gives exactly that same
+span of all images. Both ideal directions hold before any HS comparison.
+\end{proof}
+
+\begin{theorem}[Every original HS order is bounded by the true triangular substitution]
+\label{hir:actual-triangular-substitution-all-order-hs-inequality}
+\uses{hir:actual-triangular-deformation-genuine-inverse,hir:actual-triangular-deformation-whole-fibre-ideal,hir:actual-holomorphic-family-fibre-hs-closed-superlevels}
+\lean{Hironaka.HironakaActualTriangularSubstitutionHS.hilbertSamuelValue_actual_triangular_substitution}
+\leanok
+For EVERY actual original ideal $I\subset R$, EVERY original offset
+$b\in\mathbb C$, and EVERY $\ell\ge0$,
+\[
+ H_I(\ell)\le H_{R\,S_b^*(I)}(\ell).
+\]
+There is no principality, flatness, standard basis or proposed comparison
+hypothesis.
+\end{theorem}
+\begin{proof}
+Use the preceding internally constructed actual holomorphic family. Its
+fibre HS superlevel at the ACTUAL fixed value $H_I(\ell)$ is closed on
+the whole actual parameter line, by genuine normal-fibre semicontinuity.
+At every nonzero parameter the preceding real inverse construction
+preserves each existing original HS value, and the whole fibre-ideal
+dictionary identifies the fibre with precisely that actual pullback
+ideal. Thus the closed set contains EVERY nonzero parameter. Their true
+density in the complex line implies that zero also belongs. The entire
+zero-fibre ideal is the actual $S_b$ pullback ideal, which proves the
+displayed inequality for every order. All original generator and scalar
+actions are unchanged throughout. No division by an exceptional equation
+or strict-transform identification has been assumed or inferred.
+\end{proof}

@@ -1,0 +1,133 @@
+\section{Actual power lifts give the entire compatible normal filtration}
+
+For a commutative algebra $B\to R$ and actual original ideals $I,J$, write
+$L_q=\operatorname{im}(J^q\to R/(I+J^{q+1}))$ and
+$D=\bigoplus_{q\geq0}L_q$. Suppose these genuine original layers are free
+over $B$. Use their internally constructed power lifts
+$\lambda_q:L_q\to J^q$. Put
+\[
+ \Lambda(v)=\sum_q\lambda_q(v_q),\quad
+ T_s=R/(I+J^s),\quad \Gamma_s(v)=[\Lambda(v)].
+\]
+Every sum has finite support. The original coherent-ideal consumer below
+obtains these free layers internally on the same actual nearby open.
+
+\begin{definition}[The true whole representative and every normal truncation map]
+\label{hir:relative-normal-actual-whole-power-lift-truncation-map}
+\uses{hir:relative-normal-actual-free-layer-power-lift}
+\lean{Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualWholePowerLift,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualWholePowerLift_lof,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_lof}
+\leanok
+The preceding original power representatives define a genuine $B$-linear
+whole map $\Lambda:D\to R$ and, for every $s$, a genuine $B$-linear
+map $\Gamma_s:D\to T_s$. The degree-$q$ image is the same original
+numerator $\lambda_q(x)$ followed by the actual quotient map.
+\end{definition}
+\begin{proof}
+The $q$th whole power lift followed by its original power-submodule
+inclusion is $B$-linear. The finite-support direct-sum universal property
+therefore constructs one whole linear map whose restriction in every
+degree is this composite. The actual whole quotient map to $T_s$ is
+$B$-linear. Composing it with the same whole map gives $\Gamma_s$ and
+the asserted original numerator formula in every degree.
+\end{proof}
+
+\begin{lemma}[Every actual power representative has a preimage in the correct tail]
+\label{hir:relative-normal-actual-power-lift-truncation-tail-surjectivity}
+\uses{hir:relative-normal-actual-whole-power-lift-truncation-map,hir:relative-normal-actual-free-layer-power-lift-numerators}
+\lean{Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_power_preimage,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_power_preimage_any,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_surjective}
+\leanok
+For every $r,s$ and every actual original $g\in J^r$, its class in
+$T_s$ is $\Gamma_s(v)$ for some $v\in D$ with $v_q=0$ for all $q<r$.
+In particular every $\Gamma_s$ is surjective.
+\end{lemma}
+\begin{proof}
+If $r\geq s$, then $J^r\subseteq J^s$, so the actual class of $g$ is
+zero and $v=0$ works. For $r<s$, put $x_r=p_r(g)$ in the true original
+layer. The lift identity gives
+$g-\lambda_r(x_r)\in I+J^{r+1}$. Write this difference as
+$i_r+g_{r+1}$ with $i_r\in I$ and $g_{r+1}\in J^{r+1}$. Thus its
+actual class in $T_s$ is the sum of the class of $\lambda_r(x_r)$
+and the class of $g_{r+1}$. Repeat the construction at $r+1$; induction
+on $s-r$ terminates at degree $s$, whose whole power is killed in
+$T_s$. The resulting finite sum of degree inclusions has all degrees
+below $r$ zero and maps to the original class of $g$. For unrestricted
+surjectivity take $r=0$, when the actual original power is all of $R$,
+and use surjectivity of the original quotient map.
+\end{proof}
+
+\begin{theorem}[The full kernel is exactly the original high-degree tail]
+\label{hir:relative-normal-actual-power-lift-truncation-whole-kernel}
+\uses{hir:relative-normal-actual-power-lift-truncation-tail-surjectivity,hir:relative-normal-actual-free-layer-power-lift-numerators}
+\lean{Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualWholePowerLift_mem_power,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_eq_zero_iff,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_ker}
+\leanok
+For every $s$,
+\[
+ \Gamma_s(v)=0\quad\Longleftrightarrow\quad
+ v_q=0\text{ for every }q<s.
+\]
+Moreover $\Lambda(v)\in J^r$ whenever $v_q=0$ for every $q<r$.
+\end{theorem}
+\begin{proof}
+In the last assertion each nonzero summand of the finite representative
+sum has degree at least $r$ and lies in its actual power $J^q\subseteq
+J^r$. The zero lower-degree summands also lie in $J^r$, so closure
+under finite sums proves the assertion. If every degree below $s$
+vanishes, apply it with $r=s$ to prove $\Gamma_s(v)=0$.
+
+Conversely, suppose $\Lambda(v)\in I+J^s$. Prove $v_q=0$ for $q<s$
+by induction on $q$. Assume every lower degree is zero and subtract
+the degree-$q$ inclusion $\iota_q(v_q)$ from $v$. This remaining vector
+has every degree below $q+1$ zero, so its true representative lies in
+$J^{q+1}$. Since $q<s$, $J^s\subseteq J^{q+1}$. Linearity therefore
+gives $\lambda_q(v_q)\in I+J^{q+1}$. Its true layer class is zero,
+while the power-lift identity identifies that same class with $v_q$.
+Hence $v_q=0$, completing the induction and the full kernel identity.
+\end{proof}
+
+\begin{theorem}[The actual maps preserve the entire normal filtration and every truncation comparison]
+\label{hir:relative-normal-actual-power-lift-truncation-compatible-filtration}
+\uses{hir:relative-normal-actual-power-lift-truncation-whole-kernel}
+\lean{Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTail,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalPowerImage,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_tail_image,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationComparison,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationMap_comparison,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationQuotientEquiv,Hironaka.HironakaRelativeNormalActualCompatibleTruncations.actualNormalTruncationQuotientEquiv_mk}
+\leanok
+Let $D^{\geq r}$ be the original direct-sum tail and let $F_r(s)$ be
+the actual image of $J^r$ in $T_s$. Then
+$\Gamma_s(D^{\geq r})=F_r(s)$ for every $r,s$. For $s\leq t$, the
+true original quotient map $T_t\to T_s$ composed with $\Gamma_t$ is
+$\Gamma_s$. In particular $D/D^{\geq s}\simeq_B T_s$, retaining the
+whole original normal filtration.
+\end{theorem}
+\begin{proof}
+The preceding whole representative containment gives one inclusion
+in the image identity. The actual power-tail preimage theorem gives
+the reverse inclusion for every actual representative of $F_r(s)$.
+The comparison quotient sends the class of every original numerator
+to its same class. Thus it sends each degree image of $\Gamma_t$
+to the same degree image of $\Gamma_s$. Equality on every direct-sum
+degree proves equality of the whole maps. Their previously proved
+surjectivity and full kernel identity give the quotient isomorphism.
+The image identity proves that this same isomorphism preserves all
+original normal filtration levels.
+\end{proof}
+
+\begin{theorem}[Only original coherence gives the entire actual compatible filtration on one nearby open]
+\label{hir:relative-normal-original-nearby-compatible-power-truncations}
+\uses{hir:relative-normal-original-nearby-all-power-lifts,hir:relative-normal-actual-power-lift-truncation-compatible-filtration}
+\lean{Hironaka.HironakaRelativeNormalActualCompatibleTruncations.exists_original_nearby_all_compatible_normal_truncations}
+\leanok
+Original coherence of the ideal on $\mathbb C^{d+t}$ gives one genuine
+base open meeting every origin neighborhood, the original uniform
+degree ranks, and, at every actual plane point in that open, all the
+preceding compatible original truncation maps, whole kernels and
+filtration identities. No power lift, filtration splitting or desired
+truncation dictionary is a caller premise.
+\end{theorem}
+\begin{proof}
+The original-only all-power-lift producer supplies one true open and
+all actual original degree modules with their finite freeness and
+uniform ranks. Apply the preceding constructions at each original
+plane point to its same whole translated original ideal and actual
+normal-coordinate ideal. Their proofs apply simultaneously to all
+orders using the same internally selected degree lifts. Retain the
+previous original open and rank data. This gives every stated map
+and identity from the original coherent ideal alone.
+\end{proof}

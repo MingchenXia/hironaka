@@ -1,0 +1,101 @@
+\section{The actual global sharp endpoint manifold and proper holomorphic projection}
+
+The original-only point-covering sharp recipes now supply real endpoint
+comparisons and the genuine glued topological projection with entire saturated
+local ranges. The following construction proves its actual separation,
+countability and holomorphic charts, rather than requiring these conclusions
+as gluing certificates. No original sharp history is declared canonical.
+
+\begin{theorem}[Actual saturated endpoint charts give genuine separation and countability]
+\label{hir:sharp-actual-original-glued-endpoint-separation-countability}
+\uses{hir:sharp-actual-original-endpoint-comparison-atlas,hir:sharp-actual-endpoint-saturated-local-range,hir:terminal-atlas-actual-saturated-projection-hausdorff,hir:terminal-atlas-actual-saturated-projection-second-countable}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveGlobalManifold.endpointSpace_t2,Hironaka.HironakaSharpActualCurveGlobalManifold.endpointSpace_secondCountable}
+The actual glued sharp endpoint space constructed from only the original
+curve data is Hausdorff and second countable. No compactness of the ambient
+manifold, countable chosen atlas or separation certificate is assumed.
+\end{theorem}
+\begin{proof}
+Every actual local endpoint is a genuine complex manifold, so is Hausdorff
+and second countable. The real quotient projection is continuous and the
+proved entire inclusion range is exactly its inverse image of the original
+base open. The original-only recipe producer puts every ambient point in its
+own true open, giving a genuine base cover.
+
+For two distinct glued points with distinct projected images, pull back
+actual disjoint original neighborhoods. If their projected images agree,
+the saturated range places BOTH points in one actual local open embedding;
+its genuine Hausdorff neighborhoods give actual disjoint open neighborhoods
+in the glued space. For countability, use second countability of the original
+ambient manifold to select a countable subfamily of the actual base cover.
+Saturated ranges then make the corresponding actual local embeddings a
+countable cover of the entire glued space. Their true local countable bases
+supply a genuine countable basis globally. These are exactly the previously
+proved genuine saturated-atlas topology producers, applied to actual data
+constructed from only original input.
+\end{proof}
+
+\begin{theorem}[Actual lifted charts construct the original global complex endpoint and holomorphic projection]
+\label{hir:sharp-actual-original-global-complex-endpoint}
+\uses{hir:sharp-actual-original-glued-endpoint-separation-countability,hir:sharp-actual-endpoint-embedding-overlap,hir:sharp-actual-endpoint-glued-projection,hir:terminal-atlas-actual-lifted-charted-space,hir:terminal-atlas-actual-lifted-holomorphic-manifold,hir:terminal-atlas-actual-local-inclusion-holomorphic}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveGlobalManifold.endpointChartedSpace,Hironaka.HironakaSharpActualCurveGlobalManifold.endpointSpace_isComplexManifold,Hironaka.HironakaSharpActualCurveGlobalManifold.endpointManifold,Hironaka.HironakaSharpActualCurveGlobalManifold.localInclusion_contMDiff,Hironaka.HironakaSharpActualCurveGlobalManifold.gluedProjection_contMDiff,Hironaka.HironakaSharpActualCurveGlobalManifold.originalEndpointManifold,Hironaka.HironakaSharpActualCurveGlobalManifold.originalEndpointProjection,Hironaka.HironakaSharpActualCurveGlobalManifold.originalEndpointProjection_contMDiff,Hironaka.HironakaSharpActualCurveGlobalManifold.originalLocalInclusion_contMDiff}
+Construct a genuine complex manifold of the original ambient dimension on
+the actual glued sharp endpoint space. Every actual local inclusion is
+holomorphic, and the true global projection to the original ambient manifold
+is holomorphic. Its local point formula is exactly the original prefix/tail
+projection. No supplied chart-transition, manifold or holomorphicity
+certificate is an input.
+\end{theorem}
+\begin{proof}
+Lift each genuine local endpoint chart through its actual open embedding.
+Joint surjectivity supplies a real chart at every glued point. The actual
+embedding-overlap biholomorphisms, with their proved exact inclusion identity,
+identify coordinate transitions with genuine local holomorphic transitions.
+The already proved genuine lifted-chart construction therefore supplies a
+true complex charted manifold; the first theorem supplies the actual
+Hausdorff and second countable fields. Its actual chart construction proves
+each local inclusion holomorphic.
+
+At an arbitrary actual glued point, choose a true local endpoint chart using
+joint surjectivity. On its real open image the global projection has the
+proved exact local composite formula. The local endpoint projection is
+holomorphic, and the actual lifted chart inverse is the genuine old local
+chart inverse. Their actual composition proves holomorphicity of the global
+projection at that point, by equality on a genuine chart-source neighborhood.
+This is whole-map holomorphicity on the actual constructed manifold, not a
+separately named analytic model or a replacement projection.
+\end{proof}
+
+\begin{theorem}[The actual original global endpoint projection is proper]
+\label{hir:sharp-actual-original-global-projection-proper}
+\uses{hir:sharp-actual-original-global-complex-endpoint,hir:sharp-actual-endpoint-saturated-local-range,hir:sharp-actual-original-retained-local-recipe-family}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveGlobalManifold.gluedProjection_local_full,Hironaka.HironakaSharpActualCurveGlobalManifold.gluedProjection_fibre,Hironaka.HironakaSharpActualCurveGlobalManifold.gluedProjection_fibre_isCompact,Hironaka.HironakaSharpActualCurveGlobalManifold.gluedProjection_isClosedMap,Hironaka.HironakaSharpActualCurveGlobalManifold.gluedProjection_isProperMap,Hironaka.HironakaSharpActualCurveGlobalManifold.originalEndpointProjection_isProperMap}
+The true holomorphic glued projection is a proper map. This does not require
+compact original ambient space, compact whole original cosupport, or a
+uniform finite bound on all local history lengths.
+\end{theorem}
+\begin{proof}
+For any original point, use its actual chosen base open containing it. The
+entire saturated range identifies the whole global fibre with the image of
+the corresponding actual finite-history fibre under its real local open
+embedding. The local actual blowup composite is proper, so this fibre is
+compact; its genuine continuous image is compact.
+
+For a global closed set, pull it back along that actual local embedding.
+The actual finite-history proper projection sends this genuine local closed
+set to a closed subset of the true base open. For an original point outside
+the global image, its actual local complement contains the point. If a point
+of this complement belonged to the global image, the entire saturated range
+would put its genuine global preimage in that same local endpoint. The exact
+local projection equation would then put the point in the excluded local
+closed image, a contradiction. Thus the local open complement is a real
+ambient neighborhood disjoint from the global image. This proves the actual
+global projection closed. Its already constructed continuity, true compact
+fibres and closed-map property prove properness.
+
+Global strict-carrier and divisor descent, the whole sharp geometric endpoint
+statement and a general global finite preparation driver remain separate
+producers. Properness is not used as a substitute for any of them.
+\end{proof}

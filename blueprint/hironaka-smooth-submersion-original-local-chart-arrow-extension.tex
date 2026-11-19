@@ -1,0 +1,93 @@
+\section{Actual smooth arrows between original local terminal charts}
+
+For arbitrary original source and target manifolds, every actual source atlas
+open and target atlas open supply a true restricted smooth base map on their
+intersection. Original whole marked-record functoriality and canonical open
+restriction then produce an actual smooth Cartesian terminal arrow. This is
+the local geometric producer for arbitrary noncompact-target descent; no
+chosen local arrow or compatibility hypothesis is supplied by the caller.
+
+\begin{lemma}[Actual original chart intersections retain the genuine smooth base map]
+\label{hir:original-smooth-chart-intersection-actual-submersion}
+\uses{hir:submersion-contact-restriction-open-charts,hir:smooth-terminal-submersion-biholomorphic-precomposition}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalLocalChartArrow.actualSmoothChartCommonOpen,Hironaka.HironakaSmoothSubmersionOriginalLocalChartArrow.actualSmoothChartBaseMap,Hironaka.HironakaSmoothSubmersionOriginalLocalChartArrow.actualSmoothChartBaseMap_isSubmersion}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Let $f:Y\to X$ be a genuine holomorphic submersion and $U\subseteq Y$,
+$V\subseteq X$ actual opens. Form $Q=U\cap f^{-1}V$ and its literal
+nested open inside $U$. The actual map from that nested open to $V$,
+with underlying value $f$, is a genuine submersion with a fixed complement.
+No actual point of $Q$ or nonemptiness assumption is needed.
+\end{lemma}
+\begin{proof}
+The true inverse image of $V$ is open by continuity of $f$, so $Q$ and
+its nested open are actual opens. Membership in $Q$ gives the true target
+subtype membership. At a point of $Q$, restrict the original submersion's
+actual domain and target charts by the open inclusions. Both resulting
+charts lie in the respective maximal holomorphic atlases, because the
+open inclusions and their true partial inverses are holomorphic. Their
+coordinate presentation is the same fixed-complement linear projection
+as the original submersion: cancelling the real open-inclusion inverse
+recovers the original chart formula. The same original complement is
+used at every point, and an empty domain needs no pointwise choices.
+The nested-open biholomorphism carries this submersion onto the literal
+nested base used by actual tower restriction.
+\end{proof}
+
+\begin{theorem}[The actual smooth chart base retains the entire original marked record]
+\label{hir:original-smooth-chart-intersection-whole-marked-dictionary}
+\uses{hir:original-smooth-chart-intersection-actual-submersion,hir:submersion-choice-image-trace-definition}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalLocalChartArrow.actualSmoothChartBaseMap_whole_marked_dictionary}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+For an original coherent marked record $M$ on $X$, the whole smooth
+pullback of its restriction to $V$, along the actual nested chart base
+map, equals the restriction of the whole original $f^*M$ first to $U$
+and then to the actual nested open over $Q$. Every original submanifold,
+indexed boundary member, ideal and mark is retained.
+\end{theorem}
+\begin{proof}
+Compose the actual chart base map with the true inclusion of $V$ into
+$X$. Its entire underlying map equals $f$ composed with the two actual
+source inclusions. Whole coherent marked-pullback composition applies to
+this equality of maps. On the target side it identifies pullback of the
+restricted marked record with pullback by that entire composite. On the
+source side apply the same entire composition identity twice, retaining
+the original ordered boundary list and all literal marked fields. The
+result is exactly the asserted whole record equality; no individual
+field dictionary is assumed.
+\end{proof}
+
+\begin{theorem}[Only original inputs produce every genuine local terminal smooth Cartesian arrow]
+\label{hir:original-local-terminal-actual-smooth-chart-arrow}
+\uses{hir:original-smooth-chart-intersection-whole-marked-dictionary,hir:original-terminal-open-actual-history-data,hir:original-input-covering-local-canonical-terminal-atlas,hir:smooth-original-finite-terminal-intrinsic-smooth-map}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalLocalChartArrow.originalLocalTerminalSmoothChartArrow,Hironaka.HironakaSmoothSubmersionOriginalLocalChartArrow.originalLocalTerminalSmoothChartArrow_properties}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Let $M$ be in the original invariant domain and $f:Y\to X$ a genuine
+smooth map. For every internally selected original source atlas index
+$i$ and target atlas index $j$, form the actual source-open intersection
+$U_i\cap f^{-1}V_j$. From its literal preimage in the original source
+local final tower, construct a genuine submersion to the original target
+local final tower. It satisfies the entire original-base pointwise
+projection equality and is holomorphically Cartesian over the actual
+nested chart base map. Neither base need be compact; no local histories,
+arrows or overlap compatibility witnesses are caller inputs.
+\end{theorem}
+\begin{proof}
+Original smooth pullback supplies the whole source marked domain. The
+original atlas producer internally supplies the actual source local
+tower over $U_i$ and target local tower over $V_j$, with canonicality and
+terminality. Restrict the true source tower to its actual nested base
+over $U_i\cap f^{-1}V_j$. Original open restriction supplies its marked
+domain, canonicality and terminality. The preceding whole dictionary
+identifies this original source record with the smooth pullback of the
+true target local record. Transport the two source-history predicates
+along that entire equality. The original finite terminal smooth-map
+producer therefore applies to these actual restricted and local towers
+and constructs the genuine submersion with its actual Cartesian law.
+Its entire nested-base projection equation, followed by actual subtype
+inclusions and the true restricted-tower projection formula, is exactly
+the original-base pointwise projection equality. All geometry is supplied
+internally from the original input, including empty intersections.
+\end{proof}

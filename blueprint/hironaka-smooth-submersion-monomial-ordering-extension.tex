@@ -1,0 +1,130 @@
+\section{Actual monomial ordering under arbitrary dimensional smooth pullback}
+
+For a genuine holomorphic submersion $f:Y^m\to X^n$, the existing whole
+divisor dictionary identifies every original index and exponent. Its
+monomial key still uses the genuine ambient dimension: a key with support
+$K$ starts with $n-|K|$ on $X$ and $m-|K|$ on $Y$. We prove that this
+dimension change preserves and reflects the complete original ordering.
+All index cardinality bounds are produced from the actual SNC coordinates.
+No equality of keys in different dimensions is asserted. Higher invariants,
+canonical blowup base change and complete smooth functoriality remain open.
+
+\begin{lemma}[Actual submersion dimension inequality]
+\label{hir:submersion-monomial-dimension}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialOrdering.dimension_le_of_submersionAt}
+A genuine submersion at an actual point of $Y^m$ internally gives $n\le m$.
+\leanok
+\end{lemma}
+\begin{proof}
+The actual submersion coordinates give a continuous complex linear
+isomorphism $L:\mathbb C^m\simeq\mathbb C^n\times F$. Compose its linear
+map with first projection. For every $v$, $L^{-1}(v,0)$ is a genuine
+preimage, so this actual linear map is surjective. The finite-rank
+inequality for this map gives $\dim_{\mathbb C}\mathbb C^n\le
+\dim_{\mathbb C}\mathbb C^m$. Their genuine ranks are $n$ and $m$.
+There is no ambient nonemptiness assumption: the actual point supplies it.
+\end{proof}
+
+\begin{lemma}[Entire original key ordering]
+\label{hir:submersion-monomial-key-order}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialOrdering.key_lt_key_dimension_iff, Hironaka.HironakaSmoothSubmersionMonomialOrdering.key_le_key_dimension_iff}
+If $|K|,|L|\le n\le m$, then for arbitrary actual exponent functions $a,b$
+the strict and weak comparisons of original keys of $K,L$ agree in
+dimensions $n$ and $m$.
+\leanok
+\end{lemma}
+\begin{proof}
+Write the complete original lexicographic key as
+$(n-|K|,\sum_Ka,K)$, with the last entry colexicographically ordered.
+Because both cardinalities are at most $n$, subtraction does not truncate.
+Thus the strict comparison, and equality, of the first coordinates agree
+after replacing $n$ by $m$. The actual exponent sums and colex entries
+remain the same. Expanding the two original lexicographic comparisons
+proves strict equivalence. Weak comparison is the negation of the reverse
+strict comparison in the actual linear order, which proves the weak case.
+\end{proof}
+
+\begin{lemma}[Same genuine top subset in both dimensions]
+\label{hir:submersion-monomial-common-top}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialOrdering.exists_common_top_dimensions}
+For a genuine finite member set $S$ with $|S|\le n\le m$ and
+$d\le\sum_Sa$, one actual feasible subset attains the original invariant
+in both dimensions and dominates every actual feasible key in both.
+\uses{hir:submersion-monomial-key-order}
+\leanok
+\end{lemma}
+\begin{proof}
+Take the actual maximizing subset of the original finite feasible family
+in dimension $n$. Every feasible subset is contained in $S$, so the
+genuine cardinality bounds needed by the preceding lemma hold. The whole
+family of key inequalities therefore transports to dimension $m$.
+Taking the actual maximum of its key image shows that the same subset
+attains the dimension-$m$ invariant. Feasibility, sums and colex tie
+breaking are unchanged, and original key injectivity makes the subset
+unique in either dimension. No maximizing subset is supplied by a caller.
+\end{proof}
+
+\begin{lemma}[Whole invariant ordering, including the bottom value]
+\label{hir:submersion-monomial-invariant-order}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialOrdering.inv_le_inv_dimension_iff, Hironaka.HironakaSmoothSubmersionMonomialOrdering.inv_eq_inv_dimension_iff}
+For two arbitrary real member sets of cardinality at most $n\le m$, with
+arbitrary exponent functions and marks, the entire original invariants
+have the same weak comparisons and equality in both dimensions.
+\uses{hir:submersion-monomial-common-top}
+\leanok
+\end{lemma}
+\begin{proof}
+If either feasible family is empty, the original invariant is literally
+bottom, in both dimensions. Empty families do not depend on dimension;
+the corresponding bottom/nonbottom comparisons therefore agree. If both
+are nonempty, internally take their actual common top subsets from the
+preceding lemma. Rewrite the actual maxima as their keys and use the
+whole key-order equivalence. Equality follows by the two weak comparisons.
+Zero marks, zero dimensions, empty member sets and bottom values are
+included in the same argument.
+\end{proof}
+
+\begin{lemma}[Actual original gamma ordering under smooth pullback]
+\label{hir:submersion-monomial-gamma-order}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialOrdering.gamma_pullback_le_iff, Hironaka.HironakaSmoothSubmersionMonomialOrdering.gamma_pullback_eq_iff}
+For an actual coherent ideal and actual SNC boundary on $X$, the original
+gamma values of its genuine pullback at any two actual points of $Y$
+have exactly the original gamma ordering and equality at their images.
+\uses{hir:submersion-monomial-dimension, hir:submersion-monomial-invariant-order}
+\leanok
+\end{lemma}
+\begin{proof}
+Use the actual submersion point to produce $n\le m$. The genuine SNC
+coordinate family injects the actual member indices at each image point
+into distinct coordinate hyperplanes, and hence internally bounds both
+cardinalities by $n$. The previously proved whole divisor dictionary
+identifies all original member indices and the entire exponent function
+of the pullback. Apply the preceding ordering lemma to these exact
+original data. This proves every comparison and equality without assuming
+any pullback value, member-cardinality or ordering certificate.
+\end{proof}
+
+\begin{lemma}[Literal original marked maximum locus]
+\label{hir:submersion-monomial-original-max-locus}
+\lean{Hironaka.HironakaSmoothSubmersionMonomialOrdering.maxLocus_gamma_markedPullback_eq}
+For a surjective genuine holomorphic submersion and an actual coherent
+marked ideal whose marked ambient locus is the whole manifold, with genuine SNC boundary, the original gamma maximum locus
+on its actual controlled cosupport pulls back to the literal maximum
+locus of the original marked pullback.
+\uses{hir:submersion-monomial-gamma-order}
+\leanok
+\end{lemma}
+\begin{proof}
+The genuine whole marked ambient locus remains whole under preimage.
+Whole original ambient order preservation identifies the actual pulled-back
+cosupport with the preimage of the original cosupport. If an image point
+is in the original maximum locus, every point of the pulled cosupport
+has a smaller or equal gamma by the complete ordering equivalence. In
+the reverse direction, lift every original cosupport point using actual
+surjectivity. Its lift lies in the actual pulled cosupport, and the same
+ordering equivalence gives the required original inequality. Membership
+and all inequalities give equality of the entire literal sets, including
+empty cosupports and unattained maxima. Surjectivity is real geometry;
+no maximum certificate is an input. For a nonsurjective submersion, the
+pointwise comparison statement remains valid without this global claim.
+\end{proof}

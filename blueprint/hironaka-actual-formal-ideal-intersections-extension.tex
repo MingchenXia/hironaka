@@ -1,0 +1,39 @@
+\section{Whole intersections under genuine analytic Taylor extension}
+
+Let $R$ be the original holomorphic germ ring at the origin of $\mathbb C^n$,
+$S=\mathbb C[[x_1,\ldots,x_n]]$, and $T:R\to S$ the existing original Taylor
+homomorphism. Formal coefficients below need not be convergent.
+
+\begin{theorem}[Taylor extension preserves entire original ideal intersections]
+\label{hir:actual-formal-extension-whole-ideal-intersections}
+\uses{hir:actual-formal-relations-original-analytic-syzygies}
+\lean{Hironaka.HironakaActualFormalIdealIntersections.map_inf_originalTaylorAlgHom}
+\leanok
+For any two original ideals $I,J\subseteq R$, including zero and unit ideals,
+\[
+ T(I\cap J)S= T(I)S\cap T(J)S.
+\]
+The statement concerns whole ideals and every formal element, including $n=0$;
+finite generators, relation certificates and an intersection-compatibility
+hypothesis are not supplied.
+\end{theorem}
+\begin{proof}
+Monotonicity gives the forward inclusion. For the reverse, take any formal
+$F$ in both extensions. The original analytic ring is Noetherian, so choose
+finite original generators $g_i$ of $I$ and $h_l$ of $J$. Membership in their
+formal extensions supplies actual finite expressions
+$F=\sum_i T(g_i)A_i=\sum_l T(h_l)D_l$.
+Apply the preceding analytic syzygy producer to the concatenated original
+family $(g_i,h_l)$ and the formal relation vector $(A_i,-D_l)$.
+It supplies a finite formal family $B_j$ and original coefficients
+$c_{ij},d_{lj}$ with
+\[
+ A_i=\sum_jT(c_{ij})B_j,\qquad
+ \sum_i g_i c_{ij}+\sum_l h_l d_{lj}=0.
+\]
+Set $k_j=\sum_i g_i c_{ij}$. Then $k_j\in I$ and the second identity gives
+$k_j=-\sum_l h_l d_{lj}\in J$. Substituting the first identity into the
+expression for $F$ and interchanging the two finite sums gives
+$F=\sum_j T(k_j)B_j$. Thus $F$ belongs to the extension of the actual
+intersection. All sums may be empty; no convergence of $A_i,D_l,B_j$ is used.
+\end{proof}

@@ -1,0 +1,69 @@
+\section{Strict filtered elimination of a degree-one regular symbol}
+
+Let $R$ be a commutative ring, let $I,N\subset R$ be ideals and let
+$v\in N$. Suppose multiplication by the degree-one symbol of $v$ is
+injective on every piece of the $N$-adic associated graded of $R/I$.
+In terms of the entire original ideals, this means that for every
+$q\geq0$ and $b\in N^q$,
+\[
+ vb\in I+N^{q+2}\quad\Longrightarrow\quad b\in I+N^{q+1}.
+\]
+This is the usual regular-symbol hypothesis; no freeness, geometric
+normal-flatness or equality of two filtrations is assumed.
+
+\begin{theorem}[Regular symbols give exact successor division in every finite degree]
+\label{hir:regular-symbol-whole-successor-division}
+\lean{Hironaka.HironakaStrictFilteredRegularElement.mem_successor_iff_mem_current_of_regular_symbol}
+\leanok
+For every $q\geq0$ and every $a\in R$,
+\[
+ va\in I+N^{q+1}\quad\Longleftrightarrow\quad a\in I+N^q.
+\]
+Thus the entire successor denominator has exactly the expected
+principal colon denominator. No separatedness or Noetherian
+hypothesis is needed for this finite-degree identity.
+\end{theorem}
+\begin{proof}
+The implication from right to left holds at every degree: write
+$a=i+b$ with $i\in I$ and $b\in N^q$. Then $vi\in I$ and
+$vb\in N^{q+1}$ because $v\in N$.
+
+For the converse use induction on $q$. At $q=0$ the conclusion is
+$a\in I+R=R$. Suppose the converse holds at $q$ and
+$va\in I+N^{q+2}$. Since $N^{q+2}\subset N^{q+1}$, the induction
+hypothesis writes $a=i+b$ with $i\in I$ and $b\in N^q$.
+Subtracting $vi\in I$ from the given inclusion gives
+$vb\in I+N^{q+2}$. Injectivity of the degree-$q$ symbol therefore
+gives $b\in I+N^{q+1}$. Adding back $i$ gives
+$a\in I+N^{q+1}$, completing the induction. The proof uses only
+finite powers and whole ideal membership.
+\end{proof}
+
+\begin{theorem}[The entire principal image meets the filtration strictly]
+\label{hir:regular-symbol-whole-principal-intersection}
+\uses{hir:regular-symbol-whole-successor-division}
+\lean{Hironaka.HironakaStrictFilteredRegularElement.sup_pow_inf_principal_of_regular_symbol}
+\leanok
+For every $q\geq0$, the following equality holds for entire ideals:
+\[
+ (I+N^{q+1})\cap(I+(v))=I+(v)N^q.
+\]
+In particular, imposing the actual element $v$ introduces precisely
+its degree-one graded image in each finite filtration quotient.
+\end{theorem}
+\begin{proof}
+Let $x$ belong to the left side. Write $x=i+va$ with $i\in I$.
+Since $x\in I+N^{q+1}$, subtraction of $i$ gives
+$va\in I+N^{q+1}$. The preceding theorem gives $a=j+b$ with
+$j\in I$ and $b\in N^q$. Hence
+$x=(i+vj)+vb\in I+(v)N^q$.
+
+Conversely $I$ is contained in both ideals on the left.
+Since $v\in N$, the entire product $(v)N^q$ is contained in
+$N^{q+1}$ and is also contained in $(v)$. Therefore its sum with
+$I$ belongs to both ideals on the left, proving the reverse inclusion.
+This proves equality of whole ideals, including arbitrary original
+multipliers. It does not infer that $v$ is injective on the entire
+unfiltered quotient: that stronger conclusion requires a separate
+intersection-of-all-powers assertion.
+\end{proof}

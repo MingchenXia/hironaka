@@ -1,0 +1,165 @@
+\section{Actual relative normal monomial bases of entire normal-power quotients}
+\label{sec:hironaka-relative-normal-monomial-basis}
+
+Let $B=\mathcal O_{\mathbf C^d,0}$, $R=\mathcal O_{\mathbf C^{d+t},0}$
+and $J=(z_{d+1},\ldots,z_{d+t})$. Use the actual tangential pullback as the
+entire base algebra. This is the usual genuine normal-coordinate polynomial
+expansion in the smooth-centre charts of \cite{bierstone-milman97-invent-math}.
+All derivatives below are actual holomorphic germ derivatives; the complete
+Taylor kernel was produced analytically in the preceding extension.
+Only $R/J^q$ is asserted free. A quotient by an additional original ideal
+need not be free or flat. Actual relative ideal matrices, fixed-degree free
+patches, all-degree normal-flat centre selection and higher HS descent remain
+subsequent obligations; general G8 remains OPEN.
+
+\begin{lemma}[Actual entire normal derivations and genuine polynomial evaluation]
+\label{hir:relative-normal-basis-actual-derivation-evaluation}
+\lean{Hironaka.HironakaRelativeNormalMonomialBasis.iteratedDerivativeGerm_singleton_mul,Hironaka.HironakaRelativeNormalMonomialBasis.normalDerivativeMap,Hironaka.HironakaRelativeNormalMonomialBasis.normalDerivation,Hironaka.HironakaRelativeNormalMonomialBasis.normalDerivation_normalCoordinate,Hironaka.HironakaRelativeNormalMonomialBasis.normalPolynomialEval,Hironaka.HironakaRelativeNormalMonomialBasis.normalDerivation_polynomialEval,Hironaka.HironakaRelativeNormalMonomialBasis.planeTrace_normalPolynomialEval}
+\uses{hir:relative-normal-actual-tangential-linearity,hir:relative-normal-actual-iterated-derivative-germs,hir:relative-normal-entire-germ-retraction}
+\leanok
+Each genuine normal basis vector defines a $B$-derivation on the ENTIRE original
+holomorphic germ ring. Its derivative of the original normal coordinate $z_j$
+is $\delta_{ij}$. Evaluation of the actual polynomial ring $B[Z_1,\ldots,Z_t]$
+at these original coordinate germs is a genuine entire base-algebra map.
+The actual derivative of its value is exactly the value of the true formal
+polynomial partial derivative. Its whole plane trace is the original
+polynomial constant coefficient.
+\end{lemma}
+\begin{proof}
+Take actual original holomorphic representatives of two whole germs on a
+common neighbourhood. The original complex product rule gives the true
+Leibniz identity throughout that neighbourhood, hence on entire germs. The
+previous tangential-linearity theorem supplies actual $B$-linearity, and the
+constant function one has zero derivative. The actual normal coordinate is
+an original linear coordinate functional; its genuine derivative evaluated
+at the actual normal basis vector is the Kronecker delta everywhere. These
+are the true derivation fields, not supplied certificates.
+
+Evaluate a polynomial by its entire base coefficients and actual normal
+germs. On constants the actual derivative is zero because the tangential
+projection kills the true normal basis vector. On $Z_j$ it is the proved
+Kronecker delta. Induct on the original polynomial, with true addition and
+multiplication by $Z_j$, and apply the actual Leibniz rule. The genuine formal
+partial derivative satisfies exactly these original operations, proving the
+whole equality. The actual entire trace fixes every base coefficient and
+kills every normal coordinate, so the same genuine polynomial induction
+identifies it with the whole constant coefficient.
+\end{proof}
+
+\begin{lemma}[Actual normal-power membership forces every lower polynomial coefficient to vanish]
+\label{hir:relative-normal-basis-actual-coefficient-separation}
+\lean{Hironaka.HironakaRelativeNormalMonomialBasis.normalDerivation_mem_normalIdeal_pow,Hironaka.HironakaRelativeNormalMonomialBasis.normalExponentDegree,Hironaka.HironakaRelativeNormalMonomialBasis.coefficient_eq_zero_of_normalPolynomialEval_mem}
+\uses{hir:relative-normal-basis-actual-derivation-evaluation,hir:relative-normal-actual-whole-power-kernel}
+\leanok
+For every ORIGINAL polynomial $P\in B[Z]$, actual membership of its entire
+coordinate evaluation in $J^q$ forces its coefficient at each genuine exponent
+$\alpha$ of total degree $|\alpha|<q$ to be the zero WHOLE base germ.
+\end{lemma}
+\begin{proof}
+Induct on $q$, uniformly for every actual polynomial and exponent. Degree
+zero gives no exponent satisfying the strict inequality. For positive $q$
+and $\alpha=0$, take the actual whole trace: $J^q\subset J$ and the actual
+entire plane kernel is $J$, so the original constant coefficient is zero.
+If $\alpha\ne0$, choose a genuine coordinate $i$ with $\alpha_i>0$ and put
+$\beta=\alpha-e_i$. The actual original normal derivative lowers $J^q$ to
+$J^{q-1}$, by the already proved true derivative/power producer. Its value is
+the true evaluated formal derivative, by the preceding actual whole equality.
+Since $|\beta|=|\alpha|-1<q-1$, induction makes the original $\beta$ coefficient
+of this derivative zero. The genuine polynomial coefficient formula is
+$\alpha_i$ times the original $\alpha$ coefficient. This actual positive
+integer is nonzero in the entire base germ ring: evaluating a claimed zero
+constant germ would give the corresponding nonzero complex number. The
+original holomorphic germ ring is a domain. Therefore that entire original
+coefficient is zero. All derivatives and ideal-power facts are internally
+produced; the coefficient equality is not an assumption.
+\end{proof}
+
+\begin{definition}[Finite actual normal exponent family and genuine monomial combination]
+\label{hir:relative-normal-basis-actual-finite-exponents}
+\lean{Hironaka.HironakaRelativeNormalMonomialBasis.normalExponentIndex,Hironaka.HironakaRelativeNormalMonomialBasis.normalExponentIndex_entry_lt,Hironaka.HironakaRelativeNormalMonomialBasis.normalExponentFintype,Hironaka.HironakaRelativeNormalMonomialBasis.normalExponentMonomial,Hironaka.HironakaRelativeNormalMonomialBasis.normalPolynomialEval_monomial,Hironaka.HironakaRelativeNormalMonomialBasis.normalMonomialCombination,Hironaka.HironakaRelativeNormalMonomialBasis.normalMonomialCombination_apply,Hironaka.HironakaRelativeNormalMonomialBasis.coefficient_normalMonomialCombination_polynomial}
+\uses{hir:relative-normal-basis-actual-derivation-evaluation}
+\leanok
+Index by genuine finitely supported $t$-tuples $\alpha$ with $|\alpha|<q$.
+This is internally finite: each actual entry is bounded by the actual total
+degree, hence is $<q$. The genuine quotient combination map sends an entire
+base coefficient tuple $(a_\alpha)$ to the original whole germ class
+$\sum_\alpha \pi^*a_\alpha z^\alpha\pmod{J^q}$.
+\end{definition}
+\begin{proof}
+Encode each actual exponent by its actual entries in the finite type
+$\operatorname{Fin}(q)^t$. Equality of those genuine entries gives equality
+of the original finitely supported exponent, proving injectivity and finite
+indexing internally. True polynomial evaluation identifies each original
+monomial $Z^\alpha$ with the genuine normal-coordinate product. The actual
+quotient map is base-linear, and its finite combination is therefore a real
+base-linear map on the entire original coefficient tuples. At $q=0$ the
+index is empty. When $t=0$ and $q>0$, its sole exponent is zero.
+\end{proof}
+
+\begin{theorem}[Actual monomials below degree q form a true entire relative quotient basis]
+\label{hir:relative-normal-basis-actual-entire-quotient-basis}
+\lean{Hironaka.HironakaRelativeNormalMonomialBasis.normalMonomialCombination_injective,Hironaka.HironakaRelativeNormalMonomialBasis.normalWordExponent,Hironaka.HironakaRelativeNormalMonomialBasis.normalWordExponent_degree,Hironaka.HironakaRelativeNormalMonomialBasis.normalWord_eq_exponentMonomial,Hironaka.HironakaRelativeNormalMonomialBasis.normalWordSpan_le_combination_comap,Hironaka.HironakaRelativeNormalMonomialBasis.normalMonomialCombination_surjective,Hironaka.HironakaRelativeNormalMonomialBasis.normalPowerLinearEquiv,Hironaka.HironakaRelativeNormalMonomialBasis.normalMonomialBasis,Hironaka.HironakaRelativeNormalMonomialBasis.normalMonomialBasis_apply,Hironaka.HironakaRelativeNormalMonomialBasis.free_quotient_normalIdeal_pow}
+\uses{hir:relative-normal-basis-actual-coefficient-separation,hir:relative-normal-basis-actual-finite-exponents,hir:relative-normal-all-power-representatives}
+\leanok
+The genuine combination map is bijective, hence internally gives a true
+$B$-basis of the ENTIRE original quotient $R/J^q$ indexed by those actual
+exponents. Its basis vectors are precisely the original monomial classes.
+In particular this literal whole quotient is a finite free base module.
+\end{theorem}
+\begin{proof}
+Suppose an actual coefficient combination is the zero quotient class. The
+entire corresponding original finite polynomial evaluates to a true member
+of $J^q$. Every exponent in the real combination has degree $<q$. The
+preceding actual separation theorem makes each original polynomial coefficient
+zero as a WHOLE base germ. The genuine coefficient at an indexed exponent
+is exactly the corresponding entry of the actual tuple, since the actual
+exponent family has no repetitions. Thus the tuple is zero. Base linearity
+applied to the difference proves injectivity.
+
+The preceding actual relative Hadamard producer supplies every entire germ a
+finite real normal-word representative modulo $J^q$. Count each actual normal
+index in a word. Its counts form a genuine exponent of degree equal to that
+word's actual length, hence $<q$. Commutativity of the genuine entire germ ring
+identifies the original word product with its actual exponent monomial.
+Therefore every true representative lies in the real monomial span, and the
+actual finite quotient combination is surjective. The internally proved
+bijection gives the actual linear equivalence and transported standard finite
+basis. This is an original basis producer, not a supplied independence,
+spanning or rank certificate. The zero quotient and empty basis at $q=0$ are
+included, and the $t=0$ case has the genuine one-vector base basis for $q>0$.
+\end{proof}
+
+\begin{theorem}[Original regular centre transports all true normal-power quotient bases]
+\label{hir:relative-normal-basis-actual-original-centre}
+\lean{Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalMonomialCombination,Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalMonomialCombination_apply,Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalMonomialCombination_injective,Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalMonomialCombination_surjective,Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalPowerLinearEquiv,Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalMonomialBasis,Hironaka.HironakaRelativeNormalMonomialBasis.transportedNormalMonomialBasis_apply,Hironaka.HironakaRelativeNormalMonomialBasis.free_quotient_mapped_normalIdeal_pow,Hironaka.HironakaRelativeNormalMonomialBasis.exists_regular_relative_monomial_basis,Hironaka.HironakaRelativeNormalMonomialBasis.exists_closed_smooth_relative_monomial_basis}
+\uses{hir:relative-normal-basis-actual-entire-quotient-basis,hir:smooth-centre-actual-closed-centre-relative-consumer,hir:relative-normal-original-centre-taylor-kernel}
+\leanok
+Actual original regularity internally constructs genuine nonlinear flattening,
+the true entire centre ideal $K$ and its genuine transported base algebra.
+For every $q$, it then supplies an actual finite base basis of the whole
+original centre-power quotient $R/K^q$, by the true transported original
+normal monomials. True closed smooth centre geometry internally supplies the dimension at
+each actual centre point and this same producer. This does not assert freeness
+or flatness after adjoining any other original ideal.
+\end{theorem}
+\begin{proof}
+Use the actual regular-centre producer to select the genuine flattening and
+entire germ algebra isomorphism $E$, and to prove the ENTIRE original ideal
+equality $K=E(J)$ with every whole power equality. The transported base action
+is multiplication by $E(\pi^*a)$. Combine the actual transformed normal monomials with this genuine entire
+base action. The result is exactly the class of $E$ applied to the original
+finite evaluated polynomial. If that class vanishes, its whole normal-power
+membership pulls back through the genuine inverse to actual $J^q$ membership;
+the internally proved original coefficient separation gives injectivity.
+For any original germ $g$, apply the actual untransported surjectivity to
+$E^{-1}g$ and map its whole power remainder through $E$. This proves true
+transported surjectivity. Its actual linear equivalence transports the
+standard finite coefficient basis to the genuine monomial basis. Its vectors are exactly the classes of $E(z^\alpha)$, by the
+original whole quotient map. All coordinate, ideal, power, base and basis data
+have been internally produced from original geometry, simultaneously in all
+$q$. The resulting base need not be constant across differently dimensioned
+components; original regularity gives the actual dimension at the chosen
+point. All-degree normal-flatness of a singular space along a selected centre
+still requires controlling its additional original ideal, which this result
+does not presume.
+\end{proof}

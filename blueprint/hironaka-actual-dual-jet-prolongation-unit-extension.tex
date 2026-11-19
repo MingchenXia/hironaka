@@ -1,0 +1,97 @@
+\section{The genuine differential prolongation vanishes for the original unit-ideal complement}
+
+\begin{theorem}[Canonical actual directional derivative germ gives precisely the original successor scalar jet]
+\label{hir:actual-canonical-directional-germ-successor-scalar-jet}
+\uses{hir:relative-normal-actual-iterated-derivative-germs,hir:actual-analytic-directional-jet-commutation}
+\lean{Hironaka.HironakaActualDualJetProlongationUnit.actual_directional_derivative_germ_scalar_jet}
+\leanok
+For every whole original holomorphic germ $g$, actual direction $w$,
+order $q$ and original coordinate word $r$ of degree less than $q$,
+the old scalar-jet coordinate of the canonical existing derivative
+germ $\operatorname{iteratedDerivativeGerm}[w](g)$ is exactly the
+successor original derivative component of $J_{q+1}g$ evaluated with
+$w$ first and the same original row tuple afterward. The canonical
+derivative operation is fixed before every jet order; no new
+replacement derivative germ is chosen.
+\end{theorem}
+\begin{proof}
+Represent the original whole germ by an actual function $f$
+holomorphic on a true neighborhood of zero. The existing canonical
+derivative-germ dictionary identifies the derivative with the germ
+of $z\mapsto Df(z)(w)$, which is genuinely holomorphic near zero.
+Actual holomorphicity supplies an analytic germ at zero. The accepted
+analytic directional-jet identity says that the $|r|$-th derivative
+of this same directional derivative function, on the original row
+tuple, equals the $(|r|+1)$-st original derivative of $f$ with $w$
+first. The unchanged finite-jet and scalar-coordinate definitions
+are precisely those evaluations. Thus the equality holds for the
+same original germ, canonical derivative, direction and row.
+\end{proof}
+
+\begin{theorem}[Zero on the entire actual old jet image implies zero prolongation on the entire true next jet image]
+\label{hir:actual-dual-jet-prolongation-zero-old-image-zero-next-image}
+\uses{hir:actual-dual-jet-differential-prolongation,hir:actual-canonical-directional-germ-successor-scalar-jet}
+\lean{Hironaka.HironakaActualDualJetProlongationUnit.actualDualJetProlongation_zero_of_old_true_jet_zero}
+\leanok
+Let the actual original row coefficients $\eta_r(c)$ be holomorphic
+on one true open $V\subset\mathbb C^d$. Suppose that at every
+$c\in V$ their actual pairing with the old jet of every whole
+original holomorphic germ is zero. Then their genuine differential
+prolongation vanishes on every actual next-order jet at every
+$c\in V$, in every tangent direction. Only genuine old and next
+finite-jet images are used; no full multilinear-product realization
+or individual redundant-row coefficient vanishing is asserted.
+\end{theorem}
+\begin{proof}
+Fix an actual next jet and choose one original whole germ $g$
+representing it. For this fixed germ, the actual scalar function
+$c\mapsto\sum_r\eta_r(c)(J_qg)_r$ is zero on the actual open.
+Differentiate this true finite sum. The old jet coordinates are fixed
+complex scalars, so the finite product rule says precisely that the
+sum of the derivative-coefficient terms in the genuine prolongation
+is zero. No individual redundant row coefficient is concluded zero.
+
+Choose an actual representative $f$ of the same germ $g$ that is
+holomorphic near zero. Its analytic germ at zero follows from actual
+complex holomorphicity on a genuine open neighborhood. For the fixed
+actual direction $Ta$, the function $z\mapsto Df(z)(Ta)$ is
+holomorphic on a genuine neighborhood of zero, by analytic Fr\'echet
+differentiation and existing continuous linear direction evaluation.
+It therefore gives the existing canonical original holomorphic germ
+$h=\operatorname{iteratedDerivativeGerm}[Ta](g)$.
+The accepted actual analytic directional-jet identity identifies each
+old derivative coordinate of $h$ with the corresponding successor
+coordinate of the same original next jet of $g$, with $Ta$ first.
+The original zero-on-all-old-germs hypothesis applied to this actual
+$h$ makes the whole successor term sum zero. Adding the two zero
+sums gives exactly the genuine prolongation evaluated at the chosen
+original next jet. The empty sum $q=0$ is included. This proof uses
+only genuine holomorphic representatives and actual jet identities.
+\end{proof}
+
+\begin{theorem}[An actual original unit ideal needs no generator-vanishing premise]
+\label{hir:actual-dual-jet-prolongation-original-unit-ideal-zero}
+\uses{hir:actual-dual-jet-prolongation-zero-old-image-zero-next-image,hir:actual-macaulay-annihilator-whole-ideal-jet}
+\lean{Hironaka.HironakaActualDualJetProlongationUnit.actualDualJetProlongation_zero_of_translatedIdeal_eq_top}
+\leanok
+Use the same original holomorphic family on a true open $U$ and
+actual parameter open $V$ with $T(V)\subset U$. Suppose actual
+holomorphic moving rows annihilate every original old Macaulay column
+on $V$, and the unchanged entire original translated ideal is the
+unit ideal at every actual $Tc$ in this domain. Then their actual
+differential prolongation vanishes on every true next jet there, in
+every tangent direction. No original generator value is assumed zero.
+\end{theorem}
+\begin{proof}
+At each actual parameter point, every whole original germ belongs to
+the unchanged original translated ideal because that ideal is the
+whole ring. The accepted entire-original-ideal annihilator theorem
+turns actual old-column annihilation into zero pairing with the old
+jet of every such germ. This is exactly the hypothesis of the
+preceding genuine old-image-to-next-image theorem on the same actual
+open and original row functions. Apply it. The conclusion kills the
+entire actual next jet image, so it also kills the jet of every germ
+of the original unit ideal. This is the true unit-ideal complement
+to the proper-case generator-vanishing argument; it does not derive
+vanishing of generators of a unit ideal.
+\end{proof}

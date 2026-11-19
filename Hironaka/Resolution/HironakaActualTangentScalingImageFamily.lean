@@ -1,0 +1,966 @@
+/-
+Copyright (c) 2026 Hironaka contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Hironaka contributors
+-/
+import Hironaka.Resolution.HironakaActualExceptionalInitialGeneration
+import Hironaka.Resolution.HironakaActualNormalFibreDiagramCompare
+import Hironaka.Resolution.HironakaActualInitialPivotNormality
+import Hironaka.Resolution.HironakaActualNormalCoordinateReindex
+
+/-!
+# Actual tangent-scaling image monic families
+
+The matching total band of an actual normal-power member is tangent-free.
+Genuine whole jet-colons eliminate the first normal pivot from minimal vertices.
+Finite homogeneous multiplier bands produce literal analytic sigma-image witnesses,
+retaining that pivot in the normal polynomials. For SAME prescribed original
+canonical relative quotients the normal powers, whole initial generation and all
+current colons are derived internally from the natural current order bounds,
+using true chart factorization and actual normal-coordinate reindexing.
+Blueprint: `hironaka-actual-tangent-scaling-image-family-extension.tex`.
+-/
+
+set_option autoImplicit false
+open Set Classical
+open scoped BigOperators
+namespace Hironaka.HironakaActualTangentScalingImageFamily
+noncomputable section
+open HolGerm HironakaRelativeNormalMonomialBasis HironakaRelativeNormalIdeal
+ HironakaActualFormalCoordinatePowerDivision HironakaActualFormalInitialDiagram
+ HironakaActualHomogeneousInitialHS HironakaActualPureNormalVertices
+ HironakaActualNormalFibreDiagramCompare HironakaActualRelativeTaylorCoefficients
+ HironakaActualCoefficientPresentationCentrePower HironakaActualExceptionalInitialGeneration
+ HironakaActualExceptionalFilteredDivision HironakaActualInitialPivotNormality
+ HironakaActualHomogeneousInitialTangentDerivatives HironakaActualReducedBasisDivision
+ HironakaActualNormalCoordinateReindex HironakaActualOriginalFormalHSTransfer
+ HironakaActualFormalBlowupMemberGeneration HironakaActualRelativePointChartFactorization
+ HironakaActualTangentScalingFiltration HironakaActualAnalyticBlowupTaylor
+ HironakaActualAnalyticFormalNormalPowers HironakaHolomorphicJetMonomialSpan
+ HironakaActualOriginalFormalTaylor HironakaActualOriginalReducedVertexBasis
+variable {d t : ℕ} {ι : Type*}
+local notation "R" => MvPowerSeries (Fin (d+t)) ℂ
+local notation "S" => actualTangentCentreVariables d t
+local notation "N" => actualFormalCoordinateIdeal (d+t) S
+local notation "𝔪" => actualFormalCoordinateIdeal (d+t) univ
+
+private theorem tangent_not_normal (i : Fin d) : i.castAdd t∉actualTangentCentreVariables d t := by
+  rintro ⟨j,hj⟩
+  have h:=congrArg Fin.val hj
+  simp only [Fin.val_natAdd,Fin.val_castAdd] at h
+  omega
+
+private theorem normal_weight_le_degree (α : Fin (d+t) →₀ ℕ) :
+    Finsupp.weight (actualCoordinateWeight S) α≤α.degree := by
+  rw [Finsupp.weight_eq_sum,Finsupp.degree_eq_sum]
+  apply Finset.sum_le_sum
+  intro i _
+  by_cases hi:i∈S <;> simp [actualCoordinateWeight,hi]
+
+private theorem normal_weight_lt_degree (i : Fin d) (α : Fin (d+t) →₀ ℕ)
+    (hi : α (i.castAdd t)≠0) : Finsupp.weight (actualCoordinateWeight S) α<α.degree := by
+  rw [Finsupp.weight_eq_sum,Finsupp.degree_eq_sum]
+  apply Finset.sum_lt_sum
+  · intro j _
+    by_cases hj:j∈S <;> simp [actualCoordinateWeight,hj]
+  · refine ⟨i.castAdd t,Finset.mem_univ _,?_⟩
+    simpa [actualCoordinateWeight,tangent_not_normal i] using Nat.pos_of_ne_zero hi
+
+private def NormalOnly (F : R) : Prop :=
+  ∀ (i : Fin d) (α : Fin (d+t) →₀ ℕ),α (i.castAdd t)≠0→MvPowerSeries.coeff α F=0
+
+/-- The matching total band of a genuine whole normal-power member has no tangent coefficient. -/
+theorem homogeneousComponent_normal_only (w : ℕ) (F : R) (hF : F∈N^w) :
+    ∀ (i : Fin d) (α : Fin (d+t) →₀ ℕ),α (i.castAdd t)≠0→
+      MvPowerSeries.coeff α (MvPowerSeries.homogeneousComponent w F)=0 := by
+  intro i α hi
+  rw [MvPowerSeries.coeff_homogeneousComponent]
+  split_ifs with hα
+  · exact (mem_actualFormalCoordinateIdeal_pow_iff S w F).mp hF α
+      (by rw [←hα];exact normal_weight_lt_degree i α hi)
+  · rfl
+
+private theorem normal_exponent_range_iff (α : Fin (d+t) →₀ ℕ) :
+    α∈range (Finsupp.embDomain (actualNormalFormalEmbedding d t)) ↔
+      ∀i : Fin d,α (i.castAdd t)=0 := by
+  rw [Finsupp.mem_range_embDomain_iff]
+  constructor
+  · intro h i
+    by_contra hi
+    obtain ⟨j,hj⟩ := h (Finsupp.mem_support_iff.mpr hi)
+    have hh:=congrArg Fin.val hj
+    change d+j.val=i.val at hh
+    omega
+  · intro h i hi
+    revert hi
+    refine Fin.addCases (fun j hj => ?_) (fun j _ => ⟨j,rfl⟩) i
+    exact False.elim ((Finsupp.mem_support_iff.mp hj) (h j))
+
+private theorem normalProjection_fixed (F : R) (hF : NormalOnly F) : normalProjection d t F=F := by
+  apply MvPowerSeries.ext
+  intro α
+  rw [normalProjection_coefficient]
+  split_ifs with hα
+  · rfl
+  · symm
+    have hn : ¬∀i : Fin d,α (i.castAdd t)=0 := fun h => hα ((normal_exponent_range_iff α).mpr h)
+    push Not at hn
+    obtain ⟨i,hi⟩ := hn
+    exact hF i α hi
+
+private theorem normalProjection_normal_only (F : R) : NormalOnly (normalProjection d t F) := by
+  intro i α hi
+  rw [normalProjection_coefficient,if_neg]
+  intro h
+  exact hi ((normal_exponent_range_iff α).mp h i)
+
+private theorem normalProjection_homogeneous (w : ℕ) (F : R) (hF : F.IsHomogeneous w) :
+    (normalProjection d t F).IsHomogeneous w := by
+  intro α hα
+  rw [normalProjection_coefficient] at hα
+  split_ifs at hα
+  · exact hF hα
+  · exact False.elim (hα rfl)
+
+private theorem pderiv_normal_only (F : R) (hF : NormalOnly F) (i : Fin d) :
+    MvPowerSeries.pderiv ℂ (i.castAdd t) F=0 := by
+  apply MvPowerSeries.ext
+  intro α
+  rw [MvPowerSeries.coeff_pderiv,hF i _ (by simp),zero_mul,map_zero]
+
+private theorem tangent_pderiv_span (C : ι → R) (hC : ∀i,NormalOnly (C i))
+    (j : Fin d) (F : R) (hF : F∈Ideal.span (range C)) :
+    MvPowerSeries.pderiv ℂ (j.castAdd t) F∈Ideal.span (range C) := by
+  induction hF using Submodule.span_induction with
+  | mem F hF =>
+    obtain ⟨i,rfl⟩:=hF
+    rw [pderiv_normal_only _ (hC i) j]
+    exact Ideal.zero_mem _
+  | zero => rw [map_zero];exact Ideal.zero_mem _
+  | add F G _ _ hF hG => simpa only [map_add] using Ideal.add_mem _ hF hG
+  | smul A F hF ih =>
+    change MvPowerSeries.pderiv ℂ (j.castAdd t) (A*F)∈_
+    rw [Derivation.leibniz,smul_eq_mul,smul_eq_mul]
+    exact Ideal.add_mem _ (Ideal.mul_mem_left _ A ih) (Ideal.mul_mem_right _ _ hF)
+
+/-- WHOLE initial generation and genuine normal powers internally force every current minimal vertex to be tangent-free. -/
+theorem current_vertex_tangent_zero_of_normal_components
+    (H : ι → R) (w : ι → ℕ) (hN : ∀i,H i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range H))=
+      Ideal.span (range fun i => MvPowerSeries.homogeneousComponent (w i) (H i)))
+    (a : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t))) (Ideal.span (range H))) :
+    actualTangentExponent (d := d) (t := t) a.val=0 := by
+  apply tangentExponent_vertex_zero_of_initial_tangent_pderiv d t _ ?_ a
+  intro j F hF
+  rw [hInitial] at hF ⊢
+  exact tangent_pderiv_span _ (fun i => homogeneousComponent_normal_only _ _ (hN i)) j F hF
+
+
+private theorem component_of_initial_mem (K : Ideal R) (F : R)
+    (hF : F∈actualHomogeneousInitialIdeal K) (q : ℕ) :
+    MvPowerSeries.homogeneousComponent q F∈actualHomogeneousInitialIdeal K := by
+  obtain ⟨L,hLI,hLq,hBand⟩ := actual_homogeneous_initial_ideal_degree_lift K F hF q
+  rw [←hBand]
+  exact homogeneousComponent_mem_actual_initial_of_mem_power K q L hLI hLq
+
+private theorem normalProjection_initial_mem
+    (H : ι → R) (w : ι → ℕ) (hN : ∀i,H i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range H))=
+      Ideal.span (range fun i => MvPowerSeries.homogeneousComponent (w i) (H i)))
+    (F : R) (hF : F∈actualHomogeneousInitialIdeal (Ideal.span (range H))) :
+    normalProjection d t F∈actualHomogeneousInitialIdeal (Ideal.span (range H)) := by
+  have hm := Ideal.mem_map_of_mem (normalProjection d t).toRingHom hF
+  have hmap : Ideal.map (normalProjection d t).toRingHom
+      (actualHomogeneousInitialIdeal (Ideal.span (range H)))≤
+        actualHomogeneousInitialIdeal (Ideal.span (range H)) := by
+    rw [hInitial,Ideal.map_span,←range_comp]
+    apply Ideal.span_le.mpr
+    rintro _ ⟨i,rfl⟩
+    change normalProjection d t (MvPowerSeries.homogeneousComponent (w i) (H i))∈_
+    rw [normalProjection_fixed _ (homogeneousComponent_normal_only _ _ (hN i))]
+    exact Ideal.mem_span_range_self (x:=i)
+  exact hmap hm
+
+private theorem exists_normal_initial_witness
+    (H : ι → R) (w : ι → ℕ) (hN : ∀i,H i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range H))=
+      Ideal.span (range fun i => MvPowerSeries.homogeneousComponent (w i) (H i)))
+    (a : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t))) (Ideal.span (range H))) :
+    ∃P : R,P∈actualHomogeneousInitialIdeal (Ideal.span (range H)) ∧
+      P.IsHomogeneous a.val.degree ∧ NormalOnly P ∧ MvPowerSeries.coeff a.val P=1 ∧
+      ∀β,(MonomialOrder.degLex (σ := Fin (d+t))).toSyn β<MonomialOrder.degLex.toSyn a.val→
+        MvPowerSeries.coeff β P=0 := by
+  have haJ : a.val∈actualInitialVertices MonomialOrder.degLex
+      (actualHomogeneousInitialIdeal (Ideal.span (range H))) := by
+    simpa only [actualInitialVertices,actual_homogeneous_initial_ideal_diagram] using a.property
+  obtain ⟨F,hFI,hFne,hInit,hMonic⟩ := exists_actual_monic_vertex_series MonomialOrder.degLex
+    (actualHomogeneousInitialIdeal (Ideal.span (range H))) a.val haJ
+  let P := MvPowerSeries.homogeneousComponent a.val.degree F
+  have hP : P∈actualHomogeneousInitialIdeal (Ideal.span (range H)) :=
+    component_of_initial_mem _ F hFI _
+  have hPH : P.IsHomogeneous a.val.degree := MvPowerSeries.isHomogeneous_homogeneousComponent F _
+  have haT := current_vertex_tangent_zero_of_normal_components H w hN hInitial a
+  have haR : a.val∈range (Finsupp.embDomain (actualNormalFormalEmbedding d t)) := by
+    apply (normal_exponent_range_iff _).mpr
+    intro i
+    exact congrArg (fun β : Fin d →₀ ℕ => β i) haT
+  refine ⟨normalProjection d t P,normalProjection_initial_mem H w hN hInitial P hP,
+    normalProjection_homogeneous _ P hPH,normalProjection_normal_only P,?_,?_⟩
+  · rw [normalProjection_coefficient,if_pos haR]
+    change MvPowerSeries.coeff a.val (MvPowerSeries.homogeneousComponent a.val.degree F)=1
+    rw [MvPowerSeries.coeff_homogeneousComponent]
+    simpa only [Finsupp.degree_eq_weight_one,Pi.one_def,ite_true] using hMonic
+  · intro β hβ
+    rw [normalProjection_coefficient]
+    split_ifs
+    · change MvPowerSeries.coeff β (MvPowerSeries.homogeneousComponent a.val.degree F)=0
+      rw [MvPowerSeries.coeff_homogeneousComponent]
+      split_ifs
+      · exact coeff_eq_zero_of_lt_actualInitialExponent MonomialOrder.degLex F hFne β (hInit.symm ▸ hβ)
+      · rfl
+    · rfl
+
+private theorem homogeneous_of_X_factor (e : Fin (d+t)) (q : ℕ)
+    (F G : R) (hFG : F=MvPowerSeries.X e*G) (hF : F.IsHomogeneous (q+1)) :
+    G.IsHomogeneous q := by
+  intro β hc
+  have hcf : MvPowerSeries.coeff (Finsupp.single e 1+β) F≠0 := by
+    rwa [hFG,MvPowerSeries.X,MvPowerSeries.coeff_add_monomial_mul,one_mul]
+  have hdf : (Finsupp.single e 1+β).degree=q+1 := by
+    simpa only [Finsupp.degree_eq_weight_one,Pi.one_def] using hF hcf
+  have he : (Finsupp.single e 1+β).degree=1+β.degree := by
+    simp only [Finsupp.degree_eq_weight_one,map_add,Finsupp.weight_single,one_smul]
+  rw [he] at hdf
+  have hβ : β.degree=q := by omega
+  simpa only [Finsupp.degree_eq_weight_one,Pi.one_def] using hβ
+
+private theorem first_normal_pivot_dvd
+    (j : Fin t) (P : R) (q : ℕ) (a : Fin (d+t) →₀ ℕ)
+    (hHom : P.IsHomogeneous q) (hNormal : NormalOnly P)
+    (hT : actualTangentExponent (d:=d) (t:=t) a=0) (hDegree : a.degree=q)
+    (hLower : ∀β,(MonomialOrder.degLex (σ := Fin (d+t))).toSyn β<MonomialOrder.degLex.toSyn a→
+      MvPowerSeries.coeff β P=0)
+    (hPos : 0<a (firstNormalIndex d t j)) : MvPowerSeries.X (firstNormalIndex d t j)∣P := by
+  apply MvPowerSeries.X_dvd_iff.mpr
+  intro β hβ
+  by_contra hc
+  have hdegβ : β.degree=q := by
+    simpa only [Finsupp.degree_eq_weight_one,Pi.one_def] using hHom hc
+  have hLex : toLex β<toLex a := by
+    apply Finsupp.Lex.lt_iff.mpr
+    refine ⟨firstNormalIndex d t j,?_,?_⟩
+    · intro i hi
+      have hid : i.val<d := by
+        have he : (firstNormalIndex d t j).val=d := by simp [firstNormalIndex]
+        have hh:=hi
+        change i.val<(firstNormalIndex d t j).val at hh
+        omega
+      let k : Fin d:=⟨i.val,hid⟩
+      have hki : k.castAdd t=i := Fin.ext rfl
+      have hβi : β i=0 := by
+        by_contra hne
+        exact hc (hNormal k β (by rwa [hki]))
+      have hai : a i=0 := by
+        have h:=congrArg (fun δ : Fin d →₀ ℕ => δ k) hT
+        change a (k.castAdd t)=0 at h
+        rwa [hki] at h
+      simp only [ofLex_toLex,hβi,hai]
+    · simp only [ofLex_toLex,hβ];exact hPos
+  have hlt : (MonomialOrder.degLex (σ := Fin (d+t))).toSyn β<MonomialOrder.degLex.toSyn a := by
+    change toDegLex β<toDegLex a
+    exact Finsupp.DegLex.lt_iff.mpr (Or.inr ⟨hdegβ.trans hDegree.symm,hLex⟩)
+  exact hc (hLower β hlt)
+
+/-- Genuine normal components and ALL current exceptional colons force the FIRST NORMAL pivot out of every current minimal vertex. -/
+theorem current_vertex_first_normal_pivot_zero
+    (H : ι → R) (w : ι → ℕ) (hN : ∀i,H i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range H))=
+      Ideal.span (range fun i => MvPowerSeries.homogeneousComponent (w i) (H i)))
+    (j : Fin t)
+    (hCol : ∀q,((Ideal.span (range H))⊔𝔪^(q+1)).colon {MvPowerSeries.X (firstNormalIndex d t j)}=
+      Ideal.span (range H)⊔𝔪^q)
+    (a : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t))) (Ideal.span (range H))) :
+    a.val (firstNormalIndex d t j)=0 := by
+  by_contra hz
+  let e:=firstNormalIndex d t j
+  have hPos : 0<a.val e:=Nat.pos_of_ne_zero hz
+  obtain ⟨P,hPI,hPH,hPN,hPM,hPL⟩:=exists_normal_initial_witness H w hN hInitial a
+  have hPne : P≠0 := by
+    intro h;have hc:=congrArg (MvPowerSeries.coeff a.val) h
+    rw [hPM,map_zero] at hc
+    exact one_ne_zero hc
+  have hPInit : actualInitialExponent MonomialOrder.degLex P hPne=a.val :=
+    actualInitialExponent_eq_of_coefficients MonomialOrder.degLex P hPne a.val
+      (by rw [hPM];exact one_ne_zero) hPL
+  obtain ⟨Q,hPQ⟩:= first_normal_pivot_dvd j P a.val.degree a.val hPH hPN
+    (current_vertex_tangent_zero_of_normal_components H w hN hInitial a) rfl hPL hPos
+  have hQne : Q≠0 := by
+    intro hz
+    simp [hz] at hPQ
+    exact hPne hPQ
+  have hDegPos : 0<a.val.degree := by
+    have hh : Finsupp.single e 1≤a.val := Finsupp.single_le_iff.mpr hPos
+    have hg:=Finsupp.degree_mono hh
+    have hg' : 1≤a.val.degree := by simpa only [Finsupp.degree_single] using hg
+    omega
+  have hQH : Q.IsHomogeneous (a.val.degree-1) := by
+    apply homogeneous_of_X_factor e (a.val.degree-1) P Q hPQ
+    have he : a.val.degree-1+1=a.val.degree := by omega
+    rwa [he]
+  have hQK : Q∈actualHomogeneousInitialIdeal (Ideal.span (range H)) :=
+    homogeneous_initial_pivot_cancel _ e hCol _ Q hQH (by rwa [←hPQ])
+  have hXne : (MvPowerSeries.X e : R)≠0 := by
+    intro hz
+    have hh:=congrArg (MvPowerSeries.coeff (Finsupp.single e 1)) hz
+    simp [MvPowerSeries.X] at hh
+  have hProd:=actualInitialExponent_mul MonomialOrder.degLex (MvPowerSeries.X e) Q hXne hQne
+  have hXInit : actualInitialExponent MonomialOrder.degLex (MvPowerSeries.X e) hXne=Finsupp.single e 1 :=
+    actualInitialExponent_monomial MonomialOrder.degLex _
+  have hAdd : Finsupp.single e 1+actualInitialExponent MonomialOrder.degLex Q hQne=a.val := by
+    rw [hXInit] at hProd
+    have hp : actualInitialExponent MonomialOrder.degLex (MvPowerSeries.X e*Q) (mul_ne_zero hXne hQne)=a.val := by
+      simpa only [hPQ] using hPInit
+    exact hProd.symm.trans hp
+  have hDiagram : actualInitialExponent MonomialOrder.degLex Q hQne∈
+      actualInitialDiagram MonomialOrder.degLex (actualHomogeneousInitialIdeal (Ideal.span (range H))) :=
+    ⟨Q,hQK,hQne,rfl⟩
+  have hMin : Minimal (·∈actualInitialDiagram MonomialOrder.degLex
+      (actualHomogeneousInitialIdeal (Ideal.span (range H)))) a.val := by
+    simpa only [actualInitialVertices,actual_homogeneous_initial_ideal_diagram,Set.Finite.mem_toFinset,mem_ofPred_eq]
+      using a.property
+  have hLe : actualInitialExponent MonomialOrder.degLex Q hQne≤a.val := by
+    rw [←hAdd];exact le_add_left le_rfl
+  have hRev:=hMin.le_of_le hDiagram hLe
+  have hh:=congrArg (fun α : Fin (d+t) →₀ ℕ => α e) hAdd
+  have hr:=hRev e
+  simp only [Finsupp.add_apply,Finsupp.single_eq_same] at hh
+  omega
+
+
+private theorem point_power_of_normal_power (q : ℕ) (F : R) (hF : F∈N^q) : F∈𝔪^q := by
+  apply (mem_actualFormalCoordinateIdeal_pow_iff univ q F).mpr
+  intro α hα
+  have hdeg : α.degree<q := by
+    simpa [actualCoordinateWeight,Finsupp.weight_eq_sum,Finsupp.degree_eq_sum] using hα
+  exact (mem_actualFormalCoordinateIdeal_pow_iff S q F).mp hF α
+    (lt_of_le_of_lt (normal_weight_le_degree α) hdeg)
+
+private theorem homogeneous_power (q : ℕ) (F : R) (hF : F.IsHomogeneous q) : F∈𝔪^q := by
+  apply (mem_actualFormalCoordinateIdeal_pow_iff univ q F).mpr
+  intro α hα
+  apply hF.coeff_eq_zero
+  have hdeg : α.degree<q := by
+    simpa [actualCoordinateWeight,Finsupp.weight_eq_sum,Finsupp.degree_eq_sum] using hα
+  omega
+
+private theorem power_order (q : ℕ) (F : R) (hF : F∈𝔪^q) : (q : ℕ∞)≤F.order := by
+  apply MvPowerSeries.nat_le_order
+  intro α hα
+  apply (mem_actualFormalCoordinateIdeal_pow_iff univ q F).mp hF α
+  simpa [actualCoordinateWeight,Finsupp.weight_eq_sum,Finsupp.degree_eq_sum] using hα
+
+attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
+private theorem component_product (H Q : R) (w q : ℕ)
+    (hH : H∈𝔪^w) (hQ : Q∈𝔪^(q-w)) :
+    MvPowerSeries.homogeneousComponent q (H*Q)=
+      if w≤q then MvPowerSeries.homogeneousComponent w H *
+        MvPowerSeries.homogeneousComponent (q-w) Q else 0 := by
+  split_ifs with hd
+  · have he:=MvPowerSeries.homogeneousComponent_mul_of_le_order
+      (power_order w H hH) (power_order (q-w) Q hQ)
+    rwa [Nat.add_sub_of_le hd] at he
+  · have hp : H*Q∈𝔪^(q+1) :=
+      (𝔪^(q+1)).mul_mem_right Q (Ideal.pow_le_pow_right (by omega) hH)
+    apply MvPowerSeries.homogeneousComponent_of_lt_order_eq_zero
+    exact lt_of_lt_of_le (by exact_mod_cast Nat.lt_succ_self q) (power_order (q+1) _ hp)
+
+private theorem scaling_normalProjection_fixed (e : Fin (d+t)) (_he : e∈S) (F : R) :
+    actualFormalBlowup (actualTangentScalingVariables S e) e (fun _ => 0) (normalProjection d t F)=
+      normalProjection d t F := by
+  have hr (G : MvPowerSeries (Fin t) ℂ) :
+      MvPowerSeries.rename (actualNormalFormalEmbedding d t) G=
+        MvPowerSeries.substAlgHom (MvPowerSeries.HasSubst.X_comp (actualNormalFormalEmbedding d t)) G := by
+    rw [MvPowerSeries.substAlgHom_apply,MvPowerSeries.rename_eq_subst]
+  unfold normalProjection
+  rw [AlgHom.comp_apply,hr]
+  unfold actualFormalBlowup
+  rw [MvPowerSeries.substAlgHom_comp_substAlgHom_apply,
+    MvPowerSeries.substAlgHom_apply,MvPowerSeries.substAlgHom_apply]
+  congr 1
+  funext i
+  change actualFormalBlowup (actualTangentScalingVariables S e) e (fun _ => 0)
+    (MvPowerSeries.X (actualNormalFormalEmbedding d t i))=MvPowerSeries.X (actualNormalFormalEmbedding d t i)
+  rw [actualFormalBlowup_X]
+  have hi : actualNormalFormalEmbedding d t i∈S:=⟨i,rfl⟩
+  by_cases hie : actualNormalFormalEmbedding d t i=e <;>
+    simp [actualFormalBlowupCoordinates,actualTangentScalingVariables,hi,hie]
+
+private theorem normal_power_of_normal_homogeneous (e : Fin (d+t)) (he : e∈S)
+    (q : ℕ) (F : R) (hF : F.IsHomogeneous q) (hNormal : NormalOnly F) : F∈N^q := by
+  have h := (mem_normal_pow_tangentScaling_iff_point_pow S e he q F).mpr (homogeneous_power q F hF)
+  rw [←normalProjection_fixed F hNormal,scaling_normalProjection_fixed e he F] at h
+  rwa [normalProjection_fixed F hNormal] at h
+
+private theorem homogeneous_truncation (q : ℕ) (F : R) (hF : F.IsHomogeneous q) :
+    (MvPowerSeries.truncTotal (q+1) F : R)=F := by
+  apply MvPowerSeries.ext
+  intro α
+  rw [MvPolynomial.coeff_coe,MvPowerSeries.coeff_truncTotal_eq_ite]
+  split_ifs
+  · rfl
+  · symm;exact hF.coeff_eq_zero (by omega)
+
+private theorem taylor_polynomial (p : MvPolynomial (Fin (d+t)) ℂ) :
+    actualUnshiftedTaylorAlgHom (d+t) (MvPolynomial.aeval coordinateGerm p)=(p : R) := by
+  induction p using MvPolynomial.induction_on with
+  | C c =>
+    rw [MvPolynomial.aeval_C,MvPolynomial.coe_C]
+    exact (actualUnshiftedTaylorAlgHom (d+t)).commutes c
+  | add p q hp hq => simpa only [map_add,MvPolynomial.coe_add] using congrArg₂ (·+·) hp hq
+  | mul_X p i hp =>
+    simp only [map_mul,MvPolynomial.coe_mul,hp]
+    rw [MvPolynomial.aeval_X,actualUnshiftedTaylor_coordinate,MvPolynomial.coe_X]
+
+private theorem scaling_polynomial_fixed (e : Fin (d+t)) (he : e∈S)
+    (p : MvPolynomial (Fin (d+t)) ℂ) (hNormal : NormalOnly (p : R)) :
+    actualAnalyticBlowupPullback (actualTangentScalingVariables S e) e (fun _ => 0)
+      (MvPolynomial.aeval coordinateGerm p)=MvPolynomial.aeval coordinateGerm p := by
+  apply actualUnshiftedTaylorAlgHom_injective (d+t)
+  have hh:=AlgHom.congr_fun (actualTaylor_analyticBlowupPullback
+    (actualTangentScalingVariables S e) e (fun _ => 0)) (MvPolynomial.aeval coordinateGerm p)
+  change actualUnshiftedTaylorAlgHom (d+t) (actualAnalyticBlowupPullback
+    (actualTangentScalingVariables S e) e (fun _ => 0) (MvPolynomial.aeval coordinateGerm p))=_ at hh
+  rw [hh,AlgHom.comp_apply,taylor_polynomial]
+  rw [←normalProjection_fixed (p : R) hNormal,scaling_normalProjection_fixed e he]
+
+private theorem exists_normal_homogeneous_bands [Fintype ι]
+    (H : ι → R) (w : ι → ℕ) (hN : ∀i,H i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range H))=
+      Ideal.span (range fun i => MvPowerSeries.homogeneousComponent (w i) (H i)))
+    (q : ℕ) (P : R) (hPI : P∈actualHomogeneousInitialIdeal (Ideal.span (range H)))
+    (hP : P.IsHomogeneous q) (hPN : NormalOnly P) :
+    ∃A : ι → R,P=(∑i,MvPowerSeries.homogeneousComponent (w i) (H i)*A i) ∧
+      (∀i,(A i).IsHomogeneous (q-w i)) ∧ (∀i,NormalOnly (A i)) ∧
+      ∀i,q<w i→A i=0 := by
+  let C : ι → R:=fun i=>MvPowerSeries.homogeneousComponent (w i) (H i)
+  have hC (i : ι) : (C i).IsHomogeneous (w i):=MvPowerSeries.isHomogeneous_homogeneousComponent _ _
+  have hPC : P∈Ideal.span (range C):=by rwa [hInitial] at hPI
+  obtain ⟨B,hB,hBpow⟩:=exists_homogeneous_filtered_representation C w hC P hPC q (homogeneous_power q P hP)
+  let A : ι → R:=fun i=>if w i≤q then MvPowerSeries.homogeneousComponent (q-w i) (B i) else 0
+  have hA (i : ι) : (A i).IsHomogeneous (q-w i):=by
+    dsimp [A];split_ifs
+    · exact MvPowerSeries.isHomogeneous_homogeneousComponent _ _
+    · simp
+  have hRep : P=∑i,C i*A i := by
+    have hh:=congrArg (MvPowerSeries.homogeneousComponent q) hB
+    rw [←MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent.mp hP,map_sum] at hh
+    rw [hh]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [component_product _ _ _ _ (homogeneous_power _ _ (hC i)) (hBpow i)]
+    rw [←MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent.mp (hC i)]
+    dsimp [A];split_ifs <;> simp only [mul_zero]
+  refine ⟨fun i=>normalProjection d t (A i),?_,fun i=>normalProjection_homogeneous _ _ (hA i),
+    fun i=>normalProjection_normal_only _,?_⟩
+  · have hh:=congrArg (normalProjection d t) hRep
+    rw [normalProjection_fixed P hPN,map_sum] at hh
+    simp_rw [map_mul] at hh
+    have hCf (i : ι) : normalProjection d t (C i)=C i:=
+      normalProjection_fixed _ (homogeneousComponent_normal_only _ _ (hN i))
+    simp_rw [hCf] at hh
+    exact hh
+  · intro i hi
+    simp [A,show ¬w i≤q from by omega]
+
+
+/-- The actual Taylor family after the literal first-normal tangent-scaling pullback. -/
+def actualTangentScaledTaylorFamily (j : Fin t) (h : ι → HolGerm (ComplexModel (d+t))) : ι → R :=
+  fun i=>actualUnshiftedTaylorAlgHom (d+t)
+    (actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+      (firstNormalIndex d t j) (fun _=>0) (h i))
+
+private theorem exists_analytic_image_witness [Fintype ι]
+    (j : Fin t) (h : ι → HolGerm (ComplexModel (d+t))) (w : ι → ℕ)
+    (hN : ∀i,actualTangentScaledTaylorFamily j h i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range (actualTangentScaledTaylorFamily j h)))=
+      Ideal.span (range fun i=>MvPowerSeries.homogeneousComponent (w i) (actualTangentScaledTaylorFamily j h i)))
+    (a : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t)))
+      (Ideal.span (range (actualTangentScaledTaylorFamily j h)))) :
+    ∃L : HolGerm (ComplexModel (d+t)),L∈Ideal.span (range h) ∧
+      (let B:=actualUnshiftedTaylorAlgHom (d+t)
+        (actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+          (firstNormalIndex d t j) (fun _=>0) L)
+       B∈Ideal.span (range (actualTangentScaledTaylorFamily j h)) ∧ B∈N^a.val.degree ∧
+        MvPowerSeries.coeff a.val B=1 ∧
+        ∀β,(MonomialOrder.degLex (σ := Fin (d+t))).toSyn β<MonomialOrder.degLex.toSyn a.val→
+          MvPowerSeries.coeff β B=0) := by
+  let e:=firstNormalIndex d t j
+  have he : e∈S:=⟨⟨0,lt_of_le_of_lt (Nat.zero_le j.val) j.isLt⟩,rfl⟩
+  let σ:=actualAnalyticBlowupPullback (actualTangentScalingVariables S e) e (fun _=>0)
+  let τ:=actualUnshiftedTaylorAlgHom (d+t)
+  let H:=actualTangentScaledTaylorFamily j h
+  let q:=a.val.degree
+  obtain ⟨P,hPI,hPH,hPN,hPM,hPL⟩:=exists_normal_initial_witness H w hN hInitial a
+  obtain ⟨A,hRep,hAH,hAN,hAzero⟩:=exists_normal_homogeneous_bands H w hN hInitial q P hPI hPH hPN
+  let Q : ι → HolGerm (ComplexModel (d+t)):=fun i=>
+    MvPolynomial.aeval coordinateGerm (MvPowerSeries.truncTotal (q-w i+1) (A i))
+  have hQt (i : ι) : τ (Q i)=A i := by
+    rw [taylor_polynomial,homogeneous_truncation _ _ (hAH i)]
+  have hQσ (i : ι) : σ (Q i)=Q i := by
+    apply scaling_polynomial_fixed e he
+    rw [homogeneous_truncation _ _ (hAH i)]
+    exact hAN i
+  let L:=∑i,Q i*h i
+  have hL : L∈Ideal.span (range h) := by
+    apply Ideal.sum_mem
+    intro i _
+    exact Ideal.mul_mem_left _ _ (Ideal.mem_span_range_self (x:=i))
+  have hCalc : τ (σ L)=∑i,H i*A i := by
+    change τ (σ (∑i,Q i*h i))=_
+    rw [map_sum,map_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [map_mul,hQσ,map_mul,hQt]
+    exact mul_comm _ _
+  have hMem : τ (σ L)∈Ideal.span (range H) := by
+    rw [hCalc]
+    apply Ideal.sum_mem
+    intro i _
+    exact Ideal.mul_mem_right _ _ (Ideal.mem_span_range_self (x:=i))
+  have hPow : τ (σ L)∈N^q := by
+    rw [hCalc]
+    apply Ideal.sum_mem
+    intro i _
+    by_cases hi:w i≤q
+    · have hApow:=normal_power_of_normal_homogeneous e he (q-w i) (A i) (hAH i) (hAN i)
+      have hprod:=Ideal.mul_mem_mul (hN i) hApow
+      rw [←pow_add,Nat.add_sub_of_le hi] at hprod
+      exact hprod
+    · rw [hAzero i (by omega),mul_zero]
+      exact Ideal.zero_mem _
+  have hComp : MvPowerSeries.homogeneousComponent q (τ (σ L))=P := by
+    rw [hCalc,map_sum,hRep]
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [component_product _ _ _ _ (point_power_of_normal_power _ _ (hN i))
+      (homogeneous_power _ _ (hAH i))]
+    split_ifs with hi
+    · rw [←MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent.mp (hAH i)]
+    · rw [hAzero i (by omega),mul_zero]
+  refine ⟨L,hL,hMem,hPow,?_,?_⟩
+  · have hc:=congrArg (MvPowerSeries.coeff a.val) hComp
+    rw [MvPowerSeries.coeff_homogeneousComponent,if_pos rfl] at hc
+    exact hc.trans hPM
+  · intro β hβ
+    have hdeg : β.degree≤q := by
+      change toDegLex β<toDegLex a.val at hβ
+      rcases Finsupp.DegLex.lt_iff.mp hβ with hd|⟨hd,_⟩
+      · exact le_of_lt hd
+      · exact le_of_eq hd
+    by_cases hd : β.degree=q
+    · have hc:=congrArg (MvPowerSeries.coeff β) hComp
+      rw [MvPowerSeries.coeff_homogeneousComponent,if_pos hd] at hc
+      exact hc.trans (hPL β hβ)
+    · exact (mem_actualFormalCoordinateIdeal_pow_iff univ q _).mp
+        (point_power_of_normal_power q _ hPow) β
+        (by simpa [actualCoordinateWeight,Finsupp.weight_eq_sum,Finsupp.degree_eq_sum] using (show β.degree<q from by omega))
+
+/-- Actual homogeneous bands construct an analytic sigma-IMAGE monic family; no image family is incoming. -/
+theorem exists_tangentScaling_analytic_image_family [Fintype ι]
+    (j : Fin t) (h : ι → HolGerm (ComplexModel (d+t))) (w : ι → ℕ)
+    (hN : ∀i,actualTangentScaledTaylorFamily j h i∈N^(w i))
+    (hInitial : actualHomogeneousInitialIdeal (Ideal.span (range (actualTangentScaledTaylorFamily j h)))=
+      Ideal.span (range fun i=>MvPowerSeries.homogeneousComponent (w i) (actualTangentScaledTaylorFamily j h i)))
+    (hCol : ∀q,((Ideal.span (range (actualTangentScaledTaylorFamily j h)))⊔𝔪^(q+1)).colon
+      {MvPowerSeries.X (firstNormalIndex d t j)}=Ideal.span (range (actualTangentScaledTaylorFamily j h))⊔𝔪^q) :
+    ∃ (B : ActualMonicVertexFamily (MonomialOrder.degLex (σ := Fin (d+t)))
+        (Ideal.span (range (actualTangentScaledTaylorFamily j h))))
+      (L : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t)))
+        (Ideal.span (range (actualTangentScaledTaylorFamily j h)))→HolGerm (ComplexModel (d+t))),
+      (∀a,L a∈Ideal.span (range h)) ∧
+      (∀a,familyVertexSeries MonomialOrder.degLex _ B a=actualUnshiftedTaylorAlgHom (d+t)
+        (actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+          (firstNormalIndex d t j) (fun _=>0) (L a))) ∧
+      ∀a,(actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+          (firstNormalIndex d t j) (fun _=>0) (L a))∈normalIdeal d t^a.val.degree ∧
+        actualTangentExponent (d:=d) (t:=t) a.val=0 ∧ a.val (firstNormalIndex d t j)=0 := by
+  choose L hL hData using exists_analytic_image_witness j h w hN hInitial
+  let σ:=actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+    (firstNormalIndex d t j) (fun _=>0)
+  let B : ActualMonicVertexFamily (MonomialOrder.degLex (σ := Fin (d+t)))
+      (Ideal.span (range (actualTangentScaledTaylorFamily j h))) :=
+    { series:=fun a=>actualUnshiftedTaylorAlgHom (d+t) (σ (L a))
+      mem:=fun a=>(hData a).1
+      monic:=fun a=>(hData a).2.2.1
+      lower:=fun a=>(hData a).2.2.2 }
+  refine ⟨B,L,hL,fun _=>rfl,?_⟩
+  intro a
+  refine ⟨?_,current_vertex_tangent_zero_of_normal_components _ w hN hInitial a,
+    current_vertex_first_normal_pivot_zero _ w hN hInitial j hCol a⟩
+  apply (mem_normalIdeal_pow_iff_actualTaylor_mem_formal_normal_pow d t _ _).mpr
+  exact (hData a).2.1
+
+
+private theorem unshiftedTaylor_property (n : ℕ)
+    (P : (m : ℕ) → (HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) → Prop)
+    (h : P (0+n) (originalTaylorAlgHom n)) : P n (actualUnshiftedTaylorAlgHom n) := by
+  have hc {m : ℕ} (hm : m=n)
+      (f : HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) (hf : P m f) :
+      P n (cast (congrArg (fun j => HolGerm (ComplexModel j) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) hm) f) := by
+    subst m
+    exact hf
+  exact hc (Nat.zero_add n) (originalTaylorAlgHom n) h
+
+attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
+private theorem prescribed_point_filtered_data (n : ℕ)
+    (I : Ideal (HolGerm (ComplexModel n)))
+    (G : actualInitialVertices (MonomialOrder.degLex (σ := Fin n))
+      (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I)→HolGerm (ComplexModel n))
+    (hG : ∀a,actualUnshiftedTaylorAlgHom n (G a)=
+      HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries MonomialOrder.degLex
+        (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I) a)
+    (e : Fin n) (b : Fin n → ℂ)
+    (H : actualInitialVertices (MonomialOrder.degLex (σ := Fin n))
+      (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I)→HolGerm (ComplexModel n))
+    (hH : ∀a,coordinateGerm e^normalExponentDegree a.val*H a=
+      actualAnalyticBlowupPullback univ e b (G a))
+    (hOrder : ∀a,H a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel n))^normalExponentDegree a.val) :
+    let K:=Ideal.span (range fun a=>actualUnshiftedTaylorAlgHom n (H a))
+    (∀q F,F∈K→F∈actualFormalCoordinateIdeal n univ^q→
+      ∃Q : actualInitialVertices (MonomialOrder.degLex (σ := Fin n))
+        (Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom I)→MvPowerSeries (Fin n) ℂ,
+        F=(∑a,actualUnshiftedTaylorAlgHom n (H a)*Q a) ∧
+        ∀a,Q a∈actualFormalCoordinateIdeal n univ^(q-normalExponentDegree a.val)) ∧
+    ∀q,(K⊔actualFormalCoordinateIdeal n univ^(q+1)).colon {MvPowerSeries.X e}=
+      K⊔actualFormalCoordinateIdeal n univ^q := by
+  let P (m : ℕ) (τ : HolGerm (ComplexModel m) →ₐ[ℂ] MvPowerSeries (Fin n) ℂ) : Prop :=
+    ∀(J : Ideal (HolGerm (ComplexModel m)))
+      (B : actualInitialVertices (MonomialOrder.degLex (σ := Fin n)) (Ideal.map τ.toRingHom J)→HolGerm (ComplexModel m)),
+      (∀a,τ (B a)=HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries MonomialOrder.degLex
+        (Ideal.map τ.toRingHom J) a)→
+      ∀(j : Fin m)(c : Fin m→ℂ)
+      (A : actualInitialVertices (MonomialOrder.degLex (σ := Fin n)) (Ideal.map τ.toRingHom J)→HolGerm (ComplexModel m)),
+      (∀a,coordinateGerm j^normalExponentDegree a.val*A a=actualAnalyticBlowupPullback univ j c (B a))→
+      (∀a,A a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel m))^normalExponentDegree a.val)→
+      let K:=Ideal.span (range fun a=>τ (A a))
+      (∀q F,F∈K→F∈actualFormalCoordinateIdeal n univ^q→
+        ∃Q : actualInitialVertices (MonomialOrder.degLex (σ := Fin n)) (Ideal.map τ.toRingHom J)→
+          MvPowerSeries (Fin n) ℂ,F=(∑a,τ (A a)*Q a) ∧∀a,Q a∈actualFormalCoordinateIdeal n univ^(q-normalExponentDegree a.val)) ∧
+      ∀q,(K⊔actualFormalCoordinateIdeal n univ^(q+1)).colon {τ (coordinateGerm j)}=
+        K⊔actualFormalCoordinateIdeal n univ^q
+  have hP : P (0+n) (originalTaylorAlgHom n) := by
+    intro J B hB j c A hA hOrd
+    let j0 : Fin n:=⟨j.val,by simpa using j.isLt⟩
+    have hj : j0.natAdd 0=j:=by apply Fin.ext;simp [j0]
+    have hVars : actualTangentCentreVariables 0 n=univ:=by
+      ext i;constructor
+      · intro _;trivial
+      · intro _;refine ⟨⟨i.val,by simpa using i.isLt⟩,?_⟩;apply Fin.ext;simp
+    have hBF : B=originalReducedVertexBasis J := by
+      funext a
+      apply originalTaylorAlgHom_injective n
+      rw [hB,originalReducedVertexBasis_taylor]
+    obtain ⟨A0,hA0,hNamed,hData⟩:=exists_original_point_canonical_strict_symbol_family J j0 c
+    have hAF : A0=A:=by
+      funext a
+      have hz : (coordinateGerm j : HolGerm (ComplexModel (0+n)))≠0:=
+        HolomorphicGermReducednessBridge.coordinate_germ_ne_zero j
+      apply mul_left_cancel₀ (pow_ne_zero (normalExponentDegree a.val) hz)
+      rw [hA]
+      have hh:=hA0 a
+      rw [hj,hVars,←hBF] at hh
+      exact hh
+    rw [hAF] at hData hNamed
+    have hData':=hData hOrd
+    rw [hNamed,Ideal.map_span,←range_comp] at hData'
+    have hcoord : originalTaylorAlgHom n (coordinateGerm j)=MvPowerSeries.X j0 := by
+      have hh:=originalTaylorAlgHom_coordinate n j0
+      change originalTaylorAlgHom n (coordinateGerm (j0.natAdd 0))=_ at hh
+      rwa [hj] at hh
+    have hFun : ((originalTaylorAlgHom n).toRingHom ∘ A)=fun a=>originalTaylorAlgHom n (A a) := rfl
+    rw [hFun] at hData'
+    rw [hcoord]
+    exact hData' 
+  have hh:=unshiftedTaylor_property n P hP I G hG e b H hH hOrder
+  simpa only [actualUnshiftedTaylor_coordinate] using hh
+
+
+private theorem equiv_mem_map_iff (E : R≃ₐ[ℂ]R) (I : Ideal R) (F : R) :
+    E F∈Ideal.map E.toRingEquiv.toRingHom I↔F∈I := by
+  rw [Ideal.mem_map_iff_of_surjective E.toRingEquiv.toRingHom E.surjective]
+  constructor
+  · rintro ⟨G,hG,hEq⟩
+    have heq : G=F:=E.injective hEq
+    exact heq ▸ hG
+  · intro hF
+    exact ⟨F,hF,rfl⟩
+
+private theorem rename_filtered_data [Fintype ι]
+    (r : Fin (d+t)≃Fin (d+t)) (H : ι→R) (w : ι→ℕ) (e : Fin (d+t))
+    (hFiltered : ∀q F,F∈Ideal.span (range H)→F∈𝔪^q→
+      ∃Q : ι→R,F=(∑i,H i*Q i) ∧∀i,Q i∈𝔪^(q-w i))
+    (hCol : ∀q,(Ideal.span (range H)⊔𝔪^(q+1)).colon {MvPowerSeries.X e}=
+      Ideal.span (range H)⊔𝔪^q) :
+    let H':=fun i=>MvPowerSeries.rename r (H i)
+    (∀q F,F∈Ideal.span (range H')→F∈𝔪^q→
+      ∃Q : ι→R,F=(∑i,H' i*Q i) ∧∀i,Q i∈𝔪^(q-w i)) ∧
+    ∀q,(Ideal.span (range H')⊔𝔪^(q+1)).colon {MvPowerSeries.X (r e)}=
+      Ideal.span (range H')⊔𝔪^q := by
+  let E:=MvPowerSeries.renameEquiv ℂ r
+  let H':=fun i=>MvPowerSeries.rename r (H i)
+  have hPow (q : ℕ) : Ideal.map E.toRingEquiv.toRingHom (𝔪^q)=𝔪^q := by
+    change Ideal.map (MvPowerSeries.rename r).toRingHom (𝔪^q)=𝔪^q
+    have him : r '' (univ : Set (Fin (d+t)))=univ := by
+      ext x
+      simp only [mem_image,mem_univ,true_and,iff_true]
+      exact ⟨r.symm x,r.apply_symm_apply x⟩
+    rw [Ideal.map_pow,map_formalCoordinateIdeal_rename,him]
+  have hSpan : Ideal.map E.toRingEquiv.toRingHom (Ideal.span (range H))=Ideal.span (range H') := by
+    rw [Ideal.map_span,←range_comp]
+    rfl
+  have hSup (q : ℕ) : Ideal.map E.toRingEquiv.toRingHom (Ideal.span (range H)⊔𝔪^q)=
+      Ideal.span (range H')⊔𝔪^q := by rw [Ideal.map_sup,hSpan,hPow]
+  have hMem (q : ℕ) (F : R) : E F∈Ideal.span (range H')⊔𝔪^q↔F∈Ideal.span (range H)⊔𝔪^q := by
+    rw [←hSup]
+    exact equiv_mem_map_iff E _ F
+  refine ⟨?_,?_⟩
+  · intro q F hF hFq
+    have hFI : E.symm F∈Ideal.span (range H) := by
+      apply (equiv_mem_map_iff E _ _).mp
+      rw [hSpan,E.apply_symm_apply]
+      exact hF
+    have hFpower : E.symm F∈𝔪^q := by
+      apply (equiv_mem_map_iff E _ _).mp
+      rw [hPow,E.apply_symm_apply]
+      exact hFq
+    obtain ⟨Q,hQ,hQpow⟩:=hFiltered q (E.symm F) hFI hFpower
+    refine ⟨fun i=>E (Q i),?_,?_⟩
+    · have hh:=congrArg E hQ
+      rw [E.apply_symm_apply,map_sum] at hh
+      simp_rw [map_mul] at hh
+      exact hh
+    · intro i
+      have hm:=Ideal.mem_map_of_mem E.toRingEquiv.toRingHom (hQpow i)
+      rwa [hPow] at hm
+  · intro q
+    ext F
+    let G:=E.symm F
+    have hG : E G=F:=E.apply_symm_apply F
+    have hX : E (MvPowerSeries.X e)=MvPowerSeries.X (r e):=MvPowerSeries.rename_X r e
+    constructor
+    · intro hc
+      have hp : MvPowerSeries.X (r e)*F∈Ideal.span (range H')⊔𝔪^(q+1) := by
+        simpa only [smul_eq_mul,mul_comm] using Submodule.mem_colon_singleton.mp hc
+      have hl : MvPowerSeries.X e*G∈Ideal.span (range H)⊔𝔪^(q+1) := by
+        apply (hMem (q+1) _).mp
+        rw [map_mul,hX,hG]
+        exact hp
+      have hg : G∈Ideal.span (range H)⊔𝔪^q := by
+        rw [←hCol q,Submodule.mem_colon_singleton]
+        simpa only [smul_eq_mul,mul_comm] using hl
+      have hh:=(hMem q G).mpr hg
+      rwa [hG] at hh
+    · intro hf
+      have hg : G∈Ideal.span (range H)⊔𝔪^q := (hMem q G).mp (by rwa [hG])
+      have hc : G∈(Ideal.span (range H)⊔𝔪^(q+1)).colon {MvPowerSeries.X e} := by rwa [hCol q]
+      have hl : MvPowerSeries.X e*G∈Ideal.span (range H)⊔𝔪^(q+1) := by
+        simpa only [smul_eq_mul,mul_comm] using Submodule.mem_colon_singleton.mp hc
+      have hp:=(hMem (q+1) _).mpr hl
+      rw [map_mul,hX,hG] at hp
+      apply Submodule.mem_colon_singleton.mpr
+      simpa only [smul_eq_mul,mul_comm] using hp
+
+attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
+private theorem initial_eq_component_span_of_filtered [Fintype ι]
+    (H : ι→R) (w : ι→ℕ) (hH : ∀i,H i∈𝔪^(w i))
+    (hFiltered : ∀q F,F∈Ideal.span (range H)→F∈𝔪^q→
+      ∃Q : ι→R,F=(∑i,H i*Q i) ∧∀i,Q i∈𝔪^(q-w i)) :
+    actualHomogeneousInitialIdeal (Ideal.span (range H))=
+      Ideal.span (range fun i=>MvPowerSeries.homogeneousComponent (w i) (H i)) := by
+  have hBand (q : ℕ) (F : R) (hFI : F∈Ideal.span (range H)) (hFq : F∈𝔪^q) :
+      MvPowerSeries.homogeneousComponent q F∈
+        Ideal.span (range fun i=>MvPowerSeries.homogeneousComponent (w i) (H i)) := by
+    obtain ⟨Q,hQ,hQpow⟩:=hFiltered q F hFI hFq
+    rw [hQ,map_sum]
+    apply Ideal.sum_mem
+    intro i _
+    rw [component_product _ _ _ _ (hH i) (hQpow i)]
+    split_ifs
+    · exact Ideal.mul_mem_right _ _ (Ideal.mem_span_range_self (x:=i))
+    · exact Ideal.zero_mem _
+  apply le_antisymm
+  · apply Ideal.span_le.mpr
+    rintro G ⟨F,rfl⟩
+    change actualHomogeneousInitialForm F.val F.property.2∈_
+    apply hBand _ _ F.property.1
+    apply (mem_actualFormalCoordinateIdeal_pow_iff univ _ _).mpr
+    intro α hα
+    have ho:=actualHomogeneousInitialDegree_eq_order F.val F.property.2
+    apply MvPowerSeries.coeff_of_lt_order
+    rw [←ho]
+    exact_mod_cast (show α.degree<actualHomogeneousInitialDegree F.val F.property.2 from
+      by simpa [actualCoordinateWeight,Finsupp.weight_eq_sum,Finsupp.degree_eq_sum] using hα)
+  · apply Ideal.span_le.mpr
+    rintro G ⟨i,rfl⟩
+    apply homogeneousComponent_mem_actual_initial_of_mem_power _ _ _ (Ideal.mem_span_range_self (x:=i))
+    have he : 𝔪=genuineFormalVariables (d+t) := by simp [actualFormalCoordinateIdeal,genuineFormalVariables]
+    simpa only [he] using hH i
+
+private theorem actual_point_power_iff (n q : ℕ) (g : HolGerm (ComplexModel n)) :
+    g∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel n))^q ↔
+      actualUnshiftedTaylorAlgHom n g∈actualFormalCoordinateIdeal n univ^q := by
+  let P (m : ℕ) (τ : HolGerm (ComplexModel m)→ₐ[ℂ]MvPowerSeries (Fin n) ℂ) : Prop :=
+    ∀g : HolGerm (ComplexModel m),g∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel m))^q↔
+      τ g∈actualFormalCoordinateIdeal n univ^q
+  have hP : P (0+n) (originalTaylorAlgHom n) := by
+    intro g
+    rw [mem_original_maximal_pow_iff_formal_coefficients_zero,mem_actualFormalCoordinateIdeal_pow_iff]
+    simp only [Finsupp.weight_eq_sum,actualCoordinateWeight,mem_univ,ite_true,smul_eq_mul,mul_one,
+      normalExponentDegree]
+  exact unshiftedTaylor_property n P hP g
+
+
+private theorem rename_scaling_family (j : Fin t) (h : ι→HolGerm (ComplexModel (d+t))) :
+    (fun a=>MvPowerSeries.rename (normalPivotPermutation d t j)
+      (actualUnshiftedTaylorAlgHom (d+t) (actualAnalyticBlowupPullback
+        (actualTangentScalingVariables S (j.natAdd d)) (j.natAdd d) (fun _=>0) (h a))))=
+    actualTangentScaledTaylorFamily j (fun a=>coordinateGermEquiv (normalPivotPermutation d t j) (h a)) := by
+  let r:=normalPivotPermutation d t j
+  have hConj (g : HolGerm (ComplexModel (d+t))) :
+      coordinateGermEquiv r (actualAnalyticBlowupPullback
+        (actualTangentScalingVariables S (j.natAdd d)) (j.natAdd d) (fun _=>0) g)=
+      actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+        (firstNormalIndex d t j) (fun _=>0) (coordinateGermEquiv r g) := by
+    rw [coordinateGermEquiv_actualAnalyticBlowupPullback,image_tangentScalingVariables,
+      normalPivotPermutation_normal_set,normalPivotPermutation_pivot]
+    rfl
+  funext a
+  have hp:=DFunLike.congr_fun (actualTaylor_coordinateGermEquiv r)
+    (actualAnalyticBlowupPullback (actualTangentScalingVariables S (j.natAdd d))
+      (j.natAdd d) (fun _=>0) (h a))
+  change actualUnshiftedTaylorAlgHom (d+t) (coordinateGermEquiv r
+    (actualAnalyticBlowupPullback (actualTangentScalingVariables S (j.natAdd d))
+      (j.natAdd d) (fun _=>0) (h a)))=_ at hp
+  rw [hConj] at hp
+  exact hp.symm
+
+private theorem scaled_normal_powers (j : Fin t) (h : ι→HolGerm (ComplexModel (d+t))) (w : ι→ℕ)
+    (hCurrent : ∀a,h a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (d+t)))^(w a)) :
+    ∀a,actualUnshiftedTaylorAlgHom (d+t) (actualAnalyticBlowupPullback
+      (actualTangentScalingVariables S (j.natAdd d)) (j.natAdd d) (fun _=>0) (h a))∈N^(w a) := by
+  intro a
+  apply (mem_normalIdeal_pow_iff_actualTaylor_mem_formal_normal_pow d t (w a) _).mp
+  exact (mem_normal_pow_analytic_tangentScaling_iff_maximal_pow d t j (w a) (h a)).mpr (hCurrent a)
+
+private theorem filtered_data_of_eq [Fintype ι]
+    (F F' : ι→R) (w : ι→ℕ) (e e' : Fin (d+t)) (hF : F=F') (he : e=e')
+    (hf : ∀q f,f∈Ideal.span (range F)→f∈𝔪^q→∃Q : ι→R,
+      f=(∑a,F a*Q a) ∧∀a,Q a∈𝔪^(q-w a))
+    (hc : ∀q,(Ideal.span (range F)⊔𝔪^(q+1)).colon {MvPowerSeries.X e}=
+      Ideal.span (range F)⊔𝔪^q) :
+    (∀q f,f∈Ideal.span (range F')→f∈𝔪^q→∃Q : ι→R,
+      f=(∑a,F' a*Q a) ∧∀a,Q a∈𝔪^(q-w a)) ∧
+    ∀q,(Ideal.span (range F')⊔𝔪^(q+1)).colon {MvPowerSeries.X e'}=
+      Ideal.span (range F')⊔𝔪^q := by
+  subst F'
+  subst e'
+  exact ⟨hf,hc⟩
+
+private theorem normal_powers_of_rename (j : Fin t) (F F' : ι→R) (w : ι→ℕ)
+    (hF : (fun a=>MvPowerSeries.rename (normalPivotPermutation d t j) (F a))=F')
+    (hN : ∀a,F a∈N^(w a)) : ∀a,F' a∈N^(w a) := by
+  intro a
+  have hh:=Ideal.mem_map_of_mem (MvPowerSeries.rename (normalPivotPermutation d t j)).toRingHom (hN a)
+  rw [map_formal_normal_pow_normalPivotPermutation] at hh
+  exact (congrFun hF a) ▸ hh
+
+private theorem reindexed_scaled_data [Fintype ι]
+    (j : Fin t) (h : ι→HolGerm (ComplexModel (d+t))) (w : ι→ℕ)
+    (hCurrent : ∀a,h a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (d+t)))^(w a))
+    (hFiltered :
+      let σ:=actualAnalyticBlowupPullback
+        (actualTangentScalingVariables S (j.natAdd d)) (j.natAdd d) (fun _=>0)
+      let F:=fun a=>actualUnshiftedTaylorAlgHom (d+t) (σ (h a))
+      ∀q f,f∈Ideal.span (range F)→f∈𝔪^q→∃Q : ι→R,
+        f=(∑a,F a*Q a) ∧∀a,Q a∈𝔪^(q-w a))
+    (hCol :
+      let σ:=actualAnalyticBlowupPullback
+        (actualTangentScalingVariables S (j.natAdd d)) (j.natAdd d) (fun _=>0)
+      let F:=fun a=>actualUnshiftedTaylorAlgHom (d+t) (σ (h a))
+      ∀q,(Ideal.span (range F)⊔𝔪^(q+1)).colon {MvPowerSeries.X (j.natAdd d)}=
+        Ideal.span (range F)⊔𝔪^q) :
+    let h':=fun a=>coordinateGermEquiv (normalPivotPermutation d t j) (h a)
+    let F':=actualTangentScaledTaylorFamily j h'
+    (∀a,F' a∈N^(w a)) ∧
+    actualHomogeneousInitialIdeal (Ideal.span (range F'))=
+      Ideal.span (range fun a=>MvPowerSeries.homogeneousComponent (w a) (F' a)) ∧
+    ∀q,(Ideal.span (range F')⊔𝔪^(q+1)).colon {MvPowerSeries.X (firstNormalIndex d t j)}=
+      Ideal.span (range F')⊔𝔪^q := by
+  let e:=j.natAdd d
+  let σ:=actualAnalyticBlowupPullback (actualTangentScalingVariables S e) e (fun _=>0)
+  let τ:=actualUnshiftedTaylorAlgHom (d+t)
+  let A:=fun a=>σ (h a)
+  let F:=fun a=>τ (A a)
+  have hFN : ∀a,F a∈N^(w a):=scaled_normal_powers j h w hCurrent
+  let r:=normalPivotPermutation d t j
+  let P:=coordinateGermEquiv r
+  let h':=fun a=>P (h a)
+  let F':=actualTangentScaledTaylorFamily j h'
+  have hFfun : (fun a=>MvPowerSeries.rename r (F a))=F' := rename_scaling_family j h
+  obtain ⟨hrf,hrc⟩:=rename_filtered_data r F w e hFiltered hCol
+  obtain ⟨hf,hc⟩:=filtered_data_of_eq _ F' w _ (firstNormalIndex d t j)
+    hFfun (normalPivotPermutation_pivot d t j) hrf hrc
+  have hn:=normal_powers_of_rename j F F' w hFfun hFN
+  have hi:=initial_eq_component_span_of_filtered F' w
+    (fun a=>point_power_of_normal_power _ _ (hn a)) hf
+  exact ⟨hn,hi,hc⟩
+
+/-- SAME prescribed original canonical quotients internally yield the genuine analytic image family. -/
+theorem exists_original_relative_current_image_family
+    (I : Ideal (HolGerm (ComplexModel (d+t))))
+    (G : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t)))
+      (Ideal.map (actualUnshiftedTaylorAlgHom (d+t)).toRingHom I)→HolGerm (ComplexModel (d+t)))
+    (hG : ∀a,actualUnshiftedTaylorAlgHom (d+t) (G a)=
+      HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries MonomialOrder.degLex
+        (Ideal.map (actualUnshiftedTaylorAlgHom (d+t)).toRingHom I) a)
+    (j : Fin t) (b : Fin (d+t)→ℂ)
+    (h : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t)))
+      (Ideal.map (actualUnshiftedTaylorAlgHom (d+t)).toRingHom I)→HolGerm (ComplexModel (d+t)))
+    (hQuotient : ∀a,coordinateGerm (j.natAdd d)^normalExponentDegree a.val*h a=
+      actualAnalyticBlowupPullback S (j.natAdd d) b (G a))
+    (hCurrent : ∀a,h a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (d+t)))^normalExponentDegree a.val) :
+    let h':=fun a=>coordinateGermEquiv (normalPivotPermutation d t j) (h a)
+    let K:=Ideal.span (range (actualTangentScaledTaylorFamily j h'))
+    ∃ (B : ActualMonicVertexFamily (MonomialOrder.degLex (σ := Fin (d+t))) K)
+      (L : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t))) K→HolGerm (ComplexModel (d+t))),
+      (∀a,L a∈Ideal.span (range h')) ∧
+      (∀a,familyVertexSeries MonomialOrder.degLex K B a=actualUnshiftedTaylorAlgHom (d+t)
+        (actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+          (firstNormalIndex d t j) (fun _=>0) (L a))) ∧
+      ∀a,(actualAnalyticBlowupPullback (actualTangentScalingVariables S (firstNormalIndex d t j))
+          (firstNormalIndex d t j) (fun _=>0) (L a))∈normalIdeal d t^a.val.degree ∧
+        actualTangentExponent (d:=d) (t:=t) a.val=0 ∧ a.val (firstNormalIndex d t j)=0 := by
+  let e:=j.natAdd d
+  let σ:=actualAnalyticBlowupPullback (actualTangentScalingVariables S e) e (fun _=>0)
+  let τ:=actualUnshiftedTaylorAlgHom (d+t)
+  let A:=fun a=>σ (h a)
+  let F:=fun a=>τ (A a)
+  let w : actualInitialVertices (MonomialOrder.degLex (σ := Fin (d+t)))
+      (Ideal.map (actualUnshiftedTaylorAlgHom (d+t)).toRingHom I)→ℕ :=
+    fun a=>normalExponentDegree a.val
+  have hFN (a) : F a∈N^(w a) := by
+    apply (mem_normalIdeal_pow_iff_actualTaylor_mem_formal_normal_pow d t (w a) (A a)).mp
+    exact (mem_normal_pow_analytic_tangentScaling_iff_maximal_pow d t j (w a) (h a)).mpr (hCurrent a)
+  have hAPoint (a) : A a∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (d+t)))^(w a) :=
+    (actual_point_power_iff (d+t) (w a) (A a)).mpr (point_power_of_normal_power _ _ (hFN a))
+  have hAQuotient (a) : coordinateGerm e^(w a)*A a=
+      actualAnalyticBlowupPullback univ e (actualPointChartDirection S b) (G a) :=
+    actual_relative_quotient_point_equation S e b (w a) (G a) (h a) (hQuotient a)
+  obtain ⟨hFiltered,hCol⟩:=prescribed_point_filtered_data (d+t) I G hG e
+    (actualPointChartDirection S b) A hAQuotient hAPoint
+  obtain ⟨hN,hInitial,hCol'⟩:=reindexed_scaled_data j h w hCurrent hFiltered hCol
+  exact exists_tangentScaling_analytic_image_family j
+    (fun a=>coordinateGermEquiv (normalPivotPermutation d t j) (h a)) w hN hInitial hCol'
+
+end
+end Hironaka.HironakaActualTangentScalingImageFamily

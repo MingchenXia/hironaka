@@ -1,0 +1,79 @@
+\section{The actual full-dimensional identity branch}
+
+The full-dimensional branch is geometric: its original vanishing ideal
+vanishes on an open component, so no nonzero-along invariant-domain
+hypothesis is imposed. Initial SNC boundaries are retained as whole
+ordered lists. No compactness of the ambient manifold or smooth source
+is needed.
+
+\begin{lemma}[An open carrier is transverse to the entire SNC boundary]
+\label{hir:original-open-carrier-snc-transverse}
+\uses{hir:snc}
+\lean{Hironaka.HironakaOriginalFullDimensionIdentity.isTransverse_of_isOpen}
+\leanok
+Let $W$ be any open subset of a complex manifold and let $E$ be an
+original ordered SNC boundary. Then $W$ is transverse to $E$ and hence
+has normal crossings with it.
+\end{lemma}
+\begin{proof}
+At any point, use the actual simultaneous SNC coordinates for the
+entire boundary and take the empty set of equations for the ambient
+manifold. The existing boundary coordinate singletons are disjoint
+from this empty set, so these same coordinates prove transversality
+of the whole ambient manifold. At any point of $W$, openness makes
+$W$ and the ambient manifold agree on a neighbourhood. Locality of
+adapted coordinate families therefore proves transversality of $W$
+with the same entire ordered boundary. Transversality implies normal
+crossings.
+\end{proof}
+
+\begin{theorem}[The full-dimensional original elementary map and its actual smooth square]
+\label{hir:original-full-dimension-identity-smooth-square}
+\uses{hir:original-open-carrier-snc-transverse,hir:submersion-nc-entire-snc-preimage,hir:submersion-cartesian-tower-whole-universal}
+\lean{Hironaka.HironakaOriginalFullDimensionIdentity.full_dimension_identity_smooth_square}
+\leanok
+Let $V\subseteq X^n$ be an original closed irreducible analytic
+subvariety of dimension $n$, and let $E$ be any original ordered SNC
+boundary. The actual identity tower $T$ resolves this full-dimensional
+branch: its conventional strict carrier is exactly $V$, a closed
+connected submanifold of dimension $n$, transverse to $E$; the actual
+exceptional locus and intrinsic singular locus of $V$ are empty. Its
+map is holomorphic, proper, surjective and an isomorphism everywhere,
+and it is an admissible empty blowup sequence with the unchanged
+entire ordered boundary $E$.
+
+For every actual holomorphic submersion $b:Y^m\to X^n$, the identity
+tower $Q$ on $Y$, with upper arrow exactly $b$, is the genuine actual
+Cartesian pullback of this same $T$. Its conventional strict carrier
+is exactly $b^{-1}V$, a closed submanifold regular of dimension $m$
+at all its points and transverse to the entire literal boundary
+$E'=E.map(b^{-1})$. Its map has the same empty exceptional, admissible,
+proper, surjective and everywhere-isomorphic dictionary. The whole
+strict-transform square commutes and the actual holomorphic universal
+property holds. No source connectedness, source compactness or global
+inequality $n\le m$ is assumed.
+\end{theorem}
+\begin{proof}
+The genuine full-dimensional irreducible-subvariety theorem makes
+$V$ a closed connected submanifold of dimension $n$. Every one of its
+points is therefore regular of ambient dimension, so its carrier is
+open as well as closed and its intrinsic singular locus is empty.
+Apply the preceding lemma to the actual initial boundary. The identity
+map has empty exceptional locus, and the conventional strict transform
+is the closure of the original carrier; closedness identifies it
+with that carrier. The actual zero-step sequence is admissible with
+unchanged boundary; holomorphicity, properness, surjectivity and its
+everywhere inverse are those of the identity.
+
+The continuous map $b$ pulls the same open and closed carrier back to
+an open and closed source carrier. At a source point it agrees locally
+with the whole source manifold, which is regular of dimension $m$;
+locality of actual regular coordinates proves the claimed regularity.
+The genuine smooth SNC pullback theorem supplies the entire ordered
+boundary $E'$. Apply the preceding lemma again. The actual zero-step
+pullback constructor gives $Q,T$ and upper arrow exactly $b$, whose
+actual universal property gives the Cartesian square. Both literal
+strict-transform formulas now give the whole strict-set equality,
+including the empty-source case. All source identity-map properties
+follow as in the target. No vanishing-ideal invariant domain is used.
+\end{proof}

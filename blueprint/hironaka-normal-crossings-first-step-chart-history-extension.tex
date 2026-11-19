@@ -1,0 +1,121 @@
+\section{Actual first-step NC histories in coordinate models}
+\label{sec:hironaka-normal-crossings-first-step-chart-history}
+
+Let $H$ be an actual NC carrier in a complex $n$-manifold, with positive
+highest branch count $r$, and let $C=\{x:r\leq\nu_H(x)\}$. We retain
+the unchanged original datum $M_H=(X,X,\varnothing,I_H,1)$ and its genuine
+first blowup along $C$. Coordinate models below are actual blowups of
+the coordinate centre, not just present-day descriptions of strict transforms.
+Model comparison points remain actual images of the original blown-up
+points. No fixed orbit representative or finite whole-value image is asserted.
+
+\begin{lemma}[A genuine one-step history isomorphism from actual blowups]
+\label{hir:general-nc-one-step-history-universal-comparison}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepChartHistory.exists_oneStep_isTowerIso}
+An actual biholomorphism between two bases that identifies their whole
+centres lifts to a genuine isomorphism between any actual blowups of
+those centres. The lifts commute exactly with the projections, and the
+result is an isomorphism of the entire one-step towers.
+\end{lemma}
+\begin{proof}
+Compose the second blowup with the inverse base biholomorphism. Its
+actual blowup universal property is the blowup property over the first
+base along the first centre. The two actual blowups over that same base
+therefore factor uniquely through one another. Their composites are
+holomorphic self-maps over the projection; uniqueness in the universal
+property makes both composites the identity. These comparison maps give
+an actual biholomorphism of the blown-up manifolds. Apply the base
+biholomorphism to the exact projection equation to obtain exact
+commutation over the original base map. Together with the assumed whole
+centre identity, the reflexive base history extends to the asserted
+one-step history isomorphism. No lifted map or history-isomorphism
+certificate is supplied.
+\end{proof}
+
+\begin{lemma}[Literal whole carrier and centre identities in an actual NC chart]
+\label{hir:general-nc-first-step-whole-chart-data}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepChartHistory.chart_preimage_centre,Hironaka.HironakaNormalCrossingsFirstStepChartHistory.chart_preimage_carrier}
+In an actual highest-stratum chart, the biholomorphism from its true
+open domain to its lifted open coordinate target pulls the coordinate
+centre back to the entire trace of $C$ and the selected coordinate union
+back to the entire trace of $H$.
+\uses{hir:general-nc-highest-stratum-branch-adapted-coordinates}
+\end{lemma}
+\begin{proof}
+At every point of the actual chart domain, the chart's centre equation
+identifies the intrinsic highest-count condition with vanishing of all
+last $r$ coordinates. This is precisely membership in the actual coordinate
+centre. Its carrier equation identifies membership in the whole original
+carrier with vanishing of at least one of those coordinates. These
+pointwise equivalences prove the two literal preimage set identities.
+Both statements hold on the whole open domain, including points outside
+the original centre or carrier.
+\end{proof}
+
+\begin{theorem}[An internally produced first-step coordinate history]
+\label{hir:general-nc-actual-first-step-coordinate-history}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepChartHistory.exists_highest_chart_history,Hironaka.HironakaNormalCrossingsFirstStepChartHistory.HighestChartHistory.pullback_original}
+Given an actual blowup along $C$, a point $x\in C$, and any fixed genuine
+coordinate-centre blowup, the original NC carrier internally produces an
+actual centred highest-stratum chart and an isomorphism from the original
+one-step history restricted to its domain to the coordinate blowup history
+restricted to the chart target. The original marked data are identified
+in full with the original coordinate-carrier datum on that target.
+\uses{hir:general-nc-one-step-history-universal-comparison,hir:general-nc-first-step-whole-chart-data,hir:general-nc-generic-initial-value-flat-chart}
+\end{theorem}
+\begin{proof}
+The highest-stratum chart producer gives an actual centred flattening
+at $x$, with the whole centre and carrier equations of the preceding
+lemma. Restrict each of the two actual blowups to the corresponding
+actual open base. Genuine blowup restriction gives the required two
+universal properties, and the preceding whole centre identity identifies
+their centres under the actual chart biholomorphism. Apply the universal
+comparison lemma to construct an actual biholomorphism of their entire
+inverse-image opens and a genuine one-step tower isomorphism.
+
+For the marked records, the whole carrier identity and the actual chart
+and its inverse identify holomorphic germs vanishing on the two whole
+traces. Thus their complete vanishing ideals agree after actual pullback.
+The remaining fields agree literally: full ambient carrier, empty old
+boundary and marking one. This identifies the whole original records,
+without replacing them by present strict-transform data. All maps and
+inverse-image domains are those of the actual first blowups.
+\end{proof}
+
+\begin{theorem}[Whole ambient-dimensional canonical values on the actual first histories]
+\label{hir:general-nc-first-step-whole-canonical-chart-value}
+\leanok
+\lean{Hironaka.HironakaNormalCrossingsFirstStepChartHistory.exists_highest_chart_history_canonical_value}
+Assume $n>0$. In the preceding construction, the entire first-step value
+of $\mathrm{canonicalInvariant}(n)$ at each actual transformed cosupport
+point equals its value on the literal original coordinate-carrier datum
+along the genuine restricted coordinate blowup history at the image
+point. All chronological and born-boundary information is retained by
+the actual one-step history isomorphism.
+\uses{hir:general-nc-actual-first-step-coordinate-history,hir:general-nc-ambient-canonical-initial-full-maximum}
+\end{theorem}
+\begin{proof}
+The actual original full-maximum theorem identifies $C$ with the entire
+initial maximum for the exact ambient-dimensional canonical invariant.
+The given point of $C$ supplies attainment, so the actual first history
+is canonical without a supplied history certificate. Restricting to the
+chosen chart domain preserves the initial whole maximum: the domain
+meets $C$, and the proved reflexive restriction law preserves every whole
+value and its cosupport. Hence the restricted first step is canonical
+for the same original pulled-back datum.
+
+Apply the invariant's genuine whole tower-isomorphism law to the inverse
+of the constructed one-step history isomorphism. Its right-hand original
+restricted history is canonical as just proved. The whole original-record
+identity turns the left-hand datum into the literal coordinate-carrier
+datum on the actual open target. The original cosupport restriction
+identity supplies precisely the required point hypothesis. Finally apply
+the invariant's proved open restriction law to the global original first
+history. The composite of these two whole-value equalities gives the
+claim. The model point is the actual image under the constructed lift;
+no assertion that it is a fixed representative, or that finitely many
+whole values occur, follows without an additional orbit construction.
+\end{proof}

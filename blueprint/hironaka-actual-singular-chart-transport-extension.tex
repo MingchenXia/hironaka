@@ -1,0 +1,100 @@
+\section{Actual arbitrary-set functional ideals in the same genuine manifold chart}
+
+Let $X$ be a genuine complex manifold of dimension $n$, let $x\in X$,
+and let $\Phi$ be supplied genuine local holomorphic coordinates after
+the preferred chart $e$ at $x$, with $\Phi(e(x))=0$. Retain the literal
+maps $r=\Phi\circ e$ and $q=e^{-1}\circ\Phi^{-1}$, each defined as an
+original function. Their inverse identities and holomorphy are used only
+on their actual open domains. No smoothness or analyticity is required
+of the original subset $N\subset X$.
+
+\begin{lemma}[Entire original functional families in the same supplied chart]
+\label{hir:actual-singular-chart-entire-functional-span}
+\lean{Hironaka.HironakaActualSingularChartTransport.isInSpanAt_inverseCoordinates_iff}
+\uses{trace:actual-manifold-finite-span-adapted-covariance}
+\leanok
+For any original family $\mathcal S$ of functions on $X$, finite
+functional span membership of $F$ at $x$ is equivalent to finite
+functional span membership of $F\circ q$ at zero in the entire literal
+family $\{s\circ q:s\in\mathcal S\}$. This allows infinite and empty
+original families, with no finite-generation or coherence certificate.
+\end{lemma}
+\begin{proof}
+An actual span relation chooses a finite list of original generators.
+Regard the same relation as membership in the range span of exactly that
+finite list. The genuine finite adapted-chart transport sends the same
+original functions to their literal compositions with $q$. Each belongs
+to the asserted entire composed family, so generator monotonicity gives
+one implication. Conversely, a finite relation in that entire composed
+family chooses finitely many composed functions. Choose an original
+preimage function for each of these finitely many entries. The literal
+function equalities identify the relation with the finite span of those
+same preimages composed with $q$. The reverse genuine finite adapted-chart
+transport returns the original finite relation, and all chosen original
+preimages belong to $\mathcal S$. Generator monotonicity proves the
+reverse implication. No infinite sum or global extension is involved.
+\end{proof}
+
+\begin{lemma}[Actual vanishing membership for an arbitrary original set in the same inverse chart]
+\label{hir:actual-singular-chart-vanishing-membership}
+\lean{Hironaka.HironakaActualSingularChartTransport.holomorphicAt_inverseCoordinates_iff,Hironaka.HironakaActualSingularChartTransport.vanishingIdeal_inverseCoordinates_iff}
+\uses{hir:actual-singular-chart-entire-functional-span}
+\leanok
+For every original subset $N\subset X$ and function $F:X\to\mathbb C$,
+\[
+ F\in(\mathcal I_N)_x\quad\Longleftrightarrow\quad
+ F\circ q\in(\mathcal I_{q^{-1}N})_0.
+\]
+The set on the right is the actual entire inverse image under the literal
+original inverse coordinate function, rather than an assumed analytic
+presentation. In particular holomorphy of $F$ at $x$ and of $F\circ q$
+at zero are equivalent.
+\end{lemma}
+\begin{proof}
+The genuine finite adapted-chart span theorem applied to the one-element
+family containing $F$ gives exactly the asserted equivalence of
+holomorphy. The actual inverse chart $q$ tends to $x$ at zero by
+continuity and its real local inverse identity; hence a genuine
+neighbourhood on which $F$ vanishes on $N$ pulls back to a genuine
+neighbourhood on which $F\circ q$ vanishes on $q^{-1}N$.
+Conversely the actual forward map $r$ tends to zero at $x$.
+Pull a local zero relation for $F\circ q$ back through $r$ and intersect
+with the true open coordinate domain of $x$. On this domain the real
+identity $q(r(z))=z$ holds. It converts both the set membership and the
+function value into the original membership in $N$ and the original
+value $F(z)$. Together with the holomorphy equivalence this proves the
+reverse original vanishing-ideal implication.
+\end{proof}
+
+\begin{lemma}[Every model vanishing function has its actual original representative in the same chart]
+\label{hir:actual-singular-chart-original-function-representative}
+\lean{Hironaka.HironakaActualSingularChartTransport.original_representative_of_model_vanishing}
+\uses{hir:actual-singular-chart-vanishing-membership}
+\leanok
+Suppose the source of $\Phi$ lies in the actual target of the preferred
+chart $e$. If an original model function $g$ belongs to
+$(\mathcal I_{q^{-1}N})_0$, the literal original function $a=g\circ r$
+belongs to $(\mathcal I_N)_x$, and $a\circ q=g$ on a genuine
+neighbourhood of zero. No original representative is supplied as a
+certificate or extended holomorphically to the entire manifold.
+\end{lemma}
+\begin{proof}
+The true target of $\Phi$ is an open neighbourhood of zero. For each
+point $u$ in it, the actual source inclusion ensures that
+$e^{-1}(\Phi^{-1}(u))$ belongs to the true original coordinate domain,
+and the literal right inverse identity gives $r(q(u))=u$.
+Thus $(g\circ r)\circ q=g$ on this genuine neighbourhood.
+Original vanishing membership is invariant under equality on a
+neighbourhood: holomorphy is invariant under that equality, and the
+local zero relation is simply restricted to its intersection.
+Therefore $(g\circ r)\circ q$ has the stated model vanishing membership.
+The preceding inverse-chart theorem returns actual membership of the
+same literal $g\circ r$ in $(\mathcal I_N)_x$. Its arbitrary values
+outside the coordinate neighbourhood play no role; no global
+holomorphic extension has been asserted.
+\end{proof}
+
+These dictionaries retain a supplied genuine chart and arbitrary original
+sets and functions. Constructing the product commutation for a genuine
+submersion and then deriving its whole singular vanishing-ideal pullback
+is a further geometric application, not an assumed ideal equality.

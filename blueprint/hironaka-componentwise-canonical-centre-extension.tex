@@ -1,0 +1,127 @@
+\section{Actual canonical centres on disjoint open components}
+\label{sec:hironaka-componentwise-canonical-centre}
+
+The following construction uses a disjoint open partition. Distinct
+components may have different maximal invariant values, with no
+bound or largest value among them. Every centre is a whole genuine
+canonical centre on its component; none is cut off by a bump function.
+
+\begin{theorem}[Whole local maximum centres glue across a disjoint open partition]
+\label{hir:componentwise-canonical-centre-exact-trace}
+\uses{hir:centre-function-seq,hir:invariant-driver,hir:open-restriction-tower}
+\lean{Hironaka.HironakaComponentwiseCanonicalCentre.localMaximum,Hironaka.HironakaComponentwiseCanonicalCentre.parallelCentre,Hironaka.HironakaComponentwiseCanonicalCentre.preimage_parallelCentre,Hironaka.HironakaComponentwiseCanonicalCentre.parallelCentre_admissible}
+\leanok
+Let $R$ be a proved resolution invariant, $M$ an original marked
+ideal of its domain, and $T:Y\to X$ an actual test prefix. Let
+$X=\coprod_iU_i$ be a disjoint open partition, and suppose the
+actual restrictions $T_i=T|_{U_i}$ are canonical for $M_i=M|_{U_i}$.
+Put $V_i=T^{-1}(U_i)$, let $C_i$ be the whole canonical maximum
+centre of $M_i$ after $T_i$, and define
+\[
+ C(T)=\bigcup_i\iota_i(C_i)\subset Y.
+\]
+Then $\iota_i^{-1}(C(T))=C_i$ for every $i$, and $C(T)$ is a
+globally closed smooth admissible centre for the whole current
+transform of $M$, with its original ordered boundary.
+No global maximum of the invariant is required.
+\end{theorem}
+\begin{proof}
+If a point of $V_i$ lies in the displayed union through $C_j$,
+its original image belongs to both $U_i$ and $U_j$. Disjointness
+forces $i=j$, and injectivity of the true open inclusion identifies
+the original point with that same centre point. This proves the
+entire trace equality; the reverse inclusion is immediate.
+
+Each $C_i$ is genuinely admissible by the resolution invariant's
+maximum-centre theorem applied to the actual canonical restricted
+prefix. The whole current marked record restricts to the record
+transformed along $T_i$, since $T$ is a genuine test prefix.
+Thus on every $V_i$ the actual trace of $C(T)$ is admissible
+for the original current restricted record. The $V_i$ cover
+all of $Y$. Admissibility is local on this true open cover:
+closedness follows from openness of the local complements,
+regularity from the local coordinate flattenings, cosupport
+inclusion from its genuine restriction dictionary, and normal
+crossings from the same local coordinates retaining every
+ordered boundary entry. These give global admissibility.
+\end{proof}
+
+\begin{theorem}[One actual global blowup advances every restricted canonical history]
+\label{hir:componentwise-canonical-global-refinement}
+\uses{hir:componentwise-canonical-centre-exact-trace,hir:resolution-driver,hir:open-restriction-tower}
+\lean{Hironaka.HironakaComponentwiseCanonicalCentre.exists_parallel_canonical_refinement}
+\leanok
+Under the preceding hypotheses there is a genuine proper
+blowup $\pi:Z\to Y$ along $C(T)$ such that the enlarged
+whole original prefix is a test prefix and its actual
+restriction to every $U_i$ is canonical for $M_i$.
+The restricted next centre is exactly $C_i$, including
+empty component centres.
+\end{theorem}
+\begin{proof}
+The constructed centre is admissible, hence is contained in
+the current cosupport. The original domain condition implies
+that this cosupport has empty interior, and therefore so does
+the centre. The genuine blowup-existence theorem applies to
+its global closed smooth geometry and gives $\pi$. Such an
+actual blowup is proper. Global admissibility makes the
+enlarged original prefix a true test prefix.
+
+Restriction of this actual enlarged tower is the original
+restricted tower followed by the true restricted blowup,
+whose centre is the actual inverse image of $C(T)$. The
+preceding exact trace says this centre equals $C_i$, the
+whole local canonical maximum. Hence each restricted
+canonical prefix advances by its own genuine maximum
+step. Empty maxima give the permitted actual empty steps;
+no stage or empty-step position is discarded.
+\end{proof}
+
+\begin{theorem}[Original componentwise compact cosupport gives a nontrivial global first step]
+\label{hir:original-componentwise-compact-canonical-first-step}
+\uses{hir:componentwise-canonical-global-refinement,hir:invariant-driver-seq,hir:open-restriction-marked}
+\lean{Hironaka.HironakaComponentwiseCanonicalCentre.componentOpen,Hironaka.HironakaComponentwiseCanonicalCentre.exists_original_componentwise_canonical_first_blowup}
+\leanok
+Let $M$ be an original marked ideal of the actual canonical
+invariant's domain. Suppose its original cosupport restricted
+to each connected ambient component is compact. Then the
+original input internally gives one globally admissible centre
+$C$ and an actual proper first blowup along $C$, which is a
+test blowup of $M$. On each connected component $U$,
+\[
+ C|_U=\operatorname{maxLocus}
+    (\operatorname{inv}(M|_U),\operatorname{cosupp}(M|_U)),
+\]
+and that true restricted first prefix is canonical.
+Moreover $C$ is nonempty exactly when the original cosupport
+is nonempty. The ambient space and total cosupport need not
+be compact; the component maxima need not have a common bound.
+\end{theorem}
+\begin{proof}
+A complex manifold is locally connected, so its connected
+components form a disjoint open cover and are also closed.
+Construct these actual component opens from the quotient map
+to connected components. Apply the preceding global refinement
+to the reflexive original tower, whose restrictions are all
+canonically reflexive. This internally gives the global
+centre, its exact whole traces and the actual first blowup.
+
+The centre lies in the original cosupport, so its nonemptiness
+implies nonemptiness of the cosupport. Conversely, a point of
+the original cosupport lies in one component open. Its
+genuine restricted cosupport is nonempty and compact by the
+original componentwise hypothesis. The actual upper
+semicontinuous invariant attains a maximum on that compact
+set. The corresponding whole component centre is nonempty,
+and its actual image lies in $C$. This proves the converse,
+without choosing a largest value over different components.
+\end{proof}
+
+\begin{remark}
+This is a genuine noncompact global centre and elementary
+refinement producer for a disjoint open component schedule.
+Constructing its infinite sequence and locally terminal
+tails is a subsequent step. Componentwise compact cosupport
+is an explicit extra geometric hypothesis, so no assertion
+about the unrestricted connected noncompact case follows.
+\end{remark}

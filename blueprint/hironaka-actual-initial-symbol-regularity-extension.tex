@@ -1,0 +1,127 @@
+\section{Actual tangent coordinates are regular symbols}
+
+Write $S=\mathbb C[[z_1,\ldots,z_n]]$, $\mathfrak m=(z_1,\ldots,z_n)$,
+and $\operatorname{in}(K)$ for the entire homogeneous initial ideal of
+an ideal $K\subset S$. All powers below are powers of the actual maximal
+ideal; none is a normal-power filtration along a positive-dimensional
+centre. The conclusions supply the finite-order regular-symbol step used
+in comparing those filtrations, without asserting normal flatness.
+
+\begin{theorem}[Initial tangent stability gives actual formal regular symbols]
+\label{hir:actual-initial-tangent-formal-regular-symbol}
+\uses{hir:actual-polynomial-pderiv-locally-nilpotent,hir:actual-pderiv-stable-polynomial-coordinate-saturation,hir:actual-homogeneous-initial-ideal-degree-lift,hir:actual-homogeneous-initial-component-derivative-dictionaries}
+\lean{Hironaka.HironakaActualInitialSymbolRegularity.formal_regular_symbol_of_initial_pderiv}
+\leanok
+Suppose the polynomial contraction of $\operatorname{in}(K)$ is stable
+under $\partial/\partial z_i$. For every $q\geq0$ and every
+$b\in\mathfrak m^q$,
+\[
+ z_i b\in K+\mathfrak m^{q+2}\quad\Longrightarrow\quad
+ b\in K+\mathfrak m^{q+1}.
+\]
+\end{theorem}
+\begin{proof}
+Write $z_i b=g+c$, with $g\in K$ and
+$c\in\mathfrak m^{q+2}$. Both $z_i b$ and $c$ belong to
+$\mathfrak m^{q+1}$, so $g\in\mathfrak m^{q+1}$. Its degree
+$q+1$ component therefore belongs to $\operatorname{in}(K)$.
+The same component of $c$ is zero, and multiplication by $z_i$
+raises degree by one. Consequently $z_i b_q\in\operatorname{in}(K)$,
+where $b_q$ denotes the degree $q$ homogeneous component of $b$.
+The component $b_q$ is an actual polynomial. Partial stability of the
+polynomial contraction and characteristic-zero coordinate saturation give
+$b_q\in\operatorname{in}(K)$.
+
+The homogeneous initial-ideal degree-lifting theorem supplies
+$L\in K\cap\mathfrak m^q$ whose degree $q$ component is $b_q$.
+Every coefficient of $b-L$ of degree below $q$ vanishes because both
+summands belong to $\mathfrak m^q$; its coefficients of degree $q$
+vanish by the component equality. Thus $b-L\in\mathfrak m^{q+1}$,
+and $b\in K+\mathfrak m^{q+1}$ as required.
+\end{proof}
+
+\begin{theorem}[The same symbol is regular in the original holomorphic ring]
+\label{hir:actual-initial-tangent-original-regular-symbol}
+\uses{hir:actual-initial-tangent-formal-regular-symbol,hir:actual-formal-extension-whole-original-ideal-contraction,hir:actual-original-formal-variable-power-extension}
+\lean{Hironaka.HironakaActualInitialSymbolRegularity.original_regular_symbol_of_initial_pderiv,Hironaka.HironakaActualInitialSymbolRegularity.unshifted_original_regular_symbol_of_initial_pderiv}
+\leanok
+Let $I$ be an ideal in the original ring of holomorphic germs at the
+origin, and let $K$ be its entire Taylor extension. If the polynomial
+contraction of $\operatorname{in}(K)$ is stable under the corresponding
+coordinate partial derivative, multiplication by the actual coordinate
+germ $v=z_i$ has the preceding regular-symbol property for every degree
+of the original maximal-ideal filtration of $\mathcal O/I$.
+\end{theorem}
+\begin{proof}
+The actual Taylor algebra homomorphism sends the original coordinate
+germ to $z_i$, and sends every power of the original maximal ideal
+onto the corresponding formal variable-ideal power. It therefore sends
+$vb\in I+\mathfrak m^{q+2}$ and $b\in\mathfrak m^q$ to the exact
+hypotheses of the formal theorem. That theorem puts the Taylor image of
+$b$ in the entire extension of $I+\mathfrak m^{q+1}$.
+Contraction of the entire original ideal under the Taylor homomorphism
+gives $b\in I+\mathfrak m^{q+1}$. Reindexing the identical dimension
+$0+n=n$ preserves both the coordinate and ideal dictionaries, so the
+statement also holds in the original unshifted coordinate ring.
+\end{proof}
+
+\begin{theorem}[Actual tangent coordinates are nonzerodivisors on the original quotient]
+\label{hir:actual-initial-tangent-original-coordinate-saturation}
+\uses{hir:actual-initial-tangent-original-regular-symbol,hir:regular-symbol-whole-successor-division,hir:actual-whole-ideal-maximal-filtration-separated}
+\lean{Hironaka.HironakaActualInitialSymbolRegularity.original_coordinate_mul_mem_iff_of_initial_pderiv}
+\leanok
+Under the preceding hypotheses, every actual original germ $a$ satisfies
+$va\in I$ if and only if $a\in I$. Thus multiplication by the actual
+coordinate class is injective on the entire original quotient
+$\mathcal O/I$.
+\end{theorem}
+\begin{proof}
+If $a\in I$, ideal closure gives $va\in I$. Conversely suppose
+$va\in I$. For every $q\geq0$ this implies
+$va\in I+\mathfrak m^{q+2}$. Strict successor division gives
+$a\in I+\mathfrak m^{q+1}$. The original analytic germ ring is
+Noetherian and local, so the maximal-adic filtration of its quotient
+by $I$ is separated. Intersecting these positive thickenings gives
+$a\in I$. Applying this equivalence to the difference of two
+representatives proves the asserted injectivity on the entire
+quotient.
+\end{proof}
+
+\begin{theorem}[Original Hilbert--Samuel constant centres give strict tangent division]
+\label{hir:actual-original-hs-centre-tangent-strict-division}
+\uses{hir:actual-original-hs-centre-whole-initial-tangent-pderiv,hir:actual-initial-tangent-original-regular-symbol,hir:actual-initial-tangent-original-coordinate-saturation,hir:regular-symbol-whole-successor-division,hir:regular-symbol-whole-principal-intersection}
+\lean{Hironaka.HironakaActualInitialSymbolRegularity.exists_original_hs_constant_centre_strict_tangent_division}
+\leanok
+Let $A$ be a coherent ideal on a complex manifold, and let $C$ be
+regular of dimension $d$ at $x$. Suppose the entire intrinsic
+Hilbert--Samuel function of $A$ is constant along $C$. There is an
+actual local holomorphic coordinate change flattening $C$ at $x$
+such that the following holds in the unchanged origin ideal $I_0$
+of the flattened original sheaf. For each of its first $d$ tangent
+coordinate germs $v$, every $q\geq0$, and every original germ $a$,
+\[
+ va\in I_0+\mathfrak m^{q+1}
+ \quad\Longleftrightarrow\quad a\in I_0+\mathfrak m^q,
+ \qquad
+ (I_0+\mathfrak m^{q+1})\cap(I_0+(v))
+   =I_0+(v)\mathfrak m^q.
+\]
+Moreover $va\in I_0$ if and only if $a\in I_0$, so each such actual
+tangent coordinate acts injectively on the entire original quotient.
+\end{theorem}
+\begin{proof}
+The actual original constant-Hilbert--Samuel centre theorem constructs
+one flattening and proves stability of the polynomial contraction of
+the entire initial ideal under every tangent partial derivative.
+Apply the preceding original-ring theorem to each actual tangent
+coordinate. It gives the regular-symbol implication in every degree
+for the same $I_0$. Each tangent coordinate belongs to the actual
+maximal ideal, as follows either by evaluation at the origin or by
+the exact Taylor ideal dictionary. Strict filtered successor division
+then gives the displayed equivalence for arbitrary original
+numerators. Strict principal-image intersection gives the displayed
+equality of entire ideals. These are finite-power identities; no
+assertion of normal flatness is needed. The original-ring coordinate
+saturation theorem gives the last assertion from the proved
+finite-power statements and actual analytic separatedness.
+\end{proof}

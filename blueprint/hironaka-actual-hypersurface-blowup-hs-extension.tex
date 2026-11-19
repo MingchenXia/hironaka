@@ -1,0 +1,89 @@
+\section{Actual all-order HS nonincrease for genuine maximal-order hypersurface blowups}
+
+The HS here is the existing intrinsic dimension of the entire original
+local quotient. Original admissibility and genuine blowup geometry supply
+the comparison; no HS or transformed-ideal equality is an input. This
+chapter covers the hypersurface case, including its singular exceptional
+points. General nonprincipal Bennett comparison remains a separate problem.
+
+\begin{lemma}[The computed principal jet dimension increases with actual order]
+\label{hir:actual-principal-binomial-hs-monotone-order}
+\lean{Hironaka.HironakaActualHypersurfaceBlowupHS.actual_principal_binomial_hs_mono}
+\leanok
+\uses{hir:actual-principal-entire-hilbert-samuel-formula}
+For $\mu\le\nu$ and $n,\ell\ge0$,
+\[
+ \binom{n+\ell}{n}-\mathbf1_{\mu\le\ell}\binom{n+\ell-\mu}{n}
+ \ \le\ 
+ \binom{n+\ell}{n}-\mathbf1_{\nu\le\ell}\binom{n+\ell-\nu}{n}.
+\]
+Each subtracted term is understood to be zero when its indicated condition
+fails, as in the genuine principal quotient formula.
+\end{lemma}
+\begin{proof}
+If $\nu\le\ell$, then also $\mu\le\ell$ and
+$n+\ell-\nu\le n+\ell-\mu$. Monotonicity of binomial coefficients in
+the upper index gives that the term subtracted on the right is at most
+the one subtracted on the left; natural subtraction reverses this
+inequality. If $\ell<\nu$, the right side is the full ambient jet
+dimension, which bounds either the ambient dimension or the corresponding
+natural subtraction on the left. These cases include $n=0$ and zero orders.
+\end{proof}
+
+\begin{theorem}[Original invertible-ideal order comparison gives every actual intrinsic HS comparison]
+\label{hir:actual-invertible-order-comparison-entire-hs}
+\lean{Hironaka.HironakaActualHypersurfaceBlowupHS.actual_invertible_intrinsic_hs_le_of_original_order_le}
+\leanok
+\uses{hir:actual-invertible-original-order-entire-intrinsic-hs,hir:actual-principal-binomial-hs-monotone-order}
+Let $A,B$ be original invertible ideals on complex manifolds of the same
+dimension $n$, at actual points $y,x$. If their EXISTING original ambient
+orders satisfy $\operatorname{ord}_y A\le\operatorname{ord}_x B$, then
+$H_A(y,\ell)\le H_B(x,\ell)$ for every $\ell\ge0$.
+\end{theorem}
+\begin{proof}
+For each original invertible ideal the preceding intrinsic producer chooses
+internally one finite integer order, identifies it with the EXISTING
+original order, and computes all of the actual intrinsic HS values from
+that same integer. Substitute these two genuine order identities in the
+assumed original order comparison. Their finite integer orders are
+therefore ordered, so the preceding binomial inequality compares the two
+computed EXISTING profiles at every order. No principal generator, whole
+stalk equality or HS formula is required from the caller.
+\end{proof}
+
+\begin{theorem}[Every point of a genuine maximal-order hypersurface blowup has nonincreasing intrinsic HS]
+\label{hir:actual-hypersurface-blowup-all-order-hs-nonincreasing}
+\lean{Hironaka.HironakaActualHypersurfaceBlowupHS.actual_hypersurface_blowup_intrinsic_hs_nonincreasing}
+\leanok
+\uses{hir:actual-invertible-order-comparison-entire-hs,hir:actual-blowup-off-centre-intrinsic-reduced-hs,hir:actual-max-order-hypersurface-strict-ideal,hir:maximum-phase-entire-current-ideal}
+Let $W$ be an original analytic hypersurface in a complex manifold of
+dimension $m+1$, with original invertible vanishing ideal, dense regular
+$m$-dimensional locus, and original SNC boundary $E$. Suppose its original
+order on $W$ is bounded by $\mu\ge2$. For ANY original admissible centre
+of $(X,E,\mathcal I_W,\mu)$ and ANY genuine blowup $\pi:Y\to X$ at that
+centre, the actual reduced strict transform $W'$ satisfies
+\[
+ H_{W'}(y,\ell)\le H_W(\pi(y),\ell)
+ \qquad (y\in Y,\ \ell\ge0).
+\]
+In particular the statement includes all singular exceptional strict points.
+\end{theorem}
+\begin{proof}
+Original coherence and admissibility give the actual centre-power inclusion
+by the genuine Hadamard theorem. The original global order bound gives the
+actual maximal-order derivative-unit condition. The genuine controlled
+transform preserves that condition, hence its actual original order is
+bounded by $\mu$ at every new point. The proved hypersurface strict-ideal
+theorem, using only the hypotheses just stated, identifies the ENTIRE
+controlled ideal with the ENTIRE reduced strict-transform vanishing ideal;
+its genuine invertibility follows from actual invertible ideal division.
+If $\pi(y)$ is in the centre, original admissibility gives source order at
+least $\mu$, whereas maximal order bounds it above by $\mu$. Thus the
+new original order is at most the original source order. Apply the preceding
+invertible-ideal intrinsic HS comparison at every order. If $\pi(y)$ is
+outside the centre, the independently constructed genuine complement
+biholomorphism and actual whole strict-ideal dictionary give equality of
+the existing intrinsic HS profiles, hence the required inequality. No
+regularity assumption on $y$, no replacement principal ideal and no HS
+comparison certificate occurs in either case.
+\end{proof}

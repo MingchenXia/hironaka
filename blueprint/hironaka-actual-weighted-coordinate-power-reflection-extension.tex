@@ -1,0 +1,81 @@
+\section{Actual centre-order reflection and exact weighted admissibility}
+\label{sec:hironaka-actual-weighted-coordinate-power-reflection}
+
+\begin{theorem}[Actual selected-coordinate order is multiplicative]
+\label{hir:actual-selected-coordinate-order-multiplicative}
+\uses{hir:actual-formal-center-order-from-support}
+\lean{Hironaka.HironakaActualWeightedCoordinatePowerReflection.actualFormalCenterOrder_mul,Hironaka.HironakaActualWeightedCoordinatePowerReflection.actualFormalCenterOrder_pow}
+\leanok
+For any coordinate set $A$ and nonzero original complex formal series $F,G$,
+the actual $A$-centre order satisfies
+$\nu_A(FG)=\nu_A(F)+\nu_A(G)$ and $\nu_A(F^r)=r\nu_A(F)$ for every natural $r$.
+The coordinate set may be empty or contain all coordinates.
+\end{theorem}
+\begin{proof}
+Put $p=\nu_A(F)$ and $q=\nu_A(G)$. Actual whole centre-power membership gives
+$F\in I_A^p$ and $G\in I_A^q$, hence $FG\in I_A^{p+q}$ and
+$\nu_A(FG)\ge p+q$. The degree-$p$ selected-weight component of $F$ is nonzero:
+an actual nonzero coefficient attains the defining minimum $p$ and remains
+unchanged in this component. Likewise the degree-$q$ component of $G$ is nonzero.
+All lower selected-weight coefficients vanish. The degree-$(p+q)$ component of
+the product is therefore the product of those two components, by actual
+finite-antidiagonal multiplication. The formal series ring is a domain, so
+this component is nonzero. An order greater than $p+q$ would make every one of
+its coefficients zero, a contradiction. Thus equality holds. The unit has
+centre order zero, as witnessed by its nonzero constant coefficient. Induction
+on $r$, starting with this unit and applying multiplicativity, proves the power
+identity.
+\end{proof}
+
+\begin{theorem}[Actual normal powers reflect positive powers of the original germ]
+\label{hir:actual-normal-coordinate-power-reflection}
+\uses{hir:actual-selected-coordinate-order-multiplicative,hir:actual-formal-normal-power-contracts-exact-original-analytic-power}
+\lean{Hironaka.HironakaActualWeightedCoordinatePowerReflection.mem_formal_coordinate_power_mul_iff,Hironaka.HironakaActualWeightedCoordinatePowerReflection.mem_normal_power_mul_iff}
+\leanok
+For $r>0$ and every genuine original analytic germ $f$,
+\[
+ f^r\in N^{wr}\quad\Longleftrightarrow\quad f\in N^w,
+\]
+where $N$ is the whole original normal-coordinate ideal. The corresponding
+statement holds for every formal coordinate-centre ideal $I_A$.
+\end{theorem}
+\begin{proof}
+If the series is zero both memberships hold. Otherwise the proved actual
+maximal-power dictionary changes formal membership into the numerical
+inequality $wr\le\nu_A(F^r)=r\nu_A(F)$. Since $r>0$, this is equivalent to
+$w\le\nu_A(F)$, hence to $F\in I_A^w$. For an original analytic germ, apply
+the actual Taylor homomorphism, which preserves powers. Its entire normal-power
+contraction identifies both analytic memberships with these exact formal
+memberships. This proves both directions without assuming a power-reflection
+or order certificate.
+\end{proof}
+
+\begin{theorem}[Common-mark compression has exactly the original weighted centre conditions]
+\label{hir:actual-weighted-compression-exact-centre-admissibility}
+\uses{hir:actual-normal-coordinate-power-reflection,hir:actual-weighted-coefficient-common-mark}
+\lean{Hironaka.HironakaActualWeightedCoordinatePowerReflection.weightedCompression_le_normal_power_iff}
+\leanok
+Let $c_i$ be finitely many original analytic germs with positive integer weights
+$w_i$, and let $D=\prod_iw_i$. For their actual compressed ideal
+$J=(c_i^{D/w_i}:i)$ one has
+\[
+ J\subseteq N^D\quad\Longleftrightarrow\quad
+ \text{for every }i,\ c_i\in N^{w_i}.
+\]
+In particular the equivalence applies to the literal finite coefficient family
+internally constructed from an original analytic vertex ideal, and to its
+actual transformed coefficient family with the same weights.
+\end{theorem}
+\begin{proof}
+An entire span lies in an ideal exactly when every actual generator does.
+Thus the left side is equivalent to $c_i^{D/w_i}\in N^D$ for every $i$.
+Each positive weight divides $D$, and its quotient is positive, with
+$w_i(D/w_i)=D$. Substitute this equality and apply positive-power reflection
+to each unchanged original germ. Both implications follow. With an empty
+family the span is zero and the right side is vacuous, so the equivalence still
+holds.
+\end{proof}
+
+This proves exact weighted coordinate-centre conditions, not an identification
+with a current Hilbert--Samuel locus. A persistent weighted presentation and its
+iterated geometric admissibility and strict progress require further results.

@@ -1,0 +1,87 @@
+\section{Arbitrary actual convergent series realize their original Taylor coefficients}
+
+\begin{theorem}[Literal finite degree bands and genuine scalar-line expansions]
+\label{hir:actual-convergent-scalar-line-expansion}
+\uses{hir:actual-taylor-polynomial-evaluation,hir:actual-monomial-owner-polydisc-convergence}
+\lean{Hironaka.HironakaActualConvergentTaylorRealization.degreePolynomial_coeff,Hironaka.HironakaActualConvergentTaylorRealization.scalarLine_hasFPowerSeriesOnBall,Hironaka.HironakaActualConvergentTaylorRealization.scalarLine_hasFPowerSeriesAt}
+\leanok
+Let $F$ have finite actual absolute coefficient mass at a positive polyradius
+$\rho$. Define the genuine finite polynomial $P_k$ to be the homogeneous
+part of degree $k$ of the true truncation of $F$ below degree $k+1$.
+Then $(P_k)_\alpha=F_\alpha$ when $|\alpha|=k$ and is zero otherwise.
+For each $z$ in the closed $\rho$-polydisc the actual function
+$t\mapsto\operatorname{eval}(F,tz)$ has the genuine scalar multilinear
+expansion $q_k(t_1,\ldots,t_k)=P_k(z)\prod_jt_j$ at zero, with radius at
+least one. No expansion,
+coefficient or output convergence certificate is supplied.
+\end{theorem}
+\begin{proof}
+The true homogeneous projection and truncation coefficient formulas give
+the asserted literal coefficients. At $z$, absolute summability of the
+unchanged monomials allows grouping by total degree. Each degree fibre is
+exactly $P_k(z)$, since its coefficients agree on the fibre and vanish
+off it. Thus the $P_k(z)$ form a summable complex series; finite-dimensional
+absolute summability gives $\sum_k|P_k(z)|<\infty$. The norm of the scalar
+multilinear map $q_k$ is exactly $|P_k(z)|$, so the genuine convergence
+radius is at least one. For $|t|<1$, the point $tz$ remains in the original
+closed polydisc. The same absolute degree regrouping gives a sum of
+$P_k(tz)$; the finite homogeneous polynomial identity gives
+$P_k(tz)=t^kP_k(z)=q_k(t,\ldots,t)$. These facts construct the actual
+power-series-on-a-ball expansion and hence the asserted expansion at zero.
+\end{proof}
+
+\begin{theorem}[Near-zero actual evaluation is injective on convergent formal series]
+\label{hir:actual-convergent-evaluation-injective}
+\uses{hir:actual-convergent-scalar-line-expansion,hir:actual-polydisc-evaluation-additive-algebra}
+\lean{Hironaka.HironakaActualConvergentTaylorRealization.eq_zero_of_evaluation_eventually_zero,Hironaka.HironakaActualConvergentTaylorRealization.eq_of_evaluation_eventually_eq}
+\leanok
+If $F$ has finite actual coefficient mass at some positive polyradius and
+its literal evaluation is zero near zero, then $F=0$. Consequently two
+series with actual positive-radius finite mass and identical evaluations
+near zero are equal, even when their input radii differ.
+\end{theorem}
+\begin{proof}
+Fix any $z$ in the closed input polydisc. Continuity of $t\mapsto tz$
+pulls the zero neighbourhood back to a zero neighbourhood on the scalar
+line. Genuine one-variable analytic uniqueness forces every multilinear
+coefficient of the preceding expansion to vanish. Evaluating at the tuple
+of ones gives $P_k(z)=0$ for every $k$. Each coordinate's open positive
+radius disk is infinite, because it is a neighbourhood in the nondiscrete
+complex field. Polynomial function extensionality on their product therefore
+forces every $P_k$ to be the zero polynomial. The literal degree-coefficient
+formula then forces every coefficient of $F$ to vanish. For two input
+series, shrink to the coordinatewise minimum radius, which retains positive
+radii and both genuine masses by termwise comparison. Their difference
+also has finite mass, and actual convergent addition and negation identify
+its local evaluation with zero. Apply the proved zero statement.
+\end{proof}
+
+\begin{theorem}[Every actual absolutely convergent series has its exact original Taylor germ]
+\label{hir:actual-convergent-original-taylor-realization}
+\uses{hir:actual-convergent-evaluation-injective,hir:actual-original-taylor-function-reconstruction,hir:actual-original-taylor-positive-coefficient-mass,hir:actual-coefficient-polydisc-holomorphy}
+\lean{Hironaka.HironakaActualConvergentTaylorRealization.evaluationGerm,Hironaka.HironakaActualConvergentTaylorRealization.originalTaylor_evaluationGerm}
+\leanok
+For every formal $F$ with finite actual coefficient mass at a positive
+polyradius, its actual evaluated holomorphic function, in the unchanged
+original Euclidean coordinates, defines a genuine original holomorphic
+germ whose already constructed original Taylor algebra image is exactly
+$F$. Neither this coefficient equality nor an expansion is an input.
+\end{theorem}
+\begin{proof}
+Actual mass gives holomorphy on the positive open polydisc. Compose with
+the genuine original coordinate projections; their continuity and the
+positivity of the radii give a neighbourhood of zero on which the composed
+function is holomorphic. Thus it defines the asserted actual original
+germ. The unconditional original Taylor mass theorem supplies a positive
+radius for the Taylor image of this same germ. Original Taylor function
+reconstruction says that its literal Taylor evaluation agrees near zero
+with the original evaluation function of $F$. The true continuous
+coordinate inverse carries this equality to the original coordinate tuple
+neighbourhood. Apply the preceding actual evaluation injectivity theorem
+to conclude that the two whole formal series agree.
+\end{proof}
+
+This realizes arbitrary convergent series as actual original germs. It does
+not yet identify convergent whole-ideal division with a presentation-invariant
+current-history Hilbert--Samuel locus or establish a terminating resolution
+driver.

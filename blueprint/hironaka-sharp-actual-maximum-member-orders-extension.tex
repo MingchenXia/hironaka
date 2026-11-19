@@ -1,0 +1,88 @@
+\section{Actual original-member order profiles on one full maximum centre}
+
+Assume the ambient dimension $n$ is positive throughout.
+Let $N$ be a closed smooth carrier and $F_i$ a finite family of coherent,
+relatively principal, nonzero whole germ ideals. All ordinary orders below
+are the actual orders along $N$, with the original finite positions retained.
+
+\begin{theorem}[A constant product order fixes every individual order locally]
+\label{hir:sharp-actual-family-member-orders-on-product-stratum}
+\lean{Hironaka.HironakaSharpActualMaximumMemberOrders.eventually_member_orders_of_constant_product}
+\uses{hir:sharp-original-actual-member-trace-orders-finite-usc,hir:sharp-actual-finite-relative-product-geometry-order-sum}
+Suppose $C\subseteq N$ and the whole relative product $\prod_i F_i$ has
+constant actual ordinary order on $C$. At every $x\in C$, there is an
+ambient neighbourhood such that all $y\in C$ in it satisfy simultaneously
+\[
+ \operatorname{ord}_{N,y}(F_i)=\operatorname{ord}_{N,x}(F_i)
+ \quad\text{for every original position }i.
+\]
+\leanok
+\end{theorem}
+\begin{proof}
+Coherence, relative principality and actual nonzeroness give the whole
+product geometry and the literal equality of its order with the finite
+sum of the member orders. Upper semicontinuity gives an ambient
+neighbourhood on which each member order is at most its value at $x$.
+Intersect these finitely many neighbourhoods. For $y\in C$ there, the
+product-order hypothesis makes the two finite sums equal. Equality of
+finite sums of natural numbers, with every summand bounded above by the
+corresponding summand at $x$, forces equality at every position. Empty
+families are covered by the same finite-sum argument.
+\end{proof}
+
+\begin{theorem}[The complete proper-position profile is fixed on the same neighbourhood]
+\label{hir:sharp-actual-family-proper-profile-on-product-stratum}
+\lean{Hironaka.HironakaSharpActualMaximumMemberOrders.eventually_member_orders_and_proper_positions}
+\uses{hir:sharp-actual-family-member-orders-on-product-stratum,hir:sharp-original-empty-boundary-ordinary-trace-order-dictionary}
+Under the preceding hypotheses, the same neighbourhood can be chosen
+so that the entire actual finite set of proper ideal positions at $y$
+equals that at $x$. This concerns the unchanged whole germ predicates;
+no indexed count replaces the actual proper-position set.
+\leanok
+\end{theorem}
+\begin{proof}
+For a coherent ideal, the actual germ is proper exactly when the point
+belongs to its whole zero locus. On $N$, the genuine order/cosupport
+dictionary identifies this condition with ordinary order at least one.
+Thus equality of every individual order on the preceding neighbourhood
+gives both directions of membership for every finite position. Finite-set
+extensionality proves the asserted equality, simultaneously with all
+order equalities. No equality of distinct ideal-germ classes is inferred.
+\end{proof}
+
+\begin{theorem}[Original geometry internally supplies the adapted full maximum centre]
+\label{hir:sharp-actual-full-maximum-original-member-orders}
+\lean{Hironaka.HironakaSharpActualMaximumMemberOrders.exists_actual_dynamic_centre_member_order_profile}
+\uses{hir:sharp-original-dynamic-first-full-born-incidence,hir:sharp-original-chronological-full-product-geometry-order-sum,hir:sharp-actual-family-proper-profile-on-product-stratum}
+Let $W$ be a compact smooth positive-pure-dimensional carrier, let $E$
+be an actual ambient SNC list, and suppose $W$ is dense away from its
+union. At every genuine finite test prefix for the empty-boundary
+carrier template, if the actual chronological FIRST defect is nonempty,
+there is one nonempty actual FULL maximum centre $C$ in that defect,
+admissible for both the actual current product and the carrier template.
+For each $x\in C$, all original normalised chronological member orders,
+the whole proper-position set and every born-boundary incidence are
+constant near $x$ along that same $C$.
+\leanok
+\end{theorem}
+\begin{proof}
+Use the original full-maximum/born-incidence producer once and retain its
+chosen $C$, both admissibility assertions and its actual maximum equality.
+Any two points of this maximum have equal whole current canonical values.
+Taking the genuine first coordinate and using the actual normalised-product
+order dictionary shows that the entire chronological product has equal
+ordinary order at the two points. The whole product is the actual finite
+relative product of the original chronological member family.
+
+The actual test-prefix geometry internally supplies coherence, relative
+principality and nonzeroness of every such member on the same current
+carrier. The carrier is smooth by the actual template test tower. Apply
+the preceding two theorems to this very family and centre. Intersect their
+neighbourhood with the retained born-incidence neighbourhood, leaving
+$C$ unchanged. This yields all conclusions simultaneously. No order,
+incidence or terminal-history certificate is an original input. This
+proves local adaptation of the actual normalised member profile only;
+strict original ambient trace-factor compatibility, full modified-history
+decrease, later joint boundary admissibility and sharp termination remain
+separate obligations.
+\end{proof}

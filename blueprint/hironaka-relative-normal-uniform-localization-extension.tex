@@ -1,0 +1,120 @@
+\section{One genuine original base denominator for the entire normal polynomial quotient}
+Let $B$ be an actual domain, $K=\operatorname{Frac}(B)$ its genuine fraction
+field, and $H\subset B[Z_1,\ldots,Z_t]$ an arbitrary whole ideal. Fix an actual
+well-founded monomial order. Every family and denominator below is internally
+produced from $H$; no leading-family, Groebner, basis, freeness or localization
+result certificate is supplied by a caller.
+
+\begin{theorem}[Actual original lifts of the internally produced field leading family]
+\label{hir:relative-normal-uniform-original-leading-lifts}
+\lean{Hironaka.HironakaRelativeNormalUniformLocalization.degree_map_of_injective,Hironaka.HironakaRelativeNormalUniformLocalization.fractionExtendedIdeal,Hironaka.HironakaRelativeNormalUniformLocalization.exists_original_leading_lift,Hironaka.HironakaRelativeNormalUniformLocalization.originalLeadingLift,Hironaka.HironakaRelativeNormalUniformLocalization.originalLeadingLift_spec,Hironaka.HironakaRelativeNormalUniformLocalization.originalLeadingLiftFamily,Hironaka.HironakaRelativeNormalUniformLocalization.originalLeadingLiftFamily_mem,Hironaka.HironakaRelativeNormalUniformLocalization.originalLeadingLift_mem_family}
+\leanok
+\uses{hir:relative-normal-standard-internal-leading-generators}
+The actual fraction-field extension $H_K$ internally supplies finitely many
+nonzero original whole polynomials $h_i\in H$ whose leading exponents are
+exactly those of its internally produced actual field leading family. They
+therefore give complete leading coverage of every actual nonzero member of
+$H_K$ after coefficient extension.
+\end{theorem}
+\begin{proof}
+The genuine polynomial ring $K[Z]$ is the localization of $B[Z]$ at the image
+under the constant-polynomial map of the ACTUAL nonzero elements of $B$.
+Every actual selected field generator $g_i\in H_K$ therefore has a genuine
+original ideal numerator $h_i\in H$ and an actual nonzero base denominator
+$s_i\in B$, with $g_i C(s_i)=h_i$ after the actual coefficient map. A nonzero
+constant multiplier over the field preserves the entire actual support and
+leading exponent. The original coefficient map is injective, so it preserves
+support and leading exponents as well. Thus each actual $h_i$ is nonzero and
+has precisely the leading exponent of $g_i$. Choose these actual membership
+witnesses internally for the finite field family. The original zero and unit
+ideal cases are included literally; an empty selected family is allowed.
+\end{proof}
+
+\begin{theorem}[A single genuine nonzero original leading coefficient denominator]
+\label{hir:relative-normal-uniform-common-denominator}
+\lean{Hironaka.HironakaRelativeNormalUniformLocalization.uniformLeadingDenominator,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLeadingDenominator_ne_zero,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedFractionMap,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedFractionMap_eq,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedFractionMap_injective,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedCoefficientMap_injective,Hironaka.HironakaRelativeNormalUniformLocalization.originalLeadingLiftFamily_leadingCoeff_unit,Hironaka.HironakaRelativeNormalUniformLocalization.leadingCoeff_map_of_injective}
+\leanok
+\uses{hir:relative-normal-uniform-original-leading-lifts}
+There is an internally produced nonzero $b\in B$ such that every actual lifted
+leading coefficient is a genuine unit in the actual localization $B_b$, and
+the actual coefficient map $B_b\longrightarrow K$ is injective. The same $b$
+is used for the entire polynomial quotient, without dependence on a degree
+or truncation parameter.
+\end{theorem}
+\begin{proof}
+Form the actual finite product $b$ of the leading coefficients of the actual
+nonzero original lifts. Each factor is nonzero in the actual domain $B$, so
+the true product is nonzero; the empty product is $1$. Each factor divides
+$b$, and the image of $b$ is a unit in the ACTUAL localization away from $b$.
+Hence every factor becomes a genuine unit there. The actual map into $K$
+is constructed by the universal localization lift of the original fraction
+map, since the actual nonzero image of $b$ is a unit in the true field.
+A localized element mapping to zero can be represented by an original
+numerator divided by a power of $b$. Its original numerator maps to zero in
+$K$, and injectivity of the original domain fraction map makes it zero.
+The actual localized element is therefore zero. This proves true map
+injectivity and actual support preservation of coefficient extension.
+\end{proof}
+
+\begin{theorem}[The entire actual localized original standard monomial quotient basis]
+\label{hir:relative-normal-uniform-localized-whole-basis}
+\lean{Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedIdeal,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedLeadingFamily,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedLeadingFamily_spec,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalized_standard_of_division_standard,Hironaka.HironakaRelativeNormalUniformLocalization.exists_uniformLocalized_standard_remainder,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalizedIdeal_map_fraction,Hironaka.HironakaRelativeNormalUniformLocalization.uniformLocalized_standard_polynomial_eq_zero_of_mem,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardExponentIndex,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardPolynomialMap,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardPolynomialMap_support,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardPolynomialMap_injective,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardMonomialCombination,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardMonomialCombination_injective,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardMonomialCombination_surjective,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardMonomialLinearEquiv,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardMonomialBasis,Hironaka.HironakaRelativeNormalUniformLocalization.uniformStandardMonomialBasis_apply,Hironaka.HironakaRelativeNormalUniformLocalization.moduleFree_uniform_localized_quotient}
+\leanok
+\uses{hir:relative-normal-uniform-common-denominator,hir:relative-normal-standard-entire-quotient-basis}
+For this SAME actual internally produced $b$, the ORIGINAL monomial classes
+indexed by the entire field-standard exponent family form a genuine
+$B_b$-basis of $B_b[Z]/H_b$, where $H_b$ is the actual coefficient extension
+of the SAME original ideal $H$. In particular this actual whole polynomial
+quotient is free over $B_b$.
+\end{theorem}
+\begin{proof}
+Map the actual original lifts into $B_b[Z]$. Their leading coefficients are
+actual units, so genuine well-founded polynomial division expresses every
+whole polynomial as a finite combination of these actual whole $H_b$
+members plus a remainder. Preservation of each actual leading exponent
+makes EVERY actual remainder support exponent field-standard. Hence the
+actual standard monomial coefficient map onto the whole quotient is
+surjective. For injectivity, a standard-supported polynomial lying in $H_b$
+maps under the actual injective coefficient map to a standard-supported
+polynomial in $H_K$: extension of the original ideal commutes with the
+actual composite coefficient maps. The already proved whole field
+standard-kernel separation makes that entire field polynomial zero.
+Injectivity of coefficient extension makes the original localized polynomial
+zero, and the actual coefficient embedding makes its entire finitely
+supported coefficient function zero. Thus the actual standard coefficient
+map is a linear equivalence. Transport the genuine single-vector coefficient
+basis through it. Each vector is its LITERAL original monomial quotient
+class; the entire, possibly infinite index set is retained.
+\end{proof}
+
+\begin{theorem}[Actual original holomorphic normal ideal common-denominator consumer]
+\label{hir:relative-normal-uniform-original-normal-consumer}
+\lean{Hironaka.HironakaRelativeNormalUniformLocalization.originalUniformNormalDenominator,Hironaka.HironakaRelativeNormalUniformLocalization.originalUniformNormalDenominator_ne_zero,Hironaka.HironakaRelativeNormalUniformLocalization.originalUniformNormalIdeal,Hironaka.HironakaRelativeNormalUniformLocalization.originalUniformNormalStandardExponentIndex,Hironaka.HironakaRelativeNormalUniformLocalization.originalUniformNormalStandardMonomialBasis,Hironaka.HironakaRelativeNormalUniformLocalization.originalUniformNormalStandardMonomialBasis_apply,Hironaka.HironakaRelativeNormalUniformLocalization.moduleFree_original_uniform_normal_quotient,Hironaka.HironakaRelativeNormalUniformLocalization.exists_nonzero_original_uniform_normal_localization}
+\leanok
+\uses{hir:relative-normal-uniform-localized-whole-basis,hir:relative-normal-graded-whole-initial-ideal}
+For every WHOLE original holomorphic ideal $I$, its SAME internally proved
+whole normal initial ideal has an internally produced genuine nonzero
+entire tangential base germ $b$ for which its whole coefficient-localized
+normal polynomial quotient has the actual original standard monomial basis.
+\end{theorem}
+\begin{proof}
+Take $B$ to be the genuine entire tangential holomorphic germ domain and $H$
+to be the actual internally constructed whole original normal initial ideal.
+Its original ideal is used literally, and its fraction extension is the same
+one used in the earlier field-standard producer. Apply the three actual
+producers above with the actual finite normal coordinate family and the
+actual well-founded degree-lex order. All witnesses are internally obtained
+from this whole original ideal. The nonzero $b$ is an entire base germ; no
+point-value nonvanishing hypothesis or caller flatness certificate is used.
+\end{proof}
+
+\begin{remark}
+This chapter proves a genuine SAME-denominator basis of the WHOLE coefficient-
+localized polynomial quotient. A literal identification with the localization
+of the actual original associated module, a degree-compatible localized basis
+of EACH actual original graded piece, freeness of ALL actual original
+$R/(I+J^q)$ truncations on that same localization, and uniform analytic spread
+to original nearby stalks are distinct subsequent producer obligations.
+Whole ungraded freeness is never treated as all-degree graded freeness.
+General G8, uniform analytic normal flatness and higher HS descent remain OPEN.
+\end{remark}

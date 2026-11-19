@@ -1,0 +1,132 @@
+\section{Whole maxima on every homogeneous coordinate-model canonical prefix}
+\label{sec:hironaka-homogeneous-canonical-tower-maxima}
+
+Fix an actual coordinate union $H_S$ in the lifted complex coordinate
+model and its unchanged original datum $M_S=(X,X,\varnothing,I_{H_S},1)$.
+Let $R$ be a proved resolution invariant whose dimension bound is at
+least the ambient dimension. Every canonical prefix below is an actual
+finite tower. Empty historical positions are retained; no terminal or
+no-empty-prefix uniqueness theorem is used.
+
+\begin{theorem}[Actual automorphism lifts along an exact canonical prefix]
+\label{hir:homogeneous-exact-canonical-prefix-automorphism-lift}
+\lean{Hironaka.HironakaHomogeneousCanonicalTowerMaxima.exists_canonical_tower_automorphism}
+For any original invariant-domain datum and any actual base
+biholomorphism preserving its whole marked record, every exact finite
+canonical prefix internally supplies a genuine tower automorphism over
+that base map. Its literal empty positions and full-maximum positions
+are retained.
+\leanok
+\uses{hir:general-nc-one-step-history-universal-comparison}
+\end{theorem}
+\begin{proof}
+Induct on the actual given prefix. At the reflexive prefix the supplied
+base biholomorphism is the required lift. Suppose an actual prefix lift
+has been constructed. The whole marked-data preservation and whole
+history-transform law identify the current cosupport with its actual
+preimage under the lifted biholomorphism. The invariant's genuine
+tower-isomorphism law identifies all whole values on that cosupport.
+Consequently the entire full maximum pulls back to itself, using actual
+surjectivity of the lift. The next actual centre is either the literal
+empty set, which also pulls back to itself, or that entire maximum.
+Thus the exact next centre is preserved in both cases.
+
+The actual one-step universal comparison constructs a biholomorphism
+between the two genuine blowups of this preserved centre. Its exact
+projection equation extends the previously constructed history
+isomorphism by the actual step constructor. This yields the desired
+whole-prefix automorphism with the same actual empty positions. No
+comparison with a terminal prefix or another independently chosen
+sequence is assumed.
+\end{proof}
+
+\begin{lemma}[Actual homogeneous original records and their whole prefix values]
+\label{hir:homogeneous-model-entire-record-and-prefix-value}
+\lean{Hironaka.HironakaHomogeneousCanonicalTowerMaxima.homothety_pullback_original,Hironaka.HironakaHomogeneousCanonicalTowerMaxima.canonical_automorphism_value}
+Every nonzero scalar homothety preserves the whole original coordinate
+record. Its actual lift along an exact canonical prefix preserves the
+literal transformed cosupport and every entry of the whole prefix value.
+\leanok
+\uses{hir:homogeneous-exact-canonical-prefix-automorphism-lift,hir:general-nc-diagonal-monomial-chart-equation}
+\end{lemma}
+\begin{proof}
+Nonzero scalar multiplication preserves each selected coordinate zero
+predicate, hence the whole original carrier. The genuine homothety and
+its reciprocal inverse transport the entire holomorphic vanishing-ideal
+predicate; the full ambient carrier, empty boundary and marking one
+agree literally. Thus its pulled-back original marked record is exactly
+the original one. Apply the preceding actual prefix-lift producer.
+Whole history-transform naturality then preserves the current literal
+cosupport. The proved invariant tower-isomorphism law, on this actual
+cosupport, gives equality of the entire prefix values. No equality is
+inferred merely from current coordinates or boundary incidences.
+\end{proof}
+
+\begin{theorem}[An actual compact representative set for every whole prefix value]
+\label{hir:homogeneous-model-proper-compact-value-representatives}
+\lean{Hironaka.HironakaHomogeneousCanonicalTowerMaxima.exists_compact_value_representatives}
+For every actual finite canonical prefix of $M_S$, there is an actual
+compact subset of its current cosupport on which every whole current
+value is represented.
+\leanok
+\uses{hir:homogeneous-model-entire-record-and-prefix-value,bcalc:tower-preimage-compact}
+\end{theorem}
+\begin{proof}
+Take the lifted closed unit ball in the original coordinate base and
+the intersection of its full tower preimage with the actual current
+cosupport. The base ball is compact. Actual finite blowup towers have
+compact preimages of compact sets, and actual test-transform cosupports
+are closed. Thus this precise intersection is compact and is contained
+in the literal current cosupport.
+
+Given a current cosupport point, let $v$ be its actual original coordinate
+image. Put $t=1/(\lVert v\rVert+1)>0$ and regard $t$ as a nonzero complex
+scalar. Its genuine prefix lift takes the point to another actual
+cosupport point with exactly the same whole value. Exact commutation of
+the history projections identifies the new base coordinate with $tv$.
+Its norm is $\lVert v\rVert/(\lVert v\rVert+1)\leq1$, so this actual
+image point belongs to the same fixed compact intersection. The compact
+set is constructed from the prefix, not supplied as a certificate.
+\end{proof}
+
+\begin{theorem}[A genuine whole maximum at every nonempty homogeneous canonical prefix]
+\label{hir:homogeneous-model-every-prefix-whole-maximum}
+\lean{Hironaka.HironakaHomogeneousCanonicalTowerMaxima.homogeneous_maxLocus_nonempty}
+Every actual finite canonical prefix of $M_S$ with nonempty transformed
+cosupport attains its entire whole invariant maximum on that cosupport.
+\leanok
+\uses{hir:homogeneous-model-proper-compact-value-representatives,hir:invariant-order}
+\end{theorem}
+\begin{proof}
+The compact representative set is nonempty because each point of the
+nonempty current cosupport has an actual representative there. Restrict
+the invariant's proved upper semicontinuity to that compact subset.
+Its genuine compact maximum theorem supplies an actual representative
+point dominating every value on the subset. Every whole value on the
+entire current cosupport equals one of those representative values.
+Hence this same actual point dominates the entire current cosupport
+and belongs to its actual whole maximum locus. No compactness of the
+ambient coordinate manifold is assumed.
+\end{proof}
+
+\begin{theorem}[Actual whole-maximum successor at every nonterminal homogeneous prefix]
+\label{hir:homogeneous-model-every-prefix-actual-canonical-successor}
+\lean{Hironaka.HironakaHomogeneousCanonicalTowerMaxima.exists_homogeneous_canonical_successor}
+At every such nonterminal prefix, the internally nonempty entire whole
+maximum supplies a genuine smooth-centre blowup extending the literal
+prefix as an actual canonical test tower.
+\leanok
+\uses{hir:homogeneous-model-every-prefix-whole-maximum}
+\end{theorem}
+\begin{proof}
+The preceding theorem gives nonemptiness of the literal whole maximum.
+The proved invariant maximum-admissibility law makes it a closed smooth
+admissible centre for the same current marked datum. The actual domain
+and test-tower cosupport theorem gives empty interior for this maximum.
+Actual smooth-centre blowup existence constructs a genuine blowup of
+that very entire centre. Appending it to the literal prefix gives a
+test step by admissibility and a canonical step by its exact full-maximum
+identity. This is an every-prefix successor producer; an actual strict
+progress and finite termination driver is still required before a
+terminal model resolution can be asserted.
+\end{proof}

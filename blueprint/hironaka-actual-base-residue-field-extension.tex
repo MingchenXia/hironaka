@@ -1,0 +1,66 @@
+\section{The actual tangent germ residue field}
+
+Write $B=\mathcal O_{\mathbb C^d,0}$, $\mathfrak m_B$ for its genuine
+maximal ideal, and $\kappa(B)=B/\mathfrak m_B$. Complex coefficients carry
+the actual $B$-algebra structure given by evaluation at the origin.
+
+\begin{theorem}[Canonical residue field and literal origin values]
+\label{hir:actual-base-residue-field}
+\lean{Hironaka.HironakaActualBaseResidueField.baseResidueFieldEquiv,Hironaka.HironakaActualBaseResidueField.baseResidueFieldEquiv_residue,Hironaka.HironakaActualBaseResidueField.baseResidueFieldEquiv_symm}
+\leanok
+Evaluation induces a $B$-algebra isomorphism
+$e:\kappa(B)\simeq_B\mathbb C$ satisfying $e([g])=g(0)$ for every
+original holomorphic germ $g$. Its inverse sends a complex number to the
+class of the corresponding actual constant germ.
+\end{theorem}
+\begin{proof}
+The full maximal ideal consists exactly of the germs whose value at the
+origin is zero. Evaluation therefore descends to the quotient. Its map
+is injective because its domain is a field and the map preserves one.
+Every complex number is the value of its constant germ, proving
+surjectivity and the stated inverse formula. The formula on a residue
+class proves compatibility with the original $B$-algebra structures.
+\end{proof}
+
+\begin{theorem}[Natural tensor comparison and detection of injectivity]
+\label{hir:actual-base-residue-tensor}
+\lean{Hironaka.HironakaActualBaseResidueField.residueTensorEquiv,Hironaka.HironakaActualBaseResidueField.residueTensorEquiv_tmul,Hironaka.HironakaActualBaseResidueField.residueTensorEquiv_natural,Hironaka.HironakaActualBaseResidueField.residue_lTensor_injective_iff_complex}
+\leanok
+\uses{hir:actual-base-residue-field}
+For every $B$-module $P$, the formula $a\otimes p\mapsto e(a)\otimes p$
+gives a $B$-linear equivalence $E_P:\kappa(B)\otimes_B P\simeq_B
+\mathbb C\otimes_B P$. For every $B$-linear map $f:P\to Q$ it satisfies
+$E_Q(1\otimes f)=(1\otimes f)E_P$. Consequently tensoring $f$ with
+$\kappa(B)$ is injective exactly when tensoring it with the actual
+complex residue algebra is injective.
+\end{theorem}
+\begin{proof}
+Tensor the underlying $B$-linear equivalence of $e$ with the identity of
+$P$. Its inverse tensors $e^{-1}$ with that identity. Both sides of the
+naturality equality send $a\otimes p$ to $e(a)\otimes f(p)$; additivity
+extends the equality to every tensor. The two vertical maps of this
+commuting square are bijective, so injectivity of either horizontal
+map is equivalent to that of the other.
+\end{proof}
+
+\begin{theorem}[The complex residue criterion for actual filtered cuts]
+\label{hir:actual-base-complex-symbol-criterion}
+\lean{Hironaka.HironakaActualBaseResidueField.adicLayer_after_parameter_finite_free_of_complex}
+\leanok
+\uses{hir:actual-base-residue-tensor,hir:local-actual-symbol-quotient-layers-free}
+Let $R$ be a commutative $B$-algebra, $I,N\subset R$ ideals, and
+$v\in N$. Suppose every actual adic layer
+$G_q=\operatorname{im}(N^q\to R/(I+N^{q+1}))$ is finite free over $B$,
+and every literal multiplication map $G_q\to G_{q+1}$ becomes injective
+under the actual complex residue tensor. Then all actual layers for
+$I+(v)$ and the same $N$ are finite free over $B$.
+\end{theorem}
+\begin{proof}
+Apply the tensor comparison to every actual multiplication map,
+restricted to $B$. It supplies exactly the canonical residue-field
+injectivity hypothesis of the existing filtered-cut theorem. That
+theorem splits the multiplication map, proves the whole filtered
+intersection equality, and identifies the next actual layer with its
+free quotient. Its degree-zero argument uses the genuine zero-degree
+layer isomorphism; no positive-degree assumption is imposed here.
+\end{proof}

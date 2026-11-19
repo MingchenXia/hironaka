@@ -1,0 +1,178 @@
+\section{Actual fixed-order whole-quotient frames on an internally produced pivot patch}
+\label{sec:hironaka-holomorphic-jet-quotient-frames}
+
+These are genuine frames for the entire point quotients at one fixed truncation
+order, constructed from original holomorphic functions. The patch is internally
+chosen where their actual finite Macaulay rank attains its maximum on the given
+nonempty original open domain. A single nonzero minor at an arbitrary point does
+not imply constant rank on a neighbourhood. No density, maximal-Hilbert--Samuel
+centre or normal-flatness for all relative powers is asserted here.
+
+\begin{definition}[The fixed actual whole scalar-jet space]
+\label{hir:actual-fixed-whole-scalar-jet-range}
+\lean{Hironaka.HironakaHolomorphicJetQuotientFrames.scalarJet,Hironaka.HironakaHolomorphicJetQuotientFrames.scalarJetRange,Hironaka.HironakaHolomorphicJetQuotientFrames.ker_scalarJet}
+\leanok
+\uses{hir:actual-finite-jet-coordinate-evaluation,hir:whole-point-power-ring-dictionary}
+For fixed $q$, let $J_q$ be the genuine entire first-$q$ scalar-coordinate jet
+map and $S_q=\operatorname{range}J_q$. This is a fixed finite-dimensional
+complex subspace of the actual coordinate-word array space, independent of
+any point or ideal. Its actual kernel is the entire maximal-ideal power
+$\mathfrak m^q$.
+\end{definition}
+\begin{proof}
+The real scalar-coordinate evaluation is injective on the entire original
+multilinear jet target. Hence its composite with the actual whole-germ jet has
+exactly that jet's kernel. The previous actual point-power/kernel theorem
+identifies this kernel with the complete maximal-ideal power. The actual range
+is a subspace of a finite coordinate array, so is finite-dimensional. No
+independence of repeated word coordinates or artificial full-array surjectivity
+is asserted for $q>2$.
+\end{proof}
+
+\begin{lemma}[Actual selected columns and the complete ideal image]
+\label{hir:actual-selected-columns-entire-ideal-image}
+\lean{Hironaka.HironakaHolomorphicJetQuotientFrames.columnMap,Hironaka.HironakaHolomorphicJetQuotientFrames.rowMap,Hironaka.HironakaHolomorphicJetQuotientFrames.pivotMatrix,Hironaka.HironakaHolomorphicJetQuotientFrames.rowMap_columnMap,Hironaka.HironakaHolomorphicJetQuotientFrames.original_columns_mem_scalarJetRange,Hironaka.HironakaHolomorphicJetQuotientFrames.range_originalMacaulay_eq_whole_scalar_image}
+\leanok
+\uses{hir:actual-fixed-whole-scalar-jet-range,hir:actual-macaulay-jet-columns-holomorphic,hir:actual-whole-generated-ideal-finite-jet-columns}
+For original holomorphic family $G$ at $p$, let $C(p)$ be its true word-times-
+generator Macaulay matrix. Given actual row and column selections of size $k$,
+let $F$ select those rows, $B(p)$ combine those selected actual columns, and
+$K(p)=FB(p)$. Every selected and unselected actual column belongs to $S_q$;
+the complete column image equals the whole original translated ideal jet image.
+\end{lemma}
+\begin{proof}
+The actual matrix entry dictionary is precisely $J_q(z^\alpha G_i(p+z))$.
+Thus every genuine column is in the fixed range $S_q$. Finite linear combination
+of the selected columns gives $B(p)$ and direct finite-sum evaluation gives
+$FB(p)=K(p)$. The genuine whole-ideal jet-image/Macaulay formula supplies ALL
+original ideal membership germs, not only a selected family of derivatives.
+Consequently the full matrix image is exactly that entire ideal image; selected
+columns span a subspace of it. This applies equally to empty selections and
+empty families.
+\end{proof}
+
+\begin{theorem}[Internally attained maximal rank and a real nonempty open pivot patch]
+\label{hir:actual-maximal-rank-nonempty-open-pivot}
+\lean{Hironaka.HironakaHolomorphicJetQuotientFrames.exists_maximal_rank_open_pivot_patch}
+\leanok
+\uses{hir:actual-macaulay-jet-columns-holomorphic,hir:actual-hilbert-samuel-point-value-minor-loci,hir:actual-selected-columns-entire-ideal-image}
+For a nonempty original open domain on which the actual original finite family
+is holomorphic, the real Macaulay rank attains an actual maximum $k$. Internally
+chosen row and column selections give a nonzero actual $k$-minor at a maximizing
+point. On an internally constructed nonempty open pivot patch, this minor stays
+nonzero and the ENTIRE actual matrix rank equals $k$ at every point.
+\end{theorem}
+\begin{proof}
+All genuine matrix ranks are natural numbers bounded by the fixed finite array
+dimension, so their image on the nonempty original domain is a nonempty finite
+set. Choose its actual maximum and a genuine point realizing it. The true
+rank/minor dictionary produces an actual $k$-square minor with nonzero determinant
+at that point (for $k=0$ its true empty determinant is one). Original holomorphic
+matrix entries give holomorphic finite minors; continuity on the original open
+domain makes its nonzero locus open. Intersect with that domain to obtain the
+real nonempty patch. At every point of it, the actual nonzero minor forces rank
+at least $k$, and the internally chosen GLOBAL maximum on that domain forces
+rank at most $k$. Thus rank is exactly $k$. The upper bound is indispensable;
+the proof does not infer it from a single arbitrary nonzero minor. No compactness
+or caller rank/attainment/patch certificate is assumed.
+\end{proof}
+
+\begin{lemma}[Actual holomorphic pivot projection and its complete kernel]
+\label{hir:actual-holomorphic-pivot-whole-kernel}
+\lean{Hironaka.HironakaHolomorphicJetQuotientFrames.pivotProjection,Hironaka.HironakaHolomorphicJetQuotientFrames.rowMap_pivotProjection_eq_zero,Hironaka.HironakaHolomorphicJetQuotientFrames.pivotProjection_columnMap_eq_zero,Hironaka.HironakaHolomorphicJetQuotientFrames.ker_pivotProjection_eq_selected_image,Hironaka.HironakaHolomorphicJetQuotientFrames.columnMap_injective_of_det_ne_zero,Hironaka.HironakaHolomorphicJetQuotientFrames.range_columnMap_le_entire_image,Hironaka.HironakaHolomorphicJetQuotientFrames.finrank_range_columnMap,Hironaka.HironakaHolomorphicJetQuotientFrames.range_columnMap_eq_entire_image,Hironaka.HironakaHolomorphicJetQuotientFrames.range_originalMacaulay_le_scalarJetRange,Hironaka.HironakaHolomorphicJetQuotientFrames.fixedQuotientModel,Hironaka.HironakaHolomorphicJetQuotientFrames.pivotProjection_holomorphic_entries,Hironaka.HironakaHolomorphicJetQuotientFrames.pivotProjection_mem_fixed_model,Hironaka.HironakaHolomorphicJetQuotientFrames.pivotProjection_eq_self,Hironaka.HironakaHolomorphicJetQuotientFrames.ker_pivotProjection_eq_entire_image}
+\leanok
+\uses{hir:actual-maximal-rank-nonempty-open-pivot,hir:actual-selected-columns-entire-ideal-image}
+On that genuine patch, the actual endomorphism
+$P(p)=1-B(p)K(p)^{-1}F$ restricts to a surjection from $S_q$ to the fixed space
+$L=S_q\cap\ker F$. It is identity on $L$, and its kernel inside $S_q$ is precisely
+the ENTIRE actual ideal jet image. Its unmodified original finite array entries
+are holomorphic on the real pivot patch.
+\end{lemma}
+\begin{proof}
+The actual determinant is nonzero, so $K(p)$ has its genuine inverse. Original
+matrix entries are holomorphic and the adjugate/determinant formula expresses
+every inverse entry as a genuine finite polynomial divided by the same nonzero
+original determinant, hence holomorphic. Finite products/sums give the actual
+entries of $P$. The identity $FB=K$ yields $FP=0$; all actual columns of $B$
+belong to $S_q$, hence $P(S_q)\subseteq S_q\cap\ker F$. On that fixed intersection,
+$Fv=0$ gives $Pv=v$, proving surjectivity. The inverse identity gives $PB=0$.
+Conversely $Pv=0$ expresses $v=B K^{-1}Fv$, so its kernel is exactly the selected
+column span. The invertible pivot makes those $k$ selected columns independent.
+They lie in the actual complete image, and on the real patch the actual complete
+image has the same dimension $k$. The finite-dimensional inclusion and equal
+actual dimensions identify selected image with ENTIRE ideal image. This proves
+the claimed full kernel, with no selected-image equality premise.
+\end{proof}
+
+\begin{theorem}[Genuine entire point quotients have fixed local frame coordinates]
+\label{hir:actual-entire-point-quotient-pivot-frame}
+\lean{Hironaka.HironakaHolomorphicJetQuotientFrames.wholeQuotientCoordinates,Hironaka.HironakaHolomorphicJetQuotientFrames.wholeQuotientCoordinates_surjective,Hironaka.HironakaHolomorphicJetQuotientFrames.ker_wholeQuotientCoordinates,Hironaka.HironakaHolomorphicJetQuotientFrames.wholeQuotientFrame,Hironaka.HironakaHolomorphicJetQuotientFrames.finrank_fixed_model,Hironaka.HironakaHolomorphicJetQuotientFrames.rowMap_scalarJetRange_surjective,Hironaka.HironakaHolomorphicJetQuotientFrames.exists_original_whole_quotient_frames}
+\leanok
+\uses{hir:actual-holomorphic-pivot-whole-kernel,hir:actual-fixed-whole-scalar-jet-range}
+For EVERY point of the internally produced pivot patch, $P(p)J_q$ gives genuine
+coordinates identifying the literal ENTIRE point quotient
+$R/(I_p+\mathfrak m^q)$ with the SAME fixed complex space $L$. Its actual dimension
+is $\dim S_q-k$. The original finite projection entries vary holomorphically on
+the patch.
+\end{theorem}
+\begin{proof}
+The entire scalar jet surjects onto its actual range $S_q$ by definition; $P$
+surjects from that range onto $L$. Their composite therefore surjects onto $L$.
+If $P J_q g=0$, the complete kernel theorem supplies an original entire ideal
+member $a$ with $J_qg=J_qa$. Thus $g-a$ belongs to the genuine kernel
+$\mathfrak m^q$, proving $g\in I_p+\mathfrak m^q$. Conversely an actual ideal
+member maps into the complete ideal image and is killed by $P$, while every
+actual maximal-ideal-power member is killed by $J_q$. This proves the exact
+ENTIRE kernel. The genuine first-isomorphism theorem produces a linear
+equivalence from the literal ring-ideal quotient to $L$. Because $F$ restricts
+to a surjection on $S_q$ (using the actual invertible pivot columns), true
+rank-nullity gives $\dim L=\dim S_q-k$. At $q=0$, $S_q=0$ and the actual quotient
+by $\mathfrak m^0=R$ is zero. Empty original families have $k=0$ and give the
+actual entire truncated ambient quotient; unit ideals give a zero quotient.
+No full-array dimension is substituted for the actual possibly redundant
+whole-jet range.
+\end{proof}
+
+\begin{theorem}[Coherence alone internally produces whole intrinsic quotient frames]
+\label{hir:actual-coherent-intrinsic-quotient-frames}
+\lean{Hironaka.HironakaHolomorphicJetQuotientFrames.exists_coherent_whole_quotient_frames}
+\leanok
+\uses{hir:actual-entire-point-quotient-pivot-frame,hir:actual-coherent-whole-point-quotient-column-dictionary,hir:actual-nonlinear-full-quotient-hilbert-samuel-invariance}
+At every original base point of a coherent ideal on a genuine complex manifold,
+there is an original open neighbourhood and an internally chosen nonempty open
+subpatch on which its ENTIRE intrinsic fixed-$q$ point quotients have the same
+actual finite complex frame model. The actual preferred chart point quotient
+is transported by genuine nonlinear original chart algebra equivalences.
+The subpatch need not contain the initial base point.
+\end{theorem}
+\begin{proof}
+Original coherence internally produces one genuine Cartan family, its original
+holomorphic neighbourhood and the ALL-membership whole-stalk ideal dictionary
+in the initial original chart. Move that neighbourhood into the actual chart
+coordinates: the real target/preimage intersection is open and nonempty at the
+base point, and the entire original family is holomorphic there. Apply the
+internally attained maximum/pivot/frame producer. Pull its genuine nonempty
+open patch back through the original chart; it stays inside the Cartan
+neighbourhood and is nonempty because every chosen coordinate point belongs
+to the true target. At every point of this subpatch the ALL-membership dictionary
+identifies the fixed-chart reduced whole ideal with the same actual translated
+family ideal, so the preceding entire quotient frame applies. The actual
+translated nonlinear overlap between the preferred point chart and this fixed
+original chart internally induces a full germ algebra equivalence; it maps
+ALL original membership germs and preserves every genuine maximal-ideal power.
+Its actual quotient algebra equivalence transports the preferred ENTIRE point
+quotient into those same frame coordinates. No caller ideal-map equality,
+quotient/frame isomorphism, matrix-rank constant or analytic chart certificate
+is supplied. The actual fixed-$q$ Hilbert--Samuel value is constant on this
+chosen genuine open patch by the real quotient dimension.
+\end{proof}
+
+\begin{remark}
+This supplies actual finite-truncation quotient coordinates from genuine
+holomorphic data. The internally maximizing rank gives a minimal fixed-$q$
+Hilbert--Samuel value on that original Cartan patch; it is not a construction
+of a maximal-Hilbert--Samuel resolution centre. Density would require actual
+analytic component/identity arguments and is not deduced. Full normal flatness
+still requires the real smooth-centre relative ideal filtration and all degrees;
+actual higher-HS blowup transformation and termination remain OPEN.
+\end{remark}

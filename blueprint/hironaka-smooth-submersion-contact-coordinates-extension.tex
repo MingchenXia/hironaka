@@ -1,0 +1,121 @@
+\section{One actual nested contact-coordinate flag and its genuine smooth lift}
+
+\begin{lemma}[The genuine contact coordinate replacement preserves the whole original carrier]
+\label{hir:submersion-contact-coordinates-original-flag}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoordinates.contactCoords_mem_original_plane,Hironaka.HironakaSmoothSubmersionContactCoordinates.contactCoords_contact_slot}
+\uses{mc:contact-hypersurface-along,hir:order-along-flat}
+\leanok
+In genuine original coordinates flattening $N$ onto the plane of dimension
+$k$, replace one tangential coordinate $j<k$ by a true function $u$, moving
+that coordinate to slot $l=k-1$. The actual contact-coordinate map lies in
+the plane of dimension $k$ exactly on $N$, and its slot $l$ is the entire
+original function $u$. These are whole equations on the actual flat domain,
+not prescribed chart-output certificates.
+\end{lemma}
+\begin{proof}
+The original coordinate replacement swaps only $j$ and $l$, both strictly
+below $k$. Every normal index $i\geq k$ is therefore fixed by that actual
+permutation and is distinct from $l$. At each such index, the literal new
+coordinate equals the original normal coordinate. Conversely every original
+normal coordinate occurs at that same new normal index. Thus vanishing of
+all actual new normal coordinates is precisely vanishing of all original
+normal coordinates, equivalent to $N$ by the original genuine flattening.
+The replaced slot itself is $u$ by the literal coordinate-map definition.
+The already proved contact-coordinate equation gives plane dimension $k-1$
+exactly on $N\cap V(u)$; this calculation retains EVERY other original slot.
+\end{proof}
+
+\begin{theorem}[ONLY original direction geometry internally creates one nested whole coordinate flag]
+\label{hir:submersion-contact-coordinates-internal-original-chart}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoordinates.exists_original_contact_coordinates}
+\uses{hir:submersion-contact-coordinates-original-flag,hir:submersion-tangent-contact-actual-carriers,mc:contact-hypersurface-along,bcalc:snc-chart,hir:giraud-along,mc:derivative-along-coherent}
+\leanok
+Given original coherent $I$, actual closed smooth $N$, a genuine original
+whole tangent direction $u$ on its open $U$ and an actual contact point,
+internally produce $k>0$, $l=k-1$ and ONE true centred holomorphic coordinate
+chart whose ENTIRE domain lies in $U$. On that domain the actual original
+carrier is exactly the plane of dimension $k$, the actual contact is exactly
+the plane of dimension $k-1$, and the literal coordinate $l$ equals $u$.
+No caller chart, index, positive dimension, normal form or desired equality
+certificate is supplied.
+\end{theorem}
+\begin{proof}
+Actual original smoothness chooses true flattening coordinates at the
+contact point. Coherence of the genuine tangent iterate gives holomorphicity
+of $u$ throughout its actual open. Its real tangent-direction witness at the
+zero gives a true nonzero tangent derivative. The actual field decomposition
+internally chooses a tangential partial $j<k$ with nonzero value, so $k>0$
+and $l=k-1$ exists. Form the genuine contact-coordinate map of node one.
+Its real differential is injective by the original coordinate replacement
+calculation and that nonzero partial. It is genuinely holomorphic on the
+actual intersection $U$ with the old flat domain. The actual holomorphic
+inverse-function producer therefore constructs a true local coordinate
+inverse and recentres its value, with domain contained in this intersection
+and an ENTIRE coordinate equality to the contact-coordinate map minus its
+value at the point. The original chart was centred and $u$ vanishes at the
+contact point, so that value is genuinely zero. Node one's whole original
+carrier equation, its contact equation and its literal $u$ coordinate
+therefore hold on the ENTIRE new domain. This is an internally constructed
+joint flag, rather than separate independently chosen regularity charts.
+\end{proof}
+
+\begin{theorem}[The SAME nested flag lifts in one genuine fibre-first source chart]
+\label{hir:submersion-contact-coordinates-internal-source-flag}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoordinates.exists_joint_contact_coordinates}
+\uses{hir:submersion-contact-coordinates-internal-original-chart,hir:submersion-adapted-whole-original-centre,hir:submersion-relative-differential-actual-linear-projection,hir:submersion-relative-differential-actual-inverse-chain-rule,hir:submersion-monomial-dimension}
+\leanok
+For a genuine submersion of ANY two dimensions and a true point over that
+original contact, internally lift the SAME original chart to ONE true source
+chart with ALL original coordinate functions retained at actual injected
+indices. Its ENTIRE original-carrier preimage is the plane of dimension
+$k+(m-n)$, its ENTIRE contact preimage is the plane of dimension
+$(k-1)+(m-n)$, and its actual contact coordinate is the WHOLE function
+$u\circ f$. Source points in this chart map into the original chart domain
+and actual $U$. No caller source chart, source flag, projection or equality
+certificate is primitive.
+\end{theorem}
+\begin{proof}
+At the actual source point, genuine submersion geometry internally gives
+$m=n+t$. Construct the actual fibre-first adapted chart from the SAME true
+original chart of node two. Its proved entire dictionary retains every
+original coordinate at its literal shifted index $t+j$, while the $t$ fibre
+slots remain free. Apply the true whole original-centre producer to the
+actual original plane of dimension $k$ and, in the SAME source chart, to the
+actual contact plane of dimension $k-1$. It gives exact contiguous planes
+$t+k$ and $t+k-1$, hence the asserted dimensions. The literal shifted contact
+coordinate equals the actual original $u$ coordinate evaluated at $f(z)$,
+which node two identifies with $u(f(z))$ on the whole domain. The genuine
+coordinate dictionary also gives image-domain containment and EVERY
+retained original coordinate, not merely a stalk assertion. The actual
+linear projection and inverse-point equality are the already proved true
+adapted-chart producers. No points in an empty source demand fictitious
+indices; an actual point itself supplies the only required dimension
+comparison. Dimension zero is excluded only when the true nonzero tangent
+derivative produces the genuine positive $k$.
+\end{proof}
+
+\begin{theorem}[Original maximal-order data internally select the joint contact flag]
+\label{hir:submersion-contact-coordinates-original-only-consumer}
+\lean{Hironaka.HironakaSmoothSubmersionContactCoordinates.exists_original_only_joint_contact_coordinates}
+\uses{hir:submersion-tangent-contact-original-joint-existence,hir:submersion-tangent-contact-closed-open-carriers,hir:submersion-contact-coordinates-internal-source-flag,hir:smooth-relative-whole-cosupport}
+\leanok
+ONLY genuine original submersion, original coherent marked ideal, actual
+closed smooth original carrier, positive mark and a real source cosupport
+point with maximal original image order internally choose the SAME original
+open and contact function and produce the preceding ENTIRE original/source
+nested coordinate flags. No selected direction, positive carrier dimension,
+contact chart, source form, canonical or termination certificate is supplied.
+\end{theorem}
+\begin{proof}
+The genuine original-only maximal-order contact producer internally chooses
+actual $U,u$ and BOTH whole tangent directions. Its actual original local
+cosupport inclusion puts the image point on the true contact, hence
+$u(f(y))=0$. The source point is in the ENTIRE preimage contact. Apply node
+three, with that actual chosen original direction, to produce one original
+chart and its genuine coupled source chart. All coordinates, the positive
+original dimension, actual injected slot and entire two-carrier flag
+identities are internal outputs. Coherent original input and genuine
+submersion are the only analytic primitives. Original boundary transversality,
+independent contact choices, higher canonical driver and noncompact
+termination remain OPEN; this flag does not assume or imply them.
+\end{proof}

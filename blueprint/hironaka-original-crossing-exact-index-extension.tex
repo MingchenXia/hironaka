@@ -1,0 +1,101 @@
+\section{The exact whole lower index of an original crossing run}
+
+The original crossing lower history retains the same marked datum and a true
+interior empty step. Its actual insertion index is its WHOLE original lower
+boundary length plus the true remaining head length. Actual SNC geometry
+computes that index from the original level; it is not a comparison premise.
+This refines the indexed Step One bookkeeping of
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}.
+
+\begin{lemma}[Whole original lower boundary length at the actual level]
+\label{hir:original-whole-lower-boundary-exact-length}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-member-filtered-prefix-exact-count,hir:step-one-bridge}
+\lean{Hironaka.HironakaOriginalCrossingExactIndex.original_lower_boundary_length_actual_level}
+\leanok
+Let $M$ be originally well formed, let $K$ be an actual bar-test history, and
+let $p$ be an actual stage point with level $\ell$. The WHOLE actual lower
+marked record formed at its true level has boundary length
+\[
+ |\operatorname{lowerMarkedM}(M,\ell,K,p).E|
+       =|M.E|+|K|-\ell.
+\]
+At level zero this is the genuine chosen-contact lower record; at every
+positive level it is the genuine member-restricted lower record. No carrier,
+choice, index or boundary-count certificate is assumed.
+\end{lemma}
+\begin{proof}
+At level zero the actual coefficient/contact record retains the entire bar
+transform boundary, and open pullback preserves its length. The true bar
+transform length is $|M.E|+|K|$, and subtraction by zero leaves it unchanged.
+At positive level the actual lower boundary is the open pullback of the
+entire bar boundary filtered by removal of the original members through $p$.
+Actual bar-testness makes this bar transform genuinely well formed and SNC.
+Its literal original member list is its prefix of length $|M.E|$. Apply the
+proved exact original filtered-prefix count with larger prefix equal to its
+WHOLE boundary. The boundary count of the original prefix is the true level
+$\ell$. The map into the actual open lower carrier preserves the retained
+length, yielding the displayed identity. This counts every actual boundary
+index and permits inactive or empty repeated entries.
+\end{proof}
+
+\begin{theorem}[Original crossing canonicity internally computes the exact lower index]
+\label{hir:original-crossing-lower-index-exact}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-whole-lower-boundary-exact-length,hir:original-canonical-crossing-lower-data,hir:original-interior-crossing-selected-splits}
+\lean{Hironaka.HironakaOriginalCrossingExactIndex.original_canonical_crossing_lower_index_exact}
+\leanok
+Assume only an original dimension-$(k+1)$ maximal-order datum and an actual
+canonical Step One history $HS$ for the specific original lower family
+$R_k$. Let $y$ be an actual nonspecial point whose TRUE own-level run
+$r$ reaches the insertion after $H$, so $r\geq|S|$. Put
+$K=\operatorname{head}(H,r-|S|)$, $B=\operatorname{tail}(H,r-|S|)$, $p=(BS)(y)$,
+$\ell=\operatorname{level}(M,HS,y)$, and
+$J=\operatorname{lowerMarkedM}(M,\ell,K,p)$.
+Then the exact actual lower insertion position is
+\[
+ |J.E|+|B|=|M.E|+|H|-\ell.
+\]
+Every actual lower order, including positive recursive orders, is allowed.
+\end{theorem}
+\begin{proof}
+The genuine original canonical bridge supplies actual whole bar-testness and
+hence bar-testness of the literal selected prefix $K$. Its actual nonspecial
+current point lies in its own level regime. Since the true suffix length
+$|B|+|S|$ is at most $r$, actual reaching-run membership gives the SAME level
+$\ell$ at the assignment point $p$. Apply the preceding whole lower-length
+identity there. This also gives $\ell\leq|M.E|+|K|$, since the true level counts
+indices in an original prefix. Actual head/tail lengths sum to $|H|$.
+Consequently adding $|B|$ to the computed whole lower boundary length yields
+exactly $|M.E|+|H|-\ell$. Nothing about lower values or inserted canonical
+histories is assumed.
+\end{proof}
+
+\begin{theorem}[The actual crossing leaf uses the same whole Step One history map]
+\label{hir:original-crossing-leaf-common-history-map}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-crossing-lower-index-exact,hir:original-canonical-crossing-step-one-monomial-leaf,hir:original-short-history-step-map}
+\lean{Hironaka.HironakaOriginalCrossingExactIndex.original_canonical_crossing_leaf_history_map}
+\leanok
+For the preceding original canonical inputs AT AN ACTUAL ORIGINAL COSUPPORT
+POINT, assume the suffix $S$ is nonempty.
+The genuine original lower-data producer internally constructs the whole
+actual lower canonical tail, domain and cosupport point. On its actual lower
+nonmonomial-order-zero branch, the ENTIRE original Step One value on
+$H\epsilon S$ is $F_{k,|M.E|+|H|}$ of the original value on $HS$.
+The original point may have zero or positive Step One level.
+\end{theorem}
+\begin{proof}
+The genuine original canonical crossing-leaf producer supplies the actual
+lower witness, domain, full canonical tail and cosupport internally. On its
+stated actual order-zero branch it proves the complete Step One pair formula
+with actual family index $|J.E|+|B|$. Substitute the exact original index
+computed above. The first coordinate of the whole original Step One value
+is its actual level, so this pair formula is precisely the definition of the
+single level-indexed strict history map $F_{k,j}$. The lower order-zero
+condition is an explicit real branch on internally supplied original data;
+positive crossing recursion remains open. Together with the complete short
+Step One formula, this supplies the common map for actual short points and
+actual crossing leaf points, without claiming full higher crossing transport
+or noncompact scheduling.
+\end{proof}

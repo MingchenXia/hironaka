@@ -1,0 +1,123 @@
+\section{Intrinsic canonical elementary arrows for compact nonpure input}
+
+\begin{definition}[Intrinsic ordered elementary recipe]
+\label{hir:original-intrinsic-ordered-recipe}
+\uses{hir:original-canonical-ordered-filtered-choice}
+\lean{Hironaka.HironakaOriginalIntrinsicNonpureRecipe.IntrinsicOrderedRecipe}
+\leanok
+For original $W\subset X^n$ and ordered boundary $E$, an intrinsic
+ordered recipe is a genuine actual separator/head/tail tree on some
+finite raw labelled list whose nonempty filter is exactly the
+increasing intrinsic dimension-part list of $W$. Its bad-set index is
+the intrinsic singular set together with $W$ on the original boundary.
+Empty raw padding is allowed. This condition contains no desired
+geometry, target map, smooth square or comparison certificate.
+\end{definition}
+
+\begin{definition}[Whole elementary geometric output]
+\label{hir:original-intrinsic-elementary-geometry-output}
+\lean{Hironaka.HironakaOriginalIntrinsicNonpureRecipe.HasElementaryGeometry}
+\leanok
+The elementary output comprises actual admissibility over the original
+intrinsic bad set, the whole final SNC boundary, actual exceptional and
+new-boundary inclusions, the singular inverse-image inclusion and
+isomorphism off the bad set, the whole closed regular strict carrier,
+its intrinsic dimension-part union and regularity, pairwise disjoint
+strict dimension parts, normal crossings, holomorphy, properness and
+surjectivity. This transparent predicate is used as a conclusion of the
+original-only existence theorem.
+\end{definition}
+
+\begin{lemma}[Every actual ordered tree retains its own whole SNC boundary]
+\label{hir:original-ordered-tree-own-snc}
+\uses{hir:original-canonical-ordered-filtered-choice}
+\lean{Hironaka.HironakaOriginalIntrinsicNonpureRecipe.ordered_tree_final_snc}
+\leanok
+A genuine ordered tree starting at an actual SNC boundary ends with
+its own entire ordered SNC boundary, retaining empty positions.
+\end{lemma}
+\begin{proof}
+Induct on its actual provenance. The nil tree retains the initial
+boundary. For a cons tree the actual pure-head stage has a genuine
+invariant domain and actual canonicality. Canonicality gives genuine
+geometric testness; the invariant-domain transform theorem therefore
+supplies the entire actual head-output SNC boundary. Apply induction
+to the real tail starting at precisely this boundary.
+\end{proof}
+
+\begin{theorem}[Any two independent intrinsic recipes define one elementary arrow]
+\label{hir:original-intrinsic-ordered-recipe-choice}
+\uses{hir:original-intrinsic-ordered-recipe,hir:original-canonical-ordered-filtered-choice}
+\lean{Hironaka.HironakaOriginalIntrinsicNonpureRecipe.intrinsic_recipe_choice}
+\leanok
+Any two actual intrinsic ordered recipes for the same original $W,E$
+have a unique actual final biholomorphism over the original base.
+It carries their whole ordered filtered final boundaries and gives the
+whole strict-transform square for every original subset, including
+nonclosed subsets. No common history, index or empty-padding pattern
+is assumed.
+\end{theorem}
+\begin{proof}
+Unpack only the genuine raw-tree provenance and the intrinsic
+nonempty-list equality from the two recipe records. Their input
+filters are therefore equal. Apply the proved entire ordered-tree
+choice theorem over the actual identity base. Its genuine constructed
+map and filtered whole-boundary identity give the assertions, and
+its every-subset strict square reduces to the stated identity square.
+Its actual projection uniqueness gives uniqueness with these properties.
+\end{proof}
+
+\begin{theorem}[Original compact nonpure data give an intrinsic canonical elementary arrow with independent smooth sources]
+\label{hir:original-intrinsic-nonpure-elementary-independent-smooth}
+\uses{hir:original-intrinsic-ordered-recipe,hir:original-intrinsic-elementary-geometry-output,hir:original-intrinsic-ordered-recipe-choice,hir:original-ordered-tree-own-snc,hir:original-nonpure-canonical-elementary-smooth-projection}
+\lean{Hironaka.HironakaOriginalIntrinsicNonpureRecipe.exists_original_intrinsic_nonpure_resolution}
+\leanok
+Let $W$ be an original compact analytic subset of empty interior and
+let $E$ be an original ordered SNC boundary with $W$ dense off it.
+These original data internally construct an intrinsic ordered recipe
+$T$ with the whole elementary geometry. Fix this SAME target before
+any holomorphic submersion $b:Y^m\to X^n$. Internally construct an
+intrinsic source recipe $Q$ with its own whole elementary geometry,
+actual Cartesian blowup square, full strict-carrier and shifted
+intrinsic-dimension-part squares and actual upper submersion.
+
+Every independently chosen intrinsic source recipe $S$ has its own
+whole SNC boundary and is uniquely isomorphic to this SAME $Q$ over
+$Y$, with exact filtered whole-boundary and every-subset strict
+squares. The induced upper map to $T$ is holomorphic submersive and
+has the true entire holomorphic Cartesian universal property. Its
+own strict carrier is a closed submanifold with normal crossings
+against its own entire final boundary. Thus the elementary arrow is
+independent of raw empty padding and all auxiliary canonical choices.
+No source compactness, source history or comparison certificate is
+an original input. No particular normalized finite history is claimed.
+\end{theorem}
+\begin{proof}
+Apply the genuine original compact nonpure producer to the original
+analytic carrier and boundary. Its actual raw tree uses the whole
+intrinsic dimension list, so it is an intrinsic recipe. All its whole
+elementary geometry is exactly the geometric output recorded above.
+For any given smooth $b$, take the actual source supplied by that
+same producer. Its actual raw shifted dimension list has exactly
+the intrinsic source nonempty filter, by the proved whole intrinsic
+dimension-list pullback theorem. Thus it is a genuine intrinsic
+source recipe even when $Y$ is noncompact or empty. Its own whole
+elementary geometry, actual upper submersion and Cartesian strict
+squares are those of the same actual source.
+
+For any independent source recipe $S$, apply the preceding choice
+theorem to it and $Q$. The resulting actual biholomorphism transports
+the whole strict carrier, hence its closed-submanifold property.
+The preceding SNC lemma gives its own whole final SNC list.
+Filter only empty entries in the actual boundary identity; normal
+crossings ignores precisely those entries. Genuine smooth inverse-image
+normal crossings therefore gives normal crossings with $S$'s OWN
+whole final boundary. Compose the actual upper map of $Q$ with this
+actual biholomorphism to obtain a genuine upper submersion for $S$.
+For every holomorphic cone, the genuine universal lift to $Q$ followed
+by the inverse biholomorphism is the unique lift to $S$. This proves
+the entire Cartesian universal property, not merely a commuting
+point square. Projection uniqueness gives the unique comparison.
+This is final-arrow canonicity for the actual intrinsic algorithm;
+it uses no fictitious source compactness or assumed filtered history.
+\end{proof}

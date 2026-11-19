@@ -1,0 +1,218 @@
+\section{Actual coordinate-monomial representatives and finite ideal jet columns}
+\label{sec:hironaka-holomorphic-jet-monomial-span}
+
+Work in the entire actual holomorphic local ring $R=\mathcal O_{\mathbb C^n,0}$
+with its original constant-germ complex algebra structure and actual maximal
+ideal $\mathfrak m$. This is the next genuine producer for the literal
+Hilbert--Samuel point values of \cite{bierstone-milman97-invent-math},
+Remark~1.3. The words used below may repeat variables and may represent the
+same commutative monomial. They form a finite spanning family; no independence
+or supplied Taylor-representative certificate is asserted.
+
+\begin{definition}[Actual finite coordinate words]
+\label{hir:actual-finite-coordinate-words}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.coordinateGerm,Hironaka.HironakaHolomorphicJetMonomialSpan.monomialIndex,Hironaka.HironakaHolomorphicJetMonomialSpan.fintypeMonomialIndex,Hironaka.HironakaHolomorphicJetMonomialSpan.wordMonomial,Hironaka.HironakaHolomorphicJetMonomialSpan.monomialSpan}
+\leanok
+\uses{hir:actual-finite-holomorphic-linear-jet}
+Let $z_i$ denote the actual germ of the original coordinate function.
+For $q\ge0$, use the finite index set of pairs $(j,w)$ with $j<q$ and
+$w:\{0,\ldots,j-1\}\to\{0,\ldots,n-1\}$. Associate the genuine product
+$z_w=\prod_{k<j}z_{w(k)}$ and let $P_q$ be their complex linear span in $R$.
+The empty word represents $1$. If $q=0$, the index set is empty and $P_q=0$.
+\end{definition}
+\begin{proof}
+There are finitely many degrees $j<q$; for each one, there are finitely
+many maps between the two finite coordinate index sets. Their finite
+disjoint union is therefore finite. The products and span are formed in
+the same entire original ring. This includes $n=0$ and the unique empty
+word of degree zero.
+\end{proof}
+
+\begin{lemma}[Original Hadamard decomposition of every whole germ]
+\label{hir:actual-whole-germ-hadamard-decomposition}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.exists_coordinate_decomposition}
+\leanok
+\uses{bex:hadamard,hir:actual-finite-coordinate-words}
+Every actual germ $g\in R$ has genuine whole germs $h_i$ such that
+$g=g(0)+\sum_{i<n}z_i h_i$.
+\end{lemma}
+\begin{proof}
+Choose a genuine original holomorphic representative $f$ of $g$.
+The function $f-f(0)$ vanishes on the zero-dimensional coordinate plane.
+The original holomorphic coordinate-plane Hadamard lemma therefore produces
+original holomorphic functions $H_i$ on a neighbourhood of zero with
+$f-f(0)=\sum_i z_iH_i$ there. Pass these same original functions to actual
+germs. Germ formation preserves every finite sum and product and sends the
+constant $f(0)$ to the constant germ $g(0)$. Rearranging the resulting actual
+ring identity gives the stated equality. No decomposition is an input.
+\end{proof}
+
+\begin{lemma}[Coordinate products raise the genuine finite span]
+\label{hir:actual-coordinate-word-span-step}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.one_mem_monomialSpan,Hironaka.HironakaHolomorphicJetMonomialSpan.coordinate_mul_mem_monomialSpan}
+\leanok
+\uses{hir:actual-finite-coordinate-words}
+The constant $1$ belongs to $P_{q+1}$, and multiplication by any original
+coordinate sends $P_q$ into $P_{q+1}$.
+\end{lemma}
+\begin{proof}
+The empty word has length zero, hence lies among words of length less than
+$q+1$. If a word has length $j<q$, prefixing a coordinate gives a word of
+length $j+1<q+1$, whose actual product is $z_i z_w$. Multiplication by $z_i$
+is an actual complex linear map on $R$. Thus this generator calculation
+extends by linear-span induction to every element of $P_q$.
+\end{proof}
+
+\begin{theorem}[Internally produced monomial representatives]
+\label{hir:actual-whole-germ-finite-monomial-representative}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.exists_monomial_representative}
+\leanok
+\uses{hir:actual-whole-germ-hadamard-decomposition,hir:actual-coordinate-word-span-step,hir:whole-point-power-ring-dictionary}
+For every $g\in R$ and $q\ge0$, there is an actual $p\in P_q$ with
+$g-p\in\mathfrak m^q$.
+\end{theorem}
+\begin{proof}
+Induct on $q$. For $q=0$, choose $p=0$ since $\mathfrak m^0=R$.
+For the next degree use the proved original Hadamard decomposition
+$g=g(0)+\sum_i z_i h_i$. The induction hypothesis internally produces
+$p_i\in P_q$ with $h_i-p_i\in\mathfrak m^q$. Set
+$p=g(0)+\sum_i z_i p_i$. The empty word and the preceding coordinate-span
+lemma put $p$ in $P_{q+1}$. Each $z_i$ is in the actual maximal ideal,
+because the original coordinate vanishes at zero. Thus every genuine
+product $z_i(h_i-p_i)$ lies in $\mathfrak m\mathfrak m^q=\mathfrak m^{q+1}$.
+Their finite sum equals $g-p$ in the actual ring, proving the claim.
+The argument includes the zero-coordinate case, when the sum is empty.
+\end{proof}
+
+\begin{theorem}[Actual whole finite-jet image]
+\label{hir:actual-whole-jet-monomial-span}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.range_finiteJet_eq_span_monomials}
+\leanok
+\uses{hir:actual-whole-germ-finite-monomial-representative,hir:actual-finite-linear-jet-kernel}
+The image of the true $q$th complex linear jet of the entire ring is exactly
+the complex span of the jets of this finite family of actual coordinate words.
+\end{theorem}
+\begin{proof}
+For an arbitrary actual germ, the preceding theorem produces a finite
+monomial representative with remainder in the exact kernel $\mathfrak m^q$.
+Its jet therefore equals the jet of that representative, which lies in the
+span of the actual word jets by linearity. Conversely each word jet is in
+the actual linear-map range, and that range is a complex subspace. This gives
+both inclusions, not merely a dimension bound.
+\end{proof}
+
+\begin{theorem}[Actual finite Macaulay columns for a whole generated ideal]
+\label{hir:actual-whole-generated-ideal-finite-jet-columns}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.map_span_ideal_finiteJet_eq_monomial_columns}
+\leanok
+\uses{hir:actual-whole-germ-finite-monomial-representative,hir:actual-finite-linear-jet-kernel}
+For a finite family of actual original germs $G_i$, the jet image of the
+entire ring ideal they generate equals the complex span of the actual
+finite columns $j_q(z_wG_i)$, where $w$ has length less than $q$.
+\end{theorem}
+\begin{proof}
+Every element of the actual ring ideal has a finite sum expression
+$\sum_i a_iG_i$ with whole-ring coefficients $a_i$. The internally produced
+representative theorem replaces every $a_i$ by $p_i\in P_q$ with remainder
+in $\mathfrak m^q$. The maximal-ideal power is an actual ideal, so multiplying
+each remainder by the actual $G_i$ and summing remains in $\mathfrak m^q$.
+The proved exact jet kernel removes this remainder. Complex linearity and
+span induction on every $p_i$ put the jet of $\sum_i p_iG_i$ into the stated
+finite column span. Conversely every actual word product $z_wG_i$ belongs
+to the entire generated ideal. Its jet lies in the ideal's actual image,
+a complex subspace, so the finite column span is contained in that image.
+No supplied jet-image or polynomial-representative certificate is used.
+\end{proof}
+
+\begin{theorem}[Internally generated columns of every original ideal]
+\label{hir:actual-every-original-ideal-finite-jet-columns}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.exists_original_generators_jet_columns}
+\leanok
+\uses{hir:actual-whole-generated-ideal-finite-jet-columns,lag:germ-noetherian}
+For every original actual ideal $I\subseteq R$ there is a finite family of
+original functions $G_i$, holomorphic near zero, whose entire germs generate
+$I$. For every $q$, the whole jet image of $I$ is exactly the complex span of
+the finitely many actual columns $j_q(z_w[G_i])$ above.
+\end{theorem}
+\begin{proof}
+The genuine Weierstrass-division Noetherian theorem applies to the entire
+original germ ring. It internally provides a finite family of actual germs
+generating the given $I$. Every one of those germs has a genuine original
+holomorphic representative; choose these finitely many original functions.
+Replacing each generating germ by its equal original representative
+preserves the entire generated ring ideal. Apply the preceding whole-ideal
+column theorem for every $q$ to this same internally produced family.
+Thus original representative existence, ideal generation and exact finite
+jet columns are outputs, not additional hypotheses.
+\end{proof}
+
+\begin{theorem}[Exact whole quotient rank]
+\label{hir:actual-whole-point-quotient-jet-rank}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.finrank_quotient_eq_jet_rank_sub_ideal_image_rank}
+\leanok
+\uses{hir:actual-finite-linear-jet-kernel,hir:actual-point-quotient-finite-dimensional}
+Let $V_q$ be the actual whole finite-jet image of $R$ and let $W_q$ be
+the image of any original ideal $I$. Then
+$\dim_{\mathbb C}R/(I+\mathfrak m^q)=\dim_{\mathbb C}V_q-\dim_{\mathbb C}W_q$.
+\end{theorem}
+\begin{proof}
+Restrict the genuine jet map to its actual image $V_q$, and follow it by
+the quotient map to $V_q/W_q$. Both maps are surjective. A whole germ
+maps to zero precisely when its jet equals the jet of some actual member
+of $I$. By the proved exact kernel, this holds precisely when that germ
+is an element of $I+\mathfrak m^q$. The actual first isomorphism theorem
+therefore identifies the entire original quotient with $V_q/W_q$.
+The true finite-dimensional quotient dimension formula gives
+$\dim(V_q/W_q)+\dim W_q=\dim V_q$. Viewing $W_q$ inside $V_q$ or inside
+the original jet target gives the same dimension by the injective actual
+subtype map. Rearranging in the natural numbers gives the asserted
+subtraction, including the whole-ideal and zero-degree cases.
+\end{proof}
+
+\begin{definition}[Actual finite Macaulay linear map]
+\label{hir:actual-finite-macaulay-linear-map}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.macaulayMap,Hironaka.HironakaHolomorphicJetMonomialSpan.range_macaulayMap}
+\leanok
+\uses{hir:actual-whole-generated-ideal-finite-jet-columns}
+The actual finite Macaulay map sends complex coefficient vectors indexed
+by $(w,i)$ to $\sum_{w,i}c_{w,i}j_q(z_wG_i)$. Its actual linear-map range
+is exactly the proved whole ideal jet image.
+\end{definition}
+\begin{proof}
+This is the genuine linear combination map of the finite column family.
+Its image is exactly the complex span of those original columns, by the
+linear-span definition and the finite linear combination universal property.
+The preceding whole-generated-ideal theorem identifies that span with
+the true image of the entire original ring ideal.
+\end{proof}
+
+\begin{theorem}[Literal Hilbert--Samuel value from actual Macaulay rank]
+\label{hir:actual-hilbert-samuel-macaulay-rank}
+\lean{Hironaka.HironakaHolomorphicJetMonomialSpan.hilbertSamuelValue_eq_macaulay_rank,Hironaka.HironakaHolomorphicJetMonomialSpan.exists_original_generators_macaulay_rank}
+\leanok
+\uses{hir:actual-whole-point-quotient-jet-rank,hir:actual-finite-macaulay-linear-map,hir:actual-hilbert-samuel-point-value}
+For the entire actual ideal generated by the original finite family $G_i$,
+its literal value at $\ell$ is
+$H_I(\ell)=\dim V_{\ell+1}-\operatorname{rank}M_{\ell+1,G}$.
+\end{theorem}
+\begin{proof}
+Unfold the literal whole-ring quotient defining $H_I(\ell)$.
+Apply the preceding exact quotient-rank theorem with $q=\ell+1$.
+The actual range equality for the original Macaulay map replaces
+$\dim W_q$ by its genuine range dimension. Thus every term is the rank
+of an actual finite complex linear map, with no supplied presentation
+or transformation certificate. For any given original ideal, the preceding internal Noetherian generator
+producer supplies original functions and their exact whole ideal equality.
+Applying the same rank identity for every $\ell$ gives that same original
+family as an output, together with the literal rank formula for all its
+Hilbert--Samuel values. No generating family is required as an extra input.
+\end{proof}
+
+\begin{remark}
+These are literal whole-ring monomial representatives and whole-ideal jet
+columns. Turning local coherent generators into holomorphically varying matrix
+columns and exact analytic Hilbert--Samuel rank thresholds is the next producer. A normally
+flat smooth centre, a semicoherent Hilbert--Samuel transformation
+presentation, higher-entry descent and finite higher-codimension resolution
+are not consequences yet. General G8 remains open.
+\end{remark}

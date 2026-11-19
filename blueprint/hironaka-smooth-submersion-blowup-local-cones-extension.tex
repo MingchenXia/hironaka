@@ -1,0 +1,112 @@
+\section{Actual holomorphic cones lift locally even entirely in the exceptional divisor}
+
+\begin{lemma}[The actual matching-chart lift of every whole compatible cone]
+\label{hir:submersion-blowup-local-cone-entire-join}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLocalCones.exists_matching_chart_cone,Hironaka.HironakaSmoothSubmersionBlowupLocalCones.matching_chart_joint_point_unique}
+\uses{hir:submersion-adapted-blowup-entire-monomial-dictionary,hir:submersion-adapted-blowup-actual-smooth-chart-map}
+Consider actual source/target blowup charts $c',c$, with true block normal-index and pivot identities and the whole source-to-target flattening coordinate identity on the source flat domain. Genuine matching adapted charts are a special case. On an actual manifold $P$, let $u:P\to Y$ and $v:P\to\mathrm{Bl}_C X$
+be holomorphic, with $fu=\pi v$. On the genuine open where $u$ lies in the
+source flat domain and $v$ lies in the target monomial chart, internally
+construct a holomorphic map into the actual source blowup chart, whose
+projection is $u$ and whose flat-chart map is $v$. If the actual parameter projection maps the source chart target into the target chart target, two points in that SAME source chart with equal base and flat-chart image are equal. Thus the lift is unique among maps with image in that SAME chart and these whole identities.
+\end{lemma}
+\begin{proof}
+Write $U=\Psi e_y u$ and $V=c.\mathrm{toFun}\,v$ on this true open. Both are
+holomorphic there, by their genuine chart and flattening domains. The actual
+whole source-coordinate dictionary and the original compatible square give
+$\operatorname{drop}U=\sigma_j V$ at every point. Form the literal parameter
+map $w=\mathrm{split}^{-1}(\operatorname{fibre}U,V)$. The actual block monomial identities and original square give $\sigma'_j w=U$. The original $u$ lies in the source flat domain, so $U$ belongs to its genuine flattening target; therefore the entire image of $w$ lies in the actual source monomial-chart target. Genuine continuous-linear maps make $w$ holomorphic. The actual
+block/monomial identities give $\sigma'_j w=U$ and
+$\operatorname{drop}w=V$. Compose with the genuine entire holomorphic inverse
+of the source blowup chart to obtain $g$. The actual flattening inverse
+identities prove $\pi'g=u$; the true target chart inverse gives
+$\mathrm{flatChartMap}\,g=v$. This uses no division by the exceptional
+parameter. For two points in the SAME chart, equal source projections give equal monomial parameters. The fibre projection commutes with this genuine block monomial, so their fibre parameters agree. The parameter-projection target containment and true target chart right-inverse turn equality of the flat-chart images into equality of the dropped parameters. The actual linear split is injective, so these two parameter vectors are equal. The genuine source-chart left-inverse gives equality of the actual points, hence uniqueness of maps with these whole identities. This is uniqueness inside an actual chosen chart, not yet global
+joint-point uniqueness.
+\end{proof}
+
+\begin{theorem}[Original geometry internally lifts every cone near an exceptional point]
+\label{hir:submersion-blowup-local-cone-original-exceptional}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLocalCones.exists_canonical_exceptional_local_cone}
+\uses{hir:submersion-blowup-local-cone-entire-join,hir:submersion-adapted-actual-product-shrink,hir:submersion-global-lift-whole-chart-equality}
+ONLY original global submersion $f:Y^{n+r}\to X^n$, closed smooth nowhere-dense
+centre $C$, and genuine holomorphic compatible cone $u:P\to Y$,
+$v:P\to\mathrm{Bl}_C X$ internally give a local holomorphic lift near any
+actual $p_0\in P$ with $f(u p_0)\in C$. The neighbourhood is a true open
+containing $p_0$, its lift goes into the actual source blowup, and BOTH whole
+projection identities hold on that entire neighbourhood.
+\end{theorem}
+\begin{proof}
+Set $y=u p_0$ and $z=v p_0$. The genuine original square identifies the actual
+base of $z$ with $fy$. Internally choose the genuine centre flattening at $fy$.
+The actual non-tangent direction of $z$ supplies its true target pivot. The
+actual submersion chart producer supplies the SAME matching source chart and
+product target; restricting the target flattening preserves the selected
+pivot coordinate, so the target monomial chart contains $z$. The source
+flattening contains $y$ by its true central inverse identity. The intersection
+of the inverse images of these two actual open domains under the original
+holomorphic $u,v$ is therefore a true open neighbourhood of $p_0$.
+Apply the preceding actual entire join construction on this SAME open. Its
+source projection is $u$. Entire universal-chart equality identifies the
+actual canonical lift $G_0$ with the flat-chart map on the entire source
+chart, hence $G_0g=v$ throughout this SAME neighbourhood, including when the
+ENTIRE original cone maps into the exceptional divisor. No chosen lift,
+product-domain, chart-coverage, local-lift or Cartier output certificate is a
+caller hypothesis.
+\end{proof}
+
+\begin{theorem}[The original off-centre cone has its actual local lift]
+\label{hir:submersion-blowup-local-cone-original-off}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLocalCones.exists_canonical_off_local_cone}
+\uses{hir:submersion-blowup-actual-complement-biholomorphism,hir:submersion-blowup-lift-actual-lift}
+For the same original data and an actual point with $f(u p_0)\notin C$, a true
+open neighbourhood of that point has a holomorphic source blowup lift
+satisfying BOTH entire original cone projection identities.
+\end{theorem}
+\begin{proof}
+Use the actual open inverse image of the source centre complement under $u$.
+It contains $p_0$ by the original off-centre assumption. The source primitive
+blowup internally gives the true complement biholomorphism, holomorphic in
+both directions on its whole actual complement. Compose its genuine inverse
+with the corestricted original $u$ to construct the actual holomorphic lift
+$g$. Its projection is $u$ on the entire open. The true universal square and
+the original compatible cone square give equal bases for $G_0g$ and $v$.
+Those bases avoid $C$, so actual off-centre point uniqueness gives $G_0g=v$
+on the entire open. Empty complements require no nonexistent witness: the
+specified actual point supplies the true nonempty neighbourhood when needed.
+\end{proof}
+
+\begin{theorem}[Every actual cone is locally lifted for arbitrary genuine choices]
+\label{hir:submersion-blowup-local-cone-arbitrary-choices}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupLocalCones.exists_actual_local_cone}
+\uses{hir:submersion-blowup-local-cone-original-exceptional,hir:submersion-blowup-local-cone-original-off,hir:submersion-blowup-choice-actual-conjugate,hir:submersion-monomial-dimension}
+ONLY original submersion $f$ and ANY primitive genuine target/source blowup
+choices, together with genuine holomorphic compatible cone $u,v$, internally
+give a true local holomorphic source lift at EVERY actual point of $P$, with
+both whole original projection identities. The cone may lie entirely in the
+exceptional divisor; its pulled-back centre ideal is not required invertible.
+\end{theorem}
+\begin{proof}
+For arbitrary original dimensions $m,n$, the specified actual reference
+point gives $y=u p_0$. The actual original submersion at $y$ internally
+proves $n\leq m$, hence $m=n+r$ for a genuine natural $r$. No caller
+dimension bound is assumed, and an empty test manifold has no reference
+point to lift. Internally construct the actual identity-base comparisons $a,b$ with the
+canonical blowups and their whole lift formula $G=a^{-1}G_0b$. The actual
+canonical cone is $u,av$ and is holomorphic; its whole compatible square
+follows from the original square and the actual comparison projection.
+At each original point, centre membership decides the preceding exceptional
+or off-centre producer. Let $g_0$ be its actual local canonical lift on its
+actual produced neighbourhood. Then $g=b^{-1}g_0$ is holomorphic there, and
+the genuine comparison projection and whole conjugation identities give
+$\pi'g=u$ and $Gg=v$ on that entire neighbourhood. Every chart, neighbourhood,
+comparison and lift is internally generated. This local existence theorem
+does NOT assume or claim global joint-point uniqueness, overlap equality for
+arbitrary chosen lifts, a glued global lift, or the full Cartesian universal
+property. Those are the next independent mathematical obligations; higher
+invariant/canonical-driver functoriality is also still OPEN.
+\end{proof}

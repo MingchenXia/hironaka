@@ -1,0 +1,88 @@
+\section{Literal analytic standard monomials over the centre base}
+\label{sec:hironaka-actual-standard-normal-bases}
+Let $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+$N=(z_1,\ldots,z_t)$, $M=\mathfrak m_B R$, and $T:R\to\mathbb C[[u,z]]$ be the actual Taylor map.
+For an arbitrary original ideal $I\subset R$, write $K_f=T(I+M)\mathbb C[[u,z]]$.
+The finite index $S_q$ consists of the exponents of total degree $<q$ outside the genuine degree-first diagram of $K_f$.
+All monomial lifts below are the literal analytic coordinate products, rather than unspecified lifts of residue classes.
+
+\begin{theorem}[Prescribed lifts of the actual complex residue basis]
+\label{hir:actual-prescribed-complex-basis-lift}
+\uses{hir:actual-base-residue-field,hir:actual-base-residue-tensor}
+\lean{Hironaka.HironakaActualStandardNormalBases.exists_basis_of_complex_basis}
+\leanok
+If $Q$ is finitely presented and flat over $B$, and a prescribed family $v_i\in Q$ has
+$1\otimes v_i$ as a complex basis of $\mathbb C\otimes_BQ$, then there is a $B$-basis $b$ with $b_i=v_i$ for every $i$.
+\end{theorem}
+\begin{proof}
+Origin evaluation gives the proved field equivalence $e:\kappa(B)\simeq\mathbb C$.
+The genuine tensor equivalence $\kappa(B)\otimes_BQ\to\mathbb C\otimes_BQ$ sends $a\otimes v$ to $e(a)\otimes v$;
+it is linear after restricting the complex action through $e$.
+Thus the displayed complex basis transports to the literal family $1\otimes v_i$ over $\kappa(B)$.
+Flatness makes $\mathfrak m_B\otimes_BQ\to Q$ injective.
+The local finite-presentation basis-lifting theorem applies to this prescribed family and gives $b_i=v_i$.
+In particular it does not replace the displayed lifts by other elements with the same residues.
+\end{proof}
+
+\begin{theorem}[Actual complex fibre standard monomial basis]
+\label{hir:actual-normal-fibre-standard-basis}
+\uses{hir:relative-normal-original-fibre-tensor-algebra,hir:relative-normal-original-fibre-maximal-power,hir:actual-original-formal-whole-jet-algebra-equivalence,hir:actual-formal-standard-monomial-whole-jet-basis}
+\lean{Hironaka.HironakaActualStandardNormalBases.normalFibreFormalJetEquiv,Hironaka.HironakaActualStandardNormalBases.normalFibreFormalJetEquiv_tmul_mk,Hironaka.HironakaActualStandardNormalBases.complexStandardMonomialBasis,Hironaka.HironakaActualStandardNormalBases.complexStandardMonomialBasis_apply}
+\leanok
+For every $I,q$, the actual algebra maps identify
+$\mathbb C\otimes_B R/(I+N^q)$ with $\mathbb C[[u,z]]/(K_f+(u,z)^q)$, preserving each numerator as its actual Taylor series.
+The literal analytic monomials indexed by $S_q$ therefore give a complex basis of this residue tensor.
+\end{theorem}
+\begin{proof}
+The whole actual fibre tensor equivalence has target $R/(I+M+N^q)$.
+The proved ideal identity $I+M+N^q=I+M+\mathfrak m_R^q$ identifies this with the whole point quotient of the same ideal $I+M$.
+The genuine original/formal whole-jet equivalence then gives the stated formal quotient, sending $[g]$ to $[Tg]$.
+The existing formal standard-monomial equivalence has basis vectors $[u^\beta z^\gamma]$.
+Its pullback through these actual equivalences is $1\otimes[u^\beta z^\gamma]$, since Taylor sends each analytic monomial to that same formal monomial.
+No freeness of the original $B$-module is used in this residue assertion, including $q=0$.
+\end{proof}
+
+\begin{theorem}[The standard labels are genuine normal labels]
+\label{hir:actual-fibre-standard-normal-labels}
+\uses{hir:actual-normal-fibre-standard-basis}
+\lean{Hironaka.HironakaActualStandardNormalBases.tangentVariable_mem_fibreFormalIdeal,Hironaka.HironakaActualStandardNormalBases.standardIndex_tangent_zero,Hironaka.HironakaActualStandardNormalBases.analyticMonomial_standardIndex_eq_normal,Hironaka.HironakaActualStandardNormalBases.normalStandardIndex,Hironaka.HironakaActualStandardNormalBases.normalStandardIndexEquiv}
+\leanok
+Every $\alpha\in S_q$ has zero tangent block.
+Consequently $S_q$ is canonically equivalent to the normal exponents $\gamma$ of degree $<q$ with $(0,\gamma)\notin\Gamma(K_f)$, and its analytic monomials are literally the original normal coordinate products $z^\gamma$.
+\end{theorem}
+\begin{proof}
+Each tangent coordinate $u_i$ is the actual tangent pullback of an element of $\mathfrak m_B$, so its Taylor variable lies in $K_f$.
+Its exponent $e_i$ is in the actual diagram. If $\alpha_i>0$, upperness puts $\alpha$ in that diagram, contradicting standardness.
+Thus all tangent exponents vanish. Splitting the two actual exponent blocks identifies $\alpha$ with $(0,\gamma)$; the total degree then equals the normal degree.
+These explicit splitting and joining maps are inverse and preserve the original monomial products, including empty coordinate blocks and $q=0$.
+\end{proof}
+
+\begin{theorem}[Literal analytic standard monomial bases]
+\label{hir:actual-normal-truncation-standard-basis}
+\uses{hir:actual-prescribed-complex-basis-lift,hir:actual-normal-fibre-standard-basis,hir:actual-fibre-standard-normal-labels}
+\lean{Hironaka.HironakaActualStandardNormalBases.exists_standardMonomialBasis,Hironaka.HironakaActualStandardNormalBases.exists_normalStandardMonomialBasis}
+\leanok
+If the whole actual normal truncation $R/(I+N^q)$ is finite free over $B$, then it has a $B$-basis indexed by $S_q$, whose vectors are the literal analytic monomial classes. Reindexing by the proved normal labels gives precisely the classes $[z^\gamma]$ as a $B$-basis.
+\end{theorem}
+\begin{proof}
+Finite freeness implies finite presentation and flatness.
+Apply the prescribed-lift theorem to the literal analytic monomial family and its proved complex residue basis.
+Every resulting basis vector equals exactly the specified analytic quotient class. Reindex with the preceding explicit normal-label equivalence; the monomial equality gives the precise normal coordinate product at every label.
+\end{proof}
+
+\begin{theorem}[Original constant-HS centre supplies all literal bases]
+\label{hir:actual-original-centre-standard-monomial-bases}
+\uses{hir:actual-original-centre-normal-layers-finite-free,hir:actual-normal-truncation-standard-basis}
+\lean{Hironaka.HironakaActualStandardNormalBases.exists_original_hs_constant_centre_standard_monomial_bases}
+\leanok
+The original coherent ideal and regular constant-Hilbert--Samuel centre admit one genuine flattening $\Phi$ and the same origin ideal $I_0$ such that all $R/(I_0+N^q)$ have the preceding literal bases.
+\end{theorem}
+\begin{proof}
+Choose the single flattening and original origin ideal from the proved all-degree original normal-layer freeness producer.
+The actual short exact truncation sequences and actual zero quotient give all normal truncations free by induction; they are finite since they are quotients of the genuine finite normal-monomial ambient truncation.
+For each $q$ apply the preceding theorem to that same $I_0$.
+No second existential chart, flatness, basis, initial-diagram, or compatibility certificate is supplied.
+\end{proof}
+
+This produces the actual fibre-diagram monomial bases.
+Comparison of this diagram with the original ideal diagram, arbitrary-ideal relative formal quotient transport, and the whole reduced-vertex normal-power assertion remain subsequent results; no Bennett or general G8 closure follows from the basis statement alone.

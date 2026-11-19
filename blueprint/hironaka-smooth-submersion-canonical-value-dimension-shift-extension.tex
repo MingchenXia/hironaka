@@ -1,0 +1,111 @@
+\section{Actual ambient dimension shifts of the original canonical value types}
+
+The original invariant value types and gamma formulas are unchanged.
+For an actual smooth map $Y^m\to X^n$, its fibre dimension is $t=m-n$.
+Old monomial keys have first coordinate $n-|K|$, so their actual pulled
+values have first coordinate $(n-|K|)+t$. Their sum and complete colex
+indexed set stay literal. Numerical equality across dimensions is therefore
+not the correct desired conclusion.
+
+\begin{lemma}[The actual ambient key and bottom-preserving value shift]
+\label{hir:smooth-actual-value-ambient-key-shift}
+\lean{Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.dimensionKey,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.strictMono_dimensionKey,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.dimensionValue,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.strictMono_dimensionValue,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.dimensionKey_key}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:monomial-invariant}
+Construct $D_t$ on the original monomial value triples by adding $t$ to
+their first coordinate and retaining the entire second coordinate and
+whole colex member set. Its extension to WithBot retains bottom. Both
+maps are strictly increasing. For every actual indexed $K$ with $|K|\le n$,
+$D_t(\operatorname{key}_n(a,K))=\operatorname{key}_{n+t}(a,K)$.
+\end{lemma}
+\begin{proof}
+Addition of $t$ is strictly increasing and reflects equality on natural
+numbers. Split the literal lexicographic order into unequal first
+coordinates and equal first coordinates; the former is preserved by
+addition, while the latter retains precisely the entire original remaining
+lexicographic pair. Bottom remains the unique least WithBot element,
+so this extension is also strictly increasing. For an actual key, the
+bound $|K|\le n$ gives $(n+t)-|K|=(n-|K|)+t$. The other two original
+coordinates are identical, proving the entire key equality.
+\end{proof}
+
+\begin{theorem}[The whole original feasible maximum and actual smooth gamma]
+\label{hir:smooth-actual-value-whole-gamma-dimension}
+\lean{Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.inv_dimension_shift,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.gammaAlong_preimage_dimension_shift}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-actual-value-ambient-key-shift,hir:smooth-relative-monomial-whole-dictionary,hir:snc-basic}
+If the actual through-member set $S$ has $|S|\le n$, the entire original
+finite feasible maximum in dimension $n+t$ is WithBot.map$(D_t)$ of the
+whole original maximum in dimension $n$. Consequently the literal gammaAlong
+of an actual smooth pullback of an original coherent marked record with
+SNC boundary is this same actual dimension shift of its original gammaAlong.
+\end{theorem}
+\begin{proof}
+The whole feasible family is unchanged because its subsets, exponent sums
+and mark are unchanged. Each actual feasible $K$ is contained in $S$,
+so its true cardinality is at most $n$ and the preceding complete key
+formula applies. If the feasible family is empty, both actual maxima are
+bottom. Otherwise choose an actual original top set. Strict monotonicity
+preserves domination of every feasible key, so that same actual indexed
+set gives the pulled maximum and its exact dimension shift. For a genuine
+smooth map, the previously proved original exponent and indexed-member
+dictionaries supply precisely the same entire feasible family. Original
+SNC bounds the actual through-member cardinality internally, and the actual
+submersion supplies $m=n+(m-n)$. Apply the finite maximum formula with
+these original data. No gamma/value comparison is a caller premise.
+\end{proof}
+
+\begin{theorem}[Explicit strictly increasing maps of all original value types]
+\label{hir:smooth-actual-value-recursive-dimension-maps}
+\lean{Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.seedDimension,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.strictMono_seedDimension,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.stepDimensionMap,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.strictMono_stepDimensionMap,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.generalDimensionMap,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.strictMono_generalDimensionMap,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.familyDimensionMap,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.strictMono_familyDimensionMap,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.familyDimensionEmbedding}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-actual-value-ambient-key-shift,hir:canonical-centres}
+For each actual $t,k$, construct a strictly increasing map
+$F_{t,k}:\operatorname{ValTy}(k)\to\operatorname{ValTy}(t+k)$.
+At $k=0$ use the natural strict seed: identity when $t=0$, and the general
+value with outer coordinate equal to its input and monomial branch bottom
+when $t>0$. At $k+1$, preserve the original nonmonomial-order coordinate,
+apply the bottom-preserving $D_t$ to the monomial branch, and retain the
+original Step One level while applying WithTop.map$(F_{t,k})$ to its lower
+value. All actual top, bottom, branch and indexed colex information is retained.
+\end{theorem}
+\begin{proof}
+The seed is strictly increasing in its literal outer coordinate.
+For the successor, first lift $F_{t,k}$ through the actual WithTop lower
+entry and retain the original Step One level; the two literal lexicographic
+cases prove strict monotonicity. Lift that map through the general branch's
+WithTop and use the preceding WithBot monomial map on the other branch.
+The two equal-branch cases preserve order by these proved maps; every
+monomial branch remains below every nonmonomial branch. Retain the outer
+nonmonomial order and use its two literal lexicographic cases. Induction
+constructs the actual function and proves it strictly increasing at all $k$.
+No recursive invariant comparison property is assumed.
+\end{proof}
+
+\begin{corollary}[Actual value order reflection and genuine monomial-stage normalization]
+\label{hir:smooth-actual-value-original-stage-normalization}
+\lean{Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.familyDimensionMap_comparisons,Hironaka.HironakaSmoothSubmersionCanonicalValueDimensionShift.IsActualTowerPullback.gammaAlong_stage_dimension_shift}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:smooth-actual-value-recursive-dimension-maps,hir:smooth-actual-value-whole-gamma-dimension,hir:submersion-relative-control-joint-tower}
+The constructed original value maps reflect strict order, weak order and
+equality. At every original actual Cartesian test-history stage, the whole
+actual gammaAlong is the explicit ambient shift of the original stage
+gammaAlong, with all original indexed members retained.
+\end{corollary}
+\begin{proof}
+Strict monotonicity between linear orders reflects each comparison. At an
+actual Cartesian test stage, original well-formedness and original testness
+internally supply coherent stage ideals and the entire SNC stage boundary.
+The genuine whole marked-stage dictionary and the preceding original smooth
+gamma producer give the exact normalized monomial value. These are actual
+record/finite maximum constructions, with no stage-value certificate.
+\end{proof}
+
+These explicit maps and actual monomial value formulas are prerequisites
+for the full higher smooth comparison. They do not assert that the entire
+actual invFamily values are already related by these maps, nor prove the
+independent chosen-contact comparison, canonical driver or sheaf flatness.

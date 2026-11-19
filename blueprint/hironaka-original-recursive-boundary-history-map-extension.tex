@@ -1,0 +1,131 @@
+\section{Actual canonical initial-boundary compatibility at every recursive depth}
+
+Keep every original indexed member and entire original canonical history.
+The recursive chronological history maps differ from the uniform metadata
+insertion maps on arbitrary symbols. Their equality on ACTUAL canonical
+values is proved from the true lower canonical data and original empty
+prefixes. This is the ordered-boundary recursive route of
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}, adapted by
+constructing each lower input internally from the original history.
+
+\begin{lemma}[Recursive chronological maps on unchanged whole value types]
+\label{hir:original-recursive-chronological-history-value-maps}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-invariant-empty-map,hir:original-invariant-empty-map-strict,hir:original-short-history-step-map}
+\lean{Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveHistoryShift,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveStepShift,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveHistoryShift_succ,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.strictMono_recursiveHistoryShift,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.strictMono_recursiveStepShift,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveHistoryShiftEmbedding,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveStepShiftEmbedding,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveHistoryShift_zero,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.recursiveHistoryShift_one}
+\leanok
+On the unchanged original types define
+\[
+ H_{0,j}=\mathrm{id},\qquad
+ S_{k,j}(\ell,v)=(\ell,\operatorname{map}(H_{k,j-\ell})(v)),\qquad
+ H_{k+1,j}=\operatorname{generalShift}(j,S_{k,j}),
+\]
+where subtraction is clamped at zero and the masked map fixes infinity.
+Every $H_{k,j}$ and $S_{k,j}$ is strict and therefore an order embedding.
+For every depth, $H_{k,0}=\operatorname{shiftFamily}(k,0)$; also
+$H_{1,j}=\operatorname{shiftFamily}(1,j)$.
+No assertion on actual history values follows from these algebraic facts alone.
+\end{lemma}
+\begin{proof}
+Induct on $k$, simultaneously for all natural indices. At zero the family
+map is the identity. For the Step One map, strict first-coordinate
+inequalities are retained. If both first coordinates equal $\ell$, the
+same index $j-\ell$ occurs on both lower coordinates and strictness of
+$H_{k,j-\ell}$, extended by infinity, reflects the lower inequality.
+The established strict general map therefore makes $H_{k+1,j}$ strict.
+At index zero, $0-\ell=0$ for every level, so $S_{k,0}$ is the pair map
+of $H_{k,0}$. The induction identity at zero gives precisely the defining
+recursion of the original uniform zero-index family shift. At depth one,
+$S_{0,j}$ is the identity pair map for every level; the defining original
+first-depth shift has that same pair map. These are identities on the
+unchanged recursive types; the zero-index monomial map is not replaced
+by an identity.
+\end{proof}
+
+\begin{theorem}[Actual original canonical Step One values have initial-boundary compatibility]
+\label{hir:original-recursive-canonical-step-initial-boundary-compatibility}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-recursive-chronological-history-value-maps,hir:original-initial-boundary-actual-lower-history-prefix,hir:step-one-canonical-tail,hir:original-crossing-run-base-regime,hir:original-invariant-empty-actual}
+\lean{Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.original_canonical_step_initial_boundary_compatibility}
+\leanok
+For EVERY family depth $k$, original maximal-order record $M$ in the actual
+bound-$(k+1)$ domain, its OLD entire Step One $R_k$-canonical history $T$,
+actual transformed cosupport point $y$, and true ORIGINAL index
+$j\leq |M.E|$, internally prove
+\[
+ S_{k,j}(\operatorname{StepOne}(R_k;M,T,y))
+ =\operatorname{pairShift}(\operatorname{shiftFamily}(k,0))
+    (\operatorname{StepOne}(R_k;M,T,y)).
+\]
+No lower-domain, lower-canonicality, empty-prefix, branch or value certificate
+is a caller premise. The family depth induction is discharged internally.
+\end{theorem}
+\begin{proof}
+The proof is simultaneous with the following entire-family theorem by
+natural-number depth induction. At lower depth zero the map is the identity.
+Assume the actual entire-family initial-boundary comparison at depth $k$.
+Original Step One canonicality internally gives barred testness, actual
+barred cosupport and genuine canonical lower data at every nonspecial
+cosupport point. A special point has infinite lower value, fixed by both
+maps. At a nonspecial point put $\ell=\operatorname{level}(M,T,y)$ and
+split at its actual own-level run, obtaining the true head $K$, suffix $Q$
+and actual point $p=Qy$. Current regime membership and the true suffix
+length imply that the head point has this SAME level $\ell$; whole barred
+testness supplies actual head testness. Original canonical-tail data give
+the actual lower marked record $L$, its bound-$k$ domain, OLD entire
+restricted $R_k$-canonical history, mask membership and genuine cosupport.
+The proved original initial-boundary prefix theorem internally supplies
+$d=j-\ell\leq |L.E|$ and the actual first $d$ entries empty, including the
+true chosen-contact branch at zero level. Apply the depth induction hypothesis
+to THIS actual lower record and history at index $d$. It identifies
+$H_{k,d}$ on its whole original value with the original uniform shift at
+$d$. The actual specific-family empty-prefix theorem makes that uniform
+shift equal the zero-index shift on THIS value. Expanding the true masked
+value and retaining first coordinate $\ell$ gives the displayed whole
+comparison. Every lower property used here is constructed from original
+canonical input, rather than supplied as a desired conclusion.
+\end{proof}
+
+\begin{theorem}[Every actual original canonical family has recursive initial-boundary compatibility]
+\label{hir:original-recursive-canonical-family-initial-boundary-compatibility}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-recursive-canonical-step-initial-boundary-compatibility,hir:original-recursive-chronological-history-value-maps,hir:general-canonical-tail,hir:original-canonical-general-crossing-companion-data,hir:original-invariant-empty-actual}
+\lean{Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.original_canonical_family_initial_boundary_compatibility,Hironaka.HironakaOriginalRecursiveBoundaryHistoryMap.original_canonical_family_empty_initial_boundary_compatibility}
+\leanok
+For EVERY depth $k$, ONLY original bound-$k$ record $M$, its OLD whole
+$R_k$-canonical history $T$, actual transformed cosupport point $y$ and
+true ORIGINAL index $j\leq |M.E|$, internally prove
+\[
+ H_{k,j}(R_k(M,T,y))=\operatorname{shiftFamily}(k,j)(R_k(M,T,y)).
+\]
+Consequently a genuine first-$j$ empty original boundary prefix gives
+$H_{k,j}(R_k(M,T,y))=H_{k,0}(R_k(M,T,y))$.
+No caller comparison, lower canonicality, branch or arbitrary-invariant
+certificate is assumed.
+\end{theorem}
+\begin{proof}
+At depth zero both maps are the identity. Given the entire depth-$k$ result,
+the preceding argument proves Step One initial-boundary compatibility for
+its actual lower family. Now consider original depth $k+1$ and inspect its
+actual outer order. At order zero, both maps apply exactly the same
+monomial chronological insertion at index $j$, so they agree on the ENTIRE
+actual family leaf without a lower premise. At positive order original
+full canonical-tail data internally supply the actual assignment head,
+order mask, true companion $J$, bound-$(k+1)$ domain, maximal order, OLD
+whole Step One $R_k$-canonical restricted tail, mask membership and cosupport.
+The entire companion boundary retains $|M.E|+|K|$ entries, so the ORIGINAL
+bound $j\leq |M.E|$ gives $j\leq |J.E|$. Apply the Step One result just
+proved to THIS actual companion. Thus its true recursive inner map agrees
+with the original uniform zero-index pair map. The outer general map
+expansion is exactly the original uniform depth-$(k+1)$ shift at index $j$.
+This completes the genuine specific-family depth induction, uniformly over
+all original records, real restricted carriers and whole histories. Finally,
+if the first $j$ original members are empty, the established actual
+specific-family empty-prefix theorem equates the uniform shifts at $j$ and
+zero on the actual original value; the first lemma identifies that zero
+shift with $H_{k,0}$. The comparison is at a valid INITIAL boundary index;
+it supplies the actual compatibility needed for future lower records, whose
+initial lists include earlier chronological exceptional members. Arbitrary
+higher interior history transport and noncompact scheduling remain further
+obligations.
+\end{proof}

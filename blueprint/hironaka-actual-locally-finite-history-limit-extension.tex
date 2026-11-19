@@ -1,0 +1,86 @@
+\section{The actual complex limit of one locally finite blowup history}
+
+This construction takes an actual growing sequence and local finiteness of
+its actual centre images. It constructs its genuine complex endpoint and
+proper holomorphic composite. It does not assert existence of such a sequence
+for arbitrary original noncompact analytic data.
+
+\begin{theorem}[The internally constructed limit has its actual continuous projection]
+\label{hir:actual-locally-finite-history-limit-projection}
+\uses{hir:actual-locally-finite-history-overlap-cocycle-gluing}
+\lean{Hironaka.HironakaActualLocallyFiniteHistoryLimit.gluedProjection,Hironaka.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_local,Hironaka.HironakaActualLocallyFiniteHistoryLimit.localInclusion_range,Hironaka.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition,Hironaka.HironakaActualLocallyFiniteHistoryLimit.embeddingTransition_inclusion}
+\leanok
+The quotient of the internally constructed local finite endpoints has a
+continuous projection to the original base. On every local endpoint it is
+literally the projection of that actual recorded finite prefix. The entire
+range of each local inclusion is the inverse image of its original window.
+The actual embedding-overlap transitions are genuine biholomorphisms.
+\end{theorem}
+\begin{proof}
+The whole projection equations of the already constructed overlap maps give
+a compatible family of continuous finite-prefix projections. The genuine
+topological quotient universal property supplies the global projection and
+its whole local equations. Each local endpoint projects into its own
+window. Conversely represent an arbitrary point by another local endpoint.
+If its projection lies in the first window, it is in the actual overlap;
+its already constructed transition gives a representative in the first
+endpoint, with equality supplied by the actual gluing relation. This proves
+both directions of the saturated-range equation. These equations identify
+the embedding overlaps with the actual saturated overlaps. Conjugating the
+constructed holomorphic overlap map by the literal equal-open
+biholomorphisms gives the asserted true embedding transition and its
+inclusion equation.
+\end{proof}
+
+\begin{theorem}[The genuine locally finite complex endpoint]
+\label{hir:actual-locally-finite-history-limit-complex-manifold}
+\uses{hir:actual-locally-finite-history-limit-projection,hir:actual-locally-finite-history-internal-window-atlas}
+\lean{Hironaka.HironakaActualLocallyFiniteHistoryLimit.limitManifold,Hironaka.HironakaActualLocallyFiniteHistoryLimit.localInclusion_contMDiff,Hironaka.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_contMDiff}
+\leanok
+The actual glued space, with charts lifted from its actual finite endpoints,
+is a Hausdorff second-countable complex manifold of the original ambient
+dimension. Every local inclusion and the actual global projection are
+holomorphic. There is no incoming limit manifold or atlas certificate.
+\end{theorem}
+\begin{proof}
+The internally chosen windows cover the original Hausdorff second-countable
+manifold. The proved saturated-range equations and actual open embeddings
+therefore make the glued space Hausdorff: points with distinct base images
+are separated downstairs, and points above one window are separated in its
+actual finite endpoint. A countable subcover of the original windows, with
+countable bases of their actual finite endpoints, supplies second
+countability. Lift the genuine endpoint charts through the actual open
+embeddings. Their true holomorphic overlap maps prove the complex atlas
+compatibility. The same lifted charts make every local inclusion
+holomorphic. On any such chart, the global projection is literally the
+holomorphic actual finite-prefix projection; hence it is holomorphic on the
+whole limit. These are applications of the generic actual saturated-atlas
+producers to data proved above, not assumptions about a desired atlas.
+\end{proof}
+
+\begin{theorem}[The whole limit projection is genuinely proper]
+\label{hir:actual-locally-finite-history-limit-proper}
+\uses{hir:actual-locally-finite-history-limit-projection,hir:actual-locally-finite-history-limit-complex-manifold}
+\lean{Hironaka.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_fibre,Hironaka.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_isClosedMap,Hironaka.HironakaActualLocallyFiniteHistoryLimit.gluedProjection_isProperMap}
+\leanok
+The actual holomorphic limit projection is proper. Its entire fibre at an
+original point is the image, under that point's actual endpoint inclusion,
+of the compact fibre of its genuine finite restricted prefix.
+\end{theorem}
+\begin{proof}
+The saturated-range equation places every point of the whole global fibre
+inside the endpoint attached to the original point. The whole local
+projection identity then proves the literal stated fibre equality. The
+actual finite blowup projection is proper, so that fibre is compact, and
+its actual continuous inclusion preserves compactness.
+
+To prove closedness, let $C$ be closed in the limit and let $x$ lie outside
+its projected image. Pull $C$ back to the actual endpoint attached to $x$.
+Its image under the proper finite restricted prefix is closed in the local
+base window. The complement is an open neighbourhood of $x$ there. Its
+image in the original base is open; the entire saturated-range equation
+shows that it misses the global image of $C$. Thus the global projection is
+closed. It is continuous and has compact fibres, so the actual closed-map
+criterion proves properness. No global maximum or uniform finite stopping
+time is used.
+\end{proof}

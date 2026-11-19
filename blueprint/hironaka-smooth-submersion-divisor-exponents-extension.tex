@@ -1,0 +1,53 @@
+\section{Actual divisor exponents under genuine holomorphic submersions}
+
+All maps in this chapter are genuine holomorphic submersions between arbitrary smooth complex manifolds of dimensions m and n. The whole original ideal is coherent. Its actual divisibility exponents and original indexed monomial data are produced without caller neighbourhood-surjectivity, divisibility, exponent or invariant certificates. The original gamma uses its ambient dimension in the first coordinate; the cross-dimensional statement retains the genuine source dimension m, rather than asserting an incorrect dimension-independent gamma equality. Higher invariants and canonical blowup base change remain open.
+
+\begin{lemma}\label{hir:submersion-actual-map-nhds}
+\uses{hir:submersion-local-section}
+\lean{Hironaka.HironakaSmoothSubmersionDivisorExponents.map_nhds_submersion_eq}
+\leanok
+At an actual submersion point y, the image of the entire neighbourhood filter is exactly the neighbourhood filter at f(y).
+\end{lemma}
+\begin{proof}
+The genuine submersion charts internally produce a holomorphic local section s through y, with f composed with s equal to the identity near f(y). Its holomorphy at f(y) gives continuity and hence a map of that neighbourhood filter into the neighbourhood filter at y. Applying f and using the actual local section identity proves the reverse filter inclusion. Continuity of f at y supplies the forward inclusion. Both inclusions give the exact equality; no openness or neighbourhood-image certificate is input.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-actual-divisibility-exponents}
+\uses{hir:submersion-actual-map-nhds,hir:submersion-cosupport}
+\lean{Hironaka.HironakaSmoothSubmersionDivisorExponents.isDivNear_pullback_iff,Hironaka.HironakaSmoothSubmersionDivisorExponents.divExp_pullback_eq}
+\leanok
+For every original set H, every degree e and every y, actual IsDivNear of the entire pulled-back ideal along the actual preimage of H is equivalent to original IsDivNear along H at f(y). Their original natural divisibility exponents are equal, including the zero fallback when no first failure exists.
+\end{theorem}
+\begin{proof}
+The already proved genuine submersion order dictionary identifies every actual pulled-back cosupport with its true preimage. The definition of IsDivNear is eventual containment of H in that whole cosupport. Rewrite its neighbourhood filter using the internally proved exact image-filter equality, then use the eventual-map dictionary. This proves the whole predicate equivalence in every degree. Function extensionality gives equality of the degree predicates. Unfold the literal original divExp definition, including its dependent first-failure search and fallback, and rewrite by this equality. No nonzero, hypersurface, positive dimension or bounded-order hypothesis is needed for this exact predicate statement.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-actual-indexed-exponents}
+\uses{hir:submersion-actual-divisibility-exponents}
+\lean{Hironaka.HironakaSmoothSubmersionDivisorExponents.expData_pullback_eq}
+\leanok
+The entire original indexed exponent function of the pulled-back ideal and actual pulled-back boundary list equals the original indexed exponent function at f(y), at every natural index, with zero beyond the original list length.
+\end{theorem}
+\begin{proof}
+The actual map of the finite list preserves its length. At an index within that length its literal get is the true preimage of the same original member. Apply the preceding internally produced divExp equality to that actual member. At every remaining index both literal original definitions give zero. Function extensionality yields the whole indexed-function equality. Empty lists, repeated empty members and zero exponents are retained literally.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-actual-monomial-value-dictionary}
+\uses{hir:submersion-actual-indexed-exponents}
+\lean{Hironaka.HironakaSmoothSubmersionDivisorExponents.gamma_pullback_original_dictionary,Hironaka.HironakaSmoothSubmersionDivisorExponents.gamma_same_dimension_pullback_eq}
+\leanok
+The actual original gamma of the entire pullback in dimension m equals the literal original MonomialInvariant.inv with bound m, the original boundary indices through f(y), the entire original indexed exponent function, and the original mark. In equal dimensions this is exactly the original gamma at f(y).
+\end{theorem}
+\begin{proof}
+A pulled-back list member contains y exactly when its original member contains f(y); the genuine pure memberIdx map dictionary therefore gives equality of the original finite index sets. Unfold the literal gamma, then rewrite this actual index-set equality and the complete exponent-function equality. The dimension parameter remains m in the literal key. When m equals n the rewritten expression is the original gamma by definition. This does not replace the original invariant or suppress its dimension normalization.
+\end{proof}
+
+\begin{theorem}\label{hir:submersion-literal-marked-monomial-value-dictionary}
+\uses{hir:submersion-actual-monomial-value-dictionary,hir:crossdim-literal-marked-pullback}
+\lean{Hironaka.HironakaSmoothSubmersionDivisorExponents.gamma_markedPullback_original_dictionary}
+\leanok
+The literal original whole markedPullback record has the same exact monomial dictionary with the original ideal, actual original indexed boundary, unchanged original mark and genuine source dimension bound.
+\end{theorem}
+\begin{proof}
+Unfold only the literal markedPullback ideal, boundary and mark fields. They are the whole genuine ideal pullback, the literal preimage map of the entire original list, and the unchanged original mark. The preceding actual gamma dictionary applies directly. The original carrier field remains its entire actual preimage; no canonicality or admissibility of a pulled-back tower is assumed or claimed.
+\end{proof}

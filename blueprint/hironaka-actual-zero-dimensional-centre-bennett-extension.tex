@@ -1,0 +1,70 @@
+\section{The intrinsic Bennett comparison for actual zero-dimensional centres}
+
+\begin{theorem}[Original point-centre geometry gives every intrinsic geometric comparison above the centre]
+\label{hir:actual-manifold-point-centre-bennett-all-orders}
+\uses{hir:actual-point-centre-blowup-coordinate-normal-form,hir:actual-open-coordinate-geometric-strict-square,hir:actual-flat-coordinate-inverse-any-subset-intrinsic-hs,hir:actual-geometric-point-bennett-all-orders,hir:actual-any-subset-open-intrinsic-hs}
+Let $\pi:Y\to X$ satisfy the full original blowup universal property.
+Let $z\in Y$ and suppose the original centre is regular of dimension
+zero at $\pi(z)$. For every subset $W\subseteq X$ and every order $\ell$,
+the unchanged intrinsic Hilbert--Samuel value of the original geometric
+strict transform at $z$ is at most the original value of $W$ at $\pi(z)$.
+\lean{Hironaka.HironakaActualZeroDimensionalCentreBennett.hilbertSamuelAt_actual_point_centre_blowup_le}
+\leanok
+There is no analytic-extension, coordinate-normal-form, coherence or
+Hilbert--Samuel comparison certificate premise.
+\end{theorem}
+\begin{proof}
+The actual point-centre normal-form theorem constructs genuine centred
+source and target coordinates $\Theta,\Phi$, an actual exceptional
+coordinate $j$ and actual parameters $b$. Write $U=\Theta.\mathrm{target}$
+and $V=\Phi.\mathrm{target}$, true open subsets of the original model.
+The actual inverse coordinates give genuine biholomorphisms from $U,V$
+to the original source and target flattening domains. The normal-form
+square sends every actual point of $U$ into $V$ by the unchanged point
+polynomial $P=\pi^{\mathrm{point}}_{j,b}$; it therefore defines a genuine
+holomorphic restriction $Q:U\to V$. Its original square commutes with
+$\pi$ and the actual inverse-coordinate maps.
+Let $B\subseteq V$ be the actual inverse-coordinate preimage of $W$,
+and extend it to the model subset $A$ by the actual subtype inclusion.
+The inclusion is injective, so its inverse image of $A$ is exactly $B$.
+Apply the genuine open-coordinate strict-transform square first to
+$\pi$ and $Q$, and then to $P$ and $Q$ with the true model-open inclusions.
+These two equalities identify the inverse-coordinate preimage of the
+entire original geometric strict transform with the restriction to $U$
+of the entire actual point-polynomial geometric strict transform of $A$.
+The arbitrary-subset intrinsic coordinate and true-open transport
+identities identify their unchanged HS values at the actual zero point
+with the original values at $z$. The proved all-order point-polynomial
+Bennett theorem bounds this value by the model value of $A$ at zero.
+True-open restriction, the exact subset identity for $A$ and $B$, and
+actual inverse target-coordinate transport identify the latter value
+with the unchanged original value of $W$ at $\pi(z)$. This gives the
+asserted inequality at the arbitrary order, retaining the original
+complex quotient dimensions and differential-exceptional strict sets.
+\end{proof}
+
+\begin{theorem}[Actual blowup along a zero-dimensional smooth centre never increases intrinsic HS]
+\label{hir:actual-zero-dimensional-centre-bennett-all-points-all-orders}
+\uses{hir:actual-manifold-point-centre-bennett-all-orders,hir:actual-blowup-off-centre-intrinsic-reduced-hs}
+\lean{Hironaka.HironakaActualZeroDimensionalCentreBennett.hilbertSamuelAt_actual_zero_dimensional_centre_blowup_le}
+\leanok
+Suppose $\pi:Y\to X$ is an original blowup and its centre is regular of
+dimension zero at each centre point. For every original analytic subset
+$W\subseteq X$, every actual $z\in Y$ and every order $\ell$, the original
+intrinsic HS value of the original geometric strict transform at $z$
+is at most that of $W$ at $\pi(z)$.
+\end{theorem}
+\begin{proof}
+If $\pi(z)$ lies in the centre, apply the preceding original-only
+point-centre theorem using its actual zero-dimensional regularity.
+Otherwise the existing actual off-centre biholomorphic comparison gives
+equality of these same original intrinsic values. Equality implies the
+required inequality. The two cases cover every original point, and the
+order was arbitrary.
+\end{proof}
+
+The first theorem applies even to arbitrary subsets above the centre;
+analyticity in the second theorem is used only by the existing
+off-centre theorem. This closes the actual zero-dimensional-centre
+case. General positive-dimensional permissible centres, their
+coefficient compatibility and the general Bennett theorem remain open.

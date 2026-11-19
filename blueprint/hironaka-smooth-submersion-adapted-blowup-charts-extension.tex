@@ -1,0 +1,46 @@
+\section{Actual original source and target blowup charts from internally adapted submersion products}
+The original input consists only of a genuine submersion $f$ of dimensions $n+r$ and $n$ at $y$, an actual original target centre flattening chart $\Phi$, its genuine zero-centre and preferred-chart-source conditions, the original whole equations of $C$, and a genuine target normal pivot $j\geq k$. No source chart, monomial dictionary, matching-chart or blowup-lift output is input.
+
+\begin{lemma}[Whole original-dimension monomial split dictionary]
+\label{hir:submersion-adapted-blowup-entire-monomial-dictionary}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.adaptedFibreProjection,Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.adaptedFibreProjection_apply,Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.adaptedFibreProjection_monomial,Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.adaptedTargetProjection_monomial,Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.fibreFirstSplit_monomial}
+\uses{hir:submersion-adapted-fibre-first-rotation,hir:submersion-monomial-chart-blocks,bex:monomial-chart}
+
+For the genuine internally constructed fibre-first split of $\mathbb C^{n+r}$, the source monomial polynomial with tangent dimension $r+k$ and rotated original pivot $r+j$ retains the ENTIRE fibre block and drops to the actual target monomial polynomial with tangent dimension $k$ and original pivot $j$. These are equalities of whole actual polynomial maps, including the entire exceptional hyperplane.
+\end{lemma}
+\begin{proof}
+The preceding true finite rotation gives the individual target coordinate $r+i$ and fibre coordinate $a<r$. On a source fibre coordinate, the normal-index condition $r+k\leq a$ is impossible, hence the source monomial polynomial leaves that coordinate unchanged. On a source target coordinate, $r+k\leq r+i$ is equivalent to $k\leq i$, and equality with the rotated pivot is equivalent to $i=j$ by genuine finite permutation injectivity. The source monomial formula thus agrees with the target polynomial on EVERY target coordinate. Both complete coordinate equalities give the entire genuine split equality. Zero pivot values are allowed throughout.
+\end{proof}
+
+\begin{theorem}[Original geometry internally constructs genuine corresponding FlatCharts]
+\label{hir:submersion-adapted-blowup-actual-flat-charts}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.exists_actual_adapted_flat_charts}
+\uses{hir:submersion-adapted-actual-product-shrink,hir:submersion-adapted-blowup-entire-monomial-dictionary,bex:monomial-chart}
+
+Internally produce actual open neighbourhoods $R,S$ and genuine source and target \texttt{BlowupConstruction.FlatChart}s of the original preimage centre and original target centre. The target chart is the original chart genuinely restricted to the internally produced $S$; the source chart is the internally produced adapted product chart. Their actual base points, tangent dimensions and pivot indices are respectively $fy,k,j$ and $y,r+k,r+j$. Their actual monomial chart targets are EXACTLY
+\[
+ V=\sigma_{k,j}^{-1}(S),\qquad
+ V'=\operatorname{split}^{-1}(R\times V).
+\]
+For EVERY $w\in V'$, the actual inverse source blowup-chart base point maps to the actual target blowup-chart base point of its genuine target projection: $f(c'.\mathrm{pt}(w))=c.\mathrm{pt}(\operatorname{drop}(w))$.
+\end{theorem}
+\begin{proof}
+Apply the original adapted-product producer; its real product topology internally gives the actual $R,S$, source chart $\Psi$ with target exactly the whole product, whole original preimage-centre equations and complete inverse point square. Restrict the original target chart to $S$ using its actual inclusion in the original target and its zero membership. Its entire original centre equations and preferred-chart-source condition restrict to this SAME actual chart. These facts construct the target \texttt{FlatChart}, with the original normal pivot $j$. The produced source chart and its whole original preimage-centre equation construct the actual source \texttt{FlatChart}; the finite rotation gives $r+k\leq r+j$, so its pivot is genuinely normal. No corresponding-chart certificate enters. The target chart target is its literal monomial inverse image of $S$. For the source chart target, apply the preceding entire fibre/target polynomial split dictionary to its literal product target: the actual fibre is in $R$ and the actual target polynomial is in $S$, precisely the stated product of the target chart open. For every actual source chart parameter, its actual source monomial image belongs to $\Psi$'s actual product target; apply the genuine whole inverse point square there and substitute the actual target polynomial identity. The actual target restricted inverse is literally the original inverse, yielding the displayed equality even at exceptional parameters.
+\end{proof}
+
+
+\begin{theorem}[Genuine original charts internally give an actual smooth local blowup map]
+\label{hir:submersion-adapted-blowup-actual-smooth-chart-map}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.flatChartMap,Hironaka.HironakaSmoothSubmersionAdaptedBlowupCharts.exists_actual_smooth_flat_chart_map}
+\uses{hir:submersion-adapted-blowup-actual-flat-charts,hir:submersion-relative-regular-geometry,bex:atlas,bex:monomial-chart}
+
+If the original map is a genuine global submersion and the original target centre is closed smooth, internally produce the preceding SAME matching actual charts and a map on the actual source blowup space, defined on its real chart domain by $G(p)=c^{-1}(\operatorname{drop}(c'(p)))$. At EVERY point of this actual source chart domain, $G$ is a genuine complex submersion with the SAME finite fibre complement, lands in the actual target blowup chart, and satisfies $f(p.\mathrm{base})=G(p).\mathrm{base}$. Entirely exceptional points are included.
+\end{theorem}
+\begin{proof}
+The original closed smooth centre gives the target blowup manifold. Its genuine preimage is closed smooth by the existing original submersion regularity producer, so the actual source blowup manifold is constructed internally too. At any actual source chart point $p$, the genuine source chart image lies in its literal target. The whole product-target dictionary places its actual projection in the genuine target chart target, and the genuine target chart inverse therefore lands in the actual target chart source. Both actual \texttt{FlatChart.homeo}s belong to the genuine blowup atlases and hence their maximal atlases. The SAME finite split followed by factor interchange identifies source model with target model times fibre complement. In these SAME actual charts the written map is exactly its first projection, by the actual source and target inverse identities at EVERY actual source chart coordinate. The original submersion definition therefore holds at $p$. The actual source inverse-chart base point is the original source base by its genuine inverse identity, and the preceding whole point-square equality gives the actual base square. No pivot nonvanishing condition is assumed; membership in the actual blowup chart supplies only its genuine homogeneous-direction pivot, and its base may lie entirely in the exceptional divisor. This is a genuine local map producer, not yet identification with the global universal lift.
+\end{proof}
+
+This produces genuine original \texttt{FlatChart} objects and exact whole polynomial/open/base-point dictionaries. Identifying the global universal blowup lift on these SAME whole chart domains, proving every original source blowup point is covered by a genuinely matching pair, and gluing all charts remain required for full arbitrary-choice smooth base change. Higher invariant/old driver identification, whole G3/G8 and noncompact termination remain OPEN. OWN OFFLIB only; formal registration/native/publication pending root recovery.

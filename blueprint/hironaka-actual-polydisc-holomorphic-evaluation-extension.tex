@@ -1,0 +1,76 @@
+\section{Actual holomorphic evaluation of absolutely convergent coefficient series}
+
+Write $P_\rho=\{z:|z_i|<\rho_i\}$ and
+$\overline P_\rho=\{z:|z_i|\leq\rho_i\}$ for the original coordinate
+polydiscs, and $|F|_\rho=\sum_\alpha|F_\alpha|\rho^\alpha$.
+All evaluations below are literal sums of the original complex monomials.
+
+\begin{theorem}[The actual monomial sums converge uniformly and retain the mass bound]
+\label{hir:actual-coefficient-polydisc-uniform-evaluation}
+\uses{hir:actual-monomial-owner-polydisc-convergence}
+\lean{Hironaka.HironakaActualPolydiscHolomorphicEvaluation.closedPolydisc,Hironaka.HironakaActualPolydiscHolomorphicEvaluation.openPolydisc,Hironaka.HironakaActualPolydiscHolomorphicEvaluation.actualSeriesEvaluation,Hironaka.HironakaActualPolydiscHolomorphicEvaluation.evaluation_uniform_and_bound}
+If the actual coefficients of $F$ have finite absolute mass at $\rho$,
+the finite monomial sums converge uniformly to the actual evaluation on
+$\overline P_\rho$, and $|F(z)|\leq|F|_\rho$ there.
+\leanok
+\end{theorem}
+\begin{proof}
+Each actual monomial has norm at most $|F_\alpha|\rho^\alpha$
+on the entire closed polydisc, by multiplication of the coordinate
+inequalities. The given finite mass is precisely summability of these
+nonnegative majorants. The uniform Weierstrass test gives the literal
+finite-subset sum limit. The norm of the actual sum is at most the sum
+of its monomial norms, which is at most the stated mass by the already
+proved absolute evaluation estimate.
+\end{proof}
+
+\begin{theorem}[Finite actual coefficient mass produces a holomorphic function]
+\label{hir:actual-coefficient-polydisc-holomorphy}
+\uses{hir:actual-coefficient-polydisc-uniform-evaluation}
+\lean{Hironaka.HironakaActualPolydiscHolomorphicEvaluation.evaluation_differentiableOn,Hironaka.HironakaActualPolydiscHolomorphicEvaluation.evaluation_contDiffOn,Hironaka.HironakaActualPolydiscHolomorphicEvaluation.evaluation_zero_neighbourhood}
+The actual evaluation is complex differentiable and complex smooth on
+$P_\rho$. Positive radii make this a genuine neighbourhood of zero;
+no differentiability or convergence of an output function is assumed.
+\leanok
+\end{theorem}
+\begin{proof}
+The open polydisc is a finite intersection of inverse images of open
+real intervals under continuous coordinate norms. Every actual
+monomial is a product of powers of complex coordinate linear maps,
+hence is everywhere complex differentiable. To use the genuine
+several-variable Weierstrass theorem, encode the countable exponent
+type injectively in the natural numbers. Preimages of the finite
+initial intervals exhaust every finite exponent set, so their finite
+monomial sums retain the proved uniform limit. At any point of the
+open polydisc choose a ball contained in it. The finite sums are
+complex differentiable on that ball and converge uniformly there.
+The several-variable Weierstrass theorem proves differentiability at
+its centre. Finally the proved finite-dimensional complex regularity
+theorem gives complex smoothness throughout the open polydisc.
+\end{proof}
+
+\begin{theorem}[The actual owner quotients and remainder evaluate holomorphically]
+\label{hir:actual-monomial-owner-holomorphic-evaluation}
+\uses{hir:actual-monomial-owner-absolute-bounds,hir:actual-coefficient-polydisc-holomorphy,hir:actual-coefficient-polydisc-uniform-evaluation}
+\lean{Hironaka.HironakaActualPolydiscHolomorphicEvaluation.monomialOwner_evaluations_holomorphic}
+For positive radii and finite input mass, every literal actual
+monomial-owner quotient and the literal actual remainder give complex
+differentiable functions on the same open polydisc. On the entire
+closed polydisc their evaluated norms satisfy the actual quotient
+bound $\rho^a|Q_aF(z)|\leq|F|_\rho$ and remainder bound
+$|RF(z)|\leq|F|_\rho$.
+\leanok
+\end{theorem}
+\begin{proof}
+The actual owner-partition estimates internally prove finite mass of
+every quotient and remainder, with the stated scaled mass bounds.
+Apply the just-proved holomorphy theorem to each unchanged actual
+series. The closed-polydisc evaluation bound followed by its actual
+mass bound proves the asserted norm inequalities; positive radii
+ensure multiplication by $\rho^a$ preserves the inequality.
+\end{proof}
+
+This produces genuine holomorphic functions from actual coefficient
+summability. It does not assert that an arbitrary holomorphic germ's
+formal Taylor series has such a radius, nor prove convergence or
+termination of perturbed analytic vertex division or HS tracking.

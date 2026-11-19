@@ -1,0 +1,91 @@
+\section{An actual new initial exponent forces a finite strict Hilbert--Samuel drop}
+
+Write $\Gamma(I)$ for the actual degree-lex initial diagram of a whole
+formal ideal $I\subset\mathbb C[[x_1,\ldots,x_n]]$. The inclusion
+$\Gamma(I)\subseteq\Gamma(J)$ below is an explicit mathematical
+hypothesis. It is not inferred from equality of a normalized ideal
+with a geometric strict ideal. No normalized-order or history tracking
+criterion is claimed here.
+
+\begin{theorem}[Every actual added initial exponent forces a specific strict drop]
+\label{hir:actual-new-diagram-exponent-strict-hs-drop}
+\uses{hir:actual-formal-and-original-hs-standard-monomial-count}
+\lean{Hironaka.HironakaActualDiagramStrictHSDrop.genuineFormalHilbertSamuelValue_strict_lt_of_new_diagram_exponent}
+\leanok
+Let $I,J$ be whole formal ideals with
+$\Gamma(I)\subseteq\Gamma(J)$. If
+$\beta\in\Gamma(J)\setminus\Gamma(I)$, then
+\[
+ H_J(|\beta|)<H_I(|\beta|).
+\]
+These are the genuine entire finite-jet Hilbert--Samuel dimensions.
+\end{theorem}
+\begin{proof}
+The actual standard monomials of total degree less than
+$|\beta|+1$ for $J$ form a subset of those for $I$, since diagram
+inclusion reverses the complements. The literal identity on exponent
+vectors gives an injective map between their genuine finite index types.
+The vector $\beta$ belongs to the $I$ type, by its degree and
+nonmembership in $\Gamma(I)$, but cannot lie in that map's image:
+its membership in $\Gamma(J)$ contradicts the defining condition of
+every source element. The map is not surjective, so the source finite
+cardinality is strictly smaller. The proved actual whole standard
+monomial bases identify these two cardinalities with the stated
+original finite-jet dimensions, proving the strict inequality.
+\end{proof}
+
+\begin{theorem}[The first extra degree is the first strict value drop, and whole profiles detect diagram equality]
+\label{hir:actual-diagram-first-strict-hs-drop-and-rigidity}
+\uses{hir:actual-new-diagram-exponent-strict-hs-drop,hir:actual-formal-and-original-hs-standard-monomial-count}
+\lean{Hironaka.HironakaActualDiagramStrictHSDrop.exists_first_hilbertSamuel_drop_of_diagram_ne,Hironaka.HironakaActualDiagramStrictHSDrop.genuineFormalHilbertSamuelValue_eq_iff_diagram_eq_of_subset}
+\leanok
+Under the same actual diagram inclusion, if the diagrams differ,
+there is an actual integer $d$ such that $H_J(d)<H_I(d)$ and
+$H_J(\ell)=H_I(\ell)$ for every $\ell<d$. Consequently their entire
+Hilbert--Samuel profiles agree if and only if their whole actual
+initial diagrams agree.
+\end{theorem}
+\begin{proof}
+A proper inclusion has a genuine exponent in the difference.
+Choose the least natural degree of such an exponent; the natural
+well-ordering supplies an exponent of that exact degree $d$.
+The preceding theorem gives the strict value inequality at $d$.
+For $\ell<d$, every exponent of degree less than $\ell+1$ has degree
+strictly less than $d$. If it belongs to $\Gamma(J)$ but not
+$\Gamma(I)$, its degree contradicts the chosen least degree.
+Thus the two whole diagrams have exactly the same membership on
+these bounded exponent vectors. The actual identity of exponents
+therefore gives an equivalence of their finite standard index types;
+their cardinalities and genuine finite-jet dimensions agree.
+
+If all values agree, a genuine exponent in the diagram difference
+would contradict its specific strict inequality. Hence no difference
+exponent exists, and the inclusion is equality. Conversely equality
+of whole diagrams gives the same bounded index equivalence at every
+order, and therefore all values agree.
+\end{proof}
+
+\begin{corollary}[The same finite strict drop concerns original analytic ideals]
+\label{hir:actual-original-taylor-diagram-strict-hs-drop}
+\uses{hir:actual-diagram-first-strict-hs-drop-and-rigidity,hir:actual-original-formal-entire-hs-transfer}
+\lean{Hironaka.HironakaActualDiagramStrictHSDrop.hilbertSamuelValue_strict_lt_of_new_taylor_diagram_exponent,Hironaka.HironakaActualDiagramStrictHSDrop.hilbertSamuelValue_eq_iff_taylor_diagram_eq_of_subset}
+\leanok
+Let $A,B$ be arbitrary original holomorphic origin ideals. Use their
+literal whole Taylor extensions $\widehat A,\widehat B$, and assume
+$\Gamma(\widehat A)\subseteq\Gamma(\widehat B)$. Every actual exponent
+$\beta$ in the diagram difference gives the strict original analytic
+inequality $H_B(|\beta|)<H_A(|\beta|)$. Their entire original analytic
+profiles agree exactly when their whole Taylor initial diagrams agree.
+No formalization or diagram identification is supplied by the caller.
+\end{corollary}
+\begin{proof}
+The genuine original Taylor homomorphism sends each entire original
+ideal to its whole formal extension. Its proved whole-jet quotient
+algebra equivalence identifies every original analytic
+Hilbert--Samuel value with the formal value of that very extension.
+Apply the preceding actual formal strict inequality and rigidity
+theorems to these two literal extensions, then use those same
+whole-jet value identities on both sides. Thus the strict inequality
+and every profile identity concern the original analytic ideals,
+not an unrelated finite-dimensional model.
+\end{proof}

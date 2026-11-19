@@ -1,0 +1,154 @@
+\section{Removing the residual of an SNC-supported divisor}
+\label{sec:hironaka-divisor-unit-extension}
+
+W{\l}odarczyk's Step~2 defines the monomial part using the irreducible
+components of the boundary divisors.  Here the boundary is a finite list
+of nonempty connected closed smooth hypersurfaces with simple normal
+crossings.  The actual residual produced in
+Theorem~\ref{hir:divisor-finite-connected-component-residual} is shown to
+be the unit ideal when the original divisor is supported on that boundary.
+No residual factorization or unit property is an input to this argument.
+Disconnected prescribed boundary members require component refinement;
+this theorem does not assign one multiplicity to such a member.
+
+\begin{lemma}[A point on exactly one coordinate hyperplane]
+\label{hir:divisor-coordinate-unit-point}
+\lean{Hironaka.HironakaDivisorResidualUnit.exists_coordinate_unit_point}
+\leanok
+For $j\in\{1,\ldots,n\}$ and $r>0$, there is a point $z\in B(0,r)$
+with $z_j=0$ and $z_i\ne0$ for every $i\ne j$.
+\end{lemma}
+\begin{proof}
+Let $v_j=0$ and $v_i=1$ for $i\ne j$, and put
+$\delta=r/(\|v\|+1)$ and $z=\delta v$.  Then $\delta>0$ and
+$\|z\|=\delta\|v\|<\delta(\|v\|+1)=r$.
+The asserted coordinate values follow immediately.  When $n=1$, this
+construction gives $z=0$, which satisfies the same conditions.
+\end{proof}
+
+\begin{lemma}[A nonempty supported divisor has a local boundary component]
+\label{hir:divisor-supported-local-component}
+\uses{hir:divisor-coordinate-unit-point,trace:actual-holomorphic-coordinate-monomial-factorization,trace:actual-snc-divisor-local-monomial-generator}
+\lean{Hironaka.HironakaDivisorResidualUnit.exists_member_locally_in_support}
+\leanok
+Let $R$ be an effective divisor on a complex $n$-manifold, and let $E$
+be a finite SNC list.  Suppose $\operatorname{Supp}R\subseteq\bigcup_{W\in E}W$.
+If $x\in\operatorname{Supp}R$, there is $W\in E$ containing $x$ such
+that $W$ is contained in $\operatorname{Supp}R$ in a neighbourhood of $x$.
+\end{lemma}
+\begin{proof}
+Invertibility supplies a holomorphic generator $g$ of the actual ideal
+of $R$ on an open neighbourhood $U$ of $x$.  At each $y\in U$,
+$y\in\operatorname{Supp}R$ if and only if $g(y)=0$: the generator itself
+belongs to the ideal, and every other member is a holomorphic multiple
+of it.  Choose an adapted SNC coordinate map $\psi$ with $\psi(x)=0$.
+Each member of $E$ through $x$ is a single coordinate hyperplane in this
+chart.  Closedness of the finitely many other members lets us shrink
+the chart to avoid all of them.
+
+The germ $G=g\circ\psi^{-1}$ has zero locus contained in the union of
+coordinate hyperplanes.  The existing holomorphic coordinate
+factorization theorem therefore gives
+\[
+ G(z)=H(z)\prod_{j=1}^n z_j^{a_j}
+\]
+near zero, with $H(0)\ne0$ and $a_j\in\mathbb N$.  This is a factorization
+of the genuine generator, obtained by the analytic Nullstellensatz and
+the primality of coordinate germs.  It is not assumed as a divisor
+certificate.  Only containment of the zero locus is needed for this
+local coordinate factorization.
+
+Since $g(x)=0$, some $a_j>0$.  Otherwise every factor at zero is one,
+so $g(x)=H(0)\ne0$.  This argument also rules out the support case in
+ambient dimension zero, where the coordinate product is empty.
+Take a sufficiently small point $z$ from
+Lemma~\ref{hir:divisor-coordinate-unit-point} for this $j$.  The displayed
+factorization gives $G(z)=0$, so $\psi^{-1}(z)\in\operatorname{Supp}R$.
+Support containment puts that point in a member $W$ of $E$; our shrinking
+ensures $x\in W$.  Its adapted coordinate equation is $z_k=0$ for a
+single $k$.  All coordinates of $z$ except $j$ are nonzero, hence $k=j$.
+Thus $W$ is precisely the $j$th coordinate hyperplane locally.
+The same factorization vanishes at every nearby point of that
+hyperplane because $a_j>0$.  Translating back to the manifold proves
+the local containment of $W$ in the actual support.
+\end{proof}
+
+\begin{theorem}[No boundary component means empty support]
+\label{hir:divisor-residual-empty-support}
+\uses{hir:divisor-supported-local-component,hir:divisor-exponent-connected-carrier,hir:divisor-ideal-nonzero,hir:cosupport}
+\lean{Hironaka.HironakaDivisorResidualUnit.support_eq_empty_of_no_component}
+\leanok
+Let $E$ be a finite SNC list whose members are nonempty connected closed
+smooth submanifolds.  If an effective divisor $R$ satisfies
+$\operatorname{Supp}R\subseteq\bigcup_{W\in E}W$ and
+$W\not\subseteq\operatorname{Supp}R$ for every $W\in E$, then
+$\operatorname{Supp}R=\varnothing$.
+\end{theorem}
+\begin{proof}
+Suppose $x\in\operatorname{Supp}R$.  The preceding lemma produces a
+member $W$ through $x$ locally contained in the support.  Since the
+ideal of $R$ is coherent and its cosupport of mark one equals its zero
+locus, this is the genuine condition
+$\operatorname{IsDivNear}(I_R,W,1,x)$.
+The ideal of an effective divisor has a nonzero stalk at every point.
+The actual divisor exponent is locally constant on a smooth carrier,
+and connectedness makes it a single integer $a$ on all of $W$.
+Its divisibility characterization at $x$ gives $1\le a$.
+At each $y\in W$ the same characterization now gives
+$\operatorname{IsDivNear}(I_R,W,1,y)$; evaluating this neighbourhood
+condition at $y$ puts $y$ in the mark-one cosupport, hence in
+$\operatorname{Supp}R$.  Consequently $W\subseteq\operatorname{Supp}R$,
+contrary to the hypothesis.  There can therefore be no such $x$.
+\end{proof}
+
+\begin{theorem}[The actual residual ideal is the unit ideal]
+\label{hir:divisor-residual-unit}
+\uses{hir:divisor-residual-empty-support}
+\lean{Hironaka.HironakaDivisorResidualUnit.ideal_eq_unitIdeal_of_no_component}
+\leanok
+Under the hypotheses of Theorem~\ref{hir:divisor-residual-empty-support},
+the complete germ ideal of $R$ equals the holomorphic unit ideal:
+$I_R=\mathcal O_M$.
+\end{theorem}
+\begin{proof}
+The support is the zero locus of the actual coherent ideal.  Empty
+zero locus means that at every $x$ there is a member $b$ of the ideal
+with $b(x)\ne0$.  The inverse of $b$ is holomorphic near $x$.
+Every holomorphic germ $f$ is the holomorphic multiple $(f/b)b$, so it
+belongs to the original ideal.  Conversely every ideal member is
+holomorphic by coherence.  These two inclusions identify every stalk
+with the holomorphic unit stalk, proving equality of the germ ideals.
+\end{proof}
+
+\begin{theorem}[A genuine monomial factorization of an SNC-supported divisor]
+\label{hir:divisor-supported-finite-monomial}
+\uses{hir:divisor-finite-connected-component-residual,hir:divisor-residual-unit,hir:divisor-finite-component-product-coherent}
+\dcref{W{\l}odarczyk 2005, Step 2}
+\source{wlodarczyk05-hironaka}
+\lean{Hironaka.HironakaDivisorResidualUnit.exists_componentPowerProduct_eq}
+\leanok
+Let $E$ be a finite SNC list of nonempty connected closed smooth
+hypersurfaces, and let $D$ be an effective divisor with
+$\operatorname{Supp}D\subseteq\bigcup_{W\in E}W$.
+There is a list $A=((W_1,a_1),\ldots,(W_s,a_s))$, with underlying list
+$E$ and nonnegative integer exponents, such that
+\[
+ I_D=\prod_{i=1}^s I_{W_i}^{a_i}
+\]
+as complete germ ideals at all original points.
+\end{theorem}
+\begin{proof}
+The existing finite connected-component extraction theorem constructs
+$A$ and an actual invertible residual $R$, together with
+$I_D=(\prod_i I_{W_i}^{a_i})I_R$,
+$\operatorname{Supp}R\subseteq\operatorname{Supp}D$, and
+$W\not\subseteq\operatorname{Supp}R$ for every $W\in E$.
+The support hypothesis on $D$ therefore applies to $R$.
+Theorem~\ref{hir:divisor-residual-unit} identifies $I_R$ with the unit
+ideal.  Coherence of the genuine finite product and multiplication by
+the unit ideal remove this factor from the full ideal equality.
+The empty boundary case yields $I_D=\mathcal O_M$ by the same argument.
+The exponents here are the actual exponents of the successive
+intermediate divisors in the ordered extraction; no identification
+with all exponents of the original divisor is asserted by this theorem.
+\end{proof}

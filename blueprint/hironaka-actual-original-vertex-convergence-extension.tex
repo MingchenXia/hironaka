@@ -1,0 +1,99 @@
+\section{Original whole ideals internally produce convergent canonical reduced vertices}
+
+\begin{theorem}[Actual original ideal elements lift every finite jet of their whole formal extension]
+\label{hir:actual-original-ideal-finite-jet-lift}
+\uses{hir:actual-original-formal-whole-jet-map-bijective,hir:actual-formal-variable-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualOriginalVertexConvergence.exists_original_ideal_finite_jet_lift}
+\leanok
+For every actual ideal $J$ of original holomorphic germs, every $F$ in
+its whole original Taylor extension, and every natural $q$, there is an
+actual $g\in J$ whose original Taylor coefficients agree with those of
+$F$ at every exponent of degree less than $q$.
+\end{theorem}
+\begin{proof}
+Compose the original Taylor map with the quotient by the genuine
+formal variable ideal's $q$th power. This actual map is surjective:
+the original polynomial evaluation of the degree-$q$ truncation of
+any formal series has exactly its quotient class. The class of $F$
+lies in the image of $J$ under this same map, by composition of ideal
+images. Surjectivity identifies membership in that image with the
+existence of an actual preimage $g\in J$. Equality of the quotient
+classes says that the Taylor difference belongs to the genuine
+variable power. Its proved coefficient kernel gives every asserted
+coefficient equality, including the vacuous case $q=0$.
+\end{proof}
+
+\begin{theorem}[The actual formal vertices have internally produced original monic germ witnesses]
+\label{hir:actual-original-monic-vertex-family}
+\uses{hir:actual-original-ideal-finite-jet-lift,hir:actual-formal-variable-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualOriginalVertexConvergence.exists_original_monic_vertex_family}
+\leanok
+For every actual original germ ideal $J$, its genuine whole formal
+Taylor extension has a monic degree-lexicographic vertex family all
+of whose actual series are original Taylor images of internally
+chosen actual members of $J$. No family or analytic witness is supplied.
+\end{theorem}
+\begin{proof}
+Each genuine vertex $a$ already has a monic member of the whole formal
+ideal. Apply the preceding theorem at $q=|a|+1$. Its original witness
+has coefficient one at $a$ and retains every lower coefficient:
+every degree-lexicographically smaller exponent has degree at most
+$|a|$. These lower coefficients are zero for the actual formal vertex
+member. The witness's Taylor image lies in the same whole ideal by
+the original ideal image map. Choose these genuine witnesses at the
+internally finite vertex set and use their unchanged Taylor images
+as the family, with the just-proved monicity and lower vanishing.
+This construction also applies when the vertex set is empty.
+\end{proof}
+
+\begin{theorem}[An arbitrary finite original germ family has an internally common positive coefficient radius]
+\label{hir:actual-original-finite-family-coefficient-radius}
+\uses{hir:actual-original-taylor-positive-coefficient-mass,hir:actual-anisotropic-coefficient-mass}
+\lean{Hironaka.HironakaActualOriginalVertexConvergence.exists_finite_originalTaylor_common_mass}
+\leanok
+For every finite family of original holomorphic germs, there is one
+positive uniform radius at which every unchanged original Taylor
+series has finite absolute coefficient mass. No individual or common
+radius is an input; the assertion includes an empty family.
+\end{theorem}
+\begin{proof}
+Induct on the finite index set. For the empty set choose radius one.
+For an inserted germ, original holomorphy produces a positive radius
+for its actual Taylor series. Take the minimum of that radius and
+the positive radius supplied for the preceding family. Positivity
+is retained and coefficient mass is monotone under decreasing each
+positive coordinate radius, so all original series converge at this
+same smaller radius. Apply the result to the actual finite universe.
+\end{proof}
+
+\begin{theorem}[Every whole original ideal has genuinely convergent canonical reduced formal vertices]
+\label{hir:actual-original-ideal-reduced-vertex-convergence}
+\uses{hir:actual-original-monic-vertex-family,hir:actual-original-finite-family-coefficient-radius,hir:actual-deg-lex-vertex-small-radius,hir:actual-coefficient-polydisc-holomorphy}
+\lean{Hironaka.HironakaActualOriginalVertexConvergence.exists_original_reduced_vertices_finite_mass}
+\leanok
+For every original holomorphic germ ideal $J$, there is an internally
+produced positive polyradius at which all canonical reduced vertex
+series of its unchanged whole formal Taylor extension have finite
+absolute coefficient mass. Their actual evaluations are holomorphic
+on the genuine open polydisc. No chosen family, convergence certificate,
+radius, weight, inverse or reduced-basis certificate is an input.
+\end{theorem}
+\begin{proof}
+Construct the genuine original monic vertex family and its actual
+original germ witnesses by the second theorem. The third theorem
+supplies a single positive radius for all their unchanged Taylor
+series. Each true leading monomial has finite coefficient support,
+so subtracting it retains finite absolute coefficient mass at this
+same radius. The genuine small-radius vertex theorem now internally
+constructs positive separating weights and a smaller polyradius with
+actual perturbation norm less than one. Its proved Neumann division
+therefore gives finite coefficient mass for every canonical reduced
+vertex of the same whole ideal. Actual convergent evaluation is
+holomorphic on the open polydisc by the proved several-variable
+holomorphic evaluation theorem. No witness or radius is imported
+from the desired conclusion.
+\end{proof}
+
+Realization of these convergent formal series as original Taylor
+images, uniform current-history Hilbert--Samuel tracking and global
+resolution remain separate results.

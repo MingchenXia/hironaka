@@ -1,0 +1,55 @@
+\section{Actual Taylor compatibility with whole colon saturation}
+
+Let $R$ be the original analytic germ ring at the origin of $\mathbb C^n$,
+$S$ its genuine formal power series ring, and $T:R\to S$ the existing Taylor
+homomorphism. Write $C_0(I,a)=I$ and $C_{q+1}(I,a)=C_q(I,a):a$ for the
+existing whole origin-colon chain, in either actual ring.
+
+\begin{theorem}[Entire principal colons commute with actual Taylor extension]
+\label{hir:actual-formal-extension-whole-principal-colon}
+\uses{hir:actual-formal-relations-original-analytic-syzygies}
+\lean{Hironaka.HironakaActualFormalColonSaturation.map_colon_originalTaylorAlgHom}
+\leanok
+For every original ideal $I\subseteq R$ and every original germ $a\in R$,
+\[
+ T(I:a)S=(T(I)S):T(a).
+\]
+There is no nonzero hypothesis on $a$ and no finite relation certificate.
+\end{theorem}
+\begin{proof}
+Taylor multiplicativity gives the forward inclusion. If $FT(a)\in T(I)S$,
+choose internally finite original generators $g_i$ of $I$ and write
+$FT(a)=\sum_iT(g_i)A_i$. Apply the actual analytic syzygy producer to
+$(g_i,-a)$ and $(A_i,F)$. It supplies original coefficients $c_{ij},b_j$
+and formal $B_j$ such that
+$F=\sum_j T(b_j)B_j$ and $\sum_i g_ic_{ij}-ab_j=0$ in $R$.
+Thus $ab_j\in I$, so every $b_j\in I:a$ and the displayed expression puts
+$F$ in the extension of the whole original colon. Empty generator/relation
+families and $a=0$ need no separate geometric hypothesis.
+\end{proof}
+
+\begin{theorem}[One internally chosen index computes both entire saturations]
+\label{hir:actual-formal-extension-whole-colon-saturation}
+\uses{hir:actual-formal-extension-whole-principal-colon,hir:relative-normal-coherent-saturation-origin-stability}
+\lean{Hironaka.HironakaActualFormalColonSaturation.map_actualOriginColonChain,Hironaka.HironakaActualFormalColonSaturation.exists_actual_original_formal_saturation_index}
+\leanok
+For every original $I,a$ and every $q\geq0$, actual Taylor extension of
+$C_q(I,a)$ equals $C_q(T(I)S,T(a))$. Moreover there exists an internally
+chosen $N\geq0$ such that both chains are constant for all $q\geq N$.
+For every formal $F$, membership in some formal colon is equivalent to
+membership in the extension of the one original ideal $C_N(I,a)$.
+\end{theorem}
+\begin{proof}
+Induction on $q$ and the preceding whole colon identity give equality of
+both chains term by term, starting at $q=0$. The original ring is Noetherian,
+and its actual origin-colon chain is increasing. The ascending chain
+condition therefore supplies an $N$ for which every original term with
+index at least $N$ equals the original $N$th term. Extending these whole
+ideal equalities and using termwise compatibility gives the same stability
+for the actual formal chain, with the very same $N$. If $F$ lies in the
+$q$th formal term, monotonicity puts it in the term with index $\max(q,N)$;
+stability puts it in the $N$th term. Conversely membership in the $N$th
+term supplies the witness $q=N$. Termwise compatibility identifies that
+term with the extension of the original $N$th ideal. This is whole formal
+saturation, without a formal convergence assumption or a supplied stable index.
+\end{proof}

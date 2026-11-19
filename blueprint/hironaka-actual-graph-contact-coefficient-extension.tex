@@ -1,0 +1,98 @@
+\section{A genuine normal graph contact direction and whole coefficient slice}
+
+The marked ideal remains on its full smooth ambient space. The arbitrary
+singular graph is never substituted for its smooth marked ambient stratum.
+Canonical invariant tails, maximal centres and history descent remain separate.
+
+\begin{theorem}[A literal graph-normal equation is an actual marking-one tangent direction]
+\label{hir:actual-graph-normal-tangent-direction}
+\uses{hir:actual-graph-functional-ideal-every-point,mc:tangent-direction,bcalc:hypersurface}
+\lean{Hironaka.HironakaActualGraphContactCoefficient.graphFunction_chartDeriv_eq_one,Hironaka.HironakaActualGraphContactCoefficient.graphFunction_isTangentDirection,Hironaka.HironakaActualGraphContactCoefficient.graphNormalContact_regularAtDim}
+\leanok
+On any actual open where $f$ is holomorphic, each literal normal graph
+equation $u_i=y_i-f_i(x)$ is a marking-one tangent direction of the
+independent original graph vanishing ideal on the corresponding true
+ambient open. Its actual preferred-chart normal derivative is exactly one.
+Its actual zero hypersurface on that true open is regular of dimension
+one less than the smooth ambient dimension.
+\end{theorem}
+\begin{proof}
+The preferred chart on the actual vector model is the identity. The actual
+complex chain rule gives $Du_i$ as the $i$th normal projection minus the
+$i$th component of $Df$ composed with the first block projection. On the
+$i$th normal basis vector these terms are one and zero. Local holomorphy
+of $f$ proves holomorphy of $u_i$ on the true ambient open. Every original
+graph point satisfies $u_i=0$ literally. Thus $u_i$ belongs to the entire
+original graph vanishing ideal at every point of the true open. At mark
+one its derivative-zero iterate is that original ideal, so these facts
+give every actual tangent-direction requirement, including the nonzero
+derivative at every zero, without a supplied contact certificate. The genuine
+hypersurface inverse-function theorem proves actual regularity of this zero
+hypersurface on the same true open.
+\end{proof}
+
+\begin{theorem}[The genuine whole graph-section ideal pullback]
+\label{hir:actual-graph-section-whole-ideal-pullback}
+\uses{hir:actual-graph-functional-ideal-every-point}
+\lean{Hironaka.HironakaActualGraphContactCoefficient.graphSection_pullback_mem_iff}
+\leanok
+For every original subset $W$, point $x$, and $f$ holomorphic only near
+$x$, the entire independently defined functional pullback of the graph
+vanishing ideal along the literal graph section at $x$ is the original
+vanishing ideal of $W$, for every original scalar numerator. No coherence
+or pullback equality is input.
+\end{theorem}
+\begin{proof}
+For each original graph-vanishing function, true continuity of the actual
+holomorphic graph section transports its entire neighborhood vanishing
+relation to $W$ near $x$, and the actual complex chain rule proves
+holomorphy of its composition. Every pullback generator is therefore a
+base-vanishing germ. Any true finite holomorphic span remains base
+vanishing: intersect the finitely many actual generator neighborhoods
+with the genuine span-relation neighborhood and evaluate the finite sum.
+Conversely, an original base-vanishing function $a$ gives the actual
+ambient function $a\circ p$. True projection continuity transports its
+whole vanishing relation to the original graph, and the ordinary complex
+chain rule gives its local holomorphy. Its pullback through the actual
+graph section is exactly $a$ because $p\circ\operatorname{graph}(f)=1$.
+The actual one-term span proves the reverse entire membership.
+\end{proof}
+
+\begin{theorem}[The actual marking-one coefficient slice removes one genuine graph-normal equation]
+\label{hir:actual-graph-marking-one-coefficient-slice}
+\uses{hir:actual-graph-section-whole-ideal-pullback,hir:actual-graph-normal-tangent-direction,mc:coefficient-ideal}
+\lean{Hironaka.HironakaActualGraphContactCoefficient.coefficientGraphSection_mem_iff,Hironaka.HironakaActualGraphContactCoefficient.exists_scalarGraphContactCoefficientSlice}
+\leanok
+Mark the original graph ideal by one, on its full smooth ambient space
+with empty boundary. Its actual coefficient ideal has entire graph-section
+pullback equal to the original base ideal at every point where $f$ is
+holomorphic nearby. In particular let the base subset be any actual
+lower graph and let $f$ have one scalar graph-normal component. The smooth
+contact parametrization removes exactly that added normal equation and
+recovers the whole original lower graph ideal. The actual point lies in an
+internally chosen true open; its normal equation is an actual marking-one
+tangent direction there, and its contact hypersurface is genuinely regular
+of the lower ambient dimension. No smoothness of the lower
+graph or coherence certificate is assumed for this membership dictionary.
+\end{theorem}
+\begin{proof}
+The genuine marking-one coefficient construction contains only the
+derivative-zero summand, with exponent one and mark one. Expanding the
+actual finite-span and ideal-power definitions, every generator and each
+finite holomorphic combination belongs to the original graph vanishing
+ideal, by its actual vanishing relation. Conversely any original
+vanishing germ occurs as a one-term combination with the constant unit.
+Thus the coefficient ideal is that entire original graph ideal; this is
+proved from true closure of vanishing germs rather than inferred from
+coherence. Apply the preceding whole graph-section pullback theorem.
+For the one-equation assertion substitute the actual lower graph for
+$W$ and the genuine scalar normal function for $f$. The target graph is
+literally the lower graph with one added graph equation; its contact
+parametrization and projection are the actual graph section and block
+projection. Choose a true original holomorphic neighborhood from the original
+near-point holomorphy. The preceding derivative-one and actual hypersurface
+regularity theorems supply this same genuine smooth graph-normal contact
+direction and its actual dimension, while the whole ideal equivalence holds
+for every original scalar numerator. No canonical tail or maximal-centre
+invariance is inferred from the coefficient calculation.
+\end{proof}

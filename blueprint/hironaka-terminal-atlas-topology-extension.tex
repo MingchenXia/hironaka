@@ -1,0 +1,97 @@
+\section{Genuine separation, countability and charts for a projection-saturated terminal atlas}
+
+The noncompact gluing route of
+\cite{bierstone-milman08-functoriality,wlodarczyk05-hironaka} needs an
+actual Hausdorff, second-countable charted space, not only a topological
+quotient. These generic geometric lemmas are applied to the original local
+canonical resolution atlas after its actual gluing producer supplies its
+projection and true saturated ranges. Here the atlas inputs are genuine
+open embeddings and their actual projection ranges; no global separation,
+countability or chart certificate is assumed. Holomorphic compatibility,
+properness and the original global resolution sequence remain later producers.
+
+\begin{theorem}[Actual saturated local embeddings over a Hausdorff original base give Hausdorff gluing]
+\label{hir:terminal-atlas-actual-saturated-projection-hausdorff}
+\lean{Hironaka.HironakaTerminalAtlasTopology.t2Space_of_actual_saturated_projection_atlas}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:open-restriction-tower}
+Let $p:G\to X$ be an actual continuous projection to a Hausdorff original
+base and $U_i$ true original open sets covering $X$. Let actual Hausdorff
+local final spaces $F_i$ embed openly by $\iota_i:F_i\to G$, with the
+TRUE entire range equality $\iota_i(F_i)=p^{-1}(U_i)$. Then the actual
+glued space $G$ is Hausdorff. No separation or fiber-injectivity certificate
+is required; actual original terminal gluing supplies these primitive data.
+\end{theorem}
+\begin{proof}
+Take distinct actual points $a,b$ of $G$. If their original base images are
+distinct, disjoint original open neighborhoods separate those images;
+actual continuity gives disjoint open preimages separating $a,b$. If their
+original images coincide, choose one true original $U_i$ containing that
+base point. Actual saturated range equality puts BOTH points in the SAME
+actual local embedding. Choose their actual local preimages; injectivity
+of the genuine embedding makes them distinct. Actual local Hausdorffness
+gives disjoint open neighborhoods, whose images under the genuine open
+embedding are open neighborhoods in $G$. Genuine embedding injectivity
+makes those image neighborhoods disjoint. Thus every pair of distinct
+original glued points is separated, with no false global projection
+injectivity or automatic Hausdorffness of arbitrary gluing.
+\end{proof}
+
+\begin{theorem}[Original second countability internally gives a countable saturated terminal subcover]
+\label{hir:terminal-atlas-actual-saturated-projection-second-countable}
+\lean{Hironaka.HironakaTerminalAtlasTopology.secondCountable_of_actual_saturated_projection_atlas}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:terminal-atlas-actual-saturated-projection-hausdorff}
+In the same actual saturated open-embedding situation, suppose ONLY the
+original base and each actual local final space are second countable. The
+actual glued space is second countable, even when its original atlas index
+is uncountable. No countable index, countable local-history choice or global
+second-countability certificate is supplied.
+\end{theorem}
+\begin{proof}
+Original second countability gives a countable subfamily of the TRUE
+original open cover with the same union $X$. Pull back THIS actual union
+through the actual projection. The true saturated range equality identifies
+it with the union of the selected actual final embedding ranges, so those
+countably many genuine open images cover ALL of $G$. Each true embedding
+is a homeomorphism from its actual local final space onto its literal range.
+Transport local second countability through that genuine homeomorphism.
+The actual countable open-cover theorem then gives second countability of
+$G$. Every global point is covered by the actual selected images; neither
+surjectivity of the projection nor an arbitrary countable quotient assertion
+is used.
+\end{proof}
+
+\begin{definition}[Genuine local final charts lift to actual charts on a jointly covering open-embedding atlas]
+\label{hir:terminal-atlas-actual-lifted-charted-space}
+\lean{Hironaka.HironakaTerminalAtlasTopology.actualLiftedTerminalChartedSpace}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+\uses{hir:open-restriction-tower}
+For true local charted final spaces with the SAME complex model and genuine
+jointly covering open embeddings into an actual topological space $G$, build
+an actual charted-space structure on $G$. Its atlas is the images of ALL
+actual local atlas charts through the true embeddings. Each global preferred
+chart is the genuine lift of a local preferred chart at an internally chosen
+actual representative of that global point. No global charted-space certificate
+or transition regularity conclusion is assumed.
+\end{definition}
+\begin{proof}
+Genuine joint coverage supplies an actual local index and actual point
+mapping to each global point. Choose those actual witnesses. A true local
+chart extends through an actual open embedding to an open partial
+homeomorphism on $G$: its source is the true image of the original chart
+source, its target is the unchanged true chart target, and its inverse is
+the actual embedding composed with the true original inverse chart. The
+embedding's genuine injectivity and openness prove both inverse equations,
+open sources and actual partial continuity. Use ALL such lifted true atlas
+charts as the global atlas. At a global point, choose the lift of the local
+preferred chart at its actual chosen representative. Original preferred-chart
+source membership and the true representative equation prove global source
+membership; original local preferred-chart atlas membership proves global
+atlas membership. This is an actual charted-space construction; genuine
+holomorphic transition maps and the complex-manifold conclusion are separate
+subsequent mathematical producers.
+\end{proof}

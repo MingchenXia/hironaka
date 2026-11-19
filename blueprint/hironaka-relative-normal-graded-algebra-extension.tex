@@ -1,0 +1,146 @@
+\section{The intrinsic algebra of the original normal filtration}
+
+Write $R=\mathcal O_{\mathbb C^{d+t},0}$ and
+$B=\mathcal O_{\mathbb C^d,0}$, with the actual tangent pullback giving
+the $B$-algebra structure on $R$. Let $J$ be the original normal ideal and
+let $I\subset R$ be any original whole germ ideal. Its existing literal
+degree-$q$ module is the image of $J^q$ in $R/(I+J^{q+1})$. The algebra
+below is constructed from multiplication of these genuine representatives;
+the polynomial quotient is a subsequent theorem about that algebra. This
+commutative-algebra construction is the explicit intrinsic algebra adaptation
+needed by the relative normal-flatness and Hilbert--Samuel route; the quotient
+never defines the multiplication.
+
+The source-facing objective is the whole local-ring Hilbert--Samuel
+quotient used in Bierstone--Milman, ``Use of the Hilbert--Samuel function''.
+The following constructions supply its relative normal-filtration algebra
+ingredient directly from the original germ ideals. They add the intrinsic
+multiplication to the preceding literal-module dictionary; they do not assert
+the source's semicontinuity, admissible-centre theorem, or descent under
+blowing up.
+
+\begin{definition}[Actual multiplication of original normal layers]
+\label{hir:relative-normal-intrinsic-layer-multiplication}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalGradedPieceMul}
+\leanok
+\uses{hir:relative-normal-graded-literal-layers}
+For $x$ in degree $p$ and $y$ in degree $q$, choose actual representatives
+$g\in J^p$ and $h\in J^q$ of their whole quotient classes and define
+$x\cdot y$ to be the class of $gh$ in the image of $J^{p+q}$ in
+$R/(I+J^{p+q+1})$.
+\end{definition}
+\begin{proof}
+The representatives exist by the literal image-module definition.
+Their product lies in $J^pJ^q=J^{p+q}$, hence gives an element of the
+stated actual layer. Independence from these representatives is proved in
+the following lemma.
+\end{proof}
+
+\begin{lemma}[The whole original remainder makes multiplication well-defined]
+\label{hir:relative-normal-intrinsic-layer-product-independent}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalGradedPieceMul_of_representatives}
+\leanok
+\uses{hir:relative-normal-intrinsic-layer-multiplication}
+The actual product class is independent of the chosen whole original
+representatives. In particular, the product of the degree-$p$ class of
+$g\in J^p$ and the degree-$q$ class of $h\in J^q$ is exactly the
+degree-$(p+q)$ class of their actual product $gh$.
+\end{lemma}
+\begin{proof}
+Suppose $g-g'\in I+J^{p+1}$ and $h-h'\in I+J^{q+1}$, with each
+representative in its asserted original power. For $v\in I+J^{p+1}$
+and $w\in J^q$, write $v=i+u$ with $i\in I$ and
+$u\in J^{p+1}$. Then $iw\in I$ and
+$uw\in J^{p+1}J^q=J^{p+q+1}$, so
+$vw\in I+J^{p+q+1}$. Apply this first to $(g-g')h$, and then,
+with the two degrees interchanged, to $g'(h-h')$. Their sum is
+$gh-g'h'$, which therefore belongs to the whole next-power remainder
+$I+J^{p+q+1}$. The two product classes coincide in exactly the original
+quotient that defines the layer.
+\end{proof}
+
+\begin{theorem}[The literal original direct sum is an intrinsic graded algebra]
+\label{hir:relative-normal-intrinsic-graded-algebra}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGradedCommRing,Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGradedAlgebra,Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGraded_lof_mul_lof,Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGraded_algebraMap}
+\leanok
+\uses{hir:relative-normal-intrinsic-layer-product-independent}
+The existing literal direct sum of all original normal layers is a
+commutative $B$-algebra, with the product of its degree-$p$ and
+degree-$q$ summands given by the preceding actual multiplication and lying
+in degree $p+q$. Its unit is the actual class of $1$ in degree zero.
+Its $B$-scalar action is the existing tangent-pullback action on each layer.
+\end{theorem}
+\begin{proof}
+The family of actual powers $J^q\subset R$, with ordinary multiplication
+and degree-zero unit $1$, is a graded commutative ring. The true quotient
+map from each $J^q$ onto its literal layer is additive and $B$-linear,
+and the preceding lemma makes these maps multiplicative for the already
+defined actual layer products. Every layer class has an actual power
+representative. Thus associativity, commutativity, the two unit laws, and
+both distributive laws follow by lifting the classes to these genuine
+power representatives and applying the corresponding identities in $R$.
+The degree-zero scalar class is the class of the actual tangent pullback of
+the scalar; multiplying it by a degree-$q$ representative gives exactly
+the existing scalar action on the whole quotient. Extend the homogeneous
+products to finite sums by distributivity. All sums involved are finite,
+and these proved homogeneous laws give the stated commutative algebra on
+the original direct sum.
+\end{proof}
+
+\begin{lemma}[The actual entire polynomial symbol map is an algebra homomorphism]
+\label{hir:relative-normal-intrinsic-polynomial-symbol-algebra-hom}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalGradedAlgebra.normalAssociatedSymbolAlgHom,Hironaka.HironakaRelativeNormalGradedAlgebra.normalAssociatedSymbolAlgHom_toLinearMap,Hironaka.HironakaRelativeNormalGradedAlgebra.normalAssociatedSymbolAlgHom_ker}
+\leanok
+\uses{hir:relative-normal-intrinsic-graded-algebra,hir:relative-normal-graded-homogeneous-surjection,hir:relative-normal-graded-whole-initial-ideal}
+The existing true polynomial symbol map from $B[Y_1,\ldots,Y_t]$ to the
+literal original associated module is a unital $B$-algebra homomorphism
+for its intrinsic multiplication. Its complete kernel is the existing
+whole original normal initial ideal.
+\end{lemma}
+\begin{proof}
+For homogeneous $P$ of degree $p$ and $Q$ of degree $q$, their symbol
+classes are the actual classes of their genuine normal evaluations in
+their respective layers. The intrinsic product lemma identifies their
+product with the class of the product of these evaluations in degree
+$p+q$. Actual normal polynomial evaluation is an algebra homomorphism,
+so this is exactly the symbol of the homogeneous polynomial $PQ$.
+Write arbitrary $P$ and $Q$ as their finite sums of monomials, each of
+which is homogeneous of its actual exponent degree. Induct through these
+two finite sums. Additivity of the existing symbol map and the two
+distributive laws reduce every induction step to the already proved
+homogeneous product identity. This gives the same multiplicative identity
+for the two whole polynomials.
+The symbol of $1$ is its actual degree-zero class, which is the
+intrinsic unit. A constant coefficient has the actual degree-zero tangent
+pullback class, proving preservation of scalars. The underlying map is
+the existing entire symbol map, so its previously proved complete
+kernel dictionary gives exactly the existing original initial ideal.
+\end{proof}
+
+\begin{theorem}[The polynomial quotient is the intrinsic original associated algebra]
+\label{hir:relative-normal-intrinsic-associated-quotient-algebra-dictionary}
+\source{bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGradedQuotientAlgEquiv,Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGradedQuotientAlgEquiv_mk,Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGradedQuotientAlgEquiv_toLinearEquiv,Hironaka.HironakaRelativeNormalGradedAlgebra.originalNormalAssociatedGradedQuotientAlgEquiv_homogeneous}
+\leanok
+\uses{hir:relative-normal-intrinsic-polynomial-symbol-algebra-hom,hir:relative-normal-graded-internal-finite-relations}
+There is a $B$-algebra isomorphism from the whole polynomial quotient by
+the existing original normal initial ideal onto the intrinsic original
+associated algebra. It sends every actual polynomial numerator to its
+same existing entire original symbol, retaining every homogeneous degree.
+\end{theorem}
+\begin{proof}
+The original homogeneous symbol surjections give surjectivity of the
+entire symbol map onto the literal direct sum. Its intrinsic algebra
+homomorphism has exactly the existing whole original initial ideal as
+kernel. The algebraic first isomorphism theorem therefore gives the
+asserted quotient isomorphism. Its defining quotient map sends every
+polynomial numerator to that same actual symbol. For a homogeneous
+numerator the original component dictionary places its symbol in its
+actual same-degree summand, proving the degree assertion. Since every original quotient class has a polynomial numerator, the numerator identity also proves that the underlying linear isomorphism is exactly the previous literal quotient-module dictionary. The ring and
+scalar structures used here were constructed before this quotient
+comparison from genuine original representatives.
+\end{proof}

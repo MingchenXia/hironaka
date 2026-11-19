@@ -1,0 +1,153 @@
+\section{Canonical analytic division retains its exact formal quotients and filtration}
+
+\begin{theorem}[A whole owner-supported relation is zero componentwise]
+\label{hir:actual-owner-supported-formal-relation-uniqueness}
+\uses{hir:actual-formal-initial-exponent-coefficient-product,hir:actual-monic-vertex-family-whole-division}
+\lean{Hironaka.HironakaActualOwnerAnalyticDivision.owner_supported_relation_eq_zero}
+\leanok
+For any genuine monic vertex family of a whole formal ideal, a whole
+relation $\sum_a G_aH_a=0$ whose $a$th quotient is supported in its actual
+disjoint monomial-owner part has every $H_a=0$. No convergence or inverse
+operator hypothesis is needed.
+\end{theorem}
+\begin{proof}
+Suppose some quotient is nonzero. Among the finitely many nonzero
+quotients choose $a$ for which the shifted genuine first exponent
+$c=a+\operatorname{inexp}(H_a)$ is least in the same monomial order.
+The genuine first exponent of $G_aH_a$ is $c$, and its coefficient is
+the nonzero first coefficient of $H_a$, since $G_a$ is monic at $a$.
+Every other nonzero product has first exponent at least $c$. Equality
+would give two quotient first coefficients in the same actual owner
+part, forcing their vertex labels equal. Thus every different product
+has strictly larger first exponent and its coefficient at $c$ is zero.
+The whole sum therefore has the nonzero coefficient of $G_aH_a$ at $c$,
+contrary to the relation. Empty families are included.
+\end{proof}
+
+\begin{theorem}[Every actual owner division has the literal recursively constructed formal quotients]
+\label{hir:actual-owner-division-formal-quotient-dictionary}
+\uses{hir:actual-owner-supported-formal-relation-uniqueness,hir:actual-monic-vertex-family-whole-division,hir:actual-monic-family-canonical-remainder}
+\lean{Hironaka.HironakaActualOwnerAnalyticDivision.owner_division_quotients_eq_familyFormalQuotient}
+\leanok
+A whole owner-supported division with the genuine canonical normal
+remainder has precisely the previously constructed recursive formal
+quotients, for the same monic vertex family and the same numerator.
+\end{theorem}
+\begin{proof}
+The genuine recursion gives another whole division with owner-supported
+quotients. Its remainder equals the canonical normal remainder by the
+whole remainder uniqueness theorem. Subtract the two actual whole
+identities. The resulting difference quotients are owner-supported:
+outside their owner's part both original coefficients are zero. Apply
+the preceding relation theorem to their whole relation, giving zero
+in every difference component, exactly equality of every quotient.
+\end{proof}
+
+\begin{theorem}[Original canonical analytic division has the exact Taylor quotients and shifted order bounds]
+\label{hir:actual-original-canonical-analytic-filtered-division}
+\uses{hir:actual-owner-division-formal-quotient-dictionary,hir:actual-original-canonical-reduced-analytic-division,hir:actual-monic-family-centre-power-division,hir:actual-original-formal-taylor-maximal-power-kernel}
+\lean{Hironaka.HironakaActualOwnerAnalyticDivision.exists_original_filtered_reduced_vertex_division}
+\leanok
+Every original ideal and original numerator internally give analytic
+quotients by its same canonical analytic reduced family and the same
+canonical analytic normal remainder. Every quotient's original Taylor
+series is literally the genuine formal recursive quotient. If the
+numerator belongs to the whole maximal-ideal power $\mathfrak m^q$,
+the quotient at vertex $a$ belongs to
+$\mathfrak m^{\max(q-|a|,0)}$.
+\end{theorem}
+\begin{proof}
+Use the original analytic owner division, which internally proves
+convergence of its actual quotients and remainder. Apply original Taylor
+to its whole identity; the canonical analytic generators have exactly
+the same canonical reduced formal series and its remainder has exactly
+the canonical formal normal representative. Its supplied genuine owner
+support and the preceding theorem therefore identify every Taylor
+quotient with the literal formal recursion. Degree-first monicity of
+each canonical reduced member implies all its coefficients below total
+degree $|a|$ vanish. The genuine recursive shifted-weight division bound,
+with every coordinate weight one, now says every coefficient of the
+$a$th quotient below degree $q-|a|$ is zero. The actual original
+Taylor/whole maximal-power dictionary converts this coefficient
+vanishing into the stated whole analytic ideal power. It includes
+$q=0$ and negative differences by the ordinary zero power convention.
+\end{proof}
+
+\begin{theorem}[Approximate original canonical relations lift to genuine analytic syzygies]
+\label{hir:actual-original-canonical-analytic-syzygy-lifting}
+\uses{hir:actual-original-canonical-analytic-filtered-division}
+\lean{Hironaka.HironakaActualOwnerAnalyticDivision.exists_original_canonical_syzygy_of_relation_error}
+\leanok
+For an original ideal with its same canonical analytic reduced family,
+any actual analytic coefficient family $P_a$ whose actual relation error
+$E=\sum_aG_aP_a$ lies in $\mathfrak m^q$ has a genuine analytic syzygy
+$C_a$ with
+\[
+ \sum_aG_aC_a=0,\qquad
+ P_a-C_a\in\mathfrak m^{\max(q-|a|,0)}\quad\hbox{for every }a.
+\]
+The input is the actual approximate relation at a stated finite order;
+no exact syzygy, relation lift, convergence or prepared tracking
+certificate is supplied.
+\end{theorem}
+\begin{proof}
+The actual whole error belongs to the original ideal, since every $G_a$
+does. Divide it by that same canonical analytic family using the preceding
+theorem. Its canonical normal remainder is zero: the entire original
+normal projection has kernel exactly the original ideal. Thus
+$E=\sum_aG_aQ_a$ with every actual analytic quotient $Q_a$ in
+$\mathfrak m^{\max(q-|a|,0)}$. Set $C_a=P_a-Q_a$. Subtract the two whole
+expressions for $E$; distributivity over the finite actual vertex set
+proves $\sum_aG_aC_a=0$. Since $P_a-C_a=Q_a$, all the prescribed whole
+power bounds follow. In particular this corrects any actual polynomial
+relation among homogeneous initial forms whose original relation error
+has the corresponding next-order vanishing.
+\end{proof}
+
+These are exact canonical analytic relation lifts. Turning them into
+exceptional torsion-freeness of the normalized transformed generator ideal,
+and proving a reverse current Hilbert--Samuel persistence criterion,
+remain separate assertions.
+
+\begin{theorem}[Actual homogeneous initial relations have prescribed analytic syzygy lifts]
+\label{hir:actual-original-homogeneous-initial-analytic-syzygy}
+\uses{hir:actual-original-canonical-analytic-syzygy-lifting,hir:actual-original-formal-taylor-maximal-power-kernel}
+\lean{Hironaka.HironakaActualOwnerAnalyticDivision.exists_original_initial_syzygy_lift}
+\leanok
+Fix an original ideal with its actual canonical analytic generators $G_a$,
+and an integer $D$ at least every vertex degree $|a|$. Let $P_a$ be actual
+original analytic germs whose entire Taylor series are homogeneous of
+degree $D-|a|$, and suppose the literal homogeneous initial relation
+\[
+ \sum_a T(P_a)\,\operatorname{hom}_{|a|}T(G_a)=0
+\]
+holds. Then internally produce actual analytic germs $C_a$ with
+$\sum_aG_aC_a=0$ and
+\[
+ \operatorname{hom}_{D-|a|}T(C_a)=T(P_a),\qquad
+ P_a-C_a\in\mathfrak m^{D+1-|a|}
+\]
+for every vertex. The input is a genuine homogeneous relation on the
+same source initial forms; no vanishing order of its entire original
+relation error or analytic syzygy is supplied.
+\end{theorem}
+\begin{proof}
+Put $E=\sum_aG_aP_a$. For every exponent $c$ of degree at most $D$,
+expand each product coefficient in its genuine finite antidiagonal.
+A nonzero coefficient of $T(P_a)$ at $u$ forces $|u|=D-|a|$.
+Consequently the complementary exponent $v$, with $u+v=c$, has
+$|v|\le|a|$. If this inequality is strict, degree-first monicity of
+the original canonical reduced generator makes its coefficient zero;
+if equality holds, its coefficient is precisely that of its degree
+$|a|$ homogeneous component. Thus every coefficient of $T(E)$ through
+degree $D$ equals the same coefficient of the displayed whole zero
+relation. All such coefficients vanish. The actual original maximal-power
+dictionary therefore gives $E\in\mathfrak m^{D+1}$ internally.
+Apply the preceding actual analytic syzygy correction with $q=D+1$.
+It supplies $P_a-C_a\in\mathfrak m^{D+1-|a|}$ and the genuine whole
+syzygy. Its Taylor correction has zero coefficients in degree $D-|a|$,
+since $|a|\le D$. Taking that actual homogeneous component leaves
+$T(P_a)$ unchanged; the latter series is homogeneous of exactly that
+degree by hypothesis. This proves both the prescribed initial component
+and every whole analytic correction power.
+\end{proof}

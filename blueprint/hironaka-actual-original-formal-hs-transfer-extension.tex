@@ -1,0 +1,116 @@
+\section{Genuine whole original and formal jet quotients have the same HS values}
+
+Keep the ACTUAL original Taylor complex algebra embedding
+$\mathcal T:R=\mathcal O_{\mathbb C^n,0}\hookrightarrow
+S=\mathbb C[[X_1,\ldots,X_n]]$. Write $\mathfrak m$ for the original
+maximal ideal and $\mathfrak n=(X_1,\ldots,X_n)$ for the genuine formal
+variable ideal. This chapter proves the original-to-formal Hilbert--Samuel
+bridge used in the standard-basis setting of
+\cite[\S7, pp.~260--271]{bierstone-milman97-invent-math}. Every complex
+scalar action below is the genuine existing action on its actual ring.
+
+\begin{lemma}[The genuine formal variable powers have exactly the actual low-coefficient kernel]
+\label{hir:actual-formal-variable-power-coefficient-kernel}
+\uses{hir:actual-formal-coefficients-original-polynomial-approximation}
+For every genuine $F\in S$ and $q\ge0$,
+\[
+ F\in\mathfrak n^q\quad\Longleftrightarrow\quad
+ [X^\alpha]F=0\text{ for every }|\alpha|<q.
+\]
+\lean{Hironaka.HironakaActualOriginalFormalHSTransfer.genuineFormalVariables,Hironaka.HironakaActualOriginalFormalHSTransfer.mem_genuineFormalVariables_pow_iff_coefficients_zero}
+\leanok
+\end{lemma}
+\begin{proof}
+Use the canonical, coefficient-defined algebra equivalence from the
+ACTUAL formal series ring to the adic completion of the genuine polynomial
+ring $P=\mathbb C[X]$ at its true variable ideal $J$. Its actual variable
+formula sends EACH $X_i$ to the canonical completion image of the SAME
+polynomial variable. Actual image-of-span therefore sends the WHOLE
+$\mathfrak n$ to $J\widehat P$, and sends $\mathfrak n^q$ to
+$J^q\widehat P$. The original finite variable family makes $J$ finitely
+generated. The genuine completion evaluation kernel theorem identifies
+$J^q\widehat P$ with the kernel of evaluation to $P/J^q$.
+The canonical series equivalence evaluates at order $q$ to precisely the
+class of the actual total-degree truncation of $F$. In the genuine
+polynomial ring, membership in $J^q$ means exactly vanishing of ALL
+coefficients of degree below $q$; the actual truncation retains precisely
+these coefficients. These equalities in BOTH directions give the claimed
+kernel. This applies also to the empty variable family and to $q=0$.
+No equivalence or desired power-kernel premise is supplied by a caller.
+\end{proof}
+
+\begin{theorem}[The actual original-to-formal whole quotient map is bijective at every order]
+\label{hir:actual-original-formal-whole-jet-map-bijective}
+\uses{hir:actual-formal-variable-power-coefficient-kernel,hir:actual-formal-extension-whole-original-ideal-contraction,hir:actual-original-formal-variable-power-extension,hir:actual-formal-coefficients-original-polynomial-approximation}
+For EVERY original ideal $I\subset R$ and EVERY $q\ge0$, the genuine
+original Taylor map induces the canonical bijective ORIGINAL complex
+algebra map
+\[
+ R/(I+\mathfrak m^q)\longrightarrow
+ S/(S\mathcal T(I)+\mathfrak n^q),\qquad[g]\longmapsto[\mathcal T(g)].
+\]
+\lean{Hironaka.HironakaActualOriginalFormalHSTransfer.actualFormalThickening,Hironaka.HironakaActualOriginalFormalHSTransfer.originalFormalWholeJetMap,Hironaka.HironakaActualOriginalFormalHSTransfer.originalFormalWholeJetMap_mk,Hironaka.HironakaActualOriginalFormalHSTransfer.originalFormalWholeJetMap_injective,Hironaka.HironakaActualOriginalFormalHSTransfer.originalFormalWholeJetMap_surjective}
+\leanok
+\end{theorem}
+\begin{proof}
+Actual extension sends the ENTIRE original $I+\mathfrak m^q$ to
+$S\mathcal T(I)+\mathfrak n^q$, so the displayed original algebra map
+is well defined. If the images of two genuine original classes agree,
+$\mathcal T(g-h)$ belongs to that true extended ideal. Actual whole
+original extension-contraction forces $g-h\in I+\mathfrak m^q$,
+proving injectivity.
+For any genuine formal numerator $F$, evaluate its actual total-degree
+truncation below $q$ at the SAME original coordinate germs to obtain
+$g_F\in R$. The already proved original polynomial/Taylor identity
+shows that $\mathcal T(g_F)$ has precisely the lower coefficients of
+$F$. The preceding genuine formal power kernel therefore gives
+$\mathcal T(g_F)-F\in\mathfrak n^q$. Their true formal quotient
+classes agree, proving surjectivity on EVERY entire formal class. The
+same construction handles $q=0$, where both quotient rings are trivial.
+\end{proof}
+
+\begin{theorem}[Canonical whole quotient algebra equivalences retain every actual original numerator]
+\label{hir:actual-original-formal-whole-jet-algebra-equivalence}
+\uses{hir:actual-original-formal-whole-jet-map-bijective}
+The preceding map constructs an actual ORIGINAL complex algebra
+equivalence for every $I,q$, whose value at EVERY original numerator
+class is its literal Taylor numerator class as displayed above.
+\lean{Hironaka.HironakaActualOriginalFormalHSTransfer.originalFormalWholeJetAlgEquiv,Hironaka.HironakaActualOriginalFormalHSTransfer.originalFormalWholeJetAlgEquiv_mk}
+\leanok
+\end{theorem}
+\begin{proof}
+Apply the genuine algebra equivalence constructor to the ACTUAL
+bijective quotient algebra map, retaining that same forward map. Its
+numerator formula is therefore the defining actual quotient map formula.
+The scalar field acts through the original constant-germ map on the
+source, and the genuine constant formal series on the target; the true
+Taylor algebra commutation gives complex linearity of this equivalence.
+There is no changed or transported algebra action on either actual
+quotient.
+\end{proof}
+
+\begin{theorem}[Every existing original HS value equals the genuine formal extension HS value]
+\label{hir:actual-original-formal-entire-hs-transfer}
+\uses{hir:actual-original-formal-whole-jet-algebra-equivalence,hir:actual-point-quotient-finite-dimensional,hir:actual-hilbert-samuel-point-value}
+Every $S/(K+\mathfrak n^q)$, for arbitrary formal ideal $K\subset S$,
+is genuinely finite dimensional over the existing complex field. Define
+$H^{\mathrm{formal}}_K(\ell)=\dim_\mathbb C S/(K+\mathfrak n^{\ell+1})$.
+Then for EVERY original ideal $I$ and EVERY $\ell\ge0$,
+\[
+ H_I(\ell)=H^{\mathrm{formal}}_{S\mathcal T(I)}(\ell).
+\]
+\lean{Hironaka.HironakaActualOriginalFormalHSTransfer.finiteDimensional_formal_quotient_sup_variables_pow,Hironaka.HironakaActualOriginalFormalHSTransfer.genuineFormalHilbertSamuelValue,Hironaka.HironakaActualOriginalFormalHSTransfer.hilbertSamuelValue_eq_genuine_formal_extension}
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine original quotient $R/\mathfrak m^q$ is internally finite
+dimensional by actual holomorphic finite jets. The true complex-linear
+quotient equivalence at $I=0$ therefore makes $S/\mathfrak n^q$ finite
+dimensional. Its actual surjective quotient map to
+$S/(K+\mathfrak n^q)$ gives the first assertion, with no formal
+Noetherian or finite-quotient certificate assumed. Finally take the
+preceding actual whole quotient complex-linear equivalence for the SAME
+original $I$ and $q=\ell+1$. Its true complex dimension equality is
+precisely the EXISTING original HS value and the displayed genuine formal
+value, proving the assertion simultaneously at every order.
+\end{proof}

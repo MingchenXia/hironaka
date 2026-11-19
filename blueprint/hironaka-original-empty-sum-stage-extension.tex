@@ -1,0 +1,65 @@
+\section{Genuine projection neutrality of empty sum-separation stages}
+
+\begin{lemma}[Disjoint original parts force every canonical sum centre empty]
+\label{hir:original-disjoint-sum-all-empty-canonical-stage}
+\uses{hir:original-canonical-sum-intrinsic-source-record}
+\lean{Hironaka.HironakaOriginalEmptySumStage.canonical_sum_stage_empty_of_disjoint}
+\leanok
+Let $A,B\subset X^n$ be actual analytic subsets, with $A$ of empty
+interior, disjoint $A,B$, and actual ordered SNC boundary $E_0$.
+For the unchanged original sum datum
+$M=(X,E_0,\mathcal I_A+\mathcal I_B,1)$, every actual canonical history
+$T$ has only empty centres and is already terminal. No compactness,
+terminality or stage-neutrality certificate is supplied. In particular
+this applies when a pulled dimension part is actually empty.
+\end{lemma}
+\begin{proof}
+Original analyticity gives coherence of the whole sum ideal; empty
+interior of $A$ and the original SNC boundary make the actual datum an
+invariant-domain datum. Its marking-one cosupport is exactly its whole
+zero locus $A\cap B$, which is empty by the actual disjointness.
+The genuine original empty-cosupport theorem applies to this very actual
+canonical history: every transformed cosupport is empty, so each whole
+maximum centre is empty, as is every permitted empty centre. Its actual
+canonical test history therefore has empty final cosupport and is
+terminal. No new history has replaced the supplied $T$.
+\end{proof}
+
+\begin{theorem}[The whole empty sum stage is uniquely projection-neutral]
+\label{hir:original-empty-sum-stage-unique-projection-neutrality}
+\uses{hir:original-disjoint-sum-all-empty-canonical-stage,hir:original-ambient-terminal-choice-intrinsic-unique-comparison,hir:original-all-empty-whole-boundary}
+\lean{Hironaka.HironakaOriginalEmptySumStage.existsUnique_projection_neutral_sum_stage}
+\leanok
+For the same original inputs and any actual canonical sum history
+$T:X\leftarrow D$, there is a unique actual biholomorphism
+$\eta:D\simeq X$ equal pointwise to its actual projection. Every original
+closed subset $P$ has literal strict transform $\eta^{-1}P$. The actual
+entire boundary is
+\[
+ E_T=E_0.\operatorname{map}(\eta^{-1})
+       \mathbin{+}[\varnothing]^{\operatorname{length}(T)}.
+\]
+After filtering exactly empty entries it is therefore the filtered
+inverse image of $E_0$. The original actual history is all-empty and
+terminal. This retains its actual number of empty boundary positions;
+comparison of subsequent recursive stages after deleting those positions
+is a separate invariant-transport statement.
+\end{theorem}
+\begin{proof}
+The preceding lemma makes $T$ all-empty and terminal for the unchanged
+sum datum. The identity history is also canonical and terminal for that
+same empty-cosupport datum. Genuine actual terminal-history comparison,
+including ambient dimension zero, gives an actual biholomorphism from
+$D$ to $X$ commuting with these two projections. Since the second
+projection is the literal identity, its underlying function equals the
+actual $T$ projection pointwise. Any other such biholomorphism has that
+same underlying function, hence equals it.
+A genuine biholomorphism has no differential exceptional points and is a
+homeomorphism. Its strict transform of any original closed subset is
+therefore exactly its inverse image. The actual all-empty tower boundary
+formula retains every old member as the inverse image under this same
+projection and appends one actual empty entry for each performed blowup.
+Substitute the proved pointwise projection identity. Filtering removes
+exactly the appended empty entries, giving the displayed neutral
+filtered boundary while retaining the entire unfiltered identity.
+\end{proof}

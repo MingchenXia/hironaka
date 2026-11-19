@@ -1,0 +1,95 @@
+\section{Actual quotient-subspace models commute with genuine open restriction}
+\label{sec:hironaka-actual-analytic-subspace-open-restriction}
+
+Let $C\subset M$ be a subset of a complex manifold and let $U\subset M$
+be an original open. Write $C_U=\{x\in U:x\in C\}$. Each subspace model
+has its independently constructed actual whole vanishing-quotient sheaf.
+No comparison of structure sheaves or stalks is assumed.
+
+\begin{theorem}[The native sheaf stalk pullback is the actual whole chart-germ pullback]
+\label{hir:actual-analytic-subspace-native-chart-pullback}
+\uses{hir:real-domain-actual-complex-sheaf-stalk-whole-germ-equivalence,hir:actual-original-holomorphic-map-whole-germ-pullback}
+\lean{Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualNativeStalk_chart_pullback}
+\leanok
+For an actual holomorphic map $f:M\to N$, the original native locally
+ringed stalk pullback agrees, under the actual whole stalk/chart ring
+equivalences, with the independently constructed actual holomorphic
+chart-germ pullback. This equality holds for every original target
+stalk element, with the original scalar and numerator maps.
+\end{theorem}
+\begin{proof}
+Represent an arbitrary original target stalk element by a genuine
+holomorphic section $s$ on an original open $V$ containing $f(x)$.
+The native stalk-pullback germ formula sends it to the germ of the
+literal section pullback on $f^{-1}V$. The actual source chart map sends
+this germ to the translated chart germ of that pulled-back section's
+original extension. The actual target chart map sends the original
+germ to the translated chart germ of the original extension of $s$.
+The independently proved chart-germ pullback formula sends that
+numerator to its actual composition with $f$. On the genuine open
+$f^{-1}V$, this composition equals the original extension of the
+literal pulled-back section pointwise. Their original function germs,
+and hence their translated chart germs, are equal. Thus both actual
+maps agree on every genuine section representative and on the entire
+target stalk.
+\end{proof}
+
+\begin{theorem}[Every actual open-subspace inclusion has isomorphic whole quotient stalks]
+\label{hir:actual-analytic-subspace-open-stalk-iso}
+\uses{hir:actual-analytic-subspace-native-chart-pullback,hir:actual-analytic-subspace-holomorphic-map,hir:actual-any-subset-open-whole-vanishing-ideal}
+\lean{Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceMap,Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceStalkEquiv,Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceMap_stalk_apply,Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceMap_stalk_isIso}
+\leanok
+The genuine holomorphic original open inclusion $U\hookrightarrow M$
+constructs an actual locally ringed map from the model of $C_U$ to the
+model of $C$. Every stalk map of this same actual subspace morphism is
+an isomorphism of the entire original quotient local rings.
+\end{theorem}
+\begin{proof}
+The actual open-inclusion chart-germ pullback is the identity on the
+same original preferred-chart germ ring. The preceding compatibility
+therefore identifies its native ambient stalk map, in both actual chart
+equivalences, with that identity. The existing genuine open vanishing
+transport theorem, proved by actual restriction and actual local zero
+extension, identifies the entire original chart vanishing ideal for
+$C_U$ with the entire original chart ideal for $C$. Thus the identity
+induces an internally constructed isomorphism of their whole chart
+quotients. Compose it with the two actual quotient-subspace stalk/chart
+equivalences to obtain a bijection between the actual subspace stalks.
+The proved actual subspace pullback formula on all original ambient
+numerators and the native-chart compatibility identify the actual
+subspace stalk map with this bijection. The original target inclusion
+stalk is surjective, so these numerator identities cover every target
+subspace stalk element. Hence the actual stalk map itself is an
+isomorphism; no stalk-isomorphism certificate was an input.
+\end{proof}
+
+\begin{theorem}[Actual open quotient models are the genuine open restriction]
+\label{hir:actual-analytic-subspace-open-restriction-iso}
+\uses{hir:actual-analytic-subspace-open-stalk-iso,hir:actual-analytic-subspace-holomorphic-map}
+\lean{Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceMap_base_isOpenEmbedding,Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceMap_isOpenImmersion,Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceRestrictionIso,Hironaka.HironakaActualAnalyticSubspaceOpenRestriction.actualOpenSubspaceRestrictionIso_inclusion}
+\leanok
+The same actual map from the model of $C_U$ to the model of $C$ is a
+genuine open immersion. It internally constructs an actual isomorphism
+from the independently constructed model of $C_U$ to the actual open
+restriction of the model of $C$. Composing its isomorphism with the
+literal restriction inclusion recovers the same actual holomorphic
+subspace map, hence also its proved original ambient inclusion square.
+\end{theorem}
+\begin{proof}
+The underlying map sends $\langle\langle x,x\in U\rangle,x\in C\rangle$
+to $\langle x,x\in C\rangle$. It is the literal homeomorphic
+identification with the open subset $\{x\in C:x\in U\}$ of the actual
+subtype $C$, so it is an open embedding. Every actual stalk map is an
+isomorphism by the preceding theorem. The genuine locally ringed open
+immersion criterion therefore proves that this same actual map is an
+open immersion. Its original universal restriction construction gives
+the asserted isomorphism with the actual restriction along this open
+embedding. The universal construction's actual inclusion identity
+identifies its composite with the restriction inclusion with the
+original actual subspace map. No overlap structure-sheaf map was supplied.
+\end{proof}
+
+These statements apply in particular to actual analytic subsets $C$ and
+their original open pieces. They supply genuine open model maps needed
+for an analytic atlas. Effective compatible atlas gluing and descent of
+resolution centres and blowups remain further obligations.

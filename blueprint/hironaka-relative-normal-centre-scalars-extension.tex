@@ -1,0 +1,136 @@
+\section{Canonical centre-ring scalars on the original normal graded layers}
+
+Let $R$ be the actual original ambient holomorphic local ring, $I$ the
+whole original ideal and $J$ the whole normal ideal.  The already constructed
+layer $L_q$ is the image of $J^q$ in $R/(I+J^{q+1})$; its addition and its
+intrinsic graded product are retained.  The following scalar descent is a
+local algebraic ingredient for the Hilbert--Samuel equisingularity route in
+Bierstone--Milman, subsection ``Use of the Hilbert-Samuel
+function''.  That source passage describes the geometric goal; the explicit
+quotient-scalar construction below is an additional algebraic argument.
+It does not establish a normal-flat sheaf, centre containment, full ambient
+Hilbert--Samuel comparison or descent under blowing up.  No action of $R/J$
+on the full higher truncation $R/(I+J^s)$ is asserted.
+
+\begin{lemma}[Actual ambient multiplication on the whole original layer]
+\label{hir:relative-normal-actual-layer-ambient-scalars}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-graded-literal-layers,hir:relative-normal-intrinsic-layer-multiplication}
+\lean{Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPieceAmbientModule,Hironaka.HironakaRelativeNormalCentreScalars.idealPowerLayerAmbient_smul_class}
+\leanok
+For any $q\geq0$, ordinary quotient multiplication defines a genuine
+$R$-module on the existing literal layer $L_q$.  For every actual
+$g\in J^q$ and $r\in R$, it is given by
+\[
+ r\,[g]_q=[rg]_q.
+\]
+The additive group is the original one; the action does not use a
+polynomial quotient identification or a chosen tangent splitting.
+\end{lemma}
+\begin{proof}
+Every element of $L_q$ has a representative $g\in J^q$ by its image
+construction.  Since $J^q$ is an ideal, $rg\in J^q$.  Thus the actual
+quotient product of the class of $r$ and this element is again in the
+same image.  Multiplication in the original quotient is already
+well-defined: if $g-g'\in I+J^{q+1}$, then $r(g-g')$ is in this same ideal.
+Associativity, the scalar unit law and distributivity follow from the
+corresponding equalities in that quotient, since the inclusion of its
+image subtype is injective.  Its actual quotient class formula gives
+the displayed equality for every representative, not only a chosen one.
+\end{proof}
+
+\begin{lemma}[Internally proved annihilation and canonical centre scalars]
+\label{hir:relative-normal-actual-layer-centre-scalars}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-actual-layer-ambient-scalars}
+\lean{Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPiece_isTorsionBy_normalIdeal,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPieceCentreModule,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPieceCentre_mk_smul_class}
+\leanok
+The whole original ideal $J$ annihilates $L_q$.  Consequently the actual
+ambient action descends canonically to a module over the actual centre
+quotient $R/J$, with the formula
+\[
+ (r\bmod J)\,[g]_q=[rg]_q\qquad(g\in J^q).
+\]
+No annihilator or desired quotient-action hypothesis is supplied.
+\end{lemma}
+\begin{proof}
+For $u\in J$ and $g\in J^q$, their actual product belongs to
+$J J^q=J^{q+1}$, hence has zero class in $R/(I+J^{q+1})$.
+The actual power-class surjection therefore proves $u x=0$ for EVERY
+$x\in L_q$.  If $r-r'\in J$, distributivity gives
+$rx-r'x=(r-r')x=0$.  Thus the ambient scalar additive homomorphism factors
+through the genuine quotient $R/J$.  On a quotient representative its
+value is the original ambient multiplication.  The original ambient
+module laws descend along the surjection $R\to R/J$, proving all module
+laws and the formula.  This also proves uniqueness among quotient scalar
+actions whose scalar representatives have the stated actual action.
+\end{proof}
+
+\begin{lemma}[Canonical scalars on the original whole direct sum]
+\label{hir:relative-normal-actual-associated-centre-scalars}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-actual-layer-centre-scalars,hir:relative-normal-intrinsic-graded-algebra}
+\lean{Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGradedAmbientModule,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGraded_isTorsionBy_normalIdeal,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGradedCentreModule,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGradedCentre_smul_of}
+\leanok
+The existing literal direct sum $G=\bigoplus_{q\geq0}L_q$ inherits the
+actual componentwise ambient action and canonical $R/J$ action.  For
+every degree inclusion $\iota_q$, actual scalar $r$ and actual $x\in L_q$,
+\[
+ (r\bmod J)\,\iota_q(x)=\iota_q((r\bmod J)x).
+\]
+Every component of this action is the original quotient class product,
+and $J$ annihilates the entire direct sum, all degrees simultaneously.
+\end{lemma}
+\begin{proof}
+Define the ambient action componentwise; the support stays finite because
+scalar multiplication preserves zero.  The laws hold in every actual
+component and hence in the direct sum.  For $u\in J$, its action on every
+component is zero by the preceding lemma, so its action on the entire
+direct sum is zero.  Define the quotient action componentwise from the already canonically
+descended layer actions.  Its laws hold in each component.  Representing
+a quotient scalar by $r\in R$ identifies this action with the actual
+ambient action componentwise, so it is exactly its quotient descent.
+The ambient action commutes with each degree inclusion, as can be
+checked in every component.  The two scalar representative formulas
+then give the displayed inclusion identity.  Thus descent of the whole sum agrees with the
+componentwise already descended layer actions.
+\end{proof}
+
+\begin{lemma}[Comparison after canonical descent with the actual plane trace]
+\label{hir:relative-normal-actual-centre-trace-scalar-dictionary}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-actual-layer-centre-scalars,hir:relative-normal-actual-associated-centre-scalars,hir:relative-normal-entire-plane-kernel,hir:relative-normal-whole-hadamard}
+\lean{Hironaka.HironakaRelativeNormalCentreScalars.planeQuotientAlgEquiv_mk,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPieceCentre_smul_eq_planeQuotient,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPieceCentre_mk_smul_eq_trace,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalGradedPieceCentre_tangent_smul,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGradedCentre_smul_eq_planeQuotient,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGradedCentre_mk_smul_eq_trace,Hironaka.HironakaRelativeNormalCentreScalars.originalNormalAssociatedGradedCentre_tangent_smul}
+\leanok
+In original split coordinates, put $B=\mathcal O_{\mathbb C^d,0}$ and
+$R=\mathcal O_{\mathbb C^{d+t},0}$.  The actual plane trace induces the
+already proved algebra isomorphism $e:R/J\simeq B$.  For EVERY actual
+quotient scalar $c$, the newly descended action on $L_q$ and $G$ agrees
+with the existing tangent $B$-action of $e(c)$.  In particular
+\[
+ (r\bmod J)x=(\operatorname{trace} r)x,
+ \qquad
+ (\operatorname{pullback} b\bmod J)x=bx.
+\]
+The canonical centre action is constructed before this comparison.
+\end{lemma}
+\begin{proof}
+The actual relative Hadamard decomposition says
+$r-\operatorname{pullback}(\operatorname{trace}r)\in J$.
+Its action on each actual layer is therefore zero.  The actual ambient
+quotient multiplication by the pulled back $b$ is precisely the old
+$tangent$ scalar action, both on every quotient numerator and on the
+same image subtype.  Thus the first scalar formula holds for every
+$r$ and every actual layer element.  Every quotient scalar has an
+actual representative, and the true plane quotient isomorphism takes
+this representative to its actual trace, so the formula holds for every
+$c\in R/J$.  Trace of tangent pullback is the identity, giving the second
+formula.  Componentwise verification gives the same two equalities on
+the entire direct sum, with the original degree inclusions retained.
+\end{proof}
+
+Intrinsic free or flat modules over an actual smooth-centre stalk ring,
+chart independence, a coherent sheaf/stalk identification and genuine
+centre inclusion remain subsequent geometric producers.  The previous
+same-open tangent ranks and fibre Hilbert--Samuel sequences do not by
+themselves supply those conclusions.

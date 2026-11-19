@@ -1,0 +1,83 @@
+\section{Actual initial-boundary compatibility of the whole history map}
+
+The indexed Step One histories retain the original boundary list, including
+empty or inactive repetitions. This supplies the compatibility between the
+initial-boundary insertion formula and the true level-dependent history map
+needed for higher original recursive histories. The argument adapts the
+indexed recursive route of \cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+by deriving the necessary empty prefix from the actual original geometry.
+
+\begin{lemma}[The true lower empty prefix contains the clamped history index]
+\label{hir:original-initial-boundary-actual-lower-history-prefix}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-member-filtered-prefix-exact-count,hir:original-invariant-empty-actual}
+\lean{Hironaka.HironakaOriginalBoundaryHistoryMap.original_initial_lower_index_bound,Hironaka.HironakaOriginalBoundaryHistoryMap.original_initial_lower_history_empty_prefix}
+\leanok
+Let $M$ be an original well-formed marked record, $H$ an actual test history
+for its original barred record, $p$ an actual endpoint, and $j\leq |M.E|$.
+Put $\ell=\operatorname{level}(M,H,p)$ and $d=j-\ell$, with subtraction
+clamped at zero. The ACTUAL selected lower record $L(M,\ell,H,p)$ has at
+least $d$ boundary entries and its first $d$ entries are empty. At positive
+level, $d$ is bounded above by the actual retained-prefix insertion index.
+No lower record, empty-prefix or index comparison is assumed.
+\end{lemma}
+\begin{proof}
+Write $E$ for the full actual barred boundary, $m=|M.E|$ and
+$E_0=E\vert_m$ for its original prefix. Actual testness and original
+well-formedness give the true SNC boundary. The established indexed SNC
+count therefore says that the retained original prefix, filtered by
+$\neg(W\in E_0\mathbin{\wedge}p\in W)$, has length $m-\ell$.
+Also $\ell\leq m$, since it counts a subset of the $m$ original indices.
+Split the literal original prefix into its first $j$ entries and its next
+$m-j$ entries. Filtering preserves concatenation; the retained suffix has
+length at most $m-j$. If $c$ is the actual retained length of the first
+$j$ entries, then $m-\ell\leq c+(m-j)$, hence $j-\ell\leq c$.
+The actual original lower-prefix producer makes the first $c$ lower entries
+empty at positive level. Taking their first $d\leq c$ entries proves the
+claim with its boundary-length bound. At level zero the actual chosen-contact
+lower prefix already has its first $j$ entries empty; here $d=j$.
+No equality of independent contact choices is needed: this is the actual
+lower record selected by the unchanged original input.
+\end{proof}
+
+\begin{theorem}[The entire actual Step One value has one compatible initial-boundary history map]
+\label{hir:original-initial-boundary-entire-step-history-map-compatibility}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-initial-boundary-actual-lower-history-prefix,hir:original-short-history-step-map,hir:original-invariant-empty-actual,hir:original-crossing-run-base-regime}
+\lean{Hironaka.HironakaOriginalBoundaryHistoryMap.actual_lower_history_map_compatibility,Hironaka.HironakaOriginalBoundaryHistoryMap.actual_entire_step_history_map_compatibility}
+\leanok
+For EVERY original well-formed $M$, entire barred test history $T$, actual
+point $y$, every actual original initial-boundary index $j\leq |M.E|$,
+and EVERY family depth $k$, the entire actual Step One value $v$ satisfies
+\[
+ \mathcal H_{k,j}(v)=\operatorname{pairShift}(\operatorname{shiftFamily}(k,0))(v),
+ \qquad v=\operatorname{StepOne}(R_k;M,T,y).
+\]
+The value is unrestricted in its level, chosen-contact branch and all inner
+nonmonomial orders. No canonicality, lower-value, branch or compatibility
+certificate is supplied.
+\end{theorem}
+\begin{proof}
+At any actual assignment head $H$ and suffix $Q$, take the level of the
+actual assignment point $p=Qy$. The preceding result gives a true empty
+prefix of length $j-\ell$ in the ACTUAL lower marked record. If $p$ misses
+the actual lower mask, the masked lower value is infinite and both maps
+fix it. If it lies in the mask, restrict the actual whole suffix and use
+the specific-family empty-prefix theorem on this actual lower record.
+It gives $\operatorname{shiftFamily}(k,j-\ell)$ equal to
+$\operatorname{shiftFamily}(k,0)$ on its ENTIRE $R_k$ value, at every inner
+order. Coercion into the masked value gives the same equality.
+For the whole Step One value, a special point has infinite lower coordinate,
+so the two pair maps agree directly. At a nonspecial point put
+$\ell=\operatorname{level}(M,T,y)$, let $r$ be the actual run of that regime,
+and take the literal full split $T=H Q$ with suffix length $\min(r,|T|)$.
+Current regime membership and this true suffix length imply regime membership
+at the original assignment head, by the established reaching-run induction.
+Thus its ACTUAL point level is exactly $\ell$. Whole testness supplies actual
+barred testness of that head. Apply the masked comparison just proved and
+expand the unchanged Step One definition. Both first coordinates are $\ell$;
+the second coordinates coincide by that actual lower comparison. This gives
+the displayed entire value identity, including empty suffixes and level zero.
+It supplies a compatibility producer; higher outer canonical-history transport
+and global scheduling remain separate obligations.
+\end{proof}

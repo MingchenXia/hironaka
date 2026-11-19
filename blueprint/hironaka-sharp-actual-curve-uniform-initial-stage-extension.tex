@@ -1,0 +1,68 @@
+\section{The actual initial global stage is the original space}
+
+\begin{lemma}[The zero-prefix projection is an actual local biholomorphism]
+\label{hir:sharp-actual-curve-zero-prefix-biholomorphism}
+\uses{hir:sharp-actual-curve-uniform-prefix-head-successor}
+\lean{Hironaka.HironakaSharpActualCurveUniformInitialStage.zeroPrefixBiholomorphism,Hironaka.HironakaSharpActualCurveUniformInitialStage.zeroPrefixBiholomorphism_point}
+\leanok
+For every genuine finite blowup history over a complex manifold, the entire
+zero-prefix endpoint is biholomorphic to its original base by its actual
+projection. Every position of the original history is retained in the
+full-history construction; taking its zero prefix selects the genuine
+reflexive history, rather than deleting empty steps from a positive prefix.
+\end{lemma}
+\begin{proof}
+The whole dependent endpoint-and-history identity for the zero prefix
+identifies it with the original base equipped with its reflexive history.
+On that history the identity biholomorphism has exactly the required
+projection. Transport the entire assertion, including both its source
+manifold and the actual projection formula, along this whole identity.
+The resulting actual biholomorphism has point map equal to the zero-prefix
+projection on its entire source. No separate identification is assumed.
+\end{proof}
+
+\begin{theorem}[The actual initial-stage projection is the original-space biholomorphism]
+\label{hir:sharp-actual-curve-uniform-initial-stage}
+\uses{hir:sharp-actual-curve-zero-prefix-biholomorphism,hir:sharp-actual-curve-original-uniform-stage-atlas,hir:sharp-actual-endpoint-saturated-local-range,hir:sharp-actual-curve-original-global-uniform-stages}
+\lean{Hironaka.HironakaSharpActualCurveUniformInitialStage.initialProjection_bijective,Hironaka.HironakaSharpActualCurveUniformInitialStage.initialProjectionBiholomorphism,Hironaka.HironakaSharpActualCurveUniformInitialStage.initialProjectionBiholomorphism_point,Hironaka.HironakaSharpActualCurveUniformInitialStage.originalInitialBiholomorphism,Hironaka.HironakaSharpActualCurveUniformInitialStage.originalInitialBiholomorphism_point}
+\leanok
+For actual retained local histories covering the original complex manifold,
+the SAME actual global zero-stage projection is a biholomorphism onto that
+original manifold. Its entire inverse on every original chart is the
+actual local zero-prefix inverse followed by the actual gluing inclusion.
+Only the original positive-dimensional smooth pure curve, ordered SNC,
+and density data internally supply this construction for the original
+uniform stages. No initial-stage isomorphism or inverse certificate is input.
+\end{theorem}
+\begin{proof}
+For each actual chart, the first lemma identifies its zero-prefix
+projection with a genuine local biholomorphism onto the original chart.
+The exact glued projection law identifies the global projection on the
+actual inclusion with this local projection followed by the original
+open inclusion. For any original point choose a chart containing it;
+the inverse local biholomorphism followed by the actual inclusion gives
+a global preimage. This proves surjectivity.
+
+If two global points have equal original images, choose one original
+chart containing their common image. The entire saturated-range identity
+places both global points in the SAME actual inclusion range. Choose
+their local representatives there. The exact projection law makes their
+local projection values equal. The actual local biholomorphism is
+injective, so these representatives, and hence the original global points,
+are equal. This proves injectivity using actual ranges, rather than an
+assumed separation or inverse property.
+
+Take the inverse of this actual bijective projection. On the entire
+original chart it equals the actual gluing inclusion composed with the
+local zero-prefix inverse: applying the now proved injective projection
+to these two values gives the same original point. This composite is
+holomorphic by the actual inclusion and local inverse holomorphicity.
+Every original point belongs to one such genuine open chart, and the
+open-subtype holomorphicity criterion therefore proves holomorphicity
+of the entire inverse. The original projection is already holomorphic.
+Its actual bijectivity supplies both inverse laws, so it is the stated
+biholomorphism, with underlying map precisely the original projection.
+Finally the original-only histories and their actual cover supply all
+inputs internally. This identifies stage zero; neither a uniform finite
+length nor a globally finite scheduler is concluded.
+\end{proof}

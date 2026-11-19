@@ -1,0 +1,98 @@
+\section{Actual all-order ambient Hilbert--Samuel conditions have finite local equations}
+
+For the EXISTING intrinsic original function $H_A(y,\ell)=
+\texttt{hilbertSamuelAt}(A,y,\ell)$ and any natural threshold sequence
+$h$, use the literal COORDINATEWISE whole condition
+$S_h=\{y:\forall\ell,\ h_\ell\leq H_A(y,\ell)\}$.
+No lexicographic comparison or finite-value theorem is silently asserted.
+This is the all-order closed-superlevel step of
+Bierstone--Milman\cite{bierstone-milman97-invent-math}, Theorem 9.2,
+printed page 276. Local finiteness of the actual value family, its full
+semicoherent blowup presentation and descent remain subsequent obligations.
+
+\begin{lemma}[Actual finite Hilbert--Samuel prefixes form a descending analytic chain]
+\label{hir:actual-ambient-hs-finite-prefix-analytic-chain}
+\uses{hir:actual-intrinsic-hilbert-samuel-analytic-superlevels}
+\lean{Hironaka.HironakaActualWholeAmbientHSSuperlevel.actualWholeAmbientHSSuperlevel,Hironaka.HironakaActualWholeAmbientHSSuperlevel.actualAmbientHSFinitePrefix,Hironaka.HironakaActualWholeAmbientHSSuperlevel.mem_actualAmbientHSFinitePrefix,Hironaka.HironakaActualWholeAmbientHSSuperlevel.isComplexAnalyticSubset_actualAmbientHSFinitePrefix,Hironaka.HironakaActualWholeAmbientHSSuperlevel.actualAmbientHSFinitePrefix_antitone,Hironaka.HironakaActualWholeAmbientHSSuperlevel.actualWholeAmbientHSSuperlevel_subset_prefix}
+\leanok
+For original coherent $A$, let $S_{h,k}=\{y:\forall\ell\leq k,
+ h_\ell\leq H_A(y,\ell)\}$. Each is genuinely complex analytic, and
+$S_{h,k+1}\subseteq S_{h,k}$ on the entire original manifold.
+\end{lemma}
+\begin{proof}
+Start with the genuine original order-zero superlevel. At the true successor
+intersect the preceding prefix with the original order-$k+1$ superlevel.
+The existing original coherence producer supplies finite holomorphic rank
+minor equations for each intrinsic superlevel. Actual finite intersections
+retain a finite holomorphic equation family, hence analyticity. Induction
+identifies both membership directions with all original orders through $k$.
+Every successor is contained in its preceding factor, proving antitonicity.
+\end{proof}
+
+\begin{theorem}[One actual neighborhood and finite order control the entire original all-order condition]
+\label{hir:actual-ambient-hs-whole-prefix-local-stationarity}
+\uses{hir:actual-ambient-hs-finite-prefix-analytic-chain,ana:analytic-noether}
+\lean{Hironaka.HironakaActualWholeAmbientHSSuperlevel.exists_original_local_whole_ambient_hs_prefix}
+\leanok
+At every original point $x$ there are an internally produced finite order
+$k$ and one genuine open neighborhood $U$ such that
+$S_h\cap U=S_{h,k}\cap U$, in BOTH membership directions.
+\end{theorem}
+\begin{proof}
+Apply the already proved LOCAL analytic descending-chain stationarity in
+the proof of Lemma~\ref{ana:analytic-noether}. Its local producer requires
+no compactness of the original manifold: genuine local Noetherian germ
+ideals and identity continuation along the actual connected regular
+decomposition give ONE neighborhood on which EVERY later prefix equals
+$S_{h,k}$. The whole condition implies the finite prefix immediately.
+Conversely take a point of $S_{h,k}\cap U$ and any original order $\ell$.
+Use the same stationarity at prefix $\max(k,\ell)$; the point belongs to
+that actual prefix, so its original order-$\ell$ inequality holds.
+This proves the whole literal condition for every $\ell$, on the SAME
+neighborhood. No caller stationary-germ, uniform neighborhood or finite
+cutoff certificate occurs.
+\end{proof}
+
+\begin{theorem}[The literal whole original ambient Hilbert--Samuel superlevel is analytic]
+\label{hir:actual-ambient-hs-whole-superlevel-analytic}
+\uses{hir:actual-ambient-hs-whole-prefix-local-stationarity,hir:actual-ambient-hs-finite-prefix-analytic-chain}
+\lean{Hironaka.HironakaActualWholeAmbientHSSuperlevel.isComplexAnalyticSubset_actualWholeAmbientHSSuperlevel,Hironaka.HironakaActualWholeAmbientHSSuperlevel.actualWholeAmbientHSSuperlevel_isCoherent,Hironaka.HironakaActualWholeAmbientHSSuperlevel.actualWholeAmbientHSSuperlevel_zeroLocus,Hironaka.HironakaActualWholeAmbientHSSuperlevel.exists_original_whole_ambient_hs_generators}
+\leanok
+For ONLY original coherence of $A$ and any $h$, the literal whole $S_h$
+is a genuine complex analytic subset of the original manifold. Its actual
+vanishing ideal is coherent and has genuine finite local holomorphic
+generators cutting out that SAME all-order set.
+\end{theorem}
+\begin{proof}
+At each actual original point, the preceding internally produced neighborhood
+identifies the WHOLE set with one true finite analytic prefix. Choose that
+prefix's existing finite holomorphic presentation in the point's original
+chart and restrict its genuine coordinate domain to the SAME neighborhood.
+The whole local equality proves both zero-locus directions for $S_h$.
+Thus these actual presentations give global complex analyticity. Actual
+Cartan coherence of its genuine vanishing ideal supplies finite local
+holomorphic generators with BOTH nearby germ-span directions. The original
+analytic vanishing-ideal zero-locus theorem identifies their actual common
+zero set with this SAME literal all-order $S_h$.
+\end{proof}
+
+\begin{theorem}[Every actual compact window has one finite order controlling all original whole conditions]
+\label{hir:actual-ambient-hs-whole-superlevel-compact-window-cutoff}
+\uses{hir:actual-ambient-hs-whole-prefix-local-stationarity}
+\lean{Hironaka.HironakaActualWholeAmbientHSSuperlevel.exists_original_compact_window_whole_ambient_hs_prefix}
+\leanok
+For every actual compact subset $K$ of the original manifold, there is one
+internally constructed order $k$ such that for EVERY $y\in K$,
+$y\in S_h$ if and only if $y\in S_{h,k}$. The original ambient manifold
+need not be compact.
+\end{theorem}
+\begin{proof}
+The true local-stationarity neighborhoods cover $K$. Its actual compactness
+chooses a finite subcover. Take the maximum of their genuine finite orders,
+using zero for an empty subcover. Whole membership implies that maximum
+prefix. Conversely every point of $K$ lies in some chosen original
+neighborhood. The maximum prefix is contained in its neighborhood's own
+prefix by actual antitonicity. Its local whole/prefix equivalence therefore
+gives whole membership. The same maximum works for every original point
+of $K$, including the empty window without an extra premise.
+\end{proof}

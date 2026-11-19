@@ -1,0 +1,157 @@
+\section{The entire genuine associated module sheaf and its original centre-free stalks}
+
+All degrees are kept simultaneously. Define the actual whole associated
+module presheaf as the categorical direct sum of the independently
+constructed actual degree module presheaves, and its genuine module sheaf
+by actual module sheafification. Its true section modules are the
+coproducts of the actual degree section modules; this is an actual finite
+support construction on each open, not a stalk-defined family.
+
+\begin{lemma}[Actual module stalks preserve true entire coproducts]
+\label{hir:real-domain-actual-module-stalk-coproduct-preservation}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-layer-module-presheaf-stalk-action,hir:real-domain-actual-normal-layer-module-sheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.ActualModulePresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModulePresheafStalk,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModulePresheafSectionModule,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModulePresheafStalkModule,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkMapHom,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkMapHom_germ,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkMapHom_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkMapLinear,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkFunctor,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkFunctor_forget,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleStalkFunctor_preservesColimitsOfShape,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleDirectSumCofan,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualModuleDirectSumCofanIsColimit}
+\leanok
+Taking the genuine neighbourhood colimit of a module presheaf over the
+literal complex structure sheaf defines a functor to modules over its
+actual ring stalk. Morphisms are the actual induced stalk maps, linear
+for their independently constructed actions. This functor preserves
+ALL genuine small coproducts. In particular it carries the actual
+degree-module coproduct to the entire direct sum of their actual stalks,
+retaining every degree inclusion.
+\end{lemma}
+\begin{proof}
+The actual filtered-colimit module construction gives each stalk action
+before comparison. For a genuine module-presheaf morphism, represent an
+arbitrary stalk element by a true section and an arbitrary ring-stalk
+scalar on a smaller true open inside its domain. Actual section linearity
+and the independent stalk product formulas give the arbitrary scalar
+law for the induced stalk map. Actual stalk functor identity and
+composition then give the stated module functor.
+
+Forgetting module structure from module presheaves preserves true
+coproducts: their actual section modules are computed pointwise, and
+forgetting module structure to additive groups preserves module
+coproducts. The genuine additive stalk functor preserves coproducts
+because it is left adjoint to the actual skyscraper presheaf functor.
+Hence the composite module-stalk functor followed by forgetting its
+stalk module structure preserves coproducts. The module-to-additive
+forgetful functor reflects colimit cocones: a cocone already has linear
+legs, and the additive universal map is linear by testing on every
+colimit inclusion. It therefore reflects these coproduct universal
+properties, giving actual module-stalk coproduct preservation. The
+concrete direct sum is the module coproduct: its degree inclusions are
+linear, an arbitrary compatible family extends by the finite sum of
+its values, and equality is checked on every degree inclusion. These
+actual universal identities give the stated whole comparison and all
+inclusion formulas, with no caller finite-support or stalk certificate.
+\end{proof}
+
+\begin{definition}[The actual whole associated module presheaf and genuine module sheaf]
+\label{hir:real-domain-actual-normal-associated-module-sheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-module-stalk-coproduct-preservation,hir:real-domain-actual-normal-layer-module-presheaf-stalk-action,hir:real-domain-actual-normal-layer-module-sheaf}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedModulePresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedModuleSheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafModulePresheaf,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalk,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedUnitStalkIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafDegreeStalkInclusion}
+\leanok
+Form the genuine coproduct of ALL actual original degree module
+presheaves, and apply module sheafification over the literal original
+complex structure-ring sheaf. This defines the entire actual associated
+module sheaf. Its stalk action comes independently from the true
+sheafified section module operations. The canonical unit gives a
+genuine ambient-linear equivalence from the whole raw coproduct stalk
+to the actual whole module-sheaf stalk, preserving every original degree
+section inclusion. No global gluing or sheaf witness is an input.
+\end{definition}
+\begin{proof}
+Module presheaf coproducts exist and evaluation at every original open
+preserves them. Their actual section coproduct is the true finite-support
+direct sum of degree image-section modules, with real restrictions
+induced by all original layer restrictions. Module sheafification
+internally constructs the genuine sheaf and its independently inherited
+section products. Its true module unit is section-linear and its
+underlying additive map is canonical sheafification. The genuine
+topological stalk theorem makes this additive unit stalk map an
+isomorphism. The first lemma makes it genuinely module-linear for both
+independent stalk actions; the additive forgetful functor reflects
+isomorphisms, so it is an actual ambient-linear isomorphism. Its actual
+unit and stalk inclusion identities retain EVERY degree section germ.
+This constructs a true module sheaf, without claiming that raw globally
+finite support section images themselves have the sheaf gluing property.
+\end{proof}
+
+\begin{theorem}[The whole actual associated module-sheaf stalk is the entire original normal direct sum]
+\label{hir:real-domain-actual-normal-associated-sheaf-whole-centre-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-module-sheaf,hir:real-domain-actual-module-stalk-coproduct-preservation,hir:real-domain-actual-normal-layer-whole-stalk-ambient-linear-equivalence,hir:real-domain-actual-normal-layer-colimit-centre-scalars,hir:relative-normal-actual-associated-centre-scalars}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedDegreeStalkIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedRawStalkWholeIso,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkWholeLinearEquiv,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedRawStalkWholeIso_ι,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkWholeLinearEquiv_inclusion,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkWholeLinearEquiv_germ_inclusion,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkWholeLinearEquiv_power_class,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalk_isTorsionByCentre,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkCentreModule,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkCentre_mk_smul,Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.actualNormalAssociatedSheafStalkWholeCentreLinearEquiv}
+\leanok
+ONLY original coherence of $A$ internally identifies the ENTIRE actual
+associated module-sheaf stalk with the ENTIRE direct sum of ALL original
+normal layers. The comparison is ambient-linear for independent actual
+actions and preserves EVERY original degree section class. The entire
+centre ideal annihilates the true whole sheaf stalk action BEFORE
+quotient descent; the SAME comparison is then centre-linear for both
+independently descended canonical actions.
+\end{theorem}
+\begin{proof}
+The first lemma identifies the actual raw coproduct stalk with the entire
+direct sum of actual raw degree stalks, with every degree inclusion
+formula. Original coherence internally supplies the entire original
+ambient-linear comparison in EVERY degree. Their coproduct is therefore
+an actual ambient-linear isomorphism with the whole direct sum of the
+ENTIRE original layers. Compose with the inverse true sheafification
+unit stalk isomorphism. This gives the genuine whole sheaf comparison,
+whose inclusion formulas are the actual coproduct, degree and unit
+identities. Every original power representative retains its SAME
+original ring-germ class by the degree formula.
+
+The true original entire direct sum has its independently constructed
+componentwise ambient multiplication. Its entire centre ideal annihilates
+each genuine degree by actual powers, so it annihilates an arbitrary
+whole direct sum element, tested degreewise. For an arbitrary sheaf
+stalk element and centre-ideal scalar, apply the genuine ambient-linear
+comparison to its product. This gives zero in the whole original direct
+sum. Actual injectivity proves zero in the true independently defined
+sheaf stalk action. Thus centre annihilation is PROVED before quotient
+scalar descent. Descend this actual action through the actual centre
+quotient. Choosing an ambient representative for any centre quotient
+scalar, the two canonical ambient-product formulas and ambient linearity
+prove the SAME comparison is centre-linear. No centre action on any
+higher remainder truncation, or desired annihilation/free witness, is
+assumed.
+\end{proof}
+
+\begin{theorem}[One original accumulating centre open makes the entire actual associated module-sheaf stalk free and flat]
+\label{hir:real-domain-original-actual-normal-associated-sheaf-free-open}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-normal-associated-sheaf-whole-centre-stalk-equivalence,hir:real-domain-original-all-relative-degrees-free-actual-sheaf-stalk-open,hir:real-domain-original-all-actual-normal-layer-sheaf-degrees-free-open}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualNormalAssociatedSheaf.exists_original_regular_all_actual_associated_sheaf_degrees_free_open}
+\leanok
+ONLY original regularity of $C$ at $x$, original coherence of $A$ and
+original $A\leq\mathcal I_C$ internally give ONE true original open $O$
+with $x\in\overline{C\cap O}$ on which EVERY actual whole associated
+module-sheaf stalk is free and flat over the actual centre quotient
+ring, with its independently descended canonical action. All actual
+degree module-sheaf stalks on that SAME open are finite, free and flat.
+No caller free open, whole graded kernel, sheaf or flatness certificate
+is supplied.
+\end{theorem}
+\begin{proof}
+The completed original producer internally constructs one true open with
+the stated closure property and freeness of the entire original normal
+direct sum for its genuine canonical centre action, together with all
+original degree properties. At each actual centre point the preceding
+original-coherence whole sheaf-stalk centre-linear isomorphism transfers
+that genuine basis to the actual whole associated module-sheaf stalk.
+The same independent action is flat because it is free. Each degree
+sheaf-stalk comparison similarly transfers finite generation and
+freeness of its corresponding ENTIRE original layer; freeness gives
+flatness. All these comparisons use that SAME original open, at every
+point and every degree. This proves actual module-sheaf stalk normal
+flatness on the accumulating centre open; geometric graded ring/sheaf
+multiplication, centre quotient sheaf gluing, ambient Hilbert--Samuel
+transformation and blowup descent remain subsequent producers. No
+origin flatness, every-component density or global resolution schedule
+is inferred.
+\end{proof}

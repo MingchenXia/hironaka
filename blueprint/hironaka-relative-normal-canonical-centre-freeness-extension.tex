@@ -1,0 +1,102 @@
+\section{Canonical centre-ring freeness on one original analytic open}
+
+Put $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$ and
+$Q=R/J$.  The action of $Q$ on the original layers and their whole direct
+sum is the actual action already descended from ambient multiplication and
+proved $J$-annihilation.  It is not defined by a chosen tangent action.
+The actual plane quotient isomorphism $e:Q\simeq B$ is used below only for
+comparison.  This supplies an intrinsic local-algebra ingredient for the
+Bierstone--Milman Hilbert--Samuel equisingularity route; a coherent sheaf
+identification, original centre containment, nonlinear stalk/chart transport
+and full ambient Hilbert--Samuel descent remain subsequent producers.
+The higher full truncations remain modules over the split tangent ring $B$;
+no $Q$-action on those truncations is asserted.
+
+\begin{lemma}[Actual identity semilinear dictionaries for centre scalars]
+\label{hir:relative-normal-canonical-centre-trace-semilinear}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-actual-centre-trace-scalar-dictionary}
+\lean{Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalGradedPieceCentreTraceEquiv,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalGradedPieceCentreTraceEquiv_apply,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalGradedPieceCentreTraceEquiv_symm_apply,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalAssociatedGradedCentreTraceEquiv,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalAssociatedGradedCentreTraceEquiv_apply,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalAssociatedGradedCentreTraceEquiv_symm_apply}
+\leanok
+For every actual original whole germ ideal $I$ and every $q$, the identity
+on the existing layer $L_q$ is a genuine $e$-semilinear equivalence from
+its canonical $Q$-module to its old tangent $B$-module.  The same is true
+on the entire existing direct sum $G$.  Both equivalences and their
+inverses fix every actual element, in particular every original power
+class and every original degree inclusion.
+\end{lemma}
+\begin{proof}
+Use the identity bijection on the unchanged original additive groups.
+It preserves addition.  The proved actual scalar dictionary is precisely
+$c x=e(c)x$ for EVERY $c\in Q$ and actual element $x$, on a layer and on
+the whole sum.  This is the needed semilinear identity.  The inverse uses
+the actual inverse ring isomorphism: writing $b=e(c)$ in this identity
+gives $b x=e^{-1}(b)x$.  The two functions compose to the identity and
+fix actual classes and inclusions because both functions are literally
+the identity on those carriers.
+\end{proof}
+
+\begin{lemma}[Freeness and finite generation under the actual centre dictionary]
+\label{hir:relative-normal-canonical-centre-free-flat-dictionary}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-canonical-centre-trace-semilinear}
+\lean{Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalGradedPieceCentre_free_flat_of_tangent_free,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalGradedPieceCentre_finite_of_tangent_finite,Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.originalNormalAssociatedGradedCentre_free_flat_of_tangent_free}
+\leanok
+If an actual layer or whole direct sum is free for its old tangent
+$B$-action, it is free and flat for its independently constructed
+canonical $Q$-action.  If an actual layer is finitely generated over $B$,
+it is finitely generated over $Q$.  These are conditional algebraic
+helpers; no desired canonical-action or flatness premise is assumed.
+\end{lemma}
+\begin{proof}
+Take an actual $B$-basis.  Retain the same actual vectors as a $Q$-family.
+For any element, its unique finite $B$-linear expansion becomes a finite
+$Q$-linear expansion by applying the true inverse isomorphism $e^{-1}$
+to every coefficient and using the semilinear dictionary.  A vanishing
+$Q$-linear relation maps under $e$ to a vanishing $B$-relation, so every
+coefficient is zero.  Thus this is a true $Q$-basis, for the canonical
+action already defined.  The same coefficient conversion changes any
+finite $B$-generating family into a finite $Q$-generating family.  A free
+module is flat: tensoring its direct-sum basis representation is a direct
+sum of copies of the given module map, so it preserves injectivity.
+No new scalar action is used in any of these arguments.
+\end{proof}
+
+\begin{theorem}[Original coherent input supplies one canonical centre free open]
+\label{hir:relative-normal-original-nearby-canonical-centre-free-flat-open}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-canonical-centre-free-flat-dictionary,hir:relative-normal-coefficient-algebra-nearby-associated-free-open,hir:relative-normal-coefficient-algebra-all-degree-free-open}
+\lean{Hironaka.HironakaRelativeNormalCanonicalCentreFreeness.exists_original_nearby_canonical_centre_free_flat_open}
+\leanok
+Let $\mathcal I$ be the actual original coherent ideal.  There exists one
+open $U\subset\mathbb C^d$, meeting EVERY neighbourhood of the origin,
+such that for every $a\in U$ the entire original normal associated sum
+of the WHOLE translated stalk ideal $I_a$ is free and flat over its actual
+centre quotient ring $Q$.  EVERY actual original degree layer of this
+same $I_a$ is finite, free and flat over its canonical $Q$-action, on this
+SAME $U$ and simultaneously for all degrees.
+\end{theorem}
+\begin{proof}
+The original coherent-input whole associated-module producer internally
+constructs the common true coefficient domain, complete relation/kernel
+spreading, actual nearby homomorphisms and single denominator nonvanishing
+open $U$.  It gives whole tangent $B$-freeness at every $a\in U$, with
+$U$ open and meeting every origin neighbourhood.  Keep exactly this $U$.
+Apply the preceding actual semilinear coefficient-conversion helper at
+the WHOLE translated ideal $I_a$ to obtain canonical $Q$-free and flat
+whole sum.  The proved genuine homogeneous layer summand and finite
+homogeneous symbol surjection give finite free $B$-layers internally from
+that same whole free sum.  Apply the same actual layer dictionary to each
+$q$ to obtain finite free and flat canonical $Q$-layers.  The choices
+of open and denominator preceded $q$, so one and the same $U$ works for
+ALL actual original degrees.  No basis, coefficient presentation, whole
+kernel, free/flat statement or centre-action equality is supplied by the
+original coherent input caller.
+\end{proof}
+
+The open need not contain the origin and is not asserted dense on every
+arbitrary component.  The theorem concerns the actual original graded
+modules and their canonical local centre quotient action.  It supplies
+neither a bundled sheaf result nor an assertion that a centre is contained
+in the original zero space, and makes no ambient mixed-degree Hilbert--Samuel
+or blowing-up descent conclusion.

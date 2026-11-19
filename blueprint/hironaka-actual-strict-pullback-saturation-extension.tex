@@ -1,0 +1,128 @@
+\section{Whole actual pullback saturation computes the geometric strict ideal}
+
+\begin{theorem}[Coherent off-divisor membership forces a whole exceptional power]
+\label{hir:actual-coherent-off-divisor-membership-power}
+\uses{hir:relative-normal-coherent-saturation-colon-dictionary,lag:prime-nullstellensatz}
+\lean{Hironaka.HironakaActualStrictPullbackSaturation.exists_coordinate_power_mul_mem_of_off_divisor_membership}
+\leanok
+Let $\mathcal J$ be any actual coherent ideal sheaf near the origin of
+$\mathbf C^n$, let $G$ be an actual holomorphic function near zero, and
+let $e$ be a coordinate. If $G_y\in\mathcal J_y$ at every sufficiently
+nearby actual point with $y_e\ne0$, then for some $N\ge0$ the whole
+original germ $z_e^N[G]$ belongs to $\mathcal J_0$.
+\end{theorem}
+\begin{proof}
+Genuine Oka coherence gives a finite actual holomorphic presentation of
+the colon sheaf $\mathcal J:G$ on one neighbourhood of zero. At each
+nearby point off $z_e=0$, the hypothesis says the constant function one
+belongs to this colon, so its finite generators cannot all vanish at
+that point: evaluating a genuine local expression for one would give
+$1=0$. Thus $z_e$ vanishes on the common zero locus of those actual colon
+generators near zero. Every original generator germ belongs to the whole
+colon $\mathcal J_0:[G]$, by its actual colon membership and the original
+whole-germ dictionary. The analytic Nullstellensatz applied to these
+actual generators puts $z_e$ in the radical of this whole colon. Some
+power $z_e^N$ therefore belongs to $\mathcal J_0:[G]$, which says exactly
+$z_e^N[G]\in\mathcal J_0$. The finite colon presentation and the power
+are constructed internally.
+\end{proof}
+
+\begin{theorem}[The actual chart inverse identifies whole pullback ideals off the divisor]
+\label{hir:actual-normal-blowup-off-divisor-whole-pullback}
+\uses{hir:actual-normal-blowup-exceptional-locus-exact,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualStrictPullbackSaturation.actualBlowupInverse,Hironaka.HironakaActualStrictPullbackSaturation.pullback_vanishingIdeal_mem_iff_off_coordinate}
+\leanok
+For an actual normal-coordinate blowup chart $\pi$, any original subset
+$W$, and any actual point $y$ with $y_e\ne0$, the independently defined
+whole functional ideals satisfy
+\[
+ (\pi^*\mathcal I_W)_y=\mathcal I_{\pi^{-1}W,y}.
+\]
+The inverse chart is constructed from the literal functions
+$x_e$, $x_i/x_e-b_i$ on selected nonpivot coordinates, and $x_i$ on
+unselected coordinates.
+\end{theorem}
+\begin{proof}
+On the actual open set $x_e\ne0$, the displayed functions are holomorphic.
+Substituting them in the actual polynomial chart and conversely gives
+the identity in every coordinate. For a function vanishing on the actual
+inverse image of $W$ near $y$, compose it with this true inverse. It is
+holomorphic near $\pi(y)$ and vanishes on $W$ there: the actual inverse
+maps a neighbourhood into the original vanishing neighbourhood, and
+$\pi\circ\pi^{-1}$ is the identity there. This source vanishing function
+pulls back to the original target function on a neighbourhood of $y$,
+by the other inverse identity. A single genuine pulled-back generator
+with coefficient one proves its whole pullback-ideal membership. The
+other direction follows by substituting actual pulled-back vanishing
+functions and their finite holomorphic coefficients. No regularity or
+coherence of $W$ is needed for this off-divisor equality.
+\end{proof}
+
+\begin{theorem}[The whole actual sheaf pullback origin ideal is the literal ring pullback]
+\label{hir:actual-holomorphic-whole-origin-pullback}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality,hir:relative-normal-coherent-saturation-colon-dictionary}
+\lean{Hironaka.HironakaActualStrictPullbackSaturation.originalOriginIdeal_holomorphic_pullback_eq}
+\leanok
+For an actual holomorphic map fixing zero and an original coherent ideal
+sheaf, the whole original origin ideal of its independently defined sheaf
+pullback equals the ring-theoretic image ideal under the actual germ
+composition map.
+\end{theorem}
+\begin{proof}
+For every actual original pulled-back member, its defining finite local
+functional span expresses it as a finite holomorphic combination of
+actual compositions of source members. The original germ of each such
+composition is literally the germ homomorphism image of its original
+source germ; the genuine finite functional identity therefore places
+the whole target germ in the ring image ideal. Conversely every source
+generator germ has an actual representative belonging to the original
+source sheaf. Its actual composition is a defining generator of the
+independently constructed pullback sheaf, so its whole germ belongs to
+that pullback's origin ideal. Actual coherence of the holomorphic
+pullback gives the required whole original membership dictionary. Closure
+under finite sums and arbitrary multipliers proves both entire ideal
+inclusions.
+\end{proof}
+
+\begin{theorem}[Original analytic strict ideals are the whole exceptional saturation]
+\label{hir:actual-original-analytic-geometric-strict-whole-saturation}
+\uses{hir:actual-coherent-off-divisor-membership-power,hir:actual-normal-blowup-off-divisor-whole-pullback,hir:actual-holomorphic-whole-origin-pullback,hir:actual-geometric-strict-exceptional-parameter-regular}
+\lean{Hironaka.HironakaActualStrictPullbackSaturation.mem_original_analytic_strict_ideal_iff_exists_coordinate_power,Hironaka.HironakaActualStrictPullbackSaturation.exists_original_analytic_strict_fixed_power_colon}
+\leanok
+For any original analytic subset $W$, any actual normal-coordinate blowup
+chart with normal dimension at least two, and any whole original target
+germ $g$,
+\[
+ g\in I(W')\quad\Longleftrightarrow\quad
+ \exists N\ge0:\ z_e^Ng\in\pi^*I(W).
+\]
+One internally chosen finite exponent $N_0$, independent of every target germ, also gives the whole ideal equality $I(W')=(\pi^*I(W)):(z_e^{N_0})$.
+Consequently the whole actual exceptional saturation is radical, and the
+radical in the preceding radical-colon formula need not be supplied as
+an independent ideal operation to compute the strict ideal.
+\end{theorem}
+\begin{proof}
+Original analyticity gives genuine coherence of $\mathcal I_W$ and its
+actual holomorphic pullback $\mathcal J$. Suppose $g$ belongs to the
+whole geometric strict ideal and choose an actual holomorphic
+representative $G$. The exact exceptional hyperplane dictionary writes
+the strict set as the closure of $\pi^{-1}(W)\setminus\{z_e=0\}$.
+Thus $G$ vanishes on that defining set in a genuine neighbourhood of
+zero. At any nearby point off the divisor, shrink within that
+neighbourhood and off the divisor; $G$ then belongs to the actual whole
+vanishing ideal of $\pi^{-1}W$. The off-divisor theorem identifies this
+with actual whole pullback membership. The coherent off-divisor criterion
+now gives $z_e^N[G]\in\mathcal J_0$ for some internally produced $N$.
+The whole origin pullback dictionary identifies this with the displayed
+ring ideal. Conversely a whole member of that pullback ideal vanishes
+on $\pi^{-1}W$ near zero, hence on its off-divisor defining subset.
+Continuity extends the vanishing to its closure, so $z_e^Ng\in I(W')$.
+The already proved whole exceptional-power saturation of the actual
+geometric strict ideal cancels that power and yields $g\in I(W')$.
+Both implications concern the entire original ideals and actual functions,
+not only point values or finite jets. The actual holomorphic germ ring is Noetherian. Its ascending sequence of whole colons by successive powers of $z_e$ therefore stabilizes at one internally chosen index $N_0$. Each power-membership condition is the corresponding whole colon membership, so any member of their union belongs to the $N_0$th colon: pass to the larger of its index and $N_0$ and use stabilization. Conversely every member of that colon already belongs to the union. The whole ideal equality follows from the displayed equivalence. Since a whole vanishing ideal is radical, the computed saturation is radical as a consequence.
+\end{proof}
+
+This does not yet identify the ideal generated by normalized canonical
+members with this saturation, prove transformed standard-family relations,
+or establish a reverse current Hilbert--Samuel persistence criterion.

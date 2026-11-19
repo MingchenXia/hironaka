@@ -1,0 +1,76 @@
+\section{Actual pure-head choices over a genuine base change and empty boundary positions}
+
+\begin{lemma}[The intrinsic pure good open ignores only empty boundary entries]
+\label{hir:original-pure-head-good-open-empty-base}
+\uses{hir:original-smooth-intrinsic-regular-locus,hir:original-boundary-empty-filter-geometry}
+\lean{Hironaka.HironakaOriginalPureHeadChoice.pure_good_open_over_base}
+\leanok
+Let $\Phi:X'\simeq X$ be a genuine biholomorphism, let $A$ be an original
+analytic subset, and let $E,E'$ be original ordered SNC boundaries whose
+filtered nonempty lists agree under actual $\Phi$ inverse image. For the
+same dimension label $d$, the source intrinsic boundary-free regular open
+of $\Phi^{-1}A$ and $E'$ is exactly the inverse image of the target
+intrinsic boundary-free regular open of $A$ and $E$.
+\end{lemma}
+\begin{proof}
+Filtering only empty members does not change a list's whole union: each
+original point in a member proves that member nonempty. Equality of the
+filtered original lists therefore identifies the union of $E'$ with the
+inverse image under $\Phi$ of the union of $E$. The actual biholomorphism
+is a holomorphic submersion of relative dimension zero, so its entire
+intrinsic dimension-$d$ regular locus is the inverse image of the target
+regular locus. Substitute these two actual set equalities into the
+definition of the boundary-free regular open, and commute inverse image
+with difference, union and complement. This proves equality of the
+actual opens, not a supplied good-locus certificate.
+\end{proof}
+
+\begin{theorem}[Independent actual pure-head stages have one map over the prescribed base]
+\label{hir:original-pure-head-unique-empty-base-comparison}
+\uses{hir:original-pure-head-good-open-empty-base,hir:original-empty-boundary-terminal-base-comparison,hir:original-empty-boundary-first-meeting-base-comparison,hir:original-canonical-ordered-resolution-tree}
+\lean{Hironaka.HironakaOriginalPureHeadChoice.existsUnique_pure_head_choice_over_base}
+\leanok
+For the same actual original inputs, let $T$ and $S$ be actual pure-head
+stages of the ordered recursion for $(A,d,E)$ and
+$(\Phi^{-1}A,d,E')$. Then there is a unique actual final biholomorphism
+$\eta$ over $\Phi$. It transports their entire ordered final boundaries
+after filtering precisely empty members. For every original closed set
+$P\subset X$ it also satisfies
+\[
+ P_S(\Phi^{-1}P)=\eta^{-1}P_T(P).
+\]
+No common stopping index, comparison map or terminality premise is added.
+The empty head case and ambient dimension zero are included.
+\end{theorem}
+\begin{proof}
+The actual whole vanishing-ideal pullback for the genuine submersion
+$\Phi$ identifies the source pure-head ideal with the actual pullback
+of the target whole ideal. Whole ambient carriers and marking one
+agree, and the assumed filtered boundary equality is exactly the
+remaining initial-record condition for the genuine stage comparison.
+
+If $A$ is nonempty, the actual base bijection makes $\Phi^{-1}A$
+nonempty. Both genuine pure-head stage records therefore supply actual
+next whole maximum points and avoidance of their own intrinsic good
+opens. The preceding lemma proves those actual opens are the required
+corresponding opens. Apply the genuine first-meeting comparison over
+$\Phi$ and empty initial positions. It constructs the unique actual
+map and the whole ordered filtered-boundary identity, with no common
+index or terminality assumption.
+
+If $A$ is empty, both whole original cosupports are empty. Each actual
+canonical head history is then genuinely terminal, by the original
+empty-cosupport theorem. Apply the genuine terminal comparison over
+$\Phi$ and empty initial positions instead. It gives the same form of
+unique map and whole ordered filtered-boundary identity, including in
+ambient dimension zero; no next-maximum point is invented.
+
+Finally the genuine whole strict-transform comparison for a
+biholomorphic projection square applies to the constructed actual
+$\Phi,\eta$, the two actual blowup projections and every original
+closed $P$. It gives the stated entire strict-transform identity.
+Uniqueness of the already constructed map also gives uniqueness with
+this additional whole-set property. These are comparisons of the actual
+canonical pure stages supplied by the recursive provenance, not a
+claim of uniqueness for an arbitrary unrelated resolution.
+\end{proof}

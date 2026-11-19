@@ -1,0 +1,204 @@
+\section{Actual exceptional saturation and homogeneous fibres give strict filtered division}
+
+Work in the genuine ring $R=\mathbb C[[x_1,\ldots,x_n]]$, with its
+actual coordinate maximal ideal $\mathfrak m=(x_1,\ldots,x_n)$.
+All coefficients, ideal powers and products below are the original
+formal-series operations. No comparison of diagrams in fixed coordinates
+is assumed.
+
+\begin{definition}[The literal pivot-zero projection]
+\label{hir:actual-exceptional-pivot-zero-projection}
+\lean{Hironaka.HironakaActualExceptionalFilteredDivision.pivotZeroProjection}
+\leanok
+For a coordinate $e$, let $\rho_e:R\to R$ first discard that coordinate
+and then include the remaining series literally. Thus its coefficient
+at $\alpha$ is the original coefficient when $\alpha_e=0$, and zero
+otherwise. It is an actual complex algebra endomorphism.
+\end{definition}
+
+\begin{theorem}[Homogeneous generators give exact shifted filtered representations]
+\label{hir:actual-homogeneous-family-shifted-filtered-division}
+\uses{hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualExceptionalFilteredDivision.exists_homogeneous_filtered_representation}
+\leanok
+Let $(p_i)_{i\in A}$ be a finite family of genuine series homogeneous
+of degrees $d_i$. If $F\in(p_i)\cap\mathfrak m^q$, then there are
+actual whole series $Q_i\in\mathfrak m^{q-d_i}$ with
+$F=\sum_i p_iQ_i$.
+\end{theorem}
+\begin{proof}
+Choose any whole finite span representation $F=\sum_i p_iA_i$.
+Define $Q_i$ by retaining exactly the coefficients of $A_i$ of total
+degree at least $q-d_i$. These are genuine whole series and have the
+stated maximal-power membership by the true coefficient criterion.
+For a coefficient indexed by $\alpha$, every nonzero coefficient of
+$p_i$ in its finite product antidiagonal has degree exactly $d_i$.
+Consequently the corresponding coefficient of $Q_i$ is retained
+exactly when $|\alpha|\ge q$. The genuine convolution therefore gives
+$[x^\alpha](p_iQ_i)=[x^\alpha](p_iA_i)$ above that degree and zero below
+it. Summing gives the coefficients of $F$ in both cases, because its
+coefficients below $q$ vanish. Whole coefficient extensionality gives
+the exact identity, including zero degrees and empty families.
+\end{proof}
+
+\begin{theorem}[Whole actual projection, kernel and maximal powers]
+\label{hir:actual-exceptional-pivot-projection-kernel-powers}
+\uses{hir:actual-exceptional-pivot-zero-projection,hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_coefficient,Hironaka.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_idempotent,Hironaka.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_eq_zero_iff,Hironaka.HironakaActualExceptionalFilteredDivision.pivotZeroProjection_mem_point_power,Hironaka.HironakaActualExceptionalFilteredDivision.point_power_of_X_mul_mem}
+\leanok
+The literal projection is idempotent, preserves every actual maximal
+power, and $\rho_e(F)=0$ if and only if the actual variable $x_e$
+divides $F$. In addition, $x_eF\in\mathfrak m^{q+1}$ implies
+$F\in\mathfrak m^q$.
+\end{theorem}
+\begin{proof}
+The genuine inclusion and complementary-coordinate restriction give
+the displayed coefficient formula: precisely exponent vectors with
+pivot exponent zero are in the image of the complementary exponent
+embedding. Applying the formula twice proves idempotence. The same
+formula preserves every coefficient vanishing condition of total
+degree less than $q$, proving maximal-power preservation.
+The projection vanishes exactly when all coefficients with pivot
+exponent zero vanish. The genuine formal-variable divisibility
+criterion identifies this with $x_e\mid F$. Finally multiplication
+by the literal monomial $x_e$ shifts each coefficient index by its
+unit exponent and increases the total degree by exactly one. The
+coefficient criterion for $\mathfrak m^{q+1}$ therefore annihilates
+every coefficient of $F$ of degree less than $q$.
+\end{proof}
+
+\begin{theorem}[Actual exceptional saturation produces whole strict maximal filtration]
+\label{hir:actual-exceptional-saturated-homogeneous-fibre-filtered-division}
+\uses{hir:actual-homogeneous-family-shifted-filtered-division,hir:actual-exceptional-pivot-projection-kernel-powers}
+\lean{Hironaka.HironakaActualExceptionalFilteredDivision.exists_exceptional_filtered_representation}
+\leanok
+Let $I=(H_i)_{i\in A}$ be an actual whole finite span. Suppose
+$x_eF\in I\Rightarrow F\in I$ for every whole series $F$,
+$H_i\in\mathfrak m^{d_i}$, and each literal shadow
+$\rho_e(H_i)$ is homogeneous of degree $d_i$.
+Then every $F\in I\cap\mathfrak m^q$ admits an exact whole identity
+$F=\sum_iH_iQ_i$ with $Q_i\in\mathfrak m^{q-d_i}$.
+These are natural saturation, generator-order and literal fibre
+conditions; no filtered representation or standardness is an input.
+\end{theorem}
+\begin{proof}
+Induct on $q$. For $q=0$ any actual finite-span representation works,
+since all the required coefficient powers are the whole ring.
+Suppose the assertion holds at $q$, and let
+$F\in I\cap\mathfrak m^{q+1}$.
+Apply the literal projection to any whole span representation of $F$.
+Its image lies in the span of the homogeneous shadows and in
+$\mathfrak m^{q+1}$. The homogeneous-family theorem gives
+$\rho_e(F)=\sum_i\rho_e(H_i)A_i$ with
+$A_i\in\mathfrak m^{q+1-d_i}$.
+Apply the projection once more. Its idempotence replaces these
+coefficients by $\rho_e(A_i)$ without changing the identity or their
+power bounds. Hence
+$D=F-\sum_iH_i\rho_e(A_i)$ has zero projection, so $D=x_eK$.
+Every summand subtracted from $F$ belongs to
+$\mathfrak m^{q+1}$, since
+$d_i+(q+1-d_i)\ge q+1$; thus $K\in\mathfrak m^q$ by the true
+one-variable coefficient shift. Also $D\in I$, and the actual
+exceptional saturation gives $K\in I$.
+
+The induction hypothesis writes $K=\sum_iH_iB_i$ with
+$B_i\in\mathfrak m^{q-d_i}$. Set
+$Q_i=\rho_e(A_i)+x_eB_i$. The first term has the required power;
+the second does too because $1+(q-d_i)\ge q+1-d_i$.
+Substituting the exact identity for $K$ proves the exact whole
+identity for $F$. This is a finite induction, with no convergence,
+incoming lifting certificate or change of generators.
+\end{proof}
+
+\begin{theorem}[The actual exceptional initial symbol is regular in every order]
+\label{hir:actual-exceptional-homogeneous-fibre-regular-initial-symbol}
+\uses{hir:actual-homogeneous-family-shifted-filtered-division,hir:actual-exceptional-pivot-projection-kernel-powers}
+\lean{Hironaka.HironakaActualExceptionalFilteredDivision.exceptional_point_power_colon_eq}
+\leanok
+Under the same natural span, generator-order, homogeneous-shadow and
+whole exceptional saturation conditions,
+\[
+ (I+\mathfrak m^{q+1}):x_e=I+\mathfrak m^q
+ \qquad(q\ge0).
+\]
+Thus regularity of the actual exceptional initial symbol is produced;
+it is not an incoming filtered regularity condition.
+\end{theorem}
+\begin{proof}
+Let $x_eF=A+B$ with $A\in I$ and $B\in\mathfrak m^{q+1}$.
+Projection kills $x_e$ and gives $\rho_e(A)=-\rho_e(B)$, so this
+shadow belongs to the span of the homogeneous shadows and to
+$\mathfrak m^{q+1}$. The homogeneous-family result and a second
+projection give coefficients $C_i$ fixed by the projection, of orders
+at least $q+1-d_i$, with $\rho_e(A)=\sum_i\rho_e(H_i)C_i$.
+Then $A'=\sum_iH_iC_i$ belongs to $I\cap\mathfrak m^{q+1}$ and has
+exactly the same shadow as $A$. Write $A-A'=x_eK$ using the actual
+projection kernel. Actual whole saturation gives $K\in I$.
+The exact two identities give $x_e(F-K)=B+A'\in\mathfrak m^{q+1}$;
+the genuine coefficient shift therefore puts $F-K$ in
+$\mathfrak m^q$. Hence $F\in I+\mathfrak m^q$.
+Conversely multiplication by $x_e$ preserves $I$ and sends
+$\mathfrak m^q$ into $\mathfrak m^{q+1}$, proving the reverse
+inclusion and the whole colon equality.
+\end{proof}
+
+\begin{theorem}[The same original canonical normalized family has strict formal maximal filtration]
+\label{hir:actual-canonical-point-normalized-strict-filtered-division}
+\uses{hir:actual-exceptional-saturated-homogeneous-fibre-filtered-division,hir:actual-exceptional-homogeneous-fibre-regular-initial-symbol,hir:actual-original-point-normalized-exceptional-regularity,hir:actual-original-point-normalized-total-saturation,hir:actual-formal-relations-original-analytic-syzygies,hir:actual-point-canonical-quotient-pure-coefficient}
+\lean{Hironaka.HironakaActualExceptionalFilteredDivision.exists_original_point_canonical_filtered_family,Hironaka.HironakaActualExceptionalFilteredDivision.exists_original_point_canonical_strict_symbol_family}
+\leanok
+An original analytic germ ideal $J$ and a genuine point chart internally
+produce ONE analytic normalized family $H_a$ of the original canonical
+reduced generators $G_a$. Their whole span is the independently defined
+normalized ideal. The family is chosen before all order hypotheses and
+finite jets. If every $H_a$ retains its own original vertex order $d_a$,
+then every $F\in(\widehat H_a)\cap\mathfrak m^q$ has an exact whole formal
+representation $F=\sum_a\widehat H_a Q_a$ with
+$Q_a\in\mathfrak m^{q-d_a}$. No target filtered division, homogeneous
+shadow, exceptional regularity or HS certificate is supplied. The SAME
+chosen family also has the whole colon identities above at every order.
+\end{theorem}
+\begin{proof}
+Choose the genuine same-generator canonical normalized family with
+actual exceptional regularity. The whole point-normalized ideal is
+the actual total-pullback saturation. The image of the original ideal
+lies in the span of these same $H_a$, since the original canonical
+$G_a$ span the original ideal and $\pi^*G_a=e^{d_a}H_a$.
+Repeated actual exceptional cancellation therefore puts every member
+of that saturation in the same span. Conversely every $H_a$ is a
+literal normalized member, using the original canonical generator's
+true point power. Thus the whole spans agree without changing family.
+
+Exceptional regularity also holds for the entire Taylor extension.
+Indeed a formal relation between the $\widehat H_a$ and the actual
+$\widehat e=x_e$ is generated by genuine analytic syzygies, by actual
+Taylor flatness. In every such analytic syzygy, the coefficient of
+$e$ lies in the analytic span of $H_a$ by its actual exceptional
+regularity. Hence its whole Taylor image lies in the formal span.
+The expression for the coefficient of $x_e$ in the original formal
+relation then places that coefficient itself in this formal span.
+This proves the required whole formal exceptional cancellation.
+
+For each same quotient, its pure coefficients are exactly those of
+the literal dehomogenized degree-$d_a$ original polynomial. The latter
+is pivot independent: substitution removes the pivot variable. Its
+total degree is at most $d_a$, because each source monomial has that
+degree and each substituted variable has total degree at most one.
+The assumed actual order of $H_a$ makes all its Taylor coefficients
+below $d_a$ vanish. The actual pivot-zero shadow is therefore precisely
+a genuine homogeneous series of degree $d_a$, including the possible
+zero shadow. The preceding whole filtered-division theorem applies to
+this same formal family, its internally proved exceptional regularity,
+these homogeneous shadows and the true Taylor order bounds. It yields
+the stated exact shifted representation at every finite order. Apply
+also the preceding regular-initial-symbol theorem to these same internally
+proved conditions; this gives every whole colon identity for this SAME
+family, without selecting a second normalized family.
+\end{proof}
+
+The point-order hypothesis now gives actual target maximal-filtration
+control and actual exceptional initial-symbol regularity for the same
+original canonical family. The converse from
+entire current HS persistence, a complete HS identification from this
+filtered presentation, and positive-dimensional-centre propagation
+remain separate downstream steps.

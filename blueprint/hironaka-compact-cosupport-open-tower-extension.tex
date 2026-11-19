@@ -1,0 +1,23 @@
+\section{Extending an entire prescribed finite open test history}
+
+\begin{lemma}[Compactness of current and fully retained open cosupports]
+\label{hir:compact-cosupport-current-and-open}
+\uses{hir:open-restriction-marked,hir:marked-ideal,ana:blowups}
+\lean{Hironaka.HironakaCompactCosupportOpenTowerExtension.current_cosupport_compact,Hironaka.HironakaCompactCosupportOpenTowerExtension.restricted_cosupport_compact}
+\leanok
+Let $M$ be a marked ideal with coherent ideal and closed smooth carrier, and suppose its entire cosupport is compact. Every actual finite test history has compact current cosupport, contained in the inverse image of the original cosupport. Restriction to any open containing the entire cosupport retains compactness of the restricted cosupport.
+\end{lemma}
+\begin{proof}
+At every test step the transformed ideal remains coherent and its carrier remains a closed submanifold. The current cosupport is therefore closed. Every current cosupport point projects into the original cosupport: over a centre this follows from admissibility, and away from it the actual controlled-transform dictionary preserves membership. The finite blowup projection is proper, so the inverse image of the compact original cosupport is compact. Its closed current subset is compact. For an open containing the entire cosupport, the cosupport restriction dictionary identifies the restricted cosupport with its full inverse image under the inclusion. Its image is exactly the original compact set, and compactness is equivalent under this embedding.
+\end{proof}
+
+\begin{theorem}[A prescribed finite open test history has an ambient extension]
+\label{hir:compact-cosupport-open-tower-extension}
+\uses{hir:compact-cosupport-current-and-open,hir:compact-open-blowup-extension,hir:compact-open-centre-admissible,hir:tower-isomorphism,hir:open-restriction-marked}
+\lean{Hironaka.HironakaCompactCosupportOpenTowerExtension.exists_extension}
+\leanok
+Let $M$ be a marked ideal on $X$ with coherent ideal, closed smooth carrier and compact entire cosupport. Let $U\subset X$ be open and contain that entire cosupport. Every prescribed finite actual test history $T$ of $M|_U$ extends to an actual test history $Q$ of $M$ of the same length. There is a genuine endpoint biholomorphism $e$ from the prescribed endpoint to $Q^{-1}(U)$, belonging to an actual isomorphism of the entire towers $T\simeq Q|_U$ over the identity of $U$. Thus all projection, current marked-record and centre-relative strict-transform dictionaries follow from this actual isomorphism. No extension or progress certificate is assumed.
+\end{theorem}
+\begin{proof}
+Induct on the prescribed finite history. The empty history extends by the empty history and its identity comparison. Suppose the prescribed prefix has already been extended to $Q$ with endpoint comparison $e$. Its next centre is a closed subset of the compact current restricted cosupport, hence is compact. Transport the prescribed next blowup to the actual open endpoint of $Q$ through $e$. Its centre is the whole image of the prescribed centre, and remains compact. The entire current-record identity for the prefix identifies admissibility with admissibility for the actual open restriction of the current ambient marked ideal. The compact open-centre lemma then proves ambient admissibility for its entire image. The actual one-step extension theorem constructs an ambient blowup and a genuine biholomorphism from the prescribed next endpoint to its restriction over the same open. Append this actual blowup to $Q$. The returned commuting square and the literal preimage identity for the centre extend the tower isomorphism by its step constructor. Ambient admissibility proves testness for this entire appended ambient history. This completes the induction. Tower-isomorphism length and projection identities, together with the established exact restriction identities, give the stated dictionaries.
+\end{proof}

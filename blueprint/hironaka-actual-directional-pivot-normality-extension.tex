@@ -1,0 +1,119 @@
+\section{Directional source stability forces the same canonical point orders}
+
+Fix an actual formal source ideal $K\subset\mathbb C[[x_1,\ldots,x_n]]$,
+a point chart $(e,b)$, its genuine linear source shear $S$, and the literal
+direction $v_e=1$, $v_i=b_i$ for $i\ne e$. Write $J$ for the independently
+defined whole formal strict ideal. The natural source qualification below is
+that $\delta_vP\in\operatorname{in}K$ for every polynomial $P$ whose whole
+formal image belongs to $\operatorname{in}K$. It is a derivation-stability
+condition, not an order, diagram-comparison, shadow or HS certificate.
+
+\begin{theorem}[Directional sparsity of the same canonical source forms]
+\label{hir:actual-canonical-directional-form-sparsity}
+\uses{hir:actual-directional-normal-polynomial-dehom-euler,hir:actual-reduced-formal-vertex-members,hir:actual-homogeneous-initial-ideal-diagram-equality,hir:actual-formal-normal-representative-unique}
+\lean{Hironaka.HironakaActualDirectionalPivotNormality.canonical_source_form_directional_zero,Hironaka.HironakaActualDirectionalPivotNormality.canonical_source_dehomogeneous_homogeneous}
+\leanok
+Assume the stated source directional stability. For every SAME canonical
+reduced source series $G_a$ of vertex degree $w=|a|$, its literal degree-$w$
+source polynomial $P_a$ satisfies $\delta_vP_a=0$; consequently
+$\operatorname{dehom}_{e,b}P_a$ is genuinely homogeneous of degree $w$.
+\end{theorem}
+\begin{proof}
+The source form $P_a$ belongs to the whole source initial ideal, so its
+directional derivative does also. At any exponent $\beta\in\Gamma(K)$,
+upward closure puts $\beta+\mathbf1_i$ in $\Gamma(K)$. Its coefficient
+in $G_a$ is zero unless this exponent is $a$. That exception is impossible:
+minimality of the vertex $a$ and $\beta\le a$ would imply $a\le\beta$,
+contradicting the positive $i$-increment. Every partial-derivative summand
+therefore has zero coefficient on the ENTIRE source diagram. The initial
+ideal has exactly this diagram, so genuine normal-representative uniqueness
+makes the whole directional derivative zero. The previously proved actual
+Euler coefficient formula now reads
+$(w-|\beta|)[X^\beta]\operatorname{dehom}P_a=0$. A nonzero coefficient
+forces $|\beta|=w$, since a nonzero integer is nonzero in $\mathbb C$.
+This is precisely whole homogeneous degree $w$, including the zero form.
+\end{proof}
+
+\begin{theorem}[The entire point shadow is the sheared source initial ideal]
+\label{hir:actual-directional-whole-shadow-source-initial}
+\uses{hir:actual-canonical-directional-form-sparsity,hir:actual-reduced-canonical-homogeneous-initial-span,hir:actual-point-homogeneous-dehom-shear-identity,hir:actual-point-exceptional-restriction-dehomogenized-polynomial}
+\lean{Hironaka.HironakaActualDirectionalPivotNormality.pivot_projection_strict_eq_sheared_source_initial,Hironaka.HironakaActualDirectionalPivotNormality.sheared_source_initial_component_mem}
+\leanok
+Under the same natural qualification,
+$\rho_e(J)=S(\operatorname{in}K)$ as ENTIRE ideals. Every homogeneous
+component of a member of this whole sheared ideal remains in it.
+\end{theorem}
+\begin{proof}
+The genuine strict-family generation theorem uses exactly the original
+canonical $G_a$ with their actual source point powers. For each such
+normalized member, the genuine exceptional congruence identifies its entire
+pivot restriction with $\operatorname{dehom}P_a$. The latter is pivot free
+by its literal polynomial substitution. The preceding theorem makes it
+homogeneous of degree $w$, and the genuine shear/dehom identity gives
+$\operatorname{dehom}P_a=S(P_a)$. Mapping the entire original canonical
+initial-form span and the entire strict-family span proves both ideal
+inclusions, hence the asserted equality. For component closure, express an
+arbitrary whole ideal member as an actual finite sum $\sum c_a S(P_a)$.
+Its degree-$q$ component is the sum of $[c_a]_{q-w}S(P_a)$ for $w\le q$;
+terms with $w>q$ are zero. Every term lies in the same whole ideal.
+No homogeneous closure or projection equality is assumed.
+\end{proof}
+
+\begin{theorem}[All current exceptional colons force every same canonical order]
+\label{hir:actual-directional-canonical-order-of-current-colons}
+\uses{hir:actual-directional-whole-shadow-source-initial,hir:actual-current-colons-homogeneous-initial-pivot-cancellation,hir:actual-canonical-higher-band-dehom-initial-independence,hir:actual-point-normalized-all-pivot-coefficient-bands,hir:actual-current-point-factor-source-band-dictionary}
+\lean{Hironaka.HironakaActualDirectionalPivotNormality.canonical_directional_quotient_power_of_colons}
+\leanok
+Assume source directional stability and the actual whole colons
+$(J+\mathfrak m^{q+1}):e=J+\mathfrak m^q$ for every $q$.
+For every SAME canonical $G_a$ and every genuine quotient
+$e^{|a|}H=\pi_{e,b}^*G_a$, one has $H\in\mathfrak m^{|a|}$.
+\end{theorem}
+\begin{proof}
+Otherwise take the genuine first nonzero current degree $q<|a|$ of $H$.
+Its degree-$q$ form $F$ lies in the whole current initial ideal. We prove
+that any factorization $F=e^rL$, with $L$ homogeneous of degree $q-r$ and
+in that same initial ideal, has $L=0$, by induction on $q-r$.
+The actual degree-lift theorem and the preceding component closure put
+$\rho_e(L)$ in $S(\operatorname{in}K)$. The literal coefficient-band
+formula identifies it with degree $q-r$ of
+$\operatorname{dehom}([G_a]_{|a|+r})$. The actual point power
+$H\in\mathfrak m^q$ supplies all lower bands zero. When $r=0$, the first
+source-form theorem makes the degree-$q$ band zero because $q<|a|$.
+When $r>0$, the source band has degree strictly greater than $|a|$;
+the SAME canonical reduced family makes it normal on the ENTIRE original
+diagram, and genuine directional first-band independence makes its band
+zero. Thus $\rho_e(L)=0$. If its degree is zero, this forces $L=0$.
+Otherwise the actual pivot kernel gives $L=eL'$; the genuine initial
+pivot cancellation derived from the given colons retains $L'$ inside the
+same current initial ideal. Its degree is one less and the factorization
+becomes $F=e^{r+1}L'$, so induction applies. At $r=0$ this contradicts the
+nonzero genuine initial form of $H$. Every source band and quotient in
+this argument belongs to the original prescribed family.
+\end{proof}
+
+\begin{theorem}[Qualified original arbitrary-direction persistence implies every canonical order]
+\label{hir:actual-original-directional-persistent-canonical-orders-qualified}
+\uses{hir:actual-directional-canonical-order-of-current-colons,hir:actual-original-point-persistent-hs-full-initial-colons,hir:actual-point-centre-whole-analytic-strict-generators}
+\lean{Hironaka.HironakaActualDirectionalPivotNormality.original_directional_persistent_hs_orders_of_source_stable}
+\leanok
+For an original analytic point ideal $I$, assume the stated natural
+source directional stability for its ACTUAL Taylor ideal and actual entire
+source/current HS equality in chart $(e,b)$. Then every genuine normalized
+quotient of the SAME original canonical formal source series retains its
+original vertex order.
+\end{theorem}
+\begin{proof}
+The actual analytic-to-formal strict-ideal dictionary identifies the entire
+current Taylor ideal with the independently defined formal strict ideal.
+Actual original HS persistence, the real Bennett comparison and the finite
+jet rigidity theorem supply every required current exceptional colon.
+Apply the preceding theorem to the literal source Taylor ideal, chart and
+prescribed quotient. This invokes no new source family and no additional
+current-order or standardness hypothesis.
+\end{proof}
+
+The directional source qualification is explicit in this chapter; its
+derivation from arbitrary-direction original persistence is separate geometry.
+This chapter does not assert the original-only arbitrary-direction criterion,
+positive-dimensional-centre maximal standardness, or any history termination.

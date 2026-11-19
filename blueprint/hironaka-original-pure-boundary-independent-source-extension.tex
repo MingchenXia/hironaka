@@ -1,0 +1,162 @@
+\section{An independently stopped intrinsic source with its own boundary}
+
+Retain an original compact analytic carrier $W\subseteq X^n$, pure of
+dimension $d<n$, an original ordered SNC family $E_0$ and
+$W\subseteq\overline{W\setminus|E_0|}$.  For an arbitrary holomorphic
+submersion $b:Y^m\to X$, put
+\[
+ W'=b^{-1}W,\quad E'_0=b^{-1}E_0,\quad d'=d+(m-n),\quad
+ M=(X,X,E_0,I_W,1),\quad M'=(Y,Y,E'_0,I_{W'},1).
+\]
+The actual whole vanishing-ideal pullback theorem identifies $b^*M=M'$.
+The original intrinsic good-open and bad-set dictionaries identify
+$O'=b^{-1}O$ and $F'=b^{-1}F$ with the source's own dimension-$d'$
+definitions.  There is no global dimension inequality imposed on an
+empty source.
+
+\begin{lemma}[Empty histories transport the original boundary and only discard empty slots]
+\label{hir:original-empty-histories-filtered-boundary-comparison}
+\uses{hir:original-all-empty-whole-boundary}
+\lean{Hironaka.HironakaOriginalPureBoundaryIndependentSource.empty_towers_filtered_boundary_transport}
+\leanok
+Let $A$ be an original marked record with closed initial boundary
+members.  For actual all-empty towers $S,Q$ of $A$ and any endpoint map
+$a$ satisfying $p_Qa=p_S$, the ordered nonempty boundary lists satisfy
+\[
+ E_S^{\ne\varnothing}=((a^{-1}E_Q))^{\ne\varnothing}.
+\]
+The actual lengths may differ; the initial boundary need not be empty.
+\end{lemma}
+\begin{proof}
+The whole ordered empty-history formula gives
+$E_S=p_S^{-1}E_A$ followed by exactly $\operatorname{length}S$ empty
+members, and the corresponding formula for $Q$.  Taking inverse images
+of the latter by $a$ replaces its original prefix by
+$(p_Qa)^{-1}E_A=p_S^{-1}E_A$ and leaves its entire empty suffix empty.
+Filtering deletes both empty suffixes.  The two remaining ordered
+prefix filters are literally the same.  No equality of the two
+unfiltered lists or of their lengths follows or is needed.
+\end{proof}
+
+\begin{theorem}[Any intrinsic source first-meeting prefix compares with the same target]
+\label{hir:original-pure-boundary-independent-intrinsic-comparison}
+\uses{hir:actual-singular-vanishing-ideal-pullback-submersion,hir:original-smooth-intrinsic-singular-boundary-good,hir:original-pure-boundary-prefix-smooth-comparison,hir:original-first-meeting-prefix-map-unique,hir:original-first-meeting-filtered-boundary,hir:original-empty-histories-filtered-boundary-comparison,hir:normal-crossings-delete-empty-boundary}
+\lean{Hironaka.HironakaOriginalPureBoundaryIndependentSource.independent_intrinsic_source_prefix_comparison}
+\leanok
+For this finite-history comparison, compactness of $W$ is unnecessary.
+Let $T$ be an actual original target canonical prefix avoiding $O$,
+whose next whole maximum meets $O$ when $W$ is nonempty, and let $Q$ be
+its actual smooth pullback.  Let $S$ be any independent finite canonical
+history of the intrinsic $M'$ avoiding its own $O'$; when $W'$ is
+nonempty, suppose its next whole maximum meets $O'$.
+There is a unique endpoint biholomorphism $\eta$ from $S$ to $Q$ over
+$Y$.  With $G=g_Q\eta$, the projection square for $p_S,p_T,b,G$ is
+holomorphic Cartesian and $G$ is a submersion.  Their conventional strict
+carriers correspond as whole sets, and
+\[
+ E_S^{\ne\varnothing}=((G^{-1}E_T))^{\ne\varnothing}.
+\]
+The source has its own actual SNC boundary.  Target smoothness,
+dimension $d$ and normal crossings imply source smoothness, dimension
+$d'$ and normal crossings with its own $E_S$.
+\end{theorem}
+\begin{proof}
+The whole singular vanishing-ideal pullback equality gives the literal
+initial record equality $b^*M=M'$, including its entire ordered original
+boundary.  Transport source canonicality along this actual equality.
+The proved intrinsic good-open equality identifies source avoidance and
+its stipulated encounter with those over $b^{-1}O$.
+
+If $W'$ is nonempty, openness of $b$ and density of $W\cap O$ give a
+point of $W'$ over $O$.  Lift it through the surjective actual $Q$.
+The target pure-carrier maximum dictionary puts its image in the target
+whole maximum; the actual whole-value ambient dimension embedding
+makes this source lift a whole source maximum over $O'$.  Thus both
+$S$ and $Q$ satisfy the same original source first-meeting conditions.
+Actual first-meeting uniqueness supplies $\eta$, and its filtered
+boundary theorem gives the asserted source comparison.
+
+If $W'$ is empty, its actual original cosupport is empty.  Every actual
+canonical centre in $S$ and $Q$ is empty, and both histories are
+terminal.  Genuine terminal endpoint uniqueness supplies $\eta$.
+The preceding all-empty comparison supplies the same filtered boundary
+equality, retaining the possibly nonempty initial ordered boundary.
+
+In either case compose the actual upper map of $Q$ with $\eta$.
+Biholomorphism and actual blowup universal properties give the stated
+submersion and Cartesian square.  The projection identity transports
+the entire conventional strict carrier through $\eta$; the actual
+smooth strict-transform theorem for $Q$ identifies it with the inverse
+image of the target strict carrier.  Smooth submersion pullback of
+target regular coordinates gives source smoothness and dimension.
+Pull back target normal-crossings coordinates, then use the filtered
+boundary equality and invariance under deleting empty members to
+obtain normal crossings with the source's own actual boundary.
+\end{proof}
+
+\begin{theorem}[Original data internally select an independent intrinsic stopped source]
+\label{hir:original-pure-boundary-independent-intrinsic-source}
+\uses{hir:original-pure-boundary-canonical-first-prefix,hir:original-pure-boundary-independent-intrinsic-comparison,hir:original-global-finite-smooth-source-history,hir:original-cosupport-persistence-avoided-open,hir:original-smooth-intrinsic-pure-boundary-density,hir:original-smooth-intrinsic-singular-boundary-good}
+\lean{Hironaka.HironakaOriginalPureBoundaryIndependentSource.exists_original_independently_stopped_intrinsic_source}
+\leanok
+Only the preceding original $W,X,E_0$ data and the actual smooth map
+$b$ internally construct the actual target canonical stopped prefix
+$T$ and its tail, a separately stopped canonical source prefix $S$ and
+its tail in the actual smooth pullback of the full target terminal
+history, and an upper submersion $G$ with the preceding Cartesian,
+strict-carrier and filtered own-boundary comparisons.
+
+The source is canonical for its literal intrinsic $M'$, avoids its own
+$O'$, and has its next whole maximum encounter there when $W'$ is
+nonempty.  If $W'$ is empty its selected prefix is the identity and
+the full source history has only empty centres.  Its actual accumulated
+boundary is SNC, its own strict carrier is regular of dimension $d'$
+and has normal crossings with this same boundary.  It is admissible
+relative to $E'_0$ with centres over its intrinsic $F'$, and its whole
+new-boundary union contains its exceptional locus and lies over $F'$.
+The inverse image of its intrinsic singular set lies in its exceptional
+locus.  Its projection is holomorphic, proper, surjective and an
+isomorphism over $Y\setminus F'$.  The complete target elementary
+dictionary and both actual history factorizations are retained.
+\end{theorem}
+\begin{proof}
+Use the actual original target prefix construction once, retaining its
+full canonical terminal history $P$, stopped prefix $T$, tail and
+complete elementary boundary geometry.  Construct the actual smooth
+pullback $B$ of this full $P$.  The original finite-source theorem gives
+canonicality and terminality for $b^*M$, hence for the intrinsic $M'$
+by the whole initial record equality.
+
+If $W'$ is nonempty, openness and the original density give a point over
+$W\cap O$.  If all centres of $B$ avoided $O'$, lift this point by
+surjectivity.  Actual cosupport persistence would put its lift in the
+terminal empty cosupport, a contradiction.  The genuine first-centre
+splitting of this same $B$ therefore supplies an independently stopped
+$S$, its literal tail, canonicality, avoidance and the source whole
+maximum encounter.  If $W'$ is empty, choose the identity prefix and
+$B$ as its tail; empty original cosupport forces every actual centre
+of $B$ to be empty.
+
+Apply the preceding comparison to this $S$ and the actual pullback of
+the already selected $T$.  It gives the asserted same-map Cartesian,
+strict-carrier, own-boundary and regularity comparisons.  Source
+canonicality gives actual testness and its own SNC boundary.  Its
+centres lie over $W'$ and over the complement of its intrinsic $O'$,
+whose intersection is contained in $F'$.  This proves admissibility
+and the new-boundary support over $F'$; the actual exceptional support
+formula supplies its full exceptional containments.  Source strict
+regularity gives the intrinsic singular-preimage containment.  Finally
+the actual finite source tower supplies holomorphicity, properness
+and surjectivity, and the exceptional image containment gives the
+isomorphism off $F'$.  No source compactness, source history, chart,
+ideal equality or comparison witness was a caller input.
+\end{proof}
+
+\begin{remark}
+These conclusions concern the stated compact original pure-dimensional
+carrier, including reducible and empty cases, and arbitrary initial
+SNC boundary.  They do not equate actual stopping indices or unfiltered
+accumulated boundary lists of independently stopped histories.
+Arbitrary non-pure dimension-part composites and separate relatively
+compact elementary variants require their own compatibility statements.
+\end{remark}

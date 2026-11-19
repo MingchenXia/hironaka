@@ -1,0 +1,96 @@
+\section{Actual terminal choice comparison after internally omitting empty steps}
+
+Keep the ORIGINAL marked record and every original indexed boundary member.
+Two actual finite canonical histories may use different genuine blowup
+choices and different numbers of actual empty steps. The route of
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality} is adapted by
+internally compressing their actual empty steps BEFORE the genuine
+canonical terminal-history comparison. The original histories need not
+have equal recorded length and are not asserted to be isomorphic as
+uncompressed recorded towers.
+
+\begin{lemma}[Actual nonempty canonical histories satisfy the true canonical segment condition]
+\label{hir:original-actual-nonempty-canonical-segment}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:canonical-segments,hir:blowup-tower}
+\lean{Hironaka.HironakaOriginalTerminalChoiceComparison.isCanonicalSegment_of_actual_nonempty_centres}
+\leanok
+A whole canonical history whose EVERY actual recorded centre is nonempty
+is a genuine canonical segment with no empty steps. This supplies the
+entire segment condition from true whole canonicality and the existing
+every-centre predicate, rather than a chosen list of active centres.
+\end{lemma}
+\begin{proof}
+Induct on the actual tower. The empty tower satisfies both whole conditions.
+At a next genuine blowup, whole canonicality supplies canonicality of its
+actual prefix and the alternative that its actual centre is empty or the
+entire original maximum locus. The actual every-centre condition supplies
+prefix nonemptiness and actual centre nonemptiness. The empty alternative
+is therefore impossible. The induction gives the prefix canonical segment,
+and this genuine nonempty maximum centre gives the entire next canonical
+segment. No existence of a maximum is inferred beyond the given true
+canonical centre.
+\end{proof}
+
+\begin{theorem}[Original actual terminal histories compare after internal empty compression]
+\label{hir:original-terminal-histories-actual-choice-comparison}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-terminal-histories-actual-biholomorphic-base-comparison}
+\lean{Hironaka.HironakaOriginalTerminalChoiceComparison.original_terminal_histories_actual_choice_comparison}
+\leanok
+At EVERY actual specific family depth, ONLY original bound-$k$ marked
+input and TWO GIVEN entire actual canonical terminal histories internally
+supply an actual biholomorphism between their ORIGINAL final manifolds
+commuting with their WHOLE original projections to the SAME original base.
+Their recorded lengths and actual empty-step choices may differ. No
+nonempty-centre, compressed history, canonical segment or final comparison
+certificate is supplied by a caller, and no compactness is required.
+\end{theorem}
+\begin{proof}
+Use the following genuine original base-biholomorphic comparison with the
+identity of the SAME original base. Original domain coherence makes its
+actual identity pullback literally the original marked record. The TWO
+GIVEN original canonical terminal histories therefore supply its actual
+original and pulled-back inputs. That producer internally constructs both
+nonempty canonical terminal histories before whole canonical terminal
+comparison, and the composed true final biholomorphism retains the original
+whole projection formula. Since the base map is identity, its exact formula
+is the asserted equality of original projections. No compressed condition
+or comparison witness is supplied by the caller. The original histories
+may have different empty-step counts; only their actual final spaces are
+compared, without an uncompressed tower or arbitrary-map uniqueness claim.
+\end{proof}
+
+\begin{theorem}[Actual terminal choices compare over a genuine original base biholomorphism]
+\label{hir:original-terminal-histories-actual-biholomorphic-base-comparison}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\uses{hir:original-actual-nonempty-canonical-segment,hir:original-finite-family-empty-free-canonical-compression,hir:canonical-resolution}
+\lean{Hironaka.HironakaOriginalTerminalChoiceComparison.original_terminal_histories_biholomorphic_base_comparison}
+\leanok
+Let the original base map be a genuine biholomorphism $\Phi:X'\to X$.
+At EVERY actual family depth, original bound-$k$ $M$ over $X$ and TWO
+GIVEN actual canonical terminal histories of $M$ and its ACTUAL $\Phi$
+pullback internally supply a genuine original-final-space biholomorphism
+$\eta:Y'\to Y$ satisfying $p_T\eta=\Phi p_{T'}$. No pulled-back domain,
+nonempty/compressed history, equal length or terminal comparison certificate
+is a caller input.
+\end{theorem}
+\begin{proof}
+The original domain is stable under the genuine base biholomorphism;
+its actual holomorphic pullback internally supplies the correct original
+pulled-back marked record and domain. Apply finite actual empty compression
+to both GIVEN original whole canonical histories. Each result retains its
+original record, internally constructs all actual centres nonempty and
+whole canonicality, and gives the true final biholomorphism, whole
+projection identity and terminal iff. Given terminality then internally
+gives both compressed terminal histories. The first lemma gives the
+true canonical segments. The established per-sequence canonical terminal
+comparison over $\Phi$ aligns these ACTUAL original and pulled-back
+records and gives their whole tower isomorphism, internally with equal
+compressed length. Compose its final map with the inverse source
+compression final map and target compression final map. Their true whole
+projection identities give precisely $p_T\eta=\Phi p_{T'}$ at EVERY
+original source point. Empty histories/manifolds and differing original
+empty-step counts are included. Noncompact global scheduling, intrinsic
+uniqueness/cocycles and global resolution gluing remain distinct obligations.
+\end{proof}

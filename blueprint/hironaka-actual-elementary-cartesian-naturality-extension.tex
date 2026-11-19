@@ -1,0 +1,62 @@
+\section{Actual elementary final Cartesian arrows satisfy identity and composition}
+\label{sec:hironaka-actual-elementary-cartesian-naturality}
+
+The genuine whole holomorphic square uniqueness and pasting theorems
+already apply to arbitrary finite actual blowup projections, without a
+canonical or terminal marked history. The following final-arrow laws
+therefore apply to the actual elementary ordered algorithms, even when
+their distinct ideal stages are not one CAN history of a mixed ideal.
+
+\begin{theorem}[The actual Cartesian arrow over the identity is the identity]
+\label{hir:actual-elementary-cartesian-identity}
+\lean{Hironaka.HironakaActualElementaryCartesianNaturality.upperMap_identity}
+For any actual finite blowup tower $T:D\to X$, let $g:D\to D$ be
+holomorphic, commute with this same actual projection, and make the
+whole projection square over $\mathrm{id}_X$ holomorphically Cartesian.
+Then $g=\mathrm{id}_D$. No marked ideal, CAN, terminality or common
+history certificate is required.
+\uses{hir:smooth-terminal-whole-pullback-map-intrinsic-uniqueness}
+\leanok
+\end{theorem}
+\begin{proof}
+The literal identity on $D$ is holomorphic and commutes with $T$.
+Its identity projection square is genuinely universal: for a
+holomorphic cone $(u,v)$ with $u=T v$, take the actual lift $v$;
+its two components are the cone equalities, and any other lift is
+$v$ by its identity upper component. Compare the given whole Cartesian
+arrow with this genuine identity square using the proved actual finite
+source projection uniqueness theorem. That theorem constructs the two
+actual inverse universal lifts before invoking genuine blowup
+projection rigidity; it imposes no marked-history premise. It gives
+$g=\mathrm{id}_D$ for the same actual tower.
+\end{proof}
+
+\begin{theorem}[Actual independently chosen elementary Cartesian arrows compose]
+\label{hir:actual-elementary-cartesian-composition}
+\lean{Hironaka.HironakaActualElementaryCartesianNaturality.upperMap_composition}
+Let $T:D\to X$, $S:E\to Y$ and $Q:F\to Z$ be arbitrary actual
+finite blowup towers. Let $f:Y\to X$ and holomorphic $h:Z\to Y$
+be the actual base maps. Suppose actual holomorphic arrows $g:E\to D$
+and $k:F\to E$ commute with the respective projections and give
+whole holomorphic Cartesian squares over $f,h$. If an independently
+chosen actual holomorphic $c:F\to D$ gives the whole Cartesian square
+over $f\circ h$, then $c=g\circ k$.
+No common choice of individual stages, globally scheduled history or
+canonical/terminal marked-history assumption is added.
+\uses{hir:smooth-terminal-whole-pullback-map-intrinsic-uniqueness,hir:smooth-terminal-whole-holomorphic-pullback-pasting}
+\leanok
+\end{theorem}
+\begin{proof}
+Genuine projection commutation gives
+$T(g(k(z)))=f(S(k(z)))=f(h(Q(z)))$. The composite is holomorphic.
+Apply the proved genuine whole-square pasting theorem: for any actual
+holomorphic cone over $f\circ h$, first use the square for $g$ to
+lift to $E$, then use the square for $k$ to lift to $F$. Successive
+universal uniqueness proves existence and uniqueness for the same
+composite $g\circ k$. Thus both $c$ and $g\circ k$ are actual whole
+holomorphic Cartesian arrows with the same actual finite source
+projection $Q$ and target projection $T$. The proved genuine finite
+source projection uniqueness theorem makes them equal. These are
+literal laws for the independently constructed final arrows; they do
+not assume those laws or any equality of their individual histories.
+\end{proof}

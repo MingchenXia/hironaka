@@ -1,0 +1,97 @@
+\section{Identity and composition of the entire original global smooth arrows}
+
+Write $T(M)$ for the actual global terminal manifold constructed from the
+original marked ideal $M$, and $p_M:T(M)\to X$ for its original projection.
+For a smooth map $f:Y\to X$, the actual global arrow
+$G_f:T(f^*M)\to T(M)$ is already constructed without compactness, together
+with its Cartesian holomorphic square and its intrinsic uniqueness.  Here the
+identity and composition laws concern those same entire arrows.  They do not
+construct a globally scheduled noncompact blowup history.
+
+\begin{theorem}[Actual terminal manifolds transport along equality of whole marked records]
+\label{hir:original-global-terminal-whole-record-transport}
+\uses{hir:original-input-global-terminal-genuine-complex-manifold}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFunctor.terminalRecordEquiv,
+Hironaka.HironakaSmoothSubmersionOriginalGlobalFunctor.terminalRecordEquiv_proj,
+Hironaka.HironakaSmoothSubmersionOriginalGlobalFunctor.terminalRecordEquiv_trans}
+\leanok
+An equality of entire original marked records induces a genuine
+biholomorphism between their actual global terminal manifolds, commuting with
+their whole original projections.  These biholomorphisms compose according to
+transitivity of equality.  Only the original domain hypotheses are required.
+\end{theorem}
+\begin{proof}
+Identify the two whole marked records using their given equality. Their
+domain proofs are proofs of the same proposition, so the terminal
+constructions are the same original construction.  Take the identity
+biholomorphism. Its projection equality is reflexive. For three equal records,
+identify both successive equalities in turn; both the successive transport
+and the direct transport are the same identity biholomorphism. This proves
+the composition equality on their entire actual terminal manifolds.
+\end{proof}
+
+\begin{theorem}[The entire original global arrow preserves identity]
+\label{hir:original-arbitrary-target-global-smooth-arrow-identity}
+\uses{hir:original-global-terminal-whole-record-transport,hir:original-arbitrary-target-global-intrinsic-smooth-cartesian-uniqueness,hir:smooth-terminal-full-square-biholomorphic-transport}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFunctor.originalGlobalSmoothMap_identity}
+\leanok
+For every original marked ideal in its original invariant domain, the entire
+global smooth arrow over the identity of the ambient manifold is exactly the
+biholomorphism induced by the actual whole-record equality
+$\operatorname{id}^*M=M$.  Thus, after this literal identification of source
+records, it is the identity of the same actual global terminal manifold. No
+compactness or supplied terminal history is assumed.
+\end{theorem}
+\begin{proof}
+Whole marked pullback along the identity is the original record: its carrier
+and marking are unchanged, its ordered boundary is mapped by the identity,
+and its coherent germ ideal pulls back to itself. The first theorem gives the
+corresponding actual terminal biholomorphism $e:T(\operatorname{id}^*M)\to
+T(M)$ with $p_M e=p_{\operatorname{id}^*M}$.
+
+This biholomorphism has a Cartesian square over the identity. Explicitly, for
+a holomorphic cone $(a,b)$ satisfying $p_M b=a$, its unique lift is $e^{-1}b$;
+the projection identity and both inverse identities verify the cone equations
+and uniqueness. The already constructed global arrow over the identity is
+holomorphic, commutes with these projections, and has the same Cartesian
+property. Intrinsic uniqueness for the entire original global arrows
+therefore identifies it with $e$.
+\end{proof}
+
+\begin{theorem}[The entire original global arrows preserve smooth composition]
+\label{hir:original-arbitrary-target-global-smooth-arrow-composition}
+\uses{hir:original-global-terminal-whole-record-transport,hir:original-arbitrary-target-global-intrinsic-smooth-cartesian-uniqueness,hir:smooth-terminal-whole-holomorphic-pullback-pasting,hir:smooth-terminal-full-square-biholomorphic-transport}
+\lean{Hironaka.HironakaSmoothSubmersionOriginalGlobalFunctor.originalGlobalSmoothMap_composition}
+\leanok
+For arbitrary smooth maps $Z\xrightarrow{h}Y\xrightarrow{f}X$ and original
+marked input $M$, let $e:T((f\circ h)^*M)\to T(h^*(f^*M))$ be the actual
+terminal biholomorphism induced by the whole-record pullback-composition
+identity. Then
+\[
+ G_f\circ G_h\circ e=G_{f\circ h}
+\]
+on the entire original global source terminal manifold. Neither source nor
+intermediate nor target is assumed compact. All arrows and all domain
+hypotheses in this equality are constructed from the original smooth maps and
+the original marked input.
+\end{theorem}
+\begin{proof}
+The original smooth domain theorem supplies the domain for $f^*M$ and then
+for $h^*(f^*M)$; composition of genuine smooth maps supplies the domain for
+$(f\circ h)^*M$. Whole coherent pullback identifies their carriers, entire
+ordered boundaries, ideals and markings, hence gives the actual full-record
+equality. The first theorem constructs $e$, and its projection equality is
+$p_{h^*(f^*M)}e=p_{(f\circ h)^*M}$.
+
+The true global projection identities give
+$p_M G_fG_he=f p_{f^*M}G_he=fh p_{h^*(f^*M)}e=fh
+p_{(f\circ h)^*M}$. The composite is holomorphic. Paste the two actual
+Cartesian squares for $G_f$ and $G_h$: a cone first has its unique lift through
+$G_f$, and then its unique lift through $G_h$; the two uniqueness statements
+give uniqueness of the pasted lift. Transport this pasted square along the
+genuine source biholomorphism $e$, using its inverse on every cone lift.
+The composite $G_fG_he$ therefore has the same whole Cartesian square and
+projection identity as the independently constructed $G_{f\circ h}$.
+Intrinsic uniqueness on the entire original global source identifies these
+two holomorphic arrows.
+\end{proof}

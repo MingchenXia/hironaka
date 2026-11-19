@@ -1,0 +1,137 @@
+\section{Original local canonical principalization with the same smooth Cartesian stages}
+
+Let $X^n$ be an arbitrary complex manifold, $I$ its original coherent
+functional ideal, nonzero along every point, and $E_0$ an arbitrary
+original ordered SNC boundary. The original datum is
+$M_0=(X,X,E_0,I,1)$. The statements retain the actual canonical terminal
+towers furnished by the local driver, rather than only their resulting
+principal ideals. No compactness of $Z(I)$ is assumed.
+
+\begin{lemma}[Whole geometry of an actual ambient terminal tower]
+\label{hir:original-local-canonical-principalization-terminal-geometry}
+\lean{Hironaka.HironakaOriginalLocalCanonicalPrincipalization.terminal_principalization_geometry}
+\uses{hir:principalization-boundary}
+\leanok
+Suppose $M=(X,X,E,J,1)$ is an actual invariant-domain datum and $T$ an
+actual terminal geometric test tower for $M$. If the whole original zero
+locus of $J$ is $F$, then every actual centre lies over $F$, the tower
+is admissible for $(X,E,F)$, and its entire ordered boundary $E_T$ is SNC.
+Its actual total exceptional divisor $D_T$ satisfies
+\[
+ T^*J=\mathcal O(-D_T),\qquad
+ |D_T|=T^{-1}F=\bigcup(E_T.\operatorname{drop}|E|).
+\]
+The entire differential exceptional locus lies in $|D_T|$. The same
+projection is holomorphic, proper and surjective, and is an isomorphism
+over $X\setminus F$.
+\end{lemma}
+\begin{proof}
+Coherence and marking one identify the whole cosupport of the ambient
+datum with the whole zero locus of $J$, hence with $F$. Actual testness
+confines every centre over that original cosupport and gives admissibility.
+The invariant domain is preserved by the genuine marked transforms, so
+the entire final ordered boundary is SNC. Actual terminality gives the
+whole principalization identity $T^*J=\mathcal O(-D_T)$. The zero locus
+of the whole coherent pullback is the actual inverse image of its whole
+zero locus, which proves $|D_T|=T^{-1}F$. The actual boundary bookkeeping
+identifies this support with precisely the entries born after all the
+original $|E|$ positions, with none of those positions deleted. Every
+differential exceptional point of an actual finite blowup tower belongs
+to this support. The actual blowup sequence is holomorphic, proper and
+surjective, and is an isomorphism away from its exceptional image. That
+image lies in $F$ by the proved support equality, giving the stated
+isomorphism over its complement. This lemma's actual terminal-tower
+hypothesis is internally discharged in the following existence statements.
+\end{proof}
+
+\begin{theorem}[A prescribed relatively compact open retains its actual canonical tower and every smooth source]
+\label{hir:original-local-canonical-principalization-prescribed-open}
+\lean{Hironaka.HironakaOriginalLocalCanonicalPrincipalization.exists_canonical_boundary_principalization_of_subset_isCompact}
+\uses{hir:original-local-canonical-principalization-terminal-geometry,hir:resolution-relatively-compact,hir:original-canonical-boundary-principalization-smooth}
+\leanok
+Let $U\subset X$ be a prescribed original open contained in a compact
+set $L$. For the unchanged whole restricted datum
+$M=M_0|_U$, original geometry internally produces an actual finite
+canonical terminal tower $T:U\leftarrow D$ for the actual
+$\operatorname{canonicalInvariant}(n)$. It retains the entire geometry
+of the preceding lemma, with
+$F=U\cap Z(I)$, $J=I|_U$ and the entire restricted original boundary
+$E_0|_U$. In particular the support of its total exceptional divisor is
+the union of the entries after the original $|E_0|$ positions.
+
+The choice of this same $D,T$ precedes \emph{every} genuine submersion
+$b:Y^m\to U$. For each such $b$ it internally produces an actual
+finite tower $Q:Y\leftarrow C$ and actual upper submersion $g:C\to D$
+in a holomorphic Cartesian square, with equal literal lengths and
+$Tg=bQ$. The intrinsic source datum is the unchanged whole marked
+pullback $N=b^*M$; it has the entire ordered inverse-image boundary,
+the actual whole pulled ideal and marking one. The same $Q$ is canonical
+and terminal for $\operatorname{canonicalInvariant}(m)$ on $N$.
+Every source centre lies over $b^{-1}F$, and the whole source geometry
+of the preceding lemma holds, including
+\[
+ E_Q=E_T.\operatorname{map}(g^{-1}),\quad
+ Q^*(b^*J)=\mathcal O(-D_Q),\quad
+ |D_Q|=Q^{-1}(b^{-1}F).
+\]
+The source born support is the union after the same original $|E_0|$
+positions. No source compactness, source resolving history or comparison
+certificate is supplied.
+\end{theorem}
+\begin{proof}
+Original coherence, nonzero-alongness and SNC give the actual invariant
+domain of $M_0$. Apply the stronger relatively compact canonical driver
+to the original $U\subset L$, retaining both its actual canonical tower
+and its terminal geometric resolution. Its restricted datum is exactly
+$M$, not a replacement ideal or boundary. Open pullback preserves the
+actual domain, and the whole zero-locus pullback formula gives
+$J.\operatorname{zeroLocus}=F$. Apply the preceding lemma to this same
+chosen $T$. The original boundary restriction is a literal list map,
+so it has exactly $|E_0|$ positions.
+
+Now fix an arbitrary actual submersion $b$ after this target choice.
+Genuine stepwise Cartesian blowup construction produces $Q,g$ from the
+same $T$, retaining every actual empty centre. Its actual universal
+property gives the holomorphic Cartesian square, upper submersion,
+commuting projections and equal lengths. Whole actual marked-transform
+comparison gives $N_Q=g^*M_T$, with no reindexing or filtering. Therefore
+its entire boundary is the displayed literal list map and its final
+cosupport is the inverse image of the empty target cosupport. The same
+source history is thus terminal. Actual ambient canonical comparison
+gives canonicality for the genuine source ambient dimension, including
+an empty source. The source domain follows from actual smooth pullback.
+The zero locus of its entire ideal is $b^{-1}F$, so the preceding lemma
+supplies every stated source admissibility, principalization, support,
+SNC, properness, surjectivity and isomorphism assertion. Two literal
+list maps retain exactly the original number of positions. The target
+was fixed before $b$, so no different target witness has been substituted.
+\end{proof}
+
+\begin{theorem}[An arbitrary compact set has a relatively compact canonical principalization neighbourhood]
+\label{hir:original-local-canonical-principalization-compact-neighbourhood}
+\lean{Hironaka.HironakaOriginalLocalCanonicalPrincipalization.exists_canonical_boundary_principalization_local}
+\uses{hir:original-local-canonical-principalization-prescribed-open}
+\leanok
+For every original compact $K\subset X$ there is an original open
+$U\supset K$ with compact closure and a genuine actual canonical
+terminal tower for $M_0|_U$, retaining all target geometry and all
+same-target arbitrary smooth-source conclusions of the preceding
+theorem. The actual $U,T$ are chosen before all these source maps.
+Neither a canonical choice of neighbourhood nor a comparison between
+different neighbourhood choices is asserted.
+\end{theorem}
+\begin{proof}
+The original complex manifold is locally compact. Compactness of $K$
+therefore gives an original open neighbourhood $U$ of $K$ with compact
+closure in $X$. Its whole set is contained in that closure. Apply the
+preceding theorem with the prescribed $U$ and compact set $L=\overline U$.
+Retain its actual target witness before all arbitrary smooth sources.
+Every required target and source assertion is then exactly that theorem's
+conclusion on this one neighbourhood. No compactness of the original
+zero locus, source manifold or source cosupport enters this construction.
+\end{proof}
+
+For a global actual submersion $Y\to X$, its genuine restriction
+$b^{-1}U\to U$ is an instance of the arbitrary source statement.
+This local finite construction does not assert an unrestricted globally
+locally finite resolution or a functorial rule for choosing $U$.

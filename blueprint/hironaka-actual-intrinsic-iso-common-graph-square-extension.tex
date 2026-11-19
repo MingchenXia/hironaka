@@ -1,0 +1,97 @@
+\section{The common graph compares the specified original intrinsic isomorphism}
+
+The preceding paired-window theorem retains the point values of the given
+intrinsic isomorphism. Here the common-model isomorphisms are constructed with
+literal graph coordinates; their entire quotient-sheaf comparison is then
+proved to equal the specified original map. Arbitrary existential choices of
+common-model isomorphisms would not retain this information.
+
+\begin{theorem}[Common graph isomorphisms retain their literal original coordinates]
+\label{hir:actual-common-graph-isos-literal-coordinates}
+\uses{hir:actual-local-common-graph-model}
+\lean{Hironaka.HironakaActualIntrinsicIsoCommonGraphSquare.actualCommonGraphModelIsos_with_coordinates}
+\leanok
+Let $W\subset U\subset\mathbf C^n$ and $D\subset V\subset\mathbf C^m$,
+with original functions $f,g$ holomorphic on the true opens $U,V$.
+Suppose $f(W)\subset D$, $g(D)\subset W$, $gf=1$ on $W$ and $fg=1$ on
+$D$. There exist actual whole locally ringed common-graph isomorphisms
+$E_W,E_D$, over the actual complex point, whose original ambient values
+are respectively $(x,f(x))$ and $(g(y),y)$ for every actual model point.
+\end{theorem}
+\begin{proof}
+Use the genuine wide graph parametrization and projection isomorphisms.
+Their original base coordinates are literally the stated graph tuples.
+Every first wide graph point belongs to the common open $U\times V$,
+because $f(W)\subset D\subset V$; the reverse assertion follows from
+$g(D)\subset W\subset U$. The actual coordinate-open restriction
+isomorphisms therefore apply. They preserve the original ambient coordinate
+in both directions: their forward maps are literal inclusions, and their
+inverse identities prove the same formula for their inverses. The two
+restricted graph subsets are literally equal, using the two inverse
+identities only on $W,D$. Transport across this proved set equality also
+preserves the ambient coordinate. Compose these actual maps. The resulting
+whole isomorphisms have the claimed original tuple values and actual
+complex-point triangles by the genuine structural triangles of all factors.
+\end{proof}
+
+\begin{theorem}[Actual original coordinate-window inclusions preserve the complex point]
+\label{hir:actual-coordinate-window-inclusion}
+\uses{hir:actual-intrinsic-iso-paired-original-windows,hir:reduced-analytic-model-holomorphic-morphisms}
+\lean{Hironaka.HironakaActualIntrinsicIsoCommonGraphSquare.coordinateWindowInclusion,Hironaka.HironakaActualIntrinsicIsoCommonGraphSquare.coordinateWindowInclusion_point}
+\leanok
+For an actual model $C\subset U$ and a true coordinate open $A\subset U$,
+the actual subset window $(\operatorname{image}C)\cap A$ has a genuine
+whole locally ringed inclusion into the original model, over the actual
+complex point, with literal original base coordinate unchanged.
+\end{theorem}
+\begin{proof}
+The ambient map $A\to U$ is the genuine holomorphic coordinate-open
+inclusion. Membership in the original coordinate carrier is equivalent to
+membership in $C$, by subtype injectivity. This proves that the actual
+ambient inclusion maps the entire window subset into $C$. Apply the genuine
+holomorphic quotient-subspace map construction to this actual inclusion.
+Its literal base formula gives the asserted coordinate identity, and its
+proved complex structural-map compatibility gives the actual point triangle.
+\end{proof}
+
+\begin{theorem}[Any specified original intrinsic isomorphism has a whole common-graph comparison square locally]
+\label{hir:actual-intrinsic-iso-whole-common-graph-square}
+\uses{hir:actual-intrinsic-iso-paired-original-windows,hir:actual-common-graph-isos-literal-coordinates,hir:actual-coordinate-window-inclusion,hir:actual-analytic-subspace-intrinsic-map-faithful,hir:actual-local-common-graph-analytic-object}
+\lean{Hironaka.HironakaActualIntrinsicIsoCommonGraphSquare.exists_actual_intrinsic_iso_common_graph_square}
+\leanok
+Given any actual intrinsic isomorphism $e$ over the actual complex point
+between two original analytic models, and an actual source point, true
+paired coordinate windows and actual common analytic graph isomorphisms
+$E_W,E_D$ are internally constructed so that the entire locally ringed
+maps satisfy
+\[
+ (E_W\circ E_D^{-1})\circ i_D=i_C\circ e.
+\]
+Here composition is written in diagrammatic order and $i_C,i_D$ are the
+actual original window inclusions. The chosen original points belong to
+the produced windows, and the common graph is an actual analytic-category
+object. No representatives, graph isomorphisms or comparison square are input.
+\end{theorem}
+\begin{proof}
+Apply the genuine paired-window theorem to the same given $e$ and point.
+It constructs real opens, original holomorphic $f,g$, all subset maps and
+inverse identities, and the exact point-value identity $f(x)=e(x)$ on
+the original source window. Apply the first theorem to these same produced
+functions and subsets. For a source-window point $x$, the common graph
+value of $E_W(x)$ has second coordinate $f(x)$. If
+$y=E_D^{-1}(E_W(x))$, the actual inverse identity and the literal original
+coordinate formula for $E_D$ force the original coordinate of $y$ to be
+$f(x)$. Thus both sides of the displayed square have the same actual base
+map, using the exact given-$e$ point-value identity and subtype injectivity.
+Every factor preserves the actual complex point. The previously proved
+faithfulness of whole scalar-compatible quotient-model maps therefore
+upgrades this base equality to equality of the entire locally ringed maps,
+including their sheaf morphisms. The same original analytic window and
+ordinary-function graph construction give the actual analytic-category
+object. No invariance of a marked algorithm under adding graph equations
+is used or inferred.
+\end{proof}
+
+This proves the specified whole local presentation-comparison square.
+Canonical centre/history invariance under graph stabilization and proper
+resolution descent remain additional G1 requirements.

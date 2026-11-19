@@ -1,0 +1,116 @@
+\section{Canonical reduced standard bases of the actual formal ideal}
+
+Let $S=\mathbb C[[X_1,\ldots,X_n]]$, let $\prec$ be a monomial
+order, and let $\mathcal N(I)$ be the actual initial-exponent diagram
+of an arbitrary ideal $I\subset S$. Write $R_I$ for the remainder
+already constructed by actual formal division. Its coefficients vanish
+on $\mathcal N(I)$. The vertex members chosen for that division are
+monic but need not be reduced. We now construct reduced members from the
+remainder itself. This is the normal-form construction used in the
+standard-basis argument in \cite{bierstone-milman03-desingularization-algorithms},
+Section 6.3; here existence, uniqueness and generation are established
+directly for the actual formal ideal, before any geometric hypothesis.
+
+\begin{theorem}[The actual remainder is the unique normal representative]
+\label{hir:actual-formal-normal-representative-unique}
+\uses{hir:actual-formal-vertex-division-identity,hir:actual-formal-vertex-division-supports}
+\source{bierstone-milman03-desingularization-algorithms}
+\lean{Hironaka.HironakaActualReducedFormalStandardBasis.sub_actualFormalRemainder_mem,Hironaka.HironakaActualReducedFormalStandardBasis.eq_zero_of_mem_of_diagram_coefficients_zero,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_unique,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_eq_zero_iff,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_add,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_smul,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_eq_self,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_idempotent,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalNormalProjection,Hironaka.HironakaActualReducedFormalStandardBasis.mem_range_actualFormalNormalProjection_iff}
+\leanok
+For every $F\in S$, $F-R_I(F)\in I$. If $F-H\in I$ and every
+coefficient of $H$ on $\mathcal N(I)$ is zero, then $H=R_I(F)$.
+Consequently $R_I(F)=0$ if and only if $F\in I$, and $R_I$ is a
+$\mathbb C$-linear idempotent with kernel $I$ and image the space of
+series supported outside $\mathcal N(I)$.
+\end{theorem}
+\begin{proof}
+The division identity expresses $F-R_I(F)$ as a finite sum of multiples
+of actual members of $I$, proving membership. The difference
+$H-R_I(F)=(F-R_I(F))-(F-H)$ belongs to $I$ and has zero coefficients
+on its entire diagram. If it were nonzero, its actual initial exponent
+would belong to $\mathcal N(I)$, contradicting that vanishing. This proves
+uniqueness. A member of $I$ has zero remainder by the same argument;
+conversely a zero remainder and the membership just proved put $F$ in $I$.
+
+For $F,G\in S$ and $c\in\mathbb C$, the series $R_I(F)+R_I(G)$ and
+$cR_I(F)$ vanish on the diagram and differ from $F+G$ and $cF$ by members
+of $I$. Uniqueness proves additivity and homogeneity. Any series vanishing
+on the diagram is its own remainder, again by uniqueness, proving both
+idempotence and the asserted image. No decomposition is supplied by the
+caller.
+\end{proof}
+
+\begin{lemma}[Actual division preserves every initial segment]
+\label{hir:actual-formal-division-initial-segment}
+\uses{hir:actual-formal-vertex-division-identity}
+\lean{Hironaka.HironakaActualReducedFormalStandardBasis.actualDivisionCoefficient_eq_zero_of_lt,Hironaka.HironakaActualReducedFormalStandardBasis.actualFormalRemainder_coefficient_lower}
+\leanok
+If $[X^c]F=0$ for every $c\prec a$, then $[X^c]R_I(F)=0$ for every
+$c\prec a$.
+\end{lemma}
+\begin{proof}
+Use well-founded induction on $c$ in the actual division recursion.
+For $c\prec a$, its input coefficient is zero. Every correction summand
+contains a division coefficient at an exponent $b\prec c$, and therefore
+$b\prec a$; the induction hypothesis makes that summand zero. The
+recursion thus makes the division coefficient at $c$ zero. A remainder
+coefficient is either this division coefficient or zero according as
+$c$ lies outside or inside the actual diagram, proving the claim for all
+initial segments, including monomial orders with infinitely many
+predecessors.
+\end{proof}
+
+\begin{theorem}[Internally constructed canonical reduced vertex members]
+\label{hir:actual-reduced-formal-vertex-members}
+\uses{hir:actual-formal-normal-representative-unique,hir:actual-formal-division-initial-segment}
+\lean{Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_mem,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_coefficient_diagram,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_coefficient,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_coefficient_lower,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_ne_zero,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_initialExponent,Hironaka.HironakaActualReducedFormalStandardBasis.actualReducedVertexSeries_unique}
+\leanok
+For each actual vertex $a$ of $\mathcal N(I)$, define
+\[
+ G_a=X^a-R_I(X^a).
+\]
+Then $G_a\in I$, its actual initial exponent is $a$, its coefficient
+there is one, and its coefficient at every other exponent of
+$\mathcal N(I)$ is zero. It is the unique member of $I$ with this entire
+diagram coefficient vector. In particular it depends only on the actual
+ideal and monomial order.
+\end{theorem}
+\begin{proof}
+Membership follows from the first theorem. At a diagram exponent $b$,
+the remainder coefficient is zero, so $[X^b]G_a$ is the coefficient of
+$X^a$, namely one for $b=a$ and zero otherwise. All coefficients of
+$X^a$ below $a$ vanish; the initial-segment lemma makes the remainder
+coefficients there vanish as well. Thus the nonzero coefficient at $a$
+is the actual first one. If another member has the same coefficients
+on the whole diagram, its difference from $G_a$ belongs to $I$ and
+vanishes on the diagram, so the first proof makes that difference zero.
+This also proves independence from all choices made during division.
+\end{proof}
+
+\begin{theorem}[The genuine reduced standard basis generates the whole ideal]
+\label{hir:actual-reduced-formal-standard-basis-generation}
+\uses{hir:actual-reduced-formal-vertex-members,hir:actual-formal-normal-representative-unique,hir:actual-formal-ideal-initial-diagram-upper}
+\lean{Hironaka.HironakaActualReducedFormalStandardBasis.ideal_eq_of_le_of_diagram_le,Hironaka.HironakaActualReducedFormalStandardBasis.actual_formal_ideal_eq_span_reduced_vertex_series}
+\leanok
+The finite family $(G_a)$ is a reduced standard basis of the SAME ideal:
+\[
+ I=(G_a:a\text{ an actual vertex of }\mathcal N(I)).
+\]
+This includes the zero ideal, the unit ideal and ambient dimension zero.
+\end{theorem}
+\begin{proof}
+Let $J$ be the displayed span. Its generators belong to $I$, hence
+$J\subset I$. Each actual vertex $a$ of $\mathcal N(I)$ is the actual
+initial exponent of $G_a\in J$. Upward closure of the actual diagram and
+the vertex cover imply $\mathcal N(I)\subset\mathcal N(J)$; the reverse
+inclusion follows directly from $J\subset I$.
+
+For any $F\in I$, division by the actual ideal $J$ gives
+$R_J(F)=F-H$ with $H\in J\subset I$. Thus $R_J(F)\in I$.
+If it were nonzero, its actual initial exponent would lie in
+$\mathcal N(I)\subset\mathcal N(J)$, where all remainder coefficients
+vanish, a contradiction. Therefore $R_J(F)=0$ and the first theorem
+gives $F\in J$. This proves the other whole-ideal inclusion. No
+geometric compatibility, normal-flatness, or strict-transform conclusion
+has been assumed or asserted.
+\end{proof}

@@ -1,0 +1,66 @@
+\section{The exceptional parameter is regular on the whole geometric strict quotient}
+
+\begin{theorem}[Whole vanishing ideals of off-hyperplane closures are saturated]
+\label{hir:actual-off-hyperplane-closure-whole-ideal-saturation}
+\uses{hir:actual-whole-vanishing-origin-ideal-meaning,hir:actual-local-continuous-vanishing-closure}
+\lean{Hironaka.HironakaActualStrictExceptionalRegularity.coordinate_pow_mul_mem_closure_ideal_iff,Hironaka.HironakaActualStrictExceptionalRegularity.closure_ideal_colon_coordinate_pow}
+\leanok
+Let $S\subset\mathbf C^n$ be any actual subset on which the coordinate
+$z_e$ is everywhere nonzero, and let $J$ be the original whole holomorphic
+vanishing germ ideal of $\overline S$ at the origin. For every actual
+holomorphic germ $h$ and every $q\ge0$,
+\[
+ z_e^q h\in J\quad\Longleftrightarrow\quad h\in J.
+\]
+Equivalently the whole ideal quotient $J:(z_e^q)$ equals $J$ for every
+$q$. Neither analyticity of $S$ nor a saturation hypothesis is required.
+\end{theorem}
+\begin{proof}
+Choose an actual holomorphic representative $H$ of $h$. Multiplication
+and taking powers of actual holomorphic germs identify $z_e^qh$ with
+the germ of the actual function $z\mapsto z_e^qH(z)$. Membership in the
+original whole vanishing ideal means this function vanishes throughout
+$\overline S$ near the origin. In particular it vanishes on $S$ there.
+At each of these actual points, the factor $z_e^q$ is nonzero, so $H$
+vanishes. Holomorphy gives continuity at every point of an actual
+neighbourhood. This extends the local vanishing on $S$ to local vanishing
+on its whole closure: otherwise a nonzero value at a closure point would
+have an open neighbourhood of nonzero values intersecting $S$, a
+contradiction. Thus $h\in J$. Conversely ideal membership is preserved
+by multiplication by every $z_e^q$. The ideal quotient consists precisely
+of germs whose product with $z_e^q$ belongs to $J$, so the stated
+membership equivalence proves equality of the whole ideals.
+\end{proof}
+
+\begin{theorem}[The actual geometric strict quotient has a regular exceptional parameter]
+\label{hir:actual-geometric-strict-exceptional-parameter-regular}
+\uses{hir:actual-off-hyperplane-closure-whole-ideal-saturation,hir:actual-normal-blowup-hyperplane-exceptional}
+\lean{Hironaka.HironakaActualStrictExceptionalRegularity.coordinate_pow_mul_mem_geometric_strict_ideal_iff,Hironaka.HironakaActualStrictExceptionalRegularity.geometric_strict_ideal_colon_coordinate_pow,Hironaka.HironakaActualStrictExceptionalRegularity.exceptional_isSMulRegular_geometric_strict_quotient}
+\leanok
+For an actual normal-coordinate blowup chart with normal dimension
+$t\ge2$, pivot $e=d+j$, arbitrary chart direction and arbitrary original
+subset $W$, let $W'$ be its original geometric strict transform and let
+$J'$ be its whole original holomorphic vanishing germ ideal. Then
+$J':(z_e^q)=J'$ for every $q\ge0$. In particular multiplication by the
+actual exceptional coordinate is injective on the entire original germ
+quotient $\mathcal O_{\mathbf C^{d+t},0}/J'$.
+\end{theorem}
+\begin{proof}
+By the original geometric definition, $W'$ is the closure of the actual
+set $S=\pi^{-1}(W)\setminus\operatorname{Exc}(\pi)$. The actual normal
+chart differential has a genuine nonzero kernel at every point with
+$z_e=0$ when $t\ge2$. Hence the whole hyperplane $z_e=0$ lies in its
+actual differential exceptional locus. Every point of the defining set
+$S$ therefore has $z_e\ne0$. Apply the preceding theorem to this actual
+set $S$; it gives the claimed whole-ideal membership equivalence and
+colon equality at every power. For injectivity on the quotient, the
+kernel of multiplication by $z_e$ consists of the classes of $h$ with
+$z_eh\in J'$. The power-one equivalence says every such $h$ belongs to
+$J'$, so every kernel class is zero. This argument also covers an empty
+strict germ, whose quotient is zero.
+\end{proof}
+
+This is regularity on the whole geometric strict quotient. Identifying a
+normalized generator ideal with this geometric ideal, lifting a complete
+standard basis through the exceptional parameter, and obtaining a reverse
+Hilbert--Samuel persistence criterion require further arguments.

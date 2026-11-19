@@ -1,0 +1,54 @@
+\section{Literal relative-to-point analytic chart factorization}
+
+Let $A$ be any actual selected coordinate centre, $e$ a pivot, and $b$ a
+prescribed direction. Let $\pi_A$ be its genuine relative polynomial chart,
+$\sigma$ the actual zero chart selecting $A^c\cup\{e\}$, and let $b^0_i=b_i$
+on $A$ and zero off $A$. These are the actual complex maps and whole original
+germ pullbacks already constructed, not formal substitutes.
+
+\begin{theorem}[The genuine point chart is the composite of the actual relative and tangent-scaling charts]
+\label{hir:actual-relative-point-chart-factorization}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualRelativePointChartFactorization.actualPointChartDirection,Hironaka.HironakaActualRelativePointChartFactorization.actualTangentScalingVariables,Hironaka.HironakaActualRelativePointChartFactorization.actualAnalyticBlowupMap_relative_point,Hironaka.HironakaActualRelativePointChartFactorization.actualAnalyticBlowupPullback_relative_point,Hironaka.HironakaActualRelativePointChartFactorization.map_actual_relative_point_ideal}
+\leanok
+The actual maps satisfy $\pi_A\circ\sigma=\pi_{\mathrm{point},b^0}$.
+Their ENTIRE original germ pullbacks therefore satisfy the literal composite
+algebra-homomorphism equality. Consequently the corresponding entire ideal
+images agree for every original ideal, without a selected-generator hypothesis.
+\end{theorem}
+\begin{proof}
+The pivot is fixed by both charts. A nonpivot coordinate in $A$ is fixed by
+$\sigma$ and sent by $\pi_A$ to $e(b_i+z_i)$. A coordinate outside $A$ is
+sent by $\sigma$ to $ez_i$ and fixed by $\pi_A$, which is exactly the point
+chart with $b^0_i=0$. Coordinate extensionality proves the equality of the
+actual polynomial maps. For any original representative germ, both composite
+pullbacks are actual composition of that same representative with these
+identical maps. Whole germ extensionality proves equality at every germ,
+hence equality of algebra maps. Applying ideal-map composition proves the
+whole ideal-image square.
+\end{proof}
+
+\begin{theorem}[The SAME prescribed relative normalized family becomes the prescribed point family]
+\label{hir:actual-relative-point-prescribed-normalized-family}
+\uses{hir:actual-relative-point-chart-factorization,lag:germ-domain}
+\lean{Hironaka.HironakaActualRelativePointChartFactorization.actual_relative_quotient_point_equation,Hironaka.HironakaActualRelativePointChartFactorization.actual_relative_quotient_point_unique}
+\leanok
+For any genuine original $G,H$ and weight $w$, the exact relative quotient
+$e^wH=\pi_A^*G$ gives
+$e^w\sigma^*H=\pi_{\mathrm{point},b^0}^*G$.
+Thus a supplied point quotient with this same numerator and weight equals
+$\sigma^*H$ as a whole original germ. Both conclusions retain the SAME
+relative family; no independently chosen chart or family is substituted.
+\end{theorem}
+\begin{proof}
+Apply the actual algebra homomorphism $\sigma^*$ to the given whole equality.
+It preserves the actual product and power, fixes the genuine pivot germ, and
+its composite with $\pi_A^*$ is the first theorem's actual point pullback.
+This gives the literal displayed equation. If another point quotient is
+supplied, subtract its equation from this one. The genuine pivot germ is
+nonzero and the actual holomorphic-germ ring is a domain. Cancellation of
+its actual power proves equality of the whole germs. No quotient equality
+or output family correspondence is incoming.
+\end{proof}
+
+This is the literal same-family chart bridge. A suitable monic image-family, its current maximal filtration, and a relative HS criterion are subsequent obligations.

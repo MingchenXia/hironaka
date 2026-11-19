@@ -1,0 +1,113 @@
+\section{Relative Hadamard division inside the same singular cylinder ideal}
+
+Let $S\subset\mathbb C^n$ be invariant under changing selected fibre coordinates.
+No regularity, analyticity, coherence, or reduced-ideal presentation is assumed
+for $S$. Its ideal below is the actual ideal of holomorphic germs vanishing on
+$S$ near the specified point. In particular the results apply to an arbitrary
+singular cylinder $W\times\mathbb C^t$.
+
+\begin{lemma}[Coordinate division retains the entire cylinder vanishing ideal]
+\label{hir:actual-cylinder-coordinate-division-ideal}
+\lean{Hironaka.HironakaActualCylinderRelativeHadamard.cylinder_subset_closure_coordinate_complement,Hironaka.HironakaActualCylinderRelativeHadamard.mem_vanishingIdeal_of_coord_mul}
+\leanok
+If changing coordinate $i$ preserves $S$, then $S\setminus\{z_i=0\}$ is dense
+in $S$. Consequently, if $H$ is holomorphic near $q$ and $z_iH$ belongs to the
+actual vanishing ideal of $S$ at $q$, then $H$ belongs to that same ideal.
+\end{lemma}
+\begin{proof}
+For a point of $S$ with nonzero $i$th coordinate the density assertion is
+immediate. At a point whose $i$th coordinate is zero, replace that coordinate
+by any nonzero scalar of arbitrarily small modulus. The new point remains in
+$S$ and tends to the original point, proving the density. Choose one open
+neighbourhood of $q$ where $H$ is holomorphic and $z_iH$ vanishes on $S$.
+At every point of $S$ in that neighbourhood with nonzero $i$th coordinate,
+cancellation gives $H=0$. Each remaining point of the intersection is in the
+closure of these points within the same open neighbourhood. Continuity of
+$H$ there therefore gives $H=0$ at that point as well. This is actual
+vanishing-ideal membership on a genuine neighbourhood of $q$.
+\end{proof}
+
+\begin{theorem}[One-coordinate relative Hadamard division in the same ideal]
+\label{hir:actual-cylinder-one-coordinate-hadamard}
+\lean{Hironaka.HironakaActualCylinderRelativeHadamard.exists_relative_coord_quotient_mem_vanishingIdeal}
+\uses{hir:actual-cylinder-coordinate-division-ideal,bex:hadamard}
+\leanok
+Suppose $q_i=0$, changing coordinate $i$ preserves $S$, and the actual
+holomorphic germ $F$ belongs to the vanishing ideal of $S$ at $q$. Write
+$P_i z$ for $z$ with coordinate $i$ set to zero. Then $F\circ P_i$ belongs
+to the same ideal, and there exists $H$ in that same ideal such that
+\[
+ F(z)-F(P_i z)=z_iH(z)
+\]
+near $q$.
+\end{theorem}
+\begin{proof}
+The linear map $P_i$ fixes $q$, so $F\circ P_i$ is holomorphic near $q$.
+It vanishes near $q$ on $S$, since $P_i$ preserves $S$ and is continuous.
+Thus the difference is in the same actual vanishing ideal and vanishes on
+the entire coordinate hyperplane $z_i=0$. Genuine holomorphic division by
+one coordinate gives a holomorphic $H$ with the displayed exact local
+equation. Its product $z_iH$ vanishes on $S$ near $q$ by that equation.
+The preceding lemma puts $H$ itself in the original vanishing ideal.
+\end{proof}
+
+\begin{theorem}[Whole relative Hadamard decomposition retains every coefficient in the original ideal]
+\label{hir:actual-cylinder-relative-hadamard-whole}
+\lean{Hironaka.HironakaActualCylinderRelativeHadamard.exists_sum_coord_mul_mem_vanishingIdeal}
+\uses{hir:actual-cylinder-one-coordinate-hadamard}
+\leanok
+Let $q\in\mathbb C^k\times0$, and suppose changing any coordinate $i\ge k$
+preserves $S$. If $F$ belongs to the actual vanishing ideal of $S$ at $q$
+and vanishes near $q$ on $\mathbb C^k\times0$, then there are actual
+holomorphic germs $H_i$, each in that same vanishing ideal, with $H_i=0$
+for $i<k$, and
+\[
+ F(z)=\sum_{i\ge k}z_iH_i(z)
+\]
+near $q$.
+\end{theorem}
+\begin{proof}
+Induct on the number $n-k$ of fibre coordinates. For zero coordinates the
+plane is the whole space, so $F=0$ near $q$ and all coefficients can be zero.
+For the next coordinate $i=k$, the preceding theorem gives
+$F-F\circ P_i=z_iH_i$, with both $H_i$ and $F\circ P_i$ in the original
+vanishing ideal. The latter function vanishes on the plane with free
+coordinates $<k+1$: setting coordinate $k$ to zero sends that plane into
+the original $k$-plane. The inductive hypothesis applies to that same
+function, the same set $S$, and the remaining coordinates. It produces
+all its coefficients inside the same original ideal and with zero
+coefficients below $k+1$. Insert the already constructed $H_i$ at index
+$k$. The two actual local equalities, valid on their common neighbourhood,
+then give the displayed finite sum. All coefficient holomorphy and
+vanishing claims have been retained in the induction.
+\end{proof}
+
+\begin{corollary}[The literal singular product has the actual relative difference formula]
+\label{hir:actual-singular-cylinder-relative-difference}
+\lean{Hironaka.HironakaActualCylinderRelativeHadamard.cylinderCarrier,Hironaka.HironakaActualCylinderRelativeHadamard.exists_cylinder_relative_difference}
+\uses{hir:actual-cylinder-relative-hadamard-whole,hir:hadamard-bridge-along}
+\leanok
+For any $W\subset\mathbb C^k$ put $S=W\times\mathbb C^t$ in the actual
+coordinate model $\mathbb C^{k+t}$, and let $P(z,v)=(z,0)$. If $F$ belongs
+to the actual vanishing ideal $J$ of $S$ at the origin, there are actual
+holomorphic germs $H_i\in J$ such that
+\[
+ F(z,v)-F(z,0)=\sum_{i\ge k}(z,v)_iH_i(z,v)
+\]
+near the origin. Every coefficient belongs to the whole original cylinder
+vanishing ideal; no pulled-back-ideal equality is assumed.
+\end{corollary}
+\begin{proof}
+Changing any fibre coordinate preserves the literal product. The actual
+linear retraction $P$ also preserves it and fixes the origin. Therefore
+$F\circ P$ is holomorphic and vanishes near the origin on the same
+product. The difference $F-F\circ P$ belongs to $J$ and vanishes on the
+whole base plane, because $P$ fixes that plane. Apply the preceding
+relative Hadamard theorem to this difference. It gives precisely the
+asserted whole local equation and puts every coefficient in $J$.
+\end{proof}
+
+The coherent finite-module Nakayama argument identifying the entire cylinder
+ideal with the extension of the original singular base ideal is a subsequent
+producer. General smooth pullback, resolution drivers, and termination are
+not asserted by this relative division result alone.

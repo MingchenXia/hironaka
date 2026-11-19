@@ -1,0 +1,84 @@
+\section{The actual tangent-scaling chart identifies normal and total filtrations}
+
+Let $S$ be the actual normal coordinates, with $e\in S$. Let $\sigma$ be
+the genuine zero-direction chart with selected coordinates $S^c\cup\{e\}$.
+Let $N=(X_i:i\in S)$ be the actual whole normal ideal, and $\mathfrak m$
+the actual whole point ideal. These are different filtrations; no normal
+homogeneity is identified with total homogeneity.
+
+\begin{theorem}[The genuine whole chart contracts every normal power to the point power]
+\label{hir:actual-tangent-scaling-formal-filtration}
+\uses{hir:actual-formal-monomial-blowup-coefficient-reflection,hir:actual-formal-coordinate-power-coefficient-kernel}
+\lean{Hironaka.HironakaActualTangentScalingFiltration.actualTangentScalingExponent_normal_weight,Hironaka.HironakaActualTangentScalingFiltration.mem_normal_pow_tangentScaling_iff_point_pow,Hironaka.HironakaActualTangentScalingFiltration.comap_normal_pow_tangentScaling}
+\leanok
+For every original exponent $a$, the literal inserted exponent $T(a)$ has
+normal weight $|a|$. Consequently, for every entire formal $F$ and every $q$,
+\[
+ \sigma(F)\in N^q\quad\Longleftrightarrow\quad F\in\mathfrak m^q.
+\]
+This is a whole ideal inverse-image equality for every finite power.
+\end{theorem}
+\begin{proof}
+The selected nonpivot coordinates of $\sigma$ are precisely $S^c$.
+Inserting their sum in the pivot, whose normal weight is one, gives
+$\operatorname{wt}_S(T(a))=\operatorname{wt}_S(a)+\operatorname{wt}_{S^c}(a)=|a|$.
+Each point coordinate pulls back into the actual normal ideal: a normal
+coordinate is fixed, and a tangent coordinate becomes its product with the
+normal pivot. The whole point ideal therefore maps into $N$, and actual
+ideal-map powers give the forward implication at every $q$.
+Conversely, normal-power membership kills all target coefficients below
+normal weight $q$. At $T(a)$ this kills the coefficient whenever $|a|<q$.
+Genuine whole coefficient reflection identifies it with the actual source
+coefficient at $a$. The actual whole point-power coefficient criterion
+therefore gives $F\in\mathfrak m^q$. Extensionality gives the entire ideal
+inverse-image equality, not a selected-generator comparison.
+\end{proof}
+
+\begin{theorem}[The literal cone inverse preserves exactly the required mixed filtration]
+\label{hir:actual-tangent-scaling-cone-inverse-filtration}
+\uses{hir:actual-tangent-scaling-formal-filtration,hir:actual-zero-chart-whole-cone-range}
+\lean{Hironaka.HironakaActualTangentScalingFiltration.coefficientInverse_point_pow_iff_normal_pow}
+\leanok
+For every entire target $F$ supported in the genuine nonnegative chart cone,
+its literal coefficient inverse satisfies
+\[
+ \mathcal C(F)\in\mathfrak m^q\quad\Longleftrightarrow\quad F\in N^q.
+\]
+Thus a genuine normal-weight bound on actual image owner quotients becomes
+the exact source total-order bound; no output filtration certificate is assumed.
+\end{theorem}
+\begin{proof}
+The previously proved entire cone-range theorem gives
+$\sigma\mathcal C(F)=F$ for precisely this actual coefficient inverse.
+Substitute this literal identity in the first theorem at $\mathcal C(F)$.
+Both directions follow for the entire actual series. The incoming cone
+condition is the natural actual range characterization, not the desired
+source point-power bound.
+\end{proof}
+
+\begin{theorem}[The genuine original analytic chart has the same whole filtration contraction]
+\label{hir:actual-tangent-scaling-analytic-filtration}
+\uses{hir:actual-tangent-scaling-formal-filtration,hir:actual-original-formal-taylor-maximal-power-kernel,hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality,hir:actual-formal-normal-power-contracts-exact-original-analytic-power}
+\lean{Hironaka.HironakaActualTangentScalingFiltration.mem_normal_pow_analytic_tangentScaling_iff_maximal_pow,Hironaka.HironakaActualTangentScalingFiltration.comap_analytic_normal_pow_tangentScaling}
+\leanok
+For the actual normal coordinate block of $\mathbb C^{d+t}$ and a prescribed normal pivot, the genuine original analytic tangent-scaling pullback and every actual
+germ $g$ and $q$, its pullback lies in the whole analytic normal-coordinate
+power $N^q$ if and only if $g$ lies in the genuine maximal power
+$\mathfrak m^q$. No source order or pullback order is incoming as a certificate.
+\end{theorem}
+\begin{proof}
+The actual Taylor map sends the whole analytic coordinate ideal to the whole
+formal coordinate ideal. The genuine analytic normal-power contraction
+identifies membership in its powers with membership after the unchanged
+whole Taylor map. The true whole Taylor naturality square identifies the
+Taylor series of the genuine analytic pullback with the actual formal chart
+image of the source Taylor series. Apply the first theorem to that series.
+Finally, actual dimension reassociation of the original point-power Taylor
+kernel identifies its entire point-power condition with the source genuine
+maximal power. These exact equalities prove both analytic directions and
+retain the distinction between source total and target normal filtrations.
+\end{proof}
+
+The suitable monic image-family still must be constructed from the SAME actual
+relative family. Neither that construction nor a relative current HS theorem
+is inferred from this exact filtration dictionary alone.

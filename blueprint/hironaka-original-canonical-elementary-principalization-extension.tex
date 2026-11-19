@@ -1,0 +1,108 @@
+\section{The original canonical tower as an elementary principalization}
+
+The compact ambient manifold in this section may be disconnected, and may
+be empty.  The source of a smooth base map need not be compact.  We use the
+literal marked ideal $M=(X,X,\varnothing,I,1)$ throughout.  The finite tower
+is the actual output of the compact canonical driver for this record.
+Thus the elementary principalization and the original terminal manifold
+refer to the same resolution, including its full total-transform ideal.
+The construction specializes the terminal-map comparison to elementary
+principalization, as in \cite{bierstone-milman08-functoriality}; it does not
+identify an embedded-resolution stopped prefix with a full terminal tower.
+
+\begin{theorem}[Canonical elementary principalization on the actual compact terminal tower]
+\label{hir:original-canonical-elementary-principalization}
+\uses{hir:principalization,hir:principalization-compact-support,hir:admissible-sequence,hir:smooth-original-compact-canonical-terminal-object,hir:original-global-terminal-finite-whole-biholomorphism}
+\lean{Hironaka.HironakaOriginalCanonicalElementaryPrincipalization.canonical_elementary_principalization}
+\leanok
+\source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
+Let $X$ be a compact complex manifold and $I$ a coherent ideal which is
+nonzero as a germ at every point.  Let $T:D\to X$ be the internally
+constructed compact canonical tower for $M$.  Write $p=T.\mathrm{proj}$,
+$D_T$ for its effective exceptional divisor and $E_T$ for the actual
+accumulated boundary of the transform of $M$.  Then $T$ is both a canonical
+segment and a geometric resolution of $M$.  The same projection $p$ is a
+proper surjective holomorphic admissible blowup sequence from the empty
+boundary, every centre lies over $Z(I)$, and
+\[
+ p^* I=I_{D_T},\qquad E_T\text{ is SNC},\qquad
+ \operatorname{supp}D_T=\bigcup_{H\in E_T}H=p^{-1}Z(I).
+\]
+Its exceptional locus is contained in $\operatorname{supp}D_T$, and it is
+an isomorphism over $X\setminus Z(I)$.  There is a biholomorphism
+$\eta_X:\widetilde X_M\to D$ from the original glued terminal manifold
+such that $p\eta_X=P_M$, the original whole glued projection.
+\end{theorem}
+\begin{proof}
+Coherence and germwise nonvanishing put the literal $M$ in the ambient
+invariant domain.  Apply the compact canonical driver to this very record;
+retain its canonical segment and geometric resolution.  The segment gives
+whole canonicality.  The original cosupport is exactly $Z(I)$, so the
+actual test-tower centre containment puts every centre of this tower over
+$Z(I)$.  Applying the admissible-sequence dictionary to this tower gives
+the claimed sequence with exactly its accumulated boundary.  Its
+projection is holomorphic, proper and surjective because it is the
+projection of a finite actual blowup tower.
+
+For mark one and ambient support $X$, the geometric-resolution identity
+gives $p^*I=I_{D_T}$ as whole germ ideals.  Well-formedness of the actual
+transformed record gives SNC for $E_T$.  The tower's exceptional-divisor
+support formula, with empty initial boundary, gives the first support
+equality.  The zero-locus pullback formula applied to the whole ideal
+identity gives the second.  The exceptional-locus containment for a tower
+therefore puts its entire image over $Z(I)$; the blowup-sequence
+isomorphism theorem gives the isomorphism over its complement.  Finally
+apply the original finite-terminal identification to this same $T$ and
+the canonicality and resolution just produced.  Its whole projection
+formula is precisely $p\eta_X=P_M$.
+\end{proof}
+
+\begin{theorem}[Arbitrary smooth source and the same elementary principalization]
+\label{hir:original-canonical-elementary-principalization-smooth}
+\uses{hir:original-canonical-elementary-principalization,hir:original-global-finite-smooth-source-history,hir:smooth-original-finite-terminal-intrinsic-smooth-map,hir:original-global-finite-terminal-smooth-map-cartesian,hir:original-global-terminal-finite-whole-biholomorphism}
+\lean{Hironaka.HironakaOriginalCanonicalElementaryPrincipalization.canonical_elementary_principalization_smooth_base_change}
+\leanok
+\source{bierstone-milman08-functoriality}
+With the preceding original $I,X,M,T,p,D_T$, let $b:Y\to X$ be any
+holomorphic submersion.  The actual Cartesian pullback construction of
+this finite $T$ internally gives a finite canonical geometric resolution
+$S:C\to Y$ of $b^*M$, without compactness of $Y$.  Writing $q=S.\mathrm{proj}$,
+there are internally constructed holomorphic submersions
+$g:C\to D$ and $G:\widetilde Y_{b^*M}\to\widetilde X_M$ for which
+\[
+ pg=bq,\qquad P_MG=bP_{b^*M},\qquad
+ \eta_XG=g\eta_Y .
+\]
+Both displayed projection squares are holomorphic Cartesian squares;
+$\eta_Y:\widetilde Y_{b^*M}\to C$ and $\eta_X$ are biholomorphisms over
+the unchanged original bases.  In particular the lower principalization
+in these squares is exactly the preceding $p$, with its literal whole
+identity $p^*I=I_{D_T}$.
+\end{theorem}
+\begin{proof}
+Choose the actual smooth pullback tower of the entire finite target $T$.
+The original smooth-source-history theorem proves canonicality of this
+actual $S$ and its genuine geometric terminality.  Apply the intrinsic
+finite-terminal smooth-map theorem to these two histories, keeping the
+already chosen target $T$.  It gives the submersion $g$, the equality
+$pg=bq$, and the holomorphic Cartesian universal property.
+
+Identify both actual finite terminal histories with their original glued
+terminal manifolds by their genuine over-base biholomorphisms $\eta_Y$
+and $\eta_X$.  The global finite smooth arrow is defined as
+$G=\eta_X^{-1}g\eta_Y$.  Hence $\eta_XG=g\eta_Y$.  The finite comparison
+projection identities give the second projection equality.  Transporting
+the finite Cartesian universal property through these biholomorphisms
+gives the whole global holomorphic Cartesian property, and their
+composition with $g$ is a submersion.  The target is still the original
+compact driver's tower, so the first theorem supplies its unchanged whole
+total-transform identity.
+\end{proof}
+
+\begin{remark}
+These results give the arbitrary smooth comparison for elementary ideal
+principalization with empty initial boundary.  Embedded resolution uses a
+stopped prefix before the first centre meeting the original regular locus;
+the full terminal ideal map here is not that stopped map.  Comparisons for
+that prefix and the corresponding boundary statements remain separate.
+\end{remark}

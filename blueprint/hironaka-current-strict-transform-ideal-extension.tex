@@ -1,0 +1,144 @@
+\section{The actual current reduced ideal and residual order}
+
+\begin{lemma}[Order reverses ideal inclusion]
+\label{hir:order-antitone-ideal}
+\uses{hir:order}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.order_le_of_ideal_le}
+\leanok
+If $\mathfrak a\subset\mathfrak b$ are ideals of germs, then
+$\operatorname{ord}_x(\mathfrak b|_N)\leq\operatorname{ord}_x(\mathfrak a|_N)$.
+\end{lemma}
+\begin{proof}
+If every member of $\mathfrak b_x$ belongs to the $q$th power of the
+maximal ideal on $N$, the same holds for every member of $\mathfrak a_x$.
+Each integer occurring in the supremum defining the order of $\mathfrak b$
+therefore occurs in the supremum for $\mathfrak a$. Taking suprema proves
+the assertion, including infinite orders.
+\end{proof}
+
+\begin{lemma}[Current strict transform lies in the actual cosupport]
+\label{hir:current-strict-transform-in-cosupport}
+\uses{hir:admissible-calculus,hir:embedded-resolution-boundary}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.strictTransform_subset_cosupp_of_centresAvoid}
+\leanok
+Let $W$ be closed and $W\subset\overline{W\cap O}$ for an open $O$.
+Let the marked ideal $(X,X,E_0,\mathcal I_W,1)$ be in the invariant domain.
+For every actual test tower $T$ whose centres avoid $T^{-1}O$, its current
+strict transform $S$ is contained in its actual current cosupport.
+No smoothness of $W$ is required.
+\end{lemma}
+\begin{proof}
+The actual current ambient carrier is the whole manifold and its mark is one,
+so its cosupport is the zero locus of its coherent controlled ideal and is
+closed. Density transports to $S\subset\overline{S\cap T^{-1}O}$.
+Every point of $S$ maps into $W$, since $W$ is closed. On $T^{-1}O$ the
+actual cosupport is exactly the inverse image of $W$: restriction of the
+recorded tower to $O$ has only empty centres and is a local biholomorphic
+pullback. Thus $S\cap T^{-1}O$ is in the current cosupport. Closure gives
+the result.
+\end{proof}
+
+\begin{lemma}[The controlled ideal vanishes on the current strict transform]
+\label{hir:current-controlled-ideal-in-reduced-ideal}
+\uses{hir:current-strict-transform-in-cosupport}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.controlledIdeal_le_currentStrictIdeal}
+\leanok
+Under the preceding hypotheses, the actual current controlled ideal satisfies
+$\mathfrak a_T\subset\mathcal I_S$.
+\end{lemma}
+\begin{proof}
+The previous lemma puts $S$ in the zero locus of $\mathfrak a_T$.
+For a germ $g\in(\mathfrak a_T)_x$, coherence gives a local presentation
+by holomorphic generators and expresses $g$ as a holomorphic linear
+combination near $x$. The same expression makes $g$ a member of the
+ideal at every sufficiently nearby point. It consequently vanishes on
+$S$ near $x$, which is precisely membership in $(\mathcal I_S)_x$.
+\end{proof}
+
+\begin{lemma}[Residual ideal outside the divisor]
+\label{hir:residual-ideal-off-boundary}
+\uses{hir:monomial-part-along}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.nmPart_mem_iff_of_notMem_boundary}
+\leanok
+For a coherent ideal on the whole ambient manifold, its nonmonomial part
+has exactly the same germs as the ideal at a point outside the divisor.
+\end{lemma}
+\begin{proof}
+At such a point every condition indexed by a divisor member through that
+point is empty, so the constant germ $1$ belongs to the monomial part.
+A residual germ multiplied by $1$ therefore belongs to the original ideal;
+restriction to the whole manifold changes no coherent ideal. Conversely
+every original germ belongs to its colon by the monomial part, by ideal
+closure under holomorphic multiplication. This proves both inclusions.
+\end{proof}
+
+\begin{lemma}[Removing the monomial factor preserves vanishing on a dense set]
+\label{hir:residual-ideal-in-dense-reduced-ideal}
+\uses{hir:residual-ideal-off-boundary,hir:monomial-part-along}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.nmPart_le_vanishingIdeal_of_dense_zeroLocus}
+\leanok
+Let a well-formed nonzero marked ideal have the whole manifold as its
+ambient carrier, and let $n>0$. If $S$ is in its ideal's zero locus and
+$S\subset\overline{S\setminus|E|}$, then its actual nonmonomial ideal is
+contained in $\mathcal I_S$.
+\end{lemma}
+\begin{proof}
+The residual ideal is coherent, by the actual SNC monomial-factorization
+theorem and nonzero germs. Its zero locus is therefore closed. At a point
+of $S\setminus|E|$, the preceding lemma identifies its residual germs
+with original germs, all of which vanish at that point. Hence the residual
+zero locus contains $S\setminus|E|$ and by density contains $S$.
+The same coherent-germ propagation argument as above gives inclusion in
+$\mathcal I_S$.
+\end{proof}
+
+\begin{theorem}[Actual residual ideal inside the current reduced ideal]
+\label{hir:current-residual-ideal-in-reduced-ideal}
+\uses{hir:current-controlled-ideal-in-reduced-ideal,hir:residual-ideal-in-dense-reduced-ideal,hir:admissible-calculus}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.nonmonomialIdeal_le_currentStrictIdeal}
+\leanok
+Under the current-strict-transform hypotheses, suppose additionally that
+$n>0$ and every initial boundary member is disjoint from $O$.
+Then the actual residual ideal of the current controlled transform satisfies
+$\mathcal N(\mathfrak a_T)\subset\mathcal I_S$.
+\end{theorem}
+\begin{proof}
+Every actual centre lies over $X\setminus O$, because the recorded tower
+avoids $O$. The actual admissible-sequence producer and the boundary-support
+induction put every current boundary member over either the initial
+boundary or $X\setminus O$. Both miss $O$. Density transports to
+$S\subset\overline{S\cap T^{-1}O}$, and this dense part misses the whole
+current boundary. Thus $S\subset\overline{S\setminus|E_T|}$.
+The invariant domain is preserved by the actual test tower; in particular
+the current ideal is coherent and nonzero and its current divisor is SNC.
+Its zero locus contains $S$ by the preceding current-ideal lemma. Apply
+the residual-ideal density lemma.
+\end{proof}
+
+\begin{theorem}[Fresh reduced order is bounded by the actual residual order]
+\label{hir:fresh-order-bounded-current-residual-order}
+\uses{hir:current-residual-ideal-in-reduced-ideal,hir:order-antitone-ideal,bcalc:nonmonomial-order-local}
+\lean{Hironaka.HironakaCurrentStrictTransformIdeal.fresh_order_le_nmOrd_geoTransformAlong}
+\leanok
+With the hypotheses of the preceding theorem, at every current point $y$,
+\[
+ \operatorname{ord}_y(\mathcal I_S)
+ \leq \operatorname{ord}_y\mathcal N(\mathfrak a_T).
+\]
+The right hand side is the actual finite first coordinate used by the
+canonical general-step invariant. In particular the freshly initialized
+reduced order is finite.
+\end{theorem}
+\begin{proof}
+For every integer $q$ such that all germs of $\mathcal I_S$ vanish to order
+$q$, the proved inclusion makes all residual germs vanish to order $q$.
+The actual domain and nonzero-germ theorem identify this condition with
+$q$ being at most the finite residual order of the current marked ideal.
+Take the supremum over those integers $q$.
+\end{proof}
+
+This comparison proves only the first order-coordinate bound. It does not
+identify the higher coefficient-ideal coordinates after reinitialization,
+prove their strict lexicographic descent, or exclude boundary-only branches
+of the old controlled cosupport from every canonical maximum. The literal
+current-singular-locus condition for an initially singular set remains open.

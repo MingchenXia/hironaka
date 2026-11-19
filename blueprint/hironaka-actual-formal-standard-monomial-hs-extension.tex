@@ -1,0 +1,103 @@
+\section{Genuine standard monomials compute the actual formal and original HS functions}
+
+Let $S=\mathbb C[[X_1,\ldots,X_n]]$ with its GENUINE complex action,
+let $I\subset S$ be ANY actual ideal, and let $\mathcal N(I)$ be its
+internally constructed actual degree-lexicographic initial diagram.
+Write $\mathfrak n=(X_1,\ldots,X_n)$. The following supplies the genuine
+finite quotient bases underlying the diagram Hilbert--Samuel formula in
+\cite[\S7, Lemmas~7.5--7.7, pp.~261--264]{bierstone-milman97-invent-math}.
+The finite diagram complement, basis, and quotient dimensions are all
+constructed from the actual whole ideal, rather than supplied as premises.
+
+\begin{lemma}[Actual diagram-avoiding bounded series are separated in the whole jet quotient]
+\label{hir:actual-formal-standard-monomial-jet-separation}
+\uses{hir:actual-formal-initial-exponent-coefficient-product,hir:actual-formal-ideal-initial-diagram-upper,hir:actual-formal-variable-power-coefficient-kernel}
+Let $q\ge0$ and let $P\in S$ be an ACTUAL series whose every nonzero
+coefficient exponent $a$ satisfies $|a|<q$ and $a\notin\mathcal N(I)$.
+If $P\in I+\mathfrak n^q$, then $P=0$.
+\lean{Hironaka.HironakaActualFormalStandardMonomialHS.actual_degree_le_of_deglex_lt,Hironaka.HironakaActualFormalStandardMonomialHS.bounded_diagram_avoiding_series_eq_zero}
+\leanok
+\end{lemma}
+\begin{proof}
+Write $P=G+Z$ in the actual whole ideal sum, with $G\in I$ and
+$Z\in\mathfrak n^q$. If $P\ne0$, take its actual lowest nonzero
+coefficient exponent $a$. Its genuine support condition gives $|a|<q$
+and $a\notin\mathcal N(I)$. The actual power kernel kills every
+coefficient of $Z$ below degree $q$. Thus the genuine coefficient of
+$G$ at $a$ is the SAME nonzero coefficient of $P$. For any exponent
+$b\prec a$, degree-lex compatibility gives $|b|\le|a|<q$, so both
+the coefficient of $P$ there and that of $Z$ vanish. Hence the actual
+lowest exponent of the genuine nonzero $G$ is precisely $a$. But
+$G\in I$ forces $a\in\mathcal N(I)$ by the actual definition of the
+diagram, a contradiction. This includes $q=0$ and both extreme ideals.
+\end{proof}
+
+\begin{theorem}[The actual finite standard monomial map is a genuine complex linear bijection]
+\label{hir:actual-formal-standard-monomial-whole-jet-basis}
+\uses{hir:actual-formal-standard-monomial-jet-separation,hir:actual-formal-vertex-division-identity,hir:actual-formal-vertex-division-supports,hir:actual-formal-variable-power-coefficient-kernel}
+Construct the actual finite set
+$B_q(I)=\{a\in\mathbb N^n:|a|<q,\ a\notin\mathcal N(I)\}$.
+The literal complex linear map
+\[
+ \mathbb C^{B_q(I)}\longrightarrow S/(I+\mathfrak n^q),\qquad
+ (c_a)\longmapsto\left[\sum_{a\in B_q(I)}c_aX^a\right]
+\]
+is bijective, retaining the genuine existing complex scalar action on
+the ACTUAL whole quotient.
+\lean{Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardIndex,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardIndexFintype,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardLift,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardLift_coefficient,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardLift_coefficient_outside,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardLift_support,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap_apply,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap_injective,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardQuotientMap_surjective,Hironaka.HironakaActualFormalStandardMonomialHS.actualStandardQuotientLinearEquiv}
+\leanok
+\end{theorem}
+\begin{proof}
+The actual bounded exponent set is finite; its actual diagram complement
+therefore defines a true finite coordinate space. The genuine finite sum
+of the actual monomials is complex linear, and the actual quotient map
+is complex linear for the existing action.
+If such a sum maps to zero, it belongs to the SAME actual whole
+$I+\mathfrak n^q$. Its true coefficients are zero except at the
+displayed distinct bounded diagram-complement exponents, and its
+coefficient at each displayed exponent is precisely $c_a$. The preceding
+actual separation lemma forces this entire series to be zero, and hence
+every $c_a=0$. This proves injectivity.
+For any actual formal numerator $F$, genuine formal division gives
+$F=\sum Q_af_a+R$, with every actual $f_a\in I$ and every remainder
+coefficient on $\mathcal N(I)$ zero. Form the ACTUAL finite sum of the
+coefficients of $R$ at the exponents of $B_q(I)$. Its coefficients
+agree with those of $R$ at EVERY exponent of degree below $q$: on the
+diagram both are zero, and off the diagram the literal matching
+monomial contributes the same coefficient. The genuine power kernel
+therefore places their difference in $\mathfrak n^q$. The actual
+whole finite sum $\sum Q_af_a$ belongs to $I$, so this finite standard
+sum has exactly the SAME whole quotient class as $F$. Thus every actual
+formal quotient class is reached. No quotient rank, independence,
+spanning, or division certificate is a caller hypothesis.
+\end{proof}
+
+\begin{theorem}[Every genuine formal and existing original HS value is an actual diagram count]
+\label{hir:actual-formal-and-original-hs-standard-monomial-count}
+\uses{hir:actual-formal-standard-monomial-whole-jet-basis,hir:actual-original-formal-entire-hs-transfer}
+For EVERY actual formal ideal $I\subset S$ and EVERY $\ell\ge0$,
+\[
+ H^{\mathrm{formal}}_I(\ell)
+ =\#\{a\notin\mathcal N(I):|a|\le\ell\}.
+\]
+Consequently, for EVERY original holomorphic germ ideal $J\subset
+\mathcal O_{\mathbb C^n,0}$, its EXISTING original HS value satisfies
+\[
+ H_J(\ell)=\#\{a\notin\mathcal N(S\mathcal T(J)):|a|\le\ell\},
+\]
+where $\mathcal T$ is the ACTUAL original Taylor complex algebra embedding.
+\lean{Hironaka.HironakaActualFormalStandardMonomialHS.genuineFormalHilbertSamuelValue_eq_card_standardIndex,Hironaka.HironakaActualFormalStandardMonomialHS.hilbertSamuelValue_eq_card_actual_formal_standardIndex}
+\leanok
+\end{theorem}
+\begin{proof}
+The preceding internally constructed true complex linear bijection gives
+a genuine linear equivalence from the actual finite complex coordinate
+space to the whole formal jet quotient. Its true dimension equality,
+together with the actual dimension of a finite complex function space,
+gives the first formula at $q=\ell+1$. The previously proved equality
+of EVERY existing original HS value with that of the actual whole formal
+extension gives the second formula for the SAME original $J$. No
+scalar action, ideal, or numerator is replaced. These are diagram counts;
+general strict Bennett comparison and transformed standard-basis
+stability still require their separate genuine transformation proofs.
+\end{proof}

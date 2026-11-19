@@ -1,0 +1,133 @@
+\section{Internally generated original centre dual rows and their actual connection}
+
+For one fixed order $q$ and genuine original pivot rows and columns,
+write $P(p)$ for the unchanged inverse-pivot projection on original
+word-coordinate arrays. Its true whole-jet range remains the actual
+scalar-jet image; repeated word rows are not declared independent.
+Define the actual scalar coefficient functions
+\[
+ \eta_{a,r}(c)=\bigl(P(Tc)e_r\bigr)_a,
+\]
+where $e_r$ is the ordinary coordinate vector and $T$ is the actual
+tangent inclusion. These are specified functions of the original
+projection, rather than caller-supplied moving annihilators.
+
+\begin{theorem}[Actual projected dual coefficients give the genuine whole-array pairing]
+\label{hir:actual-centre-projected-dual-row-pairing}
+\uses{hir:actual-holomorphic-pivot-whole-kernel}
+\lean{Hironaka.HironakaActualCentreDualJetConnection.actualProjectedDualRow,Hironaka.HironakaActualCentreDualJetConnection.actualProjectedDualRow_pairing}
+\leanok
+For every original scalar array $v$ and actual parameter $c$,
+\[
+ \sum_r\eta_{a,r}(c)v_r=(P(Tc)v)_a.
+\]
+This identity is on the whole scalar array, without an independence
+assumption on actual derivative-word coordinates.
+\end{theorem}
+\begin{proof}
+In the genuine finite coordinate space,
+$v=\sum_r v_r e_r$. Apply the original linear projection $P(Tc)$,
+using its actual linearity to move the finite sum and coefficients
+through it. Evaluate the resulting equality at the original coordinate
+$a$. The coefficient of $v_r$ is precisely the defining value
+$(P(Tc)e_r)_a$. Complex scalar multiplication and multiplication agree,
+and commutativity gives the displayed pairing.
+\end{proof}
+
+\begin{theorem}[The actual dual coefficients and every fixed directional first derivative are holomorphic on the real tangent domain]
+\label{hir:actual-centre-projected-dual-row-first-derivatives-holomorphic}
+\uses{hir:actual-centre-projected-dual-row-pairing,hir:actual-holomorphic-pivot-whole-kernel}
+\lean{Hironaka.HironakaActualCentreDualJetConnection.actualProjectedDualRow_holomorphic,Hironaka.HironakaActualCentreDualJetConnection.actualProjectedDualRow_fderiv_holomorphic}
+\leanok
+Let the original functions be holomorphic on one actual open $U$.
+Let $D\subset U$ be a real open where the selected original pivot
+determinant is nonzero. On the actual open $V=T^{-1}(D)$ every
+specified coefficient $\eta_{a,r}$ is holomorphic. For every fixed
+actual tangent direction $b$, the actual function
+$c\mapsto D\eta_{a,r}(c)(b)$ is holomorphic on the same $V$.
+\end{theorem}
+\begin{proof}
+The genuine original inverse-pivot projection has holomorphic entries
+on $D$ by its accepted determinant/adjugate proof. Fixing the genuine
+input vector $e_r$ and output coordinate $a$, and composing with the
+actual continuous linear tangent inclusion, gives holomorphicity of
+$\eta_{a,r}$ on $T^{-1}(D)$. That preimage is open. At each of its
+actual points, complex holomorphicity on this true open gives an
+actual analytic germ. The analytic derivative theorem makes the
+actual Fr\'echet derivative analytic at the same point. Compose it
+with the existing continuous linear evaluation at the fixed direction
+$b$. This proves holomorphicity of every asserted derivative function
+on precisely the same real domain, with no global extension of the
+original family and no order-dependent replacement of it.
+\end{proof}
+
+\begin{theorem}[Original HS-constant centre geometry internally supplies actual moving dual rows with the genuine successor relation]
+\label{hir:actual-original-hs-centre-dual-rows-successor-connection}
+\uses{hir:actual-centre-projected-dual-row-first-derivatives-holomorphic,hir:actual-hs-constant-centre-origin-pivot-whole-frames,hir:actual-moving-macaulay-annihilator-successor-connection}
+\lean{Hironaka.HironakaActualCentreDualJetConnection.exists_original_hs_constant_centre_dual_jet_connection}
+\leanok
+For an original coherent germ ideal along an actual regular centre,
+assume only original intrinsic Hilbert--Samuel constancy on that
+centre. There are one genuine original flattening chart, one original
+coherent generating family on an actual open around the base point,
+and one real flattened open $U$ containing zero, chosen before all
+orders. For every order $q=\ell+1$, an actual original pivot and a real
+open $D_q\subset U$ containing zero internally produce the specified
+dual coefficient functions above on $V_q=T^{-1}(D_q)$.
+
+Their coefficients and all fixed-direction first derivatives are
+holomorphic on that same $V_q$. They annihilate every unchanged
+original Macaulay column at $Tc$. Their simultaneous pairing with the
+actual scalar jet of a whole original germ vanishes exactly when the
+germ belongs to the same original translated ideal plus the genuine
+point power $\mathfrak m^q$. For every original column $(w,i)$,
+every output row $a$, every actual $c\in V_q$ and tangent direction
+$b$, they satisfy the actual successor identity
+\[
+ \sum_r\left(
+ D\eta_{a,r}(c)(b)M_q(Tc)_{r,(w,i)}+
+ \eta_{a,r}(c)D^{|r|+1}
+ (w(z)G_i(z+Tc))_0(Tb,v_r)
+ \right)=0.
+\]
+No moving row, matrix-kernel, pivot-minor or connection certificate is
+an input. Per-order genuine domains are used, with no single open
+claimed to support all orders simultaneously.
+\end{theorem}
+\begin{proof}
+Apply the accepted original HS-constant-centre frame theorem. Its
+actual flattening chart, original family and original generating open,
+and flattened open $U$ precede the universal order quantifier. The
+same theorem internally chooses, at each order, a genuine maximal
+pivot at zero and an actual open $D_q\subset U$ through zero with
+nonzero determinant. Its genuine original projection has kernel
+exactly the whole unchanged original Macaulay image on the actual
+centre, and its whole original-germ quotient coordinates have kernel
+exactly the original translated ideal plus $\mathfrak m^q$.
+
+Use the specified coordinate coefficient functions of this same
+projection. The previous theorem supplies their actual holomorphicity
+and that of all their fixed-direction first derivatives on
+$V_q=T^{-1}(D_q)$, which is open and contains zero. Every original
+Macaulay column lies in the range of the unchanged full original
+column map, hence in the true kernel of this projection. Applying
+the exact dual-row pairing identity to that actual column proves the
+whole original column annihilation without assuming such a condition.
+
+For a whole original germ, simultaneous zero pairings mean that every
+coordinate of its original projected scalar jet is zero, by that
+same pairing identity. This is equivalent to zero in the genuine
+fixed quotient model: its inclusion into scalar arrays is injective.
+The accepted whole-germ kernel equality identifies this precisely
+with membership in the original translated ideal plus the actual
+point power. No quotient of the full redundant word array is used.
+
+Finally apply the accepted actual moving Macaulay annihilator theorem
+to these specified holomorphic coefficient functions and the column
+annihilation just proved internally. Its true word-derivative
+correction is killed inside the entire same original ideal, so the
+result is exactly the asserted successor identity. This constructs
+actual moving dual rows and their real connection from original
+geometry. Full adjoint prolongation, normal-flatness and compatible
+vertex-family selection remain separate assertions.
+\end{proof}

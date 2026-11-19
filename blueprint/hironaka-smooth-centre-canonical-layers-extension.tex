@@ -1,0 +1,140 @@
+\section{Actual nonlinear smooth-centre normal layers and canonical scalars}
+
+The original split normal layers already have the canonical quotient-ring
+action obtained from ambient multiplication and internally proved ideal
+annihilation. We now compare them with the literal power-image layers of
+an actual original nonlinear smooth-centre stalk. This is an explicit
+local-algebra and chart ingredient for the Bierstone--Milman
+Hilbert--Samuel equisingularity route, not a sheaf normal-flatness theorem
+assumed from that source. A genuine regular-centre flattening supplies
+the coordinate equivalence and the WHOLE original vanishing ideal.
+
+\begin{lemma}[Whole original power quotients under a genuine ring equivalence]
+\label{hir:nonlinear-centre-actual-power-quotient}
+\source{bierstone-milman08-functoriality}
+\uses{hir:relative-normal-actual-layer-centre-scalars}
+\lean{Hironaka.HironakaSmoothCentreCanonicalLayers.centreQuotientEquiv,Hironaka.HironakaSmoothCentreCanonicalLayers.centreQuotientEquiv_mk,Hironaka.HironakaSmoothCentreCanonicalLayers.centreQuotientEquiv_symm_mk,Hironaka.HironakaSmoothCentreCanonicalLayers.powerLayerQuotientEquiv,Hironaka.HironakaSmoothCentreCanonicalLayers.powerLayerQuotientEquiv_mk,Hironaka.HironakaSmoothCentreCanonicalLayers.powerLayerQuotientEquiv_symm_mk}
+\leanok
+Let $E:R\simeq S$ be a genuine commutative ring equivalence and let
+$I,J\subset R$. For every $q$, the original quotient map induces a
+genuine equivalence
+\[
+ R/(I+J^{q+1})\simeq
+ S/(E(I)+E(J)^{q+1}),\qquad [g]\longmapsto[E(g)].
+\]
+It also gives the centre-ring equivalence $R/J\simeq S/E(J)$ with the
+same actual representative formula. Both inverse maps send $[h]$ to
+$[E^{-1}(h)]$ and retain entire original ideals, not a finite selection
+of relations.
+\end{lemma}
+\begin{proof}
+The actual image map preserves ideal sums and products, so it sends
+$I+J^{q+1}$ to $E(I)+E(J)^{q+1}$. Its inverse has the inverse ideal
+dictionary because $E$ is bijective. Thus both actual ring maps descend
+to the full quotient ideals. Their representative compositions are the
+identity, so quotient surjectivity proves the full inverse identities.
+The same construction with $J$ proves the centre-ring statement.
+\end{proof}
+
+\begin{lemma}[Every original power-image layer has its actual nonlinear comparison]
+\label{hir:nonlinear-centre-actual-layer-comparison}
+\source{bierstone-milman08-functoriality}
+\uses{hir:nonlinear-centre-actual-power-quotient,hir:relative-normal-graded-literal-layers}
+\lean{Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerLayerAddEquiv,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerLayerAddEquiv_val,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerLayerAddEquiv_symm_val,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerLayerAddEquiv_class}
+\leanok
+For every $q$, the preceding whole quotient equivalence restricts to an
+additive equivalence between the literal images
+\[
+ L_q=\operatorname{image}(J^q\to R/(I+J^{q+1})),\quad
+ L'_q=\operatorname{image}(E(J)^q\to S/(E(I)+E(J)^{q+1})).
+\]
+EVERY actual represented class $[g]_q$, $g\in J^q$, is sent to
+$[E(g)]_q$; the inverse has the corresponding $E^{-1}$ formula. No
+desired layer map, surjectivity or comparison equality is an input.
+\end{lemma}
+\begin{proof}
+Take the actual quotient equivalence on each original layer element.
+Its genuine power representative $g$ belongs to $J^q$, so $E(g)$ belongs
+to $E(J)^q$ and its class lies in the target image. Conversely every
+target power element has an actual preimage in $J^q$ because ideal
+images under the genuine bijection are precisely set images, and images
+commute with powers. This proves closure for the true inverse quotient
+map. Restricting the whole quotient inverse identities proves the
+restricted maps inverse; addition follows from their original ring maps.
+All class formulas hold on every representative because they are the
+actual quotient representative formulas, independently of choices.
+\end{proof}
+
+\begin{lemma}[Naturality of the intrinsically descended centre actions]
+\label{hir:nonlinear-centre-canonical-scalars-and-whole-sum}
+\source{bierstone-milman08-functoriality}
+\uses{hir:nonlinear-centre-actual-layer-comparison,hir:relative-normal-actual-associated-centre-scalars}
+\lean{Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerLayerAddEquiv_centre_smul,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerLayerCentreEquiv,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerAssociatedAddEquiv,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerAssociatedAddEquiv_component,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerAssociatedAddEquiv_of,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerAssociatedAddEquiv_centre_smul,Hironaka.HironakaSmoothCentreCanonicalLayers.actualPowerAssociatedCentreEquiv}
+\leanok
+The actual layer equivalence is semilinear for the actual centre-ring
+equivalence. For EVERY centre scalar $c$ and actual layer element $x$,
+\[
+ e_q(cx)=\overline E(c)e_q(x).
+\]
+These true degree maps also induce the whole direct-sum semilinear
+equivalence, preserving every actual degree inclusion and every actual
+power class. All actions on both sides are their independently defined
+ambient-product quotient descents.
+\end{lemma}
+\begin{proof}
+Represent $c$ by $r\in R$. The canonical quotient scalar on either side
+acts by the genuine ambient product. The underlying whole quotient ring
+map sends $rx$ to $E(r)e_q(x)$ because it preserves multiplication.
+The centre quotient sends the scalar representative $r$ to $E(r)$,
+proving the formula. Quotient scalar surjectivity gives EVERY $c$; the
+whole layer carrier, not selected generators, is used. Apply these actual
+additive equivalences componentwise to finite-support elements. Their
+inverse maps preserve zero, hence finite support, and the inverse laws
+hold in every component. The scalar formula holds componentwise, giving
+whole semilinearity and the stated degree inclusion identities.
+\end{proof}
+
+\begin{theorem}[Original regular-centre data supply the whole nonlinear stalk bridge]
+\label{hir:nonlinear-centre-original-regular-stalk-bridge}
+\source{bierstone-milman08-functoriality}
+\uses{hir:nonlinear-centre-canonical-scalars-and-whole-sum,hir:smooth-centre-entire-vanishing-stalk-normal-ideal}
+\lean{Hironaka.HironakaSmoothCentreCanonicalLayers.wholeChartStalkIdeal_le_of_original_le,Hironaka.HironakaSmoothCentreCanonicalLayers.exists_original_regular_canonical_layer_bridge}
+\leanok
+Let $C$ be an actual original centre regular of dimension $d$ at $x$ in
+an original complex manifold of dimension $d+t$. Let $A$ be an original
+ideal and assume its actual germ-ideal inclusion in the vanishing ideal
+of $C$. Put $I_x$ equal to its WHOLE original chart stalk and $K_x$ equal
+to the WHOLE original vanishing chart stalk of $C$. Original regularity
+internally supplies an actual nonlinear flattening with genuine chart
+domains, a germ equivalence $E$, and $K_x=E(J)$. It supplies
+$I_x\subset K_x$, the actual centre-ring comparison and all original
+split layers and their whole direct sum for $E^{-1}(I_x)$, compared
+semilinearly to the literal original $K_x$-power image layers of $I_x$.
+Every represented germ and every degree inclusion is retained by the
+true $E$ formula. No coordinate, ideal, power, layer, scalar or flatness
+comparison certificate is supplied by the caller.
+\end{theorem}
+\begin{proof}
+Apply the genuine original regular-centre producer. It constructs an
+actual holomorphic local equivalence, containing the actual chart point
+in its source, mapping the original centre exactly onto the coordinate
+plane on its genuine domain, and fixing zero after recentering. Its
+entire induced germ equivalence identifies the WHOLE vanishing stalk
+with the image of the true coordinate normal ideal. The actual original
+germ-ideal inclusion gives inclusion of every original membership germ;
+spanning all such germs proves $I_x\subset K_x$. Bijectivity gives
+$E(E^{-1}(I_x))=I_x$ internally. The preceding whole quotient, layer and
+canonical scalar constructions applied to this actual $E$ and these
+actual whole ideals give every required comparison. The coordinate
+source/target and centre formula are retained from the producer, rather
+than replaced by an abstract desired chart dictionary.
+\end{proof}
+
+This bridge does not construct the nonlinear coherent family on an
+entire centre neighbourhood, the intrinsic sheaf module or its stalk
+identification. In particular it does not supply an unproved flatness
+assumption at the original centre point. Original-input freeness on a
+genuine nearby geometric centre domain, chart independence, ambient
+mixed-degree Hilbert--Samuel comparison, blowing-up descent and the
+singular-centre driver remain further producers. Higher whole truncations
+are not assigned a centre quotient-ring action.

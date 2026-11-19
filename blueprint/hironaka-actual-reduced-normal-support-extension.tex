@@ -1,0 +1,89 @@
+\section{Literal normal monomial independence forces reduced vertex support}
+
+Write $S=\mathbb C[[u_1,\ldots,u_d,z_1,\ldots,z_t]]$,
+$\widehat B=\mathbb C[[u]]$ and $N=(z_1,\ldots,z_t)$.
+Let $K\subset S$ be an actual ideal, let $m$ be a monomial order,
+and let $\Gamma$ be its actual initial diagram. These statements concern
+the actual canonical reduced vertex series in $K$. They do not assume
+the desired normal-power membership.
+
+\begin{lemma}[Reconstruction from the entire low normal coefficient family]
+\label{hir:actual-reduced-normal-support-reconstruction}
+\lean{Hironaka.HironakaActualReducedNormalSupport.sub_formalNormalCombination_mem_normal_power}
+\leanok
+\uses{hir:actual-formal-normal-truncation-coordinates}
+For every $F\in S$ and $q\geq0$, let $c_\gamma(u)$ be its entire formal
+coefficient of $z^\gamma$. Then
+\[
+ F-\sum_{|\gamma|<q}c_\gamma(u)z^\gamma\in N^q.
+\]
+\end{lemma}
+\begin{proof}
+For every exponent $(\beta,\gamma)$ with $|\gamma|<q$, the actual
+coefficient formula for the finite normal monomial combination extracts
+exactly the $u^\beta$ coefficient of $c_\gamma$. This is, by definition,
+the $(\beta,\gamma)$ coefficient of $F$. Every coefficient of the
+difference of normal weight below $q$ therefore vanishes. The proved
+whole coordinate-power coefficient criterion places the difference in
+the actual ideal $N^q$. The argument also covers $q=0$.
+\end{proof}
+
+\begin{lemma}[Reduced tails give literal normal-standard coefficient families]
+\label{hir:actual-reduced-normal-support-standard-coefficients}
+\lean{Hironaka.HironakaActualReducedNormalSupport.reducedNormalCoefficients_mem_standard}
+\leanok
+\uses{hir:actual-reduced-formal-vertex-members,hir:actual-formal-ideal-initial-diagram-upper}
+Let $a$ be an actual initial vertex and let $G_a$ be the canonical
+reduced vertex series. If $q\leq |a_z|$, then its low normal coefficient
+family $(c_\gamma)_{|\gamma|<q}$ has $c_\gamma=0$ whenever
+$(0,\gamma)\in\Gamma$.
+\end{lemma}
+\begin{proof}
+Fix such a normal exponent $\gamma$. Upperness of the actual initial
+diagram gives $(\beta,\gamma)\in\Gamma$ for every tangent exponent
+$\beta$. Its normal weight is $|\gamma|<q\leq|a_z|$, so it cannot
+equal the vertex $a$. The actual reduced series has coefficient zero
+at every exponent of $\Gamma$ other than $a$. Thus every tangent
+coefficient of $c_\gamma$ is zero, which proves the asserted equality
+of entire formal coefficient series.
+\end{proof}
+
+\begin{theorem}[Literal standard normal independence gives true vertex powers]
+\label{hir:actual-reduced-normal-support-from-monomial-injectivity}
+\lean{Hironaka.HironakaActualReducedNormalSupport.actualReducedVertexSeries_mem_normal_power_of_standardNormalMonomialMap_injective,Hironaka.HironakaActualReducedNormalSupport.all_actualReducedVertexSeries_mem_normal_power_of_standardNormalMonomialMap_injective}
+\leanok
+\uses{hir:actual-reduced-normal-support-reconstruction,hir:actual-reduced-normal-support-standard-coefficients}
+For each $q$, let $V_q$ be the actual $\widehat B$-submodule of finite
+normal coefficient arrays $(b_\gamma)_{|\gamma|<q}$ for which
+$b_\gamma=0$ whenever $(0,\gamma)\in\Gamma$. Consider the literal
+normal monomial map
+\[
+ V_q\longrightarrow S/(K+N^q),\qquad
+ (b_\gamma)_\gamma\longmapsto
+ \left[\sum_{|\gamma|<q} b_\gamma(u)z^\gamma\right].
+\]
+If this named map is injective for $q=|a_z|$, then the canonical
+reduced vertex series $G_a$ belongs to the entire actual ideal
+$N^{|a_z|}$. Consequently, injectivity of these literal maps at
+every order gives this true normal-power membership at every actual
+vertex of the same ideal $K$.
+\end{theorem}
+\begin{proof}
+Take $q=|a_z|$. By the preceding lemma, the actual low normal
+coefficient family of $G_a$ belongs to $V_q$. The reconstruction lemma
+shows that its finite normal combination is congruent to $G_a$ modulo
+$N^q$. The actual reduced vertex series belongs to the original ideal
+$K$, so this literal coefficient family maps to zero in $S/(K+N^q)$.
+Injectivity of the stated monomial map makes the entire coefficient
+family zero. Thus every coefficient of $G_a$ of normal weight below
+$q$ vanishes. The actual whole coordinate-power coefficient criterion
+gives $G_a\in N^q$. Applying this argument independently at every
+actual vertex proves the all-vertex conclusion.
+\end{proof}
+
+The hypothesis is genuine linear independence of specified monomial
+classes in an actual formal normal truncation. Producing it from an
+original Hilbert--Samuel constant centre, including comparison of the
+fibre-standard and original-diagram indices, is a separate geometric
+producer. No such geometric producer or general Bennett theorem is
+asserted by this chapter.

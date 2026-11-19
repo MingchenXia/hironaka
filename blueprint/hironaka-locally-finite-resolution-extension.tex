@@ -1,0 +1,168 @@
+\section{Actual stabilization of growing canonical sequences}
+
+Bierstone--Milman\cite{bierstone-milman08-functoriality}, Section 7, and
+W{\l}odarczyk\cite{wlodarczyk05-hironaka} use local finiteness of the recorded
+centres to obtain eventual local stabilization. This section proves that
+bridge for genuine growing canonical sequences. It does not assume, or
+assert as a consequence of local finiteness alone, that such a globally
+resolving sequence has already been constructed on every noncompact manifold.
+
+\begin{definition}[The actual next centre and its proper image]
+\label{hir:growing-sequence-actual-centres}
+\uses{hir:centre-function-seq,bcalc:restrict-empty-tower}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.stepCentre,Hironaka.HironakaLocallyFiniteResolutionSequence.centreImage,Hironaka.HironakaLocallyFiniteResolutionSequence.exists_step_map}
+\leanok
+Let $s$ be a growing sequence $X=X_0\leftarrow X_1\leftarrow\cdots$ of
+actual recorded blowup towers $T_i$. Choose the actual centre $C_i\subset X_i$
+and blowup $\pi_i:X_{i+1}\to X_i$ from its one-step extension, so that
+$T_{i+1}=T_i\mathbin{\cdot}(C_i,\pi_i)$. Put $B_i=T_i(C_i)\subset X$.
+\end{definition}
+\begin{proof}
+The growing sequence supplies an actual one-step extension at every index.
+Choice selects its centre, and the same witness provides the map, its blowup
+property, and the exact equality of recorded towers. The definition of $B_i$
+is the image of that actual centre, not an exceptional-set surrogate.
+\end{proof}
+
+\begin{lemma}[Counting actual centre intersections]
+\label{hir:growing-sequence-count-step}
+\uses{hir:growing-sequence-actual-centres,hir:centre-function-seq}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.countCentresMeeting_step,Hironaka.HironakaLocallyFiniteResolutionSequence.monotone_countCentresMeeting}
+\leanok
+For $K\subset X$, write $q_i(K)$ for the number of recorded centres meeting
+the inverse image of $K$ in $T_i$. Then
+\[
+ q_{i+1}(K)=q_i(K)+\mathbf 1_{B_i\cap K\ne\varnothing}.
+\]
+In particular $q_i(K)$ is nondecreasing.
+\end{lemma}
+\begin{proof}
+Rewrite $T_{i+1}$ using the actual one-step witness. The recursive definition
+of the count adds one precisely when $C_i\cap T_i^{-1}(K)$ is nonempty.
+This is equivalent to nonemptiness of $B_i\cap K$, by taking the image of a
+witness in one direction and its actual preimage witness in the other.
+Each increment is either zero or one, so induction on indices gives monotonicity.
+\end{proof}
+
+\begin{theorem}[Compact sets eventually meet no later centre]
+\label{hir:growing-canonical-sequence-compact-tail}
+\uses{hir:growing-sequence-count-step,hir:centre-function-seq}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.exists_no_later_centres_meet_compact,Hironaka.HironakaLocallyFiniteResolutionSequence.finite_centres_meeting_compact}
+\leanok
+Let $R$ be a resolution invariant with per-sequence local finiteness, and
+let every $T_i$ be canonical for an actual marked ideal in its domain. For
+every compact $K\subset X$, there is $N$ such that $B_i\cap K$ is empty
+for all $i\ge N$. In particular only finitely many indices have centres
+whose images meet $K$.
+\end{theorem}
+\begin{proof}
+Per-sequence local finiteness bounds all $q_i(K)$ by an integer $m$. Their
+range is a nonempty finite subset of $\{0,\ldots,m\}$, so its maximum is
+attained at some $N$. Monotonicity and maximality force $q_i(K)=q_N(K)$
+for every $i\ge N$. The count identity then forces every later increment
+to be zero, which says exactly $B_i\cap K=\varnothing$. The meeting indices
+are contained in $\{0,\ldots,N-1\}$, so they form a finite set.
+\end{proof}
+
+\begin{theorem}[A locally finite family of closed proper centre images]
+\label{hir:growing-canonical-sequence-closed-images}
+\uses{hir:growing-sequence-actual-centres,hir:growing-canonical-sequence-compact-tail}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.isClosed_centreImage,Hironaka.HironakaLocallyFiniteResolutionSequence.locallyFinite_centreImages}
+\leanok
+Every $B_i$ is closed, and the indexed family $(B_i)_{i\in\mathbb N}$ is
+locally finite on the base manifold $X$.
+\end{theorem}
+\begin{proof}
+The actual centre is a closed smooth submanifold by the blowup property.
+The actual tower projection is proper, hence closed, so $B_i$ is closed.
+Every point of a complex manifold has a compact neighbourhood $K$. Only
+finitely many $B_i$ meet that neighbourhood, by the preceding theorem.
+This proves local finiteness of the indexed family, including repeated or
+empty images; finiteness counts actual indices rather than distinct sets.
+\end{proof}
+
+\begin{theorem}[An open neighbourhood misses the whole actual tail]
+\label{hir:growing-canonical-sequence-open-tail}
+\uses{hir:growing-canonical-sequence-closed-images,hir:growing-canonical-sequence-compact-tail}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.exists_open_no_later_centres}
+\leanok
+For every compact $K\subset X$ there are $N$ and an open $U\supset K$
+such that $C_i\cap T_i^{-1}(U)=\varnothing$ for every $i\ge N$.
+\end{theorem}
+\begin{proof}
+Choose $N$ so all $B_i$ with $i\ge N$ miss $K$. This tail family remains
+locally finite. Since every member is closed, its union is closed: near any
+point only finitely many members need to be removed. Let $U$ be the complement
+of that union. It is open and contains $K$. Any point of $C_i\cap T_i^{-1}(U)$
+would have image in both $U$ and the omitted tail union, a contradiction.
+\end{proof}
+
+\begin{theorem}[The later actual blowups are isomorphisms over that neighbourhood]
+\label{hir:growing-canonical-sequence-isomorphism-tail}
+\uses{hir:growing-canonical-sequence-open-tail,bcalc:restrict-empty-tower}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.isIsomorphismOver_step_of_disjoint,Hironaka.HironakaLocallyFiniteResolutionSequence.exists_open_isomorphism_tail}
+\leanok
+For the same $N,U$, every actual later map $\pi_i:X_{i+1}\to X_i$ is an
+isomorphism over $T_i^{-1}(U)$. Thus its restriction over $U$ has empty
+centre, and every finite later composite stabilizes there up to actual
+isomorphism.
+\end{theorem}
+\begin{proof}
+The actual blowup is an isomorphism off $C_i$. Since $T_i^{-1}(U)$ misses
+$C_i$, restriction of that actual isomorphism to $T_i^{-1}(U)$ remains
+bijective and avoids the exceptional locus. The one-step tower witness
+retains the actual map and blowup proof. Successive restricted maps therefore
+compose to isomorphisms over $U$; the restricted-centre trace is empty at
+all those steps.
+\end{proof}
+
+
+\begin{definition}[The actual finite tail tower]
+\label{hir:growing-sequence-actual-tail-tower}
+\uses{hir:growing-sequence-actual-centres}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.tailTower,Hironaka.HironakaLocallyFiniteResolutionSequence.append_tailTower}
+\leanok
+For every $N,j$, the actual steps of the growing sequence construct a finite
+tower $T_{N,j}:X_N\leftarrow\cdots\leftarrow X_{N+j}$ with
+$T_N\mathbin{\cdot}T_{N,j}=T_{N+j}$ as an equality of recorded towers.
+\end{definition}
+\begin{proof}
+For $j=0$ take the empty tower on $X_N$. For $j+1$ append to $T_{N,j}$ the
+actual chosen next blowup at index $N+j$. By the one-step witness this is a
+genuine blowup and has last manifold $X_{N+j+1}$. Associativity of appending
+and the induction equality give
+$T_N\mathbin{\cdot}T_{N,j+1}=T_{N+j}\mathbin{\cdot}(C_{N+j},\pi_{N+j})
+=T_{N+j+1}$. Thus the construction retains the actual intermediate spaces,
+centres and maps, not just their composite.
+\end{proof}
+
+\begin{theorem}[The entire actual restricted tail is empty]
+\label{hir:growing-sequence-empty-restricted-tails}
+\uses{hir:growing-sequence-actual-tail-tower,hir:growing-canonical-sequence-open-tail,bcalc:restrict-empty-tower}
+\lean{Hironaka.HironakaLocallyFiniteResolutionSequence.centresAvoid_tailTower,Hironaka.HironakaLocallyFiniteResolutionSequence.exists_open_empty_restricted_tails}
+\leanok
+The compact-tail neighbourhood $U$ may be chosen so that, for every finite
+$j$, the restriction of the actual $T_{N,j}$ to $T_N^{-1}(U)$ has only
+empty centres.
+\end{theorem}
+\begin{proof}
+Induct through the actual steps of $T_{N,j}$. The empty tail has no centres.
+At the next step, the append equality of recorded towers identifies
+$T_N\circ T_{N,j}$ with the original projection $T_{N+j}$. Consequently
+the inverse image of $T_N^{-1}(U)$ at that step equals $T_{N+j}^{-1}(U)$.
+The actual next centre misses this set by the open-tail theorem. This proves
+that all actual tail centres avoid the starting open preimage. The genuine
+restricted-tower calculus identifies such avoidance exactly with having
+empty centre at every recorded step of the restriction.
+\end{proof}
+
+\begin{remark}[The remaining noncompact existence obligation]
+To produce a globally resolving sequence one must still glue genuine local
+canonical towers and prove a scheduling rule that eventually resolves every
+point. The local driver shrinks open bases around compact sets. Its independently
+chosen output towers are not already compatible on overlaps. Moreover a
+global maximum of the invariant need not be attained on a noncompact
+cosupport, so the compact dependent-choice driver cannot simply be reused.
+Neither a caller-supplied compatible-tower certificate nor the local finiteness
+of a given sequence discharges this remaining obligation.
+\end{remark}

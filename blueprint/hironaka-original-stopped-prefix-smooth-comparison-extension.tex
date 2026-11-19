@@ -1,0 +1,146 @@
+\section{Smooth comparison of the actual embedded stopped prefix}
+
+Here $\operatorname{Str}_p(W)$ denotes the conventional strict transform
+$\overline{p^{-1}W\setminus\operatorname{Exc}p}$.  This section compares
+that whole set, including its exceptional points.  The target is the
+actual canonical prefix before the first centre meeting the original
+regular open set, rather than the full terminal ideal-principalization
+map.  The source is the actual smooth pullback of this same prefix.
+
+\begin{lemma}[The conventional strict transform from a dense preserved open]
+\label{hir:original-strict-transform-dense-preserved-open}
+\uses{mc:first-centre-exists,mc:first-centre-smooth-part,hir:embedded-resolution-local}
+\lean{Hironaka.HironakaOriginalStoppedPrefixSmoothComparison.strictTransform_eq_closure_preimage_inter_of_centresAvoid}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+Let $T:D\to X$ be an actual finite blowup tower, $O\subseteq X$ open,
+and $W\subseteq X$ with $W\subseteq\overline{W\cap O}$.  If every actual
+centre of $T$ avoids the inverse image of $O$, then
+\[
+ \operatorname{Str}_p(W)=\overline{p^{-1}(W\cap O)},\qquad p=T.\mathrm{proj}.
+\]
+\end{lemma}
+\begin{proof}
+There are no exceptional points of $p$ over $O$.  Thus
+$p^{-1}(W\cap O)$ is contained in $p^{-1}W\setminus\operatorname{Exc}p$,
+which gives one inclusion after taking closures.  Conversely take
+$y\in p^{-1}W\setminus\operatorname{Exc}p$ and a neighbourhood $V$ of $y$.
+The differential of $p$ at $y$ is invertible.  The local inverse theorem
+therefore gives $p_*(\mathcal N_y)=\mathcal N_{p(y)}$, so $p(V)$ is a
+neighbourhood of $p(y)$.  Original density supplies a point of
+$p(V)\cap W\cap O$.  A representative of that image point lies in
+$V\cap p^{-1}(W\cap O)$.  Hence $y$ belongs to the latter closure.
+That closure is closed, so it contains the closure defining the entire
+conventional strict transform, which proves the other inclusion.
+\end{proof}
+
+\begin{theorem}[Whole strict-transform equality on an actual smooth Cartesian tower]
+\label{hir:original-stopped-strict-transform-smooth-square}
+\uses{hir:original-strict-transform-dense-preserved-open,hir:smooth-original-ambient-canonical-history-values,hir:submersion-relative-control-joint-tower}
+\lean{Hironaka.HironakaOriginalStoppedPrefixSmoothComparison.IsActualTowerPullback.centresAvoid_preimage,Hironaka.HironakaOriginalStoppedPrefixSmoothComparison.IsActualTowerPullback.strictTransform_preimage_of_centresAvoid}
+\leanok
+\source{bierstone-milman08-functoriality}
+Let $b:Y\to X$ be a holomorphic submersion and let
+$(b,Q,T,g)$ be an actual Cartesian pullback of finite blowup towers, with
+projections $q:C\to Y$ and $p:D\to X$.  Suppose the original $O,W,T$
+satisfy the preceding lemma.  Then the actual source centres avoid
+$b^{-1}O$, and
+\[
+ \operatorname{Str}_q(b^{-1}W)=g^{-1}\operatorname{Str}_p(W).
+\]
+No equality of strict transforms or exceptional sets is a premise.
+\end{theorem}
+\begin{proof}
+Induct on the actual pullback tower.  At an added step the source centre
+is the literal inverse image of the target centre.  If a source point in
+this centre projected into $b^{-1}O$, the actual projection square would
+put its target point in the target centre over $O$, contradicting target
+avoidance.  This proves source avoidance, including empty centres.
+
+The submersion $b$ is continuous and open.  Consequently inverse image
+under $b$ commutes with closure, and original density gives
+$b^{-1}W\subseteq\overline{b^{-1}(W\cap O)}$.  Apply the preceding lemma
+to both towers.  The actual upper map $g$ is also a continuous open
+submersion, so its inverse image commutes with the target closure.
+Finally $pg=bq$ identifies the sets inside those closures.  These three
+equalities give the claimed equality of whole strict transforms.
+\end{proof}
+
+\begin{theorem}[An original embedded stopped prefix and its genuine arbitrary smooth source]
+\label{hir:original-canonical-embedded-stopped-smooth-comparison}
+\uses{hir:original-stopped-strict-transform-smooth-square,hir:smooth-original-compact-canonical-terminal-object,hir:embedded-from-resolution,hir:embedded-resolution-snc,hir:submersion-relative-regular-geometry,hir:submersion-relative-nc-transversality,hir:submersion-relative-control-joint-tower,hir:smooth-original-ambient-canonical-history-values}
+\lean{Hironaka.HironakaOriginalStoppedPrefixSmoothComparison.exists_original_smooth_embedded_stopped_prefix}
+\leanok
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+Let $X$ be a compact complex manifold, $V\subset X$ a closed irreducible
+analytic subvariety with $\dim V<n$ and coherent whole vanishing ideal.
+Let $b:Y\to X$ be any holomorphic submersion, without compactness of $Y$.
+For the literal $M=(X,X,\varnothing,I_V,1)$, internally construct its compact
+canonical terminal tower $T$.  There are an actual canonical prefix $T_0$
+and actual remaining tail $R$ with $T_0R=T$, and an internally constructed
+actual Cartesian smooth pullback $Q_0$ of this same prefix, such that:
+the centres of $T_0$ avoid $O=X\setminus\operatorname{Sing}V$, its next
+actual maximal centre meets the inverse image of $O$, and the centres of
+$Q_0$ avoid $b^{-1}O$.  Write $p=T_0.\mathrm{proj}$, $q=Q_0.\mathrm{proj}$,
+$g$ for the actual upper submersion and $E$ for the actual transformed
+boundary on the target prefix.  Both projections are proper surjective
+holomorphic admissible blowup sequences, with centres over the original
+singular set $\operatorname{Sing}V$ and its inverse image $b^{-1}\operatorname{Sing}V$.
+Their boundaries are exactly $E$ and $g^{-1}E$, and both are SNC.
+
+The target prefix is canonical for $M$, the source prefix is canonical
+for the literal marked pullback $b^*M$, and both are actual geometric test
+towers.  The square $pg=bq$ has the holomorphic Cartesian universal
+property.  Its whole strict transforms satisfy
+\[
+ \operatorname{Str}_q(b^{-1}V)=g^{-1}\operatorname{Str}_p(V).
+\]
+They are closed smooth submanifolds, regular respectively of dimensions
+$\dim V$ and $\dim V+(m-n)$ at all their points, and have normal crossings
+with their exact accumulated boundaries.  Both maps are isomorphisms over
+their stated good open sets, and their exceptional images lie outside
+those opens.
+\end{theorem}
+\begin{proof}
+The dimension bound and coherence put $M$ in the invariant domain.  The
+compact driver internally supplies an actual canonical terminal tower.
+Some actual centre meets $O$: otherwise the nonempty original regular
+locus would remain in the final cosupport, contrary to terminality and
+surjectivity of the tower projection.  Take the first such centre.  The
+first-centre theorem retains the actual prefix $T_0$, tail $R$ and
+factorization, its canonicality, avoidance of $O$, and a point of the
+actual next maximum over $O$.
+
+The identity principle for this maximum says that the strict transform
+of $V$ is locally a component of that smooth admissible centre.  It
+therefore is closed smooth, has dimension $\dim V$ everywhere, and has
+normal crossings with the actual accumulated boundary $E$.  Actual
+testness also gives that $E$ is SNC.  The centres-avoidance dictionary
+places every actual target centre over $\operatorname{Sing}V$.
+
+Construct the actual smooth pullback tower of this very $T_0$.  The
+original canonical transport theorem gives source canonicality for
+$b^*M$, and the whole transformed-record dictionary gives actual source
+testness and its literal boundary $E$ pulled back through $g$.  Original
+density $V\subseteq\overline{V\cap O}$ and the preceding theorem give
+source avoidance and the whole conventional strict-transform equality.
+Smooth submersion pullback transfers closed smoothness, its exact fibre
+dimension, SNC of the boundary, and normal crossings of the strict carrier
+with that boundary.  Both projections are proper holomorphic surjections
+because they are actual finite blowup towers.  Testness and the centres
+over the stated original singular sets give the two admissible-sequence
+conclusions.  Finally avoidance puts each exceptional image outside its
+good open set, and the finite blowup-sequence isomorphism theorem gives
+the two good-open isomorphisms.  These arguments retain the selected
+stopped prefix and every actual source position, including empty ones.
+\end{proof}
+
+\begin{remark}
+The source canonical marked input here is exactly $b^*M$, whose ideal is
+the whole pulled-back ideal $b^*I_V$.  No equality
+$b^*I_V=I_{b^{-1}V}$ for singular $V$ is assumed or concluded.  Comparing
+this constructed source with an independently selected stopped source
+prefix is a further statement, especially when target centres become
+empty under a nonsurjective base map.  Neither a common stopping index
+nor the full embedded or boundary functoriality assertion follows here.
+\end{remark}

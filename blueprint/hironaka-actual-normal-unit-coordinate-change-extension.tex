@@ -1,0 +1,136 @@
+\section{Actual unit coordinates in the normal directions}
+
+\begin{definition}[The genuine normal-direction unit biholomorphism]
+\label{hir:actual-normal-unit-local-biholomorphism}
+\uses{hir:actual-point-unit-local-biholomorphism}
+Let $A\subseteq\{0,\ldots,n-1\}$ be an actual normal-coordinate set,
+$e\in A$, and $b\in\mathbb C^n$. On the actual open neighbourhood
+$U=\{z:1+z_e\ne0\}$ of zero define $F_e(z)=z_e$,
+$F_i(z)=(b_i+z_i)/(1+z_e)-b_i$ for $i\in A\setminus\{e\}$,
+and $F_i(z)=z_i$ outside $A$. Define the actual polynomial inverse by
+$G_e(w)=w_e$, $G_i(w)=(1+w_e)(b_i+w_i)-b_i$ on
+$A\setminus\{e\}$, and $G_i(w)=w_i$ outside $A$.
+These maps give the original $\mathrm{LocalHolomorphicEquivAt}$ at zero,
+with source and target equal to the true set $U$.
+\lean{Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitLocalEquiv}
+\leanok
+\end{definition}
+\begin{proof}
+The denominator is a continuous affine coordinate and equals one at
+zero, so $U$ is open and contains zero. The exceptional coordinate is
+fixed by both maps, hence both preserve $U$. Both send zero to zero.
+For a normal coordinate other than $e$, substituting $F$ into $G$
+and conversely cancels the nonzero factor $1+z_e$ and gives that
+coordinate; the exceptional and tangent coordinates are identities.
+Thus the two displayed vector maps are genuine inverses on $U$.
+Complex-linear coordinate projections, sums and products give global
+holomorphicity of $G$. The same projections and the genuine nonzero
+denominator give holomorphicity of $F$ on $U$. These facts provide
+every original field of the local biholomorphism.
+\end{proof}
+
+\begin{theorem}[The entire original germ equivalence preserves every HS value]
+\label{hir:actual-normal-unit-whole-germ-hs}
+\uses{hir:actual-normal-unit-local-biholomorphism}
+The actual pullback by $F$ induces the original whole germ algebra
+equivalence $E$. For every ideal $I$ of the original holomorphic germ
+ring and every order $\ell$, the unchanged original Hilbert--Samuel
+value of $E(I)$ equals that of $I$.
+\lean{Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitGermEquiv,Hironaka.HironakaActualNormalUnitCoordinateChange.hilbertSamuelValue_actualNormalUnitGermEquiv}
+\leanok
+\end{theorem}
+\begin{proof}
+The proved actual coordinate map fixes the original zero, so apply the
+existing original local-germ algebra equivalence constructor to it.
+Its inverse is induced by the proved actual inverse map. The original
+whole-ideal HS invariance theorem for this genuine local equivalence
+identifies the entire ideals and their original local-ring quotient
+dimensions at every maximal-ideal power. No comparison certificate or
+chosen finite-jet truncation is supplied.
+\end{proof}
+
+\begin{theorem}[The literal normal and tangent coordinate germ formulas]
+\label{hir:actual-normal-unit-coordinate-germ}
+\uses{hir:actual-normal-unit-whole-germ-hs,hir:actual-point-unit-homogeneous-polynomial-dictionary}
+Write $x_i$ for the original coordinate germs and let $v$ be the
+already constructed genuine germ of $(1+z_e)^{-1}$. Then
+$E(x_e)=x_e$, $E(x_i)=(b_i+x_i)v-b_i$ for
+$i\in A\setminus\{e\}$, and $E(x_i)=x_i$ outside $A$.
+The unchanged original germs satisfy $(1+x_e)v=v(1+x_e)=1$;
+both are units.
+\lean{Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitGermEquiv_coordinate,Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitGermEquiv_tangent}
+\leanok
+\end{theorem}
+\begin{proof}
+The original local pullback evaluates the genuine coordinate function
+after the actual map $F$. Compare its actual representatives with the
+displayed sums, product with $v$, and constant germs. Their values agree
+on the genuine neighbourhood $U$ by the coordinate definition, giving
+the whole germ equalities. In a tangent coordinate the map is exactly
+the identity. The denominator and reciprocal are the existing genuine
+germs, so their already proved two inverse identities and unit proofs
+apply without introducing another reciprocal or a supplied inverse.
+\end{proof}
+
+\begin{definition}[Actual finite normal dehomogenization and the ordinary translated base point]
+\label{hir:actual-normal-finite-dehomogenization}
+For an actual finite polynomial $P$, define $\delta_A P$ by the genuine
+polynomial substitution $X_e\mapsto1$,
+$X_i\mapsto b_i+X_i$ for $i\in A\setminus\{e\}$,
+and $X_i\mapsto X_i$ outside $A$. The ordinary complex base point is
+$p_e=1$, $p_i=b_i$ for other normal coordinates, and $p_i=0$
+outside $A$.
+\lean{Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalDehomogenization,Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitBasePoint}
+\leanok
+\end{definition}
+\begin{proof}
+All substituted entries are actual finite polynomials. Their assignment
+therefore determines the ordinary multivariate-polynomial algebra map
+by its universal property. The displayed finite complex coordinates
+determine the actual base point in the original complex model. These
+definitions evaluate finite polynomials only; they perform no formal
+power-series evaluation at a nonzero point.
+\end{proof}
+
+\begin{theorem}[Every finite normal-weight homogeneous polynomial has the exact whole germ dictionary]
+\label{hir:actual-normal-unit-weighted-polynomial-dictionary}
+\uses{hir:actual-normal-unit-coordinate-germ,hir:actual-normal-finite-dehomogenization}
+Use the original indicator weight $w_i=1$ on $A$ and $w_i=0$
+outside $A$. If the actual finite polynomial $P$ is weighted
+homogeneous of degree $d$ for these weights, then for every $z\in U$
+\[
+ (\delta_A P)(F(z))=(1+z_e)^{-d}P(p+z).
+\]
+In the entire original germ algebra, with the forward equivalence
+oriented as actual pullback by $F$, the exact equality is
+\[
+ E\bigl((\delta_A P)(x)\bigr)=v^d P(p+x).
+\]
+All tangent variables remain unshifted in $P(p+x)$.
+\lean{Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitForward_dehomogenization,Hironaka.HironakaActualNormalUnitCoordinateChange.actualNormalUnitGermEquiv_dehomogenization}
+\leanok
+\end{theorem}
+\begin{proof}
+For any commutative complex algebra, expand the actual polynomial as
+its finite sum of coefficient monomials. Evaluating at
+$c^{w_i}q_i$ factors each monomial by $c^{\sum_i\alpha_iw_i}$.
+Every supported monomial has that weight equal to $d$, so the finite
+sum is $c^d P(q)$. This remains valid for zero polynomials and
+degree zero, including arbitrary tangent monomials.
+For $c=(1+z_e)^{-1}$, substitution of $F$ into the dehomogenizing
+entries gives $c^{w_i}(p_i+z_i)$: in coordinate $e$ this is
+$c(1+z_e)=1$; in the other normal coordinates it follows by the
+displayed quotient formula; in the tangents it is $c^0z_i=z_i$.
+The finite scaling identity proves the pointwise formula.
+The original whole germ pullback is an algebra map. Its proved
+coordinate formulas give exactly the same substituted entries with
+$c=v$ and $q_i=x_i+p_i$. The two genuine inverse identities treat
+the exceptional coordinate. Apply the same finite scaling identity
+inside the original whole germ algebra, obtaining the asserted exact
+equality without any formal nonzero-point evaluation.
+\end{proof}
+
+These are genuine normal-coordinate and finite-polynomial producers.
+They supply no coefficient-cosupport, normal-flatness or Bennett
+comparison certificate. General positive-dimensional permissible-centre
+Bennett and the required analytic coefficient realization remain open.

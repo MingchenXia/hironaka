@@ -1,0 +1,119 @@
+\section{Actual compatible target pairs have genuine blowup preimages}
+
+\begin{lemma}[Actual target direction chooses the matching pair of charts]
+\label{hir:submersion-blowup-compatible-target-chart-point}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupCompatiblePoints.exists_actual_target_matching_point}
+\uses{hir:submersion-adapted-actual-product-shrink,hir:submersion-adapted-blowup-entire-monomial-dictionary,bex:monomial-chart}
+Let $f:Y^{n+r}\to X^n$ be a genuine submersion at $y$, and let an actual
+flattening $\Phi$ at $fy$ carry the whole local centre to the coordinate plane
+of dimension $k$, with $\Phi(fy)=0$. For an actual target blowup point $z$
+with $z.\mathrm{base}=fy\in C$, internally produce matching actual blowup
+charts $c,c'$, an actual product open $R\times S$, and an actual source
+blowup point $p$. They satisfy $z\in c.\mathrm{source}$,
+$p\in c'.\mathrm{source}$, $p.\mathrm{base}=y$, and
+$\mathrm{flatChartMap}(c,c')(p)=z$, with the exact product targets and whole
+original base projection square. No chart, pivot or compatible-point output
+certificate is supplied.
+\end{lemma}
+\begin{proof}
+The actual target direction is not tangent to the true centre. The genuine
+flattening tangent dictionary therefore supplies a normal index $j\ge k$
+whose differential on this actual direction is nonzero. Internally adapt
+the actual submersion coordinates to this SAME $\Phi$ and shrink them to the
+actual product target $R\times S$, with $0\in R$, $0\in S$ and source centre
+flattened in fibre-first coordinates. Restricting $\Phi$ to $S$ preserves its
+entire coordinate functions and the actual chosen direction differential.
+Hence the monomial target chart with this actual $j$ contains $z$: its base
+is the actual central point, and its true extended pivot value is nonzero.
+The source chart uses the corresponding actual normal index after block
+rotation. The genuine monomial/block formulas prove its target is exactly
+$\mathrm{split}^{-1}(R\times c.\mathrm{target})$, with the whole inverse
+base projection square. Set
+\[w=\mathrm{split}^{-1}(0,c.\mathrm{toFun}(z)),\qquad p=c'.\mathrm{invFun}(w).\]
+The actual chart target and $0\in R$ give $w\in c'.\mathrm{target}$ and
+$p\in c'.\mathrm{source}$. Since $z.\mathrm{base}=fy$, the monomial target
+base coordinates are exactly $\Phi(fy)=0$. The genuine source monomial/block
+identities therefore give monomial source coordinates zero. The actual
+source flattening sends its centre $y$ to zero and has its actual inverse
+there, so $p.\mathrm{base}=y$. The true right inverse of $c'$ and the true
+left inverse of $c$ give the displayed actual map identity, including points
+on the entire exceptional divisor. No parameter inversion occurs.
+\end{proof}
+
+\begin{theorem}[The actual universal lift hits every compatible exceptional pair]
+\label{hir:submersion-blowup-compatible-exceptional-pair}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupCompatiblePoints.exists_canonical_exceptional_compatible_point}
+\uses{hir:submersion-blowup-compatible-target-chart-point,hir:submersion-global-lift-whole-chart-equality,hir:submersion-blowup-lift-centre}
+For ONLY a genuine global submersion $f:Y^{n+r}\to X^n$, a closed smooth
+nowhere-dense centre $C$, and an actual pair $y,z$ with $fy=z.\mathrm{base}\in C$,
+the internally generated canonical source blowup and actual universal lift
+$G_0$ have an actual point $p$ with $p.\mathrm{base}=y$ and $G_0p=z$.
+\end{theorem}
+\begin{proof}
+The original closed smooth centre supplies the genuine flattening and its
+actual central zero value internally. Apply the preceding producer to the
+actual target direction at $z$, with the true original submersion at $y$.
+The existing entire universal-chart equality identifies $G_0$ with the
+internally produced flat-chart map on the entire source chart. The actual
+point belongs to this source, so the preceding actual map equality gives
+$G_0p=z$. The original submersion internally supplies the source closed
+smooth nowhere-dense centre and both genuine blowups. No exceptional
+surjectivity or compatible-point conclusion is an input.
+\end{proof}
+
+\begin{theorem}[Every actual compatible pair has a source blowup point]
+\label{hir:submersion-blowup-compatible-whole-pair}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupCompatiblePoints.exists_canonical_compatible_point}
+\uses{hir:submersion-blowup-compatible-exceptional-pair,hir:submersion-blowup-lift-actual-lift,bex:blowup-space}
+For the same ONLY original data and EVERY actual pair $y,z$ satisfying
+$fy=z.\mathrm{base}$, an actual source blowup point $p$ satisfies
+$p.\mathrm{base}=y$ and $G_0p=z$.
+\end{theorem}
+\begin{proof}
+If $fy\in C$, use the preceding exceptional producer. Otherwise the actual
+source point is the genuine off-centre point over $y$. The true universal
+projection square gives the base of $G_0p$ equal to $fy=z.\mathrm{base}$.
+Off the centre the actual blowup point is uniquely determined by its base,
+so $G_0p=z$. The two cases cover every actual compatible pair without a
+chosen output point or density hypothesis.
+\end{proof}
+
+\begin{theorem}[Compatible pairs for arbitrary genuine blowup choices]
+\label{hir:submersion-blowup-compatible-arbitrary-choices}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupCompatiblePoints.exists_actual_compatible_point}
+\uses{hir:submersion-blowup-compatible-whole-pair,hir:submersion-blowup-choice-actual-conjugate}
+ONLY original $f$ and ANY primitive genuine target/source blowup choices
+internally give, for every actual pair $y,z$ with $fy=\pi z$, a source point
+$p$ with $\pi'p=y$ and $Gp=z$, where $G$ is THEIR actual universal lift.
+\end{theorem}
+\begin{proof}
+Internally construct the true identity-base comparison biholomorphisms
+$a,b$ with the canonical blowups and the entire lift formula $G=a^{-1}G_0b$.
+The actual point $az$ has base $\pi z=fy$, so the preceding producer gives
+$P$ with canonical source base $y$ and $G_0P=az$. Set $p=b^{-1}P$.
+The genuine whole comparison projection square gives $\pi'p=y$, and the
+entire conjugation formula gives $Gp=a^{-1}(az)=z$. Comparisons and the
+canonical compatible-point witness are internally produced, not hypotheses.
+\end{proof}
+
+\begin{theorem}[Actual surjective original submersions give surjective lifts]
+\label{hir:submersion-blowup-compatible-surjective-lift}
+\leanok
+\lean{Hironaka.HironakaSmoothSubmersionBlowupCompatiblePoints.actualLift_surjective}
+\uses{hir:submersion-blowup-compatible-arbitrary-choices}
+If the original genuine submersion is surjective, THEIR actual universal
+lift for ANY genuine blowup choices is surjective.
+\end{theorem}
+\begin{proof}
+For any actual target blowup point $z$, original surjectivity supplies an
+actual $y$ with $fy=\pi z$. The preceding producer supplies $p$ with $Gp=z$.
+No surjectivity of a produced lift is supplied. Empty centres and empty
+source/target sets obey the same genuine quantified statement; no nonexistent
+exceptional chart is selected. Joint-point uniqueness, holomorphic lifting
+of arbitrary cones, and the full Cartesian universal property remain
+separate OPEN targets, as do the general higher invariant and driver.
+\end{proof}

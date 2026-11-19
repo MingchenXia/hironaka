@@ -1,0 +1,219 @@
+\section{Original mixed analytic data for the actual local canonical algorithm}
+
+All carriers below are original analytic subsets; no compactness of the
+carrier is imposed. The increasing list ranges over $0\le k<n$.
+Its completeness as a decomposition of $W$ uses empty interior; the
+locally good conditions on these individual lower-dimensional parts
+do not need that additional hypothesis.
+
+\begin{lemma}[Original intrinsic parts supply every local algorithm condition]
+\label{hir:original-local-nonpure-intrinsic-input}
+\uses{hir:embedded-resolution-dimension-parts,hir:embedded-resolution-analytic-local}
+\lean{Hironaka.HironakaOriginalLocalNonpureCanonicalResolution.intrinsic_local_input}
+\leanok
+Let $W\subseteq X^n$ be original analytic, let $E$ be an original
+ordered SNC boundary, and suppose $W\subseteq\overline{W\setminus|E|}$.
+Put $F=W_{\rm sing}\cup(W\cap|E|)$, using the entire intrinsic
+all-dimensional singular set, and
+$L=[(W^{(0)},0),\ldots,(W^{(n-1)},n-1)]$.
+Then $F$ is closed, every entry of this actual whole ordered list is
+locally good relative to $(E,F)$, and every pair of distinct list
+positions has carrier intersection contained in $F$. No locally good
+part, bad-set or intersection certificate is an input.
+\end{lemma}
+\begin{proof}
+The intrinsic singular set is closed for a closed analytic carrier.
+The finite union of the actual closed boundary members is closed,
+so its intersection with $W$ and then the displayed union are closed.
+Every intrinsic dimension part is analytic, and its label belongs
+to the actual range $0,\ldots,n-1$. Its nonregular locus is contained
+in the whole original singular set. Its intersection with the boundary
+is contained in $W\cap|E|$. The genuine dimension-part density theorem,
+applied to the original density off the boundary, places the whole
+part in the closure of its complement of $F$. These are exactly all
+locally good fields. Finally distinct intrinsic dimension parts
+intersect only in the original whole singular set. The actual range
+has no repeated labels, so this gives the ordered pairwise statement
+for the entire literal list, including empty parts.
+\end{proof}
+
+\begin{lemma}[Whole strict geometry assembles from the genuine resolved dimension parts]
+\label{hir:original-local-nonpure-whole-geometry}
+\uses{hir:embedded-resolution-dimension-parts,hir:original-nonpure-canonical-elementary-smooth-projection,ana:strict-transform-composition}
+\lean{Hironaka.HironakaOriginalLocalNonpureCanonicalResolution.whole_geometry_of_dimension_parts}
+\leanok
+Let $W\subseteq X^n$ be original analytic with empty interior, let
+$T$ be an actual blowup tower, and let $E_f$ be an actual ordered
+boundary on its endpoint. Suppose the actual conventional strict
+transforms of the intrinsic dimension parts are pairwise disjoint,
+each lower-dimensional part is everywhere regular with its actual
+label, and each has normal crossings with $E_f$. Then the whole
+strict transform of $W$ is a closed submanifold, is the literal finite
+union of those strict parts, is regular of dimension $k$ along every
+actual dimension-$k$ strict part, and has normal crossings with the
+same whole boundary. These hypotheses concern the part geometry;
+whole strict geometry is derived, rather than assumed.
+\end{lemma}
+\begin{proof}
+Empty interior makes every part of dimension at least $n$ empty and
+expresses $W$ as the finite union of its $n$ lower-dimensional intrinsic
+parts. Conventional strict transform commutes with this finite union:
+expand its defining closure, distribute inverse image and removal of
+the exceptional locus over the union, then use closure of a finite
+union. Every strict part is closed by its actual definition.
+
+At a point of one nonempty strict part, remove the finite union of
+all other closed strict parts. Pairwise disjointness makes the
+complement an open neighbourhood of that point. On this neighbourhood
+the entire strict carrier equals exactly the chosen strict part.
+Locality of genuine regular coordinates transfers its actual dimension
+to the whole carrier. The finite union formula supplies such a part
+at every point, so the whole carrier is a closed submanifold.
+The same local equality and locality of adapted normal-crossings
+coordinate families transfer normal crossings from the chosen part
+to the whole carrier, with the same entire ordered boundary. Empty
+parts, empty ambient spaces and dimension zero are covered by the
+same finite-union argument; no uniform nonemptiness is assumed.
+\end{proof}
+
+\begin{theorem}[Original mixed analytic data produce a genuine canonical local target]
+\label{hir:original-local-nonpure-canonical-target}
+\uses{hir:original-local-nonpure-intrinsic-input,hir:original-local-nonpure-whole-geometry,hir:original-local-canonical-ordered-resolution-producer,hir:original-smooth-intrinsic-regular-locus,hir:original-dimension-part-smooth-shift}
+\lean{Hironaka.HironakaOriginalLocalNonpureCanonicalResolution.exists_original_local_nonpure_target}
+\leanok
+Let $W\subseteq X$ be original analytic with empty interior, let $E$
+be original SNC, and suppose $W\subseteq\overline{W\setminus|E|}$.
+For every prescribed open $U$ contained in a compact subset of $X$,
+these original data internally supply an actual finite ordered
+canonical tree $T$ on the full intrinsic increasing dimension-part
+list of $W_U=W\cap U$, with its entire actual final boundary. Its
+actual centres lie over the intrinsic
+$F_U=(W_U)_{\rm sing}\cup(W_U\cap|E_U|)$.
+The same projection has the entire elementary geometry: admissibility,
+SNC, exceptional and newly born boundary support over $F_U$, whole
+singular preimage in the exceptional locus, isomorphism off $F_U$,
+closed smooth conventional strict carrier, exact intrinsic finite
+part union, its actual dimensions along each part, pairwise disjoint
+strict parts, whole normal crossings, holomorphicity, properness
+and surjectivity. No incoming history, local part, comparison or
+compactness of $W$ is assumed.
+\end{theorem}
+\begin{proof}
+The first lemma internally supplies the actual original bad set and
+all natural ordered locally good part hypotheses. Apply the genuine
+local ordered-tree producer to the original inclusion of the same
+prescribed $U$. Its compact-enclosed range is supplied by the given
+compact set. This constructs the actual tree, complete initial and
+final boundaries, real centre support, admissibility, and regularity,
+normal crossings and pairwise disjointness of all labelled strict parts.
+
+The actual open inclusion is a holomorphic submersion of relative
+dimension zero. The whole intrinsic singular-set and dimension-part
+pullback equalities therefore identify its bad set and full labelled
+input list with the intrinsic ones on $U$. Openness preserves empty
+interior and analytic inverse image preserves analyticity. Parts with
+label at least $n$ are genuinely empty. Consequently the preceding
+whole-geometry lemma applies to these actual resolved intrinsic parts
+and proves the entire strict carrier, its finite union, dimensions and
+normal crossings. Actual admissibility supplies the whole exceptional
+and new-boundary formulas and the isomorphism off the same bad set.
+The genuine singular-preimage theorem applied to the whole actual
+smooth strict carrier gives the singular exceptional assertion.
+The actual finite blowup projection is holomorphic, proper and
+surjective. All conclusions concern the same internally constructed
+$T$ and its whole boundary.
+\end{proof}
+
+\begin{theorem}[The same original local target has intrinsic independent smooth sources]
+\label{hir:original-local-nonpure-natural-smooth-sources}
+\uses{hir:original-local-nonpure-canonical-target,hir:original-actual-ordered-tree-smooth-pullback,hir:original-canonical-ordered-filtered-choice,hir:original-dimension-part-smooth-shift,hir:original-dimension-part-below-smooth-fibre-empty}
+\lean{Hironaka.HironakaOriginalLocalNonpureCanonicalResolution.HasIntrinsicSmoothSources,Hironaka.HironakaOriginalLocalNonpureCanonicalResolution.exists_original_local_nonpure_resolution}
+\leanok
+Under exactly the preceding original hypotheses, the actual target
+$T$ is chosen before every actual holomorphic submersion $b:Y^m\to U$.
+It has intrinsic smooth sources in the following transparent sense.
+The same actual Cartesian pullback $Q$ is an intrinsic ordered recipe
+for $b^{-1}W_U$, has the complete elementary geometry with its entire
+literal boundary, and satisfies the whole strict-carrier and shifted
+intrinsic-dimension-part squares. Its upper arrow is smooth, actual
+lengths agree, projections commute and the holomorphic universal
+property holds. An intrinsic recipe records its own actual canonical ordered stages
+and requires its surviving ordered entries to equal the nonempty
+entries of the intrinsic dimension-part list. No target-dependent
+stopping or comparison certificate is added.
+
+Every independently selected intrinsic source recipe has its own
+whole SNC boundary and smooth strict carrier with normal crossings.
+It has a unique actual endpoint biholomorphism to $Q$ over $Y$,
+transporting the entire filtered final boundary and every whole raw
+strict carrier. Composing this same map with the actual upper arrow
+gives a smooth holomorphic Cartesian comparison with the same target
+$T$. Neither compactness nor nonemptiness of $Y$ is required.
+\end{theorem}
+\begin{proof}
+Choose the actual original target from the preceding theorem. Its
+original intrinsic dimension parts are analytic and densely avoid its
+actual intrinsic bad set. Their finite union makes the whole carrier
+dense off that same closed set. The genuine actual-tree smooth
+pullback theorem therefore internally constructs the actual source
+history, its intrinsic sum and pure-head stages, real source centre
+support and admissibility. Intrinsic all-dimensional singular-set
+pullback identifies the actual source support with its own intrinsic
+bad set. The dimension-part shift and genuine empty low-fibre parts
+identify the surviving raw source entries with the nonempty entries
+of the complete intrinsic source list, giving an actual intrinsic
+source recipe.
+
+The actual preserved-open strict-square theorem applies to the whole
+carrier and every original intrinsic dimension part by their proved
+density off the same bad set. Thus whole smooth inverse-image
+regularity and normal crossings give the source smooth carrier and
+NC with its entire actual boundary. Every source dimension label below
+the relative dimension is genuinely empty. For each remaining label
+$j$, write $j=(j-r)+r$ and use the actual shifted part square; target
+whole-carrier regularity and genuine smooth regularity pullback give
+source dimension $j$. The same split and the actual target pairwise
+disjointness prove disjointness of all intrinsic source parts.
+Analyticity and empty interior under the open submersion give the
+whole finite intrinsic source union. Source admissibility gives its
+exceptional, born-boundary and off-bad-set fields; its whole smooth
+strict carrier gives the intrinsic singular-preimage containment.
+All remaining map and Cartesian properties come from that same actual
+source tower.
+
+For any independent intrinsic source recipe, genuine whole-tree
+uniqueness compares its actual tree to this same $Q$ over the identity
+of $Y$, using the proved equality of the surviving intrinsic labels.
+The resulting unique actual endpoint map carries the whole filtered
+chronological boundary and every strict carrier. Actual tree
+canonical domains give its own entire SNC boundary. Pull back the
+whole source smooth carrier under this map and transfer NC using the
+proved invariance under deletion of empty boundary members. The actual
+upper submersion composed with the same biholomorphism remains smooth;
+transporting the actual universal-property lifts through its genuine
+inverse proves the Cartesian property. No independently normalized
+source tree or source compactness is inferred from uniqueness.
+\end{proof}
+
+\begin{corollary}[A genuine original local mixed resolution around every compact set]
+\label{hir:original-local-nonpure-natural-compact-neighbourhood}
+\uses{hir:original-local-nonpure-natural-smooth-sources}
+\lean{Hironaka.HironakaOriginalLocalNonpureCanonicalResolution.exists_original_local_nonpure_resolution_near_compact}
+\leanok
+For the same original analytic $W$, empty interior, ordered SNC $E$
+and density off $E$, every compact $K\subseteq X$ is contained in a
+relatively compact open $U$ carrying the actual target and the entire
+intrinsic independent smooth-source conclusion just proved. The
+neighbourhood is internally constructed and chosen before its target
+and every smooth source. No canonicity of a neighbourhood choice is
+asserted.
+\end{corollary}
+\begin{proof}
+A complex manifold is locally compact. The original compact set
+therefore has an actual open neighbourhood $U$ with compact closure.
+Apply the preceding theorem to this same prescribed $U$, using its
+compact closure as the genuine enclosure and the tautological
+inclusion of $U$ into its closure. This retains its entire actual
+chosen target and every smooth-source assertion. All inputs remain
+the original data; the carrier $W$ need not be compact.
+\end{proof}

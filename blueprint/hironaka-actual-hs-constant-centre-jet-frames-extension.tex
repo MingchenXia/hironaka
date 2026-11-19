@@ -1,0 +1,133 @@
+\section{Original HS-constant centres give genuine jet frames at the original point}
+
+\begin{theorem}[The true original jet-image bound makes HS subtraction faithful]
+\label{hir:actual-centre-jet-rank-bound-and-hs-inversion}
+\uses{hir:actual-translated-point-quotient-macaulay-rank,hir:actual-entire-point-quotient-pivot-frame}
+For actual finite original holomorphic functions $H_i$ near any actual
+point $p$ and every finite truncation $q$, the rank of their original
+Macaulay matrix is bounded by the dimension of the actual original
+whole jet image. Consequently equality of the actual translated-ideal
+HS values at two genuine points, at order $\ell$, implies equality
+of their original Macaulay ranks at truncation $\ell+1$.
+\lean{Hironaka.HironakaActualHSConstantCentreJetFrames.finrank_originalMacaulay_le_actualJet,Hironaka.HironakaActualHSConstantCentreJetFrames.originalMacaulay_rank_eq_of_translated_hs_eq}
+\leanok
+\end{theorem}
+\begin{proof}
+Every original column is the actual scalar-coordinate jet of an
+original monomial times one of the actual translated generator germs.
+Thus the entire original column image lies in the scalar jet range.
+The original coordinate-array map is injective on the genuine whole
+jet image, so these two actual jet-image dimensions agree. Monotonicity
+of dimension gives the asserted rank bound. The proved original HS
+rank dictionary at the two points reads $D-r_p=D-r_{p'}$, with this
+same genuine jet dimension $D$. Both ranks are at most $D$ by the
+proved bound, so ordinary natural-number subtraction cancels faithfully
+and yields $r_p=r_{p'}$. No rank bound is assumed as a certificate.
+\end{proof}
+
+\begin{theorem}[One real common original generator family gives every intrinsic HS and centre rank dictionary]
+\label{hir:actual-hs-constant-centre-common-real-jet-ranks}
+\uses{hir:actual-centre-jet-rank-bound-and-hs-inversion,hir:real-centre-domain-whole-nearby-translated-ideals,hir:smooth-centre-fixed-real-original-ambient-hs-dictionary,hir:actual-intrinsic-whole-stalk-hilbert-samuel-value}
+Let $A$ be an original coherent germ ideal on the original manifold
+of dimension $d+t$. Let $C$ be actually regular of dimension $d$ at
+$x$, and suppose its original intrinsic HS function at every point
+of $C$ equals that at $x$ at every order. Then original geometry and
+coherence internally give one true centred flattening $\Phi$, one
+finite family of original functions $G_i$ generating $A$ on one real
+original open $O\ni x$, and one real ambient open $U\ni0$ inside
+$\Phi.\mathrm{target}$. The functions
+$H_i=G_i\circ\mathrm{actualFlatteningInverseMap}(x,\Phi)$ are
+holomorphic on that SAME $U$ and generate the unchanged actual
+pullback sheaf there, with the entire original translated-ideal
+identity at every actual point of $U$.
+For every $p\in U$ and every $\ell$, the original intrinsic HS at
+the actual inverse-coordinate point is the genuine whole jet dimension
+minus the rank of the original Macaulay matrix of these SAME $H_i$
+at $p$. On $U\cap(\mathbb C^d\times0)$ this actual matrix rank
+equals its rank at $0$ for every order. The common generators and
+ambient $U$ are chosen once, before any order.
+\lean{Hironaka.HironakaActualHSConstantCentreJetFrames.exists_original_hs_constant_centre_common_jet_ranks}
+\leanok
+\end{theorem}
+\begin{proof}
+Original regularity supplies a genuine centred flattening, and original
+coherence and the actual inverse-coordinate holomorphicity supply
+actual original generators $G_i$, their original open $O$, and one
+smaller real open $U\ni0$ on which their literal composites $H_i$
+generate the actual pulled-back sheaf. The existing entire translated
+membership dictionary identifies its whole origin ideal with the
+span of these very translated germs. Actual affine translations in
+that dictionary and in the original Macaulay map agree by commutativity
+of addition, so no ideal is replaced.
+At every actual $p\in U$, the proved true nearby germ algebra
+equivalence identifies this entire ideal with the original whole chart
+stalk. Original chart invariance therefore identifies its HS with the
+unchanged intrinsic HS. Apply the genuine matrix-rank dictionary to
+obtain every asserted finite-order equality on this one $U$.
+If $p$ is in the actual plane, the true flattening inverse identities
+put its original inverse-coordinate point in $C$. Its entire intrinsic
+HS equals that at $x$ by the original source hypothesis, and inverse
+coordinates carry $0$ to $x$. Thus the two translated-ideal HS values
+are equal at every order. The preceding proved rank bound and faithful
+subtraction yield equality of the actual original ranks at $p$ and
+$0$, without any caller-supplied rank or quotient-frame data.
+\end{proof}
+
+\begin{theorem}[Every order has a genuine maximal pivot at zero and whole centre quotient frames on a real neighbourhood]
+\label{hir:actual-hs-constant-centre-origin-pivot-whole-frames}
+\uses{hir:actual-hs-constant-centre-common-real-jet-ranks,hir:actual-entire-point-quotient-pivot-frame,hir:real-domain-fixed-flattening-all-original-whole-stalks}
+The SAME original flattening, finite generators and common real
+ambient $U$ can be chosen so that for EVERY $\ell$, there exist an
+actual pivot size $k$, actual original word rows and columns, and a
+real ambient open $D_\ell\subseteq U$ containing $0$ such that the
+original pivot determinant is nonzero throughout $D_\ell$.
+Here $k$ is the rank of the actual original Macaulay matrix at $0$;
+its entire scalar projection has holomorphic entries on $D_\ell$.
+The actual tangent open $V_\ell=\mathrm{tangentInclusion}^{-1}(D_\ell)$
+is open and contains $0$. At every actual plane point of $D_\ell$,
+the pivot-projection kernel is the ENTIRE original Macaulay image,
+the whole germ-coordinate kernel is the actual translated ideal plus
+the genuine maximal-ideal power, and the ENTIRE original nearby
+chart-stalk quotient is linearly equivalent over $\mathbb C$ to the
+same fixed original quotient model. These assertions therefore hold
+at every tangent parameter in $V_\ell$.
+\lean{Hironaka.HironakaActualHSConstantCentreJetFrames.exists_original_hs_constant_centre_origin_pivot_frames}
+\leanok
+\end{theorem}
+\begin{proof}
+Choose the preceding original common data once. Fix $\ell$ and let
+$k$ be the actual matrix rank at $0$. The genuine finite-column
+minor criterion says that rank less than $k$ is equivalent to the
+vanishing of all actual $k$ by $k$ minors. The rank at zero equals
+$k$, so one such original minor is nonzero at zero. This also covers
+$k=0$, whose empty determinant is one. Intersect $U$ with the actual
+nonzero locus of this genuine holomorphic minor. This is a real
+ambient open $D_\ell$ containing zero, on which that very pivot is
+invertible. Its original inverse-pivot projection entries are
+holomorphic by the actual adjugate/determinant proof.
+At an actual plane point of $D_\ell$, the preceding source-derived
+rank constancy gives the actual rank $k$, while the selected original
+pivot is nonzero there. The proved original pivot kernel and whole
+germ-coordinate kernel theorems therefore apply to the entire
+original ideal, not only a selected subspace. They construct its
+whole translated-ideal quotient frame. The true original nearby germ
+algebra equivalence carries this entire ideal and every genuine
+maximal-ideal power to the original whole chart stalk; composing the
+inverse of its quotient equivalence with that actual frame gives the
+stated original quotient frame. Finally the actual continuous linear
+tangent inclusion has open preimage $V_\ell$ and carries zero to
+zero, so this tangent neighbourhood contains zero and every one of
+its points maps to the actual plane. No generic free locus missing
+the original point is used.
+\end{proof}
+
+These are source-derived finite-order quotient frames at the original
+point, for one genuine common original generator family. The pivot
+neighbourhood may depend on the order; no common neighbourhood for
+all orders, derivative/filtration compatibility between orders,
+normal-flatness, canonical reduced centre-power property, compatible
+vertex-family selection or general positive-dimensional Bennett is
+asserted. Those further obligations remain separate. An analytic
+subset $W$ supplies the original coherent ideal $A=I_W$ by Cartan
+coherence; no global analytic extension of the flattened local data
+is required.

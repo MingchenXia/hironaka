@@ -1,0 +1,106 @@
+\section{Intrinsic highest-stratum subcentres for a general NC old boundary}
+\label{sec:nc-highest-subcentre-admissibility}
+
+The old boundary below is a closed NC carrier with actual local branches and
+possible global self-intersections. No global smooth branch list is assumed.
+The results construct genuine local admissibility and actual local transformed
+branch geometry for a supplied smooth subcentre. They do not select a canonical
+subcentre or prove strict progress or a terminal general-NC algorithm.
+
+\begin{theorem}[Every smooth highest-stratum subcentre is contained in every actual local branch]
+\label{hir:nc-highest-subcentre-actual-branches}
+\lean{Hironaka.HironakaNormalCrossingsHighestSubcentreAdmissibility.flatBranches,Hironaka.HironakaNormalCrossingsHighestSubcentreAdmissibility.isSNCDivisor_flatBranches,Hironaka.HironakaNormalCrossingsHighestSubcentreAdmissibility.exists_highest_subcentre_branches}
+Let $H\subseteq X^n$ be an original NC carrier, let $r$ bound its intrinsic
+branch multiplicity everywhere, and let $C$ be contained in the whole level
+$\{x:\operatorname{mult}_H(x)\ge r\}$. For each $x\in C$ there is an actual
+open neighbourhood $U$ and a genuine SNC list $B$ of actual coordinate branches
+such that $H|_U=\bigcup B$ and $C|_U\subseteq B_i$ for EVERY member $B_i$.
+The entire list is constructed from the original NC flattening.
+\uses{hir:general-nc-actual-local-snc-branches,hir:general-nc-highest-multiplicity-smooth-centre}
+\leanok
+\end{theorem}
+\begin{proof}
+Take the actual original NC flattening at $x$, with its finite set $S$ of
+coordinate hyperplanes through the origin. The intrinsic multiplicity formula
+and its global bound imply $|S|=r$. On its whole flat domain the highest level
+is exactly the intersection of all coordinate equations indexed by $S$:
+a point has at least $|S|$ vanishing entries among $S$ precisely when every
+one vanishes. Thus every point of $C$ in this domain lies on every branch.
+
+Use this actual flat domain as $U$ and define $B$ by the literal finite list
+of equations $\Phi_j=0$, $j\in S$. The actual flattening is a biholomorphism
+onto its actual open target. Pulling the genuine distinct coordinate-hyperplane
+SNC list through the target inclusion and this biholomorphism proves that
+$B$ is SNC on the WHOLE $U$. The original flattening equation proves its
+whole union is $H|_U$. The highest-level intersection calculation gives the
+claimed containment in every member, with no branch labels chosen globally.
+\end{proof}
+
+\begin{theorem}[Actual local marked admissibility is independent of branch order]
+\label{hir:nc-highest-subcentre-marked-admissibility}
+\lean{Hironaka.HironakaNormalCrossingsHighestSubcentreAdmissibility.localBranchMarked,Hironaka.HironakaNormalCrossingsHighestSubcentreAdmissibility.exists_highest_subcentre_local_admissibility}
+In the same situation suppose $C$ is an actual closed submanifold and is
+contained in the ORIGINAL cosupport of coherent marked data $(N,I,d)$, with
+arbitrary unchanged marking $d$. The actual neighbourhoods and branch lists
+can be chosen so that $C|_U$ is a genuine admissible centre for
+$(N|_U,I|_U,d,B)$ and for EVERY permutation of that whole list. The ideal,
+carrier and marking are literally the original restrictions. No invariant
+value, centre admissibility or comparison certificate is input.
+\uses{hir:nc-highest-subcentre-actual-branches,bcalc:nc-comparison,hir:general-restrict-open}
+\leanok
+\end{theorem}
+\begin{proof}
+Use the preceding actual branch list. Its every member contains $C|_U$.
+The proved SNC comparison theorem therefore permits deleting ALL branch
+members when testing normal crossings of this centre. An actual closed
+submanifold has normal crossings with the empty divisor, so the comparison
+proves normal crossings with the entire actual branch list. Closed
+submanifold geometry restricts through the genuine open inclusion.
+
+Coherence supplies holomorphic ideal germs, hence the true cosupport
+restriction theorem identifies the restricted cosupport with the literal
+inverse image of the ORIGINAL cosupport at the SAME marking. The given
+original containment therefore supplies exactly the remaining centre
+condition. These are all three actual marked admissibility fields.
+A permutation changes neither the membership of the whole branch list nor
+its geometric normal-crossings condition: pull each indexed coordinate
+witness back through the actual member reindexing. The ideal, carrier,
+marking and cosupport are unchanged. Thus the same centre is admissible
+for every such permutation, with no claim about the old ordered invariant.
+\end{proof}
+
+\begin{theorem}[A genuine subcentre blowup preserves the original off-cosupport locus and has actual local SNC transformed branches]
+\label{hir:nc-highest-subcentre-actual-blowup}
+\lean{Hironaka.HironakaNormalCrossingsHighestSubcentreAdmissibility.exists_highest_subcentre_blowup}
+If additionally $r>0$, the actual smooth subcentre has a genuine universal
+blowup $\pi:Y\to X$, isomorphic over the complement of the ORIGINAL
+cosupport. At each point of $C$ the SAME actual local branch neighbourhood
+has the genuine restricted blowup. Its complete branch strict transforms,
+followed by the actual new exceptional divisor, form an SNC list.
+For whole-ambient marked data $(X,I,d)$ this same local blowup is a genuine
+admissible marked step with the literally restricted original ideal and
+unchanged marking; no additional current cosupport is substituted.
+\uses{hir:nc-highest-subcentre-marked-admissibility,bcalc:restrict-open,bcalc:snc-transform,ana:blowup-existence,bcalc:isomorphism-off-centre}
+\leanok
+\end{theorem}
+\begin{proof}
+The positive highest stratum has empty interior by its genuine regular
+codimension-$r$ coordinates. Interior monotonicity therefore gives empty
+interior for $C$. Its actual closed-submanifold geometry supplies a genuine
+universal-property blowup. The exceptional image lies in $C$, which is in
+the ORIGINAL cosupport, so the genuine blowup isomorphism-off theorem gives
+the required original good-locus isomorphism.
+
+At every centre point retain the preceding actual $U,B$ and let
+$V=\pi^{-1}U$. The actual restriction theorem proves that the literal
+restricted map $V\to U$ is the blowup along $C|_U$. The actual centre already
+has normal crossings with the WHOLE branch list. The genuine SNC blowup
+calculus consequently gives the complete transformed list
+$[B_1',\ldots,B_s',\pi^{-1}(C|_U)]$ as SNC on the whole actual $V$.
+For whole-ambient marked data the true restricted ideal is coherent,
+the ambient carrier is smooth and transverse to every SNC divisor, and
+the preceding theorem supplies actual centre admissibility at the original
+mark. Thus this very restricted map is an actual permitted marked step.
+No point outside the original permitted locus is blown up. No strict
+multiplicity decrease or canonical-history identification is inferred.
+\end{proof}

@@ -1,0 +1,147 @@
+\section{The actual original General history crossing an interior empty step}
+
+The original general invariant keeps its actual nonmonomial order and
+the companion formed at the start of its original order regime.  To
+compare an interior empty insertion, that order and its whole selected
+history must be computed from the original datum, including an empty
+tail.  The following are genuine history and canonical-input producers
+for the positive General branch.  They do not assume a companion value
+or new canonical-history comparison.  The source route is W\l odarczyk's
+General step and Bierstone--Milman's trivial-blowup convention
+\cite{wlodarczyk05-hironaka,bierstone-milman08-functoriality}.
+
+\begin{theorem}[Original nonmonomial order on every interior empty history]
+\label{hir:original-interior-empty-all-tail-order}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGeneralCrossingHistory.nmOrd_interior_empty_all_tails}
+\leanok
+\uses{hir:original-interior-empty-history,hir:original-empty-boundary-test-history,bcalc:nonmonomial-order-transport}
+Let $M$ be originally well formed, $H$ an actual test history of $M$,
+$S$ any actual subsequent history, and $y$ any actual final point.  Then
+the nonmonomial orders of the SAME original $M$ on $H\epsilon S$ and $HS$
+at $y$ agree.  No nonempty-tail, positive-order or desired equality
+condition is required.
+\end{theorem}
+\begin{proof}
+The actual transformed head $K=M_H$ is well formed.  Its genuine identity
+empty blowup is admissible, hence has a coherent transformed ideal.
+Removing its new empty boundary entry leaves the actual empty-step base
+$K_\epsilon^{\mathrm{base}}$, coherently restricted-equivalent to $K$
+by the genuine identity pullback dictionary.  Their carriers are the same
+closed original carrier, and both ideals are coherent.  Restricted
+equivalence therefore gives equal nonmonomial orders after the entire
+actual suffix $S$.  The actual new empty boundary entry changes no
+nonmonomial order, also after $S$; its index is internally valid because
+the base boundary has exactly $|K.E|$ members.  The real transform-append
+and transform-step dictionaries identify these two computed transforms
+with $M_{H\epsilon S}$ and $M_{HS}$.  This proves the stated original
+order equality for every $S$, including the immediate empty step.
+\end{proof}
+
+\begin{theorem}[The actual original order-regime run across insertion]
+\label{hir:original-interior-empty-order-regime-run}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGeneralCrossingHistory.ordRegime_dictionary,Hironaka.HironakaOriginalGeneralCrossingHistory.ordRegime_run_dictionary}
+\leanok
+\uses{hir:original-interior-empty-all-tail-order,hir:tower-split}
+For these actual data and any fixed original order $o$, put
+$r=\operatorname{run}_{M,o}(HS,y)$.  The actual run on $H\epsilon S$
+is $r$ if $r<|S|$, is $r+1$ if $r\geq|S|$ and the original point
+$S.\operatorname{proj}(y)$ is in order regime $o$ at $H$, and is $|S|$
+otherwise.  The regime is the literal original transformed-cosupport
+membership together with $\nu=o$.
+\end{theorem}
+\begin{proof}
+Induct on the actual last steps of $S$.  At the empty tail, the run
+recursion on the genuine identity empty step reads the original regime
+at $H$: it adds one to the original run if that regime holds, and is
+zero otherwise.  This is exactly the displayed formula when $|S|=0$.
+At a nonempty last step, the preceding theorem identifies the original
+order regime at the two predecessor points.  If the predecessor fails
+the regime, both runs are zero and the old run is shorter than the
+positive tail length.  If it satisfies the regime, each actual run is
+the predecessor run plus one.  Apply induction and compare the old
+predecessor run with the predecessor tail length.  Each of the three
+inductive cases gives precisely the corresponding stated current case.
+The actual whole cosupport dictionary supplies the cosupport component
+of the two predecessor regimes; the order dictionary supplies their
+order component.  The composite projections identify the original base
+point throughout.
+\end{proof}
+
+\begin{theorem}[Both whole General splits retain the original assignment head]
+\label{hir:original-interior-general-crossing-splits}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGeneralCrossingHistory.actual_general_crossing_splits}
+\leanok
+\uses{hir:original-interior-empty-order-regime-run,hir:original-crossing-run-base-regime,hir:original-crossing-restricted-empty-history}
+Assume $y$ is in the actual original transformed cosupport, its actual
+current order is $o$, and the original run $r$ reaches
+$S$.  The actual new order-regime run is $r+1$.  Put $a=r-|S|$,
+$D=\operatorname{stage}(H,a)$, $K=\operatorname{head}(H,a)$ and
+$B=\operatorname{tail}(H,a)$.  Both entire selected General split records
+have the SAME original stage/head $(D,K)$, with tails $BS$ and
+$B\epsilon S$.  Hence the actual original order mask
+$U=\operatorname{ordMask}(M_K,o)$ and WHOLE companion $J$ formed from
+$M,o,K$ are identical at the two assignments.  The new restricted
+companion tail has the genuine restricted-interior-empty diagram.
+\end{theorem}
+\begin{proof}
+Actual cosupport membership and current order supply current order-regime membership.  A
+run reaching $S$ internally supplies membership at the original $H$
+point by the true run-reaching induction.  The preceding run formula
+therefore gives $r+1$.  The actual full split formula above the tail
+length gives the old split $(D,K,BS)$.  Apply it to $H\epsilon,S$ at
+$r+1$: the remaining split count is $a+1$, whose first removed step is
+the identity empty blowup.  The actual split recursion therefore gives
+$(D,K,B\epsilon S)$.  Both lower constructions use literally the same
+$M,o,K$, so their order mask and entire companion agree without a chosen
+comparison hypothesis.  Restrict the real empty-history diagram to this
+literal original open $U$; its identity base and actual final open
+identifications give the entire asserted tail isomorphism.
+\end{proof}
+
+\begin{theorem}[Original full canonical input supplies the crossing companion data]
+\label{hir:original-canonical-general-crossing-companion-data}
+\source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
+\lean{Hironaka.HironakaOriginalGeneralCrossingHistory.original_canonical_general_crossing_data,Hironaka.HironakaOriginalGeneralCrossingHistory.original_canonical_general_companion_history}
+\leanok
+\uses{hir:original-interior-general-crossing-splits,hir:general-canonical-tail,hir:original-interior-empty-test-history}
+Let $n>0$, let $M$ belong to the original dimension-$(k+1)$ invariant
+domain, and let $HS$ be canonical for its actual full $R_{k+1}$.
+Let $y$ be an original transformed-cosupport point with actual positive
+order $o$ and actual order-regime run reaching $S$.  Use the true original
+$K,B,U,J$ just computed.  Original data internally supply mask membership,
+the true dimension-$(k+1)$ domain and maximal order of $J$, the entire
+OLD restricted companion tail canonical for the actual Step One value
+formed from $R_k$, and its actual cosupport point.  They also supply the
+WHOLE new restricted companion tail diagram and its genuine testness.
+No companion domain, maximal-order, test, canonical-history, mask or value
+comparison is a caller premise.
+\end{theorem}
+\begin{proof}
+The actual original family supplies testness of its canonical $HS$ and
+hence of $H$.  Its positive branch is the genuine General value whose
+inner maximal-order value is the actual Step One construction from
+$R_k$.  That construction has its proved actual maximal-order value
+properties.  The General canonical-tail theorem therefore gives actual
+companion lower data at the original order-regime split.  Substitute
+the preceding WHOLE computed original split before unpacking the
+dependent mask member and cosupport point.  This gives exactly the
+domain, maximal order, canonical restricted old tail and cosupport
+stated for the literal $U,J,BS$.  The preceding new split retains that
+same original $U,J$ and gives its genuine whole restricted empty-history
+diagram.  The true old canonical companion tail is a test history.
+Normalize its restriction of concatenation by the actual tower
+isomorphism; testness transfers and the real identity-pullback gives
+the same coherent $J$.  The original interior-empty test equivalence
+supplies testness of the normalized inserted companion tail.  The true
+new restriction diagram transfers this testness back to the whole
+new restricted companion tail.  These constructions use only the
+internally supplied original companion data and actual geometry.
+\end{proof}
+
+The added interior companion history is not asserted to be canonical or
+to have the required positive recursive value yet.  Full positive inner
+insertion, outer General values, mixed spectra and noncompact scheduling
+remain further obligations.

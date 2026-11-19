@@ -1,0 +1,131 @@
+\section{Actual whole homogeneous histories over every origin neighbourhood}
+\label{sec:hironaka-homogeneous-canonical-neighbourhoods}
+
+Retain the entire lifted coordinate model, a selected coordinate union,
+and its whole original marked datum $M_S=(X,X,\varnothing,I_{H_S},1)$.
+Let $R$ be a proved invariant whose dimension bound is at least the
+ambient dimension. All neighbourhoods below are genuine open subsets
+of the original coordinate base containing its origin. All prefixes,
+open restrictions and centres are the actual ones.
+
+\begin{theorem}[Every whole prefix value occurs over every origin neighbourhood]
+\label{hir:homogeneous-every-whole-value-over-origin-neighbourhood}
+\lean{Hironaka.HironakaHomogeneousCanonicalNeighbourhoods.exists_value_representative_over_neighbourhood}
+For any actual finite canonical prefix and any actual origin
+neighbourhood, every whole value on its entire transformed cosupport
+is represented by an actual cosupport point whose original projection
+belongs to that neighbourhood. Empty historical positions are allowed.
+\leanok
+\uses{hir:homogeneous-exact-canonical-prefix-automorphism-lift,hir:homogeneous-model-entire-record-and-prefix-value}
+\end{theorem}
+\begin{proof}
+Pull the actual open neighbourhood back under the lifted-model
+coordinate homeomorphism. It contains a genuine ball of radius
+$\epsilon>0$ about zero. For a current cosupport point with original
+coordinate image $v$, put
+$c=(\epsilon/2)/(\lVert v\rVert+1)>0$, regarded as a nonzero complex
+scalar. The actual whole-record homothety lift along the exact given
+canonical prefix preserves the entire current value and current
+cosupport. Its exact projection equation sends the actual original
+image to $cv$. The inequality
+$\lVert cv\rVert=(\epsilon/2)\lVert v\rVert/(\lVert v\rVert+1)
+\leq\epsilon/2<\epsilon$ places this actual image in the supplied open
+neighbourhood. Thus the lifted actual point is the required
+representative. This uses no invariance of the neighbourhood under
+scaling and no equality inferred from current incidence data.
+\end{proof}
+
+\begin{theorem}[The exact entire full maximum restricts to the exact local full maximum]
+\label{hir:homogeneous-origin-neighbourhood-whole-maximum-preimage}
+\lean{Hironaka.HironakaHomogeneousCanonicalNeighbourhoods.maxLocus_restrict_eq}
+For every such actual prefix and neighbourhood, the actual full maximum
+of the restricted original datum along the literal restricted history
+is exactly the preimage of the entire original full maximum.
+\leanok
+\uses{hir:homogeneous-every-whole-value-over-origin-neighbourhood,hir:invariant-order}
+\end{theorem}
+\begin{proof}
+Actual whole-transform naturality identifies the restricted cosupport
+with the preimage of the entire current cosupport. The invariant's
+actual open-history law identifies their whole values pointwise.
+An entire maximum point lying in that preimage consequently dominates
+all restricted cosupport values, so lies in the restricted maximum.
+Conversely, take a restricted maximum point and any entire cosupport
+point. The preceding theorem represents the latter's entire value at
+an actual cosupport point over the neighbourhood. The restricted
+maximum dominates that representative value. Pointwise whole-value
+compatibility therefore makes it dominate the original arbitrary
+entire value. Thus it is an entire maximum point. Both inclusions
+hold even when the cosupport is empty.
+\end{proof}
+
+\begin{lemma}[A genuine canonical centre loses no nonemptiness on restriction]
+\label{hir:homogeneous-origin-neighbourhood-exact-empty-centre-slots}
+\lean{Hironaka.HironakaHomogeneousCanonicalNeighbourhoods.centreTrace_nonempty_iff}
+For any actual next step of an actual canonical prefix, its literal
+centre trace over an origin neighbourhood is nonempty if and only if
+the actual entire centre is nonempty. Thus literal empty slots and
+nonempty full-maximum slots are preserved.
+\leanok
+\uses{hir:homogeneous-every-whole-value-over-origin-neighbourhood}
+\end{lemma}
+\begin{proof}
+A point of the literal centre trace is an actual point of the entire
+centre, giving one implication. For the other, the actual canonical
+step says its centre is empty or the entire full maximum. A nonempty
+centre excludes the empty case. Choose an actual point in that full
+maximum and represent its whole value over the neighbourhood by the
+preceding theorem. The representative is in the actual cosupport and
+has the same whole maximum value, hence is in that very entire
+centre. It defines an actual point of the literal centre trace.
+\end{proof}
+
+\begin{theorem}[Literal restriction preserves every nonempty-centre canonical history]
+\label{hir:homogeneous-origin-neighbourhood-nonempty-canonical-history}
+\lean{Hironaka.HironakaHomogeneousCanonicalNeighbourhoods.isCanonicalSegment_restrict}
+The literal restriction to an origin neighbourhood of every actual
+nonempty-centre canonical segment of $M_S$ is a nonempty-centre
+canonical segment of the literal restricted original datum.
+\leanok
+\uses{hir:homogeneous-origin-neighbourhood-whole-maximum-preimage,hir:homogeneous-origin-neighbourhood-exact-empty-centre-slots}
+\end{theorem}
+\begin{proof}
+Induct on the actual given history. Restriction of the reflexive
+history is reflexive. At a genuine next step, restriction gives
+exactly the already restricted preceding history followed by the
+actual blowup of the literal centre trace. The induction hypothesis
+gives canonicality of the preceding restricted segment. The preceding
+lemma makes its new centre trace nonempty. Its actual original centre
+is the entire full maximum, and the exact full-maximum preimage theorem
+identifies that literal trace with the entire full maximum of the
+restricted history. These are precisely the nonempty-centre canonical
+segment conditions for the actual restricted next step. No historical
+slot is discarded or inserted.
+\end{proof}
+
+\begin{theorem}[One actual entire coordinate resolution restricts canonically over every origin neighbourhood]
+\label{hir:homogeneous-common-coordinate-resolution-origin-neighbourhood}
+\lean{Hironaka.HironakaHomogeneousCanonicalNeighbourhoods.exists_common_coordinate_resolution_on_neighbourhood}
+For the actual ambient-dimensional canonical invariant and every
+selected coordinate union, every genuine origin neighbourhood has an
+internally constructed actual entire coordinate canonical resolution
+whose literal restriction is also a nonempty-centre canonical
+resolution of the literal restricted original datum.
+\leanok
+\uses{hir:homogeneous-actual-canonicalInvariant-coordinate-resolution,hir:homogeneous-origin-neighbourhood-nonempty-canonical-history}
+\end{theorem}
+\begin{proof}
+Internally construct an actual entire coordinate resolution by the
+proved ambient-dimensional canonical invariant. Its literal centre
+history is a nonempty-centre canonical segment. The preceding theorem
+makes its literal restriction another nonempty-centre canonical
+segment. The actual restriction theorem for test towers preserves
+admissibility, and the genuine cosupport restriction identity turns
+the entire final empty cosupport into the local empty cosupport.
+Hence this same entire actual tower and its literal restriction give
+the claimed two resolutions. No incoming resolution, common history,
+local maximum, or centre comparison is assumed. This is a statement
+about coordinate original models and their actual open restrictions;
+arbitrary original normal-crossing chart globalization remains a
+separate construction.
+\end{proof}

@@ -1,0 +1,87 @@
+\section{Independence of actual ambient extensions on reduced subspace models}
+\label{sec:hironaka-actual-analytic-subspace-presentation-independence}
+
+Let $C\subset M$ and $D\subset N$ be subsets of complex manifolds. The
+locally ringed models remain the literal reduced vanishing-quotient sheaves
+on the actual topological subtypes. The two ambient dimensions may differ.
+All morphisms below are the previously constructed genuine quotient-sheaf
+maps, rather than supplied structure-sheaf maps.
+
+\begin{theorem}[Ambient extensions agreeing on the actual subset have equal quotient pullbacks]
+\label{hir:actual-analytic-subspace-ambient-eqOn}
+\uses{hir:actual-analytic-subspace-holomorphic-map,hir:actual-analytic-subspace-reduced-stalks}
+\lean{Hironaka.HironakaActualAnalyticSubspacePresentationIndependence.actualAmbientRestriction_eqOn}
+\leanok
+Suppose actual holomorphic maps $f,g:M\to N$ agree on $C$. Then the two
+actual locally ringed morphisms from the model of $C$ into the actual
+ambient manifold $N$, obtained by the source inclusion followed by $f$
+and $g$, are equal.
+\end{theorem}
+\begin{proof}
+Their actual underlying continuous maps are equal by the given pointwise
+agreement on $C$. Fix $x\in C$ and an actual target holomorphic section
+$s$ over an open $U$ containing their common image. Both pullbacks are
+defined on the original opens $f^{-1}U$ and $g^{-1}U$. Restrict them to
+the genuine common open $W=f^{-1}U\cap g^{-1}U$, which contains $x$.
+For every $z\in C\cap W$ their difference has literal value
+$s(f(z))-s(g(z))=0$. The actual section vanishing criterion places the
+entire difference in the original whole vanishing section ideal. Its
+germ at $x$ therefore belongs to the original whole vanishing stalk
+ideal, so the two actual quotient stalk classes coincide. Restriction
+of sections leaves their germs unchanged. The actual stalk pullback
+formula identifies these classes with the two composite stalk maps on
+the germ of $s$. Every target stalk element is such a genuine section
+germ; the canonical stalk transport between the equal image points
+retains that same numerator. Hence the two composite stalk maps agree.
+The genuine sheaf stalk extensionality theorem, together with equality
+of the underlying maps, gives the asserted locally ringed equality.
+\end{proof}
+
+\begin{theorem}[Actual subspace morphisms depend only on their values on the source subset]
+\label{hir:actual-analytic-subspace-map-eqOn}
+\uses{hir:actual-analytic-subspace-ambient-eqOn,hir:actual-analytic-subspace-inclusion-mono,hir:actual-analytic-subspace-holomorphic-map}
+\lean{Hironaka.HironakaActualAnalyticSubspacePresentationIndependence.actualSubspaceMap_eqOn}
+\leanok
+If $f,g:M\to N$ are actual holomorphic maps carrying $C$ into $D$ and
+agreeing on $C$, their internally constructed morphisms between the
+actual locally ringed subspace models are equal.
+\end{theorem}
+\begin{proof}
+Compose both proposed subspace morphisms with the actual target
+inclusion. Their proved inclusion squares identify the composites with
+the source inclusion followed by the two actual ambient holomorphic
+maps. The preceding theorem makes these composites equal. Cancel the
+genuine monomorphism given by the actual target inclusion.
+\end{proof}
+
+\begin{theorem}[Mutually inverse ambient maps only on the subsets give actual presentation isomorphisms]
+\label{hir:actual-analytic-subspace-mutual-restriction-iso}
+\uses{hir:actual-analytic-subspace-map-eqOn,hir:actual-analytic-subspace-map-functor-laws}
+\lean{Hironaka.HironakaActualAnalyticSubspacePresentationIndependence.actualSubspaceMutualRestrictionIso}
+\leanok
+Let $f:M\to N$ and $g:N\to M$ be actual holomorphic maps carrying $C$
+into $D$ and $D$ into $C$. Suppose $g(f(x))=x$ for every $x\in C$ and
+$f(g(y))=y$ for every $y\in D$. They internally construct an actual
+isomorphism of the two reduced locally ringed subspace models, with
+literal underlying restrictions of $f$ and $g$ and their genuine
+ambient inclusion squares. No ambient inverse identity outside the
+specified subsets or ambient equality of dimensions is required.
+\end{theorem}
+\begin{proof}
+Use the two actual holomorphic maps and the two subset-containment
+hypotheses to construct the previously proved genuine locally ringed
+subspace morphisms. Their composites are the actual restrictions of
+$gf$ and $fg$ by the proved composition law. Each composite ambient
+map agrees with the relevant identity on the actual source subset.
+The preceding independence theorem equates its constructed subspace
+map with the constructed identity restriction. The actual identity
+law makes these maps the two identity morphisms. Thus the two actual
+constructed morphisms are mutually inverse and form the claimed
+locally ringed isomorphism. Their inclusion squares are already proved
+for the same actual holomorphic maps.
+\end{proof}
+
+This is a genuine comparison when actual ambient holomorphic extensions
+of the inverse subset maps are given. Holomorphic extension of arbitrary
+intrinsic overlap maps, effective atlas gluing, and descent of a resolution
+to arbitrary abstract analytic spaces remain separate obligations.

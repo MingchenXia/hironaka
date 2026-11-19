@@ -1,0 +1,53 @@
+\section{Geometric strict transforms in genuine open coordinate squares}
+
+\begin{lemma}[Actual open coordinate embeddings have bijective differentials]
+\label{hir:actual-open-coordinate-embedding-differential}
+\lean{Hironaka.HironakaActualOpenCoordinateStrictSquare.mfderiv_actual_diffeomorph_bijective,Hironaka.HironakaActualOpenCoordinateStrictSquare.mfderiv_actual_open_coordinate_bijective}
+\leanok
+A genuine biholomorphism has a bijective original complex manifold
+differential at every point. Composing such a biholomorphism onto a true
+open subset with the original open inclusion again has bijective
+differential. The source manifold and the target manifold may live in
+different universes.
+\end{lemma}
+\begin{proof}
+Differentiate the true inverse identity. The composition of the inverse
+differential and the forward differential is the identity of the same
+finite-dimensional complex model. Bijectivity of a composition of
+endomorphisms of this model implies bijectivity of each factor. The
+original open inclusion has bijective differential in its actual
+preferred charts. The actual chain rule therefore proves bijectivity
+also after composing with this inclusion.
+\end{proof}
+
+\begin{theorem}[The original geometric strict transform commutes with a genuine open coordinate square]
+\label{hir:actual-open-coordinate-geometric-strict-square}
+\uses{hir:actual-open-coordinate-embedding-differential}
+\lean{Hironaka.HironakaActualOpenCoordinateStrictSquare.strictTransform_actual_open_coordinate_square}
+\leanok
+Let $f:Y\to X$ and $g:Y'\to X'$ be actual holomorphic maps between
+equidimensional original complex manifolds. Let $a:X'\simeq V\subseteq X$
+and $b:Y'\simeq U\subseteq Y$ be actual biholomorphisms onto true open
+subsets, and suppose the actual maps satisfy $f\circ b=a\circ g$.
+For every subset $A\subseteq X$, the original geometric strict transform
+of $a^{-1}A$ by $g$ is exactly the inverse image under $b$ of the original
+geometric strict transform of $A$ by $f$. No analyticity or closedness
+hypothesis is needed, and the coordinate manifolds may have a different
+universe from the original manifolds.
+\end{theorem}
+\begin{proof}
+The preceding lemma makes the two genuine open coordinate differentials
+bijective. Differentiate the actual commutative square. The two chain
+rule compositions are equal. Since all four tangent models are the same
+finite-dimensional complex vector space, bijectivity of either composed
+differential is equivalent to bijectivity of the differential of $f$,
+respectively of $g$. Thus the actual exceptional locus of $g$ is exactly
+the inverse image of the actual exceptional locus of $f$.
+The map $b$ is continuous and open, being a true biholomorphism followed
+by a true open inclusion. Its inverse image therefore commutes with
+closure. The actual commutative square identifies the inverse images of
+$A$, and inverse images commute with set difference. Apply these three
+identities to the unchanged definition of geometric strict transform
+as closure of the inverse image outside the actual differential
+exceptional locus. This proves equality of the entire actual sets.
+\end{proof}

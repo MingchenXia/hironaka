@@ -1,0 +1,96 @@
+\section{The strict contact-plane map is genuinely the lower-dimensional blowup}
+
+The actual strict contact transform is now given its own genuine intrinsic
+complex manifold structure. Whole exceptional-ideal restriction, rather than
+an ambient marked-pullback identity with the wrong stratum, supplies the
+reverse universal-property comparison.
+
+\begin{theorem}[Actual intrinsic strict contact geometry and invertible original centre pullback]
+\label{hir:actual-plane-contact-strict-intrinsic-ideal}
+\uses{hir:actual-graph-normal-tangent-direction,bcalc:strict-submanifold,ana:submanifold-complex-structure,hir:geo-transform-wellformed,hir:actual-graph-section-whole-ideal-pullback,hir:submersion-choice-image-trace-whole-pullback}
+\lean{Hironaka.HironakaActualPlaneContactBlowupRestriction.strictPlaneChartedSpace,Hironaka.HironakaActualPlaneContactBlowupRestriction.strictPlane_isComplexManifold,Hironaka.HironakaActualPlaneContactBlowupRestriction.restrictedPlaneProjection_contMDiff,Hironaka.HironakaActualPlaneContactBlowupRestriction.restrictedPlaneProjection_invertible}
+\leanok
+For the same actual ambient blowup along the literal plane centre, the
+actual strict contact transform $S$ has a genuinely constructed complex
+manifold structure of dimension $d$. Its actual first-projected restricted
+map $\sigma:S\to\mathbf C^d$ is holomorphic and
+$\sigma^*\mathcal I_D$ is genuinely invertible. No intrinsic ideal or
+regularity/invertibility certificate is supplied.
+\end{theorem}
+\begin{proof}
+The literal contact-plane equation has actual normal derivative one, hence
+the plane is genuinely regular of dimension $d$. The actual ambient strict
+transform theorem preserves this dimension. Its genuine flattening atlas
+constructs the intrinsic complex manifold structure on the same actual
+subtype $S$, with holomorphic inclusion $i_S$. Thus
+$\sigma=p\pi i_S$ is genuinely holomorphic. The actual exceptional ideal
+is invertible along the entire strict transform, including its genuine
+nonvanishing condition there. Whole restriction to the intrinsic submanifold
+therefore gives an invertible ideal on $S$. Whole cross-dimensional ideal
+pullback composition identifies it with $(\pi i_S)^*\mathcal I_C$.
+Every actual strict-transform point maps into the original contact plane,
+so $\pi i_S=\iota\sigma$ literally. The proved whole original centre
+restriction $\iota^*\mathcal I_C=\mathcal I_D$ then identifies this same
+invertible ideal with $\sigma^*\mathcal I_D$.
+\end{proof}
+
+\begin{theorem}[Genuine universal comparisons are inverse on the actual strict contact transform]
+\label{hir:actual-plane-contact-strict-biholomorphism}
+\uses{hir:actual-plane-contact-strict-intrinsic-ideal,hir:actual-plane-contact-blowup-universal-lift,hir:actual-plane-contact-blowup-whole-strict-image,ana:submanifold-corestriction,ana:blowups}
+\lean{Hironaka.HironakaActualPlaneContactBlowupRestriction.exists_strictPlane_diffeomorph}
+\leanok
+For any genuine lower blowup $\rho:Z\to\mathbf C^d$ along $D$, there
+is an actual biholomorphism $E:Z\simeq S$ over the same original base,
+$\sigma E=\rho$. No inverse, immersion, bijection or stratum isomorphism
+is input.
+\end{theorem}
+\begin{proof}
+The preceding actual ambient lift has its entire image in $S$, so genuine
+submanifold corestriction gives a holomorphic map $\alpha:Z\to S$.
+The first theorem proves the entire original ideal pullback of $\sigma$
+invertible, so the actual lower blowup universal property constructs a
+holomorphic $\beta:S\to Z$ with $\rho\beta=\sigma$.
+Both $\beta\alpha$ and the identity are actual holomorphic maps over
+$\rho$; lower universal uniqueness makes them equal. To prove the other
+identity, compare $\kappa\beta$ and $i_S$ in the actual ambient blowup
+universal property, using the genuinely invertible whole pullback along
+$\pi i_S$. The proved original whole map identities make both maps lie
+over that same actual base map. Ambient uniqueness makes them equal.
+Actual subtype injectivity then gives $\alpha\beta=1_S$. The two
+constructed holomorphic maps and their genuine inverse identities define
+the stated actual biholomorphism. Proper surjectivity alone is never used
+as a substitute for injectivity or an inverse.
+\end{proof}
+
+\begin{theorem}[The actual restricted strict-contact map satisfies the entire lower blowup universal property]
+\label{hir:actual-plane-contact-restricted-blowup}
+\uses{hir:actual-plane-contact-strict-intrinsic-ideal,hir:actual-plane-contact-strict-biholomorphism,ana:blowup-existence,ana:blowups}
+\lean{Hironaka.HironakaActualPlaneContactBlowupRestriction.restrictedPlaneProjection_isBlowupAlong}
+\leanok
+From the original smooth closed nowhere dense $D$ and the same supplied
+actual ambient blowup alone, the restricted actual map
+$\sigma:S\to\mathbf C^d$, with the genuinely constructed intrinsic
+structure above, is an actual blowup along $D$. In particular the full
+universal property is proved for test manifolds of every dimension; no
+restricted-blowup, comparison-isomorphism or invariant-equality certificate
+is assumed.
+\end{theorem}
+\begin{proof}
+Actual blowup existence internally chooses $\rho:Z\to\mathbf C^d$.
+The preceding theorem constructs $E:Z\simeq S$ over the base.
+Original centre regularity and nowhere density are exactly the required
+centre hypotheses. Holomorphy and whole ideal invertibility of $\sigma$
+were proved in the first theorem. For any genuine holomorphic test map
+$g:T\to\mathbf C^d$ whose whole original centre pullback is invertible,
+the actual universal property of $\rho$ constructs a unique holomorphic
+$h:T\to Z$. Compose with $E$ to obtain the actual lift to $S$.
+Any other holomorphic lift to $S$ composed with $E^{-1}$ is a lift to $Z$,
+so lower universal uniqueness makes it $h$. The actual inverse identity
+then proves uniqueness in $S$. This verifies every field of the actual
+lower-dimensional blowup definition, for all test dimensions.
+\end{proof}
+
+Canonical invariant tails, maximal centres and full histories over different
+ambient presentations remain further assertions. This chapter proves the
+actual one-step contact-stratum restriction geometry and whole universal
+property, without replacing them by such invariance assumptions.

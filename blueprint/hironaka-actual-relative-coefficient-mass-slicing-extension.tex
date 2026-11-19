@@ -1,0 +1,113 @@
+\section{One actual radius for every relative normal coefficient series}
+
+Write the original coordinates as $(u,z)\in\mathbb C^d\times\mathbb C^t$.
+Fix one positive original polyradius $\rho$ on all $d+t$ coordinates,
+\emph{before} choosing any normal exponent $\gamma$. Let
+$\rho_u(i)=\rho(i)$ on the first block and $\rho_z(j)=\rho(d+j)$ on
+the second block. For $F=\sum_{\beta,\gamma}F_{\beta,\gamma}u^\beta z^\gamma$
+write the literal relative coefficient series as
+$F_\gamma(u)=\sum_\beta F_{\beta,\gamma}u^\beta$.
+Its coefficients are extracted from the actual entire formal series.
+
+\begin{lemma}[Literal exponent fibres and radius monomials split exactly]
+\label{hir:actual-relative-coefficient-radius-fibre}
+\lean{Hironaka.HironakaActualRelativeCoefficientMassSlicing.actualJoinedExponent_left_injective,Hironaka.HironakaActualRelativeCoefficientMassSlicing.radiusMonomial_actualJoinedExponent}
+\uses{hir:actual-formal-centre-power-relative-coefficients,hir:actual-monomial-owner-absolute-bounds}
+\leanok
+For each fixed actual normal exponent $\gamma$, the map
+$\beta\mapsto(\beta,\gamma)$ is injective. For all $\beta,\gamma$,
+\[
+ \rho^{(\beta,\gamma)}=\rho_u^\beta\rho_z^\gamma.
+\]
+In particular the actual normal factor $\rho_z^\gamma$ is strictly
+positive, including an empty normal block.
+\end{lemma}
+\begin{proof}
+Equality of joined exponents implies equality on every original first-block
+coordinate, hence equality of the two tangent exponents. For the radius
+identity split the finite product over the actual $d+t$ indices into its
+first $d$ and last $t$ factors. The joined exponent has the literal values
+$\beta_i$ and $\gamma_j$ on these respective blocks, giving the displayed
+factorization exactly. Every factor in the normal finite product is a
+nonnegative integer power of a strictly positive original radius and is
+strictly positive. Their product is positive; when the block is empty
+this is the empty product one.
+\end{proof}
+
+\begin{theorem}[Every actual relative coefficient has finite mass at the same fixed base radius]
+\label{hir:actual-relative-coefficient-same-radius-mass}
+\lean{Hironaka.HironakaActualRelativeCoefficientMassSlicing.normalCoefficient_hasFiniteCoefficientMass,Hironaka.HironakaActualRelativeCoefficientMassSlicing.normalCoefficient_mass_bound,Hironaka.HironakaActualRelativeCoefficientMassSlicing.normalCoefficient_mass_le_div}
+\uses{hir:actual-relative-coefficient-radius-fibre}
+\leanok
+Suppose the entire original series has finite actual absolute coefficient
+mass $|F|_\rho=\sum_{\beta,\gamma}|F_{\beta,\gamma}|\rho_u^\beta\rho_z^\gamma$.
+Then for \emph{every} $\gamma$, $F_\gamma$ has finite actual mass at the
+\emph{same} base radius $\rho_u$, and
+\[
+ \rho_z^\gamma |F_\gamma|_{\rho_u}\leq |F|_\rho,
+ \qquad
+ |F_\gamma|_{\rho_u}\leq |F|_\rho/\rho_z^\gamma.
+\]
+There is no exponent-dependent choice or shrinking of the base radius.
+\end{theorem}
+\begin{proof}
+Restrict the summable nonnegative original mass terms along the genuine
+injection $\beta\mapsto(\beta,\gamma)$. They remain summable.
+By the first lemma the resulting term is exactly
+$\rho_z^\gamma\bigl(|(F_\gamma)_\beta|\rho_u^\beta\bigr)$.
+Since the actual constant $\rho_z^\gamma$ is nonzero, division by this
+single constant proves summability of the actual coefficient mass of
+$F_\gamma$ at the unchanged base radius. Summing the same literal
+identity identifies $\rho_z^\gamma|F_\gamma|_{\rho_u}$ with the sum
+of these original mass terms on that injective fibre. All original
+terms are nonnegative, so the fibre sum is at most the full original
+sum. This gives the first inequality. Divide by the actual strictly
+positive normal factor to obtain the second inequality. The argument
+starts with the same given $\rho$ and original summable family for every
+$\gamma$, rather than choosing a separate convergence radius per label.
+\end{proof}
+
+\begin{theorem}[Every actual normal coefficient evaluates holomorphically on one common original base polydisc]
+\label{hir:actual-relative-coefficient-common-polydisc-functions}
+\lean{Hironaka.HironakaActualRelativeCoefficientMassSlicing.actualNormalCoefficientEvaluation_apply,Hironaka.HironakaActualRelativeCoefficientMassSlicing.normalCoefficient_evaluations_common_domain,Hironaka.HironakaActualRelativeCoefficientMassSlicing.normalCoefficient_evaluation_holomorphicAt_zero,Hironaka.HironakaActualRelativeCoefficientMassSlicing.normalCoefficient_evaluation_bound}
+\uses{hir:actual-relative-coefficient-same-radius-mass,hir:actual-coefficient-polydisc-holomorphy,hir:actual-coefficient-polydisc-uniform-evaluation}
+\leanok
+Under the same original hypotheses define the literal original function
+\[
+ c_\gamma(u)=\sum_\beta F_{\beta,\gamma}u^\beta
+ \quad(u\in\mathbb C^d).
+\]
+The \emph{single} original set
+$U=\{u:|u_i|<\rho_u(i)\text{ for every }i\}$ is an open neighbourhood
+of zero. Every $c_\gamma$ is holomorphic and complex smooth on $U$,
+and is a genuine holomorphic representative near zero. For every
+$u$ in the common closed base polydisc,
+\[
+ \rho_z^\gamma |c_\gamma(u)|\leq |F|_\rho.
+\]
+All functions use the same original base coordinates and the same $U$;
+no output holomorphy or common-domain certificate is supplied.
+\end{theorem}
+\begin{proof}
+For each $\gamma$ the preceding theorem supplies finite actual mass at
+exactly $\rho_u$. Apply the proved coefficient-mass evaluation theorem
+at that same radius. It gives a genuine holomorphic and complex smooth
+function on the original open polydisc, with its actual absolute value
+on the closed polydisc bounded by $|F_\gamma|_{\rho_u}$. Compose with
+the true continuous linear original-coordinate identification of
+$\mathbb C^d$ with its coordinate tuple. Its inverse image of the open
+polydisc is the displayed original $U$. It is open by continuity, and
+contains zero because all the first-block radii are strictly positive.
+The true composition rules retain holomorphy and complex smoothness on
+that same $U$ for every $\gamma$. Intersecting with this genuine open
+neighbourhood gives the claimed holomorphic representative near zero.
+Multiply the closed-polydisc bound by the positive normal radius factor
+and apply the preceding sharp mass inequality. No local identities were
+spread through infinitely many independent neighbourhoods.
+\end{proof}
+
+This establishes a common convergence and holomorphy domain for every
+literal coefficient slice of a series with one actual full mass radius.
+It does not replace prescribed older coefficient functions by an
+unproved common representative, identify a persistent Hilbert--Samuel
+locus, or assert resolution descent or termination.

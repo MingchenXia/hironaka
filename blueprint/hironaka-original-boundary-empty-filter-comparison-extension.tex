@@ -1,0 +1,148 @@
+\section{Actual canonical stages across empty original boundary positions}
+
+For an original marked datum $M$, write $M^{\mathrm{ne}}$ for the same
+entire record with its original boundary replaced by the literal ordered
+list $M.E.\mathrm{filter}(\mathrm{Nonempty})$. Only empty positions are
+deleted. No deletion history, index correspondence or final comparison
+is supplied as input.
+
+\begin{lemma}[Literal filtering preserves actual domains and whole test histories]
+\label{hir:original-boundary-empty-filter-geometry}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.nonemptyBoundary,Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.isInvDomain_nonemptyBoundary,Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.isGeoTestTower_nonemptyBoundary_iff,Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.cosupp_nonemptyBoundary_along,Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.isGeoResolution_nonemptyBoundary_iff,Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.filtered_boundary_nonemptyBoundary_along}
+\uses{hir:original-invariant-empty-actual,hir:original-empty-boundary-test-history}
+\leanok
+Every original invariant domain of $M$ is an actual domain of
+$M^{\mathrm{ne}}$. For every actual tower $T$, testness and terminality
+for the two original records are equivalent, their whole transformed
+cosupports agree, and their whole transformed boundary lists agree after
+deleting precisely the empty members.
+\end{lemma}
+\begin{proof}
+The filtered list is an actual sublist of the original ordered list.
+The actual SNC charts and transverse charts restrict to those original
+positions, while the closed submanifold, whole ideal, marking and
+nonzero-along conditions are unchanged. Thus the actual domain is
+preserved. To prove the history assertions without a supplied deletion
+history, induct over the original finite list with an arbitrary retained
+prefix. A nonempty head is retained and incorporated into that prefix.
+An empty head is exactly insertion of one empty member at the length of
+the prefix. The proved actual insertion test theorem, whole marked
+transform theorem and cosupport theorem therefore remove that head.
+This induction gives whole testness equivalence and whole cosupport
+equality for the same actual $T$. Terminality is exactly their conjunction
+with empty final cosupport. For the boundary assertion, actual insertion
+commutes with the whole chronological marked transform, and filtering
+the resulting empty member removes exactly that position. The same
+finite-list induction proves equality of the final filtered lists,
+retaining all nonempty positions in their original order.
+\end{proof}
+
+\begin{theorem}[Actual canonical centres and histories ignore only empty original positions]
+\label{hir:original-boundary-empty-filter-canonical}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.isCanonical_nonemptyBoundary_iff,Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.maxLocus_nonemptyBoundary}
+\uses{hir:original-boundary-empty-filter-geometry,hir:original-invariant-empty-canonical-histories}
+\leanok
+In every ambient dimension, for every actual tower $T$ and subset $S$
+of its final manifold, the whole maximum locus of the actual ambient
+canonical invariant on $S$ is the same for $M^{\mathrm{ne}}$ and $M$.
+Actual canonicality of $T$ for these two records is equivalent. The
+whole invariant values themselves are not asserted equal.
+\end{theorem}
+\begin{proof}
+In positive ambient dimension the actual recursively constructed value
+after one empty insertion is the proved strictly order preserving
+embedding of the old value. Its whole maximum loci therefore agree,
+and the proved actual canonical insertion theorem gives canonicality
+equivalence for the same $T$. Apply the preceding genuine finite-list
+deletion induction to these two assertions. In ambient dimension zero,
+the actual canonical invariant is the constant base-case function.
+Its maximum locus on every $S$ is independent of the boundary. Induction
+through the actual tower, using the already proved whole cosupport
+insertion equality at every prefix, gives canonicality equivalence.
+The same finite-list deletion induction completes this dimension as
+well. Thus no value-equality substitution or dimension-positivity guard
+is hidden in the result.
+\end{proof}
+
+\begin{lemma}[Entire filtered boundaries of actual canonical terminal choices]
+\label{hir:original-terminal-filtered-boundary-transport}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.terminal_filtered_boundary_transport}
+\uses{hir:original-empty-compression-filtered-boundary,hir:original-ambient-terminal-choice-intrinsic-unique-comparison,hir:original-empty-histories-filtered-boundary-comparison}
+\leanok
+For the same original invariant-domain record $M$, any two actual
+canonical terminal towers and any actual over-base biholomorphism of
+their final manifolds have equal whole ordered final boundaries after
+pullback and deletion of exactly the empty members.
+\end{lemma}
+\begin{proof}
+In positive dimension use genuine actual empty compression on each
+history, retaining the whole filtered-boundary identities and final
+cosupport identities. The compressed histories have only nonempty
+centres, are canonical and remain terminal. Actual canonical terminal
+tower uniqueness gives a genuine whole tower isomorphism between these
+compressed histories, so whole marked-transform comparison gives their
+entire boundary pullback equality. Compose this isomorphism with the
+two actual compression biholomorphisms. The resulting map is over the
+original base; intrinsic uniqueness of actual over-base biholomorphisms
+identifies it with the supplied map. Pull back the two filtered-boundary
+identities through these genuine bijections. Inverse image under a
+surjection preserves nonemptiness, so filtering commutes with these
+list maps. Cancellation of the bijective pullback proves the stated
+entire ordered equality. In ambient dimension zero actual canonicality
+and the original bound-zero domain force every actual centre to be
+empty: the current cosupport is empty, and each centre is empty or that
+whole maximum locus. The actual all-empty-tower boundary formula then
+gives the same filtered-boundary identity directly from the projection
+equation. No nonempty-stage certificate is assumed.
+\end{proof}
+
+\begin{theorem}[Actual terminal stages compare across literal empty-position changes]
+\label{hir:original-boundary-empty-filter-terminal-choice}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.terminal_choice_across_empty_boundaries}
+\uses{hir:original-boundary-empty-filter-geometry,hir:original-boundary-empty-filter-canonical,hir:original-terminal-filtered-boundary-transport,hir:original-ambient-terminal-choice-intrinsic-unique-comparison}
+\leanok
+Let two original marked records have the same closed-submanifold field,
+whole ideal and marking, and equal literal ordered lists after filtering
+only empty boundary members. Suppose the first is an actual invariant
+domain. Any actual canonical terminal tower for each record internally
+has a unique final over-base biholomorphism. That same map transports
+their whole final ordered boundaries after deleting precisely empty
+members. No stage comparison or insertion history is input.
+\end{theorem}
+\begin{proof}
+The two actual filtered records are literally equal in every field.
+The first lemma gives their actual common domain and transfers whole
+testness and terminality; the second transfers actual canonicality.
+Apply actual terminal projection uniqueness to these same two towers
+on the common filtered record, obtaining its unique actual over-base
+biholomorphism. The preceding terminal-boundary lemma transports the
+whole filtered transformed boundaries for that record. The first lemma's
+same-history filtered-boundary identities replace both sides by the
+corresponding whole boundaries for the original two records. Thus the
+same genuine map has every asserted property.
+\end{proof}
+
+\begin{theorem}[Actual first-meeting stages compare across literal empty-position changes]
+\label{hir:original-boundary-empty-filter-first-meeting-choice}
+\lean{Hironaka.HironakaOriginalBoundaryEmptyFilterComparison.first_meeting_choice_across_empty_boundaries}
+\uses{hir:original-boundary-empty-filter-geometry,hir:original-boundary-empty-filter-canonical,hir:original-first-meeting-prefix-map-unique,hir:original-first-meeting-filtered-boundary}
+\leanok
+Under the same natural original-record conditions, let two actual
+canonical prefixes both avoid the same original open and let their next
+whole actual maximum loci meet that open. Then their final projections
+have a unique over-base biholomorphism, which transports the entire
+ordered final boundaries after deleting exactly empty members.
+\end{theorem}
+\begin{proof}
+Replace each initial record by its literal filtered record. These
+records coincide in every field and have the actual common domain.
+Canonicality transfers by the second theorem, while the same actual
+towers and centres still avoid the same original open. The exact whole
+maximum-locus and cosupport equalities transfer both actual next-maximum
+encounters. Genuine original first-meeting projection uniqueness gives
+the unique over-base biholomorphism of these same prefixes. Its actual
+first-meeting boundary transport gives the ordered filtered-boundary
+equality. Finally use the first lemma's whole same-history filtered
+boundary identities to recover the boundary lists of the two original
+records. No common stopping index or terminality assumption is added.
+\end{proof}

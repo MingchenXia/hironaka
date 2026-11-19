@@ -1,0 +1,118 @@
+\section{Dynamic higher-dimensional prefixes preserve the entire original NC-good locus}
+
+Let $W$ be a closed smooth carrier in a complex manifold of positive ambient
+dimension, of fixed positive dimension $d+1$, and let $E$ be the entire ordered
+original SNC divisor. Assume $W\subset\overline{W\setminus\bigcup E}$.
+For an actual finite tower $T$, write $J_{i,T}$ for the independently defined
+chronological member ideals, $P_T$ for their actual carrier-relative product,
+and $Z_T$ for the FIRST defect: the product order exceeds the number of
+distinct proper whole germ ideals. Empty positions and boundary slots are
+retained. The original good open is the complement of the literal original
+sharp bad locus; it includes every point outside $W$ and every point where
+$W$ has normal crossings with the whole original $E$.
+
+\begin{theorem}[The entire FIRST defect through a genuine empty history]
+\label{hir:sharp-actual-empty-history-first-defect}
+\uses{hir:sharp-actual-original-composite-total-all-exceptional-residual,hir:original-all-empty-whole-boundary,hir:original-all-empty-tower-projection,hir:sharp-actual-original-controlled-history-current-first-order,bcalc:nonmonomial-order-local,bcalc:restrict-empty-tower}
+\lean{Hironaka.HironakaSharpActualNormalCrossingsGoodPreservation.chronologicalDistinctDefect_of_isEmptyTower}
+\leanok
+For every actual finite tower $T$ all of whose centres are empty,
+\[
+ Z_T=T^{-1}(Z_{\rm original}),
+\]
+where $Z_{\rm original}$ is independently defined using the original product
+and the quotient of the proper original trace germ ideals. This is a whole-set
+equality, including points outside the carrier.
+\end{theorem}
+\begin{proof}
+An actual blowup of the empty centre is a biholomorphism, so induction makes
+the literal composite projection a biholomorphism. Every closed original set
+has its actual inverse image as strict transform. The entire born divisor is
+the ordered list of $\operatorname{length}(T)$ empty members. The whole
+composite-total residual theorem identifies each $J_{i,T}$ with the
+nonmonomial part of the literal original member pullback. Appending an empty
+member does not change that part. Removing each empty entry therefore gives
+the actual carrier restriction of this raw pullback.
+
+For every holomorphic germ on the current ambient manifold, composition with
+the actual inverse projection identifies membership in this entire restricted
+ideal with membership in the original trace ideal. Conversely, composition
+with the projection and its two inverse identities recover every original
+germ. Thus both directions of equality of whole member germs are preserved,
+as is properness, tested by the unit germ. The induced equivalence of the
+actual quotient sets takes the image of precisely the proper positions onto
+the corresponding original image. Their finite cardinalities are equal;
+no indexed incidence count is substituted for the quotient count.
+
+The actual controlled/chronological product theorem identifies the order of
+$P_T$ with the nonmonomial order of the unchanged original positive marked
+product along $T$. Empty-prefix order transport identifies this with the
+original ordinary product order. The actual carrier is the inverse image of
+$W$. These carrier, count and order identities give both directions of the
+displayed whole defect equality.
+\end{proof}
+
+\begin{theorem}[Every actual dynamic prefix avoids the original good open]
+\label{hir:sharp-actual-dynamic-prefix-original-good-avoidance}
+\uses{hir:sharp-actual-empty-history-first-defect,hir:sharp-original-chronological-distinct-defect-open,hir:sharp-actual-dynamic-full-maximum-history,hir:sharp-original-distinct-defect-disjoint-entire-good-locus,bcalc:restrict-empty-tower}
+\lean{Hironaka.HironakaSharpActualNormalCrossingsGoodPreservation.dynamic_history_centresAvoid_originalGood,Hironaka.HironakaSharpActualNormalCrossingsGoodPreservation.dynamic_history_centresOver_originalSharpBad}
+\leanok
+Let $T$ be an actual dynamic full-maximum history and an actual test history
+for the unchanged original positive marked product. Every centre of $T$
+avoids the inverse image of the entire original good open. Equivalently,
+every centre lies over the literal original sharp bad locus.
+\end{theorem}
+\begin{proof}
+Induct on the actual finite tower. The assertion is vacuous for its empty
+prefix. Suppose it holds for a prefix $P$. Restrict $P$ to the entire
+original good open $U$. Its centres are genuinely empty by the restriction
+calculus. The whole chronological FIRST restriction identity, followed by
+the preceding empty-history identity, identifies the restriction of $Z_P$
+with the inverse image of the original FIRST defect for the original data
+restricted to $U$.
+
+At every point of $U$ inside its carrier, the original NC coordinates and
+the original density give genuine transversality. The actual original
+product-order/distinct-trace theorem therefore says that original FIRST
+defect is empty there; outside the carrier it is empty by definition.
+Equivalently one may use the whole original FIRST restriction identity and
+its already proved disjointness from the original good locus. Hence $Z_P$
+has no point above $U$. A nonempty dynamic next centre is the whole full
+maximum on $Z_P$, so is a subset of $Z_P$ and also misses $U$. If the defect
+has cleared, the recorded next centre is actually empty and misses $U$ as
+well. This proves the induction without assuming avoidance. Taking the
+complement of $U$ gives the stated whole centre support.
+\end{proof}
+
+\begin{theorem}[Original finite dynamic prefixes preserve all original NC-good points]
+\label{hir:sharp-actual-original-dynamic-good-preserving-prefix}
+\uses{hir:sharp-actual-dynamic-prefix-original-good-avoidance,hir:sharp-actual-original-dynamic-full-boundary-prefix,hir:admissible-sequence}
+\lean{Hironaka.HironakaSharpActualNormalCrossingsGoodPreservation.exists_original_dynamic_good_preserving_prefix}
+\leanok
+If $W$ is compact, then for each prescribed finite length $k$ there is one
+actual dynamic tower of that length which retains the original positive
+test history, the full ambient original-plus-born boundary test history,
+and the full ordered SNC divisor. Its centres lie over the original sharp
+bad locus, and its same composite projection is proper and is an isomorphism
+over every original smooth NC-good point.
+\end{theorem}
+\begin{proof}
+The genuine original-input dynamic-prefix construction chooses one actual
+tower $T$ before any added conclusion. Apply the preceding theorem to that
+same tower and its actual original test history. Its second actual test
+history is for the ambient unit, zero-mark template with initial boundary
+the entire original $E$. Together with the now proved centre support, this
+gives a genuine admissible blowup sequence over the literal original bad
+locus, with the same composite projection and the same whole ordered final
+boundary. The actual admissible-sequence theorem makes this projection an
+isomorphism over the complement of that locus, which is exactly the whole
+original good open. Properness is the actual finite-blowup properness
+theorem. The retained SNC conclusion is the whole original-strict-plus-born
+list already supplied by the same original prefix construction.
+\end{proof}
+
+This gives preservation for each genuine finite dynamic prefix in every
+fixed positive carrier dimension. It neither constructs a uniform clearing
+time nor identifies a restarted full invariant with its chronological lower
+history. Strict modified-invariant decrease, higher-dimensional sharp
+termination and the full G4 final endpoint remain separate obligations.

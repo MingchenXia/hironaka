@@ -1,0 +1,158 @@
+\section{Actual deformation equations and one analytic saturation neighborhood}
+Fix natural $d,t$ and an ORIGINAL coherent ideal sheaf $\mathfrak a$ on
+$\mathbb C^{d+t}$. No deformation model, equation presentation, stable
+index, saturation or normal-cone identity is an additional input. Put
+$D=d+t+1+t$ and use the literal coordinates $(x,y,u,v)$ on
+$\mathbb C^D$, with $x\in\mathbb C^d$ and $y,v\in\mathbb C^t$.
+All memberships below are memberships of whole holomorphic germs.
+
+\begin{theorem}[The actual coordinate projection and deformation equations]
+\label{hir:relative-normal-deformation-equations}
+\lean{Hironaka.HironakaRelativeNormalDeformationSaturation.deformationDimension,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationProjection,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationParameter,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationFiberCoordinate,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationEquation,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationParameter_holomorphic,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationEquation_holomorphic}
+\leanok
+\uses{hir:relative-normal-original-split}
+The internally defined continuous linear projection is
+$p(x,y,u,v)=(x,y)$. The internally defined parameter and fiber coordinates
+are $u$ and $v_i$. The actual finite equations are the literal entire
+functions $e_i(x,y,u,v)=uv_i-y_i$. The parameter and all equations are
+holomorphic on the whole enlarged ambient space.
+\end{theorem}
+\begin{proof}
+Project to the first $d+t$ coordinates using the actual first-coordinate
+continuous linear projection. Each specified scalar coordinate is its
+genuine continuous linear functional, not a chosen point value. The parameter
+is therefore everywhere complex differentiable. Multiplication of the two
+actual coordinate functions, followed by subtraction of the actual original
+normal coordinate, gives the literal equation and everywhere complex
+differentiability. The first-coordinate projection is an actual smooth
+holomorphic map. All constructions also apply to $d=0$ and $t=0$.
+\end{proof}
+
+\begin{theorem}[The actual original deformation equation ideal is coherent]
+\label{hir:relative-normal-deformation-original-ideal}
+\lean{Hironaka.HironakaRelativeNormalDeformationSaturation.deformationEquationIdeal,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationEquationIdeal_isCoherent,Hironaka.HironakaRelativeNormalDeformationSaturation.originalDeformationIdeal,Hironaka.HironakaRelativeNormalDeformationSaturation.originalDeformationIdeal_isCoherent}
+\leanok
+\uses{hir:relative-normal-deformation-equations,oka:coherence,oka:coherent-colon}
+Internally define
+$\mathcal K=p^*\mathfrak a+(e_i:i\in\{1,\ldots,t\})$
+as the sum of the genuine original ideal pullback and the entire finite
+equation ideal. Original coherence alone makes this actual ideal coherent.
+\end{theorem}
+\begin{proof}
+The finite equation ideal records precisely the holomorphic finite span of
+the actual family $e_i$ at each point. Its global entire generators give a
+coherent presentation on the entire enlarged space, including the empty
+family when $t=0$. Actual smooth holomorphic pullback carries the original
+coherent ideal to a coherent ideal by the genuine coherent pullback theorem.
+The actual sheaf sum consists of the finite holomorphic span of the union of
+these two actual stalk predicates. The coherent sum theorem supplies a local
+finite presentation of this literal sum. Thus the equation model is built
+from the original ideal; no presentation or kernel conclusion is supplied.
+\end{proof}
+
+\begin{theorem}[Every actual repeated parameter colon is a coherent ideal]
+\label{hir:relative-normal-deformation-coherent-colons}
+\lean{Hironaka.HironakaRelativeNormalDeformationSaturation.germIdeal_finitely_generated_at,Hironaka.HironakaRelativeNormalDeformationSaturation.finitely_generated_at_isCoherent,Hironaka.HironakaRelativeNormalDeformationSaturation.actualColonGermIdeal,Hironaka.HironakaRelativeNormalDeformationSaturation.actualColonGermIdeal_isCoherent,Hironaka.HironakaRelativeNormalDeformationSaturation.originalDeformationColonIdeal,Hironaka.HironakaRelativeNormalDeformationSaturation.originalDeformationColonIdeal_isCoherent}
+\leanok
+\uses{hir:relative-normal-deformation-original-ideal,hir:relative-normal-coherent-saturation-colon-dictionary,oka:coherent-colon}
+Let $\mathcal K_0=\mathcal K$ and let $\mathcal K_{q+1}$ consist of
+holomorphic germs $g$ with $gu\in\mathcal K_q$. These are the literal
+repeated parameter colons. Each is a genuine coherent ideal on the whole
+enlarged space, internally produced for every natural $q$.
+\end{theorem}
+\begin{proof}
+At an arbitrary actual point, the original coherent presentation converts
+manifold holomorphic finite spans to ordinary complex differentiable finite
+spans, using the model-space derivative equivalence. Actual Euclidean Oka
+coherence then produces a finite presentation for the colon by the actual
+holomorphic parameter. Induct on $q$ at this same arbitrary point. Reindex
+any finite generator type by its genuine equivalence with a finite ordinal;
+finite sums are unchanged under this equivalence, so conversion back gives
+the required manifold coherent presentation. No finite colon generators are
+caller data. The recorded predicate is exactly the recursive functional
+colon, including its holomorphic-germ condition, at every point.
+\end{proof}
+
+\begin{theorem}[One genuine open stabilizes all powers and the entire actual saturation]
+\label{hir:relative-normal-deformation-uniform-saturation}
+\lean{Hironaka.HironakaRelativeNormalDeformationSaturation.exists_original_deformation_uniform_saturation}
+\leanok
+\uses{hir:relative-normal-deformation-original-ideal,hir:relative-normal-deformation-coherent-colons,hir:relative-normal-coherent-saturation-original-consumer}
+Original coherence internally produces a natural $N$ and ONE open
+neighborhood $U$ of the origin such that, at EVERY $z\in U$ and for EVERY
+whole ambient function $g$, all $\mathcal K_{N+q,z}$ have the same
+membership as $\mathcal K_{N,z}$ for EVERY natural $q$. For every $q\geq N$
+and every holomorphic $g$ at $z$,
+$gu^q\in\mathcal K_z\iff gu^N\in\mathcal K_z$.
+Moreover $g$ belongs to SOME $\mathcal K_{q,z}$ if and only if it belongs
+to the one actual coherent ideal $\mathcal K_{N,z}$.
+\end{theorem}
+\begin{proof}
+Apply the genuine original-input coherent saturation producer to the actual
+coherent equation ideal and the actual holomorphic parameter. Internally
+Noetherianity of the whole origin germ ring selects $N$. Actual Oka coherent
+presentations of the two consecutive colons and whole finite functional
+membership witnesses shrink to ONE neighborhood where the two entire stalks
+agree at EVERY point. Literal colon induction propagates this equality to
+ALL subsequent powers on that SAME open. The true entire-power dictionary
+and actual original ideal closure identify the entire increasing saturation
+union with the internally selected colon. Substitute the exact recursive
+GermIdeal predicates just defined. No stabilization index, neighborhood,
+saturation certificate or nearby cone identity is supplied by the caller.
+\end{proof}
+
+\begin{theorem}[The actual effective central restriction]
+\label{hir:relative-normal-deformation-central-restriction}
+\lean{Hironaka.HironakaRelativeNormalDeformationSaturation.deformationCentralInclusion,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationCentralInclusion_tangent,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationCentralInclusion_normal,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationCentralInclusion_parameter,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationCentralInclusion_fiber,Hironaka.HironakaRelativeNormalDeformationSaturation.deformationEquation_central,Hironaka.HironakaRelativeNormalDeformationSaturation.originalDeformationCentralIdeal,Hironaka.HironakaRelativeNormalDeformationSaturation.originalDeformationCentralIdeal_isCoherent}
+\leanok
+\uses{hir:relative-normal-deformation-equations,hir:relative-normal-deformation-coherent-colons}
+The internally constructed continuous linear map
+$j:\mathbb C^{d+t}\to\mathbb C^D$ is
+$j(x,v)=(x,0,0,v)$. It has exactly the displayed tangent, original normal,
+parameter and fiber coordinate dictionary; EVERY actual equation vanishes
+identically on its image. The actual central restriction
+$j^*\mathcal K_N$ is a genuine coherent ideal for every $N$.
+\end{theorem}
+\begin{proof}
+Use the actual finite product of coordinate continuous linear functionals,
+followed by the genuine product-to-Euclidean continuous linear equivalence.
+In the tangent block use the corresponding original tangent functional; in
+the added fiber block use the corresponding original fiber functional; in
+the original normal and parameter blocks use the zero functional. The index
+blocks are disjoint. Evaluating at each specified coordinate gives precisely
+its literal coordinate, or zero for an absent block. In the actual equation this yields $0\cdot v_i-0=0$
+as an identity of entire functions. The map is a genuine continuous linear
+map, hence smooth holomorphic. Pull back the actual coherent selected colon
+along this map using the genuine coherent pullback theorem. This constructs
+the actual restriction; it does not identify it with an associated graded
+ideal before that separate whole-ideal dictionary is proved.
+\end{proof}
+
+\begin{theorem}[The original ideal jointly produces the actual coherent saturation model]
+\label{hir:relative-normal-deformation-original-model}
+\lean{Hironaka.HironakaRelativeNormalDeformationSaturation.exists_original_deformation_saturated_model}
+\leanok
+\uses{hir:relative-normal-deformation-uniform-saturation,hir:relative-normal-deformation-central-restriction}
+Only $d,t$ and original coherent $\mathfrak a$ jointly produce the actual
+projection, parameter and equation ideal, the internally selected $N,U$,
+the SAME actual coherent $\mathcal K_N$ with the entire all-power and
+saturation dictionaries on $U$, and its actual coherent central restriction.
+\end{theorem}
+\begin{proof}
+Retain the actual $N,U$ from the uniform original-input producer, and append
+coherence of the literal $N$th colon and coherence of its literal central
+pullback, already proved for every index. The entire all-point/all-power
+dictionary is unchanged. Thus all output objects are constructed from the
+same original ideal and the same actual equations. The conclusion is a
+joint actual model, not an independently supplied result certificate.
+\end{proof}
+
+\paragraph{Open frontier.}
+The actual equation saturation model and its actual central restriction have
+NOT yet been identified with the nearby entire original Rees algebra or
+whole original associated graded cone. These dictionaries are independent
+remaining obligations. The finite analytic coefficient model and the origin
+localized all-degree algebra are not promoted to nearby all-degree freeness.
+Analytic normal-flat neighborhoods, higher Hilbert--Samuel strata and G8
+remain open. No canonical map of all origin germs into arbitrary nearby
+stalks is used.

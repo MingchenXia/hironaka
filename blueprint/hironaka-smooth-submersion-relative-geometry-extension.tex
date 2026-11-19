@@ -1,0 +1,121 @@
+\section{Whole original relative geometry under genuine smooth submersions}
+
+\begin{theorem}[Every original simultaneous coordinate family]
+\label{hir:submersion-relative-coordinate-families}
+\uses{hir:submersion-nc-full-lifted-coordinates}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeGeometry.isCoordinateFamilyAt_preimage_submersion}
+For a genuine holomorphic submersion $f:Y^m\to X^n$ and any original
+coordinate family at $f(y)$, there is an internally produced coordinate
+embedding $\rho:\{1,\ldots,n\}\hookrightarrow\{1,\ldots,m\}$ such that
+every entire preimage member is the coordinate subspace cut out by the
+image under $\rho$ of precisely its original cutting-coordinate set.
+\end{theorem}
+\begin{proof}
+Apply the genuine lifted product-coordinate construction to the actual
+centered original chart. It supplies a centered chart at $y$, defined on
+a genuine ambient open neighborhood, whose coordinates indexed by
+$\rho$ are exactly all original coordinates composed with $f$.
+Every point of its domain maps into the original chart domain. Substitute
+this complete dictionary into each original member equation. A vector
+vanishes on the mapped finite index set exactly when its original
+coordinates vanish on the original index set, since $\rho$ is injective.
+Thus the same internally constructed chart simultaneously gives all
+original preimage members; no preimage-chart certificate is an input.
+\end{proof}
+\leanok
+
+\begin{theorem}[Original regular points and closed submanifolds]
+\label{hir:submersion-relative-regular-geometry}
+\uses{hir:submersion-relative-coordinate-families}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeGeometry.regularAtDim_preimage_submersion,Hironaka.HironakaSmoothSubmersionRelativeGeometry.isClosedSubmanifold_preimage_submersion}
+If the original set $N$ is regular of dimension $j$ at $f(y)$,
+then $f^{-1}N$ is regular of dimension $j+m-n$ at $y$.
+Consequently a closed original submanifold has a closed submanifold
+preimage under a genuine global holomorphic submersion.
+\end{theorem}
+\begin{proof}
+The original regular chart cuts out $N$ by exactly the last $n-j$
+coordinates. The preceding simultaneous coordinate dictionary cuts out
+its preimage by the injective image of those same $n-j$ coordinates.
+An actual finite coordinate permutation puts precisely those cutting
+coordinates last. Its induced complex linear isometry is a global
+holomorphic equivalence, with holomorphic inverse; compose it with the
+actual lifted chart. This is a true regular flattening of dimension
+$m-(n-j)=j+(m-n)$. The actual submersion internally implies $n\le m$,
+and the original regularity implies $j\le n$, so the equality and dimension
+bound hold also when either dimension is zero. For the global statement,
+continuity gives closedness and apply this actual regular flattening
+at every preimage point to its original regular dimension.
+\end{proof}
+\leanok
+
+\begin{theorem}[Entire original normal crossings and transversality]
+\label{hir:submersion-relative-nc-transversality}
+\uses{hir:submersion-relative-coordinate-families}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeGeometry.hasNormalCrossings_preimage_submersion,Hironaka.HironakaSmoothSubmersionRelativeGeometry.isTransverse_preimage_submersion}
+The whole preimage of an original centre with normal crossings with
+the original ordered boundary again has normal crossings with the
+entire pulled boundary. The entire pulled boundary is transverse
+to the whole preimage of an original transverse underlying set.
+\end{theorem}
+\begin{proof}
+At each actual preimage point apply the preceding family construction
+to the original simultaneous family consisting of the underlying set
+or centre and every indexed original boundary member. Identify the
+pulled list index with the same original index; list length and order
+are unchanged. Images under the single injective coordinate map retain
+the cardinality one of each actual through-member cutting set.
+For transversality, two mapped index sets intersect only when their
+original index sets intersect, by injectivity. Hence every original
+disjointness relation with the underlying cutting set is retained.
+These are exactly the original definitions on the entire preimage;
+empty and repeated historical list entries remain literal.
+\end{proof}
+\leanok
+
+\begin{theorem}[Actual original nonvanishing along the whole preimage]
+\label{hir:submersion-relative-nonzero}
+\uses{hir:submersion-relative-coordinate-families,hir:submersion-local-section}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeGeometry.isNonzeroAlongAt_preimage_submersion}
+A coherent original ideal which is nonzero along the original underlying
+set at $f(y)$ has an actual nonzero germ along the entire preimage at $y$.
+The original underlying set is arbitrary.
+\end{theorem}
+\begin{proof}
+Choose the actual original ideal germ nonzero at points of the original
+set arbitrarily close to $f(y)$. Its composition with the genuine smooth
+map belongs to the whole original pulled ideal. The genuine local
+holomorphic section through $y$ gives exactly
+$f_*(\mathcal N_y)=\mathcal N_{f(y)}$: continuity gives one inclusion
+and composition with the section gives the other. Transport the original
+frequent nonzero predicate through this equality. It says precisely that
+the actual composed germ is nonzero at points of the entire original
+preimage set arbitrarily close to $y$. No caller witness on the preimage
+is used and no analyticity of that set is required.
+\end{proof}
+\leanok
+
+\begin{theorem}[Whole original marked geometry and invariant domain]
+\label{hir:submersion-relative-invariant-domain}
+\uses{hir:submersion-relative-regular-geometry,hir:submersion-relative-nc-transversality,hir:submersion-relative-nonzero,hir:submersion-nc-entire-snc-preimage}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeGeometry.isWellFormed_markedPullback_submersion,Hironaka.HironakaSmoothSubmersionRelativeGeometry.isInvDomain_markedPullback_submersion}
+The entire actual marked preimage of an original well-formed marked
+ideal is well formed. An original invariant domain of underlying
+dimension at most $k$ gives an actual preimage invariant domain of
+underlying dimension at most $k+m-n$, with the same original marking.
+\end{theorem}
+\begin{proof}
+The actual marked pullback retains the entire preimage underlying set,
+whole ideal pullback, original ordered preimage boundary and original
+mark. The preceding producers give closed submanifold geometry,
+transversality and nonvanishing. Genuine holomorphic pullback gives
+coherence and the genuine whole SNC producer gives the entire boundary
+condition. At each original point select its actual regular dimension
+$j\le k$ from the original domain. The preceding regular producer gives
+the preimage dimension $j+(m-n)\le k+(m-n)$. The original positive mark
+is unchanged. These are all fields of the true original invariant-domain
+definition; no preimage well-formedness, dimension or nonvanishing
+certificate is supplied. Higher invariant equality, genuine blowup
+base change and complete canonical smooth functoriality remain open.
+\end{proof}
+\leanok

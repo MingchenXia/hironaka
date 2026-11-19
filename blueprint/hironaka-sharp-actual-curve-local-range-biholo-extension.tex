@@ -1,0 +1,79 @@
+\section{Genuine local inverses on the actual global sharp endpoint}
+
+The actual global complex endpoint is constructed, but a continuous inverse
+of its local open embedding is not automatically a proved holomorphic inverse.
+This chapter derives inverse regularity from the genuine lifted local charts,
+then supplies the exact local finite-history projection dictionary required
+for subsequent strict-carrier and divisor descent.
+
+\begin{lemma}[The actual range homeomorphism has a genuine holomorphic inverse]
+\label{hir:sharp-actual-endpoint-local-range-inverse-holomorphic}
+\uses{hir:sharp-actual-original-global-complex-endpoint,hir:sharp-actual-endpoint-saturated-local-range}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localRangeOpen,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localHomeomorphism,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localHomeomorphism_point,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localHomeomorphism_inverse_point,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localHomeomorphism_contMDiff,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localHomeomorphism_symm_contMDiff}
+For a genuine endpoint chart of the constructed global complex manifold,
+construct the actual homeomorphism from its original local endpoint onto
+its real open inclusion range. Both its forward map and its actual inverse
+are holomorphic, with their exact original point identities.
+\end{lemma}
+\begin{proof}
+The proved local open embedding gives the genuine range homeomorphism,
+with both inverse point laws. Its forward map is holomorphic by the actual
+local inclusion theorem followed by the real range-subtype lift. For an
+actual point in the range, let its genuine inverse be x. Take the true local
+chart e at x and its actual lifted chart c in the global manifold. The real
+inverse point equation puts the range point in c's true source and identifies
+its c-coordinate with e(x).
+
+The actual chart-atlas membership and genuine maximal-atlas inverse theorem
+make the composition of c, the real range inclusion, and e inverse holomorphic
+at that point. On the actual open preimage of c's source, write a point as an
+included local point. Injectivity of the true open embedding and the genuine
+homeomorphism inverse equation identify its inverse with that local point.
+The real lifted-chart formula then says that the composition is exactly the
+actual homeomorphism inverse on this genuine neighborhood. Thus that actual
+inverse is holomorphic everywhere, without an inverse-regularity certificate.
+\end{proof}
+
+\begin{theorem}[The actual local endpoint is biholomorphic to its whole saturated range]
+\label{hir:sharp-actual-endpoint-local-range-biholomorphism}
+\uses{hir:sharp-actual-endpoint-local-range-inverse-holomorphic}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localBiholomorphism,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localBiholomorphism_point,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.originalLocalBiholomorphism}
+Construct a real biholomorphism from every actual finite-history endpoint
+to its ENTIRE genuine saturated inclusion range, with the exact OLD local
+inclusion as its underlying map. For the original-only atlas all these data
+are constructed from only the original curve, ordered SNC and density input.
+\end{theorem}
+\begin{proof}
+Use the genuine homeomorphism's actual equivalence as the two inverse maps,
+and attach the two independently proved holomorphic directions. Its underlying
+point is the actual inclusion by construction, not just an abstract isomorphic
+model. The original-only consumer uses the already constructed actual recipe
+atlas and real base cover; no local history, chart, inverse or comparison is a
+new caller hypothesis.
+\end{proof}
+
+\begin{theorem}[The genuine restricted global projection is the actual old finite-history projection]
+\label{hir:sharp-actual-endpoint-local-range-projection-dictionary}
+\uses{hir:sharp-actual-endpoint-local-range-biholomorphism,hir:sharp-actual-endpoint-glued-projection,hir:sharp-actual-endpoint-saturated-local-range}
+\leanok
+\lean{Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localRangeProjection,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localRangeProjection_biholomorphism,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localRangeProjection_inverse,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.localRangeProjection_contMDiff,Hironaka.HironakaSharpActualCurveLocalRangeBiholomorphism.originalLocalBiholomorphism_projection}
+The actual global projection restricted to this real saturated range takes
+values in the original actual base open. Through the genuine local
+biholomorphism it is exactly the SAME original prefix-and-tail finite-history
+projection. The reverse formula at EVERY actual range point and holomorphicity
+of this true base-open-valued restricted map are also proved.
+\end{theorem}
+\begin{proof}
+Saturated-range equality supplies membership of each real global projected
+point in the original base open, constructing the genuine restricted map.
+The proved local component equation and actual append-projection identity
+identify its value after the local biholomorphism with the true finite-history
+projection, by real subtype extensionality. Evaluate this equation at the
+actual inverse image of any range point and use the genuine inverse law to
+obtain the reverse formula. Thus the restricted map equals the actual old
+finite-history projection composed with the proved holomorphic inverse.
+Their true composition proves holomorphicity. No global strict carrier,
+divisor identification or sharp driver is inferred from this dictionary alone.
+\end{proof}

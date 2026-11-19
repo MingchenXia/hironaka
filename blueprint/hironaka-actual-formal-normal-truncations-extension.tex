@@ -1,0 +1,85 @@
+\section{Actual base completion of whole normal truncations}
+
+Write $B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+$\widehat B=\mathbb C[[u_1,\ldots,u_d]]$ and
+$\widehat R=\mathbb C[[u_1,\ldots,u_d,x_1,\ldots,x_t]]$.
+The base action on $\widehat R$ is actual first-block renaming.
+Let $N=(x_1,\ldots,x_t)$ in $R$ and $\widehat N$ the same formal
+normal-variable ideal. All coefficient rings, normal coordinates and
+Taylor maps retain their literal original definitions.
+
+\begin{theorem}[Whole formal normal monomial coordinates]
+\label{hir:actual-formal-normal-truncation-coordinates}
+\lean{Hironaka.HironakaActualFormalNormalTruncations.formalNormalMonomialMap,Hironaka.HironakaActualFormalNormalTruncations.formalNormalPowerLinearEquiv}
+\leanok
+\uses{hir:actual-relative-polynomial-formal-taylor-coefficient,hir:actual-formal-coordinate-power-coefficient-kernel}
+For every $q\geq0$, actual finite normal monomial combination gives a
+$\widehat B$-linear isomorphism
+\[
+ \widehat B^{\{\gamma\in\mathbb N^t:\lvert\gamma\rvert<q\}}
+ \simeq\widehat R/\widehat N^q.
+\]
+\end{theorem}
+\begin{proof}
+Send a coefficient family $a$ to the class of the finite sum
+$\sum_{\lvert\gamma\rvert<q}a_\gamma(u)x^\gamma$. The actual
+normal-block coefficient of this sum is exactly $a_\gamma$ at every
+listed exponent. Hence a sum in $\widehat N^q$ has every listed whole
+coefficient zero, proving injectivity. Conversely, for a whole formal
+series $F$, take $a_\gamma$ to be its actual entire tangential coefficient
+series at normal exponent $\gamma$. The difference between $F$ and the
+stated finite sum has all coefficients of normal degree below $q$ zero,
+so the genuine coordinate-power coefficient criterion puts the whole
+difference in $\widehat N^q$. This proves surjectivity. Multiplication
+by a renamed base series distributes through the finite sum, proving
+$\widehat B$-linearity. For $q=0$ the index set and quotient are both zero.
+\end{proof}
+
+\begin{theorem}[Actual Taylor numerators preserve all finite normal coordinates]
+\label{hir:actual-formal-normal-truncation-taylor}
+\lean{Hironaka.HironakaActualFormalNormalTruncations.formalNormalMonomialMap_actualTaylorCoordinates}
+\leanok
+\uses{hir:actual-formal-normal-truncation-coordinates,hir:actual-relative-coefficient-literal-formal-taylor-dictionary}
+The actual analytic normal coordinates of $g\in R$, expanded by the
+original base Taylor map, represent exactly $[\widehat g]$ in
+$\widehat R/\widehat N^q$.
+\end{theorem}
+\begin{proof}
+The previously proved entire relative-coefficient identity says that
+each actual formal normal coefficient of $\widehat g$ is the original
+base Taylor expansion of the same actual analytic coefficient germ.
+The actual normal monomial coordinates of $[g]\in R/N^q$ are these
+same coefficient germs at every degree below $q$. Thus both formal
+representatives have identical entire coefficient series in all normal
+degrees below $q$. Their difference lies in $\widehat N^q$ by the whole
+coordinate-power criterion, proving equality of their original classes.
+\end{proof}
+
+\begin{theorem}[Canonical whole finite-normal-jet base change]
+\label{hir:actual-formal-normal-truncation-base-change}
+\lean{Hironaka.HironakaActualFormalNormalTruncations.normalTruncationBaseChangeEquiv,Hironaka.HironakaActualFormalNormalTruncations.normalTruncationBaseChangeEquiv_tmul_mk}
+\leanok
+\uses{hir:actual-formal-normal-truncation-coordinates,hir:actual-formal-normal-truncation-taylor,hir:relative-normal-basis-actual-entire-quotient-basis}
+For every $q\geq0$, one has an actual $\widehat B$-linear isomorphism
+\[
+ \widehat B\otimes_B(R/N^q)\simeq\widehat R/\widehat N^q,
+ \qquad c\otimes[g]\longmapsto c[\widehat g].
+\]
+\end{theorem}
+\begin{proof}
+The established analytic normal monomial basis identifies $R/N^q$ with
+the finite family of copies of the entire ring $B$. Tensor this actual
+linear isomorphism with $\widehat B$. The genuine finite-family tensor
+isomorphism identifies the result with the same family of copies of
+$\widehat B$. Compose with the formal normal-coordinate isomorphism
+already proved. On a pure tensor, its coefficients are $c$ times the
+base Taylor expansions of the analytic normal coordinates. The preceding
+Taylor-coordinate identity therefore gives exactly the displayed
+original-numerator formula. Every component is an actual linear
+isomorphism, so the construction is bijective in every order, including zero.
+\end{proof}
+
+This is the ambient normal-power dictionary, before quotienting by an
+additional original ideal. Equality of the entire extended ideal images,
+compatibility with reduced standard monomial families, and the whole
+reduced-vertex normal-power assertion remain separate obligations.

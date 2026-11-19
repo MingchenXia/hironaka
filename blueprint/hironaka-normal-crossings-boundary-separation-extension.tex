@@ -1,0 +1,203 @@
+\section{An actual finite separation tower for the original NC carrier}
+\label{sec:hironaka-normal-crossings-boundary-separation}
+
+The strict carrier in this section is the actual closure of the preimage
+off the differential exceptional locus. The construction stops at original
+branch count at most one. All centres have original count at least two;
+the Cartier centre-removal case is never used in this tower.
+
+\begin{lemma}[Actual original density off a higher highest stratum]
+\label{hir:general-nc-higher-highest-relative-density}
+\lean{Hironaka.HironakaNormalCrossingsBoundarySeparation.subset_closure_sdiff_highest_of_two_le,Hironaka.HironakaNormalCrossingsBoundarySeparation.geoStrictTransform_highest_eq_strictTransform}
+\leanok
+\uses{hir:general-nc-highest-stratum-branch-adapted-coordinates,hir:general-nc-intrinsic-branch-multiplicity}
+Let $H$ be a genuine original NC carrier whose branch counts are at most
+$r\ge2$, and let $C$ be its whole highest stratum. Then
+$H\subseteq\overline{H\setminus C}$. Consequently the centre-removed
+geometric strict transform in any genuine blowup of $C$ equals its
+actual differential-exceptional-locus strict transform.
+\end{lemma}
+\begin{proof}
+A point of $H$ outside $C$ already belongs to $H\setminus C$.
+At a point of $C$, the produced actual centred coordinates express
+$H$ as the union of the last $r$ coordinate hyperplanes and $C$ as
+their intersection. There are two distinct indices $i,j$ in that block
+since $r\ge2$. For any neighbourhood of the original point, the actual
+coordinate inverse is continuous at zero and has an open target domain.
+Hence for sufficiently small nonzero complex $t$, the vector $t e_j$
+lies in that target and its actual inverse lies in the chosen
+neighbourhood. Its $i$th coordinate is zero, so it belongs to the
+actual original carrier; its $j$th coordinate is nonzero, so it lies
+outside the whole centre. Every neighbourhood thus meets
+$H\setminus C$, proving the actual relative density. The proved
+genuine blowup strict-transform comparison applies to this produced
+density and gives the stated exact equality. No density or strict
+transform dictionary is an input.
+\end{proof}
+
+\begin{lemma}[Actual smooth terminal carrier and transverse boundary]
+\label{hir:general-nc-count-one-smooth-terminal-pair}
+\lean{Hironaka.HironakaNormalCrossingsBoundarySeparation.regularAtDim_of_branchMultiplicity_le_one,Hironaka.HironakaNormalCrossingsBoundarySeparation.isClosedSubmanifold_of_branchMultiplicity_le_one,Hironaka.HironakaNormalCrossingsBoundarySeparation.isTransverse_of_boundaryAdapted_count_le_one,Hironaka.HironakaNormalCrossingsBoundarySeparation.isSNCDivisor_append_original_of_count_le_one}
+\leanok
+\uses{hir:general-nc-simultaneous-original-boundary,hir:general-nc-highest-multiplicity-smooth-centre}
+If a boundary adapted pair has all original branch counts at most one,
+its whole original carrier is a closed smooth submanifold, regular
+of dimension $n-1$ at each of its points, and is transverse to its
+actual SNC boundary. The list obtained by appending that entire
+original carrier to the boundary is SNC.
+\end{lemma}
+\begin{proof}
+At a point of the carrier, the actual intrinsic count is positive,
+so it is exactly one. The intrinsic count-one superlevel is exactly
+the whole carrier, including all its connected components, because
+positivity is equivalent to actual carrier membership. The genuine
+highest-superlevel regularity theorem therefore produces its actual
+regular coordinates of dimension $n-1$ everywhere on the carrier;
+it is closed by the original pair hypothesis. Alternatively in the
+actual simultaneous coordinates its selected original set has exactly
+one index. The whole union equation is then that single hyperplane
+equation, hence also its singleton coordinate-subspace equation.
+The existing through boundary singletons are disjoint from it and
+mutually distinct, giving actual transversality on the same domain.
+Appending the original carrier adds precisely that new singleton at
+points of the carrier and no through member elsewhere, so the actual
+whole appended list satisfies SNC. If the original carrier is empty,
+all regularity and transversality claims are vacuous and the appended
+empty member creates no through coordinate condition. Dimension zero
+is included: positive original count there is impossible.
+\end{proof}
+
+\begin{definition}[A genuine intrinsic higher separation step]
+\label{hir:general-nc-intrinsic-higher-separation-step}
+\lean{Hironaka.HironakaNormalCrossingsBoundarySeparation.IsHigherSeparationCentre}
+\leanok
+\uses{hir:general-nc-simultaneous-original-boundary}
+A current carrier $H$, current finite boundary $E$ and current centre
+$C$ form an intrinsic higher separation step when they have an actual
+boundary adapted pair, an attained whole global original maximum
+$r\ge2$, and $C$ is exactly that whole highest original stratum.
+This is a geometric condition on one current centre, not a finite
+tower or a termination certificate.
+\end{definition}
+
+\begin{lemma}[A genuinely produced higher step and exact original transform]
+\label{hir:general-nc-actual-higher-separation-step}
+\lean{Hironaka.HironakaNormalCrossingsBoundarySeparation.exists_higher_boundary_blowup,Hironaka.HironakaNormalCrossingsBoundarySeparation.higherSeparationCentre_subset,Hironaka.HironakaNormalCrossingsBoundarySeparation.higherSeparationCentre_geometry}
+\leanok
+\uses{hir:general-nc-boundary-transform-original-count-step,hir:general-nc-higher-highest-relative-density}
+A boundary adapted pair whose original counts are not all at most
+one internally produces its attained maximum $r\ge2$, its nonempty
+whole closed smooth centre of codimension $r$, a genuine blowup, and
+an actual transformed pair with every original count at most $r-1$.
+Its original carrier is exactly the differential strict transform;
+the current accumulated boundary is exactly the strict old list
+followed by the new exceptional preimage.
+\end{lemma}
+\begin{proof}
+The failure of the count-one bound gives an actual point of count
+greater than one and hence a nonempty original carrier. The genuine
+finite intrinsic-count image produces an attained positive maximum
+$r$, bounding that point, so $r\ge2$. Its whole stratum is nonempty,
+closed and regular of dimension $n-r$ at every centre point, by the
+actual maximum-stratum producer. Its entire centre lies in the
+original carrier because its count is positive. The actual simultaneous
+pair coordinates flatten the centre using the original selected indices;
+all through old boundary singletons are disjoint from those indices,
+so the entire centre is transverse to the actual SNC boundary.
+The genuine blowup and whole
+transformed-pair producer then give the actual projection, true
+accumulated boundary list and smaller original count. The preceding
+actual relative-density theorem identifies this centre-removed
+original strict carrier with the differential strict carrier.
+The old boundary uses exactly its genuine centre-removed strict
+transforms, as required by the accumulated-boundary operation; no
+replacement of those boundary definitions is made.
+\end{proof}
+
+\begin{theorem}[A bounded actual tower with literal higher centres]
+\label{hir:general-nc-bounded-actual-separation-tower}
+\lean{Hironaka.HironakaNormalCrossingsBoundarySeparation.exists_boundary_separation_tower_bound,Hironaka.HironakaNormalCrossingsBoundarySeparation.stageGeometry_of_higherSeparationCentres}
+\leanok
+\uses{hir:general-nc-actual-higher-separation-step,hir:general-nc-count-one-smooth-terminal-pair,hir:blowup-tower}
+For a boundary adapted pair with all original counts bounded by $b$,
+there is an actual finite blowup tower of length at most
+$\max(b-1,0)$ whose whole differential strict original carrier has
+count at most one and is boundary adapted with its literal accumulated
+boundary. Every actual recorded centre is an intrinsic higher
+separation step for the actual current differential strict carrier
+and actual current accumulated boundary. In particular the boundary
+at each actual centre stage is SNC and every centre has codimension
+at least two and lies in the current strict original carrier.
+\end{theorem}
+\begin{proof}
+Induct on the actual integer bound $b$, uniformly in the current
+manifold, original carrier and current finite boundary. If all actual
+counts are at most one, take the real empty tower. Its projection is
+the identity, its strict original carrier is the same closed carrier,
+and its boundary list is unchanged. It has length zero and no centre
+conditions. This covers an empty carrier and the base case $b=0$.
+
+Otherwise apply the preceding produced higher step. Its attained
+maximum satisfies $2\le r\le b$. The new actual original count is
+at most $r-1\le b-1$. Apply the induction hypothesis to the actual
+blowup manifold and produced transformed pair, then prepend the
+actual first blowup to the resulting real tail tower. The exact
+first-step differential strict-transform dictionary and the genuine
+holomorphic strict-composition theorem identify every tail current
+carrier with the actual differential strict transform under its
+whole prefix. The actual accumulated-boundary append identity
+identifies every tail boundary with the literal original boundary
+transformed along that whole prefix. Thus all actual tail centre
+conditions transport to the concatenated tower; the first centre
+has the produced intrinsic higher-step property. Tower lengths add,
+and the tail bound gives at most $1+\max(b-2,0)=b-1$, since this
+case has $b\ge2$. The final actual pair and count-one bound are
+transported by those same exact dictionaries. This is an actual
+finite construction, with no caller-supplied candidate tower,
+termination certificate or global ordering of original branches.
+\end{proof}
+
+\begin{theorem}[A genuine global NC separation and complement isomorphism]
+\label{hir:general-nc-global-separation-complement-isomorphism}
+\lean{Hironaka.HironakaNormalCrossingsBoundarySeparation.centresOver_of_higherSeparationCentres,Hironaka.HironakaNormalCrossingsBoundarySeparation.isIsomorphismOver_compl_of_higherSeparationCentres,Hironaka.HironakaNormalCrossingsBoundarySeparation.exists_boundary_separation_tower,Hironaka.HironakaNormalCrossingsBoundarySeparation.exists_length_zero_separation_of_empty,Hironaka.HironakaNormalCrossingsBoundarySeparation.exists_normalCrossings_separation_tower}
+\leanok
+\uses{hir:general-nc-bounded-actual-separation-tower,hir:general-nc-boundary-empty-producer,hir:general-nc-count-one-smooth-terminal-pair}
+Every actual original NC carrier has a genuine separation tower of
+length at most $\max(n-1,0)$ starting with empty boundary. Its final
+whole differential strict carrier is smooth, transverse to the
+actual accumulated SNC boundary, and appending that carrier gives
+a genuine SNC list. More generally an initial boundary adapted pair
+has the same conclusion with its true accumulated old boundary.
+The tower projection is an isomorphism over the complement of the
+original carrier.
+\end{theorem}
+\begin{proof}
+The genuine actual count is always at most $n$, so apply the bounded
+tower producer with $b=n$. Its actual terminal pair and count-one
+bound give smoothness, pointwise dimension, transversality and the
+SNC appended list by the terminal-pair theorem. For an original NC
+carrier alone, its empty-boundary pair is internally produced first.
+
+Each literal centre lies in its actual current differential strict
+carrier. Closedness of the original carrier and continuity of the
+actual prefix projection put that entire strict carrier inside the
+preimage of the original carrier. Thus every real recorded centre
+lies over the original carrier. Restricting the actual tower to its
+open complement makes every centre empty; the resulting true tower
+has no differential exceptional point there. The actual exceptional
+image therefore lies in the original carrier. The genuine blowup
+sequence is surjective and injective away from its exceptional locus,
+so the proved blowup-sequence isomorphism theorem gives the stated
+isomorphism over that whole open complement. No compactness,
+connectedness or finite global component family is required.
+\end{proof}
+
+\begin{remark}
+The output is an actual intrinsic geometric separation tower, with
+literal current carriers and accumulated boundary at every stage.
+This does not imply cosupport admissibility for a separately marked
+ideal. The old ordered invariant retains its colexicographic label
+tie-break, and its canonical marked-ideal sequence is not identified
+with this geometric tower. That full marked-ideal general-NC descent
+remains open.
+\end{remark}

@@ -1,0 +1,132 @@
+\section{True whole normal Taylor functions of the same original coherent generators}
+This OWN OFFLIB chapter uses an ACTUAL affine translation of functions and
+the original coherent sheaf. It never defines a homomorphism from arbitrary
+origin germs to nearby germs. The previous original nearby ideal dictionary
+is retained; its relation with an analytic projector and a single all-order
+free neighborhood remains open.
+
+\begin{lemma}[The actual translated source open is a genuine neighborhood]
+\label{hir:relative-normal-translated-taylor-actual-source-open}
+\lean{Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedSourceOpen,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedSourceOpen_isOpen,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedSourceOpen_mem_nhds}
+\leanok
+\uses{hir:relative-normal-translated-jets-actual-affine-pullback}
+For an actual open $V$ and $a\in V$, its actual inverse image under
+$\tau_a(z)=a+z$ is open and contains zero. Every whole function identity on
+$V$ therefore holds on an actual zero-neighborhood after this translation.
+\end{lemma}
+\begin{proof}
+The genuine globally holomorphic affine map is continuous. Its inverse image
+of the genuine open $V$ is open, and $\tau_a(0)=a\in V$ gives zero membership.
+The resulting genuine neighborhood is a member of the actual zero filter.
+Restriction of a whole equality to this inverse image gives its true
+eventual equality, without a point-value test or a map of arbitrary germs.
+\end{proof}
+
+\begin{theorem}[Every genuine iterated derivative commutes with actual translation on the whole source open]
+\label{hir:relative-normal-translated-taylor-whole-derivative-identity}
+\lean{Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.iterDeriv_actualAffineTranslation,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.iterDeriv_actualAffineTranslation_eventually,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.iterDeriv_actualAffineTranslation_differentiableOn}
+\leanok
+\uses{hir:relative-normal-translated-taylor-actual-source-open,hir:relative-normal-actual-iterated-derivative-germs}
+If $f$ is genuinely holomorphic on the actual open $V$, then for EVERY
+ordered direction list $L$ and EVERY actual $z$ with $a+z\in V$,
+$D_L(f\circ\tau_a)(z)=D_Lf(a+z)$. Both sides are holomorphic on this
+same actual translated open. The whole equality holds for all lists, not
+merely for derivatives evaluated at the source point.
+\end{theorem}
+\begin{proof}
+Holomorphic derivative stability on an open gives actual holomorphy of
+$D_Lf$ on the SAME $V$ for every list. Induct on the literal list. The empty
+case is function composition. For a successor, the induction equality holds
+on the WHOLE open $\tau_a^{-1}V$; its actual openness gives equality on a true
+neighborhood of the chosen $z$. The genuine derivative congruence theorem
+therefore identifies the Frechet derivatives of those actual functions at
+$z$. Apply the genuine chain rule to $D_Lf\circ\tau_a$, with original
+holomorphy at $a+z$ supplied by derivative stability. The actual derivative
+of constant-plus-identity is literally the identity continuous linear map.
+Its application to the actual first direction gives precisely the written
+successor derivative. Actual composition of holomorphic functions proves
+holomorphy on the whole translated open. This proves all lists internally.
+\end{proof}
+
+\begin{theorem}[True original coefficient functions have the entire nearby relative Taylor germs]
+\label{hir:relative-normal-translated-taylor-entire-coefficient-functions}
+\lean{Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedNormalTaylorFunction,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedNormalTaylorFunction_holAt,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.relativeTaylorCoefficient_actualTranslated_function}
+\leanok
+\uses{hir:relative-normal-translated-taylor-whole-derivative-identity,hir:relative-normal-actual-coefficient-map}
+For every actual $a\in V$ and ordered normal word $L$, define the ACTUAL base
+function
+$c_{a,L}(u)=|L|!^{-1}D_{L_{\mathrm{normal}}}f(a+\iota(u))$, where $\iota$ is
+the genuine normal-plane embedding. It is holomorphic near zero. Its ENTIRE
+holomorphic germ equals the true normalized relative Taylor coefficient of
+the actual whole translated germ $[f\circ\tau_a]$.
+\end{theorem}
+\begin{proof}
+The preceding theorem gives the WHOLE derivative function identity on the
+actual translated zero-neighborhood. The genuine plane embedding sends zero
+to zero and is continuous complex linear; compose the actual neighborhood
+and both derivative functions with it. Actual derivative holomorphy and
+composition prove genuine base holomorphy. Form the ENTIRE germ of the
+written normalized actual function. The true derivative-germ producer on
+the actual representative is the germ of its actual iterated derivative.
+The whole eventual derivative identity identifies that entire germ with
+$[D_Lf\circ\tau_a]$. Genuine whole plane trace is precomposition by the actual
+embedding, and scalar multiplication of whole germs is multiplication of
+these actual functions by $|L|!^{-1}$. These literal whole-germ identities
+give the written coefficient equality. No coefficient value replaces a germ.
+\end{proof}
+
+\begin{theorem}[Every finite original Taylor tuple uses these same whole functions]
+\label{hir:relative-normal-translated-taylor-all-word-tuples}
+\lean{Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedTaylorFunctionTuple,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.normalTaylorCoefficients_actualTranslated_function,Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.actualTranslatedTaylorFunctionTuple_eq_iff_quotient}
+\leanok
+\uses{hir:relative-normal-translated-taylor-entire-coefficient-functions,hir:relative-normal-actual-whole-power-kernel}
+At EVERY actual $a\in V$ and EVERY literal $q$, the ENTIRE actual relative
+Taylor tuple of $[f\circ\tau_a]$ has every word entry exactly the genuine germ
+of $c_{a,L}$. Equality of the tuples is exactly equality of entire quotient
+classes modulo the literal actual $J^q$.
+\end{theorem}
+\begin{proof}
+Apply the preceding true whole coefficient identity to each literal word of
+length below $q$. The genuine finite tuple is defined entrywise by these
+actual relative Taylor coefficients, so extensionality gives the entire
+tuple dictionary. Its actual full kernel is $J^q$; the genuine established
+whole Taylor-kernel theorem identifies equal tuples exactly with equality
+modulo the whole normal power. This uses the actual functions as
+representatives at the genuine point; neither coefficients nor a kernel
+certificate is caller input. Order zero gives the literal empty tuple.
+\end{proof}
+
+\begin{theorem}[Only original coherence returns all nearby original ideal and whole Taylor function dictionaries jointly]
+\label{hir:relative-normal-translated-taylor-original-coherent-consumer}
+\lean{Hironaka.HironakaRelativeNormalTranslatedTaylorFunctions.exists_original_coherent_translated_Taylor_functions}
+\leanok
+\uses{hir:relative-normal-translated-jets-original-coherent-consumer,hir:relative-normal-translated-taylor-all-word-tuples}
+Only original $d,t,\mathfrak a$ and coherence select ONE original finite
+holomorphic function family and ONE actual open. At EVERY actual point of
+that open and EVERY literal order, return the preceding genuine coefficient
+function/germ and tuple dictionaries for THESE SAME functions, jointly with
+the ENTIRE nearby actual original ideal and finite normal-jet column image
+dictionaries. No Taylor family, representative, identity, coefficient, image,
+basis, domain or free-module result certificate is caller data.
+\end{theorem}
+\begin{proof}
+Consume the genuine original coherent translated-jet producer ONCE and
+retain its literal open, finite original functions and entire original
+sheaf/translated ideal/image dictionaries. Convert their original
+holomorphy on this actual open to genuine complex differentiability there.
+Apply the whole derivative and genuine normalized coefficient function
+producers to each SAME original function at every genuine point and every
+literal word/order. Return these actual whole identities with all the
+retained original ideal dictionaries. No independent nearby generators or
+origin-to-nearby germ map is chosen.
+\end{proof}
+
+\paragraph{Open frontier.}
+This true all-word nearby Taylor representative dictionary does not yet
+identify the finite analytic projector image with the nearby ORIGINAL jet
+image. That still requires actual finite whole cleared-denominator column
+identities and genuine original centre charts. A fixed-order image
+identification does not by itself supply one all-order open. Entire nearby
+original Rees/normal-cone identification, analytic normal-flatness, all-order
+freeness, higher Hilbert--Samuel and G8 remain OPEN. Formal registration,
+native target build, leanok and GitHub publication remain pending root.

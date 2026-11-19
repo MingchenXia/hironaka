@@ -1,0 +1,93 @@
+\section{Original canonical individual-sum separation on a prescribed relatively compact open}
+\label{sec:hironaka-original-local-canonical-sum-separation}
+
+The original analytic parts and their intersection need not be compact.
+The actual stage remains the canonical terminal stage of the individual
+sum $I_A+I_B$ with the entire original ordered boundary. It is not
+replaced by a sum with the union of all later parts.
+
+\begin{theorem}[Whole intrinsic sum data and mutual density on the same open]
+\label{hir:original-local-canonical-sum-whole-open-data}
+\lean{Hironaka.HironakaOriginalLocalCanonicalSumSeparation.local_sum_record,Hironaka.HironakaOriginalLocalCanonicalSumSeparation.local_sum_density}
+For original analytic parts $A,B$ and actual ordered boundary $E_0$,
+the whole marked pullback to an actual open $U$ is the independently
+intrinsic sum datum of $A_U,B_U$ and the literal boundary $E_0|_U$.
+If each original part is dense away from the other, then each whole
+local part has that same genuine mutual density on $U$.
+\uses{hir:original-canonical-sum-intrinsic-source-record,hir:actual-singular-vanishing-ideal-pullback-submersion}
+\leanok
+\end{theorem}
+\begin{proof}
+The actual open inclusion is a holomorphic submersion. The genuine
+whole singular-ideal pullback theorem identifies each intrinsic
+vanishing ideal and the whole sum-pullback formula identifies their
+sum. Whole inverse images identify the carrier, original ordered
+boundary list and mark, proving equality of the entire records.
+The open inclusion commutes with closure. Pull back each original
+mutual-density inclusion, commute the whole closure and actual
+inverse image, and use inverse image of difference. This proves both
+whole local density statements without compactness of either part.
+\end{proof}
+
+\begin{theorem}[Original local data construct the same actual canonical terminal individual-sum separator]
+\label{hir:original-local-canonical-sum-prescribed-open-producer}
+\lean{Hironaka.HironakaOriginalLocalCanonicalSumSeparation.exists_local_canonical_sum_separation}
+Let $A,B\subset X^n$ be original analytic parts, with $A$ of empty
+interior, each dense away from the other, and let $E_0$ be the actual
+original ordered SNC boundary. For any prescribed open $U$ contained
+in a given compact set, these data internally construct an actual
+canonical terminal history $T$ of the intrinsic local individual-sum
+datum $(U,E_0|_U,I_{A_U}+I_{B_U},1)$. This same $T$ separates the
+whole conventional strict transforms of $A_U$ and $B_U$. It is
+admissible over $A_U\cap B_U$, its whole boundary is SNC, its whole
+sum pullback is the actual exceptional divisor ideal, and that
+exceptional support is the inverse image of $A_U\cap B_U$. Its
+projection is holomorphic, proper, surjective and an isomorphism off
+that intersection.
+
+Fix this target before every smooth $b:Y\to U$. Internally construct
+an actual source tower $Q$ and upper submersion $g$ with a true
+holomorphic Cartesian projection square. Its marked input is the
+whole intrinsic sum of the two source parts and literal source
+boundary. It is canonical and terminal, has the whole corresponding
+principalization and admissible geometry, and its entire ordered
+boundary is exactly the $g$-inverse-image list of the target boundary.
+The whole source strict parts are the $g$-inverse images of the two
+target strict parts, hence disjoint. No source compactness, incoming
+history or ideal/comparison certificate is assumed.
+\uses{hir:original-local-canonical-sum-whole-open-data,hir:original-local-canonical-principalization-prescribed-open,hir:original-local-canonical-principalization-terminal-geometry,hir:original-stopped-strict-transform-smooth-square}
+\leanok
+\end{theorem}
+\begin{proof}
+Original coherence of both vanishing ideals gives coherence of their
+whole sum. Empty interior of $A$ makes its vanishing ideal nonzero at
+every point, hence makes the larger sum ideal nonzero. Apply the
+proved original-only local canonical principalization producer to
+this actual sum and the original SNC boundary. It constructs a
+finite actual canonical terminal history on the prescribed open.
+The preceding whole-record identity rewrites its actual input as the
+intrinsic local sum datum. Its principalization identity and exact
+exceptional support, together with the preceding actual local mutual
+density, force disjointness of the two entire strict transforms by
+the genuine sum-separation theorem. All remaining target geometry
+comes from that same canonical terminal history.
+
+For a given $b$, take the actual universal smooth blowup pullback of
+this same $T$. The genuine whole sum-record pullback identity gives
+its independently intrinsic source input, and true canonical-history
+and cosupport pullback make it canonical and terminal. Apply the
+proved whole terminal principalization geometry to this actual source
+record. Its ordered boundary is literally the inverse image of the
+entire target list by the actual marked-history dictionary.
+
+All target centres lie over the actual local intersection. Each
+part's mutual density says it is dense in the complement of that
+intersection. The genuine preserved-open strict-square theorem
+therefore identifies both whole source strict transforms with the
+inverse images of their corresponding target strict transforms,
+including exceptional points. Target disjointness then gives source
+disjointness. True finite blowup geometry gives the source's
+holomorphy, properness and surjectivity. This constructs an actual
+individual-sum stage of the same ordered algorithm without compact
+intersection or source compactness assumptions.
+\end{proof}

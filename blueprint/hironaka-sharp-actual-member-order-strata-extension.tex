@@ -1,0 +1,76 @@
+\section{Finite weighted pieces of an actual adapted centre}
+
+Throughout, the ambient complex manifold has positive dimension. All
+ideals below are whole coherent germ ideals, and all orders are actual
+ordinary orders along the indicated smooth carrier.
+
+\begin{theorem}[Locally constant profiles cut admissible closed centres]
+\label{hir:sharp-actual-locally-constant-admissible-fibres}
+\lean{Hironaka.HironakaSharpActualMemberOrderStrata.admissible_fibre_of_eventually_constant}
+\uses{hir:sharp-actual-family-member-orders-on-product-stratum}
+Let $C$ be an admissible centre for a coherent marked ideal $M$ and let
+$f$ be a function on the ambient manifold. Suppose that near every
+$x\in C$, the restriction of $f$ to $C$ equals $f(x)$. Then every entire
+fibre $C\cap f^{-1}(a)$ is again an admissible closed centre for $M$.
+\leanok
+\end{theorem}
+\begin{proof}
+Admissibility is local on an ambient open cover. At a point outside the
+closed set $C$, use its open complement; the fibre is empty there. At a
+point of $C$, choose an ambient open neighbourhood on which $f$ is
+constant along $C$. If its value is $a$, the fibre agrees with the whole
+of $C$ on this open; otherwise it is empty there. Restrict the original
+admissibility in the first case and use empty-centre admissibility in the
+second. The local admissibility theorem gives global closed smoothness,
+cosupport containment and normal crossings with the unchanged boundary.
+\end{proof}
+
+\begin{theorem}[Actual product order gives a finite admissible partition]
+\label{hir:sharp-actual-finite-member-order-centre-partition}
+\lean{Hironaka.HironakaSharpActualMemberOrderStrata.finite_member_order_strata}
+\uses{hir:sharp-actual-locally-constant-admissible-fibres,hir:sharp-actual-family-member-orders-on-product-stratum,hir:sharp-actual-finite-relative-product-geometry-order-sum}
+Let $F_i$, $i\in\{0,\ldots,m-1\}$, be relatively principal nonzero
+coherent ideals on a closed smooth carrier $N$. Let $C\subseteq N$ be
+admissible for $M$. Suppose the actual relative product has order $q$
+at every point of $C$. For each vector
+$\alpha\in\{0,\ldots,q\}^{m}$, put
+\[
+ C_\alpha=\{x\in C:\operatorname{ord}_{N,x}F_i=\alpha_i
+                      \text{ for every }i\}.
+\]
+These finitely many entire pieces cover $C$, are pairwise disjoint,
+and are admissible closed centres for the unchanged $M$.
+\leanok
+\end{theorem}
+\begin{proof}
+Product-order additivity makes the sum of the nonnegative member orders
+equal $q$, so every member order is at most $q$. This gives a vector in
+the stated finite index set at each point of $C$, proving coverage.
+Equality of two such vectors follows position by position at a common
+point, giving pairwise disjointness. The preceding constant-product
+theorem makes the whole member-order vector locally constant along $C$.
+Apply the admissible-fibre theorem to that actual vector. Empty families,
+empty pieces and $q=0$ require no exceptions to this argument.
+\end{proof}
+
+\begin{theorem}[Each piece is adapted to the actual individual marks]
+\label{hir:sharp-actual-finite-member-order-weight-admissibility}
+\lean{Hironaka.HironakaSharpActualMemberOrderStrata.member_order_strata_weighted_admissible}
+\uses{hir:sharp-actual-finite-member-order-centre-partition,hir:sharp-original-empty-boundary-ordinary-trace-order-dictionary}
+Under the preceding hypotheses, $C_\alpha$ is simultaneously admissible
+for every actual marked ideal $(N,E_M,F_i,\alpha_i)$, with the same
+unchanged boundary list $E_M$. Its actual member orders are precisely
+the specified marks at every point of the entire piece.
+\leanok
+\end{theorem}
+\begin{proof}
+The preceding partition gives closed smoothness and normal crossings
+with $E_M$ for the entire piece. Its definition gives the exact ordinary
+order of each member. The genuine order/cosupport equivalence therefore
+places the piece in the cosupport of that member at its specified mark.
+These three assertions are exactly admissibility. Marks equal to zero
+are retained as literal marked ideals; no positive-mark well-formedness
+claim is inferred for them. These are the actual normalised members,
+not a replacement for the original ambient strict traces or a proof of
+strict decrease of the modified invariant.
+\end{proof}

@@ -1,0 +1,97 @@
+\section{Actual intrinsic holomorphic germs extend through true flattening charts}
+
+All intrinsic structures below are the genuine native flattening atlas
+constructed from original regularity. No ambient extension or ideal
+comparison certificate is assumed.
+
+\begin{theorem}[Every actual intrinsic holomorphic germ has a genuine local ambient lift]
+\label{hir:actual-submanifold-holomorphic-germ-extension}
+\uses{ana:submanifold-complex-structure}
+\lean{Hironaka.HironakaActualSubmanifoldGermExtension.exists_ambient_holomorphic_germ}
+\leanok
+Let $W\subset X^n$ be an original subset regular of dimension $k\le n$
+at every one of its points, equipped with its actually constructed native
+complex manifold atlas. For every $p\in W$ and every actual intrinsic
+holomorphic scalar germ $b$ at $p$, there is an actual ambient scalar
+function $B$, holomorphic near $p$, whose restriction has the same entire
+germ as $b$. No global holomorphic extension is claimed.
+\end{theorem}
+\begin{proof}
+Choose the actual original flattening datum $F$ at $p$, and its native
+intrinsic chart $e$. Write $G(y)=\operatorname{pr}_k(F_{\rm flat}(F_{\rm amb}(y)))$
+and use the literal total map $R(y)=e^{-1}(G(y))$ into $W$. At $p$ the
+coordinate $G(p)$ lies in the true target of $e$. Actual ambient chart
+holomorphy, the true flattening source and the linear projection make
+$G$ holomorphic on the real ambient source. Shrink an actual neighbourhood
+of $p$ so that every $G(y)$ lies in the actual target of $e$. The genuine
+native atlas inverse theorem then makes $R$ holomorphic at every point
+of this neighbourhood. The actual chart inverse identity gives
+$R(p)=p$ and $R(y)=y$ for all nearby $y\in W$. Thus $B=b\circ R$ is
+holomorphic near $p$ by the actual germ composition theorem and agrees
+with $b$ on all nearby intrinsic points. Values chosen by the total chart
+inverse outside its real target are never asserted to be holomorphic.
+\end{proof}
+
+\begin{theorem}[The entire vanishing ideal of every singular intrinsic subset is a genuine restriction]
+\label{hir:actual-submanifold-whole-singular-vanishing-restriction}
+\uses{hir:actual-submanifold-holomorphic-germ-extension}
+\lean{Hironaka.HironakaActualSubmanifoldGermExtension.pullback_vanishing_image}
+\leanok
+For the same genuine native $W$ and its actual inclusion $j:W\to X$,
+every original subset $V\subset W$ satisfies the whole independent
+functional ideal equality
+\[
+ j^*\mathcal I_{j(V)}=\mathcal I_V.
+\]
+No smoothness, closedness, analyticity or coherence of $V$ is required.
+\end{theorem}
+\begin{proof}
+Actual continuity of $j$ pulls each genuine ambient vanishing germ back
+to a holomorphic germ vanishing on $V$ near the intrinsic point. A finite
+actual holomorphic span preserves this property, proving one inclusion
+for the entire functional pullback ideal. Conversely take an actual
+$b\in\mathcal I_{V,p}$ and lift it by the preceding theorem to a genuine
+ambient holomorphic $B$. The entire germ equality and actual vanishing
+of $b$ hold simultaneously on a neighbourhood in $W$. The genuine subtype
+neighbourhood formula supplies an ambient neighbourhood whose intersection
+with $W$ lies in that whole intrinsic neighbourhood. Thus $B$ vanishes
+on every point of $j(V)$ in this actual ambient neighbourhood, so
+$B\in\mathcal I_{j(V),j(p)}$. Its one-term actual pullback span, together
+with the true germ equality, contains $b$. This is equality of entire
+functional ideals, rather than a point-value or radical substitute.
+\end{proof}
+
+\begin{theorem}[Actual intrinsic restriction reflects the whole ambient restricted comparison]
+\label{hir:actual-submanifold-intrinsic-restrict-comparison-iff}
+\uses{hir:actual-submanifold-holomorphic-germ-extension}
+\lean{Hironaka.HironakaActualSubmanifoldGermExtension.restrictLe_iff_restrictIdeal_le}
+\leanok
+For the same original regular $W$, let $\mathfrak a,\mathfrak b$ be
+original ambient functional ideals and let $\mathfrak a$ be coherent.
+Then the original ambient restricted comparison
+$\operatorname{RestrictLe}(W,\mathfrak a,\mathfrak b)$ holds if and only if
+the entire intrinsic ideals satisfy
+$\mathfrak a\mathcal O_W\subseteq\mathfrak b\mathcal O_W$.
+No coherence of $\mathfrak b$ or coefficient-extension premise is input.
+\end{theorem}
+\begin{proof}
+The proved ambient-to-intrinsic comparison theorem restricts every
+actual ambient coefficient and gives the forward implication. For the
+converse, take an original ambient member $g\in\mathfrak a_{j(p)}$.
+Coherence supplies its genuine holomorphy, so its restriction lies in
+the intrinsic extension of $\mathfrak a$. The given entire intrinsic
+ideal inclusion writes this actual restriction as a finite holomorphic
+combination of restrictions of true original members of $\mathfrak b$.
+For each of these finitely many actual intrinsic coefficients, use the
+first theorem to construct a true ambient holomorphic lift. Intersect
+the finitely many actual germ equalities with the original finite span
+identity. The subtype neighbourhood formula turns this simultaneous
+identity into an actual ambient neighbourhood on whose intersection
+with $W$ the required whole finite relation holds. These literal ambient
+coefficients and original generators prove the ambient restricted
+comparison at every original point and for every original member.
+\end{proof}
+
+These genuine local extension and whole ideal statements do not identify
+controlled coefficient records, canonical invariant tails or maximal centres,
+and do not supply canonical history compatibility or proper resolution descent.

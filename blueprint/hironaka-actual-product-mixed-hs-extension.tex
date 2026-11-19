@@ -1,0 +1,104 @@
+\section{The genuine mixed maximal-power quotient of a smooth product}
+
+All ideals and scalar actions are the original ones. Write
+$B=\mathcal O_{\mathbb C^d,0}$, $R=\mathcal O_{\mathbb C^{d+t},0}$,
+$m=\mathfrak m_B$, $J=(z_1,\ldots,z_t)$, and let $I\subset B$ be arbitrary.
+The actual ambient maximal ideal is $mR+J$. This computation retains its
+mixed powers throughout, using genuine original monomials.
+
+\begin{lemma}[Genuine monomial coordinates preserve every whole normal-power filtration image]
+\label{hir:actual-product-monomial-normal-power-filtration}
+\uses{hir:relative-normal-basis-actual-coefficient-separation,hir:relative-normal-basis-actual-entire-quotient-basis}
+\lean{Hironaka.HironakaActualProductMixedHS.actualNormalMonomial_mem_power,Hironaka.HironakaActualProductMixedHS.actualProductNormalTail,Hironaka.HironakaActualProductMixedHS.actualNormalPowerImage_coordinates}
+\leanok
+For $r\le s$, in the genuine monomial coordinates
+$R/J^s\simeq B^{A_s}$, the actual image of $J^r$ is exactly the families
+whose coefficients of every degree strictly below $r$ vanish.
+Each original monomial $z^\alpha$ belongs to $J^{|\alpha|}$.
+\end{lemma}
+\begin{proof}
+For the monomial assertion, each factor $z_i^{\alpha_i}$ belongs to the
+actual $\alpha_i$th power; multiply these genuine ideal-power memberships
+and add their exponents. If a class has a representative $g\in J^r$,
+its genuine monomial representative $P$ differs from $g$ by a member of
+$J^s\subset J^r$. Thus $P\in J^r$, and the original whole coefficient
+separation theorem makes every lower coefficient zero. Conversely a
+family with lower coefficients zero has its original polynomial sum
+supported only in degrees at least $r$. Each such original monomial is
+in $J^{|\alpha|}\subset J^r$ by the first assertion; multiplying by its
+whole original coefficient and summing gives a genuine representative
+in $J^r$. These are both directions of the full image equality.
+\end{proof}
+
+\begin{lemma}[Actual mixed maximal powers have precisely the genuine coordinate weights]
+\label{hir:actual-product-monomial-mixed-maximal-power-coordinates}
+\uses{hir:actual-product-monomial-normal-power-filtration,hir:relative-normal-original-ambient-mixed-maximal-power}
+\lean{Hironaka.HironakaActualProductMixedHS.actualProductMixedCoordinates,Hironaka.HironakaActualProductMixedHS.actualProductMixedTailSum_eq_coordinates,Hironaka.HironakaActualProductMixedHS.actualMixedPowerImage_coordinates}
+\leanok
+In the SAME actual coordinates of $R/J^s$, the image of
+$(mR+J)^s$ is precisely the families with
+$a_\alpha\in m^{s-|\alpha|}$ for every $\alpha\in A_s$.
+\end{lemma}
+\begin{proof}
+Expand the true ideal power as
+$\sum_{r=0}^s(mR)^{s-r}J^r$. The actual quotient and original $B$-linear
+monomial maps carry each term to $m^{s-r}$ times the genuine degree-at-least
+$r$ tail. Any such multiple has zero lower coordinates; a coordinate of
+degree $q\ge r$ lies in $m^{s-r}\subset m^{s-q}$, proving one inclusion.
+Conversely decompose an arbitrary finite coefficient family into its
+single-coordinate vectors. The vector at index $\alpha$, of degree $q$,
+is its coefficient $a_\alpha\in m^{s-q}$ times the unit coordinate vector
+of that SAME original monomial. The unit vector lies in the true tail
+of degree $q$, so this term belongs to the $r=q$ summand of the actual
+mixed image. Their finite sum proves the other inclusion.
+\end{proof}
+
+\begin{theorem}[Whole original smooth-product ambient jets retain all actual weighted coefficient quotients]
+\label{hir:actual-product-whole-ambient-jet-weighted-coefficient-quotient}
+\uses{hir:actual-product-monomial-mixed-maximal-power-coordinates,hir:actual-product-entire-extension-ideal-module-quotient}
+\lean{Hironaka.HironakaActualProductMixedHS.actualProductCoordinateIdealSup,Hironaka.HironakaActualProductMixedHS.actualProductWholeIdealImage_coordinates,Hironaka.HironakaActualProductMixedHS.actualRingIdealModuleQuotientEquiv,Hironaka.HironakaActualProductMixedHS.actualProductMixedJetEquiv,Hironaka.HironakaActualProductMixedHS.actualProductMixedJetEquiv_monomial_sum,Hironaka.HironakaActualProductMixedHS.actualProductAmbientJetEquiv,Hironaka.HironakaActualProductMixedHS.actualProductAmbientJetEquiv_monomial_sum}
+\leanok
+The genuine original ambient quotient
+$R/(IR+\mathfrak m_R^s)$ is $B$-linearly equivalent, and hence originally
+complex-linearly equivalent, to
+$\prod_{\alpha\in A_s}B/(I+m^{s-|\alpha|})$.
+The class of EVERY original lower-degree monomial sum has exactly its
+weighted whole original coefficient classes.
+\end{theorem}
+\begin{proof}
+The full original normal power $J^s$ is a summand of the actual mixed
+maximal power, so first quotienting by $J^s$ changes no final quotient.
+In this true quotient, the extension ideal $IR$ has exactly the
+coordinatewise ideal $I$ by the genuine original-scalar extension
+comparison. The preceding lemma gives exactly the coordinate weights
+of the whole maximal power. Their sum is coordinatewise $I+m^{s-|\alpha|}$:
+one inclusion follows by addition; for the converse choose for each of
+the finitely many coordinates a decomposition into these two ideals
+and assemble its two families. The quotient of the finite coefficient
+module by these actual coordinate ideals is its finite product of the
+actual coefficient quotients. Every map uses the original monomial
+combination and the actual quotient projections, proving the assertion
+on every original numerator class and the original complex scalars.
+\end{proof}
+
+\begin{theorem}[The EXISTING intrinsic germ HS of the true smooth product is the actual all-order convolution]
+\label{hir:actual-product-original-ambient-hs-convolution}
+\uses{hir:actual-product-whole-ambient-jet-weighted-coefficient-quotient}
+\lean{Hironaka.HironakaActualProductMixedHS.actualProductHilbertSamuel_convolution}
+\leanok
+For EVERY original order $\ell$,
+\[
+ H_{IR}(\ell)=\sum_{\alpha\in A_{\ell+1}} H_I(\ell-|\alpha|).
+\]
+Here both sides are the existing actual whole local-ring HS functions.
+\end{theorem}
+\begin{proof}
+Apply the preceding genuine complex-linear quotient equivalence with
+$s=\ell+1$. Every index has degree at most $\ell$, hence
+$s-|\alpha|=(\ell-|\alpha|)+1$. The corresponding coefficient quotient
+therefore has exactly the EXISTING original value
+$H_I(\ell-|\alpha|)$. All such original maximal-power quotients are
+finite-dimensional. The finite product dimension formula sums these
+actual dimensions, proving the literal asserted equality at EVERY order.
+No product HS formula or desired quotient comparison is an assumption.
+\end{proof}

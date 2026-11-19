@@ -1,0 +1,89 @@
+\section{Actual relative orders under smooth submersions}
+
+All statements concern the original germ ideals and the original order
+defined by nearby agreement on a set. The set need not be smooth or analytic.
+No caller order, relative ideal, section or value certificate is assumed.
+
+\begin{lemma}[Whole relative function-order dictionary]
+\label{hir:smooth-relative-function-order}
+\uses{hir:submersion-local-section}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeOrder.vanishesToOrderOn_preimage_iff}
+\leanok
+Let $f:Y^m\to X^n$ be a holomorphic submersion at $y$, $N\subset X$
+any set, and $a$ any actual function on $X$. For every natural $q$,
+$a\circ f$ vanishes to order at least $q$ along $f^{-1}N$ at $y$
+if and only if $a$ vanishes to order at least $q$ along $N$ at $f(y)$.
+\end{lemma}
+\begin{proof}
+Submersion charts internally produce a holomorphic local section $s$
+through $y$, with $s(f(y))=y$ and $f\circ s=\mathrm{id}$ near $f(y)$.
+If $a\circ f$ agrees along $f^{-1}N$ with an actual germ
+$b\in\mathfrak m_y^q$, compose $b$ with $s$. Holomorphic composition
+preserves powers of point ideals, so $b\circ s\in\mathfrak m_{f(y)}^q$.
+Continuity of $s$ transports the entire nearby agreement. For every nearby
+$x\in N$, the section identity puts $s(x)$ in $f^{-1}N$ and gives
+$a(x)=a(f(s(x)))=b(s(x))$. This is precisely the original relative order.
+Conversely a genuine representative $b\in\mathfrak m_{f(y)}^q$ agreeing
+with $a$ along $N$ pulls back to $b\circ f\in\mathfrak m_y^q$;
+continuity transports the whole agreement to $f^{-1}N$. Both arguments
+use actual point-ideal representatives and hold also for $q=0$, empty
+sets, dimension zero and points outside $N$.
+\end{proof}
+
+\begin{theorem}[All thresholds of the whole relative ideal]
+\label{hir:smooth-relative-whole-ideal-thresholds}
+\uses{hir:smooth-relative-function-order}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeOrder.orderGE_preimage_iff}
+\leanok
+For the same actual submersion and any original germ ideal $I$ whose
+members are holomorphic at $f(y)$, every threshold of $f^*I$ along
+$f^{-1}N$ equals the corresponding threshold of $I$ along $N$.
+\end{theorem}
+\begin{proof}
+Each original $a\in I_{f(y)}$ gives the actual pullback generator
+$a\circ f\in(f^*I)_y$, using the holomorphic unit coefficient. A
+threshold for the whole pulled-back ideal therefore descends for every
+original member by the preceding equivalence. In the other direction,
+every original member pulls back with the same threshold. The actual
+pullback ideal is the whole germ span of these generators. Relative
+order is preserved by holomorphic multiplication and finite sums, so
+every genuine member of this entire germ span has the threshold.
+There is no choice of a finite presentation and no reduced-ideal
+substitution for the original ideal.
+\end{proof}
+
+\begin{theorem}[Original extended-natural relative order]
+\label{hir:smooth-relative-extended-order}
+\uses{hir:smooth-relative-whole-ideal-thresholds}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeOrder.order_preimage_eq}
+\leanok
+The original extended-natural order of $f^*I$ along $f^{-1}N$ at $y$
+is exactly the original order of $I$ along $N$ at $f(y)$.
+\end{theorem}
+\begin{proof}
+The original order is the supremum of exactly those natural thresholds
+which hold. The preceding theorem identifies this entire indexed family,
+so its supremum is unchanged, including infinite order. No finite order
+or nonvanishing assumption is introduced.
+\end{proof}
+
+\begin{theorem}[Whole relative marked cosupport]
+\label{hir:smooth-relative-whole-cosupport}
+\uses{hir:smooth-relative-whole-ideal-thresholds}
+\lean{Hironaka.HironakaSmoothSubmersionRelativeOrder.cosupport_preimage_eq}
+\leanok
+If $f$ is a holomorphic submersion everywhere and $I$ is coherent, then
+for every natural marking $q$ the entire cosupport along $f^{-1}N$
+of $f^*I$ is the preimage of the entire cosupport along $N$ of $I$.
+\end{theorem}
+\begin{proof}
+At every actual $y$, coherence makes all original ideal members
+holomorphic. Apply the whole relative threshold dictionary at $y$.
+Membership in either cosupport consists of membership in the actual
+underlying set and its original order threshold. The underlying sets
+are literally related by preimage, and the thresholds coincide, proving
+equality of the entire ambient sets. Surjectivity is unnecessary; empty
+preimages and marking zero are retained. Higher invariant equality,
+canonical blowup base change and complete smooth functoriality remain
+open.
+\end{proof}

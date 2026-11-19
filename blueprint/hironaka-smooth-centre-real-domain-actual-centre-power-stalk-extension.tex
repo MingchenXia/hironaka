@@ -1,0 +1,102 @@
+\section{Literal centre-power section presheaves and their whole original stalks}
+
+Use the actual centre vanishing ideal section presheaf. On each true open
+$V$, take the literal power $J(V)^q$ inside the actual complex section
+ring. This keeps actual finite sums of products of genuine centre sections;
+it does not define the power presheaf from a desired stalk power dictionary.
+All scalar actions are ambient section-ring products and actual ring-stalk
+products. No centre quotient action on a higher truncation is asserted.
+
+\begin{lemma}[Actual restrictions define every centre-power section presheaf]
+\label{hir:real-domain-actual-centre-power-section-presheaf}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-ideal-section-presheaf,hir:real-domain-actual-centre-ideal-section-whole-stalk-equivalence}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionIdeal,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.map_actualCentreSectionIdeal_restrict_le,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionIdeal_restrict,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionRestrict,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionPresheaf,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionStalk,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.map_actualCentreSectionIdeal_germ_le,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionIdeal_germ_mem,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionGermHom,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionGermCocone,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerStalkToWholeHom,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerStalkToWholeHom_germ}
+\leanok
+For EVERY original subset $C$ and EVERY natural $q$, actual restriction
+maps preserve the literal powers of its whole centre section ideal.
+These give a true additive centre-power section presheaf on ALL actual
+original opens. Every power-section germ at $y$ maps to its SAME actual
+ring germ in the ENTIRE power $J_y^q$, forming a genuine neighbourhood
+cocone and literal colimit-to-power additive homomorphism.
+\end{lemma}
+\begin{proof}
+Actual restriction takes every original centre section into the true
+smaller-open centre ideal. Ring homomorphisms preserve ideal products and
+powers, hence map the entire $q$th section ideal power into the smaller-open
+$q$th power. Restriction identity and composition are inherited from the
+literal structure sheaf on all section values, so these power subgroups
+form a true additive presheaf. At a neighbourhood containing $y$, the
+actual section-to-stalk ring homomorphism maps the centre section ideal
+into the entire original centre ideal at $y$. Power preservation puts each
+power-section germ into the ENTIRE stalk power. All restriction germ
+identities therefore give the actual neighbourhood cocone, and the literal
+colimit universal property gives the stated map with every representative
+formula. This uses no caller generation, power comparison or stalk map.
+\end{proof}
+
+\begin{theorem}[All actual centre-power section germ images equal the whole stalk powers]
+\label{hir:real-domain-actual-centre-power-section-whole-germ-image}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-power-section-presheaf,hir:real-domain-actual-centre-ideal-section-whole-stalk-equivalence,hir:real-domain-actual-complex-sheaf-original-section-germs}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionGermImage,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionGermImage_le_whole,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerSectionGermImage_eq_whole}
+\leanok
+For EVERY $C,y,q$, the image of ALL genuine $q$th centre-power sections
+under actual original germs is exactly the ENTIRE ideal power $J_y^q$.
+Every original power element has an actual power-section representative
+on a true original neighbourhood. No global centre coherence, local
+coordinate-plane assumption or desired power-image certificate is supplied.
+\end{theorem}
+\begin{proof}
+First the set of actual power-section germs is an ideal in the literal
+ring stalk. Zero has a zero section representative. For addition restrict
+two actual power sections to their true common open and add. For arbitrary
+ring multiplication choose a true structure-sheaf section representing
+the scalar, restrict it and the power section to a common actual open,
+and multiply. Pointwise ideal-power membership is preserved. The preceding
+power-germ containment proves one ENTIRE inclusion.
+
+For the reverse inclusion induct on $q$. At $q=0$ any actual ring stalk
+element has a true section representative, and the zeroth section ideal
+power is the entire section ring. For the successor use
+$J_y^{q+1}=J_y^qJ_y$. The induction hypothesis gives a true $q$th power
+section representative for every element of $J_y^q$, and the entire actual
+centre-ideal stalk dictionary gives a true centre section representative
+for every element of $J_y$. Restrict both to their SAME actual common
+open. Their literal product belongs to the $(q+1)$st section ideal power
+and its actual ring germ is exactly the product of the original germs.
+Thus the entire ideal product lies in the genuine power-section germ
+image, because that image is a real ideal and contains every such product.
+This gives EVERY element of the ENTIRE successor power a true section
+representative, completing the induction without selecting finite origin
+generators or evaluating an arbitrary origin germ at a nearby point.
+\end{proof}
+
+\begin{theorem}[Every actual centre-power presheaf colimit stalk is its entire original power]
+\label{hir:real-domain-actual-centre-power-section-whole-stalk-equivalence}
+\source{bierstone-milman08-functoriality}
+\uses{hir:real-domain-actual-centre-power-section-presheaf,hir:real-domain-actual-centre-power-section-whole-germ-image}
+\lean{Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerStalkToWholeHom_injective,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerStalkToWholeHom_surjective,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerStalkWholeEquiv,Hironaka.HironakaSmoothCentreRealDomainActualCentrePowerStalk.actualCentrePowerStalkWholeEquiv_germ}
+\leanok
+At EVERY original point and EVERY degree, the literal additive colimit
+stalk of the actual centre-power section presheaf is internally equivalent
+to the ENTIRE centre ideal power in the actual structure-sheaf stalk.
+Its value on EVERY genuine power-section germ is its SAME original ring
+germ, including degree zero. No desired stalk equivalence is a premise.
+\end{theorem}
+\begin{proof}
+The true power-section cocone gives the actual stalk homomorphism.
+Surjectivity follows from the preceding ENTIRE power-section germ image:
+represent the given original power element by a true section and take
+its actual power-presheaf colimit germ. For injectivity represent two
+actual power-presheaf stalk elements by genuine power sections. Equal
+images give equal actual original structure-sheaf germs. The true filtered
+neighbourhood colimit equality supplies a real common open on which their
+structure-sheaf restrictions are equal. The power subtype restrictions
+are therefore equal on the SAME actual open. The literal power-presheaf
+colimit restriction identity gives equality of the two original stalk
+elements. Bijectivity upgrades this SAME homomorphism to the stated entire
+additive equivalence and retains all representative formulas. Genuine
+normal-cone quotient layers, sheaf gluing, whole direct-sum stalks and
+ambient Hilbert--Samuel/blowup descent remain subsequent comparisons.
+\end{proof}

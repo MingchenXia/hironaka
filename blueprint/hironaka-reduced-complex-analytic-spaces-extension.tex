@@ -1,0 +1,97 @@
+\section{A category with actual reduced complex analytic local models}
+
+\begin{definition}[The complex point and actual embedded models over it]
+\label{hir:reduced-analytic-complex-point-models}
+\lean{Hironaka.HironakaReducedComplexAnalyticSpaces.complexPoint,Hironaka.HironakaReducedComplexAnalyticSpaces.modelOver}
+Let the complex point be the genuine locally ringed space of the
+zero-dimensional complex manifold $\mathbb C^0$. Every actual subspace
+model has its structural morphism to this point, obtained by composing
+the actual ambient inclusion with the original constant holomorphic map.
+For an open $U\subseteq\mathbb C^n$ and $C\subseteq U$, denote this
+actual object over the complex point by $\operatorname{Model}(U,C)$.
+The slice morphisms retain the complex structural map.
+\leanok
+\end{definition}
+
+\begin{definition}[Reduced complex analytic spaces]
+\label{hir:reduced-analytic-space-category}
+\uses{hir:reduced-analytic-complex-point-models,hir:actual-analytic-subspace-structure-sheaf}
+\lean{Hironaka.HironakaReducedComplexAnalyticSpaces.hasAnalyticCharts,Hironaka.HironakaReducedComplexAnalyticSpaces.ReducedComplexAnalyticSpace}
+A reduced complex analytic space is a Hausdorff, second countable
+locally ringed space over the complex point such that every point lies
+in the image of an actual open immersion
+\[
+ \operatorname{Model}(U,C)\longrightarrow X
+\]
+over the complex point, with $U$ open in some $\mathbb C^n$ and $C$ a
+closed complex analytic subset of $U$. Use the full subcategory of the
+native slice category on this local-model property. This definition
+contains no resolution, centre, atlas-descent or terminal-map data.
+\leanok
+\end{definition}
+
+\begin{theorem}[Every actual closed analytic model is an object]
+\label{hir:reduced-analytic-embedded-model-object}
+\uses{hir:reduced-analytic-space-category}
+\lean{Hironaka.HironakaReducedComplexAnalyticSpaces.hasAnalyticCharts_model,Hironaka.HironakaReducedComplexAnalyticSpaces.embeddedModel}
+Every closed analytic subset of an actual open $U\subseteq\mathbb C^n$,
+with its already constructed quotient structure sheaf, is an object of
+this category.
+\leanok
+\end{theorem}
+\begin{proof}
+The genuine underlying subset of $U$ is Hausdorff and second countable
+by the inherited topologies. At any point use this same original
+analytic model and its identity morphism as the local chart. The identity
+is an actual open immersion, covers the point, and commutes with its
+structural morphism to the complex point. Thus every part of the
+local-model property follows from the original analytic subset.
+\end{proof}
+
+\begin{theorem}[Reducedness of every actual abstract stalk]
+\label{hir:reduced-analytic-abstract-stalks-reduced}
+\uses{hir:reduced-analytic-space-category,hir:actual-analytic-subspace-reduced-stalks}
+\lean{Hironaka.HironakaReducedComplexAnalyticSpaces.isReduced_stalk}
+Every stalk of every object of this category is a reduced local ring.
+\leanok
+\end{theorem}
+\begin{proof}
+Locality is part of the native locally ringed space. At a given point
+take an actual analytic model chart covering it and a genuine preimage
+point. The open immersion induces an actual isomorphism from the
+abstract stalk to that model stalk. The latter is the previously proved
+whole reduced vanishing-quotient local ring. If an element of the
+abstract stalk is nilpotent, its image in the model stalk is nilpotent
+and hence zero. Injectivity of the actual stalk isomorphism makes the
+original element zero. Reducedness is therefore proved from the local
+models, rather than inserted as an additional stalk certificate.
+\end{proof}
+
+\begin{theorem}[Original holomorphic maps give genuine complex-structural morphisms]
+\label{hir:reduced-analytic-model-holomorphic-morphisms}
+\uses{hir:reduced-analytic-embedded-model-object,hir:actual-analytic-subspace-holomorphic-map,hir:actual-analytic-subspace-map-functor-laws}
+\lean{Hironaka.HironakaReducedComplexAnalyticSpaces.actualSubspaceMap_point,Hironaka.HironakaReducedComplexAnalyticSpaces.embeddedModelMap,Hironaka.HironakaReducedComplexAnalyticSpaces.embeddedModelMap_id,Hironaka.HironakaReducedComplexAnalyticSpaces.embeddedModelMap_comp}
+An actual holomorphic map between original open coordinate domains,
+carrying their specified analytic subsets into one another, induces a
+genuine morphism of these objects. It retains the literal quotient
+subspace map, commutes with the structural morphisms to the complex
+point, and preserves identities and composition.
+\leanok
+\end{theorem}
+\begin{proof}
+The actual subspace-map inclusion square reduces structural commutation
+to the native composition law for original holomorphic ambient maps.
+Composing any such map with the original constant map to $\mathbb C^0$
+is precisely the original source constant map. The resulting equality
+is the actual commutative triangle defining a slice morphism; the full
+subcategory then supplies the asserted analytic-space morphism.
+The underlying slice arrows of identity and composition are the actual
+subspace maps. Their previously proved functor laws give equality of
+these arrows. Native slice and full-subcategory extensionality give
+the exact analytic-space identity and composition laws.
+\end{proof}
+
+This supplies a concrete abstract reduced analytic-space category and its
+embedded generators. Intrinsic smooth loci, effective atlas gluing,
+change between unrelated presentations and resolution descent still
+require their actual geometric producers.

@@ -1,0 +1,99 @@
+\section{Genuine monomial blowup coefficients reflect the whole center-power filtration}
+
+Keep the actual coordinate center $P=(X_i:i\in A)$ and $e\in A$.
+For this chapter take the actual zero-direction chart $\sigma_0$ of the
+preceding genuine formal blowup construction. Put $B=A\setminus\{e\}$.
+Its literal exponent map is
+\[
+ T(\alpha)=\alpha+\bigl(\sum_{i\in B}\alpha_i\bigr)\mathbf e_e.
+\]
+This is the monomial chart underlying the substitutions in
+\cite[\S7, pp.~267--272]{bierstone-milman97-invent-math}.
+The conclusion is a genuine reflection theorem, rather than a supplied
+exceptional-valuation or saturation comparison. Other chart directions
+and the all-power strict-transform saturation bridge remain subsequent work.
+
+\begin{lemma}[The actual chart exponent map is injective and gives the true monomial product]
+\label{hir:actual-formal-monomial-blowup-exponent-embedding}
+\uses{hir:actual-formal-blowup-coordinate-power-image}
+The actual map $T$ is additive and injective. For every genuine exponent
+$\alpha$,
+\[
+ T(\alpha)_e=\sum_{i\in A}\alpha_i,
+ \qquad\prod_i\sigma_0(X_i)^{\alpha_i}=X^{T(\alpha)}.
+\]
+\lean{Hironaka.HironakaActualFormalMonomialBlowupReflection.actualMonomialBlowupExponent,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualMonomialBlowupExponent_other_weight,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualMonomialBlowupExponent_injective,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualMonomialBlowupExponent_exceptional,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualFormalBlowup_zero_coordinates,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualFormalBlowup_zero_coordinate_product}
+\leanok
+\end{lemma}
+\begin{proof}
+The true $B$-weight and the actual single-coordinate insertion are
+additive, proving additivity. The actual $B$-weight of $T(\alpha)$
+equals the $B$-weight of $\alpha$, because $e\notin B$.
+If $T(\alpha)=T(\beta)$, apply this true weight equality, then evaluate
+at $e$ to recover $\alpha_e=\beta_e$. At every other index the inserted
+single exponent is zero, so equality gives every remaining coordinate.
+Thus $\alpha=\beta$.
+Since $e\in A$, the true $A$-weight is the sum of the true $B$-weight
+and the exponent at $e$, proving the displayed coordinate formula.
+The literal zero-direction coordinate image is
+$X_iX_e^{\mathbf1_B(i)}$. Genuine power multiplicativity and the finite
+product over the actual support therefore give
+$X^\alpha X_e^{\sum_{i\in B}\alpha_i}=X^{T(\alpha)}$ in the true formal ring.
+\end{proof}
+
+\begin{theorem}[Every original coefficient survives at its literal true blown-up exponent]
+\label{hir:actual-formal-monomial-blowup-coefficient-reflection}
+\uses{hir:actual-formal-monomial-blowup-exponent-embedding}
+For EVERY actual formal series $F$ and EVERY exponent $\alpha$,
+\[
+ [X^{T(\alpha)}]\sigma_0(F)=[X^\alpha]F.
+\]
+In particular the genuine formal algebra map $\sigma_0$ is injective.
+\lean{Hironaka.HironakaActualFormalMonomialBlowupReflection.actualFormalBlowup_zero_coefficient,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualFormalBlowup_zero_injective}
+\leanok
+\end{theorem}
+\begin{proof}
+Apply the genuine formal substitution coefficient formula to the finite
+zero-constant coordinate family. Its actual summand at a source exponent
+$\beta$ is $[X^\beta]F$ times the coefficient at $T(\alpha)$ of the
+true product $\prod_i\sigma_0(X_i)^{\beta_i}$.
+By the preceding literal monomial formula, this second coefficient is
+one when $T(\beta)=T(\alpha)$ and zero otherwise. Actual injectivity of
+$T$ makes the sole surviving exponent exactly $\beta=\alpha$.
+The genuine coefficient sum therefore equals the claimed original
+coefficient. If two actual image series agree, this identity recovers
+every original coefficient; actual coefficient extensionality proves
+the original series equal, establishing injectivity.
+\end{proof}
+
+\begin{theorem}[Both whole actual center-power reflection directions and true normalized nonvanishing]
+\label{hir:actual-formal-monomial-blowup-whole-power-reflection}
+\uses{hir:actual-formal-monomial-blowup-coefficient-reflection,hir:actual-formal-coordinate-power-coefficient-kernel,hir:actual-formal-blowup-normalized-member}
+For EVERY actual $F\in S$ and every $d\in\mathbb N$,
+\[
+ F\in P^d\quad\Longleftrightarrow\quad X_e^d\mid\sigma_0(F).
+\]
+Thus the genuine inverse image of the whole exceptional principal power
+$(X_e^d)$ is exactly the actual whole $P^d$.
+For every nonzero actual $F\in P^d$, the internally constructed genuine
+normalized quotient $[F]_d$ in this chart is nonzero.
+\lean{Hironaka.HironakaActualFormalMonomialBlowupReflection.mem_coordinate_power_iff_blowup_zero_exceptional_dvd,Hironaka.HironakaActualFormalMonomialBlowupReflection.comap_exceptional_power_blowup_zero,Hironaka.HironakaActualFormalMonomialBlowupReflection.actualNormalizedFormalMember_zero_direction_ne_zero}
+\leanok
+\end{theorem}
+\begin{proof}
+Forward divisibility is supplied internally by the already proved
+whole-power chart image formula. Conversely assume the actual exceptional
+power divides $\sigma_0(F)$. The true variable-power coefficient kernel
+kills every target coefficient whose exponent at $e$ is less than $d$.
+For any actual source $\alpha$ of $A$-weight less than $d$, the preceding
+exponent formula gives $T(\alpha)_e<d$. The true coefficient-reflection
+identity therefore kills the actual source coefficient at $\alpha$.
+The genuine whole coordinate-power kernel puts $F$ in $P^d$.
+This proves both membership directions at every actual numerator and
+therefore equality of the actual whole ideal inverse images.
+Finally, if the actual normalized quotient of a nonzero $F$ were zero,
+its defining literal exceptional-product identity would give
+$\sigma_0(F)=0$. The independently proved actual substitution injectivity
+would force $F=0$, a contradiction. No target-shaped valuation,
+normalization or saturation premise is used.
+\end{proof}

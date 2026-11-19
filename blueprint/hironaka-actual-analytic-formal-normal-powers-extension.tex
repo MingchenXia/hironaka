@@ -1,0 +1,58 @@
+\section{Genuine entire analytic normal powers and exact formal contraction}
+
+The literal relative coefficient dictionary now allows genuine membership in
+entire analytic normal powers to be recovered from the actual formal Taylor
+series. The statement concerns the original coordinate normal ideals, not
+faithful flatness for an arbitrary ideal or convergence of prescribed series.
+
+\begin{theorem}[The entire original normal power is the actual analytic coefficient kernel]
+\label{hir:actual-entire-analytic-normal-power-relative-coefficient-kernel}
+\uses{hir:actual-relative-coefficient-polynomial-truncations,hir:actual-relative-coefficient-germ-stability}
+\lean{Hironaka.HironakaActualAnalyticFormalNormalPowers.mem_normalIdeal_pow_iff_actual_relative_coefficients_zero}
+\leanok
+For every genuine holomorphic germ $g$, every actual normal degree bound $q$,
+and both coordinate blocks, $g$ belongs to the entire original normal ideal
+power $N^q$ if and only if all actual stable analytic relative coefficient
+germs of normal degree less than $q$ vanish in the whole tangential germ ring.
+\end{theorem}
+\begin{proof}
+Let $P_q(g)$ be the independently constructed original relative quotient
+polynomial, with actual remainder $g-P_q(g)$ in $N^q$. If $g\in N^q$, then
+the genuine evaluation of $P_q(g)$ also belongs to $N^q$. The original whole
+polynomial coefficient separation annihilates every polynomial coefficient
+below degree $q$. Each such coefficient is the actual stable analytic
+coefficient germ. Conversely, if every actual low coefficient germ vanishes,
+every low coefficient of $P_q(g)$ vanishes by its stabilization identity.
+Every higher coefficient vanishes by construction of the genuine quotient
+polynomial. Thus the entire polynomial is zero. Its genuine whole remainder
+then proves $g\in N^q$. This also includes $q=0$ and empty normal or tangent
+coordinate blocks.
+\end{proof}
+
+\begin{theorem}[Every genuine formal normal power contracts to exactly the original analytic power]
+\label{hir:actual-formal-normal-power-contracts-exact-original-analytic-power}
+\uses{hir:actual-entire-analytic-normal-power-relative-coefficient-kernel,hir:actual-relative-coefficient-literal-formal-taylor-dictionary,hir:actual-original-formal-taylor-algebra-embedding}
+\lean{Hironaka.HironakaActualAnalyticFormalNormalPowers.actualUnshiftedTaylorAlgHom_injective,Hironaka.HironakaActualAnalyticFormalNormalPowers.mem_normalIdeal_pow_iff_actualTaylor_mem_formal_normal_pow,Hironaka.HironakaActualAnalyticFormalNormalPowers.comap_actual_formal_normal_pow_eq_original_normal_pow}
+\leanok
+Under the independently defined genuine original Taylor algebra embedding,
+the inverse image of every actual formal normal ideal power is exactly the
+entire original analytic normal ideal power. Equivalently, membership of the
+Taylor series of an arbitrary actual analytic germ in the formal normal power
+is equivalent to genuine membership of that same analytic germ in $N^q$.
+\end{theorem}
+\begin{proof}
+The true Taylor coordinate dictionary identifies the image of the original
+normal ideal with the actual formal normal coordinate ideal. The actual
+ideal-map power identity sends every original member of $N^q$ into its formal
+power. In the reverse direction, genuine formal normal-power membership
+annihilates every formal coefficient of normal degree less than $q$,
+regardless of the tangent degree. Thus each entire formal normal coefficient
+series below degree $q$ is zero. The literal relative Taylor dictionary
+identifies it with the genuine tangential Taylor series of the actual analytic
+relative coefficient germ. The original Taylor map is injective on the entire
+original germ ring, including after the genuine dimension reassociation
+$0+d=d$; hence each such actual coefficient germ is zero. Apply the preceding
+whole analytic coefficient-kernel criterion. Equality of the two entire ideals
+follows by their membership criterion. No existence of an analytic preimage
+for any arbitrary formal series is asserted.
+\end{proof}

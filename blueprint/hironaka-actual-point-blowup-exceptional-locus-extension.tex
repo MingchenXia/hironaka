@@ -1,0 +1,85 @@
+\section{The actual differential exceptional locus of the point chart}
+
+Throughout this chapter $\pi$ is the existing actual polynomial point
+chart map on the original $\mathbb C^n$,
+\[
+ \pi_e(z)=z_e,\qquad \pi_i(z)=z_e(b_i+z_i)\quad(i\ne e).
+\]
+The exceptional locus means the original locus where the actual
+holomorphic manifold differential is not bijective. No properness or
+global blowup universal property is assumed for this single chart map.
+
+\begin{theorem}[The actual manifold differential of the genuine point chart]
+\label{hir:actual-point-blowup-differential-coordinates}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualPointBlowupExceptionalLocus.mfderiv_actual_point_blowup_apply}
+\leanok
+For every point $z$, vector $v$ and coordinate $i$, the actual manifold
+holomorphic differential of the unchanged point chart satisfies
+\[
+ (D\pi_z(v))_i=
+ \begin{cases}
+ v_e,&i=e,\\
+ v_e(b_i+z_i)+z_e v_i,&i\ne e.
+ \end{cases}
+\]
+\end{theorem}
+\begin{proof}
+The original point chart is genuinely holomorphic everywhere. Compose
+its actual Fr\'echet differential with the continuous complex-linear
+$i$-th coordinate projection. The chain rule identifies this composition
+with the derivative of its actual scalar coordinate function. For
+$i=e$ that function is the original linear coordinate projection. For
+$i\ne e$ the product rule applied to $z_e(b_i+z_i)$ gives the displayed
+expression. Uniqueness of the Fr\'echet differential proves equality for
+every vector. On the original normed-space manifold with its self model,
+the actual manifold differential is the actual Fr\'echet differential;
+this existing dictionary transfers the computed expression to the
+original manifold differential, rather than postulating a Jacobian.
+\end{proof}
+
+\begin{theorem}[The genuine coordinate hyperplane lies in the actual exceptional locus in dimension at least two]
+\label{hir:actual-point-blowup-hyperplane-exceptional}
+\uses{hir:actual-point-blowup-differential-coordinates}
+\lean{Hironaka.HironakaActualPointBlowupExceptionalLocus.exists_actual_point_blowup_nonzero_kernel,Hironaka.HironakaActualPointBlowupExceptionalLocus.mem_exceptionalLocus_actual_point_blowup_of_coordinate_eq_zero}
+\leanok
+Suppose $n\ge2$ and $z_e=0$. The actual manifold differential of $\pi$
+at $z$ has a nonzero kernel vector. Consequently $z$ belongs to the
+existing differential-defined exceptional locus of $\pi$.
+\end{theorem}
+\begin{proof}
+Choose a genuine coordinate $j\ne e$, possible because $n\ge2$, and let
+$v$ be the actual standard coordinate vector $e_j$. Its $j$-th coordinate
+is one, so $v\ne0$, whereas $v_e=0$. The preceding differential formula
+gives zero in output coordinate $e$. Every other output coordinate is
+$v_e(b_i+z_i)+z_e v_i=0$. Thus the whole actual differential sends the
+nonzero vector $v$ to zero. It is not injective and therefore not
+bijective. This is exactly membership in the original exceptional locus.
+\end{proof}
+
+\begin{theorem}[The actual one-dimensional point chart is the identity]
+\label{hir:actual-point-blowup-one-dimensional-identity}
+\uses{hir:actual-analytic-blowup-coordinate-pullback-taylor-naturality}
+\lean{Hironaka.HironakaActualPointBlowupExceptionalLocus.actual_point_blowup_one_eq_id,Hironaka.HironakaActualPointBlowupExceptionalLocus.exceptionalLocus_actual_point_blowup_one,Hironaka.HironakaActualPointBlowupExceptionalLocus.strictTransform_actual_point_blowup_one}
+\leanok
+In dimension one, for every actual chart coordinate and parameter, the
+unchanged point chart is the identity. Its original exceptional locus
+is empty. For every closed set $A$, its original geometric strict
+transform under this chart map is exactly $A$.
+\end{theorem}
+\begin{proof}
+There is only one coordinate, namely $e$, so each component of $\pi(z)$
+is the corresponding component of $z$. Hence the actual map is the
+identity. Its actual manifold differential is the identity linear map,
+which is bijective at every point; its original exceptional locus is
+empty. The existing strict-transform definition is the closure of the
+inverse image of $A$ outside that exceptional locus. It consequently
+reduces to $\overline A=A$ because $A$ is closed.
+\end{proof}
+
+These statements supply the differential-defined exceptional-set input
+for the later point geometric comparison. They do not equate the
+normalized-member ideal with an original geometric strict-transform
+ideal. In dimension one that proposed equality can fail, so the genuine
+identity case above is retained separately. General positive-dimensional
+permissible centres require their own compatibility argument.

@@ -1,0 +1,93 @@
+\section{Actual analytic centre powers and exceptional quotients from local coefficient cosupport}
+
+The coefficient functions are the actual relative coefficients of genuine analytic
+germs. We use their literal coefficients, not an unproved identification with
+unnormalized derivatives. The construction concerns the coefficient-centre step
+of \cite[Theorem 9.4]{bierstone-milman97-invent-math}; arbitrary prescribed formal
+reduced vertices and the full transformed presentation remain separate.
+
+\begin{lemma}[Whole analytic and formal tail-coordinate powers have the same original members]
+\label{hir:actual-analytic-formal-tail-coordinate-power-contraction}
+\uses{hir:actual-formal-normal-power-contracts-exact-original-analytic-power,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{Hironaka.HironakaActualCoefficientAnalyticBlowup.actualTangentCentreVariables_eq_tail,Hironaka.HironakaActualCoefficientAnalyticBlowup.mem_analytic_tail_pow_iff_actualTaylor_mem,Hironaka.HironakaActualCoefficientAnalyticBlowup.actualPresentationCentreVariables_eq_tail}
+\leanok
+For every $k\le n$, let $A=\{i\in\{0,\ldots,n-1\}:k\le i\}$. The inverse
+image under the genuine whole Taylor map of the formal coordinate ideal
+power $(x_i:i\in A)^q$ is exactly the $q$-th power of the actual analytic
+coordinate-germ ideal with these same generators. The three-block
+presentation centre $(y,z)$, in coordinates $(u,y,z)$, is literally this
+tail-coordinate centre with cutoff $\dim u$.
+\end{lemma}
+\begin{proof}
+Write $n=k+t$. A finite index belongs to the range of the original inclusion
+$i\mapsto k+i$ precisely when its value is at least $k$: the reverse witness
+is its value minus $k$, which lies below $t$. Consequently the selected
+coordinate set is exactly the original standard normal-coordinate set.
+The analytic ideal is the span of those same original coordinate germs.
+The previously proved entire normal-power contraction therefore proves the
+claimed equivalence for every germ and every $q$. For the three-block centre,
+split an index into the $(u,y)$ and $z$ blocks. In the first block membership
+means its value is at least $\dim u$, by the same range calculation; every
+index in the $z$ block satisfies this bound and is a centre variable.
+This proves equality of the actual coordinate sets, including empty blocks.
+\end{proof}
+
+\begin{theorem}[True local coefficient cosupport supplies the whole actual analytic centre power]
+\label{hir:actual-local-coefficient-cosupport-analytic-centre-power}
+\uses{hir:actual-analytic-formal-tail-coordinate-power-contraction,hir:actual-local-coefficient-presentation-centre-power,hir:actual-relative-coefficient-literal-formal-taylor-dictionary}
+\lean{Hironaka.HironakaActualCoefficientAnalyticBlowup.mem_analyticPresentationCentre_pow_of_local_coefficient_cosupport}
+\leanok
+Let $g(u,y,z)$ be a genuine analytic germ. On a real open neighbourhood
+$U$ of the origin choose actual representatives $c_\gamma(u,y)$ of its
+original relative coefficient germs. For every $|\gamma|<q$ suppose
+$c_\gamma$ belongs at zero to an original ideal $\mathfrak a_\gamma$
+coherent on $U$, and
+\[
+ U\cap\{y=0\}\subset\operatorname{cosupp}
+  (\mathfrak a_\gamma,q-|\gamma|).
+\]
+Then $g$ belongs to the entire actual analytic ideal $(y,z)^q$.
+\end{theorem}
+\begin{proof}
+The literal whole Taylor coefficient dictionary identifies the normal
+coefficient of the Taylor series of $g$ with the Taylor series of the
+chosen original coefficient germ. The already proved real-domain local
+coefficient-cosupport theorem therefore puts the entire Taylor series of
+$g$ in the actual formal presentation-centre power $(y,z)^q$. The preceding
+entire inverse-image identity, and the literal equality of the presentation
+centre with the tail-coordinate centre, now place the original analytic
+germ itself in the whole analytic power. This uses neither a supplied
+analytic power nor convergence of an arbitrary formal member.
+\end{proof}
+
+\begin{theorem}[Finite analytic families internally produce coefficient data and genuine exceptional quotients]
+\label{hir:actual-finite-coefficient-centre-analytic-exceptional-quotients}
+\uses{hir:actual-finite-local-coherent-coefficient-ideals,hir:actual-local-coefficient-cosupport-analytic-centre-power,hir:actual-analytic-blowup-exceptional-quotient-formal-dictionary}
+\lean{Hironaka.HironakaActualCoefficientAnalyticBlowup.exists_actual_finite_coefficient_analytic_blowup}
+\leanok
+For every finite actual analytic family $g_i(u,y,z)$ and bound $q$, one
+can choose a real common low-coefficient holomorphic neighbourhood, actual
+relative coefficient representatives and their genuine coherent principal
+germ ideals internally. If the actual centre in that neighbourhood lies
+in each of the low coefficient cosupports of weight $q-|\gamma|$, then
+in every genuine coordinate chart with exceptional index belonging to
+the centre, the actual analytic pullback of $g_i$ has an actual analytic
+quotient by the exceptional coordinate to power $q$. Its whole Taylor
+series satisfies the exact normalized formal exceptional-product identity.
+\end{theorem}
+\begin{proof}
+Apply the proved finite actual coefficient construction. It gives genuine
+representatives and their real common domain, original principal-ideal
+coherence and original membership without assuming them. Its stable finite
+Taylor polynomial coefficients identify those same functions with every
+original relative coefficient germ. Under the stated ordinary cosupport
+containments, the previous theorem puts $g_i$ in the whole actual analytic
+centre power. Genuine analytic exceptional division then constructs its
+holomorphic quotient with the actual product identity. Applying the true
+Taylor homomorphism, its literal coordinate dictionary and its whole
+blowup naturality gives the displayed formal exceptional-product identity.
+The exceptional index is required to belong to the centre; no exceptional
+chart is fabricated for an empty centre. The formal exceptional variable
+is nonzero, so this product identity also uniquely determines the existing
+normalized formal member.
+\end{proof}
