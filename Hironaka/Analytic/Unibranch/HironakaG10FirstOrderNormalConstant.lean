@@ -15,7 +15,7 @@ theorem firstOrderNormalLinearEquiv_constant (d a : ℕ) (b : HolGerm (ComplexMo
     letI := tangentAlgebra d a
     firstOrderNormalLinearEquiv d a (b,0) =
       Ideal.Quotient.mk (normalIdeal d a ^ 2) (tangentPullback d a b) := by
-  letI := tangentAlgebra d a
+  let _ := tangentAlgebra d a
   have h := firstOrderNormalLinearEquiv_option_single d a none b
   have he : ((firstOrderExponentEquiv a) none).val = 0 := rfl
   have hm : normalExponentMonomial d a 0 = 1 := by simp [normalExponentMonomial]

@@ -20,7 +20,7 @@ theorem firstOrderNormalLinearEquiv_mul (d a : ℕ)
     firstOrderNormalLinearEquiv d a (b,v) * firstOrderNormalLinearEquiv d a (c,w) =
       firstOrderNormalLinearEquiv d a (b*c, b • w + c • v) := by
   classical
-  letI := tangentAlgebra d a
+  let _ := tangentAlgebra d a
   let E := firstOrderNormalLinearEquiv d a
   have hsplit (b : HolGerm (ComplexModel d)) (v : Fin a → HolGerm (ComplexModel d)) :
       E (b,v) = E (b,0) + E (0,v) := by

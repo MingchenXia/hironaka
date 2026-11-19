@@ -19,11 +19,11 @@ theorem flat_tensor_of_flat_quotient {R M : Type} [CommRing R] [AddCommGroup M] 
     Module.Flat (R ⧸ L) ((R ⧸ L) ⊗[R] M) := by
   let B := R ⧸ I
   let Q := R ⧸ L
-  letI : Algebra B Q := (Ideal.Quotient.factor hIL).toAlgebra
-  letI : IsScalarTower R B Q := IsScalarTower.of_algebraMap_eq (fun _ => rfl)
-  letI : Module.Flat B (B ⊗[R] M) := hflat
+  let _ : Algebra B Q := (Ideal.Quotient.factor hIL).toAlgebra
+  let _ : IsScalarTower R B Q := IsScalarTower.of_algebraMap_eq (fun _ => rfl)
+  let _ : Module.Flat B (B ⊗[R] M) := hflat
   have hQ : Module.Flat Q (Q ⊗[B] (B ⊗[R] M)) := inferInstance
-  letI := hQ
+  let _ := hQ
   exact Module.Flat.of_linearEquiv (TensorProduct.AlgebraTensorModule.cancelBaseChange R B Q Q M).symm
 end
 end Hironaka.Analytic.Unibranch.HironakaG10FlatNestedQuotientBaseChange

@@ -28,17 +28,17 @@ theorem actualSquareZeroMatrix_flat_iff (d t a : ℕ) {b : ℕ}
     letI : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
     letI : Module R M := Module.compHom M (tangentPullback d t).toRingHom
     Module.Flat R Q ↔ Module.Flat R M := by
-  letI := tangentAlgebra d t
+  let _ := tangentAlgebra d t
   let B := HolGerm (ComplexModel (d+t))
   let R := HolGerm (ComplexModel d)
   let Q := HolGerm (ComplexModel ((d+t)+a)) ⧸ actualSquareZeroMatrixIdeal (d+t) a F
   let M := (Fin a → B) ⧸ LinearMap.range F.mulVecLin
-  letI : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
-  letI : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
-  letI : Module R M := Module.compHom M (tangentPullback d t).toRingHom
+  let _ : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
+  let _ : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
+  let _ : Module R M := Module.compHom M (tangentPullback d t).toRingHom
   change Module.Flat R Q ↔ Module.Flat R M
-  letI : Module R B := Module.compHom B (tangentPullback d t).toRingHom
-  letI : Module.Flat R B := tangentPullback_flat d t
+  let _ : Module R B := Module.compHom B (tangentPullback d t).toRingHom
+  let _ : Module.Flat R B := tangentPullback_flat d t
   let e := actualSquareZeroMatrixAlgEquiv (d+t) a F
   let E : Q ≃ₗ[R] TrivSqZeroExt B M := {
     e.toRingEquiv.toAddEquiv with

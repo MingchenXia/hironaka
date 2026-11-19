@@ -27,7 +27,7 @@ theorem map_matrixColumnIdeal (d a : ℕ) {b : ℕ}
     Ideal.map (firstOrderNormalAlgEquiv d a).toRingHom (matrixColumnIdeal F) =
       Ideal.map (Ideal.Quotient.mk (normalIdeal d a ^ 2))
         (Ideal.span (Set.range (actualMatrixColumn d a F))) := by
-  letI := tangentAlgebra d a
+  let _ := tangentAlgebra d a
   simp only [matrixColumnIdeal, Ideal.map_span]
   apply congrArg Ideal.span
   ext x

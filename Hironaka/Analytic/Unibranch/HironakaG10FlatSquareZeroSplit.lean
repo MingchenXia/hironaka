@@ -15,9 +15,9 @@ variable {R B M : Type} [CommRing R] [CommRing B] [Module R B]
 /-- A product of two flat modules is flat. -/
 theorem flat_product [Module.Flat R B] [Module.Flat R M] : Module.Flat R (B × M) := by
   let C : Bool → Type _ := fun i => if i then M else B
-  letI : ∀ i, AddCommMonoid (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
-  letI : ∀ i, Module R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
-  letI : ∀ i, Module.Flat R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
+  let _ : ∀ i, AddCommMonoid (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
+  let _ : ∀ i, Module R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
+  let _ : ∀ i, Module.Flat R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
   let e : (B × M) ≃ₗ[R] (∀ i, C i) := {
     toFun := fun p i => match i with | false => p.1 | true => p.2
     invFun := fun f => (f false,f true)
@@ -35,10 +35,10 @@ theorem flat_squareZero_iff [Module B M] [Module.Flat R B] :
     Module.Flat R (TrivSqZeroExt B M) ↔ Module.Flat R M := by
   constructor
   · intro h
-    letI : Module.Flat R (B × M) := h
+    let _ : Module.Flat R (B × M) := h
     exact Module.Flat.of_retract (LinearMap.inr R B M) (LinearMap.snd R B M) (by ext; rfl)
   · intro h
-    letI := h
+    let _ := h
     have hp : Module.Flat R (B × M) := flat_product
     exact hp
 end

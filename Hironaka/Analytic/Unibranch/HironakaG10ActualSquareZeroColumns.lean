@@ -25,7 +25,7 @@ theorem firstOrderNormalAlgEquiv_matrixColumn (d a : ℕ) {b : ℕ}
     firstOrderNormalAlgEquiv d a (TrivSqZeroExt.inr (F.col j)) =
       Ideal.Quotient.mk (normalIdeal d a ^ 2) (actualMatrixColumn d a F j) := by
   classical
-  letI := tangentAlgebra d a
+  let _ := tangentAlgebra d a
   change firstOrderNormalLinearEquiv d a (0,F.col j) = _
   rw [firstOrderNormalLinearEquiv_vector]
   simp only [actualMatrixColumn, map_sum, map_mul, Matrix.col_apply]

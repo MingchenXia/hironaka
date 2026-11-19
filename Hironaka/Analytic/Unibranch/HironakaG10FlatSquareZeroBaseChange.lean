@@ -15,9 +15,9 @@ variable {R S B M : Type} [CommRing R] [CommRing S] [Algebra R S]
 
 theorem flat_product_modules {R B M : Type} [CommRing R] [AddCommGroup B] [Module R B] [AddCommGroup M] [Module R M] [Module.Flat R B] [Module.Flat R M] : Module.Flat R (B × M) := by
   let C : Bool → Type _ := fun i => if i then M else B
-  letI : ∀ i, AddCommMonoid (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
-  letI : ∀ i, Module R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
-  letI : ∀ i, Module.Flat R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
+  let _ : ∀ i, AddCommMonoid (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
+  let _ : ∀ i, Module R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
+  let _ : ∀ i, Module.Flat R (C i) := fun i => by cases i <;> dsimp [C] <;> infer_instance
   let e : (B × M) ≃ₗ[R] (∀ i, C i) := {
     toFun := fun p i => match i with | false => p.1 | true => p.2
     invFun := fun f => (f false,f true)
@@ -38,14 +38,14 @@ theorem flat_baseChange_product_iff [Module.Flat R B] :
   have hs : Module.Flat S (S ⊗[R] B) := inferInstance
   constructor
   · intro h
-    letI := h
-    letI : Module.Flat S ((S ⊗[R] B) × (S ⊗[R] M)) := Module.Flat.of_linearEquiv E.symm
+    let _ := h
+    let _ : Module.Flat S ((S ⊗[R] B) × (S ⊗[R] M)) := Module.Flat.of_linearEquiv E.symm
     exact Module.Flat.of_retract (LinearMap.inr S (S ⊗[R] B) (S ⊗[R] M))
       (LinearMap.snd S (S ⊗[R] B) (S ⊗[R] M)) (by ext; rfl)
   · intro h
-    letI := h
-    letI := hs
-    letI : Module.Flat S ((S ⊗[R] B) × (S ⊗[R] M)) := flat_product_modules
+    let _ := h
+    let _ := hs
+    let _ : Module.Flat S ((S ⊗[R] B) × (S ⊗[R] M)) := flat_product_modules
     exact Module.Flat.of_linearEquiv E
 /-- If an algebra splits linearly as a flat module plus a second summand,
 its quotient base change is flat precisely when the second summand is. -/

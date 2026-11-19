@@ -17,7 +17,7 @@ theorem linear_parts_mul_zero (d a : ℕ) (v w : Fin a → HolGerm (ComplexModel
     letI := tangentAlgebra d a
     firstOrderNormalLinearEquiv d a (0,v) * firstOrderNormalLinearEquiv d a (0,w) = 0 := by
   classical
-  letI := tangentAlgebra d a
+  let _ := tangentAlgebra d a
   rw [firstOrderNormalLinearEquiv_vector,firstOrderNormalLinearEquiv_vector]
   rw [Finset.sum_mul]
   apply Finset.sum_eq_zero
