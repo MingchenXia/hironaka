@@ -110,10 +110,10 @@ theorem varying_scalar_ideal_forces_native_quotient_flat
       F₀ G₀ hex R₀ S₀ hR hS I q hp hC hT hI hDirect z hz
     have hn : Module.Flat Q (Q ⊗[R] D) :=
       source_matrix_germ_flat_gives_quotient_native_flat d t q I hO hF hK₀ z hz0 hs
-    letI := hn
+    let _ := hn
     exact Module.Flat.of_linearEquiv
       ((centeredNativeMatrixCokernelEquiv d t F z hhol).baseChange R Q C D)
-  letI := hc
+  let _ := hc
   exact Module.Flat.of_linearEquiv
     ((centeredNativeMatrixCokernelEquiv d t F z hhol).baseChange R (R ⧸ I) C D).symm
 end

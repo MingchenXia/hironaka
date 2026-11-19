@@ -98,11 +98,11 @@ theorem source_matrix_germ_flat_gives_quotient_native_flat
         (parameterQuotientMap d q I) (parameterQuotientMap_kills d q I) (M i j))).restrictScalars Q)) := by
     rw [hmatrix] at hflat
     exact hflat
-  letI := hf'
+  let _ := hf'
   have hc : Module.Flat Q (Q ⊗[HolGerm (ComplexModel d)]
       ((Fin a → HolGerm (ComplexModel (d+t))) ⧸ LinearMap.range M.mulVecLin)) :=
     Module.Flat.of_linearEquiv (actualJointMatrixCokernelEquiv d t q I M)
-  letI := hc
+  let _ := hc
   exact Module.Flat.of_linearEquiv
     ((centeredNativeMatrixCokernelEquiv d t F x hhol).baseChange (HolGerm (ComplexModel d)) Q _ _).symm
 end
