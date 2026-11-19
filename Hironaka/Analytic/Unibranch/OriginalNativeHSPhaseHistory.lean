@@ -23,7 +23,7 @@ open Hironaka Hironaka.BlowupSequences
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
   ResolutionInvariantSeq CanonicalCentres HironakaActualAnalyticSubspaceMaps
   HironakaReducedComplexAnalyticSpaces HomogenizedGlueingTower
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 /-- Ordinary actual native windows, before powers or a choice of invariant. -/
 structure Windows (X : SourceReducedComplexSpace) (H : ℕ → ℕ) (N : ℕ) where

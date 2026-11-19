@@ -315,7 +315,7 @@ theorem truncQ_smul (n : ℕ) (r : HolGerm (ComplexModel d)) (x : TruncQ d t L K
 theorem qTrunc_smul (n : ℕ) (r : HolGerm (ComplexModel d)) (y : QTrunc d t L n) :
     letI := quotAlgebra d t K L
     (Ideal.Quotient.mk K r) • y = (tangentPullback d t r) • y := by
-  letI := quotAlgebra d t K L
+  let := quotAlgebra d t K L
   obtain ⟨c, rfl⟩ := Submodule.Quotient.mk_surjective _ y
   obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective c
   rfl
@@ -341,7 +341,7 @@ theorem flat_quotient_of_free_initial (hK : K ≠ ⊤)
         (originalNormalInitialIdeal d t L).map (MvPolynomial.map (Ideal.Quotient.mk K)))) :
     letI := quotAlgebra d t K L
     Module.Flat (HolGerm (ComplexModel d) ⧸ K) (HolGerm (ComplexModel (d+t)) ⧸ L) := by
-  letI := quotAlgebra d t K L
+  let := quotAlgebra d t K L
   have := isNoetherianRing_holGerm_euclidean (d+t)
   have hJ : normalQ d t L ≤ Ideal.jacobson ⊥ := by
     have h1 : normalIdeal d t ≤ Ideal.jacobson L :=

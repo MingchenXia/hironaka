@@ -35,7 +35,7 @@ open Hironaka Hironaka.HolomorphicIdealSheaves
   HironakaNativePulledIdealStalk HironakaActualAnalyticSubspace
   HironakaSmoothCentreRealDomainActualSheafStalk
   HironakaSingularSubspaceBlowupCartierUniversalIdealSheaf
-open ResolutionInvariantSpec (IsInvDomain)
+open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 noncomputable section
 

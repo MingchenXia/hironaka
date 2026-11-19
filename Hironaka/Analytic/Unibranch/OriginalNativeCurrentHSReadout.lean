@@ -17,7 +17,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaG11CompatibleCanonicalTowers HironakaG11StrictTransformTowers
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
   HironakaActualPowerBoundaryExponents ResolutionInvariantSeq
-open ResolutionInvariantSpec (IsInvDomain)
+open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {Base : SourceReducedComplexSpace} {N : ℕ} {ι : Type*}
   (w : ι→DimEmbedding Base N) (raw : ∀ i,MarkedIdeal N (Amb w i)) (e : ι→ℕ)

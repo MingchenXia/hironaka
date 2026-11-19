@@ -29,9 +29,9 @@ theorem scalarSections_zero_iff_operator_zero (d : ℕ) (U : Opens (ComplexModel
     ext v
     apply SeparatingDual.eq_zero_of_forall_dual_eq_zero (R := ℂ)
     intro ell
-    simpa only [ContinuousLinearMap.zero_apply, operatorScalarSection_apply] using h v ell
+    simpa only [zero_apply, operatorScalarSection_apply] using h v ell
   · intro h v ell
-    rw [operatorScalarSection_apply, h, ContinuousLinearMap.zero_apply, map_zero]
+    rw [operatorScalarSection_apply, h, zero_apply, map_zero]
 
 /-- If a finite subfamily generates all obstruction germs at this point,
 its literal scalar zero equations detect the whole operator. -/

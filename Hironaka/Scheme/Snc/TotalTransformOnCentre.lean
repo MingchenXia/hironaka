@@ -60,6 +60,18 @@ open AlgebraicGeometry CategoryTheory IsLocalRing Ideal TopologicalSpace Scheme.
 
 namespace AlgebraicGeometry
 
+private theorem map_map_le_maximalIdeal {S T R : Type*}
+    [CommRing S] [CommRing T] [CommRing R] [IsLocalRing S] [IsLocalRing T] [IsLocalRing R]
+    (e₁ : S ≃+* T) (e₂ : T ≃+* R) {I : Ideal S} (hI : I ≤ maximalIdeal S) :
+    (I.map e₁).map e₂ ≤ maximalIdeal R := by
+  have hm₁ : (maximalIdeal S).map e₁ = maximalIdeal T := by
+    simpa only [RingEquiv.symm_symm] using map_maximalIdeal_ringEquiv e₁.symm
+  have hm₂ : (maximalIdeal T).map e₂ = maximalIdeal R := by
+    simpa only [RingEquiv.symm_symm] using map_maximalIdeal_ringEquiv e₂.symm
+  have hincl := Ideal.map_mono (f := e₂) (Ideal.map_mono (f := e₁) hI)
+  rw [hm₁, hm₂] at hincl
+  exact hincl
+
 section Transport
 
 variable {Y X' : Scheme.{u}}
@@ -256,6 +268,7 @@ theorem stalkIdeal_le_iff_of_isOpenImmersion {Y : Scheme.{u}} (ι : Y ⟶ X) [Is
   · intro h
     exact hI.le.trans ((Ideal.map_mono h).trans hJ.symm.le)
 
+set_option maxHeartbeats 9000000 in
 include f in
 /-- The chart computation of the proofs of [Hau14, Proposition 5.3] and [Hau14, Proposition 5.4]
 ([Hau03, Appendix C]) at a possibly non-closed point: at a point `x'` of the exceptional divisor of
@@ -361,17 +374,15 @@ theorem exists_totalTransformData_of_mem_support_of_specializes {ι : Type*} [Fi
       ((congrArg (Ideal.map alg')
         (affineBlowUpAlgebra.map_algebraMap_eq_span_singleton (E.coord j hj).2)).trans
         ((Ideal.map_span alg' _).trans (congrArg span Set.image_singleton)))
-  have hmax : ∀ {S S' : Type u} [CommRing S] [CommRing S'] [IsLocalRing S] [IsLocalRing S']
-      (e : S ≃+* S'), (maximalIdeal S).map e = maximalIdeal S' := fun e => by
-    have := map_maximalIdeal_ringEquiv e.symm
-    rwa [RingEquiv.symm_symm] at this
   -- `y_j` vanishes at `p`
   have hjq : chartCoord E hj j ∈ p.asIdeal := by
     have hle := (Scheme.IdealSheafData.mem_support_iff_stalkIdeal_le_maximalIdeal (I := FU)
       (x := b₂)).mp hb₂F
-    have h1 := Ideal.map_mono (f := e₂) (Ideal.map_mono (f := e₁) hle)
+    have h1 := map_map_le_maximalIdeal
+      (T := ↑((affineBlowUp E.centerIdeal).presheaf.stalk ((affineBlowUp.chart E.centerIdeal (E.coord j hj)) p)))
+      (R := Localization.AtPrime p.asIdeal) e₁ e₂ hle
     have h1' : span {alg' (alg (E.v j))} ≤ maximalIdeal (Localization.AtPrime p.asIdeal) :=
-      hFchart.symm.le.trans (h1.trans ((congrArg (Ideal.map e₂) (hmax e₁)).trans (hmax e₂)).le)
+      hFchart.symm.le.trans h1
     have hmem := h1' (mem_span_singleton_self _)
     rw [chartCoord_self]
     exact (IsLocalization.AtPrime.to_map_mem_maximal_iff
@@ -394,8 +405,12 @@ theorem exists_totalTransformData_of_mem_support_of_specializes {ι : Type*} [Fi
     hc''inj T' hT hT'
   obtain ⟨hshape, hlt⟩ := hchartData
   -- back along the ring isomorphisms and the two restrictions
-  have h₂ := TotalTransformData.of_ringEquiv e₂ hFchart (fun i => rfl) hshape
-  have h₁ := TotalTransformData.of_ringEquiv e₁ rfl (fun i => rfl) h₂
+  have h₂ : TotalTransformData ((FU.stalkIdeal b₂).map e₁) (fun i => (Tb i).map e₁) :=
+    TotalTransformData.of_ringEquiv
+      (S := ↑((affineBlowUp E.centerIdeal).presheaf.stalk ((affineBlowUp.chart E.centerIdeal (E.coord j hj)) p)))
+      (S' := Localization.AtPrime p.asIdeal) (T' := T') e₂ hFchart (fun i => rfl) hshape
+  have h₁ : TotalTransformData (FU.stalkIdeal b₂) Tb :=
+    TotalTransformData.of_ringEquiv e₁ rfl (fun i => rfl) h₂
   have h₀ := TotalTransformData.of_comap_isOpenImmersion ρ₂ (Z₀.comap (blowUpπ Z₀))
     (fun i => ((D i).comap V₀.1.ι).comap (blowUpπ Z₀)) b₂ (comap_restrictHom _ _)
     (fun i => comap_π_comap_restrictHom _ _ _) h₁

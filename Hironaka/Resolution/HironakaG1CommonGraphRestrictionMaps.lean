@@ -104,6 +104,7 @@ theorem commonGraphSecondRestriction_openImage (hBV : B ≤ V) :
 
 /-- Use the same underlying charted space after reindexing an equal
 finite coordinate dimension. -/
+@[instance_reducible]
 def chartedSpaceReindex {d e : ℕ} {T : Type} [TopologicalSpace T]
     [ChartedSpace (ComplexModel e) T] (h : e = d) :
     ChartedSpace (ComplexModel d) T := h ▸ inferInstanceAs (ChartedSpace (ComplexModel e) T)

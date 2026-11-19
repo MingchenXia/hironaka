@@ -361,9 +361,9 @@ theorem isRegularLocalRing_localization_chartOrigin
 theorem ringKrullDim_localization_chartOrigin
     (hx : maximalIdeal R = Ideal.span (Set.range x)) (hn : (n : WithBot ℕ∞) = ringKrullDim R)
     [(chartOrigin x r).IsPrime] : ringKrullDim (Localization.AtPrime (chartOrigin x r)) = n := by
-  have := isRegularLocalRing_localization_chartOrigin x r hx hn
+  have hregular := isRegularLocalRing_localization_chartOrigin x r hx hn
   refine le_antisymm ?_ (natCast_le_ringKrullDim_localization_chartOrigin x r hx hn)
-  rw [← IsRegularLocalRing.spanFinrank_maximalIdeal]
+  rw [← @IsRegularLocalRing.spanFinrank_maximalIdeal (Localization.AtPrime (chartOrigin x r)) _ hregular]
   exact Nat.cast_le.mpr (spanFinrank_maximalIdeal_localization_chartOrigin_le x r)
 
 end ChartLocal

@@ -53,12 +53,28 @@ open IsLocalRing MvPolynomial
 
 universe u
 
+private theorem ordElem_algebraMap_le_of_fibrePolynomial {S K : Type*} [CommRing S]
+    [Field K] {k : ℕ} (ψ : S →+* MvPolynomial (Fin k) K)
+    (𝔮 : Ideal S) [𝔮.IsPrime] [(𝔮.map ψ).IsPrime] (hcomap : 𝔮 = (𝔮.map ψ).comap ψ)
+    (a : S) (ha : ψ a ≠ 0) :
+    ordElem (algebraMap S (Localization.AtPrime 𝔮) a) ≤ ((ψ a).totalDegree : ℕ∞) := by
+  let Ψ : Localization.AtPrime 𝔮 →+* Localization.AtPrime (𝔮.map ψ) :=
+    Localization.localRingHom 𝔮 (𝔮.map ψ) ψ hcomap
+  have : IsLocalHom Ψ := Localization.isLocalHom_localRingHom 𝔮 (𝔮.map ψ) ψ hcomap
+  have h := ordElem_le_ordElem_map Ψ (algebraMap S (Localization.AtPrime 𝔮) a)
+  have hmap : Ψ (algebraMap S (Localization.AtPrime 𝔮) a) =
+      algebraMap _ (Localization.AtPrime (𝔮.map ψ)) (ψ a) :=
+    Localization.localRingHom_to_map 𝔮 (𝔮.map ψ) ψ hcomap a
+  rw [hmap] at h
+  exact h.trans (ordElem_algebraMap_le_totalDegree _ ha)
+
 variable {R : Type u} [CommRing R] [IsRegularLocalRing R] {n : ℕ} (x : Fin n → R)
   (hx : maximalIdeal R = Ideal.span (Set.range x)) (hn : (n : WithBot ℕ∞) = ringKrullDim R)
   (r : Fin n)
 
 include hx hn
 
+set_option maxHeartbeats 2000000 in
 /-- **The order of a transform at every prime of the fibre** (the proof of [Kol07, Lemma 61]: "in
 `π⁻¹_* f` we get a monomial of degree `≤ m`"; at the non-rational primes the argument is the
 library's own): for `f ∈ Pᵐ` of order exactly `m`, the transform `f / x_rᵐ` has order `≤ m` in the
@@ -117,23 +133,11 @@ theorem ordElem_algebraMap_transformElem_le (𝔮 : Ideal (chartRing x r)) [𝔮
     unfold MvPolynomial.totalDegree
     exact Finset.sup_mono hsub
   have hPdeg : (MvPolynomial.map (residue R) Q).totalDegree ≤ m := hPdeg'.trans hdeg
-  -- the local homomorphism `R'_𝔮 → κ[Y]_𝔮̄`
   have := hprime
-  let Ψ : Localization.AtPrime 𝔮 →+* Localization.AtPrime (𝔮.map ψ) :=
-    Localization.localRingHom 𝔮 (𝔮.map ψ) ψ hcomap
-  have : IsLocalHom Ψ := Localization.isLocalHom_localRingHom 𝔮 (𝔮.map ψ) ψ hcomap
-  have h1 : ordElem (algebraMap (chartRing x r) (Localization.AtPrime 𝔮) (transformElem x r f hf))
-      ≤ ordElem (Ψ (algebraMap _ _ (transformElem x r f hf))) := ordElem_le_ordElem_map Ψ _
-  have h2 : Ψ (algebraMap _ _ (transformElem x r f hf)) =
-      algebraMap _ (Localization.AtPrime (𝔮.map ψ)) (MvPolynomial.map (residue R) Q) := by
-    rw [← hψQ]
-    exact Localization.localRingHom_to_map 𝔮 (𝔮.map ψ) ψ hcomap _
-  have h3 : ordElem (algebraMap _ (Localization.AtPrime (𝔮.map ψ)) (MvPolynomial.map (residue R) Q))
-      ≤ ((MvPolynomial.map (residue R) Q).totalDegree : ℕ∞) :=
-    ordElem_algebraMap_le_totalDegree _ hP0
-  refine h1.trans ?_
-  rw [h2]
-  exact h3.trans (by exact_mod_cast hPdeg)
+  have hψne : ψ (transformElem x r f hf) ≠ 0 := by rwa [hψQ]
+  have hψdeg : (ψ (transformElem x r f hf)).totalDegree ≤ m := by rwa [hψQ]
+  exact (ordElem_algebraMap_le_of_fibrePolynomial ψ 𝔮 hcomap _ hψne).trans
+    (by exact_mod_cast hψdeg)
 
 /-- [Kol07, Lemma 61] in local form at every point of the fibre
 (`Hironaka/Algebra/Local/Lemma61.lean` is the case of the `κ`-rational points): if `I ≤ Pᵐ` and `ord

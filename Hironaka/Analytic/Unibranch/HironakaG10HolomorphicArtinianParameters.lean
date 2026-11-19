@@ -23,9 +23,9 @@ theorem truncated_germ_finite_local_nilpotent (n q : ℕ)
         ∃ k : ℕ, IsLocalRing.maximalIdeal Q ^ k = ⊥ := by
   let J := I ⊔ IsLocalRing.maximalIdeal (HolGerm (ComplexModel n)) ^ q
   let Q := HolGerm (ComplexModel n) ⧸ J
-  letI : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr hproper
-  letI : IsLocalRing Q := IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
-  letI : FiniteDimensional ℂ Q := finiteDimensional_quotient_sup_maximalIdeal_pow n q I
+  let : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing Q := IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
+  let : FiniteDimensional ℂ Q := finiteDimensional_quotient_sup_maximalIdeal_pow n q I
   exact ⟨inferInstance,Module.finrank ℂ Q,⟨Module.finBasis ℂ Q⟩,maximalIdeal_nilpotent⟩
 
 end Hironaka.Analytic.Unibranch.HironakaG10HolomorphicArtinianParameters

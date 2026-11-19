@@ -95,7 +95,7 @@ theorem map_scalarOperatorSection_stalk_ideal_zero (d : ℕ) (U : Opens (Complex
     change HolGerm.mk (operatorScalarFunction d S q.1 q.2) _ =
       germAt (0 : ComplexModel d) (operatorScalarFunction d S q.1 q.2)
     rw [germAt_of_holAt h]
-    simp only [zero_add, add_zero]
+    simp only [zero_add]
   · rintro ⟨q,rfl⟩
     refine ⟨q,?_⟩
     have h : HolAt (operatorScalarFunction d S q.1 q.2) (0 : ComplexModel d) :=
@@ -103,7 +103,7 @@ theorem map_scalarOperatorSection_stalk_ideal_zero (d : ℕ) (U : Opens (Complex
     change germAt (0 : ComplexModel d) (operatorScalarFunction d S q.1 q.2) =
       HolGerm.mk (operatorScalarFunction d S q.1 q.2) _
     rw [germAt_of_holAt h]
-    simp only [zero_add, add_zero]
+    simp only [zero_add]
 
 end
 end Hironaka.Analytic.Unibranch.HironakaG10SchurSectionStalk

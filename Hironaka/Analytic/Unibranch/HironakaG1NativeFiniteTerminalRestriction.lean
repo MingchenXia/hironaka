@@ -23,7 +23,7 @@ open Hironaka Hironaka
   HironakaOriginalTerminalAtlas HironakaOriginalTerminalManifold
   HironakaG1OriginalTerminalOpenRestriction SourceReducedComplexSpace
   OriginalNativeModification SmoothCentreModification HironakaG1NativeModificationIsoTransport
-open ResolutionInvariantSpec (IsInvDomain)
+open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 attribute [local instance] originalTerminalChartedSpace originalTerminalGluedSpace_isComplexManifold
 

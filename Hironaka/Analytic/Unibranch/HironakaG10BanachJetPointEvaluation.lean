@@ -38,7 +38,7 @@ theorem coefficientEvaluation_banachJet_eq_original
     coefficientEvaluation b z (parameterTensorEquiv b (banachJet d q φ f)) j =
       φ (HolGerm.mk (pointCoordinate z j ∘ f)
         (hf.mono fun _ h => (pointCoordinate z j).differentiableAt.comp _ h)) := by
-  letI := parameterCoefficientModule (E := r → holSubalgebra K) b
+  let := parameterCoefficientModule (E := r → holSubalgebra K) b
   rw [coefficientEvaluation_apply]
   symm
   simpa [pointCoordinate] using

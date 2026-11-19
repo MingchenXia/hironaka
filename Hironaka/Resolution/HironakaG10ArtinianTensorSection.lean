@@ -15,7 +15,7 @@ def quotientBaseMap {Q : Type} [CommRing Q] [Algebra ℂ Q]
       Ideal.map (tangentPullback d t).toRingHom (RingHom.ker φ.toRingHom)) :=
   (Ideal.Quotient.liftₐ (RingHom.ker φ.toRingHom)
     ((Ideal.Quotient.mkₐ ℂ _).comp (tangentPullback d t))
-    (fun a ha => Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_map_of_mem _ ha))).comp
+    (fun _ ha => Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_map_of_mem _ ha))).comp
       (Ideal.quotientKerAlgEquivOfSurjective hsurj).symm.toAlgHom
 
 /-- Universal tensor section built from the actual base and fibre pullbacks. -/

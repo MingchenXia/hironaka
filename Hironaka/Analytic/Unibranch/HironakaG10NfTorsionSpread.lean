@@ -227,6 +227,7 @@ variable {n : ℕ} {Y : Type} [TopologicalSpace Y] [ChartedSpace (ComplexModel n
   (hland : realOpenStrictTransform d t j b U W ⊆ f ⁻¹' V)
   {k : ℕ} (J : Fin k → realOpenChartDomain d t j b U → ℂ)
 
+omit [IsComplexManifold n Y] in
 include hf hland in
 /-- Torsion bound in the joint quotient ⟺ strict ideal bound in the ambient stalk. -/
 theorem pivotTorsion_le_iff (y : realOpenChartDomain d t j b U) (hy : y ∈ localDomain d t j b U W h0 hW) :

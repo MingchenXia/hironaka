@@ -26,7 +26,7 @@ theorem joint_source_germ_eq_coefficient_jet
     {O : Set (ComplexModel d × X)} (hO : IsOpen O)
     {F : ComplexModel d × X → ℂ} (hF : DifferentiableOn ℂ F O)
     (hK : ∀ z ∈ K, (0, z) ∈ O) (z : K) :
-    ∃ (hf : ∀ᶠ s in 𝓝 (0 : ComplexModel d),
+    ∃ (_hf : ∀ᶠ s in 𝓝 (0 : ComplexModel d),
       DifferentiableAt ℂ (restrictParam K hF) s)
       (hg : ∀ᶠ s in 𝓝 (0 : ComplexModel d), DifferentiableAt ℂ (fun s => F (s,z)) s),
       φ (HolGerm.mk (fun s => F (s,z)) hg) =

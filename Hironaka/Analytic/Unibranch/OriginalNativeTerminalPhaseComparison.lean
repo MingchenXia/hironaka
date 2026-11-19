@@ -19,7 +19,7 @@ open Hironaka Hironaka.BlowupSequences
   MarkedIdealBiholomorphism HironakaReducedComplexAnalyticSpaces
   HironakaG11CompatibleAnalyticCover SourceReducedComplexSpace
   HironakaOriginalTerminalOverlapComparison HironakaG8LocalHistory
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 variable {n : ℕ} {X X' Y Y' : CMfd.{0} n}
 
 def strictSpace (T : BlowupTower X Y) (W : Set X)

@@ -134,6 +134,7 @@ theorem centerSplitEquiv_prod_X_pow (β : Fin r →₀ ℕ) :
     fun j _ => by rw [map_pow, centerSplitEquiv_X_of_lt A n r hrn j.2]
   rw [Finset.prod_congr rfl h, monomial_eq, C_1, one_mul, Finsupp.prod]
 
+set_option maxHeartbeats 800000 in
 /-- The key identity: the initial form of the image of `F` in the Rees algebra is the reduction of
 the coefficients of `F` modulo `I`. -/
 theorem initialAux_coe_reesPresentation (F : MvPolynomial (Fin r) (MvPolynomial (Fin n) A)) :
@@ -162,7 +163,8 @@ theorem initialAux_coe_reesPresentation (F : MvPolynomial (Fin r) (MvPolynomial 
         (Ideal.span (Set.range (X : Fin r →
           MvPolynomial (Fin r) (MvPolynomial (Fin n) A ⧸ centerIdeal A n r)))) ^ β.degree := by
       rw [monomial_eq, C_1, one_mul, Finsupp.prod, Finsupp.degree_apply]
-      exact prod_pow_mem_pow (Ideal.span (Set.range X)) β.support β X
+      exact prod_pow_mem_pow (Ideal.span (Set.range (X : Fin r →
+        MvPolynomial (Fin r) (MvPolynomial (Fin n) A ⧸ centerIdeal A n r)))) β.support β X
         fun j => Ideal.subset_span ⟨j, rfl⟩
     have hcc := RingHom.congr_fun (constantCoeff_comp_centerSplitEquiv A n r hrn) c
     rw [RingHom.comp_apply, RingHom.coe_coe] at hcc

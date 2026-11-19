@@ -22,7 +22,7 @@ open Hironaka Hironaka.HolomorphicIdealSheaves
   HironakaG11PresLineState HironakaSmoothSubmersionCartesianTower
   HironakaSmoothSubmersionOriginalContactHistory BlowupTowers BlowupTowerTransforms
   MarkedIdeals MarkedIdeals.MarkedIdeal CanonicalCentres ResolutionInvariantSpec
-open HomogenizedGlueingTower (strictAlong)
+open Hironaka.HomogenizedGlueingTower (strictAlong)
 open scoped ProductComplexManifold
 
 variable {X Y : SourceReducedComplexSpace} {f : X⟶Y} {x : X.obj.left}

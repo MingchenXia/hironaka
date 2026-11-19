@@ -18,8 +18,8 @@ theorem normalPowerLinearEquiv_single (d a q : ℕ) (α : normalExponentIndex a 
     (normalPowerLinearEquiv d a q) (Pi.single α b) =
       b • Ideal.Quotient.mk (normalIdeal d a ^ q) (normalExponentMonomial d a α.val) := by
   classical
-  letI := tangentAlgebra d a
-  letI := normalExponentFintype a q
+  let := tangentAlgebra d a
+  let := normalExponentFintype a q
   change normalMonomialCombination d a q (Pi.single α b) = _
   simp [normalMonomialCombination]
 
@@ -32,8 +32,8 @@ theorem firstOrderNormalLinearEquiv_option_single (d a : ℕ) (o : Option (Fin a
       b • Ideal.Quotient.mk (normalIdeal d a ^ 2)
         (normalExponentMonomial d a ((firstOrderExponentEquiv a) o).val) := by
   classical
-  letI := tangentAlgebra d a
-  letI := normalExponentFintype a 2
+  let := tangentAlgebra d a
+  let := normalExponentFintype a 2
   let e := firstOrderExponentEquiv a
   have hf : (fun α : normalExponentIndex a 2 =>
       match e.symm α with
@@ -44,7 +44,7 @@ theorem firstOrderNormalLinearEquiv_option_single (d a : ℕ) (o : Option (Fin a
     | none =>
       have he : α = e none := by rw [← ho]; exact (e.apply_symm_apply α).symm
       subst α
-      cases o <;> simp [ho]
+      cases o <;> simp
     | some j =>
       have he : α = e (some j) := by rw [← ho]; exact (e.apply_symm_apply α).symm
       subst α
@@ -56,7 +56,7 @@ theorem firstOrderNormalLinearEquiv_option_single (d a : ℕ) (o : Option (Fin a
         · have hne : e (some i) ≠ e (some j) := by
             intro h
             exact hij (Option.some.inj (e.injective h))
-          simp [Pi.single_apply, hij, hne]
+          simp [hij, hne]
   cases o with
   | none =>
     change normalPowerLinearEquiv d a 2 (fun α => match e.symm α with | none => b | some _ => 0) = _

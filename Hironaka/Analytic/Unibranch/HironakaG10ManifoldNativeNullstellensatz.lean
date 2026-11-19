@@ -65,7 +65,7 @@ theorem wholeVanishing_le_radical_of_support_subset {n : ℕ} {M : Type}
         (chartAt (ComplexModel n) (t z)).left_inv (mem_chart_source (ComplexModel n) (t z))] using hzF i
     have hone : (1 : HolGerm (ComplexModel n)) ∈ IsLocalRing.maximalIdeal _ := by
       have h := hle (by rw [htop]; trivial : (1 : _) ∈ J (t z))
-      simpa using h
+      simp at h
     exact (IsLocalRing.maximalIdeal.isMaximal (HolGerm (ComplexModel n))).ne_top
       (by rw [Ideal.eq_top_iff_one]; exact hone)
   have hvan : Ideal.map E.toRingHom (actualWholeSheafStalkIdeal (vanishingIdeal (n := n) C) x) ≤

@@ -59,7 +59,7 @@ theorem finite_irreducible_decomposition (X : SourceReducedComplexSpace)
             A.val = B ∪ C ∧ A.val ≠ B ∧ A.val ≠ C := by
           unfold IsIrreducibleAnalyticSubset at hirr
           simp only [A.property,hnon,true_and] at hirr
-          push_neg at hirr
+          push Not at hirr
           exact hirr
         obtain ⟨B,C,hB,hC,hBA,hCA,hunion,hneB,hneC⟩ := hsplit
         let B' : {A : Set X.obj.left // X.IsAnalyticSubset A} := ⟨B,hB⟩
