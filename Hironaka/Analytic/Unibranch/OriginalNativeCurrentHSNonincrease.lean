@@ -18,8 +18,8 @@ open Hironaka Hironaka.BlowupSequences
   HironakaG11StrictTransformTowers HironakaG11WindowTowers HironakaG11ManifoldWindowCentres
   OriginalNativeCurrentHSReadout BlowupTowers BlowupTowerTransforms
   MarkedIdeals MarkedIdeals.MarkedIdeal ResolutionInvariantSeq
-open HomogenizedGlueingTower (strictAlong)
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.HomogenizedGlueingTower (strictAlong)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {Base : SourceReducedComplexSpace} {N : ℕ} {ι : Type*}
   (w : ι→DimEmbedding Base N) (raw : ∀ i,MarkedIdeal N (Amb w i)) (e : ι→ℕ)

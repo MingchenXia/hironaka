@@ -20,7 +20,7 @@ open Hironaka Hironaka SourceReducedComplexSpace
   HironakaG11CompatibleAnalyticCover OriginalNativeHSCompactShadowWindows
   HironakaActualPowerBoundaryExponents HironakaG8LocalHistory ResolutionInvariantOrder
   BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal ResolutionInvariantSeq CanonicalCentres
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {X : SourceReducedComplexSpace} {K : Set X.obj.left} (M : Maximum X K) (hK : IsCompact K)
 local notation "H" => originalStalkHS X M.point

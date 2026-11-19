@@ -34,7 +34,7 @@ open Hironaka Hironaka.HolomorphicIdealSheaves
   SourceReducedComplexSpace OriginalNativeModification OriginalIntrinsicSingularLocus
   HironakaG1OriginalSingularCleanup HironakaG1NativeCleanupModelIndependence
   HironakaG1NativeCleanupComponentModelIndependence
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 attribute [local instance] originalTerminalChartedSpace originalTerminalGluedSpace_isComplexManifold
 

@@ -23,7 +23,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaG11CompatibleAnalyticCover HironakaG11PresWindows
   HironakaG11SingularCentreModification HironakaG1RSingularCentreEmbedded
   SourceReducedComplexSpace OriginalNativeTerminalPhaseComparison
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 variable {n : ℕ} {X Y : CMfd.{0} n}
 
 private theorem conventional_eq_of_hsTowerState

@@ -29,8 +29,8 @@ open Hironaka Hironaka.HolomorphicIdealSheaves
   ResolutionInvariantSeq MarkedIdealBiholomorphism HironakaIntrinsicComplexAnalyticRegularLocus
   HironakaG11SingularCentreModification SmoothCentreModification EmbeddedBlowup
   HironakaIntrinsicReducedCentreIdealSheaf HironakaG11PresPresentation
-open ResolutionInvariantSpec (IsInvDomain)
-open HomogenizedGlueingTower (strictAlong)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
 
