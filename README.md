@@ -1,8 +1,8 @@
 # Hironaka exact build-cache workflow
 
 This branch builds and publishes a Lean build cache for Hironaka source commit
-`949d7f7a3add128f276edddf98bb172b3885acaf`. The workflow runs when the branch is
-updated. It stages assets in the draft release `build-cache-lean-4.33.1-949d7f7a3add`
+`6ad4296663977a25e15cb476504f414f2aaf9e23`. The workflow runs when the branch is
+updated. It stages assets in the draft release `build-cache-lean-4.33.1-6ad429666397`
 and makes the release public after verifying the complete archive. [GitHub releases](https://github.com/MingchenXia/hironaka/releases)
 
 The default runner is the ordinary disposable `ubuntu-24.04` runner. The workflow
@@ -93,7 +93,7 @@ build to force this precondition. On that fresh checkout, with `lean` on PATH:
 ```sh
 # Explicit values from the verified Actions publication receipt:
 export CACHE_REPO=MingchenXia/hironaka
-export CACHE_TAG='build-cache-lean-4.33.1-949d7f7a3add'
+export CACHE_TAG='build-cache-lean-4.33.1-6ad429666397'
 export TRUSTED_MANIFEST_SHA256='THE_SHA256_FROM_THE_RELEASE_NOTES'
 export CHECKOUT='/absolute/path/to/fresh/source'
 export CACHE_DIRECTORY='/absolute/path/to/fresh/download'
