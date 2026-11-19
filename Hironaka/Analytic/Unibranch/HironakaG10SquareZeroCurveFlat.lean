@@ -46,16 +46,16 @@ theorem curve_squareZero_quotient_flat {a b c : ℕ} (d t : ℕ)
   let FM := germMat 0 (curveFamily d t L F)
   let Q := HolGerm (ComplexModel ((1+t)+a)) ⧸ actualSquareZeroMatrixIdeal (1+t) a FM
   let M := (Fin a → B) ⧸ LinearMap.range FM.mulVecLin
-  letI : Algebra B (HolGerm (ComplexModel ((1+t)+a))) := tangentAlgebra (1+t) a
-  letI : Module R Q := Module.compHom Q (tangentPullback 1 t).toRingHom
-  letI : Module R M := Module.compHom M (tangentPullback 1 t).toRingHom
+  let _ : Algebra B (HolGerm (ComplexModel ((1+t)+a))) := tangentAlgebra (1+t) a
+  let _ : Module R Q := Module.compHom Q (tangentPullback 1 t).toRingHom
+  let _ : Module R M := Module.compHom M (tangentPullback 1 t).toRingHom
   change Module.Flat R Q
   have hn : Module.Flat R (nativeCokernel 1 t FM) :=
     native_curve_cokernel_flat_of_exact_normal_fibre d t F G hF hG hcomp hfib L
   have hn' : Module.Flat R ((Fin a → B) ⧸ (LinearMap.range FM.mulVecLin).restrictScalars R) := by
     exact hn
   have hm : Module.Flat R M := by
-    letI := hn'
+    let _ := hn'
     exact Module.Flat.of_linearEquiv (Submodule.Quotient.restrictScalarsEquiv R (LinearMap.range FM.mulVecLin)).symm
   exact (actualSquareZeroMatrix_flat_iff 1 t a FM).mpr hm
 end

@@ -26,11 +26,11 @@ theorem flat_restrict_of_ringEquiv {R S M : Type} [CommRing R] [CommRing S]
     [AddCommGroup M] [Module S M] (e : R ≃+* S) (h : Module.Flat S M) :
     letI : Module R M := Module.compHom M e.toRingHom
     Module.Flat R M := by
-  letI : Algebra R S := e.toRingHom.toAlgebra
-  letI : Module R M := Module.compHom M e.toRingHom
-  letI : IsScalarTower R S M := IsScalarTower.of_compHom R S M
-  letI : Module.Flat R S := RingHom.Flat.of_bijective e.bijective
-  letI : Module.Flat S M := h
+  let _ : Algebra R S := e.toRingHom.toAlgebra
+  let _ : Module R M := Module.compHom M e.toRingHom
+  let _ : IsScalarTower R S M := IsScalarTower.of_compHom R S M
+  let _ : Module.Flat R S := RingHom.Flat.of_bijective e.bijective
+  let _ : Module.Flat S M := h
   exact Module.Flat.trans R S M
 
 /-- An exact original normal fibre gives actual centered matrix-cokernel
@@ -49,11 +49,11 @@ theorem native_curve_cokernel_flat_of_exact_normal_fibre {a b c : ℕ} (d t : �
       (nativeCokernel 1 t (germMat 0 (curveFamily d t L F))) := by
   let FM := curveFamily d t L F
   let M := germCokernel (productFamily t FM) 0
-  letI : Module (HolGerm ℂ) M := parameterModule (productFamily t FM) 0
+  let _ : Module (HolGerm ℂ) M := parameterModule (productFamily t FM) 0
   have hflat : Module.Flat (HolGerm ℂ) M :=
     curve_cokernel_flat_of_exact_normal_fibre d t F G hF hG hcomp hfib L
-  letI : Module (HolGerm (ComplexModel 1)) M := Module.compHom M baseGermEquiv.toRingHom
-  letI : Module.Flat (HolGerm (ComplexModel 1)) M := flat_restrict_of_ringEquiv baseGermEquiv hflat
+  let _ : Module (HolGerm (ComplexModel 1)) M := Module.compHom M baseGermEquiv.toRingHom
+  let _ : Module.Flat (HolGerm (ComplexModel 1)) M := flat_restrict_of_ringEquiv baseGermEquiv hflat
   exact Module.Flat.of_linearEquiv (curveChartMatrixCokernelEquiv t FM (holAt_curveFamily d t L F hF))
 end
 end Hironaka.Analytic.Unibranch.HironakaG10NativeLinearCurveFlat

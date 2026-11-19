@@ -55,13 +55,13 @@ theorem chartMap_reassociated_flat_iff_nested (d t a : ℕ) {b : ℕ}
     letI : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
     letI : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
     (chartMap d (t+a) (reassociatedSquareZeroIdeal d t a F)).Flat ↔ Module.Flat R Q := by
-  letI := tangentAlgebra d t
+  let _ := tangentAlgebra d t
   let B := HolGerm (ComplexModel (d+t))
   let R := HolGerm (ComplexModel d)
   let J := actualSquareZeroMatrixIdeal (d+t) a F
   let Q := HolGerm (ComplexModel ((d+t)+a)) ⧸ J
-  letI : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
-  letI : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
+  let _ : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
+  let _ : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
   change (chartMap d (t+a) (reassociatedSquareZeroIdeal d t a F)).Flat ↔ Module.Flat R Q
   let e := Ideal.quotientEquiv J (reassociatedSquareZeroIdeal d t a F) (assocGermEquiv d t a) rfl
   let η : R →+* Q := (Ideal.Quotient.mk J).comp

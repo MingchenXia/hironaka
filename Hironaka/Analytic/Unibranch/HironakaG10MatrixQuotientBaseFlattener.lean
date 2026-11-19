@@ -36,7 +36,7 @@ theorem chartMap_quot_flat_iff_tensor_matrix (d t a : ℕ) {b : ℕ}
     letI : Module R M := Module.compHom M (tangentPullback d t).toRingHom
     (quotMap (chartMap d (t+a) (reassociatedSquareZeroIdeal d t a F)) I).Flat ↔
       Module.Flat (R ⧸ I) ((R ⧸ I) ⊗[R] M) := by
-  letI := tangentAlgebra d t
+  let _ := tangentAlgebra d t
   let B := HolGerm (ComplexModel (d+t))
   let R := HolGerm (ComplexModel d)
   let J := actualSquareZeroMatrixIdeal (d+t) a F
@@ -45,11 +45,11 @@ theorem chartMap_quot_flat_iff_tensor_matrix (d t a : ℕ) {b : ℕ}
   let C := HolGerm (ComplexModel (d+(t+a))) ⧸ reassociatedSquareZeroIdeal d t a F
   let η : R →+* Q := (Ideal.Quotient.mk J).comp
     ((tangentPullback (d+t) a).toRingHom.comp (tangentPullback d t).toRingHom)
-  letI : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
-  letI : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
-  letI : Module R M := Module.compHom M (tangentPullback d t).toRingHom
-  letI : Algebra R C := (chartMap d (t+a) (reassociatedSquareZeroIdeal d t a F)).toAlgebra
-  letI : Module.Flat R B := tangentPullback_flat d t
+  let _ : Algebra B (HolGerm (ComplexModel ((d+t)+a))) := tangentAlgebra (d+t) a
+  let _ : Module R Q := Module.compHom Q (tangentPullback d t).toRingHom
+  let _ : Module R M := Module.compHom M (tangentPullback d t).toRingHom
+  let _ : Algebra R C := (chartMap d (t+a) (reassociatedSquareZeroIdeal d t a F)).toAlgebra
+  let _ : Module.Flat R B := tangentPullback_flat d t
   let e := Ideal.quotientEquiv J (reassociatedSquareZeroIdeal d t a F) (assocGermEquiv d t a) rfl
   have he : e.toRingHom.comp η = chartMap d (t+a) (reassociatedSquareZeroIdeal d t a F) := by
     apply RingHom.ext
