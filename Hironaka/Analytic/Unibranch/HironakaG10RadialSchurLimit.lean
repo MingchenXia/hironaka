@@ -78,7 +78,6 @@ theorem radially_contracted_flat_forces_schur_zero
       ((radialHolomorphic hconv hc (Gr j l) r : holSubalgebra K) : C(K,ℂ)) z := by
     intro z j l
     rw [hred z (hKV z.property) j l, radialHolomorphic_coe]
-    change extendZero K (Gr j l) (radialPoint c r z) = _
     exact extendZero_of_mem K (Gr j l) (radialPoint_mem hconv hc r z)
   have hzero := artinian_relation_with_invertible_current_reference_forces_old_schur_zero
     hKU basis ε hnil F₀ G₀ hex R₀ S₀ hR hS _ hRef Fr G hFr hGu

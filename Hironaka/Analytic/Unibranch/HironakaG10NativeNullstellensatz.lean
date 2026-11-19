@@ -31,7 +31,7 @@ theorem intrinsicCentre_le_radical_of_support_subset {X : SourceReducedComplexSp
     intrinsicCentreStalkRange X.obj.left C x ≤ (J x).radical := by
   obtain ⟨e,⟨w,hw⟩,heV,_⟩ := LocalEmbedding.exists_domain x hV hxV
   let j := e.map
-  letI : LocallyRingedSpace.IsOpenImmersion j := e.isOpenImmersion
+  let _ : LocallyRingedSpace.IsOpenImmersion j := e.isOpenImmersion
   change j.base w = x at hw
   rw [← hw] at hC ⊢
   let K := pullFamily j J
@@ -57,7 +57,7 @@ theorem intrinsicCentre_le_radical_of_support_subset {X : SourceReducedComplexSp
       intrinsicCentreStalkRange (actualSubspaceLocallyRingedSpace (n := e.dim) e.carrier)
         (j.base ⁻¹' C) w := by
     exact openImmersion_pulled_stalkIdeal_eq j C w
-  letI : IsIso (j.stalkMap w) := LocallyRingedSpace.IsOpenImmersion.stalk_iso j w
+  let _ : IsIso (j.stalkMap w) := LocallyRingedSpace.IsOpenImmersion.stalk_iso j w
   have hbij : Function.Bijective (j.stalkMap w).hom :=
     (asIso (j.stalkMap w)).commRingCatIsoToRingEquiv.bijective
   have hrad : Ideal.map (j.stalkMap w).hom
