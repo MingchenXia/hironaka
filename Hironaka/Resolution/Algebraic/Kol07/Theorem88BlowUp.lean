@@ -215,7 +215,7 @@ theorem derivativeIter_map_le_map_iterate_chartD (q : Z.blowUp)
   -- the chart derivations, localized and transported to `𝒪_{B,q}`
   let der : Fin n → Derivation k (Z.blowUp.presheaf.stalk q)
       (Z.blowUp.presheaf.stalk q) :=
-    fun i => Derivation.congrRingEquiv e.symm hk'
+    fun i => Derivation.congrRingEquiv (A := Localization.AtPrime 𝔮) e.symm hk'
       ((c.chartDerivRingOver ρ hk i).localization 𝔮.primeCompl)
   have hder_ψ : ∀ (i : Fin n) (t : chartRing c.x ρ),
       der i (ψ' t) = ψ' (c.chartDerivRing ρ i t) := by
@@ -546,29 +546,26 @@ theorem derivativeIter_markedTransform_eq_iSup (hS : IsSmoothDivisor S) {m : ℕ
             (c'.chartSat r (algebraMap _ (chartRing c'.x r) (c'.x ⟨0, h0⟩))).map ψ' :=
           stalkIdeal_strictTransform_eq_map_span_colon Z q c'.x r hZ' 𝔮 e he S hSz0
         rw [hJ]
-        calc Ideal.derivativeIter k s
-              ((transformIdeal c'.x r (I.stalkIdeal (Z.blowUpπ q)) m).map ψ')
-            ≤ ((c'.chartD r)^[s] (transformIdeal c'.x r (I.stalkIdeal
-                (Z.blowUpπ q)) m)).map ψ' :=
-              derivativeIter_map_le_map_iterate_chartD f n Z q hq c' hk' r 𝔮 e hkk' _ s
-          _ ≤ (⨆ j' ≤ s, c'.chartDlogpow r ⟨0, h0⟩ (s - j')
-                (transformIdeal c'.x r (c'.Dpow j' (I.stalkIdeal (Z.blowUpπ q)))
-                    (m - j'))).map
-                ψ' :=
-              Ideal.map_mono (c'.iterate_chartD_transformIdeal_le r hr0 hIz hs)
-          _ = ⨆ j' ≤ s, (c'.chartDlogpow r ⟨0, h0⟩ (s - j')
-                (transformIdeal c'.x r (c'.Dpow j' (I.stalkIdeal (Z.blowUpπ q)))
-                    (m - j'))).map
-                ψ' := by
-              simp only [Ideal.map_iSup]
-          _ ≤ ⨆ j' ≤ s, Ideal.logDerivativeIter k ((S.strictTransform Z).stalkIdeal q) (s - j')
-                (((I.derivativeIter f j').markedTransform Z (m - j')).stalkIdeal q) := by
-              refine iSup₂_mono fun j' hj' => ?_
-              rw [hM j' hj', hS1]
-              refine (Ideal.map_mono (c'.chartDlogpow_le_logDerivativeIter r hk' hr0 _ _)).trans ?_
-              refine (Ideal.map_logDerivativeIter_le 𝔮.primeCompl e.symm hkk' _ _ _).trans ?_
-              exact Ideal.logDerivativeIter_mono _ _ (Ideal.map_mono (transformIdeal_mono c'.x r
-                (Ideal.Dpow_le_derivativeIter c' hk' j' _)))
+        refine (derivativeIter_map_le_map_iterate_chartD f n Z q hq c' hk' r 𝔮 e hkk'
+          (transformIdeal c'.x r (I.stalkIdeal (Z.blowUpπ q)) m) s).trans ?_
+        refine (Ideal.map_mono (f := ψ')
+          (c'.iterate_chartD_transformIdeal_le r hr0 hIz hs)).trans ?_
+        simp only [Ideal.map_iSup]
+        refine iSup₂_mono fun j' hj' => ?_
+        rewrite [hM j' hj', hS1]
+        refine (Ideal.map_mono (f := ψ')
+          (c'.chartDlogpow_le_logDerivativeIter r hk' hr0 (s - j') _)).trans ?_
+        let J : Ideal (chartRing c'.x r) :=
+          c'.chartSat r (algebraMap _ (chartRing c'.x r) (c'.x ⟨0, h0⟩))
+        let K : Ideal (chartRing c'.x r) :=
+          transformIdeal c'.x r (c'.Dpow j' (I.stalkIdeal (Z.blowUpπ q))) (m - j')
+        have hLocal := Ideal.map_logDerivativeIter_le
+          (k := k) (A := chartRing c'.x r) (B := Localization.AtPrime 𝔮)
+          (C := Z.blowUp.presheaf.stalk q) 𝔮.primeCompl e.symm hkk' J (s - j') K
+        change Ideal.map ψ' (Ideal.logDerivativeIter k J (s - j') K) ≤ _
+        refine hLocal.trans ?_
+        exact Ideal.logDerivativeIter_mono (J.map ψ') (s - j') (Ideal.map_mono (f := ψ')
+          (transformIdeal_mono c'.x r (Ideal.Dpow_le_derivativeIter c' hk' j' _)))
     · -- off the center: the `j = s` summand
       rw [stalkIdeal_derivativeIter_markedTransform_of_notMem f n Z I m s q hq0]
       refine le_iSup₂_of_le s le_rfl ?_
