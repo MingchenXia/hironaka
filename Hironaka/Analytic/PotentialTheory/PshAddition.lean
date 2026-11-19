@@ -1,4 +1,5 @@
 import Hironaka.Analytic.PotentialTheory.Plurisubharmonic
+import Hironaka.Analytic.PshConvexCone
 
 /-!
 # Addition of extended-real plurisubharmonic functions
@@ -48,51 +49,5 @@ theorem DiscPshOn.circleDeficit_add {u w : E → EReal} {U : Set E}
     (hC _ (circle_mem_affineClosedDisc x v hr _))
     (hW _ (circle_mem_affineClosedDisc x v hr _))]
   exact lintegral_add_left (hu.measurable_circle_deficit x v hr hD C) _
-
-/-- The sum of two disc-PSH functions is disc-PSH, with no finiteness assumption
-on their negative parts and with identically negative infinity permitted. -/
-theorem DiscPshOn.add {u w : E → EReal} {U : Set E}
-    (hu : DiscPshOn u U) (hw : DiscPshOn w U) :
-    DiscPshOn (fun y => u y + w y) U := by
-  refine ⟨fun y hy => EReal.add_ne_top (hu.ne_top y hy) (hw.ne_top y hy), ?_, ?_⟩
-  · intro y hy
-    exact UpperSemicontinuousWithinAt.add'
-      (hu.upperSemicontinuousOn y hy) (hw.upperSemicontinuousOn y hy)
-      (EReal.continuousAt_add (Or.inl (hu.ne_top y hy)) (Or.inr (hw.ne_top y hy)))
-  · intro x v r hr hD C hC
-    obtain ⟨A, hA⟩ := hu.exists_disc_upper_bound x v hr.le hD
-    obtain ⟨B, hB⟩ := hw.exists_disc_upper_bound x v hr.le hD
-    let D : ℝ := Max.max A (C - B)
-    have hAD : A ≤ D := le_max_left _ _
-    have hCD : C ≤ D + B := by
-      have : C - B ≤ D := le_max_right _ _
-      linarith
-    have hDu : ∀ y ∈ affineClosedDisc x v r, u y ≤ (D : EReal) :=
-      fun y hy => (hA y hy).trans (EReal.coe_le_coe_iff.mpr hAD)
-    have hsum : circleDeficit (fun y => u y + w y) x v r (D + B) ≤
-        ENNReal.ofReal (2 * Real.pi) * (((D + B : ℝ) : EReal) - (u x + w x)).toENNReal := by
-      rw [hu.circleDeficit_add x v hr.le hD D B hDu hB,
-        finiteDeficit_add D B (hDu x (center_mem_affineClosedDisc x v hr.le))
-          (hB x (center_mem_affineClosedDisc x v hr.le)), mul_add]
-      exact add_le_add (hu.submean x v r hr hD D hDu) (hw.submean x v r hr hD B hB)
-    apply (discSubmean_add_bound_iff x v hr.le C (D + B - C)
-      (sub_nonneg.mpr hCD) hC).mp
-    have hboundeq : C + (D + B - C) = D + B := by ring
-    simpa only [hboundeq] using hsum
-
-/-- Addition preserves the genuine ambient PSH germ at a point. -/
-theorem PlurisubharmonicAt.add {u w : E → EReal} {x : E}
-    (hu : PlurisubharmonicAt u x) (hw : PlurisubharmonicAt w x) :
-    PlurisubharmonicAt (fun y => u y + w y) x := by
-  obtain ⟨U, hU, hxU, hu⟩ := hu
-  obtain ⟨V, hV, hxV, hw⟩ := hw
-  exact ⟨U ∩ V, hU.inter hV, ⟨hxU, hxV⟩,
-    (hu.mono inter_subset_left).add (hw.mono inter_subset_right)⟩
-
-/-- Addition preserves PSH germs on any set. -/
-theorem PlurisubharmonicOn.add {u w : E → EReal} {U : Set E}
-    (hu : PlurisubharmonicOn u U) (hw : PlurisubharmonicOn w U) :
-    PlurisubharmonicOn (fun y => u y + w y) U :=
-  fun x hx => (hu x hx).add (hw x hx)
 
 end Hironaka
