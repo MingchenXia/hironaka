@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Install the exact source toolchain; HTTPS+GitHub asset SHA256 required."""
+import argparse
 import hashlib
 import json
 import os
@@ -7,7 +8,6 @@ from pathlib import Path
 import re
 import ssl
 import subprocess
-import sys
 import tarfile
 import urllib.request
 
@@ -34,7 +34,7 @@ def https_open(url):
     return response
 
 
-def install(project, destination, opener=https_open):
+def install(project, destination, opener=https_open, *, pinned_asset=None):
     toolchain = (project / 'lean-toolchain').read_text().strip()
     match = re.fullmatch(r'leanprover/lean4:v(\d+\.\d+\.\d+(?:-rc\d+)?)', toolchain)
     if not match:
@@ -43,19 +43,26 @@ def install(project, destination, opener=https_open):
     if os.uname().machine != 'x86_64':
         raise ValueError('This bundle requires the x86_64 Linux release')
     name = f'lean-{version}-linux.tar.zst'
-    with opener(f'https://api.github.com/repos/leanprover/lean4/releases/tags/v{version}') as response:
-        raw = response.read(2 * 1024 * 1024 + 1)
-    if len(raw) > 2 * 1024 * 1024:
-        raise ValueError('Release metadata exceeded bound')
-    metadata = json.loads(raw)
-    if metadata.get('tag_name') != 'v' + version or metadata.get('draft') is not False:
-        raise ValueError('Exact published toolchain release required')
-    assets = [a for a in metadata['assets'] if a['name'] == name]
-    if len(assets) != 1 or not re.fullmatch(r'sha256:[0-9a-f]{64}', assets[0].get('digest', '')):
-        raise ValueError('Exact unique archive with GitHub SHA256 digest required')
-    asset = assets[0]
     url = f'https://github.com/leanprover/lean4/releases/download/v{version}/{name}'
-    if asset['browser_download_url'] != url:
+    if pinned_asset is not None:
+        asset = pinned_asset
+        if asset['name'] != name or asset['size'] < 1 or asset['id'] < 1:
+            raise ValueError('Archive pin does not match the source toolchain')
+    else:
+        with opener(f'https://api.github.com/repos/leanprover/lean4/releases/tags/v{version}') as response:
+            raw = response.read(2 * 1024 * 1024 + 1)
+        if len(raw) > 2 * 1024 * 1024:
+            raise ValueError('Release metadata exceeded bound')
+        metadata = json.loads(raw)
+        if metadata.get('tag_name') != 'v' + version or metadata.get('draft') is not False:
+            raise ValueError('Exact published toolchain release required')
+        assets = [entry for entry in metadata['assets'] if entry['name'] == name]
+        if len(assets) != 1:
+            raise ValueError('Exact unique archive with GitHub SHA256 digest required')
+        asset = assets[0]
+    if not re.fullmatch(r'sha256:[0-9a-f]{64}', asset.get('digest', '')):
+        raise ValueError('Official archive SHA256 required')
+    if pinned_asset is None and asset.get('browser_download_url') != url:
         raise ValueError('Unexpected archive origin')
     destination.mkdir(parents=True, exist_ok=False)
     archive = destination / name
@@ -93,4 +100,10 @@ def install(project, destination, opener=https_open):
 
 
 if __name__ == '__main__':
-    print(install(Path(sys.argv[1]).resolve(), Path(sys.argv[2]).resolve()))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('source', type=Path)
+    parser.add_argument('destination', type=Path)
+    parser.add_argument('--pin', type=Path, help='Official archive metadata captured from the upstream release')
+    options = parser.parse_args()
+    asset = json.loads(options.pin.read_text()) if options.pin else None
+    print(install(options.source.resolve(), options.destination.resolve(), pinned_asset=asset))

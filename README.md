@@ -24,7 +24,7 @@ partial-cache success, automatic resume, or promised six-hour completion.
 ## Exact build and checks
 
 Lean is selected from the checked-out `lean-toolchain`, downloaded from its exact
-official HTTPS GitHub release, verified against the release asset's SHA256/size,
+official HTTPS GitHub release and checked using the asset SHA-256 and size recorded in `lean-asset.json`,
 and safely extracted. Missing asset digest metadata is a hard failure. TLS
 verification stays enabled, redirects must stay HTTPS, and no `curl | sh` installer
 or moving Lean version is used. `lake exe cache get` materializes the exact Git

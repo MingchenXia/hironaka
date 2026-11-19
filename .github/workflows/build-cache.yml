@@ -49,7 +49,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
       - name: Install exact source Lean release over verified TLS
-        run: python3 cache-tools/scripts/install_lean.py source "$RUNNER_TEMP/hironaka-lean"
+        run: python3 cache-tools/scripts/install_lean.py source "$RUNNER_TEMP/hironaka-lean" --pin cache-tools/lean-asset.json
       - name: Build every physical module and run checks
         env:
           MATHLIB_CACHE_DIR: ${{ runner.temp }}/hironaka-mathlib-downloads-${{ github.run_id }}-${{ github.run_attempt }}
