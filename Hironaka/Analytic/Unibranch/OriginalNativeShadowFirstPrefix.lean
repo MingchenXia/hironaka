@@ -20,7 +20,7 @@ open Hironaka Hironaka.BlowupSequences
   BlowupTowers BlowupTowerTransforms BlowupTowerIsomorphism MarkedIdeals MarkedIdeals.MarkedIdeal
   MarkedIdealBiholomorphism.MarkedIdeal ResolutionInvariantSeq ResolutionInvariantSegments
   HironakaActualPowerBoundaryExponents CanonicalCentres
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 variable {X : SourceReducedComplexSpace} {K : Set X.obj.left}
   (M : Maximum X K) (hK : IsCompact K)

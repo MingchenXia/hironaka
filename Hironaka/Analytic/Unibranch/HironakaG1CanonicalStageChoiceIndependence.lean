@@ -33,7 +33,7 @@ open Hironaka Hironaka.HolomorphicIdealSheaves
   HironakaSingularModuleSheafStalk HironakaNativePulledIdealSheaf
   HironakaSingularSubspaceBlowupCartierUniversalIdealSheaf
   HironakaG11BlowupLocality SmoothCentreModification
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 noncomputable section
 

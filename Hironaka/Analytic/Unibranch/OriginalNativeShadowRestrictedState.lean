@@ -17,7 +17,7 @@ open Hironaka Hironaka.BlowupSequences
   BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism.MarkedIdeal
   HironakaActualPowerBoundaryExponents MarkedIdealEquivalence MarkedIdealEquivalence.MarkedIdeal
   HironakaG11VanishingPrincipalization
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {X : SourceReducedComplexSpace} {K : Set X.obj.left}
   (M : Maximum X K) (hK : IsCompact K)

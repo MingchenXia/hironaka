@@ -20,7 +20,7 @@ open Hironaka Hironaka
   MarkedIdealBiholomorphism HironakaIntrinsicReducedCentreIdealSheaf
   HironakaIntrinsicReducedCentreOpenPullback HironakaNativePulledIdealSheaf
   HironakaNativePulledIdealStalk
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {X : SourceReducedComplexSpace} {N k : ℕ} {Λ : Type*}
   [LinearOrder Λ] [Nonempty Λ] {ι κ ν : Type*}

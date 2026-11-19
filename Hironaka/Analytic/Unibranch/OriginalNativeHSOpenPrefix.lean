@@ -16,8 +16,8 @@ open Hironaka Hironaka.BlowupSequences
   MarkedIdealBiholomorphism.MarkedIdeal HironakaActualPowerBoundaryExponents
   HironakaActualAnalyticSubspaceMaps HironakaActualAnalyticSubspaceOpenRestriction
   HironakaReducedComplexAnalyticSpaces
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open HomogenizedGlueingTower (strictAlong)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.HomogenizedGlueingTower (strictAlong)
 
 /-- Ordinary genuine raw-record data, with no algorithmic output fields. -/
 structure Input (n : ℕ) where

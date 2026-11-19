@@ -13,7 +13,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaG11VanishingPrincipalization HironakaG11StrictTransformTowers HironakaG11CompatibleCanonicalTowers
   BlowupTowers BlowupTowerTransforms BlowupTowerIsomorphism MarkedIdeals MarkedIdeals.MarkedIdeal
   ResolutionInvariantSeq
-open ResolutionInvariantSpec (IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsCanonical)
 
 variable {X B : SourceReducedComplexSpace} {n : ℕ} {ι : Type*}
   (w : ι → DimEmbedding X n) (j : B ⟶ X) (hj : LocallyRingedSpace.IsOpenImmersion j.hom.left)

@@ -15,7 +15,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaActualAnalyticSubspaceMaps HironakaReducedComplexAnalyticSpaces
   BlowupTowers BlowupTowerTransforms BlowupTowerIsomorphism ResolutionInvariantSeq
   MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism.MarkedIdeal HironakaActualPowerBoundaryExponents
-open ResolutionInvariantSpec (IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsCanonical)
 
 variable {X : SourceReducedComplexSpace} {n : ℕ} {ι : Type*}
   (w : ι → DimEmbedding X n) {T : Towers w} (xs : XStage w T)

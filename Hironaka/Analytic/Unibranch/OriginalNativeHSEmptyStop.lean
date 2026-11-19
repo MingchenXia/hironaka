@@ -20,7 +20,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaG11HSPhaseInduction HironakaActualPowerBoundaryExponents
   OriginalNativeHSOuterHistory OriginalRelativelyCompactRestriction
   BlowupTowers BlowupTowerTransforms ResolutionInvariantSeq MarkedIdeals MarkedIdeals.MarkedIdeal
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 /-- ONLY ordinary PRESENT raw records, actual stages/history and an EMPTY shadow branch. -/
 structure Input (n : ℕ) (Λ : Type) [LinearOrder Λ] where

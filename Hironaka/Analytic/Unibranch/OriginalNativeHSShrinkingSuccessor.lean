@@ -12,7 +12,7 @@ noncomputable section
 open Hironaka Hironaka.BlowupSequences
   Hironaka BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
   OriginalNativeHSOpenPrefix ResolutionInvariantSeq CanonicalCentres
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 private abbrev invariant (ambientDim : ℕ) := (OriginalNativeHSPhaseHistory.originalInvariant ambientDim).toResolutionInvariant
 variable {n : ℕ} (P : Input n) {Y : CMfd.{0} n} (T : BlowupTower P.ambient Y)

@@ -19,7 +19,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaG11PresTowerState HironakaG11PresLineState HironakaG11PresWindows
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CanonicalCentres
   HironakaActualPowerBoundaryExponents HomogenizedGlueingTower
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 private theorem native_lift_eq_of_smooth
     {A B C D : SourceReducedComplexSpace} {q : A ⟶ B} {p : C ⟶ D}

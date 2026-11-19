@@ -18,7 +18,7 @@ open Hironaka Hironaka.BlowupSequences
   BlowupTowers BlowupTowerIsomorphism MarkedIdealTowerTransport MarkedIdeals MarkedIdeals.MarkedIdeal
   MarkedIdealBiholomorphism.MarkedIdeal HironakaActualPowerBoundaryExponents
   HironakaActualAnalyticSubspaceMaps HironakaReducedComplexAnalyticSpaces
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 private def flatOpen {Y : SourceReducedComplexSpace} (e : LocalEmbedding Y) (O : Opens e.ambient) :
     Opens (ComplexModel e.dim) :=

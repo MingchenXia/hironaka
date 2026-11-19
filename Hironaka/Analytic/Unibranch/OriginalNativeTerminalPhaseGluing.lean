@@ -16,7 +16,7 @@ open Hironaka Hironaka.BlowupSequences
   BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal HironakaActualPowerBoundaryExponents
   CanonicalCentres OriginalIntrinsicHSSuperlevels OriginalNativeTerminalWindowOverlap
   HironakaG11SingularCentreModification
-open ResolutionInvariantSpec (IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsCanonical)
 
 variable {X : SourceReducedComplexSpace} {n : ℕ} {ι κ : Type}
   (wT : ι → DimEmbedding X n) (wS : κ → DimEmbedding X n)

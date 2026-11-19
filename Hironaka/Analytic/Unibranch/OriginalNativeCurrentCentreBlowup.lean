@@ -23,7 +23,7 @@ open Hironaka Hironaka
   HironakaSingularSubspaceBlowupCartierUniversalIdealSheaf
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
   MarkedIdealBiholomorphism
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {X : SourceReducedComplexSpace} {N : ℕ} {ι : Type*}
   (w : ι → DimEmbedding X N) (raw : ∀ i, MarkedIdeal N (Amb w i))

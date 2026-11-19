@@ -26,7 +26,7 @@ open Hironaka Hironaka
   SourceReducedComplexSpace OriginalNativeModification SmoothCentreModification
   HironakaG1NativeCleanupModelIndependence HironakaG1NativeCleanupComponentModelIndependence
   HironakaG1NativeModificationIsoTransport HironakaG1NativeFiniteTerminalRestriction
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 attribute [local instance] originalTerminalChartedSpace originalTerminalGluedSpace_isComplexManifold
 

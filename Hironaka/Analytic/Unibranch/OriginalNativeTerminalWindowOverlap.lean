@@ -20,7 +20,7 @@ open Hironaka Hironaka.BlowupSequences
   HironakaActualAnalyticSubspaceMaps HironakaActualAnalyticSubspaceOpenRestriction
   HironakaReducedComplexAnalyticSpaces HironakaG1DistinctNativeTerminalNormalization
   HironakaOriginalTerminalOpenComparison CanonicalCentres
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 section WindowOpen
 variable {X : SourceReducedComplexSpace} {n : ℕ} {ι : Type}

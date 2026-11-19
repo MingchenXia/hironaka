@@ -19,7 +19,7 @@ open Hironaka Hironaka.BlowupSequences
   OriginalIntrinsicHSSuperlevels HironakaIntrinsicComplexAnalyticRegularLocus HironakaG11PresReduction
   HironakaG1CanonicalStageCentreIdeal HironakaActualPowerBoundaryExponents
   BlowupTowers BlowupTowerTransforms ResolutionInvariantSeq MarkedIdeals MarkedIdeals.MarkedIdeal CanonicalCentres HironakaG8LocalHistory HironakaG11InvBMClass
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 /-- ONLY genuine PRESENT records/histories and natural current compact-shadow IH. -/
 structure Input (n : ℕ) (Λ : Type) [LinearOrder Λ] [Nonempty Λ] where

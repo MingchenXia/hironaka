@@ -14,7 +14,7 @@ open Hironaka Hironaka
   HironakaG11CompatibleCanonicalTowers HironakaG11StrictTransformTowers
   HironakaG11InvBMClass HironakaG8LocalHistory HironakaG1CanonicalStageCentreIdeal
   BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism
-open ResolutionInvariantSpec (IsInvDomain)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {X Z : SourceReducedComplexSpace} {N k : ℕ} {Λ : Type*}
   [LinearOrder Λ] [Nonempty Λ] {ι : Type*}

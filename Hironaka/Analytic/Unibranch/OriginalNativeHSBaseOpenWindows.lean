@@ -15,7 +15,7 @@ open Hironaka Hironaka.BlowupSequences
   MarkedIdealTowerTransport MarkedIdeals MarkedIdeals.MarkedIdeal
   MarkedIdealBiholomorphism.MarkedIdeal HironakaActualPowerBoundaryExponents
   HironakaG11StrictTransformTowers HomogenizedGlueingTower ResolutionInvariantSeq
-open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 variable {X B : SourceReducedComplexSpace} {n : ℕ} {ι : Type*}
   (w : ι → DimEmbedding X n) (j : B ⟶ X) (hj : LocallyRingedSpace.IsOpenImmersion j.hom.left)
