@@ -1,8 +1,8 @@
 # Hironaka exact build-cache workflow
 
 This branch builds and publishes a Lean build cache for Hironaka source commit
-`19a3232088fce3dab71eb2e2135d82683962c091`. The workflow runs when the branch is
-updated. It stages assets in the draft release `build-cache-lean-4.33.1-19a3232088fc`
+`2c8d037241f9353a9872c025acfa7a4cdbd2465a`. The workflow runs when the branch is
+updated. It stages assets in the draft release `build-cache-lean-4.33.1-2c8d037241f9`
 and makes the release public after verifying the complete archive. [GitHub releases](https://github.com/MingchenXia/hironaka/releases)
 
 The default runner is the ordinary disposable `ubuntu-24.04` runner. The workflow
@@ -34,7 +34,7 @@ pinned Mathlib `cache clean!` command only after successful unpack.
 
 The driver inventories and hashes **every physical** `Hironaka/**/*.lean` plus
 `Hironaka.lean`, checks local import existence/cycles, and runs ordinary
-`lake build`. It then requests only missing supplemental `.olean` targets in
+`lake build`. It then requests supplemental `.olean` targets in
 dependency order, at most 32 per invocation, and checks the entire physical
 source/olean inventory. This is broader compilation coverage than merely
 building the default umbrella. The published source's 8099-module static inventory
@@ -43,13 +43,10 @@ was read independently during preparation; counts are recomputed for every input
 The cache workflow uses three Lean threads and the source's warnings-as-errors
 settings. The source CI runs the axiom and kernel checks from `main`.
 
-After the default build and supplemental batches, with Lake stopped, setup JSON
-files under the project's build IR directory are archived into verified compressed
-sidecars. All member bytes and the compressed archive are checked and fsynced
-before original setup files are removed. Olean/ilean files, traces, C files, and
-other IR stay in place. The existing merger reconstructs each archived setup file
-in the outgoing stream. This reduces persistent disk, but does not reduce the
-peak before the first default build finishes.
+After a compilation failure, the runner can save its project build files in
+GitHub Actions cache storage. A retry can reuse those files with the same Lean
+toolchain and locked dependencies. Lake checks the default build and every
+supplemental target against the exact current source before packaging.
 
 ## Draft cache and trust
 
@@ -96,7 +93,7 @@ build to force this precondition. On that fresh checkout, with `lean` on PATH:
 ```sh
 # Explicit values from the verified Actions publication receipt:
 export CACHE_REPO=MingchenXia/hironaka
-export CACHE_TAG='build-cache-lean-4.33.1-19a3232088fc'
+export CACHE_TAG='build-cache-lean-4.33.1-2c8d037241f9'
 export TRUSTED_MANIFEST_SHA256='THE_SHA256_FROM_THE_RELEASE_NOTES'
 export CHECKOUT='/absolute/path/to/fresh/source'
 export CACHE_DIRECTORY='/absolute/path/to/fresh/download'

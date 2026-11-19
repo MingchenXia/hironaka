@@ -50,8 +50,7 @@ def publish(project, state, tag, *, client=None):
     sink = GitHubReleaseSink(DESTINATION, tag, client=client)
     # Constructor verifies draft + pins numeric ID. Core checks fresh manifest
     # absence and independently reads every uploaded part before final commit.
-    sidecars = json.loads((state / 'sidecars.json').read_text())
-    result = rc.publish_project(project, lean, sidecars, sink, state / 'spool')
+    result = rc.publish_project(project, lean, [], sink, state / 'spool')
     verification = {'status': 'complete', 'repo': DESTINATION, 'draft_tag': tag,
                     'source_commit': os.environ['SOURCE_REF'],
                     'manifest_sha256': result['manifest_sha256'], 'chunks': len(result['verified_parts']),

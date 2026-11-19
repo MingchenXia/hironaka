@@ -137,6 +137,9 @@ if sys.argv[1:2] == ['build']:
 
     def test_full_fixture_build_then_actual_rolling_and_draft_adapter(self):
         env = self.fixture_project(); state = self.root / 'state'
+        cached = self.project / '.lake/build/lib/lean/Hironaka/Supplement.olean'
+        cached.parent.mkdir(parents=True)
+        cached.write_bytes(b'stale warm build')
         with patch.dict(os.environ, env), patch.object(b, 'require_space', return_value=50*1024**3):
             receipt = b.build(self.project, state, budget_minutes=1, batch_size=32)
         self.assertEqual(receipt['status'], 'complete')
@@ -224,7 +227,7 @@ if sys.argv[1:2] == ['build']:
             if 'uses' in step:
                 self.assertRegex(step['uses'], r'@[0-9a-f]{40}$')
         self.assertEqual(job['env']['SOURCE_REF'],
-                         '19a3232088fce3dab71eb2e2135d82683962c091')
+                         '2c8d037241f9353a9872c025acfa7a4cdbd2465a')
 
 
 if __name__ == '__main__': unittest.main()

@@ -19,8 +19,8 @@ jobs:
     env:
       PYTHONDONTWRITEBYTECODE: '1'
       LEAN_NUM_THREADS: '3'
-      SOURCE_REF: 19a3232088fce3dab71eb2e2135d82683962c091
-      DRAFT_TAG: build-cache-lean-4.33.1-19a3232088fc
+      SOURCE_REF: 2c8d037241f9353a9872c025acfa7a4cdbd2465a
+      DRAFT_TAG: build-cache-lean-4.33.1-2c8d037241f9
       CACHE_RELEASE_ID: "450877677"
       INITIAL_FREE_GIB: "36"
       SOURCE_REPOSITORY: MingchenXia/hironaka
@@ -50,10 +50,27 @@ jobs:
           persist-credentials: false
       - name: Install exact source Lean release over verified TLS
         run: python3 cache-tools/scripts/install_lean.py source "$RUNNER_TEMP/hironaka-lean" --pin cache-tools/lean-asset.json
+      - name: Restore previously compiled Hironaka files
+        id: warm-build
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        continue-on-error: true
+        with:
+          path: source/.lake/build
+          key: hironaka-build-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('source/lean-toolchain', 'source/lake-manifest.json') }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            hironaka-build-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('source/lean-toolchain', 'source/lake-manifest.json') }}-
       - name: Build every physical module
+        id: compile
         env:
           MATHLIB_CACHE_DIR: ${{ runner.temp }}/hironaka-mathlib-downloads-${{ github.run_id }}-${{ github.run_attempt }}
         run: python3 cache-tools/scripts/build_all.py source "$RUNNER_TEMP/hironaka-evidence" --budget-minutes 315
+      - name: Save compiled files for a retry
+        if: failure() && steps.compile.outcome == 'failure' && steps.warm-build.outputs.cache-primary-key != ''
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        continue-on-error: true
+        with:
+          path: source/.lake/build
+          key: ${{ steps.warm-build.outputs.cache-primary-key }}
       - name: Stream and publish verified cache
         env:
           GH_TOKEN: ${{ github.token }}

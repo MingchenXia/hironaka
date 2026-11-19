@@ -20,7 +20,6 @@ sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / 'cache_tools'))
 import rolling_cache as rc
-from setup_sidecars import checkpoint
 
 GIB = 1024**3
 MODULE = re.compile(r'[A-Za-z_][A-Za-z_0-9]*(?:\.[A-Za-z_][A-Za-z_0-9]*)*\Z')
@@ -190,7 +189,6 @@ def build(project, state, budget_minutes=315, batch_size=32):
         # oleans also build its transitive Hironaka import closure.
         commands.run(['lake', 'build'], 'default-build')
         receipt['default_build'] = 'passed'
-        checkpoint(project, ['.lake/build'], state)
         def olean(name):
             return project / '.lake/build/lib/lean' / (name.replace('.', '/')+'.olean')
         closure, pending = set(), ['Hironaka']
@@ -204,16 +202,15 @@ def build(project, state, budget_minutes=315, batch_size=32):
             raise ValueError('Default build succeeded without its complete umbrella import closure')
         receipt.update(umbrella_closure_count=len(closure), supplemental_source_count=len(supplemental),
                        supplemental_missing_count=len(absent))
-        # Only physically absent supplemental outputs need extra Lake targets.
-        for start in range(0, len(absent), batch_size):
-            batch = absent[start:start+batch_size]
+        # Ask Lake to validate supplemental outputs even after restoring a warm build.
+        for start in range(0, len(supplemental), batch_size):
+            batch = supplemental[start:start+batch_size]
             require_space(project, 6)
             commands.run(['lake', 'build', *['+'+m+':olean' for m in batch]], f'build-{start:05}')
             for name in batch:
                 if not olean(name).is_file():
                     raise ValueError(f'Lake succeeded without expected olean: {name}')
             receipt['supplemental_batches'].append(batch)
-            checkpoint(project, ['.lake/build'], state)
             rc.atomic_json(state / 'build-receipt.json', receipt)
         coverage = {name: {'path': str(olean(name).relative_to(project)), 'bytes': olean(name).stat().st_size}
                     for name in ordered if olean(name).is_file() and not olean(name).is_symlink()}
