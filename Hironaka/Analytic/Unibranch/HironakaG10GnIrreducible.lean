@@ -285,7 +285,7 @@ theorem exists_rowFlat (p₀ : ComplexModel m) (y₀ : ComplexModel t) (Q : Set 
         rw [hLmap, ambientGermEquiv_tangentPullback]
         exact Ideal.mem_sup_right (Ideal.mem_map_of_mem _ hk)
       exact (Ideal.comap_map_of_bijective _ (ambientGermEquiv m t).bijective).le hmem
-    haveI : Fact (∀ k ∈ baseIdeal Qt a, tangentPullback m t k ∈ L) := ⟨hKL⟩
+    have _ : Fact (∀ k ∈ baseIdeal Qt a, tangentPullback m t k ∈ L) := ⟨hKL⟩
     have hK : baseIdeal Qt a ≠ ⊤ := by
       rw [hK_eq]
       intro htop

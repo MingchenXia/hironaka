@@ -109,7 +109,7 @@ theorem flat_chartCyclic_of_flat_library (I : Ideal (HolGerm (ComplexModel d)))
     Module.Flat (HolGerm (ComplexModel d) ⧸ I)
       ((HolGerm (ComplexModel d × ComplexModel t) ⧸ chartBaseIdeal d t I) ⧸
         (Ideal.span (range f)).map (Ideal.Quotient.mk (chartBaseIdeal d t I))) := by
-  letI := quotAlgebra d t I L
+  let _ := quotAlgebra d t I L
   let e := chartQuotEquiv d t I L f hL
   have halg : ∀ r : HolGerm (ComplexModel d) ⧸ I,
       e (algebraMap (HolGerm (ComplexModel d) ⧸ I) (HolGerm (ComplexModel (d+t)) ⧸ L) r) =

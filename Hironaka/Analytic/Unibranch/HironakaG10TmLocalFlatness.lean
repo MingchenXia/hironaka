@@ -94,7 +94,7 @@ theorem chartFlat_iff_fibreExactAt (d t : ℕ) (I : Ideal (HolGerm (ComplexModel
 
 /-- **(1b) Exact starts modulo `I` exist** (the relation module modulo `I` is finitely generated). -/
 theorem exists_exactStartModAt (d t : ℕ) (I : Ideal (HolGerm (ComplexModel d))) {a b : ℕ}
-    (F : Fin a → Fin b → ComplexModel d × ComplexModel t → ℂ) (p) (hF : ∀ i j, HolAt (F i j) p) :
+    (F : Fin a → Fin b → ComplexModel d × ComplexModel t → ℂ) (p) (_hF : ∀ i j, HolAt (F i j) p) :
     ∃ (c : ℕ) (G : Fin b → Fin c → ComplexModel d × ComplexModel t → ℂ),
       (∀ j k, HolAt (G j k) p) ∧ ExactStartModAt d t I G F p := by
   have := isNoetherianRing_prod d t
