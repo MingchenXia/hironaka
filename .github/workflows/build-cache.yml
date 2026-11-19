@@ -1,0 +1,90 @@
+name: Build and publish Hironaka cache
+
+on:
+  push:
+    branches: [hironaka-build-cache]
+
+permissions: {}
+concurrency:
+  group: hironaka-build-cache
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'MingchenXia/hironaka'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    permissions:
+      contents: write
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      LEAN_NUM_THREADS: '2'
+      SOURCE_REF: 6ef256b95c83998bad8e254bf90dd69f5064b6be
+      DRAFT_TAG: build-cache-lean-4.33.1-6ef256b95c83
+      CACHE_RELEASE_ID: "450877677"
+      INITIAL_FREE_GIB: "36"
+      SOURCE_REPOSITORY: MingchenXia/hironaka
+    steps:
+      - name: Check out cache tooling
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          path: cache-tools
+          persist-credentials: false
+      - name: Verify the draft release and source pin
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/releases/$CACHE_RELEASE_ID" |
+            jq -e --arg tag "$DRAFT_TAG" --arg source "$SOURCE_REF" \
+              '.draft and .tag_name == $tag and .target_commitish == $source' >/dev/null
+      - name: Validate inputs and recover ephemeral runner disk
+        run: bash cache-tools/scripts/recover-disk.sh
+      - name: Check out exact public source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: MingchenXia/hironaka
+          ref: ${{ env.SOURCE_REF }}
+          path: source
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Install exact source Lean release over verified TLS
+        run: python3 cache-tools/scripts/install_lean.py source "$RUNNER_TEMP/hironaka-lean"
+      - name: Build every physical module and run checks
+        env:
+          MATHLIB_CACHE_DIR: ${{ runner.temp }}/hironaka-mathlib-downloads-${{ github.run_id }}-${{ github.run_attempt }}
+        run: python3 cache-tools/scripts/build_all.py source "$RUNNER_TEMP/hironaka-evidence" --budget-minutes 270
+      - name: Stream and publish verified cache
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/hironaka-evidence"
+          python3 cache-tools/scripts/publish_cache.py source "$evidence" "$DRAFT_TAG"
+          manifest_sha=$(jq -er '.manifest_sha256 | select(test("^[0-9a-f]{64}$"))' "$evidence/publication-receipt.json")
+          module_count=$(jq -er '.physical_module_count' "$evidence/build-receipt.json")
+          printf 'Lean build cache for source commit `%s`.\n\nCompiled modules %s.\n\nManifest SHA-256 `%s`.\n\nSee the [hironaka-build-cache branch](https://github.com/MingchenXia/hironaka/tree/hironaka-build-cache) for restore instructions.\n' \
+            "$SOURCE_REF" "$module_count" "$manifest_sha" > "$evidence/release-notes.md"
+          jq -n --rawfile body "$evidence/release-notes.md" \
+            '{draft: false, make_latest: "false", body: $body}' > "$evidence/release-patch.json"
+          gh api --method PATCH "repos/$GITHUB_REPOSITORY/releases/$CACHE_RELEASE_ID" \
+            --input "$evidence/release-patch.json" |
+            jq -er --arg tag "$DRAFT_TAG" --arg source "$SOURCE_REF" \
+              'select(.draft == false and .tag_name == $tag and .target_commitish == $source) | .html_url' \
+              > "$evidence/published-release-url"
+          test -s "$evidence/published-release-url"
+          cat "$evidence/published-release-url"
+      - name: Retain small logs and receipts even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: cache-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/hironaka-evidence/*.json
+            ${{ runner.temp }}/hironaka-evidence/published-release-url
+            ${{ runner.temp }}/hironaka-evidence/logs/*.log
+            ${{ runner.temp }}/hironaka-evidence/spool/receipt.json
+            ${{ runner.temp }}/hironaka-evidence/spool/*-manifest*.json
+            ${{ runner.temp }}/hironaka-lean/installation.json
+          if-no-files-found: warn
+          retention-days: 14
