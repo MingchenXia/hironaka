@@ -81,7 +81,7 @@ theorem quotient_centered_flat_gives_source_matrix_germ_flat
   have hQ : Module.Flat Q (Q ⊗[HolGerm (ComplexModel d)]
       ((Fin a → HolGerm (ComplexModel (d+t))) ⧸ LinearMap.range M.mulVecLin)) :=
     flat_tensor_of_flat_quotient I (truncatedParameterIdeal d q I) hI hflat
-  letI := hQ
+  let _ := hQ
   have hresult := Module.Flat.of_linearEquiv (actualJointMatrixCokernelEquiv d t q I M).symm
   have hmap : (fun i j => actualArtinianParameterPullback d t q (parameterQuotientMap d q I)
         (parameterQuotientMap_kills d q I) ((swapParameterFibre d t).symm

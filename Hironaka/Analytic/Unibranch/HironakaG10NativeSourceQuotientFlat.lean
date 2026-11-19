@@ -61,7 +61,7 @@ theorem quotient_native_flat_gives_source_matrix_germ_flat
   let D := ((Fin a → HolGerm (ComplexModel d × ComplexModel t)) ⧸ LinearMap.range
     (Matrix.mulVecLin (fun i j => germAt (0,x) (F i j))))
   have hc : Module.Flat B (B ⊗[R] C) := by
-    letI := hflat
+    let _ := hflat
     exact Module.Flat.of_linearEquiv ((centeredNativeMatrixCokernelEquiv d t F x hhol).baseChange R B C D)
   exact quotient_centered_flat_gives_source_matrix_germ_flat d t q I hO hF hK x hx hc
 end
