@@ -49,8 +49,8 @@ theorem matrixOperatorJet_eq_artinian_on_one
   have hA : ∀ᶠ s in 𝓝 (0 : ComplexModel d), DifferentiableAt ℂ A s := by
     filter_upwards [eventually_all.mpr fun i => eventually_all.mpr fun j => hM i j] with s hs
     exact differentiableAt_matrixOperator fun i j => hs i j
-  letI := parameterCoefficientModule (E := a → holSubalgebra K) b
-  letI := parameterCoefficientModule (E := r → holSubalgebra K) b
+  let _ := parameterCoefficientModule (E := a → holSubalgebra K) b
+  let _ := parameterCoefficientModule (E := r → holSubalgebra K) b
   apply coefficientEvaluation_jointly_injective (r := a) b
   intro z
   funext i

@@ -40,8 +40,8 @@ theorem matrixOperatorJet_eq_artinian_whole
           ((parameterTensorEquiv (E := r → holSubalgebra K) b).symm v)) =
         banachMatrixCLM b hKU F hF v := by
   classical
-  letI := parameterCoefficientModule (E := a → holSubalgebra K) b
-  letI := parameterCoefficientModule (E := r → holSubalgebra K) b
+  let _ := parameterCoefficientModule (E := a → holSubalgebra K) b
+  let _ := parameterCoefficientModule (E := r → holSubalgebra K) b
   let T : Q ⊗[ℂ] ((r → holSubalgebra K) →L[ℂ] (a → holSubalgebra K)) :=
     banachJet d q φ (fun s => matrixOperator (M s))
   let L : (Q ⊗[ℂ] (r → holSubalgebra K)) →ₗ[Q] (ι → a → holSubalgebra K) :=

@@ -67,7 +67,7 @@ theorem actualBaseChangedQuotient_flat (d t q : ℕ)
     Module.Flat Q ((Q ⊗[ℂ] HolGerm (ComplexModel t)) ⧸
       Ideal.map (actualArtinianParameterPullback d t q (parameterQuotientMap d q I)
         (parameterQuotientMap_kills d q I)).toRingHom K) := by
-  letI := hflat
+  let _ := hflat
   exact Module.Flat.of_linearEquiv (actualBaseChangedQuotientEquiv d t q I K).symm.toLinearEquiv
 end
 end Hironaka.HironakaG10ArtinianFlatQuotient
