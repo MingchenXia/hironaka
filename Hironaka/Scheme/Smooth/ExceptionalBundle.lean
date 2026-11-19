@@ -90,6 +90,10 @@ section Model
 
 variable (k : Type u) [Field k] (n r : ℕ)
 
+-- Make the quotient ring instance available to the polynomial grading.
+noncomputable local instance : CommRing (MvPolynomial (Fin n) k ⧸ centerIdeal k n r) :=
+  Ideal.Quotient.commRing (centerIdeal k n r)
+
 /-- `L = V(t_0, …, t_{r-1}) ≅ Spec (k[t]/(t_0, …, t_{r-1}))` (the inverse of
 `specQuotientToSubscheme`). -/
 noncomputable def coordinateSubspaceIsoSpec :

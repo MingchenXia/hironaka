@@ -225,7 +225,8 @@ theorem exists_chartOrigin_point (Z : X.IdealSheafData) (x : X) {n r : ℕ}
   have hmemR : ∀ w, w ∈ maximalIdeal (Localization.AtPrime (chartOrigin y ρ)) →
       e.symm w ∈ maximalIdeal ((Scheme.IdealSheafData.blowUp Z).presheaf.stalk x') := by
     intro w hw
-    rw [← map_maximalIdeal_ringEquiv e]
+    rw [← map_maximalIdeal_ringEquiv
+      (S' := Localization.AtPrime (chartOrigin y ρ)) e]
     exact Ideal.mem_map_of_mem _ hw
   have hyρ : e.symm (algebraMap (chartRing y ρ) (Localization.AtPrime (chartOrigin y ρ))
       (chartYR y ρ ρ)) = (Scheme.IdealSheafData.blowUpπ Z).stalkMap x' (hx' ▸ y ρ) := by

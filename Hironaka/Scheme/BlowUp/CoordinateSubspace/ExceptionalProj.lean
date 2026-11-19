@@ -72,6 +72,11 @@ namespace AlgebraicGeometry.CoordinateSubspace
 
 variable (A : Type u) [CommRing A] (n r : ℕ) (hrn : r ≤ n)
 
+-- Keep the quotient ring instance available when synthesizing the grading's
+-- additive group through the polynomial ring.
+noncomputable local instance : CommRing (MvPolynomial (Fin n) A ⧸ centerIdeal A n r) :=
+  Ideal.Quotient.commRing (centerIdeal A n r)
+
 /-! ### The chart of `x_j`: the ring map `R[I/x_j] → (𝒪(L)[u]_{u_j})₀` -/
 
 section Chart

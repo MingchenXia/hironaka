@@ -85,7 +85,11 @@ theorem chartDeriv_commutator_of_lt {i j : Fin n} (hij : i < j) :
   · -- `i < j = r`
     rw [hj]
     have hir : i < r := hj ▸ hij
-    rw [c.chartDeriv_of_lt r hir, c.chartDeriv_self r, lie_add, lie_sum]
+    rw [c.chartDeriv_of_lt r hir, c.chartDeriv_self r]
+    rw [LieRing.lie_add,
+      lie_sum (Finset.univ.filter (fun k : Fin n => k < r))
+        (fun k => chartY c.x r k • c.awayPderiv r k)
+        (algebraMap R (Localization.Away (c.x r)) (c.x r) • c.awayPderiv r i)]
     have h1 : ⁅algebraMap R (Localization.Away (c.x r)) (c.x r) • c.awayPderiv r i,
         c.awayPderiv r r⁆ = -c.awayPderiv r i := by
       rw [← one_smul (Localization.Away (c.x r)) (c.awayPderiv r r),
@@ -114,7 +118,11 @@ theorem chartDeriv_commutator_of_lt {i j : Fin n} (hij : i < j) :
         awayPderiv_algebraMap_x, if_neg hj.ne']
       simp
     · -- `i = r < j`
-      rw [hi, c.chartDeriv_self r, add_lie, sum_lie, hE r j, zero_add]
+      rw [hi, c.chartDeriv_self r]
+      rw [LieRing.add_lie,
+        sum_lie (Finset.univ.filter (fun k : Fin n => k < r))
+          (fun k => chartY c.x r k • c.awayPderiv r k) (c.awayPderiv r j),
+        hE r j, zero_add]
       refine Finset.sum_eq_zero fun k hk => ?_
       have hk' : k < r := (Finset.mem_filter.mp hk).2
       rw [← one_smul (Localization.Away (c.x r)) (c.awayPderiv r j),
