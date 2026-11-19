@@ -1,16 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
 # Algebraic parametrization data of a prime ideal of `𝒪_n` in Noether position
+
+Blueprint `lag:minimal-polynomial-weierstrass`, `lag:primitive-element`,
+`lag:substitution-relations`, `lag:ideal-comparison` (Demailly, *Complex analytic and
+differential geometry*, II.4.13--4.18).
 
 Let `Q ⊆ 𝒪_n` be prime and in Noether position over `𝒪_d` (`IsNoetherNormalization Q d`).
 `AlgebraicParametrization Q d` records the germ-level algebra that the local

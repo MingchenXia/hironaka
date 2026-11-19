@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionOriginalTerminalFunctor
 /-! Actual finite smooth terminal maps commute with independent terminal histories.
 Complete three-node mathematics preceded proofs. Genuine universal transport

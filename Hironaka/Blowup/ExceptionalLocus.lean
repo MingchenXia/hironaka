@@ -1,18 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSequences
 import Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions
 import Mathlib.Geometry.Manifold.MFDeriv.Basic
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Functoriality of the exceptional locus
 
-Source: CT22, Section 4.
+Source: Copy-4, `sec:prelim` (modifications and `Exc(μ)`); CT22, Section 4.
 
 `exceptionalLocus n f` is the set of points where the holomorphic differential
 of an equidimensional map fails to be bijective.  Two facts make it functorial
@@ -27,6 +22,10 @@ bijective exactly when both factors are (`bijective_comp_clm_iff`).  All three
 manifolds have the same dimension `n`, so all the differentials are
 endomorphisms of `ComplexModel n`; in particular injectivity and surjectivity
 coincide, which is what makes the "only if" direction true.
+
+The consumers are the modification statements of
+`Hironaka.LocusProperties` (`nonKahlerLocus_pullback` in particular, whose
+right-hand side contains `Exc(μ)`).
 -/
 
 open Set

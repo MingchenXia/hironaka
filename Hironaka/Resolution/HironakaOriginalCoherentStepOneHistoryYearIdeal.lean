@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalCoherentSpecialResetIdeal
 /-! Literal real masked StepOne higher-or-equalSPECIAL reset ideals give actual
 whole finite lower-year equations. Coherence precedes the exact original zero

@@ -1,50 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneEmptyPrefix
 import Hironaka.Invariant.MemberRestrictTowerIso
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactLowerValue
-import Hironaka.Invariant.ContactRepresentative
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneAdmissible
-import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: independence of the representative (property (7))
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the invariant depends only on the
-equivalence class of the marked ideal (the resolution of equivalent marked ideals is the same).
+Blueprint `hir:step-one-representative` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of
+`hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the invariant
+depends only on the equivalence class of the marked ideal (the resolution of equivalent marked ideals is the same).
 
-For restricted-equivalent marked ideals `𝔍 ≃ 𝔍'` (`MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv`: same `N`,
-`E`, `d`, the ideals agree on `N`), the masked Step 1 values agree along canonical segments, which are the same for
-both: `J̄ ≃ J̄'` (`ContactRepresentative.restrictEquiv_barMarked`), so the transforms along every tower have the
-same `N` and cosupport; the original members are the same (`ContactLowerValue.origMembers_restrictEquiv`), so are
-levels, special points, regimes and runs; the lower values agree by
-`ContactLowerValue.lowerValueL_zero_representative` (level `0`) and
+For restricted-equivalent marked ideals `𝔍 ≃ 𝔍'` (`MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv`: same `N`, `E`, `d`, the
+ideals agree on `N`), the masked Step 1 values agree along canonical segments, which are the same for both: `J̄ ≃ J̄'`
+(`ContactRepresentative.restrictEquiv_barMarked`), so the transforms along every tower have the same `N` and cosupport; the
+original members are the same (TN23's `ContactLowerValue.origMembers_restrictEquiv`), so are levels, special points, regimes and
+runs; the lower values agree by TN23's `ContactLowerValue.lowerValueL_zero_representative` (level `0`) and TN3's
 `MemberRestrictTowerIso.lowerValueL_succ_representative` (levels `≥ 1`).
 
 ## Main results
@@ -52,6 +23,9 @@ levels, special points, regimes and runs; the lower values agree by
 * `regimeRun_congr`: runs of pointwise equivalent regimes agree;
 * `isSpecial_iff_of_eq`: special points from the original members, `N` and the cosupport;
 * `stepOneInvM_representative_eq`, **`stepOneInvM_representative`**: property (7).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -62,7 +36,13 @@ universe u v
 namespace Hironaka.StepOneRepresentative
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail
+  Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant)

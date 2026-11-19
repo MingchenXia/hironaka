@@ -1,12 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.RankDegeneracy
-
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.MarkedIdeal.GermIdealOrderBounds
 
 set_option autoImplicit false
 
@@ -26,8 +18,6 @@ namespace Hironaka.HironakaCurrentEmbeddingDimension
 open Hironaka.HolomorphicIdealSheaves
 open RankDegeneracy StokesSingularLocusAnalytic AnalyticJacobianSingularCore
 open AnalyticDimensionBasics
-
-open Hironaka
 
 noncomputable section
 

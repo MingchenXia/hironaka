@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaDiscreteCosupportCanonicalHistory
 
 /-!
@@ -24,7 +19,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   MarkedIdealBiholomorphism MarkedIdealRestrictOpen ResolutionInvariantSeq ResolutionDriver ResolutionInvariantDriver
   CanonicalCentres HironakaComponentwiseCanonicalCentre HironakaComponentwiseCanonicalHistory
   TowerPreimageCompact InvDomainTowerAlong
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 variable {n k : ℕ} {X Y : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ]
 
 /-- The literal current strict upper full-value cut of the original history. -/

@@ -1,12 +1,8 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Analysis.Complex.CauchyIntegral
 import Mathlib.Analysis.Analytic.Order
 import Mathlib.Analysis.Analytic.Uniqueness
 import Mathlib.Analysis.LocallyConvex.SeparatingDual
+
 set_option autoImplicit false
 
 /-!

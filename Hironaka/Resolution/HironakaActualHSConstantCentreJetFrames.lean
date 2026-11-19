@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaHolomorphicJetQuotientFrames
-import Hironaka.Support.OriginalFixedRealAmbientHSDictionaryExact
+import Hironaka.Resolution.HironakaSmoothCentreRealDomainActualAmbientHS
 
 set_option autoImplicit false
 open Set Filter Classical

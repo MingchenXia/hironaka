@@ -1,11 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaSNCSupportedMonomialIdeal
-import Hironaka.Invariant.PrincipalMonomialExponent
-import Hironaka.Invariant.PrincipalIdealProducts
+import Hironaka.Invariant.MonomialCase
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.List.Nodup
 

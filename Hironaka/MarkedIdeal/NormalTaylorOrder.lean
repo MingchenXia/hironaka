@@ -1,24 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.OrderTaylor
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.IdealPowers
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The order of a germ from its normal derivatives along a submanifold
 
-Source: Włodarczyk 2005, proof of Lemma `le:S`; GGT 2008 (`wlodarczyk09-analytic-resolution`), proof of Proposition
-5.6.4: in coordinates `(y, x)` with `S = {x = 0}`, write `f = ∑_α c_α(y) x^α`; then `ord_p f ≥ μ` as soon as `ord_p
-(c_α|_S) ≥ μ - |α|` for `|α| < μ`, and `c_α|_S = (α!)⁻¹ (∂^α_x f)|_S`.
+Hironaka phase H3 (TN23-ENVELOPES); blueprint `mc:normal-taylor-model`, `mc:normal-taylor-order`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, proof of Lemma `le:S`; GGT 2008 (`wlodarczyk09-analytic-resolution`),
+proof of Proposition 5.6.4: in coordinates `(y, x)` with `S = {x = 0}`, write `f = ∑_α c_α(y) x^α`; then
+`ord_p f ≥ μ` as soon as `ord_p (c_α|_S) ≥ μ - |α|` for `|α| < μ`, and `c_α|_S = (α!)⁻¹ (∂^α_x f)|_S`.
 
 * `inNormalPow_of_normalDeriv` (in `ℂⁿ`): if for every list `L` of normal directions (`eₗ`, `l ≥ k`) with `|L| < μ`
   the derivative `∂^L F` agrees on the plane `ℂᵏ × 0` near `0` with a germ of `𝔪₀^{μ-|L|}`, then `F ∈ 𝔪₀^μ`
@@ -29,6 +20,9 @@ Source: Włodarczyk 2005, proof of Lemma `le:S`; GGT 2008 (`wlodarczyk09-analyti
 * `mem_idealPow_of_normalDeriv` (on a manifold): for coordinates `ψ` centred at `p ∈ S` in which `S` is the plane
   `ℂᵏ × 0`, a holomorphic `f` lies in `𝔪_p^μ` if each normal derivative `∂^L f` (`|L| < μ`) vanishes to order
   `μ - |L|` along `S` at `p`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter Metric
@@ -36,7 +30,8 @@ open scoped Topology Manifold ContDiff Nat
 
 namespace Hironaka.NormalTaylorOrder
 
-open Hironaka.HolomorphicIdealSheaves Complex HolomorphicTaylorTail GermIdealOrder IdealWeightPowers OrderTaylor
+open Hironaka.HolomorphicIdealSheaves Complex HolomorphicTaylorTail GermIdealOrder IdealWeightPowers
+  OrderTaylor
 
 noncomputable section
 

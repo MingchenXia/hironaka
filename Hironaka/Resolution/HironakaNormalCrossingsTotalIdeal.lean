@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaNormalCrossingsOpenRestrictionSeparation
 import Hironaka.Resolution.HironakaNormalCrossingsBranchOverlap
 import Hironaka.Resolution.HironakaPureCodimensionOneInvertibleIdeal
@@ -51,7 +46,6 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves HolGerm
   AnalyticDescendingChain AnalyticGermDecomposition HolomorphicGermReducednessBridge
   BlowupTowers BlowupTowerTransforms BlowupStrictSubmanifold MarkedIdeals MarkedIdeals.MarkedIdeal
   GermIdealTotalTransform HironakaStageCenters HironakaLocallyFiniteDivisorSum RestrictEmptyTower
-open Hironaka
 noncomputable section
 attribute [local instance] Classical.propDecidable
 variable {n : ℕ}

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualExceptionalJetHSComparison
 import Hironaka.Resolution.HironakaActualFormalBlowupAllDirections
 import Hironaka.Resolution.HironakaActualFiniteInitialGeneration
@@ -57,7 +52,6 @@ private theorem order_of_power (q : ℕ) (F : R) (hF : F∈genuineFormalVariable
   apply (mem_genuineFormalVariables_pow_iff_coefficients_zero n q F).mp hF α
   simpa only [normalExponentDegree,Finsupp.degree_eq_sum] using hα
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 private theorem reduced_component_member_span (I : Ideal R) (q : ℕ) (F : R)
     (hI : F∈I) (hF : F∈genuineFormalVariables n^q) :
     MvPowerSeries.homogeneousComponent q F∈Ideal.span (range (fun a : actualInitialVertices MonomialOrder.degLex I =>
@@ -89,7 +83,6 @@ private theorem reduced_component_member_span (I : Ideal R) (q : ℕ) (F : R)
       (lt_of_lt_of_le (by exact_mod_cast Nat.lt_succ_self q) hprod)]
     exact Ideal.zero_mem _
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- The ENTIRE original initial ideal uses the SAME reduced canonical components. -/
 theorem actualHomogeneousInitialIdeal_eq_reduced_component_span (I : Ideal R) :
     actualHomogeneousInitialIdeal I=Ideal.span (range (fun a : actualInitialVertices MonomialOrder.degLex I =>

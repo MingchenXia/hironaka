@@ -1,41 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MonomialPart
 import Hironaka.Blowup.SimultaneousNormalCrossings
 import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.LocalGiraudTransform
-import Hironaka.Invariant.MemberPullback
-import Hironaka.Blowup.NormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Monomial ideals under the blowup of a centre with normal crossings: the generator form
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), the monomial charts of `le:inclusions` and Step 2b of the proof
-of `pr:resol` (the transform of a monomial marked ideal); Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`) §5.
+Hironaka phase H2 (TN3), the design node `hir:monomial-blowup` (`blueprint/src/hironaka.tex`), taken
+by TN3 on TN-CLASSICAL's request (I-0977 C-0059 / C-0060 / C-0061), in the generator form.
+Blueprint `bcalc:monomial-chart`, `bcalc:monomial-transform` (chapter `blowup-calculus.tex`).
+Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), the monomial charts of `le:inclusions` and
+Step 2b of the proof of `pr:resol` (the transform of a monomial marked ideal); Bierstone--Milman
+2008 (`bierstone-milman08-functoriality`) §5.
 
 Let `π : Y → X` be the blowup along `C`, `E` a simple normal crossings divisor with which `C` has
 only normal crossings, and `z ∈ Y` over `C`.
@@ -48,7 +26,20 @@ only normal crossings, and `z ∈ Y` over `C`.
   `π z` and exponents `a_i`,
   `(∏_{π z ∈ E_i} u_i^{a_i}) ∘ π = c · W_j^{e} · ∏_{z ∈ E_i'} W_{s i}^{a_i}` near `z`, with
   `c(z) ≠ 0` and `e = ∑_{π z ∈ E_i, C ⊆ E_i near π z} a_i`.
-* Helpers: `mem_centre_iff_of_generator`, `mem_iff_of_vanishingIdeal_eq` (zero sets from generators),
+* `mem_controlledTransform_iff_of_eq`: if `𝔞 = (m)` at `π z` and `m ∘ π = c · h^e · q` near `z`
+  with `𝒪(-D) = (h)`, `c(z) ≠ 0` and `μ ≤ e`, then `σ^c(𝔞, μ) = (h^{e-μ} q)` at `z`.
+* `exists_monomial_chart_transform`: hence the controlled transform of a monomial ideal
+  `(∏ u_i^{a_i})` with mark `μ ≤ e` is generated at `z` by `W_j^{e-μ} ∏_{z ∈ E_i'} W_{s i}^{a_i}`
+  (`a_D = ∑_{C ⊆ E_i} a_i - μ`, `S(z) = {i | z ∈ E_i'}`); `mem_geoTransform_iff_of_eq`: the same
+  for the transform of a marked ideal `(M, M, E, 𝔞, d)` (`N = M`, coherent ideal).
+* `frequently_ne_zero_of_generator`: a local generator of `𝒪(-D)` vanishes identically near no
+  point.
+* `exists_snc_chart_geoTransform` (and `_of_flat`, from flat coordinates at `π z`): the same in
+  coordinates `Θ` centred at `z` adapted to `E' = (E_1', …, E_s', π⁻¹ C)` -- the members of `E'`
+  through `z` are the hyperplanes `{Θ_{σ i} = 0}` (`σ` injective on them) and the transformed ideal
+  of `(M, M, E, 𝔞, d)` is `(∏_{z ∈ E'_i} Θ_{σ i}^{a'_i})` at `z`, `a'_i = a_i` (`i < s`),
+  `a'_s = e - d`: the input shape of `MonomialCase` (section `Principal`).  Helpers:
+  `mem_centre_iff_of_generator`, `mem_iff_of_vanishingIdeal_eq` (zero sets from generators),
   `prod_map_append_singleton`.
 
 Proof of the chart statement: coordinates `Φ` at `π z` adapted to `C` and `E`
@@ -58,6 +49,9 @@ monomial chart `σⱼ` through `z` (`exists_monomialLocalInverse`), `Φ ∘ π =
 or `= W_{s i}` (`s i < k_C`); the generators `u_i` differ from `Φ_{s i}` by units
 (`exists_unit_of_isInSpanAt`), and the factors `W_{s i}` with `W_{s i}(z) ≠ 0` are units too.
 "`C ⊆ E_i` near `π z` iff `k_C ≤ s i`" is `eventually_subset_iff_le` (as in `MemberPullback`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -68,7 +62,19 @@ universe u
 namespace Hironaka.MonomialBlowup
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupFlatCoordinates Hironaka.BlowupMonomialCharts Hironaka.BlowupLocalSurjectivity Hironaka.BlowupExceptionalDivisor Hironaka.BlowupStrictSubmanifold Hironaka.BlowupStrictIdeal Hironaka.BlowupSNCTransform Hironaka.NormalCrossings Hironaka.SimultaneousNormalCrossings Hironaka.MemberPullback Hironaka.MonomialPart Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.BlowupControlledTransform Hironaka.InvertibleIdealQuotient
+open Hironaka.BlowupFlatCoordinates
+  Hironaka.BlowupMonomialCharts
+  Hironaka.BlowupLocalSurjectivity
+  Hironaka.BlowupExceptionalDivisor
+  Hironaka.BlowupStrictSubmanifold
+  Hironaka.BlowupStrictIdeal
+  Hironaka.BlowupSNCTransform Hironaka.NormalCrossings
+  Hironaka.SimultaneousNormalCrossings
+  Hironaka.MemberPullback
+  Hironaka.MonomialPart Hironaka.GermIdealOrder
+  Hironaka.IdealWeightPowers
+  Hironaka.BlowupControlledTransform
+  Hironaka.InvertibleIdealQuotient
 
 noncomputable section
 
@@ -408,6 +414,171 @@ theorem exists_monomial_chart (hπ : IsBlowupAlong n C π) {E : List (Set X)}
 
 end Chart
 
+/-! ### The controlled transform of a principal ideal with an exceptional factor -/
+
+section Transform
+
+variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+  [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+  [IsComplexManifold n Y] {C : Set X} {π : Y → X}
+
+/-- **The controlled transform of a principal ideal with an exceptional factor**: if `𝔞 = (m)` at
+`π z` and `m ∘ π = c · h^e · q` near `z`, with `𝒪(-D) = (h)` at `z`, `h` vanishing identically near
+no point, `c(z) ≠ 0` and `μ ≤ e`, then `σ^c(𝔞, μ) = (h^{e-μ} q)` at `z`. -/
+theorem mem_controlledTransform_iff_of_eq (hπ : IsBlowupAlong n C π) {𝔞 : GermIdeal n X}
+    {m : X → ℂ} {z : Y} (hm : HolomorphicAt n m (π z))
+    (hgen : ∀ g, 𝔞.mem (π z) g ↔ IsInSpanAt (n := n) (· = m) (π z) g) {h c q : Y → ℂ}
+    (hD : ∀ g, (exceptionalDivisor hπ).ideal.mem z g ↔ IsInSpanAt (n := n) (· = h) z g)
+    (hh : HolomorphicAt n h z) (hhne : ∃ᶠ y in 𝓝 z, h y ≠ 0) (hc : HolomorphicAt n c z)
+    (hcz : c z ≠ 0) (hq : HolomorphicAt n q z) {e μ : ℕ} (hμe : μ ≤ e)
+    (heq : (fun w => m (π w)) =ᶠ[𝓝 z] fun w => c w * h w ^ e * q w) (g : Y → ℂ) :
+    (controlledTransform hπ 𝔞 μ).mem z g ↔
+      IsInSpanAt (n := n) (· = fun w => h w ^ (e - μ) * q w) z g := by
+  have hpb : ∀ f, (GermIdeal.pullback (m := n) π 𝔞).mem z f ↔
+      IsInSpanAt (n := n) (· = m ∘ π) z f :=
+    pullback_mem_iff_of_generator hπ.contMDiff hm hgen
+  have hhμ : (idealPow (exceptionalDivisor hπ).ideal μ).mem z (fun y => h y ^ μ) :=
+    pow_mem_idealPow ((hD h).mpr (isInSpanAt_self rfl hh)) hh μ
+  have hhpow : HolomorphicAt n (fun y => h y ^ (e - μ) * q y) z :=
+    (CompanionReduction.holomorphicAt_pow_of hh _).mul hq
+  have he : ∀ y, h y ^ e = h y ^ μ * h y ^ (e - μ) := fun y => by
+    rw [← pow_add, Nat.add_sub_cancel' hμe]
+  constructor
+  · rintro ⟨hghol, hg⟩
+    -- `h^μ g ∈ π^*𝔞 = (m ∘ π)`, then cancel `h^μ`
+    obtain ⟨-, b, hb, hbeq⟩ := isInSpanAt_eq_iff.mp ((hpb _).mp (hg _ hhμ))
+    refine isInSpanAt_eq_iff.mpr ⟨hghol, fun y => b y * c y, hb.mul hc, ?_⟩
+    have hsub := eventually_eq_zero_of_mul_eventually_eq_zero
+      (f := fun y => g y - b y * c y * (h y ^ (e - μ) * q y)) (m := fun y => h y ^ μ)
+      (GiraudAlong.holomorphicAt_sub hghol ((hb.mul hc).mul hhpow))
+      (CompanionReduction.holomorphicAt_pow_of hh μ) (hhne.mono fun y hy => pow_ne_zero _ hy) (by
+        filter_upwards [hbeq, heq] with y h1 h2
+        simp only [Function.comp_apply] at h1
+        calc (g y - b y * c y * (h y ^ (e - μ) * q y)) * h y ^ μ
+            = h y ^ μ * g y - b y * (c y * (h y ^ μ * h y ^ (e - μ)) * q y) := by ring
+          _ = 0 := by rw [h1, h2, he]; ring)
+    filter_upwards [hsub] with y hy
+    exact sub_eq_zero.mp hy
+  · intro hg
+    obtain ⟨hghol, b, hb, hbeq⟩ := isInSpanAt_eq_iff.mp hg
+    refine ⟨hghol, fun p hp => ?_⟩
+    obtain ⟨p', hp', hpeq⟩ :=
+      exists_eq_mul_pow_of_mem_idealPow (fun g' hg' => (hD g').mp hg') hp
+    refine (hpb _).mpr (isInSpanAt_eq_iff.mpr ⟨(holomorphicAt_of_mem_idealPow hp).mul hghol,
+      fun y => p' y * b y * (c y)⁻¹,
+      (hp'.mul hb).mul (BlowupFlatCoordinates.HolomorphicAt.inv hc hcz), ?_⟩)
+    filter_upwards [hpeq, hbeq, heq, hc.continuousAt.eventually (isOpen_ne.mem_nhds hcz)]
+      with y h1 h2 h3 h4
+    show p y * g y = p' y * b y * (c y)⁻¹ * (m ∘ π) y
+    simp only [Function.comp_apply]
+    rw [h1, h2, h3, he]
+    have h5 : (c y)⁻¹ * c y = 1 := inv_mul_cancel₀ h4
+    linear_combination (-(p' y * b y * (h y ^ μ * h y ^ (e - μ)) * q y)) * h5
+
+/-- `W_j` vanishes identically near no point of `U`: its zero set in `U` is `D ∩ U`, which has
+empty interior. -/
+theorem frequently_ne_zero_of_generator (hπ : IsBlowupAlong n C π) {U : Set Y} (hU : IsOpen U)
+    {h : Y → ℂ}
+    (hD : ∀ y ∈ U, ∀ g, (exceptionalDivisor hπ).ideal.mem y g ↔ IsInSpanAt (n := n) (· = h) y g)
+    {z : Y} (hz : z ∈ U) : ∃ᶠ y in 𝓝 z, h y ≠ 0 := by
+  rw [Filter.Frequently]
+  intro hall
+  obtain ⟨V, hVsub, hVo, hzV⟩ := mem_nhds_iff.mp ((hU.eventually_mem hz).and hall)
+  -- every point of `V` lies on `D`
+  have hVD : V ⊆ π ⁻¹' C := by
+    intro y hy
+    have hyU : y ∈ U := (hVsub hy).1
+    have hsupp : y ∈ (exceptionalDivisor hπ).support := by
+      intro g hg
+      obtain ⟨-, a, -, hga⟩ := isInSpanAt_eq_iff.mp ((hD y hyU g).mp hg)
+      rw [hga.self_of_nhds]
+      have : h y = 0 := by simpa using (hVsub hy).2
+      simp [this]
+    rwa [support_exceptionalDivisor hπ] at hsupp
+  have hint : z ∈ interior (π ⁻¹' C) := interior_mono hVD (hVo.interior_eq.symm ▸ hzV)
+  rw [ExceptionalFibres.interior_preimage_eq_empty hπ] at hint
+  exact hint
+
+/-- **The transform of a marked ideal `(M, M, E, 𝔞, d)` with a principal ideal with an exceptional
+factor** (`N = M`, `𝔞` coherent): the transformed ideal is the controlled transform
+(`MarkedIdeal.geoTransform_ideal_eq_controlledTransform`), so it is `(h^{e-d} q)` at `z`. -/
+theorem mem_geoTransform_iff_of_eq (hπ : IsBlowupAlong n C π) (𝔪 : MarkedIdeals.MarkedIdeal n X)
+    (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent) {m : X → ℂ} {z : Y}
+    (hm : HolomorphicAt n m (π z))
+    (hgen : ∀ g, 𝔪.ideal.mem (π z) g ↔ IsInSpanAt (n := n) (· = m) (π z) g) {h c q : Y → ℂ}
+    (hD : ∀ g, (exceptionalDivisor hπ).ideal.mem z g ↔ IsInSpanAt (n := n) (· = h) z g)
+    (hh : HolomorphicAt n h z) (hhne : ∃ᶠ y in 𝓝 z, h y ≠ 0) (hc : HolomorphicAt n c z)
+    (hcz : c z ≠ 0) (hq : HolomorphicAt n q z) {e : ℕ} (hde : 𝔪.d ≤ e)
+    (heq : (fun w => m (π w)) =ᶠ[𝓝 z] fun w => c w * h w ^ e * q w) (g : Y → ℂ) :
+    (𝔪.geoTransform C π).ideal.mem z g ↔
+      IsInSpanAt (n := n) (· = fun w => h w ^ (e - 𝔪.d) * q w) z g := by
+  rw [MarkedIdeals.MarkedIdeal.geoTransform_ideal_eq_controlledTransform (𝔪 := 𝔪) hN h𝔞 hπ]
+  exact mem_controlledTransform_iff_of_eq hπ hm hgen hD hh hhne hc hcz hq hde heq g
+
+end Transform
+
+/-! ### Monomial ideals: the transform in the monomial chart -/
+
+section Monomial
+
+variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+  [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+  [IsComplexManifold n Y] {C : Set X} {π : Y → X}
+
+open Classical in
+/-- **`hir:monomial-blowup`, ambient, generator form.**  In the monomial chart of
+`exists_monomial_chart` (whose properties are repeated here), for a monomial ideal
+`𝔞 = (∏_{π z ∈ E_i} u_i^{a_i})` at `π z` (`u_i` holomorphic generators of `𝓘_{E_i}`) and a mark
+`μ ≤ e = ∑_{π z ∈ E_i, C ⊆ E_i near π z} a_i`, the controlled transform is
+`σ^c(𝔞, μ) = (W_j^{e-μ} ∏_{z ∈ E_i'} W_{s i}^{a_i})` at `z`: monomial, with exponent `e - μ` on the
+exceptional divisor `D = {W_j = 0}` and `a_i` on the strict transforms `E_i' = {W_{s i} = 0}`
+through `z`. -/
+theorem exists_monomial_chart_transform (hπ : IsBlowupAlong n C π) {E : List (Set X)}
+    (hE : IsSNCDivisor n E) (hnc : HasNormalCrossings n C E) {z : Y} (hzC : π z ∈ C) :
+    ∃ (j : Fin n) (s : Fin E.length → Fin n) (W : Y → ComplexModel n) (U : Set Y),
+      IsOpen U ∧ z ∈ U ∧
+      (∀ y ∈ U, ContMDiffAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ W y) ∧
+      Function.Injective (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ))
+        (chartAt (ComplexModel n) z z)) ∧
+      W z j = 0 ∧
+      (∀ y ∈ U, ∀ g, (exceptionalDivisor hπ).ideal.mem y g ↔
+        IsInSpanAt (n := n) (· = fun w => W w j) y g) ∧
+      (∀ i, z ∈ geoStrictTransform π C (E.get i) → π z ∈ E.get i ∧ s i ≠ j ∧ W z (s i) = 0 ∧
+        ∀ y ∈ U, ∀ g, (vanishingIdeal (n := n) (geoStrictTransform π C (E.get i))).mem y g ↔
+          IsInSpanAt (n := n) (· = fun w => W w (s i)) y g) ∧
+      Set.InjOn s {i | π z ∈ E.get i} ∧
+      ∀ (a : Fin E.length → ℕ) (u : Fin E.length → X → ℂ),
+        (∀ i, π z ∈ E.get i → HolomorphicAt n (u i) (π z) ∧
+          ∀ g, (vanishingIdeal (n := n) (E.get i)).mem (π z) g ↔
+            IsInSpanAt (n := n) (· = u i) (π z) g) →
+        ∀ (𝔞 : GermIdeal n X), (∀ g, 𝔞.mem (π z) g ↔ IsInSpanAt (n := n)
+            (· = fun x => ∏ i ∈ Finset.univ.filter (fun i => π z ∈ E.get i), u i x ^ a i) (π z) g) →
+        ∀ μ : ℕ, μ ≤ ∑ i ∈ Finset.univ.filter
+            (fun i => π z ∈ E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ E.get i), a i →
+        ∀ g, (controlledTransform hπ 𝔞 μ).mem z g ↔ IsInSpanAt (n := n)
+          (· = fun w => W w j ^ ((∑ i ∈ Finset.univ.filter
+              (fun i => π z ∈ E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ E.get i), a i) - μ) *
+            ∏ i ∈ Finset.univ.filter (fun i => z ∈ geoStrictTransform π C (E.get i)),
+              W w (s i) ^ a i) z g := by
+  classical
+  obtain ⟨j, s, W, U, hU, hzU, hWs, hinj, hWzj, hD, hH, hsinj, hmono⟩ :=
+    exists_monomial_chart hπ hE hnc hzC
+  refine ⟨j, s, W, U, hU, hzU, hWs, hinj, hWzj, hD, hH, hsinj, fun a u hu 𝔞 h𝔞 μ hμ g => ?_⟩
+  obtain ⟨c, hc, hcz, heq⟩ := hmono a u hu
+  have hm : HolomorphicAt n (fun x => ∏ i ∈ Finset.univ.filter (fun i => π z ∈ E.get i),
+      u i x ^ a i) (π z) :=
+    holomorphicAt_finset_prod _ fun i hiT =>
+      CompanionReduction.holomorphicAt_pow_of (hu i (Finset.mem_filter.mp hiT).2).1 (a i)
+  have hWj : HolomorphicAt n (fun w => W w j) z := holomorphicAt_coord hU hWs j hzU
+  have hq : HolomorphicAt n (fun w => ∏ i ∈ Finset.univ.filter
+      (fun i => z ∈ geoStrictTransform π C (E.get i)), W w (s i) ^ a i) z :=
+    holomorphicAt_finset_prod _ fun i _ =>
+      CompanionReduction.holomorphicAt_pow_of (holomorphicAt_coord hU hWs (s i) hzU) (a i)
+  exact mem_controlledTransform_iff_of_eq hπ hm h𝔞 (hD z hzU) hWj
+    (frequently_ne_zero_of_generator hπ hU hD hzU) hc hcz hq hμ heq g
+
+end Monomial
+
 /-! ### The transform in coordinates adapted to the transformed divisor -/
 
 section SNCForm
@@ -463,6 +634,186 @@ theorem mem_centre_iff_of_generator (hπ : IsBlowupAlong n C π) {h : Y → ℂ}
     obtain ⟨-, a, -, hga⟩ := isInSpanAt_eq_iff.mp ((hD g).mp hg)
     rw [hga.self_of_nhds]
     simp [h0]
+
+open Classical in
+/-- **`hir:monomial-blowup`, ambient, in coordinates adapted to the transformed divisor.**  Let
+`(X, X, E, 𝔞, d)` be a marked ideal with `𝔞` coherent, `E` simple normal crossings, `C` with only
+normal crossings with `E`, and `π z ∈ C`.  If `𝔞 = (∏_{π z ∈ E_i} u_i^{a_i})` at `π z`
+(`u_i` holomorphic generators of `𝓘_{E_i}`) and `d ≤ e = ∑_{π z ∈ E_i, C ⊆ E_i near π z} a_i`, then
+there are coordinates `Θ` centred at `z`, indices `σ` (injective on the members of
+`E' = (E_1', …, E_s', π⁻¹ C)` through `z`) and exponents `a'` (`a'_i = a_i` for `i < s`,
+`a'_s = e - d`) such that every member of `E'` through `z` is the coordinate hyperplane
+`{Θ_{σ i} = 0}` and the transformed ideal is `(∏_{z ∈ E'_i} Θ_{σ i}^{a'_i})` at `z`: the hypotheses
+of the principal monomial calculus of `MonomialCase` (section `Principal`) at `z`. -/
+theorem exists_snc_chart_geoTransform (hπ : IsBlowupAlong n C π)
+    (𝔪 : MarkedIdeals.MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hE : IsSNCDivisor n 𝔪.E) (hnc : HasNormalCrossings n C 𝔪.E) {z : Y} (hzC : π z ∈ C)
+    (a : Fin 𝔪.E.length → ℕ) (u : Fin 𝔪.E.length → X → ℂ)
+    (hu : ∀ i, π z ∈ 𝔪.E.get i → HolomorphicAt n (u i) (π z) ∧
+      ∀ g, (vanishingIdeal (n := n) (𝔪.E.get i)).mem (π z) g ↔
+        IsInSpanAt (n := n) (· = u i) (π z) g)
+    (hgen : ∀ g, 𝔪.ideal.mem (π z) g ↔ IsInSpanAt (n := n)
+      (· = fun x => ∏ i ∈ Finset.univ.filter (fun i => π z ∈ 𝔪.E.get i), u i x ^ a i) (π z) g)
+    (hd : 𝔪.d ≤ ∑ i ∈ Finset.univ.filter
+      (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) :
+    ∃ (Θ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) z z))
+      (σ : Fin (𝔪.geoTransform C π).E.length → Fin n)
+      (a' : Fin (𝔪.geoTransform C π).E.length → ℕ),
+      Θ.source ⊆ (chartAt (ComplexModel n) z).target ∧
+      Θ.toFun (chartAt (ComplexModel n) z z) = 0 ∧
+      Set.InjOn σ {i | z ∈ (𝔪.geoTransform C π).E.get i} ∧
+      (∀ i, z ∈ (𝔪.geoTransform C π).E.get i → ∀ {y : Y},
+        y ∈ (chartAt (ComplexModel n) z).source → chartAt (ComplexModel n) z y ∈ Θ.source →
+          (y ∈ (𝔪.geoTransform C π).E.get i ↔
+            Θ.toFun (chartAt (ComplexModel n) z y) (σ i) = 0)) ∧
+      (∀ i (hi : i.1 < 𝔪.E.length), a' i = a ⟨i.1, hi⟩) ∧
+      (∀ i, ¬ i.1 < 𝔪.E.length → a' i = (∑ i ∈ Finset.univ.filter
+        (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) - 𝔪.d) ∧
+      ∀ g, (𝔪.geoTransform C π).ideal.mem z g ↔ IsInSpanAt (n := n)
+        (· = fun y => ∏ i ∈ Finset.univ.filter (fun i => z ∈ (𝔪.geoTransform C π).E.get i),
+          flatCoord Θ (σ i) y ^ a' i) z g := by
+  classical
+  obtain ⟨j, s, W, U, hU, hzU, hWs, hinj, hWzj, hD, hH, hsinj, hmono⟩ :=
+    exists_monomial_chart_transform hπ hE hnc hzC
+  obtain ⟨Θ, hΘt, hΘ0, hΘ⟩ := exists_recentred_coords hU hWs hzU hinj
+  -- zero sets on `U`
+  have hCu : ∀ y ∈ U, (π y ∈ C ↔ W y j = 0) := fun y hy =>
+    mem_centre_iff_of_generator hπ (holomorphicAt_coord hU hWs j hy) (hD y hy)
+  have hHu : ∀ i, z ∈ geoStrictTransform π C (𝔪.E.get i) → ∀ y ∈ U,
+      (y ∈ geoStrictTransform π C (𝔪.E.get i) ↔ W y (s i) = 0) := fun i hi y hy =>
+    mem_iff_of_vanishingIdeal_eq isClosed_closure (holomorphicAt_coord hU hWs (s i) hy)
+      ((hH i hi).2.2.2 y hy)
+  -- the recentred coordinates
+  have hflat : ∀ {y : Y}, y ∈ (chartAt (ComplexModel n) z).source →
+      chartAt (ComplexModel n) z y ∈ Θ.source →
+        y ∈ U ∧ ∀ k, Θ.toFun (chartAt (ComplexModel n) z y) k = W y k - W z k :=
+    fun {y} hy hyΘ => by
+      obtain ⟨hyU, hΘy⟩ := hΘ hy hyΘ
+      exact ⟨hyU, fun k => by
+        show Θ.toFun ((complexChartAt (n := n) z).val y) k = _
+        rw [hΘy, PiLp.sub_apply]⟩
+  have hget : ∀ i : Fin (𝔪.geoTransform C π).E.length, (𝔪.geoTransform C π).E.get i =
+      if h : i.1 < 𝔪.E.length then geoStrictTransform π C (𝔪.E.get ⟨i.1, h⟩) else π ⁻¹' C :=
+    fun i => get_map_append_singleton 𝔪.E (geoStrictTransform π C) (π ⁻¹' C) i
+  let σ : Fin (𝔪.geoTransform C π).E.length → Fin n := fun i =>
+    if h : i.1 < 𝔪.E.length then s ⟨i.1, h⟩ else j
+  let a' : Fin (𝔪.geoTransform C π).E.length → ℕ := fun i =>
+    if h : i.1 < 𝔪.E.length then a ⟨i.1, h⟩ else (∑ i ∈ Finset.univ.filter
+      (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) - 𝔪.d
+  refine ⟨Θ, σ, a', hΘt, hΘ0, ?_, ?_, fun i hi => dif_pos hi, fun i hi => dif_neg hi, ?_⟩
+  · -- the indices of the members through `z` are distinct
+    intro i hi i' hi' hii'
+    simp only [Set.mem_ofPred_eq] at hi hi'
+    rw [hget i] at hi
+    rw [hget i'] at hi'
+    simp only [σ] at hii'
+    by_cases h : i.1 < 𝔪.E.length <;> by_cases h' : i'.1 < 𝔪.E.length
+    · rw [dif_pos h] at hi hii'
+      rw [dif_pos h'] at hi' hii'
+      exact Fin.ext (Fin.mk.inj_iff.mp (hsinj (hH _ hi).1 (hH _ hi').1 hii'))
+    · rw [dif_pos h] at hi hii'
+      rw [dif_neg h'] at hii'
+      exact absurd hii' (hH _ hi).2.1
+    · rw [dif_neg h] at hii'
+      rw [dif_pos h'] at hi' hii'
+      exact absurd hii'.symm (hH _ hi').2.1
+    · exact eq_of_not_lt h h'
+  · -- the members through `z` are coordinate hyperplanes
+    intro i hi y hy hyΘ
+    obtain ⟨hyU, hΘy⟩ := hflat hy hyΘ
+    rw [hget i] at hi ⊢
+    simp only [σ]
+    by_cases h : i.1 < 𝔪.E.length
+    · simp only [dif_pos h] at hi ⊢
+      rw [hΘy, (hH _ hi).2.2.1, sub_zero]
+      exact hHu _ hi y hyU
+    · simp only [dif_neg h]
+      rw [hΘy, hWzj, sub_zero]
+      exact hCu y hyU
+  · -- the generator
+    intro g
+    rw [MarkedIdeals.MarkedIdeal.geoTransform_ideal_eq_controlledTransform (𝔪 := 𝔪) hN h𝔞 hπ,
+      hmono a u hu 𝔪.ideal hgen 𝔪.d hd g]
+    refine MemberPullback.isInSpanAt_eq_congr ?_ g
+    filter_upwards [(isOpen_flatDomain Θ).mem_nhds (mem_flatDomain_self Θ)] with y hy
+    obtain ⟨-, hΘy⟩ := hflat hy.1 hy.2
+    have hfc : ∀ k, W z k = 0 → flatCoord Θ k y = W y k := fun k hk => by
+      show Θ.toFun (chartAt (ComplexModel n) z y) k = _
+      rw [hΘy, hk, sub_zero]
+    have hpt : ∀ i : Fin (𝔪.geoTransform C π).E.length,
+        (if z ∈ (𝔪.geoTransform C π).E.get i then flatCoord Θ (σ i) y ^ a' i else 1) =
+          if h : i.1 < 𝔪.E.length then
+            (if z ∈ geoStrictTransform π C (𝔪.E.get ⟨i.1, h⟩) then
+              W y (s ⟨i.1, h⟩) ^ a ⟨i.1, h⟩ else 1)
+          else W y j ^ ((∑ i ∈ Finset.univ.filter
+            (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) - 𝔪.d) := by
+      intro i
+      rw [hget i]
+      by_cases h : i.1 < 𝔪.E.length
+      · simp only [σ, a', dif_pos h]
+        split_ifs with hzi
+        · rw [hfc _ (hH _ hzi).2.2.1]
+        · rfl
+      · simp only [σ, a', dif_neg h]
+        rw [if_pos (show z ∈ π ⁻¹' C from hzC), hfc _ hWzj]
+    rw [Finset.prod_filter, Finset.prod_filter, Finset.prod_congr rfl fun i _ => hpt i]
+    have hprod := prod_map_append_singleton 𝔪.E (geoStrictTransform π C) (π ⁻¹' C)
+      (fun i => if h : i.1 < 𝔪.E.length then
+            (if z ∈ geoStrictTransform π C (𝔪.E.get ⟨i.1, h⟩) then
+              W y (s ⟨i.1, h⟩) ^ a ⟨i.1, h⟩ else 1)
+          else W y j ^ ((∑ i ∈ Finset.univ.filter
+            (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) - 𝔪.d))
+    refine Eq.trans (mul_comm _ _) (Eq.trans ?_ hprod.symm)
+    congr 1
+    · refine Finset.prod_congr rfl fun i _ => ?_
+      simp only [Fin.val_mk, dif_pos i.2, Fin.eta]
+    · simp only [Fin.val_mk, lt_irrefl, not_false_eq_true, dif_neg]
+
+open Classical in
+/-- **The same, from flat coordinates at `π z`** (the shape of `MonomialCase`, section
+`Principal`): if the members `E_i` through `π z` (`i ∈ T`) are the coordinate hyperplanes
+`{Φ_{σ₀ i} = 0}` of a flattening `Φ` at `π z` and `𝔞 = (∏_{i ∈ T} Φ_{σ₀ i}^{a_i})` at `π z`, the
+conclusion of `exists_snc_chart_geoTransform` holds (the `Φ_{σ₀ i}` generate the `𝓘_{E_i}`,
+`MemberPullback.vanishingIdeal_mem_iff_flatCoord`). -/
+theorem exists_snc_chart_geoTransform_of_flat (hπ : IsBlowupAlong n C π)
+    (𝔪 : MarkedIdeals.MarkedIdeal n X) (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hE : IsSNCDivisor n 𝔪.E) (hnc : HasNormalCrossings n C 𝔪.E) {z : Y} (hzC : π z ∈ C)
+    {Φ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) (π z) (π z))}
+    {σ₀ : Fin 𝔪.E.length → Fin n} {T : Finset (Fin 𝔪.E.length)}
+    (hT : ∀ i, i ∈ T ↔ π z ∈ 𝔪.E.get i)
+    (hA : ∀ i ∈ T, ∀ {y : X}, y ∈ (chartAt (ComplexModel n) (π z)).source →
+      chartAt (ComplexModel n) (π z) y ∈ Φ.source →
+        (y ∈ 𝔪.E.get i ↔ Φ.toFun (chartAt (ComplexModel n) (π z) y) (σ₀ i) = 0))
+    (a : Fin 𝔪.E.length → ℕ)
+    (hgen : ∀ g, 𝔪.ideal.mem (π z) g ↔ IsInSpanAt (n := n)
+      (· = fun x => ∏ i ∈ T, flatCoord Φ (σ₀ i) x ^ a i) (π z) g)
+    (hd : 𝔪.d ≤ ∑ i ∈ Finset.univ.filter
+      (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) :
+    ∃ (Θ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) z z))
+      (σ : Fin (𝔪.geoTransform C π).E.length → Fin n)
+      (a' : Fin (𝔪.geoTransform C π).E.length → ℕ),
+      Θ.source ⊆ (chartAt (ComplexModel n) z).target ∧
+      Θ.toFun (chartAt (ComplexModel n) z z) = 0 ∧
+      Set.InjOn σ {i | z ∈ (𝔪.geoTransform C π).E.get i} ∧
+      (∀ i, z ∈ (𝔪.geoTransform C π).E.get i → ∀ {y : Y},
+        y ∈ (chartAt (ComplexModel n) z).source → chartAt (ComplexModel n) z y ∈ Θ.source →
+          (y ∈ (𝔪.geoTransform C π).E.get i ↔
+            Θ.toFun (chartAt (ComplexModel n) z y) (σ i) = 0)) ∧
+      (∀ i (hi : i.1 < 𝔪.E.length), a' i = a ⟨i.1, hi⟩) ∧
+      (∀ i, ¬ i.1 < 𝔪.E.length → a' i = (∑ i ∈ Finset.univ.filter
+        (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) - 𝔪.d) ∧
+      ∀ g, (𝔪.geoTransform C π).ideal.mem z g ↔ IsInSpanAt (n := n)
+        (· = fun y => ∏ i ∈ Finset.univ.filter (fun i => z ∈ (𝔪.geoTransform C π).E.get i),
+          flatCoord Θ (σ i) y ^ a' i) z g := by
+  classical
+  have hTeq : T = Finset.univ.filter (fun i => π z ∈ 𝔪.E.get i) := by
+    ext i
+    simp [hT]
+  subst hTeq
+  refine exists_snc_chart_geoTransform hπ 𝔪 hN h𝔞 hE hnc hzC a (fun i => flatCoord Φ (σ₀ i))
+    (fun i hi => ⟨holomorphicAt_flatCoord Φ (σ₀ i) (mem_flatDomain_self Φ), fun g =>
+      vanishingIdeal_mem_iff_flatCoord Φ (hA i ((hT i).mpr hi)) (mem_flatDomain_self Φ) g⟩)
+    hgen hd
 
 end SNCForm
 

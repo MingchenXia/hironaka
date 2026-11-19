@@ -1,39 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.ExceptionalPushforwardAlong
 import Hironaka.Invariant.BoundaryCount
 import Hironaka.MarkedIdeal.HomogenizedGlueingTower
 import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
 import Hironaka.Blowup.NormalCrossingsComparison
 import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Strict transforms of intersections of members along multiple test blow-ups
 
-Sources: Włodarczyk 2009 (`wlodarczyk09-analytic-resolution`) Step 1a (printed p. 55, the intersections `H^s_α` of
-`s` divisors and the count `s(x)` with the strict transforms of `E` identified with `E`); Bierstone--Milman 2008
+Hironaka phase H2 (TN3), the blowup side of Step 1a inside a submanifold `N` (`hir:maximal-order-step`,
+TN-CLASSICAL's H4 design; claim I-0977 C-0091).  Blueprint `bcalc:member-intersection-strict`,
+`bcalc:member-intersection-tower` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2009
+(`wlodarczyk09-analytic-resolution`) Step 1a (printed p. 55, the intersections `H^s_α` of `s` divisors
+and the count `s(x)` with the strict transforms of `E` identified with `E`); Bierstone--Milman 2008
 (`bierstone-milman08-functoriality`) §2 (the transformed divisor `E'`).
 
 Let `π` be the blowup along `C ⊆ N`, `E` a simple normal crossings divisor transverse to the closed
@@ -43,18 +25,24 @@ set `N`, `C` with only normal crossings with `E`, and `S` a set of indices of me
   form of `ExceptionalPushforwardAlong.geoStrictTransform_inter_eq` (in adapted coordinates all of them
   are coordinate subspaces of one monomial chart, `bcalc:snc-chart`).
 
-Along a tower `T` (`strictAlong`, iterated strict transform):
+Along a tower `T` (`strictAlong`, TN23's iterated strict transform):
 
 * `take_E_geoTransformAlong`, `get_E_geoTransformAlong`: the first `#E` members of the transformed
   divisor `E_T` are the strict transforms `strictAlong T H_i` of the original members (the exceptional
   divisors are appended after them);
-* `strictAlong_mono`, `isClosed_strictAlong`, `strictAlong_subset_preimage`: strict transforms along a tower are
-  monotone, closed, lie over the set, and so stay disjoint;
-* `strictAlong_inter_memberInter`: for a well-formed `(M, N, E, 𝔞, d)` and a multiple test blow-up `T`, `(N ∩ H_S)_T
-  = N_T ∩ ⋂_{i ∈ S} (H_i)_T` -- a point of `N_T` lying on the strict transforms of the members `H_i`, `i ∈ S`, lies
-  on the strict transform of the intersection `N ∩ H_S`. In Step 1a a point of the cosupport with `s(x) = s` thus
-  lies on the strict transform of the intersection it lies on at the start of Step 1, where the restricted invariant
-  is evaluated.
+* `strictAlong_mono`, `isClosed_strictAlong`, `strictAlong_subset_preimage`,
+  `disjoint_strictAlong`: strict transforms along a tower are monotone, closed, lie over the set, and
+  so stay disjoint;
+* `strictAlong_inter_memberInter`: for a well-formed `(M, N, E, 𝔞, d)` and a multiple test blow-up
+  `T`, `(N ∩ H_S)_T = N_T ∩ ⋂_{i ∈ S} (H_i)_T` -- a point of `N_T` lying on the strict transforms of
+  the members `H_i`, `i ∈ S`, lies on the strict transform of the intersection `N ∩ H_S`;
+  `mem_strictAlong_inter_memberInter_iff` reads it with the members `E_T.get i` of the transform, and
+  `mem_strictAlong_inter_memberInter_self` takes for `S` the original members through the point.  In
+  Step 1a a point of the cosupport with `s(x) = s` thus lies on the strict transform of the
+  intersection it lies on at the start of Step 1, where the restricted invariant is evaluated.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -65,7 +53,15 @@ universe u
 namespace Hironaka.MemberInterTowerAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupFlatCoordinates Hironaka.BlowupMonomialCharts Hironaka.BlowupLocalSurjectivity Hironaka.BlowupStrictSubmanifold Hironaka.BlowupSNCTransform Hironaka.NormalCrossings Hironaka.SimultaneousNormalCrossings Hironaka.BoundaryCount Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.HomogenizedGlueingTower
+open Hironaka.BlowupFlatCoordinates
+  Hironaka.BlowupMonomialCharts
+  Hironaka.BlowupLocalSurjectivity
+  Hironaka.BlowupStrictSubmanifold
+  Hironaka.BlowupSNCTransform Hironaka.NormalCrossings
+  Hironaka.SimultaneousNormalCrossings
+  Hironaka.BoundaryCount Hironaka.BlowupTowers
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.HomogenizedGlueingTower
 
 noncomputable section
 
@@ -177,6 +173,12 @@ theorem strictAlong_subset_preimage : {Y : CMfd.{u} n} → (T : BlowupTower X Y)
       strictAlong_subset_preimage T hA
         (geoStrictTransform_subset_preimage hπ.contMDiff.continuous (isClosed_strictAlong T hA) hz)
 
+/-- **Strict transforms of disjoint closed sets stay disjoint.** -/
+theorem disjoint_strictAlong {Y : CMfd.{u} n} (T : BlowupTower X Y) {A B : Set X} (hA : IsClosed A)
+    (hB : IsClosed B) (hAB : Disjoint A B) : Disjoint (strictAlong T A) (strictAlong T B) :=
+  Disjoint.mono (strictAlong_subset_preimage T hA) (strictAlong_subset_preimage T hB)
+    (hAB.preimage T.proj)
+
 end Strict
 
 /-! ### The original members along a tower -/
@@ -253,6 +255,26 @@ theorem strictAlong_inter_memberInter (h𝔪 : 𝔪.IsWellFormed) (S : Finset (F
       forall_exists_index, and_imp, forall_apply_eq_imp_iff₂, get_E_geoTransformAlong,
       N_geoTransformAlong_step, strictAlong_step]
 
+/-- `strictAlong_inter_memberInter` with the members `E_T.get i` of the transformed divisor. -/
+theorem mem_strictAlong_inter_memberInter_iff (h𝔪 : 𝔪.IsWellFormed) (S : Finset (Fin 𝔪.E.length))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) (z : Y) :
+    z ∈ strictAlong T (𝔪.N ∩ memberInter 𝔪.E S) ↔ z ∈ (geoTransformAlong 𝔪 T).N ∧
+      ∀ i ∈ S, z ∈ (geoTransformAlong 𝔪 T).E.get
+        (Fin.castLE (length_E_le_length_E_geoTransformAlong 𝔪 T) i) := by
+  rw [strictAlong_inter_memberInter 𝔪 h𝔪 S T hT]
+  simp only [mem_inter_iff, mem_ofPred_eq, get_E_geoTransformAlong]
+
+open Classical in
+/-- **A point of `N_T` lies on the strict transform of the intersection of `N` with the original
+members whose strict transforms pass through it** (Step 1a: the intersection `N ∩ H_S` a point with
+`s(x) = s` lies on). -/
+theorem mem_strictAlong_inter_memberInter_self (h𝔪 : 𝔪.IsWellFormed) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {z : Y} (hz : z ∈ (geoTransformAlong 𝔪 T).N) :
+    z ∈ strictAlong T
+      (𝔪.N ∩ memberInter 𝔪.E (Finset.univ.filter fun i => z ∈ strictAlong T (𝔪.E.get i))) := by
+  rw [strictAlong_inter_memberInter 𝔪 h𝔪 _ T hT]
+  exact ⟨hz, fun i hi => (Finset.mem_filter.mp hi).2⟩
+
 end Tower
 
 /-! ### Localising the centres over an open set -/
@@ -261,7 +283,33 @@ section Localise
 
 variable {X : CMfd.{u} n}
 
-open TopologicalSpace Hironaka.BlowupTowerTransforms Hironaka.CoefficientIdealRestriction
+open TopologicalSpace Hironaka.BlowupTowerTransforms
+  Hironaka.CoefficientIdealRestriction
+
+/-- **The strict transform of a union along a tower is the union of the strict transforms.** -/
+theorem strictAlong_union : {Y : CMfd.{u} n} → (T : BlowupTower X Y) → (A B : Set X) →
+    strictAlong T (A ∪ B) = strictAlong T A ∪ strictAlong T B
+  | _, .refl, _, _ => rfl
+  | _, .step T C π _, A, B => by
+    rw [strictAlong_step, strictAlong_step, strictAlong_step, strictAlong_union T A B]
+    unfold geoStrictTransform
+    rw [union_sdiff_distrib, preimage_union, closure_union]
+
+/-- **Localising the centres, several intersections at once** (Step 1a, "moving apart"): if the
+centres of `T` lie in the strict transforms of `A ∪ B`, with `B` closed and disjoint from the open
+set `U`, then the centres of the restriction of `T` to `U` lie in the strict transforms of `A ∩ U`. -/
+theorem centresIn_restrict_of_centresIn_union (U : Opens X) {A B : Set X} (hB : IsClosed B)
+    (hUB : Disjoint (U : Set X) B) : {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      CentresIn (A ∪ B) T → CentresIn ((↑) ⁻¹' A : Set U) (restrict U T)
+  | _, .refl, _ => trivial
+  | _, .step T C _ _, hT => by
+    refine ⟨centresIn_restrict_of_centresIn_union U hB hUB T hT.1, fun p hp => ?_⟩
+    rw [strictAlong_restrict U T A]
+    have hpC : p.1 ∈ strictAlong T A ∪ strictAlong T B := by
+      rw [← strictAlong_union]; exact hT.2 hp
+    rcases hpC with h | h
+    · exact h
+    · exact absurd (strictAlong_subset_preimage T hB h) (Set.disjoint_left.mp hUB p.2)
 
 /-- **Localising the centres, for every multiple test blow-up** (Step 1b, a hypersurface of maximal
 contact on `U`): if every admissible centre `C` of every multiple test blow-up `T` of `𝔪` satisfies
@@ -323,6 +371,34 @@ theorem isTransverse_drop_E_geoTransformAlong (h𝔪 : 𝔪.IsWellFormed) {W : S
     exact ⟨BlowupStrictIdeal.isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold hπ hWT hCW,
       isSNCDivisor_geoTransformE_of_hasNormalCrossings hπ hsnc hnc,
       isTransverse_geoTransformE_of_hasNormalCrossings hπ hWT.1 hCW hsnc htr hnc⟩
+
+/-- **All of `E_T` is transverse to `W_T`** when `E` is transverse to `W` at the start and the
+centres lie in the strict transforms of `W`. -/
+theorem isTransverse_E_geoTransformAlong (h𝔪 : 𝔪.IsWellFormed) {W : Set X}
+    (hW : IsClosedSubmanifold n W) (hWE : IsTransverse n W 𝔪.E) : {Y : CMfd.{u} n} →
+      (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T → CentresIn W T →
+      IsClosedSubmanifold n (strictAlong T W) ∧ IsTransverse n (strictAlong T W) (geoTransformAlong 𝔪 T).E
+  | _, .refl, _, _ => ⟨hW, hWE⟩
+  | _, .step T C π hπ, hT, hTW => by
+    obtain ⟨hWT, htr⟩ := isTransverse_E_geoTransformAlong h𝔪 hW hWE T hT.1 hTW.1
+    have hwf := MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong h𝔪 T hT.1
+    have hC : (geoTransformAlong 𝔪 T).IsAdmissibleCentre C := hT.2
+    have hCW : C ⊆ strictAlong T W := hTW.2
+    rw [geoTransformAlong_step, geoTransform_E, strictAlong_step]
+    exact ⟨BlowupStrictIdeal.isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold hπ hWT hCW,
+      isTransverse_geoTransformE_of_hasNormalCrossings hπ hWT.1 hCW hwf.isSNCDivisor htr hC.2.2⟩
+
+/-- **The marked ideal on `W_T` with the exceptional members is well formed**: under the hypotheses
+of `isTransverse_drop_E_geoTransformAlong`, `(Y, W_T, E_T without the original members, 𝔟, μ)` is well
+formed for every coherent `𝔟` (Step 1b's marked ideal on the strict transform of the hypersurface of
+maximal contact, the old members having been dropped in Step 1a). -/
+theorem isWellFormed_strictAlong_drop (h𝔪 : 𝔪.IsWellFormed) {W : Set X}
+    (hW : IsClosedSubmanifold n W) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T)
+    (hTW : CentresIn W T) {𝔟 : GermIdeal n Y} (h𝔟 : 𝔟.IsCoherent) (μ : ℕ) :
+    ({ N := strictAlong T W, E := (geoTransformAlong 𝔪 T).E.drop 𝔪.E.length, ideal := 𝔟, d := μ } :
+      MarkedIdeal n Y).IsWellFormed :=
+  let h := isTransverse_drop_E_geoTransformAlong 𝔪 h𝔪 hW T hT hTW
+  ⟨h.1, h𝔟, h.2.1, h.2.2⟩
 
 end Transverse
 

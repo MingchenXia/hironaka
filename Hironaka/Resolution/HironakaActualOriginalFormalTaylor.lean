@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualOriginalTaylorPolynomial
 import Mathlib.RingTheory.MvPowerSeries.Basic
 
@@ -154,7 +149,6 @@ theorem originalTaylorAlgHom_coordinate (n : ℕ) (i : Fin n) :
     originalTaylorAlgHom n (normalCoordinate 0 n i)=MvPowerSeries.X i :=
   originalTaylorSeries_coordinate n i
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ACTUAL original maximal powers have exactly the genuine lower formal-coefficient kernel. -/
 theorem mem_original_maximal_pow_iff_formal_coefficients_zero (n q : ℕ)
     (g : HolGerm (ComplexModel (0+n))) :

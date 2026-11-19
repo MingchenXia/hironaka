@@ -1,23 +1,23 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Algebra.Polynomial.Roots
 import Mathlib.Analysis.Complex.Basic
 import Mathlib.Algebra.BigOperators.Fin
+
 set_option autoImplicit false
 
 /-!
 # Finitely many points of the moment curve avoid any `m` hyperplanes
 
-Combinatorial step of the plan for Cartan's theorem on an irreducible germ (step 2): instead of Demailly's
-interpolation in the coefficients `c` of the primitive element (CADG II.4.29), use finitely many coefficient vectors
-`c(t_i) = (1, t_i, …, t_i^{k-1})` on the moment curve. A hyperplane `{c: ∑_l λ_l c_l = 0}` (`λ ≠ 0`) contains `c(t)`
-only for the `≤ k - 1` roots `t` of `∑_l λ_l t^l`. Hence (`exists_forall_sum_mul_pow_ne_zero`): for `K > m (k - 1)`
-distinct `t_i` and any `m` nonzero `λ_j`, some `c(t_i)` lies on none of the hyperplanes. In the application the `m ≤
-q(q-1)` hyperplanes are those where `u_c` fails to be primitive or fails to separate the fibre over a given base
-point; `m` is bounded independently of the base point.
+Step 2 (combinatorial) of our proof of Cartan's theorem on an irreducible germ: instead of
+Demailly's
+interpolation in the coefficients `c` of the primitive element (CADG II.4.29), use finitely many
+coefficient vectors `c(t_i) = (1, t_i, …, t_i^{k-1})` on the moment curve.  A hyperplane
+`{c : ∑_l λ_l c_l = 0}` (`λ ≠ 0`) contains `c(t)` only for the `≤ k - 1` roots `t` of
+`∑_l λ_l t^l`.  Hence (`exists_forall_sum_mul_pow_ne_zero`): for `K > m (k - 1)` distinct `t_i`
+and any `m` nonzero `λ_j`, some `c(t_i)` lies on none of the hyperplanes.  In the application the
+`m ≤ q(q-1)` hyperplanes are those where `u_c` fails to be primitive or fails to separate the
+fibre over a given base point; `m` is bounded independently of the base point.
+
+Sorry-free.
 -/
 
 open Polynomial

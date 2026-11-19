@@ -1,20 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationData
 import Hironaka.Analytic.HolomorphicCoefficientPolynomials
 import Mathlib.Analysis.Calculus.ImplicitContDiff
 import Mathlib.Analysis.Complex.Polynomial.Basic
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Analytic.RegularLocusDense
+
 set_option autoImplicit false
 
 /-!
 # The parametrizing sets of an irreducible germ
+
+Blueprint `lag:parametrization-sets`, `lag:parametrization-regular` (Demailly, *Complex
+analytic and differential geometry*, II.4.19).
 
 From the pointwise identities `ParametrizationData A` we build `SetsData`: on a small
 polydisc the fibre coordinates of `A` are small over small base points (the roots of the
@@ -243,6 +238,7 @@ theorem GoodRadii.finite_fibre {r₁ r₂ : ℝ} (hR : P.GoodRadii r₁ r₂)
   obtain ⟨hfin, hcard⟩ := ncard_setOf_monicEval_eq_zero P.deg P.w x (P.simple x hxb hδ)
   rw [hR.fibre_eq hx hδ]
   exact ⟨hfin.image _, by rw [(hR.injOn_graphPoint hx hδ).ncard_image, hcard]⟩
+
 
 theorem continuousOn_fibreForm (P : ParametrizationData A) :
     ContinuousOn (fibreForm P.dim P.coef) (coordinateProjection n P.dim ⁻¹' ball 0 P.rad) := by

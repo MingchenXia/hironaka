@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPrincipalHSFormula
 import Hironaka.Resolution.HironakaActualWholeStalkHolomorphicPullback
 import Hironaka.Analytic.OrderInvariance
@@ -94,7 +89,6 @@ theorem wholeChartStalkIdeal_le_maximal_pow_iff (A : GermIdeal n X) (x : X)
     exact (chartTranslatedGerm_mem_maximal_pow_iff x g hg q).mpr
       (mem_idealPow_of_vanishesToOrderOn_univ (h g hgA))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONLY original invertibility supplies a nonzero original principal whole chart stalk. -/
 theorem exists_actual_nonzero_principal_whole_stalk (A : GermIdeal n X)
     (hA : A.IsInvertible) (x : X) :
@@ -127,8 +121,6 @@ theorem exists_actual_nonzero_principal_whole_stalk (A : GermIdeal n X)
   refine ⟨f,hf,?_⟩
   simpa only [Set.range_const,Fin.isValue] using hspan
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Original invertibility internally supplies ONE actual finite original order and ALL intrinsic HS values. -/
 theorem exists_actual_original_order_intrinsic_hs (A : GermIdeal n X)
     (hA : A.IsInvertible) (x : X) :

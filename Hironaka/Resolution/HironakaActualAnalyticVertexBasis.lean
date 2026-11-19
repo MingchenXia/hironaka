@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualFormalColonSaturation
-import Hironaka.Support.ActualDegreeLexBoundExact
+import Hironaka.Resolution.HironakaActualFormalStandardMonomialHS
 
 /-! Internally constructed genuine original analytic monic vertices generate the WHOLE original ideal. -/
 set_option autoImplicit false

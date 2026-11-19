@@ -1,31 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MonomialStepAlong
 import Hironaka.Invariant.MonomialInvariantFunctorial
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialCase
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The invariant of the monomial case along a submanifold under open restrictions, biholomorphisms and empty blowups
+
+Blueprint `hir:monomial-invariance-along` (`blueprint/src/hironaka.tex`, Hironaka phase H4; clause (4) of
+`hir:monomial-case` for `N ≠ M`).  Sources: Włodarczyk 2005, Step 2b and §2.4 (functoriality for étale maps);
+Bierstone--Milman 2008, §5 and Theorem 1.3 (the invariant depends only on the exponents of the members through the
+point and their order in `E`).  For `N = M` this is `MonomialInvariantFunctorial`.
 
 The invariant `γ_N = MonomialCaseAlong.gammaAlong n N 𝔞 E d` at `x` is read off the members of `E` through `x` and the
 exponents along `N`, `e^N_{E_i}(x) = DivisorExponentAlong.divExpAlong n N 𝔞 (E_i) x`, which are defined by the
@@ -37,9 +22,15 @@ cosupports `cosupp(𝔞|_N, e)` near `x`.
   of `(N, 𝔞, E)` at `φ x'`;
 * `gammaAlong_pullback_val` (**restriction to an open set**) and `gammaAlong_pullback_diffeomorph` (**biholomorphisms**)
   for marked ideals, `MarkedIdealBiholomorphism.MarkedIdeal.pullback` (which pulls back `N` as well);
-* `towerInvAlong_restrict`: along the restriction of a multiple test blow-up to an open set
+* `gammaAlong_geoTransform_empty` (**steps with empty centre**): for the blowup along `∅` (a biholomorphism) the
+  invariant along `N'` of the transform of a well-formed marked ideal, nonzero and monomial along `N`, is the invariant
+  of the base read through `π` (`MonomialStepAlong.gammaAlong_geoTransform_eq_of_notMem`);
+* `towerInvAlong_restrict`, `towerInvAlong_transport`: along the restriction of a multiple test blow-up to an open set
   (`MarkedIdealRestrictOpen`) and along the transport of a tower by a biholomorphism of the base
   (`MarkedIdealTowerTransport`), the invariants `MonomialStepAlong.towerInvAlong` at the stages correspond.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -50,7 +41,14 @@ universe u
 namespace Hironaka.MonomialInvariantFunctorialAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.MonomialPartAlong Hironaka.MonomialCase Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong Hironaka.MonomialInvariant Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealTowerTransport Hironaka.NormalCrossings
+open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong
+  Hironaka.MonomialPartAlong Hironaka.MonomialCase
+  Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong
+  Hironaka.MonomialInvariant
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealTowerTransport
+  Hironaka.NormalCrossings
 
 noncomputable section
 
@@ -146,6 +144,20 @@ theorem gammaAlong_pullback_diffeomorph {X' : Type u} [TopologicalSpace X'] [Cha
       (⟨𝔪.N, [], 𝔪.ideal, e⟩ : MarkedIdeal n X) h𝔞
   · exact Φ.toHomeomorph.map_nhds_eq p
 
+/-- **Steps with empty centre** (`hir:monomial-case` (4) along `N`): for the blowup `π` along `∅`, the invariant along
+`N'` of the transform of a well-formed `(X, N, E, 𝔞, d)` which is nonzero and monomial along `N` is the invariant along
+`N` read through `π` (`MonomialStepAlong.gammaAlong_geoTransform_eq_of_notMem`; the appended member passes through no
+point). -/
+theorem gammaAlong_geoTransform_empty (hn : 0 < n) {Y : Type u} [TopologicalSpace Y]
+    [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y] {π : Y → X} (hπ : IsBlowupAlong n (∅ : Set X) π)
+    (𝔪 : MarkedIdeal n X) (h𝔪 : 𝔪.IsWellFormed) (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y)
+    (hmono : IsMonomialAlong n 𝔪.N 𝔪.ideal 𝔪.E) {z : Y} (hzN : z ∈ (𝔪.geoTransform ∅ π).N) (d : ℕ) :
+    gammaAlong n (𝔪.geoTransform ∅ π).N (𝔪.geoTransform ∅ π).ideal (𝔪.geoTransform ∅ π).E d z =
+      gammaAlong n 𝔪.N 𝔪.ideal 𝔪.E d (π z) := by
+  have hwf := GeoTransformWellFormed.isWellFormed_geoTransform_of_isAdmissibleCentre h𝔪
+    (isAdmissibleCentre_empty 𝔪) hπ
+  exact gammaAlong_geoTransform_eq_of_notMem hn h𝔪 hne hmono hπ hwf.isCoherent hzN (notMem_empty (π z)) d
+
 end Marked
 
 /-! ### Along restricted and transported towers -/
@@ -165,6 +177,20 @@ theorem towerInvAlong_restrict (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifol
   rw [MarkedIdealRestrictOpen.geoTransformAlong_restrict U hN h𝔞 T hT]
   exact gammaAlong_pullback_val (geoTransformAlong 𝔪 T)
     (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg) (openPreimage T U) p _
+
+/-- **The invariant along a transported tower** (`hir:monomial-case` (4) along `N`, with `hir:tower-transport`): for a
+biholomorphism `Φ : X' ≅ X` and a tower `T` over `X`, the invariant along `N_T` of the transform of `Φ^*𝔪` along the
+transported tower at `p` is the invariant of the transform of `𝔪` along `T` at `back p`. -/
+theorem towerInvAlong_transport {X' : CMfd.{u} n} (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X)
+    (𝔪 : MarkedIdeal n X) (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → ∀ p : (transport Φ T).target,
+      towerInvAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower p = towerInvAlong 𝔪 T ((transport Φ T).back p)
+  | _, .refl, p => gammaAlong_pullback_diffeomorph Φ 𝔪
+      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg) p _
+  | _, .step T C π hπ, p => by
+      unfold towerInvAlong
+      rw [geoTransformAlong_transport_step Φ h𝔞 T C π hπ]
+      rfl
 
 end Tower
 

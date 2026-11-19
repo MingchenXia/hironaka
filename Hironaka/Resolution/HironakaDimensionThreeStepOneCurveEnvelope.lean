@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaGeneralThreeNonspecialAnalyticLoci
 
 /-!
@@ -27,8 +22,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaDimensionTwoStepOneAnalyticSuperlevels HironakaStepOneSpecialAnalyticLoci
   MarkedIdeals MarkedIdeals.MarkedIdeal CodimOneSupportAlong NormalCrossings
   SimultaneousNormalCrossings HomogenizedIdealAlong GermIdealOrder BoundaryCount MemberInterLocusAlong DivisorExponentAlong
-open Hironaka
-
 noncomputable section
 variable {n : ℕ} {M : Type*} [TopologicalSpace M]
   [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
@@ -265,7 +258,7 @@ theorem exists_analytic_dimone_nonspecial_envelope
 
 
 open HironakaGeneralThreeNonspecialAnalyticLoci
-open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 /-- Original actual General3 inputs internally supply all companion geometry for the genuine curve envelope. -/
 theorem exists_actual_companion_dimone_nonspecial_envelope (hn : 0 < n)

@@ -1,51 +1,24 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralValueOrderZero
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.ContactRepresentative
-import Hironaka.Invariant.GeneralValue
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.NonmonomialOrderTransport
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The general value does not depend on the representative: property (7)
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2 (the invariant is assigned to
-the marked ideal "up to equivalence"; the companion ideal only depends on the restriction of the ideal to `N`);
-Bierstone--Milman 2008, Step II.
+Blueprint `hir:general-representative` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2 (the invariant is assigned to the marked
+ideal "up to equivalence"; the companion ideal only depends on the restriction of the ideal to `N`); Bierstone--Milman 2008,
+Step II.
 
-Let `𝔪 ≃ 𝔫` be restricted-equivalent marked ideals (closed `N`, coherent ideals). The general value
-`GeneralValue.genInv M 𝔪` is built from three pieces of data along a tower `T`: the order `ν` of the nonmonomial
-part, the run of a point in its regime `OrdRegime 𝔪 o`, and -- at positive order -- the companion ideal of the
-transform at the start of the run, restricted to its mask `{ν ≤ o}`. All three agree for `𝔪` and `𝔫`
-(`NonmonomialOrderTransport`: `ν`, the regime and its run, the mask; `CompanionRebase.companionOf_congr`:
-restricted-equivalent marked ideals have EQUAL companion ideals, and from the first blowup on the transforms are
-equal, `RestrictEquiv.geoTransformAlong_step_eq`). Hence the companion values, and the general values, are equal --
-along every tower, at every point, for every value function `M` (at order `0` this is
-`GeneralValueOrderZero.genInv_congr_of_nmOrd_eq_zero`).
+Let `𝔪 ≃ 𝔫` be restricted-equivalent marked ideals (closed `N`, coherent ideals).  The general value
+`GeneralValue.genInv M 𝔪` is built from three pieces of data along a tower `T`: the order `ν` of the nonmonomial part, the run
+of a point in its regime `OrdRegime 𝔪 o`, and -- at positive order -- the companion ideal of the transform at the start of the
+run, restricted to its mask `{ν ≤ o}`.  All three agree for `𝔪` and `𝔫` (TN3's `NonmonomialOrderTransport`: `ν`, the regime and
+its run, the mask; TN3's `CompanionRebase.companionOf_congr`: restricted-equivalent marked ideals have EQUAL companion ideals,
+and from the first blowup on the transforms are equal, `RestrictEquiv.geoTransformAlong_step_eq`).  Hence the companion values,
+and the general values, are equal -- along every tower, at every point, for every value function `M` (at order `0` this is
+TN3's `GeneralValueOrderZero.genInv_congr_of_nmOrd_eq_zero`).
 
 ## Main results
 
@@ -55,6 +28,9 @@ along every tower, at every point, for every value function `M` (at order `0` th
 * **`genInv_congr_of_pos`** (property (7) at positive order), **`genInv_congr`** (at every point, along every tower);
 * **`representative_field`**: property (7) in the shape of the field `representative` of
   `ResolutionInvariantExt.ResolutionInvariant`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -65,7 +41,16 @@ universe u v
 namespace Hironaka.GeneralRepresentative
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail Hironaka.NonmonomialOrderTransport Hironaka.MaxOrderValue Hironaka.GeneralValue
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail
+  Hironaka.NonmonomialOrderTransport Hironaka.MaxOrderValue
+  Hironaka.GeneralValue
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section
@@ -142,9 +127,8 @@ theorem genInv_congr_of_pos (hEq : RestrictEquiv 𝔪 𝔫) (hN : IsClosed 𝔪.
   rw [genInv_of_nmOrd_ne_zero M 𝔪 T ho ho0, genInv_of_nmOrd_ne_zero M 𝔫 T (hν ▸ ho) ho0,
     regimeRun_ordRegime_congr hEq hN h𝔪 h𝔫 o T y, genLowerValue_congr M hEq hN h𝔪 h𝔫 o]
 
-/-- **Property (7) of the general value**: restricted-equivalent marked ideals (closed `N`, coherent ideals) have the
-same general value, at every point, along every tower (order `0`:
-`GeneralValueOrderZero.genInv_congr_of_nmOrd_eq_zero`). -/
+/-- **Property (7) of the general value**: restricted-equivalent marked ideals (closed `N`, coherent ideals) have the same
+general value, at every point, along every tower (order `0`: TN3's `GeneralValueOrderZero.genInv_congr_of_nmOrd_eq_zero`). -/
 theorem genInv_congr (hEq : RestrictEquiv 𝔪 𝔫) (hN : IsClosed 𝔪.N) (h𝔪 : 𝔪.ideal.IsCoherent)
     (h𝔫 : 𝔫.ideal.IsCoherent) {Y : CMfd.{u} n} (T : BlowupTower X Y) (y : Y) :
     genInv M 𝔪 T y = genInv M 𝔫 T y := by

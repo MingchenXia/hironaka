@@ -1,9 +1,3 @@
-import Hironaka.Coherence.CoherentIdealFiniteSpan
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.CoherentIdealColon
 import Hironaka.Analytic.HolomorphicGermRing
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
@@ -19,8 +13,6 @@ open scoped Topology Manifold
 namespace Hironaka.EuclideanHolomorphicGermSpan
 
 open Hironaka.HolomorphicIdealSheaves
-
-open Hironaka
 
 noncomputable section
 

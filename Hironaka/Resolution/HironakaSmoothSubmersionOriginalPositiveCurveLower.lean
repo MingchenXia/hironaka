@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionOriginalCurveFamily
 /-! Actual original positive-member inner recursion through the complete
 curve family, with no monomial-inner-order or source-canonical certificate.

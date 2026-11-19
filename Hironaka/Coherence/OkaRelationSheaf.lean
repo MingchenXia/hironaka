@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Analysis.Complex.Basic
 import Mathlib.Analysis.Calculus.FDeriv.Mul
 import Mathlib.Analysis.Calculus.FDeriv.Add
@@ -10,6 +5,7 @@ import Mathlib.Analysis.Calculus.Deriv.Inv
 import Mathlib.Topology.Homeomorph.Defs
 import Mathlib.Algebra.BigOperators.Option
 import Mathlib.Data.Fintype.EquivFin
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -97,6 +93,10 @@ theorem HolAt.add {f g : X → ℂ} {y : X} (hf : HolAt f y) (hg : HolAt g y) :
     HolAt (fun x => f x + g x) y :=
   (hf.and hg).mono fun _ h => h.1.add h.2
 
+theorem HolAt.sub {f g : X → ℂ} {y : X} (hf : HolAt f y) (hg : HolAt g y) :
+    HolAt (fun x => f x - g x) y :=
+  (hf.and hg).mono fun _ h => h.1.sub h.2
+
 theorem HolAt.neg {f : X → ℂ} {y : X} (hf : HolAt f y) : HolAt (fun x => -f x) y :=
   hf.mono fun _ h => h.neg
 
@@ -134,6 +134,11 @@ theorem HolAt.inv {f : X → ℂ} {y : X} (hf : HolAt f y) (hy : f y ≠ 0) :
   have hne : ∀ᶠ x in 𝓝 y, f x ≠ 0 := hf.continuousAt.eventually_ne hy
   exact (hf.and hne).mono fun _ h => h.1.inv h.2
 
+theorem HolAt.congr {f g : X → ℂ} {y : X} (hf : HolAt f y) (hfg : f =ᶠ[𝓝 y] g) :
+    HolAt g y := by
+  filter_upwards [hf, hfg.eventuallyEq_nhds] with x hx hxe
+  exact hx.congr_of_eventuallyEq hxe.symm
+
 theorem holAt_of_differentiableOn {f : X → ℂ} {U : Set X} (hU : IsOpen U)
     (hf : DifferentiableOn ℂ f U) {y : X} (hy : y ∈ U) : HolAt f y :=
   eventually_of_mem (hU.mem_nhds hy) fun _ hx => hf.differentiableAt (hU.mem_nhds hx)
@@ -156,6 +161,12 @@ section Basic
 
 variable {X : Type*} [NormedAddCommGroup X] [NormedSpace ℂ X]
   {κ ι : Type*} [Fintype κ] [Fintype ι]
+
+theorem GeneratesRelationsOn.mono {F : κ → ι → X → ℂ} {U V : Set X} {μ : Type*} [Fintype μ]
+    {σ : μ → ι → X → ℂ} (h : GeneratesRelationsOn F U σ) (hVU : V ⊆ U) :
+    GeneratesRelationsOn F V σ :=
+  ⟨fun k j => (h.1 k j).mono hVU, fun k i x hx => h.2.1 k i x (hVU hx),
+    fun y hy a ha => h.2.2 y (hVU hy) a ha⟩
 
 /-- The relations at `y` of a system whose entries vanish near `y` are all holomorphic
 tuples; the unit vectors generate them. -/

@@ -1,13 +1,8 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicIdealSheaves
 import Hironaka.Manifold.HolomorphicContDiff
 import Mathlib.Geometry.Manifold.ContMDiff.Atlas
 import Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!

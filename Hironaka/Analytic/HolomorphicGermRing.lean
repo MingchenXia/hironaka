@@ -1,12 +1,8 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Analysis.Calculus.FDeriv.Pow
 import Mathlib.Analysis.Complex.Basic
 import Mathlib.Topology.Germ
 import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+
 set_option autoImplicit false
 
 /-!
@@ -25,6 +21,8 @@ all germs `Filter.Germ (𝓝 0) ℂ`.
 * `HolGerm.mk f hf` : the germ of `f`, with `HolGerm.mk_eq_mk_iff`, `HolGerm.exists_eq_mk`
   and the algebraic `mk_*` lemmas.
 * `HolGerm.eval` : evaluation at `0`, a ring homomorphism to `ℂ`.
+* `HolGerm.isUnit_iff_eval_ne_zero`, the `IsLocalRing` instance and
+  `HolGerm.mem_maximalIdeal_iff`.
 * `HolGerm.comap L`, `HolGerm.comapEquiv L` : pull back along continuous linear maps
   (equivalences).
 -/
@@ -53,6 +51,11 @@ theorem eventually_differentiableAt_add {f g : E → ℂ}
     (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
     ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (fun z => f z + g z) z :=
   hf.and hg |>.mono fun _ h => h.1.add h.2
+
+theorem eventually_differentiableAt_sub {f g : E → ℂ}
+    (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
+    ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (fun z => f z - g z) z :=
+  hf.and hg |>.mono fun _ h => h.1.sub h.2
 
 theorem eventually_differentiableAt_neg {f : E → ℂ}
     (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) :
@@ -159,9 +162,37 @@ theorem mk_add (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ 
     mk (fun z => f z + g z) (eventually_differentiableAt_add hf hg) = mk f hf + mk g hg :=
   rfl
 
+theorem mk_add' (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z)
+    (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
+    mk (f + g) (eventually_differentiableAt_add hf hg) = mk f hf + mk g hg :=
+  rfl
+
+theorem mk_sub (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z)
+    (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
+    mk (fun z => f z - g z) (eventually_differentiableAt_sub hf hg) = mk f hf - mk g hg :=
+  rfl
+
+theorem mk_sub' (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z)
+    (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
+    mk (f - g) (eventually_differentiableAt_sub hf hg) = mk f hf - mk g hg :=
+  rfl
+
+theorem mk_neg (f : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) :
+    mk (fun z => -f z) (eventually_differentiableAt_neg hf) = -mk f hf :=
+  rfl
+
+theorem mk_neg' (f : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) :
+    mk (-f) (eventually_differentiableAt_neg hf) = -mk f hf :=
+  rfl
+
 theorem mk_mul (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z)
     (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
     mk (fun z => f z * g z) (eventually_differentiableAt_mul hf hg) = mk f hf * mk g hg :=
+  rfl
+
+theorem mk_mul' (f g : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z)
+    (hg : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ g z) :
+    mk (f * g) (eventually_differentiableAt_mul hf hg) = mk f hf * mk g hg :=
   rfl
 
 theorem mk_pow (f : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) (n : ℕ) :
@@ -189,6 +220,10 @@ def constHom : ℂ →+* HolGerm E where
   map_zero' := rfl
   map_add' _ _ := rfl
 
+theorem constHom_apply (c : ℂ) :
+    constHom c = mk (fun _ : E => c) (eventually_differentiableAt_const c) :=
+  rfl
+
 theorem mk_const (c : ℂ) :
     mk (fun _ : E => c) (eventually_differentiableAt_const c) = constHom c :=
   rfl
@@ -209,6 +244,33 @@ theorem eval_constHom (c : ℂ) : eval (constHom c : HolGerm E) = c :=
 instance : Nontrivial (HolGerm E) :=
   (eval : HolGerm E →+* ℂ).domain_nontrivial
 
+/-- Holomorphic germs have no nonzero nilpotents.  This only uses the
+pointwise fact that a complex number whose power vanishes is zero; it does
+not use an identity theorem or the stronger domain property for holomorphic
+germs. -/
+theorem isReduced : IsReduced (HolGerm E) := by
+  constructor
+  intro g hg
+  obtain ⟨n, hn⟩ := hg
+  induction g using induction_on with
+  | h f hf =>
+    rw [← mk_zero]
+    apply mk_eq_mk_iff.mpr
+    have hn' : mk (fun z : E => f z ^ n) (eventually_differentiableAt_pow hf n) =
+        mk (fun _ : E => 0) eventually_differentiableAt_zero := by
+      calc
+        mk (fun z : E => f z ^ n) (eventually_differentiableAt_pow hf n) =
+            mk f hf ^ n := mk_pow f hf n
+        _ = 0 := hn
+        _ = mk (fun _ : E => 0) eventually_differentiableAt_zero := mk_zero.symm
+    have hfn : ∀ᶠ z in 𝓝 (0 : E), f z ^ n = 0 := mk_eq_mk_iff.mp hn'
+    filter_upwards [hfn] with z hz
+    exact eq_zero_of_pow_eq_zero hz
+
+/-- The preceding pointwise theorem supplies the standard reduced-ring
+instance for holomorphic germs. -/
+instance : IsReduced (HolGerm E) := isReduced
+
 theorem isUnit_iff_eval_ne_zero (g : HolGerm E) : IsUnit g ↔ eval g ≠ 0 := by
   refine ⟨fun h => (h.map eval).ne_zero, fun h => ?_⟩
   induction g using induction_on with
@@ -224,6 +286,10 @@ instance : IsLocalRing (HolGerm E) :=
   IsLocalRing.of_nonunits_add fun a b ha hb => by
     simp only [mem_nonunits_iff, isUnit_iff_eval_ne_zero, not_not, map_add] at ha hb ⊢
     rw [ha, hb, add_zero]
+
+theorem mem_maximalIdeal_iff (g : HolGerm E) :
+    g ∈ IsLocalRing.maximalIdeal (HolGerm E) ↔ eval g = 0 := by
+  rw [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, isUnit_iff_eval_ne_zero, not_not]
 
 section Comap
 

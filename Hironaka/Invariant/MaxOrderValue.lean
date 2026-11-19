@@ -1,59 +1,36 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneWellFounded
 import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneBridge
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Value functions for the marked ideals of maximal order: the properties without (8)
 
-Sources: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a ("By Step 1 we can resolve
-the marked ideal of maximal order `O(𝓘, μ)`"); Bierstone--Milman 2008, Step II.B.
+Blueprint `hir:max-order-value` (`blueprint/src/hironaka.tex`, Hironaka phase H4, between `hir:maximal-order-step` and
+`hir:general-step`).  Sources: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a ("By Step 1 we can
+resolve the marked ideal of maximal order `O(𝓘, μ)`"); Bierstone--Milman 2008, Step II.B.
 
-The general step (`hir:general-step`) computes its value at a point of positive order `o` of the nonmonomial part
-from the maximal-order invariant of a companion ideal, formed at a point-dependent stage on an open set. What it
-uses of that invariant are its properties (1)--(7) and (4') of `hir:centre-function`, for the marked ideals of the
-domain **of maximal order**, in the shape of the fields of `ResolutionInvariantExt.ResolutionInvariant`; for
-well-ordered values it is automatic. This module packages those properties as a predicate `IsMaxOrderValue n k M` on
-a value function `M` (no data, no field (8)), proves it for the masked Step 1 value (`isMaxOrderValue_stepOneInvM`,
-from `StepOneBridge`, for a lower invariant of `ResolutionInvariantExt`; the route uses
-`StepOneSeq.isMaxOrderValue_stepOneInvM`, its form for `ResolutionInvariantSeq` obtained by the kernel-checked
-transport of `ExtSeqTransport`), and derives the canonical-segment API the general step needs, as
+The general step (`hir:general-step`) computes its value at a point of positive order `o` of the nonmonomial part from the
+maximal-order invariant of a companion ideal, formed at a point-dependent stage on an open set.  What it uses of that invariant
+are its properties (1)--(7) and (4') of `hir:centre-function`, for the marked ideals of the domain **of maximal order**, in the
+shape of the fields of `ResolutionInvariantExt.ResolutionInvariant`; property (8) is used only for the general step's own (8),
+whose form along growing sequences the human has since decided (I-1139 C-0001 (b)); for well-ordered values it is automatic
+(`CanonicalCentres.seqLocallyFiniteMaxOrder_of_wellFoundedLT`).  This module packages those properties as a predicate
+`IsMaxOrderValue n k M` on a value function `M` (no data, no field (8)), proves it for the masked Step 1 value
+(`isMaxOrderValue_stepOneInvM`, from `StepOneBridge`, for a lower invariant of `ResolutionInvariantExt`; the route uses
+`StepOneSeq.isMaxOrderValue_stepOneInvM`, its form for `ResolutionInvariantSeq` obtained by the kernel-checked transport of
+`ExtSeqTransport`), and derives the canonical-segment API the general step needs, as
 `ResolutionInvariantExt` and `InvDomainRebase` do for resolution invariants:
 
-* `IsMaxOrderValue.step_of_notMem`, `.step_lt_of_mem`;
+* `IsMaxOrderValue.step_of_notMem`, `.step_lt_of_mem`, `.stepDrop` (properties (3), (4) one step at a time);
 * `.isAdmissibleCentre_maxLocus`, `.isGeoTestTower_of_isCanonical` (canonical segments are multiple test blow-ups);
 * `.isCanonical_restrict` (open sets), `.isCanonical_of_isTowerIso` (isomorphisms of towers), `.isCanonical_append_iff`
   (re-basing after an empty prefix), `.isCanonical_of_restrictEquiv` (representatives), and `.value_rebase` (re-basing the
   values: empty prefix and representative together, the form in which the general step compares nearby points).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -64,12 +41,20 @@ universe u v
 namespace Hironaka.MaxOrderValue
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantOrder Hironaka.HomogenizedIdealAlong Hironaka.StepOneValueMasked Hironaka.StepOneWellFounded
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism
+  Hironaka.ResolutionInvariantOrder Hironaka.HomogenizedIdealAlong
+  Hironaka.StepOneValueMasked Hironaka.StepOneWellFounded
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open Hironaka.ResolutionInvariantExt (ResolutionInvariant IsEmptyTower isCanonical_of_isEmptyTower maxLocus_congr)
+open Hironaka.ResolutionInvariantExt (ResolutionInvariant IsEmptyTower isCanonical_of_isEmptyTower
+  maxLocus_congr)
 open Hironaka.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top maxLocus_eq_level)
-open Hironaka.ResolutionInvariantSegments (maxLocus_preimage maxLocus_preimage_of_surjective cosupp_geoTransformAlong_restrict)
+open Hironaka.ResolutionInvariantSegments (maxLocus_preimage maxLocus_preimage_of_surjective
+  cosupp_geoTransformAlong_restrict)
 
 noncomputable section
 
@@ -229,6 +214,14 @@ theorem isGeoTestTower_of_isCanonical (hM : IsMaxOrderValue n k M) {𝔍 : Marke
       rcases hC with rfl | rfl
       · exact MarkedIdeal.isAdmissibleCentre_empty _
       · exact isAdmissibleCentre_maxLocus hM h hmax T hT hTt
+
+/-- **The drop property** (`StepOneWellFounded.StepDrop`) along the canonical segments. -/
+theorem stepDrop (hM : IsMaxOrderValue n k M) {𝔍 : MarkedIdeal n X} (h : IsInvDomain k 𝔍)
+    (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) : StepDrop 𝔍 (M 𝔍) := by
+  intro Y Z T C π hπ hcan z hz
+  have hTs := isGeoTestTower_of_isCanonical hM h hmax _ hcan
+  refine ⟨proj_mem_cosupp_step h.isWellFormed.isClosedSubmanifold_N h.isWellFormed.isCoherent T C π hπ hTs hz,
+    fun hzC => step_lt_of_mem hM h hmax T C π hπ hcan hz hzC, fun hzC => step_of_notMem hM h hmax T C π hπ hcan hz hzC⟩
 
 end Step
 

@@ -1,13 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.AnalyticLocalStatement
 import Hironaka.Analytic.RegularAtDimChart
 import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
@@ -18,6 +12,8 @@ the model space `ℂⁿ` with its identity chart, pull back along the preferred 
 `p` to local decomposition data for `A` at `p` (`LocalDecomposition.ofChart`).  Pieces are
 pulled back, equations are unchanged, and regularity is transported by
 `RegularAtDimChart.regularAtDim_chart_iff`.
+
+This reduces blueprint `lag:local-statement` to the model space.
 -/
 
 open Set

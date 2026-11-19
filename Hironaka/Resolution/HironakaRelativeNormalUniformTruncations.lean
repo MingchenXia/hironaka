@@ -1,11 +1,6 @@
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 import Hironaka.Resolution.HironakaRelativeNormalLocalizedAssociatedGraded
@@ -308,7 +303,6 @@ def originalLocalizedNormalTruncationSuccProductEquiv (d t : ℕ)
     (originalLocalizedNormalTruncationMap_surjective d t I q)
     (originalLocalizedNormalTruncation_exact d t I q)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONE internally produced nonzero whole original tangential germ makes ALL literal original quotient truncations genuinely finite free. -/
 theorem exists_nonzero_all_original_normal_truncation_finite_free (d t : ℕ)
     (I : Ideal (HolGerm (ComplexModel (d+t)))) :

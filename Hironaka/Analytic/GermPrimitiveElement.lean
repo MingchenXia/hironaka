@@ -1,23 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermMinimalPolynomial
 import Mathlib.FieldTheory.PrimitiveElement
 import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
 import Mathlib.FieldTheory.Perfect
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.GermIntegrallyClosed
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
 # Primitive element with constant coefficients, denominators and separability
+
+Blueprint `lag:primitive-element` (Demailly, *Complex analytic and differential geometry*,
+II.4.13, II.4.15).
 
 For a prime `Q ⊆ 𝒪_n` in Noether position over `𝒪_d`, with `K = Frac 𝒪_d` and
 `L = Frac(𝒪_n / Q)`: there is a linear form `u = ∑_{k ≥ d} c_k z_k`, `c_k ∈ ℂ`, with
@@ -146,6 +138,7 @@ theorem exists_forall_mem_adjoin_sum [Algebra F E] [Algebra.IsSeparable F E] {k 
     · exact hle (hc i hi)
 
 end Field
+
 
 section Ring
 

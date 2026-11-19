@@ -1,14 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicGermWeierstrassPreparation
 import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.RegularDirection
+
 set_option autoImplicit false
 
 /-!
@@ -56,6 +48,10 @@ theorem comap_id (g : HolGerm E) : comap (ContinuousLinearMap.id ℂ E) g = g :=
   induction g using induction_on with
   | h f hf => rfl
 
+theorem comapEquiv_apply (L : E ≃L[ℂ] F) (g : HolGerm F) :
+    comapEquiv L g = comap (L : E →L[ℂ] F) g :=
+  rfl
+
 theorem comapEquiv_trans_apply (L₁ : E ≃L[ℂ] F) (L₂ : F ≃L[ℂ] G) (g : HolGerm G) :
     comapEquiv (L₁.trans L₂) g = comapEquiv L₁ (comapEquiv L₂ g) := by
   induction g using induction_on with
@@ -92,6 +88,11 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
 /-- The Weierstrass polynomial `t ^ s + ∑_{j<s} A_j(z) t ^ j` on `E × ℂ`. -/
 def prodWeierstrassGerm (s : ℕ) (A : ℕ → HolGerm E) : HolGerm (E × ℂ) :=
   lastCoord ^ s + ∑ j ∈ Finset.range s, ofFst (A j) * lastCoord ^ j
+
+theorem ofFst_mk (f : E → ℂ) (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) :
+    ofFst (mk f hf) = mk (fun x : E × ℂ => f x.1)
+      (eventually_differentiableAt_comp_clm (ContinuousLinearMap.fst ℂ E ℂ) hf) :=
+  rfl
 
 theorem eventually_differentiableAt_lastPoly (s : ℕ) (a : ℕ → E → ℂ)
     (ha : ∀ j, ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (a j) z) :
@@ -267,6 +268,19 @@ theorem projGerm_projGerm {d n m : ℕ} (hdn : d ≤ n) (c : HolGerm (ComplexMod
     projGerm m n (projGerm n d c) = projGerm m d c := by
   rw [projGerm, projGerm, projGerm, comap_comap, coordinateProjection_comp hdn]
 
+/-- `𝒪_k → 𝒪_n` is injective for `k ≤ n`. -/
+theorem projGerm_injective {n k : ℕ} (hk : k ≤ n) : Function.Injective (projGerm n k) := by
+  intro x y hxy
+  have key : ∀ c : HolGerm (ComplexModel k),
+      comap (coordinateInclusion n k) (projGerm n k c) = c := by
+    intro c
+    have hcomp : (coordinateProjection n k).comp (coordinateInclusion n k) =
+        ContinuousLinearMap.id ℂ (ComplexModel k) := by
+      ext w : 1
+      exact coordinateProjection_coordinateInclusion hk w
+    rw [projGerm, comap_comap, hcomp, comap_id]
+  rw [← key x, ← key y, hxy]
+
 theorem projGerm_coordGerm {n m k : ℕ} (hk : k < n) (hnm : n ≤ m) :
     projGerm m n (coordGerm n k hk) = coordGerm m k (lt_of_lt_of_le hk hnm) := by
   rw [coordGerm, projGerm_mk, coordGerm, mk_eq_mk_iff]
@@ -330,7 +344,46 @@ theorem exists_eq_mul_weierstrassGerm_add {n s : ℕ} {A : ℕ → HolGerm (Comp
     comapEquiv_euclideanSnocCLE_prodWeierstrassGerm, comapEquiv_euclideanSnocCLE_ofFst,
     comapEquiv_euclideanSnocCLE_lastCoord] using h'
 
+/-- The linear map `z ↦ ((z_0, …, z_{k-1}), z_k)` from `ℂⁿ` to `ℂᵏ × ℂ`. -/
+def coordSplit (n k : ℕ) (hk : k < n) : ComplexModel n →L[ℂ] ComplexModel k × ℂ :=
+  (coordinateProjection n k).prod
+    (EuclideanSpace.proj (⟨k, hk⟩ : Fin n) : ComplexModel n →L[ℂ] ℂ)
+
+theorem comap_coordSplit_ofFst (n k : ℕ) (hk : k < n) (x : HolGerm (ComplexModel k)) :
+    comap (coordSplit n k hk) (ofFst x) = projGerm n k x := by
+  rw [ofFst, comap_comap]
+  rfl
+
+theorem comap_coordSplit_lastCoord (n k : ℕ) (hk : k < n) :
+    comap (coordSplit n k hk) (lastCoord : HolGerm (ComplexModel k × ℂ)) = coordGerm n k hk :=
+  rfl
+
+theorem comap_coordSplit_prodWeierstrassGerm (n k : ℕ) (hk : k < n) (s : ℕ)
+    (A : ℕ → HolGerm (ComplexModel k)) :
+    comap (coordSplit n k hk) (prodWeierstrassGerm s A) = weierstrassGerm n k hk s A := by
+  simp only [prodWeierstrassGerm, weierstrassGerm, map_add, map_pow, map_sum, map_mul,
+    comap_coordSplit_ofFst, comap_coordSplit_lastCoord]
+
+theorem eventually_differentiableAt_coordWeierstrass (n k : ℕ) (hk : k < n) (s : ℕ)
+    (a : ℕ → ComplexModel k → ℂ) (ha : ∀ j, ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (a j) z) :
+    ∀ᶠ z in 𝓝 (0 : ComplexModel n), DifferentiableAt ℂ (fun z : ComplexModel n =>
+      z ⟨k, hk⟩ ^ s + ∑ j ∈ Finset.range s, a j (coordinateProjection n k z) * z ⟨k, hk⟩ ^ j) z :=
+  eventually_differentiableAt_comp_clm (coordSplit n k hk)
+    (eventually_differentiableAt_lastWeierstrass s a ha)
+
+/-- The Weierstrass germ with coefficient germs `mk (a j)` is the germ of the explicit
+function `z_k ^ s + ∑_{j<s} a_j(z_0, …, z_{k-1}) z_k ^ j`. -/
+theorem weierstrassGerm_eq_mk (n k : ℕ) (hk : k < n) (s : ℕ) (a : ℕ → ComplexModel k → ℂ)
+    (ha : ∀ j, ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (a j) z) :
+    weierstrassGerm n k hk s (fun j => mk (a j) (ha j)) =
+      mk (fun z : ComplexModel n =>
+        z ⟨k, hk⟩ ^ s + ∑ j ∈ Finset.range s, a j (coordinateProjection n k z) * z ⟨k, hk⟩ ^ j)
+        (eventually_differentiableAt_coordWeierstrass n k hk s a ha) := by
+  rw [← comap_coordSplit_prodWeierstrassGerm, prodWeierstrassGerm_eq_mk, comap_mk]
+  rfl
+
 end Tower
+
 
 end HolGerm
 

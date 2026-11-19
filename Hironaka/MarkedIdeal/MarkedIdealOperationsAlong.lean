@@ -1,49 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.OrderMultiplicativity
-import Hironaka.Invariant.OrderTaylor
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.Coherence.VanishingIdealCoherent
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Sums and products of marked ideals on a submanifold under admissible blowups
 
-Source: Włodarczyk 2005 §2.9, Lemma `le:operations` (sums `(𝓘, μ) + (𝓙, ν) = (𝓘^ν + 𝓙^μ, μν)` and products `(𝓘𝓙, μ +
-ν)` of marked ideals and their multiple test blow-ups), in Bierstone--Milman's formalism `(M, N, E, 𝓘, d)` with `𝓘 ⊆
-𝒪_N` (BM08, Definitions 2.1--2.2). For `N = M` this is `MarkedIdealOperationsTransform`.
+Blueprint `hir:local-retraction`, `hir:order-power-along`, `hir:restricted-equivalence`,
+`hir:marked-operations-along` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Source: Włodarczyk 2005 §2.9,
+Lemma `le:operations` (sums `(𝓘, μ) + (𝓙, ν) = (𝓘^ν + 𝓙^μ, μν)` and products `(𝓘𝓙, μ + ν)` of marked ideals and
+their multiple test blow-ups), in Bierstone--Milman's formalism `(M, N, E, 𝓘, d)` with `𝓘 ⊆ 𝒪_N` (BM08,
+Definitions 2.1--2.2).  For `N = M` this is `MarkedIdealOperationsTransform`.
 
 For `N ≠ M` the ideal of a marked ideal is an ambient representative of an ideal of `𝒪_N`; only its restriction to
 `N` matters.  So the statements hold up to **restricted equivalence** (`MarkedIdeal.RestrictEquiv`: same `N`, `E`,
@@ -65,7 +32,12 @@ mark, and `Res_N 𝔞 = Res_N 𝔟`), which has the same cosupport, the same adm
   sum of the transforms) and `geoTransform_mul_restrictEquiv` (the same for products);
 * along towers (Włodarczyk `le:operations` (1)--(2) for marked ideals on a closed submanifold `N`, same `E`):
   `geoTransformAlong_add_along` (the multiple test blow-ups of `𝔪₁ + 𝔪₂` are exactly the simultaneous ones, and
-  along them `(𝔪₁ + 𝔪₂)_T ≃ (𝔪₁)_T + (𝔪₂)_T`), `geoTransformAlong_mul_along`.
+  along them `(𝔪₁ + 𝔪₂)_T ≃ (𝔪₁)_T + (𝔪₂)_T`), `isGeoResolution_add_iff_along`, `geoTransformAlong_mul_along`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -76,7 +48,9 @@ universe u
 namespace Hironaka.MarkedIdealOperationsAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.HadamardBridge Hironaka.HadamardBridgeAlong Hironaka.IdealOrderArithmetic
+open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers
+  Hironaka.HadamardBridge Hironaka.HadamardBridgeAlong
+  Hironaka.IdealOrderArithmetic
 
 noncomputable section
 
@@ -282,7 +256,8 @@ end Restricted
 
 namespace MarkedIdeal
 
-open RestrictedIdealWeight RestrictedIdealExtension RestrictedIdealQuotient MarkedIdeals MarkedIdeals.MarkedIdeal BlowupStrictSubmanifold
+open RestrictedIdealWeight RestrictedIdealExtension RestrictedIdealQuotient MarkedIdeals
+  MarkedIdeals.MarkedIdeal BlowupStrictSubmanifold
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
   [IsComplexManifold n M]
@@ -626,6 +601,28 @@ theorem geoTransformAlong_add_along (𝔪₁ 𝔪₂ : MarkedIdeal n X) (h : IsS
         · rw [geoTransformAlong_step, hstep]
           exact HadamardBridgeAlong.isCoherent_geoTransform_ideal_of_isAdmissibleCentre
             hpair.isClosedSubmanifold hcohA hCA hπ
+
+/-- **Resolutions of a sum along `N`** (same `E`, marks `≥ 1`): a tower resolves `𝔪₁ + 𝔪₂` iff it is a simultaneous
+multiple test blow-up of `𝔪₁` and `𝔪₂` after which their cosupports are disjoint. -/
+theorem isGeoResolution_add_iff_along (𝔪₁ 𝔪₂ : MarkedIdeal n X) (h : IsSubmanifoldPair 𝔪₁ 𝔪₂)
+    (hd₁ : 1 ≤ 𝔪₁.d) (hd₂ : 1 ≤ 𝔪₂.d) {Y : CMfd.{u} n} (T : BlowupTower X Y) :
+    IsGeoResolution (MarkedIdealOperationsTransform.MarkedIdeal.add 𝔪₁ 𝔪₂) T ↔
+      IsGeoTestTower 𝔪₁ T ∧ IsGeoTestTower 𝔪₂ T ∧
+        (geoTransformAlong 𝔪₁ T).cosupp ∩ (geoTransformAlong 𝔪₂ T).cosupp = ∅ := by
+  obtain ⟨hiff, heq⟩ := geoTransformAlong_add_along 𝔪₁ 𝔪₂ h hd₁ hd₂ T
+  have hd₁T : 1 ≤ (geoTransformAlong 𝔪₁ T).d := by rw [d_geoTransformAlong]; exact hd₁
+  have hd₂T : 1 ≤ (geoTransformAlong 𝔪₂ T).d := by rw [d_geoTransformAlong]; exact hd₂
+  constructor
+  · rintro ⟨hT, hc⟩
+    obtain ⟨hT₁, hT₂⟩ := hiff.mp hT
+    obtain ⟨he, hpair, -⟩ := heq hT₁ hT₂
+    rw [he.cosupp_eq, cosupp_add_along hpair hd₁T hd₂T] at hc
+    exact ⟨hT₁, hT₂, hc⟩
+  · rintro ⟨hT₁, hT₂, hc⟩
+    obtain ⟨he, hpair, -⟩ := heq hT₁ hT₂
+    refine ⟨hiff.mpr ⟨hT₁, hT₂⟩, ?_⟩
+    rw [he.cosupp_eq, cosupp_add_along hpair hd₁T hd₂T]
+    exact hc
 
 /-- **Włodarczyk `le:operations` (2) along a closed submanifold `N`** (same `E`): a simultaneous multiple test
 blow-up of `𝔪₁` and `𝔪₂` is one of `𝔪₁ · 𝔪₂`, and along it `(𝔪₁ · 𝔪₂)_T` is restricted-equivalent to

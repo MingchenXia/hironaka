@@ -1,55 +1,27 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
 import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsInvariance
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Marked ideals, transforms and multiple test blow-ups restricted to open subsets
 
-Sources: Włodarczyk 2005 §2.1 (extensions "arise naturally when we pass to open subsets") and §2.4 (Proposition
-`pr:funct`: multiple test blow-ups pull back along étale maps, here open embeddings), Bierstone--Milman 2008, the
-paragraph after Theorem 1.3 (restriction to open sets, trivial blowings-up); the canonicity clause (2) of
-`hir:canonical-resolution`.
+Blueprint `hir:open-restriction-ideal`, `hir:open-restriction-marked`, `hir:open-restriction-tower`
+(`blueprint/src/hironaka.tex`, Hironaka phase H1).  Sources: Włodarczyk 2005 §2.1 (extensions "arise naturally
+when we pass to open subsets") and §2.4 (Proposition `pr:funct`: multiple test blow-ups pull back along étale
+maps, here open embeddings), Bierstone--Milman 2008, the paragraph after Theorem 1.3 (restriction to open sets,
+trivial blowings-up); the canonicity clause (2) of `hir:canonical-resolution`.
 
-The restriction of a marked ideal `𝔪 = (X, N, E, 𝔞, d)` to an open `U ⊆ X` is its pullback along the inclusion `ι: U
-→ X` (`MarkedIdealBiholomorphism.MarkedIdeal.pullback`, no new definition): `𝔪|_U = (U, N ∩ U, E ∩ U, ι^*𝔞, d)`.
-Towers are restricted with `BlowupTowerTransforms.restrict` (stages `openPreimage T U`, centres `C ∩ U_i`).
+The restriction of a marked ideal `𝔪 = (X, N, E, 𝔞, d)` to an open `U ⊆ X` is its pullback along the inclusion
+`ι : U → X` (`MarkedIdealBiholomorphism.MarkedIdeal.pullback`, no new definition):
+`𝔪|_U = (U, N ∩ U, E ∩ U, ι^*𝔞, d)`.  Towers are restricted with TN3's `BlowupTowerTransforms.restrict`
+(stages `openPreimage T U`, centres `C ∩ U_i`).
 
 ## Germ ideals on an open subset (`O : Opens Y`, `ι = Subtype.val`)
 
-* `mem_pullback_val_iff`: for a coherent `𝔠`, a germ `f` on `O` lies in `ι^*𝔠` iff its extension by zero lies in `𝔠`
-  (`extendOpens`);
+* `mem_pullback_val_iff`: for a coherent `𝔠`, a germ `f` on `O` lies in `ι^*𝔠` iff its extension by zero lies
+  in `𝔠` (TN3's `extendOpens`);
 * `restrictOn_pullback_val_iff`: the same for `Res_{W ∩ O} ι^*𝔟` and `Res_W 𝔟`;
 * `colonAlong_pullback_val`: **the quotient along `W` commutes with restriction to `O`** (coherent ideals);
 * `mem_idealPow_pointIdeal_extendOpens`: `h ∈ 𝔪_x^q` on `O` gives `ext h ∈ 𝔪_x^q` on `Y`.
@@ -60,8 +32,8 @@ Towers are restricted with `BlowupTowerTransforms.restrict` (stages `openPreimag
 * `IsAdmissibleCentre.pullback_val`, `IsWellFormed.pullback_val`: admissible centres and well-formedness restrict;
 * `geoStrictTransform_restrict`: strict transforms commute with restriction;
 * `geoTransform_pullback_val`: **the transform commutes with restriction**: transforming `𝔪|_U` along the
-  restriction `π⁻¹U → U` of the blowup `π` (`BlowupRestrictOpen.isBlowupAlong_restrict`) with centre `C ∩ U` gives
-  the restriction of the transform of `𝔪` to `π⁻¹U` (coherent ideals).
+  restriction `π⁻¹U → U` of the blowup `π` (TN3's `BlowupRestrictOpen.isBlowupAlong_restrict`) with centre
+  `C ∩ U` gives the restriction of the transform of `𝔪` to `π⁻¹U` (coherent ideals).
 
 ## Towers
 
@@ -69,8 +41,14 @@ Towers are restricted with `BlowupTowerTransforms.restrict` (stages `openPreimag
   submanifold and `𝔞` coherent, every stage keeps both properties;
 * `geoTransformAlong_restrict`: along such a tower, the transform of `𝔪|_U` along the restricted tower is the
   restriction of the transform of `𝔪` to the open preimage, stage by stage;
-* `isGeoTestTower_restrict`: **the restriction of a multiple test blow-up (a resolution) of `𝔪` to `U` is one of
-  `𝔪|_U`**, and well-formed stages restrict to well-formed stages.
+* `isGeoTestTower_restrict`, `isGeoResolution_restrict`, `isWellFormed_geoTransformAlong_restrict`: **the
+  restriction of a multiple test blow-up (a resolution) of `𝔪` to `U` is one of `𝔪|_U`**, and well-formed stages
+  restrict to well-formed stages.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -81,7 +59,14 @@ universe u
 namespace Hironaka.MarkedIdealRestrictOpen
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.GermIdealPullbackCalculus Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.RestrictedIdealExtension Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient Hironaka.GermIdealTotalTransform Hironaka.BlowupStrictSubmanifold Hironaka.BlowupRestrictOpen Hironaka.BlowupTowerTransforms
+open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance
+  Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism
+  Hironaka.GermIdealPullbackCalculus Hironaka.GermIdealOrder
+  Hironaka.IdealWeightPowers Hironaka.RestrictedIdealExtension
+  Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient
+  Hironaka.GermIdealTotalTransform Hironaka.BlowupStrictSubmanifold
+  Hironaka.BlowupRestrictOpen Hironaka.BlowupTowerTransforms
 
 noncomputable section
 
@@ -356,6 +341,24 @@ theorem isGeoTestTower_restrict (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : �
       exact IsAdmissibleCentre.pullback_val
         (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg) hC
         (openPreimage T U)
+
+/-- **Resolutions restrict**: the restriction to `U` of a resolution of `𝔪` is a resolution of `𝔪|_U`. -/
+theorem isGeoResolution_restrict (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    {Y : CMfd.{u} n} {T : BlowupTower X Y} (hT : IsGeoResolution 𝔪 T) :
+    IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T) := by
+  obtain ⟨-, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hN h𝔞 T hT.1
+  refine ⟨isGeoTestTower_restrict U hN h𝔞 T hT.1, ?_⟩
+  rw [geoTransformAlong_restrict U hN h𝔞 T hT.1, cosupp_pullback_val _
+    (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg), hT.2,
+    preimage_empty]
+
+/-- **Well-formed stages restrict to well-formed stages.** -/
+theorem isWellFormed_geoTransformAlong_restrict (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    {Y : CMfd.{u} n} {T : BlowupTower X Y} (hT : IsGeoTestTower 𝔪 T)
+    (hW : (geoTransformAlong 𝔪 T).IsWellFormed) :
+    (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T)).IsWellFormed := by
+  rw [geoTransformAlong_restrict U hN h𝔞 T hT]
+  exact IsWellFormed.pullback_val hW (openPreimage T U)
 
 end Tower
 

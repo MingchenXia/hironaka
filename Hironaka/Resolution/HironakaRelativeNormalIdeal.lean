@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaHolomorphicJetChartInvariance
 import Mathlib.RingTheory.Finiteness.Basic
 
@@ -27,10 +22,6 @@ namespace Hironaka.HironakaRelativeNormalIdeal
 open Hironaka.HolomorphicIdealSheaves HolGerm
   HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan
   HironakaHolomorphicJetChartInvariance
-open Hironaka
-
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
-
 noncomputable section
 
 /-- Actual first-coordinate projection of the original ambient model. -/

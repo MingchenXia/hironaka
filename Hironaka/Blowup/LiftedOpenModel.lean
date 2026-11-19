@@ -1,12 +1,8 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Manifold.ComplexManifold
 import Hironaka.Manifold.HolomorphicContDiff
 import Mathlib.Geometry.Manifold.ContMDiff.Atlas
 import Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions
+
 set_option autoImplicit false
 
 /-!
@@ -29,6 +25,8 @@ open scoped Topology Manifold ContDiff
 universe u
 
 namespace Hironaka
+
+
 
 noncomputable section
 
@@ -85,6 +83,9 @@ def mk (w : ComplexModel n) (hw : w ∈ S) : LiftedOpen.{u} S := ⟨ULift.up w, 
 @[simp] theorem mk_toModel (p : LiftedOpen.{u} S) : mk S (toModel S p) p.2 = p := rfl
 
 theorem toModel_mem (p : LiftedOpen.{u} S) : toModel S p ∈ S := p.2
+
+theorem continuous_toModel : Continuous (toModel.{u} S) :=
+  continuous_uliftDown.comp continuous_subtype_val
 
 theorem isOpenEmbedding_toModel : Topology.IsOpenEmbedding (toModel.{u} S) :=
   (Homeomorph.ulift.isOpenEmbedding).comp (liftedOpens.{u} S).isOpen.isOpenEmbedding_subtypeVal

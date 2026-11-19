@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalContactChoiceLowerHistories
 /-! Real contact-choice tower isomorphisms produce literal lower TESTS and
 ENTIRE controlled records at EVERY head of EVERY ORIGINAL upper test. -/

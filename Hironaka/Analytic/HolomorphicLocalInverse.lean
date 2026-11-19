@@ -1,30 +1,39 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.StrictTransformComposition
+import Hironaka.Analytic.LelongNumberComparison
 import Hironaka.Blowup.BlowupFibreDirection
-import Hironaka.Manifold.HolomorphicMapsContDiffOn
 import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
 
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
+/-!
+# Local holomorphic inverses at unramified points
+
+Let `g : Z → Y` be a holomorphic map of `n`-dimensional complex manifolds and `z` a point where
+`dg` is bijective.  In the preferred charts the inverse function theorem gives a local inverse
+`s = e⁻¹ ∘ Φ⁻¹ ∘ d`, which is holomorphic on an open neighbourhood `V` of `g z`
+(`exists_localInverse`): the derivative of the coordinate expression stays invertible near
+`e z`, so `Φ⁻¹` is smooth at every point of its target used.
+
+Consequently `ν(u ∘ g, z) ≤ ν(u, g z)` for a function `u` with `u ∘ g` pole-forcing at `z`
+(`lelongNumber_comp_le`), and together with `LelongNumberComparison.lelongNumber_le_comp`,
+Lelong numbers are invariant under `g` at `z`.
+-/
+
 open Set Filter
-open scoped Topology Manifold ContDiff
+open scoped Topology Manifold ContDiff ENNReal
+
 universe u
 
 namespace Hironaka.HolomorphicLocalInverse
 
-open Hironaka
+open Hironaka.HolomorphicMaps Hironaka.BlowupSequences Hironaka.NonKahlerLocus
+
 noncomputable section
 
-open HolomorphicMaps BlowupSequences
 variable {n : ℕ} {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
   [IsComplexManifold n Y]
-  {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z]
-  [IsComplexManifold n Z]
+  {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]
 
 /-- **Local holomorphic inverse at an unramified point.** -/
 theorem exists_localInverse {g : Z → Y}
@@ -126,6 +135,22 @@ theorem exists_localInverse {g : Z → Y}
       rw [e.val.left_inv hz'e]
     rw [← hFz', ← hΦcoe, Φ.left_inv hz'Φ, e.val.left_inv hz'e]
 
+/-- **Lelong numbers do not increase under pullback at an unramified point.** -/
+theorem lelongNumber_comp_le {g : Z → Y}
+    (hg : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ g) {z : Z}
+    (hz : z ∉ exceptionalLocus n g) {u : Y → EReal}
+    (hbot : 0 < lelongNumber (n := n) (fun z' => u (g z')) z → u (g z) = ⊥) :
+    lelongNumber (n := n) (fun z' => u (g z')) z ≤ lelongNumber (n := n) u (g z) := by
+  obtain ⟨V, s, hV, hgzV, hsz, hgs, hss, -⟩ := exists_localInverse hg hz
+  have hsd : MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) s (g z) :=
+    (hss _ hgzV).mdifferentiableAt (by simp)
+  have h1 := LelongNumberComparison.lelongNumber_le_comp (u := fun z' => u (g z')) hsd
+    (by rw [hsz]; exact hbot)
+  rw [hsz] at h1
+  refine h1.trans_eq (LelongNumberComparison.lelongNumber_congr ?_)
+  filter_upwards [hV.mem_nhds hgzV] with y hy
+  simp only [hgs y hy]
 
 end
+
 end Hironaka.HolomorphicLocalInverse

@@ -1,18 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaStepOneSpecialAnalyticLoci
 import Hironaka.Analytic.ThinDimensionDrop
 import Hironaka.Invariant.ResolutionInvariantDriver
 import Mathlib.Topology.DiscreteSubset
-
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.MarkedIdeal.GermIdealOrderBounds
-
-import Hironaka.Analytic.PreconnectedZeroDimensionalPoints
-import Hironaka.Analytic.ThinAnalyticDimensionBound
 
 set_option autoImplicit false
 

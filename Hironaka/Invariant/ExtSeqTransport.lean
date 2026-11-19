@@ -1,13 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantSeq
+
 set_option autoImplicit false
 
 /-!
 # Transporting results about resolution invariants from the uniform form of (8) to the per-sequence form
+
+Blueprint `hir:step-one-seq` (`blueprint/src/hironaka.tex`, Hironaka phase H4).  Human decision I-1139 C-0001 (option (b)): a
+resolution invariant is `ResolutionInvariantSeq.ResolutionInvariant` (properties (1)--(7), (4') as the predicate
+`ResolutionInvariantSeq.IsInvValue`, property (8) in its per-sequence form); the structure `ResolutionInvariantExt.ResolutionInvariant`
+(property (8) in its uniform form) is kept, superseded.
 
 The Step 1 (maximal-order) value of `hir:maximal-order-step` and its properties were formalized for a lower invariant
 `R : ResolutionInvariantExt.ResolutionInvariant n (k - 1) Λ`.  Their proofs use `R` only through its value function and its
@@ -16,7 +17,11 @@ precise and gives the same results for `R : ResolutionInvariantSeq.ResolutionInv
 
 ## The command
 
-Its type and value are those of the old constant with
+`transport_ext_to_seq c₁ c₂ …` adds, for each listed constant `cᵢ` and, recursively, for every constant of the project that its
+type or value uses and that depends (transitively) on the structure `ResolutionInvariantExt.ResolutionInvariant`, a NEW constant
+named by inserting `Seq` after `Hironaka` (`Hironaka.StepOneBridge.admissible_field`
+becomes `Hironaka.Seq.StepOneBridge.admissible_field`).  Its type and value are those of the old constant
+with
 
 * the structure `ResolutionInvariantExt.ResolutionInvariant` replaced by `ResolutionInvariantSeq.ResolutionInvariant` (same
   parameters, same universe levels);
@@ -27,10 +32,13 @@ Its type and value are those of the old constant with
 
 `transport_ext_to_seq_module M₁ M₂ …` does this for every declaration of the modules `Mᵢ` that depends on the old structure.
 
-Every new constant is added with `addDecl`, i.e. **checked by the kernel**; nothing is assumed. The command fails if
-a value uses property (8) (`locallyFinite`), the constructor or any other declaration of the old structure, so a
-successful transport is a proof that the transported results need only properties (1)--(7), (4'). Definitions are
-added as `noncomputable`, with the reducibility of the original; theorems as theorems.
+Every new constant is added with `addDecl`, i.e. **checked by the kernel**; nothing is assumed.  The command fails if a value uses
+property (8) (`locallyFinite`), the constructor or any other declaration of the old structure, so a successful transport is a
+proof that the transported results need only properties (1)--(7), (4').  Definitions are added as `noncomputable`, with the
+reducibility of the original; theorems as theorems.  The command adds no axiom and no `sorry`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 namespace Hironaka.ExtSeqTransport
@@ -62,6 +70,7 @@ def usedConsts (ci : ConstantInfo) : Array Name :=
   | some v => s ++ v.getUsedConstants
   | none => s
 
+/-- A declaration of the project (only those can depend on the old structure). -/
 def isProjectConst (c : Name) : Bool :=
   (`Hironaka).isPrefixOf c || (`_private.Hironaka).isPrefixOf c
 
@@ -95,8 +104,9 @@ partial def collect (roots : Array Name) : CoreM (Array Name × NameSet) := do
   return (← order.get, deps)
 
 /-- Replace the old structure, its projections and the transported constants in an expression (a purely syntactic
-replacement; the kernel checks the result). A projection `R.inv` becomes `R.inv` of the new structure, a projection
-`R.f` for a field `f` of (1)--(7), (4') becomes `R.isInvValue.f`. -/
+replacement; the kernel checks the result).  A projection `R.inv` becomes `R.inv` of the new structure, a projection
+`R.f` for a field `f` of (1)--(7), (4') becomes `R.isInvValue.f`; anything else of the old structure is left in place and
+rejected by `transportExpr`. -/
 partial def replaceExt (ported : NameSet) (e : Expr) : Expr :=
   e.replace fun e =>
     match e with
@@ -127,6 +137,8 @@ partial def replaceExt (ported : NameSet) (e : Expr) : Expr :=
       | _ => none
     | _ => none
 
+/-- `replaceExt`, failing if anything of the old structure is left (property (8), the constructor, a projection without its
+structure argument). -/
 def transportExpr (ported : NameSet) (e : Expr) : MetaM Expr := do
   let e := replaceExt ported e
   let bad := e.getUsedConstants.filter fun c => c == extStruct || extStruct.isPrefixOf c

@@ -1,39 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.MonomialBlowup
 import Hironaka.Blowup.ExceptionalPushforwardAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPart
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Monomial ideals under the blowup of a centre with normal crossings, along a submanifold
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2b of the proof of `pr:resol` (the transform of a monomial
-marked ideal), and the transform of marked ideals along a submanifold, §2.1 (3)--(5); Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`) §5.
+Hironaka phase H2 (TN3), the design node `hir:monomial-blowup` (`blueprint/src/hironaka.tex`) for
+`N ≠ M`, taken by TN3 on TN-CLASSICAL's request (I-0977 C-0059 / C-0060 / C-0061 / C-0066), in the
+generator form, stalk version.  Blueprint `bcalc:monomial-transform-along` (chapter
+`blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2b of the proof
+of `pr:resol` (the transform of a monomial marked ideal), and the transform of marked ideals along
+a submanifold, §2.1 (3)--(5); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`) §5.
 
 Let `(M, N, E, 𝔞, d)` be a marked ideal with `N` a closed submanifold, `𝔞` coherent, `C` an
 admissible centre, `π` the blowup along `C`, `N' = closure (π⁻¹ (N \ C))` and `z ∈ N'` over `C`.
@@ -42,6 +21,10 @@ admissible centre, `π` the blowup along `C`, `N' = closure (π⁻¹ (N \ C))` a
   `m ∘ π = c · h^e · q` near `z` (`𝒪(-D) = (h)` at `z`, `c(z) ≠ 0`, `d ≤ e`), then
   `Res_{N'} 𝔞' = Res_{N'} (h^{e-d} q)` at `z` (`Res_W 𝔟 = Res_W 𝔠` at a point: the same germs
   `g` are, on `W` near the point, combinations of germs of `𝔟` resp. `𝔠`).
+* `exists_monomial_chart_transform_along`: in the monomial chart `W` of
+  `MonomialBlowup.exists_monomial_chart`, for `Res_N 𝔞 = Res_N (∏_{π z ∈ E_i} u_i^{a_i})` at
+  `π z` (`u_i` generators of `𝓘_{E_i}`) and `d ≤ e = ∑_{π z ∈ E_i, C ⊆ E_i near π z} a_i`:
+  `Res_{N'} 𝔞' = Res_{N'} (W_j^{e-d} ∏_{z ∈ E_i'} W_{s i}^{a_i})` at `z`.
 * helpers: `isInSpanOnAt_comp_of_mem_pullback`, `isInSpanOnAt_pullback_comp` (restricted
   generators and restricted membership pull back from `N` to `N'`).
 
@@ -49,10 +32,14 @@ No transversality of `E` to `N` is used: the statement is about the restrictions
 generators.  Reading `W_j|_{N'}`, `W_{s i}|_{N'}` as coordinates of `N'` (the monomial form of
 `E'|_{N'}`) needs coordinates adapted to `N'` as well, which this module does not provide.
 
-Proof: `restrictLe_pullback_geoTransform` (`Res_{N'} π^*𝔞 = Res_{N'} 𝒪(-dD) 𝔞'`), the local generator `h₀` of
-`𝒪(-dD)` vanishing identically on no piece of `N'` (`isInvertibleAlong_geoStrictTransform`), `h^d = κ h₀` with `κ(z)
-≠ 0` (`MonomialBlowup.exists_unit_of_isInSpanAt`), and cancellation of `h₀` along `N'`
+Proof: TN-CLASSICAL's `restrictLe_pullback_geoTransform` (`Res_{N'} π^*𝔞 = Res_{N'} 𝒪(-dD) 𝔞'`),
+the local generator `h₀` of `𝒪(-dD)` vanishing identically on no piece of `N'`
+(`isInvertibleAlong_geoStrictTransform`), `h^d = κ h₀` with `κ(z) ≠ 0`
+(`MonomialBlowup.exists_unit_of_isInSpanAt`), and cancellation of `h₀` along `N'`
 (`RestrictedIdealQuotient.eventuallyEq_within_of_mul_eventuallyEq_within`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -63,7 +50,19 @@ universe u
 namespace Hironaka.MonomialBlowupAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupFlatCoordinates Hironaka.BlowupExceptionalDivisor Hironaka.BlowupStrictSubmanifold Hironaka.BlowupStrictIdeal Hironaka.NormalCrossings Hironaka.MonomialPart Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.BlowupControlledTransform Hironaka.InvertibleIdealQuotient Hironaka.RelativePrincipalizationSpan Hironaka.RestrictedIdealQuotient Hironaka.GermIdealTotalTransform Hironaka.MonomialBlowup
+open Hironaka.BlowupFlatCoordinates
+  Hironaka.BlowupExceptionalDivisor
+  Hironaka.BlowupStrictSubmanifold
+  Hironaka.BlowupStrictIdeal
+  Hironaka.NormalCrossings
+  Hironaka.MonomialPart Hironaka.GermIdealOrder
+  Hironaka.IdealWeightPowers
+  Hironaka.BlowupControlledTransform
+  Hironaka.InvertibleIdealQuotient
+  Hironaka.RelativePrincipalizationSpan
+  Hironaka.RestrictedIdealQuotient
+  Hironaka.GermIdealTotalTransform
+  Hironaka.MonomialBlowup
 
 noncomputable section
 
@@ -117,12 +116,14 @@ theorem isInSpanOnAt_pullback_comp (hπ : IsBlowupAlong n C π) {N : Set X} (hNc
   · filter_upwards [hπ.contMDiff.continuous.continuousAt.eventually hsum] with w hw hwN
     exact hw (geoStrictTransform_subset_preimage hπ.contMDiff.continuous hNc hwN)
 
-/-- **The transform along `N'` of an ideal whose restriction to `N` is principal.** Let `(M, N, E, 𝔞, d)` have `N` a
-closed submanifold, `𝔞` coherent, `C` an admissible centre, and `z ∈ N'` over `C`. If `Res_N 𝔞 = Res_N (m)` at `π z`
-and `m ∘ π = c · h^e · q` near `z`, with `𝒪(-D) = (h)` at `z`, `c(z) ≠ 0` and `d ≤ e`, then `Res_{N'} 𝔞' = Res_{N'}
-(h^{e-d} q)` at `z`. Proof: `Res_{N'} π^*𝔞 = Res_{N'} 𝒪(-dD) 𝔞'` (`restrictLe_pullback_geoTransform`), `𝒪(-dD) =
-(h₀)` near `z` with `h₀` vanishing identically on no piece of `N'` (`isInvertibleAlong_geoStrictTransform`), `h^d =
-κ h₀` with `κ(z) ≠ 0` (`exists_unit_of_isInSpanAt`), so `m ∘ π = h₀ · c κ h^{e-d} q`; then cancel `h₀` along `N'`
+/-- **The transform along `N'` of an ideal whose restriction to `N` is principal.**  Let
+`(M, N, E, 𝔞, d)` have `N` a closed submanifold, `𝔞` coherent, `C` an admissible centre, and
+`z ∈ N'` over `C`.  If `Res_N 𝔞 = Res_N (m)` at `π z` and `m ∘ π = c · h^e · q` near `z`, with
+`𝒪(-D) = (h)` at `z`, `c(z) ≠ 0` and `d ≤ e`, then `Res_{N'} 𝔞' = Res_{N'} (h^{e-d} q)` at `z`.
+Proof: `Res_{N'} π^*𝔞 = Res_{N'} 𝒪(-dD) 𝔞'` (TN-CLASSICAL's `restrictLe_pullback_geoTransform`),
+`𝒪(-dD) = (h₀)` near `z` with `h₀` vanishing identically on no piece of `N'`
+(`isInvertibleAlong_geoStrictTransform`), `h^d = κ h₀` with `κ(z) ≠ 0`
+(`exists_unit_of_isInSpanAt`), so `m ∘ π = h₀ · c κ h^{e-d} q`; then cancel `h₀` along `N'`
 (`eventuallyEq_within_of_mul_eventuallyEq_within`). -/
 theorem isInSpanOnAt_geoTransform_iff_of_eq (hπ : IsBlowupAlong n C π) {𝔪 : MarkedIdeal n X}
     (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hC : 𝔪.IsAdmissibleCentre C)
@@ -260,6 +261,58 @@ theorem isInSpanOnAt_geoTransform_iff_of_eq (hπ : IsBlowupAlong n C π) {𝔪 :
     have hne' : c y * κ y ≠ 0 := hne
     rw [h8, ← h7, mul_assoc (c y * κ y), ← mul_assoc (c y * κ y)⁻¹, inv_mul_cancel₀ hne',
       one_mul]
+
+open Classical in
+/-- **`hir:monomial-blowup` along `N'`, generator form.**  Let `(M, N, E, 𝔞, d)` have `N` a closed
+submanifold, `𝔞` coherent, `E` simple normal crossings, `C` an admissible centre, and
+`z ∈ N'` over `C`.  In the monomial chart `W` of `MonomialBlowup.exists_monomial_chart` (whose
+properties are repeated), if `Res_N 𝔞 = Res_N (∏_{π z ∈ E_i} u_i^{a_i})` at `π z` (`u_i`
+holomorphic generators of `𝓘_{E_i}`) and `d ≤ e = ∑_{π z ∈ E_i, C ⊆ E_i near π z} a_i`, then
+`Res_{N'} 𝔞' = Res_{N'} (W_j^{e-d} ∏_{z ∈ E_i'} W_{s i}^{a_i})` at `z`. -/
+theorem exists_monomial_chart_transform_along (hπ : IsBlowupAlong n C π) {𝔪 : MarkedIdeal n X}
+    (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hC : 𝔪.IsAdmissibleCentre C)
+    (hE : IsSNCDivisor n 𝔪.E) {z : Y} (hz : z ∈ geoStrictTransform π C 𝔪.N) (hzC : π z ∈ C) :
+    ∃ (j : Fin n) (s : Fin 𝔪.E.length → Fin n) (W : Y → ComplexModel n) (U : Set Y),
+      IsOpen U ∧ z ∈ U ∧
+      (∀ y ∈ U, ContMDiffAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ W y) ∧
+      Function.Injective (fderiv ℂ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ))
+        (chartAt (ComplexModel n) z z)) ∧
+      W z j = 0 ∧
+      (∀ y ∈ U, ∀ g, (exceptionalDivisor hπ).ideal.mem y g ↔
+        IsInSpanAt (n := n) (· = fun w => W w j) y g) ∧
+      (∀ i, z ∈ geoStrictTransform π C (𝔪.E.get i) → π z ∈ 𝔪.E.get i ∧ s i ≠ j ∧
+        W z (s i) = 0 ∧
+        ∀ y ∈ U, ∀ g, (vanishingIdeal (n := n) (geoStrictTransform π C (𝔪.E.get i))).mem y g ↔
+          IsInSpanAt (n := n) (· = fun w => W w (s i)) y g) ∧
+      Set.InjOn s {i | π z ∈ 𝔪.E.get i} ∧
+      ∀ (a : Fin 𝔪.E.length → ℕ) (u : Fin 𝔪.E.length → X → ℂ),
+        (∀ i, π z ∈ 𝔪.E.get i → HolomorphicAt n (u i) (π z) ∧
+          ∀ g, (vanishingIdeal (n := n) (𝔪.E.get i)).mem (π z) g ↔
+            IsInSpanAt (n := n) (· = u i) (π z) g) →
+        (∀ g, IsInSpanOnAt (n := n) 𝔪.N (𝔪.ideal.mem (π z)) (π z) g ↔
+          IsInSpanOnAt (n := n) 𝔪.N
+            (· = fun x => ∏ i ∈ Finset.univ.filter (fun i => π z ∈ 𝔪.E.get i), u i x ^ a i)
+            (π z) g) →
+        𝔪.d ≤ ∑ i ∈ Finset.univ.filter
+            (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i →
+        ∀ g, IsInSpanOnAt (n := n) (geoStrictTransform π C 𝔪.N)
+            ((𝔪.geoTransform C π).ideal.mem z) z g ↔
+          IsInSpanOnAt (n := n) (geoStrictTransform π C 𝔪.N)
+            (· = fun w => W w j ^ ((∑ i ∈ Finset.univ.filter
+              (fun i => π z ∈ 𝔪.E.get i ∧ ∀ᶠ y in 𝓝 (π z), y ∈ C → y ∈ 𝔪.E.get i), a i) - 𝔪.d) *
+              ∏ i ∈ Finset.univ.filter (fun i => z ∈ geoStrictTransform π C (𝔪.E.get i)),
+                W w (s i) ^ a i) z g := by
+  classical
+  obtain ⟨j, s, W, U, hU, hzU, hWs, hinj, hWzj, hD, hH, hsinj, hmono⟩ :=
+    exists_monomial_chart hπ hE hC.2.2 hzC
+  refine ⟨j, s, W, U, hU, hzU, hWs, hinj, hWzj, hD, hH, hsinj, fun a u hu hgen hd g => ?_⟩
+  obtain ⟨c, hc, hcz, heq⟩ := hmono a u hu
+  have hWj : HolomorphicAt n (fun w => W w j) z := holomorphicAt_coord hU hWs j hzU
+  have hq : HolomorphicAt n (fun w => ∏ i ∈ Finset.univ.filter
+      (fun i => z ∈ geoStrictTransform π C (𝔪.E.get i)), W w (s i) ^ a i) z :=
+    holomorphicAt_finset_prod _ fun i _ =>
+      CompanionReduction.holomorphicAt_pow_of (holomorphicAt_coord hU hWs (s i) hzU) (a i)
+  exact isInSpanOnAt_geoTransform_iff_of_eq hπ hN h𝔞 hC hz hgen (hD z hzU) hWj hc hcz hq hd heq g
 
 end Along
 

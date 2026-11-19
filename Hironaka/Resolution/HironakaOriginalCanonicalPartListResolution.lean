@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.OriginalCentresOverAppendHeadExact
 import Hironaka.Resolution.HironakaOriginalCanonicalDimensionList
 import Hironaka.Resolution.HironakaOriginalCanonicalSumSeparation
 import Hironaka.Resolution.HironakaActualTowerPullbackAppend

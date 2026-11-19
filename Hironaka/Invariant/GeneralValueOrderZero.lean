@@ -1,58 +1,39 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralAdmissible
 import Hironaka.Invariant.NonmonomialOrderMonomialTransport
 import Hironaka.Invariant.NonmonomialOrderTransport
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.GeneralValue
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialInvariantFunctorialAlong
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The general value at the points of order zero: re-basing, open sets, isomorphisms, representatives
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (Step 2b, the monomial case);
-Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.A.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); asked I-0977 C-0204 (on TN3's offer C-0202),
+claimed C-0206.  Blueprint `bcalc:general-value-order-zero` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (Step 2b, the monomial case); Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`), Step II.A.
 
-General value `GeneralValue.genInv M 𝔪` (generic in the maximal-order value function `M`) is, at a point `y` of the
-last stage of a tower `T` where the nonmonomial part of the transform has order `ν_T(y) = 0`, the pair `(0, inl
-γ_T(y))` with `γ_T = MonomialStepAlong.towerInvAlong 𝔪 T` the monomial invariant of the transform
-(`genInv_eq_towerInvAlong`). This module states, for `genInv M 𝔪` itself, the order-`0` halves of the properties
-(4'), (5), (6), (7) of `hir:centre-function` (the remaining ones: (1)--(4) hold at every value, `GeneralAdmissible`,
-`GeneralUSC`, `GeneralCanonicalTail`). Each is the conjunction of the same property for the order `ν`
-(`NonmonomialOrderLocal`, `NonmonomialOrderTransport`) and for `γ` (`NonmonomialOrderMonomialTransport`,
-`MonomialInvariantFunctorialAlong.towerInvAlong_restrict`); `M` plays no role at order `0`:
+TN-CLASSICAL's general value `GeneralValue.genInv M 𝔪` (generic in the maximal-order value function `M`) is, at a point `y` of
+the last stage of a tower `T` where the nonmonomial part of the transform has order `ν_T(y) = 0`, the pair `(0, inl γ_T(y))`
+with `γ_T = MonomialStepAlong.towerInvAlong 𝔪 T` the monomial invariant of the transform (`genInv_eq_towerInvAlong`).  This
+module states, for `genInv M 𝔪` itself, the order-`0` halves of the properties (4'), (5), (6), (7) of `hir:centre-function`
+(the remaining ones: (1)--(4) hold at every value, TN-CLASSICAL's `GeneralAdmissible`, `GeneralUSC`, `GeneralCanonicalTail`).
+Each is the conjunction of the same property for the order `ν` (TN3's `NonmonomialOrderLocal`, `NonmonomialOrderTransport`)
+and for `γ` (TN3's `NonmonomialOrderMonomialTransport`, `MonomialInvariantFunctorialAlong.towerInvAlong_restrict`); `M` plays
+no role at order `0`:
 
 * **`genInv_append_of_nmOrd_eq_zero`** ((4'), for every prefix `P`, empty or not): `genInv M 𝔪 (P T₁) z = genInv M 𝔪_P T₁ z`;
 * **`genInv_restrict_of_nmOrd_eq_zero`** ((5)): restriction to an open set `U ⊆ X`, along multiple test blow-ups;
 * **`genInv_isTowerIso_of_nmOrd_eq_zero`** ((6)): isomorphisms of towers over biholomorphisms, along multiple test blow-ups;
 * **`genInv_congr_of_nmOrd_eq_zero`** ((7)): restricted-equivalent marked ideals, along every tower;
-* `emptyPrefix_field_of_nmOrd_eq_zero`, `restrictOpen_field_of_nmOrd_eq_zero`, `towerIso_field_of_nmOrd_eq_zero`:
-  the same in the shapes of the fields of `ResolutionInvariantExt.ResolutionInvariant`, along canonical segments of
-  `genInv M 𝔪` (multiple test blow-ups by `GeneralAdmissible.isGeoTestTower_of_isCanonical_genInv`), with the extra
-  hypothesis `ν = 0` at the point, so that each field splits into the order-`0` half (here) and the positive-order
-  half.
+* `emptyPrefix_field_of_nmOrd_eq_zero`, `restrictOpen_field_of_nmOrd_eq_zero`, `towerIso_field_of_nmOrd_eq_zero`,
+  `representative_field_of_nmOrd_eq_zero`: the same in the shapes of the fields of `ResolutionInvariantExt.ResolutionInvariant`,
+  along canonical segments of `genInv M 𝔪` (multiple test blow-ups by `GeneralAdmissible.isGeoTestTower_of_isCanonical_genInv`),
+  with the extra hypothesis `ν = 0` at the point, so that each field splits into the order-`0` half (here) and the
+  positive-order half.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -63,7 +44,14 @@ universe u v
 namespace Hironaka.GeneralValueOrderZero
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialInvariant Hironaka.MonomialStepAlong Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderTransport Hironaka.NonmonomialOrderMonomialTransport Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.GeneralAdmissible
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialInvariant
+  Hironaka.MonomialStepAlong Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism
+  Hironaka.MarkedIdealRestrictOpen Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderTransport
+  Hironaka.NonmonomialOrderMonomialTransport Hironaka.MaxOrderValue
+  Hironaka.GeneralValue Hironaka.GeneralAdmissible
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
 
@@ -196,6 +184,15 @@ theorem towerIso_field_of_nmOrd_eq_zero (hM : IsMaxOrderValue n k M) (hn : 0 < n
     (h0 : nmOrd (geoTransformAlong 𝔪 T) (χ p) = 0) :
     genInv M (MarkedIdeal.pullback Φ 𝔪) T' p = genInv M 𝔪 T (χ p) :=
   genInv_isTowerIso_of_nmOrd_eq_zero M hn h Φ hiso (isGeoTestTower_of_isCanonical_genInv hM hn h T hcan) p h0
+
+/-- **(7) at order `0`, in the shape of the field `representative`** (both marked ideals in the domain; no canonicity or
+maximal order needed). -/
+theorem representative_field_of_nmOrd_eq_zero {X : CMfd.{u} n} (𝔪 𝔫 : MarkedIdeal n X) (h𝔪 : IsInvDomain k 𝔪)
+    (h𝔫 : IsInvDomain k 𝔫) (hEq : RestrictEquiv 𝔪 𝔫) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (_hcan : IsCanonical 𝔪 (genInv M 𝔪) T) (y : Y) (_hy : y ∈ (geoTransformAlong 𝔪 T).cosupp)
+    (h0 : nmOrd (geoTransformAlong 𝔪 T) y = 0) : genInv M 𝔪 T y = genInv M 𝔫 T y :=
+  genInv_congr_of_nmOrd_eq_zero M hEq h𝔪.isWellFormed.isClosedSubmanifold_N.1 h𝔪.isWellFormed.isCoherent
+    h𝔫.isWellFormed.isCoherent T h0
 
 end Fields
 

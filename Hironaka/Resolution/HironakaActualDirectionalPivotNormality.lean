@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPointNormalizedCoefficientBands
 
 /-!
@@ -344,7 +339,6 @@ private theorem current_factor_zero (K : Ideal R) (e : Fin n) (b : Fin n → ℂ
     have hz := ih (r+1) (by omega) G hGI hG hFactor'
     rw [hLG,hz,mul_zero]
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- Whole actual current colons and natural source directional stability force
 every SAME canonical normalized source member's original point order. -/
 theorem canonical_directional_quotient_power_of_colons (K : Ideal R) (e : Fin n) (b : Fin n → ℂ)

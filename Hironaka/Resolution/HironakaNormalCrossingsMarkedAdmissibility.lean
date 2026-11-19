@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaNormalCrossingsTotalIdeal
 import Hironaka.Resolution.HironakaHypersurfaceStrictIdeal
 import Hironaka.Resolution.HironakaControlledTransform
@@ -36,8 +31,7 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves
   HironakaNormalCrossingsBoundarySeparation HironakaNormalCrossingsBoundaryTransform
   HironakaNormalCrossingsMultiplicityStrata HironakaNormalCrossingsSeparationChoiceComparison
   BlowupStrictSubmanifold HironakaStageCenters NormalCrossings GermIdealOrder
-  Hironaka.ResolutionInvariantSpec HironakaControlledTransform IdealWeightPowers
-open Hironaka
+  ResolutionInvariantSpec HironakaControlledTransform IdealWeightPowers
 noncomputable section
 variable {n : ℕ} {A B D : CMfd.{u} n}
 

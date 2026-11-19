@@ -1,11 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ActualNoetherGeometricDimension
 import Hironaka.Analytic.ActualCodimensionOneNoetherIdeal
-
 
 set_option autoImplicit false
 
@@ -14,8 +8,6 @@ set_option autoImplicit false
 The actual local branches and Noether coordinates are internally chosen.
 No supplied principal ideal, dimension bridge or local equation is used.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter Topology

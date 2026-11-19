@@ -1,8 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
+import Hironaka.Analytic.PositiveDimensionalComponent
 import Hironaka.Resolution.HironakaSharpActualFiniteMemberProduct
 
 /-! Literal dynamic FIRST Z from TRUE actual ideal-germ quotient classes.
@@ -205,17 +201,16 @@ private theorem pair_analytic {N : Set X} (hN : IsClosedSubmanifold n N)
     (CodimOneSupport.isComplexAnalyticSubset_zeroLocus (hc i))).inter
     (CodimOneSupport.isComplexAnalyticSubset_zeroLocus (hc j))
 
-/-- BOTH actual finite geometric directions, including every outside/unit case. -/
-theorem actual_distinct_defect_eq_finite_geometric_loci {N : Set X} (hN : IsClosedSubmanifold n N)
+private theorem actual_distinct_defect_mem_iff_geometric_loci {N : Set X} (hN : IsClosedSubmanifold n N)
     {F : Fin m → GermIdeal n X} (hc : ∀ i,(F i).IsCoherent)
     (hnz : ∀ i,∀ y ∈ N,IsNonzeroAlongAt N (F i) y)
     (hpr : ∀ i,∀ y ∈ N,∃ f : X → ℂ,HolomorphicAt n f y ∧ ∀ a,(F i).mem y a ↔
       HolomorphicAt n a y ∧ IsInSpanOnAt (n := n) N (·=f) y a)
-    (d : ℕ) (hreg : ∀ x ∈ N,RegularAtDim (n := n) N x (d+1)) :
-    actualFamilyDistinctDefect N F=actualHighOrderLocus N F ∪ actualSharedDimensionLocus N F d := by
-  have hhigh (x : X) : x ∈ actualHighOrderLocus N F ↔ ∃ i,x ∈ cosupport n N (F i) 2 := by
+    (d : ℕ) {x : X} (hreg : x ∈ N → RegularAtDim (n := n) N x (d+1)) :
+    x ∈ actualFamilyDistinctDefect N F ↔ x ∈ actualHighOrderLocus N F ∪ actualSharedDimensionLocus N F d := by
+  have hhigh : x ∈ actualHighOrderLocus N F ↔ ∃ i,x ∈ cosupport n N (F i) 2 := by
     simp only [actualHighOrderLocus,mem_iUnion]
-  have hpair (x : X) : x ∈ actualSharedDimensionLocus N F d ↔
+  have hpair : x ∈ actualSharedDimensionLocus N F d ↔
       ∃ i j,i ≠ j ∧ LocDimGE (n := n) (N ∩ (F i).zeroLocus ∩ (F j).zeroLocus) x d := by
     simp only [actualSharedDimensionLocus,mem_iUnion]
     constructor
@@ -230,23 +225,22 @@ theorem actual_distinct_defect_eq_finite_geometric_loci {N : Set X} (hN : IsClos
     have hp := (one_le_order_iff_proper hN hc hnz hx i).mpr hi
     have hh : ¬2 ≤ ordinaryTraceOrder N (F i) x := fun h => hno ⟨i,h⟩
     omega
-  ext x
   constructor
   · intro hz
     rcases (actual_distinct_defect_iff_witness hN hc hnz hpr hz.1).mp hz with hhi | ⟨i,j,hij,hpi,hpj,hrel⟩
     · obtain ⟨i,hi⟩ := hhi
-      exact Or.inl ((hhigh x).mpr ⟨i,(ordinaryTraceOrder_cosupport_iff hN (hc i) (hnz i) hz.1 2).mpr hi⟩)
+      exact Or.inl (hhigh.mpr ⟨i,(ordinaryTraceOrder_cosupport_iff hN (hc i) (hnz i) hz.1 2).mpr hi⟩)
     · by_cases hhi : ∃ a,2 ≤ ordinaryTraceOrder N (F a) x
       · obtain ⟨a,ha⟩ := hhi
-        exact Or.inl ((hhigh x).mpr ⟨a,(ordinaryTraceOrder_cosupport_iff hN (hc a) (hnz a) hz.1 2).mpr ha⟩)
+        exact Or.inl (hhigh.mpr ⟨a,(ordinaryTraceOrder_cosupport_iff hN (hc a) (hnz a) hz.1 2).mpr ha⟩)
       · obtain ⟨f,hf,hfi⟩ := hpr i x hz.1
-        exact Or.inr ((hpair x).mpr ⟨i,j,hij,actual_orderOne_pair_locDimGE_of_germ_eq hN (hc i) (hc j)
-          (hnz i) hz.1 (hreg x hz.1) f hf hfi (horder x hz.1 hhi i hpi) hrel⟩)
+        exact Or.inr (hpair.mpr ⟨i,j,hij,actual_orderOne_pair_locDimGE_of_germ_eq hN (hc i) (hc j)
+          (hnz i) hz.1 (hreg hz.1) f hf hfi (horder x hz.1 hhi i hpi) hrel⟩)
   · rintro (hhi | hp)
-    · obtain ⟨i,hi⟩ := (hhigh x).mp hhi
+    · obtain ⟨i,hi⟩ := hhigh.mp hhi
       exact (actual_distinct_defect_iff_witness hN hc hnz hpr hi.1).mpr
         (Or.inl ⟨i,(ordinaryTraceOrder_cosupport_iff hN (hc i) (hnz i) hi.1 2).mp hi⟩)
-    · obtain ⟨i,j,hij,hdim⟩ := (hpair x).mp hp
+    · obtain ⟨i,j,hij,hdim⟩ := hpair.mp hp
       have hxA := CodimOneSupport.mem_of_locDimGE (pair_analytic hN hc i j).isClosed hdim
       have hxN := hxA.1.1
       apply (actual_distinct_defect_iff_witness hN hc hnz hpr hxN).mpr
@@ -257,8 +251,19 @@ theorem actual_distinct_defect_eq_finite_geometric_loci {N : Set X} (hN : IsClos
         obtain ⟨f,hf,hfi⟩ := hpr i x hxN
         obtain ⟨g,hg,hgj⟩ := hpr j x hxN
         exact Or.inr ⟨i,j,hij,hpi,hpj,actual_orderOne_germ_eq_of_pair_locDimGE hN (hc i) (hc j)
-          (hnz i) (hnz j) hxN (hreg x hxN) f g hf hg hfi hgj
+          (hnz i) (hnz j) hxN (hreg hxN) f g hf hg hfi hgj
           (horder x hxN hhi i hpi) (horder x hxN hhi j hpj) hdim⟩
+
+/-- BOTH actual finite geometric directions, including every outside/unit case. -/
+theorem actual_distinct_defect_eq_finite_geometric_loci {N : Set X} (hN : IsClosedSubmanifold n N)
+    {F : Fin m → GermIdeal n X} (hc : ∀ i,(F i).IsCoherent)
+    (hnz : ∀ i,∀ y ∈ N,IsNonzeroAlongAt N (F i) y)
+    (hpr : ∀ i,∀ y ∈ N,∃ f : X → ℂ,HolomorphicAt n f y ∧ ∀ a,(F i).mem y a ↔
+      HolomorphicAt n a y ∧ IsInSpanOnAt (n := n) N (·=f) y a)
+    (d : ℕ) (hreg : ∀ x ∈ N,RegularAtDim (n := n) N x (d+1)) :
+    actualFamilyDistinctDefect N F=actualHighOrderLocus N F ∪ actualSharedDimensionLocus N F d := by
+  ext x
+  exact actual_distinct_defect_mem_iff_geometric_loci hN hc hnz hpr d (hreg x)
 
 private theorem analytic_finset_union {ι : Type*} (t : Finset ι) (A : ι → Set X)
     (hA : ∀ i ∈ t,IsComplexAnalyticSubset (n := n) (A i)) :
@@ -275,15 +280,10 @@ private theorem analytic_finite_union {ι : Type*} [Fintype ι] (A : ι → Set 
     IsComplexAnalyticSubset (n := n) (⋃ i,A i) := by
   simpa only [Finset.mem_univ,iUnion_true] using analytic_finset_union Finset.univ A (fun i _ => hA i)
 
-/-- GENUINE whole analytic producer for the literal actual-family FIRST defect. -/
-theorem isComplexAnalyticSubset_actualFamilyDistinctDefect {N : Set X} (hN : IsClosedSubmanifold n N)
-    {F : Fin m → GermIdeal n X} (hc : ∀ i,(F i).IsCoherent)
-    (hnz : ∀ i,∀ y ∈ N,IsNonzeroAlongAt N (F i) y)
-    (hpr : ∀ i,∀ y ∈ N,∃ f : X → ℂ,HolomorphicAt n f y ∧ ∀ a,(F i).mem y a ↔
-      HolomorphicAt n a y ∧ IsInSpanOnAt (n := n) N (·=f) y a)
-    (d : ℕ) (hreg : ∀ x ∈ N,RegularAtDim (n := n) N x (d+1)) :
-    IsComplexAnalyticSubset (n := n) (actualFamilyDistinctDefect N F) := by
-  rw [actual_distinct_defect_eq_finite_geometric_loci hN hc hnz hpr d hreg]
+private theorem finite_geometric_defect_loci_analytic {N : Set X}
+    (hN : IsClosedSubmanifold n N) {F : Fin m → GermIdeal n X}
+    (hc : ∀ i,(F i).IsCoherent) (d : ℕ) :
+    IsComplexAnalyticSubset (n := n) (actualHighOrderLocus N F ∪ actualSharedDimensionLocus N F d) := by
   apply HironakaEmbeddedAnalyticLocal.isComplexAnalyticSubset_union
   · apply analytic_finite_union
     intro i
@@ -297,6 +297,50 @@ theorem isComplexAnalyticSubset_actualFamilyDistinctDefect {N : Set X} (hN : IsC
       exact isComplexAnalyticSubset_empty
     · simp only [if_neg hij]
       exact isComplexAnalyticSubset_locDimGE (pair_analytic hN hc i j) d
+
+/-- GENUINE whole analytic producer for the literal actual-family FIRST defect. -/
+theorem isComplexAnalyticSubset_actualFamilyDistinctDefect {N : Set X} (hN : IsClosedSubmanifold n N)
+    {F : Fin m → GermIdeal n X} (hc : ∀ i,(F i).IsCoherent)
+    (hnz : ∀ i,∀ y ∈ N,IsNonzeroAlongAt N (F i) y)
+    (hpr : ∀ i,∀ y ∈ N,∃ f : X → ℂ,HolomorphicAt n f y ∧ ∀ a,(F i).mem y a ↔
+      HolomorphicAt n a y ∧ IsInSpanOnAt (n := n) N (·=f) y a)
+    (d : ℕ) (hreg : ∀ x ∈ N,RegularAtDim (n := n) N x (d+1)) :
+    IsComplexAnalyticSubset (n := n) (actualFamilyDistinctDefect N F) := by
+  rw [actual_distinct_defect_eq_finite_geometric_loci hN hc hnz hpr d hreg]
+  exact finite_geometric_defect_loci_analytic hN hc d
+
+/-- The true defect is closed for a closed smooth carrier of locally
+varying dimension. Positive dimensions use the same finite geometric
+loci on a neighborhood, and zero-dimensional carrier points are isolated. -/
+theorem isClosed_actualFamilyDistinctDefect {N : Set X} (hN : IsClosedSubmanifold n N)
+    {F : Fin m → GermIdeal n X} (hc : ∀ i,(F i).IsCoherent)
+    (hnz : ∀ i,∀ y ∈ N,IsNonzeroAlongAt N (F i) y)
+    (hpr : ∀ i,∀ y ∈ N,∃ f : X → ℂ,HolomorphicAt n f y ∧ ∀ a,(F i).mem y a ↔
+      HolomorphicAt n a y ∧ IsInSpanOnAt (n := n) N (·=f) y a) :
+    IsClosed (actualFamilyDistinctDefect N F) := by
+  rw [← isOpen_compl_iff, isOpen_iff_mem_nhds]
+  intro x hx
+  by_cases hxN : x ∈ N
+  · obtain ⟨k, hk⟩ := hN.2 x hxN
+    cases k with
+    | zero =>
+      obtain ⟨U, hU, hxU, hIso⟩ :=
+        PositiveDimensionalComponent.exists_isOpen_inter_subset_singleton_of_regularAtDim_zero hk
+      filter_upwards [hU.mem_nhds hxU] with y hyU
+      intro hy
+      have hyx : y = x := hIso ⟨hy.1,hyU⟩
+      exact hx (hyx ▸ hy)
+    | succ d =>
+      let G := actualHighOrderLocus N F ∪ actualSharedDimensionLocus N F d
+      have hG : IsClosed G := (finite_geometric_defect_loci_analytic hN hc d).isClosed
+      have hxG : x ∈ Gᶜ := fun h =>
+        hx ((actual_distinct_defect_mem_iff_geometric_loci hN hc hnz hpr d (fun _ => hk)).mpr h)
+      filter_upwards [RegularPatchNeighborhood.eventually_regularAtDim hk, hG.isOpen_compl.mem_nhds hxG]
+        with y hyReg hyG
+      intro hy
+      exact hyG ((actual_distinct_defect_mem_iff_geometric_loci hN hc hnz hpr d hyReg).mp hy)
+  · filter_upwards [hN.1.isOpen_compl.mem_nhds hxN] with y hy
+    exact fun h => hy h.1
 
 private theorem template_regularAtDim {W : Set X} (hW : IsClosedSubmanifold n W) (d : ℕ)
     (hreg : ∀ x ∈ W,RegularAtDim (n := n) W x d) :

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualInitialSymbolRegularity
 
 /-!
@@ -43,7 +38,6 @@ private theorem variable_isHomogeneous (i : Fin n) :
     simp [Finsupp.weight_single]
   · simp [MvPowerSeries.coeff_X, he] at hα
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 private theorem mem_power_actualInitialDegree
     (F : MvPowerSeries (Fin n) ℂ) (hFne : F ≠ 0) :
     F ∈ genuineFormalVariables n ^ actualHomogeneousInitialDegree F hFne := by

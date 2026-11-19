@@ -1,12 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.ExceptionalFibres
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -55,6 +48,24 @@ theorem eq_of_apply_eq_of_not_mem_exceptionalLocus {f : Y → X}
         simpa only [mem_union, mem_preimage, not_or] using hy
       have hgy : g y' = g y := ih hy'.2 h
       exact ExceptionalFibres.eq_of_apply_eq_of_not_mem_exceptionalLocus hg hy'.1 hgy
+
+/-- A compact blowup sequence is an isomorphism off every set containing the image of its
+exceptional locus. -/
+theorem isIsomorphismOver_compl_of_image_exceptionalLocus_subset [CompactSpace X]
+    {f : Y → X} (hf : IsBlowupSequence n X Y f) {A : Set X}
+    (hA : f '' exceptionalLocus n f ⊆ A) : IsIsomorphismOver n f Aᶜ := by
+  obtain ⟨-, hsurj⟩ := StrictTransformComposition.IsBlowupSequence.compactSpace_surjective hf
+  refine ⟨⟨fun y hy => hy, ?_, ?_⟩, ?_⟩
+  · intro y hy y' hy' hyy'
+    exact (eq_of_apply_eq_of_not_mem_exceptionalLocus hf (y := y)
+      (fun hyexc => hy (hA ⟨y, hyexc, rfl⟩)) hyy'.symm).symm
+  · intro x hx
+    obtain ⟨y, hy⟩ := hsurj x
+    refine ⟨y, ?_, hy⟩
+    intro hyA
+    exact hx (hy ▸ hyA)
+  · refine disjoint_left.mpr fun y hy hyexc => hy ?_
+    exact hA ⟨y, hyexc, rfl⟩
 
 end
 

@@ -1,41 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.NormalDerivativeMonomial
 import Hironaka.MarkedIdeal.HomogenizedGlueingAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Manifold.LocalHolomorphicInverse
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.Blowup.NestedFlattening
-import Hironaka.MarkedIdeal.NormalDerivativeChart
-import Hironaka.MarkedIdeal.NormalTaylorOrder
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Blowup.RegularPatchPushforward
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Normal derivatives along a submanifold: flat charts of a pair `S ⊆ N`
 
-For `N = M` these are `NormalDerivativeChart` / `NormalDerivativeMonomial`.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0055: the chart tools for Włodarczyk's Lemma `le:S` (2) in full
+along a submanifold `N` (GGT 2008, Proposition 5.6.4, for a marked ideal `(M, N, E, 𝔞, μ)` and a closed submanifold
+`S ⊆ N`); blueprint `mc:plane-retraction-derivatives`, `mc:normal-taylor-along`, `mc:nested-pair-chart`,
+`mc:normal-derivative-along-ideal`, `mc:strict-pair-monomial`, `mc:normal-derivative-monomial-along`
+(`blueprint/src/maximal-contact.tex`).  For `N = M` these are `NormalDerivativeChart` / `NormalDerivativeMonomial`.
 
 Along `N` the coefficients of the source are the derivatives in the directions normal to `S` and tangent to `N`: in a
 chart in which `S = ℂ^{k_S} × 0` and `N = ℂ^{k_N} × 0`, the directions `e_l`, `k_S ≤ l < k_N`.
@@ -51,9 +27,13 @@ chart in which `S = ℂ^{k_S} × 0` and `N = ℂ^{k_N} × 0`, the directions `e_
   (`FlatChart.nd_mem_iterDerivIdealAlong`).
 * **Nested charts of a pair** (`FlatChart.exists_nested_pair`): the product-form refinement of `FlatChart.exists_nested`
   (only the coordinates `< k_S` change) keeps `N = ℂ^{k_N} × 0` for `k_N ≥ k_S`.
+* **Charts from maps** (`FlatChart.exists_of_map'`): `FlatChart.exists_of_map` with its domain recorded.
 * **The strict transforms of `S ⊆ N` in one monomial chart** (`exists_local_geoStrictTransform_pair`).
 * **The monomial identity along `N'`** (`nd_monomial_identity_along`): if `g ∘ π = W_j^d h'` only on `N'`, then
   `W_j^d ∂^L h' = W_j^{|L|} (∂^L g) ∘ π` on `N'`, for the directions of `L` in `[k_C, k_N) \ {j}`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter Metric
@@ -63,7 +43,9 @@ universe u
 
 namespace Hironaka.NormalDerivativeAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences HolomorphicTaylorTail NormalTaylorOrder NormalDerivativeChart NormalDerivativeMonomial BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity GermIdealOrder IdealWeightPowers DerivativeIdeal DerivativeIdealAlong GiraudAlong DerivativeIdealAlongCoherent
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences HolomorphicTaylorTail NormalTaylorOrder
+  NormalDerivativeChart NormalDerivativeMonomial BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity
+  GermIdealOrder IdealWeightPowers DerivativeIdeal DerivativeIdealAlong GiraudAlong DerivativeIdealAlongCoherent
 
 noncomputable section
 

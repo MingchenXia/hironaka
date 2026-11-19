@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.RestrictEmptyTowerCentresOverOriginalExact
 import Hironaka.Resolution.HironakaNormalCrossingsSNCBlockCarrier
 import Hironaka.Resolution.HironakaNormalCrossingsOpenRestrictionSeparation
 
@@ -30,7 +24,7 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves
   MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism MarkedIdealRestrictOpen
   CoefficientIdeal CoefficientIdealRestriction MemberInterTowerAlong RestrictEmptyTower
   AnalyticSubsetOpens GermIdealOrder
-open _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)
+open ResolutionInvariantExt (IsEmptyTower)
 variable {n : ℕ}
 
 /-- Genuine open traces construct the actual whole boundary-adapted carrier. -/

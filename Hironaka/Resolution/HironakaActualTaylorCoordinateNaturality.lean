@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualCoefficientPresentationCentrePower
 import Mathlib.RingTheory.MvPowerSeries.Rename
 
@@ -18,7 +13,6 @@ open HolGerm HironakaHolomorphicJetMonomialSpan
   HironakaActualCoefficientPresentationCentrePower HironakaActualFormalCoordinatePowerDivision
   HironakaHolomorphicJetChartInvariance
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The true original Hadamard decomposition forces the WHOLE maximal-ideal image. -/
 theorem map_actualGerm_maximalIdeal_le_formal_coordinates {d m : ℕ}
     (f : HolGerm (ComplexModel d) →ₐ[ℂ] MvPowerSeries (Fin m) ℂ)

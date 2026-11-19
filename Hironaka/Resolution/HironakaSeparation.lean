@@ -1,41 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaAdmissibleCalculus
 import Hironaka.Resolution.HironakaEmbeddedBoundary
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Coherence.CartanIrreducible
-import Hironaka.MarkedIdeal.CoefficientRestrictionTower
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedReducible
-import Hironaka.Resolution.HironakaPrincipalizationBoundary
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.Resolution.StrictTransformComposition
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Separating strict transforms by principalizing `𝓘_A + 𝓘_B` (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 (the strict transform of a
-non-equidimensional space is smooth, so its parts of different dimensions end up disjoint) and Theorem 1.10
-(principalization); Kollár 2007 (`kollar07-resolution`), "Principalization III" (principalization relative to a
-simple normal crossings divisor).
+Blueprint `hir:separation` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka library, the separation step of embedded
+resolution of an analytic set whose components have different dimensions).  Sources: Bierstone--Milman 1997
+(`bierstone-milman97-invent-math`), Theorem 1.6 (the strict transform of a non-equidimensional space is smooth, so its parts of
+different dimensions end up disjoint) and Theorem 1.10 (principalization); Kollár 2007 (`kollar07-resolution`), "Principalization
+III" (principalization relative to a simple normal crossings divisor).
 
 **The separation lemma** (`disjoint_strictTransform_of_pullback_sumIdeal`).  Let `f : Y → X` be holomorphic between complex
 manifolds of the same dimension, `A, B ⊆ X` closed, each the closure of its part off the other (`A ⊆ closure (A \ B)`,
@@ -54,6 +30,9 @@ divisor `E₀` with simple normal crossings, principalization of `𝓘_A + 𝓘_
 (`HironakaPrincipalizationBoundary.exists_principalization_boundary`; the ideal is coherent by Cartan's theorem, nonzero at every
 point, and its zero locus is `A ∩ B`, `zeroLocus_sumIdeal_vanishingIdeal`) gives an admissible sequence of `(X, E₀)` with
 centres over `A ∩ B` after which the strict transforms of `A` and `B` are disjoint.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaAdmissibleCalculus` and `HironakaEmbeddedBoundary`
+only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -64,7 +43,8 @@ universe u
 namespace Hironaka.HironakaSeparation
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence Hironaka.DivisorExponentAlong Hironaka.RestrictedIdealExtension
+open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence
+  Hironaka.DivisorExponentAlong Hironaka.RestrictedIdealExtension
 
 noncomputable section
 

@@ -1,48 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.CodimOneCentre
 import Hironaka.Blowup.ExceptionalPushforwardAlong
 import Hironaka.Invariant.MemberPullback
 import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupDerivativeIdeal
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NestedFlattening
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Blowing up a centre of codimension one in `N` inside the support along `N`
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.7, Lemma `le:codim1` (Villamayor): "After the blow-up `σ` at
-such a component `C ⊆ supp(𝓘, μ)` the induced support `supp(𝓘', μ)` does not intersect the exceptional divisor of
-`σ`", applied to the marked ideals `(M, N, E, 𝔞, d)` of the induction, whose support lies in `N`; Włodarczyk 2009
-(`wlodarczyk09-analytic-resolution`), Step 1ba.
+Hironaka phase H2 (TN3), the H2 side of Step 1b of the maximal-order step inside a submanifold `N`
+(`hir:maximal-order-step`, `blueprint/src/hironaka.tex`, planned with `N` general: I-0977 C-0082):
+claimed on I-0977 C-0083.  Blueprint `bcalc:codim-one-along` (chapter `blowup-calculus.tex`).
+Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.7, Lemma `le:codim1` (Villamayor): "After
+the blow-up `σ` at such a component `C ⊆ supp(𝓘, μ)` the induced support `supp(𝓘', μ)` does not
+intersect the exceptional divisor of `σ`", applied to the marked ideals `(M, N, E, 𝔞, d)` of the
+induction, whose support lies in `N`; Włodarczyk 2009 (`wlodarczyk09-analytic-resolution`), Step 1ba.
 
 Pointwise form (`notMem_cosupp_geoTransform_of_codim_one_along`): let `(M, N, E, 𝔞, d)` have `N` a
 closed submanifold, `𝔞` coherent, `d ≥ 1`, let `π` be the blowup along `C ⊆ cosupp(𝔞|_N, d)`, and
@@ -64,9 +37,14 @@ generates `𝒪(-D)` near `z` (`BlowupStrictIdeal.exceptionalDivisor_mem_iff_of_
 `f ∘ π = (c ∘ π) · W_j^d` on `N'` near `z`, and `c ∘ π` lies in
 `𝔞' = (Res_{N'} π^*𝔞 : 𝒪(-dD))` at `z`; it does not vanish at `z`, so `z ∉ cosupp(𝔞'|_{N'}, d)`.
 
-For a marked ideal of maximal order along `N` (`HomogenizedIdealAlong.IsMaximalOrderAlong`: `ord(𝔞|_N) ≤ d`
-everywhere) and a centre of codimension one in `N` at each of its points, the cosupport of the transform misses the
-exceptional divisor.
+For a marked ideal of maximal order along `N` (`HomogenizedIdealAlong.IsMaximalOrderAlong`:
+`ord(𝔞|_N) ≤ d` everywhere) and a centre of codimension one in `N` at each of its points, the
+cosupport of the transform misses the exceptional divisor
+(`cosupp_geoTransform_inter_preimage_eq_empty_along`).  For `N = M` this is
+`CodimOneCentre.cosupp_geoTransform_inter_preimage_eq_empty`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -76,7 +54,12 @@ universe u
 
 namespace Hironaka.CodimOneCentreAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupStrictSubmanifold BlowupStrictIdeal BlowupExceptionalDivisor BlowupDerivativeIdeal BlowupSNCTransform NormalCrossings RelativePrincipalizationSpan MarkedIdeals IdealWeightPowers CodimOneCentre RestrictedIdealWeight RestrictedIdealExtension InvertibleIdealQuotient MemberPullback HomogenizedIdealAlong
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupStrictSubmanifold
+  BlowupStrictIdeal BlowupExceptionalDivisor BlowupDerivativeIdeal BlowupSNCTransform
+  NormalCrossings RelativePrincipalizationSpan MarkedIdeals IdealWeightPowers CodimOneCentre
+  RestrictedIdealWeight RestrictedIdealExtension InvertibleIdealQuotient MemberPullback
+  HomogenizedIdealAlong
 
 noncomputable section
 
@@ -277,6 +260,35 @@ theorem notMem_cosupp_geoTransform_of_codim_one_along (hπ : IsBlowupAlong n C �
   -- but it does not vanish at `z`
   have h3 := (vanishesToOrderOn_one_iff hzN hcπ).mp ((hzord _ hmem).mono hd)
   exact hcx h3
+
+open MarkedIdeal in
+/-- **`le:codim1`, transform half, inside `N`**: for `(M, N, E, 𝔞, d)` with `N` a closed submanifold,
+`𝔞` coherent, `d ≥ 1` and `ord(𝔞|_N) ≤ d` at the points of the centre, if the centre `C` (inside
+the cosupport) has codimension one in `N` at each of its points, then the cosupport of the
+transform does not meet the exceptional divisor `π⁻¹ C`. -/
+theorem cosupp_geoTransform_inter_preimage_eq_empty_of_forall_along (hπ : IsBlowupAlong n C π)
+    {𝔪 : MarkedIdeal n X} (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) (hsub : C ⊆ 𝔪.cosupp)
+    (hcodim : ∀ x ∈ C, ∃ k, RegularAtDim (n := n) C x k ∧ RegularAtDim (n := n) 𝔪.N x (k + 1))
+    (hord : ∀ x ∈ C, x ∉ cosupport n 𝔪.N 𝔪.ideal (𝔪.d + 1)) :
+    (𝔪.geoTransform C π).cosupp ∩ π ⁻¹' C = ∅ := by
+  refine eq_empty_iff_forall_notMem.mpr fun z ⟨hz, hzC⟩ => ?_
+  obtain ⟨k, hCk, hNk⟩ := hcodim (π z) hzC
+  exact notMem_cosupp_geoTransform_of_codim_one_along hπ hN h𝔞 hd hsub hzC hCk hNk
+    (hord (π z) hzC) hz
+
+open MarkedIdeal in
+/-- **Step 1ba inside `N`**: for a marked ideal of maximal order along `N`
+(`IsMaximalOrderAlong`: `ord(𝔞|_N) ≤ d` everywhere), blowing up a centre inside the cosupport that
+has codimension one in `N` at each of its points, the cosupport of the transform misses the
+exceptional divisor. -/
+theorem cosupp_geoTransform_inter_preimage_eq_empty_along (hπ : IsBlowupAlong n C π)
+    {𝔪 : MarkedIdeal n X} (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) (hmax : IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d) (hsub : C ⊆ 𝔪.cosupp)
+    (hcodim : ∀ x ∈ C, ∃ k, RegularAtDim (n := n) C x k ∧ RegularAtDim (n := n) 𝔪.N x (k + 1)) :
+    (𝔪.geoTransform C π).cosupp ∩ π ⁻¹' C = ∅ :=
+  cosupp_geoTransform_inter_preimage_eq_empty_of_forall_along hπ hN h𝔞 hd hsub hcodim
+    fun x _ => hmax x
 
 end Blowup
 

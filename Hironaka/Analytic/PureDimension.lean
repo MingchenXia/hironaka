@@ -1,20 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.LocalStatementAssembly
 import Hironaka.Analytic.RegularLocusDense
 import Hironaka.Analytic.AnalyticSubsetTopology
 import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.AnalyticLocalStatement
+
 set_option autoImplicit false
 
 /-!
 # Dimension strata and pure dimensionality of irreducible analytic sets
+
+Blueprint `ana:dimension-strata`, `ana:pure-dimension` (Demailly, *Complex analytic and
+differential geometry*, II.5.3).
 
 For an analytic subset `A` of a complex manifold and a predicate `P` on dimensions, let
 `S_P = ⋃_{P j} R_j`, where `R_j` is the set of regular points of `A` of dimension `j`.
@@ -47,6 +42,7 @@ noncomputable section
 
 variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
   [IsComplexManifold n M]
+
 
 /-- The regular points of `A` whose dimension satisfies `P`. -/
 def regularStratum (A : Set M) (P : ℕ → Prop) : Set M :=

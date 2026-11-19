@@ -1,22 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.LocalDecompositionChart
 import Hironaka.Analytic.IrreducibleGermLocal
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.AnalyticLocalStatement
-import Hironaka.Analytic.RegularAtDimChart
+
 set_option autoImplicit false
 
 /-!
 # Assembling the local statement (LS)
 
-Local decomposition data exist at every point of an analytic subset of a complex manifold
-(`AnalyticLocalStatement.exists_localDecomposition`):
+Blueprint `lag:local-statement`.  Local decomposition data exist at every point of an analytic
+subset of a complex manifold (`AnalyticLocalStatement.exists_localDecomposition`):
 
 1. at `0 ∈ ℂⁿ`, decompose the analytic germ into irredundant irreducible germs
    (`AnalyticGermDecomposition.exists_irreducible_decomposition_euclidean`), replace each by
@@ -48,6 +39,10 @@ theorem translation_apply (q z : ComplexModel n) : translation q z = z + q := rf
 
 theorem translation_symm_apply (q z : ComplexModel n) : (translation q).symm z = z - q := by
   rw [sub_eq_add_neg]; rfl
+
+theorem translation_source (q : ComplexModel n) : (translation q).source = univ := rfl
+
+theorem translation_target (q : ComplexModel n) : (translation q).target = univ := rfl
 
 theorem differentiableOn_translation (q : ComplexModel n) :
     DifferentiableOn ℂ (translation q) (translation q).source :=
@@ -241,7 +236,9 @@ theorem exists_localDecomposition_zero {S : Set (ComplexModel n)} (hS : IsAnalyt
 variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
   [IsComplexManifold n M]
 
-/-- **The local statement (LS).** Every point of an analytic subset of a complex manifold has local decomposition data. -/
+/-- **The local statement (LS).**  Every point of an analytic subset of a complex manifold has
+local decomposition data.  Blueprint `lag:local-statement`; the remaining inputs are
+`IrreducibleGermLocal.exists_pure_nhds` and `IrreducibleGermLocal.exists_thin_nhds`. -/
 theorem exists_localDecomposition {A : Set M} (hA : IsComplexAnalyticSubset (n := n) A)
     {p : M} (_hp : p ∈ A) : Nonempty (LocalDecomposition (n := n) A p) := by
   obtain ⟨P⟩ := hA p

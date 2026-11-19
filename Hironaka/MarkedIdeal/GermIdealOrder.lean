@@ -1,21 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.IdealPowers
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 
 /-!
 # The order of an ideal sheaf at a point, relative to a submanifold
 
-Sources: Włodarczyk 2005 §2.1 (`ord_x(𝓘) := max{i | 𝓘 ⊂ 𝔪_x^i}`, `supp(X, 𝓘, E, μ) = {x | ord_x 𝓘 ≥ μ}`) and
-Bierstone--Milman 2008, Definitions 2.1 (the cosupport `{x ∈ N | ord_x 𝓘 ≥ d}` of a marked ideal `(M, N, E, 𝓘, d)`,
-with `ord_x 𝓘` the largest `q` such that `𝓘_x ⊂ 𝔪^q_{N,x}`).
+Blueprint `hir:order` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Sources:
+Włodarczyk 2005 §2.1 (`ord_x(𝓘) := max{i | 𝓘 ⊂ 𝔪_x^i}`, `supp(X, 𝓘, E, μ) = {x | ord_x 𝓘 ≥ μ}`) and
+Bierstone--Milman 2008, Definitions 2.1 (the cosupport `{x ∈ N | ord_x 𝓘 ≥ d}` of a marked ideal
+`(M, N, E, 𝓘, d)`, with `ord_x 𝓘` the largest `q` such that `𝓘_x ⊂ 𝔪^q_{N,x}`).
 
 ## The ambient encoding
 
@@ -30,8 +23,19 @@ it is Włodarczyk's `ord_x`.
 
 * `pointIdeal x` -- the maximal ideal sheaf `𝔪_x = 𝓘_{{x}}`;
 * `VanishesToOrderOn n N x q g` -- `g|_N ∈ 𝔪_{N,x}^q`; `OrderGE n N 𝔞 x q` -- `ord_x(𝔞|_N) ≥ q`;
-* `order n N 𝔞 x: ℕ∞`
+* `order n N 𝔞 x : ℕ∞` -- `ord_x(𝔞|_N)`, with `le_order_iff`;
 * `cosupport n N 𝔞 d` -- `{x ∈ N | ord_x(𝔞|_N) ≥ d}`;
+* the elementary facts: `𝔪^{q+1} ⊆ 𝔪^q` (`idealPow_pointIdeal_succ_le`), monotonicity in `q`,
+  order `≥ 0` for holomorphic germs, order `≥ 1` iff vanishing at the point
+  (`vanishesToOrderOn_one_iff`), `cosupport_zero`, `cosupport_one`, `cosupport_unitIdeal`,
+  multiplicativity `𝔪^p 𝔪^q ⊆ 𝔪^{p+q}` (`VanishesToOrderOn.mul`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`, so that those two statements can
+later be proved in place from it.
+
+Sorry-free.  The Taylor characterisation of `𝔪_x^q` by vanishing derivatives (needed for
+`supp(𝓘, μ) = V(𝓓^{μ-1} 𝓘)`) is the next H1 item, not done here.
 -/
 
 open Set Filter
@@ -51,6 +55,10 @@ variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel 
 variable (n) in
 /-- The maximal ideal sheaf `𝔪_x = 𝓘_{{x}}` of a point. -/
 def pointIdeal (x : M) : GermIdeal n M := vanishingIdeal {x}
+
+theorem mem_pointIdeal_iff {x y : M} {g : M → ℂ} :
+    (pointIdeal n x).mem y g ↔ HolomorphicAt n g y ∧ ∀ᶠ z in 𝓝 y, z = x → g z = 0 :=
+  Iff.rfl
 
 /-- A germ of `𝔪_x` at `x` vanishes at `x`. -/
 theorem apply_eq_zero_of_mem_pointIdeal {x : M} {g : M → ℂ} (hg : (pointIdeal n x).mem x g) :
@@ -113,6 +121,11 @@ theorem idealPow_le_of_le {𝔞 : GermIdeal n M}
 theorem holomorphicAt_of_mem_pointIdeal {x y : M} {g : M → ℂ} (hg : (pointIdeal n x).mem y g) :
     HolomorphicAt n g y :=
   hg.1
+
+/-- `𝔪_x^{q+1} ⊆ 𝔪_x^q`. -/
+theorem idealPow_pointIdeal_succ_le (x : M) (q : ℕ) :
+    (idealPow (pointIdeal n x) (q + 1)).Le (idealPow (pointIdeal n x) q) :=
+  idealPow_succ_le (fun _ _ hg => holomorphicAt_of_mem_pointIdeal hg) q
 
 /-- A germ of `𝔪_x^q` with `q ≥ 1` vanishes at `x`. -/
 theorem apply_eq_zero_of_mem_idealPow_pointIdeal {x : M} {g : M → ℂ} {q : ℕ} (hq : 1 ≤ q)
@@ -199,6 +212,11 @@ theorem VanishesToOrderOn.mul {f : M → ℂ} {p q : ℕ} (hf : VanishesToOrderO
   filter_upwards [hfh, hgk] with y hy1 hy2 hyN
   rw [hy1 hyN, hy2 hyN]
 
+/-- A holomorphic multiple keeps the order. -/
+theorem VanishesToOrderOn.mul_left {c : M → ℂ} (hc : HolomorphicAt n c x) {q : ℕ}
+    (hg : VanishesToOrderOn n N x q g) : VanishesToOrderOn n N x q (fun y => c y * g y) := by
+  simpa using (vanishesToOrderOn_zero (N := N) hc).mul hg
+
 /-! ### The order of an ideal -/
 
 variable (n) in
@@ -214,6 +232,31 @@ theorem OrderGE.mono {p q : ℕ} (hqp : q ≤ p) (h : OrderGE n N 𝔞 x p) : Or
 /-- For an ideal of holomorphic germs the order is always `≥ 0`. -/
 theorem orderGE_zero (h𝔞 : ∀ g, 𝔞.mem x g → HolomorphicAt n g x) : OrderGE n N 𝔞 x 0 :=
   fun g hg => vanishesToOrderOn_zero (h𝔞 g hg)
+
+variable (n) in
+/-- **The order `ord_x(𝔞|_N) ∈ ℕ∞`**: the supremum of the `q` with `𝔞_x|_N ⊆ 𝔪_{N,x}^q`
+(`⊤` when `𝔞|_N` vanishes near `x`, e.g. for the zero ideal). -/
+def order (N : Set M) (𝔞 : GermIdeal n M) (x : M) : ℕ∞ :=
+  ⨆ (q : ℕ) (_ : OrderGE n N 𝔞 x q), (q : ℕ∞)
+
+/-- **`q ≤ ord_x(𝔞|_N)` iff `ord_x(𝔞|_N) ≥ q`** (for an ideal of holomorphic germs). -/
+theorem le_order_iff (h𝔞 : ∀ g, 𝔞.mem x g → HolomorphicAt n g x) {q : ℕ} :
+    (q : ℕ∞) ≤ order n N 𝔞 x ↔ OrderGE n N 𝔞 x q := by
+  constructor
+  · intro hq
+    by_contra hnot
+    have hlt : ∀ k : ℕ, OrderGE n N 𝔞 x k → k < q := fun k hk => by
+      by_contra hkq
+      exact hnot (hk.mono (not_lt.mp hkq))
+    rcases Nat.eq_zero_or_pos q with rfl | hq0
+    · exact hnot (orderGE_zero h𝔞)
+    have hle : order n N 𝔞 x ≤ ((q - 1 : ℕ) : ℕ∞) :=
+      iSup₂_le fun k hk => by exact_mod_cast Nat.le_sub_one_of_lt (hlt k hk)
+    have := hq.trans hle
+    have : q ≤ q - 1 := by exact_mod_cast this
+    omega
+  · intro hq
+    exact le_iSup₂ (f := fun (k : ℕ) (_ : OrderGE n N 𝔞 x k) => (k : ℕ∞)) q hq
 
 /-! ### The cosupport -/
 
@@ -243,6 +286,13 @@ theorem cosupport_one (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) :
     exact ⟨hxN, fun g hg => (vanishesToOrderOn_one_iff hxN (h𝔞 x g hg)).mp (hx g hg)⟩
   · rintro ⟨hxN, hx⟩
     exact ⟨hxN, fun g hg => (vanishesToOrderOn_one_iff hxN (h𝔞 x g hg)).mpr (hx g hg)⟩
+
+/-- The unit ideal has empty cosupport for every positive mark. -/
+theorem cosupport_unitIdeal {d : ℕ} (hd : 1 ≤ d) : cosupport n N (unitIdeal n M) d = ∅ := by
+  refine eq_empty_of_forall_notMem fun x hx => ?_
+  have h1 := (hx.2 (fun _ => (1 : ℂ)) (holomorphicAt_const 1)).mono hd
+  have := (vanishesToOrderOn_one_iff hx.1 (holomorphicAt_const (n := n) (M := M) (x := x) 1)).mp h1
+  exact one_ne_zero this
 
 end
 

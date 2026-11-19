@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionOriginalLocalChartArrow
 /-! Full original global-target Cartesian laws for the actual original local
 smooth arrows. Complete mathematics preceded code. Actual saturation and the

@@ -1,34 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderMonomial
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Invariant.NonmonomialOrderCanonical
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The monomial phase of the general step along canonical segments
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (Step 2b, the monomial case,
-where the nonmonomial part is trivial); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.A.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`, the case `o = 0`); claim I-0977 C-0198
+(shape C-0199).  Blueprint `bcalc:nonmonomial-order-monomial-canonical` (chapter `blowup-calculus.tex`).  Sources:
+Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (Step 2b, the monomial case, where the
+nonmonomial part is trivial); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.A.
 
 The value `f` of the general step has as first entry the order `ν` of the nonmonomial part (`OrdMonotone 𝔪 f`,
 `NonmonomialOrderCanonical`), and at the cosupport points of order `0` it is a fixed strictly monotone function `ψ` of the
@@ -48,6 +29,11 @@ of the properties of `hir:centre-function` that the general step needs, from the
 * **`towerInvAlong_step_of_nmOrd_eq_zero`**, **`value_step_of_nmOrd_eq_zero`** (properties (3), (4) at `o = 0`, the shape of
   `StepOneWellFounded.StepDrop`): along a canonical step, at a point `z` of the new cosupport with `ν(π z) = 0`, `π z` lies in
   the old cosupport, `ν(z) = 0`, and `γ` (hence `f`) drops if `π z ∈ C` and is unchanged otherwise;
+* **`towerInvAlong_le_of_canonical`**, `value_le_of_canonical`: along a canonical segment, at a point whose image at an
+  earlier stage has order `0`, `γ` (hence `f`) has not gone up.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -58,7 +44,12 @@ universe u v
 namespace Hironaka.NonmonomialOrderMonomialCanonical
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialInvariant Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderCanonical Hironaka.NonmonomialOrderMonomial Hironaka.DivisorExponentAlong
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialInvariant
+  Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderCanonical
+  Hironaka.NonmonomialOrderMonomial Hironaka.DivisorExponentAlong
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus)
 
@@ -274,6 +265,58 @@ theorem value_step_of_nmOrd_eq_zero (hn : 0 < n) {k : ℕ} (h : IsInvDomain k �
   · rw [hv.apply hT z hz hz0, hv.apply hTT (π z) hπz h0, heq hzC]
 
 end Step
+
+/-! ### Along canonical segments -/
+
+section Segment
+
+variable {X : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ] {𝔪 : MarkedIdeal n X}
+  {f : ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ} {ψ : WithBot Val → Λ}
+
+/-- **Along a canonical segment the invariant `γ` does not go up at points of order `0`** (`𝔪` in the domain, `n > 0`): if
+`T₀ M` is a multiple test blow-up of `𝔪` and a canonical segment of `f`, and `z` is a point of the last cosupport whose image
+at the last stage of `T₀` has order `0`, then that image lies in the cosupport there, `ν(z) = 0`, and
+`γ_{T₀M}(z) ≤ γ_{T₀}(M z)` (induction on `M`, `towerInvAlong_step_of_nmOrd_eq_zero`; the intermediate images have order `0`
+because the order never goes up, `NonmonomialOrderCanonical.nmOrd_le_nmOrd_proj`). -/
+theorem towerInvAlong_le_of_canonical (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪) (hf : OrdMonotone 𝔪 f)
+    (hψ : StrictMono ψ) (hv : OrdZeroValue 𝔪 f ψ) {Y₀ : CMfd.{u} n} (T₀ : BlowupTower X Y₀) :
+    ∀ {Y : CMfd.{u} n} (M : BlowupTower Y₀ Y), IsGeoTestTower 𝔪 (T₀.append M) → IsCanonical 𝔪 f (T₀.append M) →
+      ∀ z ∈ (geoTransformAlong 𝔪 (T₀.append M)).cosupp, nmOrd (geoTransformAlong 𝔪 T₀) (M.proj z) = 0 →
+        M.proj z ∈ (geoTransformAlong 𝔪 T₀).cosupp ∧ nmOrd (geoTransformAlong 𝔪 (T₀.append M)) z = 0 ∧
+          towerInvAlong 𝔪 (T₀.append M) z ≤ towerInvAlong 𝔪 T₀ (M.proj z)
+  | _, .refl, _, _, z, hz, h0 => ⟨hz, h0, le_rfl⟩
+  | _, .step M C π hπ, hT, hcan, z, hz, h0 => by
+      have hT' : IsGeoTestTower 𝔪 (.step (T₀.append M) C π hπ) := hT
+      have hcan' : IsCanonical 𝔪 f (.step (T₀.append M) C π hπ) := hcan
+      -- the image one stage down has order `0`
+      have hπz := (nmOrd_step_le_of_canonical hn h hf (T₀.append M) C π hπ hT' hcan'.2 hz).1
+      have hle := (nmOrd_le_nmOrd_proj hn h hf T₀ M hT'.1 hcan'.1 (π z) hπz).2
+      have h0π : nmOrd (geoTransformAlong 𝔪 (T₀.append M)) (π z) = 0 := by
+        have : nmOrd (geoTransformAlong 𝔪 T₀) (M.proj (π z)) = 0 := h0
+        omega
+      obtain ⟨-, hz0, hlt, heq⟩ :=
+        towerInvAlong_step_of_nmOrd_eq_zero hn h hf hψ hv (T₀.append M) C π hπ hT' hcan' hz h0π
+      obtain ⟨hM, -, hIH⟩ := towerInvAlong_le_of_canonical hn h hf hψ hv T₀ M hT'.1 hcan'.1 (π z) hπz h0
+      refine ⟨hM, hz0, ?_⟩
+      have hstep : towerInvAlong 𝔪 (.step (T₀.append M) C π hπ) z ≤ towerInvAlong 𝔪 (T₀.append M) (π z) := by
+        by_cases hzC : π z ∈ C
+        · exact (hlt hzC).le
+        · exact (heq hzC).le
+      exact hstep.trans hIH
+
+/-- **Along a canonical segment the value does not go up at points of order `0`** (hypotheses of
+`towerInvAlong_le_of_canonical`): `f (T₀ M) z ≤ f T₀ (M z)`. -/
+theorem value_le_of_canonical (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪) (hf : OrdMonotone 𝔪 f)
+    (hψ : StrictMono ψ) (hv : OrdZeroValue 𝔪 f ψ) {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (M : BlowupTower Y₀ Y)
+    (hT : IsGeoTestTower 𝔪 (T₀.append M)) (hcan : IsCanonical 𝔪 f (T₀.append M))
+    {z : Y} (hz : z ∈ (geoTransformAlong 𝔪 (T₀.append M)).cosupp) (h0 : nmOrd (geoTransformAlong 𝔪 T₀) (M.proj z) = 0) :
+    f (T₀.append M) z ≤ f T₀ (M.proj z) := by
+  obtain ⟨hM, hz0, hle⟩ := towerInvAlong_le_of_canonical hn h hf hψ hv T₀ M hT hcan z hz h0
+  have hT₀ : IsGeoTestTower 𝔪 T₀ := ((isGeoTestTower_append_iff 𝔪 T₀ M).mp hT).1
+  rw [hv.apply hT z hz hz0, hv.apply hT₀ (M.proj z) hM h0]
+  exact hψ.monotone hle
+
+end Segment
 
 end
 

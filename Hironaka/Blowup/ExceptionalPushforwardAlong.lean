@@ -1,60 +1,32 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.ExceptionalIdealPushforward
 import Hironaka.MarkedIdeal.GiraudAlong
 import Hironaka.Blowup.SimultaneousNormalCrossings
 import Hironaka.Blowup.NestedFlattening
 import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupDerivativeIdeal
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.OrderTaylor
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The blowup calculus along a submanifold: the chart retraction and `π_* 𝒪(-KD)` along `N'`
 
-The blowup half of the calculus along a submanifold `N ≠ M` (`hir:along-calculus`). Sources: Włodarczyk 2005
-(`wlodarczyk05-hironaka`) §2.2 and the monomial charts of `le:inclusions`; Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`) §3 (marked ideals `(M, N, E, 𝓘, d)`, the transform restricted to `N'`).
+Hironaka phase H2 (TN3): the blowup half of the calculus along a submanifold `N ≠ M`
+(`hir:along-calculus`, split agreed on I-0977 C-0054 / C-0055).  Blueprint
+`bcalc:chart-retraction`, `bcalc:exceptional-pushforward-along` (chapter `blowup-calculus.tex`).
+Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`) §2.2 and the monomial charts of `le:inclusions`;
+Bierstone--Milman 2008 (`bierstone-milman08-functoriality`) §3 (marked ideals `(M, N, E, 𝓘, d)`, the
+transform restricted to `N'`).
 
 Let `π : Y → X` be the blowup along `C`, `N ⊇ C` a closed submanifold and
 `N' = closure (π⁻¹(N \ C))` its strict transform.  At a point `z ∈ N'` over `C`:
 
-* `exists_chartRetraction`: in nested flattening coordinates `Φ` at `π z` (`C = ℂ^{k_C} × 0`, `N = ℂ^{k_N} × 0`) the
-  flat retraction `r = φ ∘ P ∘ ψ` of `X` onto `N` (`P` = `planeRetract k_N`; `ψ = flatMap Φ`, `φ = flatInv Φ`,
-  `GiraudAlong` API) lifts through the monomial chart `σⱼ` containing `z` (necessarily `j < k_N`) to `r' = ℓⱼ ∘ P ∘
-  W`, a holomorphic map near `z` with `r' z = z`, values in `N'`, and `π ∘ r' = r ∘ π`. The key identity is `σⱼ ∘ P
-  = P ∘ σⱼ` for `j < k_N` (`monomial_planeRetract`); that `ℓⱼ` maps the plane into `N'` is
-  `lift_mem_geoStrictTransform`.
+* `exists_chartRetraction`: in nested flattening coordinates `Φ` at `π z` (`C = ℂ^{k_C} × 0`,
+  `N = ℂ^{k_N} × 0`) the flat retraction `r = φ ∘ P ∘ ψ` of `X` onto `N` (`P` = `planeRetract k_N`;
+  `ψ = flatMap Φ`, `φ = flatInv Φ`, TN-CLASSICAL's `GiraudAlong` API) lifts through the monomial
+  chart `σⱼ` containing `z` (necessarily `j < k_N`) to `r' = ℓⱼ ∘ P ∘ W`, a holomorphic map near
+  `z` with `r' z = z`, values in `N'`, and `π ∘ r' = r ∘ π`.  The key identity is
+  `σⱼ ∘ P = P ∘ σⱼ` for `j < k_N` (`monomial_planeRetract`); that `ℓⱼ` maps the plane into `N'`
+  is `lift_mem_geoStrictTransform`.
 * `mem_idealPow_vanishingIdeal_along_of_pullback`: if `f ∘ π` agrees on `N'` near `z` with a germ of
   `𝒪(-D)^K`, then `f` agrees on `N` near `π z` with a germ of `𝓘_C^K` (the along-`N'` form of
   `π_* 𝒪(-KD) = 𝓘_C^K`).  Proof: `f♭ = f ∘ r` has `f♭ ∘ π = (f ∘ π) ∘ r'` near `z`; `r'` maps
@@ -76,6 +48,12 @@ transformed ideal `𝔞' = 𝓘_D^{-d} π^*𝔞|_{N'}` (`MarkedIdeal.geoTransfor
 * clause 2 along `N'` (`frequently_le_vanishingIdeal_of_geoTransform_le`,
   `exists_not_mem_vanishingIdeal_of_geoTransform`), for a closed `A ⊆ N` (e.g. `A = H ∩ N`): if
   `𝔞' ⊆ 𝓘_{A'}` at `z ∈ A'`, then `𝔞 ⊆ 𝓘_A` at points of `A \ C` arbitrarily close to `π z`;
+* `restrictLe_geoTransform_of_pullback` (admissible centre): if `π^*𝔞 = 𝒪(-eD) · 𝔟` on `N'` with
+  `e ≥ d`, then `𝔞' = 𝒪(-(e-d)D) · 𝔟` on `N'` (cancellation of `𝒪(-dD)`, invertible along `N'`);
+  with `bcalc:member-pullback` this is the transform of a monomial marked ideal along `N'`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -755,6 +733,58 @@ theorem exists_not_mem_vanishingIdeal_of_geoTransform (hπ : IsBlowupAlong n C �
       hnot).exists
   obtain ⟨a, ha, hna⟩ := hyle hy.1
   exact hna (hy.2 a ha)
+
+/-- **The transform of an ideal with an exceptional factor, along `N'`** (the restricted form of
+`σ^c(𝓘_D^e 𝔟, d) = 𝓘_D^{e-d} 𝔟`): let `(M, N, E, 𝔞, d)` have `N` a closed submanifold, `𝔞`
+coherent, and `C` an admissible centre.  If `π^*𝔞` and `𝒪(-eD) · 𝔟` (`𝔟` coherent, `e ≥ d`) have
+the same restriction to `N'`, then the transformed ideal `𝔞'` and `𝒪(-(e-d)D) · 𝔟` have the same
+restriction to `N'`.  With `bcalc:member-pullback` (`π^*𝓘_H = 𝒪(-D) 𝓘_{H'}` or `𝓘_{H'}`) this
+computes the transform of a monomial marked ideal along `N'`.  Proof: TN-CLASSICAL's
+`restrictLe_pullback_geoTransform` (`Res_{N'} π^*𝔞 = Res_{N'} 𝒪(-dD) 𝔞'`), `𝒪(-eD) =
+𝒪(-(e-d)D) 𝒪(-dD)`, and cancellation of `𝒪(-dD)`, invertible along `N'`
+(`RestrictLeCalculus.restrictLe_of_restrictLe_mul_mul`). -/
+theorem restrictLe_geoTransform_of_pullback (hπ : IsBlowupAlong n C π) {𝔪 : MarkedIdeal n X}
+    (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hC : 𝔪.IsAdmissibleCentre C)
+    {𝔟 : GermIdeal n Y} (h𝔟 : 𝔟.IsCoherent) {e : ℕ} (hde : 𝔪.d ≤ e)
+    (hle : RestrictedIdealWeight.RestrictLe (geoStrictTransform π C 𝔪.N)
+      (GermIdeal.pullback (m := n) π 𝔪.ideal) ((idealPow (exceptionalDivisor hπ).ideal e).mul 𝔟))
+    (hge : RestrictedIdealWeight.RestrictLe (geoStrictTransform π C 𝔪.N)
+      ((idealPow (exceptionalDivisor hπ).ideal e).mul 𝔟) (GermIdeal.pullback (m := n) π 𝔪.ideal)) :
+    RestrictedIdealWeight.RestrictLe (geoStrictTransform π C 𝔪.N) (𝔪.geoTransform C π).ideal
+        ((idealPow (exceptionalDivisor hπ).ideal (e - 𝔪.d)).mul 𝔟) ∧
+      RestrictedIdealWeight.RestrictLe (geoStrictTransform π C 𝔪.N)
+        ((idealPow (exceptionalDivisor hπ).ideal (e - 𝔪.d)).mul 𝔟) (𝔪.geoTransform C π).ideal := by
+  have h𝔩 : (exceptionalDivisor hπ).ideal.IsCoherent :=
+    GermIdealPullbackCalculus.isCoherent_pullback hπ.contMDiff (isCoherent_vanishingIdeal_centre hπ)
+  have hPc : (idealPow (exceptionalDivisor hπ).ideal (e - 𝔪.d)).IsCoherent :=
+    GermIdealPullbackCalculus.isCoherent_idealPow h𝔩 _
+  have hQc : (idealPow (exceptionalDivisor hπ).ideal 𝔪.d).IsCoherent :=
+    GermIdealPullbackCalculus.isCoherent_idealPow h𝔩 _
+  have hσc : (𝔪.geoTransform C π).ideal.IsCoherent :=
+    isCoherent_geoTransform_ideal_of_isAdmissibleCentre hN h𝔞 hC hπ
+  -- `𝒪(-eD) 𝔟 = (𝒪(-(e-d)D) 𝔟) 𝒪(-dD)`
+  have hsplit : (idealPow (exceptionalDivisor hπ).ideal e).mul 𝔟 =
+      ((idealPow (exceptionalDivisor hπ).ideal (e - 𝔪.d)).mul 𝔟).mul
+        (idealPow (exceptionalDivisor hπ).ideal 𝔪.d) := by
+    have he : idealPow (exceptionalDivisor hπ).ideal e =
+        idealPow (exceptionalDivisor hπ).ideal ((e - 𝔪.d) + 𝔪.d) := by
+      congr 1; omega
+    rw [he, RestrictLeCalculus.idealPow_add h𝔩, GermIdealTotalTransform.mul_assoc hPc hQc h𝔟,
+      RestrictLeCalculus.mul_comm' (idealPow (exceptionalDivisor hπ).ideal 𝔪.d) 𝔟,
+      ← GermIdealTotalTransform.mul_assoc hPc h𝔟 hQc]
+  obtain ⟨h1, h2⟩ :=
+    MarkedIdealOperationsAlong.MarkedIdeal.restrictLe_pullback_geoTransform hN h𝔞 hC hπ
+  have hinv : RestrictedIdealQuotient.IsInvertibleAlong n (geoStrictTransform π C 𝔪.N)
+      (idealPow (exceptionalDivisor hπ).ideal 𝔪.d) :=
+    isInvertibleAlong_geoStrictTransform hπ 𝔪.N 𝔪.d
+  have hPb : ((idealPow (exceptionalDivisor hπ).ideal (e - 𝔪.d)).mul 𝔟).IsCoherent :=
+    isCoherent_mul hPc h𝔟
+  refine ⟨RestrictLeCalculus.restrictLe_of_restrictLe_mul_mul hσc hPb hinv ?_,
+    RestrictLeCalculus.restrictLe_of_restrictLe_mul_mul hPb hσc hinv ?_⟩
+  · rw [RestrictLeCalculus.mul_comm' _ (idealPow (exceptionalDivisor hπ).ideal 𝔪.d), ← hsplit]
+    exact RestrictLeCalculus.RestrictLe.trans h2 hle
+  · rw [← hsplit, RestrictLeCalculus.mul_comm' _ (idealPow (exceptionalDivisor hπ).ideal 𝔪.d)]
+    exact RestrictLeCalculus.RestrictLe.trans hge h1
 
 end MarkedIdeal
 

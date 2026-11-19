@@ -1,50 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MonomialPartEtale
 import Hironaka.Invariant.InvDomainRebase
 import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The companion ideal of the general step: functoriality and re-basing across steps empty near the point
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` ("By Step 1 we can resolve the
-marked ideal of maximal order `O(𝓘, μ)` ... Then we repeat the procedure") and §2.4 (commutativity with étale
-morphisms); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0150 (offered C-0139 /
+C-0146).  Blueprint `bcalc:companion-rebase` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` ("By Step 1 we can resolve the marked ideal of maximal order
+`O(𝓘, μ)` ... Then we repeat the procedure") and §2.4 (commutativity with étale morphisms); Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`), Step II.B.
 
 At a point where the order `o` of the nonmonomial part is positive, the general step computes the value from the
 maximal-order invariant of the companion ideal
@@ -67,6 +35,11 @@ equivalence, with the domain and the identity of values, and the functoriality o
 * `restrictEquiv_companionOf_geoTransformAlong_of_isEmptyTower`: along a tower with only empty centres;
 * **`restrictEquiv_companionOf_rebase`**: for `T` a multiple test blow-up of `𝔪` whose centres miss the open `W`,
   `𝓞(𝔪_T, o)|_{T⁻¹W} ≃ (𝓞(𝔪, o)|_W)_{T|_W}`;
+* **`companionOf_rebase`**: with `InvDomainRebase.inv_rebase`, the re-based companion ideal lies in the domain, canonical
+  tails re-base, and the values of a resolution invariant agree.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -77,7 +50,14 @@ universe u v
 namespace Hironaka.CompanionRebase
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale Hironaka.IdealWeightPowers Hironaka.RestrictedIdealExtension Hironaka.DerivativeIdealAlongEtale Hironaka.RestrictedIdealWeight Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.MarkedIdealOperationsTransform.MarkedIdeal Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale
+  Hironaka.IdealWeightPowers Hironaka.RestrictedIdealExtension
+  Hironaka.DerivativeIdealAlongEtale Hironaka.RestrictedIdealWeight
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
 
 noncomputable section
 
@@ -264,7 +244,8 @@ end EmptyStep
 section Tower
 
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open BlowupTowers BlowupTowerTransforms MarkedIdealRestrictOpen ResolutionInvariantExt RestrictEmptyTower InvDomainCompanion InvDomainRebase
+open BlowupTowers BlowupTowerTransforms MarkedIdealRestrictOpen ResolutionInvariantExt RestrictEmptyTower
+  InvDomainCompanion InvDomainRebase
 
 variable {X : CMfd.{u} n}
 
@@ -310,6 +291,40 @@ theorem restrictEquiv_companionOf_rebase (hn : 0 < n) {k : ℕ} {𝔪 : MarkedId
   rw [← pullback_val_companionOf hn hdomT.isWellFormed hdomT.isNonzeroAlongAt (openPreimage T W) o,
     ← pullback_val_companionOf hn h.isWellFormed h.isNonzeroAlongAt W o] at hK
   exact hK
+
+variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+/-- **The companion ideal, re-based** (the form the general step uses to compare nearby points): for `𝔪` in the domain
+(`n > 0`, `o ≥ 1`), `T` a multiple test blow-up of `𝔪` whose centres miss the open `W`, and a resolution invariant `R` in
+dimension `≤ k`, write `𝓞₀ = 𝓞(𝔪, o)|_W` (formed at the first stage) and `𝓞₁ = 𝓞(𝔪_T, o)|_{T⁻¹W}` (formed at the last
+stage).  If `T|_W T₁` is a canonical segment of `𝓞₀`, then `𝓞₁` lies in the domain, `T₁` is a canonical segment of it,
+its transforms along `T₁` lie in the domain, and the values of `𝓞₀` along `T|_W T₁` are those of `𝓞₁` along `T₁` on the
+cosupport. -/
+theorem companionOf_rebase (hn : 0 < n) (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) {o : ℕ} (ho : 1 ≤ o) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T)
+    (W : Opens X) (hW : CentresAvoid W T) {Z : CMfd.{u} n}
+    (T₁ : BlowupTower (CMfd.of (n := n) (openPreimage T W)) Z)
+    (hcan : IsCanonical (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o))
+      (R.inv (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o))) ((restrict W T).append T₁)) :
+    IsInvDomain k (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+        (companionOf n (geoTransformAlong 𝔪 T) o)) ∧
+      IsCanonical (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y) (companionOf n (geoTransformAlong 𝔪 T) o))
+        (R.inv (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+          (companionOf n (geoTransformAlong 𝔪 T) o))) T₁ ∧
+      IsInvDomain k (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+        (companionOf n (geoTransformAlong 𝔪 T) o)) T₁) ∧
+      ∀ z ∈ (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o))
+          ((restrict W T).append T₁)).cosupp,
+        R.inv (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o)) ((restrict W T).append T₁) z =
+          R.inv (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+            (companionOf n (geoTransformAlong 𝔪 T) o)) T₁ z := by
+  have he : IsEmptyTower (restrict W T) := (isEmptyTower_restrict_iff W T).mpr hW
+  have hEq := restrictEquiv_companionOf_rebase hn h ho T hT W hW
+  have hdom := isInvDomain_pullback_val_companionAlong hn h W ho
+  have hdomT := InvDomainTowerAlong.isInvDomain_geoTransformAlong h T hT
+  have hcoh := (isInvDomain_pullback_val_companionAlong hn hdomT (openPreimage T W) ho).isWellFormed.isCoherent
+  obtain ⟨h1, h2, h3⟩ := inv_rebase (X := CMfd.of (n := n) W) R hdom (restrict W T) he hEq hcoh T₁ hcan
+  exact ⟨h1, h2, isInvDomain_of_isCanonical R h1 T₁ h2, h3⟩
 
 end Tower
 

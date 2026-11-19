@@ -1,23 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ConstantRankSubmanifold
 import Hironaka.Analytic.HolomorphicGenericRank
 import Hironaka.Analytic.GermParametrizationData
 import Hironaka.Analytic.HolomorphicZeroSetThin
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.HolomorphicConstantRank
+
 set_option autoImplicit false
 
 /-!
 # Manifold pieces of a parametrized irreducible germ
 
-Let `A ⊆ ℂⁿ` carry parametrization data `P` of dimension `d` (Noether position, projection `π` onto the first `d`
-coordinates) with parametrizing sets `S` on the polydisc `Δ`.
+Blueprint `rem:finite-fibre-piece` (Demailly, *Complex analytic and differential geometry*,
+II.4.19, used in II.8).  Let `A ⊆ ℂⁿ` carry parametrization data `P` of dimension `d` (Noether
+position, projection `π` onto the first `d` coordinates) with parametrizing sets `S` on the
+polydisc `Δ`.
 
 * `finite_fibre_ball`: EVERY fibre of `π` on `A ∩ ball 0 rad` is finite (a
   point over `x` has its coordinates `z_k`, `k ≥ d`, among the roots of the monic `Q_k(x, ·)`).
@@ -42,7 +36,8 @@ noncomputable section
 
 namespace Hironaka.FiniteFibrePiece
 
-open Hironaka.RegularLocusDense GermParametrizationData HolomorphicConstantRank HolomorphicGenericRank ConstantRankSubmanifold
+open Hironaka.RegularLocusDense GermParametrizationData HolomorphicConstantRank
+  HolomorphicGenericRank ConstantRankSubmanifold
 
 variable {n : ℕ}
 

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalGradedAlgebra
 import Mathlib.Algebra.Module.Torsion.Basic
 
@@ -253,7 +248,6 @@ theorem planeQuotientAlgEquiv_mk (d t : ℕ) (r : HolGerm (ComplexModel (d+t))) 
   exact quotientKerAlgEquivOfEq_mk ℂ (normalIdeal d t) (planeTrace d t)
     (normalIdeal_eq_ker_planeTrace d t) (planeTrace_surjective d t) r
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The actual trace decomposition, not a desired scalar dictionary, gives the difference in J. -/
 theorem original_minus_tangentTrace_mem (d t : ℕ) (r : HolGerm (ComplexModel (d+t))) :
     r - tangentPullback d t (planeTrace d t r) ∈ normalIdeal d t := by

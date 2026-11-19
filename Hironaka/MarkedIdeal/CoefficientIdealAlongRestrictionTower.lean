@@ -1,38 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
 import Hironaka.MarkedIdeal.CoefficientIdealAlongRestriction
 import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The coefficient ideal along a submanifold, restricted to a submanifold, along multiple test blow-ups
 
-Sources: Włodarczyk 2005, Lemmas `le:cf` and `le:S` (1) and the inclusion `⊆` of (2); GGT 2008, Lemma 5.6.3 and
-Proposition 5.6.4 (1)--(2), for a marked ideal `(M, N, E, 𝔞, d)` on a closed submanifold `N` and a closed
-submanifold `S ⊆ N`. The along-`N` form of `CoefficientIdealRestriction.restrict_tower` / `coeff_restrict_tower` (`N
-= M`).
+Hironaka phase H3 (TN23-ENVELOPES): the tower form along `N` of the H4 requirement node `hir:coefficient-restriction`
+(Step 1a of `hir:maximal-order-step` inside `N`), claimed on I-0981 C-0053; blueprint `mc:restrict-tower-along`,
+`mc:coefficient-restriction-tower-along` (`blueprint/src/maximal-contact.tex`).  Sources: Włodarczyk 2005, Lemmas `le:cf` and
+`le:S` (1) and the inclusion `⊆` of (2); GGT 2008, Lemma 5.6.3 and Proposition 5.6.4 (1)--(2), for a marked ideal
+`(M, N, E, 𝔞, d)` on a closed submanifold `N` and a closed submanifold `S ⊆ N`.  The along-`N` form of
+`CoefficientIdealRestriction.restrict_tower` / `coeff_restrict_tower` (`N = M`).
 
 * `geoTransform_withN_restrictEquiv_along` (`le:cf`, one blowup, along `N`): for `S ⊆ N` and an admissible centre
   `C ⊆ S`, the transform of `𝔟|_S` is restricted-equivalent to the restriction of the transform of `𝔟` to the strict
@@ -43,8 +24,13 @@ submanifold `S ⊆ N`. The along-`N` form of `CoefficientIdealRestriction.restri
   `𝔪` with centres in the strict transforms of `S`, `T` is one of `𝓒_N(𝔪)|_S`, `[𝓒_N(𝔪)|_S]_T ≃ 𝓒_N(𝔪)_T|_{S_T}`, and
   `supp(𝔪_T) ∩ S_T ⊆ supp[𝓒_N(𝔪)|_S]_T`.
 
-Not here: the reverse inclusion `supp[𝓒_N(𝔪)|_S]_T ⊆ supp(𝔪_T)` for `T` nonempty (`le:S` (2) in full and (3) along
-`N`; at `T = refl` it is `CoefficientIdealAlongRestriction.cosupp_coeffMarkedAlong_withN`).
+Not here: the reverse inclusion `supp[𝓒_N(𝔪)|_S]_T ⊆ supp(𝔪_T)` for `T` nonempty (`le:S` (2) in full and (3) along `N`;
+at `T = refl` it is `CoefficientIdealAlongRestriction.cosupp_coeffMarkedAlong_withN`).  For `N = M` it is
+`CoefficientRestrictionTower.cosupp_coeff_withN_tower` (the normal-derivative invariant `GoodAt`, in flat charts of `S_T` in
+`M`); along `N` the invariant has to be carried in flat charts of the pair `S_T ⊆ N_T`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -54,7 +40,10 @@ universe u
 
 namespace Hironaka.CoefficientIdealAlongRestrictionTower
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder IdealWeightPowers RestrictedIdealWeight BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal BlowupStrictSubmanifold HomogenizedIdealAlong HomogenizedIdealAlongTower CoefficientIdealRestriction
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder IdealWeightPowers
+  RestrictedIdealWeight BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealOperationsAlong
+  MarkedIdealOperationsAlong.MarkedIdeal BlowupStrictSubmanifold HomogenizedIdealAlong HomogenizedIdealAlongTower
+  CoefficientIdealRestriction
 open HomogenizedGlueingTower (strictAlong)
 
 noncomputable section

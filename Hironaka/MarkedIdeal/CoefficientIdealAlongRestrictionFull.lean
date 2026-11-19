@@ -1,60 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.NormalDerivativeAlong
 import Hironaka.MarkedIdeal.CoefficientIdealAlongRestrictionTower
 import Hironaka.MarkedIdeal.CoefficientRestrictionTower
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFibreDirection
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupFunctionTransform
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdeal
-import Hironaka.MarkedIdeal.CoefficientIdealAlongRestriction
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.MarkedIdeal.NormalDerivativeChart
-import Hironaka.MarkedIdeal.NormalDerivativeMonomial
-import Hironaka.MarkedIdeal.NormalTaylorOrder
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The restricted coefficient ideal along a submanifold, along multiple test blow-ups: the full statement
 
-The along-`N` form of `CoefficientRestrictionTower` (`N = M`).
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0055: Włodarczyk's Lemma `le:S` (2)--(3) along a submanifold `N`
+(GGT 2008, Proposition 5.6.4), the tower form along `N` of the H4 requirement node `hir:coefficient-restriction` (Step 1a of
+`hir:maximal-order-step` inside `N`); blueprint `mc:transform-along-pullback`, `mc:normal-coefficient-invariant-along`,
+`mc:normal-coefficient-step-along`, `mc:coefficient-restriction-full-along` (`blueprint/src/maximal-contact.tex`).  The
+along-`N` form of `CoefficientRestrictionTower` (`N = M`).
 
 For `𝔪 = (X, N, E, 𝔞, μ)` with `N` a closed submanifold, `𝔞` coherent, `μ ≥ 1`, a closed submanifold `S ⊆ N` and a multiple
 test blow-up `T` of `𝔪` with centres in the strict transforms of `S`:
@@ -78,6 +36,9 @@ transform (`mem_geoTransform_of_mem_pullback`); off the centre the transform is 
 (`isInSpanOnAt_pullback_of_mem_geoTransform_of_notMem`); over the centre, for a local equation `l` of the exceptional
 divisor, `l^d 𝔞' ⊆ π^*𝔞` on `N'` (`isInSpanOnAt_pow_mul_of_mem_geoTransform`) and every `g ∈ 𝔞` has `g ∘ π = l^d h'` on
 `N'` with `h' ∈ 𝔞'` (`exists_mem_geoTransform_eq_pow_mul`, from the Hadamard bridge along `N`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter Metric
@@ -87,7 +48,11 @@ universe u
 
 namespace Hironaka.CoefficientIdealAlongRestrictionFull
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder IdealWeightPowers BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal CoefficientIdeal CoefficientIdealRestriction HomogenizedIdealAlong HomogenizedIdealAlongTower CoefficientIdealAlongRestrictionTower NormalTaylorOrder NormalDerivativeChart NormalDerivativeMonomial NormalDerivativeAlong BlowupStrictSubmanifold BlowupFunctionTransform RelativePrincipalizationSpan
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder IdealWeightPowers
+  BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal
+  CoefficientIdeal CoefficientIdealRestriction HomogenizedIdealAlong HomogenizedIdealAlongTower
+  CoefficientIdealAlongRestrictionTower NormalTaylorOrder NormalDerivativeChart NormalDerivativeMonomial
+  NormalDerivativeAlong BlowupStrictSubmanifold BlowupFunctionTransform RelativePrincipalizationSpan
 open HomogenizedGlueingTower (strictAlong strictAlong_step)
 
 noncomputable section

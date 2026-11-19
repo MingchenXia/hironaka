@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalDiscreteFullCutCentres
 import Hironaka.Resolution.HironakaActualLocallyFiniteHistoryComparison
 
@@ -25,7 +20,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   ResolutionDriver ResolutionInvariantDriver CanonicalCentres InvDomainTowerAlong
   HironakaOriginalDiscreteFullCutCentres HironakaLocallyFiniteResolutionSequence
   HironakaActualLocallyFiniteHistoryComparison TowerPreimageCompact
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical countCentresMeeting)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical countCentresMeeting)
 variable {n k : ℕ} {X : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ]
 
 /-- Genuine actual next maps retain the whole selected original-cut centre. -/

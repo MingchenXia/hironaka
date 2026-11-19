@@ -1,38 +1,24 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.DerivativeIdeal
+import Hironaka.MarkedIdeal.MaximalContact
 import Hironaka.Blowup.SimultaneousNormalCrossings
 import Mathlib.Geometry.Manifold.MFDeriv.NormedSpace
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Tangent directions along a submanifold and hypersurfaces of maximal contact inside it
 
-Sources: Włodarczyk 2005, §2.7 (tangent directions, Giraud), applied on the submanifold `N` of a marked ideal `(M,
-N, E, 𝔞, μ)` with the derivative ideals `𝓓_N` along `N` (`DerivativeIdealAlong.derivIdealAlong`); Bierstone--Milman
-2008, §3 (maximal contact on `N`).
+Hironaka phase H3 (TN23-ENVELOPES): the single-stage part of item (3) of the calculus along a submanifold
+(`hir:along-calculus` in `blueprint/src/hironaka.tex`, claimed on I-0981 C-0038); blueprint
+`mc:tangent-direction-along`, `mc:tangent-direction-along-exists`, `mc:contact-hypersurface-along`
+(`blueprint/src/maximal-contact.tex`).  Sources: Włodarczyk 2005, §2.7 (tangent directions, Giraud), applied on the
+submanifold `N` of a marked ideal `(M, N, E, 𝔞, μ)` with the derivative ideals `𝓓_N` along `N`
+(`DerivativeIdealAlong.derivIdealAlong`); Bierstone--Milman 2008, §3 (maximal contact on `N`).
 
-* `IsTangentDirectionAlong N 𝔞 μ U u`: `u` is a germ of `𝓓_N^{μ-1}(𝔞)` at every point of the open set `U`, and at
-  each of its zeros in `U` some holomorphic vector field tangent to `N` has `ξ(u) ≠ 0` (the restriction `u|_N` has
-  nonvanishing differential there).
+* `IsTangentDirectionAlong N 𝔞 μ U u`: `u` is a germ of `𝓓_N^{μ-1}(𝔞)` at every point of the open set `U`, and at each
+  of its zeros in `U` some holomorphic vector field tangent to `N` has `ξ(u) ≠ 0` (the restriction `u|_N` has nonvanishing
+  differential there).  For `N = M` it is `MaximalContact.IsTangentDirection` (`isTangentDirectionAlong_univ_iff`).
 * `IsTangentDirectionAlong.cosupport_inter_subset`: `cosupp(𝔞|_N, μ) ∩ U ⊆ V(u)` (any `N`, `μ ≥ 1`).
 * `exists_isTangentDirectionAlong`: for `𝔞` coherent, `N` a closed submanifold and `x ∈ cosupp(𝔞|_N, μ)` with
   `ord_x(𝔞|_N) ≤ μ` (maximal order AT `x`), there is a tangent direction along `N` on a neighbourhood of `x`.  It is a
@@ -47,6 +33,9 @@ N, E, 𝔞, μ)` with the derivative ideals `𝓓_N` along `N` (`DerivativeIdeal
 
 Not here: the behaviour along multiple test blow-ups (the cosupports stay in the strict transforms of `V(u) ∩ N`), which
 needs the transforms along `N` (item (2) of `hir:along-calculus`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -55,7 +44,12 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.TangentDirectionAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong Hironaka.BlowupFlatCoordinates Hironaka.DerivativeIdealAlongCoherent Hironaka.RelativePrincipalizationSpan Hironaka.SimultaneousNormalCrossings Hironaka.BlowupSNCTransform Hironaka.BlowupStrictIdeal Hironaka.BlowupStrictSubmanifold
+open Hironaka.GermIdealOrder Hironaka.DerivativeIdeal
+  Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong
+  Hironaka.BlowupFlatCoordinates Hironaka.DerivativeIdealAlongCoherent
+  Hironaka.RelativePrincipalizationSpan Hironaka.SimultaneousNormalCrossings
+  Hironaka.BlowupSNCTransform Hironaka.BlowupStrictIdeal
+  Hironaka.BlowupStrictSubmanifold
 
 noncomputable section
 
@@ -100,6 +94,33 @@ theorem IsTangentDirectionAlong.cosupport_inter_subset (h𝔞 : ∀ x g, 𝔞.me
     (hμ : 1 ≤ μ) {U : Set M} {u : M → ℂ} (hu : IsTangentDirectionAlong N 𝔞 μ U u) :
     cosupport n N 𝔞 μ ∩ U ⊆ {x | u x = 0} :=
   fun x hx => apply_eq_zero_of_mem_cosupport h𝔞 hμ hx.1 (hu.mem x hx.2)
+
+/-- The derivative along the field with constant coefficients `v` is the partial derivative `∂_v`. -/
+theorem fieldDeriv_const (e : ComplexChart n M) (v : ComplexModel n) (f : M → ℂ) (p : M) :
+    fieldDeriv e (fun m _ => v m) f p = chartDeriv e v f p := by
+  simp only [fieldDeriv, chartDeriv]
+  conv_rhs => rw [← sum_smul_single v]
+  rw [map_sum]
+  exact Finset.sum_congr rfl fun m _ => by rw [map_smul, smul_eq_mul]
+
+/-- **For `N = M` a tangent direction along `N` is a tangent direction** (`MaximalContact.IsTangentDirection`). -/
+theorem isTangentDirectionAlong_univ_iff (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} {U : Set M}
+    {u : M → ℂ} : IsTangentDirectionAlong univ 𝔞 μ U u ↔ MaximalContact.IsTangentDirection 𝔞 μ U u := by
+  constructor
+  · rintro ⟨hU, hmem, hmult⟩
+    refine ⟨hU, fun x hx => ?_, fun x hx hux => ?_⟩
+    · rw [← iterDerivIdealAlong_univ h𝔞]
+      exact hmem x hx
+    · obtain ⟨e, ξ, hξ, hne⟩ := hmult x hx hux
+      obtain ⟨m, -, hm⟩ := Finset.exists_ne_zero_of_sum_ne_zero hne
+      exact ⟨e, EuclideanSpace.single m 1, hξ.mem_source, right_ne_zero_of_mul hm⟩
+  · rintro ⟨hU, hmem, hmult⟩
+    refine ⟨hU, fun x hx => ?_, fun x hx hux => ?_⟩
+    · rw [iterDerivIdealAlong_univ h𝔞]
+      exact hmem x hx
+    · obtain ⟨e, v, hxe, hne⟩ := hmult x hx hux
+      exact ⟨e, fun m _ => v m, isTangentField_univ hxe fun m => holomorphicAt_const _,
+        by rw [fieldDeriv_const]; exact hne⟩
 
 /-! ### Existence of tangent directions along `N` -/
 

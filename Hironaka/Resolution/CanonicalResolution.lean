@@ -1,41 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Blowup.BlowupUniqueness
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The canonical resolution of marked ideals
 
-Sources: Włodarczyk 2005 (`hiron.tex`), Theorem 1.0.1 / Proposition `pr:resol` (the canonical resolution: blow up
-the maximum locus of the invariant until the cosupport is empty; compatibility with open embeddings and
-biholomorphisms); Bierstone--Milman 2008 (functoriality).
+Blueprint `hir:canonical-resolution` (`blueprint/src/hironaka.tex`, Hironaka phase H4).  Sources: Włodarczyk 2005 (`hiron.tex`),
+Theorem 1.0.1 / Proposition `pr:resol` (the canonical resolution: blow up the maximum locus of the invariant until the cosupport is
+empty; compatibility with open embeddings and biholomorphisms); Bierstone--Milman 2008 (functoriality).
 
-Let `R` be a resolution invariant in dimension `≤ k` (`ResolutionInvariantSeq.ResolutionInvariant`), e.g. the
-canonical one `CanonicalCentres.canonicalInvariant n` in dimension `≤ n`. A **canonical resolution** of a marked
-ideal `𝔪` of the domain is a canonical segment of `R.inv 𝔪` without empty centres
-(`ResolutionDriver.IsCanonicalSegment`: every centre is the nonempty maximum locus of the invariant on the
-cosupport) which is a resolution.
+Let `R` be a resolution invariant in dimension `≤ k` (`ResolutionInvariantSeq.ResolutionInvariant`, human decision I-1139 (b)), e.g.
+the canonical one `CanonicalCentres.canonicalInvariant n` in dimension `≤ n`.  A **canonical resolution** of a marked ideal `𝔪` of
+the domain is a canonical segment of `R.inv 𝔪` without empty centres (`ResolutionDriver.IsCanonicalSegment`: every centre is the
+nonempty maximum locus of the invariant on the cosupport) which is a resolution.
 
 ## Main results
 
@@ -52,6 +30,9 @@ cosupport) which is a resolution.
   `𝔪|_U` (its centres empty or maximum loci); (3) for every biholomorphism `Φ : X' ≅ X`, every canonical resolution of `Φ^*𝔪` is
   isomorphic to `T` over `Φ` (stage-by-stage biholomorphisms commuting with the blowups);
 * `canonicalResolution_canonicalInvariant`: the same for the canonical invariant in dimension `≤ n`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -62,7 +43,10 @@ universe u v
 namespace Hironaka.CanonicalResolution
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.ResolutionInvariantSeq
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.BlowupTowerIsomorphism
+  Hironaka.MarkedIdealRestrictOpen Hironaka.ResolutionInvariantSeq
 open Hironaka.MarkedIdealBiholomorphism.MarkedIdeal (pullback)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus IsCanonicalSegment isCanonicalSegment_step_iff)

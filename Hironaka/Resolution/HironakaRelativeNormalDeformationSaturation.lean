@@ -1,11 +1,6 @@
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 import Hironaka.Resolution.HironakaRelativeNormalCoherentSaturation
@@ -117,7 +112,6 @@ theorem originalDeformationIdeal_isCoherent (d t : ℕ)
     (GermIdealPullbackCalculus.isCoherent_pullback (deformationProjection d t).contMDiff hI)
     (deformationEquationIdeal_isCoherent d t)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- True original coherent finite spans at an ARBITRARY actual Euclidean point. -/
 theorem germIdeal_finitely_generated_at {n : ℕ}
     (I : GermIdeal n (ComplexModel n)) (hI : I.IsCoherent) (x : ComplexModel n) :
@@ -135,7 +129,6 @@ theorem germIdeal_finitely_generated_at {n : ℕ}
     exact ⟨hg.mono (fun _ h => h.mdifferentiableAt),a,
       fun i => (ha i).mono (fun _ h => h.mdifferentiableAt),he⟩
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Actual finite analytic presentations at ALL points give genuine sheaf coherence. -/
 theorem finitely_generated_at_isCoherent {n : ℕ} (I : GermIdeal n (ComplexModel n))
     (hI : ∀ x, IdealFGAt I.mem x) : I.IsCoherent := by

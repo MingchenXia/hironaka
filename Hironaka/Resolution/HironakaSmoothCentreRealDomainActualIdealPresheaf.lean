@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothCentreRealDomainActualSheafStalk
 /-! Actual ideal section presheaves and their entire original colimit stalks.
 Complete four-node mathematics precedes code. Original coherent membership

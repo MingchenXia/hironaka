@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaMonomialAnalyticSuperlevels
 /-! Actual globally analytic historical starting-year thresholds for positive
 companions. Complete source-first mathematics preceded code. Internally coherent

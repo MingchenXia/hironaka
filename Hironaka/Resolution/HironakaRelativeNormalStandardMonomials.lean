@@ -33,11 +33,8 @@ Blueprint: `hironaka-relative-normal-standard-monomials-extension.tex`.
 set_option autoImplicit false
 open Set
 namespace Hironaka.HironakaRelativeNormalStandardMonomials
-open Hironaka
 noncomputable section
 variable {K : Type*} [Field K]
-
-attribute [local instance 2000] IsLocalRing.toNontrivial
 
 /-- Genuine Noetherian finite SUBSET extraction internally produces actual whole-ideal leading coverage. -/
 theorem exists_finite_actual_leading_generators (t : ℕ) (m : MonomialOrder (Fin t))

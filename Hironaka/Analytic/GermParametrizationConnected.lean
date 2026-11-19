@@ -1,22 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationDense
 import Hironaka.Analytic.GermParametrizationSets
 import Hironaka.Analytic.HypersurfaceComplementConnected
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.HolomorphicZeroSetThin
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Analytic.RiemannExtension
+
 set_option autoImplicit false
 
 /-!
 # The regular part of an irreducible germ is connected
+
+Blueprint `lag:regular-part-connected` (Demailly, *Complex analytic and differential
+geometry*, II.4.19).
 
 In adapted coordinates, with `ParametrizationData A` and its `SetsData`, let `g` be
 holomorphic near `0 ∈ ℂᵈ` and not identically zero.  On small polydiscs `Δ` the set

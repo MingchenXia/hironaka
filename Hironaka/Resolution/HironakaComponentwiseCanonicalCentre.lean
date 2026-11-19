@@ -1,8 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
+import Hironaka.Resolution.HironakaG8CompatibleLocalCentres
 import Hironaka.Resolution.HironakaOriginalCompactCosupportGlobalScheduler
 import Hironaka.Analytic.GrowingSeqTail
 import Mathlib.Topology.Connected.LocallyConnected
@@ -52,20 +48,18 @@ theorem preimage_parallelCentre {J : Type w} (U : J → Opens X)
     (hdisj : Pairwise (fun i j => Disjoint (U i : Set X) (U j : Set X))) (i : J) :
     (Subtype.val : openPreimage T (U i) → Y) ⁻¹' parallelCentre R M T U=
       localMaximum R M T (U i) := by
-  ext z
-  constructor
-  · intro hz
-    obtain ⟨j,y,hy,he⟩ := mem_iUnion.mp hz
-    have hij : i=j := by
+  have hc : ∀ (a b : J) (y : Y) (ha : y ∈ openPreimage T (U a))
+      (hb : y ∈ openPreimage T (U b)),
+      (⟨y,ha⟩ : openPreimage T (U a)) ∈ localMaximum R M T (U a) ↔
+      (⟨y,hb⟩ : openPreimage T (U b)) ∈ localMaximum R M T (U b) := by
+    intro a b y ha hb
+    have hab : a = b := by
       by_contra hne
-      have hyU : T.proj (y : Y) ∈ U j := y.property
-      rw [he] at hyU
-      exact disjoint_left.mp (hdisj hne) z.property hyU
-    subst j
-    have hyz : y=z := Subtype.ext he
-    simpa only [hyz] using hy
-  · intro hz
-    exact mem_iUnion.mpr ⟨i,z,hz,rfl⟩
+      exact disjoint_left.mp (hdisj hne) ha hb
+    subst b
+    rfl
+  exact HironakaG8CompatibleLocalCentres.preimage_compatibleCentre
+    (fun i => openPreimage T (U i)) (fun i => localMaximum R M T (U i)) hc i
 
 /-- Genuine local canonical maxima descend to a globally closed smooth admissible centre. -/
 theorem parallelCentre_admissible (hM : IsInvDomain k M) (hT : IsGeoTestTower M T)
@@ -75,18 +69,25 @@ theorem parallelCentre_admissible (hM : IsInvDomain k M) (hT : IsGeoTestTower M 
     (hcan : ∀ i, IsCanonical (MarkedIdeal.pullback (Subtype.val : U i → X) M)
       (R.inv (MarkedIdeal.pullback (Subtype.val : U i → X) M)) (restrict (U i) T)) :
     (geoTransformAlong M T).IsAdmissibleCentre (parallelCentre R M T U) := by
-  have hcoh := (InvDomainTowerAlong.isInvDomain_geoTransformAlong hM T hT).isWellFormed.isCoherent
-  apply isAdmissibleCentre_of_forall_exists_opens
-    (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcoh hg)
-  intro y
-  obtain ⟨i,hi⟩ := hcover (T.proj y)
-  refine ⟨openPreimage T (U i),hi,?_⟩
-  rw [preimage_parallelCentre R M T U hdisj i]
-  have hd := InvDomainTowerAlong.isInvDomain_pullback_val (U i) hM
-  have ht := R.isInvValue.isGeoTestTower_of_isCanonical hd (restrict (U i) T) (hcan i)
-  have ha := R.isInvValue.isAdmissibleCentre_maxLocus hd (restrict (U i) T) (hcan i) ht
-  simpa only [localMaximum,geoTransformAlong_restrict (U i) hM.isWellFormed.isClosedSubmanifold_N
-    hM.isWellFormed.isCoherent T hT] using ha
+  let V : J → Opens Y := fun i => openPreimage T (U i)
+  let C : ∀ i, Set (V i) := fun i => localMaximum R M T (U i)
+  have hc : ∀ (a b : J) (y : Y) (ha : y ∈ V a) (hb : y ∈ V b),
+      (⟨y,ha⟩ : V a) ∈ C a ↔ (⟨y,hb⟩ : V b) ∈ C b := by
+    intro a b y ha hb
+    change (⟨y,ha⟩ : openPreimage T (U a)) ∈ localMaximum R M T (U a) ↔
+      (⟨y,hb⟩ : openPreimage T (U b)) ∈ localMaximum R M T (U b)
+    rw [← preimage_parallelCentre R M T U hdisj a, ← preimage_parallelCentre R M T U hdisj b]
+    rfl
+  have hcover' : ∀ y : Y, ∃ i, y ∈ V i := fun y => hcover (T.proj y)
+  have hC : ∀ i, (MarkedIdeal.pullback (Subtype.val : V i → Y) (geoTransformAlong M T)).IsAdmissibleCentre (C i) := by
+    intro i
+    have hd := InvDomainTowerAlong.isInvDomain_pullback_val (U i) hM
+    have ht := R.isInvValue.isGeoTestTower_of_isCanonical hd (restrict (U i) T) (hcan i)
+    have ha := R.isInvValue.isAdmissibleCentre_maxLocus hd (restrict (U i) T) (hcan i) ht
+    simpa only [C,V,localMaximum,geoTransformAlong_restrict (U i) hM.isWellFormed.isClosedSubmanifold_N
+      hM.isWellFormed.isCoherent T hT] using ha
+  exact HironakaG8CompatibleLocalCentres.compatibleCentre_admissible (geoTransformAlong M T)
+    (InvDomainTowerAlong.isInvDomain_geoTransformAlong hM T hT).isWellFormed.isCoherent V C hcover' hc hC
 
 /-- A true global blowup advances all actual restricted canonical prefixes at once. -/
 theorem exists_parallel_canonical_refinement (hM : IsInvDomain k M) (hT : IsGeoTestTower M T)

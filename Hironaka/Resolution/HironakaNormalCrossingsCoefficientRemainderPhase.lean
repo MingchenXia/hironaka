@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.CoefficientRestrictionTowerIffOriginalExact
 import Hironaka.Resolution.HironakaOpenCarrierTestTowerExtension
 import Hironaka.Resolution.HironakaOriginalWholeContactRemainderDomain
 import Hironaka.Resolution.HironakaNormalCrossingsIntrinsicStratumCentre
@@ -36,7 +30,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaStepOneZeroContactRemainderExtension HironakaCoherentTransformExtension
   HironakaOpenCarrierTestTowerExtension CanonicalCentres HironakaAdmissibleSequence
   HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsMultiplicityStrata
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
 /-- All domain fields and the whole ORIGINAL open record are derived internally. -/

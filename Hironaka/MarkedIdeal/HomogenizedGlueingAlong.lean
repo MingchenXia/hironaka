@@ -1,49 +1,25 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HomogenizedIdealAlong
 import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupDerivativeIdeal
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.MarkedIdeal.CoefficientIdeal
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.MarkedIdeal.HomogenizedEquivalence
-import Hironaka.MarkedIdeal.HomogenizedIdeal
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The glueing lemma along a submanifold (one stage)
 
-Sources: Włodarczyk 2005, Lemmas `le:homo0` / `le:homo` (the Glueing Lemma); Włodarczyk 2009 (GGT 2008), Lemma
-5.5.3; applied on the submanifold `N` of a marked ideal `(M, N, E, 𝔞, μ)` with the derivative ideals `𝓓_N` along `N`
-and the homogenized ideal `𝓗_N(𝔞)` of `HomogenizedIdealAlong`.
+Hironaka phase H3 (TN23-ENVELOPES): step (4c) of item (4) of the calculus along a submanifold (`hir:along-calculus` in
+`blueprint/src/hironaka.tex`, claimed on I-0981 C-0040 / C-0044); blueprint `mc:flat-change`, `mc:flat-coordinate-iterated`,
+`mc:glueing-inclusion-along`, `mc:homogenized-along-invariance`, `mc:coordinate-pair-along`, `mc:glueing-lemma-along`
+(`blueprint/src/maximal-contact.tex`).  Sources: Włodarczyk 2005, Lemmas `le:homo0` / `le:homo` (the Glueing Lemma);
+Włodarczyk 2009 (GGT 2008), Lemma 5.5.3; applied on the submanifold `N` of a marked ideal `(M, N, E, 𝔞, μ)` with the
+derivative ideals `𝓓_N` along `N` and the homogenized ideal `𝓗_N(𝔞)` of `HomogenizedIdealAlong`.
 
-The analytic glueing lemma for `N = M` compares two tangent directions `u`, `v` through a coordinate change `φ` that
-replaces the coordinate `u` by `v`. Along `N` the coordinates must also flatten `N`:
+The analytic glueing lemma for `N = M` (`HomogenizedGlueing.glueing_lemma`) compares two tangent directions `u`, `v` through
+a coordinate change `φ` that replaces the coordinate `u` by `v`.  Along `N` the coordinates must also flatten `N`:
 
-* **Flat charts.** For a flat chart `Θ` of `N` at `x` (a local biholomorphism `Θ` of `ℂⁿ` near `e x` with `N = (Θ ∘
-  e)⁻¹(ℂᵏ × 0)` near `x`), the coordinate field `∂/∂Θ_l` (`l < k`) is `GiraudAlong.flatField Θ eₗ`, tangent to `N`;
-  hence for `F` with `F ∘ Θ ∘ e ∈ 𝔞_x`, `(∂ₗʲ F) ∘ Θ ∘ e ∈ 𝓓_N^j(𝔞)_x` (`iterDeriv_comp_flatMap_mem`).
+* **Flat charts.**  For a flat chart `Θ` of `N` at `x` (a local biholomorphism `Θ` of `ℂⁿ` near `e x` with
+  `N = (Θ ∘ e)⁻¹(ℂᵏ × 0)` near `x`), the coordinate field `∂/∂Θ_l` (`l < k`) is TN-CLASSICAL's `GiraudAlong.flatField Θ eₗ`,
+  tangent to `N`; hence for `F` with `F ∘ Θ ∘ e ∈ 𝔞_x`, `(∂ₗʲ F) ∘ Θ ∘ e ∈ 𝓓_N^j(𝔞)_x` (`iterDeriv_comp_flatMap_mem`).
 * **The coordinate change of a flat chart** (`flatChange`, an instance of `HomogenizedIdeal.CoordinateChange` with
   `W = Θ ∘ e`): `φ(p) = (Θ ∘ e)⁻¹(Θ(e p) + h(p) eᵢ)`.  For `h ∈ T_N(𝔞)_x` with `h(x) = 0` and a tangential index `i < k`
   the **glueing inclusion along `N`** holds: `f ∘ φ ∈ 𝓗_N(𝔞)_x` for `f ∈ 𝔞_x` (`comp_mem_homogenizedIdealAlong`, the convergent
@@ -54,9 +30,16 @@ replaces the coordinate `u` by `v`. Along `N` the coordinates must also flatten 
   `i`-th coordinate) keeps the normal coordinates `ψ_r` (`r ≥ k`) and has `u` as `i`-th coordinate; it is a new flat chart of
   `N` at `x` when `d(u ∘ ψ⁻¹)(0) w ≠ 0` (`exists_flatChart_alongCoords`).  For two tangent directions `u`, `v` along `N` a
   common `w` exists (both restricted differentials are nonzero on `ℂᵏ × 0`).
+* **`glueing_lemma_along`** (Włodarczyk's Glueing Lemma (1)--(3) along `N`, analytic form): for tangent directions `u`, `v` of
+  `(𝔞|_N, μ)` along a closed submanifold `N` at `x ∈ cosupp(𝔞|_N, μ)` (`𝔞` coherent, `μ ≥ 1`) there are `φ, ψ : M → M`,
+  holomorphic and mutually inverse near `x`, fixing `x`, with `φ^*𝓗_N(𝔞) = 𝓗_N(𝔞)` and `ψ^*𝓗_N(𝔞) = 𝓗_N(𝔞)` near `x`,
+  `u ∘ φ = v` and `v ∘ ψ = u` near `x`, `φ = ψ = id` on `cosupp(𝔞|_N, μ)` near `x`, and **`φ⁻¹N = N = ψ⁻¹N` near `x`**.
 
 Not here: the statements along multiple test blow-ups (step (4d), after the transforms along `N`, item (2) of
 `hir:along-calculus`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -67,7 +50,13 @@ universe u
 namespace Hironaka.HomogenizedGlueingAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong Hironaka.DerivativeIdealAlongCoherent Hironaka.TangentDirectionAlong Hironaka.IdealWeightPowers Hironaka.HomogenizedEquivalence Hironaka.HomogenizedIdealAlong Hironaka.HolomorphicTaylorTail Hironaka.BlowupFlatCoordinates Hironaka.HadamardBridgeAlong Hironaka.RelativePrincipalizationSpan
+open Hironaka.GermIdealOrder Hironaka.DerivativeIdeal
+  Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong
+  Hironaka.DerivativeIdealAlongCoherent Hironaka.TangentDirectionAlong
+  Hironaka.IdealWeightPowers Hironaka.HomogenizedEquivalence
+  Hironaka.HomogenizedIdealAlong Hironaka.HolomorphicTaylorTail
+  Hironaka.BlowupFlatCoordinates Hironaka.HadamardBridgeAlong
+  Hironaka.RelativePrincipalizationSpan
 
 noncomputable section
 
@@ -745,6 +734,105 @@ theorem eventually_pullback_iff_of_inverse {𝔟 : GermIdeal n M} (h𝔟 : 𝔟.
     (isInSpanAt_of_eq_mul ⟨g ∘ d'.coordMap, hgψ, rfl⟩ hgh (holomorphicAt_const 1) ?_)
   filter_upwards [hyinv] with p hp
   simp [hp]
+
+/-! ### The glueing lemma along `N` -/
+
+/-- **The Glueing Lemma along a submanifold** (Włodarczyk 2005, Lemma `le:homo` (1)--(3), and GGT 2008 Lemma 5.5.3, on the
+submanifold `N`; analytic form).  Let `𝔞` be coherent, `N` a closed submanifold, `μ ≥ 1`, and `u`, `v` tangent directions of
+`(𝔞|_N, μ)` along `N` on open sets containing `x ∈ cosupp(𝔞|_N, μ)`.  There are `φ, ψ : M → M`, holomorphic near `x`, inverse
+to each other near `x`, fixing `x`, such that near `x`
+1. `φ^*𝓗_N(𝔞) = 𝓗_N(𝔞)` and `ψ^*𝓗_N(𝔞) = 𝓗_N(𝔞)`;
+2. `u ∘ φ = v` and `v ∘ ψ = u`;
+3. `φ` and `ψ` fix `cosupp(𝔞|_N, μ)` pointwise;
+4. `φ⁻¹N = N` and `ψ⁻¹N = N`. -/
+theorem glueing_lemma_along {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {N : Set M} (hN : IsClosedSubmanifold n N)
+    {μ : ℕ} (hμ : 1 ≤ μ) {x : M} (hx : x ∈ cosupport n N 𝔞 μ) {U U' : Set M} {u v : M → ℂ}
+    (hu : IsTangentDirectionAlong N 𝔞 μ U u) (hxU : x ∈ U)
+    (hv : IsTangentDirectionAlong N 𝔞 μ U' v) (hxU' : x ∈ U') :
+    ∃ φ ψ : M → M, φ x = x ∧ ψ x = x ∧
+      (∀ᶠ p in 𝓝 x, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) φ p ∧
+        MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ p) ∧
+      (∀ᶠ p in 𝓝 x, ψ (φ p) = p ∧ φ (ψ p) = p) ∧
+      (∀ᶠ y in 𝓝 x, ∀ g, (GermIdeal.pullback (m := n) φ (homogenizedIdealAlong N 𝔞 μ)).mem y g ↔
+        (homogenizedIdealAlong N 𝔞 μ).mem y g) ∧
+      (∀ᶠ y in 𝓝 x, ∀ g, (GermIdeal.pullback (m := n) ψ (homogenizedIdealAlong N 𝔞 μ)).mem y g ↔
+        (homogenizedIdealAlong N 𝔞 μ).mem y g) ∧
+      (∀ᶠ p in 𝓝 x, u (φ p) = v p ∧ v (ψ p) = u p) ∧
+      (∀ᶠ y in 𝓝 x, y ∈ cosupport n N 𝔞 μ → φ y = y ∧ ψ y = y) ∧
+      (∀ᶠ p in 𝓝 x, (φ p ∈ N ↔ p ∈ N) ∧ (ψ p ∈ N ↔ p ∈ N)) := by
+  classical
+  have hhol : ∀ y g, 𝔞.mem y g → HolomorphicAt n g y := fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+  have hT := isCoherent_tangentIdealAlong h𝔞 hN μ
+  have hH := isCoherent_homogenizedIdealAlong h𝔞 hN μ
+  have hxN : x ∈ N := hx.1
+  have hux : (tangentIdealAlong N 𝔞 μ).mem x u := hu.mem x hxU
+  have hvx : (tangentIdealAlong N 𝔞 μ).mem x v := hv.mem x hxU'
+  have hu0 : u x = 0 := apply_eq_zero_of_mem_cosupport hhol hμ hx hux
+  have hv0 : v x = 0 := apply_eq_zero_of_mem_cosupport hhol hμ hx hvx
+  have huh : ∀ y ∈ U, HolomorphicAt n u y := fun y hy =>
+    holomorphicAt_of_mem_iterDerivIdealAlong hhol (μ - 1) y u (hu.mem y hy)
+  have hvh : ∀ y ∈ U', HolomorphicAt n v y := fun y hy =>
+    holomorphicAt_of_mem_iterDerivIdealAlong hhol (μ - 1) y v (hv.mem y hy)
+  -- a flat chart of `N` at `x` and a common tangential direction
+  obtain ⟨k, hk⟩ := hN.2 x hxN
+  obtain ⟨Φ, hΦsrc, hΦx, hflat⟩ := exists_flatChart_of_regularAtDim hk
+  obtain ⟨w, i, hw, hi, hwi, hℓu, hℓv⟩ := exists_common_direction hΦsrc hflat hxN (huh x hxU) (hvh x hxU')
+    (hu.multiplicity_one x hxU hu0) (hv.multiplicity_one x hxU' hv0)
+  -- the two adapted flat charts
+  obtain ⟨Θu, hΘut, hΘu0, hΘu, hflatu⟩ :=
+    exists_flatChart_alongCoords hΦsrc hflat hΦx hw hi hwi hu.isOpen hxU huh hu0 hℓu
+  obtain ⟨Θv, hΘvt, hΘv0, hΘv, hflatv⟩ :=
+    exists_flatChart_alongCoords hΦsrc hflat hΦx hw hi hwi hv.isOpen hxU' hvh hv0 hℓv
+  have hAu : ∀ᶠ p in 𝓝 x, flatMap Θu p = alongCoords Φ w i u p := by
+    filter_upwards [(isOpen_flatDomain Θu).mem_nhds (mem_flatDomain_self Θu)] with p hp
+    exact (hΘu hp.1 hp.2).2
+  have hAv : ∀ᶠ p in 𝓝 x, flatMap Θv p = alongCoords Φ w i v p := by
+    filter_upwards [(isOpen_flatDomain Θv).mem_nhds (mem_flatDomain_self Θv)] with p hp
+    exact (hΘv hp.1 hp.2).2
+  have hrel1 : ∀ᶠ p in 𝓝 x, flatMap Θv p = flatMap Θu p + (v p - u p) • EuclideanSpace.single i 1 ∧
+      flatMap Θu p i = u p := by
+    filter_upwards [hAu, hAv] with p hpu hpv
+    exact ⟨by rw [hpu, hpv, alongCoords_sub], by rw [hpu, alongCoords_apply_self hwi]⟩
+  have hrel2 : ∀ᶠ p in 𝓝 x, flatMap Θu p = flatMap Θv p + (u p - v p) • EuclideanSpace.single i 1 ∧
+      flatMap Θv p i = v p := by
+    filter_upwards [hAu, hAv] with p hpu hpv
+    exact ⟨by rw [hpu, hpv, alongCoords_sub (u := v) (v := u)], by rw [hpv, alongCoords_apply_self hwi]⟩
+  -- the coordinate changes
+  have hhuv : HolomorphicAt n (fun p => v p - u p) x := GiraudAlong.holomorphicAt_sub (hvh x hxU') (huh x hxU)
+  have hhvu : HolomorphicAt n (fun p => u p - v p) x := GiraudAlong.holomorphicAt_sub (huh x hxU) (hvh x hxU')
+  have h0uv : (fun p => v p - u p) x = 0 := by show v x - u x = 0; rw [hu0, hv0, sub_zero]
+  have h0vu : (fun p => u p - v p) x = 0 := by show u x - v x = 0; rw [hu0, hv0, sub_zero]
+  set d := flatChange Θu hΘut _ hhuv h0uv i with hd
+  set d' := flatChange Θv hΘvt _ hhvu h0vu i with hd'
+  have hP1 := eventually_flatChange_pair hΘut hΘvt hflatu hflatv hhuv h0uv hhvu h0vu hΘu0 hΘv0 hrel1
+  have hP2 := eventually_flatChange_pair hΘvt hΘut hflatv hflatu hhvu h0vu hhuv h0uv hΘv0 hΘu0 hrel2
+  -- `φ^*𝓗_N(𝔞) ⊆ 𝓗_N(𝔞)` and `ψ^*𝓗_N(𝔞) ⊆ 𝓗_N(𝔞)` at `x`
+  have hcomp : ∀ g, (homogenizedIdealAlong N 𝔞 μ).mem x g →
+      (homogenizedIdealAlong N 𝔞 μ).mem x (g ∘ d.coordMap) := fun g hg =>
+    comp_mem_homogenizedIdealAlong_of_mem hΘut hflatu hhuv h0uv h𝔞 hN hi
+      (HomogenizedGlueing.sub_mem hT hvx hux) hg
+  have hcomp' : ∀ g, (homogenizedIdealAlong N 𝔞 μ).mem x g →
+      (homogenizedIdealAlong N 𝔞 μ).mem x (g ∘ d'.coordMap) := fun g hg =>
+    comp_mem_homogenizedIdealAlong_of_mem hΘvt hflatv hhvu h0vu h𝔞 hN hi
+      (HomogenizedGlueing.sub_mem hT hux hvx) hg
+  have hinv1 : ∀ᶠ p in 𝓝 x, d'.coordMap (d.coordMap p) = p := hP1.mono fun p hp => hp.2.1
+  have hinv2 : ∀ᶠ p in 𝓝 x, d.coordMap (d'.coordMap p) = p := hP2.mono fun p hp => hp.2.1
+  -- fixed points
+  have hfix : ∀ᶠ y in 𝓝 x, y ∈ cosupport n N 𝔞 μ → d.coordMap y = y ∧ d'.coordMap y = y := by
+    filter_upwards [hu.isOpen.mem_nhds hxU, hv.isOpen.mem_nhds hxU',
+      HomogenizedGlueing.eventually_coordMap_eq_self d, HomogenizedGlueing.eventually_coordMap_eq_self d']
+      with y hyU hyU' hy hy' hyc
+    have h0u : u y = 0 := apply_eq_zero_of_mem_cosupport hhol hμ hyc (hu.mem y hyU)
+    have h0v : v y = 0 := apply_eq_zero_of_mem_cosupport hhol hμ hyc (hv.mem y hyU')
+    exact ⟨hy (show v y - u y = 0 by rw [h0u, h0v, sub_zero]), hy' (show u y - v y = 0 by rw [h0u, h0v, sub_zero])⟩
+  refine ⟨d.coordMap, d'.coordMap, d.coordMap_self, d'.coordMap_self,
+    (HomogenizedGlueing.eventually_mdifferentiableAt_coordMap d).and
+      (HomogenizedGlueing.eventually_mdifferentiableAt_coordMap d'),
+    hinv1.and hinv2, eventually_pullback_iff_of_inverse hH d d' hcomp hcomp' hinv1,
+    eventually_pullback_iff_of_inverse hH d' d hcomp' hcomp hinv2,
+    (hP1.and hP2).mono fun p hp => ⟨hp.1.1, hp.2.1⟩, hfix,
+    (hP1.and hP2).mono fun p hp => ⟨hp.1.2.2, hp.2.2.2⟩⟩
 
 end
 

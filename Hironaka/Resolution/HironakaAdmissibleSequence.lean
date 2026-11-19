@@ -1,65 +1,29 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedExceptional
 import Hironaka.Analytic.MonomialCaseLocal
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.SingularLocus
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Coherence.CartanIrreducible
-import Hironaka.Invariant.CodimOneAdmissibleAlong
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.Resolution.FactorizationDomain
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Resolution.HironakaEmbeddedResolutionLocal
-import Hironaka.Resolution.HironakaFromSeqInvariant
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Resolution.HironakaPrincipalization
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.SmoothCentreLocus
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Admissible blowup sequences; principalization and embedded resolution with a compact singular set (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorems 1.6 and 1.10 (admissible blowups, the
-centres over `Sing X`, quasi-compactness only where the centres live); Kollár 2007, "Principalization II/III"
-(normal crossings of the centres with the accumulated divisor); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
+Blueprint `hir:admissible-sequence`, `hir:principalization-compact-support`, `hir:embedded-resolution-compact-support`
+(`blueprint/src/hironaka.tex`; TN.5, the review 57572af3 of the Hironaka strengthenings, items S5, S2, S3).  Sources:
+Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorems 1.6 and 1.10 (admissible blowups, the centres over
+`Sing X`, quasi-compactness only where the centres live); Kollár 2007, "Principalization II/III" (normal crossings of the
+centres with the accumulated divisor); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
 
-**Admissible blowup sequences.** `IsAdmissibleBlowupSequence n X E₀ F Y f E`: a finite composition `f: Y → X` of
-blowups whose every centre `C` (at a stage `f_j: Y_j → X` with accumulated divisor `E_j`) is a smooth centre having
-only normal crossings with `E_j` and lying over `F`; after the blowup `π` along `C` the divisor is `(closure (π⁻¹ (H
-\ C)))_{H ∈ E_j} ++ [π⁻¹ C]`, starting from `E₀`. It is what composing resolutions needs, and it records the two
-properties of the canonical resolution that the previous public statements did not export.
+**Admissible blowup sequences (S5).**  `IsAdmissibleBlowupSequence n X E₀ F Y f E`: a finite composition `f : Y → X` of
+blowups whose every centre `C` (at a stage `f_j : Y_j → X` with accumulated divisor `E_j`) is a smooth centre having only
+normal crossings with `E_j` and lying over `F`; after the blowup `π` along `C` the divisor is
+`(closure (π⁻¹ (H \ C)))_{H ∈ E_j} ++ [π⁻¹ C]`, starting from `E₀`.  It is what composing resolutions needs, and it records
+the two properties of the canonical resolution that the previous public statements did not export.
 
-**Compact support.** The canonical process needs a compact *cosupport*, not a compact base: the compact-cosupport
-driver of `MonomialCaseLocal` applies to the canonical invariant
-(`exists_isGeoResolution_isCanonical_of_isCompact`). Hence principalization on any complex manifold when only `Z(𝔞)`
-is compact, and embedded resolution when only `V` is compact, with the sequence admissible, the centres over `Z(𝔞)`
-(resp. over `V_sing`), and `Exc f = ⋃ E = f⁻¹(V_sing)`. The compact forms are the special case of a compact `X`.
+**Compact support (S2, S3).**  The canonical process needs a compact *cosupport*, not a compact base: the compact-cosupport
+driver of `MonomialCaseLocal` applies to the canonical invariant (`exists_isGeoResolution_isCanonical_of_isCompact`).  Hence
+principalization on any complex manifold when only `Z(𝔞)` is compact, and embedded resolution when only `V` is compact, with
+the sequence admissible, the centres over `Z(𝔞)` (resp. over `V_sing`), and `Exc f = ⋃ E = f⁻¹(V_sing)`.  The compact forms
+(H+2, H+1) are the special case of a compact `X`.
 
 ## Main results
 
@@ -70,6 +34,11 @@ is compact, and embedded resolution when only `V` is compact, with the sequence 
 * `exists_tower_embedded_of_isCanonical`: the first-centre argument from any canonical resolution of `(X, X, ∅, 𝓘_W, 1)`;
 * **`exists_principalization_of_isCompact`**, **`exists_embeddedResolution_of_isCompact`** and the compact-base corollaries
   `exists_principalization_admissible`, `exists_embeddedResolution_admissible`;
+* `exceptionalLocus_nonempty_of_singular`, `ne_nil_of_singular` (non-vacuity: a singular `V` needs exceptional points), and
+  `isNonzeroAlongAt_univ_iff_exists` (the hypothesis of principalization in elementary terms).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedExceptional` and `MonomialCaseLocal`
+only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -79,12 +48,18 @@ universe u v
 
 namespace Hironaka.HironakaAdmissibleSequence
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong
+  Hironaka.BlowupTowerTransforms
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus IsCanonicalSegment)
-open Hironaka.EmbeddedFromResolution (EmbeddingFields regularOpen regularAtDim_of_mem_regularOpen exists_first_centre mem_cosupp_iff_of_centresAvoid isInvDomain_vanishingIdeal_of_dim_lt isClosedConnectedSubmanifold_of_dim_eq)
-open Hironaka.HironakaEmbeddedResolutionLocal (strictTransform_of_centresAvoid mem_maxLocus_iff_of_centresAvoid_of_pureDim exceptionalDivisor_facts_of_centresAvoid subset_closure_inter_regularOpen)
+open Hironaka.EmbeddedFromResolution (EmbeddingFields regularOpen mem_regularOpen_iff
+  regularAtDim_of_mem_regularOpen exists_first_centre mem_cosupp_iff_of_centresAvoid isInvDomain_vanishingIdeal_of_dim_lt
+  isClosedConnectedSubmanifold_of_dim_eq)
+open Hironaka.HironakaEmbeddedResolutionLocal (strictTransform_of_centresAvoid
+  mem_maxLocus_iff_of_centresAvoid_of_pureDim exceptionalDivisor_facts_of_centresAvoid subset_closure_inter_regularOpen)
 
 noncomputable section
 
@@ -175,11 +150,11 @@ section Driver
 
 variable {Λ : Type v} [LinearOrder Λ] [WellFoundedLT Λ] {k : ℕ}
 
-/-- **A resolution invariant with well-ordered values resolves every marked ideal of its domain with compact cosupport,
-on any complex manifold, by a canonical segment**: the compact-cosupport driver
-`MonomialCaseLocal.exists_isGeoResolution_of_wellFounded_invariant_of_isCompact` applied to the invariant, whose
-properties (1)-(3) give the admissibility of the maximum locus, its upper semicontinuity and the drop of the
-maximum. -/
+/-- **A resolution invariant with well-ordered values resolves every marked ideal of its domain with compact cosupport, on any
+complex manifold, by a canonical segment** (`ResolutionInvariantSeq.exists_isGeoResolution_isCanonical` with a compact cosupport
+in place of a compact base): the compact-cosupport driver
+`MonomialCaseLocal.exists_isGeoResolution_of_wellFounded_invariant_of_isCompact` applied to the invariant, whose properties
+(1)-(3) give the admissibility of the maximum locus, its upper semicontinuity and the drop of the maximum. -/
 theorem exists_isGeoResolution_isCanonical_of_isCompact (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v} n k Λ)
     {X : CMfd.{u} n} {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) (hK : IsCompact 𝔪.cosupp) :
     ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
@@ -329,7 +304,8 @@ theorem exists_principalization_of_isCompact {X : Type u} [TopologicalSpace X] [
   rw [hsuppZ] at hz'
   exact hz'
 
-/-- **Principalization, admissible form** (compact `X`). -/
+/-- **Principalization, admissible form** (compact `X`; H+2 with the admissibility of the sequence and the centres over
+`Z(𝔞)` exported). -/
 theorem exists_principalization_admissible {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
     [IsComplexManifold n X] [CompactSpace X] {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent)
     (hne : ∀ x, IsNonzeroAlongAt univ 𝔞 x) :
@@ -440,8 +416,8 @@ theorem exists_embeddedResolution_of_isCompact {X : Type u} [TopologicalSpace X]
       exact hasNormalCrossings_nil_of_isClosedSubmanifold
         (FactorizationDomain.isClosedSubmanifold_of_isClosedConnectedSubmanifold hV)
 
-/-- **Embedded resolution, admissible form** (compact `X`; the admissibility of the sequence and the centres over
-`V_sing` exported). -/
+/-- **Embedded resolution, admissible form** (compact `X`; H+1 with `Exc f = ⋃ E = f⁻¹(V_sing)`, the admissibility of the
+sequence and the centres over `V_sing` exported). -/
 theorem exists_embeddedResolution_admissible {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
     [IsComplexManifold n X] [CompactSpace X] (V : ClosedIrreducibleAnalyticSubvariety n X) :
     ∃ (X' : Type u) (_ : TopologicalSpace X') (_ : ChartedSpace (ComplexModel n) X')
@@ -456,6 +432,38 @@ theorem exists_embeddedResolution_admissible {X : Type u} [TopologicalSpace X] [
   exists_embeddedResolution_of_isCompact V V.isClosed_carrier.isCompact
 
 end EmbeddedResolution
+
+/-! ### Non-vacuity -/
+
+section NonVacuity
+
+variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
+  {X' : Type u} [TopologicalSpace X'] [ChartedSpace (ComplexModel n) X'] [IsComplexManifold n X']
+
+/-- **A singular subvariety needs exceptional points** (the review's probe P1): a blowup sequence whose strict transform of a
+singular `V` is regular of dimension `dim V` at each of its points has a nonempty exceptional locus; so in the embedded
+resolution theorems `E ≠ []` and `f` is not a biholomorphism when `V_sing ≠ ∅`. -/
+theorem exceptionalLocus_nonempty_of_singular {f : X' → X} (hf : IsBlowupSequence n X X' f)
+    (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hreg : ∀ x ∈ strictTransform n f V.carrier,
+      RegularAtDim (n := n) (strictTransform n f V.carrier) x V.dim)
+    (hV : (singularLocus V).Nonempty) : (exceptionalLocus n f).Nonempty := by
+  obtain ⟨x, hx⟩ := hV
+  obtain ⟨z, rfl⟩ := HironakaLocalPrincipalization.IsBlowupSequence.surjective hf x
+  exact ⟨z, HironakaEmbeddedExceptional.preimage_singularLocus_subset_exceptionalLocus hf.contMDiff V hreg hx⟩
+
+/-- **The divisor of an embedded resolution of a singular subvariety is not empty** (the review's probe P1). -/
+theorem ne_nil_of_singular {f : X' → X} (hf : IsBlowupSequence n X X' f)
+    (V : ClosedIrreducibleAnalyticSubvariety n X) {E : List (Set X')}
+    (hexc : exceptionalLocus n f ⊆ ⋃ H ∈ E, H)
+    (hreg : ∀ x ∈ strictTransform n f V.carrier,
+      RegularAtDim (n := n) (strictTransform n f V.carrier) x V.dim)
+    (hV : (singularLocus V).Nonempty) : E ≠ [] := by
+  rintro rfl
+  obtain ⟨z, hz⟩ := exceptionalLocus_nonempty_of_singular hf V hreg hV
+  simpa using hexc hz
+
+end NonVacuity
 
 end
 

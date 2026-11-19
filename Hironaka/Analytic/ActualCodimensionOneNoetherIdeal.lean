@@ -1,11 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermMinimalPolynomial
 import Hironaka.Coherence.OkaGermRelations
-
 
 set_option autoImplicit false
 
@@ -15,8 +9,6 @@ The actual base inclusion and actual Weierstrass polynomial are the
 natural Noether-position hypothesis.  The generator and full ideal
 identity are produced internally, not supplied as certificates.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter Topology Polynomial

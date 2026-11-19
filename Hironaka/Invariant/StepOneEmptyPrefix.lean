@@ -1,59 +1,22 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneAdmissible
 import Hironaka.Invariant.ContactEmptyPrefix
 import Hironaka.Invariant.ContactRepresentative
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactLowerValue
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainMemberRestriction
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Invariant.StepOneCompare
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: the value re-based across an empty prefix (property (4'))
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: resolutions are compatible with
-*extensions* (isomorphisms inserted into the sequence), here blowups along the empty set at the start.
+Blueprint `hir:step-one-empty-prefix` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of
+`hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: resolutions are
+compatible with *extensions* (isomorphisms inserted into the sequence), here blowups along the empty set at the start.
+
+Let `P` be a tower with only empty centres and `𝔍' = 𝔍_P` the transform of `𝔍` along `P`.  The Step 1 value of `𝔍` along
+`P T₁` is that of `𝔍'` along `T₁` (property (4') of `hir:centre-function` for the masked value `stepOneInvM`), the review's
+finding M2 for the masked value: `J̄(𝔍') ≃ J̄(𝔍)_P` only up to restricted equivalence (TN23's `ContactEmptyPrefix`), the
+original members of `𝔍'` are those of `𝔍` followed by the `|P|` (empty) exceptional members of `P`, and the run in the
+regime can reach into `P` on the side of `𝔍` (the run cap).
 
 ## Main results
 
@@ -66,13 +29,16 @@ Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: r
   regimes and the masks of Step 1ab agree;
 * `restrictEquiv_memberRestrict_membersThrough`, `lowerData_congr`: Step 1ab's restricted marked ideals of
   restricted-equivalent marked ideals, and lower data across them;
-* `lowerDataL_succ_emptyPrefix`, `lowerValueL_succ_emptyPrefix_refl`: Step 1ab's lower data and lower value across
-  an empty prefix (the run inside the tail, and the run covering it) -- the twins of
-  `ContactLowerValue.lowerValueL_zero_emptyPrefix` and `lowerValueL_zero_emptyPrefix_rebase` (Step 1bb);
+* `lowerDataL_succ_emptyPrefix`, `lowerValueL_succ_emptyPrefix_refl`: Step 1ab's lower data and lower value across an empty
+  prefix (the run inside the tail, and the run covering it) -- the twins of TN23's `ContactLowerValue.lowerValueL_zero_emptyPrefix`
+  and `lowerValueL_zero_emptyPrefix_rebase` (Step 1bb);
 * `regimeRun_append_of_lt`, `regimeRun_append_of_eq`, `regime_base_of_regimeRun_eq`, `regimeRun_eq_length_of_isEmptyTower`,
   `split_zero`, `split_append_of_le`, `split_of_length_le`: the run cap -- a run along `P T₁` is the run along `T₁` if shorter
   than `T₁`, and otherwise covers `P` too (empty steps keep the regime);
 * `hypotheses_emptyPrefix`, `stepOneInvM_emptyPrefix_eq`, **`stepOneInvM_emptyPrefix`**: property (4').
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -83,11 +49,21 @@ universe u v
 namespace Hironaka.StepOneEmptyPrefix
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneMaskTower Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail Hironaka.BoundaryCount Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong Hironaka.InvDomainMemberRestriction Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneMaskTower Hironaka.StepOneValueMasked
+  Hironaka.StepOneCanonicalTail Hironaka.BoundaryCount
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong
+  Hironaka.MemberInterLocusAlong Hironaka.InvDomainMemberRestriction
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
 open Hironaka.HomogenizedGlueingTower (strictAlong strictAlong_step)
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
-open Hironaka.ResolutionInvariantExt (ResolutionInvariant IsEmptyTower isGeoTestTower_of_isEmptyTower isGeoTestTower_of_isCanonical)
+open Hironaka.ResolutionInvariantExt (ResolutionInvariant IsEmptyTower isGeoTestTower_of_isEmptyTower
+  isGeoTestTower_of_isCanonical)
 
 noncomputable section
 
@@ -175,9 +151,9 @@ section Rebase
 
 variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X)
 
-/-- **`J̄(𝔍_P)_{H₀} ≃ J̄(𝔍)_{P H₀}`** along every multiple test blow-up `P H₀` of `J̄` with `P` empty (`𝔍` well formed,
-`d ≥ 1`): `ContactEmptyPrefix.restrictEquiv_barMarked_geoTransformAlong_of_isEmptyTower` at the start, then
-restricted-equivalent marked ideals have the same transform (`RestrictEquiv.geoTransform_eq`). -/
+/-- **`J̄(𝔍_P)_{H₀} ≃ J̄(𝔍)_{P H₀}`** along every multiple test blow-up `P H₀` of `J̄` with `P` empty (`𝔍` well formed, `d ≥ 1`):
+TN23's `ContactEmptyPrefix.restrictEquiv_barMarked_geoTransformAlong_of_isEmptyTower` at the start, then restricted-equivalent
+marked ideals have the same transform (`RestrictEquiv.geoTransform_eq`). -/
 theorem restrictEquiv_barMarked_append (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) {Y₁ : CMfd.{u} n}
     (P : BlowupTower X Y₁) (hP : IsEmptyTower P) :
     ∀ {Y₀ : CMfd.{u} n} (H₀ : BlowupTower Y₁ Y₀), IsGeoTestTower (barMarked 𝔍) (P.append H₀) →
@@ -557,11 +533,10 @@ theorem hypotheses_emptyPrefix (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (
     isMaximalOrderAlong_geoTransformAlong h𝔍.isClosedSubmanifold_N h𝔍.isCoherent hmax P hPt,
     InvDomainTowerAlong.dimLE_geoTransformAlong h𝔍.isClosedSubmanifold_N h𝔍.isCoherent hk P hPt⟩
 
-/-- **The values agree along `P T₁` and `T₁`** when both are canonical segments (`P` empty): equal levels and special
-points; at a non-special point the run either stays inside `T₁` (same split, `P` prepended to the head:
-`ContactLowerValue.lowerValueL_zero_emptyPrefix` at level `0`, `lowerDataL_succ_emptyPrefix` at levels `≥ 1`), or
-covers `T₁` and then all of `P` (the base on both sides: `lowerValueL_zero_emptyPrefix_rebase`,
-`lowerValueL_succ_emptyPrefix_refl`).
+/-- **The values agree along `P T₁` and `T₁`** when both are canonical segments (`P` empty): equal levels and special points;
+at a non-special point the run either stays inside `T₁` (same split, `P` prepended to the head: TN23's
+`ContactLowerValue.lowerValueL_zero_emptyPrefix` at level `0`, `lowerDataL_succ_emptyPrefix` at levels `≥ 1`), or covers `T₁`
+and then all of `P` (the base on both sides: TN23's `lowerValueL_zero_emptyPrefix_rebase`, `lowerValueL_succ_emptyPrefix_refl`).
 -/
 theorem stepOneInvM_emptyPrefix_eq (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) (hk : DimLE n 𝔍.N k) {Y₁ : CMfd.{u} n} (P : BlowupTower X Y₁)

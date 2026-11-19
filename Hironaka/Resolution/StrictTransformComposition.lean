@@ -1,21 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.ExceptionalLocus
 import Hironaka.Blowup.BlowupCompact
 import Hironaka.Blowup.BlowupIsomorphismOff
 import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
 import Mathlib.Geometry.Manifold.MFDeriv.Atlas
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Strict transforms along a composition of blowups
 
-Source: CT22, Section 4 (strict transforms under a composition of blowups with smooth centres).
+Source: CT22, Section 4 (strict transforms under a composition of blowups with
+smooth centres); Copy-4, `sec:prelim`; blueprint `ana:locus-properties`.
 
 * `map_nhds_eq_of_not_mem_exceptionalLocus`: a holomorphic map between
   manifolds of the same dimension is open at every point where its differential
@@ -27,6 +22,8 @@ Source: CT22, Section 4 (strict transforms under a composition of blowups with s
   its image is compact.
 * `image_exceptionalLocus_comp`: `(f ∘ g)(Exc (f ∘ g)) = f(g(Exc g)) ∪ f(Exc f)`
   for a surjective `g`.
+
+Everything here is sorry-free.
 -/
 
 open Set Filter
@@ -227,6 +224,33 @@ theorem strictTransform_comp {f : Y → X} {g : Z → Y}
     exact image_mem_map ht'
   obtain ⟨_, ⟨w, ⟨hwt, hwE⟩, rfl⟩, hwS⟩ := mem_closure_iff_nhds.mp hzS _ himg
   exact ⟨w, hwt, hwS, hwE⟩
+
+/-- **A blowup of a compact manifold is surjective**: it is an isomorphism over the
+dense complement of the centre, and its image is compact, hence closed. -/
+theorem surjective_of_isBlowupAlong [CompactSpace Y] {C : Set Y} {g : Z → Y}
+    (hg : IsBlowupAlong n C g) : Function.Surjective g := by
+  have := BlowupCompact.compactSpace_of_isBlowupAlong hg
+  have hclosed : IsClosed (range g) := (isCompact_range hg.contMDiff.continuous).isClosed
+  have hsub : Cᶜ ⊆ range g := fun y hy => by
+    obtain ⟨z, -, hz⟩ :=
+      (BlowupIsomorphismOff.isIsomorphismOver_compl_of_isBlowupAlong hg).1.2.2 hy
+    exact ⟨z, hz⟩
+  have hdense : closure Cᶜ = univ := by rw [closure_compl, hg.2.1, compl_empty]
+  intro y
+  have h := hclosed.closure_subset_iff.mpr hsub
+  rw [hdense] at h
+  exact h (mem_univ y)
+
+/-- **A blowup sequence of a compact manifold** has compact source and is surjective. -/
+theorem IsBlowupSequence.compactSpace_surjective [CompactSpace X] {f : Y → X}
+    (hf : IsBlowupSequence n X Y f) : CompactSpace Y ∧ Function.Surjective f := by
+  induction hf with
+  | refl => exact ⟨inferInstance, Function.surjective_id⟩
+  | step f C g _hf hg ih =>
+      obtain ⟨hcompact, hsurj⟩ := ih
+      have := hcompact
+      exact ⟨BlowupCompact.compactSpace_of_isBlowupAlong hg,
+        hsurj.comp (surjective_of_isBlowupAlong hg)⟩
 
 omit [IsComplexManifold n X] [IsComplexManifold n Y] [IsComplexManifold n Z] in
 /-- The image of the exceptional locus of the first factor lies in the image of the

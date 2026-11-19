@@ -1,58 +1,54 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HadamardBridge
 import Hironaka.Invariant.OrderMultiplicativity
 import Hironaka.Blowup.GlueingTrivialAction
 import Hironaka.Blowup.BlowupStrictIdeal
 import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Analytic.HolomorphicAnalytic
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.Invariant.OrderTaylor
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The pushforward of `𝒪(-KD)`: a germ whose pullback lies in `𝒪(-D)^K` lies in `𝓘_C^K`
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`) §2.2 (the controlled transform `y^{-μ}(f ∘ σ)`, `y` a generator
-of the ideal of the exceptional divisor) and Step 2a of the proof of `pr:resol` (the decomposition `𝓘 = 𝓜(𝓘) 𝓝(𝓘)`
-with a nonmonomial part divisible by no ideal of a divisor in `E`, to be kept along the transforms);
-Bierstone--Milman 2008 (`bierstone-milman08-functoriality`). The first result is the local form of `π_* 𝒪(-KD) =
-𝓘_C^K` for a smooth centre `C`.
+Hironaka phase H2 (TN3), H4 list item 3, blowup half (I-0977 C-0045 / C-0050).  Blueprint
+`bcalc:exceptional-pushforward`, `bcalc:controlled-not-exceptional` (chapter `blowup-calculus.tex`).
+Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`) §2.2 (the controlled transform
+`y^{-μ}(f ∘ σ)`, `y` a generator of the ideal of the exceptional divisor) and Step 2a of the proof
+of `pr:resol` (the decomposition `𝓘 = 𝓜(𝓘) 𝓝(𝓘)` with a nonmonomial part divisible by no ideal of a
+divisor in `E`, to be kept along the transforms); Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`).  The first result is the local form of `π_* 𝒪(-KD) = 𝓘_C^K`
+for a smooth centre `C`.
 
 * `mem_idealPow_vanishingIdeal_of_pullback_mem`: for the blowup `π` along `C`, a point `z` over
   `C`, and `f` holomorphic at `π z`: if `f ∘ π ∈ 𝒪(-D)^K` at `z`, then `f ∈ 𝓘_C^K` at `π z`.
+* `mem_cosupport_succ_of_controlledTransform_le`, `exists_not_mem_exceptionalDivisor`: if
+  `C ⊆ cosupp(𝔞, μ)` (`𝔞` coherent) and `σ^c(𝔞, μ) ⊆ 𝒪(-D)` at a point `z` over `C`, then
+  `ord_{π z} 𝔞 ≥ μ + 1`; so where the order is exactly `μ`, `σ^c(𝔞, μ)` is not in `𝒪(-D)`.
+* `frequently_le_vanishingIdeal_of_controlledTransform_le`,
+  `exists_not_mem_vanishingIdeal_geoStrictTransform`: if `σ^c(𝔟, o) ⊆ 𝓘_{H'}` at a point of the
+  strict transform `H'` of a closed `H`, then `𝔟 ⊆ 𝓘_H` at points of `H \ C` arbitrarily close to
+  its image; so if `𝔟 ⊄ 𝓘_H` at the points of `H \ C` near `π z`, `σ^c(𝔟, o) ⊄ 𝓘_{H'}` at `z`
+  (helper `eventually_le_vanishingIdeal_of_isCoherent`).
 
 ## Proof
 
-Take flattening coordinates `Φ ∘ e` at `x = π z` with `C = ℂᵏ × 0`, `F = f ∘ e⁻¹ ∘ Φ⁻¹`, and the monomial chart `σⱼ`
-of the blowup through `z` (`exists_monomialLocalInverse`, with its lift `ℓ`, `existsUnique_monomialLift`;
-`extendLifted` reads `ℓ` on `ℂⁿ`). The germs of `𝒪(-D)` vanish on `D`, so `f ∘ π ∈ 𝔪_u^K` at every `u ∈ D` near `z`
-(`eventually_mem_idealPow_pointIdeal`); pulling back along `ℓ`, every derivative of order `< K` of `G = F ∘ σⱼ`
-vanishes at the points `λ` near `W z` with `λⱼ = 0`. For `w ∈ ℂᵏ × 0` near `0` and a direction `h` near `h₀ = W z +
-eⱼ`, the line `t ↦ w + t h` is `σⱼ(λ + t v)`, with `λ = liftPoint k j w h` (the tangential part of `w`, the ratios
-`hᵢ / hⱼ`, and `λⱼ = 0`) and `v = liftDir k j h` (`monomial_liftPoint_add`). Hence `D^a F(w)(h, …, h) = D^a G(λ)(v,
-…, v) = 0` for `a < K` and all `h` in an open set. The diagonal of the symmetric form `D^a F(w)` is a polynomial, so
-it vanishes everywhere (identity principle), and polarization
-(`OrderMultiplicativity.eq_zero_of_symmetric_of_apply_diag`) gives `D^a F(w) = 0`
-(`eq_zero_of_symmetric_of_apply_diag_on_open`). `inNormalPow_of_iterDeriv_eq_zero` and
-`OrderTaylor.mem_idealPow_of_inNormalPow` turn the vanishing along `ℂᵏ × 0` into `f ∈ 𝓘_C^K`, as in the Hadamard
-bridge.
+Take flattening coordinates `Φ ∘ e` at `x = π z` with `C = ℂᵏ × 0`, `F = f ∘ e⁻¹ ∘ Φ⁻¹`, and the
+monomial chart `σⱼ` of the blowup through `z` (`exists_monomialLocalInverse`, with its lift `ℓ`,
+`existsUnique_monomialLift`; `extendLifted` reads `ℓ` on `ℂⁿ`). The germs of `𝒪(-D)` vanish on `D`,
+so `f ∘ π ∈ 𝔪_u^K` at every `u ∈ D` near `z` (`eventually_mem_idealPow_pointIdeal`); pulling back
+along `ℓ`, every derivative of order `< K` of `G = F ∘ σⱼ` vanishes at the points `λ` near `W z`
+with `λⱼ = 0`. For `w ∈ ℂᵏ × 0` near `0` and a direction `h` near `h₀ = W z + eⱼ`, the line
+`t ↦ w + t h` is `σⱼ(λ + t v)`, with `λ = liftPoint k j w h` (the tangential part of `w`, the
+ratios `hᵢ / hⱼ`, and `λⱼ = 0`) and `v = liftDir k j h` (`monomial_liftPoint_add`). Hence
+`D^a F(w)(h, …, h) = D^a G(λ)(v, …, v) = 0` for `a < K` and all `h` in an open set. The diagonal
+of the symmetric form `D^a F(w)` is a polynomial, so it vanishes everywhere (identity principle),
+and polarization (TN-CLASSICAL's `OrderMultiplicativity.eq_zero_of_symmetric_of_apply_diag`) gives
+`D^a F(w) = 0` (`eq_zero_of_symmetric_of_apply_diag_on_open`). TN23's
+`inNormalPow_of_iterDeriv_eq_zero` and `OrderTaylor.mem_idealPow_of_inNormalPow` turn the vanishing
+along `ℂᵏ × 0` into `f ∈ 𝓘_C^K`, as in the Hadamard bridge.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -421,6 +417,126 @@ theorem mem_idealPow_vanishingIdeal_of_pullback_mem (hπ : IsBlowupAlong n C π)
   filter_upwards [(isOpen_flatDomain Φ).mem_nhds hx'] with p hp
   simp only [hFdef]
   rw [flatInverse_flat Φ hp]
+
+/-! ### The controlled transform at the points of the exceptional divisor -/
+
+/-- **A controlled transform inside `𝒪(-D)` forces a higher order** (for Włodarczyk 2005, Step 2a
+of `pr:resol`; the blowup half of TN-CLASSICAL's `hir:nonmonomial-transform`): if `C ⊆ cosupp(𝔞, μ)`
+for a coherent `𝔞` and `σ^c(𝔞, μ) ⊆ 𝒪(-D)` at a point `z` over `C`, then `ord_{π z} 𝔞 ≥ μ + 1`.
+Indeed `π^*𝔞 = 𝒪(-μD) σ^c(𝔞, μ) ⊆ 𝒪(-D)^{μ+1}` at `z`, so `𝔞 ⊆ 𝓘_C^{μ+1}` at `π z`. -/
+theorem mem_cosupport_succ_of_controlledTransform_le (hπ : IsBlowupAlong n C π)
+    {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent) {μ : ℕ} (hsub : C ⊆ cosupport n univ 𝔞 μ) {z : Y}
+    (hz : π z ∈ C)
+    (hle : ∀ g, (BlowupControlledTransform.controlledTransform hπ 𝔞 μ).mem z g →
+      (exceptionalDivisor hπ).ideal.mem z g) :
+    π z ∈ cosupport n univ 𝔞 (μ + 1) := by
+  refine ⟨mem_univ _, fun a ha => ?_⟩
+  have hahol : HolomorphicAt n a (π z) :=
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 ha
+  have hπd : ∀ᶠ w in 𝓝 z, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=
+    Eventually.of_forall fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)
+  have haπ : HolomorphicAt n (a ∘ π) z := holomorphicAt_comp_map hπd hahol
+  have h1 : (GermIdeal.pullback (m := n) π 𝔞).mem z (a ∘ π) :=
+    BlowupDerivativeIdeal.comp_mem_pullback ha haπ (holomorphicAt_const 1)
+      (Eventually.of_forall fun p => by simp)
+  rw [pullback_eq_mul_controlledTransform_of_subset_cosupport hπ h𝔞 hsub] at h1
+  have h2 : (idealPow (exceptionalDivisor hπ).ideal (μ + 1)).mem z (a ∘ π) :=
+    mem_idealPow_succ_iff.mpr ((show IsInSpanAt (n := n) (fun s => ∃ p q,
+      (idealPow (exceptionalDivisor hπ).ideal μ).mem z p ∧
+        (BlowupControlledTransform.controlledTransform hπ 𝔞 μ).mem z q ∧ s = p * q) z (a ∘ π)
+      from h1).mono fun _ ⟨p, q, hp, hq, hs⟩ => ⟨p, q, hp, hle q hq, hs⟩)
+  have h3 := mem_idealPow_vanishingIdeal_of_pullback_mem hπ hz hahol h2
+  have h4 : (idealPow (pointIdeal n (π z)) (μ + 1)).mem (π z) a :=
+    mem_idealPow_of_mem_at (𝔞 := vanishingIdeal (n := n) C)
+      (fun g (hg : (vanishingIdeal (n := n) C).mem (π z) g) =>
+        mem_pointIdeal_of_apply_eq_zero hg.1 (hg.2.self_of_nhds hz)) (μ + 1) h3
+  exact ⟨a, h4, Eventually.of_forall fun _ _ => rfl⟩
+
+/-- **Where the order along the centre is exactly `μ`, the controlled transform is not in `𝒪(-D)`**:
+if `C ⊆ cosupp(𝔞, μ)` and `ord_{π z} 𝔞 ≤ μ`, some germ of `σ^c(𝔞, μ)` at `z` is not in `𝒪(-D)`. -/
+theorem exists_not_mem_exceptionalDivisor (hπ : IsBlowupAlong n C π) {𝔞 : GermIdeal n X}
+    (h𝔞 : 𝔞.IsCoherent) {μ : ℕ} (hsub : C ⊆ cosupport n univ 𝔞 μ) {z : Y} (hz : π z ∈ C)
+    (hord : π z ∉ cosupport n univ 𝔞 (μ + 1)) :
+    ∃ g, (BlowupControlledTransform.controlledTransform hπ 𝔞 μ).mem z g ∧
+      ¬ (exceptionalDivisor hπ).ideal.mem z g := by
+  by_contra h
+  simp only [not_exists, not_and, not_not] at h
+  exact hord (mem_cosupport_succ_of_controlledTransform_le hπ h𝔞 hsub hz h)
+
+/-- **The controlled transform and the strict transform of a closed set** (the second clause of the
+blowup half of `hir:nonmonomial-transform`): if `C ⊆ cosupp(𝔟, o)`, `𝔟` coherent, and at a point `z`
+of the strict transform `H'` of a closed `H` the controlled transform `σ^c(𝔟, o)` lies in `𝓘_{H'}`,
+then arbitrarily close to `π z` there are points `y ∈ H \ C` with `𝔟 ⊆ 𝓘_H` at `y`.  Proof:
+`σ^c(𝔟, o) ⊆ 𝓘_{H'}` propagates to the points of `H' \ D` near `z` (coherence), which are dense in
+`H'`; there `π^*𝔟 = 𝒪(-oD) σ^c(𝔟, o) ⊆ 𝓘_{H'}`, and the section of `π` over `X \ C` carries the
+vanishing down to `H` near `π z'`. -/
+theorem frequently_le_vanishingIdeal_of_controlledTransform_le (hπ : IsBlowupAlong n C π)
+    {𝔟 : GermIdeal n X} (h𝔟 : 𝔟.IsCoherent) {o : ℕ} (hsub : C ⊆ cosupport n univ 𝔟 o)
+    {H : Set X} {z : Y} (hzH : z ∈ BlowupStrictSubmanifold.geoStrictTransform π C H)
+    (hle : ∀ g, (BlowupControlledTransform.controlledTransform hπ 𝔟 o).mem z g →
+      (vanishingIdeal (n := n) (BlowupStrictSubmanifold.geoStrictTransform π C H)).mem z g) :
+    ∃ᶠ y in 𝓝 (π z), y ∈ H \ C ∧ ∀ a, 𝔟.mem y a → (vanishingIdeal (n := n) H).mem y a := by
+  have hπc : Continuous π := hπ.contMDiff.continuous
+  have hσc := isCoherent_controlledTransform_of_subset_cosupport hπ h𝔟 hsub
+  have hev := eventually_le_vanishingIdeal_of_isCoherent hσc hle
+  have hfreq : ∃ᶠ z' in 𝓝 z, z' ∈ π ⁻¹' (H \ C) := mem_closure_iff_frequently.mp hzH
+  obtain ⟨sec, hsec, hπsec, hsecπ⟩ := BlowupIsomorphismOff.exists_section_compl hπ
+  refine (hπc.tendsto z).frequently ((hfreq.and_eventually hev).mono fun z' ⟨hz'HC, hz'le⟩ => ?_)
+  refine ⟨hz'HC, fun a ha => ?_⟩
+  have hahol : HolomorphicAt n a (π z') :=
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 ha
+  have hπd : ∀ᶠ w in 𝓝 z', MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π w :=
+    Eventually.of_forall fun w => (hπ.contMDiff w).mdifferentiableAt (by simp)
+  have haπ : HolomorphicAt n (a ∘ π) z' := holomorphicAt_comp_map hπd hahol
+  have h1 : (GermIdeal.pullback (m := n) π 𝔟).mem z' (a ∘ π) :=
+    BlowupDerivativeIdeal.comp_mem_pullback ha haπ (holomorphicAt_const 1)
+      (Eventually.of_forall fun p => by simp)
+  rw [pullback_eq_mul_controlledTransform_of_subset_cosupport hπ h𝔟 hsub] at h1
+  -- `a ∘ π` vanishes on `H'` near `z'`
+  have hvanish : ∀ᶠ w in 𝓝 z', w ∈ BlowupStrictSubmanifold.geoStrictTransform π C H →
+      (a ∘ π) w = 0 := by
+    obtain ⟨-, K, r, c, hr, -, hsum⟩ := (show IsInSpanAt (n := n) (fun s => ∃ p q,
+      (idealPow (exceptionalDivisor hπ).ideal o).mem z' p ∧
+        (BlowupControlledTransform.controlledTransform hπ 𝔟 o).mem z' q ∧ s = p * q) z' (a ∘ π)
+      from h1)
+    choose p q hp hq hpq using hr
+    have hqv : ∀ k, ∀ᶠ w in 𝓝 z', w ∈ BlowupStrictSubmanifold.geoStrictTransform π C H →
+        q k w = 0 := fun k => (hz'le _ (hq k)).2
+    filter_upwards [hsum, eventually_all.mpr hqv] with w hw hwq hwH
+    rw [hw]
+    refine Finset.sum_eq_zero fun k _ => ?_
+    rw [hpq k]
+    simp [hwq k hwH]
+  -- carry the vanishing down along the section of `π` over `X \ C`
+  have hz'C : π z' ∈ Cᶜ := hz'HC.2
+  have hcont : Tendsto sec (𝓝 ⟨π z', hz'C⟩) (𝓝 z') := by
+    have h := hsec.continuous.continuousAt (x := ⟨π z', hz'C⟩)
+    rwa [ContinuousAt, hsecπ z' hz'C] at h
+  have h2 := hcont.eventually hvanish
+  rw [nhds_subtype_eq_comap, Filter.eventually_comap] at h2
+  refine ⟨hahol, ?_⟩
+  filter_upwards [h2, hπ.1.1.isOpen_compl.mem_nhds hz'C] with y hy hyC hyH
+  have hsy : π (sec ⟨y, hyC⟩) = y := congrFun hπsec ⟨y, hyC⟩
+  have hmem : sec ⟨y, hyC⟩ ∈ BlowupStrictSubmanifold.geoStrictTransform π C H :=
+    subset_closure (show π (sec ⟨y, hyC⟩) ∈ H \ C by rw [hsy]; exact ⟨hyH, hyC⟩)
+  have := hy ⟨y, hyC⟩ rfl hmem
+  simpa [Function.comp_apply, hsy] using this
+
+/-- **Contrapositive**: if near `π z` the ideal `𝔟` lies in `𝓘_H` at no point of `H \ C`, then at a
+point `z` of `H'` some germ of `σ^c(𝔟, o)` is not in `𝓘_{H'}`. -/
+theorem exists_not_mem_vanishingIdeal_geoStrictTransform (hπ : IsBlowupAlong n C π)
+    {𝔟 : GermIdeal n X} (h𝔟 : 𝔟.IsCoherent) {o : ℕ} (hsub : C ⊆ cosupport n univ 𝔟 o)
+    {H : Set X} {z : Y} (hzH : z ∈ BlowupStrictSubmanifold.geoStrictTransform π C H)
+    (hnot : ∀ᶠ y in 𝓝 (π z), y ∈ H \ C → ∃ a, 𝔟.mem y a ∧ ¬ (vanishingIdeal (n := n) H).mem y a) :
+    ∃ g, (BlowupControlledTransform.controlledTransform hπ 𝔟 o).mem z g ∧
+      ¬ (vanishingIdeal (n := n) (BlowupStrictSubmanifold.geoStrictTransform π C H)).mem z g := by
+  by_contra h
+  simp only [not_exists, not_and, not_not] at h
+  obtain ⟨y, hy, hyle⟩ :=
+    ((frequently_le_vanishingIdeal_of_controlledTransform_le hπ h𝔟 hsub hzH h).and_eventually
+      hnot).exists
+  obtain ⟨a, ha, hna⟩ := hyle hy.1
+  exact hna (hy.2 a ha)
 
 end Blowup
 

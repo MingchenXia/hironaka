@@ -1,36 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactStageRebase
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactEquivalenceAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1 does not depend on the representative of the marked ideal
 
-A marked ideal is only determined by the restriction of its ideal to `N`
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0103 / I-0977 C-0142: the H3 input for property (7) (independence
+of the representative) of `hir:centre-function` for the Step 1 value function of `hir:maximal-order-step` and hence for
+`hir:general-step` (`blueprint/src/hironaka.tex`).  A marked ideal is only determined by the restriction of its ideal to `N`
 (`MarkedIdealOperationsAlong.RestrictEquiv`); Step 1 forms `J̄ = 𝓒_N(𝓗_N(𝔍))`, chooses a tangent direction of
-`(𝔍.ideal|_N, d)` and restricts the coefficient ideal of the transform to the strict transform of the hypersurface
-of maximal contact. All three steps respect restricted equivalence. Source: Włodarczyk 2005 (arXiv `hiron.tex`),
-Proposition `pr:resol` (4) and the definition of marked ideals (`(M, N, E, 𝓘, μ)` with `𝓘` an ideal of `𝒪_N`).
+`(𝔍.ideal|_N, d)` and restricts the coefficient ideal of the transform to the strict transform of the hypersurface of
+maximal contact.  All three steps respect restricted equivalence.  Blueprint `mc:contact-representative`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), Proposition `pr:resol` (4) and the
+definition of marked ideals (`(M, N, E, 𝓘, μ)` with `𝓘` an ideal of `𝒪_N`).
 
 ## Main results
 
@@ -40,6 +23,14 @@ Proposition `pr:resol` (4) and the definition of marked ideals (`(M, N, E, 𝓘,
 * `exists_isTangentDirectionAlong_of_restrictLe`: a tangent direction `u` of `(𝔞|_N, μ)` on `U` gives, near every point of
   `N ∩ U`, a tangent direction `w` of `(𝔟|_N, μ)` with `w = u` on `N` whenever `𝔞|_N ⊆ 𝔟|_N` (so the hypersurface of maximal
   contact inside `N` is the same);
+* `restrictEquiv_contactMarked`: for `(M, N, ∅, 𝔞, μ) ≃ (M, N, ∅, 𝔞', μ)`, tangent directions `u`, `w` equal on `N` over an
+  open `O`, a multiple test blow-up `T₀` and `W ⊆ T₀⁻¹O`:
+  `contactMarked N 𝔞 μ u T₀ W ≃ contactMarked N 𝔞' μ w T₀ W`;
+* `contactMarked_representative`: with TN3's `InvDomainRebase` -- the domain, the canonical segments and the values of a
+  resolution invariant agree for the two.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -49,7 +40,10 @@ universe u v
 
 namespace Hironaka.ContactRepresentative
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism DerivativeIdealAlong MarkedIdealRestrictOpen MarkedIdealOperationsAlong.MarkedIdeal ResolutionInvariantExt RestrictedIdealWeight
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism DerivativeIdealAlong
+  MarkedIdealRestrictOpen MarkedIdealOperationsAlong.MarkedIdeal ResolutionInvariantExt RestrictedIdealWeight
 open HomogenizedGlueingTower (strictAlong)
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
@@ -140,6 +134,98 @@ theorem exists_isTangentDirectionAlong_of_restrictLe {N : Set M} {𝔞 𝔟 : Ge
     (fun y hy _ h0 => hu.multiplicity_one y hy h0) hxU hxN
 
 end Tangent
+
+/-! ### Step 1b's restricted marked ideal for restricted-equivalent representatives -/
+
+section ContactMarked
+
+open MaximalOrderStepOneB (stepOneMarked contactMarked)
+
+variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+  {N : Set M} {𝔞 𝔞' : GermIdeal n M} {μ : ℕ}
+
+/-- **Step 1b's restricted marked ideal does not depend on the representative**: let `(M, N, ∅, 𝔞, μ) ≃ (M, N, ∅, 𝔞', μ)`
+(coherent ideals, `N` a closed submanifold), `u`, `w` functions equal on `N` over an open `O` (in use: a tangent direction of
+`(𝔞|_N, μ)` and the one of `(𝔞'|_N, μ)` given by `exists_isTangentDirectionAlong_of_restrictLe`), `T₀` a multiple test
+blow-up of `stepOneMarked N 𝔞 μ` and `W ⊆ T₀⁻¹O` open.  Then `contactMarked N 𝔞 μ u T₀ W ≃ contactMarked N 𝔞' μ w T₀ W`. -/
+theorem restrictEquiv_contactMarked (h𝔞 : 𝔞.IsCoherent) (h𝔞' : 𝔞'.IsCoherent) (hN : IsClosedSubmanifold n N)
+    (hEq : RestrictEquiv (⟨N, [], 𝔞, μ⟩ : MarkedIdeal n M) ⟨N, [], 𝔞', μ⟩) {u w : M → ℂ} (O : Opens M)
+    (huw : ∀ y ∈ O, y ∈ N → u y = w y) {Y : CMfd.{u} n} (T₀ : BlowupTower (CMfd.of (n := n) M) Y)
+    (hT₀ : IsGeoTestTower (stepOneMarked N 𝔞 μ) T₀) (W : Opens Y) (hWO : (W : Set Y) ⊆ openPreimage T₀ O) :
+    RestrictEquiv (contactMarked N 𝔞 μ u T₀ W) (contactMarked N 𝔞' μ w T₀ W) := by
+  have hJ : RestrictEquiv (stepOneMarked N 𝔞 μ) (stepOneMarked N 𝔞' μ) :=
+    restrictEquiv_barMarked (M := M) (𝔪 := ⟨N, [], 𝔞, μ⟩) (𝔫 := ⟨N, [], 𝔞', μ⟩) hEq hN h𝔞 h𝔞'
+  obtain ⟨hJN, hJc, -⟩ := ContactIndependenceAlong.coeffHom_basic (μ := μ) h𝔞 hN
+  obtain ⟨-, hJc', -⟩ := ContactIndependenceAlong.coeffHom_basic (μ := μ) h𝔞' hN
+  have hT₀' : IsGeoTestTower (stepOneMarked N 𝔞' μ) T₀ :=
+    ((MarkedIdealEquivalence.MarkedIdeal.RestrictEquiv.wEquiv hJ hJN.1 hJc hJc').2 T₀).1.mp hT₀
+  obtain ⟨hNT, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hJN hJc T₀ hT₀
+  obtain ⟨hNT', hcT'⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong (hJ.N_eq ▸ hJN) hJc' T₀ hT₀'
+  have hK := ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransformAlong hJ hJN.1 hJc hJc'
+    (A := N ∩ {x | u x = 0}) (fun x hx => hx.1) T₀
+  have hP := restrictEquiv_pullback_val W hK (isCoherent_coeffMarkedAlong hcT hNT) (isCoherent_coeffMarkedAlong hcT' hNT')
+  -- the hypersurfaces `N ∩ V(u)` and `N ∩ V(w)` have the same strict transform over `O`
+  have hloc := ContactEquivalenceStage.strictAlong_inter_preimage_eq O.isOpen
+    (A := N ∩ {x | u x = 0}) (B := N ∩ {x | w x = 0}) (by
+      ext y
+      show (y ∈ N ∧ u y = 0) ∧ y ∈ O ↔ (y ∈ N ∧ w y = 0) ∧ y ∈ O
+      constructor
+      · rintro ⟨⟨hyN, hy0⟩, hyO⟩
+        exact ⟨⟨hyN, by rw [← huw y hyO hyN]; exact hy0⟩, hyO⟩
+      · rintro ⟨⟨hyN, hy0⟩, hyO⟩
+        exact ⟨⟨hyN, by rw [huw y hyO hyN]; exact hy0⟩, hyO⟩) T₀
+  have hset : (Subtype.val : W → Y) ⁻¹' strictAlong T₀ (N ∩ {x | w x = 0}) =
+      (Subtype.val : W → Y) ⁻¹' strictAlong T₀ (N ∩ {x | u x = 0}) := by
+    ext p
+    have hp : (p : Y) ∈ T₀.proj ⁻¹' (O : Set M) := hWO p.2
+    constructor
+    · intro h
+      have h1 : (p : Y) ∈ strictAlong T₀ (N ∩ {x | w x = 0}) ∩ T₀.proj ⁻¹' (O : Set M) := ⟨h, hp⟩
+      rw [← hloc] at h1
+      exact h1.1
+    · intro h
+      have h1 : (p : Y) ∈ strictAlong T₀ (N ∩ {x | u x = 0}) ∩ T₀.proj ⁻¹' (O : Set M) := ⟨h, hp⟩
+      rw [hloc] at h1
+      exact h1.1
+  unfold contactMarked
+  rw [ContactCanonicalAlong.pullback_withN, ContactCanonicalAlong.pullback_withN (Subtype.val : W → Y)
+    (coeffMarkedAlong (geoTransformAlong (stepOneMarked N 𝔞' μ) T₀)), hset, ← ContactCanonicalAlong.pullback_withN,
+    ← ContactCanonicalAlong.pullback_withN]
+  exact hP
+
+variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+/-- **The values of Step 1b do not depend on the representative**: in the situation of `restrictEquiv_contactMarked`, if
+`contactMarked N 𝔞 μ u T₀ W` lies in the domain of a resolution invariant `R`, so does `contactMarked N 𝔞' μ w T₀ W`, the two
+have the same canonical segments, and along them `R` takes the same values on the cosupport (properties (7) and (5) of
+`R` with TN3's `InvDomainRebase.isInvDomain_of_restrictEquiv` / `isCanonical_of_restrictEquiv`). -/
+theorem contactMarked_representative (R : ResolutionInvariant.{u, v} n k Λ) (h𝔞 : 𝔞.IsCoherent)
+    (h𝔞' : 𝔞'.IsCoherent) (hN : IsClosedSubmanifold n N)
+    (hEq : RestrictEquiv (⟨N, [], 𝔞, μ⟩ : MarkedIdeal n M) ⟨N, [], 𝔞', μ⟩) {u w : M → ℂ} (O : Opens M)
+    (huw : ∀ y ∈ O, y ∈ N → u y = w y) {Y : CMfd.{u} n} (T₀ : BlowupTower (CMfd.of (n := n) M) Y)
+    (hT₀ : IsGeoTestTower (stepOneMarked N 𝔞 μ) T₀) (W : Opens Y) (hWO : (W : Set Y) ⊆ openPreimage T₀ O)
+    (hdom : IsInvDomain k (contactMarked N 𝔞 μ u T₀ W)) :
+    IsInvDomain k (contactMarked N 𝔞' μ w T₀ W) ∧
+      ∀ {Z : CMfd.{u} n} (T₁ : BlowupTower (CMfd.of (n := n) W) Z),
+        IsCanonical (contactMarked N 𝔞 μ u T₀ W) (R.inv (contactMarked N 𝔞 μ u T₀ W)) T₁ →
+        IsCanonical (contactMarked N 𝔞' μ w T₀ W) (R.inv (contactMarked N 𝔞' μ w T₀ W)) T₁ ∧
+        ∀ z ∈ (geoTransformAlong (contactMarked N 𝔞 μ u T₀ W) T₁).cosupp,
+          R.inv (contactMarked N 𝔞 μ u T₀ W) T₁ z = R.inv (contactMarked N 𝔞' μ w T₀ W) T₁ z := by
+  have hE := restrictEquiv_contactMarked h𝔞 h𝔞' hN hEq O huw T₀ hT₀ W hWO
+  have hc' : (contactMarked N 𝔞' μ w T₀ W).ideal.IsCoherent := by
+    have hJ : RestrictEquiv (stepOneMarked N 𝔞 μ) (stepOneMarked N 𝔞' μ) :=
+      restrictEquiv_barMarked (M := M) (𝔪 := ⟨N, [], 𝔞, μ⟩) (𝔫 := ⟨N, [], 𝔞', μ⟩) hEq hN h𝔞 h𝔞'
+    obtain ⟨hJN, hJc, -⟩ := ContactIndependenceAlong.coeffHom_basic (μ := μ) h𝔞 hN
+    obtain ⟨-, hJc', -⟩ := ContactIndependenceAlong.coeffHom_basic (μ := μ) h𝔞' hN
+    have hT₀' : IsGeoTestTower (stepOneMarked N 𝔞' μ) T₀ :=
+      ((MarkedIdealEquivalence.MarkedIdeal.RestrictEquiv.wEquiv hJ hJN.1 hJc hJc').2 T₀).1.mp hT₀
+    obtain ⟨hNT', hcT'⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong (hJ.N_eq ▸ hJN) hJc' T₀ hT₀'
+    exact GermIdealPullbackCalculus.isCoherent_pullback contMDiff_subtype_val (isCoherent_coeffMarkedAlong hcT' hNT')
+  have hdom' := InvDomainRebase.isInvDomain_of_restrictEquiv hdom hE hc'
+  refine ⟨hdom', fun T₁ hcan => ⟨InvDomainRebase.isCanonical_of_restrictEquiv R hdom hdom' hE T₁ hcan, fun z hz => ?_⟩⟩
+  exact R.representative _ _ hdom hdom' hE T₁ hcan z hz
+
+end ContactMarked
 
 end
 

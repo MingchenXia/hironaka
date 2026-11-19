@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalIdeal
 import Hironaka.Resolution.HironakaActualCentreJointJets
 import Hironaka.Analytic.AnalyticGermDecomposition
@@ -182,7 +177,6 @@ private theorem map_shear_normalIdeal :
   funext i
   exact graphShearAlgEquiv_normalCoordinate f hf h0 i
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The actual whole graph kernel consists exactly of the literal finite original graph equations. -/
 theorem ker_graphTrace_eq_graphRelations :
     RingHom.ker (graphTrace f hf h0).toRingHom = graphRelations f hf := by

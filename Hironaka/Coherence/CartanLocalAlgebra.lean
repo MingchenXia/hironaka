@@ -1,16 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.CartanGermReduction
 import Hironaka.Analytic.GermParametrizationFunctions
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.GermMinimalPolynomial
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
@@ -35,6 +25,8 @@ bounds (`CartanGermReduction.exists_reduce_degreeLT`); (B) substitution `δ coor
 
 Unlike Demailly we put the `E_k(z_k)` among the generators (they vanish on `A`), so (4.17) is not
 needed here.
+
+Sorry-free.
 -/
 
 open Filter Topology Polynomial

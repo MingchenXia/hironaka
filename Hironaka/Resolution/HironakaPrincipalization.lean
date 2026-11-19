@@ -1,39 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CanonicalCentres
 import Hironaka.Blowup.BlowupSequenceIsomorphismOff
 import Hironaka.Resolution.FactorizationDomain
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.RestrictLeCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Principalization of a coherent ideal (Hironaka)
 
-Sources: Włodarczyk 2005 (`hiron.tex`), §2.3, "(1) ⟹ (2)": a resolution of the marked ideal `(X, X, ∅, 𝔞, 1)`
-principalizes `𝔞`; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Theorem 1.3 (principalization,
-functorial form); Kollár 2007, Theorem 3.26.
+Blueprint `hir:principalization` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka strengthening (H+2) for the standalone
+library).  Sources: Włodarczyk 2005 (`hiron.tex`), §2.3, "(1) ⟹ (2)": a resolution of the marked ideal `(X, X, ∅, 𝔞, 1)`
+principalizes `𝔞`; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Theorem 1.3 (principalization, functorial
+form); Kollár 2007, Theorem 3.26.
 
 **Statement.**  Let `X` be a compact complex manifold and `𝔞` a coherent ideal sheaf on `X` which vanishes identically on no
 nonempty open set (at every point some germ of `𝔞` is not identically zero nearby).  Then there is a finite sequence of blowups
@@ -43,12 +21,12 @@ with smooth centres `f : X' → X` and an effective divisor `D` on `X'` such tha
 * the support of `D` is `f⁻¹ Z(𝔞)`, and it is the union of the members of a divisor with simple normal crossings;
 * `f` is an isomorphism over `X \ Z(𝔞)` (every centre lies over the zero locus of `𝔞`).
 
-**Route.** The canonical resolution invariant in dimension `≤ n` (`CanonicalCentres.canonicalInvariant`) resolves
-the marked ideal `(X, X, [], 𝔞, 1)`; a resolution with mark `1` and `N = X` principalizes
-(`MarkedIdeal.pullback_eq_exceptionalDivisor_of_isGeoResolution`: `T^*𝔞 = 𝒪(-E_T)` for the exceptional divisor `E_T`
-of the tower). New here: the support of `E_T` is the union of the members of the transformed divisor of the marked
-ideal (`support_exceptionalDivisor_eq_biUnion`), which has simple normal crossings because the transforms stay well
-formed; and the exceptional locus of the tower lies in the support of `E_T`.
+**Route.**  The canonical resolution invariant in dimension `≤ n` (`CanonicalCentres.canonicalInvariant`) resolves the marked
+ideal `(X, X, [], 𝔞, 1)` (driver `ResolutionInvariantSeq.exists_isGeoResolution_isCanonical`); a resolution with mark `1` and
+`N = X` principalizes (`MarkedIdeal.pullback_eq_exceptionalDivisor_of_isGeoResolution`: `T^*𝔞 = 𝒪(-E_T)` for the exceptional
+divisor `E_T` of the tower).  New here: the support of `E_T` is the union of the members of the transformed divisor of the marked
+ideal (`support_exceptionalDivisor_eq_biUnion`), which has simple normal crossings because the transforms stay well formed; and
+the exceptional locus of the tower lies in the support of `E_T`.
 
 ## Main results
 
@@ -57,6 +35,12 @@ formed; and the exceptional locus of the tower lies in the support of `E_T`.
   any tower is the union of the members of the transformed divisor; the exceptional locus of a tower lies in that support;
 * `isInvDomain_univ`: `(X, X, [], 𝔞, 1)` lies in the domain of the invariants in dimension `≤ n` when `𝔞` is coherent and
   nonzero at every point (no connectedness needed);
+* **`exists_tower_principalization`** (tower form) and **`exists_principalization`** (the public statement, unbundled);
+  `exists_principalization_of_connected` (on a connected `X` it suffices that `𝔞` is not the zero ideal).
+
+Import discipline (standalone Hironaka library): this module imports only the resolution machinery (`CanonicalCentres`) and
+`BlowupSequenceIsomorphismOff`, `FactorizationDomain`; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -67,7 +51,9 @@ universe u
 namespace Hironaka.HironakaPrincipalization
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.BlowupStrictSubmanifold Hironaka.DivisorExponentAlong
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.BlowupStrictSubmanifold Hironaka.DivisorExponentAlong
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 noncomputable section
@@ -187,6 +173,70 @@ theorem isInvDomain_univ {M : Type u} [TopologicalSpace M] [ChartedSpace (Comple
   dimLE := fun x _ => ⟨n, le_rfl, AnalyticIrreducibleComponents.regularAtDim_univ x⟩
   one_le_d := le_rfl
   isNonzeroAlongAt := fun x _ => hne x
+
+/-- **Principalization, tower form**: over a compact base, a coherent ideal nonzero at every point is principalized by a
+multiple test blow-up `T` of `(X, X, [], 𝔞, 1)`: `T^*𝔞 = 𝒪(-E_T)`, the support of `E_T` is the union of the members of the
+transformed divisor, which has simple normal crossings, and the exceptional locus of `T` lies in that support. -/
+theorem exists_tower_principalization {X : CMfd.{u} n} [CompactSpace X] {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent)
+    (hne : ∀ x, IsNonzeroAlongAt univ 𝔞 x) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y),
+      IsGeoResolution (⟨univ, [], 𝔞, 1⟩ : MarkedIdeal n X) T ∧
+      GermIdeal.pullback (m := n) T.proj 𝔞 = (BlowupTowerTransforms.exceptionalDivisor T).ideal ∧
+      IsSNCDivisor n (geoTransformAlong (⟨univ, [], 𝔞, 1⟩ : MarkedIdeal n X) T).E ∧
+      (BlowupTowerTransforms.exceptionalDivisor T).support =
+        ⋃ H ∈ (geoTransformAlong (⟨univ, [], 𝔞, 1⟩ : MarkedIdeal n X) T).E, H ∧
+      exceptionalLocus n T.proj ⊆ (BlowupTowerTransforms.exceptionalDivisor T).support := by
+  set 𝔪 : MarkedIdeal n X := ⟨univ, [], 𝔞, 1⟩ with h𝔪
+  have hdom : IsInvDomain n 𝔪 := isInvDomain_univ h𝔞 hne
+  obtain ⟨Y, T, -, hres⟩ :=
+    ResolutionInvariantSeq.exists_isGeoResolution_isCanonical (CanonicalCentres.canonicalInvariant.{u} n) hdom
+  refine ⟨Y, T, hres, ?_, ?_, support_exceptionalDivisor_eq_biUnion 𝔪 rfl T, exceptionalLocus_subset_support T⟩
+  · exact pullback_eq_exceptionalDivisor_of_isGeoResolution 𝔪 rfl h𝔞 rfl T hres
+  · exact (InvDomainTowerAlong.isInvDomain_geoTransformAlong hdom T hres.1).isWellFormed.isSNCDivisor
+
+/-- **Principalization of a coherent ideal** (Hironaka; `hir:principalization`): let `X` be a compact complex manifold and `𝔞`
+a coherent ideal sheaf on `X` which is nonzero at every point (some germ of `𝔞_x` is not identically zero near `x`).  There
+are a finite sequence of blowups with smooth centres `f : X' → X`, an effective divisor `D` on `X'` and a list `E` of
+hypersurfaces with simple normal crossings such that `f^*𝔞 = 𝒪(-D)`, `supp D = ⋃ E = f⁻¹ Z(𝔞)`, and `f` is an isomorphism over
+`X \ Z(𝔞)`. -/
+theorem exists_principalization {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+    [IsComplexManifold n X] [CompactSpace X] {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent)
+    (hne : ∀ x, IsNonzeroAlongAt univ 𝔞 x) :
+    ∃ (X' : Type u) (_ : TopologicalSpace X') (_ : ChartedSpace (ComplexModel n) X')
+      (_ : IsComplexManifold n X') (f : X' → X) (_ : IsBlowupSequence n X X' f)
+      (D : EffectiveDivisor n X') (E : List (Set X')),
+      GermIdeal.pullback (m := n) f 𝔞 = D.ideal ∧
+      IsSNCDivisor n E ∧
+      D.support = ⋃ H ∈ E, H ∧
+      D.support = f ⁻¹' 𝔞.zeroLocus ∧
+      IsIsomorphismOver n f 𝔞.zeroLocusᶜ := by
+  have : CompactSpace (CMfd.of (n := n) X) := ‹CompactSpace X›
+  obtain ⟨Y, T, -, hpb, hsnc, hsupp, hexc⟩ := exists_tower_principalization (X := CMfd.of (n := n) X) h𝔞 hne
+  have hsuppZ : (BlowupTowerTransforms.exceptionalDivisor T).support = T.proj ⁻¹' 𝔞.zeroLocus := by
+    rw [EffectiveDivisor.support, ← hpb, BlowupExceptionalDivisor.zeroLocus_pullback T.contMDiff_proj h𝔞]
+  refine ⟨Y, inferInstance, inferInstance, inferInstance, T.proj, T.isBlowupSequence,
+    BlowupTowerTransforms.exceptionalDivisor T, _, hpb, hsnc, hsupp, hsuppZ, ?_⟩
+  refine BlowupSequenceIsomorphismOff.isIsomorphismOver_compl_of_image_exceptionalLocus_subset T.isBlowupSequence ?_
+  rintro x ⟨z, hz, rfl⟩
+  have hz' := hexc hz
+  rw [hsuppZ] at hz'
+  exact hz'
+
+/-- **Principalization on a connected manifold**: it suffices that `𝔞` is not the zero ideal (`𝔞 ⊄ 𝓘_X`). -/
+theorem exists_principalization_of_connected {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+    [IsComplexManifold n X] [CompactSpace X] [ConnectedSpace X] {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent)
+    (hres : ¬ 𝔞.Le (vanishingIdeal (n := n) (univ : Set X))) :
+    ∃ (X' : Type u) (_ : TopologicalSpace X') (_ : ChartedSpace (ComplexModel n) X')
+      (_ : IsComplexManifold n X') (f : X' → X) (_ : IsBlowupSequence n X X' f)
+      (D : EffectiveDivisor n X') (E : List (Set X')),
+      GermIdeal.pullback (m := n) f 𝔞 = D.ideal ∧
+      IsSNCDivisor n E ∧
+      D.support = ⋃ H ∈ E, H ∧
+      D.support = f ⁻¹' 𝔞.zeroLocus ∧
+      IsIsomorphismOver n f 𝔞.zeroLocusᶜ :=
+  exists_principalization h𝔞 fun x =>
+    FactorizationDomain.isNonzeroAlongAt_of_not_le FactorizationDomain.isClosedConnectedSubmanifold_univ h𝔞 hres x
+      (mem_univ x)
 
 end Principalization
 

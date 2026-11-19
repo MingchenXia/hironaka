@@ -1,0 +1,164 @@
+\begin{theorem}[Synchronized terminal native phases]
+\label{hir:g8-native-simultaneous-terminal-comparison}
+\lean{Hironaka.HironakaG8NativeFilteredSimultaneousTerminal.native_simultaneous_terminal_emptyAware_of_filtered_boundary}
+\uses{hir:g8-simultaneous-native-centre-comparison,hir:g8-native-common-history-clock}
+Two complete native phases with the same Hilbert--Samuel label and
+carrier compare on their common actual base. The ordered boundary
+lists may differ by globally empty slots. The isomorphism matches the
+actual stages up to empty steps. The native windows and their common
+positive marks may be chosen independently.
+\end{theorem}
+
+\begin{proof}
+Filter each ordered boundary by the mask of ambient empty slots. The
+same mask on every native window retains canonicality, active cosupport
+and simultaneous maxima. To erase one globally empty blowup, normalize
+its map to an identity step. Restriction retains the identity step and
+literal suffix on each window, so every active rank changes by the
+same strictly monotone recursive clock shift. The surviving actual
+centres therefore retain their simultaneous maximum certificates.
+Repeat until every centre is nonempty. At each pair of matched
+prefixes the simultaneous-centre comparison identifies the next centre,
+and uniqueness of blowups gives the physical comparison on that step.
+The shorter history cannot finish earlier than the longer one because
+both window systems detect the same remaining active points.
+\end{proof}
+
+\begin{theorem}[Comparison of labelled native singular histories]
+\label{hir:g8-labelled-native-whole-overlap}
+\lean{Hironaka.HironakaG8LabelledNativeHead.exists_head_phase,Hironaka.HironakaG8LabelledNativeOverlap.labelled_native_history_overlap}
+\uses{hir:g8-labelled-native-resolve-compact,hir:g8-native-simultaneous-terminal-comparison}
+Two complete labelled histories on a shared comparison open compare
+by actual tower isomorphisms with empty stages allowed. Both compact
+tasks contain the comparison open, and their corresponding initial
+strict carriers and nonempty boundary lists match over the base.
+\end{theorem}
+
+\begin{proof}
+Extract the first actual phase and the saturated suffix from each
+history. If the highest labels differ, the higher phase is empty
+on the shared open because all singular profiles there are bounded
+by the lower label. If they agree, compare the synchronized phases.
+In either case the stage comparison matches the current carrier and
+nonempty chronological boundary slots. The dense complement is
+preserved under the singular-centred phases. Induct on the total
+number of remaining labels and append the physical comparisons.
+\end{proof}
+
+\begin{theorem}[Original invariant comparisons at aligned overlap prefixes]
+\label{hir:g8-original-overlap-prefix-transport}
+\uses{hir:g8-labelled-native-whole-overlap,hir:g8-native-prefix-original-canonical}
+\lean{Hironaka.HironakaG8OriginalOverlapPrefixTransport.original_prefix_transport_of_emptyAware,Hironaka.HironakaG8OriginalOverlapPrefixTransport.original_native_overlap_prefix_read,Hironaka.HironakaG8OriginalOverlapPrefixTransport.exists_aligned_prefix_of_emptyAware,Hironaka.HironakaG8OriginalOverlapPrefixTransport.original_prefix_centres_of_canonical_overlap,Hironaka.HironakaG8OriginalOverlapPrefixTransport.original_native_prefix_centres_of_canonical_overlap}
+\leanok
+An actual empty-aware overlap aligns every finite prefix of
+one history with a literal prefix of the other. A canonical
+side in the original invariant domain transfers canonicality
+and the maximum locus to the matching prefix. For whole
+vanishing records the comparison allows different empty
+boundary slots and uses the matching ordered nonempty slots.
+\end{theorem}
+\begin{proof}
+Follow the physical stage alignment through the finite
+pruning. Remove empty steps to compare the original
+canonical histories, then restore their strictly monotone
+recursive changes and transfer the maximum loci. For
+vanishing records the carrier equality and the filtered
+boundary equality supply the original record comparison.
+\end{proof}
+
+\begin{theorem}[Original canonicality on actual labelled overlaps]
+\label{hir:g8-labelled-native-original-overlap}
+\uses{hir:g8-original-overlap-prefix-transport}
+\lean{Hironaka.HironakaG8LabelledNativeOriginalOverlap.labelled_native_original_overlap_prefix,Hironaka.HironakaG8LabelledNativeOriginalOverlap.labelled_native_original_overlap_iff}
+\leanok
+For two actual labelled histories on their common saturated
+task, the labelled overlap supplies the physical comparison.
+Under the right record's original invariant domain, whole
+mark-one canonicality agrees. A canonical right history
+gives the matching left prefix and its original maximum
+locus at every finite right prefix.
+\end{theorem}
+\begin{proof}
+Apply the labelled overlap theorem to the supplied carrier
+and filtered ordered boundary data. Its actual empty-aware
+comparison aligns the finite prefixes and supplies the
+original record transport.
+\end{proof}
+
+\begin{theorem}[Original prefix transport on the adopted embedded atlas]
+\label{hir:g8-labelled-embedded-original-overlap}
+\uses{hir:g8-labelled-native-original-overlap,hir:g8-complete-labelled-compact-enclosed}
+\lean{Hironaka.HironakaG8LabelledEmbeddedOriginalOverlap.labelled_embedded_chart_original_overlap}
+\leanok
+The physical comparison of two actual embedded atlas charts
+on their literal intersection gives a whole mark-one
+canonicality equivalence under the right invariant domain
+and the supplied smooth-tail comparisons. At each aligned
+prefix, right-prefix canonicality suffices to transport the
+cosupport and its original maximum locus.
+\end{theorem}
+\begin{proof}
+Use the physical comparison already furnished by the labelled
+embedded atlas. Apply the original finite prefix comparison
+to the same isomorphism after empty-step alignment, keeping
+its endpoint map and the whole ordered boundary comparison.
+\end{proof}
+
+\begin{theorem}[The original domain on a proper embedded chart overlap]
+\label{hir:g8-proper-embedded-original-overlap}
+\uses{hir:g8-labelled-embedded-original-overlap}
+\lean{Hironaka.HironakaG8ProperEmbeddedOriginalOverlap.original_vanishing_domain_iff_empty_interior,Hironaka.HironakaG8ProperEmbeddedOriginalOverlap.original_vanishing_domain_on_nested_open,Hironaka.HironakaG8ProperEmbeddedOriginalOverlap.labelled_proper_embedded_chart_original_overlap}
+\leanok
+A whole analytic vanishing record with ordered SNC boundary
+has the mark-one invariant domain exactly when its carrier
+has empty interior. If the actual chart intersection misses
+the interior of the original analytic set, the embedded
+overlap derives the right domain. It then transports
+original canonicality and finite-prefix maxima.
+\end{theorem}
+\begin{proof}
+A nonzero analytic germ along the ambient carrier is
+equivalent to the absence of a neighborhood contained in the
+analytic set. The literal nested opens preserve coherence and
+pull back the entire ordered SNC boundary. Apply this criterion
+on the actual intersection and use the embedded overlap theorem.
+\end{proof}
+
+\begin{theorem}[Prefix readback on the prescribed charts of the glued atlas]
+\label{hir:g8-adopted-original-prefix-readback}
+\uses{hir:g8-proper-embedded-original-overlap,hir:g8-noncompact-embedded-resolution-atlas}
+\lean{Hironaka.HironakaG8AdoptedOriginalPrefixReadback.original_canonical_iff_stage_maxima,Hironaka.HironakaG8AdoptedOriginalPrefixReadback.reference_stage_maxima_restrict_prefix,Hironaka.HironakaG8AdoptedOriginalPrefixReadback.adopted_compact_chart_original_prefix_readback}
+\leanok
+A prescribed compact-enclosed window has a chart of the
+same glued map with the literal saturated endpoint open.
+On an overlap avoiding the carrier's interior, the reference
+prefix's original stage-maxima criterion gives an aligned
+prefix with original canonicality, cosupport and maximum
+pullback.
+\end{theorem}
+\begin{proof}
+Select the actual chart supplied for the prescribed window.
+Convert the reference stage criterion to canonicality and
+restrict it to the literal overlap. The adopted embedded
+comparison gives the actual aligned prefix and transfers
+its original maximum locus.
+\end{proof}
+
+\begin{theorem}[The first native centre on an occupied principal overlap]
+\label{hir:g8-adopted-principal-first-centre}
+\uses{hir:g8-adopted-original-prefix-readback,hir:g8-principal-native-initialization}
+\lean{Hironaka.HironakaG8AdoptedPrincipalFirstCentre.retained_native_initial_trace_eq_principal_centre}
+\leanok
+On an occupied literal window where the retained native
+record uses the whole vanishing ideal at its top mark, the
+physical centre trace is the pullback of the principal
+initializer's original centre. The actual first blowups
+have a tower isomorphism over the supplied overlap.
+\end{theorem}
+\begin{proof}
+Occupancy attains the top order on the retained chart.
+Remove the synchronizing power and use the common-ideal
+initial comparison to identify the whole mark-one maximum.
+Transport it on the given overlap and apply uniqueness of
+blowups to the two actual maps with that centre.
+\end{proof}

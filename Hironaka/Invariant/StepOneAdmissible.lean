@@ -1,53 +1,22 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneUSC
 import Hironaka.Invariant.StepOneAdmissibleTop
 import Hironaka.Invariant.MemberRestrictAdmissible
 import Hironaka.Invariant.ContactLowerValue
 import Hironaka.Invariant.StepOneSpecialDrop
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: admissibility of the level sets of the value
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1a / 1b: near a non-special point
-the centres of the canonical resolution of Step 1 are those of the canonical resolution of the restricted
-lower-dimensional marked ideal, and its admissible centres are admissible centres of `J̄` (Lemma `le:S`).
+Blueprint `hir:step-one-admissible`, `hir:step-one-canonical-test` (`blueprint/src/hironaka.tex`, Hironaka phase H4, pieces
+of `hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1a / 1b:
+near a non-special point the centres of the canonical resolution of Step 1 are those of the canonical resolution of the
+restricted lower-dimensional marked ideal, and its admissible centres are admissible centres of `J̄` (Lemma `le:S`).
 
 Property (1) of the masked Step 1 value function (`hir:centre-function`, "admissibility of the level sets of the maximum, on
-open sets") at the **non-special values** `(s, λ)`, `λ ∈ Λ`. Let `T` be a multiple test blow-up of `J̄` which is a canonical
+open sets") at the **non-special values** `(s, λ)`, `λ ∈ Λ`.  Let `T` be a multiple test blow-up of `J̄` which is a canonical
 segment of `stepOneInvM R 𝔍`, `W` an open set of its last stage on which the value is `≤ (s, λ)` on the cosupport, and `x` a
 point of `W` in the cosupport.
 
@@ -60,16 +29,14 @@ point of `W` in the cosupport.
   `T₁|_{W_x}` (`StepOneCanonicalTail.stepOneInvM_eq_lower`), on which `R ≤ λ`; the field `admissible` of `R` makes it an
   admissible centre of the restriction of the transform of `𝔏`, and the **transfer** (`AdmissibleTransfer`) makes it one of
   the restriction of `J̄_T` (`exists_opens_isAdmissibleCentre_of_eq`).
-* Admissible centres are local relative to an open set
-  (`MaxLocusLocal.isAdmissibleCentre_pullback_val_of_forall_exists_opens`).
+* Admissible centres are local relative to an open set (TN3's `MaxLocusLocal.isAdmissibleCentre_pullback_val_of_forall_exists_opens`).
 
-The transfer is Włodarczyk's `le:S` for one centre, on every open set of the last stage: for `s ≥ 1`
-`MemberRestrictAdmissible.isAdmissibleCentre_pullback_val_of_lowerMarked_succ` (`hasAdmissibleTransfer_succ`), for
-`s = 0` `ContactLowerValue.isAdmissibleCentre_of_lowerMarkedM_zero` (`hasAdmissibleTransfer_zero`; the divisor is
-kept and masked). With the top values (`StepOneAdmissibleTop`) this is property (1) at every value; at the maximum
-value on the whole last stage it makes the maximum locus an admissible centre, so **canonical segments of
-`stepOneInvM R 𝔍` are multiple test blow-ups of `J̄`**, and the test-tower hypothesis of the canonical-tail theorem
-and of properties (1)--(4) is removed.
+The transfer is Włodarczyk's `le:S` for one centre, on every open set of the last stage: for `s ≥ 1` TN3's
+`MemberRestrictAdmissible.isAdmissibleCentre_pullback_val_of_lowerMarked_succ` (`hasAdmissibleTransfer_succ`), for `s = 0`
+TN23's `ContactLowerValue.isAdmissibleCentre_of_lowerMarkedM_zero` (`hasAdmissibleTransfer_zero`; the divisor is kept and
+masked).  With the top values (`StepOneAdmissibleTop`) this is property (1) at every value; at the maximum value on the whole
+last stage it makes the maximum locus an admissible centre, so **canonical segments of `stepOneInvM R 𝔍` are multiple test
+blow-ups of `J̄`**, and the test-tower hypothesis of the canonical-tail theorem and of properties (1)--(4) is removed.
 
 ## Main results
 
@@ -77,15 +44,18 @@ and of properties (1)--(4) is removed.
   `hasAdmissibleTransfer`;
 * `exists_opens_preimage_eq_empty`, `exists_opens_isAdmissibleCentre_of_eq`;
 * `stepOneInvM_admissible_coe_of_hasAdmissibleTransfer`: the level sets of the values `(s, λ)`, given the transfer at level `s`;
-* `stepOneInvM_admissible_coe`, **`stepOneInvM_admissible`**: property (1) at the values `(s + 1, λ)`, `(s, λ)`, and
-  at every value;
+* `stepOneInvM_admissible_succ_coe`, `stepOneInvM_admissible_coe`, **`stepOneInvM_admissible`**: property (1) at the values
+  `(s + 1, λ)`, `(s, λ)`, and at every value;
 * `isAdmissibleCentre_maxLocus_stepOneInvM`, **`isGeoTestTower_of_isCanonical_stepOneInvM`**: the maximum locus is an
   admissible centre, and canonical segments are multiple test blow-ups;
-* `stepOneInvM_admissible_of_isCanonical`, `stepOneInvM_usc_of_isCanonical`, `stepOneInvM_decrease_of_isCanonical`,
-  `stepOneInvM_emptyStep_of_isCanonical`: the canonical-tail theorem and properties (1)--(4) along canonical
-  segments, without the test-tower hypothesis (the shapes of the fields `admissible`, `usc`, `decrease`, `emptyStep`
-  of `ResolutionInvariantExt.ResolutionInvariant`, `IsInvDomain` replaced by the explicit hypotheses: well formed,
-  `d ≥ 1`, maximal order along `N`, `dim N ≤ k`, `0 < n`).
+* `hasLowerDataL_stepOneInvM_of_isCanonical`, `stepOneInvM_admissible_of_isCanonical`, `stepOneInvM_usc_of_isCanonical`,
+  `stepOneInvM_decrease_of_isCanonical`, `stepOneInvM_emptyStep_of_isCanonical`: the canonical-tail theorem and properties
+  (1)--(4) along canonical segments, without the test-tower hypothesis (the shapes of the fields `admissible`, `usc`,
+  `decrease`, `emptyStep` of `ResolutionInvariantExt.ResolutionInvariant`, `IsInvDomain` replaced by the explicit hypotheses:
+  well formed, `d ≥ 1`, maximal order along `N`, `dim N ≤ k`, `0 < n`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -96,7 +66,15 @@ universe u v
 namespace Hironaka.StepOneAdmissible
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneMaskTower Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail Hironaka.StepOneUSC Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.ResolutionInvariantOrder Hironaka.MaxLocusLocal
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneMaskTower Hironaka.StepOneValueMasked
+  Hironaka.StepOneCanonicalTail Hironaka.StepOneUSC
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.ResolutionInvariantOrder
+  Hironaka.MaxLocusLocal
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant isGeoTestTower_of_isCanonical)
@@ -130,14 +108,14 @@ def HasAdmissibleTransfer (s : ℕ) : Prop :=
       IsGeoTestTower (lowerMarkedM 𝔍 s T₀ y₀) (restrict (lowerMask 𝔍 s T₀ y₀) T₁) →
         AdmissibleTransfer 𝔍 s T₀ T₁ y₀
 
-/-- **Step 1ab: the transfer holds at every level `s + 1`** (Włodarczyk `le:S` for one centre;
+/-- **Step 1ab: the transfer holds at every level `s + 1`** (Włodarczyk `le:S` for one centre; TN3's
 `MemberRestrictAdmissible.isAdmissibleCentre_pullback_val_of_lowerMarked_succ`). -/
 theorem hasAdmissibleTransfer_succ (h𝔍 : 𝔍.IsWellFormed) (hn : 0 < n) (s : ℕ) :
     HasAdmissibleTransfer 𝔍 (s + 1) :=
   fun T₀ T₁ hT _ hy₀ hTW W'' _ h =>
     MemberRestrictAdmissible.isAdmissibleCentre_pullback_val_of_lowerMarked_succ 𝔍 h𝔍 hn T₀ T₁ hT hy₀ hTW W'' h
 
-/-- **Step 1bb: the transfer holds at level `0`** (the divisor is kept and masked;
+/-- **Step 1bb: the transfer holds at level `0`** (the divisor is kept and masked; TN23's
 `ContactLowerValue.isAdmissibleCentre_of_lowerMarkedM_zero`). -/
 theorem hasAdmissibleTransfer_zero (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) : HasAdmissibleTransfer 𝔍 0 :=
   fun T₀ T₁ hT _ hy₀ _ W'' C h => ContactLowerValue.isAdmissibleCentre_of_lowerMarkedM_zero 𝔍 h𝔍 hd T₀ T₁ hT hy₀ W'' C h
@@ -322,6 +300,22 @@ theorem stepOneInvM_admissible_coe_of_hasAdmissibleTransfer (h𝔍 : 𝔍.IsWell
     rw [hV]
     exact MarkedIdeal.isAdmissibleCentre_empty _
 
+/-- **Property (1) of the masked Step 1 value at the values `(s + 1, λ)`** (`hir:step-one-admissible`; Step 1ab): along a
+multiple test blow-up `T` of `J̄` which is a canonical segment of `stepOneInvM R 𝔍`, on an open `W` on which the value is
+`≤ (s + 1, λ)` on the cosupport, the points of `W` in the cosupport with value `(s + 1, λ)` form an admissible centre of the
+restriction of `J̄_T` to `W`. -/
+theorem stepOneInvM_admissible_succ_coe (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
+    (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) (hk : DimLE n 𝔍.N k) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower (barMarked 𝔍) T) (hcan : IsCanonical (barMarked 𝔍) (stepOneInvM R 𝔍) T) (W : Opens Y)
+    (s : ℕ) (l : Λ)
+    (hle : ∀ y ∈ (geoTransformAlong (barMarked 𝔍) T).cosupp, y ∈ W →
+      stepOneInvM R 𝔍 T y ≤ toLex (s + 1, (l : WithTop Λ))) :
+    (MarkedIdeal.pullback (Subtype.val : W → Y) (geoTransformAlong (barMarked 𝔍) T)).IsAdmissibleCentre
+      ((Subtype.val : W → Y) ⁻¹' {y | y ∈ (geoTransformAlong (barMarked 𝔍) T).cosupp ∧
+        stepOneInvM R 𝔍 T y = toLex (s + 1, (l : WithTop Λ))}) :=
+  stepOneInvM_admissible_coe_of_hasAdmissibleTransfer 𝔍 R h𝔍 hd hn hmax hk T hT hcan W (s + 1) l
+    (hasAdmissibleTransfer_succ 𝔍 h𝔍 hn s) hle
+
 /-- **Property (1) of the masked Step 1 value at the values `(s, λ)`** (`hir:step-one-admissible`; Step 1ab for `s ≥ 1`,
 Step 1bb for `s = 0`). -/
 theorem stepOneInvM_admissible_coe (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
@@ -394,6 +388,14 @@ section Canonical
 
 variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X) {k : ℕ} {Λ : Type v} [LinearOrder Λ]
   (R : ResolutionInvariant.{u, v} n (k - 1) Λ)
+
+/-- **The canonical-tail theorem along canonical segments** (`StepOneCanonicalTail.hasLowerDataL_of_isCanonical` without the
+test-tower hypothesis). -/
+theorem hasLowerDataL_stepOneInvM_of_isCanonical (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
+    (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) (hk : DimLE n 𝔍.N k) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hcan : IsCanonical (barMarked 𝔍) (stepOneInvM R 𝔍) T) : HasLowerDataL R 𝔍 (lowerMarkedM 𝔍) T :=
+  hasLowerDataL_of_isCanonical 𝔍 R h𝔍 hd hn hmax hk T
+    (isGeoTestTower_of_isCanonical_stepOneInvM 𝔍 R h𝔍 hd hn hmax hk T hcan) hcan
 
 /-- **Property (1) along canonical segments** (the field `admissible`, `IsInvDomain` replaced by the explicit hypotheses). -/
 theorem stepOneInvM_admissible_of_isCanonical (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)

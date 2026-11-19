@@ -4,7 +4,7 @@
 \label{hir:step-one-well-founded}
 \uses{hir:step-one-bridge,hir:centre-function,hir:resolution-driver,hir:invariant-driver,hir:canonical-segments,bcalc:transform-off-centre,bcalc:inv-domain-stable}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality,kollar07-resolution}
-\lean{Hironaka.StepOneWellFounded.StepDrop,Hironaka.StepOneWellFounded.lt_of_mem_maxLocus,Hironaka.StepOneWellFounded.lt_of_isCanonical_append,Hironaka.StepOneWellFounded.lt_of_isCanonical_step,Hironaka.StepOneWellFounded.proj_mem_cosupp_step}\upstreamlean{TranscendentalNakamaye.Pending.StepOneWellFounded.stepDrop_of_resolutionInvariant,TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_of_wellFoundedLT}\lean{Hironaka.StepOneWellFounded.stepDrop_stepOneInvM}\upstreamlean{TranscendentalNakamaye.Pending.StepOneWellFounded.stepOneInvM_lt_of_isCanonical_append,TranscendentalNakamaye.Pending.StepOneWellFounded.isAdmissibleCentre_maxLocus_stepOneInvM,TranscendentalNakamaye.Pending.StepOneWellFounded.exists_isGeoResolution_stepOneInvM}
+\lean{Hironaka.StepOneWellFounded.StepDrop,Hironaka.StepOneWellFounded.lt_of_mem_maxLocus,Hironaka.StepOneWellFounded.lt_of_isCanonical_append,Hironaka.StepOneWellFounded.lt_of_isCanonical_step,Hironaka.StepOneWellFounded.proj_mem_cosupp_step}\upstreamlean{history-8a7b3c4faa3f4e55,history-abd68b8db93a4bd9}\lean{Hironaka.StepOneWellFounded.stepDrop_stepOneInvM}\upstreamlean{history-1f7f2076b2030710,history-b1dba5159b4192a7,history-baa07d92ab838416}
 \mixedleanok
 Let \(\underline{\mathcal I}\) be a marked ideal on \(X\) and \(\operatorname{inv}\) a function on the towers over \(X\) such that after every step of a canonical segment
 (the centre \(C\) empty or the maximum locus) every point \(z\) of the new cosupport lies over the cosupport, with \(\operatorname{inv}(z)<\operatorname{inv}(\pi z)\) if
@@ -36,7 +36,7 @@ when \(\Lambda\) is.
 \label{hir:marked-ideal-operations}
 \uses{hir:cosupport-basic,hir:order-basic,hir:order-power,hir:derivative-leibniz}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.IdealOrderArithmetic.vanishesToOrderOn_sum_mul,Hironaka.IdealOrderArithmetic.IsInSpanAt.vanishesToOrderOn,Hironaka.IdealOrderArithmetic.cosupport_sumIdeal,Hironaka.IdealOrderArithmetic.inter_cosupport_subset_cosupport_mul,Hironaka.IdealOrderArithmetic.cosupport_subset_cosupport_idealPow,Hironaka.OrderMultiplicativity.cosupport_idealPow_mul_eq}\upstreamlean{TranscendentalNakamaye.Pending.OrderMultiplicativity.cosupport_sumIdeal_idealPow}
+\lean{Hironaka.IdealOrderArithmetic.vanishesToOrderOn_sum_mul,Hironaka.IdealOrderArithmetic.IsInSpanAt.vanishesToOrderOn,Hironaka.IdealOrderArithmetic.cosupport_sumIdeal,Hironaka.IdealOrderArithmetic.inter_cosupport_subset_cosupport_mul,Hironaka.IdealOrderArithmetic.cosupport_subset_cosupport_idealPow,Hironaka.OrderMultiplicativity.cosupport_idealPow_mul_eq}\upstreamlean{history-c114b4fe6efaa223}
 \mixedleanok
 Let \(\mathfrak a,\mathfrak b\) be ideals of holomorphic germs and \(N\subset M\). Then
 \(\operatorname{cosupp}(\mathfrak a+\mathfrak b|_N,\mu)=\operatorname{cosupp}(\mathfrak a|_N,\mu)\cap\operatorname{cosupp}(\mathfrak b|_N,\mu)\),
@@ -59,7 +59,7 @@ Lemma~\ref{hir:order-power}. The last statement combines the first and the fourt
 \label{hir:controlled-operations}
 \uses{bcalc:controlled-transform,bcalc:exceptional-divisor}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.MarkedIdealOperationsTransform.mul_le_mul',Hironaka.MarkedIdealOperationsTransform.idealPow_mono,Hironaka.MarkedIdealOperationsTransform.idealPow_idealPow,Hironaka.MarkedIdealOperationsTransform.mul_sumIdeal,Hironaka.MarkedIdealOperationsTransform.pullback_sumIdeal,Hironaka.MarkedIdealOperationsTransform.isCoherent_D,Hironaka.MarkedIdealOperationsTransform.controlledTransform_mul,Hironaka.MarkedIdealOperationsTransform.controlledTransform_idealPow,Hironaka.MarkedIdealOperationsTransform.controlledTransform_sumIdeal}\upstreamlean{TranscendentalNakamaye.Pending.MarkedIdealOperationsTransform.controlledTransform_sumIdeal_idealPow}
+\lean{Hironaka.MarkedIdealOperationsTransform.mul_le_mul',Hironaka.MarkedIdealOperationsTransform.idealPow_mono,Hironaka.MarkedIdealOperationsTransform.idealPow_idealPow,Hironaka.MarkedIdealOperationsTransform.mul_sumIdeal,Hironaka.MarkedIdealOperationsTransform.pullback_sumIdeal,Hironaka.MarkedIdealOperationsTransform.isCoherent_D,Hironaka.MarkedIdealOperationsTransform.controlledTransform_mul,Hironaka.MarkedIdealOperationsTransform.controlledTransform_idealPow,Hironaka.MarkedIdealOperationsTransform.controlledTransform_sumIdeal}\upstreamlean{history-94c4a5af3f864f5d}
 \mixedleanok
 Let \(\sigma\) be a blowup along \(C\) and \(\mathfrak a\subset\mathcal I_C^\mu\), \(\mathfrak b\subset\mathcal I_C^\nu\) coherent. Then
 \(\sigma^{\mathrm c}(\mathfrak a\mathfrak b,\mu+\nu)=\sigma^{\mathrm c}(\mathfrak a,\mu)\,\sigma^{\mathrm c}(\mathfrak b,\nu)\), \(\sigma^{\mathrm c}(\mathfrak a^k,\mu k)=\sigma^{\mathrm c}(\mathfrak a,\mu)^k\),

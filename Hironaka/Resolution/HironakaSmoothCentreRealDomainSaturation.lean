@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.RealDomainLocalCoherenceExact
 import Hironaka.Resolution.HironakaSmoothCentreCoherentDomain
 
 /-! # Exact original saturation on a real nonlinear domain
@@ -21,6 +15,22 @@ noncomputable section
 open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf OkaIdealOperations
   OkaCoherence HironakaSmoothCentreCoherentDomain HironakaRelativeNormalCoherentSaturation
 
+/-- The genuine restricted local coherence condition supplies the actual Oka finite presentation. -/
+theorem idealFGAt_of_coherentOn {n : ℕ} (I : GermIdeal n (ComplexModel n))
+    (W : Set (ComplexModel n)) (hI : CoherentOn I W) {y : ComplexModel n} (hy : y ∈ W) :
+    IdealFGAt I.mem y := by
+  obtain ⟨U, hU, hyU, _hUW, N, H, hH, hgen⟩ := hI y hy
+  refine ⟨U, hU, hyU, Fin N, inferInstance, H,
+    fun i => mdifferentiableOn_iff_differentiableOn.mp (hH i), ?_⟩
+  intro z hz g
+  rw [hgen z hz g, CoherentIdealColon.isInSpanAt_range_iff]
+  constructor
+  · rintro ⟨hg, a, ha, he⟩
+    exact ⟨hg.mono (fun _ h => h.differentiableAt), a,
+      fun i => (ha i).mono (fun _ h => h.differentiableAt), he⟩
+  · rintro ⟨hg, a, ha, he⟩
+    exact ⟨hg.mono (fun _ h => h.mdifferentiableAt), a,
+      fun i => (ha i).mono (fun _ h => h.mdifferentiableAt), he⟩
 
 section Original
 variable {n : ℕ} {M : Type*} [TopologicalSpace M]

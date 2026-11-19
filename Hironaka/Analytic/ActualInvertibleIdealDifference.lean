@@ -1,15 +1,10 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.GermIdealTotalTransform
 
 set_option autoImplicit false
 
 /-! # Effective differences of actual invertible holomorphic ideals
 
-Two nested invertible ideals have
+Copy--4 `lem:ideal-comparison`: two nested actual invertible ideals have
 an invertible actual colon ideal, and hence their difference is an
 effective divisor on the same manifold.  No second principalization is
 assumed.  The proof cancels germs rather than dividing at a zero.

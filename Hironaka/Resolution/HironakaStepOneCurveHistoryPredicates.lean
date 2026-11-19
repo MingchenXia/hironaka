@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaDimensionThreeStepOneCurveEnvelope
 
 /-!
@@ -29,8 +24,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaBoundaryCountAnalyticSuperlevels HironakaStepOneSpecialAnalyticLoci
   HironakaCurveAnalyticPredicates GlobalComponents RegularLocusComponent AnalyticDimensionBasics
   CanonicalCentres
-open Hironaka
-
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
@@ -184,7 +177,7 @@ theorem exists_analytic_dimzero_stepOne_history_exception (hn : 0 < n)
     hlevel rf sx, hlevel rf sx1, htop rf sx]
 
 open HironakaGeneralThreeNonspecialAnalyticLoci HironakaDimensionThreeStepOneCurveEnvelope
-open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 /-- Original true domain3/canonical inputs produce the genuine companion curve and computed history exception. -/
 theorem exists_actual_companion_stepOne_history_exception (hn : 0 < n)

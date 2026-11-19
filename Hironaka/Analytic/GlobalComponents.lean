@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.RegularLocusComponent
 
 set_option autoImplicit false
@@ -11,7 +6,7 @@ set_option autoImplicit false
 # Global irreducible components are locally finite
 
 Blueprint `rem:global-components` (Demailly, *Complex analytic and differential geometry*, II.5.3),
-the usual global irreducible-component decomposition.
+step M7 of the route to Remmert's proper mapping theorem (`blueprint/src/remmert.tex`).
 
 Let `A` be an analytic subset of a complex manifold.  The *global components* of `A` are the
 closures of the connected components of the set of regular points of `A` (of any dimension).

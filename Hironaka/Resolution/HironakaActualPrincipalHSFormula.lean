@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPrincipalJetMultiplication
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
@@ -91,7 +86,6 @@ theorem hilbertSamuelValue_actual_principal (f : R) (μ : ℕ)
     rw [sup_eq_right.mpr hi]
     exact actualBaseJetDimension n ℓ
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- A nonzero ORIGINAL germ alone supplies the entire existing principal HS profile. -/
 theorem hilbertSamuelValue_actual_principal_order (f : R) (hf : f ≠ 0) (ℓ : ℕ) :
     hilbertSamuelValue (Ideal.span ({f} : Set R)) ℓ =

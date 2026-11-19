@@ -3,7 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-import Hironaka.Blowup.ControlledTransformUniqueness
 import Hironaka.Resolution.HironakaSmoothSubmersionDivisorExponents
 import Hironaka.Blowup.BlowupControlledTransform
 set_option autoImplicit false
@@ -14,7 +13,6 @@ open Hironaka.HolomorphicIdealSheaves
 open InvertibleIdealQuotient GermIdealPullbackCalculus RelativePrincipalizationSpan
 open IdealWeightPowers MarkedIdeals GermIdealOrder
 open HironakaSmoothSubmersionDivisorExponents HironakaSmoothSubmersionCoefficientIdeals
-open Hironaka
 noncomputable section
 variable {n m : ℕ} {X Y : Type*} [TopologicalSpace X]
  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]

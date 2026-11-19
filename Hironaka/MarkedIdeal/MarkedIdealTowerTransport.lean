@@ -1,27 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.NormalCrossingsInvariance
 import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Transport of multiple test blow-ups along a biholomorphism of the base
 
-Sources: Włodarczyk 2005 §2.4 (Proposition `pr:funct`: multiple test blow-ups and resolutions pull back along étale
-maps; here biholomorphisms), Bierstone--Milman 2008 Theorem 1.3 (functoriality); the canonicity clause (3) of
-`hir:canonical-resolution`.
+Blueprint `hir:biholomorphism-invariance`, `hir:tower-transport` (`blueprint/src/hironaka.tex`, Hironaka
+phase H1: transport of a tower along a biholomorphism).  Sources: Włodarczyk 2005 §2.4 (Proposition `pr:funct`:
+multiple test blow-ups and resolutions pull back along étale maps; here biholomorphisms), Bierstone--Milman 2008
+Theorem 1.3 (functoriality); the canonicity clause (3) of `hir:canonical-resolution`.
 
 Let `Φ : X' ≃ₘ⟮𝓘(ℂ, ℂⁿ), 𝓘(ℂ, ℂⁿ)⟯ X` be a biholomorphism (Mathlib's `Diffeomorph`, smooth of order `∞`
 for the complex model with corners) and `𝔪` a marked ideal on `X` with coherent ideal.
@@ -40,6 +29,21 @@ for the complex model with corners) and `𝔪` a marked ideal on `X` with cohere
 blowup `σ₁ : Y₁ → X` replaced by `Φ⁻¹ ∘ σ₁ : Y₁ → X'` (a blowup along `Φ⁻¹C₁`,
 `MarkedIdealBiholomorphism.isBlowupAlong_comp_inverse`) and the later ones unchanged; its field `back` is the
 biholomorphism of the last stages (`Φ` for the empty tower, the identity otherwise).  Stage by stage:
+
+* `length_transport`, `proj_transport` (`Φ ∘ T'.proj = T.proj ∘ back`): the stages correspond by
+  biholomorphisms commuting with the blowups;
+* `geoTransformAlong_transport_step`: from the first blowup on, the transforms of `Φ^*𝔪` along `T'` and of `𝔪`
+  along `T` are EQUAL (at stage `0` they are `Φ^*𝔪` and `𝔪`); `geoTransform_transport` is the one-step form used
+  in the induction;
+* `cosupp_geoTransformAlong_transport`, `isAdmissibleCentre_transport_iff`,
+  `isWellFormed_geoTransformAlong_transport`: cosupports, admissible centres and well-formedness correspond;
+* `isGeoTestTower_transport_iff`, `isGeoResolution_transport_iff`: **`T'` is a multiple test blow-up (a
+  resolution) of `Φ^*𝔪` iff `T` is one of `𝔪`.**
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -50,7 +54,10 @@ universe u
 namespace Hironaka.MarkedIdealTowerTransport
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.GermIdealPullbackCalculus
+open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance
+  Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism
+  Hironaka.GermIdealPullbackCalculus
 
 noncomputable section
 
@@ -178,6 +185,116 @@ def transport : {Y : CMfd.{u} n} → BlowupTower X Y → TowerTransport X' Y
     (transport Φ (BlowupTower.refl : BlowupTower X X)).tower = BlowupTower.refl := rfl
 
 @[simp] theorem transport_refl_back : (transport Φ (BlowupTower.refl : BlowupTower X X)).back = Φ := rfl
+
+variable {Y Z : CMfd.{u} n}
+
+theorem transport_step_tower (T : BlowupTower X Y) (C : Set Y) (π : Z → Y) (hπ : IsBlowupAlong n C π) :
+    (transport Φ (.step T C π hπ)).tower =
+      .step (transport Φ T).tower ((transport Φ T).back ⁻¹' C) ((transport Φ T).back.symm ∘ π)
+        (isBlowupAlong_comp_inverse (transport Φ T).back.contMDiff (transport Φ T).back.symm.contMDiff
+          (transport Φ T).back.apply_symm_apply (transport Φ T).back.symm_apply_apply hπ) := rfl
+
+/-- From the first blowup on, the last-stage biholomorphism is the identity. -/
+theorem transport_step_back (T : BlowupTower X Y) (C : Set Y) (π : Z → Y) (hπ : IsBlowupAlong n C π) :
+    ⇑(transport Φ (.step T C π hπ)).back = id := rfl
+
+/-- **The transported tower has the same length.** -/
+theorem length_transport : {Y : CMfd.{u} n} → (T : BlowupTower X Y) → (transport Φ T).tower.length = T.length
+  | _, .refl => rfl
+  | _, .step T _ _ _ => congrArg (· + 1) (length_transport T)
+
+/-- **The stages correspond by biholomorphisms commuting with the projections**:
+`Φ ∘ T'.proj = T.proj ∘ back`. -/
+theorem proj_transport : {Y : CMfd.{u} n} → (T : BlowupTower X Y) → ∀ p : (transport Φ T).target,
+    Φ ((transport Φ T).tower.proj p) = T.proj ((transport Φ T).back p)
+  | _, .refl, _ => rfl
+  | _, .step T _ π _, p => by
+      have := proj_transport T ((transport Φ T).back.symm (π p))
+      rw [Diffeomorph.apply_symm_apply] at this
+      exact this
+
+/-- **The stage maps commute with the blowups**: the new blowup `σ'` satisfies `back ∘ σ' = σ` (on the previous
+stage). -/
+theorem back_comp_step (T : BlowupTower X Y) (π : Z → Y) (p : Z) :
+    (transport Φ T).back ((transport Φ T).back.symm (π p)) = π p :=
+  Diffeomorph.apply_symm_apply _ _
+
+variable {𝔪 : MarkedIdeal n X}
+
+/-- **One step of the transported transform**: blowing up `back⁻¹C` by `back⁻¹ ∘ σ` after the transport of `T`
+gives the transform of `𝔪` along `T` followed by `σ` (coherent ideal). -/
+theorem geoTransform_transport (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → {Z : CMfd.{u} n} → (C : Set Y) → {π : Z → Y} →
+    ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ π →
+      (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).geoTransform
+          ((transport Φ T).back ⁻¹' C) ((transport Φ T).back.symm ∘ π) =
+        (geoTransformAlong 𝔪 T).geoTransform C π
+  | _, .refl, _, C, _, hπ =>
+      MarkedIdeal.geoTransform_pullback Φ.contMDiff Φ.symm.contMDiff Φ.apply_symm_apply Φ.symm_apply_apply 𝔪
+        h𝔞 C hπ
+  | _, .step T C' π' hπ', _, C, π, _ => by
+      have ih := geoTransform_transport h𝔞 T C' hπ'.contMDiff
+      change ((geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).geoTransform
+          ((transport Φ T).back ⁻¹' C') ((transport Φ T).back.symm ∘ π')).geoTransform C π = _
+      rw [ih]
+      rfl
+
+/-- **From the first blowup on, the transforms are equal**: the transform of `Φ^*𝔪` along the transported tower
+is the transform of `𝔪` along `T` (on the same last stage). -/
+theorem geoTransformAlong_transport_step (h𝔞 : 𝔪.ideal.IsCoherent) (T : BlowupTower X Y) (C : Set Y)
+    (π : Z → Y) (hπ : IsBlowupAlong n C π) :
+    geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ (.step T C π hπ)).tower =
+      geoTransformAlong 𝔪 (.step T C π hπ) :=
+  geoTransform_transport Φ h𝔞 T C hπ.contMDiff
+
+/-- **Cosupports correspond**: `cosupp 𝔪'_{T'} = back⁻¹ cosupp 𝔪_T`. -/
+theorem cosupp_geoTransformAlong_transport (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).cosupp =
+        (transport Φ T).back ⁻¹' (geoTransformAlong 𝔪 T).cosupp
+  | _, .refl => cosupp_pullback_eq h𝔞
+  | _, .step T C π hπ => by
+      rw [geoTransformAlong_transport_step Φ h𝔞 T C π hπ]
+      rfl
+
+/-- **Admissible centres correspond**: `back⁻¹C` is admissible for the transform of `Φ^*𝔪` along `T'` iff `C` is
+admissible for the transform of `𝔪` along `T`. -/
+theorem isAdmissibleCentre_transport_iff (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → (C : Set Y) →
+      ((geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).IsAdmissibleCentre
+          ((transport Φ T).back ⁻¹' C) ↔ (geoTransformAlong 𝔪 T).IsAdmissibleCentre C)
+  | _, .refl, _ => isAdmissibleCentre_pullback_iff h𝔞
+  | _, .step T C' π hπ, C => by
+      rw [geoTransformAlong_transport_step Φ h𝔞 T C' π hπ]
+      rfl
+
+/-- **Well-formedness corresponds** along the transported tower. -/
+theorem isWellFormed_geoTransformAlong_transport (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → (geoTransformAlong 𝔪 T).IsWellFormed →
+      (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).IsWellFormed
+  | _, .refl, h => IsWellFormed.pullback h
+  | _, .step T C π hπ, h => by
+      rw [geoTransformAlong_transport_step Φ h𝔞 T C π hπ]
+      exact h
+
+/-- **Multiple test blow-ups correspond**: the transport of `T` is a multiple test blow-up of `Φ^*𝔪` iff `T` is
+one of `𝔪`. -/
+theorem isGeoTestTower_transport_iff (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      (IsGeoTestTower (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower ↔ IsGeoTestTower 𝔪 T)
+  | _, .refl => Iff.rfl
+  | _, .step T C π hπ => by
+      rw [transport_step_tower, isGeoTestTower_step_iff, isGeoTestTower_step_iff,
+        isGeoTestTower_transport_iff h𝔞 T, isAdmissibleCentre_transport_iff Φ h𝔞 T C]
+
+/-- **Resolutions correspond**: the transport of `T` resolves `Φ^*𝔪` iff `T` resolves `𝔪`. -/
+theorem isGeoResolution_transport_iff (h𝔞 : 𝔪.ideal.IsCoherent) (T : BlowupTower X Y) :
+    IsGeoResolution (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower ↔ IsGeoResolution 𝔪 T := by
+  unfold IsGeoResolution
+  rw [isGeoTestTower_transport_iff Φ h𝔞 T, cosupp_geoTransformAlong_transport Φ h𝔞 T]
+  refine and_congr_right fun _ => ⟨fun h => ?_, fun h => by rw [h, preimage_empty]⟩
+  rw [← (transport Φ T).back.toEquiv.surjective.image_preimage (geoTransformAlong 𝔪 T).cosupp]
+  rw [show ⇑(transport Φ T).back.toEquiv = ⇑(transport Φ T).back from rfl, h, image_empty]
 
 end Transport
 

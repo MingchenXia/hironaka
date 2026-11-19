@@ -1,26 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationDense
 import Hironaka.Analytic.GermParametrizationFunctions
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
 # Parametrization data with exposed fields, and density for each primitive element
 
-Inputs of Cartan's theorem for an irreducible germ (steps 3--4). The tree proves
-`GermParametrizationData.nonempty_parametrizationData` and `GermParametrizationData.nonempty_localParametrization`
-in `Nonempty` form, which hides the facts Cartan's argument needs about the data it constructs. This module restates
-them:
+Inputs of Cartan's theorem for an irreducible germ (steps 3--4 of our proof).  The tree proves
+`GermParametrizationData.nonempty_parametrizationData` and
+`GermParametrizationData.nonempty_localParametrization` in `Nonempty` form, which hides the
+facts Cartan's argument needs about the data it constructs.  This module restates them:
 
 * `exists_radius_parametrizationData`: for an `AlgebraicParametrization` (e.g. one with a
   prescribed primitive element, `CartanPrescribedPrimitive`) and every small radius `ρ` there is
@@ -31,6 +20,8 @@ them:
   step of `nonempty_localParametrization`, Demailly II.4.19 a)).
 
 The proofs are those of the tree, with the conclusions exposed.
+
+Sorry-free.
 -/
 
 open Set Filter Metric Polynomial

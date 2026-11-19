@@ -1,9 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Manifold.ComplexManifold
+module
+
+public import Hironaka.Manifold.ComplexManifold
+
 /-!
 # Complex analytic subsets and their regular loci
 
@@ -18,6 +16,8 @@ Analytic irreducibility below is the decomposition property for analytic
 subsets.  It deliberately does not use the unrelated Hausdorff-topological
 predicate `IsIrreducible`.
 -/
+
+@[expose] public section
 
 open Set
 open scoped Manifold ContDiff Topology
@@ -62,6 +62,13 @@ variable [hM : IsComplexManifold n M]
 namespace ComplexAnalyticPresentationAt
 
 variable {A B : Set M} {x : M}
+
+/-- Transport a local presentation across equality of the represented sets. -/
+def congr (hAB : A = B)
+    (p : ComplexAnalyticPresentationAt (n := n) A x) :
+    ComplexAnalyticPresentationAt (n := n) B x := by
+  subst B
+  exact p
 
 /-- The whole ambient manifold has the empty family of local equations. -/
 def univ (x : M) :
@@ -169,6 +176,13 @@ theorem IsComplexAnalyticSubset.inter {A B : Set M}
   obtain ⟨pB⟩ := hB x
   exact ⟨pA.inter pB⟩
 
+/-- Analyticity depends only on the underlying subset. -/
+theorem isComplexAnalyticSubset_congr {A B : Set M} (hAB : A = B) :
+    IsComplexAnalyticSubset (n := n) A ↔
+      IsComplexAnalyticSubset (n := n) B := by
+  subst B
+  rfl
+
 /-- Analytic irreducibility: a nonempty analytic set cannot be expressed as the
 union of two proper analytic subsets of itself. -/
 def IsComplexAnalyticallyIrreducible (A : Set M) : Prop :=
@@ -184,6 +198,9 @@ variable {A B C : Set M}
 
 theorem analytic (hA : IsComplexAnalyticallyIrreducible (n := n) A) :
     IsComplexAnalyticSubset (n := n) A := hA.1
+
+theorem nonempty (hA : IsComplexAnalyticallyIrreducible (n := n) A) : A.Nonempty :=
+  hA.2.1
 
 theorem eq_left_or_eq_right
     (hA : IsComplexAnalyticallyIrreducible (n := n) A)
@@ -201,6 +218,11 @@ theorem congr (hAB : A = B) :
   rfl
 
 end IsComplexAnalyticallyIrreducible
+
+@[simp] theorem not_isComplexAnalyticallyIrreducible_empty :
+    ¬ IsComplexAnalyticallyIrreducible (n := n) (∅ : Set M) := by
+  intro h
+  exact h.nonempty.ne_empty rfl
 
 /-- The standard complex `k`-plane inside the ambient coordinate space:
 the first `k` coordinates are free and every remaining coordinate vanishes. -/
@@ -224,6 +246,38 @@ structure LocalHolomorphicEquivAt (p : ComplexModel n) where
   mapsTo_invFun : MapsTo invFun target source
   left_inv : ∀ z, z ∈ source → invFun (toFun z) = z
   right_inv : ∀ w, w ∈ target → toFun (invFun w) = w
+
+namespace LocalHolomorphicEquivAt
+
+/-- The underlying local biholomorphism is an actual open partial
+homeomorphism.  Keeping this conversion explicit lets local analytic
+flattenings use the topological covariance theorems for upper-semicontinuous
+regularization. -/
+def toOpenPartialHomeomorph {p : ComplexModel n}
+    (Φ : LocalHolomorphicEquivAt (n := n) p) :
+    OpenPartialHomeomorph (ComplexModel n) (ComplexModel n) where
+  toFun := Φ.toFun
+  invFun := Φ.invFun
+  source := Φ.source
+  target := Φ.target
+  map_source' := Φ.mapsTo_toFun
+  map_target' := Φ.mapsTo_invFun
+  left_inv' := Φ.left_inv
+  right_inv' := Φ.right_inv
+  continuousOn_toFun := Φ.toFun_holomorphic.continuousOn
+  continuousOn_invFun := Φ.invFun_holomorphic.continuousOn
+  open_source := Φ.isOpen_source
+  open_target := Φ.isOpen_target
+
+@[simp] theorem coe_toOpenPartialHomeomorph {p : ComplexModel n}
+    (Φ : LocalHolomorphicEquivAt (n := n) p) :
+    (toOpenPartialHomeomorph Φ : ComplexModel n → ComplexModel n) = Φ.toFun := rfl
+
+@[simp] theorem coe_toOpenPartialHomeomorph_symm {p : ComplexModel n}
+    (Φ : LocalHolomorphicEquivAt (n := n) p) :
+    ((toOpenPartialHomeomorph Φ).symm : ComplexModel n → ComplexModel n) = Φ.invFun := rfl
+
+end LocalHolomorphicEquivAt
 
 include hM
 /-- A point at which `A` is locally biholomorphically flattened to
@@ -255,6 +309,19 @@ theorem regularLocus_subset (A : Set M) (k : ℕ) :
   intro x hx
   exact hx.2.1
 
+omit hM in
+/-- Regularity of a fixed dimension is invariant under equality of subsets. -/
+theorem regularAtDim_congr {A B : Set M} (hAB : A = B) (x : M) (k : ℕ) :
+    RegularAtDim (n := n) A x k ↔ RegularAtDim (n := n) B x k := by
+  subst B
+  rfl
+
+omit hM in
+theorem regularLocus_congr {A B : Set M} (hAB : A = B) (k : ℕ) :
+    regularLocus (n := n) A k = regularLocus (n := n) B k := by
+  subst B
+  rfl
+
 /-- A closed irreducible analytic subvariety together with a certified complex
 dimension.  The regular-point field records evidence that the chosen dimension
 is realized.  It does not postulate a global embedded manifold model or assert
@@ -279,11 +346,25 @@ theorem analytic (V : ClosedIrreducibleAnalyticSubvariety n M) :
     IsComplexAnalyticSubset (n := n) V.carrier :=
   V.irreducible_carrier.analytic
 
+theorem nonempty (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    V.carrier.Nonempty :=
+  V.irreducible_carrier.nonempty
+
 /-- The certified dimension is witnessed by an actual regular point. -/
 theorem exists_regular_point (V : ClosedIrreducibleAnalyticSubvariety n M) :
     ∃ x ∈ V.carrier, RegularAtDim (n := n) V.carrier x V.dim := by
   obtain ⟨x, hx⟩ := V.regularLocus_nonempty
   exact ⟨x, regularLocus_subset V.carrier V.dim hx, hx⟩
+
+/-- Extensionality includes the certified dimension; no unproved uniqueness of
+analytic dimension is smuggled into the bundle. -/
+@[ext] theorem ext (hcarrier : V.carrier = W.carrier) (hdim : V.dim = W.dim) :
+    V = W := by
+  cases V
+  cases W
+  cases hcarrier
+  cases hdim
+  rfl
 
 end ClosedIrreducibleAnalyticSubvariety
 

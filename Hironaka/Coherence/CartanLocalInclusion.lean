@@ -1,23 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.CartanLocalAlgebra
 import Hironaka.Coherence.CartanKeyLemma
 import Hironaka.Coherence.OkaIdealOperations
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.AnalyticProjectionWeierstrass
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.GermParametrizationFunctions
-import Hironaka.Analytic.GermParametrizationSets
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Coherence.OkaGermBridge
-import Hironaka.Coherence.OkaRelationSheaf
+
 set_option autoImplicit false
 
 /-!
@@ -37,6 +21,8 @@ Proof: translate to germs at `x` (`OkaGermBridge.germAt`), apply Demailly's Lemm
 (`CartanLocalAlgebra.exists_local_division`): `δ^m g ≡ r(u - u(x))` with `deg r` smaller than the
 local Weierstrass factor `W'` of `W(u(x) + T)`; then `r(u - u(x))` vanishes on `(A, x)`, so
 `r = 0` by the key step `CartanKeyLemma.eventually_eq_zero_of_vanishing`.
+
+Sorry-free.
 -/
 
 open Set Filter Metric Polynomial
@@ -44,7 +30,9 @@ open scoped Topology
 
 namespace Hironaka.CartanLocalInclusion
 
-open RegularLocusDense HolGerm GermAlgebraicParametrization GermParametrizationData GermParametrizationFunctions OkaRelationSheaf OkaIdealOperations OkaGermBridge AnalyticGermDecomposition
+open RegularLocusDense HolGerm GermAlgebraicParametrization GermParametrizationData
+  GermParametrizationFunctions OkaRelationSheaf OkaIdealOperations OkaGermBridge
+  AnalyticGermDecomposition
 
 noncomputable section
 

@@ -1,25 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.BoundaryCount
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Intersections of members with a submanifold transverse to the divisor
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of the proof of `pr:resol` (the monomial case: the centre
-is the maximal locus of the monomial invariant, an intersection of components of the divisor restricted to `N`);
-Bierstone--Milman 2008 (`bierstone-milman08-functoriality`) §5.
+Hironaka phase H2 (TN3), an input of the monomial case along a submanifold `N`
+(`hir:monomial-case`, `hir:monomial-invariant-geometry` (5) for `N ≠ M`,
+`blueprint/src/hironaka.tex`):
+claimed on I-0977 C-0071.  Blueprint `bcalc:member-intersection-along` (chapter
+`blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of the proof of
+`pr:resol` (the monomial case: the centre is the maximal locus of the monomial invariant, an
+intersection of components of the divisor restricted to `N`); Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`) §5.
 
 Let `E` be a simple normal crossings divisor transverse to `N` (`NormalCrossings.IsTransverse`:
 at each point of `N` one coordinate system makes `N` a coordinate subspace `L_{S₀}` and each member
@@ -29,11 +23,16 @@ members.
 * `hasNormalCrossings_inter_memberInter`: `N ∩ ⋂_{i ∈ S} E_i` has only normal crossings with `E`
   (in the transversality coordinates it is `L_{S₀ ∪ {t_i : i ∈ S}}`);
 * `isClosedSubmanifold_inter_memberInter` (`N` closed, `0 < n`): it is a closed submanifold;
+* `isAdmissibleCentre_inter_memberInter`: if it lies in the cosupport of `(M, N, E, 𝔞, d)`, it is an
+  admissible centre; `_of_isWellFormed` for a well-formed marked ideal.
 
 These are the along-`N` versions of `BoundaryCount.hasNormalCrossings_memberInter`,
 `isClosedSubmanifold_memberInter`, `isAdmissibleCentre_memberInter` (`N = M`), with the same proofs:
 the flattening of the centre comes from
 `SimultaneousNormalCrossings.isAdaptedAt_of_hasNormalCrossings`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -43,7 +42,8 @@ universe u
 
 namespace Hironaka.MemberInterAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupSNCTransform NormalCrossings SimultaneousNormalCrossings MarkedIdeals BoundaryCount
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupSNCTransform NormalCrossings SimultaneousNormalCrossings MarkedIdeals BoundaryCount
 
 noncomputable section
 
@@ -85,6 +85,23 @@ theorem isClosedSubmanifold_inter_memberInter (hn : 0 < n) {N : Set X} (hNc : Is
   have h := (hflat hy hyΦ).1
   rw [← complexCoordinatePlane_min] at h
   exact h
+
+/-- **The trace on `N` of an intersection of members inside the cosupport is an admissible
+centre** of `(M, N, E, 𝔞, d)` (`N` closed, `E` simple normal crossings and transverse to `N`). -/
+theorem isAdmissibleCentre_inter_memberInter (hn : 0 < n) (𝔪 : MarkedIdeal n X)
+    (hNc : IsClosed 𝔪.N) (hE : IsSNCDivisor n 𝔪.E) (hT : IsTransverse n 𝔪.N 𝔪.E)
+    (S : Finset (Fin 𝔪.E.length)) (hsub : 𝔪.N ∩ memberInter 𝔪.E S ⊆ 𝔪.cosupp) :
+    𝔪.IsAdmissibleCentre (𝔪.N ∩ memberInter 𝔪.E S) :=
+  ⟨isClosedSubmanifold_inter_memberInter hn hNc hE hT S, hsub,
+    hasNormalCrossings_inter_memberInter hT S⟩
+
+/-- **The same for a well-formed marked ideal.** -/
+theorem isAdmissibleCentre_inter_memberInter_of_isWellFormed (hn : 0 < n) {𝔪 : MarkedIdeal n X}
+    (h𝔪 : 𝔪.IsWellFormed) (S : Finset (Fin 𝔪.E.length))
+    (hsub : 𝔪.N ∩ memberInter 𝔪.E S ⊆ 𝔪.cosupp) :
+    𝔪.IsAdmissibleCentre (𝔪.N ∩ memberInter 𝔪.E S) :=
+  isAdmissibleCentre_inter_memberInter hn 𝔪 h𝔪.isClosedSubmanifold_N.1 h𝔪.isSNCDivisor
+    h𝔪.isTransverse S hsub
 
 end
 

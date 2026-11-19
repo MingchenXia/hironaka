@@ -1,41 +1,23 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupStrictIdeal
 import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Manifold.LocalHolomorphicInverse
-import Hironaka.Blowup.BlowupFibreDirection
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.Blowup.NestedFlattening
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Blowup.RegularPatchPullback
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Strict transforms of simple normal crossings divisors
 
-Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Definitions 2.2 and the remark after them
-("`E'` is a normal crossings divisor transverse to `N'`, because `σ` is admissible"); Wlodarczyk 2005
-(`wlodarczyk05-hironaka`), §2.1.
+Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Definitions 2.2 and the
+remark after them ("`E'` is a normal crossings divisor transverse to `N'`, because `σ` is
+admissible"); Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1.  Blueprint `bcalc:snc-chart`,
+`bcalc:snc-transform` (chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup along `C`, `N ⊇ C`, and `E = [H₁, …, H_s]` an ordered simple normal
 crossings divisor.  The transformed divisor of a marked ideal is
 
   `E' = [H₁', …, H_s', π⁻¹ C]`,  `H' = closure (π⁻¹ (H \ C))`
 
-(`MarkedIdeals.MarkedIdeal.geoTransform`, uses exactly this list).
+(`MarkedIdeals.MarkedIdeal.geoTransform`, TN-CLASSICAL 27f0bacf, uses exactly this list).
 
 * `mem_geoStrictTransform_iff_of_chart` -- **in a monomial chart `j` built on coordinates `Φ` with
   `C = ℂ^k × 0`, the strict transform of a coordinate subspace `L_T = {w_t = 0, t ∈ T}` is
@@ -54,6 +36,8 @@ crossings divisor.  The transformed divisor of a marked ideal is
 The hypothesis `IsAdaptedAt` is the simultaneous normal crossings of `N`, `C` and `E` at the points
 of the centre (Bierstone--Milman's "`C`, `E` have only normal crossings", read together with
 `C ⊆ N` and `E` transverse to `N`); it is a hypothesis here, not an interface.
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter
@@ -63,7 +47,10 @@ universe u
 
 namespace Hironaka.BlowupSNCTransform
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection BlowupStrictSubmanifold BlowupStrictIdeal NormalCrossings RegularAtDimTransport Hironaka.RegularPatchPullback
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection
+  BlowupStrictSubmanifold BlowupStrictIdeal NormalCrossings RegularAtDimTransport
+  Hironaka.RegularPatchPullback
 
 noncomputable section
 

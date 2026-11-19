@@ -1,45 +1,22 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupBiholomorphismLift
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingAlongTower
-import Hironaka.MarkedIdeal.HomogenizedGlueingLiftAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Isomorphisms of towers along concatenations, and the glueing lifts along the tail of a segment
 
-The *tail* form of `BlowupTowerIsomorphism.exists_isTowerIso_coeffHom`, which Step 1b of `hir:maximal-order-step`
-needs to show that its value "does not depend on `w`". Step 1b forms the marked ideal `𝓢_w` at the stage `T₀` where
-it starts and evaluates the inductive invariant along the *tail* `T₁` of the segment `T₀ T₁`; property (6) of
-`hir:centre-function` (`hir:tower-isomorphism` form) is then applied over the lift `Φ_{T₀}` of the glueing
-biholomorphism, to an isomorphism of the restricted tails. The restriction `(T₀ T₁)|_U` is not definitionally
-`T₀|_U` followed by `T₁|_{T₀⁻¹U}` (the stages agree only propositionally), so the tail isomorphism is built
-directly. Source: Włodarczyk 2005 (arXiv `hiron.tex`), Step 1bb (the induced towers `φ^*(X_i)`, defined up to
-isomorphism, and `φ_{pu}^*(..) = φ_{pv}^*(..)` along the part of the resolution after the hypersurface of maximal
-contact is chosen).
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0077 (offered C-0075): the *tail* form of
+`BlowupTowerIsomorphism.exists_isTowerIso_coeffHom`, which Step 1b of `hir:maximal-order-step` (`blueprint/src/hironaka.tex`)
+needs to show that its value "does not depend on `w`".  Step 1b forms the marked ideal `𝓢_w` at the stage `T₀` where it
+starts and evaluates the inductive invariant along the *tail* `T₁` of the segment `T₀ T₁`; property (6) of
+`hir:centre-function` (`hir:tower-isomorphism` form) is then applied over the lift `Φ_{T₀}` of the glueing biholomorphism,
+to an isomorphism of the restricted tails.  The restriction `(T₀ T₁)|_U` is not definitionally `T₀|_U` followed by
+`T₁|_{T₀⁻¹U}` (the stages agree only propositionally), so the tail isomorphism is built directly.  Blueprint
+`mc:tower-isomorphism-append`, `mc:tower-isomorphism-restrict-append`, `mc:glueing-lift-tail`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), Step 1bb (the induced towers
+`φ^*(X_i)`, defined up to isomorphism, and `φ_{pu}^*(..) = φ_{pv}^*(..)` along the part of the resolution after the
+hypersurface of maximal contact is chosen).
 
 ## Isomorphisms of towers
 
@@ -57,9 +34,13 @@ contact is chosen).
   (and of a family of preserved marked ideals) there are a lift `Φ` along `T₀ T₁` (with the isomorphism of the whole
   restricted towers and the family transported) and an isomorphism `χ : T₁|_{T₀⁻¹U'} ≅ T₁|_{T₀⁻¹U}` over `Φ₀` which agrees
   with `Φ` pointwise.
-* `exists_isTowerIso_tail_coeffHom`: for `J̄ = 𝓒_N(𝓗_N(𝔞), μ)` and `T₀ T₁` a multiple test blow-up of `J̄`: the lift
-  `Φ₀` along `T₀` (head isomorphism over the glueing biholomorphism) and the tail isomorphism `χ` over `Φ₀`, which
-  fixes `cosupp J̄_{T₀ T₁}` pointwise.
+* `exists_isTowerIso_tail_coeffHom`: for `J̄ = 𝓒_N(𝓗_N(𝔞), μ)` and `T₀ T₁` a multiple test blow-up of `J̄`: the lift `Φ₀`
+  along `T₀` (head isomorphism over the glueing biholomorphism, the four clauses of
+  `ContactIndependenceAlong.exists_isGlueingLiftAlong_coeffHom` at `T₀`) and the tail isomorphism `χ` over `Φ₀`, which fixes
+  `cosupp J̄_{T₀ T₁}` pointwise; `contact_independence_along_tail`: packaged from two tangent directions.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -164,7 +145,10 @@ end Hironaka.BlowupTowerIsomorphism
 
 namespace Hironaka.BlowupTowerIsoTail
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism MarkedIdealRestrictOpen BlowupStrictSubmanifold HomogenizedIdealAlong CoefficientIdealRestriction TangentDirectionAlong BlowupTowerIsomorphism BlowupRestrictOpen
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism
+  MarkedIdealRestrictOpen BlowupStrictSubmanifold HomogenizedIdealAlong CoefficientIdealRestriction
+  TangentDirectionAlong BlowupTowerIsomorphism BlowupRestrictOpen
 open HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
@@ -231,7 +215,8 @@ end RestrictAppend
 
 section Glueing
 
-open HomogenizedGlueingAlong HomogenizedGlueingAlongTower HomogenizedGlueingLiftAlong GlueingTrivialAction ContactIndependenceAlong BlowupBiholomorphismLift
+open HomogenizedGlueingAlong HomogenizedGlueingAlongTower HomogenizedGlueingLiftAlong GlueingTrivialAction
+  ContactIndependenceAlong BlowupBiholomorphismLift
 
 variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ} (G : GlueingDataAlong N 𝔞 μ u v)
@@ -363,6 +348,39 @@ theorem exists_isTowerIso_tail_coeffHom (h𝔞 : 𝔞.IsCoherent) (hN : IsClosed
   rw [hpt p (opensCongr (n := n) (openPreimage_append T₀ T₁ G.dom) p) rfl]
   rw [(hW.2 _).2 hT] at hp
   exact hL.apply_eq_of_mem_cosupp G h𝔞 hN hμ hH (opensCongr (n := n) (openPreimage_append T₀ T₁ G.dom) p) hp
+
+/-- **Packaged from two tangent directions** (Step 1bb along the tail): for tangent directions `u`, `v` along `N` of
+`(𝔞|_N, μ)` on open sets containing `x ∈ cosupp(𝔞|_N, μ)` there are glueing data `G` along `N` with `x ∈ U ∩ U'` such that
+for all towers `T₀`, `T₁` with `T₀ T₁` a multiple test blow-up of `J̄` some lift `Φ₀` along `T₀` maps the restricted
+coefficient ideal on `(N ∩ V(u))_{T₀}` to that on `(N ∩ V(v))_{T₀}` and carries an isomorphism of the restricted tails
+`T₁|_{T₀⁻¹U'} ≅ T₁|_{T₀⁻¹U}` whose last-stage map fixes `cosupp J̄_{T₀ T₁}` pointwise. -/
+theorem contact_independence_along_tail (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) {x : M}
+    (hx : x ∈ cosupport n N 𝔞 μ) {U₁ U₂ : Set M} (hu : IsTangentDirectionAlong N 𝔞 μ U₁ u) (hxU₁ : x ∈ U₁)
+    (hv : IsTangentDirectionAlong N 𝔞 μ U₂ v) (hxU₂ : x ∈ U₂) :
+    ∃ G : GlueingDataAlong N 𝔞 μ u v, x ∈ G.dom ∧ x ∈ G.cod ∧
+      ∀ {Y Z : CMfd.{u} n} (T₀ : BlowupTower (CMfd.of (n := n) M) Y) (T₁ : BlowupTower Y Z),
+        IsGeoTestTower (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) (T₀.append T₁) →
+        ∃ (Φ₀ : CMfd.of (n := n) (openPreimage T₀ G.dom) ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯
+              CMfd.of (n := n) (openPreimage T₀ G.cod))
+          (χ : CMfd.of (n := n) (openPreimage T₁ (openPreimage T₀ G.dom))
+            ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯
+              CMfd.of (n := n) (openPreimage T₁ (openPreimage T₀ G.cod))),
+          IsGlueingLiftAlong G T₀ Φ₀ ∧
+          IsTowerIso Φ₀ (restrict (openPreimage T₀ G.dom) T₁) (restrict (openPreimage T₀ G.cod) T₁) χ ∧
+          MarkedIdeal.pullback Φ₀ (MarkedIdeal.pullback (Subtype.val : openPreimage T₀ G.cod → Y)
+              (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T₀))
+                (strictAlong T₀ (N ∩ {x | u x = 0})))) =
+            MarkedIdeal.pullback (Subtype.val : openPreimage T₀ G.dom → Y)
+              (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T₀))
+                (strictAlong T₀ (N ∩ {x | v x = 0}))) ∧
+          ∀ p : openPreimage T₁ (openPreimage T₀ G.dom),
+            (p : Z) ∈ (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) (T₀.append T₁)).cosupp →
+              (χ p : Z) = p := by
+  obtain ⟨G, hxW, htriv⟩ := exists_glueingDataAlong_trivial h𝔞 hN hμ hx hu hxU₁ hv hxU₂
+  obtain ⟨hxd, hxc⟩ := G.mem_dom_and_mem_cod hxW hx
+  refine ⟨G, hxd, hxc, fun T₀ T₁ hT => ?_⟩
+  obtain ⟨Φ₀, χ, hL₀, -, hχ, -, hS₀, -, -, hfix⟩ := exists_isTowerIso_tail_coeffHom G h𝔞 hN hμ htriv T₀ T₁ hT
+  exact ⟨Φ₀, χ, hL₀, hχ, hS₀, hfix⟩
 
 end Glueing
 

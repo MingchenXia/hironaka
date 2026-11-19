@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.RestrictEmptyTowerAppendOriginalExact
 import Hironaka.Resolution.HironakaOriginalIndependentStoppedSource
 
 /-!
@@ -30,7 +24,7 @@ noncomputable section
 
 attribute [local instance] Classical.propDecidable
 
-open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   BlowupTowers BlowupTowerTransforms BlowupTowerIsomorphism MarkedIdeals MarkedIdeals.MarkedIdeal
   NormalCrossings RestrictEmptyTower CanonicalCentres EmbeddedFromResolution HironakaStageCenters
   HironakaOriginalTerminalChoiceComparison
@@ -44,9 +38,9 @@ open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaSmoothSubmersionOriginalCompactTerminal HironakaSmoothSubmersionRelativeGeometry
   HironakaSmoothSubmersionNormalCrossings
 
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open _root_.Hironaka.ResolutionDriver (maxLocus)
-open _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionDriver (maxLocus)
+open ResolutionInvariantExt (IsEmptyTower)
 
 variable {n m : ℕ} {X A B D D' : CMfd.{u} n} {Y E F : CMfd.{u} m}
 

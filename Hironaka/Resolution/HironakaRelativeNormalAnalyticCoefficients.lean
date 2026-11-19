@@ -1,11 +1,6 @@
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 import Hironaka.Resolution.HironakaRelativeNormalUniformLocalization
@@ -42,18 +37,15 @@ open HolGerm HironakaRelativeNormalAssociatedGraded HironakaRelativeNormalUnifor
 
 variable {V : Type*} [NormedAddCommGroup V] [NormedSpace ℂ V]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- An internally chosen entire holomorphic coefficient representative, with literal zero representative. -/
 def actualCoefficientRepresentative (h : HolGerm V) : V → ℂ := by
   classical
   exact if h=0 then 0 else Classical.choose h.property
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Zero coefficients are represented by the literal entire zero function. -/
 theorem actualCoefficientRepresentative_zero : actualCoefficientRepresentative (0 : HolGerm V) = 0 := by
   simp [actualCoefficientRepresentative]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Genuine holomorphicity on an actual neighborhood is supplied by the original whole germ. -/
 theorem actualCoefficientRepresentative_holomorphic (h : HolGerm V) :
     ∀ᶠ y in 𝓝 (0 : V), DifferentiableAt ℂ (actualCoefficientRepresentative h) y := by
@@ -64,7 +56,6 @@ theorem actualCoefficientRepresentative_holomorphic (h : HolGerm V) :
   · simp only [actualCoefficientRepresentative,if_neg hh]
     exact (Classical.choose_spec h.property).1
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The WHOLE true germ of the chosen coefficient is the SAME original entire germ. -/
 theorem actualCoefficientRepresentative_germ (h : HolGerm V) :
     (actualCoefficientRepresentative h : Germ (𝓝 (0 : V)) ℂ) = h.val := by
@@ -98,7 +89,6 @@ def actualPolynomialRepresentative {t : ℕ} (P : MvPolynomial (Fin t) (HolGerm 
     MvPolynomial (Fin t) (V → ℂ) :=
   ∑ α ∈ P.support, MvPolynomial.monomial α (actualCoefficientRepresentative (P.coeff α))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- At EVERY exponent the genuine entire coefficient function is its SAME original coefficient representative. -/
 theorem actualPolynomialRepresentative_coeff {t : ℕ} (P : MvPolynomial (Fin t) (HolGerm V))
     (α : Fin t →₀ ℕ) :
@@ -130,7 +120,6 @@ theorem actualPolynomialSpecialization_coeff {t : ℕ} (P : MvPolynomial (Fin t)
   rw [actualPolynomialSpecialization,MvPolynomial.coeff_map,actualPolynomialRepresentative_coeff]
   rfl
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The whole specialized polynomial retains the SAME original finite support bound. -/
 theorem actualPolynomialSpecialization_support_subset {t : ℕ} (P : MvPolynomial (Fin t) (HolGerm V))
     (y : V) : (actualPolynomialSpecialization P y).support ⊆ P.support := by
@@ -162,7 +151,6 @@ theorem actualPolynomialSpecialization_degree {t : ℕ} (m : MonomialOrder (Fin 
     rw [actualPolynomialSpecialization_coeff]
     exact hy
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONE actual common open retains holomorphicity of ALL whole polynomial coefficients in a finite family. -/
 theorem exists_common_polynomial_coefficient_open {t : ℕ}
     (Ps : Finset (MvPolynomial (Fin t) (HolGerm V))) :
@@ -477,7 +465,6 @@ theorem actualOriginalLeadingLifts_specialized_degree (d t : ℕ) (I : Ideal (Ho
   rw [map_prod] at hp
   exact Finset.prod_ne_zero_iff.mp hp g hg
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONLY the actual original whole ideal internally produces its ENTIRE common analytic finite model and SAME nonzero denominator open. -/
 theorem exists_original_whole_analytic_model (d t : ℕ) (I : Ideal (HolGerm (ComplexModel (d+t)))) :
     ∃ (U : Set (ComplexModel d)) (β : ComplexModel d → ℂ),

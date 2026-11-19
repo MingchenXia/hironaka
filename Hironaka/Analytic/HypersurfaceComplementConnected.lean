@@ -1,16 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicZeroSetThin
 import Mathlib.Analysis.Normed.Module.Connected
 import Mathlib.Topology.Compactness.Lindelof
 import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+
 set_option autoImplicit false
 
 /-!
 # Complements of hypersurfaces in a ball are path-connected
+
+Blueprint `lag:hypersurface-complement-connected` (Demailly, *Complex analytic and
+differential geometry*, II.4.19).
 
 If `g` is holomorphic on a ball `B` of a finite-dimensional complex normed space and not
 identically zero near the centre, then `B \ g⁻¹(0)` is path-connected.  Two points

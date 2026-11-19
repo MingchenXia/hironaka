@@ -1,10 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.BlowupEmptyIdentityExact
-import Hironaka.Support.CodimOneRestrictedTowerExact
 import Hironaka.Resolution.HironakaOriginalInvariantEmptyInsertion
 import Hironaka.Blowup.BlowupExistenceCodimOne
 import Hironaka.Resolution.HironakaCoherentTransformExtension

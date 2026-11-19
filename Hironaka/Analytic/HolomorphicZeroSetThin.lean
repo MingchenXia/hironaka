@@ -1,11 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicGermRing
 import Mathlib.Analysis.Complex.CauchyIntegral
 import Mathlib.Analysis.Analytic.Uniqueness
+
 set_option autoImplicit false
 
 /-!

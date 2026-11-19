@@ -1,59 +1,27 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactMarkedCanonical
 import Hironaka.Invariant.StepOneRegime
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplitIso
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Invariant.ContactStageTail
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HomogenizedGlueingAlongTower
-import Hironaka.MarkedIdeal.HomogenizedGlueingLiftAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.MaximalOrderStepOneB
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1b's value under a change of tangent direction, on arbitrary open sets
 
-The change of tangent direction in Step 1b of the Step 1 value function on the masks of two points, with hypotheses
-on those masks only, not on the glueing neighbourhoods. Source: Włodarczyk 2005 (arXiv `hiron.tex`), Step 1bb: by
-the Glueing Lemma `le:homo` the value does not depend on the hypersurface of maximal contact (`φ_{pu}^*(..) =
-φ_{pv}^*(..)` along the resolution after the hypersurface is chosen).
+Hironaka phase H3 (TN23-ENVELOPES), handed over by TN-CLASSICAL on I-0981 C-0109 (accepted C-0110), in the shape asked there,
+and in the form with the divisor kept and masked (the orchestrator's review of the Step 1 value function, 3 October 2026,
+findings H1 and M1): the change of tangent direction in Step 1b of the Step 1 value function (`hir:maximal-order-step`,
+`blueprint/src/hironaka.tex`; TN-CLASSICAL's `StepOneValue.stepOneInv`) on the masks of two points, with hypotheses on those
+masks only, not on the glueing neighbourhoods (`MaximalOrderStepOneB.inv_contactMarked_eq_ext`).  Blueprint
+`mc:tower-iso-opens`, `mc:tangent-change-opens` (`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv
+`hiron.tex`), Step 1bb: by the Glueing Lemma `le:homo` the value does not depend on the hypersurface of maximal contact
+(`φ_{pu}^*(..) = φ_{pv}^*(..)` along the resolution after the hypersurface is chosen).
 
-In the canonical-tail theorem of Step 1 the value at a nearby point `p` is computed with the tangent direction
-chosen at the base point of `p` and on the mask of `p`, while the reference point uses its own tangent direction and
-mask. tail form of the glueing lifts (`BlowupTowerIsoTail.exists_isTowerIso_tail_coeffHom`) gives an isomorphism of
-the tails restricted to the glueing neighbourhoods `T₀⁻¹U'`, `T₀⁻¹U` over the lift `Φ₀`; this module restricts it to
-the open set `V` of the points of `W' ∩ T₀⁻¹U'` mapped into `W` by `Φ₀` and to its image, which contain every point
-of the cosupport over `U' ∩ U` (fixed by `Φ₀`), and compares the two values through properties (5) and (6) of the
-inductive invariant.
+In the canonical-tail theorem of Step 1 the value at a nearby point `p` is computed with the tangent direction chosen at the base
+point of `p` and on the mask of `p`, while the reference point uses its own tangent direction and mask.  TN23's tail form of
+the glueing lifts (`BlowupTowerIsoTail.exists_isTowerIso_tail_coeffHom`) gives an isomorphism of the tails restricted to the
+glueing neighbourhoods `T₀⁻¹U'`, `T₀⁻¹U` over the lift `Φ₀`; this module restricts it to the open set `V` of the points of
+`W' ∩ T₀⁻¹U'` mapped into `W` by `Φ₀` and to its image, which contain every point of the cosupport over `U' ∩ U` (fixed by
+`Φ₀`), and compares the two values through properties (5) and (6) of the inductive invariant.
 
 ## Main results
 
@@ -63,11 +31,19 @@ inductive invariant.
 * `pullback_pullback_of_comp` (generic): `b^*(a^*𝔫) = d^*𝔫` for `a ∘ b = d`, `𝔫` coherent;
 * `exists_tail_iso_opens`: the restricted isomorphism of tails around a point of the cosupport, inside two given open sets;
   `inv_eq_of_tail_iso` (generic): values on two open sets compared through it;
+* **`inv_contactMarked_eq_of_opens`** (the shape of C-0109, `E = ∅`): for tangent directions `u`, `v` of `(𝔞|_N, μ)` at
+  `x ∈ cosupp` there is an open `O ∋ x` such that for every multiple test blow-up `T₀ T₁` of `J̄ = stepOneMarked N 𝔞 μ` and all
+  open sets `W ⊆ T₀⁻¹U₁`, `W' ⊆ T₀⁻¹U₂` of the stage `T₀` on which `contactMarked N 𝔞 μ u T₀ W` and
+  `contactMarked N 𝔞 μ v T₀ W'` lie in the domain of a resolution invariant `R` with canonical restricted tails, the two values
+  agree at every point of `cosupp J̄_{T₀ T₁}` over `W ∩ W' ∩ T₀⁻¹O`;
 * `pullback_val_restrictedCoeffHom_eq`: on an open set missing the original members, Step 1b's restricted marked ideal with the
   divisor of `𝔍` kept is the one with the original members deleted, preceded by `#𝔍.E` empty members;
-* **`inv_restrictedCoeffHom_eq_of_opens`** (divisor kept and masked): the same for `(𝓒_{N_{T₀}}(J̄_{T₀})|_{(N ∩
-  V(u))_{T₀}})|_W` with `J̄ = 𝓒_N(𝓗_N(𝔍))` carrying the divisor of `𝔍`, for open sets `W`, `W'` meeting no original
-  member; `inv_restrictedCoeffHom_eq_of_opens_disjoint` with the masks stated as disjointness.
+* **`inv_restrictedCoeffHom_eq_of_opens`** (divisor kept and masked; the shape of I-0981 C-0111): the same for
+  `(𝓒_{N_{T₀}}(J̄_{T₀})|_{(N ∩ V(u))_{T₀}})|_W` with `J̄ = 𝓒_N(𝓗_N(𝔍))` carrying the divisor of `𝔍`, for open sets `W`, `W'`
+  meeting no original member; `inv_restrictedCoeffHom_eq_of_opens_disjoint` with the masks stated as disjointness.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -77,7 +53,10 @@ universe u v
 
 namespace Hironaka.StepOneTangentChange
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen BlowupTowerIsomorphism ResolutionInvariantExt MaxLocusLocal HomogenizedGlueingAlongTower
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen
+  BlowupTowerIsomorphism ResolutionInvariantExt MaxLocusLocal HomogenizedGlueingAlongTower
 open HomogenizedGlueingTower (strictAlong)
 open MaximalOrderStepOneB (stepOneMarked contactMarked)
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
@@ -338,6 +317,68 @@ theorem exists_tail_iso_opens {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} (h�
 
 end Core
 
+/-! ### The change of tangent direction: the original members deleted (`E = ∅`) -/
+
+section TangentChange
+
+variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- **Step 1b's value does not depend on the tangent direction, on arbitrary open sets** (Włodarczyk, Step 1bb; the form of
+`MaximalOrderStepOneB.inv_contactMarked_eq_ext` asked on I-0981 C-0109): for tangent directions `u` on `U₁ ∋ x` and `v` on
+`U₂ ∋ x` of `(𝔞|_N, μ)` at a point `x` of the cosupport there is an open `O ∋ x` such that for every multiple test blow-up
+`T₀ T₁` of `J̄ = stepOneMarked N 𝔞 μ` and all open sets `W ⊆ T₀⁻¹U₁`, `W' ⊆ T₀⁻¹U₂` of the last stage of `T₀`: if
+`contactMarked N 𝔞 μ u T₀ W` and `contactMarked N 𝔞 μ v T₀ W'` lie in the domain of the resolution invariant `R` and the
+restrictions of `T₁` to `W`, `W'` are canonical segments of them, then at every point of `cosupp J̄_{T₀ T₁}` over
+`W ∩ W' ∩ T₀⁻¹O` the two values agree. -/
+theorem inv_contactMarked_eq_of_opens {k : ℕ} {Λ : Type v} [LinearOrder Λ] (R : ResolutionInvariant.{u, v} n k Λ)
+    {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    {x : M} (hx : x ∈ cosupport n N 𝔞 μ) {u v : M → ℂ} {U₁ U₂ : Set M}
+    (hu : IsTangentDirectionAlong N 𝔞 μ U₁ u) (hxU₁ : x ∈ U₁)
+    (hv : IsTangentDirectionAlong N 𝔞 μ U₂ v) (hxU₂ : x ∈ U₂) :
+    ∃ O : Opens M, x ∈ O ∧ ∀ {Y Z : CMfd.{u} n} (T₀ : BlowupTower (CMfd.of (n := n) M) Y) (T₁ : BlowupTower Y Z),
+      IsGeoTestTower (stepOneMarked N 𝔞 μ) (T₀.append T₁) →
+      ∀ (W W' : Opens Y), (W : Set Y) ⊆ T₀.proj ⁻¹' U₁ → (W' : Set Y) ⊆ T₀.proj ⁻¹' U₂ →
+      IsInvDomain k (contactMarked N 𝔞 μ u T₀ W) →
+      IsCanonical (contactMarked N 𝔞 μ u T₀ W) (R.inv (contactMarked N 𝔞 μ u T₀ W)) (restrict W T₁) →
+      IsInvDomain k (contactMarked N 𝔞 μ v T₀ W') →
+      IsCanonical (contactMarked N 𝔞 μ v T₀ W') (R.inv (contactMarked N 𝔞 μ v T₀ W')) (restrict W' T₁) →
+      ∀ (p : openPreimage T₁ W) (q : openPreimage T₁ W'), (p : Z) = q → T₀.proj (T₁.proj p) ∈ O →
+        (p : Z) ∈ (geoTransformAlong (stepOneMarked N 𝔞 μ) (T₀.append T₁)).cosupp →
+        R.inv (contactMarked N 𝔞 μ u T₀ W) (restrict W T₁) p =
+          R.inv (contactMarked N 𝔞 μ v T₀ W') (restrict W' T₁) q := by
+  obtain ⟨O, hxO, hO⟩ := exists_tail_iso_opens h𝔞 hN hμ hx hu hxU₁ hv hxU₂
+  refine ⟨O, hxO, ?_⟩
+  intro Y Z T₀ T₁ hT W W' hWU hW'U hdomu hcanu hdomv hcanv p q hpq hpO hpcos
+  have hzW' : T₁.proj (p : Z) ∈ W' := by
+    rw [hpq]
+    exact q.2
+  obtain ⟨Vu, Vv, hzu, hzv, ψ, ξ, hVuW, hVvW', hI, hξ, hψS⟩ := hO T₀ T₁ hT W W' p p.2 hzW' hpO hpcos
+  have hT₀ : IsGeoTestTower (stepOneMarked N 𝔞 μ) T₀ := ((isGeoTestTower_append_iff _ T₀ T₁).mp hT).1
+  obtain ⟨hJN, hJc, -⟩ := ContactIndependenceAlong.coeffHom_basic (μ := μ) h𝔞 hN
+  obtain ⟨hNT, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hJN hJc T₀ hT₀
+  have hcosu : (⟨(p : Z), hzu⟩ : openPreimage T₁ Vu) ∈
+      (geoTransformAlong (contactMarked N 𝔞 μ u T₀ Vu) (restrict Vu T₁)).cosupp := by
+    rw [(ContactStageTail.isGeoTestTower_tail_contactMarked_of_le h𝔞 hN hμ ⟨U₁, hu.isOpen⟩ hu T₀ T₁ hT Vu
+      fun y hy => hWU (hVuW hy)).2]
+    exact hpcos
+  have hcosv : (⟨(p : Z), hzv⟩ : openPreimage T₁ Vv) ∈
+      (geoTransformAlong (contactMarked N 𝔞 μ v T₀ Vv) (restrict Vv T₁)).cosupp := by
+    rw [(ContactStageTail.isGeoTestTower_tail_contactMarked_of_le h𝔞 hN hμ ⟨U₂, hv.isOpen⟩ hv T₀ T₁ hT Vv
+      fun y hy => hW'U (hVvW' hy)).2]
+    exact hpcos
+  have key := inv_eq_of_tail_iso R
+    (𝔫u := withN (coeffMarkedAlong (geoTransformAlong (stepOneMarked N 𝔞 μ) T₀)) (strictAlong T₀ (N ∩ {y | u y = 0})))
+    (𝔫v := withN (coeffMarkedAlong (geoTransformAlong (stepOneMarked N 𝔞 μ) T₀)) (strictAlong T₀ (N ∩ {y | v y = 0})))
+    (isCoherent_coeffMarkedAlong hcT hNT) (isCoherent_coeffMarkedAlong hcT hNT)
+    hVuW hVvW' T₁ (by exact hdomu) (by exact hcanu) (by exact hdomv) (by exact hcanv) hI (by exact hψS) (p : Z)
+    hzu hzv hξ (by exact hcosu) (by exact hcosv)
+  have hp : (⟨(p : Z), hVuW hzu⟩ : openPreimage T₁ W) = p := rfl
+  have hq : (⟨(p : Z), hVvW' hzv⟩ : openPreimage T₁ W') = q := Subtype.ext hpq
+  rw [hp, hq] at key
+  exact key
+
+end TangentChange
+
 /-! ### The change of tangent direction: the divisor kept and masked -/
 
 section TangentChangeKept
@@ -471,8 +512,8 @@ theorem inv_restrictedCoeffHom_eq_of_opens (R : ResolutionInvariant.{u, v} n k �
   rw [hp, hq] at key
   exact key
 
-/-- **`inv_restrictedCoeffHom_eq_of_opens` with the masks stated as disjointness**: the open sets `W`, `W'` are
-disjoint from the first `#𝔍.E` members of `E_{T₀}`. -/
+/-- **`inv_restrictedCoeffHom_eq_of_opens` with the masks stated as disjointness** (the packaging of I-0981 C-0111): the open
+sets `W`, `W'` are disjoint from the first `#𝔍.E` members of `E_{T₀}`. -/
 theorem inv_restrictedCoeffHom_eq_of_opens_disjoint (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X)
     (h𝔞 : 𝔍.ideal.IsCoherent) (hN : IsClosedSubmanifold n 𝔍.N) (hd : 1 ≤ 𝔍.d) {x : X}
     (hx : x ∈ cosupport n 𝔍.N 𝔍.ideal 𝔍.d) {u v : X → ℂ} {U₁ U₂ : Set X}

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaGeneralTwoCompanionCurveLoci
 import Hironaka.Analytic.ClosureDifferenceAnalytic
 
@@ -28,7 +23,6 @@ open GlobalComponents HironakaCurveAnalyticPredicates HironakaDimensionTwoStepOn
   HironakaOneDimensionalCanonicalSuperlevels HironakaGeneralTwoCompanionCurveLoci
   ClosureDifferenceAnalytic AnalyticDimensionBasics
 
-open Hironaka
 noncomputable section
 
 variable {n : ℕ} {M : Type*} [TopologicalSpace M]

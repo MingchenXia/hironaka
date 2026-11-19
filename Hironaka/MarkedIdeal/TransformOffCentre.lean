@@ -1,37 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
 import Hironaka.Blowup.BlowupIsomorphismOff
 import Hironaka.Invariant.IdealOrderArithmetic
 import Hironaka.MarkedIdeal.CodimOneSupport
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The transform of a marked ideal away from the centre
 
-Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1 (the blowup is an isomorphism off the centre, and the
-controlled transform is the pullback there) and Proposition `pr:resol` (3)(b) (off the centre the invariants do not
-change); Bierstone--Milman 2008, Definition 2.2.
+Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1 (the blowup is an isomorphism off the
+centre, and the controlled transform is the pullback there) and Proposition `pr:resol` (3)(b) (off
+the centre the invariants do not change); Bierstone--Milman 2008, Definition 2.2.  Blueprint
+`bcalc:transform-off-centre`, `bcalc:transform-off-centre-tower`, `bcalc:codim-one-step-rest`
+(chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup along `C` and `𝔪 = (X, N, E, 𝔞, d)` a marked ideal with `N` closed
 and `𝔞` an ideal of holomorphic germs; `𝔪' = 𝔪.geoTransform C π` is the corrected transform.
@@ -44,8 +26,16 @@ and `𝔞` an ideal of holomorphic germs; `𝔪' = 𝔪.geoTransform C π` is th
   the holomorphic section `s` of `π` over `X \ C` (`BlowupIsomorphismOff.exists_section_compl`)
   carries `a ∘ π = h` on `N'` back to `a = h ∘ s` on `N`, with `h ∘ s ∈ 𝔪^d` (extended by zero off
   `X \ C`).
-* Step 1ba, completed: blowing up the codimension-one part `R` of the support `S` of a marked ideal of maximal
-  order, the new support lies over `S \ R`, which has dimension `≤ n - 2` (with `CodimOneSupport`).
+* `cosupp_geoTransform_diff_preimage`: `cosupp 𝔪' \ π⁻¹ C = π⁻¹ (cosupp 𝔪 \ C)`;
+  `cosupp_geoTransform_subset_preimage`: `cosupp 𝔪' ⊆ π⁻¹ (cosupp 𝔪)` when `C ⊆ cosupp 𝔪`;
+  `cosupp_geoTransformAlong_subset`: along a multiple test blow-up the cosupports lie over
+  `cosupp 𝔪`.
+* `N = M`: `cosupport_controlledTransform_diff_preimage` for the controlled transform `σ^c(𝔞, μ)`.
+* Step 1ba, completed: blowing up the codimension-one part `R` of the support `S` of a marked ideal
+  of maximal order, the new support lies over `S \ R`, which has dimension `≤ n - 2`
+  (`cosupport_controlledTransform_subset_preimage_diff_codimOnePart`, with `CodimOneSupport`).
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter TopologicalSpace
@@ -53,7 +43,10 @@ open scoped Topology Manifold ContDiff
 
 namespace Hironaka.TransformOffCentre
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal GermIdealOrder IdealWeightPowers RestrictedIdealExtension RestrictedIdealQuotient InvertibleIdealQuotient BlowupStrictSubmanifold HadamardBridge IdealOrderArithmetic RelativePrincipalizationSpan BlowupControlledTransform
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal GermIdealOrder IdealWeightPowers
+  RestrictedIdealExtension RestrictedIdealQuotient InvertibleIdealQuotient BlowupStrictSubmanifold
+  HadamardBridge IdealOrderArithmetic RelativePrincipalizationSpan BlowupControlledTransform
 
 noncomputable section
 
@@ -162,6 +155,18 @@ theorem mem_cosupp_geoTransform_iff (𝔪 : MarkedIdeal n X) (hN : IsClosed 𝔪
   ⟨mem_cosupp_of_mem_cosupp_geoTransform 𝔪 hN h𝔞 hπ hz,
     mem_cosupp_geoTransform_of_mem_cosupp 𝔪 hN hπ hz⟩
 
+/-- `cosupp 𝔪' \ π⁻¹ C = π⁻¹ (cosupp 𝔪 \ C)`. -/
+theorem cosupp_geoTransform_diff_preimage (𝔪 : MarkedIdeal n X) (hN : IsClosed 𝔪.N)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) (hπ : IsBlowupAlong n C π) :
+    (𝔪.geoTransform C π).cosupp \ π ⁻¹' C = π ⁻¹' (𝔪.cosupp \ C) := by
+  ext z
+  simp only [Set.mem_sdiff, mem_preimage]
+  constructor
+  · rintro ⟨h, hz⟩
+    exact ⟨(mem_cosupp_geoTransform_iff 𝔪 hN h𝔞 hπ hz).mp h, hz⟩
+  · rintro ⟨h, hz⟩
+    exact ⟨(mem_cosupp_geoTransform_iff 𝔪 hN h𝔞 hπ hz).mpr h, hz⟩
+
 /-- **The cosupport of the transform lies over the cosupport** when the centre lies in it. -/
 theorem cosupp_geoTransform_subset_preimage (𝔪 : MarkedIdeal n X) (hN : IsClosed 𝔪.N)
     (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) (hπ : IsBlowupAlong n C π)
@@ -187,6 +192,41 @@ theorem cosupp_geoTransformAlong_subset {X : CMfd.{u} n} (𝔪 : MarkedIdeal n X
       intro z hz
       exact ih (cosupp_geoTransform_subset_preimage _ hNT.1
         (fun _ _ hg => GermIdeal.IsCoherent.holomorphicAt_mem hcT hg) hπ hC.2.1 hz)
+
+/-! ### `N = M`: the controlled transform -/
+
+/-- **Off the centre the controlled transform has the same cosupport** (`N = M`, `𝔞` coherent):
+`cosupp(σ^c(𝔞, μ), μ) \ π⁻¹ C = π⁻¹ (cosupp(𝔞, μ) \ C)`. -/
+theorem cosupport_controlledTransform_diff_preimage (hπ : IsBlowupAlong n C π)
+    {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent) (μ : ℕ) :
+    cosupport n univ (controlledTransform hπ 𝔞 μ) μ \ π ⁻¹' C =
+      π ⁻¹' (cosupport n univ 𝔞 μ \ C) := by
+  set 𝔪 : MarkedIdeal n X := { N := univ, E := [], ideal := 𝔞, d := μ } with h𝔪
+  have h := cosupp_geoTransform_diff_preimage 𝔪 isClosed_univ
+    (fun _ _ hg => GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg) hπ
+  rw [MarkedIdeal.cosupp, MarkedIdeal.geoTransform_N_eq_univ (C := C) (π := π) rfl hπ,
+    MarkedIdeal.geoTransform_ideal_eq_controlledTransform (C := C) (π := π) rfl h𝔞 hπ,
+    MarkedIdeal.geoTransform_d] at h
+  exact h
+
+/-- **Step 1ba, completed** (Wlodarczyk `le:codim1`): blowing up the codimension-one part `R` of
+the support `S` of a coherent marked ideal of maximal order, the support of the controlled transform
+lies over `S \ R`. -/
+theorem cosupport_controlledTransform_subset_preimage_diff_codimOnePart {𝔞 : GermIdeal n X}
+    {μ : ℕ} (h𝔞 : 𝔞.IsCoherent) (hμ : 1 ≤ μ) (hmax : MaximalContact.IsMaximalOrder 𝔞 μ)
+    (hπ : IsBlowupAlong n (CodimOneSupport.codimOnePart 𝔞 μ) π) :
+    cosupport n univ (controlledTransform hπ 𝔞 μ) μ ⊆
+      π ⁻¹' (cosupport n univ 𝔞 μ \ CodimOneSupport.codimOnePart 𝔞 μ) := by
+  intro z hz
+  have hzR : π z ∉ CodimOneSupport.codimOnePart 𝔞 μ := fun hzR => by
+    have h := CodimOneSupport.cosupport_controlledTransform_inter_preimage_codimOnePart_eq_empty
+      h𝔞 hμ hmax hπ
+    exact (eq_empty_iff_forall_notMem.mp h) z ⟨hz, hzR⟩
+  have h := cosupport_controlledTransform_diff_preimage hπ h𝔞 μ
+  have : z ∈ cosupport n univ (controlledTransform hπ 𝔞 μ) μ \
+      π ⁻¹' CodimOneSupport.codimOnePart 𝔞 μ := ⟨hz, hzR⟩
+  rw [h] at this
+  exact this
 
 end
 

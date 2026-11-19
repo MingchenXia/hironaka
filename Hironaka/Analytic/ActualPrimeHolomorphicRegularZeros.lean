@@ -1,13 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ActualPrimeGermGenericAvoidance
 import Hironaka.Analytic.ActualWeierstrassGermQuotient
 import Mathlib.Algebra.Polynomial.Derivative
-
-import Hironaka.Analytic.GermCoordinateFirstProjection
 
 set_option autoImplicit false
 
@@ -18,8 +11,6 @@ The complete mathematical statement and ENTIRE proof precede the import
 baseline.  Weierstrass preparation, actual polynomial divisibility recovery
 and finite avoidance produce the derivative condition from the original germ.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter Metric Polynomial

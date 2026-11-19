@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.InvUSCSuperlevelExact
 import Hironaka.Resolution.HironakaOriginalCompactCosupportGlobalScheduler
 /-! Actual global SAME-P canonical finite phases erase a compact INITIAL full
 upper cut, allowing noncompact whole cosupport. No analytic threshold, desired

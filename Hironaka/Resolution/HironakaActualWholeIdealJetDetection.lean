@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaHolomorphicJetMonomialSpan
 import Mathlib.RingTheory.Filtration
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
@@ -68,7 +63,6 @@ theorem mem_original_ideal_iff_all_positive_thickenings
     | zero => simp
     | succ ℓ => exact h ℓ
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- BOTH actual whole finite-jet image directions precede the all-order reconstruction. -/
 theorem finiteJet_mem_original_image_iff (I : Ideal (HolGerm (ComplexModel n)))
     (q : ℕ) (g : HolGerm (ComplexModel n)) :

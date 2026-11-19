@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Analytic.HolomorphicGermDifferentiableSubtraction
 import Hironaka.Resolution.HironakaHolomorphicPointJets
 import Hironaka.Analytic.CoordinatePlaneDivision
 import Hironaka.Analytic.HolomorphicGermNoetherian
@@ -29,7 +23,6 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.HironakaHolomorphicJetMonomialSpan
 open Hironaka.HolomorphicIdealSheaves HolGerm
 open HironakaHolomorphicPointJets
-open Hironaka
 noncomputable section
 variable {n : ℕ}
 
@@ -111,9 +104,6 @@ theorem coordinate_mul_mem_monomialSpan {q : ℕ} (i : Fin n)
     rw [mul_smul_comm]
     exact Submodule.smul_mem _ c hp
 
-section
-attribute [local instance 1001] SubsemiringClass.toAddSubmonoidClass
-
 /-- Internally constructed finite original coordinate representative of every germ. -/
 theorem exists_monomial_representative (q : ℕ) (g : HolGerm (ComplexModel n)) :
     ∃ p ∈ monomialSpan n q,
@@ -145,8 +135,6 @@ theorem exists_monomial_representative (q : ℕ) (g : HolGerm (ComplexModel n)) 
       · apply (HolGerm.mem_maximalIdeal_iff _).mpr
         rfl
       · exact hrem i
-
-end
 
 /-- The genuine entire jet image is the finite actual coordinate-word span. -/
 theorem range_finiteJet_eq_span_monomials (q : ℕ) :

@@ -33,7 +33,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaCurveAnalyticPredicates NormalCrossings GeneralValue BoundaryCount
   DivisorExponentAlong MonomialCase MonomialCaseAlong MonomialInvariant MonomialStepAlong MonomialInvariantFunctorialAlong
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open Hironaka
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 

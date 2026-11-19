@@ -1,13 +1,9 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.RingTheory.Polynomial.Resultant.Basic
 import Mathlib.Analysis.Calculus.FDeriv.Pi
 import Mathlib.Analysis.Normed.Field.Lemmas
 import Mathlib.Analysis.Complex.Basic
 import Mathlib.Analysis.Calculus.FDeriv.Mul
+
 set_option autoImplicit false
 
 /-!
@@ -18,6 +14,12 @@ Chirka, §3.7), where a Weierstrass polynomial `t^d + ∑_{k<d} a_k(z) t^k` and 
 remainders of Weierstrass division are treated as polynomials in `t` whose coefficients
 depend holomorphically on `z`.
 
+* `holOnSubring U`: the ring of functions `E → ℂ` complex differentiable on `U`, with
+  evaluation `evalAt U z` at a point.
+* `differentiableOn_resultant_map`: for polynomials `P, Q` over that ring, the resultant
+  (with fixed formal degrees) of the evaluated polynomials `P(z), Q(z)` is holomorphic in
+  `z` on `U`.  By `Polynomial.resultant_map_map` it is the evaluation of the resultant
+  computed in the ring, which is an element of the ring.
 * `norm_lt_of_weierstrass_root`: the roots of `t^d + ∑_{k<d} a_k t^k` lie in the disc of
   radius `ε ≤ 1` once every `‖a_k‖ < ε^d / d`.
 -/
@@ -29,6 +31,43 @@ namespace Hironaka.HolomorphicCoefficientPolynomials
 noncomputable section
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E]
+
+/-- Functions `E → ℂ` complex differentiable on `U`, as a subring of `E → ℂ`. -/
+def holOnSubring (U : Set E) : Subring (E → ℂ) where
+  carrier := {f | DifferentiableOn ℂ f U}
+  mul_mem' hf hg := hf.mul hg
+  one_mem' := differentiableOn_const 1
+  add_mem' hf hg := hf.add hg
+  zero_mem' := differentiableOn_const 0
+  neg_mem' hf := hf.neg
+
+/-- Evaluation at `z` on the ring of functions differentiable on `U`. -/
+def evalAt (U : Set E) (z : E) : holOnSubring U →+* ℂ :=
+  (Pi.evalRingHom (fun _ : E => ℂ) z).comp (holOnSubring U).subtype
+
+@[simp] theorem evalAt_apply (U : Set E) (z : E) (f : holOnSubring U) :
+    evalAt U z f = (f : E → ℂ) z := rfl
+
+/-- The polynomial `∑_{k<N} a_k T^k` over the ring of functions differentiable on `U`. -/
+def ofCoeffs (U : Set E) (N : ℕ) (a : ℕ → E → ℂ) (ha : ∀ k, DifferentiableOn ℂ (a k) U) :
+    (holOnSubring U)[X] :=
+  ∑ k ∈ Finset.range N, C (⟨a k, ha k⟩ : holOnSubring U) * X ^ k
+
+theorem map_ofCoeffs (U : Set E) (N : ℕ) (a : ℕ → E → ℂ)
+    (ha : ∀ k, DifferentiableOn ℂ (a k) U) (z : E) :
+    (ofCoeffs U N a ha).map (evalAt U z) = ∑ k ∈ Finset.range N, C (a k z) * X ^ k := by
+  simp [ofCoeffs, Polynomial.map_sum]
+
+/-- **Resultants of polynomials with holomorphic coefficients are holomorphic.** -/
+theorem differentiableOn_resultant_map (U : Set E) (P Q : (holOnSubring U)[X]) (m n : ℕ) :
+    DifferentiableOn ℂ
+      (fun z => resultant (P.map (evalAt U z)) (Q.map (evalAt U z)) m n) U := by
+  have h : (fun z => resultant (P.map (evalAt U z)) (Q.map (evalAt U z)) m n) =
+      ((resultant P Q m n : holOnSubring U) : E → ℂ) := by
+    funext z
+    rw [resultant_map_map, evalAt_apply]
+  rw [h]
+  exact (resultant P Q m n).2
 
 /-- **Root bound for Weierstrass-type polynomials.**  If `0 < ε ≤ 1` and every coefficient
 satisfies `‖a_k‖ * d < ε ^ d`, every root `t` of `t^d + ∑_{k<d} a_k t^k` has `‖t‖ < ε`. -/

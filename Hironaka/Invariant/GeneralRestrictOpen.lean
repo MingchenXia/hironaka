@@ -1,74 +1,35 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralTowerIso
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerSplitIso
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactMarkedCanonical
-import Hironaka.Invariant.GeneralAdmissible
-import Hironaka.Invariant.GeneralCanonicalTail
-import Hironaka.Invariant.GeneralCompare
-import Hironaka.Invariant.GeneralValue
-import Hironaka.Invariant.GeneralValueOrderZero
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.NonmonomialOrderTransport
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneNearby
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneTowerIso
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The general value under restriction to open sets: property (5)
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale
-morphisms, in particular with restriction to open sets; Bierstone--Milman 2008, Step II.
+Blueprint `hir:general-restrict-open` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).  Source:
+Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale morphisms, in
+particular with restriction to open sets; Bierstone--Milman 2008, Step II.
 
 Let `𝔪` be a marked ideal of the domain (`0 < n`), `U ⊆ X` open and `T` a canonical segment of the general value
-`genInv M 𝔪` (`M` a value function for the marked ideals of maximal order). At a point `p` over `U` of the cosupport
-of positive order `o`, the general values of `𝔪|_U` along `T|_U` and of `𝔪` along `T` agree. The orders and runs
-agree (`NonmonomialOrderRegime.regimeRun_ordRegime_restrict`); the split of `T|_U` at the run is isomorphic over
-`id_U` to the restriction of the split of `T` (`BlowupTowerSplitIso.exists_isTowerIso_split_restrict`), so the
-companion value of `p` for `𝔪|_U` is, by `GeneralTowerIso.value_companionOf_isTowerIso`, the value of `M` for the
-companion ideal of `(𝔪_{T₀})|_V` (`V = T₀⁻¹U`) on its mask, which is the companion ideal `𝓞` of `𝔪_{T₀}` restricted
-first to `V` and then to the trace of the mask `W` of `𝔪_{T₀}`
-(`NonmonomialOrderTransport.mem_ordMask_restrict_iff`, `CompanionRebase.pullback_val_companionOf`). Two restrictions
-are one (`value_restrict_restrict`: `MaxLocusLocal.isTowerIso_restrict_nestedOpens` and property (6) of `M`), to `W
-∩ V`, and the value on `W ∩ V` is that on `W` (`GeneralCompare.value_restrict_nestedOpens`), the companion value of
-`p` for `𝔪`. At order `0` this is `GeneralValueOrderZero.restrictOpen_field_of_nmOrd_eq_zero`.
+`genInv M 𝔪` (`M` a value function for the marked ideals of maximal order).  At a point `p` over `U` of the cosupport of positive
+order `o`, the general values of `𝔪|_U` along `T|_U` and of `𝔪` along `T` agree.  The orders and runs agree (TN3's
+`NonmonomialOrderRegime.regimeRun_ordRegime_restrict`); the split of `T|_U` at the run is isomorphic over `id_U` to the
+restriction of the split of `T` (`BlowupTowerSplitIso.exists_isTowerIso_split_restrict`), so the companion value of `p` for
+`𝔪|_U` is, by `GeneralTowerIso.value_companionOf_isTowerIso`, the value of `M` for the companion ideal of `(𝔪_{T₀})|_V`
+(`V = T₀⁻¹U`) on its mask, which is the companion ideal `𝓞` of `𝔪_{T₀}` restricted first to `V` and then to the trace of the mask
+`W` of `𝔪_{T₀}` (TN3's `NonmonomialOrderTransport.mem_ordMask_restrict_iff`, `CompanionRebase.pullback_val_companionOf`).  Two
+restrictions are one (`value_restrict_restrict`: `MaxLocusLocal.isTowerIso_restrict_nestedOpens` and property (6) of `M`), to
+`W ∩ V`, and the value on `W ∩ V` is that on `W` (`GeneralCompare.value_restrict_nestedOpens`), the companion value of `p` for
+`𝔪`.  At order `0` this is TN3's `GeneralValueOrderZero.restrictOpen_field_of_nmOrd_eq_zero`.
 
 ## Main results
 
 * `value_restrict_restrict`: restricting to `V` and then to the trace of `W` is restricting to `W ∩ V`, for a maximal-order value;
 * **`genInv_restrict_of_pos`**: property (5) of the general value at positive order;
 * **`restrictOpen_field`**: property (5) in the shape of the field `restrictOpen` of `ResolutionInvariantExt.ResolutionInvariant`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -79,7 +40,19 @@ universe u v
 namespace Hironaka.GeneralRestrictOpen
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.StepOneTangentChange Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail Hironaka.NonmonomialOrderTransport Hironaka.InvDomainCompanion Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.GeneralCompare Hironaka.GeneralCanonicalTail Hironaka.HomogenizedIdealAlong Hironaka.MaxLocusLocal Hironaka.GeneralTowerIso
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.BlowupTowerIsomorphism Hironaka.StepOneTangentChange
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail
+  Hironaka.NonmonomialOrderTransport Hironaka.InvDomainCompanion
+  Hironaka.MaxOrderValue Hironaka.GeneralValue
+  Hironaka.GeneralCompare Hironaka.GeneralCanonicalTail
+  Hironaka.HomogenizedIdealAlong Hironaka.MaxLocusLocal
+  Hironaka.GeneralTowerIso
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section
@@ -251,8 +224,8 @@ theorem genInv_restrict_of_pos (hM : IsMaxOrderValue n k M) (hn : 0 < n) {𝔪 :
   rfl
 
 /-- **Property (5) of the general value in the shape of the field `restrictOpen`** of
-`ResolutionInvariantExt.ResolutionInvariant`: along canonical segments of the general value (`M` a value function
-for the marked ideals of maximal order, `0 < n`), at every point of the cosupport over `U` (order `0`:
+`ResolutionInvariantExt.ResolutionInvariant`: along canonical segments of the general value (`M` a value function for the
+marked ideals of maximal order, `0 < n`), at every point of the cosupport over `U` (order `0`: TN3's
 `GeneralValueOrderZero.restrictOpen_field_of_nmOrd_eq_zero`). -/
 theorem restrictOpen_field (hM : IsMaxOrderValue n k M) (hn : 0 < n) (𝔪 : MarkedIdeal n X) (h : IsInvDomain k 𝔪)
     (U : Opens X) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hcan : IsCanonical 𝔪 (genInv M 𝔪) T) (p : openPreimage T U)

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalCoefficientPolynomialBaseChange
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.Algebra.Category.ModuleCat.Free
@@ -23,7 +18,6 @@ open Hironaka.HolomorphicIdealSheaves HolGerm OkaRelationSheaf
 
 attribute [local instance] coefficientSubalgebraRing
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- One actual nonvanishing open makes every entire nearby original associated module free. -/
 theorem exists_original_nearby_associated_free_open (d t : ℕ)
     (I : GermIdeal (d+t) (ComplexModel (d+t))) (hI : I.IsCoherent) :

@@ -1,35 +1,50 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.IdealProducts
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPresentation
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
-# Products and powers of ideal sheaves
+# Products and powers of ideals present sums and multiples of weights
 
-The unit ideal sheaf, membership in a product of ideal sheaves through products of generating families, coherence of
-products, and the powers `idealPow 𝔞 p`.
+Source: Copy-4, `sec:qpsh` and `lem:ideal-comparison`
+(`transcendental-nakamaye-copy4-20260911`).
 
-Declarations:
-* `isInSpanAt_congr`
-* `mem_range_mulFamily`
-* `isInSpanAt_mulFamily_mul`
-* `mem_mul_iff_isInSpanAt_mulFamily`
-* `isCoherent_mul`
-* `unitIdeal`
-* `mem_unitIdeal_iff`
-* `isCoherent_unitIdeal`
-* `idealPow`
-* `idealPow_zero`
-* `idealPow_succ`
+`Pending/IdealWeightProducts` proves `ψ_{𝔞𝔟} = ψ_𝔞 + ψ_𝔟 + O(1)` in the form
+that takes a presenting function for the product ideal as a *hypothesis*.  That
+is enough to compare two given potentials, but `lem:ideal-comparison` needs the
+constructive form as well, because it reads the inclusion
+
+  `𝔅 · 𝔅̄_m^p ⊆ 𝔅̄_M`
+
+off against `ψ_{𝔅̄_M} ≤ ψ_𝔅 + p ψ_{𝔅̄_m} + O(1)`, and no potential presenting
+`𝔅 · 𝔅̄_m^p` has been named anywhere: the whole point is that `ψ_𝔅 + p ψ_{𝔅̄_m}`
+*is* one.
+
+This module supplies it.  The two statements are
+
+* `hasAnalyticSingularitiesOfType_mul`: the sum of a potential of type `(c, 𝔞)`
+  and one of type `(c, 𝔟)` has type `(c, 𝔞𝔟)`;
+* `hasAnalyticSingularitiesOfType_pow`: `p • φ` has type `(c, 𝔞^p)`.
+
+Both are honest strengthenings, not restatements: they carry the *coherence* of
+the product ideal, which `sameSingularityTypeAt_mul` assumed as part of its third
+hypothesis.  The content is the local identification
+
+  `(𝔞𝔟)_y = ⟨gᵢhⱼ⟩_y`   for generators `g` of `𝔞` and `h` of `𝔟` on `U ∋ y`,
+
+whose nontrivial direction expands a germ `∑ₜ aₜ (αₜ βₜ)` of the product ideal by
+substituting the expansions of `αₜ` and `βₜ` — that is `IsInSpanAt.trans`
+together with the pairwise-product span lemma below.  The weight identity is then
+the exact family identity `generatorLog (mulFamily g h) = generatorLog g +
+generatorLog h` of `Pending/IdealWeightProducts`, with the two bounded remainders
+added.
+
+The multiple is recorded as the `ℕ`-scalar multiple `p • φ` of `EReal`, i.e. as an
+iterated sum.  That is deliberate: `((p : ℝ) : EReal) * φ` would force a case
+analysis at `φ = ⊥` for `p = 0`, and nothing downstream needs the real scalar.
+
+The unit ideal `unitIdeal` (every holomorphic germ) is recorded here too, since
+it is `𝔞^0` and is presented by the constant `0`.
 -/
 
 open Set Filter
@@ -39,7 +54,7 @@ namespace Hironaka.IdealWeightPowers
 
 noncomputable section
 
-open Hironaka.HolomorphicIdealSheaves
+open Hironaka.HolomorphicIdealSheaves Hironaka.GlobalAnalyticSingularities
 open Hironaka.IdealWeightComparison
 open Hironaka.IdealWeightProducts
 open Hironaka.RelativePrincipalizationSpan
@@ -145,6 +160,45 @@ theorem isCoherent_mul {𝔞 𝔟 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) (h�
       (fun j z hz => (hhdiff j z hz.2).mono inter_subset_right)
       (fun z hz => hgiff z hz.1) (fun z hz => hhiff z hz.2) hz k
 
+/-! ### The weight of a product, constructively -/
+
+/-- **`ψ_𝔞 + ψ_𝔟` presents `𝔞𝔟`.**  Unlike
+`IdealWeightProducts.sameSingularityTypeAt_mul` this does not assume a presenting
+function for the product ideal; it produces one, together with the coherence of
+`𝔞𝔟`. -/
+theorem hasAnalyticSingularitiesOfType_mul {φ φ' : M → EReal} {c : ℚ}
+    {𝔞 𝔟 : GermIdeal n M}
+    (hφ : HasAnalyticSingularitiesOfType (n := n) φ c 𝔞)
+    (hφ' : HasAnalyticSingularitiesOfType (n := n) φ' c 𝔟) :
+    HasAnalyticSingularitiesOfType (n := n) (fun y => φ y + φ' y) c (𝔞.mul 𝔟) := by
+  obtain ⟨hc, hcoh, hpres⟩ := hφ
+  obtain ⟨-, hcoh', hpres'⟩ := hφ'
+  refine ⟨hc, isCoherent_mul hcoh hcoh', fun x => ?_⟩
+  obtain ⟨U, hU, hxU, N, g, hgdiff, hgiff, R, C₀, hRb, hφeq⟩ := hpres x
+  obtain ⟨U', hU', hxU', P, h, hhdiff, hhiff, R', C₀', hR'b, hφ'eq⟩ := hpres' x
+  have hcR : (0 : ℝ) < (c : ℝ) := by exact_mod_cast hc
+  refine ⟨U ∩ U', hU.inter hU', ⟨hxU, hxU'⟩, N * P, mulFamily g h, ?_, ?_,
+    fun y => R y + R' y, C₀ + C₀', ?_, ?_⟩
+  · intro k z hz
+    exact ((hgdiff _ z hz.1).mono inter_subset_left).mul
+      ((hhdiff _ z hz.2).mono inter_subset_right)
+  · intro z hz k
+    exact mem_mul_iff_isInSpanAt_mulFamily (hU.inter hU')
+      (fun i z hz => (hgdiff i z hz.1).mono inter_subset_left)
+      (fun j z hz => (hhdiff j z hz.2).mono inter_subset_right)
+      (fun z hz => hgiff z hz.1) (fun z hz => hhiff z hz.2) hz k
+  · intro y hy
+    have h1 := abs_le.mp (hRb y hy.1)
+    have h2 := abs_le.mp (hR'b y hy.2)
+    rw [abs_le]
+    constructor <;> linarith [h1.1, h1.2, h2.1, h2.2]
+  · intro y hy
+    dsimp only
+    rw [hφeq y hy.1, hφ'eq y hy.2, generatorLog_mulFamily,
+      EReal.left_distrib_of_nonneg_of_ne_top (EReal.coe_nonneg.mpr hcR.le)
+        (EReal.coe_ne_top _), EReal.coe_add]
+    exact add_add_add_comm _ _ _ _
+
 /-! ### The unit ideal and powers -/
 
 variable (n M) in
@@ -175,6 +229,60 @@ def idealPow (𝔞 : GermIdeal n M) : ℕ → GermIdeal n M
 
 @[simp] theorem idealPow_succ (𝔞 : GermIdeal n M) (p : ℕ) :
     idealPow 𝔞 (p + 1) = (idealPow 𝔞 p).mul 𝔞 := rfl
+
+/-- The constant `0` presents the unit ideal, for any positive exponent `c`. -/
+theorem hasAnalyticSingularitiesOfType_unitIdeal {c : ℚ} (hc : 0 < c) :
+    HasAnalyticSingularitiesOfType (n := n) (fun _ : M => (0 : EReal)) c
+      (unitIdeal n M) := by
+  refine ⟨hc, isCoherent_unitIdeal, fun x => ⟨univ, isOpen_univ, mem_univ x, 1,
+    fun _ => (1 : M → ℂ), fun _ => (mdifferentiable_const
+      (I := 𝓘(ℂ, ComplexModel n)) (I' := 𝓘(ℂ, ℂ)) (c := (1 : ℂ))).mdifferentiableOn,
+    fun _ _ _ => mem_unitIdeal_iff, fun _ => (0 : ℝ), 0, fun _ _ => by simp,
+    fun y _ => ?_⟩⟩
+  have hlog : generatorLog (fun _ : Fin 1 => (1 : M → ℂ)) y = 0 := by
+    rw [generatorLog_eq_log_sum]
+    simp
+  rw [hlog]
+  simp
+
+/-- **`p • ψ_𝔞` presents `𝔞^p`** (Copy-4, `sec:qpsh`).  This is the form
+`lem:ideal-comparison` consumes: it converts an inclusion `𝔟 · 𝔞^p ⊆ 𝔠` into the
+weight inequality `ψ_𝔠 ≤ ψ_𝔟 + p ψ_𝔞 + O(1)` with no potential for `𝔞^p` named
+anywhere. -/
+theorem hasAnalyticSingularitiesOfType_pow {φ : M → EReal} {c : ℚ}
+    {𝔞 : GermIdeal n M} (hφ : HasAnalyticSingularitiesOfType (n := n) φ c 𝔞) :
+    ∀ p : ℕ, HasAnalyticSingularitiesOfType (n := n) (fun y => p • φ y) c
+      (idealPow 𝔞 p)
+  | 0 => by
+    simpa using hasAnalyticSingularitiesOfType_unitIdeal (n := n) (M := M) hφ.1
+  | p + 1 => by
+    have ih := hasAnalyticSingularitiesOfType_pow hφ p
+    have := hasAnalyticSingularitiesOfType_mul ih hφ
+    simpa [succ_nsmul] using this
+
+/-! ### The `O(1)` consequences -/
+
+/-- **`ψ_{𝔞^p} = p ψ_𝔞 + O(1)` on a compact manifold**, with one constant. -/
+theorem sameSingularityTypeOn_univ_pow [CompactSpace M] {φ φp : M → EReal} {c : ℚ}
+    {𝔞 : GermIdeal n M} {p : ℕ}
+    (hφ : HasAnalyticSingularitiesOfType (n := n) φ c 𝔞)
+    (hφp : HasAnalyticSingularitiesOfType (n := n) φp c (idealPow 𝔞 p)) :
+    SameSingularityTypeOn φp (fun y => p • φ y) univ :=
+  sameSingularityTypeOn_univ_of_eq_type hφp (hasAnalyticSingularitiesOfType_pow hφ p)
+
+/-- **`lem:ideal-comparison`, weight form.**  An inclusion `𝔟 · 𝔞^p ⊆ 𝔠` of
+coherent ideals is exactly the inequality `ψ_𝔟 + p ψ_𝔞 ≤ ψ_𝔠 + O(1)` between the
+potentials that present them, with one constant on a compact manifold. -/
+theorem moreSingularOn_univ_add_nsmul_of_mul_pow_le [CompactSpace M]
+    {φ ψ χ : M → EReal} {c : ℚ} {𝔞 𝔟 𝔠 : GermIdeal n M} {p : ℕ}
+    (hφ : HasAnalyticSingularitiesOfType (n := n) φ c 𝔞)
+    (hψ : HasAnalyticSingularitiesOfType (n := n) ψ c 𝔟)
+    (hχ : HasAnalyticSingularitiesOfType (n := n) χ c 𝔠)
+    (hle : (𝔟.mul (idealPow 𝔞 p)).Le 𝔠) :
+    MoreSingularOn (fun y => ψ y + p • φ y) χ univ :=
+  moreSingularOn_univ_of_le
+    (hasAnalyticSingularitiesOfType_mul hψ (hasAnalyticSingularitiesOfType_pow hφ p))
+    hχ hle
 
 end
 

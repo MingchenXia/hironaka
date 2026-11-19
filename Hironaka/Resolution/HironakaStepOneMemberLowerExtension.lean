@@ -1,10 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaStepOneCurveHistoryPredicates
-import Hironaka.Invariant.MemberRestrictCosupportExact
 
 /-!
 # Entire actual positive-level member lower datum and exact literal mask identity
@@ -19,7 +13,6 @@ Full controlled tail extension, zero-level contact and whole General3/G3 remain 
 Blueprint: `hironaka-step-one-member-lower-extension.tex`.
 -/
 
-
 set_option autoImplicit false
 open Set Filter
 open scoped Topology Manifold ContDiff
@@ -32,9 +25,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   GlobalComponents RegularLocusComponent AnalyticDimensionBasics
   NormalCrossings HomogenizedIdealAlong StepOneValue StepOneLowerDomain
   BlowupTowers BlowupTowerTransforms BlowupTowerSplit
-open Hironaka.ResolutionInvariantSpec (IsInvDomain)
-open Hironaka
-
+open ResolutionInvariantSpec (IsInvDomain)
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
@@ -220,7 +211,7 @@ theorem pullback_memberLowerExtension_eq_lowerMarked_succ (hn : 0 < n) (m : Mark
   exact carrier_memberLowerExtension_on_mask hn m hw T hT y hl z.2
 
 open StepOneRegime HironakaGeneralThreeNonspecialAnalyticLoci
-open Hironaka.ResolutionInvariantSpec (IsCanonical)
+open ResolutionInvariantSpec (IsCanonical)
 
 private theorem regime_at_run_start_of_current (P : Regime X) (T : BlowupTower X Y)
     (y : Y) (hy : P T y) :

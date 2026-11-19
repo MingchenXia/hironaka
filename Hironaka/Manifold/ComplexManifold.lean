@@ -1,11 +1,9 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Mathlib.Analysis.InnerProductSpace.PiL2
-import Mathlib.Geometry.Manifold.IsManifold.Basic
-import Mathlib.Analysis.Calculus.DifferentialForm.Basic
+module
+
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Geometry.Manifold.IsManifold.Basic
+public import Mathlib.Analysis.Calculus.DifferentialForm.Basic
+
 /-!
 # Complex manifolds and real differential forms in charts
 
@@ -18,6 +16,8 @@ Coefficient functions are extended arbitrarily outside their chart targets;
 only their restrictions to those open targets have geometric meaning. No global
 exterior-derivative operator or coordinate-independence theorem is assumed here.
 -/
+
+@[expose] public section
 
 open scoped Manifold ContDiff
 open Set
@@ -58,11 +58,46 @@ def chartTransition (e f : ComplexChart n M) :
     OpenPartialHomeomorph (ComplexModel n) (ComplexModel n) :=
   e.val.symm.trans f.val
 
+/-- The derivative used to transport real tangent vectors between charts. -/
+noncomputable def chartTransitionDerivative (e f : ComplexChart n M)
+    (z : ComplexModel n) : ComplexModel n →L[ℝ] ComplexModel n :=
+  fderiv ℝ (chartTransition e f) z
+
 /-- Holomorphic overlap compatibility comes from the manifold structure. -/
 theorem chartTransition_mem_groupoid [IsComplexManifold n M]
     (e f : ComplexChart n M) :
     chartTransition e f ∈ contDiffGroupoid ∞ (𝓘(ℂ, ComplexModel n)) :=
   StructureGroupoid.compatible _ e.property f.property
+
+/-- A smooth real `k`-form, represented in the specified holomorphic atlas.
+The compatibility field is the tensor transformation law, not an abstract
+predicate standing in for differential geometry. -/
+structure SmoothRealForm (n : ℕ) (M : Type*) [TopologicalSpace M]
+    [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M] (k : ℕ) where
+  coeff : ComplexChart n M → ComplexModel n →
+    (ComplexModel n) [⋀^Fin k]→L[ℝ] ℝ
+  smooth : ∀ e, ContDiffOn ℝ ∞ (coeff e) e.val.target
+  compatible : ∀ e f z, z ∈ (chartTransition e f).source →
+    ∀ v : Fin k → ComplexModel n,
+      coeff e z v = coeff f (chartTransition e f z)
+        (fun i => chartTransitionDerivative e f z (v i))
+
+namespace SmoothRealForm
+
+variable [IsComplexManifold n M] {k : ℕ}
+
+/-- Closedness is vanishing of mathlib's exterior derivative in every chart.
+Only points of the open chart target are tested. -/
+def IsClosed (form : SmoothRealForm n M k) : Prop :=
+  ∀ e z, z ∈ e.val.target → extDeriv (form.coeff e) z = 0
+
+/-- The zero differential form satisfies the genuine overlap equation. -/
+def zero : SmoothRealForm n M k where
+  coeff := fun _ _ => 0
+  smooth := fun _ => contDiffOn_const
+  compatible := by intros; simp
+
+end SmoothRealForm
 
 end
 

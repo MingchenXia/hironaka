@@ -1,11 +1,6 @@
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 import Hironaka.Resolution.HironakaRelativeNormalGraphCentralPolynomialModel
@@ -63,7 +58,6 @@ def actualNearbyCoefficientPolynomial (d t : ℕ)
     (HolGerm.mk (actualCoefficientRepresentative (P.coeff α) ∘ actualAffineTranslation d a)
       (actualCoefficientFunctionTranslation_holomorphic d a _ (hcoeff α)))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem actualNearbyCoefficientPolynomial_coeff (d t : ℕ)
     (P : MvPolynomial (Fin t) (HolGerm (ComplexModel d))) (a : ComplexModel d)
     (hcoeff : ∀ α, HolAt (actualCoefficientRepresentative (P.coeff α)) a)
@@ -84,7 +78,6 @@ theorem actualNearbyCoefficientPolynomial_coeff (d t : ℕ)
       exact map_zero (Germ.coeRingHom (𝓝 (0 : ComplexModel d)))
     simp [actualNearbyCoefficientPolynomial,MvPolynomial.coeff_sum,MvPolynomial.coeff_monomial,hα,hzero]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem actualNearbyCoefficientPolynomial_support_subset (d t : ℕ)
     (P : MvPolynomial (Fin t) (HolGerm (ComplexModel d))) (a : ComplexModel d)
     (hcoeff : ∀ α, HolAt (actualCoefficientRepresentative (P.coeff α)) a) :
@@ -214,7 +207,6 @@ private theorem actual_fixed_translation_membership {n N : ℕ}
     simpa only [actualAffineTranslation_zero] using holomorphicAt_of_mdifferentiableOn hU (hS i) ha
   · simpa only [actualAffineTranslation_zero] using hgen a ha
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem actual_translated_origin_ideal_from_fixed_functions {n N : ℕ}
     (I : GermIdeal n (ComplexModel n)) (S : Fin N → ComplexModel n → ℂ)
     {U : Set (ComplexModel n)} (hU : IsOpen U)
@@ -252,7 +244,6 @@ private theorem actual_translated_origin_ideal_from_fixed_functions {n N : ℕ}
       (fun j => (hhol j).mono (fun _ hz => hz.mdifferentiableAt)) i
 
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem actual_function_span_holomorphic_dictionary {n m : ℕ}
     (S : Fin m → ComplexModel n → ℂ) (y : ComplexModel n) (g : ComplexModel n → ℂ) :
     InSpanAt S y g ↔ IsInSpanAt (n := n) (· ∈ range S) y g := by

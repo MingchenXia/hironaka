@@ -1,15 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.OkaIdealOperations
 import Hironaka.Coherence.CartanCoherenceDef
 import Hironaka.Analytic.HolomorphicBoundedQuotient
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Coherence.OkaRelationSheaf
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -24,10 +16,13 @@ of `0` in `ℂⁿ`."
 `x₀ ∈ Ω`, the ideal of germs vanishing on `{f = 0}` is finitely generated near `x₀` in the sense
 of `OkaIdealOperations.IdealFGAt` (generated at every point of a neighbourhood).
 
-In the preferred chart `e` at `x`, the analytic presentation of `A` at `x` describes `e(A)` near `e x` as `{f = 0}`;
-the generators `s_k` of its vanishing ideal near `e x` give the generators `s_k ∘ e` of `𝓘_A` near `x`.
+`cartanCoherence_of_localCartan`: `LocalCartan n` implies `CartanComponentIdeal.CartanCoherence n X`
+for every complex manifold `X` of dimension `n`, i.e. the statement of the named input
+`CartanCoherenceInterface.cartanCoherence`.  In the preferred chart `e` at `x`, the analytic
+presentation of `A` at `x` describes `e(A)` near `e x` as `{f = 0}`; the generators `s_k` of its
+vanishing ideal near `e x` give the generators `s_k ∘ e` of `𝓘_A` near `x`.
 
-What remains for Cartan's theorem is `LocalCartan n`.
+Sorry-free.  What remains for Cartan's theorem is `LocalCartan n`.
 -/
 
 open Set Filter
@@ -37,7 +32,8 @@ universe u
 
 namespace Hironaka.CartanLocalReduction
 
-open Hironaka.HolomorphicIdealSheaves OkaRelationSheaf OkaIdealOperations CartanComponentIdeal
+open Hironaka.HolomorphicIdealSheaves OkaRelationSheaf OkaIdealOperations
+  CartanComponentIdeal
 
 /-- **Cartan's theorem, local form in `ℂⁿ`.** -/
 def LocalCartan (n : ℕ) : Prop :=

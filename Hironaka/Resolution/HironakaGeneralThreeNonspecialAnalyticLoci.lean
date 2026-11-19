@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaDimensionThreeStepOneLowerAnalyticLoci
 
 /-!
@@ -30,8 +25,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HomogenizedIdealAlong StepOneValue StepOneRegime ResolutionInvariantSpec
   CanonicalCentres NonmonomialOrderLocal NonmonomialOrderRegime NonmonomialOrderTail
   GeneralValue CompanionRebase GeneralCanonicalTail
-
-open Hironaka
 
 noncomputable section
 

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalFirstMeetingPrefixUniqueness
 
 /-!
@@ -28,7 +23,7 @@ namespace Hironaka.HironakaOriginalIndependentStoppedSource
 
 noncomputable section
 
-open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal NormalCrossings
   RestrictEmptyTower CanonicalCentres EmbeddedFromResolution
   HironakaSmoothSubmersionCoefficientIdeals HironakaSmoothSubmersionOrderedChoiceBaseChange
@@ -39,9 +34,9 @@ open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaOriginalFirstMeetingPrefixUniqueness HironakaOriginalStoppedPrefixSmoothComparison
   HironakaSmoothSubmersionRelativeGeometry HironakaSmoothSubmersionNormalCrossings
 
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)
-open _root_.Hironaka.ResolutionDriver (maxLocus)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantExt (IsEmptyTower)
+open ResolutionDriver (maxLocus)
 
 variable {n m : ℕ} {X D : CMfd.{u} n} {Y E F : CMfd.{u} m}
 

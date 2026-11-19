@@ -1,12 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaDivisorPowers
 import Hironaka.Analytic.ActualInvertibleIdealDifference
 import Hironaka.Blowup.BlowupExistenceCodimOne
-import Hironaka.Blowup.SmoothHypersurfaceIdeal
 import Hironaka.Resolution.EmbeddedFromResolution
 import Mathlib.Topology.LocallyConstant.Basic
 
@@ -22,9 +16,9 @@ colon ideal, and its full stalkwise factorization is proved.
 Mathematical source: Włodarczyk 2005, Step 2, monomial/nonmonomial
 decomposition. This isolates a connected smooth hypersurface, rather
 than assuming a global multiplicity on a disconnected SNC list member.
-The same single-component argument appears in the SGPT project, but
+The same single-component argument appears in the Hironaka project, but
 this module uses only the Hironaka local algebra and geometry and
-imports no SGPT module. Blueprint: `hironaka-divisor-extension.tex`.
+imports no Hironaka module. Blueprint: `hironaka-divisor-extension.tex`.
 -/
 
 open Set Filter

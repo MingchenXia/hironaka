@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Blowup.BlowupSNCTransform
 import Hironaka.Resolution.HironakaActualAnalyticBlowupTaylor
 
@@ -50,14 +45,18 @@ theorem fderiv_complex_monomial_inverse_injective {x : X}
   rw [hd.fderiv_restrictScalars ℝ]
   exact hv
 
-/-- Actual point-centre polynomial coordinates are constructed from the original blowup and regularity alone. -/
-theorem exists_actual_point_blowup_coordinates {C : Set X} {π : Y → X}
+/-- Actual point-centre coordinates together with the source flattening used
+to construct the SAME point-blowup square. -/
+theorem exists_actual_point_blowup_coordinates_with_flattening {C : Set X} {π : Y → X}
     (hπ : IsBlowupAlong n C π) (z : Y) (hCz : RegularAtDim (n := n) C (π z) 0) :
     ∃ (Φ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) (π z) (π z)))
       (j : Fin n) (b : Fin n → ℂ)
       (Θ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) z z)),
       Φ.source ⊆ (chartAt (ComplexModel n) (π z)).target ∧
       Φ.toFun (chartAt (ComplexModel n) (π z) (π z))=0 ∧
+      (∀ {x : X}, x ∈ (chartAt (ComplexModel n) (π z)).source →
+        chartAt (ComplexModel n) (π z) x ∈ Φ.source →
+        (x ∈ C ↔ Φ.toFun (chartAt (ComplexModel n) (π z) x) ∈ complexCoordinatePlane n 0)) ∧
       Θ.source ⊆ (chartAt (ComplexModel n) z).target ∧
       Θ.toFun (chartAt (ComplexModel n) z z)=0 ∧ b j=0 ∧
       ∀ u : Y, u ∈ (chartAt (ComplexModel n) z).source →
@@ -82,13 +81,32 @@ theorem exists_actual_point_blowup_coordinates {C : Set X} {π : Y → X}
   have hWj : W z j=0 := by
     have he := congrArg (fun w : ComplexModel n => w j) (hWeq z hzO).2
     simpa [monomial_apply,hΦ0] using he
-  refine ⟨Φ,j,(fun i => W z i),Θ,hΦsrc,hΦ0,hΘsrc,hΘ0,hWj,?_⟩
+  refine ⟨Φ,j,(fun i => W z i),Θ,hΦsrc,hΦ0,hflat,hΘsrc,hΘ0,hWj,?_⟩
   intro y hy hyΘ
   obtain ⟨hyO,hcoord⟩ := hΘeq hy hyΘ
   change Θ.toFun (chartAt (ComplexModel n) z y)=W y-W z at hcoord
   refine ⟨(hWeq y hyO).1,?_⟩
   rw [hcoord,← actual_point_monomial_recentre j (W z) (W y) hWj]
   exact (hWeq y hyO).2.symm
+
+/-- The original point-centre coordinate API follows by forgetting the source flattening. -/
+theorem exists_actual_point_blowup_coordinates {C : Set X} {π : Y → X}
+    (hπ : IsBlowupAlong n C π) (z : Y) (hCz : RegularAtDim (n := n) C (π z) 0) :
+    ∃ (Φ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) (π z) (π z)))
+      (j : Fin n) (b : Fin n → ℂ)
+      (Θ : LocalHolomorphicEquivAt (n := n) (chartAt (ComplexModel n) z z)),
+      Φ.source ⊆ (chartAt (ComplexModel n) (π z)).target ∧
+      Φ.toFun (chartAt (ComplexModel n) (π z) (π z))=0 ∧
+      Θ.source ⊆ (chartAt (ComplexModel n) z).target ∧
+      Θ.toFun (chartAt (ComplexModel n) z z)=0 ∧ b j=0 ∧
+      ∀ u : Y, u ∈ (chartAt (ComplexModel n) z).source →
+        chartAt (ComplexModel n) z u ∈ Θ.source →
+        π u ∈ flatDomain Φ ∧
+        Φ.toFun (chartAt (ComplexModel n) (π z) (π u))=
+          actualAnalyticBlowupMap univ j b (Θ.toFun (chartAt (ComplexModel n) z u)) := by
+  obtain ⟨Φ,j,b,Θ,hΦsrc,hΦ0,_hFlat,hΘsrc,hΘ0,hb,hSquare⟩ :=
+    exists_actual_point_blowup_coordinates_with_flattening hπ z hCz
+  exact ⟨Φ,j,b,Θ,hΦsrc,hΦ0,hΘsrc,hΘ0,hb,hSquare⟩
 
 end
 end Hironaka.HironakaActualPointBlowupCoordinates

@@ -3,14 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Hironaka contributors
 -/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.CoordinateGermNonzeroExact
-import Hironaka.Support.RestrictedIdealLeSumLeftExact
-import Hironaka.Support.HolGermReducedExact
 import Hironaka.Resolution.HironakaRelativeNormalDeformationSaturation
 import Hironaka.Resolution.HironakaRelativeNormalAssociatedGraded
 import Hironaka.Analytic.HolomorphicZeroSetThin
@@ -463,8 +455,6 @@ theorem deformationCentralPullback_fiberPolynomialEval (d t : ℕ)
     deformationCentralPullback_base]
   simp only [map_prod,map_pow,deformationCentralPullback_fiber,normalExponentMonomial]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
-attribute [local instance 2000] HolGerm.instIsReduced in
 /-- Whole parameter cancellation gives the precise actual central initial symbol. -/
 theorem exists_divided_scaling_initial_symbol (d t q : ℕ)
     (g : HolGerm (ComplexModel (d+t))) (hg : g ∈ normalIdeal d t ^ q) :

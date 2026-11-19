@@ -1,42 +1,12 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneTowerIso
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneAdmissible
-import Hironaka.Invariant.StepOneEmptyPrefix
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRepresentative
-import Hironaka.Invariant.StepOneRestrictOpen
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: the properties of the value stated for the marked ideal itself
+
+Blueprint `hir:step-one-bridge` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
 
 The properties of the masked Step 1 value function `stepOneInvM R 𝔍` were proved along the canonical segments of `J̄ =
 𝓒_N(𝓗_N(𝔍))` (maximum loci on `cosupp J̄_T`).  The fields of a resolution invariant (`ResolutionInvariantExt.ResolutionInvariant`)
@@ -53,6 +23,9 @@ in exactly the shape of the fields of `ResolutionInvariantExt.ResolutionInvarian
 * `isCanonical_iff`, `isGeoTestTower_of_isCanonical`, `cosupp_eq_of_isCanonical`: canonical segments of `𝔍` and of `J̄` agree;
 * `admissible_field`, `usc_field`, `decrease_field`, `emptyStep_field`, `emptyPrefix_field`, `restrictOpen_field`,
   `towerIso_field`, `representative_field`: the fields (1)--(7) and (4').
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -63,7 +36,12 @@ universe u v
 namespace Hironaka.StepOneBridge
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneValue Hironaka.StepOneValueMasked Hironaka.HomogenizedIdealAlong Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.ResolutionInvariantOrder
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.StepOneValue Hironaka.StepOneValueMasked
+  Hironaka.HomogenizedIdealAlong Hironaka.MarkedIdealBiholomorphism
+  Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.ResolutionInvariantOrder
 open Hironaka.MarkedIdealEquivalence.MarkedIdeal (WEquiv E_geoTransformAlong_eq)
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)

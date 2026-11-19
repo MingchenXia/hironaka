@@ -1,56 +1,41 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MemberInterTowerAlong
 import Hironaka.MarkedIdeal.CodimOneSupportAlong
 import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
 import Hironaka.MarkedIdeal.MaximalContactAlongTower
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.LocalGiraudTransformAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsInvariance
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.TangentDirectionAlong
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1ba inside a submanifold at a later stage: the centre has normal crossings with the divisor
 
-Source: Włodarczyk 2009 (`wlodarczyk09-analytic-resolution`) Step 1ba (printed p. 57): "the irreducible components
-of the centers of blow-ups were either contained in the strict transforms or disjoint from them. Therefore `E_r`
-will be transversal to all the codimension 1 components" -- stated there without proof. In the route of
-`hironaka.tex` the codimension-one part along `N_T` of the cosupport is, near each of its points, the strict
-transform of the hypersurface of maximal contact `N ∩ V(u) ∩ U` (`MaximalContactAlongTower.exists_contact_along` and
-`CodimOneSupportAlong`), and the exceptional divisors are transverse to that strict transform
-(`MemberInterTowerAlong`, over `U`).
+Hironaka phase H2 (TN3), for TN-CLASSICAL's Step 1 inside `N` (`hir:maximal-order-step`; claim
+I-0977 C-0094).  Blueprint `bcalc:normal-crossings-local`, `bcalc:exceptional-transverse-open`,
+`bcalc:codim-one-admissible-along` (chapter `blowup-calculus.tex`).  Source: Włodarczyk 2009
+(`wlodarczyk09-analytic-resolution`) Step 1ba (printed p. 57): "the irreducible components of the
+centers of blow-ups were either contained in the strict transforms or disjoint from them.  Therefore
+`E_r` will be transversal to all the codimension 1 components" -- stated there without proof.  In the
+route of `hironaka.tex` the codimension-one part along `N_T` of the cosupport is, near each of its
+points, the strict transform of the hypersurface of maximal contact `N ∩ V(u) ∩ U` (TN-CLASSICAL's
+`MaximalContactAlongTower.exists_contact_along` and `CodimOneSupportAlong`), and the exceptional
+divisors are transverse to that strict transform (`MemberInterTowerAlong`, over `U`).
 
 * `isCoordinateFamilyAt_congr`, `isTransverse_of_forall_eventually`,
   `hasNormalCrossings_of_forall_eventually`: adapted coordinates, transversality and normal crossings
   are local -- a set agreeing near each of its points with a set having them has them.
 * `isTransverse_inter_of_preimage_val`: transversality on an open subset `O` gives transversality of
   `W ∩ O` in the ambient manifold.
-* `isTransverse_drop_E_inter_preimage`: for a well-formed `𝔪`, an open `U` and `A` with `A ∩ U` a closed submanifold
-  of `U`, if every admissible centre `C` of every multiple test blow-up `T` satisfies `C ∩ T⁻¹ U ⊆ A_T`
-  (`centre_subset_strictAlong_along`), then the exceptional members of `E_T` are transverse to `A_T ∩ T⁻¹ U`.
+* `isTransverse_drop_E_inter_preimage`: for a well-formed `𝔪`, an open `U` and `A` with `A ∩ U` a
+  closed submanifold of `U`, if every admissible centre `C` of every multiple test blow-up `T`
+  satisfies `C ∩ T⁻¹ U ⊆ A_T` (TN-CLASSICAL's `centre_subset_strictAlong_along`), then the exceptional
+  members of `E_T` are transverse to `A_T ∩ T⁻¹ U`.
+* `isTransverse_drop_E_of_forall_eventually`: hence a set `R` agreeing near each of its points (over
+  `U`) with `A_T` is transverse to the exceptional members.
+* `isAdmissibleCentre_codimOnePartAlong`: a marked ideal of maximal order along `N` whose codimension-one
+  part along `N` is transverse to `E` has that part as an admissible centre (Step 1ba's centre).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -61,7 +46,12 @@ universe u
 namespace Hironaka.CodimOneAdmissibleAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.HomogenizedGlueingTower Hironaka.MemberInterTowerAlong Hironaka.MarkedIdealRestrictOpen Hironaka.CodimOneSupportAlong Hironaka.HomogenizedIdealAlong Hironaka.MarkedIdealBiholomorphism
+open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.HomogenizedGlueingTower Hironaka.MemberInterTowerAlong
+  Hironaka.MarkedIdealRestrictOpen Hironaka.CodimOneSupportAlong
+  Hironaka.HomogenizedIdealAlong Hironaka.MarkedIdealBiholomorphism
 
 noncomputable section
 
@@ -180,7 +170,48 @@ theorem isTransverse_drop_E_inter_preimage (h𝔪 : 𝔪.IsWellFormed) (U : Open
   rw [hE] at hD
   exact isTransverse_inter_of_preimage_val (openPreimage T U) hD
 
+/-- **A set agreeing near each of its points with the strict transform of `A` (over `U`) is transverse
+to the exceptional members**, under the hypotheses of `isTransverse_drop_E_inter_preimage`.  With
+`R` the codimension-one part along `N_T` of the cosupport and `A = N ∩ V(u) ∩ U`, the local agreement is
+`MaximalContactAlongTower.exists_contact_along` with
+`CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff_eq_zero_of_isInSpanOnAt`. -/
+theorem isTransverse_drop_E_of_forall_eventually (h𝔪 : 𝔪.IsWellFormed) (U : Opens X) {A : Set X}
+    (hA : IsClosedSubmanifold n ((↑) ⁻¹' A : Set U))
+    (h : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y), IsGeoTestTower 𝔪 T →
+      (geoTransformAlong 𝔪 T).IsAdmissibleCentre C → C ∩ T.proj ⁻¹' (U : Set X) ⊆ strictAlong T A)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {R : Set Y}
+    (hR : ∀ x ∈ R, T.proj x ∈ (U : Set X) ∧ x ∈ strictAlong T A ∧
+      ∀ᶠ y in 𝓝 x, y ∈ R ↔ y ∈ strictAlong T A) :
+    IsTransverse n R ((geoTransformAlong 𝔪 T).E.drop 𝔪.E.length) := by
+  refine isTransverse_of_forall_eventually fun x hx => ?_
+  obtain ⟨hxU, hxA, hRA⟩ := hR x hx
+  refine ⟨strictAlong T A ∩ T.proj ⁻¹' (U : Set X), ⟨hxA, hxU⟩, ?_,
+    isTransverse_drop_E_inter_preimage 𝔪 h𝔪 U hA h T hT⟩
+  have hO : T.proj ⁻¹' (U : Set X) ∈ 𝓝 x :=
+    (U.isOpen.preimage T.contMDiff_proj.continuous).mem_nhds hxU
+  filter_upwards [hRA, hO] with y hy hyU
+  exact ⟨fun h => ⟨hy.mp h, hyU⟩, fun h => hy.mpr h.1⟩
+
 end Tower
+
+/-! ### Step 1ba's centre -/
+
+section Admissible
+
+variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- **Step 1ba's centre is admissible**: for a marked ideal `(M, N, E, 𝔞, d)` with `N` a closed
+submanifold, `𝔞` coherent, `d ≥ 1` and of maximal order along `N`, if the codimension-one part along
+`N` of the cosupport is transverse to `E` (e.g. by `isTransverse_drop_E_of_forall_eventually` for the
+exceptional members), it is an admissible centre. -/
+theorem isAdmissibleCentre_codimOnePartAlong (𝔪 : MarkedIdeal n M) (hN : IsClosedSubmanifold n 𝔪.N)
+    (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d) (hmax : IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d)
+    (htr : IsTransverse n (codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) 𝔪.E) :
+    𝔪.IsAdmissibleCentre (codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) :=
+  ⟨isClosedSubmanifold_codimOnePartAlong h𝔞 hN hd hmax, codimOnePartAlong_subset,
+    htr.hasNormalCrossings⟩
+
+end Admissible
 
 /-! ### The codimension-one part along `N_T` at every stage -/
 
@@ -188,7 +219,9 @@ section Stage
 
 variable {X : CMfd.{u} n} (𝔪 : MarkedIdeal n X)
 
-open Hironaka.TangentDirectionAlong Hironaka.GiraudAlong Hironaka.TransformOffCentre Hironaka.MaximalContactAlongTower Hironaka.LocalGiraudTransformAlong Hironaka.GermIdealOrder
+open Hironaka.TangentDirectionAlong Hironaka.GiraudAlong
+  Hironaka.TransformOffCentre Hironaka.MaximalContactAlongTower
+  Hironaka.LocalGiraudTransformAlong Hironaka.GermIdealOrder
 
 /-- **At every stage of Step 1 inside `N` the codimension-one part along `N_T` of the cosupport is
 transverse to the exceptional divisors.**  Let `(M, N, E, 𝔞, d)` be well formed, of maximal order along
@@ -243,6 +276,24 @@ theorem isTransverse_codimOnePartAlong_drop_E (h𝔪 : 𝔪.IsWellFormed) (hμ :
   · rintro ⟨hyA, -⟩
     have hyN : y ∈ (geoTransformAlong 𝔪 T).N := strictAlong_subset_N 𝔪 hAN T hyA
     exact ⟨hyN, (hwA y hyO hyN).mpr hyA⟩
+
+/-- **Step 1ba's centre at every stage of Step 1 inside `N`** (the old members dropped): for the
+marked ideal `𝔪'` at the stage `T` with `N_T`, the transformed ideal, the mark and `E_T` without the
+original members, if `𝔪'` is of maximal order along `N_T`, the codimension-one part along `N_T` of its
+cosupport is an admissible centre. -/
+theorem isAdmissibleCentre_codimOnePartAlong_stage (h𝔪 : 𝔪.IsWellFormed) (hμ : 1 ≤ 𝔪.d)
+    (hmax : IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower 𝔪 T)
+    (hmaxT : IsMaximalOrderAlong (geoTransformAlong 𝔪 T).N (geoTransformAlong 𝔪 T).ideal
+      (geoTransformAlong 𝔪 T).d) :
+    ({ geoTransformAlong 𝔪 T with E := (geoTransformAlong 𝔪 T).E.drop 𝔪.E.length } :
+      MarkedIdeal n Y).IsAdmissibleCentre
+      (codimOnePartAlong (geoTransformAlong 𝔪 T).N (geoTransformAlong 𝔪 T).ideal
+        (geoTransformAlong 𝔪 T).d) := by
+  obtain ⟨hNT, h𝔞T⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong h𝔪.isClosedSubmanifold_N
+    h𝔪.isCoherent T hT
+  exact isAdmissibleCentre_codimOnePartAlong _ hNT h𝔞T (by rw [d_geoTransformAlong]; exact hμ) hmaxT
+    (isTransverse_codimOnePartAlong_drop_E 𝔪 h𝔪 hμ hmax T hT)
 
 end Stage
 

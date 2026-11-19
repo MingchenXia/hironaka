@@ -1,49 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CodimOnePartTowerAlong
 import Hironaka.Invariant.BoundaryCountAlong
 import Hironaka.MarkedIdeal.CoefficientIdealAlongRestriction
 import Hironaka.Blowup.NormalCrossingsComparison
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.AnalyticDimensionBasics
-import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.CodimOneAdmissibleAlong
-import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.MarkedIdeal.CodimOneSupport
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterAlong
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1aa inside a submanifold: the value set of `(s, ∞)`
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol`; Włodarczyk 2009
+Hironaka phase H2 (TN3), for TN-CLASSICAL's Step 1a inside `N` (`hir:maximal-order-step`; claim
+I-0977 C-0104).  Blueprint `bcalc:member-locus-def`, `bcalc:member-locus-canonical`,
+`bcalc:member-locus-level`, `bcalc:member-restriction-nonzero`, `bcalc:member-locus-centre` (chapter
+`blowup-calculus.tex`; the last appended in round r3, claim I-0977 C-0106).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol`; Włodarczyk 2009
 (`wlodarczyk09-analytic-resolution`) Step 1aa (printed p. 55).
 
 In Step 1a of the algorithm for a marked ideal `(M, N, E, 𝔞, d)` of maximal order along `N`, the points
@@ -61,19 +31,28 @@ and the cosupport of the transform.
   `mem_memberInterLocus_map_congr` (locality: only the germs at `x` of `N`, `S` and the members matter),
   `mem_memberInterLocus_preimage_iff` (preimages under a map `f` with `map f (𝓝 z) = 𝓝 (f z)`), and
   `map_nhds_eq_of_notMem` (a blowup is such a map off its centre);
-* `mem_memberInterLocus_geoTransform_iff`: off the centre of a blowup the member locus corresponds; along towers:
-  `mem_memberInterLocus_geoTransformAlong_step_iff` (properties (3) "equal otherwise" and (4))
+* `mem_memberInterLocus_geoTransform_iff`: off the centre of a blowup the member locus corresponds;
+  along towers: `mem_memberInterLocus_geoTransformAlong_step_iff` (properties (3) "equal otherwise" and
+  (4)), `memberInterLocus_geoTransformAlong_transport` (6), `memberInterLocus_geoTransformAlong_restrict`
+  (5), `memberInterLocus_geoTransformAlong_of_restrictEquiv`, `memberInterLocus_geoTransformAlong_of_wEquiv`
+  (7);
 * the level-`s₀` part `C = L ∩ {s = s₀}` (the centre of Step 1aa): `eventually_mem_memberInterLocus_level` (near
-  each of its points it contains `N ∩ H_{S(x)}`); `memberInterLocus_level_geoTransformAlong_subset` (along every
-  multiple test blow-up the level-`s₀` part lies over the closure of the original one); tools
-  `boundaryCount_eq_of_forall_iff`, `forall_iff_of_forall_imp_of_boundaryCount_le`, `strictAlong_append`,
-  `strictAlong_inter_forall_mem`
+  each of its points it contains `N ∩ H_{S(x)}`); `memberInterLocus_level_geoTransform_eq_empty` (after the
+  blowup along `C`, admissible, the level-`s₀` part is empty: the count drops over `C`);
+  `memberInterLocus_level_geoTransformAlong_subset` (along every multiple test blow-up the level-`s₀` part lies
+  over the closure of the original one), `memberInterLocus_level_geoTransformAlong_eq_empty`,
+  `memberInterLocus_level_geoTransformAlong_append_eq_empty` (so after Step 1aa it stays empty);
+  tools `boundaryCount_eq_of_forall_iff`, `forall_iff_of_forall_imp_of_boundaryCount_le`, `strictAlong_append`,
+  `strictAlong_inter_forall_mem`;
 * `isAdmissibleCentre_memberInterLocus_level`: at the maximal level (`s ≤ s₀` on the cosupport, `d ≥ 1`, `0 < n`)
   the level-`s₀` part is an admissible centre -- closed by the filling lemma on `N ∩ H_{S(x)}`, near each of its
   points equal to `N ∩ H_{S(x)}` (`eventually_mem_level_iff`); tool `setOf_forall_mem_eq_memberInter_of_mem`;
 * `isNonzeroAlongAt_of_notMem_memberInterLocus`, `isNonzeroAlongAt_coeffMarkedAlong_of_notMem_memberInterLocus`:
   off the member locus, the restriction of the coefficient ideal along `N` to `N ∩ H_{S(y)}` is nonzero
   near `y` (the hypothesis of `hir:centre-function` for the restricted marked ideals of Step 1ab).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -84,7 +63,16 @@ universe u
 namespace Hironaka.MemberInterLocusAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.HomogenizedGlueingTower Hironaka.MarkedIdealRestrictOpen Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealTowerTransport Hironaka.CodimOnePartCanonical Hironaka.GermIdealOrder Hironaka.HomogenizedIdealAlong Hironaka.BoundaryCount Hironaka.DivisorExponentAlong Hironaka.CoefficientIdealRestriction Hironaka.MarkedIdealEquivalence Hironaka.GiraudAlong Hironaka.BlowupStrictSubmanifold Hironaka.MemberInterTowerAlong Hironaka.CodimOnePartTowerAlong
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.HomogenizedGlueingTower Hironaka.MarkedIdealRestrictOpen
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealTowerTransport
+  Hironaka.CodimOnePartCanonical Hironaka.GermIdealOrder
+  Hironaka.HomogenizedIdealAlong Hironaka.BoundaryCount
+  Hironaka.DivisorExponentAlong Hironaka.CoefficientIdealRestriction
+  Hironaka.MarkedIdealEquivalence Hironaka.GiraudAlong
+  Hironaka.BlowupStrictSubmanifold Hironaka.MemberInterTowerAlong
+  Hironaka.CodimOnePartTowerAlong
 
 noncomputable section
 
@@ -116,6 +104,9 @@ theorem mem_memberInterLocus_iff {N : Set X} {E : List (Set X)} {S : Set X} {x :
   refine and_congr Iff.rfl (eventually_congr (Eventually.of_forall fun y => ?_))
   exact imp_congr_right fun _ => imp_congr_left (forall_get_iff (P := fun H => x ∈ H → y ∈ H))
 
+theorem memberInterLocus_subset (N : Set X) (E : List (Set X)) (S : Set X) :
+    memberInterLocus N E S ⊆ S := fun _ h => h.1
+
 open Classical in
 /-- The intersection of the members through `y` in index form. -/
 theorem setOf_forall_mem_eq_memberInter (E : List (Set X)) (y : X) :
@@ -146,6 +137,14 @@ theorem mem_memberInterLocus_map_congr {α : Type*} {N N' S S' : Set X} {E : Lis
   · intro h hyN' hall
     exact h hyN' fun H hH hxH => (hyE H hH).mp (hall H hH ((hx H hH).mpr hxH))
 
+/-- The locality of `mem_memberInterLocus_map_congr` with `g' = id`. -/
+theorem mem_memberInterLocus_map_congr_id {N N' S S' : Set X} {E : List (Set X)} {g : Set X → Set X}
+    {x : X} (hN : ∀ᶠ y in 𝓝 x, y ∈ N' ↔ y ∈ N) (hS : ∀ᶠ y in 𝓝 x, y ∈ S' ↔ y ∈ S)
+    (hE : ∀ H ∈ E, ∀ᶠ y in 𝓝 x, y ∈ g H ↔ y ∈ H) :
+    x ∈ memberInterLocus N' (E.map g) S' ↔ x ∈ memberInterLocus N E S := by
+  have h := mem_memberInterLocus_map_congr (g' := id) hN hS hE
+  rwa [List.map_id] at h
+
 /-- **Preimages**: for a map `f` with `map f (𝓝 z) = 𝓝 (f z)` (a homeomorphism, an open embedding, a
 blowup off its centre), `z` is in the member locus of `f⁻¹ S` along `f⁻¹ N` and the preimages of the
 members iff `f z` is in that of `S`. -/
@@ -162,6 +161,17 @@ theorem memberInterLocus_preimage (f : Y → X) (hf : ∀ z, Filter.map f (𝓝 
     (N : Set X) (E : List (Set X)) (S : Set X) :
     memberInterLocus (f ⁻¹' N) (E.map (f ⁻¹' ·)) (f ⁻¹' S) = f ⁻¹' memberInterLocus N E S :=
   Set.ext fun z => mem_memberInterLocus_preimage_iff f (hf z) N E S
+
+/-- **Members not through `x` do not matter.** -/
+theorem mem_memberInterLocus_append_iff {N S : Set X} {E E' : List (Set X)} {x : X}
+    (hE' : ∀ H ∈ E', x ∉ H) :
+    x ∈ memberInterLocus N (E ++ E') S ↔ x ∈ memberInterLocus N E S := by
+  rw [mem_memberInterLocus_iff, mem_memberInterLocus_iff]
+  refine and_congr Iff.rfl (eventually_congr (Eventually.of_forall fun y => ?_))
+  refine imp_congr_right fun _ => imp_congr_left ?_
+  simp only [List.mem_append]
+  exact ⟨fun h H hH => h H (Or.inl hH), fun h H hH hx => hH.elim (fun hH => h H hH hx)
+    fun hH => absurd hx (hE' H hH)⟩
 
 open Classical in
 /-- **Equal counts** for points on the same members. -/
@@ -237,6 +247,14 @@ theorem mem_memberInterLocus_geoTransform_iff (𝔪 : MarkedIdeal n X) (hN : IsC
     exact TransformOffCentre.eventually_mem_geoStrictTransform_iff (hE₀ H hH) hπ.1.1
       hπ.contMDiff.continuous hz
 
+/-- **A blowup along `∅` pulls the member locus back** (property (4), empty steps). -/
+theorem memberInterLocus_geoTransform_empty (𝔪 : MarkedIdeal n X) (hN : IsClosed 𝔪.N)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) (hπ : IsBlowupAlong n ∅ π)
+    {E₀ : List (Set X)} (hE₀ : ∀ H ∈ E₀, IsClosed H) :
+    memberInterLocus (𝔪.geoTransform ∅ π).N (E₀.map (geoStrictTransform π ∅)) (𝔪.geoTransform ∅ π).cosupp =
+      π ⁻¹' memberInterLocus 𝔪.N E₀ 𝔪.cosupp :=
+  Set.ext fun _ => mem_memberInterLocus_geoTransform_iff 𝔪 hN h𝔞 hπ hE₀ (Set.notMem_empty _)
+
 end OffCentre
 
 /-! ### Along towers -/
@@ -265,6 +283,83 @@ theorem mem_memberInterLocus_geoTransformAlong_step_iff (hN : IsClosedSubmanifol
   exact mem_memberInterLocus_geoTransform_iff (geoTransformAlong 𝔪 T) hNT.1
     (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg) hπ
     (isClosed_of_mem_take_E_geoTransformAlong 𝔪 hE T) hz
+
+/-- **The member locus along transported towers** (property (6)): along the transport of a tower `T`
+by a biholomorphism `Φ : X' ≅ X`, the member locus of the transform of `Φ^*𝔪` is the preimage under the
+last-stage biholomorphism of that of the transform of `𝔪`. -/
+theorem memberInterLocus_geoTransformAlong_transport
+    (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X) (h𝔞 : 𝔪.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      memberInterLocus (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).N
+          ((geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).E.take 𝔪.E.length)
+          (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) (transport Φ T).tower).cosupp =
+        (transport Φ T).back ⁻¹' memberInterLocus (geoTransformAlong 𝔪 T).N
+          ((geoTransformAlong 𝔪 T).E.take 𝔪.E.length) (geoTransformAlong 𝔪 T).cosupp
+  | _, .refl => by
+      ext p
+      change p ∈ memberInterLocus (Φ ⁻¹' 𝔪.N) ((𝔪.E.map (Φ ⁻¹' ·)).take 𝔪.E.length)
+          (cosupport n (Φ ⁻¹' 𝔪.N) (GermIdeal.pullback (m := n) Φ 𝔪.ideal) 𝔪.d) ↔
+        Φ p ∈ memberInterLocus 𝔪.N (𝔪.E.take 𝔪.E.length) (cosupport n 𝔪.N 𝔪.ideal 𝔪.d)
+      rw [List.take_of_length_le (by rw [List.length_map]), List.take_of_length_le le_rfl,
+        cosupport_pullback Φ
+          (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg) 𝔪.d]
+      exact mem_memberInterLocus_preimage_iff Φ (Φ.toHomeomorph.map_nhds_eq p) _ _ _
+  | _, .step T C π hπ => by
+      rw [geoTransformAlong_transport_step Φ h𝔞 T C π hπ]
+      rfl
+
+/-- **The member locus along restricted towers** (property (5)): along the restriction to an open `U`
+of a multiple test blow-up `T`, the member locus of the transform of `𝔪|_U` is the trace on the open
+preimage of `U` of that of the transform of `𝔪`. -/
+theorem memberInterLocus_geoTransformAlong_restrict (U : Opens X) (hN : IsClosedSubmanifold n 𝔪.N)
+    (h𝔞 : 𝔪.ideal.IsCoherent) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) :
+    memberInterLocus (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T)).N
+        ((geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T)).E.take
+          𝔪.E.length)
+        (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T)).cosupp =
+      ((↑) : openPreimage T U → Y) ⁻¹' memberInterLocus (geoTransformAlong 𝔪 T).N
+        ((geoTransformAlong 𝔪 T).E.take 𝔪.E.length) (geoTransformAlong 𝔪 T).cosupp := by
+  obtain ⟨-, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hN h𝔞 T hT
+  rw [geoTransformAlong_restrict U hN h𝔞 T hT]
+  have hc := cosupp_pullback_val (geoTransformAlong 𝔪 T)
+    (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg)
+    (openPreimage T U)
+  ext p
+  change p ∈ memberInterLocus ((Subtype.val : openPreimage T U → Y) ⁻¹' (geoTransformAlong 𝔪 T).N)
+      (((geoTransformAlong 𝔪 T).E.map ((Subtype.val : openPreimage T U → Y) ⁻¹' ·)).take 𝔪.E.length)
+      (MarkedIdeal.pullback (Subtype.val : openPreimage T U → Y) (geoTransformAlong 𝔪 T)).cosupp ↔ _
+  rw [hc, ← List.map_take]
+  exact mem_memberInterLocus_preimage_iff Subtype.val
+    ((openPreimage T U).isOpen.isOpenEmbedding_subtypeVal.map_nhds_eq p) _ _ _
+
+/-- **Restricted-equivalent marked ideals have the same member locus at every stage** (property (7);
+closed `N`, coherent ideals). -/
+theorem memberInterLocus_geoTransformAlong_of_restrictEquiv {𝔫 : MarkedIdeal n X}
+    (h : MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv 𝔪 𝔫) (hN : IsClosed 𝔪.N)
+    (h𝔪 : 𝔪.ideal.IsCoherent) (h𝔫 : 𝔫.ideal.IsCoherent) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
+      memberInterLocus (geoTransformAlong 𝔪 T).N ((geoTransformAlong 𝔪 T).E.take 𝔪.E.length)
+          (geoTransformAlong 𝔪 T).cosupp =
+        memberInterLocus (geoTransformAlong 𝔫 T).N ((geoTransformAlong 𝔫 T).E.take 𝔪.E.length)
+          (geoTransformAlong 𝔫 T).cosupp
+  | _, .refl => by
+      change memberInterLocus 𝔪.N (𝔪.E.take 𝔪.E.length) 𝔪.cosupp =
+        memberInterLocus 𝔫.N (𝔫.E.take 𝔪.E.length) 𝔫.cosupp
+      rw [h.N_eq, h.E_eq, h.cosupp_eq]
+  | _, .step T C π hπ => by
+      rw [MarkedIdealEquivalence.MarkedIdeal.RestrictEquiv.geoTransformAlong_step_eq h hN h𝔪 h𝔫 T C π hπ]
+
+/-- **Equivalent marked ideals with the same `N` have the same member locus along every multiple test
+blow-up** (property (7) for the replacement of `𝔪` by `𝓒(𝓗(𝔪))`). -/
+theorem memberInterLocus_geoTransformAlong_of_wEquiv {𝔫 : MarkedIdeal n X}
+    (h : MarkedIdealEquivalence.MarkedIdeal.WEquiv 𝔪 𝔫) (hN : 𝔪.N = 𝔫.N) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) :
+    memberInterLocus (geoTransformAlong 𝔪 T).N ((geoTransformAlong 𝔪 T).E.take 𝔪.E.length)
+        (geoTransformAlong 𝔪 T).cosupp =
+      memberInterLocus (geoTransformAlong 𝔫 T).N ((geoTransformAlong 𝔫 T).E.take 𝔪.E.length)
+        (geoTransformAlong 𝔫 T).cosupp := by
+  rw [N_geoTransformAlong, N_geoTransformAlong, hN, (h.2 T).2 hT,
+    MarkedIdealEquivalence.MarkedIdeal.E_geoTransformAlong_eq h.1 T]
 
 end Tower
 
@@ -298,6 +393,48 @@ theorem eventually_mem_memberInterLocus_level {N S : Set X} {E : List (Set X)}
     boundaryCount_eq_of_forall_iff hiff⟩
   filter_upwards [hy1] with w hw hwN hwE
   exact hw hwN fun H hH hxH => hwE H hH ((hiff H hH).mpr hxH)
+
+/-- **Blowing up the level-`s₀` part of the member locus empties it** (Step 1aa inside `N`).  Let `𝔪` be
+well formed, `E₀` a sublist of its divisor (the members counted), `C` the set of points of the member locus
+of the cosupport along `N` and `E₀` at which `s = s₀`, assumed an admissible centre, and `π` the blowup
+along `C`.  Then no point of the transform has `s' = s₀` and lies in the member locus of the transformed
+cosupport along `N'` and the strict transforms of `E₀`: over `C` the count drops
+(`BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_boundaryCount_along`, as `C ⊇ N ∩ H_{S(x)}` near
+`x`), and off `C` the member locus and the count correspond. -/
+theorem memberInterLocus_level_geoTransform_eq_empty (𝔪 : MarkedIdeal n X) (h𝔪 : 𝔪.IsWellFormed)
+    {E₀ : List (Set X)} (hE₀ : E₀.Sublist 𝔪.E) (s₀ : ℕ)
+    (hπ : IsBlowupAlong n (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π)
+    (hC : 𝔪.IsAdmissibleCentre (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀})) :
+    memberInterLocus (𝔪.geoTransform (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π).N
+        (E₀.map (geoStrictTransform π (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀})))
+        (𝔪.geoTransform (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π).cosupp ∩
+      {z | boundaryCount (E₀.map (geoStrictTransform π
+        (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}))) z = s₀} = ∅ := by
+  set C := memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀} with hCdef
+  have hE₀c : ∀ H ∈ E₀, IsClosed H := fun H hH => h𝔪.isSNCDivisor.1 H (hE₀.subset hH)
+  have hhol : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x := fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔪.isCoherent hg
+  refine eq_empty_iff_forall_notMem.mpr fun z ⟨hzL, hzs⟩ => ?_
+  have hzs' : boundaryCount (E₀.map (geoStrictTransform π C)) z = s₀ := hzs
+  by_cases hzC : π z ∈ C
+  · have hzN : z ∈ geoStrictTransform π C 𝔪.N := (𝔪.geoTransform C π).cosupp_subset_N hzL.1
+    obtain ⟨hxL, hxs⟩ := hzC
+    have hxs' : boundaryCount E₀ (π z) = s₀ := hxs
+    have hCloc : ∀ᶠ y in 𝓝 (π z), y ∈ 𝔪.N →
+        (∀ i : Fin E₀.length, π z ∈ E₀.get i → y ∈ E₀.get i) → y ∈ C := by
+      filter_upwards [eventually_mem_memberInterLocus_level hE₀c hxL] with y hy hyN hyE
+      obtain ⟨hyL, hyc⟩ := hy hyN hyE
+      exact ⟨hyL, show boundaryCount E₀ y = s₀ by rw [hyc, hxs']⟩
+    have hlt := BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_boundaryCount_along hπ
+      hC.subset_N (NormalCrossingsComparison.isSNCDivisor_of_sublist h𝔪.isSNCDivisor hE₀)
+      (NormalCrossingsComparison.isTransverse_of_forall_mem h𝔪.isTransverse fun _ hH => hE₀.subset hH)
+      (NormalCrossingsComparison.hasNormalCrossings_of_forall_mem hC.2.2 fun _ hH => hE₀.subset hH)
+      ⟨hxL, hxs⟩ hzN hCloc
+    omega
+  · have h1 := (mem_memberInterLocus_geoTransform_iff 𝔪 h𝔪.isClosedSubmanifold_N.1 hhol hπ hE₀c hzC).mp hzL
+    have h2 := CodimOnePartCanonical.boundaryCount_map_geoStrictTransform_of_notMem hπ.1.1
+      hπ.contMDiff.continuous hE₀c hzC
+    exact hzC ⟨h1, show boundaryCount E₀ (π z) = s₀ by rw [← h2]; exact hzs'⟩
 
 end LevelStep
 
@@ -419,6 +556,62 @@ theorem memberInterLocus_level_geoTransformAlong_subset (h𝔪 : 𝔪.IsWellForm
         exact hys
       exact ⟨y, hyt, memberInterLocus_level_geoTransformAlong_subset h𝔪 hE₀ s₀ T hT0 ⟨hπyL, hπys⟩⟩
 
+/-- **Once empty, the level-`s₀` part of the member locus stays empty along every multiple test
+blow-up.** -/
+theorem memberInterLocus_level_geoTransformAlong_eq_empty (h𝔪 : 𝔪.IsWellFormed) {E₀ : List (Set X)}
+    (hE₀ : ∀ H ∈ E₀, H ∈ 𝔪.E) (s₀ : ℕ)
+    (hempty : memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀} = ∅)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) :
+    memberInterLocus (geoTransformAlong 𝔪 T).N (E₀.map (strictAlong T)) (geoTransformAlong 𝔪 T).cosupp ∩
+      {z | boundaryCount (E₀.map (strictAlong T)) z = s₀} = ∅ := by
+  have h := memberInterLocus_level_geoTransformAlong_subset 𝔪 h𝔪 hE₀ s₀ T hT
+  rw [hempty, closure_empty, preimage_empty] at h
+  exact subset_empty_iff.mp h
+
+/-- **After Step 1aa the level-`s₀` part of the member locus is empty and stays empty**: for `𝔪` well
+formed, a sublist `E₀` of `𝔪.E` (the members counted), `π` the blowup along the level-`s₀` part `C` of the
+member locus and `S` a tower over its source such that `π` followed by `S` is a multiple test blow-up of
+`𝔪`, the level-`s₀` part of the member locus of the transform along this tower (strict transforms of
+`E₀`) is empty. -/
+theorem memberInterLocus_level_geoTransformAlong_append_eq_empty (h𝔪 : 𝔪.IsWellFormed)
+    {E₀ : List (Set X)} (hE₀ : E₀.Sublist 𝔪.E) (s₀ : ℕ) {Y₁ : CMfd.{u} n} (π : Y₁ → X)
+    (hπ : IsBlowupAlong n (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π)
+    {Y : CMfd.{u} n} (S : BlowupTower Y₁ Y)
+    (hS : IsGeoTestTower 𝔪 ((BlowupTower.step .refl
+      (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π hπ).append S)) :
+    memberInterLocus
+        (geoTransformAlong 𝔪 ((BlowupTower.step .refl
+          (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π hπ).append S)).N
+        (E₀.map (strictAlong ((BlowupTower.step .refl
+          (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π hπ).append S)))
+        (geoTransformAlong 𝔪 ((BlowupTower.step .refl
+          (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π hπ).append S)).cosupp ∩
+      {z | boundaryCount (E₀.map (strictAlong ((BlowupTower.step .refl
+          (memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀}) π hπ).append S))) z = s₀} =
+      ∅ := by
+  set C := memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = s₀} with hCdef
+  set T₁ : BlowupTower X Y₁ := .step .refl C π hπ with hT₁
+  obtain ⟨hT₁t, hSt⟩ := (isGeoTestTower_append_iff 𝔪 T₁ S).mp hS
+  have hC : 𝔪.IsAdmissibleCentre C := hT₁t.2
+  have hW₁ : (geoTransformAlong 𝔪 T₁).IsWellFormed :=
+    MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong h𝔪 T₁ hT₁t
+  have hE₁ : ∀ H ∈ E₀.map (strictAlong T₁), H ∈ (geoTransformAlong 𝔪 T₁).E := by
+    rw [List.forall_mem_map]
+    intro H hH
+    show geoStrictTransform π C H ∈ 𝔪.E.map (geoStrictTransform π C) ++ [π ⁻¹' C]
+    exact List.mem_append_left _ (List.mem_map_of_mem (hE₀.subset hH))
+  have hempty₁ := memberInterLocus_level_geoTransform_eq_empty 𝔪 h𝔪 hE₀ s₀ hπ hC
+  have hempty₁' : memberInterLocus (geoTransformAlong 𝔪 T₁).N (E₀.map (strictAlong T₁))
+      (geoTransformAlong 𝔪 T₁).cosupp ∩ {x | boundaryCount (E₀.map (strictAlong T₁)) x = s₀} = ∅ :=
+    hempty₁
+  have h := memberInterLocus_level_geoTransformAlong_eq_empty (geoTransformAlong 𝔪 T₁) hW₁ hE₁ s₀
+    hempty₁' S hSt
+  have hmap : E₀.map (strictAlong (T₁.append S)) = (E₀.map (strictAlong T₁)).map (strictAlong S) := by
+    rw [List.map_map]
+    exact List.map_congr_left fun H _ => strictAlong_append T₁ H S
+  rw [hmap, geoTransformAlong_append]
+  exact h
+
 end LevelTower
 
 /-! ### Off the member locus the restriction to `N ∩ H_{S(y)}` is nonzero -/
@@ -445,11 +638,12 @@ theorem isNonzeroAlongAt_of_notMem_memberInterLocus {N S : Set M} {E : List (Set
     exact hz1 ⟨⟨hzN, hzE⟩, fun g hg => ⟨fun _ => 0, zero_mem_idealPow _ z ν, hz2 g hg⟩⟩
   exact ⟨key.self_of_nhds hyN fun _ _ h => h, key⟩
 
-/-- **Step 1ab's restricted marked ideals are nonzero along their submanifolds off the member locus.** For `𝔪 = (M, N,
-E, 𝔞, d)` with `N` a closed submanifold, `𝔞` coherent, `d ≥ 1`, a list `E₀` of sets (the members counted) and `y ∈
-N` not in the member locus of the cosupport along `N` and `E₀`, the coefficient ideal along `N` restricted to `A = N
-∩ H_{S(y)}` (`withN (coeffMarkedAlong 𝔪) A`, with any `E`) is nonzero along `A` near `y`. (Its cosupport is `cosupp
-𝔪 ∩ A`, `CoefficientIdealAlongRestriction.cosupp_coeffMarkedAlong_withN`.) -/
+/-- **Step 1ab's restricted marked ideals are nonzero along their submanifolds off the member locus.**
+For `𝔪 = (M, N, E, 𝔞, d)` with `N` a closed submanifold, `𝔞` coherent, `d ≥ 1`, a list `E₀` of sets (the
+members counted) and `y ∈ N` not in the member locus of the cosupport along `N` and `E₀`, the coefficient
+ideal along `N` restricted to `A = N ∩ H_{S(y)}` (TN23's `withN (coeffMarkedAlong 𝔪) A`, with any `E`) is
+nonzero along `A` near `y`.  (Its cosupport is `cosupp 𝔪 ∩ A`,
+`CoefficientIdealAlongRestriction.cosupp_coeffMarkedAlong_withN`.) -/
 theorem isNonzeroAlongAt_coeffMarkedAlong_of_notMem_memberInterLocus (𝔪 : MarkedIdeal n M)
     (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d) (E₀ : List (Set M))
     {y : M} (hyN : y ∈ 𝔪.N) (hy : y ∉ memberInterLocus 𝔪.N E₀ 𝔪.cosupp) :

@@ -1,51 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralCompare
 import Hironaka.Invariant.NonmonomialOrderMonomialCanonical
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.GeneralValue
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Invariant.NonmonomialOrderCanonical
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Invariant.StepOneNearby
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The canonical-tail theorem of the general step: lower data along canonical segments; the drop property
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a: at a point of order `o ≥ 1`
-the value is that of the maximal-order invariant of the companion ideal formed where the point reached the order
-`o`, along the rest of the resolution, "which is a canonical segment of it" -- near the point, the centres of a
-canonical segment of the general value are empty or the maximum loci of the companion's invariant.
+Blueprint `hir:general-canonical-tail` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a: at a point of order `o ≥ 1` the value is
+that of the maximal-order invariant of the companion ideal formed where the point reached the order `o`, along the rest of the
+resolution, "which is a canonical segment of it" -- near the point, the centres of a canonical segment of the general value are
+empty or the maximum loci of the companion's invariant.
 
 Let `𝔪` lie in the domain (`0 < n`), `M` a value function for the marked ideals of maximal order
 (`MaxOrderValue.IsMaxOrderValue`) and `genInv M 𝔪` the general value (`GeneralValue`).  **Main theorem**
@@ -53,21 +19,20 @@ Let `𝔪` lie in the domain (`0 < n`), `M` a value function for the marked idea
 every point of the cosupport of positive order has lower data at the split of `T` at the start of its run
 (`GeneralValue.GenLowerData`).
 
-Proof: induction on the tower. After a further blowup `σ` along `C`, a point `y` whose image `σ y` is in the regime
-of its order `o` has the split of `σ y` with the tail extended by `σ`; the trace of `C` on the restricted tail is
-empty or the maximum locus of the companion's value (`MaxLocusLocal.preimage_maxLocus_eq_or` with the strictly
-monotone `λ ↦ (o, λ)`): over the mask `W = {ν ≤ o}` the points of the companion's cosupport are the points of order
-`o` (`mem_cosupp_compAt_iff`), their value is `(o, value of the companion formed at the start of σ y)` by the
-comparison (`genInv_eq_of_mem_cosupp_compAt`: their own runs started no earlier -- `ordRegime_and_le_regimeRun` --,
-the steps between the two starts miss their mask -- `exists_middle_ord`, from `centresAvoid_of_canonical` --, and
-`GeneralCompare.genLowerValue_eq_rebase`), and the other points over the mask have smaller order. A point leaving
-its regime starts a new run with lower data along the empty tail (`genLowerData_refl`).
+Proof: induction on the tower.  After a further blowup `σ` along `C`, a point `y` whose image `σ y` is in the regime of its order
+`o` has the split of `σ y` with the tail extended by `σ`; the trace of `C` on the restricted tail is empty or the maximum locus of
+the companion's value (`MaxLocusLocal.preimage_maxLocus_eq_or` with the strictly monotone `λ ↦ (o, λ)`): over the mask
+`W = {ν ≤ o}` the points of the companion's cosupport are the points of order `o` (`mem_cosupp_compAt_iff`), their value is
+`(o, value of the companion formed at the start of σ y)` by the comparison (`genInv_eq_of_mem_cosupp_compAt`: their own runs
+started no earlier -- TN3's `ordRegime_and_le_regimeRun` --, the steps between the two starts miss their mask --
+`exists_middle_ord`, from TN3's `centresAvoid_of_canonical` --, and `GeneralCompare.genLowerValue_eq_rebase`), and the other
+points over the mask have smaller order.  A point leaving its regime starts a new run with lower data along the empty tail
+(`genLowerData_refl`).
 
-Consequence (`genInv_drop`): along a canonical segment of `genInv M 𝔪` which is a multiple test blow-up, after one
-more step every point of the new cosupport lies over the cosupport, with a smaller value over the centre and the
-same value off it -- properties (3) and (4) of `hir:centre-function` for the general value -- at positive order from
-the lower data and the order bookkeeping of `NonmonomialOrderCanonical`, at order `0` by
-`NonmonomialOrderMonomialCanonical`.
+Consequence (`genInv_drop`): along a canonical segment of `genInv M 𝔪` which is a multiple test blow-up, after one more step
+every point of the new cosupport lies over the cosupport, with a smaller value over the centre and the same value off it --
+properties (3) and (4) of `hir:centre-function` for the general value -- at positive order from the lower data and the order
+bookkeeping of TN3's `NonmonomialOrderCanonical`, at order `0` by TN3's `NonmonomialOrderMonomialCanonical`.
 
 ## Main results
 
@@ -75,6 +40,9 @@ the lower data and the order bookkeeping of `NonmonomialOrderCanonical`, at orde
   `genInv_eq_of_mem_cosupp_compAt`: tools;
 * `HasGenLowerData`, `genLowerData_step`, **`hasGenLowerData_of_isCanonical`**: the canonical-tail theorem;
 * `ordZeroValue_genInv`, **`genInv_drop`**: the drop property of the general value along canonical test segments.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -85,7 +53,18 @@ universe u v
 namespace Hironaka.GeneralCanonicalTail
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.RestrictEmptyTower Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.GeneralCompare Hironaka.InvDomainCompanion Hironaka.StepOneWellFounded
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.BlowupTowerIsomorphism Hironaka.RestrictEmptyTower
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical
+  Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong
+  Hironaka.MaxOrderValue Hironaka.GeneralValue
+  Hironaka.GeneralCompare Hironaka.InvDomainCompanion
+  Hironaka.StepOneWellFounded
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
 open Hironaka.ResolutionDriver (maxLocus)
@@ -397,7 +376,7 @@ section Drop
 variable {X : CMfd.{u} n} {k : ℕ} {Λ : Type v} [LinearOrder Λ]
   (M : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ) (𝔪 : MarkedIdeal n X)
 
-/-- At the points of order `0` the general value is `(0, γ)` (the hypothesis `OrdZeroValue` of
+/-- At the points of order `0` the general value is `(0, γ)` (the hypothesis `OrdZeroValue` of TN3's
 `NonmonomialOrderMonomialCanonical`). -/
 theorem ordZeroValue_genInv :
     NonmonomialOrderMonomialCanonical.OrdZeroValue 𝔪 (genInv M 𝔪)

@@ -1,52 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HomogenizedGlueingLift
 import Hironaka.MarkedIdeal.HomogenizedGlueingAlongTower
 import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupBiholomorphismLift
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.MarkedIdeal.HomogenizedGlueingAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdeal
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The Glueing Lemma along a submanifold along multiple test blow-ups: the lifts of the glueing biholomorphism
 
-Source: Włodarczyk 2005, Lemma `le:homo` (4) and its proof, for the marked ideal `(M, N, ∅, 𝓗_N(𝔞), μ)` of
-`HomogenizedGlueingAlongTower` (`φ_v` the inclusion of an open set `U`, `φ_u = φ` the glueing biholomorphism `U ≅
-U'`, which preserves `N`).
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0059: the along-`N` form of `HomogenizedGlueingLift` (`N = M`), the
+last tower statement of item (4) of `hir:along-calculus` (`blueprint/src/hironaka.tex`); blueprint
+`mc:glueing-trivial-along`, `mc:glue-tower-along`, `mc:glueing-lift-along` (`blueprint/src/maximal-contact.tex`).  Source:
+Włodarczyk 2005, Lemma `le:homo` (4) and its proof, in the analytic adaptation of design note D7, for the marked ideal
+`(M, N, ∅, 𝓗_N(𝔞), μ)` of `HomogenizedGlueingAlongTower` (`φ_v` the inclusion of an open set `U`, `φ_u = φ` the glueing
+biholomorphism `U ≅ U'`, which preserves `N`).
 
 * `glueIdealAlong N 𝔞 μ = 𝓓_N^{μ-1}(𝓗_N(𝔞)) ⊇ T_N(𝔞)` and `exists_glueingDataAlong_trivial`: glueing data along `N` whose
   maps act trivially modulo `𝓓_N^{μ-1}(𝓗_N(𝔞))` at its zeros in `W` (the coordinate changes of the glueing lemma along `N`
@@ -57,11 +24,14 @@ U'`, which preserves `N`).
   blow-up of `(𝓗_N(𝔞), μ)` is one of `glueMarkedAlong`, with centres in the strict transforms of `N`, and along it the
   cosupport of `(𝓗_N(𝔞), μ)_T` lies in the zeros of the transformed glue ideal (`le:S` restriction `CoefficientIdealRestriction.restrict_tower`
   for `S = N`, and the inclusions along `N`, `HomogenizedIdealAlongTower.mem_cosupp_derivMarkedAlong_tower`).
-* `IsGlueingLiftAlong G T Φ` and `exists_isGlueingLiftAlong` (Włodarczyk `le:homo` (4) along `N`): along every
-  multiple test blow-up `T` of `(𝓗_N(𝔞), μ)` a biholomorphism `Φ_T` from the preimage of `U` onto that of `U'` lifts
-  `φ`, acts trivially (as does `Φ_T⁻¹`) modulo the transformed glue ideal at its zeros, identifies the restrictions
-  of `(𝓗_N(𝔞), μ)_T` (so `N_T` too) and the strict transforms of `V(u)`, `V(v)` and of `N ∩ V(u)`, `N ∩ V(v)`;
-  `IsGlueingLiftAlong.apply_eq_of_mem_cosupp`: it fixes the cosupport.
+* `IsGlueingLiftAlong G T Φ` and `exists_isGlueingLiftAlong` (Włodarczyk `le:homo` (4) along `N`): along every multiple test
+  blow-up `T` of `(𝓗_N(𝔞), μ)` a biholomorphism `Φ_T` from the preimage of `U` onto that of `U'` lifts `φ`, acts trivially (as
+  does `Φ_T⁻¹`) modulo the transformed glue ideal at its zeros, identifies the restrictions of `(𝓗_N(𝔞), μ)_T` (so `N_T` too)
+  and the strict transforms of `V(u)`, `V(v)` and of `N ∩ V(u)`, `N ∩ V(v)`; `IsGlueingLiftAlong.apply_eq_of_mem_cosupp`: it
+  fixes the cosupport; `glueing_lemma_lift_along`: the package.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -71,7 +41,10 @@ universe u
 
 namespace Hironaka.HomogenizedGlueingLiftAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal DerivativeIdealAlong GiraudAlong DerivativeIdealAlongCoherent TangentDirectionAlong IdealWeightPowers HomogenizedIdealAlong HomogenizedGlueingAlong HomogenizedGlueingAlongTower HadamardBridgeAlong BlowupFlatCoordinates GlueingTrivialAction HomogenizedGlueingLift RelativePrincipalizationSpan
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal
+  DerivativeIdealAlong GiraudAlong DerivativeIdealAlongCoherent TangentDirectionAlong IdealWeightPowers
+  HomogenizedIdealAlong HomogenizedGlueingAlong HomogenizedGlueingAlongTower HadamardBridgeAlong
+  BlowupFlatCoordinates GlueingTrivialAction HomogenizedGlueingLift RelativePrincipalizationSpan
 open HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
@@ -102,10 +75,10 @@ theorem tangentIdealAlong_le_glueIdealAlong {N : Set M} {𝔞 : GermIdeal n M} (
   iterDerivIdealAlong_mono (le_homogenizedIdealAlong
     (fun _ _ hg => GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg) hμ) (μ - 1)
 
-/-- **Glueing data along `N` acting trivially** (Włodarczyk, proof of `le:homo` (4), along `N`): for tangent directions
-`u`, `v` along `N` at `x ∈ cosupp(𝔞|_N, μ)` there are glueing data along `N` with `x ∈ W` whose maps act trivially
-modulo `𝓓_N^{μ-1}(𝓗_N(𝔞))` at its zeros in `W` (recording the coordinate changes, whose `h = ±(v - u)` lies in
-`T_N(𝔞)`). -/
+/-- **Glueing data along `N` acting trivially** (Włodarczyk, proof of `le:homo` (4), along `N`): for tangent directions `u`,
+`v` along `N` at `x ∈ cosupp(𝔞|_N, μ)` there are glueing data along `N` with `x ∈ W` whose maps act trivially modulo
+`𝓓_N^{μ-1}(𝓗_N(𝔞))` at its zeros in `W` (the construction of `HomogenizedGlueingAlong.glueing_lemma_along`, recording the
+coordinate changes, whose `h = ±(v - u)` lies in `T_N(𝔞)`). -/
 theorem exists_glueingDataAlong_trivial {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {N : Set M}
     (hN : IsClosedSubmanifold n N) {μ : ℕ} (hμ : 1 ≤ μ) {x : M} (hx : x ∈ cosupport n N 𝔞 μ) {U U' : Set M}
     {u v : M → ℂ} (hu : IsTangentDirectionAlong N 𝔞 μ U u) (hxU : x ∈ U)
@@ -246,9 +219,10 @@ theorem cosupp_subset_zeroSet_glue (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubma
   have hghol : HolomorphicAt n g x := GermIdeal.IsCoherent.holomorphicAt_mem hcohJ hg
   exact (vanishesToOrderOn_one_iff hxN hghol).mp (hord g hg)
 
-/-- **Multiple test blow-ups of `(𝓗_N(𝔞), μ)` carry the glue ideal**: every multiple test blow-up of `(M, N, ∅, 𝓗_N(𝔞),
-μ)` is one of the ambient glue marked ideal, with centres in the strict transforms of `N`; along it `cosupp(𝓗_N(𝔞),
-μ)_T` lies in the zeros of the transformed glue ideal, which is coherent with `N` the whole space. -/
+/-- **Multiple test blow-ups of `(𝓗_N(𝔞), μ)` carry the glue ideal** (the along-`N` form of `DerivativeIdealTower.inclusions_tower`
+for the tangent ideal): every multiple test blow-up of `(M, N, ∅, 𝓗_N(𝔞), μ)` is one of the ambient glue marked ideal, with
+centres in the strict transforms of `N`; along it `cosupp(𝓗_N(𝔞), μ)_T` lies in the zeros of the transformed glue ideal, which
+is coherent with `N` the whole space. -/
 theorem glue_tower (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) :
     {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) T →
       IsGeoTestTower (glueMarkedAlong N 𝔞 μ) T ∧ CentresIn N T ∧
@@ -286,7 +260,8 @@ end GlueTower
 
 section Lift
 
-open BlowupBiholomorphismLift MarkedIdealRestrictOpen BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism BlowupControlledTransform HomogenizedIdealAlongTower
+open BlowupBiholomorphismLift MarkedIdealRestrictOpen BlowupTowers BlowupTowerTransforms MarkedIdeals
+  MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism BlowupControlledTransform HomogenizedIdealAlongTower
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ} (G : GlueingDataAlong N 𝔞 μ u v)
@@ -445,6 +420,22 @@ theorem IsGlueingLiftAlong.apply_eq_of_mem_cosupp (h𝔞 : 𝔞.IsCoherent) (hN 
   obtain ⟨-, -, hzero, -, -⟩ := glue_tower (X := CMfd.of (n := n) M) h𝔞 hN hμ T hT
   have := (hL.trivial p (hzero hp)).apply_eq
   rwa [extendMap_val] at this
+
+/-- **The Glueing Lemma along `N` with the lifts** (Włodarczyk 2005, `le:homo` (1)–(4) along `N`, `E = ∅`, analytic form):
+for tangent directions `u`, `v` along `N` of `(𝔞|_N, μ)` (`𝔞` coherent, `N` a closed submanifold, `μ ≥ 1`) on open sets
+containing `x ∈ cosupp(𝔞|_N, μ)` there are glueing data along `N` (a biholomorphism `Φ : U ≅ U'` with `x ∈ U ∩ U'`,
+`Φ^*((𝓗_N(𝔞), μ)|_{U'}) = (𝓗_N(𝔞), μ)|_U` as marked ideals, `Φ⁻¹(N ∩ U') = N ∩ U`, `Φ⁻¹(V(u) ∩ U') = V(v) ∩ U`, fixing
+`cosupp(𝔞|_N, μ) ∩ U`) such that along every multiple test blow-up of `(𝓗_N(𝔞), μ)` the biholomorphism lifts
+(`IsGlueingLiftAlong`). -/
+theorem glueing_lemma_lift_along (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) {x : M}
+    (hx : x ∈ cosupport n N 𝔞 μ) {U₁ U₂ : Set M} (hu : IsTangentDirectionAlong N 𝔞 μ U₁ u) (hxU₁ : x ∈ U₁)
+    (hv : IsTangentDirectionAlong N 𝔞 μ U₂ v) (hxU₂ : x ∈ U₂) :
+    ∃ G : GlueingDataAlong N 𝔞 μ u v, x ∈ G.dom ∧ x ∈ G.cod ∧
+      ∀ {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y),
+        IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) T → ∃ Φ, IsGlueingLiftAlong G T Φ := by
+  obtain ⟨G, hxW, htriv⟩ := exists_glueingDataAlong_trivial h𝔞 hN hμ hx hu hxU₁ hv hxU₂
+  obtain ⟨hxd, hxc⟩ := G.mem_dom_and_mem_cod hxW hx
+  exact ⟨G, hxd, hxc, fun T hT => exists_isGlueingLiftAlong G h𝔞 hN hμ htriv T hT⟩
 
 end Lift
 

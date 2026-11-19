@@ -1,50 +1,20 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.InvDomainMemberRestriction
 import Hironaka.Invariant.InvDomainCompanion
 import Hironaka.Invariant.RestrictEmptyTower
 import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.NonmonomialStepAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Re-basing Step 1a's restricted marked ideal across steps that are empty near the point
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol` and the lemma on the
-commutativity of the resolution procedure with étale morphisms (blow-ups whose centres miss the image pull back to
-isomorphisms; the restrictions `J̄_{|H^s_α}` commute with them).
+Hironaka phase H2 (TN3), for TN-CLASSICAL's Step 1 value function (`hir:maximal-order-step`) and general step
+(`hir:general-step`); claim I-0977 C-0133 (offered C-0128 / C-0131).  Blueprint `bcalc:member-restriction-rebase`,
+`bcalc:inv-rebase` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol` and the lemma on the commutativity of the resolution procedure
+with étale morphisms (blow-ups whose centres miss the image pull back to isomorphisms; the restrictions `J̄_{|H^s_α}`
+commute with them).
 
 In Step 1a the value at a point `x` of the cosupport involves the lower-dimensional invariant of the restricted marked
 ideal `𝓢(𝔪, y) = (Y, N ∩ H_{S(y)}, E_{S(y)}, 𝓒_N(𝔞), μ_𝓒)` (`InvDomainMemberRestriction.memberRestrict` at
@@ -60,8 +30,8 @@ module proves that, up to restricted equivalence, with the domain, and the resul
   statement of the earlier `SimultaneousNormalCrossings.eq_of_eventually_mem_iff`, without `IsComplexManifold`);
 * `memberInter_membersThrough_eq`, `memberRestrict_membersThrough_N`, `memberRestrict_membersThrough_E`,
   `filter_map_members`: `𝓢(𝔪, y)` by value (`H_{S(y)}` and `E_{S(y)}` as conditions on members);
-* `restrictEquiv_memberRestrict_geoTransform_empty`: across a step with empty centre, `𝓢(𝔪', z) ≃ 𝓢(𝔪, π z)'` ((K3)
-  `ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransform_empty` with the members of `S` deleted);
+* `restrictEquiv_memberRestrict_geoTransform_empty`: across a step with empty centre, `𝓢(𝔪', z) ≃ 𝓢(𝔪, π z)'`
+  (TN23's (K3) `ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransform_empty` with the members of `S` deleted);
 * `mem_of_preimage_val_mem_map`, `pullback_val_memberRestrict_membersThrough`: `𝓢` commutes with restriction to open sets;
 * `restrictEquiv_memberRestrict_geoTransformAlong_of_isEmptyTower`: along a tower with only empty centres;
 * **`restrictEquiv_memberRestrict_rebase`**: for `T` a multiple test blow-up of `𝔫` whose centres miss the open `W` and `p`
@@ -72,7 +42,12 @@ module proves that, up to restricted equivalence, with the domain, and the resul
 * **`memberRestrict_rebase`**: the two combined -- if `𝓢(𝔫, T p)|_W` lies in the domain and `T|_W T₁` is a canonical segment
   of it, then `𝓢(𝔫_T, p)|_{T⁻¹W}` lies in the domain, `T₁` is a canonical segment of it, its transforms along `T₁` lie in the
   domain and the values agree;
-* (The restricted equivalence of the companion ideals formed at two stages is not proved here.)
+* `isInvDomain_companionAlong_rebase`, `companionAlong_rebase`: the companion ideal of the general step restricted to `W`,
+  re-based along `T|_W`, lies in the domain, and canonical tails and values re-base.  (The restricted equivalence of the
+  companion ideals formed at two stages is not proved here.)
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -83,7 +58,9 @@ universe u v
 namespace Hironaka.InvDomainRebase
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.BoundaryCount Hironaka.InvDomainMemberRestriction Hironaka.MarkedIdealBiholomorphism
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.NormalCrossings Hironaka.BoundaryCount
+  Hironaka.InvDomainMemberRestriction Hironaka.MarkedIdealBiholomorphism
 
 noncomputable section
 
@@ -230,10 +207,10 @@ theorem surjective_of_isBlowupAlong_empty (hπ : IsBlowupAlong n (∅ : Set Y) �
 
 open Classical in
 /-- **Step 1a's restricted marked ideal across a step with empty centre** (the (K3) form for `memberRestrict`, from
-`ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransform_empty`): for the blowup `π` along `∅`, a list `E₀`
-of members of `E` and a point `z`, the restricted marked ideal of the transform at `z` (members of the strict
+TN23's `ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransform_empty`): for the blowup `π` along `∅`, a list
+`E₀` of members of `E` and a point `z`, the restricted marked ideal of the transform at `z` (members of the strict
 transforms of `E₀` through `z` deleted) is restricted-equivalent to the transform of the restricted marked ideal at
-`π z`. (`N` a closed submanifold, coherent ideal, `d ≥ 1`, closed members.) -/
+`π z`.  (`N` a closed submanifold, coherent ideal, `d ≥ 1`, closed members.) -/
 theorem restrictEquiv_memberRestrict_geoTransform_empty (𝔪 : MarkedIdeal n Y) (hN : IsClosedSubmanifold n 𝔪.N)
     (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d) (hE : ∀ H ∈ 𝔪.E, IsClosed H) {E₀ : List (Set Y)}
     (hE₀ : ∀ H ∈ E₀, H ∈ 𝔪.E) (hπ : IsBlowupAlong n (∅ : Set Y) π) (z : Z) :
@@ -339,7 +316,8 @@ end Open
 
 section Tower
 
-open BlowupStrictSubmanifold ContactCanonicalAlong MarkedIdealOperationsAlong.MarkedIdeal BlowupTowers BlowupTowerTransforms MarkedIdealRestrictOpen HomogenizedGlueingTower ResolutionInvariantExt RestrictEmptyTower
+open BlowupStrictSubmanifold ContactCanonicalAlong MarkedIdealOperationsAlong.MarkedIdeal BlowupTowers
+  BlowupTowerTransforms MarkedIdealRestrictOpen HomogenizedGlueingTower ResolutionInvariantExt RestrictEmptyTower
 
 variable {X : CMfd.{u} n}
 
@@ -418,7 +396,8 @@ end Tower
 section Values
 
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open BlowupTowers BlowupTowerTransforms ResolutionInvariantExt RestrictEmptyTower HomogenizedGlueingTower MarkedIdealOperationsAlong.MarkedIdeal
+open BlowupTowers BlowupTowerTransforms ResolutionInvariantExt RestrictEmptyTower HomogenizedGlueingTower
+  MarkedIdealOperationsAlong.MarkedIdeal
 
 /-- Restricted equivalence is symmetric. -/
 theorem restrictEquiv_symm {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
@@ -535,6 +514,65 @@ theorem memberRestrict_rebase (hn : 0 < n) (R : ResolutionInvariant.{u, v} n k �
   exact ⟨h1, h2, isInvDomain_of_isCanonical R h1 T₁ h2, h3⟩
 
 end Values
+
+/-! ### The companion ideal: the domain after re-basing -/
+
+section Companion
+
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open BlowupTowers BlowupTowerTransforms ResolutionInvariantExt RestrictEmptyTower CompanionReductionAlong
+  MonomialPartAlong InvDomainCompanion
+
+variable {X : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+/-- **The companion ideal re-based across steps empty over `W` lies in the domain**: for `𝔪` in the domain, `0 < n`,
+`o ≥ 1` and a tower `T` whose centres miss the open `W`, the companion ideal of `𝔪` restricted to `W` and transformed along
+the restricted tower `T|_W` lies in `IsInvDomain k`. -/
+theorem isInvDomain_companionAlong_rebase (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) {o : ℕ}
+    (ho : 1 ≤ o) {Y : CMfd.{u} n} (T : BlowupTower X Y) (W : Opens X) (hW : CentresAvoid W T) :
+    IsInvDomain k (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X)
+      (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+      (restrict W T)) :=
+  isInvDomain_geoTransformAlong_of_isEmptyTower (X := CMfd.of (n := n) W)
+    (isInvDomain_pullback_val_companionAlong hn h W ho) (restrict W T) ((isEmptyTower_restrict_iff W T).mpr hW)
+
+/-- **The companion ideal along a canonical tail after re-basing**: with `𝓞_W` the companion ideal of `𝔪` restricted to
+`W` and `T|_W T₁` a canonical segment of it for a resolution invariant `R` in dimension `≤ k` (the centres of `T` missing
+`W`), `T₁` is a canonical segment of the re-based companion ideal `(𝓞_W)_{T|_W}`, the transforms along `T|_W T₁` lie in the
+domain, and the values of `𝓞_W` along `T|_W T₁` are those of `(𝓞_W)_{T|_W}` along `T₁` on the cosupport. -/
+theorem companionAlong_rebase (hn : 0 < n) (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) {o : ℕ} (ho : 1 ≤ o) {Y : CMfd.{u} n} (T : BlowupTower X Y) (W : Opens X)
+    (hW : CentresAvoid W T) {Z : CMfd.{u} n} (T₁ : BlowupTower (CMfd.of (n := n) (openPreimage T W)) Z)
+    (hcan : IsCanonical (MarkedIdeal.pullback (Subtype.val : W → X)
+        (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+      (R.inv (MarkedIdeal.pullback (Subtype.val : W → X)
+        (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d)))
+      ((restrict W T).append T₁)) :
+    IsCanonical (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X)
+          (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+          (restrict W T))
+        (R.inv (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X)
+          (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+          (restrict W T))) T₁ ∧
+      IsInvDomain k (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X)
+          (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+        ((restrict W T).append T₁)) ∧
+      ∀ z ∈ (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X)
+          (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+          ((restrict W T).append T₁)).cosupp,
+        R.inv (MarkedIdeal.pullback (Subtype.val : W → X)
+            (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+            ((restrict W T).append T₁) z =
+          R.inv (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X)
+            (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d))
+            (restrict W T)) T₁ z := by
+  have he : IsEmptyTower (restrict W T) := (isEmptyTower_restrict_iff W T).mpr hW
+  have hdom := isInvDomain_pullback_val_companionAlong hn h W ho
+  exact ⟨(isCanonical_append_iff (X := CMfd.of (n := n) W) R hdom (restrict W T) he T₁).mp hcan,
+    isInvDomain_of_isCanonical (X := CMfd.of (n := n) W) R hdom _ hcan,
+    fun z hz => R.emptyPrefix _ hdom (restrict W T) T₁ he hcan z hz⟩
+
+end Companion
 
 end
 

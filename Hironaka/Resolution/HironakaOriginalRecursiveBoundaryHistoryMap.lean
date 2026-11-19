@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalBoundaryHistoryMap
 import Hironaka.Resolution.HironakaOriginalGeneralCrossingHistory
 /-! Actual canonical initial-boundary compatibility at every family depth.

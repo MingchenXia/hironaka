@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualNormalUnitCoordinateChange
 import Hironaka.Resolution.HironakaRelativeNormalMonomialBasis
 import Hironaka.Resolution.HironakaActualCoefficientPresentationCentrePower
@@ -89,7 +84,6 @@ private theorem homogeneous_eval₂_scaled {R S : Type*} [CommRing R] [CommRing 
   rw [← hP.degree_eq_sum_deg_support ha]
   ac_rfl
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Exact finite normal-homogeneous dictionary with arbitrary genuine original tangent germ coefficients. -/
 theorem actualNormalUnitGermEquiv_analytic_dehomogenization (d t : ℕ) (j : Fin t)
     (b : Fin (d+t) → ℂ) (P : MvPolynomial (Fin t) (HolGerm (ComplexModel d)))

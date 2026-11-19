@@ -3,12 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-import Hironaka.Analytic.OrderInvariance
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.DerivativeIdealInvariance
 
 set_option autoImplicit false
@@ -19,7 +13,6 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.HironakaSmoothPullbackDerivatives
 open Hironaka.HolomorphicIdealSheaves
 open DerivativeIdeal GermIdealOrder OrderInvariance InvertibleIdealQuotient HadamardBridge
-open Hironaka
 noncomputable section
 variable {n m : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
  {M' : Type*} [TopologicalSpace M'] [ChartedSpace (ComplexModel m) M'] [IsComplexManifold m M']

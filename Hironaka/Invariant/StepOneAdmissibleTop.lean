@@ -1,45 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneValueMasked
 import Hironaka.Invariant.CodimOneAdmissibleAlong
 import Hironaka.Invariant.MemberInterLocusAlong
 import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Invariant.ContactStageInvDomain
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsInvariance
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: admissibility of the top level sets of the value
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: Step 1aa ("the intersections `H^s_α ∩
-N` contained in the support ... are disjoint ... we blow them up") and Step 1ba ("the codimension one components of
-the support ... blow them up").
+Blueprint `hir:step-one-admissible-top` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of
+`hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: Step 1aa ("the
+intersections `H^s_α ∩ N` contained in the support ... are disjoint ... we blow them up") and Step 1ba ("the codimension one
+components of the support ... blow them up").
 
 Property (1) of the Step 1 value function (`hir:centre-function`, "admissibility of the level sets of the maximum, on open
 sets") at the **top values** `(s, ∞)`, for every family of lower marked ideals (`StepOneValueMasked.stepOneInvL`).  Along a
@@ -47,18 +20,21 @@ multiple test blow-up `T` of `J̄ = 𝓒_N(𝓗_N(𝔍))`, the points of the cos
 points of level `s` (`stepOneInvL_eq_top_iff`: a lower value is never `∞`).  On an open `W` of the last stage on which the
 value is `≤ (s, ∞)` on the cosupport (i.e. the level is `≤ s`):
 
-* `s ≥ 1` (Step 1aa): the special points of level `s` in `W` are the level-`s` part of the member locus of the
-  restriction to `W`, an admissible centre by `MemberInterLocusAlong.isAdmissibleCentre_memberInterLocus_level`
+* `s ≥ 1` (Step 1aa): the special points of level `s` in `W` are the level-`s` part of the member locus of the restriction to
+  `W`, an admissible centre by TN3's `MemberInterLocusAlong.isAdmissibleCentre_memberInterLocus_level`
   (`isAdmissibleCentre_top_of_one_le`);
-* `s = 0` (Step 1ba): the special points in `W` are the trace on `W` of the codimension-one part `Z₁` of the
-  cosupport, a closed submanifold (`CodimOneSupportAlong.isClosedSubmanifold_codimOnePartAlong`, maximal order)
-  transverse to the exceptional members (`CodimOneAdmissibleAlong.isTransverse_codimOnePartAlong_drop_E`), and over
-  `W` the cosupport misses the original members (`isAdmissibleCentre_top_zero`;
+* `s = 0` (Step 1ba): the special points in `W` are the trace on `W` of the codimension-one part `Z₁` of the cosupport, a
+  closed submanifold (TN3's `CodimOneSupportAlong.isClosedSubmanifold_codimOnePartAlong`, maximal order) transverse to the
+  exceptional members (TN3's `CodimOneAdmissibleAlong.isTransverse_codimOnePartAlong_drop_E`), and over `W` the cosupport
+  misses the original members (`isAdmissibleCentre_top_zero`; TN23's
   `ContactStageInvDomain.isTransverse_append_of_forall_notMem`).
 
 Hence `stepOneInvL_admissible_top`: the shape of the field `admissible` of `ResolutionInvariantExt.ResolutionInvariant` at
 the values `(s, ∞)`.  (The values `(s, λ)` with `λ < ∞` -- the non-special level sets, from the admissibility of the lower
 invariant on the masks -- are not treated here.)
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -69,7 +45,15 @@ universe u v
 namespace Hironaka.StepOneAdmissibleTop
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneValueMasked Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.BlowupStrictSubmanifold Hironaka.GermIdealOrder Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance Hironaka.BlowupRestrictOpen
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneValueMasked Hironaka.BoundaryCount
+  Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.BlowupStrictSubmanifold
+  Hironaka.GermIdealOrder Hironaka.NormalCrossings
+  Hironaka.NormalCrossingsInvariance Hironaka.BlowupRestrictOpen
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant)
 
 noncomputable section
@@ -115,9 +99,9 @@ theorem stepOneInvL_eq_top_iff (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (
     exact absurd (congrArg (fun p => (ofLex p).2) h) (lowerValueL_ne_top 𝔍 R h𝔍 hd hn hmax L T hT hy hsp)
 
 /-- **Step 1aa: on an open set where the level is `≤ s` (`s ≥ 1`), the points of value `(s, ∞)` form an admissible
-centre** of the restriction to `W` of the transform of `J̄` along a multiple test blow-up `T`: they are the
-level-`s` part of the member locus of the cosupport along the original members
-(`MemberInterLocusAlong.isAdmissibleCentre_memberInterLocus_level` on the restriction). -/
+centre** of the restriction to `W` of the transform of `J̄` along a multiple test blow-up `T`: they are the level-`s` part of
+the member locus of the cosupport along the original members (TN3's
+`MemberInterLocusAlong.isAdmissibleCentre_memberInterLocus_level` on the restriction). -/
 theorem isAdmissibleCentre_top_of_one_le (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {Y : CMfd.{u} n} (T : BlowupTower X Y)
     (hT : IsGeoTestTower (barMarked 𝔍) T) (W : Opens Y) {s : ℕ} (hs : 1 ≤ s)
@@ -170,8 +154,8 @@ theorem isAdmissibleCentre_top_of_one_le (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤
 
 /-- **Step 1ba: on an open set where the level is `0`, the points of value `(0, ∞)` form an admissible centre** of the
 restriction to `W` of the transform of `J̄` along a multiple test blow-up `T`: they are the trace on `W` of the
-codimension-one part of the cosupport, a closed submanifold (maximal order) transverse to the exceptional members,
-and over `W` the cosupport misses the original members. -/
+codimension-one part of the cosupport, a closed submanifold (maximal order) transverse to the exceptional members (TN3), and
+over `W` the cosupport misses the original members. -/
 theorem isAdmissibleCentre_top_zero (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {Y : CMfd.{u} n} (T : BlowupTower X Y)
     (hT : IsGeoTestTower (barMarked 𝔍) T) (W : Opens Y)

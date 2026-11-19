@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalGradedAlgebra
 import Hironaka.Resolution.HironakaRelativeNormalCoefficientAlgebraNearbyFreeness
 import Mathlib.LinearAlgebra.TensorProduct.Basis
@@ -393,7 +388,6 @@ open OkaRelationSheaf HironakaRelativeNormalDeformationInitialRelations
 
 attribute [local instance] coefficientSubalgebraRing
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Original coherence internally supplies one analytic open and one whole original degree-rank sequence. -/
 theorem exists_original_nearby_all_degree_uniform_rank_open (d t : ℕ)
     (I : GermIdeal (d+t) (ComplexModel (d+t))) (hI : I.IsCoherent) :

@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.NonmonomialDiffeoExact
 import Hironaka.Resolution.HironakaOriginalWholeContactMaskDictionary
 /-! The SAME literal original contact lower first entry is an exact trace of
 actual whole contact remainder Nm order equations in every induction level.

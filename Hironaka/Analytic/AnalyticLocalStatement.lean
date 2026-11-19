@@ -1,15 +1,12 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # The local statement (LS) for analytic subsets
+
+Blueprint `lag:local-statement` (Demailly, *Complex analytic and differential geometry*,
+II.4.24, II.4.26, II.5.3).
 
 Near every point `p` of an analytic subset `A` of a complex manifold there are an open
 neighbourhood `W` of `p` inside the preferred chart at `p` and finitely many subsets
@@ -21,8 +18,9 @@ neighbourhood `W` of `p` inside the preferred chart at `p` and finitely many sub
   dimension `dᵢ` are dense in `Aᵢ`;
 * for `i ≠ l`, `Aᵢ ∩ A_l` has empty interior relative to `Aᵢ`.
 
-The `Aᵢ` are representatives of the irreducible components of the germ of `A` at `p`; the statement is the output of
-the local parametrization theorem for irreducible germs.
+The `Aᵢ` are representatives of the irreducible components of the germ of `A` at `p`; the
+statement is the output of the local parametrization theorem for irreducible germs
+(blueprint `lag:irreducible-germ-pure`, `lag:thin-subgerm`).
 
 `LocalDecomposition A p` bundles these data.  Their existence,
 `exists_localDecomposition`, is assembled in `Hironaka.LocalStatementAssembly`; the global
@@ -33,6 +31,8 @@ analytic sets) are derived from it in `Hironaka.PureDimension`.
 open Set
 
 namespace Hironaka.AnalyticLocalStatement
+
+
 
 noncomputable section
 

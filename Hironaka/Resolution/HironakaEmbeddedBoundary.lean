@@ -1,62 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedReducible
 import Hironaka.Resolution.HironakaPrincipalizationBoundary
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Coherence.CartanIrreducible
-import Hironaka.Invariant.CodimOneAdmissibleAlong
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedResolutionLocal
-import Hironaka.Resolution.HironakaFromSeqInvariant
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Resolution.HironakaPrincipalization
-import Hironaka.Resolution.HironakaRelativelyCompact
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Blowup.SimultaneousNormalCrossings
-import Hironaka.Invariant.SmoothCentreHomogeneity
-import Hironaka.Invariant.SmoothCentreInvariant
-import Hironaka.Invariant.SmoothCentreLocus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Embedded resolution relative to a simple normal crossings boundary (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 and (1.9) (embedded
-desingularization by admissible blowups, the centres having normal crossings with the accumulated divisor; in 1.6
-(1) a centre may lie in `X_j ∩ E_j` once the strict transform `X_j` is smooth); Kollár 2007 (`kollar07-resolution`),
-"Principalization, III" (an initial simple normal crossings divisor `E`); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
+Blueprint `hir:embedded-resolution-boundary` (`blueprint/src/hironaka.tex`; TN.5, item S4 of the review 57572af3 of the
+Hironaka strengthenings, the embedded half; the principalization half is `hir:principalization-boundary`).  Sources:
+Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 and (1.9) (embedded desingularization by admissible
+blowups, the centres having normal crossings with the accumulated divisor; in 1.6 (1) a centre may lie in `X_j ∩ E_j` once the
+strict transform `X_j` is smooth); Kollár 2007 (`kollar07-resolution`), "Principalization, III" (an initial simple normal
+crossings divisor `E`); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
 
 **Statement.**  Let `X` be a complex manifold, `E₀` a divisor on `X` with simple normal crossings, and `W ⊆ X` an analytic set of
 pure dimension `d < n` (possibly reducible), no member of `E₀` containing a nonempty relatively open subset of `W`
@@ -102,6 +58,10 @@ involved) makes the strict transform smooth.  The support of the exceptional div
   `W`, over every open set contained in a compact set, relative to the restriction of `E₀`);
 * `subset_closure_diff_biUnion_of_forall_disjoint`: the density hypothesis holds when no member of `E₀` meets `W` (e.g.
   `E₀ = []`), and then `F = W_sing`.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedReducible` and
+`HironakaPrincipalizationBoundary` only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -112,7 +72,11 @@ universe u v
 namespace Hironaka.HironakaEmbeddedBoundary
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms Hironaka.HironakaAdmissibleSequence Hironaka.MarkedIdealBiholomorphism
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong
+  Hironaka.BlowupTowerTransforms Hironaka.HironakaAdmissibleSequence
+  Hironaka.MarkedIdealBiholomorphism
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
 open Hironaka.ResolutionDriver (maxLocus)
@@ -125,6 +89,11 @@ variable {n : ℕ}
 /-! ### Marked ideals of a subset with a given divisor -/
 
 section MarkedIdeal
+
+/-- **A list of empty sets pulls back to a list of empty sets.** -/
+theorem map_preimage_of_forall_eq_empty {α β : Type*} (f : α → β) {E : List (Set β)} (hE : ∀ H ∈ E, H = ∅) :
+    E.map (f ⁻¹' ·) = E.map fun _ => (∅ : Set α) :=
+  List.map_congr_left fun H hH => by rw [hE H hH, preimage_empty]
 
 /-- **The cosupport of `(M, M, E, 𝓘_Z, 1)` is `Z`** (`Z` closed; the cosupport does not see the divisor). -/
 theorem cosupp_mk_vanishingIdeal {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
@@ -275,15 +244,15 @@ variable {k : ℕ} {Λ : Type v} [LinearOrder Λ]
 
 /-- **The cosupport over an open set the centres miss is the preimage of `V`** (`EmbeddedFromResolution.
 mem_cosupp_iff_of_centresAvoid` for `(X, X, E, 𝓘_V, 1)`, any divisor `E`). -/
-theorem mem_cosupp_iff_of_centresAvoid {X : CMfd.{u} n} {V : Set X} {E : List (Set X)} (hV : IsClosed V)
-    (hdom : IsInvDomain k (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X)) (U : Opens X)
+theorem mem_cosupp_iff_of_centresAvoid_wellFormed {X : CMfd.{u} n} {V : Set X} {E : List (Set X)} (hV : IsClosed V)
+    (hWF : (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X).IsWellFormed) (U : Opens X)
     {Y : CMfd.{u} n} (T : BlowupTower X Y)
     (hTt : IsGeoTestTower (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X) T) (hT : CentresAvoid U T)
     {y : Y} (hy : T.proj y ∈ U) :
     y ∈ (geoTransformAlong (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X) T).cosupp ↔ T.proj y ∈ V := by
-  have hc := ResolutionInvariantSegments.cosupp_geoTransformAlong_restrict hdom.isWellFormed.isClosedSubmanifold_N
-    hdom.isWellFormed.isCoherent U T hTt
-  have hdomU := InvDomainTowerAlong.isInvDomain_pullback_val U hdom
+  have hc := ResolutionInvariantSegments.cosupp_geoTransformAlong_restrict hWF.isClosedSubmanifold_N
+    hWF.isCoherent U T hTt
+  have hdomU := MarkedIdealRestrictOpen.IsWellFormed.pullback_val hWF U
   have he : IsEmptyTower (restrict U T) := (isEmptyTower_restrict_iff U T).mpr hT
   set p : openPreimage T U := ⟨y, hy⟩ with hp
   have h1 : y ∈ (geoTransformAlong (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X) T).cosupp ↔
@@ -292,10 +261,18 @@ theorem mem_cosupp_iff_of_centresAvoid {X : CMfd.{u} n} {V : Set X} {E : List (S
     rw [hc]
     rfl
   rw [h1, SmoothCentreInvariant.mem_cosupp_geoTransformAlong_of_isEmptyTower _
-    hdomU.isWellFormed.isClosedSubmanifold_N hdomU.isWellFormed.isCoherent (restrict U T) he p,
+    hdomU.isClosedSubmanifold_N hdomU.isCoherent (restrict U T) he p,
     pullback_val_mk_vanishingIdeal U E V, cosupp_mk_vanishingIdeal (hV.preimage continuous_subtype_val)]
   show (((restrict U T).proj p : U) : X) ∈ V ↔ _
   rw [proj_restrict]
+
+theorem mem_cosupp_iff_of_centresAvoid {X : CMfd.{u} n} {V : Set X} {E : List (Set X)} (hV : IsClosed V)
+    (hdom : IsInvDomain k (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X)) (U : Opens X)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hTt : IsGeoTestTower (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X) T) (hT : CentresAvoid U T)
+    {y : Y} (hy : T.proj y ∈ U) :
+    y ∈ (geoTransformAlong (⟨univ, E, vanishingIdeal (n := n) V, 1⟩ : MarkedIdeal n X) T).cosupp ↔ T.proj y ∈ V :=
+  mem_cosupp_iff_of_centresAvoid_wellFormed hV hdom.isWellFormed U T hTt hT hy
 
 /-- **The maximum locus over an open set missing the members of `E` on which `W` is smooth of pure dimension**
 (`HironakaEmbeddedResolutionLocal.mem_maxLocus_iff_of_centresAvoid_of_pureDim` for `(X, X, E, 𝓘_W, 1)`): for a canonical
@@ -532,14 +509,14 @@ theorem exists_embeddedResolution_boundary_of_isCanonical {X : Type u} [Topologi
   · rw [← hsupp]
     exact hsuppF
 
-/-- **Embedded resolution relative to a simple normal crossings boundary** (Hironaka;
-`hir:embedded-resolution-boundary`, embedded half): let `X` be any complex manifold, `E₀` a divisor on `X` with
-simple normal crossings, and `W ⊆ X` a compact analytic set of pure dimension `d < n` (possibly reducible) such that
-no member of `E₀` contains a nonempty relatively open subset of `W`. Put `F = W_sing ∪ (W ∩ |E₀|)`. There are an
-admissible blowup sequence `f: X' → X` of `(X, E₀)` with centres over `F` and its accumulated divisor `E` (the
-strict transforms of the members of `E₀`, then the new members) such that `E` has simple normal crossings, `Exc f ⊆
-⋃ (new members) ⊆ f⁻¹ F`, `f⁻¹(W_sing) ⊆ Exc f`, `f` is an isomorphism over `X \ F`, and the strict transform of `W`
-is a closed submanifold of `X'`, of dimension `d` at each of its points, with only normal crossings with `E`. -/
+/-- **Embedded resolution relative to a simple normal crossings boundary** (Hironaka; `hir:embedded-resolution-boundary`,
+review S4, embedded half): let `X` be any complex manifold, `E₀` a divisor on `X` with simple normal crossings, and `W ⊆ X` a
+compact analytic set of pure dimension `d < n` (possibly reducible) such that no member of `E₀` contains a nonempty relatively
+open subset of `W`.  Put `F = W_sing ∪ (W ∩ |E₀|)`.  There are an admissible blowup sequence `f : X' → X` of `(X, E₀)` with
+centres over `F` and its accumulated divisor `E` (the strict transforms of the members of `E₀`, then the new members) such
+that `E` has simple normal crossings, `Exc f ⊆ ⋃ (new members) ⊆ f⁻¹ F`, `f⁻¹(W_sing) ⊆ Exc f`, `f` is an isomorphism over
+`X \ F`, and the strict transform of `W` is a closed submanifold of `X'`, of dimension `d` at each of its points, with only
+normal crossings with `E`. -/
 theorem exists_embeddedResolution_boundary_of_isCompact {X : Type u} [TopologicalSpace X]
     [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W)
     (hK : IsCompact W) {d : ℕ} (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d)) {E₀ : List (Set X)}
@@ -563,8 +540,8 @@ theorem exists_embeddedResolution_boundary_of_isCompact {X : Type u} [Topologica
     (CanonicalCentres.canonicalInvariant.{u} n) hdom (by rw [hcos]; exact hK)
   exact exists_embeddedResolution_boundary_of_isCanonical hWa hd hpure hE₀ hE₀W T₀ hcan₀ hres₀
 
-/-- **Embedded resolution relative to a simple normal crossings boundary in a compact manifold** (`X` compact; embedded
-half). -/
+/-- **Embedded resolution relative to a simple normal crossings boundary in a compact manifold** (`X` compact; review S4,
+embedded half). -/
 theorem exists_embeddedResolution_boundary {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
     [IsComplexManifold n X] [CompactSpace X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W) {d : ℕ}
     (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d)) {E₀ : List (Set X)} (hE₀ : IsSNCDivisor n E₀)
@@ -603,11 +580,11 @@ theorem preimage_biUnion_list {α β : Type*} (f : α → β) (E : List (Set β)
   · rintro ⟨_, ⟨H, hH, rfl⟩, hx⟩
     exact ⟨H, hH, hx⟩
 
-/-- **Embedded resolution relative to a simple normal crossings boundary over a relatively compact open set** (embedded
-half): let `X` be any complex manifold, `E₀` a divisor on `X` with simple normal crossings, `W ⊆ X` an analytic set
-of pure dimension `d < n` (no compactness) with `W ⊆ closure (W \ |E₀|)`, and `X₀ ⊆ X` an open set contained in a
-compact set. The conclusions of `exists_embeddedResolution_boundary_of_isCompact` hold for `W ∩ X₀` in `X₀`,
-relative to the restriction of `E₀`, with centres over `F ∩ X₀`. -/
+/-- **Embedded resolution relative to a simple normal crossings boundary over a relatively compact open set** (review S4,
+embedded half, with S6): let `X` be any complex manifold, `E₀` a divisor on `X` with simple normal crossings, `W ⊆ X` an
+analytic set of pure dimension `d < n` (no compactness) with `W ⊆ closure (W \ |E₀|)`, and `X₀ ⊆ X` an open set contained in a
+compact set.  The conclusions of `exists_embeddedResolution_boundary_of_isCompact` hold for `W ∩ X₀` in `X₀`, relative to the
+restriction of `E₀`, with centres over `F ∩ X₀`. -/
 theorem exists_embeddedResolution_boundary_of_subset_isCompact {X : Type u} [TopologicalSpace X]
     [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W)
     {d : ℕ} (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d)) {E₀ : List (Set X)}

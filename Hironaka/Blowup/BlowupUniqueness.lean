@@ -1,22 +1,23 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The blowup along a smooth centre is unique up to a unique isomorphism over `X`
 
-Source: the universal property recorded in `Hironaka.BlowupSequences.IsBlowupAlong`; this is the standard formal
-consequence of it.
+Source: the universal property recorded in `Hironaka.BlowupSequences.IsBlowupAlong`
+(Copy-4, `sec:prelim`); this is the standard formal consequence of it.
 
-`IsBlowupAlong n C π` is stated by a universal property whose test manifolds range over all dimensions in the
-universe of the target.
+`IsBlowupAlong n C π` is stated by a universal property whose test manifolds range over all
+dimensions in the universe of the target.  Two blowups of `X` along the same centre therefore
+factor uniquely through each other, and the two comparison maps are mutually inverse
+biholomorphisms over `X`.  This is what licenses the definite article in "*the* blowup", and it
+is what makes any explicit construction of a blowup interchangeable with an abstractly given
+one: every statement in the workspace that assumes `IsBlowupAlong n C π` is a statement about a
+single object.
+
+Sorry-free; it uses nothing but the universal property.
 -/
 
 open Set
@@ -69,6 +70,15 @@ theorem exists_biholomorphism_over {C : Set X} {π₁ : Y₁ → X} {π₂ : Y�
     calc π₂ ∘ (e ∘ f) = (π₂ ∘ e) ∘ f := rfl
       _ = π₁ ∘ f := by rw [hπe]
       _ = π₂ := hπf
+
+/-- The comparison map is a bijection. -/
+theorem bijective_comparison {C : Set X} {π₁ : Y₁ → X} {π₂ : Y₂ → X}
+    (h₁ : IsBlowupAlong n C π₁) (h₂ : IsBlowupAlong n C π₂) :
+    ∃ e : Y₁ → Y₂, Function.Bijective e ∧
+      ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ e ∧ π₂ ∘ e = π₁ := by
+  obtain ⟨e, f, he, -, hπe, -, hfe, hef⟩ := exists_biholomorphism_over h₁ h₂
+  exact ⟨e, Function.bijective_iff_has_inverse.mpr
+    ⟨f, congrFun hfe, congrFun hef⟩, he, hπe⟩
 
 end
 

@@ -1,24 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Differentials of germs and the tangent space of a smooth centre
 
-Source: Demailly, *Complex analytic and differential geometry*, VII.12.1 (`agbook.tex` line 20218).
+Source: Demailly, *Complex analytic and differential geometry*, VII.12.1
+(`references/demailly-cadg`, `agbook.tex` line 20218); blueprint `bex:tangent-flat`.
 
-First module of the construction of the blowup along a smooth centre. Demailly records a point of the exceptional
-divisor over `y ∈ C` as a line in the normal space `T_yX / T_yC`. Here the tangent space `T_yX` is `ℂⁿ`, read in the
-preferred chart at `y`, and
+First module of the construction of the blowup along a smooth centre (TN.4 #6).  Demailly records a
+point of the exceptional divisor over `y ∈ C` as a line in the normal space `T_yX / T_yC`.  Here the
+tangent space `T_yX` is `ℂⁿ`, read in the preferred chart at `y`, and
 
 * `germDiff n f y` is the differential at `y` of a function `f`, i.e. the derivative of
   `f ∘ (chartAt y)⁻¹` at `chartAt y y`;

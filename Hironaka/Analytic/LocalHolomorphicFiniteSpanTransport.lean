@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.EuclideanHolomorphicGermSpan
 import Hironaka.Analytic.ComplexAnalyticSubvarieties
 
@@ -17,7 +12,6 @@ namespace Hironaka.LocalHolomorphicFiniteSpanTransport
 
 open Hironaka.HolomorphicIdealSheaves
 
-open Hironaka
 noncomputable section
 
 private theorem tendsto_inv {n : ℕ} {p : ComplexModel n}

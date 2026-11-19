@@ -1,29 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSpaceAtlas
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSpace
-import Hironaka.Blowup.BlowupSpaceRatio
-import Hironaka.Blowup.BlowupSpaceTangent
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The blowup along a smooth centre is a complex manifold
 
-Source: Demailly, *Complex analytic and differential geometry*, VII.12.2--12.3 (`agbook.tex` lines 20306--20333).
+Source: Demailly, *Complex analytic and differential geometry*, VII.12.2--12.3
+(`references/demailly-cadg`, `agbook.tex` lines 20306--20333); blueprint `bex:atlas`.
 
-Fifth module of the construction of the blowup. For a closed submanifold `C` of `X` (`[Fact (IsClosedSubmanifold n
-C)]`), the atlas `blowupAtlas n C` (Demailly's monomial charts and the charts of `X \ C`) defines, through
-`ChartedSpaceCore`, a topology and a charted space structure on `BlowupSpace n C`:
+Fifth module of the construction of the blowup (TN.4 #6).  For a closed submanifold `C` of `X`
+(`[Fact (IsClosedSubmanifold n C)]`), the atlas `blowupAtlas n C` (Demailly's monomial charts and
+the charts of `X \ C`) defines, through `ChartedSpaceCore`, a topology and a charted space structure
+on `BlowupSpace n C`:
 
 * every point lies in a chart: off `C` in a chart of `X`, over `y ∈ C` in a monomial chart `τ̃ⱼ`
   over the chosen flattening at `y`, for a normal index `j` with `d_yτⱼ(ξ_p) ≠ 0`
@@ -43,7 +32,8 @@ universe u
 
 namespace Hironaka.BlowupConstruction
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates BlowupMonomialCharts BlowupSpaceTangent BlowupSpace
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates
+  BlowupMonomialCharts BlowupSpaceTangent BlowupSpace
 
 noncomputable section
 

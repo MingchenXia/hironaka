@@ -1,19 +1,12 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.StrictTransformComposition
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupIsomorphismOff
+
 set_option autoImplicit false
 
 /-!
 # Fibres of a blowup through non-exceptional points
 
-Source: CT22, Section 4; Griffiths--Harris, Ch. 1 §4 (blowups).
+Source: CT22, Section 4; Griffiths--Harris, Ch. 1 §4 (blowups); blueprint
+`ana:rv-birational-blowup`.
 
 Let `π : Z → M` be the blowup of `M` along a nowhere dense closed submanifold `C`
 (`IsBlowupAlong`, a universal property).
@@ -102,6 +95,14 @@ theorem image_exceptionalLocus_subset (hπ : IsBlowupAlong n C π) :
     π '' exceptionalLocus n π ⊆ C := by
   rintro _ ⟨z, hz, rfl⟩
   exact BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ hz
+
+/-- For compact `M`, the image of the exceptional locus is closed. -/
+theorem isClosed_image_exceptionalLocus [CompactSpace M] (hπ : IsBlowupAlong n C π) :
+    IsClosed (π '' exceptionalLocus n π) := by
+  have := BlowupCompact.compactSpace_of_isBlowupAlong hπ
+  have hclosed : IsClosed (exceptionalLocus n π) :=
+    isOpen_compl_iff.mp (StrictTransformComposition.isOpen_compl_exceptionalLocus hπ.contMDiff)
+  exact (hclosed.isCompact.image hπ.contMDiff.continuous).isClosed
 
 end
 

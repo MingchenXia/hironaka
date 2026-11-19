@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualRelativeTaylorCoefficients
 import Mathlib.LinearAlgebra.TensorProduct.Pi
 /-!
@@ -30,7 +25,7 @@ open HolGerm HironakaRelativeNormalIdeal HironakaRelativeNormalMonomialBasis
   HironakaActualRelativeCoefficientGerms HironakaActualRelativeTaylorCoefficients
 variable (d t q : ℕ)
 local instance : Fintype (normalExponentIndex t q) := normalExponentFintype t q
-local instance instAlgebraMvPowerSeriesFinComplexHAddNat_transcendentalNakamaye : Algebra (MvPowerSeries (Fin d) ℂ) (MvPowerSeries (Fin (d+t)) ℂ) :=
+local instance : Algebra (MvPowerSeries (Fin d) ℂ) (MvPowerSeries (Fin (d+t)) ℂ) :=
   (MvPowerSeries.rename (Fin.castAdd t : Fin d → Fin (d+t))).toRingHom.toAlgebra
 
 def formalNormalCombination : (normalExponentIndex t q → MvPowerSeries (Fin d) ℂ) →ₗ[MvPowerSeries (Fin d) ℂ]

@@ -1,26 +1,20 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.RestrictedIdealQuotient
 import Hironaka.MarkedIdeal.GermIdealTotalTransform
 import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Restricted inclusions of ideal sheaves: pullback, cancellation, powers, zero loci
 
-In the germ-ideal encoding, "an inclusion on `V`" is `RestrictLe V` (`RestrictedIdealWeight`); this module supplies
-the calculus that Step 1 performs on it:
+Source: Copy-4, `prop:principalization`, Step 1 (`transcendental-nakamaye-copy4-20260911`,
+`source/main-Nulllocus.tex:1810-1830`) and `lem:ideal-comparison` (`:1666-1711`).
+
+Copy-4 Step 1 defines the excess ideal `𝔣_B = (𝔅 𝒪_{W₁}) · 𝒪_{W₁}(G_M - p G_m)` on the strict
+transform `W₁`, from the inclusion `𝔅 𝔅̄_m^p ⊆ 𝔅̄_M` of `eq:ideal-comparison`, which holds on
+`V` only.  In the germ-ideal encoding, "an inclusion on `V`" is `RestrictLe V`
+(`RestrictedIdealWeight`); this module supplies the calculus that Step 1 performs on it:
 
 * `restrictLe_pullback` — a restricted inclusion on `V` pulls back to one on any `W` with
   `π(W) ⊆ V` (on `W₁`: `(𝔅 𝔅_m^p) 𝒪 ⊆ 𝔅_M 𝒪` along `W₁`);
@@ -28,8 +22,14 @@ the calculus that Step 1 performs on it:
   (`RestrictedIdealQuotient.IsInvertibleAlong`): `Res_W(𝔞 𝔩) ⊆ Res_W(𝔟 𝔩)` gives
   `Res_W 𝔞 ⊆ Res_W 𝔟`.  On `W₁`, where `𝔅_m 𝒪 = 𝒪(-G̃_m)` is invertible, this turns
   `𝔅 𝒪(-p G_m) ⊆ 𝒪(-G_M)` into `𝔅 ⊆ 𝒪(-(G_M - p G_m))`;
+* `isInvertibleAlong_of_isInvertible` — an ambient invertible ideal whose zero locus contains
+  no nonempty relatively open subset of `W` is invertible along `W`;
+* `not_le_vanishingIdeal_of_restrictLe_mul` — if `Res_W 𝔞 ⊆ Res_W (𝔩 𝔠)` and `𝔞 ⊄ 𝓘_W`, then
+  `𝔠 ⊄ 𝓘_W` (the excess ideal is nonzero on `W₁`);
 * the algebra of `GermIdeal.mul` the bookkeeping needs: `mul_comm'`, `mul_unitIdeal`,
   `idealPow_add`, and zero loci of products and powers.
+
+Everything here is sorry-free.
 -/
 
 open Set Filter
@@ -40,7 +40,8 @@ namespace Hironaka.RestrictLeCalculus
 noncomputable section
 
 open Hironaka.HolomorphicIdealSheaves
-open RelativePrincipalizationSpan InvertibleIdealQuotient RestrictedIdealWeight RestrictedIdealQuotient IdealWeightPowers GermIdealTotalTransform
+open RelativePrincipalizationSpan InvertibleIdealQuotient RestrictedIdealWeight
+  RestrictedIdealQuotient IdealWeightPowers GermIdealTotalTransform
 
 section Algebra
 
@@ -116,6 +117,15 @@ theorem notMem_zeroLocus_mul {𝔞 𝔟 : GermIdeal n M} (h𝔞 : 𝔞.IsCoheren
     (GermIdeal.IsCoherent.holomorphicAt_mem h𝔟 hb))
   exact mul_ne_zero hay hby (hZ _ hmem)
 
+/-- Off the zero locus of `𝔞`, off the zero locus of every power `𝔞^p`. -/
+theorem notMem_zeroLocus_idealPow {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {y : M}
+    (hy : y ∉ 𝔞.zeroLocus) : ∀ p : ℕ, y ∉ (idealPow 𝔞 p).zeroLocus
+  | 0 => fun hZ => by
+      have h1 : (unitIdeal n M).mem y (fun _ => (1 : ℂ)) := holomorphicAt_const 1
+      exact one_ne_zero (hZ _ h1)
+  | p + 1 => notMem_zeroLocus_mul (GermIdealPullbackCalculus.isCoherent_idealPow h𝔞 p) h𝔞
+      (notMem_zeroLocus_idealPow h𝔞 hy p) hy
+
 end Algebra
 
 /-! ### Restricted inclusions -/
@@ -171,6 +181,49 @@ theorem restrictLe_of_restrictLe_mul_mul {W : Set M} {𝔞 𝔟 𝔩 : GermIdeal
     ring
   exact eventuallyEq_within_of_mul_eventuallyEq_within hU hnon hxU hghol
     (HolomorphicAt.sum _ fun i _ => (ha i).mul (hthol i)) hcancel
+
+/-- **An ambient invertible ideal is invertible along `W`** once its zero locus contains no
+nonempty relatively open subset of `W`. -/
+theorem isInvertibleAlong_of_isInvertible {W : Set M} {𝔩 : GermIdeal n M}
+    (h𝔩 : 𝔩.IsInvertible)
+    (hdense : ∀ O : Set M, IsOpen O → (O ∩ W).Nonempty → ∃ y ∈ O ∩ W, y ∉ 𝔩.zeroLocus) :
+    IsInvertibleAlong n W 𝔩 := by
+  intro x _
+  obtain ⟨U, hU, hxU, h, hhd, -, hgen⟩ := h𝔩 x
+  refine ⟨U, hU, hxU, h, hhd, fun O hO hOU hOW => ?_, hgen⟩
+  obtain ⟨y, hyOW, hyZ⟩ := hdense O hO hOW
+  refine ⟨y, hyOW, fun hy0 => hyZ fun g hg => ?_⟩
+  obtain ⟨-, e, -, he⟩ := isInSpanAt_eq_iff.mp ((hgen y (hOU hyOW.1) g).mp hg)
+  rw [he.self_of_nhds]
+  show e y * h y = 0
+  rw [hy0, mul_zero]
+
+/-- **The cofactor of a nonzero restriction is nonzero on `W`.**  If `Res_W 𝔞 ⊆ Res_W(𝔩 𝔠)` and
+`𝔠 ⊆ 𝓘_W`, every germ of `𝔞` vanishes on `W`; so `𝔞 ⊄ 𝓘_W` forces `𝔠 ⊄ 𝓘_W`. -/
+theorem not_le_vanishingIdeal_of_restrictLe_mul {W : Set M} (hW : IsClosed W)
+    {𝔞 𝔩 𝔠 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) (hle : RestrictLe W 𝔞 (𝔩.mul 𝔠))
+    (h𝔞W : ¬ 𝔞.Le (vanishingIdeal (n := n) W)) : ¬ 𝔠.Le (vanishingIdeal (n := n) W) := by
+  intro h𝔠
+  apply h𝔞W
+  intro x g hg
+  refine ⟨GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg, ?_⟩
+  by_cases hxW : x ∈ W
+  · obtain ⟨N, s, a, hs, -, hsum⟩ := hle x hxW g hg
+    have hs0 : ∀ i, ∀ᶠ y in 𝓝 x, y ∈ W → s i y = 0 := by
+      intro i
+      obtain ⟨-, K, u, c, hu, -, husum⟩ := mem_mul_iff.mp (hs i)
+      choose p q hp hq hpq using hu
+      have hq0 : ∀ j, ∀ᶠ y in 𝓝 x, y ∈ W → q j y = 0 := fun j => (h𝔠 x (q j) (hq j)).2
+      filter_upwards [husum, eventually_all.mpr hq0] with y hy hy' hyW
+      rw [hy]
+      refine Finset.sum_eq_zero fun j _ => ?_
+      rw [hpq j]
+      simp [hy' j hyW]
+    filter_upwards [hsum, eventually_all.mpr hs0] with y hy hy' hyW
+    rw [hy hyW]
+    exact Finset.sum_eq_zero fun i _ => by rw [hy' i hyW, mul_zero]
+  · filter_upwards [hW.isOpen_compl.mem_nhds hxW] with y hy hyW
+    exact absurd hyW hy
 
 /-- Restricted inclusions compose. -/
 theorem RestrictLe.trans {W : Set M} {𝔞 𝔟 𝔠 : GermIdeal n M} (h𝔞𝔟 : RestrictLe W 𝔞 𝔟)

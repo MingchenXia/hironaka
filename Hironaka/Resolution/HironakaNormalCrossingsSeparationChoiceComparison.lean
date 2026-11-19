@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaNormalCrossingsBiholomorphicMultiplicity
 import Hironaka.Resolution.HironakaNormalCrossingsBoundarySeparation
 import Hironaka.Blowup.BlowupTowerIsoTail
@@ -45,8 +40,6 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves
   HironakaNormalCrossingsBoundarySeparation HironakaNormalCrossingsBiholomorphicMultiplicity
   BlowupTowers BlowupTowerTransforms BlowupTowerIsomorphism BlowupStrictSubmanifold MarkedIdeals
   MarkedIdeals.MarkedIdeal HironakaStageCenters NormalCrossings RestrictEmptyTower
-
-open Hironaka
 
 noncomputable section
 attribute [local instance] Classical.propDecidable

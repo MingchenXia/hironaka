@@ -1,69 +1,28 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralValue
 import Hironaka.Invariant.StepOneCompare
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionOpen
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneEmptyPrefix
-import Hironaka.Invariant.StepOneNearby
-import Hironaka.Invariant.StepOneRestrictOpen
-import Hironaka.Invariant.StepOneTowerIso
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The general value of a nearby point through the reference point's companion ideal
 
-Sources: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a (the companion ideal formed
-where the order was reached, computed along the part of the resolution after it) and the lemma on the commutativity
-of the resolution procedure with étale morphisms (re-basing across steps which are isomorphisms near the point).
+Blueprint `hir:general-compare` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).  Sources:
+Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a (the companion ideal formed where the order was
+reached, computed along the part of the resolution after it) and the lemma on the commutativity of the resolution procedure
+with étale morphisms (re-basing across steps which are isomorphisms near the point).
 
-Let `T = T₀' M T₁` be a multiple test blow-up of `𝔪` (in the domain, `0 < n`), `o ≥ 1`, and `p` a point of the last
-stage whose run in the regime of order `o` started at `T₀'` (lower data there, `GeneralValue.GenLowerData`), while a
-reference point started at `T₀ = T₀' M`. If the centres of `M` miss the mask `W' = {ν ≤ o}` of `T₀'` (they lie in
-`{ν ≥ o + 1}`: `NonmonomialOrderCanonical.centresAvoid_of_canonical`), the companion value of `p` is the value of
-the maximal-order value function `M` for the companion ideal formed at `T₀` on its mask `W`, along `T₁|_W`
-(`genLowerValue_eq_rebase`):
+Let `T = T₀' M T₁` be a multiple test blow-up of `𝔪` (in the domain, `0 < n`), `o ≥ 1`, and `p` a point of the last stage
+whose run in the regime of order `o` started at `T₀'` (lower data there, `GeneralValue.GenLowerData`), while a reference point
+started at `T₀ = T₀' M`.  If the centres of `M` miss the mask `W' = {ν ≤ o}` of `T₀'` (they lie in `{ν ≥ o + 1}`: TN3's
+`NonmonomialOrderCanonical.centresAvoid_of_canonical`), the companion value of `p` is the value of the maximal-order value
+function `M` for the companion ideal formed at `T₀` on its mask `W`, along `T₁|_W` (`genLowerValue_eq_rebase`):
 
-1. `(M T₁)|_{W'}` is isomorphic to `M|_{W'}` followed by `T₁|_{M⁻¹W'}` (`value_restrict_append`;
+1. `(M T₁)|_{W'}` is isomorphic to `M|_{W'}` followed by `T₁|_{M⁻¹W'}` (`value_restrict_append`; TN23's
    `isTowerIso_restrict_append`);
-2. `M|_{W'}` has only empty centres, and the companion ideal of `𝔪_{T₀'}` on `W'`, transformed along it, is
-   restricted-equivalent to the companion ideal of `𝔪_{T₀}` on `M⁻¹W'`
-   (`CompanionRebase.restrictEquiv_companionOf_rebase`), so the values re-base
-   (`MaxOrderValue.IsMaxOrderValue.value_rebase`);
+2. `M|_{W'}` has only empty centres, and the companion ideal of `𝔪_{T₀'}` on `W'`, transformed along it, is restricted-equivalent
+   to the companion ideal of `𝔪_{T₀}` on `M⁻¹W'` (TN3's `CompanionRebase.restrictEquiv_companionOf_rebase`), so the values
+   re-base (`MaxOrderValue.IsMaxOrderValue.value_rebase`);
 3. the companion ideals of `𝔪_{T₀}` on the two open sets `M⁻¹W'` and `W` are restrictions of one marked ideal, and the values
    on two open sets agree (`value_eq_of_two_opens`, from `value_restrict_nestedOpens`).
 
@@ -77,6 +36,9 @@ These are the maximal-order-value versions of `MaxLocusLocal.restrict_nestedOpen
 * `compAt_eq_pullback`, `isInvDomain_compAt`, `isMaximalOrderAlong_compAt`: the companion ideal formed at a stage lies in the
   domain and is of maximal order;
 * **`genLowerValue_eq_rebase`**: the companion value of a point which started earlier, through the later companion ideal.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -87,7 +49,18 @@ universe u v
 namespace Hironaka.GeneralCompare
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.RestrictEmptyTower Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.MaxLocusLocal Hironaka.InvDomainCompanion Hironaka.CompanionOpen
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.BlowupTowerIsomorphism Hironaka.RestrictEmptyTower
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical
+  Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong
+  Hironaka.MaxOrderValue Hironaka.GeneralValue
+  Hironaka.MaxLocusLocal Hironaka.InvDomainCompanion
+  Hironaka.CompanionOpen
 open Hironaka.BlowupTowerIsoTail (opensCongr isTowerIso_restrict_append openPreimage_append)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)

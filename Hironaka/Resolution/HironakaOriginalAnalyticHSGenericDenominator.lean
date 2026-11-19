@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothCentreRealDomainActualAmbientHS
 /-! Retain the genuine common holomorphic denominator and its ACTUAL nonzero
 locus for every original normal degree/intrinsic HS order. No caller certificate. -/
@@ -50,7 +45,6 @@ section OriginalCentre
 variable {d t : ℕ} {M : Type*} [TopologicalSpace M]
   [ChartedSpace (ComplexModel (d+t)) M] [IsComplexManifold (d+t) M]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONLY original inputs retain the actual nonzero-germ denominator and ENTIRE
 literal nonzero locus of the SAME whole original uniform normal-degree ranks. -/
 theorem exists_original_analytic_denominator_uniform_degrees

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualFormalWeightedDivision
 import Hironaka.Resolution.HironakaActualHomogeneousInitialHS
 
@@ -50,7 +45,6 @@ theorem actualFormalQuotient_mem_shifted_power (I : Ideal (MvPowerSeries (Fin n)
   intro b hb
   exact (actual_formal_degreelex_division_maximal_filtration I F q hF).2 a b (by omega)
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- True product components retain actual filtered quotient coefficients and SAME original vertex initial forms. -/
 theorem actualFormalQuotient_vertex_product_component (I : Ideal (MvPowerSeries (Fin n) ℂ))
     (q : ℕ) (F : MvPowerSeries (Fin n) ℂ) (hF : F ∈ genuineFormalVariables n ^ q)
@@ -96,7 +90,6 @@ theorem actualFormalMember_component_mem_initial_vertex_span (I : Ideal (MvPower
   · exact Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨a,rfl⟩)
   · exact Ideal.zero_mem _
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- BOTH whole ideal directions identify all actual original initial forms with the SAME finite vertex initials. -/
 theorem actualHomogeneousInitialIdeal_eq_initial_vertex_span (I : Ideal (MvPowerSeries (Fin n) ℂ)) :
     actualHomogeneousInitialIdeal I=actualInitialVertexSpan I := by

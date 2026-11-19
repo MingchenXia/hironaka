@@ -1,18 +1,12 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
 # Noether normalization for prime ideals of `𝒪_n`
 
 Source: Demailly, *Complex analytic and differential geometry*, II.4.8 and II.4.13.
+Blueprint: `lag:noether-normalization`, `lag:finite-extension`.
 
 Let `P ⊆ 𝒪_n` be a prime ideal.  After a linear change of coordinates (`P` is replaced by
 its image `Q` under the induced ring automorphism) there is `d ≤ n` such that
@@ -21,8 +15,9 @@ its image `Q` under the induced ring automorphism) there is `d ≤ n` such that
 * for each `d ≤ k < n` (`0`-indexed coordinates) `Q` contains a Weierstrass polynomial in
   `z_k` with coefficients in `𝒪_k` (`HasWeierstrassPolynomial`);
 
-(`exists_isNoetherNormalization`). Consequently every germ is congruent modulo `Q` to an `𝒪_d`-combination of
-finitely many fixed germs (`exists_finite_generators`), so `𝒪_d → 𝒪_n / Q` is injective, finite and integral.
+(`exists_isNoetherNormalization`).  Consequently every germ is congruent modulo `Q` to an
+`𝒪_d`-combination of finitely many fixed germs (`exists_finite_generators`), so
+`𝒪_d → 𝒪_n / Q` is injective, finite and integral (`exists_noetherNormalization`).
 
 ## Proof
 
@@ -257,6 +252,56 @@ theorem isIntegral (h : IsNoetherNormalization Q d) : (quotientStructureMap Q d)
   h.finite.to_isIntegral
 
 end IsNoetherNormalization
+
+/-- `HasWeierstrassPolynomial` in terms of explicit holomorphic coefficient functions. -/
+theorem hasWeierstrassPolynomial_iff {n : ℕ} (Q : Ideal (HolGerm (ComplexModel n))) (k : ℕ)
+    (hk : k < n) :
+    HasWeierstrassPolynomial Q k hk ↔
+      ∃ (s : ℕ) (a : ℕ → ComplexModel k → ℂ)
+        (ha : ∀ j, ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (a j) z),
+        (∀ j < s, a j 0 = 0) ∧
+          mk (fun z : ComplexModel n => z ⟨k, hk⟩ ^ s +
+              ∑ j ∈ Finset.range s, a j (coordinateProjection n k z) * z ⟨k, hk⟩ ^ j)
+            (eventually_differentiableAt_coordWeierstrass n k hk s a ha) ∈ Q := by
+  constructor
+  · rintro ⟨s, A, hA, hW⟩
+    choose a ha hAa using fun j => exists_eq_mk (A j)
+    obtain rfl : A = fun j => mk (a j) (ha j) := funext hAa
+    exact ⟨s, a, ha, hA, weierstrassGerm_eq_mk n k hk s a ha ▸ hW⟩
+  · rintro ⟨s, a, ha, ha0, hW⟩
+    exact ⟨s, fun j => mk (a j) (ha j), ha0, (weierstrassGerm_eq_mk n k hk s a ha).symm ▸ hW⟩
+
+/-- **Noether normalization and finiteness for prime ideals of `𝒪_n`** (Demailly II.4.8,
+II.4.13).  For a prime `P ⊆ 𝒪_n` there are `d ≤ n` and a linear change of coordinates `L`
+such that, for the transformed prime `Q = L^* P`:
+* `Q ∩ 𝒪_d = 0`;
+* for `d ≤ k < n`, `Q` contains a Weierstrass polynomial
+  `z_k ^ s + ∑_{j<s} a_j(z_0, …, z_{k-1}) z_k ^ j`, `a_j(0) = 0`;
+* finitely many germs generate `𝒪_n` modulo `Q` over `𝒪_d`;
+* `𝒪_d → 𝒪_n / Q` is injective, finite and integral. -/
+theorem exists_noetherNormalization {n : ℕ} (P : Ideal (HolGerm (ComplexModel n)))
+    [P.IsPrime] :
+    ∃ (d : ℕ) (_ : d ≤ n) (L : ComplexModel n ≃L[ℂ] ComplexModel n),
+      (∀ c : HolGerm (ComplexModel d),
+        HolGerm.comap (coordinateProjection n d) c ∈ P.map (comapEquiv L) → c = 0) ∧
+      (∀ k (hk : k < n), d ≤ k →
+        ∃ (s : ℕ) (a : ℕ → ComplexModel k → ℂ)
+          (ha : ∀ j, ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ (a j) z),
+          (∀ j < s, a j 0 = 0) ∧
+            mk (fun z : ComplexModel n => z ⟨k, hk⟩ ^ s +
+                ∑ j ∈ Finset.range s, a j (coordinateProjection n k z) * z ⟨k, hk⟩ ^ j)
+              (eventually_differentiableAt_coordWeierstrass n k hk s a ha) ∈
+              P.map (comapEquiv L)) ∧
+      (∃ (N : ℕ) (m : Fin N → HolGerm (ComplexModel n)), ∀ f : HolGerm (ComplexModel n),
+        ∃ c : Fin N → HolGerm (ComplexModel d),
+          f - ∑ i, HolGerm.comap (coordinateProjection n d) (c i) * m i ∈ P.map (comapEquiv L)) ∧
+      Function.Injective (quotientStructureMap (P.map (comapEquiv L)) d) ∧
+      (quotientStructureMap (P.map (comapEquiv L)) d).Finite ∧
+      (quotientStructureMap (P.map (comapEquiv L)) d).IsIntegral := by
+  obtain ⟨d, L, h⟩ := exists_isNoetherNormalization P
+  exact ⟨d, h.le, L, h.eq_zero_of_mem,
+    fun k hk hdk => (hasWeierstrassPolynomial_iff _ k hk).1 (h.weierstrass k hk hdk),
+    h.exists_finite_generators, h.injective, h.finite, h.isIntegral⟩
 
 end
 

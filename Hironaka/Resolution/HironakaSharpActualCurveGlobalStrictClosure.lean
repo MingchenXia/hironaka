@@ -1,11 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSharpActualCurveGlobalGoodIsomorphism
-import Hironaka.Support.MarkOneCarrierDensityExact
-import Hironaka.Support.OpensExceptionalLocusExact
+import Hironaka.Resolution.FactorizationFromResolution
+import Hironaka.Analytic.OpensRestrictionMeasure
 
 /-! Actual TEST carrier density, full exceptional chart dictionaries and
 the EXISTING conventional strict closure of the SAME global projection. -/

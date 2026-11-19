@@ -26,7 +26,7 @@ take the inclusion as their hypothesis.
 \label{bcalc:exceptional-divisor}
 \uses{ana:blowups,ana:ideal-sheaves,ana:blowup-exceptional-image}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.BlowupExceptionalDivisor.exceptionalDivisor,Hironaka.BlowupExceptionalDivisor.exceptionalDivisor_ideal,Hironaka.BlowupExceptionalDivisor.support_exceptionalDivisor}\upstreamlean{TranscendentalNakamaye.Pending.BlowupExceptionalDivisor.exceptionalLocus_subset_support_exceptionalDivisor,TranscendentalNakamaye.Pending.BlowupExceptionalDivisor.interior_support_exceptionalDivisor}\lean{Hironaka.BlowupExceptionalDivisor.interior_exceptionalLocus_eq_empty,Hironaka.BlowupExceptionalDivisor.pullback_idealPow_vanishingIdeal,Hironaka.BlowupExceptionalDivisor.isCoherent_vanishingIdeal_centre,Hironaka.BlowupExceptionalDivisor.totalTransform,Hironaka.BlowupExceptionalDivisor.support_totalTransform,Hironaka.BlowupExceptionalDivisor.zeroLocus_vanishingIdeal,Hironaka.BlowupExceptionalDivisor.zeroLocus_pullback,Hironaka.BlowupExceptionalDivisor.pullback_unitIdeal,Hironaka.BlowupExceptionalDivisor.pullback_idealPow,Hironaka.BlowupExceptionalDivisor.isInvertible_unitIdeal,Hironaka.BlowupExceptionalDivisor.isInvertible_idealPow,Hironaka.BlowupExceptionalDivisor.isCoherent_ideal}
+\lean{Hironaka.BlowupExceptionalDivisor.exceptionalDivisor,Hironaka.BlowupExceptionalDivisor.exceptionalDivisor_ideal,Hironaka.BlowupExceptionalDivisor.support_exceptionalDivisor}\upstreamlean{history-b1b874fc39bba85e,history-2cd8aaf5837aadfe}\lean{Hironaka.BlowupExceptionalDivisor.interior_exceptionalLocus_eq_empty,Hironaka.BlowupExceptionalDivisor.pullback_idealPow_vanishingIdeal,Hironaka.BlowupExceptionalDivisor.isCoherent_vanishingIdeal_centre,Hironaka.BlowupExceptionalDivisor.totalTransform,Hironaka.BlowupExceptionalDivisor.support_totalTransform,Hironaka.BlowupExceptionalDivisor.zeroLocus_vanishingIdeal,Hironaka.BlowupExceptionalDivisor.zeroLocus_pullback,Hironaka.BlowupExceptionalDivisor.pullback_unitIdeal,Hironaka.BlowupExceptionalDivisor.pullback_idealPow,Hironaka.BlowupExceptionalDivisor.isInvertible_unitIdeal,Hironaka.BlowupExceptionalDivisor.isInvertible_idealPow,Hironaka.BlowupExceptionalDivisor.isCoherent_ideal}
 \mixedleanok
 Let \(\pi\colon Y\to X\) be the blowup of \(X\) along \(C\). The ideal \(\pi^*\mathcal I_C=\mathcal I_C\mathcal O_Y\)
 is invertible; it is the ideal \(\mathcal O_Y(-D)\) of an effective divisor \(D\), the \emph{exceptional divisor}, and
@@ -118,7 +118,7 @@ Lemma~\ref{bcalc:cancellation}.
 \label{bcalc:restrict-open}
 \uses{ana:blowups,rem:open-subset-analytic,ana:ideal-sheaves}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.BlowupRestrictOpen.isBlowupAlong_restrict}\upstreamlean{TranscendentalNakamaye.Pending.BlowupRestrictOpen.exists_isBlowupAlong_restrict}\lean{Hironaka.BlowupRestrictOpen.contMDiff_opens_mk,Hironaka.BlowupRestrictOpen.vanishingIdeal_opens_mem_iff,Hironaka.BlowupRestrictOpen.vanishingIdeal_opens_mem_comp_val,Hironaka.BlowupRestrictOpen.pullback_vanishingIdeal_opens,Hironaka.BlowupRestrictOpen.isClosedSubmanifold_preimage_val,Hironaka.BlowupRestrictOpen.interior_preimage_val_eq_empty}
+\lean{Hironaka.BlowupRestrictOpen.isBlowupAlong_restrict}\upstreamlean{history-3fdc8735027363ce}\lean{Hironaka.BlowupRestrictOpen.contMDiff_opens_mk,Hironaka.BlowupRestrictOpen.vanishingIdeal_opens_mem_iff,Hironaka.BlowupRestrictOpen.vanishingIdeal_opens_mem_comp_val,Hironaka.BlowupRestrictOpen.pullback_vanishingIdeal_opens,Hironaka.BlowupRestrictOpen.isClosedSubmanifold_preimage_val,Hironaka.BlowupRestrictOpen.interior_preimage_val_eq_empty}
 \mixedleanok
 Let \(\pi\colon Y\to X\) be the blowup along \(C\) and \(V\subset X\) open. Then the restriction
 \(\pi^{-1}(V)\to V\) of \(\pi\) is the blowup of the complex manifold \(V\) along \(C\cap V\).
@@ -173,7 +173,7 @@ the blowup \(\pi_r\) with exceptional divisor \(D_r\) (Lemma~\ref{bcalc:exceptio
 \label{bcalc:transform-ambient}
 \uses{bcalc:controlled-transform,bcalc:exceptional-divisor,hir:marked-ideal,hir:transform}
 \source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.BlowupTowerTransforms.strictTransform_univ}\lean{Hironaka.BlowupTowerTransforms.restrictOn_univ}\upstreamlean{TranscendentalNakamaye.Pending.BlowupTowerTransforms.transform_ideal_eq_controlledTransform,TranscendentalNakamaye.Pending.BlowupTowerTransforms.transform_N_eq_univ}
+\upstreamlean{history-39a000d6a9e26390}\lean{Hironaka.BlowupTowerTransforms.restrictOn_univ}\upstreamlean{history-041f8b1539e0eb9c,history-f88e623227b5c1c8}
 \mixedleanok
 Let \(\pi\colon Y\to X\) be the blowup along \(C\). The strict transform of \(X\) is \(Y\). For a marked ideal \((X,X,E,\mathfrak a,d)\)
 with \(\mathfrak a\) coherent, its transform by \(\pi\) is \((Y,Y,E',\sigma^{c}(\mathfrak a,d),d)\): the ideal of the transform,
@@ -192,7 +192,7 @@ along \(Y\) of \(\pi^*\mathfrak a\) by \(\mathcal O_Y(-dD)=(\pi^*\mathcal I_C)^{
 \label{bcalc:principalization}
 \uses{bcalc:transform-ambient,bcalc:controlled-transform,bcalc:tower-exceptional,bcalc:cancellation,hir:test-tower,hir:cosupport}
 \source{wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.BlowupTowerTransforms.pullback_eq_mul_transformAlong,TranscendentalNakamaye.Pending.BlowupTowerTransforms.pullback_eq_exceptionalDivisor_of_isResolution,TranscendentalNakamaye.Pending.BlowupTowerTransforms.isInvertible_pullback_of_isResolution}\lean{Hironaka.BlowupTowerTransforms.le_vanishingIdeal_of_subset_zeroLocus,Hironaka.BlowupTowerTransforms.eq_unitIdeal_of_zeroLocus_eq_empty}
+\upstreamlean{history-68e78f4c664d0800,history-e11a27701b9a6b19,history-6c84b250ab81a93c}\lean{Hironaka.BlowupTowerTransforms.le_vanishingIdeal_of_subset_zeroLocus,Hironaka.BlowupTowerTransforms.eq_unitIdeal_of_zeroLocus_eq_empty}
 \mixedleanok
 Let \(\mathfrak a\) be a coherent ideal on \(X\) and \(T\) a multiple test blow-up of the marked ideal \((X,X,E,\mathfrak a,1)\), with
 projection \(p\) and transform \((X_r,X_r,E_r,\mathfrak a_r,1)\). Then \(\mathfrak a_r\) is coherent and
@@ -268,7 +268,7 @@ coordinates are \(\tau_i\circ\pi=\alpha_ih\) with \(h\) a local generator of \(\
 \label{bcalc:strict-submanifold}
 \uses{bcalc:nested-flattening,bcalc:monomial-lift,bcalc:exceptional-divisor,ana:regular-transport,ana:local-holomorphic-inverse}
 \source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
-\lean{Hironaka.BlowupStrictSubmanifold.geoStrictTransform,Hironaka.BlowupStrictSubmanifold.geoStrictTransform_subset_preimage,Hironaka.BlowupStrictSubmanifold.mem_geoStrictTransform_iff_of_notMem,Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform_of_notMem,Hironaka.BlowupStrictSubmanifold.exists_local_geoStrictTransform,Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform_of_mem,Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform}\upstreamlean{TranscendentalNakamaye.Pending.BlowupStrictSubmanifold.isClosedSubmanifold_geoStrictTransform}
+\lean{Hironaka.BlowupStrictSubmanifold.geoStrictTransform,Hironaka.BlowupStrictSubmanifold.geoStrictTransform_subset_preimage,Hironaka.BlowupStrictSubmanifold.mem_geoStrictTransform_iff_of_notMem,Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform_of_notMem,Hironaka.BlowupStrictSubmanifold.exists_local_geoStrictTransform,Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform_of_mem,Hironaka.BlowupStrictSubmanifold.regularAtDim_geoStrictTransform}\upstreamlean{history-a4826e154e15aaa8}
 \mixedleanok
 The strict transform \(N'=\overline{\pi^{-1}(N\setminus C)}\) is a closed submanifold of \(Y\), regular of dimension \(k_N\) at each of
 its points. In the monomial chart of Lemma~\ref{bcalc:monomial-lift} at a point \(z\) over \(C\), built on nested coordinates
@@ -360,7 +360,7 @@ The second clause is why the transform of a marked ideal must use \(\overline{\p
 \label{bcalc:function-transform}
 \uses{bcalc:controlled-transform,bcalc:exceptional-divisor,bcalc:cancellation}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.BlowupFunctionTransform.IsLocalEquation,Hironaka.BlowupFunctionTransform.exists_isLocalEquation,Hironaka.BlowupFunctionTransform.IsLocalEquation.holomorphicAt}\upstreamlean{TranscendentalNakamaye.Pending.BlowupFunctionTransform.IsLocalEquation.nonvanishing_pow}\lean{Hironaka.BlowupFunctionTransform.IsLocalEquation.idealPow_mem_iff,Hironaka.BlowupFunctionTransform.IsLocalEquation.pow_mem,Hironaka.BlowupFunctionTransform.exists_eq_pow_mul}\upstreamlean{TranscendentalNakamaye.Pending.BlowupFunctionTransform.eventuallyEq_of_pow_mul}\lean{Hironaka.BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul}\upstreamlean{TranscendentalNakamaye.Pending.BlowupFunctionTransform.mem_controlledTransform_iff}\lean{Hironaka.BlowupFunctionTransform.holomorphicAt_pow,Hironaka.BlowupFunctionTransform.isInSpanAt_range_const_iff,Hironaka.BlowupFunctionTransform.holomorphicAt_of_mem_idealPow}
+\lean{Hironaka.BlowupFunctionTransform.IsLocalEquation,Hironaka.BlowupFunctionTransform.exists_isLocalEquation,Hironaka.BlowupFunctionTransform.IsLocalEquation.holomorphicAt}\upstreamlean{history-9084ba0548b01025}\lean{Hironaka.BlowupFunctionTransform.IsLocalEquation.idealPow_mem_iff,Hironaka.BlowupFunctionTransform.IsLocalEquation.pow_mem,Hironaka.BlowupFunctionTransform.exists_eq_pow_mul}\upstreamlean{history-f80cfad1e0e1cc12}\lean{Hironaka.BlowupFunctionTransform.mem_controlledTransform_of_eq_pow_mul}\upstreamlean{history-12740548196ee73b}\lean{Hironaka.BlowupFunctionTransform.holomorphicAt_pow,Hironaka.BlowupFunctionTransform.isInSpanAt_range_const_iff,Hironaka.BlowupFunctionTransform.holomorphicAt_of_mem_idealPow}
 \mixedleanok
 A \emph{local equation} of \(D\) on an open set \(U\subset Y\) is a holomorphic \(h\) on \(U\), vanishing identically on no nonempty open
 subset, with \(\mathcal O_Y(-D)=(h)\) on \(U\); local equations exist around every point. On \(U\), \(\mathcal O_Y(-\mu D)=(h^{\mu})\), and for
@@ -388,7 +388,7 @@ coherent ideal \(\sigma^{c}(\mathfrak a,\mu)\) by (2) (Lemma~\ref{bcalc:controll
 \label{bcalc:giraud-strict}
 \uses{bcalc:function-transform,bcalc:strict-ideal}
 \source{wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.BlowupFunctionTransform.vanishingIdeal_geoStrictTransform_mem_iff,TranscendentalNakamaye.Pending.BlowupFunctionTransform.mem_geoStrictTransform_iff_eq_zero,TranscendentalNakamaye.Pending.BlowupFunctionTransform.mem_iff_eq_zero_of_span,TranscendentalNakamaye.Pending.BlowupFunctionTransform.vanishingIdeal_le_of_subset}
+\upstreamlean{history-c99aee5a3bc0a6bf,history-50ba29421063594e,history-6788917aa403d72a,history-aca310537b1111bc}
 \upstreamleanok
 Let \(N\supset C\) be a closed submanifold, \(z\in U\), and suppose \(\mathcal I_N=(u)\) at \(\pi(z)\) with \(u\) holomorphic, and
 \(u\circ\pi=h\,u'\) near \(z\). Then \(\mathcal I_{N'}=(u')\) at \(z\), where \(N'=\overline{\pi^{-1}(N\setminus C)}\); in particular \(z\in N'\) if and only
@@ -406,7 +406,7 @@ vanishes at \(z\); if \(z\notin N'\), the constant \(1\) lies in \(\mathcal I_{N
 \label{bcalc:hypersurface}
 \uses{bcalc:strict-ideal,bcalc:snc-chart,hir:derivative-ideal,ana:local-holomorphic-inverse}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.LocalGiraudTransform.exists_hypersurface_coords,Hironaka.LocalGiraudTransform.mem_plane_pred_iff,Hironaka.LocalGiraudTransform.vanishingIdeal_zeroSet_mem_iff}\upstreamlean{TranscendentalNakamaye.Pending.LocalGiraudTransform.regularAtDim_zeroSet,TranscendentalNakamaye.Pending.LocalGiraudTransform.isClosed_preimage_val_zeroSet}
+\lean{Hironaka.LocalGiraudTransform.exists_hypersurface_coords,Hironaka.LocalGiraudTransform.mem_plane_pred_iff,Hironaka.LocalGiraudTransform.vanishingIdeal_zeroSet_mem_iff}\upstreamlean{history-d665eb179a07abf5,history-e2c9a6d623d73023}
 \mixedleanok
 Let \(u\) be holomorphic on an open set \(U\subset X\), of multiplicity one at its zeros in \(U\) (at each such zero some partial derivative of
 \(u\) in some chart does not vanish). Then \(V(u)\cap U\) is closed in \(U\) and regular of dimension \(n-1\) at each of its points, and at every
@@ -429,7 +429,7 @@ coordinates \(W\) (as in the proof of Theorem~\ref{bcalc:strict-ideal}) the idea
 \label{bcalc:giraud-local}
 \uses{bcalc:hypersurface,bcalc:restrict-open,bcalc:giraud-strict,bcalc:multiplicity-one,bcalc:strict-submanifold,bcalc:function-transform,mc:tangent-direction,mc:tangent-direction-support}
 \source{wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.LocalGiraudTransform.vanishingIdeal_geoStrictTransform_mem_iff_of_open,TranscendentalNakamaye.Pending.LocalGiraudTransform.mem_geoStrictTransform_iff_eq_zero_of_open,TranscendentalNakamaye.Pending.LocalGiraudTransform.eventually_mem_geoStrictTransform_iff_of_open,TranscendentalNakamaye.Pending.LocalGiraudTransform.exists_chartDeriv_ne_zero_controlledTransform_of_open}\lean{Hironaka.LocalGiraudTransform.isLocalEquation_restrict,Hironaka.LocalGiraudTransform.geoStrictTransform_preimage_val,Hironaka.LocalGiraudTransform.vanishingIdeal_comp_val_iff}\upstreamlean{TranscendentalNakamaye.Pending.LocalGiraudTransform.isInSpanAt_eq_comp_val_iff,TranscendentalNakamaye.Pending.LocalGiraudTransform.IsTangentDirection.giraud_hypotheses}
+\upstreamlean{history-3ed9422e354ad513,history-015d7171e150da9a,history-a17fa57079489f93,history-c092eb87609b4ed5}\lean{Hironaka.LocalGiraudTransform.isLocalEquation_restrict,Hironaka.LocalGiraudTransform.geoStrictTransform_preimage_val,Hironaka.LocalGiraudTransform.vanishingIdeal_comp_val_iff}\upstreamlean{history-cec03bb1e8a98e26,history-3ee87d8ca77af138}
 \mixedleanok
 Let \(u\) be holomorphic on an open set \(U\subset X\), of multiplicity one at its zeros in \(U\), with \(C\cap U\subset V(u)\), and put
 \(N=V(u)\cap U\), \(N'=\overline{\pi^{-1}(N\setminus C)}\). Let \(h\) be a local equation of the exceptional divisor on \(U'\subset Y\),
@@ -486,7 +486,7 @@ Lemma~\ref{bcalc:multiplicity-one}.) The second claim is evaluation at \(z\). Fo
 \label{bcalc:giraud-local-along}
 \uses{bcalc:giraud-local,bcalc:tangent-generator-along,bcalc:restrict-open,bcalc:strict-ideal,bcalc:strict-submanifold,bcalc:function-transform,bcalc:exceptional-divisor,mc:contact-hypersurface-along,mc:tangent-direction-along,mc:tangent-direction-along-basic,mc:derivative-along}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.LocalGiraudTransformAlong.vanishingIdeal_geoStrictTransform_inter_zeroSet_mem_iff,Hironaka.LocalGiraudTransformAlong.eventually_mem_geoStrictTransform_inter_zeroSet_iff,Hironaka.LocalGiraudTransformAlong.exists_fieldDeriv_ne_zero_controlledTransform_along}\upstreamlean{TranscendentalNakamaye.Pending.LocalGiraudTransformAlong.giraud_hypotheses_of_isTangentDirectionAlong}\lean{Hironaka.LocalGiraudTransformAlong.isClosedSubmanifold_preimage_val_inter_zeroSet,Hironaka.LocalGiraudTransformAlong.isInSpanAt_pullback_of_mem_vanishingIdeal_geoStrictTransform,Hironaka.LocalGiraudTransformAlong.eventually_eq_zero_of_mem_geoStrictTransform,Hironaka.LocalGiraudTransformAlong.ne_zero_of_isLocalEquation,Hironaka.LocalGiraudTransformAlong.frequently_ne_zero_of_isLocalEquation}
+\lean{Hironaka.LocalGiraudTransformAlong.vanishingIdeal_geoStrictTransform_inter_zeroSet_mem_iff,Hironaka.LocalGiraudTransformAlong.eventually_mem_geoStrictTransform_inter_zeroSet_iff,Hironaka.LocalGiraudTransformAlong.exists_fieldDeriv_ne_zero_controlledTransform_along}\upstreamlean{history-3d890b06982a46b3}\lean{Hironaka.LocalGiraudTransformAlong.isClosedSubmanifold_preimage_val_inter_zeroSet,Hironaka.LocalGiraudTransformAlong.isInSpanAt_pullback_of_mem_vanishingIdeal_geoStrictTransform,Hironaka.LocalGiraudTransformAlong.eventually_eq_zero_of_mem_geoStrictTransform,Hironaka.LocalGiraudTransformAlong.ne_zero_of_isLocalEquation,Hironaka.LocalGiraudTransformAlong.frequently_ne_zero_of_isLocalEquation}
 \mixedleanok
 Let \(N\supset C\) be a closed submanifold, \(u\) holomorphic on an open set \(U\subset X\) with multiplicity one along \(N\) at its zeros on \(N\) (at each
 such point some holomorphic field tangent to \(N\) has \(\xi(u)\ne0\)), and \(C\cap U\subset V(u)\). Put \(W=N\cap V(u)\cap U\), and let \(W'\), \(N'\) be the strict
@@ -532,7 +532,7 @@ multiplicity one along \(N\) by definition, and \(C\cap U\subset\operatorname{co
 \label{bcalc:codim-one}
 \uses{bcalc:function-transform,bcalc:exceptional-divisor,hir:hadamard-bridge,hir:giraud-support,hir:cosupport,hir:order-basic,hir:geo-transform-ambient,mc:maximal-order,mc:principal-power}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0018,wlodarczyk09-analytic-resolution:page-0019}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneCentre.notMem_cosupport_controlledTransform_of_codim_one}\lean{Hironaka.CodimOneCentre.notMem_cosupport_succ_of_isMaximalOrder}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneCentre.cosupport_controlledTransform_inter_preimage_eq_empty,TranscendentalNakamaye.Pending.CodimOneCentre.cosupp_geoTransform_inter_preimage_eq_empty,TranscendentalNakamaye.Pending.CodimOneCentre.exists_generator_vanishingIdeal_of_regularAtDim,TranscendentalNakamaye.Pending.CodimOneCentre.VanishesToOrderOn.congr}\lean{Hironaka.CodimOneCentre.vanishesToOrderOn_pow}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneCentre.apply_ne_zero_of_not_vanishesToOrderOn}
+\upstreamlean{history-9cbbe2516fef0005}\lean{Hironaka.CodimOneCentre.notMem_cosupport_succ_of_isMaximalOrder}\upstreamlean{history-f5571d20847417db,history-e303f3de09b5bd0f,history-4272e8a25dfd6ffc,history-fa7a4e5ef6dfd95b}\lean{Hironaka.CodimOneCentre.vanishesToOrderOn_pow}\upstreamlean{history-24f2310cfe376c92}
 \mixedleanok
 Let \(\mathfrak a\) be coherent, \(\mu\ge1\), and let the centre \(C\) of the blowup \(\pi\) lie in \(\operatorname{cosupp}(\mathfrak a,\mu)\) (orders on the whole
 manifold). If \(z\in\pi^{-1}(C)\), \(C\) has dimension \(n-1\) at \(x=\pi(z)\), and \(\operatorname{ord}_x\mathfrak a\le\mu\), then
@@ -600,7 +600,7 @@ regularity at \(x\) only depends on the germ (Lemma~\ref{lag:regular-point-basic
 \begin{lemma}[Irreducible analytic sets: connectedness and local dimension]
 \label{bcalc:irreducible-connected}
 \uses{fpgeom:complex-analytic-subvariety,ana:analytic-preimage,ana:pure-dimension,lag:regular-locus-dense,rem:dimension}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.isPreconnected_of_isComplexAnalyticallyIrreducible,TranscendentalNakamaye.Pending.CodimOneSupport.locDimGE_carrier}
+\upstreamlean{history-ccb11486323ccd3b,history-64d520af8e0a41e5}
 \upstreamleanok
 An analytically irreducible subset \(V\) of a complex manifold is connected. If \(V\) is a closed irreducible analytic subvariety, then
 \(\dim_xV\ge\dim V\) at every point \(x\in V\).
@@ -617,7 +617,7 @@ every regular point of \(V\) has dimension \(\dim V\) (Lemma~\ref{ana:pure-dimen
 \begin{lemma}[The support of a coherent marked ideal is analytic]
 \label{bcalc:cosupport-analytic}
 \uses{ana:zero-locus-coherent,hir:giraud-support,hir:derivative-ideal-generators}
-\lean{Hironaka.CodimOneSupport.isComplexAnalyticSubset_zeroLocus}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.isComplexAnalyticSubset_cosupport}
+\lean{Hironaka.CodimOneSupport.isComplexAnalyticSubset_zeroLocus}\upstreamlean{history-3d70943f108a3cb6}
 \mixedleanok
 If \(\mathfrak a\) is coherent and \(\mu\ge1\), then \(\operatorname{cosupp}(\mathfrak a,\mu)\) (orders on the whole manifold) is an analytic subset.
 \end{lemma}
@@ -632,7 +632,7 @@ many local generators (Lemma~\ref{ana:zero-locus-coherent}).
 \label{bcalc:codim-one-local}
 \uses{bcalc:analytic-fill,bcalc:hypersurface,mc:tangent-direction,mc:tangent-direction-support,mc:tangent-direction-exists,mc:maximal-order}
 \source{wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.eventually_mem_iff_of_locDimGE,TranscendentalNakamaye.Pending.CodimOneSupport.regularAtDim_of_locDimGE}
+\upstreamlean{history-a81cf3e08cd8b3a6,history-49a0a61453d1ee33}
 \upstreamleanok
 Let \(\mathfrak a\) be coherent, \(\mu\ge1\), and \(A\subset\operatorname{cosupp}(\mathfrak a,\mu)\) analytic with \(\dim_xA\ge n-1\). If \(u\) is a tangent
 direction of \((\mathfrak a,\mu)\) on an open set \(U\ni x\) (Definition~\ref{mc:tangent-direction}), then \(A=V(u)\) near \(x\). If moreover
@@ -651,7 +651,7 @@ Lemma~\ref{bcalc:analytic-fill}, \(A=H\) near \(x\), i.e.\ \(A=V(u)\) near \(x\)
 \begin{definition}[The codimension-one part of the support]
 \label{bcalc:codim-one-part-def}
 \uses{hir:cosupport}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.codimOnePart_subset}
+\upstreamlean{history-c6e5feed69c2c523,history-8f30ff22ee8a616e}
 \upstreamleanok
 The \emph{codimension-one part} \(R(\mathfrak a,\mu)\) of the support \(S=\operatorname{cosupp}(\mathfrak a,\mu)\) is the set of points at which \(S\) is
 regular of dimension \(n-1\).
@@ -661,7 +661,7 @@ regular of dimension \(n-1\).
 \label{bcalc:codim-one-part}
 \uses{bcalc:codim-one-part-def,bcalc:codim-one-local,bcalc:cosupport-analytic,bcalc:hypersurface,bcalc:nested-flattening,lag:regular-point-basics,lag:regular-locus-dense,hir:giraud-support,mc:tangent-direction-exists,mc:tangent-direction-support,rem:dimension}
 \source{wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.mem_codimOnePart_iff,TranscendentalNakamaye.Pending.CodimOneSupport.eventually_mem_codimOnePart_iff,TranscendentalNakamaye.Pending.CodimOneSupport.isClosed_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.regularAtDim_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.isClosedSubmanifold_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.exists_isOpen_cosupport_inter_eq_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.eventually_mem_codimOnePart_iff_eq_zero,TranscendentalNakamaye.Pending.CodimOneSupport.isClosed_cosupport_diff_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.lt_of_regularAtDim_cosupport_diff_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.dimLE_cosupport_diff_codimOnePart}
+\upstreamlean{history-509f6d46607457e6,history-05dbc5a39c1c210a,history-aeb5de10cd5a4713,history-1b3a09bed99d562c,history-09548d0f28cdf3a3,history-320d1ab8cddd2193,history-39d61b3b8597bd84,history-2ef7612dfb91b5ff,history-67a0e3e409dfd33a,history-bd1c9183acb51d83}
 \upstreamleanok
 Let \((\mathfrak a,\mu)\) be coherent, of maximal order, \(\mu\ge1\), with support \(S\) and codimension-one part \(R\). Then:
 \begin{enumerate}
@@ -690,7 +690,7 @@ submanifold has smaller dimension (Lemma~\ref{bcalc:nested-flattening}), so \(j\
 \label{bcalc:codim-one-components}
 \uses{bcalc:codim-one-part,bcalc:codim-one-local,bcalc:irreducible-connected,bcalc:cosupport-analytic,bcalc:codim-one,rem:dimension-monotone,mc:tangent-direction-exists,mc:tangent-direction-support,ana:nonkahler-locus}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0018,wlodarczyk09-analytic-resolution:page-0019}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.carrier_subset_codimOnePart,TranscendentalNakamaye.Pending.CodimOneSupport.eventually_mem_carrier_iff,TranscendentalNakamaye.Pending.CodimOneSupport.regularAtDim_carrier,TranscendentalNakamaye.Pending.CodimOneSupport.eventually_mem_carrier_iff_mem_cosupport,TranscendentalNakamaye.Pending.CodimOneSupport.exists_isOpen_cosupport_inter_eq_carrier,TranscendentalNakamaye.Pending.CodimOneSupport.connectedComponentIn_eq_carrier,TranscendentalNakamaye.Pending.CodimOneSupport.disjoint_carrier,TranscendentalNakamaye.Pending.CodimOneSupport.isIrreducibleComponent_codim_one,TranscendentalNakamaye.Pending.CodimOneSupport.cosupport_controlledTransform_inter_preimage_carrier_eq_empty}
+\upstreamlean{history-f6169c80c58c3c41,history-91b05ff99ea299bf,history-ec12ee3ff3a676a7,history-090901358a241a78,history-29e04a1192f7b912,history-49db5e6a3af4171e,history-ecff593b4ed1a865,history-b3689f04734ea73a,history-170338544ff5d7a1}
 \upstreamleanok
 Let \((\mathfrak a,\mu)\) be coherent, of maximal order, \(\mu\ge1\), with support \(S\), and let \(V\subset S\) be a closed irreducible analytic subvariety
 with \(\dim V=n-1\) (for instance an irreducible component of \(S\) of codimension one). Then \(V\subset R(\mathfrak a,\mu)\), and:
@@ -722,7 +722,7 @@ apply Lemma~\ref{bcalc:codim-one}.
 \label{bcalc:codim-one-step}
 \uses{bcalc:codim-one,bcalc:codim-one-part,hir:geo-transform-ambient}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupport.cosupport_controlledTransform_inter_preimage_codimOnePart_eq_empty,TranscendentalNakamaye.Pending.CodimOneSupport.cosupp_geoTransform_inter_preimage_codimOnePart_eq_empty}
+\upstreamlean{history-f13be3601eb436a4,history-c9e39947d5e3bf72}
 \upstreamleanok
 Let \((\mathfrak a,\mu)\) be coherent, of maximal order, \(\mu\ge1\), and let \(\pi\) be the blowup along its codimension-one part \(R\). Then the
 cosupport of \(\sigma^{c}(\mathfrak a,\mu)\) does not meet the exceptional divisor \(\pi^{-1}(R)\); the same holds for the corrected transform of a marked
@@ -757,7 +757,7 @@ uniqueness clause they agree, i.e.\ \(s(\pi(z))=z\). So \(\pi\) maps \(\pi^{-1}(
 \label{bcalc:transform-off-centre}
 \uses{bcalc:isomorphism-off-centre,bcalc:controlled-transform,hir:geo-transform,hir:geo-transform-wellformed,hir:geo-transform-ambient,hir:cosupport,hir:order-basic,hir:point-power-pullback,hir:open-restriction-ideal,hir:marked-ideal-operations}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.TransformOffCentre.eventually_mem_geoStrictTransform_iff,Hironaka.TransformOffCentre.IsInSpanOnAt.vanishesToOrderOn,Hironaka.TransformOffCentre.mem_cosupp_geoTransform_of_mem_cosupp,Hironaka.TransformOffCentre.mem_cosupp_of_mem_cosupp_geoTransform,Hironaka.TransformOffCentre.mem_cosupp_geoTransform_iff}\upstreamlean{TranscendentalNakamaye.Pending.TransformOffCentre.cosupp_geoTransform_diff_preimage}\lean{Hironaka.TransformOffCentre.cosupp_geoTransform_subset_preimage}\upstreamlean{TranscendentalNakamaye.Pending.TransformOffCentre.cosupport_controlledTransform_diff_preimage}
+\lean{Hironaka.TransformOffCentre.eventually_mem_geoStrictTransform_iff,Hironaka.TransformOffCentre.IsInSpanOnAt.vanishesToOrderOn,Hironaka.TransformOffCentre.mem_cosupp_geoTransform_of_mem_cosupp,Hironaka.TransformOffCentre.mem_cosupp_of_mem_cosupp_geoTransform,Hironaka.TransformOffCentre.mem_cosupp_geoTransform_iff}\upstreamlean{history-3fc7df75e36c8d48}\lean{Hironaka.TransformOffCentre.cosupp_geoTransform_subset_preimage}\upstreamlean{history-781f95dcddb872a8}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be a marked ideal with \(N\) closed and \(\mathfrak a\) an ideal of holomorphic germs, \(\pi\) the blowup
 along \(C\), and \(\underline{\mathcal I}'=(M',N',E',\mathfrak a',d)\) the transform (Definition~\ref{hir:geo-transform}). If \(\pi(z)\notin C\), then
@@ -807,7 +807,7 @@ of that stage, which lies over \(\operatorname{cosupp}\underline{\mathcal I}\) b
 \label{bcalc:codim-one-step-rest}
 \uses{bcalc:codim-one-step,bcalc:codim-one-part,bcalc:transform-off-centre}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
-\upstreamlean{TranscendentalNakamaye.Pending.TransformOffCentre.cosupport_controlledTransform_subset_preimage_diff_codimOnePart}
+\upstreamlean{history-c3d4abca51a1c6bf}
 \upstreamleanok
 Let \((\mathfrak a,\mu)\) be coherent, of maximal order, \(\mu\ge1\), with support \(S\) and codimension-one part \(R\), and let \(\pi\) be the blowup along
 \(R\). Then \(\operatorname{cosupp}(\sigma^{c}(\mathfrak a,\mu),\mu)\subset\pi^{-1}(S\setminus R)\), where \(S\setminus R\) is closed of dimension \(\le n-2\)
@@ -827,7 +827,7 @@ Lemma~\ref{bcalc:codim-one} holds inside \(N\) with the same proof, read on \(N\
 \label{bcalc:codim-one-along}
 \uses{bcalc:codim-one,bcalc:nested-flattening,bex:hadamard,hir:hadamard-bridge-along,hir:restricted-calculus,bcalc:hyperplane-ideal,mc:principal-power,bcalc:monomial-lift,bcalc:snc-chart,bcalc:strict-ideal,bcalc:exceptional-divisor,hir:geo-transform,hir:cosupport,hir:order-basic,mc:maximal-order-along}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0018,wlodarczyk09-analytic-resolution:page-0019,wlodarczyk09-analytic-resolution:page-0027}
-\lean{Hironaka.CodimOneCentreAlong.isInSpanOnAt_subset,Hironaka.CodimOneCentreAlong.VanishesToOrderOn.congr_on,Hironaka.CodimOneCentreAlong.apply_ne_zero_of_not_vanishesToOrderOn_on,Hironaka.CodimOneCentreAlong.isInSpanOnAt_flatCoord_of_mem_vanishingIdeal,Hironaka.CodimOneCentreAlong.notMem_cosupp_geoTransform_of_codim_one_along}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneCentreAlong.cosupp_geoTransform_inter_preimage_eq_empty_of_forall_along,TranscendentalNakamaye.Pending.CodimOneCentreAlong.cosupp_geoTransform_inter_preimage_eq_empty_along}
+\lean{Hironaka.CodimOneCentreAlong.isInSpanOnAt_subset,Hironaka.CodimOneCentreAlong.VanishesToOrderOn.congr_on,Hironaka.CodimOneCentreAlong.apply_ne_zero_of_not_vanishesToOrderOn_on,Hironaka.CodimOneCentreAlong.isInSpanOnAt_flatCoord_of_mem_vanishingIdeal,Hironaka.CodimOneCentreAlong.notMem_cosupp_geoTransform_of_codim_one_along}\upstreamlean{history-9ac7a3a304fa94ad,history-08bafe211e61d593}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have \(N\) a closed submanifold, \(\mathfrak a\) coherent and \(d\ge1\), and let the centre \(C\) of the
 blowup \(\pi\) lie in \(\operatorname{cosupp}\underline{\mathcal I}\). Let \(z\in\pi^{-1}(C)\), \(x=\pi(z)\), and suppose that at \(x\) the centre is regular of
@@ -899,7 +899,7 @@ Let \(N\subset M\) be a submanifold. The \emph{codimension-one part along \(N\)}
 \label{bcalc:codim-one-part-along}
 \uses{bcalc:codim-one-part-along-def,bcalc:codim-one-local-along,bcalc:codim-one-part,hir:giraud-along,bcalc:nested-flattening,lag:regular-point-basics,lag:regular-locus-dense,mc:tangent-direction-along-basic,mc:tangent-direction-along-exists,mc:contact-hypersurface-along,rem:dimension}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.CodimOneSupportAlong.codimOnePartAlong_subset,Hironaka.CodimOneSupportAlong.mem_codimOnePartAlong_iff,Hironaka.CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff,Hironaka.CodimOneSupportAlong.isClosed_codimOnePartAlong,Hironaka.CodimOneSupportAlong.regularAtDim_codimOnePartAlong,Hironaka.CodimOneSupportAlong.isClosedSubmanifold_codimOnePartAlong,Hironaka.CodimOneSupportAlong.exists_isOpen_cosupport_inter_eq_codimOnePartAlong}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff_eq_zero}\lean{Hironaka.CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff_eq_zero_of_isInSpanOnAt,Hironaka.CodimOneSupportAlong.isClosed_cosupport_diff_codimOnePartAlong,Hironaka.CodimOneSupportAlong.lt_of_regularAtDim_cosupport_diff_codimOnePartAlong}
+\lean{Hironaka.CodimOneSupportAlong.codimOnePartAlong_subset,Hironaka.CodimOneSupportAlong.mem_codimOnePartAlong_iff,Hironaka.CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff,Hironaka.CodimOneSupportAlong.isClosed_codimOnePartAlong,Hironaka.CodimOneSupportAlong.regularAtDim_codimOnePartAlong,Hironaka.CodimOneSupportAlong.isClosedSubmanifold_codimOnePartAlong,Hironaka.CodimOneSupportAlong.exists_isOpen_cosupport_inter_eq_codimOnePartAlong}\upstreamlean{history-4b0662e12ab74cdd}\lean{Hironaka.CodimOneSupportAlong.eventually_mem_codimOnePartAlong_iff_eq_zero_of_isInSpanOnAt,Hironaka.CodimOneSupportAlong.isClosed_cosupport_diff_codimOnePartAlong,Hironaka.CodimOneSupportAlong.lt_of_regularAtDim_cosupport_diff_codimOnePartAlong}
 \mixedleanok
 Let \(N\) be a closed submanifold and \((\mathfrak a|_N,\mu)\) coherent, of maximal order along \(N\), \(\mu\ge1\), with support \(S\) and codimension-one part \(R=R_N(\mathfrak a,\mu)\)
 along \(N\). Then:
@@ -931,7 +931,7 @@ which is regular of dimension \(k\) at \(y\) (Lemma~\ref{mc:contact-hypersurface
 \label{bcalc:codim-one-step-along}
 \uses{bcalc:codim-one-along,bcalc:codim-one-part-along,bcalc:transform-off-centre,bcalc:codim-one-step,bcalc:codim-one-step-rest}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneSupportAlong.cosupp_geoTransform_inter_preimage_codimOnePartAlong_eq_empty,TranscendentalNakamaye.Pending.CodimOneSupportAlong.cosupp_geoTransform_subset_preimage_diff_codimOnePartAlong}
+\upstreamlean{history-70928f99cc651dab,history-f38af83a79334fec}
 \upstreamleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have \(N\) a closed submanifold, \(\mathfrak a\) coherent, \(d\ge1\), and be of maximal order along \(N\); let \(\pi\) be the
 blowup along the codimension-one part \(R\) of its support along \(N\). Then the cosupport of the transform does not meet the exceptional divisor
@@ -974,7 +974,7 @@ generators.
 \label{bcalc:member-pullback}
 \uses{bcalc:hyperplane-ideal,bcalc:snc-simultaneous,bcalc:monomial-lift,bcalc:snc-chart,bcalc:strict-ideal,bcalc:exceptional-divisor,hir:snc}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberPullback.exists_chart_generators}\upstreamlean{TranscendentalNakamaye.Pending.MemberPullback.mem_pullback_member_iff_of_subset}\lean{Hironaka.MemberPullback.mem_pullback_member_iff_of_not_subset}
+\lean{Hironaka.MemberPullback.exists_chart_generators}\upstreamlean{history-c3362adaf7c6149d}\lean{Hironaka.MemberPullback.mem_pullback_member_iff_of_not_subset}
 \mixedleanok
 Let \(\pi\) be the blowup along \(C\), \(D=\pi^{-1}(C)\), \(E\) a simple normal crossings divisor with which \(C\) has normal crossings, \(H\) a member of
 \(E\) and \(H'=\overline{\pi^{-1}(H\setminus C)}\). At a point \(z\) of the blowup:
@@ -1004,7 +1004,7 @@ and \(\pi^*\mathcal I_H=(W_jW_t)=(W_j)(W_t)\), resp.\ \((W_j)=(W_j)\cdot\mathcal
 \label{bcalc:monomial-chart}
 \uses{bcalc:snc-simultaneous,bcalc:member-pullback,bcalc:monomial-lift,bcalc:snc-chart,bcalc:hyperplane-ideal,bcalc:strict-ideal,bcalc:exceptional-divisor,hir:monomial-factorization,ana:blowup-exceptional-image,hir:snc}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.MonomialBlowup.exists_unit_of_isInSpanAt,Hironaka.MonomialBlowup.eventually_subset_iff_le,Hironaka.MonomialBlowup.exists_monomial_chart}\upstreamlean{TranscendentalNakamaye.Pending.MonomialBlowup.frequently_ne_zero_of_generator}
+\lean{Hironaka.MonomialBlowup.exists_unit_of_isInSpanAt,Hironaka.MonomialBlowup.eventually_subset_iff_le,Hironaka.MonomialBlowup.exists_monomial_chart}\upstreamlean{history-759f411b1ce45fc9}
 \mixedleanok
 Let \(\pi\) be the blowup along \(C\), \(D=\pi^{-1}(C)\), \(E=(H_1,\dots,H_s)\) a simple normal crossings divisor with which \(C\) has only
 normal crossings, \(H_i'=\overline{\pi^{-1}(H_i\setminus C)}\), and \(z\) a point with \(x=\pi(z)\in C\). There are an open \(U\ni z\), a holomorphic
@@ -1038,7 +1038,7 @@ at \(z\). The exponent of \(W_j\) is the sum of the \(a_i\) with \(s_i\ge k\), t
 \label{bcalc:monomial-transform}
 \uses{bcalc:monomial-chart,bcalc:controlled-transform-def,bcalc:controlled-transform,bcalc:exceptional-divisor,hir:monomial-factorization,hir:geo-transform-ambient,hir:marked-ideal}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.MonomialBlowup.mem_controlledTransform_iff_of_eq,TranscendentalNakamaye.Pending.MonomialBlowup.mem_geoTransform_iff_of_eq,TranscendentalNakamaye.Pending.MonomialBlowup.exists_monomial_chart_transform}
+\upstreamlean{history-14cecf6adcd036e4,history-bb03b5c5965bf830,history-7847d470ccaf5698}
 \upstreamleanok
 Let \(\pi\), \(D\), \(z\) and \(\mathfrak a\) be as follows.
 \begin{enumerate}
@@ -1066,7 +1066,7 @@ Lemma~\ref{bcalc:monomial-chart}(3).
 \label{bcalc:monomial-transform-coords}
 \uses{bcalc:monomial-transform,bcalc:monomial-chart,bcalc:snc-chart,bcalc:snc-transform,bcalc:hyperplane-ideal,bcalc:exceptional-divisor,hir:geo-transform}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.MonomialBlowup.exists_snc_chart_geoTransform,TranscendentalNakamaye.Pending.MonomialBlowup.exists_snc_chart_geoTransform_of_flat}\lean{Hironaka.MonomialBlowup.mem_centre_iff_of_generator,Hironaka.MonomialBlowup.mem_iff_of_vanishingIdeal_eq,Hironaka.MonomialBlowup.prod_map_append_singleton}
+\upstreamlean{history-526d768b08747456,history-423f15db2b293820}\lean{Hironaka.MonomialBlowup.mem_centre_iff_of_generator,Hironaka.MonomialBlowup.mem_iff_of_vanishingIdeal_eq,Hironaka.MonomialBlowup.prod_map_append_singleton}
 \mixedleanok
 Let \((X,X,E,\mathfrak a,d)\) be a marked ideal with \(\mathfrak a\) coherent, \(E=(H_1,\dots,H_s)\) a simple normal crossings divisor, \(C\) a centre with only
 normal crossings with \(E\), \(\pi\) the blowup along \(C\) and \(z\) a point with \(x=\pi(z)\in C\). Suppose \(\mathfrak a=(\prod_{x\in H_i}u_i^{a_i})\) at \(x\), with
@@ -1094,7 +1094,7 @@ Theorem~\ref{bcalc:snc-transform}; Definition~\ref{hir:geo-transform}). Flat coo
 \label{bcalc:monomial-transform-along}
 \uses{bcalc:monomial-chart,bcalc:monomial-transform,hir:marked-operations-along-step,hir:geo-transform-wellformed,hir:geo-transform-coherent,hir:monomial-factorization,bcalc:strict-submanifold,bcalc:exceptional-divisor,hir:geo-transform,hir:marked-ideal}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.MonomialBlowupAlong.isInSpanOnAt_geoTransform_iff_of_eq}\upstreamlean{TranscendentalNakamaye.Pending.MonomialBlowupAlong.exists_monomial_chart_transform_along}\lean{Hironaka.MonomialBlowupAlong.isInSpanOnAt_comp_of_mem_pullback,Hironaka.MonomialBlowupAlong.isInSpanOnAt_pullback_comp}
+\lean{Hironaka.MonomialBlowupAlong.isInSpanOnAt_geoTransform_iff_of_eq}\upstreamlean{history-f6601220a30905a3}\lean{Hironaka.MonomialBlowupAlong.isInSpanOnAt_comp_of_mem_pullback,Hironaka.MonomialBlowupAlong.isInSpanOnAt_pullback_comp}
 \mixedleanok
 Let \((M,N,E,\mathfrak a,d)\) be a marked ideal with \(N\) a closed submanifold and \(\mathfrak a\) coherent, \(C\) an admissible centre, \(\pi\) the blowup along \(C\),
 \(N'=\overline{\pi^{-1}(N\setminus C)}\), \(\mathfrak a'\) the transformed ideal, and \(z\in N'\) with \(\pi(z)\in C\). Write \(\operatorname{Res}_W\mathfrak b=\operatorname{Res}_W\mathfrak c\)
@@ -1228,7 +1228,7 @@ maximality of \(s\) becomes the hypothesis that no member outside \(S\) meets \(
 \label{bcalc:member-intersection}
 \uses{hir:snc,hir:transform,bcalc:snc-simultaneous,bcalc:snc-transform-nc,lag:regular-locus-dense,ana:blowups}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.BoundaryCount.memberInter,Hironaka.BoundaryCount.isClosed_memberInter,Hironaka.BoundaryCount.mem_coordSubspace_biUnion,Hironaka.BoundaryCount.complexCoordinatePlane_min,Hironaka.BoundaryCount.hasNormalCrossings_memberInter,Hironaka.BoundaryCount.isClosedSubmanifold_memberInter}\upstreamlean{TranscendentalNakamaye.Pending.BoundaryCount.isAdmissibleCentre_memberInter}
+\lean{Hironaka.BoundaryCount.memberInter,Hironaka.BoundaryCount.isClosed_memberInter,Hironaka.BoundaryCount.mem_coordSubspace_biUnion,Hironaka.BoundaryCount.complexCoordinatePlane_min,Hironaka.BoundaryCount.hasNormalCrossings_memberInter,Hironaka.BoundaryCount.isClosedSubmanifold_memberInter}\upstreamlean{history-1b660d3bc093e50d}
 \mixedleanok
 Let \(E\) be a simple normal crossings divisor on \(X\) and \(S\) a set of indices of members. Then \(H_S\) is closed and has only normal
 crossings with \(E\). If \(n>0\), \(H_S\) is a closed submanifold. If \(E\) is the divisor of a marked ideal \(\underline{\mathcal I}\) and
@@ -1249,7 +1249,7 @@ Lemma~\ref{bcalc:snc-simultaneous} gives coordinates at \(x\) in which \(H_S=\ma
 \label{bcalc:member-intersection-along}
 \uses{bcalc:member-intersection,hir:snc,bcalc:snc-simultaneous,bcalc:snc-transform-nc,lag:regular-locus-dense,hir:transform,hir:marked-ideal}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberInterAlong.hasNormalCrossings_inter_memberInter,Hironaka.MemberInterAlong.isClosedSubmanifold_inter_memberInter}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterAlong.isAdmissibleCentre_inter_memberInter,TranscendentalNakamaye.Pending.MemberInterAlong.isAdmissibleCentre_inter_memberInter_of_isWellFormed}
+\lean{Hironaka.MemberInterAlong.hasNormalCrossings_inter_memberInter,Hironaka.MemberInterAlong.isClosedSubmanifold_inter_memberInter}\upstreamlean{history-40dd9136f9a25c69,history-333d18507cfd18e2}
 \mixedleanok
 Let \(E\) be a simple normal crossings divisor on \(X\) transverse to a closed set \(N\), and \(S\) a set of indices of members. Then
 \(N\cap H_S\) is closed and has only normal crossings with \(E\). If \(n>0\), \(N\cap H_S\) is a closed submanifold. If \(N\) and \(E\) are those of a
@@ -1273,7 +1273,7 @@ Definition~\ref{hir:transform}; a well formed marked ideal has \(N\) closed and 
 \label{bcalc:boundary-count}
 \uses{hir:snc,bcalc:strict-submanifold,hir:test-tower,hir:test-tower-basic,hir:geo-transform,hir:geo-transform-basic}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality,wlodarczyk09-analytic-resolution:page-0025}
-\lean{Hironaka.BoundaryCount.boundaryCount,Hironaka.BoundaryCount.eventually_boundaryCount_le,Hironaka.BoundaryCount.boundaryCount_map,Hironaka.BoundaryCount.boundaryCount_map_geoStrictTransform_le}\upstreamlean{TranscendentalNakamaye.Pending.BoundaryCount.isClosed_of_mem_take_E_transformAlong,TranscendentalNakamaye.Pending.BoundaryCount.boundaryCount_take_E_transformAlong_le}\lean{Hironaka.BoundaryCount.isClosed_of_mem_take_E_geoTransformAlong}\upstreamlean{TranscendentalNakamaye.Pending.BoundaryCount.boundaryCount_take_E_geoTransformAlong_le}
+\lean{Hironaka.BoundaryCount.boundaryCount,Hironaka.BoundaryCount.eventually_boundaryCount_le,Hironaka.BoundaryCount.boundaryCount_map,Hironaka.BoundaryCount.boundaryCount_map_geoStrictTransform_le}\upstreamlean{history-0cdd9d27e6ce5406,history-c7e22222a72f0d68}\lean{Hironaka.BoundaryCount.isClosed_of_mem_take_E_geoTransformAlong}\upstreamlean{history-092b06a43767b839}
 \mixedleanok
 Let \(E\) be a finite sequence of closed subsets of \(X\). (1) \(s\) is upper semicontinuous: \(s(y)\le s(x)\) for all \(y\) near \(x\).
 (2) For a continuous map \(\pi\colon Y\to X\) and any \(C\), \(s'(z)\le s(\pi(z))\) for every \(z\in Y\), where \(s'(z)\) counts the
@@ -1297,7 +1297,7 @@ each stage composes with the induction hypothesis.
 \label{bcalc:boundary-count-drop}
 \uses{bcalc:member-intersection,bcalc:boundary-count,bcalc:snc-simultaneous,bcalc:monomial-lift,bcalc:snc-chart,bcalc:strict-submanifold}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality,wlodarczyk09-analytic-resolution:page-0025}
-\upstreamlean{TranscendentalNakamaye.Pending.BoundaryCount.boundaryCount_map_geoStrictTransform_lt,TranscendentalNakamaye.Pending.BoundaryCount.card_filter_mem_geoStrictTransform_lt,TranscendentalNakamaye.Pending.BoundaryCount.boundaryCount_map_geoStrictTransform_lt_boundaryCount}
+\upstreamlean{history-016136365eb9360a,history-3951300ba6ed550b,history-667d533094da67a1}
 \upstreamleanok
 Let \(E\) be a simple normal crossings divisor on \(X\), \(S\) a set of indices such that no member \(H_i\) with \(i\notin S\) meets
 \(C=H_S\), and \(\pi\) the blowup along \(C\). Then \(s'(z)<\#S\) for every \(z\in\pi^{-1}(C)\). (Włodarczyk, Step 1aa: ``by blowing up
@@ -1331,7 +1331,7 @@ because \(z\) lies on their strict transforms. As \(\varepsilon\to0\), \(\Phi^{-
 \label{bcalc:boundary-count-drop-along}
 \uses{bcalc:boundary-count-drop,bcalc:boundary-count,bcalc:member-intersection-along,bcalc:snc-simultaneous,bcalc:monomial-lift,bcalc:snc-chart,bcalc:strict-submanifold}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality,wlodarczyk09-analytic-resolution:page-0025}
-\lean{Hironaka.BoundaryCountAlong.card_filter_mem_geoStrictTransform_lt_along,Hironaka.BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_boundaryCount_along}\upstreamlean{TranscendentalNakamaye.Pending.BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_along}
+\lean{Hironaka.BoundaryCountAlong.card_filter_mem_geoStrictTransform_lt_along,Hironaka.BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_boundaryCount_along}\upstreamlean{history-bd2043f32115c2fc}
 \mixedleanok
 Let \(E\) be a simple normal crossings divisor on \(X\) transverse to a set \(N\), \(C\subset N\) the centre of the blowup \(\pi\), with only normal
 crossings with \(E\), \(N'=\overline{\pi^{-1}(N\setminus C)}\) the strict transform, and \(S\) a set of indices of members. Let \(z\in N'\) with
@@ -1368,7 +1368,7 @@ near \(x\) the centre is \(N\cap\bigcap_{x\in H_i}H_i\), and (2) gives \(s'(z)<s
 \label{bcalc:member-intersection-drop-along}
 \uses{bcalc:member-intersection-along,bcalc:snc-simultaneous,bcalc:sub-divisor,bcalc:nc-comparison,hir:snc,hir:marked-ideal}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.BoundaryCountAlong.isTransverse_inter_memberInter_of_forall,Hironaka.BoundaryCountAlong.isTransverse_inter_memberInter_drop,Hironaka.BoundaryCountAlong.isSNCDivisor_drop}\upstreamlean{TranscendentalNakamaye.Pending.BoundaryCountAlong.inter_memberInter_subset_of_notMem_drop}\lean{Hironaka.BoundaryCountAlong.isWellFormed_inter_memberInter_drop}
+\lean{Hironaka.BoundaryCountAlong.isTransverse_inter_memberInter_of_forall,Hironaka.BoundaryCountAlong.isTransverse_inter_memberInter_drop,Hironaka.BoundaryCountAlong.isSNCDivisor_drop}\upstreamlean{history-f4eff32f4a9d4767}\lean{Hironaka.BoundaryCountAlong.isWellFormed_inter_memberInter_drop}
 \mixedleanok
 Let \(E\) be a simple normal crossings divisor on \(X\) transverse to \(N\), \(S\) a set of indices of members, and \(E_S\) the subsequence of the
 members with index not in \(S\). Then \(E_S\) is a simple normal crossings divisor, transverse to \(N\cap H_S\) (more generally, any finite sequence of
@@ -1412,7 +1412,7 @@ As for one member (Lemma~\ref{bcalc:trace-strict-transform}). \(\subset\): stric
 \label{bcalc:member-intersection-tower}
 \uses{bcalc:member-intersection-strict,mc:strict-along,hir:wellformed-tower,hir:test-tower,hir:geo-transform,hir:blowup-tower,bcalc:boundary-count}
 \source{wlodarczyk09-analytic-resolution:page-0025,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberInterTowerAlong.strictAlong_mono,Hironaka.MemberInterTowerAlong.isClosed_strictAlong,Hironaka.MemberInterTowerAlong.strictAlong_subset_preimage,Hironaka.MemberInterTowerAlong.disjoint_strictAlong,Hironaka.MemberInterTowerAlong.take_E_geoTransformAlong,Hironaka.MemberInterTowerAlong.length_E_le_length_E_geoTransformAlong,Hironaka.MemberInterTowerAlong.get_E_geoTransformAlong,Hironaka.MemberInterTowerAlong.setOf_forall_strictAlong_eq_memberInter,Hironaka.MemberInterTowerAlong.strictAlong_inter_memberInter}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterTowerAlong.mem_strictAlong_inter_memberInter_iff,TranscendentalNakamaye.Pending.MemberInterTowerAlong.mem_strictAlong_inter_memberInter_self}
+\lean{Hironaka.MemberInterTowerAlong.strictAlong_mono,Hironaka.MemberInterTowerAlong.isClosed_strictAlong,Hironaka.MemberInterTowerAlong.strictAlong_subset_preimage,Hironaka.MemberInterTowerAlong.disjoint_strictAlong,Hironaka.MemberInterTowerAlong.take_E_geoTransformAlong,Hironaka.MemberInterTowerAlong.length_E_le_length_E_geoTransformAlong,Hironaka.MemberInterTowerAlong.get_E_geoTransformAlong,Hironaka.MemberInterTowerAlong.setOf_forall_strictAlong_eq_memberInter,Hironaka.MemberInterTowerAlong.strictAlong_inter_memberInter}\upstreamlean{history-9758a29b4f138c6b,history-932ae64a245ffccd}
 \mixedleanok
 Let \(T\) be a tower over \(X\), and write \(A_T\) for the iterated strict transform of \(A\subset X\) (Definition~\ref{mc:strict-along}). Then \(A\mapsto A_T\) is
 monotone; for \(A\) closed, \(A_T\) is closed and lies over \(A\), so the strict transforms of disjoint closed sets are disjoint. For a marked ideal
@@ -1441,7 +1441,7 @@ Lemma~\ref{bcalc:member-intersection-strict} applied to \(N_T\), \(E_T\), \(C\) 
 \label{bcalc:centres-localise}
 \uses{bcalc:member-intersection-tower,mc:strict-along,hir:open-restriction-tower,hir:test-tower,mc:coefficient-restriction-drop-along}
 \source{wlodarczyk09-analytic-resolution:page-0025,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberInterTowerAlong.strictAlong_union}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterTowerAlong.centresIn_restrict_of_centresIn_union}\lean{Hironaka.MemberInterTowerAlong.centresIn_restrict_of_forall}
+\lean{Hironaka.MemberInterTowerAlong.strictAlong_union}\upstreamlean{history-12b3a2d5d3165910}\lean{Hironaka.MemberInterTowerAlong.centresIn_restrict_of_forall}
 \mixedleanok
 Let \(T\) be a tower over \(X\) and \(U\subset X\) open, and write \(T|_U\) for its restriction (Lemma~\ref{hir:open-restriction-tower}). Then \((A\cup B)_T=A_T\cup B_T\).
 (1) If the centres of \(T\) lie in the strict transforms of \(A\cup B\), with \(B\) closed and disjoint from \(U\), then the centres of \(T|_U\) lie in the strict
@@ -1465,7 +1465,7 @@ The centres of \(T|_U\) are the traces of those of \(T\) on the open preimages o
 \label{bcalc:exceptional-transverse-tower}
 \uses{bcalc:member-intersection-tower,bcalc:snc-transform,bcalc:strict-submanifold,bcalc:sub-divisor,hir:wellformed-tower,hir:test-tower,hir:snc-basic,mc:strict-along}
 \source{wlodarczyk09-analytic-resolution:page-0025,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberInterTowerAlong.drop_E_geoTransformAlong_step,Hironaka.MemberInterTowerAlong.isTransverse_drop_E_geoTransformAlong}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterTowerAlong.isTransverse_E_geoTransformAlong,TranscendentalNakamaye.Pending.MemberInterTowerAlong.isWellFormed_strictAlong_drop}\upstreamunbound{TranscendentalNakamaye.Pending.MemberInterTowerAlong.isTransverse_drop_E_geoTransformAlong',TranscendentalNakamaye.Pending.MemberInterTowerAlong.isWellFormed_strictAlong_drop'}
+\lean{Hironaka.MemberInterTowerAlong.drop_E_geoTransformAlong_step,Hironaka.MemberInterTowerAlong.isTransverse_drop_E_geoTransformAlong}\upstreamlean{history-db9f4fd84d1dfa65,history-256f09462bf540c4}\upstreamunbound{history-f5e5cb97357ee0cc,history-85ae1a20839e64b3}
 \historicalleanok
 Let \((M,N,E,\mathfrak a,d)\) be well formed, \(W\) a closed submanifold and \(T\) a multiple test blow-up whose centres lie in the strict transforms of \(W\).
 Then \(W_T\) is a closed submanifold, and the members of \(E_T\) after the first \(\#E\) (the exceptional divisors of \(T\)) form a simple normal crossings
@@ -1507,7 +1507,7 @@ coordinates on the ambient manifold for \(W\) and the members (Lemma~\ref{hir:sn
 \label{bcalc:exceptional-transverse-open}
 \uses{bcalc:exceptional-transverse-tower,bcalc:centres-localise,bcalc:normal-crossings-local,hir:open-restriction-tower,hir:open-restriction-marked,hir:giraud-tower-along}
 \source{wlodarczyk09-analytic-resolution:page-0027,bierstone-milman08-functoriality}
-\lean{Hironaka.CodimOneAdmissibleAlong.isTransverse_drop_E_inter_preimage}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneAdmissibleAlong.isTransverse_drop_E_of_forall_eventually}
+\lean{Hironaka.CodimOneAdmissibleAlong.isTransverse_drop_E_inter_preimage}\upstreamlean{history-b558be70d80b1bb4}
 \mixedleanok
 Let \((M,N,E,\mathfrak a,d)\) be well formed, \(U\subset M\) open and \(A\) a set whose trace on \(U\) is a closed submanifold of \(U\), and assume that every
 admissible centre \(C\) of every multiple test blow-up \(T\) satisfies \(C\cap T^{-1}(U)\subset A_T\) (for a tangent direction \(u\) along \(N\) on \(U\) and
@@ -1527,7 +1527,7 @@ statement for \(R\).
 \label{bcalc:codim-one-admissible-along}
 \uses{bcalc:exceptional-transverse-open,bcalc:codim-one-part-along,bcalc:codim-one-local-along,hir:marked-ideal,hir:giraud-tower-along,mc:tangent-direction-along-exists,bcalc:transform-off-centre-tower,bcalc:giraud-local-along,hir:open-restriction-tower,hir:geo-transform-basic,bcalc:normal-crossings-local}
 \source{wlodarczyk09-analytic-resolution:page-0027}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOneAdmissibleAlong.isAdmissibleCentre_codimOnePartAlong}\lean{Hironaka.CodimOneAdmissibleAlong.isTransverse_codimOnePartAlong_drop_E}\upstreamlean{TranscendentalNakamaye.Pending.CodimOneAdmissibleAlong.isAdmissibleCentre_codimOnePartAlong_stage}
+\upstreamlean{history-c2cf1c3f068f7b6f}\lean{Hironaka.CodimOneAdmissibleAlong.isTransverse_codimOnePartAlong_drop_E}\upstreamlean{history-1753cbe014e8b431}
 \mixedleanok
 Let \((M,N,E,\mathfrak a,d)\) have \(N\) a closed submanifold and \(\mathfrak a\) coherent, be of maximal order along \(N\), \(d\ge1\). If the codimension-one part along \(N\) of its cosupport
 (Definition~\ref{bcalc:codim-one-part-along-def}) is transverse to \(E\), it is an admissible centre. If \((M,N,E,\mathfrak a,d)\) is well formed, of
@@ -1580,7 +1580,7 @@ of \(A\) (Remark~\ref{rem:open-subset-analytic}).
 \label{bcalc:codim-one-part-canonical}
 \uses{bcalc:codim-one-part-along-def,bcalc:regular-point-transport,hir:biholomorphism-transform,hir:open-restriction-marked,hir:open-restriction-tower,hir:tower-transport,hir:tower-transport-resolution,hir:restricted-equivalence,hir:restricted-equivalence-basic,hir:marked-equivalence,hir:marked-equivalence-basic,mc:strict-along,hir:cosupport,rem:dimension,rem:open-subset-analytic}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.CodimOnePartCanonical.mem_codimOnePartAlong_iff_of_eventually}\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartCanonical.mem_codimOnePartAlong_congr,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_congr}\lean{Hironaka.CodimOnePartCanonical.cosupport_pullback,Hironaka.CodimOnePartCanonical.codimOnePartAlong_pullback,Hironaka.CodimOnePartCanonical.codimOnePartAlong_pullback_val}\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_transport,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_restrict,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_restrictEquiv,TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransformAlong_of_wEquiv}
+\lean{Hironaka.CodimOnePartCanonical.mem_codimOnePartAlong_iff_of_eventually}\upstreamlean{history-4561174851fd7e7d,history-f2ccd630aaeaaa8f}\lean{Hironaka.CodimOnePartCanonical.cosupport_pullback,Hironaka.CodimOnePartCanonical.codimOnePartAlong_pullback,Hironaka.CodimOnePartCanonical.codimOnePartAlong_pullback_val}\upstreamlean{history-643d77558121e7a5,history-b1f954f110dbb7ee,history-d8697822c080b54e,history-55ffd47623c6246c}
 \mixedleanok
 Write \(R_N(\mathfrak a,\mu)\) for the codimension-one part along \(N\) of \(\operatorname{cosupp}(\mathfrak a|_N,\mu)\) (Definition~\ref{bcalc:codim-one-part-along-def}), and
 \(R(\underline{\mathcal I})=R_N(\mathfrak a,d)\) for \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\). Let \(\mathfrak a\) consist of holomorphic germs.
@@ -1616,7 +1616,7 @@ blow-ups (Definition~\ref{hir:marked-equivalence}), and \(N_T\) is the iterated 
 \label{bcalc:codim-one-part-off-centre}
 \uses{bcalc:codim-one-part-canonical,bcalc:regular-point-transport,bcalc:isomorphism-off-centre,bcalc:transform-off-centre,hir:open-restriction-tower,hir:geo-transform}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.CodimOnePartCanonical.mem_codimOnePartAlong_geoTransform_iff}\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartCanonical.codimOnePartAlong_geoTransform_empty}\lean{Hironaka.CodimOnePartCanonical.mem_codimOnePartAlong_geoTransformAlong_step_iff}
+\lean{Hironaka.CodimOnePartCanonical.mem_codimOnePartAlong_geoTransform_iff}\upstreamlean{history-d6507e9f2950042e}\lean{Hironaka.CodimOnePartCanonical.mem_codimOnePartAlong_geoTransformAlong_step_iff}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have \(N\) closed and \(\mathfrak a\) consisting of holomorphic germs, \(\pi\) the blowup along \(C\) and
 \(\underline{\mathcal I}'\) the transform. If \(\pi(z)\notin C\), then \(z\in R(\underline{\mathcal I}')\) if and only if \(\pi(z)\in R(\underline{\mathcal I})\). In particular a
@@ -1638,7 +1638,7 @@ coherent (Lemma~\ref{hir:open-restriction-tower}).
 \label{bcalc:boundary-count-canonical}
 \uses{bcalc:boundary-count,bcalc:transform-off-centre,hir:tower-transport,hir:tower-transport-resolution,hir:open-restriction-tower,hir:geo-transform}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.CodimOnePartCanonical.boundaryCount_map_preimage,Hironaka.CodimOnePartCanonical.boundaryCount_map_geoStrictTransform_of_notMem,Hironaka.CodimOnePartCanonical.boundaryCount_take_E_geoTransformAlong_step_of_notMem}\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartCanonical.boundaryCount_take_E_geoTransformAlong_transport,TranscendentalNakamaye.Pending.CodimOnePartCanonical.boundaryCount_take_E_geoTransformAlong_restrict}
+\lean{Hironaka.CodimOnePartCanonical.boundaryCount_map_preimage,Hironaka.CodimOnePartCanonical.boundaryCount_map_geoStrictTransform_of_notMem,Hironaka.CodimOnePartCanonical.boundaryCount_take_E_geoTransformAlong_step_of_notMem}\upstreamlean{history-91af67a27319b367,history-439a0bc9a7975dcb}
 \mixedleanok
 For a map \(f\) and a sequence \(E\) of sets, the number of members of \((f^{-1}H)_{H\in E}\) through \(z\) is the number of members of \(E\) through \(f(z)\). Let
 \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have closed members, and write \(s_T(z)\) for the number of the first \(\#E\) members of \(E_T\) (the strict transforms of the
@@ -1673,7 +1673,7 @@ nonzero. As in Proposition~\ref{bcalc:codim-one-part-canonical}, \(R(\underline{
 \label{bcalc:codim-one-part-tower}
 \uses{bcalc:codim-one-part-along-def,bcalc:codim-one-part-along,bcalc:codim-one-local-along,bcalc:codim-one-part-off-centre,bcalc:transform-off-centre-tower,hir:giraud-tower-along,mc:tangent-direction-along-exists,mc:strict-along,hir:wellformed-tower,hir:test-tower}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
-\lean{Hironaka.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_subset}\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_eq_empty}
+\lean{Hironaka.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_subset}\upstreamlean{history-bd54920a7dfc599b}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed, of maximal order along \(N\), with \(d\ge1\), and let \(T\) be a multiple test blow-up of
 \(\underline{\mathcal I}\) with projection \(p\). Then \(R(\underline{\mathcal I}_T)\subset p^{-1}(R(\underline{\mathcal I}))\). In particular, if \(R(\underline{\mathcal I})=\emptyset\),
@@ -1698,7 +1698,7 @@ formed (Lemma~\ref{hir:wellformed-tower}), which the cited results need at each 
 \label{bcalc:codim-one-part-empty}
 \uses{bcalc:codim-one-part-tower,bcalc:codim-one-step-along,bcalc:codim-one-part-off-centre,hir:geo-transform-basic,hir:wellformed-tower,hir:along-transform}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
-\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransform_codimOnePartAlong_eq_empty,TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_append_eq_empty}
+\upstreamlean{history-9740e34519b24b99,history-07bc964850775131}
 \upstreamleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have \(N\) a closed submanifold, \(\mathfrak a\) coherent, \(d\ge1\), and be of maximal order along \(N\); let \(\pi\) be
 the blowup along \(R(\underline{\mathcal I})\) and \(\underline{\mathcal I}'\) the transform. Then \(R(\underline{\mathcal I}')=\emptyset\). If \(\underline{\mathcal I}\) is well
@@ -1717,7 +1717,7 @@ Theorem~\ref{bcalc:codim-one-part-tower} to \(\underline{\mathcal I}'\).
 \label{bcalc:contact-restriction-nonzero}
 \uses{bcalc:codim-one-part-canonical,bcalc:codim-one-part-tower,mc:contact-equivalence-open-along,mc:contact-hypersurface-along,mc:tangent-direction-along,mc:homogenized-along-basic,hir:open-restriction-ideal,hir:marked-equivalence,hir:exponent-along,hir:cosupport,hir:wellformed-tower,ana:ideal-sheaves}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0027}
-\lean{Hironaka.CodimOnePartTowerAlong.eventually_forall_eq_zero_of_not_isNonzeroAlongAt,Hironaka.CodimOnePartTowerAlong.isNonzeroAlongAt_of_notMem_codimOnePartAlong,Hironaka.CodimOnePartTowerAlong.IsTangentDirectionAlong.exists_regularAtDim_succ}\upstreamlean{TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.isNonzeroAlongAt_contact_open,TranscendentalNakamaye.Pending.CodimOnePartTowerAlong.isNonzeroAlongAt_contact_open_geoTransformAlong}
+\lean{Hironaka.CodimOnePartTowerAlong.eventually_forall_eq_zero_of_not_isNonzeroAlongAt,Hironaka.CodimOnePartTowerAlong.isNonzeroAlongAt_of_notMem_codimOnePartAlong,Hironaka.CodimOnePartTowerAlong.IsTangentDirectionAlong.exists_regularAtDim_succ}\upstreamlean{history-4d5d6b6a3c27bf59,history-1909f4e060a32e2c}
 \mixedleanok
 \begin{enumerate}
 \item Let \(N\) be regular of dimension \(k+1\) and \(A\) regular of dimension \(k\) at \(y\), \(\mathfrak b\) coherent, and suppose that near \(y\)
@@ -1777,7 +1777,7 @@ points with \(s(x)=s\) are the points of value \((s,\infty)\) of Step~1aa.
 \label{bcalc:member-locus-canonical}
 \uses{bcalc:member-locus-def,bcalc:isomorphism-off-centre,bcalc:transform-off-centre,bcalc:codim-one-part-canonical,hir:biholomorphism-transform,hir:tower-transport,hir:tower-transport-resolution,hir:open-restriction-marked,hir:open-restriction-tower,hir:restricted-equivalence,hir:restricted-equivalence-basic,hir:marked-equivalence,hir:marked-equivalence-basic,mc:strict-along,bcalc:boundary-count,hir:geo-transform,hir:geo-transform-basic}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberInterLocusAlong.forall_get_iff,Hironaka.MemberInterLocusAlong.mem_memberInterLocus_iff}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_subset}\lean{Hironaka.MemberInterLocusAlong.setOf_forall_mem_eq_memberInter,Hironaka.MemberInterLocusAlong.mem_memberInterLocus_map_congr}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.mem_memberInterLocus_map_congr_id}\lean{Hironaka.MemberInterLocusAlong.mem_memberInterLocus_preimage_iff,Hironaka.MemberInterLocusAlong.memberInterLocus_preimage}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.mem_memberInterLocus_append_iff}\lean{Hironaka.MemberInterLocusAlong.map_nhds_eq_of_notMem,Hironaka.MemberInterLocusAlong.mem_memberInterLocus_geoTransform_iff}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_geoTransform_empty}\lean{Hironaka.MemberInterLocusAlong.mem_memberInterLocus_geoTransformAlong_step_iff}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_geoTransformAlong_transport,TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_geoTransformAlong_restrict,TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_geoTransformAlong_of_restrictEquiv,TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_geoTransformAlong_of_wEquiv}
+\lean{Hironaka.MemberInterLocusAlong.forall_get_iff,Hironaka.MemberInterLocusAlong.mem_memberInterLocus_iff}\upstreamlean{history-7a150152981de0ad}\lean{Hironaka.MemberInterLocusAlong.setOf_forall_mem_eq_memberInter,Hironaka.MemberInterLocusAlong.mem_memberInterLocus_map_congr}\upstreamlean{history-3f8110d2d609a95a}\lean{Hironaka.MemberInterLocusAlong.mem_memberInterLocus_preimage_iff,Hironaka.MemberInterLocusAlong.memberInterLocus_preimage}\upstreamlean{history-665cf93d7bbb7a4c}\lean{Hironaka.MemberInterLocusAlong.map_nhds_eq_of_notMem,Hironaka.MemberInterLocusAlong.mem_memberInterLocus_geoTransform_iff}\upstreamlean{history-35398d816cf142fe}\lean{Hironaka.MemberInterLocusAlong.mem_memberInterLocus_geoTransformAlong_step_iff}\upstreamlean{history-97df26a9c96b02fe,history-0754a52049025702,history-64ae32b7957b21c0,history-ce1688a92af0067e}
 \mixedleanok
 \begin{enumerate}
 \item (Locality) Whether \(x\in L_N(E,S)\) depends only on the germs at \(x\) of \(N\), of \(S\) and of the members of \(E\); members not through \(x\) play no role.
@@ -1817,7 +1817,7 @@ equivalent ones have the same \(E\), equal cosupports along their multiple test 
 \label{bcalc:member-locus-level}
 \uses{bcalc:member-locus-def,bcalc:member-locus-canonical,bcalc:boundary-count,bcalc:boundary-count-drop-along,bcalc:boundary-count-canonical,bcalc:member-intersection-tower,bcalc:sub-divisor,mc:strict-along,hir:wellformed-tower,hir:geo-transform-basic,hir:test-tower,hir:marked-ideal}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0025}
-\lean{Hironaka.MemberInterLocusAlong.boundaryCount_eq_of_forall_iff,Hironaka.MemberInterLocusAlong.forall_iff_of_forall_imp_of_boundaryCount_le,Hironaka.MemberInterLocusAlong.eventually_mem_memberInterLocus_level}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_level_geoTransform_eq_empty}\lean{Hironaka.MemberInterLocusAlong.strictAlong_append,Hironaka.MemberInterLocusAlong.strictAlong_inter_forall_mem,Hironaka.MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_subset}\upstreamlean{TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_eq_empty,TranscendentalNakamaye.Pending.MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_append_eq_empty}
+\lean{Hironaka.MemberInterLocusAlong.boundaryCount_eq_of_forall_iff,Hironaka.MemberInterLocusAlong.forall_iff_of_forall_imp_of_boundaryCount_le,Hironaka.MemberInterLocusAlong.eventually_mem_memberInterLocus_level}\upstreamlean{history-4fddd8c5c6cf98f0}\lean{Hironaka.MemberInterLocusAlong.strictAlong_append,Hironaka.MemberInterLocusAlong.strictAlong_inter_forall_mem,Hironaka.MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_subset}\upstreamlean{history-bc36e62755544367,history-20cc944a400b92b0}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed, \(E_0\) a sequence of members of \(E\) (in the algorithm \(E_0=E\), or at a later stage the strict transforms of
 the original members), \(s_0\in\mathbf N\), and \(C=\{x\in L_N(E_0,\operatorname{cosupp}\underline{\mathcal I}):s(x)=s_0\}\), \(s\) counting the members of \(E_0\).
@@ -1902,7 +1902,7 @@ If every germ of \(\mathfrak b\) at \(y\) vanished on \(A\) near \(y\), then, \(
 \label{bcalc:locus-tower-isomorphism}
 \uses{hir:tower-isomorphism,mc:tower-isomorphism-transform,bcalc:codim-one-part-canonical,bcalc:boundary-count-canonical,bcalc:member-locus-def,bcalc:member-locus-canonical,hir:biholomorphism-invariance,hir:open-restriction-tower}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.LocusTowerIsomorphism.codimOnePartAlong_geoTransformAlong_isTowerIso,TranscendentalNakamaye.Pending.LocusTowerIsomorphism.boundaryCount_take_E_geoTransformAlong_isTowerIso,TranscendentalNakamaye.Pending.LocusTowerIsomorphism.memberInterLocus_geoTransformAlong_isTowerIso,TranscendentalNakamaye.Pending.LocusTowerIsomorphism.memberInterLocus_level_geoTransformAlong_isTowerIso,TranscendentalNakamaye.Pending.LocusTowerIsomorphism.isAdmissibleCentre_geoTransformAlong_isTowerIso_iff}
+\upstreamlean{history-5ede5d9230fe212a,history-a64335f51ad8cc15,history-1e3694e4d2c657dc,history-5e4bbc489c7684f2,history-504ec5649f41ac9c}
 \upstreamleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have \(N\) a closed submanifold and \(\mathfrak a\) coherent, \(T\) a multiple test blow-up of \(\underline{\mathcal I}\), \(\Phi\colon M'\to M\) a
 biholomorphism and \(\chi\colon T'\to T\) an isomorphism of towers over \(\Phi\) with last-stage biholomorphism \(\chi_r\) (Definition~\ref{hir:tower-isomorphism}). For
@@ -2003,7 +2003,7 @@ built at a later stage of a canonical segment.
 \label{bcalc:smooth-centre-locus}
 \uses{hir:cosupport,hir:cosupport-basic,hir:transform,hir:snc-basic,bcalc:codim-one-part-along-def,bcalc:codim-one-part-along,lag:regular-point-basics,bcalc:analytic-fill,ana:cartan-coherence,hir:exponent-along,bcalc:contact-restriction-nonzero,hir:centre-function,bcalc:inv-domain-stable}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.SmoothCentreLocus.holomorphicAt_of_mem_vanishingIdeal,Hironaka.SmoothCentreLocus.zeroLocus_vanishingIdeal,Hironaka.SmoothCentreLocus.cosupport_vanishingIdeal_one,Hironaka.SmoothCentreLocus.cosupp_vanishingIdeal}\upstreamlean{TranscendentalNakamaye.Pending.SmoothCentreLocus.isAdmissibleCentre_vanishingIdeal,TranscendentalNakamaye.Pending.SmoothCentreLocus.codimOnePartAlong_vanishingIdeal_subset,TranscendentalNakamaye.Pending.SmoothCentreLocus.mem_codimOnePartAlong_vanishingIdeal_iff,TranscendentalNakamaye.Pending.SmoothCentreLocus.codimOnePartAlong_vanishingIdeal_eq_self,TranscendentalNakamaye.Pending.SmoothCentreLocus.codimOnePartAlong_vanishingIdeal_eq_empty,TranscendentalNakamaye.Pending.SmoothCentreLocus.frequently_mem_diff,TranscendentalNakamaye.Pending.SmoothCentreLocus.isNonzeroAlongAt_vanishingIdeal,TranscendentalNakamaye.Pending.SmoothCentreLocus.isInvDomain_vanishingIdeal}
+\lean{Hironaka.SmoothCentreLocus.holomorphicAt_of_mem_vanishingIdeal,Hironaka.SmoothCentreLocus.zeroLocus_vanishingIdeal,Hironaka.SmoothCentreLocus.cosupport_vanishingIdeal_one,Hironaka.SmoothCentreLocus.cosupp_vanishingIdeal}\upstreamlean{history-9b881eb2b340f5e6,history-a6e0eec6bff0c93a,history-444f11198fb6a9f2,history-56a289b2a47e0a98,history-010a4c00df603b74,history-e13d14812b0d1d81,history-f6bdbb6b5f193dc7,history-aca47127b638a7f9}
 \mixedleanok
 Let \(Z\subset N\) be closed submanifolds of \(M\) and \(\underline{\mathcal I}_Z=(M,N,\emptyset,\mathcal I_Z,1)\), with \(\mathcal I_Z\) the ideal of germs of holomorphic
 functions vanishing on \(Z\).
@@ -2067,7 +2067,7 @@ lie on \(H_i\): a contradiction. The second statement follows at each point.
 \label{bcalc:member-restriction-domain}
 \uses{hir:centre-function,bcalc:member-intersection-dim,bcalc:member-intersection-drop-along,bcalc:member-restriction-nonzero,bcalc:member-locus-def,bcalc:member-locus-level,bcalc:boundary-count,bcalc:member-intersection-tower,bcalc:inv-domain-stable,mc:coefficient-restriction-along,mc:coefficient-restriction-drop-along,mc:homogenized-along-basic,hir:open-restriction-marked,hir:open-restriction-ideal,hir:wellformed-tower,hir:geo-transform-basic,hir:exponent-along}
 \source{wlodarczyk05-hironaka,wlodarczyk09-analytic-resolution:page-0025}
-\lean{Hironaka.InvDomainMemberRestriction.isInvDomain_pullback_val_of_forall,Hironaka.InvDomainMemberRestriction.memberRestrict}\upstreamlean{TranscendentalNakamaye.Pending.InvDomainMemberRestriction.memberRestrict_eq}\lean{Hironaka.InvDomainMemberRestriction.memberRestrict_N,Hironaka.InvDomainMemberRestriction.memberRestrict_E,Hironaka.InvDomainMemberRestriction.memberRestrict_ideal,Hironaka.InvDomainMemberRestriction.memberRestrict_d,Hironaka.InvDomainMemberRestriction.one_le_memberRestrict_d,Hironaka.InvDomainMemberRestriction.isWellFormed_memberRestrict,Hironaka.InvDomainMemberRestriction.dimLE_memberRestrict,Hironaka.InvDomainMemberRestriction.cosupp_memberRestrict,Hironaka.InvDomainMemberRestriction.isNonzeroAlongAt_memberRestrict,Hironaka.InvDomainMemberRestriction.membersThrough,Hironaka.InvDomainMemberRestriction.mem_membersThrough,Hironaka.InvDomainMemberRestriction.memberInter_membersThrough,Hironaka.InvDomainMemberRestriction.membersThrough_nonempty,Hironaka.InvDomainMemberRestriction.exists_opens_forall_mem_imp}\upstreamlean{TranscendentalNakamaye.Pending.InvDomainMemberRestriction.isInvDomain_memberRestrict_membersThrough}\lean{Hironaka.InvDomainMemberRestriction.mem_E_geoTransformAlong_of_mem_map}\upstreamlean{TranscendentalNakamaye.Pending.InvDomainMemberRestriction.isInvDomain_memberRestrict_geoTransformAlong,TranscendentalNakamaye.Pending.InvDomainMemberRestriction.exists_opens_isInvDomain_memberRestrict_geoTransformAlong}
+\lean{Hironaka.InvDomainMemberRestriction.isInvDomain_pullback_val_of_forall,Hironaka.InvDomainMemberRestriction.memberRestrict}\upstreamlean{history-8152ca2f2afbcdb1}\lean{Hironaka.InvDomainMemberRestriction.memberRestrict_N,Hironaka.InvDomainMemberRestriction.memberRestrict_E,Hironaka.InvDomainMemberRestriction.memberRestrict_ideal,Hironaka.InvDomainMemberRestriction.memberRestrict_d,Hironaka.InvDomainMemberRestriction.one_le_memberRestrict_d,Hironaka.InvDomainMemberRestriction.isWellFormed_memberRestrict,Hironaka.InvDomainMemberRestriction.dimLE_memberRestrict,Hironaka.InvDomainMemberRestriction.cosupp_memberRestrict,Hironaka.InvDomainMemberRestriction.isNonzeroAlongAt_memberRestrict,Hironaka.InvDomainMemberRestriction.membersThrough,Hironaka.InvDomainMemberRestriction.mem_membersThrough,Hironaka.InvDomainMemberRestriction.memberInter_membersThrough,Hironaka.InvDomainMemberRestriction.membersThrough_nonempty,Hironaka.InvDomainMemberRestriction.exists_opens_forall_mem_imp}\upstreamlean{history-06c7436a82254220}\lean{Hironaka.InvDomainMemberRestriction.mem_E_geoTransformAlong_of_mem_map}\upstreamlean{history-c420a53b325d3137,history-ef04884cbfe61919}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed with \(d\ge1\), \(n>0\) and \(N\) regular of dimension \(\le k\) at each of its points. For a set \(S\) of indices of
 members let \(\underline{\mathcal S}_S=(M,N\cap H_S,E_S,\mathcal C_N(\mathfrak a),\mu_{\mathcal C})\) be the restriction of the coefficient ideal along \(N\) to \(N\cap H_S\), the members of
@@ -2150,7 +2150,7 @@ set, which the re-basing property of the invariant (Definition~\ref{hir:centre-f
 \label{bcalc:restrict-empty-tower}
 \uses{hir:blowup-tower,hir:open-restriction-tower,hir:tower-split,hir:centre-function}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.RestrictEmptyTower.CentresAvoid,Hironaka.RestrictEmptyTower.CentresOver,Hironaka.RestrictEmptyTower.centresAvoid_refl,Hironaka.RestrictEmptyTower.centresOver_refl,Hironaka.RestrictEmptyTower.centresAvoid_step_iff}\upstreamlean{TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_step_iff}\lean{Hironaka.RestrictEmptyTower.preimage_val_eq_empty_iff,Hironaka.RestrictEmptyTower.isEmptyTower_restrict_iff,Hironaka.RestrictEmptyTower.centresAvoid_of_centresOver}\upstreamlean{TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_of_centresOver,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_append_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_append_iff,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresAvoid_head,TranscendentalNakamaye.Pending.RestrictEmptyTower.centresOver_head,TranscendentalNakamaye.Pending.RestrictEmptyTower.isEmptyTower_restrict_head}
+\lean{Hironaka.RestrictEmptyTower.CentresAvoid,Hironaka.RestrictEmptyTower.CentresOver,Hironaka.RestrictEmptyTower.centresAvoid_refl,Hironaka.RestrictEmptyTower.centresOver_refl,Hironaka.RestrictEmptyTower.centresAvoid_step_iff}\upstreamlean{history-5884037cfa7e9859}\lean{Hironaka.RestrictEmptyTower.preimage_val_eq_empty_iff,Hironaka.RestrictEmptyTower.isEmptyTower_restrict_iff,Hironaka.RestrictEmptyTower.centresAvoid_of_centresOver}\upstreamlean{history-5246914a957accbc,history-9e70e13eb2736bae,history-bc74435d9074fd13,history-7e9c432129fbef0a,history-caf37edb8a6e355e,history-a6a718588bf804ae}
 \mixedleanok
 Let \(T\) be a tower over \(X\) with centres \(C_i\subset X_i\) and projections \(p_i\colon X_i\to X\), and \(U\subset X\) open. The restriction \(T|_U\)
 (Lemma~\ref{hir:open-restriction-tower}) has only empty centres if and only if \(C_i\cap p_i^{-1}(U)=\emptyset\) for every \(i\). In particular, if every
@@ -2225,7 +2225,7 @@ restriction outside.
 \label{bcalc:inv-rebase}
 \uses{hir:centre-function,hir:canonical-segments,hir:restricted-equivalence,hir:marked-equivalence-basic,hir:nonmonomial-step-along,bcalc:inv-domain-stable,hir:invariant-driver,bcalc:member-restriction-rebase,bcalc:restrict-empty-tower,bcalc:companion-domain}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.InvDomainRebase.restrictEquiv_symm,Hironaka.InvDomainRebase.isInvDomain_of_restrictEquiv,Hironaka.InvDomainRebase.isInvDomain_geoTransformAlong_of_isEmptyTower,Hironaka.InvDomainRebase.isCanonical_of_restrictEquiv,Hironaka.InvDomainRebase.inv_rebase,Hironaka.InvDomainRebase.memberRestrict_rebase}\upstreamlean{TranscendentalNakamaye.Pending.InvDomainRebase.isInvDomain_companionAlong_rebase,TranscendentalNakamaye.Pending.InvDomainRebase.companionAlong_rebase}
+\lean{Hironaka.InvDomainRebase.restrictEquiv_symm,Hironaka.InvDomainRebase.isInvDomain_of_restrictEquiv,Hironaka.InvDomainRebase.isInvDomain_geoTransformAlong_of_isEmptyTower,Hironaka.InvDomainRebase.isCanonical_of_restrictEquiv,Hironaka.InvDomainRebase.inv_rebase,Hironaka.InvDomainRebase.memberRestrict_rebase}\upstreamlean{history-836a0dc710d995c7,history-10b64d6d0c62c3f5}
 \mixedleanok
 Let \(\operatorname{inv}\) be a resolution invariant in dimension \(\le k\) (Definition~\ref{hir:centre-function}).
 \begin{enumerate}
@@ -2278,7 +2278,7 @@ and record how centres behave under restriction to open sets and under isomorphi
 \label{bcalc:max-locus-local}
 \uses{hir:resolution-driver}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.MaxLocusLocal.maxLocus_comp_strictMono,Hironaka.MaxLocusLocal.preimage_maxLocus_subset,Hironaka.MaxLocusLocal.preimage_maxLocus_eq_or}\upstreamlean{TranscendentalNakamaye.Pending.MaxLocusLocal.preimage_maxLocus_eq_or_of_eq,TranscendentalNakamaye.Pending.MaxLocusLocal.preimage_level_eq_of_eq,TranscendentalNakamaye.Pending.MaxLocusLocal.preimage_level_eq_empty,TranscendentalNakamaye.Pending.MaxLocusLocal.le_of_comp_le}\lean{Hironaka.MaxLocusLocal.strictMono_toLex_coe}
+\lean{Hironaka.MaxLocusLocal.maxLocus_comp_strictMono,Hironaka.MaxLocusLocal.preimage_maxLocus_subset,Hironaka.MaxLocusLocal.preimage_maxLocus_eq_or}\upstreamlean{history-639bf26befff8483,history-f574761e3f9e570e,history-d3ad68ffa20636ba,history-9081af1d20d2bbe7}\lean{Hironaka.MaxLocusLocal.strictMono_toLex_coe}
 \mixedleanok
 Let \(\Lambda\), \(\Lambda'\) be totally ordered, \(f\colon Y\to\Lambda\), \(s\subset Y\), \(\iota\colon Y'\to Y\) a map, \(s'\subset\iota^{-1}(s)\), \(g\colon Y'\to\Lambda'\) and
 \(\varphi\colon\Lambda'\to\Lambda\) strictly increasing, with \(f(\iota(p))=\varphi(g(p))\) for \(p\in s'\). Write \(\max_sf\) for the set of points of \(s\) at which \(f\)
@@ -2307,7 +2307,7 @@ compared when the first agree, and \(\Lambda'\to\Lambda'\cup\{\infty\}\) is stri
 \label{bcalc:centre-local}
 \uses{bcalc:max-locus-local,hir:invariant-driver,hir:biholomorphism-invariance,hir:open-restriction-ideal,hir:open-restriction-marked,bcalc:restrict-open,hir:centre-function,hir:canonical-segments,hir:tower-isomorphism,mc:tower-isomorphism-transform}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.MaxLocusLocal.nestedOpens,Hironaka.MaxLocusLocal.nestedOpensDiffeo,Hironaka.MaxLocusLocal.nestedOpensDiffeo_apply,Hironaka.MaxLocusLocal.pullback_val_pullback_val,Hironaka.MaxLocusLocal.isAdmissibleCentre_pullback_val_of_forall_exists_opens}\upstreamlean{TranscendentalNakamaye.Pending.MaxLocusLocal.preimage_maxLocus_restrict_eq_or,TranscendentalNakamaye.Pending.MaxLocusLocal.maxLocus_isTowerIso}
+\lean{Hironaka.MaxLocusLocal.nestedOpens,Hironaka.MaxLocusLocal.nestedOpensDiffeo,Hironaka.MaxLocusLocal.nestedOpensDiffeo_apply,Hironaka.MaxLocusLocal.pullback_val_pullback_val,Hironaka.MaxLocusLocal.isAdmissibleCentre_pullback_val_of_forall_exists_opens}\upstreamlean{history-3c98f80c6dc5e6b5,history-3fa6489b6fdbe739}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) have a coherent ideal.
 \begin{enumerate}
@@ -2426,7 +2426,7 @@ the companion ideal of Lemma~\ref{hir:companion-reduction-along} at the monomial
 \label{bcalc:companion-rebase}
 \uses{bcalc:monomial-part-etale,bcalc:companion-domain,hir:companion-reduction-along,hir:marked-sum-product,hir:controlled-operations,bcalc:exceptional-divisor,mc:empty-blowup-inverse,hir:restricted-equivalence,hir:restricted-equivalence-basic,hir:open-restriction-marked,hir:open-restriction-tower,bcalc:restrict-empty-tower,bcalc:inv-domain-stable,bcalc:inv-rebase,hir:centre-function,hir:invariant-driver}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.CompanionRebase.companionAlong_ideal,Hironaka.CompanionRebase.companionAlong_d,Hironaka.CompanionRebase.pullback_companionAlong,Hironaka.CompanionRebase.companionOf,Hironaka.CompanionRebase.companionOf_congr,Hironaka.CompanionRebase.pullback_companionOf_of_local,Hironaka.CompanionRebase.pullback_val_companionOf,Hironaka.CompanionRebase.isLocalInverseAt_diffeo,Hironaka.CompanionRebase.pullback_diffeo_companionOf,Hironaka.CompanionRebase.restrictEquiv_companionOf_geoTransform_empty,Hironaka.CompanionRebase.restrictEquiv_companionOf_geoTransformAlong_of_isEmptyTower,Hironaka.CompanionRebase.restrictEquiv_companionOf_rebase}\upstreamlean{TranscendentalNakamaye.Pending.CompanionRebase.companionOf_rebase}
+\lean{Hironaka.CompanionRebase.companionAlong_ideal,Hironaka.CompanionRebase.companionAlong_d,Hironaka.CompanionRebase.pullback_companionAlong,Hironaka.CompanionRebase.companionOf,Hironaka.CompanionRebase.companionOf_congr,Hironaka.CompanionRebase.pullback_companionOf_of_local,Hironaka.CompanionRebase.pullback_val_companionOf,Hironaka.CompanionRebase.isLocalInverseAt_diffeo,Hironaka.CompanionRebase.pullback_diffeo_companionOf,Hironaka.CompanionRebase.restrictEquiv_companionOf_geoTransform_empty,Hironaka.CompanionRebase.restrictEquiv_companionOf_geoTransformAlong_of_isEmptyTower,Hironaka.CompanionRebase.restrictEquiv_companionOf_rebase}\upstreamlean{history-401db5d09f39e66d}
 \mixedleanok
 Let \(n>0\) and \(o\ge1\).
 \begin{enumerate}
@@ -2475,7 +2475,7 @@ open-set statement Lemma~\ref{hir:companion-basic} records as missing. We write 
 \label{bcalc:companion-open}
 \uses{bcalc:companion-rebase,bcalc:monomial-part-etale,hir:monomial-part-along,hir:companion-reduction-along,hir:companion-maximal-order-along,mc:maximal-order-along,hir:giraud-along,hir:marked-equivalence-basic,hir:restricted-equivalence-basic,hir:open-restriction-marked,bcalc:inv-domain-stable,mc:derivative-along-etale}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.CompanionOpen.restrictEquiv_mul_parts,Hironaka.CompanionOpen.cosupport_mul_parts,Hironaka.CompanionOpen.isClosed_cosupport_nonmonomialPartAlong,Hironaka.CompanionOpen.isMaximalOrderAlong_companionOf,Hironaka.CompanionOpen.companionOf_reduction,Hironaka.CompanionOpen.bound_pullback_val,Hironaka.CompanionOpen.isMaximalOrderAlong_companionOf_pullback_val}\upstreamlean{TranscendentalNakamaye.Pending.CompanionOpen.companionOf_reduction_pullback_val}
+\lean{Hironaka.CompanionOpen.restrictEquiv_mul_parts,Hironaka.CompanionOpen.cosupport_mul_parts,Hironaka.CompanionOpen.isClosed_cosupport_nonmonomialPartAlong,Hironaka.CompanionOpen.isMaximalOrderAlong_companionOf,Hironaka.CompanionOpen.companionOf_reduction,Hironaka.CompanionOpen.bound_pullback_val,Hironaka.CompanionOpen.isMaximalOrderAlong_companionOf_pullback_val}\upstreamlean{history-fbb488077cdae33c}
 \mixedleanok
 Let \(n>0\) and \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed with \(\mathfrak a\) nonzero along \(N\) at every point of \(N\); write \(\mathcal N=\mathcal N_N(\mathfrak a)\),
 \(\mathcal M=\mathcal M_N(\mathfrak a)\).
@@ -2513,7 +2513,7 @@ gives the open set on which this holds.
 \label{bcalc:nonmonomial-order-zero}
 \uses{bcalc:companion-open,bcalc:monomial-part-etale,hir:monomial-part,hir:monomial-part-along,ana:restricted-colon,ana:restricted-calculus,hir:order-basic,mc:derivative-along-etale}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderZero.restrictLe_monomialPartAlong_of_notMem}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderZero.isOpen_compl_cosupport_one}\lean{Hironaka.NonmonomialOrderZero.isMonomialAlong_pullback_val}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderZero.isMonomialAlong_pullback_val_compl}
+\lean{Hironaka.NonmonomialOrderZero.restrictLe_monomialPartAlong_of_notMem}\upstreamlean{history-4e90156607412d3e}\lean{Hironaka.NonmonomialOrderZero.isMonomialAlong_pullback_val}\upstreamlean{history-566ca8b71af6ee94}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) with \(\mathfrak a\) coherent, and write \(\mathcal M=\mathcal M_N(\mathfrak a)\), \(\mathcal N=\mathcal N_N(\mathfrak a)\).
 \begin{enumerate}
@@ -2542,7 +2542,7 @@ with its whole divisor \(E_T\). The lemma below collects the properties of this 
 \label{bcalc:nonmonomial-order-local}
 \uses{hir:monomial-part-along,hir:nonmonomial-transform-along,hir:exponent-along,hir:cosupport-basic,bcalc:companion-open,bcalc:monomial-part-etale,bcalc:companion-rebase,mc:empty-blowup-inverse,mc:derivative-along-etale,bcalc:restrict-empty-tower,bcalc:inv-rebase,bcalc:inv-domain-stable,hir:open-restriction-tower,hir:open-restriction-marked,bcalc:tower-restrict,hir:tower-isomorphism,mc:tower-isomorphism-transform,hir:restricted-calculus,hir:companion-reduction-along,hir:centre-function,hir:test-tower}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderLocal.nmPart,Hironaka.NonmonomialOrderLocal.ordGe,Hironaka.NonmonomialOrderLocal.nmOrd,Hironaka.NonmonomialOrderLocal.ordGe_anti,Hironaka.NonmonomialOrderLocal.ordGe_subset_N,Hironaka.NonmonomialOrderLocal.nmOrd_congr,Hironaka.NonmonomialOrderLocal.nmOrd_le_of_notMem,Hironaka.NonmonomialOrderLocal.mem_ordGe_of_succ_le,Hironaka.NonmonomialOrderLocal.succ_le_nmOrd_of_mem,Hironaka.NonmonomialOrderLocal.exists_notMem_ordGe,Hironaka.NonmonomialOrderLocal.mem_ordGe_iff,Hironaka.NonmonomialOrderLocal.isClosed_ordGe,Hironaka.NonmonomialOrderLocal.eventually_nmOrd_le,Hironaka.NonmonomialOrderLocal.mem_ordGe_pullback_iff_of_local}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderLocal.nmOrd_pullback_of_local}\lean{Hironaka.NonmonomialOrderLocal.mem_ordGe_pullback_val_iff,Hironaka.NonmonomialOrderLocal.nmOrd_pullback_val,Hironaka.NonmonomialOrderLocal.mem_ordGe_pullback_diffeo_iff}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderLocal.nmOrd_pullback_diffeo}\lean{Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransform_empty_iff,Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransformAlong_of_isEmptyTower,Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransformAlong_of_centresAvoid}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderLocal.nmOrd_geoTransformAlong_of_centresAvoid}\lean{Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransform_of_notMem,Hironaka.NonmonomialOrderLocal.nmOrd_geoTransform_of_notMem,Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransformAlong_isTowerIso,Hironaka.NonmonomialOrderLocal.nmOrd_geoTransformAlong_isTowerIso,Hironaka.NonmonomialOrderLocal.companionOf_tower_facts,Hironaka.NonmonomialOrderLocal.notMem_ordGe_geoTransform_of_mem,Hironaka.NonmonomialOrderLocal.nmOrd_geoTransform_le_of_mem}
+\lean{Hironaka.NonmonomialOrderLocal.nmPart,Hironaka.NonmonomialOrderLocal.ordGe,Hironaka.NonmonomialOrderLocal.nmOrd,Hironaka.NonmonomialOrderLocal.ordGe_anti,Hironaka.NonmonomialOrderLocal.ordGe_subset_N,Hironaka.NonmonomialOrderLocal.nmOrd_congr,Hironaka.NonmonomialOrderLocal.nmOrd_le_of_notMem,Hironaka.NonmonomialOrderLocal.mem_ordGe_of_succ_le,Hironaka.NonmonomialOrderLocal.succ_le_nmOrd_of_mem,Hironaka.NonmonomialOrderLocal.exists_notMem_ordGe,Hironaka.NonmonomialOrderLocal.mem_ordGe_iff,Hironaka.NonmonomialOrderLocal.isClosed_ordGe,Hironaka.NonmonomialOrderLocal.eventually_nmOrd_le,Hironaka.NonmonomialOrderLocal.mem_ordGe_pullback_iff_of_local}\upstreamlean{history-dbb2108815f3a7f4}\lean{Hironaka.NonmonomialOrderLocal.mem_ordGe_pullback_val_iff,Hironaka.NonmonomialOrderLocal.nmOrd_pullback_val,Hironaka.NonmonomialOrderLocal.mem_ordGe_pullback_diffeo_iff}\upstreamlean{history-eb68163f6beeb219}\lean{Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransform_empty_iff,Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransformAlong_of_isEmptyTower,Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransformAlong_of_centresAvoid}\upstreamlean{history-60519799a192199e}\lean{Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransform_of_notMem,Hironaka.NonmonomialOrderLocal.nmOrd_geoTransform_of_notMem,Hironaka.NonmonomialOrderLocal.mem_ordGe_geoTransformAlong_isTowerIso,Hironaka.NonmonomialOrderLocal.nmOrd_geoTransformAlong_isTowerIso,Hironaka.NonmonomialOrderLocal.companionOf_tower_facts,Hironaka.NonmonomialOrderLocal.notMem_ordGe_geoTransform_of_mem,Hironaka.NonmonomialOrderLocal.nmOrd_geoTransform_le_of_mem}
 \mixedleanok
 Let \(n\ge1\). For a well-formed marked ideal \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) with \(\mathfrak a\) nonzero along \(N\) at every point of \(N\), write
 \(\nu_{\underline{\mathcal I}}(y)=\operatorname{ord}_y(\mathcal N_N(\mathfrak a)|_N)\) for \(y\in N\) (Proposition~\ref{hir:monomial-part-along}).
@@ -2609,7 +2609,7 @@ and~\ref{hir:step-one-mask-tower} for Step~1.
 \label{bcalc:nonmonomial-order-regime}
 \uses{bcalc:nonmonomial-order-local,hir:regime-run,bcalc:restrict-empty-tower,bcalc:companion-rebase,hir:open-restriction-tower,hir:open-restriction-marked,bcalc:tower-restrict,hir:tower-isomorphism,mc:tower-isomorphism-transform,bcalc:transform-off-centre,hir:geo-transform-basic,hir:test-tower,bcalc:inv-domain-stable,hir:companion-reduction-along,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderRegime.regimeRun_restrict_of,Hironaka.NonmonomialOrderRegime.regimeRun_isTowerIso_of,Hironaka.NonmonomialOrderRegime.OrdRegime,Hironaka.NonmonomialOrderRegime.ordRegime_iff,Hironaka.NonmonomialOrderRegime.ordRegime_step_iff_of_notMem,Hironaka.NonmonomialOrderRegime.ordRegime_restrict_iff,Hironaka.NonmonomialOrderRegime.regimeRun_ordRegime_restrict,Hironaka.NonmonomialOrderRegime.ordRegime_isTowerIso_iff,Hironaka.NonmonomialOrderRegime.regimeRun_ordRegime_isTowerIso,Hironaka.NonmonomialOrderRegime.notMem_ordGe_of_mask,Hironaka.NonmonomialOrderRegime.mem_ordGe_of_mem_centre_of_mask,Hironaka.NonmonomialOrderRegime.ordRegime_and_le_regimeRun,Hironaka.NonmonomialOrderRegime.CentresOrdGt,Hironaka.NonmonomialOrderRegime.centresOrdGt_step_iff,Hironaka.NonmonomialOrderRegime.centresAvoid_of_centresOrdGt}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderRegime.companionOf_rebase_of_centresOrdGt}
+\lean{Hironaka.NonmonomialOrderRegime.regimeRun_restrict_of,Hironaka.NonmonomialOrderRegime.regimeRun_isTowerIso_of,Hironaka.NonmonomialOrderRegime.OrdRegime,Hironaka.NonmonomialOrderRegime.ordRegime_iff,Hironaka.NonmonomialOrderRegime.ordRegime_step_iff_of_notMem,Hironaka.NonmonomialOrderRegime.ordRegime_restrict_iff,Hironaka.NonmonomialOrderRegime.regimeRun_ordRegime_restrict,Hironaka.NonmonomialOrderRegime.ordRegime_isTowerIso_iff,Hironaka.NonmonomialOrderRegime.regimeRun_ordRegime_isTowerIso,Hironaka.NonmonomialOrderRegime.notMem_ordGe_of_mask,Hironaka.NonmonomialOrderRegime.mem_ordGe_of_mem_centre_of_mask,Hironaka.NonmonomialOrderRegime.ordRegime_and_le_regimeRun,Hironaka.NonmonomialOrderRegime.CentresOrdGt,Hironaka.NonmonomialOrderRegime.centresOrdGt_step_iff,Hironaka.NonmonomialOrderRegime.centresAvoid_of_centresOrdGt}\upstreamlean{history-c30f4e2ab6965be2}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) a marked ideal in the domain of Definition~\ref{hir:centre-function}, \(\nu\) the order of the nonmonomial part of
 Lemma~\ref{bcalc:nonmonomial-order-local}, and \(o\in\mathbf N\). A point \(y\) of the last stage of a tower \(T\) is \emph{in the regime \(o\)} if
@@ -2661,7 +2661,7 @@ hypotheses of Lemma~\ref{bcalc:nonmonomial-order-regime}(3) at the start of the 
 \label{bcalc:nonmonomial-order-canonical}
 \uses{bcalc:nonmonomial-order-local,bcalc:nonmonomial-order-regime,hir:nonmonomial-step-along,hir:nonmonomial-transform-along,hir:monomial-factorization-unique-along,hir:monomial-invariant-along,hir:restricted-equivalence-basic,hir:geo-transform-coherent,bcalc:transform-wellformed,bcalc:transform-off-centre,bcalc:inv-domain-stable,hir:centre-function,hir:invariant-order,hir:regime-run,hir:tower-split,hir:test-tower,hir:geo-transform-basic,bcalc:companion-rebase,hir:cosupport-basic}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderCanonical.notMem_ordGe_one_geoTransform_of_mem,Hironaka.NonmonomialOrderCanonical.nmOrd_geoTransform_le_of_level,Hironaka.NonmonomialOrderCanonical.OrdMonotone,Hironaka.NonmonomialOrderCanonical.ordMonotone_toLex,Hironaka.NonmonomialOrderCanonical.nmOrd_le_of_mem_maxLocus,Hironaka.NonmonomialOrderCanonical.nmOrd_eq_of_mem_maxLocus,Hironaka.NonmonomialOrderCanonical.subset_ordGe_of_canonical,Hironaka.NonmonomialOrderCanonical.nmOrd_step_le_of_canonical,Hironaka.NonmonomialOrderCanonical.nmOrd_le_nmOrd_proj,Hironaka.NonmonomialOrderCanonical.isInvUSCOn_of_ordMonotone}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderCanonical.isInvUSCOn_toLex}\lean{Hironaka.NonmonomialOrderCanonical.mem_cosupp_and_succ_le_before_start,Hironaka.NonmonomialOrderCanonical.centresOrdGt_of_canonical,Hironaka.NonmonomialOrderCanonical.centresAvoid_of_canonical}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderCanonical.restrictEquiv_companionOf_rebase_of_canonical}
+\lean{Hironaka.NonmonomialOrderCanonical.notMem_ordGe_one_geoTransform_of_mem,Hironaka.NonmonomialOrderCanonical.nmOrd_geoTransform_le_of_level,Hironaka.NonmonomialOrderCanonical.OrdMonotone,Hironaka.NonmonomialOrderCanonical.ordMonotone_toLex,Hironaka.NonmonomialOrderCanonical.nmOrd_le_of_mem_maxLocus,Hironaka.NonmonomialOrderCanonical.nmOrd_eq_of_mem_maxLocus,Hironaka.NonmonomialOrderCanonical.subset_ordGe_of_canonical,Hironaka.NonmonomialOrderCanonical.nmOrd_step_le_of_canonical,Hironaka.NonmonomialOrderCanonical.nmOrd_le_nmOrd_proj,Hironaka.NonmonomialOrderCanonical.isInvUSCOn_of_ordMonotone}\upstreamlean{history-0760b2909f3ffa50}\lean{Hironaka.NonmonomialOrderCanonical.mem_cosupp_and_succ_le_before_start,Hironaka.NonmonomialOrderCanonical.centresOrdGt_of_canonical,Hironaka.NonmonomialOrderCanonical.centresAvoid_of_canonical}\upstreamlean{history-381cad5c4d52a644}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) a marked ideal in the domain of Definition~\ref{hir:centre-function} and \(\nu\) the order of the nonmonomial part of
 Lemma~\ref{bcalc:nonmonomial-order-local}. Let \(f\) assign to every tower \(T\) over \(X\) a function \(f(T)\) on its last stage with values in a totally ordered set,
@@ -2732,7 +2732,7 @@ Lemma~\ref{bcalc:nonmonomial-order-regime}(2)), and that nearby points of the sa
 \label{bcalc:nonmonomial-order-tail}
 \uses{bcalc:nonmonomial-order-canonical,bcalc:nonmonomial-order-local,bcalc:nonmonomial-order-regime,bcalc:companion-open,hir:nonmonomial-transform-along,hir:companion-reduction-along,hir:open-restriction-tower,hir:open-restriction-marked,hir:test-tower,hir:geo-transform-basic,hir:regime-run,hir:tower-split,bcalc:inv-domain-stable,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderTail.E_geoTransformAlong_congr,Hironaka.NonmonomialOrderTail.cosupp_companionOf_geoTransformAlong,Hironaka.NonmonomialOrderTail.isGeoTestTower_companion_of_canonical,Hironaka.NonmonomialOrderTail.ordMask,Hironaka.NonmonomialOrderTail.mem_ordMask_iff,Hironaka.NonmonomialOrderTail.notMem_ordGe_of_mem_ordMask,Hironaka.NonmonomialOrderTail.regime_start,Hironaka.NonmonomialOrderTail.proj_tail_mem_ordMask,Hironaka.NonmonomialOrderTail.isGeoTestTower_companion_tail_of_canonical}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderTail.eventually_ordRegime_and_le_regimeRun}
+\lean{Hironaka.NonmonomialOrderTail.E_geoTransformAlong_congr,Hironaka.NonmonomialOrderTail.cosupp_companionOf_geoTransformAlong,Hironaka.NonmonomialOrderTail.isGeoTestTower_companion_of_canonical,Hironaka.NonmonomialOrderTail.ordMask,Hironaka.NonmonomialOrderTail.mem_ordMask_iff,Hironaka.NonmonomialOrderTail.notMem_ordGe_of_mem_ordMask,Hironaka.NonmonomialOrderTail.regime_start,Hironaka.NonmonomialOrderTail.proj_tail_mem_ordMask,Hironaka.NonmonomialOrderTail.isGeoTestTower_companion_tail_of_canonical}\upstreamlean{history-c1ad67d41d432704}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) a marked ideal in the domain of Definition~\ref{hir:centre-function}, \(\nu\) the order of the nonmonomial part, \(o\ge1\), and
 \(f\) a value function whose order dominates \(\nu\) as in Lemma~\ref{bcalc:nonmonomial-order-canonical}. Write \(W_o(\underline{\mathcal J})\) for the open set of the points
@@ -2833,7 +2833,7 @@ over a compact set. The lemma below supplies both on the side of the order of th
 \label{bcalc:nonmonomial-order-phase}
 \uses{bcalc:nonmonomial-order-tail,bcalc:nonmonomial-order-canonical,bcalc:nonmonomial-order-local,bcalc:companion-open,bcalc:companion-domain,bcalc:inv-domain-stable,hir:open-restriction-marked,hir:test-tower,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderPhase.isAdmissibleCentre_companion_iff}\lean{Hironaka.NonmonomialOrderPhase.isAdmissibleCentre_pullback_val_companion_iff}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderPhase.exists_nmOrd_le_of_isCompact,TranscendentalNakamaye.Pending.NonmonomialOrderPhase.exists_nmOrd_le_of_isCompact_of_canonical}
+\upstreamlean{history-6971a6b6abdf5cff}\lean{Hironaka.NonmonomialOrderPhase.isAdmissibleCentre_pullback_val_companion_iff}\upstreamlean{history-d3d45cacdda45335,history-e0deaab15db46624}
 \mixedleanok
 Let \(n\ge1\) and \(\nu\) the order of the nonmonomial part.
 \begin{enumerate}
@@ -2871,7 +2871,7 @@ needs a marked ideal which is monomial along all of \(N\); the lemma below obtai
 \label{bcalc:nonmonomial-order-monomial}
 \uses{bcalc:nonmonomial-order-zero,bcalc:nonmonomial-order-tail,bcalc:nonmonomial-order-local,hir:monomial-invariant-along,hir:monomial-step-along,hir:monomial-invariance-along,bcalc:centre-local,bcalc:restrict-open,hir:open-restriction-marked,bcalc:inv-domain-stable,bcalc:transform-wellformed,hir:giraud-along,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderMonomial.isMonomialAlong_pullback_val_ordMask,Hironaka.NonmonomialOrderMonomial.mem_ordMask_zero,Hironaka.NonmonomialOrderMonomial.isAdmissibleCentre_gammaAlong_level_of_ordZero}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderMonomial.isAdmissibleCentre_maxLocus_gammaAlong_of_ordZero}\lean{Hironaka.NonmonomialOrderMonomial.gammaAlong_geoTransform_pullback_val,Hironaka.NonmonomialOrderMonomial.gammaAlong_geoTransform_eq_of_notMem_of_ordZero,Hironaka.NonmonomialOrderMonomial.preimage_maxLocus_gammaAlong_eq_maxLocusA,Hironaka.NonmonomialOrderMonomial.gammaAlong_geoTransform_lt_of_ordZero}
+\lean{Hironaka.NonmonomialOrderMonomial.isMonomialAlong_pullback_val_ordMask,Hironaka.NonmonomialOrderMonomial.mem_ordMask_zero,Hironaka.NonmonomialOrderMonomial.isAdmissibleCentre_gammaAlong_level_of_ordZero}\upstreamlean{history-3864ba214dc29859}\lean{Hironaka.NonmonomialOrderMonomial.gammaAlong_geoTransform_pullback_val,Hironaka.NonmonomialOrderMonomial.gammaAlong_geoTransform_eq_of_notMem_of_ordZero,Hironaka.NonmonomialOrderMonomial.preimage_maxLocus_gammaAlong_eq_maxLocusA,Hironaka.NonmonomialOrderMonomial.gammaAlong_geoTransform_lt_of_ordZero}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) lie in the domain of Definition~\ref{hir:centre-function}, \(\nu\) be the order of the nonmonomial part
 (Lemma~\ref{bcalc:nonmonomial-order-local}), \(\gamma=\gamma_N\) the invariant of Lemma~\ref{hir:monomial-invariant-along} (with the mark \(d\)), and \(W_0\) the open set of the
@@ -2922,7 +2922,7 @@ the value of the general step is one (it reads \((0,\gamma)\) at the points of o
 \label{bcalc:nonmonomial-order-monomial-canonical}
 \uses{bcalc:nonmonomial-order-monomial,bcalc:nonmonomial-order-canonical,bcalc:nonmonomial-order-local,hir:monomial-invariant-along,bcalc:max-locus-local,hir:canonical-segments,bcalc:inv-domain-stable,hir:geo-transform-basic,hir:centre-function,hir:invariant-order}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderMonomialCanonical.OrdZeroValue,Hironaka.NonmonomialOrderMonomialCanonical.OrdZeroValue.apply,Hironaka.NonmonomialOrderMonomialCanonical.strictMono_toLex_zero_inl,Hironaka.NonmonomialOrderMonomialCanonical.ordZeroValue_toLex,Hironaka.NonmonomialOrderMonomialCanonical.nmOrd_eq_zero_of_mem_maxLocus,Hironaka.NonmonomialOrderMonomialCanonical.notMem_ordGe_one_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.maxLocus_eq_maxLocus_towerInvAlong,Hironaka.NonmonomialOrderMonomialCanonical.isAdmissibleCentre_level_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.eventually_le_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.towerInvAlong_step_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.value_step_of_nmOrd_eq_zero}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderMonomialCanonical.towerInvAlong_le_of_canonical,TranscendentalNakamaye.Pending.NonmonomialOrderMonomialCanonical.value_le_of_canonical}
+\lean{Hironaka.NonmonomialOrderMonomialCanonical.OrdZeroValue,Hironaka.NonmonomialOrderMonomialCanonical.OrdZeroValue.apply,Hironaka.NonmonomialOrderMonomialCanonical.strictMono_toLex_zero_inl,Hironaka.NonmonomialOrderMonomialCanonical.ordZeroValue_toLex,Hironaka.NonmonomialOrderMonomialCanonical.nmOrd_eq_zero_of_mem_maxLocus,Hironaka.NonmonomialOrderMonomialCanonical.notMem_ordGe_one_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.maxLocus_eq_maxLocus_towerInvAlong,Hironaka.NonmonomialOrderMonomialCanonical.isAdmissibleCentre_level_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.eventually_le_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.towerInvAlong_step_of_nmOrd_eq_zero,Hironaka.NonmonomialOrderMonomialCanonical.value_step_of_nmOrd_eq_zero}\upstreamlean{history-95d81cf7b61af7c3,history-e4168690b89efc68}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) lie in the domain of Definition~\ref{hir:centre-function}, \(\nu\) be the order of the nonmonomial part and, for a tower \(T\),
 \(\gamma_T\) the invariant of Lemma~\ref{hir:monomial-invariant-along} of \(\underline{\mathcal I}_T\) (with its mark). Let \(f\) be a value function whose order dominates
@@ -2981,7 +2981,7 @@ points of order \(0\), that the invariant \(\gamma\) of the current transform be
 \label{bcalc:nonmonomial-order-monomial-transport}
 \uses{bcalc:nonmonomial-order-monomial,bcalc:nonmonomial-order-monomial-canonical,hir:monomial-invariant-along,hir:monomial-invariance-along,hir:exponent-along,hir:restricted-calculus,hir:restricted-equivalence-basic,hir:marked-equivalence-basic,hir:tower-isomorphism,mc:tower-isomorphism-transform,hir:geo-transform-basic,hir:open-restriction-tower,bcalc:inv-domain-stable}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.NonmonomialOrderMonomialTransport.gammaAlong_congr_of_cosupport,Hironaka.NonmonomialOrderMonomialTransport.gammaAlong_congr_of_restrictEquiv,Hironaka.NonmonomialOrderMonomialTransport.towerInvAlong_congr,Hironaka.NonmonomialOrderMonomialTransport.towerInvAlong_isTowerIso,Hironaka.NonmonomialOrderMonomialTransport.towerInvAlong_append}\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderMonomialTransport.towerInvAlong_step_empty_of_nmOrd_eq_zero}
+\lean{Hironaka.NonmonomialOrderMonomialTransport.gammaAlong_congr_of_cosupport,Hironaka.NonmonomialOrderMonomialTransport.gammaAlong_congr_of_restrictEquiv,Hironaka.NonmonomialOrderMonomialTransport.towerInvAlong_congr,Hironaka.NonmonomialOrderMonomialTransport.towerInvAlong_isTowerIso,Hironaka.NonmonomialOrderMonomialTransport.towerInvAlong_append}\upstreamlean{history-fa38b79a6f9139df}
 \mixedleanok
 For a marked ideal \(\underline{\mathcal I}\) and a tower \(T\) over its base let \(\gamma_T\) be the invariant of Lemma~\ref{hir:monomial-invariant-along} of
 \(\underline{\mathcal I}_T\) (along \(N_T\), with the members of \(E_T\) and the mark).
@@ -3026,7 +3026,7 @@ value function \(M\) of the companion phase plays no role there.
 \label{bcalc:general-value-order-zero}
 \uses{hir:general-value,hir:general-value-basic,hir:general-admissible,hir:max-order-value,hir:centre-function,bcalc:nonmonomial-order-local,bcalc:nonmonomial-order-transport,bcalc:nonmonomial-order-monomial-transport,hir:monomial-invariance-along,hir:open-restriction-tower,hir:tower-isomorphism,mc:tower-isomorphism-transform,hir:restricted-equivalence-basic,hir:geo-transform-basic,bcalc:inv-domain-stable}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.GeneralValueOrderZero.genInv_eq_towerInvAlong,Hironaka.GeneralValueOrderZero.genInv_eq_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_append_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.emptyPrefix_field_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_restrict_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_isTowerIso_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_congr_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.restrictOpen_field_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.towerIso_field_of_nmOrd_eq_zero}\upstreamlean{TranscendentalNakamaye.Pending.GeneralValueOrderZero.representative_field_of_nmOrd_eq_zero}
+\lean{Hironaka.GeneralValueOrderZero.genInv_eq_towerInvAlong,Hironaka.GeneralValueOrderZero.genInv_eq_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_append_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.emptyPrefix_field_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_restrict_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_isTowerIso_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.genInv_congr_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.restrictOpen_field_of_nmOrd_eq_zero,Hironaka.GeneralValueOrderZero.towerIso_field_of_nmOrd_eq_zero}\upstreamlean{history-6766c0b9384e6436}
 \mixedleanok
 Let \(M\) be a value function (Definition~\ref{hir:max-order-value}) and \(\operatorname{inv}\) the general value of Definition~\ref{hir:general-value}. For a tower \(T\) let
 \(\nu_T\) be the order of the nonmonomial part of \(\underline{\mathcal I}_T\) and \(\gamma_T\) the invariant of \(\underline{\mathcal I}_T\) of
@@ -3121,7 +3121,7 @@ The lemma below gives the topological part.
 \label{bcalc:tower-preimage-compact}
 \uses{ana:blowup-compact,hir:tower-sequence,hir:test-tower,hir:geo-transform-basic,bcalc:inv-domain-stable,hir:giraud-along,hir:step-one-well-founded,hir:centre-function,hir:canonical-segments,bcalc:tower-restrict}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.TowerPreimageCompact.exists_mem_nhds_isCompact_preimage,TranscendentalNakamaye.Pending.TowerPreimageCompact.isCompact_preimage_of_isBlowupAlong,TranscendentalNakamaye.Pending.TowerPreimageCompact.isCompact_preimage_proj,TranscendentalNakamaye.Pending.TowerPreimageCompact.countCentresMeeting_append}\lean{Hironaka.TowerPreimageCompact.exists_restrict_step}\upstreamlean{TranscendentalNakamaye.Pending.TowerPreimageCompact.isClosed_cosupp_geoTransformAlong,TranscendentalNakamaye.Pending.TowerPreimageCompact.isCompact_preimage_inter_cosupp}\lean{Hironaka.TowerPreimageCompact.proj_mem_cosupp_append,Hironaka.TowerPreimageCompact.countCentresMeeting_eq_inter_cosupp}\upstreamlean{TranscendentalNakamaye.Pending.TowerPreimageCompact.countCentresMeeting_append_eq_inter_cosupp,TranscendentalNakamaye.Pending.TowerPreimageCompact.countCentresMeeting_append_eq_restrict}
+\upstreamlean{history-3dbe4ee94c10ae32,history-e94c95b478271b39,history-e10d94ab8e7cdb80,history-2061557721f9c81a}\lean{Hironaka.TowerPreimageCompact.exists_restrict_step}\upstreamlean{history-1ddc775fd63e0554,history-91371e746975e592}\lean{Hironaka.TowerPreimageCompact.proj_mem_cosupp_append,Hironaka.TowerPreimageCompact.countCentresMeeting_eq_inter_cosupp}\upstreamlean{history-1398fae9aeb3e4d5,history-4b4f4f3ddd23b201}
 \mixedleanok
 Let \(K\) be a compact subset of the base \(X\).
 \begin{enumerate}
@@ -3161,7 +3161,7 @@ phase: the lemma below collects what the order contributes, for every value func
 \label{bcalc:nonmonomial-order-global-phase}
 \uses{bcalc:nonmonomial-order-canonical,bcalc:nonmonomial-order-local,bcalc:nonmonomial-order-regime,bcalc:nonmonomial-order-tail,bcalc:nonmonomial-order-phase,hir:regime-run,hir:step-one-phase,hir:monomial-invariant,hir:general-value,bcalc:general-value-order-zero,bcalc:inv-domain-stable,hir:test-tower,hir:centre-function,hir:invariant-order}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.nmOrd_le_append_of_le,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.nmOrd_proj_eq_of_le,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.ordRegime_and_length_le_regimeRun_of_le,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.cosupp_subset_ordMask_of_le,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.nmOrd_le_of_mem_centre,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.pairwise_centreValues_nmOrd,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.exists_centre_nmOrd_le_of_isCompact,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.genInv_snd_of_fst_eq_zero,TranscendentalNakamaye.Pending.NonmonomialOrderGlobalPhase.not_strictAnti_zero_inl}\lean{Hironaka.NonmonomialOrderGlobalPhase.wellFoundedLT_genValue}
+\upstreamlean{history-9c68aff4335d1268,history-0f0dd8d6ad3de5f3,history-d948662271e7c132,history-814ada52b3d2f4b2,history-e32478c93bfc210e,history-ea314324fa538fd9,history-417f4960aac4268d,history-dffc6eb29abeece4,history-bebff0df13a69605}\lean{Hironaka.NonmonomialOrderGlobalPhase.wellFoundedLT_genValue}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) lie in the domain of Definition~\ref{hir:centre-function}, and \(f\) be a value function whose order dominates \(\nu\)
 (Lemma~\ref{bcalc:nonmonomial-order-canonical}). Let \(T_0\) be a multiple test blow-up with \(\nu\le o\) on \(\operatorname{cosupp}\underline{\mathcal I}_{T_0}\).
@@ -3204,7 +3204,7 @@ previous one by one blowup). The phase argument passes, at a stage, to the rest 
 \label{bcalc:growing-seq-tail}
 \uses{hir:centre-function-seq,bcalc:tower-preimage-compact,bcalc:tower-restrict,hir:canonical-segments,hir:tower-sequence,hir:test-tower,hir:geo-transform-basic}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.ResolutionInvariantSeq.GrowingSeq.restrict,Hironaka.ResolutionInvariantSeq.GrowingSeq.restrict_stage,Hironaka.ResolutionInvariantSeq.GrowingSeq.count_restrict}\upstreamlean{TranscendentalNakamaye.Pending.ResolutionInvariantSeq.GrowingSeq.tailTower,TranscendentalNakamaye.Pending.ResolutionInvariantSeq.GrowingSeq.stage_add_eq_append,TranscendentalNakamaye.Pending.ResolutionInvariantSeq.GrowingSeq.tail,TranscendentalNakamaye.Pending.ResolutionInvariantSeq.GrowingSeq.tail_stage,TranscendentalNakamaye.Pending.ResolutionInvariantSeq.GrowingSeq.count_add}\lean{Hironaka.ResolutionInvariantSeq.GrowingSeq.count_mono}\upstreamlean{TranscendentalNakamaye.Pending.ResolutionInvariantSeq.GrowingSeq.exists_bound_of_tail_restrict}
+\lean{Hironaka.ResolutionInvariantSeq.GrowingSeq.restrict,Hironaka.ResolutionInvariantSeq.GrowingSeq.restrict_stage,Hironaka.ResolutionInvariantSeq.GrowingSeq.count_restrict}\upstreamlean{history-51d85cb8fb8acbf9,history-766f4ba87eefebfb,history-c0c2d3ecfa4ac56d,history-406480963456ab57,history-b70a73901b6a2942}\lean{Hironaka.ResolutionInvariantSeq.GrowingSeq.count_mono}\upstreamlean{history-8c0c9bc8712b40a2}
 \mixedleanok
 Let \(s=(T_i)_{i\ge0}\) be a growing sequence of towers over \(X\) (\(T_0\) empty, \(T_{i+1}\) is \(T_i\) followed by one blowup).
 \begin{enumerate}
@@ -3238,7 +3238,7 @@ of property (8) along growing sequences (Definition~\ref{hir:centre-function-seq
 \label{bcalc:general-phase-count}
 \uses{hir:general-value,hir:general-admissible,hir:max-order-value,hir:step-one-phase,hir:centre-function-seq,bcalc:nonmonomial-order-global-phase,hir:monomial-invariant,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.GeneralPhaseCount.exists_bound_of_isPrefix}\upstreamlean{TranscendentalNakamaye.Pending.GeneralPhaseCount.countCentresMeeting_le_length_filter,TranscendentalNakamaye.Pending.GeneralPhaseCount.length_filter_le_eq_sum,TranscendentalNakamaye.Pending.GeneralPhaseCount.countCentresMeeting_le_sum_phases}\lean{Hironaka.GeneralPhaseCount.centreValues_isPrefix_succ}\upstreamlean{TranscendentalNakamaye.Pending.GeneralPhaseCount.exists_bound_phase_zero,TranscendentalNakamaye.Pending.GeneralPhaseCount.exists_bound_of_phases}
+\lean{Hironaka.GeneralPhaseCount.exists_bound_of_isPrefix}\upstreamlean{history-5d89a10774a89f28,history-6c7256798bec4367,history-7f0dfcd5e4dafc8f}\lean{Hironaka.GeneralPhaseCount.centreValues_isPrefix_succ}\upstreamlean{history-2941614cefdfb113,history-6555434896b304ba}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) lie in the domain of Definition~\ref{hir:centre-function}, \(M\) be a value function for the marked ideals of maximal order
 (Definition~\ref{hir:max-order-value}) and \(\operatorname{inv}\) the general value. For a tower \(T\) let \(v(T)\) be the list of the values of the nonempty centres
@@ -3272,7 +3272,7 @@ sequences (Definition~\ref{hir:centre-function-seq}) from property (8) of the va
 \label{bcalc:general-companion-phase}
 \uses{hir:general-value,hir:general-value-basic,hir:general-canonical-tail,hir:general-compare,hir:general-admissible,hir:max-order-value,hir:centre-function-seq,hir:step-one-phase,hir:tower-split,bcalc:nonmonomial-order-global-phase,bcalc:nonmonomial-order-regime,bcalc:nonmonomial-order-canonical,bcalc:nonmonomial-order-local,bcalc:nonmonomial-order-tail,bcalc:max-locus-local,bcalc:inv-domain-stable,bcalc:growing-seq-tail,bcalc:tower-preimage-compact,bcalc:general-phase-count,hir:canonical-segments,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.GeneralCompanionPhase.exists_split_append,TranscendentalNakamaye.Pending.GeneralCompanionPhase.centresOrdGt_append,TranscendentalNakamaye.Pending.GeneralCompanionPhase.CentresOrdGe,TranscendentalNakamaye.Pending.GeneralCompanionPhase.genInv_eq_of_mem_cosupp_phase,TranscendentalNakamaye.Pending.GeneralCompanionPhase.isCanonical_restrict_phase,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_step,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_step_of,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_step_of_not,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_le_countCentresMeeting,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_append,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_eq_zero_of_centresOrdGt,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countCentresMeeting_le_sum_countPhase,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_le_filter,TranscendentalNakamaye.Pending.GeneralCompanionPhase.countPhase_le_of_le,TranscendentalNakamaye.Pending.GeneralCompanionPhase.exists_bound_countPhase}
+\upstreamlean{history-1d235a86bb47052c,history-bc1badec06b4b7ca,history-07721ce922540469,history-da4057748fd0939f,history-5cfae7a1f6e69484,history-e71d144d0920553e,history-fd3450f86ebeeb0e,history-6c40ede233955c4c,history-77ac7f7348c8537d,history-5e74093924afcc74,history-6c975d50cb5a759f,history-a2e9d9a95e23733e,history-46274f51e7ef0f0e,history-13917bca35dff412,history-bfd12a4e9b741673,history-5958383c779c4ae8}
 \upstreamleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) lie in the domain of Definition~\ref{hir:centre-function}, \(M\) be a value function for the marked ideals of maximal order
 (Definition~\ref{hir:max-order-value}), \(\operatorname{inv}\) the general value and \(\nu\) the order of the nonmonomial part. Let \(o\ge1\), and let \(T_0\) be a multiple
@@ -3321,7 +3321,7 @@ Lemma ``le:S'' for a single centre.
 \label{bcalc:member-restrict-admissible}
 \uses{bcalc:member-restriction-domain,mc:coefficient-restriction-drop-along,mc:coefficient-restriction-full-along,bcalc:nc-comparison,hir:drop-containing-members,hir:drop-members,hir:marked-equivalence-basic,hir:wellformed-tower,hir:step-one-compare,bcalc:member-restriction-rebase,hir:step-one-value,hir:step-one-lower-domain,hir:open-restriction-tower,hir:open-restriction-marked,hir:geo-transform-basic,mc:contact-independence-along}
 \source{wlodarczyk05-hironaka}
-\upstreamlean{TranscendentalNakamaye.Pending.MemberRestrictAdmissible.isAdmissibleCentre_memberRestrict_iff,TranscendentalNakamaye.Pending.MemberRestrictAdmissible.isAdmissibleCentre_memberRestrict_iff',TranscendentalNakamaye.Pending.MemberRestrictAdmissible.isAdmissibleCentre_lowerMarked_succ_iff,TranscendentalNakamaye.Pending.MemberRestrictAdmissible.isAdmissibleCentre_of_lowerMarked_succ}
+\upstreamlean{history-72c14c41a8bd6cfc,history-c68bedf23260edff,history-df6c0e2f9364c415,history-e5ffc6f50f07813a}
 \upstreamleanok
 Let \(n\ge1\), \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be well formed with \(d\ge1\), \(S\) a set of members of \(E\), and \(\underline{\mathcal S}\) the restricted marked ideal
 \((M,N\cap H_S,E_S,\mathcal C_N(\mathfrak a),\mu_{\mathcal C})\) of Lemma~\ref{bcalc:member-restriction-domain}.
@@ -3387,7 +3387,7 @@ tower. An isomorphism \(T_0'T_1'\to T_0T_1\) over \(\Phi\) splits into \(\chi_0\
 \label{bcalc:companion-tower-iso}
 \uses{bcalc:companion-rebase,bcalc:companion-domain,bcalc:nonmonomial-order-local,mc:tower-isomorphism-transform,mc:tower-iso-opens,mc:contact-marked-canonical,bcalc:inv-domain-stable,hir:canonical-segments,hir:tower-isomorphism,hir:tower-split-iso,hir:centre-function}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.CompanionTowerIso.companionOf_isTowerIso}\upstreamlean{TranscendentalNakamaye.Pending.CompanionTowerIso.bound_isTowerIso,TranscendentalNakamaye.Pending.CompanionTowerIso.isGeoTestTower_companionOf_isTowerIso,TranscendentalNakamaye.Pending.CompanionTowerIso.inv_companionOf_isTowerIso}
+\lean{Hironaka.CompanionTowerIso.companionOf_isTowerIso}\upstreamlean{history-474d9203a702c078,history-b5dd291042f1d672,history-2ec19ae2b56a2f90}
 \mixedleanok
 Let \(n\ge1\), \(\underline{\mathcal I}\) in the domain of Definition~\ref{hir:centre-function}, \(o\ge1\), \(\chi_0\colon T_0'\to T_0\) an isomorphism of towers over a
 biholomorphism \(\Phi\colon X'\to X\) with \(T_0\) a multiple test blow-up of \(\underline{\mathcal I}\), and \(W'\), \(W\) open sets of the last stages with
@@ -3542,7 +3542,7 @@ pulling back along \(\Phi\) gives \(f\in\mathcal I_C^K\) at \(x\) (Lemma~\ref{hi
 \label{bcalc:controlled-not-exceptional}
 \uses{bcalc:exceptional-pushforward,bcalc:controlled-transform-def,bcalc:controlled-transform,hir:bridge-consumers,hir:cosupport,bcalc:isomorphism-off-centre,bcalc:strict-submanifold}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.ExceptionalIdealPushforward.mem_cosupport_succ_of_controlledTransform_le,TranscendentalNakamaye.Pending.ExceptionalIdealPushforward.exists_not_mem_exceptionalDivisor}\lean{Hironaka.ExceptionalIdealPushforward.eventually_le_vanishingIdeal_of_isCoherent}\upstreamlean{TranscendentalNakamaye.Pending.ExceptionalIdealPushforward.frequently_le_vanishingIdeal_of_controlledTransform_le,TranscendentalNakamaye.Pending.ExceptionalIdealPushforward.exists_not_mem_vanishingIdeal_geoStrictTransform}
+\upstreamlean{history-7f2b447de35b59b5,history-079151aac785daa5}\lean{Hironaka.ExceptionalIdealPushforward.eventually_le_vanishingIdeal_of_isCoherent}\upstreamlean{history-7bd5fba363e95d98,history-78af47ef342dd118}
 \mixedleanok
 Let \(\mathfrak a\) be coherent, \(C\subset\operatorname{cosupp}(\mathfrak a,\mu)\), \(\pi\) the blowup along \(C\) and \(z\in D\). If \(\sigma^c(\mathfrak a,\mu)\subset\mathcal O(-D)\)
 at \(z\), then \(\operatorname{ord}_{\pi(z)}\mathfrak a\ge\mu+1\). Hence, at every point of \(D\) over a point of \(C\) where \(\operatorname{ord}\mathfrak a=\mu\), some germ of
@@ -3653,7 +3653,7 @@ points \(z'\in\pi^{-1}(A\setminus C)\subset N'\) accumulate at \(z\). At such \(
 \label{bcalc:transform-exceptional-factor-along}
 \uses{hir:marked-operations-along-step,ana:restricted-calculus,hir:geo-transform,hir:geo-transform-wellformed,bcalc:exceptional-divisor}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.ExceptionalPushforwardAlong.restrictLe_geoTransform_of_pullback}
+\upstreamlean{history-9e8262491415fab6}
 \upstreamleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) with \(N\) a closed submanifold, \(\mathfrak a\) coherent, \(C\) an admissible centre and \(\mathfrak a'\) the
 transformed ideal. If \(\pi^*\mathfrak a\) and \(\mathcal O(-eD)\,\mathfrak b\) have the same restriction to \(N'\), for a coherent \(\mathfrak b\) and \(e\ge d\),
@@ -3719,7 +3719,7 @@ of \(\psi\) and \(\psi^{-1}\) as in Lemma~\ref{bcalc:chart-retraction}). It maps
 \label{bcalc:member-trace-ideal}
 \uses{bcalc:member-retraction,ana:ideal-sheaves,hir:snc,hir:wellformed-tower}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\upstreamlean{TranscendentalNakamaye.Pending.MemberTraceIdealAlong.comp_mem_idealPow_of_comp_mem,TranscendentalNakamaye.Pending.MemberTraceIdealAlong.mem_idealPow_of_forall_mem}\lean{Hironaka.MemberTraceIdealAlong.comp_mem_vanishingIdeal,Hironaka.MemberTraceIdealAlong.isInSpanOnAt_of_retraction,Hironaka.MemberTraceIdealAlong.mem_vanishingIdeal_of_isInSpanOnAt,Hironaka.MemberTraceIdealAlong.vanishingIdeal_mem_inter}\upstreamlean{TranscendentalNakamaye.Pending.MemberTraceIdealAlong.isInSpanOnAt_idealPow_vanishingIdeal_iff}\lean{Hironaka.MemberTraceIdealAlong.isInSpanOnAt_vanishingIdeal_iff,Hironaka.MemberTraceIdealAlong.isInSpanOnAt_vanishingIdeal_iff_mem}\upstreamlean{TranscendentalNakamaye.Pending.MemberTraceIdealAlong.isInSpanOnAt_idealPow_vanishingIdeal_iff_of_isWellFormed}\lean{Hironaka.MemberTraceIdealAlong.isInSpanOnAt_vanishingIdeal_iff_mem_of_isWellFormed}
+\upstreamlean{history-dafca8f4e9a20c43,history-ea0b93ba38804a99}\lean{Hironaka.MemberTraceIdealAlong.comp_mem_vanishingIdeal,Hironaka.MemberTraceIdealAlong.isInSpanOnAt_of_retraction,Hironaka.MemberTraceIdealAlong.mem_vanishingIdeal_of_isInSpanOnAt,Hironaka.MemberTraceIdealAlong.vanishingIdeal_mem_inter}\upstreamlean{history-174d581220ab9f9b}\lean{Hironaka.MemberTraceIdealAlong.isInSpanOnAt_vanishingIdeal_iff,Hironaka.MemberTraceIdealAlong.isInSpanOnAt_vanishingIdeal_iff_mem}\upstreamlean{history-91c49843e1de306f}\lean{Hironaka.MemberTraceIdealAlong.isInSpanOnAt_vanishingIdeal_iff_mem_of_isWellFormed}
 \mixedleanok
 Let \(E\) be a simple normal crossings divisor transverse to \(N\), \(H\) a member of \(E\), \(x\in N\) and \(K\ge0\). Then \(\mathcal I_H^K\) and
 \(\mathcal I_{H\cap N}^K\) have the same restriction to \(N\) at \(x\): a function agrees on \(N\) near \(x\) with a holomorphic combination of germs of the one
@@ -3743,7 +3743,7 @@ holomorphic and \(g=\sum a_is_i\) on \(N\) with \(s_i\) vanishing on \(H\cap N\)
 \label{bcalc:exceptional-trace-ideal}
 \uses{bcalc:member-trace-ideal,bcalc:snc-transform,bcalc:strict-ideal,bcalc:exceptional-divisor,hir:nonmonomial-step,hir:snc-basic}
 \source{wlodarczyk05-hironaka,bierstone-milman08-functoriality}
-\lean{Hironaka.MemberTraceIdealAlong.exceptionalDivisor_mem_iff_vanishingIdeal}\upstreamlean{TranscendentalNakamaye.Pending.MemberTraceIdealAlong.isInSpanOnAt_idealPow_exceptionalDivisor_iff}\lean{Hironaka.MemberTraceIdealAlong.isInSpanOnAt_exceptionalDivisor_iff_mem}\upstreamlean{TranscendentalNakamaye.Pending.MemberTraceIdealAlong.isInSpanOnAt_exceptionalDivisor_of_mem_vanishingIdeal}
+\lean{Hironaka.MemberTraceIdealAlong.exceptionalDivisor_mem_iff_vanishingIdeal}\upstreamlean{history-9f3e6812efb11500}\lean{Hironaka.MemberTraceIdealAlong.isInSpanOnAt_exceptionalDivisor_iff_mem}\upstreamlean{history-fc7b0d04cca4058b}
 \mixedleanok
 Let \(\pi\) be the blowup along \(C\), \(N\supset C\) a closed submanifold, \(D=\pi^{-1}(C)\) and \(z\in N'\) with \(\pi(z)\in C\). Then \(\mathcal O(-D)=\mathcal I_D\) at
 \(z\), and \(\mathcal O(-KD)\) and \(\mathcal I_{N'\cap D}^K\) have the same restriction to \(N'\) at \(z\). In particular a germ vanishing on \(N'\cap D\) near \(z\)
@@ -3878,7 +3878,7 @@ nothing to prove if \(C=\emptyset\)); conclude by Theorem~\ref{bcalc:snc-transfo
 \label{bcalc:transform-wellformed}
 \uses{bcalc:snc-transform,bcalc:snc-simultaneous,hir:geo-transform,hir:geo-transform-wellformed,hir:marked-ideal,hir:hadamard-bridge-along}
 \source{bierstone-milman08-functoriality}
-\lean{Hironaka.GeoTransformWellFormed.isWellFormed_geoTransform_of_isAdmissibleCentre,Hironaka.GeoTransformWellFormed.isWellFormed_geoTransform}\upstreamlean{TranscendentalNakamaye.Pending.GeoTransformWellFormed.isWellFormed_geoTransform_of_E_eq_nil}\lean{Hironaka.GeoTransformWellFormed.isWellFormed_geoTransform_of_adapted}\upstreamlean{TranscendentalNakamaye.Pending.GeoTransformWellFormed.isWellFormed_geoTransform_of_E_eq_nil'}
+\lean{Hironaka.GeoTransformWellFormed.isWellFormed_geoTransform_of_isAdmissibleCentre,Hironaka.GeoTransformWellFormed.isWellFormed_geoTransform}\upstreamlean{history-76d85986b49b221d}\lean{Hironaka.GeoTransformWellFormed.isWellFormed_geoTransform_of_adapted}\upstreamlean{history-63bdda420950b350}
 \mixedleanok
 Let \(\underline{\mathcal I}=(M,N,E,\mathfrak a,d)\) be a well-formed marked ideal and \(C\) an admissible centre. Then the transform of
 \(\underline{\mathcal I}\) by the blowup along \(C\) is well formed.
@@ -3901,7 +3901,7 @@ centre with \(E\), and the members containing the centre do not change it.
 \label{bcalc:sub-divisor}
 \uses{hir:snc,hir:marked-ideal}
 \source{bierstone-milman08-functoriality}
-\lean{Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_mem,Hironaka.NormalCrossingsComparison.isTransverse_of_forall_mem,Hironaka.NormalCrossingsComparison.isSNCDivisor_of_sublist}\upstreamlean{TranscendentalNakamaye.Pending.NormalCrossingsComparison.isWellFormed_withE}
+\lean{Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_mem,Hironaka.NormalCrossingsComparison.isTransverse_of_forall_mem,Hironaka.NormalCrossingsComparison.isSNCDivisor_of_sublist}\upstreamlean{history-0a495a247d4e5831}
 \mixedleanok
 Let \(E\) be a finite sequence of closed subsets of \(X\) and \(E'\) a finite sequence each of whose members is a member of \(E\).
 (1) If \(C\) has only normal crossings with \(E\), it has only normal crossings with \(E'\); if \(E\) is transverse to \(N\), so is \(E'\).
@@ -3921,7 +3921,7 @@ increasing, hence injective, map of the indices; composing the hyperplane indice
 \label{bcalc:nc-comparison}
 \uses{bcalc:sub-divisor,bcalc:snc-simultaneous,hir:snc,hir:transform,ana:local-holomorphic-inverse}
 \source{bierstone-milman08-functoriality,wlodarczyk05-hironaka}
-\lean{Hironaka.NormalCrossingsComparison.hasNormalCrossings_iff_of_forall_mem,Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_notMem,Hironaka.NormalCrossingsComparison.IsPartialNCAt,Hironaka.NormalCrossingsComparison.isPartialNCAt_of_hasNormalCrossings,Hironaka.NormalCrossingsComparison.IsPartialNCAt.insert,Hironaka.NormalCrossingsComparison.mem_complexCoordinatePlane_pred_iff}\upstreamlean{TranscendentalNakamaye.Pending.NormalCrossingsComparison.hasNormalCrossings_filter_iff,TranscendentalNakamaye.Pending.NormalCrossingsComparison.hasNormalCrossings_drop_iff}\lean{Hironaka.NormalCrossingsComparison.isAdmissibleCentre_withE_iff}
+\lean{Hironaka.NormalCrossingsComparison.hasNormalCrossings_iff_of_forall_mem,Hironaka.NormalCrossingsComparison.hasNormalCrossings_of_forall_notMem,Hironaka.NormalCrossingsComparison.IsPartialNCAt,Hironaka.NormalCrossingsComparison.isPartialNCAt_of_hasNormalCrossings,Hironaka.NormalCrossingsComparison.IsPartialNCAt.insert,Hironaka.NormalCrossingsComparison.mem_complexCoordinatePlane_pred_iff}\upstreamlean{history-9dab0a05e1435531,history-6614ea3b05a1f6c2}\lean{Hironaka.NormalCrossingsComparison.isAdmissibleCentre_withE_iff}
 \mixedleanok
 Let \(E\) be a simple normal crossings divisor on \(X\), \(C\subset X\), and \(E'\) a finite sequence of members of \(E\) such that every member of
 \(E\) that is not a member of \(E'\) contains \(C\). Then \(C\) has only normal crossings with \(E'\) if and only if it has only normal crossings with
@@ -3954,7 +3954,7 @@ cosupport of a marked ideal does not depend on \(E\), so admissibility (Definiti
 \label{bcalc:nc-comparison-transform}
 \uses{hir:geo-transform,hir:snc}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.NormalCrossingsComparison.geoStrictTransform_mono,Hironaka.NormalCrossingsComparison.forall_mem_transformE}\upstreamlean{TranscendentalNakamaye.Pending.NormalCrossingsComparison.sublist_transformE}\lean{Hironaka.NormalCrossingsComparison.forall_notMem_transformE,Hironaka.NormalCrossingsComparison.geoTransform_withE}
+\lean{Hironaka.NormalCrossingsComparison.geoStrictTransform_mono,Hironaka.NormalCrossingsComparison.forall_mem_transformE}\upstreamlean{history-6d4a19e35a8c3f6f}\lean{Hironaka.NormalCrossingsComparison.forall_notMem_transformE,Hironaka.NormalCrossingsComparison.geoTransform_withE}
 \mixedleanok
 Let \(E\) and \(E'\) be finite sequences of subsets of \(X\) such that every member of \(E'\) is a member of \(E\) and every member of \(E\) that is not a
 member of \(E'\) contains \(S\). Let \(\pi\colon Y\to X\) be a map, \(C\subset X\), and let \(E^\pi=(H_1',\dots,H_s',\pi^{-1}(C))\), with
@@ -3974,7 +3974,7 @@ both, so it is \(H'\) for a member \(H\) of \(E\); \(H\) is not a member of \(E'
 \label{bcalc:multiplicity-one}
 \uses{bcalc:giraud-strict,bcalc:strict-submanifold,hir:derivative-ideal,ana:local-holomorphic-inverse}
 \source{wlodarczyk05-hironaka}
-\lean{Hironaka.GeneratorMultiplicityOne.surjective_fderiv_toFun}\upstreamlean{TranscendentalNakamaye.Pending.GeneratorMultiplicityOne.exists_chartDeriv_ne_zero_of_vanishingIdeal_eq_span,TranscendentalNakamaye.Pending.GeneratorMultiplicityOne.exists_chartDeriv_ne_zero_controlledTransform}
+\lean{Hironaka.GeneratorMultiplicityOne.surjective_fderiv_toFun}\upstreamlean{history-b3ef344982b3d05d,history-f6acc165d7c0a094}
 \mixedleanok
 Let \(N\) be regular of dimension \(k<n\) at \(y\), and suppose \(\mathcal I_N=(g)\) at \(y\) with \(g\) holomorphic. Then \(dg(y)\ne0\): some partial
 derivative of \(g\) in a chart does not vanish at \(y\). Consequently, in the situation of Corollary~\ref{bcalc:giraud-strict} with \(N\) of

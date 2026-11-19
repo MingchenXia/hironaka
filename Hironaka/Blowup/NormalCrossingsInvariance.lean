@@ -1,23 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.NormalCrossings
 import Hironaka.Analytic.RegularAtDimTransport
 import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.LocalHolomorphicInverse
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Normal crossings pull back along local biholomorphisms and open inclusions
 
-Sources: Włodarczyk 2005 §2.4 (functoriality of the resolution under étale maps; here biholomorphisms and open
-embeddings, the clauses (2)--(3) of `hir:canonical-resolution`), Bierstone--Milman 2008 Theorem 1.3 (functoriality).
+Blueprint `hir:snc-invariance` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Sources:
+Włodarczyk 2005 §2.4 (functoriality of the resolution under étale maps; here biholomorphisms and
+open embeddings, the clauses (2)--(3) of `hir:canonical-resolution`), Bierstone--Milman 2008
+Theorem 1.3 (functoriality).
 
 The three normal crossings notions of `Hironaka.NormalCrossings` (`IsSNCDivisor`, `HasNormalCrossings`,
 `IsTransverse`) are all built from one local picture, adapted coordinates for a family at a point
@@ -36,6 +30,11 @@ crossings and transversality pull back (`isSNCDivisor_map_preimage`, `hasNormalC
 `isTransverse_preimage`).  Instances: maps without exceptional points
 (`pullsBackCoordinates_of_forall_notMem_exceptionalLocus`, e.g. biholomorphisms) and open inclusions
 (`pullsBackCoordinates_val`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -45,7 +44,8 @@ universe u
 
 namespace Hironaka.NormalCrossingsInvariance
 
-open Hironaka.BlowupSequences Hironaka.NormalCrossings Hironaka.AnalyticSubsetOpens
+open Hironaka.BlowupSequences Hironaka.NormalCrossings
+  Hironaka.AnalyticSubsetOpens
 
 noncomputable section
 

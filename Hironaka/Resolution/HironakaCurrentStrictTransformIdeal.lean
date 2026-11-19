@@ -1,12 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaStageCenters
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.Invariant.CoherentZeroLocus
-import Hironaka.Blowup.StrictVanishingIdealSupport
 
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
@@ -46,16 +38,16 @@ theorem order_le_of_ideal_le {X : CMfd.{u} n} {N : Set X} {a b : GermIdeal n X}
 
 /-- A preserved dense initial open part puts the actual current strict transform
 inside the actual controlled cosupport, even for a singular initial set. -/
-theorem strictTransform_subset_cosupp_of_centresAvoid {X Y : CMfd.{u} n} {W : Set X}
-    {E₀ : List (Set X)} {k : ℕ} (hW : IsClosed W)
-    (hdom : IsInvDomain k (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X))
+theorem strictTransform_subset_cosupp_of_centresAvoid_wellFormed {X Y : CMfd.{u} n} {W : Set X}
+    {E₀ : List (Set X)} (hW : IsClosed W)
+    (hWF : (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X).IsWellFormed)
     (O : Opens X) (hdense : W ⊆ closure (W ∩ (O : Set X))) (T : BlowupTower X Y)
     (hT : IsGeoTestTower (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X) T)
     (hO : CentresAvoid O T) :
     strictTransform n T.proj W ⊆
       (geoTransformAlong (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X) T).cosupp := by
   let m : MarkedIdeal n X := ⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩
-  obtain ⟨hN, hcoh, _⟩ := pullback_eq_mul_geoTransformAlong (𝔪 := m) rfl hdom.isWellFormed.isCoherent T hT
+  obtain ⟨hN, hcoh, _⟩ := pullback_eq_mul_geoTransformAlong (𝔪 := m) rfl hWF.isCoherent T hT
   have hcos : (geoTransformAlong m T).cosupp = (geoTransformAlong m T).ideal.zeroLocus := by
     rw [MarkedIdeal.cosupp, hN, d_geoTransformAlong, cosupport_one
       (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcoh hg), univ_inter]
@@ -67,8 +59,18 @@ theorem strictTransform_subset_cosupp_of_centresAvoid {X Y : CMfd.{u} n} {W : Se
   refine hD.trans (closure_minimal ?_ hclosed)
   rintro y ⟨hyS, hyO⟩
   have hyO' : T.proj y ∈ O := by simpa using hyO
-  exact (HironakaEmbeddedBoundary.mem_cosupp_iff_of_centresAvoid hW hdom O T hT hO hyO').mpr
+  exact (HironakaEmbeddedBoundary.mem_cosupp_iff_of_centresAvoid_wellFormed hW hWF O T hT hO hyO').mpr
     (strictTransform_subset_preimage T.contMDiff_proj.continuous hW hyS)
+
+theorem strictTransform_subset_cosupp_of_centresAvoid {X Y : CMfd.{u} n} {W : Set X}
+    {E₀ : List (Set X)} {k : ℕ} (hW : IsClosed W)
+    (hdom : IsInvDomain k (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X))
+    (O : Opens X) (hdense : W ⊆ closure (W ∩ (O : Set X))) (T : BlowupTower X Y)
+    (hT : IsGeoTestTower (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X) T)
+    (hO : CentresAvoid O T) :
+    strictTransform n T.proj W ⊆
+      (geoTransformAlong (⟨univ, E₀, vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X) T).cosupp :=
+  strictTransform_subset_cosupp_of_centresAvoid_wellFormed hW hdom.isWellFormed O hdense T hT hO
 
 /-- Actual controlled germs vanish near every point on the current strict transform. -/
 theorem controlledIdeal_le_currentStrictIdeal {X Y : CMfd.{u} n} {W : Set X}

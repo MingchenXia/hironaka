@@ -1,58 +1,28 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneCanonicalTail
 import Hironaka.MarkedIdeal.CodimOneCentreAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.BoundaryCountAlong
-import Hironaka.MarkedIdeal.CodimOneSupport
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsComparison
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneMaskTower
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: the value drops over the special points of a canonical centre
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: Step 1aa ("the intersections `H^s_α ∩
-N` contained in the support ... blowing them up decreases `s`") and Step 1ba ("blowing up the codimension one
-components ... removes them from the support").
+Blueprint `hir:step-one-special-drop` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: Step 1aa ("the intersections `H^s_α ∩ N` contained
+in the support ... blowing them up decreases `s`") and Step 1ba ("blowing up the codimension one components ... removes them
+from the support").
 
 Property (3) of the Step 1 value function (`hir:centre-function`, "the value drops over the centre") at the **special** points,
 for every family of lower marked ideals (`StepOneValueMasked.stepOneInvL`).  Let `T σ` be a multiple test blow-up of
 `J̄ = 𝓒_N(𝓗_N(𝔍))` whose last centre `C` is the maximum locus of the Step 1 value at the last stage of `T`, and `x ∈ C` a special
 point of level `s`, so the maximum is `(s, ∞)`:
 
-* `s ≥ 1` (Step 1aa): near `x`, the points of `N` on the original members through `x` lie in the cosupport (the
-  member locus), have level `s` and are special, hence have the maximal value and lie in `C`;
-  `BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_boundaryCount_along` then makes the level drop at
-  every point of the cosupport over `x` (`level_step_lt_of_isSpecial`);
-* `s = 0` (Step 1ba): near `x` the cosupport is the codimension-one part `Z₁` (every point of it there has level `0`
-  and is special, so lies in `C`), so `C` is regular of codimension one in `N` at `x`, and by maximal order
+* `s ≥ 1` (Step 1aa): near `x`, the points of `N` on the original members through `x` lie in the cosupport (the member locus),
+  have level `s` and are special, hence have the maximal value and lie in `C`; TN3's
+  `BoundaryCountAlong.boundaryCount_map_geoStrictTransform_lt_boundaryCount_along` then makes the level drop at every point of
+  the cosupport over `x` (`level_step_lt_of_isSpecial`);
+* `s = 0` (Step 1ba): near `x` the cosupport is the codimension-one part `Z₁` (every point of it there has level `0` and is
+  special, so lies in `C`), so `C` is regular of codimension one in `N` at `x`, and by maximal order TN3's
   `CodimOneCentreAlong.notMem_cosupp_geoTransform_of_codim_one_along` leaves no point of the cosupport over `x`
   (`notMem_cosupp_step_of_isSpecial_zero`).
 
@@ -62,6 +32,9 @@ masked Step 1 value function along canonical segments which are multiple test bl
 the field `decrease` of `ResolutionInvariantExt.ResolutionInvariant`): blowing up the nonempty maximum locus, the value drops over
 it and is unchanged off it.  Likewise **property (4)** (`stepOneInvM_emptyStep`, the field `emptyStep`): a blowup along
 the empty centre does not change the values.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -72,7 +45,14 @@ universe u v
 namespace Hironaka.StepOneSpecialDrop
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneValueMasked Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.BlowupStrictSubmanifold Hironaka.GermIdealOrder Hironaka.NormalCrossings
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneValueMasked Hironaka.BoundaryCount
+  Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.BlowupStrictSubmanifold
+  Hironaka.GermIdealOrder Hironaka.NormalCrossings
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant)
 

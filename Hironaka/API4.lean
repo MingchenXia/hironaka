@@ -1,25 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedAnalyticLocal
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaBaseChange
-import Hironaka.Resolution.HironakaEmbeddedDimensionParts
-import Hironaka.Blowup.NormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The public statements of the Hironaka library, IV: analytic sets over relatively compact open sets; restriction to opens
 
-`Hironaka.API`, `Hironaka.API2` and `Hironaka.API3` are unchanged; this module adds, in the same form (over an
-unbundled complex manifold, without marked ideals, towers, invariants or domain conditions):
+Blueprint `hir:public-statements-analytic-local` (`blueprint/src/hironaka.tex`; TN.5, the relatively compact and local forms of
+gap (G1) of the public surface).  `HironakaAPI`, `HironakaAPI2` and `HironakaAPI3` are unchanged; this module adds, in the same
+form (over an unbundled complex manifold, without marked ideals, towers, invariants or domain conditions):
 
 ## Embedded resolution of an arbitrary analytic set over an open set contained in a compact set
 
@@ -44,6 +33,9 @@ For an analytic set `W ⊆ X` with empty interior (its components may have diffe
   total space is embedded onto `f⁻¹(O)`; exceptional loci and strict transforms correspond).
 
 These are restatements of theorems of `HironakaEmbeddedAnalyticLocal` and `HironakaBaseChange`; their proofs are one line.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedAnalyticLocal` only; it does not import,
+even transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -54,7 +46,8 @@ universe u
 namespace Hironaka
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence Hironaka.HironakaEmbeddedDimensionParts
+open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence
+  Hironaka.HironakaEmbeddedDimensionParts
 
 noncomputable section
 
@@ -186,7 +179,7 @@ variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [Is
 
 /-- **Separation over an open set contained in a compact set, relative to a boundary**: `A, B ⊆ X` analytic, `A` with empty
 interior, `A ⊆ closure (A \ B)`, `B ⊆ closure (B \ A)` (no compactness), `E₀` a divisor with simple normal crossings, `X₀` an
-open set contained in a compact set. There is an admissible blowup sequence of `(X₀, E₀|X₀)` with centres over `A ∩ B ∩ X₀`,
+open set contained in a compact set.  There is an admissible blowup sequence of `(X₀, E₀|X₀)` with centres over `A ∩ B ∩ X₀`,
 with a divisor with simple normal crossings, after which the strict transforms of `A ∩ X₀` and `B ∩ X₀` are disjoint. -/
 theorem exists_separation_of_subset_isCompact {A B : Set X} (hAa : IsComplexAnalyticSubset (n := n) A)
     (hBa : IsComplexAnalyticSubset (n := n) B) (hint : interior A = ∅) (hAB : A ⊆ closure (A \ B))

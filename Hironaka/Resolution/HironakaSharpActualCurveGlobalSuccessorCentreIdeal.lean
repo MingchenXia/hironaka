@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSharpActualCurveGlobalSuccessorCentre
-import Hironaka.Support.OriginalInvertibleOpenCoverExact
+import Hironaka.Resolution.HironakaOriginalGlobalPrincipalization
 
 /-! Entire actual centre-ideal pullback identities precede genuine global
 invertibility; no principalization or blowup certificate is an input. -/

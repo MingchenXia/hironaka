@@ -1,31 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaAdmissibleCalculus
 import Hironaka.Blowup.BlowupRestrictOpen
 import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsInvariance
-import Hironaka.Analytic.RegularAtDimTransport
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Base change of admissible blowup sequences along open holomorphic embeddings (Hironaka)
 
-Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Theorem 1.3 and the paragraph after it (a
-resolution sequence pulls back along an open embedding, trivial blowings-up being inserted); Włodarczyk 2005
-(`wlodarczyk05-hironaka`), §2.4 (Proposition `pr:funct`, multiple test blow-ups pull back along étale maps, here
-open embeddings).
+Blueprint `hir:base-change-open` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka library: the tool behind the relatively
+compact and local forms of the embedded resolution of an arbitrary analytic set, `HironakaEmbeddedAnalyticLocal`).  Sources:
+Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Theorem 1.3 and the paragraph after it (a resolution sequence
+pulls back along an open embedding, trivial blowings-up being inserted); Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.4
+(Proposition `pr:funct`, multiple test blow-ups pull back along étale maps, here open embeddings).
 
 **Open holomorphic embeddings.**  `IsOpenHoloEmbedding n ι` for `ι : B → A`: `ι` is a biholomorphism `Φ : B ≅ O` onto an open
 subset `O ⊆ A` followed by the inclusion.  Examples: the inclusion of an open subset (`isOpenHoloEmbedding_val`), its
@@ -46,6 +33,10 @@ transform of `ι⁻¹S` by `f'` is `j⁻¹` of the strict transform of `S` by `f
 normal crossings and simple normal crossings divisors pull back along open holomorphic embeddings
 (`regularAtDim_preimage`, `hasNormalCrossings_preimage`, `isSNCDivisor_map_preimage`).  The case of the inclusion of an
 open subset is `IsAdmissibleBlowupSequence.exists_restrict_opens` (restriction of an admissible sequence to an open subset).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaAdmissibleCalculus`, `BlowupRestrictOpen` and
+`MarkedIdealTowerTransport` only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -56,7 +47,8 @@ universe u
 namespace Hironaka.HironakaBaseChange
 
 open Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance Hironaka.HironakaAdmissibleSequence Hironaka.HironakaAdmissibleCalculus
+open Hironaka.NormalCrossings Hironaka.NormalCrossingsInvariance
+  Hironaka.HironakaAdmissibleSequence Hironaka.HironakaAdmissibleCalculus
 
 noncomputable section
 
@@ -151,6 +143,10 @@ theorem isOpenEmbedding (h : IsOpenHoloEmbedding n ι) : Topology.IsOpenEmbeddin
 theorem continuous (h : IsOpenHoloEmbedding n ι) : Continuous ι := h.contMDiff.continuous
 
 theorem isOpenMap (h : IsOpenHoloEmbedding n ι) : IsOpenMap ι := h.isOpenEmbedding.isOpenMap
+
+theorem injective (h : IsOpenHoloEmbedding n ι) : Function.Injective ι := h.isOpenEmbedding.injective
+
+theorem isOpen_range (h : IsOpenHoloEmbedding n ι) : IsOpen (range ι) := h.isOpenEmbedding.isOpen_range
 
 /-- **Closures pull back** along an open holomorphic embedding. -/
 theorem preimage_closure (h : IsOpenHoloEmbedding n ι) (S : Set A) : ι ⁻¹' closure S = closure (ι ⁻¹' S) :=

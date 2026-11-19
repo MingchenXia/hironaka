@@ -1,61 +1,61 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.MarkedIdeals
 import Hironaka.Blowup.BlowupStrictIdeal
 import Hironaka.Blowup.BlowupTowerTransforms
 import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Blowup.ExceptionalFibres
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.Coherence.VanishingIdealCoherent
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The transform of a marked ideal with centre-relative strict transforms
 
-Sources: Bierstone--Milman 2008, Definitions 2.2 (the transform `(M', N', E', 𝓘', d)` of a marked ideal by an
-admissible blowing-up: `N'` and the members of `E'` other than the last are STRICT transforms, i.e. blowups of `N`
-and of the `H ∈ E` along their intersections with the centre), Włodarczyk 2005 §2.1 (conditions (3)--(5) of a
-resolution) and §2.2 (controlled transforms).
+Blueprint `hir:geo-transform`, `hir:geo-transform-basic`, `hir:geo-transform-wellformed`,
+`hir:geo-transform-ambient` (`blueprint/src/hironaka.tex`, Hironaka phase H1/H2).  Sources:
+Bierstone--Milman 2008, Definitions 2.2 (the transform `(M', N', E', 𝓘', d)` of a marked ideal by an
+admissible blowing-up: `N'` and the members of `E'` other than the last are STRICT transforms, i.e.
+blowups of `N` and of the `H ∈ E` along their intersections with the centre), Włodarczyk 2005 §2.1
+(conditions (3)--(5) of a resolution) and §2.2 (controlled transforms).
 
 ## Why a second transform
 
-When the algorithm blows up a codimension-one centre equal to an earlier exceptional member `H` (Włodarczyk's lemma
-on codimension-one components of the cosupport), the old transform lists `H` twice in `E'` (not simple normal
-crossings), and a component of `N` inside `C` survives in `N'` (not transverse to `E'`, and the generator of the
-exceptional ideal vanishes on it). This module defines the corrected transform `geoTransform`, NEW, without touching
-the existing one.
+Until run 0191, `MarkedIdeals.MarkedIdeal.transform` took the strict transforms of `N` and of the members
+of `E` with the FirstPass `strictTransform n π A = closure (π⁻¹ A \ Exc π)`.  Along a centre `C` of codimension
+one the blowup is a biholomorphism, `Exc π = ∅`, and that keeps the parts of `A` lying in `C`; the
+sources' strict transform is `closure (π⁻¹ (A \ C))` (`BlowupStrictSubmanifold.geoStrictTransform`),
+which deletes them.  When the algorithm blows up a codimension-one centre equal to an earlier
+exceptional member `H` (Włodarczyk's lemma on codimension-one components of the cosupport), the old
+transform lists `H` twice in `E'` (not simple normal crossings), and a component of `N` inside `C`
+survives in `N'` (not transverse to `E'`, and the generator of the exceptional ideal vanishes on it).
+This module defines the corrected transform `geoTransform`, NEW, without touching the existing one
+(review finding R-1 of I-0981 C-0004; human question I-0988).  The in-place fix was authorised (human
+decisions I-1010 and I-1011, run 0191): `transform` now has the same body as `geoTransform`, and
+`geoTransform_eq_transform` holds without its hypothesis.
 
 ## Main declarations
 
 * `geoTransform`, `geoTransformAlong`, `IsGeoTestTower`, `IsGeoResolution` and their bookkeeping
-  (`geoTransformAlong_append`, `isGeoTestTower_append_iff`, `d_geoTransformAlong`, `length_E_geoTransformAlong`);
+  (`geoTransformAlong_append`, `isGeoTestTower_append_iff`, `IsGeoResolution.append`,
+  `isGeoResolution_refl_iff`, `d_geoTransformAlong`, `length_E_geoTransformAlong`);
+* comparison with the existing transform (TN3's `BlowupStrictIdeal.geoStrictTransform_subset_strictTransform`,
+  `BlowupStrictIdeal.geoStrictTransform_eq_strictTransform` for centres nowhere dense in `N`):
+  `geoStrictTransform_eq_strictTransform_of_exceptionalLocus_eq`, `geoTransform_eq_transform` (equal whenever `Exc π = π⁻¹ C`, e.g. for centres of codimension
+  `≥ 2` or empty centres), and the defect itself: `geoStrictTransform_eq_empty_of_subset`
+  (a member contained in the centre disappears);
 * well-formedness ingredients: `isClosedSubmanifold_geoTransform_N` (`N'` is a closed submanifold, from
-  `BlowupStrictIdeal.isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold`),
-  `isInvertibleAlong_geoStrictTransform` (the exceptional ideal is invertible ALONG `N'`, the property that fails
-  for the old transform), `restrictLe_pullback`, `isCoherent_geoTransform_ideal` (the transformed ideal is
-  coherent);
+  TN3's `BlowupStrictIdeal.isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold`),
+  `isInvertibleAlong_geoStrictTransform` (the exceptional ideal is invertible ALONG `N'`, the
+  property that fails for the old transform), `restrictLe_pullback`,
+  `isCoherent_geoTransform_ideal` (the transformed ideal is coherent);
+* `N = M`: `geoStrictTransform_univ`, `geoTransform_N_eq_univ`,
+  `geoTransform_ideal_eq_controlledTransform`, and along a multiple test blow-up of `(M, M, E, 𝔞, d)`:
+  `pullback_eq_mul_geoTransformAlong` (`T^*𝔞 = 𝒪(-d E_T) · 𝔞_T`, `𝔞_T` coherent, any mark `d`),
+  `pullback_eq_exceptionalDivisor_of_isGeoResolution` (a resolution with the mark `1` principalizes:
+  `T^*𝔞 = 𝒪(-E_T)`), `isInvertible_pullback_of_isGeoResolution`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -114,7 +114,40 @@ theorem geoTransform_ideal : (𝔪.geoTransform C π).ideal =
 theorem length_E_geoTransform : (𝔪.geoTransform C π).E.length = 𝔪.E.length + 1 := by
   simp
 
+/-- The exceptional divisor is the last member of the transformed `E`. -/
+theorem getLast_E_geoTransform :
+    (𝔪.geoTransform C π).E.getLast (by simp) = π ⁻¹' C := by
+  simp
+
+/-! ### Comparison with `strictTransform` and with `transform` -/
+
 variable {𝔪 C π}
+
+/-- **A set inside the centre has empty strict transform**: this is what removes, e.g., an
+exceptional member `H` blown up again as a codimension-one centre `C = H`. -/
+theorem geoStrictTransform_eq_empty_of_subset {A : Set M} (hA : A ⊆ C) :
+    geoStrictTransform π C A = ∅ := by
+  rw [geoStrictTransform, sdiff_eq_empty.mpr hA, preimage_empty, closure_empty]
+
+/-- **Both strict transforms agree when `Exc π = π⁻¹ C`** (centres of codimension `≥ 2`). -/
+theorem geoStrictTransform_eq_strictTransform_of_exceptionalLocus_eq
+    (h : exceptionalLocus n π = π ⁻¹' C) (A : Set M) :
+    geoStrictTransform π C A = strictTransform n π A := by
+  rw [geoStrictTransform, strictTransform, h, preimage_sdiff]
+
+/-- **Both transforms agree when `Exc π = π⁻¹ C`.** -/
+theorem geoTransform_eq_transform (h : exceptionalLocus n π = π ⁻¹' C) :
+    𝔪.geoTransform C π = 𝔪.transform C π := by
+  -- since run 0191 (I-1010 / I-1011) `transform` takes the same centre-relative strict transforms,
+  -- so the two transforms agree without the hypothesis
+  have _h := h
+  rfl
+
+/-- For the empty centre both transforms agree (the blowup is then a biholomorphism). -/
+theorem geoTransform_empty_eq_transform (hπ : IsBlowupAlong n (∅ : Set M) π) :
+    𝔪.geoTransform ∅ π = 𝔪.transform ∅ π :=
+  geoTransform_eq_transform (subset_empty_iff.mp fun _ hy =>
+    BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ hy)
 
 /-! ### Well-formedness ingredients -/
 
@@ -143,8 +176,10 @@ theorem one_mem_pullback_vanishingIdeal {y : M'} (hy : π y ∉ C) (hC : IsClose
   exact isInSpanAt_self (S := fun s => ∃ a, (vanishingIdeal (n := n) C).mem (π y) a ∧ s = a ∘ π)
     ⟨fun _ => (1 : ℂ), h1, rfl⟩ (holomorphicAt_const 1)
 
-/-- **The exceptional ideal is invertible along `N'`**: its local generator vanishes identically on no nonempty
-relatively open subset of `N' = closure (π⁻¹ (N \ C))`, because `π⁻¹ (N \ C)` is dense in `N'` and misses `π⁻¹ C`. -/
+/-- **The exceptional ideal is invertible along `N'`**: its local generator vanishes identically on
+no nonempty relatively open subset of `N' = closure (π⁻¹ (N \ C))`, because `π⁻¹ (N \ C)` is dense
+in `N'` and misses `π⁻¹ C`.  (For the FirstPass strict transform this fails along codimension-one
+centres containing a component of `N`.) -/
 theorem isInvertibleAlong_geoStrictTransform (hπ : IsBlowupAlong n C π) (N : Set M) (d : ℕ) :
     IsInvertibleAlong n (geoStrictTransform π C N)
       (idealPow (GermIdeal.pullback (m := n) π (vanishingIdeal (n := n) C)) d) := by
@@ -298,6 +333,17 @@ theorem isGeoTestTower_append_iff (T : BlowupTower X Y) (S : BlowupTower Y Z) :
     simp only [BlowupTower.append, IsGeoTestTower, ih, geoTransformAlong_append]
     tauto
 
+/-- **Resolutions concatenate.** -/
+theorem IsGeoResolution.append {T : BlowupTower X Y} {S : BlowupTower Y Z}
+    (hT : IsGeoTestTower 𝔪 T) (hS : IsGeoResolution (geoTransformAlong 𝔪 T) S) :
+    IsGeoResolution 𝔪 (T.append S) :=
+  ⟨(isGeoTestTower_append_iff 𝔪 T S).mpr ⟨hT, hS.1⟩, by rw [geoTransformAlong_append]; exact hS.2⟩
+
+/-- The empty tower resolves exactly the marked ideals with empty cosupport. -/
+theorem isGeoResolution_refl_iff :
+    IsGeoResolution 𝔪 (BlowupTower.refl : BlowupTower X X) ↔ 𝔪.cosupp = ∅ := by
+  simp [IsGeoResolution, IsGeoTestTower]
+
 /-- **Along a multiple test blow-up of `(X, X, E, 𝔞, d)`** with `𝔞` coherent, `N` stays the whole
 space, the transform `𝔞_T` is coherent, and `T^*𝔞 = 𝒪(-d E_T) · 𝔞_T` (any mark `d`; the centre
 inclusions `𝔞_T ⊆ 𝓘_C^d` come from the Hadamard bridge). -/
@@ -364,6 +410,13 @@ theorem pullback_eq_exceptionalDivisor_of_isGeoResolution (hN : 𝔪.N = univ)
   rw [hpb, BlowupTowerTransforms.eq_unitIdeal_of_zeroLocus_eq_empty hcohT hz, hd,
     RestrictLeCalculus.mul_unitIdeal (isCoherent_idealPow (isCoherent_ideal _) _), idealPow_succ,
     idealPow_zero, unitIdeal_mul (isCoherent_ideal _)]
+
+/-- The principalized total transform is invertible. -/
+theorem isInvertible_pullback_of_isGeoResolution (hN : 𝔪.N = univ) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 𝔪.d = 1) (T : BlowupTower X Y) (hT : IsGeoResolution 𝔪 T) :
+    (GermIdeal.pullback (m := n) T.proj 𝔪.ideal).IsInvertible := by
+  rw [pullback_eq_exceptionalDivisor_of_isGeoResolution 𝔪 hN h𝔞 hd T hT]
+  exact (BlowupTowerTransforms.exceptionalDivisor T).isInvertible
 
 end Tower
 

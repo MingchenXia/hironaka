@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Mathlib.Algebra.MvPolynomial.PDeriv
 import Mathlib.Algebra.Module.LinearMap.End
 import Mathlib.RingTheory.Ideal.Maps

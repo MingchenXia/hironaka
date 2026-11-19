@@ -1,54 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GeoTransformWellFormed
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialStepAlong
-import Hironaka.Invariant.NonmonomialTransformAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The order of the nonmonomial part along canonical segments of the general step
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0188.  Blueprint
+`bcalc:nonmonomial-order-canonical` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`),
+Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
 
 The value of the general step at a point `y` of the cosupport has as first entry the order `ν(y) = ord_y(𝓝(𝔪_T)|_{N_T})` of
 the nonmonomial part (`NonmonomialOrderLocal.nmOrd`), followed by a value read off the companion ideal (`o ≥ 1`) or the
@@ -70,6 +30,9 @@ blow-ups; true for `toLex (ν, ·)`, `ordMonotone_toLex`):
   stage before the last step of `M σ`, every centre of `M σ` lies in `{ν ≥ o + 1}`, the hypothesis of
   `NonmonomialOrderRegime.centresAvoid_of_centresOrdGt` / `companionOf_rebase_of_centresOrdGt`;
   `centresAvoid_of_canonical`: hence the centres between two start stages miss an open set on which `ν ≤ o`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -80,7 +43,15 @@ universe u v
 namespace Hironaka.NonmonomialOrderCanonical
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.GermIdealOrder Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.RestrictEmptyTower Hironaka.RelativePrincipalizationSpan Hironaka.InvertibleIdealQuotient Hironaka.RestrictedIdealQuotient Hironaka.RestrictedIdealExtension Hironaka.IdealWeightPowers Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.GermIdealOrder Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.StepOneRegime
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime
+  Hironaka.RestrictEmptyTower Hironaka.RelativePrincipalizationSpan
+  Hironaka.InvertibleIdealQuotient Hironaka.RestrictedIdealQuotient
+  Hironaka.RestrictedIdealExtension Hironaka.IdealWeightPowers
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus)
 
@@ -321,6 +292,18 @@ theorem isInvUSCOn_of_ordMonotone (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪
     omega
   · exact h2 hy' heq
 
+/-- **Upper semicontinuity of the lexicographic value `(ν, g)`** (`𝔪` in the domain, `n > 0`): it suffices that near every
+point `y` of the cosupport, `g ≤ g(y)` at the cosupport points of the same order. -/
+theorem isInvUSCOn_toLex (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪) {Λ' : Type v} [LinearOrder Λ']
+    (g : ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ') {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower 𝔪 T)
+    (hlev : ∀ y ∈ (geoTransformAlong 𝔪 T).cosupp, ∀ᶠ y' in 𝓝 y, y' ∈ (geoTransformAlong 𝔪 T).cosupp →
+      nmOrd (geoTransformAlong 𝔪 T) y' = nmOrd (geoTransformAlong 𝔪 T) y → g T y' ≤ g T y) :
+    IsInvUSCOn (fun y => toLex (nmOrd (geoTransformAlong 𝔪 T) y, g T y)) (geoTransformAlong 𝔪 T).cosupp :=
+  isInvUSCOn_of_ordMonotone (f := fun {Y} T y => toLex (nmOrd (geoTransformAlong 𝔪 T) y, g (Y := Y) T y)) hn h
+    (ordMonotone_toLex 𝔪 g) T hT fun y hy => (hlev y hy).mono fun _ hy' hy'c heq =>
+      Prod.Lex.toLex_le_toLex.mpr (Or.inr ⟨heq, hy' hy'c heq⟩)
+
 end USC
 
 /-! ### Re-basing at the start of the run -/
@@ -412,6 +395,28 @@ theorem centresAvoid_of_canonical (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪
   have hdom₀ := InvDomainTowerAlong.isInvDomain_geoTransformAlong h T₀ hT₀
   exact centresAvoid_of_centresOrdGt hn hdom₀ W hbound (.step M C π hπ) hTM
     (centresOrdGt_of_canonical hn h hf T₀ M C π hπ hT hcan w hw hwo)
+
+/-- **The companion ideal re-bases across the steps between two start stages** (`𝔪` in the domain, `n > 0`, `o ≥ 1`):
+under the hypotheses of `centresAvoid_of_canonical`, with `S = M σ`,
+`𝓞(𝔪_{T₀ S}, o)|_{S⁻¹W} ≃ (𝓞(𝔪_{T₀}, o)|_W)_{S|_W}` (`CompanionRebase.restrictEquiv_companionOf_rebase`); with
+properties (4') and (7) of the invariant applied to the companion ideal this compares the values computed from the two
+start stages. -/
+theorem restrictEquiv_companionOf_rebase_of_canonical (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪)
+    (hf : OrdMonotone 𝔪 f) {o : ℕ} (ho : 1 ≤ o) {Y₀ : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (W : Opens Y₀)
+    (hbound : ∀ x ∈ (geoTransformAlong 𝔪 T₀).cosupp, x ∈ W → x ∉ ordGe (geoTransformAlong 𝔪 T₀) (o + 1))
+    {Y Z : CMfd.{u} n} (M : BlowupTower Y₀ Y) (C : Set Y) (π : Z → Y) (hπ : IsBlowupAlong n C π)
+    (hT : IsGeoTestTower 𝔪 (T₀.append (.step M C π hπ))) (hcan : IsCanonical 𝔪 f (T₀.append (.step M C π hπ)))
+    {w : Y} (hw : w ∈ (geoTransformAlong 𝔪 (T₀.append M)).cosupp)
+    (hwo : o + 1 ≤ nmOrd (geoTransformAlong 𝔪 (T₀.append M)) w) :
+    MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv
+      (MarkedIdeal.pullback (Subtype.val : openPreimage (.step M C π hπ) W → Z)
+        (CompanionRebase.companionOf n (geoTransformAlong (geoTransformAlong 𝔪 T₀) (.step M C π hπ)) o))
+      (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → Y₀)
+        (CompanionRebase.companionOf n (geoTransformAlong 𝔪 T₀) o)) (restrict W (.step M C π hπ))) := by
+  obtain ⟨hT₀, hTM⟩ := (isGeoTestTower_append_iff 𝔪 T₀ (.step M C π hπ)).mp hT
+  have hdom₀ := InvDomainTowerAlong.isInvDomain_geoTransformAlong h T₀ hT₀
+  exact CompanionRebase.restrictEquiv_companionOf_rebase hn hdom₀ ho (.step M C π hπ) hTM W
+    (centresAvoid_of_canonical hn h hf T₀ W hbound M C π hπ hT hcan hw hwo).1
 
 end Start
 

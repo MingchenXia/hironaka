@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaNormalCrossingsGlobalPhaseCarrier
 import Hironaka.Resolution.HironakaNormalCrossingsOldBlockSuperlevels
 import Hironaka.Resolution.HironakaOriginalEmptyHeadPrefix
@@ -31,7 +26,7 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves
   HironakaNormalCrossingsGlobalPhaseCarrier HironakaNormalCrossingsOldBlockSuperlevels
   HironakaBoundaryCoefficientBranchHistories HironakaNormalCrossingsHighestSubcentreAdmissibility
   HironakaOriginalEmptyHeadPrefix RestrictEmptyTower
-open _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)
+open ResolutionInvariantExt (IsEmptyTower)
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
 private theorem count_congr {A : Type u} [TopologicalSpace A] [ChartedSpace (ComplexModel n) A]

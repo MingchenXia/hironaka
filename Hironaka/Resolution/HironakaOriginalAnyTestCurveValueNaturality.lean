@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalAnyTestCurveFullValue
 import Hironaka.Invariant.MonomialInvariantFunctorialAlong
 /-! Exact ALL-depth original curve FULL values on ANY original TEST under

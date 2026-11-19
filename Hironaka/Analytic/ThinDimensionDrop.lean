@@ -1,28 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.DimensionMonotone
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticDescendingChain
-import Hironaka.Analytic.AnalyticDimensionBasics
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.FiniteFibrePiece
-import Hironaka.Analytic.GermComponentDimension
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.GermParametrizationDense
-import Hironaka.Analytic.GermParametrizationProof
-import Hironaka.Analytic.IrreducibleGermLocal
-import Hironaka.Analytic.RegularPointDimension
+
 set_option autoImplicit false
 
 /-!
 # Thin analytic subsets have smaller dimension
 
-Let `T` be analytic in a complex manifold with `dim T ≤ a`, and `T' ⊆ T` with empty interior relative to `T`. Then
-every regular point of `T'` has dimension `< a`.
+Blueprint `rem:thin-dimension-drop` (Demailly, *Complex analytic and differential geometry*, II.5,
+used throughout II.8).  Let `T` be analytic in a complex manifold with `dim T ≤ a`, and `T' ⊆ T`
+with empty interior relative to `T`.  Then every regular point of `T'` has dimension `< a`.
 
 * `exists_isOpen_avoid`: inside an open set `W₀`, finitely many sets `F_j` each of which is avoided
   by `G` in every open subset meeting `G` can be avoided all at once by an open subset meeting `G`.
@@ -42,7 +27,9 @@ noncomputable section
 
 namespace Hironaka.ThinDimensionDrop
 
-open Hironaka.RegularLocusDense AnalyticGermDecomposition GermParametrization GermParametrizationData GermComponentDimension RegularPointDimension RegularAtDimChart AnalyticDescendingChain AnalyticDimensionBasics FiniteFibrePiece DimensionMonotone
+open Hironaka.RegularLocusDense AnalyticGermDecomposition GermParametrization
+  GermParametrizationData GermComponentDimension RegularPointDimension RegularAtDimChart
+  AnalyticDescendingChain AnalyticDimensionBasics FiniteFibrePiece DimensionMonotone
 
 variable {n : ℕ}
 
@@ -321,5 +308,12 @@ theorem lt_of_regularAtDim_of_thin {T T' : Set M} (hT : IsComplexAnalyticSubset 
     exact hwW
   rw [hempty] at hpm
   exact hpm
+
+/-- **Thin analytic subsets have smaller dimension**, as a dimension bound: `dim T' ≤ a - 1`. -/
+theorem dimLE_pred_of_thin {T T' : Set M} (hT : IsComplexAnalyticSubset (n := n) T)
+    (hT'T : T' ⊆ T) (hthin : ∀ O : Set M, IsOpen O → O ∩ T ⊆ T' → O ∩ T = ∅) {a : ℕ}
+    (hdim : DimLE (n := n) T a) : DimLE (n := n) T' (a - 1) := fun y k hy => by
+  have := lt_of_regularAtDim_of_thin hT hT'T hthin hdim hy
+  omega
 
 end Hironaka.ThinDimensionDrop

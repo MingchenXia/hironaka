@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaNormalCrossingsBoundarySeparation
 import Hironaka.Analytic.RegularAtDimTransport
 
@@ -37,8 +32,6 @@ namespace Hironaka.HironakaNormalCrossingsBiholomorphicMultiplicity
 open Hironaka.BlowupSequences HironakaNormalCrossingsLocalBranches
   HironakaNormalCrossingsMultiplicityStrata HironakaNormalCrossingsBoundaryTransform
   BlowupFlatCoordinates NormalCrossings NormalCrossingsInvariance
-
-open Hironaka
 
 noncomputable section
 variable {n : ℕ} {Y Z : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]

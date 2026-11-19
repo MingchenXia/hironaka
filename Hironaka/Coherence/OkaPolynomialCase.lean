@@ -1,13 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.OkaGermBridge
-import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Coherence.OkaGermRelations
-import Hironaka.Coherence.OkaRelationSheaf
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 

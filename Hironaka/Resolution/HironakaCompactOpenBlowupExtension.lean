@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.AnalyticSubsetPresentationsExact
 import Hironaka.Blowup.BlowupTowerIsomorphism
 import Hironaka.Blowup.BlowupExistence
 
@@ -49,36 +43,47 @@ variable {n : ℕ} {X : Type u} [TopologicalSpace X]
   {U : Opens X} {C : Set U}
 
 /-- The whole image of a compact open complex submanifold is an ambient centre. -/
-theorem isClosedSubmanifold_image_val (hC : IsClosedSubmanifold n C)
-    (hK : IsCompact C) : IsClosedSubmanifold n ((Subtype.val : U → X) '' C) := by
-  refine ⟨(hK.image continuous_subtype_val).isClosed, ?_⟩
-  rintro x ⟨c, hc, rfl⟩
-  obtain ⟨k, hk⟩ := hC.2 c hc
-  exact ⟨k, regularAtDim_image_val_iff.mpr hk⟩
+theorem isClosedSubmanifold_image_val_of_closed (hC : IsClosedSubmanifold n C)
+    (hClosed : IsClosed ((Subtype.val : U → X) '' C)) :
+    IsClosedSubmanifold n ((Subtype.val : U → X) '' C) := by
+  refine ⟨hClosed, ?_⟩
+  rintro x ⟨c,hc,rfl⟩
+  obtain ⟨k,hk⟩ := hC.2 c hc
+  exact ⟨k,regularAtDim_image_val_iff.mpr hk⟩
 
-/-- A prescribed actual blowup of an open set with compact centre is the
-restriction of a genuine ambient blowup, through its actual universal comparison. -/
-theorem exists_extension {Y : CMfd.{u} n} {π : Y → U}
-    (hπ : IsBlowupAlong n C π) (hK : IsCompact C) :
+theorem exists_extension_of_closed_image {Y : CMfd.{u} n} {π : Y → U}
+    (hπ : IsBlowupAlong n C π) (hClosed : IsClosed ((Subtype.val : U → X) '' C)) :
     ∃ (Z : CMfd.{u} n) (q : Z → X) (hq : IsBlowupAlong n ((Subtype.val : U → X) '' C) q),
       ∃ χ : Y ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯
           (⟨q ⁻¹' (U : Set X), U.isOpen.preimage hq.contMDiff.continuous⟩ : Opens Z),
         ∀ y : Y, q (χ y).val = (π y).val := by
-  obtain ⟨Z, tZ, cZ, mZ, q, hq⟩ := exists_isBlowupAlong
-    ((Subtype.val : U → X) '' C) (isClosedSubmanifold_image_val hπ.1 hK)
-    (interior_image_val_eq_empty hπ.2.1)
+  obtain ⟨Z,tZ,cZ,mZ,q,hq⟩ := exists_isBlowupAlong
+    ((Subtype.val : U → X) '' C) (isClosedSubmanifold_image_val_of_closed hπ.1 hClosed)
+      (interior_image_val_eq_empty hπ.2.1)
   let : TopologicalSpace Z := tZ
   let : ChartedSpace (ComplexModel n) Z := cZ
   let : IsComplexManifold n Z := mZ
   let V : Opens Z := ⟨q ⁻¹' (U : Set X), U.isOpen.preimage hq.contMDiff.continuous⟩
   let r : V → U := fun p => ⟨q p.val, p.property⟩
   have hr : IsBlowupAlong n C r := by
-    simpa only [Subtype.val_injective.preimage_image] using
-      isBlowupAlong_restrict hq U V.isOpen
-  obtain ⟨e, f, he, hf, hqe, _hπf, hfe, hef⟩ := exists_biholomorphism_over hπ hr
-  refine ⟨⟨Z⟩, q, hq, ⟨⟨e, f, congrFun hfe, congrFun hef⟩, he, hf⟩, ?_⟩
+    simpa only [Subtype.val_injective.preimage_image] using isBlowupAlong_restrict hq U V.isOpen
+  obtain ⟨e,f,he,hf,hqe,_hπf,hfe,hef⟩ := exists_biholomorphism_over hπ hr
+  refine ⟨⟨Z⟩,q,hq,⟨⟨e,f,congrFun hfe,congrFun hef⟩,he,hf⟩,?_⟩
   intro y
   exact congrArg Subtype.val (congrFun hqe y)
+
+
+theorem isClosedSubmanifold_image_val (hC : IsClosedSubmanifold n C)
+    (hK : IsCompact C) : IsClosedSubmanifold n ((Subtype.val : U → X) '' C) :=
+  isClosedSubmanifold_image_val_of_closed hC (hK.image continuous_subtype_val).isClosed
+
+theorem exists_extension {Y : CMfd.{u} n} {π : Y → U}
+    (hπ : IsBlowupAlong n C π) (hK : IsCompact C) :
+    ∃ (Z : CMfd.{u} n) (q : Z → X) (hq : IsBlowupAlong n ((Subtype.val : U → X) '' C) q),
+      ∃ χ : Y ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯
+          (⟨q ⁻¹' (U : Set X), U.isOpen.preimage hq.contMDiff.continuous⟩ : Opens Z),
+        ∀ y : Y, q (χ y).val = (π y).val :=
+  exists_extension_of_closed_image hπ (hK.image continuous_subtype_val).isClosed
 
 /-- Simultaneous coordinates for the whole ordered boundary pass from the
 open centre to its actual image in the original manifold. -/

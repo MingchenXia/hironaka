@@ -1,49 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CompanionOpen
 import Hironaka.Invariant.NonmonomialTransformAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialPartEtale
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The order of the nonmonomial part: a local, finite, upper semicontinuous invariant
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0165.  Blueprint
+`bcalc:nonmonomial-order-local` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`),
+Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
 
 At a point `x` of the cosupport of a marked ideal `𝔪 = (X, N, E, 𝔞, d)` the general step reads off the order
 `o = ord_x(𝓝_N(𝔞)|_N)` of the nonmonomial part (`MonomialPartAlong.nonmonomialPartAlong`), and along a tower it uses the
@@ -65,6 +31,9 @@ that order a function and proves the facts about it which do not depend on the i
 * **`companionOf_tower_facts`**: along a multiple test blow-up of the companion ideal `𝓞(𝔪, o)` (`o ≥ 1`, order `≤ o` on
   the cosupport), the tower is one of `𝔪`, the order stays `≤ o` on the cosupport, and the cosupport of `𝓞_T` lies in
   `{ord ≥ o} ∩ cosupp 𝔪_T`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -75,7 +44,15 @@ universe u
 namespace Hironaka.NonmonomialOrderLocal
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale Hironaka.CompanionRebase Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.DerivativeIdealAlongEtale Hironaka.MarkedIdealRestrictOpen Hironaka.RestrictEmptyTower Hironaka.BlowupTowerIsomorphism Hironaka.InvDomainRebase Hironaka.ContactCanonicalAlong
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale
+  Hironaka.CompanionRebase Hironaka.GermIdealOrder
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.DerivativeIdealAlongEtale
+  Hironaka.MarkedIdealRestrictOpen Hironaka.RestrictEmptyTower
+  Hironaka.BlowupTowerIsomorphism Hironaka.InvDomainRebase
+  Hironaka.ContactCanonicalAlong
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
 
@@ -203,6 +180,12 @@ theorem mem_ordGe_pullback_iff_of_local (hn : 0 < n) {φ : M' → M}
     (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hNN hg)]
   rfl
 
+theorem nmOrd_pullback_of_local (hn : 0 < n) {φ : M' → M}
+    (hloc : ∀ y : M', ∃ ψ : M → M', IsLocalInverseAt n φ ψ y) {𝔪 : MarkedIdeal n M} (h𝔪 : 𝔪.IsWellFormed)
+    (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) (z : M') :
+    nmOrd (MarkedIdeal.pullback φ 𝔪) z = nmOrd 𝔪 (φ z) :=
+  nmOrd_congr fun q => mem_ordGe_pullback_iff_of_local hn hloc h𝔪 hne q z
+
 /-- **Restriction to an open set** does not change the order. -/
 theorem mem_ordGe_pullback_val_iff (hn : 0 < n) {𝔪 : MarkedIdeal n M} (h𝔪 : 𝔪.IsWellFormed)
     (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) (U : Opens M) (q : ℕ) (z : U) :
@@ -220,6 +203,11 @@ theorem mem_ordGe_pullback_diffeo_iff (hn : 0 < n) (Φ : M' ≃ₘ⟮𝓘(ℂ, C
     {𝔪 : MarkedIdeal n M} (h𝔪 : 𝔪.IsWellFormed) (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) (q : ℕ)
     (z : M') : z ∈ ordGe (MarkedIdeal.pullback Φ 𝔪) q ↔ Φ z ∈ ordGe 𝔪 q :=
   mem_ordGe_pullback_iff_of_local hn (fun y => ⟨Φ.symm, isLocalInverseAt_diffeo Φ y⟩) h𝔪 hne q z
+
+theorem nmOrd_pullback_diffeo (hn : 0 < n) (Φ : M' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ M)
+    {𝔪 : MarkedIdeal n M} (h𝔪 : 𝔪.IsWellFormed) (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) (z : M') :
+    nmOrd (MarkedIdeal.pullback Φ 𝔪) z = nmOrd 𝔪 (Φ z) :=
+  nmOrd_congr fun q => mem_ordGe_pullback_diffeo_iff hn Φ h𝔪 hne q z
 
 end Local
 
@@ -291,6 +279,12 @@ theorem mem_ordGe_geoTransformAlong_of_centresAvoid (hn : 0 < n) {k : ℕ} {𝔪
     ?_
   refine (mem_ordGe_pullback_val_iff hn h.isWellFormed h.isNonzeroAlongAt W q _).trans ?_
   rw [proj_restrict W T p]
+
+theorem nmOrd_geoTransformAlong_of_centresAvoid (hn : 0 < n) {k : ℕ} {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) (W : Opens X)
+    (hW : CentresAvoid W T) {z : Y} (hz : T.proj z ∈ W) :
+    nmOrd (geoTransformAlong 𝔪 T) z = nmOrd 𝔪 (T.proj z) :=
+  nmOrd_congr fun q => mem_ordGe_geoTransformAlong_of_centresAvoid hn h T hT W hW q hz
 
 /-- **Off the centre of a test blowup** the order is that of the image. -/
 theorem mem_ordGe_geoTransform_of_notMem (hn : 0 < n) {Y Z : CMfd.{u} n} {k : ℕ} {𝔫 : MarkedIdeal n Y}

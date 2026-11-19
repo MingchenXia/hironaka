@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationData
 import Hironaka.Analytic.GermParametrization
 import Hironaka.Analytic.RiemannExtension
@@ -10,12 +5,14 @@ import Hironaka.Analytic.HolomorphicZeroSetThin
 import Hironaka.Analytic.RegularPointDimension
 import Mathlib.LinearAlgebra.Lagrange
 import Mathlib.Combinatorics.Pigeonhole
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
+
 set_option autoImplicit false
 
 /-!
 # Density of the regular part of an irreducible germ
+
+Blueprint `lag:canonical-defining-functions`, `lag:parametrization-dense` (Demailly,
+*Complex analytic and differential geometry*, II.4.19).
 
 Given `ParametrizationData A` and its `SetsData`, the part of `A` over the complement of the
 discriminant locus is dense in `A` near `0`.  For a linear form `λ` on the fibre, the
@@ -218,8 +215,9 @@ theorem exists_extension_coeff_fibrePoly (S : SetsData P) (ℓ : ComplexModel n 
     ⟨(1 + M) ^ P.deg, hball.mono fun x hx hdx => norm_coeff_fibrePoly_le S ℓ hM0 hM hx hdx j⟩
   exact ⟨F, hFd.and hFe⟩
 
-/-- **Canonical defining functions**: the canonical polynomial `P_ℓ` has holomorphic coefficients near `0`, and
-`P_ℓ(z', ℓ(z))` vanishes on `A` near `0`. -/
+/-- **Canonical defining functions** (blueprint `lag:canonical-defining-functions`): the
+canonical polynomial `P_ℓ` has holomorphic coefficients near `0`, and `P_ℓ(z', ℓ(z))`
+vanishes on `A` near `0`. -/
 theorem exists_canonical (S : SetsData P) (ℓ : ComplexModel n →L[ℂ] ℂ) {M : ℝ}
     (hM0 : 0 ≤ M) (hM : ∀ z ∈ polydisc n P.dim S.r₁ S.r₂, ‖ℓ z‖ ≤ M) :
     ∃ F : ℕ → ComplexModel P.dim → ℂ,
@@ -368,6 +366,9 @@ theorem exists_bound_forms (d N : ℕ) :
     (Finset.single_le_sum (fun J _ => hK0 J) (Finset.mem_powerset.2 hIN)) hδ
 
 /-! ### Density -/
+
+theorem polydisc_subset_polydisc {n d : ℕ} {r₁ r₁' r₂ : ℝ} (h : r₁ ≤ r₁') :
+    polydisc n d r₁ r₂ ⊆ polydisc n d r₁' r₂ := polydisc_mono h
 
 theorem nonempty_localParametrization (P : ParametrizationData A) (S : SetsData P) :
     Nonempty (GermParametrization.LocalParametrization A) := by

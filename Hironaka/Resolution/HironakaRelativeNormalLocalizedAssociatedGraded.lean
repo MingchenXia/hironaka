@@ -1,11 +1,6 @@
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 import Hironaka.Resolution.HironakaRelativeNormalUniformLocalization
@@ -483,7 +478,6 @@ theorem originalLocalizedGradedMonomialBasis_supported (d t : ℕ) (I : Ideal (H
 abbrev originalLocalizedDegreeExponentIndex (d t : ℕ) (I : Ideal (HolGerm (ComplexModel (d+t)))) (q : ℕ) :=
   {α : originalUniformNormalStandardExponentIndex d t I // α.val.degree=q}
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The genuine coefficient combination in the SAME literal original localized degree, from the actual whole original monomial basis. -/
 def originalLocalizedDegreeMonomialCombination (d t : ℕ) (I : Ideal (HolGerm (ComplexModel (d+t)))) (q : ℕ) :
     letI := tangentAlgebra d t
@@ -493,7 +487,6 @@ def originalLocalizedDegreeMonomialCombination (d t : ℕ) (I : Ideal (HolGerm (
   degreeFiberCombination (fun α : originalUniformNormalStandardExponentIndex d t I => α.val.degree)
     (originalLocalizedGradedPiece d t I) (originalLocalizedGradedMonomialBasis d t I).repr.symm q
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The TRUE whole original homogeneous standard basis supplies both injectivity and surjectivity of EVERY actual degree combination internally. -/
 theorem originalLocalizedDegreeMonomialCombination_bijective (d t : ℕ)
     (I : Ideal (HolGerm (ComplexModel (d+t)))) (q : ℕ) :
@@ -505,7 +498,6 @@ theorem originalLocalizedDegreeMonomialCombination_bijective (d t : ℕ)
   intro α
   simpa only [Module.Basis.repr_symm_single_one] using originalLocalizedGradedMonomialBasis_supported d t I α
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- TRUE original degree combination gives the actual localized ORIGINAL J-adic graded-piece linear equivalence. -/
 def originalLocalizedDegreeMonomialLinearEquiv (d t : ℕ)
     (I : Ideal (HolGerm (ComplexModel (d+t)))) (q : ℕ) :
@@ -585,7 +577,6 @@ theorem originalLocalizedGradedMonomialBasis_degree_index (d t : ℕ)
       localizedDirectSumEquiv_mk_one_lof (Submonoid.powers (originalUniformNormalDenominator d t I))
         (fun k => (originalNormalGradedPiece d t I k : Type)) q (originalNormalDegreeMonomialSymbol d t I q α)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- EVERY true degree basis vector is precisely its LITERAL localized ORIGINAL normal monomial symbol, not an abstract supplied frame. -/
 theorem originalLocalizedDegreeMonomialBasis_apply (d t : ℕ)
     (I : Ideal (HolGerm (ComplexModel (d+t)))) (q : ℕ) (α : originalLocalizedDegreeExponentIndex d t I q) :
@@ -606,7 +597,6 @@ theorem originalLocalizedDegreeMonomialBasis_apply (d t : ℕ)
     _ = (v α.val) q := congrArg (fun z => z q) (Module.Basis.repr_symm_single_one v α.val)
     _ = LocalizedModule.mk (originalNormalDegreeMonomialSymbol d t I q α) 1 := h
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONE internally produced nonzero whole original base germ makes ALL actual ORIGINAL normal graded pieces genuinely finite free simultaneously. -/
 theorem exists_nonzero_all_original_graded_piece_finite_free (d t : ℕ)
     (I : Ideal (HolGerm (ComplexModel (d+t)))) :

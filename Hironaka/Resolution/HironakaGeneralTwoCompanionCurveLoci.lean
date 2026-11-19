@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaCoherentTransformExtension
 
 set_option autoImplicit false
@@ -31,7 +26,6 @@ open GlobalComponents RegularLocusComponent AnalyticDimensionBasics
   MarkedIdeals MarkedIdeals.MarkedIdeal GermIdealOrder DivisorExponentAlong
   CodimOneSupportAlong CodimOneSupport NormalCrossings BoundaryCount MemberInterLocusAlong
 
-open Hironaka
 noncomputable section
 
 variable {n : ℕ} {M : Type*} [TopologicalSpace M]

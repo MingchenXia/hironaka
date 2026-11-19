@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaSmoothCentreRelativeIdeal
 import Hironaka.MarkedIdeal.NormalTaylorOrder
 
@@ -33,8 +28,6 @@ open Hironaka.HolomorphicIdealSheaves HolGerm HolomorphicTaylorTail
   NormalTaylorOrder HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan
   HironakaRelativeNormalIdeal HironakaSmoothCentreRelativeIdeal HironakaHolomorphicJetChartInvariance
   HironakaHolomorphicJetRankLoci
-open Hironaka
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
 noncomputable section
 variable {n : ℕ}
 

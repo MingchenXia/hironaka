@@ -1,41 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaBaseChange
 import Hironaka.Resolution.HironakaEmbeddedAnalytic
 import Hironaka.Resolution.HironakaBoundaryRelativelyCompact
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Coherence.CartanIrreducible
-import Hironaka.Invariant.CodimOneAdmissibleAlong
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Resolution.HironakaAdmissibleCalculus
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedBoundary
-import Hironaka.Resolution.HironakaEmbeddedDimensionParts
-import Hironaka.Resolution.HironakaEmbeddedReducible
-import Hironaka.Resolution.HironakaSeparation
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.Resolution.StrictTransformComposition
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Embedded resolution of an arbitrary analytic set over relatively compact open sets (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 and §13 ("finite over every
-relatively compact open subset"); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
+Blueprint `hir:embedded-resolution-analytic-local` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka library: the relatively
+compact and local forms of gap (G1)).  Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 and §13
+("finite over every relatively compact open subset"); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
 
 **Statement.**  Let `X` be any complex manifold, `W ⊆ X` an analytic set with empty interior whose components may have
 different dimensions (not necessarily compact), and `X₀ ⊆ X` an open set contained in a compact set.  With `W_sing` the points
@@ -63,6 +38,10 @@ holomorphic embedding (`HironakaBaseChange`):
   (`HironakaEmbeddedBoundary.exists_embeddedResolution_boundary_of_subset_isCompact`) and pulled back along `j₁`;
 * the remaining parts are resolved by the induction hypothesis along the new open holomorphic embedding `j₂`, with the bad set
   cut down to their strict transforms (disjoint from the resolved first part), as in the compact case.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaBaseChange`, `HironakaEmbeddedAnalytic` and
+`HironakaBoundaryRelativelyCompact` only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -73,7 +52,10 @@ universe u
 namespace Hironaka.HironakaEmbeddedAnalyticLocal
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence Hironaka.HironakaAdmissibleCalculus Hironaka.HironakaEmbeddedDimensionParts Hironaka.HironakaBaseChange Hironaka.HironakaEmbeddedAnalytic Hironaka.RestrictedIdealExtension Hironaka.DivisorExponentAlong
+open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence
+  Hironaka.HironakaAdmissibleCalculus Hironaka.HironakaEmbeddedDimensionParts
+  Hironaka.HironakaBaseChange Hironaka.HironakaEmbeddedAnalytic
+  Hironaka.RestrictedIdealExtension Hironaka.DivisorExponentAlong
 
 noncomputable section
 
@@ -85,7 +67,7 @@ section Union
 
 variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
 
-/-- Products of the local equations present a union. -/
+/-- Products of the local equations present a union (as in `ConstantRankImage.presentationUnion`). -/
 def presentationUnion {A B : Set M} {x : M} (pA : ComplexAnalyticPresentationAt (n := n) A x)
     (pB : ComplexAnalyticPresentationAt (n := n) B x) :
     ComplexAnalyticPresentationAt (n := n) (A ∪ B) x where

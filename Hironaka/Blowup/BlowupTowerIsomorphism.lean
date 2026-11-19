@@ -1,44 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactIndependenceAlong
 import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupBiholomorphismLift
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingAlongTower
-import Hironaka.MarkedIdeal.HomogenizedGlueingLiftAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Coherence.VanishingIdealCoherent
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Isomorphisms of towers over a biholomorphism of the bases
 
-The Lean form of design node `hir:tower-isomorphism` and its three uses. Property (6) of `hir:centre-function` is
-stated for isomorphisms of towers over a biholomorphism of the bases; the transport `Φ^*T` of `hir:tower-transport`
-is the case `χ_i = id` (`i ≥ 1`), and the stage-by-stage lifts of the glueing biholomorphism along a segment are
-another (the "does not depend on `w`" step of Step 1b of `hir:maximal-order-step`). Source: Włodarczyk 2005 (arXiv
-`hiron.tex`): Proposition `pr: funct` (the induced towers `φ^*(X_i) = X' ×_X X_i`, defined up to isomorphism, with
-lifts `φ_i` commuting with the blow-ups) and Step 1bb (`φ_{pu}^*(..) = φ_{pv}^*(..)`).
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0074 at TN-CLASSICAL's request (C-0073, answer (a) to TN23's
+C-0072): the Lean form of TN-CLASSICAL's design node `hir:tower-isomorphism` (`blueprint/src/hironaka.tex`, fbf21d2b) and
+its three uses.  Property (6) of `hir:centre-function` is stated for isomorphisms of towers over a biholomorphism of the
+bases; the transport `Φ^*T` of `hir:tower-transport` is the case `χ_i = id` (`i ≥ 1`), and the stage-by-stage lifts of the
+glueing biholomorphism along a segment are another (the "does not depend on `w`" step of Step 1b of
+`hir:maximal-order-step`).  Blueprint `mc:tower-isomorphism-basic`, `mc:tower-isomorphism-transform`,
+`mc:tower-isomorphism-coefficient`, `mc:glueing-lift-tower-isomorphism` (`blueprint/src/maximal-contact.tex`).  Source:
+Włodarczyk 2005 (arXiv `hiron.tex`): Proposition `pr: funct` (the induced towers `φ^*(X_i) = X' ×_X X_i`, defined up to
+isomorphism, with lifts `φ_i` commuting with the blow-ups) and Step 1bb (`φ_{pu}^*(..) = φ_{pv}^*(..)`).
 
 ## Isomorphisms of towers
 
@@ -52,12 +29,24 @@ lifts `φ_i` commuting with the blow-ups) and Step 1bb (`φ_{pu}^*(..) = φ_{pv}
 * `IsTowerIso.geoTransformAlong_eq`: along a multiple test blow-up `T` of `𝔪`, `(Φ^*𝔪)_{T'} = χ^*(𝔪_T)`;
   `IsTowerIso.isGeoTestTower_iff`, `IsTowerIso.isGeoResolution_iff`: multiple test blow-ups and resolutions correspond;
   `IsTowerIso.cosupp_geoTransformAlong`.
+* `IsTowerIso.coeffMarkedAlong_eq`, `IsTowerIso.restrictedCoeff_eq` (`S_{Φ⁻¹A}((Φ^*𝔪)_{T'}) = χ^* S_A(𝔪_T)`,
+  `S_A(𝔪_T) = 𝓒_{N_T}(𝔪_T)|_{A_T}`), `IsTowerIso.restricted_eq`, `IsTowerIso.cosupp_restrictedCoeff_eq`,
+  `IsTowerIso.isTangentDirectionAlong` (`u ∘ χ`, with `N'_{T'} ∩ V(u ∘ χ) = χ⁻¹(N_T ∩ V(u))`): the form of
+  `ContactCanonicalAlong`'s (K1) for isomorphic towers.
 
 ## The glueing lifts
 
 * `exists_isGlueingLiftAlong_isTowerIso`: along every multiple test blow-up `T` of `(𝓗_N(𝔞), μ)` and of a family of
-  pairs `(𝔫 i, 𝔫' i)` preserved by the glueing biholomorphism, one lift `Φ_T` (`IsGlueingLiftAlong`) is the
-  last-stage biholomorphism of an isomorphism `T|_U ≅ T|_{U'}` over `G.equiv` and transports every `(𝔫 i)_T`.
+  pairs `(𝔫 i, 𝔫' i)` preserved by the glueing biholomorphism, one lift `Φ_T` (`IsGlueingLiftAlong`) is the last-stage
+  biholomorphism of an isomorphism `T|_U ≅ T|_{U'}` over `G.equiv` and transports every `(𝔫 i)_T`;
+  `exists_isGlueingLiftAlong_isTowerIso_hom` (no family).
+* `exists_isTowerIso_coeffHom`: for `J̄ = 𝓒_N(𝓗_N(𝔞), μ)`, the same with the four clauses of
+  `ContactIndependenceAlong.exists_isGlueingLiftAlong_coeffHom` (`J̄_T` transported, `S_{u,T}|_{U'} ↦ S_{v,T}|_U` with and
+  without `𝓒`, `cosupp J̄_T` fixed pointwise); `contact_independence_along_isTowerIso`: packaged from two tangent
+  directions at a point of the cosupport.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -67,7 +56,10 @@ universe u
 
 namespace Hironaka.BlowupTowerIsomorphism
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism MarkedIdealTowerTransport MarkedIdealRestrictOpen BlowupStrictSubmanifold HomogenizedIdealAlong CoefficientIdealRestriction TangentDirectionAlong
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism
+  MarkedIdealTowerTransport MarkedIdealRestrictOpen BlowupStrictSubmanifold HomogenizedIdealAlong
+  CoefficientIdealRestriction TangentDirectionAlong
 open HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
@@ -146,7 +138,8 @@ variable {X X' : CMfd.{u} n} (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(�
   {Y' Y : CMfd.{u} n} {T' : BlowupTower X' Y'} {T : BlowupTower X Y}
   {χ : Y' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y}
 
-/-- **Transforms along isomorphic towers** (`hir:tower-isomorphism`): along a multiple test blow-up `T` of `𝔪` (closed
+/-- **Transforms along isomorphic towers** (`hir:tower-isomorphism`, the generalisation of
+`MarkedIdealTowerTransport.geoTransformAlong_transport_step`): along a multiple test blow-up `T` of `𝔪` (closed
 submanifold, coherent ideal) and a tower `T'` isomorphic to it over `Φ`, the transform of `Φ^*𝔪` along `T'` is the
 `χ`-pullback of the transform of `𝔪` along `T`. -/
 theorem IsTowerIso.geoTransformAlong_eq (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
@@ -225,13 +218,47 @@ theorem IsTowerIso.restrictedCoeff_eq (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞
   rw [IsTowerIso.coeffMarkedAlong_eq Φ hN h𝔞 hd h hT, h.strictAlong_eq A]
   rfl
 
+/-- **The restrictions of the transforms correspond along isomorphic multiple test blow-ups** (without `𝓒`). -/
+theorem IsTowerIso.restricted_eq (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (h : IsTowerIso Φ T' T χ) (hT : IsGeoTestTower 𝔪 T) (A : Set X) :
+    withN (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) T') (strictAlong T' (Φ ⁻¹' A)) =
+      MarkedIdeal.pullback χ (withN (geoTransformAlong 𝔪 T) (strictAlong T A)) := by
+  rw [IsTowerIso.geoTransformAlong_eq Φ hN h𝔞 h hT, h.strictAlong_eq A]
+  rfl
+
+/-- **Cosupports of the restricted coefficient ideals correspond**: `cosupp S_{Φ⁻¹A}((Φ^*𝔪)_{T'}) = χ⁻¹ cosupp S_A(𝔪_T)`. -/
+theorem IsTowerIso.cosupp_restrictedCoeff_eq (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) (h : IsTowerIso Φ T' T χ) (hT : IsGeoTestTower 𝔪 T) (A : Set X) :
+    (withN (coeffMarkedAlong (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) T')) (strictAlong T' (Φ ⁻¹' A))).cosupp =
+      χ ⁻¹' (withN (coeffMarkedAlong (geoTransformAlong 𝔪 T)) (strictAlong T A)).cosupp := by
+  rw [IsTowerIso.restrictedCoeff_eq Φ hN h𝔞 hd h hT A]
+  exact MarkedIdeal.cosupp_pullback χ.contMDiff χ.symm.contMDiff χ.apply_symm_apply χ.symm_apply_apply _
+    fun _ _ hg => ContactCanonicalAlong.holomorphicAt_of_mem_coeffMarkedAlong _ hg
+
+/-- **Tangent directions correspond along isomorphic multiple test blow-ups**: if `u` is a tangent direction of
+`(𝔪_T|_{N_T}, μ)` on `V`, then `u ∘ χ` is one of `((Φ^*𝔪)_{T'}|_{N'_{T'}}, μ)` on `χ⁻¹V`, and
+`N'_{T'} ∩ V(u ∘ χ) = χ⁻¹(N_T ∩ V(u))`. -/
+theorem IsTowerIso.isTangentDirectionAlong (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (h : IsTowerIso Φ T' T χ) (hT : IsGeoTestTower 𝔪 T) {μ : ℕ} {V : Set Y} {u : Y → ℂ}
+    (hu : IsTangentDirectionAlong (geoTransformAlong 𝔪 T).N (geoTransformAlong 𝔪 T).ideal μ V u) :
+    IsTangentDirectionAlong (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) T').N
+        (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) T').ideal μ (χ ⁻¹' V) (u ∘ χ) ∧
+      (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) T').N ∩ {p | (u ∘ χ) p = 0} =
+        χ ⁻¹' ((geoTransformAlong 𝔪 T).N ∩ {y | u y = 0}) := by
+  obtain ⟨-, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hN h𝔞 T hT
+  rw [IsTowerIso.geoTransformAlong_eq Φ hN h𝔞 h hT]
+  exact ⟨ContactEquivalenceAlong.isTangentDirectionAlong_pullback
+    (fun y => ⟨_, isLocalInverseAt_of_contMDiff χ.contMDiff χ.symm.contMDiff χ.apply_symm_apply
+      χ.symm_apply_apply y⟩) (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent hcT) hu, rfl⟩
+
 end Naturality
 
 /-! ### The glueing lifts along a segment form an isomorphism of the restricted segments -/
 
 section Glueing
 
-open HomogenizedGlueingAlong HomogenizedGlueingAlongTower HomogenizedGlueingLiftAlong GlueingTrivialAction ContactIndependenceAlong
+open HomogenizedGlueingAlong HomogenizedGlueingAlongTower HomogenizedGlueingLiftAlong GlueingTrivialAction
+  ContactIndependenceAlong
 
 variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ} (G : GlueingDataAlong N 𝔞 μ u v)
@@ -273,6 +300,26 @@ theorem exists_isGlueingLiftAlong_isTowerIso (h𝔞 : 𝔞.IsCoherent) (hN : IsC
         (HadamardBridgeAlong.isCoherent_geoTransform_ideal_of_isAdmissibleCentre hNT hcT (h𝔫T i).2 hπ) hcT'
         (HadamardBridgeAlong.isCoherent_geoTransform_ideal_of_isAdmissibleCentre hNT' hcT' (h𝔫'T i).2 hπ) (hP i)
 
+/-- **The glueing lifts form an isomorphism of the restricted segments** (`hir:tower-isomorphism`): along every
+multiple test blow-up `T` of `(𝓗_N(𝔞), μ)` some lift `Φ_T` of the glueing biholomorphism is the last-stage
+biholomorphism of an isomorphism `T|_U ≅ T|_{U'}` over `G.equiv`. -/
+theorem exists_isGlueingLiftAlong_isTowerIso_hom (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    (htriv : ∀ y ∈ G.W, y ∈ zeroSet (glueIdealAlong N 𝔞 μ) →
+      TrivialAt G.φ (glueIdealAlong N 𝔞 μ) y ∧ TrivialAt G.ψ (glueIdealAlong N 𝔞 μ) y)
+    {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y)
+    (hT : IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) T) :
+    ∃ Φ, IsGlueingLiftAlong G T Φ ∧ IsTowerIso G.equiv (restrict G.dom T) (restrict G.cod T) Φ := by
+  obtain ⟨Φ, hL, hI, -⟩ := exists_isGlueingLiftAlong_isTowerIso G h𝔞 hN hμ htriv (ι := Empty) Empty.elim Empty.elim
+    (fun i => i.elim) (fun i => i.elim) (fun i => i.elim) (fun i => i.elim) (fun i => i.elim) T hT (fun i => i.elim)
+    (fun i => i.elim)
+  exact ⟨Φ, hL, hI⟩
+
+/-- **The independence of the hypersurface of maximal contact inside `N` along isomorphic restricted segments**
+(Step 1b of `hir:maximal-order-step` with `hir:tower-isomorphism`): along every multiple test blow-up `T` of
+`J̄ = 𝓒_N(𝓗_N(𝔞), μ)` there is a lift `Φ_T` of the glueing biholomorphism which is the last-stage biholomorphism of an
+isomorphism `T|_U ≅ T|_{U'}` over `G.equiv` and satisfies the four clauses of
+`ContactIndependenceAlong.exists_isGlueingLiftAlong_coeffHom`: it transports `J̄_T`, maps the restricted coefficient ideal
+on `(N ∩ V(u))_T` to that on `(N ∩ V(v))_T` (with and without `𝓒`), and fixes `cosupp J̄_T` pointwise. -/
 theorem exists_isTowerIso_coeffHom (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
     (htriv : ∀ y ∈ G.W, y ∈ zeroSet (glueIdealAlong N 𝔞 μ) →
       TrivialAt G.φ (glueIdealAlong N 𝔞 μ) y ∧ TrivialAt G.ψ (glueIdealAlong N 𝔞 μ) y)
@@ -311,6 +358,32 @@ theorem exists_isTowerIso_coeffHom (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubma
     lift_pullback_restricted hL (hP ()), fun p hp => ?_⟩
   rw [(hW.2 T).2 hT] at hp
   exact hL.apply_eq_of_mem_cosupp G h𝔞 hN hμ hH p hp
+
+/-- **Packaged from two tangent directions** (Step 1bb, with `hir:tower-isomorphism`): for tangent directions `u`, `v`
+along `N` of `(𝔞|_N, μ)` on open sets containing `x ∈ cosupp(𝔞|_N, μ)` there are glueing data `G` along `N` with
+`x ∈ U ∩ U'` such that along every multiple test blow-up `T` of `J̄` some lift `Φ_T` is the last-stage biholomorphism of
+an isomorphism `T|_U ≅ T|_{U'}` over `G.equiv` with the four clauses of `exists_isTowerIso_coeffHom`. -/
+theorem contact_independence_along_isTowerIso (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    {x : M} (hx : x ∈ cosupport n N 𝔞 μ) {U₁ U₂ : Set M} (hu : IsTangentDirectionAlong N 𝔞 μ U₁ u) (hxU₁ : x ∈ U₁)
+    (hv : IsTangentDirectionAlong N 𝔞 μ U₂ v) (hxU₂ : x ∈ U₂) :
+    ∃ G : GlueingDataAlong N 𝔞 μ u v, x ∈ G.dom ∧ x ∈ G.cod ∧
+      ∀ {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y),
+        IsGeoTestTower (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T →
+        ∃ Φ, IsGlueingLiftAlong G T Φ ∧ IsTowerIso G.equiv (restrict G.dom T) (restrict G.cod T) Φ ∧
+          MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+              (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T))
+                (strictAlong T (N ∩ {x | u x = 0})))) =
+            MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+              (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T))
+                (strictAlong T (N ∩ {x | v x = 0}))) ∧
+          ∀ p : openPreimage T G.dom,
+            (p : Y) ∈ (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T).cosupp →
+              (Φ p : Y) = p := by
+  obtain ⟨G, hxW, htriv⟩ := exists_glueingDataAlong_trivial h𝔞 hN hμ hx hu hxU₁ hv hxU₂
+  obtain ⟨hxd, hxc⟩ := G.mem_dom_and_mem_cod hxW hx
+  refine ⟨G, hxd, hxc, fun T hT => ?_⟩
+  obtain ⟨Φ, hL, hI, -, hS, -, hfix⟩ := exists_isTowerIso_coeffHom G h𝔞 hN hμ htriv T hT
+  exact ⟨Φ, hL, hI, hS, hfix⟩
 
 end Glueing
 

@@ -1,23 +1,8 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Manifold.HolomorphicMaps
-import Hironaka.Manifold.ComplexManifold
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.InnerProductSpace.Orthogonal
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Analysis.Calculus.DifferentialForm.Basic
-import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
-import Mathlib.Analysis.Normed.Module.ContinuousInverse
-import Mathlib.LinearAlgebra.Multilinear.FiniteDimensional
+import Hironaka.Analytic.FormPullback
 import Mathlib.Geometry.Manifold.MFDeriv.Atlas
 import Mathlib.Geometry.Manifold.MFDeriv.FDeriv
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.LiftedOpenModel
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -29,6 +14,9 @@ the `j`-th monomial chart near `z` (`BlowupLocalSurjectivity.exists_monomialLoca
 `σⱼ ∘ W = Φ ∘ e ∘ π` and `ℓⱼ ∘ W = id`.  Write `D` for the derivative of `W` in the preferred
 chart at `z`.  If `dπ_z v = 0` then
 
+* `fderiv_monomialInverse_apply_eq_zero`: `(D v)ᵢ = 0` whenever `σⱼ(w)ᵢ = wᵢ`, i.e. for `i < k`
+  and for `i = j` (the components of `σⱼ ∘ W` are those of `Φ ∘ e ∘ π`, whose derivative
+  kills `v`);
 * `fderiv_monomialInverse_ne_zero`: `D v ≠ 0` for `v ≠ 0`, since `e ∘ ℓⱼ ∘ W ∘ e⁻¹ = id`.
 
 So `D v` is a nonzero fibre direction, along which the Blanchard weight is Fubini–Study.
@@ -41,7 +29,8 @@ universe u
 
 namespace Hironaka.BlowupFibreDirection
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences Hironaka.HolomorphicMaps BlowupFlatCoordinates BlowupMonomialCharts
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences Hironaka.HolomorphicMaps
+  BlowupFlatCoordinates BlowupMonomialCharts
 
 noncomputable section
 
@@ -94,6 +83,60 @@ theorem differentiableAt_chart_comp {z : Z}
     rw [(chartAt (ComplexModel n) z).left_inv (mem_chart_source _ z)]
     exact hW.mdifferentiableAt (by simp)
   exact mdifferentiableAt_iff_differentiableAt.mp (h2.comp _ h1)
+
+/-- **Kernel directions of `π` are fibre directions**: the components of `D v` that `σⱼ`
+leaves unchanged vanish. -/
+theorem fderiv_monomialInverse_apply_eq_zero (hπ : IsBlowupAlong n C π) (hO : IsOpen O)
+    (hWs : ∀ z' ∈ O, ContMDiffAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ W z')
+    (hWeq : ∀ z' ∈ O, π z' ∈ flatDomain Φ ∧
+      monomial k j (W z') = Φ.toFun (chartAt (ComplexModel n) y₀ (π z')))
+    {z : Z} (hz : z ∈ O) {v : ComplexModel n}
+    (hv : mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) π z v = 0)
+    (i : Fin n) (hi : ¬ (k ≤ i.1 ∧ i ≠ j)) :
+    fderiv ℝ (fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)) (chartAt (ComplexModel n) z z)
+      v i = 0 := by
+  set e := complexChartAt (n := n) z
+  set ζ₀ := chartAt (ComplexModel n) z z
+  set d : ComplexChart n M := ⟨chartAt (ComplexModel n) y₀, chart_mem_atlas _ y₀⟩
+  set G := fun ζ => W ((chartAt (ComplexModel n) z).symm ζ)
+  have hζt : ζ₀ ∈ e.val.target := e.val.map_source (mem_complexChartAt_source z)
+  have hsymm : e.val.symm ζ₀ = z := e.val.left_inv (mem_complexChartAt_source z)
+  have hzd : ζ₀ ∈ coordinateDomain π e d :=
+    ⟨hζt, by show π (e.val.symm ζ₀) ∈ d.val.source; rw [hsymm]; exact (hWeq z hz).1.1⟩
+  have hzp : ζ₀ ∈ coordinateDomain π e (complexChartAt (n := n) (π z)) :=
+    ⟨hζt, by
+      show π (e.val.symm ζ₀) ∈ (complexChartAt (n := n) (π z)).val.source
+      rw [hsymm]; exact mem_complexChartAt_source _⟩
+  have hT : fderiv ℝ (coordinateMap π e d) ζ₀ v = 0 := by
+    rw [coordinateMap_fderiv_change_target hπ.contMDiff e _ d hzp hzd,
+      ContinuousLinearMap.comp_apply, fderiv_coordinateMap_eq_mfderiv hπ.contMDiff z v, hv]
+    exact map_zero _
+  have hGev : (fun ζ => G ζ i) =ᶠ[𝓝 ζ₀] fun ζ => Φ.toFun (coordinateMap π e d ζ) i := by
+    have hcont : ContinuousAt e.val.symm ζ₀ := e.val.continuousAt_symm hζt
+    rw [← hsymm] at hz
+    filter_upwards [hcont.eventually (hO.mem_nhds hz)] with ζ hζ
+    have := congrArg (fun w : ComplexModel n => w i) (hWeq _ hζ).2
+    simp only [monomial_apply, if_neg hi] at this
+    exact this
+  have hGd : DifferentiableAt ℝ G ζ₀ := (differentiableAt_chart_comp (hWs z hz)).restrictScalars ℝ
+  have h1 : fderiv ℝ (fun ζ => G ζ i) ζ₀ v = fderiv ℝ G ζ₀ v i := by
+    have := (((EuclideanSpace.proj i : ComplexModel n →L[ℂ] ℂ).restrictScalars ℝ).hasFDerivAt.comp
+      ζ₀ hGd.hasFDerivAt).fderiv
+    exact congrArg (fun L : ComplexModel n →L[ℝ] ℂ => L v) this
+  rw [← h1, hGev.fderiv_eq]
+  have hTd : DifferentiableAt ℝ (coordinateMap π e d) ζ₀ :=
+    (coordinateMap_contDiffAt_real hπ.contMDiff e d hzd).differentiableAt (by simp)
+  have hΦd : DifferentiableAt ℝ Φ.toFun (coordinateMap π e d ζ₀) := by
+    have hmem : coordinateMap π e d ζ₀ ∈ Φ.source := by
+      show chartAt (ComplexModel n) y₀ (π (e.val.symm ζ₀)) ∈ Φ.source
+      rw [hsymm]; exact (hWeq z (by rw [← hsymm] at hz ⊢; exact hz)).1.2
+    exact (Φ.toFun_holomorphic.differentiableAt (Φ.isOpen_source.mem_nhds hmem)).restrictScalars ℝ
+  have := ((((EuclideanSpace.proj i : ComplexModel n →L[ℂ] ℂ).restrictScalars ℝ).hasFDerivAt.comp
+    ζ₀ (hΦd.hasFDerivAt.comp ζ₀ hTd.hasFDerivAt))).fderiv
+  rw [show (fun ζ => Φ.toFun (coordinateMap π e d ζ) i) =
+    (⇑((EuclideanSpace.proj i : ComplexModel n →L[ℂ] ℂ).restrictScalars ℝ) ∘ Φ.toFun ∘
+      coordinateMap π e d) from rfl, this]
+  simp [hT]
 
 theorem liftedOpen_extChartAt_symm (S : TopologicalSpace.Opens (ComplexModel n))
     (p : LiftedOpen.{u} S) {w : ComplexModel n} (hw : w ∈ S) :

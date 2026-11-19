@@ -1,22 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.AnalyticGermDecomposition
 import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Local parametrization of an irreducible germ: the pointwise data
 
-In coordinates `z = (z', z'')`, `z' = π z ∈ ℂᵈ` the first `d` coordinates, the algebra of an irreducible germ `A` at
-`0 ∈ ℂⁿ` (Noether normalization, the primitive element `u`, its minimal polynomial `W`, the discriminant multiple
-`δ` and the polynomials `B_k`, the minimal polynomials `Q_k` of the fibre coordinates, and the ideal comparison)
-yields the following identities of holomorphic functions on a ball `ball 0 rad`. They are all that the geometric
-part of the parametrization theorem uses.
+Blueprint `lag:parametrization-sets` (Demailly, *Complex analytic and differential geometry*,
+II.4.19).  In coordinates `z = (z', z'')`, `z' = π z ∈ ℂᵈ` the first `d` coordinates, the
+algebra of an irreducible germ `A` at `0 ∈ ℂⁿ` (Noether normalization, the primitive element
+`u`, its minimal polynomial `W`, the discriminant multiple `δ` and the polynomials `B_k`,
+the minimal polynomials `Q_k` of the fibre coordinates, and the ideal comparison) yields
+the following identities of holomorphic functions on a ball `ball 0 rad`.  They are all
+that the geometric part of the parametrization theorem uses.
 
 * `W(z', u(z)) = 0`, `δ(z') z_k = B_k(z', u(z))`, `Q_k(z', z_k) = 0` on `A`;
 * for every root `t` of `W(x, ·)`: `u` recovers `t` from `B(x, t) / δ(x)`, the coordinates
@@ -26,7 +22,8 @@ part of the parametrization theorem uses.
 * primality of the vanishing ideal, `I(A) ∩ 𝒪_d = 0`, and the integral equation over `𝒪_d`
   of a function vanishing on `A ∩ B`.
 
-`SetsData` records the geometric consequences on a polydisc.
+`SetsData` records the geometric consequences on a polydisc (blueprint
+`lag:parametrization-sets`, `lag:parametrization-regular`).
 -/
 
 open Set Filter Metric
@@ -126,10 +123,12 @@ structure ParametrizationData (A : Set (ComplexModel n)) where
 
 variable {A : Set (ComplexModel n)}
 
-/-- **The parametrizing sets**: on a polydisc `Δ = polydisc n d r₁ r₂` inside the ball, fibre coordinates of `A` are
-small over small base points, the fibres over the complement of the discriminant locus have exactly `q` points, near
-each such point `A` is the graph of a holomorphic section over the base, hence regular of dimension `d`, and the
-projection is open on that part. -/
+/-- **The parametrizing sets** (blueprint `lag:parametrization-sets`,
+`lag:parametrization-regular`): on a polydisc `Δ = polydisc n d r₁ r₂` inside the ball,
+fibre coordinates of `A` are small over small base points, the fibres over the complement
+of the discriminant locus have exactly `q` points, near each such point `A` is the graph of a
+holomorphic section over the base, hence regular of dimension `d`, and the projection is open
+on that part. -/
 structure SetsData (P : ParametrizationData A) where
   r₁ : ℝ
   r₂ : ℝ

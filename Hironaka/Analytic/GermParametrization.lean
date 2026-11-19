@@ -1,15 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.AnalyticGermDecomposition
 import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Local parametrization of an irreducible analytic germ: the output interface
+
+Blueprint `lag:parametrization-sets`, `lag:parametrization-regular`,
+`lag:parametrization-dense`, and the algebraic step of `lag:thin-subgerm` (Demailly,
+*Complex analytic and differential geometry*, II.4.19).
 
 For an irreducible analytic germ `A` at `0 ∈ ℂⁿ`, `LocalParametrization A` records what the
 local parametrization theorem provides and what the local statement consumes:

@@ -36,8 +36,6 @@ open Hironaka.HolomorphicIdealSheaves HolGerm
   HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan HironakaRelativeNormalIdeal
   HironakaSmoothCentreRelativeIdeal HironakaRelativeNormalTaylorCoefficients
   HironakaRelativeNormalMonomialBasis HironakaRelativeNormalIdealMatrices
-open Hironaka
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
 noncomputable section
 
 /-- The actual exponent sum is the genuine polynomial monomial degree. -/

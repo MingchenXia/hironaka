@@ -1,66 +1,31 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneRestrictOpen
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerSplitIso
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactLowerValue
-import Hironaka.Invariant.ContactStageKept
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Invariant.MemberRestrictTowerIso
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneAdmissible
-import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: isomorphisms of towers (property (6))
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale
-morphisms, in particular with biholomorphisms.
+Blueprint `hir:step-one-tower-iso` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale morphisms, in
+particular with biholomorphisms.
 
-For a biholomorphism `Φ: X' ≅ X` and an isomorphism of towers `χ: T' ≅ T` over `Φ`
-(`BlowupTowerIsomorphism.IsTowerIso`), the masked Step 1 values of `Φ^*𝔍` along `T'` are those of `𝔍` along `T`
-(through `χ`), and canonical segments correspond. `J̄(Φ^*𝔍) = Φ^*J̄(𝔍)` (`ContactStageKept.barMarked_pullback`) and
-transforms correspond along isomorphisms of towers (`IsTowerIso.geoTransformAlong_eq`), so the original members
-(`ContactLowerValue.origMembers_isTowerIso`), levels, special points (codimension-one part and member locus under
-biholomorphisms) and regimes are preimages; runs agree (`NonmonomialOrderRegime.regimeRun_isTowerIso_of`); splits
-correspond (`BlowupTowerSplitIso.IsTowerIso.exists_split`); the lower values agree by
-`ContactLowerValue.lowerValueL_zero_isTowerIso` (level `0`) and `MemberRestrictTowerIso.lowerValueL_succ_isTowerIso`
-(levels `≥ 1`).
+For a biholomorphism `Φ : X' ≅ X` and an isomorphism of towers `χ : T' ≅ T` over `Φ` (`BlowupTowerIsomorphism.IsTowerIso`), the
+masked Step 1 values of `Φ^*𝔍` along `T'` are those of `𝔍` along `T` (through `χ`), and canonical segments correspond.
+`J̄(Φ^*𝔍) = Φ^*J̄(𝔍)` (TN23's `ContactStageKept.barMarked_pullback`) and transforms correspond along isomorphisms of towers
+(`IsTowerIso.geoTransformAlong_eq`), so the original members (TN23's `ContactLowerValue.origMembers_isTowerIso`), levels, special
+points (TN3's codimension-one part and member locus under biholomorphisms) and regimes are preimages; runs agree (TN3's
+`NonmonomialOrderRegime.regimeRun_isTowerIso_of`); splits correspond (`BlowupTowerSplitIso.IsTowerIso.exists_split`); the lower
+values agree by TN23's `ContactLowerValue.lowerValueL_zero_isTowerIso` (level `0`) and TN3's
+`MemberRestrictTowerIso.lowerValueL_succ_isTowerIso` (levels `≥ 1`).
 
 ## Main results
 
 * `geoTransformAlong_barMarked_isTowerIso`, `isTowerIso_facts`, `hypotheses_pullback`;
 * `stepOneInvM_isTowerIso_eq`, **`stepOneInvM_isTowerIso`**: property (6).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -71,7 +36,14 @@ universe u v
 namespace Hironaka.StepOneTowerIso
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail
+  Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong
+  Hironaka.MemberInterLocusAlong Hironaka.MarkedIdealBiholomorphism
+  Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant)

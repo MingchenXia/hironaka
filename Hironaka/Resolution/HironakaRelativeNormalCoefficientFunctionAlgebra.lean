@@ -3,11 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Hironaka contributors
 -/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalAffineDNCDictionary
 
 /-! # A common algebra of actual holomorphic coefficient functions
@@ -70,7 +65,6 @@ def coefficientPolynomialLift (d t : ℕ) (B : Set (ComplexModel d))
     MvPolynomial (Fin t) (coefficientFunctionAlgebra d B) :=
   ∑ α ∈ P.support, MvPolynomial.monomial α (coefficientFunction d B (P.coeff α) (hc α))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem coefficientPolynomialLift_coeff (d t : ℕ) (B : Set (ComplexModel d))
     (P : MvPolynomial (Fin t) (HolGerm (ComplexModel d)))
     (hc : ∀ α, ∀ a ∈ B, HolAt (actualCoefficientRepresentative (P.coeff α)) a)
@@ -85,7 +79,6 @@ theorem coefficientPolynomialLift_coeff (d t : ℕ) (B : Set (ComplexModel d))
       rw [MvPolynomial.notMem_support_iff.mp hα, actualCoefficientRepresentative_zero]
     simp [coefficientPolynomialLift, MvPolynomial.coeff_sum, MvPolynomial.coeff_monomial, hα, hz]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem coefficientPolynomialLift_homogeneous (d t : ℕ) (B : Set (ComplexModel d))
     (P : MvPolynomial (Fin t) (HolGerm (ComplexModel d)))
     (hc : ∀ α, ∀ a ∈ B, HolAt (actualCoefficientRepresentative (P.coeff α)) a)
@@ -229,7 +222,6 @@ def finiteCoefficientPolynomialLift (Ps : Finset (MvPolynomial (Fin t) A))
   ∑ α ∈ P.support, MvPolynomial.monomial α
     ⟨P.coeff α, coefficient_mem_finitePolynomialCoefficientAlgebra Ps P hP α⟩
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem finiteCoefficientPolynomialLift_coeff (Ps : Finset (MvPolynomial (Fin t) A))
     (P : MvPolynomial (Fin t) A) (hP : P ∈ Ps) (α : Fin t →₀ ℕ) :
     (finiteCoefficientPolynomialLift Ps P hP).coeff α =
@@ -269,7 +261,6 @@ end FiniteCoefficients
 
 attribute [local instance] coefficientSubalgebraRing
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Noetherianity spreads the complete coefficient kernel, not only finitely many chosen identities. -/
 theorem exists_common_coefficient_kernel_open (d : ℕ) (B : Set (ComplexModel d))
     (hB : IsOpen B) (h0 : (0 : ComplexModel d) ∈ B)

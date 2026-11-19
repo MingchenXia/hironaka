@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualNormalizedInitialRelations
 import Hironaka.Resolution.HironakaActualExceptionalFibreRelations
 import Hironaka.Resolution.HironakaActualPolynomialRehomogenization
@@ -129,7 +124,6 @@ private theorem canonical_point_power
   apply canonical_coefficient_lower_degree J a α
   simpa only [Finsupp.degree_eq_sum,normalExponentDegree] using hα
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The SAME canonical actual analytic quotient has its literal finite polynomial exceptional initial value. -/
 theorem canonical_point_quotient_initial_congruence
     (J : Ideal (HolGerm (ComplexModel (0+n))))
@@ -191,7 +185,6 @@ theorem canonical_point_quotient_initial_congruence
   rw [heq]
   exact Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self _)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONE canonical normalized family has no exceptional torsion in its whole analytic quotient. -/
 theorem exists_original_point_exceptional_regular_canonical_family
     (J : Ideal (HolGerm (ComplexModel (0+n)))) (j : Fin n) (b : Fin (0+n) → ℂ) :

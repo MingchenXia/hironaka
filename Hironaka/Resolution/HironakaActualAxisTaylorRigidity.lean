@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualExceptionalJetRigidity
 
 /-!
@@ -43,7 +38,6 @@ private theorem projection_X (e i : Fin n) :
     rw [MvPowerSeries.killCompl_X,MvPowerSeries.rename_X]
     rfl
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem axis_zero_preserves_original_power (e : Fin n) (q : ℕ)
     (g : HolGerm (ComplexModel (0+n)))
     (hg : g∈IsLocalRing.maximalIdeal (HolGerm (ComplexModel (0+n)))^q) :
@@ -63,7 +57,6 @@ private theorem axis_zero_preserves_original_power (e : Fin n) (q : ℕ)
   rw [Ideal.map_pow] at h
   exact (pow_le_pow_left' hmap q) h
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem originalTaylor_axis_polynomial (e : Fin n) (p : MvPolynomial (Fin n) ℂ) :
     originalTaylorAlgHom n (actualAxisContractionGerm (e.natAdd 0) 0 (originalPolynomialEval n p))=
       pivotZeroProjection e (originalTaylorAlgHom n (originalPolynomialEval n p)) := by

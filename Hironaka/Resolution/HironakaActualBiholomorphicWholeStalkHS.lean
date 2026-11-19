@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualWholeStalkHolomorphicPullback
-import Hironaka.Support.GenuineAmbientJetAlgEquivExact
+import Hironaka.Resolution.HironakaSmoothCentreRealDomainActualAmbientHS
 import Hironaka.Resolution.HironakaActualWholeAmbientHSSuperlevel
 
 /-! Genuine original biholomorphisms preserve entire original stalks and the existing intrinsic HS function. -/

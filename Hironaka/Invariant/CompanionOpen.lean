@@ -1,42 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CompanionRebase
 import Hironaka.MarkedIdeal.MarkedIdealEquivalence
 import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialPartEtale
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The companion ideal on an open set where the order of the nonmonomial part is bounded
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`) and the open-set statement missing from
+`hir:companion-basic`; claim I-0977 C-0157.  Blueprint `bcalc:companion-open` (chapter `blowup-calculus.tex`).  Sources:
+Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008
 (`bierstone-milman08-functoriality`), Step II.B.
 
 The general step takes, at a point where `o = ord(𝓝_N(𝔞)|_N)` is positive, an open set `W` on which this order is at most
@@ -53,8 +27,11 @@ factorization `(N, E, 𝓝_N(𝔞)𝓜_N(𝔞), d)`, and on an open set with the
 * **`isMaximalOrderAlong_companionOf`**, **`companionOf_reduction`**: under `ord(𝓝_N(𝔞)|_N) ≤ o` on `cosupp 𝔪`, the companion
   ideal is of maximal order along `N`, its multiple test blow-ups are multiple test blow-ups of `𝔪` and of `(N, E, 𝓝, o)`,
   the bound persists along them on the cosupport of `𝔪`, and `cosupp 𝓞_T = cosupp(𝓝_T, o) ∩ cosupp 𝔪_T`;
-* `bound_pullback_val`, **`isMaximalOrderAlong_companionOf_pullback_val`**: the same for `𝓞(𝔪|_W, o)` when the bound
-  holds on `cosupp 𝔪 ∩ W` only (`hir:companion-basic` on an open set).
+* `bound_pullback_val`, **`isMaximalOrderAlong_companionOf_pullback_val`**, **`companionOf_reduction_pullback_val`**: the same
+  for `𝓞(𝔪|_W, o)` when the bound holds on `cosupp 𝔪 ∩ W` only (`hir:companion-basic` on an open set).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -65,7 +42,14 @@ universe u
 namespace Hironaka.CompanionOpen
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale Hironaka.CompanionRebase Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.BlowupTowers Hironaka.DerivativeIdealAlongEtale Hironaka.MarkedIdealRestrictOpen Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.MarkedIdealEquivalence.MarkedIdeal Hironaka.RestrictedIdealWeight
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.MonomialPartEtale
+  Hironaka.CompanionRebase Hironaka.GermIdealOrder
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+  Hironaka.DerivativeIdealAlongEtale Hironaka.MarkedIdealRestrictOpen
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.MarkedIdealEquivalence.MarkedIdeal Hironaka.RestrictedIdealWeight
 
 noncomputable section
 
@@ -190,6 +174,43 @@ theorem isMaximalOrderAlong_companionOf_pullback_val (hn : 0 < n) {k : ℕ} {�
   have hW := InvDomainTowerAlong.isInvDomain_pullback_val W h
   exact isMaximalOrderAlong_companionOf (X := CMfd.of (n := n) W) hn hW.isWellFormed hW.isNonzeroAlongAt
     (bound_pullback_val hn h.isWellFormed h.isNonzeroAlongAt W hbound)
+
+/-- **Reduction to maximal order on an open set** (`hir:companion-basic` / `hir:general-step` on an open set `W`): for `𝔪`
+in the domain, `o ≥ 1` and `ord(𝓝_N(𝔞)|_N) ≤ o` on `cosupp 𝔪 ∩ W`, every multiple test blow-up `T` of `𝓞(𝔪|_W, o)` is one
+of `𝔪|_W` and of `(N, E, 𝓝, o)|_W`; along it the bound persists on `cosupp (𝔪|_W)_T`, and
+`cosupp 𝓞_T = cosupp(𝓝_T, o) ∩ cosupp (𝔪|_W)_T`. -/
+theorem companionOf_reduction_pullback_val (hn : 0 < n) {k : ℕ} {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪)
+    (W : Opens X) {o : ℕ} (ho : 1 ≤ o)
+    (hbound : ∀ x ∈ 𝔪.cosupp, x ∈ W → x ∉ cosupport n 𝔪.N (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (o + 1))
+    {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) W) Y)
+    (hT : IsGeoTestTower (companionOf n (M := CMfd.of (n := n) W) (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪) o) T) :
+    IsGeoTestTower (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪) T ∧
+      IsGeoTestTower (⟨(MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N, (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E,
+        nonmonomialPartAlong n (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N
+          (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).ideal (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E, o⟩ :
+            MarkedIdeal n (CMfd.of (n := n) W)) T ∧
+      (∀ z ∈ (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪) T).cosupp,
+        z ∉ cosupport n (geoTransformAlong (⟨(MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N,
+            (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E,
+            nonmonomialPartAlong n (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N
+              (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).ideal (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E, o⟩ :
+                MarkedIdeal n (CMfd.of (n := n) W)) T).N
+          (geoTransformAlong (⟨(MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N,
+            (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E,
+            nonmonomialPartAlong n (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N
+              (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).ideal (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E, o⟩ :
+                MarkedIdeal n (CMfd.of (n := n) W)) T).ideal (o + 1)) ∧
+      (geoTransformAlong (companionOf n (M := CMfd.of (n := n) W) (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪) o)
+          T).cosupp =
+        (geoTransformAlong (⟨(MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N,
+            (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E,
+            nonmonomialPartAlong n (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).N
+              (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).ideal (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪).E, o⟩ :
+                MarkedIdeal n (CMfd.of (n := n) W)) T).cosupp ∩
+          (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X) 𝔪) T).cosupp := by
+  have hW := InvDomainTowerAlong.isInvDomain_pullback_val W h
+  exact companionOf_reduction (X := CMfd.of (n := n) W) hn hW.isWellFormed hW.isNonzeroAlongAt ho
+    (bound_pullback_val hn h.isWellFormed h.isNonzeroAlongAt W hbound) T hT
 
 end
 

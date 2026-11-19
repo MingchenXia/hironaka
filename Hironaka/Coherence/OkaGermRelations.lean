@@ -1,14 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.OkaPolynomialRelations
 import Hironaka.Analytic.GermMinimalPolynomial
 import Hironaka.Analytic.HolomorphicZeroSetThin
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
@@ -24,6 +17,8 @@ germ `t₀ + s` of the shifted last coordinate.
 
 * `shiftEval t₀ : (HolGerm E)[X] →+* HolGerm (E × ℂ)`; `shiftEval_eq_comp`:
   `shiftEval t₀ P = shiftEval 0 (P.comp (X + t₀))`.
+* `shiftEval_injective`: a polynomial in `t` with holomorphic coefficients whose germ vanishes is
+  zero (uniqueness of Weierstrass division by `t^s`).
 * `exists_eq_sum_shiftEval_polynomialRelations` — **Oka's key lemma at `(z₀, t₀)`**: if
   `W ∈ (HolGerm E)[X]` is monic and `g_1, …, g_q` have degree `≤ D` with `g_{j₀} = W`, every
   relation `∑ a_j · shiftEval t₀ g_j = 0` among germs at `(z₀, t₀)` is a combination of the germs
@@ -125,6 +120,13 @@ theorem shiftEval_zero_injective : Function.Injective (shiftEval (E := E) 0) := 
   by_cases hj : j < P.natDegree + 1
   · exact h j hj
   · exact coeff_eq_zero_of_natDegree_lt (by omega)
+
+/-- **Injectivity of `shiftEval t₀`.** -/
+theorem shiftEval_injective (t₀ : ℂ) : Function.Injective (shiftEval (E := E) t₀) := by
+  intro P Q hPQ
+  rw [shiftEval_eq_comp, shiftEval_eq_comp t₀ Q] at hPQ
+  have := shiftEval_zero_injective hPQ
+  rw [← comp_shiftPoly_neg t₀ P, this, comp_shiftPoly_neg]
 
 /-- **Weierstrass division by a Weierstrass polynomial `W'`, polynomial form.** -/
 theorem exists_eq_mul_shiftEval_add {W' : (HolGerm E)[X]} (hW' : W'.Monic)

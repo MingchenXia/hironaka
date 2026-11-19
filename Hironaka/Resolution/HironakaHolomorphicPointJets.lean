@@ -1,16 +1,6 @@
-import Hironaka.Analytic.HolomorphicGermMaximalIdeal
-import Hironaka.Invariant.IdealPowerAddition
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.OrderMultiplicativity
 import Hironaka.Analytic.EuclideanHolomorphicGermSpan
 import Mathlib.LinearAlgebra.Multilinear.FiniteDimensional
-
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.MarkedIdeal.GermIdealOrderBounds
 
 set_option autoImplicit false
 
@@ -31,8 +21,6 @@ namespace Hironaka.HironakaHolomorphicPointJets
 
 open Hironaka.HolomorphicIdealSheaves HolGerm
 open IdealWeightPowers GermIdealOrder OrderTaylor RelativePrincipalizationSpan
-
-open Hironaka
 
 noncomputable section
 

@@ -1,30 +1,26 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
 import Hironaka.Analytic.PullbackNonvanishing
 import Hironaka.Analytic.InvertibleIdealCoherent
 import Hironaka.Coherence.VanishingIdealCoherent
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Total transforms and the composition of the relative-principalization identity
 
+Source: Copy-4, the paragraph after `lem:relative-principalization` and Step 2 of
+`prop:principalization` (`transcendental-nakamaye-copy4-20260911`):
+
 > If `g : Y'' → Y'` is a further sequence of blowups adapted to `W'`, with
 > divisor `H''` satisfying (i) for `W'`, then `g^* H + H''` satisfies (i) for the
 > composition `f ∘ g` and `W`.
 
-There was no total transform `g^* H` of an effective divisor, and `GermIdeal.mul` had neither associativity nor
-compatibility with pullback.
+`prop:principalization` builds `π` in three stages and then asserts `eq:IV-H`,
+`𝓘_V 𝒪_Y = 𝒪_Y(-H) · 𝓘_W` with `H = H^fix_m + P^mov + P^F`, by exactly that
+remark applied twice.  Nothing in the project could state it: there was no total
+transform `g^* H` of an effective divisor, and `GermIdeal.mul` had neither
+associativity nor compatibility with pullback.
 
 Contents:
 
@@ -42,7 +38,8 @@ Contents:
   `MeteredDivisorOperations.exists_ne_zero_comp`.
 * `pullback_vanishingIdeal_mul_comp` — the composition remark itself.
 
-No Hironaka input, no compactness, no Kähler hypothesis.
+Everything here is sorry-free: no Hironaka input, no compactness, no Kähler
+hypothesis.
 -/
 
 open Set Filter
@@ -52,7 +49,9 @@ universe u
 
 namespace Hironaka.GermIdealTotalTransform
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences RelativePrincipalizationSpan GermIdealPullbackCalculus IdealWeightPowers InvertibleIdealQuotient
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  RelativePrincipalizationSpan GermIdealPullbackCalculus IdealWeightPowers
+  InvertibleIdealQuotient
 
 noncomputable section
 
@@ -329,6 +328,67 @@ ideals. -/
 def EffectiveDivisor.add (D D' : EffectiveDivisor n Z) : EffectiveDivisor n Z where
   ideal := D.ideal.mul D'.ideal
   isInvertible := isInvertible_mul D.isInvertible D'.isInvertible
+
+/-- **The composition remark after `lem:relative-principalization`.**  If
+`𝔞 𝒪_Y = 𝒪(-H) · 𝔟` and `𝔟 𝒪_Z = 𝒪(-H') · 𝔠`, then
+`𝔞 𝒪_Z = 𝒪(-(g^* H + H')) · 𝔠`.  Nothing about blowups is used beyond
+`interior (Exc g) = ∅`, which is what makes `g^* H` a divisor. -/
+theorem pullback_comp_eq_mul {f : Y → X} {g : Z → Y}
+    (hf : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ f)
+    (hg : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ g)
+    (hint : interior (exceptionalLocus n g) = ∅)
+    {𝔞 : GermIdeal n X} {𝔟 : GermIdeal n Y} {𝔠 : GermIdeal n Z}
+    (h𝔞 : 𝔞.IsCoherent) (h𝔟 : 𝔟.IsCoherent) (h𝔠 : 𝔠.IsCoherent)
+    (H : EffectiveDivisor n Y) (H' : EffectiveDivisor n Z)
+    (h1 : GermIdeal.pullback (m := n) f 𝔞 = H.ideal.mul 𝔟)
+    (h2 : GermIdeal.pullback (m := n) g 𝔟 = H'.ideal.mul 𝔠) :
+    GermIdeal.pullback (m := n) (f ∘ g) 𝔞 =
+      (EffectiveDivisor.add (EffectiveDivisor.totalTransform hg hint H) H').ideal.mul 𝔠 := by
+  have hHcoh : H.ideal.IsCoherent :=
+    DivisorMetric.isCoherent_of_isInvertible H.isInvertible
+  have hH'coh : H'.ideal.IsCoherent :=
+    DivisorMetric.isCoherent_of_isInvertible H'.isInvertible
+  have hgHcoh : (GermIdeal.pullback (m := n) g H.ideal).IsCoherent :=
+    isCoherent_pullback hg hHcoh
+  calc GermIdeal.pullback (m := n) (f ∘ g) 𝔞
+      = GermIdeal.pullback (m := n) g (GermIdeal.pullback (m := n) f 𝔞) :=
+        pullback_comp hf hg h𝔞
+    _ = GermIdeal.pullback (m := n) g (H.ideal.mul 𝔟) := by rw [h1]
+    _ = (GermIdeal.pullback (m := n) g H.ideal).mul (GermIdeal.pullback (m := n) g 𝔟) :=
+        pullback_mul hg hHcoh h𝔟
+    _ = (GermIdeal.pullback (m := n) g H.ideal).mul (H'.ideal.mul 𝔠) := by rw [h2]
+    _ = ((GermIdeal.pullback (m := n) g H.ideal).mul H'.ideal).mul 𝔠 :=
+        (mul_assoc hgHcoh hH'coh h𝔠).symm
+
+/-- **`eq:IV-H` across two stages.**  Clause (i) of `lem:relative-principalization`
+composes: with `W' = strictTransform f W` and `W'' = strictTransform g W'`,
+
+    `𝓘_W 𝒪_Y = 𝒪(-H)·𝓘_{W'}` and `𝓘_{W'} 𝒪_Z = 𝒪(-H')·𝓘_{W''}`
+      ⟹  `𝓘_W 𝒪_Z = 𝒪(-(g^*H + H'))·𝓘_{strictTransform (f ∘ g) W}`.
+
+Copy-4 applies this twice, to `Y → Y₁ → Y_fix → X`, to obtain
+`H = H^fix_m + P^mov + P^F` and `eq:IV-H`. -/
+theorem pullback_vanishingIdeal_comp_eq_mul {f : Y → X} {g : Z → Y}
+    (hf : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ f)
+    (hg : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ g)
+    (hint : interior (exceptionalLocus n g) = ∅)
+    {W : Set X} (hW : IsClosedSubmanifold n W)
+    (hW' : IsClosedSubmanifold n (strictTransform n f W))
+    (hW'' : IsClosedSubmanifold n (strictTransform n g (strictTransform n f W)))
+    (H : EffectiveDivisor n Y) (H' : EffectiveDivisor n Z)
+    (h1 : GermIdeal.pullback (m := n) f (vanishingIdeal (n := n) W)
+      = H.ideal.mul (vanishingIdeal (n := n) (strictTransform n f W)))
+    (h2 : GermIdeal.pullback (m := n) g (vanishingIdeal (n := n) (strictTransform n f W))
+      = H'.ideal.mul
+          (vanishingIdeal (n := n) (strictTransform n g (strictTransform n f W)))) :
+    GermIdeal.pullback (m := n) (f ∘ g) (vanishingIdeal (n := n) W)
+      = (EffectiveDivisor.add (EffectiveDivisor.totalTransform hg hint H) H').ideal.mul
+          (vanishingIdeal (n := n) (strictTransform n (f ∘ g) W)) := by
+  rw [StrictTransformComposition.strictTransform_comp hf hg W]
+  exact pullback_comp_eq_mul hf hg hint
+    (VanishingIdealCoherent.isCoherent_vanishingIdeal hW)
+    (VanishingIdealCoherent.isCoherent_vanishingIdeal hW')
+    (VanishingIdealCoherent.isCoherent_vanishingIdeal hW'') H H' h1 h2
 
 end Functorial
 

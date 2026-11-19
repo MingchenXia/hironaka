@@ -5,8 +5,6 @@ Authors: Claude
 -/
 import Hironaka.Resolution.HironakaSmoothSubmersionCoefficientIdeals
 import Hironaka.Invariant.MonomialCase
-import Hironaka.Invariant.AmbientDivisorExponent
-import Hironaka.Invariant.MonomialAmbientDataExact
 set_option autoImplicit false
 open Set Filter
 open scoped Topology Manifold ContDiff
@@ -15,7 +13,6 @@ open Hironaka.HolomorphicIdealSheaves
 open GermIdealOrder DivisorExponent MonomialCase MonomialInvariant
 open HironakaSmoothSubmersionOrder HironakaSmoothSubmersionCoefficientIdeals
 open MarkedIdeals
-open Hironaka
 noncomputable section
 variable {n m : ℕ} {X Y : Type*} [TopologicalSpace X]
  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]

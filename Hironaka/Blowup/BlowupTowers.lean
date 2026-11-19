@@ -1,22 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Towers of blowups, recorded as data
 
-Source: the sequences `X_0 = X ← X_1 ← ⋯ ← X_r` of blowups with smooth centres of Włodarczyk 2005 §2.1 ("multiple
-test blow-ups"), Bierstone--Milman 2008 Theorem 1.3 and Definitions 2.4.
+Blueprint `hir:blowup-tower` (`blueprint/src/hironaka.tex`, Hironaka phase).  Source: the sequences
+`X_0 = X ← X_1 ← ⋯ ← X_r` of blowups with smooth centres of Włodarczyk 2005 §2.1 ("multiple test
+blow-ups"), Bierstone--Milman 2008 Theorem 1.3 and Definitions 2.4.
 
-`Hironaka.BlowupSequences.IsBlowupSequence` is a `Prop`: it says that a map is SOME finite composite of blowups, and
-forgets the intermediate spaces and centres. The resolution algorithm needs them as data -- the marked ideal is
-transformed step by step, the invariant at a stage depends on the earlier ones, and towers are concatenated. This
-file provides that data structure.
+`Hironaka.BlowupSequences.IsBlowupSequence` is a `Prop`: it says that a map is SOME finite
+composite of blowups, and forgets the intermediate spaces and centres.  The resolution algorithm
+needs them as data -- the marked ideal is transformed step by step, the invariant at a stage
+depends on the earlier ones, and towers are concatenated.  This file provides that data structure
+(the shared tower type of the Hironaka phase, at the seam between phases H1 and H2).
 
 ## Design (R1)
 
@@ -36,8 +33,18 @@ file provides that data structure.
 * `CMfd`, `CMfd.of`;
 * `BlowupTower`, `proj`, `length`, `append`, `proj_append`, `length_append`, `append_refl`,
   `refl_append`, `append_assoc`;
+* `isBlowupSequence` (every tower is a blowup sequence) and its converse
+  `exists_proj_eq_of_isBlowupSequence` (every blowup sequence is the projection of a tower), so a
+  tower is exactly the data behind `IsBlowupSequence`, the form in which the two Hironaka statements
+  (`EmbeddedResolution.exists_embeddedResolution_smoothData`,
+  `RelativePrincipalization.exists_factorizationData`) are stated.
 
-Restriction of a tower to an open subset needs the restriction of a single blowup to an open subset.
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`, so that those two statements can
+later be proved in place from it.
+
+Sorry-free.  Restriction of a tower to an open subset needs the restriction of a single blowup to an
+open subset (an H2 item).
 -/
 
 open Set
@@ -118,6 +125,18 @@ theorem isBlowupSequence (T : BlowupTower X Y) : IsBlowupSequence n X Y T.proj :
 theorem contMDiff_proj (T : BlowupTower X Y) :
     ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ T.proj :=
   T.isBlowupSequence.contMDiff
+
+/-- **Every blowup sequence is the projection of a tower.** -/
+theorem exists_proj_eq_of_isBlowupSequence {X₀ Y₀ : Type u} [TopologicalSpace X₀]
+    [ChartedSpace (ComplexModel n) X₀] [IsComplexManifold n X₀] [TopologicalSpace Y₀]
+    [ChartedSpace (ComplexModel n) Y₀] [IsComplexManifold n Y₀] {f : Y₀ → X₀}
+    (h : IsBlowupSequence n X₀ Y₀ f) :
+    ∃ T : BlowupTower (CMfd.of (n := n) X₀) (CMfd.of (n := n) Y₀), T.proj = f := by
+  induction h with
+  | refl => exact ⟨refl, rfl⟩
+  | step f C g _ hg ih =>
+    obtain ⟨T, hT⟩ := ih
+    exact ⟨step T C g hg, by simp [proj, hT]⟩
 
 /-- Concatenation of towers: first `T`, then `S` over the last space of `T`. -/
 def append (T : BlowupTower X Y) : {Z : CMfd.{u} n} → BlowupTower Y Z → BlowupTower X Z

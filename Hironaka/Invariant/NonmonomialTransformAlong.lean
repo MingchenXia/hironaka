@@ -1,52 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialStepAlong
 import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GeoTransformWellFormed
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberTraceIdealAlong
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The transforms of the monomial and nonmonomial parts inside a submanifold
 
-For `N = M` this is `NonmonomialTransformTower`.
+Blueprint `hir:nonmonomial-transform-along` (`blueprint/src/hironaka.tex`, Hironaka phase H4, Step 2a of the resolution
+algorithm for `N ≠ M`).  Sources: Bierstone--Milman 2008 §5 (the monomial part `𝓜(𝓘)`, the nonmonomial part `𝓝(𝓘)`, the
+companion ideal and their transforms); Włodarczyk 2005, Step 2a of the proof of `pr:resol`.  For `N = M` this is
+`NonmonomialTransformTower`.
 
 ## Main results
 
@@ -66,11 +30,15 @@ For `N = M` this is `NonmonomialTransformTower`.
   `isDivNearAlong_eq_of_cosupport_eq`, `divExpAlong_eq_of_isDivNearAlong_eq`, `monomialPartAlong_eq_of_divExpAlong_eq`,
   `exists_isInSpanOnAt_of_mul_generator`, `le_nonmonomialPartAlong_self`, `isPrincipalMonomialAlongAt_monomialPartAlong`,
   `parts_hypotheses`;
-* `nonmonomialPart_geoTransformAlong_along` (`hir:nonmonomial-transform` for `N ≠ M`): for `(X, N, E, 𝔞, d)` well
-  formed with `𝔞` nonzero along `N` and `ord(𝓝_N(𝔞)|_N) ≤ o` on the cosupport, along every multiple test blow-up `T`
-  of the companion ideal of `(𝓝_N(𝔞), 𝓜_N(𝔞), o)`, `T` is one of `(X, N, E, 𝔞, d)`, the transform of `(N, E, 𝓝_N(𝔞),
-  o)` is the nonmonomial part of `𝔞_T` along `N_T` (contained in it, equal to it on `N_T`), the monomial part of
-  `𝔞_T` is that of a monomial `𝓜_T`, and `ord(𝓝_{N_T}(𝔞_T)|_{N_T}) ≤ o` on the cosupport.
+* `nonmonomialPart_geoTransformAlong_along` (`hir:nonmonomial-transform` for `N ≠ M`): for `(X, N, E, 𝔞, d)` well formed with
+  `𝔞` nonzero along `N` and `ord(𝓝_N(𝔞)|_N) ≤ o` on the cosupport, along every multiple test blow-up `T` of the companion
+  ideal of `(𝓝_N(𝔞), 𝓜_N(𝔞), o)`, `T` is one of `(X, N, E, 𝔞, d)`, the transform of `(N, E, 𝓝_N(𝔞), o)` is the nonmonomial
+  part of `𝔞_T` along `N_T` (contained in it, equal to it on `N_T`), the monomial part of `𝔞_T` is that of a monomial `𝓜_T`,
+  and `ord(𝓝_{N_T}(𝔞_T)|_{N_T}) ≤ o` on the cosupport; `nonmonomialPart_geoTransformAlong_along_of_resolution`: after a
+  resolution of the companion ideal, `ord(𝓝_{N_T}(𝔞_T)|_{N_T}) < o` on the cosupport.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -81,7 +49,17 @@ universe u
 namespace Hironaka.NonmonomialTransformAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.MonomialPartAlong Hironaka.NormalCrossings Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong Hironaka.BlowupStrictSubmanifold Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.RestrictedIdealWeight Hironaka.MarkedIdealOperationsTransform.MarkedIdeal Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.CompanionReductionAlong Hironaka.NonmonomialStepAlong Hironaka.RelativePrincipalizationSpan Hironaka.InvertibleIdealQuotient Hironaka.BlowupFlatCoordinates
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.DivisorExponentAlong Hironaka.MonomialPartAlong
+  Hironaka.NormalCrossings Hironaka.MonomialCaseAlong
+  Hironaka.MonomialStepAlong Hironaka.BlowupStrictSubmanifold
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.RestrictedIdealWeight
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.CompanionReductionAlong Hironaka.NonmonomialStepAlong
+  Hironaka.RelativePrincipalizationSpan Hironaka.InvertibleIdealQuotient
+  Hironaka.BlowupFlatCoordinates
 
 noncomputable section
 
@@ -528,6 +506,32 @@ theorem nonmonomialPart_geoTransformAlong_along (hn : 0 < n) (𝔪 : MarkedIdeal
   refine hbT z hz₀ ?_
   rw [hNeq]
   exact ⟨hz'.1, fun g hg => hz'.2 g (hL z g hg)⟩
+
+/-- **After a resolution of the companion ideal the order of the nonmonomial part along `N` has dropped**
+(`hir:nonmonomial-transform`, last clause, for `N ≠ M`): `T` is a multiple test blow-up of `(X, N, E, 𝔞, d)` and
+`ord(𝓝_{N_T}(𝔞_T)|_{N_T}) < o` at every point of `cosupp 𝔪_T`. -/
+theorem nonmonomialPart_geoTransformAlong_along_of_resolution (hn : 0 < n) (𝔪 : MarkedIdeal n X)
+    (h𝔪 : 𝔪.IsWellFormed) (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) {o : ℕ} (ho : 1 ≤ o)
+    (hbound : ∀ x ∈ 𝔪.cosupp, x ∉ cosupport n 𝔪.N (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (o + 1))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoResolution (companionAlong 𝔪.N 𝔪.E (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E)
+      (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) o 𝔪.d) T) :
+    IsGeoTestTower 𝔪 T ∧ ∀ z ∈ (geoTransformAlong 𝔪 T).cosupp, z ∉ cosupport n (geoTransformAlong 𝔪 T).N
+      (nonmonomialPartAlong n (geoTransformAlong 𝔪 T).N (geoTransformAlong 𝔪 T).ideal (geoTransformAlong 𝔪 T).E) o := by
+  obtain ⟨hTm, -, hNeq, -, hL, -, -, -⟩ :=
+    nonmonomialPart_geoTransformAlong_along hn 𝔪 h𝔪 hne ho hbound T hT.1
+  obtain ⟨h𝓝, h𝓜, -, -, -, -, hREq⟩ := parts_hypotheses hn 𝔪 h𝔪 hne
+  have hbound' : ∀ x ∈ cosupport n 𝔪.N ((nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E).mul
+      (monomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E)) 𝔪.d,
+      x ∉ cosupport n 𝔪.N (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) (o + 1) := fun x hx =>
+    hbound x (by rw [hREq.cosupp_eq]; exact hx)
+  obtain ⟨-, hres⟩ := companion_resolution_along h𝔪.isClosedSubmanifold_N 𝔪.E h𝓝 h𝓜 ho hbound' T hT
+  have hW := MarkedIdealEquivalence.MarkedIdeal.RestrictEquiv.wEquiv hREq h𝔪.isClosedSubmanifold_N.1 h𝔪.isCoherent (isCoherent_mul h𝓝 h𝓜)
+  refine ⟨hTm, fun z hz hz' => hres z ?_ ?_⟩
+  · rw [← (hW.2 T).2 hTm]; exact hz
+  · show z ∈ cosupport n _ _ _
+    rw [hNeq, d_geoTransformAlong]
+    exact ⟨hz'.1, fun g hg => hz'.2 g (hL z g hg)⟩
 
 end Main
 

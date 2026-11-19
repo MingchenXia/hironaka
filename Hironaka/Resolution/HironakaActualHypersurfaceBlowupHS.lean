@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualInvertibleIntrinsicHS
 import Hironaka.Resolution.HironakaHypersurfaceMultiplicityDescent
 import Hironaka.Resolution.HironakaActualBlowupOffCentreIntrinsicHS
@@ -35,7 +30,6 @@ variable {n : ℕ} {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
   [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
   [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- ONLY original invertibility and the EXISTING original order comparison give EVERY intrinsic HS inequality. -/
 theorem actual_invertible_intrinsic_hs_le_of_original_order_le
     (A : GermIdeal n Y) (B : GermIdeal n X) (hA : A.IsInvertible) (hB : B.IsInvertible)

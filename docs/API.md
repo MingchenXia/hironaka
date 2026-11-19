@@ -12,6 +12,162 @@ where `ComplexModel n = EuclideanSpace ℂ (Fin n)` and `IsComplexManifold n X` 
 
 Vocabulary (all in this library): `GermIdeal n X` is an ideal sheaf of holomorphic germs, with `IsCoherent`, `zeroLocus` (`Z(𝔞)`), `pullback`; `EffectiveDivisor` is an invertible ideal sheaf `𝒪(-D)` with its support; `ClosedIrreducibleAnalyticSubvariety` and `IsComplexAnalyticSubset` are analytic subsets; `Hironaka.singularLocus V = V \ V_reg` (`V_sing`), and `W_sing = W \ regularLocus W d`; `IsSNCDivisor n E` says that the closed members of the list `E` have simple normal crossings (at every point the members through it are distinct coordinate hyperplanes of one chart); an *admissible blowup sequence* of `(X, E₀)` over `F` (`HironakaAdmissibleSequence.IsAdmissibleBlowupSequence n X E₀ F X' f E`) is a finite composition `f : X' → X` of blowups with smooth centres, each centre having only normal crossings with the divisor accumulated so far and lying over `F`; `E` starts with the strict transforms of the members of `E₀`, then has one member per blowup. `exceptionalLocus` (`Exc f`), `strictTransform` and `IsIsomorphismOver` have their usual meaning.
 
+## Intrinsic comparison and noncompact resolution
+
+```lean
+import Hironaka.Resolution.Algebraic.HironakaG1OriginalCombinedResolution
+import Hironaka.Resolution.HironakaG1FiniteClosedGraphOriginalComparison
+import Hironaka.Resolution.HironakaG8FinalOrderedEndpoint
+
+#check Hironaka.Resolution.Algebraic.HironakaG1OriginalCombinedResolution.original_contract
+#check Hironaka.HironakaG1FiniteClosedGraphOriginalComparison.exists_closed_graph_actual_native_realization
+#check Hironaka.HironakaG8FinalOrderedEndpoint.exists_locally_finite_ordered_boundary_epoch_canonical
+```
+
+The first theorem gives the strong analytic resolution functor on intrinsic
+reduced spaces and the smooth-functorial algebraic family in characteristic
+zero, with change-of-field compatibility. The second supplies the finite
+normal-codimension comparison on the same marked record. The third assumes a
+complex-analytic subset `W` and an ordered SNC divisor `E`, with the complement
+of `E` dense in `W`. It returns a proper projection, a locally finite cover by
+compatible finite marked-ideal tests and native Hilbert–Samuel certificates,
+and a smooth strict transform in normal crossings with the full indexed
+boundary. See the [precise scope and counterexamples](../STATUS.md#resolution-goals).
+
+For a single finite or locally finite growing original mark-one TEST, the
+compact connected components theorem assumes compactness of each connected
+component of `singularSet W`, together with the analytic, SNC and density
+hypotheses above. It produces a proper surjective projection with smooth
+direct strict transform and an isomorphism off the original singular locus.
+
+```lean
+import Hironaka.Resolution.HironakaG8CompactConnectedSingular
+
+#check Hironaka.HironakaG8CompactConnectedSingular.compact_connected_original_singular_finite_or_proper_limit
+```
+
+Along a holomorphic submersion, the same compact-component condition on the
+base supplies a single finite or locally finite growing original TEST of the
+pulled subset. In the growing branch the projected source centres are exact
+inverse images of the projected base centres.
+
+```lean
+import Hironaka.Resolution.HironakaG8SubmersionCompactConnectedTest
+
+#check Hironaka.HironakaG8SubmersionCompactConnectedTest.submersion_test_of_compact_connected_base_singular
+```
+
+Cofinal reordered TEST charts with actual nested comparisons yield one
+locally finite growing TEST of the original mark-one record. Under the
+exact original footprint readback, each nested comparison automatically
+preserves the event rank.
+
+```lean
+import Hironaka.Resolution.HironakaG8MatchedSortedGlobalTest
+
+#check Hironaka.HironakaG8MatchedSortedGlobalTest.global_test_of_nested_rank_reorderings
+```
+
+With intrinsic singular centres and smooth terminal strict transforms on
+these same nested charts, the globalization also gives the corresponding
+proper smooth direct strict-transform endpoint.
+
+```lean
+import Hironaka.Resolution.HironakaG8ReorderedSingularEndpoint
+
+#check Hironaka.HironakaG8ReorderedSingularEndpoint.intrinsic_endpoint_of_nested_rank_reorderings
+```
+
+Joint spatial reordering starts with an actual nested pair and a valid
+larger target order. It constructs the actual smaller TEST and its literal
+comparison with the reordered larger tower.
+
+```lean
+import Hironaka.Resolution.HironakaG8JointSpatialReordering
+
+#check Hironaka.HironakaG8JointSpatialReordering.jointly_realize_nested_spatial_target
+```
+
+The cofinal spatial-rank endpoint constructs the geometric words and
+the mutual comparisons automatically from the original physical chart
+family and one injective rank increasing on spatial precedence.
+
+```lean
+import Hironaka.Resolution.HironakaG8CofinalSpatialRankEndpoint
+
+#check Hironaka.HironakaG8CofinalSpatialRankEndpoint.intrinsic_endpoint_of_cofinal_spatial_rank
+```
+
+A covering original family with coherent physical event labels, intrinsic
+singular centres and smooth terminal strict transforms also yields one
+locally finite TEST when the length of spatial predecessor paths into each
+event is bounded. Events sharing a natural rank may be grouped into one
+blowup. The projection is proper and is an isomorphism over the original
+regular locus.
+
+```lean
+import Hironaka.Resolution.HironakaG8CofinalWeakRankEndpoint
+
+#check Hironaka.HironakaG8CofinalWeakRankEndpoint.intrinsic_endpoint_of_cofinal_weak_spatial_rank
+#check Hironaka.HironakaG8CofinalWeakRankEndpoint.intrinsic_endpoint_of_cofinal_bounded_spatial_height
+```
+
+The countable cusp sheets provide an actual original TEST atlas with
+unbounded spatial path lengths. The same analytic set has a separate
+three-step whole original TEST with intrinsic singular centres and a
+smooth terminal strict transform.
+
+```lean
+import Hironaka.Resolution.HironakaG8CuspSheetsNoWeakRank
+import Hironaka.Resolution.HironakaG8SameClockCuspSheets
+
+#check Hironaka.HironakaG8CuspSheetsNoWeakRank.exists_cusp_sheets_original_test_atlas_without_weak_rank
+#check Hironaka.HironakaG8SameClockCuspSheets.exists_whole_cusp_sheets_three_step_test
+```
+
+Finished finite original TESTs on a cover of the singular locus
+give a single locally finite intrinsic resolution when all distinct
+overlaps avoid that locus. Local tower lengths may be unbounded.
+
+```lean
+import Hironaka.Resolution.HironakaG8SingularCoverTestLimit
+import Hironaka.Resolution.HironakaG8ScheduledCuspNativeObstruction
+
+#check Hironaka.HironakaG8SingularCoverTestLimit.intrinsic_endpoint_of_singular_cover_tests
+#check Hironaka.HironakaG8ScheduledCuspNativeObstruction.scheduled_cusp_cutoff_not_native
+```
+
+The uniformly bounded cover gives a finite endpoint. Charts carrying
+locally finite growing TESTs also suffice on a regular-overlap
+cover of the singular locus. For cofinal native charts that are
+transitive on their singular loci, every event has a representative
+in one finite chart and an intrinsic global TEST exists.
+
+```lean
+import Hironaka.Resolution.HironakaG8BoundedOpenTestEndpoint
+import Hironaka.Resolution.HironakaG8GrowingSingularCoverTestLimit
+import Hironaka.Resolution.HironakaG8NativeHomogeneousEndpoint
+
+#check Hironaka.HironakaG8BoundedOpenTestEndpoint.bounded_endpoint_of_compatible_open_tests
+#check Hironaka.HironakaG8GrowingSingularCoverTestLimit.intrinsic_endpoint_of_singular_cover_growing_tests
+#check Hironaka.HironakaG8NativeHomogeneousEndpoint.intrinsic_endpoint_of_homogeneous_native_windows
+```
+
+A common upper bound on a weak spatial rank gives a finite ambient
+original TEST, even if several disjoint events use each rank. A local
+growing TEST supported in a closed ambient subset of its window extends
+to the ambient manifold while retaining each restricted prefix.
+
+```lean
+import Hironaka.Resolution.HironakaG8BoundedWeakRankEndpoint
+import Hironaka.Resolution.HironakaG8ClosedSupportedGrowingExtension
+import Hironaka.Resolution.HironakaG8SupportedCompactClearance
+
+#check Hironaka.HironakaG8BoundedWeakRankEndpoint.finite_endpoint_of_uniformly_bounded_weak_spatial_rank
+#check Hironaka.HironakaG8ClosedSupportedGrowingExtension.exists_supported_growing_test_extension
+#check Hironaka.HironakaG8SupportedCompactClearance.exists_compact_clearance_in_supported_growing_test
+```
+
 ## De Jong alterations over arbitrary fields
 
 `Hironaka.DeJong` is a separate scheme-theoretic API, also exported by
@@ -21,7 +177,7 @@ of finite type; it need not be geometrically integral.
 
 | theorem | statement |
 |---|---|
-| `Hironaka.deJongAlterationTheorem` | For every field `k`, the unchanged native proposition `DeJongAlterations.DeJongAlterationTheorem k`. Its only inputs are `(k : Type u) [Field k]`. |
+| `Hironaka.deJongAlterationTheorem` | For every field `k`, the proposition `Hironaka.DeJongAlterationTheorem k`. Its only inputs are `(k : Type u) [Field k]`. |
 | `Hironaka.exists_alterationWithBoundary` | For an actual `k`-variety `X` and any prescribed proper closed subset `Z`, a genuine alteration `Y → X`, an open immersion `j : Y → Ybar`, an integral regular projective `k`-variety `Ybar`, and a strict SNC boundary whose support is exactly `j(f⁻¹(Z)) ∪ (Ybar \ j(Y))`. |
 
 The boundary includes the effective Cartier, reducedness, regular-intersection

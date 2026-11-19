@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualFirstSymbolTangentClosure
 import Hironaka.Resolution.HironakaActualHomogeneousInitialHS
 import Hironaka.Resolution.HironakaActualOriginalTaylorDerivatives
@@ -28,7 +23,6 @@ open HolGerm HironakaHolomorphicPointJets HironakaRelativeNormalIdeal
   HironakaSmoothCentreRealDomainActualAmbientHS HironakaSmoothCentreRealDomainOriginalStalkFreeness
   HironakaRelativeNormalCoherentTranslatedJets HironakaRelativeNormalDeformationInitialRelations
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 /-- The WHOLE genuine initial ideal contains each true degree-q component of an original ideal member of order at least q. -/
 theorem homogeneousComponent_mem_actual_initial_of_mem_power {n : ℕ}
     (K : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ)
@@ -76,8 +70,6 @@ theorem pderiv_homogeneousComponent_zero {n : ℕ} (i : Fin n)
     simp [Finsupp.degree_eq_weight_one, Finsupp.weight_single]
   simp [MvPowerSeries.coeff_pderiv, MvPowerSeries.coeff_homogeneousComponent, hd]
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Actual original first-symbol closure preserves the ENTIRE SAME homogeneous initial ideal, including all formal generators. -/
 theorem actual_homogeneous_initial_ideal_pderiv_of_first_symbol_closure (n : ℕ)
     (I : Ideal (HolGerm (ComplexModel (0+n)))) (i : Fin n)

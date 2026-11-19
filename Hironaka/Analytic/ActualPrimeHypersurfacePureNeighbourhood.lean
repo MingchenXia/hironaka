@@ -1,12 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ActualPrimeHolomorphicRegularZeros
 import Hironaka.Analytic.GermComponentDimension
 import Hironaka.Analytic.AnalyticJacobianCriterion
-
 
 set_option autoImplicit false
 
@@ -16,8 +10,6 @@ set_option autoImplicit false
 Complete mathematical statement and ENTIRE proof precede the baseline.
 Actual original regular-zero frequency supplies the dimension internally.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter Metric

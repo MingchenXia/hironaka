@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothCentreNearbyStalks
 
 /-! # Whole original centre ideals at every real nearby centre point
@@ -100,7 +95,6 @@ theorem actualNearbyGermEquiv_normalCoordinate (x : M)
   rw [hPlane (i.natAdd d) (by simp), sub_zero,
     actualNearbyPoint_chart_value x Φ hsrc a ha, (chartAt (ComplexModel (d+t)) x).right_inv (hsrc hz)]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- At every REAL centre-plane target point, the ENTIRE original vanishing stalk is the actual image. -/
 theorem whole_nearby_vanishing_stalk_eq_map_normalIdeal (x : M) (C : Set M)
     (Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel (d+t)) x x))

@@ -1,41 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupBiholomorphismLift
 import Hironaka.Blowup.BlowupDerivativeIdeal
 import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupFunctionTransform
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.ExceptionalFibres
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.MarkedIdeal.HomogenizedIdeal
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Maps acting trivially modulo an ideal, and their lifts along a blowup
 
-Source: Włodarczyk 2005, proof of `le:homo` (4): the coordinate change `φ` satisfies `φ^*(f) - f ∈ (h) ⊆ T(𝓘)` for
-every `f`, and the same holds for its lift `φ₁` to a blowup with centre in `V(T(𝓘))`, modulo the transformed ideal
-`T(𝓘)₁ = 𝓘(D)⁻¹ σ^*(T(𝓘))`; in particular `φ₁` fixes `V(T(𝓘)₁) ⊇ cosupp(𝓘₁, μ)` pointwise.
+Hironaka phase H3 (TN23-ENVELOPES), the core of the lifts `φᵢ` in Włodarczyk's Glueing Lemma `le:homo` (4); blueprint
+`mc:trivial-action`, `mc:trivial-action-lift` (`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, proof of
+`le:homo` (4): the coordinate change `φ` satisfies `φ^*(f) - f ∈ (h) ⊆ T(𝓘)` for every `f`, and the same holds for its lift
+`φ₁` to a blowup with centre in `V(T(𝓘))`, modulo the transformed ideal `T(𝓘)₁ = 𝓘(D)⁻¹ σ^*(T(𝓘))`; in particular `φ₁`
+fixes `V(T(𝓘)₁) ⊇ cosupp(𝓘₁, μ)` pointwise.
 
 * `zeroSet J`, `TrivialAt f J y` (`f` fixes `y`, is holomorphic near `y`, and `g ∘ f - g ∈ J_y` for every germ `g`).
 * `le_vanishingIdeal_of_subset_zeroSet`, `pullback_le_controlledTransform`,
@@ -50,6 +27,9 @@ every `f`, and the same holds for its lift `φ₁` to a blowup with centre in `V
   `f₁` are `W_i + W_j δᵢ` and `(W_i + δᵢ)/(1 + δⱼ)`; both lift `f ∘ π`, so they agree off the exceptional divisor, hence
   everywhere), and `trivialAt_lift`: **if `f` acts trivially modulo `J` (`C ⊆ V(J)`) and `π ∘ f₁ = f ∘ π`, then `f₁`
   acts trivially modulo `σ^c(J, 1)` at every point of `V(σ^c(J, 1))`**; in particular it fixes those points.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -59,7 +39,9 @@ universe u
 
 namespace Hironaka.GlueingTrivialAction
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder IdealWeightPowers BlowupControlledTransform BlowupExceptionalDivisor InvertibleIdealQuotient HolomorphicTaylorTail HomogenizedGlueing
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  IdealWeightPowers BlowupControlledTransform BlowupExceptionalDivisor InvertibleIdealQuotient
+  HolomorphicTaylorTail HomogenizedGlueing
 
 noncomputable section
 

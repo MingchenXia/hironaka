@@ -1,52 +1,26 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.InvDomainTowerAlong
 import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.BoundaryCountAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterAlong
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1ab's restricted marked ideals lie in the domain of the inductive invariant
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol`; Włodarczyk 2009
-(`wlodarczyk09-analytic-resolution`) Step 1a (printed p. 55).
+Hironaka phase H2 (TN3), for TN-CLASSICAL's Step 1a inside `N` (`hir:maximal-order-step`; claim I-0977 C-0120,
+narrowed in C-0121).  Blueprint `bcalc:member-intersection-dim`, `bcalc:member-restriction-domain` (chapter
+`blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol`;
+Włodarczyk 2009 (`wlodarczyk09-analytic-resolution`) Step 1a (printed p. 55).
 
 In Step 1a of the maximal-order step, at a point `y` of the cosupport lying on `s₀ ≥ 1` of the original members
 (`s₀` the current maximum of `s`), the value is `(s₀, inv(𝒮))` with the lower-dimensional invariant of the
 restriction `𝒮 = (X, N ∩ H_{S(y)}, E_{S(y)}, 𝓒_N(𝔞), μ_𝓒)` of the coefficient ideal to the intersection of `N` with
-the members through `y`, the members `S(y)` deleted from `E` (form
-`CoefficientIdealAlongRestrictionDrop.coeffAlong_restrict_withE_iff`). The inductive invariant
+the members through `y`, the members `S(y)` deleted from `E` (TN23's form
+`CoefficientIdealAlongRestrictionDrop.coeffAlong_restrict_withE_iff`).  The inductive invariant
 (`ResolutionInvariantSpec.ResolutionInvariant`) is defined on the marked ideals of
 `ResolutionInvariantSpec.IsInvDomain (k - 1)`; this module shows that `𝒮`, restricted to a neighbourhood of `y`
-missing the members not through `y`, lies there once the level-`s₀` part of the member locus is empty, which is the
-situation after Step 1aa.
+missing the members not through `y`, lies there once the level-`s₀` part of the member locus is empty, which is
+the situation after Step 1aa (`MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_append_eq_empty`).
 
 ## Main results
 
@@ -56,13 +30,17 @@ situation after Step 1aa.
   `E`, the step along the coordinate of a member of `S` stays in `N` and leaves `N ∩ H_S`);
 * `isInvDomain_pullback_val_of_forall`: a well-formed marked ideal with `dim N ≤ k`, `d ≥ 1`, nonzero along `N` at
   the points of an open `U`, restricted to `U`, lies in `IsInvDomain k`;
-* `memberRestrict 𝔪 S`: the restricted marked ideal `{ withN (coeffMarkedAlong 𝔪) (N ∩ H_S) with E:= E_S }`;
-  `isWellFormed_memberRestrict`, `dimLE_memberRestrict`, `one_le_memberRestrict_d`
+* `memberRestrict 𝔪 S`: the restricted marked ideal `{ withN (coeffMarkedAlong 𝔪) (N ∩ H_S) with E := E_S }`;
+  `isWellFormed_memberRestrict`, `dimLE_memberRestrict`, `one_le_memberRestrict_d`, `cosupp_memberRestrict`;
 * `isNonzeroAlongAt_memberRestrict`: off the member locus, at a point near which `H_S` is the intersection of the
   members of `E₀` through the point, the coefficient ideal is nonzero along `N ∩ H_S`;
-* `membersThrough`, `exists_opens_forall_mem_imp`: for `y` on `s₀ ≥ 1` members of a list `E₀` of members of `E`,
-  with the level-`s₀` part of the member locus empty, the restriction of `memberRestrict 𝔪 (membersThrough 𝔪.E E₀
-  y)` to every open set on whose points the members of `E₀` all pass through `y` lies in `IsInvDomain (k - 1)`.
+* `membersThrough`, `exists_opens_forall_mem_imp`, **`isInvDomain_memberRestrict_membersThrough`**: for `y` on
+  `s₀ ≥ 1` members of a list `E₀` of members of `E`, with the level-`s₀` part of the member locus empty, the
+  restriction of `memberRestrict 𝔪 (membersThrough 𝔪.E E₀ y)` to every open set on whose points the members of `E₀`
+  all pass through `y` lies in `IsInvDomain (k - 1)`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -73,7 +51,14 @@ universe u
 namespace Hironaka.InvDomainMemberRestriction
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealRestrictOpen Hironaka.DivisorExponentAlong Hironaka.ResolutionInvariantSpec Hironaka.NormalCrossings Hironaka.BoundaryCount Hironaka.BlowupSNCTransform Hironaka.SimultaneousNormalCrossings Hironaka.MemberInterAlong Hironaka.BoundaryCountAlong Hironaka.MemberInterLocusAlong Hironaka.CoefficientIdealRestriction Hironaka.HomogenizedIdealAlong Hironaka.RegularPointDimension Hironaka.MarkedIdealBiholomorphism
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealRestrictOpen Hironaka.DivisorExponentAlong
+  Hironaka.ResolutionInvariantSpec Hironaka.NormalCrossings
+  Hironaka.BoundaryCount Hironaka.BlowupSNCTransform
+  Hironaka.SimultaneousNormalCrossings Hironaka.MemberInterAlong
+  Hironaka.BoundaryCountAlong Hironaka.MemberInterLocusAlong
+  Hironaka.CoefficientIdealRestriction Hironaka.HomogenizedIdealAlong
+  Hironaka.RegularPointDimension Hironaka.MarkedIdealBiholomorphism
 
 noncomputable section
 
@@ -192,12 +177,16 @@ section Restrict
 
 variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
 
-/-- **Step 1ab's restricted marked ideal** `(X, N ∩ H_S, E_S, 𝓒_N(𝔞), μ_𝓒)`: the coefficient ideal along `N` restricted
-to the intersection of `N` with the members of `S`, these members deleted from `E` (form in
+/-- **Step 1ab's restricted marked ideal** `(X, N ∩ H_S, E_S, 𝓒_N(𝔞), μ_𝓒)`: the coefficient ideal along `N`
+restricted to the intersection of `N` with the members of `S`, these members deleted from `E` (TN23's form in
 `CoefficientIdealAlongRestrictionDrop.coeffAlong_restrict_withE_iff`). -/
 def memberRestrict (𝔪 : MarkedIdeal n X) (S : Finset (Fin 𝔪.E.length)) : MarkedIdeal n X :=
   { withN (coeffMarkedAlong 𝔪) (𝔪.N ∩ memberInter 𝔪.E S) with
     E := ((List.finRange 𝔪.E.length).filter fun i => i ∉ S).map 𝔪.E.get }
+
+theorem memberRestrict_eq (𝔪 : MarkedIdeal n X) (S : Finset (Fin 𝔪.E.length)) :
+    memberRestrict 𝔪 S = { withN (coeffMarkedAlong 𝔪) (𝔪.N ∩ memberInter 𝔪.E S) with
+      E := ((List.finRange 𝔪.E.length).filter fun i => i ∉ S).map 𝔪.E.get } := rfl
 
 @[simp] theorem memberRestrict_N (𝔪 : MarkedIdeal n X) (S : Finset (Fin 𝔪.E.length)) :
     (memberRestrict 𝔪 S).N = 𝔪.N ∩ memberInter 𝔪.E S := rfl
@@ -232,6 +221,18 @@ theorem dimLE_memberRestrict (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪
     {S : Finset (Fin 𝔪.E.length)} (hS : S.Nonempty) {k : ℕ} (hk : DimLE n 𝔪.N k) :
     DimLE n (memberRestrict 𝔪 S).N (k - 1) :=
   dimLE_inter_memberInter hn h𝔪.isSNCDivisor h𝔪.isTransverse hS hk
+
+/-- **The cosupport of the restricted marked ideal** is `cosupp 𝔪 ∩ H_S` (TN23's
+`CoefficientIdealAlongRestriction.cosupp_coeffMarkedAlong_withN`; it does not depend on `E`). -/
+theorem cosupp_memberRestrict {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed) (hd : 1 ≤ 𝔪.d)
+    (S : Finset (Fin 𝔪.E.length)) : (memberRestrict 𝔪 S).cosupp = 𝔪.cosupp ∩ memberInter 𝔪.E S := by
+  have h := CoefficientIdealAlongRestriction.cosupp_coeffMarkedAlong_withN h𝔪.isClosedSubmanifold_N.2
+    (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔪.isCoherent hg) hd
+    (S := 𝔪.N ∩ memberInter 𝔪.E S) inter_subset_left
+  have h' : (memberRestrict 𝔪 S).cosupp = 𝔪.cosupp ∩ (𝔪.N ∩ memberInter 𝔪.E S) := h
+  rw [h']
+  ext x
+  exact ⟨fun hx => ⟨hx.1, hx.2.2⟩, fun hx => ⟨hx.1, 𝔪.cosupp_subset_N hx.1, hx.2⟩⟩
 
 /-- **Off the member locus the restricted marked ideal is nonzero along `N ∩ H_S`**: at a point `z ∈ N` near
 which `H_S` is the intersection of the members of `E₀` through `z`, and which is not in the member locus of the
@@ -309,11 +310,54 @@ theorem exists_opens_forall_mem_imp {E₀ : List (Set X)} (hE₀ : ∀ H ∈ E�
 
 end Through
 
+/-! ### The domain of Step 1ab's restricted marked ideals -/
+
+section Domain
+
+variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
+
+/-- **Step 1ab's restricted marked ideals lie in the domain of the inductive invariant** (one stage).  Let `𝔪` be
+well formed with `d ≥ 1` and `dim N ≤ k`, `E₀` a list of members of `E` (the members counted), `y` a point on
+`s₀ ≥ 1` members of `E₀`, and assume that no point of the member locus of the cosupport along `N` and `E₀` lies on
+exactly `s₀` members of `E₀` (after Step 1aa,
+`MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_append_eq_empty`).  On every open `U` whose
+points lie on no member of `E₀` missing `y` (`exists_opens_forall_mem_imp`), the restriction
+`(X, N ∩ H_{S(y)}, E_{S(y)}, 𝓒_N(𝔞), μ_𝓒)|_U` lies in `IsInvDomain (k - 1)`: it is well formed, of dimension
+`≤ k - 1`, with positive mark, and at each of its points `z` in `U` (on exactly the members of `E₀` through `y`,
+hence off the member locus) its ideal is nonzero along `N ∩ H_{S(y)}`. -/
+theorem isInvDomain_memberRestrict_membersThrough (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed)
+    (hd : 1 ≤ 𝔪.d) {k : ℕ} (hk : DimLE n 𝔪.N k) {E₀ : List (Set X)} (hE₀ : ∀ H ∈ E₀, H ∈ 𝔪.E) {y : X}
+    (hy : 1 ≤ boundaryCount E₀ y)
+    (hempty : memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = boundaryCount E₀ y} = ∅)
+    (U : Opens X) (hU : ∀ z ∈ U, ∀ H ∈ E₀, z ∈ H → y ∈ H) :
+    IsInvDomain (k - 1)
+      (MarkedIdeal.pullback (Subtype.val : U → X) (memberRestrict 𝔪 (membersThrough 𝔪.E E₀ y))) := by
+  refine isInvDomain_pullback_val_of_forall (isWellFormed_memberRestrict hn h𝔪 _)
+    (dimLE_memberRestrict hn h𝔪 (membersThrough_nonempty hE₀ hy) hk) (one_le_memberRestrict_d 𝔪 _) U ?_
+  rintro z ⟨hzN, hzS⟩ hzU
+  have hzS' : z ∈ {w | ∀ H ∈ E₀, y ∈ H → w ∈ H} := memberInter_membersThrough hE₀ y ▸ hzS
+  -- `z` lies on exactly the members of `E₀` through `y`
+  have hiff : ∀ H ∈ E₀, y ∈ H ↔ z ∈ H := fun H hH => ⟨fun hyH => hzS' H hH hyH, fun hzH => hU z hzU H hH hzH⟩
+  have hset : memberInter 𝔪.E (membersThrough 𝔪.E E₀ y) = {w | ∀ H ∈ E₀, z ∈ H → w ∈ H} := by
+    rw [memberInter_membersThrough hE₀ y]
+    ext w
+    exact forall_congr' fun H => forall_congr' fun hH => by rw [hiff H hH]
+  refine isNonzeroAlongAt_memberRestrict h𝔪.isClosedSubmanifold_N h𝔪.isCoherent hd E₀ _ hzN
+    (Eventually.of_forall fun w => by rw [hset]; exact Iff.rfl) fun hzL => ?_
+  have hz : z ∈ memberInterLocus 𝔪.N E₀ 𝔪.cosupp ∩ {x | boundaryCount E₀ x = boundaryCount E₀ y} :=
+    ⟨hzL, (boundaryCount_eq_of_forall_iff hiff).symm⟩
+  rw [hempty] at hz
+  exact hz
+
+end Domain
+
 /-! ### Along multiple test blow-ups: at every stage after Step 1aa -/
 
 section Tower
 
-open Hironaka.BlowupTowers Hironaka.CoefficientIdealRestriction Hironaka.MemberInterTowerAlong Hironaka.InvDomainTowerAlong Hironaka.HomogenizedGlueingTower
+open Hironaka.BlowupTowers Hironaka.CoefficientIdealRestriction
+  Hironaka.MemberInterTowerAlong Hironaka.InvDomainTowerAlong
+  Hironaka.HomogenizedGlueingTower
 
 variable {X : CMfd.{u} n}
 
@@ -327,6 +371,46 @@ theorem mem_E_geoTransformAlong_of_mem_map (𝔪 : MarkedIdeal n X) {E₀ : List
     rw [take_E_geoTransformAlong]
     exact List.mem_map_of_mem (hE₀ H hH)
   exact List.mem_of_mem_take h
+
+/-- **At every stage after Step 1aa, Step 1ab's restricted marked ideals lie in the domain.**  Let `𝔪` be well
+formed with `d ≥ 1` and `dim N ≤ k` (at the start of Step 1), `E₀` a list of members of `E` (the original members),
+`T` a multiple test blow-up of `𝔪` along which the level-`s₀` part of the member locus is empty (for instance a
+tower starting with the Step 1aa blowup at level `s₀`,
+`MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_append_eq_empty`), and `y` a point of the last stage
+on `s₀ ≥ 1` of the strict transforms of the members of `E₀`.  On every open `U` whose points lie on none of these
+strict transforms missing `y`, the restriction of `(Y, N_T ∩ H_{S(y)}, (E_T)_{S(y)}, 𝓒_{N_T}(𝔞_T), μ_𝓒)` lies in
+`IsInvDomain (k - 1)`. -/
+theorem isInvDomain_memberRestrict_geoTransformAlong (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed)
+    (hd : 1 ≤ 𝔪.d) {k : ℕ} (hk : DimLE n 𝔪.N k) {E₀ : List (Set X)} (hE₀ : ∀ H ∈ E₀, H ∈ 𝔪.E)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {s₀ : ℕ}
+    (hempty : memberInterLocus (geoTransformAlong 𝔪 T).N (E₀.map (strictAlong T)) (geoTransformAlong 𝔪 T).cosupp ∩
+      {z | boundaryCount (E₀.map (strictAlong T)) z = s₀} = ∅)
+    {y : Y} (hys : boundaryCount (E₀.map (strictAlong T)) y = s₀) (hs₀ : 1 ≤ s₀) (U : Opens Y)
+    (hU : ∀ z ∈ U, ∀ H ∈ E₀.map (strictAlong T), z ∈ H → y ∈ H) :
+    IsInvDomain (k - 1) (MarkedIdeal.pullback (Subtype.val : U → Y)
+      (memberRestrict (geoTransformAlong 𝔪 T) (membersThrough (geoTransformAlong 𝔪 T).E (E₀.map (strictAlong T)) y))) :=
+  isInvDomain_memberRestrict_membersThrough hn
+    (MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong h𝔪 T hT)
+    (by rw [d_geoTransformAlong]; exact hd)
+    (dimLE_geoTransformAlong h𝔪.isClosedSubmanifold_N h𝔪.isCoherent hk T hT)
+    (mem_E_geoTransformAlong_of_mem_map 𝔪 hE₀ T) (hys ▸ hs₀) (by rw [hys]; exact hempty) U hU
+
+/-- **The same on an explicit neighbourhood of `y`**: there is an open `U ∋ y` (the points on no strict transform of a
+member of `E₀` missing `y`) on which the restriction lies in `IsInvDomain (k - 1)`. -/
+theorem exists_opens_isInvDomain_memberRestrict_geoTransformAlong (hn : 0 < n) {𝔪 : MarkedIdeal n X}
+    (h𝔪 : 𝔪.IsWellFormed) (hd : 1 ≤ 𝔪.d) {k : ℕ} (hk : DimLE n 𝔪.N k) {E₀ : List (Set X)}
+    (hE₀ : ∀ H ∈ E₀, H ∈ 𝔪.E) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {s₀ : ℕ}
+    (hempty : memberInterLocus (geoTransformAlong 𝔪 T).N (E₀.map (strictAlong T)) (geoTransformAlong 𝔪 T).cosupp ∩
+      {z | boundaryCount (E₀.map (strictAlong T)) z = s₀} = ∅)
+    {y : Y} (hys : boundaryCount (E₀.map (strictAlong T)) y = s₀) (hs₀ : 1 ≤ s₀) :
+    ∃ U : Opens Y, y ∈ U ∧ IsInvDomain (k - 1) (MarkedIdeal.pullback (Subtype.val : U → Y)
+      (memberRestrict (geoTransformAlong 𝔪 T)
+        (membersThrough (geoTransformAlong 𝔪 T).E (E₀.map (strictAlong T)) y))) := by
+  have hclosed : ∀ H ∈ E₀.map (strictAlong T), IsClosed H := fun H hH =>
+    (MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong h𝔪 T hT).isSNCDivisor.1 H
+      (mem_E_geoTransformAlong_of_mem_map 𝔪 hE₀ T H hH)
+  obtain ⟨U, hyU, hU⟩ := exists_opens_forall_mem_imp hclosed y
+  exact ⟨U, hyU, isInvDomain_memberRestrict_geoTransformAlong hn h𝔪 hd hk hE₀ T hT hempty hys hs₀ U hU⟩
 
 end Tower
 

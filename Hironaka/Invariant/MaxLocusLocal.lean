@@ -1,61 +1,48 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantExt
 import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
 import Hironaka.Blowup.BlowupTowerSplitIso
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Maximum loci and admissible centres from local data
 
-Source: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1 of the proof of Proposition `pr:resol`: the invariant at a
-point is computed from local data (the invariant of a lower-dimensional marked ideal on a neighbourhood of the
-point), and the centre is the locus where the global invariant attains its maximum; "the blow-ups will be performed
-at the centers ... for which the invariant attains its maximum".
+Hironaka phase H2 (TN3), inputs for `hir:canonical-centres` (TN-CLASSICAL's construction of a resolution invariant in
+dimension `≤ k` from one in dimension `≤ k - 1`; claim I-0977 C-0141, nested open sets of towers C-0145).  Blueprint
+`bcalc:max-locus-local`, `bcalc:centre-local`, `bcalc:restrict-nested` (chapter `blowup-calculus.tex`).  Source: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1 of the
+proof of Proposition `pr:resol`: the invariant at a point is computed from local data (the invariant of a lower-dimensional
+marked ideal on a neighbourhood of the point), and the centre is the locus where the global invariant attains its maximum;
+"the blow-ups will be performed at the centers ... for which the invariant attains its maximum".
 
 ## Main results
 
 * `maxLocus_comp_strictMono`: a strictly monotone change of values does not change maximum loci;
-* `preimage_maxLocus_subset`, **`preimage_maxLocus_eq_or`**: the global centre from local data -- let `ι: Y' → Y`
+* `preimage_maxLocus_subset`, **`preimage_maxLocus_eq_or`**: the global centre from local data -- let `ι : Y' → Y`
   (in the application the inclusion of the preimage of a neighbourhood), `s ⊆ Y`, `s' ⊆ ι⁻¹ s` (the cosupport of the
-  lower-dimensional marked ideal), `f ∘ ι = φ ∘ g` on `s'` with `φ` strictly monotone, and every other point of `ι⁻¹
-  s` strictly below a point of `s'`; then the trace `ι⁻¹ (maxLocus f s)` is empty or the maximum locus of `g` on
-  `s'`
-* `strictMono_toLex_coe`: the values `(s₀, b)` in `ℕ ×ₗ WithTop Λ` (Step 1 value function) are a strictly monotone
-  image of `b`;
+  lower-dimensional marked ideal), `f ∘ ι = φ ∘ g` on `s'` with `φ` strictly monotone, and every other point of `ι⁻¹ s`
+  strictly below a point of `s'`; then the trace `ι⁻¹ (maxLocus f s)` is empty or the maximum locus of `g` on `s'`;
+  `preimage_maxLocus_eq_or_of_eq` (`φ = id`, `s' = ι⁻¹ s`: `ResolutionInvariantSegments.maxLocus_preimage` without the
+  nonemptiness hypothesis);
+* `preimage_level_eq_of_eq`, `preimage_level_eq_empty`, `le_of_comp_le`: the same for the level sets of property (1)
+  of `hir:centre-function`;
+* `strictMono_toLex_coe`: the values `(s₀, b)` in `ℕ ×ₗ WithTop Λ` (TN-CLASSICAL's Step 1 value function) are a strictly
+  monotone image of `b`;
 * `nestedOpens`, `nestedOpensDiffeo`, `pullback_val_pullback_val`: an open `V ⊆ W` seen inside `W` is biholomorphic to
   `V`, and restricting to `W` and then to `V` is restricting to `V` (transported);
 * **`isAdmissibleCentre_pullback_val_of_forall_exists_opens`**: admissible centres are local relative to an open `W`;
+* **`preimage_maxLocus_restrict_eq_or`**, **`maxLocus_isTowerIso`**: centres along open sets and isomorphisms of towers --
+  for a resolution invariant and a canonical segment, the trace of the maximum locus on an open set is empty or the maximum
+  locus of the restricted marked ideal along the restricted segment, and along an isomorphism of towers the maximum loci
+  correspond;
 * `nestedDiffeo`, `openPreimage_mono`, `mem_openPreimage_restrict_nestedOpens`, `isTowerIso_restrict_nestedOpens`,
   `pullback_symm_nestedOpensDiffeo`, **`restrict_nestedOpens`**: nested open sets of towers -- restricting a tower to `W`
   and then to `W ∩ V` is restricting it to `V ⊆ W` (an isomorphism of towers over `nestedOpensDiffeo`), and for a resolution
   invariant the domain, the canonical segments and the values pass from `𝔫|_W` along `T|_W` to `𝔫|_V` along `T|_V` (for
   shrinking a neighbourhood on which a lower-dimensional marked ideal is formed).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -120,6 +107,44 @@ theorem preimage_maxLocus_eq_or (ι : Y' → Y) {f : Y → Λ} {g : Y' → Λ'} 
       _ ≤ φ (g p) := hφ.monotone (hp p₀ hp₀s')
       _ = f (ι p) := (hfg p hps').symm
 
+/-- **Traces of maximum loci** (equal values on the trace): the trace of the maximum locus of `f` on `s` is empty or the
+maximum locus on the trace of `s` of a function with the same values there. -/
+theorem preimage_maxLocus_eq_or_of_eq (ι : Y' → Y) {f : Y → Λ} {g : Y' → Λ} {s : Set Y}
+    (hfg : ∀ p ∈ ι ⁻¹' s, f (ι p) = g p) :
+    ι ⁻¹' maxLocus f s = ∅ ∨ ι ⁻¹' maxLocus f s = maxLocus g (ι ⁻¹' s) :=
+  preimage_maxLocus_eq_or ι strictMono_id subset_rfl hfg fun _ _ h => absurd ‹_› h
+
+/-- **Level sets from local data** (property (1) of `hir:centre-function`): if `f ∘ ι = φ ∘ g` on `s' ⊆ ι⁻¹ s` and no other
+point of `ι⁻¹ s` has the value `l = φ μ`, the trace of the level set `{f = l}` on `s` is the level set `{g = μ}` on `s'`. -/
+theorem preimage_level_eq_of_eq (ι : Y' → Y) {f : Y → Λ} {g : Y' → Λ'} {φ : Λ' → Λ} (hφ : StrictMono φ)
+    {s : Set Y} {s' : Set Y'} (hs' : s' ⊆ ι ⁻¹' s) (hfg : ∀ p ∈ s', f (ι p) = φ (g p)) {l : Λ}
+    (hne : ∀ p ∈ ι ⁻¹' s, p ∉ s' → f (ι p) ≠ l) {μ : Λ'} (hμ : φ μ = l) :
+    ι ⁻¹' {y | y ∈ s ∧ f y = l} = {p | p ∈ s' ∧ g p = μ} := by
+  ext p
+  constructor
+  · rintro ⟨hps, hpl⟩
+    by_cases hps' : p ∈ s'
+    · refine ⟨hps', hφ.injective ?_⟩
+      rw [← hfg p hps', hpl, hμ]
+    · exact absurd hpl (hne p hps hps')
+  · rintro ⟨hps', hpμ⟩
+    exact ⟨hs' hps', by rw [hfg p hps', hpμ, hμ]⟩
+
+/-- **Level sets from local data, outside the range**: if the level `l` is not a value of `φ` and no point of `ι⁻¹ s`
+outside `s'` has the value `l`, the trace of the level set is empty. -/
+theorem preimage_level_eq_empty (ι : Y' → Y) {f : Y → Λ} {g : Y' → Λ'} {φ : Λ' → Λ} {s : Set Y} {s' : Set Y'}
+    (hfg : ∀ p ∈ s', f (ι p) = φ (g p)) {l : Λ} (hne : ∀ p ∈ ι ⁻¹' s, p ∉ s' → f (ι p) ≠ l)
+    (hl : ∀ μ, φ μ ≠ l) : ι ⁻¹' {y | y ∈ s ∧ f y = l} = ∅ := by
+  refine eq_empty_iff_forall_notMem.mpr fun p ⟨hps, hpl⟩ => ?_
+  by_cases hps' : p ∈ s'
+  · exact hl (g p) (by rw [← hfg p hps', hpl])
+  · exact hne p hps hps' hpl
+
+/-- A bound on `f = φ ∘ g` is a bound on `g`. -/
+theorem le_of_comp_le (ι : Y' → Y) {f : Y → Λ} {g : Y' → Λ'} {φ : Λ' → Λ} (hφ : StrictMono φ) {s' : Set Y'}
+    (hfg : ∀ p ∈ s', f (ι p) = φ (g p)) {μ : Λ'} (hle : ∀ p ∈ s', f (ι p) ≤ φ μ) : ∀ p ∈ s', g p ≤ μ :=
+  fun p hp => hφ.le_iff_le.mp (hfg p hp ▸ hle p hp)
+
 /-- **The values `(s₀, b)`** of a lexicographic value function with `WithTop` second component are a strictly monotone image
 of `b`. -/
 theorem strictMono_toLex_coe {α : Type*} [LinearOrder α] (a : α) :
@@ -132,7 +157,9 @@ end Order
 
 section Nested
 
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowers
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.BlowupTowers
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
 
@@ -195,11 +222,58 @@ theorem isAdmissibleCentre_pullback_val_of_forall_exists_opens {𝔪 : MarkedIde
 
 end Nested
 
+/-! ### Canonical centres along open sets and isomorphisms of towers -/
+
+section Centres
+
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism
+  Hironaka.ResolutionInvariantExt
+open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+
+variable {n : ℕ} {X X' : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+/-- **Canonical centres along open sets**: for a resolution invariant `R`, `𝔪` in its domain, a canonical segment `T` and an
+open `U`, the trace on the open preimage of `U` of the maximum locus of `R.inv 𝔪 T` on the cosupport is empty or the maximum
+locus of `R.inv (𝔪|_U) (T|_U)` on the cosupport of the restriction (property (5)). -/
+theorem preimage_maxLocus_restrict_eq_or (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (hdom : IsInvDomain k 𝔪) (U : Opens X) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hcan : IsCanonical 𝔪 (R.inv 𝔪) T) :
+    (Subtype.val : openPreimage T U → Y) ⁻¹' maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp = ∅ ∨
+      (Subtype.val : openPreimage T U → Y) ⁻¹' maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp =
+        maxLocus (R.inv (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T))
+          (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) (restrict U T)).cosupp := by
+  have hTt := isGeoTestTower_of_isCanonical R hdom T hcan
+  rw [ResolutionInvariantSegments.cosupp_geoTransformAlong_restrict hdom.isWellFormed.isClosedSubmanifold_N
+    hdom.isWellFormed.isCoherent U T hTt]
+  exact preimage_maxLocus_eq_or_of_eq _ fun p hp => (R.restrictOpen 𝔪 hdom U T hcan p hp).symm
+
+/-- **Canonical centres along isomorphisms of towers**: for an isomorphism `χ : T' → T` of towers over a biholomorphism
+`Φ` and a canonical segment `T` of `𝔪` in the domain, the maximum locus of `R.inv (Φ^*𝔪) T'` on its cosupport is the
+preimage under `χ` of that of `R.inv 𝔪 T` (property (6)). -/
+theorem maxLocus_isTowerIso (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪)
+    (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X) {Y' Y : CMfd.{u} n} {T' : BlowupTower X' Y'}
+    {T : BlowupTower X Y} {χ : Y' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y} (hiso : IsTowerIso Φ T' T χ)
+    (hcan : IsCanonical 𝔪 (R.inv 𝔪) T) :
+    maxLocus (R.inv (MarkedIdeal.pullback Φ 𝔪) T') (geoTransformAlong (MarkedIdeal.pullback Φ 𝔪) T').cosupp =
+      χ ⁻¹' maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp := by
+  have hTt := isGeoTestTower_of_isCanonical R hdom T hcan
+  rw [IsTowerIso.cosupp_geoTransformAlong Φ hdom.isWellFormed.isClosedSubmanifold_N hdom.isWellFormed.isCoherent
+    hiso hTt]
+  exact ResolutionInvariantSegments.maxLocus_preimage_of_surjective χ.toEquiv.surjective
+    (fun p hp => R.towerIso Φ 𝔪 hdom T' T χ hiso hcan p hp)
+
+end Centres
+
 /-! ### Nested open sets of towers -/
 
 section NestedTowers
 
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantExt
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism
+  Hironaka.ResolutionInvariantExt
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 variable {n : ℕ}

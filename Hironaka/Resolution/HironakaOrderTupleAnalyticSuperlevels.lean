@@ -1,15 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaAnalyticCentreExtension
 import Hironaka.Resolution.HironakaEmbeddedAnalyticLocal
 import Hironaka.Invariant.CanonicalCentres
 import Mathlib.Data.List.Lex
-
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.MarkedIdeal.GermIdealOrderBounds
 
 set_option autoImplicit false
 

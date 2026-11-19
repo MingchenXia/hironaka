@@ -31,8 +31,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   AnalyticDimensionBasics GlobalComponents RegularLocusComponent
   HironakaCurveAnalyticPredicates HironakaDimensionThreeStepOneCurveEnvelope
   NormalCrossings GermIdealOrder HomogenizedIdealAlong StepOneValue StepOneLowerDomain
-open Hironaka.ResolutionInvariantSpec (IsInvDomain)
-open Hironaka
+open ResolutionInvariantSpec (IsInvDomain)
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
@@ -224,7 +223,7 @@ theorem exists_analytic_dimzero_member_order_history_exception (hn : 0 < n)
     obtain ⟨q, _, _, hconst, hpred⟩ := hdictionary i B hB
     exact ⟨(hconst x hxQi).trans (hconst y hyQi).symm, hpred x hxQi⟩
 open StepOneRegime HironakaGeneralThreeNonspecialAnalyticLoci
-open Hironaka.ResolutionInvariantSpec (IsCanonical)
+open ResolutionInvariantSpec (IsCanonical)
 
 private theorem regime_at_run_start (P : Regime X) (T : BlowupTower X Y)
     (y : Y) (hy : P T y) :

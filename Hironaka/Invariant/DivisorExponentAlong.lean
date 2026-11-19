@@ -1,29 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.DivisorExponent
 import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
 import Hironaka.Invariant.MemberInterAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.OrderTaylor
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Exponents of an ideal along the trace of a member on a submanifold
+
+Blueprint `hir:exponent-along` (`blueprint/src/hironaka.tex`, Hironaka phase H4, the exponent half of
+`hir:divisor-exponent` along a submanifold `N ≠ M`).  Sources: Bierstone--Milman 2008, §5 (the monomial part of a marked
+ideal `(M, N, E, 𝓘, d)`: the largest power of the ideal of `H ∩ N` dividing `𝓘|_N`, for each member `H` of `E`),
+Włodarczyk 2005, Step 2 (`𝓘|_N = 𝓘_{D_1}^{a_1} ⋯ 𝓘_{D_k}^{a_k} 𝓝(𝓘)` on `N`).  For `N = M` this is
+`DivisorExponent`.
 
 For an ideal `𝔞` of holomorphic germs, a set `N` (a submanifold) and a set `H` (in the application a member of `E`)
 put `IsDivNearAlong n N 𝔞 H e x` when, near `x`, the points of `N ∩ H` lie in `cosupp(𝔞|_N, e)`; the **exponent along
@@ -37,6 +26,8 @@ ambient ones of `DivisorExponent`:
 * `IsLocalRetraction.eventually_eq_zero_of_forall`: **Krull along `N`** -- a germ of infinite order along `N` vanishes
   on `N` near `x`; hence the exponent is finite (`exists_not_isDivNearAlong`) where `𝔞|_N` does not vanish near `x`
   (`IsNonzeroAlongAt`);
+* `isDivNearAlong_iff`: divisibility near `x` is divisibility of the stalk, every germ of `𝔞_x` agreeing on `N` with a
+  germ of `𝓘_{N ∩ H}^e` (with `g ∘ r`);
 * `isDivNearAlong_of_frequently` (**identity principle along `N ∩ H`**): the ambient identity principle
   `DivisorExponent.mem_idealPow_vanishingIdeal_of_frequently` applied to `s_i ∘ r`, `s_i` generators of `𝔞`, with the
   submanifold `C = N ∩ H`;
@@ -46,7 +37,11 @@ ambient ones of `DivisorExponent`:
 * for a simple normal crossings divisor `E` transverse to a closed `N` (`n > 0`): `regularAtDim_inter_get` (`N ∩ E_i` is
   regular, by `MemberInterAlong`) and `eventually_divExpAlong_get_eq`.
 
-For `N = univ` the definitions are those of `DivisorExponent`.
+For `N = univ` the definitions are those of `DivisorExponent` (`isDivNearAlong_univ_iff`, `divExpAlong_univ`,
+`isNonzeroAlongAt_univ_iff`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -55,7 +50,10 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.DivisorExponentAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.OrderTaylor Hironaka.HadamardBridge Hironaka.IdealOrderArithmetic Hironaka.GermOrderProduct Hironaka.DivisorExponent
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.OrderTaylor Hironaka.HadamardBridge
+  Hironaka.IdealOrderArithmetic Hironaka.GermOrderProduct
+  Hironaka.DivisorExponent
 
 noncomputable section
 
@@ -155,6 +153,11 @@ variable (n) in
 def IsDivNearAlong (N : Set M) (𝔞 : GermIdeal n M) (H : Set M) (e : ℕ) (x : M) : Prop :=
   ∀ᶠ z in 𝓝 x, z ∈ N → z ∈ H → z ∈ cosupport n N 𝔞 e
 
+/-- For `N = univ` this is `DivisorExponent.IsDivNear`. -/
+theorem isDivNearAlong_univ_iff {e : ℕ} {x : M} : IsDivNearAlong n univ 𝔞 H e x ↔ IsDivNear n 𝔞 H e x :=
+  ⟨fun h => Filter.Eventually.mono h fun z hz => hz (mem_univ z),
+    fun h => Filter.Eventually.mono h fun _ hz _ => hz⟩
+
 theorem isDivNearAlong_zero (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) (x : M) :
     IsDivNearAlong n N 𝔞 H 0 x :=
   Eventually.of_forall fun z hzN _ => by rw [cosupport_zero h𝔞]; exact hzN
@@ -225,6 +228,20 @@ theorem IsLocalRetraction.mem_idealPow_vanishingIdeal_comp {x : M} (hr : IsLocal
   filter_upwards [hzrr] with p hp
   simp [Function.comp, hp]
 
+/-- **Divisibility near `x` is divisibility of the stalk along `N`**: for `𝔞` coherent, `r` a retraction onto `N` at
+`x` and `N ∩ H` a submanifold at `x`, `IsDivNearAlong 𝔞 N H e x` iff every germ of `𝔞_x` agrees on `N` near `x` with a
+germ of `𝓘_{N ∩ H}^e`. -/
+theorem isDivNearAlong_iff (h𝔞 : 𝔞.IsCoherent) {x : M} (hr : IsLocalRetraction n N r x) {k : ℕ}
+    (hNH : RegularAtDim (n := n) (N ∩ H) x k) {e : ℕ} :
+    IsDivNearAlong n N 𝔞 H e x ↔ ∀ g, 𝔞.mem x g →
+      ∃ h, (idealPow (vanishingIdeal (n := n) (N ∩ H)) e).mem x h ∧ ∀ᶠ y in 𝓝 x, y ∈ N → g y = h y := by
+  refine ⟨fun hd g hg => ⟨g ∘ r, ?_, hr.eventually_eq_comp g⟩,
+    isDivNearAlong_of_forall_mem h𝔞 (A := N ∩ H) fun z hzN hzH => ⟨hzN, hzH⟩⟩
+  refine hr.mem_idealPow_vanishingIdeal_comp h𝔞 hNH ?_ hd hg
+  filter_upwards [hr.eq_self] with z hz hzA
+  rw [hz hzA.1]
+  exact hzA.2
+
 /-- **Identity principle along `N ∩ H`**: for `𝔞` coherent, `r` a retraction onto `N` at `x` and `N ∩ H` a submanifold
 at `x`, if points `y ∈ N ∩ H` with `IsDivNearAlong 𝔞 N H e y` accumulate at `x`, then `IsDivNearAlong 𝔞 N H e x`. -/
 theorem isDivNearAlong_of_frequently (h𝔞 : 𝔞.IsCoherent) {x : M} (hr : IsLocalRetraction n N r x) {k : ℕ}
@@ -254,10 +271,21 @@ noncomputable def divExpAlong (N : Set M) (𝔞 : GermIdeal n M) (H : Set M) (x 
   classical
   exact if h : ∃ e, ¬ IsDivNearAlong n N 𝔞 H (e + 1) x then Nat.find h else 0
 
+/-- For `N = univ` this is `DivisorExponent.divExp`. -/
+theorem divExpAlong_univ {x : M} : divExpAlong n univ 𝔞 H x = divExp n 𝔞 H x := by
+  have hfun : IsDivNearAlong n univ 𝔞 H = IsDivNear n 𝔞 H :=
+    funext fun _ => funext fun _ => propext isDivNearAlong_univ_iff
+  unfold divExpAlong divExp
+  rw [hfun]
+
 /-- `𝔞|_N` does not vanish near `x` on `N`: `𝔞_x` contains a germ which does not vanish identically on `N` near
 `x`. -/
 def IsNonzeroAlongAt (N : Set M) (𝔞 : GermIdeal n M) (x : M) : Prop :=
   ∃ g, 𝔞.mem x g ∧ ∃ᶠ y in 𝓝 x, y ∈ N ∧ g y ≠ 0
+
+/-- For `N = univ` this is `DivisorExponent.IsNonzeroAt`. -/
+theorem isNonzeroAlongAt_univ_iff {x : M} : IsNonzeroAlongAt univ 𝔞 x ↔ IsNonzeroAt 𝔞 x := by
+  simp [IsNonzeroAlongAt, IsNonzeroAt]
 
 /-- **The exponent along `N` is finite**: at a point `x ∈ H` where `𝔞|_N` does not vanish near `x` on `N` (and `r` is a
 retraction onto `N` at `x`), some `IsDivNearAlong 𝔞 N H e x` fails. -/
@@ -356,6 +384,15 @@ theorem eventually_divExpAlong_get_eq (hn : 0 < n) (hN : IsClosedSubmanifold n N
   obtain ⟨r, hr⟩ := exists_isLocalRetraction hk
   obtain ⟨k', hk'⟩ := regularAtDim_inter_get hn hN.1 hE hT i hx hxi
   exact eventually_divExpAlong_eq h𝔞 hr hk' (Eventually.of_forall hne)
+
+/-- **The exponent along `N` of a member characterizes divisibility** at the points of its trace. -/
+theorem isDivNearAlong_get_iff_le (hN : IsClosedSubmanifold n N) {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent)
+    (i : Fin E.length) {x : M} (hx : x ∈ N) (hxi : x ∈ E.get i) (hne : IsNonzeroAlongAt N 𝔞 x) {e : ℕ} :
+    IsDivNearAlong n N 𝔞 (E.get i) e x ↔ e ≤ divExpAlong n N 𝔞 (E.get i) x := by
+  obtain ⟨k, hk⟩ := hN.2 x hx
+  obtain ⟨r, hr⟩ := exists_isLocalRetraction hk
+  exact isDivNearAlong_iff_le_divExpAlong hr hxi hne fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
 
 end Members
 

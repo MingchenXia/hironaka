@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalWholeContactRemainderDomain
 /-! One actual chosen contact model, uniform over every genuine extension of
 an ANY original maximal-order test prefix. Retains the entire ordered boundary.

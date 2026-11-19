@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualCentrePrincipalParts
 
 /-! # The actual middle tangent-displacement-zero quotient
@@ -183,7 +178,6 @@ private theorem map_displacementIdeal (d t : ℕ) :
   exact (coordinatePullback_coordinate (middleBlockEquiv d t) _).trans
     (congrArg coordinateGerm (middleBlockEquiv_v d t i))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The ENTIRE true v=0 kernel equals the span of the actual middle v coordinates. -/
 theorem tangentDisplacementIdeal_eq_ker (d t : ℕ) :
     tangentDisplacementIdeal d t=RingHom.ker (actualTangentDisplacementZeroTrace d t).toRingHom := by
@@ -229,7 +223,6 @@ theorem map_actualCentreJointIdeal_eq_original (d t : ℕ) {ι : Type*}
   funext i
   exact actualTangentDisplacementZeroTrace_jointPullback d t _
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem actualTangentDisplacementZeroTrace_v (d t : ℕ) (i : Fin d) :
     actualTangentDisplacementZeroTrace d t (coordinateGerm ((i.castAdd t).natAdd d))=0 := by
   unfold actualTangentDisplacementZeroTrace coordinateGerm
@@ -245,7 +238,6 @@ theorem actualTangentDisplacementZeroTrace_x (d t : ℕ) (i : Fin t) :
   apply HolGerm.mk_eq_mk_iff.mpr
   exact Eventually.of_forall fun z => actualTangentDisplacementZeroInclusion_x d t z i
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The SAME genuine joint displacement ideal (v,x) maps to the ORIGINAL normal ideal (x). -/
 theorem map_jointNormalIdeal_eq_normal (d t : ℕ) :
     Ideal.map (actualTangentDisplacementZeroTrace d t).toRingHom

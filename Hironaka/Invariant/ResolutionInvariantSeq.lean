@@ -1,48 +1,25 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Resolution invariants with local finiteness along growing sequences
 
-Property (8) of a resolution invariant ("local finiteness") is replaced by its **per-sequence** form, in a NEW
-structure in a NEW module; `ResolutionInvariantExt` and its predecessor `ResolutionInvariantSpec` stay unchanged
-(kept); no new invariance property is added.
+Blueprint `hir:centre-function-seq`, `hir:invariant-driver-seq` (`blueprint/src/hironaka.tex`, Hironaka phase H4).  Human
+decision I-1139 C-0001 (3 October 2026, option (b), "as recommended"): property (8) of a resolution invariant ("local
+finiteness") is replaced by its **per-sequence** form, in a NEW structure in a NEW module; `ResolutionInvariantExt` and its
+predecessor `ResolutionInvariantSpec` stay unchanged (superseded, kept); no new invariance property is added.
 
-The uniform form of (8) (`ResolutionInvariantExt.ResolutionInvariant.locallyFinite`: one bound `m`, for each compact
-`K`, valid for every canonical segment) cannot be derived for the inductive step from the other properties:
-canonical segments branch at every step (a centre may be empty or the maximum locus), and inserting an empty step in
-the middle of a segment changes the values of the general step. What the inductive step proves is the per-sequence
-form: **along every growing sequence of canonical segments** (each extending the previous one by one blowup) **only
-finitely many nonempty centres meet a compact set `K`**. This suffices for the resolution
-(`exists_isGeoResolution_isCanonicalSegment`): iterate the blowup of the maximum locus; if no stage were a
-resolution, the iteration (by dependent choice) would be a growing sequence of canonical segments with infinitely
-many nonempty centres, meeting the compact base.
+The uniform form of (8) (`ResolutionInvariantExt.ResolutionInvariant.locallyFinite`: one bound `m`, for each compact `K`,
+valid for every canonical segment) cannot be derived for the inductive step from the other properties: canonical segments
+branch at every step (a centre may be empty or the maximum locus), and inserting an empty step in the middle of a segment
+changes the values of the general step (TN3's `MonomialInvariantEmptyMember.genInv_step_empty_append_ne`).  What the inductive
+step proves is the per-sequence form: **along every growing sequence of canonical segments** (each extending the previous one
+by one blowup) **only finitely many nonempty centres meet a compact set `K`**.  This suffices for the resolution
+(`exists_isGeoResolution_isCanonicalSegment`): iterate the blowup of the maximum locus; if no stage were a resolution, the
+iteration (by dependent choice) would be a growing sequence of canonical segments with infinitely many nonempty centres,
+meeting the compact base.
 
 ## Main definitions
 
@@ -60,8 +37,11 @@ many nonempty centres, meeting the compact base.
 * `IsInvValue.isAdmissibleCentre_maxLocus`, `IsInvValue.isGeoTestTower_of_isCanonical`: canonical segments are multiple test
   blow-ups;
 * `exists_isGeoResolution_of_seqFinite`: the abstract driver with per-sequence finiteness (dependent choice);
-* **`exists_isGeoResolution_isCanonicalSegment`**: over a compact base every marked ideal of the domain is resolved
-  by a canonical segment.
+* **`exists_isGeoResolution_isCanonicalSegment`**, `exists_isGeoResolution_isCanonical`: over a compact base every marked ideal
+  of the domain is resolved by a canonical segment.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -72,10 +52,16 @@ universe u v
 namespace Hironaka.ResolutionInvariantSeq
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism.MarkedIdeal Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantOrder Hironaka.ResolutionDriver
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealBiholomorphism.MarkedIdeal
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism
+  Hironaka.ResolutionInvariantOrder Hironaka.ResolutionDriver
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical countCentresMeeting)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
-open Hironaka.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top maxLocus_eq_level interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment)
+open Hironaka.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top
+  maxLocus_eq_level interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment)
 
 noncomputable section
 
@@ -147,9 +133,9 @@ structure IsInvValue (k : ℕ) {Λ : Type v} [LinearOrder Λ]
       ∀ y ∈ (geoTransformAlong 𝔪 T).cosupp, inv 𝔪 T y = inv 𝔫 T y
 
 variable (n) in
-/-- **Property (8), per-sequence form**: for every marked ideal of the domain and every compact `K ⊆ X`, along every
-growing sequence of canonical segments only finitely many nonempty centres meet (the preimage of) `K` -- the numbers
-of centres meeting `K` of the stages are bounded. -/
+/-- **Property (8), per-sequence form** (human decision I-1139 (b)): for every marked ideal of the domain and every compact
+`K ⊆ X`, along every growing sequence of canonical segments only finitely many nonempty centres meet (the preimage of) `K`
+-- the numbers of centres meeting `K` of the stages are bounded. -/
 def SeqLocallyFinite (k : ℕ) {Λ : Type v} [LinearOrder Λ]
     (inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ) : Prop :=
   ∀ {X : CMfd.{u} n} (𝔪 : MarkedIdeal n X), IsInvDomain k 𝔪 → ∀ K : Set X, IsCompact K →
@@ -332,6 +318,13 @@ theorem exists_isGeoResolution_isCanonicalSegment [CompactSpace X] (R : Resoluti
   · intro s hP _
     exact R.seqLocallyFinite 𝔪 h univ isCompact_univ s fun i =>
       isCanonical_of_isCanonicalSegment (𝔪 := 𝔪) (R.inv 𝔪) _ (hP i)
+
+/-- The same, with the resolution a canonical segment in the sense of `hir:centre-function`. -/
+theorem exists_isGeoResolution_isCanonical [CompactSpace X] (R : ResolutionInvariant.{u, v} n k Λ)
+    {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
+  obtain ⟨Y, T, hcan, hres⟩ := exists_isGeoResolution_isCanonicalSegment R h
+  exact ⟨Y, T, isCanonical_of_isCanonicalSegment _ T hcan, hres⟩
 
 end Driver
 

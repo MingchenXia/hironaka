@@ -1,44 +1,28 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantSpec
 import Hironaka.Invariant.InvDomainTowerAlong
 import Hironaka.MarkedIdeal.GiraudAlong
 import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsInvariance
-import Hironaka.Invariant.ResolutionDriver
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # A resolution invariant resolves every marked ideal of its domain over a compact base
 
-Sources: Bierstone--Milman 2008 §7 and Włodarczyk 2005, end of the proof of the resolution theorem (the centres are
-the maximum loci of the invariant; local finiteness gives termination); Kollár 2007 §3.4.
+Blueprint `hir:invariant-driver` (`blueprint/src/hironaka.tex`, Hironaka phase H4): the hypotheses of the driver
+`ResolutionDriver.exists_isGeoResolution_of_bounded_invariant` (`hir:resolution-driver`) follow from the properties of a
+resolution invariant (`ResolutionInvariantSpec.ResolutionInvariant`, `hir:centre-function`).  Sources:
+Bierstone--Milman 2008 §7 and Włodarczyk 2005, end of the proof of the resolution theorem (the centres are the maximum
+loci of the invariant; local finiteness gives termination); Kollár 2007 §3.4.
 
 Nothing here changes the definition of a resolution invariant: the two facts the driver needs beyond the fields --
 *canonical segments are multiple test blow-ups* and *the maximum locus has empty interior* -- are derived.
 
 ## Main results
 
-* `isAdmissibleCentre_of_forall_exists_opens`: **admissible centres are local** -- `C` is an admissible centre of
-  `𝔪` iff every point has an open neighbourhood `W` such that `C ∩ W` is one of `𝔪|_W` (the converse of
-  `MarkedIdealRestrictOpen.IsAdmissibleCentre.pullback_val`); in particular
+* `isAdmissibleCentre_of_forall_exists_opens`, `isAdmissibleCentre_iff_forall_exists_opens`: **admissible centres are
+  local** -- `C` is an admissible centre of `𝔪` iff every point has an open neighbourhood `W` such that `C ∩ W` is one of
+  `𝔪|_W` (the converse of `MarkedIdealRestrictOpen.IsAdmissibleCentre.pullback_val`); in particular
   `isAdmissibleCentre_of_pullback_val_top`: admissible for `𝔪|_X` implies admissible for `𝔪`;
 * `maxLocus_eq_level`: a nonempty maximum locus is the level set of its value;
 * `isAdmissibleCentre_maxLocus`: along a canonical segment which is a multiple test blow-up, the maximum locus of the
@@ -46,14 +30,22 @@ Nothing here changes the definition of a resolution invariant: the two facts the
 * `isGeoTestTower_of_isCanonical`: **canonical segments are multiple test blow-ups**;
 * `interior_cosupp_eq_empty`, `interior_maxLocus_eq_empty`: the cosupport of a marked ideal of `IsInvDomain k`, hence
   every maximum locus along a multiple test blow-up, has empty interior;
-* `isCanonical_of_isCanonicalSegment`: the driver's canonical segments (no empty steps) are canonical segments, and
-  their length is the number of centres meeting `X`;
+* `isCanonical_of_isCanonicalSegment`, `countCentresMeeting_univ_eq_length`: the driver's canonical segments (no empty
+  steps) are canonical segments, and their length is the number of centres meeting `X`;
 * `exists_isGeoResolution_isCanonicalSegment`: **over a compact base, a resolution invariant in dimension `≤ k`
   resolves every marked ideal of `IsInvDomain k`, by a canonical segment** (iterate the blowup of the maximum locus;
   property (8) with `K = X` bounds the length).
 
-The facts of this module about admissible centres, maximum loci, cosupports and canonical segments of an arbitrary
-value function are used by the route.
+**The results for the first structure are superseded, kept** (blueprint `hir:centre-function-v1-results`):
+`isAdmissibleCentre_maxLocus`, `isGeoTestTower_of_isCanonical`, `isInvDomain_of_isCanonical`,
+`exists_isGeoResolution_isCanonicalSegment` and `exists_isGeoResolution_isCanonical` are stated for
+`ResolutionInvariantSpec.ResolutionInvariant` and lie outside the constant cone of the main theorem; the route's driver is
+`ResolutionInvariantSeq.exists_isGeoResolution_isCanonicalSegment` (`hir:invariant-driver-seq`).  The facts of this module about
+admissible centres, maximum loci, cosupports and canonical segments of an arbitrary value function are used by the route (all of
+them lie in that cone except `isAdmissibleCentre_iff_forall_exists_opens` and `countCentresMeeting_univ_eq_length`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -64,7 +56,14 @@ universe u v
 namespace Hironaka.ResolutionInvariantDriver
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism.MarkedIdeal Hironaka.MarkedIdealRestrictOpen Hironaka.NormalCrossings Hironaka.ResolutionInvariantOrder Hironaka.ResolutionInvariantSpec Hironaka.ResolutionDriver
+open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealBiholomorphism.MarkedIdeal
+  Hironaka.MarkedIdealRestrictOpen
+  Hironaka.NormalCrossings
+  Hironaka.ResolutionInvariantOrder Hironaka.ResolutionInvariantSpec
+  Hironaka.ResolutionDriver
 
 noncomputable section
 
@@ -125,6 +124,15 @@ theorem isAdmissibleCentre_of_forall_exists_opens {𝔪 : MarkedIdeal n M}
     · change (⟨x, hxW⟩ : W) ∈ (𝔪.E.map ((Subtype.val : W → M) ⁻¹' ·)).get (c i)
       rw [hget i]
       exact hi
+
+/-- **Admissible centres are local** (iff form): `C` is an admissible centre of `𝔪` iff every point has an open
+neighbourhood `W` on which `C ∩ W` is an admissible centre of `𝔪|_W`. -/
+theorem isAdmissibleCentre_iff_forall_exists_opens {𝔪 : MarkedIdeal n M}
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) {C : Set M} :
+    𝔪.IsAdmissibleCentre C ↔ ∀ x : M, ∃ W : Opens M, x ∈ W ∧
+      (pullback (Subtype.val : W → M) 𝔪).IsAdmissibleCentre ((Subtype.val : W → M) ⁻¹' C) :=
+  ⟨fun hC _ => ⟨⊤, trivial, IsAdmissibleCentre.pullback_val h𝔞 hC ⊤⟩,
+    isAdmissibleCentre_of_forall_exists_opens h𝔞⟩
 
 /-- **Admissible for the restriction to the whole space implies admissible.** -/
 theorem isAdmissibleCentre_of_pullback_val_top {𝔪 : MarkedIdeal n M}
@@ -193,6 +201,43 @@ section Canonical
 
 variable {X : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ] {k : ℕ}
 
+/-- **The maximum locus is an admissible centre** along a canonical segment which is a multiple test blow-up: property (1)
+of `hir:centre-function` on the whole last stage, with the maximum as the level, and locality of admissibility. -/
+theorem isAdmissibleCentre_maxLocus (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hcan : IsCanonical 𝔪 (R.inv 𝔪) T)
+    (hT : IsGeoTestTower 𝔪 T) :
+    (geoTransformAlong 𝔪 T).IsAdmissibleCentre (maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp) := by
+  by_cases hne : (maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp).Nonempty
+  · obtain ⟨y₀, hy₀⟩ := hne
+    have hadm := R.admissible 𝔪 h T hcan ⊤ (R.inv 𝔪 T y₀) (fun y hy _ => hy₀.2 y hy)
+    rw [← maxLocus_eq_level hy₀] at hadm
+    have hcoh := (MarkedIdealOpenBiholomorphism.isWellFormed_geoTransformAlong h.isWellFormed T hT).isCoherent
+    exact isAdmissibleCentre_of_pullback_val_top
+      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcoh hg) hadm
+  · rw [not_nonempty_iff_eq_empty.mp hne]
+    exact MarkedIdeal.isAdmissibleCentre_empty _
+
+/-- **Canonical segments are multiple test blow-ups**: every centre is empty or the maximum locus, which is admissible
+(`isAdmissibleCentre_maxLocus`, by induction along the segment). -/
+theorem isGeoTestTower_of_isCanonical (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T →
+      IsGeoTestTower 𝔪 T
+  | _, .refl, _ => trivial
+  | _, .step T C π hπ, hcan => by
+      obtain ⟨hT, hC⟩ : IsCanonical 𝔪 (R.inv 𝔪) T ∧
+          (C = ∅ ∨ C = maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp) := hcan
+      have hTt := isGeoTestTower_of_isCanonical R h T hT
+      refine (isGeoTestTower_step_iff 𝔪 T C π hπ).mpr ⟨hTt, ?_⟩
+      rcases hC with rfl | rfl
+      · exact MarkedIdeal.isAdmissibleCentre_empty _
+      · exact isAdmissibleCentre_maxLocus R h T hT hTt
+
+/-- Along a canonical segment the transform stays in the domain. -/
+theorem isInvDomain_of_isCanonical (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hcan : IsCanonical 𝔪 (R.inv 𝔪) T) :
+    IsInvDomain k (geoTransformAlong 𝔪 T) :=
+  InvDomainTowerAlong.isInvDomain_geoTransformAlong h T (isGeoTestTower_of_isCanonical R h T hcan)
+
 /-- **Maximum loci have empty interior** along every multiple test blow-up of a marked ideal of the domain (they lie in
 the cosupport, `interior_cosupp_eq_empty`). -/
 theorem interior_maxLocus_eq_empty {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n}
@@ -210,6 +255,51 @@ theorem isCanonical_of_isCanonicalSegment {𝔪 : MarkedIdeal n X} (inv : ∀ {Y
       obtain ⟨hT, -, hC⟩ := (isCanonicalSegment_step_iff 𝔪 inv T C π hπ).mp hcan
       exact (⟨isCanonical_of_isCanonicalSegment inv T hT, Or.inr hC⟩ :
         IsCanonical 𝔪 inv T ∧ (C = ∅ ∨ C = maxLocus (inv T) (geoTransformAlong 𝔪 T).cosupp))
+
+/-- **The length of a canonical segment without empty steps is its number of centres meeting `X`.** -/
+theorem countCentresMeeting_univ_eq_length {𝔪 : MarkedIdeal n X}
+    (inv : ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y), IsCanonicalSegment 𝔪 inv T →
+      countCentresMeeting (univ : Set X) T = T.length
+  | _, .refl, _ => rfl
+  | _, .step T C π hπ, hcan => by
+      obtain ⟨hT, hne, -⟩ := (isCanonicalSegment_step_iff 𝔪 inv T C π hπ).mp hcan
+      have hne' : (C ∩ T.proj ⁻¹' (univ : Set X)).Nonempty := by
+        rw [preimage_univ, inter_univ]
+        exact hne
+      simp only [countCentresMeeting, countCentresMeeting_univ_eq_length inv T hT, if_pos hne',
+        BlowupTower.length_step]
+
+/-- **A resolution invariant resolves every marked ideal of its domain over a compact base, by a canonical segment**
+(`hir:canonical-resolution`, existence, from `hir:centre-function`): iterate the blowup of the maximum locus of the
+invariant on the cosupport.  The cosupports are closed (`GiraudAlong.isClosed_cosupport_along`), the invariant is upper
+semicontinuous on them (2), the maximum loci are admissible centres (1) with empty interior, and canonical segments have
+at most `m` centres meeting the compact `X` (8): `ResolutionDriver.exists_isGeoResolution_of_bounded_invariant`.
+Superseded (first structure), kept; the route uses `ResolutionInvariantSeq.exists_isGeoResolution_isCanonicalSegment`. -/
+theorem exists_isGeoResolution_isCanonicalSegment [CompactSpace X] (R : ResolutionInvariant.{u, v} n k Λ)
+    {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonicalSegment 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
+  obtain ⟨m, hm⟩ := R.locallyFinite 𝔪 h univ isCompact_univ
+  refine exists_isGeoResolution_of_bounded_invariant 𝔪 (R.inv 𝔪) ?_ ?_ ?_ m ?_
+  · intro Y T _ hT
+    have hwf := (InvDomainTowerAlong.isInvDomain_geoTransformAlong h T hT).isWellFormed
+    exact GiraudAlong.isClosed_cosupport_along hwf.isCoherent hwf.isClosedSubmanifold_N _
+  · intro Y T _ hT
+    exact R.usc 𝔪 h T hT
+  · intro Y T hcan hT _
+    exact ⟨isAdmissibleCentre_maxLocus R h T (isCanonical_of_isCanonicalSegment _ T hcan) hT,
+      interior_maxLocus_eq_empty h T hT _⟩
+  · intro Y T hcan _
+    rw [← countCentresMeeting_univ_eq_length (𝔪 := 𝔪) (R.inv 𝔪) T hcan]
+    exact hm T (isCanonical_of_isCanonicalSegment _ T hcan)
+
+/-- The same, with the resolution a canonical segment in the sense of `hir:centre-function`.
+Superseded (first structure), kept; the route uses `ResolutionInvariantSeq.exists_isGeoResolution_isCanonical`. -/
+theorem exists_isGeoResolution_isCanonical [CompactSpace X] (R : ResolutionInvariant.{u, v} n k Λ)
+    {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
+  obtain ⟨Y, T, hcan, hres⟩ := exists_isGeoResolution_isCanonicalSegment R h
+  exact ⟨Y, T, isCanonical_of_isCanonicalSegment _ T hcan, hres⟩
 
 end Canonical
 

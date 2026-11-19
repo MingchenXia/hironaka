@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalTerminalAtlas
 /-! Properness of the actual original-input terminal glued projection.
 Complete three-node mathematics preceded proof code. Whole saturated local

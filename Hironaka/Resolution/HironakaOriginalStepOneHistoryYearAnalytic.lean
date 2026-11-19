@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.StepOneDropExact
 import Hironaka.Resolution.HironakaOriginalFrozenRecursiveLower
 /-! True global lower-history year thresholds of the SAME original masked StepOne
 regime, retaining actual special resets. Source-first complete blueprint precedes

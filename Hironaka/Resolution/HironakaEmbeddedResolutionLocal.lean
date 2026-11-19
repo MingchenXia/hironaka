@@ -1,62 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedResolution
 import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.SingularLocus
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Analytic.ClosureDifferenceAnalytic
-import Hironaka.Analytic.ComponentComplementConnected
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.Blowup.ExceptionalFibres
-import Hironaka.Blowup.ExceptionalImageCodimension
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Resolution.HironakaFromSeqInvariant
-import Hironaka.Resolution.HironakaPrincipalization
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.PureDimension
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Analytic.RegularLocusComponent
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Resolution.StrictTransformComposition
-import Hironaka.Resolution.StrictTransformSubvariety
-import Hironaka.Resolution.StrictTransformSubvarietySequence
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Local embedded resolution on a non-compact complex manifold (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), §13 (the algorithm over relatively compact open
-subsets); Włodarczyk 2005 (`wlodarczyk05-hironaka`), Theorem 1.0.2 (embedded desingularization) and §2.3.
+Blueprint `hir:embedded-resolution-local` (`blueprint/src/hironaka.tex`; TN.5, the local (non-compact) form of the Hironaka
+strengthening (H+1) for the standalone library: the analogue for embedded resolution of `hir:principalization-local`).
+Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), §13 (the algorithm over relatively compact open subsets);
+Włodarczyk 2005 (`wlodarczyk05-hironaka`), Theorem 1.0.2 (embedded desingularization) and §2.3.
 
 **Statement.**  Let `X` be a complex manifold, not necessarily compact, `V ⊆ X` a closed irreducible analytic subvariety and
 `K ⊆ X` compact.  There are an open neighbourhood `U` of `K`, a finite sequence of blowups with smooth centres `f : U' → U`
@@ -91,9 +45,17 @@ any complex manifold.
   `isComplexAnalyticSubset_strictTransform_of_isBlowupAlong`, `isComplexAnalyticSubset_strictTransform_proj`;
 * `exists_strictTransform_subvariety_of_isBlowupAlong`, `exists_strictTransform_subvariety_of_isBlowupSequence`,
   `isConnected_strictTransform_of_isBlowupSequence`: `StrictTransformSubvariety(Sequence)` without `[CompactSpace]`;
+* `strictTransform_eq_connectedComponentIn`, `strictTransform_eq_connectedComponentIn_maxLocus`,
+  `not_centresAvoid_of_cosupp_eq_empty`, `exists_embedded_of_isCanonical`: the corresponding lemmas of `EmbeddedFromResolution`
+  without `[CompactSpace]`;
 * `isCanonical_of_isTowerIso`, **`exists_local_resolution_isCanonical`** (the local canonical driver with a canonical output);
 * `mem_maxLocus_iff_of_centresAvoid_of_pureDim`, **`strictTransform_of_centresAvoid`** (the identity-principle step for an
   analytic set, not necessarily irreducible), `exceptionalDivisor_facts_of_centresAvoid`;
+* **`exists_tower_embeddedResolution_local`** (tower form) and **`exists_embeddedResolution_local`** (the public statement).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedResolution` and
+`HironakaLocalPrincipalization` only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -103,12 +65,20 @@ universe u v
 
 namespace Hironaka.HironakaEmbeddedResolutionLocal
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.RestrictEmptyTower Hironaka.RegularLocusComponent Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowerIsomorphism Hironaka.BlowupTowerTransforms
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.RestrictEmptyTower Hironaka.RegularLocusComponent
+  Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowerIsomorphism
+  Hironaka.BlowupTowerTransforms
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
 open Hironaka.ResolutionDriver (maxLocus)
-open Hironaka.EmbeddedFromResolution (EmbeddingFields regularOpen regularAtDim_of_mem_regularOpen mem_regularOpen_of_regularAtDim notMem_exceptionalLocus_of_centresAvoid mem_strictTransform_iff_of_centresAvoid mem_cosupp_iff_of_centresAvoid exists_first_centre isInvDomain_vanishingIdeal_of_dim_lt isClosedConnectedSubmanifold_of_dim_eq)
+open Hironaka.EmbeddedFromResolution (EmbeddingFields regularOpen mem_regularOpen_iff
+  regularAtDim_of_mem_regularOpen mem_regularOpen_of_regularAtDim notMem_exceptionalLocus_of_centresAvoid
+  image_exceptionalLocus_subset_compl mem_strictTransform_iff_of_centresAvoid mem_cosupp_iff_of_centresAvoid
+  mem_maxLocus_iff_of_centresAvoid exists_first_centre isInvDomain_vanishingIdeal_of_dim_lt
+  isClosedConnectedSubmanifold_of_dim_eq)
 
 noncomputable section
 
@@ -123,14 +93,16 @@ variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [Is
   {C : Set M} {π : Z → M}
 
 /-- **The image of the exceptional locus of a blowup is closed** (on any complex manifold; a blowup is a closed map,
-`HironakaLocalPrincipalization.isProperMap_of_isBlowupAlong`). -/
+`HironakaLocalPrincipalization.isProperMap_of_isBlowupAlong`; `ExceptionalFibres.isClosed_image_exceptionalLocus` without
+compactness). -/
 theorem isClosed_image_exceptionalLocus (hπ : IsBlowupAlong n C π) : IsClosed (π '' exceptionalLocus n π) :=
   (HironakaLocalPrincipalization.isProperMap_of_isBlowupAlong hπ).isClosedMap _
     (isOpen_compl_iff.mp (StrictTransformComposition.isOpen_compl_exceptionalLocus hπ.contMDiff))
 
 open BlowupFlatCoordinates ExceptionalImageCodimension in
-/-- **The image of the exceptional locus of a blowup is analytic** (on any complex manifold). It is the union of the
-connected components of the centre of codimension at least two. -/
+/-- **The image of the exceptional locus of a blowup is analytic** (on any complex manifold;
+`ExceptionalImageAnalytic.isComplexAnalyticSubset_image_exceptionalLocus` without compactness: closedness and surjectivity
+come from properness).  It is the union of the connected components of the centre of codimension at least two. -/
 theorem isComplexAnalyticSubset_image_exceptionalLocus (hπ : IsBlowupAlong n C π) :
     IsComplexAnalyticSubset (n := n) (π '' exceptionalLocus n π) := by
   classical
@@ -213,7 +185,8 @@ variable {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [Is
   {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]
 
 /-- **The strict transform of an irreducible subvariety under one blowup is an irreducible subvariety of the same
-dimension** (and the blowup is surjective, without compactness). -/
+dimension** (`StrictTransformSubvariety.exists_strictTransform_subvariety_of_isBlowupAlong` on any complex manifold: the
+image of the exceptional locus is closed and analytic, and the blowup is surjective, without compactness). -/
 theorem exists_strictTransform_subvariety_of_isBlowupAlong {C : Set Y} {g : Z → Y} (hg : IsBlowupAlong n C g)
     (W : ClosedIrreducibleAnalyticSubvariety n Y) (hW : ¬ W.carrier ⊆ g '' exceptionalLocus n g) :
     ∃ Wt : ClosedIrreducibleAnalyticSubvariety n Z,
@@ -306,8 +279,9 @@ theorem exists_strictTransform_subvariety_of_isBlowupAlong {C : Set Y} {g : Z �
 variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]
   {Xt : Type u} [TopologicalSpace Xt] [ChartedSpace (ComplexModel n) Xt] [IsComplexManifold n Xt]
 
-/-- **The strict transform of an irreducible subvariety along a blowup sequence is an irreducible subvariety of the
-same dimension**, provided the subvariety is not exceptional for the whole sequence. -/
+/-- **The strict transform of an irreducible subvariety along a blowup sequence is an irreducible subvariety of the same
+dimension**, provided the subvariety is not exceptional for the whole sequence
+(`StrictTransformSubvarietySequence.exists_strictTransform_subvariety_of_isBlowupSequence` on any complex manifold). -/
 theorem exists_strictTransform_subvariety_of_isBlowupSequence {μ : Xt → X} (hμ : IsBlowupSequence n X Xt μ)
     (V : ClosedIrreducibleAnalyticSubvariety n X) (hV : ¬ V.carrier ⊆ μ '' exceptionalLocus n μ) :
     ∃ Vt : ClosedIrreducibleAnalyticSubvariety n Xt,
@@ -332,7 +306,8 @@ theorem exists_strictTransform_subvariety_of_isBlowupSequence {μ : Xt → X} (h
       refine ⟨Vt, ?_, hVd.trans hWd⟩
       rw [hVc, hWc, StrictTransformComposition.strictTransform_comp hfs.contMDiff hg.contMDiff]
 
-/-- **The strict transform is connected when the exceptional image lies in the singular locus**. -/
+/-- **The strict transform is connected when the exceptional image lies in the singular locus**
+(`StrictTransformSubvarietySequence.isConnected_strictTransform_of_isBlowupSequence` on any complex manifold). -/
 theorem isConnected_strictTransform_of_isBlowupSequence {μ : Xt → X} (hμ : IsBlowupSequence n X Xt μ)
     (V : ClosedIrreducibleAnalyticSubvariety n X) (hExcS : μ '' exceptionalLocus n μ ⊆ singularLocus V) :
     IsConnected (strictTransform n μ V.carrier) := by
@@ -348,6 +323,156 @@ theorem isConnected_strictTransform_of_isBlowupSequence {μ : Xt → X} (hμ : I
 
 end Subvariety
 
+/-! ### The identity-principle step and the stopping of `EmbeddedFromResolution`, without compactness -/
+
+section Identity
+
+variable {X : CMfd.{u} n}
+
+/-- **The identity-principle step of `hir:embedded-from-resolution` on any complex manifold**
+(`EmbeddedFromResolution.strictTransform_eq_connectedComponentIn` without `[CompactSpace]`; the same proof, with the strict
+transform of an irreducible subvariety along a blowup sequence from `exists_strictTransform_subvariety_of_isBlowupSequence`). -/
+theorem strictTransform_eq_connectedComponentIn (V : ClosedIrreducibleAnalyticSubvariety n X)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : CentresAvoid (regularOpen V) T) {C : Set Y}
+    (hC : IsClosedSubmanifold n C) (hCV : ∀ y : Y, T.proj y ∈ regularOpen V → (y ∈ C ↔ T.proj y ∈ V.carrier))
+    {c : Y} (hc : c ∈ C) (hcU : T.proj c ∈ regularOpen V) :
+    T.proj '' exceptionalLocus n T.proj ⊆ singularLocus V ∧
+      strictTransform n T.proj V.carrier = connectedComponentIn C c ∧
+      ∀ x ∈ strictTransform n T.proj V.carrier,
+        RegularAtDim (n := n) (strictTransform n T.proj V.carrier) x V.dim := by
+  set S := strictTransform n T.proj V.carrier with hSdef
+  set O : Set Y := T.proj ⁻¹' (regularOpen V : Set X) with hOdef
+  have hO : IsOpen O := (regularOpen V).isOpen.preimage T.contMDiff_proj.continuous
+  have hcO : c ∈ O := hcU
+  have hExc : T.proj '' exceptionalLocus n T.proj ⊆ singularLocus V := by
+    intro x hx
+    by_contra hxs
+    exact image_exceptionalLocus_subset_compl (regularOpen V) T hT hx hxs
+  have hSO : ∀ y ∈ O, y ∈ S ↔ T.proj y ∈ V.carrier := fun y hy =>
+    mem_strictTransform_iff_of_centresAvoid (regularOpen V) T hT V.isClosed_carrier hy
+  have hCS : ∀ y ∈ O, y ∈ C ↔ y ∈ S := fun y hy => (hCV y hy).trans (hSO y hy).symm
+  have hSOC : S ∩ O = C ∩ O := by
+    ext y
+    exact ⟨fun h => ⟨(hCS y h.2).mpr h.1, h.2⟩, fun h => ⟨(hCS y h.2).mp h.1, h.2⟩⟩
+  have hfcV : T.proj c ∈ V.carrier := (hCV c hcU).mp hc
+  have hSc : RegularAtDim (n := n) S c V.dim :=
+    RegularAtDimTransport.regularAtDim_of_preimage T.contMDiff_proj
+      (notMem_exceptionalLocus_of_centresAvoid (regularOpen V) T hT c hcU) hO hcO hSO
+      (regularAtDim_of_mem_regularOpen hfcV hcU)
+  have hCc : RegularAtDim (n := n) C c V.dim :=
+    RegularPointDimension.regularAtDim_of_inter_eq hO hcO hSOC hSc
+  obtain ⟨Vt, hVt, -⟩ := exists_strictTransform_subvariety_of_isBlowupSequence T.isBlowupSequence V
+    (StrictTransformSubvarietySequence.not_subset_image_exceptionalLocus_of_image_exceptionalLocus_subset_singular
+      V hExc)
+  have hSirr : IsComplexAnalyticallyIrreducible (n := n) S := by rw [hSdef, ← hVt]; exact Vt.irreducible_carrier
+  have hCan : IsComplexAnalyticSubset (n := n) C := AnalyticSubsetPreimage.isComplexAnalyticSubset_of_isClosedSubmanifold hC
+  have hRC : regularPoints (n := n) C = C :=
+    Subset.antisymm (regularPoints_subset C) fun y hy => hC.2 y hy
+  have hKC : component (n := n) C c = connectedComponentIn C c := by
+    show connectedComponentIn (regularPoints (n := n) C) c = _
+    rw [hRC]
+  have hSK : component (n := n) S c ⊆ C :=
+    component_subset_of_isOpen hCan hO ⟨c, hcO, mem_component_self hSc⟩ fun y hy =>
+      (hCS y hy.1).mpr (component_subset S c hy.2)
+  have hKS : component (n := n) C c ⊆ S :=
+    component_subset_of_isOpen hSirr.analytic hO ⟨c, hcO, mem_component_self hCc⟩ fun y hy =>
+      (hCS y hy.1).mp (component_subset C c hy.2)
+  have hSKC : component (n := n) S c ⊆ component (n := n) C c :=
+    subset_component_of_isPreconnected isPreconnected_connectedComponentIn
+      (fun y hy => hRC.symm ▸ hSK hy) ⟨c, mem_component_self hSc, mem_component_self hCc⟩
+  have hSeq : S = closure (component (n := n) S c) := StrictTransformSubvariety.eq_closure_component hSirr hSc
+  have hSC : S ⊆ C := by
+    rw [hSeq]
+    exact closure_minimal hSK hC.1
+  have hSeqK : S = component (n := n) C c := by
+    refine Subset.antisymm (fun x hx => ?_) hKS
+    obtain ⟨j, hj⟩ := hC.2 x (hSC hx)
+    obtain ⟨W, hW, hxW, hWC⟩ := exists_open_inter_subset_component hj (mem_component_self hj)
+    rw [hSeq] at hx
+    obtain ⟨z, hzW, hzS⟩ := mem_closure_iff.mp hx W hW hxW
+    have hzx : z ∈ component (n := n) C x := hWC ⟨hSK hzS, hzW⟩
+    have hzc : z ∈ component (n := n) C c := hSKC hzS
+    have h1 : component (n := n) C x = component (n := n) C c :=
+      (connectedComponentIn_eq hzx).trans (connectedComponentIn_eq hzc).symm
+    exact h1 ▸ mem_component_self hj
+  refine ⟨hExc, hSeqK.trans hKC, fun x hx => ?_⟩
+  have hxK : x ∈ component (n := n) C c := hSeqK ▸ hx
+  have hCx : RegularAtDim (n := n) C x V.dim := regularAtDim_of_mem_component hCc hxK
+  obtain ⟨W, hW, hxW, hWC⟩ := exists_open_inter_subset_component hCc hxK
+  refine RegularPointDimension.regularAtDim_of_inter_eq hW hxW ?_ hCx
+  ext y
+  exact ⟨fun h => ⟨hSeqK ▸ hWC h, h.2⟩, fun h => ⟨hSC h.1, h.2⟩⟩
+
+variable {k : ℕ} {Λ : Type v} [LinearOrder Λ]
+  {inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
+
+/-- **The identity-principle step for the first centre meeting the smooth part, on any complex manifold**
+(`EmbeddedFromResolution.strictTransform_eq_connectedComponentIn_maxLocus` without `[CompactSpace]`). -/
+theorem strictTransform_eq_connectedComponentIn_maxLocus (hF : EmbeddingFields n k inv)
+    (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hcan : IsCanonical (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)
+      (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)) T)
+    (hT : CentresAvoid (regularOpen V) T) {c : Y}
+    (hc : c ∈ maxLocus (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+      (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp)
+    (hcU : T.proj c ∈ regularOpen V) :
+    T.proj '' exceptionalLocus n T.proj ⊆ singularLocus V ∧
+      strictTransform n T.proj V.carrier =
+        connectedComponentIn (maxLocus
+          (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+          (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp) c ∧
+      ∀ x ∈ strictTransform n T.proj V.carrier,
+        RegularAtDim (n := n) (strictTransform n T.proj V.carrier) x V.dim := by
+  have hTt := hF.isGeoTestTower_of_isCanonical hdom T hcan
+  have hadm := hF.isAdmissibleCentre_maxLocus hdom T hcan hTt
+  exact strictTransform_eq_connectedComponentIn V T hT hadm.1
+    (fun y hy => mem_maxLocus_iff_of_centresAvoid hF V hdom T hcan hT hc hcU hy) hc hcU
+
+/-- **Some centre meets the smooth part, on any complex manifold**
+(`EmbeddedFromResolution.not_centresAvoid_of_cosupp_eq_empty` without `[CompactSpace]`: blowup sequences are surjective,
+`HironakaLocalPrincipalization.IsBlowupSequence.surjective`). -/
+theorem not_centresAvoid_of_cosupp_eq_empty (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hTt : IsGeoTestTower (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T)
+    (hres : (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp = ∅) :
+    ¬ CentresAvoid (regularOpen V) T := by
+  intro hT
+  obtain ⟨x, hx⟩ := V.regularLocus_nonempty
+  obtain ⟨y, rfl⟩ := HironakaLocalPrincipalization.IsBlowupSequence.surjective T.isBlowupSequence x
+  have hyU : T.proj y ∈ regularOpen V := mem_regularOpen_of_regularAtDim hx
+  have hy := (mem_cosupp_iff_of_centresAvoid V.isClosed_carrier hdom (regularOpen V) T hTt hT hyU).mpr
+    (regularLocus_subset _ _ hx)
+  rw [hres] at hy
+  exact hy
+
+/-- **Embedded resolution from a canonical resolution of `(X, X, ∅, 𝓘_V, 1)`, on any complex manifold**
+(`EmbeddedFromResolution.exists_embedded_of_isCanonical` without `[CompactSpace]`): the prefix before the first centre meeting
+the preimage of `X ∖ V_sing` has its exceptional image in `V_sing` and a strict transform of `V` regular of dimension `dim V` at
+each of its points. -/
+theorem exists_embedded_of_isCanonical (hF : EmbeddingFields n k inv) (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hcan : IsCanonical (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)
+      (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)) T)
+    (hres : (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) T).cosupp = ∅) :
+    ∃ (Y' : CMfd.{u} n) (T' : BlowupTower X Y') (S : BlowupTower Y' Y), T'.append S = T ∧
+      IsCanonical (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)
+        (inv (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X)) T' ∧
+      CentresAvoid (regularOpen V) T' ∧
+      T'.proj '' exceptionalLocus n T'.proj ⊆ singularLocus V ∧
+      ∀ x ∈ strictTransform n T'.proj V.carrier,
+        RegularAtDim (n := n) (strictTransform n T'.proj V.carrier) x V.dim := by
+  have hTt := hF.isGeoTestTower_of_isCanonical hdom T hcan
+  obtain ⟨Y', T', S, hTS, h1, h2, c, hc, hcU⟩ := exists_first_centre _ _ (regularOpen V) T hcan
+    (not_centresAvoid_of_cosupp_eq_empty V hdom T hTt hres)
+  obtain ⟨hE, -, hreg⟩ := strictTransform_eq_connectedComponentIn_maxLocus hF V hdom T' h1 h2 hc hcU
+  exact ⟨Y', T', S, hTS, h1, h2, hE, hreg⟩
+
+end Identity
+
 /-! ### Canonical segments along isomorphisms of towers, and the local canonical driver -/
 
 section Canonical
@@ -356,8 +481,8 @@ variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
   {inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
 
 /-- **Canonical segments correspond along isomorphisms of towers** for every value function with the properties
-`EmbeddingFields` (property (6)): if `χ: T' → T` is an isomorphism of towers over a biholomorphism `Φ` and `T` is a
-canonical segment of `𝔪`, then `T'` is one of `Φ^*𝔪`. -/
+`EmbeddingFields` (`ResolutionInvariantSegments.isCanonical_of_isTowerIso` for `inv`; property (6)): if `χ : T' → T` is an
+isomorphism of towers over a biholomorphism `Φ` and `T` is a canonical segment of `𝔪`, then `T'` is one of `Φ^*𝔪`. -/
 theorem isCanonical_of_isTowerIso (hF : EmbeddingFields n k inv) {X X' : CMfd.{u} n} {𝔪 : MarkedIdeal n X}
     (hdom : IsInvDomain k 𝔪) (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X) {Y' Y : CMfd.{u} n}
     {T' : BlowupTower X' Y'} {T : BlowupTower X Y}
@@ -390,9 +515,9 @@ section LocalDriver
 
 variable {Λ : Type v} [LinearOrder Λ] [WellFoundedLT Λ] {k : ℕ}
 
-/-- **Nothing of the cosupport over `K`, canonical form**: if no point of the cosupport along a canonical segment `T`
-lies over the compact `K`, the restriction of `T` to the open complement of the image of the cosupport is a
-canonical segment resolving `𝔪` over a neighbourhood of `K` (with canonicity from
+/-- **Nothing of the cosupport over `K`, canonical form**: if no point of the cosupport along a canonical segment `T` lies over
+the compact `K`, the restriction of `T` to the open complement of the image of the cosupport is a canonical segment resolving
+`𝔪` over a neighbourhood of `K` (`HironakaLocalPrincipalization.exists_local_resolution_of_disjoint`, with canonicity from
 `HironakaLocalPrincipalization.isCanonical_restrict`). -/
 theorem exists_local_resolution_isCanonical_of_disjoint (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v} n k Λ)
     {X : CMfd.{u} n} {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪) {K : Set X} {Y : CMfd.{u} n}
@@ -420,7 +545,9 @@ theorem exists_local_resolution_isCanonical_of_disjoint (R : ResolutionInvariant
   refine eq_empty_iff_forall_notMem.mpr fun p hp => ?_
   exact p.2 ⟨p, hp, rfl⟩
 
-/-- **From an open set of an open set back to an open set of `X`, canonical form** (`isCanonical_of_isTowerIso`). -/
+/-- **From an open set of an open set back to an open set of `X`, canonical form**
+(`HironakaLocalPrincipalization.exists_resolution_of_nested` with canonicity transported along the tower isomorphism,
+`isCanonical_of_isTowerIso`). -/
 theorem exists_canonical_resolution_of_nested (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v} n k Λ)
     {X : CMfd.{u} n} {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪) {K : Set X}
     (O : Opens X) (hKO : K ⊆ O) (U₁ : Opens (CMfd.of (n := n) O)) (hKU₁ : (Subtype.val : O → X) ⁻¹' K ⊆ U₁)
@@ -456,9 +583,9 @@ theorem exists_canonical_resolution_of_nested (R : ResolutionInvariantSeq.Resolu
     at hres hcan
   exact ⟨U, hKU, _, _, hcan, hres⟩
 
-/-- **The local canonical driver with a canonical output, inductive form**: along a canonical segment `T` of `𝔪` all of
-whose values over the compact `K` are `< μ`, the marked ideal is resolved over an open neighbourhood `U` of `K` by a
-*canonical segment* of `𝔪|_U` (keeping track of canonicity). -/
+/-- **The local canonical driver with a canonical output, inductive form**: along a canonical segment `T` of `𝔪` all of whose
+values over the compact `K` are `< μ`, the marked ideal is resolved over an open neighbourhood `U` of `K` by a *canonical
+segment* of `𝔪|_U` (`HironakaLocalPrincipalization.exists_local_resolution_of_lt`, keeping track of canonicity). -/
 theorem exists_local_resolution_isCanonical_of_lt (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v} n k Λ)
     (μ : WithTop Λ) :
     ∀ {X : CMfd.{u} n} (𝔪 : MarkedIdeal n X), IsInvDomain k 𝔪 → ∀ (K : Set X), IsCompact K →
@@ -587,9 +714,11 @@ theorem strictTransform_of_centresAvoid {W : Set X} (hWa : IsComplexAnalyticSubs
 variable {k : ℕ} {Λ : Type v} [LinearOrder Λ]
   {inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
 
-/-- **The maximum locus over an open set on which `W` is smooth of pure dimension** (in place of a subvariety and `X ∖
-V_sing`): for a canonical segment `T` of `(X, X, ∅, 𝓘_W, 1)` whose centres miss the preimages of `O`, once the
-maximum locus meets the preimage of `O` it contains, over `O`, exactly the preimage of `W`. -/
+/-- **The maximum locus over an open set on which `W` is smooth of pure dimension**
+(`EmbeddedFromResolution.mem_maxLocus_iff_of_centresAvoid` for any closed `W` and open `O` with `W ∩ O` regular of dimension `d`
+at each of its points, in place of a subvariety and `X ∖ V_sing`): for a canonical segment `T` of `(X, X, ∅, 𝓘_W, 1)` whose
+centres miss the preimages of `O`, once the maximum locus meets the preimage of `O` it contains, over `O`, exactly the preimage
+of `W`. -/
 theorem mem_maxLocus_iff_of_centresAvoid_of_pureDim (hF : EmbeddingFields n k inv) {W : Set X} (hW : IsClosed W)
     (O : Opens X) {d : ℕ} (hpure : ∀ x : O, (x : X) ∈ W → RegularAtDim (n := n) W x d)
     (hdom : IsInvDomain k (⟨univ, [], vanishingIdeal (n := n) W, 1⟩ : MarkedIdeal n X))
@@ -634,6 +763,160 @@ theorem exceptionalDivisor_facts_of_centresAvoid {𝔪 : MarkedIdeal n X} (hdom 
     HironakaEmbeddedResolution.support_exceptionalDivisor_subset_of_centresAvoid O T hT⟩
 
 end General
+
+/-! ### Local embedded resolution -/
+
+section Local
+
+/-- **Local embedded resolution, tower form** (`dim V < n`, `𝓘_V` coherent; `X` any complex manifold, `K ⊆ X` compact): there
+are an open neighbourhood `U` of `K` and a multiple test blow-up `T` of `(U, U, ∅, 𝓘_{V ∩ U}, 1)` whose strict transform of
+`V ∩ U` is a closed submanifold, regular of dimension `dim V` at each of its points, whose transformed divisor `E` has simple
+normal crossings with union the support of the exceptional divisor `E_T`, which contains the exceptional locus of `T` and lies
+over `V_sing`, and such that the strict transform has only normal crossings with `E`. -/
+theorem exists_tower_embeddedResolution_local {X : CMfd.{u} n} (V : ClosedIrreducibleAnalyticSubvariety n X)
+    (hV : V.dim < n) (hcoh : (vanishingIdeal (n := n) V.carrier).IsCoherent) {K : Set X} (hK : IsCompact K) :
+    ∃ U : Opens X, K ⊆ U ∧ ∃ (Y : CMfd.{u} n) (T : BlowupTower (CMfd.of (n := n) U) Y),
+      IsGeoTestTower (⟨univ, [], vanishingIdeal (n := n) ((Subtype.val : U → X) ⁻¹' V.carrier), 1⟩ :
+        MarkedIdeal n (CMfd.of (n := n) U)) T ∧
+      IsClosedSubmanifold n (strictTransform n T.proj ((Subtype.val : U → X) ⁻¹' V.carrier)) ∧
+      (∀ x ∈ strictTransform n T.proj ((Subtype.val : U → X) ⁻¹' V.carrier),
+        RegularAtDim (n := n) (strictTransform n T.proj ((Subtype.val : U → X) ⁻¹' V.carrier)) x V.dim) ∧
+      IsSNCDivisor n (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) ((Subtype.val : U → X) ⁻¹' V.carrier), 1⟩ :
+        MarkedIdeal n (CMfd.of (n := n) U)) T).E ∧
+      (BlowupTowerTransforms.exceptionalDivisor T).support =
+        ⋃ H ∈ (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) ((Subtype.val : U → X) ⁻¹' V.carrier), 1⟩ :
+          MarkedIdeal n (CMfd.of (n := n) U)) T).E, H ∧
+      exceptionalLocus n T.proj ⊆ (BlowupTowerTransforms.exceptionalDivisor T).support ∧
+      (BlowupTowerTransforms.exceptionalDivisor T).support ⊆
+        T.proj ⁻¹' ((Subtype.val : U → X) ⁻¹' singularLocus V) ∧
+      HasNormalCrossings n (strictTransform n T.proj ((Subtype.val : U → X) ⁻¹' V.carrier))
+        (geoTransformAlong (⟨univ, [], vanishingIdeal (n := n) ((Subtype.val : U → X) ⁻¹' V.carrier), 1⟩ :
+          MarkedIdeal n (CMfd.of (n := n) U)) T).E := by
+  have hdom : IsInvDomain n (⟨univ, [], vanishingIdeal (n := n) V.carrier, 1⟩ : MarkedIdeal n X) :=
+    isInvDomain_vanishingIdeal_of_dim_lt le_rfl V hV hcoh
+  have hF := HironakaFromSeqInvariant.embeddingFields_of_seq (CanonicalCentres.canonicalInvariant.{u} n)
+  obtain ⟨U, hKU, Y₀, T₀, hcan₀, hres₀⟩ :=
+    exists_local_resolution_isCanonical (CanonicalCentres.canonicalInvariant.{u} n) hdom hK
+  have hdomU := InvDomainTowerAlong.isInvDomain_pullback_val U hdom
+  rw [SmoothCentreInvariant.pullback_val_smoothCentreMarked U V.carrier] at hcan₀ hres₀ hdomU
+  refine ⟨U, hKU, ?_⟩
+  -- the data on `U`
+  set W : Set (CMfd.of (n := n) U) := (Subtype.val : U → X) ⁻¹' V.carrier with hWdef
+  let O' : Opens (CMfd.of (n := n) U) :=
+    ⟨(Subtype.val : U → X) ⁻¹' (regularOpen V : Set X), (regularOpen V).isOpen.preimage continuous_subtype_val⟩
+  have hO'c : ∀ x : CMfd.of (n := n) U, x ∉ O' ↔ (x : X) ∈ singularLocus V := fun x =>
+    show ¬ ((x : X) ∉ singularLocus V) ↔ _ from not_not
+  have hWa : IsComplexAnalyticSubset (n := n) W :=
+    AnalyticSubsetPreimage.isComplexAnalyticSubset_preimage contMDiff_subtype_val V.analytic
+  have hreg : ∀ x ∈ W, x ∈ O' → RegularAtDim (n := n) W x V.dim := fun x hxW hxO =>
+    AnalyticSubsetOpens.regularAtDim_preimage_val_iff.mpr (regularAtDim_of_mem_regularOpen hxW hxO)
+  have hdense : W ⊆ closure (W ∩ O') := by
+    intro x hx
+    have h := subset_closure_inter_regularOpen V hx
+    have h2 := (U.isOpen.isOpenMap_subtype_val).preimage_closure_eq_closure_preimage continuous_subtype_val
+      (V.carrier ∩ regularOpen V)
+    exact (Set.ext_iff.mp h2 x).mp h
+  have hTt₀ := hres₀.1
+  have hsupp : ∀ {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) U) Y), CentresAvoid O' T →
+      (BlowupTowerTransforms.exceptionalDivisor T).support ⊆
+        T.proj ⁻¹' ((Subtype.val : U → X) ⁻¹' singularLocus V) := fun T hT z hz =>
+    (hO'c _).mp (HironakaEmbeddedResolution.support_exceptionalDivisor_subset_of_centresAvoid O' T hT hz)
+  by_cases hA : CentresAvoid O' T₀
+  · -- every centre misses the smooth part: then `V ∩ U` is empty
+    have hWO : ∀ x ∈ W, x ∉ O' := fun x hxW hxO => by
+      obtain ⟨y, rfl⟩ := HironakaLocalPrincipalization.IsBlowupSequence.surjective T₀.isBlowupSequence x
+      have hy := (mem_cosupp_iff_of_centresAvoid hWa.isClosed hdomU O' T₀ hTt₀ hA hxO).mpr hxW
+      rw [hres₀.2] at hy
+      exact hy
+    have hW0 : W = ∅ := by
+      refine eq_empty_iff_forall_notMem.mpr fun x hx => ?_
+      have h := hdense hx
+      rw [show W ∩ (O' : Set (CMfd.of (n := n) U)) = ∅ from
+        eq_empty_iff_forall_notMem.mpr fun y hy => hWO y hy.1 hy.2, closure_empty] at h
+      exact h
+    have hS0 : strictTransform n T₀.proj W = ∅ := by
+      rw [hW0]
+      simp [strictTransform]
+    obtain ⟨hsnc, hsuppE, hexc, -⟩ :=
+      exceptionalDivisor_facts_of_centresAvoid hdomU rfl O' T₀ hTt₀ hA
+    refine ⟨Y₀, T₀, hTt₀, ?_, ?_, hsnc, hsuppE, hexc, hsupp T₀ hA, ?_⟩
+    · rw [hS0]
+      exact ⟨isClosed_empty, fun x hx => absurd hx (notMem_empty x)⟩
+    · rw [hS0]
+      exact fun x hx => absurd hx (notMem_empty x)
+    · rw [hS0]
+      exact fun x hx => absurd hx (notMem_empty x)
+  · -- the first centre meeting the smooth part
+    obtain ⟨Y', T', -, -, h1, h2, c, hc, hcU⟩ := exists_first_centre _ _ O' T₀ hcan₀ hA
+    have hTt' := hF.isGeoTestTower_of_isCanonical hdomU T' h1
+    have hadm := hF.isAdmissibleCentre_maxLocus hdomU T' h1 hTt'
+    have hCV := fun y (hy : T'.proj y ∈ O') =>
+      mem_maxLocus_iff_of_centresAvoid_of_pureDim hF hWa.isClosed O' (d := V.dim)
+        (fun x hx => hreg x hx x.2) hdomU T' h1 h2 hc hcU hy
+    obtain ⟨hSC, hev, hreg'⟩ := strictTransform_of_centresAvoid hWa O' hreg hdense T' h2 hadm.1 hCV
+    obtain ⟨hsnc, hsuppE, hexc, -⟩ :=
+      exceptionalDivisor_facts_of_centresAvoid hdomU rfl O' T' hTt' h2
+    refine ⟨Y', T', hTt', ⟨isClosed_closure, fun x hx => ⟨V.dim, hreg' x hx⟩⟩, hreg', hsnc, hsuppE, hexc,
+      hsupp T' h2, ?_⟩
+    exact CodimOneAdmissibleAlong.hasNormalCrossings_of_forall_eventually fun x hx =>
+      ⟨_, hSC hx, hev x hx, hadm.2.2⟩
+
+/-- **Local embedded resolution** (Hironaka; `hir:embedded-resolution-local`): let `X` be a complex manifold, not necessarily
+compact, `V ⊆ X` a closed irreducible analytic subvariety and `K ⊆ X` compact.  There are an open neighbourhood `U` of `K`, a
+finite sequence of blowups with smooth centres `f : U' → U` and a divisor `E` on `U'` with simple normal crossings such that the
+exceptional locus of `f` lies in `⋃ E`, `⋃ E` lies over `V_sing`, `f` is an isomorphism over `U \ V_sing`, and the strict
+transform of `V ∩ U` is a closed submanifold of `U'`, of dimension `dim V` at each of its points, with only normal crossings
+with `E`. -/
+theorem exists_embeddedResolution_local {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+    [IsComplexManifold n X] (V : ClosedIrreducibleAnalyticSubvariety n X) {K : Set X} (hK : IsCompact K) :
+    ∃ U : Opens X, K ⊆ U ∧
+    ∃ (U' : Type u) (_ : TopologicalSpace U') (_ : ChartedSpace (ComplexModel n) U')
+      (_ : IsComplexManifold n U') (f : U' → U) (_ : IsBlowupSequence n U U' f) (E : List (Set U')),
+      IsSNCDivisor n E ∧
+      exceptionalLocus n f ⊆ ⋃ H ∈ E, H ∧
+      (⋃ H ∈ E, H) ⊆ f ⁻¹' ((Subtype.val : U → X) ⁻¹' singularLocus V) ∧
+      IsIsomorphismOver n f ((Subtype.val : U → X) ⁻¹' singularLocus V)ᶜ ∧
+      IsClosedSubmanifold n (strictTransform n f ((Subtype.val : U → X) ⁻¹' V.carrier)) ∧
+      (∀ x ∈ strictTransform n f ((Subtype.val : U → X) ⁻¹' V.carrier),
+        RegularAtDim (n := n) (strictTransform n f ((Subtype.val : U → X) ⁻¹' V.carrier)) x V.dim) ∧
+      HasNormalCrossings n (strictTransform n f ((Subtype.val : U → X) ⁻¹' V.carrier)) E := by
+  rcases V.dim_le.lt_or_eq with h | h
+  · obtain ⟨U, hKU, Y, T, -, hS, hreg, hsnc, hsupp, hexc, hsing, hnc⟩ :=
+      exists_tower_embeddedResolution_local (X := CMfd.of (n := n) X) V h
+        (CartanIrreducible.cartanCoherence V.carrier V.irreducible_carrier.analytic) hK
+    refine ⟨U, hKU, Y, inferInstance, inferInstance, inferInstance, T.proj, T.isBlowupSequence, _, hsnc, ?_, ?_, ?_,
+      hS, hreg, hnc⟩
+    · rw [← hsupp]
+      exact hexc
+    · rw [← hsupp]
+      exact hsing
+    · refine HironakaLocalPrincipalization.isIsomorphismOver_compl_of_image_exceptionalLocus_subset
+        T.isBlowupSequence ?_
+      rintro x ⟨z, hz, rfl⟩
+      exact hsing (hexc hz)
+  · -- `dim V = n`: `V` is a connected component of `X`, and the identity over `U = X` works
+    have hV := isClosedConnectedSubmanifold_of_dim_eq V h
+    set W : Set (⊤ : Opens X) := (Subtype.val : (⊤ : Opens X) → X) ⁻¹' V.carrier with hWdef
+    have hst : strictTransform n (id : (⊤ : Opens X) → (⊤ : Opens X)) W = W := by
+      simp [strictTransform, exceptionalLocus_id, (V.isClosed_carrier.preimage continuous_subtype_val).closure_eq, W]
+    have hregW : ∀ x ∈ W, RegularAtDim (n := n) W x V.dim := fun x hx =>
+      AnalyticSubsetOpens.regularAtDim_preimage_val_iff.mpr (by rw [h]; exact hV.2.2 _ hx)
+    have hWsub : IsClosedSubmanifold n W :=
+      ⟨V.isClosed_carrier.preimage continuous_subtype_val, fun x hx => ⟨V.dim, hregW x hx⟩⟩
+    refine ⟨⊤, fun x _ => trivial, _, inferInstance, inferInstance, inferInstance, id, IsBlowupSequence.refl, [],
+      isSNCDivisor_nil, ?_, ?_,
+      HironakaLocalPrincipalization.isIsomorphismOver_compl_of_image_exceptionalLocus_subset IsBlowupSequence.refl
+        (by simp [exceptionalLocus_id]), ?_, ?_, ?_⟩
+    · simp [exceptionalLocus_id]
+    · simp
+    · rw [hst]
+      exact hWsub
+    · rw [hst]
+      exact hregW
+    · rw [hst]
+      exact hasNormalCrossings_nil_of_isClosedSubmanifold hWsub
+
+end Local
 
 end
 

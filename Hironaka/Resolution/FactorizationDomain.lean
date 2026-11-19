@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CodimOnePartTowerAlong
 import Hironaka.MarkedIdeal.CodimOneSupport
 import Hironaka.Analytic.RegularLocusComponent
@@ -11,18 +6,17 @@ import Hironaka.MarkedIdeal.SubmanifoldRestrictLe
 import Hironaka.Invariant.ResolutionInvariantSpec
 import Hironaka.Blowup.NormalCrossings
 import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Invariant.DivisorExponentAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The domain condition of relative principalization
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), the marked ideals to which the resolution applies.
+Blueprint `mc:factorization-domain` (`blueprint/src/maximal-contact.tex`), an input of `hir:factorization-from-resolution`
+(Hironaka phase H5a; claim I-0981 C-0160).  Sources: Copy-4 (`transcendental-nakamaye-copy4-20260911`), the proof of
+`lem:relative-principalization` ("`𝔞 ⊄ 𝓘_W`, equivalently `Res_W 𝔞 ≠ 0`"); Włodarczyk 2005 (`wlodarczyk05-hironaka`), the
+marked ideals to which the resolution applies.
 
 Let `N` be a closed connected submanifold of dimension `k` of a complex manifold `M` and `𝔞` a coherent ideal with
 `𝔞 ⊄ 𝓘_N`.  Then at every point of `N` some germ of `𝔞` does not vanish identically on `N` near the point.  The set of points
@@ -37,6 +31,11 @@ is the domain condition of the second application in the proof of relative princ
 
 * `isNonzeroAlongAt_of_not_le`: `𝔞 ⊄ 𝓘_N` with `N` a closed connected submanifold and `𝔞` coherent gives
   `IsNonzeroAlongAt N 𝔞 y` at every `y ∈ N`;
+* `isInvDomain_of_not_le`: `(M, N, [], 𝔞, 1)` lies in `IsInvDomain j` for every `j ≥ k`;
+* `isInvDomain_univ_of_not_le`: the case `N = univ` for a connected `M`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -47,7 +46,8 @@ universe u
 namespace Hironaka.FactorizationDomain
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.DivisorExponentAlong Hironaka.MarkedIdeals Hironaka.NormalCrossings Hironaka.RegularLocusComponent
+open Hironaka.DivisorExponentAlong Hironaka.MarkedIdeals
+  Hironaka.NormalCrossings Hironaka.RegularLocusComponent
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
@@ -90,8 +90,28 @@ theorem isClosedSubmanifold_of_isClosedConnectedSubmanifold {N : Set M} {k : ℕ
     (hN : IsClosedConnectedSubmanifold n N k) : IsClosedSubmanifold n N :=
   ⟨hN.1, fun x hx => ⟨k, hN.2.2 x hx⟩⟩
 
+/-- **The domain condition of relative principalization** (`mc:factorization-domain`): for a closed connected submanifold `N`
+of dimension `k ≤ j` and a coherent `𝔞 ⊄ 𝓘_N`, the marked ideal `(M, N, [], 𝔞, 1)` lies in the domain of the invariants in
+dimension `≤ j`. -/
+theorem isInvDomain_of_not_le {N : Set M} {k j : ℕ} (hN : IsClosedConnectedSubmanifold n N k) (hkj : k ≤ j)
+    {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) (hres : ¬ 𝔞.Le (vanishingIdeal (n := n) N)) :
+    IsInvDomain j (⟨N, [], 𝔞, 1⟩ : MarkedIdeal n M) where
+  isWellFormed := ⟨(isClosedSubmanifold_of_isClosedConnectedSubmanifold hN), h𝔞, isSNCDivisor_nil,
+    isTransverse_nil_of_isClosedSubmanifold (isClosedSubmanifold_of_isClosedConnectedSubmanifold hN)⟩
+  dimLE := fun x hx => ⟨k, hkj, hN.2.2 x hx⟩
+  one_le_d := le_rfl
+  isNonzeroAlongAt := isNonzeroAlongAt_of_not_le hN h𝔞 hres
+
 /-- A connected complex manifold of dimension `n` is a closed connected submanifold of itself, of dimension `n`. -/
 theorem isClosedConnectedSubmanifold_univ [ConnectedSpace M] : IsClosedConnectedSubmanifold n (univ : Set M) n :=
   ⟨isClosed_univ, isConnected_univ, fun x _ => AnalyticIrreducibleComponents.regularAtDim_univ x⟩
+
+/-- **The domain condition of the second application** (`mc:factorization-domain`): on a connected `M` of dimension
+`n ≤ j`, a coherent ideal which is not the zero ideal (`𝔞 ⊄ 𝓘_M`) gives `(M, M, [], 𝔞, 1)` in the domain in dimension
+`≤ j`. -/
+theorem isInvDomain_univ_of_not_le [ConnectedSpace M] {j : ℕ} (hnj : n ≤ j) {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent)
+    (hres : ¬ 𝔞.Le (vanishingIdeal (n := n) (univ : Set M))) :
+    IsInvDomain j (⟨univ, [], 𝔞, 1⟩ : MarkedIdeal n M) :=
+  isInvDomain_of_not_le isClosedConnectedSubmanifold_univ hnj h𝔞 hres
 
 end Hironaka.FactorizationDomain

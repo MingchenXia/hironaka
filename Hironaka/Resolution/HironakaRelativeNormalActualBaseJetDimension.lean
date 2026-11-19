@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalActualWeightedTruncations
 import Hironaka.Resolution.HironakaRelativeNormalMonomialBasis
 import Mathlib.Data.Sym.Card
@@ -84,7 +79,6 @@ def actualZeroTangentJetComplexEquiv (d k : ℕ) :
         (congrArg (fun J : Ideal (HolGerm (ComplexModel (0+d))) => J ^ (k+1))
           (zeroTangentNormalIdeal_eq_maximalIdeal d))).toLinearEquiv)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Every complex coordinate basis vector retains its SAME original whole monomial class. -/
 theorem actualZeroTangentJetComplexEquiv_single (d k : ℕ) (α : normalExponentIndex d (k+1)) :
     let := normalExponentFintype d (k+1)

@@ -32,8 +32,6 @@ open Hironaka.HolomorphicIdealSheaves HolGerm HolomorphicTaylorTail
   HironakaRelativeNormalIdeal HironakaSmoothCentreRelativeIdeal
   HironakaRelativeNormalTaylorCoefficients HironakaHolomorphicJetChartInvariance
   HironakaHolomorphicJetRankLoci
-open Hironaka
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
 noncomputable section
 variable {n : ℕ}
 

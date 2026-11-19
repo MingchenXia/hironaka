@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalStoppedBoundaryTransport
 import Hironaka.Resolution.HironakaOriginalBoundaryCanonicalPrincipalization
 import Hironaka.Resolution.HironakaEmbeddedBoundary
@@ -30,7 +25,7 @@ namespace Hironaka.HironakaOriginalPureBoundaryCanonicalPrefix
 
 noncomputable section
 
-open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal NormalCrossings
   RestrictEmptyTower CanonicalCentres EmbeddedFromResolution HironakaAdmissibleSequence
   HironakaSmoothSubmersionCoefficientIdeals HironakaSmoothSubmersionOrderedChoiceBaseChange
@@ -39,9 +34,9 @@ open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaSmoothSubmersionNormalCrossings HironakaOriginalIndependentStoppedSource
   HironakaOriginalBoundaryCanonicalPrincipalization
 
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open _root_.Hironaka.ResolutionDriver (maxLocus)
-open _root_.Hironaka.ResolutionInvariantExt (IsEmptyTower)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionDriver (maxLocus)
+open ResolutionInvariantExt (IsEmptyTower)
 
 variable {n m : ℕ} {X D : CMfd.{u} n} {Y E : CMfd.{u} m}
 

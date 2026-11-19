@@ -1,26 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSpaceTangent
 import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The blowup along a smooth centre as a set, and its charts
 
-Source: Demailly, *Complex analytic and differential geometry*, VII.12.1--12.2 (`agbook.tex` lines 20218--20306).
+Source: Demailly, *Complex analytic and differential geometry*, VII.12.1--12.2
+(`references/demailly-cadg`, `agbook.tex` lines 20218--20306); blueprint `bex:blowup-space`,
+`bex:monomial-chart`.
 
-Second module of the construction of the blowup. Demailly's blowup of `X` along `C` is, as a set, `(X \ C) ⊔ P(NC)`.
-Here a point is a pair `(x, L)` with `L ⊆ ℂⁿ = T_xX` a subspace: `L = 0` when `x ∉ C`, and `L = T_xC + ℂξ` with `ξ ∉
-T_xC` when `x ∈ C` (`BlowupSpace`). For a function `f` and a point `p = (x, L)`, `extVal f p` is `f x` off `C` and
-`d_xf(ξ_p)` on `C`, for a chosen generator `ξ_p` of `L` modulo `T_xC`; Demailly's extension `(f/g)~` is the quotient
+Second module of the construction of the blowup (TN.4 #6).  Demailly's blowup of `X` along `C`
+is, as a set, `(X \ C) ⊔ P(NC)`.  Here a point is a pair `(x, L)` with `L ⊆ ℂⁿ = T_xX` a subspace:
+`L = 0` when `x ∉ C`, and `L = T_xC + ℂξ` with `ξ ∉ T_xC` when `x ∈ C` (`BlowupSpace`).  For a
+function `f` and a point `p = (x, L)`, `extVal f p` is `f x` off `C` and `d_xf(ξ_p)` on `C`, for a
+chosen generator `ξ_p` of `L` modulo `T_xC`; Demailly's extension `(f/g)~` is the quotient
 `extVal f / extVal g`.
 
 * `FlatChart`: a flattening chart `(y₀, k, Φ)` of `C` together with a normal index `j ≥ k`;
@@ -38,7 +33,8 @@ universe u
 
 namespace Hironaka.BlowupConstruction
 
-open Hironaka.HolomorphicIdealSheaves BlowupFlatCoordinates BlowupMonomialCharts BlowupSpaceTangent
+open Hironaka.HolomorphicIdealSheaves BlowupFlatCoordinates BlowupMonomialCharts
+  BlowupSpaceTangent
 
 noncomputable section
 
@@ -111,6 +107,9 @@ def excPoint (x : X) (hx : x ∈ C) (ξ : ComplexModel n) (hξ : ξ ∉ tangentS
 
 @[simp] theorem base_excPoint (x : X) (hx : x ∈ C) (ξ : ComplexModel n)
     (hξ : ξ ∉ tangentSpace n C x) : (excPoint x hx ξ hξ).base = x := rfl
+
+theorem eq_offPoint {p : BlowupSpace n C} (h : p.base ∉ C) : p = offPoint p.base h :=
+  BlowupSpace.ext rfl (dir_eq_bot h)
 
 /-- Over a point off `C` there is exactly one point. -/
 theorem eq_of_base_eq_of_not_mem {p q : BlowupSpace n C} (hpq : p.base = q.base)

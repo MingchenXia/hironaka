@@ -1,41 +1,42 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.DerivativeIdeal
 import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Order and derivatives; Giraud's lemma
 
+Blueprint `hir:order-taylor`, `hir:giraud-support` (`blueprint/src/hironaka.tex`, Hironaka phase H1).
 Sources: Włodarczyk 2005 §2.1 (`ord_x`) and §2.6 (Lemma `le:Vi1`: `supp(𝓘, μ) = supp(𝓓^i 𝓘, μ - i)`),
 Bierstone--Milman 2008 §3.2.
 
 ## Main results
 
-* `iterChartDeriv e L g` -- the iterated partial derivative `∂_{v₁} ⋯ ∂_{v_m} g` in an atlas chart `e` along the
-  list `L = [v₁, …, v_m]`; `iterChartDeriv_eq_iterDeriv` identifies it with `HolomorphicTaylorTail.iterDeriv` of `g
-  ∘ e⁻¹`.
-* **Order and derivatives** (`mem_idealPow_pointIdeal_iff`): for `x` in the domain of an atlas chart `e` and `g`
-  holomorphic at `x`, `g ∈ 𝔪_x^q` if and only if every iterated partial derivative of order `< q` of `g` in `e`
-  vanishes at `x`. The forward half iterates `chartDeriv_mem_idealPow`; the converse is
-  `inNormalPow_of_iterDeriv_eq_zero` (with `k = 0`) transported to `M` by `mem_idealPow_of_inNormalPow`.
+* `iterChartDeriv e L g` -- the iterated partial derivative `∂_{v₁} ⋯ ∂_{v_m} g` in an atlas chart `e`
+  along the list `L = [v₁, …, v_m]`; `iterChartDeriv_eq_iterDeriv` identifies it with TN23's
+  `HolomorphicTaylorTail.iterDeriv` of `g ∘ e⁻¹`.
+* **Order and derivatives** (`mem_idealPow_pointIdeal_iff`): for `x` in the domain of an atlas chart `e`
+  and `g` holomorphic at `x`, `g ∈ 𝔪_x^q` if and only if every iterated partial derivative of order `< q`
+  of `g` in `e` vanishes at `x`.  The forward half iterates `chartDeriv_mem_idealPow`; the converse
+  is TN23's `inNormalPow_of_iterDeriv_eq_zero` (with `k = 0`) transported to `M` by
+  `mem_idealPow_of_inNormalPow`.
 * `mem_idealPow_of_inNormalPow`: if `ψ : M → ℂⁿ` is holomorphic near `x`, its coordinates `ψᵢ`, `i ≥ k`,
   lie in an ideal `I` at `x`, and `f = F ∘ ψ` near `x` with `F` in the `μ`-th power of the ideal of
   the normal coordinates at `ψ x` (`InNormalPow k (ψ x) μ F`), then `f ∈ I^μ` at `x`.  (Also used
   by the Hadamard bridge, with `ψ` flattening coordinates.)
-* **Giraud--Villamayor** (`N = M`): `cosupp(𝓓𝔞, μ) ⊆ cosupp(𝔞, μ+1)` for `μ ≥ 1`, hence `cosupp(𝔞, μ + i) =
-  cosupp(𝓓^i 𝔞, μ)` for `μ ≥ 1`, `cosupp(𝔞, j + 1) = V(𝓓^j 𝔞)`, and the cosupport of a coherent ideal is closed.
+* **Giraud--Villamayor** (`N = M`): `cosupp(𝓓𝔞, μ) ⊆ cosupp(𝔞, μ+1)` for `μ ≥ 1`
+  (`cosupport_derivIdeal_subset_cosupport_succ`; the other inclusion is
+  `DerivativeIdeal.cosupport_succ_subset_cosupport_derivIdeal`), hence
+  `cosupp(𝔞, μ + i) = cosupp(𝓓^i 𝔞, μ)` for `μ ≥ 1` (`cosupport_add_eq_cosupport_iterDerivIdeal`),
+  `cosupp(𝔞, j + 1) = V(𝓓^j 𝔞)` (`cosupport_succ_eq_zeroLocus_iterDerivIdeal`), and the cosupport of a
+  coherent ideal is closed (`isClosed_cosupport`).  (`𝓓^i(𝓓^j 𝔞) = 𝓓^{i+j} 𝔞` is TN23's
+  `MaximalContact.iterDerivIdeal_iterDerivIdeal`.)
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -44,7 +45,8 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.OrderTaylor
 
 open Hironaka.HolomorphicIdealSheaves
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.HolomorphicTaylorTail
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.DerivativeIdeal Hironaka.HolomorphicTaylorTail
 
 noncomputable section
 
@@ -62,6 +64,13 @@ theorem mem_idealPow_congr : ∀ {m : ℕ}, (idealPow I m).mem x f → f =ᶠ[�
     (idealPow I m).mem x g
   | 0, hf, h => HolomorphicAt.congr hf h
   | _ + 1, hf, h => mem_idealPow_succ_iff.mpr (isInSpanAt_congr (mem_idealPow_succ_iff.mp hf) h)
+
+/-- `I^m` at `x` is closed under addition. -/
+theorem mem_idealPow_add : ∀ {m : ℕ}, (idealPow I m).mem x f → (idealPow I m).mem x g →
+    (idealPow I m).mem x (fun p => f p + g p)
+  | 0, hf, hg => HolomorphicAt.add hf hg
+  | _ + 1, hf, hg => mem_idealPow_succ_iff.mpr (RelativePrincipalizationSpan.IsInSpanAt.add
+      (mem_idealPow_succ_iff.mp hf) (mem_idealPow_succ_iff.mp hg))
 
 /-- `I^m` at `x` is closed under finite sums. -/
 theorem mem_idealPow_sum {ι : Type*} (s : Finset ι) {F : ι → M → ℂ} :
@@ -139,6 +148,12 @@ def iterChartDeriv (e : ComplexChart n M) : List (ComplexModel n) → (M → ℂ
 @[simp] theorem iterChartDeriv_cons (e : ComplexChart n M) (v : ComplexModel n)
     (L : List (ComplexModel n)) (g : M → ℂ) :
     iterChartDeriv e (v :: L) g = chartDeriv e v (iterChartDeriv e L g) := rfl
+
+theorem iterChartDeriv_append (e : ComplexChart n M) (L L' : List (ComplexModel n)) (g : M → ℂ) :
+    iterChartDeriv e (L ++ L') g = iterChartDeriv e L (iterChartDeriv e L' g) := by
+  induction L with
+  | nil => rfl
+  | cons v L ih => simp [ih]
 
 /-- In the domain of the chart, the iterated partial derivatives of `g` in `e` are the iterated
 directional derivatives of `g ∘ e⁻¹` (`HolomorphicTaylorTail.iterDeriv`) at `e p`. -/
@@ -258,6 +273,86 @@ theorem mem_idealPow_of_vanishesToOrderOn_univ {x : M} {q : ℕ} {g : M → ℂ}
     (hg : VanishesToOrderOn n univ x q g) : (idealPow (pointIdeal n x) q).mem x g := by
   obtain ⟨h, hh, hgh⟩ := hg
   exact mem_idealPow_congr hh (hgh.mono fun y hy => (hy (mem_univ y)).symm)
+
+/-- **Giraud--Villamayor, the second inclusion**: for `μ ≥ 1`, `cosupp(𝓓𝔞, μ) ⊆ cosupp(𝔞, μ + 1)`
+(for `N = M`, `𝔞` an ideal of holomorphic germs). -/
+theorem cosupport_derivIdeal_subset_cosupport_succ
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ) :
+    cosupport n univ (derivIdeal 𝔞) μ ⊆ cosupport n univ 𝔞 (μ + 1) := by
+  rintro x ⟨-, hx⟩
+  refine ⟨mem_univ x, fun f hf => ?_⟩
+  set e := complexChartAt (n := n) x
+  have hxe : x ∈ e.val.source := mem_complexChartAt_source x
+  have hfD : (idealPow (pointIdeal n x) μ).mem x f :=
+    mem_idealPow_of_vanishesToOrderOn_univ (hx f (le_derivIdeal h𝔞 x f hf))
+  have hdf : ∀ v, (idealPow (pointIdeal n x) μ).mem x (chartDeriv e v f) := fun v =>
+    mem_idealPow_of_vanishesToOrderOn_univ (hx _ (chartDeriv_mem_derivIdeal h𝔞 hxe hf))
+  refine ⟨f, mem_idealPow_of_iterChartDeriv_eq_zero hxe (h𝔞 x f hf) (μ + 1) fun L hL => ?_,
+    Eventually.of_forall fun _ _ => rfl⟩
+  rcases List.eq_nil_or_concat L with rfl | ⟨L', v, rfl⟩
+  · exact apply_eq_zero_of_mem_idealPow_pointIdeal hμ hfD
+  · rw [List.concat_eq_append, iterChartDeriv_append]
+    have hL' : L'.length < μ := by simp at hL; omega
+    exact iterChartDeriv_eq_zero_of_mem_idealPow hxe (hdf v) L' hL'
+
+/-- **Giraud--Villamayor** (`N = M`): for `μ ≥ 1`, `cosupp(𝔞, μ + 1) = cosupp(𝓓𝔞, μ)`. -/
+theorem cosupport_succ_eq_cosupport_derivIdeal
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ) :
+    cosupport n univ 𝔞 (μ + 1) = cosupport n univ (derivIdeal 𝔞) μ :=
+  Subset.antisymm (cosupport_succ_subset_cosupport_derivIdeal μ)
+    (cosupport_derivIdeal_subset_cosupport_succ h𝔞 hμ)
+
+/-- **Giraud--Villamayor, iterated** (`N = M`): for `μ ≥ 1` and every `i`,
+`cosupp(𝔞, μ + i) = cosupp(𝓓^i 𝔞, μ)`. -/
+theorem cosupport_add_eq_cosupport_iterDerivIdeal
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) :
+    ∀ (i : ℕ) {μ : ℕ}, 1 ≤ μ → cosupport n univ 𝔞 (μ + i) = cosupport n univ (iterDerivIdeal 𝔞 i) μ
+  | 0, μ, _ => rfl
+  | i + 1, μ, hμ => by
+    rw [show μ + (i + 1) = (μ + 1) + i by omega,
+      cosupport_add_eq_cosupport_iterDerivIdeal h𝔞 i (by omega : 1 ≤ μ + 1),
+      cosupport_succ_eq_cosupport_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal h𝔞 i) hμ]
+    rfl
+
+/-- **The cosupport is the zero locus of a derivative ideal** (`N = M`):
+`cosupp(𝔞, j + 1) = V(𝓓^j 𝔞)`. -/
+theorem cosupport_succ_eq_zeroLocus_iterDerivIdeal
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) (j : ℕ) :
+    cosupport n univ 𝔞 (j + 1) = (iterDerivIdeal 𝔞 j).zeroLocus := by
+  rw [show j + 1 = 1 + j by omega, cosupport_add_eq_cosupport_iterDerivIdeal h𝔞 j le_rfl,
+    cosupport_one (holomorphicAt_of_mem_iterDerivIdeal h𝔞 j), univ_inter]
+
+/-- The zero locus of a coherent ideal is closed. -/
+theorem isClosed_zeroLocus_of_isCoherent {𝔟 : GermIdeal n M} (h𝔟 : 𝔟.IsCoherent) :
+    IsClosed 𝔟.zeroLocus := by
+  refine isOpen_compl_iff.mp (isOpen_iff_mem_nhds.mpr fun x hx => ?_)
+  obtain ⟨g, hg, hgx⟩ : ∃ g, 𝔟.mem x g ∧ g x ≠ 0 := by
+    by_contra! h
+    exact hx h
+  obtain ⟨U, hUo, hxU, N, s, hs, hgen⟩ := h𝔟 x
+  obtain ⟨-, K, t, a, ht, -, hsum⟩ := (hgen x hxU g).mp hg
+  obtain ⟨i, hi⟩ : ∃ i, t i x ≠ 0 := by
+    by_contra! h
+    exact hgx (by rw [hsum.self_of_nhds]; simp [h])
+  obtain ⟨r, hr⟩ := ht i
+  have hshol : ∀ z ∈ U, HolomorphicAt n (s r) z := fun z hz =>
+    eventually_of_mem (hUo.mem_nhds hz) fun w hw => (hs r w hw).mdifferentiableAt (hUo.mem_nhds hw)
+  have hne : ∀ᶠ y in 𝓝 x, s r y ≠ 0 :=
+    (hshol x hxU).continuousAt.eventually (isOpen_ne.mem_nhds (hr ▸ hi))
+  filter_upwards [hUo.mem_nhds hxU, hne] with y hyU hy hyV
+  refine hy (hyV (s r) ((hgen y hyU (s r)).mpr ?_))
+  exact isInSpanAt_of_eq_mul ⟨r, rfl⟩ (hshol y hyU) (holomorphicAt_const 1)
+    (Eventually.of_forall fun _ => (one_mul _).symm)
+
+/-- **The cosupport of a coherent ideal is closed** (`N = M`). -/
+theorem isClosed_cosupport (h𝔞 : 𝔞.IsCoherent) (μ : ℕ) : IsClosed (cosupport n univ 𝔞 μ) := by
+  have hhol : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x := fun x g hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+  rcases μ with _ | j
+  · rw [cosupport_zero hhol]
+    exact isClosed_univ
+  · rw [cosupport_succ_eq_zeroLocus_iterDerivIdeal hhol j]
+    exact isClosed_zeroLocus_of_isCoherent (isCoherent_iterDerivIdeal h𝔞 j)
 
 end Giraud
 

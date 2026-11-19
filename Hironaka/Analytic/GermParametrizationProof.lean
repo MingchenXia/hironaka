@@ -1,27 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermPrimitiveElement
 import Hironaka.Analytic.GermParametrizationFunctions
 import Hironaka.Analytic.GermParametrizationSets
 import Hironaka.Analytic.GermParametrizationDense
 import Hironaka.Analytic.RegularAtDimChart
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.GermMinimalPolynomial
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.GermParametrization
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
 # The local parametrization theorem for irreducible germs
+
+Blueprint `lag:parametrization-dense` and its predecessors (Demailly, *Complex analytic and
+differential geometry*, II.4.19).
 
 For an irreducible analytic germ `A` at `0 ∈ ℂⁿ` the vanishing ideal is prime; after a
 linear change of coordinates `L` it is in Noether position over `𝒪_d`
@@ -169,6 +158,7 @@ theorem exists_algebraicParametrization {Q : Ideal (HolGerm (ComplexModel n))} [
            exists_eqn := fun f hf => GermMinimalPolynomial.exists_eqn_of_not_mem hQ hf
            reduce := GermMinimalPolynomial.exists_reduce hQ.le p fun k _ => hp k }⟩
 
+/-- **Local parametrization theorem** (output form), blueprint `lag:parametrization-dense`. -/
 theorem exists_localParametrization {A : Set (ComplexModel n)} (hA : IsIrreducibleGerm A) :
     Nonempty (LocalParametrization A) := by
   have hprime : (vanishingIdeal A).IsPrime := (isIrreducibleGerm_iff_isPrime hA.1).1 hA

@@ -1,76 +1,39 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralRestrictOpen
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionOpen
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.ContactLowerValue
-import Hironaka.Invariant.GeneralAdmissible
-import Hironaka.Invariant.GeneralCanonicalTail
-import Hironaka.Invariant.GeneralCompare
-import Hironaka.Invariant.GeneralRepresentative
-import Hironaka.Invariant.GeneralValue
-import Hironaka.Invariant.GeneralValueOrderZero
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.NonmonomialOrderTransport
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneEmptyPrefix
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Re-basing the general value after an empty prefix: property (4')
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: extensions of the resolution insert
-isomorphisms, and the invariants of points transformed isomorphically do not change; Bierstone--Milman 2008, Step
-II.
+Blueprint `hir:general-empty-prefix` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).  Source:
+Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: extensions of the resolution insert isomorphisms, and the
+invariants of points transformed isomorphically do not change; Bierstone--Milman 2008, Step II.
 
-Let `𝔪` be a marked ideal of the domain (`0 < n`), `P` a tower with only empty centres and `P T₁` a canonical
-segment of the general value `genInv M 𝔪`. At a point `z` of the cosupport of positive order `o`, the general value
-of `𝔪` along `P T₁` is that of `𝔪_P` along `T₁`. The orders agree (`geoTransformAlong_append`) and the regimes along
-`P H` and along `H` correspond (`NonmonomialOrderTransport.ordRegime_append_iff`).
+Let `𝔪` be a marked ideal of the domain (`0 < n`), `P` a tower with only empty centres and `P T₁` a canonical segment of the
+general value `genInv M 𝔪`.  At a point `z` of the cosupport of positive order `o`, the general value of `𝔪` along `P T₁` is that
+of `𝔪_P` along `T₁`.  The orders agree (`geoTransformAlong_append`) and the regimes along `P H` and along `H` correspond (TN3's
+`NonmonomialOrderTransport.ordRegime_append_iff`).
 
 * If the run of `z` along `T₁` is shorter than `T₁`, both runs agree and the split of `P T₁` at it is `P` followed by the split of
   `T₁` (`StepOneEmptyPrefix.regimeRun_append_of_lt`, `split_append_of_le`): the companion values are computed from the same
   transform (`GeneralRepresentative.genLowerValue_congr_of_eq`).
-* If the run covers `T₁`, it covers `P` too (`regimeRun_ordRegime_isEmptyTower`): along `P T₁` the companion ideal
-  is formed at the base, along `T₁` for `𝔪_P` at the base of `T₁`. They are related by re-basing across the empty
-  restricted tower `P|_W` (`genLowerValue_refl_append_of_isEmptyTower`: `GeneralCompare.value_restrict_append`,
-  `CompanionRebase.restrictEquiv_companionOf_rebase`, property (4') of `M` through
-  `MaxOrderValue.IsMaxOrderValue.value_rebase`), and the mask of `𝔪_P` is the preimage of that of `𝔪`
-  (`NonmonomialOrderTransport.ordMask_isEmptyTower`).
+* If the run covers `T₁`, it covers `P` too (TN3's `regimeRun_ordRegime_isEmptyTower`): along `P T₁` the companion ideal is
+  formed at the base, along `T₁` for `𝔪_P` at the base of `T₁`.  They are related by re-basing across the empty restricted tower
+  `P|_W` (`genLowerValue_refl_append_of_isEmptyTower`: `GeneralCompare.value_restrict_append`, TN3's
+  `CompanionRebase.restrictEquiv_companionOf_rebase`, property (4') of `M` through `MaxOrderValue.IsMaxOrderValue.value_rebase`),
+  and the mask of `𝔪_P` is the preimage of that of `𝔪` (TN3's `NonmonomialOrderTransport.ordMask_isEmptyTower`).
 
-At order `0` this is `GeneralValueOrderZero.emptyPrefix_field_of_nmOrd_eq_zero`.
+At order `0` this is TN3's `GeneralValueOrderZero.emptyPrefix_field_of_nmOrd_eq_zero`.
 
 ## Main results
 
 * `genLowerValue_refl_append_of_isEmptyTower`: the companion value formed at the base, across an empty prefix;
 * **`genInv_emptyPrefix_of_pos`**: property (4') of the general value at positive order;
 * **`emptyPrefix_field`**: property (4') in the shape of the field `emptyPrefix` of `ResolutionInvariantExt.ResolutionInvariant`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -81,7 +44,19 @@ universe u v
 namespace Hironaka.GeneralEmptyPrefix
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.RestrictEmptyTower Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail Hironaka.NonmonomialOrderTransport Hironaka.InvDomainCompanion Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.GeneralCompare Hironaka.GeneralCanonicalTail Hironaka.HomogenizedIdealAlong Hironaka.StepOneEmptyPrefix Hironaka.CompanionOpen
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.RestrictEmptyTower
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail
+  Hironaka.NonmonomialOrderTransport Hironaka.InvDomainCompanion
+  Hironaka.MaxOrderValue Hironaka.GeneralValue
+  Hironaka.GeneralCompare Hironaka.GeneralCanonicalTail
+  Hironaka.HomogenizedIdealAlong Hironaka.StepOneEmptyPrefix
+  Hironaka.CompanionOpen
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower isGeoTestTower_of_isEmptyTower)
 
@@ -204,8 +179,8 @@ theorem genInv_emptyPrefix_of_pos (hM : IsMaxOrderValue n k M) (hn : 0 < n) {�
     rfl
 
 /-- **Property (4') of the general value in the shape of the field `emptyPrefix`** of
-`ResolutionInvariantExt.ResolutionInvariant`: along canonical segments of the general value (`M` a value function
-for the marked ideals of maximal order, `0 < n`), at every point (order `0`:
+`ResolutionInvariantExt.ResolutionInvariant`: along canonical segments of the general value (`M` a value function for the
+marked ideals of maximal order, `0 < n`), at every point (order `0`: TN3's
 `GeneralValueOrderZero.emptyPrefix_field_of_nmOrd_eq_zero`). -/
 theorem emptyPrefix_field (hM : IsMaxOrderValue n k M) (hn : 0 < n) (𝔪 : MarkedIdeal n X) (h : IsInvDomain k 𝔪)
     {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y) (h₀ : IsEmptyTower T₀)

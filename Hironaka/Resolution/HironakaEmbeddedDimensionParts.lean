@@ -1,28 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedBoundary
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedReducible
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.PureDimension
-import Hironaka.Analytic.RegularPointDimension
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Embedded resolution of the dimension parts of an analytic set (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6; Włodarczyk 2005
-(`wlodarczyk05-hironaka`); Demailly, *Complex analytic and differential geometry*, II.5 (dimension strata).
+Blueprint `hir:embedded-resolution-dimension-parts` (`blueprint/src/hironaka.tex`; TN.5, item S7 of the review 57572af3 of the
+Hironaka strengthenings, for analytic sets whose components have different dimensions).  Sources: Bierstone--Milman 1997
+(`bierstone-milman97-invent-math`), Theorem 1.6; Włodarczyk 2005 (`wlodarczyk05-hironaka`); Demailly, *Complex analytic and
+differential geometry*, II.5 (dimension strata).
 
 For a closed analytic set `W` of a complex manifold `X` and `k ∈ ℕ`, the **`k`-dimensional part** of `W` is
 `W⁽ᵏ⁾ = closure (Reg_k W)`, the closure of the set of points at which `W` is a submanifold of dimension `k` (classically, the
@@ -48,12 +35,15 @@ a later centre meeting an earlier, already smooth strict transform may make it s
 
 ## Main results
 
-* `dimensionPart`, `regularStratum_eq_regularLocus`, `isComplexAnalyticSubset_dimensionPart`,
-  `dimensionPart_subset`, `regularAtDim_dimensionPart_of_regularAtDim`, `subset_closure_regularLocus_dimensionPart`,
-  `eq_iUnion_dimensionPart`, `diff_regularLocus_dimensionPart_subset`;
+* `dimensionPart`, `regularStratum_eq_regularLocus`, `isComplexAnalyticSubset_dimensionPart`, `dimensionPart_subset`,
+  `regularAtDim_dimensionPart_of_regularAtDim`, `subset_closure_regularLocus_dimensionPart`, `eq_iUnion_dimensionPart`,
+  `dimensionPart_eq_self_of_pure`, `diff_regularLocus_dimensionPart_subset`;
 * **`exists_embeddedResolution_dimensionPart_of_isCompact`** (`W` compact, `k < n`), **`exists_embeddedResolution_dimensionPart`**
   (`X` compact) and **`exists_embeddedResolution_dimensionPart_boundary_of_isCompact`** (relative to a simple normal crossings
   boundary).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedBoundary` only; it does not import, even
+transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -127,6 +117,11 @@ theorem eq_iUnion_dimensionPart {W : Set M} (hWa : IsComplexAnalyticSubset (n :=
   rw [closure_iUnion_of_finite] at hcl
   exact hcl
 
+/-- **For `W` of pure dimension `d`, the `d`-dimensional part is `W`.** -/
+theorem dimensionPart_eq_self_of_pure {W : Set M} (hW : IsClosed W) {d : ℕ}
+    (hpure : W ⊆ closure (regularLocus (n := n) W d)) : dimensionPart (n := n) W d = W :=
+  Subset.antisymm (dimensionPart_subset hW d) hpure
+
 /-- **The singular points of `W⁽ᵏ⁾` are points where `W` is not a submanifold of dimension `k`.** -/
 theorem diff_regularLocus_dimensionPart_subset {W : Set M} (hW : IsClosed W) (k : ℕ) :
     dimensionPart (n := n) W k \ regularLocus (n := n) (dimensionPart (n := n) W k) k ⊆
@@ -139,13 +134,13 @@ end Parts
 
 section Resolution
 
-/-- **Embedded resolution of a dimension part** (Hironaka; `hir:embedded-resolution-dimension-parts`): let `X` be any
-complex manifold, `W ⊆ X` a compact analytic set (its components may have different dimensions) and `k < n`. Write
-`W⁽ᵏ⁾` for the `k`-dimensional part and `W⁽ᵏ⁾_sing` for the points of `W⁽ᵏ⁾` at which it is not a submanifold of
-dimension `k`. There are an admissible blowup sequence `f: X' → X` (from the empty divisor, centres over
-`W⁽ᵏ⁾_sing`) and its divisor `E` such that `E` has simple normal crossings, `Exc f = ⋃ E = f⁻¹(W⁽ᵏ⁾_sing)`, `f` is
-an isomorphism over `X \ W⁽ᵏ⁾_sing`, and the strict transform of `W⁽ᵏ⁾` is a closed submanifold of `X'`, of
-dimension `k` at each of its points, with only normal crossings with `E`. -/
+/-- **Embedded resolution of a dimension part** (Hironaka; `hir:embedded-resolution-dimension-parts`, review S7 for analytic sets
+whose components have different dimensions): let `X` be any complex manifold, `W ⊆ X` a compact analytic set (its components may
+have different dimensions) and `k < n`.  Write `W⁽ᵏ⁾` for the `k`-dimensional part and `W⁽ᵏ⁾_sing` for the points of `W⁽ᵏ⁾` at which
+it is not a submanifold of dimension `k`.  There are an admissible blowup sequence `f : X' → X` (from the empty divisor, centres
+over `W⁽ᵏ⁾_sing`) and its divisor `E` such that `E` has simple normal crossings, `Exc f = ⋃ E = f⁻¹(W⁽ᵏ⁾_sing)`, `f` is an
+isomorphism over `X \ W⁽ᵏ⁾_sing`, and the strict transform of `W⁽ᵏ⁾` is a closed submanifold of `X'`, of dimension `k` at each of
+its points, with only normal crossings with `E`. -/
 theorem exists_embeddedResolution_dimensionPart_of_isCompact {X : Type u} [TopologicalSpace X]
     [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W)
     (hK : IsCompact W) {k : ℕ} (hk : k < n) :
@@ -165,7 +160,7 @@ theorem exists_embeddedResolution_dimensionPart_of_isCompact {X : Type u} [Topol
     (hK.of_isClosed_subset isClosed_closure (dimensionPart_subset hWa.isClosed k)) hk
     (subset_closure_regularLocus_dimensionPart hWa.isClosed k)
 
-/-- **Embedded resolution of a dimension part in a compact manifold** (`X` compact). -/
+/-- **Embedded resolution of a dimension part in a compact manifold** (`X` compact; review S7). -/
 theorem exists_embeddedResolution_dimensionPart {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
     [IsComplexManifold n X] [CompactSpace X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W) {k : ℕ}
     (hk : k < n) :
@@ -183,9 +178,9 @@ theorem exists_embeddedResolution_dimensionPart {X : Type u} [TopologicalSpace X
       HasNormalCrossings n (strictTransform n f (dimensionPart (n := n) W k)) E :=
   exists_embeddedResolution_dimensionPart_of_isCompact hWa hWa.isClosed.isCompact hk
 
-/-- **Embedded resolution of a dimension part relative to a simple normal crossings boundary** (`W` compact): the
-conclusions of `HironakaEmbeddedBoundary.exists_embeddedResolution_boundary_of_isCompact` for `W⁽ᵏ⁾`, when no member
-of `E₀` contains a nonempty relatively open subset of `W⁽ᵏ⁾`. -/
+/-- **Embedded resolution of a dimension part relative to a simple normal crossings boundary** (`W` compact, review S7 with
+S4): the conclusions of `HironakaEmbeddedBoundary.exists_embeddedResolution_boundary_of_isCompact` for `W⁽ᵏ⁾`, when no member of
+`E₀` contains a nonempty relatively open subset of `W⁽ᵏ⁾`. -/
 theorem exists_embeddedResolution_dimensionPart_boundary_of_isCompact {X : Type u} [TopologicalSpace X]
     [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W)
     (hK : IsCompact W) {k : ℕ} (hk : k < n) {E₀ : List (Set X)} (hE₀ : IsSNCDivisor n E₀)

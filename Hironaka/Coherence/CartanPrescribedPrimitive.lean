@@ -1,26 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationProof
 import Mathlib.LinearAlgebra.Vandermonde
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.GermIntegrallyClosed
-import Hironaka.Analytic.GermMinimalPolynomial
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.GermPrimitiveElement
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
 # Primitive elements on the moment curve, and parametrization data for a prescribed one
 
-Step 3 of the plan for Cartan's theorem on an irreducible germ (Demailly, *Complex analytic and differential
-geometry*, II.4.13 and II.4.29).
+Step 3 of our proof of Cartan's theorem on an irreducible germ
+(Demailly, *Complex analytic and differential geometry*, II.4.13 and II.4.29).
 
 Let `Q ⊆ 𝒪_n` be prime and in Noether position over `𝒪_d`, `K = Frac 𝒪_d`,
 `L = Frac(𝒪_n / Q)`.  Demailly notes (II.4.13) that `u_c = ∑_{k ≥ d} c_k z_k` is a primitive
@@ -37,6 +24,8 @@ moment curve `c(t)_k = t^k`:
 * `exists_algebraicParametrization_of_isDenomForm`: for such a PRESCRIBED `c` (and prescribed
   minimal polynomials of the fibre coordinates) there is an `AlgebraicParametrization Q d`
   with `coef = c` (the tree's `exists_algebraicParametrization` chooses `c` itself).
+
+Sorry-free.
 -/
 
 open Polynomial IntermediateField
@@ -107,6 +96,7 @@ theorem finite_setOf_not_forall_mem_adjoin [Algebra.IsAlgebraic K L] [Algebra.Is
   exact ht fun l => htop'.symm ▸ IntermediateField.mem_top
 
 end Field
+
 
 section Ring
 

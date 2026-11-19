@@ -1,26 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Analytic.CoordinatePlaneDivision
-import Hironaka.Blowup.LiftedOpenModel
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # A blowup of a compact manifold along a smooth centre is compact
 
-`compactSpace_of_isBlowupAlong`: if `π: Z → M` is the blowup of a compact complex manifold along a nowhere dense
-closed submanifold (`IsBlowupAlong`, a universal property), then `Z` is compact.
+`compactSpace_of_isBlowupAlong`: if `π : Z → M` is the blowup of a compact complex manifold
+along a nowhere dense closed submanifold (`IsBlowupAlong`, a universal property), then `Z` is
+compact.  This is the compactness half of
+`Hironaka.ModificationInputs.compactSpace_and_kahler_of_isBlowupAlong`.
 
 Every `y ∈ M` has a neighbourhood `K` with `π⁻¹ K` compact:
 * off `C`, the inclusion of `M \ C` lifts to `s`, and uniqueness of lifts on `π⁻¹(M \ C)` gives
@@ -38,7 +27,8 @@ universe u
 
 namespace Hironaka.BlowupCompact
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity
 
 noncomputable section
 

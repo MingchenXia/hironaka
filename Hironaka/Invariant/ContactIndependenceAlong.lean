@@ -1,45 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HomogenizedGlueingLiftAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupBiholomorphismLift
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Blowup.GlueingTrivialAction
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingAlongTower
-import Hironaka.MarkedIdeal.HomogenizedGlueingLift
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.Coherence.VanishingIdealCoherent
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Independence of the hypersurface of maximal contact inside a submanifold, along multiple test blow-ups
 
-Source: Włodarczyk 2005, Step 1bb ("We need to show that these invariants do not depend on the choice of `u`":
-`φ_{pu}^*(U_p, J̄_p, E_p, μ̄) = φ_{pv}^*(U_p, J̄_p, E_p, μ̄)` and `φ_{pu}^{-1}(V(u)_p) = φ_{pv}^{-1}(V(v)_p)`), with
-Lemma `le:homo` (4), `φ_u = φ` the glueing biholomorphism `U ≅ U'` along `N`; the lifts are those of
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0066 (continued C-0067): TN-CLASSICAL's item (b), the
+independence of the hypersurface of maximal contact inside `N` along towers, which Step 1b of `hir:maximal-order-step`
+inside `N` reads (`blueprint/src/hironaka.tex`); blueprint `mc:lift-step-pair`, `mc:lift-transport-along`,
+`mc:restricted-coefficient-transport`, `mc:restricted-coefficient-lift-along`, `mc:contact-independence-along`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, Step 1bb ("We need to show that these invariants do not
+depend on the choice of `u`": `φ_{pu}^*(U_p, J̄_p, E_p, μ̄) = φ_{pv}^*(U_p, J̄_p, E_p, μ̄)` and
+`φ_{pu}^{-1}(V(u)_p) = φ_{pv}^{-1}(V(v)_p)`), with Lemma `le:homo` (4), in the analytic adaptation of design note D7 (`φ_v`
+the inclusion of an open set `U`, `φ_u = φ` the glueing biholomorphism `U ≅ U'` along `N`; the lifts are those of
 `HomogenizedGlueingLiftAlong`).
 
 ## One step
@@ -47,21 +21,41 @@ Lemma `le:homo` (4), `φ_u = φ` the glueing biholomorphism `U ≅ U'` along `N`
 * `pullback_lift_geoTransform_pair`: under the lift `Φ₁` of `Φ : A ≅ B` along a blowup, if `Φ^*(𝔪|_B) = 𝔪'|_A`, then
   `Φ₁^*(𝔪_1|_{π⁻¹B}) = 𝔪'_1|_{π⁻¹A}` for the transforms (the form of `HomogenizedGlueingLift.pullback_lift_geoTransform`
   with two marked ideals).
+* `exists_isGlueingLiftAlong_step`: the induction step of `HomogenizedGlueingLiftAlong.exists_isGlueingLiftAlong` as a
+  standalone statement, recording that the new lift lifts the old one and that the centres correspond;
+  `lift_eq_equiv_refl`: along the empty tower the lift is the glueing biholomorphism.
 
 ## (T1) Transport
+
+* `exists_isGlueingLiftAlong_transport`: for glueing data `G` along `N` acting trivially modulo the glue ideal and a family
+  of pairs of marked ideals `(𝔫 i, 𝔫' i)` (closed submanifolds, coherent ideals) with `G.equiv^*(𝔫 i|_{U'}) = 𝔫' i|_U`,
+  along every tower that is a multiple test blow-up of `(𝓗_N(𝔞), μ)` and of every `𝔫 i`, `𝔫' i` there is ONE lift `Φ_T`
+  (`IsGlueingLiftAlong`) with `Φ_T^*((𝔫 i)_T|_{cod}) = (𝔫' i)_T|_{dom}` for all `i`; `exists_isGlueingLiftAlong_transport_one`:
+  one preserved marked ideal.
 
 ## (T2) The restricted coefficient ideals correspond
 
 * `pullback_withN_of_pullback`, `pullback_withN_coeffMarkedAlong_of_pullback`: if `Φ^*(𝔪|_B) = 𝔪'|_A` and
   `Φ⁻¹(S ∩ B) = S' ∩ A`, then `Φ^*((𝔪|_S)|_B) = (𝔪'|_{S'})|_A` and `Φ^*((𝓒(𝔪)|_S)|_B) = (𝓒(𝔪')|_{S'})|_A` (coefficient
   ideals along the submanifolds of `𝔪`, `𝔪'`), for any biholomorphism `Φ : A ≅ B` of open sets.
-* `lift_pullback_restrictedCoeff` ((b)): `Φ_T^*(S_{u,T}|_{cod}) = S_{v,T}|_{dom}` for `S_{u,T} = 𝓒_{N_T}(𝔫_T)|_{(N ∩
-  V(u))_T}`; `lift_pullback_restricted`: the form without `𝓒`.
+* `lift_preimage_proj_preimage`, `lift_preimage_strict_inter_proj`, `lift_preimage_strict_zeroSet_inter_proj`: the lift
+  maps `T⁻¹(φ⁻¹A) ∩ dom` onto `T⁻¹(A) ∩ cod`, and `(N ∩ V(v))_T ∩ T⁻¹(A')` (resp. `V(v)_T ∩ T⁻¹(A')`) onto
+  `(N ∩ V(u))_T ∩ T⁻¹(A)` (resp. `V(u)_T ∩ T⁻¹(A)`) when `φ⁻¹(A) ∩ U = A' ∩ U` (forms on preimages of sets of the base).
+* `lift_pullback_restrictedCoeff` (TN-CLASSICAL's (b)): `Φ_T^*(S_{u,T}|_{cod}) = S_{v,T}|_{dom}` for
+  `S_{u,T} = 𝓒_{N_T}(𝔫_T)|_{(N ∩ V(u))_T}`; `lift_pullback_restricted`: the form without `𝓒`;
+  `lift_pullback_restrictedCoeff_inter_proj`: the form with `(N ∩ V(u))_T ∩ T⁻¹(A)`.
 
 ## (T3) The instance `J̄ = 𝓒_N(𝓗_N(𝔞), μ)`
 
 * `one_le_coeffMarkedAlong_d`, `coeffHom_basic`: `J̄` has submanifold `N`, a coherent ideal and mark `≥ 1`;
   `pullback_restrict_coeffHom`: `G.equiv^*(J̄|_{U'}) = J̄|_U`; `wEquiv_coeffHom`: `J̄ ≃ (𝓗_N(𝔞), μ)`;
+* `exists_isGlueingLiftAlong_coeffHom`: along every multiple test blow-up `T` of `J̄` there is a lift `Φ_T` with
+  `Φ_T^*(J̄_T|_{cod}) = J̄_T|_{dom}`, `Φ_T^*(S_{u,T}(J̄)|_{cod}) = S_{v,T}(J̄)|_{dom}` (with and without `𝓒`) and fixing
+  `cosupp J̄_T` pointwise; `contact_independence_along`: the package from two tangent directions at a point of the
+  cosupport.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -71,7 +65,9 @@ universe u
 
 namespace Hironaka.ContactIndependenceAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder TangentDirectionAlong HomogenizedIdealAlong HomogenizedGlueingAlong HomogenizedGlueingAlongTower GlueingTrivialAction HomogenizedGlueingLift HomogenizedGlueingLiftAlong CoefficientIdealRestriction
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  TangentDirectionAlong HomogenizedIdealAlong HomogenizedGlueingAlong HomogenizedGlueingAlongTower
+  GlueingTrivialAction HomogenizedGlueingLift HomogenizedGlueingLiftAlong CoefficientIdealRestriction
 open HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
@@ -80,7 +76,8 @@ noncomputable section
 
 section Step
 
-open BlowupBiholomorphismLift MarkedIdealRestrictOpen MarkedIdealBiholomorphism BlowupStrictSubmanifold BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal BlowupRestrictOpen
+open BlowupBiholomorphismLift MarkedIdealRestrictOpen MarkedIdealBiholomorphism BlowupStrictSubmanifold BlowupTowers
+  MarkedIdeals MarkedIdeals.MarkedIdeal BlowupRestrictOpen
 
 variable {n : ℕ} {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y]
   {Z : Type u} [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z] [IsComplexManifold n Z]
@@ -127,15 +124,16 @@ end Step
 
 section LiftStep
 
-open BlowupBiholomorphismLift MarkedIdealRestrictOpen BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism BlowupControlledTransform HomogenizedIdealAlongTower
+open BlowupBiholomorphismLift MarkedIdealRestrictOpen BlowupTowers BlowupTowerTransforms MarkedIdeals
+  MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism BlowupControlledTransform HomogenizedIdealAlongTower
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ} (G : GlueingDataAlong N 𝔞 μ u v)
 
-/-- **One step of the lift along `N`** (the induction step of `HomogenizedGlueingLiftAlong.exists_isGlueingLiftAlong`):
-if `Φ` is a lift along `T` and the tower `T` followed by the blowup `π` along `C` is a multiple test blow-up of
-`(𝓗_N(𝔞), μ)`, then `Φ⁻¹(C ∩ cod) = C ∩ dom` and there is a lift `Φ₁` along the longer tower lifting `Φ` (`π ∘ Φ₁ =
-Φ ∘ π`). -/
+/-- **One step of the lift along `N`** (the induction step of `HomogenizedGlueingLiftAlong.exists_isGlueingLiftAlong`, as a
+standalone statement): if `Φ` is a lift along `T` and the tower `T` followed by the blowup `π` along `C` is a multiple test
+blow-up of `(𝓗_N(𝔞), μ)`, then `Φ⁻¹(C ∩ cod) = C ∩ dom` and there is a lift `Φ₁` along the longer tower lifting `Φ`
+(`π ∘ Φ₁ = Φ ∘ π`). -/
 theorem exists_isGlueingLiftAlong_step (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
     {Y Z : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y) (C : Set Y) (π : Z → Y)
     (hπ : IsBlowupAlong n C π) (hT : IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) (.step T C π hπ))
@@ -231,6 +229,74 @@ theorem lift_eq_equiv_refl
 
 end LiftStep
 
+/-! ### (T1) Transport of preserved marked ideals by the lifts -/
+
+section Transport
+
+open BlowupBiholomorphismLift MarkedIdealRestrictOpen BlowupTowers BlowupTowerTransforms MarkedIdeals
+  MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism HomogenizedIdealAlongTower
+
+variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+  {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ} (G : GlueingDataAlong N 𝔞 μ u v)
+
+/-- **(T1) The lifts transport the transforms of marked ideals that the glueing biholomorphism transports**
+(Włodarczyk, Step 1bb: `φ_{pu}^*(U_p, J̄_p, E_p, μ̄) = φ_{pv}^*(U_p, J̄_p, E_p, μ̄)`, along `N`, for the lifts of
+`le:homo` (4)).  Let `G` be glueing data along `N` acting trivially modulo `𝓓_N^{μ-1}(𝓗_N(𝔞))` at its zeros in `W`
+(`HomogenizedGlueingLiftAlong.exists_glueingDataAlong_trivial`), and `(𝔫 i, 𝔫' i)` a family of pairs of marked ideals on `M`
+with closed submanifolds and coherent ideals such that `G.equiv^*(𝔫 i|_{U'}) = 𝔫' i|_U`.  Along every tower `T` that is a
+multiple test blow-up of `(𝓗_N(𝔞), μ)` and of every `𝔫 i` and `𝔫' i` there is one lift `Φ_T` of the glueing biholomorphism
+(`IsGlueingLiftAlong`) with `Φ_T^*((𝔫 i)_T|_{cod}) = (𝔫' i)_T|_{dom}` for every `i`. -/
+theorem exists_isGlueingLiftAlong_transport (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    (htriv : ∀ y ∈ G.W, y ∈ zeroSet (glueIdealAlong N 𝔞 μ) →
+      TrivialAt G.φ (glueIdealAlong N 𝔞 μ) y ∧ TrivialAt G.ψ (glueIdealAlong N 𝔞 μ) y)
+    {ι : Sort*} (𝔫 𝔫' : ι → MarkedIdeal n M) (hN𝔫 : ∀ i, IsClosedSubmanifold n (𝔫 i).N)
+    (h𝔫 : ∀ i, (𝔫 i).ideal.IsCoherent) (hN𝔫' : ∀ i, IsClosedSubmanifold n (𝔫' i).N)
+    (h𝔫' : ∀ i, (𝔫' i).ideal.IsCoherent)
+    (hpb : ∀ i, MarkedIdeal.pullback G.equiv (MarkedIdeal.pullback (Subtype.val : G.cod → M) (𝔫 i)) =
+      MarkedIdeal.pullback (Subtype.val : G.dom → M) (𝔫' i)) :
+    {Y : CMfd.{u} n} → (T : BlowupTower (CMfd.of (n := n) M) Y) →
+      IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) T → (∀ i, IsGeoTestTower (𝔫 i) T) →
+      (∀ i, IsGeoTestTower (𝔫' i) T) →
+      ∃ Φ, IsGlueingLiftAlong G T Φ ∧ ∀ i,
+        MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+          (geoTransformAlong (𝔫 i) T)) =
+        MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y) (geoTransformAlong (𝔫' i) T)
+  | _, .refl, hT, _, _ => by
+      obtain ⟨Φ, hL⟩ := exists_isGlueingLiftAlong G h𝔞 hN hμ htriv .refl hT
+      have hΦ : Φ = G.equiv := lift_eq_equiv_refl G hL
+      subst hΦ
+      exact ⟨_, hL, hpb⟩
+  | _, .step T C π hπ, hT, h𝔫T, h𝔫'T => by
+      obtain ⟨Φ, hL, hP⟩ := exists_isGlueingLiftAlong_transport h𝔞 hN hμ htriv 𝔫 𝔫' hN𝔫 h𝔫 hN𝔫' h𝔫' hpb T hT.1
+        (fun i => (h𝔫T i).1) (fun i => (h𝔫'T i).1)
+      obtain ⟨hcorr, Φ₁, hΦ₁, hL₁⟩ := exists_isGlueingLiftAlong_step G h𝔞 hN hμ T C π hπ hT hL
+      refine ⟨Φ₁, hL₁, fun i => ?_⟩
+      obtain ⟨hNT, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong (hN𝔫 i) (h𝔫 i) T (h𝔫T i).1
+      obtain ⟨hNT', hcT'⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong (hN𝔫' i) (h𝔫' i) T
+        (h𝔫'T i).1
+      exact pullback_lift_geoTransform_pair hπ Φ hcorr Φ₁ hΦ₁ hcT
+        (HadamardBridgeAlong.isCoherent_geoTransform_ideal_of_isAdmissibleCentre hNT hcT (h𝔫T i).2 hπ) hcT'
+        (HadamardBridgeAlong.isCoherent_geoTransform_ideal_of_isAdmissibleCentre hNT' hcT' (h𝔫'T i).2 hπ) (hP i)
+
+/-- **(T1) for one preserved marked ideal**: if `G.equiv^*(𝔫|_{U'}) = 𝔫|_U`, then along every multiple test blow-up of
+`(𝓗_N(𝔞), μ)` and of `𝔫` some lift `Φ_T` has `Φ_T^*(𝔫_T|_{cod}) = 𝔫_T|_{dom}`. -/
+theorem exists_isGlueingLiftAlong_transport_one (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    (htriv : ∀ y ∈ G.W, y ∈ zeroSet (glueIdealAlong N 𝔞 μ) →
+      TrivialAt G.φ (glueIdealAlong N 𝔞 μ) y ∧ TrivialAt G.ψ (glueIdealAlong N 𝔞 μ) y)
+    (𝔫 : MarkedIdeal n M) (hN𝔫 : IsClosedSubmanifold n 𝔫.N) (h𝔫 : 𝔫.ideal.IsCoherent)
+    (hpb : MarkedIdeal.pullback G.equiv (MarkedIdeal.pullback (Subtype.val : G.cod → M) 𝔫) =
+      MarkedIdeal.pullback (Subtype.val : G.dom → M) 𝔫)
+    {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y)
+    (hT : IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) T) (h𝔫T : IsGeoTestTower 𝔫 T) :
+    ∃ Φ, IsGlueingLiftAlong G T Φ ∧
+      MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y) (geoTransformAlong 𝔫 T)) =
+        MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y) (geoTransformAlong 𝔫 T) := by
+  obtain ⟨Φ, hL, hP⟩ := exists_isGlueingLiftAlong_transport G h𝔞 hN hμ htriv (ι := Unit) (fun _ => 𝔫) (fun _ => 𝔫)
+    (fun _ => hN𝔫) (fun _ => h𝔫) (fun _ => hN𝔫) (fun _ => h𝔫) (fun _ => hpb) T hT (fun _ => h𝔫T) (fun _ => h𝔫T)
+  exact ⟨Φ, hL, hP ()⟩
+
+end Transport
+
 /-! ### (T2) The restricted coefficient ideals correspond -/
 
 section Restricted
@@ -276,7 +342,8 @@ end Restricted
 
 section RestrictedLift
 
-open BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealRestrictOpen MarkedIdealBiholomorphism
+open BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealRestrictOpen
+  MarkedIdealBiholomorphism
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ} {G : GlueingDataAlong N 𝔞 μ u v}
@@ -284,11 +351,40 @@ variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel
   {Φ : CMfd.of (n := n) (openPreimage T G.dom) ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯
     CMfd.of (n := n) (openPreimage T G.cod)}
 
-/-- **(T2) The restricted coefficient ideals correspond under the lifts** ((b); Włodarczyk, Step 1bb): if `Φ_T` is a
-lift along `T` transporting `𝔪` to `𝔪'` (`Φ_T^*(𝔪|_{cod}) = 𝔪'|_{dom}`; for instance `𝔪 = 𝔪' = 𝔫_T`, (T1)), then for
-`S_{u,T}(𝔪) = 𝓒_{N_T}(𝔪)|_{(N ∩ V(u))_T}` (the coefficient ideal along the submanifold of `𝔪`, restricted to the
-strict transform of the hypersurface of maximal contact `N ∩ V(u)`): `Φ_T^*(S_{u,T}(𝔪)|_{cod}) =
-S_{v,T}(𝔪')|_{dom}`. -/
+/-- **The lift maps preimages of sets of the base to preimages of their `φ`-preimages**:
+`Φ_T⁻¹(T⁻¹(A) ∩ cod) = T⁻¹(φ⁻¹A) ∩ dom`. -/
+theorem lift_preimage_proj_preimage (hL : IsGlueingLiftAlong G T Φ) (A : Set M) :
+    Φ ⁻¹' ((↑) ⁻¹' (T.proj ⁻¹' A) : Set (openPreimage T G.cod)) =
+      ((↑) ⁻¹' (T.proj ⁻¹' (G.φ ⁻¹' A)) : Set (openPreimage T G.dom)) := by
+  ext p
+  change T.proj (Φ p : Y) ∈ A ↔ G.φ (T.proj p) ∈ A
+  rw [hL.proj_eq p]
+
+/-- **Open forms**: if `φ⁻¹(A) ∩ U = A' ∩ U` on the base, the lift maps `S_{v,T} ∩ T⁻¹(A')` onto `S_{u,T} ∩ T⁻¹(A)`
+(`S_{u,T} = (N ∩ V(u))_T`). -/
+theorem lift_preimage_strict_inter_proj (hL : IsGlueingLiftAlong G T Φ) {A A' : Set M}
+    (hA : ∀ p ∈ G.dom, G.φ p ∈ A ↔ p ∈ A') :
+    Φ ⁻¹' ((↑) ⁻¹' (strictAlong T (N ∩ {x | u x = 0}) ∩ T.proj ⁻¹' A) : Set (openPreimage T G.cod)) =
+      ((↑) ⁻¹' (strictAlong T (N ∩ {x | v x = 0}) ∩ T.proj ⁻¹' A') : Set (openPreimage T G.dom)) := by
+  rw [preimage_inter, preimage_inter, preimage_inter, hL.strict_eq_N, lift_preimage_proj_preimage hL]
+  congr 1
+  ext p
+  exact hA _ p.2
+
+/-- The same with `V(u)`, `V(v)` in place of `N ∩ V(u)`, `N ∩ V(v)`. -/
+theorem lift_preimage_strict_zeroSet_inter_proj (hL : IsGlueingLiftAlong G T Φ) {A A' : Set M}
+    (hA : ∀ p ∈ G.dom, G.φ p ∈ A ↔ p ∈ A') :
+    Φ ⁻¹' ((↑) ⁻¹' (strictAlong T {x | u x = 0} ∩ T.proj ⁻¹' A) : Set (openPreimage T G.cod)) =
+      ((↑) ⁻¹' (strictAlong T {x | v x = 0} ∩ T.proj ⁻¹' A') : Set (openPreimage T G.dom)) := by
+  rw [preimage_inter, preimage_inter, preimage_inter, hL.strict_eq, lift_preimage_proj_preimage hL]
+  congr 1
+  ext p
+  exact hA _ p.2
+
+/-- **(T2) The restricted coefficient ideals correspond under the lifts** (TN-CLASSICAL's (b); Włodarczyk, Step 1bb):
+if `Φ_T` is a lift along `T` transporting `𝔪` to `𝔪'` (`Φ_T^*(𝔪|_{cod}) = 𝔪'|_{dom}`; for instance `𝔪 = 𝔪' = 𝔫_T`,
+(T1)), then for `S_{u,T}(𝔪) = 𝓒_{N_T}(𝔪)|_{(N ∩ V(u))_T}` (the coefficient ideal along the submanifold of `𝔪`, restricted
+to the strict transform of the hypersurface of maximal contact `N ∩ V(u)`): `Φ_T^*(S_{u,T}(𝔪)|_{cod}) = S_{v,T}(𝔪')|_{dom}`. -/
 theorem lift_pullback_restrictedCoeff (hL : IsGlueingLiftAlong G T Φ) {m m' : MarkedIdeal n Y}
     (hNm : IsClosedSubmanifold n m.N) (hm : m.ideal.IsCoherent) (hd : 1 ≤ m.d) (hNm' : IsClosedSubmanifold n m'.N)
     (hm' : m'.ideal.IsCoherent) (hd' : 1 ≤ m'.d)
@@ -309,13 +405,28 @@ theorem lift_pullback_restricted (hL : IsGlueingLiftAlong G T Φ) {m m' : Marked
       MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y) (withN m' (strictAlong T (N ∩ {x | v x = 0}))) :=
   pullback_withN_of_pullback Φ hpb hL.strict_eq_N
 
+/-- **(T2) on preimages of sets of the base** (open forms): with `φ⁻¹(A) ∩ U = A' ∩ U`,
+`Φ_T^*((𝓒_{N_T}(𝔪)|_{(N ∩ V(u))_T ∩ T⁻¹A})|_{cod}) = (𝓒_{N_T}(𝔪')|_{(N ∩ V(v))_T ∩ T⁻¹A'})|_{dom}`. -/
+theorem lift_pullback_restrictedCoeff_inter_proj (hL : IsGlueingLiftAlong G T Φ)
+    {m m' : MarkedIdeal n Y} (hNm : IsClosedSubmanifold n m.N) (hm : m.ideal.IsCoherent) (hd : 1 ≤ m.d)
+    (hNm' : IsClosedSubmanifold n m'.N) (hm' : m'.ideal.IsCoherent) (hd' : 1 ≤ m'.d)
+    (hpb : MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y) m) =
+      MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y) m') {A A' : Set M}
+    (hA : ∀ p ∈ G.dom, G.φ p ∈ A ↔ p ∈ A') :
+    MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+        (withN (coeffMarkedAlong m) (strictAlong T (N ∩ {x | u x = 0}) ∩ T.proj ⁻¹' A))) =
+      MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+        (withN (coeffMarkedAlong m') (strictAlong T (N ∩ {x | v x = 0}) ∩ T.proj ⁻¹' A')) :=
+  pullback_withN_coeffMarkedAlong_of_pullback Φ hNm hm hd hNm' hm' hd' hpb (lift_preimage_strict_inter_proj hL hA)
+
 end RestrictedLift
 
 /-! ### (T3) The instance `J̄ = 𝓒_N(𝓗_N(𝔞), μ)` -/
 
 section Instance
 
-open BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealRestrictOpen MarkedIdealEquivalence.MarkedIdeal HomogenizedIdealAlongTower BlowupRestrictOpen MarkedIdealBiholomorphism
+open BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealRestrictOpen
+  MarkedIdealEquivalence.MarkedIdeal HomogenizedIdealAlongTower BlowupRestrictOpen MarkedIdealBiholomorphism
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} {u v : M → ℂ}
@@ -359,6 +470,87 @@ theorem pullback_restrict_coeffHom (G : GlueingDataAlong N 𝔞 μ u v) (h𝔞 :
     pullback_coeffMarkedAlong_of_inverse G.equiv.contMDiff G.equiv.symm.contMDiff G.equiv.apply_symm_apply
       G.equiv.symm_apply_apply _ hHB hNB hμ,
     G.pullback_restrict h𝔞 hN, pullback_val_coeffMarkedAlong G.dom _ hH hN hμ]
+
+/-- **(T3) The independence of the hypersurface of maximal contact inside `N`, for `J̄ = 𝓒_N(𝓗_N(𝔞), μ)`** (Włodarczyk,
+Step 1bb, along `N`, `E = ∅`).  For glueing data `G` along `N` acting trivially modulo `𝓓_N^{μ-1}(𝓗_N(𝔞))` at its zeros in
+`W`, along every multiple test blow-up `T` of `J̄` (equivalently of `(𝓗_N(𝔞), μ)`) there is a lift `Φ_T` of the glueing
+biholomorphism (`IsGlueingLiftAlong`) with
+1. `Φ_T^*(J̄_T|_{cod}) = J̄_T|_{dom}`;
+2. `Φ_T^*(S_{u,T}|_{cod}) = S_{v,T}|_{dom}` for `S_{u,T} = 𝓒_{N_T}(J̄_T)|_{(N ∩ V(u))_T}`;
+3. `Φ_T^*((J̄_T|_{(N ∩ V(u))_T})|_{cod}) = (J̄_T|_{(N ∩ V(v))_T})|_{dom}`;
+4. `Φ_T` fixes `cosupp J̄_T` pointwise. -/
+theorem exists_isGlueingLiftAlong_coeffHom (G : GlueingDataAlong N 𝔞 μ u v) (h𝔞 : 𝔞.IsCoherent)
+    (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    (htriv : ∀ y ∈ G.W, y ∈ zeroSet (glueIdealAlong N 𝔞 μ) →
+      TrivialAt G.φ (glueIdealAlong N 𝔞 μ) y ∧ TrivialAt G.ψ (glueIdealAlong N 𝔞 μ) y)
+    {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y)
+    (hT : IsGeoTestTower (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T) :
+    ∃ Φ, IsGlueingLiftAlong G T Φ ∧
+      MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+          (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T)) =
+        MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+          (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T) ∧
+      MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+          (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T))
+            (strictAlong T (N ∩ {x | u x = 0})))) =
+        MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+          (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T))
+            (strictAlong T (N ∩ {x | v x = 0}))) ∧
+      MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+          (withN (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T)
+            (strictAlong T (N ∩ {x | u x = 0})))) =
+        MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+          (withN (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T)
+            (strictAlong T (N ∩ {x | v x = 0}))) ∧
+      ∀ p : openPreimage T G.dom,
+        (p : Y) ∈ (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T).cosupp → (Φ p : Y) = p := by
+  obtain ⟨hJN, hJc, hJd⟩ := coeffHom_basic (μ := μ) h𝔞 hN
+  have hW := wEquiv_coeffHom h𝔞 hN hμ
+  have hH : IsGeoTestTower (homogenizedMarkedAlong N 𝔞 μ) T := (hW.2 T).1.mp hT
+  obtain ⟨Φ, hL, hP⟩ := exists_isGlueingLiftAlong_transport_one G h𝔞 hN hμ htriv _ hJN hJc
+    (pullback_restrict_coeffHom G h𝔞 hN hμ) T hH hT
+  obtain ⟨hNT, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hJN hJc T hT
+  have hdT : 1 ≤ (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T).d := by
+    rw [d_geoTransformAlong]; exact hJd
+  refine ⟨Φ, hL, hP, lift_pullback_restrictedCoeff hL hNT hcT hdT hNT hcT hdT hP, lift_pullback_restricted hL hP,
+    fun p hp => ?_⟩
+  rw [(hW.2 T).2 hT] at hp
+  exact hL.apply_eq_of_mem_cosupp G h𝔞 hN hμ hH p hp
+
+/-- **The independence of the hypersurface of maximal contact inside `N`, packaged** (Włodarczyk, Step 1bb, along `N`):
+for tangent directions `u`, `v` along `N` of `(𝔞|_N, μ)` (`𝔞` coherent, `N` a closed submanifold, `μ ≥ 1`) on open sets
+containing `x ∈ cosupp(𝔞|_N, μ)` there are glueing data along `N` with `x ∈ U ∩ U'` such that along every multiple test
+blow-up `T` of `J̄ = 𝓒_N(𝓗_N(𝔞), μ)` some lift `Φ_T` of the glueing biholomorphism transports `J̄_T`, maps
+`S_{v,T} = 𝓒_{N_T}(J̄_T)|_{(N ∩ V(v))_T}` to `S_{u,T}` (with and without `𝓒`) and fixes `cosupp J̄_T` pointwise. -/
+theorem contact_independence_along (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) {x : M}
+    (hx : x ∈ cosupport n N 𝔞 μ) {U₁ U₂ : Set M} (hu : IsTangentDirectionAlong N 𝔞 μ U₁ u) (hxU₁ : x ∈ U₁)
+    (hv : IsTangentDirectionAlong N 𝔞 μ U₂ v) (hxU₂ : x ∈ U₂) :
+    ∃ G : GlueingDataAlong N 𝔞 μ u v, x ∈ G.dom ∧ x ∈ G.cod ∧
+      ∀ {Y : CMfd.{u} n} (T : BlowupTower (CMfd.of (n := n) M) Y),
+        IsGeoTestTower (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T →
+        ∃ Φ, IsGlueingLiftAlong G T Φ ∧
+          MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+              (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T)) =
+            MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+              (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T) ∧
+          MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+              (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T))
+                (strictAlong T (N ∩ {x | u x = 0})))) =
+            MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+              (withN (coeffMarkedAlong (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T))
+                (strictAlong T (N ∩ {x | v x = 0}))) ∧
+          MarkedIdeal.pullback Φ (MarkedIdeal.pullback (Subtype.val : openPreimage T G.cod → Y)
+              (withN (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T)
+                (strictAlong T (N ∩ {x | u x = 0})))) =
+            MarkedIdeal.pullback (Subtype.val : openPreimage T G.dom → Y)
+              (withN (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T)
+                (strictAlong T (N ∩ {x | v x = 0}))) ∧
+          ∀ p : openPreimage T G.dom,
+            (p : Y) ∈ (geoTransformAlong (coeffMarkedAlong (homogenizedMarkedAlong N 𝔞 μ)) T).cosupp →
+              (Φ p : Y) = p := by
+  obtain ⟨G, hxW, htriv⟩ := exists_glueingDataAlong_trivial h𝔞 hN hμ hx hu hxU₁ hv hxU₂
+  obtain ⟨hxd, hxc⟩ := G.mem_dom_and_mem_cod hxW hx
+  exact ⟨G, hxd, hxc, fun T hT => exists_isGlueingLiftAlong_coeffHom G h𝔞 hN hμ htriv T hT⟩
 
 end Instance
 

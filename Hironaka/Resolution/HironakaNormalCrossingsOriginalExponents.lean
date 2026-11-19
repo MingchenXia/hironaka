@@ -3,9 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-import Hironaka.Blowup.ControlledTransformZeroExact
-import Hironaka.Invariant.MemberNonContainedPullbackExact
-import Hironaka.MarkedIdeal.ControlledProductTransformExact
 import Hironaka.Resolution.HironakaNormalCrossingsMarkedAdmissibility
 
 /-! # Exact original NC weights on the actual finite separation
@@ -40,7 +37,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences HolGerm AnalyticG
   BlowupFlatCoordinates CartanIrreducibleReduction OkaRelationSheaf OkaIdealOperations AnalyticDescendingChain
 open GermIdealOrder IdealWeightPowers OrderTaylor InvertibleIdealQuotient
   HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsMultiplicityStrata BlowupTowers
-open Hironaka
 noncomputable section
 variable {n : ℕ}
 

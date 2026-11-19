@@ -1,49 +1,40 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MemberInterAlong
 import Hironaka.Blowup.NormalCrossingsComparison
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The boundary count along a submanifold transverse to the divisor
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), proof of `pr:resol`, Step 1a (the intersections `H^s_α` of `s`
-members restricted to the submanifold; "by blowing up `C = H^s_α` we separate divisors contributing to `H^s_α`, thus
-creating new points all with `s(x) < s`") and Step 2 (the monomial case); Bierstone--Milman 2008
+Hironaka phase H2 (TN3), inputs of the monomial case along a submanifold `N`
+(`hir:monomial-case` (2) for `N ≠ M`) and of Step 1a of the maximal-order step inside `N`
+(`hir:maximal-order-step`, `blueprint/src/hironaka.tex`): claimed on I-0977 C-0080.  Blueprint
+`bcalc:boundary-count-drop-along`, `bcalc:member-intersection-drop-along` (chapter
+`blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), proof of
+`pr:resol`, Step 1a (the intersections `H^s_α` of `s` members restricted to the submanifold; "by
+blowing up `C = H^s_α` we separate divisors contributing to `H^s_α`, thus creating new points all
+with `s(x) < s`") and Step 2 (the monomial case); Bierstone--Milman 2008
 (`bierstone-milman08-functoriality`) §5.
 
 Let `π : Y → X` be the blowup along `C`, `C ⊆ N`, `E` a simple normal crossings divisor transverse
 to `N` with which `C` has only normal crossings, and `S` a set of indices of members.
 
-* `card_filter_mem_geoStrictTransform_lt_along`: if near `π z` the centre contains `N ∩ H_S`, a point `z` of the
-  strict transform `N'` over `C` does not lie on all the `H_i'`, `i ∈ S`. (the hypothesis there is `C ⊇ H_S` near `π
-  z`, which fails along `N`, where `C = N ∩ H_S`.)
-* `boundaryCount_map_geoStrictTransform_lt_boundaryCount_along`: if near `x = π z` the centre contains the trace on
-  `N` of the intersection of the members through `x`, then `s'(z) < s(x)` at every `z ∈ N'` over `C` (Step 1aa
-  inside `N`).
-* Step 1a's restriction to `N ∩ H_S`: the list `E_S` of the members with index not in `S` is transverse to `N ∩ H_S`
-  (`isTransverse_inter_memberInter_of_forall`, any list of such members; `isTransverse_inter_memberInter_drop`), is
-  a simple normal crossings divisor (`isSNCDivisor_drop`), and every member of `E` missing from it contains `N ∩
-  H_S`; so `(M, N ∩ H_S, E_S, 𝔞, d)` is well formed when `𝔞` is coherent (`isWellFormed_inter_memberInter_drop`, `0
-  < n`).
+* `card_filter_mem_geoStrictTransform_lt_along`: if near `π z` the centre contains `N ∩ H_S`, a
+  point `z` of the strict transform `N'` over `C` does not lie on all the `H_i'`, `i ∈ S`.  (For
+  `N = M` this is `BoundaryCount.card_filter_mem_geoStrictTransform_lt`; the hypothesis there is
+  `C ⊇ H_S` near `π z`, which fails along `N`, where `C = N ∩ H_S`.)
+* `boundaryCount_map_geoStrictTransform_lt_boundaryCount_along`: if near `x = π z` the centre
+  contains the trace on `N` of the intersection of the members through `x`, then `s'(z) < s(x)` at
+  every `z ∈ N'` over `C` (Step 1aa inside `N`); `boundaryCount_map_geoStrictTransform_lt_along`:
+  the global form, for `C = N ∩ H_S` met by no member outside `S`: `s'(z) < #S`.
+* Step 1a's restriction to `N ∩ H_S`: the list `E_S` of the members with index not in `S` is
+  transverse to `N ∩ H_S` (`isTransverse_inter_memberInter_of_forall`, any list of such members;
+  `isTransverse_inter_memberInter_drop`), is a simple normal crossings divisor
+  (`isSNCDivisor_drop`), and every member of `E` missing from it contains `N ∩ H_S`
+  (`inter_memberInter_subset_of_notMem_drop`, the hypothesis of
+  `CoefficientRestrictionDrop.coeff_restrict_withE_iff`); so `(M, N ∩ H_S, E_S, 𝔞, d)` is well
+  formed when `𝔞` is coherent (`isWellFormed_inter_memberInter_drop`, `0 < n`).
 
 Proof of the drop: in coordinates at `π z` adapted to `C ⊆ N` and `E`
 (`SimultaneousNormalCrossings.isAdaptedAt_of_hasNormalCrossings`: `C = ℂ^{k_C} × 0`,
@@ -56,6 +47,9 @@ coordinate is `ε ≠ 0` with `j ≥ k_C`.  Transversality of `E_S`: in the tran
 of `E` at a point of `N ∩ H_S`, `N ∩ H_S = L_{S₀ ∪ ⋃_{i ∈ S} T_i}`, and the hyperplane index of a
 member `j ∉ S` through the point is none of the `T_i`, `i ∈ S` (two members through a point that agree
 near it are the same member, `SimultaneousNormalCrossings.eq_of_eventually_mem_iff`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -65,7 +59,10 @@ universe u
 
 namespace Hironaka.BoundaryCountAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupStrictSubmanifold BlowupSNCTransform NormalCrossings SimultaneousNormalCrossings MarkedIdeals BoundaryCount NormalCrossingsComparison MemberInterAlong
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupStrictSubmanifold
+  BlowupSNCTransform NormalCrossings SimultaneousNormalCrossings MarkedIdeals BoundaryCount
+  NormalCrossingsComparison MemberInterAlong
 
 noncomputable section
 
@@ -157,6 +154,18 @@ theorem isSNCDivisor_drop {E : List (Set X)} (hE : IsSNCDivisor n E) (S : Finset
     (l := List.finRange E.length)).map E.get
   rwa [List.map_get_finRange] at h
 
+/-- **Every member of `E` missing from `E_S` contains `N ∩ H_S`** (it is a member of `S`). -/
+theorem inter_memberInter_subset_of_notMem_drop {N : Set X} {E : List (Set X)}
+    (S : Finset (Fin E.length)) :
+    ∀ H ∈ E, H ∉ ((List.finRange E.length).filter fun i => i ∉ S).map E.get →
+      N ∩ memberInter E S ⊆ H := by
+  intro H hH hH'
+  obtain ⟨i, rfl⟩ := List.mem_iff_get.mp hH
+  by_cases hi : i ∈ S
+  · exact fun y hy => hy.2 i hi
+  · exact absurd (List.mem_map.mpr
+      ⟨i, List.mem_filter.mpr ⟨List.mem_finRange i, by simpa using hi⟩, rfl⟩) hH'
+
 /-- **The restriction of a well-formed marked ideal to `N ∩ H_S`, with the divisor `E_S`, is well
 formed** (`0 < n`), for any coherent ideal `𝔟` and mark `μ`: Step 1a's
 `(M, N ∩ H_S, E_S, 𝓒_N(𝔞), μ_𝓒)` with the coefficient ideal along `N`. -/
@@ -182,6 +191,10 @@ variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
   [IsComplexManifold n Y] {C : Set X} {π : Y → X}
 
 open Classical in
+/-- **No point of `N'` over the centre lies on all the strict transforms of the members of `S`**,
+if near `π z` the centre contains `N ∩ H_S` (`C ⊆ N`, `E` simple normal crossings and transverse to
+`N`, `C` with normal crossings with `E`).  The curve `σ_j(W z + ε e_j)` of
+`BoundaryCount.card_filter_mem_geoStrictTransform_lt` stays in `N` because `z ∈ N'`. -/
 theorem card_filter_mem_geoStrictTransform_lt_along (hπ : IsBlowupAlong n C π) {N : Set X}
     (hCN : C ⊆ N) {E : List (Set X)} (hE : IsSNCDivisor n E) (hT : IsTransverse n N E)
     (hnc : HasNormalCrossings n C E) (S : Finset (Fin E.length)) {z : Y} (hz : π z ∈ C)
@@ -321,6 +334,28 @@ theorem boundaryCount_map_geoStrictTransform_lt_boundaryCount_along (hπ : IsBlo
   refine card_filter_mem_geoStrictTransform_lt_along hπ hCN hE hT hnc S hz hzN ?_
   filter_upwards [hC] with y hy hyN hyS
   exact hy hyN fun i hi => hyS i (by rw [hS, Finset.mem_filter]; exact ⟨Finset.mem_univ _, hi⟩)
+
+open Classical in
+/-- **Blowing up `N ∩ H_S` separates the members along `N`** (global form): if
+`C = N ∩ H_S` and no member outside `S` meets `C`, every point of `N'` over `C` lies on fewer than
+`#S` strict transforms of members. -/
+theorem boundaryCount_map_geoStrictTransform_lt_along (hπ : IsBlowupAlong n C π) {N : Set X}
+    {E : List (Set X)} (hE : IsSNCDivisor n E) (hT : IsTransverse n N E)
+    (S : Finset (Fin E.length)) (hC : C = N ∩ memberInter E S)
+    (hS : ∀ x ∈ C, ∀ i, x ∈ E.get i → i ∈ S) {z : Y} (hz : π z ∈ C)
+    (hzN : z ∈ geoStrictTransform π C N) :
+    boundaryCount (E.map (geoStrictTransform π C)) z < S.card := by
+  have hCN : C ⊆ N := by rw [hC]; exact inter_subset_left
+  have hnc : HasNormalCrossings n C E := by rw [hC]; exact hasNormalCrossings_inter_memberInter hT S
+  refine (boundaryCount_map_geoStrictTransform_lt_boundaryCount_along hπ hCN hE hT hnc hz hzN
+    (Eventually.of_forall fun y hyN hy => ?_)).trans_le ?_
+  · rw [hC]
+    have hzS : π z ∈ memberInter E S := by
+      have := hz; rw [hC] at this; exact this.2
+    exact ⟨hyN, fun i hi => hy i (hzS i hi)⟩
+  · refine Finset.card_le_card fun i hi => ?_
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hi
+    exact hS _ hz i hi
 
 end Blowup
 

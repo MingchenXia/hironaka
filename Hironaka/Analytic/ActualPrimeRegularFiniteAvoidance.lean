@@ -1,10 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ActualPrimeHypersurfacePureNeighbourhood
-
 
 set_option autoImplicit false
 
@@ -14,8 +8,6 @@ set_option autoImplicit false
 Complete natural statement and ENTIRE proof precede the import baseline.
 Density is produced from the original equation, not an input certificate.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter

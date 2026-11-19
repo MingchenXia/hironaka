@@ -1,42 +1,22 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.LocalGiraudTransform
 import Hironaka.MarkedIdeal.TangentDirectionAlong
 import Hironaka.Blowup.NestedFlattening
 import Hironaka.Invariant.MonomialPart
 import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
 import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupFunctionTransform
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Wlodarczyk's lemma on tangent directions along a submanifold
 
-Source: Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.7, Lemma `le:Gi` (Giraud) parts (2) and (3), applied on the
-submanifold `N` of a marked ideal (§2.1, the transform along a submanifold).
+Hironaka phase H2 (TN3): the along-`N` form of the local lemma on tangent directions
+(`LocalGiraudTransform`, blueprint `bcalc:giraud-local`), asked for by TN-CLASSICAL for the tower
+half of item (3) of `hir:along-calculus` (I-0977 C-0072; claimed C-0074).  Blueprint
+`bcalc:giraud-local-along`, `bcalc:tangent-generator-along` (chapter `blowup-calculus.tex`).
+Source: Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.7, Lemma `le:Gi` (Giraud) parts (2) and
+(3), applied on the submanifold `N` of a marked ideal (§2.1, the transform along a submanifold).
 
 Let `π` be the blowup along `C`, `N ⊇ C` a closed submanifold, `U` open, `u` holomorphic on `U`
 with multiplicity one along `N` at its zeros on `N` (some holomorphic field tangent to `N` has
@@ -50,21 +30,29 @@ transforms.
   of `N'` lies on `W'` iff `u'` vanishes there;
 * `exists_fieldDeriv_ne_zero_controlledTransform_along` (`le:Gi` (2) along `N`): at `z ∈ W'` some
   holomorphic field tangent to `N'` has `ξ(u') ≠ 0` -- `u'` has multiplicity one along `N'`;
-* `IsTangentDirectionAlong.giraud_hypotheses_along`: a tangent direction along `N`
-  (`TangentDirectionAlong.IsTangentDirectionAlong`) and a centre in the cosupport satisfy the hypotheses.
-* tools: `exists_fieldDeriv_ne_zero_of_vanishingIdeal_le` (if `A ⊆ B` are regular at `z` of dimensions `a < b` and
-  `𝓘_A ⊆ 𝓘_B + (f)` at `z`), `isInSpanAt_pullback_of_mem_vanishingIdeal_geoStrictTransform` (`𝒪(-D) 𝓘_{A'} ⊆ π^*
-  𝓘_A` for a set `A` whose trace on an open `V` is a closed submanifold of `V` containing `C ∩ V`: the strict ideal
-  theorem `BlowupStrictIdeal.pullback_vanishingIdeal_eq_mul` on the restricted blowup
+* `IsTangentDirectionAlong.giraud_hypotheses_along`: a tangent direction along `N` (TN23's
+  `TangentDirectionAlong.IsTangentDirectionAlong`) and a centre in the cosupport satisfy the
+  hypotheses.
+* tools: `exists_fieldDeriv_ne_zero_of_vanishingIdeal_le` (if `A ⊆ B` are regular at `z` of
+  dimensions `a < b` and `𝓘_A ⊆ 𝓘_B + (f)` at `z`, then `f` has a nonvanishing derivative along a
+  field tangent to `B` -- the along version of
+  `GeneratorMultiplicityOne.exists_chartDeriv_ne_zero_of_vanishingIdeal_eq_span`),
+  `isInSpanAt_pullback_of_mem_vanishingIdeal_geoStrictTransform` (`𝒪(-D) 𝓘_{A'} ⊆ π^* 𝓘_A` for a set
+  `A` whose trace on an open `V` is a closed submanifold of `V` containing `C ∩ V`: the strict
+  ideal theorem `BlowupStrictIdeal.pullback_vanishingIdeal_eq_mul` on the restricted blowup
   `BlowupRestrictOpen.isBlowupAlong_restrict`), `eventually_eq_zero_of_mem_geoStrictTransform`,
   `isInSpanAt_of_mul_isInSpanAt` (cancelling a local equation).
 
-Proof of the ideal identity: `𝓘_W = 𝓘_N + (u)` near `π z`
-(`TangentDirectionAlong.exists_vanishingIdeal_inter_zeroSet_mem_iff`); `𝒪(-D) 𝓘_{W'} ⊆ π^* 𝓘_W` (the strict ideal
-theorem for `W` on `V = U`); `π^* 𝓘_N = 𝒪(-D) 𝓘_{N'}` (for `N`); `u ∘ π = h u'`. So `h 𝓘_{W'} ⊆ h (𝓘_{N'} + (u'))`,
-and `h` cancels (it vanishes identically near no point). Conversely `𝓘_{N'} ⊆ 𝓘_{W'}` as `W' ⊆ N'`, and `u'`
-vanishes on `W'` by continuity. Then (3) evaluates generators at a point, and (2) is the tool above with `A = W'`
-(regular of dimension `k - 1`) and `B = N'` (dimension `k`).
+Proof of the ideal identity: `𝓘_W = 𝓘_N + (u)` near `π z` (TN23's
+`TangentDirectionAlong.exists_vanishingIdeal_inter_zeroSet_mem_iff`); `𝒪(-D) 𝓘_{W'} ⊆ π^* 𝓘_W` (the
+strict ideal theorem for `W` on `V = U`); `π^* 𝓘_N = 𝒪(-D) 𝓘_{N'}` (for `N`); `u ∘ π = h u'`.  So
+`h 𝓘_{W'} ⊆ h (𝓘_{N'} + (u'))`, and `h` cancels (it vanishes identically near no point).
+Conversely `𝓘_{N'} ⊆ 𝓘_{W'}` as `W' ⊆ N'`, and `u'` vanishes on `W'` by continuity.  Then (3)
+evaluates generators at a point, and (2) is the tool above with `A = W'` (regular of dimension
+`k - 1`) and `B = N'` (dimension `k`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -74,7 +62,11 @@ universe u
 
 namespace Hironaka.LocalGiraudTransformAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences DerivativeIdeal DerivativeIdealAlong DerivativeIdealAlongCoherent GiraudAlong BlowupFlatCoordinates BlowupStrictSubmanifold BlowupStrictIdeal BlowupFunctionTransform BlowupExceptionalDivisor BlowupRestrictOpen LocalGiraudTransform AnalyticSubsetOpens RelativePrincipalizationSpan TangentDirectionAlong
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  DerivativeIdeal DerivativeIdealAlong DerivativeIdealAlongCoherent GiraudAlong
+  BlowupFlatCoordinates BlowupStrictSubmanifold BlowupStrictIdeal BlowupFunctionTransform
+  BlowupExceptionalDivisor BlowupRestrictOpen LocalGiraudTransform AnalyticSubsetOpens
+  RelativePrincipalizationSpan TangentDirectionAlong
 
 noncomputable section
 
@@ -309,8 +301,9 @@ variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
   [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
   [IsComplexManifold n Y] {C : Set X} {π : Y → X}
 
-/-- **`N ∩ V(u) ∩ U` is a closed submanifold of `U`** when `u` (holomorphic on `U`) has multiplicity one along `N` at
-its zeros on `N` (`regularAtDim_inter_zeroSet` at each point). -/
+/-- **`N ∩ V(u) ∩ U` is a closed submanifold of `U`** when `u` (holomorphic on `U`) has
+multiplicity one along `N` at its zeros on `N` (TN23's `regularAtDim_inter_zeroSet` at each
+point). -/
 theorem isClosedSubmanifold_preimage_val_inter_zeroSet {N : Set X} (hN : IsClosedSubmanifold n N)
     (U : Opens X) {u : X → ℂ} (hu : ∀ x ∈ (U : Set X), HolomorphicAt n u x)
     (hu1 : ∀ x ∈ (U : Set X), x ∈ N → u x = 0 → ∃ (e : ComplexChart n X) (ξ : Fin n → X → ℂ),
@@ -352,7 +345,7 @@ theorem vanishingIdeal_geoStrictTransform_inter_zeroSet_mem_iff (hπ : IsBlowupA
     have h1 := isInSpanAt_pullback_of_mem_vanishingIdeal_geoStrictTransform hπ ⟨U, hU⟩
       (isClosedSubmanifold_preimage_val_inter_zeroSet hN ⟨U, hU⟩ hu hu1)
       (fun x hxC hxU => ⟨⟨hCN hxC, hCu x hxC hxU⟩, hxU⟩) hh hz hzU hg
-    -- `𝓘_W ⊆ 𝓘_N + (u)` at `π z`
+    -- `𝓘_W ⊆ 𝓘_N + (u)` at `π z` (TN23)
     obtain ⟨k, hkn, -, Φ, hΦsrc, -, hflat⟩ := hN.2 (π z) hzN
     obtain ⟨e, ξ, hξ, hne⟩ := hu1 (π z) hzU hzN hz0
     obtain ⟨V', -, hzV', -, hgenW⟩ :=
@@ -520,6 +513,23 @@ theorem exists_fieldDeriv_ne_zero_controlledTransform_along (hπ : IsBlowupAlong
   exact exists_fieldDeriv_ne_zero_of_vanishingIdeal_le (by omega : k - 1 < k) hW'reg hN'reg hWN hu'
     hu'0 fun g hg => (vanishingIdeal_geoStrictTransform_inter_zeroSet_mem_iff hπ hN hCN hh hU hu hu1
       hCu hz hzU hzN hz0 hu' heq g).mp hg
+
+/-- **A tangent direction along `N` satisfies the hypotheses**: for a tangent direction `u` of
+`(𝔞|_N, μ)` on `U` (`μ ≥ 1`, germs of `𝔞` holomorphic; TN23's `IsTangentDirectionAlong`) and a
+centre `C` in `cosupp(𝔞|_N, μ)`: `U` is open, `u` is holomorphic on `U` with multiplicity one along
+`N` at its zeros, and `C ∩ U ⊆ V(u)`. -/
+theorem giraud_hypotheses_of_isTangentDirectionAlong {M : Type*} [TopologicalSpace M]
+    [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M] {N : Set M} {𝔞 : GermIdeal n M}
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ) {U : Set M}
+    {u : M → ℂ} (hu : IsTangentDirectionAlong N 𝔞 μ U u) {C : Set M}
+    (hC : C ⊆ GermIdealOrder.cosupport n N 𝔞 μ) :
+    IsOpen U ∧ (∀ x ∈ U, HolomorphicAt n u x) ∧
+      (∀ x ∈ U, x ∈ N → u x = 0 → ∃ (e : ComplexChart n M) (ξ : Fin n → M → ℂ),
+        IsTangentField N e ξ x ∧ fieldDeriv e ξ u x ≠ 0) ∧
+      ∀ x ∈ C, x ∈ U → u x = 0 :=
+  ⟨hu.isOpen, fun x hx => holomorphicAt_of_mem_iterDerivIdealAlong h𝔞 (μ - 1) x u (hu.mem x hx),
+    fun x hx _ h0 => hu.multiplicity_one x hx h0,
+    fun _ hxC hxU => IsTangentDirectionAlong.cosupport_inter_subset h𝔞 hμ hu ⟨hC hxC, hxU⟩⟩
 
 end Giraud
 

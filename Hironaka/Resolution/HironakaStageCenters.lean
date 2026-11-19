@@ -1,15 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedBoundary
 import Hironaka.Resolution.HironakaAdmissibleCalculus
 import Hironaka.Analytic.HolomorphicLocalInverse
 import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.Analytic.AnalyticSubsetOpenMaps
-import Hironaka.Resolution.HironakaPureRegularDensity
-import Hironaka.Resolution.HironakaBlowupCompactPreimage
 
 set_option autoImplicit false
 set_option linter.unusedSectionVars false

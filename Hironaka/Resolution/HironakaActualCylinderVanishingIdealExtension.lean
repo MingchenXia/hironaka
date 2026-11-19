@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.HolGermSubExact
 import Hironaka.Resolution.HironakaActualCylinderRelativeHadamard
 import Hironaka.Analytic.AnalyticGermDecomposition
 import Hironaka.Resolution.HironakaRelativeNormalIdeal
@@ -76,7 +70,6 @@ private theorem inclusion_projection_eq_planeRetract (k t : ℕ) (z : ComplexMod
     have he : i=j.natAdd k := Fin.ext (by dsimp [j]; omega)
     rw [he,tangentInclusion_normal,planeRetract_apply,if_neg (by simp only [Fin.val_natAdd]; omega)]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Actual relative Hadamard gives the whole original ideal inclusion with self-multiples needed by Nakayama. -/
 theorem cylinder_vanishingIdeal_le_extension_sup_normal_mul (k t : ℕ) (W : Set (ComplexModel k)) :
     AnalyticGermDecomposition.vanishingIdeal (cylinderCarrier k t W)≤

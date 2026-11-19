@@ -1,40 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.MonomialBlowupAlong
 import Hironaka.Invariant.MonomialResolution
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.LocalGiraudTransform
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberPullback
-import Hironaka.Blowup.MonomialBlowup
-import Hironaka.Invariant.MonomialPart
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -42,8 +8,12 @@ set_option linter.unusedSectionVars false
 # Monomial ideals under the blowup of a centre with normal crossings, along a submanifold:
 # coordinates adapted to the strict transform
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2b of the proof of `pr:resol` and the transform of marked
-ideals along a submanifold, §2.1 (3)--(5); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`) §5.
+Hironaka phase H2 (TN3), the design node `hir:monomial-blowup` (`blueprint/src/hironaka.tex`) for
+`N ≠ M`, in the coordinate form TN-CLASSICAL asked for (I-0977 C-0067 / C-0068 / C-0069).
+Blueprint `bcalc:monomial-chart-adapted`, `bcalc:monomial-transform-along-coords` (chapter
+`blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2b of the proof
+of `pr:resol` and the transform of marked ideals along a submanifold, §2.1 (3)--(5);
+Bierstone--Milman 2008 (`bierstone-milman08-functoriality`) §5.
 
 Let `π : Y → X` be the blowup along `C`, `C ⊆ N`, `E` a divisor, and `z ∈ Y` over `C`.
 
@@ -67,12 +37,13 @@ Let `π : Y → X` be the blowup along `C`, `C ⊆ N`, `E` a divisor, and `z ∈
   `Res_N 𝔞 = Res_N (∏ Φ_{σ₀ i}^{a_i})`).
 * helper: `isInSpanOnAt_eq_congr` (a restricted principal relation depends only on the germ of
   the generator).
-* off the centre: `isInSpanOnAt_geoTransform_iff_pullback_of_notMem` (`Res_{N'} 𝔞' = Res_{N'} π^*𝔞` at `z` with `π z
-  ∉ C`) and `exists_snc_chart_geoTransform_along_of_notMem`: from centred flat coordinates `Φ` at `π z ∉ C` with `N
-  = {Φ_t = 0, t ≥ k}`, the members through `π z` the hyperplanes `{Φ_{σ₀ i} = 0}` (`σ₀ i < k`, `σ₀` injective on
-  them) and `Res_N 𝔞 = Res_N (∏ Φ_{σ₀ i}^{a_i})`, the same shape at `z` with `Θ = Φ ∘ π`
-  (`MonomialResolution.exists_chart_comp`): together with `exists_snc_chart_geoTransform_along` every point of `N'`
-  is covered.
+* off the centre (claim I-0977 C-0071): `isInSpanOnAt_geoTransform_iff_pullback_of_notMem`
+  (`Res_{N'} 𝔞' = Res_{N'} π^*𝔞` at `z` with `π z ∉ C`) and
+  `exists_snc_chart_geoTransform_along_of_notMem`: from centred flat coordinates `Φ` at `π z ∉ C`
+  with `N = {Φ_t = 0, t ≥ k}`, the members through `π z` the hyperplanes `{Φ_{σ₀ i} = 0}`
+  (`σ₀ i < k`, `σ₀` injective on them) and `Res_N 𝔞 = Res_N (∏ Φ_{σ₀ i}^{a_i})`, the same shape at
+  `z` with `Θ = Φ ∘ π` (TN-CLASSICAL's `MonomialResolution.exists_chart_comp`): together with
+  `exists_snc_chart_geoTransform_along` every point of `N'` is covered.
 
 Proof: the proof of `MonomialBlowup.exists_monomial_chart` run on the adapted coordinates of
 `IsAdaptedAt` instead of those of `C` and `E` alone, plus the description of `N'` in the monomial
@@ -81,6 +52,9 @@ recentring `Θ = W - W z` (`exists_recentred_coords`) as in `exists_snc_chart_ge
 generator from `MonomialBlowupAlong.isInSpanOnAt_geoTransform_iff_of_eq`.  The adapted coordinates
 at `π z` exist by `SimultaneousNormalCrossings.isAdaptedAt_of_hasNormalCrossings` (`C ⊆ N`, `E`
 SNC and transverse to `N`, `C` with normal crossings with `E`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -91,7 +65,22 @@ universe u
 namespace Hironaka.MonomialBlowupAlongChart
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupFlatCoordinates Hironaka.BlowupMonomialCharts Hironaka.BlowupLocalSurjectivity Hironaka.BlowupExceptionalDivisor Hironaka.BlowupStrictSubmanifold Hironaka.BlowupStrictIdeal Hironaka.BlowupSNCTransform Hironaka.NormalCrossings Hironaka.SimultaneousNormalCrossings Hironaka.MemberPullback Hironaka.MonomialPart Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.BlowupControlledTransform Hironaka.InvertibleIdealQuotient Hironaka.RelativePrincipalizationSpan Hironaka.MonomialBlowup Hironaka.MonomialBlowupAlong
+open Hironaka.BlowupFlatCoordinates
+  Hironaka.BlowupMonomialCharts
+  Hironaka.BlowupLocalSurjectivity
+  Hironaka.BlowupExceptionalDivisor
+  Hironaka.BlowupStrictSubmanifold
+  Hironaka.BlowupStrictIdeal
+  Hironaka.BlowupSNCTransform Hironaka.NormalCrossings
+  Hironaka.SimultaneousNormalCrossings
+  Hironaka.MemberPullback
+  Hironaka.MonomialPart Hironaka.GermIdealOrder
+  Hironaka.IdealWeightPowers
+  Hironaka.BlowupControlledTransform
+  Hironaka.InvertibleIdealQuotient
+  Hironaka.RelativePrincipalizationSpan
+  Hironaka.MonomialBlowup
+  Hironaka.MonomialBlowupAlong
 
 noncomputable section
 

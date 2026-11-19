@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.EmbeddedOriginalRegularPrefixExact
 import Hironaka.Resolution.HironakaOriginalCanonicalElementaryPrincipalization
 
 /-!
@@ -33,7 +27,7 @@ namespace Hironaka.HironakaOriginalStoppedPrefixSmoothComparison
 
 noncomputable section
 
-open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
   NormalCrossings RestrictEmptyTower DivisorExponentAlong CanonicalCentres
   HironakaAdmissibleSequence HironakaSmoothSubmersionOriginalCompactTerminal
@@ -43,7 +37,7 @@ open Hironaka Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaSmoothSubmersionRelativeGeometry HironakaSmoothSubmersionNormalCrossings
   EmbeddedFromResolution
 
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 variable {n m : ℕ} {X D : CMfd.{u} n} {Y E : CMfd.{u} m}
 

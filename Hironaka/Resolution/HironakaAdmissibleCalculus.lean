@@ -1,31 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Resolution.HironakaEmbeddedResolutionLocal
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Blowup.NormalCrossingsInvariance
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Resolution.StrictTransformComposition
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Calculus of admissible blowup sequences (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), (1.1)--(1.2) and Theorem 1.6 (admissible
-sequences, the accumulated exceptional divisor, the strict transform); Kollár 2007 (`kollar07-resolution`),
-"Principalization III" (the initial divisor is carried along by strict transforms).
+Blueprint `hir:admissible-calculus` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka library, a tool for embedded resolution of
+analytic sets whose components have different dimensions).  Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`),
+(1.1)--(1.2) and Theorem 1.6 (admissible sequences, the accumulated exceptional divisor, the strict transform); Kollár 2007
+(`kollar07-resolution`), "Principalization III" (the initial divisor is carried along by strict transforms).
 
 Let `f : Y → X` be an admissible blowup sequence of `(X, E₀)` with centres over a set `F`
 (`HironakaAdmissibleSequence.IsAdmissibleBlowupSequence`), with accumulated divisor `E`, the members of `E₀` being closed.
@@ -44,6 +28,9 @@ Let `f : Y → X` be an admissible blowup sequence of `(X, E₀)` with centres o
   `diff_regularLocus_strictTransform_subset`, `strictTransform_subset_closure_diff`): along any blowup sequence the strict
   transform of an analytic set is analytic, compact if the set is, and over the locus where `f` is an isomorphism it keeps the
   regular points of the set and their density.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaAdmissibleSequence` only; it does not import, even
+transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -99,6 +86,11 @@ theorem isCompact_strictTransform {Y : Type u} [TopologicalSpace Y] [ChartedSpac
     IsCompact (strictTransform n f A) :=
   ((isProperMap_of_isBlowupSequence hf).isCompact_preimage hA).of_isClosed_subset isClosed_closure
     (strictTransform_subset_preimage hf.contMDiff.continuous hA.isClosed)
+
+/-- The strict transform of a finite union is the union of the strict transforms. -/
+theorem strictTransform_union {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] (f : Y → X)
+    (A B : Set X) : strictTransform n f (A ∪ B) = strictTransform n f A ∪ strictTransform n f B := by
+  rw [strictTransform, strictTransform, strictTransform, preimage_union, union_sdiff_distrib, closure_union]
 
 /-- The strict transform of the empty set is empty. -/
 @[simp] theorem strictTransform_empty {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y] (f : Y → X) :
@@ -301,6 +293,17 @@ theorem IsAdmissibleBlowupSequence.biUnion_subset {Y : Type u} [TopologicalSpace
   · obtain ⟨H, hH, rfl⟩ := List.mem_map.mp h1
     exact Or.inl (mem_iUnion₂.mpr ⟨H, hH, (hT H (hE₀ H hH)).2.1 hzH'⟩)
   · exact Or.inr (hNF (mem_iUnion₂.mpr ⟨H', h1, hzH'⟩))
+
+/-- **The members of an accumulated divisor are closed** (members of `E₀` closed). -/
+theorem IsAdmissibleBlowupSequence.isClosed_mem {Y : Type u} [TopologicalSpace Y]
+    [ChartedSpace (ComplexModel n) Y] [IsComplexManifold n Y] {f : Y → X} {E : List (Set Y)}
+    (h : IsAdmissibleBlowupSequence n X E₀ F Y f E) (hE₀ : ∀ H ∈ E₀, IsClosed H) : ∀ H ∈ E, IsClosed H := by
+  obtain ⟨T, N, rfl, hT, hNcl, -, -⟩ := IsAdmissibleBlowupSequence.exists_decomposition h
+  intro H' hH'
+  rcases List.mem_append.mp hH' with h1 | h1
+  · obtain ⟨H, hH, rfl⟩ := List.mem_map.mp h1
+    exact (hT H (hE₀ H hH)).1
+  · exact hNcl H' h1
 
 /-- Adapted coordinates only constrain the members through the point: a family each of whose members through `x` is a member
 of an adapted family (with the same index set) is adapted. -/

@@ -1,49 +1,40 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Resolution invariants along canonical segments, invariant under empty prefixes
 
-* the properties (2) and (4)--(7) are required along **canonical segments** only, as in the sources (Włodarczyk
-  2005, Proposition `pr:resol` (1) and (4): the invariants live on the supports of the canonical resolution, and an
-  étale pullback of the canonical resolution is an *extension* of the canonical resolution), instead of along every
-  multiple test blow-up;
-* invariance under an empty step is stated for a centre `C` with `C = ∅` (restricted towers have centres `(↑) ⁻¹'
-  C`, empty only propositionally);
-* **re-basing along an empty prefix** (new field `emptyPrefix`): if the first part `T₀` of a canonical segment `T₀
-  T₁` has only empty centres, the invariant of `𝔪` along `T₀ T₁` is that of `𝔪_{T₀}` along `T₁`. Włodarczyk's
-  extensions insert isomorphisms anywhere in a resolution (`hiron.tex`, the definition of extensions and the étale
-  lemma in the proof of `pr:resol`); the inductive step compares points whose lower-dimensional invariants are
-  computed from different stages, across steps which are empty near them.
+Blueprint `hir:centre-function` (`blueprint/src/hironaka.tex`, Hironaka phase H4): the Lean form of the object the
+inductive construction of the canonical resolution of marked ideals produces, dimension by dimension.  This module
+**supersedes** the first form `ResolutionInvariantSpec.ResolutionInvariant` (kept unchanged, blueprint
+`hir:centre-function-v1`), following an independent review of 3 October 2026 (its findings F1, F2,
+F5):
 
-This structure enters the constant cone of the main theorem only through the base case
-`ResolutionInvariantSeq.ResolutionInvariant.ofDimZero` (`ofExt` of `ResolutionInvariant.ofDimZero` here). Results
-stated for it that never use `locallyFinite` reach the route through the kernel-checked transport of
-`ExtSeqTransport` (`StepOneSeq`).
+* (F2) the properties (2) and (4)--(7) are required along **canonical segments** only, as in the sources
+  (Włodarczyk 2005, Proposition `pr:resol` (1) and (4): the invariants live on the supports of the canonical resolution,
+  and an étale pullback of the canonical resolution is an *extension* of the canonical resolution), instead of along
+  every multiple test blow-up;
+* (F5) invariance under an empty step is stated for a centre `C` with `C = ∅` (restricted towers have centres
+  `(↑) ⁻¹' C`, empty only propositionally);
+* (F1) **re-basing along an empty prefix** (new field `emptyPrefix`): if the first part `T₀` of a canonical segment
+  `T₀ T₁` has only empty centres, the invariant of `𝔪` along `T₀ T₁` is that of `𝔪_{T₀}` along `T₁`.  Włodarczyk's
+  extensions insert isomorphisms anywhere in a resolution (`hiron.tex`, the definition of extensions and the étale
+  lemma in the proof of `pr:resol`); the inductive step compares points whose lower-dimensional invariants are computed
+  from different stages, across steps which are empty near them.  The review found that the first form's
+  eight properties do not imply this.
+
+**Itself superseded on the route, kept**: the author's decision of 3 October 2026 replaced property (8)
+(`locallyFinite`, one bound for all canonical segments) by its form along growing sequences,
+`ResolutionInvariantSeq.ResolutionInvariant`: the invariant the route builds (`CanonicalCentres.canonicalInvariant`) and uses
+(`HironakaFromSeqInvariant`, the in-place proofs of the two Hironaka statements, `CanonicalResolution`).  This structure enters the
+constant cone of the main theorem only through the base case `ResolutionInvariantSeq.ResolutionInvariant.ofDimZero` (`ofExt` of
+`ResolutionInvariant.ofDimZero` here).  Results stated for it that never use `locallyFinite` reach the route through the
+kernel-checked transport of `ExtSeqTransport` (`StepOneSeq`); the driver `exists_isGeoResolution_isCanonicalSegment` /
+`exists_isGeoResolution_isCanonical`, which uses `locallyFinite`, is superseded by
+`ResolutionInvariantSeq.exists_isGeoResolution_isCanonicalSegment` / `exists_isGeoResolution_isCanonical`
+(`hir:invariant-driver-seq`) and lies outside that cone.
 
 The domain `ResolutionInvariantSpec.IsInvDomain`, canonical segments `ResolutionInvariantSpec.IsCanonical` and the count
 `ResolutionInvariantSpec.countCentresMeeting` are unchanged.
@@ -55,12 +46,15 @@ The domain `ResolutionInvariantSpec.IsInvDomain`, canonical segments `Resolution
   `restrictOpen`, `towerIso`, `representative`, `locallyFinite`);
 * `ResolutionInvariant.ofDimZero`: the base case -- every constant function is one in dimension `≤ 0`;
 * `isAdmissibleCentre_maxLocus`, `isGeoTestTower_of_isCanonical`, `isInvDomain_of_isCanonical`,
-  `exists_isGeoResolution_isCanonicalSegment`: the driver (`hir:invariant-driver`) for the new structure -- over a
-  compact base every marked ideal of the domain is resolved by a canonical segment;
+  `exists_isGeoResolution_isCanonicalSegment`, `exists_isGeoResolution_isCanonical`: the driver (`hir:invariant-driver`)
+  for the new structure -- over a compact base every marked ideal of the domain is resolved by a canonical segment;
 * `isCanonical_restrict`, `isCanonical_of_isTowerIso`: canonical segments restrict to open sets and correspond along
   isomorphisms of towers (`hir:canonical-segments`);
 * `maxLocus_congr`, `isCanonical_append_iff`: **re-basing canonical segments** -- after an empty prefix `T₀`, `T₀ T₁` is a
   canonical segment of `𝔪` iff `T₁` is one of `𝔪_{T₀}`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -71,10 +65,18 @@ universe u v
 namespace Hironaka.ResolutionInvariantExt
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism.MarkedIdeal Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantOrder Hironaka.ResolutionDriver
-open Hironaka.ResolutionInvariantSpec (DimLE IsInvDomain IsCanonical countCentresMeeting cosupp_geoTransformAlong_eq_empty_of_dimLE_zero countCentresMeeting_eq_zero_of_dimLE_zero)
-open Hironaka.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top maxLocus_eq_level interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment)
-open Hironaka.ResolutionInvariantSegments (maxLocus_preimage maxLocus_preimage_of_surjective cosupp_geoTransformAlong_restrict)
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealBiholomorphism.MarkedIdeal
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism
+  Hironaka.ResolutionInvariantOrder Hironaka.ResolutionDriver
+open Hironaka.ResolutionInvariantSpec (DimLE IsInvDomain IsCanonical countCentresMeeting
+  cosupp_geoTransformAlong_eq_empty_of_dimLE_zero countCentresMeeting_eq_zero_of_dimLE_zero)
+open Hironaka.ResolutionInvariantDriver (isAdmissibleCentre_of_pullback_val_top
+  maxLocus_eq_level interior_maxLocus_eq_empty isCanonical_of_isCanonicalSegment countCentresMeeting_univ_eq_length)
+open Hironaka.ResolutionInvariantSegments (maxLocus_preimage maxLocus_preimage_of_surjective
+  cosupp_geoTransformAlong_restrict)
 
 noncomputable section
 
@@ -277,6 +279,34 @@ theorem isInvDomain_of_isCanonical (R : ResolutionInvariant.{u, v} n k Λ) {𝔪
     (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hcan : IsCanonical 𝔪 (R.inv 𝔪) T) :
     IsInvDomain k (geoTransformAlong 𝔪 T) :=
   InvDomainTowerAlong.isInvDomain_geoTransformAlong h T (isGeoTestTower_of_isCanonical R h T hcan)
+
+/-- **A resolution invariant resolves every marked ideal of its domain over a compact base, by a canonical segment**
+(`ResolutionDriver.exists_isGeoResolution_of_bounded_invariant` with (1), (2) and (8) for `K = X`).
+Superseded on the route by `ResolutionInvariantSeq.exists_isGeoResolution_isCanonicalSegment`, kept. -/
+theorem exists_isGeoResolution_isCanonicalSegment [CompactSpace X] (R : ResolutionInvariant.{u, v} n k Λ)
+    {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonicalSegment 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
+  obtain ⟨m, hm⟩ := R.locallyFinite 𝔪 h univ isCompact_univ
+  refine exists_isGeoResolution_of_bounded_invariant 𝔪 (R.inv 𝔪) ?_ ?_ ?_ m ?_
+  · intro Y T _ hT
+    have hwf := (InvDomainTowerAlong.isInvDomain_geoTransformAlong h T hT).isWellFormed
+    exact GiraudAlong.isClosed_cosupport_along hwf.isCoherent hwf.isClosedSubmanifold_N _
+  · intro Y T hcan _
+    exact R.usc 𝔪 h T (isCanonical_of_isCanonicalSegment _ T hcan)
+  · intro Y T hcan hT _
+    exact ⟨isAdmissibleCentre_maxLocus R h T (isCanonical_of_isCanonicalSegment _ T hcan) hT,
+      interior_maxLocus_eq_empty h T hT _⟩
+  · intro Y T hcan _
+    rw [← countCentresMeeting_univ_eq_length (𝔪 := 𝔪) (R.inv 𝔪) T hcan]
+    exact hm T (isCanonical_of_isCanonicalSegment _ T hcan)
+
+/-- The same, with the resolution a canonical segment in the sense of `hir:centre-function`.
+Superseded on the route by `ResolutionInvariantSeq.exists_isGeoResolution_isCanonical`, kept. -/
+theorem exists_isGeoResolution_isCanonical [CompactSpace X] (R : ResolutionInvariant.{u, v} n k Λ)
+    {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) :
+    ∃ (Y : CMfd.{u} n) (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T ∧ IsGeoResolution 𝔪 T := by
+  obtain ⟨Y, T, hcan, hres⟩ := exists_isGeoResolution_isCanonicalSegment R h
+  exact ⟨Y, T, isCanonical_of_isCanonicalSegment _ T hcan, hres⟩
 
 end Driver
 

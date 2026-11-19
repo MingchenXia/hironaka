@@ -1,50 +1,24 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.LocalGiraudTransformAlong
 import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
 import Hironaka.MarkedIdeal.DerivativeIdealAlongTransform
 import Hironaka.MarkedIdeal.MaximalContactTower
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupDerivativeIdeal
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFunctionTransform
-import Hironaka.Blowup.BlowupStrictIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Hypersurfaces of maximal contact inside a submanifold along multiple test blow-ups
 
-Source: Włodarczyk 2005, §2.7, Lemma `le:Giraud` (from Lemma `le:Gi`), here along a closed submanifold `N` as in
-Bierstone--Milman 2008, §3: if `u` is a tangent direction of `(𝔞|_N, μ)` on `U`, then along every multiple test
-blow-up of `(M, N, E, 𝔞, μ)` the cosupports of the transforms lie in the strict transforms of `N ∩ V(u) ∩ U`.
+Blueprint `hir:giraud-tower-along` (`blueprint/src/hironaka.tex`, Hironaka phase H4; the tower half of item (3) of
+`hir:along-calculus`).  Source: Włodarczyk 2005, §2.7, Lemma `le:Giraud` (from Lemma `le:Gi`), here along a closed
+submanifold `N` as in Bierstone--Milman 2008, §3: if `u` is a tangent direction of `(𝔞|_N, μ)` on `U`, then along every
+multiple test blow-up of `(M, N, E, 𝔞, μ)` the cosupports of the transforms lie in the strict transforms of `N ∩ V(u) ∩ U`.
 
-Built on `hir:along-transform` (`DerivativeIdealAlongTransform.restrictLe_geoTransform_derivMarkedAlong`: the
-transform of `𝓓_N^{μ-1}(𝔪)` lies, on `N'`, in `𝓓_{N'}^{μ-1}(𝔪')`), along-`N'` local Giraud lemma
-(`LocalGiraudTransformAlong`) and tower inclusions along `N` (`HomogenizedIdealAlongTower.inclusions_tower_along`).
+Built on TN-CLASSICAL's `hir:along-transform` (`DerivativeIdealAlongTransform.restrictLe_geoTransform_derivMarkedAlong`:
+the transform of `𝓓_N^{μ-1}(𝔪)` lies, on `N'`, in `𝓓_{N'}^{μ-1}(𝔪')`), TN3's along-`N'` local Giraud lemma
+(`LocalGiraudTransformAlong`, c400c5a1: the controlled transform `u'` of `u` cuts out on `N'` the strict transform of
+`N ∩ V(u) ∩ U` and has multiplicity one along `N'` there) and TN23's tower inclusions along `N`
+(`HomogenizedIdealAlongTower.inclusions_tower_along`, c4ed2baa: `N_T` is a closed submanifold and `𝔞_T` is coherent).
 
 * `apply_eq_zero_of_isInSpanOnAt`: a combination on `W` of germs vanishing at `x ∈ W` vanishes at `x`.
 * `strictAlong_subset_N`: strict transforms of subsets of `N` along `T` lie in `N_T`.
@@ -57,6 +31,9 @@ transform of `𝓓_N^{μ-1}(𝔪)` lies, on `N'`, in `𝓓_{N'}^{μ-1}(𝔪')`),
 
 The tangent direction of the transform is only controlled on `N_T` (agreement on `N_T` with germs of the derivative ideal
 along `N_T`, multiplicity one at its zeros on `N_T`), which is all that the next step and the cosupport need.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -67,7 +44,15 @@ universe u
 namespace Hironaka.MaximalContactAlongTower
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.DerivativeIdealAlong Hironaka.TangentDirectionAlong Hironaka.HomogenizedIdealAlong Hironaka.RestrictedIdealWeight Hironaka.BlowupFunctionTransform Hironaka.BlowupStrictSubmanifold Hironaka.BlowupExceptionalDivisor Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.HomogenizedGlueingTower Hironaka.RestrictedIdealExtension Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient Hironaka.GiraudAlong
+open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers
+  Hironaka.DerivativeIdealAlong Hironaka.TangentDirectionAlong
+  Hironaka.HomogenizedIdealAlong Hironaka.RestrictedIdealWeight
+  Hironaka.BlowupFunctionTransform Hironaka.BlowupStrictSubmanifold
+  Hironaka.BlowupExceptionalDivisor Hironaka.BlowupTowers
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.HomogenizedGlueingTower Hironaka.RestrictedIdealExtension
+  Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient
+  Hironaka.GiraudAlong
 
 noncomputable section
 
@@ -198,12 +183,12 @@ theorem exists_contact_along :
           ring
         exact DerivativeIdealAlongTransform.restrictLe_geoTransform_derivMarkedAlong (geoTransformAlong 𝔪 T) hNT
           hcoh hC hπ (by rw [hd]; omega) x hxN w' hmem
-      · -- Multiplicity one along `N'` at the zeros (along-`N'` local Giraud, (ii))
+      · -- multiplicity one along `N'` at the zeros (TN3's along-`N'` local Giraud, (ii))
         intro x hx hxN h0
         obtain ⟨⟨hxh, hxO⟩, hw'x, heqx, hiff⟩ := hO'sub hx
         exact LocalGiraudTransformAlong.exists_fieldDeriv_ne_zero_controlledTransform_along hπ hNT hCN hh hOo
           hwhol hw1 hCw hxh hxO hw'x heqx ((hiff hxN).mpr h0)
-      · -- The zero set on `N'` ((i), and locality of strict transforms over `O`)
+      · -- the zero set on `N'` (TN3's (i), and locality of strict transforms over `O`)
         intro y hy hyN
         obtain ⟨⟨-, hyO⟩, -, -, hiff⟩ := hO'sub hy
         rw [← hiff hyN, strictAlong_step]

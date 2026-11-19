@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualStandardNormalBases
 import Hironaka.Resolution.HironakaActualRelativeFormalQuotients
 import Hironaka.Resolution.HironakaActualReducedNormalSupport
@@ -45,7 +40,7 @@ local instance (q : ℕ) : Fintype (normalExponentIndex t q) := normalExponentFi
 local instance : Algebra (HolGerm (ComplexModel d)) (HolGerm (ComplexModel (d+t))) := tangentAlgebra d t
 local instance : Algebra (HolGerm (ComplexModel d)) (MvPowerSeries (Fin d) ℂ) :=
   (actualUnshiftedTaylorAlgHom d).toRingHom.toAlgebra
-local instance instAlgebraMvPowerSeriesFinComplexHAddNat_transcendentalNakamaye : Algebra (MvPowerSeries (Fin d) ℂ) (MvPowerSeries (Fin (d+t)) ℂ) :=
+local instance : Algebra (MvPowerSeries (Fin d) ℂ) (MvPowerSeries (Fin (d+t)) ℂ) :=
   (MvPowerSeries.rename (Fin.castAdd t : Fin d → Fin (d+t))).toRingHom.toAlgebra
 
 theorem exists_formalNormalStandardBasis (I : Ideal (HolGerm (ComplexModel (d+t)))) (q : ℕ)

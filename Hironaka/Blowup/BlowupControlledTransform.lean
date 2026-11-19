@@ -1,29 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLeCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The controlled transform of a marked ideal under a blowup
 
-Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1 condition (3) of a resolution and §2.2 ("Transforms of
-marked ideals and controlled transforms of functions", including the lemma `𝓘 ⊆ 𝓘_C^μ`, `σ^*𝓘 ⊆ 𝓘_D^μ` that makes
-the transform well defined); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2 (`𝓘' = 𝓘_{σ⁻¹C}^{-d}
-σ^*𝓘`).
+Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1 condition (3) of a resolution and §2.2
+("Transforms of marked ideals and controlled transforms of functions", including the lemma
+`𝓘 ⊆ 𝓘_C^μ`, `σ^*𝓘 ⊆ 𝓘_D^μ` that makes the transform well defined); Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`), §2 (`𝓘' = 𝓘_{σ⁻¹C}^{-d} σ^*𝓘`); blueprint
+`bcalc:controlled-transform` (chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup along `C` with exceptional divisor `D`
 (`BlowupExceptionalDivisor.exceptionalDivisor`) and let `𝔞` be a coherent ideal with
@@ -35,16 +22,23 @@ Let `π : Y → X` be the blowup along `C` with exceptional divisor `D`
 defined here as the colon ideal `(π^*𝔞 : 𝓘_D^μ)` (`InvertibleIdealQuotient.colon`), which needs
 no hypothesis; the hypothesis `𝔞 ⊆ 𝓘_C^μ` is what makes it the quotient.
 
-In the sources the hypothesis is `C ⊆ supp(𝔞, μ) = {x: ord_x 𝔞 ≥ μ}`; that `C ⊆ supp(𝔞, μ)` gives `𝔞 ⊆ 𝓘_C^μ` for a
-smooth `C` is Wlodarczyk's lemma in §2.2 (a Hadamard-type statement about orders of germs), which belongs to the
-local algebra of orders and is NOT used here: every statement below takes `𝔞 ⊆ 𝓘_C^μ` directly.
+In the sources the hypothesis is `C ⊆ supp(𝔞, μ) = {x : ord_x 𝔞 ≥ μ}`; that `C ⊆ supp(𝔞, μ)`
+gives `𝔞 ⊆ 𝓘_C^μ` for a smooth `C` is Wlodarczyk's lemma in §2.2 (a Hadamard-type statement
+about orders of germs), which belongs to the local algebra of orders (H1 of the Hironaka plan)
+and is NOT used here: every statement below takes `𝔞 ⊆ 𝓘_C^μ` directly.
 
 * `controlledTransform hπ 𝔞 μ` — the colon ideal `(π^*𝔞 : 𝓘_D^μ)`;
 * `pullback_le_idealPow_exceptionalDivisor` — `𝔞 ⊆ 𝓘_C^μ ⟹ π^*𝔞 ⊆ 𝒪_Y(-μD)`;
 * `pullback_eq_mul_controlledTransform` — `π^*𝔞 = 𝒪_Y(-μD) · σ^c(𝔞, μ)`;
 * `isCoherent_controlledTransform`;
+* `eq_controlledTransform_of_eq_mul` — uniqueness: any coherent `𝔠` with
+  `π^*𝔞 = 𝒪_Y(-μD) · 𝔠` is the controlled transform (from `colon_mul_eq`, cancellation of an
+  invertible ideal);
+* `controlledTransform_zero` — `σ^c(𝔞, 0) = π^*𝔞`;
 * the ideal algebra used along sequences of blowups: `pullback_id`, `idealPow_unitIdeal`,
   `unitIdeal_mul`, `mul_mul_mul_comm`, `idealPow_mul` (`(𝔞𝔟)^μ = 𝔞^μ 𝔟^μ`).
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter
@@ -54,9 +48,57 @@ universe u
 
 namespace Hironaka.BlowupControlledTransform
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealTotalTransform GermIdealPullbackCalculus IdealWeightPowers InvertibleIdealQuotient RelativePrincipalizationSpan BlowupExceptionalDivisor
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  GermIdealTotalTransform GermIdealPullbackCalculus IdealWeightPowers InvertibleIdealQuotient
+  RelativePrincipalizationSpan BlowupExceptionalDivisor
 
 noncomputable section
+
+/-! ### Cancellation of an invertible ideal -/
+
+section Cancel
+
+variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
+  [IsComplexManifold n M]
+
+/-- **Cancellation of an invertible ideal**: `(𝔩 𝔠 : 𝔩) = 𝔠` for `𝔩` invertible and `𝔠`
+coherent. -/
+theorem colon_mul_eq {𝔩 𝔠 : GermIdeal n M} (h𝔩 : 𝔩.IsInvertible) (h𝔠 : 𝔠.IsCoherent) :
+    colon (𝔩.mul 𝔠) 𝔩 = 𝔠 := by
+  refine GermIdeal.ext (funext fun x => funext fun f => propext ⟨fun hf => ?_, fun hf => ?_⟩)
+  · obtain ⟨hfhol, hfmul⟩ := mem_colon_iff.mp hf
+    obtain ⟨U, hU, hxU, h₀, hh₀d, hnon, hgen⟩ := h𝔩 x
+    have hh₀ : HolomorphicAt n h₀ x := holomorphicAt_of_mdifferentiableOn hU hh₀d hxU
+    have hh₀mem : 𝔩.mem x h₀ := (hgen x hxU h₀).mpr (isInSpanAt_self rfl hh₀)
+    obtain ⟨-, K, u, c, hu, hc, husum⟩ := mem_mul_iff.mp (hfmul h₀ hh₀mem)
+    choose p q hp hq hpq using hu
+    choose e he hee using fun j => (isInSpanAt_eq_iff.mp ((hgen x hxU (p j)).mp (hp j))).2
+    have hqhol : ∀ j, HolomorphicAt n (q j) x :=
+      fun j => GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 (hq j)
+    have hFhol : HolomorphicAt n (fun y => ∑ j, (c j y * e j y) * q j y) x :=
+      HolomorphicAt.sum _ fun j _ => ((hc j).mul (he j)).mul (hqhol j)
+    have hfeq : f =ᶠ[𝓝 x] fun y => ∑ j, (c j y * e j y) * q j y := by
+      refine eventuallyEq_of_mul_eventuallyEq hU hnon hxU hfhol hFhol ?_
+      filter_upwards [husum, eventually_all.mpr hee] with y hy hy'
+      rw [hy, Finset.mul_sum]
+      refine Finset.sum_congr rfl fun j _ => ?_
+      rw [hpq j]
+      show c j y * (p j y * q j y) = h₀ y * (c j y * e j y * q j y)
+      rw [hy' j]
+      ring
+    exact mem_of_isInSpanAt_mem h𝔠
+      ⟨hfhol, K, q, fun j y => c j y * e j y, hq, fun j => (hc j).mul (he j), hfeq⟩
+  · refine mem_colon_iff.mpr ⟨GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 hf, fun g hg => ?_⟩
+    have hghol : HolomorphicAt n g x := GermIdeal.IsInvertible.holomorphicAt_mem h𝔩 hg
+    exact mem_mul_of_mem_mem hg hf (hghol.mul (GermIdeal.IsCoherent.holomorphicAt_mem h𝔠 hf))
+
+/-- The colon ideal by the unit ideal is the ideal itself, for a coherent ideal. -/
+theorem colon_unitIdeal {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) :
+    colon 𝔞 (unitIdeal n M) = 𝔞 := by
+  have h := colon_mul_eq (isInvertible_unitIdeal (n := n) (M := M)) h𝔞
+  rwa [RestrictLeCalculus.mul_comm', RestrictLeCalculus.mul_unitIdeal h𝔞] at h
+
+end Cancel
 
 /-! ### Ideal algebra for powers and products -/
 
@@ -154,6 +196,20 @@ theorem isCoherent_controlledTransform (hπ : IsBlowupAlong n C π)
   isCoherent_colon (isCoherent_pullback hπ.contMDiff h𝔞)
     (isInvertible_idealPow_exceptionalDivisor hπ μ)
     (pullback_le_idealPow_exceptionalDivisor hπ hle)
+
+/-- **Uniqueness of the controlled transform**: a coherent `𝔠` with `π^*𝔞 = 𝒪_Y(-μD) · 𝔠` is the
+controlled transform (Wlodarczyk: "the controlled transform is well defined"). -/
+theorem eq_controlledTransform_of_eq_mul (hπ : IsBlowupAlong n C π)
+    {𝔞 : GermIdeal n X} {μ : ℕ} {𝔠 : GermIdeal n Y} (h𝔠 : 𝔠.IsCoherent)
+    (heq : GermIdeal.pullback (m := n) π 𝔞 = (idealPow (exceptionalDivisor hπ).ideal μ).mul 𝔠) :
+    𝔠 = controlledTransform hπ 𝔞 μ := by
+  rw [controlledTransform, heq, colon_mul_eq (isInvertible_idealPow_exceptionalDivisor hπ μ) h𝔠]
+
+/-- With the mark `μ = 0` the controlled transform is the total transform `π^*𝔞`. -/
+theorem controlledTransform_zero (hπ : IsBlowupAlong n C π) {𝔞 : GermIdeal n X}
+    (h𝔞 : 𝔞.IsCoherent) :
+    controlledTransform hπ 𝔞 0 = GermIdeal.pullback (m := n) π 𝔞 := by
+  rw [controlledTransform, idealPow_zero, colon_unitIdeal (isCoherent_pullback hπ.contMDiff h𝔞)]
 
 end Controlled
 

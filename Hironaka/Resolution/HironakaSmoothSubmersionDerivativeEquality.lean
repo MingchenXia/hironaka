@@ -3,11 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionJacobian
 set_option autoImplicit false
 open Set Filter
@@ -16,8 +11,6 @@ namespace Hironaka.HironakaSmoothSubmersionDerivativeEquality
 open Hironaka.HolomorphicIdealSheaves
 open DerivativeIdeal GermIdealOrder OrderInvariance InvertibleIdealQuotient HadamardBridge
 open HironakaSmoothPullbackDerivatives HironakaSmoothSubmersionJacobian
-open Hironaka
-
 noncomputable section
 variable {n m : ℕ} {X Y : Type*} [TopologicalSpace X]
  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]

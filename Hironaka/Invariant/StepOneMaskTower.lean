@@ -1,45 +1,25 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.CodimOnePartTowerAlong
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Points over a mask of Step 1 keep the regime along the tail
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1a ("by the maximality condition
-... the set `supp(J̄_i) ∩ H^{s_i}_{α' i}` is either disjoint from `H^{s_{j_1}}_{α i}` or contained in it") and Step
-1b ("for any tangent direction `u`, the restriction of `(X_i)_{p ≤ i ≤ m}` to `(V(u)_i)` is an extension of the
-canonical resolution").
+Blueprint `hir:step-one-mask-tower` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1a ("by the maximality condition ... the
+set `supp(J̄_i) ∩ H^{s_i}_{α' i}` is either disjoint from `H^{s_{j_1}}_{α i}` or contained in it") and Step 1b ("for any
+tangent direction `u`, the restriction of `(X_i)_{p ≤ i ≤ m}` to `(V(u)_i)` is an extension of the canonical resolution").
 
-The value of Step 1 at a point is computed from the stage `T₀` at which it entered its regime, on a mask `W` around
-its image there (`StepOneValue`). Along a multiple test blow-up `T₀ T₁` of `J̄`, a point `z` of the last stage lying
-over the mask `W` of a point `y₀` of level `s` at `T₀`, and of level `s` itself, keeps that regime at every stage of
-`T₁`: over `W` the level is at most `s` (the original members missing `y₀` miss `W`, and the level does not increase
-along the tower), and no point over `W` of level `s` is special (along a multiple test blow-up the special points of
-level `s` lie over the closure of those at `T₀`, resp. over the codimension-one part at `T₀` --
-`MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_subset` and
-`CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_subset` -- which the mask misses). Hence **its run is at
-least the length of `T₁`: it entered the regime at `T₀` or before.** This is the first half of the comparison of
-nearby points in the Step 1 value function.
+The value of Step 1 at a point is computed from the stage `T₀` at which it entered its regime, on a mask `W` around its image
+there (`StepOneValue`).  Along a multiple test blow-up `T₀ T₁` of `J̄`, a point `z` of the last stage lying over the mask `W`
+of a point `y₀` of level `s` at `T₀`, and of level `s` itself, keeps that regime at every stage of `T₁`: over `W` the level is
+at most `s` (the original members missing `y₀` miss `W`, and the level does not increase along the tower), and no point over
+`W` of level `s` is special (along a multiple test blow-up the special points of level `s` lie over the closure of those at
+`T₀`, resp. over the codimension-one part at `T₀` -- TN3's `MemberInterLocusAlong.memberInterLocus_level_geoTransformAlong_subset`
+and `CodimOnePartTowerAlong.codimOnePartAlong_geoTransformAlong_subset` -- which the mask misses).  Hence **its run is at
+least the length of `T₁`: it entered the regime at `T₀` or before.**  This is the first half of the comparison of nearby
+points in the Step 1 value function.
 
 ## Main results
 
@@ -49,6 +29,9 @@ nearby points in the Step 1 value function.
 * `le_regimeRun_append`: a generic criterion for a run to cover a tail;
 * `stepRegime_and_le_regimeRun_of_mem_lowerMask`: **a point over the mask, of the level of the mask, is in the regime and its
   run covers the tail.**
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -59,7 +42,12 @@ universe u v
 namespace Hironaka.StepOneMaskTower
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.HomogenizedIdealAlong Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong Hironaka.MarkedIdealRestrictOpen
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.HomogenizedIdealAlong Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong
+  Hironaka.MemberInterLocusAlong Hironaka.MarkedIdealRestrictOpen
 open Hironaka.HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
@@ -146,8 +134,8 @@ section Special
 variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X) (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d)
 
 include h𝔍 in
-/-- **Over the mask of Step 1ab no point of the level of `y₀` is special**: the special points of that level lie over
-the closure of those at `T₀`, and the mask is an open set missing those. -/
+/-- **Over the mask of Step 1ab no point of the level of `y₀` is special**: the special points of that level lie over the
+closure of those at `T₀` (TN3), and the mask is an open set missing those. -/
 theorem not_isSpecial_of_mem_maskA {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y)
     (hT : IsGeoTestTower (barMarked 𝔍) (T₀.append T₁)) {y₀ : Y₀} (hl : 1 ≤ level 𝔍 T₀ y₀) {z : Y}
     (hz : T₁.proj z ∈ maskA 𝔍 T₀ y₀) (hlz : level 𝔍 (T₀.append T₁) z = level 𝔍 T₀ y₀) :
@@ -172,8 +160,8 @@ theorem not_isSpecial_of_mem_maskA {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y
     exact (interior_subset hwW).2 ⟨hwL.2, Or.inr ⟨hl.trans_eq hwL.2.symm, hwL.1⟩⟩
 
 include h𝔍 hd in
-/-- **Over the mask of Step 1bb no point is special**: along a multiple test blow-up the codimension-one part lies over
-the codimension-one part at `T₀` (maximal order), which the mask misses. -/
+/-- **Over the mask of Step 1bb no point is special**: along a multiple test blow-up the codimension-one part lies over the
+codimension-one part at `T₀` (TN3; maximal order), which the mask misses. -/
 theorem not_isSpecial_of_mem_maskB (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {Y₀ Y : CMfd.{u} n}
     (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y) (hT : IsGeoTestTower (barMarked 𝔍) (T₀.append T₁)) {y₀ : Y₀}
     {z : Y} (hz : T₁.proj z ∈ maskB 𝔍 T₀ y₀) : ¬ IsSpecial 𝔍 (T₀.append T₁) z := by

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPointUnitCoordinateChange
 import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
 
@@ -261,7 +256,6 @@ theorem actualNormalUnitForward_dehomogenization (A : Set (Fin n)) (e : Fin n) (
       · simp [hi,hiA,actualNormalUnitBasePoint_apply,actualNormalUnitForward_apply,actualCoordinateWeight]
   rw [hc,weightedHomogeneous_aeval_scaled _ P d hP]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The same finite weighted dictionary holds in the entire original germ algebra, with true inverse unit. -/
 theorem actualNormalUnitGermEquiv_dehomogenization (A : Set (Fin n)) (e : Fin n) (he : e ∈ A)
     (b : Fin n → ℂ) (P : MvPolynomial (Fin n) ℂ) (d : ℕ)

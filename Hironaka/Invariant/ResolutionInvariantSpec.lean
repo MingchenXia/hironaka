@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupTowerIsomorphism
 import Hironaka.Invariant.ResolutionInvariantOrder
 import Hironaka.Invariant.ResolutionDriver
@@ -13,30 +8,27 @@ import Hironaka.Invariant.DivisorExponentAlong
 import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
 import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
 import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Resolution invariants and canonical segments
 
-Sources: Bierstone--Milman 2008 §§4--6 (the invariant `inv` with values in a totally ordered set, its
-semicontinuity, its decrease and its functoriality); Włodarczyk 2005, Proposition `pr:resol` and §2.4 (resolutions
-commuting with étale morphisms, i.e. with open restriction and biholomorphisms, and *extensions* by isomorphisms --
-here blowups along the empty set).
+Blueprint `hir:centre-function` (`blueprint/src/hironaka.tex`, Hironaka phase H4): the Lean form of the object the
+inductive construction of the canonical resolution of marked ideals produces, dimension by dimension
+(`hir:maximal-order-step`, `hir:general-step`, `hir:canonical-centres`).  Sources: Bierstone--Milman 2008 §§4--6 (the
+invariant `inv` with values in a totally ordered set, its semicontinuity, its decrease and its functoriality);
+Włodarczyk 2005, Proposition `pr:resol` and §2.4 (resolutions commuting with étale morphisms, i.e. with open
+restriction and biholomorphisms, and *extensions* by isomorphisms -- here blowups along the empty set).
 
-The structure and `ofDimZero` lie outside the constant cone of the main theorem; the definitions `DimLE`,
-`IsInvDomain`, `IsCanonical`, `countCentresMeeting` and the dimension-zero lemmas of this module lie inside it.
+**Superseded, kept** (blueprint `hir:centre-function-v1`; formalized content is never deleted): the structure `ResolutionInvariant`
+of this module, with `ResolutionInvariant.ofDimZero`, was superseded by `ResolutionInvariantExt.ResolutionInvariant` (the
+orchestrator's independent review of 3 October 2026, findings F1, F2, F5), and that one on the route by
+`ResolutionInvariantSeq.ResolutionInvariant` (local finiteness along growing sequences, human decision I-1139 C-0001 (b)): the
+invariant built by `CanonicalCentres.canonicalInvariant` and used by the in-place proofs of the two Hironaka statements.  The
+structure and `ofDimZero` lie outside the constant cone of the main theorem; the definitions `DimLE`, `IsInvDomain`,
+`IsCanonical`, `countCentresMeeting` and the dimension-zero lemmas of this module lie inside it.
 
 ## Definitions
 
@@ -46,13 +38,12 @@ The structure and `ofDimZero` lie outside the constant cone of the main theorem;
 * `IsCanonical 𝔪 inv T`: every centre of `T` is empty or the maximum locus of `inv` of the preceding part on the cosupport
   of the transform (a *canonical segment*; empty centres are Włodarczyk's extensions by isomorphisms).
 * `countCentresMeeting K T`: the number of nonempty centres of `T` meeting the preimage of `K`.
-* `ResolutionInvariant n k Λ`: a function `inv 𝔪 T: X_T → Λ` (`Λ` linearly ordered) with the eight properties of
+* `ResolutionInvariant n k Λ`: a function `inv 𝔪 T : X_T → Λ` (`Λ` linearly ordered) with the eight properties of
   `hir:centre-function`, required for the marked ideals of `IsInvDomain k` along their multiple test blow-ups: (1)
-  admissibility of the level sets of the maximum on open sets, (2) upper semicontinuity on the cosupport, (3)
-  decrease under the blowup of the maximum locus, (4) invariance under empty steps, (5) under restriction to open
-  sets, (6) under isomorphisms of towers over biholomorphisms (`BlowupTowerIsomorphism.IsTowerIso`), (7)
-  independence of the representative (`MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv`), (8) local finiteness
-  of canonical segments.
+  admissibility of the level sets of the maximum on open sets, (2) upper semicontinuity on the cosupport, (3) decrease
+  under the blowup of the maximum locus, (4) invariance under empty steps, (5) under restriction to open sets, (6) under
+  isomorphisms of towers over biholomorphisms (`BlowupTowerIsomorphism.IsTowerIso`, TN23), (7) independence of the
+  representative (`MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv`), (8) local finiteness of canonical segments.
 
 ## Main results
 
@@ -60,6 +51,9 @@ The structure and `ofDimZero` lie outside the constant cone of the main theorem;
   empty, and stays empty along every multiple test blow-up;
 * `ResolutionInvariant.ofDimZero`: **the base case of `hir:canonical-centres`** -- every constant function is a
   resolution invariant in dimension `≤ 0`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -70,7 +64,12 @@ universe u v
 namespace Hironaka.ResolutionInvariantSpec
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism.MarkedIdeal Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantOrder
+open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealBiholomorphism.MarkedIdeal
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantOrder
 
 noncomputable section
 
@@ -256,6 +255,50 @@ theorem countCentresMeeting_eq_zero_of_dimLE_zero {Λ : Type v} [LinearOrder Λ]
       subst hC0
       refine ⟨(isGeoTestTower_step_iff 𝔪 T ∅ π hπ).mpr ⟨hTt, isAdmissibleCentre_empty _⟩, ?_⟩
       simp [countCentresMeeting, hcount]
+
+/-- **The base case of `hir:canonical-centres`**: in dimension `≤ 0` every constant function is a resolution invariant --
+every cosupport along every multiple test blow-up is empty, so (2)-(7) hold vacuously, the level sets of (1) are empty,
+and canonical segments have only empty centres (8). -/
+def ResolutionInvariant.ofDimZero (Λ : Type v) [LinearOrder Λ] (l₀ : Λ) : ResolutionInvariant.{u, v} n 0 Λ where
+  inv := fun {_} _ {_} _ _ => l₀
+  admissible := by
+    intro X 𝔪 h Y T hT W l _
+    have hempty := cosupp_geoTransformAlong_eq_empty_of_dimLE_zero h T
+      (countCentresMeeting_eq_zero_of_dimLE_zero h (fun {_} _ _ => l₀) ∅ T hT).1
+    have hset : ((Subtype.val : W → Y) ⁻¹' {y | y ∈ (geoTransformAlong 𝔪 T).cosupp ∧ l₀ = l}) = ∅ := by
+      refine eq_empty_iff_forall_notMem.mpr fun y hy => ?_
+      have := hy.1
+      rw [hempty] at this
+      exact this
+    rw [hset]
+    exact isAdmissibleCentre_empty _
+  usc := by
+    intro X 𝔪 h Y T hT
+    rw [cosupp_geoTransformAlong_eq_empty_of_dimLE_zero h T hT]
+    exact fun x hx => absurd hx (notMem_empty x)
+  decrease := by
+    intro X 𝔪 h Y Z T C π hπ hT hne hC
+    exfalso
+    have hempty := cosupp_geoTransformAlong_eq_empty_of_dimLE_zero h T
+      (countCentresMeeting_eq_zero_of_dimLE_zero h (fun {_} _ _ => l₀) ∅ T hT).1
+    obtain ⟨y, hy⟩ := hne
+    rw [hC, hempty] at hy
+    exact hy.1
+  emptyStep := by
+    intro X 𝔪 h Y Z T π hπ hT z _
+    rfl
+  restrictOpen := by
+    intro X 𝔪 h U Y T hT p _
+    rfl
+  towerIso := by
+    intro X X' Φ 𝔪 h Y' Y T' T χ hiso hT p _
+    rfl
+  representative := by
+    intro X 𝔪 𝔫 h𝔪 h𝔫 hEq Y T hT y _
+    rfl
+  locallyFinite := by
+    intro X 𝔪 h K _
+    exact ⟨0, fun T hT => (countCentresMeeting_eq_zero_of_dimLE_zero h (fun {_} _ _ => l₀) K T hT).2.le⟩
 
 end DimZero
 

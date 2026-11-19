@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalCurvePositiveEmptyWindow
 /-! Genuine same-carrier candidate geometry and actual curve special leaves.
 No global candidate TEST or canonical value locality is supplied. -/

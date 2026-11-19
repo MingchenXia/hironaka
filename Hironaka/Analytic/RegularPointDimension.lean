@@ -1,14 +1,10 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-! # Regular points: locality and uniqueness of dimension
+
+Blueprint `lag:regular-point-basics`.
 
 * `regularAtDim_of_inter_eq`: if `A ∩ W = B ∩ W` for an open `W ∋ x`, then `A` regular of
   dimension `k` at `x` implies the same for `B`.  Proof: restrict the flattening to the
@@ -23,6 +19,8 @@ open Set Filter
 open scoped Topology
 
 namespace Hironaka.RegularPointDimension
+
+
 
 variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
   [IsComplexManifold n M]

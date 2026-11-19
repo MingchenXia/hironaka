@@ -1,41 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderTail
 import Hironaka.Invariant.SmoothCentreInvariant
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialPartEtale
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The order of the nonmonomial part, its regime and its mask under the operations of the general step
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.4 (commutativity with étale morphisms) and Step 2a of
-Proposition `pr:resol`; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0193.  Blueprint
+`bcalc:nonmonomial-order-transport` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`),
+§2.4 (commutativity with étale morphisms) and Step 2a of Proposition `pr:resol`; Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`), Step II.B.
 
 Properties (4'), (5), (6), (7) of the general step's value (`ResolutionInvariantExt.ResolutionInvariant`) compare values
 computed for an empty prefix and the re-based marked ideal, for a marked ideal and its restriction to an open set, along an
@@ -51,12 +26,14 @@ isomorphism of towers, and for two restricted-equivalent representatives.  On th
 * (6) **`mem_ordMask_isTowerIso_iff`**: the mask along isomorphisms of towers (the regime and its run:
   `NonmonomialOrderRegime.ordRegime_isTowerIso_iff`, `regimeRun_ordRegime_isTowerIso`; the companion:
   `CompanionTowerIso`);
-* (4') **`ordRegime_append_iff`**: the regime along `P S` is the regime of `𝔪_P` along `S` (for every `P`, the
-  hypothesis of `StepOneEmptyPrefix.regimeRun_append_of_lt` / `_of_eq`); along a tower `P` with only empty centres,
-  **`ordRegime_isEmptyTower_iff`** (the regime is that of the image at the base),
-  **`regimeRun_ordRegime_isEmptyTower`** (the run is `length P` or `0`), **`ordMask_isEmptyTower`** (the mask is the
-  preimage of the mask at the base; the companion:
+* (4') **`ordRegime_append_iff`**: the regime along `P S` is the regime of `𝔪_P` along `S` (for every `P`, the hypothesis
+  of TN-CLASSICAL's `StepOneEmptyPrefix.regimeRun_append_of_lt` / `_of_eq`); along a tower `P` with only empty centres,
+  **`ordRegime_isEmptyTower_iff`** (the regime is that of the image at the base), **`regimeRun_ordRegime_isEmptyTower`** (the
+  run is `length P` or `0`), **`ordMask_isEmptyTower`** (the mask is the preimage of the mask at the base; the companion:
   `CompanionRebase.restrictEquiv_companionOf_geoTransformAlong_of_isEmptyTower`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -67,7 +44,15 @@ universe u v
 namespace Hironaka.NonmonomialOrderTransport
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.MonomialPartEtale Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.MonomialPartEtale Hironaka.GermIdealOrder
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen
+  Hironaka.BlowupTowerIsomorphism Hironaka.StepOneRegime
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime
+  Hironaka.NonmonomialOrderTail
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 open Hironaka.ResolutionInvariantExt (IsEmptyTower)
 

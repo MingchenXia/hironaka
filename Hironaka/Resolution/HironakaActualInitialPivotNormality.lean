@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualZeroPointReducedTail
 import Hironaka.Resolution.HironakaActualAxisTaylorRigidity
 import Hironaka.Resolution.HironakaActualPointOrderRetainingHS
@@ -340,7 +335,6 @@ theorem pivot_projection_strict_eq_source_initial (K : Ideal R) (e : Fin n)
 
 open HironakaActualZeroPointReducedTail
 
-attribute [local instance 2000] IsOrderedRing.toIsOrderedAddMonoid in
 private theorem canonical_zero_quotient_power_of_colons (K : Ideal R) (e : Fin n)
     (hD : ∀ F∈actualHomogeneousInitialIdeal K,MvPowerSeries.pderiv ℂ e F∈actualHomogeneousInitialIdeal K)
     (hCol : ∀ q,((actualFormalStrictTransform K univ e (mem_univ e) (fun _ => 0)) ⊔ 𝔪^(q+1)).colon {MvPowerSeries.X e}=

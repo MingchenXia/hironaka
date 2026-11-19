@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalGeneralCrossingHistory
 /-! Exact original short-history filtered index from genuine SNC geometry.
 Complete four-node mathematics written first in `Mathematics.tex`.

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaHolomorphicJetMonomialSpan
 import Mathlib.LinearAlgebra.Multilinear.Basis
 import Mathlib.Analysis.Calculus.FDeriv.Analytic
@@ -30,7 +25,6 @@ open Set Filter
 open scoped Topology Manifold ContDiff
 namespace Hironaka.HironakaHolomorphicJetRankLoci
 open HolGerm HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan
-open Hironaka
 noncomputable section
 variable {n : ℕ}
 

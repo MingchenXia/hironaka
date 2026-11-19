@@ -1,45 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderCanonical
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionOpen
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialTransformAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The companion phase of the general step after the start of a run
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` ("By Step 1 we can resolve the
-marked ideal of maximal order `O(𝓘, μ)`"); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0188 (acknowledged C-0189).
+Blueprint `bcalc:nonmonomial-order-tail` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` ("By Step 1 we can resolve the marked ideal of maximal order
+`O(𝓘, μ)`"); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
 
 At a point `y` of order `o = ν(y) ≥ 1` along a canonical segment `T` of the general step's value `f`, the value is read off
 the companion ideal `𝓞(𝔪_{T₀}|_W, o)` formed at the start `T₀` of the run of `y` in the regime `OrdRegime 𝔪 o`, on an open
@@ -56,10 +26,15 @@ later:
   `≥ length T₁` in the regime `o`, then `T₁|_W` is a multiple test blow-up of `𝓞(𝔪_{T₀}|_W, o)` (every centre of `T₁` is
   empty or the maximum locus of `f`, which lies in `{ν ≥ o}` while some image of that point has order `o`);
 * `ordMask 𝔪 o`: the open set `{ν ≤ o}` (complement of the closure of `{ν ≥ o + 1}`, which is closed on the domain,
-  `mem_ordMask_iff`); **`ordRegime_start`**: the image of a point at the start of its run is in the regime and in
-  the mask there
+  `mem_ordMask_iff`); **`ordRegime_start`**, **`proj_tail_mem_ordMask`**: the image of a point at the start of its run is in
+  the regime and in the mask there;
 * **`isGeoTestTower_companion_tail_of_canonical`**: with `T₀ = head T r`, `T₁ = tail T r` (`r` the run of `y`) and
   `W = ordMask 𝔪_{T₀} o`, the restricted tail is a multiple test blow-up of the companion ideal;
+* **`eventually_ordRegime_and_le_regimeRun`**: near `y`, every point of the cosupport of order `≥ o` is in the regime `o`
+  with run at least that of `y` -- it started no later.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -70,7 +45,14 @@ universe u v
 namespace Hironaka.NonmonomialOrderTail
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.GermIdealOrder Hironaka.BlowupTowers Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.GermIdealOrder Hironaka.BlowupTowers
+  Hironaka.DivisorExponentAlong
+  Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus)
 
@@ -206,6 +188,33 @@ theorem notMem_ordGe_of_mem_ordMask {M : CMfd.{u} n} {𝔫 : MarkedIdeal n M} {o
     x ∉ ordGe 𝔫 (o + 1) :=
   fun h => hx (subset_closure h)
 
+/-- **At the start of its run a point is in its regime**: if `y` is in the regime `P` at the last stage of `T`, then
+the image of `y` at the stage where its run starts (the split of `T` at the run) is in the regime there. -/
+theorem regime_start (P : Regime X) {Y : CMfd.{u} n} (T : BlowupTower X Y) {y : Y} (hy : P T y) :
+    P (BlowupTowerSplit.head T (regimeRun P T y)) ((BlowupTowerSplit.tail T (regimeRun P T y)).proj y) := by
+  rcases Nat.eq_zero_or_pos (regimeRun P T y) with h0 | hpos
+  · rw [h0]
+    cases T <;> exact hy
+  · exact regime_head_of_le_regimeRun P T y _ hpos le_rfl
+
+/-- **At the start of its run a point of order `o` is in the regime `o` and in the mask of `o`.** -/
+theorem proj_tail_mem_ordMask (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n} (T : BlowupTower X Y)
+    (hT : IsGeoTestTower 𝔪 T) {y : Y} (hy : y ∈ (geoTransformAlong 𝔪 T).cosupp) {o : ℕ}
+    (hyo : nmOrd (geoTransformAlong 𝔪 T) y = o) :
+    OrdRegime 𝔪 o (BlowupTowerSplit.head T (regimeRun (OrdRegime 𝔪 o) T y))
+        ((BlowupTowerSplit.tail T (regimeRun (OrdRegime 𝔪 o) T y)).proj y) ∧
+      (BlowupTowerSplit.tail T (regimeRun (OrdRegime 𝔪 o) T y)).proj y ∈
+        ordMask (geoTransformAlong 𝔪 (BlowupTowerSplit.head T (regimeRun (OrdRegime 𝔪 o) T y))) o := by
+  have hreg := regime_start (OrdRegime 𝔪 o) T (y := y) ⟨hy, hyo⟩
+  refine ⟨hreg, ?_⟩
+  have hT₀ := ((BlowupTowerSplit.isGeoTestTower_iff_head_tail 𝔪 T (regimeRun (OrdRegime 𝔪 o) T y)).mp hT).1
+  have hdom₀ := InvDomainTowerAlong.isInvDomain_geoTransformAlong h _ hT₀
+  refine (mem_ordMask_iff hn hdom₀.isWellFormed hdom₀.isNonzeroAlongAt o _).mpr fun hge => ?_
+  have h1 := (mem_ordGe_iff hdom₀.isWellFormed hdom₀.isNonzeroAlongAt
+    ((geoTransformAlong 𝔪 _).cosupp_subset_N hreg.1) (o + 1)).mp hge
+  rw [hreg.2] at h1
+  omega
+
 /-- **The restricted tail of a point is a multiple test blow-up of its companion ideal** (`𝔪` in the domain, `n > 0`):
 along a multiple test blow-up `T` of `𝔪` which is a canonical segment of `f`, let `y` be a point of the cosupport of order
 `o ≥ 1` and `r` its run in the regime `o`; split `T = T₀ T₁` at `r` (`T₀ = head T r`, `T₁ = tail T r`).  Then
@@ -234,6 +243,37 @@ theorem isGeoTestTower_companion_tail_of_canonical (hn : 0 < n) {k : ℕ} (h : I
   exact isGeoTestTower_companion_of_canonical hn h hf ho (BlowupTowerSplit.head T j)
     (ordMask (geoTransformAlong 𝔪 (BlowupTowerSplit.head T j)) o) (fun _ _ hx => notMem_ordGe_of_mem_ordMask hx)
     (BlowupTowerSplit.tail T j) hT' hcan' y hrun
+
+/-- **Nearby points of the same order started no later** (`𝔪` in the domain, `n > 0`): along a multiple test blow-up `T`
+of `𝔪` which is a canonical segment of `f`, let `y` be a point of the cosupport of order `o ≥ 1`.  Near `y`, every point of
+the cosupport of order `≥ o` is in the regime `o` and its run is at least that of `y`: the mask theorem
+(`NonmonomialOrderRegime.ordRegime_and_le_regimeRun`) applies to the split of `T` at the run of `y` with
+`W = ordMask 𝔪_{T₀} o`, by `isGeoTestTower_companion_tail_of_canonical`, and the image of `y` at its start lies in `W`
+(`proj_tail_mem_ordMask`). -/
+theorem eventually_ordRegime_and_le_regimeRun (hn : 0 < n) {k : ℕ} (h : IsInvDomain k 𝔪) (hf : OrdMonotone 𝔪 f)
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) (hcan : IsCanonical 𝔪 f T) {y : Y}
+    (hy : y ∈ (geoTransformAlong 𝔪 T).cosupp) {o : ℕ} (hyo : nmOrd (geoTransformAlong 𝔪 T) y = o) (ho : 1 ≤ o) :
+    ∀ᶠ y' in 𝓝 y, y' ∈ (geoTransformAlong 𝔪 T).cosupp → o ≤ nmOrd (geoTransformAlong 𝔪 T) y' →
+      OrdRegime 𝔪 o T y' ∧ regimeRun (OrdRegime 𝔪 o) T y ≤ regimeRun (OrdRegime 𝔪 o) T y' := by
+  set j := regimeRun (OrdRegime 𝔪 o) T y with hj
+  have hT₀ := ((BlowupTowerSplit.isGeoTestTower_iff_head_tail 𝔪 T j).mp hT).1
+  have hdom₀ := InvDomainTowerAlong.isInvDomain_geoTransformAlong h _ hT₀
+  set W := ordMask (geoTransformAlong 𝔪 (BlowupTowerSplit.head T j)) o with hW
+  have hT' : IsGeoTestTower 𝔪 ((BlowupTowerSplit.head T j).append (BlowupTowerSplit.tail T j)) := by
+    rw [BlowupTowerSplit.head_append_tail]
+    exact hT
+  have hTW := isGeoTestTower_companion_tail_of_canonical hn h hf ho T hT hcan y
+  have hmask := ordRegime_and_le_regimeRun hn h ho (BlowupTowerSplit.head T j) W
+    (fun _ _ hx => notMem_ordGe_of_mem_ordMask hx) (BlowupTowerSplit.tail T j) hT' hTW
+  rw [BlowupTowerSplit.head_append_tail] at hmask
+  have hyW := (proj_tail_mem_ordMask hn h T hT hy hyo).2
+  have hcont : ContinuousAt (BlowupTowerSplit.tail T j).proj y :=
+    (BlowupTowerSplit.tail T j).contMDiff_proj.continuous.continuousAt
+  filter_upwards [hcont.preimage_mem_nhds (W.isOpen.mem_nhds hyW)] with y' hy'W hy' hy'o
+  obtain ⟨hreg, hlen⟩ := hmask y' hy' hy'W hy'o
+  refine ⟨hreg, ?_⟩
+  rw [BlowupTowerSplit.length_tail] at hlen
+  exact (le_min le_rfl (regimeRun_le_length (OrdRegime 𝔪 o) T y)).trans hlen
 
 end Start
 

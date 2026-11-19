@@ -1,41 +1,26 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.NestedFlattening
 import Hironaka.Blowup.BlowupLocalSurjectivity
 import Hironaka.Blowup.BlowupFibreDirection
 import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Manifold.LocalHolomorphicInverse
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Blowup.RegularPatchPullback
-import Hironaka.Blowup.RegularPatchPushforward
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The strict transform of a submanifold through the centre is a submanifold
 
-Source: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2 (a marked ideal `(M, N, E, 𝓘, d)` is
-transformed by a blowup of `M` with centre `C ⊆ N`, and `N'` is the strict transform of `N`); Wlodarczyk 2005
-(`wlodarczyk05-hironaka`), §2 (restriction of a multiple test blow-up to a smooth subvariety containing the
-centres); Demailly, CADG VII.12 (monomial charts).
+Source: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2 (a marked ideal
+`(M, N, E, 𝓘, d)` is transformed by a blowup of `M` with centre `C ⊆ N`, and `N'` is the strict
+transform of `N`); Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2 (restriction of a multiple test
+blow-up to a smooth subvariety containing the centres); Demailly, CADG VII.12 (monomial charts);
+blueprint `bcalc:strict-submanifold` (chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup along `C`, and `N ⊇ C` a closed subset regular of dimension `k_N`
 at each of its points.  Its (geometric) strict transform
 
   `N' = closure (π⁻¹ (N \ C))`
 
-Is regular of dimension `k_N` at each of its points.
+is regular of dimension `k_N` at each of its points (`regularAtDim_geoStrictTransform`).
 
 Proof.  Off `π⁻¹ C` the map `π` is a local biholomorphism and `N' = π⁻¹ N` there.  At a point
 `z` over `C`, take nested flattening coordinates `Φ` for `C ⊆ N` at `π z`
@@ -49,6 +34,8 @@ chart `j ≥ k_C` of the blowup around `z` with local inverse `W` (`σ_j ∘ W =
 So near `z`, `N' = W⁻¹(ℂ^{k_N} × 0)` if `j < k_N` (the points `ℓ_j(W u + t e_j)`, `t ≠ 0` small,
 lie in `π⁻¹(N \ C)`), and `N'` misses a neighbourhood of `z` if `j ≥ k_N`.  `W` is a local
 biholomorphism at `z` (its derivative is injective, `BlowupFibreDirection`), which flattens `N'`.
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter
@@ -58,7 +45,9 @@ universe u
 
 namespace Hironaka.BlowupStrictSubmanifold
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection NestedFlattening Hironaka.RegularPatchPullback Hironaka.RegularLocusDense
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection
+  NestedFlattening Hironaka.RegularPatchPullback Hironaka.RegularLocusDense
 
 noncomputable section
 
@@ -117,6 +106,7 @@ theorem eq_zero_of_monomial_mem_plane {m : ℕ} (hjm : m ≤ j.1)
   simpa [monomial_apply] using this
 
 end Monomial
+
 
 /-! ### Dimension of a submanifold of a submanifold -/
 
@@ -452,6 +442,28 @@ theorem regularAtDim_geoStrictTransform_of_mem (hπ : IsBlowupAlong n C π) {N :
   show y ∈ geoStrictTransform π C N ↔ W (ez.symm (ez y)) - W z ∈ complexCoordinatePlane n kN
   rw [ez.left_inv hy, sub_mem_plane_iff hWz, hiff y hyO]
   exact ⟨fun h => h.2, fun h => ⟨hjN, h⟩⟩
+
+/-- **The strict transform of a submanifold containing the centre is a submanifold of the same
+dimension**: if `N ⊇ C` is closed and regular of dimension `k_N` at each of its points, every
+point of `N' = closure (π⁻¹ (N \ C))` is a regular point of `N'` of dimension `k_N`. -/
+theorem regularAtDim_geoStrictTransform (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hNc : IsClosed N) {kN : ℕ} (hN : ∀ x ∈ N, RegularAtDim (n := n) N x kN) (hCN : C ⊆ N)
+    {z : Y} (hz : z ∈ geoStrictTransform π C N) :
+    RegularAtDim (n := n) (geoStrictTransform π C N) z kN := by
+  by_cases hzC : π z ∈ C
+  · obtain ⟨kC, hkC⟩ := hπ.1.2 (π z) hzC
+    have hNz := hN (π z) (hCN hzC)
+    exact regularAtDim_geoStrictTransform_of_mem hπ (le_of_regularAtDim_subset hkC hNz hCN) hkC
+      hNz hCN hz
+  · exact regularAtDim_geoStrictTransform_of_notMem hπ hNc hzC
+      (hN (π z) (geoStrictTransform_subset_preimage hπ.contMDiff.continuous hNc hz))
+
+/-- The strict transform of a closed submanifold `N ⊇ C` of dimension `k_N` is a closed
+submanifold. -/
+theorem isClosedSubmanifold_geoStrictTransform (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hNc : IsClosed N) {kN : ℕ} (hN : ∀ x ∈ N, RegularAtDim (n := n) N x kN) (hCN : C ⊆ N) :
+    IsClosedSubmanifold n (geoStrictTransform π C N) :=
+  ⟨isClosed_closure, fun _ hz => ⟨kN, regularAtDim_geoStrictTransform hπ hNc hN hCN hz⟩⟩
 
 end Blowup
 

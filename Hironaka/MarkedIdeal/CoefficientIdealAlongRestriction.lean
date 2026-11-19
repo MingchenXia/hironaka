@@ -1,38 +1,31 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupDerivativeIdeal
-import Hironaka.MarkedIdeal.CoefficientIdeal
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.OrderMultiplicativity
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The coefficient ideal along a submanifold, restricted to a subset (one stage)
 
-Sources: Włodarczyk 2005, Lemma `le:S` (first statement), GGT 2008 Proposition 5.6.4 (1), on the submanifold `N` of
-`(M, N, E, 𝔞, d)` with the coefficient ideal `𝓒_N` of `HomogenizedIdealAlong`.
+Hironaka phase H3 (TN23-ENVELOPES): the single-stage along-`N` halves of the H4 requirement nodes `hir:coefficient-restriction`
+(Step 1a of `hir:maximal-order-step`: the restriction of the coefficient ideal to an intersection `S` of members of `E`,
+along `N`) and `hir:contact-equivalence` (Step 1b: the restriction to a hypersurface of maximal contact inside `N`), claimed on
+I-0981 C-0046; blueprint `mc:coefficient-restriction-along` (`blueprint/src/maximal-contact.tex`).  Sources: Włodarczyk 2005,
+Lemma `le:S` (first statement), GGT 2008 Proposition 5.6.4 (1), on the submanifold `N` of `(M, N, E, 𝔞, d)` with the coefficient
+ideal `𝓒_N` of `HomogenizedIdealAlong`.
 
 * `cosupport_inter_subset_of_subset`: `cosupp(𝔟|_N, d) ∩ S ⊆ cosupp(𝔟|_S, d)` for `S ⊆ N` (orders do not drop under restriction).
 * `cosupport_coeffMarkedAlong_subset`: `cosupp(𝓒_N(𝔪)|_A, μ_𝓒) ⊆ cosupp 𝔪` for every `A ⊆ N` (the last summand of `𝓒_N` contains
   `g^{μ_𝓒}` for `g ∈ 𝓓_N^{d-1} 𝔞`, and `cosupp(𝔞|_N, d) = N ∩ V(𝓓_N^{d-1} 𝔞)`).
 * **`cosupp_coeffMarkedAlong_withN`: `cosupp(𝓒_N(𝔪)|_S) = cosupp 𝔪 ∩ S`** for every `S ⊆ N` (`le:S`, first statement, along `N`).
+* **`cosupp_contact_along`**: for a tangent direction `u` of `(𝔞|_N, d)` along `N` on `U`,
+  `cosupp(𝓒_N(𝔪)|_{N ∩ V(u) ∩ U}) = cosupp 𝔪 ∩ U` (the cosupport identity of the reduction to the hypersurface of maximal contact
+  inside `N`).
 
 Not here: the statements along multiple test blow-ups with centres in the strict transforms of `S` (they need the transforms along
 `N`, item (2) of `hir:along-calculus`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -43,7 +36,11 @@ universe u
 namespace Hironaka.CoefficientIdealAlongRestriction
 
 open Hironaka.HolomorphicIdealSheaves
-open Hironaka.GermIdealOrder Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong Hironaka.TangentDirectionAlong Hironaka.IdealWeightPowers Hironaka.MarkedIdeals Hironaka.CoefficientIdeal Hironaka.CoefficientIdealRestriction Hironaka.HomogenizedIdealAlong
+open Hironaka.GermIdealOrder Hironaka.DerivativeIdealAlong
+  Hironaka.GiraudAlong Hironaka.TangentDirectionAlong
+  Hironaka.IdealWeightPowers Hironaka.MarkedIdeals
+  Hironaka.CoefficientIdeal Hironaka.CoefficientIdealRestriction
+  Hironaka.HomogenizedIdealAlong
 
 noncomputable section
 
@@ -93,6 +90,20 @@ theorem cosupp_coeffMarkedAlong_withN {𝔪 : MarkedIdeal n M}
   refine Subset.antisymm (fun x hx => ⟨cosupport_coeffMarkedAlong_subset hN h𝔞 hd hS hx, hx.1⟩) ?_
   rw [← cosupp_coeffMarkedAlong hN h𝔞 hd]
   exact cosupport_inter_subset_of_subset hS _ _
+
+/-- **The cosupport identity of the reduction to a hypersurface of maximal contact inside `N`**: for a tangent direction `u`
+of `(𝔞|_N, d)` along `N` on `U`, `cosupp(𝓒_N(𝔪)|_{N ∩ V(u) ∩ U}) = cosupp 𝔪 ∩ U` (`N` regular at its points, `d ≥ 1`). -/
+theorem cosupp_contact_along {𝔪 : MarkedIdeal n M}
+    (hN : ∀ x ∈ 𝔪.N, ∃ k, RegularAtDim (n := n) 𝔪.N x k) (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x)
+    (hd : 1 ≤ 𝔪.d) {U : Set M} {u : M → ℂ} (hu : IsTangentDirectionAlong 𝔪.N 𝔪.ideal 𝔪.d U u) :
+    (withN (coeffMarkedAlong 𝔪) (𝔪.N ∩ {y | u y = 0} ∩ U)).cosupp = 𝔪.cosupp ∩ U := by
+  rw [cosupp_coeffMarkedAlong_withN hN h𝔞 hd (fun y hy => hy.1.1)]
+  ext x
+  constructor
+  · rintro ⟨hx, -, hxU⟩
+    exact ⟨hx, hxU⟩
+  · rintro ⟨hx, hxU⟩
+    exact ⟨hx, ⟨⟨MarkedIdeal.cosupp_subset_N 𝔪 hx, hu.cosupport_inter_subset h𝔞 hd ⟨hx, hxU⟩⟩, hxU⟩⟩
 
 end
 

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualOriginalFormalTaylor
 import Mathlib.RingTheory.MvPowerSeries.Trunc
 
@@ -81,7 +76,6 @@ theorem formal_combination_actual_jet_approximation (n : ℕ) {r : ℕ}
   rw [hmul]
   exact (actualFormalApproximation_mul_coefficient n k (A i) (originalTaylorAlgHom n (G i)) α hα).symm
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- EVERY original whole ideal contracts from its ACTUAL entire formal extension, without a flatness premise. -/
 theorem mem_original_ideal_iff_formal_extension (n : ℕ)
     (I : Ideal (HolGerm (ComplexModel (0+n)))) (g : HolGerm (ComplexModel (0+n))) :

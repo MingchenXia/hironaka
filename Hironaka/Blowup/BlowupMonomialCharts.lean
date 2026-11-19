@@ -1,17 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupFlatCoordinates
 import Hironaka.Blowup.LiftedOpenModel
 import Mathlib.Analysis.Calculus.ContDiff.WithLp
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.CoordinatePlaneDivision
-import Hironaka.Analytic.HolomorphicGermAlgebra
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -38,7 +28,8 @@ universe u
 
 namespace Hironaka.BlowupMonomialCharts
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates
 
 noncomputable section
 

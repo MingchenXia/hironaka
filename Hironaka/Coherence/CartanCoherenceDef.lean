@@ -1,25 +1,27 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Analysis.CStarAlgebra.Classes
 import Hironaka.Analytic.HolomorphicIdealSheaves
 import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # The statement of Cartan's coherence theorem, in a light module
 
-`CartanCoherence n X`: the ideal sheaf of every analytic subset of the complex manifold `X` is coherent (H. Cartan
-1950). The definition is moved here verbatim from `Hironaka.CartanComponentIdeal`. It keeps its namespace
-`Hironaka.CartanComponentIdeal`, its name, binders, body and docstring, so it is the same constant.
+`CartanCoherence n X`: the ideal sheaf of every analytic subset of the complex manifold `X` is
+coherent (H. Cartan 1950).  The definition is moved here verbatim from `Hironaka.CartanComponentIdeal`.
+It keeps its namespace `Hironaka.CartanComponentIdeal`, its name, binders,
+body and docstring, so it is the same constant. `Hironaka.CartanComponentIdeal` imports this module
+and re-exports it.
 
-The proof of Cartan's theorem (`CartanLocalReduction` -> `CoherentIdealColon` -> `CartanIrreducibleReduction` ->
-`CartanIrreducible.cartanCoherence`) needs only this definition.
+Why it moved: the closure of `Hironaka.CartanComponentIdeal` contains `Hironaka.RelativePrincipalization`.
+The proof of Cartan's theorem (`CartanLocalReduction` -> `CoherentIdealColon` ->
+`CartanIrreducibleReduction` -> `CartanIrreducible.cartanCoherence`) needs only this definition.
+It now imports this module, so it lies outside the import closures of both Hironaka statements.
 
-No statement is changed.
+The extra import `Mathlib.Analysis.CStarAlgebra.Classes` makes the instances in the binders
+elaborate exactly as they did in `Hironaka.CartanComponentIdeal`.
+
+Sorry-free.  No statement is changed.
 -/
 
 universe u

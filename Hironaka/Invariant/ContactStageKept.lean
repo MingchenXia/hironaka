@@ -1,47 +1,20 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
+import Hironaka.Resolution.HironakaG3UniverseHomCoeff
 import Hironaka.Invariant.StepOneTangentChange
 import Hironaka.Invariant.ContactRepresentative
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactEquivalenceStage
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Invariant.ContactMarkedCanonical
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1b's restricted marked ideal with the divisor kept: transport, restriction, re-basing, representatives
 
-Step 1bb's lower marked ideal keeps the divisor of `𝔍` (the original members are masked, not deleted), so the Step
-1b inputs of properties (4'), (5), (6) and (7) of `hir:centre-function` for the Step 1 value function are needed for
-that marked ideal. Source: Włodarczyk 2005 (arXiv `hiron.tex`), Step 1bb with `(E_p ∖ E)|_{V(u)_p}` read
-set-theoretically, and the lemma on the commutativity of the resolution procedure in Step 1 with étale morphisms.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0113 / I-0977 C-0156, after the orchestrator's review of the Step 1
+value function (3 October 2026, finding H1, accepted by TN-CLASSICAL on I-0981 C-0111): Step 1bb's lower marked ideal keeps
+the divisor of `𝔍` (the original members are masked, not deleted), so the Step 1b inputs of properties (4'), (5), (6) and (7)
+of `hir:centre-function` for the Step 1 value function (`hir:maximal-order-step`, `blueprint/src/hironaka.tex`) are needed
+for that marked ideal.  Blueprint `mc:contact-stage-kept` (`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005
+(arXiv `hiron.tex`), Step 1bb with `(E_p ∖ E)|_{V(u)_p}` read set-theoretically, and the lemma on the commutativity of the
+resolution procedure in Step 1 with étale morphisms.
 
 For `𝔍 = (X, N, E, 𝔞, d)`, `J̄ = 𝓒_N(𝓗_N(𝔍))` with the divisor `E`, a function `w`, a tower `T₀` and an open `W` of its last
 stage, `contactMarkedKept 𝔍 w T₀ W = (𝓒_{N_{T₀}}(J̄_{T₀})|_{(N ∩ V(w))_{T₀}})|_W`, with the divisor of `J̄_{T₀}` (on Step 1bb's
@@ -61,9 +34,16 @@ tangent direction (`StepOneTangentChange.inv_restrictedCoeffHom_eq_of_opens`).
 * **`contactMarkedKept_restrict`**, **`inv_contactMarkedKept_restrict`** (property (5)): for `U` open in the base and
   `W ⊆ T₀⁻¹U`, the marked ideal of `𝔍|_U` along `T₀|_U` on `W` (inside `T₀⁻¹U`), with domain, canonical segments, cosupports and
   values;
+* **`contactMarkedKept_rebase`**, **`contactMarkedKept_rebase_nested`** (property (4') through re-basing): across steps empty over
+  `W`, the marked ideal formed at the later stage lies in the domain with the same canonical segments and values, also on a later
+  mask `W' ⊆ T⁻¹W` along the global tail (the first duplicates TN-CLASSICAL's `StepOneCompare.contactKept_rebase`, proved in
+  parallel; see its docstring);
 * **`restrictEquiv_contactMarkedKept`**, **`contactMarkedKept_representative`** (property (7)): for restricted-equivalent `𝔍 ≃ 𝔍'`
   and tangent directions equal on `N` over `W`, the two marked ideals are restricted-equivalent, with the same domain, canonical
   segments and values.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -73,7 +53,11 @@ universe u v
 
 namespace Hironaka.ContactStageKept
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen BlowupTowerIsomorphism ResolutionInvariantExt MaxLocusLocal RestrictEmptyTower StepOneTangentChange MarkedIdealOperationsAlong.MarkedIdeal
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen
+  BlowupTowerIsomorphism ResolutionInvariantExt MaxLocusLocal RestrictEmptyTower StepOneTangentChange
+  MarkedIdealOperationsAlong.MarkedIdeal
 open HomogenizedGlueingTower (strictAlong)
 open ContactIndependenceAlong (one_le_coeffMarkedAlong_d)
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
@@ -119,9 +103,8 @@ variable {X X' : CMfd.{u} n} (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(�
 theorem barMarked_pullback (h𝔞 : 𝔍.ideal.IsCoherent) (hN : IsClosedSubmanifold n 𝔍.N) (hd : 1 ≤ 𝔍.d) :
     coeffMarkedAlong (homMarkedAlong (MarkedIdeal.pullback Φ 𝔍)) =
       MarkedIdeal.pullback Φ (coeffMarkedAlong (homMarkedAlong 𝔍)) := by
-  rw [pullback_coeffMarkedAlong_of_inverse Φ.contMDiff Φ.symm.contMDiff Φ.apply_symm_apply Φ.symm_apply_apply
-      (homMarkedAlong 𝔍) (isCoherent_homMarkedAlong h𝔞 hN) hN hd,
-    pullback_homMarkedAlong_of_inverse Φ.contMDiff Φ.symm.contMDiff Φ.apply_symm_apply Φ.symm_apply_apply 𝔍 h𝔞 hN hd]
+  have _ := hd
+  exact G3UniverseBarMarked.coeffHomMarked_pullback_diffeo Φ 𝔍 h𝔞 hN
 
 variable {Y₀' Y₀ : CMfd.{u} n} {T₀' : BlowupTower X' Y₀'} {T₀ : BlowupTower X Y₀}
   {χ₀ : Y₀' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y₀}
@@ -270,6 +253,136 @@ theorem inv_contactMarkedKept_restrict (R : ResolutionInvariant.{u, v} n k Λ) (
     rw [key, hχ]
 
 end Restrict
+
+/-! ### Property (4'): re-basing across steps empty near the point -/
+
+section Rebase
+
+/-- **Cosupports on nested open sets**: for `V ⊆ A` open in `Y`, a marked ideal `𝔫` on `Y` with coherent ideal, and a tower `T₁`
+over `Y` whose restrictions to `A` and to `V` are multiple test blow-ups of `𝔫|_A` and `𝔫|_V`, a point of the cosupport of
+`𝔫|_V` along `T₁|_V` lies in the cosupport of `𝔫|_A` along `T₁|_A`. -/
+theorem mem_cosupp_of_nested {Y Z : CMfd.{u} n} {𝔫 : MarkedIdeal n Y} (h𝔫 : 𝔫.ideal.IsCoherent) {A V : Opens Y}
+    (hVA : V ≤ A) (T₁ : BlowupTower Y Z)
+    (hNA : IsClosedSubmanifold n (MarkedIdeal.pullback (Subtype.val : A → Y) 𝔫).N)
+    (hcA : (MarkedIdeal.pullback (Subtype.val : A → Y) 𝔫).ideal.IsCoherent)
+    (hNV : IsClosedSubmanifold n (MarkedIdeal.pullback (Subtype.val : V → Y) 𝔫).N)
+    (hcV : (MarkedIdeal.pullback (Subtype.val : V → Y) 𝔫).ideal.IsCoherent)
+    (hTA : IsGeoTestTower (MarkedIdeal.pullback (Subtype.val : A → Y) 𝔫) (restrict A T₁))
+    (hTV : IsGeoTestTower (MarkedIdeal.pullback (Subtype.val : V → Y) 𝔫) (restrict V T₁)) (p : openPreimage T₁ V)
+    (hp : p ∈ (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : V → Y) 𝔫) (restrict V T₁)).cosupp) :
+    (⟨(p : Z), openPreimage_mono T₁ hVA p.2⟩ : openPreimage T₁ A) ∈
+      (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : A → Y) 𝔫) (restrict A T₁)).cosupp := by
+  have hiso := isTowerIso_restrict_nestedOpens (X := Y) hVA T₁
+  have hc1 := IsTowerIso.cosupp_geoTransformAlong (nestedOpensDiffeo (n := n) hVA) hNV hcV hiso hTV
+  rw [← pullback_val_pullback_val h𝔫 hVA] at hc1
+  have hc2 := ResolutionInvariantSegments.cosupp_geoTransformAlong_restrict hNA hcA (nestedOpens A V) (restrict A T₁) hTA
+  have hp' : (nestedDiffeo (n := n) (openPreimage T₁ A) (openPreimage (restrict A T₁) (nestedOpens A V))
+      (openPreimage T₁ V) (mem_openPreimage_restrict_nestedOpens A V T₁) (openPreimage_mono T₁ hVA)).symm p ∈
+      (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : nestedOpens A V → A)
+        (MarkedIdeal.pullback (Subtype.val : A → Y) 𝔫)) (restrict (nestedOpens A V) (restrict A T₁))).cosupp := by
+    rw [hc1, mem_preimage, Diffeomorph.apply_symm_apply]
+    exact hp
+  rw [hc2] at hp'
+  exact hp'
+
+variable {X : CMfd.{u} n} {𝔍 : MarkedIdeal n X} {k : ℕ} {Λ : Type v} [LinearOrder Λ]
+
+/-- **Step 1b's values (divisor kept) re-based across steps empty over `W`**: let `T₀ T` be a multiple test blow-up of `J̄`,
+`u` a tangent direction of `(𝔍.ideal|_N, d)` on `U`, `W ⊆ T₀⁻¹U` open with the centres of `T` missing `W`.  If
+`𝓢₀ = contactMarkedKept 𝔍 u T₀ W` lies in the domain of `R` and `T|_W T₁` is a canonical segment of it, then
+`𝓢₁ = contactMarkedKept 𝔍 u (T₀ T) (T⁻¹W)` lies in the domain, `T₁` is a canonical segment of it, its transforms along `T₁` lie in
+the domain, and the values of `𝓢₀` along `T|_W T₁` are those of `𝓢₁` along `T₁` on the cosupport.
+
+Note: the same statement is TN-CLASSICAL's `StepOneCompare.contactKept_rebase` (154c4cbb), proved in parallel (its request to
+drop this item, I-0981 C-0114, crossed with this module); kept under the standing rule that formalized content is not deleted.
+Consumers may use either. -/
+theorem contactMarkedKept_rebase (R : ResolutionInvariant.{u, v} n k Λ) (h𝔞 : 𝔍.ideal.IsCoherent)
+    (hN : IsClosedSubmanifold n 𝔍.N) (hd : 1 ≤ 𝔍.d) (U : Opens X) {u : X → ℂ}
+    (hu : IsTangentDirectionAlong 𝔍.N 𝔍.ideal 𝔍.d U u) {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀)
+    (T : BlowupTower Y₀ Y) (hT : IsGeoTestTower (coeffMarkedAlong (homMarkedAlong 𝔍)) (T₀.append T)) (W : Opens Y₀)
+    (hWU : (W : Set Y₀) ⊆ openPreimage T₀ U) (hW : CentresAvoid W T) (hdom : IsInvDomain k (contactMarkedKept 𝔍 u T₀ W))
+    {Z : CMfd.{u} n} (T₁ : BlowupTower (CMfd.of (n := n) (openPreimage T W)) Z)
+    (hcan : IsCanonical (contactMarkedKept 𝔍 u T₀ W) (R.inv (contactMarkedKept 𝔍 u T₀ W)) ((restrict W T).append T₁)) :
+    IsInvDomain k (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W)) ∧
+      IsCanonical (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W))
+        (R.inv (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W))) T₁ ∧
+      IsInvDomain k (geoTransformAlong (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W)) T₁) ∧
+      ∀ z ∈ (geoTransformAlong (contactMarkedKept 𝔍 u T₀ W) ((restrict W T).append T₁)).cosupp,
+        R.inv (contactMarkedKept 𝔍 u T₀ W) ((restrict W T).append T₁) z =
+          R.inv (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W)) T₁ z := by
+  have he : IsEmptyTower (restrict W T) := (isEmptyTower_restrict_iff W T).mpr hW
+  have hEq := ContactStageRebase.restrictEquiv_restrictedCoeffHomAlong_rebase 𝔍 hN h𝔞 hd U hu T₀ T hT W hWU hW
+  have hcoh : (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W)).ideal.IsCoherent :=
+    GermIdealPullbackCalculus.isCoherent_pullback contMDiff_subtype_val
+      (isCoherent_restrictedCoeff 𝔍 h𝔞 hN u (T₀.append T) hT)
+  obtain ⟨h1, h2, h3⟩ := InvDomainRebase.inv_rebase (X := CMfd.of (n := n) W) R hdom (restrict W T) he hEq hcoh T₁ hcan
+  exact ⟨h1, h2, isInvDomain_of_isCanonical R h1 T₁ h2, h3⟩
+
+/-- **The re-based values on a later mask** (property (4') through re-basing, nested form): in the situation of
+`contactMarkedKept_rebase`, with a global tail `T₁` over the last stage of `T₀ T` and `T|_W T₁|_W` (i.e. `(T T₁)|_W`) a canonical
+segment of `𝓢₀ = contactMarkedKept 𝔍 u T₀ W`, for every open `W' ⊆ T⁻¹W` the marked ideal `contactMarkedKept 𝔍 u (T₀ T) W'` formed
+at the later stage lies in the domain, `T₁|_{W'}` is a canonical segment of it, and at a point `p` of its cosupport its value is
+that of `𝓢₀` along `(T T₁)|_W` at `p`. -/
+theorem contactMarkedKept_rebase_nested (R : ResolutionInvariant.{u, v} n k Λ) (h𝔞 : 𝔍.ideal.IsCoherent)
+    (hN : IsClosedSubmanifold n 𝔍.N) (hd : 1 ≤ 𝔍.d) (U : Opens X) {u : X → ℂ}
+    (hu : IsTangentDirectionAlong 𝔍.N 𝔍.ideal 𝔍.d U u) {Y₀ Y Z : CMfd.{u} n} (T₀ : BlowupTower X Y₀)
+    (T : BlowupTower Y₀ Y) (T₁ : BlowupTower Y Z)
+    (hT : IsGeoTestTower (coeffMarkedAlong (homMarkedAlong 𝔍)) (T₀.append T)) (W : Opens Y₀)
+    (hWU : (W : Set Y₀) ⊆ openPreimage T₀ U) (hW : CentresAvoid W T) (hdom : IsInvDomain k (contactMarkedKept 𝔍 u T₀ W))
+    (hcan : IsCanonical (contactMarkedKept 𝔍 u T₀ W) (R.inv (contactMarkedKept 𝔍 u T₀ W)) (restrict W (T.append T₁)))
+    {W' : Opens Y} (hW' : W' ≤ openPreimage T W) :
+    IsInvDomain k (contactMarkedKept 𝔍 u (T₀.append T) W') ∧
+      IsCanonical (contactMarkedKept 𝔍 u (T₀.append T) W') (R.inv (contactMarkedKept 𝔍 u (T₀.append T) W'))
+        (restrict W' T₁) ∧
+      ∀ (p : openPreimage T₁ W') (q : openPreimage (T.append T₁) W), (p : Z) = q →
+        p ∈ (geoTransformAlong (contactMarkedKept 𝔍 u (T₀.append T) W') (restrict W' T₁)).cosupp →
+        R.inv (contactMarkedKept 𝔍 u (T₀.append T) W') (restrict W' T₁) p =
+          R.inv (contactMarkedKept 𝔍 u T₀ W) (restrict W (T.append T₁)) q := by
+  -- `(T T₁)|_W ≅ T|_W · T₁|_{T⁻¹W}` over the identity
+  have hiso := BlowupTowerIsoTail.isTowerIso_restrict_append W T T₁
+  have hcoh₀ : (contactMarkedKept 𝔍 u T₀ W).ideal.IsCoherent := hdom.isWellFormed.isCoherent
+  have hid : MarkedIdeal.pullback (Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of (n := n) W) ∞)
+      (contactMarkedKept 𝔍 u T₀ W) = contactMarkedKept 𝔍 u T₀ W :=
+    ContactCanonicalAlong.pullback_id _ hcoh₀
+  have hcan' := isCanonical_of_isTowerIso R hdom _ hiso.symm hcan
+  rw [show (Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of (n := n) W) ∞).symm =
+    Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of (n := n) W) ∞ from rfl, hid] at hcan'
+  -- re-basing to the stage `T₀ T` on `T⁻¹W`
+  obtain ⟨h1, h2, -, h4⟩ := contactMarkedKept_rebase R h𝔞 hN hd U hu T₀ T hT W hWU hW hdom _ hcan'
+  -- shrinking to `W' ⊆ T⁻¹W`
+  have hcoh₁ := isCoherent_restrictedCoeff 𝔍 h𝔞 hN u (T₀.append T) hT
+  obtain ⟨h5, h6, h7⟩ := restrict_nestedOpens R hcoh₁ hW' h1 T₁ h2
+  refine ⟨h5, h6, fun p q hpq hp => ?_⟩
+  rw [h7 p hp]
+  set r : openPreimage T₁ (openPreimage T W) := ⟨(p : Z), openPreimage_mono T₁ hW' p.2⟩ with hrdef
+  -- `r` lies in the cosupport of `𝓢₁` along `T₁|_{T⁻¹W}`, hence in that of `𝓢₀` along `T|_W T₁|_{T⁻¹W}`
+  have hr₁ : r ∈ (geoTransformAlong (contactMarkedKept 𝔍 u (T₀.append T) (openPreimage T W))
+      (restrict (openPreimage T W) T₁)).cosupp :=
+    mem_cosupp_of_nested hcoh₁ hW' T₁ h1.isWellFormed.isClosedSubmanifold_N h1.isWellFormed.isCoherent
+      h5.isWellFormed.isClosedSubmanifold_N h5.isWellFormed.isCoherent (isGeoTestTower_of_isCanonical R h1 _ h2)
+      (isGeoTestTower_of_isCanonical R h5 _ h6) p hp
+  have hEq := ContactStageRebase.restrictEquiv_restrictedCoeffHomAlong_rebase 𝔍 hN h𝔞 hd U hu T₀ T hT W hWU hW
+  have hTc := isGeoTestTower_of_isCanonical R hdom _ hcan'
+  have hTW : IsGeoTestTower (contactMarkedKept 𝔍 u T₀ W) (restrict W T) :=
+    ((isGeoTestTower_append_iff _ (restrict W T) (restrict (openPreimage T W) T₁)).mp hTc).1
+  obtain ⟨hNT₀, hcT₀⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong
+    hdom.isWellFormed.isClosedSubmanifold_N hdom.isWellFormed.isCoherent (restrict W T) hTW
+  have hWE := MarkedIdealEquivalence.MarkedIdeal.RestrictEquiv.wEquiv hEq h1.isWellFormed.isClosedSubmanifold_N.1
+    h1.isWellFormed.isCoherent hcT₀
+  have hr₀ : r ∈ ((geoTransformAlong (contactMarkedKept 𝔍 u T₀ W)
+      ((restrict W T).append (restrict (openPreimage T W) T₁))).cosupp : Set (openPreimage T₁ (openPreimage T W))) := by
+    rw [geoTransformAlong_append, ← (hWE.2 _).2 (isGeoTestTower_of_isCanonical R h1 _ h2)]
+    exact hr₁
+  have key4 := h4 r hr₀
+  -- `(T T₁)|_W ≅ T|_W · T₁|_{T⁻¹W}` carries `q` to `r`
+  have hr : BlowupTowerIsoTail.opensCongr (n := n) (BlowupTowerIsoTail.openPreimage_append T T₁ W).symm q = r :=
+    Subtype.ext hpq.symm
+  have key6 := R.towerIso (Diffeomorph.refl 𝓘(ℂ, ComplexModel n) (CMfd.of (n := n) W) ∞) _ hdom _ _ _ hiso hcan'
+    q (by rw [hr]; exact hr₀)
+  rw [hid, hr] at key6
+  rw [key6, key4]
+
+end Rebase
 
 /-! ### Property (7): representatives -/
 

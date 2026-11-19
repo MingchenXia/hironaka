@@ -3,11 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionOrder
 import Hironaka.Resolution.HironakaSmoothPullbackDerivatives
 import Hironaka.Analytic.StokesSingularLocusAnalytic
@@ -18,8 +13,6 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.HironakaSmoothSubmersionJacobian
 open Hironaka.HolomorphicIdealSheaves
 open HironakaSmoothSubmersionOrder HironakaSmoothPullbackDerivatives
-open Hironaka
-
 noncomputable section
 variable {n m : ℕ} {X Y : Type*} [TopologicalSpace X]
  [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]

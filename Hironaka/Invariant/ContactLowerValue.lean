@@ -1,72 +1,27 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactEmptyPrefix
 import Hironaka.Invariant.StepOneCompare
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactMarkedCanonical
-import Hironaka.Invariant.ContactRepresentative
-import Hironaka.Invariant.ContactStageInvDomain
-import Hironaka.Invariant.ContactStageKept
-import Hironaka.Invariant.ContactStageTail
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneTangentChange
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1bb's lower value of the masked Step 1 value function under biholomorphisms, restrictions and representatives
 
-The Step 1b inputs of properties (1), (4'), (5), (6) and (7) of `hir:centre-function` for masked Step 1 value
-function, at the level of its lower values at level `0`. Source: Włodarczyk 2005 (arXiv `hiron.tex`), Step 1bb and
-the lemma on the commutativity of the resolution procedure with étale morphisms: the values of Step 1b do not depend
-on the hypersurface of maximal contact and commute with étale morphisms.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0120 / I-0977 C-0168: the Step 1b inputs of properties (1), (4'),
+(5), (6) and (7) of `hir:centre-function` for TN-CLASSICAL's masked Step 1 value function (`StepOneValueMasked.stepOneInvM`,
+`hir:step-one-value-masked`, a piece of `hir:maximal-order-step`, `blueprint/src/hironaka.tex`), at the level of its lower
+values at level `0`.  Blueprint `mc:contact-lower-value` (`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv
+`hiron.tex`), Step 1bb and the lemma on the commutativity of the resolution procedure with étale morphisms: the values of
+Step 1b do not depend on the hypersurface of maximal contact and commute with étale morphisms.
 
-At level `0` the lower value of a point `p` is computed with the tangent direction chosen at the base point of `p`,
-on the mask of `p`. Transporting it along a biholomorphism, a restriction or a change of representative produces the
-transported tangent direction on the transported mask, not the one chosen for the new marked ideal on its own mask.
-The **anchor lemma** `lowerValueL_zero_eq` absorbs this: given lower data, the lower value is the value of `R` for
-*any* tangent direction `u` on *any* open set `W` around the image of `p` missing the original members, on which the
-marked ideal of Step 1b lies in the domain with a canonical restricted tail
-(`StepOneTangentChange.inv_restrictedCoeffHom_eq_of_opens_disjoint`). The three properties then follow from the
-transport lemmas of `ContactStageKept`, with lower data on both sides (which canonical-tail theorem
-`StepOneCanonicalTail.hasLowerDataL_of_isCanonical` supplies along canonical segments).
+At level `0` the lower value of a point `p` is computed with the tangent direction chosen at the base point of `p`, on the mask
+of `p`.  Transporting it along a biholomorphism, a restriction or a change of representative produces the transported tangent
+direction on the transported mask, not the one chosen for the new marked ideal on its own mask.  The **anchor lemma**
+`lowerValueL_zero_eq` absorbs this: given lower data, the lower value is the value of `R` for *any* tangent direction `u` on
+*any* open set `W` around the image of `p` missing the original members, on which the marked ideal of Step 1b lies in the
+domain with a canonical restricted tail (`StepOneTangentChange.inv_restrictedCoeffHom_eq_of_opens_disjoint`).  The three
+properties then follow from the transport lemmas of `ContactStageKept`, with lower data on both sides (which TN-CLASSICAL's
+canonical-tail theorem `StepOneCanonicalTail.hasLowerDataL_of_isCanonical` supplies along canonical segments).
 
 ## Main results
 
@@ -82,16 +37,22 @@ transport lemmas of `ContactStageKept`, with lower data on both sides (which can
 * **`lowerValueL_zero_representative`** (property (7)): for restricted-equivalent `𝔍 ≃ 𝔍'` and lower data for both at the same
   point and split, the two lower values agree (`origMembers_restrictEquiv`: the original members do not depend on the
   representative);
-* **`isAdmissibleCentre_of_contactMarkedKept`**, `isAdmissibleCentre_of_lowerMarkedM_zero` (the Step 1bb input of
-  property (1) at the values `(0, λ)`): on every open `W''` of `T₁⁻¹W`, an admissible centre of the restriction of
-  the transform of Step 1b's marked ideal along `T₁|_W` is an admissible centre of the restriction of `J̄_{T₀ T₁}`
-  (same cosupport, same divisor);
-* **`lowerValueL_zero_emptyPrefix`** (property (4'), the run of the point not reaching into the prefix): for `P`
-  with only empty centres, lower data for `𝔍` at the split `(P H₀) T₁` and for `𝔍_P` at the split `H₀ T₁`, the two
-  lower values agree (`ContactEmptyPrefix.contactMarkedKept_emptyPrefix` and the anchor on both sides);
-  **`lowerValueL_zero_emptyPrefix_rebase`** (the run reaching into the prefix): for `P₁ P₂` with only empty centres,
-  lower data for `𝔍` at the split `P₁ (P₂ T₁)` and for `𝔍_{P₁ P₂}` at the split `refl T₁`, the two lower values
-  agree (re-basing across `P₂`, `StepOneCompare.lowerValue_eq_zero_rebase`, with `centresAvoid_of_isEmptyTower`).
+* **`isAdmissibleCentre_of_contactMarkedKept`**, `isAdmissibleCentre_of_lowerMarkedM_zero` (the Step 1bb input of property (1) at
+  the values `(0, λ)`, local form asked on I-0981 C-0124): on every open `W''` of `T₁⁻¹W`, an admissible centre of the restriction
+  of the transform of Step 1b's marked ideal along `T₁|_W` is an admissible centre of the restriction of `J̄_{T₀ T₁}` (same
+  cosupport, same divisor);
+* **`lowerValueL_zero_emptyPrefix`** (property (4'), the run of the point not reaching into the prefix): for `P` with only empty
+  centres, lower data for `𝔍` at the split `(P H₀) T₁` and for `𝔍_P` at the split `H₀ T₁`, the two lower values agree
+  (`ContactEmptyPrefix.contactMarkedKept_emptyPrefix` and the anchor on both sides);
+  **`lowerValueL_zero_emptyPrefix_rebase`** (the run reaching into the prefix): for `P₁ P₂` with only empty centres, lower data
+  for `𝔍` at the split `P₁ (P₂ T₁)` and for `𝔍_{P₁ P₂}` at the split `refl T₁`, the two lower values agree (re-basing across
+  `P₂`, `StepOneCompare.lowerValue_eq_zero_rebase`, with `centresAvoid_of_isEmptyTower`);
+  `lowerValueL_zero_emptyPrefix_refl`: its case `P₁ = refl` (the run covering the whole tower), in the shape of TN-CLASSICAL's
+  `StepOneEmptyPrefix.lowerValueL_succ_emptyPrefix_refl` (I-0981 C-0131; not consumed -- `StepOneEmptyPrefix` uses the general
+  form directly).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -101,7 +62,11 @@ universe u v
 
 namespace Hironaka.ContactLowerValue
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen BlowupTowerIsomorphism ResolutionInvariantExt StepOneTangentChange ContactStageKept StepOneValue StepOneLowerDomain StepOneValueMasked MarkedIdealOperationsAlong.MarkedIdeal
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen
+  BlowupTowerIsomorphism ResolutionInvariantExt StepOneTangentChange ContactStageKept
+  StepOneValue StepOneLowerDomain StepOneValueMasked MarkedIdealOperationsAlong.MarkedIdeal
 open HomogenizedGlueingTower (strictAlong)
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
@@ -709,12 +674,12 @@ theorem centresAvoid_of_isEmptyTower {Y₁ : CMfd.{u} n} (W : Opens Y₁) :
       obtain ⟨hM, hC⟩ : IsEmptyTower M ∧ C = ∅ := h
       exact ⟨centresAvoid_of_isEmptyTower W M hM, by rw [hC]; exact Set.empty_disjoint _⟩
 
-/-- **Property (4') of the masked Step 1 value function at level `0`, lower values, when the run of the point reaches
-into the empty prefix**: let `𝔍` be well formed with `d ≥ 1`, `P₁ P₂` a tower over `X` with only empty centres, `P₁
-P₂ T₁` a multiple test blow-up of `J̄` and `z` a point of its cosupport. If `z` has lower data at level `0` for `𝔍`
-at the split `P₁ (P₂ T₁)` and for `𝔍_{P₁ P₂}` at the split `refl T₁`, the two lower values agree. (The value for `𝔍`
-is re-based across the empty `P₂` (`StepOneCompare.lowerValue_eq_zero_rebase`), then carried across the empty prefix
-`P₁ P₂` as in `lowerValueL_zero_emptyPrefix`.) -/
+/-- **Property (4') of the masked Step 1 value function at level `0`, lower values, when the run of the point reaches into the
+empty prefix**: let `𝔍` be well formed with `d ≥ 1`, `P₁ P₂` a tower over `X` with only empty centres, `P₁ P₂ T₁` a multiple
+test blow-up of `J̄` and `z` a point of its cosupport.  If `z` has lower data at level `0` for `𝔍` at the split `P₁ (P₂ T₁)` and
+for `𝔍_{P₁ P₂}` at the split `refl T₁`, the two lower values agree.  (The value for `𝔍` is re-based across the empty `P₂`
+(TN-CLASSICAL's `StepOneCompare.lowerValue_eq_zero_rebase`), then carried across the empty prefix `P₁ P₂` as in
+`lowerValueL_zero_emptyPrefix`.) -/
 theorem lowerValueL_zero_emptyPrefix_rebase (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X)
     (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) {Y₁ Y Z : CMfd.{u} n} (P₁ : BlowupTower X Y₁) (P₂ : BlowupTower Y₁ Y)
     (hP : IsEmptyTower (P₁.append P₂)) (T₁ : BlowupTower Y Z) (hT : IsGeoTestTower (barMarked 𝔍) ((P₁.append P₂).append T₁))
@@ -795,6 +760,26 @@ theorem lowerValueL_zero_emptyPrefix_rebase (R : ResolutionInvariant.{u, v} n k 
   rw [hval, key₁]
   congr 1
   exact (hval₃ _ hcos₃).symm.trans (hvalP _ hcos₃)
+
+/-- **Property (4') of the masked Step 1 value function at level `0`, lower values, when the run of the point covers the whole
+tower** (the level-`0` twin of TN-CLASSICAL's `StepOneEmptyPrefix.lowerValueL_succ_emptyPrefix_refl`; asked shape, I-0981
+C-0131): for `P` with only empty centres, `P T₁` a multiple test blow-up of `J̄` and `z` a point of its cosupport with lower data
+at level `0` for `𝔍` at the split `refl (P T₁)` and for `𝔍_P` at the split `refl T₁`, the two lower values agree
+(`lowerValueL_zero_emptyPrefix_rebase` with `P₁ = refl`).  Not consumed: TN-CLASSICAL's `StepOneEmptyPrefix` (f1803bbb) applies
+`lowerValueL_zero_emptyPrefix_rebase` at `P₁ = refl` directly (I-0981 C-0133); kept as the convenience form. -/
+theorem lowerValueL_zero_emptyPrefix_refl (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X)
+    (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) {Y₁ Y : CMfd.{u} n} (P : BlowupTower X Y₁) (hP : IsEmptyTower P)
+    (T₁ : BlowupTower Y₁ Y) (hT : IsGeoTestTower (barMarked 𝔍) (P.append T₁)) {z : Y}
+    (hz : z ∈ (geoTransformAlong (barMarked 𝔍) (P.append T₁)).cosupp)
+    (hD : LowerDataL R 𝔍 (lowerMarkedM 𝔍) 0 BlowupTower.refl (P.append T₁) z)
+    (hD' : LowerDataL R (geoTransformAlong 𝔍 P) (lowerMarkedM (geoTransformAlong 𝔍 P)) 0 BlowupTower.refl T₁ z) :
+    lowerValueL R 𝔍 (lowerMarkedM 𝔍) 0 BlowupTower.refl (P.append T₁) z =
+      lowerValueL R (geoTransformAlong 𝔍 P) (lowerMarkedM (geoTransformAlong 𝔍 P)) 0 BlowupTower.refl T₁ z := by
+  have h := lowerValueL_zero_emptyPrefix_rebase R 𝔍 h𝔍 hd BlowupTower.refl P
+    (by rw [BlowupTower.refl_append]; exact hP) T₁ (by rw [BlowupTower.refl_append]; exact hT)
+    (by rw [BlowupTower.refl_append]; exact hz) hD (by rw [BlowupTower.refl_append]; exact hD')
+  rw [BlowupTower.refl_append] at h
+  exact h
 
 end EmptyPrefix
 

@@ -1,33 +1,27 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupExceptionalDivisor
 import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The restriction of a blowup to an open subset
 
-Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1, Remark after the definition of extensions ("the definition
-of extension arises naturally when we pass to open subsets of the considered ambient variety"), and §2.4
-(Proposition `pr:funct`: multiple test blow-ups pull back along smooth morphisms; an open embedding is the case used
-in the analytic setting); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), the paragraph after Theorem
-1.3 (trivial blowings-up inserted for open embeddings).
+Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1, Remark after the definition of
+extensions ("the definition of extension arises naturally when we pass to open subsets of the
+considered ambient variety"), and §2.4 (Proposition `pr:funct`: multiple test blow-ups pull back
+along smooth morphisms; an open embedding is the case used in the analytic setting);
+Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), the paragraph after Theorem 1.3
+(trivial blowings-up inserted for open embeddings); blueprint `bcalc:restrict-open`
+(chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup of `X` along `C` (`IsBlowupAlong`, a universal property) and
 `V ⊆ X` open.  Then the restriction `π⁻¹ V → V` of `π` is the blowup of `V` along `C ∩ V`:
 
 * `isBlowupAlong_restrict` — for any proof `hV` that `π⁻¹ V` is open (the statement does not
   depend on it), `IsBlowupAlong n (C ∩ V) (π|_{π⁻¹V})`;
+* `exists_isBlowupAlong_restrict` — the same, in the form the restriction of a blowup tower to
+  an open set consumes (an open preimage and the blowup property).
 
 Ingredients, all about an open subset `V` of a complex manifold:
 
@@ -39,6 +33,8 @@ Ingredients, all about an open subset `V` of a complex manifold:
 
 The universal property of the restriction is that of `π`, applied to `ι ∘ g`: the lift lands in
 `π⁻¹ V` because `π ∘ h = ι ∘ g` takes values in `V`.
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter TopologicalSpace
@@ -48,7 +44,8 @@ universe u
 
 namespace Hironaka.BlowupRestrictOpen
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences AnalyticSubsetOpens RelativePrincipalizationSpan
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences AnalyticSubsetOpens
+  RelativePrincipalizationSpan
 
 noncomputable section
 
@@ -180,6 +177,15 @@ theorem isBlowupAlong_restrict (hπ : IsBlowupAlong n C π) (V : Opens X)
       have := huniq (Subtype.val ∘ k) ⟨hk', hπk⟩
       funext z
       exact Subtype.ext (congrFun this z)
+
+/-- The restriction of a blowup to an open subset, in the form consumed by the restriction of a
+blowup tower: the preimage is open and the restricted map is the blowup along the trace. -/
+theorem exists_isBlowupAlong_restrict (hπ : IsBlowupAlong n C π) (V : Opens X) :
+    ∃ hV : IsOpen (π ⁻¹' (V : Set X)),
+      IsBlowupAlong n ((↑) ⁻¹' C : Set V)
+        (fun p : (⟨π ⁻¹' (V : Set X), hV⟩ : Opens Y) => (⟨π p.1, p.2⟩ : V)) :=
+  ⟨V.isOpen.preimage hπ.contMDiff.continuous,
+    isBlowupAlong_restrict hπ V (V.isOpen.preimage hπ.contMDiff.continuous)⟩
 
 end Blowup
 

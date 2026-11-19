@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalCrossingLowerLeaf
 /-! Whole original canonical lower-history normalization at EVERY order.
 Complete mathematics written first in `hironaka-original-canonical-normalized-lower-tail-extension.tex`. This uses the

@@ -1,22 +1,51 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.StokesSingularLocus
 import Hironaka.Analytic.AnalyticJacobianCriterion
 import Hironaka.Analytic.RegularAtDimChart
+import Mathlib.Geometry.Manifold.MFDeriv.NormedSpace
 import Hironaka.Analytic.RegularAtDimTransport
 import Hironaka.Analytic.AnalyticSubsetTopology
-import Mathlib.Geometry.Manifold.MFDeriv.NormedSpace
+import Hironaka.Analytic.StokesPolePotential
 
 set_option autoImplicit false
+
+/-!
+# The singular locus of an irreducible analytic subvariety is analytic (TN.4 #4)
+
+Blueprint `ana:stokes-singular-locus-analytic` (Demailly, `demailly-cadg:II.4.31`, for a
+pure-dimensional set) and `ana:stokes-cutoffs` on `V_sing`.
+
+Let `V` be a closed irreducible analytic subvariety of dimension `k` of a complex manifold of
+dimension `n`.  Near a point `x`, let `sᵢ` be Cartan generators of the ideal of `V`
+(`StokesSingularLocus.exists_cartanGenerators`), read in the preferred chart at `x`.
+
+* `le_finrank_span_fderiv_of_regularAtDim` — at a regular point of dimension `k`, the
+  differentials of the `sᵢ` span a space of dimension `≥ n - k` (the normal coordinates of a
+  flattening lie in the ideal, so their independent differentials are combinations of the
+  `dsᵢ`); hence some `(n - k)`-minor of the Jacobian is nonzero
+  (`exists_minor_ne_zero_of_le_finrank`).
+* `regularAtDim_of_minor_ne_zero` — conversely, a nonzero `(n - k)`-minor at a point of `V`
+  forces regularity of dimension `k`: the selected equations cut out a `k`-manifold `Z ⊇ V`
+  (implicit function theorem); `V ∩ Z`, read on a ball of `Z`, is an analytic subset; a regular
+  point of it of dimension `j` gives (through `extendLHE`, `Φ₁ × id`) a regular point of `V` of
+  dimension `j`, so `j = k` by pure dimensionality (`PureDimension.eq_dim_of_regularAtDim`);
+  hence `V ∩ Z` has interior and is the whole ball (identity theorem).
+* `singularLocus V = V \ V_reg`; `isClosed_singularLocus`, `isComplexAnalyticSubset_singularLocus`
+  (cut out by the `sᵢ` and all `(n - k)`-minors of their Jacobian).
+* `exists_stokesCutoffs_singularLocus` — the cutoffs of the one-sided probe for `A = V_sing`.
+-/
+
 open Set Filter Module
 open scoped Topology Manifold
+
 namespace Hironaka.StokesSingularLocusAnalytic
-open Hironaka AnalyticJacobianSingularCore
+
+open AnalyticJacobianSingularCore
+
 noncomputable section
+
 variable {n : ℕ}
+
+/-! ### Maximal minors -/
 
 /-- Evaluation of a functional on the standard basis vectors. -/
 def evalBasis : (ComplexModel n →L[ℂ] ℂ) →ₗ[ℂ] (Fin n → ℂ) where
@@ -407,7 +436,237 @@ theorem le_finrank_span_fderiv_of_regularAtDim {A U : Set M} (hU : IsOpen U) {N 
   have := Submodule.finrank_mono hle
   rwa [finrank_span_eq_card hli, Fintype.card_fin] at this
 
+/-- **A nonzero maximal Jacobian minor at a point of `V` forces regularity**
+(`demailly-cadg:II.4.31`, the direction that uses pure dimensionality).  In the preferred chart at
+`x`, let `sᵢ` cut out the irreducible `V` on an open set `U`.  If an `(n - dim V)`-minor of the
+Jacobian of the `sᵢ` is nonzero at a point `y ∈ V ∩ U`, then `V` is regular of dimension `dim V`
+at `y`: the selected equations cut out a manifold `Z ⊇ V` of dimension `dim V`, and `V ∩ Z`,
+read on `Z`, is an analytic subset of a ball which, being of pure dimension `dim V`, has
+interior, hence is the whole ball by the identity theorem. -/
+theorem regularAtDim_of_minor_ne_zero (V : ClosedIrreducibleAnalyticSubvariety n M) (x : M)
+    {U : Set M} (hU : IsOpen U) {N : ℕ} {s : Fin N → M → ℂ}
+    (hs : ∀ i, MDifferentiableOn 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ℂ) (s i) U)
+    (hzero : ∀ y ∈ U, (y ∈ V.carrier ↔ ∀ i, s i y = 0))
+    {y : M} (hyU : y ∈ U) (hye : y ∈ (complexChartAt (n := n) x).val.source)
+    (hyV : y ∈ V.carrier) (rows : Fin (n - V.dim) → Fin N) (cols : Fin (n - V.dim) → Fin n)
+    (hminor : jacobianMinor (fun i w => s i ((complexChartAt (n := n) x).val.symm w)) rows cols
+      ((complexChartAt (n := n) x).val y) ≠ 0) :
+    RegularAtDim (n := n) V.carrier y V.dim := by
+  classical
+  set e := (complexChartAt (n := n) x).val with he
+  have hk : V.dim ≤ n := V.dim_le
+  set g : Fin N → ComplexModel n → ℂ := fun i w => s i (e.symm w) with hg
+  set W : Set (ComplexModel n) := e.target ∩ e.symm ⁻¹' U with hW
+  have hWo : IsOpen W := e.isOpen_inter_preimage_symm hU
+  have hqt : e y ∈ e.target := e.map_source hye
+  have hsq : e.symm (e y) = y := e.left_inv hye
+  have hqW : e y ∈ W := ⟨hqt, by rw [mem_preimage, hsq]; exact hyU⟩
+  have hgd : ∀ i, DifferentiableOn ℂ (g i) W := fun i z hz =>
+    (differentiableAt_chart (complexChartAt (n := n) x) hz.1
+      ((hs i).mdifferentiableAt (hU.mem_nhds hz.2))).differentiableWithinAt
+  have hWV : ∀ z ∈ W, (e.symm z ∈ V.carrier ↔ ∀ i, g i z = 0) := fun z hz => hzero _ hz.2
+  have hyg : ∀ i, g i (e y) = 0 := (hWV _ hqW).mp (by rw [hsq]; exact hyV)
+  -- the selected equations have independent differentials and cut out a manifold `Z ⊇ V`
+  have hli : LinearIndependent ℂ (fun a => fderiv ℂ (g (rows a)) (e y)) :=
+    AnalyticJacobianCriterion.linearIndependent_of_fullJacobianMinor_ne_zero
+      (g := fun a => g (rows a)) cols hminor
+  obtain ⟨Φ, hΦW, hΦ0, hΦflat⟩ :=
+    AnalyticJacobianCriterion.exists_flattening_of_localCompleteIntersection
+      (S := {z | ∀ a, g (rows a) z = 0}) hWo hqW (fun a => hyg (rows a))
+      (fun a => hgd (rows a)) (fun z _ => Iff.rfl) hli
+  have hnk : n - (n - V.dim) = V.dim := by omega
+  rw [hnk] at hΦflat
+  -- a ball `D` of the plane on which `V ∩ Z` is read
+  have h0t : coordinateInclusion n V.dim 0 ∈ Φ.target := by
+    rw [map_zero, ← hΦ0]; exact Φ.mapsTo_toFun Φ.center_mem_source
+  obtain ⟨ρ, hρ, hball⟩ := Metric.isOpen_iff.mp
+    (Φ.isOpen_target.preimage (coordinateInclusion n V.dim).continuous) 0 h0t
+  set D : Set (ComplexModel V.dim) := Metric.ball 0 ρ with hD
+  have hinvS : ∀ w ∈ D, Φ.invFun (coordinateInclusion n V.dim w) ∈ Φ.source := fun w hw =>
+    Φ.mapsTo_invFun (hball hw)
+  set G : Fin N → ComplexModel V.dim → ℂ := fun i w => g i (Φ.invFun (coordinateInclusion n V.dim w))
+    with hG
+  have hGd : ∀ i, DifferentiableOn ℂ (G i) D := fun i =>
+    (hgd i).comp (Φ.invFun_holomorphic.comp (coordinateInclusion n V.dim).differentiableOn
+      fun w hw => hball hw) fun w hw => hΦW (hinvS w hw)
+  have h0D : (0 : ComplexModel V.dim) ∈ D := Metric.mem_ball_self hρ
+  have hinv0 : Φ.invFun (coordinateInclusion n V.dim 0) = e y := by
+    rw [map_zero, ← hΦ0, Φ.left_inv _ Φ.center_mem_source]
+  have h0DV : (0 : ComplexModel V.dim) ∈ {w | ∀ i, G i w = 0} := fun i => by
+    simp only [hG, hinv0]; exact hyg i
+  -- a regular point of `V ∩ Z` read on the ball, of some dimension `j ≤ V.dim`
+  obtain ⟨w₁, ⟨⟨hw₁DV, hw₁D⟩, -⟩, j, hjk, Φ₁, hΦ₁D, -, hΦ₁flat⟩ :=
+    exists_flattening_of_isZeroLocus (n := V.dim) Metric.isOpen_ball Metric.isOpen_ball hGd
+      (fun w _ => Iff.rfl) h0DV h0D h0D
+  set p := Φ.invFun (coordinateInclusion n V.dim w₁) with hp
+  have hpΦ : p ∈ Φ.source := hinvS w₁ hw₁D
+  have hΦp : Φ.toFun p = coordinateInclusion n V.dim w₁ := Φ.right_inv _ (hball hw₁D)
+  set Θ := RegularAtDimTransport.LocalHolomorphicEquivAt.comp
+    (Φ.restrict univ isOpen_univ p ⟨hpΦ, trivial⟩) (extendLHE hk Φ₁) hΦp with hΘ
+  have hΘflat : ∀ z ∈ Θ.source,
+      (e.symm z ∈ V.carrier ↔ Θ.toFun z ∈ complexCoordinatePlane n j) := by
+    intro z hz
+    have hzΦ : z ∈ Φ.source := hz.1.1
+    have hzW : z ∈ W := hΦW hzΦ
+    have hz1 : coordinateProjection n V.dim (Φ.toFun z) ∈ Φ₁.source := hz.2
+    change _ ↔ extendFirst V.dim Φ₁.toFun (Φ.toFun z) ∈ _
+    rw [extendFirst_mem_plane_iff hk hjk, hWV z hzW]
+    constructor
+    · intro hz0
+      have hZ : Φ.toFun z ∈ complexCoordinatePlane n V.dim :=
+        (hΦflat z hzΦ).mp fun a => hz0 (rows a)
+      refine ⟨(hΦ₁flat _ hz1).mp fun i => ?_, hZ⟩
+      simp only [hG]
+      rw [coordinateInclusion_coordinateProjection hZ, Φ.left_inv z hzΦ]
+      exact hz0 i
+    · rintro ⟨h1, hZ⟩ i
+      have h2 := (hΦ₁flat _ hz1).mpr h1 i
+      simp only [hG] at h2
+      rwa [coordinateInclusion_coordinateProjection hZ, Φ.left_inv z hzΦ] at h2
+  -- that point is a regular point of `V` of dimension `j`, so `j = dim V`
+  have hpe : p ∈ e.target := (hΦW hpΦ).1
+  have hy₁ : RegularAtDim (n := n) V.carrier (e.symm p) j := by
+    refine regularAtDim_of_flattening_of_mem (x := x) (le_trans hjk hk) Θ ?_
+      ((hWV p (hΦW hpΦ)).mpr fun i => hw₁DV i) (e.map_target hpe) ?_
+    · intro y' hy' hy'Θ
+      have h := hΘflat (e y') hy'Θ
+      rwa [e.left_inv hy'] at h
+    · rw [e.right_inv hpe]; exact Θ.center_mem_source
+  have hjk' : j = V.dim := PureDimension.eq_dim_of_regularAtDim V hy₁
+  -- so `V ∩ Z` has interior in the ball, and by the identity theorem it is the whole ball
+  have hsub : ∀ w ∈ Φ₁.source, ∀ i, G i w = 0 := fun w hw =>
+    (hΦ₁flat w hw).mpr (by
+      rw [hjk']; intro i hi; exact absurd i.2 (not_lt.mpr hi))
+  have hDall : ∀ w ∈ D, ∀ i, G i w = 0 := fun w hw i =>
+    eqOn_zero_of_isOpen_convex Metric.isOpen_ball (convex_ball 0 ρ) (hGd i) Φ₁.isOpen_source
+      (fun w' hw' => (hΦ₁D hw').1) ⟨w₁, Φ₁.center_mem_source⟩ (fun w' hw' => hsub w' hw' i) hw
+  -- near `e y`, `V` is exactly `Z`
+  set O : Set (ComplexModel n) := Φ.source ∩ Φ.toFun ⁻¹' (coordinateProjection n V.dim ⁻¹' D)
+    with hO
+  have hOo : IsOpen O := Φ.toFun_holomorphic.continuousOn.isOpen_inter_preimage
+    Φ.isOpen_source (Metric.isOpen_ball.preimage (coordinateProjection n V.dim).continuous)
+  have hqO : e y ∈ O := ⟨Φ.center_mem_source, by simp [hΦ0, h0D]⟩
+  have hOflat : ∀ z ∈ O, (e.symm z ∈ V.carrier ↔ Φ.toFun z ∈ complexCoordinatePlane n V.dim) := by
+    intro z hz
+    rw [hWV z (hΦW hz.1)]
+    constructor
+    · intro h0; exact (hΦflat z hz.1).mp fun a => h0 (rows a)
+    · intro hZ i
+      have h2 := hDall _ hz.2 i
+      simp only [hG] at h2
+      rwa [coordinateInclusion_coordinateProjection hZ, Φ.left_inv z hz.1] at h2
+  refine regularAtDim_of_flattening_of_mem (x := x) hk
+    (Φ.restrict O hOo (e y) ⟨Φ.center_mem_source, hqO⟩) ?_ hyV hye ⟨Φ.center_mem_source, hqO⟩
+  intro y' hy' hy'O
+  have h := hOflat (e y') hy'O.2
+  rwa [e.left_inv hy'] at h
+
+/-! ### The singular locus -/
+
+/-- The **singular locus** of `V`: the points of `V` at which `V` is not regular of dimension
+`dim V`. -/
+def singularLocus (V : ClosedIrreducibleAnalyticSubvariety n M) : Set M :=
+  V.carrier \ regularLocus (n := n) V.carrier V.dim
+
+theorem mem_singularLocus {V : ClosedIrreducibleAnalyticSubvariety n M} {y : M} :
+    y ∈ singularLocus V ↔ y ∈ V.carrier ∧ ¬ RegularAtDim (n := n) V.carrier y V.dim :=
+  Iff.rfl
+
+theorem singularLocus_subset (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    singularLocus V ⊆ V.carrier := sdiff_subset
+
+theorem disjoint_singularLocus_regularLocus (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    Disjoint (singularLocus V) (regularLocus (n := n) V.carrier V.dim) :=
+  disjoint_sdiff_left
+
+/-- **The singular locus is closed** (regularity is relatively open). -/
+theorem isClosed_singularLocus (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    IsClosed (singularLocus V) := by
+  rw [← isOpen_compl_iff, isOpen_iff_mem_nhds]
+  intro y hy
+  by_cases hyV : y ∈ V.carrier
+  · have hreg : RegularAtDim (n := n) V.carrier y V.dim := by
+      by_contra h; exact hy ⟨hyV, h⟩
+    filter_upwards [RegularPatchNeighborhood.eventually_regularAtDim hreg] with z hz hzS
+    exact hzS.2 (hz hzS.1)
+  · filter_upwards [V.isClosed_carrier.isOpen_compl.mem_nhds hyV] with z hz hzS
+    exact hz hzS.1
+
+/-- **The singular locus is analytic, cut out by Jacobian minors** (`demailly-cadg:II.4.31`): in
+the preferred chart at any point, by Cartan generators `sᵢ` of the ideal of `V` and all
+`(n - dim V)`-minors of their Jacobian. -/
+theorem isComplexAnalyticSubset_singularLocus (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    IsComplexAnalyticSubset (n := n) (singularLocus V) := by
+  classical
+  intro x
+  obtain ⟨U, hU, hxU, N, s, hs, hspan, hzeroU⟩ :=
+    StokesSingularLocus.exists_cartanGenerators V.analytic V.isClosed_carrier x
+  set e := (complexChartAt (n := n) x).val with he
+  set g : Fin N → ComplexModel n → ℂ := fun i w => s i (e.symm w) with hg
+  set W : Set (ComplexModel n) := e.target ∩ e.symm ⁻¹' U with hW
+  have hWo : IsOpen W := e.isOpen_inter_preimage_symm hU
+  have hgd : ∀ i, DifferentiableOn ℂ (g i) W := fun i z hz =>
+    (differentiableAt_chart (complexChartAt (n := n) x) hz.1
+      ((hs i).mdifferentiableAt (hU.mem_nhds hz.2))).differentiableWithinAt
+  have hxe : x ∈ e.source := mem_complexChartAt_source x
+  refine ⟨{ generatorCount := N + Fintype.card (JacobianMinorIndex N n (n - V.dim))
+            generator := Fin.addCases g (jacobianMinorGenerator (n := n) (r := n - V.dim) g)
+            coordinateNeighborhood := W
+            isOpen_coordinateNeighborhood := hWo
+            center_mem_coordinateNeighborhood :=
+              ⟨e.map_source hxe, by rw [mem_preimage, e.left_inv hxe]; exact hxU⟩
+            coordinateNeighborhood_subset_target := inter_subset_left
+            generator_holomorphic := ?_
+            zeroLocus := ?_ }⟩
+  · intro a
+    refine Fin.addCases ?_ ?_ a
+    · intro j; simpa using hgd j
+    · intro j
+      simpa using differentiableOn_jacobianMinorGenerator (n := n) (r := n - V.dim) hWo hgd j
+  · intro y hye hyW
+    have hyU : y ∈ U := by
+      have := hyW.2
+      rwa [mem_preimage, e.left_inv hye] at this
+    have hgy : ∀ i, g i ((complexChartAt (n := n) x).val y) = s i y := fun i => by
+      simp only [hg]
+      rw [he, (complexChartAt (n := n) x).val.left_inv hye]
+    rw [Fin.forall_fin_add]
+    simp only [Fin.addCases_left, Fin.addCases_right]
+    constructor
+    · rintro ⟨hyV, hyreg⟩
+      refine ⟨fun i => by rw [hgy]; exact (hzeroU y hyU).mp hyV i, fun b => ?_⟩
+      by_contra hb
+      exact hyreg (regularAtDim_of_minor_ne_zero V x hU hs hzeroU hyU hye hyV _ _ hb)
+    · rintro ⟨hs0, hminor⟩
+      have hyV := (hzeroU y hyU).mpr fun i => by rw [← hgy]; exact hs0 i
+      refine ⟨hyV, fun hreg => ?_⟩
+      obtain ⟨rows, cols, hrc⟩ := exists_minor_ne_zero_of_le_finrank _
+        (le_finrank_span_fderiv_of_regularAtDim hU hs hspan hzeroU (complexChartAt (n := n) x)
+          hyU hye hreg)
+      apply hrc
+      have h := hminor ((Fintype.equivFin (JacobianMinorIndex N n (n - V.dim))) (rows, cols))
+      simpa [jacobianMinorGenerator, jacobianMinor, hg] using h
+
+/-- **The cutoffs of the one-sided probe along `V_sing`** (`ana:stokes-cutoffs` for
+`A = V_sing`): on a compact complex manifold with a Kähler form `ω`, chart-smooth `χ_m` with
+`0 ≤ χ_m ≤ 1`, vanishing on an open neighbourhood of `V_sing`, tending to `1` at every regular
+point of `V`, and `ddᶜ χ_m + (C / (m + 1)) ω ≥ 0`. -/
+theorem exists_stokesCutoffs_singularLocus [CompactSpace M]
+    (omega : PositiveClasses.KahlerBackground n M) (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    ∃ (C : ℝ) (χ : ℕ → M → ℝ) (hχ : ∀ m, ChartSmooth (n := n) (χ m)), 0 < C ∧
+      (∀ m y, 0 ≤ χ m y ∧ χ m y ≤ 1) ∧
+      (∀ m, ∃ O : Set M, IsOpen O ∧ singularLocus V ⊆ O ∧ ∀ y ∈ O, χ m y = 0) ∧
+      (∀ y ∈ regularLocus (n := n) V.carrier V.dim, Tendsto (fun m => χ m y) atTop (𝓝 1)) ∧
+      ∀ m, (ManifoldTubePositivity.ddcClosedForm (χ m) (hχ m) +
+        (C / ((m : ℝ) + 1)) • omega.form).val.IsSemipositive := by
+  obtain ⟨C, χ, hχ, hC, h01, hzero, hlim, hsemi⟩ :=
+    StokesPolePotential.exists_stokesCutoffs omega (isComplexAnalyticSubset_singularLocus V)
+      (isClosed_singularLocus V)
+  exact ⟨C, χ, hχ, hC, h01, hzero,
+    fun y hy => hlim y fun hyS => hyS.2 hy, hsemi⟩
 
 end Manifold
+
 end
+
 end Hironaka.StokesSingularLocusAnalytic

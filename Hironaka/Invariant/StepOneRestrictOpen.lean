@@ -1,62 +1,23 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneRepresentative
 import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerSplitIso
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactLowerValue
-import Hironaka.Invariant.ContactStageKept
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Invariant.MemberRestrictTowerIso
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneAdmissible
-import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: restriction to open sets (property (5))
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale
-morphisms, in particular with restriction to open sets.
+Blueprint `hir:step-one-restrict-open` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of
+`hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution
+commutes with étale morphisms, in particular with restriction to open sets.
 
-For `U ⊆ X` open and `𝔍|_U` the restriction, the masked Step 1 values of `𝔍|_U` along `T|_U` are those of `𝔍` along
-`T`, and canonical segments restrict. `J̄(𝔍|_U) = J̄(𝔍)|_U` (`ContactStageKept.barMarked_pullback_val`) and
-transforms commute with restriction, so the original members, levels, special points (codimension-one part and
-member locus under restriction) and regimes are the traces of those of `𝔍`; runs agree
-(`NonmonomialOrderRegime.regimeRun_restrict_of`); the split of `T|_U` is the restriction of the split of `T` up to
-isomorphisms over `id_U` (`BlowupTowerSplitIso.exists_isTowerIso_split_restrict`); the lower values agree by
-`ContactLowerValue.lowerValueL_zero_restrict` (level `0`) and `MemberRestrictTowerIso.lowerValueL_succ_restrict`
-(levels `≥ 1`).
+For `U ⊆ X` open and `𝔍|_U` the restriction, the masked Step 1 values of `𝔍|_U` along `T|_U` are those of `𝔍` along `T`, and
+canonical segments restrict.  `J̄(𝔍|_U) = J̄(𝔍)|_U` (TN23's `ContactStageKept.barMarked_pullback_val`) and transforms commute with
+restriction, so the original members, levels, special points (TN3's codimension-one part and member locus under restriction)
+and regimes are the traces of those of `𝔍`; runs agree (TN3's `NonmonomialOrderRegime.regimeRun_restrict_of`); the split of
+`T|_U` is the restriction of the split of `T` up to isomorphisms over `id_U` (`BlowupTowerSplitIso.exists_isTowerIso_split_restrict`);
+the lower values agree by TN23's `ContactLowerValue.lowerValueL_zero_restrict` (level `0`) and TN3's
+`MemberRestrictTowerIso.lowerValueL_succ_restrict` (levels `≥ 1`).
 
 ## Main results
 
@@ -64,6 +25,9 @@ isomorphisms over `id_U` (`BlowupTowerSplitIso.exists_isTowerIso_split_restrict`
   special points and regimes;
 * `hypotheses_restrict`: the hypotheses of Step 1 pass to `𝔍|_U`;
 * `stepOneInvM_restrict_eq`, **`stepOneInvM_restrict`**: property (5).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -74,7 +38,14 @@ universe u v
 namespace Hironaka.StepOneRestrictOpen
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong Hironaka.MarkedIdealRestrictOpen Hironaka.MemberInterLocusAlong Hironaka.BlowupTowerIsoTail Hironaka.MarkedIdealBiholomorphism
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail
+  Hironaka.HomogenizedIdealAlong Hironaka.CodimOneSupportAlong
+  Hironaka.MarkedIdealRestrictOpen Hironaka.MemberInterLocusAlong
+  Hironaka.BlowupTowerIsoTail Hironaka.MarkedIdealBiholomorphism
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant)

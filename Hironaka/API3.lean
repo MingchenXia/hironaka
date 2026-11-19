@@ -1,26 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedAnalytic
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Resolution.HironakaAdmissibleCalculus
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedDimensionParts
-import Hironaka.Resolution.HironakaSeparation
-import Hironaka.Blowup.NormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The public statements of the Hironaka library, III: analytic sets whose components have different dimensions
 
-`Hironaka.API` (`hir:public-statements`) and `Hironaka.API2` (`hir:public-statements-complete`) are unchanged; this
-module adds, in the same form (over an unbundled complex manifold, without marked ideals, towers, invariants or
-domain conditions):
+Blueprint `hir:public-statements-analytic` (`blueprint/src/hironaka.tex`; TN.5, gap (G1) of the public surface).  `HironakaAPI`
+(`hir:public-statements`) and `HironakaAPI2` (`hir:public-statements-complete`) are unchanged; this module adds, in the same form
+(over an unbundled complex manifold, without marked ideals, towers, invariants or domain conditions):
 
 ## Embedded resolution of an arbitrary analytic set by one sequence (Hironaka; Bierstone--Milman 1997, Theorem 1.6)
 
@@ -46,6 +34,9 @@ For a compact analytic set `W` with empty interior (its components may have diff
 
 These are restatements of theorems of `HironakaEmbeddedAnalytic`, `HironakaSeparation` and `HironakaAdmissibleCalculus`; their
 proofs are one line.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedAnalytic` only; it does not import, even
+transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -56,7 +47,8 @@ universe u
 namespace Hironaka
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence Hironaka.HironakaEmbeddedDimensionParts
+open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence
+  Hironaka.HironakaEmbeddedDimensionParts
 
 noncomputable section
 

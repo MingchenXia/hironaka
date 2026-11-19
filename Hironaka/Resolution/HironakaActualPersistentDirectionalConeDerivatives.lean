@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPointNormalizedBennett
 import Hironaka.Resolution.HironakaActualSuppliedFlatteningNormalPowers
 import Mathlib.RingTheory.MvPowerSeries.Rename
@@ -52,7 +47,6 @@ private def shearGerm (e : Fin n) (b : Fin n → ℂ) :
   toRingEquiv := HolGerm.comapEquiv (shearLinear e b).toContinuousLinearEquiv
   commutes' _ := rfl
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem shearGerm_coordinate (e : Fin n) (b : Fin n → ℂ) (i : Fin n) :
     shearGerm e b (coordinateGerm i)=
       coordinateGerm i+if i=e then 0 else HolGerm.constHom (b i)*coordinateGerm e := by
@@ -291,7 +285,6 @@ private theorem translated_polyIdeal_eq {ι : Type*} (P : ι → MvPolynomial (F
   funext i
   exact (translated_poly_mk p (P i)).symm
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem polyTranslatedIdeal_origin_formal {ι : Type*} (P : ι → MvPolynomial (Fin n) ℂ) :
     Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom (polyTranslatedIdeal P 0)=
       Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)) := by
@@ -391,7 +384,6 @@ theorem translated_cone_hs_eq_of_point_persistence
       ←hilbertSamuelValue_eq_actual_unshifted_formal_extension]
     exact hunit
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem shearGerm_translated_polynomial (e : Fin n) (b p : Fin n → ℂ)
     (f : MvPolynomial (Fin n) ℂ) :
     shearGerm e b (actualUnshiftedTranslatedPolynomialEval n

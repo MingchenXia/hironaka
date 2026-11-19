@@ -1,5 +1,0 @@
-/-- EVERY actual coefficient vector retains its genuine literal finite monomial numerator. -/
-theorem actualStandardQuotientMap_apply (I : Ideal (MvPowerSeries (Fin n) ℂ)) (q : ℕ)
-    (c : actualStandardIndex n I q → ℂ) :
-    actualStandardQuotientMap n I q c=
-      Ideal.Quotient.mk (I ⊔ genuineFormalVariables n ^ q) (actualStandardLift n I q c) := rfl

@@ -1,28 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSNCTransform
 import Hironaka.Analytic.GeneratorMultiplicityOne
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Manifold.LocalHolomorphicInverse
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Blowup.RegularPatchPushforward
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Simultaneous normal crossings coordinates for a centre, a submanifold and a divisor
 
-Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Definitions 2.1--2.2 ("`E` is transverse to
-`N`", "`C` and `E` have only normal crossings") and the remark after them; Wlodarczyk 2005
-(`wlodarczyk05-hironaka`), §2.1.
+Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Definitions 2.1--2.2 ("`E` is
+transverse to `N`", "`C` and `E` have only normal crossings") and the remark after them;
+Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1.  Blueprint `bcalc:snc-simultaneous` (chapter
+`blowup-calculus.tex`).
 
 Let `C ⊆ N` be subsets of a complex manifold `X` and `E = [H₁, …, H_s]` a simple normal crossings
 divisor, transverse to `N`, with which `C` has only normal crossings.  Then at every point `x ∈ C`
@@ -49,6 +37,8 @@ agreeing near `x` are equal (`eq_of_eventually_mem_iff`).
 The statement needs `0 < n`: in dimension `0` no function `Fin E.length → Fin 0` exists when `E`
 is nonempty.  Every blowup centre with a point has `0 < n` (`pos_of_isBlowupAlong`), since the
 centre of a blowup has empty interior.
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter
@@ -58,7 +48,8 @@ universe u
 
 namespace Hironaka.SimultaneousNormalCrossings
 
-open Hironaka.BlowupSequences NormalCrossings BlowupSNCTransform BlowupStrictSubmanifold RegularAtDimTransport RegularPatchPushforward
+open Hironaka.BlowupSequences NormalCrossings BlowupSNCTransform BlowupStrictSubmanifold
+  RegularAtDimTransport RegularPatchPushforward
 
 noncomputable section
 
@@ -743,6 +734,8 @@ theorem isTransverse_geoTransformE_of_hasNormalCrossings {C N : Set X} {π : Y �
     isAdaptedAt_of_hasNormalCrossings (pos_of_isBlowupAlong hπ hx) hCN hE hT hnc hx
 
 end Manifold
+
+
 
 end
 

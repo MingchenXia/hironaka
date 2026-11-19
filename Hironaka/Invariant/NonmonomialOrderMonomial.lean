@@ -1,44 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderTail
 import Hironaka.Invariant.NonmonomialOrderZero
 import Hironaka.Invariant.MonomialInvariantFunctorialAlong
 import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GeoTransformWellFormed
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The monomial phase of the general step: the invariant `γ` where the nonmonomial part has order zero
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (where the nonmonomial part is
-trivial the marked ideal is monomial and Step 2b, the monomial case, applies); Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`), Step II.A.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`, the case `o = 0`); claim I-0977 C-0198,
+asked in C-0197.  Blueprint `bcalc:nonmonomial-order-monomial` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (where the nonmonomial part is trivial the marked ideal is
+monomial and Step 2b, the monomial case, applies); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.A.
 
 At a point of order `ν = 0` of the nonmonomial part the general step's value is read off the invariant
 `γ_𝔫 = MonomialCaseAlong.gammaAlong n 𝔫.N 𝔫.ideal 𝔫.E 𝔫.d` of the current marked ideal.  The monomial case along `N`
@@ -49,10 +23,11 @@ restricts to that open set, applies the monomial case there, and reads the resul
 `𝔫` in the domain (`IsInvDomain k 𝔫`) and `n > 0`:
 
 * `isMonomialAlong_pullback_val_ordMask`: `𝔫|_{ordMask 𝔫 0}` is monomial along its submanifold;
-* **`isAdmissibleCentre_gammaAlong_level_of_ordZero`** (property (1) at `o = 0`): on an open `W` on which the
-  cosupport has order `0` and `γ ≤ v`, the points of the cosupport with `γ = v` form an admissible centre of `𝔫|_W`
-  (the patching of `MaxLocusLocal.isAdmissibleCentre_pullback_val_of_forall_exists_opens`); in particular the
-  maximum locus of `γ_𝔫` on a cosupport of order `0` is an admissible centre;
+* **`isAdmissibleCentre_gammaAlong_level_of_ordZero`** (property (1) at `o = 0`): on an open `W` on which the cosupport
+  has order `0` and `γ ≤ v`, the points of the cosupport with `γ = v` form an admissible centre of `𝔫|_W` (the patching
+  of `MaxLocusLocal.isAdmissibleCentre_pullback_val_of_forall_exists_opens`); in particular
+  (`isAdmissibleCentre_maxLocus_gammaAlong_of_ordZero`) the maximum locus of `γ_𝔫` on a cosupport of order `0` is an
+  admissible centre;
 * **`gammaAlong_geoTransform_eq_of_notMem_of_ordZero`** (properties (3), (4) off the centre at `o = 0`): for any admissible
   centre `C` (`C = ∅` allowed) and `z ∈ N'` with `π z ∉ C` of order `0`, `γ_{𝔫'}(z) = γ_𝔫(π z)`;
 * **`gammaAlong_geoTransform_lt_of_ordZero`** (property (3) over the centre at `o = 0`): if the whole cosupport has order
@@ -60,6 +35,9 @@ restricts to that open set, applies the monomial case there, and reads the resul
 
 Upper semicontinuity of `γ_𝔫` on `N` needs no monomiality (`MonomialCaseAlong.eventually_gammaAlong_le`, with
 `IsInvDomain.isNonzeroAlongAt`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -70,7 +48,12 @@ universe u v
 namespace Hironaka.NonmonomialOrderMonomial
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.MonomialInvariant Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderTail
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.MonomialInvariant Hironaka.MonomialCaseAlong
+  Hironaka.MonomialStepAlong Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderTail
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 open Hironaka.ResolutionDriver (maxLocus)
 
@@ -190,6 +173,20 @@ theorem isAdmissibleCentre_gammaAlong_level_of_ordZero (hn : 0 < n) (h : IsInvDo
           exact ⟨𝔫.cosupp_subset_N hq, hγq⟩
       rw [← hset]
       exact hadm
+
+/-- **The maximum locus of `γ` on a cosupport of order `0` is an admissible centre** (`n > 0`, `𝔫` in the domain): the
+maximum locus is a level set (`ResolutionInvariantDriver.maxLocus_eq_level`), and
+`isAdmissibleCentre_gammaAlong_level_of_ordZero` on `W = ⊤` applies. -/
+theorem isAdmissibleCentre_maxLocus_gammaAlong_of_ordZero (hn : 0 < n) (h : IsInvDomain k 𝔫)
+    (hcos : ∀ y ∈ 𝔫.cosupp, y ∉ ordGe 𝔫 1) :
+    𝔫.IsAdmissibleCentre (maxLocus (gammaAlong n 𝔫.N 𝔫.ideal 𝔫.E 𝔫.d) 𝔫.cosupp) := by
+  rcases (maxLocus (gammaAlong n 𝔫.N 𝔫.ideal 𝔫.E 𝔫.d) 𝔫.cosupp).eq_empty_or_nonempty with he | ⟨c, hc⟩
+  · rw [he]
+    exact isAdmissibleCentre_empty 𝔫
+  · rw [ResolutionInvariantDriver.maxLocus_eq_level hc]
+    exact ResolutionInvariantDriver.isAdmissibleCentre_of_pullback_val_top
+      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h.isWellFormed.isCoherent hg)
+      (isAdmissibleCentre_gammaAlong_level_of_ordZero hn h ⊤ _ (fun y hy _ => hcos y hy) fun y hy _ => hc.2 y hy)
 
 end Mask
 

@@ -1,36 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneCanonicalTail
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: upper semicontinuity of the value
 
+Blueprint `hir:step-one-usc` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
 Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1: the invariant of Step 1 is
-`(s(x), inv_{k-1}(x))` with `s` the number of original divisor members through `x` (upper semicontinuous, the
-members being closed) and `inv_{k-1}` the lower-dimensional invariant of the restricted marked ideal on a
-neighbourhood of `x` (upper semicontinuous by induction).
+`(s(x), inv_{k-1}(x))` with `s` the number of original divisor members through `x` (upper semicontinuous, the members being
+closed) and `inv_{k-1}` the lower-dimensional invariant of the restricted marked ideal on a neighbourhood of `x` (upper
+semicontinuous by induction).
 
 Property (2) of the Step 1 value function (`hir:centre-function`, "upper semicontinuity on the cosupport") for the masked
 value `StepOneValueMasked.stepOneInvM`, along canonical segments which are multiple test blow-ups of `J̄`:
@@ -38,7 +18,8 @@ value `StepOneValueMasked.stepOneInvM`, along canonical segments which are multi
 * at a special point `x` of level `s` the value is `(s, ∞)`, the largest value of level `s`, and the level is upper
   semicontinuous (`BoundaryCount.eventually_boundaryCount_le`);
 * at a non-special point `x` of level `s`, `x` has lower data (`StepOneCanonicalTail.hasLowerDataL_of_isCanonical`): over the
-  open preimage of its mask the points of the cosupport have level `≤ s`, those of level `s` lie in the cosupport of the lower marked ideal along the restricted tail, where the value is `(s, R(q))` (`StepOneCanonicalTail.stepOneInvM_eq_lower`), and
+  open preimage of its mask the points of the cosupport have level `≤ s`, those of level `s` lie in the cosupport of the lower
+  marked ideal along the restricted tail, where the value is `(s, R(q))` (`StepOneCanonicalTail.stepOneInvM_eq_lower`), and
   `R` is upper semicontinuous there (the field `usc` of `R`).
 
 ## Main results
@@ -46,6 +27,9 @@ value `StepOneValueMasked.stepOneInvM`, along canonical segments which are multi
 * `eventually_level_le`: the level is upper semicontinuous;
 * `eventually_forall_mem_of_eventually`: an eventual property on an open subtype, pushed to the ambient space;
 * `stepOneInvM_eventually_le_of_not_isSpecial`, **`stepOneInvM_usc`**: property (2).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -56,7 +40,14 @@ universe u v
 namespace Hironaka.StepOneUSC
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneMaskTower Hironaka.StepOneValueMasked Hironaka.StepOneCanonicalTail Hironaka.BoundaryCount Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.ResolutionInvariantOrder
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneMaskTower Hironaka.StepOneValueMasked
+  Hironaka.StepOneCanonicalTail Hironaka.BoundaryCount
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.ResolutionInvariantOrder
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
 open Hironaka.ResolutionInvariantExt (ResolutionInvariant isGeoTestTower_of_isCanonical)
 

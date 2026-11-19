@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Coherence.GeneralCoherentIdealColon
 import Hironaka.Analytic.LocalHolomorphicFiniteSpanTransport
 
 set_option autoImplicit false
@@ -17,7 +11,6 @@ namespace Hironaka.ManifoldFiniteSpanChartTransport
 
 open Hironaka.HolomorphicIdealSheaves
 
-open Hironaka
 noncomputable section
 
 /-- The literal original generators, rather than chart-generated substitutes, are retained. -/

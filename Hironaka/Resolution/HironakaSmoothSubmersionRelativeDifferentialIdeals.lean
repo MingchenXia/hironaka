@@ -1,8 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
+import Hironaka.Resolution.HironakaG3UniverseHomCoeff
 import Hironaka.Resolution.HironakaSmoothSubmersionAdaptedProductCoordinates
 import Hironaka.Resolution.HironakaSmoothSubmersionRelativeControlledTower
 import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
@@ -438,17 +434,8 @@ theorem pullback_homogenizedIdealAlong {m : ℕ} {Y : CMfd.{u} m} {f : Y → X}
     (I : GermIdeal n X) (hI : I.IsCoherent) (N : Set X) (hN : IsClosedSubmanifold n N) (μ : ℕ) :
     GermIdeal.pullback (m := m) f (homogenizedIdealAlong N I μ) =
       homogenizedIdealAlong (f ⁻¹' N) (GermIdeal.pullback (m := m) f I) μ := by
-  unfold homogenizedIdealAlong homSum
-  rw [pullback_finSumIdeal hf.contMDiff _ _ (fun i _ =>
-    IdealWeightPowers.isCoherent_mul (isCoherent_iterDerivIdealAlong hI hN i)
-      (isCoherent_idealPow (isCoherent_tangentIdealAlong hI hN μ) i))]
-  apply finSumIdeal_congr
-  intro i _
-  rw [HironakaSmoothSubmersionCoefficientIdeals.pullback_mul hf.contMDiff
-    (isCoherent_iterDerivIdealAlong hI hN i) (isCoherent_idealPow (isCoherent_tangentIdealAlong hI hN μ) i),
-    HironakaSmoothSubmersionCoefficientIdeals.pullback_idealPow hf.contMDiff
-      (isCoherent_tangentIdealAlong hI hN μ),
-    pullback_iterDerivIdealAlong hf I hI N hN i,pullback_tangentIdealAlong hf I hI N hN μ]
+  exact G3UniverseBarMarked.homogenized_pullback_of_iter f hf.contMDiff N I hI hN
+    (pullback_iterDerivIdealAlong hf I hI N hN) μ
 
 theorem pullback_homMarkedAlong {m : ℕ} {Y : CMfd.{u} m} {f : Y → X}
     (hf : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ f)
@@ -461,18 +448,8 @@ theorem pullback_coeffMarkedAlong {m : ℕ} {Y : CMfd.{u} m} {f : Y → X}
     (hf : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ f)
     (M : MarkedIdeal n X) (hI : M.ideal.IsCoherent) (hN : IsClosedSubmanifold n M.N) :
     markedPullback (m := m) f (coeffMarkedAlong M) = coeffMarkedAlong (markedPullback (m := m) f M) := by
-  refine MarkedIdealOperationsTransform.MarkedIdeal.ext_of rfl rfl ?_ rfl
-  change GermIdeal.pullback (m := m) f
-      (finSumIdeal (fun i => idealPow (iterDerivIdealAlong M.N M.ideal i)
-        (sumExp (fun j => M.d-j) M.d i)) M.d) =
-    finSumIdeal (fun i => idealPow (iterDerivIdealAlong (f ⁻¹' M.N)
-      (GermIdeal.pullback (m := m) f M.ideal) i) (sumExp (fun j => M.d-j) M.d i)) M.d
-  rw [pullback_finSumIdeal hf.contMDiff _ _
-    (fun i _ => isCoherent_idealPow (isCoherent_iterDerivIdealAlong hI hN i) _)]
-  apply finSumIdeal_congr
-  intro i _
-  rw [HironakaSmoothSubmersionCoefficientIdeals.pullback_idealPow hf.contMDiff
-    (isCoherent_iterDerivIdealAlong hI hN i),pullback_iterDerivIdealAlong hf M.ideal hI M.N hN i]
+  exact G3UniverseBarMarked.coeffMarked_pullback_of_iter f hf.contMDiff M hI hN
+    (pullback_iterDerivIdealAlong hf M.ideal hI M.N hN)
 
 theorem homMarkedAlong_cosupp_preimage {m : ℕ} {Y : CMfd.{u} m} {f : Y → X}
     (hf : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ f)

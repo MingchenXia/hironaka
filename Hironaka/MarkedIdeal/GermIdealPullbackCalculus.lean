@@ -1,25 +1,23 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.IdealPowers
 import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Pullback calculus for germ ideals
 
-Step 1 starts from the inclusion `𝔅_M ⊆ 𝔅_m^{M/m}` on `V` and transports it to `Y_fix`:
+Source: Copy-4, Step 1 of `prop:principalization`
+(`transcendental-nakamaye-copy4-20260911`).  Step 1 starts from the inclusion
+`𝔅_M ⊆ 𝔅_m^{M/m}` on `V` and transports it to `Y_fix`:
 
     `𝔅_M 𝒪_{Y_fix} ⊆ (𝔅_m 𝒪_{Y_fix})^{M/m} = 𝒪_{Y_fix}(-(M/m) G̃_m)`,
 
-This module supplies them:
+then divides (`InvertibleIdealQuotient`) to get the coherent `𝔠_M`, and finally
+needs `𝔠_M` to have nonzero restriction to `W_m` so that
+`lem:relative-principalization` applies to it.  Each of those four moves is a
+property of `GermIdeal.pullback`, `GermIdeal.mul` and `idealPow` that nothing in
+the project recorded.  This module supplies them:
 
 * `isInSpanAt_comp` — a span relation at `f y` composes with `f` to a span
   relation at `y` in the pulled-back family.  The workhorse; everything else is
@@ -28,8 +26,18 @@ This module supplies them:
 * `isCoherent_pullback` — **the pullback of a coherent ideal along a holomorphic
   map is coherent**, with the pulled-back generators as generators.  Without it
   `InvertibleIdealQuotient` cannot even be applied to `𝔅_M 𝒪_{Y_fix}`.
+* `pullback_mul_le`, `pullback_idealPow_le` — `(𝔞𝔟)𝒪_Y ⊆ (𝔞𝒪_Y)(𝔟𝒪_Y)` and its
+  iterate, which is how the power on the right-hand side of the displayed
+  inclusion is reached.
+* `mul_le_right`, `mul_le_left`, `not_le_right_of_not_le_mul` — `𝔩𝔠 ⊆ 𝔠`, so a
+  factorization `𝔞 = 𝔩𝔠` transfers "nonzero restriction to `W`" from `𝔞` to `𝔠`.
 
-No Hironaka input, no compactness, no Kähler hypothesis.
+A `GermIdeal` is a bare membership predicate with no closure axiom, so
+`mul_le_right` needs its left factor's members to be holomorphic; both coherence
+and invertibility supply that, and the two corollaries record it.
+
+Everything here is sorry-free: no Hironaka input, no compactness, no Kähler
+hypothesis.
 -/
 
 open Set Filter
@@ -37,7 +45,8 @@ open scoped Topology Manifold ContDiff
 
 namespace Hironaka.GermIdealPullbackCalculus
 
-open Hironaka.HolomorphicIdealSheaves RelativePrincipalizationSpan IdealWeightPowers
+open Hironaka.HolomorphicIdealSheaves RelativePrincipalizationSpan
+  IdealWeightPowers
 
 noncomputable section
 
@@ -139,7 +148,38 @@ theorem isCoherent_idealPow {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) :
   | 0 => isCoherent_unitIdeal
   | p + 1 => isCoherent_mul (isCoherent_idealPow h𝔞 p) h𝔞
 
+/-- The pullback of a power is contained in the power of the pullback. -/
+theorem pullback_idealPow_le
+    (hf : ContMDiff 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ f)
+    {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) :
+    ∀ p : ℕ, (GermIdeal.pullback (m := m) f (idealPow 𝔞 p)).Le
+      (idealPow (GermIdeal.pullback (m := m) f 𝔞) p)
+  | 0 => by
+      intro y g hg
+      exact (GermIdeal.mem_pullback_iff.mp hg).holomorphicAt
+  | p + 1 => by
+      intro y g hg
+      have h1 := pullback_mul_le hf
+        (fun {_ _} h => GermIdeal.IsCoherent.holomorphicAt_mem (isCoherent_idealPow h𝔞 p) h)
+        (fun {_ _} h => GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 h) y g hg
+      refine InvertibleIdealQuotient.mem_mul_iff.mpr
+        (IsInSpanAt.mono ?_ (InvertibleIdealQuotient.mem_mul_iff.mp h1))
+      rintro s' ⟨p', q', hp', hq', rfl⟩
+      exact ⟨p', q', pullback_idealPow_le hf h𝔞 p y p' hp', hq', rfl⟩
+
 /-! ## Absorption -/
+
+/-- `𝔩 · 𝔠 ⊆ 𝔠`.  A `GermIdeal` has no closure axiom, so the left factor's
+members are required to be holomorphic. -/
+theorem mul_le_right {𝔞 𝔟 : GermIdeal n M}
+    (h𝔞hol : ∀ {x : M} {g : M → ℂ}, 𝔞.mem x g → HolomorphicAt n g x)
+    (h𝔟 : 𝔟.IsCoherent) : (𝔞.mul 𝔟).Le 𝔟 := by
+  intro x g hg
+  obtain ⟨U, hU, hxU, N, s, hs, hgen⟩ := h𝔟 x
+  refine (hgen x hxU g).mpr
+    (IsInSpanAt.trans ?_ (InvertibleIdealQuotient.mem_mul_iff.mp hg))
+  rintro t ⟨p, q, hp, hq, rfl⟩
+  exact IsInSpanAt.mul_left (h𝔞hol hp) ((hgen x hxU q).mp hq)
 
 /-- `𝔞 · 𝔟 ⊆ 𝔞`, the mirror statement. -/
 theorem mul_le_left {𝔞 𝔟 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent)
@@ -153,6 +193,21 @@ theorem mul_le_left {𝔞 𝔟 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent)
   refine InvertibleIdealQuotient.IsInSpanAt.congr'
     (IsInSpanAt.mul_left (h𝔟hol hq) ((hgen x hxU p).mp hp)) ?_
   exact Eventually.of_forall fun z => mul_comm _ _
+
+/-- **Nonzero restriction transfers across a factorization.**  If `𝔞 = 𝔩 · 𝔠`
+and `𝔞 ⊄ 𝔠'`, then `𝔠 ⊄ 𝔠'`.  With `𝔠' = 𝓘_W` this is Copy-4's "the restriction
+of `𝔠_M` to `W_m` is nonzero because `𝔅̄_M ≠ 0`", i.e. exactly the hypothesis
+`lem:relative-principalization` asks of `𝔠_M`. -/
+theorem not_le_right_of_not_le_mul {𝔞 𝔟 𝔠 : GermIdeal n M}
+    (h𝔞hol : ∀ {x : M} {g : M → ℂ}, 𝔞.mem x g → HolomorphicAt n g x)
+    (h𝔟 : 𝔟.IsCoherent) (h : ¬ (𝔞.mul 𝔟).Le 𝔠) : ¬ 𝔟.Le 𝔠 :=
+  fun hb => h fun x g hg => hb x g (mul_le_right h𝔞hol h𝔟 x g hg)
+
+/-- The form Step 1 uses, with the left factor invertible. -/
+theorem not_le_right_of_not_le_mul_invertible {𝔞 𝔟 𝔠 : GermIdeal n M}
+    (h𝔞 : 𝔞.IsInvertible) (h𝔟 : 𝔟.IsCoherent) (h : ¬ (𝔞.mul 𝔟).Le 𝔠) : ¬ 𝔟.Le 𝔠 :=
+  not_le_right_of_not_le_mul
+    (fun {_ _} hg => GermIdeal.IsInvertible.holomorphicAt_mem h𝔞 hg) h𝔟 h
 
 end
 

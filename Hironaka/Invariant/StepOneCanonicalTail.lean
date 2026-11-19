@@ -1,49 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneCompare
 import Hironaka.Invariant.StepOneTangentChange
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneMaskTower
-import Hironaka.Invariant.StepOneNearby
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The canonical-tail theorem of Step 1: lower data along canonical segments
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1: the lower-dimensional
-invariant of a point is that of the restricted marked ideal formed at the stage where the point entered its regime,
-"along `T₁|_W`, which is a canonical segment of it" -- near the point, the centres of the canonical segment of the
-Step 1 invariant are empty or the maximum loci of the lower-dimensional invariant.
+Blueprint `hir:step-one-canonical-tail` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1: the lower-dimensional invariant of a
+point is that of the restricted marked ideal formed at the stage where the point entered its regime, "along `T₁|_W`, which is a
+canonical segment of it" -- near the point, the centres of the canonical segment of the Step 1 invariant are empty or the
+maximum loci of the lower-dimensional invariant.
 
 Let `𝔍` be well formed with `d ≥ 1`, of maximal order along `N` with `dim N ≤ k` (`0 < n`), `R` a resolution invariant in
 dimension `≤ k - 1` and `stepOneInvM R 𝔍` the Step 1 value function with the original members masked
@@ -52,15 +20,14 @@ is a canonical segment of `stepOneInvM R 𝔍`, every point of the cosupport whi
 (`StepOneValueMasked.LowerDataL`): the image lies in its mask, the lower marked ideal lies in the domain, the restricted tail is a
 canonical segment of it, and the point lies in its cosupport.
 
-Proof: induction on the length. After a further blowup `σ` along `C` (the maximum locus or empty), a point `y` whose
-image `z = σ y` keeps its regime has the split of `z` with the tail extended by `σ`; the new centre traced on the
-restricted tail is empty or the maximum locus of the lower-dimensional invariant
-(`MaxLocusLocal.preimage_maxLocus_eq_or` with the strictly monotone `λ ↦ (s, λ)`), because at every point `q` of the
-cosupport of the lower marked ideal the value is `(s, R(q))`: `stepOneInvM_eq_lower` -- `q` has the level `s`, lower
-data at its own (possibly earlier) split by induction, the steps between the two starts miss its mask
-(`StepOneValueMasked.centresAvoid_lowerMaskL`, with `exists_middle`), and `StepOneCompare` moves its value to the
-reference point's lower marked ideal (Step 1bb with `StepOneTangentChange`); and the other points over the mask have
-a smaller level. A point leaving its regime starts a new run with lower data from `StepOneValueMasked` and
+Proof: induction on the length.  After a further blowup `σ` along `C` (the maximum locus or empty), a point `y` whose image
+`z = σ y` keeps its regime has the split of `z` with the tail extended by `σ`; the new centre traced on the restricted tail is
+empty or the maximum locus of the lower-dimensional invariant (TN3's `MaxLocusLocal.preimage_maxLocus_eq_or` with the strictly
+monotone `λ ↦ (s, λ)`), because at every point `q` of the cosupport of the lower marked ideal the value is `(s, R(q))`:
+`stepOneInvM_eq_lower` -- `q` has the level `s`, lower data at its own (possibly earlier) split by induction, the steps between
+the two starts miss its mask (`StepOneValueMasked.centresAvoid_lowerMaskL`, with `exists_middle`), and `StepOneCompare` moves its
+value to the reference point's lower marked ideal (Step 1bb with TN23's `StepOneTangentChange`); and the other points over the
+mask have a smaller level.  A point leaving its regime starts a new run with lower data from `StepOneValueMasked` and
 `StepOneCompare` (`lowerDataL_refl`).
 
 ## Main results
@@ -69,14 +36,17 @@ a smaller level. A point leaving its regime starts a new run with lower data fro
 * `mem_cosupp_lowerMarkedM_iff`: a point over the mask lies in the cosupport of the lower marked ideal along the restricted
   tail iff it lies in `cosupp J̄_T` and has the level of the mask;
 * `lowerDataL_refl`: lower data along the empty tail;
-* `lowerValueL_eq_succ_of_eq`, `lowerValueL_eq_zero_of_eq`: the comparison of `StepOneCompare` with the stages given
-  by equations, Step 1bb finished by `inv_restrictedCoeffHom_eq_of_opens_disjoint`;
+* `lowerValueL_eq_succ_of_eq`, `lowerValueL_eq_zero_of_eq`: the comparison of `StepOneCompare` with the stages given by
+  equations, Step 1bb finished by TN23's `inv_restrictedCoeffHom_eq_of_opens_disjoint`;
 * `exists_middle`: the middle part between two start stages, with its centres missing the earlier mask;
 * `stepOneInvM_eq_lower`: the value at a point of the cosupport of the lower marked ideal;
 * `lowerDataL_step`, **`hasLowerDataL_of_isCanonical`**: the canonical-tail theorem;
 * `stepOneInvM_step_of_notMem_of_isCanonical`, `stepOneInvM_step_lt_of_mem_of_isCanonical`: properties (3) "equal off the
   centre", (4), and (3) "drop over the centre" at non-special points keeping their level, now unconditional along canonical
   segments which are multiple test blow-ups.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -87,7 +57,16 @@ universe u v
 namespace Hironaka.StepOneCanonicalTail
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneMaskTower Hironaka.StepOneNearby Hironaka.StepOneValueMasked Hironaka.StepOneCompare Hironaka.BoundaryCount Hironaka.InvDomainMemberRestriction Hironaka.MarkedIdealBiholomorphism Hironaka.RestrictEmptyTower Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.TangentDirectionAlong Hironaka.CoefficientIdealRestriction
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneMaskTower Hironaka.StepOneNearby
+  Hironaka.StepOneValueMasked Hironaka.StepOneCompare
+  Hironaka.BoundaryCount Hironaka.InvDomainMemberRestriction
+  Hironaka.MarkedIdealBiholomorphism Hironaka.RestrictEmptyTower
+  Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong
+  Hironaka.TangentDirectionAlong Hironaka.CoefficientIdealRestriction
 open Hironaka.HomogenizedGlueingTower (strictAlong)
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
@@ -212,10 +191,9 @@ theorem lowerValueL_eq_succ_of_eq (h𝔍 : 𝔍.IsWellFormed) (hn : 0 < n) {s : 
   subst e e'
   exact lowerValue_eq_succ R 𝔍 h𝔍 hn T₀' M T₁ hT hdom₀ hcan₀ hpW hlp hcos₀ hd₁ hM
 
-/-- **Step 1bb comparison, stages given by equations**: re-basing (`StepOneCompare.lowerValue_eq_zero_rebase`) and the
-change of tangent direction on the masks (`StepOneTangentChange.inv_restrictedCoeffHom_eq_of_opens_disjoint`,
-divisor kept): the lower value of `p` is the value of `R` for the masked lower marked ideal of `y₀` along `T₁|_W` at
-`p`. -/
+/-- **Step 1bb comparison, stages given by equations**: re-basing (`StepOneCompare.lowerValue_eq_zero_rebase`) and the change
+of tangent direction on the masks (TN23's `StepOneTangentChange.inv_restrictedCoeffHom_eq_of_opens_disjoint`, divisor kept): the
+lower value of `p` is the value of `R` for the masked lower marked ideal of `y₀` along `T₁|_W` at `p`. -/
 theorem lowerValueL_eq_zero_of_eq (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {Y₁ Y₀ Y : CMfd.{u} n}
     (T₀' : BlowupTower X Y₁) (M : BlowupTower Y₁ Y₀) (T₀ : BlowupTower X Y₀) (e : T₀'.append M = T₀)
@@ -444,13 +422,12 @@ theorem stepOneInvM_eq_lower (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn
     exact lowerValueL_eq_succ_of_eq 𝔍 R h𝔍 hn (head T' (regimeRun (stepRegime 𝔍 (s' + 1)) T' q)) M (head T' r) e₁
       (tail T' r) (tail T' (regimeRun (stepRegime 𝔍 (s' + 1)) T' q)) e₂ hT₀₁ hdom₀ hcan₀ q.2 hlp hq hqD hM
 
-/-- **The induction step of the canonical-tail theorem**: along a multiple test blow-up `T' σ` of `J̄` which is a
-canonical segment of `stepOneInvM R 𝔍` (`σ` the blowup along `C`), with lower data along every tower at most as long
-as `T'`, a point `y` of the cosupport whose image `σ y` is in the regime of the level `s` of `y`, with run `r`, has
-lower data at the split of `T'` at `r` followed by `σ`: the trace of `C` on the restricted tail is empty or the
-maximum locus of the lower-dimensional invariant (`MaxLocusLocal.preimage_maxLocus_eq_or`, with
-`stepOneInvM_eq_lower` and the smaller levels elsewhere over the mask), and `y` lies in the cosupport of the lower
-marked ideal. -/
+/-- **The induction step of the canonical-tail theorem**: along a multiple test blow-up `T' σ` of `J̄` which is a canonical
+segment of `stepOneInvM R 𝔍` (`σ` the blowup along `C`), with lower data along every tower at most as long as `T'`, a point
+`y` of the cosupport whose image `σ y` is in the regime of the level `s` of `y`, with run `r`, has lower data at the split of
+`T'` at `r` followed by `σ`: the trace of `C` on the restricted tail is empty or the maximum locus of the lower-dimensional
+invariant (TN3's `MaxLocusLocal.preimage_maxLocus_eq_or`, with `stepOneInvM_eq_lower` and the smaller levels elsewhere over the
+mask), and `y` lies in the cosupport of the lower marked ideal. -/
 theorem lowerDataL_step (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) (hk : DimLE n 𝔍.N k) {Y' Z : CMfd.{u} n} (T' : BlowupTower X Y')
     (C : Set Y') (π : Z → Y') (hπ : IsBlowupAlong n C π) (hT : IsGeoTestTower (barMarked 𝔍) (.step T' C π hπ))

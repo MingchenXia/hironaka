@@ -1,11 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.RestrictedIdealLeSumLeftExact
-import Hironaka.MarkedIdeal.DerivativeIdealCoherence
-import Hironaka.Invariant.OrderTaylorCosupport
 import Hironaka.Resolution.HironakaNormalCrossingsHighestSubcentreAdmissibility
 import Hironaka.Resolution.HironakaEmbeddedReducible
 import Hironaka.Invariant.OrderTaylor
@@ -34,8 +26,8 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsMultiplicityStrata
   HironakaNormalCrossingsHighestStratumBlowup HironakaNormalCrossingsHighestSubcentreAdmissibility
   CanonicalCentres
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open _root_.Hironaka.ResolutionDriver (maxLocus)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionDriver (maxLocus)
 variable {n : ℕ} {X : CMfd.{u} n}
 
 /-- The actual intrinsic stratum ideal plus actual original derivative ideal. -/

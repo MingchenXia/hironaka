@@ -1,46 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactStageTail
 import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Invariant.ContactStageInvDomain
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.MarkedIdeal.MaximalContactAlongTower
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Re-basing Step 1b's restricted marked ideal across steps that are empty near the point
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), the lemma on the commutativity of the resolution procedure in Step 1
-with étale morphisms (`J̄'_{|V(u)} = φ^*(J̄_{|V(u)})`; blow-ups whose centres miss the image pull back to
-isomorphisms).
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0095 / I-0977 C-0134 (confirmed by TN-CLASSICAL, C-0098) for the Step 1
+value function (`hir:maximal-order-step`, `blueprint/src/hironaka.tex`; TN-CLASSICAL's `StepOneValue`): the Step 1b analogue of
+TN3's `InvDomainRebase.memberRestrict_rebase` (Step 1a).  Blueprint `mc:contact-stage-rebase`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), the lemma on the commutativity of the
+resolution procedure in Step 1 with étale morphisms (`J̄'_{|V(u)} = φ^*(J̄_{|V(u)})`; blow-ups whose centres miss the image
+pull back to isomorphisms).
 
 In Step 1b the value at a point involves the invariant of `𝓢_{u,T₀}|_W = (𝓒_{N_{T₀}}(J̄_{T₀})|_{(N ∩ V(u))_{T₀}})|_W`
 (`MaximalOrderStepOneB.contactMarked N 𝔞 μ u T₀ W`), formed at a stage `T₀` that depends on the point and restricted to a
@@ -52,11 +24,19 @@ equivalence, and the resulting identity of values.
 
 ## Main results
 
-* `restrictEquiv_restrictedCoeff_geoTransformAlong_of_isEmptyTower` (generic): along a tower with only empty
-  centres, `𝓒_{N_T}(𝔪_T)|_{A_T} ≃ (𝓒_N(𝔪)|_A)_T` ((K3)
-  `ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransformAlong_empty` step by step);
+* `restrictEquiv_restrictedCoeff_geoTransformAlong_of_isEmptyTower` (generic): along a tower with only empty centres,
+  `𝓒_{N_T}(𝔪_T)|_{A_T} ≃ (𝓒_N(𝔪)|_A)_T` (TN23's (K3) `ContactCanonicalAlong.restrictEquiv_restrictedCoeff_geoTransformAlong_empty`
+  step by step);
 * `restrictEquiv_restrictedCoeffHomAlong_rebase` (any divisor): for `J̄ = 𝓒_N(𝓗_N(𝔍))`, a multiple test blow-up `T₀ T` of `J̄`,
   `W ⊆ T₀⁻¹U` open with the centres of `T` missing `W`: `𝓢_{u,T₀T}|_{T⁻¹W} ≃ (𝓢_{u,T₀}|_W)_{T|_W}`;
+* `restrictEquiv_contactMarked_rebase`: the same for `E = ∅` in TN-CLASSICAL's notation, `contactMarked N 𝔞 μ u (T₀.append T)
+  (openPreimage T W) ≃ (contactMarked N 𝔞 μ u T₀ W)_{restrict W T}`;
+* **`contactMarked_rebase`**: with TN3's `InvDomainRebase.inv_rebase` -- if `𝓢_{u,T₀}|_W` lies in the domain of a resolution
+  invariant `R` and `T|_W T₁` is a canonical segment of it, then `𝓢_{u,T₀T}|_{T⁻¹W}` lies in the domain, `T₁` is a canonical
+  segment of it, its transforms along `T₁` lie in the domain, and the values agree on the cosupport.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -66,7 +46,11 @@ universe u v
 
 namespace Hironaka.ContactStageRebase
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong HomogenizedIdealAlongTower MarkedIdealBiholomorphism MarkedIdealRestrictOpen MemberInterTowerAlong MaximalContactAlongTower MarkedIdealOperationsAlong.MarkedIdeal ResolutionInvariantExt RestrictEmptyTower
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong HomogenizedIdealAlongTower MarkedIdealBiholomorphism
+  MarkedIdealRestrictOpen MemberInterTowerAlong MaximalContactAlongTower MarkedIdealOperationsAlong.MarkedIdeal
+  ResolutionInvariantExt RestrictEmptyTower
 open HomogenizedGlueingTower (strictAlong strictAlong_restrict)
 open MemberInterLocusAlong (strictAlong_append)
 open ContactIndependenceAlong (one_le_coeffMarkedAlong_d)
@@ -157,6 +141,62 @@ theorem restrictEquiv_restrictedCoeffHomAlong_rebase {Y₀ Y : CMfd.{u} n} (T₀
   exact hK
 
 end CoeffHomAlong
+
+/-! ### Step 1b with `E = ∅`, in the notation of `MaximalOrderStepOneB` -/
+
+section ContactMarked
+
+open MaximalOrderStepOneB (stepOneMarked contactMarked)
+
+variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+  {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ}
+
+/-- **Step 1b's restricted marked ideal re-based, `E = ∅`** (TN-CLASSICAL's notation): for a multiple test blow-up `T₀ T` of
+`stepOneMarked N 𝔞 μ` and an open `W ⊆ T₀⁻¹U` missed by the centres of `T`,
+`contactMarked N 𝔞 μ u (T₀ T) (T⁻¹W) ≃ (contactMarked N 𝔞 μ u T₀ W)_{T|_W}`. -/
+theorem restrictEquiv_contactMarked_rebase (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ)
+    (U : Opens M) {u : M → ℂ} (hu : IsTangentDirectionAlong N 𝔞 μ U u) {Y₀ Y : CMfd.{u} n}
+    (T₀ : BlowupTower (CMfd.of (n := n) M) Y₀) (T : BlowupTower Y₀ Y)
+    (hT : IsGeoTestTower (stepOneMarked N 𝔞 μ) (T₀.append T)) (W : Opens Y₀) (hWU : (W : Set Y₀) ⊆ openPreimage T₀ U)
+    (hW : CentresAvoid W T) :
+    RestrictEquiv (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W))
+      (geoTransformAlong (contactMarked N 𝔞 μ u T₀ W) (restrict W T)) := by
+  unfold contactMarked
+  exact restrictEquiv_restrictedCoeffHomAlong_rebase (X := CMfd.of (n := n) M) (⟨N, [], 𝔞, μ⟩ : MarkedIdeal n M) hN h𝔞 hμ
+    U hu T₀ T hT W hWU hW
+
+variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+/-- **Step 1b's values re-based** (the form the Step 1 value function uses to compare nearby points, the analogue of TN3's
+`InvDomainRebase.memberRestrict_rebase` for Step 1a): let `T₀ T` be a multiple test blow-up of `J̄ = stepOneMarked N 𝔞 μ`,
+`W ⊆ T₀⁻¹U` open with the centres of `T` missing `W`, and `R` a resolution invariant in dimension `≤ k`.  If
+`𝓢₀ = contactMarked N 𝔞 μ u T₀ W` lies in the domain and `T|_W T₁` is a canonical segment of it, then
+`𝓢₁ = contactMarked N 𝔞 μ u (T₀ T) (T⁻¹W)` lies in the domain, `T₁` is a canonical segment of `𝓢₁`, every transform of `𝓢₁`
+along `T₁` lies in the domain, and the values of `𝓢₀` along `T|_W T₁` are those of `𝓢₁` along `T₁` on the cosupport. -/
+theorem contactMarked_rebase (R : ResolutionInvariant.{u, v} n k Λ) (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N)
+    (hμ : 1 ≤ μ) (U : Opens M) {u : M → ℂ} (hu : IsTangentDirectionAlong N 𝔞 μ U u) {Y₀ Y : CMfd.{u} n}
+    (T₀ : BlowupTower (CMfd.of (n := n) M) Y₀) (T : BlowupTower Y₀ Y)
+    (hT : IsGeoTestTower (stepOneMarked N 𝔞 μ) (T₀.append T)) (W : Opens Y₀) (hWU : (W : Set Y₀) ⊆ openPreimage T₀ U)
+    (hW : CentresAvoid W T) (hdom : IsInvDomain k (contactMarked N 𝔞 μ u T₀ W))
+    {Z : CMfd.{u} n} (T₁ : BlowupTower (CMfd.of (n := n) (openPreimage T W)) Z)
+    (hcan : IsCanonical (contactMarked N 𝔞 μ u T₀ W) (R.inv (contactMarked N 𝔞 μ u T₀ W)) ((restrict W T).append T₁)) :
+    IsInvDomain k (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W)) ∧
+      IsCanonical (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W))
+        (R.inv (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W))) T₁ ∧
+      IsInvDomain k (geoTransformAlong (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W)) T₁) ∧
+      ∀ z ∈ (geoTransformAlong (contactMarked N 𝔞 μ u T₀ W) ((restrict W T).append T₁)).cosupp,
+        R.inv (contactMarked N 𝔞 μ u T₀ W) ((restrict W T).append T₁) z =
+          R.inv (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W)) T₁ z := by
+  have he : IsEmptyTower (restrict W T) := (isEmptyTower_restrict_iff W T).mpr hW
+  have hEq := restrictEquiv_contactMarked_rebase h𝔞 hN hμ U hu T₀ T hT W hWU hW
+  obtain ⟨hJN, hJc, -⟩ := ContactIndependenceAlong.coeffHom_basic (μ := μ) h𝔞 hN
+  obtain ⟨hNT, hcT⟩ := isClosedSubmanifold_N_and_isCoherent_geoTransformAlong hJN hJc (T₀.append T) hT
+  have hcoh : (contactMarked N 𝔞 μ u (T₀.append T) (openPreimage T W)).ideal.IsCoherent :=
+    GermIdealPullbackCalculus.isCoherent_pullback contMDiff_subtype_val (isCoherent_coeffMarkedAlong hcT hNT)
+  obtain ⟨h1, h2, h3⟩ := InvDomainRebase.inv_rebase (X := CMfd.of (n := n) W) R hdom (restrict W T) he hEq hcoh T₁ hcan
+  exact ⟨h1, h2, isInvDomain_of_isCanonical R h1 T₁ h2, h3⟩
+
+end ContactMarked
 
 end
 

@@ -1,46 +1,35 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
+import Hironaka.Resolution.HironakaG3UniverseVanishingIdeal
+import Hironaka.Resolution.HironakaG3UniverseDiffeoDerivative
 import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
 import Hironaka.Invariant.IdealOrderArithmetic
 import Hironaka.Analytic.RegularAtDimTransport
 import Hironaka.Blowup.BlowupExistenceCodimOne
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Marked ideals, blowups and transforms under biholomorphisms of the base
 
-Source: Włodarczyk 2005 §2.4 (functoriality of the resolution for étale maps, here biholomorphisms; the canonicity
-clause (3) of `hir:canonical-resolution`), Bierstone--Milman 2008 Theorem 1.3 (functoriality).
+Blueprint `hir:biholomorphism-blowup`, `hir:biholomorphism-transform` (`blueprint/src/hironaka.tex`, Hironaka phase
+H1/H2).  Source: Włodarczyk 2005 §2.4 (functoriality of the resolution for étale maps, here biholomorphisms;
+the canonicity clause (3) of `hir:canonical-resolution`), Bierstone--Milman 2008 Theorem 1.3 (functoriality).
 
 Let `φ : M' → M` be a biholomorphism with inverse `ψ` (holomorphic, `φ ∘ ψ = id`, `ψ ∘ φ = id`).
 * `notMem_exceptionalLocus_of_inverse`: a biholomorphism has no exceptional points;
 * `pullback_vanishingIdeal_preimage`: `g^*𝓘_{φ⁻¹A} = (φ ∘ g)^*𝓘_A` for every continuous `g` (any dimension of
   the source), in particular `φ^*𝓘_A = 𝓘_{φ⁻¹A}`;
-* `isBlowupAlong_comp_inverse`: if `π: Y → M` is a blowup along `C`, then `ψ ∘ π: Y → M'` is a blowup along `φ⁻¹C`
-  (the same space `Y`); with `π = id`, `C = ∅`: every biholomorphism is a blowup along `∅`;
+* `isBlowupAlong_comp_inverse`: if `π : Y → M` is a blowup along `C`, then `ψ ∘ π : Y → M'` is a blowup along
+  `φ⁻¹C` (the same space `Y`); with `π = id`, `C = ∅`: every biholomorphism is a blowup along `∅`
+  (`isBlowupAlong_empty_of_inverse`);
 * `MarkedIdeal.pullback φ 𝔪 = (φ⁻¹N, φ⁻¹E, φ^*𝔞, d)` and `cosupp_pullback`: `cosupp(φ^*𝔪) = φ⁻¹ cosupp 𝔪` (any `N`);
 * `geoTransform_pullback` (**naturality of the transform**): `(φ^*𝔪)` transformed along `ψ ∘ π` with centre
   `φ⁻¹C` is `𝔪` transformed along `π` with centre `C` (coherent ideal).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -51,7 +40,10 @@ universe u
 namespace Hironaka.MarkedIdealBiholomorphism
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.GermIdealTotalTransform Hironaka.GermIdealPullbackCalculus Hironaka.HadamardBridge Hironaka.MarkedIdeals Hironaka.BlowupStrictSubmanifold Hironaka.IdealOrderArithmetic
+open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers
+  Hironaka.GermIdealTotalTransform Hironaka.GermIdealPullbackCalculus
+  Hironaka.HadamardBridge Hironaka.MarkedIdeals
+  Hironaka.BlowupStrictSubmanifold Hironaka.IdealOrderArithmetic
 
 noncomputable section
 
@@ -71,25 +63,11 @@ include hφ hψ hφψ hψφ
 
 /-- **A biholomorphism has no exceptional points.** -/
 theorem notMem_exceptionalLocus_of_inverse (p : M') : p ∉ exceptionalLocus n φ := by
-  intro hp
-  apply hp
-  have hφd : ∀ q, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) φ q :=
-    fun q => (hφ q).mdifferentiableAt (by simp)
-  have hψd : ∀ q, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ q :=
-    fun q => (hψ q).mdifferentiableAt (by simp)
-  have h1 : (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ (φ p)).comp
-      (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) φ p) = ContinuousLinearMap.id ℂ _ := by
-    rw [← mfderiv_comp p (hψd _) (hφd p), show ψ ∘ φ = id from funext hψφ]
-    exact mfderiv_id
-  have h2 : (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) φ (ψ (φ p))).comp
-      (mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ (φ p)) = ContinuousLinearMap.id ℂ _ := by
-    rw [← mfderiv_comp (φ p) (hφd _) (hψd (φ p)), show φ ∘ ψ = id from funext hφψ]
-    exact mfderiv_id
-  rw [hψφ] at h2
-  exact ⟨Function.LeftInverse.injective (g := mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ (φ p))
-      fun v => DFunLike.congr_fun h1 v,
-    Function.RightInverse.surjective (g := mfderiv 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ (φ p))
-      fun v => DFunLike.congr_fun h2 v⟩
+  let e : M' ≃ₘ⟮𝓘(ℂ, ComplexModel n),𝓘(ℂ, ComplexModel n)⟯ M :=
+    { toEquiv := ⟨φ,ψ,hψφ,hφψ⟩
+      contMDiff_toFun := hφ
+      contMDiff_invFun := hψ }
+  exact not_not_intro (HironakaG3UniverseDiffeoDerivative.diffeo_mfderiv_bijective e p)
 
 /-- **Preimages of closed submanifolds under a biholomorphism are closed submanifolds.** -/
 theorem isClosedSubmanifold_preimage {C : Set M} (hC : IsClosedSubmanifold n C) :
@@ -112,44 +90,7 @@ theorem pullback_vanishingIdeal_preimage {m : ℕ} {Z : Type*} [TopologicalSpace
     (hg : ContMDiff 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ g) (A : Set M) :
     GermIdeal.pullback (m := m) g (vanishingIdeal (n := n) (φ ⁻¹' A)) =
       GermIdeal.pullback (m := m) (φ ∘ g) (vanishingIdeal (n := n) A) := by
-  have hφd : ∀ q, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) φ q :=
-    fun q => (hφ q).mdifferentiableAt (by simp)
-  have hψd : ∀ q, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ q :=
-    fun q => (hψ q).mdifferentiableAt (by simp)
-  have hgd : ∀ q, MDifferentiableAt 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) g q :=
-    fun q => (hg q).mdifferentiableAt (by simp)
-  have hφgd : ∀ q, MDifferentiableAt 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) (φ ∘ g) q :=
-    fun q => (hφd (g q)).comp q (hgd q)
-  refine GermIdeal.ext (funext fun z => funext fun f => propext ⟨fun hf => ?_, fun hf => ?_⟩)
-  · refine RelativePrincipalizationSpan.GermIdeal.mem_pullback_iff.mpr
-      (RelativePrincipalizationSpan.IsInSpanAt.trans ?_
-        (RelativePrincipalizationSpan.GermIdeal.mem_pullback_iff.mp hf))
-    rintro s ⟨t, ht, rfl⟩
-    have htψ : (vanishingIdeal (n := n) A).mem ((φ ∘ g) z) (t ∘ ψ) := by
-      refine ⟨?_, ?_⟩
-      · have h1 : HolomorphicAt n t (ψ ((φ ∘ g) z)) := by
-          simpa only [Function.comp_apply, hψφ] using ht.1
-        exact holomorphicAt_comp_map (Eventually.of_forall hψd) h1
-      · have hT : Tendsto ψ (𝓝 ((φ ∘ g) z)) (𝓝 (g z)) := by
-          have := (hψ.continuous.tendsto ((φ ∘ g) z))
-          simpa only [Function.comp_apply, hψφ] using this
-        filter_upwards [hT.eventually ht.2] with a ha haA
-        exact ha (by simp only [mem_preimage, hφψ]; exact haA)
-    have heq : t ∘ g = (t ∘ ψ) ∘ (φ ∘ g) := funext fun q => by simp [hψφ]
-    rw [heq]
-    exact InvertibleIdealQuotient.isInSpanAt_self ⟨t ∘ ψ, htψ, rfl⟩
-      (holomorphicAt_comp_map (Eventually.of_forall hφgd) htψ.1)
-  · refine RelativePrincipalizationSpan.GermIdeal.mem_pullback_iff.mpr
-      (RelativePrincipalizationSpan.IsInSpanAt.trans ?_
-        (RelativePrincipalizationSpan.GermIdeal.mem_pullback_iff.mp hf))
-    rintro s ⟨t, ht, rfl⟩
-    have htφ : (vanishingIdeal (n := n) (φ ⁻¹' A)).mem (g z) (t ∘ φ) := by
-      refine ⟨holomorphicAt_comp_map (Eventually.of_forall hφd) ht.1, ?_⟩
-      filter_upwards [(hφ.continuous.tendsto (g z)).eventually ht.2] with a ha haA
-      exact ha haA
-    exact InvertibleIdealQuotient.isInSpanAt_self (S := fun s => ∃ a,
-        (vanishingIdeal (n := n) (φ ⁻¹' A)).mem (g z) a ∧ s = a ∘ g) ⟨t ∘ φ, htφ, rfl⟩
-      (show HolomorphicAt m ((t ∘ φ) ∘ g) z from holomorphicAt_comp_map (Eventually.of_forall hgd) htφ.1)
+  exact G3UniverseVanishingIdeal.pullback_vanishingIdeal_preimage hφ hψ hφψ hψφ hg A
 
 /-- **A blowup composed with a biholomorphism of the base**: if `π : Y → M` is a blowup along `C`, then
 `ψ ∘ π : Y → M'` is a blowup along `φ⁻¹C`. -/
@@ -180,6 +121,12 @@ theorem isBlowupAlong_comp_inverse {Y : Type u} [TopologicalSpace Y] [ChartedSpa
       have := congrArg φ (congrFun hπk' z)
       simp only [Function.comp_apply, hφψ] at this ⊢
       exact this
+
+/-- **Every biholomorphism is a blowup along the empty set.** -/
+theorem isBlowupAlong_empty_of_inverse : IsBlowupAlong n (∅ : Set M') ψ := by
+  have := isBlowupAlong_comp_inverse hφ hψ hφψ hψφ
+    (BlowupExistenceCodimOne.isBlowupAlong_id_empty (n := n) (X := M))
+  simpa using this
 
 end Biholomorphism
 

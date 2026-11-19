@@ -1,14 +1,9 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
+import Hironaka.Resolution.HironakaG3UniverseSubmersionConjugate
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-import Hironaka.Support.BlowupSplitProjectionExact
 import Hironaka.Resolution.HironakaNormalCrossingsOrderedChoiceComparison
 import Mathlib.Geometry.Manifold.ContMDiff.Atlas
 
@@ -44,45 +39,12 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
 noncomputable section
 variable {n m : ℕ}
 
-private theorem pulledChart_maximal {A B : CMfd.{u} n}
-    (β : B ≃ₘ⟮𝓘(ℂ, ComplexModel n),𝓘(ℂ, ComplexModel n)⟯ A)
-    (e : OpenPartialHomeomorph A (ComplexModel n))
-    (he : e ∈ IsManifold.maximalAtlas 𝓘(ℂ, ComplexModel n) ∞ A) :
-    β.toHomeomorph.toOpenPartialHomeomorph.trans e ∈
-      IsManifold.maximalAtlas 𝓘(ℂ, ComplexModel n) ∞ B := by
-  apply OpenPartialHomeomorph.mem_maximalAtlas_of_contMDiffOn
-  · change ContMDiffOn 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞
-      (e ∘ β) (univ ∩ β ⁻¹' e.source)
-    exact (contMDiffOn_of_mem_maximalAtlas he).comp
-      β.contMDiff.contMDiffOn (fun _ hz => hz.2)
-  · change ContMDiffOn 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞
-      (β.symm ∘ e.symm) (e.target ∩ e.symm ⁻¹' univ)
-    exact β.symm.contMDiff.comp_contMDiffOn
-      ((contMDiffOn_symm_of_mem_maximalAtlas he).mono inter_subset_left)
-
-/-- Actual conjugated submersions retain the genuine globally chosen complement and real charts. -/
 theorem isSubmersion_conjugate {A A' : CMfd.{u} n} {B B' : CMfd.{u} m}
     (a : A' ≃ₘ⟮𝓘(ℂ, ComplexModel n),𝓘(ℂ, ComplexModel n)⟯ A)
     (b : B' ≃ₘ⟮𝓘(ℂ, ComplexModel m),𝓘(ℂ, ComplexModel m)⟯ B)
     {f : B → A} (hf : Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ f) :
     Manifold.IsSubmersion 𝓘(ℂ, ComplexModel m) 𝓘(ℂ, ComplexModel n) ∞ (a.symm ∘ f ∘ b) := by
-  apply Manifold.IsSubmersionOfComplement.isSubmersion (F := hf.complement)
-  intro z
-  let h := hf.isSubmersionOfComplement_complement (b z)
-  let d := b.toHomeomorph.toOpenPartialHomeomorph.trans h.domChart
-  let c := a.toHomeomorph.toOpenPartialHomeomorph.trans h.codChart
-  apply Manifold.IsSubmersionAtOfComplement.mk_of_charts h.equiv d c
-  · exact ⟨mem_univ _,h.mem_domChart_source⟩
-  · exact ⟨mem_univ _,by simpa using h.mem_codChart_source⟩
-  · exact pulledChart_maximal b h.domChart h.domChart_mem_maximalAtlas
-  · exact pulledChart_maximal a h.codChart h.codChart_mem_maximalAtlas
-  · intro w hw
-    exact ⟨mem_univ _,by simpa using h.source_subset_preimage_source hw.2⟩
-  · intro w hw
-    have hw' : w ∈ (h.domChart.extend 𝓘(ℂ, ComplexModel m)).target := by
-      simpa [d,OpenPartialHomeomorph.extend,mfld_simps] using hw
-    have he := h.writtenInCharts hw'
-    simpa [d,c,OpenPartialHomeomorph.extend,Function.comp_def,mfld_simps] using he
+  exact G3UniverseSubmersionConjugate.isSubmersion_conjugate a b hf
 
 /-- Surjectivity of actual conjugated projections is proved by genuine inverse preimages. -/
 theorem surjective_conjugate {A A' : CMfd.{u} n} {B B' : CMfd.{u} m}

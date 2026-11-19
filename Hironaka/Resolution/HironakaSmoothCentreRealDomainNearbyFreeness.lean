@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothCentreRealDomainCoefficientAlgebra
 import Hironaka.Resolution.HironakaRelativeNormalCanonicalCentreFreeness
 
@@ -30,7 +25,6 @@ section Original
 variable {d t : ℕ} {M : Type*} [TopologicalSpace M]
   [ChartedSpace (ComplexModel (d+t)) M] [IsComplexManifold (d+t) M]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONLY original real-centre inputs construct one uniform actual nonvanishing free open for ALL original nearby associated modules. -/
 theorem exists_original_regular_real_nearby_associated_free_open
     (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)

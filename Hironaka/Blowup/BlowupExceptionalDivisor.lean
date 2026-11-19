@@ -1,31 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.GermIdealTotalTransform
 import Hironaka.MarkedIdeal.RestrictLeCalculus
 import Hironaka.Blowup.BlowupIsomorphismOff
 import Hironaka.Blowup.ExceptionalFibres
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.InvertibleIdealCoherent
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Coherence.VanishingIdealCoherent
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The exceptional divisor of a blowup
 
-Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1 (the exceptional divisor `D_i` of `σ_i` and its ideal
-`𝓘(D_i)`); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2.
+Source: Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.1 (the exceptional divisor `D_i` of
+`σ_i` and its ideal `𝓘(D_i)`); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`),
+§2; blueprint `bcalc:exceptional-divisor` (chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup of `X` along the nowhere dense closed submanifold `C`
 (`IsBlowupAlong`).  By the universal property `π^* 𝓘_C = 𝓘_C 𝒪_Y` is invertible, so it is the
@@ -33,6 +19,9 @@ ideal `𝒪_Y(-D)` of an effective divisor `D`, the **exceptional divisor**.  Th
 
 * `exceptionalDivisor hπ` — the effective divisor with ideal `π^* 𝓘_C`;
 * `support_exceptionalDivisor` — its support is `π⁻¹ C`;
+* `exceptionalLocus_subset_support_exceptionalDivisor` — `Exc π ⊆ π⁻¹ C`
+  (equality fails only over components of `C` of codimension one, where `π` is a local
+  biholomorphism and `D` is the strict transform of that component);
 * `interior_exceptionalLocus_eq_empty` — `Exc π` has empty interior, which is what makes total
   transforms of divisors along `π` defined (`GermIdealTotalTransform.EffectiveDivisor.totalTransform`);
 * `pullback_idealPow_vanishingIdeal` — `π^* (𝓘_C^μ) = 𝒪_Y(-μ D)`.
@@ -41,8 +30,16 @@ Together with the small ideal calculus it needs (`isInvertible_unitIdeal`,
 `isInvertible_idealPow`, `pullback_unitIdeal`, `pullback_idealPow`, `zeroLocus_pullback`,
 `zeroLocus_vanishingIdeal`).
 
-The ideal lemmas below therefore re-prove, in a few lines each, statements that exist in modules inside that
-closure.
+Import discipline (Hironaka phase, I-0975): this module and every module of the blowup calculus
+stay OUTSIDE the import closure of `Hironaka.RelativePrincipalization` and
+`Hironaka.EmbeddedResolution`, so that those two statements can later be proved in place from
+it without an import cycle.  The ideal lemmas below therefore re-prove, in a few lines each,
+statements that exist in modules inside that closure
+(`PrincipalizationStepOneAssembly.isInvertible_unitIdeal` / `isInvertible_idealPow` /
+`pullback_unitIdeal` / `pullback_idealPow`, `StepFourNoComponentContainsW.zeroLocus_pullback`,
+`BlowupSequenceTotalTransform.interior_exceptionalLocus_eq_empty_of_isBlowupAlong`).
+
+Everything here is sorry-free.
 -/
 
 open Set Filter
@@ -52,7 +49,9 @@ universe u
 
 namespace Hironaka.BlowupExceptionalDivisor
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealTotalTransform GermIdealPullbackCalculus IdealWeightPowers InvertibleIdealQuotient RelativePrincipalizationSpan
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  GermIdealTotalTransform GermIdealPullbackCalculus IdealWeightPowers InvertibleIdealQuotient
+  RelativePrincipalizationSpan
 
 noncomputable section
 
@@ -196,6 +195,18 @@ theorem support_exceptionalDivisor (hπ : IsBlowupAlong n C π) :
   rw [EffectiveDivisor.support, exceptionalDivisor_ideal,
     zeroLocus_pullback hπ.contMDiff (isCoherent_vanishingIdeal_centre hπ),
     zeroLocus_vanishingIdeal hπ.1.1]
+
+/-- The exceptional locus of the blowup lies in the support of the exceptional divisor. -/
+theorem exceptionalLocus_subset_support_exceptionalDivisor (hπ : IsBlowupAlong n C π) :
+    exceptionalLocus n π ⊆ (exceptionalDivisor hπ).support := by
+  rw [support_exceptionalDivisor hπ]
+  exact BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ
+
+/-- The exceptional divisor is nowhere dense. -/
+theorem interior_support_exceptionalDivisor (hπ : IsBlowupAlong n C π) :
+    interior (exceptionalDivisor hπ).support = ∅ := by
+  rw [support_exceptionalDivisor hπ]
+  exact ExceptionalFibres.interior_preimage_eq_empty hπ
 
 /-- **`π^*(𝓘_C^μ) = 𝒪_Y(-μ D)`.** -/
 theorem pullback_idealPow_vanishingIdeal (hπ : IsBlowupAlong n C π) (μ : ℕ) :

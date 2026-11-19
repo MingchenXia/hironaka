@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Blowup.BlowupTowerRestrictLengthExact
 import Hironaka.Resolution.HironakaOriginalCrossingValueTransport
 import Hironaka.Invariant.GeneralValueOrderZero
 /-! Actual original canonical crossing lower histories at their monomial leaves.

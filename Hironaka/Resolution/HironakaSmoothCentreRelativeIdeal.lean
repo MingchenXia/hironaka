@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaRelativeNormalIdeal
 import Hironaka.Blowup.BlowupFlatCoordinates
 
@@ -29,8 +24,6 @@ open Hironaka.HolomorphicIdealSheaves HolGerm
   HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan
   HironakaHolomorphicJetRankLoci HironakaHolomorphicJetChartInvariance
   HironakaRelativeNormalIdeal BlowupFlatCoordinates
-open Hironaka
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
 noncomputable section
 variable {n : ℕ}
 

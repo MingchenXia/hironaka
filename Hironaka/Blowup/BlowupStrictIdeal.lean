@@ -1,49 +1,33 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupStrictSubmanifold
 import Hironaka.Blowup.BlowupControlledTransform
 import Hironaka.Coherence.VanishingIdealCoherent
 import Hironaka.Resolution.StrictTransformComposition
 import Hironaka.Coherence.FiniteGeneratorIdealDescent
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Manifold.LocalHolomorphicInverse
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFibreDirection
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Analytic.IdealProducts
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.Blowup.NestedFlattening
-import Hironaka.Blowup.RegularPatchPullback
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The ideal of the strict transform of a submanifold through the centre
 
-Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2 (the transform of a marked ideal `(M, N, E,
-𝓘, d)` under a blowup of `M` with centre `C ⊆ N`); Wlodarczyk 2005 (`wlodarczyk05-hironaka`), §2.2 (controlled
-transforms; the lemma `𝓘 ⊆ 𝓘_C^μ`) and Lemma `le:Gi` (the controlled transform of a hypersurface of maximal contact
-is its strict transform).
+Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §2 (the transform of a marked
+ideal `(M, N, E, 𝓘, d)` under a blowup of `M` with centre `C ⊆ N`); Wlodarczyk 2005
+(`wlodarczyk05-hironaka`), §2.2 (controlled transforms; the lemma `𝓘 ⊆ 𝓘_C^μ`) and Lemma `le:Gi`
+(the controlled transform of a hypersurface of maximal contact is its strict transform);
+blueprint `bcalc:strict-ideal`, `bcalc:strict-geo` (chapter `blowup-calculus.tex`).
 
 Let `π : Y → X` be the blowup along `C` with exceptional divisor `D`, and `N ⊇ C` a closed
 submanifold.  With `N' = closure (π⁻¹ (N \ C))` (`BlowupStrictSubmanifold.geoStrictTransform`):
 
 * `pullback_vanishingIdeal_eq_mul` -- **`π^*𝓘_N = 𝒪_Y(-D) · 𝓘_{N'}`**;
+* `controlledTransform_vanishingIdeal` -- **`σ^c(𝓘_N, 1) = 𝓘_{N'}`**: the controlled transform of
+  the ideal of `N` with the mark one is the ideal of its strict transform;
 * `isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold` -- `N'` is a closed
   submanifold (no constant dimension needed);
+* `geoStrictTransform_eq_strictTransform` -- if `C` is nowhere dense in `N`, `N'` is the library's
+  strict transform `closure (π⁻¹ N \ Exc π)`; `geoStrictTransform_self` -- the strict transform of
+  the centre itself is empty (the two notions differ for a centre of codimension one, where
+  `Exc π = ∅`).
 
 Proof of the ideal identity, stalk by stalk at `z ∈ Y`.
 * `π z ∉ C`: `π` has a holomorphic section over `X \ C` (`BlowupIsomorphismOff`), so
@@ -56,6 +40,8 @@ Proof of the ideal identity, stalk by stalk at `z ∈ Y`.
   `j < k_N` (then Hadamard in the coordinates `W`, a local biholomorphism, gives
   `𝓘_{N'} = (W_i, i ≥ k_N)`), and `N'` misses a neighbourhood of `z` if `j ≥ k_N`
   (`𝓘_{N'} = 𝒪`).  The product of the presentations is the presentation of `π^*𝓘_N`.
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter
@@ -65,7 +51,12 @@ universe u
 
 namespace Hironaka.BlowupStrictIdeal
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection NestedFlattening BlowupStrictSubmanifold BlowupExceptionalDivisor BlowupControlledTransform IdealWeightPowers IdealWeightProducts IdealWeightComparison InvertibleIdealQuotient RelativePrincipalizationSpan GermIdealPullbackCalculus VanishingIdealCoherent Hironaka.RegularPatchPullback
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  BlowupFlatCoordinates BlowupMonomialCharts BlowupLocalSurjectivity BlowupFibreDirection
+  NestedFlattening BlowupStrictSubmanifold BlowupExceptionalDivisor BlowupControlledTransform
+  IdealWeightPowers IdealWeightProducts IdealWeightComparison InvertibleIdealQuotient
+  RelativePrincipalizationSpan GermIdealPullbackCalculus VanishingIdealCoherent
+  Hironaka.RegularPatchPullback
 
 noncomputable section
 
@@ -689,11 +680,48 @@ theorem idealPow_one_exceptionalDivisor (hπ : IsBlowupAlong n C π) :
   show (idealPow (exceptionalDivisor hπ).ideal 0).mul (exceptionalDivisor hπ).ideal = _
   rw [idealPow_zero, unitIdeal_mul (isCoherent_ideal _)]
 
+/-- **The controlled transform of the ideal of `N ⊇ C` with the mark one is the ideal of the
+strict transform**: `σ^c(𝓘_N, 1) = 𝓘_{N'}`. -/
+theorem controlledTransform_vanishingIdeal (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hN : IsClosedSubmanifold n N) (hCN : C ⊆ N) :
+    controlledTransform hπ (vanishingIdeal (n := n) N) 1 =
+      vanishingIdeal (n := n) (geoStrictTransform π C N) := by
+  refine (eq_controlledTransform_of_eq_mul hπ (isCoherent_vanishingIdeal
+    (isClosedSubmanifold_geoStrictTransform_of_isClosedSubmanifold hπ hN hCN)) ?_).symm
+  rw [idealPow_one_exceptionalDivisor, pullback_vanishingIdeal_eq_mul hπ hN hCN]
+
 /-! ### Comparison with the library's strict transform -/
 
 /-- The geometric strict transform of the centre itself is empty. -/
 @[simp] theorem geoStrictTransform_self : geoStrictTransform π C C = ∅ := by
   simp [geoStrictTransform]
+
+/-- The geometric strict transform lies in the library's one. -/
+theorem geoStrictTransform_subset_strictTransform (hπ : IsBlowupAlong n C π) (N : Set X) :
+    geoStrictTransform π C N ⊆ strictTransform n π N := by
+  unfold geoStrictTransform strictTransform
+  exact closure_mono fun u hu => ⟨hu.1, fun hE =>
+    hu.2 (BlowupIsomorphismOff.exceptionalLocus_subset_preimage hπ hE)⟩
+
+/-- **If the centre is nowhere dense in `N`, the geometric strict transform
+`closure (π⁻¹(N \ C))` is the library's `strictTransform n π N = closure (π⁻¹N \ Exc π)`.**
+Off `Exc π` the blowup is open (inverse function theorem), so points of `N \ C` near `π u`
+lift to points near `u`. -/
+theorem geoStrictTransform_eq_strictTransform (hπ : IsBlowupAlong n C π) {N : Set X}
+    (hN : N ⊆ closure (N \ C)) :
+    geoStrictTransform π C N = strictTransform n π N := by
+  refine (geoStrictTransform_subset_strictTransform hπ N).antisymm ?_
+  show closure (π ⁻¹' N \ exceptionalLocus n π) ⊆ _
+  refine closure_minimal (fun u hu => ?_) isClosed_closure
+  obtain ⟨huN, huE⟩ := hu
+  rw [geoStrictTransform, mem_closure_iff_nhds]
+  intro V hV
+  have hmap := StrictTransformComposition.map_nhds_eq_of_not_mem_exceptionalLocus
+    hπ.contMDiff huE
+  have himg : π '' V ∈ 𝓝 (π u) := by
+    rw [← hmap]; exact image_mem_map hV
+  obtain ⟨x, ⟨v, hvV, rfl⟩, hx⟩ := mem_closure_iff_nhds.mp (hN huN) _ himg
+  exact ⟨v, hvV, hx⟩
 
 end Strict
 

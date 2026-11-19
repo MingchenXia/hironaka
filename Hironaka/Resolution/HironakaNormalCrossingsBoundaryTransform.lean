@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaNormalCrossingsHighestStratumBlowup
 
 set_option autoImplicit false
@@ -32,7 +27,6 @@ open Hironaka.BlowupSequences BlowupFlatCoordinates NormalCrossings
   BlowupMonomialCharts BlowupStrictSubmanifold RegularAtDimTransport RegularPatchPullback
   SimultaneousNormalCrossings
 
-open Hironaka
 noncomputable section
 variable {n : ℕ}
 

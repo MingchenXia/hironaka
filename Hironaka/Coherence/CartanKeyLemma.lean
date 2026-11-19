@@ -1,18 +1,9 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationDense
 import Hironaka.Analytic.GermParametrizationFunctions
 import Hironaka.Analytic.AnalyticProjectionWeierstrass
 import Hironaka.Analytic.GermParametrizationSets
 import Mathlib.Topology.MetricSpace.Sequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.HolomorphicCoefficientPolynomials
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
@@ -37,6 +28,8 @@ the separation hypothesis "no point `y ≠ x` of `closure (A ∩ Δ)` over `π x
   vanishes near `0`.  Off the discriminant locus the roots of `ω(w; ·)` are `a` distinct
   values `τ`, each giving the point `graphPoint (π x + w) (u(x) + τ)` of `A` near `x`; a
   polynomial of degree `< a` vanishing at them is zero, and the discriminant locus is thin.
+
+Sorry-free.
 -/
 
 open Set Filter Metric Polynomial

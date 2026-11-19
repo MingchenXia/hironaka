@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualAnalyticVertexCoefficientData
-import Hironaka.Support.RealDomainOriginDictionaryExact
+import Hironaka.Resolution.HironakaSmoothCentreRealDomainInitialRelations
 
 /-! True analytic monic origin generators generate the entire same original sheaf near the origin. -/
 set_option autoImplicit false

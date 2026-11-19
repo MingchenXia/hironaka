@@ -1,35 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaSeparation
 import Hironaka.Resolution.HironakaEmbeddedDimensionParts
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Invariant.CodimOneAdmissibleAlong
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.Resolution.HironakaAdmissibleCalculus
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedBoundary
-import Hironaka.Resolution.HironakaEmbeddedExceptional
-import Hironaka.Resolution.HironakaEmbeddedReducible
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Resolution.StrictTransformComposition
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Embedded resolution of an arbitrary analytic set by one blowup sequence (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 (embedded desingularization of any
-closed subspace: the final strict transform is smooth and has simultaneous normal crossings with the exceptional
-divisor; `E' = σ⁻¹(Sing X)` and `E'` is the critical locus of `σ`); Włodarczyk 2005 (`wlodarczyk05-hironaka`);
-Kollár 2007 (`kollar07-resolution`), "Principalization III".
+Blueprint `hir:embedded-resolution-analytic` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka library, gap (G1) of the public
+surface: embedded resolution of an analytic set whose irreducible components may have different dimensions, by ONE admissible
+sequence).  Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 (embedded desingularization of any
+closed subspace: the final strict transform is smooth and has simultaneous normal crossings with the exceptional divisor;
+`E' = σ⁻¹(Sing X)` and `E'` is the critical locus of `σ`); Włodarczyk 2005 (`wlodarczyk05-hironaka`); Kollár 2007
+(`kollar07-resolution`), "Principalization III".
 
 **Statement.**  Let `X` be a complex manifold and `W ⊆ X` a compact analytic set with empty interior; its components may have
 different dimensions.  Write `W⁽ᵏ⁾ = closure (Reg_k W)` for its `k`-dimensional part
@@ -69,6 +52,9 @@ transform is a submanifold at every point (the argument of `HironakaEmbeddedRedu
 **What is not claimed.**  Condition (1) of BM97 Theorem 1.6 (`C_j ⊂ Sing X_j` or `X_j` smooth and `C_j ⊂ X_j ∩ E_j`): the centres
 lie over `W_sing` (resp. `F`), not inside the singular locus of the current strict transform.  With a boundary, `f` may blow up
 smooth points of `W` on `|E₀|` at which `W` already has normal crossings with `E₀`.  Only compact `W` (or compact `X`).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaSeparation` and `HironakaEmbeddedDimensionParts`
+only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -79,7 +65,8 @@ universe u
 namespace Hironaka.HironakaEmbeddedAnalytic
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence Hironaka.HironakaAdmissibleCalculus Hironaka.HironakaEmbeddedDimensionParts
+open Hironaka.NormalCrossings Hironaka.HironakaAdmissibleSequence
+  Hironaka.HironakaAdmissibleCalculus Hironaka.HironakaEmbeddedDimensionParts
 
 noncomputable section
 
@@ -357,6 +344,8 @@ def singularSet (W : Set M) : Set M :=
 theorem mem_singularSet_iff {W : Set M} {x : M} :
     x ∈ singularSet (n := n) W ↔ x ∈ W ∧ ∀ k, ¬ RegularAtDim (n := n) W x k := by
   simp [singularSet]
+
+theorem singularSet_subset (W : Set M) : singularSet (n := n) W ⊆ W := sdiff_subset
 
 /-- **The singular set of a closed set is closed**: near a regular point all points of `W` are regular. -/
 theorem isClosed_singularSet {W : Set M} (hW : IsClosed W) : IsClosed (singularSet (n := n) W) := by

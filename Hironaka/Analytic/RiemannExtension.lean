@@ -1,20 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicGermNoetherian
 import Mathlib.Analysis.Complex.RemovableSingularity
 import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Analytic.RegularDirection
+
 set_option autoImplicit false
 
 /-!
 # The Riemann extension theorem
 
-Let `h` be holomorphic on a ball `B` centred at `0` in `ℂ^d`, not identically zero near `0`, and let `f` be
-holomorphic and bounded on `B \ h⁻¹(0)`. Then `f` agrees off `h⁻¹(0)` with a function holomorphic on a smaller ball.
+Let `h` be holomorphic on a ball `B` centred at `0` in `ℂ^d`, not identically zero near `0`,
+and let `f` be holomorphic and bounded on `B \ h⁻¹(0)`. Then `f` agrees off `h⁻¹(0)` with a
+function holomorphic on a smaller ball (`exists_extension_of_bounded`).
 
 * `differentiableAt_circleIntegral_param`: `p ↦ ∮_{C(c, ρ)} Ψ (p, τ) dτ` is holomorphic when
   `Ψ` is jointly holomorphic near `{p} × sphere c ρ` (finite-dimensional parameter space),
@@ -26,8 +21,9 @@ holomorphic and bounded on `B \ h⁻¹(0)`. Then `f` agrees off `h⁻¹(0)` with
   isolated, so `φ` extends across each of them (`differentiableOn_update_limUnder_of_bddAbove`).
 * `exists_extension_prod`: the theorem on `E × ℂ` for `h` regular in the last variable,
   with `F (x, t) = (2πi)⁻¹ ∮_{|τ| = ρ} f (x, τ) / (τ - t) dτ`.
-* `exists_extension_euclidean`: the general case on `ℂ^d`, after a linear change of coordinates
-  (`exists_regular_continuousLinearEquiv`, `euclideanSnocCLE`).
+* `exists_extension_euclidean`, `exists_extension_of_bounded`: the general case on `ℂ^d`,
+  after a linear change of coordinates (`exists_regular_continuousLinearEquiv`,
+  `euclideanSnocCLE`).
 -/
 
 namespace Hironaka.RiemannExtension
@@ -334,6 +330,29 @@ theorem exists_extension_euclidean {d : ℕ} {h f : EuclideanSpace ℂ (Fin d) �
       self_mem_nhdsWithin] with t ht ht0
     rw [hL, ht.1]
     exact mul_ne_zero (pow_ne_zero _ ht0) ht.2
+
+/-- **Riemann extension theorem.** Let `h` be holomorphic on the ball `B = ball 0 r` of `ℂ^d`
+and not identically zero near `0`, and let `f` be holomorphic and bounded on `B \ h⁻¹(0)`.
+Then there are a smaller ball `ball 0 ρ` and a holomorphic `F` on it with `F = f` off
+`h⁻¹(0)`. -/
+theorem exists_extension_of_bounded {d : ℕ} {r : ℝ} (hr : 0 < r)
+    {h f : EuclideanSpace ℂ (Fin d) → ℂ}
+    (hh : DifferentiableOn ℂ h (Metric.ball 0 r)) (hne : ¬ ∀ᶠ z in 𝓝 0, h z = 0)
+    (hf : DifferentiableOn ℂ f (Metric.ball 0 r \ h ⁻¹' {0}))
+    (hbdd : ∃ C, ∀ z ∈ Metric.ball 0 r \ h ⁻¹' {0}, ‖f z‖ ≤ C) :
+    ∃ ρ > 0, ∃ F : EuclideanSpace ℂ (Fin d) → ℂ, DifferentiableOn ℂ F (Metric.ball 0 ρ) ∧
+      ∀ z ∈ Metric.ball 0 ρ, h z ≠ 0 → F z = f z := by
+  have hU : IsOpen (ball (0 : EuclideanSpace ℂ (Fin d)) r \ h ⁻¹' {0}) :=
+    hh.continuousOn.isOpen_inter_preimage isOpen_ball isOpen_compl_singleton
+  obtain ⟨C, hC⟩ := hbdd
+  obtain ⟨F, hFd, hFe⟩ := exists_extension_euclidean (h := h) (f := f)
+    (eventually_of_mem (ball_mem_nhds 0 hr) fun z hz =>
+      hh.differentiableAt (isOpen_ball.mem_nhds hz)) hne
+    (eventually_of_mem (ball_mem_nhds 0 hr) fun z hz hz0 =>
+      hf.differentiableAt (hU.mem_nhds ⟨hz, hz0⟩))
+    ⟨C, eventually_of_mem (ball_mem_nhds 0 hr) fun z hz hz0 => hC z ⟨hz, hz0⟩⟩
+  obtain ⟨ρ, hρ, hρs⟩ := Metric.eventually_nhds_iff_ball.1 (hFd.and hFe)
+  exact ⟨ρ, hρ, F, fun z hz => (hρs z hz).1.differentiableWithinAt, fun z hz => (hρs z hz).2⟩
 
 end Euclidean
 

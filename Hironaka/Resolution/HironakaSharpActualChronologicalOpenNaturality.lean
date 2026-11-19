@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSharpActualRelativeSaturationOpenNaturality
 /-! Entire true chronological marked records commute with actual opens.
 Actual auxiliary/born lists and EACH indexed original member stay separate. -/

@@ -1,28 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.SimultaneousNormalCrossings
 import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.BlowupSNCTransform
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Blowup.RegularPatchPushforward
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Normal crossings with a divisor and with the divisor minus members containing the centre
 
-Sources: Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Definitions 2.1--2.2; Włodarczyk 2005
-(`wlodarczyk05-hironaka`), Step 1a of the proof of `pr:resol` (`E_S`: the divisor without the members containing
-`S`).
+Hironaka phase H2 (TN3), item 6 of the H2 list for H4 (I-0977 C-0048 / C-0054), consumed by the
+design node `hir:drop-containing-members` (`blueprint/src/hironaka.tex`).  Blueprint
+`bcalc:nc-comparison`, `bcalc:sub-divisor` (chapter `blowup-calculus.tex`).  Sources:
+Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Definitions 2.1--2.2; Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 1a of the proof of `pr:resol` (`E_S`: the divisor without the
+members containing `S`).
 
 Let `E` be a simple normal crossings divisor and `C` a set.  If every member of `E` that is not a
 member of the list `E'` contains `C`, and every member of `E'` is a member of `E`, then
@@ -38,10 +28,20 @@ remaining members (they contain `C`) into coordinate hyperplanes one at a time
 `t_i ≠ t₀`; `SimultaneousNormalCrossings.exists_model_coords` with `S₀ = {t₀}` replaces one
 coordinate of `C` by `v_{t₀}` and keeps the coordinates of the members already treated.
 
+Corollaries: the filter form `hasNormalCrossings_filter_iff` (`E' = E.filter p`, the dropped members
+contain `C`), the index form `hasNormalCrossings_drop_iff` (drop the members with indices in `A`),
+sub-divisors of simple normal crossings divisors (`isSNCDivisor_of_sublist`,
+`isTransverse_of_forall_mem`),
+and for marked ideals: admissibility of a centre for `(M, N, E, 𝓘, d)` and `(M, N, E', 𝓘, d)` agree
+(`isAdmissibleCentre_withE_iff`), and well-formedness passes to a sublist (`isWellFormed_withE`).
 Along one blowup the hypotheses pass to the transformed divisors (`forall_mem_transformE`,
-`forall_notMem_transformE`: the dropped members keep containing the strict transform of `S`), and the transform of
-`(M, N, E', 𝓘, d)` is the transform of `𝔪` with the transformed `E'` (`geoTransform_withE`) -- the induction step
-for towers in `hir:drop-containing-members`.
+`sublist_transformE`, `forall_notMem_transformE`: the dropped members keep containing the strict
+transform of `S`), and the transform of `(M, N, E', 𝓘, d)` is the transform of `𝔪` with the
+transformed `E'` (`geoTransform_withE`) -- the induction step for towers in
+`hir:drop-containing-members`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -51,7 +51,9 @@ universe u
 
 namespace Hironaka.NormalCrossingsComparison
 
-open Hironaka.BlowupSequences NormalCrossings BlowupSNCTransform SimultaneousNormalCrossings RegularAtDimTransport RegularPatchPushforward MarkedIdeals BlowupStrictSubmanifold
+open Hironaka.BlowupSequences NormalCrossings BlowupSNCTransform
+  SimultaneousNormalCrossings RegularAtDimTransport RegularPatchPushforward MarkedIdeals
+  BlowupStrictSubmanifold
 
 noncomputable section
 
@@ -334,14 +336,39 @@ theorem hasNormalCrossings_of_forall_notMem {C : Set X} {E E' : List (Set X)}
 
 /-! ### The comparison -/
 
-/-- **The normal-crossings comparison**. Let `E` be a simple normal crossings divisor and `E'` a list of members of `E`
-such that every member of `E` not in `E'` contains `C`. Then `C` has only normal crossings with `E'` iff it has only
-normal crossings with `E`. -/
+/-- **The normal-crossings comparison** (H2 list item 6).  Let `E` be a simple normal crossings
+divisor and `E'` a list of members of `E` such that every member of `E` not in `E'` contains `C`.
+Then `C` has only normal crossings with `E'` iff it has only normal crossings with `E`. -/
 theorem hasNormalCrossings_iff_of_forall_mem {C : Set X} {E E' : List (Set X)}
     (hE : IsSNCDivisor n E) (hsub : ∀ H ∈ E', H ∈ E) (hA : ∀ H ∈ E, H ∉ E' → C ⊆ H) :
     HasNormalCrossings n C E' ↔ HasNormalCrossings n C E :=
   ⟨fun h => hasNormalCrossings_of_forall_notMem hE h hA,
     fun h => hasNormalCrossings_of_forall_mem h hsub⟩
+
+/-- **The comparison, filter form**: dropping members that contain `C` does not change normal
+crossings with `C`. -/
+theorem hasNormalCrossings_filter_iff {C : Set X} {E : List (Set X)} (hE : IsSNCDivisor n E)
+    (q : Set X → Bool) (hq : ∀ H ∈ E, q H = false → C ⊆ H) :
+    HasNormalCrossings n C (E.filter q) ↔ HasNormalCrossings n C E :=
+  hasNormalCrossings_iff_of_forall_mem hE (fun _ hH => (List.mem_filter.mp hH).1)
+    (fun H hH hH' => hq H hH (by
+      by_contra hne
+      exact hH' (List.mem_filter.mpr ⟨hH, by simpa using hne⟩)))
+
+/-- **The comparison, index form**: drop the members `E.get i`, `i ∈ A`, all containing `C`. -/
+theorem hasNormalCrossings_drop_iff {C : Set X} {E : List (Set X)} (hE : IsSNCDivisor n E)
+    (A : Finset (Fin E.length)) (hA : ∀ i ∈ A, C ⊆ E.get i) :
+    HasNormalCrossings n C (((List.finRange E.length).filter fun i => i ∉ A).map E.get) ↔
+      HasNormalCrossings n C E := by
+  classical
+  refine hasNormalCrossings_iff_of_forall_mem hE (fun H hH => ?_) (fun H hH hH' => ?_)
+  · obtain ⟨i, -, rfl⟩ := List.mem_map.mp hH
+    exact List.get_mem _ _
+  · obtain ⟨i, rfl⟩ := List.mem_iff_get.mp hH
+    by_cases hi : i ∈ A
+    · exact hA i hi
+    · exact absurd (List.mem_map.mpr
+        ⟨i, List.mem_filter.mpr ⟨List.mem_finRange i, by simpa using hi⟩, rfl⟩) hH'
 
 /-! ### Marked ideals with fewer members -/
 
@@ -352,6 +379,12 @@ theorem isAdmissibleCentre_withE_iff (𝔪 : MarkedIdeal n X) {E' : List (Set X)
     (hE : IsSNCDivisor n 𝔪.E) (hsub : ∀ H ∈ E', H ∈ 𝔪.E) (hA : ∀ H ∈ 𝔪.E, H ∉ E' → C ⊆ H) :
     ({ 𝔪 with E := E' } : MarkedIdeal n X).IsAdmissibleCentre C ↔ 𝔪.IsAdmissibleCentre C :=
   Iff.and Iff.rfl (Iff.and Iff.rfl (hasNormalCrossings_iff_of_forall_mem hE hsub hA))
+
+/-- **Well-formedness passes to a sublist of the divisor.** -/
+theorem isWellFormed_withE {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed) {E' : List (Set X)}
+    (hE' : E'.Sublist 𝔪.E) : ({ 𝔪 with E := E' } : MarkedIdeal n X).IsWellFormed :=
+  ⟨h𝔪.isClosedSubmanifold_N, h𝔪.isCoherent, isSNCDivisor_of_sublist h𝔪.isSNCDivisor hE',
+    isTransverse_of_forall_mem h𝔪.isTransverse fun _ hH => hE'.subset hH⟩
 
 /-! ### One blowup: the hypotheses pass to the transformed divisor -/
 
@@ -376,6 +409,12 @@ theorem forall_mem_transformE (π : Y → X) (C : Set X) {E E' : List (Set X)}
   · obtain ⟨K, hK, rfl⟩ := List.mem_map.mp hH
     exact List.mem_append_left _ (List.mem_map_of_mem (hsub K hK))
   · exact List.mem_append_right _ hH
+
+/-- **Sublists pass to the transformed divisor.** -/
+theorem sublist_transformE (π : Y → X) (C : Set X) {E E' : List (Set X)} (h : E'.Sublist E) :
+    (E'.map (geoStrictTransform π C) ++ [π ⁻¹' C]).Sublist
+      (E.map (geoStrictTransform π C) ++ [π ⁻¹' C]) :=
+  (h.map _).append (List.Sublist.refl _)
 
 /-- **The dropped members keep containing the strict transform**: if every member of `E` that is not
 a member of `E'` contains `S`, then every member of the transformed divisor of `E` that is not a

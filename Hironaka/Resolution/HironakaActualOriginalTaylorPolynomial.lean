@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualWholeIdealJetDetection
 import Hironaka.Resolution.HironakaRelativeNormalActualBaseJetDimension
 
@@ -204,7 +199,6 @@ theorem originalTaylorCoefficientMap_eq_coefficient (n k : ℕ) (g : HolGerm (Co
   rw [originalTaylorPolynomial_coefficient_low n (normalExponentDegree α) g α (by omega)] at hs
   exact hs.symm
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Every original complex coefficient vanishes only for the true zero original germ. -/
 theorem originalTaylorCoefficientMap_eq_zero_iff (n : ℕ) (g : HolGerm (ComplexModel (0+n))) :
     originalTaylorCoefficientMap n g=0 ↔ g=0 := by
@@ -226,7 +220,6 @@ theorem originalTaylorCoefficientMap_eq_zero_iff (n : ℕ) (g : HolGerm (Complex
   · rintro rfl
     exact map_zero _
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The entire original germ ring has a faithful complex linear system of ACTUAL stabilized coefficients. -/
 theorem originalTaylorCoefficientMap_injective (n : ℕ) : Function.Injective (originalTaylorCoefficientMap n) := by
   intro g h he

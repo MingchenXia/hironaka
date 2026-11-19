@@ -36,8 +36,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaBoundaryCountAnalyticSuperlevels HironakaStepOneSpecialAnalyticLoci
   MemberInterLocusAlong BoundaryCount CodimOneSupportAlong MarkedIdealBiholomorphism
   HironakaDimensionTwoStepOneAnalyticSuperlevels
-open Hironaka.ResolutionInvariantSpec (IsInvDomain)
-open Hironaka
+open ResolutionInvariantSpec (IsInvDomain)
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
@@ -336,7 +335,7 @@ theorem exists_analytic_dimzero_member_companion_positive_history (hn : 0 < n)
       exact hyn ((hh.2.mp hxP).2)
 
 open HironakaGeneralThreeNonspecialAnalyticLoci
-open Hironaka.ResolutionInvariantSpec (IsCanonical)
+open ResolutionInvariantSpec (IsCanonical)
 
 theorem exists_actual_general_three_member_companion_positive_history (hn : 0 < n)
     (m : MarkedIdeal n X) (h : IsInvDomain 3 m) (T : BlowupTower X Y)

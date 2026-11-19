@@ -1,12 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalActualHSConvolution
 import Hironaka.Resolution.HironakaSmoothCentreRealDomainOriginalStalkFreeness
-import Hironaka.Support.GenuineAmbientJetAlgEquivExact
-import Hironaka.Support.OriginalFixedRealAmbientHSDictionaryExact
 
 /-! Retain the actual original nonlinear centre chart-stalk ambient HS on its genuine real domain. -/
 set_option autoImplicit false
@@ -25,6 +18,57 @@ open Hironaka.HolomorphicIdealSheaves HolGerm
   HironakaRelativeNormalActualWeightedTruncations
   HironakaHolomorphicJetChartInvariance
 
+section GenuineLocalAlgebras
+variable {R S : Type*} [CommRing R] [CommRing S] [Algebra ℂ R] [Algebra ℂ S]
+  [IsLocalRing R] [IsLocalRing S]
+
+/-- The genuine original local algebra map retains ALL actual ambient maximal-power quotient classes. -/
+def actualLocalAmbientJetAlgEquiv (E : R ≃ₐ[ℂ] S) (I : Ideal R) (s : ℕ) :
+    (R ⧸ (I ⊔ IsLocalRing.maximalIdeal R ^ s)) ≃ₐ[ℂ]
+      (S ⧸ (Ideal.map E.toRingEquiv.toRingHom I ⊔ IsLocalRing.maximalIdeal S ^ s)) :=
+  Ideal.quotientEquivAlg _ _ E (by
+    rw [Ideal.map_sup,Ideal.map_pow,
+      IsLocalRing.map_maximalIdeal_of_surjective (E : R →+* S) E.surjective]
+    rfl)
+
+/-- EVERY original ambient numerator keeps its SAME actual whole algebra image. -/
+theorem actualLocalAmbientJetAlgEquiv_mk (E : R ≃ₐ[ℂ] S) (I : Ideal R) (s : ℕ) (g : R) :
+    actualLocalAmbientJetAlgEquiv E I s
+      (Ideal.Quotient.mk (I ⊔ IsLocalRing.maximalIdeal R ^ s) g) =
+        Ideal.Quotient.mk
+          (Ideal.map E.toRingEquiv.toRingHom I ⊔ IsLocalRing.maximalIdeal S ^ s) (E g) := rfl
+
+end GenuineLocalAlgebras
+
+/-- The EXISTING original ambient HS is invariant under every genuine original complex germ algebra equivalence. -/
+theorem actualAmbientHS_eq_of_genuineAlgEquiv {n : ℕ}
+    (E : HolGerm (ComplexModel n) ≃ₐ[ℂ] HolGerm (ComplexModel n))
+    (I : Ideal (HolGerm (ComplexModel n))) (ℓ : ℕ) :
+    hilbertSamuelValue (Ideal.map E.toRingEquiv.toRingHom I) ℓ = hilbertSamuelValue I ℓ :=
+  (actualLocalAmbientJetAlgEquiv E I (ℓ+1)).toLinearEquiv.finrank_eq.symm
+
+section Manifold
+variable {n : ℕ} {M : Type*} [TopologicalSpace M]
+  [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- ANY fixed actual nonlinear flattening retains the SAME WHOLE original chart-stalk ambient HS at EVERY true target point. -/
+theorem fixed_real_original_whole_stalk_ambient_hs_dictionary
+    (A : GermIdeal n M) (hA : A.IsCoherent) (x : M)
+    (Φ : LocalHolomorphicEquivAt (chartAt (ComplexModel n) x x))
+    (hsrc : Φ.source ⊆ (chartAt (ComplexModel n) x).target)
+    (a : ComplexModel n) (ha : a ∈ Φ.target) (ℓ : ℕ) :
+    let y := actualFlatteningInverseMap x Φ a
+    let hy := actualNearbyPoint_mem_chart_source x Φ hsrc a ha
+    hilbertSamuelValue (wholeChartStalkIdeal A x y hy) ℓ =
+      hilbertSamuelValue
+        (originalCoherentOriginIdeal (actualTranslatedOriginalSheaf (actualFlattenedOriginalSheaf A x Φ) a)) ℓ := by
+  dsimp only
+  have hmap := (whole_original_stalk_dictionary_at_actual_target A hA x Φ hsrc a ha).1
+  rw [← hmap]
+  exact actualAmbientHS_eq_of_genuineAlgEquiv (actualNearbyGermEquiv Φ a ha) _ ℓ
+
+end Manifold
+
 open HironakaSmoothCentreRealDomainCoefficientAlgebra
   HironakaRelativeNormalCoefficientFunctionAlgebra HironakaRelativeNormalCoefficientAlgebraNearbyFreeness
   HironakaRelativeNormalUniformLocalization HironakaRelativeNormalUniformTruncations
@@ -34,7 +78,6 @@ section OriginalCentre
 variable {d t : ℕ} {M : Type*} [TopologicalSpace M]
   [ChartedSpace (ComplexModel (d+t)) M] [IsComplexManifold (d+t) M]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- ONLY original regular-centre geometry and coherence give ONE true real open and ALL genuine uniform normal-layer ranks. -/
 theorem exists_original_regular_real_uniform_degree_ranks
     (C : Set M) (x : M) (hreg : RegularAtDim (n := d+t) C x d)

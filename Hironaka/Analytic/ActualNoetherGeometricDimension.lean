@@ -1,11 +1,4 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermComponentDimension
-
-import Hironaka.Analytic.GermComponentGeometricDimension
 
 set_option autoImplicit false
 
@@ -15,8 +8,6 @@ The actual conversion retains its base dimension rather than forgetting
 it in a nonempty output.  The subvariety consumer internally constructs
 the parametrization and identifies its dimension geometrically.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter Metric Topology

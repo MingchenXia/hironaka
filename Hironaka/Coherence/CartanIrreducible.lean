@@ -1,36 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.CartanLocalInclusion
 import Hironaka.Coherence.CartanFamilyData
 import Hironaka.Coherence.CartanPrescribedPrimitive
 import Hironaka.Coherence.CartanGeneralPosition
 import Hironaka.Coherence.CartanIrreducibleReduction
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Coherence.CartanCoherenceDef
-import Hironaka.Coherence.CartanKeyLemma
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.GermParametrizationDense
-import Hironaka.Analytic.GermParametrizationFunctions
-import Hironaka.Analytic.GermParametrizationProof
-import Hironaka.Analytic.GermParametrizationSets
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Coherence.OkaCoherence
-import Hironaka.Coherence.OkaIdealOperations
-import Hironaka.Coherence.OkaRelationSheaf
+
 set_option autoImplicit false
 
 /-!
 # Cartan's coherence theorem for an irreducible germ
 
-Demailly, *Complex analytic and differential geometry*, II.4.29 (H. Cartan 1950), the irreducible case, with
-finitely many primitive elements in general position instead of Demailly's interpolation in the coefficients `c`.
+Demailly, *Complex analytic and differential geometry*, II.4.29 (H. Cartan 1950), the irreducible
+case, with finitely many primitive elements in general position instead of Demailly's
+interpolation in the coefficients `c`.
 
 Let `A` be an irreducible analytic germ at `0 ∈ ℂⁿ`, in Noether position over `ℂᵈ`.
 
@@ -51,6 +32,8 @@ A linear change of coordinates (`idealFGAt_vanishingIdealF_of_linearEquiv`) redu
 irreducible germ to Noether position: `irreducibleLocalCartan`.  With
 `CartanIrreducibleReduction.cartanCoherence_of_irreducibleLocalCartan` this is Cartan's theorem on
 every complex manifold (`cartanCoherence`).
+
+Sorry-free.
 -/
 
 open Set Filter Metric Polynomial
@@ -58,7 +41,9 @@ open scoped Topology
 
 namespace Hironaka.CartanIrreducible
 
-open RegularLocusDense HolGerm GermAlgebraicParametrization GermParametrizationData GermParametrizationFunctions OkaRelationSheaf OkaIdealOperations AnalyticGermDecomposition CartanLocalInclusion CartanPrescribedPrimitive CartanFamilyData
+open RegularLocusDense HolGerm GermAlgebraicParametrization GermParametrizationData
+  GermParametrizationFunctions OkaRelationSheaf OkaIdealOperations AnalyticGermDecomposition
+  CartanLocalInclusion CartanPrescribedPrimitive CartanFamilyData
 
 noncomputable section
 

@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.DropMembersContainingCentresOriginalExact
 import Hironaka.Resolution.HironakaNormalCrossingsCoefficientRemainderPhase
 
 /-!
@@ -31,7 +25,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsMultiplicityStrata
   HironakaNormalCrossingsHighestSubcentreAdmissibility
   HironakaNormalCrossingsCoefficientRemainderPhase
-open _root_.Hironaka.ResolutionInvariantSpec (IsCanonical)
+open ResolutionInvariantSpec (IsCanonical)
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
 /-- Whole literal old branch block and SAME chronological born block, even

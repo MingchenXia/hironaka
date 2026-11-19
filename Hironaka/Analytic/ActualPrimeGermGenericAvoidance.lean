@@ -1,11 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermPrimeNullstellensatz
 import Mathlib.Algebra.BigOperators.GroupWithZero.Finset
-
 
 set_option autoImplicit false
 
@@ -16,8 +10,6 @@ The complete mathematical statements and ENTIRE proofs precede the import
 baseline.  Inputs are original holomorphic functions and ordinary prime
 germ/nondivisibility conditions, not irreducibility or avoidance certificates.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter

@@ -1,67 +1,37 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralRepresentative
 import Hironaka.Invariant.CompanionTowerIso
 import Hironaka.Blowup.BlowupTowerSplitIso
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.CompanionReductionAlong
-import Hironaka.Invariant.GeneralAdmissible
-import Hironaka.Invariant.GeneralCanonicalTail
-import Hironaka.Invariant.GeneralCompare
-import Hironaka.Invariant.GeneralValue
-import Hironaka.Invariant.GeneralValueOrderZero
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainCompanion
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.NonmonomialOrderTransport
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneTangentChange
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The general value along isomorphisms of towers: property (6)
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale
-morphisms, in particular with biholomorphisms; Bierstone--Milman 2008, Step II.
+Blueprint `hir:general-tower-iso` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).  Source:
+Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`: the resolution commutes with étale morphisms, in
+particular with biholomorphisms; Bierstone--Milman 2008, Step II.
 
-Let `χ: T' ≅ T` be an isomorphism of towers over a biholomorphism `Φ: X' ≅ X`, `𝔪` a marked ideal of the domain (`0
-< n`) and `T` a canonical segment of the general value `genInv M 𝔪` (`M` a value function for the marked ideals of
-maximal order). At a point `p` with `χ p` in the cosupport of positive order `o`, the general values of `Φ^*𝔪` along
-`T'` at `p` and of `𝔪` along `T` at `χ p` agree: the orders and the runs agree
-(`NonmonomialOrderLocal.nmOrd_geoTransformAlong_isTowerIso`,
-`NonmonomialOrderRegime.regimeRun_ordRegime_isTowerIso`), the splits at the run correspond
-(`IsTowerIso.exists_split`), the masks correspond (`NonmonomialOrderTransport.mem_ordMask_isTowerIso_iff`), the
-companion ideal of `(Φ^*𝔪)_{T₀'}` on its mask is the pullback of that of `𝔪_{T₀}`
-(`CompanionTowerIso.companionOf_isTowerIso`), and property (6) of `M` along the restricted tails -- a canonical
-segment of the companion ideal by the canonical-tail theorem
-(`GeneralCanonicalTail.hasGenLowerData_of_isCanonical`) -- gives the equality (`value_companionOf_isTowerIso`). At
-order `0` this is `GeneralValueOrderZero.towerIso_field_of_nmOrd_eq_zero`.
+Let `χ : T' ≅ T` be an isomorphism of towers over a biholomorphism `Φ : X' ≅ X`, `𝔪` a marked ideal of the domain (`0 < n`)
+and `T` a canonical segment of the general value `genInv M 𝔪` (`M` a value function for the marked ideals of maximal order).
+At a point `p` with `χ p` in the cosupport of positive order `o`, the general values of `Φ^*𝔪` along `T'` at `p` and of `𝔪`
+along `T` at `χ p` agree: the orders and the runs agree (TN3's `NonmonomialOrderLocal.nmOrd_geoTransformAlong_isTowerIso`,
+`NonmonomialOrderRegime.regimeRun_ordRegime_isTowerIso`), the splits at the run correspond (`IsTowerIso.exists_split`), the
+masks correspond (TN3's `NonmonomialOrderTransport.mem_ordMask_isTowerIso_iff`), the companion ideal of `(Φ^*𝔪)_{T₀'}` on its
+mask is the pullback of that of `𝔪_{T₀}` (TN3's `CompanionTowerIso.companionOf_isTowerIso`), and property (6) of `M` along the
+restricted tails -- a canonical segment of the companion ideal by the canonical-tail theorem
+(`GeneralCanonicalTail.hasGenLowerData_of_isCanonical`) -- gives the equality (`value_companionOf_isTowerIso`, the
+maximal-order-value version of `CompanionTowerIso.inv_companionOf_isTowerIso`).  At order `0` this is TN3's
+`GeneralValueOrderZero.towerIso_field_of_nmOrd_eq_zero`.
 
 ## Main results
 
 * `value_companionOf_isTowerIso`: the values of `M` for the companion ideals along an isomorphism of towers;
 * **`genInv_isTowerIso_of_pos`**: property (6) of the general value at positive order;
 * **`towerIso_field`**: property (6) in the shape of the field `towerIso` of `ResolutionInvariantExt.ResolutionInvariant`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -72,7 +42,18 @@ universe u v
 namespace Hironaka.GeneralTowerIso
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.StepOneTangentChange Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail Hironaka.NonmonomialOrderTransport Hironaka.InvDomainCompanion Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.GeneralCompare Hironaka.GeneralCanonicalTail Hironaka.CompanionTowerIso Hironaka.HomogenizedIdealAlong
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.BlowupTowerIsomorphism Hironaka.StepOneTangentChange
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderTail
+  Hironaka.NonmonomialOrderTransport Hironaka.InvDomainCompanion
+  Hironaka.MaxOrderValue Hironaka.GeneralValue
+  Hironaka.GeneralCompare Hironaka.GeneralCanonicalTail
+  Hironaka.CompanionTowerIso Hironaka.HomogenizedIdealAlong
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section
@@ -89,11 +70,11 @@ variable {X X' : CMfd.{u} n} (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(�
   {k : ℕ} {Λ : Type v} [LinearOrder Λ]
   {M : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
 
-/-- **The values of the companion ideal along an isomorphism of towers**: let `T₀' ≅ T₀` over `Φ` with last-stage map
-`χ₀` and `T₁' ≅ T₁` over `χ₀`, `T₀` a multiple test blow-up of `𝔪` (in the domain, `0 < n`, `o ≥ 1`), and `W'`, `W`
-opens with `q ∈ W' ↔ χ₀ q ∈ W`. If `𝓞₀ = 𝓞(𝔪_{T₀}, o)|_W` is of maximal order and `T₁|_W` is a canonical segment of
-it for `M`, the values of `M` for `𝓞((Φ^*𝔪)_{T₀'}, o)|_{W'}` along `T₁'|_{W'}` and for `𝓞₀` along `T₁|_W` agree at
-corresponding points of the cosupport. -/
+/-- **The values of the companion ideal along an isomorphism of towers** (`CompanionTowerIso.inv_companionOf_isTowerIso` for
+a value function of the marked ideals of maximal order): let `T₀' ≅ T₀` over `Φ` with last-stage map `χ₀` and `T₁' ≅ T₁` over
+`χ₀`, `T₀` a multiple test blow-up of `𝔪` (in the domain, `0 < n`, `o ≥ 1`), and `W'`, `W` opens with `q ∈ W' ↔ χ₀ q ∈ W`.  If
+`𝓞₀ = 𝓞(𝔪_{T₀}, o)|_W` is of maximal order and `T₁|_W` is a canonical segment of it for `M`, the values of `M` for
+`𝓞((Φ^*𝔪)_{T₀'}, o)|_{W'}` along `T₁'|_{W'}` and for `𝓞₀` along `T₁|_W` agree at corresponding points of the cosupport. -/
 theorem value_companionOf_isTowerIso (hM : IsMaxOrderValue n k M) (hn : 0 < n) (h : IsInvDomain k 𝔪) {o : ℕ}
     (ho : 1 ≤ o) (hiso : IsTowerIso Φ T₀' T₀ χ₀) (hT₀ : IsGeoTestTower 𝔪 T₀) {W' : Opens Y₀'} {W : Opens Y₀}
     (hW : ∀ q, q ∈ W' ↔ χ₀ q ∈ W)
@@ -169,8 +150,8 @@ theorem genInv_isTowerIso_of_pos (hM : IsMaxOrderValue n k M) (hn : 0 < n) {𝔪
   rw [value_companionOf_isTowerIso Φ hM hn h ho1 h₀ hT₀ hWiff hmax h₁ hcan₀ ⟨p, hp'⟩ ⟨χ p, hW⟩ rfl hcos₀]
 
 /-- **Property (6) of the general value in the shape of the field `towerIso`** of
-`ResolutionInvariantExt.ResolutionInvariant`: along canonical segments of the general value (`M` a value function
-for the marked ideals of maximal order, `0 < n`), at every point (order `0`:
+`ResolutionInvariantExt.ResolutionInvariant`: along canonical segments of the general value (`M` a value function for the
+marked ideals of maximal order, `0 < n`), at every point (order `0`: TN3's
 `GeneralValueOrderZero.towerIso_field_of_nmOrd_eq_zero`). -/
 theorem towerIso_field (hM : IsMaxOrderValue n k M) (hn : 0 < n)
     (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X) (𝔪 : MarkedIdeal n X) (h : IsInvDomain k 𝔪)

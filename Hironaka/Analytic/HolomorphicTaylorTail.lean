@@ -1,17 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.LastVariableTaylorDivision
 import Hironaka.Analytic.CoordinatePlaneDivision
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.HolomorphicContDiff
+
 set_option autoImplicit false
 
 /-!
 # Taylor expansion with holomorphic remainder, along a line and in normal coordinates
+
+Hironaka phase H3 (TN23-ENVELOPES, agreed with TN-CLASSICAL on I-0981); blueprint
+`mc:taylor-tail`, `mc:normal-vanishing` (`blueprint/src/maximal-contact.tex`).
 
 * `exists_taylor_tail` (the convergent Taylor tail used in the analytic glueing lemma,
   Włodarczyk 2005 Lemma `homo0` in its analytic form): for `F` holomorphic near `q` and a
@@ -33,6 +29,9 @@ set_option autoImplicit false
 
 `iterDeriv L F` is the iterated directional derivative `∂_{v₁} ⋯ ∂_{v_m} F` along the list
 `L = [v₁, …, v_m]`, with `∂_v F = (z ↦ DF(z) v)`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter Metric

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalOriginalFiniteJetGenerators
 import Hironaka.Analytic.FiniteGermIdealPullbackGenerators
 
@@ -84,7 +79,6 @@ theorem actualTranslatedGenerator_raw {n : ℕ} (a : ComplexModel n)
       Germ (𝓝 (0 : ComplexModel n)) ℂ) = f ∘ actualAffineTranslation n a :=
   HolGerm.coe_mk _ _
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem actual_translated_origin_ideal_eq_span {n N : ℕ}
     (I : GermIdeal n (ComplexModel n)) (S : Fin N → ComplexModel n → ℂ)
     {U : Set (ComplexModel n)} (hU : IsOpen U)

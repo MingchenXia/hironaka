@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualFormalCoordinatePowerDivision
 import Mathlib.RingTheory.MvPowerSeries.Rename
 import Hironaka.Resolution.HironakaActualPointTangentCoefficientHSDrop
@@ -288,7 +283,6 @@ open HolGerm HironakaActualOriginalFormalTaylor HironakaActualTaylorFaithfullyFl
   HironakaActualCoefficientPresentationCentrePower HironakaActualAnalyticStrictGenerators
   HironakaHolomorphicJetMonomialSpan
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem formal_syzygies_finite {ι : Type*} [Fintype ι]
     (G : ι → HolGerm (ComplexModel (0+n))) (A : ι → MvPowerSeries (Fin n) ℂ)
     (hRel : (∑ i,originalTaylorAlgHom n (G i)*A i)=0) :
@@ -310,7 +304,6 @@ private theorem formal_syzygies_finite {ι : Type*} [Fintype ι]
     rw [←e.sum_comp (fun i => G (e.symm i)*c i l)] at h
     simpa only [Equiv.symm_apply_apply] using h
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem taylor_span_exceptional_regular {ι : Type*} [Fintype ι]
     (H : ι → HolGerm (ComplexModel (0+n))) (j : Fin n)
     (hReg : ∀ g : HolGerm (ComplexModel (0+n)),

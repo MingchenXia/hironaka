@@ -1,55 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneValueMasked
 import Hironaka.Invariant.InvDomainRebase
 import Hironaka.Invariant.ContactStageRebase
 import Hironaka.MarkedIdeal.CoefficientIdealAlongRestrictionDrop
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Invariant.ContactStageTail
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainMemberRestriction
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneMaskTower
-import Hironaka.Invariant.StepOneNearby
-import Hironaka.Invariant.StepOneValue
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1: the value of a nearby point through the reference point's lower marked ideal
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1 (the restrictions `J̄_{|H^s_α}`
-in Step 1a, `J̄_{|V(u)}` in Step 1b, computed along the part of the resolution after they are formed) and the lemma
-on the commutativity of the resolution procedure with étale morphisms.
+Blueprint `hir:step-one-compare` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1 (the restrictions `J̄_{|H^s_α}` in Step 1a,
+`J̄_{|V(u)}` in Step 1b, computed along the part of the resolution after they are formed) and the lemma on the commutativity
+of the resolution procedure with étale morphisms.
 
 Let `T = T₀' M T₁` be a multiple test blow-up of `J̄ = 𝓒_N(𝓗_N(𝔍))`, `y₀` a point of the last stage of `T₀ = T₀' M` in the regime
 of level `s`, with mask `W` and lower marked ideal `𝓢(y₀)` (the masked family `StepOneValueMasked.lowerMarkedM`), and `p` a point
@@ -57,24 +20,27 @@ of the last stage over `W` whose own split is at `T₀'` (it entered the regime 
 steps of `M` are empty over its mask `W'` (`StepOneValueMasked.centresAvoid_lowerMaskL`).  The value of `p` is computed from
 `𝓢(p₁)|_{W'}` along `(M T₁)|_{W'}`; this module moves it to the stage `T₀`:
 
-* `inv_restrict_append`: `(M T₁)|_{W'}` is isomorphic to `M|_{W'}` followed by `T₁|_{M⁻¹W'}`
-  (`isTowerIso_restrict_append`), so canonical segments, cosupports and values pass between the two (property (6)
-  over the identity);
+* `inv_restrict_append`: `(M T₁)|_{W'}` is isomorphic to `M|_{W'}` followed by `T₁|_{M⁻¹W'}` (TN23's
+  `isTowerIso_restrict_append`), so canonical segments, cosupports and values pass between the two (property (6) over the
+  identity);
 * `memberRestrict_membersThrough_congr`: Step 1ab's restricted marked ideal depends only on the members through the point;
-* **`lowerValue_eq_succ`** (Step 1ab, `s ≥ 1`): re-basing along `M` (`InvDomainRebase.memberRestrict_rebase`), then
-  the restricted marked ideal formed at `T₀` at the image of `p` is the one formed at `y₀` (same original members
-  through the two points), and the values on the two open sets `M⁻¹W'` and `W` agree
+* **`lowerValue_eq_succ`** (Step 1ab, `s ≥ 1`): re-basing along `M` (TN3's `InvDomainRebase.memberRestrict_rebase`), then
+  the restricted marked ideal formed at `T₀` at the image of `p` is the one formed at `y₀` (same original members through the
+  two points, `StepOneNearby.membersThrough_eq_of_mem_maskA`), and the values on the two open sets `M⁻¹W'` and `W` agree
   (`StepOneNearby.inv_eq_of_two_opens`): the lower value of `p` is `R` of `𝓢(y₀)|_W` along `T₁|_W` at `p`;
-* `contactKept`, `contactKept_rebase`, **`lowerValue_eq_zero_rebase`** (Step 1bb, `s = 0`, original members kept):
-  re-basing along `M` (`restrictEquiv_restrictedCoeffHomAlong_rebase`, any divisor, with `inv_rebase`) -- the lower
-  value of `p` is `R` of `contactKept 𝔍 v (T₀' M) (M⁻¹W')` along `T₁|_{M⁻¹W'}`, `v` the tangent direction chosen at
-  the base point of `p`; the change to the tangent direction of `y₀` is `StepOneTangentChange`;
-* the cosupports of the lower marked ideals along restricted tails: `mem_cosupp_lowerMarked_succ_iff` (Step 1ab: the
-  points of the cosupport of `J̄_T` on the strict transforms of the original members through `y₀`;
-  `CoefficientIdealAlongRestrictionDrop.coeffAlong_restrict_withE_iff` and `strictAlong_inter_memberInter`),
-  `level_eq_iff_of_mem_maskA` (over the mask those are the points of level `s`),
-  `isGeoTestTower_cosupp_lowerMarkedB` (Step 1bb: the restricted tail is a multiple test blow-up and the cosupport
-  is the trace of `cosupp J̄_T`, `ContactStageTail.isGeoTestTower_tail_coeffHomAlong_of_le`).
+* `contactKept`, `contactKept_rebase`, **`lowerValue_eq_zero_rebase`** (Step 1bb, `s = 0`, original members kept): re-basing
+  along `M` (TN23's `restrictEquiv_restrictedCoeffHomAlong_rebase`, any divisor, with TN3's `inv_rebase`) -- the lower value
+  of `p` is `R` of `contactKept 𝔍 v (T₀' M) (M⁻¹W')` along `T₁|_{M⁻¹W'}`, `v` the tangent direction chosen at the base point
+  of `p`; the change to the tangent direction of `y₀` is TN23's `StepOneTangentChange` (I-0981 C-0111);
+* the cosupports of the lower marked ideals along restricted tails: `mem_cosupp_lowerMarked_succ_iff` (Step 1ab: the points
+  of the cosupport of `J̄_T` on the strict transforms of the original members through `y₀`; TN23's
+  `CoefficientIdealAlongRestrictionDrop.coeffAlong_restrict_withE_iff` and TN3's `strictAlong_inter_memberInter`),
+  `level_eq_iff_of_mem_maskA` (over the mask those are the points of level `s`), `isGeoTestTower_cosupp_lowerMarkedB`
+  (Step 1bb: the restricted tail is a multiple test blow-up and the cosupport is the trace of `cosupp J̄_T`, TN23's
+  `ContactStageTail.isGeoTestTower_tail_coeffHomAlong_of_le`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -85,7 +51,17 @@ universe u v
 namespace Hironaka.StepOneCompare
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneMaskTower Hironaka.StepOneNearby Hironaka.BoundaryCount Hironaka.InvDomainMemberRestriction Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowerIsomorphism Hironaka.RestrictEmptyTower Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.MaximalOrderStepOneB Hironaka.TangentDirectionAlong Hironaka.StepOneValueMasked Hironaka.CoefficientIdealRestriction
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneMaskTower Hironaka.StepOneNearby
+  Hironaka.BoundaryCount Hironaka.InvDomainMemberRestriction
+  Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowerIsomorphism
+  Hironaka.RestrictEmptyTower Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.MaximalOrderStepOneB
+  Hironaka.TangentDirectionAlong Hironaka.StepOneValueMasked
+  Hironaka.CoefficientIdealRestriction
 open Hironaka.HomogenizedGlueingTower (strictAlong strictAlong_restrict)
 open Hironaka.BlowupTowerIsoTail (opensCongr isTowerIso_restrict_append openPreimage_append)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
@@ -101,10 +77,10 @@ section Generic
 
 variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
 
-/-- **Canonical segments and values along a restricted concatenation**: for an open `W` of `Y₁`, a marked ideal `𝔪` on
-`W` in the domain of `R` and towers `M`, `T₁`, if `(M T₁)|_W` is a canonical segment of `𝔪`, so is `M|_W` followed
-by `T₁|_{M⁻¹W}`, and at the points of the cosupport the values agree (`isTowerIso_restrict_append`, property (6)
-over the identity of `W`). -/
+/-- **Canonical segments and values along a restricted concatenation**: for an open `W` of `Y₁`, a marked ideal `𝔪` on `W`
+in the domain of `R` and towers `M`, `T₁`, if `(M T₁)|_W` is a canonical segment of `𝔪`, so is `M|_W` followed by
+`T₁|_{M⁻¹W}`, and at the points of the cosupport the values agree (TN23's `isTowerIso_restrict_append`, property (6) over
+the identity of `W`). -/
 theorem inv_restrict_append (R : ResolutionInvariant.{u, v} n k Λ) {Y₁ Y₀ Y : CMfd.{u} n} (W : Opens Y₁)
     {𝔪 : MarkedIdeal n (CMfd.of (n := n) W)} (hdom : IsInvDomain k 𝔪) (M : BlowupTower Y₁ Y₀)
     (T₁ : BlowupTower Y₀ Y) (hcan : IsCanonical 𝔪 (R.inv 𝔪) (restrict W (M.append T₁))) :
@@ -242,6 +218,10 @@ def contactKept (w : X → ℂ) {Y₀ : CMfd.{u} n} (T₀ : BlowupTower X Y₀) 
   MarkedIdeal.pullback (Subtype.val : W → Y₀)
     (withN (coeffMarkedAlong (geoTransformAlong (barMarked 𝔍) T₀)) (strictAlong T₀ (𝔍.N ∩ {x | w x = 0})))
 
+/-- The masked lower marked ideal of level `0` is `contactKept` on the mask, for the chosen tangent direction. -/
+theorem lowerMarkedB_eq_contactKept {Y₀ : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (y₀ : Y₀) :
+    lowerMarkedB 𝔍 T₀ y₀ = contactKept 𝔍 (tangentChoice 𝔍 (T₀.proj y₀)).2 T₀ (maskB 𝔍 T₀ y₀) := rfl
+
 /-- **The chosen tangent direction is one as soon as its open set contains the base point.** -/
 theorem tangentChoice_spec_of_mem {x : X} (hx : x ∈ (tangentChoice 𝔍 x).1) :
     IsTangentDirectionAlong 𝔍.N 𝔍.ideal 𝔍.d (tangentChoice 𝔍 x).1 (tangentChoice 𝔍 x).2 := by
@@ -251,11 +231,11 @@ theorem tangentChoice_spec_of_mem {x : X} (hx : x ∈ (tangentChoice 𝔍 x).1) 
   · rw [tangentChoice, dif_neg h] at hx
     exact absurd hx (notMem_empty x)
 
-/-- **Step 1b's values re-based, divisor kept**: for a multiple test blow-up `T₀ T` of `J̄`, `u` a tangent direction on
-`U`, `W ⊆ T₀⁻¹U` open with the centres of `T` missing `W`: if `contactKept 𝔍 u T₀ W` lies in the domain and `T|_W
-T₁` is a canonical segment of it, then `contactKept 𝔍 u (T₀ T) (T⁻¹W)` lies in the domain, `T₁` is a canonical
-segment of it, and the values agree on the cosupport (`restrictEquiv_restrictedCoeffHomAlong_rebase`, any divisor,
-and `InvDomainRebase.inv_rebase`). -/
+/-- **Step 1b's values re-based, divisor kept** (the E-kept twin of TN23's `ContactStageRebase.contactMarked_rebase`): for a
+multiple test blow-up `T₀ T` of `J̄`, `u` a tangent direction on `U`, `W ⊆ T₀⁻¹U` open with the centres of `T` missing `W`: if
+`contactKept 𝔍 u T₀ W` lies in the domain and `T|_W T₁` is a canonical segment of it, then `contactKept 𝔍 u (T₀ T) (T⁻¹W)` lies
+in the domain, `T₁` is a canonical segment of it, and the values agree on the cosupport (TN23's
+`restrictEquiv_restrictedCoeffHomAlong_rebase`, any divisor, and TN3's `InvDomainRebase.inv_rebase`). -/
 theorem contactKept_rebase (hN : IsClosedSubmanifold n 𝔍.N) (h𝔞 : 𝔍.ideal.IsCoherent) (hd : 1 ≤ 𝔍.d) (U : Opens X)
     {u : X → ℂ} (hu : IsTangentDirectionAlong 𝔍.N 𝔍.ideal 𝔍.d U u) {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀)
     (T : BlowupTower Y₀ Y) (hT : IsGeoTestTower (barMarked 𝔍) (T₀.append T)) (W : Opens Y₀)
@@ -277,12 +257,12 @@ theorem contactKept_rebase (hN : IsClosedSubmanifold n 𝔍.N) (h𝔞 : 𝔍.ide
     GermIdealPullbackCalculus.isCoherent_pullback contMDiff_subtype_val (isCoherent_coeffMarkedAlong hcT hNT)
   exact InvDomainRebase.inv_rebase (X := CMfd.of (n := n) W) R hdom (restrict W T) he hEq hcoh T₁ hcan
 
-/-- **The lower value of a point of level `0`, re-based to a later stage** (`hir:step-one-compare`, `s = 0`, masked
-family): let `T₀' M T₁` be a multiple test blow-up of `J̄` (`𝔍` well formed, `d ≥ 1`) and `p` a point of the last
-stage with lower data at level `0` at the split `T₀' (M T₁)`, such that the centres of `M` miss its mask `W'`. Then
-`p` lies over `M⁻¹W'`, `contactKept 𝔍 v (T₀' M) (M⁻¹W')` (`v` the tangent direction chosen at the base point of `p`)
-lies in the domain, `T₁|_{M⁻¹W'}` is a canonical segment of it, and the lower value of `p` is the value of `R` for
-it at `p`. The change from `v` to the tangent direction of another point is `StepOneTangentChange`. -/
+/-- **The lower value of a point of level `0`, re-based to a later stage** (`hir:step-one-compare`, `s = 0`, masked family):
+let `T₀' M T₁` be a multiple test blow-up of `J̄` (`𝔍` well formed, `d ≥ 1`) and `p` a point of the last stage with lower data
+at level `0` at the split `T₀' (M T₁)`, such that the centres of `M` miss its mask `W'`.  Then `p` lies over `M⁻¹W'`,
+`contactKept 𝔍 v (T₀' M) (M⁻¹W')` (`v` the tangent direction chosen at the base point of `p`) lies in the domain, `T₁|_{M⁻¹W'}`
+is a canonical segment of it, and the lower value of `p` is the value of `R` for it at `p`.  The change from `v` to the tangent
+direction of another point is TN23's `StepOneTangentChange`. -/
 theorem lowerValue_eq_zero_rebase (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) {Y₁ Y₀ Y : CMfd.{u} n}
     (T₀' : BlowupTower X Y₁) (M : BlowupTower Y₁ Y₀) (T₁ : BlowupTower Y₀ Y)
     (hT : IsGeoTestTower (barMarked 𝔍) ((T₀'.append M).append T₁)) {p : Y}
@@ -334,11 +314,11 @@ section Cosupp
 
 variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X)
 
-/-- **The cosupport of Step 1ab's lower marked ideal along the restricted tail** (`hir:step-one-compare`): along a
-multiple test blow-up `T₀ T₁` of `J̄` (`𝔍` well formed, `0 < n`), for `y₀` in its own mask at level `s + 1` and
-`T₁|_W` a multiple test blow-up of `𝓢(y₀)|_W`, a point over `W` lies in the cosupport of `𝓢(y₀)|_W` along `T₁|_W`
-iff it lies in `cosupp J̄_{T₀ T₁}` and on the strict transforms of the original members through `y₀`
-(`coeffAlong_restrict_withE_iff` on `W`, `strictAlong_inter_memberInter`). -/
+/-- **The cosupport of Step 1ab's lower marked ideal along the restricted tail** (`hir:step-one-compare`): along a multiple
+test blow-up `T₀ T₁` of `J̄` (`𝔍` well formed, `0 < n`), for `y₀` in its own mask at level `s + 1` and `T₁|_W` a
+multiple test blow-up of `𝓢(y₀)|_W`, a point over `W` lies in the cosupport of `𝓢(y₀)|_W` along `T₁|_W` iff it lies in
+`cosupp J̄_{T₀ T₁}` and on the strict transforms of the original members through `y₀` (TN23's
+`coeffAlong_restrict_withE_iff` on `W`, TN3's `strictAlong_inter_memberInter`). -/
 theorem mem_cosupp_lowerMarked_succ_iff (h𝔍 : 𝔍.IsWellFormed) (hn : 0 < n) {s : ℕ}
     {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y)
     (hT : IsGeoTestTower (barMarked 𝔍) (T₀.append T₁)) {y₀ : Y₀} (hy₀ : y₀ ∈ lowerMask 𝔍 (s + 1) T₀ y₀)
@@ -441,10 +421,10 @@ theorem level_eq_iff_of_mem_maskA (hE : ∀ H ∈ 𝔍.E, IsClosed H) {Y₀ Y : 
     simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hi ⊢
     exact hall _ (List.get_mem _ _) hi
 
-/-- **Step 1bb's restricted tails, divisor kept** (`hir:step-one-compare`): along a multiple test blow-up `T₀ T₁` of
-`J̄` (`𝔍` well formed, `d ≥ 1`, of maximal order), for `y₀` in the cosupport at `T₀`, `T₁|_W` is a multiple test
-blow-up of the masked lower marked ideal of level `0` and its cosupport is the trace of `cosupp J̄_{T₀ T₁}`
-(`ContactStageTail.isGeoTestTower_tail_coeffHomAlong_of_le`, any divisor). -/
+/-- **Step 1bb's restricted tails, divisor kept** (`hir:step-one-compare`): along a multiple test blow-up `T₀ T₁` of `J̄` (`𝔍`
+well formed, `d ≥ 1`, of maximal order), for `y₀` in the cosupport at `T₀`, `T₁|_W` is a multiple test blow-up of the masked
+lower marked ideal of level `0` and its cosupport is the trace of `cosupp J̄_{T₀ T₁}` (TN23's
+`ContactStageTail.isGeoTestTower_tail_coeffHomAlong_of_le`, any divisor). -/
 theorem isGeoTestTower_cosupp_lowerMarkedB (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y)
     (hT : IsGeoTestTower (barMarked 𝔍) (T₀.append T₁)) {y₀ : Y₀}

@@ -1,13 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ActualPrimeHolomorphicRegularZeros
 import Hironaka.Analytic.ActualPrimeRegularFiniteAvoidance
 import Hironaka.Manifold.HolomorphicContDiff
 import Hironaka.Coherence.OkaRelationSheaf
-
 
 set_option autoImplicit false
 
@@ -17,8 +11,6 @@ The differential is internally produced from the original prime and
 then made one of the actual finite tests. No unrelated frequent sets
 are silently intersected.
 -/
-
-open Hironaka
 
 noncomputable section
 open Set Filter

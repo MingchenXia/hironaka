@@ -1,13 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermMinimalPolynomial
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
@@ -20,6 +12,8 @@ Demailly, *Complex analytic and differential geometry*, II.4.14 and the proof of
 Lemma 4.18 needs, in addition, the degree bound `deg_{z_k} R < deg p_k` produced by the
 successive Weierstrass divisions (it bounds the power of the denominator `δ` needed to substitute
 `z_k = B_k(u)/δ`).  `exists_reduce_degreeLT` records it.
+
+Sorry-free.
 -/
 
 open Filter Topology Polynomial

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaNormalCrossingsCoefficientStratumResolution
 import Hironaka.Resolution.HironakaNormalCrossingsBoundaryTransform
 
@@ -33,7 +28,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaOpenCarrierTestTowerExtension CanonicalCentres HironakaAdmissibleSequence
   HironakaNormalCrossingsLocalBranches HironakaNormalCrossingsMultiplicityStrata
   HironakaNormalCrossingsBoundaryTransform HironakaNormalCrossingsCoefficientStratumResolution
-open _root_.Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
+open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
 /-- All actual original boundary entries remain in the TRUE remainder domain. -/

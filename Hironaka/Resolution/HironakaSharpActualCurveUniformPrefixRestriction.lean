@@ -1,11 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSharpActualCurveUniformPrefixes
 import Hironaka.Resolution.HironakaSharpActualCurveComparisonRestriction
-import Hironaka.Support.TowerIsoBaseCongruenceExact
 
 /-! Genuine prefix/restriction flattening from actual append and split maps,
 followed by the real restriction of an existing uniform-stage comparison. -/

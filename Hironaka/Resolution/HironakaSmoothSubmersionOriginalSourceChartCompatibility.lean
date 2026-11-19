@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionOriginalSourceChartMap
 /-! Actual original source overlap compatibility of the entire chart arrows.
 Complete mathematics preceded code. Genuine original common-open base/final

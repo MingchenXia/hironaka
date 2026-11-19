@@ -1,16 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationProof
 import Hironaka.Analytic.RegularPointDimension
 import Hironaka.Analytic.HolomorphicZeroSetThin
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.GermParametrization
+
 set_option autoImplicit false
 
 /-!
@@ -20,10 +11,12 @@ Two consequences of the local parametrization theorem for an irreducible analyti
 at `0 ∈ ℂⁿ` (Demailly, *Complex analytic and differential geometry*, II.4.19--4.26), in the
 form used to assemble the local statement (LS):
 
-* `exists_pure_nhds`: there are `d` and an open neighbourhood `Ω` of `0` such that on every open `Ω' ⊆ Ω`, EVERY
-  regular point of `A ∩ Ω'` has dimension `d` and the regular points of dimension `d` are dense in `A ∩ Ω'`;
-* `exists_thin_nhds`: if `B` is an analytic germ with `A ⊄ B` near `0`, then on some open neighbourhood `Ω` of `0`
-  the set `A ∩ B ∩ Ω` has empty interior relative to `A ∩ Ω`.
+* `exists_pure_nhds` (blueprint `lag:irreducible-germ-pure`): there are `d` and an open
+  neighbourhood `Ω` of `0` such that on every open `Ω' ⊆ Ω`, EVERY regular point of `A ∩ Ω'`
+  has dimension `d` and the regular points of dimension `d` are dense in `A ∩ Ω'`;
+* `exists_thin_nhds` (blueprint `lag:thin-subgerm`): if `B` is an analytic germ with
+  `A ⊄ B` near `0`, then on some open neighbourhood `Ω` of `0` the set `A ∩ B ∩ Ω` has empty
+  interior relative to `A ∩ Ω`.
 
 Regular points are taken in `ℂⁿ` regarded as a complex manifold with its identity chart.
 Both are derived from the local parametrization data

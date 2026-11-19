@@ -1,10 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Manifold.HolomorphicContDiff
 import Mathlib.Analysis.Complex.TaylorSeries
+
 set_option autoImplicit false
 
 /-!
@@ -69,7 +65,7 @@ theorem norm_iteratedFDeriv_le_of_forall_norm_le [FiniteDimensional ℂ E] [Comp
       refine DifferentiableAt.differentiableWithinAt ?_
       exact (hcd.contDiffAt (isOpen_ball.mem_nhds (hwR z hz))).differentiableAt_iteratedFDeriv
         (by exact_mod_cast WithTop.coe_lt_top _)
-    have hbd := Hironaka.norm_fderiv_le_of_forall_norm_le hdiff (fun z hz => ih z (hsub hz))
+    have hbd := _root_.Hironaka.norm_fderiv_le_of_forall_norm_le hdiff (fun z hz => ih z (hsub hz))
       hδ (by rw [hR']; linarith)
     rw [norm_fderiv_iteratedFDeriv] at hbd
     calc ‖iteratedFDeriv ℂ (k + 1) f w‖ ≤ M / δ ^ k / δ := hbd

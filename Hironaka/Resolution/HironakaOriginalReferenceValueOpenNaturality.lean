@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalAllDepthReferenceValueAnalytic
 /-! Actual original full-reference ideals over true open histories and overlaps.
 Only original inputs internally construct actual coherent windows. Complete

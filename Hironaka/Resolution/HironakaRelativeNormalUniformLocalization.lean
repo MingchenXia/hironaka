@@ -36,10 +36,7 @@ set_option autoImplicit false
 open Set
 open scoped nonZeroDivisors
 namespace Hironaka.HironakaRelativeNormalUniformLocalization
-open Hironaka
 noncomputable section
-
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
 open HironakaRelativeNormalStandardMonomials
 
 /-- A genuinely injective coefficient map preserves the whole original leading exponent. -/

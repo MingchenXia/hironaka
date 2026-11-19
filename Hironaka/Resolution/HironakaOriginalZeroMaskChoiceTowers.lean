@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalIndependentSmoothLowerHistories
 /-! Actual ORIGINAL member-avoiding zero contact masks have real lower TESTS
 and WHOLE records along every original upper TEST, without lower canonicality. -/

@@ -1,49 +1,29 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.HomogenizedGlueingTower
 import Hironaka.Blowup.BlowupUniqueness
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedIdeal
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Lifting biholomorphisms of open sets along a blowup; naturality of transforms on the blown-up side
 
-Source: Włodarczyk 2005, proof of `le:homo` (4) ("both morphisms `φ_u` and `φ_v` lift ... by the universal property
-of a blow-up") and Proposition `pr:funct`.
+Hironaka phase H3 (TN23-ENVELOPES), groundwork for the lifts `φᵢ` in Włodarczyk's Glueing Lemma `le:homo` (4);
+blueprint `mc:lift-biholomorphism`, `mc:transform-source-naturality` (`blueprint/src/maximal-contact.tex`).
+Source: Włodarczyk 2005, proof of `le:homo` (4) ("both morphisms `φ_u` and `φ_v` lift ... by the universal property of
+a blow-up") and Proposition `pr:funct`.
 
 * `mem_pullback_diffeo_iff`, `mem_restrictOn_pullback_diffeo_iff`, `colonAlong_pullback_diffeo`: along a biholomorphism
   `χ`, membership in a pulled-back coherent ideal is read through `χ⁻¹`, and the quotient along a set commutes with
   pullback;
-* `geoStrictTransform_comp_diffeo`, `geoTransform_comp_diffeo`: **the transform along `π ∘ χ` is the `χ`-pullback of
-  the transform along `π`** (naturality on the blown-up side; the base-side version is
+* `geoStrictTransform_comp_diffeo`, `geoTransform_comp_diffeo`: **the transform along `π ∘ χ` is the `χ`-pullback of the
+  transform along `π`** (naturality on the blown-up side; the base-side version is TN-CLASSICAL's
   `MarkedIdealBiholomorphism.MarkedIdeal.geoTransform_pullback`);
 * `preOpen hπ A = π⁻¹(A)` and `exists_lift`: **a biholomorphism `Φ : A ≅ B` of open sets of the base with
   `Φ⁻¹(C ∩ B) = C ∩ A` lifts to a biholomorphism `Φ₁ : π⁻¹A ≅ π⁻¹B` with `π ∘ Φ₁ = Φ ∘ π`** (universal property,
   `BlowupUniqueness.exists_biholomorphism_over`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -53,7 +33,10 @@ universe u
 
 namespace Hironaka.BlowupBiholomorphismLift
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder IdealWeightPowers BlowupStrictSubmanifold BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal MarkedIdealBiholomorphism RestrictedIdealExtension RestrictedIdealQuotient InvertibleIdealQuotient BlowupRestrictOpen
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  IdealWeightPowers BlowupStrictSubmanifold BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  MarkedIdealBiholomorphism RestrictedIdealExtension RestrictedIdealQuotient InvertibleIdealQuotient
+  BlowupRestrictOpen
 
 noncomputable section
 

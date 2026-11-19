@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualFormalIdealIntersections
 import Hironaka.Resolution.HironakaRelativeNormalCoherentSaturation
 
@@ -35,7 +30,6 @@ private theorem actual_extension_finite_expression (n : ℕ)
     exact Ideal.mem_span_range_self (x := i)
   · simpa only [mul_comm] using hA.symm
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Whole principal colons commute with actual original Taylor extension, even for the zero germ. -/
 theorem map_colon_originalTaylorAlgHom (n : ℕ)
     (I : Ideal (HolGerm (ComplexModel (0+n)))) (a : HolGerm (ComplexModel (0+n))) :

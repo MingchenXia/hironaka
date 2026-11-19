@@ -1,24 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.OrderMultiplicativity
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Analytic.HolomorphicAnalytic
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The order of a product of holomorphic germs: `ord_x(fg) = ord_x f + ord_x g`
 
-Sources: Włodarczyk 2005 Step 2a and Bierstone--Milman 2008 §5, Step II.B (the companion ideal: on the cosupport of
-`(𝔟𝔠, d)` with `ord 𝔟 ≤ o`, the cosupport condition passes to `(𝔠, d - o)`).
+Blueprint `hir:order-product` (`blueprint/src/hironaka.tex`, Hironaka phase H1, consumed by the H4
+reduction to maximal order `hir:companion-reduction`).  Sources: Włodarczyk 2005 Step 2a and
+Bierstone--Milman 2008 §5, Step II.B (the companion ideal: on the cosupport of `(𝔟𝔠, d)` with
+`ord 𝔟 ≤ o`, the cosupport condition passes to `(𝔠, d - o)`).
 
 ## Main results
 
@@ -29,6 +20,13 @@ Sources: Włodarczyk 2005 Step 2a and Bierstone--Milman 2008 §5, Step II.B (the
   `f ∈ 𝔪_x^a`; equivalently `ord_x(fg) ≤ ord_x f + ord_x g`.  Proof: restrict to a line `t ↦ p + t y`
   through `p = e x` in a common good direction `y`; the one-variable orders add (`analyticOrderAt_mul`).
 * `mul_notMem_idealPow`: `f ∉ 𝔪_x^{a+1}`, `g ∉ 𝔪_x^{b+1}` ⟹ `f g ∉ 𝔪_x^{a+b+1}`.
+* `mem_cosupport_of_mem_cosupport_mul` (ideal form, `N = M`): if `x ∈ cosupp(𝔟𝔠, d)`, `x ∉ cosupp(𝔟, o+1)`
+  (i.e. `ord_x 𝔟 ≤ o`) and `o ≤ d`, then `x ∈ cosupp(𝔠, d - o)`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -37,7 +35,10 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.GermOrderProduct
 
 open Hironaka.HolomorphicIdealSheaves
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.OrderTaylor Hironaka.HolomorphicTaylorTail Hironaka.IdealOrderArithmetic Hironaka.HolomorphicAnalytic Hironaka.OrderMultiplicativity
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.DerivativeIdeal Hironaka.OrderTaylor
+  Hironaka.HolomorphicTaylorTail Hironaka.IdealOrderArithmetic
+  Hironaka.HolomorphicAnalytic Hironaka.OrderMultiplicativity
 
 noncomputable section
 
@@ -218,6 +219,25 @@ theorem mul_notMem_idealPow {x : M} {f g : M → ℂ} (hf : HolomorphicAt n f x)
 theorem vanishesToOrderOn_of_mem {N : Set M} {x : M} {q : ℕ} {g : M → ℂ}
     (hg : (idealPow (pointIdeal n x) q).mem x g) : VanishesToOrderOn n N x q g :=
   ⟨g, hg, Eventually.of_forall fun _ _ => rfl⟩
+
+/-- **The cosupport of a product along a factor of bounded order** (`N = M`): if `x ∈ cosupp(𝔟𝔠, d)`,
+`ord_x 𝔟 ≤ o` (i.e. `x ∉ cosupp(𝔟, o + 1)`) and `o ≤ d`, then `x ∈ cosupp(𝔠, d - o)`. -/
+theorem mem_cosupport_of_mem_cosupport_mul {𝔟 𝔠 : GermIdeal n M}
+    (h𝔟 : ∀ x g, 𝔟.mem x g → HolomorphicAt n g x) (h𝔠 : ∀ x g, 𝔠.mem x g → HolomorphicAt n g x)
+    {x : M} {o d : ℕ} (hod : o ≤ d) (hx : x ∈ cosupport n univ (𝔟.mul 𝔠) d)
+    (hxo : x ∉ cosupport n univ 𝔟 (o + 1)) : x ∈ cosupport n univ 𝔠 (d - o) := by
+  refine ⟨mem_univ x, fun f hf => vanishesToOrderOn_of_mem ?_⟩
+  -- a germ of `𝔟` of order `≤ o`
+  obtain ⟨g, hg, hgo⟩ : ∃ g, 𝔟.mem x g ∧ ¬ (idealPow (pointIdeal n x) (o + 1)).mem x g := by
+    by_contra! hall
+    exact hxo ⟨mem_univ x, fun g hg => vanishesToOrderOn_of_mem (hall g hg)⟩
+  have hgf : (𝔟.mul 𝔠).mem x (fun p => g p * f p) :=
+    mul_mem_mul hg hf ((h𝔟 x g hg).mul (h𝔠 x f hf))
+  have hmem := mem_idealPow_of_vanishesToOrderOn_univ (hx.2 _ hgf)
+  have hmem' : (idealPow (pointIdeal n x) ((d - o) + o)).mem x (fun p => f p * g p) := by
+    rw [Nat.sub_add_cancel hod]
+    exact mem_idealPow_congr hmem (Eventually.of_forall fun p => mul_comm (g p) (f p))
+  exact mem_idealPow_of_mul_mem (h𝔠 x f hf) (h𝔟 x g hg) hgo hmem'
 
 end Germs
 

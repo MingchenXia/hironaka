@@ -1,12 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Coherence.OkaRelationSheaf
 import Hironaka.Coherence.OkaGermRelations
-import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
@@ -70,6 +64,10 @@ theorem germAt_add {f g : Z → ℂ} {y : Z} (hf : HolAt f y) (hg : HolAt g y) :
 theorem germAt_mul {f g : Z → ℂ} {y : Z} (hf : HolAt f y) (hg : HolAt g y) :
     germAt y (fun x => f x * g x) = germAt y f * germAt y g := by
   rw [germAt_of_holAt hf, germAt_of_holAt hg, germAt_of_holAt (hf.mul hg), ← mk_mul]
+
+theorem germAt_neg {f : Z → ℂ} {y : Z} (hf : HolAt f y) :
+    germAt y (fun x => -f x) = -germAt y f := by
+  rw [germAt_of_holAt hf, germAt_of_holAt hf.neg, ← mk_neg]
 
 theorem germAt_const (c : ℂ) (y : Z) : germAt y (fun _ => c) = constHom c := by
   rw [germAt_of_holAt (holAt_const c y)]

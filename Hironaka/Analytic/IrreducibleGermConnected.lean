@@ -1,25 +1,13 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermParametrizationConnected
 import Hironaka.Analytic.GermParametrizationProof
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.GermParametrizationFunctions
-import Hironaka.Analytic.GermParametrizationSets
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
 # Connected dense regular parts of irreducible germs, off finitely many other germs
+
+Blueprint `lag:local-statement-connected` (germ-level step) (Demailly, *Complex analytic and
+differential geometry*, II.4.19, II.4.26).
 
 For an irreducible analytic germ `A` at `0 ∈ ℂⁿ` and finitely many analytic germs `B_j` not
 containing `A`, there are arbitrarily small open neighbourhoods `Δ` of `0` and a connected

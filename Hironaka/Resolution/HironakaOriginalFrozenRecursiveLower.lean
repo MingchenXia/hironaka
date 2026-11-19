@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalFrozenCompanionPresentation
 /-! Actual all-dimensional recursive member/contact lower presentations and next
 literal analytic threshold consumers, built only from original canonical inputs.

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalActualBaseJetDimension
 import Hironaka.Analytic.GermOrderProduct
 import Mathlib.RingTheory.Filtration
@@ -19,7 +14,6 @@ variable {n : ℕ}
 local notation "R" => HolGerm (ComplexModel n)
 local notation "𝔪" => IsLocalRing.maximalIdeal R
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The actual Noetherian local ring has no nonzero germ in every positive maximal power. -/
 theorem exists_actual_finite_order (f : R) (hf : f ≠ 0) :
     ∃ a : ℕ, f ∉ 𝔪 ^ (a+1) := by
@@ -35,11 +29,9 @@ theorem exists_actual_finite_order (f : R) (hf : f ≠ 0) :
   rw [Ideal.iInf_pow_eq_bot_of_isLocalRing 𝔪 (IsLocalRing.maximalIdeal.isMaximal R).ne_top] at hall
   exact hf hall
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The least genuine failed original maximal power, chosen from the original nonzero germ. -/
 def actualGermOrder (f : R) (hf : f ≠ 0) : ℕ := Nat.find (exists_actual_finite_order f hf)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Both actual original order conditions are produced, including order zero for units. -/
 theorem actualGermOrder_spec (f : R) (hf : f ≠ 0) :
     f ∈ 𝔪 ^ actualGermOrder f hf ∧ f ∉ 𝔪 ^ (actualGermOrder f hf+1) := by
@@ -50,7 +42,6 @@ theorem actualGermOrder_spec (f : R) (hf : f ≠ 0) :
     exact not_not.mp (Nat.find_min (exists_actual_finite_order f hf)
       (show k < actualGermOrder f hf by omega))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The genuine two-sided maximal-power conditions determine the original order uniquely. -/
 theorem actualGermOrder_unique (f : R) (hf : f ≠ 0) (μ : ℕ)
     (hμ : f ∈ 𝔪 ^ μ) (hμn : f ∉ 𝔪 ^ (μ+1)) : actualGermOrder f hf=μ := by

@@ -36,8 +36,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   StepOneRegime NonmonomialOrderRegime CompanionRebase InvDomainCompanion
   MarkedIdealRestrictOpen CodimOneSupportAlong CoefficientIdealRestriction
   CompanionReductionAlong MarkedIdealBiholomorphism HironakaDimensionTwoStepOneAnalyticSuperlevels ContactStageKept
-open Hironaka.ResolutionInvariantSpec (IsInvDomain)
-open Hironaka
+open ResolutionInvariantSpec (IsInvDomain)
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
@@ -330,7 +329,7 @@ theorem member_lower_prefix_companion_dictionary (hn : 0 < n)
   exact hid
 
 open HironakaGeneralThreeNonspecialAnalyticLoci
-open Hironaka.ResolutionInvariantSpec (IsCanonical)
+open ResolutionInvariantSpec (IsCanonical)
 
 theorem exists_actual_general_three_member_companion_history (hn : 0 < n)
     (m : MarkedIdeal n X) (h : IsInvDomain 3 m) (T : BlowupTower X Y)

@@ -1,31 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.FiniteFibrePiece
 import Hironaka.Analytic.GermComponentDimension
 import Hironaka.Analytic.GermParametrizationProof
 import Hironaka.Analytic.AnalyticDimensionBasics
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticDescendingChain
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.GermAlgebraicParametrization
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Analytic.GermParametrizationFunctions
-import Hironaka.Analytic.GermParametrizationSets
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.LocalStatementAssembly
-import Hironaka.Analytic.RegularAtDimChart
-import Hironaka.Analytic.RegularPointDimension
+
 set_option autoImplicit false
 
 /-!
 # Monotonicity of dimension
 
-Let `T` be an analytic subset of a complex manifold.
+Blueprint `rem:dimension-monotone` (Demailly, *Complex analytic and differential geometry*, II.5,
+used throughout II.8).  Let `T` be an analytic subset of a complex manifold.
 
 * `exists_parametrization`: an irreducible germ carries, after a linear change of coordinates,
   parametrization data and parametrizing sets.
@@ -39,6 +23,8 @@ Let `T` be an analytic subset of a complex manifold.
   `A_i` has regular points of dimension `d_i`, and there `T = A_i`.
 * `locDimGE_of_regularAtDim_subset` (manifold level): if `B ⊆ T` and `z` is a regular point of `B`
   of dimension `k`, then `dim_z T ≥ k` — read in the chart at `z`.
+* Consequences: `LocDimGE.mono` (`dim_x B ≥ q ⇒ dim_x T ≥ q`) and `DimLE.anti`
+  (`dim T ≤ a ⇒ dim B ≤ a`).
 -/
 
 open Set Filter Topology Metric
@@ -47,7 +33,10 @@ noncomputable section
 
 namespace Hironaka.DimensionMonotone
 
-open Hironaka.RegularLocusDense AnalyticGermDecomposition HolGerm GermAlgebraicParametrization GermParametrization GermParametrizationData GermComponentDimension RegularPointDimension RegularAtDimChart AnalyticLocalStatement AnalyticDescendingChain AnalyticDimensionBasics FiniteFibrePiece
+open Hironaka.RegularLocusDense AnalyticGermDecomposition HolGerm
+  GermAlgebraicParametrization GermParametrization GermParametrizationData GermComponentDimension
+  RegularPointDimension RegularAtDimChart AnalyticLocalStatement AnalyticDescendingChain
+  AnalyticDimensionBasics FiniteFibrePiece
 
 variable {n : ℕ}
 
@@ -302,6 +291,15 @@ theorem locDimGE_of_regularAtDim_subset {T B : Set M} (hT : IsComplexAnalyticSub
   obtain ⟨y, hyO, d, hkd, hy⟩ :=
     exists_regularAtDim_ge_germ (isAnalyticGerm_chartGerm hT z) hUo hφd hφi hφT hU0 hφ0 hO
   exact ⟨_, hyO, d, hkd, regularAtDim_of_chartGerm hy⟩
+
+/-- `dim_x B ≥ q` and `B ⊆ T` give `dim_x T ≥ q`. -/
+theorem LocDimGE.mono {T B : Set M} (hT : IsComplexAnalyticSubset (n := n) T) (hBT : B ⊆ T)
+    {x : M} {q : ℕ} (h : LocDimGE (n := n) B x q) : LocDimGE (n := n) T x q := by
+  intro N hN
+  obtain ⟨y, hyN, j, hqj, hy⟩ := h (interior N) (interior_mem_nhds.2 hN)
+  obtain ⟨y', hy'N, j', hjj', hy'⟩ :=
+    locDimGE_of_regularAtDim_subset hT hBT hy (interior N) (isOpen_interior.mem_nhds hyN)
+  exact ⟨y', interior_subset hy'N, j', hqj.trans hjj', hy'⟩
 
 /-- `dim T ≤ a` and `B ⊆ T` give `dim B ≤ a`. -/
 theorem DimLE.anti {T B : Set M} (hT : IsComplexAnalyticSubset (n := n) T) (hBT : B ⊆ T)

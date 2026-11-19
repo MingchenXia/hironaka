@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaDivisorResidualUnit
-import Hironaka.Invariant.MonomialPartIntrinsic
+import Hironaka.Invariant.MonomialPart
 
 set_option autoImplicit false
 

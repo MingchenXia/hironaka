@@ -1,23 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupDerivativeIdeal
 import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Homogenized ideals and the analytic glueing inclusion
 
-Source: Włodarczyk 2005, §2.10 (homogenized ideals, Lemma `le:hom`, Lemma `le:homo0`).
+Hironaka phase H3 (TN23-ENVELOPES, agreed with TN-CLASSICAL on I-0981); blueprint
+`mc:homogenized-ideal`, `mc:homogenized-basic`, `mc:coordinate-iterated`, `mc:glueing-inclusion`,
+`mc:homogenized-product`, `mc:coordinate-change`, `mc:homogenized-invariance`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, §2.10 (homogenized ideals,
+Lemma `le:hom`, Lemma `le:homo0`), in the analytic adaptation of design note D7 (convergent
+coordinate changes and the convergent Taylor tail instead of formal automorphisms).
 
 For a marked ideal `(𝔞, μ)` (with `N = M`), `T(𝔞) = 𝓓^{μ-1}(𝔞)` (`tangentIdeal`) and the
 **homogenized ideal** is `𝓗(𝔞) = ∑_{i<μ} 𝓓^i(𝔞) · T(𝔞)^i` (`homogenizedIdeal`, generated stalkwise by
@@ -25,9 +20,24 @@ the products of the summands).
 
 * `le_homogenizedIdeal`: `𝔞 ⊆ 𝓗(𝔞)` (`μ ≥ 1`); `homogenizedIdeal_one`: `𝓗(𝔞) = 𝔞` for `μ = 1`
   (`le:hom` (1)).
-* Proof: the convergent Taylor tail (`HolomorphicTaylorTail.exists_taylor_tail`) of `F = f ∘ e⁻¹ ∘ Ψ` in the
-  direction `eᵢ` gives `f ∘ φ = ∑_{j<μ} (j!)⁻¹ (∂ᵢʲ F)(W) hʲ + h^μ G(W, h)`, with `(∂ᵢʲ F) ∘ W ∈ 𝓓^j(𝔞)` (from
-  `BlowupDerivativeIdeal.exists_coordDeriv_coeff`), `hʲ ∈ T(𝔞)^j` and `h^μ = h · h^{μ-1} ∈ 𝓓^{μ-1}(𝔞) · T(𝔞)^{μ-1}`.
+* `comp_mem_homogenizedIdeal` (**glueing inclusion**, the analytic core of `le:homo0` (1)): let
+  `W` be local holomorphic coordinates at `x`, `Ψ` a local inverse of `W ∘ e⁻¹`, `h ∈ T(𝔞)_x` with
+  `h(x) = 0`, and `φ(p) = e⁻¹ Ψ(W(p) + h(p) eᵢ)` (the coordinate change replacing the `i`-th
+  coordinate `wᵢ` by `wᵢ + h`, e.g. a tangent direction `u` by another one `v = u + h`).  Then
+  `f ∘ φ ∈ 𝓗(𝔞)_x` for every `f ∈ 𝔞_x`.  Proof: the convergent Taylor tail
+  (`HolomorphicTaylorTail.exists_taylor_tail`) of `F = f ∘ e⁻¹ ∘ Ψ` in the direction `eᵢ` gives
+  `f ∘ φ = ∑_{j<μ} (j!)⁻¹ (∂ᵢʲ F)(W) hʲ + h^μ G(W, h)`, with `(∂ᵢʲ F) ∘ W ∈ 𝓓^j(𝔞)`
+  (`iterDeriv_comp_mem_iterDerivIdeal`, from `BlowupDerivativeIdeal.exists_coordDeriv_coeff`),
+  `hʲ ∈ T(𝔞)^j` and `h^μ = h · h^{μ-1} ∈ 𝓓^{μ-1}(𝔞) · T(𝔞)^{μ-1}`.
+* `mul_mem_homogenizedIdeal`: `𝓗(𝓓^i 𝔞, μ - i) · T(𝔞)^i ⊆ 𝓗(𝔞, μ)` for `i < μ`.
+* `CoordinateChange` (the data `W, Ψ, h, i` of the coordinate change, `coordMap = φ`) and
+  `CoordinateChange.comp_mem_homogenizedIdeal_of_mem` (**`φ^* 𝓗(𝔞) ⊆ 𝓗(𝔞)` at `x`**, Włodarczyk's
+  `le:homo0` (1)): from the glueing inclusion for `(𝓓^i 𝔞, μ - i)` (whose tangent ideal is again
+  `T(𝔞)`), `φ^* T(𝔞)^j ⊆ T(𝔞)^j` (`comp_mem_idealPow_tangentIdeal`, via `𝓗(T(𝔞), 1) = T(𝔞)`) and
+  `mul_mem_homogenizedIdeal`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -35,7 +45,8 @@ open scoped Topology Manifold Nat
 
 namespace Hironaka.HomogenizedIdeal
 
-open Hironaka.HolomorphicIdealSheaves GermIdealOrder DerivativeIdeal IdealWeightPowers BlowupDerivativeIdeal HolomorphicTaylorTail
+open Hironaka.HolomorphicIdealSheaves GermIdealOrder DerivativeIdeal IdealWeightPowers
+  BlowupDerivativeIdeal HolomorphicTaylorTail
 
 noncomputable section
 
@@ -80,6 +91,12 @@ theorem pow_mem_idealPow {𝔟 : GermIdeal n M} {b : M → ℂ} (hb : 𝔟.mem x
       (by simpa only [pow_succ] using (holomorphicAt_pow hbh (j + 1)))
     rw [idealPow_succ]
     simpa only [pow_succ] using this
+
+/-- Membership in `𝓓^j(𝔞)`, `j ≥ 1`, only depends on the germ. -/
+theorem iterDerivIdeal_succ_mem_congr {𝔞 : GermIdeal n M} {j : ℕ} {g g' : M → ℂ}
+    (hg : (iterDerivIdeal 𝔞 (j + 1)).mem x g) (h : g =ᶠ[𝓝 x] g') :
+    (iterDerivIdeal 𝔞 (j + 1)).mem x g' :=
+  DerivativeIdeal.isInSpanAt_congr hg h
 
 end Helpers
 
@@ -127,6 +144,210 @@ theorem homogenizedIdeal_one (h𝔞 : 𝔞.IsCoherent) : homogenizedIdeal 𝔞 1
   have hb' : HolomorphicAt n b x := hb
   exact mem_of_isInSpanAt h𝔞 (isInSpanAt_of_eq_mul (s := a) ha ((hhol x a ha).mul hb') hb'
     (Eventually.of_forall fun p => by simp [mul_comm]))
+
+/-! ### Coordinate derivatives of a germ of `𝔞` lie in `𝓓^j(𝔞)` -/
+
+/-- **Iterated coordinate derivatives.**  Let `W` be local holomorphic coordinates at `x` and `F`
+holomorphic near `W x` with `F ∘ W ∈ 𝔞_x`.  Then `(∂_v^j F) ∘ W ∈ 𝓓^j(𝔞)_x` for every `j` (for the
+basis direction `v = eₗ`). -/
+theorem iterDeriv_comp_mem_iterDerivIdeal (h𝔞 : 𝔞.IsCoherent) {x : M} {W : M → ComplexModel n}
+    {N : Set (ComplexModel n)} (hN : IsOpen N) (hxN : (complexChartAt (n := n) x).val x ∈ N)
+    (hFd : DifferentiableOn ℂ (W ∘ (complexChartAt (n := n) x).val.symm) N)
+    (hinj : Function.Injective
+      (fderiv ℂ (W ∘ (complexChartAt (n := n) x).val.symm) ((complexChartAt (n := n) x).val x)))
+    {F : ComplexModel n → ℂ} (hF : ∀ᶠ w in 𝓝 (W x), DifferentiableAt ℂ F w)
+    (hFW : 𝔞.mem x (F ∘ W)) (l : Fin n) :
+    ∀ j : ℕ, (iterDerivIdeal 𝔞 j).mem x
+      (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : ℂ))) F ∘ W)
+  | 0 => hFW
+  | j + 1 => by
+    obtain ⟨c, hc, hceq⟩ := exists_coordDeriv_coeff hN hxN hFd hinj
+    have hhol : ∀ y g, 𝔞.mem y g → HolomorphicAt n g y := fun _ _ hg =>
+      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+    -- `∂^j F` is differentiable near `W x`
+    obtain ⟨r, hr, hball⟩ := Metric.eventually_nhds_iff_ball.mp hF
+    have hFU : DifferentiableOn ℂ F (Metric.ball (W x) r) := fun z hz =>
+      (hball z hz).differentiableWithinAt
+    have hdj := differentiableOn_iterDeriv hFU Metric.isOpen_ball
+      (List.replicate j (EuclideanSpace.single l (1 : ℂ)))
+    have hGev : ∀ᶠ w in 𝓝 (W x), DifferentiableAt ℂ
+        (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : ℂ))) F) w := by
+      filter_upwards [Metric.isOpen_ball.mem_nhds (Metric.mem_ball_self hr)] with w hw
+      exact (hdj w hw).differentiableAt (Metric.isOpen_ball.mem_nhds hw)
+    have hprev := iterDeriv_comp_mem_iterDerivIdeal h𝔞 hN hxN hFd hinj hF hFW l j
+    have hxs : x ∈ (complexChartAt (n := n) x).val.source := mem_complexChartAt_source x
+    -- `(∂^{j+1} F) ∘ W = ∑ₘ c l m · ∂^e_m ((∂^j F) ∘ W)` near `x`
+    have heq := hceq _ hGev l
+    have hmem : (iterDerivIdeal 𝔞 (j + 1)).mem x (fun p => ∑ m, c l m p *
+        chartDeriv (complexChartAt (n := n) x) (EuclideanSpace.single m 1)
+          (iterDeriv (List.replicate j (EuclideanSpace.single l (1 : ℂ))) F ∘ W) p) := by
+      refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun m _ => ?_
+      exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (hc l m)
+        (chartDeriv_mem_derivIdeal (holomorphicAt_of_mem_iterDerivIdeal hhol j) hxs hprev)
+    refine iterDerivIdeal_succ_mem_congr hmem ?_
+    filter_upwards [heq] with p hp
+    simp only [Function.comp_apply, List.replicate_succ, iterDeriv, dirDeriv]
+    exact hp.symm
+
+/-! ### The glueing inclusion -/
+
+/-- **The glueing inclusion** (the analytic core of Włodarczyk's Lemma `le:homo0` (1); design
+note D7).  Let `W` be local holomorphic coordinates at `x` (its reading `W ∘ e⁻¹` in the preferred
+chart `e` is holomorphic on an open `N ∋ e x` with injective derivative at `e x`), `Ψ` a holomorphic
+local inverse (`Ψ ∘ W = e` near `x`), `h` a germ of `T(𝔞) = 𝓓^{μ-1}(𝔞)` with `h(x) = 0`, and let
+`φ(p) = e⁻¹(Ψ(W(p) + h(p) eᵢ))` be the coordinate change that replaces the coordinate `wᵢ` by
+`wᵢ + h`.  Then `f ∘ φ ∈ 𝓗(𝔞)_x` for every `f ∈ 𝔞_x`. -/
+theorem comp_mem_homogenizedIdeal (h𝔞 : 𝔞.IsCoherent) {μ : ℕ} (hμ : 1 ≤ μ) {x : M}
+    {W : M → ComplexModel n} {N : Set (ComplexModel n)} (hN : IsOpen N)
+    (hxN : (complexChartAt (n := n) x).val x ∈ N)
+    (hFd : DifferentiableOn ℂ (W ∘ (complexChartAt (n := n) x).val.symm) N)
+    (hinj : Function.Injective
+      (fderiv ℂ (W ∘ (complexChartAt (n := n) x).val.symm) ((complexChartAt (n := n) x).val x)))
+    {Ψ : ComplexModel n → ComplexModel n} (hΨ : ∀ᶠ w in 𝓝 (W x), DifferentiableAt ℂ Ψ w)
+    (hΨW : ∀ᶠ p in 𝓝 x, Ψ (W p) = (complexChartAt (n := n) x).val p)
+    {h : M → ℂ} (hh : (tangentIdeal 𝔞 μ).mem x h) (hh0 : h x = 0) (i : Fin n)
+    {f : M → ℂ} (hf : 𝔞.mem x f) :
+    (homogenizedIdeal 𝔞 μ).mem x (fun p =>
+      f ((complexChartAt (n := n) x).val.symm (Ψ (W p + h p • EuclideanSpace.single i 1)))) := by
+  classical
+  set e := complexChartAt (n := n) x with he
+  have hxs : x ∈ e.val.source := mem_complexChartAt_source x
+  have hhol : ∀ y g, 𝔞.mem y g → HolomorphicAt n g y := fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+  have hfh : HolomorphicAt n f x := hhol x f hf
+  have hhh : HolomorphicAt n h x := holomorphicAt_of_mem_iterDerivIdeal hhol (μ - 1) x h hh
+  set v : ComplexModel n := EuclideanSpace.single i 1 with hv
+  set F : ComplexModel n → ℂ := fun w => f (e.val.symm (Ψ w)) with hFdef
+  -- `W` is continuous at `x`
+  have hWc : ContinuousAt W x := by
+    have hcomp : ContinuousAt (fun p => (W ∘ e.val.symm) (e.val p)) x :=
+      ((hFd _ hxN).differentiableAt (hN.mem_nhds hxN)).continuousAt.comp (e.val.continuousAt hxs)
+    refine hcomp.congr ?_
+    filter_upwards [e.val.open_source.mem_nhds hxs] with p hp
+    simp only [Function.comp_apply, e.val.left_inv hp]
+  have hΨx : Ψ (W x) = e.val x := hΨW.self_of_nhds
+  -- `F` is holomorphic near `W x`
+  have hF : ∀ᶠ w in 𝓝 (W x), DifferentiableAt ℂ F w := by
+    have hΨc : ContinuousAt Ψ (W x) := hΨ.self_of_nhds.continuousAt
+    rw [ContinuousAt, hΨx] at hΨc
+    filter_upwards [hΨ, hΨc.eventually (eventually_differentiableAt_comp_symm e hxs hfh)]
+      with w hw1 hw2
+    exact hw2.comp w hw1
+  -- `F ∘ W = f` near `x`
+  have hFW : 𝔞.mem x (F ∘ W) := by
+    refine mem_congr h𝔞 hf ?_
+    filter_upwards [hΨW, e.val.open_source.mem_nhds hxs] with p hp1 hp2
+    simp only [hFdef, Function.comp_apply, hp1, e.val.left_inv hp2]
+  -- the convergent Taylor tail of `F` in the direction `v`
+  obtain ⟨G, hG, hGeq⟩ := exists_taylor_tail hF v μ
+  have hγ : Tendsto (fun p => (W p, h p)) (𝓝 x) (𝓝 (W x, (0 : ℂ))) := by
+    rw [← hh0]
+    exact hWc.prodMk_nhds hhh.continuousAt
+  have hexp := hγ.eventually hGeq
+  -- `G (W, h)` is holomorphic at `x`
+  have hGγ : HolomorphicAt n (fun p => G (W p, h p)) x := by
+    have hhe := eventually_differentiableAt_comp_symm e hxs hhh
+    set inner : ComplexModel n → ComplexModel n × ℂ :=
+      fun ζ => ((W ∘ e.val.symm) ζ, (h ∘ e.val.symm) ζ) with hinner
+    have hinnerd : ∀ᶠ ζ in 𝓝 (e.val x), DifferentiableAt ℂ inner ζ := by
+      filter_upwards [hN.mem_nhds hxN, hhe] with ζ hζ1 hζ2
+      exact ((hFd ζ hζ1).differentiableAt (hN.mem_nhds hζ1)).prodMk hζ2
+    have hinnerx : inner (e.val x) = (W x, 0) := by
+      simp only [hinner, Function.comp_apply, e.val.left_inv hxs, hh0]
+    have hinnerc : Tendsto inner (𝓝 (e.val x)) (𝓝 (W x, (0 : ℂ))) := by
+      rw [← hinnerx]; exact hinnerd.self_of_nhds.continuousAt
+    refine (holomorphicAt_comp_chart e (W := G ∘ inner) hxs ?_).congr ?_
+    · filter_upwards [hinnerd, hinnerc.eventually hG] with ζ h1 h2
+      exact h2.comp ζ h1
+    · filter_upwards [e.val.open_source.mem_nhds hxs] with p hp
+      simp only [hinner, Function.comp_apply, e.val.left_inv hp]
+  -- the generators
+  have hA : ∀ j, (iterDerivIdeal 𝔞 j).mem x (iterDeriv (List.replicate j v) F ∘ W) :=
+    iterDeriv_comp_mem_iterDerivIdeal h𝔞 hN hxN hFd hinj hF hFW i
+  have hAh : ∀ j, HolomorphicAt n (iterDeriv (List.replicate j v) F ∘ W) x := fun j =>
+    holomorphicAt_of_mem_iterDerivIdeal hhol j x _ (hA j)
+  have hgen_j : ∀ j ∈ Finset.range μ, HomGen 𝔞 μ x
+      (fun p => (iterDeriv (List.replicate j v) F ∘ W) p * h p ^ j) := fun j hj =>
+    ⟨j, Finset.mem_range.mp hj, mul_mem_mul (hA j) (pow_mem_idealPow hh hhh j)
+      ((hAh j).mul (holomorphicAt_pow hhh j))⟩
+  have hgen_tail : HomGen 𝔞 μ x (fun p => h p * h p ^ (μ - 1)) :=
+    ⟨μ - 1, by omega, mul_mem_mul hh (pow_mem_idealPow hh hhh (μ - 1))
+      (hhh.mul (holomorphicAt_pow hhh (μ - 1)))⟩
+  have hspan : IsInSpanAt (n := n) (HomGen 𝔞 μ x) x (fun p =>
+      ∑ j ∈ Finset.range μ, (j ! : ℂ)⁻¹ * ((iterDeriv (List.replicate j v) F ∘ W) p * h p ^ j) +
+        G (W p, h p) * (h p * h p ^ (μ - 1))) := by
+    refine RelativePrincipalizationSpan.IsInSpanAt.add
+      (RelativePrincipalizationSpan.IsInSpanAt.sum _ fun j hj => ?_) ?_
+    · exact isInSpanAt_of_eq_mul (hgen_j j hj)
+        ((holomorphicAt_const _).mul ((hAh j).mul (holomorphicAt_pow hhh j)))
+        (holomorphicAt_const _) (Eventually.of_forall fun p => rfl)
+    · exact isInSpanAt_of_eq_mul hgen_tail
+        (hGγ.mul (hhh.mul (holomorphicAt_pow hhh (μ - 1)))) hGγ
+        (Eventually.of_forall fun p => rfl)
+  refine DerivativeIdeal.isInSpanAt_congr hspan ?_
+  filter_upwards [hexp] with p hp
+  have hp' : f (e.val.symm (Ψ (W p + h p • v))) =
+      ∑ j ∈ Finset.range μ, (j ! : ℂ)⁻¹ * iterDeriv (List.replicate j v) F (W p) * h p ^ j +
+        h p ^ μ * G (W p, h p) := hp
+  have hpow : h p ^ μ = h p * h p ^ (μ - 1) := by
+    rw [← pow_succ']; congr 1; omega
+  rw [hp', hpow]
+  simp only [Function.comp_apply]
+  congr 1
+  · exact Finset.sum_congr rfl fun j _ => by ring
+  · ring
+
+/-! ### Products with powers of the tangent ideal -/
+
+/-- `𝓗(𝓓^i 𝔞, μ - i) · T(𝔞)^i ⊆ 𝓗(𝔞, μ)` (germs at `x`), for `i < μ`. -/
+theorem mul_mem_homogenizedIdeal {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {x : M} {μ i : ℕ}
+    (hi : i < μ)
+    {a b : M → ℂ} (ha : (homogenizedIdeal (iterDerivIdeal 𝔞 i) (μ - i)).mem x a)
+    (hb : (idealPow (tangentIdeal 𝔞 μ) i).mem x b) :
+    (homogenizedIdeal 𝔞 μ).mem x (fun p => a p * b p) := by
+  have hhol : ∀ y g, 𝔞.mem y g → HolomorphicAt n g y := fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+  have hThol : ∀ y g, (tangentIdeal 𝔞 μ).mem y g → HolomorphicAt n g y :=
+    holomorphicAt_of_mem_iterDerivIdeal hhol (μ - 1)
+  have hbh : HolomorphicAt n b x := holomorphicAt_of_mem_idealPow hb
+  have hTT : tangentIdeal (iterDerivIdeal 𝔞 i) (μ - i) = tangentIdeal 𝔞 μ := by
+    simp only [tangentIdeal]
+    rw [MaximalContact.iterDerivIdeal_iterDerivIdeal]
+    congr 1; omega
+  obtain ⟨hah, N, s, c, hs, hc, hsum⟩ := ha
+  -- each generator `s k ∈ 𝓓^j(𝓓^i 𝔞) · T^j` times `b ∈ T^i` lies in `𝓗(𝔞)`
+  have hstep : ∀ k, IsInSpanAt (n := n) (HomGen 𝔞 μ x) x (fun p => s k p * b p) := by
+    intro k
+    obtain ⟨j, hj, hsk⟩ := hs k
+    rw [hTT] at hsk
+    obtain ⟨hskh, K, t, d', ht, hd', htsum⟩ := (show IsInSpanAt (n := n) (fun t => ∃ a' b',
+      (iterDerivIdeal (iterDerivIdeal 𝔞 i) j).mem x a' ∧
+      (idealPow (tangentIdeal 𝔞 μ) j).mem x b' ∧ t = a' * b') x (s k) from hsk)
+    have hgen : ∀ l, IsInSpanAt (n := n) (HomGen 𝔞 μ x) x (fun p => d' l p * (t l p * b p)) := by
+      intro l
+      obtain ⟨a', b', ha', hb', hteq⟩ := ht l
+      rw [MaximalContact.iterDerivIdeal_iterDerivIdeal] at ha'
+      have ha'h : HolomorphicAt n a' x := holomorphicAt_of_mem_iterDerivIdeal hhol (i + j) x a' ha'
+      have hb'h : HolomorphicAt n b' x := holomorphicAt_of_mem_idealPow hb'
+      have hbb : (idealPow (tangentIdeal 𝔞 μ) (i + j)).mem x (fun p => b' p * b p) := by
+        have := mul_mem_idealPow_add hThol hb' hb
+        rwa [Nat.add_comm j i] at this
+      have hg : HomGen 𝔞 μ x (fun p => a' p * (b' p * b p)) :=
+        ⟨i + j, by omega, mul_mem_mul ha' hbb (ha'h.mul (hb'h.mul hbh))⟩
+      refine isInSpanAt_of_eq_mul hg ((hd' l).mul ((ha'h.mul hb'h).mul hbh |>.congr
+        (Eventually.of_forall fun p => by simp only [hteq, Pi.mul_apply]))) (hd' l)
+        (Eventually.of_forall fun p => ?_)
+      simp only [hteq, Pi.mul_apply]; ring
+    refine DerivativeIdeal.isInSpanAt_congr
+      (RelativePrincipalizationSpan.IsInSpanAt.sum Finset.univ fun l _ => hgen l) ?_
+    filter_upwards [htsum] with p hp
+    simp only [hp, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun l _ => by ring
+  refine DerivativeIdeal.isInSpanAt_congr (RelativePrincipalizationSpan.IsInSpanAt.sum Finset.univ
+    fun k _ => RelativePrincipalizationSpan.IsInSpanAt.mul_left (hc k) (hstep k)) ?_
+  filter_upwards [hsum] with p hp
+  simp only [hp, Finset.sum_mul]
+  exact Finset.sum_congr rfl fun k _ => by ring
 
 /-! ### The coordinate change preserves the homogenized ideal -/
 
@@ -243,6 +464,59 @@ theorem comp_isInSpanAt {S T : (M → ℂ) → Prop} {g : M → ℂ} (hg : IsInS
   refine DerivativeIdeal.isInSpanAt_congr ?_ hsum'.symm
   refine RelativePrincipalizationSpan.IsInSpanAt.sum _ fun k _ => ?_
   exact RelativePrincipalizationSpan.IsInSpanAt.mul_left (d.holomorphicAt_comp (ha k)) (hST _ (hs k))
+
+/-- The glueing inclusion for the data `d`: `φ^* 𝔞 ⊆ 𝓗(𝔞)` at `x`. -/
+theorem comp_mem_homogenizedIdeal' {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {μ : ℕ} (hμ : 1 ≤ μ)
+    (hh : (tangentIdeal 𝔞 μ).mem x d.h) {f : M → ℂ} (hf : 𝔞.mem x f) :
+    (homogenizedIdeal 𝔞 μ).mem x (fun p => f (d.coordMap p)) :=
+  comp_mem_homogenizedIdeal h𝔞 hμ d.isOpen d.mem d.differentiableOn d.injective d.differentiableAt
+    d.left_inv hh d.h_zero d.i hf
+
+/-- **`T(𝔞)^j` is preserved by `φ`** (Włodarczyk: `φ^*(T(𝔞), 1) ⊆ 𝓗(T(𝔞), 1) = (T(𝔞), 1)`). -/
+theorem comp_mem_idealPow_tangentIdeal {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {μ : ℕ}
+    (hh : (tangentIdeal 𝔞 μ).mem x d.h) :
+    ∀ j {b : M → ℂ}, (idealPow (tangentIdeal 𝔞 μ) j).mem x b →
+      (idealPow (tangentIdeal 𝔞 μ) j).mem x (fun p => b (d.coordMap p))
+  | 0, b, hb => d.holomorphicAt_comp hb
+  | j + 1, b, hb => by
+    have hT : (tangentIdeal 𝔞 μ).IsCoherent := isCoherent_iterDerivIdeal h𝔞 (μ - 1)
+    have hThol : ∀ y g, (tangentIdeal 𝔞 μ).mem y g → HolomorphicAt n g y := fun _ _ hg =>
+      RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hT hg
+    have hT1 : (tangentIdeal (tangentIdeal 𝔞 μ) 1).mem x d.h := hh
+    rw [idealPow_succ] at hb ⊢
+    show IsInSpanAt (n := n) (fun s => ∃ a b, (idealPow (tangentIdeal 𝔞 μ) j).mem x a ∧
+      (tangentIdeal 𝔞 μ).mem x b ∧ s = a * b) x _
+    refine d.comp_isInSpanAt (S := fun s => ∃ a b, (idealPow (tangentIdeal 𝔞 μ) j).mem x a ∧
+      (tangentIdeal 𝔞 μ).mem x b ∧ s = a * b) hb ?_
+    rintro s ⟨a, t, ha, ht, rfl⟩
+    have ha' := comp_mem_idealPow_tangentIdeal h𝔞 hh j ha
+    have ht' : (tangentIdeal 𝔞 μ).mem x (fun p => t (d.coordMap p)) := by
+      have := d.comp_mem_homogenizedIdeal' hT le_rfl hT1 ht
+      rwa [homogenizedIdeal_one hT] at this
+    exact mul_mem_mul ha' ht' ((holomorphicAt_of_mem_idealPow ha').mul (hThol x _ ht'))
+
+/-- **The coordinate change preserves the homogenized ideal** (Włodarczyk, Lemma `le:homo0` (1),
+inclusion `φ^* 𝓗(𝔞) ⊆ 𝓗(𝔞)`, analytic form): if `h ∈ T(𝔞)_x`, then `f ∘ φ ∈ 𝓗(𝔞)_x` for every
+`f ∈ 𝓗(𝔞)_x`. -/
+theorem comp_mem_homogenizedIdeal_of_mem {𝔞 : GermIdeal n M} (h𝔞 : 𝔞.IsCoherent) {μ : ℕ}
+    (hμ : 1 ≤ μ) (hh : (tangentIdeal 𝔞 μ).mem x d.h) {f : M → ℂ}
+    (hf : (homogenizedIdeal 𝔞 μ).mem x f) :
+    (homogenizedIdeal 𝔞 μ).mem x (fun p => f (d.coordMap p)) := by
+  have hhol : ∀ y g, 𝔞.mem y g → HolomorphicAt n g y := fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+  refine d.comp_isInSpanAt (S := HomGen 𝔞 μ x) hf ?_
+  rintro s ⟨i, hi, hs⟩
+  refine d.comp_isInSpanAt (S := fun t => ∃ a b, (iterDerivIdeal 𝔞 i).mem x a ∧
+    (idealPow (tangentIdeal 𝔞 μ) i).mem x b ∧ t = a * b) hs ?_
+  rintro t ⟨a, b, ha, hb, rfl⟩
+  have hTT : tangentIdeal (iterDerivIdeal 𝔞 i) (μ - i) = tangentIdeal 𝔞 μ := by
+    simp only [tangentIdeal]
+    rw [MaximalContact.iterDerivIdeal_iterDerivIdeal]
+    congr 1; omega
+  have hh' : (tangentIdeal (iterDerivIdeal 𝔞 i) (μ - i)).mem x d.h := by rw [hTT]; exact hh
+  have ha' := d.comp_mem_homogenizedIdeal' (isCoherent_iterDerivIdeal h𝔞 i) (by omega) hh' ha
+  have hb' := d.comp_mem_idealPow_tangentIdeal h𝔞 hh i hb
+  exact mul_mem_homogenizedIdeal h𝔞 hi ha' hb'
 
 end CoordinateChange
 

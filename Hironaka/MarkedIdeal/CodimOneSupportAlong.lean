@@ -1,58 +1,53 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.CodimOneCentreAlong
 import Hironaka.MarkedIdeal.TransformOffCentre
 import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.AnalyticDimensionBasics
-import Hironaka.MarkedIdeal.CodimOneSupport
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The codimension-one part of the support along a submanifold
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.7, Lemma `le:codim1` (Villamayor), first half ("all
-codimension one components of `supp(𝓘, μ)` are smooth and isolated"; proof: a tangent direction has a smooth zero
-set containing the support), read for the marked ideals `(M, N, E, 𝔞, μ)` of maximal order along `N` of the
-induction; Włodarczyk 2009 (`wlodarczyk09-analytic-resolution`), Step 1ba.
+Hironaka phase H2 (TN3), the H2 side of Step 1b of the maximal-order step inside a submanifold `N`
+(`hir:maximal-order-step`, planned with `N` general: I-0977 C-0082): claimed on I-0977 C-0083.
+Blueprint `bcalc:codim-one-local-along`, `bcalc:codim-one-part-along-def`,
+`bcalc:codim-one-part-along`, `bcalc:codim-one-step-along` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), §2.7, Lemma `le:codim1` (Villamayor), first half ("all codimension one
+components of `supp(𝓘, μ)` are smooth and isolated"; proof: a tangent direction has a smooth zero
+set containing the support), read for the marked ideals `(M, N, E, 𝔞, μ)` of maximal order along `N`
+of the induction; Włodarczyk 2009 (`wlodarczyk09-analytic-resolution`), Step 1ba.
 
-Let `N` be a closed submanifold, `𝔞` coherent, `μ ≥ 1`, and `S = cosupp(𝔞|_N, μ)` (`cosupport n N 𝔞 μ`). Codimension
-is measured in `N`: at a point where `N` has dimension `k + 1`, "codimension one" means dimension `k`.
+Let `N` be a closed submanifold, `𝔞` coherent, `μ ≥ 1`, and `S = cosupp(𝔞|_N, μ)` (TN23's
+`cosupport n N 𝔞 μ`).  Codimension is measured in `N`: at a point where `N` has dimension `k + 1`,
+"codimension one" means dimension `k`.
 
 * `isComplexAnalyticSubset_cosupport_along`: `S = N ∩ V(𝓓_N^{μ-1} 𝔞)` is analytic.
-* `eventually_mem_iff_of_locDimGE_along`: if `A ⊆ S` is analytic, `N` has dimension `k + 1` at `x` and `dim_x A ≥
-  k`, then `A = N ∩ V(u)` near `x` for EVERY tangent direction `u` of `(𝔞|_N, μ)` along `N` on a neighbourhood of
-  `x` (`IsTangentDirectionAlong`; filling lemma `CodimOneSupport.eventually_mem_iff_of_regularAtDim_of_locDimGE`
-  with the hypersurface of maximal contact `N ∩ V(u)`, regular of dimension `k` by
-  `IsTangentDirectionAlong.regularAtDim_contact`); `regularAtDim_of_locDimGE_along`: for `(𝔞|_N, μ)` of maximal
-  order along `N` (`HomogenizedIdealAlong.IsMaximalOrderAlong`) such an `A` is regular of dimension `k` at `x`.
-* The codimension-one part along `N`, `codimOnePartAlong N 𝔞 μ`: the points at which `S` is regular of dimension one
-  less than `N`. For `(𝔞|_N, μ)` of maximal order along `N`: it is the set of points of `S` of local dimension `≥
-  dim N - 1` (`mem_codimOnePartAlong_iff`), closed (`isClosed_codimOnePartAlong`), open in `S`, a closed submanifold
-  of codimension one in `N` at each of its points (`isClosedSubmanifold_codimOnePartAlong`,
-  `regularAtDim_codimOnePartAlong`), equal to `N ∩ V(u)` near each of its points for every tangent direction `u`
-  along `N`; `S \ R` is closed and its regular points have dimension `≤ dim N - 2`.
-* Step 1ba inside `N`: blowing up `R`, the cosupport of the transform of `(M, N, E, 𝔞, μ)` misses the exceptional
-  divisor (from `CodimOneCentreAlong`) and lies over `S \ R`.
+* `eventually_mem_iff_of_locDimGE_along`: if `A ⊆ S` is analytic, `N` has dimension `k + 1` at `x`
+  and `dim_x A ≥ k`, then `A = N ∩ V(u)` near `x` for EVERY tangent direction `u` of `(𝔞|_N, μ)`
+  along `N` on a neighbourhood of `x` (TN23's `IsTangentDirectionAlong`; filling lemma
+  `CodimOneSupport.eventually_mem_iff_of_regularAtDim_of_locDimGE` with the hypersurface of maximal
+  contact `N ∩ V(u)`, regular of dimension `k` by `IsTangentDirectionAlong.regularAtDim_contact`);
+  `regularAtDim_of_locDimGE_along`: for `(𝔞|_N, μ)` of maximal order along `N`
+  (`HomogenizedIdealAlong.IsMaximalOrderAlong`) such an `A` is regular of dimension `k` at `x`.
+* The codimension-one part along `N`, `codimOnePartAlong N 𝔞 μ`: the points at which `S` is
+  regular of dimension one less than `N`.  For `(𝔞|_N, μ)` of maximal order along `N`: it is the
+  set of points of `S` of local dimension `≥ dim N - 1` (`mem_codimOnePartAlong_iff`), closed
+  (`isClosed_codimOnePartAlong`), open in `S` (`exists_isOpen_cosupport_inter_eq_codimOnePartAlong`),
+  a closed submanifold of codimension one in `N` at each of its points
+  (`isClosedSubmanifold_codimOnePartAlong`, `regularAtDim_codimOnePartAlong`), equal to `N ∩ V(u)`
+  near each of its points for every tangent direction `u` along `N`
+  (`eventually_mem_codimOnePartAlong_iff_eq_zero`); `S \ R` is closed
+  (`isClosed_cosupport_diff_codimOnePartAlong`) and its regular points have dimension `≤ dim N - 2`
+  (`lt_of_regularAtDim_cosupport_diff_codimOnePartAlong`).
+* Step 1ba inside `N`: blowing up `R`, the cosupport of the transform of `(M, N, E, 𝔞, μ)` misses
+  the exceptional divisor (`cosupp_geoTransform_inter_preimage_codimOnePartAlong_eq_empty`, from
+  `CodimOneCentreAlong`) and lies over `S \ R`
+  (`cosupp_geoTransform_subset_preimage_diff_codimOnePartAlong`).
 
 For `N = M` these are the statements of `Hironaka.CodimOneSupport` (`codimOnePart`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -62,7 +57,10 @@ universe u
 
 namespace Hironaka.CodimOneSupportAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder RelativePrincipalizationSpan MarkedIdeals CodimOneSupport TangentDirectionAlong GiraudAlong HomogenizedIdealAlong AnalyticDimensionBasics RegularPointDimension DerivativeIdealAlongCoherent CodimOneCentreAlong TransformOffCentre DerivativeIdealAlong
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  RelativePrincipalizationSpan MarkedIdeals CodimOneSupport TangentDirectionAlong GiraudAlong
+  HomogenizedIdealAlong AnalyticDimensionBasics RegularPointDimension DerivativeIdealAlongCoherent
+  CodimOneCentreAlong TransformOffCentre DerivativeIdealAlong
 
 noncomputable section
 
@@ -205,11 +203,75 @@ theorem isClosedSubmanifold_codimOnePartAlong (h𝔞 : 𝔞.IsCoherent) (hN : Is
     let ⟨k, _, h⟩ := regularAtDim_codimOnePartAlong hx
     ⟨k, h⟩⟩
 
+/-- **The codimension-one part along `N` is open in the support.** -/
+theorem exists_isOpen_cosupport_inter_eq_codimOnePartAlong :
+    ∃ O : Set M, IsOpen O ∧ cosupport n N 𝔞 μ ∩ O = codimOnePartAlong N 𝔞 μ := by
+  refine ⟨interior {y | y ∈ cosupport n N 𝔞 μ → y ∈ codimOnePartAlong N 𝔞 μ}, isOpen_interior,
+    Subset.antisymm (fun y hy => interior_subset hy.2 hy.1) fun x hx => ⟨codimOnePartAlong_subset hx,
+      mem_interior_iff_mem_nhds.mpr ?_⟩⟩
+  filter_upwards [eventually_mem_codimOnePartAlong_iff hx] with y h using h.mpr
+
+/-- **Near a point of the codimension-one part along `N`, the support is `N ∩ V(u)` for any tangent
+direction `u` along `N`.** -/
+theorem eventually_mem_codimOnePartAlong_iff_eq_zero (h𝔞 : 𝔞.IsCoherent)
+    (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) {U : Set M} {u : M → ℂ}
+    (hu : IsTangentDirectionAlong N 𝔞 μ U u) {x : M} (hxU : x ∈ U)
+    (hx : x ∈ codimOnePartAlong N 𝔞 μ) :
+    ∀ᶠ y in 𝓝 x, y ∈ codimOnePartAlong N 𝔞 μ ↔ y ∈ N ∧ u y = 0 := by
+  obtain ⟨k, hNk, hS⟩ := hx
+  filter_upwards [eventually_mem_codimOnePartAlong_iff ⟨k, hNk, hS⟩,
+    eventually_mem_iff_of_locDimGE_along h𝔞 hN hμ (isComplexAnalyticSubset_cosupport_along h𝔞 hN hμ)
+      subset_rfl hu hxU hNk (locDimGE_of_regularAtDim hS)] with y h1 h2
+  rw [h1, h2]
+
+/-- **The rest of the support along `N` is closed.** -/
+theorem isClosed_cosupport_diff_codimOnePartAlong (h𝔞 : 𝔞.IsCoherent)
+    (hN : IsClosedSubmanifold n N) :
+    IsClosed (cosupport n N 𝔞 μ \ codimOnePartAlong N 𝔞 μ) := by
+  obtain ⟨O, hO, hSO⟩ :=
+    exists_isOpen_cosupport_inter_eq_codimOnePartAlong (N := N) (𝔞 := 𝔞) (μ := μ)
+  have h : cosupport n N 𝔞 μ \ codimOnePartAlong N 𝔞 μ = cosupport n N 𝔞 μ ∩ Oᶜ := by
+    rw [← hSO]
+    ext y
+    simp only [Set.mem_sdiff, mem_inter_iff, mem_compl_iff, not_and]
+    exact ⟨fun h => ⟨h.1, h.2 h.1⟩, fun h => ⟨h.1, fun _ => h.2⟩⟩
+  rw [h]
+  exact (isClosed_cosupport_along h𝔞 hN μ).inter hO.isClosed_compl
+
+/-- **The rest of the support along `N` has codimension at least two in `N`**: at a point where
+`N` has dimension `k + 1`, every regular point of `cosupp(𝔞|_N, μ) \ R` has dimension `< k`. -/
+theorem lt_of_regularAtDim_cosupport_diff_codimOnePartAlong (h𝔞 : 𝔞.IsCoherent)
+    (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) (hmax : IsMaximalOrderAlong N 𝔞 μ) {y : M}
+    {j k : ℕ} (hNk : RegularAtDim (n := n) N y (k + 1))
+    (hy : RegularAtDim (n := n) (cosupport n N 𝔞 μ \ codimOnePartAlong N 𝔞 μ) y j) : j < k := by
+  have hhol : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x := fun _ _ hg =>
+    RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg
+  have hyS : y ∈ cosupport n N 𝔞 μ := hy.2.1.1
+  have hyR : y ∉ codimOnePartAlong N 𝔞 μ := hy.2.1.2
+  have hSy : RegularAtDim (n := n) (cosupport n N 𝔞 μ) y j := by
+    refine regularAtDim_of_inter_eq (isClosed_codimOnePartAlong h𝔞 hN hμ hmax).isOpen_compl hyR ?_ hy
+    ext z
+    simp only [Set.mem_sdiff, mem_inter_iff, mem_compl_iff]
+    tauto
+  obtain ⟨U, u, hyU, hu⟩ := exists_isTangentDirectionAlong_of_isMaximalOrderAlong h𝔞 hN hμ hmax hyS
+  have hux : u y = 0 := hu.cosupport_inter_subset hhol hμ ⟨hyS, hyU⟩
+  obtain ⟨k', hNk', hH⟩ := hu.regularAtDim_contact hhol hN ⟨⟨hyS.1, hux⟩, hyU⟩
+  have hkk : k' = k + 1 := eq_of_regularAtDim hNk' hNk
+  rw [hkk, Nat.add_sub_cancel] at hH
+  have hSU : RegularAtDim (n := n) (cosupport n N 𝔞 μ ∩ U) y j :=
+    regularAtDim_of_inter_eq hu.isOpen hyU (by rw [inter_assoc, inter_self]) hSy
+  have hle : j ≤ k := BlowupStrictSubmanifold.le_of_regularAtDim_subset hSU hH
+    fun z hz => ⟨⟨hz.1.1, hu.cosupport_inter_subset hhol hμ hz⟩, hz.2⟩
+  refine lt_of_le_of_ne hle fun hj => hyR ⟨k, hNk, ?_⟩
+  rw [← hj]
+  exact hSy
+
 /-! ### Weak tangent directions: controlled only on `N`
 
-Along a tower the tangent direction `w` of the transform is controlled only on the strict transform `N_T`: it agrees
-on `N_T` with combinations of germs of `𝓓_{N_T}^{μ-1}` and has multiplicity one along `N_T` at its zeros on `N_T`
-(`MaximalContactAlongTower.exists_contact_along`). The statements above hold for such `w`. -/
+Along a tower the tangent direction `w` of the transform is controlled only on the strict transform
+`N_T`: it agrees on `N_T` with combinations of germs of `𝓓_{N_T}^{μ-1}` and has multiplicity one
+along `N_T` at its zeros on `N_T` (TN-CLASSICAL's `MaximalContactAlongTower.exists_contact_along`,
+I-0977 C-0084).  The statements above hold for such `w`. -/
 
 /-- A function agreeing on `N` near a point of the support along `N` with a combination of germs of
 `𝓓_N^{μ-1} 𝔞` vanishes there. -/
@@ -275,6 +337,48 @@ theorem eventually_mem_codimOnePartAlong_iff_eq_zero_of_isInSpanOnAt (h𝔞 : �
   rw [h1, h2]
 
 end Support
+
+/-! ### Step 1ba inside `N`: blowing up the codimension-one part -/
+
+section Blowup
+
+variable {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+  [IsComplexManifold n X] {Y : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+  [IsComplexManifold n Y] {π : Y → X}
+
+open MarkedIdeal in
+/-- **Step 1ba inside `N`**: for `(M, N, E, 𝔞, d)` with `N` a closed submanifold, `𝔞` coherent,
+`d ≥ 1`, of maximal order along `N`, after the blowup along the codimension-one part of its support
+along `N` the cosupport of the transform does not meet the exceptional divisor. -/
+theorem cosupp_geoTransform_inter_preimage_codimOnePartAlong_eq_empty {𝔪 : MarkedIdeal n X}
+    (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)
+    (hmax : IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d)
+    (hπ : IsBlowupAlong n (codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) π) :
+    (𝔪.geoTransform (codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) π).cosupp ∩
+      π ⁻¹' codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d = ∅ :=
+  cosupp_geoTransform_inter_preimage_eq_empty_along hπ hN h𝔞 hd hmax codimOnePartAlong_subset
+    fun _ hx => let ⟨k, hNk, hR⟩ := regularAtDim_codimOnePartAlong hx
+      ⟨k, hR, hNk⟩
+
+open MarkedIdeal in
+/-- **After the blowup of the codimension-one part along `N`, the support has codimension at least
+two in `N`**: the cosupport of the transform lies over `cosupp(𝔞|_N, d) \ R`, a closed set whose
+regular points have dimension `≤ dim N - 2`. -/
+theorem cosupp_geoTransform_subset_preimage_diff_codimOnePartAlong {𝔪 : MarkedIdeal n X}
+    (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d)
+    (hmax : IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d)
+    (hπ : IsBlowupAlong n (codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) π) :
+    (𝔪.geoTransform (codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) π).cosupp ⊆
+      π ⁻¹' (𝔪.cosupp \ codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d) := by
+  intro z hz
+  by_cases hzR : π z ∈ codimOnePartAlong 𝔪.N 𝔪.ideal 𝔪.d
+  · have h := cosupp_geoTransform_inter_preimage_codimOnePartAlong_eq_empty hN h𝔞 hd hmax hπ
+    exact (Set.eq_empty_iff_forall_notMem.mp h z ⟨hz, hzR⟩).elim
+  · rw [← cosupp_geoTransform_diff_preimage 𝔪 hN.1
+      (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg) hπ]
+    exact ⟨hz, hzR⟩
+
+end Blowup
 
 end
 

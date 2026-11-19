@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalNoncanonicalRemainderPresentation
 /-! Genuine selected-zero strict persistence and reconstruction of the WHOLE
 contact cosupport from independently constructed zero and nonzero branches. -/

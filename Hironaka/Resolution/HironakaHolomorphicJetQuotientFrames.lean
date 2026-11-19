@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaHolomorphicJetChartInvariance
 
 /-! # Genuine whole fixed-q quotient frames from internally selected actual pivots
@@ -26,8 +21,6 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.HironakaHolomorphicJetQuotientFrames
 open HolGerm HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan
   HironakaHolomorphicJetRankLoci HironakaHolomorphicJetChartInvariance
-open Hironaka
-
 noncomputable section
 variable {n : ℕ}
 

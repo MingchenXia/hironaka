@@ -34,8 +34,6 @@ namespace Hironaka.HironakaRelativeNormalIdealMatrices
 open Hironaka.HolomorphicIdealSheaves HolGerm
   HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan HironakaRelativeNormalIdeal
   HironakaSmoothCentreRelativeIdeal HironakaRelativeNormalTaylorCoefficients HironakaRelativeNormalMonomialBasis
-open Hironaka
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass
 noncomputable section
 
 /-- Genuine entire base coordinates in the internally proved original finite normal-monomial basis. -/

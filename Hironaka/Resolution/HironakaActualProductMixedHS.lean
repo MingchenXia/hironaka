@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualProductTruncatedQuotient
 
 /-! Genuine free-coordinate monomials retain the whole normal filtration and mixed ambient jets. -/
@@ -38,7 +33,6 @@ local instance : IsScalarTower ℂ (HolGerm (ComplexModel d)) (HolGerm (ComplexM
   IsScalarTower.of_algHom (tangentPullback d t)
 local instance : Fintype (normalExponentIndex t s) := normalExponentFintype t s
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Actual degree-at-least-r coordinates in the SAME genuine original monomial family. -/
 def actualProductNormalTail (r : ℕ) :
     Submodule (HolGerm (ComplexModel d)) (normalExponentIndex t s → HolGerm (ComplexModel d)) where
@@ -47,7 +41,6 @@ def actualProductNormalTail (r : ℕ) :
   add_mem' := by intro a b ha hb α hα; change a α+b α=0; rw [ha α hα,hb α hα,add_zero]
   smul_mem' := by intro b a ha α hα; change b*a α=0; rw [ha α hα,mul_zero]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- True original coefficient separation and monomial powers identify EVERY actual normal filtration image. -/
 theorem actualNormalPowerImage_coordinates (r : ℕ) (hr : r ≤ s) :
     (((normalIdeal d t ^ r).restrictScalars (HolGerm (ComplexModel d))).map
@@ -101,7 +94,6 @@ def actualProductMixedCoordinates (K : Ideal (HolGerm (ComplexModel d))) :
     Submodule (HolGerm (ComplexModel d)) (normalExponentIndex t s → HolGerm (ComplexModel d)) :=
   Submodule.pi Set.univ (fun α => K ^ (s-normalExponentDegree α.val))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The true finite mixed sum of whole normal tails has exactly the actual coordinate weights. -/
 theorem actualProductMixedTailSum_eq_coordinates (K : Ideal (HolGerm (ComplexModel d))) :
     (⨆ r : Fin (s+1), K ^ (s-r.val) • actualProductNormalTail d t s r.val) =

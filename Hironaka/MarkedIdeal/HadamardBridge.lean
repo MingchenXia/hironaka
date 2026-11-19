@@ -1,44 +1,42 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.OrderTaylor
 import Hironaka.Blowup.BlowupFlatCoordinates
 import Hironaka.Blowup.BlowupControlledTransform
 import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The Hadamard bridge: an ideal of order `≥ μ` along a smooth centre lies in `𝓘_C^μ`
 
-Source: Włodarczyk 2005 §2.2 (the lemma `𝓘 ⊂ 𝓘_C^μ` for a smooth centre `C ⊂ supp(𝓘, μ)`, used to define the
+Blueprint `hir:hadamard-bridge` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Source:
+Włodarczyk 2005 §2.2 (the lemma `𝓘 ⊂ 𝓘_C^μ` for a smooth centre `C ⊂ supp(𝓘, μ)`, used to define the
 controlled transform).
 
-Let `𝔞` be a coherent ideal sheaf on a complex manifold `M` and `C ⊆ M` a closed complex submanifold contained in
-the cosupport `cosupp(𝔞, μ) = {x | ord_x 𝔞 ≥ μ}`. Then `𝔞 ⊆ 𝓘_C^μ`
-(`le_idealPow_vanishingIdeal_of_subset_cosupport`).
+Let `𝔞` be a coherent ideal sheaf on a complex manifold `M` and `C ⊆ M` a closed complex submanifold
+contained in the cosupport `cosupp(𝔞, μ) = {x | ord_x 𝔞 ≥ μ}`.  Then `𝔞 ⊆ 𝓘_C^μ`
+(`le_idealPow_vanishingIdeal_of_subset_cosupport`).  This is the hypothesis `𝔞.Le (idealPow 𝓘_C μ)` of
+TN3's controlled transform (`BlowupControlledTransform.pullback_eq_mul_controlledTransform`,
+`isCoherent_controlledTransform`), so every admissible centre of a marked ideal with `N = M` satisfies it:
+`ideal_le_idealPow_of_isAdmissibleCentre`, and the two controlled-transform statements with the
+hypothesis discharged, `pullback_eq_mul_controlledTransform_of_subset_cosupport` and
+`isCoherent_controlledTransform_of_subset_cosupport`.
 
 ## Proof
 
-Off `C`, `𝓘_C` contains `1`. At `y ∈ C`, take flattening coordinates `ψ = Φ ∘ e` (`RegularAtDim`) with `C = ψ⁻¹(ℂᵏ ×
-0)` and `ψ y = 0`, and `F = f ∘ ψ⁻¹` for `f ∈ 𝔞_y`. By coherence `f ∈ 𝔞_z` for `z` near `y`; for `z ∈ C` this gives
-`f ∈ 𝔪_z^μ`, hence `F ∈ 𝔪_{ψ z}^μ` (pullback of powers of the maximal ideal along a holomorphic map,
-`comp_mem_idealPow_pointIdeal`), hence every iterated derivative of order `< μ` of `F` vanishes at `ψ z`
-(`OrderTaylor.iterChartDeriv_eq_zero_of_mem_idealPow` on `ℂⁿ`).
-`HolomorphicTaylorTail.inNormalPow_of_iterDeriv_eq_zero` turns this into "`F` lies in the `μ`-th power of the ideal
-of the normal coordinates", and `OrderTaylor.mem_idealPow_of_inNormalPow` pulls that back to `f ∈ 𝓘_C^μ` at `y`.
+Off `C`, `𝓘_C` contains `1`.  At `y ∈ C`, take flattening coordinates `ψ = Φ ∘ e` (`RegularAtDim`) with
+`C = ψ⁻¹(ℂᵏ × 0)` and `ψ y = 0`, and `F = f ∘ ψ⁻¹` for `f ∈ 𝔞_y`.  By coherence `f ∈ 𝔞_z` for `z` near `y`;
+for `z ∈ C` this gives `f ∈ 𝔪_z^μ`, hence `F ∈ 𝔪_{ψ z}^μ` (pullback of powers of the maximal ideal along a
+holomorphic map, `comp_mem_idealPow_pointIdeal`), hence every iterated derivative of order `< μ` of `F`
+vanishes at `ψ z` (`OrderTaylor.iterChartDeriv_eq_zero_of_mem_idealPow` on `ℂⁿ`).  TN23's
+`HolomorphicTaylorTail.inNormalPow_of_iterDeriv_eq_zero` turns this into "`F` lies in the `μ`-th power of
+the ideal of the normal coordinates", and `OrderTaylor.mem_idealPow_of_inNormalPow` pulls that back to
+`f ∈ 𝓘_C^μ` at `y`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -49,7 +47,9 @@ universe u
 namespace Hironaka.HadamardBridge
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.HolomorphicTaylorTail Hironaka.OrderTaylor Hironaka.BlowupFlatCoordinates
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.DerivativeIdeal Hironaka.HolomorphicTaylorTail
+  Hironaka.OrderTaylor Hironaka.BlowupFlatCoordinates
 
 noncomputable section
 
@@ -206,6 +206,23 @@ theorem ideal_le_idealPow_of_isAdmissibleCentre {𝔪 : MarkedIdeal n X} (hN : �
     𝔪.ideal.Le (idealPow (vanishingIdeal (n := n) C) 𝔪.d) :=
   le_idealPow_vanishingIdeal_of_subset_cosupport h𝔞 hC.1
     (by have h := hC.2.1; rwa [MarkedIdeal.cosupp, hN] at h)
+
+/-- **`π^*𝔞 = 𝒪_Y(-μD) · σ^c(𝔞, μ)`** for a coherent `𝔞` and a blowup along a centre contained in the
+cosupport `cosupp(𝔞, μ)` (TN3's `pullback_eq_mul_controlledTransform` with its hypothesis
+`𝔞 ⊆ 𝓘_C^μ` supplied by the Hadamard bridge). -/
+theorem pullback_eq_mul_controlledTransform_of_subset_cosupport (hπ : IsBlowupAlong n C π)
+    (h𝔞 : 𝔞.IsCoherent) (hsub : C ⊆ cosupport n univ 𝔞 μ) :
+    GermIdeal.pullback (m := n) π 𝔞 =
+      (idealPow (exceptionalDivisor hπ).ideal μ).mul (controlledTransform hπ 𝔞 μ) :=
+  pullback_eq_mul_controlledTransform hπ h𝔞
+    (le_idealPow_vanishingIdeal_of_subset_cosupport h𝔞 hπ.1 hsub)
+
+/-- **The controlled transform along a centre in the cosupport is coherent.** -/
+theorem isCoherent_controlledTransform_of_subset_cosupport (hπ : IsBlowupAlong n C π)
+    (h𝔞 : 𝔞.IsCoherent) (hsub : C ⊆ cosupport n univ 𝔞 μ) :
+    (controlledTransform hπ 𝔞 μ).IsCoherent :=
+  isCoherent_controlledTransform hπ h𝔞
+    (le_idealPow_vanishingIdeal_of_subset_cosupport h𝔞 hπ.1 hsub)
 
 end Consumers
 

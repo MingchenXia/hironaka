@@ -1,22 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Simple normal crossings divisors and normal crossings with a submanifold
 
-Sources: Włodarczyk 2005 §2.1 (the ordered collection `E` of a marked ideal, whose components "have simultaneously
-simple normal crossings"; a centre `C` "has simple normal crossings with `E`"), Bierstone--Milman 2008, Definitions
-2.1 (`E = ∑ Hᵢ` an ordered simple normal crossings divisor, `Hᵢ` smooth hypersurfaces, not necessarily irreducible,
-transverse to `N`) and 2.2 (`C`, `E` have only normal crossings).
+Blueprint `hir:snc` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Sources: Włodarczyk 2005 §2.1
+(the ordered collection `E` of a marked ideal, whose components "have simultaneously simple normal
+crossings"; a centre `C` "has simple normal crossings with `E`"), Bierstone--Milman 2008,
+Definitions 2.1 (`E = ∑ Hᵢ` an ordered simple normal crossings divisor, `Hᵢ` smooth hypersurfaces,
+not necessarily irreducible, transverse to `N`) and 2.2 (`C`, `E` have only normal crossings).
 
 All three notions are instances of one local picture: holomorphic coordinates at `x` in which each
 member of a finite family passing through `x` is a coordinate subspace `{z | ∀ j ∈ S, z j = 0}`
@@ -35,6 +29,8 @@ chart, exactly as in `RegularAtDim`.
   contains `N` there (its coordinate is not one of those cutting out `N`);
 * sanity checks: `isSNCDivisor_nil`, `coordSubspace_eq_complexCoordinatePlane`,
   `hasNormalCrossings_nil_of_isClosedSubmanifold`, `isTransverse_nil_of_isClosedSubmanifold`.
+
+Sorry-free.
 -/
 
 open Set Filter

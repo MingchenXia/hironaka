@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothSubmersionCanonicalValueDimensionShift
 /-! Actual original family comparison at every positive-depth monomial leaf.
 Complete mathematical proofs preceded Lean in `Mathematics.tex`.

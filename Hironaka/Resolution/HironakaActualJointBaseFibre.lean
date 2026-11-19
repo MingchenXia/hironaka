@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPrincipalPartsResidueSymbols
 import Hironaka.Resolution.HironakaStrictFilteredGradedQuotient
 
@@ -100,7 +95,6 @@ private theorem blockSwap_tangent (d n : ℕ) (i : Fin d) :
 private theorem blockSwap_normal (d n : ℕ) (i : Fin n) :
     blockSwap d n (i.natAdd d)=i.castAdd d := by simp [blockSwap]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem maximalIdeal_eq_coordinate_span (n : ℕ) :
     IsLocalRing.maximalIdeal (HolGerm (ComplexModel n))=
       Ideal.span (range (coordinateGerm : Fin n → HolGerm (ComplexModel n))) := by
@@ -163,7 +157,6 @@ private theorem map_baseMaximalIdeal_blockSwap (d n : ℕ) :
   exact (coordinatePullback_coordinate (blockSwap d n) _).trans
     (congrArg coordinateGerm (blockSwap_tangent d n i))
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The entire actual zero-base kernel is exactly the WHOLE original base maximal image. -/
 theorem baseMaximalIdeal_eq_ker_jointBaseZeroTrace (d n : ℕ) :
     originalBaseMaximalIdeal d n=RingHom.ker (jointBaseZeroTrace d n).toRingHom := by

@@ -1,46 +1,20 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactStageInvDomain
 import Hironaka.Invariant.MaximalOrderStepOneB
 import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupRestrictOpen
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealAlongRestrictionFull
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.HomogenizedIdealAlongTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.MarkedIdeal.MaximalContactAlongTower
-import Hironaka.Invariant.MemberInterTowerAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The tails of Step 1b on open sets smaller than `T₀⁻¹U`
 
-"the lower-dimensional invariant is that of the marked ideal formed at the last stage of `T₀` (`𝓢_w`), restricted to
-a neighbourhood `W` of the image of `x` meeting no other original member, along `T₁|_W`". Source: Włodarczyk 2005
-(arXiv `hiron.tex`), Step 1bb ("By Lemma `le:codim2`, `(V(u)_i)_{0 ≤ i ≤ p}` is a multiple test blow-up of `(V(u),
-J̄|_{V(u)}, ∅, μ̄)`"), with Lemma `le:S`.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0095 / I-0977 C-0134 for TN-CLASSICAL's Step 1 value function
+(`hir:maximal-order-step`, `blueprint/src/hironaka.tex`): "the lower-dimensional invariant is that of the marked ideal formed
+at the last stage of `T₀` (`𝓢_w`), restricted to a neighbourhood `W` of the image of `x` meeting no other original member,
+along `T₁|_W`".  `ContactEquivalenceStage.isGeoTestTower_tail_coeffHom` gives the tails on `V = T₀⁻¹U` itself; this module
+gives them on every open `W ⊆ T₀⁻¹U` of the stage `T₀`.  Blueprint `mc:contact-stage-tail`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), Step 1bb ("By Lemma `le:codim2`,
+`(V(u)_i)_{0 ≤ i ≤ p}` is a multiple test blow-up of `(V(u), J̄|_{V(u)}, ∅, μ̄)`"), with Lemma `le:S`.
 
 An equivalence of marked ideals (`MarkedIdealEquivalence.WEquiv`) quantifies over the towers of its own base, so it does not
 pass from `T₀⁻¹U` to a smaller open `W` (a tower over `W` need not extend).  The results here are therefore proved for the
@@ -59,6 +33,11 @@ and Lemma `le:S` on `W`.
 * `isGeoTestTower_tail_coeffHomAlong_of_le` (**the tails on `W`**, any divisor): for `T₀ T₁` a multiple test blow-up of `J̄`
   and an open `W ⊆ T₀⁻¹U`, `T₁|_W` is a multiple test blow-up of `𝓢_{u,T₀}|_W = (𝓒_{N_{T₀}}(J̄_{T₀})|_{S_{T₀}})|_W`, with
   cosupport the trace of `cosupp J̄_{T₀ T₁}`.
+* `isGeoTestTower_tail_contactMarked_of_le`: the same for `E = ∅` in TN-CLASSICAL's notation,
+  `MaximalOrderStepOneB.contactMarked N 𝔞 μ u T₀ W` and `stepOneMarked N 𝔞 μ`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -68,7 +47,10 @@ universe u
 
 namespace Hironaka.ContactStageTail
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong HomogenizedIdealAlongTower MarkedIdealBiholomorphism MarkedIdealRestrictOpen MemberInterTowerAlong MaximalContactAlongTower CoefficientIdealAlongRestrictionFull
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong HomogenizedIdealAlongTower MarkedIdealBiholomorphism
+  MarkedIdealRestrictOpen MemberInterTowerAlong MaximalContactAlongTower CoefficientIdealAlongRestrictionFull
 open HomogenizedGlueingTower (strictAlong strictAlong_restrict)
 open MemberInterLocusAlong (strictAlong_append)
 open ContactIndependenceAlong (one_le_coeffMarkedAlong_d)
@@ -135,8 +117,8 @@ variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X) (hN : IsClosedSubmanifold n �
 include hN h𝔞 hd hu in
 /-- **Giraud at the stage `T₀` along the tails** (READING `(𝔞, μ)`, any divisor): for `J̄ = 𝓒_N(𝓗_N(𝔍))`, a tangent
 direction `u` of `(𝔍.ideal|_N, d)` along `N` on `U` and a multiple test blow-up `T₀ T` of `J̄`, the cosupport of
-`J̄_{T₀ T}` over `T₀⁻¹U` lies in the strict transform along `T` of `S_{T₀} = (N ∩ V(u))_{T₀}`.
-(`MaximalContactAlongTower.cosupp_subset_strictAlong_along` for `𝔍` along `T₀ T`, transferred by `J̄ ≃ 𝔍`.) -/
+`J̄_{T₀ T}` over `T₀⁻¹U` lies in the strict transform along `T` of `S_{T₀} = (N ∩ V(u))_{T₀}`.  (TN-CLASSICAL's
+`MaximalContactAlongTower.cosupp_subset_strictAlong_along` for `𝔍` along `T₀ T`, transferred by `J̄ ≃ 𝔍`.) -/
 theorem cosupp_tail_subset_strictAlong {Y : CMfd.{u} n} (T₀ : BlowupTower X Y)
     (hT₀ : IsGeoTestTower (coeffMarkedAlong (homMarkedAlong 𝔍)) T₀) {Z : CMfd.{u} n} (T : BlowupTower Y Z)
     (hT : IsGeoTestTower (geoTransformAlong (coeffMarkedAlong (homMarkedAlong 𝔍)) T₀) T) :
@@ -189,6 +171,33 @@ theorem isGeoTestTower_tail_coeffHomAlong_of_le {Y Z : CMfd.{u} n} (T₀ : Blowu
   exact h
 
 end CoeffHomAlong
+
+/-! ### Step 1b with `E = ∅`, in the notation of `MaximalOrderStepOneB` -/
+
+section ContactMarked
+
+open MaximalOrderStepOneB (stepOneMarked contactMarked)
+open HomogenizedGlueingAlongTower (homogenizedMarkedAlong)
+
+variable {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- **The tails of Step 1b on an open `W ⊆ T₀⁻¹U`, `E = ∅`** (READING `(𝔞, μ)`, TN-CLASSICAL's notation): for `𝔞` coherent,
+`N` a closed submanifold, `μ ≥ 1`, a tangent direction `u` of `(𝔞|_N, μ)` along `N` on `U`, a multiple test blow-up `T₀ T₁` of
+`J̄ = stepOneMarked N 𝔞 μ` and an open `W ⊆ T₀⁻¹U`: `T₁|_W` is a multiple test blow-up of `contactMarked N 𝔞 μ u T₀ W`, with
+cosupport the trace of `cosupp J̄_{T₀ T₁}`.  With `ContactStageInvDomain.isInvDomain_stage_coeffHom_of_le` (the domain on
+`W`) these are the hypotheses on `𝓢_{u,T₀}|_W` that the Step 1 value function needs along the tails. -/
+theorem isGeoTestTower_tail_contactMarked_of_le {N : Set M} {𝔞 : GermIdeal n M} {μ : ℕ} (h𝔞 : 𝔞.IsCoherent)
+    (hN : IsClosedSubmanifold n N) (hμ : 1 ≤ μ) (U : Opens M) {u : M → ℂ} (hu : IsTangentDirectionAlong N 𝔞 μ U u)
+    {Y Z : CMfd.{u} n} (T₀ : BlowupTower (CMfd.of (n := n) M) Y) (T₁ : BlowupTower Y Z)
+    (hT : IsGeoTestTower (stepOneMarked N 𝔞 μ) (T₀.append T₁)) (W : Opens Y) (hWU : (W : Set Y) ⊆ openPreimage T₀ U) :
+    IsGeoTestTower (contactMarked N 𝔞 μ u T₀ W) (restrict W T₁) ∧
+      (geoTransformAlong (contactMarked N 𝔞 μ u T₀ W) (restrict W T₁)).cosupp =
+        (Subtype.val : openPreimage T₁ W → Z) ⁻¹' (geoTransformAlong (stepOneMarked N 𝔞 μ) (T₀.append T₁)).cosupp := by
+  unfold contactMarked
+  exact isGeoTestTower_tail_coeffHomAlong_of_le (X := CMfd.of (n := n) M) (⟨N, [], 𝔞, μ⟩ : MarkedIdeal n M) hN h𝔞 hμ U
+    hu T₀ T₁ hT W hWU
+
+end ContactMarked
 
 end
 

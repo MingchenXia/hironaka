@@ -1,52 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupDerivativeIdeal
 import Hironaka.Blowup.BlowupStrictIdeal
 import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
 import Hironaka.MarkedIdeal.HomogenizedIdealAlong
 import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Manifold.HolomorphicMaps
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupFibreDirection
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupLocalSurjectivity
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.Blowup.ExceptionalFibres
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Blowup.LiftedOpenModel
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Derivative ideals along a submanifold under a blowup
 
+Blueprint `hir:along-transform` (`blueprint/src/hironaka.tex`, Hironaka phase H4; item (2) of `hir:along-calculus`).
 Sources: Włodarczyk 2005, Lemma `le:inclusions` (`σ^c(𝓓^r(𝔞), μ) ⊆ 𝓓^r(σ^c(𝔞, μ + r))`) and §2.6; Bierstone--Milman
-2008, Lemmas 3.1--3.3 (for the marked ideal `(M, N, E, 𝓘, d)` the derivatives are those of `𝓘 ⊆ 𝒪_N`, i.e. along
-`N`).
+2008, Lemmas 3.1--3.3 (for the marked ideal `(M, N, E, 𝓘, d)` the derivatives are those of `𝓘 ⊆ 𝒪_N`, i.e. along `N`).
 
 Let `π : Y → X` be the blowup along `C`, `N ⊇ C` a closed submanifold with strict transform `N'`, and `(X, N, E, 𝔞, d)`
 a marked ideal with `𝔞` coherent and `C` admissible.  Then on `N'`
@@ -57,16 +23,19 @@ where `[𝓓_N^j(𝔞)]'` is the transform of `(X, N, E, 𝓓_N^j 𝔞, d - j)` 
 
 ## Method
 
-The ambient proof writes `y · (∂f) ∘ π = D'(f ∘ π)` for a derivation `D'` of the blowup with `D'(y) ∈ (y)` (`y` a
-local generator of `𝒪(-D)`). Here:
+The ambient proof (TN23's `BlowupDerivativeIdeal.controlledTransform_derivIdeal_le`) writes `y · (∂f) ∘ π = D'(f ∘ π)`
+for a derivation `D'` of the blowup with `D'(y) ∈ (y)` (`y` a local generator of `𝒪(-D)`).  Here:
 
 * `derivationData_of_coordinates_uniform`, `IsUniformDerivationGenerator`, `exists_isUniformDerivationGenerator`:
   the same data with `D'` chosen independently of `f` (the coefficients of the ambient construction never depended
-  on `f`; the statements are re-proved in this uniform form);
+  on `f`; the statements are re-proved in this uniform form, the proofs are TN23's);
 * tangency: if the field `ξ` is tangent to `N` at `π z`, the lifted derivation `D'` is tangent to `N'` at `z`
-  (`π^*𝓘_N = 𝒪(-D) · 𝓘_{N'}`, `BlowupStrictIdeal.pullback_vanishingIdeal_eq_mul`, and the points of `π⁻¹(N \ C)`,
-  where `y ≠ 0`, are dense in `N'`);
+  (`π^*𝓘_N = 𝒪(-D) · 𝓘_{N'}`, TN3's `BlowupStrictIdeal.pullback_vanishingIdeal_eq_mul`, and the points of
+  `π⁻¹(N \ C)`, where `y ≠ 0`, are dense in `N'`);
 * then the ambient argument runs on `N'`, the cancellation of `y^{μ+1}` on `N'` again by density.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -76,7 +45,9 @@ universe u
 
 namespace Hironaka.DerivativeIdealAlongTransform
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences Hironaka.HolomorphicMaps GermIdealOrder DerivativeIdeal IdealWeightPowers InvertibleIdealQuotient BlowupExceptionalDivisor BlowupControlledTransform BlowupDerivativeIdeal
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences Hironaka.HolomorphicMaps GermIdealOrder
+  DerivativeIdeal IdealWeightPowers InvertibleIdealQuotient BlowupExceptionalDivisor
+  BlowupControlledTransform BlowupDerivativeIdeal
 
 noncomputable section
 
@@ -87,8 +58,9 @@ section Assembly
 variable {n : ℕ} {X : Type*} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
   [IsComplexManifold n X]
 
-/-- **Chart derivatives in flattening coordinates, uniformly in the function**. If `Φ` is a local biholomorphism at `e
-x` (`e` a chart at `x`), every chart derivative of `f` near `x` is a holomorphic combination of the coordinate
+/-- **Chart derivatives in flattening coordinates, uniformly in the function** (the coefficients of
+`BlowupDerivativeIdeal.chartDeriv_eventuallyEq_sum_flat` do not depend on `f`).  If `Φ` is a local biholomorphism
+at `e x` (`e` a chart at `x`), every chart derivative of `f` near `x` is a holomorphic combination of the coordinate
 derivatives of `F = f ∘ e⁻¹ ∘ Φ⁻¹` at `Φ (e q)`. -/
 theorem chartDeriv_eventuallyEq_sum_flat_uniform {x : X} (e : ComplexChart n X) (hxs : x ∈ e.val.source)
     (Φ : LocalHolomorphicEquivAt (n := n) (e.val x)) (e' : ComplexChart n X) (hx' : x ∈ e'.val.source)
@@ -144,13 +116,15 @@ theorem chartDeriv_eventuallyEq_sum_flat_uniform {x : X} (e : ComplexChart n X) 
 variable {Y : Type*} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
   [IsComplexManifold n Y]
 
-/-- **The derivation data at a point of a holomorphic map, from local coordinates.** Let `π: Y → X` be holomorphic, `z
-∈ Y`, `x = π z`, `Φ` a local biholomorphism at `e_x x`, `W` a local holomorphic coordinate system at `z` with `Φ ∘
-e_x ∘ π = Ψ ∘ W` near `z`, and suppose that the function `Q` (read through `W`) satisfies the two identities of the
-source's `y σ^*(Der)`: `Q (∂ᵢ F) ∘ Ψ = ∑ₗ Pᵢₗ ∂ₗ (F ∘ Ψ)` and `∑ₗ Pᵢₗ ∂ₗ Q = Rᵢ Q`. Then for every chart `e'` at `x`
-and every `v` there is ONE derivation `D' = ∑ₘ bₘ ∂^{e_z}_{eₘ}` with holomorphic coefficients and `D'(y) ∈ (y)` such
-that `y · (∂^{e'}_v f) ∘ π = D'(f ∘ π)` (`y = Q ∘ W`) for EVERY `f` holomorphic near `x` (whose coefficients do not
-depend on `f`). -/
+/-- **The derivation data at a point of a holomorphic map, from local coordinates.**  Let
+`π : Y → X` be holomorphic, `z ∈ Y`, `x = π z`, `Φ` a local biholomorphism at `e_x x`, `W` a local
+holomorphic coordinate system at `z` with `Φ ∘ e_x ∘ π = Ψ ∘ W` near `z`, and suppose that the
+function `Q` (read through `W`) satisfies the two identities of the source's `y σ^*(Der)`:
+`Q (∂ᵢ F) ∘ Ψ = ∑ₗ Pᵢₗ ∂ₗ (F ∘ Ψ)` and `∑ₗ Pᵢₗ ∂ₗ Q = Rᵢ Q`.  Then for every chart `e'` at `x` and
+every `v` there is ONE derivation `D' = ∑ₘ bₘ ∂^{e_z}_{eₘ}` with holomorphic coefficients and
+`D'(y) ∈ (y)` such that `y · (∂^{e'}_v f) ∘ π = D'(f ∘ π)` (`y = Q ∘ W`) for EVERY `f` holomorphic
+near `x` (the uniform form of `BlowupDerivativeIdeal.derivationData_of_coordinates`, whose
+coefficients do not depend on `f`). -/
 theorem derivationData_of_coordinates_uniform {π : Y → X}
     (hπs : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ π) {z : Y}
     (ex : ComplexChart n X) (hxs : π z ∈ ex.val.source)
@@ -271,10 +245,12 @@ variable {n : ℕ} {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel
   [IsComplexManifold n Y] {C : Set X} {π : Y → X}
 
 variable (n) in
-/-- **The data of the derivation `y σ^*(Der)` near a point `z` of the blowup, uniformly in the function**: an open `U ∋
-z` on which `y` generates `π^*𝓘_C = 𝒪_Y(-D)` and vanishes identically on no nonempty open set, and, for every chart
-`e'` at `π z` and every `v`, ONE derivation `D' = ∑ₘ bₘ ∂^{e_z}_{eₘ}` with holomorphic coefficients and `D'(y) ∈
-(y)` near `z` such that `y · (∂^{e'}_v f) ∘ π = D'(f ∘ π)` near `z` for every `f` holomorphic near `π z`. -/
+/-- **The data of the derivation `y σ^*(Der)` near a point `z` of the blowup, uniformly in the
+function** (the form of `BlowupDerivativeIdeal.IsDerivationGenerator` with the derivation chosen
+before the function): an open `U ∋ z` on which `y` generates `π^*𝓘_C = 𝒪_Y(-D)` and vanishes
+identically on no nonempty open set, and, for every chart `e'` at `π z` and every `v`, ONE
+derivation `D' = ∑ₘ bₘ ∂^{e_z}_{eₘ}` with holomorphic coefficients and `D'(y) ∈ (y)` near `z`
+such that `y · (∂^{e'}_v f) ∘ π = D'(f ∘ π)` near `z` for every `f` holomorphic near `π z`. -/
 structure IsUniformDerivationGenerator (π : Y → X) (C : Set X) (z : Y) (U : Set Y) (y : Y → ℂ) :
     Prop where
   isOpen : IsOpen U
@@ -496,7 +472,9 @@ theorem exists_isUniformDerivationGenerator (hπ : IsBlowupAlong n C π) (z : Y)
   · exact exists_isUniformDerivationGenerator_of_mem hπ hz
   · exact ⟨_, _, isUniformDerivationGenerator_of_notMem hπ hz⟩
 
+
 end PointData
+
 
 /-! ### The lifted derivation is tangent to the strict transform -/
 
@@ -550,10 +528,10 @@ theorem eventually_eq_on_of_pow_mul (hπ : IsBlowupAlong n C π) {N : Set X}
 
 /-- **The lift of a field tangent to `N` is tangent to `N'`** (`N ⊇ C` a closed submanifold, `z ∈ N'`): if `ξ` is
 tangent to `N` at `π z`, the derivation `D' = ∑ₗ Bₗ ∂_l` with `y · (ξ f) ∘ π = D'(f ∘ π)` for every `f` (uniform
-data) is tangent to `N'` at `z`, and `D'(y) ∈ (y)`. For `w ∈ 𝓘_{N'}`, `y w ∈ 𝒪(-D) 𝓘_{N'} = π^*𝓘_N`
-(`BlowupStrictIdeal.pullback_vanishingIdeal_eq_mul`), so `y w = ∑ cᵢ (tᵢ ∘ π)` with `tᵢ ∈ 𝓘_N`; then `ρ y w + y
-D'(w) = D'(y w) = ∑ D'(cᵢ) (tᵢ ∘ π) + cᵢ y (ξ tᵢ) ∘ π` vanishes on `N'`, so `y D'(w) = 0` on `N'` and `D'(w) = 0` on
-`N'` by density. -/
+data) is tangent to `N'` at `z`, and `D'(y) ∈ (y)`.  For `w ∈ 𝓘_{N'}`, `y w ∈ 𝒪(-D) 𝓘_{N'} = π^*𝓘_N` (TN3's
+`BlowupStrictIdeal.pullback_vanishingIdeal_eq_mul`), so `y w = ∑ cᵢ (tᵢ ∘ π)` with `tᵢ ∈ 𝓘_N`; then
+`ρ y w + y D'(w) = D'(y w) = ∑ D'(cᵢ) (tᵢ ∘ π) + cᵢ y (ξ tᵢ) ∘ π` vanishes on `N'`, so `y D'(w) = 0` on `N'` and
+`D'(w) = 0` on `N'` by density. -/
 theorem exists_tangent_lift (hπ : IsBlowupAlong n C π) {N : Set X} (hN : IsClosedSubmanifold n N) (hCN : C ⊆ N)
     (hy : IsUniformDerivationGenerator n π C z U y) {e : ComplexChart n X} {ξ : Fin n → X → ℂ}
     (hξ : IsTangentField N e ξ (π z)) :
@@ -648,11 +626,13 @@ theorem exists_tangent_lift (hπ : IsBlowupAlong n C π) {N : Set X} (hN : IsClo
 
 end Tangent
 
+
 /-! ### `le:inclusions` along `N`, one derivative -/
 
 section Inclusion
 
-open DerivativeIdealAlong DerivativeIdealAlongCoherent BlowupStrictSubmanifold RestrictedIdealExtension RestrictedIdealQuotient RestrictedIdealWeight RelativePrincipalizationSpan
+open DerivativeIdealAlong DerivativeIdealAlongCoherent BlowupStrictSubmanifold RestrictedIdealExtension
+  RestrictedIdealQuotient RestrictedIdealWeight RelativePrincipalizationSpan
 
 variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
 
@@ -668,6 +648,7 @@ theorem fieldDeriv_pow {e : ComplexChart n M} {ξ : Fin n → M → ℂ} {y : M 
 theorem fieldDeriv_const (e : ComplexChart n M) (ξ : Fin n → M → ℂ) (c : ℂ) (p : M) :
     fieldDeriv e ξ (fun _ => c) p = 0 := by
   simp [fieldDeriv, chartDeriv, Function.comp_def]
+
 
 /-- Derivative of `f = ∑ aₖ sₖ + t` (`t = f - ∑ aₖ sₖ`) along a field. -/
 theorem fieldDeriv_eventuallyEq_add_sum {e : ComplexChart n M} {ξ : Fin n → M → ℂ} {x : M} {f : M → ℂ}
@@ -967,6 +948,7 @@ theorem restrictLe_colonAlong_derivIdealAlong (hπ : IsBlowupAlong n C π) {N : 
   exact IsInSpanOnAt.congr_right (IsInSpanOnAt.sum _ fun j _ => IsInSpanOnAt.mul_left (hc j) (hKvspan j))
     hcanc
 
+
 /-- **`le:inclusions` along a submanifold** (Włodarczyk 2005, Lemma `le:inclusions`, along `N`): if
 `𝔞|_N ⊆ 𝓘_C^{μ+r}|_N`, then on `N'`
 `(π^* 𝓓_N^r(𝔞) : 𝒪(-μD))|_{N'} ⊆ 𝓓_{N'}^r((π^*𝔞 : 𝒪(-(μ+r)D))|_{N'})`.  Induction on `r`: the case `r = 1`
@@ -999,10 +981,11 @@ theorem restrictLe_colonAlong_iterDerivIdealAlong (hπ : IsBlowupAlong n C π) {
           HolomorphicAt n g x := fun _ _ hg => hg.1
       exact GiraudAlong.holomorphicAt_of_mem_iterDerivIdealAlong hcol r
 
-/-- **Item (2) of `hir:along-calculus`: transforms of the derivative marked ideals along `N`** (Włodarczyk 2005, Lemma
-`le:inclusions`; Bierstone--Milman 2008, Lemmas 3.1--3.3): for a marked ideal `𝔪 = (X, N, E, 𝔞, d)` with `N` a
-closed submanifold and `𝔞` coherent, an admissible centre `C` and `j ≤ d`, on the strict transform `N'` `[𝓓_N^j(𝔪)]'
-⊆ 𝓓_{N'}^j(𝔪')`, where `𝓓_N^j(𝔪) = (X, N, E, 𝓓_N^j 𝔞, d - j)` (`HomogenizedIdealAlong.derivMarkedAlong`). -/
+/-- **Item (2) of `hir:along-calculus`: transforms of the derivative marked ideals along `N`** (Włodarczyk 2005,
+Lemma `le:inclusions`; Bierstone--Milman 2008, Lemmas 3.1--3.3): for a marked ideal `𝔪 = (X, N, E, 𝔞, d)` with `N` a
+closed submanifold and `𝔞` coherent, an admissible centre `C` and `j ≤ d`, on the strict transform `N'`
+`[𝓓_N^j(𝔪)]' ⊆ 𝓓_{N'}^j(𝔪')`, where `𝓓_N^j(𝔪) = (X, N, E, 𝓓_N^j 𝔞, d - j)` (TN23's
+`HomogenizedIdealAlong.derivMarkedAlong`). -/
 theorem restrictLe_geoTransform_derivMarkedAlong (𝔪 : MarkedIdeals.MarkedIdeal n X)
     (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hC : 𝔪.IsAdmissibleCentre C)
     (hπ : IsBlowupAlong n C π) {j : ℕ} (hj : j ≤ 𝔪.d) :
@@ -1018,11 +1001,12 @@ theorem restrictLe_geoTransform_derivMarkedAlong (𝔪 : MarkedIdeals.MarkedIdea
   rw [Nat.sub_add_cancel hj] at h
   exact h
 
+
 /-- **Maximal order along `N` is preserved** (`hir:along-calculus` (2), "in particular"; Villamayor's lemma along `N`):
 if `𝔪 = (X, N, E, 𝔞, d)` has maximal order along `N` (no point of `N` of order `≥ d + 1` along `N`), so has its
-transform by an admissible blowup. With `j = d`: a germ `u ∈ 𝓓_N^d(𝔞)` with `u(π z) ≠ 0` gives `u ∘ π` in the
+transform by an admissible blowup.  With `j = d`: a germ `u ∈ 𝓓_N^d(𝔞)` with `u(π z) ≠ 0` gives `u ∘ π` in the
 transform of `(X, N, E, 𝓓_N^d 𝔞, 0)`, hence in `𝓓_{N'}^d(𝔞')` on `N'`, so `z` is not a zero of `𝓓_{N'}^d(𝔞')`
-(`HomogenizedIdealAlong.isMaximalOrderAlong_iff_inter_zeroLocus` on both sides). -/
+(TN23's `HomogenizedIdealAlong.isMaximalOrderAlong_iff_inter_zeroLocus` on both sides). -/
 theorem isMaximalOrderAlong_geoTransform (𝔪 : MarkedIdeals.MarkedIdeal n X)
     (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent) (hC : 𝔪.IsAdmissibleCentre C)
     (hπ : IsBlowupAlong n C π) (hmax : HomogenizedIdealAlong.IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d) :

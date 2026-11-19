@@ -1,29 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
 import Hironaka.MarkedIdeal.DerivativeIdealInvariance
 import Hironaka.MarkedIdeal.HadamardBridge
 import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The derivative ideal along a submanifold is étale-local
 
-Source: Włodarczyk 2005, Lemmas ``le:etale2'' / ``le:etale3'' (derivative ideals commute with étale maps), here for
-the derivative ideal `𝓓_N` along a submanifold and for local biholomorphisms.
+Hironaka phase H3 (TN23-ENVELOPES): step (4a) of item (4) of the calculus along a submanifold (`hir:along-calculus`,
+claimed on I-0981 C-0040); blueprint `mc:field-transfer`, `mc:derivative-along-etale` (`blueprint/src/maximal-contact.tex`).
+Source: Włodarczyk 2005, Lemmas ``le:etale2'' / ``le:etale3'' (derivative ideals commute with étale maps), here for the
+derivative ideal `𝓓_N` along a submanifold and for local biholomorphisms.
 
 Let `φ : M' → M` be holomorphic and a local biholomorphism: near every `y` it has a holomorphic local inverse `ψ`
 (`ψ ∘ φ = id` near `y`, `φ ∘ ψ = id` near `φ y`, `ψ` holomorphic near `φ y`).  Then for every ideal `𝔞` of holomorphic germs
@@ -43,6 +32,9 @@ with coefficients `ξ'_j = ∑_m (ξ_m ∘ φ) · (c_{mj} ∘ φ)`, `c` the Jaco
 generators of `𝓓_{φ⁻¹N}(φ^*𝔞)` at `y`; conversely, by the product rule a generator `ξ'(f')` of the right side, `f' = ∑ cₖ (bₖ ∘ φ)`,
 is a combination of the `bₖ ∘ φ` and of the `ξ'(bₖ ∘ φ) = (ξ(bₖ)) ∘ φ` for the field `ξ` transferred back along `ψ`, tangent to
 `ψ⁻¹φ⁻¹N`, which agrees with `N` near `φ y`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -51,7 +43,9 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.DerivativeIdealAlongEtale
 
 open Hironaka.HolomorphicIdealSheaves
-open Hironaka.DerivativeIdeal Hironaka.DerivativeIdealAlong Hironaka.DerivativeIdealInvariance Hironaka.HadamardBridge Hironaka.DerivativeIdealAlongCoherent Hironaka.RelativePrincipalizationSpan
+open Hironaka.DerivativeIdeal Hironaka.DerivativeIdealAlong
+  Hironaka.DerivativeIdealInvariance Hironaka.HadamardBridge
+  Hironaka.DerivativeIdealAlongCoherent Hironaka.RelativePrincipalizationSpan
 
 noncomputable section
 
@@ -408,6 +402,16 @@ theorem isLocalInverseAt_of_inverse {φ : M' → M} {ψ : M → M'}
     (hψ : ∀ x, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ x)
     (hφψ : ∀ x, φ (ψ x) = x) (hψφ : ∀ p, ψ (φ p) = p) (y : M') : IsLocalInverseAt n φ ψ y :=
   ⟨Eventually.of_forall hφ, Eventually.of_forall hψ, Eventually.of_forall hψφ, Eventually.of_forall hφψ⟩
+
+/-- **`𝓓_N` commutes with biholomorphisms**: `φ^*(𝓓_N^j 𝔞) = 𝓓_{φ⁻¹N}^j(φ^*𝔞)`. -/
+theorem pullback_iterDerivIdealAlong_of_inverse {φ : M' → M} {ψ : M → M'}
+    (hφ : ∀ p, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) φ p)
+    (hψ : ∀ x, MDifferentiableAt 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ψ x)
+    (hφψ : ∀ x, φ (ψ x) = x) (hψφ : ∀ p, ψ (φ p) = p)
+    (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) (j : ℕ) :
+    GermIdeal.pullback (m := n) φ (iterDerivIdealAlong N 𝔞 j) =
+      iterDerivIdealAlong (φ ⁻¹' N) (GermIdeal.pullback (m := n) φ 𝔞) j :=
+  pullback_iterDerivIdealAlong (fun y => ⟨ψ, isLocalInverseAt_of_inverse hφ hψ hφψ hψφ y⟩) h𝔞 j
 
 variable (U : TopologicalSpace.Opens M)
 

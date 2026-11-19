@@ -1,16 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.HolomorphicGermAlgebra
+
 set_option autoImplicit false
 
 /-!
 # Division of a coherent ideal by an invertible ideal
+
+Source: Copy-4, Step 1 of `prop:principalization`, `eq:def-cM`
+(`transcendental-nakamaye-copy4-20260911`):
+
+> Since `𝔅_M ⊆ 𝔅_m^{M/m}`, `eq:def-Gm-tilde` gives
+> `𝔅_M 𝒪_{Y_fix} = 𝒪_{Y_fix}(-(M/m) G̃_m) · 𝔠_M` for a coherent ideal `𝔠_M`.
 
 That is the only content of this module, in the germ-ideal encoding of
 `Hironaka.HolomorphicIdealSheaves`: an ideal contained in an invertible one is
@@ -28,7 +27,8 @@ the exact form recorded by `GermIdeal.IsInvertible`: the local generator
 vanishes identically on no nonempty open subset, hence `{h ≠ 0}` is dense and
 two continuous functions agreeing there agree.
 
-No Hironaka input, no compactness, no Kähler hypothesis.
+No Hironaka input, no compactness, no Kähler hypothesis.  Everything here is
+sorry-free.
 -/
 
 open Set Filter
@@ -163,6 +163,10 @@ theorem le_mul_colon (h𝔞 : 𝔞.IsCoherent) (h𝔩 : 𝔩.IsInvertible) (hle 
   rw [hy]
   ring
 
+/-- **The colon ideal of a coherent ideal by an invertible one is coherent.**
+This is the substance of `eq:def-cM`: the quotient `𝔠_M` is not merely an
+ideal sheaf, it is coherent, which is what the next application of relative
+principalization requires of it. -/
 theorem isCoherent_colon (h𝔞 : 𝔞.IsCoherent) (h𝔩 : 𝔩.IsInvertible) (hle : 𝔞.Le 𝔩) :
     (colon 𝔞 𝔩).IsCoherent := by
   intro x
@@ -240,6 +244,26 @@ theorem isCoherent_colon (h𝔞 : 𝔞.IsCoherent) (h𝔩 : 𝔩.IsInvertible) (
     show b z * (h z * f z) = g z * f z
     rw [hz]
     ring
+
+/-! ## `eq:def-cM` -/
+
+/-- **`eq:def-cM`.**  A coherent ideal contained in an invertible ideal is the
+invertible ideal times a coherent ideal.  In Copy-4's notation, with
+`𝔩 = 𝒪(-(M/m) G̃_m)` and `𝔞 = 𝔅_M 𝒪_{Y_fix}`, this is
+`𝔅_M 𝒪_{Y_fix} = 𝒪_{Y_fix}(-(M/m) G̃_m) · 𝔠_M` with `𝔠_M` coherent. -/
+theorem exists_isCoherent_eq_mul {𝔞 𝔩 : GermIdeal n M}
+    (h𝔞 : 𝔞.IsCoherent) (h𝔩 : 𝔩.IsInvertible) (hle : 𝔞.Le 𝔩) :
+    ∃ 𝔠 : GermIdeal n M, 𝔠.IsCoherent ∧ 𝔞 = 𝔩.mul 𝔠 := by
+  refine ⟨colon 𝔞 𝔩, isCoherent_colon h𝔞 h𝔩 hle, ?_⟩
+  refine GermIdeal.ext (funext fun x => funext fun g => propext ?_)
+  exact ⟨fun hg => le_mul_colon h𝔞 h𝔩 hle x g hg, fun hg => mul_colon_le h𝔞 x g hg⟩
+
+/-- The same statement for the ideal of an effective divisor, which is the form
+Step 1 uses: `𝔞 ⊆ 𝒪(-D)` gives `𝔞 = 𝒪(-D) · 𝔠` with `𝔠` coherent. -/
+theorem exists_isCoherent_eq_mul_divisor {𝔞 : GermIdeal n M} (D : EffectiveDivisor n M)
+    (h𝔞 : 𝔞.IsCoherent) (hle : 𝔞.Le D.ideal) :
+    ∃ 𝔠 : GermIdeal n M, 𝔠.IsCoherent ∧ 𝔞 = D.ideal.mul 𝔠 :=
+  exists_isCoherent_eq_mul h𝔞 D.isInvertible hle
 
 end
 

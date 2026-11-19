@@ -1,47 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CompanionReduction
 import Hironaka.MarkedIdeal.MarkedIdealEquivalence
 import Hironaka.MarkedIdeal.DerivativeIdealAlongTransform
 import Hironaka.Invariant.DivisorExponentAlong
 import Hironaka.MarkedIdeal.TransformOffCentre
 import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupDerivativeIdeal
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Analytic.GermOrderProduct
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.OrderMultiplicativity
-import Hironaka.Invariant.OrderTaylor
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Reduction to maximal order inside a submanifold: the companion ideal along `N`
 
-For `N = M` this is `CompanionReduction`.
+Blueprint `hir:companion-reduction-along`, `hir:companion-maximal-order-along` (`blueprint/src/hironaka.tex`, Hironaka
+phase H4, Step 2a of the resolution algorithm for `N ≠ M`).  Sources: Włodarczyk 2005, Proposition `pr:resol`, Step 2a;
+Bierstone--Milman 2008 §5, Step II.B and Remark 5.2.  For `N = M` this is `CompanionReduction`.
 
 Let `N` be a closed submanifold, `𝔟, 𝔠` coherent, `E` a common sequence of members, `o ≥ 1`, and suppose
 `ord_x(𝔟|_N) ≤ o` at every point of `cosupp((𝔟𝔠)|_N, d)`.  The **companion ideal along `N`** is
@@ -61,11 +33,15 @@ Let `N` be a closed submanifold, `𝔟, 𝔠` coherent, `E` a common sequence of
   `cosupp_subset_of_le`; along towers `bound_along_along` (the bound persists along common multiple test blow-ups),
   `reduction_add_along` (case `o < d`, through `MarkedIdealOperationsAlong`: the transforms of sums and products are
   restricted-equivalent to the sums and products of the transforms) and `reduction_le_along` (case `o ≥ d`);
-* `companionAlong` (+ `companionAlong_N`, `companionAlong_E`, `mul_eq_of_le_along`), `companion_reduction_along`:
-  along every multiple test blow-up `T` of the companion ideal, `T` is one of `(N, E, 𝔟𝔠, d)` and of `(N, E, 𝔟, o)`,
-  the bound `ord(𝔟_T|_{N_T}) ≤ o` persists on `cosupp((𝔟𝔠)_T, d)`, and the companion's cosupport is `cosupp(𝔟_T, o)
-  ∩ cosupp((𝔟𝔠)_T, d)`; after a resolution of the companion, `ord(𝔟_T|_{N_T}) < o` on `cosupp((𝔟𝔠)_T, d)`;
+* `companionAlong` (+ `companionAlong_N`, `companionAlong_E`, `mul_eq_of_le_along`), `companion_reduction_along`,
+  `companion_resolution_along`: along every multiple test blow-up `T`
+  of the companion ideal, `T` is one of `(N, E, 𝔟𝔠, d)` and of `(N, E, 𝔟, o)`, the bound `ord(𝔟_T|_{N_T}) ≤ o` persists on
+  `cosupp((𝔟𝔠)_T, d)`, and the companion's cosupport is `cosupp(𝔟_T, o) ∩ cosupp((𝔟𝔠)_T, d)`; after a resolution of the
+  companion, `ord(𝔟_T|_{N_T}) < o` on `cosupp((𝔟𝔠)_T, d)`;
 * `companion_isMaximalOrderAlong`: the companion ideal is of maximal order along `N`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -76,7 +52,15 @@ universe u
 namespace Hironaka.CompanionReductionAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers Hironaka.DivisorExponentAlong Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealOperationsTransform Hironaka.MarkedIdealOperationsTransform.MarkedIdeal Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.RestrictedIdealExtension Hironaka.RestrictedIdealQuotient Hironaka.BlowupStrictSubmanifold Hironaka.OrderTaylor Hironaka.DerivativeIdealAlong
+open Hironaka.GermIdealOrder Hironaka.IdealWeightPowers
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealOperationsTransform
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.RestrictedIdealExtension Hironaka.RestrictedIdealQuotient
+  Hironaka.BlowupStrictSubmanifold Hironaka.OrderTaylor
+  Hironaka.DerivativeIdealAlong
 
 noncomputable section
 
@@ -393,6 +377,22 @@ theorem companion_reduction_along {N : Set X} (hN : IsClosedSubmanifold n N) (E 
     obtain ⟨-, -, -, -, hb⟩ :=
       bound_along_along (⟨N, E, 𝔟, o⟩ : MarkedIdeal n X) ⟨N, E, 𝔟.mul 𝔠, d⟩ hN hN h𝔟 hcoh hbound T hT hT𝔪
     exact ⟨hT𝔪, hT, hb, (inter_eq_left.mpr hsub).symm⟩
+
+/-- **After a resolution of the companion ideal along `N` the order of `𝔟` has dropped**
+(`hir:companion-reduction-along`, last clause): `T` is a multiple test blow-up of `(N, E, 𝔟𝔠, d)` and
+`ord_z(𝔟_T|_{N_T}) < o` at every point of `cosupp((𝔟𝔠)_T, d)`. -/
+theorem companion_resolution_along {N : Set X} (hN : IsClosedSubmanifold n N) (E : List (Set X))
+    {𝔟 𝔠 : GermIdeal n X} (h𝔟 : 𝔟.IsCoherent) (h𝔠 : 𝔠.IsCoherent) {o d : ℕ} (ho : 1 ≤ o)
+    (hbound : ∀ x ∈ cosupport n N (𝔟.mul 𝔠) d, x ∉ cosupport n N 𝔟 (o + 1))
+    {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoResolution (companionAlong N E 𝔟 𝔠 o d) T) :
+    IsGeoTestTower (⟨N, E, 𝔟.mul 𝔠, d⟩ : MarkedIdeal n X) T ∧
+      ∀ z ∈ (geoTransformAlong (⟨N, E, 𝔟.mul 𝔠, d⟩ : MarkedIdeal n X) T).cosupp,
+        z ∉ (geoTransformAlong (⟨N, E, 𝔟, o⟩ : MarkedIdeal n X) T).cosupp := by
+  obtain ⟨h1, -, -, h4⟩ := companion_reduction_along hN E h𝔟 h𝔠 ho hbound T hT.1
+  refine ⟨h1, fun z hz hz' => ?_⟩
+  have h2 := hT.2
+  rw [h4] at h2
+  exact (eq_empty_iff_forall_notMem.mp h2) z ⟨hz', hz⟩
 
 /-! ### The companion ideal along `N` is of maximal order along `N` -/
 

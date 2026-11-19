@@ -1,49 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.API
 import Hironaka.Resolution.HironakaEmbeddedDimensionParts
 import Hironaka.Resolution.HironakaBoundaryRelativelyCompact
 import Hironaka.Resolution.CanonicalResolution
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.SingularLocus
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.Resolution.FactorizationDomain
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedBoundary
-import Hironaka.Resolution.HironakaEmbeddedReducible
-import Hironaka.Resolution.HironakaPrincipalizationBoundary
-import Hironaka.Resolution.HironakaRelativelyCompact
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The public statements of the Hironaka library, completed
 
-`Hironaka.API` (`hir:public-statements`) collects the first eleven public statements; this module adds the remaining
-ones, in the same form: over an unbundled complex manifold, without the internal machinery (no marked ideal, tower,
-invariant or domain condition in any statement, except the marked-ideal form of the canonical resolution itself),
-and with the non-vanishing hypothesis of principalization written out (`∀ x, ∃ g, 𝔞.mem x g ∧ ∃ᶠ y in 𝓝 x, g y ≠
-0`). Together, `Hironaka.API` and `Hironaka.API2` are the public surface of the library.
+Blueprint `hir:public-statements-complete` (`blueprint/src/hironaka.tex`; TN.5, the review 57572af3 of the Hironaka strengthenings,
+items S4, S6, S7 and S8; the orchestrator's extraction plan, §6).  `HironakaAPI` (`hir:public-statements`) collects the first
+eleven public statements; this module adds the remaining ones, in the same form: over an unbundled complex manifold, without the
+internal machinery (no marked ideal, tower, invariant or domain condition in any statement, except the marked-ideal form of the
+canonical resolution itself), and with the non-vanishing hypothesis of principalization written out
+(`∀ x, ∃ g, 𝔞.mem x g ∧ ∃ᶠ y in 𝓝 x, g y ≠ 0`).  Together, `HironakaAPI` and `HironakaAPI2` are the public surface of the
+library; `.archon-horizon/scratch/hironaka-public-surface.md` lists every public theorem.
 
 ## Principalization (Hironaka; Bierstone--Milman 1997, Theorem 1.10; Kollár, "Principalization, III")
 
@@ -73,6 +45,10 @@ These are restatements of theorems of `HironakaPrincipalizationBoundary`, `Hiron
 `HironakaRelativelyCompact`, `HironakaEmbeddedReducible`,
 `HironakaEmbeddedBoundary`, `HironakaEmbeddedDimensionParts`, `HironakaPrincipalization`, `FactorizationDomain` and
 `CanonicalResolution`; their proofs are at most a few lines.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaAPI`, `HironakaEmbeddedDimensionParts`,
+`HironakaBoundaryRelativelyCompact` and `CanonicalResolution` only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -82,8 +58,9 @@ universe u
 
 namespace Hironaka
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.DivisorExponentAlong Hironaka.HironakaAdmissibleSequence Hironaka.HironakaEmbeddedDimensionParts
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.NormalCrossings Hironaka.DivisorExponentAlong
+  Hironaka.HironakaAdmissibleSequence Hironaka.HironakaEmbeddedDimensionParts
 
 noncomputable section
 
@@ -378,7 +355,9 @@ end EmbeddedResolution
 
 section Canonical
 
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen
 open Hironaka.MarkedIdealBiholomorphism.MarkedIdeal (pullback)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (IsCanonicalSegment)

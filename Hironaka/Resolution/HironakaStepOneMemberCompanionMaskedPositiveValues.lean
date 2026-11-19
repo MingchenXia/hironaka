@@ -33,7 +33,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   BlowupTowerIsomorphism BlowupTowerSplitIso BlowupTowerIsoTail CanonicalCentres
   HironakaGeneralTwoCompanionCurveLoci HironakaDimensionTwoStepOneAnalyticSuperlevels
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open Hironaka
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 

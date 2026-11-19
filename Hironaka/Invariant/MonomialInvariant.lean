@@ -1,20 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Combinatorics.Colex
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Order.WithBot
 import Hironaka.Invariant.ResolutionInvariantOrder
+
 set_option autoImplicit false
 
 /-!
 # The invariant of a monomial marked ideal: combinatorics of Step 2b
 
-Sources: Włodarczyk 2005 (Step 2b of the proof of the resolution theorem: blowing up the intersection of a minimal
-set of divisor members whose exponents add up to the mark), Bierstone--Milman 2003 and Bierstone--Milman 2008 (the
-invariant of a monomial marked ideal, whose maximum locus is the next centre).
+Blueprint `hir:monomial-invariant` (`blueprint/src/hironaka.tex`, Hironaka phase H4; the combinatorial core of
+`hir:monomial-case`).  Sources: Włodarczyk 2005 (Step 2b of the proof of the resolution theorem: blowing up the
+intersection of a minimal set of divisor members whose exponents add up to the mark), Bierstone--Milman 2003 and
+Bierstone--Milman 2008 (the invariant of a monomial marked ideal, whose maximum locus is the next centre).
 
 At a point `x` of the cosupport of a monomial marked ideal `𝔞|_N = ∏_{H ∋ x} 𝓘_H^{a_H}` with mark `d`, the members of
 the divisor through `x` are recorded by a finite set `S ⊆ ℕ` of their indices in the divisor sequence, and the exponents by
@@ -35,8 +32,13 @@ sums, then colex-large subsets; the maximizing subset `I` is unique, and its mem
 * `inv_lt_of_blowup`: **the drop** -- after blowing up the intersection of the members of the top subset `I`, at a point
   over the centre in the chart of `j₀ ∈ I` the members are among `S \ {j₀}` and the new exceptional index `m`, with the old
   exponents and `a'_m = ∑_I a - d`; the invariant there is strictly smaller;
-* `wellFoundedLT_val`: the values are well-founded (colex on `Finset ℕ` is order-isomorphic to `ℕ`), so iterating
-  the blowup of the maximum locus terminates.
+* `wellFoundedLT_val`: the values are well-founded (colex on `Finset ℕ` is order-isomorphic to `ℕ`), so iterating the blowup
+  of the maximum locus terminates (`ResolutionInvariantOrder.exists_not_of_lt_succ`).
+
+Import discipline (Hironaka phase): mathlib and the mathlib-only `Hironaka.ResolutionInvariantOrder`; this module does not
+import `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Finset
@@ -211,12 +213,20 @@ theorem inv_lt_of_blowup (hn : #S ≤ n) (hI : I ∈ feasible S a d)
   · rw [(inv_eq_bot_iff (n := n)).mpr (not_le.mp h')]
     exact WithBot.bot_lt_coe _
 
-/-- **The values are well-founded**: colex on `Finset ℕ` is order-isomorphic to `ℕ` (binary expansion), and
-lexicographic products and `WithBot` of well-founded orders are well-founded. Hence the maxima of the invariant,
-which strictly decrease under the blowup of the maximum locus, reach `⊥` (empty cosupport) after finitely many
-steps. -/
+/-- **The values are well-founded**: colex on `Finset ℕ` is order-isomorphic to `ℕ` (binary expansion), and lexicographic
+products and `WithBot` of well-founded orders are well-founded.  Hence the maxima of the invariant, which strictly
+decrease under the blowup of the maximum locus, reach `⊥` (empty cosupport) after finitely many steps
+(`ResolutionInvariantOrder.exists_not_of_lt_succ`). -/
 theorem wellFoundedLT_val : WellFoundedLT (WithBot Val) := by
   have : WellFoundedLT (Colex (Finset ℕ)) := (orderIsoColex).symm.strictMono.wellFoundedLT
   infer_instance
+
+/-- **Termination of the monomial phase**: if at each stage `i` the maximum `m i` of the invariant strictly decreases as
+long as the cosupport is nonempty (`m i ≠ ⊥`), then the cosupport is empty at some stage. -/
+theorem exists_eq_bot_of_lt_succ (m : ℕ → WithBot Val) (hdec : ∀ i, m i ≠ ⊥ → m (i + 1) ≠ ⊥ → m (i + 1) < m i) :
+    ∃ i, m i = ⊥ := by
+  have := wellFoundedLT_val
+  obtain ⟨i, hi⟩ := ResolutionInvariantOrder.exists_not_of_lt_succ (fun i => m i ≠ ⊥) m hdec
+  exact ⟨i, not_not.mp hi⟩
 
 end Hironaka.MonomialInvariant

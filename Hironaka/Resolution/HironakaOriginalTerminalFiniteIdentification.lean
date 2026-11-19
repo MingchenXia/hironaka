@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalTerminalLocalBiholomorphism
 /-! Actual finite canonical terminal histories identify the original global terminal
 manifold by genuine original overlap comparisons. Complete mathematics preceded

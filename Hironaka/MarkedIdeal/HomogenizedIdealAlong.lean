@@ -1,61 +1,37 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
 import Hironaka.MarkedIdeal.TangentDirectionAlong
 import Hironaka.MarkedIdeal.HomogenizedEtale
 import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.MarkedIdeal.CoefficientIdeal
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.DerivativeIdealTower
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.MarkedIdeal.HomogenizedEquivalence
-import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.OrderMultiplicativity
-import Hironaka.Invariant.OrderTaylor
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Homogenized and coefficient ideals along a submanifold (one stage)
 
-Sources: Włodarczyk 2005, §2.10--2.11 (homogenized ideal `𝓗(𝓘, μ)`, coefficient ideal `𝓒(𝓘, μ)`), Włodarczyk 2009
-(GGT 2008) §5.5--5.6, applied on the submanifold `N` of a marked ideal `(M, N, E, 𝔞, d)` with the derivative ideals
-`𝓓_N` along `N` (`DerivativeIdealAlong.derivIdealAlong`) in place of `𝓓`; Bierstone--Milman 2008 §3 (the derivative
-ideals of `𝔞|_N` are taken on `N`).
+Hironaka phase H3 (TN23-ENVELOPES): step (4b) of item (4) of the calculus along a submanifold (`hir:along-calculus` in
+`blueprint/src/hironaka.tex`, claimed on I-0981 C-0040 / C-0042); blueprint `mc:homogenized-along`,
+`mc:homogenized-along-basic`, `mc:maximal-order-along`, `mc:order-power-strict`, `mc:homogenized-along-maximal-order`,
+`mc:homogenized-along-etale` (`blueprint/src/maximal-contact.tex`).  Sources: Włodarczyk 2005, §2.10--2.11 (homogenized ideal `𝓗(𝓘, μ)`, coefficient
+ideal `𝓒(𝓘, μ)`), Włodarczyk 2009 (GGT 2008) §5.5--5.6, applied on the submanifold `N` of a marked ideal `(M, N, E, 𝔞, d)`
+with the derivative ideals `𝓓_N` along `N` (`DerivativeIdealAlong.derivIdealAlong`) in place of `𝓓`; Bierstone--Milman
+2008 §3 (the derivative ideals of `𝔞|_N` are taken on `N`).
 
 For a marked ideal `(𝔞|_N, μ)` put `T_N(𝔞) = 𝓓_N^{μ-1}(𝔞)` (`tangentIdealAlong`) and
 
-* `homogenizedIdealAlong N 𝔞 μ = 𝓗_N(𝔞) = ∑_{i<μ} 𝓓_N^i(𝔞) · T_N(𝔞)^i` (`homSum`);
+* `homogenizedIdealAlong N 𝔞 μ = 𝓗_N(𝔞) = ∑_{i<μ} 𝓓_N^i(𝔞) · T_N(𝔞)^i` (TN23's `homSum`);
 * `derivMarkedAlong 𝔪 j = (M, N, E, 𝓓_N^j 𝔞, d - j)` and `coeffMarkedAlong 𝔪 = 𝓒_N(𝔪) = ∑_{i<d} 𝓓_N^i(𝔪)`, Włodarczyk's
   sum of marked ideals (`CoefficientIdeal.msum`); `homMarkedAlong 𝔪 = (M, N, E, 𝓗_N(𝔞), d)`.
 
-For `N = M` these are the constructions of `HomogenizedIdeal` / `CoefficientIdeal` / `HomogenizedEquivalence`.
+For `N = M` these are the constructions of `HomogenizedIdeal` / `CoefficientIdeal` / `HomogenizedEquivalence`
+(`homogenizedIdealAlong_univ`, `coeffMarkedAlong_eq_coeffMarked`, `homMarkedAlong_eq_homMarked`).
 
 * Coherence (`𝔞` coherent, `N` a closed submanifold): `isCoherent_homogenizedIdealAlong`, `isCoherent_coeffMarkedAlong`.
 * Cosupports: `𝔞 ⊆ 𝓗_N(𝔞)` and `cosupp(𝓗_N(𝔞)|_N, μ) = cosupp(𝔞|_N, μ)` for every set `N` (Giraud's inclusion along `N`);
   `cosupp 𝓒_N(𝔪) = cosupp 𝔪` when `N` is regular at its points (orders of powers along `N`).
-* Maximal order along `N`: `IsMaximalOrderAlong N 𝔞 μ` (`ord_x(𝔞|_N) ≤ μ` at every point; and on a submanifold it
-  says `𝓓_N^μ(𝔞)` vanishes at no point of `N`). It passes to `𝓗_N` (mark `μ`) and to `𝓒_N` (mark `μ_𝓒`), globally
-  and pointwise (`ord_x = μ` at a point of the cosupport).
+* Maximal order along `N`: `IsMaximalOrderAlong N 𝔞 μ` (`ord_x(𝔞|_N) ≤ μ` at every point; for `N = univ` and coherent `𝔞`
+  it is `MaximalContact.IsMaximalOrder`, and on a submanifold it says `𝓓_N^μ(𝔞)` vanishes at no point of `N`).  It passes
+  to `𝓗_N` (mark `μ`) and to `𝓒_N` (mark `μ_𝓒`), globally and pointwise (`ord_x = μ` at a point of the cosupport).
 * Étale invariance (Włodarczyk's `le:etale2` / `le:etale3` along `N`): for a holomorphic local biholomorphism `φ`,
   `φ^*𝓗_N(𝔞) = 𝓗_{φ⁻¹N}(φ^*𝔞)`, `φ^*𝓒_N(𝔪) = 𝓒_{φ⁻¹N}(φ^*𝔪)` and `φ^*𝓗_N(𝔪) = 𝓗_{φ⁻¹N}(φ^*𝔪)`; instances for
   biholomorphisms and for inclusions of open sets.  From `DerivativeIdealAlongEtale.pullback_iterDerivIdealAlong` and
@@ -63,6 +39,9 @@ For `N = M` these are the constructions of `HomogenizedIdeal` / `CoefficientIdea
 
 Not here: the glueing lemma along `N` (step (4c)) and the statements along multiple test blow-ups (step (4d), after the
 transforms along `N`, item (2) of `hir:along-calculus`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -73,7 +52,15 @@ universe u
 namespace Hironaka.HomogenizedIdealAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong Hironaka.DerivativeIdealAlongCoherent Hironaka.DerivativeIdealAlongEtale Hironaka.TangentDirectionAlong Hironaka.IdealWeightPowers Hironaka.MarkedIdeals Hironaka.DerivativeIdealTower Hironaka.CoefficientIdeal Hironaka.HomogenizedGlueing Hironaka.HomogenizedEquivalence Hironaka.HomogenizedEtale Hironaka.MarkedIdealBiholomorphism Hironaka.GermIdealPullbackCalculus Hironaka.HadamardBridge
+open Hironaka.GermIdealOrder Hironaka.DerivativeIdeal
+  Hironaka.DerivativeIdealAlong Hironaka.GiraudAlong
+  Hironaka.DerivativeIdealAlongCoherent Hironaka.DerivativeIdealAlongEtale
+  Hironaka.TangentDirectionAlong Hironaka.IdealWeightPowers
+  Hironaka.MarkedIdeals Hironaka.DerivativeIdealTower
+  Hironaka.CoefficientIdeal Hironaka.HomogenizedGlueing
+  Hironaka.HomogenizedEquivalence Hironaka.HomogenizedEtale
+  Hironaka.MarkedIdealBiholomorphism Hironaka.GermIdealPullbackCalculus
+  Hironaka.HadamardBridge
 
 noncomputable section
 
@@ -128,6 +115,47 @@ end Defs
 
 variable {n : ℕ} {M : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
   {N : Set M} {𝔞 : GermIdeal n M}
+
+/-! ### The case `N = M` -/
+
+section Univ
+
+theorem homogenizedIdealAlong_univ (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) (μ : ℕ) :
+    homogenizedIdealAlong univ 𝔞 μ = HomogenizedIdeal.homogenizedIdeal 𝔞 μ := by
+  rw [homogenizedIdeal_eq_homSum]
+  exact homSum_congr (fun i _ => iterDerivIdealAlong_univ h𝔞 i) (iterDerivIdealAlong_univ h𝔞 (μ - 1))
+
+theorem derivMarkedAlong_eq_derivMarked {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) (j : ℕ) : derivMarkedAlong 𝔪 j = derivMarked 𝔪 j :=
+  MarkedIdealOperationsTransform.MarkedIdeal.ext_of rfl rfl
+    (show iterDerivIdealAlong 𝔪.N 𝔪.ideal j = iterDerivIdeal 𝔪.ideal j by rw [hN, iterDerivIdealAlong_univ h𝔞]) rfl
+
+/-- For `N = M` the coefficient ideal along `N` is the coefficient ideal. -/
+theorem coeffMarkedAlong_eq_coeffMarked {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) : coeffMarkedAlong 𝔪 = coeffMarked 𝔪 := by
+  unfold coeffMarkedAlong coeffMarked
+  congr 1
+  funext i
+  exact derivMarkedAlong_eq_derivMarked hN h𝔞 i
+
+/-- For `N = M` the homogenized marked ideal along `N` is the homogenized marked ideal. -/
+theorem homMarkedAlong_eq_homMarked {𝔪 : MarkedIdeal n M} (hN : 𝔪.N = univ)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) : homMarkedAlong 𝔪 = homMarked 𝔪 :=
+  MarkedIdealOperationsTransform.MarkedIdeal.ext_of rfl rfl
+    (show homogenizedIdealAlong 𝔪.N 𝔪.ideal 𝔪.d = HomogenizedIdeal.homogenizedIdeal 𝔪.ideal 𝔪.d by
+      rw [hN, homogenizedIdealAlong_univ h𝔞]) rfl
+
+/-- **For `N = M` maximal order along `N` is maximal order** (`𝓓^μ 𝔞 = 𝒪`, coherent `𝔞`). -/
+theorem isMaximalOrderAlong_univ_iff (h𝔞 : 𝔞.IsCoherent) {μ : ℕ} :
+    IsMaximalOrderAlong univ 𝔞 μ ↔ MaximalContact.IsMaximalOrder 𝔞 μ := by
+  refine ⟨CompanionReduction.isMaximalOrder_of_forall_notMem h𝔞, fun h x hx => ?_⟩
+  have hx' : x ∈ cosupport n univ (iterDerivIdeal 𝔞 μ) 1 := by
+    refine MaximalContact.cosupport_add_subset_cosupport_iterDerivIdeal 𝔞 1 μ ?_
+    rwa [Nat.add_comm]
+  have h1 := (vanishesToOrderOn_one_iff hx'.1 (holomorphicAt_const 1)).mp (hx'.2 _ (h x))
+  exact one_ne_zero h1
+
+end Univ
 
 /-! ### Coherence -/
 
@@ -262,6 +290,11 @@ theorem isMaximalOrderAlong_iff_inter_zeroLocus (h𝔞 : ∀ x g, 𝔞.mem x g �
   rw [← cosupport_succ_eq_inter_zeroLocus_iterDerivIdealAlong h𝔞 hN μ, Set.eq_empty_iff_forall_notMem]
   rfl
 
+/-- **`𝓗_N` keeps the maximal order at a point**: `ord_x(𝔞|_N) ≤ μ` implies `ord_x(𝓗_N(𝔞)|_N) ≤ μ` (`μ ≥ 1`). -/
+theorem not_orderGE_homogenizedIdealAlong (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ} (hμ : 1 ≤ μ)
+    {x : M} (hmax : ¬ OrderGE n N 𝔞 x (μ + 1)) : ¬ OrderGE n N (homogenizedIdealAlong N 𝔞 μ) x (μ + 1) :=
+  fun h => hmax fun g hg => h g (le_homogenizedIdealAlong h𝔞 hμ x g hg)
+
 /-- **`𝓗_N(𝔞)` is of maximal order along `N` when `𝔞` is** (`μ ≥ 1`). -/
 theorem IsMaximalOrderAlong.homogenizedIdealAlong (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {μ : ℕ}
     (hμ : 1 ≤ μ) (h : IsMaximalOrderAlong N 𝔞 μ) : IsMaximalOrderAlong N (homogenizedIdealAlong N 𝔞 μ) μ :=
@@ -313,6 +346,17 @@ theorem IsMaximalOrderAlong.coeffMarkedAlong {𝔪 : MarkedIdeal n M}
     (hd : 1 ≤ 𝔪.d) (h : IsMaximalOrderAlong 𝔪.N 𝔪.ideal 𝔪.d) :
     IsMaximalOrderAlong 𝔪.N (coeffMarkedAlong 𝔪).ideal (coeffMarkedAlong 𝔪).d :=
   fun x hx => not_orderGE_coeffMarkedAlong hN h𝔞 hd hx.1 (fun hge => h x ⟨hx.1, hge⟩) hx.2
+
+/-- **Pointwise maximal order passes to `𝓗_N` and `𝓒_N`**: at `x ∈ cosupp 𝔪` with `ord_x(𝔞|_N) ≤ d` (so `= d`), `x` lies
+in the cosupports of `𝓗_N(𝔪)` and `𝓒_N(𝔪)` and the orders there are their marks (`N` regular at its points, `d ≥ 1`). -/
+theorem maximalOrderAt_hom_coeff {𝔪 : MarkedIdeal n M} (hN : ∀ x ∈ 𝔪.N, ∃ k, RegularAtDim (n := n) 𝔪.N x k)
+    (h𝔞 : ∀ x g, 𝔪.ideal.mem x g → HolomorphicAt n g x) (hd : 1 ≤ 𝔪.d) {x : M} (hx : x ∈ 𝔪.cosupp)
+    (hmax : ¬ OrderGE n 𝔪.N 𝔪.ideal x (𝔪.d + 1)) :
+    (x ∈ (homMarkedAlong 𝔪).cosupp ∧ ¬ OrderGE n 𝔪.N (homMarkedAlong 𝔪).ideal x ((homMarkedAlong 𝔪).d + 1)) ∧
+      (x ∈ (coeffMarkedAlong 𝔪).cosupp ∧
+        ¬ OrderGE n 𝔪.N (coeffMarkedAlong 𝔪).ideal x ((coeffMarkedAlong 𝔪).d + 1)) :=
+  ⟨⟨(cosupp_homMarkedAlong h𝔞 hd).symm ▸ hx, not_orderGE_homogenizedIdealAlong h𝔞 hd hmax⟩,
+    ⟨(cosupp_coeffMarkedAlong hN h𝔞 hd).symm ▸ hx, not_orderGE_coeffMarkedAlong hN h𝔞 hd hx.1 hmax⟩⟩
 
 end MaximalOrder
 
@@ -375,6 +419,15 @@ theorem isLocalInverseAt_of_contMDiff (hφ : ContMDiff 𝓘(ℂ, ComplexModel n)
   isLocalInverseAt_of_inverse (fun p => (hφ p).mdifferentiableAt (by simp))
     (fun x => (hψ x).mdifferentiableAt (by simp)) hφψ hψφ y
 
+/-- **`𝓗_N` commutes with biholomorphisms.** -/
+theorem pullback_homogenizedIdealAlong_of_inverse
+    (hφ : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ φ)
+    (hψ : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ ψ) (hφψ : ∀ x, φ (ψ x) = x)
+    (hψφ : ∀ p, ψ (φ p) = p) (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) {μ : ℕ} (hμ : 1 ≤ μ) :
+    GermIdeal.pullback (m := n) φ (homogenizedIdealAlong N 𝔞 μ) =
+      homogenizedIdealAlong (φ ⁻¹' N) (GermIdeal.pullback (m := n) φ 𝔞) μ :=
+  pullback_homogenizedIdealAlong hφ (fun y => ⟨ψ, isLocalInverseAt_of_contMDiff hφ hψ hφψ hψφ y⟩) h𝔞 hN hμ
+
 /-- **`𝓒_N` commutes with biholomorphisms.** -/
 theorem pullback_coeffMarkedAlong_of_inverse
     (hφ : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ φ)
@@ -400,6 +453,12 @@ end Pullback
 section OpenRestriction
 
 variable (U : TopologicalSpace.Opens M)
+
+/-- **`𝓗_N` commutes with restriction to an open set**: `ι^*𝓗_N(𝔞) = 𝓗_{ι⁻¹N}(ι^*𝔞)`. -/
+theorem pullback_val_homogenizedIdealAlong (h𝔞 : 𝔞.IsCoherent) (hN : IsClosedSubmanifold n N) {μ : ℕ} (hμ : 1 ≤ μ) :
+    GermIdeal.pullback (m := n) (Subtype.val : U → M) (homogenizedIdealAlong N 𝔞 μ) =
+      homogenizedIdealAlong ((Subtype.val : U → M) ⁻¹' N) (GermIdeal.pullback (m := n) (Subtype.val : U → M) 𝔞) μ :=
+  pullback_homogenizedIdealAlong contMDiff_subtype_val (fun y => ⟨openInv U y, isLocalInverseAt_val U y⟩) h𝔞 hN hμ
 
 /-- **`𝓒_N` commutes with restriction to an open set.** -/
 theorem pullback_val_coeffMarkedAlong (𝔪 : MarkedIdeal n M) (h𝔞 : 𝔪.ideal.IsCoherent)

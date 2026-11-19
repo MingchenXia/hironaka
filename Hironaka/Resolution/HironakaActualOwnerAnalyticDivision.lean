@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualOriginalReducedVertexBasis
 /-!
 # Exact canonical analytic owner quotients and genuine initial syzygy lifts
@@ -158,7 +153,6 @@ theorem exists_original_filtered_reduced_vertex_division
   rw [hw,hw]
   omega
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- An actual finite-order relation error is corrected to a genuine SAME-family analytic syzygy with exact shifted orders. -/
 theorem exists_original_canonical_syzygy_of_relation_error
     (J : Ideal (HolGerm (ComplexModel (0+n))))
@@ -206,7 +200,6 @@ private theorem coefficient_product_eq_initial_of_homogeneous_left
     · rw [if_pos hve]
     · rw [if_neg hve,hF v (by omega),mul_zero]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- A TRUE homogeneous relation on the SAME original initial forms internally yields an actual analytic syzygy with precisely those leading components. -/
 theorem exists_original_initial_syzygy_lift
     (J : Ideal (HolGerm (ComplexModel (0+n))))

@@ -1,44 +1,23 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.InvDomainTowerAlong
 import Hironaka.Invariant.CompanionReductionAlong
 import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPart
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The companion ideal lies in the domain of the inductive invariant
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` (the companion ideal `𝓞(𝓘) =
-𝓝(𝓘) + (𝓜(𝓘), μ - o)`, formed from the transform at a later stage); Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`; claim I-0977 C-0125).  Blueprint
+`bcalc:companion-domain` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a
+of Proposition `pr:resol` (the companion ideal `𝓞(𝓘) = 𝓝(𝓘) + (𝓜(𝓘), μ - o)`, formed from the transform at a later
+stage); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
 
 At a point of the cosupport where the order `o` of the nonmonomial part `𝓝_N(𝔞)` is positive, the general step takes
-the invariant of the maximal-order step of the companion ideal `𝓞 = companionAlong N E 𝓝_N(𝔞) 𝓜_N(𝔞) o d`
-(`CompanionReductionAlong.companionAlong`), formed on an open set and at a later stage of the segment. That
-invariant is defined on the marked ideals of `ResolutionInvariantSpec.IsInvDomain k`; this module shows that `𝓞`
-lies there whenever the marked ideal does.
+the invariant of the maximal-order step of the companion ideal
+`𝓞 = companionAlong N E 𝓝_N(𝔞) 𝓜_N(𝔞) o d` (TN-CLASSICAL's `CompanionReductionAlong.companionAlong`), formed on an
+open set and at a later stage of the segment.  That invariant is defined on the marked ideals of
+`ResolutionInvariantSpec.IsInvDomain k`; this module shows that `𝓞` lies there whenever the marked ideal does.
 
 ## Main results
 
@@ -50,6 +29,9 @@ lies there whenever the marked ideal does.
 * `isInvDomain_companionAlong_geoTransformAlong`, `isInvDomain_companionAlong_pullback_val`,
   `isInvDomain_pullback_val_companionAlong`: the same for the companion ideal of the transform along a multiple test
   blow-up, of the restriction to an open set, and for the restriction of the companion ideal.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -60,7 +42,14 @@ universe u
 namespace Hironaka.InvDomainCompanion
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.DivisorExponentAlong Hironaka.ResolutionInvariantSpec Hironaka.NormalCrossings Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.MarkedIdealOperationsTransform Hironaka.MarkedIdealOperationsTransform.MarkedIdeal Hironaka.RestrictedIdealExtension Hironaka.GermIdealOrder Hironaka.MarkedIdealBiholomorphism Hironaka.InvDomainTowerAlong Hironaka.BlowupTowers Hironaka.IdealWeightPowers
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.DivisorExponentAlong Hironaka.ResolutionInvariantSpec
+  Hironaka.NormalCrossings Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.MarkedIdealOperationsTransform
+  Hironaka.MarkedIdealOperationsTransform.MarkedIdeal
+  Hironaka.RestrictedIdealExtension Hironaka.GermIdealOrder
+  Hironaka.MarkedIdealBiholomorphism Hironaka.InvDomainTowerAlong
+  Hironaka.BlowupTowers Hironaka.IdealWeightPowers
 
 noncomputable section
 

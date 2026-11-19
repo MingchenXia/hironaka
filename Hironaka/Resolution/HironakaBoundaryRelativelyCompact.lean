@@ -1,41 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedBoundary
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Resolution.HironakaPrincipalization
-import Hironaka.Resolution.HironakaPrincipalizationBoundary
-import Hironaka.Resolution.HironakaRelativelyCompact
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Resolution relative to a simple normal crossings boundary over relatively compact open sets (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.10 and §13 (the algorithm over
-relatively compact open subsets); Kollár 2007 (`kollar07-resolution`), "Principalization, III".
+Blueprint `hir:boundary-relatively-compact` (`blueprint/src/hironaka.tex`; TN.5, items S4 and S6 of the review 57572af3 of the
+Hironaka strengthenings combined).  Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.10 and §13 (the
+algorithm over relatively compact open subsets); Kollár 2007 (`kollar07-resolution`), "Principalization, III".
 
 `HironakaPrincipalizationBoundary` principalizes a coherent ideal relative to a simple normal crossings boundary `E₀` when the
 zero locus is compact.  Here: over every open set `X₀` contained in a compact set, with no compactness of `Z(𝔞)`, relative to the
@@ -48,6 +21,9 @@ exists_isCanonical_resolution_of_subset_isCompact`, from the local driver with c
 `(X₀, X₀, E₀|_{X₀}, 𝔞|_{X₀}, 1)`; then the argument of `HironakaPrincipalizationBoundary.exists_principalization_boundary` on
 `X₀`: with mark one and `N` everything, the pullback of the ideal is the ideal of the exceptional divisor of the tower, whose
 support is the union of the members created by the blowups.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedBoundary` only; it does not import, even
+transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -58,7 +34,10 @@ universe u
 namespace Hironaka.HironakaBoundaryRelativelyCompact
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms Hironaka.HironakaAdmissibleSequence Hironaka.MarkedIdealBiholomorphism
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms
+  Hironaka.HironakaAdmissibleSequence Hironaka.MarkedIdealBiholomorphism
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section

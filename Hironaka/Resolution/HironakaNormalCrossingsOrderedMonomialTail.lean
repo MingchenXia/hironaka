@@ -3,13 +3,6 @@ Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Invariant.MonomialGammaAlongUnivExact
-import Hironaka.Invariant.MonomialAmbientDataExact
 import Hironaka.Resolution.HironakaNormalCrossingsFiniteMarkedCompletion
 import Hironaka.Invariant.MonomialResolution
 import Hironaka.Invariant.MonomialStepAlong

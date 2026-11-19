@@ -1,57 +1,24 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ContactStageKept
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactEquivalenceStage
-import Hironaka.Invariant.ContactRepresentative
-import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
-import Hironaka.MarkedIdeal.DerivativeIdealAlongTransform
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1b re-based across an empty prefix of the base
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), the definition of extensions (isomorphisms inserted anywhere in a
-resolution) and the commutativity of the resolution procedure in Step 1 with étale morphisms.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0117 / I-0977 C-0164: the H3 input of property (4') ("empty
+prefixes") of `hir:centre-function` for the masked Step 1 value function (`hir:maximal-order-step`, `blueprint/src/hironaka.tex`;
+TN-CLASSICAL's `StepOneValueMasked`), finding M2 (b) of the orchestrator's review of 3 October 2026: the marked ideal of Step 1
+formed after a prefix `P` with only empty centres, `J̄(𝔍_P) = 𝓒(𝓗(𝔍_P))`, and the transform `J̄_P` of `J̄ = 𝓒(𝓗(𝔍))` agree
+only up to restricted equivalence; the tangent direction transfers across `P`.  Blueprint `mc:contact-empty-prefix`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), the definition of extensions (isomorphisms
+inserted anywhere in a resolution) and the commutativity of the resolution procedure in Step 1 with étale morphisms.
 
 ## Main results
 
 * `restrictEquiv_trans` (generic);
-* `restrictEquiv_homMarkedAlong_geoTransform_empty`, `restrictEquiv_barMarked_geoTransform_empty`: across one blowup
-  along `∅`, `𝓗_{N'}(𝔍') ≃ 𝓗_N(𝔍)'` and `𝓒(𝓗(𝔍')) ≃ 𝓒(𝓗(𝔍))'` (the twins of (K3) for `𝓒`);
+* `restrictEquiv_homMarkedAlong_geoTransform_empty`, `restrictEquiv_barMarked_geoTransform_empty`: across one blowup along `∅`,
+  `𝓗_{N'}(𝔍') ≃ 𝓗_N(𝔍)'` and `𝓒(𝓗(𝔍')) ≃ 𝓒(𝓗(𝔍))'` (the twins of TN23's (K3) for `𝓒`);
 * **`restrictEquiv_barMarked_geoTransformAlong_of_isEmptyTower`**: along a tower `P` with only empty centres,
   `𝓒(𝓗(𝔍_P)) ≃ 𝓒(𝓗(𝔍))_P`; `isGeoTestTower_barMarked_geoTransformAlong_iff`: `T₀'` is a multiple test blow-up of `𝓒(𝓗(𝔍_P))`
   iff `P T₀'` is one of `𝓒(𝓗(𝔍))`;
@@ -60,6 +27,9 @@ resolution) and the commutativity of the resolution procedure in Step 1 with ét
   `strictAlong_inter_zero_of_isEmptyTower` (the strict transform of `N ∩ V(u)` over `p_P⁻¹U`);
 * **`restrictEquiv_contactMarkedKept_emptyPrefix`**, **`contactMarkedKept_emptyPrefix`**: for `W` over `U`,
   `contactMarkedKept 𝔍_P (u ∘ p_P) T₀' W ≃ contactMarkedKept 𝔍 u (P T₀') W`, with the same domain, canonical segments and values.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -69,7 +39,11 @@ universe u v
 
 namespace Hironaka.ContactEmptyPrefix
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen ResolutionInvariantExt MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal ContactStageKept RestrictedIdealWeight
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  TangentDirectionAlong BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen
+  ResolutionInvariantExt MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal ContactStageKept
+  RestrictedIdealWeight
 open HomogenizedGlueingTower (strictAlong strictAlong_step N_geoTransformAlong)
 open ContactIndependenceAlong (one_le_coeffMarkedAlong_d)
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)

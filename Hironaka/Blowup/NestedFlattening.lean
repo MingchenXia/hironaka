@@ -1,23 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.RegularAtDimTransport
 import Hironaka.Blowup.RegularPatchPushforward
 import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Manifold.LocalHolomorphicInverse
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Nested flattening coordinates for a submanifold of a submanifold
 
-Source: standard (the rank theorem); used by Wlodarczyk 2005 (`wlodarczyk05-hironaka`) and Bierstone--Milman 2008
-(`bierstone-milman08-functoriality`) whenever a centre `C` of a blowup lies in a submanifold `N` (the strict
-transform of `N` is then the blowup of `N` along `C`).
+Source: standard (the rank theorem); used by Wlodarczyk 2005 (`wlodarczyk05-hironaka`) and
+Bierstone--Milman 2008 (`bierstone-milman08-functoriality`) whenever a centre `C` of a blowup lies
+in a submanifold `N` (the strict transform of `N` is then the blowup of `N` along `C`); blueprint
+`bcalc:nested-flattening` (chapter `blowup-calculus.tex`).
 
 If `C ⊆ N` are regular of dimensions `k_C ≤ k_N` at `x ∈ C`, there are holomorphic coordinates at
 `x` (the preferred chart followed by a local biholomorphism, centred at `0`) in which, near `x`,
@@ -37,6 +31,8 @@ coordinates `ℂ^{k_N - k_C}` onto a complement of the range of `D`, and put
 Its differential at `0` is invertible, and `F(v, 0, 0) = φ(v)`, `F(w) ∈ ℂ^{k_N} × 0 ⟺ t = 0`.  The
 local inverse of `F` (inverse function theorem) is the required coordinate system
 (`exists_nested_flattening_model`).
+
+Everything here is sorry-free, and outside the import closure of the two Hironaka statements.
 -/
 
 open Set Filter

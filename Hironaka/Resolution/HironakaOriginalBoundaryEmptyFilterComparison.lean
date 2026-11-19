@@ -1,9 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.NormalCrossingsWellFormedSublistOriginalExact
 import Hironaka.Resolution.HironakaOriginalInvariantEmptyInsertion
 import Hironaka.Resolution.HironakaOriginalCrossingValueTransport
 import Hironaka.Resolution.HironakaOriginalPureBoundaryIndependentSource
@@ -46,27 +40,35 @@ private theorem insert_at_append_length {P : Type*} (A B : List (Set P)) :
   | cons H A ih => simpa only [List.cons_append,List.length_cons,List.insertIdx_succ_cons] using
       (congrArg (List.cons H) ih)
 
-private theorem filter_value_of_empty_insertion {P α : Type*} (V : List (Set P) → α)
-    (hV : ∀ E j, j ≤ E.length → V (E.insertIdx j ∅) = V E) (E : List (Set P)) :
-    V (E.filter (fun H => decide H.Nonempty)) = V E := by
-  have aux : ∀ B A : List (Set P),
-      V (A++B.filter (fun H => decide H.Nonempty)) = V (A++B) := by
+/-- A relation preserved while deleting an empty slot also holds from a list
+to the list obtained by removing all its empty slots in order. -/
+theorem filter_rel_of_empty_insertion {P : Type*} (R : List (Set P) → List (Set P) → Prop)
+    (hRefl : ∀ A, R A A) (hTrans : ∀ {A B C}, R A B → R B C → R A C)
+    (hStep : ∀ E j, j ≤ E.length → R (E.insertIdx j ∅) E) (E : List (Set P)) :
+    R E (E.filter fun H => decide H.Nonempty) := by
+  have aux : ∀ B A : List (Set P), R (A ++ B) (A ++ B.filter fun H => decide H.Nonempty) := by
     intro B
     induction B with
-    | nil => intro A; rfl
+    | nil => intro A; exact hRefl _
     | cons H B ih =>
       intro A
       by_cases hH : H.Nonempty
       · simpa only [List.filter_cons,decide_eq_true hH,reduceIte,List.append_assoc,
-          List.singleton_append] using ih (A++[H])
-      · have he : H = ∅ := Set.not_nonempty_iff_eq_empty.mp hH
-        subst H
+          List.singleton_append] using ih (A ++ [H])
+      · obtain rfl : H = ∅ := Set.not_nonempty_iff_eq_empty.mp hH
         simp only [List.filter_cons,Set.not_nonempty_empty,decide_false,Bool.false_eq_true,reduceIte]
-        exact (ih A).trans (by
-          have h := hV (A++B) A.length (by simp)
-          rw [insert_at_append_length] at h
-          exact h.symm)
+        have h := hStep (A ++ B) A.length (by simp)
+        rw [insert_at_append_length] at h
+        exact hTrans h (ih A)
   simpa only [List.nil_append] using aux E []
+
+/-- A list functional unchanged by an empty-slot insertion has the same
+value after dropping every empty slot. -/
+theorem filter_value_of_empty_insertion {P α : Type*} (V : List (Set P) → α)
+    (hV : ∀ E j, j ≤ E.length → V (E.insertIdx j ∅) = V E) (E : List (Set P)) :
+    V (E.filter (fun H => decide H.Nonempty)) = V E :=
+  (filter_rel_of_empty_insertion (fun A B => V A = V B) (fun _ => rfl)
+    (fun {_ _ _} h h' => h.trans h') hV E).symm
 
 private theorem filter_nonempty_insert_empty {P : Type*} (E : List (Set P)) (j : ℕ) :
     (E.insertIdx j ∅).filter (fun H => decide H.Nonempty) = E.filter (fun H => decide H.Nonempty) := by
@@ -107,6 +109,30 @@ theorem filtered_boundary_nonemptyBoundary_along (M : MarkedIdeal n X) (T : Blow
   rw [show ({M with E := E.insertIdx j ∅} : MarkedIdeal n X) = insertEmpty j ({M with E := E}) from rfl,
     geoTransformAlong_insertEmpty _ hj]
   exact filter_nonempty_insert_empty _ j
+
+/-- Filtering empty original boundary slots preserves actual canonicality
+at every positive ambient dimension and recursive depth. -/
+theorem isCanonical_invFamily_nonemptyBoundary_iff (hn : 0 < n) (k : ℕ)
+    (M : MarkedIdeal n X) (T : BlowupTower X Y) :
+    IsCanonical (nonemptyBoundary M) ((invFamily hn k).inv (nonemptyBoundary M)) T ↔
+      IsCanonical M ((invFamily hn k).inv M) T := by
+  apply Iff.of_eq
+  exact filter_value_of_empty_insertion
+    (fun E => IsCanonical ({M with E := E}) ((invFamily hn k).inv ({M with E := E})) T)
+    (fun E j hj => propext (isCanonical_invFamily_insertEmpty_iff hn k ({M with E := E}) hj T)) M.E
+
+/-- The same empty-slot filtering preserves a canonical segment with
+nonempty centres. -/
+theorem isCanonicalSegment_invFamily_nonemptyBoundary_iff (hn : 0 < n) (k : ℕ)
+    (M : MarkedIdeal n X) (T : BlowupTower X Y) :
+    ResolutionDriver.IsCanonicalSegment (nonemptyBoundary M) ((invFamily hn k).inv (nonemptyBoundary M)) T ↔
+      ResolutionDriver.IsCanonicalSegment M ((invFamily hn k).inv M) T := by
+  apply Iff.of_eq
+  exact filter_value_of_empty_insertion
+    (fun E => ResolutionDriver.IsCanonicalSegment ({M with E := E})
+      ((invFamily hn k).inv ({M with E := E})) T)
+    (fun E j hj => propext (isCanonicalSegment_invFamily_insertEmpty_iff hn k
+      ({M with E := E}) hj T)) M.E
 
 private theorem canonical_insertEmpty_iff (M : MarkedIdeal n X) {j : ℕ} (hj : j ≤ M.E.length)
     (T : BlowupTower X Y) :

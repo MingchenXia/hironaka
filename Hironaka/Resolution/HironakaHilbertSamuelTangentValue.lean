@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaHolomorphicJetChartInvariance
 import Hironaka.Resolution.HironakaCurrentEmbeddingDimension
 
@@ -24,8 +19,6 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.HironakaHilbertSamuelTangentValue
 open HolGerm HironakaHolomorphicPointJets HironakaHolomorphicJetMonomialSpan
   HironakaHolomorphicJetRankLoci HironakaHolomorphicJetChartInvariance
-open Hironaka
-
 noncomputable section
 variable {n : ℕ}
 

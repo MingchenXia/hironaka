@@ -1,54 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
+import Hironaka.Resolution.HironakaG3UniverseMemberRestrict
 import Hironaka.Invariant.ContactLowerValue
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsoTail
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.ContactCanonicalAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.Invariant.ContactMarkedCanonical
-import Hironaka.Invariant.ContactRepresentative
-import Hironaka.Invariant.ContactStageKept
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainMemberRestriction
-import Hironaka.Invariant.InvDomainRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneNearby
-import Hironaka.Invariant.StepOneTangentChange
-import Hironaka.Invariant.StepOneValue
-import Hironaka.Invariant.StepOneValueMasked
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Step 1ab's lower values under biholomorphisms, restriction to open sets and representatives
 
-The Step 1ab twins of `ContactLowerValue` (level `0`). Source: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1a of
-Proposition `pr:resol` and the commutativity of the resolution with étale morphisms.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's properties (5), (6), (7) of the masked Step 1 value function at the levels
+`s + 1 ≥ 1` (`hir:maximal-order-step`); claim I-0977 C-0181.  The Step 1ab twins of TN23's `ContactLowerValue` (level `0`).
+Blueprint `bcalc:member-restrict-tower-iso` and `bcalc:member-restrict-restrict-repr` (chapter `blowup-calculus.tex`).  Source:
+Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 1a of Proposition `pr:resol` and the commutativity of the resolution with
+étale morphisms.
 
 At a point of level `s + 1` the lower value is the value of the inductive invariant `R` for Step 1ab's restricted marked ideal
 `𝔐 = memberRestrict J̄_{T₀} (members through the image)` (`InvDomainMemberRestriction.memberRestrict`), restricted to the mask
@@ -61,12 +24,15 @@ At a point of level `s + 1` the lower value is the value of the inductive invari
   `StepOneNearby.inv_eq_of_two_opens`);
 * **`lowerValueL_succ_isTowerIso`** (property (6) at levels `s + 1`): with lower data on both sides, the lower values at
   corresponding points of isomorphic towers agree;
-* `inv_pullback_isTowerIso` (property (6) of `R`, packaged: domain, canonical segment, cosupport and values
-  transported along an isomorphism of towers), **`lowerValueL_succ_restrict`** (property (5) at levels `s + 1`,
-  `(t5)` shape): restriction to an open set of the base;
-* `restrictEquiv_memberRestrict_membersThrough`, **`lowerValueL_succ_representative`** (property (7) at levels `s +
-  1`, `(t7)` shape): restricted-equivalent representatives have restricted-equivalent restricted marked ideals and
-  the same lower values.
+* `inv_pullback_isTowerIso` (property (6) of `R`, packaged: domain, canonical segment, cosupport and values transported along an
+  isomorphism of towers), **`lowerValueL_succ_restrict`** (property (5) at levels `s + 1`, TN23's `(t5)` shape): restriction to
+  an open set of the base;
+* `restrictEquiv_memberRestrict_membersThrough`, **`lowerValueL_succ_representative`** (property (7) at levels `s + 1`, TN23's
+  `(t7)` shape): restricted-equivalent representatives have restricted-equivalent restricted marked ideals and the same lower
+  values.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -76,7 +42,11 @@ universe u v
 
 namespace Hironaka.MemberRestrictTowerIso
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen BlowupTowerIsomorphism ResolutionInvariantExt StepOneTangentChange InvDomainMemberRestriction InvDomainRebase StepOneValue StepOneLowerDomain StepOneValueMasked StepOneNearby BoundaryCount
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder
+  BlowupTowers BlowupTowerTransforms MarkedIdeals MarkedIdeals.MarkedIdeal
+  HomogenizedIdealAlong MarkedIdealBiholomorphism MarkedIdealRestrictOpen
+  BlowupTowerIsomorphism ResolutionInvariantExt StepOneTangentChange InvDomainMemberRestriction InvDomainRebase
+  StepOneValue StepOneLowerDomain StepOneValueMasked StepOneNearby BoundaryCount
 open ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section
@@ -93,13 +63,7 @@ variable {M M' : Type u} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] 
 /-- A set whose preimage under a biholomorphism is the preimage of a member of `E₀` is that member. -/
 theorem mem_of_preimage_mem_map_diffeo (χ : M' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ M)
     {E₀ : List (Set M)} {H : Set M} (h : χ ⁻¹' H ∈ E₀.map (χ ⁻¹' ·)) : H ∈ E₀ := by
-  obtain ⟨H₀, hH₀, hpre⟩ := List.mem_map.mp h
-  have hH : H₀ = H := by
-    ext x
-    have := congrArg (fun s : Set M' => χ.symm x ∈ s) hpre
-    simpa using this
-  rw [← hH]
-  exact hH₀
+  exact G3UniverseMemberRestrict.mem_of_preimage_mem_map_diffeo χ h
 
 /-- **Step 1ab's restricted marked ideal commutes with biholomorphisms**: for `𝔪` well formed with `d ≥ 1`, a list `E₀` of
 sets and a point `p`, the pullback along `χ` of the restricted marked ideal at `χ p` is the restricted marked ideal of `χ^*𝔪`
@@ -109,23 +73,7 @@ theorem pullback_diffeo_memberRestrict_membersThrough (χ : M' ≃ₘ⟮𝓘(ℂ
     MarkedIdeal.pullback χ (memberRestrict 𝔪 (membersThrough 𝔪.E E₀ (χ p))) =
       memberRestrict (MarkedIdeal.pullback χ 𝔪)
         (membersThrough (MarkedIdeal.pullback χ 𝔪).E (E₀.map (χ ⁻¹' ·)) p) := by
-  have hcoeff := HomogenizedIdealAlong.pullback_coeffMarkedAlong_of_inverse χ.contMDiff χ.symm.contMDiff
-    χ.apply_symm_apply χ.symm_apply_apply 𝔪 h𝔪.isCoherent h𝔪.isClosedSubmanifold_N hd
-  have hI := congrArg MarkedIdeal.ideal hcoeff
-  have hD := congrArg MarkedIdeal.d hcoeff
-  refine MarkedIdealOperationsTransform.MarkedIdeal.ext_of ?_ ?_ hI hD
-  · show χ ⁻¹' (memberRestrict 𝔪 (membersThrough 𝔪.E E₀ (χ p))).N = _
-    rw [memberRestrict_membersThrough_N, memberRestrict_membersThrough_N]
-    ext q
-    simp only [mem_preimage, mem_inter_iff, mem_ofPred_eq]
-    refine and_congr_right fun _ => ⟨fun hw H' hH' hH'₀ hpH' => ?_, fun hw H hH hH₀ hpH => ?_⟩
-    · obtain ⟨H, hH, rfl⟩ := List.mem_map.mp hH'
-      exact hw H hH (mem_of_preimage_mem_map_diffeo χ hH'₀) hpH'
-    · exact hw _ (List.mem_map_of_mem hH) (List.mem_map_of_mem hH₀) hpH
-  · show (memberRestrict 𝔪 (membersThrough 𝔪.E E₀ (χ p))).E.map (χ ⁻¹' ·) = _
-    rw [memberRestrict_membersThrough_E, memberRestrict_membersThrough_E]
-    exact (filter_map_members (f := (χ ⁻¹' ·)) (y := χ p) (y' := p) (fun H _ => Iff.rfl)
-      fun H _ _ h => mem_of_preimage_mem_map_diffeo χ h).symm
+  exact G3UniverseMemberRestrict.pullback_diffeo_memberRestrict_membersThrough χ h𝔪 hd E₀ p
 
 end Diffeo
 
@@ -300,12 +248,11 @@ section Restrict
 
 variable {X : CMfd.{u} n} (U : Opens X) {k : ℕ} {Λ : Type v} [LinearOrder Λ]
 
-/-- **Property (5) of the masked Step 1 value function at the levels `s + 1`, lower values** (`(t5)` shape): let `𝔍` be
-well formed with `d ≥ 1` (`n > 0`), `T₀ T₁` a multiple test blow-up of `J̄`, `U` open in the base, and `T₀' ≅ T₀|_U`
-over the identity of `U` with last-stage map `χ₀`, `T₁' ≅ T₁|_{T₀⁻¹U}` over `χ₀` with last-stage map `χ` (the split
-of `T|_U`, `BlowupTowerSplitIso.exists_isTowerIso_split_restrict`). If `p'` has lower data at level `s + 1` for
-`𝔍|_U` at the split `T₀' T₁'` and `χ p'` has lower data at level `s + 1` for `𝔍` at the split `T₀ T₁`, the two lower
-values agree. -/
+/-- **Property (5) of the masked Step 1 value function at the levels `s + 1`, lower values** (TN23's `(t5)` shape): let `𝔍` be
+well formed with `d ≥ 1` (`n > 0`), `T₀ T₁` a multiple test blow-up of `J̄`, `U` open in the base, and `T₀' ≅ T₀|_U` over the
+identity of `U` with last-stage map `χ₀`, `T₁' ≅ T₁|_{T₀⁻¹U}` over `χ₀` with last-stage map `χ` (the split of `T|_U`,
+`BlowupTowerSplitIso.exists_isTowerIso_split_restrict`).  If `p'` has lower data at level `s + 1` for `𝔍|_U` at the split
+`T₀' T₁'` and `χ p'` has lower data at level `s + 1` for `𝔍` at the split `T₀ T₁`, the two lower values agree. -/
 theorem lowerValueL_succ_restrict (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X) (h𝔍 : 𝔍.IsWellFormed)
     (hd : 1 ≤ 𝔍.d) (hn : 0 < n) {s : ℕ} {Y₀ Z Y₀' Z' : CMfd.{u} n} {T₀ : BlowupTower X Y₀} {T₁ : BlowupTower Y₀ Z}
     {T₀' : BlowupTower (CMfd.of (n := n) U) Y₀'}
@@ -492,13 +439,13 @@ theorem restrictEquiv_memberRestrict_membersThrough {𝔍 𝔍' : MarkedIdeal n 
   · exact MarkedIdealOperationsAlong.restrictLe_mono (fun _ hx => hx.1) hc.le
   · exact MarkedIdealOperationsAlong.restrictLe_mono (fun _ hx => hx.1) hc.ge
 
-/-- **Property (7) of the masked Step 1 value function at the levels `s + 1`, lower values** (`(t7)` shape): let `𝔍` be
-well formed with `d ≥ 1` (`n > 0`) and `𝔍 ≃ 𝔍'` restricted-equivalent with `𝔍'` coherent, and `T₀ T₁` a multiple
-test blow-up of `J̄`. If `p` has lower data at level `s + 1` at the split `T₀ T₁` both for `𝔍` and for `𝔍'`, the two
-lower values agree. (Step 1ab's restricted marked ideals of the two sides are restricted-equivalent
-(`restrictEquiv_memberRestrict_membersThrough`); on the intersection `W` of the two masks both lie in the domain of
-`R` with the restricted tail a canonical segment (`MaxLocusLocal.restrict_nestedOpens`), the values agree by
-property (7) of `R`, and the anchor `lowerValueL_succ_eq` on both sides.) -/
+/-- **Property (7) of the masked Step 1 value function at the levels `s + 1`, lower values** (TN23's `(t7)` shape): let `𝔍` be
+well formed with `d ≥ 1` (`n > 0`) and `𝔍 ≃ 𝔍'` restricted-equivalent with `𝔍'` coherent, and `T₀ T₁` a multiple test blow-up
+of `J̄`.  If `p` has lower data at level `s + 1` at the split `T₀ T₁` both for `𝔍` and for `𝔍'`, the two lower values agree.
+(Step 1ab's restricted marked ideals of the two sides are restricted-equivalent
+(`restrictEquiv_memberRestrict_membersThrough`); on the intersection `W` of the two masks both lie in the domain of `R` with the
+restricted tail a canonical segment (`MaxLocusLocal.restrict_nestedOpens`), the values agree by property (7) of `R`, and the
+anchor `lowerValueL_succ_eq` on both sides.) -/
 theorem lowerValueL_succ_representative (R : ResolutionInvariant.{u, v} n k Λ) {𝔍 𝔍' : MarkedIdeal n X}
     (h𝔍 : 𝔍.IsWellFormed) (h𝔞' : 𝔍'.ideal.IsCoherent) (hn : 0 < n) (hEq : RestrictEquiv 𝔍 𝔍') {s : ℕ}
     {Y₀ Z : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Z)

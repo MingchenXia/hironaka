@@ -1,33 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.CompanionOpen
 import Hironaka.MarkedIdeal.CodimOneCentreAlong
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Invariant.MonomialPartEtale
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Where the nonmonomial part has order zero, the marked ideal is monomial
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (the monomial case, Step 2b, is
-entered where the nonmonomial part `𝓝(𝓘)` is trivial); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`),
-Step II.A.
+Hironaka phase H2 (TN3), for the case `o = 0` of TN-CLASSICAL's general step (`hir:general-step`: "If `o = 0` the marked
+ideal is monomial near `x`"); claim I-0977 C-0159.  Blueprint `bcalc:nonmonomial-order-zero` (chapter
+`blowup-calculus.tex`).  Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (the monomial
+case, Step 2b, is entered where the nonmonomial part `𝓝(𝓘)` is trivial); Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`), Step II.A.
 
 `𝔞|_N = 𝓜_N(𝔞) 𝓝_N(𝔞)` (`MonomialPartAlong`).  At a point `y ∈ N` where `ord_y(𝓝_N(𝔞)|_N) = 0`, some germ `c` of the
 quotient `𝓝_N(𝔞) = (Res_N 𝔞 : 𝓜_N(𝔞))` does not vanish at `y`, and every germ `g` of `𝓜_N(𝔞)` satisfies
@@ -40,6 +24,10 @@ the monomial case along `N`: `MonomialCaseAlong`, `MonomialStepAlong`).
 
 * `restrictLe_monomialPartAlong_of_notMem`: at `y ∈ N` with `ord_y(𝓝_N(𝔞)|_N) = 0`, `Res_N 𝓜_N(𝔞) ⊆ Res_N 𝔞` at `y`;
 * **`isMonomialAlong_pullback_val`**: if `ord(𝓝_N(𝔞)|_N) = 0` at the points of `N ∩ W`, `𝔪|_W` is monomial along `N ∩ W`;
+* `isOpen_compl_cosupport_one`: `W = (cosupp(𝓝_N(𝔞)|_N, 1))ᶜ` is open.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -50,7 +38,13 @@ universe u
 namespace Hironaka.NonmonomialOrderZero
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.MonomialPartEtale Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.BlowupTowers Hironaka.DerivativeIdealAlongEtale Hironaka.RestrictedIdealWeight Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient Hironaka.RestrictedIdealExtension
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.MonomialPartEtale Hironaka.GermIdealOrder
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowers
+  Hironaka.DerivativeIdealAlongEtale Hironaka.RestrictedIdealWeight
+  Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient
+  Hironaka.RestrictedIdealExtension
 
 noncomputable section
 
@@ -84,6 +78,13 @@ open ResolutionInvariantSpec (IsInvDomain)
 
 variable {X : CMfd.{u} n}
 
+/-- **The points of positive order of the nonmonomial part form a closed set**, so its complement is an open
+neighbourhood of every point of `N` where the order is `0` (and of every point off `N`). -/
+theorem isOpen_compl_cosupport_one (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed)
+    (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) :
+    IsOpen (cosupport n 𝔪.N (nonmonomialPartAlong n 𝔪.N 𝔪.ideal 𝔪.E) 1)ᶜ :=
+  (CompanionOpen.isClosed_cosupport_nonmonomialPartAlong hn h𝔪 hne 1).isOpen_compl
+
 /-- **Where the nonmonomial part has order zero the marked ideal is monomial** (`hir:general-step`, case `o = 0`): for `𝔪`
 with a coherent ideal and an open `W` on which `ord(𝓝_N(𝔞)|_N) = 0` at the points of `N`, the
 restriction `𝔪|_W` is monomial along `N ∩ W`: `Res_{N ∩ W} 𝓜_{N ∩ W}(𝔞|_W) ⊆ Res_{N ∩ W} 𝔞|_W`. -/
@@ -105,6 +106,16 @@ theorem isMonomialAlong_pullback_val {𝔪 : MarkedIdeal n X} (h𝔞 : 𝔪.idea
   rw [← pullback_monomialPartAlong hloc
     (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem h𝔞 hg)]
   exact h1
+
+/-- **The monomial branch on the canonical open set**: with `W = (cosupp(𝓝_N(𝔞)|_N, 1))ᶜ`, the restriction of `𝔪` to `W`
+is monomial along `N ∩ W`, and `W` contains every point of `N` where `ord(𝓝_N(𝔞)|_N) = 0`. -/
+theorem isMonomialAlong_pullback_val_compl (hn : 0 < n) {𝔪 : MarkedIdeal n X} (h𝔪 : 𝔪.IsWellFormed)
+    (hne : ∀ y ∈ 𝔪.N, IsNonzeroAlongAt 𝔪.N 𝔪.ideal y) :
+    IsMonomialAlong n
+      (MarkedIdeal.pullback (Subtype.val : (⟨_, isOpen_compl_cosupport_one hn h𝔪 hne⟩ : Opens X) → X) 𝔪).N
+      (MarkedIdeal.pullback (Subtype.val : (⟨_, isOpen_compl_cosupport_one hn h𝔪 hne⟩ : Opens X) → X) 𝔪).ideal
+      (MarkedIdeal.pullback (Subtype.val : (⟨_, isOpen_compl_cosupport_one hn h𝔪 hne⟩ : Opens X) → X) 𝔪).E :=
+  isMonomialAlong_pullback_val h𝔪.isCoherent _ fun _ hy => hy
 
 end Open
 

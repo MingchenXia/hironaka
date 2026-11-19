@@ -1,58 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Analytic.SingularLocus
-import Hironaka.Manifold.ComplexManifold
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.InnerProductSpace.Orthogonal
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Analysis.Calculus.DifferentialForm.Basic
-import Mathlib.MeasureTheory.Integral.CircleAverage
-import Mathlib.Topology.Semicontinuity.Basic
-import Mathlib.Topology.Instances.EReal.Lemmas
-import Mathlib.Tactic.Linarith
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Mathlib.Analysis.InnerProductSpace.Laplacian
-import Mathlib.Analysis.InnerProductSpace.Calculus
-import Mathlib.Tactic.Ring
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Matrix.PosDef
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
-import Mathlib.MeasureTheory.Integral.Bochner.Basic
-import Mathlib.MeasureTheory.Measure.WithDensity
-import Mathlib.LinearAlgebra.Alternating.DomCoprod
-import Mathlib.Topology.Order.Monotone
-import Mathlib.Topology.Algebra.MetricSpace.Lipschitz
-import Mathlib.Tactic
-import Mathlib.Analysis.Fourier.AddCircle
-import Mathlib.Analysis.InnerProductSpace.Harmonic.Constructions
-import Mathlib.Analysis.Complex.OperatorNorm
-import Mathlib.Analysis.Normed.Operator.Mul
-import Mathlib.MeasureTheory.Integral.CircleIntegral
-import Mathlib.Analysis.Complex.Harmonic.MeanValue
-import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
-import Mathlib.MeasureTheory.Integral.Lebesgue.Map
-import Mathlib.Analysis.SpecialFunctions.Complex.CircleMap
-import Mathlib.MeasureTheory.Integral.IntegrableOn
-import Mathlib.Data.EReal.Operations
-import Mathlib.MeasureTheory.Measure.Prod
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.Topology.MetricSpace.Thickening
-import Mathlib.Analysis.Distribution.Distribution
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Bases
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Analysis.Normed.Module.Connected
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
-import Hironaka.Manifold.HolomorphicContDiff
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
+import Hironaka.Analytic.AdmissibleCurrentFormPositivity
+
 set_option autoImplicit false
 
 /-!
@@ -72,6 +19,8 @@ Consequently the whole image of a `RegularPatch` lies in the regular locus of th
 certified dimension, and the patch parametrization is continuous.
 
 * `regularAtDim_of_flattening`, `eventually_regularAtDim`: openness of regularity in `A`.
+* `toManifold_mem_carrier`, `toManifold_mem_regularLocus`, `regularAtDim_toManifold`.
+* `continuousOn_toManifold`, `toManifold_zero`, `continuousAt_toManifold_zero`.
 -/
 
 open Set Filter
@@ -80,6 +29,8 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.RegularPatchNeighborhood
 
 noncomputable section
+
+open NumericalRestrictedVolume AdmissibleCurrentFormPositivity
 
 variable {n : ℕ} {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M]
   [IsComplexManifold n M]
@@ -213,6 +164,97 @@ theorem eventually_regularAtDim {A : Set M} {x : M} {k : ℕ}
       (Φ.isOpen_source.mem_nhds Φ.center_mem_source)
   filter_upwards [hsrc, hΦ] with y hy hyΦ hyA
   exact regularAtDim_of_flattening hk Φ hflat hyA hy hyΦ
+
+namespace RegularPatch
+
+variable {V : ClosedIrreducibleAnalyticSubvariety n M} (P : RegularPatch V)
+
+omit [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M] in
+theorem planeInclusion_mem_complexCoordinatePlane {k : ℕ} (w : ComplexModel k) :
+    planeInclusion k n w ∈ complexCoordinatePlane n k := by
+  intro i hi
+  simp [planeInclusion, not_lt.mpr hi]
+
+omit [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M] in
+@[simp] theorem planeInclusion_zero (k : ℕ) : planeInclusion k n 0 = 0 := by
+  ext i
+  simp [planeInclusion]
+
+theorem coordinateParametrization_mem_source {w : ComplexModel V.dim}
+    (hw : w ∈ P.parameterDomain) :
+    P.coordinateParametrization w ∈ P.flattening.source :=
+  P.flattening.mapsTo_invFun hw
+
+theorem toManifold_mem_chart_source {w : ComplexModel V.dim}
+    (hw : w ∈ P.parameterDomain) :
+    P.toManifold w ∈ (complexChartAt (n := n) P.center).val.source :=
+  (complexChartAt (n := n) P.center).val.map_target
+    (P.source_subset ((coordinateParametrization_mem_source P) hw))
+
+theorem chart_toManifold {w : ComplexModel V.dim} (hw : w ∈ P.parameterDomain) :
+    (complexChartAt (n := n) P.center).val (P.toManifold w) =
+      P.coordinateParametrization w :=
+  (complexChartAt (n := n) P.center).val.right_inv
+    (P.source_subset ((coordinateParametrization_mem_source P) hw))
+
+/-- The patch parametrization lands in the subvariety. -/
+theorem toManifold_mem_carrier {w : ComplexModel V.dim} (hw : w ∈ P.parameterDomain) :
+    P.toManifold w ∈ V.carrier := by
+  have hΦ : (complexChartAt (n := n) P.center).val (P.toManifold w) ∈ P.flattening.source := by
+    rw [(chart_toManifold P) hw]
+    exact (coordinateParametrization_mem_source P) hw
+  rw [P.flattens ((toManifold_mem_chart_source P) hw) hΦ, (chart_toManifold P) hw]
+  change P.flattening.toFun (P.flattening.invFun (planeInclusion V.dim n w)) ∈ _
+  rw [P.flattening.right_inv _ hw]
+  exact planeInclusion_mem_complexCoordinatePlane w
+
+/-- Every point parametrized by a regular patch is a regular point of the certified
+dimension. -/
+theorem toManifold_mem_regularLocus {w : ComplexModel V.dim} (hw : w ∈ P.parameterDomain) :
+    P.toManifold w ∈ regularLocus (n := n) V.carrier V.dim := by
+  have hΦ : (complexChartAt (n := n) P.center).val (P.toManifold w) ∈ P.flattening.source := by
+    rw [(chart_toManifold P) hw]
+    exact (coordinateParametrization_mem_source P) hw
+  exact regularAtDim_of_flattening V.dim_le P.flattening P.flattens
+    ((toManifold_mem_carrier P) hw) ((toManifold_mem_chart_source P) hw) hΦ
+
+theorem zero_mem_parameterDomain : (0 : ComplexModel V.dim) ∈ P.parameterDomain := by
+  change planeInclusion V.dim n 0 ∈ P.flattening.target
+  rw [planeInclusion_zero, ← P.center_to_zero]
+  exact P.flattening.mapsTo_toFun P.flattening.center_mem_source
+
+theorem coordinateParametrization_zero :
+    P.coordinateParametrization 0 = (complexChartAt (n := n) P.center).val P.center := by
+  change P.flattening.invFun (planeInclusion V.dim n 0) = _
+  rw [planeInclusion_zero, ← P.center_to_zero]
+  exact P.flattening.left_inv _ P.flattening.center_mem_source
+
+@[simp] theorem toManifold_zero : P.toManifold 0 = P.center := by
+  change (complexChartAt (n := n) P.center).val.symm (P.coordinateParametrization 0) = _
+  rw [(coordinateParametrization_zero P)]
+  exact (complexChartAt (n := n) P.center).val.left_inv (mem_complexChartAt_source _)
+
+theorem continuousOn_toManifold : ContinuousOn P.toManifold P.parameterDomain := by
+  have hpar : ContinuousOn P.coordinateParametrization P.parameterDomain :=
+    P.flattening.invFun_holomorphic.continuousOn.comp
+      (planeInclusionCLM V.dim n).continuous.continuousOn (fun w hw => hw)
+  exact (complexChartAt (n := n) P.center).val.continuousOn_symm.comp hpar
+    (fun w hw => P.source_subset ((coordinateParametrization_mem_source P) hw))
+
+theorem continuousAt_toManifold_zero : ContinuousAt P.toManifold 0 :=
+  (continuousOn_toManifold P).continuousAt
+    ((RegularPatchDerivative.isOpen_parameterDomain P).mem_nhds (zero_mem_parameterDomain P))
+
+/-- **A regular patch parametrizes regular points near its centre.** -/
+theorem regularAtDim_toManifold :
+    ∃ r > 0, ∀ w ∈ Metric.ball (0 : ComplexModel V.dim) r,
+      w ∈ P.parameterDomain ∧ P.toManifold w ∈ regularLocus (n := n) V.carrier V.dim := by
+  obtain ⟨r, hr, hball⟩ :=
+    Metric.isOpen_iff.mp (RegularPatchDerivative.isOpen_parameterDomain P) 0
+      (zero_mem_parameterDomain P)
+  exact ⟨r, hr, fun w hw => ⟨hball hw, (toManifold_mem_regularLocus P) (hball hw)⟩⟩
+
+end RegularPatch
 
 end
 

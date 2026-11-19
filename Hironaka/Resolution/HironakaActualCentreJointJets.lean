@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualCentreJetFrameCocycle
 import Hironaka.Resolution.HironakaRelativeNormalTaylorCoefficients
 import Hironaka.Invariant.OrderMultiplicativity
@@ -51,7 +46,6 @@ def actualJointScalarJet (d n q : ℕ) :
       simp only [map_smul,Pi.smul_apply,smul_eq_mul,RingHom.id_apply]
       ring }
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Factorial units preserve the COMPLETE original normal-power kernel, including all repeated words. -/
 theorem ker_actualJointScalarJet (d n q : ℕ) :
     letI := tangentAlgebra d n

@@ -1,38 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MonomialInvariantFunctorialAlong
 import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
 import Hironaka.MarkedIdeal.CoefficientRestrictionTower
 import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
 import Hironaka.Invariant.IdealOrderArithmetic
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedIdeal
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.Invariant.MonomialPartAlong
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The monomial and nonmonomial parts along a submanifold under local biholomorphisms
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` and §2.4 (the resolution
-procedure commutes with étale morphisms); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B
-(the companion ideal is built from the monomial part `M(𝓘)` and the nonmonomial part `N(𝓘)` of the marked ideal,
-both determined by the exponents of the members of `E` through the point).
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0150 (offered C-0139 /
+C-0146).  Blueprint `bcalc:monomial-part-etale` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` and §2.4 (the resolution procedure commutes with étale
+morphisms); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B (the companion ideal is built from
+the monomial part `M(𝓘)` and the nonmonomial part `N(𝓘)` of the marked ideal, both determined by the exponents of the
+members of `E` through the point).
 
 The general step forms the companion ideal from `𝓜_N(𝔞)` (`MonomialPartAlong.monomialPartAlong`) and
 `𝓝_N(𝔞) = (Res_N 𝔞 : 𝓜_N(𝔞))` (`MonomialPartAlong.nonmonomialPartAlong`), and compares nearby points through open
@@ -56,6 +39,9 @@ inclusion of an open set, `isLocalInverseAt_val`; a blowup along `∅`,
 * **`monomialPartAlong_congr`, `nonmonomialPartAlong_congr`**: both parts only depend on `Res_N 𝔞` (`N` closed);
 * **`monomialPartAlong_append_empty`, `nonmonomialPartAlong_append_empty`**: appending an empty member to `E` changes
   neither part.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -66,7 +52,11 @@ universe u
 namespace Hironaka.MonomialPartEtale
 
 open Hironaka.HolomorphicIdealSheaves
-open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong Hironaka.MonomialPartAlong Hironaka.IdealWeightPowers Hironaka.RestrictedIdealExtension Hironaka.RestrictedIdealQuotient Hironaka.InvertibleIdealQuotient Hironaka.DerivativeIdealAlongEtale Hironaka.HadamardBridge Hironaka.RestrictedIdealWeight
+open Hironaka.GermIdealOrder Hironaka.DivisorExponentAlong
+  Hironaka.MonomialPartAlong Hironaka.IdealWeightPowers
+  Hironaka.RestrictedIdealExtension Hironaka.RestrictedIdealQuotient
+  Hironaka.InvertibleIdealQuotient Hironaka.DerivativeIdealAlongEtale
+  Hironaka.HadamardBridge Hironaka.RestrictedIdealWeight
 
 noncomputable section
 

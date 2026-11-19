@@ -1,29 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.SingularLocus
-import Mathlib.MeasureTheory.Integral.CircleAverage
-import Mathlib.Topology.Semicontinuity.Basic
-import Mathlib.Topology.Instances.EReal.Lemmas
-import Mathlib.Tactic.Linarith
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.SpecialFunctions.Log.ENNRealLogExp
-import Mathlib.Analysis.Calculus.FDeriv.Mul
-import Mathlib.MeasureTheory.Integral.Lebesgue.Add
-import Mathlib.Order.Filter.Germ.Basic
+import Hironaka.Analytic.PotentialTheory.MultiplierIdealsBasic
 import Mathlib.Geometry.Manifold.MFDeriv.Basic
 import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Ideal sheaves of holomorphic functions, divisors and multiplier ideals
 
-An ideal sheaf `𝔞 ⊆ 𝒪_M` is recorded by its stalks: `𝔞.mem x g` says that the function `g`, holomorphic near `x`,
-has its germ at `x` in `𝔞_x`. All constructions below depend only on germs. The following are new definitions of
-this first pass:
+Source: Copy-4, `sec:prelim`, `lem:regularization`,
+`lem:relative-principalization`, `lem:exceptional-metric`
+(`transcendental-nakamaye-copy4-20260911`).
+
+An ideal sheaf `𝔞 ⊆ 𝒪_M` is recorded by its stalks: `𝔞.mem x g` says that the
+function `g`, holomorphic near `x`, has its germ at `x` in `𝔞_x`.  All
+constructions below depend only on germs.  The following are new definitions of
+this first pass (recorded in the blueprint, `ana:geometric-setting`):
 
 * `IsInSpanAt S x g`: the germ of `g` at `x` is a finite holomorphic combination
   of functions from `S`; `IsInSpanOnAt W S x g` is the same identity required only
@@ -38,9 +30,14 @@ this first pass:
   holomorphic function that does not vanish identically on any nonempty open set.
   On a complex manifold this is `𝒪(-D)` for an effective divisor `D`; its
   support is the zero locus.
-* Locally `ψ_E = ∑ aᵢ log |gᵢ|² + h` with `aᵢ ∈ ℚ≥0`, local equations `gᵢ`, `h` smooth, and `Θ_E = -ddᶜ h`; this is
-  `ddᶜ ψ_E = [E] - Θ_E`. Such data are in bijection with pairs (effective `ℚ`-divisor, smooth metric). The support
-  of `E` is the pole set of `ψ_E`.
+* `multiplierIdeal c φ` (`𝓘(cφ)`): germs `g` with `|g|² e^{-cφ}` integrable near
+  the point in the preferred chart.
+* `MeteredEffectiveQDivisor`: an effective `ℚ`-divisor `E` with a smooth Hermitian
+  metric on `𝒪(E)`, encoded by the global weight `ψ_E = log |s_E|²` and the
+  curvature form `Θ_E`.  Locally `ψ_E = ∑ aᵢ log |gᵢ|² + h` with `aᵢ ∈ ℚ≥0`, local
+  equations `gᵢ`, `h` smooth, and `Θ_E = -ddᶜ h`; this is `ddᶜ ψ_E = [E] - Θ_E`.
+  Such data are in bijection with pairs (effective `ℚ`-divisor, smooth metric).
+  The support of `E` is the pole set of `ψ_E`.
 -/
 
 open Set Filter MeasureTheory
@@ -49,6 +46,8 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.HolomorphicIdealSheaves
 
 noncomputable section
+
+open NumericalRestrictedVolumeScaffold
 
 variable {n m : ℕ} {M : Type*} [TopologicalSpace M]
   [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
@@ -117,6 +116,14 @@ end GermIdeal
 def vanishingIdeal (A : Set M) : GermIdeal n M where
   mem x g := HolomorphicAt n g x ∧ ∀ᶠ y in 𝓝 x, y ∈ A → g y = 0
 
+/-- The multiplier ideal `𝓘(cφ)`: holomorphic germs `g` at `x` such that
+`|g|² e^{-cφ}` is Lebesgue integrable near `x` in the preferred chart. -/
+def multiplierIdeal (c : ℝ) (φ : M → EReal) : GermIdeal n M where
+  mem x g := HolomorphicAt n g x ∧
+    MultiplierIntegrableAt (chartFunction φ (complexChartAt (n := n) x)) c
+      (fun z => g ((complexChartAt (n := n) x).val.symm z))
+      ((complexChartAt (n := n) x).val x) volume
+
 variable (n M) in
 /-- An effective divisor `D`, recorded by its invertible ideal sheaf `𝒪(-D)`. -/
 structure EffectiveDivisor where
@@ -126,6 +133,29 @@ structure EffectiveDivisor where
 /-- The support of an effective divisor. -/
 def EffectiveDivisor.support (D : EffectiveDivisor n M) : Set M :=
   D.ideal.zeroLocus
+
+variable (n M) in
+/-- An effective `ℚ`-divisor `E` with a smooth Hermitian metric on `𝒪(E)`, recorded
+by `ψ_E = log |s_E|²` and the curvature form `Θ_E`, with `ddᶜ ψ_E = [E] - Θ_E`. -/
+structure MeteredEffectiveQDivisor where
+  weight : M → EReal
+  curvature : ClosedRealOneOneForm n M
+  local_presentation : ∀ x : M, ∃ U : Set M, IsOpen U ∧ x ∈ U ∧
+    ∃ (N : ℕ) (a : Fin N → ℚ) (g : Fin N → M → ℂ) (h : M → ℝ),
+      (∀ i, 0 ≤ a i) ∧
+      (∀ i, MDifferentiableOn 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ℂ) (g i) U) ∧
+      (∀ i, ∀ W : Set M, IsOpen W → W ⊆ U → W.Nonempty → ∃ y ∈ W, g i y ≠ 0) ∧
+      (∀ e : ComplexChart n M,
+        ContDiffOn ℝ ∞ (fun z => h (e.val.symm z)) (e.val.target ∩ e.val.symm ⁻¹' U)) ∧
+      (∀ y ∈ U, weight y =
+        (∑ i, ((a i : ℝ) : EReal) * generatorLog (fun _ : Fin 1 => g i) y) + (h y : EReal)) ∧
+      ∀ (e : ComplexChart n M) (z : ComplexModel n), z ∈ e.val.target →
+        e.val.symm z ∈ U →
+          curvature.val.coeff e z = -smoothDDC (fun y => h (e.val.symm y)) z
+
+/-- The support of a metered effective `ℚ`-divisor. -/
+def MeteredEffectiveQDivisor.support (E : MeteredEffectiveQDivisor n M) : Set M :=
+  poleSet E.weight
 
 end
 

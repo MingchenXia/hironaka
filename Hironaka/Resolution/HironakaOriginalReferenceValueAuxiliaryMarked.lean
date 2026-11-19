@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalReferenceValueOpenNaturality
 /-! Actual full-reference auxiliary marked inputs at every original depth,
 with the SAME current ordered boundary and genuine whole open-record equality.

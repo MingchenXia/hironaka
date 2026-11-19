@@ -1,23 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.RiemannExtension
 import Hironaka.Analytic.HolomorphicZeroSetThin
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.RingTheory.Polynomial.RationalRoot
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
 # The ring of holomorphic germs is integrally closed
 
-For `x = a / b` in the fraction field of `𝒪_d = HolGerm (EuclideanSpace ℂ (Fin d))` which is integral over `𝒪_d`,
-clearing denominators gives `a ^ k + ∑_{i < k} c_i b ^ (k - i) a ^ i = 0`. Off the zero set of `b` the quotient `a /
-b` is then a root of a monic polynomial with locally bounded coefficients, hence locally bounded; the Riemann
-extension theorem extends it to a holomorphic `F`, and `b F = a` near `0` by density of the complement of the zero
-set of `b`.
+Blueprint node `lag:germ-integrally-closed`. For `x = a / b` in the fraction field of
+`𝒪_d = HolGerm (EuclideanSpace ℂ (Fin d))` which is integral over `𝒪_d`, clearing denominators
+gives `a ^ k + ∑_{i < k} c_i b ^ (k - i) a ^ i = 0`. Off the zero set of `b` the quotient
+`a / b` is then a root of a monic polynomial with locally bounded coefficients, hence locally
+bounded; the Riemann extension theorem extends it to a holomorphic `F`, and `b F = a` near `0`
+by density of the complement of the zero set of `b`.
 
 ## Main declarations
 

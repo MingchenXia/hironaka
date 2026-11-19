@@ -1,16 +1,7 @@
 /-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-/-
 Copyright (c) 2026 Archon Horizon contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
-import Hironaka.MarkedIdeal.GeoStrictEmptyExact
-import Hironaka.MarkedIdeal.GeoResolutionAppendExact
-import Hironaka.Invariant.UnitCosupportExact
-import Hironaka.Invariant.NonzeroAlongUnivExact
 import Hironaka.Resolution.HironakaNormalCrossingsOriginalExponents
 import Hironaka.Blowup.BlowupExistenceCodimOne
 
@@ -44,7 +35,6 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   BlowupTowers BlowupFlatCoordinates BlowupStrictSubmanifold NormalCrossings
   MarkedIdeals MarkedIdeals.MarkedIdeal IdealWeightPowers
   DivisorExponent HironakaDivisorResidual IdealOrderArithmetic HironakaNormalCrossingsLocalBranches
-open Hironaka
 noncomputable section
 variable {n : ℕ} {M : Type u} [TopologicalSpace M]
   [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
@@ -180,7 +170,7 @@ theorem isWellFormed_monomialMarkedIdeal {E : List (Set M)} (hE : IsSNCDivisor n
 /-- Actual whole product invertibility supplies every genuine marking-one domain field internally. -/
 theorem isInvDomain_monomialMarkedIdeal {E : List (Set M)} (hE : IsSNCDivisor n E)
     (F : List (Set M × ℕ)) (hF : ∀ p ∈ F, p.1 ∈ E) :
-    Hironaka.ResolutionInvariantSpec.IsInvDomain n (monomialMarkedIdeal (n := n) E F) := by
+    ResolutionInvariantSpec.IsInvDomain n (monomialMarkedIdeal (n := n) E F) := by
   refine ⟨isWellFormed_monomialMarkedIdeal hE F hF,?_,le_rfl,?_⟩
   · intro x _
     exact ⟨n,le_rfl,AnalyticIrreducibleComponents.regularAtDim_univ x⟩
@@ -623,7 +613,7 @@ theorem originalMarkedCompletion_length_le {H : Set A}
 /-- EVERY literal prefix of the generated complete tower internally has the actual original marked domain. -/
 theorem originalMarkedCompletion_prefix_domain {H : Set A}
     (hH : IsNormalCrossingsCarrier (n := n) H) (i : ℕ) :
-    Hironaka.ResolutionInvariantSpec.IsInvDomain n
+    ResolutionInvariantSpec.IsInvDomain n
       (geoTransformAlong (originalMarkedIdeal H) (BlowupTowerSplit.head (originalMarkedCompletion hH) i)) := by
   have hh := ((BlowupTowerSplit.isGeoTestTower_iff_head_tail (originalMarkedIdeal H)
     (originalMarkedCompletion hH) i).mp (originalMarkedCompletion_isGeoResolution hH).1).1

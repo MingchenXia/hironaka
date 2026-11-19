@@ -1,11 +1,7 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Mathlib.Analysis.Complex.Liouville
 import Mathlib.Analysis.Calculus.UniformLimitsDeriv
 import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
+
 set_option autoImplicit false
 
 /-!
@@ -91,7 +87,7 @@ theorem differentiableAt_of_tendstoUniformlyOn_ball [CompleteSpace F]
     have hwn : DifferentiableAt ℂ (g n) w := hdn.differentiableAt (ball_mem_nhds w hR2)
     rw [dist_eq_norm, ← fderiv_sub hwm hwn]
     calc ‖fderiv ℂ (fun y => g m y - g n y) w‖ ≤ (ε * (R / 4) / 2) / (R / 4) :=
-          norm_fderiv_le_of_forall_norm_le (hdm.sub hdn)
+          _root_.Hironaka.norm_fderiv_le_of_forall_norm_le (hdm.sub hdn)
             (fun y hy => by
               rw [← dist_eq_norm]
               exact (hN₁ m (le_of_max_le_left hm) n (le_of_max_le_left hn) y
@@ -126,7 +122,7 @@ theorem exists_ball_forall_norm_fderiv_le {f : E → F} {U : Set E}
     (‖f z₀‖ + 1) / (ρ' / 4), fun w hw => ?_⟩
   have hsub : ball w (ρ' / 2) ⊆ ball z₀ ρ' :=
     ball_subset_ball' (by rw [mem_ball] at hw; linarith)
-  refine norm_fderiv_le_of_forall_norm_le (hf.mono (hsub.trans hρ'U)) (fun y hy => ?_)
+  refine _root_.Hironaka.norm_fderiv_le_of_forall_norm_le (hf.mono (hsub.trans hρ'U)) (fun y hy => ?_)
     (by positivity) (by linarith)
   have hy' := mem_ball.1 (hsub hy)
   have h1 := hσf (lt_of_lt_of_le hy' (min_le_right _ _))
@@ -161,7 +157,7 @@ theorem norm_fderiv_add_sub_le {f : E → F} {z₀ : E} {δ L : ℝ} (hδ : 0 < 
   have heq : fderiv ℂ (fun y => f (y + d) - f y) w = fderiv ℂ f (w + d) - fderiv ℂ f w := by
     rw [fderiv_fun_sub (hshift w hw') (hdiff _ (hA w hw').1), fderiv_comp_add_right]
   rw [← heq]
-  refine norm_fderiv_le_of_forall_norm_le hφ (fun y hy => ?_) (by positivity) (by linarith)
+  refine _root_.Hironaka.norm_fderiv_le_of_forall_norm_le hφ (fun y hy => ?_) (by positivity) (by linarith)
   have := hlip y (hA y hy).1 (y + d) (hA y hy).2
   rwa [add_sub_cancel_left] at this
 
@@ -282,10 +278,22 @@ theorem contDiffOn_of_differentiableOn_complex [FiniteDimensional ℂ E] [Comple
         ih _ (differentiableOn_fderiv_apply_of_isOpen hg hU v)
   exact contDiffOn_infty.2 fun n => key n f hf
 
+/-- Real-smooth version of `contDiffOn_of_differentiableOn_complex`. -/
+theorem contDiffOn_real_of_differentiableOn_complex [FiniteDimensional ℂ E] [CompleteSpace F]
+    {f : E → F} {U : Set E} (hf : DifferentiableOn ℂ f U) (hU : IsOpen U) :
+    ContDiffOn ℝ ∞ f U :=
+  (contDiffOn_of_differentiableOn_complex hf hU).restrict_scalars ℝ
+
 /-- Pointwise version of `contDiffOn_of_differentiableOn_complex`. -/
 theorem contDiffAt_of_differentiableOn_complex [FiniteDimensional ℂ E] [CompleteSpace F]
     {f : E → F} {U : Set E} (hf : DifferentiableOn ℂ f U) (hU : IsOpen U) {x : E}
     (hx : x ∈ U) : ContDiffAt ℂ ∞ f x :=
   (contDiffOn_of_differentiableOn_complex hf hU).contDiffAt (hU.mem_nhds hx)
+
+/-- Pointwise real-smooth version of `contDiffOn_of_differentiableOn_complex`. -/
+theorem contDiffAt_real_of_differentiableOn_complex [FiniteDimensional ℂ E] [CompleteSpace F]
+    {f : E → F} {U : Set E} (hf : DifferentiableOn ℂ f U) (hU : IsOpen U) {x : E}
+    (hx : x ∈ U) : ContDiffAt ℝ ∞ f x :=
+  (contDiffOn_real_of_differentiableOn_complex hf hU).contDiffAt (hU.mem_nhds hx)
 
 end Hironaka

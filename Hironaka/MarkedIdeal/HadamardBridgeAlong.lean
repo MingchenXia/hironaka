@@ -1,35 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NestedFlattening
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.OrderTaylor
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLe
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The Hadamard bridge along a submanifold
 
-Source: Włodarczyk 2005 §2.2 (the lemma `𝓘 ⊂ 𝓘_C^μ` for a smooth centre `C ⊂ supp(𝓘, μ)`), applied on the
-submanifold `N` of a marked ideal `(M, N, E, 𝓘, d)` (Bierstone--Milman 2008, Definitions 2.1--2.2: `𝓘` is an ideal
-of `𝒪_N`).
+Blueprint `hir:hadamard-bridge-along` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Source: Włodarczyk 2005
+§2.2 (the lemma `𝓘 ⊂ 𝓘_C^μ` for a smooth centre `C ⊂ supp(𝓘, μ)`), applied on the submanifold `N` of a marked ideal
+`(M, N, E, 𝓘, d)` (Bierstone--Milman 2008, Definitions 2.1--2.2: `𝓘` is an ideal of `𝒪_N`).
 
 Let `𝔞` be a coherent ideal on `M`, `N` a closed submanifold and `C ⊆ N` a closed submanifold contained in the
 cosupport of `𝔞` ALONG `N`, `cosupp(𝔞|_N, μ)`.  Then `𝔞|_N ⊆ 𝓘_C^μ|_N`, i.e. `RestrictLe N 𝔞 𝓘_C^μ`
@@ -43,14 +22,19 @@ well-formedness".
 
 ## Proof
 
-At `x ∈ C` take nested flattening coordinates `ψ = Φ ∘ e` (`NestedFlattening.exists_nested_flattening`: `C =
-ψ⁻¹(ℂ^{k_C} × 0)`, `N = ψ⁻¹(ℂ^{k_N} × 0)`, `ψ x = 0`) and the linear retraction `P` of `ℂⁿ` onto `ℂ^{k_N} × 0`
-(`planeRetract`). For `g ∈ 𝔞_x`, the function `ĝ = g ∘ ψ⁻¹ ∘ P ∘ ψ` agrees with `g` on `N` near `x`. At a point `w`
-of `ℂ^{k_C} × 0` near `0`, `z = ψ⁻¹ w ∈ C` and (coherence) `g ∈ 𝔞_z`, so `g` agrees on `N` near `z` with some `h ∈
-𝔪_z^μ`; since `ψ⁻¹ ∘ P` maps into `N` and sends `w` to `z`, `F̂ = g ∘ ψ⁻¹ ∘ P` agrees near `w` with `h ∘ ψ⁻¹ ∘ P ∈
-𝔪_w^μ`. So all derivatives of order `< μ` of `F̂` vanish along `ℂ^{k_C} × 0`, and Taylor lemma
-(`HolomorphicTaylorTail.inNormalPow_of_iterDeriv_eq_zero`) with `OrderTaylor.mem_idealPow_of_inNormalPow` gives `ĝ ∈
-𝓘_C^μ` at `x`. Off `C`, `𝓘_C` contains `1`.
+At `x ∈ C` take nested flattening coordinates `ψ = Φ ∘ e` (`NestedFlattening.exists_nested_flattening`:
+`C = ψ⁻¹(ℂ^{k_C} × 0)`, `N = ψ⁻¹(ℂ^{k_N} × 0)`, `ψ x = 0`) and the linear retraction `P` of `ℂⁿ` onto `ℂ^{k_N} × 0`
+(`planeRetract`).  For `g ∈ 𝔞_x`, the function `ĝ = g ∘ ψ⁻¹ ∘ P ∘ ψ` agrees with `g` on `N` near `x`.  At a point `w`
+of `ℂ^{k_C} × 0` near `0`, `z = ψ⁻¹ w ∈ C` and (coherence) `g ∈ 𝔞_z`, so `g` agrees on `N` near `z` with some
+`h ∈ 𝔪_z^μ`; since `ψ⁻¹ ∘ P` maps into `N` and sends `w` to `z`, `F̂ = g ∘ ψ⁻¹ ∘ P` agrees near `w` with
+`h ∘ ψ⁻¹ ∘ P ∈ 𝔪_w^μ`.  So all derivatives of order `< μ` of `F̂` vanish along `ℂ^{k_C} × 0`, and TN23's Taylor
+lemma (`HolomorphicTaylorTail.inNormalPow_of_iterDeriv_eq_zero`) with `OrderTaylor.mem_idealPow_of_inNormalPow`
+gives `ĝ ∈ 𝓘_C^μ` at `x`.  Off `C`, `𝓘_C` contains `1`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -61,7 +45,10 @@ universe u
 namespace Hironaka.HadamardBridgeAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.HolomorphicTaylorTail Hironaka.OrderTaylor Hironaka.BlowupFlatCoordinates Hironaka.HadamardBridge Hironaka.RestrictedIdealWeight
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.DerivativeIdeal Hironaka.HolomorphicTaylorTail
+  Hironaka.OrderTaylor Hironaka.BlowupFlatCoordinates
+  Hironaka.HadamardBridge Hironaka.RestrictedIdealWeight
 
 noncomputable section
 

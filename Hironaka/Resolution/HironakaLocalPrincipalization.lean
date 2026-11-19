@@ -1,49 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaPrincipalization
 import Hironaka.Resolution.HironakaFromSeqInvariant
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupCompact
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupSequenceIsomorphismOff
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Local principalization on a non-compact complex manifold (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.10 (principalization over a
-quasi-compact manifold) and §13, Theorem 13.2 (the algorithm applied over relatively compact open subsets: "the
-compactness hypothesis guarantees that inv takes only finitely many values"); Włodarczyk 2005
-(`wlodarczyk05-hironaka`), §2.3, "(1) ⟹ (2)".
+Blueprint `hir:principalization-local` (`blueprint/src/hironaka.tex`; TN.5, the Hironaka strengthening (H+3) for the
+standalone library: the local form over a non-compact manifold).  Sources: Bierstone--Milman 1997
+(`bierstone-milman97-invent-math`), Theorem 1.10 (principalization over a quasi-compact manifold) and §13, Theorem 13.2 (the
+algorithm applied over relatively compact open subsets: "the compactness hypothesis guarantees that inv takes only finitely
+many values"); Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.3, "(1) ⟹ (2)".
 
 **Statement.**  Let `X` be a complex manifold, not necessarily compact, `K ⊆ X` compact, and `𝔞` a coherent ideal sheaf on
 `X` which vanishes identically on no nonempty open set.  Then there are an open neighbourhood `U` of `K`, a finite
@@ -51,16 +19,17 @@ sequence of blowups with smooth centres `f : U' → U` and an effective divisor 
 `supp D = f⁻¹ Z(𝔞|_U)` is the union of the members of a divisor with simple normal crossings, and `f` is an isomorphism
 over `U \ Z(𝔞)`.
 
-**Route.** The local canonical driver: for a resolution invariant with well-ordered values (the canonical invariant
-of `CanonicalCentres`), a marked ideal of the domain on any `X` is resolved over an open neighbourhood of a compact
-`K`. Along a canonical segment `T` let `μ` be the maximum of the invariant on the part of the cosupport over `K` (a
-compact set: blowups are proper maps). The points of the cosupport with value `≤ μ` form an open set `W` (upper
-semicontinuity), and since the projection of the tower is a closed map, `O = X \ T.proj (Wᶜ)` is an open
-neighbourhood of `K`. Over `O` the maximum of the invariant on the whole cosupport is `μ`, attained; its maximum
-locus is an admissible centre, and after blowing it up every value over `K` is `< μ` (property (3)). The values are
-well-ordered, so after finitely many steps nothing of the cosupport lies over `K`, and the base is shrunk once more
-to the complement of the image of the cosupport. The successive bases are open sets of open sets; they are brought
-back to open sets of `X` by `MaxLocusLocal.nestedDiffeo` and the transport of towers along biholomorphisms.
+**Route.**  The local canonical driver (`exists_local_resolution`): for a resolution invariant with well-ordered values
+(the canonical invariant of `CanonicalCentres`), a marked ideal of the domain on any `X` is resolved over an open
+neighbourhood of a compact `K`.  Along a canonical segment `T` let `μ` be the maximum of the invariant on the part of the
+cosupport over `K` (a compact set: blowups are proper maps).  The points of the cosupport with value `≤ μ` form an open set
+`W` (upper semicontinuity), and since the projection of the tower is a closed map, `O = X \ T.proj (Wᶜ)` is an open
+neighbourhood of `K`.  Over `O` the maximum of the invariant on the whole cosupport is `μ`, attained; its maximum locus is an
+admissible centre, and after blowing it up every value over `K` is `< μ` (property (3)).  The values are well-ordered, so
+after finitely many steps nothing of the cosupport lies over `K`, and the base is shrunk once more to the complement of the
+image of the cosupport.  The successive bases are open sets of open sets; they are brought back to open sets of `X` by
+`MaxLocusLocal.nestedDiffeo` and the transport of towers along biholomorphisms.  The principalization then follows as in
+`HironakaPrincipalization.exists_tower_principalization`.
 
 New basic facts, valid without compactness: a blowup (in the universal-property sense of `IsBlowupAlong`) is a proper map
 and is surjective; blowup sequences are surjective and are isomorphisms off the image of their exceptional locus.
@@ -73,6 +42,11 @@ and is surjective; blowup sequences are surjective and are isomorphisms off the 
   sequences, and the isomorphism off the image of the exceptional locus without compactness;
 * `isCanonical_restrict`: canonical segments restrict to open sets (for value functions with the properties of
   `EmbeddedFromResolution.EmbeddingFields`, e.g. every `ResolutionInvariantSeq.ResolutionInvariant`);
+* **`exists_local_resolution`** (local canonical driver) and **`exists_principalization_local`** (the public statement).
+
+Import discipline (standalone Hironaka library): this module imports only `HironakaPrincipalization` and
+`HironakaFromSeqInvariant`; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -83,7 +57,12 @@ universe u v
 namespace Hironaka.HironakaLocalPrincipalization
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism Hironaka.DivisorExponentAlong Hironaka.BlowupFlatCoordinates Hironaka.BlowupMonomialCharts Hironaka.BlowupLocalSurjectivity
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism
+  Hironaka.DivisorExponentAlong
+  Hironaka.BlowupFlatCoordinates Hironaka.BlowupMonomialCharts
+  Hironaka.BlowupLocalSurjectivity
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus)
 
@@ -133,6 +112,11 @@ theorem isProperMap_of_isBlowupAlong (hπ : IsBlowupAlong n C π) : IsProperMap 
   obtain ⟨x, -, hx⟩ := hKc.ultrafilter_le_nhds 𝒰 (le_principal_iff.mpr (h hK))
   exact ⟨x, hx⟩
 
+/-- **The preimage of a compact set under a blowup is compact.** -/
+theorem isCompact_preimage_of_isBlowupAlong (hπ : IsBlowupAlong n C π) {K : Set M} (hK : IsCompact K) :
+    IsCompact (π ⁻¹' K) :=
+  (isProperMap_of_isBlowupAlong hπ).isCompact_preimage hK
+
 /-- **A blowup is surjective** (on any complex manifold): its image is closed (a proper map is closed) and contains the
 dense complement of the centre. -/
 theorem surjective_of_isBlowupAlong (hπ : IsBlowupAlong n C π) : Function.Surjective π := by
@@ -163,7 +147,7 @@ theorem IsBlowupSequence.surjective {f : Y → X} (hf : IsBlowupSequence n X Y f
   | step f C g _hf hg ih => exact ih.comp (surjective_of_isBlowupAlong hg)
 
 /-- **A blowup sequence is an isomorphism off every set containing the image of its exceptional locus** (on any complex
-manifold). -/
+manifold; `BlowupSequenceIsomorphismOff.isIsomorphismOver_compl_of_image_exceptionalLocus_subset` without compactness). -/
 theorem isIsomorphismOver_compl_of_image_exceptionalLocus_subset {f : Y → X} (hf : IsBlowupSequence n X Y f)
     {A : Set X} (hA : f '' exceptionalLocus n f ⊆ A) : IsIsomorphismOver n f Aᶜ := by
   have hsurj := IsBlowupSequence.surjective hf
@@ -193,7 +177,9 @@ section Canonical
 variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
   {inv : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ}
 
-/-- **The restriction of a canonical segment to an open set is a canonical segment** of the restricted marked ideal. -/
+/-- **The restriction of a canonical segment to an open set is a canonical segment** of the restricted marked ideal
+(`ResolutionInvariantSegments.isCanonical_restrict` for a value function with the properties of
+`EmbeddedFromResolution.EmbeddingFields`). -/
 theorem isCanonical_restrict (hF : EmbeddedFromResolution.EmbeddingFields n k inv) {X : CMfd.{u} n}
     {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪) (U : Opens X) :
     ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y), IsCanonical 𝔪 (inv 𝔪) T →
@@ -258,6 +244,29 @@ end Nested
 section LocalDriver
 
 variable {Λ : Type v} [LinearOrder Λ] [WellFoundedLT Λ] {k : ℕ}
+
+/-- **Nothing of the cosupport over `K`**: if no point of the cosupport along a multiple test blow-up `T` lies over the
+compact `K`, then `T` restricted to the open complement of the image of the cosupport is a resolution over a neighbourhood
+of `K`. -/
+theorem exists_local_resolution_of_disjoint {X : CMfd.{u} n} {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪)
+    {K : Set X} {Y : CMfd.{u} n} (T : BlowupTower X Y) (hTt : IsGeoTestTower 𝔪 T)
+    (hne : ¬ ((geoTransformAlong 𝔪 T).cosupp ∩ T.proj ⁻¹' K).Nonempty) :
+    ∃ U : Opens X, K ⊆ U ∧ ∃ (Y' : CMfd.{u} n) (T' : BlowupTower (CMfd.of (n := n) U) Y'),
+      IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) T' := by
+  have hdomT := InvDomainTowerAlong.isInvDomain_geoTransformAlong hdom T hTt
+  have hSc : IsClosed (geoTransformAlong 𝔪 T).cosupp :=
+    GiraudAlong.isClosed_cosupport_along hdomT.isWellFormed.isCoherent hdomT.isWellFormed.isClosedSubmanifold_N _
+  let O : Opens X := ⟨(T.proj '' (geoTransformAlong 𝔪 T).cosupp)ᶜ,
+    ((isProperMap_proj T).isClosedMap _ hSc).isOpen_compl⟩
+  have hKO : K ⊆ O := by
+    rintro x hx ⟨y, hyS, rfl⟩
+    exact hne ⟨y, hyS, hx⟩
+  refine ⟨O, hKO, _, restrict O T, MarkedIdealRestrictOpen.isGeoTestTower_restrict O
+    hdom.isWellFormed.isClosedSubmanifold_N hdom.isWellFormed.isCoherent T hTt, ?_⟩
+  rw [ResolutionInvariantSegments.cosupp_geoTransformAlong_restrict hdom.isWellFormed.isClosedSubmanifold_N
+    hdom.isWellFormed.isCoherent O T hTt]
+  refine eq_empty_iff_forall_notMem.mpr fun p hp => ?_
+  exact p.2 ⟨p, hp, rfl⟩
 
 /-- **One step of the local process**: if some point of the cosupport along a canonical segment `T` of `𝔪` lies over the
 compact `K`, let `μ₀` be the maximum of the invariant there.  There are an open neighbourhood `O` of `K` and a canonical
@@ -359,7 +368,136 @@ theorem exists_shrink_step (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v
     rw [hCdef]
     exact ⟨hzS, fun p hp => (hle p hp).trans h.ge⟩
 
+/-- **From an open set of an open set back to an open set of `X`**: a resolution of `(𝔪|_O)|_{U₁}` over an open
+`U₁ ⊆ O` containing `K` gives one of `𝔪|_U` over the open `U ⊆ X` with the points of `U₁`. -/
+theorem exists_resolution_of_nested {X : CMfd.{u} n} {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪) {K : Set X}
+    (O : Opens X) (hKO : K ⊆ O) (U₁ : Opens (CMfd.of (n := n) O)) (hKU₁ : (Subtype.val : O → X) ⁻¹' K ⊆ U₁)
+    {Y₁ : CMfd.{u} n} (T₁ : BlowupTower (CMfd.of (n := n) U₁) Y₁)
+    (hres₁ : IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U₁ → O)
+      (MarkedIdeal.pullback (Subtype.val : O → X) 𝔪)) T₁) :
+    ∃ U : Opens X, K ⊆ U ∧ ∃ (Y' : CMfd.{u} n) (T' : BlowupTower (CMfd.of (n := n) U) Y'),
+      IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) T' := by
+  obtain ⟨U, hUdef⟩ : ∃ U : Opens X, (U : Set X) = (Subtype.val : O → X) '' (U₁ : Set O) :=
+    ⟨⟨_, O.isOpen.isOpenMap_subtype_val _ U₁.isOpen⟩, rfl⟩
+  have hBD : ∀ q : O, q ∈ U₁ ↔ (q : X) ∈ U := fun q => by
+    rw [← SetLike.mem_coe (x := (q : X)), hUdef]
+    exact ⟨fun hq => ⟨q, hq, rfl⟩, fun ⟨q', hq', heq⟩ => (Subtype.ext heq : q' = q) ▸ hq'⟩
+  have hDA : U ≤ O := by
+    intro x hx
+    rw [← SetLike.mem_coe, hUdef] at hx
+    obtain ⟨q, -, rfl⟩ := hx
+    exact q.2
+  have hKU : K ⊆ U := fun x hx => (hBD ⟨x, hKO hx⟩).mp (hKU₁ hx)
+  have hdomO := InvDomainTowerAlong.isInvDomain_pullback_val O hdom
+  have hdom₁ := InvDomainTowerAlong.isInvDomain_pullback_val U₁ hdomO
+  have hiso := BlowupTowerIsomorphism.transport_isTowerIso (MaxLocusLocal.nestedDiffeo (n := n) O U₁ U hBD hDA).symm T₁
+  have hres := (BlowupTowerIsomorphism.IsTowerIso.isGeoResolution_iff
+    (MaxLocusLocal.nestedDiffeo (n := n) O U₁ U hBD hDA).symm
+    hdom₁.isWellFormed.isClosedSubmanifold_N hdom₁.isWellFormed.isCoherent hiso).mpr hres₁
+  rw [pullback_symm_nestedDiffeo hdom.isWellFormed.isCoherent O U₁ U hBD hDA] at hres
+  exact ⟨U, hKU, _, _, hres⟩
+
+/-- **The local canonical driver, inductive form**: along a canonical segment `T` of `𝔪` all of whose values over the
+compact `K` are `< μ`, the marked ideal is resolved over an open neighbourhood of `K`.  Induction on `μ` (well-ordered
+values): shrink the base and blow up the maximum locus (`exists_shrink_step`), then continue with the values `< μ₀`. -/
+theorem exists_local_resolution_of_lt (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v} n k Λ)
+    (μ : WithTop Λ) :
+    ∀ {X : CMfd.{u} n} (𝔪 : MarkedIdeal n X), IsInvDomain k 𝔪 → ∀ (K : Set X), IsCompact K →
+      ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T →
+      (∀ z ∈ (geoTransformAlong 𝔪 T).cosupp, T.proj z ∈ K → ((R.inv 𝔪 T z : Λ) : WithTop Λ) < μ) →
+      ∃ U : Opens X, K ⊆ U ∧ ∃ (Y' : CMfd.{u} n) (T' : BlowupTower (CMfd.of (n := n) U) Y'),
+        IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) T' := by
+  induction μ using WellFoundedLT.induction with
+  | _ μ ih => ?_
+  intro X 𝔪 hdom K hK Y T hcan hlt
+  have hTt := (HironakaFromSeqInvariant.embeddingFields_of_seq R).isGeoTestTower_of_isCanonical hdom T hcan
+  by_cases hne : ((geoTransformAlong 𝔪 T).cosupp ∩ T.proj ⁻¹' K).Nonempty
+  · obtain ⟨z₀, hz₀, O, hKO, Y₁, T₁, hcan₁, hlt₁⟩ := exists_shrink_step R hdom hK T hcan hne
+    have hK₁ : IsCompact ((Subtype.val : O → X) ⁻¹' K) :=
+      (Topology.IsInducing.subtypeVal.isCompact_preimage_iff (fun x hx => ⟨⟨x, hKO hx⟩, rfl⟩)).mpr hK
+    obtain ⟨U₁, hKU₁, Y₂, T₂, hres₂⟩ := ih _ (hlt z₀ hz₀.1 hz₀.2) (MarkedIdeal.pullback (Subtype.val : O → X) 𝔪)
+      (InvDomainTowerAlong.isInvDomain_pullback_val O hdom) ((Subtype.val : O → X) ⁻¹' K) hK₁ T₁ hcan₁
+      fun z hz hzK => WithTop.coe_lt_coe.mpr (hlt₁ z hz hzK)
+    exact exists_resolution_of_nested hdom O hKO U₁ hKU₁ T₂ hres₂
+  · exact exists_local_resolution_of_disjoint hdom T hTt hne
+
+/-- **The local canonical driver** (`hir:principalization-local`, first part): let `R` be a resolution invariant in
+dimension `≤ k` with well-ordered values (e.g. `CanonicalCentres.canonicalInvariant`), `X` any complex manifold (not
+necessarily compact), `𝔪` a marked ideal of the domain and `K ⊆ X` compact.  Then there are an open neighbourhood `U` of
+`K` and a multiple test blow-up of `𝔪|_U` with empty final cosupport. -/
+theorem exists_local_resolution (R : ResolutionInvariantSeq.ResolutionInvariant.{u, v} n k Λ) {X : CMfd.{u} n}
+    {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪) {K : Set X} (hK : IsCompact K) :
+    ∃ U : Opens X, K ⊆ U ∧ ∃ (Y : CMfd.{u} n) (T : BlowupTower (CMfd.of (n := n) U) Y),
+      IsGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) T :=
+  exists_local_resolution_of_lt R ⊤ 𝔪 hdom K hK .refl trivial fun _ _ _ => WithTop.coe_lt_top _
+
 end LocalDriver
+
+/-! ### Local principalization -/
+
+section Principalization
+
+/-- **Local principalization, tower form**: on any complex manifold `X`, a coherent ideal nonzero at every point is
+principalized over an open neighbourhood `U` of a compact `K` by a multiple test blow-up `T` of `(U, U, [], 𝔞|_U, 1)`:
+`T^*(𝔞|_U) = 𝒪(-E_T)`, the support of `E_T` is the union of the members of the transformed divisor, which has simple normal
+crossings, and the exceptional locus of `T` lies in that support. -/
+theorem exists_tower_principalization_local {X : CMfd.{u} n} {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent)
+    (hne : ∀ x, IsNonzeroAlongAt univ 𝔞 x) {K : Set X} (hK : IsCompact K) :
+    ∃ U : Opens X, K ⊆ U ∧ ∃ (Y : CMfd.{u} n) (T : BlowupTower (CMfd.of (n := n) U) Y),
+      GermIdeal.pullback (m := n) T.proj (GermIdeal.pullback (m := n) (Subtype.val : U → X) 𝔞) =
+        (BlowupTowerTransforms.exceptionalDivisor T).ideal ∧
+      IsSNCDivisor n (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X)
+        (⟨univ, [], 𝔞, 1⟩ : MarkedIdeal n X)) T).E ∧
+      (BlowupTowerTransforms.exceptionalDivisor T).support =
+        ⋃ H ∈ (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : U → X)
+          (⟨univ, [], 𝔞, 1⟩ : MarkedIdeal n X)) T).E, H ∧
+      exceptionalLocus n T.proj ⊆ (BlowupTowerTransforms.exceptionalDivisor T).support := by
+  set 𝔪 : MarkedIdeal n X := ⟨univ, [], 𝔞, 1⟩ with h𝔪
+  have hdom : IsInvDomain n 𝔪 := HironakaPrincipalization.isInvDomain_univ h𝔞 hne
+  obtain ⟨U, hKU, Y, T, hres⟩ := exists_local_resolution (CanonicalCentres.canonicalInvariant.{u} n) hdom hK
+  have hdomU := InvDomainTowerAlong.isInvDomain_pullback_val U hdom
+  refine ⟨U, hKU, Y, T, ?_, ?_, HironakaPrincipalization.support_exceptionalDivisor_eq_biUnion _ rfl T,
+    HironakaPrincipalization.exceptionalLocus_subset_support T⟩
+  · exact pullback_eq_exceptionalDivisor_of_isGeoResolution (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) rfl
+      hdomU.isWellFormed.isCoherent rfl T hres
+  · exact (InvDomainTowerAlong.isInvDomain_geoTransformAlong hdomU T hres.1).isWellFormed.isSNCDivisor
+
+/-- **Local principalization of a coherent ideal** (Hironaka; `hir:principalization-local`): let `X` be a complex manifold,
+not necessarily compact, `K ⊆ X` compact, and `𝔞` a coherent ideal sheaf on `X` which is nonzero at every point (some germ
+of `𝔞_x` is not identically zero near `x`).  There are an open neighbourhood `U` of `K`, a finite sequence of blowups with
+smooth centres `f : U' → U`, an effective divisor `D` on `U'` and a list `E` of hypersurfaces with simple normal crossings
+such that `f^*(𝔞|_U) = 𝒪(-D)`, `supp D = ⋃ E = f⁻¹ (U ∩ Z(𝔞))`, and `f` is an isomorphism over `U \ Z(𝔞)`. -/
+theorem exists_principalization_local {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
+    [IsComplexManifold n X] {𝔞 : GermIdeal n X} (h𝔞 : 𝔞.IsCoherent) (hne : ∀ x, IsNonzeroAlongAt univ 𝔞 x)
+    {K : Set X} (hK : IsCompact K) :
+    ∃ U : Opens X, K ⊆ U ∧
+    ∃ (U' : Type u) (_ : TopologicalSpace U') (_ : ChartedSpace (ComplexModel n) U')
+      (_ : IsComplexManifold n U') (f : U' → U) (_ : IsBlowupSequence n U U' f)
+      (D : EffectiveDivisor n U') (E : List (Set U')),
+      GermIdeal.pullback (m := n) f (GermIdeal.pullback (m := n) (Subtype.val : U → X) 𝔞) = D.ideal ∧
+      IsSNCDivisor n E ∧
+      D.support = ⋃ H ∈ E, H ∧
+      D.support = f ⁻¹' ((Subtype.val : U → X) ⁻¹' 𝔞.zeroLocus) ∧
+      IsIsomorphismOver n f ((Subtype.val : U → X) ⁻¹' 𝔞.zeroLocus)ᶜ := by
+  obtain ⟨U, hKU, Y, T, hpb, hsnc, hsupp, hexc⟩ :=
+    exists_tower_principalization_local (X := CMfd.of (n := n) X) h𝔞 hne hK
+  have h𝔞U : (GermIdeal.pullback (m := n) (Subtype.val : U → X) 𝔞).IsCoherent :=
+    (InvDomainTowerAlong.isInvDomain_pullback_val U (HironakaPrincipalization.isInvDomain_univ
+      (M := CMfd.of (n := n) X) h𝔞 hne)).isWellFormed.isCoherent
+  have hZ : (GermIdeal.pullback (m := n) (Subtype.val : U → X) 𝔞).zeroLocus = (Subtype.val : U → X) ⁻¹' 𝔞.zeroLocus :=
+    BlowupExceptionalDivisor.zeroLocus_pullback contMDiff_subtype_val h𝔞
+  have hsuppZ : (BlowupTowerTransforms.exceptionalDivisor T).support =
+      T.proj ⁻¹' ((Subtype.val : U → X) ⁻¹' 𝔞.zeroLocus) := by
+    rw [EffectiveDivisor.support, ← hpb, BlowupExceptionalDivisor.zeroLocus_pullback T.contMDiff_proj h𝔞U, hZ]
+  refine ⟨U, hKU, Y, inferInstance, inferInstance, inferInstance, T.proj, T.isBlowupSequence,
+    BlowupTowerTransforms.exceptionalDivisor T, _, hpb, hsnc, hsupp, hsuppZ, ?_⟩
+  refine isIsomorphismOver_compl_of_image_exceptionalLocus_subset T.isBlowupSequence ?_
+  rintro x ⟨z, hz, rfl⟩
+  have hz' := hexc hz
+  rw [hsuppZ] at hz'
+  exact hz'
+
+end Principalization
 
 end
 

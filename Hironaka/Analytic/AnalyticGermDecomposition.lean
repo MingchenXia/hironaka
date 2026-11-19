@@ -1,10 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
@@ -66,6 +61,15 @@ theorem IsAnalyticGerm.congr {A B : Set E} (hA : IsAnalyticGerm A) (hAB : A =ᶠ
   refine ⟨s, g, hg, (hAg.and (eventuallyEq_set.1 hAB)).mono fun z hz => ?_⟩
   exact hz.2.symm.trans hz.1
 
+/-- The whole space is an analytic germ. -/
+theorem isAnalyticGerm_univ : IsAnalyticGerm (Set.univ : Set E) :=
+  ⟨0, Fin.elim0, fun j => j.elim0, Eventually.of_forall fun _ => by simp⟩
+
+/-- The empty set is an analytic germ. -/
+theorem isAnalyticGerm_empty : IsAnalyticGerm (∅ : Set E) :=
+  isAnalyticGerm_of_finite (ι := Unit) (fun _ _ => 1)
+    (fun _ => eventually_differentiableAt_const 1) (Eventually.of_forall fun _ => by simp)
+
 /-- The zero set of a function differentiable near `0` is an analytic germ. -/
 theorem isAnalyticGerm_zeroSet {f : E → ℂ} (hf : ∀ᶠ z in 𝓝 0, DifferentiableAt ℂ f z) :
     IsAnalyticGerm {z | f z = 0} :=
@@ -81,6 +85,27 @@ theorem IsAnalyticGerm.inter {A B : Set E} (hA : IsAnalyticGerm A) (hB : IsAnaly
   · cases i <;> simp [hg, hh]
   · intro z hz
     simp [Set.mem_inter_iff, hz.1, hz.2, Sum.forall]
+
+/-- The union of two analytic germs is an analytic germ, cut out by the pairwise products of
+the defining functions. -/
+theorem IsAnalyticGerm.union {A B : Set E} (hA : IsAnalyticGerm A) (hB : IsAnalyticGerm B) :
+    IsAnalyticGerm (A ∪ B) := by
+  obtain ⟨s, g, hg, hAg⟩ := hA
+  obtain ⟨t, h, hh, hBh⟩ := hB
+  refine isAnalyticGerm_of_finite (fun p : Fin s × Fin t => fun z => g p.1 z * h p.2 z)
+    (fun p => eventually_differentiableAt_mul (hg p.1) (hh p.2)) ((hAg.and hBh).mono ?_)
+  intro z hz
+  rw [Set.mem_union, hz.1, hz.2]
+  constructor
+  · rintro (H | H) p
+    · simp [H p.1]
+    · simp [H p.2]
+  · intro H
+    by_cases hg0 : ∀ i, g i z = 0
+    · exact Or.inl hg0
+    · push Not at hg0
+      obtain ⟨i, hi⟩ := hg0
+      exact Or.inr fun j => (mul_eq_zero.1 (H (i, j))).resolve_left hi
 
 /-- Intersecting an analytic germ with the zero set of a function differentiable near `0`
 gives an analytic germ. -/
@@ -143,6 +168,22 @@ theorem le_of_vanishingIdeal_le {A B : Set E} (hB : IsAnalyticGerm B)
     (mem_vanishingIdeal_mk (hf := hg j)).1 <| h <| (mem_vanishingIdeal_mk (hf := hg j)).2 <|
       hBg.mono fun z hz hzB => hz.1 hzB j
   exact ((eventually_all.2 hgA).and hBg).mono fun z hz hzA => hz.2.2 fun j => hz.1 j hzA
+
+/-- For an analytic germ `B`, `I(B) ≤ I(A)` iff `A ≤ᶠ B`. -/
+theorem vanishingIdeal_le_iff {A B : Set E} (hB : IsAnalyticGerm B) :
+    vanishingIdeal B ≤ vanishingIdeal A ↔ A ≤ᶠ[𝓝 0] B :=
+  ⟨le_of_vanishingIdeal_le hB, vanishingIdeal_anti⟩
+
+/-- Two analytic germs coincide iff their vanishing ideals coincide. -/
+theorem eventuallyEq_iff_vanishingIdeal_eq {A B : Set E} (hA : IsAnalyticGerm A)
+    (hB : IsAnalyticGerm B) : A =ᶠ[𝓝 0] B ↔ vanishingIdeal A = vanishingIdeal B :=
+  ⟨vanishingIdeal_congr, fun h =>
+    (le_of_vanishingIdeal_le hB h.ge).antisymm (le_of_vanishingIdeal_le hA h.le)⟩
+
+/-- A strict germ inclusion of analytic germs gives a strict inclusion of vanishing ideals. -/
+theorem vanishingIdeal_lt_of_lt {A B : Set E} (hA : IsAnalyticGerm A) (hAB : A ≤ᶠ[𝓝 0] B)
+    (hBA : ¬ B ≤ᶠ[𝓝 0] A) : vanishingIdeal B < vanishingIdeal A :=
+  lt_of_le_not_ge (vanishingIdeal_anti hAB) fun h => hBA (le_of_vanishingIdeal_le hA h)
 
 /-! ### Irreducible germs -/
 

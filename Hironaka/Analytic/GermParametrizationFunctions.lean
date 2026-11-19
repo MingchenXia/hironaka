@@ -1,19 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermAlgebraicParametrization
 import Hironaka.Analytic.GermParametrizationData
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.HolomorphicGermRing
+
 set_option autoImplicit false
 
 /-!
 # From germ-level algebra to pointwise parametrization identities
+
+Blueprint `lag:substitution-relations`, `lag:ideal-comparison`,
+`lag:parametrization-sets` (algebraic identities) (Demailly, *Complex analytic and
+differential geometry*, II.4.15--4.19).
 
 If `A` is an analytic germ whose vanishing ideal is prime and carries
 `AlgebraicParametrization (vanishingIdeal A) d`, then choosing holomorphic representatives

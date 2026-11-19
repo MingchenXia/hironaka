@@ -1,31 +1,21 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSpaceRatio
 import Mathlib.Analysis.Calculus.FDeriv.WithLp
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSpace
-import Hironaka.Blowup.BlowupSpaceTangent
-import Hironaka.Analytic.HolomorphicGermAlgebra
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The coordinate changes of the blowup are holomorphic
 
-Source: Demailly, *Complex analytic and differential geometry*, VII.12.2 (`agbook.tex` lines 20306--20326).
+Source: Demailly, *Complex analytic and differential geometry*, VII.12.2
+(`references/demailly-cadg`, `agbook.tex` lines 20306--20326); blueprint `bex:atlas`.
 
-Fourth module of the construction of the blowup. The atlas `blowupAtlas n C` consists of Demailly's monomial charts
-`τ̃ⱼ` over all flattening charts (`FlatChart.toPartialEquiv`) and the charts of `X` restricted to `X \ C`
-(`OffChart.toPartialEquiv`). For two charts `a, b` of the atlas the coordinate change `b ∘ a⁻¹` has an open domain
-`a.target ∩ a⁻¹(b.source)` and is holomorphic there (`isOpen_transition`, `differentiableOn_transition`). Between
-two monomial charts this is Demailly's lemma (`FlatChart.differentiableAt_ratio`): the coordinates of `τ̃'ⱼ'` are
+Fourth module of the construction of the blowup (TN.4 #6).  The atlas `blowupAtlas n C` consists of
+Demailly's monomial charts `τ̃ⱼ` over all flattening charts (`FlatChart.toPartialEquiv`) and the
+charts of `X` restricted to `X \ C` (`OffChart.toPartialEquiv`).  For two charts `a, b` of the atlas
+the coordinate change `b ∘ a⁻¹` has an open domain `a.target ∩ a⁻¹(b.source)` and is holomorphic
+there (`isOpen_transition`, `differentiableOn_transition`).  Between two monomial charts this is
+Demailly's lemma (`FlatChart.differentiableAt_ratio`): the coordinates of `τ̃'ⱼ'` are
 `(τ'ᵢ/τ'ⱼ')~ = (τ'ᵢ/τⱼ)~ / (τ'ⱼ'/τⱼ)~`.
 -/
 
@@ -36,7 +26,8 @@ universe u
 
 namespace Hironaka.BlowupConstruction
 
-open Hironaka.HolomorphicIdealSheaves BlowupFlatCoordinates BlowupMonomialCharts BlowupSpaceTangent BlowupSpace
+open Hironaka.HolomorphicIdealSheaves BlowupFlatCoordinates BlowupMonomialCharts
+  BlowupSpaceTangent BlowupSpace
 
 noncomputable section
 

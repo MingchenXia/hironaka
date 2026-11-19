@@ -1,39 +1,35 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.IdealOrderArithmetic
 import Hironaka.Analytic.HolomorphicAnalytic
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.Analytic.IdealPowers
-import Hironaka.Invariant.OrderTaylor
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Multiplicativity of the order: `ord_x(g^ν) = ν · ord_x(g)`
 
-Source: Włodarczyk 2005 §2.9 (`supp(𝓘^ν, μν) = supp(𝓘, μ)`, used in Lemma `le:operations` for sums of marked ideals
-with different marks).
+Blueprint `hir:order-power` (`blueprint/src/hironaka.tex`, Hironaka phase H1).  Source: Włodarczyk 2005 §2.9
+(`supp(𝓘^ν, μν) = supp(𝓘, μ)`, used in Lemma `le:operations` for sums of marked ideals with different marks).
 
 ## Main results
 
 * `ContinuousMultilinearMap.eq_zero_of_symmetric_of_apply_diag`: **polarization** -- a symmetric continuous
   multilinear map over `ℂ` which vanishes on the diagonal is zero.
-* `iterDeriv_ofFn_eq_iteratedFDeriv`: the iterated directional derivatives of `HolomorphicTaylorTail` are the values
-  of `iteratedFDeriv`.
+* `iterDeriv_ofFn_eq_iteratedFDeriv`: the iterated directional derivatives of TN23's `HolomorphicTaylorTail` are
+  the values of `iteratedFDeriv`.
 * `mem_idealPow_pointIdeal_iff_iteratedFDeriv`: `g ∈ 𝔪_x^q ⟺ D^j(g ∘ e⁻¹)(e x) = 0` for `j < q`
   (preferred chart `e`).
 * `mem_idealPow_of_pow_mem`: if `g^ν ∈ 𝔪_x^{νμ}` with `ν ≥ 1`, then `g ∈ 𝔪_x^μ`.  Proof: if not, let `a < μ`
   be the order of `g`; by polarization some direction `y` has `D^a G(p)(y, …, y) ≠ 0`, so `t ↦ G(p + t y)`
   has order exactly `a` at `0` and its `ν`-th power order `νa < νμ` (mathlib's `analyticOrderAt_pow`),
   contradicting `g^ν ∈ 𝔪_x^{νμ}`.
+* `cosupport_idealPow_mul_eq` (`N = M`): `cosupp(𝔞^ν, μν) = cosupp(𝔞, μ)` for `ν ≥ 1`;
+  `cosupport_sumIdeal_idealPow` (Włodarczyk `le:operations`(1) for two marked ideals):
+  `cosupp(𝔞^ν + 𝔟^μ, μν) = cosupp(𝔞, μ) ∩ cosupp(𝔟, ν)` for `μ, ν ≥ 1`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.
+
+Sorry-free.
 -/
 
 open Set Filter
@@ -42,7 +38,10 @@ open scoped Topology Manifold ContDiff
 namespace Hironaka.OrderMultiplicativity
 
 open Hironaka.HolomorphicIdealSheaves
-open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder Hironaka.DerivativeIdeal Hironaka.OrderTaylor Hironaka.HolomorphicTaylorTail Hironaka.IdealOrderArithmetic Hironaka.RestrictedIdealExtension Hironaka.HolomorphicAnalytic
+open Hironaka.IdealWeightPowers Hironaka.GermIdealOrder
+  Hironaka.DerivativeIdeal Hironaka.OrderTaylor
+  Hironaka.HolomorphicTaylorTail Hironaka.IdealOrderArithmetic
+  Hironaka.RestrictedIdealExtension Hironaka.HolomorphicAnalytic
 
 noncomputable section
 
@@ -264,6 +263,30 @@ theorem mem_idealPow_of_pow_mem {x : M} {g : M → ℂ} (hg : HolomorphicAt n g 
     exact_mod_cast hle
   have : ν * a < ν * μ := Nat.mul_lt_mul_of_pos_left haμ hν
   omega
+
+/-! ### Cosupports of powers and of sums of marked ideals -/
+
+variable {𝔞 𝔟 : GermIdeal n M}
+
+/-- **`cosupp(𝔞^ν, μν) = cosupp(𝔞, μ)`** for `ν ≥ 1` (`N = M`, `𝔞` an ideal of holomorphic germs). -/
+theorem cosupport_idealPow_mul_eq (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {ν : ℕ} (hν : 1 ≤ ν)
+    (μ : ℕ) : cosupport n univ (idealPow 𝔞 ν) (μ * ν) = cosupport n univ 𝔞 μ := by
+  refine Subset.antisymm ?_ (cosupport_subset_cosupport_idealPow μ ν)
+  rintro x ⟨-, hx⟩
+  refine ⟨mem_univ x, fun g hg => ⟨g, ?_, Eventually.of_forall fun _ _ => rfl⟩⟩
+  have hpow := mem_idealPow_of_vanishesToOrderOn_univ (hx _ (pow_mem_idealPow hg (h𝔞 x g hg) ν))
+  rw [Nat.mul_comm] at hpow
+  exact mem_idealPow_of_pow_mem (h𝔞 x g hg) hν hpow
+
+/-- **The sum of two marked ideals** (Włodarczyk `le:operations`(1)): for `μ, ν ≥ 1`,
+`cosupp(𝔞^ν + 𝔟^μ, μν) = cosupp(𝔞, μ) ∩ cosupp(𝔟, ν)` (`N = M`). -/
+theorem cosupport_sumIdeal_idealPow (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x)
+    (h𝔟 : ∀ x g, 𝔟.mem x g → HolomorphicAt n g x) {μ ν : ℕ} (hμ : 1 ≤ μ) (hν : 1 ≤ ν) :
+    cosupport n univ (sumIdeal (idealPow 𝔞 ν) (idealPow 𝔟 μ)) (μ * ν) =
+      cosupport n univ 𝔞 μ ∩ cosupport n univ 𝔟 ν := by
+  rw [cosupport_sumIdeal (fun x g hg => holomorphicAt_of_mem_idealPow hg)
+      (fun x g hg => holomorphicAt_of_mem_idealPow hg),
+    cosupport_idealPow_mul_eq h𝔞 hν μ, Nat.mul_comm, cosupport_idealPow_mul_eq h𝔟 hμ ν]
 
 end Iterated
 

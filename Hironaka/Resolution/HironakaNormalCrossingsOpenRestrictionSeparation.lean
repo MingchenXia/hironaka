@@ -1,13 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaNormalCrossingsSeparationChoiceComparison
 import Hironaka.Resolution.HironakaBaseChange
 import Hironaka.Blowup.BlowupExistenceCodimOne
-import Hironaka.Blowup.BlowupEmptyCentreExact
-import Hironaka.Blowup.BlowupTowerRestrictLengthExact
 
 /-! # Actual NC separation on opens with internally omitted empty steps
 
@@ -33,7 +26,6 @@ ideal cosupport admissibility remain open. The protected strict statement module
 are absent from imports and the actual proof/type cone.
 -/
 
-
 set_option autoImplicit false
 
 open Set
@@ -48,8 +40,6 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves
   HironakaNormalCrossingsSeparationChoiceComparison
   BlowupTowers BlowupTowerTransforms BlowupTowerIsomorphism BlowupStrictSubmanifold MarkedIdeals
   MarkedIdeals.MarkedIdeal HironakaStageCenters NormalCrossings RestrictEmptyTower
-
-open Hironaka
 
 noncomputable section
 attribute [local instance] Classical.propDecidable

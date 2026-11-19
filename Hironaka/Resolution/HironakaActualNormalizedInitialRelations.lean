@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualOwnerAnalyticDivision
 import Hironaka.Resolution.HironakaActualNormalAxisDehomogenization
 
@@ -35,7 +30,6 @@ open HolGerm HironakaRelativeNormalIdeal HironakaRelativeNormalMonomialBasis
   HironakaActualOriginalTaylorPolynomial
 variable {n : ℕ}
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Actual point powers, genuine exceptional quotients and analytic-domain cancellation transport a whole weighted source syzygy. -/
 theorem exists_actual_normalized_syzygy {ι : Type*} [Fintype ι]
     (G C H : ι → HolGerm (ComplexModel (0+n))) (d : ι → ℕ) (D : ℕ)
@@ -72,7 +66,6 @@ theorem exists_actual_normalized_syzygy {ι : Type*} [Fintype ι]
 
 
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- One actual normalized canonical family, fixed before EVERY genuine homogeneous initial relation, admits whole analytic target relation lifts with their literal polynomial exceptional restrictions. -/
 theorem exists_original_point_normalized_initial_relation_lifts
     (J : Ideal (HolGerm (ComplexModel (0+n)))) (j : Fin n) (b : Fin (0+n) → ℂ) :
@@ -188,7 +181,6 @@ private theorem originalTaylor_polynomial (p : MvPolynomial (Fin n) ℂ) :
       rw [show originalPolynomialEval n (MvPolynomial.X i)=normalCoordinate 0 n i from MvPolynomial.aeval_X _ i,
         originalTaylorAlgHom_coordinate,MvPolynomial.coe_X]
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- EVERY literal homogeneous polynomial initial relation lifts to a whole analytic relation of the SAME prechosen normalized family, with exact polynomial dehomogenization plus an exceptional multiple. -/
 theorem exists_original_point_polynomial_relation_lifts
     (J : Ideal (HolGerm (ComplexModel (0+n)))) (j : Fin n) (b : Fin (0+n) → ℂ) :

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.PureSingularLocus
 
 set_option autoImplicit false
@@ -46,8 +41,6 @@ namespace Hironaka.RankDegeneracy
 
 open AnalyticJacobianSingularCore StokesSingularLocusAnalytic AnalyticDimensionBasics
 open RegularPatchNeighborhood RegularLocusDense HolomorphicIdealSheaves
-
-open Hironaka
 
 noncomputable section
 

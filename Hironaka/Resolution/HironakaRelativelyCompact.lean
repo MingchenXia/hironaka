@@ -1,52 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.ExceptionalLocus
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.SingularLocus
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Coherence.CartanIrreducible
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.Resolution.HironakaEmbeddedExceptional
-import Hironaka.Resolution.HironakaEmbeddedResolutionLocal
-import Hironaka.Resolution.HironakaFromSeqInvariant
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Resolution.HironakaPrincipalization
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxLocusLocal
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionInvariantSegments
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.SmoothCentreInvariant
-import Hironaka.Resolution.StrictTransformComposition
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Principalization and embedded resolution over relatively compact open sets (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorems 1.6 and 1.10 and §13 ("finite over
-every relatively compact open subset"); Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.3.
+Blueprint `hir:resolution-relatively-compact` (`blueprint/src/hironaka.tex`; TN.5, item S6 of the review 57572af3 of the
+Hironaka strengthenings).  Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorems 1.6 and 1.10 and §13
+("finite over every relatively compact open subset"); Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.3.
 
 **Statement.**  Let `X` be a complex manifold, not necessarily compact, and `X₀ ⊆ X` an open set contained in a compact set
 (e.g. a relatively compact open set).
@@ -72,6 +34,9 @@ canonical segments and resolutions restrict to open sets, and the open set `X₀
 * **`exists_principalization_of_subset_isCompact`**, **`exists_embeddedResolution_of_subset_isCompact`**;
 * `exists_principalization_local_admissible`, `exists_embeddedResolution_local_admissible` (local forms with admissibility
   and a relatively compact neighbourhood).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaAdmissibleSequence` only; it does not import,
+even transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -81,11 +46,17 @@ universe u v
 
 namespace Hironaka.HironakaRelativelyCompact
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism Hironaka.HironakaAdmissibleSequence Hironaka.MarkedIdealBiholomorphism
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong
+  Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism
+  Hironaka.HironakaAdmissibleSequence Hironaka.MarkedIdealBiholomorphism
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
-open Hironaka.EmbeddedFromResolution (EmbeddingFields regularOpen regularAtDim_of_mem_regularOpen isInvDomain_vanishingIdeal_of_dim_lt isClosedConnectedSubmanifold_of_dim_eq)
-open Hironaka.HironakaEmbeddedResolutionLocal (exceptionalDivisor_facts_of_centresAvoid subset_closure_inter_regularOpen)
+open Hironaka.EmbeddedFromResolution (EmbeddingFields regularOpen
+  regularAtDim_of_mem_regularOpen isInvDomain_vanishingIdeal_of_dim_lt isClosedConnectedSubmanifold_of_dim_eq)
+open Hironaka.HironakaEmbeddedResolutionLocal (exceptionalDivisor_facts_of_centresAvoid
+  subset_closure_inter_regularOpen)
 
 noncomputable section
 

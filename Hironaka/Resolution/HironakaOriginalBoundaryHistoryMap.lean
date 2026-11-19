@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalStepOneCurveHistory
 /-! Actual initial-boundary compatibility for the complete indexed history map.
 Complete two-node mathematics preceded code. Higher outer histories remain open. -/

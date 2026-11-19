@@ -1,52 +1,30 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralCanonicalTail
 import Hironaka.Invariant.StepOneUSC
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.GeneralValue
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.NonmonomialOrderCanonical
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderMonomialCanonical
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.ResolutionInvariantOrder
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Property (2) of the general value: upper semicontinuity
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a: the invariant `(ν, inv_𝓞)` is
-upper semicontinuous because `ν` is and, among the nearby points of the same order, the values are those of the
-maximal-order invariant of one companion ideal, which is upper semicontinuous by Step 1.
+Blueprint `hir:general-usc` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:general-step`).  Source:
+Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2a: the invariant `(ν, inv_𝓞)` is upper semicontinuous
+because `ν` is and, among the nearby points of the same order, the values are those of the maximal-order invariant of one
+companion ideal, which is upper semicontinuous by Step 1.
 
 Let `𝔪` lie in the domain (`0 < n`), `M` a value function for the marked ideals of maximal order
-(`MaxOrderValue.IsMaxOrderValue`) and `T` a canonical segment of the general value `genInv M 𝔪` which is a multiple
-test blow-up. At a point `y` of the cosupport of order `o ≥ 1`, the nearby points of the cosupport of order `o` lie
-over the mask `W` of the start of `y` and in the cosupport of the companion ideal formed there along the restricted
-tail (`GeneralCanonicalTail.mem_cosupp_compAt_iff`), where the general value is `(o, M)` of that companion ideal
-(`GeneralCanonicalTail.genInv_eq_of_mem_cosupp_compAt`), and `M` is upper semicontinuous along the restricted tail,
-a canonical segment of the companion ideal (property (2) of `M`, the canonical-tail theorem):
-`genInv_eventually_le_of_pos`. At points of order `0` this is
-`NonmonomialOrderMonomialCanonical.eventually_le_of_nmOrd_eq_zero`, and
+(`MaxOrderValue.IsMaxOrderValue`) and `T` a canonical segment of the general value `genInv M 𝔪` which is a multiple test blow-up.
+At a point `y` of the cosupport of order `o ≥ 1`, the nearby points of the cosupport of order `o` lie over the mask `W` of the
+start of `y` and in the cosupport of the companion ideal formed there along the restricted tail
+(`GeneralCanonicalTail.mem_cosupp_compAt_iff`), where the general value is `(o, M)` of that companion ideal
+(`GeneralCanonicalTail.genInv_eq_of_mem_cosupp_compAt`), and `M` is upper semicontinuous along the restricted tail, a canonical
+segment of the companion ideal (property (2) of `M`, the canonical-tail theorem): `genInv_eventually_le_of_pos`.  At points of
+order `0` this is TN3's `NonmonomialOrderMonomialCanonical.eventually_le_of_nmOrd_eq_zero`, and TN3's
 `NonmonomialOrderCanonical.isInvUSCOn_of_ordMonotone` reduces upper semicontinuity to points of the same order:
 **`genInv_usc`**.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -57,7 +35,15 @@ universe u v
 namespace Hironaka.GeneralUSC
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.GeneralCanonicalTail Hironaka.ResolutionInvariantOrder
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit
+  Hironaka.MarkedIdealRestrictOpen Hironaka.StepOneRegime
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime
+  Hironaka.NonmonomialOrderCanonical Hironaka.NonmonomialOrderTail
+  Hironaka.HomogenizedIdealAlong Hironaka.MaxOrderValue
+  Hironaka.GeneralValue Hironaka.GeneralCanonicalTail
+  Hironaka.ResolutionInvariantOrder
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section

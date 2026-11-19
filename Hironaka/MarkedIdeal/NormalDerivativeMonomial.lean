@@ -1,40 +1,31 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.NormalDerivativeChart
 import Hironaka.Blowup.BlowupStrictSubmanifold
 import Hironaka.Blowup.NestedFlattening
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Analytic.HolomorphicTaylorTail
-import Hironaka.MarkedIdeal.NormalTaylorOrder
-import Hironaka.Analytic.RegularAtDimTransport
-import Hironaka.Blowup.RegularPatchPushforward
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Normal derivatives through the monomial charts of a blowup
 
-Source: Włodarczyk 2005, proof of Lemma `le:S`; GGT 2008, proof of Proposition 5.6.4: in the chart `x'ᵢ = xᵢ / y_m`
-of the blowup along a centre inside `S = {x = 0}`, the controlled transform `f' = y_m^{-μ} σ^* f` has normal
-coefficients `c'_α = y_m^{|α| - μ} σ^* c_α`.
+Hironaka phase H3 (TN23-ENVELOPES); blueprint `mc:normal-derivative-monomial` (`blueprint/src/maximal-contact.tex`).
+Source: Włodarczyk 2005, proof of Lemma `le:S`; GGT 2008, proof of Proposition 5.6.4: in the chart
+`x'ᵢ = xᵢ / y_m` of the blowup along a centre inside `S = {x = 0}`, the controlled transform
+`f' = y_m^{-μ} σ^* f` has normal coefficients `c'_α = y_m^{|α| - μ} σ^* c_α`.
 
 In `ℂⁿ`, for the monomial map `σⱼ` (`σⱼ(w)ᵢ = wᵢ wⱼ` for `i ≥ k`, `i ≠ j`) and directions `eₗ` with `l ≠ j`, `k ≤ l`:
 * `monomial_add_smul_single`: `σⱼ(w + t eₗ) = σⱼ(w) + t wⱼ eₗ`;
 * `iterDeriv_comp_monomial`: `∂^L (G ∘ σⱼ) = wⱼ^{|L|} (∂^L G) ∘ σⱼ`;
+* `iterDeriv_pow_mul`: `∂^L (wⱼ^m H) = wⱼ^m ∂^L H`.
 
 Nested flat charts in product form (`FlatChart.exists_nested`): given a flat chart for `S` (plane `ℂ^{k_N} × 0`) at
 `p` and a submanifold `C ⊆ S` through `p`, there is a flat chart for `S` in which also `C` is the plane
 `ℂ^{k_C} × 0`, obtained by changing only the tangential coordinates (`T(a, t) = (τ(a), t)`); the normal derivatives
 are unchanged.  (A general change of flat chart mixes tangential derivatives into the normal ones; the proof of
 `le:S` needs the normal ones.)
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter Metric
@@ -42,7 +33,8 @@ open scoped Topology Manifold ContDiff
 
 namespace Hironaka.NormalDerivativeMonomial
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.RegularLocusDense HolomorphicTaylorTail NormalTaylorOrder BlowupMonomialCharts
+open Hironaka.HolomorphicIdealSheaves Hironaka.RegularLocusDense HolomorphicTaylorTail NormalTaylorOrder
+  BlowupMonomialCharts
 
 noncomputable section
 
@@ -133,6 +125,14 @@ theorem iterDeriv_mul_of_const {c H : ComplexModel n → ℂ} {U : Set (ComplexM
     rw [heq.fderiv_eq, fderiv_apply_eq_of_line (b := bv l) hd1 hd2 (fun t => by rw [hl w t])]
     rw [fderiv_const_mul ((hdL w hw).differentiableAt (hU.mem_nhds hw)), FunLike.coe_smul, Pi.smul_apply,
       smul_eq_mul]
+
+/-- **Normal derivatives ignore a factor `wⱼ^m`** (directions `eₗ`, `l ≠ j`). -/
+theorem iterDeriv_pow_mul {j : Fin n} {m : ℕ} {H : ComplexModel n → ℂ} {U : Set (ComplexModel n)} (hU : IsOpen U)
+    (hH : DifferentiableOn ℂ H U) (L : List (Fin n)) (hL : ∀ l ∈ L, l ≠ j) (w : ComplexModel n) (hw : w ∈ U) :
+    iterDeriv (L.map bv) (fun w => w j ^ m * H w) w = w j ^ m * iterDeriv (L.map bv) H w :=
+  iterDeriv_mul_of_const (c := fun w => w j ^ m) hU
+    (fun _ => ((EuclideanSpace.proj j : ComplexModel n →L[ℂ] ℂ).differentiableAt).pow _) hH L
+    (fun l hl w t => by simp [bv, Ne.symm (hL l hl)]) w hw
 
 /-- Iterated derivatives only depend on the germ. -/
 theorem iterDeriv_congr_of_eventuallyEq {F G : ComplexModel n → ℂ} {u : ComplexModel n} (h : F =ᶠ[𝓝 u] G) :

@@ -1,42 +1,34 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
+import Hironaka.Resolution.HironakaG3UniverseTangentDirection
 import Hironaka.MarkedIdeal.CoefficientIdealAlongRestrictionFull
 import Hironaka.MarkedIdeal.MaximalContactAlongTower
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.DerivativeIdealAlongEtale
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.MarkedIdeal.HadamardBridge
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Reduction to a hypersurface of maximal contact inside a submanifold
 
-Source: Włodarczyk 2005, Lemma `le:codim2` (with any `E`, and without its hypothesis on the codimension of the
-support, which the proof does not use), applied to the marked ideal `(M, N, E, 𝔞, μ)` on a closed submanifold `N`
-and a hypersurface of maximal contact `N ∩ V(u)` inside `N`.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0060: the along-`N` form of `ContactEquivalence` /
+`ContactEquivalenceOpen` (`N = M`), i.e. the H4 requirement node `hir:contact-equivalence` inside `N` (Step 1b of
+`hir:maximal-order-step`); blueprint `mc:tangent-direction-along-open`, `mc:contact-equivalence-along`,
+`mc:contact-equivalence-open-along` (`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, Lemma `le:codim2`
+(with any `E`, and without its hypothesis on the codimension of the support, which the proof does not use), applied to the
+marked ideal `(M, N, E, 𝔞, μ)` on a closed submanifold `N` and a hypersurface of maximal contact `N ∩ V(u)` inside `N`.
 
 * `isTangentDirectionAlong_pullback_val`: a tangent direction along `N` on an open `U` restricts to one along `ι⁻¹N` on all of
   `U` (`DerivativeIdealAlongEtale`: `ι^*𝓓_N^j = 𝓓_{ι⁻¹N}^j ι^*` and the transfer of tangent fields);
   `isTangentDirectionAlong_pullback`: the same for any local biholomorphism `φ` (on `φ⁻¹U`).
 * `isClosedSubmanifold_contact_along`: for a tangent direction `u` along `N` on all of `X`, `N ∩ V(u)` is a closed submanifold.
+* `centresIn_contact_along`: every multiple test blow-up of `𝔪` has its centres in the strict transforms of `N ∩ V(u)`
+  (TN-CLASSICAL's `MaximalContactAlongTower.centre_subset_strictAlong_along`, the tower half of `hir:along-calculus` (3)).
+* **`contact_wEquiv_along`** (`le:codim2` along `N`): `𝔪 ≃ 𝓒_N(𝔪)|_{N ∩ V(u)}` (`MarkedIdealEquivalence.WEquiv`), from
+  `CoefficientIdealAlongRestrictionFull.coeffAlong_restrict_tower_iff` (`le:S` in full along `N`) and
+  `MaximalContactAlongTower.cosupp_subset_strictAlong_along`.
+* **`contact_wEquiv_open_along`**: the same for a tangent direction along `N` on an open set `U`:
+  `𝔪|_U ≃ (U, ι⁻¹(N ∩ V(u)), E|_U, 𝓒_N(𝔞)|_U, μ_𝓒)`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -46,7 +38,10 @@ universe u
 
 namespace Hironaka.ContactEquivalenceAlong
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdealAlong DerivativeIdealAlongEtale DerivativeIdealAlongCoherent GiraudAlong TangentDirectionAlong BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealEquivalence MarkedIdealEquivalence.MarkedIdeal CoefficientIdealAlongRestrictionFull MarkedIdealBiholomorphism
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdealAlong
+  DerivativeIdealAlongEtale DerivativeIdealAlongCoherent GiraudAlong TangentDirectionAlong BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong MarkedIdealEquivalence MarkedIdealEquivalence.MarkedIdeal
+  CoefficientIdealAlongRestrictionFull MarkedIdealBiholomorphism
 open HomogenizedGlueingTower (strictAlong)
 
 noncomputable section
@@ -96,33 +91,8 @@ invariants along `N`): for `φ : M' → M` with holomorphic local inverses at ev
 theorem isTangentDirectionAlong_pullback {M' : Type u} [TopologicalSpace M'] [ChartedSpace (ComplexModel n) M']
     [IsComplexManifold n M'] {φ : M' → M} (hloc : ∀ y : M', ∃ ψ : M → M', IsLocalInverseAt n φ ψ y)
     (h𝔞 : ∀ x g, 𝔞.mem x g → HolomorphicAt n g x) {V : Set M} (hu : IsTangentDirectionAlong N 𝔞 μ V u) :
-    IsTangentDirectionAlong (φ ⁻¹' N) (GermIdeal.pullback (m := n) φ 𝔞) μ (φ ⁻¹' V) (u ∘ φ) where
-  isOpen := by
-    have hφc : Continuous φ := continuous_iff_continuousAt.mpr fun y =>
-      (hloc y).choose_spec.mdiff.self_of_nhds.continuousAt
-    exact hu.isOpen.preimage hφc
-  mem y hy := by
-    obtain ⟨ψ, h⟩ := hloc y
-    rw [← pullback_iterDerivIdealAlong hloc h𝔞 (μ - 1)]
-    exact comp_mem_pullback h.mdiff (hu.mem (φ y) hy)
-      (holomorphicAt_of_mem_iterDerivIdealAlong h𝔞 (μ - 1) (φ y) u (hu.mem (φ y) hy))
-  multiplicity_one y hy hy0 := by
-    obtain ⟨ψ, h⟩ := hloc y
-    obtain ⟨e, ξ, hξ, hne⟩ := hu.multiplicity_one (φ y) hy hy0
-    have hy' : y ∈ (complexChartAt (n := n) y).val.source := mem_complexChartAt_source y
-    have huhol : HolomorphicAt n u (φ y) :=
-      holomorphicAt_of_mem_iterDerivIdealAlong h𝔞 (μ - 1) (φ y) u (hu.mem (φ y) hy)
-    have hghol : HolomorphicAt n (u ∘ φ) y := HadamardBridge.holomorphicAt_comp_map h.mdiff huhol
-    refine ⟨complexChartAt (n := n) y, transferField φ ψ e (complexChartAt (n := n) y) ξ,
-      isTangentField_transfer h hy' hξ, ?_⟩
-    have hcongr := fieldDeriv_transfer h hy' hξ.mem_source ξ hghol
-    rw [hcongr.self_of_nhds]
-    have hloc' : ((u ∘ φ) ∘ ψ) =ᶠ[𝓝 (φ y)] u := by
-      filter_upwards [h.right_inv] with q hq
-      simp only [Function.comp_apply, hq]
-    show fieldDeriv e ξ ((u ∘ φ) ∘ ψ) (φ y) ≠ 0
-    rw [(fieldDeriv_congr hξ.mem_source hloc').self_of_nhds]
-    exact hne
+    IsTangentDirectionAlong (φ ⁻¹' N) (GermIdeal.pullback (m := n) φ 𝔞) μ (φ ⁻¹' V) (u ∘ φ) := by
+  exact G3UniverseTangentDirection.isTangentDirectionAlong_pullback hloc h𝔞 hu
 
 /-- A difference vanishing on `N` near a point of `N` has vanishing derivative there along a field tangent to `N`: the
 derivatives of `f` and `g` along `ξ` agree at `y` when `f = g` on `N` near `y`. -/
@@ -218,6 +188,88 @@ theorem isClosedSubmanifold_contact_along {𝔪 : MarkedIdeal n X} (hN : IsClose
   refine ⟨(hN.1.inter (isClosed_eq hcont continuous_const)).inter isClosed_univ, fun x hx => ?_⟩
   obtain ⟨k, -, hk⟩ := hu.regularAtDim_contact hhol hN hx
   exact ⟨k - 1, hk⟩
+
+/-- **Every multiple test blow-up of `𝔪` has its centres in the strict transforms of `N ∩ V(u)`** (`u` a tangent direction
+along `N` on all of `X`; TN-CLASSICAL's `MaximalContactAlongTower.centre_subset_strictAlong_along`). -/
+theorem centresIn_contact_along (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) {u : X → ℂ} (hu : IsTangentDirectionAlong 𝔪.N 𝔪.ideal 𝔪.d univ u) :
+    {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T → CentresIn (𝔪.N ∩ {x | u x = 0} ∩ univ) T
+  | _, .refl, _ => trivial
+  | _, .step T C π hπ, hT => by
+      obtain ⟨hT0, hC⟩ := (isGeoTestTower_step_iff 𝔪 T C π hπ).mp hT
+      refine (centresIn_step_iff _ T C π hπ).mpr ⟨centresIn_contact_along 𝔪 hN h𝔞 hd hu T hT0, fun x hx => ?_⟩
+      exact MaximalContactAlongTower.centre_subset_strictAlong_along 𝔪 hN h𝔞 hd hu T hT0 hC ⟨hx, mem_univ _⟩
+
+/-- **Włodarczyk `le:codim2` along `N` (reduction to a hypersurface of maximal contact inside `N`)**: for
+`𝔪 = (X, N, E, 𝔞, μ)` with `N` a closed submanifold, `𝔞` coherent, `μ ≥ 1`, and a tangent direction `u` of `(𝔞|_N, μ)` along
+`N` on all of `X`, `𝔪 ≃ 𝓒_N(𝔪)|_{N ∩ V(u)}` (`MarkedIdealEquivalence.WEquiv`). -/
+theorem contact_wEquiv_along (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) {u : X → ℂ} (hu : IsTangentDirectionAlong 𝔪.N 𝔪.ideal 𝔪.d univ u) :
+    WEquiv 𝔪 (withN (coeffMarkedAlong 𝔪) (𝔪.N ∩ {x | u x = 0} ∩ univ)) := by
+  have hS := isClosedSubmanifold_contact_along hN h𝔞 hu
+  have hSN : 𝔪.N ∩ {x | u x = 0} ∩ univ ⊆ 𝔪.N := fun x hx => hx.1.1
+  refine ⟨rfl, fun T => ⟨⟨fun hT => ?_, fun hT => ?_⟩, fun hT => ?_⟩⟩
+  · exact (coeffAlong_restrict_tower_iff 𝔪 hN h𝔞 hd hS hSN T).1.mpr
+      ⟨hT, centresIn_contact_along 𝔪 hN h𝔞 hd hu T hT⟩
+  · exact ((coeffAlong_restrict_tower_iff 𝔪 hN h𝔞 hd hS hSN T).1.mp hT).1
+  · have hTS := centresIn_contact_along 𝔪 hN h𝔞 hd hu T hT
+    rw [cosupp_coeffAlong_withN_tower 𝔪 hN h𝔞 hd hS hSN T hT hTS]
+    refine (inter_eq_left.mpr fun x hx => ?_).symm
+    exact MaximalContactAlongTower.cosupp_subset_strictAlong_along 𝔪 hN h𝔞 hd hu T hT ⟨hx, mem_univ _⟩
+
+/-- **Włodarczyk `le:codim2` along `N` on an open set**: for `𝔪 = (X, N, E, 𝔞, μ)` with `N` a closed submanifold, `𝔞`
+coherent and `μ ≥ 1`, and a tangent direction `u` along `N` on an open set `U`,
+`𝔪|_U ≃ (U, ι⁻¹(N ∩ V(u)), E|_U, 𝓒_N(𝔞)|_U, μ_𝓒)` (`MarkedIdealEquivalence.WEquiv` on `U`).  No hypothesis on the codimension
+of the support. -/
+theorem contact_wEquiv_open_along (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
+    (hd : 1 ≤ 𝔪.d) (U : Opens X) {u : X → ℂ} (hu : IsTangentDirectionAlong 𝔪.N 𝔪.ideal 𝔪.d U u) :
+    WEquiv (X := CMfd.of (n := n) U) (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪)
+      (withN (MarkedIdeal.pullback (Subtype.val : U → X) (coeffMarkedAlong 𝔪))
+        ((Subtype.val : U → X) ⁻¹' (𝔪.N ∩ {y | u y = 0}))) := by
+  have hval : ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ (Subtype.val : U → X) := contMDiff_subtype_val
+  have hNU : IsClosedSubmanifold n (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪).N :=
+    BlowupRestrictOpen.isClosedSubmanifold_preimage_val hN U
+  have hcohU : (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪).ideal.IsCoherent :=
+    GermIdealPullbackCalculus.isCoherent_pullback hval h𝔞
+  have huU := isTangentDirectionAlong_pullback_val U (MarkedIdealOperationsAlong.MarkedIdeal.hol_of_isCoherent h𝔞) hu
+  have h := contact_wEquiv_along (X := CMfd.of (n := n) U) (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪) hNU hcohU hd
+    huU
+  rw [pullback_val_coeffMarkedAlong U 𝔪 h𝔞 hN hd]
+  have hS : (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪).N ∩ {x : U | (u ∘ Subtype.val) x = 0} ∩ univ =
+      (Subtype.val : U → X) ⁻¹' (𝔪.N ∩ {y | u y = 0}) := by
+    ext y
+    simp [MarkedIdeal.pullback]
+  rw [← hS]
+  exact h
+
+/-- **The contact equivalence for a restricted tangent direction along `N`**: for `w` as in
+`exists_isTangentDirectionAlong_of_isInSpanOnAt` (holomorphic on an open `O`, equal on `N` to combinations of germs of
+`𝓓_N^{μ-1}(𝔞)`, multiplicity one along `N` at its zeros on `N` -- the clauses of TN-CLASSICAL's
+`MaximalContactAlongTower.exists_contact_along` at a stage of a tower) and `x ∈ N ∩ O`, there is an open `U ∋ x`, `U ⊆ O`,
+with `𝔪|_U ≃ (U, ι⁻¹(N ∩ V(w)), E|_U, 𝓒_N(𝔞)|_U, μ_𝓒)`. -/
+theorem contact_wEquiv_open_along_of_isInSpanOnAt (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n 𝔪.N)
+    (h𝔞 : 𝔪.ideal.IsCoherent) (hd : 1 ≤ 𝔪.d) {O : Set X} (hO : IsOpen O) {w : X → ℂ}
+    (hw : ∀ y ∈ O, HolomorphicAt n w y)
+    (hwD : ∀ y ∈ O, y ∈ 𝔪.N → IsInSpanOnAt (n := n) 𝔪.N ((iterDerivIdealAlong 𝔪.N 𝔪.ideal (𝔪.d - 1)).mem y) y w)
+    (hw1 : ∀ y ∈ O, y ∈ 𝔪.N → w y = 0 → ∃ (e : ComplexChart n X) (ξ : Fin n → X → ℂ),
+      IsTangentField 𝔪.N e ξ y ∧ fieldDeriv e ξ w y ≠ 0)
+    {x : X} (hxO : x ∈ O) (hxN : x ∈ 𝔪.N) :
+    ∃ U : Opens X, x ∈ U ∧ (U : Set X) ⊆ O ∧
+      WEquiv (X := CMfd.of (n := n) U) (MarkedIdeal.pullback (Subtype.val : U → X) 𝔪)
+        (withN (MarkedIdeal.pullback (Subtype.val : U → X) (coeffMarkedAlong 𝔪))
+          ((Subtype.val : U → X) ⁻¹' (𝔪.N ∩ {y | w y = 0}))) := by
+  obtain ⟨U, hxU, hUO, w', hw', hagree⟩ :=
+    exists_isTangentDirectionAlong_of_isInSpanOnAt h𝔞 hN hO hw hwD hw1 hxO hxN
+  refine ⟨U, hxU, hUO, ?_⟩
+  have h := contact_wEquiv_open_along 𝔪 hN h𝔞 hd U hw'
+  have hS : (Subtype.val : U → X) ⁻¹' (𝔪.N ∩ {y | w' y = 0}) = (Subtype.val : U → X) ⁻¹' (𝔪.N ∩ {y | w y = 0}) := by
+    ext y
+    simp only [mem_preimage, mem_inter_iff, mem_ofPred_eq]
+    constructor
+    · rintro ⟨hyN, hy0⟩; exact ⟨hyN, by rw [← hagree y y.2 hyN]; exact hy0⟩
+    · rintro ⟨hyN, hy0⟩; exact ⟨hyN, by rw [hagree y y.2 hyN]; exact hy0⟩
+  rw [← hS]
+  exact h
 
 end Contact
 

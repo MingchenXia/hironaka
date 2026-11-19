@@ -1,10 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-import Hironaka.Support.ConstantRankImageGraphExact
-import Hironaka.Support.HolomorphicMaxRankDenseExact
 import Hironaka.Analytic.RankDegeneracy
 import Hironaka.Analytic.HolomorphicGenericRank
 import Hironaka.Analytic.HolomorphicConstantRank

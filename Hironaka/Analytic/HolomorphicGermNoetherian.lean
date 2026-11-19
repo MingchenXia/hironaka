@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicGermRing
 import Hironaka.Analytic.RegularDirection
 import Hironaka.Analytic.LastVariableTaylorDivision
@@ -10,6 +5,7 @@ import Hironaka.Analytic.WeierstrassDivisionAbstract
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Finiteness.Ideal
 import Mathlib.Analysis.InnerProductSpace.PiL2
+
 set_option autoImplicit false
 
 /-!

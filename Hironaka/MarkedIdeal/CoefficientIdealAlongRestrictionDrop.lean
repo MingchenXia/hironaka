@@ -1,29 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.CoefficientRestrictionDrop
 import Hironaka.MarkedIdeal.CoefficientIdealAlongRestrictionFull
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.DropMembers
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The restricted coefficient ideal along a submanifold with the members containing `S` deleted
 
-Source: Włodarczyk 2005, Lemmas `le:cf`, `le:S`, `le:S2` and Step 1a (the marked ideal `(S, 𝓒(𝓙)|_S, E_S, μ_𝓒)` with
-`E_S` the members of `E` not containing `S`), applied inside `N`.
+Hironaka phase H3 (TN23-ENVELOPES), claimed on I-0981 C-0055: the along-`N` form of TN-CLASSICAL's
+`CoefficientRestrictionDrop.coeff_restrict_withE_iff` (`N = M`), i.e. the H4 requirement node `hir:coefficient-restriction` for
+Step 1a of `hir:maximal-order-step` inside `N`; blueprint `mc:coefficient-restriction-drop-along`
+(`blueprint/src/maximal-contact.tex`).  Source: Włodarczyk 2005, Lemmas `le:cf`, `le:S`, `le:S2` and Step 1a (the marked
+ideal `(S, 𝓒(𝓙)|_S, E_S, μ_𝓒)` with `E_S` the members of `E` not containing `S`), applied inside `N`.
 
 * `coeffAlong_restrict_withE_iff`: for `𝔪 = (X, N, E, 𝔞, μ)` well formed with `μ ≥ 1`, a closed submanifold `S ⊆ N`, and a
   list `E'` of members of `E` such that every member of `E` missing from `E'` contains `S`: a tower is a multiple test
@@ -31,6 +19,9 @@ Source: Włodarczyk 2005, Lemmas `le:cf`, `le:S`, `le:S2` and Step 1a (the marke
   `cosupp = cosupp 𝔪_T ∩ S_T`.  From `CoefficientIdealAlongRestrictionFull.coeffAlong_restrict_tower_iff` (`le:S` in full
   along `N`, keeping `E`) and `DropMembers` (deleting members containing `S` changes nothing along towers with centres in
   the strict transforms of `S`, given simple normal crossings along the test towers of `𝔪`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set
@@ -39,7 +30,9 @@ universe u
 
 namespace Hironaka.CoefficientIdealAlongRestrictionDrop
 
-open Hironaka.BlowupSequences NormalCrossings BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdealRestriction HomogenizedIdealAlong DropMembers CoefficientRestrictionDrop CoefficientIdealAlongRestrictionFull
+open Hironaka.BlowupSequences NormalCrossings BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal
+  CoefficientIdealRestriction HomogenizedIdealAlong DropMembers CoefficientRestrictionDrop
+  CoefficientIdealAlongRestrictionFull
 open HomogenizedGlueingTower (strictAlong)
 
 variable {n : ℕ} {X : CMfd.{u} n}

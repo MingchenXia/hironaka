@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaRelativeNormalMonomialBasis
 import Hironaka.Analytic.HolomorphicGermPointTruncationClosure
 import Mathlib.RingTheory.Ideal.Colon
@@ -27,7 +22,6 @@ theorem projectionJetCoefficients_tangent_mul (d t q : ℕ)
   let := tangentAlgebra d t
   exact (projectionJetCoefficients d t q).map_smul a g
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem projectionJetCoefficients_eq_zero_iff (d t q : ℕ)
     (g : HolGerm (ComplexModel (d+t))) :
     projectionJetCoefficients d t q g = 0 ↔ g ∈ normalIdeal d t ^ q := by
@@ -58,7 +52,6 @@ theorem projectionJetCoefficients_reconstruction (d t q : ℕ)
   exact ((Ideal.Quotient.mkₐ (HolGerm (ComplexModel d)) (normalIdeal d t ^ q)).toLinearMap.map_smul
     (projectionJetCoefficients d t q g α) (normalExponentMonomial d t α.val)).symm
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem projection_extended_ideal_coefficients (d t q : ℕ)
     (I : Ideal (HolGerm (ComplexModel d)))
     {g : HolGerm (ComplexModel (d+t))} (hg : g ∈ Ideal.map (tangentPullback d t).toRingHom I) :
@@ -84,7 +77,6 @@ theorem projection_extended_ideal_coefficients (d t q : ℕ)
   intro α
   simpa only [one_mul] using hall 1 α
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 theorem projection_extended_ideal_mod_normal_pow_iff (d t q : ℕ)
     (I : Ideal (HolGerm (ComplexModel d))) (g : HolGerm (ComplexModel (d+t))) :
     g ∈ Ideal.map (tangentPullback d t).toRingHom I ⊔ normalIdeal d t ^ q ↔

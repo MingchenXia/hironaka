@@ -1,29 +1,19 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupSpace
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Blowup.BlowupMonomialCharts
-import Hironaka.Blowup.BlowupSpaceTangent
-import Hironaka.Analytic.CoordinatePlaneDivision
-import Hironaka.Analytic.HolomorphicGermAlgebra
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Extended quotients are holomorphic in the monomial charts
 
-Source: Demailly, *Complex analytic and differential geometry*, VII.12.2 (`agbook.tex` lines 20306--20326).
+Source: Demailly, *Complex analytic and differential geometry*, VII.12.2
+(`references/demailly-cadg`, `agbook.tex` lines 20306--20326); blueprint `bex:ratio-holomorphic`.
 
-Third module of the construction of the blowup. Demailly's key observation: if `g` vanishes on the centre,
-Hadamard's lemma writes `g = ∑ zₖ Aₖ`, so `(g/zⱼ)~` is, in the coordinates `w` of the chart `τ̃ⱼ`, the holomorphic
-function `Aⱼ(σⱼ w) + ∑_{k ≠ j} wₖ Aₖ(σⱼ w)`; hence every extended quotient `(f/g)~ = (f/zⱼ)~ / (g/zⱼ)~` is
-holomorphic where `(g/zⱼ)~ ≠ 0`, and the coordinate changes of the blowup are holomorphic.
+Third module of the construction of the blowup (TN.4 #6).  Demailly's key observation: if `g`
+vanishes on the centre, Hadamard's lemma writes `g = ∑ zₖ Aₖ`, so `(g/zⱼ)~` is, in the coordinates
+`w` of the chart `τ̃ⱼ`, the holomorphic function `Aⱼ(σⱼ w) + ∑_{k ≠ j} wₖ Aₖ(σⱼ w)`; hence every
+extended quotient `(f/g)~ = (f/zⱼ)~ / (g/zⱼ)~` is holomorphic where `(g/zⱼ)~ ≠ 0`, and the coordinate
+changes of the blowup are holomorphic.
 
 * `FlatChart.ratio c f w = extVal f (τ̃ⱼ⁻¹ w) / extVal τⱼ (τ̃ⱼ⁻¹ w)`, the function `(f/τⱼ)~` read in
   the chart;
@@ -42,7 +32,8 @@ universe u
 
 namespace Hironaka.BlowupConstruction
 
-open Hironaka.HolomorphicIdealSheaves BlowupFlatCoordinates BlowupMonomialCharts BlowupSpaceTangent
+open Hironaka.HolomorphicIdealSheaves BlowupFlatCoordinates BlowupMonomialCharts
+  BlowupSpaceTangent
 
 noncomputable section
 

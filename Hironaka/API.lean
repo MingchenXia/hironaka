@@ -1,29 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedReducible
 import Hironaka.Resolution.HironakaPrincipalizationBoundary
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.SingularLocus
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaRelativelyCompact
-import Hironaka.Blowup.NormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The public statements of the Hironaka library, in elementary terms
 
-This module collects the final public statements of resolution of singularities proved in this library: over an
-unbundled complex manifold, without the internal machinery (no marked ideal, tower, invariant or domain condition in
-any statement), and with the non-vanishing hypothesis of principalization written out:
+Blueprint `hir:public-statements` (`blueprint/src/hironaka.tex`; TN.5, the review 57572af3 of the Hironaka strengthenings, item
+S8, first half; the orchestrator's extraction plan, §6).  This module collects the final public statements of resolution of
+singularities proved in this project, in the form intended for the standalone library: over an unbundled complex manifold,
+without the internal machinery (no marked ideal, tower, invariant or domain condition in any statement), and with the
+non-vanishing hypothesis of principalization written out:
 
   `∀ x, ∃ g, 𝔞.mem x g ∧ ∃ᶠ y in 𝓝 x, g y ≠ 0`
 
@@ -52,6 +40,12 @@ An admissible blowup sequence with centres over the singular set, `E` with simpl
 
 These are restatements of the theorems of `HironakaAdmissibleSequence`, `HironakaRelativelyCompact`,
 `HironakaPrincipalizationBoundary` and `HironakaEmbeddedReducible`; their proofs are one line.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaEmbeddedReducible` and
+`HironakaPrincipalizationBoundary` only; it does not import, even transitively, `Hironaka.RelativePrincipalization` or
+`Hironaka.EmbeddedResolution`, and none of its statements mentions a pluripotential, Kähler, volume or current notion (the
+constant `singularLocus` of the statements is a notion of analytic geometry that sits in `Hironaka.NonKahlerLocus`; the
+extraction plan moves it next to `ClosedIrreducibleAnalyticSubvariety`).  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -61,8 +55,9 @@ universe u
 
 namespace Hironaka
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.NormalCrossings Hironaka.DivisorExponentAlong Hironaka.HironakaAdmissibleSequence
+open Hironaka.NonKahlerLocus Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
+open Hironaka.NormalCrossings Hironaka.DivisorExponentAlong
+  Hironaka.HironakaAdmissibleSequence
 
 noncomputable section
 

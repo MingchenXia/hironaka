@@ -1,67 +1,47 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.MaxOrderValue
 import Hironaka.Invariant.NonmonomialOrderPhase
 import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.NonmonomialOrderCanonical
-import Hironaka.Invariant.NonmonomialOrderLocal
-import Hironaka.Invariant.NonmonomialOrderRegime
-import Hironaka.Invariant.NonmonomialOrderTail
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneRegime
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The value function of the general step
 
-Sources: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2 (Step 2a: the companion ideal
-`O(𝓘, μ)` of maximal order, resolved by Step 1, "then we repeat the procedure"; Step 2b: the monomial case);
+Blueprint `hir:general-value`, `hir:general-value-basic` (`blueprint/src/hironaka.tex`, Hironaka phase H4, pieces of
+`hir:general-step`).  Sources: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 2 (Step 2a: the
+companion ideal `O(𝓘, μ)` of maximal order, resolved by Step 1, "then we repeat the procedure"; Step 2b: the monomial case);
 Bierstone--Milman 2008, Step II.
 
-Let `𝔪` be a marked ideal and `T` a tower over its base. At a point `y` of the last stage write `ν(y) = o` for the
-order of the nonmonomial part of the transform `𝔪_T` (`NonmonomialOrderLocal.nmOrd`). The value of the general step
-is the lexicographic pair `(o, ·)` with
+Let `𝔪` be a marked ideal and `T` a tower over its base.  At a point `y` of the last stage write `ν(y) = o` for the order of the
+nonmonomial part of the transform `𝔪_T` (TN3's `NonmonomialOrderLocal.nmOrd`).  The value of the general step is the
+lexicographic pair `(o, ·)` with
 
-* for `o ≥ 1`: the value of a maximal-order value function `M` (`MaxOrderValue.IsMaxOrderValue`; in the induction,
-  the masked Step 1 value) of the **companion ideal** `𝓞 = 𝓞(𝔪_{T₀}|_W, o)` formed at the stage `T₀` at which the
-  images of `y` reached the order `o` -- the start of the run of `y` in the regime `OrdRegime 𝔪 o`, `T = T₀ T₁` --
-  restricted to the open set `W = {ν ≤ o}` (`NonmonomialOrderTail.ordMask`), along the restricted tail `T₁|_W`, at
-  `y` (`genLowerValue`; `∞` if the image of `y` is off `W`);
-* for `o = 0`: the invariant `γ` of the monomial case (`MonomialCaseAlong.gammaAlong`) of `𝔪_T` at `y` -- near a
-  point of order `0` the marked ideal is monomial (`NonmonomialOrderZero`).
+* for `o ≥ 1`: the value of a maximal-order value function `M` (`MaxOrderValue.IsMaxOrderValue`; in the induction, the masked
+  Step 1 value) of the **companion ideal** `𝓞 = 𝓞(𝔪_{T₀}|_W, o)` formed at the stage `T₀` at which the images of `y` reached the
+  order `o` -- the start of the run of `y` in the regime `OrdRegime 𝔪 o`, `T = T₀ T₁` -- restricted to the open set
+  `W = {ν ≤ o}` (TN3's `NonmonomialOrderTail.ordMask`), along the restricted tail `T₁|_W`, at `y` (`genLowerValue`; `∞` if the
+  image of `y` is off `W`, which does not happen on the domain: `genLowerValue_ne_top`);
+* for `o = 0`: the invariant `γ` of the monomial case (`MonomialCaseAlong.gammaAlong`) of `𝔪_T` at `y` -- near a point of order
+  `0` the marked ideal is monomial (TN3's `NonmonomialOrderZero`).
 
-The value is generic in `M`, so that it serves whichever form the maximal-order invariant takes once property (8) is
-settled; it is ordered lexicographically, the second entry in `WithBot Val ⊕ₗ WithTop Λ` (the two cases never meet,
-the first entry deciding). The data `T₀`, `W`, `𝓞` are those of
-`NonmonomialOrderTail.isGeoTestTower_companion_tail_of_canonical` (the restricted tail is a multiple test blow-up of
-the companion ideal along every canonical segment of a value function whose order dominates `ν`, which this one
-does: `ordMonotone_genInv`).
+The value is generic in `M`, so that it serves whichever form the maximal-order invariant takes once property (8) is settled
+(inbox I-1139); it is ordered lexicographically, the second entry in `WithBot Val ⊕ₗ WithTop Λ` (the two cases never meet, the
+first entry deciding).  The data `T₀`, `W`, `𝓞` are those of TN3's `NonmonomialOrderTail.isGeoTestTower_companion_tail_of_canonical`
+(the restricted tail is a multiple test blow-up of the companion ideal along every canonical segment of a value function whose
+order dominates `ν`, which this one does: `ordMonotone_genInv`).
 
 ## Main results
 
 * `compAt`, `genLowerValue`, `genSecond`, `genInv`, `GenLowerData`: the definitions;
-* `ordMonotone_genInv`, `genInv_lt_of_nmOrd_lt`, `genInv_of_nmOrd_eq_zero`, `genInv_of_nmOrd_ne_zero`,
-  `genLowerValue_eq_of_mem`: basic facts;
+* `genInv_fst`, `ordMonotone_genInv`, `genInv_lt_of_nmOrd_lt`, `genInv_of_nmOrd_eq_zero`, `genInv_of_nmOrd_ne_zero`,
+  `genLowerValue_eq_of_mem`, **`genLowerValue_ne_top`**, `genInv_lt_top_of_genLowerData`: basic facts;
 * **the value under one blowup**, at a point whose image has positive order and keeps it: `genLowerValue_step_of_notMem`,
   `genLowerValue_step_lt_of_mem` (given lower data, from (3), (4) of `M` along the restricted tail), `genInv_step_eq_of_regime`,
   **`genInv_step_of_notMem`** (equal off the centre), **`genInv_step_lt_of_mem`** (smaller over the centre).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -72,7 +52,15 @@ universe u v
 namespace Hironaka.GeneralValue
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong Hironaka.MaxOrderValue Hironaka.MonomialCaseAlong
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdealRestrictOpen
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+  Hironaka.NonmonomialOrderRegime Hironaka.NonmonomialOrderCanonical
+  Hironaka.NonmonomialOrderTail Hironaka.HomogenizedIdealAlong
+  Hironaka.MaxOrderValue Hironaka.MonomialCaseAlong
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus)
 
@@ -144,7 +132,11 @@ section Basic
 variable {X : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ]
   (M : ∀ {X : CMfd.{u} n}, MarkedIdeal n X → ∀ {Y : CMfd.{u} n}, BlowupTower X Y → Y → Λ) (𝔪 : MarkedIdeal n X)
 
-/-- **The general value dominates the order of the nonmonomial part** (the hypothesis `OrdMonotone` of
+/-- The first entry of the general value is the order of the nonmonomial part. -/
+theorem genInv_fst {Y : CMfd.{u} n} (T : BlowupTower X Y) (y : Y) :
+    (ofLex (genInv M 𝔪 T y)).1 = nmOrd (geoTransformAlong 𝔪 T) y := rfl
+
+/-- **The general value dominates the order of the nonmonomial part** (the hypothesis `OrdMonotone` of TN3's
 `NonmonomialOrder*` modules). -/
 theorem ordMonotone_genInv : OrdMonotone 𝔪 (genInv M 𝔪) :=
   ordMonotone_toLex 𝔪 (genSecond M 𝔪)
@@ -177,6 +169,26 @@ theorem genLowerValue_eq_of_mem {o : ℕ} {Y₀ Y : CMfd.{u} n} {T₀ : BlowupTo
       (⟨y, h⟩ : openPreimage T₁ (ordMask (geoTransformAlong 𝔪 T₀) o)) : Λ) : WithTop Λ) := by
   classical
   rw [genLowerValue, dif_pos h]
+
+/-- **The junk value is never reached**: along a multiple test blow-up of `𝔪` (in the domain, `0 < n`), at a point of the
+cosupport the companion value at the split at the start of its run is finite -- the image of the point there lies in the
+mask (TN3's `NonmonomialOrderTail.proj_tail_mem_ordMask`). -/
+theorem genLowerValue_ne_top (hn : 0 < n) {k : ℕ} {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {y : Y} (hy : y ∈ (geoTransformAlong 𝔪 T).cosupp) {o : ℕ}
+    (hyo : nmOrd (geoTransformAlong 𝔪 T) y = o) :
+    genLowerValue M 𝔪 o (head T (regimeRun (OrdRegime 𝔪 o) T y)) (tail T (regimeRun (OrdRegime 𝔪 o) T y)) y ≠ ⊤ := by
+  rw [genLowerValue_eq_of_mem M 𝔪 (proj_tail_mem_ordMask hn h T hT hy hyo).2]
+  exact WithTop.coe_ne_top
+
+/-- Under lower data the value at a point of order `o ≥ 1` is below `(o, ∞)`. -/
+theorem genInv_lt_top_of_genLowerData {k : ℕ} {Y : CMfd.{u} n} (T : BlowupTower X Y) {y : Y} {o : ℕ}
+    (h : nmOrd (geoTransformAlong 𝔪 T) y = o) (ho : o ≠ 0)
+    (hd : GenLowerData M k 𝔪 o (head T (regimeRun (OrdRegime 𝔪 o) T y)) (tail T (regimeRun (OrdRegime 𝔪 o) T y)) y) :
+    genInv M 𝔪 T y < toLex (o, toLex (Sum.inr (⊤ : WithTop Λ) : WithBot MonomialInvariant.Val ⊕ WithTop Λ)) := by
+  obtain ⟨hm, -⟩ := hd
+  rw [genInv_of_nmOrd_ne_zero M 𝔪 T h ho, genLowerValue_eq_of_mem M 𝔪 hm, Prod.Lex.toLex_lt_toLex]
+  refine Or.inr ⟨rfl, ?_⟩
+  exact Sum.Lex.inr_lt_inr_iff.mpr (WithTop.coe_lt_top _)
 
 end Basic
 

@@ -1,38 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderMonomialCanonical
 import Hironaka.Invariant.NonmonomialOrderTransport
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealEquivalence
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MonomialCase
-import Hironaka.Invariant.MonomialCaseAlong
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.MonomialInvariantFunctorialAlong
-import Hironaka.Invariant.MonomialStepAlong
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The invariant of the monomial phase under the operations of the general step
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2b of Proposition `pr:resol` and the functoriality of the
-invariant (commutation with étale maps); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §5 and Theorem
-1.3.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`, the case `o = 0`); claim I-0977 C-0201.
+Blueprint `bcalc:nonmonomial-order-monomial-transport` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2b of Proposition `pr:resol` and the functoriality of the invariant (commutation with étale
+maps); Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), §5 and Theorem 1.3.
 
 At the points of order `0` the value of the general step is read off `γ_T = MonomialStepAlong.towerInvAlong 𝔪 T`, the invariant
 of the monomial case of the transform `𝔪_T`.  Properties (4)--(7) of `hir:centre-function` for the general value need, at these
@@ -45,6 +23,11 @@ points, that `γ_T` behaves under the operations of the general step as the orde
 * **`towerInvAlong_isTowerIso`** (property (6)): along an isomorphism of towers `χ : T' → T` over a biholomorphism `Φ`,
   `γ` of `Φ^*𝔪` along `T'` at `p` is `γ` of `𝔪` along `T` at `χ p`;
 * **`towerInvAlong_append`** (property (4')): `γ` of `𝔪` along `P T₁` is `γ` of `𝔪_P` along `T₁`, for every `P`;
+* **`towerInvAlong_step_empty_of_nmOrd_eq_zero`** (property (4) at `o = 0`): a trailing blowup along `∅` does not change
+  `γ` at a point whose image has order `0` (`𝔪` in the domain, `n > 0`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -55,7 +38,15 @@ universe u
 namespace Hironaka.NonmonomialOrderMonomialTransport
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialInvariant Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong Hironaka.DivisorExponentAlong Hironaka.GermIdealOrder Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.MarkedIdealOperationsAlong.MarkedIdeal Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderMonomial Hironaka.NonmonomialOrderMonomialCanonical
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialInvariant
+  Hironaka.MonomialCaseAlong Hironaka.MonomialStepAlong
+  Hironaka.DivisorExponentAlong Hironaka.GermIdealOrder
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerIsomorphism Hironaka.MarkedIdealRestrictOpen
+  Hironaka.MarkedIdealOperationsAlong.MarkedIdeal
+  Hironaka.NonmonomialOrderLocal Hironaka.NonmonomialOrderMonomial
+  Hironaka.NonmonomialOrderMonomialCanonical
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 noncomputable section
@@ -133,6 +124,18 @@ theorem towerInvAlong_append (𝔪 : MarkedIdeal n X) {Y₀ Y : CMfd.{u} n} (P :
     towerInvAlong 𝔪 (P.append T₁) = towerInvAlong (geoTransformAlong 𝔪 P) T₁ := by
   unfold towerInvAlong
   rw [geoTransformAlong_append]
+
+/-- **(4) at order `0`: a trailing empty step** (`𝔪` in the domain, `n > 0`): if `T` is a multiple test blow-up of `𝔪` and `π`
+the blowup along `∅`, then at every point `z` of the strict transform whose image has order `0`,
+`γ_{T π}(z) = γ_T(π z)` (`NonmonomialOrderMonomial.gammaAlong_geoTransform_eq_of_notMem_of_ordZero` with `C = ∅`). -/
+theorem towerInvAlong_step_empty_of_nmOrd_eq_zero (hn : 0 < n) {k : ℕ} {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪)
+    {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T) {π : Z → Y}
+    (hπ : IsBlowupAlong n (∅ : Set Y) π) {z : Z} (hzN : z ∈ (geoTransformAlong 𝔪 (.step T ∅ π hπ)).N)
+    (h0 : nmOrd (geoTransformAlong 𝔪 T) (π z) = 0) :
+    towerInvAlong 𝔪 (.step T ∅ π hπ) z = towerInvAlong 𝔪 T (π z) := by
+  have hdomT := InvDomainTowerAlong.isInvDomain_geoTransformAlong h T hT
+  exact gammaAlong_geoTransform_eq_of_notMem_of_ordZero hn hdomT (isAdmissibleCentre_empty _) hπ hzN
+    (notMem_empty _) (notMem_ordGe_one_of_nmOrd_eq_zero hdomT.isWellFormed hdomT.isNonzeroAlongAt h0) _
 
 end Tower
 

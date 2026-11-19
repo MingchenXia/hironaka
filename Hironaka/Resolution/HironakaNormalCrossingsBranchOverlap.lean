@@ -1,14 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicCoordinateFactorization
 import Mathlib.Algebra.BigOperators.Associated
 import Hironaka.Blowup.BlowupFlatCoordinates
-
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.MarkedIdeal.GermIdealOrderBounds
 
 set_option autoImplicit false
 
@@ -28,8 +20,6 @@ open scoped Topology
 namespace Hironaka.HironakaNormalCrossingsBranchOverlap
 
 open HolomorphicGermReducednessBridge AnalyticGermDecomposition
-
-open Hironaka
 
 noncomputable section
 

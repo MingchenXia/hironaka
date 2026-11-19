@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaOriginalInteriorZeroLowerHistory
 /-! Whole actual recursively constructed lower values in original short histories.
 The complete mathematical route was written first in `hironaka-original-short-lower-values-extension.tex`.

@@ -1,12 +1,5 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaStepOneMemberLowerExtension
 import Hironaka.Resolution.HironakaCoherentTransformExtension
-
-import Hironaka.Invariant.MemberStrictPartitionExact
 
 /-!
 # Entire actual positive-level member transforms on the original canonical tail
@@ -35,8 +28,7 @@ open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
   HironakaDimensionTwoStepOneAnalyticSuperlevels HironakaCoherentTransformExtension
 open BoundaryCount HironakaStepOneSpecialAnalyticLoci
 open HomogenizedGlueingTower GermIdealPullbackCalculus IdealWeightPowers
-open Hironaka.ResolutionInvariantSpec (IsInvDomain)
-open Hironaka
+open ResolutionInvariantSpec (IsInvDomain)
 noncomputable section
 variable {n : ℕ} {X Y : CMfd.{u} n}
 
@@ -332,7 +324,7 @@ theorem memberLowerExtension_tail_domain_and_mask_identity (hn : 0 < n)
 
 
 open StepOneRegime HironakaGeneralThreeNonspecialAnalyticLoci
-open Hironaka.ResolutionInvariantSpec (IsCanonical)
+open ResolutionInvariantSpec (IsCanonical)
 
 private theorem regime_at_actual_run_start (P : Regime X) (T : BlowupTower X Y)
     (y : Y) (hy : P T y) :

@@ -1,37 +1,16 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.NonmonomialOrderLocal
 import Hironaka.Invariant.StepOneRegime
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CompanionRebase
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The regime of the general step: the stage at which a point reached its order of the nonmonomial part
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` and the lemma on étale
-morphisms; Bierstone--Milman 2008 (`bierstone-milman08-functoriality`), Step II.B.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's general step (`hir:general-step`); claim I-0977 C-0165 (acknowledged C-0167).
+Blueprint `bcalc:nonmonomial-order-regime` (chapter `blowup-calculus.tex`).  Sources: Włodarczyk 2005
+(`wlodarczyk05-hironaka`), Step 2a of Proposition `pr:resol` and the lemma on étale morphisms; Bierstone--Milman 2008
+(`bierstone-milman08-functoriality`), Step II.B.
 
 At a point `y` of the cosupport along a tower `T` where the order `o = ord_y(𝓝(𝔪_T))` of the nonmonomial part
 (`NonmonomialOrderLocal.nmOrd`) is positive, the general step computes the value from the maximal-order invariant of the
@@ -42,18 +21,23 @@ calculus:
 
 * `OrdRegime 𝔪 o T y`: `y` lies in the cosupport of `𝔪_T` and `nmOrd 𝔪_T y = o`;
   `ordRegime_step_iff_of_notMem`: off the centre of a test blowup the regime of the image is the regime of the point;
-* `regimeRun_restrict_of`, `regimeRun_isTowerIso_of`: the runs of `StepOneRegime` under restriction to opens and
-  along isomorphisms of towers when the regimes correspond only along towers with a property inherited by prefixes
-  (e.g. multiple test blow-ups) -- **`regimeRun_ordRegime_restrict`**, **`regimeRun_ordRegime_isTowerIso`**: for
-  `OrdRegime` along multiple test blow-ups
+* `regimeRun_restrict_of`, `regimeRun_isTowerIso_of`: the runs of `StepOneRegime` under restriction to opens and along
+  isomorphisms of towers when the regimes correspond only along towers with a property inherited by prefixes (e.g.
+  multiple test blow-ups) -- `StepOneRegime.regimeRun_restrict` / `regimeRun_isTowerIso` ask it along all towers;
+  **`regimeRun_ordRegime_restrict`**, **`regimeRun_ordRegime_isTowerIso`**: for `OrdRegime` along multiple test blow-ups;
 * **`ordRegime_and_le_regimeRun`** (the mask theorem, analogue of `StepOneMaskTower`): if `T₀ T₁` is a multiple test
   blow-up of `𝔪`, `W` an open set of the last stage of `T₀` on which the order is `≤ o` on the cosupport (`o ≥ 1`), and
   `T₁|_W` a multiple test blow-up of the companion ideal `𝓞(𝔪_{T₀}|_W, o)`, then every point of the cosupport over `W` of
   order `≥ o` lies in the regime `OrdRegime 𝔪 o` and its run is at least the length of `T₁` -- it reached `o` at the last
   stage of `T₀` or before; in particular nearby points of the same order entered the regime no later;
-* `CentresOrdGt 𝔪 o T`: every centre of `T` lies in `{ord ≥ o + 1}`; **`centresAvoid_of_centresOrdGt`** (the steps
-  between two starts miss the mask): along a multiple test blow-up whose centres lie in `{ord ≥ o + 1}`, they miss
-  an open set `W` on which the order is `≤ o` on the cosupport, and the bound persists over `W`.
+* `CentresOrdGt 𝔪 o T`: every centre of `T` lies in `{ord ≥ o + 1}`; **`centresAvoid_of_centresOrdGt`** (the steps between
+  two starts miss the mask, analogue of `StepOneNearby.centresAvoid_lowerMask`): along a multiple test blow-up whose
+  centres lie in `{ord ≥ o + 1}`, they miss an open set `W` on which the order is `≤ o` on the cosupport, and the bound
+  persists over `W`; **`companionOf_rebase_of_centresOrdGt`**: hence the companion ideal formed at the earlier stage
+  re-bases to the later one (`CompanionRebase.companionOf_rebase`).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -64,7 +48,13 @@ universe u v
 namespace Hironaka.NonmonomialOrderRegime
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong Hironaka.CompanionReductionAlong Hironaka.CompanionRebase Hironaka.GermIdealOrder Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen Hironaka.RestrictEmptyTower Hironaka.BlowupTowerIsomorphism Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.MarkedIdealBiholomorphism Hironaka.MonomialPartAlong
+  Hironaka.CompanionReductionAlong Hironaka.CompanionRebase
+  Hironaka.GermIdealOrder Hironaka.BlowupTowers
+  Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen
+  Hironaka.RestrictEmptyTower Hironaka.BlowupTowerIsomorphism
+  Hironaka.StepOneRegime Hironaka.NonmonomialOrderLocal
 open Hironaka.ResolutionInvariantSpec (IsInvDomain)
 
 noncomputable section
@@ -350,11 +340,11 @@ theorem centresOrdGt_step_iff (𝔪 : MarkedIdeal n X) (o : ℕ) {Y Z : CMfd.{u}
     CentresOrdGt 𝔪 o (.step T C π hπ) ↔ CentresOrdGt 𝔪 o T ∧ C ⊆ ordGe (geoTransformAlong 𝔪 T) (o + 1) :=
   Iff.rfl
 
-/-- **The steps whose centres lie in `{ord ≥ o + 1}` miss an open set on which the order is `≤ o`** (`𝔪` in the domain,
-`n > 0`): if the order is `≤ o` on `cosupp 𝔪 ∩ W` and every centre of the multiple test blow-up `T` lies in `{ord ≥
-o + 1}`, the centres miss the preimages of `W` and the order stays `≤ o` at the cosupport points over `W` -- by
-induction, a centre is in the cosupport, where over `W` the order is `≤ o`, and off the centres the order is that of
-the image. -/
+/-- **The steps whose centres lie in `{ord ≥ o + 1}` miss an open set on which the order is `≤ o`** (the general step's
+analogue of `StepOneNearby.centresAvoid_lowerMask`; `𝔪` in the domain, `n > 0`): if the order is `≤ o` on
+`cosupp 𝔪 ∩ W` and every centre of the multiple test blow-up `T` lies in `{ord ≥ o + 1}`, the centres miss the preimages of
+`W` and the order stays `≤ o` at the cosupport points over `W` -- by induction, a centre is in the cosupport, where over
+`W` the order is `≤ o`, and off the centres the order is that of the image. -/
 theorem centresAvoid_of_centresOrdGt (hn : 0 < n) {k : ℕ} {𝔪 : MarkedIdeal n X} (h : IsInvDomain k 𝔪) {o : ℕ}
     (W : Opens X) (hbound : ∀ x ∈ 𝔪.cosupp, x ∈ W → x ∉ ordGe 𝔪 (o + 1)) :
     ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y), IsGeoTestTower 𝔪 T → CentresOrdGt 𝔪 o T →
@@ -379,6 +369,35 @@ theorem centresAvoid_of_centresOrdGt (hn : 0 < n) {k : ℕ} {𝔪 : MarkedIdeal 
       show z ∉ ordGe ((geoTransformAlong 𝔪 T).geoTransform C π) (o + 1)
       rw [mem_ordGe_geoTransform_of_notMem hn hdomT hC hπ (o + 1) hzC]
       exact hb (π z) hz' hzW
+
+variable {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+open ResolutionInvariantSpec (IsCanonical) in
+open ResolutionInvariantExt (ResolutionInvariant) in
+/-- **Re-basing the companion ideal across steps whose centres lie in `{ord ≥ o + 1}`** (`CompanionRebase.companionOf_rebase`
+with `centresAvoid_of_centresOrdGt`): for `𝔪` in the domain (`n > 0`, `o ≥ 1`), `T` a multiple test blow-up of `𝔪` whose
+centres lie in `{ord ≥ o + 1}`, `W` open with order `≤ o` on `cosupp 𝔪 ∩ W`, and `T|_W T₁` a canonical segment of
+`𝓞₀ = 𝓞(𝔪, o)|_W`, the companion ideal `𝓞₁ = 𝓞(𝔪_T, o)|_{T⁻¹W}` lies in the domain, `T₁` is a canonical segment of it,
+its transforms along `T₁` lie in the domain, and the values of `𝓞₀` along `T|_W T₁` are those of `𝓞₁` along `T₁`. -/
+theorem companionOf_rebase_of_centresOrdGt (hn : 0 < n) (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (h : IsInvDomain k 𝔪) {o : ℕ} (ho : 1 ≤ o) {Y : CMfd.{u} n} (T : BlowupTower X Y) (hT : IsGeoTestTower 𝔪 T)
+    (W : Opens X) (hbound : ∀ x ∈ 𝔪.cosupp, x ∈ W → x ∉ ordGe 𝔪 (o + 1)) (hc : CentresOrdGt 𝔪 o T)
+    {Z : CMfd.{u} n} (T₁ : BlowupTower (CMfd.of (n := n) (openPreimage T W)) Z)
+    (hcan : IsCanonical (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o))
+      (R.inv (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o))) ((restrict W T).append T₁)) :
+    IsInvDomain k (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+        (companionOf n (geoTransformAlong 𝔪 T) o)) ∧
+      IsCanonical (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y) (companionOf n (geoTransformAlong 𝔪 T) o))
+        (R.inv (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+          (companionOf n (geoTransformAlong 𝔪 T) o))) T₁ ∧
+      IsInvDomain k (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+        (companionOf n (geoTransformAlong 𝔪 T) o)) T₁) ∧
+      ∀ z ∈ (geoTransformAlong (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o))
+          ((restrict W T).append T₁)).cosupp,
+        R.inv (MarkedIdeal.pullback (Subtype.val : W → X) (companionOf n 𝔪 o)) ((restrict W T).append T₁) z =
+          R.inv (MarkedIdeal.pullback (Subtype.val : openPreimage T W → Y)
+            (companionOf n (geoTransformAlong 𝔪 T) o)) T₁ z :=
+  companionOf_rebase hn R h ho T hT W (centresAvoid_of_centresOrdGt hn h W hbound T hT hc).1 T₁ hcan
 
 end Avoid
 

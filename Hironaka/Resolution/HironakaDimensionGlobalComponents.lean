@@ -1,13 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaEmbeddedDimensionParts
 import Hironaka.Analytic.GlobalComponents
 import Hironaka.Analytic.AnalyticDimensionBasics
-import Hironaka.Analytic.GeometricPureDimension
-import Hironaka.Analytic.GlobalComponentRegularity
 
 set_option autoImplicit false
 

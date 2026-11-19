@@ -1,57 +1,20 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaRelativelyCompact
-import Hironaka.Analytic.AnalyticSubsetTopology
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.RegularPatchNeighborhood
-import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Analytic.AnalyticSubsetPreimage
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Coherence.CartanIrreducible
-import Hironaka.MarkedIdeal.DerivativeIdeal
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.Resolution.EmbeddedFromResolution
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaEmbeddedExceptional
-import Hironaka.Resolution.HironakaEmbeddedResolutionLocal
-import Hironaka.Resolution.HironakaFromSeqInvariant
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.RegularPointDimension
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.SmoothCentreInvariant
-import Hironaka.Invariant.SmoothCentreLocus
-import Hironaka.Resolution.StrictTransformComposition
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Embedded resolution of a reducible analytic set of pure dimension (Hironaka)
 
-Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 (embedded desingularization of a
-closed subspace, not necessarily irreducible; the strict transform smooth, the centres over the singular locus);
-Włodarczyk 2005 (`wlodarczyk05-hironaka`).
+Blueprint `hir:embedded-resolution-pure-dimensional` (`blueprint/src/hironaka.tex`; TN.5, the review 57572af3 of the Hironaka
+strengthenings, item S7).  Sources: Bierstone--Milman 1997 (`bierstone-milman97-invent-math`), Theorem 1.6 (embedded
+desingularization of a closed subspace, not necessarily irreducible; the strict transform smooth, the centres over the singular
+locus); Włodarczyk 2005 (`wlodarczyk05-hironaka`).
 
-Let `W` be a closed analytic subset of a complex manifold `X` which is **of pure dimension `d < n`**: the points at
-which `W` is a submanifold of dimension `d` are dense in `W` (`W ⊆ closure (regularLocus W d)`). `W` may be
-reducible, and its strict transform need not be connected. Its singular set `W \ regularLocus W d` is then exactly
-the set of points at which `W` is not a submanifold of any dimension, and it is closed.
+Let `W` be a closed analytic subset of a complex manifold `X` which is **of pure dimension `d < n`**: the points at which `W` is
+a submanifold of dimension `d` are dense in `W` (`W ⊆ closure (regularLocus W d)`).  `W` may be reducible, and its strict
+transform need not be connected.  Its singular set `W \ regularLocus W d` is then exactly the set of points at which `W` is
+not a submanifold of any dimension (`diff_regularLocus_eq_of_pure`), and it is closed.
 
 The first-centre argument `HironakaAdmissibleSequence.exists_tower_embedded_of_isCanonical` already applies to such a `W`
 (analytic, regular of dimension `d` on a dense open set): its proof never uses irreducibility.  The only new inputs are the
@@ -60,13 +23,15 @@ has empty interior) and the sharpening `f⁻¹(W_sing) ⊆ Exc f` for a set in p
 
 ## Main results
 
-* `interior_eq_empty_of_pure`, `isInvDomain_vanishingIdeal_of_pure`;
-* `isClosed_diff_regularLocus`;
+* `interior_eq_empty_of_pure`, `isNonzeroAlongAt_vanishingIdeal_of_pure`, `isInvDomain_vanishingIdeal_of_pure`;
+* `isClosed_diff_regularLocus`, `diff_regularLocus_eq_of_pure` (the singular set is the set of non-manifold points);
 * `preimage_diff_regularLocus_subset_exceptionalLocus`;
 * `exists_embeddedResolution_pure_of_isCanonical` (the assembly from any canonical resolution of `(X, X, ∅, 𝓘_W, 1)`);
 * **`exists_embeddedResolution_pure_of_isCompact`** (`W` compact, `X` any complex manifold),
   **`exists_embeddedResolution_pure`** (`X` compact) and **`exists_embeddedResolution_pure_of_subset_isCompact`** (any `W`,
   over every open set contained in a compact set);
+* `subset_closure_regularLocus` (an irreducible subvariety is of pure dimension `dim V`) and `subset_closure_regularLocus_union`
+  (a disjoint union of two sets of pure dimension `d` is of pure dimension `d`): the hypotheses are met by reducible sets.
 
 In each, the blowup sequence is admissible (from the empty divisor) with centres over `W_sing`, its divisor `E` has simple
 normal crossings, `Exc f = ⋃ E = f⁻¹(W_sing)`, `f` is an isomorphism over `X \ W_sing`, and the strict transform of `W` is a
@@ -74,6 +39,9 @@ closed submanifold, of dimension `d` at each of its points, with only normal cro
 
 Not covered: an analytic set whose components have different dimensions (the canonical resolution of `(𝓘_W, 1)` would blow up
 some components before the others are smooth).
+
+Import discipline (standalone Hironaka library): this module imports `HironakaRelativelyCompact` only; it does not import,
+even transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -84,7 +52,10 @@ universe u
 namespace Hironaka.HironakaEmbeddedReducible
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms Hironaka.HironakaAdmissibleSequence
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.RestrictEmptyTower Hironaka.DivisorExponentAlong
+  Hironaka.BlowupTowerTransforms Hironaka.HironakaAdmissibleSequence
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.HironakaEmbeddedResolutionLocal (exceptionalDivisor_facts_of_centresAvoid)
 
@@ -113,6 +84,20 @@ theorem isClosed_diff_regularLocus {W : Set M} (hW : IsClosed W) (d : ℕ) :
   · filter_upwards [hW.isOpen_compl.mem_nhds hyW] with z hz hzS
     exact hz hzS.1
 
+/-- **For a set of pure dimension `d`, the non-regular set is the set of non-manifold points**: a point of `W` at which `W`
+is a submanifold of some dimension `k` has nearby points of `W` regular of dimension `k`, among them a point regular of
+dimension `d` (density), so `k = d`. -/
+theorem diff_regularLocus_eq_of_pure {W : Set M} {d : ℕ} (hpure : W ⊆ closure (regularLocus (n := n) W d)) :
+    W \ regularLocus (n := n) W d = {x | x ∈ W ∧ ∀ k, ¬ RegularAtDim (n := n) W x k} := by
+  ext x
+  refine ⟨fun hx => ⟨hx.1, fun k hk => hx.2 ?_⟩, fun hx => ⟨hx.1, hx.2 d⟩⟩
+  obtain ⟨U, hUev, hUo, hxU⟩ := mem_nhds_iff.mp (RegularPatchNeighborhood.eventually_regularAtDim hk)
+  obtain ⟨z, hzU, hzd⟩ := mem_closure_iff.mp (hpure hx.1) U hUo hxU
+  have hzk : RegularAtDim (n := n) W z k := hUev hzU hzd.2.1
+  have hkd : k = d := RegularPointDimension.eq_of_regularAtDim hzk hzd
+  rw [← hkd]
+  exact hk
+
 /-- **A set of pure dimension `d < n` has empty interior**: an interior point would have nearby regular points of
 dimension `d` which are interior points, hence regular of dimension `n`. -/
 theorem interior_eq_empty_of_pure {W : Set M} {d : ℕ} (hd : d < n)
@@ -124,11 +109,10 @@ theorem interior_eq_empty_of_pure {W : Set M} {d : ℕ} (hd : d < n)
   have := RegularPointDimension.eq_of_regularAtDim hzn hzd
   omega
 
-/-- **The ideal of an analytic set with empty interior is nonzero at every point** (`IsNonzeroAlongAt univ`): off `W` the
-constant `1` lies in it; at a point of `W`, some local equation of `W` does not vanish identically near the point, since
-otherwise `W` would contain a neighbourhood of it. -/
-theorem isNonzeroAlongAt_vanishingIdeal_of_interior_eq_empty {W : Set M} (hWa : IsComplexAnalyticSubset (n := n) W)
-    (hint : interior W = ∅) (x : M) :
+/-- At any point outside the interior of an analytic set, the vanishing
+ideal has a germ that is nonzero on the ambient carrier. -/
+theorem isNonzeroAlongAt_vanishingIdeal_of_notMem_interior {W : Set M} (hWa : IsComplexAnalyticSubset (n := n) W)
+    (x : M) (hx : x ∉ interior W) :
     IsNonzeroAlongAt (univ : Set M) (vanishingIdeal (n := n) W) x := by
   by_cases hxW : x ∈ W
   · obtain ⟨P⟩ := hWa x
@@ -142,9 +126,7 @@ theorem isNonzeroAlongAt_vanishingIdeal_of_interior_eq_empty {W : Set M} (hWa : 
       have hWn : W ∈ 𝓝 x := by
         filter_upwards [eventually_all.mpr hall, hsrc, hnb] with y h1 h2 h3
         exact (P.zeroLocus h2 h3).mpr h1
-      have hx' : x ∈ interior W := mem_interior_iff_mem_nhds.mpr hWn
-      rw [hint] at hx'
-      exact hx'
+      exact hx (mem_interior_iff_mem_nhds.mpr hWn)
     · push Not at hall
       obtain ⟨i, hi⟩ := hall
       refine ⟨fun y => P.generator i (e.val y), ⟨?_, ?_⟩, hi.mono fun y hy => ⟨mem_univ y, hy⟩⟩
@@ -157,6 +139,20 @@ theorem isNonzeroAlongAt_vanishingIdeal_of_interior_eq_empty {W : Set M} (hWa : 
       Frequently.of_forall fun y => ⟨mem_univ y, one_ne_zero⟩⟩
     filter_upwards [hWa.isClosed.isOpen_compl.mem_nhds hxW] with y hy hyW
     exact absurd hyW hy
+
+/-- **The ideal of an analytic set with empty interior is nonzero at every point** (`IsNonzeroAlongAt univ`): off `W` the
+constant `1` lies in it; at a point of `W`, some local equation of `W` does not vanish identically near the point, since
+otherwise `W` would contain a neighbourhood of it. -/
+theorem isNonzeroAlongAt_vanishingIdeal_of_interior_eq_empty {W : Set M} (hWa : IsComplexAnalyticSubset (n := n) W)
+    (hint : interior W = ∅) (x : M) :
+    IsNonzeroAlongAt (univ : Set M) (vanishingIdeal (n := n) W) x :=
+  isNonzeroAlongAt_vanishingIdeal_of_notMem_interior hWa x (hint.symm ▸ notMem_empty x)
+
+/-- **The ideal of a set of pure dimension `d < n` is nonzero at every point.** -/
+theorem isNonzeroAlongAt_vanishingIdeal_of_pure {W : Set M} (hWa : IsComplexAnalyticSubset (n := n) W) {d : ℕ}
+    (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d)) (x : M) :
+    IsNonzeroAlongAt (univ : Set M) (vanishingIdeal (n := n) W) x :=
+  isNonzeroAlongAt_vanishingIdeal_of_interior_eq_empty hWa (interior_eq_empty_of_pure hd hpure) x
 
 /-- **`(X, X, ∅, 𝓘_W, 1)` lies in the domain of the invariants in dimension `≤ k`** for `n ≤ k` and an analytic set `W` with
 empty interior (Cartan's coherence of `𝓘_W`, `CartanIrreducible.cartanCoherence`, which holds for every analytic set). -/
@@ -261,13 +257,13 @@ theorem exists_embeddedResolution_pure_of_isCanonical {X : Type u} [TopologicalS
   · rw [← hsupp]
     exact Subset.antisymm hsing (hsub.trans hexc)
 
-/-- **Embedded resolution of a compact analytic set of pure dimension** (Hironaka;
-`hir:embedded-resolution-pure-dimensional`): let `X` be any complex manifold and `W ⊆ X` a compact analytic set of
-pure dimension `d < n` (the points at which `W` is a submanifold of dimension `d` are dense in `W`; `W` may be
-reducible). There are an admissible blowup sequence `f: X' → X` (from the empty divisor, centres over `W_sing = W \
-regularLocus W d`) and its divisor `E` such that `E` has simple normal crossings, `Exc f = ⋃ E = f⁻¹(W_sing)`, `f`
-is an isomorphism over `X \ W_sing`, and the strict transform of `W` is a closed submanifold of `X'`, of dimension
-`d` at each of its points (possibly disconnected), with only normal crossings with `E`. -/
+/-- **Embedded resolution of a compact analytic set of pure dimension** (Hironaka; `hir:embedded-resolution-pure-dimensional`,
+review S7): let `X` be any complex manifold and `W ⊆ X` a compact analytic set of pure dimension `d < n` (the points at which
+`W` is a submanifold of dimension `d` are dense in `W`; `W` may be reducible).  There are an admissible blowup sequence
+`f : X' → X` (from the empty divisor, centres over `W_sing = W \ regularLocus W d`) and its divisor `E` such that `E` has
+simple normal crossings, `Exc f = ⋃ E = f⁻¹(W_sing)`, `f` is an isomorphism over `X \ W_sing`, and the strict transform of
+`W` is a closed submanifold of `X'`, of dimension `d` at each of its points (possibly disconnected), with only normal
+crossings with `E`. -/
 theorem exists_embeddedResolution_pure_of_isCompact {X : Type u} [TopologicalSpace X]
     [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W)
     (hK : IsCompact W) {d : ℕ} (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d)) :
@@ -289,7 +285,7 @@ theorem exists_embeddedResolution_pure_of_isCompact {X : Type u} [TopologicalSpa
     (CanonicalCentres.canonicalInvariant.{u} n) hdom (by rw [hcos]; exact hK)
   exact exists_embeddedResolution_pure_of_isCanonical hWa hd hpure T₀ hcan₀ hres₀
 
-/-- **Embedded resolution of an analytic set of pure dimension in a compact manifold** (`X` compact). -/
+/-- **Embedded resolution of an analytic set of pure dimension in a compact manifold** (`X` compact; review S7). -/
 theorem exists_embeddedResolution_pure {X : Type u} [TopologicalSpace X] [ChartedSpace (ComplexModel n) X]
     [IsComplexManifold n X] [CompactSpace X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W) {d : ℕ}
     (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d)) :
@@ -314,10 +310,10 @@ theorem preimage_val_diff_regularLocus {X : Type*} [TopologicalSpace X] [Charted
   simp only [mem_preimage, Set.mem_sdiff, mem_regularLocus]
   rw [AnalyticSubsetOpens.regularAtDim_preimage_val_iff]
 
-/-- **Embedded resolution of an analytic set of pure dimension over a relatively compact open set**: let `X` be any
-complex manifold, `W ⊆ X` an analytic set of pure dimension `d < n` (no compactness) and `X₀ ⊆ X` an open set
-contained in a compact set. The conclusions of `exists_embeddedResolution_pure_of_isCompact` hold for `W ∩ X₀` in
-`X₀`, with centres over `W_sing ∩ X₀`. -/
+/-- **Embedded resolution of an analytic set of pure dimension over a relatively compact open set** (review S7 with S6): let
+`X` be any complex manifold, `W ⊆ X` an analytic set of pure dimension `d < n` (no compactness) and `X₀ ⊆ X` an open set
+contained in a compact set.  The conclusions of `exists_embeddedResolution_pure_of_isCompact` hold for `W ∩ X₀` in `X₀`, with
+centres over `W_sing ∩ X₀`. -/
 theorem exists_embeddedResolution_pure_of_subset_isCompact {X : Type u} [TopologicalSpace X]
     [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] {W : Set X} (hWa : IsComplexAnalyticSubset (n := n) W)
     {d : ℕ} (hd : d < n) (hpure : W ⊆ closure (regularLocus (n := n) W d))
@@ -353,6 +349,43 @@ theorem exists_embeddedResolution_pure_of_subset_isCompact {X : Type u} [Topolog
   exact exists_embeddedResolution_pure_of_isCanonical (X := X₀) hWa₀ hd hpure₀ T₀ hcan₀ hres₀
 
 end EmbeddedResolution
+
+/-! ### Non-vacuity -/
+
+section NonVacuity
+
+variable {M : Type*} [TopologicalSpace M] [ChartedSpace (ComplexModel n) M] [IsComplexManifold n M]
+
+/-- **An irreducible subvariety of dimension `< n` is of pure dimension** (so the theorems above contain the irreducible case;
+`PureDimension.eq_dim_of_regularAtDim` is not needed: the closure of the regular locus of the component through a regular
+point of dimension `dim V` is `V`). -/
+theorem subset_closure_regularLocus (V : ClosedIrreducibleAnalyticSubvariety n M) :
+    V.carrier ⊆ closure (regularLocus (n := n) V.carrier V.dim) := by
+  refine (HironakaEmbeddedResolutionLocal.subset_closure_inter_regularOpen V).trans (closure_mono fun x hx => ?_)
+  exact EmbeddedFromResolution.regularAtDim_of_mem_regularOpen hx.1 hx.2
+
+/-- **A disjoint union of two closed sets of pure dimension `d` has pure dimension `d`** (so, with the previous lemma, two
+disjoint irreducible subvarieties of the same dimension form a reducible set to which the theorems apply): near a point of
+`A` the union agrees with `A`, off the closed `B`. -/
+theorem subset_closure_regularLocus_union {A B : Set M} (hA : IsClosed A) (hB : IsClosed B) (hAB : Disjoint A B)
+    {d : ℕ} (hpA : A ⊆ closure (regularLocus (n := n) A d)) (hpB : B ⊆ closure (regularLocus (n := n) B d)) :
+    A ∪ B ⊆ closure (regularLocus (n := n) (A ∪ B) d) := by
+  have key : ∀ {A B : Set M}, IsClosed B → Disjoint A B → A ⊆ closure (regularLocus (n := n) A d) →
+      A ⊆ closure (regularLocus (n := n) (A ∪ B) d) := by
+    intro A B hB hAB hpA x hx
+    have hO : IsOpen Bᶜ := hB.isOpen_compl
+    have hxO : x ∈ Bᶜ := fun h => hAB.notMem_of_mem_left hx h
+    refine closure_mono (fun y hy => ?_) (hO.inter_closure ⟨hxO, hpA hx⟩)
+    refine RegularPointDimension.regularAtDim_of_inter_eq hO hy.1 ?_ hy.2
+    ext z
+    simp only [mem_inter_iff, mem_union, mem_compl_iff]
+    tauto
+  rintro x (hx | hx)
+  · exact key hB hAB hpA hx
+  · rw [union_comm]
+    exact key hA hAB.symm hpB hx
+
+end NonVacuity
 
 end
 

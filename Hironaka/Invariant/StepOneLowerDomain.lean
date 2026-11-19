@@ -1,68 +1,38 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneValue
 import Hironaka.Invariant.ContactStageInvDomain
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.BoundaryCount
-import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.Invariant.ContactIndependenceAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongTransform
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Invariant.InvDomainMemberRestriction
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaximalOrderStepOneB
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.MarkedIdeal.TangentDirectionAlong
-import Hironaka.MarkedIdeal.TransformOffCentre
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The masks and the domain of the lower marked ideals of Step 1
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1ab (the restriction
-`J̄_{|H^s_α}`, after the intersections contained in the support are blown up) and Step 1bb (the restriction
-`J̄_{p|V(u)_p}` to the strict transform of a hypersurface of maximal contact, after the codimension-one components
-are blown up).
+Blueprint `hir:step-one-lower-domain` (`blueprint/src/hironaka.tex`, Hironaka phase H4, a piece of `hir:maximal-order-step`).
+Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1ab (the restriction `J̄_{|H^s_α}`, after the
+intersections contained in the support are blown up) and Step 1bb (the restriction `J̄_{p|V(u)_p}` to the strict transform of a
+hypersurface of maximal contact, after the codimension-one components are blown up).
 
 Let `𝔍` be well formed with `d ≥ 1`, of maximal order along `N`, `dim N ≤ k`, and `T₀` a multiple test blow-up of
 `J̄ = 𝓒_N(𝓗_N(𝔍))`.  At a point `y₀` of the cosupport of `J̄_{T₀}` which is not special (`StepOneValue.IsSpecial`), of level `s`:
 
-* `mem_maskA` (`s ≥ 1`): `y₀` lies in its mask -- the original members are closed and, on the open set of the points
-  on no original member missing `y₀` (where the level is at most `s`), the level-`s` member locus is closed
-  (`MemberInterLocusAlong.isAdmissibleCentre_memberInterLocus_level` for the restricted marked ideal);
-* `isInvDomain_lowerMarked_succ` (`s ≥ 1`): the lower marked ideal (`memberRestrict` restricted to the mask) lies in
-  `IsInvDomain (k - 1)`
+* `mem_maskA` (`s ≥ 1`): `y₀` lies in its mask -- the original members are closed and, on the open set of the points on no
+  original member missing `y₀` (where the level is at most `s`), the level-`s` member locus is closed (TN3's
+  `MemberInterLocusAlong.isAdmissibleCentre_memberInterLocus_level` for the restricted marked ideal);
+* `isInvDomain_lowerMarked_succ` (`s ≥ 1`): the lower marked ideal (TN3's `memberRestrict` restricted to the mask) lies in
+  `IsInvDomain (k - 1)` -- the mask-localized form of `InvDomainMemberRestriction.isInvDomain_memberRestrict_membersThrough`,
+  whose emptiness hypothesis is only used at the points of the open set;
 * `mem_maskB` (`s = 0`): `y₀` lies in its mask -- a tangent direction exists at the base point (maximal order), the original
   members are closed, and the codimension-one part `Z₁` of `J̄_{T₀}` is closed (maximal order is kept along the tower);
 * `isInvDomain_lowerMarked_zero` (`s = 0`): the lower marked ideal (`contactMarked` on the mask) lies in
-  `IsInvDomain (k - 1)` (`ContactStageInvDomain.isInvDomain_stage_coeffHom_of_le`);
+  `IsInvDomain (k - 1)` (TN23's `ContactStageInvDomain.isInvDomain_stage_coeffHom_of_le`);
 * `mem_lowerMask_and_isInvDomain`: both, for every level.
 
 The tools on `J̄` and along towers: `isWellFormed_barMarked`, `isMaximalOrderAlong_barMarked`, `cosupp_barMarked`,
 `isMaximalOrderAlong_geoTransformAlong`, `proj_mem_cosupp_of_mem_cosupp`, `isClosed_of_mem_origMembers`,
 `tangentChoice_spec`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -73,7 +43,14 @@ universe u v
 namespace Hironaka.StepOneLowerDomain
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.HomogenizedIdealAlong Hironaka.MaximalOrderStepOneB Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong Hironaka.MemberInterLocusAlong Hironaka.InvDomainMemberRestriction Hironaka.TangentDirectionAlong Hironaka.MarkedIdealBiholomorphism Hironaka.MarkedIdealRestrictOpen Hironaka.GermIdealOrder
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.HomogenizedIdealAlong Hironaka.MaximalOrderStepOneB
+  Hironaka.StepOneRegime Hironaka.StepOneValue
+  Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong
+  Hironaka.MemberInterLocusAlong Hironaka.InvDomainMemberRestriction
+  Hironaka.TangentDirectionAlong Hironaka.MarkedIdealBiholomorphism
+  Hironaka.MarkedIdealRestrictOpen Hironaka.GermIdealOrder
 open Hironaka.ResolutionInvariantSpec (IsInvDomain DimLE)
 
 noncomputable section
@@ -238,9 +215,8 @@ theorem mem_maskB (hy₀ : y₀ ∈ (geoTransformAlong (barMarked 𝔍) T₀).co
   exact h2 H hH hzH
 
 include h𝔍 hd hmax hT₀ in
-/-- **Step 1bb: the lower marked ideal lies in the domain** of the inductive invariant (`dim N ≤ k`):
-`isInvDomain_stage_coeffHom_of_le` on the mask, which lies over the open set of the tangent direction and misses
-`Z₁`. -/
+/-- **Step 1bb: the lower marked ideal lies in the domain** of the inductive invariant (`dim N ≤ k`): TN23's
+`isInvDomain_stage_coeffHom_of_le` on the mask, which lies over the open set of the tangent direction and misses `Z₁`. -/
 theorem isInvDomain_lowerMarked_zero {k : ℕ} (hk : DimLE n 𝔍.N k)
     (hy₀ : y₀ ∈ (geoTransformAlong (barMarked 𝔍) T₀).cosupp) :
     IsInvDomain (k - 1) (lowerMarked 𝔍 0 T₀ y₀) := by
@@ -270,8 +246,8 @@ variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X) (h𝔍 : 𝔍.IsWellFormed) (
 
 include h𝔍 hd hn hT₀ in
 /-- **Step 1ab: the point lies in its mask**: on the open set `V` of the points on no original member missing `y₀`, the
-level is at most that of `y₀`, so the level-`s` member locus of the restriction of `J̄_{T₀}` to `V` is an admissible
-centre, in particular closed; `y₀` is not in it. -/
+level is at most that of `y₀`, so the level-`s` member locus of the restriction of `J̄_{T₀}` to `V` is an admissible centre
+(TN3), in particular closed; `y₀` is not in it. -/
 theorem mem_maskA (hl : 1 ≤ level 𝔍 T₀ y₀) (hsp : ¬ IsSpecial 𝔍 T₀ y₀) : y₀ ∈ maskA 𝔍 T₀ y₀ := by
   classical
   set 𝔪 := geoTransformAlong (barMarked 𝔍) T₀ with h𝔪def
@@ -325,9 +301,9 @@ theorem mem_maskA (hl : 1 ≤ level 𝔍 T₀ y₀) (hsp : ¬ IsSpecial 𝔍 T�
   · exact hL
 
 include h𝔍 hd hn hT₀ in
-/-- **Step 1ab: the lower marked ideal lies in the domain** of the inductive invariant (`dim N ≤ k`, level `s + 1 ≥
-1`): `memberRestrict` at the original members through `y₀`, restricted to the mask, whose points lie on exactly
-those members and are not special of that level. -/
+/-- **Step 1ab: the lower marked ideal lies in the domain** of the inductive invariant (`dim N ≤ k`, level `s + 1 ≥ 1`): TN3's
+`memberRestrict` at the original members through `y₀`, restricted to the mask, whose points lie on exactly those members and
+are not special of that level. -/
 theorem isInvDomain_lowerMarked_succ {k s : ℕ} (hk : DimLE n 𝔍.N k) (hl : level 𝔍 T₀ y₀ = s + 1) :
     IsInvDomain (k - 1) (lowerMarked 𝔍 (s + 1) T₀ y₀) := by
   set 𝔪 := geoTransformAlong (barMarked 𝔍) T₀ with h𝔪def

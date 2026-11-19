@@ -1,86 +1,34 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupFlatCoordinates
-import Hironaka.Analytic.IdealPresentation
-import Hironaka.Manifold.ComplexManifold
-import Mathlib.Analysis.InnerProductSpace.Basic
-import Mathlib.Analysis.InnerProductSpace.Orthogonal
-import Mathlib.Analysis.Complex.Basic
-import Mathlib.Analysis.Calculus.DifferentialForm.Basic
-import Mathlib.MeasureTheory.Integral.CircleAverage
-import Mathlib.Topology.Semicontinuity.Basic
-import Mathlib.Topology.Instances.EReal.Lemmas
-import Mathlib.Tactic.Linarith
-import Mathlib.Analysis.Calculus.ContDiff.Basic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
-import Hironaka.Manifold.HolomorphicMaps
-import Mathlib.Topology.Order.Monotone
-import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
-import Mathlib.MeasureTheory.Integral.Lebesgue.Map
-import Mathlib.Analysis.SpecialFunctions.Complex.CircleMap
-import Mathlib.MeasureTheory.Integral.IntegrableOn
-import Mathlib.Data.EReal.Operations
-import Mathlib.MeasureTheory.Measure.Prod
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.Topology.MetricSpace.Thickening
-import Mathlib.Analysis.Distribution.Distribution
-import Mathlib.MeasureTheory.Function.LocallyIntegrable
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Bases
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
-import Mathlib.Analysis.InnerProductSpace.Laplacian
-import Mathlib.Analysis.InnerProductSpace.Calculus
-import Mathlib.Tactic.Ring
-import Mathlib.Analysis.Calculus.LineDeriv.IntegrationByParts
-import Mathlib.Analysis.Calculus.ContDiff.Convolution
-import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
-import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
-import Mathlib.MeasureTheory.Integral.Bochner.Basic
-import Mathlib.Analysis.Calculus.BumpFunction.Convolution
-import Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
-import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
-import Mathlib.Analysis.Matrix.PosDef
-import Mathlib.Analysis.Calculus.FDeriv.Symmetric
-import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
-import Mathlib.MeasureTheory.Measure.WithDensity
-import Mathlib.Topology.Algebra.MetricSpace.Lipschitz
-import Mathlib.Tactic
-import Mathlib.Analysis.Fourier.AddCircle
-import Mathlib.Analysis.InnerProductSpace.Harmonic.Constructions
-import Mathlib.Analysis.Complex.OperatorNorm
-import Mathlib.Analysis.Normed.Operator.Mul
-import Mathlib.MeasureTheory.Integral.CircleIntegral
-import Mathlib.Analysis.Complex.Harmonic.MeanValue
-import Mathlib.Analysis.Normed.Module.Connected
-import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict
-import Mathlib.Analysis.Complex.CauchyIntegral
-import Mathlib.Geometry.Manifold.PartitionOfUnity
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Mathlib.LinearAlgebra.Alternating.DomCoprod
-import Hironaka.Manifold.HolomorphicContDiff
-import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
-import Mathlib.Analysis.Calculus.FDeriv.WithLp
-import Mathlib.Geometry.Manifold.MFDeriv.Atlas
-import Mathlib.Geometry.Manifold.MFDeriv.FDeriv
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Analytic.HolomorphicGermAlgebra
+import Hironaka.Analytic.CoherentIdealWeight
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The vanishing ideal of a closed submanifold is coherent
 
-This module supplies the missing coherence.
+Source: Copy-4, Step 5 of `prop:principalization`
+(`transcendental-nakamaye-copy4-20260911`), where `ψ_{𝓘_V}` and `ψ_{𝓘_W}` appear
+in `eq:IV-H` and in "`ψ_{𝓘_W}` is bounded on `Λ`".
 
+Both of those need a *weight* for a vanishing ideal, and
+`Pending/CoherentIdealWeight.exists_hasAnalyticSingularitiesOfType_of_isCoherent`
+produces one from coherence alone.  This module supplies the missing coherence.
+
+Nothing new is needed analytically: `Pending/BlowupFlatCoordinates` already proves
+Hadamard's lemma in flattening coordinates
+(`exists_eq_sum_flatCoord`: every germ of `𝓘_C` on `flatDomain Φ` is
+`∑_{i ≥ k} bᵢ · flatCoord Φ i`) and that the coordinates with `i ≥ k` lie in `𝓘_C`.
 Coherence is the conjunction of those two, with the family
 
   `gᵢ = flatCoord Φ i` for `i ≥ k`,  `gᵢ = 0` for `i < k`,
 
-Together with the trivial chart off `C`, where `𝓘_C` is the unit ideal.
+together with the trivial chart off `C`, where `𝓘_C` is the unit ideal.  The one
+step not already on disk is that `𝓘_C` absorbs holomorphic combinations of its
+own members — `GermIdeal` is a bare `mem` predicate and carries no closure axiom,
+so this has to be checked for `vanishingIdeal` by hand.
+
+Everything here is sorry-free.
 -/
 
 open Set Filter
@@ -88,7 +36,8 @@ open scoped Topology Manifold ContDiff
 
 namespace Hironaka.VanishingIdealCoherent
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences BlowupFlatCoordinates
+open Hironaka.HolomorphicIdealSheaves Hironaka.GlobalAnalyticSingularities
+  Hironaka.BlowupSequences BlowupFlatCoordinates
 
 noncomputable section
 
@@ -150,6 +99,14 @@ theorem isCoherent_vanishingIdeal {C : Set M} (hC : IsClosedSubmanifold n C) :
       refine ⟨hf.1, ?_⟩
       filter_upwards [hC.1.isOpen_compl.mem_nhds hy] with y' h1 h2
       exact absurd h2 h1
+
+/-- **The weight `ψ_{𝓘_C}` of a closed submanifold** (Copy-4, `sec:qpsh`). -/
+theorem exists_hasAnalyticSingularitiesOfType_vanishingIdeal [CompactSpace M]
+    {C : Set M} (hC : IsClosedSubmanifold n C) :
+    ∃ φ : M → EReal,
+      HasAnalyticSingularitiesOfType φ 1 (vanishingIdeal (n := n) C) :=
+  CoherentIdealWeight.exists_hasAnalyticSingularitiesOfType_of_isCoherent
+    (isCoherent_vanishingIdeal hC)
 
 end
 

@@ -1,70 +1,46 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.StepOneNearby
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CodimOneSupportAlong
-import Hironaka.MarkedIdeal.CoefficientIdealRestriction
-import Hironaka.Invariant.ContactStageInvDomain
-import Hironaka.MarkedIdeal.HomogenizedGlueingTower
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MemberInterLocusAlong
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Invariant.RestrictEmptyTower
-import Hironaka.Invariant.StepOneLowerDomain
-import Hironaka.Invariant.StepOneMaskTower
-import Hironaka.Invariant.StepOneRegime
-import Hironaka.Invariant.StepOneValue
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The value function of Step 1 with the original members masked (supersedes Step 1bb of `StepOneValue`)
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1; Step 1bb works with `(V(u)_p,
-J̄_{p|V(u)_p}, (E_p ∖ E)_{|V(u)_p}, μ̄)`, the original members removed *as a set*.
+Blueprint `hir:step-one-value-masked`, `hir:step-one-value-masked-basic` (`blueprint/src/hironaka.tex`, Hironaka phase H4,
+pieces of `hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1;
+Step 1bb works with `(V(u)_p, J̄_{p|V(u)_p}, (E_p ∖ E)_{|V(u)_p}, μ̄)`, the original members removed *as a set*.
 
-**Why this module.** The first form `StepOneValue.lowerMarked 𝔍 0` (kept unchanged) builds Step 1bb's lower marked
-ideal from `stepOneMarked 𝔍.N 𝔍.ideal 𝔍.d`, i.e. it *deletes* the `#𝔍.E` original members from the divisor. Here the
-original members are **kept and masked**: the lower marked ideal of Step 1bb is `(𝓒_{N_{T₀}}(J̄_{T₀})|_{(N ∩
-V(w))_{T₀}})|_W` for `J̄ = 𝓒_N(𝓗_N(𝔍))` with the divisor of `𝔍` (`lowerMarkedB`); the mask `W` misses the original
-members, whose traces on it are empty. Step 1ab (`StepOneValue.lowerMarked 𝔍 (s + 1)`, `memberRestrict`) already
-keeps the members not through the point and is unchanged.
+**Why this module.**  The first form `StepOneValue.lowerMarked 𝔍 0` (kept unchanged) builds Step 1bb's lower marked
+ideal from `stepOneMarked 𝔍.N 𝔍.ideal 𝔍.d`, i.e. it *deletes* the `#𝔍.E` original members from the divisor.  An
+independent review of 3 October 2026 showed that this shifts the positions of the members under re-basing (`𝔍_P` has
+`#𝔍.E + |P|` members, all deleted), so property (4') fails for a resolution invariant which depends on the positions of the
+members (the planned monomial invariant does), and the general step's comparisons break.  Here the original members are **kept
+and masked**: the lower marked ideal of Step 1bb is
+`(𝓒_{N_{T₀}}(J̄_{T₀})|_{(N ∩ V(w))_{T₀}})|_W` for `J̄ = 𝓒_N(𝓗_N(𝔍))` with the divisor of `𝔍` (`lowerMarkedB`); the mask `W`
+misses the original members, whose traces on it are empty.  Step 1ab (`StepOneValue.lowerMarked 𝔍 (s + 1)`, TN3's
+`memberRestrict`) already keeps the members not through the point and is unchanged.
 
-To make later corrections cheap, the value function is defined for an arbitrary family `L` of lower marked ideals on
-the masks (`LowerFamily`): `lowerValueL`, `stepOneInvL`, `LowerDataL`; the first form is the instance `L =
-StepOneValue.lowerMarked 𝔍` (by `rfl`), the masked form the instance `L = lowerMarkedM 𝔍` (`stepOneInvM`).
+To make later corrections cheap, the value function is defined for an arbitrary family `L` of lower marked ideals on the masks
+(`LowerFamily`): `lowerValueL`, `stepOneInvL`, `LowerDataL`; the first form is the instance `L = StepOneValue.lowerMarked 𝔍`
+(`lowerValue_eq_lowerValueL`, `stepOneInv_eq_stepOneInvL`, `lowerData_iff_lowerDataL`, by `rfl`), the masked form the instance
+`L = lowerMarkedM 𝔍` (`stepOneInvM`).
 
 ## Main results
 
 * `lowerMarkedB`, `lowerMarkedM`, `LowerFamily`, `lowerValueL`, `stepOneInvL`, `LowerDataL`, `stepOneInvM`;
-* `mem_lowerMask_and_isInvDomain_M`: at a point of the cosupport in the regime of its level, the point lies in its
-  mask and the masked lower marked ideal lies in the domain in dimension `≤ k - 1` (Step 1bb:
+* `mem_lowerMask_and_isInvDomain_M`: at a point of the cosupport in the regime of its level, the point lies in its mask and the
+  masked lower marked ideal lies in the domain in dimension `≤ k - 1` (Step 1bb: TN23's
   `ContactStageInvDomain.isInvDomain_stage_coeffHomAlong_of_le`, the E-kept domain lemma);
-* the properties under one blowup for every family `L` (the proofs of `StepOneValue`, verbatim):
-  `stepOneInvL_step_of_notMem` ((3) "equal off the centre" and (4), given `LowerDataL`),
-  `stepOneInvL_step_lt_of_mem`;
-* `lowerValueL_ne_top`: along a multiple test blow-up of `J̄`, the lower value at a non-special point of the
-  cosupport is finite (its image lies in its own mask), so the junk value `∞` -- which coincides with the special
-  value -- is never reached;
+* the properties under one blowup for every family `L` (the proofs of `StepOneValue`, verbatim): `stepOneInvL_step_of_notMem`
+  ((3) "equal off the centre" and (4), given `LowerDataL`), `stepOneInvL_step_lt_of_level_lt`, `stepOneInvL_step_lt_of_mem`;
+* `lowerValueL_ne_top` (review L1): along a multiple test blow-up of `J̄`, the lower value at a non-special point of the
+  cosupport is finite (its image lies in its own mask), so the junk value `∞` -- which coincides with the special value -- is
+  never reached;
 * `HasLowerDataL`, `stepOneInvL_lt_of_mem_lowerMask`, `centresAvoid_lowerMaskL`: the comparison tools of
   `StepOneNearby` for every family `L` (the centres between two start stages miss the earlier mask).
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -75,7 +51,15 @@ universe u v
 namespace Hironaka.StepOneValueMasked
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime Hironaka.StepOneValue Hironaka.StepOneLowerDomain Hironaka.StepOneMaskTower Hironaka.BoundaryCount Hironaka.CodimOneSupportAlong Hironaka.MarkedIdealBiholomorphism Hironaka.RestrictEmptyTower Hironaka.MarkedIdealRestrictOpen Hironaka.HomogenizedIdealAlong Hironaka.CoefficientIdealRestriction Hironaka.TangentDirectionAlong
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.StepOneRegime
+  Hironaka.StepOneValue Hironaka.StepOneLowerDomain
+  Hironaka.StepOneMaskTower Hironaka.BoundaryCount
+  Hironaka.CodimOneSupportAlong Hironaka.MarkedIdealBiholomorphism
+  Hironaka.RestrictEmptyTower Hironaka.MarkedIdealRestrictOpen
+  Hironaka.HomogenizedIdealAlong Hironaka.CoefficientIdealRestriction
+  Hironaka.TangentDirectionAlong
 open Hironaka.HomogenizedGlueingTower (strictAlong)
 open Hironaka.ResolutionDriver (maxLocus)
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical DimLE)
@@ -143,10 +127,32 @@ def LowerDataL (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X) 
     (⟨y, h⟩ : openPreimage T₁ (lowerMask 𝔍 s T₀ (T₁.proj y))) ∈
       (geoTransformAlong (L s T₀ (T₁.proj y)) (restrict (lowerMask 𝔍 s T₀ (T₁.proj y)) T₁)).cosupp
 
-/-- **The value function of Step 1, original members masked**. -/
+/-- **The value function of Step 1, original members masked** (supersedes `StepOneValue.stepOneInv`). -/
 abbrev stepOneInvM (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X) {Y : CMfd.{u} n}
     (T : BlowupTower X Y) (y : Y) : ℕ ×ₗ WithTop Λ :=
   stepOneInvL R 𝔍 (lowerMarkedM 𝔍) T y
+
+/-- The first form is the instance `L = StepOneValue.lowerMarked 𝔍`: lower values. -/
+theorem lowerValue_eq_lowerValueL (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X) (s : ℕ)
+    {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y) (y : Y) :
+    lowerValue R 𝔍 s T₀ T₁ y = lowerValueL R 𝔍 (lowerMarked 𝔍) s T₀ T₁ y := rfl
+
+/-- The first form is the instance `L = StepOneValue.lowerMarked 𝔍`: values. -/
+theorem stepOneInv_eq_stepOneInvL (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) (y : Y) : stepOneInv R 𝔍 T y = stepOneInvL R 𝔍 (lowerMarked 𝔍) T y := rfl
+
+/-- The first form is the instance `L = StepOneValue.lowerMarked 𝔍`: lower data. -/
+theorem lowerData_iff_lowerDataL (R : ResolutionInvariant.{u, v} n k Λ) (𝔍 : MarkedIdeal n X) (s : ℕ)
+    {Y₀ Y : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (T₁ : BlowupTower Y₀ Y) (y : Y) :
+    LowerData R 𝔍 s T₀ T₁ y ↔ LowerDataL R 𝔍 (lowerMarked 𝔍) s T₀ T₁ y := Iff.rfl
+
+/-- At level `s + 1` the masked lower marked ideal is Step 1ab's. -/
+theorem lowerMarkedM_succ (𝔍 : MarkedIdeal n X) (s : ℕ) {Y₀ : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (y₀ : Y₀) :
+    lowerMarkedM 𝔍 (s + 1) T₀ y₀ = lowerMarked 𝔍 (s + 1) T₀ y₀ := rfl
+
+/-- At level `0` the masked lower marked ideal is `lowerMarkedB`. -/
+theorem lowerMarkedM_zero (𝔍 : MarkedIdeal n X) {Y₀ : CMfd.{u} n} (T₀ : BlowupTower X Y₀) (y₀ : Y₀) :
+    lowerMarkedM 𝔍 0 T₀ y₀ = lowerMarkedB 𝔍 T₀ y₀ := rfl
 
 end Defs
 
@@ -156,11 +162,10 @@ section Domain
 
 variable {X : CMfd.{u} n} (𝔍 : MarkedIdeal n X)
 
-/-- **The masked lower marked ideal lies in the domain**: for `𝔍` well formed with `d ≥ 1`, of maximal order along `N`
-with `dim N ≤ k` (`0 < n`), along a multiple test blow-up `T₀` of `J̄`, at a point `y₀` of the cosupport in the
-regime of its level `s`, `y₀` lies in its mask and `lowerMarkedM 𝔍 s T₀ y₀` lies in `IsInvDomain (k - 1)` (Step 1bb:
-E-kept `isInvDomain_stage_coeffHomAlong_of_le` -- the mask misses `Z₁` and the original members; Step 1ab:
-`StepOneLowerDomain`). -/
+/-- **The masked lower marked ideal lies in the domain**: for `𝔍` well formed with `d ≥ 1`, of maximal order along `N` with
+`dim N ≤ k` (`0 < n`), along a multiple test blow-up `T₀` of `J̄`, at a point `y₀` of the cosupport in the regime of its level
+`s`, `y₀` lies in its mask and `lowerMarkedM 𝔍 s T₀ y₀` lies in `IsInvDomain (k - 1)` (Step 1bb: TN23's E-kept
+`isInvDomain_stage_coeffHomAlong_of_le` -- the mask misses `Z₁` and the original members; Step 1ab: `StepOneLowerDomain`). -/
 theorem mem_lowerMask_and_isInvDomain_M (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {k : ℕ} (hk : DimLE n 𝔍.N k) {Y₀ : CMfd.{u} n}
     (T₀ : BlowupTower X Y₀) (hT₀ : IsGeoTestTower (barMarked 𝔍) T₀) {y₀ : Y₀}
@@ -215,9 +220,9 @@ theorem mem_lowerMask_of_stepRegime (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍
 
 variable {k : ℕ} {Λ : Type v} [LinearOrder Λ] (R : ResolutionInvariant.{u, v} n k Λ)
 
-/-- **The junk value is never reached**: along a multiple test blow-up of `J̄` (`𝔍` well formed, `d ≥ 1`, of maximal
-order, `0 < n`), at a non-special point of the cosupport the lower value is finite, for every family `L` -- the
-image of the point at the start of its run is in the regime and in the cosupport, hence in its own mask. -/
+/-- **The junk value is never reached** (review L1): along a multiple test blow-up of `J̄` (`𝔍` well formed, `d ≥ 1`, of
+maximal order, `0 < n`), at a non-special point of the cosupport the lower value is finite, for every family `L` -- the image
+of the point at the start of its run is in the regime and in the cosupport, hence in its own mask. -/
 theorem lowerValueL_ne_top (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) (L : LowerFamily 𝔍) {Y : CMfd.{u} n} (T : BlowupTower X Y)
     (hT : IsGeoTestTower (barMarked 𝔍) T) {y : Y} (hy : y ∈ (geoTransformAlong (barMarked 𝔍) T).cosupp)
@@ -332,6 +337,12 @@ theorem stepOneInvL_step_of_notMem (hN : IsClosedSubmanifold n 𝔍.N) (h𝔞 : 
     rw [stepOneInvL_step_eq_of_regime R 𝔍 L T C π hπ hz hreg, stepOneInvL_of_not_isSpecial R 𝔍 L _ hsp, hl,
       lowerValueL_step_of_notMem R 𝔍 L (hd hsp) hzC]
 
+/-- **Property (3), drop over the centre, when the level drops.** -/
+theorem stepOneInvL_step_lt_of_level_lt {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (π : Z → Y)
+    (hπ : IsBlowupAlong n C π) {z : Z} (h : level 𝔍 (.step T C π hπ) z < level 𝔍 T (π z)) :
+    stepOneInvL R 𝔍 L (.step T C π hπ) z < stepOneInvL R 𝔍 L T (π z) :=
+  stepOneInvL_lt_of_level_lt R 𝔍 L h
+
 /-- **Property (3), drop over the centre, at a point keeping its regime** (given lower data). -/
 theorem stepOneInvL_step_lt_of_mem {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (π : Z → Y)
     (hπ : IsBlowupAlong n C π) {z : Z} (hzC : π z ∈ C) (hz : ¬ IsSpecial 𝔍 (.step T C π hπ) z)
@@ -424,10 +435,10 @@ theorem disjoint_lowerMask_of_isCanonicalL (h𝔍 : 𝔍.IsWellFormed) (hd : 1 �
     have hlt := stepOneInvL_lt_of_mem_lowerMask R 𝔍 L h𝔍 hd hmax T₀ M hT hp₁ hD hqC.1 hqW hlw hnw
     exact absurd (hqC.2 w hw) (not_le.mpr hlt)
 
-/-- **The centres between two start stages miss the earlier mask** (for every family `L`): along a multiple test
-blow-up `T₀ M σ` of `J̄` which is a canonical segment of `stepOneInvL R 𝔍 L`, with lower data along the prefixes `T₀
-M'`, for `p₁` of level `s` at `T₀` and `w` of level at least `s` at `T₀ M`, in the cosupport and out of the regime
-of level `s`, the centres of `M σ` miss the mask of `p₁`. -/
+/-- **The centres between two start stages miss the earlier mask** (for every family `L`; `StepOneNearby.centresAvoid_lowerMask`
+for the first form): along a multiple test blow-up `T₀ M σ` of `J̄` which is a canonical segment of `stepOneInvL R 𝔍 L`, with
+lower data along the prefixes `T₀ M'`, for `p₁` of level `s` at `T₀` and `w` of level at least `s` at `T₀ M`, in the cosupport
+and out of the regime of level `s`, the centres of `M σ` miss the mask of `p₁`. -/
 theorem centresAvoid_lowerMaskL (h𝔍 : 𝔍.IsWellFormed) (hd : 1 ≤ 𝔍.d) (hn : 0 < n)
     (hmax : IsMaximalOrderAlong 𝔍.N 𝔍.ideal 𝔍.d) {k' : ℕ} (hk : DimLE n 𝔍.N k') {s : ℕ} {Y₁ : CMfd.{u} n}
     (T₀ : BlowupTower X Y₁) {p₁ : Y₁} (hp₁ : level 𝔍 T₀ p₁ = s) :

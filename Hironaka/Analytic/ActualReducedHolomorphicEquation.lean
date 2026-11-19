@@ -1,12 +1,6 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.ActualHolomorphicGermFactoriality
 import Hironaka.Analytic.RueckertNullstellensatz
 import Mathlib.RingTheory.Radical.Basic
-
 
 set_option autoImplicit false
 
@@ -17,8 +11,6 @@ reduced equation for a given nonzero holomorphic equation, including
 singular zero germs.  Pure codimension-one analytic sets without a given
 equation and global divisor currents remain separate tasks.
 -/
-
-open Hironaka
 
 noncomputable section
 open Filter Topology

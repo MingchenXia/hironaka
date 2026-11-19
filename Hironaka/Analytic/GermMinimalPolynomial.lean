@@ -1,24 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.GermAlgebraicParametrization
 import Hironaka.Analytic.GermIntegrallyClosed
 import Hironaka.Analytic.WeierstrassDivisionUniqueness
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.RegularLocusDense
-import Hironaka.Analytic.AnalyticProjectionWeierstrass
-import Hironaka.Analytic.GermCoordinateTower
-import Hironaka.Analytic.GermNoetherNormalization
-import Hironaka.Analytic.HolomorphicGermNoetherian
-import Hironaka.Analytic.HolomorphicGermRing
-import Hironaka.Analytic.HolomorphicGermWeierstrassPreparation
-import Hironaka.Analytic.HolomorphicZeroSetThin
+
 set_option autoImplicit false
 
 /-!
 # Minimal polynomials over `𝒪_d` and iterated Weierstrass reduction
+
+Blueprint `lag:finite-extension`, `lag:minimal-polynomial-weierstrass`,
+`lag:thin-subgerm` (algebraic step) (Demailly, *Complex analytic and differential
+geometry*, II.4.13, II.4.26).
 
 For a prime `Q ⊆ 𝒪_n` in Noether position over `𝒪_d`:
 

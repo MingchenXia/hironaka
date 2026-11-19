@@ -1,10 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Coherence.GeneralCoherentIdealColon
-import Hironaka.Invariant.StepOneBarMarkedCarrierBoundary
 import Hironaka.Resolution.HironakaCurveAnalyticPredicates
 import Hironaka.Coherence.CoherentIdealColon
 
@@ -35,7 +28,6 @@ open MarkedIdeals MarkedIdeals.MarkedIdeal BlowupTowers BlowupTowerTransforms
   DivisorExponentAlong GermIdealOrder MarkedIdealRestrictOpen
   BlowupStrictSubmanifold MarkedIdealBiholomorphism
 
-open Hironaka
 noncomputable section
 
 universe u

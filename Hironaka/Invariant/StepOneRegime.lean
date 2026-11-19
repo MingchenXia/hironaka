@@ -1,29 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Blowup.BlowupTowerSplitIso
 import Hironaka.Invariant.MaximalOrderStepOneB
 import Hironaka.Blowup.NormalCrossingsComparison
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerSplit
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The point-dependent split stage of Step 1, and the original members of `E` dropped
 
-Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1: the invariants of a point are
-"assigned at the moment [it is] getting blown-up" and "remain unchanged when the points are transformed
-isomorphically"; Step 1b works with `(X, J̄, ∅, μ̄)` and, at the stage `p` where it starts, with `(V(u)_p,
-J̄_{p|V(u)_p}, (E_p ∖ E)_{|V(u)_p}, μ̄)`, i.e. with the original members `E` removed.
+Blueprint `hir:regime-run`, `hir:drop-original-members` (`blueprint/src/hironaka.tex`, Hironaka phase H4, pieces of
+`hir:maximal-order-step`).  Source: Włodarczyk 2005 (arXiv `hiron.tex`), proof of Proposition `pr:resol`, Step 1: the
+invariants of a point are "assigned at the moment [it is] getting blown-up" and "remain unchanged when the points are
+transformed isomorphically"; Step 1b works with `(X, J̄, ∅, μ̄)` and, at the stage `p` where it starts, with
+`(V(u)_p, J̄_{p|V(u)_p}, (E_p ∖ E)_{|V(u)_p}, μ̄)`, i.e. with the original members `E` removed.
 
 ## The regime run
 
@@ -36,6 +25,10 @@ satisfy `P`; the tail of `BlowupTowerSplit.split T (regimeRun P T y)` is then th
 * `regimeRun`, `regimeRun_refl`, `regimeRun_step`, `regimeRun_le_length`;
 * `regime_head_of_le_regimeRun`: at every stage of the run the image of `y` satisfies `P`;
   `not_regime_head_regimeRun`: the run is maximal;
+* `regimeRun_restrict`: for a regime compatible with restriction to an open `U ⊆ X`, the run does not change;
+* `regimeRun_isTowerIso`: for regimes compatible with an isomorphism of towers, the runs correspond;
+* `eventually_le_regimeRun`: **nearby points have at least the run** -- if `P` holds near each of its points among the points
+  satisfying a condition `G` inherited by the images, then near `y` every point satisfying `G` has a run at least that of `y`.
 
 ## The original members dropped
 
@@ -43,12 +36,15 @@ satisfy `P`; the tail of `BlowupTowerSplit.split T (regimeRun P T y)` is then th
   transform appends the exceptional divisor after the strict transforms of the members);
 * `isGeoTestTower_dropE`: a multiple test blow-up stays one after dropping members (normal crossings with fewer members);
 * `coeffHom_dropE`, `geoTransformAlong_coeffHom_dropE`, `isGeoTestTower_stepOneMarked_of_coeffHom`,
-  `cosupp_geoTransformAlong_stepOneMarked`: for `J̄ = 𝓒_N(𝓗_N(𝔍))` (any `E`) with its `#𝔍.E` original members
-  dropped one gets `stepOneMarked 𝔍.N 𝔍.ideal 𝔍.d` (`E = []`), along every tower; so Step 1b's marked ideals are
-  `MaximalOrderStepOneB.contactMarked` and the results proved for them (independence of the hypersurface of maximal
-  contact, domain lemmas) apply unchanged. Dropping the fixed number `#𝔍.E` of original members (not the number of
-  members at the stage where Step 1b starts) keeps re-basing consistent: the members appended along a part with
-  empty centres are the same on both sides.
+  `cosupp_geoTransformAlong_stepOneMarked`: for `J̄ = 𝓒_N(𝓗_N(𝔍))` (any `E`) with its `#𝔍.E` original members dropped one gets
+  `stepOneMarked 𝔍.N 𝔍.ideal 𝔍.d` (`E = []`), along every tower; so Step 1b's marked ideals are
+  `MaximalOrderStepOneB.contactMarked` and the results proved for them (independence of the hypersurface of maximal contact,
+  TN23's domain lemmas) apply unchanged.  Dropping the fixed number `#𝔍.E` of original members (not the number of members at
+  the stage where Step 1b starts) keeps re-basing consistent: the members appended along a part with empty centres are the
+  same on both sides.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -59,7 +55,11 @@ universe u
 namespace Hironaka.StepOneRegime
 
 open Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.BlowupTowerIsomorphism Hironaka.BlowupTowerSplit Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.HomogenizedIdealAlong Hironaka.MaximalOrderStepOneB Hironaka.NormalCrossingsComparison
+open Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.BlowupTowerIsomorphism Hironaka.BlowupTowerSplit
+  Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.HomogenizedIdealAlong Hironaka.MaximalOrderStepOneB
+  Hironaka.NormalCrossingsComparison
 open Hironaka.HomogenizedGlueingAlongTower (homogenizedMarkedAlong)
 
 noncomputable section
@@ -147,6 +147,63 @@ theorem not_regime_head_regimeRun : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y) (
         rw [BlowupTower.proj_step]
         cases T <;> exact hP
 
+/-- **The run along a restriction to an open set**: for regimes `P` over `X` and `P'` over `U` which agree on the points
+of the open preimages (`P' (T|_U) p ↔ P T p`), the runs agree. -/
+theorem regimeRun_restrict (U : Opens X) (P' : Regime (CMfd.of (n := n) U))
+    (hP : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y) (p : openPreimage T U), P' (restrict U T) p ↔ P T p) :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y) (p : openPreimage T U), regimeRun P' (restrict U T) p = regimeRun P T p
+  | _, .refl, _ => rfl
+  | _, .step T C π hπ, p => by
+      classical
+      have hp : P' (restrict U T) ⟨π p.1, p.2⟩ ↔ P T (π p.1) := hP T ⟨π p.1, p.2⟩
+      have ih := regimeRun_restrict U P' hP T ⟨π p.1, p.2⟩
+      show (if P' (restrict U T) ⟨π p.1, p.2⟩ then regimeRun P' (restrict U T) ⟨π p.1, p.2⟩ + 1 else 0) =
+        if P T (π p.1) then regimeRun P T (π p.1) + 1 else 0
+      by_cases h : P T (π p.1)
+      · rw [if_pos (hp.mpr h), if_pos h, ih]
+      · rw [if_neg (fun h' => h (hp.mp h')), if_neg h]
+
+/-- **The run along an isomorphism of towers**: for regimes `P'` over `X'` and `P` over `X` which correspond along every
+isomorphism of towers over `Φ`, the runs correspond along `χ`. -/
+theorem regimeRun_isTowerIso {X' : CMfd.{u} n} {Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X}
+    (P' : Regime X')
+    (hP : ∀ {Y' Y : CMfd.{u} n} (S' : BlowupTower X' Y') (S : BlowupTower X Y)
+      (ψ : Y' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y), IsTowerIso Φ S' S ψ → ∀ p, P' S' p ↔ P S (ψ p))
+    {Y' Y : CMfd.{u} n} {T' : BlowupTower X' Y'} {T : BlowupTower X Y}
+    {χ : Y' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y} (h : IsTowerIso Φ T' T χ) :
+    ∀ p, regimeRun P' T' p = regimeRun P T (χ p) := by
+  classical
+  induction h with
+  | refl => exact fun _ => rfl
+  | @step Y' Y Z' Z T' T χ h C' π' hπ' C π hπ χ₁ hcomm hC ih =>
+    intro p
+    rw [regimeRun_step, regimeRun_step, hcomm]
+    have hp := hP T' T χ h (π' p)
+    by_cases hq : P T (χ (π' p))
+    · rw [if_pos (hp.mpr hq), if_pos hq, ih]
+    · rw [if_neg (fun h' => hq (hp.mp h')), if_neg hq]
+
+/-- **Nearby points have at least the run.**  Let `G` be a condition on the points of the stages inherited by the images
+under each blowup, such that near each point satisfying `P` every point satisfying `G` satisfies `P`.  Then near `y` every
+point satisfying `G` has a run at least that of `y`. -/
+theorem eventually_le_regimeRun (G : Regime X)
+    (hG : ∀ {Y Z : CMfd.{u} n} (T : BlowupTower X Y) (C : Set Y) (π : Z → Y) (hπ : IsBlowupAlong n C π) (z : Z),
+      G (.step T C π hπ) z → G T (π z))
+    (hP : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y) (y : Y), P T y → ∀ᶠ y' in 𝓝 y, G T y' → P T y') :
+    ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y) (y : Y), ∀ᶠ y' in 𝓝 y, G T y' → regimeRun P T y ≤ regimeRun P T y'
+  | _, .refl, _ => Eventually.of_forall fun _ _ => le_rfl
+  | _, .step T C π hπ, z => by
+      by_cases hz : P T (π z)
+      · have hcont : ContinuousAt π z := hπ.contMDiff.continuous.continuousAt
+        have h1 := hcont.eventually (eventually_le_regimeRun G hG hP T (π z))
+        have h2 := hcont.eventually (hP T (π z) hz)
+        filter_upwards [h1, h2] with z' hz'1 hz'2 hGz'
+        have hG' := hG T C π hπ z' hGz'
+        rw [regimeRun_step_of P T C π hπ hz, regimeRun_step_of P T C π hπ (hz'2 hG')]
+        exact Nat.succ_le_succ (hz'1 hG')
+      · rw [regimeRun_step_of_not P T C π hπ hz]
+        exact Eventually.of_forall fun _ _ => Nat.zero_le _
+
 end Run
 
 /-! ### Dropping the original members -/
@@ -180,6 +237,13 @@ theorem isGeoTestTower_dropE (𝔪 : MarkedIdeal n X) {m : ℕ} (hm : m ≤ 𝔪
       refine (isGeoTestTower_step_iff _ T C π hπ).mpr ⟨isGeoTestTower_dropE 𝔪 hm T hT, ?_⟩
       rw [geoTransformAlong_dropE 𝔪 hm T]
       exact ⟨hC.1, hC.2.1, hasNormalCrossings_of_forall_mem hC.2.2 fun H hH => List.mem_of_mem_drop hH⟩
+
+/-- Dropping members does not change the cosupport along a tower. -/
+theorem cosupp_geoTransformAlong_dropE (𝔪 : MarkedIdeal n X) {m : ℕ} (hm : m ≤ 𝔪.E.length) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) :
+    (geoTransformAlong ({ 𝔪 with E := 𝔪.E.drop m } : MarkedIdeal n X) T).cosupp = (geoTransformAlong 𝔪 T).cosupp := by
+  rw [geoTransformAlong_dropE 𝔪 hm T]
+  rfl
 
 /-- **`J̄ = 𝓒_N(𝓗_N(𝔍))` with its original members dropped is `stepOneMarked 𝔍.N 𝔍.ideal 𝔍.d`** (`E = []`). -/
 theorem coeffHom_dropE (𝔍 : MarkedIdeal n X) :

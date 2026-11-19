@@ -1,14 +1,8 @@
 /-
 Copyright (c) 2026 Hironaka contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
-import Hironaka.Support.ContactStageGlueingExact
 import Hironaka.Resolution.HironakaStepOneZeroContactRemainderTestTower
 
 /-!

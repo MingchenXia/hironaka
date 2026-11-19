@@ -1,7 +1,7 @@
 # De Jong alterations over arbitrary fields
 
 The library exposes de Jong's alteration theorem through the original native
-scheme-theoretic proposition from `DeJongAlterations`. The input field can be
+scheme-theoretic proposition from `Hironaka`. The input field can be
 imperfect and can have any characteristic.
 
 ```lean
@@ -19,7 +19,7 @@ import Hironaka
 universe u
 
 example (k : Type u) [Field k] :
-    DeJongAlterations.DeJongAlterationTheorem k :=
+    Hironaka.DeJongAlterationTheorem k :=
   Hironaka.deJongAlterationTheorem k
 ```
 
@@ -38,7 +38,7 @@ is exactly the support of a reduced strict normal-crossings divisor.
 The alteration and inclusion commute with the original structure maps to
 `Spec k`. No morphism from the compactification `Ybar` to `X` is required.
 
-The native `DeJongAlterations.IsAlteration` requires a proper dominant map
+The native `Hironaka.IsAlteration` requires a proper dominant map
 between integral schemes, finite over a nonempty open in the target. The
 native boundary structure retains effective Cartier and reducedness
 conditions, regularity of all actual component intersections, and their
@@ -53,9 +53,9 @@ Hironaka.exists_alterationWithBoundary
     (k : Type u) [Field k]
     (X : AlgebraicGeometry.Scheme.{u})
     (p : X ⟶ AlgebraicGeometry.Spec (.of k))
-    (hX : DeJongAlterations.IsVariety p)
+    (hX : Hironaka.IsVariety p)
     (Z : TopologicalSpace.Closeds X) (hZ : Z ≠ ⊤) :
-    Nonempty (DeJongAlterations.AlterationWithBoundary p (Z : Set X))
+    Nonempty (Hironaka.AlterationWithBoundary p (Z : Set X))
 ```
 
 This display records the declaration's arguments and result; the source is
@@ -90,53 +90,31 @@ The mathematical blueprint is in
 
 ## Source and verification
 
-The proof is included as the local Lake package
-[`vendor/DeJongAlterations`](../vendor/DeJongAlterations). It contains the native
-producer import cone for the completed theorem, extracted from
-`MingchenXia/archon-nakamaye` at source commit
-`187095a1888ecadb1f365e6d4dc0cb75dcd61eff`. The native proof sources retain
-their original bytes. A narrow package root exposes the completed theorem;
-unrelated project modules and unpublished drafts are excluded.
+The proof is part of Hironaka. Its algebra and geometry modules are under
+`Hironaka.Algebra` and `Hironaka.Geometry`. The original contributor and
+license headers are retained throughout the proof.
 
-- Proved endpoint: [`DeJongAlterations.StableModificationBridge.AlterationUnconditional.deJongAlterationTheorem`](../vendor/DeJongAlterations/DeJongAlterations/StableModificationBridge/AlterationUnconditional.lean).
-- Native statement and full output: [`Theorem.lean`](../vendor/DeJongAlterations/DeJongAlterations/Theorem.lean).
-- Local package guide: [`vendor/DeJongAlterations/README.md`](../vendor/DeJongAlterations/README.md).
-- Provenance and source-hash inventory:
-  [`vendor/DeJongAlterations/SOURCE.json`](../vendor/DeJongAlterations/SOURCE.json).
+- The public entry points are in [Hironaka.DeJong](../Hironaka/DeJong.lean).
+- The native statement and output are in
+  [Hironaka.Geometry.AlterationTheorem](../Hironaka/Geometry/AlterationTheorem.lean).
+- The proved endpoint is in
+  [Hironaka.Geometry.StableModificationBridge.AlterationUnconditional](../Hironaka/Geometry/StableModificationBridge/AlterationUnconditional.lean).
+- The source revision and normalized module hashes are in the
+  [source inventory](../audit/dejong-source.json).
 
-The original source repository is private. Every proof source needed by this
-integration is included here, so public builds do not depend on access to that
-repository. The vendored package has no `Hironaka` dependency; the package
-dependency direction remains acyclic.
-
-Lean 4.33.1 and Mathlib commit
-`0df444a360eaa60ab8c11dca51a86af692955474` agree with this repository's pins.
-The original contributor/license headers are preserved in the vendored source;
-this integration does not relicense those files.
-
-The integration's local commands are:
+Build and verify the proof with the pinned Lean and Mathlib versions.
 
 ```sh
 python3 scripts/check_dejong_source.py
-lake build Hironaka.DeJong
+lake build +Hironaka.DeJong
 lake build
 lake test
 ```
 
-The source check verifies every vendored source hash and Git blob, the complete
-import closure, and the shared dependency/toolchain pins without contacting the
-original repository.
-
-The root package treats its warnings as errors. Upstream warnings in the
-unchanged vendored source are preserved and inventoried in the verification
-receipt; a global `--wfail` would also reject those dependency warnings.
-
-The recursive module-ownership audit covers both `Hironaka` and
-`DeJongAlterations`, including private and generated declarations, and rejects
-axioms other than `propext`, `Classical.choice` and `Quot.sound`.
-The combined-import build and audit results are recorded in
-[`audit/dejong-integration-20261023/validation.json`](../audit/dejong-integration-20261023/validation.json).
-GitHub CI is skipped by the repository owner's instruction.
+The source check validates the complete local import closure and its module
+hashes. The axiom check audits Hironaka-owned declarations, including private
+and generated declarations, against `propext`, `Classical.choice`, and
+`Quot.sound`.
 
 The mathematical source is A. J. de Jong, *Smoothness, semi-stability and
 alterations*, Publications Mathématiques de l'IHÉS **83** (1996), 51–93,
@@ -144,5 +122,5 @@ Theorem 4.1 (printed page 66),
 [DOI: 10.1007/BF02698644](https://doi.org/10.1007/BF02698644),
 [Numdam](https://www.numdam.org/item/PMIHES_1996__83__51_0/).
 The independent paper results and the separate perfect-field generically-étale
-refinement are not claimed by this API. The original analytic gaps G1, G3, G4,
-G8 and G9 retain their existing scope and status.
+refinement are not claimed by this API. For the complex-analytic theorems, see
+the [current resolution scope](../STATUS.md#resolution-goals).

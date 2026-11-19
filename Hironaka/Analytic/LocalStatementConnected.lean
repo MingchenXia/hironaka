@@ -1,23 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.IrreducibleGermConnected
 import Hironaka.Analytic.LocalStatementAssembly
 import Hironaka.Analytic.PureDimension
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.AnalyticGermDecomposition
-import Hironaka.Analytic.AnalyticLocalStatement
-import Hironaka.Analytic.IrreducibleGermLocal
-import Hironaka.Analytic.LocalDecompositionChart
-import Hironaka.Analytic.RegularAtDimChart
-import Hironaka.Analytic.RegularPointDimension
+
 set_option autoImplicit false
 
 /-!
 # The local statement with connected regular parts
+
+Blueprint `lag:local-statement-connected` (Demailly, *Complex analytic and differential
+geometry*, II.4.24, II.5.3).
 
 `ConnectedParts D` strengthens local decomposition data `D` of `A` at `p`: every piece
 contains `p`, and each piece `Aᵢ` has an open neighbourhood `Δᵢ` of `p` and a connected set

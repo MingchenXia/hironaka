@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualTangentDisplacementZeroQuotient
 import Hironaka.Resolution.HironakaActualPrincipalPartsResidueSymbols
 import Hironaka.Resolution.HironakaActualJointTangentCuts
@@ -322,7 +317,6 @@ theorem actualTangentCutLayerMap_symbol
   layerMapTo_symbol d t (actualTangentCutIdeal d t I) le_sup_right I
     (map_actualTangentCutIdeal_eq_original d t I) a ha q z
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Every actual tangent-displacement symbol is killed by the final dictionary. -/
 theorem actualTangentCutLayerMap_tangentSymbol_zero
     (I : Ideal (HolGerm (ComplexModel (d+t)))) (i : Fin d) (q : ℕ)

@@ -1,31 +1,15 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantDriver
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionDriver
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Canonical segments of a resolution invariant: open sets, isomorphisms of towers, counting centres
 
-Sources: Włodarczyk 2005, Proposition `pr:resol` (4) and §2.4 (the pullback of the canonical resolution along an
-étale map -- here an open embedding or a biholomorphism -- is an *extension* of the canonical resolution of the
-pullback: the same nonempty centres, with steps of empty centre inserted), and the remark after Definition
-`hir:centre-function`.
+Blueprint `hir:canonical-segments` (`blueprint/src/hironaka.tex`, Hironaka phase H4).  Sources: Włodarczyk 2005,
+Proposition `pr:resol` (4) and §2.4 (the pullback of the canonical resolution along an étale map -- here an open
+embedding or a biholomorphism -- is an *extension* of the canonical resolution of the pullback: the same nonempty
+centres, with steps of empty centre inserted), and the remark after Definition `hir:centre-function`.
 
 Let `R` be a resolution invariant in dimension `≤ k` (`ResolutionInvariantSpec.ResolutionInvariant`) and `𝔪` a marked
 ideal of its domain.
@@ -40,6 +24,13 @@ ideal of its domain.
   `𝔪|_U`** (property (5): a restricted centre is empty or, the maximum being attained in `U`, the maximum locus of the
   restricted invariant);
 * `isCanonical_of_isTowerIso`: **canonical segments correspond along isomorphisms of towers** (property (6));
+* `countCentresMeeting_empty`, `countCentresMeeting_mono`, `countCentresMeeting_union_le`,
+  `countCentresMeeting_biUnion_le`, `countCentresMeeting_restrict`, `countCentresMeeting_restrict_of_subset`: the number of
+  nonempty centres meeting (the preimage of) `K` is monotone and finitely subadditive in `K`, and it is the same for a
+  tower and for its restriction to an open `U ⊇ K` -- the bookkeeping of local finiteness (8) over finitely many charts.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -50,7 +41,12 @@ universe u v
 namespace Hironaka.ResolutionInvariantSegments
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealBiholomorphism.MarkedIdeal Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism Hironaka.ResolutionInvariantSpec Hironaka.ResolutionDriver Hironaka.ResolutionInvariantDriver
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealBiholomorphism.MarkedIdeal
+  Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupTowerIsomorphism
+  Hironaka.ResolutionInvariantSpec Hironaka.ResolutionDriver
+  Hironaka.ResolutionInvariantDriver
 
 noncomputable section
 
@@ -114,7 +110,172 @@ theorem cosupp_geoTransformAlong_restrict {𝔪 : MarkedIdeal n X} (hN : IsClose
   rw [geoTransformAlong_restrict U hN h𝔞 T hT, cosupp_pullback_val _
     (fun _ _ hg => RelativePrincipalizationSpan.GermIdeal.IsCoherent.holomorphicAt_mem hcT hg)]
 
+/-- **The restriction of a canonical segment to an open set is a canonical segment** of the restricted marked ideal
+(Włodarczyk's extensions): a restricted centre is empty, or it is nonempty and then the maximum of the invariant on the
+cosupport is attained in the open set, so by property (5) the restricted centre is the maximum locus of the restricted
+invariant. -/
+theorem isCanonical_restrict (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X} (hdom : IsInvDomain k 𝔪)
+    (U : Opens X) : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y), IsCanonical 𝔪 (R.inv 𝔪) T →
+      IsCanonical (pullback (Subtype.val : U → X) 𝔪) (R.inv (pullback (Subtype.val : U → X) 𝔪)) (restrict U T)
+  | _, .refl, _ => trivial
+  | _, .step T C π hπ, hcan => by
+      obtain ⟨hT, hC⟩ : IsCanonical 𝔪 (R.inv 𝔪) T ∧
+          (C = ∅ ∨ C = maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp) := hcan
+      have ih := isCanonical_restrict R hdom U T hT
+      have hTt := isGeoTestTower_of_isCanonical R hdom T hT
+      show IsCanonical (pullback (Subtype.val : U → X) 𝔪) (R.inv (pullback (Subtype.val : U → X) 𝔪)) (restrict U T) ∧
+        (((Subtype.val : openPreimage T U → _) ⁻¹' C) = ∅ ∨
+          ((Subtype.val : openPreimage T U → _) ⁻¹' C) = maxLocus (R.inv (pullback (Subtype.val : U → X) 𝔪)
+            (restrict U T)) (geoTransformAlong (pullback (Subtype.val : U → X) 𝔪) (restrict U T)).cosupp)
+      refine ⟨ih, ?_⟩
+      rcases hC with rfl | rfl
+      · exact Or.inl (preimage_empty)
+      · by_cases hne : ((Subtype.val : openPreimage T U → _) ⁻¹'
+            maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp).Nonempty
+        · right
+          rw [cosupp_geoTransformAlong_restrict hdom.isWellFormed.isClosedSubmanifold_N hdom.isWellFormed.isCoherent
+            U T hTt]
+          exact (maxLocus_preimage _ (fun p hp => R.restrictOpen 𝔪 hdom U T hTt p hp) hne).symm
+        · exact Or.inl (not_nonempty_iff_eq_empty.mp hne)
+
 end Restrict
+
+/-! ### Isomorphisms of towers -/
+
+section Iso
+
+variable {X X' : CMfd.{u} n} {Λ : Type v} [LinearOrder Λ] {k : ℕ}
+
+/-- **Canonical segments correspond along isomorphisms of towers** (property (6)): if `χ : T' → T` is an isomorphism of
+towers over a biholomorphism `Φ` and `T` is a canonical segment of `𝔪`, then `T'` is one of `Φ^*𝔪` -- the centres of
+`T'` are the preimages of those of `T`, and the invariant of `Φ^*𝔪` along `T'` is that of `𝔪` along `T` composed with the
+stage biholomorphisms. -/
+theorem isCanonical_of_isTowerIso (R : ResolutionInvariant.{u, v} n k Λ) {𝔪 : MarkedIdeal n X}
+    (hdom : IsInvDomain k 𝔪) (Φ : X' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ X) {Y' Y : CMfd.{u} n}
+    {T' : BlowupTower X' Y'} {T : BlowupTower X Y}
+    {χ : Y' ≃ₘ⟮𝓘(ℂ, ComplexModel n), 𝓘(ℂ, ComplexModel n)⟯ Y} (hiso : IsTowerIso Φ T' T χ) :
+    IsCanonical 𝔪 (R.inv 𝔪) T → IsCanonical (pullback Φ 𝔪) (R.inv (pullback Φ 𝔪)) T' := by
+  induction hiso with
+  | refl => exact fun _ => trivial
+  | @step Y' Y Z' Z T' T χ hiso C' π' hπ' C π hπ χ₁ hcomm hC ih =>
+    intro hcan
+    obtain ⟨hT, hCc⟩ : IsCanonical 𝔪 (R.inv 𝔪) T ∧
+        (C = ∅ ∨ C = maxLocus (R.inv 𝔪 T) (geoTransformAlong 𝔪 T).cosupp) := hcan
+    have hTt := isGeoTestTower_of_isCanonical R hdom T hT
+    show IsCanonical (pullback Φ 𝔪) (R.inv (pullback Φ 𝔪)) T' ∧
+      (C' = ∅ ∨ C' = maxLocus (R.inv (pullback Φ 𝔪) T') (geoTransformAlong (pullback Φ 𝔪) T').cosupp)
+    refine ⟨ih hT, ?_⟩
+    subst hC
+    rcases hCc with rfl | rfl
+    · exact Or.inl preimage_empty
+    · right
+      rw [IsTowerIso.cosupp_geoTransformAlong Φ hdom.isWellFormed.isClosedSubmanifold_N hdom.isWellFormed.isCoherent
+        hiso hTt]
+      exact (maxLocus_preimage_of_surjective χ.toEquiv.surjective
+        (fun p hp => R.towerIso Φ 𝔪 hdom T' T χ hiso hTt p hp)).symm
+
+end Iso
+
+/-! ### Counting centres -/
+
+section Count
+
+variable {X : CMfd.{u} n}
+
+/-- No centre meets the preimage of the empty set. -/
+theorem countCentresMeeting_empty : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+    countCentresMeeting (∅ : Set X) T = 0
+  | _, .refl => rfl
+  | _, .step T C π hπ => by
+      have h : ¬ (C ∩ T.proj ⁻¹' (∅ : Set X)).Nonempty := by
+        rw [preimage_empty, inter_empty]
+        exact not_nonempty_empty
+      simp only [countCentresMeeting, countCentresMeeting_empty T, if_neg h]
+
+/-- **The count is monotone in `K`.** -/
+theorem countCentresMeeting_mono {K K' : Set X} (hK : K ⊆ K') : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+    countCentresMeeting K T ≤ countCentresMeeting K' T
+  | _, .refl => le_rfl
+  | _, .step T C π hπ => by
+      have ih := countCentresMeeting_mono hK T
+      have hsub : C ∩ T.proj ⁻¹' K ⊆ C ∩ T.proj ⁻¹' K' := inter_subset_inter_right _ (preimage_mono hK)
+      simp only [countCentresMeeting]
+      by_cases h1 : (C ∩ T.proj ⁻¹' K).Nonempty
+      · rw [if_pos h1, if_pos (h1.mono hsub)]
+        omega
+      · rw [if_neg h1]
+        split_ifs <;> omega
+
+/-- **The count is subadditive in `K`.** -/
+theorem countCentresMeeting_union_le (K K' : Set X) : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+    countCentresMeeting (K ∪ K') T ≤ countCentresMeeting K T + countCentresMeeting K' T
+  | _, .refl => le_rfl
+  | _, .step T C π hπ => by
+      have ih := countCentresMeeting_union_le K K' T
+      simp only [countCentresMeeting]
+      by_cases h : (C ∩ T.proj ⁻¹' (K ∪ K')).Nonempty
+      · rw [if_pos h]
+        rw [preimage_union, inter_union_distrib_left] at h
+        rcases union_nonempty.mp h with h1 | h2
+        · rw [if_pos h1]
+          split_ifs <;> omega
+        · rw [if_pos h2]
+          split_ifs <;> omega
+      · rw [if_neg h]
+        split_ifs <;> omega
+
+/-- **The count is finitely subadditive**: for finitely many sets `K i`, the centres meeting the preimage of their union
+are at most the sum of the counts. -/
+theorem countCentresMeeting_biUnion_le {ι : Type*} (s : Finset ι) (K : ι → Set X) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) : countCentresMeeting (⋃ i ∈ s, K i) T ≤ ∑ i ∈ s, countCentresMeeting (K i) T := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+    simp only [Finset.notMem_empty, iUnion_of_empty, iUnion_empty, Finset.sum_empty]
+    exact (countCentresMeeting_empty T).le
+  | insert a s ha ih =>
+    rw [Finset.set_biUnion_insert, Finset.sum_insert ha]
+    exact (countCentresMeeting_union_le _ _ T).trans (Nat.add_le_add_left ih _)
+
+open Classical in
+/-- **Counting along a restricted tower**: the nonempty centres of `T|_U` meeting the preimage of `K ∩ U` are the traces
+of the centres of `T` meeting the preimage of `K ∩ U`. -/
+theorem countCentresMeeting_restrict (U : Opens X) (K : Set X) : ∀ {Y : CMfd.{u} n} (T : BlowupTower X Y),
+    countCentresMeeting ((Subtype.val : U → X) ⁻¹' K) (restrict U T) = countCentresMeeting (K ∩ U) T
+  | _, .refl => rfl
+  | _, .step T C π hπ => by
+      have ih := countCentresMeeting_restrict U K T
+      have hiff : (((Subtype.val : openPreimage T U → _) ⁻¹' C) ∩
+          (restrict U T).proj ⁻¹' ((Subtype.val : U → X) ⁻¹' K)).Nonempty ↔
+          (C ∩ T.proj ⁻¹' (K ∩ (U : Set X))).Nonempty := by
+        constructor
+        · rintro ⟨p, hpC, hpK⟩
+          refine ⟨p.1, hpC, ?_, p.2⟩
+          have := proj_restrict U T p
+          simp only [mem_preimage] at hpK
+          rw [this] at hpK
+          exact hpK
+        · rintro ⟨y, hyC, hyK, hyU⟩
+          refine ⟨⟨y, hyU⟩, hyC, ?_⟩
+          simp only [mem_preimage]
+          rw [proj_restrict U T ⟨y, hyU⟩]
+          exact hyK
+      show countCentresMeeting ((Subtype.val : U → X) ⁻¹' K) (restrict U T) +
+          (if (((Subtype.val : openPreimage T U → _) ⁻¹' C) ∩
+            (restrict U T).proj ⁻¹' ((Subtype.val : U → X) ⁻¹' K)).Nonempty then 1 else 0) =
+        countCentresMeeting (K ∩ U) T + (if (C ∩ T.proj ⁻¹' (K ∩ (U : Set X))).Nonempty then 1 else 0)
+      rw [ih]
+      by_cases h : (C ∩ T.proj ⁻¹' (K ∩ (U : Set X))).Nonempty
+      · rw [if_pos h, if_pos (hiff.mpr h)]
+      · rw [if_neg h, if_neg (fun h' => h (hiff.mp h'))]
+
+/-- For `K ⊆ U` the count along `T|_U` is the count along `T`. -/
+theorem countCentresMeeting_restrict_of_subset (U : Opens X) {K : Set X} (hKU : K ⊆ U) {Y : CMfd.{u} n}
+    (T : BlowupTower X Y) :
+    countCentresMeeting ((Subtype.val : U → X) ⁻¹' K) (restrict U T) = countCentresMeeting K T := by
+  rw [countCentresMeeting_restrict, inter_eq_left.mpr hKU]
+
+end Count
 
 end
 

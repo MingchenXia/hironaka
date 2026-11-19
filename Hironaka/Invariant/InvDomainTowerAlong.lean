@@ -1,43 +1,17 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.ResolutionInvariantSpec
 import Hironaka.Invariant.NonmonomialStepAlong
 import Hironaka.Invariant.CodimOnePartTowerAlong
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticSubsetOpens
-import Hironaka.Blowup.BlowupBiholomorphismLift
-import Hironaka.Blowup.BlowupIsomorphismOff
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CodimOnePartCanonical
-import Hironaka.Invariant.CompanionReduction
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOpenBiholomorphism
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealRestrictOpen
-import Hironaka.MarkedIdeal.MarkedIdealTowerTransport
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.MonomialBlowupAlongChart
-import Hironaka.Analytic.IdealSpanCalculus
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The domain of a resolution invariant along multiple test blow-ups, open sets and biholomorphisms
 
-Sources: Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (the companion ideal is formed
-from the transform at a later stage); Bierstone--Milman 2008 §§4--6.
+Hironaka phase H2 (TN3), for TN-CLASSICAL's `hir:general-step` / `hir:maximal-order-step` (claim I-0977 C-0113).
+Blueprint `bcalc:nonzero-along-transform`, `bcalc:inv-domain-stable` (chapter `blowup-calculus.tex`).  Sources:
+Włodarczyk 2005 (`wlodarczyk05-hironaka`), Step 2 of Proposition `pr:resol` (the companion ideal is formed from the
+transform at a later stage); Bierstone--Milman 2008 §§4--6.
 
 The invariant of `hir:centre-function` (`ResolutionInvariantSpec.ResolutionInvariant`) is defined on the marked ideals
 of `ResolutionInvariantSpec.IsInvDomain k`: well formed, `dim N ≤ k`, `d ≥ 1`, and `𝔞|_N` vanishing identically near no
@@ -58,6 +32,9 @@ germ on `N'` near the point.
 * `isInvDomain_geoTransformAlong`: `IsInvDomain k 𝔪 → IsInvDomain k 𝔪_T` along every multiple test blow-up;
 * `isInvDomain_pullback`, `isInvDomain_pullback_val`: the domain is invariant under biholomorphisms and restriction to
   open sets.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -68,7 +45,12 @@ universe u
 namespace Hironaka.InvDomainTowerAlong
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupStrictSubmanifold Hironaka.DivisorExponentAlong Hironaka.ResolutionInvariantSpec Hironaka.GermIdealOrder Hironaka.RelativePrincipalizationSpan Hironaka.InvertibleIdealQuotient Hironaka.MarkedIdealBiholomorphism
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MarkedIdealRestrictOpen Hironaka.BlowupStrictSubmanifold
+  Hironaka.DivisorExponentAlong Hironaka.ResolutionInvariantSpec
+  Hironaka.GermIdealOrder Hironaka.RelativePrincipalizationSpan
+  Hironaka.InvertibleIdealQuotient Hironaka.MarkedIdealBiholomorphism
 
 noncomputable section
 

@@ -1,11 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Resolution.ExceptionalImageAvoidance
-import Hironaka.Invariant.CentresOverAvoidance
-import Hironaka.Blowup.BlowupStrictIdealControlled
 import Hironaka.Resolution.HironakaNormalCrossingsBoundaryTransform
 import Hironaka.Blowup.BlowupStrictIdeal
 import Hironaka.Resolution.HironakaStageCenters
@@ -44,7 +36,6 @@ open Hironaka.BlowupSequences Hironaka.HolomorphicIdealSheaves
   BlowupFlatCoordinates BlowupStrictSubmanifold NormalCrossings BlowupTowers
   MarkedIdeals MarkedIdeals.MarkedIdeal HironakaStageCenters RestrictEmptyTower
 
-open Hironaka
 noncomputable section
 variable {n : ℕ} {X : Type u} [TopologicalSpace X]
   [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X]

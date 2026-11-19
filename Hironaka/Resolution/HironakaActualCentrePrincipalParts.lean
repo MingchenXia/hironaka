@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualCentreJointJets
 
 set_option autoImplicit false
@@ -174,7 +169,6 @@ theorem actualCentreGermProjection_representatives (d t q : ℕ) {ι : Type*}
   exact HolGerm.mk_eq_mk_iff.mpr (Filter.EventuallyEq.of_eq he)
 
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The lifted genuine projection fixes the ENTIRE original tangent-germ row kernel. -/
 theorem actualCentreGermProjection_fixes_row_kernel (d t q : ℕ) {ι : Type*}
     (H : ι → ComplexModel (d+t) → ℂ) {U D : Set (ComplexModel (d+t))}
@@ -202,7 +196,6 @@ theorem actualCentreGermProjection_fixes_row_kernel (d t q : ℕ) {ι : Type*}
   funext j
   exact hc j
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- Source centre rank constancy makes the lifted original projection kill EVERY entire original Macaulay column germ. -/
 theorem actualCentreGermProjection_kills_columns (d t q : ℕ) {ι : Type*} [Fintype ι]
     (H : ι → ComplexModel (d+t) → ℂ) {U D : Set (ComplexModel (d+t))}
@@ -290,7 +283,6 @@ def actualCentreGermRowMap (d n q : ℕ) {k : ℕ} (rows : Fin k → monomialInd
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The actual lifted original pivot projection has ZERO entire selected rows for EVERY original tangent-germ tuple. -/
 theorem actualCentreGermProjection_row_zero (d t q : ℕ) {ι : Type*}
     (H : ι → ComplexModel (d+t) → ℂ) {U D : Set (ComplexModel (d+t))}
@@ -323,7 +315,6 @@ def actualCentrePrincipalPartsModel (d t q : ℕ) {k : ℕ}
   letI := tangentAlgebra d (d+t)
   LinearMap.range (actualJointScalarJet d (d+t) q) ⊓ LinearMap.ker (actualCentreGermRowMap d (d+t) q rows)
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 /-- The actual projection preserves the TRUE original joint-jet image, by its ENTIRE ideal kernel, and lands in the genuine model. -/
 theorem actualCentreGermProjection_mem_model (d t q : ℕ) {ι : Type*} [Fintype ι]
     (H : ι → ComplexModel (d+t) → ℂ) {U D : Set (ComplexModel (d+t))}

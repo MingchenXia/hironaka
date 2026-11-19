@@ -1,55 +1,20 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.MarkedIdeal.DerivativeIdealAlongTransform
 import Hironaka.MarkedIdeal.MarkedIdealEquivalence
 import Hironaka.MarkedIdeal.HomogenizedEtale
 import Hironaka.MarkedIdeal.HomogenizedEquivalence
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Blowup.BlowupControlledTransform
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.MarkedIdeal.CoefficientIdeal
-import Hironaka.MarkedIdeal.DerivativeIdealAlong
-import Hironaka.MarkedIdeal.DerivativeIdealAlongCoherent
-import Hironaka.MarkedIdeal.DerivativeIdealTower
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealPullbackCalculus
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.HadamardBridgeAlong
-import Hironaka.MarkedIdeal.HomogenizedGlueing
-import Hironaka.MarkedIdeal.HomogenizedIdealAlong
-import Hironaka.Analytic.IdealPowers
-import Hironaka.MarkedIdeal.InvertibleIdealQuotient
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdealOperationsTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.MarkedIdeal.RestrictLeCalculus
-import Hironaka.MarkedIdeal.RestrictedIdealExtension
-import Hironaka.MarkedIdeal.RestrictedIdealQuotient
-import Hironaka.MarkedIdeal.RestrictLe
-import Hironaka.MarkedIdeal.TangentDirectionAlong
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Homogenized and coefficient ideals along a submanifold, along multiple test blow-ups
 
-The rest of step (4d) of item (4) of `hir:along-calculus`, on top of item (2) (`DerivativeIdealAlongTransform`).
-Sources: Włodarczyk 2005, Lemma `le:inclusions` along multiple test blow-ups, Lemma `le:operations` (1) for `m`
-summands, Lemma `le:coeff` (`𝓒(𝔪) ≃ 𝔪`) and the lemma after `le:hom` (`(𝓗(𝓘), μ) ≃ (𝓘, μ)`), all for a marked ideal
-`(M, N, E, 𝔞, d)` on a closed submanifold `N` (Bierstone--Milman 2008, Definitions 2.1--2.2: the derivatives are
-those of `𝔞|_N ⊆ 𝒪_N`), with the derivative, coefficient and homogenized ideals along `N` of
-`HomogenizedIdealAlong`.
+Hironaka phase H3 (TN23-ENVELOPES): the rest of step (4d) of item (4) of `hir:along-calculus` (claimed on I-0981 C-0051),
+on top of TN-CLASSICAL's item (2) (`DerivativeIdealAlongTransform`, 5c3f4ff1).  Sources: Włodarczyk 2005, Lemma
+`le:inclusions` along multiple test blow-ups, Lemma `le:operations` (1) for `m` summands, Lemma `le:coeff`
+(`𝓒(𝔪) ≃ 𝔪`) and the lemma after `le:hom` (`(𝓗(𝓘), μ) ≃ (𝓘, μ)`), all for a marked ideal `(M, N, E, 𝔞, d)` on a closed
+submanifold `N` (Bierstone--Milman 2008, Definitions 2.1--2.2: the derivatives are those of `𝔞|_N ⊆ 𝒪_N`), with the
+derivative, coefficient and homogenized ideals along `N` of `HomogenizedIdealAlong`.
 
 Along `N` the ideal of a marked ideal only matters through its restriction to `N`, so the statements hold up to
 restricted equivalence (`MarkedIdealOperationsAlong.MarkedIdeal.RestrictEquiv`), which has the same cosupports, the same
@@ -63,6 +28,9 @@ admissible centres and the same transforms.
   `[𝓓_N^j 𝔪]_T ⊆ 𝓓_{N_T}^j(𝔪_T)` on `N_T`); `geoTransformAlong_msum_along` (`le:operations` (1) for `m` summands along
   `N`); **`coeffAlong_wEquiv`: `𝓒_N(𝔪) ≃ 𝔪`**; `hom_tower_along` (`𝓗_N(𝔪)_T ≃ ∑ᵢ [𝓓_N^i 𝔪]_T [T_N(𝔪)]_Tⁱ`);
   **`homAlong_wEquiv`: `𝓗_N(𝔪) ≃ 𝔪`**; `coeff_homAlong_wEquiv`: `𝓒_N(𝓗_N(𝔪)) ≃ 𝔪`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter
@@ -72,7 +40,11 @@ universe u
 
 namespace Hironaka.HomogenizedIdealAlongTower
 
-open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal IdealWeightPowers InvertibleIdealQuotient RestrictedIdealWeight RestrictedIdealQuotient RestrictedIdealExtension BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdeal HomogenizedEquivalence HomogenizedIdealAlong MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal GermIdealPullbackCalculus BlowupStrictSubmanifold HomogenizedGlueing DerivativeIdealAlong DerivativeIdealAlongCoherent
+open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences GermIdealOrder DerivativeIdeal
+  IdealWeightPowers InvertibleIdealQuotient RestrictedIdealWeight RestrictedIdealQuotient RestrictedIdealExtension
+  BlowupTowers MarkedIdeals MarkedIdeals.MarkedIdeal CoefficientIdeal HomogenizedEquivalence HomogenizedIdealAlong
+  MarkedIdealOperationsAlong MarkedIdealOperationsAlong.MarkedIdeal GermIdealPullbackCalculus BlowupStrictSubmanifold
+  HomogenizedGlueing DerivativeIdealAlong DerivativeIdealAlongCoherent
 
 noncomputable section
 
@@ -201,7 +173,7 @@ theorem restrictLe_geoTransform_of_restrictLe {𝔫₁ 𝔫₂ : MarkedIdeal n M
 /-! #### Włodarczyk's sum of `m` marked ideals on `N` -/
 
 /-- A family `𝔫 0, …, 𝔫 (m - 1)` of marked ideals on one closed submanifold `N`, with a common `E`, coherent ideals and
-marks `≥ 1`. -/
+marks `≥ 1` (the along-`N` form of `CoefficientIdeal.IsAmbientFamily`). -/
 structure IsSubmanifoldFamily (𝔫 : ℕ → MarkedIdeal n M) (m : ℕ) : Prop where
   N : ∀ i < m, (𝔫 i).N = (𝔫 0).N
   E : ∀ i < m, (𝔫 i).E = (𝔫 0).E
@@ -344,10 +316,11 @@ theorem restrictLe_homSum {W : Set M} {A A' : ℕ → GermIdeal n M} {B B' : Ger
   restrictLe_finSumIdeal (fun _ _ _ _ hg => (InvertibleIdealQuotient.mem_mul_iff.mp hg).1) fun i hi =>
     restrictLe_mul (hA' i hi) (fun _ _ hg => holomorphicAt_of_mem_idealPow hg) (hA i hi) (restrictLe_idealPow hB' hB i)
 
-/-- **The transform of `∑ᵢ Aᵢ Bⁱ` along `N`** (one admissible blowup): let `𝔄ᵢ` (`i < μ`, mark `μ - i`) and `𝔅` (mark
-`1`) be marked ideals on the closed submanifold `N` of `𝔥` with coherent ideals and `C` admissible for all of them,
-and let `𝔥` have mark `μ`, ideal `∑ᵢ 𝔄ᵢ 𝔅ⁱ` and `C` admissible. Then `𝔥' ≃ ∑ᵢ 𝔄ᵢ' 𝔅'ⁱ` (restricted equivalence: on
-`N'`, `σ(∑ᵢ Aᵢ Bⁱ, μ) = ∑ᵢ σ(Aᵢ, μ - i) σ(B, 1)ⁱ`). -/
+/-- **The transform of `∑ᵢ Aᵢ Bⁱ` along `N`** (one admissible blowup; the along-`N` form of
+`HomogenizedEquivalence.controlledTransform_homSum`): let `𝔄ᵢ` (`i < μ`, mark `μ - i`) and `𝔅` (mark `1`) be marked
+ideals on the closed submanifold `N` of `𝔥` with coherent ideals and `C` admissible for all of them, and let `𝔥` have
+mark `μ`, ideal `∑ᵢ 𝔄ᵢ 𝔅ⁱ` and `C` admissible.  Then `𝔥' ≃ ∑ᵢ 𝔄ᵢ' 𝔅'ⁱ` (restricted equivalence: on `N'`,
+`σ(∑ᵢ Aᵢ Bⁱ, μ) = ∑ᵢ σ(Aᵢ, μ - i) σ(B, 1)ⁱ`). -/
 theorem geoTransform_homSum_restrictEquiv {𝔄 : ℕ → MarkedIdeal n M} {𝔅 𝔥 : MarkedIdeal n M} {μ : ℕ} (hμ : 1 ≤ μ)
     (hN : IsClosedSubmanifold n 𝔥.N) (hNA : ∀ i < μ, (𝔄 i).N = 𝔥.N) (hNB : 𝔅.N = 𝔥.N)
     (hdA : ∀ i < μ, (𝔄 i).d = μ - i) (hdB : 𝔅.d = 1) (hdH : 𝔥.d = μ)
@@ -430,8 +403,8 @@ both transforms are coherent, and on `N_T`
 
   `[𝓓_N^j(𝔪)]_T ⊆ 𝓓_{N_T}^j(𝔪_T)`.
 
-Induction on `T`: the centre is admissible for `[𝓓_N^j 𝔪]_T` (Giraud along `N_T`, then the inclusion), the transform
-is monotone along `N` (`restrictLe_geoTransform_of_restrictLe`), and one step is item (2)
+Induction on `T`: the centre is admissible for `[𝓓_N^j 𝔪]_T` (Giraud along `N_T`, then the inclusion), the transform is
+monotone along `N` (`restrictLe_geoTransform_of_restrictLe`), and one step is TN-CLASSICAL's item (2)
 (`DerivativeIdealAlongTransform.restrictLe_geoTransform_derivMarkedAlong`). -/
 theorem inclusions_tower_along (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
     {j : ℕ} (hj : j ≤ 𝔪.d) :
@@ -514,8 +487,8 @@ theorem mem_cosupp_derivMarkedAlong_tower (𝔪 : MarkedIdeal n X) (hN : IsClose
 
 /-- **Włodarczyk `le:operations` (1) for `m ≥ 1` summands along `N`** (one closed submanifold `N`, common `E`, coherent
 ideals, marks `≥ 1`): the multiple test blow-ups of `𝔫 0 + … + 𝔫 (m - 1)` are exactly the simultaneous multiple test
-blow-ups of the `𝔫 i`, and along them the transform of the sum is restricted-equivalent to the sum of the
-transforms. -/
+blow-ups of the `𝔫 i`, and along them the transform of the sum is restricted-equivalent to the sum of the transforms
+(the along-`N` form of `CoefficientIdeal.geoTransformAlong_msum`). -/
 theorem geoTransformAlong_msum_along (𝔫 : ℕ → MarkedIdeal n X) {m : ℕ} (hm : 1 ≤ m)
     (h : IsSubmanifoldFamily 𝔫 m) :
     {Y : CMfd.{u} n} → (T : BlowupTower X Y) →
@@ -653,7 +626,9 @@ theorem cosupp_homTower (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n �
 coherent, `d ≥ 1`): every multiple test blow-up `T` of `𝔪` is one of `𝓗_N(𝔪)`, `𝓗_N(𝔪)_T` is coherent, and
 
   `𝓗_N(𝔪)_T ≃ (𝔪_T with ideal ∑_{i<d} [𝓓_N^i 𝔪]_T · [T_N(𝔪)]_Tⁱ)` (restricted equivalence, `homTower`).
--/
+
+The along-`N` form of `HomogenizedEquivalence.hom_tower`; one step is `geoTransform_homSum_restrictEquiv`, after
+replacing `𝓗_N(𝔪)_T` by its restricted-equivalent `homTower 𝔪 T` (same transform, `RestrictEquiv.geoTransform_eq`). -/
 theorem hom_tower_along (𝔪 : MarkedIdeal n X) (hN : IsClosedSubmanifold n 𝔪.N) (h𝔞 : 𝔪.ideal.IsCoherent)
     (hd : 1 ≤ 𝔪.d) :
     {Y : CMfd.{u} n} → (T : BlowupTower X Y) → IsGeoTestTower 𝔪 T →

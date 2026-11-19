@@ -1,20 +1,8 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
-import Hironaka.Blowup.BlowupDerivativeMaximalOrder
-import Hironaka.Invariant.CompanionMaximalOrder
-import Hironaka.MarkedIdeal.MaximalOrderBound
-import Hironaka.Blowup.BlowupStrictIdealControlled
 import Hironaka.Resolution.HironakaHypersurfaceStrictIdeal
 import Hironaka.Blowup.BlowupDerivativeIdeal
 import Hironaka.Analytic.AnalyticJacobianCriterion
 import Hironaka.Resolution.HironakaPureCodimensionOneInvertibleIdeal
 import Hironaka.Resolution.HironakaSmoothStageCenters
-
-import Hironaka.MarkedIdeal.GermIdealOrderValue
-import Hironaka.MarkedIdeal.GermIdealOrderBounds
 
 set_option autoImplicit false
 

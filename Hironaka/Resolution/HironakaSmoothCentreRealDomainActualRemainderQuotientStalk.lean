@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaSmoothCentreRealDomainActualCentrePowerStalk
 /-! Genuine original remainder section quotients and their entire ring stalks.
 Complete three-node Mathematics.tex precedes code. True section sums, actual

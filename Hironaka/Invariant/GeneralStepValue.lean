@@ -1,45 +1,33 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Invariant.GeneralEmptyPrefix
 import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Blowup.BlowupTowerIsomorphism
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.GeneralAdmissible
-import Hironaka.Invariant.GeneralCanonicalTail
-import Hironaka.Invariant.GeneralRepresentative
-import Hironaka.Invariant.GeneralRestrictOpen
-import Hironaka.Invariant.GeneralTowerIso
-import Hironaka.Invariant.GeneralUSC
-import Hironaka.Invariant.GeneralValue
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdealOperationsAlong
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Invariant.MaxOrderValue
-import Hironaka.Invariant.MonomialInvariant
-import Hironaka.Invariant.ResolutionDriver
-import Hironaka.Invariant.ResolutionInvariantExt
-import Hironaka.Invariant.ResolutionInvariantSpec
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # The general value has the properties (1)--(7), (4') of a resolution invariant
 
-**Main theorem** (`isInvValue_genInv`): for every value function `M` for the marked ideals of maximal order in
-dimension `≤ k` (`MaxOrderValue.IsMaxOrderValue n k M`; in the induction, the masked Step 1 value built from the
-invariant in dimension `≤ k - 1`) and `0 < n`, the general value `GeneralValue.genInv M` satisfies `IsInvValue n k`:
-properties (1) admissibility (`GeneralAdmissible`), (2) upper semicontinuity (`GeneralUSC`), (3) decrease and (4)
-empty steps (`GeneralCanonicalTail.genInv_drop`), (4') empty prefixes (`GeneralEmptyPrefix`), (5) open sets
-(`GeneralRestrictOpen`), (6) isomorphisms of towers (`GeneralTowerIso`) and (7) representatives
-(`GeneralRepresentative`), at every point of the cosupport along every canonical segment, for every marked ideal of
-the domain `IsInvDomain k`. At points where the nonmonomial part has order `0` the properties are
+Blueprint `hir:general-step-value` (`blueprint/src/hironaka.tex`, Hironaka phase H4, the assembly of `hir:general-step` without
+property (8)).  Human decision I-1139 C-0001 (option (b)): a resolution invariant is `ResolutionInvariantSeq.ResolutionInvariant`,
+whose properties (1)--(7), (4') form the predicate `ResolutionInvariantSeq.IsInvValue` and whose property (8) is the per-sequence
+form `ResolutionInvariantSeq.SeqLocallyFinite`.
+
+**Main theorem** (`isInvValue_genInv`): for every value function `M` for the marked ideals of maximal order in dimension `≤ k`
+(`MaxOrderValue.IsMaxOrderValue n k M`; in the induction, the masked Step 1 value built from the invariant in dimension
+`≤ k - 1`) and `0 < n`, the general value `GeneralValue.genInv M` satisfies `IsInvValue n k`: properties (1) admissibility
+(`GeneralAdmissible`), (2) upper semicontinuity (`GeneralUSC`), (3) decrease and (4) empty steps (`GeneralCanonicalTail.genInv_drop`),
+(4') empty prefixes (`GeneralEmptyPrefix`), (5) open sets (`GeneralRestrictOpen`), (6) isomorphisms of towers (`GeneralTowerIso`)
+and (7) representatives (`GeneralRepresentative`), at every point of the cosupport along every canonical segment, for every marked
+ideal of the domain `IsInvDomain k`.  At points where the nonmonomial part has order `0` the properties are TN3's
 (`NonmonomialOrderMonomialCanonical`, `GeneralValueOrderZero`).
+
+Property (8) in its form along growing sequences is not stated here for `genInv M`: from that of `M` it is
+`GeneralSeqFinite.seqLocallyFinite_genInv` (off the route), and for well-ordered values it is automatic
+(`CanonicalCentres.seqLocallyFinite_of_wellFoundedLT`), which is how the route's general step `CanonicalCentres.generalStep`
+(`hir:general-step-wf`) uses `isInvValue_genInv`.
+
+Import discipline (Hironaka phase): this module does not import, even transitively,
+`Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -50,7 +38,10 @@ universe u v
 namespace Hironaka.GeneralStepValue
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms Hironaka.MaxOrderValue Hironaka.GeneralValue Hironaka.ResolutionInvariantSeq
+open Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal
+  Hironaka.BlowupTowers Hironaka.BlowupTowerTransforms
+  Hironaka.MaxOrderValue Hironaka.GeneralValue
+  Hironaka.ResolutionInvariantSeq
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 open Hironaka.ResolutionDriver (maxLocus)
 

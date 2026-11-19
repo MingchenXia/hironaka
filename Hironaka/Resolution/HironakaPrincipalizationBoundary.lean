@@ -1,43 +1,14 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Resolution.HironakaRelativelyCompact
-import Hironaka.Blowup.BlowupSequences
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
-import Hironaka.Analytic.HolomorphicIdealSheaves
-import Hironaka.Analytic.AnalyticIrreducibleComponents
-import Hironaka.Blowup.BlowupExceptionalDivisor
-import Hironaka.Blowup.BlowupStrictSubmanifold
-import Hironaka.Blowup.BlowupTowerTransforms
-import Hironaka.Blowup.BlowupTowers
-import Hironaka.Invariant.CanonicalCentres
-import Hironaka.Invariant.DivisorExponentAlong
-import Hironaka.MarkedIdeal.GermIdealOrder
-import Hironaka.MarkedIdeal.GermIdealTotalTransform
-import Hironaka.MarkedIdeal.GiraudAlong
-import Hironaka.Resolution.HironakaAdmissibleSequence
-import Hironaka.Resolution.HironakaLocalPrincipalization
-import Hironaka.Resolution.HironakaPrincipalization
-import Hironaka.Analytic.HolomorphicGermAlgebra
-import Hironaka.Invariant.InvDomainTowerAlong
-import Hironaka.MarkedIdeal.MarkedIdealGeoTransform
-import Hironaka.MarkedIdeal.MarkedIdeals
-import Hironaka.Blowup.NormalCrossings
-import Hironaka.Analytic.IdealSpanCalculus
-import Hironaka.Invariant.ResolutionInvariantSeq
-import Hironaka.Invariant.ResolutionInvariantSpec
-import Hironaka.Blowup.SimultaneousNormalCrossings
+
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 
 /-!
 # Principalization relative to a simple normal crossings boundary (Hironaka)
 
-Sources: Kollár 2007 (`kollar07-resolution`), "Principalization, III" (an ideal on a manifold with a simple normal
-crossings divisor `E₀`: the centres have simple normal crossings with the accumulated divisor and the final divisor,
+Blueprint `hir:principalization-boundary` (`blueprint/src/hironaka.tex`; TN.5, item S4 of the review 57572af3 of the Hironaka
+strengthenings).  Sources: Kollár 2007 (`kollar07-resolution`), "Principalization, III" (an ideal on a manifold with a simple
+normal crossings divisor `E₀`: the centres have simple normal crossings with the accumulated divisor and the final divisor,
 containing the birational transform of `E₀`, has simple normal crossings); Bierstone--Milman 1997
 (`bierstone-milman97-invent-math`), Theorem 1.10 and (1.9); Włodarczyk 2005 (`wlodarczyk05-hironaka`), §2.3.
 
@@ -58,6 +29,9 @@ for a nonempty initial divisor).
 
 * `isInvDomain_univ_of_isSNCDivisor`, `support_exceptionalDivisor_eq_biUnion_drop`;
 * **`exists_principalization_boundary`** (compact zero locus) and `exists_principalization_boundary_of_compactSpace`.
+
+Import discipline (standalone Hironaka library): this module imports `HironakaRelativelyCompact` only; it does not import, even
+transitively, `Hironaka.RelativePrincipalization` or `Hironaka.EmbeddedResolution`.  Sorry-free.
 -/
 
 open Set Filter TopologicalSpace
@@ -68,7 +42,10 @@ universe u
 namespace Hironaka.HironakaPrincipalizationBoundary
 
 open Hironaka.HolomorphicIdealSheaves Hironaka.BlowupSequences
-open Hironaka.BlowupTowers Hironaka.MarkedIdeals Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms Hironaka.HironakaAdmissibleSequence Hironaka.BlowupStrictSubmanifold
+open Hironaka.BlowupTowers Hironaka.MarkedIdeals
+  Hironaka.MarkedIdeals.MarkedIdeal Hironaka.NormalCrossings
+  Hironaka.DivisorExponentAlong Hironaka.BlowupTowerTransforms
+  Hironaka.HironakaAdmissibleSequence Hironaka.BlowupStrictSubmanifold
 open Hironaka.ResolutionInvariantSpec (IsInvDomain IsCanonical)
 
 noncomputable section

@@ -1,8 +1,3 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Hironaka contributors
--/
 import Hironaka.Resolution.HironakaActualPointNormalizedBennett
 import Hironaka.Resolution.HironakaActualSuppliedFlatteningNormalPowers
 import Mathlib.RingTheory.MvPowerSeries.Rename
@@ -258,7 +253,6 @@ private theorem translated_polyIdeal_eq {ι : Type*} (P : ι → MvPolynomial (F
   funext i
   exact (translated_poly_mk p (P i)).symm
 
-attribute [local instance 2000] SubsemiringClass.toAddSubmonoidClass in
 private theorem polyTranslatedIdeal_origin_formal {ι : Type*} (P : ι → MvPolynomial (Fin n) ℂ) :
     Ideal.map (actualUnshiftedTaylorAlgHom n).toRingHom (polyTranslatedIdeal P 0)=
       Ideal.span (range fun i => (P i : MvPowerSeries (Fin n) ℂ)) := by

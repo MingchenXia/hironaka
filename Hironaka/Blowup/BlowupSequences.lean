@@ -1,18 +1,18 @@
-/-
-Copyright (c) 2026 Hironaka contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
--/
 import Hironaka.Analytic.HolomorphicIdealSheaves
 import Mathlib.Geometry.Manifold.ContMDiff.Basic
-import Hironaka.Analytic.ComplexAnalyticSubvarieties
-import Hironaka.Manifold.ComplexManifold
+
 set_option autoImplicit false
 
 /-!
 # Blowups with smooth centers, modifications and strict transforms
 
-New definitions of this first pass:
+Source: Copy-4, `sec:prelim` (modifications), the paragraph before
+`lem:relative-principalization` (sequences of blowups adapted to a
+submanifold), `lem:exceptional-metric` and `lem:resolution`
+(`transcendental-nakamaye-copy4-20260911`).
+
+New definitions of this first pass (recorded in the blueprint,
+`ana:geometric-setting`):
 
 * `IsClosedSubmanifold C`: `C` is closed and locally biholomorphically a
   coordinate plane at each of its points (a smooth center; components may have
@@ -38,6 +38,8 @@ New definitions of this first pass:
   ideal, which is never invertible), and such a map is not a modification.
 * `IsBlowupSequence n X Y f`: `f` is a finite composition of blowups with smooth
   centers (a modification in the manuscript's sense).
+* `IsAdaptedBlowupSequence n X W Y f`: every center is contained in a proper
+  analytic subset of the current strict transform of `W`, or is disjoint from it.
 -/
 
 open Set Filter
@@ -116,6 +118,23 @@ inductive IsBlowupSequence (n : ℕ) (X : Type u) [TopologicalSpace X]
       [IsComplexManifold n Z] (f : Y → X) (C : Set Y) (g : Z → Y) :
       IsBlowupSequence n X Y f → IsBlowupAlong n C g → IsBlowupSequence n X Z (f ∘ g)
 
+/-- A finite composition of blowups with smooth centers adapted to `W`: each
+center lies in a proper analytic subset of the current strict transform of `W`,
+or is disjoint from it. -/
+inductive IsAdaptedBlowupSequence (n : ℕ) (X : Type u) [TopologicalSpace X]
+    [ChartedSpace (ComplexModel n) X] [IsComplexManifold n X] (W : Set X) :
+    (Y : Type u) → [TopologicalSpace Y] → [ChartedSpace (ComplexModel n) Y] →
+      [IsComplexManifold n Y] → (Y → X) → Prop
+  | refl : IsAdaptedBlowupSequence n X W X id
+  | step {Y Z : Type u} [TopologicalSpace Y] [ChartedSpace (ComplexModel n) Y]
+      [IsComplexManifold n Y] [TopologicalSpace Z] [ChartedSpace (ComplexModel n) Z]
+      [IsComplexManifold n Z] (f : Y → X) (C : Set Y) (g : Z → Y) :
+      IsAdaptedBlowupSequence n X W Y f → IsBlowupAlong n C g →
+      ((∃ A : Set Y, IsComplexAnalyticSubset (n := n) A ∧
+          A ⊆ strictTransform n f W ∧ A ≠ strictTransform n f W ∧ C ⊆ A) ∨
+        Disjoint C (strictTransform n f W)) →
+      IsAdaptedBlowupSequence n X W Z (f ∘ g)
+
 section Lemmas
 
 variable {n : ℕ} {X : Type u} [TopologicalSpace X]
@@ -129,6 +148,19 @@ theorem IsBlowupSequence.contMDiff {f : Y → X} (h : IsBlowupSequence n X Y f) 
   induction h with
   | refl => exact contMDiff_id
   | step f C g _ hg ih => exact ih.comp hg.contMDiff
+
+/-- An adapted blowup sequence is a blowup sequence. -/
+theorem IsAdaptedBlowupSequence.isBlowupSequence {W : Set X} {f : Y → X}
+    (h : IsAdaptedBlowupSequence n X W Y f) : IsBlowupSequence n X Y f := by
+  induction h with
+  | refl => exact IsBlowupSequence.refl
+  | step f C g _ hg _ ih => exact IsBlowupSequence.step f C g ih hg
+
+/-- An adapted blowup sequence is holomorphic. -/
+theorem IsAdaptedBlowupSequence.contMDiff {W : Set X} {f : Y → X}
+    (h : IsAdaptedBlowupSequence n X W Y f) :
+    ContMDiff 𝓘(ℂ, ComplexModel n) 𝓘(ℂ, ComplexModel n) ∞ f :=
+  h.isBlowupSequence.contMDiff
 
 end Lemmas
 
