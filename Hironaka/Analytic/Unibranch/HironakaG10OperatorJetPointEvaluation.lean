@@ -38,7 +38,7 @@ theorem coefficientEvaluation_operatorJet_apply_one
             ((1 : Q) ⊗ₜ[ℂ] v))) i =
         φ (HolGerm.mk (pointCoordinate z i ∘ fun s => A s v)
           (hf.mono fun _ h => (pointCoordinate z i).differentiableAt.comp _ h)) := by
-  letI := parameterCoefficientModule (E := a → holSubalgebra K) b
+  let _ := parameterCoefficientModule (E := a → holSubalgebra K) b
   have hf : ∀ᶠ s in 𝓝 (0 : ComplexModel d), DifferentiableAt ℂ (fun s => A s v) s :=
     hA.mono fun _ h => h.clm_apply (differentiableAt_const v)
   refine ⟨hf,?_⟩

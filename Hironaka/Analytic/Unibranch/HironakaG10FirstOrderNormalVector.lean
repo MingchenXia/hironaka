@@ -16,7 +16,7 @@ theorem firstOrderNormalLinearEquiv_vector (d a : ℕ) (v : Fin a → HolGerm (C
     firstOrderNormalLinearEquiv d a (0,v) =
       ∑ i, (v i) • Ideal.Quotient.mk (normalIdeal d a ^ 2) (normalCoordinate d a i) := by
   classical
-  letI := tangentAlgebra d a
+  let _ := tangentAlgebra d a
   have hvec : ((0 : HolGerm (ComplexModel d)),v) =
       ∑ i : Fin a, ((0 : HolGerm (ComplexModel d)), Pi.single i (v i)) := by
     apply Prod.ext

@@ -20,7 +20,7 @@ theorem section_substitution_polynomial {Q : Type} [CommRing Q] [Algebra ℂ Q]
       (actualArtinianParameterPullback d t q φ hφ
         ((swapParameterFibre d t).symm (normalPolynomialEval t d P))) =
       Ideal.Quotient.mk _ ((swapParameterFibre d t).symm (normalPolynomialEval t d P)) := by
-  letI := tangentAlgebra t d
+  let _ := tangentAlgebra t d
   let J := Ideal.map (tangentPullback d t).toRingHom (RingHom.ker φ.toRingHom)
   let U : HolGerm (ComplexModel (t+d)) →+* (HolGerm (ComplexModel (d+t)) ⧸ J) :=
     (tensorFibreToQuotient d t φ hsurj).toRingHom.comp
