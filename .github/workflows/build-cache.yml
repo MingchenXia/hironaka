@@ -18,9 +18,9 @@ jobs:
       contents: write
     env:
       PYTHONDONTWRITEBYTECODE: '1'
-      LEAN_NUM_THREADS: '2'
-      SOURCE_REF: 6ef256b95c83998bad8e254bf90dd69f5064b6be
-      DRAFT_TAG: build-cache-lean-4.33.1-6ef256b95c83
+      LEAN_NUM_THREADS: '3'
+      SOURCE_REF: 19a3232088fce3dab71eb2e2135d82683962c091
+      DRAFT_TAG: build-cache-lean-4.33.1-19a3232088fc
       CACHE_RELEASE_ID: "450877677"
       INITIAL_FREE_GIB: "36"
       SOURCE_REPOSITORY: MingchenXia/hironaka
@@ -50,10 +50,10 @@ jobs:
           persist-credentials: false
       - name: Install exact source Lean release over verified TLS
         run: python3 cache-tools/scripts/install_lean.py source "$RUNNER_TEMP/hironaka-lean" --pin cache-tools/lean-asset.json
-      - name: Build every physical module and run checks
+      - name: Build every physical module
         env:
           MATHLIB_CACHE_DIR: ${{ runner.temp }}/hironaka-mathlib-downloads-${{ github.run_id }}-${{ github.run_attempt }}
-        run: python3 cache-tools/scripts/build_all.py source "$RUNNER_TEMP/hironaka-evidence" --budget-minutes 270
+        run: python3 cache-tools/scripts/build_all.py source "$RUNNER_TEMP/hironaka-evidence" --budget-minutes 315
       - name: Stream and publish verified cache
         env:
           GH_TOKEN: ${{ github.token }}

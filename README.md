@@ -1,8 +1,8 @@
 # Hironaka exact build-cache workflow
 
 This branch builds and publishes a Lean build cache for Hironaka source commit
-`6ef256b95c83998bad8e254bf90dd69f5064b6be`. The workflow runs when the branch is
-updated. It stages assets in the draft release `build-cache-lean-4.33.1-6ef256b95c83`
+`19a3232088fce3dab71eb2e2135d82683962c091`. The workflow runs when the branch is
+updated. It stages assets in the draft release `build-cache-lean-4.33.1-19a3232088fc`
 and makes the release public after verifying the complete archive. [GitHub releases](https://github.com/MingchenXia/hironaka/releases)
 
 The default runner is the ordinary disposable `ubuntu-24.04` runner. The workflow
@@ -17,8 +17,8 @@ claim that this source's cold build fits 36 GiB. The driver also measures space
 before cache download, before supplemental batches, during every child command,
 and before publishing. It stops with an incomplete receipt below its reserve.
 The source's full build may need more disk or time than an ordinary hosted job
-provides; this bundle has not run that production build. It keeps a 270-minute
-build/check budget inside the 360-minute hosted-job limit. There is no silent
+provides; this bundle has not run that production build. It keeps a 315-minute
+build budget inside the 360-minute hosted-job limit. There is no silent
 partial-cache success, automatic resume, or promised six-hour completion.
 
 ## Exact build and checks
@@ -40,16 +40,8 @@ source/olean inventory. This is broader compilation coverage than merely
 building the default umbrella. The published source's 8099-module static inventory
 was read independently during preparation; counts are recomputed for every input.
 
-The two proof checks are the source's existing CI commands, unchanged:
-
-```sh
-lake env lean scripts/CheckAxioms.lean
-lake env leanchecker Hironaka
-```
-
-The source's `warningAsError`, Lean options and native scalar actions are never
-changed. `LEAN_NUM_THREADS=2` matches its CI. No new axiom scope, proof gate, or
-project numeric limit is introduced by this bundle.
+The cache workflow uses three Lean threads and the source's warnings-as-errors
+settings. The source CI runs the axiom and kernel checks from `main`.
 
 After the default build and supplemental batches, with Lake stopped, setup JSON
 files under the project's build IR directory are archived into verified compressed
@@ -64,7 +56,7 @@ peak before the first default build finishes.
 Only the final publishing step receives the repository's `GITHUB_TOKEN`
 as `GH_TOKEN`; job permission is `contents: write`. The unchanged rolling publisher
 obtains the clean source/dependency/Lean/platform identity and streams the exact
-build roots through one zstd encoder and one bounded 95 MiB spool part. Each
+build roots through one zstd encoder and one bounded 256 MiB spool part. Each
 immutable part is read back and hashed before local removal. The entire remote
 tar/zstd stream is audited before any final manifest is exposed.
 
@@ -72,14 +64,12 @@ The draft-only GitHub adapter pins the numeric release ID, stages the manifest
 under a SHA-named asset, verifies it, then renames it to `cache.json` using the
 release asset API. Ambiguous mutation responses trigger actual-state readback
 before retry. Existing different bytes are never clobbered. The manifest is
-limited to 32 MiB, individual parts to 95 MiB, with bounded metadata/process outputs;
+limited to 64 MiB, individual parts to 256 MiB, with bounded metadata/process outputs;
 an exclusive draft writer is required: GitHub provides no atomic draft-state
-compare-and-swap against another actor publishing the release. A further full
-remote-stream validation records `publication-receipt.json` and a trusted manifest
-SHA256 in the Actions summary/evidence. The workflow publishes the release after the final audit and records its public URL.
+compare-and-swap against another actor publishing the release. The final manifest is read back before publication. The workflow records the manifest SHA-256
+in `publication-receipt.json` and the Actions summary. The workflow publishes the release after the final audit and records its public URL.
 
-Receipts distinguish all-physical **compilation** coverage from the source's
-existing proof checks. Logs and small JSON receipts are retained even on failure.
+Receipts record every compiled module. The workflow retains logs and JSON receipts even on failure.
 The public release includes the finalized manifest and every verified compressed part.
 
 ## Portable restore on a fresh clean checkout
@@ -106,7 +96,7 @@ build to force this precondition. On that fresh checkout, with `lean` on PATH:
 ```sh
 # Explicit values from the verified Actions publication receipt:
 export CACHE_REPO=MingchenXia/hironaka
-export CACHE_TAG='build-cache-lean-4.33.1-6ef256b95c83'
+export CACHE_TAG='build-cache-lean-4.33.1-19a3232088fc'
 export TRUSTED_MANIFEST_SHA256='THE_SHA256_FROM_THE_RELEASE_NOTES'
 export CHECKOUT='/absolute/path/to/fresh/source'
 export CACHE_DIRECTORY='/absolute/path/to/fresh/download'

@@ -72,7 +72,7 @@ class BundleTests(unittest.TestCase):
 import json, os, sys
 from pathlib import Path
 with open(os.environ['FIXTURE_COMMANDS'], 'a') as f: f.write(json.dumps(sys.argv[1:])+'\\n')
-if os.environ.get('FIXTURE_FAIL') and sys.argv[1:3] == ['env', 'leanchecker']: sys.exit(9)
+if os.environ.get('FIXTURE_FAIL') and sys.argv[1:2] == ['build'] and len(sys.argv) > 2: sys.exit(9)
 if sys.argv[1:2] == ['build']:
     names = ['Hironaka.A', 'Hironaka'] if len(sys.argv) == 2 else [a[1:].split(':')[0] for a in sys.argv[2:]]
     for name in names:
@@ -143,8 +143,8 @@ if sys.argv[1:2] == ['build']:
         self.assertEqual(receipt['physical_module_count'], 3)
         self.assertEqual(receipt['supplemental_batches'], [['Hironaka.Supplement']])
         calls = [json.loads(x) for x in (self.root / 'commands.jsonl').read_text().splitlines()]
-        self.assertEqual(calls, [['exe','cache','get'], ['exe','cache','clean!'], ['build'], ['build','+Hironaka.Supplement:olean'],
-                                 ['env','lean','scripts/CheckAxioms.lean'], ['env','leanchecker','Hironaka']])
+        self.assertEqual(calls, [['exe','cache','get'], ['exe','cache','clean!'], ['build'],
+                                 ['build','+Hironaka.Supplement:olean']])
         client = FakeClient()
         with patch.dict(os.environ, env), patch.object(publisher, 'require_space', return_value=50*1024**3):
             result = publisher.publish(self.project, state, 'cache/test-1', client=client)
@@ -173,10 +173,10 @@ if sys.argv[1:2] == ['build']:
         self.assertEqual(json.loads((self.project/'.lake/build/ir/Hironaka/Supplement.setup.json').read_text()),
                          {'fixture':'Hironaka.Supplement'})
 
-    def test_failed_source_check_has_incomplete_receipt_and_cannot_publish(self):
+    def test_failed_supplemental_build_has_incomplete_receipt_and_cannot_publish(self):
         env = self.fixture_project(); env['FIXTURE_FAIL'] = '1'; state = self.root / 'state'
         with patch.dict(os.environ, env), patch.object(b, 'require_space', return_value=50*1024**3):
-            with self.assertRaisesRegex(RuntimeError, 'source-kernel failed'): b.build(self.project, state, 1)
+            with self.assertRaisesRegex(RuntimeError, 'build-00000 failed'): b.build(self.project, state, 1)
             self.assertEqual(json.loads((state/'build-receipt.json').read_text())['status'], 'incomplete')
             client = FakeClient()
             with self.assertRaisesRegex(ValueError, 'Incomplete'): publisher.publish(self.project, state, 'cache/test-1', client=client)
@@ -219,12 +219,12 @@ if sys.argv[1:2] == ['build']:
         self.assertEqual(workflow['permissions'], {})
         job = workflow['jobs']['build']
         self.assertEqual(job['permissions'], {'contents':'write'})
-        self.assertEqual(job['env']['LEAN_NUM_THREADS'], '2')
+        self.assertEqual(job['env']['LEAN_NUM_THREADS'], '3')
         for step in job['steps']:
             if 'uses' in step:
                 self.assertRegex(step['uses'], r'@[0-9a-f]{40}$')
         self.assertEqual(job['env']['SOURCE_REF'],
-                         '6ef256b95c83998bad8e254bf90dd69f5064b6be')
+                         '19a3232088fce3dab71eb2e2135d82683962c091')
 
 
 if __name__ == '__main__': unittest.main()

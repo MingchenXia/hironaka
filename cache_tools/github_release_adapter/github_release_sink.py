@@ -19,8 +19,8 @@ import time
 from urllib.parse import quote
 
 BLOCK = 65536
-MAX_PART = 95 * 1024 * 1024
-MAX_MANIFEST = 32 * 1024 * 1024
+MAX_PART = 256 * 1024 * 1024
+MAX_MANIFEST = 64 * 1024 * 1024
 
 
 class SinkError(RuntimeError):
