@@ -19,10 +19,11 @@ jobs:
     env:
       PYTHONDONTWRITEBYTECODE: '1'
       LEAN_NUM_THREADS: '3'
-      SOURCE_REF: 2c8d037241f9353a9872c025acfa7a4cdbd2465a
-      DRAFT_TAG: build-cache-lean-4.33.1-2c8d037241f9
+      SOURCE_REF: 949d7f7a3add128f276edddf98bb172b3885acaf
+      DRAFT_TAG: build-cache-lean-4.33.1-949d7f7a3add
       CACHE_RELEASE_ID: "450877677"
       INITIAL_FREE_GIB: "36"
+      EXPECTED_WARM_BUILD_KEY: "hironaka-build-v1-Linux-X64-564ff09be12fd33bd7fd3963b2748ecef858505d12835c8ec4e9171393435c47-44473197653-1"
       SOURCE_REPOSITORY: MingchenXia/hironaka
     steps:
       - name: Check out cache tooling
@@ -58,7 +59,19 @@ jobs:
           path: source/.lake/build
           key: hironaka-build-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('source/lean-toolchain', 'source/lake-manifest.json') }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
-            hironaka-build-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('source/lean-toolchain', 'source/lake-manifest.json') }}-
+            ${{ env.EXPECTED_WARM_BUILD_KEY }}
+      - name: Verify the prior Hironaka build was restored
+        env:
+          MATCHED_BUILD_KEY: ${{ steps.warm-build.outputs.cache-matched-key }}
+        run: |
+          set -euo pipefail
+          if [[ "$MATCHED_BUILD_KEY" != "$EXPECTED_WARM_BUILD_KEY" || ! -d source/.lake/build/lib/lean/Hironaka ]]; then
+            echo "::error::The prior Hironaka build checkpoint was not restored"
+            exit 1
+          fi
+          count=$(find source/.lake/build/lib/lean/Hironaka -type f -name '*.olean' -printf . | wc -c)
+          test "$count" -gt 0
+          printf 'Restored %s compiled Hironaka modules from %s\n' "$count" "$MATCHED_BUILD_KEY"
       - name: Build every physical module
         id: compile
         env:
